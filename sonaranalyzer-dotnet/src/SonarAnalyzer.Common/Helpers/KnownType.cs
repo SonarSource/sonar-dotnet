@@ -90,6 +90,14 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType NUnit_Framework_TestCaseSourceAttribute = new KnownType("NUnit.Framework.TestCaseSourceAttribute");
         internal static readonly KnownType NUnit_Framework_TestFixtureAttribute = new KnownType("NUnit.Framework.TestFixtureAttribute");
         internal static readonly KnownType NUnit_Framework_TheoryAttribute = new KnownType("NUnit.Framework.TheoryAttribute");
+        internal static readonly KnownType Org_BouncyCastle_Asn1_Nist_NistNamedCurves = new KnownType("Org.BouncyCastle.Asn1.Nist.NistNamedCurves");
+        internal static readonly KnownType Org_BouncyCastle_Asn1_Sec_SecNamedCurves = new KnownType("Org.BouncyCastle.Asn1.Sec.SecNamedCurves");
+        internal static readonly KnownType Org_BouncyCastle_Asn1_TeleTrust_TeleTrusTNamedCurves = new KnownType("Org.BouncyCastle.Asn1.TeleTrust.TeleTrusTNamedCurves");
+        internal static readonly KnownType Org_BouncyCastle_Asn1_X9_ECNamedCurveTable = new KnownType("Org.BouncyCastle.Asn1.X9.ECNamedCurveTable");
+        internal static readonly KnownType Org_BouncyCastle_Asn1_X9_X962NamedCurves = new KnownType("Org.BouncyCastle.Asn1.X9.X962NamedCurves");
+        internal static readonly KnownType Org_BouncyCastle_Crypto_Generators_DHParametersGenerator = new KnownType("Org.BouncyCastle.Crypto.Generators.DHParametersGenerator");
+        internal static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new KnownType("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
+        internal static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new KnownType("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
         internal static readonly KnownType RestSharp_IRestRequest = new KnownType("RestSharp.IRestRequest");
         internal static readonly KnownType Serilog_LoggerConfiguration = new KnownType("Serilog.LoggerConfiguration");
         internal static readonly KnownType System_Action = new KnownType("System.Action");
@@ -309,8 +317,12 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_AllowPartiallyTrustedCallersAttribute = new KnownType("System.Security.AllowPartiallyTrustedCallersAttribute");
         internal static readonly KnownType System_Security_Cryptography_AesManaged = new KnownType("System.Security.Cryptography.AesManaged");
         internal static readonly KnownType System_Security_Cryptography_AsymmetricAlgorithm = new KnownType("System.Security.Cryptography.AsymmetricAlgorithm");
+        internal static readonly KnownType System_Security_Cryptography_CspParameters = new KnownType("System.Security.Cryptography.CspParameters");
         internal static readonly KnownType System_Security_Cryptography_DES = new KnownType("System.Security.Cryptography.DES");
         internal static readonly KnownType System_Security_Cryptography_DSA = new KnownType("System.Security.Cryptography.DSA");
+        internal static readonly KnownType System_Security_Cryptography_DSACryptoServiceProvider = new KnownType("System.Security.Cryptography.DSACryptoServiceProvider");
+        internal static readonly KnownType System_Security_Cryptography_ECDiffieHellman = new KnownType("System.Security.Cryptography.ECDiffieHellman");
+        internal static readonly KnownType System_Security_Cryptography_ECDsa = new KnownType("System.Security.Cryptography.ECDsa");
         internal static readonly KnownType System_Security_Cryptography_HashAlgorithm = new KnownType("System.Security.Cryptography.HashAlgorithm");
         internal static readonly KnownType System_Security_Cryptography_HMACMD5 = new KnownType("System.Security.Cryptography.HMACMD5");
         internal static readonly KnownType System_Security_Cryptography_HMACRIPEMD160 = new KnownType("System.Security.Cryptography.HMACRIPEMD160");

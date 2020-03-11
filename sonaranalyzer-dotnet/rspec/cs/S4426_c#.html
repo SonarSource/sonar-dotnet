@@ -1,7 +1,22 @@
-<p>When generating cryptograpic keys (or key pairs), it is important to use a key length that provides enough entropy against brute-force attacks. For
-the RSA algorithm the key should be at </p>
-<p> least 2048 bits long.</p>
-<p>This rule raises an issue when a RSA key-pair generator is initialized with too small a length parameter.</p>
+<p>Most of cryptographic systems require a sufficient key size to be robust against brute-force attacks.</p>
+<p><a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf">NIST recommendations</a> will be checked for these
+use-cases:</p>
+<p><strong>Digital Signature Generation</strong> and <strong>Verification:</strong> </p>
+<ul>
+  <li> p ≥ 2048 AND q ≥ 224 for DSA (<code>p</code> is key length and <code>q</code> the modulus length) </li>
+  <li> n ≥ 2048 for RSA (<code>n</code> is the key length) </li>
+</ul>
+<p><strong>Key Agreement</strong>: </p>
+<ul>
+  <li> p ≥ 2048 AND q ≥ 224 for DH and MQV </li>
+  <li> n ≥ 224 for ECDH and ECMQV (Examples: <code>secp192r1</code> is a non-compliant curve (<code>n</code> &lt; 224) but <code>secp224k1</code> is
+  compliant (<code>n</code> &gt;= 224)) </li>
+</ul>
+<p><strong>Encryption and Decryption</strong>: </p>
+<ul>
+  <li> AES-128, 192, 256 </li>
+</ul>
+<p>This rule will not raise issues for ciphers that are considered weak (no matter the key size) like <code>DES</code>, <code>Blowfish</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 using System;
@@ -13,12 +28,31 @@ namespace MyLibrary
     {
         static void Main()
         {
-            RSACryptoServiceProvider RSA = new RSACryptoServiceProvider(1024); // Noncompliant
+            var dsa1 = new DSACryptoServiceProvider(); // Noncompliant - default key size is 1024
+            dsa1.KeySize = 2048; // Noncompliant - the setter does not update the underlying key size for the DSACryptoServiceProvider class
+
+            var dsa2 = new DSACryptoServiceProvider(2048); // Noncompliant - cannot create DSACryptoServiceProvider with a key size bigger than 1024
+
+            var rsa1 = new RSACryptoServiceProvider(); // Noncompliant - default key size is 1024
+            rsa1.KeySize = 2048; // Noncompliant - the setter does not update the underlying key size for the RSACryptoServiceProvider class
+
+            var rsa2 = new RSACng(1024); // Noncompliant
+
             // ...
         }
     }
 }
 </pre>
+<p>KeySize property of DSACryptoServiceProvider and RSACryptoServiceProvider does not change the value of underlying KeySize for the algorithm.
+Property setter is ignored without error and KeySize can be changed only by using constructor overload. See:</p>
+<ul>
+  <li> <a
+  href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.dsacryptoserviceprovider.keysize">DSACryptoServiceProvider.KeySize
+  Property</a> </li>
+  <li> <a
+  href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider.keysize">RSACryptoServiceProvider.KeySize
+  Property</a> </li>
+</ul>
 <h2>Compliant Solution</h2>
 <pre>
 using System;
@@ -30,7 +64,11 @@ namespace MyLibrary
     {
         static void Main()
         {
-            RSACryptoServiceProvider RSA = new RSACryptoServiceProvider(2048);
+            var dsa1 = new DSACng(); // Compliant - default key size is 2048
+            var dsa2 = new DSACng(2048); // Compliant
+            var rsa1 = new RSACryptoServiceProvider(2048); // Compliant
+            var rsa2 = new RSACng(); // Compliant - default key size is 2048
+
             // ...
         }
     }
@@ -42,10 +80,8 @@ namespace MyLibrary
   </li>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A9</a> - Security
   Misconfiguration </li>
-  <li> <a href="https://www.ssi.gouv.fr/uploads/2014/11/RGS_v-2-0_B1.pdf">ANSSI RGSv2</a> - Référentiel Général de Sécurité version 2 </li>
-  <li> <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf">NIST FIPS 186-4</a> - Digital Signature Standard (DSS) </li>
+  <li> <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar1.pdf">NIST 800-131A</a> - Recommendation for Transitioning the
+  Use of Cryptographic Algorithms and Key Lengths </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/326.html">MITRE, CWE-326</a> - Inadequate Encryption Strength </li>
-  <li> Derived from FindSecBugs rule <a href="https://find-sec-bugs.github.io/bugs.htm#BLOWFISH_KEY_SIZE">BLOWFISH_KEY_SIZE</a> </li>
-  <li> Derived from FindSecBugs rule <a href="https://find-sec-bugs.github.io/bugs.htm#RSA_KEY_SIZE">RSA_KEY_SIZE</a> </li>
 </ul>
 
