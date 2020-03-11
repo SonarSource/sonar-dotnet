@@ -11,6 +11,18 @@ namespace Tests.Diagnostics
         DirectoryEntry Property1 { get; set; } = new DirectoryEntry(); // Compliant
         DirectoryEntry Property2 { get; set; }
 
+        public Program()
+        {
+            new DirectoryEntry("path", "user", "pass", AuthenticationTypes.Secure); // Compliant
+            new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None); // Noncompliant
+
+            var authTypeSecure = AuthenticationTypes.Secure;
+            new DirectoryEntry("path", "user", "pass", authTypeSecure); // Compliant
+
+            var authTypeNone = AuthenticationTypes.None;
+            new DirectoryEntry("path", "user", "pass", authTypeNone); // Noncompliant
+        }
+
         void CtorSetsAllowedValue()
         {
             new DirectoryEntry(); // Compliant
@@ -95,6 +107,7 @@ namespace Tests.Diagnostics
         private DirectoryEntry field4;
         private DirectoryEntry field5;
         private DirectoryEntry field6;
+        private DirectoryEntry field7 = new DirectoryEntry();
 
         private DirectoryEntry Property0 => new DirectoryEntry { AuthenticationType = AuthenticationTypes.None }; // Noncompliant
         private DirectoryEntry Property1 { get; set; } = new DirectoryEntry { AuthenticationType = AuthenticationTypes.None }; // Noncompliant
@@ -102,6 +115,12 @@ namespace Tests.Diagnostics
         private DirectoryEntry Property4 { get; set; }
         private DirectoryEntry Property5 { get; set; }
         private DirectoryEntry Property6 { get; set; }
+
+        private AuthenticationTypes AuthenticationType
+        {
+            set => field7.AuthenticationType = value;
+            get => field7.AuthenticationType;
+        }
 
         void Cases()
         {
@@ -127,6 +146,36 @@ namespace Tests.Diagnostics
             this.Property5.AuthenticationType = AuthenticationTypes.Secure;
 
             Property6 = new DirectoryEntry(); // Compliant
+        }
+    }
+
+    public struct Struct
+    {
+        public void Method()
+        {
+            new DirectoryEntry("path", "user", "pass", AuthenticationTypes.Secure); // Compliant
+            new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None); // Noncompliant
+
+            var authTypeSecure = AuthenticationTypes.Secure;
+            new DirectoryEntry("path", "user", "pass", authTypeSecure); // Compliant
+
+            var authTypeNone = AuthenticationTypes.None;
+            new DirectoryEntry("path", "user", "pass", authTypeNone); // Noncompliant
+        }
+    }
+
+    public interface IWithDefaultMethod
+    {
+        void Method()
+        {
+            new DirectoryEntry("path", "user", "pass", AuthenticationTypes.Secure); // Compliant
+            new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None); // Noncompliant
+
+            var authTypeSecure = AuthenticationTypes.Secure;
+            new DirectoryEntry("path", "user", "pass", authTypeSecure); // Compliant
+
+            var authTypeNone = AuthenticationTypes.None;
+            new DirectoryEntry("path", "user", "pass", authTypeNone); // Noncompliant
         }
     }
 
@@ -159,7 +208,7 @@ namespace Tests.Diagnostics
         public void WithTernaryOperatorUnsecure(bool condition)
         {
             var authType = condition ? AuthenticationTypes.None : AuthenticationTypes.Anonymous;
-            // Symbolic execution would a better fit to increase precision
+            // Symbolic execution would be a better fit to increase precision
             var entry = new DirectoryEntry("", null, null, authType); // Compliant - FN
         }
 

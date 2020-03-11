@@ -38,7 +38,7 @@ namespace SonarAnalyzer.SyntaxTrackers
     /// - OR invoking the constructor and then setting some specific properties on the created object
     public class CSharpObjectInitializationTracker
     {
-        private static readonly Func<ISymbol, SyntaxNode, SemanticModel, bool> DefaultIsAllowedObject = (s, node, model) => false;
+        private static readonly Func<ISymbol, ExpressionSyntax, SemanticModel, bool> DefaultIsAllowedObject = (s, node, model) => false;
 
         /// <summary>
         /// By default, we consider constructors unsafe.
@@ -56,9 +56,9 @@ namespace SonarAnalyzer.SyntaxTrackers
         private readonly Predicate<object> isAllowedConstantValue;
 
         /// <summary>
-        /// Given the symbol of an object, analyzed syntaxNode and the semantic model, returns true if it is allowed.
+        /// Given the symbol of an object, expresion used to populate the value and the semantic model, returns true if it is allowed.
         /// </summary>
-        private readonly Func<ISymbol, SyntaxNode, SemanticModel, bool> isAllowedObject;
+        private readonly Func<ISymbol, ExpressionSyntax, SemanticModel, bool> isAllowedObject;
 
         /// <summary>
         /// Given the name of a property, returns true if it is of interest for the rule verdict.
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.SyntaxTrackers
 
         internal CSharpObjectInitializationTracker(Predicate<object> isAllowedConstantValue, ImmutableArray<KnownType> trackedTypes,
             Predicate<string> isTrackedPropertyName,
-            Func<ISymbol, SyntaxNode, SemanticModel, bool> isAllowedObject = null,
+            Func<ISymbol, ExpressionSyntax, SemanticModel, bool> isAllowedObject = null,
             bool constructorIsSafe = DefaultIsConstructorSafe,
             int trackedConstructorArgumentIndex = DefaultTrackedConstructorArgumentIndex)
         {

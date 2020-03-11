@@ -19,6 +19,7 @@
  */
 
 extern alias csharp;
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -34,7 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\LdapConnectionShouldBeSecure.cs",
                 new LdapConnectionShouldBeSecure(),
-                additionalReferences: FrameworkMetadataReference.SystemDirectoryServices,
+                additionalReferences: FrameworkMetadataReference.SystemDirectoryServices
+                    .Union(NuGetMetadataReference.NETStandardV2_1_0),
                 options: ParseOptionsHelper.FromCSharp8);
         }
     }

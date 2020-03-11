@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.FindSymbols;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.XXE;
@@ -173,7 +174,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     isAllowedConstantValue: constantValue => false,
                     trackedTypes: XmlDocumentTrackedTypes,
                     isTrackedPropertyName: propertyName => "XmlResolver" == propertyName,
-                    isAllowedObject: IsAllowedObject,
+                    isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol),
                     constructorIsSafe: constructorIsSafe
                 );
 
@@ -181,7 +182,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     isAllowedConstantValue: IsAllowedValueForXmlTextReader,
                     trackedTypes: ImmutableArray.Create(KnownType.System_Xml_XmlTextReader),
                     isTrackedPropertyName : XmlTextReaderTrackedProperties.Contains,
-                    isAllowedObject: IsAllowedObject,
+                    isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol),
                     constructorIsSafe: constructorIsSafe
                 );
 
@@ -216,7 +217,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     symbol.Kind == SymbolKind.Method &&
                     symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
 
-            private static bool IsAllowedObject(ISymbol symbol, SyntaxNode node, SemanticModel model) =>
+            private static bool IsAllowedObject(ISymbol symbol) =>
                 !IsUnsafeXmlResolverConstructor(symbol) &&
                 !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers) &&
                 !IsUnsafeXmlResolverReturnType(symbol);

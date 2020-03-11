@@ -53,28 +53,37 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsAllowedValue(object constantValue) =>
             constantValue is int integerValue &&
-            IsValidAuthenticationType(integerValue);
+            !IsUnsafe(integerValue);
 
         private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(KnownType.System_DirectoryServices_DirectoryEntry);
 
-        private static bool IsAllowedObject(ISymbol symbol, SyntaxNode node, SemanticModel semanticModel)
+        /// <summary>
+        /// Verifies if the AuthenticationType parameter used on constructor invocation is secure.
+        /// </summary>
+        /// <param name="authTypeSymbol">The symbol associated with the expression used to populate the AuthenticationType parameter</param>
+        /// <param name="authTypeExpression">Expression used to populate the AuthenticationType parameter</param>
+        private static bool IsAllowedObject(ISymbol authTypeSymbol, ExpressionSyntax authTypeExpression, SemanticModel semanticModel)
         {
-            if (!symbol.GetSymbolType().Is(KnownType.System_DirectoryServices_AuthenticationTypes))
+            if (!authTypeSymbol.GetSymbolType().Is(KnownType.System_DirectoryServices_AuthenticationTypes))
             {
                 return false;
             }
 
-            // In order to correctly detect all the cases we will need to refactor the rule and use symbolic execution.
+            // In order to correctly detect all the cases we will need to refactor the rule to use symbolic execution.
             // Until this is done, we can reduce the number of false positives by checking if the variable has one of the following
             // values assigned in the parent scope: AuthenticationTypes.None, AuthenticationTypes.Anonymous, default or default(AuthenticationTypes).
-            var root = node.FirstAncestorOrSelf<MethodDeclarationSyntax>() ??
-                       node.FirstAncestorOrSelf<ClassDeclarationSyntax>() ??
-                       node.FirstAncestorOrSelf<StructDeclarationSyntax>() ??
-                       node.FirstAncestorOrSelf<InterfaceDeclarationSyntax>() ??
-                       node.SyntaxTree.GetRoot();
+            var root = authTypeExpression.FirstAncestorOrSelf<MethodDeclarationSyntax>() ??
+                       authTypeExpression.FirstAncestorOrSelf<ClassDeclarationSyntax>() ??
+                       authTypeExpression.FirstAncestorOrSelf<StructDeclarationSyntax>() ??
+                       authTypeExpression.FirstAncestorOrSelf<InterfaceDeclarationSyntax>() ??
+                       authTypeExpression.SyntaxTree.GetRoot();
 
-            return !HasUnsafeDeclaration(root, symbol, semanticModel) &&
-                   !HasUnsafeAssignment(root, symbol, semanticModel);
+            // The CSharpObjectInitializationTracker is verifying only if AuthenticationType property or DirectoryEntry ctor
+            // was invoked with a valid value, which can be evaluated as a constant.
+            // If the parameter is a variable, in order to reduce FP, we have to check if an unsafe value was set during
+            // variable declaration or later by assignment.
+            return !HasUnsafeDeclaration(root, authTypeSymbol, semanticModel) &&
+                   !HasUnsafeAssignment(root, authTypeSymbol, semanticModel);
         }
 
         private static bool HasUnsafeAssignment(SyntaxNode root, ISymbol symbol, SemanticModel semanticModel) =>
@@ -102,9 +111,9 @@ namespace SonarAnalyzer.Rules.CSharp
             semanticModel.GetConstantValue(node) is {} constantValue &&
             constantValue.HasValue &&
             constantValue.Value is int authType &&
-            !IsValidAuthenticationType(authType);
+            IsUnsafe(authType);
 
-        private static bool IsValidAuthenticationType(int authType) =>
-            authType != AuthenticationTypesNone && authType != AuthenticationTypesAnonymous;
+        private static bool IsUnsafe(int authType) =>
+            authType == AuthenticationTypesNone || authType == AuthenticationTypesAnonymous;
     }
 }
