@@ -45,35 +45,9 @@
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
 "region":  {
-"startLine":  368,
-"startColumn":  47,
-"endLine":  368,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
-"region":  {
 "startLine":  423,
 "startColumn":  57,
 "endLine":  423,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
-"region":  {
-"startLine":  426,
-"startColumn":  66,
-"endLine":  426,
 "endColumn":  74
 }
 }
