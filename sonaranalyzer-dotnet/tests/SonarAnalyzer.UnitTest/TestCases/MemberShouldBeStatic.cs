@@ -219,4 +219,22 @@ namespace Tests.Diagnostics
         protected void Session_End(object sender, EventArgs e) { }
         protected void Session_Start(object sender, EventArgs e) { }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3204
+    public class Repro_3204<TFirst, TSecond>
+    {
+        public int BuildSomething() // Noncompliant FP
+        {
+            return 42;
+        }
+    }
+
+    public class Repro_3204_OK
+    {
+        public int BuildSomething<TFirst, TSecond>() // Noncompliant, this generic method should be static
+        {
+            return 42;
+        }
+    }
+
 }
