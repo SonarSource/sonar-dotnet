@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
@@ -90,6 +91,16 @@ namespace Tests.Diagnostics
             Task.WaitAny(GetFooAsync());
             Task.WaitAll(GetFooAsync());
             Thread.Sleep(10);
+        }
+
+        public void Run(Task<int> task)
+        {
+            Action<Task<int>> arg = (action) =>
+            {
+                var ret = action.Result; // Noncompliant FP, we do not track actions which are used on ContinueWith
+            };
+
+            task.ContinueWith(arg);
         }
 
         // See https://github.com/SonarSource/sonar-dotnet/issues/2413
