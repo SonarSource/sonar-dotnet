@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var containingType = c.SemanticModel.GetDeclaredSymbol(variables[0]).ContainingType;
 
                     var typeDeclaration = fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(
-                        sn => sn.Kind() == SyntaxKind.ClassDeclaration || sn.Kind() == SyntaxKind.InterfaceDeclaration);
+                        sn => sn.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration));
 
                     foreach (var variable in variables)
                     {
