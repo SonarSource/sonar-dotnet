@@ -173,7 +173,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     isAllowedConstantValue: constantValue => false,
                     trackedTypes: XmlDocumentTrackedTypes,
                     isTrackedPropertyName: propertyName => "XmlResolver" == propertyName,
-                    isAllowedObject: IsAllowedObject,
+                    isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol),
                     constructorIsSafe: constructorIsSafe
                 );
 
@@ -181,7 +181,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     isAllowedConstantValue: IsAllowedValueForXmlTextReader,
                     trackedTypes: ImmutableArray.Create(KnownType.System_Xml_XmlTextReader),
                     isTrackedPropertyName : XmlTextReaderTrackedProperties.Contains,
-                    isAllowedObject: IsAllowedObject,
+                    isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol),
                     constructorIsSafe: constructorIsSafe
                 );
 
