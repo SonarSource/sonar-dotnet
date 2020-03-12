@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules
                 unixEndingHeaderFormat += "\n";
             }
             return IsRegularExpression
-                ? Regex.IsMatch(unixEndingHeader, unixEndingHeaderFormat)
+                ? Regex.IsMatch(unixEndingHeader, unixEndingHeaderFormat, RegexOptions.Singleline)
                 : unixEndingHeader.StartsWith(unixEndingHeaderFormat, StringComparison.Ordinal);
         }
 
