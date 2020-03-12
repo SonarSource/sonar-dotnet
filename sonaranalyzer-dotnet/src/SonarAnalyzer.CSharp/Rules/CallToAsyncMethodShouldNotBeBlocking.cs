@@ -36,6 +36,9 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S4462";
         private const string MessageFormat = "Replace this use of '{0}' with '{1}'.";
+        private const string ResultName = "Result";
+        private const string ContinueWithName = "ContinueWith";
+        private const string SleepName = "Sleep";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -46,8 +49,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 ["GetResult"] = ImmutableArray.Create(KnownType.System_Runtime_CompilerServices_TaskAwaiter,
                     KnownType.System_Runtime_CompilerServices_TaskAwaiter_TResult),
-                ["Result"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task_T),
-                ["Sleep"] = ImmutableArray.Create(KnownType.System_Threading_Thread),
+                [ResultName] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task_T),
+                [SleepName] = ImmutableArray.Create(KnownType.System_Threading_Thread),
                 ["Wait"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
                 ["WaitAll"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
                 ["WaitAny"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task)
@@ -57,8 +60,8 @@ namespace SonarAnalyzer.Rules.CSharp
             new Dictionary<string, string[]>
             {
                 ["GetResult"] = new[] { "Task.GetAwaiter.GetResult", "await" },
-                ["Result"] = new[] { "Task.Result", "await" },
-                ["Sleep"] = new[] { "Thread.Sleep", "await Task.Delay" },
+                [ResultName] = new[] { "Task.Result", "await" },
+                [SleepName] = new[] { "Thread.Sleep", "await Task.Delay" },
                 ["Wait"] = new[] { "Task.Wait", "await" },
                 ["WaitAll"] = new[] { "Task.WaitAll", "await Task.WhenAll" },
                 ["WaitAny"] = new[] { "Task.WaitAny", "await Task.WhenAny" }
@@ -81,8 +84,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (memberAccessNameName == null ||
                 !InvalidMemberAccess.ContainsKey(memberAccessNameName) ||
-                IsChainedAfterThreadPoolCall(simpleMemberAccess, context.SemanticModel)||
-                simpleMemberAccess.IsInNameOfArgument(context.SemanticModel) )
+                IsResultInContinueWithCall(memberAccessNameName, simpleMemberAccess) ||
+                IsChainedAfterThreadPoolCall(simpleMemberAccess, context.SemanticModel) ||
+                simpleMemberAccess.IsInNameOfArgument(context.SemanticModel))
             {
                 return;
             }
@@ -99,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var enclosingMethod = simpleMemberAccess.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>();
             if (enclosingMethod != null)
             {
-                if (memberAccessNameName == "Sleep" &&
+                if (memberAccessNameName == SleepName &&
                     !enclosingMethod.Modifiers.Any(SyntaxKind.AsyncKeyword))
                 {
                     return; // Thread.Sleep should not be used only in async methods
@@ -115,6 +119,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, simpleMemberAccess.GetLocation(),
                 messageArgs: MemberNameToMessageArguments[memberAccessNameName]));
+        }
+
+        private static bool IsResultInContinueWithCall(string memberAccessName, SyntaxNode syntaxNode)
+        {
+            if (memberAccessName != ResultName)
+            {
+                return false;
+            }
+
+            var parentInvocation = syntaxNode.FirstAncestorOrSelf<InvocationExpressionSyntax>();
+            return parentInvocation != null && parentInvocation.Expression.NameIs(ContinueWithName);
         }
 
         private static bool IsChainedAfterThreadPoolCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>

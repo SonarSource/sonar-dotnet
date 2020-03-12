@@ -92,11 +92,12 @@ namespace Tests.Diagnostics
             Thread.Sleep(10);
         }
 
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2413
         public Task<string> Run(Task<string> task)
         {
             return task.ContinueWith(completedTask =>
             {
-                return completedTask.Result; // Noncompliant FP, task is already completed at this point.
+                return completedTask.Result; // Compliant, task is already completed at this point.
             });
         }
 
