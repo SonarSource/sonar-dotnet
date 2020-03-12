@@ -38,9 +38,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             InvocationTracker = new VisualBasicInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, verifyingRule);
         }
 
-        protected override BuilderPatternCondition<InvocationExpressionSyntax> BuilderPattern() =>
+        protected override BuilderPatternCondition<InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
             new VisualBasicBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
-                (context, invocation) =>
+                (_, invocation) =>
                     invocation.ArgumentList?.Arguments.Count != 1
                     || !invocation.ArgumentList.Arguments.Single().GetExpression().RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
 

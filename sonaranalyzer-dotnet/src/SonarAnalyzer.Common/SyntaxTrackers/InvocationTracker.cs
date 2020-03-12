@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Helpers
 
         public InvocationCondition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition)
             where TInvocationSyntax : SyntaxNode =>
-            context => condition.InvalidBuilderInitialization(context);
+            condition.InvalidBuilderInitialization;
 
         #region Syntax-level checking methods
 

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
 
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
 
-        protected abstract BuilderPatternCondition<TInvocationSyntax> BuilderPattern();
+        protected abstract BuilderPatternCondition<TInvocationSyntax> CreateBuilderPatternCondition();
 
         protected JwtSignedBase(System.Resources.ResourceManager rspecResources)
         {
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
 
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.JWT_Builder_JwtBuilder, "Decode")),
-                InvocationTracker.IsInvalidBuilderInitialization(BuilderPattern())
+                InvocationTracker.IsInvalidBuilderInitialization(CreateBuilderPatternCondition())
                 );
         }
 

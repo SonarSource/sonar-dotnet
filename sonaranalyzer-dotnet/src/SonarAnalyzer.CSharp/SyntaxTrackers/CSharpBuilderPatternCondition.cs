@@ -32,23 +32,27 @@ namespace SonarAnalyzer.Helpers
         protected override SyntaxNode RemoveParentheses(SyntaxNode node) =>
             node.RemoveParentheses();
 
-        protected override SyntaxNode TopMostContainingMethod(SyntaxNode node) =>
+        protected override SyntaxNode GetTopMostContainingMethod(SyntaxNode node) =>
             node.GetTopMostContainingMethod();
 
-        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax node, out string identifierName)
+        protected override SyntaxNode GetExpression(InvocationExpressionSyntax node)
         {
-            identifierName = node.Expression.GetIdentifier()?.Identifier.ValueText;
             return node.Expression;
         }
 
-        protected override bool IsMemberAccess(SyntaxNode node, out SyntaxNode expression)
+        protected override string GetIdentifierName(InvocationExpressionSyntax node)
+        {
+            return node.Expression.GetName();
+        }
+
+        protected override bool IsMemberAccess(SyntaxNode node, out SyntaxNode memberAccessExpression)
         {
             if (node is MemberAccessExpressionSyntax memberAccess)
             {
-                expression = memberAccess.Expression;
+                memberAccessExpression = memberAccess.Expression;
                 return true;
             }
-            expression = null;
+            memberAccessExpression = null;
             return false;
         }
 
@@ -72,7 +76,7 @@ namespace SonarAnalyzer.Helpers
             {
                 node = statement.Expression;
             }
-            if (node is AssignmentExpressionSyntax assignment && assignment.Left.GetIdentifier()?.Identifier.ValueText == identifierName)
+            if (node is AssignmentExpressionSyntax assignment && assignment.Left.NameIs(identifierName))
             {
                 rightExpression = assignment.Right;
                 return true;

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -175,6 +176,17 @@ namespace SonarAnalyzer.Helpers.VisualBasic
                     return null;
             }
         }
+
+        public static string GetName(this ExpressionSyntax expression) =>
+            expression switch
+            {
+                MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
+                IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
+                _ => string.Empty
+            };
+
+        public static bool NameIs(this ExpressionSyntax expression, string name) =>
+            expression.GetName().Equals(name, StringComparison.InvariantCultureIgnoreCase);
 
         public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
         {

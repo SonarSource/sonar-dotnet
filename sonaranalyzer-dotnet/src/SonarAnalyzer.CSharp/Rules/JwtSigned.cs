@@ -37,9 +37,9 @@ namespace SonarAnalyzer.Rules.CSharp
             InvocationTracker = new CSharpInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, verifyingRule);
         }
 
-        protected override BuilderPatternCondition<InvocationExpressionSyntax> BuilderPattern() =>
+        protected override BuilderPatternCondition<InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
             new CSharpBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
-                (context, invocation) =>
+                (_, invocation) =>
                     invocation.ArgumentList?.Arguments.Count != 1
                     || !invocation.ArgumentList.Arguments.Single().Expression.RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
     }

@@ -30,9 +30,10 @@ namespace SonarAnalyzer.Helpers
         private readonly BuilderPatternDescriptor<TInvocationSyntax>[] descriptors;
 
         protected abstract SyntaxNode RemoveParentheses(SyntaxNode node);
-        protected abstract SyntaxNode TopMostContainingMethod(SyntaxNode node);
-        protected abstract SyntaxNode InvocationExpression(TInvocationSyntax node, out string identifierName);
-        protected abstract bool IsMemberAccess(SyntaxNode node, out SyntaxNode expression);
+        protected abstract SyntaxNode GetTopMostContainingMethod(SyntaxNode node);
+        protected abstract SyntaxNode GetExpression(TInvocationSyntax node);
+        protected abstract string GetIdentifierName(TInvocationSyntax node);
+        protected abstract bool IsMemberAccess(SyntaxNode node, out SyntaxNode memberAccessExpression);
         protected abstract bool IsObjectCreation(SyntaxNode node);
         protected abstract bool IsIdentifier(SyntaxNode node, out string identifierName);
         protected abstract bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, out SyntaxNode rightExpression);
@@ -52,17 +53,16 @@ namespace SonarAnalyzer.Helpers
                 current = RemoveParentheses(current);
                 if (current is TInvocationSyntax invocation)
                 {
-                    var expression = InvocationExpression(invocation, out var identifierName);
-                    var invocationContext = new InvocationContext(invocation, identifierName, context.SemanticModel);
+                    var invocationContext = new InvocationContext(invocation, GetIdentifierName(invocation), context.SemanticModel);
                     if (this.descriptors.FirstOrDefault(x => x.IsMatch(invocationContext)) is { } desc)
                     {
                         return !desc.IsValid(context, invocation);
                     }
-                    current = expression;
+                    current = GetExpression(invocation);
                 }
-                else if (IsMemberAccess(current, out var expression))
+                else if (IsMemberAccess(current, out var memberAccessExpression))
                 {
-                    current = expression;
+                    current = memberAccessExpression;
                 }
                 else if (IsObjectCreation(current))
                 {
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Helpers
 
         private SyntaxNode FindLinearPrecedingAssignmentExpression(string identifierName, SyntaxNode current)
         {
-            var method = TopMostContainingMethod(current);
+            var method = GetTopMostContainingMethod(current);
             while (current != method && current?.Parent != null)
             {
                 var parent = current.Parent;
