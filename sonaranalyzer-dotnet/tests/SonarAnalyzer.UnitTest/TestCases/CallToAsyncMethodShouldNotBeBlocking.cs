@@ -98,5 +98,11 @@ namespace Tests.Diagnostics
                 return completedTask.Result; // Noncompliant FP, task is already completed at this point.
             });
         }
+
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2794
+        public override string ToString()
+        {
+            return nameof(Task<object>.Result); // Noncompliant FP, nameof() does not execute async code.
+        }
     }
 }
