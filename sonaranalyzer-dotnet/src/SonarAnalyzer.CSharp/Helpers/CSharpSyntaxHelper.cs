@@ -146,14 +146,11 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool IsInNameofCall(this ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression.Parent != null &&
-            expression.Parent.IsKind(SyntaxKind.Argument) &&
-            expression.Parent.Parent != null &&
-            expression.Parent.Parent.IsKind(SyntaxKind.ArgumentList) &&
-            expression.Parent.Parent.Parent != null &&
-            expression.Parent.Parent.Parent.IsKind(SyntaxKind.InvocationExpression) &&
-            ((InvocationExpressionSyntax)expression.Parent.Parent.Parent).IsNameof(semanticModel);
+        public static bool IsInNameofCall(this ExpressionSyntax expression, SemanticModel semanticModel)
+        {
+            var parentInvocation = expression.FirstAncestorOrSelf<InvocationExpressionSyntax>();
+            return parentInvocation != null && parentInvocation.IsNameof(semanticModel);
+        }
 
         public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel)
         {

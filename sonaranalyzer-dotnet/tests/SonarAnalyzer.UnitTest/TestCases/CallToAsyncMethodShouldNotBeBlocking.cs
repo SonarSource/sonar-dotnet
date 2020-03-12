@@ -102,7 +102,7 @@ namespace Tests.Diagnostics
         // See https://github.com/SonarSource/sonar-dotnet/issues/2794
         public override string ToString()
         {
-            return nameof(Task<object>.Result); // Noncompliant FP, nameof() does not execute async code.
+            return nameof(Task<object>.Result); // Compliant, nameof() does not execute async code.
         }
     }
 }

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class CallToAsyncMethodShouldNotBeBlocking : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4462";
+        private const string DiagnosticId = "S4462";
         private const string MessageFormat = "Replace this use of '{0}' with '{1}'.";
 
         private static readonly DiagnosticDescriptor rule =
@@ -71,17 +71,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 ["Sleep"] = new[] { "Thread.Sleep", "await Task.Delay" },
             };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                ReportOnViolation,
-                SyntaxKind.SimpleMemberAccessExpression);
-        }
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportOnViolation, SyntaxKind.SimpleMemberAccessExpression);
 
         private static void ReportOnViolation(SyntaxNodeAnalysisContext context)
         {
             var simpleMemberAccess = (MemberAccessExpressionSyntax)context.Node;
-            var memberAccessNameName = simpleMemberAccess.Name?.Identifier.ValueText;
+            var memberAccessNameName = simpleMemberAccess.GetName();
 
             if (memberAccessNameName == null ||
                 !InvalidMemberAccess.ContainsKey(memberAccessNameName) ||
@@ -98,6 +94,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 !memberAccessSymbol.ContainingType.ConstructedFrom.IsAny(possibleMemberAccesses))
             {
                 return;
+            }
+
+            if (simpleMemberAccess.IsInNameofCall(context.SemanticModel))
+            {
+                return; // nameof() does not execute async code
             }
 
             var enclosingMethod = simpleMemberAccess.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>();
