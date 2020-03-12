@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool IsInNameofCall(this ExpressionSyntax expression, SemanticModel semanticModel)
+        public static bool IsInNameOfArgument(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
             var parentInvocation = expression.FirstAncestorOrSelf<InvocationExpressionSyntax>();
             return parentInvocation != null && parentInvocation.IsNameof(semanticModel);

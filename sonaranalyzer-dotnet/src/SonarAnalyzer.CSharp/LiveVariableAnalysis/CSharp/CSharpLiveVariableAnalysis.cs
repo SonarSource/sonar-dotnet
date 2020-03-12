@@ -179,7 +179,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 return;
             }
 
-            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameofCall(this.semanticModel) &&
+            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(this.semanticModel) &&
                 IsLocalScoped(symbol))
             {
                 if (IsOutArgument(identifier))

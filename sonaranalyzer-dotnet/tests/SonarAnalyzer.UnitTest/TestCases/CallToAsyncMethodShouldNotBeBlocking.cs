@@ -64,6 +64,7 @@ namespace Tests.Diagnostics
 
         private async Task SleepAsync()
         {
+            var name = nameof(Thread.Sleep);
             Thread.Sleep(10); // Noncompliant {{Replace this use of 'Thread.Sleep' with 'await Task.Delay'.}}
 //          ^^^^^^^^^^^^
         }

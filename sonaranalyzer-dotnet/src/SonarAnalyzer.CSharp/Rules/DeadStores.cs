@@ -207,7 +207,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameofCall(this.context.SemanticModel) &&
+                if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(this.context.SemanticModel) &&
                     CSharpLiveVariableAnalysis.IsLocalScoped(symbol, this.declaration))
                 {
                     if (CSharpLiveVariableAnalysis.IsOutArgument(identifier))

@@ -44,13 +44,24 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly Dictionary<string, ImmutableArray<KnownType>> InvalidMemberAccess =
             new Dictionary<string, ImmutableArray<KnownType>>
             {
-                ["Wait"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
-                ["WaitAny"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
-                ["WaitAll"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
-                ["Result"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task_T),
-                ["Sleep"] = ImmutableArray.Create(KnownType.System_Threading_Thread),
                 ["GetResult"] = ImmutableArray.Create(KnownType.System_Runtime_CompilerServices_TaskAwaiter,
                     KnownType.System_Runtime_CompilerServices_TaskAwaiter_TResult),
+                ["Result"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task_T),
+                ["Sleep"] = ImmutableArray.Create(KnownType.System_Threading_Thread),
+                ["Wait"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
+                ["WaitAll"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
+                ["WaitAny"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task)
+            };
+
+        private static readonly Dictionary<string, string[]> MemberNameToMessageArguments =
+            new Dictionary<string, string[]>
+            {
+                ["GetResult"] = new[] { "Task.GetAwaiter.GetResult", "await" },
+                ["Result"] = new[] { "Task.Result", "await" },
+                ["Sleep"] = new[] { "Thread.Sleep", "await Task.Delay" },
+                ["Wait"] = new[] { "Task.Wait", "await" },
+                ["WaitAll"] = new[] { "Task.WaitAll", "await Task.WhenAll" },
+                ["WaitAny"] = new[] { "Task.WaitAny", "await Task.WhenAny" }
             };
 
         private static readonly Dictionary<string, KnownType> TaskThreadPoolCalls =
@@ -58,17 +69,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 ["StartNew"] = KnownType.System_Threading_Tasks_TaskFactory,
                 ["Run"] = KnownType.System_Threading_Tasks_Task,
-            };
-
-        private static readonly Dictionary<string, string[]> MemberNameToMessageArguments =
-            new Dictionary<string, string[]>
-            {
-                ["Result"] = new[] { "Task.Result", "await" },
-                ["Wait"] = new[] { "Task.Wait", "await" },
-                ["GetResult"] = new[] { "Task.GetAwaiter.GetResult", "await" },
-                ["WaitAny"] = new[] { "Task.WaitAny", "await Task.WhenAny" },
-                ["WaitAll"] = new[] { "Task.WaitAll", "await Task.WhenAll" },
-                ["Sleep"] = new[] { "Thread.Sleep", "await Task.Delay" },
             };
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (simpleMemberAccess.IsInNameofCall(context.SemanticModel))
+            if (simpleMemberAccess.IsInNameOfArgument(context.SemanticModel))
             {
                 return; // nameof() does not execute async code
             }

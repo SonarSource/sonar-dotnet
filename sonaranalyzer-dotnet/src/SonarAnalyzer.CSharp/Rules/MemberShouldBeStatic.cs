@@ -166,7 +166,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel semanticModel) =>
             nodes.OfType<ExpressionSyntax>()
                 .Where(IsLeftmostIdentifierName)
-                .Where(n => !CSharpSyntaxHelper.IsInNameofCall(n, semanticModel))
+                .Where(n => !CSharpSyntaxHelper.IsInNameOfArgument(n, semanticModel))
                 .Any(n => IsInstanceMember(n, semanticModel));
 
         private static bool IsLeftmostIdentifierName(ExpressionSyntax node)

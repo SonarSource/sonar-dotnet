@@ -239,7 +239,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var propertyAccess = expr.GetSelfOrTopParenthesizedExpression();
-                if (propertyAccess.IsInNameofCall(this.semanticModel))
+                if (propertyAccess.IsInNameOfArgument(this.semanticModel))
                 {
                     return false;
                 }
