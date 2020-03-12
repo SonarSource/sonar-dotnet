@@ -44,34 +44,6 @@ namespace SonarAnalyzer.CFG.Helpers
         public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
             (ExpressionSyntax)RemoveParentheses((SyntaxNode)expression);
 
-        private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind)
-        {
-            if (expression is InvocationExpressionSyntax invocation)
-            {
-                return IsOn(invocation.Expression, onKind);
-            }
-
-            if (expression is NameSyntax)
-            {
-                // This is a simplification as we don't check where the method is defined (so this could be this or base)
-                return true;
-            }
-
-            if (expression is MemberAccessExpressionSyntax memberAccess &&
-                memberAccess.Expression.RemoveParentheses().IsKind(onKind))
-            {
-                return true;
-            }
-
-            if (expression is ConditionalAccessExpressionSyntax conditionalAccess &&
-                conditionalAccess.Expression.RemoveParentheses().IsKind(onKind))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel)
         {
             if (semanticModel.GetSymbolOrCandidateSymbol(expression) is IMethodSymbol calledSymbol)
