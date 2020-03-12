@@ -163,6 +163,40 @@ namespace Tests.Diagnostics
             return ret;
         }
 
+        public string SecretConnectionStringProperty
+        {
+            get
+            {
+                return "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+            }
+        }
+
+        public string SecretConnectionStringProperty_OK
+        {
+            get
+            {
+                return "Nothing to see here";
+            }
+        }
+
+        public string SecretConnectionStringProperty2 => "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringProperty2_OK => "Nothing to see here";
+
+        public string SecretConnectionStringProperty3 { get; } = "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringProperty3_OK { get; } = "Nothing to see here";
+
+        public string SecretConnectionStringFunction()
+        {
+            return "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        }
+
+        public string SecretConnectionStringFunction_OK()
+        {
+            return "Nothing to see here";
+        }
+
+        public string SecretConnectionStringFunction2() => "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringFunction2_OK() => "Nothing to see here";
     }
 
     class SqlConnection : IDisposable

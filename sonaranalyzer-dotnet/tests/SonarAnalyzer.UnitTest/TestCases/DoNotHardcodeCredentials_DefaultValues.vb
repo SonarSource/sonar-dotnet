@@ -153,6 +153,29 @@ Namespace Tests.Diagnostics
             Return Ret
         End Function
 
+        Public ReadOnly Property ConnectionStringProperty As String
+            Get
+                Return "Server = localhost; Database = Test; User = SA; Password = Secret123" ' Noncompliant
+            End Get
+        End Property
+
+        Public ReadOnly Property ConnectionStringProperty_OK As String
+            Get
+                Return "Nothing to see here"
+            End Get
+        End Property
+
+        Public ReadOnly Property ConnectionStringProperty2 As String = "Server = localhost; Database = Test; User = SA; Password = Secret123" ' Noncompliant
+        Public ReadOnly Property ConnectionStringProperty2_OK As String = "Nothing to see here"
+
+        Public Function ConnectionStringFunction() As String
+            Return "Server = localhost; Database = Test; User = SA; Password = Secret123" ' Noncompliant
+        End Function
+
+        Public Function ConnectionStringFunction_OK() As String
+            Return "Nothing to see here"
+        End Function
+
     End Class
 
     Public Class SqlConnection
