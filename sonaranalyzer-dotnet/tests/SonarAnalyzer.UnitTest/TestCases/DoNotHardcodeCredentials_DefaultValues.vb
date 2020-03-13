@@ -147,6 +147,20 @@ Namespace Tests.Diagnostics
             Dim e1 As String = "scheme://admin:admin@domain.com"    ' Compliant exception, user and password are the same
             Dim e2 As String = "scheme://abc:abc@domain.com"        ' Compliant exception, user and password are the same
             Dim e3 As String = "scheme://a%20;c:a%20;c@domain.com"  ' Compliant exception, user and password are the same
+
+            Dim html1 As String = ' Noncompliant
+"This is article http://login:secret@www.example.com
+Email: info@example.com
+Phone: +0000000"
+
+            Dim html2 As String =
+"This is article http://www.example.com
+Email: info@example.com
+Phone: +0000000"
+
+            Dim html3 As String = "This is article http://www.example.com Email: info@example.com Phone: +0000000"
+            Dim html4 As String = "This is article http://www.example.com<br>Email:info@example.com<br>Phone:+0000000"
+            Dim html5 As String = "This is article http://user:secret@www.example.com<br>Email:info@example.com<br>Phone:+0000000" ' Noncompliant
         End Sub
 
         Public Sub LiteralAsArgument(pwd As String, server As String)
