@@ -56,8 +56,8 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> FluentAssertions(string packageVersion) =>
             NugetMetadataFactory.Create("FluentAssertions", packageVersion);
 
-        public static IEnumerable<MetadataReference> NSubstitute(string packageVersion) =>
-            NugetMetadataFactory.Create("NSubstitute", packageVersion);
+        public static IEnumerable<MetadataReference> JWT(string packageVersion = "6.1.0") =>
+            NugetMetadataFactory.Create("JWT", packageVersion);
 
         public static IEnumerable<MetadataReference> Log4Net(string packageVersion, string targetFramework) =>
             NugetMetadataFactory.Create("log4net", packageVersion, targetFramework);
@@ -162,6 +162,9 @@ namespace SonarAnalyzer.UnitTest
 
         public static IEnumerable<MetadataReference> NHibernate(string packageVersion = "5.2.2") =>
             NugetMetadataFactory.Create("NHibernate", packageVersion);
+
+        public static IEnumerable<MetadataReference> NSubstitute(string packageVersion) =>
+            NugetMetadataFactory.Create("NSubstitute", packageVersion);
 
         public static IEnumerable<MetadataReference> NUnit(string packageVersion) =>
             NugetMetadataFactory.Create("NUnit", packageVersion);

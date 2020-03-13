@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -210,7 +210,7 @@ End Namespace";
         public void EqualityComparer_List_VB()
         {
             var comparer = new VisualBasicSyntaxNodeEqualityComparer<VisualBasic.StatementSyntax>();
-            
+
             var result = comparer.Equals(methods_VB.Method1, methods_VB.Method2);
             result.Should().BeTrue();
 
