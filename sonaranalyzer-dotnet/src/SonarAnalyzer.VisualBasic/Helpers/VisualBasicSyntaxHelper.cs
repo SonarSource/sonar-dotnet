@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Helpers.VisualBasic
             };
 
         public static SyntaxNode GetTopMostContainingMethod(this SyntaxNode node) =>
-           node.AncestorsAndSelf().LastOrDefault(ancestor => ancestor is MethodBaseSyntax || ancestor is PropertyBlockSyntax);
+            node.AncestorsAndSelf().LastOrDefault(ancestor => ancestor is MethodBaseSyntax || ancestor is PropertyBlockSyntax);
 
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
