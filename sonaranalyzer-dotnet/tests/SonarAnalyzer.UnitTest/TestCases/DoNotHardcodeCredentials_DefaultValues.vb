@@ -11,7 +11,7 @@ Namespace Tests.Diagnostics
 
         Private Const Secret As String = "constantValue"
 
-        Public Sub Test()
+        Public Sub Test(User As String)
             Dim password As String = "foo" 'Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
             '   ^^^^^^^^^^^^^^^^^^^^^^^^^^
             Dim foo As String, passwd As String = "a" 'Noncompliant {{"passwd" detected here, make sure this is not a hard-coded credential.}}
@@ -20,6 +20,8 @@ Namespace Tests.Diagnostics
             Dim foo2 As String = "Password=123" 'Noncompliant
             Dim bar As String
             bar = "Password=p" 'Noncompliant ^13#18
+
+            foo = "password"
             foo = "password="
             foo = "passwordpassword"
             foo = "foo=1;password=1" 'Noncompliant
@@ -29,6 +31,7 @@ Namespace Tests.Diagnostics
             Dim myPassword2 As String = ""
             Dim myPassword3 As String = "   "
             Dim myPassword4 As String = "foo" 'Noncompliant
+            Dim query2 As String = "password=hardcoded;user='" + User + "'" ' Noncompliant
         End Sub
 
         Public Sub DefaultKeywords()
@@ -87,11 +90,20 @@ Namespace Tests.Diagnostics
             Dim query2 As String = "password=:password"
             Dim query3 As String = "password=:param"
             Dim query4 As String = "password='" + pwd + "'"
-            Dim query5 As String = "password={0}"
-            Dim query6 As String = "password=;user=;"
-            Dim query7 As String = "password=:password;user=:user;"
-            Dim query8 As String = "password=?;user=?;"
-            Dim query9 As String = "Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;"
+            Dim query5 As String = "password='" & pwd & "'"
+            Dim query6 As String = "password={0}"
+            Dim query7 As String = "password=;user=;"
+            Dim query8 As String = "password=:password;user=:user;"
+            Dim query9 As String = "password=?;user=?;"
+            Dim query10 As String = "Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;"
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = ?")
+            End Using
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = :password")
+            End Using
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = {0}")
+            End Using
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = ")
+            End Using
         End Sub
 
         Public Sub WordInConstantNameAndValue()
@@ -120,21 +132,69 @@ Namespace Tests.Diagnostics
             Dim n1 As String = "scheme://user:azerty123@domain.com" ' Noncompliant {{Review this hard-coded URI, which may contain a credential.}}
             Dim n2 As String = "scheme://user:With%20%3F%20Encoded@domain.com"              ' Noncompliant
             Dim n3 As String = "scheme://user:With!$&'()*+,;=OtherCharacters@domain.com"    ' Noncompliant
+            Dim n4 As String = "scheme://user:azerty123@" + Domain  ' Noncompliant
+            Dim n5 As String = "scheme://user:azerty123@" & Domain  ' Noncompliant
 
-            Dim fn1 As String = "scheme://user:azerty123@" & Domain  ' Compliant FN, concatenated strings are not supported
-
-            Dim c1 As String = "scheme://user:" & Pwd & "@domain.com"
-            Dim c2 As String = "scheme://user:@domain.com"
-            Dim c3 As String = "scheme://user@domain.com:80"
-            Dim c4 As String = "scheme://user@domain.com"
-            Dim c5 As String = "scheme://domain.com/user:azerty123"
-            Dim c6 As String = String.Format("scheme://user:{0}@domain.com", Pwd)
-            Dim c7 As String = $"scheme://user:{Pwd}@domain.com"
+            Dim c1 As String = "scheme://user:" + Pwd + "@domain.com"
+            Dim c2 As String = "scheme://user:" & Pwd & "@domain.com"
+            Dim c3 As String = "scheme://user:@domain.com"
+            Dim c4 As String = "scheme://user@domain.com:80"
+            Dim c5 As String = "scheme://user@domain.com"
+            Dim c6 As String = "scheme://domain.com/user:azerty123"
+            Dim c7 As String = String.Format("scheme://user:{0}@domain.com", Pwd)
+            Dim c8 As String = $"scheme://user:{Pwd}@domain.com"
 
             Dim e1 As String = "scheme://admin:admin@domain.com"    ' Compliant exception, user and password are the same
             Dim e2 As String = "scheme://abc:abc@domain.com"        ' Compliant exception, user and password are the same
             Dim e3 As String = "scheme://a%20;c:a%20;c@domain.com"  ' Compliant exception, user and password are the same
         End Sub
+
+        Public Sub LiteralAsArgument(pwd As String, server As String)
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = Secret123")  ' Noncompliant
+            End Using
+            Using Conn As SqlConnection = OpenConn("Server = localhost; Database = Test; User = SA; Password = Secret123") ' Noncompliant
+            End Using
+            Using Conn As New SqlConnection("Server = " + server + "; Database = Test; User = SA; Password = Secret123") ' Noncompliant
+            End Using
+            Using Conn As New SqlConnection("Server = " & server & "; Database = Test; User = SA; Password = Secret123") ' Noncompliant
+            End Using
+
+            Using OpenConn("password")
+            End Using
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = " + pwd)
+            End Using
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = " & pwd)
+            End Using
+        End Sub
+
+        Private Function OpenConn(connectionString As String) As SqlConnection
+            Dim Ret As New SqlConnection(connectionString)
+            Ret.Open()
+            Return Ret
+        End Function
+
+        Public ReadOnly Property ConnectionStringProperty As String
+            Get
+                Return "Server = localhost; Database = Test; User = SA; Password = Secret123" ' Noncompliant
+            End Get
+        End Property
+
+        Public ReadOnly Property ConnectionStringProperty_OK As String
+            Get
+                Return "Nothing to see here"
+            End Get
+        End Property
+
+        Public ReadOnly Property ConnectionStringProperty2 As String = "Server = localhost; Database = Test; User = SA; Password = Secret123" ' Noncompliant
+        Public ReadOnly Property ConnectionStringProperty2_OK As String = "Nothing to see here"
+
+        Public Function ConnectionStringFunction() As String
+            Return "Server = localhost; Database = Test; User = SA; Password = Secret123" ' Noncompliant
+        End Function
+
+        Public Function ConnectionStringFunction_OK() As String
+            Return "Nothing to see here"
+        End Function
 
     End Class
 
@@ -142,6 +202,9 @@ Namespace Tests.Diagnostics
         Implements IDisposable
 
         Public Sub New(ConnStr As String)
+        End Sub
+
+        Public Sub Open()
         End Sub
 
         Public Sub Dispose() Implements IDisposable.Dispose
@@ -157,7 +220,6 @@ Namespace Tests.Diagnostics
             Configuration.Password = "foo" ' False Negative
             Me.password = Configuration.Password = "foo" ' False Negative
             Dim query1 As String = "password=':crazy;secret';user=xxx" ' False Negative - passwords enclosed in '' are not covered
-            Dim query2 As String = "password=hardcoded;user='" + user + "'" ' False Negative - Only LiteralExpressionSyntax nodes are covered
         End Sub
 
         Class Configuration

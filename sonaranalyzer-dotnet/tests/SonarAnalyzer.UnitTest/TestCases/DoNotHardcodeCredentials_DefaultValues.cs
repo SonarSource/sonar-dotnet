@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
 
         private const string secret = "constantValue";
 
-        public void Test()
+        public void Test(string user)
         {
             string password = @"foo"; // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
 //                 ^^^^^^^^^^^^^^^^^
@@ -22,21 +22,37 @@ namespace Tests.Diagnostics
             string pwdPassword = "a"; // Noncompliant {{"pwd, password" detected here, make sure this is not a hard-coded credential.}}
 
             string foo2 = @"Password=123"; // Noncompliant
+            string multiline = // Noncompliant
+                @"Server=A;
+                User=B;
+                Password=123";
+
+            string multiline_OK =
+                @"Password detected here,
+                make sure this is not
+                a hard-coded credential.";
 
             string bar;
             bar = "Password=p"; // Noncompliant
 //          ^^^^^^^^^^^^^^^^^^
 
+            foo = "password";
             foo = "password=";
             foo = "passwordpassword";
             foo = "foo=1;password=1"; // Noncompliant
             foo = "foo=1password=1";
             foo = ""; // Compliant
 
+            var something1 = (foo = "foo") + (bar = "bar");
+            var something2 = (foo = "foo") + (bar = "password=123"); // Noncompliant
+            var something3 = (foo = "foo") + (bar = "password");
+            var something4 = (foo = "foo") + (bar = "123=password");
+
             string myPassword1 = null;
             string myPassword2 = "";
             string myPassword3 = "        ";
             string myPassword4 = @"foo"; // Noncompliant
+            string query2 = "password=hardcoded;user='" + user + "'"; // Noncompliant
         }
 
         public void DefaultKeywords()
@@ -104,6 +120,10 @@ namespace Tests.Diagnostics
             string query7 = "password=:password;user=:user;";
             string query8 = "password=?;user=?;";
             string query9 = @"Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;";
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = ?")) { }
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = :password")) { }
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = {0}")) { }
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = ")) { }
         }
 
         public void WordInVariableNameAndValue()
@@ -122,6 +142,7 @@ namespace Tests.Diagnostics
             string passwordName = "UserPasswordValue";
             string password = "Password";
             string pwd = "pwd";
+            var expression = (password = "Password") + (pwd = "pwd");
 
             string myPassword = "pwd"; // Noncompliant, different value from word list is used
         }
@@ -131,8 +152,7 @@ namespace Tests.Diagnostics
             string n1 = "scheme://user:azerty123@domain.com"; // Noncompliant {{Review this hard-coded URI, which may contain a credential.}}
             string n2 = "scheme://user:With%20%3F%20Encoded@domain.com";              // Noncompliant
             string n3 = "scheme://user:With!$&'()*+,;=OtherCharacters@domain.com";    // Noncompliant
-
-            string fn1 = "scheme://user:azerty123@" + domain;  // Compliant FN, concatenated strings are not supported
+            string n4 = "scheme://user:azerty123@" + domain;  // Noncompliant
 
             string c1 = "scheme://user:" + pwd + "@domain.com";
             string c2 = "scheme://user:@domain.com";
@@ -146,6 +166,68 @@ namespace Tests.Diagnostics
             string e2 = "scheme://abc:abc@domain.com";        // Compliant exception, user and password are the same
             string e3 = "scheme://a%20;c:a%20;c@domain.com";  // Compliant exception, user and password are the same
         }
+
+        public void LiteralAsArgument(string pwd, string server)
+        {
+            using (var conn = new SqlConnection("Server = localhost; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
+            using (var conn = OpenConn("Server = " + server + "; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
+
+            using (var conn = OpenConn("password")) { }
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = " + pwd)) { }
+        }
+
+        private SqlConnection OpenConn(string connectionString)
+        {
+            var ret = new SqlConnection(connectionString);
+            ret.Open();
+            return ret;
+        }
+
+        public string SecretConnectionStringProperty
+        {
+            get
+            {
+                return "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+            }
+        }
+
+        public string SecretConnectionStringProperty_OK
+        {
+            get
+            {
+                return "Nothing to see here";
+            }
+        }
+
+        public string SecretConnectionStringProperty2 => "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringProperty2_OK => "Nothing to see here";
+
+        public string SecretConnectionStringProperty3 { get; } = "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringProperty3_OK { get; } = "Nothing to see here";
+
+        public string SecretConnectionStringFunction()
+        {
+            return "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        }
+
+        public string SecretConnectionStringFunction_OK()
+        {
+            return "Nothing to see here";
+        }
+
+        public string SecretConnectionStringFunction2() => "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringFunction2_OK() => "Nothing to see here";
+
+        public string SecretConnectionStringFunction3() => @"Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringFunction3_OK() => @"Nothing to see here";
+    }
+
+    class SqlConnection : IDisposable
+    {
+        public SqlConnection(string connectionString) { }
+        public void Open() { }
+        public void Dispose() { }
     }
 
     class FalseNegatives
@@ -158,7 +240,6 @@ namespace Tests.Diagnostics
             Configuration.Password = "foo"; // False Negative
             this.password = Configuration.Password = "foo"; // False Negative
             string query1 = "password=':crazy;secret';user=xxx"; // False Negative - passwords enclosed in '' are not covered
-            string query2 = "password=hardcoded;user='" + user + "'"; // False Negative - Only LiteralExpressionSyntax nodes are covered
         }
 
         class Configuration

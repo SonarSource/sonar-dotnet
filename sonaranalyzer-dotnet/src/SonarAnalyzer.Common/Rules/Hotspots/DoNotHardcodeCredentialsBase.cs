@@ -46,6 +46,8 @@ namespace SonarAnalyzer.Rules
         private Regex passwordValuePattern;
         private readonly IAnalyzerConfiguration analyzerConfiguration;
 
+        protected abstract void InitializeActions(ParameterLoadingAnalysisContext context);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("credentialWords", PropertyType.String, "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
@@ -56,8 +58,9 @@ namespace SonarAnalyzer.Rules
             {
                 this.credentialWords = value;
                 this.splitCredentialWords = value.ToUpperInvariant()
-                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Split(',')
                     .Select(x => x.Trim())
+                    .Where(x => x.Length != 0)
                     .ToList();
 
                 this.passwordValuePattern = new Regex(string.Format(@"\b(?<credential>{0})\s*[:=]\s*(?<suffix>.+)$",
@@ -76,7 +79,7 @@ namespace SonarAnalyzer.Rules
             this.analyzerConfiguration = analyzerConfiguration;
         }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
         {
             var innerContext = context.GetInnerContext();
 
@@ -95,6 +98,8 @@ namespace SonarAnalyzer.Rules
                PropertyAccessTracker.AssignedValueIsConstant(),
                PropertyAccessTracker.MatchProperty(
                    new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
+
+            InitializeActions(context);
         }
 
         protected bool IsEnabled(AnalyzerOptions options)
@@ -106,7 +111,7 @@ namespace SonarAnalyzer.Rules
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
              where TSyntaxNode : SyntaxNode
         {
-            private readonly Regex validCredentialPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            private readonly Regex validCredentialPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}|""|'$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             private readonly Regex uriUserInfoPattern = new Regex(@"\w+:\/\/(?<Login>[^:]+):(?<Password>[^@]+)@", RegexOptions.Compiled);
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
@@ -185,7 +190,9 @@ namespace SonarAnalyzer.Rules
             private bool ContainsUriUserInfo(string variableValue)
             {
                 var match = uriUserInfoPattern.Match(variableValue);
-                return match.Success && !string.Equals(match.Groups["Login"].Value, match.Groups["Password"].Value, StringComparison.OrdinalIgnoreCase);
+                return match.Success
+                    && !string.Equals(match.Groups["Login"].Value, match.Groups["Password"].Value, StringComparison.OrdinalIgnoreCase)
+                    && !this.validCredentialPattern.IsMatch(match.Groups["Password"].Value);
             }
         }
     }

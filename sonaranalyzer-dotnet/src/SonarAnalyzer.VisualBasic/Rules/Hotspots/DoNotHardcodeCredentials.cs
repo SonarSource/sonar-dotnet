@@ -41,10 +41,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
         }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void InitializeActions(ParameterLoadingAnalysisContext context)
         {
-            base.Initialize(context);
-
             context.RegisterCompilationStartAction(
                 c =>
                 {
@@ -60,6 +58,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     c.RegisterSyntaxNodeActionInNonGenerated(
                         new AssignmentExpressionBannedWordsFinder(this).GetAnalysisAction(rule),
                         SyntaxKind.SimpleAssignmentStatement);
+
+                    c.RegisterSyntaxNodeActionInNonGenerated(
+                        new StringLiteralBannedWordsFinder(this).GetAnalysisAction(rule),
+                        SyntaxKind.StringLiteralExpression);
                 });
         }
 
@@ -97,6 +99,58 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 syntaxNode.IsKind(SyntaxKind.SimpleAssignmentStatement) &&
                 syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel) &&
                 syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
+        }
+
+        /// <summary>
+        /// This finder checks all string literal in the code, except VariableDeclarator and SimpleAssignmentExpression. These two have their own
+        /// finders with precise logic and variable name checking.
+        /// This class inspects all other standalone string literals for values considered as hardcoded passwords (in connection strings)
+        /// based on same rules as in VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder.
+        /// </summary>
+        private class StringLiteralBannedWordsFinder : CredentialWordsFinderBase<LiteralExpressionSyntax>
+        {
+            public StringLiteralBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+
+            protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode) =>
+                syntaxNode.GetStringValue();
+
+            // We don't have a variable for cases that this finder should handle.  Cases with variable name are
+            // handled by VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder
+            // Returning null is safe here, it will not be considered as a value.
+            protected override string GetVariableName(LiteralExpressionSyntax syntaxNode) =>
+                null;
+
+            protected override bool IsAssignedWithStringLiteral(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && ShouldHandle(syntaxNode.GetTopMostContainingMethod(), syntaxNode);
+
+            // We don't want to handle VariableDeclarator and SimpleAssignmentExpression,
+            // they are implemented by other finders with better and more precise logic.
+            private static bool ShouldHandle(SyntaxNode method, SyntaxNode current)
+            {
+                while (current != null && current != method)
+                {
+                    switch (current.Kind())
+                    {
+                        case SyntaxKind.VariableDeclarator:
+                        case SyntaxKind.SimpleAssignmentStatement:
+                            return false;
+
+                        // Direct return from nested syntaxes that must be handled by this finder
+                        // before search reaches top level VariableDeclarator or SimpleAssignmentExpression.
+                        case SyntaxKind.InvocationExpression:
+                        case SyntaxKind.SimpleArgument:
+                        case SyntaxKind.AddExpression: // String concatenation is not supported by other finders
+                        case SyntaxKind.ConcatenateExpression:
+                            return true;
+
+                        default:
+                            current = current.Parent;
+                            break;
+                    }
+                }
+                // We want to handle all other literals (property initializers, return statement and return values from lambdas, arrow functions, ...)
+                return true;
+            }
         }
     }
 }
