@@ -8,6 +8,7 @@ Namespace Tests.Diagnostics
     Class Program
 
         Public Const DBConnectionString As String = "Server=localhost; Database=Test; User=SA; Password=Secret123"    ' Noncompliant
+        Public Const EditPasswordPageUrlToken As String = "{Account.EditPassword.PageUrl}" ' Compliant
 
         Private Const Secret As String = "constantValue"
 
