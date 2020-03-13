@@ -107,27 +107,33 @@ namespace SonarAnalyzer.Rules.CSharp
                 null;
 
             protected override bool IsAssignedWithStringLiteral(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && !IsHandledByOtherFinder(syntaxNode.GetTopMostContainingMethod(), syntaxNode);
+                syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && ShouldHandle(syntaxNode.GetTopMostContainingMethod(), syntaxNode);
 
-            private static bool IsHandledByOtherFinder(SyntaxNode method, SyntaxNode current)
+            private static bool ShouldHandle(SyntaxNode method, SyntaxNode current)
             {
+                // We don't want to handle VariableDeclarator and SimpleAssignmentExpression,
+                // they are implemented by other finders with better and more precise logic.
                 while (current != null && current != method)
                 {
                     switch (current.Kind())
                     {
                         case SyntaxKind.VariableDeclarator:
                         case SyntaxKind.SimpleAssignmentExpression:
-                            return true;
+                            return false;
+
+                        // Direct return from nested syntaxes that must be handled by this finder
+                        // before search reaches top level VariableDeclarator or SimpleAssignmentExpression.
                         case SyntaxKind.InvocationExpression:
                         case SyntaxKind.Argument:
                         case SyntaxKind.AddExpression: // String concatenation is not supported by other finders
-                            return false;
+                            return true;
+
                         default:
                             current = current.Parent;
                             break;
                     }
                 }
-                return false;
+                return true;
             }
         }
     }
