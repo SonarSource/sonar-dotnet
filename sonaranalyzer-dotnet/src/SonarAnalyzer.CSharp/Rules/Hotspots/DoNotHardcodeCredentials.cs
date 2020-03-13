@@ -96,6 +96,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
         }
 
+        /// <summary>
+        /// This finder checks all string literal in the code, except VariableDeclarator and SimpleAssignmentExpression. These two have their own
+        /// finders with precise logic and variable name checking.
+        /// This class inspects all other standalone string literals for values considered as hardcoded passwords (in connection strings)
+        /// based on same rules as in VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder.
+        /// </summary>
         private class StringLiteralBannedWordsFinder : CredentialWordsFinderBase<LiteralExpressionSyntax>
         {
             public StringLiteralBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
@@ -103,6 +109,9 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode) =>
                 syntaxNode.GetStringValue();
 
+            // We don't have a variable for cases that this finder should handle.  Cases with variable name are
+            // handled by VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder
+            // Returning null is safe here, it will not be considered as a value.
             protected override string GetVariableName(LiteralExpressionSyntax syntaxNode) =>
                 null;
 

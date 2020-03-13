@@ -101,6 +101,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
         }
 
+        /// <summary>
+        /// This finder checks all string literal in the code, except VariableDeclarator and SimpleAssignmentExpression. These two have their own
+        /// finders with precise logic and variable name checking.
+        /// This class inspects all other standalone string literals for values considered as hardcoded passwords (in connection strings)
+        /// based on same rules as in VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder.
+        /// </summary>
         private class StringLiteralBannedWordsFinder : CredentialWordsFinderBase<LiteralExpressionSyntax>
         {
             public StringLiteralBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
@@ -108,13 +114,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode) =>
                 syntaxNode.GetStringValue();
 
+            // We don't have a variable for cases that this finder should handle.  Cases with variable name are
+            // handled by VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder
+            // Returning null is safe here, it will not be considered as a value.
             protected override string GetVariableName(LiteralExpressionSyntax syntaxNode) =>
                 null;
 
             protected override bool IsAssignedWithStringLiteral(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && !IsHandledByOtherFinder(syntaxNode.GetTopMostContainingMethod(), syntaxNode);
+                syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && ShouldHandle(syntaxNode.GetTopMostContainingMethod(), syntaxNode);
 
-            private static bool IsHandledByOtherFinder(SyntaxNode method, SyntaxNode current)
+            // We don't want to handle VariableDeclarator and SimpleAssignmentExpression,
+            // they are implemented by other finders with better and more precise logic.
+            private static bool ShouldHandle(SyntaxNode method, SyntaxNode current)
             {
                 while (current != null && current != method)
                 {
@@ -122,18 +133,23 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     {
                         case SyntaxKind.VariableDeclarator:
                         case SyntaxKind.SimpleAssignmentStatement:
-                            return true;
+                            return false;
+
+                        // Direct return from nested syntaxes that must be handled by this finder
+                        // before search reaches top level VariableDeclarator or SimpleAssignmentExpression.
                         case SyntaxKind.InvocationExpression:
                         case SyntaxKind.SimpleArgument:
                         case SyntaxKind.AddExpression: // String concatenation is not supported by other finders
                         case SyntaxKind.ConcatenateExpression:
-                            return false;
+                            return true;
+
                         default:
                             current = current.Parent;
                             break;
                     }
                 }
-                return false;
+                // We want to handle all other literals (property initializers, return statement and return values from lambdas, arrow functions, ...)
+                return true;
             }
         }
     }

@@ -90,11 +90,12 @@ Namespace Tests.Diagnostics
             Dim query2 As String = "password=:password"
             Dim query3 As String = "password=:param"
             Dim query4 As String = "password='" + pwd + "'"
-            Dim query5 As String = "password={0}"
-            Dim query6 As String = "password=;user=;"
-            Dim query7 As String = "password=:password;user=:user;"
-            Dim query8 As String = "password=?;user=?;"
-            Dim query9 As String = "Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;"
+            Dim query5 As String = "password='" & pwd & "'"
+            Dim query6 As String = "password={0}"
+            Dim query7 As String = "password=;user=;"
+            Dim query8 As String = "password=:password;user=:user;"
+            Dim query9 As String = "password=?;user=?;"
+            Dim query10 As String = "Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;"
             Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = ?")
             End Using
             Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = :password")
@@ -131,15 +132,17 @@ Namespace Tests.Diagnostics
             Dim n1 As String = "scheme://user:azerty123@domain.com" ' Noncompliant {{Review this hard-coded URI, which may contain a credential.}}
             Dim n2 As String = "scheme://user:With%20%3F%20Encoded@domain.com"              ' Noncompliant
             Dim n3 As String = "scheme://user:With!$&'()*+,;=OtherCharacters@domain.com"    ' Noncompliant
-            Dim fn1 As String = "scheme://user:azerty123@" & Domain  ' Noncompliant
+            Dim n4 As String = "scheme://user:azerty123@" + Domain  ' Noncompliant
+            Dim n5 As String = "scheme://user:azerty123@" & Domain  ' Noncompliant
 
-            Dim c1 As String = "scheme://user:" & Pwd & "@domain.com"
-            Dim c2 As String = "scheme://user:@domain.com"
-            Dim c3 As String = "scheme://user@domain.com:80"
-            Dim c4 As String = "scheme://user@domain.com"
-            Dim c5 As String = "scheme://domain.com/user:azerty123"
-            Dim c6 As String = String.Format("scheme://user:{0}@domain.com", Pwd)
-            Dim c7 As String = $"scheme://user:{Pwd}@domain.com"
+            Dim c1 As String = "scheme://user:" + Pwd + "@domain.com"
+            Dim c2 As String = "scheme://user:" & Pwd & "@domain.com"
+            Dim c3 As String = "scheme://user:@domain.com"
+            Dim c4 As String = "scheme://user@domain.com:80"
+            Dim c5 As String = "scheme://user@domain.com"
+            Dim c6 As String = "scheme://domain.com/user:azerty123"
+            Dim c7 As String = String.Format("scheme://user:{0}@domain.com", Pwd)
+            Dim c8 As String = $"scheme://user:{Pwd}@domain.com"
 
             Dim e1 As String = "scheme://admin:admin@domain.com"    ' Compliant exception, user and password are the same
             Dim e2 As String = "scheme://abc:abc@domain.com"        ' Compliant exception, user and password are the same
@@ -153,8 +156,12 @@ Namespace Tests.Diagnostics
             End Using
             Using Conn As New SqlConnection("Server = " + server + "; Database = Test; User = SA; Password = Secret123") ' Noncompliant
             End Using
+            Using Conn As New SqlConnection("Server = " & server & "; Database = Test; User = SA; Password = Secret123") ' Noncompliant
+            End Using
 
             Using OpenConn("password")
+            End Using
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = " + pwd)
             End Using
             Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = " & pwd)
             End Using
