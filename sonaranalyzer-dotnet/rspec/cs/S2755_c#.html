@@ -86,8 +86,8 @@ while (reader.Read())
 XmlReaderSettings settings = new XmlReaderSettings();
 settings.DtdProcessing = DtdProcessing.Parse;
 settings.XmlResolver = new XmlUrlResolver();
-XmlReader reader = XmlReader.Create("xxe.xml", settings);
-while (reader.Read()) // Noncompliant: XmlReader is safe by default and becomes unsafe if DtdProcessing = Parse and XmlResolver is not null
+XmlReader reader = XmlReader.Create("xxe.xml", settings); // Noncompliant: XmlReader is safe by default and becomes unsafe if DtdProcessing = Parse and XmlResolver is not null
+while (reader.Read())
 { ... }
 </pre>
 <p>System.Xml.XPath.XPathDocument</p>
@@ -126,15 +126,15 @@ reader.ProhibitDtd = true; // Compliant: default is false
 </pre>
 <p>System.Xml.XmlReader</p>
 <pre>
-XmlReader reader = XmlReader.Create("xxe.xml");
-while (reader.Read()) // Compliant: XmlReader is safe by default
+XmlReader reader = XmlReader.Create("xxe.xml"); // Compliant: XmlReader is safe by default
+while (reader.Read())
 { ... }
 </pre>
 <p>System.Xml.XPath.XPathDocument</p>
 <pre>
 // prior to .NET 4.5.2
-XmlReader reader = XmlReader.Create("example.xml"); // safe
-XPathDocument doc = new XPathDocument(reader);
+XmlReader reader = XmlReader.Create("example.xml");
+XPathDocument doc = new XPathDocument(reader); // Compliant: XPathDocument is safe when being given a safe XmlReader
 XPathNavigator nav = doc.CreateNavigator();
 string xml = nav.InnerXml.ToString();
 </pre>
