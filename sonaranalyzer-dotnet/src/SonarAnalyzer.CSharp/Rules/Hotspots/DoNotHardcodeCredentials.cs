@@ -133,6 +133,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             break;
                     }
                 }
+                // We want to handle all other literals (property initializers, return statement and return values from lambdas, arrow functions, ...)
                 return true;
             }
         }

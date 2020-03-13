@@ -22,6 +22,10 @@ namespace Tests.Diagnostics
             string pwdPassword = "a"; // Noncompliant {{"pwd, password" detected here, make sure this is not a hard-coded credential.}}
 
             string foo2 = @"Password=123"; // Noncompliant
+            string multiline = // Noncompliant
+                @"Server=A;
+                User=B;
+                Password=123";
 
             string bar;
             bar = "Password=p"; // Noncompliant
@@ -32,6 +36,9 @@ namespace Tests.Diagnostics
             foo = "foo=1;password=1"; // Noncompliant
             foo = "foo=1password=1";
             foo = ""; // Compliant
+
+            var something1 = (foo = "foo") + (bar = "bar");
+            var something2 = (foo = "foo") + (bar = "password=123"); // Noncompliant
 
             string myPassword1 = null;
             string myPassword2 = "";
@@ -123,6 +130,7 @@ namespace Tests.Diagnostics
             string passwordName = "UserPasswordValue";
             string password = "Password";
             string pwd = "pwd";
+            var expression = (password = "Password") + (pwd = "pwd");
 
             string myPassword = "pwd"; // Noncompliant, different value from word list is used
         }
@@ -197,6 +205,9 @@ namespace Tests.Diagnostics
 
         public string SecretConnectionStringFunction2() => "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
         public string SecretConnectionStringFunction2_OK() => "Nothing to see here";
+
+        public string SecretConnectionStringFunction3() => @"Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringFunction3_OK() => @"Nothing to see here";
     }
 
     class SqlConnection : IDisposable
