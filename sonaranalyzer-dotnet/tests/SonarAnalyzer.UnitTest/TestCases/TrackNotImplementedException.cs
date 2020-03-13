@@ -29,8 +29,10 @@ namespace Tests.Diagnostics
 //          ^^^^^^^^^
         }
 
-        void NotImplemented() =>
-            throw new NotImplementedException(); // FN
+        void ByExpression() => throw new NotImplementedException(); // Noncompliant
+//                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+        NotImplementedException GetNewByExpression() => new NotImplementedException(); // Compliant - not thrown
     }
 
     interface IInterface
