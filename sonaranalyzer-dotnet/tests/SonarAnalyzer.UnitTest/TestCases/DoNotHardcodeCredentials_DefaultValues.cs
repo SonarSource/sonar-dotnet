@@ -165,6 +165,20 @@ namespace Tests.Diagnostics
             string e1 = "scheme://admin:admin@domain.com";    // Compliant exception, user and password are the same
             string e2 = "scheme://abc:abc@domain.com";        // Compliant exception, user and password are the same
             string e3 = "scheme://a%20;c:a%20;c@domain.com";  // Compliant exception, user and password are the same
+
+            string html1 = // Noncompliant
+@"This is article http://login:secret@www.example.com
+Email: info@example.com
+Phone: +0000000";
+
+            string html2 =
+@"This is article http://www.example.com
+Email: info@example.com
+Phone: +0000000";
+
+            string html3 = "This is article http://www.example.com Email: info@example.com Phone: +0000000";
+            string html4 = "This is article http://www.example.com<br>Email:info@example.com<br>Phone:+0000000";
+            string html5 = "This is article http://user:secret@www.example.com<br>Email:info@example.com<br>Phone:+0000000"; // Noncompliant
         }
 
         public void LiteralAsArgument(string pwd, string server)

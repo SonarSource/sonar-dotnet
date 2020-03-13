@@ -83,17 +83,17 @@ namespace SonarAnalyzer.Rules
         {
             var innerContext = context.GetInnerContext();
 
-            ObjectCreationTracker.Track(innerContext, new object[] {MessageHardcodedPassword},
+            ObjectCreationTracker.Track(innerContext, new object[] { MessageHardcodedPassword },
                 ObjectCreationTracker.MatchConstructor(KnownType.System_Net_NetworkCredential),
                 ObjectCreationTracker.ArgumentAtIndexIs(1, KnownType.System_String),
                 ObjectCreationTracker.ArgumentAtIndexIsConst(1));
 
-            ObjectCreationTracker.Track(innerContext, new object[] {MessageHardcodedPassword},
+            ObjectCreationTracker.Track(innerContext, new object[] { MessageHardcodedPassword },
                ObjectCreationTracker.MatchConstructor(KnownType.System_Security_Cryptography_PasswordDeriveBytes),
                ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
                ObjectCreationTracker.ArgumentAtIndexIsConst(0));
 
-            PropertyAccessTracker.Track(innerContext, new object[] {MessageHardcodedPassword},
+            PropertyAccessTracker.Track(innerContext, new object[] { MessageHardcodedPassword },
                PropertyAccessTracker.MatchSetter(),
                PropertyAccessTracker.AssignedValueIsConstant(),
                PropertyAccessTracker.MatchProperty(
@@ -112,13 +112,21 @@ namespace SonarAnalyzer.Rules
              where TSyntaxNode : SyntaxNode
         {
             private readonly Regex validCredentialPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}|""|'$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            private readonly Regex uriUserInfoPattern = new Regex(@"\w+:\/\/(?<Login>[^:]+):(?<Password>[^@]+)@", RegexOptions.Compiled);
+            private readonly Regex uriUserInfoPattern;
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
             protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer)
             {
+                // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved |  pct-encoded | sub-delims
+                const string Rfc3986_Unreserved = "-._~";  // Numbers and letters are embeded in regex itself without escaping
+                const string Rfc3986_Pct = "%";
+                const string Rfc3986_SubDelims = "!$&'()*+,;=";
+                const string UriPasswordSpecialCharacters = Rfc3986_Unreserved + Rfc3986_Pct + Rfc3986_SubDelims;
+                var uriUserInfoPart = @"[\w\d" + Regex.Escape(UriPasswordSpecialCharacters) + "]+";
+
                 this.analyzer = analyzer;
-            }
+                this.uriUserInfoPattern = new Regex(@"\w+:\/\/(?<Login>" + uriUserInfoPart + "):(?<Password>" + uriUserInfoPart + ")@", RegexOptions.Compiled);
+        }
 
             protected abstract bool IsAssignedWithStringLiteral(TSyntaxNode syntaxNode, SemanticModel semanticModel);
 
