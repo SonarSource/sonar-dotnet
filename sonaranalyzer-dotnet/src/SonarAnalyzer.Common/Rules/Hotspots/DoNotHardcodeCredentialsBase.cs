@@ -35,11 +35,13 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S2068";
         private const string MessageFormat = "{0}";
+        private const string MessageHardcodedPassword = "Please review this hard-coded password.";
         private const string MessageFormatCredential = @"""{0}"" detected here, make sure this is not a hard-coded credential.";
         private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
         protected readonly DiagnosticDescriptor rule;
+        protected readonly DiagnosticDescriptor hardCodedPasswordRule;
         private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
         private Regex passwordValuePattern;
@@ -71,6 +73,7 @@ namespace SonarAnalyzer.Rules
         protected DoNotHardcodeCredentialsBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration analyzerConfiguration)
         {
             this.rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+            this.hardCodedPasswordRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageHardcodedPassword, rspecResources).WithNotConfigurable();
             CredentialWords = DefaultCredentialWords;
             this.analyzerConfiguration = analyzerConfiguration;
         }

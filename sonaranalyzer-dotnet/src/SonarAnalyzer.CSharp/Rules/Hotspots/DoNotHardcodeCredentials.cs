@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
         internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration analyzerConfiguration)
             : base(RspecStrings.ResourceManager, analyzerConfiguration)
         {
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, rule);
+            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, hardCodedPasswordRule);
+            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, hardCodedPasswordRule);
         }
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 syntaxNode.Identifier.ValueText;
 
             protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                (syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression) &&
+                syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression &&
                 literalExpression.IsKind(SyntaxKind.StringLiteralExpression) &&
                 syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel);
         }
