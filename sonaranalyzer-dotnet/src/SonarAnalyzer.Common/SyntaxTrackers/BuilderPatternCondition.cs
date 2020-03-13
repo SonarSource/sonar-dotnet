@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Helpers
             this.descriptors = descriptors;
         }
 
-        public bool InvalidBuilderInitialization(InvocationContext context)
+        public bool IsInvalidBuilderInitialization(InvocationContext context)
         {
             var current = context.Invocation;
             while (current != null)
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Helpers
                     var invocationContext = new InvocationContext(invocation, GetIdentifierName(invocation), context.SemanticModel);
                     if (this.descriptors.FirstOrDefault(x => x.IsMatch(invocationContext)) is { } desc)
                     {
-                        return !desc.IsValid(context, invocation);
+                        return !desc.IsValid(invocation);
                     }
                     current = GetExpression(invocation);
                 }
@@ -75,6 +75,8 @@ namespace SonarAnalyzer.Helpers
                     {
                         return false;
                     }
+                    // When tracking reaches the local variable in invocation chain 'variable.MethodA().MethodB()'
+                    // we'll try to find preceding assignment to that variable to continue inspection of initialization chain.
                     current = FindLinearPrecedingAssignmentExpression(identifierName, current);
                 }
                 else

@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
                 );
         }
 
-        protected BuilderPatternDescriptor<TInvocationSyntax>[] JwtBuilderDescriptors(Func<InvocationContext, TInvocationSyntax, bool> singleArgumentIsNotFalseLiteral)
+        protected BuilderPatternDescriptor<TInvocationSyntax>[] JwtBuilderDescriptors(Func<TInvocationSyntax, bool> singleArgumentIsNotFalseLiteral)
         {
             return new[]
             {

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override BuilderPatternCondition<InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
             new CSharpBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
-                (_, invocation) =>
+                invocation =>
                     invocation.ArgumentList?.Arguments.Count != 1
                     || !invocation.ArgumentList.Arguments.Single().Expression.RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
     }

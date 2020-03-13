@@ -28,13 +28,13 @@ namespace SonarAnalyzer.Helpers
         where TInvocationSyntax : SyntaxNode
     {
         private readonly InvocationCondition[] invocationConditions;
-        private readonly Func<InvocationContext, TInvocationSyntax, bool> isValid;
+        private readonly Func<TInvocationSyntax, bool> isValid;
 
         public BuilderPatternDescriptor(bool isValid, params InvocationCondition[] invocationConditions)
-            : this((context, invocation) => isValid, invocationConditions)
+            : this(invocation => isValid, invocationConditions)
         { }
 
-        public BuilderPatternDescriptor(Func<InvocationContext, TInvocationSyntax, bool> isValid, params InvocationCondition[] invocationConditions)
+        public BuilderPatternDescriptor(Func<TInvocationSyntax, bool> isValid, params InvocationCondition[] invocationConditions)
         {
             this.isValid = isValid;
             this.invocationConditions = invocationConditions;
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Helpers
         public bool IsMatch(InvocationContext context) =>
             this.invocationConditions.All(x => x(context));
 
-        public bool IsValid(InvocationContext context, TInvocationSyntax invocation) =>
-            this.isValid(context, invocation);
+        public bool IsValid(TInvocationSyntax invocation) =>
+            this.isValid(invocation);
     }
 }

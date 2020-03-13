@@ -49,92 +49,92 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void ConstructorIsSafe_CS()
         {
             var safeConstructor = new CSharpBuilderPatternCondition(true, new BuilderPatternDescriptor<CSharpSyntax.InvocationExpressionSyntax>(false, (context) => false));
-            safeConstructor.InvalidBuilderInitialization(context_CS).Should().BeFalse();
+            safeConstructor.IsInvalidBuilderInitialization(context_CS).Should().BeFalse();
 
             var unsafeConstructor = new CSharpBuilderPatternCondition(false, new BuilderPatternDescriptor<CSharpSyntax.InvocationExpressionSyntax>(false, (context) => false));
-            unsafeConstructor.InvalidBuilderInitialization(context_CS).Should().BeTrue();
+            unsafeConstructor.IsInvalidBuilderInitialization(context_CS).Should().BeTrue();
         }
 
         [TestMethod]
         public void ConstructorIsSafe_VB()
         {
             var safeConstructor = new VisualBasicBuilderPatternCondition(true, new BuilderPatternDescriptor<VBSyntax.InvocationExpressionSyntax>(false, (context) => false));
-            safeConstructor.InvalidBuilderInitialization(context_VB).Should().BeFalse();
+            safeConstructor.IsInvalidBuilderInitialization(context_VB).Should().BeFalse();
 
             var unsafeConstructor = new VisualBasicBuilderPatternCondition(false, new BuilderPatternDescriptor<VBSyntax.InvocationExpressionSyntax>(false, (context) => false));
-            unsafeConstructor.InvalidBuilderInitialization(context_VB).Should().BeTrue();
+            unsafeConstructor.IsInvalidBuilderInitialization(context_VB).Should().BeTrue();
         }
 
         [TestMethod]
-        public void InvalidBuilderInitialization_CS()
+        public void IsInvalidBuilderInitialization_CS()
         {
             var aaaInvalidator = new BuilderPatternDescriptor<CSharpSyntax.InvocationExpressionSyntax>(false, (context) => context.MethodName == "Aaa");
             var bbbValidator = new BuilderPatternDescriptor<CSharpSyntax.InvocationExpressionSyntax>(true, (context) => context.MethodName == "Bbb");
             var cccInvalidator = new BuilderPatternDescriptor<CSharpSyntax.InvocationExpressionSyntax>(false, (context) => context.MethodName == "Ccc");
 
             var condition1 = new CSharpBuilderPatternCondition(false, bbbValidator);
-            condition1.InvalidBuilderInitialization(context_CS).Should().BeFalse(); // Invalid constructor validated by method
+            condition1.IsInvalidBuilderInitialization(context_CS).Should().BeFalse(); // Invalid constructor validated by method
 
             var condition2 = new CSharpBuilderPatternCondition(false, cccInvalidator);
-            condition2.InvalidBuilderInitialization(context_CS).Should().BeTrue(); // Invalid constructor invalidated by method
+            condition2.IsInvalidBuilderInitialization(context_CS).Should().BeTrue(); // Invalid constructor invalidated by method
 
             var condition3 = new CSharpBuilderPatternCondition(true, cccInvalidator);
-            condition3.InvalidBuilderInitialization(context_CS).Should().BeTrue(); // Valid constructor invalidated by method
+            condition3.IsInvalidBuilderInitialization(context_CS).Should().BeTrue(); // Valid constructor invalidated by method
 
             var condition4 = new CSharpBuilderPatternCondition(true, bbbValidator);
-            condition4.InvalidBuilderInitialization(context_CS).Should().BeFalse(); // Valid constructor validated by method
+            condition4.IsInvalidBuilderInitialization(context_CS).Should().BeFalse(); // Valid constructor validated by method
 
             var condition5 = new CSharpBuilderPatternCondition(false, aaaInvalidator, bbbValidator);
-            condition5.InvalidBuilderInitialization(context_CS).Should().BeFalse(); // Invalid constructor, invalidated by Aaa, validated by Bbb
+            condition5.IsInvalidBuilderInitialization(context_CS).Should().BeFalse(); // Invalid constructor, invalidated by Aaa, validated by Bbb
 
             var condition6 = new CSharpBuilderPatternCondition(false, bbbValidator, aaaInvalidator); // Configuration order has no effect
-            condition6.InvalidBuilderInitialization(context_CS).Should().BeFalse(); // Invalid constructor, invalidated by Aaa, validated by Bbb
+            condition6.IsInvalidBuilderInitialization(context_CS).Should().BeFalse(); // Invalid constructor, invalidated by Aaa, validated by Bbb
 
             var condition7 = new CSharpBuilderPatternCondition(true, bbbValidator, cccInvalidator);
-            condition7.InvalidBuilderInitialization(context_CS).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
+            condition7.IsInvalidBuilderInitialization(context_CS).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
 
             var condition8 = new CSharpBuilderPatternCondition(true, cccInvalidator, bbbValidator); // Configuration order has no effect
-            condition8.InvalidBuilderInitialization(context_CS).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
+            condition8.IsInvalidBuilderInitialization(context_CS).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
 
             var dddContext = new InvocationContext(FindMethodInvocation_CS(context_CS.Invocation.SyntaxTree, "Ddd"), "Ddd", context_CS.SemanticModel);
             var condition9 = new CSharpBuilderPatternCondition(false);
-            condition9.InvalidBuilderInitialization(dddContext).Should().BeFalse(); // Invalid constructor is not tracked throught array propagation
+            condition9.IsInvalidBuilderInitialization(dddContext).Should().BeFalse(); // Invalid constructor is not tracked through array propagation
         }
 
         [TestMethod]
-        public void InvalidBuilderInitialization_VB()
+        public void IsInvalidBuilderInitialization_VB()
         {
             var aaaInvalidator = new BuilderPatternDescriptor<VBSyntax.InvocationExpressionSyntax>(false, (context) => context.MethodName == "Aaa");
             var bbbValidator = new BuilderPatternDescriptor<VBSyntax.InvocationExpressionSyntax>(true, (context) => context.MethodName == "Bbb");
             var cccInvalidator = new BuilderPatternDescriptor<VBSyntax.InvocationExpressionSyntax>(false, (context) => context.MethodName == "Ccc");
 
             var condition1 = new VisualBasicBuilderPatternCondition(false, bbbValidator);
-            condition1.InvalidBuilderInitialization(context_VB).Should().BeFalse(); // Invalid constructor validated by method
+            condition1.IsInvalidBuilderInitialization(context_VB).Should().BeFalse(); // Invalid constructor validated by method
 
             var condition2 = new VisualBasicBuilderPatternCondition(false, cccInvalidator);
-            condition2.InvalidBuilderInitialization(context_VB).Should().BeTrue(); // Invalid constructor invalidated by method
+            condition2.IsInvalidBuilderInitialization(context_VB).Should().BeTrue(); // Invalid constructor invalidated by method
 
             var condition3 = new VisualBasicBuilderPatternCondition(true, cccInvalidator);
-            condition3.InvalidBuilderInitialization(context_VB).Should().BeTrue(); // Valid constructor invalidated by method
+            condition3.IsInvalidBuilderInitialization(context_VB).Should().BeTrue(); // Valid constructor invalidated by method
 
             var condition4 = new VisualBasicBuilderPatternCondition(true, bbbValidator);
-            condition4.InvalidBuilderInitialization(context_VB).Should().BeFalse(); // Valid constructor validated by method
+            condition4.IsInvalidBuilderInitialization(context_VB).Should().BeFalse(); // Valid constructor validated by method
 
             var condition5 = new VisualBasicBuilderPatternCondition(false, aaaInvalidator, bbbValidator);
-            condition5.InvalidBuilderInitialization(context_VB).Should().BeFalse(); // Invalid constructor, invalidated by Aaa, validated by Bbb
+            condition5.IsInvalidBuilderInitialization(context_VB).Should().BeFalse(); // Invalid constructor, invalidated by Aaa, validated by Bbb
 
             var condition6 = new VisualBasicBuilderPatternCondition(false, bbbValidator, aaaInvalidator); // Configuration order has no effect
-            condition6.InvalidBuilderInitialization(context_VB).Should().BeFalse(); // Invalid constructor, invalidated by Aaa, validated by Bbb
+            condition6.IsInvalidBuilderInitialization(context_VB).Should().BeFalse(); // Invalid constructor, invalidated by Aaa, validated by Bbb
 
             var condition7 = new VisualBasicBuilderPatternCondition(true, bbbValidator, cccInvalidator);
-            condition7.InvalidBuilderInitialization(context_VB).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
+            condition7.IsInvalidBuilderInitialization(context_VB).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
 
             var condition8 = new VisualBasicBuilderPatternCondition(true, cccInvalidator, bbbValidator); // Configuration order has no effect
-            condition8.InvalidBuilderInitialization(context_VB).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
+            condition8.IsInvalidBuilderInitialization(context_VB).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
 
             var dddContext = new InvocationContext(FindMethodInvocation_VB(context_VB.Invocation.SyntaxTree, "Ddd"), "Ddd", context_VB.SemanticModel);
             var condition9 = new VisualBasicBuilderPatternCondition(false);
-            condition9.InvalidBuilderInitialization(dddContext).Should().BeFalse(); // Invalid constructor is not tracked throught array propagation
+            condition9.IsInvalidBuilderInitialization(dddContext).Should().BeFalse(); // Invalid constructor is not tracked through array propagation
         }
 
         private static InvocationContext CreateContext_CS()

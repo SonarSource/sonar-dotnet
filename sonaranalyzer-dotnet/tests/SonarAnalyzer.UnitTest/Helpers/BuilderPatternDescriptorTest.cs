@@ -35,8 +35,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void IsMatch()
         {
             var context = CreateContext();
-            InvocationCondition trueCondition = (context) => true;
-            InvocationCondition falseCondition = (context) => false;
+            InvocationCondition trueCondition = _ => true;
+            InvocationCondition falseCondition = _ => false;
             BuilderPatternDescriptor<InvocationExpressionSyntax> descriptor;
 
             descriptor = new BuilderPatternDescriptor<InvocationExpressionSyntax>(true);
@@ -61,16 +61,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var context = CreateContext();
 
             var trueDescriptor = new BuilderPatternDescriptor<InvocationExpressionSyntax>(true);
-            trueDescriptor.IsValid(null, null).Should().BeTrue();
-            trueDescriptor.IsValid(context, null).Should().BeTrue();
-            trueDescriptor.IsValid(null, context.Invocation as InvocationExpressionSyntax).Should().BeTrue();
-            trueDescriptor.IsValid(context, context.Invocation as InvocationExpressionSyntax).Should().BeTrue();
+            trueDescriptor.IsValid(null).Should().BeTrue();
+            trueDescriptor.IsValid(context.Invocation as InvocationExpressionSyntax).Should().BeTrue();
 
             var falseDescriptor = new BuilderPatternDescriptor<InvocationExpressionSyntax>(false);
-            falseDescriptor.IsValid(null, null).Should().BeFalse();
-            falseDescriptor.IsValid(context, null).Should().BeFalse();
-            falseDescriptor.IsValid(null, context.Invocation as InvocationExpressionSyntax).Should().BeFalse();
-            falseDescriptor.IsValid(context, context.Invocation as InvocationExpressionSyntax).Should().BeFalse();
+            falseDescriptor.IsValid(null).Should().BeFalse();
+            falseDescriptor.IsValid(context.Invocation as InvocationExpressionSyntax).Should().BeFalse();
         }
 
         [TestMethod]
@@ -78,14 +74,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var context = CreateContext();
 
-            var descriptor = new BuilderPatternDescriptor<InvocationExpressionSyntax>((context, invocation) => context != null && invocation != null);
-            descriptor.IsValid(null, null).Should().BeFalse();
-            descriptor.IsValid(context, null).Should().BeFalse();
-            descriptor.IsValid(null, context.Invocation as InvocationExpressionSyntax).Should().BeFalse();
-            descriptor.IsValid(context, context.Invocation as InvocationExpressionSyntax).Should().BeTrue();
+            var descriptor = new BuilderPatternDescriptor<InvocationExpressionSyntax>(invocation => invocation != null);
+            descriptor.IsValid(null).Should().BeFalse();
+            descriptor.IsValid(context.Invocation as InvocationExpressionSyntax).Should().BeTrue();
         }
 
-        private InvocationContext CreateContext()
+        private static InvocationContext CreateContext()
         {
             const string source = @"class X{void Foo(object x){x.ToString()}};";
             var snippet = new SnippetCompiler(source, true, AnalyzerLanguage.CSharp);

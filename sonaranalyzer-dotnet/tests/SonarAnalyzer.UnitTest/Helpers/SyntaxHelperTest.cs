@@ -90,10 +90,10 @@ End Class";
             toString.NameIs(null).Should().BeFalse();
         }
 
-        private SyntaxNode[] Parse_CS(string source) =>
+        private static SyntaxNode[] Parse_CS(string source) =>
             Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().ToArray();
 
-        private SyntaxNode[] Parse_VB(string source) =>
+        private static SyntaxNode[] Parse_VB(string source) =>
             Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxTree.ParseText(source).GetRoot().DescendantNodes().ToArray();
     }
 }

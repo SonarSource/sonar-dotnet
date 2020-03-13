@@ -135,6 +135,18 @@ namespace Tests.Diagnostics
                 .Decode(invalidToken);
         }
 
+        void DecodingWithBuilder_FPs(bool condition)
+        {
+            var builder1 = new JwtBuilder();
+            Init();
+            builder1.Decode(invalidToken); // Noncompliant FP, initialization in local function is not tracked
+
+            void Init()
+            {
+                builder1 = builder1.WithSecret(secret).MustVerifySignature();
+            }
+        }
+
         void DecodingWithBuilder_FNs(bool condition)
         {
             var builder1 = new JwtBuilder();
@@ -145,6 +157,9 @@ namespace Tests.Diagnostics
             builder1.Decode(invalidToken); // FN, this is not SE rule, only linear initialization is considered
 
             CreateBuilder().Decode(invalidToken); // FN, cross procedural initialization is not tracked
+            CreateLocalBuilder().Decode(invalidToken); // FN, local function initialization is not tracked
+
+            JwtBuilder CreateLocalBuilder() => new JwtBuilder().DoNotVerifySignature();
         }
 
         JwtBuilder CreateBuilder()

@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override BuilderPatternCondition<InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
             new VisualBasicBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
-                (_, invocation) =>
+                invocation =>
                     invocation.ArgumentList?.Arguments.Count != 1
                     || !invocation.ArgumentList.Arguments.Single().GetExpression().RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
 

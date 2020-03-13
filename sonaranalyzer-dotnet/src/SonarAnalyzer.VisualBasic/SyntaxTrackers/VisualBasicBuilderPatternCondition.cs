@@ -86,15 +86,16 @@ namespace SonarAnalyzer.Helpers
         protected override bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer)
         {
             if (node is LocalDeclarationStatementSyntax declarationStatement
-                        && declarationStatement.Declarators.SingleOrDefault(x =>
-                            x.Names.Any(n => identifierName.Equals(n.Identifier.ValueText, StringComparison.OrdinalIgnoreCase))
-                            ) is { } declaration)
+                && declarationStatement.Declarators.SingleOrDefault(MatchesIdentifierName) is { } declaration)
             {
                 initializer = declaration.Initializer?.Value ?? (declaration.AsClause as AsNewClauseSyntax)?.NewExpression;
                 return true;
             }
             initializer = null;
             return false;
+
+            bool MatchesIdentifierName(VariableDeclaratorSyntax declarator) =>
+                declarator.Names.Any(n => identifierName.Equals(n.Identifier.ValueText, StringComparison.OrdinalIgnoreCase));
         }
     }
 }
