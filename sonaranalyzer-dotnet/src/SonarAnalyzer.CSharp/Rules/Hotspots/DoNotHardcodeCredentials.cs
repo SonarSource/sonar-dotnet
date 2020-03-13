@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 syntaxNode.Identifier.ValueText;
 
             protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                (syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression) &&
+                syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression &&
                 literalExpression.IsKind(SyntaxKind.StringLiteralExpression) &&
                 syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel);
         }

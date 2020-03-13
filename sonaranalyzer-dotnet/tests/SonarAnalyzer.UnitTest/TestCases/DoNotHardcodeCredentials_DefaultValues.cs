@@ -83,14 +83,14 @@ namespace Tests.Diagnostics
             new PasswordDeriveBytes(nonHardcodedPassword, byteArray, "strHashName", 1, cspParams);
             new PasswordDeriveBytes(new byte[] { 1 }, byteArray, "strHashName", 1, cspParams);
 
-            new NetworkCredential("username", secret); // Noncompliant
-            new NetworkCredential("username", "hardcoded"); // Noncompliant
-            new NetworkCredential("username", "hardcoded", "domain"); // Noncompliant
-            networkCredential.Password = "hardcoded"; // Noncompliant
-            new PasswordDeriveBytes("hardcoded", byteArray); // Noncompliant
-            new PasswordDeriveBytes("hardcoded", byteArray, cspParams); // Noncompliant
-            new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1); // Noncompliant
-            new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams); // Noncompliant
+            new NetworkCredential("username", secret); // Noncompliant {{Please review this hard-coded password.}}
+            new NetworkCredential("username", "hardcoded"); // Noncompliant {{Please review this hard-coded password.}}
+            new NetworkCredential("username", "hardcoded", "domain"); // Noncompliant {{Please review this hard-coded password.}}
+            networkCredential.Password = "hardcoded"; // Noncompliant {{Please review this hard-coded password.}}
+            new PasswordDeriveBytes("hardcoded", byteArray); // Noncompliant {{Please review this hard-coded password.}}
+            new PasswordDeriveBytes("hardcoded", byteArray, cspParams); // Noncompliant {{Please review this hard-coded password.}}
+            new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1); // Noncompliant {{Please review this hard-coded password.}}
+            new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams); // Noncompliant {{Please review this hard-coded password.}}
         }
 
         public void CompliantParameterUse(string pwd)

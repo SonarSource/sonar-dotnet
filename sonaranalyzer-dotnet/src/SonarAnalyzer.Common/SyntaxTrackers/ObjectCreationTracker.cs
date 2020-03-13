@@ -36,7 +36,10 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        public void Track(SonarAnalysisContext context, params ObjectCreationCondition[] conditions)
+        public void Track(SonarAnalysisContext context, params ObjectCreationCondition[] conditions) =>
+            Track(context, new object[0], conditions);
+
+        public void Track(SonarAnalysisContext context, object[] diagnosticMessageArgs, params ObjectCreationCondition[] conditions)
         {
             context.RegisterCompilationStartAction(
                 c =>
@@ -54,7 +57,7 @@ namespace SonarAnalyzer.Helpers
             {
                 if (IsTrackedObjectCreation(c.Node, c.SemanticModel))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation(), diagnosticMessageArgs));
                 }
             }
 

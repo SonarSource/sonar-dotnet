@@ -42,7 +42,10 @@ namespace SonarAnalyzer.Helpers
 
         protected abstract string GetPropertyName(SyntaxNode expression);
 
-        public void Track(SonarAnalysisContext context, params PropertyAccessCondition[] conditions)
+        public void Track(SonarAnalysisContext context, params PropertyAccessCondition[] conditions) =>
+            Track(context, new object[0], conditions);
+
+        public void Track(SonarAnalysisContext context, object[] diagnosticMessageArgs,  params PropertyAccessCondition[] conditions)
         {
             context.RegisterCompilationStartAction(
                 c =>
@@ -60,7 +63,7 @@ namespace SonarAnalyzer.Helpers
             {
                 if (IsTrackedProperty(c.Node, c.SemanticModel))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation(), diagnosticMessageArgs));
                 }
             }
 

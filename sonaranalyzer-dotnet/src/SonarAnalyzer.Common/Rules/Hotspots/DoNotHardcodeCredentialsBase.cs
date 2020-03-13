@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S2068";
         private const string MessageFormat = "{0}";
+        private const string MessageHardcodedPassword = "Please review this hard-coded password.";
         private const string MessageFormatCredential = @"""{0}"" detected here, make sure this is not a hard-coded credential.";
         private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
@@ -79,17 +80,17 @@ namespace SonarAnalyzer.Rules
         {
             var innerContext = context.GetInnerContext();
 
-            ObjectCreationTracker.Track(innerContext,
+            ObjectCreationTracker.Track(innerContext, new object[] {MessageHardcodedPassword},
                 ObjectCreationTracker.MatchConstructor(KnownType.System_Net_NetworkCredential),
                 ObjectCreationTracker.ArgumentAtIndexIs(1, KnownType.System_String),
                 ObjectCreationTracker.ArgumentAtIndexIsConst(1));
 
-            ObjectCreationTracker.Track(innerContext,
+            ObjectCreationTracker.Track(innerContext, new object[] {MessageHardcodedPassword},
                ObjectCreationTracker.MatchConstructor(KnownType.System_Security_Cryptography_PasswordDeriveBytes),
                ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
                ObjectCreationTracker.ArgumentAtIndexIsConst(0));
 
-            PropertyAccessTracker.Track(innerContext,
+            PropertyAccessTracker.Track(innerContext, new object[] {MessageHardcodedPassword},
                PropertyAccessTracker.MatchSetter(),
                PropertyAccessTracker.AssignedValueIsConstant(),
                PropertyAccessTracker.MatchProperty(
