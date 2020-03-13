@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
         internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration analyzerConfiguration)
             : base(RspecStrings.ResourceManager, analyzerConfiguration)
         {
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, hardCodedPasswordRule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, hardCodedPasswordRule);
+            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, rule);
         }
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)

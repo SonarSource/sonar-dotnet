@@ -72,14 +72,14 @@ Namespace Tests.Diagnostics
             passwordDeriveBytes = New PasswordDeriveBytes(nonHardcodedPassword, byteArray, "strHashName", 1, cspParams)
             passwordDeriveBytes = New PasswordDeriveBytes(New Byte() {1}, byteArray, "strHashName", 1, cspParams)
 
-            networkCredential = New NetworkCredential("username", Secret) 'Noncompliant
-            networkCredential = New NetworkCredential("username", "hardcoded") 'Noncompliant
-            networkCredential = New NetworkCredential("username", "hardcoded", "domain") 'Noncompliant
-            networkCredential.Password = "hardcoded" 'Noncompliant
-            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray) 'Noncompliant
-            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, cspParams) 'Noncompliant
-            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1) 'Noncompliant
-            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams) 'Noncompliant
+            networkCredential = New NetworkCredential("username", Secret) 'Noncompliant {{Please review this hard-coded password.}}
+            networkCredential = New NetworkCredential("username", "hardcoded") 'Noncompliant {{Please review this hard-coded password.}}
+            networkCredential = New NetworkCredential("username", "hardcoded", "domain") 'Noncompliant {{Please review this hard-coded password.}}
+            networkCredential.Password = "hardcoded" 'Noncompliant {{Please review this hard-coded password.}}
+            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray) 'Noncompliant {{Please review this hard-coded password.}}
+            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, cspParams) 'Noncompliant {{Please review this hard-coded password.}}
+            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1) 'Noncompliant {{Please review this hard-coded password.}}
+            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams) 'Noncompliant {{Please review this hard-coded password.}}
         End Sub
 
         Public Sub CompliantParameterUse(pwd As String)

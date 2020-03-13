@@ -41,7 +41,6 @@ namespace SonarAnalyzer.Rules
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
         protected readonly DiagnosticDescriptor rule;
-        protected readonly DiagnosticDescriptor hardCodedPasswordRule;
         private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
         private Regex passwordValuePattern;
@@ -73,7 +72,6 @@ namespace SonarAnalyzer.Rules
         protected DoNotHardcodeCredentialsBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration analyzerConfiguration)
         {
             this.rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-            this.hardCodedPasswordRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageHardcodedPassword, rspecResources).WithNotConfigurable();
             CredentialWords = DefaultCredentialWords;
             this.analyzerConfiguration = analyzerConfiguration;
         }
@@ -82,17 +80,17 @@ namespace SonarAnalyzer.Rules
         {
             var innerContext = context.GetInnerContext();
 
-            ObjectCreationTracker.Track(innerContext,
+            ObjectCreationTracker.Track(innerContext, new object[] {MessageHardcodedPassword},
                 ObjectCreationTracker.MatchConstructor(KnownType.System_Net_NetworkCredential),
                 ObjectCreationTracker.ArgumentAtIndexIs(1, KnownType.System_String),
                 ObjectCreationTracker.ArgumentAtIndexIsConst(1));
 
-            ObjectCreationTracker.Track(innerContext,
+            ObjectCreationTracker.Track(innerContext, new object[] {MessageHardcodedPassword},
                ObjectCreationTracker.MatchConstructor(KnownType.System_Security_Cryptography_PasswordDeriveBytes),
                ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
                ObjectCreationTracker.ArgumentAtIndexIsConst(0));
 
-            PropertyAccessTracker.Track(innerContext,
+            PropertyAccessTracker.Track(innerContext, new object[] {MessageHardcodedPassword},
                PropertyAccessTracker.MatchSetter(),
                PropertyAccessTracker.AssignedValueIsConstant(),
                PropertyAccessTracker.MatchProperty(

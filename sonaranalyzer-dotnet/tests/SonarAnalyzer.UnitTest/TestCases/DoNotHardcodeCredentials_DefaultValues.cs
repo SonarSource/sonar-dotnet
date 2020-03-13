@@ -73,7 +73,6 @@ namespace Tests.Diagnostics
             new NetworkCredential("username", nonHardcodedPassword);
             new NetworkCredential("username", secureString, "domain");
             new NetworkCredential("username", nonHardcodedPassword, "domain");
-            new NetworkCredential("username", ""); // Noncompliant {{Please review this hard-coded password.}}
 
             new PasswordDeriveBytes(nonHardcodedPassword, byteArray);
             new PasswordDeriveBytes(new byte[] { 1 }, byteArray);
