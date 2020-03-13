@@ -27,10 +27,16 @@ namespace Tests.Diagnostics
                 User=B;
                 Password=123";
 
+            string multiline_OK =
+                @"Password detected here,
+                make sure this is not
+                a hard-coded credential.";
+
             string bar;
             bar = "Password=p"; // Noncompliant
 //          ^^^^^^^^^^^^^^^^^^
 
+            foo = "password";
             foo = "password=";
             foo = "passwordpassword";
             foo = "foo=1;password=1"; // Noncompliant
@@ -39,6 +45,8 @@ namespace Tests.Diagnostics
 
             var something1 = (foo = "foo") + (bar = "bar");
             var something2 = (foo = "foo") + (bar = "password=123"); // Noncompliant
+            var something3 = (foo = "foo") + (bar = "password");
+            var something4 = (foo = "foo") + (bar = "123=password");
 
             string myPassword1 = null;
             string myPassword2 = "";
@@ -112,6 +120,10 @@ namespace Tests.Diagnostics
             string query7 = "password=:password;user=:user;";
             string query8 = "password=?;user=?;";
             string query9 = @"Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;";
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = ?")) { }
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = :password")) { }
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = {0}")) { }
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = ")) { }
         }
 
         public void WordInVariableNameAndValue()
@@ -161,6 +173,7 @@ namespace Tests.Diagnostics
             using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
             using (var conn = OpenConn("Server = " + server + "; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
 
+            using (var conn = OpenConn("password")) { }
             using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = " + pwd)) { }
         }
 

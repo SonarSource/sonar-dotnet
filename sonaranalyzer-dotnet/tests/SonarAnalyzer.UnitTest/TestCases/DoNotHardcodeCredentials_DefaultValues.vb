@@ -20,6 +20,8 @@ Namespace Tests.Diagnostics
             Dim foo2 As String = "Password=123" 'Noncompliant
             Dim bar As String
             bar = "Password=p" 'Noncompliant ^13#18
+
+            foo = "password"
             foo = "password="
             foo = "passwordpassword"
             foo = "foo=1;password=1" 'Noncompliant
@@ -93,6 +95,14 @@ Namespace Tests.Diagnostics
             Dim query7 As String = "password=:password;user=:user;"
             Dim query8 As String = "password=?;user=?;"
             Dim query9 As String = "Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;"
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = ?")
+            End Using
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = :password")
+            End Using
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = {0}")
+            End Using
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = ")
+            End Using
         End Sub
 
         Public Sub WordInConstantNameAndValue()
@@ -142,6 +152,9 @@ Namespace Tests.Diagnostics
             Using Conn As SqlConnection = OpenConn("Server = localhost; Database = Test; User = SA; Password = Secret123") ' Noncompliant
             End Using
             Using Conn As New SqlConnection("Server = " + server + "; Database = Test; User = SA; Password = Secret123") ' Noncompliant
+            End Using
+
+            Using OpenConn("password")
             End Using
             Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = " & pwd)
             End Using
