@@ -112,6 +112,14 @@ namespace Tests.Diagnostics
             });
         }
 
+        public Task<string> TaskResultInFunctionCall(Task<string> task)
+        {
+            return task.ContinueWith(completedTask =>
+            {
+                return string.Format("Result: {0}", completedTask.Result); // Compliant, task is already completed at this point.
+            });
+        }
+
         // See https://github.com/SonarSource/sonar-dotnet/issues/2794
         public override string ToString()
         {

@@ -121,16 +121,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 messageArgs: MemberNameToMessageArguments[memberAccessNameName]));
         }
 
-        private static bool IsResultInContinueWithCall(string memberAccessName, SyntaxNode syntaxNode)
-        {
-            if (memberAccessName != ResultName)
-            {
-                return false;
-            }
+        private static bool IsResultInContinueWithCall(string memberAccessName, MemberAccessExpressionSyntax memberAccess) =>
+            memberAccessName == ResultName &&
+            memberAccess.Expression is IdentifierNameSyntax identifierNameSyntax &&
+            memberAccess.FirstAncestorOrSelf<InvocationExpressionSyntax>(invocation => IsContinueWithCallWithArgumentName(invocation, identifierNameSyntax.GetName())) != null;
 
-            var parentInvocation = syntaxNode.FirstAncestorOrSelf<InvocationExpressionSyntax>();
-            return parentInvocation != null && parentInvocation.Expression.NameIs(ContinueWithName);
-        }
+        private static bool IsContinueWithCallWithArgumentName(InvocationExpressionSyntax invocation, string argumentName) =>
+            invocation.Expression.NameIs(ContinueWithName) &&
+            invocation.ArgumentList.Arguments.Any(argument => argument.Expression is SimpleLambdaExpressionSyntax lambda &&
+                                                              lambda.Parameter.Identifier.ValueText == argumentName);
 
         private static bool IsChainedAfterThreadPoolCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
             memberAccess.Expression.DescendantNodes()
