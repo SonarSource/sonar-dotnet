@@ -51,19 +51,6 @@
 "endColumn":  74
 }
 }
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
-"region":  {
-"startLine":  618,
-"startColumn":  130,
-"endLine":  618,
-"endColumn":  138
-}
-}
 }
 ]
 }

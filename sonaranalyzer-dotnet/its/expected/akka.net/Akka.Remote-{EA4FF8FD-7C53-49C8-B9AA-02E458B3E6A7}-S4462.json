@@ -2,84 +2,6 @@
 "issues":  [
 {
 "id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  494,
-"startColumn":  61,
-"endLine":  494,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  586,
-"startColumn":  44,
-"endLine":  586,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  598,
-"startColumn":  42,
-"endLine":  598,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  755,
-"startColumn":  84,
-"endLine":  755,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  755,
-"startColumn":  106,
-"endLine":  755,
-"endColumn":  119
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
-"region":  {
-"startLine":  756,
-"startColumn":  85,
-"endLine":  756,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
@@ -101,19 +23,6 @@
 "startColumn":  50,
 "endLine":  152,
 "endColumn":  76
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
-"region":  {
-"startLine":  791,
-"startColumn":  64,
-"endLine":  791,
-"endColumn":  77
 }
 }
 },
@@ -153,32 +62,6 @@
 "startColumn":  24,
 "endLine":  638,
 "endColumn":  37
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
-"region":  {
-"startLine":  248,
-"startColumn":  55,
-"endLine":  248,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
-"region":  {
-"startLine":  365,
-"startColumn":  88,
-"endLine":  365,
-"endColumn":  113
 }
 }
 }
