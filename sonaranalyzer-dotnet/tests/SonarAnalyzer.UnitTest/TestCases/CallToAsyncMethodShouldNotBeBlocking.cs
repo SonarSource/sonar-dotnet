@@ -64,6 +64,7 @@ namespace Tests.Diagnostics
 
         private async Task SleepAsync()
         {
+            var name = nameof(Thread.Sleep);
             Thread.Sleep(10); // Noncompliant {{Replace this use of 'Thread.Sleep' with 'await Task.Delay'.}}
 //          ^^^^^^^^^^^^
         }
@@ -97,6 +98,12 @@ namespace Tests.Diagnostics
             {
                 return completedTask.Result; // Noncompliant FP, task is already completed at this point.
             });
+        }
+
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2794
+        public override string ToString()
+        {
+            return nameof(Task<object>.Result); // Compliant, nameof() does not execute async code.
         }
     }
 }

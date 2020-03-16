@@ -328,7 +328,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool IsReadAccess(ExpressionSyntax parenthesized, SemanticModel semanticModel)
             {
                 return !IsBeingAssigned(parenthesized) &&
-                    !parenthesized.IsInNameofCall(semanticModel);
+                    !parenthesized.IsInNameOfArgument(semanticModel);
             }
 
             private bool IsMemberUsedInsideLambda(SyntaxNode instruction)

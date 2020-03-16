@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class CallToAsyncMethodShouldNotBeBlocking : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4462";
+        private const string DiagnosticId = "S4462";
         private const string MessageFormat = "Replace this use of '{0}' with '{1}'.";
 
         private static readonly DiagnosticDescriptor rule =
@@ -44,13 +44,24 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly Dictionary<string, ImmutableArray<KnownType>> InvalidMemberAccess =
             new Dictionary<string, ImmutableArray<KnownType>>
             {
-                ["Wait"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
-                ["WaitAny"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
-                ["WaitAll"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
-                ["Result"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task_T),
-                ["Sleep"] = ImmutableArray.Create(KnownType.System_Threading_Thread),
                 ["GetResult"] = ImmutableArray.Create(KnownType.System_Runtime_CompilerServices_TaskAwaiter,
                     KnownType.System_Runtime_CompilerServices_TaskAwaiter_TResult),
+                ["Result"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task_T),
+                ["Sleep"] = ImmutableArray.Create(KnownType.System_Threading_Thread),
+                ["Wait"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
+                ["WaitAll"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
+                ["WaitAny"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task)
+            };
+
+        private static readonly Dictionary<string, string[]> MemberNameToMessageArguments =
+            new Dictionary<string, string[]>
+            {
+                ["GetResult"] = new[] { "Task.GetAwaiter.GetResult", "await" },
+                ["Result"] = new[] { "Task.Result", "await" },
+                ["Sleep"] = new[] { "Thread.Sleep", "await Task.Delay" },
+                ["Wait"] = new[] { "Task.Wait", "await" },
+                ["WaitAll"] = new[] { "Task.WaitAll", "await Task.WhenAll" },
+                ["WaitAny"] = new[] { "Task.WaitAny", "await Task.WhenAny" }
             };
 
         private static readonly Dictionary<string, KnownType> TaskThreadPoolCalls =
@@ -60,32 +71,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 ["Run"] = KnownType.System_Threading_Tasks_Task,
             };
 
-        private static readonly Dictionary<string, string[]> MemberNameToMessageArguments =
-            new Dictionary<string, string[]>
-            {
-                ["Result"] = new[] { "Task.Result", "await" },
-                ["Wait"] = new[] { "Task.Wait", "await" },
-                ["GetResult"] = new[] { "Task.GetAwaiter.GetResult", "await" },
-                ["WaitAny"] = new[] { "Task.WaitAny", "await Task.WhenAny" },
-                ["WaitAll"] = new[] { "Task.WaitAll", "await Task.WhenAll" },
-                ["Sleep"] = new[] { "Thread.Sleep", "await Task.Delay" },
-            };
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                ReportOnViolation,
-                SyntaxKind.SimpleMemberAccessExpression);
-        }
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportOnViolation, SyntaxKind.SimpleMemberAccessExpression);
 
         private static void ReportOnViolation(SyntaxNodeAnalysisContext context)
         {
             var simpleMemberAccess = (MemberAccessExpressionSyntax)context.Node;
-            var memberAccessNameName = simpleMemberAccess.Name?.Identifier.ValueText;
+            var memberAccessNameName = simpleMemberAccess.GetName();
 
             if (memberAccessNameName == null ||
                 !InvalidMemberAccess.ContainsKey(memberAccessNameName) ||
-                IsChainedAfterThreadPoolCall(simpleMemberAccess, context.SemanticModel))
+                IsChainedAfterThreadPoolCall(simpleMemberAccess, context.SemanticModel)||
+                simpleMemberAccess.IsInNameOfArgument(context.SemanticModel) )
             {
                 return;
             }
@@ -93,8 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var possibleMemberAccesses = InvalidMemberAccess[memberAccessNameName];
 
             var memberAccessSymbol = context.SemanticModel.GetSymbolInfo(simpleMemberAccess).Symbol;
-            if (memberAccessSymbol == null ||
-                memberAccessSymbol.ContainingType == null ||
+            if (memberAccessSymbol?.ContainingType == null ||
                 !memberAccessSymbol.ContainingType.ConstructedFrom.IsAny(possibleMemberAccesses))
             {
                 return;

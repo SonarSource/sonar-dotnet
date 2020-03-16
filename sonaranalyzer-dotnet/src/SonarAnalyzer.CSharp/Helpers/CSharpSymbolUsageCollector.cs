@@ -359,7 +359,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             // nameof(Prop) --> get/set
-            if (node.IsInNameofCall(this.getSemanticModel(node)))
+            if (node.IsInNameOfArgument(this.getSemanticModel(node)))
             {
                 return AccessorAccess.Both;
             }

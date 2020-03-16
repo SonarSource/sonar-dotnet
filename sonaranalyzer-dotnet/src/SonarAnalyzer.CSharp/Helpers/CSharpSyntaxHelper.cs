@@ -146,26 +146,17 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool IsInNameofCall(this ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression.Parent != null &&
-            expression.Parent.IsKind(SyntaxKind.Argument) &&
-            expression.Parent.Parent != null &&
-            expression.Parent.Parent.IsKind(SyntaxKind.ArgumentList) &&
-            expression.Parent.Parent.Parent != null &&
-            expression.Parent.Parent.Parent.IsKind(SyntaxKind.InvocationExpression) &&
-            ((InvocationExpressionSyntax)expression.Parent.Parent.Parent).IsNameof(semanticModel);
-
-        public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel)
+        public static bool IsInNameOfArgument(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            if (expression == null ||
-                !expression.Expression.IsKind(SyntaxKind.IdentifierName) ||
-                semanticModel.GetSymbolInfo(expression).Symbol?.Kind == SymbolKind.Method)
-            {
-                return false;
-            }
-
-            return ((IdentifierNameSyntax)expression.Expression).Identifier.ToString() == NameOfKeywordText;
+            var parentInvocation = expression.FirstAncestorOrSelf<InvocationExpressionSyntax>();
+            return parentInvocation != null && parentInvocation.IsNameof(semanticModel);
         }
+
+        public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression != null &&
+            expression.Expression is IdentifierNameSyntax identifierNameSyntax &&
+            identifierNameSyntax.Identifier.ValueText == NameOfKeywordText &&
+            semanticModel.GetSymbolInfo(expression).Symbol?.Kind != SymbolKind.Method;
 
         public static bool IsStringEmpty(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
