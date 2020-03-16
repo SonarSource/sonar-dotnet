@@ -152,17 +152,11 @@ namespace SonarAnalyzer.Helpers
             return parentInvocation != null && parentInvocation.IsNameof(semanticModel);
         }
 
-        public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            if (expression == null ||
-                !expression.Expression.IsKind(SyntaxKind.IdentifierName) ||
-                semanticModel.GetSymbolInfo(expression).Symbol?.Kind == SymbolKind.Method)
-            {
-                return false;
-            }
-
-            return ((IdentifierNameSyntax)expression.Expression).Identifier.ToString() == NameOfKeywordText;
-        }
+        public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression != null &&
+            expression.Expression is IdentifierNameSyntax identifierNameSyntax &&
+            identifierNameSyntax.Identifier.ValueText == NameOfKeywordText &&
+            semanticModel.GetSymbolInfo(expression).Symbol?.Kind != SymbolKind.Method;
 
         public static bool IsStringEmpty(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
