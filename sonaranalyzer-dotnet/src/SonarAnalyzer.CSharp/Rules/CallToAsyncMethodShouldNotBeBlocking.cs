@@ -81,7 +81,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (memberAccessNameName == null ||
                 !InvalidMemberAccess.ContainsKey(memberAccessNameName) ||
-                IsChainedAfterThreadPoolCall(simpleMemberAccess, context.SemanticModel))
+                IsChainedAfterThreadPoolCall(simpleMemberAccess, context.SemanticModel)||
+                simpleMemberAccess.IsInNameOfArgument(context.SemanticModel) )
             {
                 return;
             }
@@ -89,16 +90,10 @@ namespace SonarAnalyzer.Rules.CSharp
             var possibleMemberAccesses = InvalidMemberAccess[memberAccessNameName];
 
             var memberAccessSymbol = context.SemanticModel.GetSymbolInfo(simpleMemberAccess).Symbol;
-            if (memberAccessSymbol == null ||
-                memberAccessSymbol.ContainingType == null ||
+            if (memberAccessSymbol?.ContainingType == null ||
                 !memberAccessSymbol.ContainingType.ConstructedFrom.IsAny(possibleMemberAccesses))
             {
                 return;
-            }
-
-            if (simpleMemberAccess.IsInNameOfArgument(context.SemanticModel))
-            {
-                return; // nameof() does not execute async code
             }
 
             var enclosingMethod = simpleMemberAccess.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>();
