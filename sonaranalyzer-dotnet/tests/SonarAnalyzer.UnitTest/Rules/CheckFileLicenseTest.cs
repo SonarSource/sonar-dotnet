@@ -78,8 +78,8 @@ namespace SonarAnalyzer.UnitTest.Rules
  \* along with this program; if not, write to the Free Software Foundation,
  \* Inc\., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA\.
  \*/";
-        private const string MultiSingleLineRegexHeader1 = "//-{5}\r\n// MyHeader\r\n//-{5}";
-        private const string MultiSingleLineRegexHeader2 = "//-{5}.+// MyHeader.+//-{5}";
+        private const string MultiLineRegexWithNewLine = "//-{5}\r\n// MyHeader\r\n//-{5}";
+        private const string MultiLineRegexWithDot = "//-{5}.+// MyHeader.+//-{5}";
         private const string FailingSingleLineRegexHeader = "[";
 
         [TestMethod]
@@ -207,7 +207,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithNamespaceAndRegexMultiLine_ShouldBeCompliant_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs",
-                new CheckFileLicense { HeaderFormat = MultiSingleLineRegexHeader1, IsRegularExpression = true });
+                new CheckFileLicense { HeaderFormat = MultiLineRegexWithNewLine, IsRegularExpression = true });
         }
 
         [TestMethod]
@@ -215,7 +215,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithNamespaceAndRegexSingleLine_ShouldBeCompliant_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs",
-                new CheckFileLicense { HeaderFormat = MultiSingleLineRegexHeader2, IsRegularExpression = true });
+                new CheckFileLicense { HeaderFormat = MultiLineRegexWithDot, IsRegularExpression = true });
         }
 
         [TestMethod]
