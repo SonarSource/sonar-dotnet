@@ -27,7 +27,6 @@ In general, it is best to run commands from the Visual Studio Developer Command 
     - **MAVEN_HOME** / **M2_HOME**
     - **MSBUILD_PATH** - path to the MSBuild.exe executable from the Visual Studio installation folder - to MSBuild 16
     - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests))
-    - **NUGET_PACKAGES** - path to the local nuget cache (related to build)
     - **ORCHESTRATOR_CONFIG_URL** - url to orchestrator.properties file (for integration tests) in uri form (i.e. file:///c:/something/orchestrator.properties)
     - **RULE_API_PATH** - path to folder containing the rule api jar
     - **PATH** - the system **PATH** variable must contain:
