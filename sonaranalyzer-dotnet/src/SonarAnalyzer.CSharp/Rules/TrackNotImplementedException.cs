@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -32,14 +33,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class TrackNotImplementedException : SonarDiagnosticAnalyzer
     {
-        /// <remarks>
-        /// The ThrowExpressionSyntax and corresponding type, are not avialable
-        /// in the used version of Microsoft.CodeAnalysis.Charp 1.3.2.
-        ///
-        /// See: https://docs.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.csharp.syntax.throwexpressionsyntax?view=roslyn-dotnet
-        /// </remarks>
-        private const SyntaxKind ThrowExpression = (SyntaxKind)9052;
-
         internal const string DiagnosticId = "S3717";
         private const string MessageFormat = "Implement this method or throw 'NotSupportedException' instead.";
 
@@ -58,26 +51,32 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (c.SemanticModel.GetTypeInfo(throwStatement.Expression).Type.Is(KnownType.System_NotImplementedException))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, throwStatement.GetLocation()));
-                    }
+                    ReportDiagnostic(c, throwStatement.Expression, throwStatement);
                 },
                 SyntaxKind.ThrowStatement);
-        
+
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var creationStatement = (ObjectCreationExpressionSyntax)c.Node;
-                    var throwStatement = creationStatement.Parent;
+                    var creationExpression = (ObjectCreationExpressionSyntax)c.Node;
+                    var throwExpression = creationExpression.Parent;
 
-                    if (throwStatement.Kind() == ThrowExpression &&
-                        c.SemanticModel.GetTypeInfo(creationStatement).Type.Is(KnownType.System_NotImplementedException))
+                    if (throwExpression.Kind() != SyntaxKindEx.ThrowExpression)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, throwStatement.GetLocation()));
+                        return;
                     }
+
+                    ReportDiagnostic(c, creationExpression, throwExpression);
                 },
                 SyntaxKind.ObjectCreationExpression);
+        }
+
+        private static void ReportDiagnostic(SyntaxNodeAnalysisContext c, ExpressionSyntax expression, SyntaxNode syntax)
+        {
+            if (c.SemanticModel.GetTypeInfo(expression).Type.Is(KnownType.System_NotImplementedException))
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, syntax.GetLocation()));
+            }
         }
     }
 }
