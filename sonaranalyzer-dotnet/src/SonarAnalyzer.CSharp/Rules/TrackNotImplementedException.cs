@@ -71,11 +71,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ObjectCreationExpression);
         }
 
-        private static void ReportDiagnostic(SyntaxNodeAnalysisContext c, ExpressionSyntax expression, SyntaxNode syntax)
+        private static void ReportDiagnostic(SyntaxNodeAnalysisContext c, ExpressionSyntax newExceptionExpression, SyntaxNode throwExpression)
         {
-            if (c.SemanticModel.GetTypeInfo(expression).Type.Is(KnownType.System_NotImplementedException))
+            if (c.SemanticModel.GetTypeInfo(newExceptionExpression).Type.Is(KnownType.System_NotImplementedException))
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, syntax.GetLocation()));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, throwExpression.GetLocation()));
             }
         }
     }
