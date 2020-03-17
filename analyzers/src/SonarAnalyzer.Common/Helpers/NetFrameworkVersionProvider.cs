@@ -63,14 +63,41 @@ namespace SonarAnalyzer.Helpers
                 return NetFrameworkVersion.Probably35;
             }
 
-            var typeSymbol = mscorlibAssembly.GetTypeByMetadataName("System.IO.UnmanagedMemoryStream");
-            // this was not present in .NET Framework 4.5.1 and became present in 4.5.2
-            if (typeSymbol != null && !typeSymbol.GetMembers("FlushAsync").IsEmpty)
+            if (AtLeast46(mscorlibAssembly))
+            {
+                return NetFrameworkVersion.After46;
+            }
+            if (AtLeast452(mscorlibAssembly))
             {
                 return NetFrameworkVersion.After452;
             }
-
             return NetFrameworkVersion.Between4And451;
+        }
+
+        /// <summary>Returns true if the .NET version was at least 4.5.2.</summary>
+        /// <remarks>
+        /// Detected by checking the existence of System.IO.UnmanagedMemoryStream.FlushAsync
+        /// introduced in .NET 4.5.2
+        /// </remarks>
+        private static bool AtLeast452(IAssemblySymbol mscorlibAssembly)
+        {
+            return mscorlibAssembly
+                .GetTypeByMetadataName("System.IO.UnmanagedMemoryStream")?
+                .GetMembers("FlushAsync")
+                .Any() == true;
+        }
+
+        /// <summary>Returns true if the .NET version was at least 4.6.</summary>
+        /// <remarks>
+        /// Detected by checking the existence of System.Array.Empty&lt;T&gt;,
+        /// introduced in .NET 4.6
+        /// </remarks>
+        private static bool AtLeast46(IAssemblySymbol mscorlibAssembly)
+        {
+            return mscorlibAssembly
+                .GetTypeByMetadataName("System.Array")
+                .GetMembers("Empty")
+                .Any();
         }
     }
 }

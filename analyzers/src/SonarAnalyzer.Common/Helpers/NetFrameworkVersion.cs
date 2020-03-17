@@ -29,6 +29,8 @@ namespace SonarAnalyzer.Helpers
         // between .NET 4.0 (inclusive) and .NET 4.5.1 (inclusive)
         Between4And451,
         // after .NET 4.5.2 (inclusive)
-        After452
+        After452,
+        // after .NET 4.6 (inclusive)
+        After46,
     }
 }
