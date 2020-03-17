@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -45,6 +45,37 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs",
                 new NumberPatternShouldBeRegular(),
                 ParseOptionsHelper.FromCSharp7);
+        }
+
+        [DataTestMethod]
+        [TestCategory("Rule")]
+        [DataRow("123_12", "First group is bigger then the second")]
+        [DataRow("1234_123_123", "First group is bigger then the others")]
+        [DataRow("123_123_12_123", "Another group has a different size")]
+        [DataRow("1_123.23_1234", "Last decimal group is bigger")]
+        [DataRow(".23_123_1234", "No group before the dot")]
+        public void HasIrregularPattern(string numericToken, string message)
+        {
+            Assert.IsTrue(NumberPatternShouldBeRegular.HasIrregularPattern(numericToken), message);
+        }
+
+        [DataTestMethod]
+        [TestCategory("Rule")]
+        [DataRow(".23_123_123_1", "No group before the dot")]
+        [DataRow("123", "No group character")]
+        [DataRow("1_123_123UL", "With UL suffix")]
+        [DataRow("1_123_123L", "With L suffix")]
+        [DataRow("1.1.1", "Two dots")]
+        [DataRow("0b1010_1010", "With binary prefix")]
+        [DataRow("0xFF_FF_12", "With hexadecimal prefix")]
+        [DataRow("1_123_123", "first group smaller")]
+        [DataRow("123_123_123", "All blocks equal size")]
+        [DataRow("1_123.23_123", "First decimal group after dot is one smaller")]
+        [DataRow("1_123.23_123_12", "Last decimal group is smaller")]
+        [DataRow("1_123.1234567", "Only one group of decimals")]
+        public void HasRegularPattern(string numericToken, string message)
+        {
+            Assert.IsFalse(NumberPatternShouldBeRegular.HasIrregularPattern(numericToken), message);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Tests.Diagnostics
             int million = 1_000_00_000;  // Noncompliant {{Review this number; its irregular pattern indicates an error.}}
 //                        ^^^^^^^^^^^^
 
-            var x = 1_234.56_78; // Noncompliant
+            var x = 1_234.56_78_1; // Noncompliant
 
             var y = 1_234_5; // Noncompliant
 

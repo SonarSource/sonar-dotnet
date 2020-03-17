@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -38,12 +38,13 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3937";
         private const string MessageFormat = "Review this number; its irregular pattern indicates an error.";
 
+        private const char Underscore = '_';
+        private const char Dot = '.';
+        private const int NotFound = -1;
+
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ImmutableHashSet<char> NumericTypeSuffix =
-            ImmutableHashSet.Create('L', 'D', 'F', 'U', 'M');
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -57,22 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var literal = (LiteralExpressionSyntax)c.Node;
 
-                    var numberWithoutSuffix = ClearNumberTypeSuffix(literal.Token.Text);
-
-                    var decimalParts = numberWithoutSuffix.Split('.');
-                    if (decimalParts.Length > 2)
-                    {
-                        return;
-                    }
-
-                    var hasIrregularPattern = decimalParts
-                        .SelectMany(part => part.Split('_'))
-                        .Select(x => x.Length)
-                        .Skip(1) // skip the first part (1_234 => 234)
-                        .Reverse().Skip(decimalParts.Length == 2 ? 1 : 0) // skip the last if there is a decimal (.234_5 => 234)
-                        .Distinct().Skip(1).Any(); // we expect to have only 1 size of pattern
-
-                    if (hasIrregularPattern)
+                    if (HasIrregularPattern(literal.Token.Text))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, literal.GetLocation()));
                     }
@@ -80,19 +66,85 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.NumericLiteralExpression);
         }
 
-        private static string ClearNumberTypeSuffix(string numberLiteral)
+        public static bool HasIrregularPattern(string numericToken)
         {
-            if (numberLiteral.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
+            // hexadecimal en binary prefixes
+            var start = numericToken.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase)
+                || numericToken.StartsWith("0b", StringComparison.InvariantCultureIgnoreCase) ? 2 : 0;
+
+            var length = numericToken.Length - start;
+
+            // UL suffix.
+            if (numericToken.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
             {
-                return numberLiteral.Substring(0, numberLiteral.Length - 2);
+                length -= 2;
+            }
+            // single suffixes
+            else if ("LDFUMldfum".IndexOf(numericToken[numericToken.Length - 1]) != NotFound)
+            {
+                length--;
             }
 
-            if (NumericTypeSuffix.Contains(char.ToUpperInvariant(numberLiteral[numberLiteral.Length - 1])))
+            var stripped = numericToken.Substring(start, length);
+            var splitted = stripped.Split(Dot);
+
+            // ignore multiple dots.
+            if (splitted.Length > 2)
             {
-                return numberLiteral.Substring(0, numberLiteral.Length - 1);
+                return false;
             }
 
-            return numberLiteral;
+            var groups = splitted[0].Split(Underscore).Select(s => s.Length).ToArray();
+
+            var size = NotFound;
+
+            if (groups.Length > 1)
+            {
+                size = groups[1];
+
+                // first should not be bigger.
+                if (groups[0] > size)
+                {
+                    return true;
+                }
+
+                // all should have the same size, except the first.
+                if (groups.Skip(1).Any(g => g != size))
+                {
+                    return true;
+                }
+            }
+
+            if (splitted.Length == 1)
+            {
+                return false;
+            }
+
+            var decimals = splitted[1].Split(Underscore).Select(s => s.Length).ToArray();
+
+            if (decimals.Length == 1)
+            {
+                return false;
+            }
+
+            // The first decimal group should be one smaller.
+            decimals[0]++;
+
+            size = size == NotFound ? decimals[0] : size;
+
+            // the last should not be bigger.
+            if (decimals.Last() > size)
+            {
+                return true;
+            }
+
+            // all should have the same size, except the last.
+            if (decimals.Take(decimals.Length - 1).Any(g => g != size))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
