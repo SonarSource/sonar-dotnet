@@ -19,8 +19,10 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,6 +32,7 @@ public class Coverage {
   private static final int GROW_FACTOR = 2;
   private static final int SPECIAL_HITS_NON_EXECUTABLE = -1;
   private final Map<String, int[]> hitsByLineAndFile = new HashMap<>();
+  private final Map<String, List<LineBranchCoverage>> branchCoverageByFile = new HashMap<>();
 
   void addHits(String file, int line, int hits) {
     int[] oldHitsByLine = hitsByLineAndFile.get(file);
@@ -57,6 +60,11 @@ public class Coverage {
     oldHitsByLine[i] += hits;
   }
 
+  public void addLineBranchCoverage(String file, LineBranchCoverage lineBranchCoverage){
+    List<LineBranchCoverage> linesBranchCoverage = branchCoverageByFile.computeIfAbsent(file, k -> new ArrayList<>());
+    linesBranchCoverage.add(lineBranchCoverage);
+  }
+
   public Set<String> files() {
     return hitsByLineAndFile.keySet();
   }
@@ -77,7 +85,16 @@ public class Coverage {
     return result;
   }
 
+  List<LineBranchCoverage> getLinesBranchCoverage(String file){
+    return branchCoverageByFile.getOrDefault(file, new ArrayList<>());
+  }
+
   void mergeWith(Coverage otherCoverage) {
+    mergeLineHits(otherCoverage);
+    mergeBranchCoverage(otherCoverage);
+  }
+
+  private void mergeLineHits(Coverage otherCoverage){
     Map<String, int[]> other = otherCoverage.hitsByLineAndFile;
 
     for (Map.Entry<String, int[]> entry : other.entrySet()) {
@@ -90,4 +107,15 @@ public class Coverage {
     }
   }
 
+  private void mergeBranchCoverage(Coverage otherCoverage){
+    Map<String, List<LineBranchCoverage>> otherBranchCoverageByFile = otherCoverage.branchCoverageByFile;
+
+    for (Map.Entry<String, List<LineBranchCoverage>> entry: otherBranchCoverageByFile.entrySet()){
+      String file = entry.getKey();
+
+      for (LineBranchCoverage lineBranchCoverage: entry.getValue()) {
+        addLineBranchCoverage(file, lineBranchCoverage);
+      }
+    }
+  }
 }

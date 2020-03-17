@@ -136,6 +136,11 @@ public class CoverageReportImportSensor implements Sensor {
         fileHasCoverage = true;
         newCoverage.lineHits(entry.getKey(), entry.getValue());
       }
+
+      for (LineBranchCoverage lineBranchCoverage : coverage.getLinesBranchCoverage(filePath)){
+        fileHasCoverage = true;
+        newCoverage.conditions(lineBranchCoverage.getLine(), lineBranchCoverage.getConditions(), lineBranchCoverage.getCoveredConditions());
+      }
       newCoverage.save();
 
       if (fileHasCoverage) {

@@ -109,6 +109,29 @@ public class OpenCoverReportParserTest {
   }
 
   @Test
+  public void branchCoverage() throws Exception {
+    Coverage coverage = new Coverage();
+    String filePath = new File("MyLibrary\\Calculator.cs").getCanonicalPath();
+
+    new OpenCoverReportParser(alwaysTrue).accept(new File("src/test/resources/opencover/coverage_branches.xml"), coverage);
+
+    assertThat(coverage.files()).containsOnly(filePath);
+    assertThat(coverage.hits(filePath))
+      .hasSize(3)
+      .contains(
+        Assertions.entry(6, 1),
+        Assertions.entry(7, 1),
+        Assertions.entry(14, 1));
+
+    assertThat(coverage.getLinesBranchCoverage(filePath).size()).isEqualTo(1);
+
+    LineBranchCoverage lineBranchCoverage = coverage.getLinesBranchCoverage(filePath).get(0);
+    assertThat(lineBranchCoverage.getLine()).isEqualTo(7);
+    assertThat(lineBranchCoverage.getConditions()).isEqualTo(6);
+    assertThat(lineBranchCoverage.getCoveredConditions()).isEqualTo(3);
+  }
+
+  @Test
   public void log_unsupported_file_extension() throws Exception {
     Coverage coverage = new Coverage();
     Predicate<String> alwaysFalse = s -> false;

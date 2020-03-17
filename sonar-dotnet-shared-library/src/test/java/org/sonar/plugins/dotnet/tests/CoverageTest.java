@@ -69,4 +69,29 @@ public class CoverageTest {
     assertThat(coverage.hits("baz.txt")).isEqualTo(ImmutableMap.of(2, 7));
   }
 
+  @Test
+  public void testBranchCoverage(){
+    Coverage first = new Coverage();
+
+    LineBranchCoverage fooFirstLine = new LineBranchCoverage(1, 6, 3);
+    LineBranchCoverage fooThirdLine = new LineBranchCoverage(3, 2, 1);
+    LineBranchCoverage barFirstLine = new LineBranchCoverage(1, 5, 1);
+    LineBranchCoverage barSecondLine = new LineBranchCoverage(2, 2, 2);
+
+    first.addLineBranchCoverage("foo.txt", fooFirstLine);
+    first.addLineBranchCoverage("foo.txt", fooThirdLine);
+    first.addLineBranchCoverage("bar.txt", barFirstLine);
+
+    assertThat(first.getLinesBranchCoverage("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
+    assertThat(first.getLinesBranchCoverage("bar.txt")).containsExactly(barFirstLine);
+
+    Coverage second = new Coverage();
+
+    second.addLineBranchCoverage("bar.txt", barSecondLine);
+
+    second.mergeWith(first);
+
+    assertThat(second.getLinesBranchCoverage("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
+    assertThat(second.getLinesBranchCoverage("bar.txt")).containsExactly(barSecondLine, barFirstLine);
+  }
 }
