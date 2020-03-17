@@ -101,6 +101,9 @@ namespace Tests.Diagnostics
             };
 
             task.ContinueWith(arg);
+
+            var safeTask = Task.FromResult(42);
+            var a = safeTask.Result; // Noncompliant FP, we don't track source of the task
         }
 
         // See https://github.com/SonarSource/sonar-dotnet/issues/2413
@@ -112,10 +115,29 @@ namespace Tests.Diagnostics
             });
         }
 
+        public Task<string> RunParenthesizedLambdaExpression(Task<string> task)
+        {
+            return task.ContinueWith((completedTask) =>
+            {
+                return completedTask.Result; // Compliant, task is already completed at this point.
+            });
+        }
+
         public Task<string> TaskResultInFunctionCall(Task<string> task)
         {
             return task.ContinueWith(completedTask =>
             {
+                return string.Format("Result: {0}", completedTask.Result); // Compliant, task is already completed at this point.
+            });
+        }
+
+        public Task<string> MultipleTasks(Task<string> task)
+        {
+            return task.ContinueWith(completedTask =>
+            {
+                Task<int> anotherTask = null; // Pretend to compute something
+                var b = anotherTask.Result; // Noncompliant, this task is not safe inside ContinueWith
+
                 return string.Format("Result: {0}", completedTask.Result); // Compliant, task is already completed at this point.
             });
         }

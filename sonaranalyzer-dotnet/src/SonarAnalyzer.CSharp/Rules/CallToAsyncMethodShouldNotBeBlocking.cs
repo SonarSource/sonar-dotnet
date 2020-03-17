@@ -128,8 +128,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsContinueWithCallWithArgumentName(InvocationExpressionSyntax invocation, string argumentName) =>
             invocation.Expression.NameIs(ContinueWithName) &&
-            invocation.ArgumentList.Arguments.Any(argument => argument.Expression is SimpleLambdaExpressionSyntax lambda &&
-                                                              lambda.Parameter.Identifier.ValueText == argumentName);
+            invocation.ArgumentList.Arguments.Any(argument => IsLambdaExpressionWithArgumentName(argument.Expression, argumentName));
+
+        private static bool IsLambdaExpressionWithArgumentName(ExpressionSyntax expression, string argumentName) =>
+            expression switch
+            {
+                SimpleLambdaExpressionSyntax lambda => lambda.Parameter.Identifier.ValueText == argumentName,
+                ParenthesizedLambdaExpressionSyntax parenthesizedLambda =>
+                    parenthesizedLambda.ParameterList.Parameters.Any(parameter => parameter.Identifier.ValueText == argumentName),
+                _ => false
+            };
 
         private static bool IsChainedAfterThreadPoolCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
             memberAccess.Expression.DescendantNodes()
