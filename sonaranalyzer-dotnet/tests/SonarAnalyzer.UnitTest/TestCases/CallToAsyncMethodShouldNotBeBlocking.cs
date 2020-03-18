@@ -109,10 +109,23 @@ namespace Tests.Diagnostics
         // See https://github.com/SonarSource/sonar-dotnet/issues/2413
         public Task<string> Run(Task<string> task)
         {
-            return task.ContinueWith(completedTask =>
+            // Action<Task<T>>
+            var a = task.ContinueWith(completedTask =>
+            {
+                var result = completedTask.Result; // Compliant, task is already completed at this point.
+            });
+
+            // Action<Task<T>, object>
+            var b = task.ContinueWith((completedTask, state) =>
+            {
+                var result = completedTask.Result; // Compliant, task is already completed at this point.
+            }, null);
+
+            // Func<Task<T>, object, TResult>
+            return task.ContinueWith((completedTask, state) =>
             {
                 return completedTask.Result; // Compliant, task is already completed at this point.
-            });
+            }, null);
         }
 
         public Task<string> RunParenthesizedLambdaExpression(Task<string> task)
