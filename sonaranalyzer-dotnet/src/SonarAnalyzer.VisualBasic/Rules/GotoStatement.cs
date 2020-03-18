@@ -20,14 +20,14 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class GotoStatement : GotoStatementBase<SyntaxKind>
     {
@@ -36,15 +36,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override DiagnosticDescriptor Rule => rule;
 
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+           Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+
         protected override ImmutableArray<SyntaxKind> GotoSyntaxKinds => new[]
         {
-            SyntaxKind.GotoStatement,
-            SyntaxKind.GotoCaseStatement,
-            SyntaxKind.GotoDefaultStatement
+            SyntaxKind.GoToKeyword,
+            SyntaxKind.GoToStatement
         }.ToImmutableArray();
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-           Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
-
-    }        
+    }
 }
