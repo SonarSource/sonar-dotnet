@@ -95,9 +95,9 @@ namespace SonarAnalyzer.Helpers
         private static bool AtLeast46(IAssemblySymbol mscorlibAssembly)
         {
             return mscorlibAssembly
-                .GetTypeByMetadataName("System.Array")
+                .GetTypeByMetadataName("System.Array")?
                 .GetMembers("Empty")
-                .Any();
+                .Any() == true;
         }
     }
 }
