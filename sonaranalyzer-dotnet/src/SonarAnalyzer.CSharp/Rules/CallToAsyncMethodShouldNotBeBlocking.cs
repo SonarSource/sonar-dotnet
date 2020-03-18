@@ -124,7 +124,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsResultInContinueWithCall(string memberAccessName, MemberAccessExpressionSyntax memberAccess) =>
             memberAccessName == ResultName &&
             memberAccess.Expression is IdentifierNameSyntax identifierNameSyntax &&
-            memberAccess.FirstAncestorOrSelf<InvocationExpressionSyntax>(invocation => IsContinueWithCallWithArgumentName(invocation, identifierNameSyntax.GetName())) != null;
+            identifierNameSyntax.GetName() is {} identifierName &&
+            memberAccess.FirstAncestorOrSelf<InvocationExpressionSyntax>(invocation => IsContinueWithCallWithArgumentName(invocation, identifierName)) != null;
 
         private static bool IsContinueWithCallWithArgumentName(InvocationExpressionSyntax invocation, string argumentName) =>
             invocation.Expression.NameIs(ContinueWithName) &&
