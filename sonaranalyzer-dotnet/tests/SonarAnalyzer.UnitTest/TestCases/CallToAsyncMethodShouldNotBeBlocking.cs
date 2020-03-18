@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
@@ -92,11 +93,65 @@ namespace Tests.Diagnostics
             Thread.Sleep(10);
         }
 
+        public void Run(Task<int> task)
+        {
+            Action<Task<int>> arg = (action) =>
+            {
+                var ret = action.Result; // Noncompliant FP, we do not track actions which are used on ContinueWith
+            };
+
+            task.ContinueWith(arg);
+
+            var safeTask = Task.FromResult(42);
+            var a = safeTask.Result; // Noncompliant FP, we don't track source of the task
+        }
+
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2413
         public Task<string> Run(Task<string> task)
+        {
+            // Action<Task<T>>
+            var a = task.ContinueWith(completedTask =>
+            {
+                var result = completedTask.Result; // Compliant, task is already completed at this point.
+            });
+
+            // Action<Task<T>, object>
+            var b = task.ContinueWith((completedTask, state) =>
+            {
+                var result = completedTask.Result; // Compliant, task is already completed at this point.
+            }, null);
+
+            // Func<Task<T>, object, TResult>
+            return task.ContinueWith((completedTask, state) =>
+            {
+                return completedTask.Result; // Compliant, task is already completed at this point.
+            }, null);
+        }
+
+        public Task<string> RunParenthesizedLambdaExpression(Task<string> task)
+        {
+            return task.ContinueWith((completedTask) =>
+            {
+                return completedTask.Result; // Compliant, task is already completed at this point.
+            });
+        }
+
+        public Task<string> TaskResultInFunctionCall(Task<string> task)
         {
             return task.ContinueWith(completedTask =>
             {
-                return completedTask.Result; // Noncompliant FP, task is already completed at this point.
+                return string.Format("Result: {0}", completedTask.Result); // Compliant, task is already completed at this point.
+            });
+        }
+
+        public Task<string> MultipleTasks(Task<string> task)
+        {
+            return task.ContinueWith(completedTask =>
+            {
+                Task<int> anotherTask = null; // Pretend to compute something
+                var b = anotherTask.Result; // Noncompliant, this task is not safe inside ContinueWith
+
+                return string.Format("Result: {0}", completedTask.Result); // Compliant, task is already completed at this point.
             });
         }
 
