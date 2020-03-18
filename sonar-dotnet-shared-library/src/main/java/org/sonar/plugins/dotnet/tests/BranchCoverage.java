@@ -20,6 +20,8 @@
 
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.Objects;
+
 // This class is responsible to keep SQ/SC metrics related to branch coverage
 class BranchCoverage {
   private int line;
@@ -42,5 +44,32 @@ class BranchCoverage {
 
   public int getCoveredConditions() {
     return coveredConditions;
+  }
+
+  public void add(int conditions, int coveredConditions){
+    this.conditions += conditions;
+    this.coveredConditions += coveredConditions;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    BranchCoverage other = (BranchCoverage) o;
+
+    return line == other.line &&
+      conditions == other.conditions &&
+      coveredConditions == other.coveredConditions;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(line, conditions, coveredConditions);
   }
 }

@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 public class Coverage {
@@ -62,7 +63,19 @@ public class Coverage {
 
   public void addBranchCoverage(String file, BranchCoverage branchCoverage){
     List<BranchCoverage> branchCoverages = branchCoverageByFile.computeIfAbsent(file, k -> new ArrayList<>());
-    branchCoverages.add(branchCoverage);
+
+    // If there are multiple branch coverage entries per line these need to be merged; otherwise SQ/SC will display only
+    // one of them.
+    Optional<BranchCoverage> existingCoverage = branchCoverages.stream()
+      .filter(coverage -> coverage.getLine() == branchCoverage.getLine())
+      .findAny();
+
+    if (existingCoverage.isPresent()){
+      existingCoverage.get().add(branchCoverage.getConditions(), branchCoverage.getCoveredConditions());
+    }
+    else {
+      branchCoverages.add(branchCoverage);
+    }
   }
 
   public Set<String> files() {
