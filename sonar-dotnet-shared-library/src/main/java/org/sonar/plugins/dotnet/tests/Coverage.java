@@ -72,8 +72,7 @@ public class Coverage {
 
     if (existingCoverage.isPresent()){
       existingCoverage.get().add(branchCoverage.getConditions(), branchCoverage.getCoveredConditions());
-    }
-    else {
+    } else {
       branchCoverages.add(branchCoverage);
     }
   }
