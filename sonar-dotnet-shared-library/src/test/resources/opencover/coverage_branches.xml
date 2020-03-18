@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+This file was generated from the following code:
+
+namespace BranchCoveragePoc
+{
+    public class Calculator
+    {
+        public int Compute(int x, int y, int z)
+        {
+            return x < 2
+                ? y < 3
+                    ? z < 1
+                        ? 1
+                        : 2
+                    : 3
+                : 4;
+        }
+    }
+}
+
+Unit tests:
+
+using NUnit.Framework;
+
+namespace BranchCoveragePoc.Tests
+{
+    public class Tests
+    {
+        [Test]
+        public void Test1()
+        {
+            var sut = new Calculator();
+
+            Assert.That(sut.Compute(0, 0, 0).Equals(1));
+        }
+    }
+}
+
+OpenCover version 4.7.922.0
+
+Commands used:
+msbuild BranchCoveragePoc.sln
+OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"test" -output:coverage.xml -register:user -filter:"+[BranchCoveragePoc*]* -[BranchCoveragePoc.Tests]*" -oldStyle
+-->
+
 <CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.7.922.0">
   <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="7" visitedBranchPoints="4" sequenceCoverage="100" branchCoverage="57.14" maxCyclomaticComplexity="7" minCyclomaticComplexity="1" maxCrapScore="7" minCrapScore="2" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="1" />
   <Modules>

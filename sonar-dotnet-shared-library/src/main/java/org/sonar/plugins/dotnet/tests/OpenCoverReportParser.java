@@ -96,7 +96,7 @@ public class OpenCoverReportParser implements CoverageParser {
 
     private void handleSegmentPointTag(XmlParserHelper xmlParserHelper) {
       // Open Cover lacks model documentation but the details can be found in the source code:
-      // https://github.com/OpenCover/opencover/blob/e715910bb52e327ae6df059aeea71dff4b54ee50/main/OpenCover.Framework/Model/SequencePoint.cs
+      // https://github.com/OpenCover/opencover/blob/4.7.922/main/OpenCover.Framework/Model/SequencePoint.cs
       int line = xmlParserHelper.getRequiredIntAttribute("sl");
       int vc = xmlParserHelper.getRequiredIntAttribute("vc");
       int branchExitsCount = xmlParserHelper.getIntAttributeOrZero("bec");
@@ -115,7 +115,7 @@ public class OpenCoverReportParser implements CoverageParser {
 
           // Branch exit count is 0 for all the lines which don't have branches.
           if (branchExitsCount > 0){
-            coverage.addLineBranchCoverage(identifiedFile, new LineBranchCoverage(line, branchExitsCount, branchExitsVisit));
+            coverage.addBranchCoverage(identifiedFile, new BranchCoverage(line, branchExitsCount, branchExitsVisit));
           }
 
           coverage.addHits(identifiedFile, line, vc);

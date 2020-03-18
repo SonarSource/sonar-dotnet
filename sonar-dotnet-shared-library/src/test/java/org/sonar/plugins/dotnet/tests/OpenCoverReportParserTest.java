@@ -123,12 +123,12 @@ public class OpenCoverReportParserTest {
         Assertions.entry(7, 1),
         Assertions.entry(14, 1));
 
-    assertThat(coverage.getLinesBranchCoverage(filePath).size()).isEqualTo(1);
+    assertThat(coverage.getBranchCoverage(filePath).size()).isEqualTo(1);
 
-    LineBranchCoverage lineBranchCoverage = coverage.getLinesBranchCoverage(filePath).get(0);
-    assertThat(lineBranchCoverage.getLine()).isEqualTo(7);
-    assertThat(lineBranchCoverage.getConditions()).isEqualTo(6);
-    assertThat(lineBranchCoverage.getCoveredConditions()).isEqualTo(3);
+    BranchCoverage branchCoverage = coverage.getBranchCoverage(filePath).get(0);
+    assertThat(branchCoverage.getLine()).isEqualTo(7);
+    assertThat(branchCoverage.getConditions()).isEqualTo(6);
+    assertThat(branchCoverage.getCoveredConditions()).isEqualTo(3);
   }
 
   @Test

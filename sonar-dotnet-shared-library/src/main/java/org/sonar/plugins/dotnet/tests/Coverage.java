@@ -32,7 +32,7 @@ public class Coverage {
   private static final int GROW_FACTOR = 2;
   private static final int SPECIAL_HITS_NON_EXECUTABLE = -1;
   private final Map<String, int[]> hitsByLineAndFile = new HashMap<>();
-  private final Map<String, List<LineBranchCoverage>> branchCoverageByFile = new HashMap<>();
+  private final Map<String, List<BranchCoverage>> branchCoverageByFile = new HashMap<>();
 
   void addHits(String file, int line, int hits) {
     int[] oldHitsByLine = hitsByLineAndFile.get(file);
@@ -60,9 +60,9 @@ public class Coverage {
     oldHitsByLine[i] += hits;
   }
 
-  public void addLineBranchCoverage(String file, LineBranchCoverage lineBranchCoverage){
-    List<LineBranchCoverage> linesBranchCoverage = branchCoverageByFile.computeIfAbsent(file, k -> new ArrayList<>());
-    linesBranchCoverage.add(lineBranchCoverage);
+  public void addBranchCoverage(String file, BranchCoverage branchCoverage){
+    List<BranchCoverage> branchCoverages = branchCoverageByFile.computeIfAbsent(file, k -> new ArrayList<>());
+    branchCoverages.add(branchCoverage);
   }
 
   public Set<String> files() {
@@ -85,7 +85,7 @@ public class Coverage {
     return result;
   }
 
-  List<LineBranchCoverage> getLinesBranchCoverage(String file){
+  List<BranchCoverage> getBranchCoverage(String file){
     return branchCoverageByFile.getOrDefault(file, new ArrayList<>());
   }
 
@@ -108,13 +108,13 @@ public class Coverage {
   }
 
   private void mergeBranchCoverage(Coverage otherCoverage){
-    Map<String, List<LineBranchCoverage>> otherBranchCoverageByFile = otherCoverage.branchCoverageByFile;
+    Map<String, List<BranchCoverage>> otherBranchCoverageByFile = otherCoverage.branchCoverageByFile;
 
-    for (Map.Entry<String, List<LineBranchCoverage>> entry: otherBranchCoverageByFile.entrySet()){
+    for (Map.Entry<String, List<BranchCoverage>> entry: otherBranchCoverageByFile.entrySet()){
       String file = entry.getKey();
 
-      for (LineBranchCoverage lineBranchCoverage: entry.getValue()) {
-        addLineBranchCoverage(file, lineBranchCoverage);
+      for (BranchCoverage branchCoverage : entry.getValue()) {
+        addBranchCoverage(file, branchCoverage);
       }
     }
   }

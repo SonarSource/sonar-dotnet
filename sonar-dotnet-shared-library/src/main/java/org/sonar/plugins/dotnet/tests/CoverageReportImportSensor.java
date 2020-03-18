@@ -152,9 +152,11 @@ public class CoverageReportImportSensor implements Sensor {
       newCoverage.lineHits(entry.getKey(), entry.getValue());
     }
 
-    for (LineBranchCoverage lineBranchCoverage : coverage.getLinesBranchCoverage(filePath)){
+    for (BranchCoverage branchCoverage : coverage.getBranchCoverage(filePath)){
+      LOG.trace("Found branch coverage entry on line '{}', with total conditions '{}' and covered conditions '{}'.",
+        branchCoverage.getLine(), branchCoverage.getConditions(), branchCoverage.getCoveredConditions());
       fileHasCoverage = true;
-      newCoverage.conditions(lineBranchCoverage.getLine(), lineBranchCoverage.getConditions(), lineBranchCoverage.getCoveredConditions());
+      newCoverage.conditions(branchCoverage.getLine(), branchCoverage.getConditions(), branchCoverage.getCoveredConditions());
     }
     newCoverage.save();
 

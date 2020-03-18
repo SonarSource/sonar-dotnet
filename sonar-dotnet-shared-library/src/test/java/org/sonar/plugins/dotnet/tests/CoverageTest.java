@@ -73,25 +73,25 @@ public class CoverageTest {
   public void testBranchCoverage(){
     Coverage first = new Coverage();
 
-    LineBranchCoverage fooFirstLine = new LineBranchCoverage(1, 6, 3);
-    LineBranchCoverage fooThirdLine = new LineBranchCoverage(3, 2, 1);
-    LineBranchCoverage barFirstLine = new LineBranchCoverage(1, 5, 1);
-    LineBranchCoverage barSecondLine = new LineBranchCoverage(2, 2, 2);
+    BranchCoverage fooFirstLine = new BranchCoverage(1, 6, 3);
+    BranchCoverage fooThirdLine = new BranchCoverage(3, 2, 1);
+    BranchCoverage barFirstLine = new BranchCoverage(1, 5, 1);
+    BranchCoverage barSecondLine = new BranchCoverage(2, 2, 2);
 
-    first.addLineBranchCoverage("foo.txt", fooFirstLine);
-    first.addLineBranchCoverage("foo.txt", fooThirdLine);
-    first.addLineBranchCoverage("bar.txt", barFirstLine);
+    first.addBranchCoverage("foo.txt", fooFirstLine);
+    first.addBranchCoverage("foo.txt", fooThirdLine);
+    first.addBranchCoverage("bar.txt", barFirstLine);
 
-    assertThat(first.getLinesBranchCoverage("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
-    assertThat(first.getLinesBranchCoverage("bar.txt")).containsExactly(barFirstLine);
+    assertThat(first.getBranchCoverage("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
+    assertThat(first.getBranchCoverage("bar.txt")).containsExactly(barFirstLine);
 
     Coverage second = new Coverage();
 
-    second.addLineBranchCoverage("bar.txt", barSecondLine);
+    second.addBranchCoverage("bar.txt", barSecondLine);
 
     second.mergeWith(first);
 
-    assertThat(second.getLinesBranchCoverage("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
-    assertThat(second.getLinesBranchCoverage("bar.txt")).containsExactly(barSecondLine, barFirstLine);
+    assertThat(second.getBranchCoverage("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
+    assertThat(second.getBranchCoverage("bar.txt")).containsExactly(barSecondLine, barFirstLine);
   }
 }

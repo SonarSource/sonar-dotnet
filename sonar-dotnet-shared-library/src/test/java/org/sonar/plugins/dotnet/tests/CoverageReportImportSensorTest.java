@@ -235,9 +235,9 @@ public class CoverageReportImportSensorTest {
     when(coverage.hits(bazPath)).thenReturn(ImmutableMap.<Integer, Integer>builder()
       .put(42, 1)
       .build());
-    when(coverage.getLinesBranchCoverage(fooPath)).thenReturn(ImmutableList.<LineBranchCoverage>builder()
-      .add(new LineBranchCoverage(1, 5, 2))
-      .add(new LineBranchCoverage(4, 3, 3))
+    when(coverage.getBranchCoverage(fooPath)).thenReturn(ImmutableList.<BranchCoverage>builder()
+      .add(new BranchCoverage(1, 5, 2))
+      .add(new BranchCoverage(4, 3, 3))
       .build());
 
     DefaultInputFile inputFile = new TestInputFileBuilder("foo", baseDir, new File(baseDir, "Foo.cs"))

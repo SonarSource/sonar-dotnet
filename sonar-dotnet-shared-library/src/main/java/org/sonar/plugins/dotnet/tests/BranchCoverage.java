@@ -20,12 +20,13 @@
 
 package org.sonar.plugins.dotnet.tests;
 
-class LineBranchCoverage {
+// This class is responsible to keep SQ/SC metrics related to branch coverage
+class BranchCoverage {
   private int line;
   private int conditions;
   private int coveredConditions;
 
-  public LineBranchCoverage(int line, int conditions, int coveredConditions){
+  public BranchCoverage(int line, int conditions, int coveredConditions){
     this.line = line;
     this.conditions = conditions;
     this.coveredConditions = coveredConditions;
