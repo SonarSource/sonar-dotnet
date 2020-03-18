@@ -126,29 +126,7 @@ public class CoverageReportImportSensor implements Sensor {
         continue;
       }
 
-      LOG.trace("Checking main file coverage for '{}'.", filePath);
-      fileCountStatistics.main++;
-      boolean fileHasCoverage = false;
-
-      NewCoverage newCoverage = context.newCoverage().onFile(inputFile);
-      for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
-        LOG.trace("Found entry with key '{}' and value '{}'.", entry.getKey(), entry.getValue());
-        fileHasCoverage = true;
-        newCoverage.lineHits(entry.getKey(), entry.getValue());
-      }
-
-      for (LineBranchCoverage lineBranchCoverage : coverage.getLinesBranchCoverage(filePath)){
-        fileHasCoverage = true;
-        newCoverage.conditions(lineBranchCoverage.getLine(), lineBranchCoverage.getConditions(), lineBranchCoverage.getCoveredConditions());
-      }
-      newCoverage.save();
-
-      if (fileHasCoverage) {
-        fileCountStatistics.mainWithCoverage++;
-        LOG.trace("Found some coverage info for the file '{}'.", filePath);
-      } else {
-        LOG.debug("No coverage info found for the file '{}'.", filePath);
-      }
+      analyzeCoverage(context, coverage, fileCountStatistics, filePath, inputFile);
     }
 
     LOG.debug("The total number of file count statistics is '{}'.", fileCountStatistics.total);
@@ -159,6 +137,32 @@ public class CoverageReportImportSensor implements Sensor {
         LOG.warn("The Code Coverage report doesn't contain any coverage data for the included files. For "
           + "troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
       }
+    }
+  }
+
+  private static void analyzeCoverage(SensorContext context, Coverage coverage, FileCountStatistics fileCountStatistics, String filePath, InputFile inputFile) {
+    LOG.trace("Checking main file coverage for '{}'.", filePath);
+    fileCountStatistics.main++;
+    boolean fileHasCoverage = false;
+
+    NewCoverage newCoverage = context.newCoverage().onFile(inputFile);
+    for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
+      LOG.trace("Found entry with key '{}' and value '{}'.", entry.getKey(), entry.getValue());
+      fileHasCoverage = true;
+      newCoverage.lineHits(entry.getKey(), entry.getValue());
+    }
+
+    for (LineBranchCoverage lineBranchCoverage : coverage.getLinesBranchCoverage(filePath)){
+      fileHasCoverage = true;
+      newCoverage.conditions(lineBranchCoverage.getLine(), lineBranchCoverage.getConditions(), lineBranchCoverage.getCoveredConditions());
+    }
+    newCoverage.save();
+
+    if (fileHasCoverage) {
+      fileCountStatistics.mainWithCoverage++;
+      LOG.trace("Found some coverage info for the file '{}'.", filePath);
+    } else {
+      LOG.debug("No coverage info found for the file '{}'.", filePath);
     }
   }
 
