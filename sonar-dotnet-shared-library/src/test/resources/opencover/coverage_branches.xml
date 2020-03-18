@@ -50,7 +50,7 @@ OpenCover version 4.7.922.0
 
 Commands used:
 msbuild BranchCoveragePoc.sln
-OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"test" -output:coverage.xml -register:user -filter:"+[BranchCoveragePoc*]* -[BranchCoveragePoc.Tests]*" -oldStyle
+OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"test" -output:coverage.xml -register:user -filter:"+[BranchCoveragePoc*]* -[BranchCoveragePoc.Tests]*"
 -->
 
 <CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.7.922.0">
@@ -230,16 +230,16 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModuleName>System.Buffers</ModuleName>
             <Classes />
         </Module>
-        <Module skippedDueTo="Filter" hash="C6-1E-E9-70-08-99-FC-7C-56-FD-99-EA-B2-77-BA-86-EC-00-3E-CD">
-            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Security.Cryptography.Primitives.dll</ModulePath>
-            <ModuleTime>2019-12-09T02:40:06Z</ModuleTime>
-            <ModuleName>System.Security.Cryptography.Primitives</ModuleName>
-            <Classes />
-        </Module>
         <Module skippedDueTo="Filter" hash="A1-DB-CA-49-E5-DE-15-8A-D1-27-A7-83-3B-06-C2-FD-AA-93-97-7F">
             <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Private.Uri.dll</ModulePath>
             <ModuleTime>2019-12-09T02:39:54Z</ModuleTime>
             <ModuleName>System.Private.Uri</ModuleName>
+            <Classes />
+        </Module>
+        <Module skippedDueTo="Filter" hash="C6-1E-E9-70-08-99-FC-7C-56-FD-99-EA-B2-77-BA-86-EC-00-3E-CD">
+            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Security.Cryptography.Primitives.dll</ModulePath>
+            <ModuleTime>2019-12-09T02:40:06Z</ModuleTime>
+            <ModuleName>System.Security.Cryptography.Primitives</ModuleName>
             <Classes />
         </Module>
         <Module skippedDueTo="Filter" hash="FE-CB-B7-96-25-17-F0-81-93-4A-CF-1E-36-56-09-82-59-87-B1-F7">
@@ -332,16 +332,16 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModuleName>System.Net.Security</ModuleName>
             <Classes />
         </Module>
-        <Module skippedDueTo="Filter" hash="C3-0D-A0-B1-74-3B-15-DF-A7-15-4C-96-D4-27-BF-FD-FE-00-A4-EB">
-            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Reflection.Emit.ILGeneration.dll</ModulePath>
-            <ModuleTime>2019-12-09T02:40:34Z</ModuleTime>
-            <ModuleName>System.Reflection.Emit.ILGeneration</ModuleName>
-            <Classes />
-        </Module>
         <Module skippedDueTo="Filter" hash="6A-14-D9-A1-75-17-BF-9F-6B-FB-5F-B5-AC-8A-2C-94-97-A6-50-92">
             <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Security.Cryptography.X509Certificates.dll</ModulePath>
             <ModuleTime>2019-12-09T02:40:36Z</ModuleTime>
             <ModuleName>System.Security.Cryptography.X509Certificates</ModuleName>
+            <Classes />
+        </Module>
+        <Module skippedDueTo="Filter" hash="C3-0D-A0-B1-74-3B-15-DF-A7-15-4C-96-D4-27-BF-FD-FE-00-A4-EB">
+            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Reflection.Emit.ILGeneration.dll</ModulePath>
+            <ModuleTime>2019-12-09T02:40:34Z</ModuleTime>
+            <ModuleName>System.Reflection.Emit.ILGeneration</ModuleName>
             <Classes />
         </Module>
         <Module skippedDueTo="Filter" hash="23-8C-45-0B-A6-E1-AC-BC-02-65-71-CD-F7-1B-E7-CD-B0-77-DB-8D">
@@ -350,16 +350,16 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModuleName>System.Net.Requests</ModuleName>
             <Classes />
         </Module>
-        <Module skippedDueTo="Filter" hash="82-A4-6C-57-AF-AA-D5-30-07-87-6E-51-C8-AB-EB-02-D5-17-69-13">
-            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Reflection.Emit.Lightweight.dll</ModulePath>
-            <ModuleTime>2019-12-09T02:40:00Z</ModuleTime>
-            <ModuleName>System.Reflection.Emit.Lightweight</ModuleName>
-            <Classes />
-        </Module>
         <Module skippedDueTo="Filter" hash="29-55-21-6F-D0-BC-A0-9F-72-8F-B8-5E-11-57-89-2C-FD-D8-11-99">
             <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Net.NetworkInformation.dll</ModulePath>
             <ModuleTime>2019-12-09T02:40:10Z</ModuleTime>
             <ModuleName>System.Net.NetworkInformation</ModuleName>
+            <Classes />
+        </Module>
+        <Module skippedDueTo="Filter" hash="82-A4-6C-57-AF-AA-D5-30-07-87-6E-51-C8-AB-EB-02-D5-17-69-13">
+            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Reflection.Emit.Lightweight.dll</ModulePath>
+            <ModuleTime>2019-12-09T02:40:00Z</ModuleTime>
+            <ModuleName>System.Reflection.Emit.Lightweight</ModuleName>
             <Classes />
         </Module>
         <Module skippedDueTo="Filter" hash="5A-53-4F-48-AF-B1-EB-60-21-87-B1-28-94-0A-4B-2D-BB-CE-B3-2D">
@@ -692,6 +692,12 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModuleName>System.Xml.XDocument</ModuleName>
             <Classes />
         </Module>
+        <Module skippedDueTo="Filter" hash="03-77-DB-FC-14-D5-51-16-64-85-02-C3-8C-75-4C-BB-2E-67-53-7B">
+            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Threading.ThreadPool.dll</ModulePath>
+            <ModuleTime>2019-12-09T02:40:26Z</ModuleTime>
+            <ModuleName>System.Threading.ThreadPool</ModuleName>
+            <Classes />
+        </Module>
         <Module skippedDueTo="Filter" hash="8C-61-4B-EA-81-E0-4A-28-1C-92-01-32-97-55-F9-35-20-1B-2E-63">
             <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Private.Xml.Linq.dll</ModulePath>
             <ModuleTime>2019-12-09T02:39:56Z</ModuleTime>
@@ -716,12 +722,6 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModuleName>System.Xml.ReaderWriter</ModuleName>
             <Classes />
         </Module>
-        <Module skippedDueTo="Filter" hash="03-77-DB-FC-14-D5-51-16-64-85-02-C3-8C-75-4C-BB-2E-67-53-7B">
-            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Threading.ThreadPool.dll</ModulePath>
-            <ModuleTime>2019-12-09T02:40:26Z</ModuleTime>
-            <ModuleName>System.Threading.ThreadPool</ModuleName>
-            <Classes />
-        </Module>
         <Module skippedDueTo="Filter" hash="58-CE-28-9B-89-FC-5B-7D-F9-DF-DB-E2-82-9F-FB-C8-9A-65-2E-CD">
             <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Diagnostics.Tracing.dll</ModulePath>
             <ModuleTime>2019-12-09T02:40:34Z</ModuleTime>
@@ -732,6 +732,12 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Globalization.dll</ModulePath>
             <ModuleTime>2019-12-09T02:40:36Z</ModuleTime>
             <ModuleName>System.Globalization</ModuleName>
+            <Classes />
+        </Module>
+        <Module skippedDueTo="Filter" hash="8A-4D-83-7F-AA-13-3E-66-2D-46-E1-9A-90-2F-28-2B-4E-22-71-E0">
+            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Security.Cryptography.Encoding.dll</ModulePath>
+            <ModuleTime>2019-12-09T02:40:12Z</ModuleTime>
+            <ModuleName>System.Security.Cryptography.Encoding</ModuleName>
             <Classes />
         </Module>
         <Module skippedDueTo="Filter" hash="5A-27-05-54-A0-35-F2-7F-AC-DF-14-14-4A-15-65-C6-AA-E1-76-BD">
@@ -750,12 +756,6 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Security.Cryptography.Primitives.dll</ModulePath>
             <ModuleTime>2019-12-09T02:40:06Z</ModuleTime>
             <ModuleName>System.Security.Cryptography.Primitives</ModuleName>
-            <Classes />
-        </Module>
-        <Module skippedDueTo="Filter" hash="8A-4D-83-7F-AA-13-3E-66-2D-46-E1-9A-90-2F-28-2B-4E-22-71-E0">
-            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Security.Cryptography.Encoding.dll</ModulePath>
-            <ModuleTime>2019-12-09T02:40:12Z</ModuleTime>
-            <ModuleName>System.Security.Cryptography.Encoding</ModuleName>
             <Classes />
         </Module>
         <Module skippedDueTo="Filter" hash="A4-79-06-40-D5-5F-A9-60-39-5B-4E-11-23-32-9B-D2-91-70-E6-9A">
@@ -1076,16 +1076,16 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModuleName>System.Threading.Overlapped</ModuleName>
             <Classes />
         </Module>
-        <Module skippedDueTo="Filter" hash="95-BF-E0-EF-5B-E7-8C-85-01-46-96-EC-75-69-2F-30-93-7C-60-35">
-            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Threading.Overlapped.dll</ModulePath>
-            <ModuleTime>2019-12-09T02:40:10Z</ModuleTime>
-            <ModuleName>System.Threading.Overlapped</ModuleName>
-            <Classes />
-        </Module>
         <Module skippedDueTo="Filter" hash="4B-23-3C-FB-2C-87-6B-C8-B9-B3-B0-3C-FE-2A-A6-B0-EA-C8-0B-A4">
             <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Threading.Thread.dll</ModulePath>
             <ModuleTime>2019-12-09T02:40:04Z</ModuleTime>
             <ModuleName>System.Threading.Thread</ModuleName>
+            <Classes />
+        </Module>
+        <Module skippedDueTo="Filter" hash="95-BF-E0-EF-5B-E7-8C-85-01-46-96-EC-75-69-2F-30-93-7C-60-35">
+            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Threading.Overlapped.dll</ModulePath>
+            <ModuleTime>2019-12-09T02:40:10Z</ModuleTime>
+            <ModuleName>System.Threading.Overlapped</ModuleName>
             <Classes />
         </Module>
         <Module skippedDueTo="Filter" hash="5B-60-45-56-D8-E4-3B-37-2B-94-6A-E2-2C-4F-EA-D1-38-B9-75-0D">
@@ -1496,16 +1496,16 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModuleName>System.ComponentModel</ModuleName>
             <Classes />
         </Module>
-        <Module skippedDueTo="Filter" hash="69-FE-D8-1A-39-46-E9-D5-38-AB-56-03-9C-A7-0F-45-ED-B2-D5-89">
-            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Net.Http.dll</ModulePath>
-            <ModuleTime>2019-12-09T02:40:04Z</ModuleTime>
-            <ModuleName>System.Net.Http</ModuleName>
-            <Classes />
-        </Module>
         <Module skippedDueTo="Filter" hash="47-B3-3F-43-BA-2D-BB-14-69-51-0A-2D-88-EF-AE-58-6F-7F-FD-F3">
             <ModulePath>c:\Program Files\dotnet\sdk\3.1.101\NuGet.Packaging.dll</ModulePath>
             <ModuleTime>2019-12-19T21:32:38Z</ModuleTime>
             <ModuleName>NuGet.Packaging</ModuleName>
+            <Classes />
+        </Module>
+        <Module skippedDueTo="Filter" hash="69-FE-D8-1A-39-46-E9-D5-38-AB-56-03-9C-A7-0F-45-ED-B2-D5-89">
+            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Net.Http.dll</ModulePath>
+            <ModuleTime>2019-12-09T02:40:04Z</ModuleTime>
+            <ModuleName>System.Net.Http</ModuleName>
             <Classes />
         </Module>
         <Module skippedDueTo="Filter" hash="18-FA-0D-95-F1-C9-6C-5F-3D-ED-64-F5-E7-EA-F2-93-72-0C-61-3D">
@@ -2318,16 +2318,16 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModuleName>System.Security.Claims</ModuleName>
             <Classes />
         </Module>
-        <Module skippedDueTo="Filter" hash="F2-A4-B7-B1-47-C0-9D-C3-B6-28-9C-2B-4B-F6-C4-95-9C-10-D8-94">
-            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Security.Principal.dll</ModulePath>
-            <ModuleTime>2019-12-09T02:40:08Z</ModuleTime>
-            <ModuleName>System.Security.Principal</ModuleName>
-            <Classes />
-        </Module>
         <Module skippedDueTo="Filter" hash="60-34-DF-B5-BF-6D-A3-2D-41-D2-11-56-0C-B6-52-0C-51-E7-A8-70">
             <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Security.Principal.Windows.dll</ModulePath>
             <ModuleTime>2019-12-09T02:40:06Z</ModuleTime>
             <ModuleName>System.Security.Principal.Windows</ModuleName>
+            <Classes />
+        </Module>
+        <Module skippedDueTo="Filter" hash="F2-A4-B7-B1-47-C0-9D-C3-B6-28-9C-2B-4B-F6-C4-95-9C-10-D8-94">
+            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.Security.Principal.dll</ModulePath>
+            <ModuleTime>2019-12-09T02:40:08Z</ModuleTime>
+            <ModuleName>System.Security.Principal</ModuleName>
             <Classes />
         </Module>
         <Module skippedDueTo="Filter" hash="73-50-8C-32-9F-B0-51-50-40-3F-4F-AF-67-9D-C7-02-44-E1-7C-A2">
@@ -2632,7 +2632,7 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
         </Module>
         <Module skippedDueTo="Filter" hash="A9-0B-65-65-B3-B2-67-7C-DA-EC-62-4D-1A-72-3F-3C-B1-0E-35-AD">
             <ModulePath>D:\git\BranchCoveragePoc\BranchCoveragePoc.Tests\bin\Debug\netcoreapp3.1\BranchCoveragePoc.Tests.dll</ModulePath>
-            <ModuleTime>2020-03-18T15:12:49.7129507Z</ModuleTime>
+            <ModuleTime>2020-03-18T15:43:29.5905311Z</ModuleTime>
             <ModuleName>BranchCoveragePoc.Tests</ModuleName>
             <Classes />
         </Module>
@@ -2654,10 +2654,16 @@ OpenCover.Console.exe -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"
             <ModuleName>System.Collections.Concurrent</ModuleName>
             <Classes />
         </Module>
+        <Module skippedDueTo="Filter" hash="25-0E-0B-AF-7D-43-95-8D-D9-26-1D-B6-F1-DD-43-B7-E1-0A-0F-B4">
+            <ModulePath>c:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.1\System.ComponentModel.dll</ModulePath>
+            <ModuleTime>2019-12-09T02:40:34Z</ModuleTime>
+            <ModuleName>System.ComponentModel</ModuleName>
+            <Classes />
+        </Module>
         <Module hash="2E-1D-56-99-53-35-F9-32-7E-E9-01-AD-24-E9-83-76-EB-C4-6F-3C">
             <Summary numSequencePoints="10" visitedSequencePoints="10" numBranchPoints="19" visitedBranchPoints="10" sequenceCoverage="100" branchCoverage="52.63" maxCyclomaticComplexity="13" minCyclomaticComplexity="1" maxCrapScore="13" minCrapScore="2" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="1" />
             <ModulePath>D:\git\BranchCoveragePoc\BranchCoveragePoc.Tests\bin\Debug\netcoreapp3.1\BranchCoveragePoc.dll</ModulePath>
-            <ModuleTime>2020-03-18T15:12:48.8939502Z</ModuleTime>
+            <ModuleTime>2020-03-18T15:43:28.7595305Z</ModuleTime>
             <ModuleName>BranchCoveragePoc</ModuleName>
             <Files>
                 <File uid="1" fullPath="D:\git\BranchCoveragePoc\BranchCoveragePoc\Calculator.cs" />
