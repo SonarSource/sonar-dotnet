@@ -131,14 +131,15 @@ namespace SonarAnalyzer.Rules.CSharp
             var names = collidingMembers
                 .Take(MaxMemberDisplayCount)
                 .Select(member => GetMemberDisplayName(member, spanStart, semanticModel))
+                .Distinct()
                 .ToList();
 
-            if (collidingMembers.Count == 1)
+            if (names.Count == 1)
             {
                 return names[0];
             }
 
-            if (collidingMembers.Count == 2)
+            if (names.Count == 2)
             {
                 return $"{names[0]} and {names[1]}";
             }
@@ -156,6 +157,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string GetMemberDisplayName(IMethodSymbol method, int spanStart, SemanticModel semanticModel)
         {
+            if(method.AssociatedSymbol is IPropertySymbol property && property.IsIndexer)
+            {
+                var text = property.ToMinimalDisplayString(semanticModel, spanStart, SymbolDisplayFormat.CSharpShortErrorMessageFormat);
+                return $"'{text}'";
+            }
+
             var parts = method.ToMinimalDisplayParts(semanticModel, spanStart, SymbolDisplayFormat.CSharpShortErrorMessageFormat)
                 .SkipWhile(part => !PartKindsToStartWith.Contains(part.Kind))
                 .ToList();
