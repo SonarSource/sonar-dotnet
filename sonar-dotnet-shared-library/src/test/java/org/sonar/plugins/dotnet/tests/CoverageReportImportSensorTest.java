@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import java.io.File;
 import java.io.IOException;
@@ -135,6 +136,8 @@ public class CoverageReportImportSensorTest {
     SensorContextTester context = computeCoverageMeasures(false);
     assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
     assertThat(context.lineHits("foo:Foo.cs", 4)).isEqualTo(0);
+    assertThat(context.coveredConditions("foo:Foo.cs", 1)).isEqualTo(2);
+    assertThat(context.coveredConditions("foo:Foo.cs", 4)).isEqualTo(3);
   }
 
   @Test
@@ -142,6 +145,8 @@ public class CoverageReportImportSensorTest {
     SensorContextTester context = computeCoverageMeasures(true);
     assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
     assertThat(context.lineHits("foo:Foo.cs", 4)).isEqualTo(0);
+    assertThat(context.coveredConditions("foo:Foo.cs", 1)).isEqualTo(2);
+    assertThat(context.coveredConditions("foo:Foo.cs", 4)).isEqualTo(3);
   }
 
   @Test
@@ -214,7 +219,7 @@ public class CoverageReportImportSensorTest {
     assertThat(logTester.logs(LoggerLevel.TRACE)).contains("Counting statistics for '" + fooPath + "'.");
   }
 
-  private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) throws Exception {
+  private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) {
     Coverage coverage = mock(Coverage.class);
     String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
     String bazPath = new File(baseDir, "Baz.java").getAbsolutePath();
@@ -229,6 +234,10 @@ public class CoverageReportImportSensorTest {
       .build());
     when(coverage.hits(bazPath)).thenReturn(ImmutableMap.<Integer, Integer>builder()
       .put(42, 1)
+      .build());
+    when(coverage.getBranchCoverage(fooPath)).thenReturn(ImmutableList.<BranchCoverage>builder()
+      .add(new BranchCoverage(1, 5, 2))
+      .add(new BranchCoverage(4, 3, 3))
       .build());
 
     DefaultInputFile inputFile = new TestInputFileBuilder("foo", baseDir, new File(baseDir, "Foo.cs"))

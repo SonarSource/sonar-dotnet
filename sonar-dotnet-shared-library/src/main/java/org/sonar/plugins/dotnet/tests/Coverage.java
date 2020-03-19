@@ -19,9 +19,12 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 public class Coverage {
@@ -30,6 +33,7 @@ public class Coverage {
   private static final int GROW_FACTOR = 2;
   private static final int SPECIAL_HITS_NON_EXECUTABLE = -1;
   private final Map<String, int[]> hitsByLineAndFile = new HashMap<>();
+  private final Map<String, List<BranchCoverage>> branchCoverageByFile = new HashMap<>();
 
   void addHits(String file, int line, int hits) {
     int[] oldHitsByLine = hitsByLineAndFile.get(file);
@@ -57,6 +61,22 @@ public class Coverage {
     oldHitsByLine[i] += hits;
   }
 
+  public void addBranchCoverage(String file, BranchCoverage branchCoverage){
+    List<BranchCoverage> branchCoverages = branchCoverageByFile.computeIfAbsent(file, k -> new ArrayList<>());
+
+    // If there are multiple branch coverage entries per line these need to be merged; otherwise SQ/SC will display only
+    // one of them.
+    Optional<BranchCoverage> existingCoverage = branchCoverages.stream()
+      .filter(coverage -> coverage.getLine() == branchCoverage.getLine())
+      .findAny();
+
+    if (existingCoverage.isPresent()){
+      existingCoverage.get().add(branchCoverage.getConditions(), branchCoverage.getCoveredConditions());
+    } else {
+      branchCoverages.add(branchCoverage);
+    }
+  }
+
   public Set<String> files() {
     return hitsByLineAndFile.keySet();
   }
@@ -77,7 +97,16 @@ public class Coverage {
     return result;
   }
 
+  List<BranchCoverage> getBranchCoverage(String file){
+    return branchCoverageByFile.getOrDefault(file, new ArrayList<>());
+  }
+
   void mergeWith(Coverage otherCoverage) {
+    mergeLineHits(otherCoverage);
+    mergeBranchCoverage(otherCoverage);
+  }
+
+  private void mergeLineHits(Coverage otherCoverage){
     Map<String, int[]> other = otherCoverage.hitsByLineAndFile;
 
     for (Map.Entry<String, int[]> entry : other.entrySet()) {
@@ -90,4 +119,15 @@ public class Coverage {
     }
   }
 
+  private void mergeBranchCoverage(Coverage otherCoverage){
+    Map<String, List<BranchCoverage>> otherBranchCoverageByFile = otherCoverage.branchCoverageByFile;
+
+    for (Map.Entry<String, List<BranchCoverage>> entry: otherBranchCoverageByFile.entrySet()){
+      String file = entry.getKey();
+
+      for (BranchCoverage branchCoverage : entry.getValue()) {
+        addBranchCoverage(file, branchCoverage);
+      }
+    }
+  }
 }

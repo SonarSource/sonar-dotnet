@@ -109,6 +109,36 @@ public class OpenCoverReportParserTest {
   }
 
   @Test
+  public void branchCoverage() throws Exception {
+    Coverage coverage = new Coverage();
+    String filePath = new File("D:\\git\\BranchCoveragePoc\\BranchCoveragePoc\\Calculator.cs").getCanonicalPath();
+
+    new OpenCoverReportParser(alwaysTrue).accept(new File("src/test/resources/opencover/coverage_branches.xml"), coverage);
+
+    assertThat(coverage.files()).containsOnly(filePath);
+    assertThat(coverage.hits(filePath))
+      .hasSize(9)
+      .contains(
+        Assertions.entry(8, 1),
+        Assertions.entry(9, 1),
+        Assertions.entry(10, 1),
+        Assertions.entry(12, 1),
+        Assertions.entry(13, 1),
+        Assertions.entry(14, 2),
+        Assertions.entry(16, 1),
+        Assertions.entry(18, 1),
+        Assertions.entry(25, 1));
+
+    assertThat(coverage.getBranchCoverage(filePath).size()).isEqualTo(5);
+
+    assertThat(coverage.getBranchCoverage(filePath).get(0)).isEqualTo(new BranchCoverage(9, 4 , 2));
+    assertThat(coverage.getBranchCoverage(filePath).get(1)).isEqualTo(new BranchCoverage(12, 2 , 1));
+    assertThat(coverage.getBranchCoverage(filePath).get(2)).isEqualTo(new BranchCoverage(13, 2, 1));
+    assertThat(coverage.getBranchCoverage(filePath).get(3)).isEqualTo(new BranchCoverage(14, 4, 2));
+    assertThat(coverage.getBranchCoverage(filePath).get(4)).isEqualTo(new BranchCoverage(18, 6, 3));
+  }
+
+  @Test
   public void log_unsupported_file_extension() throws Exception {
     Coverage coverage = new Coverage();
     Predicate<String> alwaysFalse = s -> false;
