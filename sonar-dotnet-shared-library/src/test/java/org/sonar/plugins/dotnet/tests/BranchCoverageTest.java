@@ -22,6 +22,8 @@ package org.sonar.plugins.dotnet.tests;
 
 import org.junit.Test;
 
+import java.util.Objects;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BranchCoverageTest {
@@ -63,6 +65,6 @@ public class BranchCoverageTest {
 
   @Test
   public void givenLineConditionsAndCoveredConditionsHashCodeConsidersAll(){
-    assertThat(new BranchCoverage(3, 2, 1).hashCode()).isEqualTo(32737);
+    assertThat(new BranchCoverage(3, 2, 1).hashCode()).isEqualTo(Objects.hash(3, 2, 1));
   }
 }
