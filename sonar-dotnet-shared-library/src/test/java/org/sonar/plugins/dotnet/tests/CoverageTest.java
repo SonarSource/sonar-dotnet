@@ -96,4 +96,28 @@ public class CoverageTest {
     assertThat(second.getBranchCoverage("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
     assertThat(second.getBranchCoverage("bar.txt")).containsExactly(new BranchCoverage(2, 4, 3), barFirstLine);
   }
+
+  @Test
+  public void testBranchCoverageWithMultipleEntriesOnTheSameLine(){
+    final String fileName = "fileName";
+    Coverage coverage = new Coverage();
+
+    coverage.addBranchCoverage(fileName, new BranchCoverage(1, 2, 1));
+    assertThat(coverage.getBranchCoverage(fileName)).containsExactly(new BranchCoverage(1, 2, 1));
+
+    coverage.addBranchCoverage(fileName, new BranchCoverage(3, 2, 1));
+    assertThat(coverage.getBranchCoverage(fileName)).containsExactly(
+      new BranchCoverage(1, 2, 1),
+      new BranchCoverage(3, 2, 1));
+
+    coverage.addBranchCoverage(fileName, new BranchCoverage(3, 3, 2));
+    assertThat(coverage.getBranchCoverage(fileName)).containsExactly(
+      new BranchCoverage(1, 2, 1),
+      new BranchCoverage(3, 5, 3));
+
+    coverage.addBranchCoverage(fileName, new BranchCoverage(3, 4, 4));
+    assertThat(coverage.getBranchCoverage(fileName)).containsExactly(
+      new BranchCoverage(1, 2, 1),
+      new BranchCoverage(3, 9, 7));
+  }
 }
