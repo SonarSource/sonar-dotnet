@@ -131,6 +131,7 @@ stages:
 
     - job: runIntegrationTestsJob
       displayName: 'Run SonarAnalyzer integration tests'
+      dependsOn: runUnitTestsJob
 
       steps:
       - task: DownloadPipelineArtifact@2
