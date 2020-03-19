@@ -91,6 +91,18 @@ stages:
           configuration: '$(buildConfiguration)'
           msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
 
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish analyzer binaries as pipeline artifact'
+        inputs:
+          path: sonaranalyzer-dotnet/its/binaries/
+          artifact: Binaries
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish rule descriptor binaries as pipeline artifact'
+        inputs:
+          path: sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin
+          artifact: RuleDescriptorBin
+
       - task: VSTest@2
         displayName: "Run SonarAnalyzer unit tests"
         inputs:
