@@ -72,22 +72,6 @@ stages:
             sonar.analysis.prNumber=$(System.PullRequest.PullRequestNumber)
             sonar.analysis.repository=$(Build.Repository.ID)
 
-      - task: SonarCloudPrepare@1
-        displayName: 'Run Code Analysis - Begin Step (master or branch)'
-        condition: ne(variables['Build.Reason'], 'PullRequest')
-        inputs:
-          SonarCloud: 'SonarCloud'
-          organization: 'sonarsource'
-          scannerMode: 'MSBuild'
-          projectKey: 'sonaranalyzer-dotnet'
-          projectName: 'SonarAnalyzer .Net'
-          projectVersion: '$(SONAR_PROJECT_VERSION)'
-          extraProperties: |
-            sonar.analysis.buildNumber=$(Build.BuildId)
-            sonar.analysis.pipeline=$(Build.BuildId)
-            sonar.analysis.sha1=$(Build.SourceVersion)
-            sonar.analysis.repository=$(Build.Repository.ID)
-
       - task: VSBuild@1
         displayName: 'Build SonarAnalyzer solution'
         inputs:
@@ -95,18 +79,6 @@ stages:
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
           msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
-
-      - task: PublishPipelineArtifact@1
-        displayName: 'Publish analyzer binaries as pipeline artifact'
-        inputs:
-          path: sonaranalyzer-dotnet/its/binaries/
-          artifact: Binaries
-
-      - task: PublishPipelineArtifact@1
-        displayName: 'Publish rule descriptor binaries as pipeline artifact'
-        inputs:
-          path: sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin
-          artifact: RuleDescriptorBin
 
       - task: VSTest@2
         displayName: "Run SonarAnalyzer unit tests"
@@ -128,20 +100,6 @@ stages:
         displayName: 'Run Code Analysis - Publish QG'
         inputs:
           pollingTimeoutSec: '300'
-
-    - job: runIntegrationTestsJob
-      displayName: 'Run SonarAnalyzer integration tests'
-      dependsOn: runUnitTestsJob
-
-      steps:
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download binaries to test'
-        inputs:
-          artifact: Binaries
-          targetPath: 'sonaranalyzer-dotnet/its/binaries/'
-
-      - task: NuGetToolInstaller@1
-        displayName: "Install NuGet"
 
       - task: PowerShell@2
         displayName: 'Run SonarAnalyzer integration tests'
