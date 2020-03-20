@@ -15,6 +15,8 @@ pool:
 variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
+  - name: system.debug
+    value: true
 
 resources:
   repositories:
@@ -24,38 +26,6 @@ resources:
       ref:  refs/heads/andrei/dump
 
 stages:
-- stage: 'var_dump'
-  displayName: Print environment
-  jobs:
-    - job: printPredefinedEnvVar
-      displayName: 'Print predefined variables'
-      steps:
-      - powershell: |
-          # https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
-          Write-Host "Build.DefinitionName is '$env:BUILD_DEFINITIONNAME'"
-          Write-Host "Build.DefinitionVersion is '$env:BUILD_DEFINITIONVERSION'"
-          Write-Host "Build.QueuedBy is '$env:BUILD_QUEUEDBY'"
-          Write-Host "Build.RequestedFor is '$env:BUILD_REQUESTEDFOR'"
-          Write-Host "Build.TriggeredBy.BuildId is '$env:BUILD_TRIGGEREDBY_BUILDID'"
-          Write-Host "Build.TriggeredBy.BuildNumber is '$env:BUILD_TRIGGEREDBY_BUILDNUMBER'"
-          Write-Host "Build.Repository.ID is '$env:BUILD_REPOSITORY_ID'"
-          Write-Host "Build.BuildId is '$env:BUILD_BUILDID'"
-          Write-Host "Build.BuildNumber is '$env:BUILD_BUILDNUMBER'"
-          Write-Host "Build.BuildUri is '$env:BUILD_BUILDURI'"
-          Write-Host "Build.SourceBranch is '$env:BUILD_SOURCEBRANCH'"
-          Write-Host "Build.SourceBranchName is '$env:BUILD_SOURCEBRANCHNAME'"
-          Write-Host "Build.SourceVersion is '$env:BUILD_SOURCEVERSION'"
-          Write-Host "Build.Reason is '$env:BUILD_REASON'"
-          Write-Host "System.HostType is '$env:SYSTEM_HOSTTYPE'"
-          Write-Host "System.PullRequest.IsFork is '$env:SYSTEM_PULLREQUEST_ISFORK'"
-          Write-Host "System.PullRequest.PullRequestNumber is '$env:SYSTEM_PULLREQUEST_PULLREQUESTNUMBER'"
-          Write-Host "System.PullRequest.PullRequestId is '$env:SYSTEM_PULLREQUEST_PULLREQUESTID'"
-          Write-Host "System.PullRequest.SourceBranch is '$env:SYSTEM_PULLREQUEST_SOURCEBRANCH'"
-          Write-Host "System.PullRequest.SourceCommitId is '$env:SYSTEM_PULLREQUEST_SOURCECOMMITID'"
-          Write-Host "System.PullRequest.SourceRepositoryURI is '$env:SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI'"
-          Write-Host "System.PullRequest.TargetBranch is '$env:SYSTEM_PULLREQUEST_TARGETBRANCH'"
-        displayName: 'Print predefined environment variables'
-
 - template: stage-with-burgr-notifications.yml@commonTemplates
   parameters:
     burgrName: 'build'
