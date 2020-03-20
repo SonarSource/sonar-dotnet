@@ -21,7 +21,7 @@ resources:
     - repository: commonTemplates
       type: git
       name: pipelines-yaml-templates
-      ref:  refs/tags/v1.0.6
+      ref:  refs/heads/andrei/dump
 
 stages:
 - stage: 'var_dump'
