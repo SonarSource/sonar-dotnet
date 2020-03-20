@@ -216,7 +216,7 @@ namespace Tests.Diagnostics
     {
         public string this[int i] // Indexer does not have a name, signature is used instead
         {
-            get { return ""; } // Noncomliant
+            get { return ""; }
 //          ^^^ Secondary
             set { }
 //          ^^^ Secondary

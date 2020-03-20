@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return methodSymbol2.MethodKind != MethodKind.EventRemove;
         }
 
-        private static string GetIssueMessageText(ICollection<IMethodSymbol> collidingMembers, SemanticModel semanticModel,
+        private static string GetIssueMessageText(IEnumerable<IMethodSymbol> collidingMembers, SemanticModel semanticModel,
             int spanStart)
         {
             var names = collidingMembers
@@ -133,19 +133,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(member => GetMemberDisplayName(member, spanStart, semanticModel))
                 .Distinct()
                 .ToList();
-
-            if (names.Count == 1)
+            return names.Count switch
             {
-                return names[0];
-            }
-
-            if (names.Count == 2)
-            {
-                return $"{names[0]} and {names[1]}";
-            }
-
-            names.Add("...");
-            return string.Join(", ", names);
+                1 => names[0],
+                2 => $"{names[0]} and {names[1]}",
+                _ => names.JoinStr(", ") + ", ..."
+            };
         }
 
         private static readonly ISet<SymbolDisplayPartKind> PartKindsToStartWith = new HashSet<SymbolDisplayPartKind>
@@ -157,7 +150,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string GetMemberDisplayName(IMethodSymbol method, int spanStart, SemanticModel semanticModel)
         {
-            if(method.AssociatedSymbol is IPropertySymbol property && property.IsIndexer)
+            if (method.AssociatedSymbol is IPropertySymbol property && property.IsIndexer)
             {
                 var text = property.ToMinimalDisplayString(semanticModel, spanStart, SymbolDisplayFormat.CSharpShortErrorMessageFormat);
                 return $"'{text}'";

@@ -86,7 +86,6 @@ namespace Tests.Diagnostics
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/3225
-    // Issue is raised correctly, but message does not contain name, because indexers doesn't have an identifier
     public interface IRepro3225<T> : IList<T>, IReadOnlyList<T> // Noncompliant {{Rename or add member 'IReadOnlyList<T>.this[int]' to this interface to resolve ambiguities.}}
     {
     }
