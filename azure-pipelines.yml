@@ -188,6 +188,7 @@ stages:
           projectName: 'SonarAnalyzer .Net'
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
+            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.xml"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
@@ -205,6 +206,7 @@ stages:
           projectName: 'SonarAnalyzer .Net'
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
+            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.xml"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(Build.SourceVersion)
@@ -218,18 +220,12 @@ stages:
           configuration: '$(buildConfiguration)'
           msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
 
-      - task: VSTest@2
-        displayName: "Run SonarAnalyzer unit tests"
-        inputs:
-          testAssemblyVer2: |
-            **\$(BuildConfiguration)\**\*.UnitTest.dll
-            !**\obj\**
-          runInParallel: true
-          runTestsInIsolation: true
-          codeCoverageEnabled: true
-          platform: '$(buildPlatform)'
-          configuration: '$(buildConfiguration)'
-          rerunFailedTests: false
+      - powershell: |
+          cd sonaranalyzer-dotnet\tests
+          $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll" -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage.xml -oldStyle -register:Path32
+          cd ..
+          cd ..
+        displayName: 'Run .Net unit tests'
 
       - task: SonarCloudAnalyze@1
         displayName: 'Run Code Analysis - End Step'
