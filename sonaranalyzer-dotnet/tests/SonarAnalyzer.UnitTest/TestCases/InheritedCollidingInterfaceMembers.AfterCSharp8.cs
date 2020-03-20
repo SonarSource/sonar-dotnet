@@ -214,16 +214,16 @@ namespace Tests.Diagnostics
 
     public interface IIndexer2
     {
-        public string this[int i] // Rule is raised but the message is not clear
+        public string this[int i] // Indexer does not have a name, signature is used instead
         {
-            get { return ""; } // Noncomliant
+            get { return ""; }
 //          ^^^ Secondary
             set { }
 //          ^^^ Secondary
         }
     }
 
-    public interface IIndexerDerived : IIndexer1, IIndexer2 // Noncompliant {{Rename or add members '' and '' to this interface to resolve ambiguities.}}
+    public interface IIndexerDerived : IIndexer1, IIndexer2 // Noncompliant {{Rename or add members 'IIndexer2.this[int]' to this interface to resolve ambiguities.}}
 //                   ^^^^^^^^^^^^^^^
     {
     }

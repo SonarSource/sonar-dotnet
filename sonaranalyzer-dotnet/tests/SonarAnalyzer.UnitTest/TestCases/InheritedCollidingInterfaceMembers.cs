@@ -84,4 +84,9 @@ namespace Tests.Diagnostics
     public interface IDummy
     {
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3225
+    public interface IRepro3225<T> : IList<T>, IReadOnlyList<T> // Noncompliant {{Rename or add member 'IReadOnlyList<T>.this[int]' to this interface to resolve ambiguities.}}
+    {
+    }
 }
