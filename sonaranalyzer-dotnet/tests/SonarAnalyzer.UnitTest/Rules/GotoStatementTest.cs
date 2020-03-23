@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void GotoStatement_VisualBasic()
+        public void GotoStatement_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\GotoStatement.vb", new VB.GotoStatement());
         }
