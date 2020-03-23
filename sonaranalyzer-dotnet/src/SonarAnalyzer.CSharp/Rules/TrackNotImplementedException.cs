@@ -56,19 +56,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ThrowStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var creationExpression = (ObjectCreationExpressionSyntax)c.Node;
-                    var throwExpression = creationExpression.Parent;
-
-                    if (throwExpression.Kind() != SyntaxKindEx.ThrowExpression)
-                    {
-                        return;
-                    }
-
-                    ReportDiagnostic(c, creationExpression, throwExpression);
-                },
-                SyntaxKind.ObjectCreationExpression);
+                 c =>
+                 {
+                     var throwExpression = (ThrowExpressionSyntaxWrapper)c.Node;
+                     ReportDiagnostic(c, throwExpression.Expression, throwExpression);
+                 },
+                 SyntaxKindEx.ThrowExpression);
         }
 
         private static void ReportDiagnostic(SyntaxNodeAnalysisContext c, ExpressionSyntax newExceptionExpression, SyntaxNode throwExpression)
