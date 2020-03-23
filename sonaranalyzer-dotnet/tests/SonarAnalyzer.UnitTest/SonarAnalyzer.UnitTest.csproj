@@ -27,6 +27,8 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.4.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.4.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="3.4.0" />
+    <!-- OpenCover is used by the build script to generate the code coverage report -->
+    <PackageReference Include="OpenCover" Version="4.7.922" />
   </ItemGroup>
 
   <ItemGroup>
