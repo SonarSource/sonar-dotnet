@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.List;
 import java.util.function.Predicate;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
@@ -95,10 +96,41 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(3);
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
-      .startsWith("Found covered lines for id '0' for path ")
+      .startsWith("Found coverage information about '16' lines for file id '0' , path ")
       .endsWith("\\MyLibrary\\Calc.cs'");
+  }
+
+  @Test
+  public void valid_with_getter_setter() throws Exception {
+    // see https://github.com/SonarSource/sonar-dotnet/issues/2622
+
+    Coverage coverage = new Coverage();
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/getter_setter.coveragexml"), coverage);
+
+    String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
+
+    assertThat(coverage.files()).contains(
+      filePath,
+      new File("GetSetTests\\BarTests.cs").getCanonicalPath()
+    );
+
+    assertThat(coverage.hits(filePath))
+      .hasSize(1)
+      .contains(
+        Assertions.entry(11, 1));
+
+    List<BranchCoverage> branchCoverages = coverage.getBranchCoverage(filePath);
+    assertThat(branchCoverages).hasSize(1);
+    assertThat(branchCoverages.get(0)).isEqualTo(new BranchCoverage(11, 2, 1));
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
+      .startsWith("Found coverage information about '1' lines for file id '0' , path ")
+      .endsWith("\\GetSet\\Bar.cs'");
   }
 
   @Test

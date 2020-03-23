@@ -42,14 +42,19 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
   public void accept(File file, Coverage coverage) {
     LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
     LOG.info("Parsing the Visual Studio coverage XML report " + file.getAbsolutePath());
-    new Parser(file, coverage).parse();
+    Parser parser = new Parser(file, coverage);
+    parser.parse();
   }
 
   private class Parser {
 
     private final File file;
-    private final Map<Integer, List<Integer>> coveredLines = new HashMap<>();
-    private final Map<Integer, List<Integer>> uncoveredLines = new HashMap<>();
+    /**
+     * The outer map key is the file ID.
+     * The inner map key is the line number.
+     * The inner map values are a list of Boolean - true when the line is covered, false when it is not.
+     */
+    private final Map<Integer, Map<Integer, List<Boolean>>> coveragePerLinePerFile = new HashMap<>();
     private final Coverage coverage;
 
     Parser(File file, Coverage coverage) {
@@ -80,27 +85,36 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
     }
 
     private void handleModuleTag() {
-      coveredLines.clear();
-      uncoveredLines.clear();
+      coveragePerLinePerFile.clear();
     }
 
+    /**
+     * The Range tags contains the coverage information per line.
+     * Important: some lines can be both covered and uncovered,
+     * e.g. automatic property with covered getter and uncovered setter.
+     */
     private void handleRangeTag(XmlParserHelper xmlParserHelper) {
       int source = xmlParserHelper.getRequiredIntAttribute("source_id");
       String covered = xmlParserHelper.getRequiredAttribute("covered");
 
       int line = xmlParserHelper.getRequiredIntAttribute("start_line");
 
+      coveragePerLinePerFile.putIfAbsent(source, new HashMap<>());
+      Map<Integer, List<Boolean>> lineCoverage = coveragePerLinePerFile.get(source);
+      lineCoverage.putIfAbsent(line, new ArrayList<>());
       if ("yes".equals(covered) || "partial".equals(covered)) {
-        coveredLines.putIfAbsent(source, new ArrayList<>());
-        coveredLines.get(source).add(line);
+        lineCoverage.get(line).add(true);
       } else if ("no".equals(covered)) {
-        uncoveredLines.putIfAbsent(source, new ArrayList<>());
-        uncoveredLines.get(source).add(line);
+        lineCoverage.get(line).add(false);
       } else {
         throw xmlParserHelper.parseError("Unsupported \"covered\" value \"" + covered + "\", expected one of \"yes\", \"partial\" or \"no\"");
       }
     }
 
+    /**
+     * After parsing the Range tags, the source file tags are iterated and
+     * the coverage gets transmitted to the scanner API.
+     */
     private void handleSourceFileTag(XmlParserHelper xmlParserHelper) {
       int id = xmlParserHelper.getRequiredIntAttribute("id");
       String path = xmlParserHelper.getRequiredAttribute("path");
@@ -119,19 +133,34 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         return;
       }
 
-      if (coveredLines.containsKey(id)) {
-        LOG.trace("Found covered lines for id '{}' for path '{}'", id, canonicalPath);
-
-        for (Integer line : coveredLines.get(id)) {
-          coverage.addHits(canonicalPath, line, 1);
-        }
+      Map<Integer, List<Boolean>> fileCoverage = coveragePerLinePerFile.get(id);
+      if (!fileCoverage.isEmpty())
+      {
+        LOG.trace("Found coverage information about '{}' lines for file id '{}' , path '{}'",
+          fileCoverage.size(), id, canonicalPath);
       }
 
-      if (uncoveredLines.containsKey(id)) {
-        LOG.trace("Found uncovered lines for id '{}' for path '{}'", id, canonicalPath);
+      for (Map.Entry<Integer, List<Boolean>> lineCoverage : fileCoverage.entrySet()) {
 
-        for (Integer line : uncoveredLines.get(id)) {
-          coverage.addHits(canonicalPath, line, 0);
+        Integer lineId = lineCoverage.getKey();
+
+        List<Boolean> coverageValues = lineCoverage.getValue();
+        int visits = 0;
+        int entryCount = 0;
+        // process line coverage
+        for (Boolean value : coverageValues)
+        {
+          int visit = value ? 1 : 0;
+          coverage.addHits(canonicalPath, lineId, visit);
+          visits += visit;
+          entryCount++;
+        }
+        // where we have both covered and uncovered, use branch coverage
+        // e.g. auto-implemented property with getter and setter
+        if (entryCount > 1)
+        {
+          // this is not really branch coverage, but it's better than nothing
+          coverage.addBranchCoverage(canonicalPath, new BranchCoverage(lineId, entryCount, visits));
         }
       }
     }
@@ -139,7 +168,6 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
     private void checkRootTag(XmlParserHelper xmlParserHelper) {
       xmlParserHelper.checkRootTag("results");
     }
-
   }
 
 }

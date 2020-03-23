@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Below is the code for which this coverage file has been created,
+together with the commands to generate the file and the tools versions.
+________________________________________________________
+
+namespace GetSet
+{
+    public class Bar
+    {
+        public int ImplicitProperty { get; set; }
+    }
+}
+________________________________________________________
+
+using GetSet;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace GetSetTests
+{
+    [TestClass]
+    public class BarTests
+    {
+        [TestMethod]
+        public void TestSetter()
+        {
+            Bar bar = new Bar();
+            Assert.AreEqual(0, bar.ImplicitProperty);
+        }
+    }
+}
+________________________________________________________
+
+msbuild .\GetSetCoverage.sln /t:Rebuild
+vstest.console.exe /EnableCodeCoverage .\GetSetTests\bin\Debug\GetSetTests.dll
+CodeCoverage.exe analyze /output:"VisualStudio.coveragexml" "PATH_TO_REPORT"
+
+Microsoft (R) Test Execution Command Line Tool Version 16.3.0-preview-20190715-02
+Microsoft (R) Coverage Collection Tool Version 16.0.30319.200
+-->
+<results>
+  <modules>
+    <module name="getsettests.dll" path="getsettests.dll" id="AD29545BFA674942BB39D2056219B41201000000" block_coverage="100.00" line_coverage="100.00" blocks_covered="4" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
+      <functions>
+        <function id="8272" token="0x6000001" name="TestSetter()" namespace="GetSetTests" type_name="BarTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="4" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="13" start_column="9" end_line="13" end_column="10" />
+            <range source_id="0" covered="yes" start_line="14" start_column="13" end_line="14" end_column="33" />
+            <range source_id="0" covered="yes" start_line="15" start_column="13" end_line="15" end_column="54" />
+            <range source_id="0" covered="yes" start_line="16" start_column="9" end_line="16" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="GetSetTests\BarTests.cs">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="getset.dll" path="getset.dll" id="C5314C3FF7DBF64CBB578659F3B3DDCE01000000" block_coverage="50.00" line_coverage="50.00" blocks_covered="1" blocks_not_covered="1" lines_covered="1" lines_partially_covered="0" lines_not_covered="1">
+      <functions>
+        <function id="8272" token="0x6000001" name="get_ImplicitProperty()" namespace="GetSet" type_name="Bar" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="11" start_column="39" end_line="11" end_column="43" />
+          </ranges>
+        </function>
+        <function id="8280" token="0x6000002" name="set_ImplicitProperty(int)" namespace="GetSet" type_name="Bar" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="0" covered="no" start_line="11" start_column="44" end_line="11" end_column="48" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="GetSet\Bar.cs">
+        </source_file>
+      </source_files>
+    </module>
+  </modules>
+</results>

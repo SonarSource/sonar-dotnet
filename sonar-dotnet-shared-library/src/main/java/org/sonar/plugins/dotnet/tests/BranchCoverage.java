@@ -28,7 +28,7 @@ class BranchCoverage {
   private int conditions;
   private int coveredConditions;
 
-  public BranchCoverage(int line, int conditions, int coveredConditions){
+  BranchCoverage(int line, int conditions, int coveredConditions){
     this.line = line;
     this.conditions = conditions;
     this.coveredConditions = coveredConditions;
@@ -42,7 +42,7 @@ class BranchCoverage {
     return conditions;
   }
 
-  public int getCoveredConditions() {
+  int getCoveredConditions() {
     return coveredConditions;
   }
 
@@ -71,5 +71,11 @@ class BranchCoverage {
   @Override
   public int hashCode() {
     return Objects.hash(line, conditions, coveredConditions);
+  }
+
+  @Override
+  public String toString() {
+    return "Branch coverage [line=" + line + ", conditions=" + conditions
+      + ", coveredConditionas=" + coveredConditions + "]";
   }
 }
