@@ -32,7 +32,7 @@ namespace Tests.Diagnostics
         void ByExpression() => throw new NotImplementedException(); // Noncompliant
 //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        int ConditionalEpxression(int i)
+        int ConditionalExpression(int i)
             => i == 0 ? 666 : throw new NotImplementedException(); // Noncompliant
 
         void NullCoalescing(object obj)
