@@ -19,26 +19,26 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class GotoStatementBase : SonarDiagnosticAnalyzer
+    public abstract class GotoStatementBase<TLanguageKindEnum> : SonarDiagnosticAnalyzer
+        where TLanguageKindEnum : struct
     {
         protected const string DiagnosticId = "S907";
         internal const string MessageFormat = "Remove this use of '{0}'.";
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        private readonly DiagnosticDescriptor rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract DiagnosticDescriptor Rule { get; }
-    }
+        protected abstract TLanguageKindEnum[] GotoSyntaxKinds { get; }
+        protected abstract string GoToLabel { get; }
 
-    public abstract class GotoStatementBase<TLanguageKindEnum> : GotoStatementBase
-         where TLanguageKindEnum : struct
-    {
-        protected abstract ImmutableArray<TLanguageKindEnum> GotoSyntaxKinds { get; }
+        protected GotoStatementBase(System.Resources.ResourceManager rspecResources)
+        {
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules
                GeneratedCodeRecognizer,
                 c =>
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetFirstToken().GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation(), GoToLabel));
                 },
                 GotoSyntaxKinds);
         }

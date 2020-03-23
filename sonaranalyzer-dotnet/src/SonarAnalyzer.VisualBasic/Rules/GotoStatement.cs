@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -31,18 +30,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class GotoStatement : GotoStatementBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected override DiagnosticDescriptor Rule => rule;
+        public GotoStatement() : base(RspecStrings.ResourceManager) { }
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
            Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override ImmutableArray<SyntaxKind> GotoSyntaxKinds => new[]
-        {
-            SyntaxKind.GoToKeyword,
-            SyntaxKind.GoToStatement
-        }.ToImmutableArray();
+        protected override SyntaxKind[] GotoSyntaxKinds => new[] { SyntaxKind.GoToStatement };
+
+        protected override string GoToLabel => "GoTo";
     }
 }
