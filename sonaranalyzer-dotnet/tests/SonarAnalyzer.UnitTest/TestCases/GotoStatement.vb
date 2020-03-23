@@ -17,6 +17,12 @@ Label:
 
         End Sub
 
+        Sub OnError()
+            On Error GoTo nextstep ' Compliant, dealt with by S2359
+nextstep:
+            System.Console.WriteLine("Error")
+        End Sub
+
     End Class
 
 End Namespace
