@@ -66,27 +66,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.NumericLiteralExpression);
         }
 
-        public static bool HasIrregularPattern(string numericToken)
+        internal static bool HasIrregularPattern(string numericToken)
         {
-            // hexadecimal en binary prefixes
-            var start = numericToken.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase)
-                || numericToken.StartsWith("0b", StringComparison.InvariantCultureIgnoreCase) ? 2 : 0;
-
-            var length = numericToken.Length - start;
-
-            // UL suffix.
-            if (numericToken.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
-            {
-                length -= 2;
-            }
-            // single suffixes
-            else if ("LDFUMldfum".IndexOf(numericToken[numericToken.Length - 1]) != NotFound)
-            {
-                length--;
-            }
-
-            var stripped = numericToken.Substring(start, length);
-            var splitted = stripped.Split(Dot);
+            var splitted = StripNumericPreAndSuffix(numericToken).Split(Dot);
 
             // ignore multiple dots.
             if (splitted.Length > 2)
@@ -132,19 +114,31 @@ namespace SonarAnalyzer.Rules.CSharp
 
             size = size == NotFound ? decimals[0] : size;
 
-            // the last should not be bigger.
-            if (decimals.Last() > size)
-            {
-                return true;
-            }
-
+            // the last should not be bigger
             // all should have the same size, except the last.
-            if (decimals.Take(decimals.Length - 1).Any(g => g != size))
-            {
-                return true;
-            }
+            return (decimals.Last() > size)
+                || (decimals.Take(decimals.Length - 1).Any(g => g != size));
+        }
 
-            return false;
+        private static string StripNumericPreAndSuffix(string numericToken)
+        {
+            // hexadecimal en binary prefixes
+            var start = numericToken.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase)
+                || numericToken.StartsWith("0b", StringComparison.InvariantCultureIgnoreCase) ? 2 : 0;
+
+            var length = numericToken.Length - start;
+
+            // UL suffix.
+            if (numericToken.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
+            {
+                length -= 2;
+            }
+            // single suffixes
+            else if ("LDFUMldfum".IndexOf(numericToken[numericToken.Length - 1]) != NotFound)
+            {
+                length--;
+            }
+            return numericToken.Substring(start, length);
         }
     }
 }
