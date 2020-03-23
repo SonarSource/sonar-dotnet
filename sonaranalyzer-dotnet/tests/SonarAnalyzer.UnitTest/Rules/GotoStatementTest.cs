@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GotoStatement_CSharp()
+        public void GotoStatement_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\GotoStatement.cs", new CS.GotoStatement());
         }
