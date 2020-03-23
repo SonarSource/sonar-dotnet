@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetFirstToken().GetLocation()));
                 },
-                GotoSyntaxKinds.ToArray());
+                GotoSyntaxKinds);
         }
     }
 }
