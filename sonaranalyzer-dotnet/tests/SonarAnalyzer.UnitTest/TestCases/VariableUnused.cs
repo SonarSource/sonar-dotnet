@@ -96,4 +96,21 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    //https://github.com/SonarSource/sonar-dotnet/issues/3137
+    public class Repro_3137
+    {
+        public void GoGoGo(Logger log)
+        {
+            using var _ = log.BeginScope("XXX"); // Noncompliant FP, discard pattern cannot be used
+        }
+
+        public class Logger
+        {
+            public IDisposable BeginScope(string scope)
+            {
+                return null;
+            }
+        }
+    }
 }
