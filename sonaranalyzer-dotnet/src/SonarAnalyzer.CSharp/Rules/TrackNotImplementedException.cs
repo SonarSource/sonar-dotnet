@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -50,12 +51,25 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (c.SemanticModel.GetTypeInfo(throwStatement.Expression).Type.Is(KnownType.System_NotImplementedException))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, throwStatement.GetLocation()));
-                    }
+                    ReportDiagnostic(c, throwStatement.Expression, throwStatement);
                 },
                 SyntaxKind.ThrowStatement);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                 c =>
+                 {
+                     var throwExpression = (ThrowExpressionSyntaxWrapper)c.Node;
+                     ReportDiagnostic(c, throwExpression.Expression, throwExpression);
+                 },
+                 SyntaxKindEx.ThrowExpression);
+        }
+
+        private static void ReportDiagnostic(SyntaxNodeAnalysisContext c, ExpressionSyntax newExceptionExpression, SyntaxNode throwExpression)
+        {
+            if (c.SemanticModel.GetTypeInfo(newExceptionExpression).Type.Is(KnownType.System_NotImplementedException))
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, throwExpression.GetLocation()));
+            }
         }
     }
 }

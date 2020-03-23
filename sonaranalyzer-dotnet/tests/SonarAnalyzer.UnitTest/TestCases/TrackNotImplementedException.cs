@@ -29,8 +29,19 @@ namespace Tests.Diagnostics
 //          ^^^^^^^^^
         }
 
-        void NotImplemented() =>
-            throw new NotImplementedException(); // FN
+        void ByExpression() => throw new NotImplementedException(); // Noncompliant
+//                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+        int ConditionalExpression(int i)
+            => i == 0 ? 666 : throw new NotImplementedException(); // Noncompliant
+
+        void NullCoalescing(object obj)
+        {
+            x = obj ?? throw new NotImplementedException(); // Noncompliant
+        }
+        private object x;
+
+        NotImplementedException GetNewByExpression() => new NotImplementedException(); // Compliant - not thrown
     }
 
     interface IInterface
