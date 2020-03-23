@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class GotoStatementBase : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S907";
+        protected const string DiagnosticId = "S907";
         internal const string MessageFormat = "Remove this use of 'goto'.";
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
