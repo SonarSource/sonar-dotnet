@@ -4,7 +4,7 @@ Namespace Tests.Diagnostics
 
     Public Class GotoStatement
 
-        Sub GotoStatement(stubid As Boolean)
+        Sub GotoStatement(condition As Boolean)
 
             If stubid Then
                 GoTo Label 'Noncompliant
