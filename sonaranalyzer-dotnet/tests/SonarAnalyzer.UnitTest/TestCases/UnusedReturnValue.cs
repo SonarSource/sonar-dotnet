@@ -95,4 +95,13 @@ namespace Tests.Diagnostics
             static int GetNumberStaticExpression() => 42; // Noncompliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3247
+    public class UnusedValueIsParameter
+    {
+        private int NeverUsed(int neverUsedVal) // FN - the returned value is not used
+        {
+            return neverUsedVal;
+        }
+    }
 }
