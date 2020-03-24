@@ -6,7 +6,7 @@ Namespace Tests.Diagnostics
 
         Sub GotoStatement(condition As Boolean)
 
-            If stubid Then
+            If condition Then
                 GoTo Label 'Noncompliant
             Else
                 Return
