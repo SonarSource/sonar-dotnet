@@ -86,6 +86,12 @@
           "Microsoft.Web.Xdt": "2.1.0"
         }
       },
+      "OpenCover": {
+        "type": "Direct",
+        "requested": "[4.7.922, )",
+        "resolved": "4.7.922",
+        "contentHash": "Mwqq3r8cHj7qazNzWp1K9zmU15amC9bzMvFK83zM4D+ATSN/IOkJGZh6kEvXnTVJjl6LN6U/4QCdRHxulAISuA=="
+      },
       "Castle.Core": {
         "type": "Transitive",
         "resolved": "4.4.0",
