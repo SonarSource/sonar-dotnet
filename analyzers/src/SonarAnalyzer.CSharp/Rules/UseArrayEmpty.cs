@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -33,18 +32,18 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class UseArrayEmpty : UseArrayEmptyBase<SyntaxKind, ArrayCreationExpressionSyntax, InitializerExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public UseArrayEmpty() : base(RspecStrings.ResourceManager) { }
 
-        protected override DiagnosticDescriptor Rule => rule;
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
-
-        protected override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => new SyntaxKind[]
+        protected override SyntaxKind[] SyntaxKindsOfInterest => new SyntaxKind[]
         {
             SyntaxKind.ArrayCreationExpression,
             SyntaxKind.ArrayInitializerExpression,
-        }.ToImmutableArray();
+        };
+
+        protected override string ArrayEmptySuffix => "<T>";
+
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
+            => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override bool IsEmptyCreation(ArrayCreationExpressionSyntax creationNode)
         {

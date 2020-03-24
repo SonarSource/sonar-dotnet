@@ -6,7 +6,9 @@ Namespace Tests.Diagnostics
 
         Public Sub Arrays()
 
-            Dim eplicit(-1) As Integer ' Noncompliant
+            Dim eplicit(-1) As Integer ' Noncompliant {{Declare this empty array using Array.Empty(Of T).}}
+'               ^^^^^^^^^^^^^^^^^^^^^^
+	
             Dim implicit1 As Integer() = New Integer() {} ' Noncompliant
             Dim implicit2 As Integer() = {} ' // Noncompliant
             Dim implicit3() As Integer = {} ' Noncompliant

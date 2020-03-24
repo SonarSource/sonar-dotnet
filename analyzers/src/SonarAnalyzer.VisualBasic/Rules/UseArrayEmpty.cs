@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Immutable;
-using System.Globalization;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -35,20 +32,19 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class UseArrayEmpty : UseArrayEmptyBase<SyntaxKind, ObjectCreationExpressionSyntax, CollectionInitializerSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public UseArrayEmpty() : base(RspecStrings.ResourceManager) { }
 
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
+            => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override DiagnosticDescriptor Rule => rule;
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
-
-        protected override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => new SyntaxKind[]
+        protected override SyntaxKind[] SyntaxKindsOfInterest => new []
         {
             SyntaxKind.VariableDeclarator,
             SyntaxKind.ObjectCreationExpression,
             SyntaxKind.CollectionInitializer,
-        }.ToImmutableArray();
+        };
+
+        protected override string ArrayEmptySuffix => "(Of T)";
 
         protected override bool ShouldReport(SyntaxNode node)
         {

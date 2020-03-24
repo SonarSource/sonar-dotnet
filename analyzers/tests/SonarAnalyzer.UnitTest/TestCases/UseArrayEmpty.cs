@@ -4,7 +4,9 @@
     {
         public UseArrayEmpty()
         {
-            var array = new int[0]; // Noncompliant
+            var array = new int[0]; // Noncompliant {{Declare this empty array using Array.Empty<T>.}}
+//                      ^^^^^^^^^^
+
             var dbl = new int[00]; // Noncompliant
             var other = new int[] { }; // Noncompliant
             var comment = new int[] { /* comment */ }; // Noncompliant

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseArrayEmptys_VisualBasic()
+        public void UseArrayEmptys_VB()
         {
             Verifier.VerifyAnalyzer(
                 @"TestCases\UseArrayEmpty.vb",
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseArrayEmptys_CSharp()
+        public void UseArrayEmptys_CS()
         {
             Verifier.VerifyAnalyzer(
                 @"TestCases\UseArrayEmpty.cs",

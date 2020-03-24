@@ -25,21 +25,28 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UseArrayEmptyBase : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S4210";
-        internal const string MessageFormat = "Declare this empty array using Array.Empty<T>().";
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
-        protected readonly INetFrameworkVersionProvider VersionProvider = new NetFrameworkVersionProvider();
-    }
-
-    public abstract class UseArrayEmptyBase<TLanguageKindEnum, TCreation, TInitialization> : UseArrayEmptyBase
+    public abstract class UseArrayEmptyBase<TLanguageKindEnum, TCreation, TInitialization> : SonarDiagnosticAnalyzer
         where TLanguageKindEnum : struct
         where TCreation : SyntaxNode
         where TInitialization : SyntaxNode
     {
+        internal const string DiagnosticId = "S666";
+        internal const string MessageFormat = "Declare this empty array using Array.Empty{0}.";
+
+        private readonly DiagnosticDescriptor rule;
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected readonly INetFrameworkVersionProvider VersionProvider = new NetFrameworkVersionProvider();
+
+        protected abstract string ArrayEmptySuffix { get; }
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract TLanguageKindEnum[] SyntaxKindsOfInterest { get; }
+
+        protected UseArrayEmptyBase(System.Resources.ResourceManager rspecResources)
+        {
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, string.Format(MessageFormat, ArrayEmptySuffix), rspecResources);
+        }
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -53,10 +60,10 @@ namespace SonarAnalyzer.Rules
                    var node = c.Node;
                    if (ShouldReport(node))
                    {
-                       c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+                       c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
                    }
                },
-               SyntaxKindsOfInterest.ToArray());
+               SyntaxKindsOfInterest);
         }
 
         protected virtual bool ShouldReport(SyntaxNode node)
@@ -67,11 +74,8 @@ namespace SonarAnalyzer.Rules
                 && IsEmptyCreation(creationNode));
         }
 
-        protected abstract bool IsEmptyCreation(TCreation creationNode);
         protected bool IsEmptyInitialization(TInitialization initializationNode) => !initializationNode.ChildNodes().Any();
 
-        protected abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
-        protected abstract DiagnosticDescriptor Rule { get; }
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected abstract bool IsEmptyCreation(TCreation creationNode);
     }
 }
