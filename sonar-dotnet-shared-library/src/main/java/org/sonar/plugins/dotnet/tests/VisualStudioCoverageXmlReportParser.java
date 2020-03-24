@@ -34,7 +34,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
   private static final Logger LOG = Loggers.get(VisualStudioCoverageXmlReportParser.class);
   private final Predicate<String> isSupported;
 
-  public  VisualStudioCoverageXmlReportParser(Predicate<String> isSupported) {
+  VisualStudioCoverageXmlReportParser(Predicate<String> isSupported) {
     this.isSupported = isSupported;
   }
 
@@ -140,6 +140,16 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
           fileCoverage.size(), id, canonicalPath);
       }
 
+      processLineCoverage(canonicalPath, fileCoverage);
+    }
+
+    /**
+     * Iterates over the line coverage metrics of the given file and calls the scanner Coverage API.
+     * @param canonicalFilePath - the path of the file
+     * @param fileCoverage - the key is the line number inside the file, the value is a list of coverage data
+     *                     for the line - true if covered, false if not covered
+     */
+    private void processLineCoverage(String canonicalFilePath, Map<Integer, List<Boolean>> fileCoverage) {
       for (Map.Entry<Integer, List<Boolean>> lineCoverage : fileCoverage.entrySet()) {
 
         Integer lineId = lineCoverage.getKey();
@@ -151,7 +161,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         for (Boolean value : coverageValues)
         {
           int visit = value ? 1 : 0;
-          coverage.addHits(canonicalPath, lineId, visit);
+          coverage.addHits(canonicalFilePath, lineId, visit);
           visits += visit;
           entryCount++;
         }
@@ -160,7 +170,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         if (entryCount > 1)
         {
           // this is not really branch coverage, but it's better than nothing
-          coverage.addBranchCoverage(canonicalPath, new BranchCoverage(lineId, entryCount, visits));
+          coverage.addBranchCoverage(canonicalFilePath, new BranchCoverage(lineId, entryCount, visits));
         }
       }
     }
