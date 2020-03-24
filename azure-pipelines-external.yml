@@ -50,23 +50,6 @@ stages:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
 
-      - task: SonarCloudPrepare@1
-        displayName: 'Run Code Analysis - Begin Step (Pull Request)'
-        condition: eq(variables['Build.Reason'], 'PullRequest')
-        inputs:
-          SonarCloud: 'SonarCloud'
-          organization: 'sonarsource'
-          scannerMode: 'MSBuild'
-          projectKey: 'sonaranalyzer-dotnet'
-          projectName: 'SonarAnalyzer .Net'
-          projectVersion: '$(SONAR_PROJECT_VERSION)'
-          extraProperties: |
-            sonar.analysis.buildNumber=$(Build.BuildId)
-            sonar.analysis.pipeline=$(Build.BuildId)
-            sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
-            sonar.analysis.prNumber=$(System.PullRequest.PullRequestNumber)
-            sonar.analysis.repository=$(Build.Repository.ID)
-
       - task: VSBuild@1
         displayName: 'Build SonarAnalyzer solution'
         inputs:
@@ -87,14 +70,6 @@ stages:
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
           rerunFailedTests: false
-
-      - task: SonarCloudAnalyze@1
-        displayName: 'Run Code Analysis - End Step'
-
-      - task: SonarCloudPublish@1
-        displayName: 'Run Code Analysis - Publish QG'
-        inputs:
-          pollingTimeoutSec: '300'
 
       - task: PowerShell@2
         displayName: 'Run SonarAnalyzer integration tests'
