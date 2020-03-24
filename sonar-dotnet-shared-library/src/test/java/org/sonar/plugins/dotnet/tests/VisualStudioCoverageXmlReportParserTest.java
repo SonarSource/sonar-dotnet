@@ -133,6 +133,37 @@ public class VisualStudioCoverageXmlReportParserTest {
       .endsWith("\\GetSet\\Bar.cs'");
   }
 
+    @Test
+  public void valid_with_multiple_getter_setter_per_line() throws Exception {
+    // see https://github.com/SonarSource/sonar-dotnet/issues/2622
+
+    Coverage coverage = new Coverage();
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/getter_setter_multiple_per_line.coveragexml"), coverage);
+
+    String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
+
+    assertThat(coverage.files()).contains(
+      filePath,
+      new File("GetSetTests\\BarTests.cs").getCanonicalPath()
+    );
+
+    assertThat(coverage.hits(filePath))
+      .hasSize(1)
+      .contains(
+        Assertions.entry(11, 2));
+
+    List<BranchCoverage> branchCoverages = coverage.getBranchCoverage(filePath);
+    assertThat(branchCoverages).hasSize(1);
+    assertThat(branchCoverages.get(0)).isEqualTo(new BranchCoverage(11, 6, 2));
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+      .startsWith("Found coverage information about '1' lines for file id '0' , path ")
+      .endsWith("\\GetSet\\Bar.cs'");
+  }
+
   @Test
   public void valid_with_wrong_file_language() throws Exception {
     Coverage coverage = new Coverage();
