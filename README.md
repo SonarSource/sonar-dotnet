@@ -10,6 +10,9 @@
 SonarC# and SonarVB are [static code analyzers](https://en.wikipedia.org/wiki/Static_program_analysis) for the C# and VB.&#8203;NET
 languages and are part of the [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarcloud.io) and [SonarLint](https://www.sonarlint.org/) code quality and security products. These analyzers allow you to produce safe, reliable and maintainable code by helping you find and correct bugs, vulnerabilities and code smells in your codebase.
 
+
+
+
 ## Features
 
 * 380+ C# rules and 130+ VB.&#8203;NET rules
