@@ -103,6 +103,9 @@ namespace Tests.Diagnostics
         public void GoGoGo(Logger log)
         {
             using var _ = log.BeginScope("XXX"); // Noncompliant FP, discard pattern cannot be used
+
+            // This is a real noncompliant that should be reported. File.Create(path).Dispose(); should be used instead
+            using var stream = File.Create("path"); // Noncompliant
         }
 
         public class Logger
