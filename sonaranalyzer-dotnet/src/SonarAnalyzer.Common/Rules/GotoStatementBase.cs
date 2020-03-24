@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
 
         protected GotoStatementBase(System.Resources.ResourceManager rspecResources)
         {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, string.Format(MessageFormat, gotoLabel), rspecResources);
         }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
