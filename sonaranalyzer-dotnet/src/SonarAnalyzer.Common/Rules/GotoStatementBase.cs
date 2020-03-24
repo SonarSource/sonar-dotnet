@@ -29,15 +29,17 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S907";
         internal const string MessageFormat = "Remove this use of '{0}'.";
+
         private readonly DiagnosticDescriptor rule;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TLanguageKindEnum[] GotoSyntaxKinds { get; }
         protected abstract string GoToLabel { get; }
 
         protected GotoStatementBase(System.Resources.ResourceManager rspecResources)
         {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, string.Format(MessageFormat, gotoLabel), rspecResources);
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, string.Format(MessageFormat, GoToLabel), rspecResources);
         }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
@@ -46,7 +48,7 @@ namespace SonarAnalyzer.Rules
                GeneratedCodeRecognizer,
                 c =>
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation(), GoToLabel));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation()));
                 },
                 GotoSyntaxKinds);
         }

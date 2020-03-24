@@ -7,7 +7,8 @@ Namespace Tests.Diagnostics
         Sub GotoStatement(condition As Boolean)
 
             If condition Then
-                GoTo Label 'Noncompliant
+                GoTo Label 'Noncompliant {{Remove this use of 'GoTo'.}}
+'               ^^^^
             Else
                 Return
             End If
