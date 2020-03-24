@@ -18,7 +18,7 @@ Label:
         End Sub
 
         Sub OnError()
-            On Error GoTo nextstep ' Compliant, dealt with by S2359
+            On Error GoTo nextstep ' Compliant, handled by S2359
 nextstep:
             System.Console.WriteLine("Error")
         End Sub
