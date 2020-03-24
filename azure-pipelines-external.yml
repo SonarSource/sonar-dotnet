@@ -1,0 +1,103 @@
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  - group: sonar-dotnet-variables
+  - group: sonarsource-build-variables
+
+stages:
+- stage: buildAndTests
+  displayName: Build and run tests
+  jobs:
+    - job: runUnitTestsJob
+      displayName: 'Run dotnet unit tests'
+
+      steps:
+      - task: NuGetToolInstaller@1
+        displayName: "Install NuGet"
+
+      - task: Cache@2
+        displayName: Cache NuGet packages
+        inputs:
+          key: 'nuget | "$(Agent.OS)" | **/packages.lock.json'
+          restoreKeys: |
+            nuget | "$(Agent.OS)"
+            nuget
+          path: $(NUGET_PACKAGES)
+
+      - task: NuGetCommand@2
+        displayName: "Restore NuGet packages"
+        inputs:
+          restoreSolution: '$(solution)'
+
+      - powershell: |
+          # Calculate the file path
+          $versionFilePath = "$env:BUILD_SOURCESDIRECTORY\scripts\version\Version.props"
+          Write-Host "Reading the Sonar project version from '${versionFilePath}' ..."
+
+          # Read the version from the file
+          [xml]$versionProps = Get-Content "$versionFilePath"
+          $sonarProjectVersion = $versionProps.Project.PropertyGroup.MainVersion
+          Write-Host "Sonar project version is '${sonarProjectVersion}'"
+
+          # Set the variable to it can be used by other tasks
+          Write-Host "##vso[task.setvariable variable=SONAR_PROJECT_VERSION;]$sonarProjectVersion"
+        displayName: 'Read Sonar project version from the versions.props file'
+
+      - task: VSBuild@1
+        displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
+        inputs:
+          solution: scripts/version/ChangeVersion.proj
+          msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
+
+      - task: SonarCloudPrepare@1
+        displayName: 'Run Code Analysis - Begin Step (Pull Request)'
+        condition: eq(variables['Build.Reason'], 'PullRequest')
+        inputs:
+          SonarCloud: 'SonarCloud'
+          organization: 'sonarsource'
+          scannerMode: 'MSBuild'
+          projectKey: 'sonaranalyzer-dotnet'
+          projectName: 'SonarAnalyzer .Net'
+          projectVersion: '$(SONAR_PROJECT_VERSION)'
+          extraProperties: |
+            sonar.analysis.buildNumber=$(Build.BuildId)
+            sonar.analysis.pipeline=$(Build.BuildId)
+            sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
+            sonar.analysis.prNumber=$(System.PullRequest.PullRequestNumber)
+            sonar.analysis.repository=$(Build.Repository.ID)
+
+      - task: VSBuild@1
+        displayName: 'Build SonarAnalyzer solution'
+        inputs:
+          solution: '$(solution)'
+          platform: '$(buildPlatform)'
+          configuration: '$(buildConfiguration)'
+          msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
+
+      - task: VSTest@2
+        displayName: "Run SonarAnalyzer unit tests"
+        inputs:
+          testAssemblyVer2: |
+            **\$(BuildConfiguration)\**\*.UnitTest.dll
+            !**\obj\**
+          runInParallel: true
+          runTestsInIsolation: true
+          codeCoverageEnabled: true
+          platform: '$(buildPlatform)'
+          configuration: '$(buildConfiguration)'
+          rerunFailedTests: false
+
+      - task: SonarCloudAnalyze@1
+        displayName: 'Run Code Analysis - End Step'
+
+      - task: SonarCloudPublish@1
+        displayName: 'Run Code Analysis - Publish QG'
+        inputs:
+          pollingTimeoutSec: '300'
+
+      - task: PowerShell@2
+        displayName: 'Run SonarAnalyzer integration tests'
+        inputs:
+          filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
+          workingDirectory: 'sonaranalyzer-dotnet/its'
