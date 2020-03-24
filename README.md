@@ -69,7 +69,8 @@ _(they are difficult, can have many side effects and are less likely to be accep
 * We suggest you do not implement new rules unless they are already specified for C# and/or VB.NET on
 our [rules repository](https://jira.sonarsource.com/projects/RSPEC).
 
-Note: our CI does not get automatically triggered on the PRs of external contributors. A member of our team will do the code review and will trigger the CI on demand by adding a comment on the PR `/AzurePipelines run Sonar.Net` (see [Azure Pipelines Comment triggers docs](https://docs.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#comment-triggers)).
+Note: Our CI does not get automatically triggered on the PRs from external contributors. A member of our team will review the code and trigger the CI on demand by adding a comment on the PR `/AzurePipelines run Sonar.Net` (see [Azure Pipelines Comment triggers docs](https://docs.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#comment-triggers)).
+
 
 ### Join us
 
