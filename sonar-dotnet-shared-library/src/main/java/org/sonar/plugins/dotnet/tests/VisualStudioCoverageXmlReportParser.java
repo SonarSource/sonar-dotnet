@@ -50,11 +50,10 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
     private final File file;
     /**
-     * The outer map key is the file ID.
-     * The inner map key is the line number.
-     * The inner map values are a list of Boolean - true when the line is covered, false when it is not.
+     * The key is the file ID.
+     * The value is the line coverage information for that file.
      */
-    private final Map<Integer, Map<Integer, List<Boolean>>> coveragePerLinePerFile = new HashMap<>();
+    private final Map<Integer, LineCoverage> lineCoveragePerFile = new HashMap<>();
     private final Coverage coverage;
 
     Parser(File file, Coverage coverage) {
@@ -85,7 +84,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
     }
 
     private void handleModuleTag() {
-      coveragePerLinePerFile.clear();
+      lineCoveragePerFile.clear();
     }
 
     /**
@@ -99,13 +98,12 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
       int line = xmlParserHelper.getRequiredIntAttribute("start_line");
 
-      coveragePerLinePerFile.putIfAbsent(source, new HashMap<>());
-      Map<Integer, List<Boolean>> lineCoverage = coveragePerLinePerFile.get(source);
-      lineCoverage.putIfAbsent(line, new ArrayList<>());
+      lineCoveragePerFile.putIfAbsent(source, new LineCoverage(source));
+      LineCoverage lineCoverage = lineCoveragePerFile.get(source);
       if ("yes".equals(covered) || "partial".equals(covered)) {
-        lineCoverage.get(line).add(true);
+        lineCoverage.addCoverageForLine(line, true);
       } else if ("no".equals(covered)) {
-        lineCoverage.get(line).add(false);
+        lineCoverage.addCoverageForLine(line, false);
       } else {
         throw xmlParserHelper.parseError("Unsupported \"covered\" value \"" + covered + "\", expected one of \"yes\", \"partial\" or \"no\"");
       }
@@ -133,27 +131,50 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         return;
       }
 
-      Map<Integer, List<Boolean>> fileCoverage = coveragePerLinePerFile.get(id);
-      if (!fileCoverage.isEmpty()) {
-        LOG.trace("Found coverage information about '{}' lines for file id '{}' , path '{}'",
-          fileCoverage.size(), id, canonicalPath);
-      }
+      LineCoverage fileCoverage = lineCoveragePerFile.get(id);
+      fileCoverage.transferData(coverage, canonicalPath);
+    }
 
-      processLineCoverage(canonicalPath, fileCoverage);
+    private void checkRootTag(XmlParserHelper xmlParserHelper) {
+      xmlParserHelper.checkRootTag("results");
+    }
+  }
+
+  private class LineCoverage {
+
+    int fileId;
+
+    // the key is the line ID
+    // the values are a list of booleans, where
+    // - 'True' means the line is covered or partially covered
+    // - 'False' means the line is not covered
+    private Map<Integer, List<Boolean>> coveragePerLine;
+
+    LineCoverage(int fileId) {
+      this.fileId = fileId;
+      this.coveragePerLine = new HashMap<>();
+    }
+
+    void addCoverageForLine(Integer lineId, Boolean isCovered) {
+      coveragePerLine.putIfAbsent(lineId, new ArrayList<>());
+      coveragePerLine.get(lineId).add(isCovered);
     }
 
     /**
-     * Iterates over the line coverage metrics of the given file and calls the scanner Coverage API.
-     * @param canonicalFilePath - the path of the file
-     * @param fileCoverage - the key is the line number inside the file, the value is a list of coverage data
-     *                     for the line - true if covered, false if not covered
+     * Transfers the coverage data to the Coverage object.
+     * @param coverage - the object which centralizes coverage information.
+     * @param canonicalFilePath - the path of the file for which this class contains coverage data.
      */
-    private void processLineCoverage(String canonicalFilePath, Map<Integer, List<Boolean>> fileCoverage) {
-      for (Map.Entry<Integer, List<Boolean>> lineCoverage : fileCoverage.entrySet()) {
+    void transferData(Coverage coverage, String canonicalFilePath) {
+      if (!coveragePerLine.isEmpty()) {
+        LOG.trace("Found coverage information about '{}' lines for file id '{}' , path '{}'",
+          coveragePerLine.size(), fileId, canonicalFilePath);
+      }
+
+      for (Map.Entry<Integer, List<Boolean>> lineCoverage : coveragePerLine.entrySet()) {
 
         Integer lineId = lineCoverage.getKey();
-
-        List<Boolean> coverageValues = lineCoverage.getValue();
+        Iterable<Boolean> coverageValues = lineCoverage.getValue();
         int visits = 0;
         int entryCount = 0;
         // process line coverage
@@ -170,10 +191,6 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
           coverage.addBranchCoverage(canonicalFilePath, new BranchCoverage(lineId, entryCount, visits));
         }
       }
-    }
-
-    private void checkRootTag(XmlParserHelper xmlParserHelper) {
-      xmlParserHelper.checkRootTag("results");
     }
   }
 
