@@ -80,22 +80,22 @@ public class UnitTestResultsImportSensor implements Sensor {
 
     context.<Integer>newMeasure()
       .forMetric(CoreMetrics.TESTS)
-      .on(context.module())
+      .on(context.project())
       .withValue(aggregatedResults.tests())
       .save();
     context.<Integer>newMeasure()
       .forMetric(CoreMetrics.TEST_ERRORS)
-      .on(context.module())
+      .on(context.project())
       .withValue(aggregatedResults.errors())
       .save();
     context.<Integer>newMeasure()
       .forMetric(CoreMetrics.TEST_FAILURES)
-      .on(context.module())
+      .on(context.project())
       .withValue(aggregatedResults.failures())
       .save();
     context.<Integer>newMeasure()
       .forMetric(CoreMetrics.SKIPPED_TESTS)
-      .on(context.module())
+      .on(context.project())
       .withValue(aggregatedResults.skipped())
       .save();
 
@@ -103,10 +103,9 @@ public class UnitTestResultsImportSensor implements Sensor {
     if (executionTime != null) {
       context.<Long>newMeasure()
         .forMetric(CoreMetrics.TEST_EXECUTION_TIME)
-        .on(context.module())
+        .on(context.project())
         .withValue(executionTime)
         .save();
     }
   }
-
 }
