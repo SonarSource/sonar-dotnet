@@ -133,7 +133,7 @@ public class VisualStudioCoverageXmlReportParserTest {
       .endsWith("\\GetSet\\Bar.cs'");
   }
 
-    @Test
+  @Test
   public void valid_with_multiple_getter_setter_per_line() throws Exception {
     // see https://github.com/SonarSource/sonar-dotnet/issues/2622
 
@@ -161,6 +161,66 @@ public class VisualStudioCoverageXmlReportParserTest {
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
       .startsWith("Found coverage information about '1' lines for file id '0' , path ")
+      .endsWith("\\GetSet\\Bar.cs'");
+  }
+
+  @Test
+  public void valid_with_complex_test_case() throws Exception {
+    // see https://github.com/SonarSource/sonar-dotnet/issues/2622
+
+    // the complex case has
+    // - full line coverage
+    // - partial line coverage due to incomplete branch coverage
+    // - partial line coverage due to uncovered getter / setter on a property
+    // - unreachable code
+
+    Coverage coverage = new Coverage();
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/valid_complex_case.coveragexml"), coverage);
+
+    String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
+
+    assertThat(coverage.files()).contains(
+      filePath,
+      new File("GetSetTests\\BarTests.cs").getCanonicalPath()
+    );
+
+    assertThat(coverage.hits(filePath))
+      .hasSize(10)
+      .contains(
+        Assertions.entry(11, 2),
+        Assertions.entry(13, 1),
+        Assertions.entry(15, 2),
+        Assertions.entry(17, 1),
+        Assertions.entry(20, 1),
+        Assertions.entry(21, 3),
+        Assertions.entry(25, 1),
+        Assertions.entry(26, 1),
+        Assertions.entry(28, 1),
+        Assertions.entry(29, 1));
+
+    List<BranchCoverage> branchCoverages = coverage.getBranchCoverage(filePath);
+    // the unreachable code is taken into consideration by the coverage tool
+    assertThat(branchCoverages).hasSize(4).containsOnly(
+      // line 11: CoveredGet , UncoveredProperty and CoveredSet on the same line
+      new BranchCoverage(11, 6, 2),
+
+      // line 13: CoveredGetOnSecondLine
+      new BranchCoverage(13, 2, 1),
+
+      // line 15: CoveredProperty
+      new BranchCoverage(15, 2, 2),
+
+      // line 17: the ArrowMethod has 'partial' coverage inside the VS report; we don't have branch coverage info for it
+
+      // line 21: first line inside BodyMethod - 3 statements (what is after 'goto' is ignored)
+      new BranchCoverage(21, 3, 3)
+    );
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(3);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
+      .startsWith("Found coverage information about '10' lines for file id '1' , path ")
       .endsWith("\\GetSet\\Bar.cs'");
   }
 
