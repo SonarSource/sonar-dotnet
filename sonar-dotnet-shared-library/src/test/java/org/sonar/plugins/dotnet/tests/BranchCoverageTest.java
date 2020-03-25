@@ -67,4 +67,10 @@ public class BranchCoverageTest {
   public void givenLineConditionsAndCoveredConditionsHashCodeConsidersAll(){
     assertThat(new BranchCoverage(3, 2, 1).hashCode()).isEqualTo(Objects.hash(3, 2, 1));
   }
+
+  @Test
+  public void toStringTest() {
+    assertThat(new BranchCoverage(3, 2, 1).toString())
+      .isEqualTo("Branch coverage [line=3, conditions=2, coveredConditions=1]");
+  }
 }

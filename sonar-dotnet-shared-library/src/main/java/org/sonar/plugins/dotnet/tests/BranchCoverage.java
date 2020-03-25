@@ -76,6 +76,6 @@ class BranchCoverage {
   @Override
   public String toString() {
     return "Branch coverage [line=" + line + ", conditions=" + conditions
-      + ", coveredConditionas=" + coveredConditions + "]";
+      + ", coveredConditions=" + coveredConditions + "]";
   }
 }
