@@ -76,36 +76,40 @@ public class UnitTestResultsImportSensor implements Sensor {
   }
 
   void analyze(SensorContext context, UnitTestResults unitTestResults) {
-    UnitTestResults aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider, unitTestResults);
+    try {
+      UnitTestResults aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider, unitTestResults);
 
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.TESTS)
-      .on(context.project())
-      .withValue(aggregatedResults.tests())
-      .save();
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.TEST_ERRORS)
-      .on(context.project())
-      .withValue(aggregatedResults.errors())
-      .save();
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.TEST_FAILURES)
-      .on(context.project())
-      .withValue(aggregatedResults.failures())
-      .save();
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.SKIPPED_TESTS)
-      .on(context.project())
-      .withValue(aggregatedResults.skipped())
-      .save();
-
-    Long executionTime = aggregatedResults.executionTime();
-    if (executionTime != null) {
-      context.<Long>newMeasure()
-        .forMetric(CoreMetrics.TEST_EXECUTION_TIME)
+      context.<Integer>newMeasure()
+        .forMetric(CoreMetrics.TESTS)
         .on(context.project())
-        .withValue(executionTime)
+        .withValue(aggregatedResults.tests())
         .save();
+      context.<Integer>newMeasure()
+        .forMetric(CoreMetrics.TEST_ERRORS)
+        .on(context.project())
+        .withValue(aggregatedResults.errors())
+        .save();
+      context.<Integer>newMeasure()
+        .forMetric(CoreMetrics.TEST_FAILURES)
+        .on(context.project())
+        .withValue(aggregatedResults.failures())
+        .save();
+      context.<Integer>newMeasure()
+        .forMetric(CoreMetrics.SKIPPED_TESTS)
+        .on(context.project())
+        .withValue(aggregatedResults.skipped())
+        .save();
+
+      Long executionTime = aggregatedResults.executionTime();
+      if (executionTime != null) {
+        context.<Long>newMeasure()
+          .forMetric(CoreMetrics.TEST_EXECUTION_TIME)
+          .on(context.project())
+          .withValue(executionTime)
+          .save();
+      }
+    } catch (Exception e) {
+      LOG.warn("Could not import unit test report: '{}'", e.getMessage());
     }
   }
 }

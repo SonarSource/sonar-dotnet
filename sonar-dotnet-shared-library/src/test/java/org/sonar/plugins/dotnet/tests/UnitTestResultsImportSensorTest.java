@@ -30,6 +30,8 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
@@ -43,6 +45,9 @@ public class UnitTestResultsImportSensorTest {
 
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Test
   public void coverage() {
@@ -150,6 +155,24 @@ public class UnitTestResultsImportSensorTest {
 
     assertThat(descriptor.isGlobal()).isTrue();
     assertThat(descriptor.languages()).containsOnly("cs");
+  }
+
+  @Test
+  public void import_two_reports_for_same_project_should_not_throw() throws Exception {
+    UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    SensorContextTester context = SensorContextTester.create(temp.newFolder());
+    UnitTestResults results = mock(UnitTestResults.class);
+
+    when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class)))
+      .thenReturn(results);
+
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+      .analyze(context, results);
+
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "vb", "VB.Net")
+      .analyze(context, results);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Could not import unit test report: 'Can not add the same measure twice'");
   }
 
 }
