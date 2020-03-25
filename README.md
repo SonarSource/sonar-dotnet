@@ -69,8 +69,11 @@ _(they are difficult, can have many side effects and are less likely to be accep
 * We suggest you do not implement new rules unless they are already specified for C# and/or VB.NET on
 our [rules repository](https://jira.sonarsource.com/projects/RSPEC).
 
-Note: our CI runs only on PRs opened by sonarsourcers.
-After your PR is ready, we will cherry-pick your commits and open a PR to run the CI (keeping the attribution).
+Note: Our CI does not get automatically triggered on the PRs from external contributors.
+A member of our team will review the code and trigger the CI on demand by adding a comment on the PR (see [Azure Pipelines Comment triggers docs](https://docs.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#comment-triggers)):
+- `/azp run Sonar.Net.External` - unit and integration tests for the analyzer (optional; can be done before the review)
+- `/azp run Sonar.Net` - full pipeline, including plugin tests and promotion (must be done before merging)
+
 
 ### Join us
 
