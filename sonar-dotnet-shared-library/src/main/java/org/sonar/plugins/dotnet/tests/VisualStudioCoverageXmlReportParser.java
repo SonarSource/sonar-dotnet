@@ -134,8 +134,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
       }
 
       Map<Integer, List<Boolean>> fileCoverage = coveragePerLinePerFile.get(id);
-      if (!fileCoverage.isEmpty())
-      {
+      if (!fileCoverage.isEmpty()) {
         LOG.trace("Found coverage information about '{}' lines for file id '{}' , path '{}'",
           fileCoverage.size(), id, canonicalPath);
       }
@@ -158,8 +157,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         int visits = 0;
         int entryCount = 0;
         // process line coverage
-        for (Boolean value : coverageValues)
-        {
+        for (Boolean value : coverageValues) {
           int visit = value ? 1 : 0;
           coverage.addHits(canonicalFilePath, lineId, visit);
           visits += visit;
@@ -167,8 +165,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         }
         // where we have both covered and uncovered, use branch coverage
         // e.g. auto-implemented property with getter and setter
-        if (entryCount > 1)
-        {
+        if (entryCount > 1) {
           // this is not really branch coverage, but it's better than nothing
           coverage.addBranchCoverage(canonicalFilePath, new BranchCoverage(lineId, entryCount, visits));
         }
