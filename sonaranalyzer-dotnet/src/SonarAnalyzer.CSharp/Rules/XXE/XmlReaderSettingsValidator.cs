@@ -107,11 +107,20 @@ namespace SonarAnalyzer.Rules.XXE
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode invocation)
         {
+            var locationRootNode = location.SourceTree?.GetRoot();
+            var invocationRootNode = invocation.SyntaxTree.GetRoot();
+
+            // We don't look for descendants when the location is outside the current context root
+            if (locationRootNode != null && locationRootNode != invocationRootNode)
+            {
+                return Enumerable.Empty<SyntaxNode>();
+            }
+
             // To optimise, we search first for the class constructor, then for the method declaration.
             // If these cannot be found (e.g. fields), we get the root of the syntax tree and search from there.
-            var root = location.SourceTree?.GetRoot()?.FindNode(location.SourceSpan) ??
+            var root = locationRootNode?.FindNode(location.SourceSpan) ??
                        invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>() ??
-                       invocation.SyntaxTree.GetRoot();
+                       invocationRootNode;
 
             return root.DescendantNodes();
         }

@@ -92,6 +92,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XPathDocument(NetFrameworkVersion version, string testFilePath) => VerifyRule(version, testFilePath);
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void XmlExternalEntityShouldNotBeParsed_NoCrashOnExternalParameterUse()
+        {
+            Verifier.VerifyAnalyzer(
+                new[]
+                {
+                    @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ParameterProvider.cs",
+                    @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ExternalParameter.cs"
+                },
+                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
+                additionalReferences: FrameworkMetadataReference.SystemXml);
+        }
+
         private static void VerifyRule(NetFrameworkVersion version, string testFilePath)
         {
             var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
