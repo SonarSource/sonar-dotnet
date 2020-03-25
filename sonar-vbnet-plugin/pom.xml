@@ -198,7 +198,7 @@
         <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
         <artifactId>sonar-packaging-maven-plugin</artifactId>
         <configuration>
-          <pluginName>SonarVB</pluginName>
+          <pluginName>VB.NET Code Quality and Security</pluginName>
           <pluginClass>org.sonar.plugins.vbnet.VbNetPlugin</pluginClass>
           <skipDependenciesPackaging>true</skipDependenciesPackaging>
           <sonarLintSupported>false</sonarLintSupported>

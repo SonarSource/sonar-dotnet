@@ -1,4 +1,4 @@
-# SonarC\# and SonarVB
+# Code Quality and Security for C\# and VB.NET
 
 [![Build Status](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_apis/build/status/Sonar.Net?branchName=master)](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_build/latest?definitionId=77&branchName=master)
 
@@ -7,8 +7,8 @@
 |Analyzer|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=sonaranalyzer-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=sonaranalyzer-dotnet&metric=coverage)|
 |Plugin|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-csharp&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.dotnet%3Asonar-csharp)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-csharp&metric=coverage)](https://sonarcloud.io/component_measures?id=org.sonarsource.dotnet%3Asonar-csharp&metric=coverage)|
 
-SonarC# and SonarVB are [static code analyzers](https://en.wikipedia.org/wiki/Static_program_analysis) for the C# and VB.&#8203;NET
-languages and are part of the [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarcloud.io) and [SonarLint](https://www.sonarlint.org/) code quality and security products. These analyzers allow you to produce safe, reliable and maintainable code by helping you find and correct bugs, vulnerabilities and code smells in your codebase.
+[Static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) of C# and VB.NET
+languages in [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarcloud.io) and [SonarLint](https://www.sonarlint.org/) code quality and security products. These analyzers allow you to produce safe, reliable and maintainable code by helping you find and correct bugs, vulnerabilities and code smells in your codebase.
 
 ## Features
 

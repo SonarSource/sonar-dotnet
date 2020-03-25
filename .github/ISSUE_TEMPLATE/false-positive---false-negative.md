@@ -29,7 +29,7 @@ Please provide a description of any known workarounds.
 
 ### Related information
 
-* SonarC# Version
+* C#/VB.NET Plugins Version
 * Visual Studio Version
 * MSBuild / dotnet version
 * If running through the Scanner for MSBuild, its version
