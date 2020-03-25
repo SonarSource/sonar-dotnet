@@ -1,6 +1,6 @@
 # Building, Testing and Debugging the .NET Analyzer
 
-All C# and VB .NET analyzers present in SonarLint for Visual Studio, in the SonarQube SonarC# Plugin or in the SonarQube SonarVB plugin are being developed here. These analyzers rely on Roslyn 1.3.2 API.
+All C# and VB.NET code analyzers present in SonarLint for Visual Studio, SonarQube and SonarCloud are being developed here. These analyzers rely on Roslyn 1.3.2 API.
 
 ## Working with the code
 

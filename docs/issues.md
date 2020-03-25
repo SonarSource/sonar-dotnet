@@ -1,6 +1,6 @@
 # Issue tracking
 
-All issues for SonarC\# and SonarVB are tracked using [GitHub Issues](https://github.com/SonarSource/sonar-dotnet/issues).
+All issues for C# and VB.NET code analyzers are tracked using [GitHub Issues](https://github.com/SonarSource/sonar-dotnet/issues).
 
 You're welcome to submit any issue that you've found using the C# and VB.NET code analyzers in:
 
