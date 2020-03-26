@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import java.util.List;
 import java.util.function.Predicate;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
@@ -76,7 +75,7 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(coverage.hits(new File("MyLibrary\\Calc.cs").getCanonicalPath()))
       .hasSize(16)
-      .contains(
+      .containsOnly(
         Assertions.entry(12, 0),
         Assertions.entry(13, 0),
         Assertions.entry(14, 0),
@@ -111,19 +110,17 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
 
-    assertThat(coverage.files()).contains(
+    assertThat(coverage.files()).containsOnly(
       filePath,
       new File("GetSetTests\\BarTests.cs").getCanonicalPath()
     );
 
     assertThat(coverage.hits(filePath))
       .hasSize(1)
-      .contains(
-        Assertions.entry(11, 1));
+      .containsOnly(Assertions.entry(11, 1));
 
-    List<BranchCoverage> branchCoverages = coverage.getBranchCoverage(filePath);
-    assertThat(branchCoverages).hasSize(1);
-    assertThat(branchCoverages.get(0)).isEqualTo(new BranchCoverage(11, 2, 1));
+    assertThat(coverage.getBranchCoverage(filePath)).hasSize(1)
+      .containsExactly(new BranchCoverage(11, 2, 1));
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
@@ -142,19 +139,18 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
 
-    assertThat(coverage.files()).contains(
+    assertThat(coverage.files()).containsOnly(
       filePath,
       new File("GetSetTests\\BarTests.cs").getCanonicalPath()
     );
 
     assertThat(coverage.hits(filePath))
       .hasSize(1)
-      .contains(
-        Assertions.entry(11, 2));
+      .containsOnly(Assertions.entry(11, 2));
 
-    List<BranchCoverage> branchCoverages = coverage.getBranchCoverage(filePath);
-    assertThat(branchCoverages).hasSize(1);
-    assertThat(branchCoverages.get(0)).isEqualTo(new BranchCoverage(11, 6, 2));
+    assertThat(coverage.getBranchCoverage(filePath))
+      .hasSize(1)
+      .containsExactly(new BranchCoverage(11, 6, 2));
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
@@ -179,14 +175,15 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
 
-    assertThat(coverage.files()).contains(
+    assertThat(coverage.files()).containsOnly(
       filePath,
+      new File("GetSet\\FooCallsBar.cs").getCanonicalPath(),
       new File("GetSetTests\\BarTests.cs").getCanonicalPath()
     );
 
     assertThat(coverage.hits(filePath))
       .hasSize(10)
-      .contains(
+      .containsOnly(
         Assertions.entry(11, 2),
         Assertions.entry(13, 1),
         Assertions.entry(15, 2),
@@ -198,9 +195,10 @@ public class VisualStudioCoverageXmlReportParserTest {
         Assertions.entry(28, 1),
         Assertions.entry(29, 1));
 
-    List<BranchCoverage> branchCoverages = coverage.getBranchCoverage(filePath);
     // the unreachable code is taken into consideration by the coverage tool
-    assertThat(branchCoverages).hasSize(4).containsOnly(
+    assertThat(coverage.getBranchCoverage(filePath))
+      .hasSize(4)
+      .containsOnly(
       // line 11: CoveredGet , UncoveredProperty and CoveredSet on the same line
       new BranchCoverage(11, 6, 2),
 
