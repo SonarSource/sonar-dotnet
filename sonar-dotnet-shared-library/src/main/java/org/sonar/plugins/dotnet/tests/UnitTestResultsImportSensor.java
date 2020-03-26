@@ -25,6 +25,7 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
@@ -34,25 +35,27 @@ import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
  */
 public class UnitTestResultsImportSensor implements Sensor {
 
-  private static final Logger LOG = Loggers.get(CoverageReportImportSensor.class);
+  private static final Logger LOG = Loggers.get(UnitTestResultsImportSensor.class);
 
   private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(new File("."), File.separator);
   private final UnitTestResultsAggregator unitTestResultsAggregator;
   private final ProjectDefinition projectDef;
   private final String languageKey;
   private final String languageName;
+  private final AnalysisWarnings analysisWarnings;
 
   public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef,
-                                     DotNetPluginMetadata pluginMetadata) {
-    this(unitTestResultsAggregator, projectDef, pluginMetadata.languageKey(), pluginMetadata.languageName());
+                                     DotNetPluginMetadata pluginMetadata, AnalysisWarnings analysisWarnings) {
+    this(unitTestResultsAggregator, projectDef, pluginMetadata.languageKey(), pluginMetadata.languageName(), analysisWarnings);
   }
 
   public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef,
-    String languageKey, String languageName) {
+    String languageKey, String languageName, AnalysisWarnings analysisWarnings) {
     this.unitTestResultsAggregator = unitTestResultsAggregator;
     this.projectDef = projectDef;
     this.languageKey = languageKey;
     this.languageName = languageName;
+    this.analysisWarnings = analysisWarnings;
   }
 
   @Override
@@ -76,26 +79,35 @@ public class UnitTestResultsImportSensor implements Sensor {
   }
 
   void analyze(SensorContext context, UnitTestResults unitTestResults) {
+    try {
+      saveTestMetrics(context, unitTestResults);
+    } catch (Exception e) {
+      LOG.warn("Could not import unit test report: '{}'", e.getMessage());
+      analysisWarnings.addUnique(String.format("Could not import unit test report for '%s'. Please check the logs for more details.", languageName));
+    }
+  }
+
+  private void saveTestMetrics(SensorContext context, UnitTestResults unitTestResults){
     UnitTestResults aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider, unitTestResults);
 
     context.<Integer>newMeasure()
       .forMetric(CoreMetrics.TESTS)
-      .on(context.module())
+      .on(context.project())
       .withValue(aggregatedResults.tests())
       .save();
     context.<Integer>newMeasure()
       .forMetric(CoreMetrics.TEST_ERRORS)
-      .on(context.module())
+      .on(context.project())
       .withValue(aggregatedResults.errors())
       .save();
     context.<Integer>newMeasure()
       .forMetric(CoreMetrics.TEST_FAILURES)
-      .on(context.module())
+      .on(context.project())
       .withValue(aggregatedResults.failures())
       .save();
     context.<Integer>newMeasure()
       .forMetric(CoreMetrics.SKIPPED_TESTS)
-      .on(context.module())
+      .on(context.project())
       .withValue(aggregatedResults.skipped())
       .save();
 
@@ -103,10 +115,9 @@ public class UnitTestResultsImportSensor implements Sensor {
     if (executionTime != null) {
       context.<Long>newMeasure()
         .forMetric(CoreMetrics.TEST_EXECUTION_TIME)
-        .on(context.module())
+        .on(context.project())
         .withValue(executionTime)
         .save();
     }
   }
-
 }

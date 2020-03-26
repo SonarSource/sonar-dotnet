@@ -30,6 +30,9 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.notifications.AnalysisWarnings;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
@@ -44,19 +47,23 @@ public class UnitTestResultsImportSensorTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
+  @Rule
+  public LogTester logTester = new LogTester();
+
   @Test
   public void coverage() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", analysisWarnings)
       .describe(new DefaultSensorDescriptor());
     SensorContext sensorContext = mock(SensorContext.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", analysisWarnings)
       .execute(sensorContext);
     verifyZeroInteractions(sensorContext);
     when(unitTestResultsAggregator.hasUnitTestResultsProperty()).thenReturn(true);
     ProjectDefinition sub = ProjectDefinition.create();
     ProjectDefinition.create().addSubProject(sub);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, sub, "cs", "C#")
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, sub, "cs", "C#", analysisWarnings)
       .execute(sensorContext);
     verifyZeroInteractions(sensorContext);
   }
@@ -72,11 +79,12 @@ public class UnitTestResultsImportSensorTest {
 
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
+    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
 
     when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class)))
       .thenReturn(results);
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", analysisWarnings)
       .analyze(context, results);
 
     verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
@@ -96,6 +104,7 @@ public class UnitTestResultsImportSensorTest {
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
 
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     UnitTestResults results = mock(UnitTestResults.class);
     when(results.tests()).thenReturn(0);
     when(results.skipped()).thenReturn(1);
@@ -104,7 +113,7 @@ public class UnitTestResultsImportSensorTest {
     when(results.executionTime()).thenReturn(null);
     when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class))).thenReturn(results);
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", analysisWarnings)
       .analyze(context, results);
 
     verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
@@ -121,6 +130,7 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void describe_execute_only_when_key_present() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
 
     Configuration configWithKey = mock(Configuration.class);
     when(configWithKey.hasKey("expectedKey")).thenReturn(true);
@@ -133,7 +143,7 @@ public class UnitTestResultsImportSensorTest {
     });
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", analysisWarnings)
       .describe(descriptor);
 
     assertThat(descriptor.configurationPredicate()).accepts(configWithKey);
@@ -143,13 +153,34 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void describe_is_global_and_only_on_language() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", analysisWarnings)
       .describe(descriptor);
 
     assertThat(descriptor.isGlobal()).isTrue();
     assertThat(descriptor.languages()).containsOnly("cs");
+  }
+
+  @Test
+  public void import_two_reports_for_same_project_should_not_throw() throws Exception {
+    UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
+    SensorContextTester context = SensorContextTester.create(temp.newFolder());
+    UnitTestResults results = mock(UnitTestResults.class);
+
+    when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class)))
+      .thenReturn(results);
+
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", analysisWarnings)
+      .analyze(context, results);
+
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "vb", "VB.NET", analysisWarnings)
+      .analyze(context, results);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Could not import unit test report: 'Can not add the same measure twice'");
+    verify(analysisWarnings).addUnique("Could not import unit test report for 'VB.NET'. Please check the logs for more details.");
   }
 
 }
