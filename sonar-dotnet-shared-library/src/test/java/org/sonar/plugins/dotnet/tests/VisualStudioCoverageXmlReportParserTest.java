@@ -243,4 +243,15 @@ public class VisualStudioCoverageXmlReportParserTest {
       .isEqualTo("Skipping the import of Visual Studio XML code coverage for the invalid file path: z:\\*\"?.cs at line 55");
   }
 
+  @Test
+  public void should_not_fail_with_missing_range_information() {
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/no_ranges.coveragexml"), mock(Coverage.class));
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+      .startsWith("Found coverage information about '10' lines for file id '0' , path ")
+      .endsWith("\\MyLibrary\\Calc.cs'");
+  }
+
 }

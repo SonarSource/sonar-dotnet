@@ -132,7 +132,10 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
       }
 
       LineCoverage fileCoverage = lineCoveragePerFile.get(id);
-      fileCoverage.transferData(coverage, canonicalPath);
+      if (fileCoverage != null)
+      {
+        fileCoverage.transferData(coverage, canonicalPath);
+      }
     }
 
     private void checkRootTag(XmlParserHelper xmlParserHelper) {
@@ -140,7 +143,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
     }
   }
 
-  private class LineCoverage {
+  private static class LineCoverage {
 
     int fileId;
 
