@@ -75,7 +75,7 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(coverage.hits(new File("MyLibrary\\Calc.cs").getCanonicalPath()))
       .hasSize(16)
-      .contains(
+      .containsOnly(
         Assertions.entry(12, 0),
         Assertions.entry(13, 0),
         Assertions.entry(14, 0),
@@ -95,10 +95,126 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
+      .startsWith("Found coverage information about '16' lines for file id '0' , path ")
+      .endsWith("\\MyLibrary\\Calc.cs'");
+  }
+
+  @Test
+  public void valid_with_getter_setter() throws Exception {
+    // see https://github.com/SonarSource/sonar-dotnet/issues/2622
+
+    Coverage coverage = new Coverage();
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/getter_setter.coveragexml"), coverage);
+
+    String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
+
+    assertThat(coverage.files()).containsOnly(
+      filePath,
+      new File("GetSetTests\\BarTests.cs").getCanonicalPath()
+    );
+
+    assertThat(coverage.hits(filePath)).containsExactly(Assertions.entry(11, 1));
+
+    assertThat(coverage.getBranchCoverage(filePath))
+      .containsExactly(new BranchCoverage(11, 2, 1));
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
+      .startsWith("Found coverage information about '1' lines for file id '0' , path ")
+      .endsWith("\\GetSet\\Bar.cs'");
+  }
+
+  @Test
+  public void valid_with_multiple_getter_setter_per_line() throws Exception {
+    // see https://github.com/SonarSource/sonar-dotnet/issues/2622
+
+    Coverage coverage = new Coverage();
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/getter_setter_multiple_per_line.coveragexml"), coverage);
+
+    String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
+
+    assertThat(coverage.files()).containsOnly(
+      filePath,
+      new File("GetSetTests\\BarTests.cs").getCanonicalPath()
+    );
+
+    assertThat(coverage.hits(filePath)).containsOnly(Assertions.entry(11, 2));
+
+    assertThat(coverage.getBranchCoverage(filePath))
+      .containsExactly(new BranchCoverage(11, 6, 2));
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+      .startsWith("Found coverage information about '1' lines for file id '0' , path ")
+      .endsWith("\\GetSet\\Bar.cs'");
+  }
+
+  @Test
+  public void valid_with_complex_test_case() throws Exception {
+    // see https://github.com/SonarSource/sonar-dotnet/issues/2622
+
+    // the complex case has
+    // - full line coverage
+    // - partial line coverage due to incomplete branch coverage
+    // - partial line coverage due to uncovered getter / setter on a property
+    // - unreachable code
+
+    Coverage coverage = new Coverage();
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/valid_complex_case.coveragexml"), coverage);
+
+    String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
+
+    assertThat(coverage.files()).containsOnly(
+      filePath,
+      new File("GetSet\\FooCallsBar.cs").getCanonicalPath(),
+      new File("GetSetTests\\BarTests.cs").getCanonicalPath()
+    );
+
+    assertThat(coverage.hits(filePath))
+      .hasSize(10)
+      .containsOnly(
+        Assertions.entry(11, 2),
+        Assertions.entry(13, 1),
+        Assertions.entry(15, 2),
+        Assertions.entry(17, 1),
+        Assertions.entry(20, 1),
+        Assertions.entry(21, 3),
+        Assertions.entry(25, 1),
+        Assertions.entry(26, 1),
+        Assertions.entry(28, 1),
+        Assertions.entry(29, 1));
+
+    // the unreachable code is taken into consideration by the coverage tool
+    assertThat(coverage.getBranchCoverage(filePath))
+      .hasSize(4)
+      .containsOnly(
+      // line 11: CoveredGet , UncoveredProperty and CoveredSet on the same line
+      new BranchCoverage(11, 6, 2),
+
+      // line 13: CoveredGetOnSecondLine
+      new BranchCoverage(13, 2, 1),
+
+      // line 15: CoveredProperty
+      new BranchCoverage(15, 2, 2),
+
+      // line 17: the ArrowMethod has 'partial' coverage inside the VS report; we don't have branch coverage info for it
+
+      // line 21: first line inside BodyMethod - 3 statements (what is after 'goto' is ignored)
+      new BranchCoverage(21, 3, 3)
+    );
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(3);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
-      .startsWith("Found covered lines for id '0' for path ")
-      .endsWith("\\MyLibrary\\Calc.cs'");
+      .startsWith("Found coverage information about '10' lines for file id '1' , path ")
+      .endsWith("\\GetSet\\Bar.cs'");
   }
 
   @Test
@@ -125,6 +241,17 @@ public class VisualStudioCoverageXmlReportParserTest {
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
     assertThat(logTester.logs(LoggerLevel.WARN).get(0))
       .isEqualTo("Skipping the import of Visual Studio XML code coverage for the invalid file path: z:\\*\"?.cs at line 55");
+  }
+
+  @Test
+  public void should_not_fail_with_missing_range_information() {
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/no_ranges.coveragexml"), mock(Coverage.class));
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+      .startsWith("Found coverage information about '10' lines for file id '0' , path ")
+      .endsWith("\\MyLibrary\\Calc.cs'");
   }
 
 }

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Below is the code for which this coverage file has been created,
+together with the commands to generate the file and the tools versions.
+
+Note: the file paths were manually changed inside the report to be relative.
+________________________________________________________
+
+namespace GetSet
+{
+    public class Bar
+    {
+        public int CoveredGet { get; set; } public int UncoveredProperty { get; set; } public int CoveredSet { get; set; }
+
+        public int CoveredGetOnSecondLine { get; set; }
+
+        public int CoveredProperty { get; set; }
+
+        public int ArrowMethod(bool condition) => condition ? CoveredGetOnSecondLine : UncoveredProperty;
+
+        public int BodyMethod()
+        {
+            var x = CoveredProperty; CoveredProperty = 1; goto label; UncoveredProperty = 1;
+
+            UncoveredProperty = 1;
+
+            label:
+            CoveredSet = 1;
+
+            return CoveredGet;
+        }
+    }
+}
+
+namespace GetSet
+{
+    public class FooCallsBar
+    {
+        public void CallBar(Bar bar)
+        {
+            Console.WriteLine(bar.CoveredGet);
+            Console.WriteLine(bar.CoveredProperty);
+        }
+    }
+}
+________________________________________________________
+
+using GetSet;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace GetSetTests
+{
+    [TestClass]
+    public class BarTests
+    {
+        [TestMethod]
+        public void CallMethods()
+        {
+            Bar bar = new Bar();
+            bar.BodyMethod();
+            bar.ArrowMethod(true);
+        }
+
+        [TestMethod]
+        public void CallBarViaFoo()
+        {
+            FooCallsBar fooCallsBar = new FooCallsBar();
+            fooCallsBar.CallBar(new Bar());
+        }
+    }
+}
+________________________________________________________
+
+msbuild .\GetSetCoverage.sln /t:Rebuild
+vstest.console.exe /EnableCodeCoverage .\GetSetTests\bin\Debug\GetSetTests.dll
+CodeCoverage.exe analyze /output:"VisualStudio.coveragexml" "PATH_TO_REPORT"
+
+Microsoft (R) Test Execution Command Line Tool Version 16.3.0-preview-20190715-02
+Microsoft (R) Coverage Collection Tool Version 16.0.30319.200
+-->
+<results>
+  <modules>
+    <module name="getset.dll" path="getset.dll" id="4F29D1E955107F4585CB1B5DC2CC1F9001000000" block_coverage="74.07" line_coverage="71.43" blocks_covered="20" blocks_not_covered="7" lines_covered="15" lines_partially_covered="1" lines_not_covered="5">
+      <functions>
+        <function id="8272" token="0x6000001" name="get_CoveredGet()" namespace="GetSet" type_name="Bar" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="11" start_column="33" end_line="11" end_column="37" />
+          </ranges>
+        </function>
+        <function id="8280" token="0x6000002" name="set_CoveredGet(int)" namespace="GetSet" type_name="Bar" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="11" start_column="38" end_line="11" end_column="42" />
+          </ranges>
+        </function>
+        <function id="8289" token="0x6000003" name="get_UncoveredProperty()" namespace="GetSet" type_name="Bar" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="11" start_column="76" end_line="11" end_column="80" />
+          </ranges>
+        </function>
+        <function id="8297" token="0x6000004" name="set_UncoveredProperty(int)" namespace="GetSet" type_name="Bar" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="11" start_column="81" end_line="11" end_column="85" />
+          </ranges>
+        </function>
+        <function id="8306" token="0x6000005" name="get_CoveredSet()" namespace="GetSet" type_name="Bar" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="11" start_column="112" end_line="11" end_column="116" />
+          </ranges>
+        </function>
+        <function id="8314" token="0x6000006" name="set_CoveredSet(int)" namespace="GetSet" type_name="Bar" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="11" start_column="117" end_line="11" end_column="121" />
+          </ranges>
+        </function>
+        <function id="8323" token="0x6000007" name="get_CoveredGetOnSecondLine()" namespace="GetSet" type_name="Bar" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="13" start_column="45" end_line="13" end_column="49" />
+          </ranges>
+        </function>
+        <function id="8331" token="0x6000008" name="set_CoveredGetOnSecondLine(int)" namespace="GetSet" type_name="Bar" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="13" start_column="50" end_line="13" end_column="54" />
+          </ranges>
+        </function>
+        <function id="8340" token="0x6000009" name="get_CoveredProperty()" namespace="GetSet" type_name="Bar" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="15" start_column="38" end_line="15" end_column="42" />
+          </ranges>
+        </function>
+        <function id="8348" token="0x600000a" name="set_CoveredProperty(int)" namespace="GetSet" type_name="Bar" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="15" start_column="43" end_line="15" end_column="47" />
+          </ranges>
+        </function>
+        <function id="8357" token="0x600000b" name="ArrowMethod(bool)" namespace="GetSet" type_name="Bar" block_coverage="60.00" line_coverage="0.00" blocks_covered="3" blocks_not_covered="2" lines_covered="0" lines_partially_covered="1" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="partial" start_line="17" start_column="51" end_line="17" end_column="105" />
+          </ranges>
+        </function>
+        <function id="8376" token="0x600000c" name="BodyMethod()" namespace="GetSet" type_name="Bar" block_coverage="100.00" line_coverage="100.00" blocks_covered="7" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="20" start_column="9" end_line="20" end_column="10" />
+            <range source_id="1" covered="yes" start_line="21" start_column="13" end_line="21" end_column="37" />
+            <range source_id="1" covered="yes" start_line="21" start_column="38" end_line="21" end_column="58" />
+            <range source_id="1" covered="yes" start_line="21" start_column="59" end_line="21" end_column="70" />
+            <range source_id="1" covered="yes" start_line="25" start_column="13" end_line="25" end_column="19" />
+            <range source_id="1" covered="yes" start_line="26" start_column="13" end_line="26" end_column="28" />
+            <range source_id="1" covered="yes" start_line="28" start_column="13" end_line="28" end_column="31" />
+            <range source_id="1" covered="yes" start_line="29" start_column="9" end_line="29" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8435" token="0x600000e" name="CallBar(GetSet.Bar)" namespace="GetSet" type_name="FooCallsBar" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="8" start_column="9" end_line="8" end_column="10" />
+            <range source_id="0" covered="yes" start_line="9" start_column="13" end_line="9" end_column="47" />
+            <range source_id="0" covered="yes" start_line="10" start_column="13" end_line="10" end_column="52" />
+            <range source_id="0" covered="yes" start_line="11" start_column="9" end_line="11" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="GetSet\FooCallsBar.cs">
+        </source_file>
+        <source_file id="1" path="GetSet\Bar.cs">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="getsettests.dll" path="getsettests.dll" id="7CA67A8D14F6144B94385F5DF112418B01000000" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+      <functions>
+        <function id="8272" token="0x6000001" name="CallMethods()" namespace="GetSetTests" type_name="BarTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="4" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="13" start_column="9" end_line="13" end_column="10" />
+            <range source_id="0" covered="yes" start_line="14" start_column="13" end_line="14" end_column="33" />
+            <range source_id="0" covered="yes" start_line="15" start_column="13" end_line="15" end_column="30" />
+            <range source_id="0" covered="yes" start_line="16" start_column="13" end_line="16" end_column="35" />
+            <range source_id="0" covered="yes" start_line="17" start_column="9" end_line="17" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8308" token="0x6000002" name="CallBarViaFoo()" namespace="GetSetTests" type_name="BarTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="4" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="21" start_column="9" end_line="21" end_column="10" />
+            <range source_id="0" covered="yes" start_line="22" start_column="13" end_line="22" end_column="57" />
+            <range source_id="0" covered="yes" start_line="23" start_column="13" end_line="23" end_column="44" />
+            <range source_id="0" covered="yes" start_line="24" start_column="9" end_line="24" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="GetSetTests\BarTests.cs">
+        </source_file>
+      </source_files>
+    </module>
+  </modules>
+</results>
