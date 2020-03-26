@@ -134,12 +134,61 @@ public class OpenCoverReportParserTest {
     assertThat(coverage.getBranchCoverage(filePath).get(0)).isEqualTo(new BranchCoverage(9, 4 , 2));
     assertThat(coverage.getBranchCoverage(filePath).get(1)).isEqualTo(new BranchCoverage(12, 2 , 1));
     assertThat(coverage.getBranchCoverage(filePath).get(2)).isEqualTo(new BranchCoverage(13, 2, 1));
-    assertThat(coverage.getBranchCoverage(filePath).get(3)).isEqualTo(new BranchCoverage(14, 4, 2));
+    assertThat(coverage.getBranchCoverage(filePath).get(3)).isEqualTo(new BranchCoverage(14, 6, 4));
     assertThat(coverage.getBranchCoverage(filePath).get(4)).isEqualTo(new BranchCoverage(18, 6, 3));
   }
 
+    @Test
+  public void branchCoverage_getter_setter_complex_case() throws Exception {
+    Coverage coverage = new Coverage();
+    String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
+
+    new OpenCoverReportParser(alwaysTrue).accept(new File("src/test/resources/opencover/valid_complex_case.xml"), coverage);
+
+    assertThat(coverage.files()).containsOnly(
+      filePath,
+      new File("GetSet\\FooCallsBar.cs").getCanonicalPath(),
+      new File("GetSetTests\\BarTests.cs").getCanonicalPath()
+    );
+    assertThat(coverage.hits(filePath))
+      .hasSize(10)
+      .contains(
+        // 2 hits from tests for Bar, 1 hit from tests for FooCallsBar
+        Assertions.entry(11, 3),
+        Assertions.entry(13, 1),
+        // 2 hits from tests for Bar, 1 hit from tests for FooCallsBar
+        Assertions.entry(15, 3),
+        Assertions.entry(17, 1),
+        Assertions.entry(20, 1),
+        Assertions.entry(21, 3),
+        Assertions.entry(25, 1),
+        Assertions.entry(26, 1),
+        Assertions.entry(28, 1),
+        Assertions.entry(29, 1));
+
+      // the unreachable code is taken into consideration by the coverage tool
+      assertThat(coverage.getBranchCoverage(filePath))
+        .hasSize(5)
+        .containsOnly(
+          // line 11: CoveredGet , UncoveredProperty and CoveredSet on the same line
+          new BranchCoverage(11, 6, 2),
+
+          // line 13: CoveredGetOnSecondLine
+          new BranchCoverage(13, 2, 1),
+
+          // line 15: CoveredProperty
+          new BranchCoverage(15, 2, 2),
+
+          // line 17: ArrowMethod
+          new BranchCoverage(17, 2, 1),
+
+          // line 21: first line inside BodyMethod - 3 statements (what is after 'goto' is ignored)
+          new BranchCoverage(21, 3, 3)
+        );
+  }
+
   @Test
-  public void log_unsupported_file_extension() throws Exception {
+  public void log_unsupported_file_extension() {
     Coverage coverage = new Coverage();
     Predicate<String> alwaysFalse = s -> false;
     // to easily check the logs (it has only one coverage entry)

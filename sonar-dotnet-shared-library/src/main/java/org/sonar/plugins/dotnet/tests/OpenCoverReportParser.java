@@ -33,7 +33,7 @@ public class OpenCoverReportParser implements CoverageParser {
   private static final Logger LOG = Loggers.get(OpenCoverReportParser.class);
   private final Predicate<String> isSupported;
 
-  public OpenCoverReportParser(Predicate<String> isSupported) {
+  OpenCoverReportParser(Predicate<String> isSupported) {
     this.isSupported = isSupported;
   }
 
@@ -49,11 +49,13 @@ public class OpenCoverReportParser implements CoverageParser {
     private final File file;
     private final Map<String, String> files = new HashMap<>();
     private final Coverage coverage;
+    private final Map<String, LineComplexCoverage> complexCoveragePerFile;
     private String fileRef;
 
     Parser(File file, Coverage coverage) {
       this.file = file;
       this.coverage = coverage;
+      this.complexCoveragePerFile = new HashMap<>();
     }
 
     public void parse() {
@@ -75,6 +77,10 @@ public class OpenCoverReportParser implements CoverageParser {
         } else if ("SequencePoint".equals(tagName)) {
           handleSegmentPointTag(xmlParserHelper);
         }
+      }
+      // treat the cases of multiple element coverage per file
+      for (LineComplexCoverage complexCoverage : complexCoveragePerFile.values()) {
+        complexCoverage.transferData(coverage);
       }
     }
 
@@ -98,6 +104,9 @@ public class OpenCoverReportParser implements CoverageParser {
       // Open Cover lacks model documentation but the details can be found in the source code:
       // https://github.com/OpenCover/opencover/blob/4.7.922/main/OpenCover.Framework/Model/SequencePoint.cs
       int line = xmlParserHelper.getRequiredIntAttribute("sl");
+      int endLine = xmlParserHelper.getRequiredIntAttribute("el");
+      int startColumn = xmlParserHelper.getRequiredIntAttribute("sc");
+      int endColumn = xmlParserHelper.getRequiredIntAttribute("ec");
       int vc = xmlParserHelper.getRequiredIntAttribute("vc");
       int branchExitsCount = xmlParserHelper.getIntAttributeOrZero("bec");
       int branchExitsVisit = xmlParserHelper.getIntAttributeOrZero("bev");
@@ -119,6 +128,13 @@ public class OpenCoverReportParser implements CoverageParser {
           }
 
           coverage.addHits(identifiedFile, line, vc);
+
+          if (line == endLine) {
+            String elementIdentifier = String.format("%d-%d-%d-%d", line, endLine, startColumn, endColumn);
+            complexCoveragePerFile.putIfAbsent(identifiedFile, new LineComplexCoverage(identifiedFile));
+            LineComplexCoverage lineComplexCoverage = complexCoveragePerFile.get(identifiedFile);
+            lineComplexCoverage.addCoverageForLineAndMethod(line, elementIdentifier, vc);
+          }
         } else {
           LOG.debug("Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +
               " is not indexed or does not have the supported language.",
@@ -131,4 +147,79 @@ public class OpenCoverReportParser implements CoverageParser {
 
   }
 
+  /**
+   * This class is useful when on a single line there are multiple methods. Some may be covered, some not
+   * (e.g. an auto-implemented property can have a covered getter and un-covered setter)
+   *
+   * So this class holds information about methods which are declared on a single line.
+   */
+  private static class LineComplexCoverage {
+
+    String fileId;
+
+    // the key is the line ID
+    // the value is a list of method hits
+    private Map<Integer, MethodHits> methodHitsPerLine;
+
+    LineComplexCoverage(String fileId) {
+      this.fileId = fileId;
+      this.methodHitsPerLine = new HashMap<>();
+    }
+
+    void addCoverageForLineAndMethod(Integer lineId, String methodName, int hits) {
+      methodHitsPerLine.putIfAbsent(lineId, new MethodHits());
+      MethodHits methodHits = methodHitsPerLine.get(lineId);
+      methodHits.addHit(methodName, hits);
+    }
+
+    /**
+     * Transfers the coverage data to the Coverage object.
+     * @param coverage - the object which centralizes coverage information.
+     */
+    void transferData(Coverage coverage) {
+      LOG.trace("Found coverage information about '{}' lines having single-line method declarations for file '{}'",
+        methodHitsPerLine.size(), fileId);
+
+      for (Map.Entry<Integer, MethodHits> lineMethodHits : methodHitsPerLine.entrySet()) {
+
+        Integer lineId = lineMethodHits.getKey();
+        MethodHits methodHits = lineMethodHits.getValue();
+        // where we have both covered and uncovered, use branch coverage
+        // e.g. auto-implemented property with getter and setter
+        if (methodHits.size() > 1) {
+          int coveredMethods = methodHits.countMethodsWithCoverage();
+          // this is not really branch coverage, but it's better than nothing
+          coverage.addBranchCoverage(fileId, new BranchCoverage(lineId, methodHits.size(), coveredMethods));
+        }
+      }
+    }
+
+    private static class MethodHits {
+      private Map<String, Integer> methodHits;
+
+      private MethodHits() {
+        methodHits = new HashMap<>();
+      }
+
+      int size() {
+        return methodHits.size();
+      }
+
+      int countMethodsWithCoverage() {
+        int number = 0;
+        for (Integer hits : methodHits.values()) {
+          if (hits > 0) {
+            number++;
+          }
+        }
+        return number;
+      }
+
+      void addHit(String methodName, int hits) {
+        methodHits.putIfAbsent(methodName, 0);
+        Integer oldVal = methodHits.get(methodName);
+        methodHits.put(methodName, oldVal + hits);
+      }
+    }
+  }
 }
