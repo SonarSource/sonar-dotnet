@@ -115,11 +115,9 @@ public class VisualStudioCoverageXmlReportParserTest {
       new File("GetSetTests\\BarTests.cs").getCanonicalPath()
     );
 
-    assertThat(coverage.hits(filePath))
-      .hasSize(1)
-      .containsOnly(Assertions.entry(11, 1));
+    assertThat(coverage.hits(filePath)).containsExactly(Assertions.entry(11, 1));
 
-    assertThat(coverage.getBranchCoverage(filePath)).hasSize(1)
+    assertThat(coverage.getBranchCoverage(filePath))
       .containsExactly(new BranchCoverage(11, 2, 1));
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
@@ -144,12 +142,9 @@ public class VisualStudioCoverageXmlReportParserTest {
       new File("GetSetTests\\BarTests.cs").getCanonicalPath()
     );
 
-    assertThat(coverage.hits(filePath))
-      .hasSize(1)
-      .containsOnly(Assertions.entry(11, 2));
+    assertThat(coverage.hits(filePath)).containsOnly(Assertions.entry(11, 2));
 
     assertThat(coverage.getBranchCoverage(filePath))
-      .hasSize(1)
       .containsExactly(new BranchCoverage(11, 6, 2));
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
