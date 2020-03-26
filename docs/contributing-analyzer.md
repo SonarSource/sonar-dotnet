@@ -116,5 +116,5 @@ From Visual Studio, make sure `SonarAnalyzer.Vsix.csproj` is selected as startup
 
 ## Contributing
 
-Please see [Contributing Code](../CONTRIBUTING.md) for details on
+Please see the [How to contribute](../README.md#how-to-contribute) section for details on
 contributing changes back to the code.

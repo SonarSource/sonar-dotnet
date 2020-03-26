@@ -40,4 +40,4 @@ To run the ITs, from your command prompt, you can either:
 
 ## Contributing
 
-Please see [Contributing Code](../CONTRIBUTING.md) for details on contributing changes back to the code.
+Please see the [How to contribute](../README.md#how-to-contribute) section  for details on contributing changes back to the code.
