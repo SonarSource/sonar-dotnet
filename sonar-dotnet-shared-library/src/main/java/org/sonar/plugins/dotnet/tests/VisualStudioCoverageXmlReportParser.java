@@ -132,8 +132,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
       }
 
       LineCoverage fileCoverage = lineCoveragePerFile.get(id);
-      if (fileCoverage != null)
-      {
+      if (fileCoverage != null) {
         fileCoverage.transferData(coverage, canonicalPath);
       }
     }
@@ -169,10 +168,8 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
      * @param canonicalFilePath - the path of the file for which this class contains coverage data.
      */
     void transferData(Coverage coverage, String canonicalFilePath) {
-      if (!coveragePerLine.isEmpty()) {
-        LOG.trace("Found coverage information about '{}' lines for file id '{}' , path '{}'",
-          coveragePerLine.size(), fileId, canonicalFilePath);
-      }
+      LOG.trace("Found coverage information about '{}' lines for file id '{}' , path '{}'",
+        coveragePerLine.size(), fileId, canonicalFilePath);
 
       for (Map.Entry<Integer, List<Boolean>> lineCoverage : coveragePerLine.entrySet()) {
 
