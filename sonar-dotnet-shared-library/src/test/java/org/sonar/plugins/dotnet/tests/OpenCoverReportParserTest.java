@@ -189,10 +189,9 @@ public class OpenCoverReportParserTest {
       List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
       assertThat(traceLogs).hasSize(35);
 
-      String logLine = traceLogs.get(32);
-      assertThat(logLine)
-        .startsWith("Found coverage information about '10' lines having single-line sequence points for file '")
-        .endsWith("Bar.cs'");
+
+      assertThat(traceLogs)
+        .contains(String.format("Found coverage information about '10' lines having single-line sequence points for file '%s'", filePath));
   }
 
   @Test
