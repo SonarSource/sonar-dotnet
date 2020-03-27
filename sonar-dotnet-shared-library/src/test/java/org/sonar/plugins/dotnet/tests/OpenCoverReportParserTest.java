@@ -139,7 +139,7 @@ public class OpenCoverReportParserTest {
   }
 
     @Test
-  public void branchCoverage_getter_setter_complex_case() throws Exception {
+  public void branchCoverage_getter_setter_multiple_sequence_points_per_line() throws Exception {
     Coverage coverage = new Coverage();
     String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
 
@@ -185,6 +185,14 @@ public class OpenCoverReportParserTest {
           // line 21: first line inside BodyMethod - 3 statements (what is after 'goto' is ignored)
           new BranchCoverage(21, 3, 3)
         );
+
+      List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
+      assertThat(traceLogs).hasSize(35);
+
+      String logLine = traceLogs.get(32);
+      assertThat(logLine)
+        .startsWith("Found coverage information about '10' lines having multiple sequence points for file '")
+        .endsWith("Bar.cs'");
   }
 
   @Test
