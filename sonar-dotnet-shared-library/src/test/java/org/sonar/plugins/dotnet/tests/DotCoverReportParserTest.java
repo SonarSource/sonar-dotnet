@@ -91,7 +91,52 @@ public class DotCoverReportParserTest {
   }
 
   @Test
-  public void predicate_false() throws Exception {
+  public void valid_with_multiple_sequence_points_per_line() throws Exception {
+    Coverage coverage = new Coverage();
+    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/valid_multiple_sequence_points_per_line.html"), coverage);
+
+    String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
+    assertThat(coverage.files()).containsOnly(filePath);
+    assertThat(coverage.hits(filePath))
+      .hasSize(14)
+      .containsOnly(
+        // 2 hits - only one getter and one setter are covered
+        Assertions.entry(7, 2),
+        Assertions.entry(9, 1),
+        // 2 hits - both get and set are covered
+        Assertions.entry(11, 2),
+        Assertions.entry(13, 1),
+        Assertions.entry(16, 1),
+        Assertions.entry(17, 3),
+        Assertions.entry(21, 1),
+        Assertions.entry(22, 1),
+        Assertions.entry(24, 1),
+        Assertions.entry(25, 1),
+        Assertions.entry(31, 1),
+        Assertions.entry(32, 1),
+        Assertions.entry(33, 1),
+        Assertions.entry(34, 1)
+      );
+
+    assertThat(coverage.getBranchCoverage(filePath))
+      .hasSize(4)
+      .containsOnly(
+        // line 7: CoveredGet , UncoveredProperty and CoveredSet on the same line
+        new BranchCoverage(7, 6, 2),
+
+        // line 9: CoveredGetOnSecondLine
+        new BranchCoverage(9, 2, 1),
+
+        // line 11: CoveredProperty
+        new BranchCoverage(11, 2, 2),
+
+        // line 17: first line inside BodyMethod - 3 statements (what is after 'goto' is ignored)
+        new BranchCoverage(17, 3, 3)
+      );
+  }
+
+  @Test
+  public void predicate_false() {
     Coverage coverage = new Coverage();
     Predicate<String> alwaysFalse = s -> false;
     new DotCoverReportParser(alwaysFalse).accept(new File("src/test/resources/dotcover/valid.html"), coverage);
