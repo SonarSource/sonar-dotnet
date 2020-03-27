@@ -131,12 +131,12 @@ public class OpenCoverReportParser implements CoverageParser {
 
           coverage.addHits(filePath, line, visitCount);
 
-          // we only want to count overlapping segments when the segment is on a single line
+          // we only want to track coverage of sequence points that are present on a single line
           if (line == endLine) {
-            String elementIdentifier = String.format("%d-%d-%d-%d", line, endLine, startColumn, endColumn);
+            String sequencePointIdentifier = String.format("%d-%d-%d-%d", line, endLine, startColumn, endColumn);
             detailedLineCoveragePerFile.putIfAbsent(filePath, new DetailedLineCoverage(filePath));
             DetailedLineCoverage detailedLineCoverage = detailedLineCoveragePerFile.get(filePath);
-            detailedLineCoverage.addCoverageForLineAndSequencePoint(line, elementIdentifier, visitCount);
+            detailedLineCoverage.addCoverageForLineAndSequencePoint(line, sequencePointIdentifier, visitCount);
           }
         } else {
           LOG.debug("Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +

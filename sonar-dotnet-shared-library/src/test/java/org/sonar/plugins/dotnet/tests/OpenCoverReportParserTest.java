@@ -143,7 +143,7 @@ public class OpenCoverReportParserTest {
     Coverage coverage = new Coverage();
     String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
 
-    new OpenCoverReportParser(alwaysTrue).accept(new File("src/test/resources/opencover/valid_complex_case.xml"), coverage);
+    new OpenCoverReportParser(alwaysTrue).accept(new File("src/test/resources/opencover/valid_case_multiple_sequence_points_per_line.xml"), coverage);
 
     assertThat(coverage.files()).containsOnly(
       filePath,
