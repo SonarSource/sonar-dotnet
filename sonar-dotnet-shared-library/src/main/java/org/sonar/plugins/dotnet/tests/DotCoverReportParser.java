@@ -114,6 +114,7 @@ public class DotCoverReportParser implements CoverageParser {
 
         coverage.addHits(fileCanonicalPath, lineStart, hits);
 
+        // we only want to count covered sequences when these are on the same line
         if (lineStart == lineEnd) {
           sequencePoints.add(new SequencePoint(lineStart, hits));
         }
@@ -122,8 +123,8 @@ public class DotCoverReportParser implements CoverageParser {
             lineStart, hits, fileCanonicalPath);
       }
 
-      Map<Integer, List<SequencePoint>> collect = sequencePoints.stream().collect(Collectors.groupingBy(SequencePoint::getStartLine));
-      for (Map.Entry<Integer, List<SequencePoint>> lineSequencePoints : collect.entrySet()){
+      Map<Integer, List<SequencePoint>> sequencePointsPerLine = sequencePoints.stream().collect(Collectors.groupingBy(SequencePoint::getStartLine));
+      for (Map.Entry<Integer, List<SequencePoint>> lineSequencePoints : sequencePointsPerLine.entrySet()){
         if (lineSequencePoints.getValue().size() > 1){
           int line = lineSequencePoints.getKey();
 
