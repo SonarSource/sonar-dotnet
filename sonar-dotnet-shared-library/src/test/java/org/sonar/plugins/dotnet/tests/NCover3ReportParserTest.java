@@ -27,11 +27,13 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class NCover3ReportParserTest {
 
@@ -49,34 +51,35 @@ public class NCover3ReportParserTest {
   public void invalid_root() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("<coverage>");
-    new NCover3ReportParser(alwaysTrue).accept(new File("src/test/resources/ncover3/invalid_root.nccov"), mock(Coverage.class));
+    new NCover3ReportParser(alwaysTrue, mock(AnalysisWarnings.class)).accept(new File("src/test/resources/ncover3/invalid_root.nccov"), mock(Coverage.class));
   }
 
   @Test
   public void wrong_version() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("exportversion");
-    new NCover3ReportParser(alwaysTrue).accept(new File("src/test/resources/ncover3/wrong_version.nccov"), mock(Coverage.class));
+    new NCover3ReportParser(alwaysTrue, mock(AnalysisWarnings.class)).accept(new File("src/test/resources/ncover3/wrong_version.nccov"), mock(Coverage.class));
   }
 
   @Test
   public void no_version() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("exportversion");
-    new NCover3ReportParser(alwaysTrue).accept(new File("src/test/resources/ncover3/no_version.nccov"), mock(Coverage.class));
+    new NCover3ReportParser(alwaysTrue, mock(AnalysisWarnings.class)).accept(new File("src/test/resources/ncover3/no_version.nccov"), mock(Coverage.class));
   }
 
   @Test
   public void non_existing_file() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("non_existing_file.nccov");
-    new NCover3ReportParser(alwaysTrue).accept(new File("src/test/resources/ncover3/non_existing_file.nccov"), mock(Coverage.class));
+    new NCover3ReportParser(alwaysTrue, mock(AnalysisWarnings.class)).accept(new File("src/test/resources/ncover3/non_existing_file.nccov"), mock(Coverage.class));
   }
 
   @Test
   public void valid() throws Exception {
+    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     Coverage coverage = new Coverage();
-    new NCover3ReportParser(alwaysTrue).accept(new File("src/test/resources/ncover3/valid.nccov"), coverage);
+    new NCover3ReportParser(alwaysTrue, analysisWarnings).accept(new File("src/test/resources/ncover3/valid.nccov"), coverage);
 
     assertThat(coverage.files()).containsOnly(
       new File("MyLibrary\\Adder.cs").getCanonicalPath(),
@@ -108,14 +111,16 @@ public class NCover3ReportParserTest {
       .endsWith("MyLibrary\\Adder.cs'.");
 
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(deprecationMessage);
+    verify(analysisWarnings).addUnique(deprecationMessage);
   }
 
   @Test
   public void log_unsupported_file_extension() throws Exception {
+    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     Coverage coverage = new Coverage();
     Predicate<String> alwaysFalse = s -> false;
     // use "one_file.nccov" to easily check the logs (it has only one coverage entry)
-    new NCover3ReportParser(alwaysFalse).accept(new File("src/test/resources/ncover3/one_file.nccov"), coverage);
+    new NCover3ReportParser(alwaysFalse, analysisWarnings).accept(new File("src/test/resources/ncover3/one_file.nccov"), coverage);
 
     assertThat(coverage.files()).isEmpty();
 
@@ -134,11 +139,13 @@ public class NCover3ReportParserTest {
       .endsWith("MyLibrary\\Adder.cs'.");
 
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(deprecationMessage);
+    verify(analysisWarnings).addUnique(deprecationMessage);
   }
 
   @Test
   public void should_not_fail_with_invalid_path() {
-    new NCover3ReportParser(alwaysTrue).accept(new File("src/test/resources/ncover3/invalid_path.nccov"), mock(Coverage.class));
+    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
+    new NCover3ReportParser(alwaysTrue, analysisWarnings).accept(new File("src/test/resources/ncover3/invalid_path.nccov"), mock(Coverage.class));
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is '");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains(
       "Skipping the import of NCover3 code coverage for the invalid file path: z:\\*\"?.cs at line 7");
@@ -146,6 +153,7 @@ public class NCover3ReportParserTest {
     assertThat(traceLogs.get(0)).isEqualTo("Analyzing the doc tag with NCover3 ID '1' and url 'z:\\*\"?.cs'.");
 
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(deprecationMessage);
+    verify(analysisWarnings).addUnique(deprecationMessage);
   }
 
 }

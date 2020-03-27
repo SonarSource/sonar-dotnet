@@ -26,6 +26,7 @@ import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -45,7 +46,8 @@ public class CoverageAggregator {
   private final DotCoverReportsAggregator dotCoverReportsAggregator;
   private final VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser;
 
-  public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration, FileSystem fs) {
+  public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration, FileSystem fs,
+                            AnalysisWarnings analysisWarnings) {
 
     Predicate<String> isIndexedAndSupportedLanguage = absolutePath -> fs.hasFiles(
       fs.predicates().and(
@@ -55,7 +57,7 @@ public class CoverageAggregator {
     this.coverageConf = coverageConf;
     this.configuration = configuration;
     this.coverageCache = new CoverageCache();
-    this.ncover3ReportParser = new NCover3ReportParser(isIndexedAndSupportedLanguage);
+    this.ncover3ReportParser = new NCover3ReportParser(isIndexedAndSupportedLanguage, analysisWarnings);
     this.openCoverReportParser = new OpenCoverReportParser(isIndexedAndSupportedLanguage);
     this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(isIndexedAndSupportedLanguage));
     this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(isIndexedAndSupportedLanguage);

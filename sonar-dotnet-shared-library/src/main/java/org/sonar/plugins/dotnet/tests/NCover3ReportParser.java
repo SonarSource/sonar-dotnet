@@ -24,18 +24,24 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+/**
+ * @deprecated in 8.6 because NCover3 is not supported anymore by NCover LLC
+ */
 @Deprecated
 public class NCover3ReportParser implements CoverageParser {
 
   private static final String EXCLUDED_ID = "0";
   private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
   private final Predicate<String> isSupported;
+  private final AnalysisWarnings analysisWarnings;
 
-  NCover3ReportParser(Predicate<String> isSupported) {
+  NCover3ReportParser(Predicate<String> isSupported, AnalysisWarnings analysisWarnings) {
     this.isSupported = isSupported;
+    this.analysisWarnings = analysisWarnings;
   }
 
   @Override
@@ -57,8 +63,11 @@ public class NCover3ReportParser implements CoverageParser {
     }
 
     public void parse() {
-      LOG.warn("NCover3 coverage import is deprecated since version 8.6 of the plugin. " +
-        "Consider using a different code coverage tool instead.");
+      String deprecationMessage ="NCover3 coverage import is deprecated since version 8.6 of the plugin. " +
+        "Consider using a different code coverage tool instead.";
+      LOG.warn(deprecationMessage);
+      analysisWarnings.addUnique(deprecationMessage);
+
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
         checkRootTag(xmlParserHelper);
         dispatchTags(xmlParserHelper);
