@@ -144,7 +144,7 @@ public class OpenCoverReportParser implements CoverageParser {
             fileId, line, visitCount, filePath);
         }
       } else {
-        LOG.debug("OpenCover parser: the filePath '{}' key is not contained in files", fileId);
+        LOG.debug("OpenCover parser: the fileId '{}' key is not contained in files", fileId);
       }
     }
 
@@ -182,7 +182,7 @@ public class OpenCoverReportParser implements CoverageParser {
      * @param coverage - the object which centralizes coverage information.
      */
     void transferData(Coverage coverage) {
-      LOG.trace("Found coverage information about '{}' lines having multiple sequence points for file '{}'",
+      LOG.trace("Found coverage information about '{}' lines having single-line sequence points for file '{}'",
         sequencePointCoveragePerLine.size(), filePath);
 
       for (Map.Entry<Integer, SequencePointsCoverage> lineSequencePointCoverage : sequencePointCoveragePerLine.entrySet()) {

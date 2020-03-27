@@ -191,7 +191,7 @@ public class OpenCoverReportParserTest {
 
       String logLine = traceLogs.get(32);
       assertThat(logLine)
-        .startsWith("Found coverage information about '10' lines having multiple sequence points for file '")
+        .startsWith("Found coverage information about '10' lines having single-line sequence points for file '")
         .endsWith("Bar.cs'");
   }
 
@@ -217,6 +217,14 @@ public class OpenCoverReportParserTest {
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
     assertThat(debugLogs.get(1)).startsWith("Skipping the import of OpenCover code coverage for the invalid file path: z:\\*\"?.cs at line 150");
+    assertThat(debugLogs.stream().skip(2)).containsOnly(
+      "OpenCover parser: the fileId '1' key is not contained in files",
+      "OpenCover parser: the fileId '1' key is not contained in files",
+      "OpenCover parser: the fileId '1' key is not contained in files",
+      "OpenCover parser: the fileId '1' key is not contained in files",
+      "OpenCover parser: the fileId '1' key is not contained in files",
+      "OpenCover parser: the fileId '1' key is not contained in files"
+    );
   }
 
 }
