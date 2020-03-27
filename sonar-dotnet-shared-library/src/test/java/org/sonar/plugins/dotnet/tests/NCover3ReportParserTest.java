@@ -42,6 +42,9 @@ public class NCover3ReportParserTest {
   public ExpectedException thrown = ExpectedException.none();
   private Predicate<String> alwaysTrue = s -> true;
 
+  private String deprecationMessage = "NCover3 coverage import is deprecated since version 8.6 of the plugin. " +
+    "Consider using a different code coverage tool instead.";
+
   @Test
   public void invalid_root() {
     thrown.expect(RuntimeException.class);
@@ -103,6 +106,8 @@ public class NCover3ReportParserTest {
     assertThat(traceLogs.get(1))
       .startsWith("NCover3 ID '1' with url 'MyLibrary\\Adder.cs' is resolved as '")
       .endsWith("MyLibrary\\Adder.cs'.");
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(deprecationMessage);
   }
 
   @Test
@@ -127,6 +132,8 @@ public class NCover3ReportParserTest {
     assertThat(traceLogs.get(1))
       .startsWith("NCover3 ID '1' with url 'MyLibrary\\Adder.cs' is resolved as '")
       .endsWith("MyLibrary\\Adder.cs'.");
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(deprecationMessage);
   }
 
   @Test
@@ -137,6 +144,8 @@ public class NCover3ReportParserTest {
       "Skipping the import of NCover3 code coverage for the invalid file path: z:\\*\"?.cs at line 7");
     List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
     assertThat(traceLogs.get(0)).isEqualTo("Analyzing the doc tag with NCover3 ID '1' and url 'z:\\*\"?.cs'.");
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(deprecationMessage);
   }
 
 }

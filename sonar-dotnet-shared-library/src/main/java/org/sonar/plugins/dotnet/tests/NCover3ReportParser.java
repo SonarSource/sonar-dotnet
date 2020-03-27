@@ -27,13 +27,14 @@ import java.util.function.Predicate;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+@Deprecated
 public class NCover3ReportParser implements CoverageParser {
 
   private static final String EXCLUDED_ID = "0";
   private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
   private final Predicate<String> isSupported;
 
-  public NCover3ReportParser(Predicate<String> isSupported) {
+  NCover3ReportParser(Predicate<String> isSupported) {
     this.isSupported = isSupported;
   }
 
@@ -56,6 +57,8 @@ public class NCover3ReportParser implements CoverageParser {
     }
 
     public void parse() {
+      LOG.warn("NCover3 coverage import is deprecated since version 8.6 of the plugin. " +
+        "Consider using a different code coverage tool instead.");
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
         checkRootTag(xmlParserHelper);
         dispatchTags(xmlParserHelper);
