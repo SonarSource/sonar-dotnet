@@ -19,21 +19,17 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import javax.annotation.Nullable;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 public class DotCoverReportParser implements CoverageParser {
 
@@ -105,7 +101,7 @@ public class DotCoverReportParser implements CoverageParser {
 
       matcher = COVERED_LINES_PATTERN_2.matcher(highlightedContents);
 
-      Set<SequencePoint> sequencePoints = new HashSet<>();
+      SequencePointCollector collector = new SequencePointCollector();
 
       while (matcher.find()) {
         int lineStart = Integer.parseInt(matcher.group(1));
@@ -113,51 +109,18 @@ public class DotCoverReportParser implements CoverageParser {
         int hits = Integer.parseInt(matcher.group(3));
 
         coverage.addHits(fileCanonicalPath, lineStart, hits);
-
-        // we only want to count covered sequences when these are on the same line
-        if (lineStart == lineEnd) {
-          sequencePoints.add(new SequencePoint(lineStart, hits));
-        }
+        collector.add(new SequencePoint(fileCanonicalPath, lineStart, lineEnd, hits));
 
         LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
             lineStart, hits, fileCanonicalPath);
       }
 
-      Map<Integer, List<SequencePoint>> sequencePointsPerLine = sequencePoints.stream().collect(Collectors.groupingBy(SequencePoint::getStartLine));
-      for (Map.Entry<Integer, List<SequencePoint>> lineSequencePoints : sequencePointsPerLine.entrySet()){
-        if (lineSequencePoints.getValue().size() > 1){
-          int line = lineSequencePoints.getKey();
-
-          List<SequencePoint> linePoints = lineSequencePoints.getValue();
-          int coveredPoints = (int)linePoints.stream().filter(point -> point.getHits() > 0).count();
-
-          BranchCoverage branchCoverage = new BranchCoverage(line, linePoints.size(), coveredPoints);
-          coverage.addBranchCoverage(fileCanonicalPath, branchCoverage);
-        }
-      }
+      collector.publishCoverage(coverage);
     }
 
     private void checkMatches(Matcher matcher) {
       if (!matcher.matches()) {
         throw new IllegalArgumentException("The report contents does not match the following regular expression: " + matcher.pattern().pattern());
-      }
-    }
-
-    private class SequencePoint{
-      private final int startLine;
-      private final int hits;
-
-      SequencePoint(int startLine, int hits){
-        this.startLine = startLine;
-        this.hits = hits;
-      }
-
-      public int getStartLine() {
-        return startLine;
-      }
-
-      public int getHits() {
-        return hits;
       }
     }
   }

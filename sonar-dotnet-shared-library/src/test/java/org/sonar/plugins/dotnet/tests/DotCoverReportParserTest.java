@@ -61,10 +61,10 @@ public class DotCoverReportParserTest {
     Coverage coverage = new Coverage();
     new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/valid.html"), coverage);
 
-    assertThat(coverage.files()).containsOnly(
-      new File("mylibrary\\calc.cs").getCanonicalPath());
+    String filePath = new File("mylibrary\\calc.cs").getCanonicalPath();
+    assertThat(coverage.files()).containsOnly(filePath);
 
-    assertThat(coverage.hits(new File("mylibrary\\calc.cs").getCanonicalPath()))
+    assertThat(coverage.hits(filePath))
       .hasSize(16)
       .contains(
         Assertions.entry(12, 0),
@@ -85,7 +85,9 @@ public class DotCoverReportParserTest {
         Assertions.entry(34, 0));
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(16);
+    assertThat(logTester.logs(LoggerLevel.TRACE))
+      .hasSize(17)
+      .contains(String.format("Found coverage information about '16' lines having single-line sequence points for file '%s'", filePath));
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
       .startsWith("dotCover parser: found coverage for line '12', hits '0' when analyzing the path '");
   }
