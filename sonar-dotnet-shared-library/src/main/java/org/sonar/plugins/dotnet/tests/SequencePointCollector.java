@@ -28,6 +28,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+// This class is responsible for publishing branch coverage for all the sequence points defined on the same line
+// since these can be only partially covered by tests.
+// e.g. properties with get and set defined on the same line
 public class SequencePointCollector {
   private static final Logger LOG = Loggers.get(SequencePointCollector.class);
   private Set<SequencePoint> sequencePoints = new HashSet<>();
