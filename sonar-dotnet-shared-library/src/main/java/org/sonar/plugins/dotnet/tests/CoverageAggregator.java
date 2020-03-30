@@ -84,6 +84,7 @@ public class CoverageAggregator {
     return hasCoverageProperty(configuration::hasKey);
   }
 
+  @VisibleForTesting
   boolean hasCoverageProperty(Predicate<String> hasKeyPredicate) {
     return hasNCover3ReportPaths(hasKeyPredicate)
       || hasOpenCoverReportPaths(hasKeyPredicate)

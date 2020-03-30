@@ -22,23 +22,28 @@ package org.sonar.plugins.dotnet.tests;
 import java.io.File;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.function.Predicate;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
+import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
+import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -265,6 +270,64 @@ public class CoverageAggregatorTest {
   @Test
   public void aggregate_visualstudio_report_does_not_exist() {
     aggregate_report_does_not_exist("visualstudio", ".coveragexml");
+  }
+
+  // this method needs to be here as the test needs to be in the same package with CoverageAggregator
+  @Test
+  public void when_UnitTestCoverageAggregator_is_created_from_CodeCoverageProvider_calls_uses_properties() {
+    // setup
+    CodeCoverageProvider provider = createTestProvider();
+    CoverageAggregator sut = provider.new UnitTestCoverageAggregator(
+      mock(Configuration.class),
+      mock(FileSystem.class),
+      mock(AnalysisWarnings.class)
+    );
+
+    // act
+    Predicate<String> mockPredicate = mock(Predicate.class);
+    sut.hasCoverageProperty(mockPredicate);
+
+    // verify
+    ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
+    verify(mockPredicate, times(4)).test(argument.capture());
+    assertThat(argument.getAllValues()).containsExactlyInAnyOrder(
+      "sonar.KEY.ncover3.reportsPaths",
+      "sonar.KEY.opencover.reportsPaths",
+      "sonar.KEY.dotcover.reportsPaths",
+      "sonar.KEY.vscoveragexml.reportsPaths"
+    );
+  }
+
+  // this method needs to be here as the test needs to be in the same package with CoverageAggregator
+  @Test
+  public void when_IntegrationTestCoverageAggregator_is_created_from_CodeCoverageProvider_calls_uses_properties() {
+    // setup
+    CodeCoverageProvider provider = createTestProvider();
+    CoverageAggregator sut = provider.new IntegrationTestCoverageAggregator(
+      mock(Configuration.class),
+      mock(FileSystem.class),
+      mock(AnalysisWarnings.class)
+    );
+
+    // act
+    Predicate<String> mockPredicate = mock(Predicate.class);
+    sut.hasCoverageProperty(mockPredicate);
+
+    // verify
+    ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
+    verify(mockPredicate, times(4)).test(argument.capture());
+    assertThat(argument.getAllValues()).containsExactlyInAnyOrder(
+      "sonar.KEY.ncover3.it.reportsPaths",
+      "sonar.KEY.opencover.it.reportsPaths",
+      "sonar.KEY.dotcover.it.reportsPaths",
+      "sonar.KEY.vscoveragexml.it.reportsPaths"
+    );
+  }
+
+  private static CodeCoverageProvider createTestProvider() {
+    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    when(pluginMetadata.languageKey()).thenReturn("KEY");
+    return new CodeCoverageProvider(pluginMetadata);
   }
 
   private void aggregate_report_does_not_exist(String propertyName, String reportFileExtension) {
