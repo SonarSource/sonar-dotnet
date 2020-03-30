@@ -23,10 +23,13 @@ import com.google.common.collect.ImmutableSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.PropertyDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class CodeCoverageProviderTest {
@@ -65,6 +68,49 @@ public class CodeCoverageProviderTest {
       "sonar.cs.opencover.reportsPaths", "sonar.cs.opencover.it.reportsPaths",
       "sonar.cs.dotcover.reportsPaths", "sonar.cs.dotcover.it.reportsPaths",
       "sonar.cs.vscoveragexml.reportsPaths", "sonar.cs.vscoveragexml.it.reportsPaths");
+  }
+
+  @Test
+  public void verify_UnitTestCoverageReportImportSensor_constructor_uses_arguments() {
+    // setup
+    CodeCoverageProvider provider = createTestProvider();
+
+    // act
+    CodeCoverageProvider.UnitTestCoverageReportImportSensor sut = provider.new UnitTestCoverageReportImportSensor(
+      mock(CodeCoverageProvider.UnitTestCoverageAggregator.class)
+    );
+
+    // verify that what got passed to the constructor is used later on
+    SensorDescriptor mockDescriptor = mock(SensorDescriptor.class);
+    sut.describe(mockDescriptor);
+
+    verify(mockDescriptor, times(1)).name("NAME Tests Coverage Report Import");
+    verify(mockDescriptor, times(1)).onlyOnLanguage("KEY");
+  }
+
+  @Test
+  public void verify_IntegrationTestCoverageReportImportSensor_constructor_uses_arguments() {
+    // setup
+    CodeCoverageProvider provider = createTestProvider();
+
+    // act
+    CodeCoverageProvider.IntegrationTestCoverageReportImportSensor sut = provider.new IntegrationTestCoverageReportImportSensor(
+      mock(CodeCoverageProvider.IntegrationTestCoverageAggregator.class)
+    );
+
+    // verify that what got passed to the constructor is used later on
+    SensorDescriptor mockDescriptor = mock(SensorDescriptor.class);
+    sut.describe(mockDescriptor);
+
+    verify(mockDescriptor, times(1)).name("[Deprecated] NAME Integration Tests Coverage Report Import");
+    verify(mockDescriptor, times(1)).onlyOnLanguage("KEY");
+  }
+
+  private static CodeCoverageProvider createTestProvider() {
+    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    when(pluginMetadata.languageKey()).thenReturn("KEY");
+    when(pluginMetadata.languageName()).thenReturn("NAME");
+    return new CodeCoverageProvider(pluginMetadata);
   }
 
   private static Set<Object> nonProperties(List extensions) {

@@ -25,6 +25,7 @@ import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.dotnet.tests.CoverageAggregator;
 import org.sonar.plugins.dotnet.tests.CoverageConfiguration;
@@ -135,8 +136,9 @@ public class CodeCoverageProvider {
 
   public class UnitTestCoverageAggregator extends CoverageAggregator {
 
-    public UnitTestCoverageAggregator(Configuration configuration, FileSystem fileSystem) {
-      super(coverageConf, configuration, fileSystem);
+    public UnitTestCoverageAggregator(Configuration configuration, FileSystem fileSystem,
+                                      AnalysisWarnings analysisWarnings) {
+      super(coverageConf, configuration, fileSystem, analysisWarnings);
     }
 
   }
@@ -151,8 +153,9 @@ public class CodeCoverageProvider {
 
   public class IntegrationTestCoverageAggregator extends CoverageAggregator {
 
-    public IntegrationTestCoverageAggregator(Configuration configuration, FileSystem fileSystem) {
-      super(itCoverageConf, configuration, fileSystem);
+    public IntegrationTestCoverageAggregator(Configuration configuration, FileSystem fileSystem,
+                                             AnalysisWarnings analysisWarnings) {
+      super(itCoverageConf, configuration, fileSystem, analysisWarnings);
     }
 
   }
