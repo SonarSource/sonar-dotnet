@@ -43,10 +43,10 @@ public class SequencePointCollector {
   }
 
   public void publishCoverage(Coverage coverage){
-    Map<String, List<SequencePoint>> sequencePointsPerFile = sequencePoints.stream().collect(Collectors.groupingBy(SequencePoint::getFilePath));
-    for (Map.Entry<String, List<SequencePoint>> fileSequencePoints : sequencePointsPerFile.entrySet()){
-      publishCoverage(coverage, fileSequencePoints.getKey(), fileSequencePoints.getValue());
-    }
+    sequencePoints.stream()
+      .collect(Collectors.groupingBy(SequencePoint::getFilePath))
+      .entrySet()
+      .forEach(fileSequencePoints -> publishCoverage(coverage, fileSequencePoints.getKey(), fileSequencePoints.getValue()));
   }
 
   private static void publishCoverage(Coverage coverage, String filePath, List<SequencePoint> sequencePoints){
