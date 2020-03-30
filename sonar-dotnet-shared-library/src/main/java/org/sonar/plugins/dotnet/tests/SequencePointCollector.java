@@ -46,7 +46,7 @@ public class SequencePointCollector {
     }
   }
 
-  private void publishCoverage(Coverage coverage, String filePath, List<SequencePoint> sequencePoints){
+  private static void publishCoverage(Coverage coverage, String filePath, List<SequencePoint> sequencePoints){
     Map<Integer, List<SequencePoint>> sequencePointsPerLine = sequencePoints.stream().collect(Collectors.groupingBy(SequencePoint::getStartLine));
 
     LOG.trace("Found coverage information about '{}' lines having single-line sequence points for file '{}'", sequencePointsPerLine.size(), filePath);
