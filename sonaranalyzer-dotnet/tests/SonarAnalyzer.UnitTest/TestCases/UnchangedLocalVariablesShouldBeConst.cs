@@ -271,4 +271,15 @@ namespace Tests.Diagnostics
             return isValid;
         };
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3271
+    public class Repro_3271
+    {
+        public void GoGoGo()
+        {
+            var tmp = 0; // Noncompliant FP
+            var flag = true; // Noncompliant FP
+            (flag, tmp) = (false, 5);
+        }
+    }
 }
