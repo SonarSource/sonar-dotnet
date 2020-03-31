@@ -9,6 +9,11 @@
     {
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/3268
+    class IEnumerableExtensionsTests // Noncompliant FP, Classes ending with "Test" or "Tests" should not be reported
+    {
+    }
+
     class foo // Noncompliant {{Rename class 'foo' to match pascal case naming rules, consider using 'Foo'.}}
     {
     }
