@@ -263,4 +263,17 @@ namespace Tests.Diagnostics
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/3239
+    public class Repro_3239
+    {
+        public void GoGoGo()
+        {
+            var tmp = 0;
+            var flag = true;
+            while (flag) // Noncompliant FP
+            {
+                (flag, tmp) = (false, 5);
+            }
+        }
+    }
 }
