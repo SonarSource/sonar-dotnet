@@ -90,8 +90,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     return true;
                 }
 
-                // all should have the same size, except the first.
-                if (groups.Skip(1).Any(g => g != size))
+                // all should have the same size, except the first, and the size should at least be 2.
+                if (size < 2 || groups.Skip(1).Any(g => g != size))
                 {
                     return true;
                 }
@@ -108,9 +108,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return false;
             }
-
-            // The first decimal group should be one smaller.
-            decimals[0]++;
 
             size = size == NotFound ? decimals[0] : size;
 
