@@ -296,6 +296,8 @@ stages:
         env:
           ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
           ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+          GITHUB_BRANCH: $(Build.SourceBranchName)
+          GIT_SHA1: $(Build.SourceVersion)
         inputs:
           goals: 'deploy'
           options: >-
