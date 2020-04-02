@@ -7,8 +7,16 @@ the function call is useless and should be dropped or the source code doesn't be
   <li> any method on <code>string</code>, <code>int</code>, ..., <code>System.Collections.Immutable.ImmutableArray&lt;T&gt;</code>,
   <code>ImmutableHashSet&lt;T&gt;</code>, ... </li>
 </ul>
-<p>Note: although <code>string.Intern</code> has a side effect, ignoring its return value is still suspicious as it is the only reference ensured to
-point to the intern pool.</p>
+<p>Notes:</p>
+<ul>
+  <li> although <code>string.Intern</code> has a side effect, ignoring its return value is still suspicious as it is the only reference ensured to
+  point to the intern pool. </li>
+  <li> Link methods can have side effects if they are misused. Example: </li>
+</ul>
+<pre>
+tests.All(c =&gt; { c.myfield = "foo"; return true; });
+</pre>
+<p>Such code should be rewritten as a normal loop.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 coll.Where(i =&gt; i &gt; 5).Select(i =&gt; i*i); // Noncompliant
