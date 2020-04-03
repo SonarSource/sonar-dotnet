@@ -7,10 +7,20 @@
     "constantCost": "5min"
   },
   "tags": [
-    
+    "cwe",
+    "sans-top25-insecure",
+    "owasp-a7"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-4564",
   "sqKey": "S4564",
-  "scope": "Main"
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      79
+    ],
+    "OWASP": [
+      "A7"
+    ]
+  }
 }
