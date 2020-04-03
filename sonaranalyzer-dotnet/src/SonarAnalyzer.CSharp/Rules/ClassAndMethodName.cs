@@ -110,15 +110,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (typeDeclaration is ClassDeclarationSyntax)
+            if (typeDeclaration is ClassDeclarationSyntax && IsTestClassName(typeDeclaration.Identifier.ValueText))
             {
-                var className = typeDeclaration.Identifier.ValueText;
-                if (className != "ITest"
-                    && className != "ITests"
-                    && (className.EndsWith("Test") || className.EndsWith("Tests")))
-                {
-                    return;
-                }
+                return;
             }
 
             if (symbol.DeclaringSyntaxReferences.Length > 1 &&
@@ -359,5 +353,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement => ((LocalFunctionStatementSyntaxWrapper)declaration).Identifier,
                 _ => throw new InvalidOperationException("Method can only be called on known registered syntax kinds")
             };
+
+        private static bool IsTestClassName(string className) =>
+            className != "ITest"
+            && className != "ITests"
+            && (className.EndsWith("Test") || className.EndsWith("Tests"));
+
     }
 }
