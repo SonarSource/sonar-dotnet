@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -107,6 +107,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(typeNameRule, identifier.GetLocation(),
                     TypeKindNameMapping[typeDeclaration.Kind()],
                     identifier.ValueText, MessageFormatUnderscore));
+                return;
+            }
+
+            if (typeDeclaration is ClassDeclarationSyntax && IsTestClassName(typeDeclaration.Identifier.ValueText))
+            {
                 return;
             }
 
@@ -348,5 +353,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement => ((LocalFunctionStatementSyntaxWrapper)declaration).Identifier,
                 _ => throw new InvalidOperationException("Method can only be called on known registered syntax kinds")
             };
+
+        private static bool IsTestClassName(string className) =>
+            className != "ITest"
+            && className != "ITests"
+            && (className.EndsWith("Test") || className.EndsWith("Tests"));
+
     }
 }
