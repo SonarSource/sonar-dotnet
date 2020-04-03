@@ -9,11 +9,6 @@
     {
     }
 
-    // https://github.com/SonarSource/sonar-dotnet/issues/3268
-    class IEnumerableExtensionsTests // Noncompliant FP, Classes ending with "Test" or "Tests" should not be reported
-    {
-    }
-
     class foo // Noncompliant {{Rename class 'foo' to match pascal case naming rules, consider using 'Foo'.}}
     {
     }
@@ -136,4 +131,39 @@ namespace AnotherNamespace
     class AddUIIntegration { }
     class TokenEOF { } // Noncompliant - 3 upper case letters
     class EOFile { }  // Compliant because 2 upper case letters + 1 for the next word
+}
+
+namespace TestSuffixes
+{
+    // https://github.com/SonarSource/sonar-dotnet/issues/3268
+    class IEnumerableExtensionsTest { } // Compliant, classes ending with "Test" or "Tests" should not be reported
+    class IEnumerableExtensionsTests { } // Compliant, classes ending with "Test" or "Tests" should not be reported
+
+    struct IStructTest { } // Noncompliant, structs are not considered as test classes
+    struct IStructTests { } // Noncompliant, structs are not considered as test classes
+
+    interface BadPrefixTest { } // Noncompliant, interfaces are not considered as test classes
+    interface BadPrefixTests { } // Noncompliant, interfaces are not considered as test classes
+
+    class _UnderscoreTest { } // Noncompliant, even when ending with Test
+    class _UnderscoreTests { } // Noncompliant, even when ending with Tests
+
+    class NormalTest { }
+    class NormalTests { }
+
+    class IMassiveProtest { } // Noncompliant, this doesn't count as Test class
+    class IMassiveProtests { } // Noncompliant, this doesn't count as Test class
+
+    class IEnumerableTEST { } // Noncompliant, this doesn't count as Test class
+    class IEnumerableTESTS { } // Noncompliant, this doesn't count as Test class
+    class IEnumerableTestS { } // Noncompliant, this doesn't count as Test class (upper S sufix)
+
+    class ITest { } // Noncompliant, this doesn't count as Test class
+    class ITests { } // Noncompliant, this doesn't count as Test class
+
+    class IfTest { }
+    class IfTests { }
+
+    class XTest { }
+    class XTests { }
 }

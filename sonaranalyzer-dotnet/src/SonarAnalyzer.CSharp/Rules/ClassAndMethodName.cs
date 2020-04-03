@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -108,6 +108,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     TypeKindNameMapping[typeDeclaration.Kind()],
                     identifier.ValueText, MessageFormatUnderscore));
                 return;
+            }
+
+            if (typeDeclaration is ClassDeclarationSyntax)
+            {
+                var className = typeDeclaration.Identifier.ValueText;
+                if (className != "ITest"
+                    && className != "ITests"
+                    && (className.EndsWith("Test") || className.EndsWith("Tests")))
+                {
+                    return;
+                }
             }
 
             if (symbol.DeclaringSyntaxReferences.Length > 1 &&
