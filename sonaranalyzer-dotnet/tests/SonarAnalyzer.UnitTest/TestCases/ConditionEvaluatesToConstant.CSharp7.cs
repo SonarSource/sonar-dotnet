@@ -276,4 +276,38 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3288
+    public class Repro_3288
+    {
+        public static void DoSomething1(object value)
+            => DoSomething(
+                value is null ? 1 : 2,
+                value is bool b ? 3 : 4,
+                value is null ? 5 : 6); // Noncompliant FP, conditions are parallel and should not distribute constraints
+                //Secondary@-1
+
+        public static void IsBoolWithoutB(object value)
+            => DoSomething(
+                value is null ? 1 : 2,
+                value is bool ? 3 : 4,  // Variable 'b' is removed
+                value is null ? 5 : 6); // OK, this doesn't reproduce the issue
+
+        public static void IsBoolB(object value)
+            => DoSomething(
+                0,
+                value is bool b ? 3 : 4,
+                value is null ? 5 : 6); // OK, this doesn't reproduce the issue
+
+        public static void IsNull(object value)
+            => DoSomething(
+                value is null ? 1 : 2,
+                0,
+                value is null ? 5 : 6); // OK, this doesn't reproduce the issue
+
+
+        private static void DoSomething(int a, int b, int c)
+        {
+        }
+    }
 }
