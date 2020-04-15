@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -778,6 +779,23 @@ namespace Tests.Diagnostics
                 }
             }
             return null;
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3290
+    class Linq_OrDefault
+    {
+        // All XxxOrDefault Linq extensions should create both null and not-null constraints.
+        string DoSomething(IEnumerable<object> list)
+        {
+            var item = list.FirstOrDefault();
+            return item.ToString(); // False Negative, item could be null here
+        }
+
+        string DoSomethingArg(IEnumerable<object> list)
+        {
+            var item = list.SingleOrDefault(x => x != null);
+            return item.ToString(); // False Negative, item could be null here
         }
     }
 }
