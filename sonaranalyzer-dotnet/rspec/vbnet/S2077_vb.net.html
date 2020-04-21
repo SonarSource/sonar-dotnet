@@ -42,11 +42,11 @@ SQL injections. The goal is to guide security code reviews and to prevent a comm
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
   <li> Avoid building queries manually using formatting technics. If you do it anyway, do not include user input in this building process. </li>
-  <li> Use <a href="https://www.owasp.org/index.php/Query_Parameterization_Cheat_Sheet">parameterized queries, prepared statements, or stored
+  <li> Use <a href="https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html">parameterized queries, prepared statements, or stored
   procedures</a> whenever possible. </li>
   <li> You may also use ORM frameworks such as Hibernate which, if used correctly, reduce injection risks. </li>
   <li> Avoid executing SQL queries containing unsafe input in stored procedures or functions. </li>
-  <li> <a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> every unsafe input. </li>
+  <li> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html">Sanitize</a> every unsafe input. </li>
 </ul>
 <p>You can also reduce the impact of an attack by using a database account with low privileges.</p>
 <h2>Sensitive Code Example</h2>
@@ -85,7 +85,7 @@ End Sub
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A1-Injection">OWASP Top 10 2017 Category A1</a> - Injection </li>
+  <li> <a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A1-Injection">OWASP Top 10 2017 Category A1</a> - Injection </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/89">MITRE, CWE-89</a> - Improper Neutralization of Special Elements used in an SQL Command </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/564.html">MITRE, CWE-564</a> - SQL Injection: Hibernate </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>

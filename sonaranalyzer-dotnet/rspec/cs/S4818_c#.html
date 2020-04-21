@@ -23,7 +23,7 @@ use of http connections.</p>
 <ul>
   <li> In many cases there is no need to open a socket yourself. Use instead libraries and existing protocols. </li>
   <li> Encrypt all data sent if it is sensitive. Usually it is better to encrypt it even if the data is not sensitive as it might change later. </li>
-  <li> <a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> any input read from the socket. </li>
+  <li> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html">Sanitize</a> any input read from the socket. </li>
   <li> Limit the number of sockets a given user can create. Close the sockets as soon as possible. </li>
 </ul>
 <h2>Sensitive Code Example</h2>
@@ -45,7 +45,7 @@ class TestSocket
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  <li> <a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
   </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/20">MITRE, CWE-20</a> - Improper Input Validation </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/400">MITRE, CWE-400</a> - Uncontrolled Resource Consumption ('Resource Exhaustion') </li>
