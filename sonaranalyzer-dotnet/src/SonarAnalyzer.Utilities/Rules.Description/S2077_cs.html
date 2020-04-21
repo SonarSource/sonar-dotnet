@@ -5,7 +5,7 @@
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-5611">CVE-2017-5611</a> </li>
 </ul>
 <p>SQL queries often need to use a hardcoded SQL string with a dynamic parameter coming from a user request. Formatting a string to add those
-parameters to the request is a bad practice as it can result in an <a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a>. The safe
+parameters to the request is a bad practice as it can result in an <a href="https://owasp.org/www-community/attacks/SQL_Injection">SQL injection</a>. The safe
 way to add parameters to a SQL query is to use SQL binding mechanisms.</p>
 <p>This rule flags the execution of SQL queries which are built using formatting of strings, even if there is no injection. This rule does not detect
 SQL injections. The goal is to guide security code reviews and to prevent a common bad practice.</p>
