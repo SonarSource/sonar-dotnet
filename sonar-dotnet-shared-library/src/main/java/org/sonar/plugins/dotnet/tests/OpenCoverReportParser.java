@@ -103,7 +103,9 @@ public class OpenCoverReportParser implements CoverageParser {
       // Open Cover lacks model documentation but the details can be found in the source code:
       // https://github.com/OpenCover/opencover/blob/4.7.922/main/OpenCover.Framework/Model/SequencePoint.cs
       int line = xmlParserHelper.getRequiredIntAttribute("sl");
+      int startColumn = xmlParserHelper.getRequiredIntAttribute("sc");
       int endLine = xmlParserHelper.getRequiredIntAttribute("el");
+      int endColumn = xmlParserHelper.getRequiredIntAttribute("ec");
       int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
       int branchExitsCount = xmlParserHelper.getIntAttributeOrZero("bec");
       int branchExitsVisit = xmlParserHelper.getIntAttributeOrZero("bev");
@@ -127,7 +129,7 @@ public class OpenCoverReportParser implements CoverageParser {
 
           coverage.addHits(filePath, line, visitCount);
 
-          sequencePointCollector.add(new SequencePoint(filePath, line, endLine, visitCount));
+          sequencePointCollector.add(new SequencePoint(filePath, line, startColumn, endLine, endColumn, visitCount));
         } else {
           LOG.debug("Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +
               " is not indexed or does not have the supported language.",

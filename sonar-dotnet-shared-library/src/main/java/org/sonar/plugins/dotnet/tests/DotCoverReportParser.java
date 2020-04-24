@@ -37,7 +37,7 @@ public class DotCoverReportParser implements CoverageParser {
   private static final Pattern COVERED_LINES_PATTERN_1 = Pattern.compile(
     ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(.*?)\\]\\);\\s*+</script>.*",
     Pattern.DOTALL);
-  private static final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)\\]");
+  private static final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),(\\d++),(\\d++),(\\d++),(\\d++)\\]");
 
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
   private final Predicate<String> isSupported;
@@ -105,11 +105,13 @@ public class DotCoverReportParser implements CoverageParser {
 
       while (matcher.find()) {
         int lineStart = Integer.parseInt(matcher.group(1));
-        int lineEnd = Integer.parseInt(matcher.group(2));
-        int hits = Integer.parseInt(matcher.group(3));
+        int columnStart = Integer.parseInt(matcher.group(2));
+        int lineEnd = Integer.parseInt(matcher.group(3));
+        int columnEnd = Integer.parseInt(matcher.group(4));
+        int hits = Integer.parseInt(matcher.group(5));
 
         coverage.addHits(fileCanonicalPath, lineStart, hits);
-        collector.add(new SequencePoint(fileCanonicalPath, lineStart, lineEnd, hits));
+        collector.add(new SequencePoint(fileCanonicalPath, lineStart, columnStart, lineEnd, columnEnd, hits));
 
         LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
             lineStart, hits, fileCanonicalPath);

@@ -59,9 +59,17 @@ public class SequencePointCollector {
         int line = lineSequencePoints.getKey();
 
         List<SequencePoint> linePoints = lineSequencePoints.getValue();
-        int coveredPoints = (int)linePoints.stream().filter(point -> point.getHits() > 0).count();
 
-        coverage.addBranchCoverage(filePath, new BranchCoverage(line, linePoints.size(), coveredPoints));
+        Map<String, List<SequencePoint>> groupsByCoverageKey = linePoints.stream().collect(Collectors.groupingBy(SequencePoint::getCoverageKey));
+
+        int coveredPoints = 0;
+        for (Map.Entry<String, List<SequencePoint>> group: groupsByCoverageKey.entrySet()){
+          if (group.getValue().stream().filter(point -> point.getHits() >0).count() > 0){
+            coveredPoints++;
+          }
+        }
+
+        coverage.addBranchCoverage(filePath, new BranchCoverage(line, groupsByCoverageKey.size(), coveredPoints));
       }
     }
   }

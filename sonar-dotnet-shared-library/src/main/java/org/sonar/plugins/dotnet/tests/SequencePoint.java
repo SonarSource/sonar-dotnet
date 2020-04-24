@@ -21,18 +21,22 @@ package org.sonar.plugins.dotnet.tests;
 
 public class SequencePoint {
   private final int lineStart;
+  private final int columnStart;
   private final int lineEnd;
+  private final int columnEnd;
   private final int hits;
   private String filePath;
 
-  SequencePoint(String filePath, int lineStart, int lineEnd, int hits) {
-    this(lineStart, lineEnd, hits);
+  SequencePoint(String filePath, int lineStart, int columnStart, int lineEnd, int columnEnd, int hits) {
+    this(lineStart, columnStart, lineEnd, columnEnd, hits);
     this.filePath = filePath;
   }
 
-  SequencePoint(int lineStart, int lineEnd, int hits){
+  SequencePoint(int lineStart, int columnStart, int lineEnd, int columnEnd, int hits) {
     this.lineStart = lineStart;
+    this.columnStart = columnStart;
     this.lineEnd = lineEnd;
+    this.columnEnd = columnEnd;
     this.hits = hits;
   }
 
@@ -50,5 +54,9 @@ public class SequencePoint {
 
   public int getHits() {
     return hits;
+  }
+
+  public String getCoverageKey() {
+    return String.format("%d-%d-%d-%d", lineStart, columnStart, lineEnd, columnEnd);
   }
 }

@@ -40,7 +40,7 @@ public class SequencePointCollectorTest {
     Coverage coverage = mock(Coverage.class);
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint("file\\path", 1 , 1, 2));
+    sut.add(new SequencePoint("file\\path", 1, 0, 1, 0,2));
     sut.publishCoverage(coverage);
 
     verify(coverage, never()).addBranchCoverage(anyString(), any());
@@ -51,8 +51,8 @@ public class SequencePointCollectorTest {
     Coverage coverage = mock(Coverage.class);
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint("first file", 1 , 1, 2));
-    sut.add(new SequencePoint("second file", 1 , 1, 2));
+    sut.add(new SequencePoint("first file", 1, 0, 1, 0, 2));
+    sut.add(new SequencePoint("second file", 1, 0, 1, 0, 2));
     sut.publishCoverage(coverage);
 
     verify(coverage, never()).addBranchCoverage(anyString(), any());
@@ -64,8 +64,8 @@ public class SequencePointCollectorTest {
     String filePath = "file path";
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint(filePath, 1 , 1, 2));
-    sut.add(new SequencePoint(filePath, 2 , 1, 1));
+    sut.add(new SequencePoint(filePath, 1, 0, 1, 0, 2));
+    sut.add(new SequencePoint(filePath, 2, 0, 1, 0, 1));
     sut.publishCoverage(coverage);
 
     verify(coverage, never()).addBranchCoverage(anyString(), any());
@@ -77,15 +77,15 @@ public class SequencePointCollectorTest {
     String filePath = "file path";
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint(filePath, 1 , 1, 2));
-    sut.add(new SequencePoint(filePath, 1 , 1, 1));
+    sut.add(new SequencePoint(filePath, 1, 3, 1, 5, 1));
+    sut.add(new SequencePoint(filePath, 1, 5, 1, 7, 2));
 
-    sut.add(new SequencePoint(filePath, 2 , 2, 2));
-    sut.add(new SequencePoint(filePath, 2 , 2, 0));
-    sut.add(new SequencePoint(filePath, 2 , 2, 4));
+    sut.add(new SequencePoint(filePath, 2, 1, 2, 5, 2));
+    sut.add(new SequencePoint(filePath, 2, 5, 2, 9, 0));
+    sut.add(new SequencePoint(filePath, 2, 11, 2, 15, 4));
 
-    sut.add(new SequencePoint(filePath, 3 , 3, 0));
-    sut.add(new SequencePoint(filePath, 3 , 3, 0));
+    sut.add(new SequencePoint(filePath, 3, 3, 3, 5, 0));
+    sut.add(new SequencePoint(filePath, 3, 5, 3, 7, 0));
     sut.publishCoverage(coverage);
 
     verify(coverage, Mockito.times(1))
@@ -105,18 +105,18 @@ public class SequencePointCollectorTest {
     String secondPath = "second";
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint(firstPath, 1 , 1, 2));
-    sut.add(new SequencePoint(firstPath, 1 , 1, 1));
+    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 2));
+    sut.add(new SequencePoint(firstPath, 1, 4, 1, 8, 1));
 
-    sut.add(new SequencePoint(secondPath, 1 , 1, 1));
-    sut.add(new SequencePoint(secondPath, 1 , 1, 0));
+    sut.add(new SequencePoint(secondPath, 1, 3, 1, 5, 1));
+    sut.add(new SequencePoint(secondPath, 1, 5, 1, 8, 0));
     sut.publishCoverage(coverage);
 
     verify(coverage, Mockito.times(1))
-      .addBranchCoverage(eq(firstPath), argThat(branchCoverage -> IsMatch(branchCoverage, 1 , 2, 2)));
+      .addBranchCoverage(eq(firstPath), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 2, 2)));
 
     verify(coverage, Mockito.times(1))
-      .addBranchCoverage(eq(secondPath), argThat(branchCoverage -> IsMatch(branchCoverage, 1 , 2, 1)));
+      .addBranchCoverage(eq(secondPath), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 2, 1)));
   }
 
   private Boolean IsMatch(BranchCoverage bc, int line, int conditions, int coveredConditions) {
