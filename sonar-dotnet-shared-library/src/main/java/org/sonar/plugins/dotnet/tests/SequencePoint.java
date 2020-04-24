@@ -28,11 +28,7 @@ public class SequencePoint {
   private String filePath;
 
   SequencePoint(String filePath, int lineStart, int columnStart, int lineEnd, int columnEnd, int hits) {
-    this(lineStart, columnStart, lineEnd, columnEnd, hits);
     this.filePath = filePath;
-  }
-
-  SequencePoint(int lineStart, int columnStart, int lineEnd, int columnEnd, int hits) {
     this.lineStart = lineStart;
     this.columnStart = columnStart;
     this.lineEnd = lineEnd;
@@ -56,7 +52,7 @@ public class SequencePoint {
     return hits;
   }
 
-  public String getCoverageKey() {
-    return String.format("%d-%d-%d-%d", lineStart, columnStart, lineEnd, columnEnd);
+  public String getUniqueIdentifier() {
+    return String.format("%s-%d-%d-%d-%d", filePath, lineStart, columnStart, lineEnd, columnEnd);
   }
 }
