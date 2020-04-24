@@ -122,102 +122,102 @@ public class SequencePointCollectorTest {
   @Test
   public void givenMultiplePointsForTheSameCodeWithHits_publishCoverage_doesNotSumConditionsMultipleTimes() {
     Coverage coverage = mock(Coverage.class);
-    String firstPath = "first";
+    String path = "path";
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 2));
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 1));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 2));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 1));
 
     sut.publishCoverage(coverage);
 
     verify(coverage, Mockito.times(1))
-      .addBranchCoverage(eq(firstPath), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 1, 1)));
+      .addBranchCoverage(eq(path), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 1, 1)));
   }
 
   @Test
   public void givenMultiplePointsForTheSameCodeWithAndWithoutHits_publishCoverage_addsBranchCoverage() {
     Coverage coverage = mock(Coverage.class);
-    String firstPath = "first";
+    String path = "path";
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 1));
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 0));
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 3));
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 0));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 1));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 0));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 3));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 0));
 
     sut.publishCoverage(coverage);
 
     verify(coverage, Mockito.times(1))
-      .addBranchCoverage(eq(firstPath), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 1, 1)));
+      .addBranchCoverage(eq(path), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 1, 1)));
   }
 
   @Test
   public void givenMultiplePointsForTheSameCodeWithoutHits_publishCoverage_doesNotSumConditionsMultipleTimes() {
     Coverage coverage = mock(Coverage.class);
-    String firstPath = "first";
+    String path = "path";
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 0));
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 0));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 0));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 0));
 
     sut.publishCoverage(coverage);
 
     verify(coverage, Mockito.times(1))
-      .addBranchCoverage(eq(firstPath), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 1, 0)));
+      .addBranchCoverage(eq(path), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 1, 0)));
   }
 
   @Test
   public void givenMultiplePointsPerLineSomeOnTheSameCodeWithHits_publishCoverage_doesNotSumConditionsMultipleTimes() {
     Coverage coverage = mock(Coverage.class);
-    String firstPath = "first";
+    String path = "path";
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 0));
-    sut.add(new SequencePoint(firstPath, 1, 4, 1, 8, 1));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 0));
+    sut.add(new SequencePoint(path, 1, 4, 1, 8, 1));
 
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 1));
-    sut.add(new SequencePoint(firstPath, 1, 4, 1, 8, 0));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 1));
+    sut.add(new SequencePoint(path, 1, 4, 1, 8, 0));
 
     sut.publishCoverage(coverage);
 
     verify(coverage, Mockito.times(1))
-      .addBranchCoverage(eq(firstPath), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 2, 2)));
+      .addBranchCoverage(eq(path), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 2, 2)));
   }
 
   @Test
   public void givenMultiplePointsPerLineSomeOnTheSameCodeWithPartialHits_publishCoverage_doesNotSumConditionsMultipleTimes() {
     Coverage coverage = mock(Coverage.class);
-    String firstPath = "first";
+    String path = "path";
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 0));
-    sut.add(new SequencePoint(firstPath, 1, 4, 1, 8, 0));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 0));
+    sut.add(new SequencePoint(path, 1, 4, 1, 8, 0));
 
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 1));
-    sut.add(new SequencePoint(firstPath, 1, 4, 1, 8, 0));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 1));
+    sut.add(new SequencePoint(path, 1, 4, 1, 8, 0));
 
     sut.publishCoverage(coverage);
 
     verify(coverage, Mockito.times(1))
-      .addBranchCoverage(eq(firstPath), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 2, 1)));
+      .addBranchCoverage(eq(path), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 2, 1)));
   }
 
   @Test
   public void givenMultiplePointsPerLineSomeOnTheSameCodeWithNoHits_publishCoverage_doesNotSumConditionsMultipleTimes() {
     Coverage coverage = mock(Coverage.class);
-    String firstPath = "first";
+    String path = "path";
 
     SequencePointCollector sut = new SequencePointCollector();
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 0));
-    sut.add(new SequencePoint(firstPath, 1, 4, 1, 8, 0));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 0));
+    sut.add(new SequencePoint(path, 1, 4, 1, 8, 0));
 
-    sut.add(new SequencePoint(firstPath, 1, 2, 1, 4, 0));
-    sut.add(new SequencePoint(firstPath, 1, 4, 1, 8, 0));
+    sut.add(new SequencePoint(path, 1, 2, 1, 4, 0));
+    sut.add(new SequencePoint(path, 1, 4, 1, 8, 0));
 
     sut.publishCoverage(coverage);
 
     verify(coverage, Mockito.times(1))
-      .addBranchCoverage(eq(firstPath), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 2, 0)));
+      .addBranchCoverage(eq(path), argThat(branchCoverage -> IsMatch(branchCoverage, 1, 2, 0)));
   }
 
   private Boolean IsMatch(BranchCoverage bc, int line, int conditions, int coveredConditions) {
