@@ -177,19 +177,19 @@ public class CoverageTest {
     sut.add(new BranchPoint(filePath, 1, 1, 2, 0, 1));
     sut.add(new BranchPoint(filePath, 1, 1, 2, 0, 1));
 
-    // Branch points with different line are not merged
+    // Branch points with different line are not aggregated
     sut.add(new BranchPoint(filePath, 2, 1, 2, 0, 1));
     sut.add(new BranchPoint(filePath, 3, 1, 2, 0, 1));
 
-    // Branch points with different offset are not merged
+    // Branch points with different offset are correctly aggregated
     sut.add(new BranchPoint(filePath, 4, 1, 2, 0, 1));
     sut.add(new BranchPoint(filePath, 4, 2, 2, 0, 1));
 
-    // Branch points with different offsetEnd are not merged
+    // Branch points with different offsetEnd are correctly aggregated
     sut.add(new BranchPoint(filePath, 5, 1, 2, 0, 1));
     sut.add(new BranchPoint(filePath, 5, 1, 3, 0, 1));
 
-    // Branch points with different path are not merged
+    // Branch points with different path are correctly aggregated
     sut.add(new BranchPoint(filePath, 6, 1, 2, 0, 1));
     sut.add(new BranchPoint(filePath, 6, 1, 2, 1, 1));
 

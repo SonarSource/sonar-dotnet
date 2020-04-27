@@ -25,6 +25,7 @@ class BranchPoint {
   private final int offsetEnd;
   private final int startLine;
   private final int hits;
+  // identifier for code path
   private final int path;
   private final String filePath;
 
