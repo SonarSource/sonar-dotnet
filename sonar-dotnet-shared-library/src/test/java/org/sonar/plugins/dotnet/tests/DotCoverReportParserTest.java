@@ -120,7 +120,7 @@ public class DotCoverReportParserTest {
         Assertions.entry(34, 1)
       );
 
-    assertThat(coverage.getBranchCoverage(filePath))
+    assertThat(coverage.getBranchCoverageBySequencePoints(filePath))
       .hasSize(4)
       .containsOnly(
         // line 7: CoveredGet , UncoveredProperty and CoveredSet on the same line

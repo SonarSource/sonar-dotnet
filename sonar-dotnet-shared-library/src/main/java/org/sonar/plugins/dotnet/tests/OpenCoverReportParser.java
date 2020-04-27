@@ -77,6 +77,8 @@ public class OpenCoverReportParser implements CoverageParser {
           handleFileRef(xmlParserHelper);
         } else if ("SequencePoint".equals(tagName)) {
           handleSequencePointTag(xmlParserHelper);
+        } else if ("BranchPoint".equals(tagName)) {
+          handleBranchPointTag(xmlParserHelper);
         }
       }
 
@@ -105,8 +107,6 @@ public class OpenCoverReportParser implements CoverageParser {
       int line = xmlParserHelper.getRequiredIntAttribute("sl");
       int endLine = xmlParserHelper.getRequiredIntAttribute("el");
       int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
-      int branchExitsCount = xmlParserHelper.getIntAttributeOrZero("bec");
-      int branchExitsVisit = xmlParserHelper.getIntAttributeOrZero("bev");
 
       String fileId = xmlParserHelper.getAttribute("fileid");
       if (fileId == null) {
@@ -120,11 +120,6 @@ public class OpenCoverReportParser implements CoverageParser {
           LOG.trace("OpenCover parser: add hits for fileId '{}', filePath '{}', line '{}', visitCount '{}'",
             fileId, filePath, line, visitCount);
 
-          // Branch exit count is 0 for all the lines which don't have branches.
-          if (branchExitsCount > 0){
-            coverage.addBranchCoverage(filePath, new BranchCoverage(line, branchExitsCount, branchExitsVisit));
-          }
-
           coverage.addHits(filePath, line, visitCount);
 
           sequencePointCollector.add(new SequencePoint(filePath, line, endLine, visitCount));
@@ -133,6 +128,38 @@ public class OpenCoverReportParser implements CoverageParser {
               " is not indexed or does not have the supported language.",
             fileId, line, visitCount, filePath);
         }
+      } else {
+        LOG.debug("OpenCover parser: the fileId '{}' key is not contained in files", fileId);
+      }
+    }
+
+    private void handleBranchPointTag(XmlParserHelper xmlParserHelper) {
+      String fileId = xmlParserHelper.getAttribute("fileid");
+      if (fileId == null) {
+        fileId = fileRef;
+      }
+
+      if (files.containsKey(fileId)) {
+        String filePath = files.get(fileId);
+
+        int line = xmlParserHelper.getIntAttributeOrZero("sl");
+        if (line == 0){
+          LOG.warn("OpenCover parser: invalid start line for {}", fileId);
+          return;
+        }
+
+        int offset = xmlParserHelper.getRequiredIntAttribute("offset");
+        int offsetEnd = xmlParserHelper.getRequiredIntAttribute("offsetend");
+        int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
+
+        if (isSupported.test(filePath)) {
+          coverage.add(new BranchPoint(filePath, line, offset, offsetEnd, visitCount));
+        } else {
+          LOG.debug("OpenCover parser: Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +
+              " is not indexed or does not have the supported language.",
+            fileId, line, visitCount, filePath);
+        }
+
       } else {
         LOG.debug("OpenCover parser: the fileId '{}' key is not contained in files", fileId);
       }

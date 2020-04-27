@@ -70,7 +70,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void testBranchCoverage(){
+  public void testBranchCoverageBySequencePoint(){
     Coverage first = new Coverage();
 
     BranchCoverage fooFirstLine = new BranchCoverage(1, 6, 3);
@@ -83,8 +83,8 @@ public class CoverageTest {
     first.addBranchCoverage("foo.txt", fooThirdLine);
     first.addBranchCoverage("bar.txt", barFirstLine);
 
-    assertThat(first.getBranchCoverage("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
-    assertThat(first.getBranchCoverage("bar.txt")).containsExactly(barFirstLine);
+    assertThat(first.getBranchCoverageBySequencePoints("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
+    assertThat(first.getBranchCoverageBySequencePoints("bar.txt")).containsExactly(barFirstLine);
 
     Coverage second = new Coverage();
 
@@ -93,8 +93,8 @@ public class CoverageTest {
 
     second.mergeWith(first);
 
-    assertThat(second.getBranchCoverage("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
-    assertThat(second.getBranchCoverage("bar.txt")).containsExactly(new BranchCoverage(2, 4, 3), barFirstLine);
+    assertThat(second.getBranchCoverageBySequencePoints("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
+    assertThat(second.getBranchCoverageBySequencePoints("bar.txt")).containsExactly(new BranchCoverage(2, 4, 3), barFirstLine);
   }
 
   @Test
@@ -103,21 +103,128 @@ public class CoverageTest {
     Coverage coverage = new Coverage();
 
     coverage.addBranchCoverage(fileName, new BranchCoverage(1, 2, 1));
-    assertThat(coverage.getBranchCoverage(fileName)).containsExactly(new BranchCoverage(1, 2, 1));
+    assertThat(coverage.getBranchCoverageBySequencePoints(fileName)).containsExactly(new BranchCoverage(1, 2, 1));
 
     coverage.addBranchCoverage(fileName, new BranchCoverage(3, 2, 1));
-    assertThat(coverage.getBranchCoverage(fileName)).containsExactly(
+    assertThat(coverage.getBranchCoverageBySequencePoints(fileName)).containsExactly(
       new BranchCoverage(1, 2, 1),
       new BranchCoverage(3, 2, 1));
 
     coverage.addBranchCoverage(fileName, new BranchCoverage(3, 3, 2));
-    assertThat(coverage.getBranchCoverage(fileName)).containsExactly(
+    assertThat(coverage.getBranchCoverageBySequencePoints(fileName)).containsExactly(
       new BranchCoverage(1, 2, 1),
       new BranchCoverage(3, 5, 3));
 
     coverage.addBranchCoverage(fileName, new BranchCoverage(3, 4, 4));
-    assertThat(coverage.getBranchCoverage(fileName)).containsExactly(
+    assertThat(coverage.getBranchCoverageBySequencePoints(fileName)).containsExactly(
       new BranchCoverage(1, 2, 1),
       new BranchCoverage(3, 9, 7));
+  }
+
+
+  @Test
+  public void givenEmptyListOfBranchPoints_getBranchCoverage_returnsEmpty() {
+    Coverage sut = new Coverage();
+
+    assertThat(sut.getBranchCoverage("fileName")).isEmpty();
+  }
+
+  @Test
+  public void givenSingleBranchPoint_getBranchCoverage_returnsEmpty() {
+    final String filePath = "filePath";
+
+    Coverage sut = new Coverage();
+    sut.add(new BranchPoint(filePath, 1, 2, 3, 4));
+
+    assertThat(sut.getBranchCoverage(filePath)).isEmpty();
+  }
+
+  @Test
+  public void givenSingleBranchPointPerFile_getBranchCoverage_returnsEmpty() {
+    final String firstPath = "firstPath";
+    final String secondPath = "secondPath";
+
+    Coverage sut = new Coverage();
+    sut.add(new BranchPoint(firstPath, 1, 2, 3, 4));
+    sut.add(new BranchPoint(secondPath, 1, 5, 6, 7));
+
+    assertThat(sut.getBranchCoverage(firstPath)).isEmpty();
+    assertThat(sut.getBranchCoverage(secondPath)).isEmpty();
+  }
+
+  @Test
+  public void givenSingleBranchPointPerLine_getBranchCoverage_returnsEmpty() {
+    final String filePath = "filePath";
+
+    Coverage sut = new Coverage();
+    sut.add(new BranchPoint(filePath, 1, 2, 3, 4));
+    sut.add(new BranchPoint(filePath, 2, 5, 6, 7));
+
+    assertThat(sut.getBranchCoverage(filePath)).isEmpty();
+  }
+
+  @Test
+  public void givenMultipleBranchPointsPerLine_getBranchCoverage_returnsBranchCoverage() {
+    final String filePath = "filePath";
+
+    Coverage sut = new Coverage();
+    // Both branch points covered
+    sut.add(new BranchPoint(filePath, 1, 1, 3, 2));
+    sut.add(new BranchPoint(filePath, 1, 4, 6, 1));
+
+    // Only 2 out of 3 branch points covered
+    sut.add(new BranchPoint(filePath, 2, 1, 3, 2));
+    sut.add(new BranchPoint(filePath, 2, 4, 6, 0));
+    sut.add(new BranchPoint(filePath, 2, 6, 8, 4));
+
+    // No branch points covered
+    sut.add(new BranchPoint(filePath, 3, 1, 3, 0));
+    sut.add(new BranchPoint(filePath, 3, 4, 6, 0));
+
+    // Same branch points appear multiple times, none covered (when tests are split in multiple test projects)
+    sut.add(new BranchPoint(filePath, 4, 1, 3, 0));
+    sut.add(new BranchPoint(filePath, 4, 4, 6, 0));
+    sut.add(new BranchPoint(filePath, 4, 1, 3, 0));
+    sut.add(new BranchPoint(filePath, 4, 4, 6, 0));
+
+    // Same branch points appear multiple times, same coverage (when tests are split in multiple test projects)
+    sut.add(new BranchPoint(filePath, 5, 1, 3, 1));
+    sut.add(new BranchPoint(filePath, 5, 4, 6, 0));
+    sut.add(new BranchPoint(filePath, 5, 1, 3, 1));
+    sut.add(new BranchPoint(filePath, 5, 4, 6, 0));
+
+    // Same branch points appear multiple times, different coverage (when tests are split in multiple test projects)
+    sut.add(new BranchPoint(filePath, 6, 1, 3, 1));
+    sut.add(new BranchPoint(filePath, 6, 4, 6, 0));
+    sut.add(new BranchPoint(filePath, 6, 1, 3, 0));
+    sut.add(new BranchPoint(filePath, 6, 4, 6, 1));
+
+    assertThat(sut.getBranchCoverage(filePath))
+      .hasSize(6)
+      .containsOnly(
+        new BranchCoverage(1, 2, 2),
+        new BranchCoverage(2, 3, 2),
+        new BranchCoverage(3, 2, 0),
+        new BranchCoverage(4, 2, 0),
+        new BranchCoverage(5, 2, 1),
+        new BranchCoverage(6, 2, 2)
+      );
+  }
+
+  @Test
+  public void givenMultipleBranchPointsPerLineInDifferentFiles_getBranchCoverage_returnsBranchCoverage() {
+    final String firstPath = "firstPath";
+    final String secondPath = "secondPath";
+
+    Coverage sut = new Coverage();
+    sut.add(new BranchPoint(firstPath, 1, 1, 3, 2));
+    sut.add(new BranchPoint(firstPath, 1, 4, 6, 1));
+
+    sut.add(new BranchPoint(secondPath, 1, 5, 8, 2));
+    sut.add(new BranchPoint(secondPath, 1, 10, 12, 0));
+    sut.add(new BranchPoint(secondPath, 1, 12, 14, 0));
+
+    assertThat(sut.getBranchCoverage(firstPath)).containsOnly(new BranchCoverage(1, 2, 2));
+    assertThat(sut.getBranchCoverage(secondPath)).containsOnly(new BranchCoverage(1, 3, 1));
   }
 }

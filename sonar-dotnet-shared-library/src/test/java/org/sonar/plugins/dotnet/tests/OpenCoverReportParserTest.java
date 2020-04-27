@@ -40,7 +40,8 @@ public class OpenCoverReportParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
-  private Predicate<String> alwaysTrue = s -> true;
+  private final Predicate<String> alwaysTrue = s -> true;
+  private final Predicate<String> alwaysFalse = s -> false;
 
   @Test
   public void invalid_root() {
@@ -129,16 +130,56 @@ public class OpenCoverReportParserTest {
         Assertions.entry(18, 1),
         Assertions.entry(25, 1));
 
-    assertThat(coverage.getBranchCoverage(filePath).size()).isEqualTo(5);
-
-    assertThat(coverage.getBranchCoverage(filePath).get(0)).isEqualTo(new BranchCoverage(9, 4 , 2));
-    assertThat(coverage.getBranchCoverage(filePath).get(1)).isEqualTo(new BranchCoverage(12, 2 , 1));
-    assertThat(coverage.getBranchCoverage(filePath).get(2)).isEqualTo(new BranchCoverage(13, 2, 1));
-    assertThat(coverage.getBranchCoverage(filePath).get(3)).isEqualTo(new BranchCoverage(14, 6, 4));
-    assertThat(coverage.getBranchCoverage(filePath).get(4)).isEqualTo(new BranchCoverage(18, 6, 3));
+    assertThat(coverage.getBranchCoverage(filePath))
+      .hasSize(5)
+      .contains(
+        new BranchCoverage(9, 4 , 2),
+        new BranchCoverage(12, 2 , 1),
+        new BranchCoverage(13, 2, 1),
+        new BranchCoverage(14, 4, 2),
+        new BranchCoverage(18, 6, 3));
   }
 
-    @Test
+  @Test
+  public void branchCoverage_codeFile_analyzedByMultipleProjects() throws Exception {
+    Coverage coverage = new Coverage();
+    String filePath = new File("BranchCoverage3296\\Code\\ValueProvider.cs").getCanonicalPath();
+
+    new OpenCoverReportParser(alwaysTrue).accept(new File("src/test/resources/opencover/code_tested_by_multiple_projects.xml"), coverage);
+    assertThat(coverage.files()).containsOnly(filePath);
+
+    assertThat(coverage.getBranchCoverage(filePath)).containsOnly(new BranchCoverage(5, 2, 2));
+  }
+
+  @Test
+  public void branchCoverage_codeFile_unsupportedFile() throws Exception {
+    Coverage coverage = new Coverage();
+    String filePath = new File("BranchCoverage3296\\Code\\ValueProvider.cs").getCanonicalPath();
+
+    new OpenCoverReportParser(alwaysFalse).accept(new File("src/test/resources/opencover/code_tested_by_multiple_projects.xml"), coverage);
+    assertThat(coverage.files()).isEmpty();
+    assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.DEBUG))
+      .contains("OpenCover parser: Skipping the fileId '1', line '5', vc '1' because file '" + filePath + "' is not indexed or does not have the supported language.");
+  }
+
+  @Test
+  public void branchCoverage_invalidFileId() throws Exception {
+    Coverage coverage = new Coverage();
+    String filePath = new File("BranchCoverage3296\\Code\\ValueProvider.cs").getCanonicalPath();
+
+    new OpenCoverReportParser(alwaysTrue).accept(new File("src/test/resources/opencover/invalid_file_id.xml"), coverage);
+    assertThat(coverage.files()).containsOnly(filePath);
+
+    assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs)
+      .contains(
+        "OpenCover parser: the fileId '3' key is not contained in files",
+        "OpenCover parser: the fileId '4' key is not contained in files");
+  }
+
+  @Test
   public void branchCoverage_getter_setter_multiple_sequence_points_per_line() throws Exception {
     Coverage coverage = new Coverage();
     String filePath = new File("GetSet\\Bar.cs").getCanonicalPath();
@@ -167,8 +208,8 @@ public class OpenCoverReportParserTest {
         Assertions.entry(29, 1));
 
       // the unreachable code is taken into consideration by the coverage tool
-      assertThat(coverage.getBranchCoverage(filePath))
-        .hasSize(5)
+      assertThat(coverage.getBranchCoverageBySequencePoints(filePath))
+        .hasSize(4)
         .containsOnly(
           // line 11: CoveredGet , UncoveredProperty and CoveredSet on the same line
           new BranchCoverage(11, 6, 2),
@@ -179,12 +220,13 @@ public class OpenCoverReportParserTest {
           // line 15: CoveredProperty
           new BranchCoverage(15, 2, 2),
 
-          // line 17: ArrowMethod
-          new BranchCoverage(17, 2, 1),
-
           // line 21: first line inside BodyMethod - 3 statements (what is after 'goto' is ignored)
           new BranchCoverage(21, 3, 3)
         );
+
+      assertThat(coverage.getBranchCoverage(filePath))
+        .hasSize(1)
+        .containsOnly(new BranchCoverage(17, 2, 1)); // line 17: ArrowMethod
 
       List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
       assertThat(traceLogs).hasSize(35);
@@ -197,7 +239,7 @@ public class OpenCoverReportParserTest {
   @Test
   public void log_unsupported_file_extension() {
     Coverage coverage = new Coverage();
-    Predicate<String> alwaysFalse = s -> false;
+
     // to easily check the logs (it has only one coverage entry)
     new OpenCoverReportParser(alwaysFalse).accept(new File("src/test/resources/opencover/one_class.xml"), coverage);
 
