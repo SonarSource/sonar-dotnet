@@ -244,33 +244,12 @@ public class OpenCoverReportParserTest {
         Assertions.entry(28, 1),
         Assertions.entry(29, 1));
 
-      // the unreachable code is taken into consideration by the coverage tool
-      assertThat(coverage.getBranchCoverageBySequencePoints(filePath))
-        .hasSize(4)
-        .containsOnly(
-          // line 11: CoveredGet , UncoveredProperty and CoveredSet on the same line
-          new BranchCoverage(11, 6, 2),
-
-          // line 13: CoveredGetOnSecondLine
-          new BranchCoverage(13, 2, 1),
-
-          // line 15: CoveredProperty
-          new BranchCoverage(15, 2, 2),
-
-          // line 21: first line inside BodyMethod - 3 statements (what is after 'goto' is ignored)
-          new BranchCoverage(21, 3, 3)
-        );
-
       assertThat(coverage.getBranchCoverage(filePath))
         .hasSize(1)
         .containsOnly(new BranchCoverage(17, 2, 1)); // line 17: ArrowMethod
 
       List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
-      assertThat(traceLogs).hasSize(35);
-
-
-      assertThat(traceLogs)
-        .contains(String.format("Found coverage information about '10' lines having single-line sequence points for file '%s'", filePath));
+      assertThat(traceLogs).hasSize(32);
   }
 
   @Test

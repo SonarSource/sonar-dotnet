@@ -101,21 +101,15 @@ public class DotCoverReportParser implements CoverageParser {
 
       matcher = COVERED_LINES_PATTERN_2.matcher(highlightedContents);
 
-      SequencePointCollector collector = new SequencePointCollector();
-
       while (matcher.find()) {
         int lineStart = Integer.parseInt(matcher.group(1));
-        int lineEnd = Integer.parseInt(matcher.group(2));
         int hits = Integer.parseInt(matcher.group(3));
 
         coverage.addHits(fileCanonicalPath, lineStart, hits);
-        collector.add(new SequencePoint(fileCanonicalPath, lineStart, lineEnd, hits));
 
         LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
             lineStart, hits, fileCanonicalPath);
       }
-
-      collector.publishCoverage(coverage);
     }
 
     private void checkMatches(Matcher matcher) {

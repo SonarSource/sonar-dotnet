@@ -24,7 +24,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,7 +33,6 @@ public class Coverage {
   private static final int GROW_FACTOR = 2;
   private static final int SPECIAL_HITS_NON_EXECUTABLE = -1;
   private final Map<String, int[]> hitsByLineAndFile = new HashMap<>();
-  private final Map<String, List<BranchCoverage>> branchCoverageByFile = new HashMap<>();
   private final List<BranchPoint> branchPoints = new ArrayList<>();
 
   void addHits(String file, int line, int hits) {
@@ -67,22 +65,6 @@ public class Coverage {
     branchPoints.add(branchPoint);
   }
 
-  public void addBranchCoverage(String file, BranchCoverage branchCoverage){
-    List<BranchCoverage> branchCoverages = branchCoverageByFile.computeIfAbsent(file, k -> new ArrayList<>());
-
-    // If there are multiple branch coverage entries per line these need to be merged; otherwise SQ/SC will display only
-    // one of them.
-    Optional<BranchCoverage> existingCoverage = branchCoverages.stream()
-      .filter(coverage -> coverage.getLine() == branchCoverage.getLine())
-      .findAny();
-
-    if (existingCoverage.isPresent()){
-      existingCoverage.get().add(branchCoverage.getConditions(), branchCoverage.getCoveredConditions());
-    } else {
-      branchCoverages.add(branchCoverage);
-    }
-  }
-
   public Set<String> files() {
     return hitsByLineAndFile.keySet();
   }
@@ -101,11 +83,6 @@ public class Coverage {
     }
 
     return result;
-  }
-
-  // this is the "custom coverage" we have for multiple statements per line coverage
-  List<BranchCoverage> getBranchCoverageBySequencePoints(String file) {
-    return branchCoverageByFile.getOrDefault(file, new ArrayList<>());
   }
 
   List<BranchCoverage> getBranchCoverage(String file) {
@@ -140,8 +117,6 @@ public class Coverage {
 
   void mergeWith(Coverage otherCoverage) {
     mergeLineHits(otherCoverage);
-    mergeBranchCoverage(otherCoverage);
-
     branchPoints.addAll(otherCoverage.branchPoints);
   }
 
@@ -154,18 +129,6 @@ public class Coverage {
 
       for (int i = otherHitsByLine.length - 1; i >= 0; i--) {
         addHits(file, i + 1, otherHitsByLine[i]);
-      }
-    }
-  }
-
-  private void mergeBranchCoverage(Coverage otherCoverage){
-    Map<String, List<BranchCoverage>> otherBranchCoverageByFile = otherCoverage.branchCoverageByFile;
-
-    for (Map.Entry<String, List<BranchCoverage>> entry: otherBranchCoverageByFile.entrySet()){
-      String file = entry.getKey();
-
-      for (BranchCoverage branchCoverage : entry.getValue()) {
-        addBranchCoverage(file, branchCoverage);
       }
     }
   }

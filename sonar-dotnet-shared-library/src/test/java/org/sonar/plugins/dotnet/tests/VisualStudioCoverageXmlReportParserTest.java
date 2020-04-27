@@ -95,9 +95,9 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(3);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
-      .startsWith("Found coverage information about '16' lines for file id '0' , path ")
+      .startsWith("Found covered lines for id '0' for path ")
       .endsWith("\\MyLibrary\\Calc.cs'");
   }
 
@@ -116,15 +116,13 @@ public class VisualStudioCoverageXmlReportParserTest {
     );
 
     assertThat(coverage.hits(filePath)).containsExactly(Assertions.entry(11, 1));
-
-    assertThat(coverage.getBranchCoverageBySequencePoints(filePath))
-      .containsExactly(new BranchCoverage(11, 2, 1));
+    assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(3);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
-      .startsWith("Found coverage information about '1' lines for file id '0' , path ")
+      .startsWith("Found covered lines for id '0' for path ")
       .endsWith("\\GetSet\\Bar.cs'");
   }
 
@@ -143,15 +141,13 @@ public class VisualStudioCoverageXmlReportParserTest {
     );
 
     assertThat(coverage.hits(filePath)).containsOnly(Assertions.entry(11, 2));
-
-    assertThat(coverage.getBranchCoverageBySequencePoints(filePath))
-      .containsExactly(new BranchCoverage(11, 6, 2));
+    assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(3);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
-      .startsWith("Found coverage information about '1' lines for file id '0' , path ")
+      .startsWith("Found covered lines for id '0' for path ")
       .endsWith("\\GetSet\\Bar.cs'");
   }
 
@@ -191,29 +187,13 @@ public class VisualStudioCoverageXmlReportParserTest {
         Assertions.entry(29, 1));
 
     // the unreachable code is taken into consideration by the coverage tool
-    assertThat(coverage.getBranchCoverageBySequencePoints(filePath))
-      .hasSize(4)
-      .containsOnly(
-      // line 11: CoveredGet , UncoveredProperty and CoveredSet on the same line
-      new BranchCoverage(11, 6, 2),
-
-      // line 13: CoveredGetOnSecondLine
-      new BranchCoverage(13, 2, 1),
-
-      // line 15: CoveredProperty
-      new BranchCoverage(15, 2, 2),
-
-      // line 17: the ArrowMethod has 'partial' coverage inside the VS report; we don't have branch coverage info for it
-
-      // line 21: first line inside BodyMethod - 3 statements (what is after 'goto' is ignored)
-      new BranchCoverage(21, 3, 3)
-    );
+    assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(3);
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(4);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
-      .startsWith("Found coverage information about '10' lines for file id '1' , path ")
+      .startsWith("Found covered lines for id '1' for path ")
       .endsWith("\\GetSet\\Bar.cs'");
   }
 
@@ -250,7 +230,7 @@ public class VisualStudioCoverageXmlReportParserTest {
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
-      .startsWith("Found coverage information about '10' lines for file id '0' , path ")
+      .startsWith("Found uncovered lines for id '0' for path ")
       .endsWith("\\MyLibrary\\Calc.cs'");
   }
 

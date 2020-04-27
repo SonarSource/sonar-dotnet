@@ -85,9 +85,6 @@ public class DotCoverReportParserTest {
         Assertions.entry(34, 0));
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
-    assertThat(logTester.logs(LoggerLevel.TRACE))
-      .hasSize(17)
-      .contains(String.format("Found coverage information about '16' lines having single-line sequence points for file '%s'", filePath));
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
       .startsWith("dotCover parser: found coverage for line '12', hits '0' when analyzing the path '");
   }
@@ -118,22 +115,6 @@ public class DotCoverReportParserTest {
         Assertions.entry(32, 1),
         Assertions.entry(33, 1),
         Assertions.entry(34, 1)
-      );
-
-    assertThat(coverage.getBranchCoverageBySequencePoints(filePath))
-      .hasSize(4)
-      .containsOnly(
-        // line 7: CoveredGet , UncoveredProperty and CoveredSet on the same line
-        new BranchCoverage(7, 6, 2),
-
-        // line 9: CoveredGetOnSecondLine
-        new BranchCoverage(9, 2, 1),
-
-        // line 11: CoveredProperty
-        new BranchCoverage(11, 2, 2),
-
-        // line 17: first line inside BodyMethod - 3 statements (what is after 'goto' is ignored)
-        new BranchCoverage(17, 3, 3)
       );
   }
 

@@ -51,7 +51,6 @@ public class OpenCoverReportParser implements CoverageParser {
     // the key is the file ID, the value is the file path
     private final Map<String, String> files = new HashMap<>();
     // the key is the file path
-    private SequencePointCollector sequencePointCollector = new SequencePointCollector();
     private String fileRef;
 
     Parser(File file, Coverage coverage) {
@@ -81,8 +80,6 @@ public class OpenCoverReportParser implements CoverageParser {
           handleBranchPointTag(xmlParserHelper);
         }
       }
-
-      sequencePointCollector.publishCoverage(coverage);
     }
 
     private void handleFileRef(XmlParserHelper xmlParserHelper) {
@@ -121,8 +118,6 @@ public class OpenCoverReportParser implements CoverageParser {
             fileId, filePath, line, visitCount);
 
           coverage.addHits(filePath, line, visitCount);
-
-          sequencePointCollector.add(new SequencePoint(filePath, line, endLine, visitCount));
         } else {
           LOG.debug("Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +
               " is not indexed or does not have the supported language.",
