@@ -117,7 +117,7 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(coverage.hits(filePath)).containsExactly(Assertions.entry(11, 1));
 
-    assertThat(coverage.getBranchCoverage(filePath))
+    assertThat(coverage.getBranchCoverageBySequencePoints(filePath))
       .containsExactly(new BranchCoverage(11, 2, 1));
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
@@ -144,7 +144,7 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(coverage.hits(filePath)).containsOnly(Assertions.entry(11, 2));
 
-    assertThat(coverage.getBranchCoverage(filePath))
+    assertThat(coverage.getBranchCoverageBySequencePoints(filePath))
       .containsExactly(new BranchCoverage(11, 6, 2));
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
@@ -191,7 +191,7 @@ public class VisualStudioCoverageXmlReportParserTest {
         Assertions.entry(29, 1));
 
     // the unreachable code is taken into consideration by the coverage tool
-    assertThat(coverage.getBranchCoverage(filePath))
+    assertThat(coverage.getBranchCoverageBySequencePoints(filePath))
       .hasSize(4)
       .containsOnly(
       // line 11: CoveredGet , UncoveredProperty and CoveredSet on the same line

@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Coverage {
 
@@ -34,6 +35,7 @@ public class Coverage {
   private static final int SPECIAL_HITS_NON_EXECUTABLE = -1;
   private final Map<String, int[]> hitsByLineAndFile = new HashMap<>();
   private final Map<String, List<BranchCoverage>> branchCoverageByFile = new HashMap<>();
+  private final List<BranchPoint> branchPoints = new ArrayList<>();
 
   void addHits(String file, int line, int hits) {
     int[] oldHitsByLine = hitsByLineAndFile.get(file);
@@ -59,6 +61,10 @@ public class Coverage {
       oldHitsByLine[i] = 0;
     }
     oldHitsByLine[i] += hits;
+  }
+
+  public void add(BranchPoint branchPoint){
+    branchPoints.add(branchPoint);
   }
 
   public void addBranchCoverage(String file, BranchCoverage branchCoverage){
@@ -97,13 +103,46 @@ public class Coverage {
     return result;
   }
 
-  List<BranchCoverage> getBranchCoverage(String file){
+  // this is the "custom coverage" we have for multiple statements per line coverage
+  List<BranchCoverage> getBranchCoverageBySequencePoints(String file) {
     return branchCoverageByFile.getOrDefault(file, new ArrayList<>());
+  }
+
+  List<BranchCoverage> getBranchCoverage(String file) {
+    List<BranchCoverage> result = new ArrayList<>();
+
+    Map<Integer, List<BranchPoint>> branchPointsPerLine = branchPoints.stream()
+      .filter(point -> point.getFilePath().equals(file))
+      .collect(Collectors.groupingBy(BranchPoint::getStartLine));
+
+    for (Map.Entry<Integer, List<BranchPoint>> lineBranchPoints : branchPointsPerLine.entrySet()){
+      if (lineBranchPoints.getValue().size() > 1){
+        int line = lineBranchPoints.getKey();
+
+        List<BranchPoint> linePoints = lineBranchPoints.getValue();
+        Map<String, List<BranchPoint>> groupsByKey = linePoints.stream().collect(Collectors.groupingBy(BranchPoint::getUniqueKey));
+
+        int coveredBranchPoints = 0;
+        for (Map.Entry<String, List<BranchPoint>> group: groupsByKey.entrySet()){
+          if (group.getValue().stream().filter(point -> point.getHits() >0).count() > 0){
+            coveredBranchPoints++;
+          }
+        }
+
+        if(groupsByKey.size() > 1) {
+          result.add(new BranchCoverage(line, groupsByKey.size(), coveredBranchPoints));
+        }
+      }
+    }
+
+    return result;
   }
 
   void mergeWith(Coverage otherCoverage) {
     mergeLineHits(otherCoverage);
     mergeBranchCoverage(otherCoverage);
+
+    branchPoints.addAll(otherCoverage.branchPoints);
   }
 
   private void mergeLineHits(Coverage otherCoverage){
