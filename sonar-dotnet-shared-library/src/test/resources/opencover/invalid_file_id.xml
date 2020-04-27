@@ -3,8 +3,10 @@
 Below is the code for which this coverage file has been created,
 together with the commands to generate the file and the tools versions.
 
-Note: the file paths were manually changed inside the report to be relative and
-the file id was modified to be invalid
+Note:
+ - the file paths were manually changed inside the report to be relative
+ - the file id was modified to be invalid
+
 ________________________________________________________
 namespace Code
 {

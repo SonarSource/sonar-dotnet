@@ -136,6 +136,8 @@ public class CoverageTest {
     Coverage sut = new Coverage();
     sut.add(new BranchPoint(filePath, 1, 2, 3, 4));
 
+    // Normally this case should not happen but if we have only one branch point
+    // we should not report coverage as line coverage is already covering that.
     assertThat(sut.getBranchCoverage(filePath)).isEmpty();
   }
 
@@ -148,6 +150,8 @@ public class CoverageTest {
     sut.add(new BranchPoint(firstPath, 1, 2, 3, 4));
     sut.add(new BranchPoint(secondPath, 1, 5, 6, 7));
 
+    // Normally this case should not happen but if we have only one branch point
+    // we should not report coverage as line coverage is already covering that.
     assertThat(sut.getBranchCoverage(firstPath)).isEmpty();
     assertThat(sut.getBranchCoverage(secondPath)).isEmpty();
   }

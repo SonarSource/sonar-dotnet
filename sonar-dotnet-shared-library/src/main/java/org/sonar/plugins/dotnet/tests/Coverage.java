@@ -103,6 +103,7 @@ public class Coverage {
     return result;
   }
 
+  // this is the "custom coverage" we have for multiple statements per line coverage
   List<BranchCoverage> getBranchCoverageBySequencePoints(String file) {
     return branchCoverageByFile.getOrDefault(file, new ArrayList<>());
   }
@@ -119,16 +120,16 @@ public class Coverage {
         int line = lineBranchPoints.getKey();
 
         List<BranchPoint> linePoints = lineBranchPoints.getValue();
-        Map<String, List<BranchPoint>> groupsByCoverageKey = linePoints.stream().collect(Collectors.groupingBy(BranchPoint::getUniqueKey));
+        Map<String, List<BranchPoint>> groupsByKey = linePoints.stream().collect(Collectors.groupingBy(BranchPoint::getUniqueKey));
 
         int coveredBranchPoints = 0;
-        for (Map.Entry<String, List<BranchPoint>> group: groupsByCoverageKey.entrySet()){
+        for (Map.Entry<String, List<BranchPoint>> group: groupsByKey.entrySet()){
           if (group.getValue().stream().filter(point -> point.getHits() >0).count() > 0){
             coveredBranchPoints++;
           }
         }
 
-        result.add(new BranchCoverage(line, groupsByCoverageKey.size(), coveredBranchPoints));
+        result.add(new BranchCoverage(line, groupsByKey.size(), coveredBranchPoints));
       }
     }
 

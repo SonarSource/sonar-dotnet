@@ -133,10 +133,25 @@ public class OpenCoverReportParserTest {
     assertThat(coverage.getBranchCoverage(filePath))
       .hasSize(5)
       .contains(
+        //  if (x == 0 || y < 0)
         new BranchCoverage(9, 4 , 2),
+
+        // _ = y == 0 || z == 0;
         new BranchCoverage(12, 2 , 1),
+
+        // _ = x == y || y == z;
         new BranchCoverage(13, 2, 1),
+
+        // _ = y == 0 || z == 0; _ = x == y || y == z;
         new BranchCoverage(14, 4, 2),
+
+        // return x < 2
+        //    ? y < 3
+        //        ? z < 1
+        //            ? 1
+        //            : 2
+        //        : 3
+        //    : 4;
         new BranchCoverage(18, 6, 3));
   }
 
@@ -156,6 +171,7 @@ public class OpenCoverReportParserTest {
     Coverage coverage = new Coverage();
     String filePath = new File("BranchCoverage3296\\Code\\ValueProvider.cs").getCanonicalPath();
 
+    // Notice we pass "alwaysFalse" as a predicate
     new OpenCoverReportParser(alwaysFalse).accept(new File("src/test/resources/opencover/code_tested_by_multiple_projects.xml"), coverage);
     assertThat(coverage.files()).isEmpty();
     assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
