@@ -102,7 +102,6 @@ public class OpenCoverReportParser implements CoverageParser {
       // Open Cover lacks model documentation but the details can be found in the source code:
       // https://github.com/OpenCover/opencover/blob/4.7.922/main/OpenCover.Framework/Model/SequencePoint.cs
       int line = xmlParserHelper.getRequiredIntAttribute("sl");
-      int endLine = xmlParserHelper.getRequiredIntAttribute("el");
       int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
 
       String fileId = xmlParserHelper.getAttribute("fileid");
