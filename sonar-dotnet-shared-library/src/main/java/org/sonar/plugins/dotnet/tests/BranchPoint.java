@@ -25,13 +25,15 @@ class BranchPoint {
   private final int offsetEnd;
   private final int startLine;
   private final int hits;
+  private final int path;
   private final String filePath;
 
-  public BranchPoint(String filePath, int startLine, int offset, int offsetEnd, int hits) {
+  public BranchPoint(String filePath, int startLine, int offset, int offsetEnd, int path, int hits) {
     this.filePath = filePath;
     this.startLine = startLine;
     this.offset = offset;
     this.offsetEnd = offsetEnd;
+    this.path = path;
     this.hits = hits;
   }
 
@@ -48,6 +50,6 @@ class BranchPoint {
   }
 
   public String getUniqueKey() {
-    return String.format("%s-%d-%d-%d", filePath, startLine, offset, offsetEnd);
+    return String.format("%s-%d-%d-%d-%d", filePath, startLine, offset, offsetEnd, path);
   }
 }

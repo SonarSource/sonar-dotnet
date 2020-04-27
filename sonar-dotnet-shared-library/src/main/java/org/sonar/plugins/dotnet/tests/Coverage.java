@@ -129,7 +129,9 @@ public class Coverage {
           }
         }
 
-        result.add(new BranchCoverage(line, groupsByKey.size(), coveredBranchPoints));
+        if(groupsByKey.size() > 1) {
+          result.add(new BranchCoverage(line, groupsByKey.size(), coveredBranchPoints));
+        }
       }
     }
 

@@ -134,7 +134,7 @@ public class CoverageTest {
     final String filePath = "filePath";
 
     Coverage sut = new Coverage();
-    sut.add(new BranchPoint(filePath, 1, 2, 3, 4));
+    sut.add(new BranchPoint(filePath, 1, 2, 3, 4, 5));
 
     // Normally this case should not happen but if we have only one branch point
     // we should not report coverage as line coverage is already covering that.
@@ -147,8 +147,8 @@ public class CoverageTest {
     final String secondPath = "secondPath";
 
     Coverage sut = new Coverage();
-    sut.add(new BranchPoint(firstPath, 1, 2, 3, 4));
-    sut.add(new BranchPoint(secondPath, 1, 5, 6, 7));
+    sut.add(new BranchPoint(firstPath, 1, 2, 3, 4, 5));
+    sut.add(new BranchPoint(secondPath, 1, 6, 7, 8, 9));
 
     // Normally this case should not happen but if we have only one branch point
     // we should not report coverage as line coverage is already covering that.
@@ -161,10 +161,46 @@ public class CoverageTest {
     final String filePath = "filePath";
 
     Coverage sut = new Coverage();
-    sut.add(new BranchPoint(filePath, 1, 2, 3, 4));
-    sut.add(new BranchPoint(filePath, 2, 5, 6, 7));
+    sut.add(new BranchPoint(filePath, 1, 2, 3, 4, 5));
+    sut.add(new BranchPoint(filePath, 2, 6, 7, 8, 9));
 
     assertThat(sut.getBranchCoverage(filePath)).isEmpty();
+  }
+
+  @Test
+  public void branchPointsMerging() {
+    final String filePath = "filePath";
+
+    Coverage sut = new Coverage();
+
+    // Identical branch points are merged
+    sut.add(new BranchPoint(filePath, 1, 1, 2, 0, 1));
+    sut.add(new BranchPoint(filePath, 1, 1, 2, 0, 1));
+
+    // Branch points with different line are not merged
+    sut.add(new BranchPoint(filePath, 2, 1, 2, 0, 1));
+    sut.add(new BranchPoint(filePath, 3, 1, 2, 0, 1));
+
+    // Branch points with different offset are not merged
+    sut.add(new BranchPoint(filePath, 4, 1, 2, 0, 1));
+    sut.add(new BranchPoint(filePath, 4, 2, 2, 0, 1));
+
+    // Branch points with different offsetEnd are not merged
+    sut.add(new BranchPoint(filePath, 5, 1, 2, 0, 1));
+    sut.add(new BranchPoint(filePath, 5, 1, 3, 0, 1));
+
+    // Branch points with different path are not merged
+    sut.add(new BranchPoint(filePath, 6, 1, 2, 0, 1));
+    sut.add(new BranchPoint(filePath, 6, 1, 2, 1, 1));
+
+    assertThat(sut.getBranchCoverage(filePath))
+      .hasSize(3)
+      .containsOnly(
+        // For the first 3 lines we will not report branch coverage since they have only one branch point each.
+        new BranchCoverage(4, 2, 2),
+        new BranchCoverage(5, 2, 2),
+        new BranchCoverage(6, 2, 2)
+      );
   }
 
   @Test
@@ -173,35 +209,35 @@ public class CoverageTest {
 
     Coverage sut = new Coverage();
     // Both branch points covered
-    sut.add(new BranchPoint(filePath, 1, 1, 3, 2));
-    sut.add(new BranchPoint(filePath, 1, 4, 6, 1));
+    sut.add(new BranchPoint(filePath, 1, 1, 3, 0, 1));
+    sut.add(new BranchPoint(filePath, 1, 4, 6, 1, 1));
 
     // Only 2 out of 3 branch points covered
-    sut.add(new BranchPoint(filePath, 2, 1, 3, 2));
-    sut.add(new BranchPoint(filePath, 2, 4, 6, 0));
-    sut.add(new BranchPoint(filePath, 2, 6, 8, 4));
+    sut.add(new BranchPoint(filePath, 2, 1, 3, 0, 2));
+    sut.add(new BranchPoint(filePath, 2, 4, 6, 1, 0));
+    sut.add(new BranchPoint(filePath, 2, 6, 8, 2, 4));
 
     // No branch points covered
-    sut.add(new BranchPoint(filePath, 3, 1, 3, 0));
-    sut.add(new BranchPoint(filePath, 3, 4, 6, 0));
+    sut.add(new BranchPoint(filePath, 3, 1, 3, 0, 0));
+    sut.add(new BranchPoint(filePath, 3, 4, 6, 1, 0));
 
     // Same branch points appear multiple times, none covered (when tests are split in multiple test projects)
-    sut.add(new BranchPoint(filePath, 4, 1, 3, 0));
-    sut.add(new BranchPoint(filePath, 4, 4, 6, 0));
-    sut.add(new BranchPoint(filePath, 4, 1, 3, 0));
-    sut.add(new BranchPoint(filePath, 4, 4, 6, 0));
+    sut.add(new BranchPoint(filePath, 4, 1, 3, 0, 0));
+    sut.add(new BranchPoint(filePath, 4, 4, 6, 1, 0));
+    sut.add(new BranchPoint(filePath, 4, 1, 3, 0, 0));
+    sut.add(new BranchPoint(filePath, 4, 4, 6, 1, 0));
 
     // Same branch points appear multiple times, same coverage (when tests are split in multiple test projects)
-    sut.add(new BranchPoint(filePath, 5, 1, 3, 1));
-    sut.add(new BranchPoint(filePath, 5, 4, 6, 0));
-    sut.add(new BranchPoint(filePath, 5, 1, 3, 1));
-    sut.add(new BranchPoint(filePath, 5, 4, 6, 0));
+    sut.add(new BranchPoint(filePath, 5, 1, 3, 0, 1));
+    sut.add(new BranchPoint(filePath, 5, 4, 6, 1, 0));
+    sut.add(new BranchPoint(filePath, 5, 1, 3, 0, 1));
+    sut.add(new BranchPoint(filePath, 5, 4, 6, 1, 0));
 
     // Same branch points appear multiple times, different coverage (when tests are split in multiple test projects)
-    sut.add(new BranchPoint(filePath, 6, 1, 3, 1));
-    sut.add(new BranchPoint(filePath, 6, 4, 6, 0));
-    sut.add(new BranchPoint(filePath, 6, 1, 3, 0));
-    sut.add(new BranchPoint(filePath, 6, 4, 6, 1));
+    sut.add(new BranchPoint(filePath, 6, 1, 3, 0, 1));
+    sut.add(new BranchPoint(filePath, 6, 4, 6, 1, 0));
+    sut.add(new BranchPoint(filePath, 6, 1, 3, 0, 0));
+    sut.add(new BranchPoint(filePath, 6, 4, 6, 1, 1));
 
     assertThat(sut.getBranchCoverage(filePath))
       .hasSize(6)
@@ -221,12 +257,12 @@ public class CoverageTest {
     final String secondPath = "secondPath";
 
     Coverage sut = new Coverage();
-    sut.add(new BranchPoint(firstPath, 1, 1, 3, 2));
-    sut.add(new BranchPoint(firstPath, 1, 4, 6, 1));
+    sut.add(new BranchPoint(firstPath, 1, 1, 3, 0, 2));
+    sut.add(new BranchPoint(firstPath, 1, 4, 6, 1, 1));
 
-    sut.add(new BranchPoint(secondPath, 1, 5, 8, 2));
-    sut.add(new BranchPoint(secondPath, 1, 10, 12, 0));
-    sut.add(new BranchPoint(secondPath, 1, 12, 14, 0));
+    sut.add(new BranchPoint(secondPath, 1, 5, 8, 0, 2));
+    sut.add(new BranchPoint(secondPath, 1, 10, 12, 1, 0));
+    sut.add(new BranchPoint(secondPath, 1, 12, 14, 2, 0));
 
     assertThat(sut.getBranchCoverage(firstPath)).containsOnly(new BranchCoverage(1, 2, 2));
     assertThat(sut.getBranchCoverage(secondPath)).containsOnly(new BranchCoverage(1, 3, 1));

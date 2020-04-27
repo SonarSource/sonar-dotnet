@@ -150,10 +150,11 @@ public class OpenCoverReportParser implements CoverageParser {
 
         int offset = xmlParserHelper.getRequiredIntAttribute("offset");
         int offsetEnd = xmlParserHelper.getRequiredIntAttribute("offsetend");
+        int path = xmlParserHelper.getRequiredIntAttribute("path");
         int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
 
         if (isSupported.test(filePath)) {
-          coverage.add(new BranchPoint(filePath, line, offset, offsetEnd, visitCount));
+          coverage.add(new BranchPoint(filePath, line, offset, offsetEnd, path, visitCount));
         } else {
           LOG.debug("OpenCover parser: Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +
               " is not indexed or does not have the supported language.",
