@@ -70,59 +70,6 @@ public class CoverageTest {
   }
 
   @Test
-  public void testBranchCoverageBySequencePoint(){
-    Coverage first = new Coverage();
-
-    BranchCoverage fooFirstLine = new BranchCoverage(1, 6, 3);
-    BranchCoverage fooThirdLine = new BranchCoverage(3, 2, 1);
-    BranchCoverage barFirstLine = new BranchCoverage(1, 5, 1);
-    BranchCoverage barSecondLine = new BranchCoverage(2, 2, 2);
-    BranchCoverage barSecondLineOther = new BranchCoverage(2, 2, 1);
-
-    first.addBranchCoverage("foo.txt", fooFirstLine);
-    first.addBranchCoverage("foo.txt", fooThirdLine);
-    first.addBranchCoverage("bar.txt", barFirstLine);
-
-    assertThat(first.getBranchCoverageBySequencePoints("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
-    assertThat(first.getBranchCoverageBySequencePoints("bar.txt")).containsExactly(barFirstLine);
-
-    Coverage second = new Coverage();
-
-    second.addBranchCoverage("bar.txt", barSecondLine);
-    second.addBranchCoverage("bar.txt", barSecondLineOther);
-
-    second.mergeWith(first);
-
-    assertThat(second.getBranchCoverageBySequencePoints("foo.txt")).containsExactly(fooFirstLine, fooThirdLine);
-    assertThat(second.getBranchCoverageBySequencePoints("bar.txt")).containsExactly(new BranchCoverage(2, 4, 3), barFirstLine);
-  }
-
-  @Test
-  public void testBranchCoverageWithMultipleEntriesOnTheSameLine(){
-    final String fileName = "fileName";
-    Coverage coverage = new Coverage();
-
-    coverage.addBranchCoverage(fileName, new BranchCoverage(1, 2, 1));
-    assertThat(coverage.getBranchCoverageBySequencePoints(fileName)).containsExactly(new BranchCoverage(1, 2, 1));
-
-    coverage.addBranchCoverage(fileName, new BranchCoverage(3, 2, 1));
-    assertThat(coverage.getBranchCoverageBySequencePoints(fileName)).containsExactly(
-      new BranchCoverage(1, 2, 1),
-      new BranchCoverage(3, 2, 1));
-
-    coverage.addBranchCoverage(fileName, new BranchCoverage(3, 3, 2));
-    assertThat(coverage.getBranchCoverageBySequencePoints(fileName)).containsExactly(
-      new BranchCoverage(1, 2, 1),
-      new BranchCoverage(3, 5, 3));
-
-    coverage.addBranchCoverage(fileName, new BranchCoverage(3, 4, 4));
-    assertThat(coverage.getBranchCoverageBySequencePoints(fileName)).containsExactly(
-      new BranchCoverage(1, 2, 1),
-      new BranchCoverage(3, 9, 7));
-  }
-
-
-  @Test
   public void givenEmptyListOfBranchPoints_getBranchCoverage_returnsEmpty() {
     Coverage sut = new Coverage();
 

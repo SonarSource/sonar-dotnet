@@ -34,7 +34,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
   private static final Logger LOG = Loggers.get(VisualStudioCoverageXmlReportParser.class);
   private final Predicate<String> isSupported;
 
-  VisualStudioCoverageXmlReportParser(Predicate<String> isSupported) {
+  public  VisualStudioCoverageXmlReportParser(Predicate<String> isSupported) {
     this.isSupported = isSupported;
   }
 
@@ -42,18 +42,14 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
   public void accept(File file, Coverage coverage) {
     LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
     LOG.info("Parsing the Visual Studio coverage XML report " + file.getAbsolutePath());
-    Parser parser = new Parser(file, coverage);
-    parser.parse();
+    new Parser(file, coverage).parse();
   }
 
   private class Parser {
 
     private final File file;
-    /**
-     * The key is the file ID.
-     * The value is the line coverage information for that file.
-     */
-    private final Map<Integer, LineCoverage> lineCoveragePerFile = new HashMap<>();
+    private final Map<Integer, List<Integer>> coveredLines = new HashMap<>();
+    private final Map<Integer, List<Integer>> uncoveredLines = new HashMap<>();
     private final Coverage coverage;
 
     Parser(File file, Coverage coverage) {
@@ -84,35 +80,27 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
     }
 
     private void handleModuleTag() {
-      lineCoveragePerFile.clear();
+      coveredLines.clear();
+      uncoveredLines.clear();
     }
 
-    /**
-     * The Range tags contains the coverage information per line.
-     * Important: some lines can be both covered and uncovered,
-     * e.g. automatic property with covered getter and uncovered setter.
-     */
     private void handleRangeTag(XmlParserHelper xmlParserHelper) {
       int source = xmlParserHelper.getRequiredIntAttribute("source_id");
       String covered = xmlParserHelper.getRequiredAttribute("covered");
 
       int line = xmlParserHelper.getRequiredIntAttribute("start_line");
 
-      lineCoveragePerFile.putIfAbsent(source, new LineCoverage(source));
-      LineCoverage lineCoverage = lineCoveragePerFile.get(source);
       if ("yes".equals(covered) || "partial".equals(covered)) {
-        lineCoverage.addCoverageForLine(line, true);
+        coveredLines.putIfAbsent(source, new ArrayList<>());
+        coveredLines.get(source).add(line);
       } else if ("no".equals(covered)) {
-        lineCoverage.addCoverageForLine(line, false);
+        uncoveredLines.putIfAbsent(source, new ArrayList<>());
+        uncoveredLines.get(source).add(line);
       } else {
         throw xmlParserHelper.parseError("Unsupported \"covered\" value \"" + covered + "\", expected one of \"yes\", \"partial\" or \"no\"");
       }
     }
 
-    /**
-     * After parsing the Range tags, the source file tags are iterated and
-     * the coverage gets transmitted to the scanner API.
-     */
     private void handleSourceFileTag(XmlParserHelper xmlParserHelper) {
       int id = xmlParserHelper.getRequiredIntAttribute("id");
       String path = xmlParserHelper.getRequiredAttribute("path");
@@ -131,67 +119,27 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         return;
       }
 
-      LineCoverage fileCoverage = lineCoveragePerFile.get(id);
-      if (fileCoverage != null) {
-        fileCoverage.transferData(coverage, canonicalPath);
+      if (coveredLines.containsKey(id)) {
+        LOG.trace("Found covered lines for id '{}' for path '{}'", id, canonicalPath);
+
+        for (Integer line : coveredLines.get(id)) {
+          coverage.addHits(canonicalPath, line, 1);
+        }
+      }
+
+      if (uncoveredLines.containsKey(id)) {
+        LOG.trace("Found uncovered lines for id '{}' for path '{}'", id, canonicalPath);
+
+        for (Integer line : uncoveredLines.get(id)) {
+          coverage.addHits(canonicalPath, line, 0);
+        }
       }
     }
 
     private void checkRootTag(XmlParserHelper xmlParserHelper) {
       xmlParserHelper.checkRootTag("results");
     }
-  }
 
-  private static class LineCoverage {
-
-    int fileId;
-
-    // the key is the line ID
-    // the values are a list of booleans, where
-    // - 'True' means the line is covered or partially covered
-    // - 'False' means the line is not covered
-    private Map<Integer, List<Boolean>> coveragePerLine;
-
-    LineCoverage(int fileId) {
-      this.fileId = fileId;
-      this.coveragePerLine = new HashMap<>();
-    }
-
-    void addCoverageForLine(Integer lineId, Boolean isCovered) {
-      coveragePerLine.putIfAbsent(lineId, new ArrayList<>());
-      coveragePerLine.get(lineId).add(isCovered);
-    }
-
-    /**
-     * Transfers the coverage data to the Coverage object.
-     * @param coverage - the object which centralizes coverage information.
-     * @param canonicalFilePath - the path of the file for which this class contains coverage data.
-     */
-    void transferData(Coverage coverage, String canonicalFilePath) {
-      LOG.trace("Found coverage information about '{}' lines for file id '{}' , path '{}'",
-        coveragePerLine.size(), fileId, canonicalFilePath);
-
-      for (Map.Entry<Integer, List<Boolean>> lineCoverage : coveragePerLine.entrySet()) {
-
-        Integer lineId = lineCoverage.getKey();
-        Iterable<Boolean> coverageValues = lineCoverage.getValue();
-        int visits = 0;
-        int entryCount = 0;
-        // process line coverage
-        for (Boolean value : coverageValues) {
-          int visit = value ? 1 : 0;
-          coverage.addHits(canonicalFilePath, lineId, visit);
-          visits += visit;
-          entryCount++;
-        }
-        // where we have both covered and uncovered, use branch coverage
-        // e.g. auto-implemented property with getter and setter
-        if (entryCount > 1) {
-          // this is not really branch coverage, but it's better than nothing
-          coverage.addBranchCoverage(canonicalFilePath, new BranchCoverage(lineId, entryCount, visits));
-        }
-      }
-    }
   }
 
 }

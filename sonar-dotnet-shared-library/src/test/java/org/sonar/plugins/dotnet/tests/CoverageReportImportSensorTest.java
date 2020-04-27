@@ -136,8 +136,8 @@ public class CoverageReportImportSensorTest {
     SensorContextTester context = computeCoverageMeasures(false);
     assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
     assertThat(context.lineHits("foo:Foo.cs", 4)).isEqualTo(0);
-    assertThat(context.coveredConditions("foo:Foo.cs", 1)).isEqualTo(2);
-    assertThat(context.coveredConditions("foo:Foo.cs", 4)).isEqualTo(3);
+    assertThat(context.coveredConditions("foo:Foo.cs", 1)).isNull();
+    assertThat(context.coveredConditions("foo:Foo.cs", 4)).isNull();
     assertThat(context.coveredConditions("foo:Foo.cs", 5)).isEqualTo(1);
     assertThat(context.coveredConditions("foo:Foo.cs", 6)).isEqualTo(2);
   }
@@ -147,8 +147,8 @@ public class CoverageReportImportSensorTest {
     SensorContextTester context = computeCoverageMeasures(true);
     assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
     assertThat(context.lineHits("foo:Foo.cs", 4)).isEqualTo(0);
-    assertThat(context.coveredConditions("foo:Foo.cs", 1)).isEqualTo(2);
-    assertThat(context.coveredConditions("foo:Foo.cs", 4)).isEqualTo(3);
+    assertThat(context.coveredConditions("foo:Foo.cs", 1)).isNull();
+    assertThat(context.coveredConditions("foo:Foo.cs", 4)).isNull();
     assertThat(context.coveredConditions("foo:Foo.cs", 5)).isEqualTo(1);
     assertThat(context.coveredConditions("foo:Foo.cs", 6)).isEqualTo(2);
   }
@@ -238,10 +238,6 @@ public class CoverageReportImportSensorTest {
       .build());
     when(coverage.hits(bazPath)).thenReturn(ImmutableMap.<Integer, Integer>builder()
       .put(42, 1)
-      .build());
-    when(coverage.getBranchCoverageBySequencePoints(fooPath)).thenReturn(ImmutableList.<BranchCoverage>builder()
-      .add(new BranchCoverage(1, 5, 2))
-      .add(new BranchCoverage(4, 3, 3))
       .build());
     when(coverage.getBranchCoverage(fooPath)).thenReturn(ImmutableList.<BranchCoverage>builder()
       .add(new BranchCoverage(5, 2, 1))
