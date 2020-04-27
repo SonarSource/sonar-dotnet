@@ -167,6 +167,27 @@ public class OpenCoverReportParserTest {
   }
 
   @Test
+  public void branchCoverage_multipleCodePaths_analyzedByMultipleProjects() throws Exception {
+    Coverage coverage = new Coverage();
+    String filePath = new File("SwitchCoverage\\SwitchCoverage\\Foo.cs").getCanonicalPath();
+
+    OpenCoverReportParser parser = new OpenCoverReportParser(alwaysTrue);
+
+    parser.accept(new File("src/test/resources/opencover/switch_expression_multiple_test_projects_1.xml"), coverage);
+    parser.accept(new File("src/test/resources/opencover/switch_expression_multiple_test_projects_2.xml"), coverage);
+
+    assertThat(coverage.files()).contains(filePath);
+    assertThat(coverage.hits(filePath))
+      .hasSize(1)
+      .contains(Assertions.entry(8, 4));
+
+    assertThat(coverage.getBranchCoverage(filePath))
+      .hasSize(1)
+      // the switch expression gets transformed to a more complex IL representation, hence 8 conditions
+      .contains(new BranchCoverage(8, 8 , 6));
+  }
+
+  @Test
   public void branchCoverage_codeFile_unsupportedFile() throws Exception {
     Coverage coverage = new Coverage();
     String filePath = new File("BranchCoverage3296\\Code\\ValueProvider.cs").getCanonicalPath();
