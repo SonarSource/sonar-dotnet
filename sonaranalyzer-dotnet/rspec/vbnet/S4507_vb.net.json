@@ -8,6 +8,7 @@
   },
   "tags": [
     "cwe",
+    "error-handling",
     "user-experience",
     "owasp-a3"
   ],
