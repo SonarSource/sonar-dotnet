@@ -12,7 +12,7 @@
     "owasp-a10",
     "suspicious"
   ],
-  "defaultSeverity": "Critical",
+  "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2486",
   "sqKey": "S2486",
   "scope": "Main",

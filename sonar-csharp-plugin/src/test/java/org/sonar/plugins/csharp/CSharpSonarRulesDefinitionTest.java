@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpSonarRulesDefinitionTest {
   private static final String SECURITY_HOTSPOT_RULE_KEY = "S2255";
-  private static final String VULNERABILITY_RULE_KEY = "S4564";
+  private static final String VULNERABILITY_RULE_KEY = "S4426";
 
   @Test
   public void test() {
@@ -82,6 +82,6 @@ public class CSharpSonarRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:79", "owaspTop10:a7");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:326", "owaspTop10:a3", "owaspTop10:a9");
   }
 }

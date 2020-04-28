@@ -10,7 +10,7 @@
     "serialization",
     "owasp-a8"
   ],
-  "defaultSeverity": "Critical",
+  "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-4212",
   "sqKey": "S4212",
   "scope": "Main",
