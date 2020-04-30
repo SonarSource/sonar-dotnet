@@ -397,6 +397,7 @@ try {
     Push-Location $PSScriptRoot
     Test-FileExists ".\binaries\SonarAnalyzer.dll"
     Test-FileExists ".\binaries\SonarAnalyzer.CFG.dll"
+    Test-FileExists ".\binaries\System.ValueTuple.dll"
 
     Write-Header "Initializing the environment"
     Initialize-ActualFolder

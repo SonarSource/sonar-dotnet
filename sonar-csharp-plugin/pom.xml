@@ -290,6 +290,7 @@
                         <include name="SonarAnalyzer.CFG.dll"/>
                         <include name="SonarAnalyzer.CSharp.dll"/>
                         <include name="Google.Protobuf.dll"/>
+                        <include name="System.ValueTuple.dll"/>
                       </fileset>
                     </copy>
                     <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"

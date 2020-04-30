@@ -137,6 +137,7 @@
       <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.CSharp.dll" />
       <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.VisualBasic.dll" />
       <BinariesToCopy Include="$(OutputPath)\Google.Protobuf.dll" />
+      <BinariesToCopy Include="$(OutputPath)\System.ValueTuple.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>
