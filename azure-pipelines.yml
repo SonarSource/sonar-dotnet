@@ -222,7 +222,7 @@ stages:
 
       - powershell: |
           cd sonaranalyzer-dotnet\tests
-          $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll" -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage.xml -oldStyle -register:Path32
+          $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage.xml -oldStyle -register:Path32
           cd ..
           cd ..
         displayName: 'Run .Net unit tests'
