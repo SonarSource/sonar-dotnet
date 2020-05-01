@@ -28,12 +28,6 @@
           "System.Threading": "4.0.0"
         }
       },
-      "System.ValueTuple": {
-        "type": "Direct",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "BahUww/+mdP4ARCAh2RQhQTg13wYLVrBb9SYVgW8ZlrwjraGCXHGjo0oIiUfZ34LUZkMMR+RAzR7dEY4S1HeQQ=="
-      },
       "Google.Protobuf": {
         "type": "Transitive",
         "resolved": "3.6.1",

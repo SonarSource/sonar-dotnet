@@ -162,8 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 "ProhibitDtd" // should be true in .NET 3.5
             );
 
-            public static (CSharpObjectInitializationTracker xmlDocumentTracker, CSharpObjectInitializationTracker xmlTextReaderTracker)
-                Create(Compilation compilation, INetFrameworkVersionProvider versionProvider)
+            public static TrackersHolder Create(Compilation compilation, INetFrameworkVersionProvider versionProvider)
             {
                 var netFrameworkVersion = versionProvider.GetDotNetFrameworkVersion(compilation);
                 var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
@@ -180,12 +179,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 var xmlTextReaderTracker = new CSharpObjectInitializationTracker(
                     isAllowedConstantValue: IsAllowedValueForXmlTextReader,
                     trackedTypes: ImmutableArray.Create(KnownType.System_Xml_XmlTextReader),
-                    isTrackedPropertyName : XmlTextReaderTrackedProperties.Contains,
+                    isTrackedPropertyName: XmlTextReaderTrackedProperties.Contains,
                     isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol),
                     constructorIsSafe: constructorIsSafe
                 );
 
-                return (xmlDocumentTracker, xmlTextReaderTracker);
+                return new TrackersHolder(xmlDocumentTracker, xmlTextReaderTracker);
             }
 
             // The XmlDocument and XmlTextReader constructors were made safe-by-default in .NET 4.5.2
@@ -224,6 +223,18 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool IsUnsafeXmlResolverReturnType(ISymbol symbol) =>
                 symbol is IMethodSymbol methodSymbol &&
                 methodSymbol.ReturnType.IsAny(UnsafeXmlResolvers);
+        }
+
+        private class TrackersHolder
+        {
+            internal readonly CSharpObjectInitializationTracker xmlDocumentTracker;
+            internal readonly CSharpObjectInitializationTracker xmlTextReaderTracker;
+
+            public TrackersHolder(CSharpObjectInitializationTracker xmlDocumentTracker, CSharpObjectInitializationTracker xmlTextReaderTracker)
+            {
+                this.xmlDocumentTracker = xmlDocumentTracker;
+                this.xmlTextReaderTracker = xmlTextReaderTracker;
+            }
         }
     }
 }
