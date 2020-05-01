@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -3009,7 +3009,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["3008"],
             //["3009"],
             //["3010"],
-            ["3011"] = "SECURITY_HOTSPOT",
+            ["3011"] = "CODE_SMELL",
             //["3012"],
             //["3013"],
             //["3014"],
