@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
                             var requiredAttributeFound = cc.Compilation.Assembly.GetAttributes(AttributeToFind).Any();
                             if (!requiredAttributeFound)
                             {
-                                cc.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], null));
+                                cc.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], null, cc.Compilation.AssemblyName));
                             }
                         });
                 });

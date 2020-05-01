@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -45,7 +45,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Action action = () => Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs",
                 new MarkAssemblyWithAssemblyVersionAttribute());
-            action.Should().Throw<UnexpectedDiagnosticException>();
+            action.Should()
+                .Throw<UnexpectedDiagnosticException>()
+                .WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
         }
     }
 }
