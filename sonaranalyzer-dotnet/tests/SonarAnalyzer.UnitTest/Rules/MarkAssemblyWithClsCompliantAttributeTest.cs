@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new MarkAssemblyWithClsCompliantAttribute());
             action.Should()
                 .Throw<UnexpectedDiagnosticException>()
-                .WithMessage("*Mark this assembly with 'System.CLSCompliantAttribute'*");
+                .WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
     }
 }
