@@ -94,7 +94,7 @@
     // https://github.com/SonarSource/sonar-dotnet/issues/3255
     public class Repro_3255
     {
-        public string UsedInTuple(string value) // Noncompliant FP
+        public string UsedInTuple(string value) // Compliant - the value is used in tuple
         {
             var x = (value, 7);
             return x.value;

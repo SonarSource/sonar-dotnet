@@ -123,6 +123,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
+        // This method is checking only the expected issues from the first file path provided. The rest of the paths are added to the
+        // project for enabling testing of different scenarios.
         public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
             IEnumerable<MetadataReference> additionalReferences = null)
