@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -129,6 +129,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 CheckUnnecessaryUsings(context, simpleNamespaces, visitor.necessaryNamespaces);
 
                 necessaryNamespaces.UnionWith(visitor.necessaryNamespaces);
+            }
+
+            public override void VisitInitializerExpression(InitializerExpressionSyntax node)
+            {
+                if (node.IsKind(SyntaxKind.CollectionInitializerExpression))
+                {
+                    foreach (var addExpression in node.Expressions)
+                    {
+                        VisitSymbol(context.SemanticModel.GetCollectionInitializerSymbolInfo(addExpression).Symbol);
+                    }
+                }
+                base.VisitInitializerExpression(node);
             }
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
