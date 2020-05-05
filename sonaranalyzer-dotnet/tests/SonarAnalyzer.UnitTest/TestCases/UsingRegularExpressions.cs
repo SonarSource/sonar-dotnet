@@ -88,4 +88,18 @@ namespace Tests.Diagnostics
             Regex.Split("{ab}*{ab}+{cd}+foo*", s, RegexOptions.Compiled, TimeSpan.Zero);
         }
     }
+
+    //https://github.com/SonarSource/sonar-dotnet/issues/3298
+    class Repro_3298
+    {
+        private const string ClassUnsafeRegex = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
+
+        void Go()
+        {
+            const string LocalUnsafeRegex = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
+
+            new Regex(ClassUnsafeRegex); // False Negative
+            new Regex(LocalUnsafeRegex); // False Negative
+        }
+    }
 }

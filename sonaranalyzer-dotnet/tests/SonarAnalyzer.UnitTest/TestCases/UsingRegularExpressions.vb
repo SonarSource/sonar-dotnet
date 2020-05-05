@@ -74,4 +74,17 @@ Namespace Tests.Diagnostics
         End Sub
     End Class
 
+    ' https//github.com/SonarSource/sonar-dotnet/issues/3298
+    Class Repro_3298
+
+        Private Const ClassUnsafeRegex As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
+
+        Public Sub Go()
+            Const LocalUnsafeRegex As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
+            Dim a As New Regex(ClassUnsafeRegex)    ' False Negative
+            Dim b As New Regex(LocalUnsafeRegex)      ' False Negative
+        End Sub
+
+    End Class
+
 End Namespace
