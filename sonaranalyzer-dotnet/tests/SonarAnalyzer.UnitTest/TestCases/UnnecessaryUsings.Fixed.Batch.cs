@@ -201,8 +201,7 @@ namespace LinqQueryWithoutUsing
     }
 }
 
-// https://github.com/SonarSource/sonar-dotnet/issues/3065
-namespace Repro_3065.Extensions
+namespace CollectionInitializerExtensions1
 {
     public static class ListExtensions
     {
@@ -213,17 +212,45 @@ namespace Repro_3065.Extensions
     }
 }
 
-namespace Repro_3065
+namespace CollectionInitializerExtensions2
 {
+    public static class ListExtensions
+    {
+        public static void Add(this List<string> list, string firstName, int number)
+        {
+            list.Add(firstName + " nb" + number);
+        }
+    }
+}
+
+namespace CollectionInitializerExtensions3
+{
+    public static class ListExtensions
+    {
+        public static void Add(this List<string> list, int number, string lastName)
+        {
+            list.Add(number + ": " + lastName);
+        }
+    }
+}
+
+namespace CollectionInitializerUse
+{
+    using CollectionInitializerExtensions1;
+    using CollectionInitializerExtensions2;
 
     internal static class Program
     {
         private static void Main(string[] args)
         {
-            var list = new List<string>
+            var list1 = new List<string>
             {
                 { "John", "Smith" },
+                { "John", 2 },
             };
+
+            var list2 = new List<string>
+            { };
         }
     }
 }
