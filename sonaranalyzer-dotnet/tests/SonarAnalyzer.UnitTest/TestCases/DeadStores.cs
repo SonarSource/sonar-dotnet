@@ -892,6 +892,15 @@ namespace Tests.Diagnostics
                 return buffer;
             }
         }
+    }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/3304
+    public class Repro_3304
+    {
+        public void WithRefKeyword(int[] values)
+        {
+            ref int value = ref values[0]; // Noncompliant FP because there exists write that is propagated
+            value = default; // Noncompliant FP because it's ref variable and value is propagated somewhere
+        }
     }
 }
