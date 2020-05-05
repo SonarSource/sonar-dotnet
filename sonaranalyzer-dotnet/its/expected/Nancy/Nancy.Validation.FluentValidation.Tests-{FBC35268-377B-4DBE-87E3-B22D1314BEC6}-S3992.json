@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3992",
-"message":  "Mark this assembly with 'System.Runtime.InteropServices.ComVisibleAttribute'",
+"message":  "Provide a 'ComVisible' attribute for assembly 'Nancy.Validation.FluentValidation.Tests'.",
 "location":  null
 }
 ]

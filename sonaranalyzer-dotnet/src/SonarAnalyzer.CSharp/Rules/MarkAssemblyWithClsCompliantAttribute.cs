@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class MarkAssemblyWithClsCompliantAttribute : MarkAssemblyWithAttributeBase
     {
         internal const string DiagnosticId = "S3990";
-        private const string MessageFormat = "Mark this assembly with 'System.CLSCompliantAttribute'";
+        private const string MessageFormat = "Provide a 'CLSCompliant' attribute for assembly '{0}'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3904",
-"message":  "Provide an 'AssemblyVersion' attribute for this assembly.",
+"message":  "Provide an 'AssemblyVersion' attribute for assembly 'Nancy.Demo.MarkdownViewEngine'.",
 "location":  null
 }
 ]

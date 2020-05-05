@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -44,8 +44,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Action action = () => Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs",
-                new MarkAssemblyWithAssemblyVersionAttribute());
-            action.Should().Throw<UnexpectedDiagnosticException>();
+                new MarkAssemblyWithClsCompliantAttribute());
+            action.Should()
+                .Throw<UnexpectedDiagnosticException>()
+                .WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
     }
 }
