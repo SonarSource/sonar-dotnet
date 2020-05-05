@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3990",
-"message":  "Mark this assembly with 'System.CLSCompliantAttribute'",
+"message":  "Provide a 'CLSCompliant' attribute for assembly 'Akka.Remote.Tests.Performance'.",
 "location":  null
 }
 ]
