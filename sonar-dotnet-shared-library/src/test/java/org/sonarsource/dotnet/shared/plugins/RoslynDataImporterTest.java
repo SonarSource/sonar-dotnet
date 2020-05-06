@@ -21,7 +21,6 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -64,7 +63,7 @@ public class RoslynDataImporterTest {
   private Path workDir;
 
   @Before
-  public void setUp() throws IOException, URISyntaxException {
+  public void setUp() throws IOException {
     workDir = temp.getRoot().toPath().resolve("reports");
     Path csFile = Paths.get("src/test/resources/Program.cs").toAbsolutePath();
 
@@ -72,13 +71,8 @@ public class RoslynDataImporterTest {
     FileUtils.copyDirectory(new File("src/test/resources/RoslynDataImporterTest"), workDir.toFile());
 
     // replace file path in the roslyn report to point to real cs file in the resources
-    Path roslynReportPath = workDir.resolve("roslyn-report.json");
-    String report = new String(Files.readAllBytes(roslynReportPath), StandardCharsets.UTF_8);
-    Files.write(roslynReportPath, StringUtils.replace(report, "Program.cs",
-      StringEscapeUtils.escapeJavaScript(csFile.toString())).getBytes(StandardCharsets.UTF_8),
-      StandardOpenOption.WRITE);
+    updateCodeFilePathsInReport("roslyn-report.json", false);
 
-    roslynReportPath = Paths.get(this.getClass().getResource("/RoslynDataImporterTest").toURI());
     tester = SensorContextTester.create(csFile.getParent());
 
     DefaultInputFile inputFile = new TestInputFileBuilder(tester.module().key(), csFile.getParent().toFile(), csFile.toFile())
@@ -126,6 +120,22 @@ public class RoslynDataImporterTest {
   }
 
   @Test
+  public void issuesWithInvalidLocationShouldNotFail() throws IOException {
+    final String repositoryName = "roslyn.stylecop.analyzers.cs";
+    Map<String, List<RuleKey>> activeRules = ImmutableMap.of(repositoryName, ImmutableList.of(RuleKey.of(repositoryName, "SA1629")));
+
+    Path reportPath = updateCodeFilePathsInReport("roslyn-report-invalid-location.json", true);
+
+    RoslynReport report = new RoslynReport(tester.project(), reportPath);
+
+    roslynDataImporter.importRoslynReports(Collections.singletonList(report), tester, activeRules, String::toString);
+
+    assertThat(tester.allIssues()).hasSize(2);
+    assertThat(tester.allAdHocRules()).isEmpty();
+    assertThat(tester.allExternalIssues()).isEmpty();
+  }
+
+  @Test
   public void roslynEmptyReportShouldNotFail() {
     Map<String, List<RuleKey>> activeRules = createActiveRules();
     roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report-empty.json"))), tester, activeRules, String::toString);
@@ -145,5 +155,26 @@ public class RoslynDataImporterTest {
     return ImmutableMap.of(
       "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")),
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
+  }
+
+  // Updates the file paths in the roslyn report to point to real cs file in the resources.
+  private Path updateCodeFilePathsInReport(String reportFileName, boolean useUriPath) throws IOException {
+    Path reportPath = workDir.resolve(reportFileName);
+    Path csFile = Paths.get("src/test/resources/Program.cs").toAbsolutePath();
+
+    // In SARIF Version 0.1 the path is an absolute path but in 1.0.0 it is serialized in URI format.
+    String csFilePath;
+    if (useUriPath) {
+      csFilePath = csFile.toUri().toString();
+    } else {
+      csFilePath = csFile.toString();
+    }
+
+    String reportContent = new String(Files.readAllBytes(reportPath), StandardCharsets.UTF_8);
+
+    reportContent = StringUtils.replace(reportContent, "Program.cs", StringEscapeUtils.escapeJavaScript(csFilePath));
+    Files.write(reportPath, reportContent.getBytes(StandardCharsets.UTF_8), StandardOpenOption.WRITE);
+
+    return reportPath;
   }
 }

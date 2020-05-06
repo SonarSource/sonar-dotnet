@@ -162,10 +162,10 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   private void createExternalIssue(InputFile inputFile, String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations) {
     NewExternalIssue newIssue = newExternalIssue(ruleId);
-    newIssue.at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, true));
+    newIssue.at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation));
     setExternalIssueSeverityAndType(ruleId, level, newIssue);
 
-    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, true);
+    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation);
 
     newIssue.save();
   }
@@ -195,21 +195,19 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
-      .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, false));
+      .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation));
 
-    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, false);
+    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation);
 
     newIssue.save();
   }
 
-  private static NewIssueLocation createPrimaryLocation(InputFile inputFile, Location primaryLocation, Supplier<NewIssueLocation> newIssueLocationSupplier,
-    boolean isLocationResilient) {
-
-    return createIssueLocation(inputFile, primaryLocation, newIssueLocationSupplier, isLocationResilient);
+  private static NewIssueLocation createPrimaryLocation(InputFile inputFile, Location primaryLocation, Supplier<NewIssueLocation> newIssueLocationSupplier) {
+    return createIssueLocation(inputFile, primaryLocation, newIssueLocationSupplier);
   }
 
   private void populateSecondaryLocations(Collection<Location> secondaryLocations, Supplier<NewIssueLocation> newIssueLocationSupplier,
-    Consumer<NewIssueLocation> newIssueLocationConsumer, boolean isLocationResilient) {
+    Consumer<NewIssueLocation> newIssueLocationConsumer) {
     for (Location secondaryLocation : secondaryLocations) {
       InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
         .hasAbsolutePath(secondaryLocation.getAbsolutePath()));
@@ -217,13 +215,12 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
         continue;
       }
 
-      NewIssueLocation newIssueLocation = createIssueLocation(inputFile, secondaryLocation, newIssueLocationSupplier, isLocationResilient);
+      NewIssueLocation newIssueLocation = createIssueLocation(inputFile, secondaryLocation, newIssueLocationSupplier);
       newIssueLocationConsumer.accept(newIssueLocation);
     }
   }
 
-  private static NewIssueLocation createIssueLocation(InputFile inputFile, Location location, Supplier<NewIssueLocation> newIssueLocationSupplier,
-    boolean isLocationResilient) {
+  private static NewIssueLocation createIssueLocation(InputFile inputFile, Location location, Supplier<NewIssueLocation> newIssueLocationSupplier) {
 
     NewIssueLocation newIssueLocation = newIssueLocationSupplier.get()
       .on(inputFile);
@@ -234,11 +231,6 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
         location.getEndLine(), location.getEndColumn()));
 
     } catch (IllegalArgumentException ex1) {
-
-      if (!isLocationResilient) {
-        // Our rules should fail if they report on an invalid location
-        throw ex1;
-      }
 
       try {
         // Precise location failed, now try the line...
