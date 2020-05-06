@@ -10,10 +10,11 @@
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 
+  <!-- Warning: when adding a package reference, we must make sure this package is available on oldest supported .NET version (currently net46) or packaged with the analyzer.
+       For instance, System.ValueTuple is not available in 4.6.1 and must be added to the final packaging if we add it here -->
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="1.3.2" />
     <PackageReference Include="System.Collections.Immutable" Version="1.1.37" />
-    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
   </ItemGroup>
 
   <ItemGroup>
