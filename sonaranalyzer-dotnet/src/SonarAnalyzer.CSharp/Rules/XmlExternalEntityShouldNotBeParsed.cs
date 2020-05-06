@@ -225,12 +225,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.ReturnType.IsAny(UnsafeXmlResolvers);
         }
 
-        private class TrackersHolder
+        private readonly struct TrackersHolder
         {
             internal readonly CSharpObjectInitializationTracker xmlDocumentTracker;
             internal readonly CSharpObjectInitializationTracker xmlTextReaderTracker;
 
-            public TrackersHolder(CSharpObjectInitializationTracker xmlDocumentTracker, CSharpObjectInitializationTracker xmlTextReaderTracker)
+            internal TrackersHolder(CSharpObjectInitializationTracker xmlDocumentTracker, CSharpObjectInitializationTracker xmlTextReaderTracker)
             {
                 this.xmlDocumentTracker = xmlDocumentTracker;
                 this.xmlTextReaderTracker = xmlTextReaderTracker;
