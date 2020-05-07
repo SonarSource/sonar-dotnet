@@ -48,6 +48,7 @@ import org.sonar.api.internal.google.common.collect.ImmutableList;
 import org.sonar.api.internal.google.common.collect.ImmutableMap;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
+import org.sonar.api.utils.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -57,6 +58,8 @@ public class RoslynDataImporterTest {
   public ExpectedException exception = ExpectedException.none();
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
+  @Rule
+  public LogTester logTester = new LogTester();
 
   private RoslynDataImporter roslynDataImporter = new RoslynDataImporter(mock(AbstractProjectConfiguration.class));
   private SensorContextTester tester;
@@ -120,22 +123,6 @@ public class RoslynDataImporterTest {
   }
 
   @Test
-  public void issuesWithInvalidLocationShouldNotFail() throws IOException {
-    final String repositoryName = "roslyn.stylecop.analyzers.cs";
-    Map<String, List<RuleKey>> activeRules = ImmutableMap.of(repositoryName, ImmutableList.of(RuleKey.of(repositoryName, "SA1629")));
-
-    Path reportPath = updateCodeFilePathsInReport("roslyn-report-invalid-location.json", true);
-
-    RoslynReport report = new RoslynReport(tester.project(), reportPath);
-
-    roslynDataImporter.importRoslynReports(Collections.singletonList(report), tester, activeRules, String::toString);
-
-    assertThat(tester.allIssues()).hasSize(2);
-    assertThat(tester.allAdHocRules()).isEmpty();
-    assertThat(tester.allExternalIssues()).isEmpty();
-  }
-
-  @Test
   public void roslynEmptyReportShouldNotFail() {
     Map<String, List<RuleKey>> activeRules = createActiveRules();
     roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report-empty.json"))), tester, activeRules, String::toString);
@@ -149,6 +136,55 @@ public class RoslynDataImporterTest {
 
     exception.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
     roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report.json"))), tester, activeRules, String::toString);
+  }
+
+  @Test
+  public void internalIssuesFromExternalRepositoriesWithInvalidLocationShouldNotFail() throws IOException {
+    final String repositoryName = "roslyn.stylecop.analyzers.cs";
+    Map<String, List<RuleKey>> activeRules = ImmutableMap.of(repositoryName, ImmutableList.of(RuleKey.of(repositoryName, "SA1629")));
+
+    Path reportPath = updateCodeFilePathsInReport("roslyn-report-invalid-location.json", true);
+
+    RoslynReport report = new RoslynReport(tester.project(), reportPath);
+
+    roslynDataImporter.importRoslynReports(Collections.singletonList(report), tester, activeRules, String::toString);
+
+    assertThat(tester.allIssues()).hasSize(2);
+    assertThat(tester.allAdHocRules()).isEmpty();
+    assertThat(tester.allExternalIssues()).isEmpty();
+
+    List<String> logs = logTester.logs();
+    assertThat(logs.get(0)).isEqualTo("Importing 1 Roslyn report");
+    assertThat(logs.get(1))
+      .startsWith("Precise issue location cannot be found! Location:")
+      .endsWith("\\resources\\Program.cs, message=Documentation text should end with a period, startLine=13, startColumn=99, endLine=13, endColumn=100]");
+    assertThat(logs.get(2))
+      .startsWith("Precise issue location cannot be found! Location:")
+      .endsWith("\\resources\\Program.cs, message=Documentation text should end with a period, startLine=100, startColumn=0, endLine=100, endColumn=1]");
+    assertThat(logs.get(3))
+      .startsWith("Line issue location cannot be found! Location:")
+      .endsWith("\\resources\\Program.cs, message=Documentation text should end with a period, startLine=100, startColumn=0, endLine=100, endColumn=1]");
+  }
+
+  @Test
+  public void internalIssuesFromCSharpRepositoryWithInvalidLocationShouldFail() throws IOException {
+    assertInvalidLocationFail("csharpsquid");
+  }
+
+  @Test
+  public void internalIssuesFromVBNetRepositoryWithInvalidLocationShouldFail() throws IOException {
+    assertInvalidLocationFail("vbnet");
+  }
+
+  private void assertInvalidLocationFail(String repositoryName) throws IOException {
+    Map<String, List<RuleKey>> activeRules = ImmutableMap.of(repositoryName, ImmutableList.of(RuleKey.of(repositoryName, "SA1629")));
+
+    Path reportPath = updateCodeFilePathsInReport("roslyn-report-invalid-location.json", true);
+
+    RoslynReport report = new RoslynReport(tester.project(), reportPath);
+
+    exception.expectMessage("99 is not a valid line offset for pointer. File Program.cs has 15 character(s) at line 13");
+    roslynDataImporter.importRoslynReports(Collections.singletonList(report), tester, activeRules, String::toString);
   }
 
   private static Map<String, List<RuleKey>> createActiveRules() {
