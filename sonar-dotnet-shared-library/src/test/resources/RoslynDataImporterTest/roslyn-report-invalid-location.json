@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "3.5.0.0",
+        "fileVersion": "3.5.0-beta4-20153-05 (20b9af91)",
+        "semanticVersion": "3.5.0",
+        "language": "en-US"
+      },
+      "results": [
+        {
+          "ruleId": "SA1629",
+          "level": "warning",
+          "message": "Documentation text should end with a period",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "Program.cs",
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 100,
+                  "endLine": 13,
+                  "endColumn": 101
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "SA1629",
+          "level": "warning",
+          "message": "Documentation text should end with a period",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "Program.cs",
+                "region": {
+                  "startLine": 100,
+                  "startColumn": 1,
+                  "endLine": 100,
+                  "endColumn": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "SA1629": {
+          "id": "SA1629",
+          "shortDescription": "Documentation text should end with a period",
+          "fullDescription": "A section of the XML header documentation for a C# element does not end with a period.",
+          "defaultLevel": "warning",
+          "helpUri": "https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1629.md",
+          "properties": {
+            "category": "StyleCop.CSharp.DocumentationRules",
+            "isEnabledByDefault": true
+          }
+        }
+      }
+    }
+  ]
+}

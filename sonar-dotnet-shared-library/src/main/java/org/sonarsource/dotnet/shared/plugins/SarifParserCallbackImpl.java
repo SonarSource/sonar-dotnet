@@ -20,9 +20,11 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -53,6 +55,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   private static final Logger LOG = Loggers.get(SarifParserCallbackImpl.class);
 
   private static final String EXTERNAL_ENGINE_ID = "roslyn";
+  private static final List<String> OWN_REPOSITORIES =  Arrays.asList("csharpsquid", "vbnet");
   private final SensorContext context;
   private final Map<String, String> repositoryKeyByRoslynRuleKey;
   private final Set<Issue> savedIssues = new HashSet<>();
@@ -192,12 +195,14 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   private void createIssue(InputFile inputFile, String ruleId, Location primaryLocation, Collection<Location> secondaryLocations, String repositoryKey) {
+    boolean isSonarSourceRepository  = isSonarSourceRepository(repositoryKey);
+
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
-      .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, false));
+      .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, !isSonarSourceRepository ));
 
-    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, false);
+    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, !isSonarSourceRepository );
 
     newIssue.save();
   }
@@ -234,6 +239,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
         location.getEndLine(), location.getEndColumn()));
 
     } catch (IllegalArgumentException ex1) {
+      LOG.debug("Precise issue location cannot be found! Location: {}", location);
 
       if (!isLocationResilient) {
         // Our rules should fail if they report on an invalid location
@@ -246,6 +252,8 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       } catch (IllegalArgumentException ex2) {
         // Line location failed so let's report at file level (we are sure the file exists).
         // As the file was already registered previously, there is nothing to do here.
+
+        LOG.debug("Line issue location cannot be found! Location: {}", location);
       }
     }
 
@@ -304,6 +312,10 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       default:
         return Severity.INFO;
     }
+  }
+
+  private static boolean isSonarSourceRepository(String repositoryKey){
+    return OWN_REPOSITORIES.contains(repositoryKey);
   }
 
   private static class Issue {
