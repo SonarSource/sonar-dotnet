@@ -195,14 +195,14 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   private void createIssue(InputFile inputFile, String ruleId, Location primaryLocation, Collection<Location> secondaryLocations, String repositoryKey) {
-    boolean isOwnRepository = isOwnRepository(repositoryKey);
+    boolean isSonarSourceRepository  = isSonarSourceRepository(repositoryKey);
 
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
-      .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, !isOwnRepository));
+      .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, !isSonarSourceRepository ));
 
-    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, !isOwnRepository);
+    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, !isSonarSourceRepository );
 
     newIssue.save();
   }
@@ -314,7 +314,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     }
   }
 
-  private static boolean isOwnRepository(String repositoryKey){
+  private static boolean isSonarSourceRepository(String repositoryKey){
     return OWN_REPOSITORIES.contains(repositoryKey);
   }
 
