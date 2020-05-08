@@ -33,7 +33,7 @@ encryptedData = RSA1.Encrypt(dataToEncrypt, false); // Noncompliant: OAEP Paddin
 <h2>Compliant Solution</h2>
 <p>AES with GCM mode with <a href="https://www.bouncycastle.org/">bouncycastle</a> library: </p>
 <pre>
-GcmBlockCipher blockCipher = new GcmBlockCipher(new AesFastEngine()); // Compliant
+GcmBlockCipher blockCipher = new GcmBlockCipher(new AesEngine()); // Compliant
 blockCipher.Init(true, new AeadParameters(new KeyParameter(secretKey), 128, iv, null));
 </pre>
 <p>AES with GCM mode with <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesgcm?view=netcore-3.0">AesGcm</a>
