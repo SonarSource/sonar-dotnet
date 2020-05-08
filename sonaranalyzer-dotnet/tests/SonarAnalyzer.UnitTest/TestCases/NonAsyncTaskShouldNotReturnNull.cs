@@ -134,7 +134,36 @@ namespace Tests.Diagnostics
                 {
                     await Task.Yield();
 
-                    return null; // Noncompliant FP
+                    return null;
+                });
+        }
+
+        public Task<object> SomeMethodNonAsync()
+        {
+            return this.SomeOtherMethodAsync(
+                input =>
+                {
+                    return null; // Noncompliant
+                });
+        }
+
+        public Task<object> SomeMethodParenthesizedAsync()
+        {
+            return this.SomeOtherMethodAsync(
+                async (input) =>
+                {
+                    await Task.Yield();
+
+                    return null;
+                });
+        }
+
+        public Task<object> SomeMethodParenthesizedNonAsync()
+        {
+            return this.SomeOtherMethodAsync(
+                (input) =>
+                {
+                    return null; // Noncompliant
                 });
         }
 

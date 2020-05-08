@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
 
         protected static bool IsInvalidEnclosingSymbolContext(SyntaxNode enclosingMember, SemanticModel model)
         {
-            var enclosingMemberSymbol = model.GetDeclaredSymbol(enclosingMember);
+            var enclosingMemberSymbol = model.GetDeclaredSymbol(enclosingMember) ?? model.GetSymbolInfo(enclosingMember).Symbol;
             var enclosingMemberMethodSymbol = enclosingMemberSymbol as IMethodSymbol;
 
             return enclosingMemberSymbol != null
