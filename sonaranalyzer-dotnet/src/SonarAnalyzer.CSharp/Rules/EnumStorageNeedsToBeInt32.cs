@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class EnumStorageNeedsToBeInt32 : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4022";
+        private const string DiagnosticId = "S4022";
         private const string MessageFormat = "Change this enum storage to 'Int32'.";
 
         private static readonly DiagnosticDescriptor rule =
@@ -44,11 +44,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var enumDeclaration = (c.Node as EnumDeclarationSyntax);
+                    var enumDeclaration = (EnumDeclarationSyntax)c.Node;
                     var enumBaseType = enumDeclaration?.BaseList?.Types.FirstOrDefault()?.Type;
 
                     if (enumDeclaration != null &&
-                        !IsInt32OrDefault(enumBaseType, c.SemanticModel))
+                        !IsDefaultOrLarger(enumBaseType, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, enumDeclaration.Identifier.GetLocation()));
                     }
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.EnumDeclaration);
         }
 
-        private static bool IsInt32OrDefault(SyntaxNode syntaxNode, SemanticModel semanticModel)
+        private static bool IsDefaultOrLarger(SyntaxNode syntaxNode, SemanticModel semanticModel)
         {
             if (syntaxNode == null)
             {
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var symbolType = semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
-            return symbolType.Is(KnownType.System_Int32);
+            return symbolType.IsAny(KnownType.System_Int32, KnownType.System_UInt32, KnownType.System_Int64, KnownType.System_UInt64);
         }
     }
 }
