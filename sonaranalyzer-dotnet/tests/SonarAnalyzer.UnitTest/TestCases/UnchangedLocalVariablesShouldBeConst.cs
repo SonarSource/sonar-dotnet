@@ -259,14 +259,33 @@ namespace Tests.Diagnostics
             }
         }
 
-        static readonly Func<string, bool> IsValidYearOfBirth = (year) =>
+        static readonly Func<string, bool> LambdaExpressionSyntax = year =>
         {
-            bool isValid = false; // Noncompliant FP
+            bool isValid = false; // Compliant
 
             if (short.TryParse(year, out short shortYear))
             {
                 isValid = true;
             }
+
+            return isValid;
+        };
+
+        static readonly Func<string, bool> ParenthesizedLambdaExpressionSyntax = (year) =>
+        {
+            bool isValid = false; // Compliant
+
+            if (short.TryParse(year, out short shortYear))
+            {
+                isValid = true;
+            }
+
+            return isValid;
+        };
+
+        static readonly Func<string, bool> UnchangedLocalValiableInLambda = year =>
+        {
+            bool isValid = false; // Noncompliant
 
             return isValid;
         };

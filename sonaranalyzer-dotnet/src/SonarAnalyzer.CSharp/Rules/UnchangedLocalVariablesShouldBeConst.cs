@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3353";
+        private const string DiagnosticId = "S3353";
         private const string MessageFormat = "Add the 'const' modifier to '{0}'.";
 
         private static readonly DiagnosticDescriptor rule =
@@ -146,10 +146,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(MatchesIdentifier)
                 .Any(IsMutatingUse);
 
-            bool IsMethodLike(SyntaxNode arg) =>
+            static bool IsMethodLike(SyntaxNode arg) =>
                 arg is BaseMethodDeclarationSyntax ||
                 arg is IndexerDeclarationSyntax ||
-                arg is AccessorDeclarationSyntax;
+                arg is AccessorDeclarationSyntax ||
+                arg is LambdaExpressionSyntax;
 
             bool MatchesIdentifier(IdentifierNameSyntax id)
             {
