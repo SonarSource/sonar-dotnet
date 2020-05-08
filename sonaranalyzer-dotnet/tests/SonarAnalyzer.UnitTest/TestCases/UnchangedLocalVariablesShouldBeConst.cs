@@ -282,6 +282,13 @@ namespace Tests.Diagnostics
 
             return isValid;
         };
+
+        static readonly Func<string, bool> UnchangedLocalValiableInLambda = year =>
+        {
+            bool isValid = false; // Noncompliant
+
+            return isValid;
+        };
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/3271
