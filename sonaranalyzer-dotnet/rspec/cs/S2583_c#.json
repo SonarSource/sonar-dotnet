@@ -9,6 +9,7 @@
   "tags": [
     "cwe",
     "unused",
+    "suspicious",
     "pitfall"
   ],
   "defaultSeverity": "Major",
