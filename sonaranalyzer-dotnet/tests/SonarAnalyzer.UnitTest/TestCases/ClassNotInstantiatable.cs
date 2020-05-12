@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -93,5 +94,14 @@ namespace Tests.Diagnostics
         private WithAttribute2()
         {
         }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3329
+    public class Repro_3329 : System.Runtime.InteropServices.SafeHandle  // Noncompliant FP, instance will be created by PInvoke of DllImport
+    {
+        private Repro_3329() : base(IntPtr.Zero, true) { }
+
+        protected override bool ReleaseHandle() => true;
+        public override bool IsInvalid => true;
     }
 }
