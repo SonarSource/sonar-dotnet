@@ -97,7 +97,7 @@ namespace Tests.Diagnostics
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/3329
-    public class Repro_3329 : System.Runtime.InteropServices.SafeHandle 'Compliant, instance will be created by PInvoke of DllImport
+    public class Repro_3329 : System.Runtime.InteropServices.SafeHandle // Compliant, instance will be created by PInvoke of DllImport
     {
         private Repro_3329() : base(IntPtr.Zero, true) { }
 
