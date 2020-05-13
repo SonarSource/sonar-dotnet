@@ -101,7 +101,7 @@ Namespace Tests.Diagnostics
     End Class
 
     ' https//github.com/SonarSource/sonar-dotnet/issues/3329
-    Public Class Repro_3329
+    Public Class Repro_3329 `Compliant, instance will be created by PInvoke of DllImport
         Inherits System.Runtime.InteropServices.SafeHandle
 
         Private Sub New()
