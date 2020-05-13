@@ -99,4 +99,23 @@ Namespace Tests.Diagnostics
         Private Sub New()
         End Sub
     End Class
+
+    ' https//github.com/SonarSource/sonar-dotnet/issues/3329
+    Public Class Repro_3329 'Noncompliant FP, instance will be created by PInvoke of DllImport
+        Inherits System.Runtime.InteropServices.SafeHandle
+
+        Private Sub New()
+            MyBase.New(System.IntPtr.Zero, True)
+        End Sub
+
+        Public Overrides ReadOnly Property IsInvalid As Boolean
+            Get
+            End Get
+        End Property
+
+        Protected Overrides Function ReleaseHandle() As Boolean
+        End Function
+
+    End Class
+
 End Namespace
