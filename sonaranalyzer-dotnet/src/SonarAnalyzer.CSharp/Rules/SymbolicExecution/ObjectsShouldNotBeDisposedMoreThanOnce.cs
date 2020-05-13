@@ -25,20 +25,17 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
+using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : SonarDiagnosticAnalyzer
+    internal sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ISymbolicExecutionAnalyzer
     {
         internal const string DiagnosticId = "S3966";
         private const string MessageFormat = "Refactor this code to make sure '{0}' is disposed only once.";
@@ -53,47 +50,37 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph) => new AnalysisContext(explodedGraph);
+
+        private class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            context.RegisterExplodedGraphBasedAnalysis(CheckForMultipleDispose);
-        }
-
-        private static void CheckForMultipleDispose(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
-        {
-            var objectDisposedCheck = new ObjectDisposedPointerCheck(explodedGraph);
-            explodedGraph.AddExplodedGraphCheck(objectDisposedCheck);
-
             // Store the nodes that should be reported and ignore duplicate reports for the same node.
             // This is needed because we generate two CFG blocks for the finally statements and even
             // though the syntax nodes are the same, when there is a return inside a try/catch block
             // the walked CFG paths could be different and FPs will appear.
-            var nodesToReport = new Dictionary<SyntaxNode, string>();
+            private readonly Dictionary<SyntaxNode, string> nodesToReport = new Dictionary<SyntaxNode, string>();
+            private readonly ObjectDisposedPointerCheck objectDisposedPointerCheck;
 
-            void memberAccessedHandler(object sender, ObjectDisposedEventArgs args)
+            public IEnumerable<Diagnostic> GetDiagnostics() =>
+                this.nodesToReport.Select(item => Diagnostic.Create(rule, item.Key.GetLocation(), item.Value));
+
+            public AnalysisContext(CSharpExplodedGraph explodedGraph)
             {
-                nodesToReport[args.SyntaxNode] = args.SymbolName;
+                this.objectDisposedPointerCheck = new ObjectDisposedPointerCheck(explodedGraph);
+                this.objectDisposedPointerCheck.ObjectDisposed += ObjectDisposedHandler;
+
+                explodedGraph.AddExplodedGraphCheck(this.objectDisposedPointerCheck);
             }
 
-            objectDisposedCheck.ObjectDisposed += memberAccessedHandler;
+            public void Dispose() => this.objectDisposedPointerCheck.ObjectDisposed -= ObjectDisposedHandler;
 
-            try
-            {
-                explodedGraph.Walk();
-            }
-            finally
-            {
-                objectDisposedCheck.ObjectDisposed -= memberAccessedHandler;
-            }
-
-            foreach (var item in nodesToReport)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Key.GetLocation(), item.Value));
-            }
+            private void ObjectDisposedHandler(object sender, ObjectDisposedEventArgs args) =>
+                this.nodesToReport[args.SyntaxNode] = args.SymbolName;
         }
 
-        internal class ObjectDisposedEventArgs : EventArgs
+        private class ObjectDisposedEventArgs : EventArgs
         {
             public string SymbolName { get; }
             public SyntaxNode SyntaxNode { get; }
@@ -105,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        internal sealed class ObjectDisposedPointerCheck : ExplodedGraphCheck
+        private sealed class ObjectDisposedPointerCheck : ExplodedGraphCheck
         {
             public event EventHandler<ObjectDisposedEventArgs> ObjectDisposed;
 

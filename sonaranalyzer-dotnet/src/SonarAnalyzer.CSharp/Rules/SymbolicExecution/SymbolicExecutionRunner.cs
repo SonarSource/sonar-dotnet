@@ -33,6 +33,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(EmptyNullableValueAccess.DiagnosticId)]
+    [Rule(ObjectsShouldNotBeDisposedMoreThanOnce.DiagnosticId)]
     public sealed class SymbolicExecutionRunner : SonarDiagnosticAnalyzer
     {
         private readonly SymbolicExecutionAnalyzerFactory symbolicExecutionAnalyzerFactory = new SymbolicExecutionAnalyzerFactory();

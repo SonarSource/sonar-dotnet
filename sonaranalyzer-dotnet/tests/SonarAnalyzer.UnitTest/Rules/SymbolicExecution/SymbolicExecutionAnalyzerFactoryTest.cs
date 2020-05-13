@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             var sut = new SymbolicExecutionAnalyzerFactory();
             var supportedDiagnostics = sut.SupportedDiagnostics.Select(descriptor => descriptor.Id).ToList();
 
-            CollectionAssert.AreEquivalent(supportedDiagnostics, new[] {"S3655"});
+            CollectionAssert.AreEquivalent(supportedDiagnostics, new[] {"S3655", "S3966"});
         }
 
         [DataTestMethod]
@@ -55,7 +55,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void GetEnabledAnalyzers_ReturnsDiagnostic_WhenEnabled(ReportDiagnostic reportDiagnostic)
         {
             var sut = new SymbolicExecutionAnalyzerFactory();
-            var diagnostics = new Dictionary<string, ReportDiagnostic> {{"S3655", reportDiagnostic}}.ToImmutableDictionary();
+            var diagnostics = new Dictionary<string, ReportDiagnostic>
+            {
+                {"S3655", reportDiagnostic},
+                {"S3966", ReportDiagnostic.Suppress}
+            }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
             var enabledAnalyzers =
@@ -70,7 +74,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void GetEnabledAnalyzers_ReturnsEmptyList_WhenDiagnosticsAreDisabled()
         {
             var sut = new SymbolicExecutionAnalyzerFactory();
-            var diagnostics = new Dictionary<string, ReportDiagnostic> {{"S3655", ReportDiagnostic.Suppress}}.ToImmutableDictionary();
+            var diagnostics = new Dictionary<string, ReportDiagnostic>
+            {
+                {"S3655", ReportDiagnostic.Suppress},
+                {"S3966", ReportDiagnostic.Suppress}
+            }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
             var enabledAnalyzers =
