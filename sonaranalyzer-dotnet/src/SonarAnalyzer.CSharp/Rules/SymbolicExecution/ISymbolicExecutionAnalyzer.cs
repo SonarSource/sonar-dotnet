@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,23 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.TestFramework;
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.SymbolicExecution;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules.SymbolicExecution
 {
-    [TestClass]
-    public class EmptyNullableValueAccessTest
+    internal interface ISymbolicExecutionAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void EmptyNullableValueAccess()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyNullableValueAccess.cs", new EmptyNullableValueAccess(),
-                                ParseOptionsHelper.FromCSharp8,
-                                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-        }
+        IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
+
+        ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph);
     }
 }
