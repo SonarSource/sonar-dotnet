@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -90,5 +90,10 @@ namespace SonarAnalyzer.Rules
             constructors.Any()
             && !HasNonPrivateConstructor(constructors)
             && constructors.All(c => !c.GetAttributes().Any());
+
+        protected static bool DerivesFromSafeHandle(ITypeSymbol typeSymbol)
+        {
+            return typeSymbol.DerivesFrom(KnownType.System_Runtime_InteropServices_SafeHandle);
+        }
     }
 }

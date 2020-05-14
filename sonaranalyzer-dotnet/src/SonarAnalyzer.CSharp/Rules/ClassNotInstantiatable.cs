@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
         {
             var namedType = context.Symbol as INamedTypeSymbol;
-            if (!IsNonStaticClassWithNoAttributes(namedType))
+            if (!IsNonStaticClassWithNoAttributes(namedType) || DerivesFromSafeHandle(namedType))
             {
                 return;
             }
