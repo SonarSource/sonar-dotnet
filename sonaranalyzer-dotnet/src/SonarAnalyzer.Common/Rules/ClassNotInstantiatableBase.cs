@@ -91,9 +91,9 @@ namespace SonarAnalyzer.Rules
             && !HasNonPrivateConstructor(constructors)
             && constructors.All(c => !c.GetAttributes().Any());
 
-        protected static bool DerivesFromSafeHandle(INamedTypeSymbol namedType)
+        protected static bool DerivesFromSafeHandle(ITypeSymbol typeSymbol)
         {
-            return namedType.DerivesFrom(KnownType.System_Runtime_InteropServices_SafeHandle);
+            return typeSymbol.DerivesFrom(KnownType.System_Runtime_InteropServices_SafeHandle);
         }
     }
 }
