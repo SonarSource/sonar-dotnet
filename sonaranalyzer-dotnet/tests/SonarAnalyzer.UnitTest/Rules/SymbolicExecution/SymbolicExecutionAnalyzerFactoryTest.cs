@@ -35,6 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     {
         private const string EmptyNullableValueAccess = "S3655";
         private const string ObjectsShouldNotBeDisposedMoreThanOnce = "S3966";
+        private const string PublicMethodArgumentsShouldBeCheckedForNull = "S3900";
 
         [TestMethod]
         public void SupportedDiagnostics_ReturnsSymbolicExecutionRuleDescriptors()
@@ -45,7 +46,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             CollectionAssert.AreEquivalent(supportedDiagnostics, new[]
             {
                 EmptyNullableValueAccess,
-                ObjectsShouldNotBeDisposedMoreThanOnce
+                ObjectsShouldNotBeDisposedMoreThanOnce,
+                PublicMethodArgumentsShouldBeCheckedForNull
             });
         }
 

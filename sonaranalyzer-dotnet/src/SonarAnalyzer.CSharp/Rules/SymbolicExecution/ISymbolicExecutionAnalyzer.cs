@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.SymbolicExecution;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
@@ -28,6 +29,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     {
         IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
-        ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph);
+        ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context);
     }
 }
