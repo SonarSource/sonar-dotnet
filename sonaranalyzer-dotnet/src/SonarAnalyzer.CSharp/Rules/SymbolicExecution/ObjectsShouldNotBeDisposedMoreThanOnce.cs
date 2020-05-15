@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph) => new AnalysisContext(explodedGraph);
 
-        private class AnalysisContext : ISymbolicExecutionAnalysisContext
+        private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
             // Store the nodes that should be reported and ignore duplicate reports for the same node.
             // This is needed because we generate two CFG blocks for the finally statements and even

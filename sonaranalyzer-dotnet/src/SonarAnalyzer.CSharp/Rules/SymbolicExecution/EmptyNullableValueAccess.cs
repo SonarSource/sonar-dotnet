@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private class AnalysisContext : ISymbolicExecutionAnalysisContext
+        private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
             private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
             private readonly NullValueAccessedCheck nullPointerCheck;
