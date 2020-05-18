@@ -33,6 +33,9 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class SymbolicExecutionAnalyzerFactoryTest
     {
+        private const string EmptyNullableValueAccess = "S3655";
+        private const string ObjectsShouldNotBeDisposedMoreThanOnce = "S3966";
+
         [TestMethod]
         public void SupportedDiagnostics_ReturnsSymbolicExecutionRuleDescriptors()
         {
@@ -41,8 +44,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
             CollectionAssert.AreEquivalent(supportedDiagnostics, new[]
             {
-                Constants.EmptyNullableValueAccess,
-                Constants.ObjectsShouldNotBeDisposedMoreThanOnce
+                EmptyNullableValueAccess,
+                ObjectsShouldNotBeDisposedMoreThanOnce
             });
         }
 
@@ -59,8 +62,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             var sut = new SymbolicExecutionAnalyzerFactory();
             var diagnostics = new Dictionary<string, ReportDiagnostic>
             {
-                {Constants.EmptyNullableValueAccess, reportDiagnostic},
-                {Constants.ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress}
+                {EmptyNullableValueAccess, reportDiagnostic},
+                {ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
@@ -69,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                     .SelectMany(analyzer => analyzer.SupportedDiagnostics.Select(descriptor => descriptor.Id))
                     .ToList();
 
-            CollectionAssert.AreEquivalent(enabledAnalyzers, new[] {Constants.EmptyNullableValueAccess});
+            CollectionAssert.AreEquivalent(enabledAnalyzers, new[] {EmptyNullableValueAccess});
         }
 
         [TestMethod]
@@ -78,8 +81,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             var sut = new SymbolicExecutionAnalyzerFactory();
             var diagnostics = new Dictionary<string, ReportDiagnostic>
             {
-                {Constants.EmptyNullableValueAccess, ReportDiagnostic.Suppress},
-                {Constants.ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress}
+                {EmptyNullableValueAccess, ReportDiagnostic.Suppress},
+                {ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
