@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Utilities
 
         internal IEnumerable<Type> AllAnalyzerTypes => diagnosticAnalyzers;
 
-        private static AnalyzerLanguage GetTargetLanguages(MemberInfo analyzerType)
+        internal static AnalyzerLanguage GetTargetLanguages(MemberInfo analyzerType)
         {
             var languages = GetLanguages(analyzerType);
 
@@ -85,10 +85,18 @@ namespace SonarAnalyzer.Utilities
         private static IEnumerable<string> GetLanguages(MemberInfo analyzerType)
         {
             var diagnosticAttribute = analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().FirstOrDefault();
+            if (diagnosticAttribute != null)
+            {
+                return diagnosticAttribute.Languages;
+            }
 
-            return diagnosticAttribute == null
-                ? analyzerType.GetCustomAttributes<RuleAttribute>().FirstOrDefault()?.Languages
-                : diagnosticAttribute.Languages;
+            var ruleAttribute = analyzerType.GetCustomAttributes<RuleAttribute>().FirstOrDefault();
+            if (ruleAttribute?.Languages != null)
+            {
+                return ruleAttribute.Languages;
+            }
+
+            throw new Exception($"Can not find any language for the given type {analyzerType.Name}!");
         }
     }
 }
