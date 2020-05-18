@@ -59,16 +59,14 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
             rulesFromResources.Should().Equal(rulesFromClasses);
         }
 
-        private static string[] GetRulesFromClasses(Assembly assembly)
-        {
-            return assembly.GetTypes()
-                           .Where(typeof(SonarDiagnosticAnalyzer).IsAssignableFrom)
-                           .Where(t => !t.IsAbstract)
-                           .Where(IsNotUtilityAnalyzer)
-                           .SelectMany(GetRuleNamesFromAttributes)
-                           .OrderBy(name => name)
-                           .ToArray();
-        }
+        private static string[] GetRulesFromClasses(Assembly assembly) =>
+            assembly.GetTypes()
+                .Where(t => typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(t) || typeof(IRuleFactory).IsAssignableFrom(t))
+                .Where(t => !t.IsAbstract)
+                .Where(IsNotUtilityAnalyzer)
+                .SelectMany(GetRuleNamesFromAttributes)
+                .OrderBy(name => name)
+                .ToArray();
 
         private static bool IsNotUtilityAnalyzer(Type arg)
         {

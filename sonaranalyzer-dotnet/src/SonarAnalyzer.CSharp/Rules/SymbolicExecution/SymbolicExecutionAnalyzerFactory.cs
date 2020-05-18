@@ -23,11 +23,14 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {
-    internal sealed class SymbolicExecutionAnalyzerFactory
+    [Rule(EmptyNullableValueAccess.DiagnosticId, LanguageNames.CSharp)]
+    [Rule(ObjectsShouldNotBeDisposedMoreThanOnce.DiagnosticId, LanguageNames.CSharp)]
+    internal sealed class SymbolicExecutionAnalyzerFactory : IRuleFactory
     {
         private readonly ImmutableArray<ISymbolicExecutionAnalyzer> analyzers;
 

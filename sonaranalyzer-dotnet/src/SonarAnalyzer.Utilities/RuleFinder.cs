@@ -19,12 +19,14 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Utilities
 {
@@ -42,12 +44,17 @@ namespace SonarAnalyzer.Utilities
 
         public RuleFinder()
         {
-            this.diagnosticAnalyzers = PackagedRuleAssemblies
+            diagnosticAnalyzers = PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)))
+                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) || typeof(IRuleFactory).IsAssignableFrom(t))
                 .Where(t => t.GetCustomAttributes<RuleAttribute>().Any())
                 .ToList();
         }
+
+        public static IEnumerable<SonarDiagnosticAnalyzer> GetAnalyzers() =>
+            PackagedRuleAssemblies.SelectMany(assembly => assembly.GetTypes())
+                .Where(type => !type.IsAbstract && typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type))
+                .Select(type => (SonarDiagnosticAnalyzer)Activator.CreateInstance(type));
 
         public IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language)
         {
@@ -78,28 +85,25 @@ namespace SonarAnalyzer.Utilities
                 .Where(type => GetTargetLanguages(type).IsAlso(language));
         }
 
-        public static AnalyzerLanguage GetTargetLanguages(Type analyzerType)
+        private static AnalyzerLanguage GetTargetLanguages(MemberInfo analyzerType)
         {
-            var attribute = analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().FirstOrDefault();
-            if (attribute == null)
-            {
-                return null;
-            }
+            var languages = GetLanguages(analyzerType);
 
-            var language = AnalyzerLanguage.None;
-            foreach (var lang in attribute.Languages)
+            return languages.Aggregate(AnalyzerLanguage.None, (current, lang) => lang switch
             {
-                if (lang == LanguageNames.CSharp)
-                {
-                    language = language.AddLanguage(AnalyzerLanguage.CSharp);
-                }
-                else if (lang == LanguageNames.VisualBasic)
-                {
-                    language = language.AddLanguage(AnalyzerLanguage.VisualBasic);
-                }
-            }
+                LanguageNames.CSharp => current.AddLanguage(AnalyzerLanguage.CSharp),
+                LanguageNames.VisualBasic => current.AddLanguage(AnalyzerLanguage.VisualBasic),
+                _ => current
+            });
+        }
 
-            return language;
+        private static IEnumerable<string> GetLanguages(MemberInfo analyzerType)
+        {
+            var diagnosticAttribute = analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().FirstOrDefault();
+
+            return diagnosticAttribute == null
+                ? analyzerType.GetCustomAttributes<RuleAttribute>().FirstOrDefault()?.Languages
+                : diagnosticAttribute.Languages;
         }
     }
 }
