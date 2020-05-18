@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -42,7 +41,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         public SymbolicExecutionRunner()
         {
-            SupportedDiagnostics = this.symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
+            SupportedDiagnostics = symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
         }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -70,7 +69,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         }
 
         private IEnumerable<ISymbolicExecutionAnalysisContext> InitializeAnalyzers(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
-            this.symbolicExecutionAnalyzerFactory
+            symbolicExecutionAnalyzerFactory
                 .GetEnabledAnalyzers(context)
                 .Select(analyzer => analyzer.AddChecks(explodedGraph));
     }

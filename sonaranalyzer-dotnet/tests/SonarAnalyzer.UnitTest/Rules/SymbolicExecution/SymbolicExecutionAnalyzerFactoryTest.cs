@@ -36,12 +36,14 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestMethod]
         public void SupportedDiagnostics_ReturnsSymbolicExecutionRuleDescriptors()
         {
-            // Currently only EmptyNullableValueAccess was updated to use the new analyzer.
-
             var sut = new SymbolicExecutionAnalyzerFactory();
             var supportedDiagnostics = sut.SupportedDiagnostics.Select(descriptor => descriptor.Id).ToList();
 
-            CollectionAssert.AreEquivalent(supportedDiagnostics, new[] {"S3655", "S3966"});
+            CollectionAssert.AreEquivalent(supportedDiagnostics, new[]
+            {
+                Constants.EmptyNullableValueAccess,
+                Constants.ObjectsShouldNotBeDisposedMoreThanOnce
+            });
         }
 
         [DataTestMethod]
@@ -57,8 +59,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             var sut = new SymbolicExecutionAnalyzerFactory();
             var diagnostics = new Dictionary<string, ReportDiagnostic>
             {
-                {"S3655", reportDiagnostic},
-                {"S3966", ReportDiagnostic.Suppress}
+                {Constants.EmptyNullableValueAccess, reportDiagnostic},
+                {Constants.ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
@@ -67,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                     .SelectMany(analyzer => analyzer.SupportedDiagnostics.Select(descriptor => descriptor.Id))
                     .ToList();
 
-            CollectionAssert.AreEquivalent(enabledAnalyzers, new[] {"S3655"});
+            CollectionAssert.AreEquivalent(enabledAnalyzers, new[] {Constants.EmptyNullableValueAccess});
         }
 
         [TestMethod]
@@ -76,8 +78,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             var sut = new SymbolicExecutionAnalyzerFactory();
             var diagnostics = new Dictionary<string, ReportDiagnostic>
             {
-                {"S3655", ReportDiagnostic.Suppress},
-                {"S3966", ReportDiagnostic.Suppress}
+                {Constants.EmptyNullableValueAccess, ReportDiagnostic.Suppress},
+                {Constants.ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();

@@ -46,6 +46,27 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph) => new AnalysisContext(explodedGraph);
 
+        private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
+        {
+            private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
+            private readonly NullValueAccessedCheck nullPointerCheck;
+
+            public IEnumerable<Diagnostic> GetDiagnostics() =>
+                nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(rule, nullIdentifier.Parent.GetLocation(), nullIdentifier.Identifier.ValueText));
+
+            public AnalysisContext(CSharpExplodedGraph explodedGraph)
+            {
+                nullPointerCheck = new NullValueAccessedCheck(explodedGraph);
+                nullPointerCheck.ValuePropertyAccessed += AddIdentifier;
+
+                explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
+            }
+
+            private void AddIdentifier(object sender, MemberAccessedEventArgs args) => nullIdentifiers.Add(args.Identifier);
+
+            public void Dispose() => nullPointerCheck.ValuePropertyAccessed -= AddIdentifier;
+        }
+
         internal sealed class NullValueAccessedCheck : ExplodedGraphCheck
         {
             public event EventHandler<MemberAccessedEventArgs> ValuePropertyAccessed;
@@ -77,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                var symbol = this.semanticModel.GetSymbolInfo(identifier).Symbol;
+                var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
                 if (!IsNullableLocalScoped(symbol))
                 {
                     return programState;
@@ -97,13 +118,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 var type = symbol.GetSymbolType();
                 return type != null &&
                     type.OriginalDefinition.Is(KnownType.System_Nullable_T) &&
-                    this.explodedGraph.IsSymbolTracked(symbol);
+                    explodedGraph.IsSymbolTracked(symbol);
             }
 
             private bool IsHasValueAccess(MemberAccessExpressionSyntax memberAccess)
             {
                 return memberAccess.Name.Identifier.ValueText == HasValueLiteral &&
-                    (this.semanticModel.GetTypeInfo(memberAccess.Expression).Type?.OriginalDefinition).Is(KnownType.System_Nullable_T);
+                    (semanticModel.GetTypeInfo(memberAccess.Expression).Type?.OriginalDefinition).Is(KnownType.System_Nullable_T);
             }
 
             internal bool TryProcessInstruction(MemberAccessExpressionSyntax instruction, ProgramState programState, out ProgramState newProgramState)
@@ -140,27 +161,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return MemberExpression.TrySetConstraint(nullabilityConstraint, programState);
             }
-        }
-
-        private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
-        {
-            private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
-            private readonly NullValueAccessedCheck nullPointerCheck;
-
-            public IEnumerable<Diagnostic> GetDiagnostics() =>
-                this.nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(rule, nullIdentifier.Parent.GetLocation(), nullIdentifier.Identifier.ValueText));
-
-            public AnalysisContext(CSharpExplodedGraph explodedGraph)
-            {
-                this.nullPointerCheck = new NullValueAccessedCheck(explodedGraph);
-                this.nullPointerCheck.ValuePropertyAccessed += AddIdentifier;
-
-                explodedGraph.AddExplodedGraphCheck(this.nullPointerCheck);
-            }
-
-            private void AddIdentifier(object sender, MemberAccessedEventArgs args) => this.nullIdentifiers.Add(args.Identifier);
-
-            public void Dispose() => this.nullPointerCheck.ValuePropertyAccessed -= AddIdentifier;
         }
     }
 }

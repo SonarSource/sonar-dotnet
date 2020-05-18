@@ -36,17 +36,17 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         public SymbolicExecutionAnalyzerFactory()
         {
             // Symbolic execution analyzers and supported diagnostics will not change at runtime so they can be safely cached.
-            this.analyzers = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
+            analyzers = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
                 new EmptyNullableValueAccess(),
                 new ObjectsShouldNotBeDisposedMoreThanOnce());
 
-            SupportedDiagnostics = this.analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics).ToImmutableArray();
+            SupportedDiagnostics = analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics).ToImmutableArray();
         }
 
         public IEnumerable<ISymbolicExecutionAnalyzer> GetEnabledAnalyzers(SyntaxNodeAnalysisContext context) =>
             // Enabled analyzers can be changed at runtime in the IDE or by using connected mode in SonarLint and because of this
             // they cannot be cached.
-            this.analyzers.Where(analyzer => HasEnabledDiagnostics(analyzer, context.Compilation.Options));
+            analyzers.Where(analyzer => HasEnabledDiagnostics(analyzer, context.Compilation.Options));
 
         private static bool HasEnabledDiagnostics(ISymbolicExecutionAnalyzer analyzer, CompilationOptions options) =>
             analyzer.SupportedDiagnostics.Any(diagnosticDescriptor => IsEnabled(options, diagnosticDescriptor));

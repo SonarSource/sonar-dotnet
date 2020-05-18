@@ -24,5 +24,8 @@ namespace SonarAnalyzer.UnitTest
     {
         internal const string NuGetLatestVersion = "LATEST";
         internal const string DotNetCore220Version = "2.2.0";
+
+        internal const string EmptyNullableValueAccess = "S3655";
+        internal const string ObjectsShouldNotBeDisposedMoreThanOnce = "S3966";
     }
 }
