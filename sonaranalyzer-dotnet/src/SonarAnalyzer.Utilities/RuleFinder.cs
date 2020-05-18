@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Utilities
         {
             diagnosticAnalyzers = PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) || t.IsSubclassOf(typeof(IRuleFactory)))
+                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) || typeof(IRuleFactory).IsAssignableFrom(t))
                 .Where(t => t.GetCustomAttributes<RuleAttribute>().Any())
                 .ToList();
         }

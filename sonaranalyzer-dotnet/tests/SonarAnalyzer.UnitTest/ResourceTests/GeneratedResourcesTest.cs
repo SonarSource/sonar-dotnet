@@ -30,6 +30,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
+using SonarAnalyzer.Utilities;
 using vbnet::SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.ResourceTests
@@ -57,6 +58,30 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
             var rulesFromClasses = GetRulesFromClasses(typeof(VisualBasicSyntaxHelper).Assembly);
 
             rulesFromResources.Should().Equal(rulesFromClasses);
+        }
+
+        [TestMethod]
+        public void ThereShouldBeRuleDetailsForAllCSharpRuleClasses()
+        {
+            var ruleDetailsKeys = RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.CSharp)
+                .Select(rd => rd.Key)
+                .OrderBy(key => key);
+
+            var rulesFromClasses = GetRulesFromClasses(typeof(CSharpSyntaxHelper).Assembly).OrderBy(key => key);
+
+            ruleDetailsKeys.Should().Equal(rulesFromClasses);
+        }
+
+        [TestMethod]
+        public void ThereShouldBeRuleDetailsForAllVbNetRuleClasses()
+        {
+            var ruleDetailsKeys = RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.VisualBasic)
+                .Select(rd => rd.Key)
+                .OrderBy(key => key);
+
+            var rulesFromClasses = GetRulesFromClasses(typeof(VisualBasicSyntaxHelper).Assembly).OrderBy(key => key);
+
+            ruleDetailsKeys.Should().Equal(rulesFromClasses);
         }
 
         private static string[] GetRulesFromClasses(Assembly assembly) =>
