@@ -37,6 +37,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         private const string ObjectsShouldNotBeDisposedMoreThanOnce = "S3966";
         private const string PublicMethodArgumentsShouldBeCheckedForNull = "S3900";
         private const string EmptyCollectionsShouldNotBeEnumerated = "S4158";
+        private const string ConditionEvaluatesToConstantBug = "S2583";
+        private const string ConditionEvaluatesToConstantCodeSmell = "S2589";
 
         [TestMethod]
         public void SupportedDiagnostics_ReturnsSymbolicExecutionRuleDescriptors()
@@ -49,7 +51,9 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 EmptyNullableValueAccess,
                 ObjectsShouldNotBeDisposedMoreThanOnce,
                 PublicMethodArgumentsShouldBeCheckedForNull,
-                EmptyCollectionsShouldNotBeEnumerated
+                EmptyCollectionsShouldNotBeEnumerated,
+                ConditionEvaluatesToConstantBug,
+                ConditionEvaluatesToConstantCodeSmell
             });
         }
 
@@ -68,7 +72,9 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             {
                 {EmptyNullableValueAccess, reportDiagnostic},
                 {ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress},
-                {EmptyCollectionsShouldNotBeEnumerated, ReportDiagnostic.Suppress}
+                {EmptyCollectionsShouldNotBeEnumerated, ReportDiagnostic.Suppress},
+                {ConditionEvaluatesToConstantBug, ReportDiagnostic.Suppress},
+                {ConditionEvaluatesToConstantCodeSmell, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
@@ -88,7 +94,9 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             {
                 {EmptyNullableValueAccess, ReportDiagnostic.Suppress},
                 {ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress},
-                {EmptyCollectionsShouldNotBeEnumerated, ReportDiagnostic.Suppress}
+                {EmptyCollectionsShouldNotBeEnumerated, ReportDiagnostic.Suppress},
+                {ConditionEvaluatesToConstantBug, ReportDiagnostic.Suppress},
+                {ConditionEvaluatesToConstantCodeSmell, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();

@@ -32,6 +32,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     [Rule(ObjectsShouldNotBeDisposedMoreThanOnce.DiagnosticId, LanguageNames.CSharp)]
     [Rule(PublicMethodArgumentsShouldBeCheckedForNull.DiagnosticId, LanguageNames.CSharp)]
     [Rule(EmptyCollectionsShouldNotBeEnumerated.DiagnosticId, LanguageNames.CSharp)]
+    [Rule(ConditionEvaluatesToConstant.S2583DiagnosticId, LanguageNames.CSharp)]
+    [Rule(ConditionEvaluatesToConstant.S2589DiagnosticId, LanguageNames.CSharp)]
     internal sealed class SymbolicExecutionAnalyzerFactory : IRuleFactory
     {
         private readonly ImmutableArray<ISymbolicExecutionAnalyzer> analyzers;
@@ -43,7 +45,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 new EmptyNullableValueAccess(),
                 new ObjectsShouldNotBeDisposedMoreThanOnce(),
                 new PublicMethodArgumentsShouldBeCheckedForNull(),
-                new EmptyCollectionsShouldNotBeEnumerated()))
+                new EmptyCollectionsShouldNotBeEnumerated(),
+                new ConditionEvaluatesToConstant()))
         {
         }
 
