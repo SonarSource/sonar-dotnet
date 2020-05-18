@@ -36,6 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         private const string EmptyNullableValueAccess = "S3655";
         private const string ObjectsShouldNotBeDisposedMoreThanOnce = "S3966";
         private const string PublicMethodArgumentsShouldBeCheckedForNull = "S3900";
+        private const string EmptyCollectionsShouldNotBeEnumerated = "S4158";
 
         [TestMethod]
         public void SupportedDiagnostics_ReturnsSymbolicExecutionRuleDescriptors()
@@ -47,7 +48,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             {
                 EmptyNullableValueAccess,
                 ObjectsShouldNotBeDisposedMoreThanOnce,
-                PublicMethodArgumentsShouldBeCheckedForNull
+                PublicMethodArgumentsShouldBeCheckedForNull,
+                EmptyCollectionsShouldNotBeEnumerated
             });
         }
 
@@ -65,7 +67,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             var diagnostics = new Dictionary<string, ReportDiagnostic>
             {
                 {EmptyNullableValueAccess, reportDiagnostic},
-                {ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress}
+                {ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress},
+                {EmptyCollectionsShouldNotBeEnumerated, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
@@ -84,7 +87,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             var diagnostics = new Dictionary<string, ReportDiagnostic>
             {
                 {EmptyNullableValueAccess, ReportDiagnostic.Suppress},
-                {ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress}
+                {ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress},
+                {EmptyCollectionsShouldNotBeEnumerated, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
@@ -93,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                     .SelectMany(analyzer => analyzer.SupportedDiagnostics.Select(descriptor => descriptor.Id))
                     .ToList();
 
-            CollectionAssert.AreEquivalent(enabledAnalyzers, new List<string>());
+            CollectionAssert.AreEquivalent(new List<string>(), enabledAnalyzers);
         }
 
         private static SyntaxNodeAnalysisContext CreateSyntaxNodeAnalysisContext(ImmutableDictionary<string, ReportDiagnostic> diagnostics)
