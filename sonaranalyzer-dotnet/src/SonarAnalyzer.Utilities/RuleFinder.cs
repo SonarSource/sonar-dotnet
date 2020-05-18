@@ -45,44 +45,30 @@ namespace SonarAnalyzer.Utilities
         {
             diagnosticAnalyzers = PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) || typeof(IRuleFactory).IsAssignableFrom(t))
+                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) || t.IsSubclassOf(typeof(IRuleFactory)))
                 .Where(t => t.GetCustomAttributes<RuleAttribute>().Any())
                 .ToList();
         }
 
-        public static IEnumerable<SonarDiagnosticAnalyzer> GetAnalyzers() =>
+        public IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
+            diagnosticAnalyzers
+                .Where(type => GetTargetLanguages(type).IsAlso(language));
+
+        internal static IEnumerable<SonarDiagnosticAnalyzer> GetAnalyzers() =>
             PackagedRuleAssemblies.SelectMany(assembly => assembly.GetTypes())
                 .Where(type => !type.IsAbstract && typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type))
                 .Select(type => (SonarDiagnosticAnalyzer)Activator.CreateInstance(type));
 
-        public IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language)
-        {
-            return this.diagnosticAnalyzers
+        internal IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language) =>
+            diagnosticAnalyzers
                 .Where(analyzerType => !IsParameterized(analyzerType))
                 .Where(type => GetTargetLanguages(type).IsAlso(language));
-        }
 
-        public static bool IsParameterized(Type analyzerType)
-        {
-            return analyzerType.GetProperties()
+        internal static bool IsParameterized(Type analyzerType) =>
+            analyzerType.GetProperties()
                 .Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
-        }
 
-        public IEnumerable<Type> AllAnalyzerTypes => diagnosticAnalyzers;
-
-        public IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language)
-        {
-            return this.diagnosticAnalyzers
-                .Where(type => GetTargetLanguages(type).IsAlso(language));
-        }
-
-        public static IEnumerable<Type> GetUtilityAnalyzerTypes(AnalyzerLanguage language)
-        {
-            return PackagedRuleAssemblies
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Rules.UtilityAnalyzerBase)))
-                .Where(type => GetTargetLanguages(type).IsAlso(language));
-        }
+        internal IEnumerable<Type> AllAnalyzerTypes => diagnosticAnalyzers;
 
         private static AnalyzerLanguage GetTargetLanguages(MemberInfo analyzerType)
         {
