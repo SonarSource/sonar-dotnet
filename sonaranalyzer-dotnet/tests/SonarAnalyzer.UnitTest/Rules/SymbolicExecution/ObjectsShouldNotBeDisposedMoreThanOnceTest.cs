@@ -18,21 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+extern alias csharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.SymbolicExecution;
+using SonarAnalyzer.UnitTest.TestFramework;
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.UnitTest.Rules
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public sealed class RuleAttribute : Attribute
+    [TestClass]
+    public class ObjectsShouldNotBeDisposedMoreThanOnceTest
     {
-        public string Key { get; }
-
-        public string[] Languages { get; }
-
-        public RuleAttribute(string key, params string[] languages)
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ObjectsShouldNotBeDisposedMoreThanOnce()
         {
-            Key = key;
-            Languages = languages;
+            // Symbolic execution analyzers are run by the SymbolicExecutionRunner
+            Verifier.VerifyAnalyzer(@"TestCases\ObjectsShouldNotBeDisposedMoreThanOnce.cs",
+                new SymbolicExecutionRunner(),
+                ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }

@@ -19,6 +19,7 @@
  */
 
 extern alias csharp;
+using System;
 using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
@@ -64,6 +65,12 @@ namespace SonarAnalyzer.UnitTest.Common
 
             countParameterless = finder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.VisualBasic).Count();
             finder.AllAnalyzerTypes.Should().HaveCountGreaterThan(countParameterless);
+        }
+
+        [TestMethod]
+        public void GetTargetLanguagesThrowsIfTypeDoesNotHaveLanguageInfo()
+        {
+            Assert.ThrowsException<NotSupportedException>(() => RuleFinder.GetTargetLanguages(typeof(string)));
         }
     }
 }

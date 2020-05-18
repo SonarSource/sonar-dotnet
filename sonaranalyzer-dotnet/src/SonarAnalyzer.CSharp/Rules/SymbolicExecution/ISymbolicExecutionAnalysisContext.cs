@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,20 +19,15 @@
  */
 
 using System;
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Rules.SymbolicExecution
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public sealed class RuleAttribute : Attribute
+    // The implementing class is responsible to encapsulate the generated data during method analysis (like diagnostics
+    // or cached nodes) and clear it and the end.
+    public interface ISymbolicExecutionAnalysisContext : IDisposable
     {
-        public string Key { get; }
-
-        public string[] Languages { get; }
-
-        public RuleAttribute(string key, params string[] languages)
-        {
-            Key = key;
-            Languages = languages;
-        }
+        IEnumerable<Diagnostic> GetDiagnostics();
     }
 }

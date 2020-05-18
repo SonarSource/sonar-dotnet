@@ -52,13 +52,6 @@ namespace SonarAnalyzer.Utilities
                 .SelectMany(t => GetRuleDetailFromRuleAttributes(t, language));
         }
 
-        public static IEnumerable<RuleDetail> GetParameterlessRuleDetails(AnalyzerLanguage language)
-        {
-            return new RuleFinder()
-                .GetParameterlessAnalyzerTypes(language)
-                .SelectMany(t => GetRuleDetailFromRuleAttributes(t, language));
-        }
-
         private static IEnumerable<RuleDetail> GetRuleDetailFromRuleAttributes(Type analyzerType,
             AnalyzerLanguage language)
         {
