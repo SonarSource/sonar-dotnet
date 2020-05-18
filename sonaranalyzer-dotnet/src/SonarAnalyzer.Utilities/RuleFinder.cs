@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Utilities
                 return ruleAttribute.Languages;
             }
 
-            throw new Exception($"Can not find any language for the given type {analyzerType.Name}!");
+            throw new NotSupportedException($"Can not find any language for the given type {analyzerType.Name}!");
         }
     }
 }

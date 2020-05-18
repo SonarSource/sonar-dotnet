@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void GetTargetLanguagesThrowsIfTypeDoesNotHaveLanguageInfo()
         {
-            Assert.ThrowsException<Exception>(() => RuleFinder.GetTargetLanguages(typeof(string)));
+            Assert.ThrowsException<NotSupportedException>(() => RuleFinder.GetTargetLanguages(typeof(string)));
         }
     }
 }
