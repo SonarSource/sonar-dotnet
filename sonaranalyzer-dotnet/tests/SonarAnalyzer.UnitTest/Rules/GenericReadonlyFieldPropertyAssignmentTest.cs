@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericReadonlyFieldPropertyAssignment()
         {
             Verifier.VerifyAnalyzer(@"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
-                new GenericReadonlyFieldPropertyAssignment());
+                new GenericReadonlyFieldPropertyAssignment(),
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
@@ -45,7 +47,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.Remove.Fixed.cs",
                 new GenericReadonlyFieldPropertyAssignment(),
                 new GenericReadonlyFieldPropertyAssignmentCodeFixProvider(),
-                GenericReadonlyFieldPropertyAssignmentCodeFixProvider.TitleRemove);
+                GenericReadonlyFieldPropertyAssignmentCodeFixProvider.TitleRemove,
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
@@ -57,7 +60,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\GenericReadonlyFieldPropertyAssignment.AddConstraint.Fixed.cs",
                 new GenericReadonlyFieldPropertyAssignment(),
                 new GenericReadonlyFieldPropertyAssignmentCodeFixProvider(),
-                GenericReadonlyFieldPropertyAssignmentCodeFixProvider.TitleAddClassConstraint);
+                GenericReadonlyFieldPropertyAssignmentCodeFixProvider.TitleAddClassConstraint,
+                ParseOptionsHelper.FromCSharp8);
         }
     }
 }

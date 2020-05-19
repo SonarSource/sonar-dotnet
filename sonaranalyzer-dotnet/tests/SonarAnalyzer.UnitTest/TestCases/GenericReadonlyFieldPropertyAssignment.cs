@@ -10,6 +10,7 @@ namespace Tests.TestCases
     {
         int X { get; set; }
         int Y { get; set; }
+        string Tag { get; set; }
     }
 
     partial class PointManager<T> where T : IPoint
@@ -18,7 +19,8 @@ namespace Tests.TestCases
         public PointManager(T point)
         {
             this.point = point;
-            this.point.X = 1; // Compliant, we are in the constructor
+            this.point.X = 1;       // Compliant, we are in the constructor
+            this.point.Tag ??= "";  // Compliant, we are in the constructor
         }
 
         public void MovePointVertically(int newX)
@@ -27,8 +29,9 @@ namespace Tests.TestCases
 //          ^^^^^^^
             point.X++; //Noncompliant; if point is a struct, then nothing happened
             Console.WriteLine(point.X);
-            var i = point.X = newX; //Noncompliant;
-            i = point.X++; //Noncompliant;
+            var i = point.X = newX; //Noncompliant
+            i = point.X++;          //Noncompliant
+            point.Tag ??= "value";  //Noncompliant
         }
     }
 
