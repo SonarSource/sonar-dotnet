@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -174,6 +174,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         case SyntaxKind.OrAssignmentExpression:
                         case SyntaxKind.LeftShiftAssignmentExpression:
                         case SyntaxKind.RightShiftAssignmentExpression:
+                        case SyntaxKindEx.CoalesceAssignmentExpression:
                             ProcessOpAssignment(instruction, assignmentLhs, liveOut);
                             break;
 

@@ -10,6 +10,8 @@ namespace Tests.Diagnostics
 //                         ^^^^^^^^^ Secondary@-1 [1]
         private int countInstance = 0;
 
+        private static string text; // Secondary
+
         public void DoSomething()
         {
             count++;  // Noncompliant [0] {{Make the enclosing instance method 'static' or remove this set on the 'static' field.}}
@@ -19,11 +21,14 @@ namespace Tests.Diagnostics
                 count++; // Compliant, already reported on this symbol
             });
             countInstance++;
+
+            text ??= "empty"; // Noncompliant
         }
 
         public static void DoSomethingStatic()
         {
             count++;
+            text ??= "empty";
         }
 
 

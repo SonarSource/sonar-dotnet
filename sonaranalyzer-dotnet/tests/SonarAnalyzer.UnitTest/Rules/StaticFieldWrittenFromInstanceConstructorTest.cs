@@ -33,7 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void StaticFieldWrittenFromInstanceConstructor()
         {
             Verifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceConstructor.cs",
-                new StaticFieldWrittenFromInstanceConstructor());
+                new StaticFieldWrittenFromInstanceConstructor(),
+                ParseOptionsHelper.FromCSharp8);
         }
     }
 }

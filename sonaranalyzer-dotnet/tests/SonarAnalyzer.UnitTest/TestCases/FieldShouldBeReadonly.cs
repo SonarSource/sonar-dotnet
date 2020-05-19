@@ -194,4 +194,15 @@ namespace Tests.Diagnostics
             otherField = 5;
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3339
+    public class NullCoalesceAssignment
+    {
+        private string value = null;
+
+        public void DoSomething()
+        {
+            value ??= "Empty";
+        }
+    }
 }

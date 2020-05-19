@@ -33,7 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FieldShouldBeReadonly()
         {
             Verifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs",
-                new FieldShouldBeReadonly());
+                new FieldShouldBeReadonly(),
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
@@ -44,7 +45,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\FieldShouldBeReadonly.cs",
                 @"TestCases\FieldShouldBeReadonly.Fixed.cs",
                 new FieldShouldBeReadonly(),
-                new FieldShouldBeReadonlyCodeFixProvider());
+                new FieldShouldBeReadonlyCodeFixProvider(),
+                ParseOptionsHelper.FromCSharp8);
         }
     }
 }

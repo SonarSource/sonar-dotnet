@@ -472,7 +472,9 @@ namespace Tests.Diagnostics
             int[] Compute(int[] arr)
             {
                 var lst = arr;    //Compliant
+                var unused = arr;
                 lst ??= new int[0];
+                unused ??= new int[0]; //Noncompliant
                 return lst;
             }
         }
