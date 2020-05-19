@@ -67,6 +67,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         private IEnumerable<ISymbolicExecutionAnalysisContext> InitializeAnalyzers(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             symbolicExecutionAnalyzerFactory
                 .GetEnabledAnalyzers(context)
-                .Select(analyzer => analyzer.AddChecks(explodedGraph));
+                .Select(analyzer => analyzer.AddChecks(explodedGraph, context));
     }
 }
