@@ -903,4 +903,21 @@ namespace Tests.Diagnostics
             value = default; // Noncompliant FP because it's ref variable and value is propagated somewhere
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3348
+    public class Repro_3348
+    {
+        public int Indices(int[] values)
+        {
+            var index = 2; // Noncompliant FP, value is used in Indice
+            return values[^index];
+        }
+
+        public int[] Ranges(int[] values)
+        {
+            var first = 2; // Noncompliant FP, value is used in Range
+            var last = 22; // Noncompliant FP, value is used in Range
+            return values[first..last];
+        }
+    }
 }
