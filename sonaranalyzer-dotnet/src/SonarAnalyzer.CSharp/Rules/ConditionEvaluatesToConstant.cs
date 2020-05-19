@@ -359,32 +359,35 @@ namespace SonarAnalyzer.Rules.CSharp
                     isNull.Add(operand);
                     return;
                 }
+
                 var symbol = semanticModel.GetSymbolInfo(operand.RemoveParentheses()).Symbol;
-                if (symbol != null)
+                if (symbol == null)
                 {
-                    if (symbol.HasConstraint(ObjectConstraint.Null, args.ProgramState))
-                    {
-                        isNull.Add(operand);
-                    }
-                    else if (useNotNull && symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
-                    {
-                        isNotNull.Add(operand);
-                    }
-                    else
-                    {
-                        isUnknown.Add(operand);
-                    }
+                    return;
+                }
+
+                if (symbol.HasConstraint(ObjectConstraint.Null, args.ProgramState))
+                {
+                    isNull.Add(operand);
+                }
+                else if (useNotNull && symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
+                {
+                    isNotNull.Add(operand);
+                }
+                else
+                {
+                    isUnknown.Add(operand);
                 }
             }
-            var rightOperands = args.Instruction.DescendantNodesAndSelf()
-                .Select(x => (x is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.CoalesceExpression) ? binary.Right : null)
-                          ?? (x is AssignmentExpressionSyntax assign && assign.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) ? assign.Right : null))
-                .WhereNotNull().ToArray();
+
+            var rightOperands = GetRightOperands(args.Instruction);
+
             foreach (var right in rightOperands)
             {
                 //It's too late for left operands of ??= or x=x??, symbolic value was already set
                 ProcessOperand(right, false);
             }
+
             if(args.ProgramPoint.Block is BinaryBranchBlock bbb
                 && bbb.BranchingNode.IsAnyKind(coalesceExpressions)
                 && args.ProgramPoint.Offset == args.ProgramPoint.Block.Instructions.Count - 1 //Last instruction of BBB holds ??= left operand value
@@ -393,5 +396,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 ProcessOperand(left, true);
             }
         }
+
+        private static IEnumerable<ExpressionSyntax> GetRightOperands(SyntaxNode node) =>
+            node.DescendantNodesAndSelf()
+                .Select(x => (x is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.CoalesceExpression) ? binary.Right : null) ??
+                             (x is AssignmentExpressionSyntax assign && assign.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) ? assign.Right : null))
+                .WhereNotNull();
     }
 }
