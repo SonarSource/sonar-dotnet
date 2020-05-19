@@ -199,13 +199,9 @@ namespace Tests.Diagnostics
     public class NullCoalesceAssignment
     {
         private string value = null;
-        private string notWritten = "Default"; // Noncompliant
 
         public void DoSomething()
         {
-            string x = null;
-            x ??= notWritten;
-
             value ??= "Empty";
         }
     }
