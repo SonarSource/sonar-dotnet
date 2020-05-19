@@ -19,6 +19,7 @@
  */
 
 extern alias csharp;
+using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
@@ -34,8 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PublicMethodArgumentsShouldBeCheckedForNull()
         {
             // Symbolic execution analyzers are run by the SymbolicExecutionRunner
+            var analyzers = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new PublicMethodArgumentsShouldBeCheckedForNull());
+            var runner = new SymbolicExecutionRunner(new SymbolicExecutionAnalyzerFactory(analyzers));
+
             Verifier.VerifyAnalyzer(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.cs",
-                new SymbolicExecutionRunner(),
+                runner,
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }

@@ -31,6 +31,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     [Rule(EmptyNullableValueAccess.DiagnosticId, LanguageNames.CSharp)]
     [Rule(ObjectsShouldNotBeDisposedMoreThanOnce.DiagnosticId, LanguageNames.CSharp)]
     [Rule(PublicMethodArgumentsShouldBeCheckedForNull.DiagnosticId, LanguageNames.CSharp)]
+    [Rule(EmptyCollectionsShouldNotBeEnumerated.DiagnosticId, LanguageNames.CSharp)]
     internal sealed class SymbolicExecutionAnalyzerFactory : IRuleFactory
     {
         private readonly ImmutableArray<ISymbolicExecutionAnalyzer> analyzers;
@@ -38,12 +39,18 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
         public SymbolicExecutionAnalyzerFactory()
-        {
-            // Symbolic execution analyzers and supported diagnostics will not change at runtime so they can be safely cached.
-            analyzers = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
+            : this(ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
                 new EmptyNullableValueAccess(),
                 new ObjectsShouldNotBeDisposedMoreThanOnce(),
-                new PublicMethodArgumentsShouldBeCheckedForNull());
+                new PublicMethodArgumentsShouldBeCheckedForNull(),
+                new EmptyCollectionsShouldNotBeEnumerated()))
+        {
+        }
+
+        internal SymbolicExecutionAnalyzerFactory(ImmutableArray<ISymbolicExecutionAnalyzer> analyzers)
+        {
+            // Symbolic execution analyzers and supported diagnostics will not change at runtime so they can be safely cached.
+            this.analyzers = analyzers;
 
             SupportedDiagnostics = analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics).ToImmutableArray();
         }
