@@ -227,11 +227,11 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class FalsePositives
+    public class PassingArgumentsByReference
     {
         private static object _gate = new object();
 
-        public void Init<T>(ref T field)
+        public void InitWithLock<T>(ref T field)
             where T : new()
         {
             if (field == null)
@@ -242,6 +242,18 @@ namespace Tests.Diagnostics
                     {
                         field = new T();
                     }
+                }
+            }
+        }
+
+        public void Init<T>(ref T field)
+            where T : new()
+        {
+            if (field == null)
+            {
+                if (field == null) // Noncompliant, we already checked for null
+                {
+                    field = new T();
                 }
             }
         }
