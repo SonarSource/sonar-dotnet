@@ -226,4 +226,24 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class FalsePositives
+    {
+        private static object _gate = new object();
+
+        public void Init<T>(ref T field)
+            where T : new()
+        {
+            if (field == null)
+            {
+                lock (_gate)
+                {
+                    if (field == null) // Noncompliant, FP - in multithreading context it makes sense to check for null twice
+                    {
+                        field = new T();
+                    }
+                }
+            }
+        }
+    }
 }
