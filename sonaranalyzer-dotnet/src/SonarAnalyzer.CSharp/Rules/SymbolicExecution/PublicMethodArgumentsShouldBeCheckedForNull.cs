@@ -71,26 +71,28 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                this.syntaxNodeAnalysisContext = context;
+                syntaxNodeAnalysisContext = context;
 
-                this.nullPointerCheck = new NullPointerDereference.NullPointerCheck(explodedGraph);
-                this.nullPointerCheck.MemberAccessing += MemberAccessingHandler;
-                explodedGraph.AddExplodedGraphCheck(this.nullPointerCheck);
+                nullPointerCheck = new NullPointerDereference.NullPointerCheck(explodedGraph);
+                nullPointerCheck.MemberAccessing += MemberAccessingHandler;
+                explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
             }
 
+            public bool SupportPartialResults { get; } = true;
+
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                this.identifiers.Select(identifier => Diagnostic.Create(rule, identifier.GetLocation(), GetMessage(identifier)));
+                identifiers.Select(identifier => Diagnostic.Create(rule, identifier.GetLocation(), GetMessage(identifier)));
 
             public void Dispose()
             {
-                if (this.nullPointerCheck != null)
+                if (nullPointerCheck != null)
                 {
-                    this.nullPointerCheck.MemberAccessing -= MemberAccessingHandler;
+                    nullPointerCheck.MemberAccessing -= MemberAccessingHandler;
                 }
             }
 
             private void MemberAccessingHandler(object sender, MemberAccessingEventArgs args) =>
-                CollectMemberAccesses(args, this.identifiers, this.syntaxNodeAnalysisContext.SemanticModel);
+                CollectMemberAccesses(args, identifiers, syntaxNodeAnalysisContext.SemanticModel);
 
             private static string GetMessage(SimpleNameSyntax identifier) =>
                 IsArgumentOfConstructorInitializer(identifier)

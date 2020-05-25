@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -60,16 +61,39 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
             try
             {
+                explodedGraph.ExplorationEnded += ExplorationEndedHandler;
+
                 explodedGraph.Walk();
             }
             finally
             {
-                foreach (var diagnostic in analyzerContexts.SelectMany(analyzerContext => analyzerContext.GetDiagnostics()))
-                {
-                    context.ReportDiagnosticWhenActive(diagnostic);
-                }
+                explodedGraph.ExplorationEnded -= ExplorationEndedHandler;
+            }
 
-                analyzerContexts.ForEach(analyzerContext => analyzerContext.Dispose());
+            // Some of the rules can return good results if the tree was only partially visited; others need to completely
+            // walk the tree in order to avoid false positives.
+            //
+            // Due to this we split the rules in two sets and report the diagnostics in steps:
+            // - When the tree is successfully visited and ExplorationEnded event is raised.
+            // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
+            // reached or if an exception was thrown during analysis.
+            ReportDiagnostics(analyzerContexts, context, true);
+
+            analyzerContexts.ForEach(analyzerContext => analyzerContext.Dispose());
+
+            void ExplorationEndedHandler(object sender, EventArgs args)
+            {
+                ReportDiagnostics(analyzerContexts, context, false);
+            }
+        }
+
+        private static void ReportDiagnostics(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
+        {
+            foreach (var diagnostic in analyzerContexts
+                .Where(analyzerContext => analyzerContext.SupportPartialResults == supportsPartialResults)
+                .SelectMany(analyzerContext => analyzerContext.GetDiagnostics()))
+            {
+                context.ReportDiagnosticWhenActive(diagnostic);
             }
         }
 

@@ -105,6 +105,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 explodedGraph.AddExplodedGraphCheck(check);
             }
 
+            public bool SupportPartialResults { get; }
+
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 emptyCollections.Except(nonEmptyCollections).Select(node => Diagnostic.Create(rule, node.GetLocation()));
 

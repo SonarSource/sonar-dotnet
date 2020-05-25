@@ -19,9 +19,12 @@
  */
 
 extern alias csharp;
+using System.Collections.Immutable;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -34,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionEvaluatesToConstant_CSharp6()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp6.cs",
-                new ConditionEvaluatesToConstant(),
+                GetAnalyzer(),
                 new[] { new CSharpParseOptions(LanguageVersion.CSharp6) });
         }
 
@@ -43,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionEvaluatesToConstant_FromCSharp7()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
-                new ConditionEvaluatesToConstant(),
+                GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp7);
         }
 
@@ -52,9 +55,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionEvaluatesToConstant_FromCSharp8()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
-                new ConditionEvaluatesToConstant(),
+                GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
+
+        private static SonarDiagnosticAnalyzer GetAnalyzer() =>
+            new SymbolicExecutionRunner(
+                new SymbolicExecutionAnalyzerFactory(
+                    ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new ConditionEvaluatesToConstant())));
     }
 }
