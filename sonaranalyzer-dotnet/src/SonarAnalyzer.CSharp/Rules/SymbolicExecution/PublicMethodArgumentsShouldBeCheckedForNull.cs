@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
             }
 
-            public bool SupportPartialWalk { get; } = true;
+            public bool SupportPartialResults { get; } = true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 identifiers.Select(identifier => Diagnostic.Create(rule, identifier.GetLocation(), GetMessage(identifier)));

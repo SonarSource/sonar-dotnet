@@ -74,8 +74,9 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             // walk the tree in order to avoid false positives.
             //
             // Due to this we split the rules in two sets and report the diagnostics in steps:
-            // - when the tree is successfully visited and ExplorationEnded event is raised
-            // - when the tree visit ends (explodedGraph.Walk() returns)
+            // - When the tree is successfully visited and ExplorationEnded event is raised.
+            // - When the tree visit ends (explodedGraph.Walk() returns). This will happen even if the maximum number of steps was
+            // reached or if an exception was thrown during analysis.
             ReportDiagnostics(analyzerContexts, context, true);
 
             analyzerContexts.ForEach(analyzerContext => analyzerContext.Dispose());
@@ -86,10 +87,10 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             }
         }
 
-        private static void ReportDiagnostics(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialWalking)
+        private static void ReportDiagnostics(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
         {
             foreach (var diagnostic in analyzerContexts
-                .Where(analyzerContext => analyzerContext.SupportPartialWalk == supportsPartialWalking)
+                .Where(analyzerContext => analyzerContext.SupportPartialResults == supportsPartialResults)
                 .SelectMany(analyzerContext => analyzerContext.GetDiagnostics()))
             {
                 context.ReportDiagnosticWhenActive(diagnostic);

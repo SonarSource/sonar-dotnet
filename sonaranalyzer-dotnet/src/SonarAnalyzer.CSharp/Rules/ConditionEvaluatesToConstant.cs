@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 explodedGraph.ConditionEvaluated += ConditionEvaluatedHandler;
             }
 
-            public bool SupportPartialWalk { get; }
+            public bool SupportPartialResults { get; }
 
             public IEnumerable<Diagnostic> GetDiagnostics()
             {
@@ -143,11 +143,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Except(conditionFalse)
                         .Where(c => !IsConditionOfLoopWithBreak((ExpressionSyntax)c))
                         .Where(c => !IsInsideCatchOrFinallyBlock(c))
-                        .Select(node => GetDiagnostics(node, true)))
+                        .Select(node => GetNodeDiagnostics(node, true)))
                     .Union(conditionFalse
                         .Except(conditionTrue)
                         .Where(c => !IsInsideCatchOrFinallyBlock(c))
-                        .Select(node => GetDiagnostics(node, false)))
+                        .Select(node => GetNodeDiagnostics(node, false)))
                     .Union(isNull
                         .Except(isUnknown)
                         .Except(isNotNull)
@@ -174,15 +174,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void ConditionEvaluatedHandler(object sender, ConditionEvaluatedEventArgs args) =>
                 CollectConditions(args, conditionTrue, conditionFalse, context.SemanticModel);
-
-            private static Diagnostic GetDiagnostics(SyntaxNode constantNode, bool constantValue)
-            {
-                var unreachableLocations = GetUnreachableLocations(constantNode, constantValue).ToList();
-                var constantText = constantValue.ToString().ToLowerInvariant();
-                return unreachableLocations.Count > 0
-                    ? Diagnostic.Create(s2583, constantNode.GetLocation(), messageArgs: string.Format(S2583MessageFormatBool, constantText), additionalLocations: unreachableLocations)
-                    : Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: string.Format(S2589MessageFormatBool, constantText));
-            }
         }
 
         private static bool IsYieldNode(Block node) =>
@@ -219,7 +210,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsLoopBreakingStatement(SyntaxNode syntaxNode) =>
             syntaxNode.IsAnyKind(loopBreakingStatements);
 
-
+        private static Diagnostic GetNodeDiagnostics(SyntaxNode constantNode, bool constantValue)
+        {
+            var unreachableLocations = GetUnreachableLocations(constantNode, constantValue).ToList();
+            var constantText = constantValue.ToString().ToLowerInvariant();
+            return unreachableLocations.Count > 0
+                ? Diagnostic.Create(s2583, constantNode.GetLocation(), messageArgs: string.Format(S2583MessageFormatBool, constantText), additionalLocations: unreachableLocations)
+                : Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: string.Format(S2589MessageFormatBool, constantText));
+        }
 
         private static IEnumerable<Location> GetUnreachableLocations(SyntaxNode constantExpression, bool constantValue)
         {

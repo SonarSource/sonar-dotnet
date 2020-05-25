@@ -60,11 +60,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
 
-        private static SonarDiagnosticAnalyzer GetAnalyzer()
-        {
-            // Symbolic execution analyzers are run by the SymbolicExecutionRunner
-            var analyzers = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new ConditionEvaluatesToConstant());
-            return new SymbolicExecutionRunner(new SymbolicExecutionAnalyzerFactory(analyzers));
-        }
+        private static SonarDiagnosticAnalyzer GetAnalyzer() =>
+            new SymbolicExecutionRunner(
+                new SymbolicExecutionAnalyzerFactory(
+                    ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new ConditionEvaluatesToConstant())));
     }
 }
