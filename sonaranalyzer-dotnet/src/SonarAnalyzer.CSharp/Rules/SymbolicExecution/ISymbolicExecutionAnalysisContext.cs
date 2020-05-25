@@ -28,6 +28,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     // or cached nodes) and clear it and the end.
     public interface ISymbolicExecutionAnalysisContext : IDisposable
     {
+        bool SupportPartialWalk { get; }
+
         IEnumerable<Diagnostic> GetDiagnostics();
     }
 }

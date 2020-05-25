@@ -128,6 +128,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 explodedGraph.ConditionEvaluated += ConditionEvaluatedHandler;
             }
 
+            public bool SupportPartialWalk { get; }
+
             public IEnumerable<Diagnostic> GetDiagnostics()
             {
                 // Do not raise issue in generator functions (See #1295)
