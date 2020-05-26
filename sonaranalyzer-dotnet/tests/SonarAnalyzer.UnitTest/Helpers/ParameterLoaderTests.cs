@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,6 +20,7 @@
 
 extern alias csharp;
 using System.Collections.Immutable;
+using System.IO;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -64,6 +65,31 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             // Assert
             analyzer.Maximum.Should().Be(200); // Default value
+        }
+
+        [TestMethod]
+        public void SetParameterValues_CalledTwiceAfterChangeInConfigFile_UpdatesProperties()
+        {
+            // Arrange
+            var sonarLintXmlRelativePath = "ResourceTests\\SonarLint.xml";
+            var additionalText = new Mock<AdditionalText>();
+            additionalText.Setup(x => x.Path).Returns(sonarLintXmlRelativePath);
+            var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act with the file on disk
+            ParameterLoader.SetParameterValues(analyzer, options);
+            analyzer.Maximum.Should().Be(1);
+
+            // Update the file on disk
+            var originalContent = File.ReadAllText(sonarLintXmlRelativePath);
+            var modifiedContent = originalContent.Replace("<Value>1</Value>", "<Value>42</Value>");
+            File.WriteAllText(sonarLintXmlRelativePath, modifiedContent);
+            ParameterLoader.SetParameterValues(analyzer, options);
+            analyzer.Maximum.Should().Be(42);
+
+            // revert change
+            File.WriteAllText(sonarLintXmlRelativePath, originalContent);
         }
     }
 }

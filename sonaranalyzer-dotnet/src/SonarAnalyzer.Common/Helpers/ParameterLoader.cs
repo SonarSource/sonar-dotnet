@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
@@ -37,16 +36,21 @@ namespace SonarAnalyzer.Helpers
     {
         private const string ParameterConfigurationFileName = "SonarLint.xml";
 
+        /**
+         * At each compilation, parse the configuration file and set the rule parameters on
+         *
+         * There is no caching mechanism because inside the IDE, the configuration file can change when the user:
+         * - changes something inside the configuration file
+         * - loads a different solution in the IDE
+         *
+         * If caching needs to be done in the future, it should take into account:
+         * - diffing the contents of the configuration file
+         * - associating the file with a unique identifier for the build project
+         */
         internal static void SetParameterValues(ParameterLoadingDiagnosticAnalyzer parameteredAnalyzer,
             AnalyzerOptions options)
         {
-            if (ProcessedAnalyzers.ContainsKey(parameteredAnalyzer))
-            {
-                return;
-            }
-
-            var additionalFile = options.AdditionalFiles
-                .FirstOrDefault(f => IsSonarLintXml(f.Path));
+            var additionalFile = options.AdditionalFiles.FirstOrDefault(f => IsSonarLintXml(f.Path));
 
             if (additionalFile == null)
             {
@@ -83,8 +87,6 @@ namespace SonarAnalyzer.Helpers
                 var convertedValue = ChangeParameterType(value, propertyParameterPair.Descriptor.Type);
                 propertyParameterPair.Property.SetValue(parameteredAnalyzer, convertedValue);
             }
-
-            ProcessedAnalyzers.AddOrUpdate(parameteredAnalyzer, 0, (a, b) => b);
         }
 
         internal static bool IsSonarLintXml(string path)
@@ -124,9 +126,6 @@ namespace SonarAnalyzer.Helpers
 
             return builder.ToImmutable();
         }
-
-        private static readonly ConcurrentDictionary<ParameterLoadingDiagnosticAnalyzer, byte> ProcessedAnalyzers =
-            new ConcurrentDictionary<ParameterLoadingDiagnosticAnalyzer, byte>();
 
         private static object ChangeParameterType(string parameter, PropertyType type)
         {
