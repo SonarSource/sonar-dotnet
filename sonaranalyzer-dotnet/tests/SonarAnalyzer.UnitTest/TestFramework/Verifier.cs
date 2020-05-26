@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             // then add ability to shift result reports with this line number
             foreach (var compilation in solution.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
+                DiagnosticVerifier.Verify(compilation, new DiagnosticAnalyzer[] {diagnosticAnalyzer}, checkMode);
             }
         }
 
@@ -95,6 +95,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             IEnumerable<MetadataReference> additionalReferences = null)
         {
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, checkMode, additionalReferences);
+        }
+
+        public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer[] diagnosticAnalyzers,
+            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+            IEnumerable<MetadataReference> additionalReferences = null)
+        {
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, additionalReferences);
         }
 
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths, UtilityAnalyzerBase diagnosticAnalyzer,
@@ -127,13 +134,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         // project for enabling testing of different scenarios.
         public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+            IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzer(paths, new []{ diagnosticAnalyzer}, options, checkMode, additionalReferences);
+
+        private static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer[] diagnosticAnalyzers,
+            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
             IEnumerable<MetadataReference> additionalReferences = null)
         {
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, additionalReferences);
 
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
+                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode);
             }
         }
 

@@ -44,13 +44,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             "BC36716" // VB12 does not support line continuation comments" i.e. a comment at the end of a multi-line statement.
         };
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode)
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode) =>
+            Verify(compilation, new [] {diagnosticAnalyzer}, checkMode);
+
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode)
         {
             try
             {
                 SuppressionHandler.HookSuppression();
 
-                var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer, checkMode);
+                var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzers, checkMode);
 
                 var expectedIssues = new IssueLocationCollector()
                     .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
@@ -63,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 // method.
                 if (diagnostics.Any())
                 {
-                    SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzer).Should()
+                    SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzers).Should()
                         .BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
                 }
             }
@@ -120,13 +123,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
             DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode,
+            bool verifyNoExceptionIsThrown = true) =>
+            GetDiagnostics(compilation, new[] {diagnosticAnalyzer}, checkMode, verifyNoExceptionIsThrown);
+
+        private static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
+            DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode,
             bool verifyNoExceptionIsThrown = true)
         {
-            var ids = diagnosticAnalyzer.SupportedDiagnostics
+            var ids = diagnosticAnalyzers
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
                 .Select(diagnostic => diagnostic.Id)
+                .Distinct()
                 .ToHashSet();
 
-            return GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, verifyNoExceptionIsThrown)
+            return GetAllDiagnostics(compilation, diagnosticAnalyzers, checkMode, verifyNoExceptionIsThrown)
                 .Where(d => ids.Contains(d.Id));
         }
 
@@ -288,13 +298,14 @@ Actual  : '{message}'");
                 counters.AddOrUpdate(ruleId, addValueFactory: key => 1, updateValueFactory: (key, count) => count + 1);
             }
 
-            public static bool ExtensionMethodsCalledForAllDiagnostics(DiagnosticAnalyzer analyzer)
+            public static bool ExtensionMethodsCalledForAllDiagnostics(IEnumerable<DiagnosticAnalyzer> analyzers)
             {
                 // In general this check is not very precise, because when the tests are run in parallel
                 // we cannot determine which diagnostic was reported from which analyzer instance. In other
                 // words, we cannot distinguish between diagnostics reported from different tests. That's
                 // why we require each diagnostic to be reported through the extension methods at least once.
-                return analyzer.SupportedDiagnostics
+                return analyzers
+                    .SelectMany(analyzer => analyzer.SupportedDiagnostics)
                     .Select(d => counters.GetValueOrDefault(d.Id))
                     .Any(count => count > 0);
             }

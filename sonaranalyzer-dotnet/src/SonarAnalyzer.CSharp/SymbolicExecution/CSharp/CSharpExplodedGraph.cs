@@ -47,7 +47,7 @@ namespace SonarAnalyzer.SymbolicExecution
             // Add mandatory checks
             AddExplodedGraphCheck(new NullPointerDereference.NullPointerCheck(this));
             AddExplodedGraphCheck(new EmptyNullableValueAccess.NullValueAccessedCheck(this));
-            AddExplodedGraphCheck(new InvalidCastToInterface.NullableCastCheck(this));
+            AddExplodedGraphCheck(new InvalidCastToInterfaceSymbolicExecution.NullableCastCheck(this));
         }
 
         #region Visit*
