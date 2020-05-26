@@ -122,9 +122,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
-            DiagnosticAnalyzer diagnosticAnalyzers, CompilationErrorBehavior checkMode,
+            DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode,
             bool verifyNoExceptionIsThrown = true) =>
-            GetDiagnostics(compilation, new[] {diagnosticAnalyzers}, checkMode, verifyNoExceptionIsThrown);
+            GetDiagnostics(compilation, new[] {diagnosticAnalyzer}, checkMode, verifyNoExceptionIsThrown);
 
         private static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
             DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode,

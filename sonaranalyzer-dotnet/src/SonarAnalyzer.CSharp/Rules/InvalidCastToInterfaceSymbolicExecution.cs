@@ -31,12 +31,12 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(InvalidCastToInterfaceRuleDetails.DiagnosticId)]
+    [Rule(InvalidCastToInterfaceRuleConstants.DiagnosticId)]
     public sealed class InvalidCastToInterfaceSymbolicExecution : SonarDiagnosticAnalyzer
     {
         private const string MessageDefinite = "Nullable is known to be empty, this cast throws an exception.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterfaceRuleDetails.Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterfaceRuleConstants.Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (!context.Equals(default(SyntaxNodeAnalysisContext)))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(InvalidCastToInterfaceRuleDetails.Rule, castExpression.GetLocation(), MessageDefinite));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(InvalidCastToInterfaceRuleConstants.Rule, castExpression.GetLocation(), MessageDefinite));
                 }
 
                 return null;

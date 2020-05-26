@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string MessageReviewFormat = "Review this cast; in this project there's no type that {0}.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterfaceRuleDetails.Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterfaceRuleConstants.Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? $"implements both '{expressionTypeName}' and '{interfaceTypeName}'"
                 : $"extends '{expressionTypeName}' and implements '{interfaceTypeName}'";
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(InvalidCastToInterfaceRuleDetails.Rule, issueLocation,
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(InvalidCastToInterfaceRuleConstants.Rule, issueLocation,
                 string.Format(MessageReviewFormat, messageReasoning)));
         }
     }

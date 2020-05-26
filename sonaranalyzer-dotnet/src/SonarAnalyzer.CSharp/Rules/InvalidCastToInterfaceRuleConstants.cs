@@ -23,7 +23,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    internal static class InvalidCastToInterfaceRuleDetails
+    internal static class InvalidCastToInterfaceRuleConstants
     {
         public const string DiagnosticId = "S1944";
         private const string MessageFormat = "{0}";
