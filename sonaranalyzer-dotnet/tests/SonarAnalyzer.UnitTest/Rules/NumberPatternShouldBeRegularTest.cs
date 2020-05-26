@@ -55,6 +55,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("123_123_12_123", "Another group has a different size")]
         [DataRow("1_123.123_1234", "Last decimal group is bigger")]
         [DataRow(".123_123_1234", "No group before the dot")]
+        [DataRow("0xFF_FF_FFF_FF", "3rd group is bigger.")]
+        [DataRow("0xFF_FF_FFF", "Last group bigger than 2.")]
+        [DataRow("0xFFFF_FFFF_FFFFF", "Last group bigger than 4.")]
         public void HasIrregularPattern(string numericToken, string message)
         {
             Assert.IsTrue(NumberPatternShouldBeRegular.HasIrregularPattern(numericToken), message);

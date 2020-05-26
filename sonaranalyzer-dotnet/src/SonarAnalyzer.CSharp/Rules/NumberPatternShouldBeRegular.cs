@@ -66,6 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.NumericLiteralExpression);
         }
 
+        /// <remarks>internal for test purposes.</remarks>
         internal static bool HasIrregularPattern(string numericToken)
         {
             var splitted = StripNumericPreAndSuffix(numericToken).Split(Dot);
@@ -119,14 +120,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string StripNumericPreAndSuffix(string numericToken)
         {
+            var start = 0;
+            var length = numericToken.Length;
+
             // hexadecimal en binary prefixes
-            var start = numericToken.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase)
-                || numericToken.StartsWith("0b", StringComparison.InvariantCultureIgnoreCase) ? 2 : 0;
-
-            var length = numericToken.Length - start;
-
+            if (numericToken.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase) ||
+                numericToken.StartsWith("0b", StringComparison.InvariantCultureIgnoreCase))
+            {
+                start = 2;
+                length -= 2;
+            }
             // UL suffix.
-            if (numericToken.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
+            else if (numericToken.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
             {
                 length -= 2;
             }
