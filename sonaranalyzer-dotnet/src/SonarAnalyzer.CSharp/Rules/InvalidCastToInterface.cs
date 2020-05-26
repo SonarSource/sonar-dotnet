@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,26 +25,16 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class InvalidCastToInterface : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1944";
-        private const string MessageFormat = "{0}";
-        internal const string MessageReviewFormat = "Review this cast; in this project there's no type that {0}.";
-        internal const string MessageDefinite = "Nullable is known to be empty, this cast throws an exception.";
+        private const string MessageReviewFormat = "Review this cast; in this project there's no type that {0}.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterfaceRuleDetails.Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -95,66 +85,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         },
                         SyntaxKind.CastExpression);
                 });
-
-            context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckEmptyNullableCast(e, c));
-        }
-
-        private static void CheckEmptyNullableCast(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
-        {
-            explodedGraph.AddExplodedGraphCheck(new NullableCastCheck(explodedGraph, context));
-            explodedGraph.Walk();
-        }
-
-        internal sealed class NullableCastCheck : ExplodedGraphCheck
-        {
-            private readonly SyntaxNodeAnalysisContext context;
-
-            public NullableCastCheck(CSharpExplodedGraph explodedGraph)
-                : base(explodedGraph)
-            {
-            }
-
-            public NullableCastCheck(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
-                : this(explodedGraph)
-            {
-                this.context = context;
-            }
-
-            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
-            {
-                var instruction = programPoint.Block.Instructions[programPoint.Offset];
-
-                return instruction.IsKind(SyntaxKind.CastExpression)
-                    ? ProcessCastAccess(programState, (CastExpressionSyntax)instruction)
-                    : programState;
-            }
-
-            private ProgramState ProcessCastAccess(ProgramState programState, CastExpressionSyntax castExpression)
-            {
-                var typeExpression = this.semanticModel.GetTypeInfo(castExpression.Expression).Type;
-                if (typeExpression == null ||
-                    !typeExpression.OriginalDefinition.Is(KnownType.System_Nullable_T))
-                {
-                    return programState;
-                }
-
-                var type = this.semanticModel.GetTypeInfo(castExpression.Type).Type;
-
-                if (type == null ||
-                    type.OriginalDefinition.Is(KnownType.System_Nullable_T) ||
-                    !this.semanticModel.Compilation.ClassifyConversion(typeExpression, type).IsNullable ||
-                    !programState.HasConstraint(programState.PeekValue(), ObjectConstraint.Null))
-                {
-                    return programState;
-                }
-
-                if (!this.context.Equals(default(SyntaxNodeAnalysisContext)))
-                {
-                    this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, castExpression.GetLocation(), MessageDefinite));
-                }
-
-                return null;
-            }
         }
 
         private static void CheckTypesForInvalidCast(INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType,
@@ -189,13 +119,11 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool HasExistingConcreteImplementation(INamedTypeSymbol type,
-            Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> interfaceImplementerMappings)
-        {
-            return interfaceImplementerMappings.ContainsKey(type) &&
-                interfaceImplementerMappings[type].Any(t => t.IsClassOrStruct());
-        }
+            IReadOnlyDictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> interfaceImplementerMappings) =>
+            interfaceImplementerMappings.ContainsKey(type) &&
+            interfaceImplementerMappings[type].Any(t => t.IsClassOrStruct());
 
-        private static void ReportIssue(INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType, Location issueLocation,
+        private static void ReportIssue(ISymbol interfaceType, ITypeSymbol expressionType, Location issueLocation,
             SyntaxNodeAnalysisContext context)
         {
             var interfaceTypeName = interfaceType.ToMinimalDisplayString(context.SemanticModel, issueLocation.SourceSpan.Start);
@@ -205,7 +133,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? $"implements both '{expressionTypeName}' and '{interfaceTypeName}'"
                 : $"extends '{expressionTypeName}' and implements '{interfaceTypeName}'";
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, issueLocation, string.Format(MessageReviewFormat, messageReasoning)));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(InvalidCastToInterfaceRuleDetails.Rule, issueLocation,
+                string.Format(MessageReviewFormat, messageReasoning)));
         }
     }
 }

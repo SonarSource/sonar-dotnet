@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,29 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.UnitTest.TestFramework;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class InvalidCastToInterfaceTest
+    internal static class InvalidCastToInterfaceRuleDetails
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void InvalidCastToInterface()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\InvalidCastToInterface.cs",
-                new SonarDiagnosticAnalyzer[]
-                {
-                    new InvalidCastToInterfaceSymbolicExecution(),
-                    new InvalidCastToInterface()
-                },
-                ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-        }
+        public const string DiagnosticId = "S1944";
+        private const string MessageFormat = "{0}";
+
+        internal static readonly DiagnosticDescriptor Rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
     }
 }
