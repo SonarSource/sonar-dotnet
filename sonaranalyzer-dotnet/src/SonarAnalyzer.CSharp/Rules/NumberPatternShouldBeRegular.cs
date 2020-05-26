@@ -130,8 +130,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 start = 2;
                 length -= 2;
             }
-            // UL suffix.
-            else if (numericToken.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
+            // UL and LU suffix.
+            else if (numericToken.EndsWith("UL", StringComparison.OrdinalIgnoreCase) ||
+                numericToken.EndsWith("LU", StringComparison.OrdinalIgnoreCase))
             {
                 length -= 2;
             }
@@ -140,6 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 length--;
             }
+
             return numericToken.Substring(start, length);
         }
     }
