@@ -19,28 +19,31 @@
  */
 
 extern alias csharp;
+using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.TestFramework;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 {
     [TestClass]
     public class InvalidCastToInterfaceTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void InvalidCastToInterface()
-        {
+        public void InvalidCastToInterface() =>
             Verifier.VerifyAnalyzer(@"TestCases\InvalidCastToInterface.cs",
                 new SonarDiagnosticAnalyzer[]
                 {
-                    new InvalidCastToInterfaceSymbolicExecution(),
+                    // Symbolic execution analyzers are run by the SymbolicExecutionRunner
+                    new SymbolicExecutionRunner(
+                        new SymbolicExecutionAnalyzerFactory(
+                            ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new InvalidCastToInterfaceSymbolicExecution()))),
                     new InvalidCastToInterface()
                 },
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-        }
     }
 }

@@ -18,36 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(InvalidCastToInterfaceRuleConstants.DiagnosticId)]
-    public sealed class InvalidCastToInterfaceSymbolicExecution : SonarDiagnosticAnalyzer
+    internal sealed class InvalidCastToInterfaceSymbolicExecution : ISymbolicExecutionAnalyzer
     {
         private const string MessageDefinite = "Nullable is known to be empty, this cast throws an exception.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterfaceRuleConstants.Rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics  { get; } = ImmutableArray.Create(InvalidCastToInterfaceRuleConstants.Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterExplodedGraphBasedAnalysis(CheckEmptyNullableCast);
-        }
-
-        private static void CheckEmptyNullableCast(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
-        {
-            explodedGraph.AddExplodedGraphCheck(new NullableCastCheck(explodedGraph, context));
-            explodedGraph.Walk();
-        }
+        public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+            new AnalysisContext(explodedGraph, context);
 
         internal sealed class NullableCastCheck : ExplodedGraphCheck
         {
@@ -99,6 +91,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return null;
             }
+        }
+
+        private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
+        {
+            public bool SupportPartialResults { get; } = true;
+
+            public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+                explodedGraph.AddExplodedGraphCheck(new NullableCastCheck(explodedGraph, context));
+
+            public void Dispose()
+            {
+                // Needed in order to implement ISymbolicExecutionAnalysisContext.
+            }
+
+            // Nothing to return since the issues are raised during analysis.
+            public IEnumerable<Diagnostic> GetDiagnostics() => Enumerable.Empty<Diagnostic>();
         }
     }
 }
