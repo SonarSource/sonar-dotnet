@@ -33,11 +33,11 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public static class ParameterLoader
+    internal static class ParameterLoader
     {
-        public static readonly string ParameterConfigurationFileName = "SonarLint.xml";
+        private const string ParameterConfigurationFileName = "SonarLint.xml";
 
-        public static void SetParameterValues(ParameterLoadingDiagnosticAnalyzer parameteredAnalyzer,
+        internal static void SetParameterValues(ParameterLoadingDiagnosticAnalyzer parameteredAnalyzer,
             AnalyzerOptions options)
         {
             if (ProcessedAnalyzers.ContainsKey(parameteredAnalyzer))
@@ -87,12 +87,12 @@ namespace SonarAnalyzer.Helpers
             ProcessedAnalyzers.AddOrUpdate(parameteredAnalyzer, 0, (a, b) => b);
         }
 
-        public static bool IsSonarLintXml(string path)
+        internal static bool IsSonarLintXml(string path)
         {
             return ConfigurationFilePathMatchesExpected(path, ParameterConfigurationFileName);
         }
 
-        public static bool ConfigurationFilePathMatchesExpected(string path, string fileName)
+        internal static bool ConfigurationFilePathMatchesExpected(string path, string fileName)
         {
             return new FileInfo(path).Name.Equals(fileName, StringComparison.OrdinalIgnoreCase);
         }
