@@ -34,6 +34,21 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class ParameterLoaderTests
     {
+        [TestMethod]
+        public void SetParameterValues_WhenNoSonarLintIsGiven_DoesNotPopulateParameters()
+        {
+            // Arrange
+            var additionalText = new Mock<AdditionalText>();
+            additionalText.Setup(x => x.Path).Returns("ResourceTests\\MyFile.xml");
+            var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.Maximum.Should().Be(3); // Default value
+        }
 
         [TestMethod]
         public void SetParameterValues_WhenGivenValidSonarLintFileAndContainsAnalyzerParameters_PopulatesProperties()
@@ -71,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_CalledTwiceAfterChangeInConfigFile_UpdatesProperties()
         {
             // Arrange
-            var sonarLintXmlRelativePath = "ResourceTests\\SonarLint.xml";
+            var sonarLintXmlRelativePath = "ResourceTests\\ToChange\\SonarLint.xml";
             var additionalText = new Mock<AdditionalText>();
             additionalText.Setup(x => x.Path).Returns(sonarLintXmlRelativePath);
             var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
@@ -91,5 +106,54 @@ namespace SonarAnalyzer.UnitTest.Helpers
             // revert change
             File.WriteAllText(sonarLintXmlRelativePath, originalContent);
         }
+
+        [TestMethod]
+        public void SetParameterValues_WithMalformedXml_DoesNotPopulateProperties()
+        {
+            // Arrange
+            var additionalText = new Mock<AdditionalText>();
+            additionalText.Setup(x => x.Path).Returns("ResourceTests\\Malformed\\SonarLint.xml");
+            var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.Maximum.Should().Be(3); // Default value
+        }
+
+        [TestMethod]
+        public void SetParameterValues_WithInexistendPath_DoesNotPopulateProperties()
+        {
+            // Arrange
+            var additionalText = new Mock<AdditionalText>();
+            additionalText.Setup(x => x.Path).Returns("ResourceTests\\ThisPathDoesNotExist\\SonarLint.xml");
+            var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.Maximum.Should().Be(3); // Default value
+        }
+
+        [TestMethod]
+        public void SetParameterValues_WithWrongPropertyType_DoesNotPopulateProperties()
+        {
+            // Arrange
+            var additionalText = new Mock<AdditionalText>();
+            additionalText.Setup(x => x.Path).Returns("ResourceTests\\StringInsteadOfInt\\SonarLint.xml");
+            var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.Maximum.Should().Be(3); // Default value
+        }
+
     }
 }

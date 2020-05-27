@@ -58,10 +58,16 @@ namespace SonarAnalyzer.Helpers
             }
 
             ImmutableList<RuleParameterValues> parameters;
-            using (var xtr = XmlReader.Create(additionalFile.Path))
+            try
             {
+                using var xtr = XmlReader.Create(additionalFile.Path);
                 var xml = XDocument.Load(xtr);
                 parameters = ParseParameters(xml);
+            }
+            catch (Exception ex) when (ex is IOException || ex is XmlException)
+            {
+                // cannot log exception
+                return;
             }
 
             var propertyParameterPairs = parameteredAnalyzer.GetType()
@@ -83,9 +89,10 @@ namespace SonarAnalyzer.Helpers
                     return;
                 }
 
-                var value = parameterValue.ParameterValue;
-                var convertedValue = ChangeParameterType(value, propertyParameterPair.Descriptor.Type);
-                propertyParameterPair.Property.SetValue(parameteredAnalyzer, convertedValue);
+                if (TryConvertToParameterType(parameterValue.ParameterValue, propertyParameterPair.Descriptor.Type, out var value))
+                {
+                    propertyParameterPair.Property.SetValue(parameteredAnalyzer, value);
+                }
             }
         }
 
@@ -127,22 +134,26 @@ namespace SonarAnalyzer.Helpers
             return builder.ToImmutable();
         }
 
-        private static object ChangeParameterType(string parameter, PropertyType type)
+        private static bool TryConvertToParameterType(string parameter, PropertyType type, out object result)
         {
             switch (type)
             {
                 case PropertyType.Text:
                 case PropertyType.String:
-                    return parameter;
+                    result = parameter;
+                    return true;
 
-                case PropertyType.Integer:
-                    return int.Parse(parameter, NumberStyles.None, CultureInfo.InvariantCulture);
+                case PropertyType.Integer when int.TryParse(parameter, NumberStyles.None, CultureInfo.InvariantCulture, out var parsedInt):
+                    result = parsedInt;
+                    return true;
 
-                case PropertyType.Boolean:
-                    return bool.Parse(parameter);
+                case PropertyType.Boolean when bool.TryParse(parameter, out var parsedBool):
+                    result = parsedBool;
+                    return true;
 
                 default:
-                    throw new NotSupportedException();
+                    result = null;
+                    return false;
             }
         }
 
