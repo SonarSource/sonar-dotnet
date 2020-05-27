@@ -226,7 +226,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     type.OriginalDefinition.Is(KnownType.System_Nullable_T);
             }
 
-            private static bool IsExceptionThrow(IdentifierNameSyntax identifier) => identifier.GetFirstNonParenthesizedParent().IsKind(SyntaxKind.ThrowStatement);
+            private static bool IsExceptionThrow(SyntaxNode syntaxNode) =>
+                syntaxNode.GetFirstNonParenthesizedParent().IsKind(SyntaxKind.ThrowStatement);
 
             private static bool IsSuccessorForeachBranch(ProgramPoint programPoint) =>
                 programPoint.Block.SuccessorBlocks.First() is BinaryBranchBlock successorBlock &&
