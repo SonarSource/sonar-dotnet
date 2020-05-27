@@ -40,15 +40,20 @@ namespace SonarAnalyzer.SymbolicExecution
     {
         private const string isNullOrEmpty = "IsNullOrEmpty";
         private const string isNullOrWhiteSpace = "IsNullOrWhiteSpace";
+        private readonly NullPointerDereference.NullPointerCheck nullPointerCheck;
 
         public CSharpExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
             : base(cfg, declaration, semanticModel, lva)
         {
+            nullPointerCheck = new NullPointerDereference.NullPointerCheck(this);
+
             // Add mandatory checks
-            AddExplodedGraphCheck(new NullPointerDereference.NullPointerCheck(this));
+            AddExplodedGraphCheck(nullPointerCheck);
             AddExplodedGraphCheck(new EmptyNullableValueAccess.NullValueAccessedCheck(this));
             AddExplodedGraphCheck(new InvalidCastToInterfaceSymbolicExecution.NullableCastCheck(this));
         }
+
+        internal NullPointerDereference.NullPointerCheck NullPointerCheck => nullPointerCheck;
 
         #region Visit*
 

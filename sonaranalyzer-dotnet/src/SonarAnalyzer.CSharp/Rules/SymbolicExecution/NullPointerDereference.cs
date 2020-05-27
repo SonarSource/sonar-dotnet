@@ -255,10 +255,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 this.context = context;
 
-                nullPointerCheck = new NullPointerCheck(explodedGraph);
+                nullPointerCheck = explodedGraph.NullPointerCheck;
                 nullPointerCheck.MemberAccessed += MemberAccessedHandler;
-
-                explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
             }
 
             public bool SupportsPartialResults => true;

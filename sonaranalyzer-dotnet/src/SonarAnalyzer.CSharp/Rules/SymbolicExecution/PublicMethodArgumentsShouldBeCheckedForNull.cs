@@ -73,9 +73,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 syntaxNodeAnalysisContext = context;
 
-                nullPointerCheck = new NullPointerDereference.NullPointerCheck(explodedGraph);
+                nullPointerCheck = explodedGraph.NullPointerCheck;
                 nullPointerCheck.MemberAccessing += MemberAccessingHandler;
-                explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
             }
 
             public bool SupportsPartialResults => true;
