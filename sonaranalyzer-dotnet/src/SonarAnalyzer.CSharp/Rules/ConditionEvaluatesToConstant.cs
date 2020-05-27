@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 explodedGraph.ConditionEvaluated += ConditionEvaluatedHandler;
             }
 
-            public bool SupportPartialResults { get; }
+            public bool SupportsPartialResults { get; }
 
             public IEnumerable<Diagnostic> GetDiagnostics()
             {

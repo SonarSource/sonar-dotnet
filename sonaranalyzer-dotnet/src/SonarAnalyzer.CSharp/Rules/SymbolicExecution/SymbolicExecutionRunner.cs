@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         private static void ReportDiagnostics(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
         {
             foreach (var diagnostic in analyzerContexts
-                .Where(analyzerContext => analyzerContext.SupportPartialResults == supportsPartialResults)
+                .Where(analyzerContext => analyzerContext.SupportsPartialResults == supportsPartialResults)
                 .SelectMany(analyzerContext => analyzerContext.GetDiagnostics()))
             {
                 context.ReportDiagnosticWhenActive(diagnostic);

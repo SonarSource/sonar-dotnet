@@ -66,22 +66,22 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly ObjectDisposedPointerCheck objectDisposedPointerCheck;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                this.nodesToReport.Select(item => Diagnostic.Create(rule, item.Key.GetLocation(), item.Value));
+                nodesToReport.Select(item => Diagnostic.Create(rule, item.Key.GetLocation(), item.Value));
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph)
             {
-                this.objectDisposedPointerCheck = new ObjectDisposedPointerCheck(explodedGraph);
-                this.objectDisposedPointerCheck.ObjectDisposed += ObjectDisposedHandler;
+                objectDisposedPointerCheck = new ObjectDisposedPointerCheck(explodedGraph);
+                objectDisposedPointerCheck.ObjectDisposed += ObjectDisposedHandler;
 
-                explodedGraph.AddExplodedGraphCheck(this.objectDisposedPointerCheck);
+                explodedGraph.AddExplodedGraphCheck(objectDisposedPointerCheck);
             }
 
-            public bool SupportPartialResults { get; }
+            public bool SupportsPartialResults => false;
 
-            public void Dispose() => this.objectDisposedPointerCheck.ObjectDisposed -= ObjectDisposedHandler;
+            public void Dispose() => objectDisposedPointerCheck.ObjectDisposed -= ObjectDisposedHandler;
 
             private void ObjectDisposedHandler(object sender, ObjectDisposedEventArgs args) =>
-                this.nodesToReport[args.SyntaxNode] = args.SymbolName;
+                nodesToReport[args.SyntaxNode] = args.SymbolName;
         }
 
         private class ObjectDisposedEventArgs : EventArgs
@@ -116,8 +116,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     new
                     {
                         SyntaxNode = i.Parent,
-                        Symbol = this.semanticModel.GetDeclaredSymbol(i.Parent)
-                            ?? this.semanticModel.GetSymbolInfo(i.Parent).Symbol
+                        Symbol = semanticModel.GetDeclaredSymbol(i.Parent)
+                            ?? semanticModel.GetSymbolInfo(i.Parent).Symbol
                     });
 
                 foreach (var disposable in disposables)
@@ -158,7 +158,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 // We need to associate the symbolic value to the symbol here first, as it hasn't been done yet, since we
                 // are are pre-processing the VariableDeclarator instruction
-                var disposableSymbol = this.semanticModel.GetDeclaredSymbol(declarator);
+                var disposableSymbol = semanticModel.GetDeclaredSymbol(declarator);
                 var newProgramState = programState.StoreSymbolicValue(disposableSymbol, programState.PeekValue());
 
                 newProgramState = ProcessDisposableSymbol(newProgramState, declarator, disposableSymbol);
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var newProgramState = programState;
 
-                var disposeMethodSymbol = this.semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
+                var disposeMethodSymbol = semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
                 if (disposeMethodSymbol.IsIDisposableDispose())
                 {
                     var disposedObject =
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         ?? (instruction.Expression as MemberAccessExpressionSyntax)?.Expression;
                     if (disposedObject != null)
                     {
-                        var disposableSymbol = this.semanticModel.GetSymbolInfo(disposedObject).Symbol;
+                        var disposableSymbol = semanticModel.GetSymbolInfo(disposedObject).Symbol;
 
                         if (disposableSymbol is IMethodSymbol ||
                             // Special case - if the parameter symbol is "this" then resolve it to the containing type
@@ -202,7 +202,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var objectCreationExpression in objectCreationExpressions)
                 {
-                    if (this.semanticModel.GetSymbolInfo(objectCreationExpression.Type).Symbol is ISymbol symbol &&
+                    if (semanticModel.GetSymbolInfo(objectCreationExpression.Type).Symbol is ISymbol symbol &&
                         symbol.GetSymbolType() is ITypeSymbol objectType &&
                         objectType.DerivesOrImplementsAny(typesDisposingUnderlyingStreamWithLeaveOpenArgumentIndex.Keys.ToImmutableArray()) &&
                         objectCreationExpression.ArgumentList?.Arguments is IEnumerable<ArgumentSyntax> argumentList &&
@@ -217,7 +217,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         if (!HasLeaveOpenTrueArgument(argumentList, leaveOpenArgumentIndex) &&
                             GetArgument(argumentList, StreamParameterName, 0) is ArgumentSyntax argument)
                         {
-                            var streamSymbol = this.semanticModel.GetSymbolInfo(argument.Expression).Symbol;
+                            var streamSymbol = semanticModel.GetSymbolInfo(argument.Expression).Symbol;
                             newProgramState = ProcessDisposableSymbol(newProgramState, argument.Expression, streamSymbol);
                         }
                     }
