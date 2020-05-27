@@ -12,5 +12,8 @@ namespace SonarAnalyzer.Helpers
                 .DeclaringSyntaxReferences
                 .FirstOrDefault()?
                 .GetSyntax();
+
+        public static bool IsExtensionMethod(this SemanticModel semanticModel, SyntaxNode expression) =>
+            semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol && memberSymbol.IsExtensionMethod;
     }
 }

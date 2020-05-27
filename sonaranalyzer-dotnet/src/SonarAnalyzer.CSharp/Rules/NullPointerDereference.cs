@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 if ((IsNullableValueType(symbol) && !IsGetTypeCall(memberAccess)) ||
-                    IsExtensionMethod(memberAccess, semanticModel))
+                    semanticModel.IsExtensionMethod(memberAccess))
                 {
                     return programState;
                 }
@@ -232,9 +232,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 programPoint.Block.SuccessorBlocks.First() is BinaryBranchBlock successorBlock &&
                 successorBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement);
 
-            internal static bool IsExtensionMethod(SyntaxNode expression, SemanticModel semanticModel) =>
-                semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol && memberSymbol.IsExtensionMethod;
-
             private class MemberAccessIdentifierScope
             {
                 public MemberAccessIdentifierScope(IdentifierNameSyntax identifier, bool isOnCurrentInstance)
@@ -277,7 +274,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private static void CollectMemberAccesses(MemberAccessedEventArgs args, ISet<IdentifierNameSyntax> nullIdentifiers,
                 SemanticModel semanticModel)
             {
-                if (!NullPointerCheck.IsExtensionMethod(args.Identifier.Parent, semanticModel))
+                if (!semanticModel.IsExtensionMethod(args.Identifier.Parent))
                 {
                     nullIdentifiers.Add(args.Identifier);
                 }

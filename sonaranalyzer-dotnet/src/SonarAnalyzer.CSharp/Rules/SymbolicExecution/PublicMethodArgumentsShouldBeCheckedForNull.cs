@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SemanticModel semanticModel)
         {
             if (args.Symbol is IParameterSymbol &&
-                !NullPointerDereference.NullPointerCheck.IsExtensionMethod(args.Identifier.Parent, semanticModel) &&
+                !semanticModel.IsExtensionMethod(args.Identifier.Parent) &&
                 !args.Symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
             {
                 identifiers.Add(args.Identifier);
