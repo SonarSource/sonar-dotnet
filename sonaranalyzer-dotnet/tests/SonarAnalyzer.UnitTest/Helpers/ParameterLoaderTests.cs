@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void SetParameterValues_WhenGivenValidSonarLintFileAndContainsAnalyzerParameters_PopulatesProperties()
+        public void SetParameterValues_WhenGivenSonarLintFileHasIntParameterType_PopulatesProperties()
         {
             // Arrange
             var options = CreateOptionsWithAdditionalFile("ResourceTests\\SonarLint.xml");
@@ -60,6 +60,20 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             // Assert
             analyzer.Maximum.Should().Be(1); // Value from the xml file
+        }
+
+        [TestMethod]
+        public void SetParameterValues_WhenGivenSonarLintFileHasStringParameterType_OnlyOneParameter_PopulatesProperty()
+        {
+            // Arrange
+            var options = CreateOptionsWithAdditionalFile("ResourceTests\\RuleWithStringParameter\\SonarLint.xml");
+            var analyzer = new EnumNameShouldFollowRegex(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.FlagsEnumNamePattern.Should().Be("1"); // value from XML file
         }
 
         [TestMethod]

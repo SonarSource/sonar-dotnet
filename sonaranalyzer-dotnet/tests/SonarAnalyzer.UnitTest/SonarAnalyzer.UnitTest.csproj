@@ -47,6 +47,7 @@
     <None Remove="CBDEMocks\CBDEFails.exe" />
     <None Remove="CBDEMocks\CBDESucceedsWithIncorrectResults.exe" />
     <None Remove="CBDEMocks\CBDEWaitAndSucceeds.exe" />
+    <None Remove="ResourceTests\RuleWithStringParameter\SonarLint.xml" />
     <None Remove="ResourceTests\StringInsteadOfInt\SonarLint.xml" />
     <None Remove="ResourceTests\ToChange\SonarLint.xml" />
   </ItemGroup>
@@ -114,6 +115,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ResourceTests\NotBoolean\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\RuleWithStringParameter\SonarLint.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ResourceTests\StringInsteadOfInt\SonarLint.xml">

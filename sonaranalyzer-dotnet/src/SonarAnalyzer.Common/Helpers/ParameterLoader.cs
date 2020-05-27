@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Helpers
 
                 if (parameterValue == null)
                 {
-                    return;
+                    continue;
                 }
 
                 if (TryConvertToParameterType(parameterValue.ParameterValue, propertyParameterPair.Descriptor.Type, out var value))

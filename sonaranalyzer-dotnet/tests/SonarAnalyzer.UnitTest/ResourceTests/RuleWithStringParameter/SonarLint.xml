@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+  <Settings>
+    <Setting>
+      <Key>sonar.cs.ignoreHeaderComments</Key>
+      <Value>true</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.cs.analyzeGeneratedCode</Key>
+      <Value>false</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.cs.file.suffixes</Key>
+      <Value>.cs</Value>
+    </Setting>
+  </Settings>
+  <Rules>
+    <Rule>
+      <Key>S2342</Key>
+      <Parameters>
+        <Parameter>
+          <Key>flagsAttributeFormat</Key>
+          <Value>1</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+  </Rules>
+  <Files>
+  </Files>
+</AnalysisInput>
