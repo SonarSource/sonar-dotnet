@@ -57,16 +57,9 @@ namespace SonarAnalyzer.Helpers
                 return;
             }
 
-            ImmutableList<RuleParameterValues> parameters;
-            try
+            var parameters = ParseParameters(additionalFile.Path);
+            if (parameters.IsEmpty)
             {
-                using var xtr = XmlReader.Create(additionalFile.Path);
-                var xml = XDocument.Load(xtr);
-                parameters = ParseParameters(xml);
-            }
-            catch (Exception ex) when (ex is IOException || ex is XmlException)
-            {
-                // cannot log exception
                 return;
             }
 
@@ -91,17 +84,27 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        internal static bool IsSonarLintXml(string path)
+        internal static bool IsSonarLintXml(string path) => ConfigurationFilePathMatchesExpected(path, ParameterConfigurationFileName);
+
+        internal static bool ConfigurationFilePathMatchesExpected(string path, string fileName) =>
+            new FileInfo(path).Name.Equals(fileName, StringComparison.OrdinalIgnoreCase);
+
+        private static ImmutableList<RuleParameterValues> ParseParameters(string path)
         {
-            return ConfigurationFilePathMatchesExpected(path, ParameterConfigurationFileName);
+            try
+            {
+                using var xtr = XmlReader.Create(path);
+                var xml = XDocument.Load(xtr);
+                return ParseParameters(xml);
+            }
+            catch (Exception ex) when (ex is IOException || ex is XmlException)
+            {
+                // cannot log exception
+                return ImmutableList.Create<RuleParameterValues>();
+            }
         }
 
-        internal static bool ConfigurationFilePathMatchesExpected(string path, string fileName)
-        {
-            return new FileInfo(path).Name.Equals(fileName, StringComparison.OrdinalIgnoreCase);
-        }
-
-        private static ImmutableList<RuleParameterValues> ParseParameters(XDocument xml)
+        private static ImmutableList<RuleParameterValues> ParseParameters(XContainer xml)
         {
             var builder = ImmutableList.CreateBuilder<RuleParameterValues>();
             foreach (var rule in xml.Descendants("Rule").Where(e => e.Elements("Parameters").Any()))
@@ -157,14 +160,14 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private class RuleParameterValues
+        private sealed class RuleParameterValues
         {
             public string RuleId { get; set; }
 
             public List<RuleParameterValue> ParameterValues { get; } = new List<RuleParameterValue>();
         }
 
-        private class RuleParameterValue
+        private sealed class RuleParameterValue
         {
             public string ParameterKey { get; set; }
 
