@@ -12,6 +12,7 @@ namespace Tests.Diagnostics
 
             // decimal notation
             var balance = 2_435_951.68;
+            double groupsizes = 1_234.56_78;
             var x = 1_234.11111;
 
             // hexadecimal notation

@@ -69,15 +69,15 @@ namespace SonarAnalyzer.Rules.CSharp
         /// <remarks>internal for test purposes.</remarks>
         internal static bool HasIrregularPattern(string numericToken)
         {
-            var splitted = StripNumericPreAndSuffix(numericToken).Split(Dot);
+            var split = StripNumericPreAndSuffix(numericToken).Split(Dot);
 
             // ignore multiple dots.
-            if (splitted.Length > 2)
+            if (split.Length > 2)
             {
                 return false;
             }
 
-            var groups = splitted[0].Split(Underscore).Select(s => s.Length).ToArray();
+            var groups = split[0].Split(Underscore).Select(s => s.Length).ToArray();
 
             var size = NotFound;
 
@@ -98,12 +98,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            if (splitted.Length == 1)
+            if (split.Length == 1)
             {
                 return false;
             }
 
-            var decimals = splitted[1].Split(Underscore).Select(s => s.Length).ToArray();
+            var decimals = split[1].Split(Underscore).Select(s => s.Length).ToArray();
 
             if (decimals.Length == 1)
             {
@@ -120,29 +120,35 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string StripNumericPreAndSuffix(string numericToken)
         {
-            var start = 0;
             var length = numericToken.Length;
 
-            // hexadecimal en binary prefixes
+            // hexadecimal and binary prefixes (0xFFFF_23_AB, 0b1110_1101)
             if (numericToken.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase) ||
                 numericToken.StartsWith("0b", StringComparison.InvariantCultureIgnoreCase))
             {
-                start = 2;
-                length -= 2;
-            }
-            // UL and LU suffix.
-            else if (numericToken.EndsWith("UL", StringComparison.OrdinalIgnoreCase) ||
-                numericToken.EndsWith("LU", StringComparison.OrdinalIgnoreCase))
-            {
-                length -= 2;
-            }
-            // single suffixes
-            else if ("LDFUMldfum".IndexOf(numericToken[numericToken.Length - 1]) != NotFound)
-            {
-                length--;
+                return numericToken.Substring(2, length - 2);
             }
 
-            return numericToken.Substring(start, length);
+            // Scientific notation (1.23E8)
+            var exponentMarker = numericToken.IndexOf("E", StringComparison.InvariantCultureIgnoreCase);
+            if (exponentMarker != NotFound)
+            {
+                return numericToken.Substring(0, exponentMarker);
+            }
+
+            // UL and LU suffix.
+            if (numericToken.EndsWith("UL", StringComparison.OrdinalIgnoreCase) ||
+                numericToken.EndsWith("LU", StringComparison.OrdinalIgnoreCase))
+            {
+                return numericToken.Substring(0, length - 2);
+            }
+            // single suffixes
+            if ("LDFUMldfum".IndexOf(numericToken[numericToken.Length - 1]) != NotFound)
+            {
+                return numericToken.Substring(0, length - 1);
+            }
+
+            return numericToken;
         }
     }
 }
