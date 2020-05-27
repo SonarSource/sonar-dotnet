@@ -77,6 +77,20 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
+        public void SetParameterValues_WhenGivenSonarLintFileHasBooleanParameterType_OnlyOneParameter_PopulatesProperty()
+        {
+            // Arrange
+            var options = CreateOptionsWithAdditionalFile("ResourceTests\\RuleWithBooleanParameter\\SonarLint.xml");
+            var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.IsRegularExpression.Should().BeTrue(); // value from XML file
+        }
+
+        [TestMethod]
         public void SetParameterValues_WhenGivenValidSonarLintFileAndDoesNotContainAnalyzerParameters_DoesNotPopulateProperties()
         {
             // Arrange
@@ -153,6 +167,20 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             // Assert
             analyzer.Maximum.Should().Be(3); // Default value
+        }
+
+        [TestMethod]
+        public void SetParameterValues_WithWrongPropertyType_StringInsteadOfBoolean_DoesNotPopulateProperties()
+        {
+            // Arrange
+            var options = CreateOptionsWithAdditionalFile("ResourceTests\\StringInsteadOfBoolean\\SonarLint.xml");
+            var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.IsRegularExpression.Should().BeFalse(); // Default value
         }
 
         private static AnalyzerOptions CreateOptionsWithAdditionalFile(string relativePath)
