@@ -84,12 +84,7 @@ namespace SonarAnalyzer.Helpers
                 var parameterValue = parameter?.ParameterValues
                     .FirstOrDefault(pv => pv.ParameterKey == propertyParameterPair.Descriptor.Key);
 
-                if (parameterValue == null)
-                {
-                    continue;
-                }
-
-                if (TryConvertToParameterType(parameterValue.ParameterValue, propertyParameterPair.Descriptor.Type, out var value))
+                if (TryConvertToParameterType(parameterValue?.ParameterValue, propertyParameterPair.Descriptor.Type, out var value))
                 {
                     propertyParameterPair.Property.SetValue(parameteredAnalyzer, value);
                 }
@@ -136,6 +131,11 @@ namespace SonarAnalyzer.Helpers
 
         private static bool TryConvertToParameterType(string parameter, PropertyType type, out object result)
         {
+            if (parameter == null)
+            {
+                result = null;
+                return false;
+            }
             switch (type)
             {
                 case PropertyType.Text:
