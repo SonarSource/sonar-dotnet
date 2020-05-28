@@ -19,19 +19,21 @@
  */
 
 extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.TestFramework;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 {
     [TestClass]
     public class NullPointerDereferenceTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NullPointerDereference_ValidatedNotNull()
-        {
+        public void NullPointerDereference_ValidatedNotNull() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 
@@ -58,43 +60,39 @@ public static class Utils
         return value.ToUpper(); // Compliant
     }
 }
-", new NullPointerDereference());
-        }
+", GetAnalyzer());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NullPointerDereference()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.cs",
-                new NullPointerDereference());
-        }
+        public void NullPointerDereference() =>
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.cs", GetAnalyzer());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NullPointerDereference_CSharp6()
-        {
+        public void NullPointerDereference_CSharp6() =>
             Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp6.cs",
-                new NullPointerDereference(),
+                GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp6);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NullPointerDereference_CSharp7()
-        {
+        public void NullPointerDereference_CSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp7.cs",
-                new NullPointerDereference(),
+                GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp7);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NullPointerDereference_CSharp8()
-        {
+        public void NullPointerDereference_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp8.cs",
-                new NullPointerDereference(),
+                GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-        }
+
+        private static SonarDiagnosticAnalyzer GetAnalyzer() =>
+            // Symbolic execution analyzers are run by the SymbolicExecutionRunner
+            new SymbolicExecutionRunner(
+                new SymbolicExecutionAnalyzerFactory(
+                    ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new NullPointerDereference())));
     }
 }

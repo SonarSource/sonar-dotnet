@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SemanticModel semanticModel)
         {
             if (args.Symbol is IParameterSymbol &&
-                !NullPointerDereference.NullPointerCheck.IsExtensionMethod(args.Identifier.Parent, semanticModel) &&
+                !semanticModel.IsExtensionMethod(args.Identifier.Parent) &&
                 !args.Symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
             {
                 identifiers.Add(args.Identifier);
@@ -73,12 +73,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 syntaxNodeAnalysisContext = context;
 
-                nullPointerCheck = new NullPointerDereference.NullPointerCheck(explodedGraph);
+                nullPointerCheck = explodedGraph.NullPointerCheck;
                 nullPointerCheck.MemberAccessing += MemberAccessingHandler;
-                explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
             }
 
-            public bool SupportPartialResults { get; } = true;
+            public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 identifiers.Select(identifier => Diagnostic.Create(rule, identifier.GetLocation(), GetMessage(identifier)));

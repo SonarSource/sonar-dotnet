@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            public bool SupportPartialResults { get; } = true;
+            public bool SupportsPartialResults => true;
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
                 explodedGraph.AddExplodedGraphCheck(new NullableCastCheck(explodedGraph, context));
