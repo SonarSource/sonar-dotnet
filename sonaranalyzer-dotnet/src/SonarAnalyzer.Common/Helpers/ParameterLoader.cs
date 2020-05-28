@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
@@ -33,25 +32,79 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public static class ParameterLoader
+    internal static class ParameterLoader
     {
-        public static readonly string ParameterConfigurationFileName = "SonarLint.xml";
+        private const string ParameterConfigurationFileName = "SonarLint.xml";
 
-        private class RuleParameterValue
+        /**
+         * At each compilation, parse the configuration file and set the rule parameters on
+         *
+         * There is no caching mechanism because inside the IDE, the configuration file can change when the user:
+         * - changes something inside the configuration file
+         * - loads a different solution in the IDE
+         *
+         * If caching needs to be done in the future, it should take into account:
+         * - diffing the contents of the configuration file
+         * - associating the file with a unique identifier for the build project
+         */
+        internal static void SetParameterValues(ParameterLoadingDiagnosticAnalyzer parameteredAnalyzer,
+            AnalyzerOptions options)
         {
-            public string ParameterKey { get; set; }
+            var additionalFile = options.AdditionalFiles.FirstOrDefault(f => IsSonarLintXml(f.Path));
 
-            public string ParameterValue { get; set; }
+            if (additionalFile == null)
+            {
+                return;
+            }
+
+            var parameters = ParseParameters(additionalFile.Path);
+            if (parameters.IsEmpty)
+            {
+                return;
+            }
+
+            var propertyParameterPairs = parameteredAnalyzer.GetType()
+                .GetRuntimeProperties()
+                .Select(p => new { Property = p, Descriptor = p.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })
+                .Where(p => p.Descriptor != null);
+
+            var ids = new HashSet<string>(parameteredAnalyzer.SupportedDiagnostics.Select(diagnostic => diagnostic.Id));
+            foreach (var propertyParameterPair in propertyParameterPairs)
+            {
+                var parameter = parameters
+                    .FirstOrDefault(p => ids.Contains(p.RuleId));
+
+                var parameterValue = parameter?.ParameterValues
+                    .FirstOrDefault(pv => pv.ParameterKey == propertyParameterPair.Descriptor.Key);
+
+                if (TryConvertToParameterType(parameterValue?.ParameterValue, propertyParameterPair.Descriptor.Type, out var value))
+                {
+                    propertyParameterPair.Property.SetValue(parameteredAnalyzer, value);
+                }
+            }
         }
 
-        private class RuleParameterValues
-        {
-            public string RuleId { get; set; }
+        internal static bool IsSonarLintXml(string path) => ConfigurationFilePathMatchesExpected(path, ParameterConfigurationFileName);
 
-            public List<RuleParameterValue> ParameterValues { get; } = new List<RuleParameterValue>();
+        internal static bool ConfigurationFilePathMatchesExpected(string path, string fileName) =>
+            new FileInfo(path).Name.Equals(fileName, StringComparison.OrdinalIgnoreCase);
+
+        private static ImmutableList<RuleParameterValues> ParseParameters(string path)
+        {
+            try
+            {
+                using var xtr = XmlReader.Create(path);
+                var xml = XDocument.Load(xtr);
+                return ParseParameters(xml);
+            }
+            catch (Exception ex) when (ex is IOException || ex is XmlException)
+            {
+                // cannot log exception
+                return ImmutableList.Create<RuleParameterValues>();
+            }
         }
 
-        private static ImmutableList<RuleParameterValues> ParseParameters(XDocument xml)
+        private static ImmutableList<RuleParameterValues> ParseParameters(XContainer xml)
         {
             var builder = ImmutableList.CreateBuilder<RuleParameterValues>();
             foreach (var rule in xml.Descendants("Rule").Where(e => e.Elements("Parameters").Any()))
@@ -79,86 +132,46 @@ namespace SonarAnalyzer.Helpers
             return builder.ToImmutable();
         }
 
-        private static readonly ConcurrentDictionary<ParameterLoadingDiagnosticAnalyzer, byte> ProcessedAnalyzers =
-            new ConcurrentDictionary<ParameterLoadingDiagnosticAnalyzer, byte>();
-
-        public static void SetParameterValues(ParameterLoadingDiagnosticAnalyzer parameteredAnalyzer,
-            AnalyzerOptions options)
+        private static bool TryConvertToParameterType(string parameter, PropertyType type, out object result)
         {
-            if (ProcessedAnalyzers.ContainsKey(parameteredAnalyzer))
+            if (parameter == null)
             {
-                return;
+                result = null;
+                return false;
             }
-
-            var additionalFile = options.AdditionalFiles
-                .FirstOrDefault(f => IsSonarLintXml(f.Path));
-
-            if (additionalFile == null)
-            {
-                return;
-            }
-
-            ImmutableList<RuleParameterValues> parameters;
-            using (var xtr = XmlReader.Create(additionalFile.Path))
-            {
-                var xml = XDocument.Load(xtr);
-                parameters = ParseParameters(xml);
-            }
-
-            var propertyParameterPairs = parameteredAnalyzer.GetType()
-                .GetRuntimeProperties()
-                .Select(p => new { Property = p, Descriptor = p.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })
-                .Where(p => p.Descriptor != null);
-
-            var ids = new HashSet<string>(parameteredAnalyzer.SupportedDiagnostics.Select(diagnostic => diagnostic.Id));
-            foreach (var propertyParameterPair in propertyParameterPairs)
-            {
-                var parameter = parameters
-                    .FirstOrDefault(p => ids.Contains(p.RuleId));
-
-                var parameterValue = parameter?.ParameterValues
-                    .FirstOrDefault(pv => pv.ParameterKey == propertyParameterPair.Descriptor.Key);
-
-                if (parameterValue == null)
-                {
-                    return;
-                }
-
-                var value = parameterValue.ParameterValue;
-                var convertedValue = ChangeParameterType(value, propertyParameterPair.Descriptor.Type);
-                propertyParameterPair.Property.SetValue(parameteredAnalyzer, convertedValue);
-            }
-
-            ProcessedAnalyzers.AddOrUpdate(parameteredAnalyzer, 0, (a, b) => b);
-        }
-
-        private static object ChangeParameterType(string parameter, PropertyType type)
-        {
             switch (type)
             {
                 case PropertyType.Text:
                 case PropertyType.String:
-                    return parameter;
+                    result = parameter;
+                    return true;
 
-                case PropertyType.Integer:
-                    return int.Parse(parameter, NumberStyles.None, CultureInfo.InvariantCulture);
+                case PropertyType.Integer when int.TryParse(parameter, NumberStyles.None, CultureInfo.InvariantCulture, out var parsedInt):
+                    result = parsedInt;
+                    return true;
 
-                case PropertyType.Boolean:
-                    return bool.Parse(parameter);
+                case PropertyType.Boolean when bool.TryParse(parameter, out var parsedBool):
+                    result = parsedBool;
+                    return true;
 
                 default:
-                    throw new NotSupportedException();
+                    result = null;
+                    return false;
             }
         }
 
-        public static bool IsSonarLintXml(string path)
+        private sealed class RuleParameterValues
         {
-            return ConfigurationFilePathMatchesExpected(path, ParameterConfigurationFileName);
+            public string RuleId { get; set; }
+
+            public List<RuleParameterValue> ParameterValues { get; } = new List<RuleParameterValue>();
         }
 
-        public static bool ConfigurationFilePathMatchesExpected(string path, string fileName)
+        private sealed class RuleParameterValue
         {
-            return new FileInfo(path).Name.Equals(fileName, StringComparison.OrdinalIgnoreCase);
+            public string ParameterKey { get; set; }
+
+            public string ParameterValue { get; set; }
         }
     }
 }

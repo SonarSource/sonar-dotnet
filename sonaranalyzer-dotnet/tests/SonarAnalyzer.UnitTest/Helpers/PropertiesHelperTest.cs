@@ -20,7 +20,6 @@ extern alias csharp;
 */
 
 using System.Collections.Immutable;
-using System.IO;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -71,7 +70,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void ShouldAnalyzeGeneratedCode_WithNotExistingPath_ReturnsFalse()
         {
-            GetSetting("ResourceTests\\NotExistingFolder\\SonarLint.xml");
+            var result = GetSetting("ResourceTests\\NotExistingFolder\\SonarLint.xml");
+            result.Should().BeFalse();
         }
 
         private static bool GetSetting(string filePath)

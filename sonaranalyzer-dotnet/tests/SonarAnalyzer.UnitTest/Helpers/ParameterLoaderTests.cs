@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,6 +20,7 @@
 
 extern alias csharp;
 using System.Collections.Immutable;
+using System.IO;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -33,14 +34,25 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class ParameterLoaderTests
     {
-
         [TestMethod]
-        public void SetParameterValues_WhenGivenValidSonarLintFileAndContainsAnalyzerParameters_PopulatesProperties()
+        public void SetParameterValues_WhenNoSonarLintIsGiven_DoesNotPopulateParameters()
         {
             // Arrange
-            var additionalText = new Mock<AdditionalText>();
-            additionalText.Setup(x => x.Path).Returns("ResourceTests\\SonarLint.xml");
-            var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
+            var options = CreateOptions("ResourceTests\\MyFile.xml");
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.Maximum.Should().Be(3); // Default value
+        }
+
+        [TestMethod]
+        public void SetParameterValues_WhenGivenSonarLintFileHasIntParameterType_PopulatesProperties()
+        {
+            // Arrange
+            var options = CreateOptions("ResourceTests\\SonarLint.xml");
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -51,12 +63,38 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
+        public void SetParameterValues_WhenGivenSonarLintFileHasStringParameterType_OnlyOneParameter_PopulatesProperty()
+        {
+            // Arrange
+            var options = CreateOptions("ResourceTests\\RuleWithStringParameter\\SonarLint.xml");
+            var analyzer = new EnumNameShouldFollowRegex(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.FlagsEnumNamePattern.Should().Be("1"); // value from XML file
+        }
+
+        [TestMethod]
+        public void SetParameterValues_WhenGivenSonarLintFileHasBooleanParameterType_OnlyOneParameter_PopulatesProperty()
+        {
+            // Arrange
+            var options = CreateOptions("ResourceTests\\RuleWithBooleanParameter\\SonarLint.xml");
+            var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.IsRegularExpression.Should().BeTrue(); // value from XML file
+        }
+
+        [TestMethod]
         public void SetParameterValues_WhenGivenValidSonarLintFileAndDoesNotContainAnalyzerParameters_DoesNotPopulateProperties()
         {
             // Arrange
-            var additionalText = new Mock<AdditionalText>();
-            additionalText.Setup(x => x.Path).Returns("ResourceTests\\SonarLint.xml");
-            var options = new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
+            var options = CreateOptions("ResourceTests\\SonarLint.xml");
             var analyzer = new LineLength(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -64,6 +102,92 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             // Assert
             analyzer.Maximum.Should().Be(200); // Default value
+        }
+
+        [TestMethod]
+        public void SetParameterValues_CalledTwiceAfterChangeInConfigFile_UpdatesProperties()
+        {
+            // Arrange
+            var sonarLintXmlRelativePath = "ResourceTests\\ToChange\\SonarLint.xml";
+            var options = CreateOptions(sonarLintXmlRelativePath);
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act with the file on disk
+            ParameterLoader.SetParameterValues(analyzer, options);
+            analyzer.Maximum.Should().Be(1); // from the XML on disk
+
+            // Update the file on disk
+            var originalContent = File.ReadAllText(sonarLintXmlRelativePath);
+            var modifiedContent = originalContent.Replace("<Value>1</Value>", "<Value>42</Value>");
+            File.WriteAllText(sonarLintXmlRelativePath, modifiedContent);
+            ParameterLoader.SetParameterValues(analyzer, options);
+            analyzer.Maximum.Should().Be(42);
+
+            // revert change
+            File.WriteAllText(sonarLintXmlRelativePath, originalContent);
+        }
+
+        [TestMethod]
+        public void SetParameterValues_WithMalformedXml_DoesNotPopulateProperties()
+        {
+            // Arrange
+            var options = CreateOptions("ResourceTests\\Malformed\\SonarLint.xml");
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.Maximum.Should().Be(3); // Default value
+        }
+
+        [TestMethod]
+        public void SetParameterValues_WithBadPath_DoesNotPopulateProperties()
+        {
+            // Arrange
+            var options = CreateOptions("ResourceTests\\ThisPathDoesNotExist\\SonarLint.xml");
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.Maximum.Should().Be(3); // Default value
+        }
+
+        [TestMethod]
+        public void SetParameterValues_WithWrongPropertyType_StringInsteadOfInt_DoesNotPopulateProperties()
+        {
+            // Arrange
+            var options = CreateOptions("ResourceTests\\StringInsteadOfInt\\SonarLint.xml");
+            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.Maximum.Should().Be(3); // Default value
+        }
+
+        [TestMethod]
+        public void SetParameterValues_WithWrongPropertyType_StringInsteadOfBoolean_DoesNotPopulateProperties()
+        {
+            // Arrange
+            var options = CreateOptions("ResourceTests\\StringInsteadOfBoolean\\SonarLint.xml");
+            var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
+
+            // Act
+            ParameterLoader.SetParameterValues(analyzer, options);
+
+            // Assert
+            analyzer.IsRegularExpression.Should().BeFalse(); // Default value
+        }
+
+        private static AnalyzerOptions CreateOptions(string relativePath)
+        {
+            var additionalText = new Mock<AdditionalText>();
+            additionalText.Setup(x => x.Path).Returns(relativePath);
+            return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
     }
 }
