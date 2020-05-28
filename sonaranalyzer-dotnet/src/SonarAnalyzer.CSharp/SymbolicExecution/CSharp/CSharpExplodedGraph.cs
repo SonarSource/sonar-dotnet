@@ -53,6 +53,14 @@ namespace SonarAnalyzer.SymbolicExecution
             AddExplodedGraphCheck(new InvalidCastToInterfaceSymbolicExecution.NullableCastCheck(this));
         }
 
+        /// <summary>
+        /// NullPointerCheck is added by default by the CSharpExplodedGraph to allow an early stop of the visit
+        /// when a null pointer dereference is found.
+        ///
+        /// In order to be able to run all the rules within one single symbolic execution pass, we have to reuse,
+        /// instead of replace, this check in dependent analyzers (e.g. PublicMethodArgumentsShouldBeCheckedForNull
+        /// and NullPointerDereference).
+        /// </summary>
         internal NullPointerDereference.NullPointerCheck NullPointerCheck => nullPointerCheck;
 
         #region Visit*
