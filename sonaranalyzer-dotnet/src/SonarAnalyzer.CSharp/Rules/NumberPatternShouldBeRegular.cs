@@ -77,45 +77,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var groups = split[0].Split(Underscore).Select(s => s.Length).ToArray();
+            var groupLengthsLeftFromDot = split[0].Split(Underscore).Select(g => g.Length).ToArray();
 
-            var size = NotFound;
-
-            if (groups.Length > 1)
+            if (HasIrregularGroupLengths(groupLengthsLeftFromDot))
             {
-                size = groups[1];
-
-                // first should not be bigger.
-                if (groups[0] > size)
-                {
-                    return true;
-                }
-
-                // all should have the same size, except the first, and the size should at least be 2.
-                if (size < 2 || groups.Skip(1).Any(g => g != size))
-                {
-                    return true;
-                }
+                return true;
             }
 
+            // no dot, so done.
             if (split.Length == 1)
             {
                 return false;
             }
 
-            var decimals = split[1].Split(Underscore).Select(s => s.Length).ToArray();
+            // reverse, as for right from the dot, the last (instead of the first)
+            // group length is allowed to be shorter than the group length.
+            var groupLengthsRightFromDot = split[1].Split(Underscore).Select(g => g.Length).Reverse().ToArray();
 
-            if (decimals.Length == 1)
-            {
-                return false;
-            }
-
-            size = size == NotFound ? decimals[0] : size;
-
-            // the last should not be bigger
-            // all should have the same size, except the last.
-            return (decimals.Last() > size)
-                || (decimals.Take(decimals.Length - 1).Any(g => g != size));
+            return HasIrregularGroupLengths(groupLengthsRightFromDot);
         }
 
         private static string StripNumericPreAndSuffix(string numericToken)
@@ -149,6 +128,25 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return numericToken;
+        }
+
+        private static bool HasIrregularGroupLengths(int[] groupLengths)
+        {
+            if (groupLengths.Length < 2)
+            {
+                return false;
+            }
+
+            // the second group is assumed to be leading.
+            var groupLength = groupLengths[1];
+
+            // first should not be bigger, and the size per group should be at least 2.
+            if (groupLength < 2 || groupLengths[0] > groupLength)
+            {
+                return true;
+            }
+
+            return groupLengths.Skip(1).Any(l => l != groupLength);
         }
     }
 }
