@@ -1,0 +1,16 @@
+{
+  "title": "\"GoTo\" statements should not be used",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "brain-overload"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-907",
+  "sqKey": "S907",
+  "scope": "All"
+}
