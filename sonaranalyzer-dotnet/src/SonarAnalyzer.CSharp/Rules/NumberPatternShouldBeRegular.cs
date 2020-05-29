@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -38,12 +38,13 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3937";
         private const string MessageFormat = "Review this number; its irregular pattern indicates an error.";
 
+        private const char Underscore = '_';
+        private const char Dot = '.';
+        private const int NotFound = -1;
+
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ImmutableHashSet<char> NumericTypeSuffix =
-            ImmutableHashSet.Create('L', 'D', 'F', 'U', 'M');
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -57,22 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var literal = (LiteralExpressionSyntax)c.Node;
 
-                    var numberWithoutSuffix = ClearNumberTypeSuffix(literal.Token.Text);
-
-                    var decimalParts = numberWithoutSuffix.Split('.');
-                    if (decimalParts.Length > 2)
-                    {
-                        return;
-                    }
-
-                    var hasIrregularPattern = decimalParts
-                        .SelectMany(part => part.Split('_'))
-                        .Select(x => x.Length)
-                        .Skip(1) // skip the first part (1_234 => 234)
-                        .Reverse().Skip(decimalParts.Length == 2 ? 1 : 0) // skip the last if there is a decimal (.234_5 => 234)
-                        .Distinct().Skip(1).Any(); // we expect to have only 1 size of pattern
-
-                    if (hasIrregularPattern)
+                    if (HasIrregularPattern(literal.Token.Text))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, literal.GetLocation()));
                     }
@@ -80,19 +66,89 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.NumericLiteralExpression);
         }
 
-        private static string ClearNumberTypeSuffix(string numberLiteral)
+        /// <remarks>internal for test purposes.</remarks>
+        internal static bool HasIrregularPattern(string numericToken)
         {
-            if (numberLiteral.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
+            var split = StripNumericPreAndSuffix(numericToken).Split(Dot);
+
+            // ignore multiple dots.
+            if (split.Length > 2)
             {
-                return numberLiteral.Substring(0, numberLiteral.Length - 2);
+                return false;
             }
 
-            if (NumericTypeSuffix.Contains(char.ToUpperInvariant(numberLiteral[numberLiteral.Length - 1])))
+            var groupLengthsLeftFromDot = split[0].Split(Underscore).Select(g => g.Length).ToArray();
+
+            if (HasIrregularGroupLengths(groupLengthsLeftFromDot))
             {
-                return numberLiteral.Substring(0, numberLiteral.Length - 1);
+                return true;
             }
 
-            return numberLiteral;
+            // no dot, so done.
+            if (split.Length == 1)
+            {
+                return false;
+            }
+
+            // reverse, as for right from the dot, the last (instead of the first)
+            // group length is allowed to be shorter than the group length.
+            var groupLengthsRightFromDot = split[1].Split(Underscore).Select(g => g.Length).Reverse().ToArray();
+
+            return HasIrregularGroupLengths(groupLengthsRightFromDot);
+        }
+
+        private static string StripNumericPreAndSuffix(string numericToken)
+        {
+            var length = numericToken.Length;
+
+            // hexadecimal and binary prefixes (0xFFFF_23_AB, 0b1110_1101)
+            if (numericToken.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase) ||
+                numericToken.StartsWith("0b", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return numericToken.Substring(2, length - 2);
+            }
+
+            // Scientific notation (1.23E8)
+            var exponentMarker = numericToken.IndexOf("E", StringComparison.InvariantCultureIgnoreCase);
+            if (exponentMarker != NotFound)
+            {
+                return numericToken.Substring(0, exponentMarker);
+            }
+
+            // UL and LU suffix.
+            if (numericToken.EndsWith("UL", StringComparison.OrdinalIgnoreCase) ||
+                numericToken.EndsWith("LU", StringComparison.OrdinalIgnoreCase))
+            {
+                return numericToken.Substring(0, length - 2);
+            }
+            // single suffixes
+            if ("LDFUMldfum".IndexOf(numericToken[numericToken.Length - 1]) != NotFound)
+            {
+                return numericToken.Substring(0, length - 1);
+            }
+
+            return numericToken;
+        }
+
+        private static bool HasIrregularGroupLengths(int[] groupLengths)
+        {
+            if (groupLengths.Length < 2)
+            {
+                return false;
+            }
+
+            // the first group is allowed to contain less digits that the other ones,
+            // so take the expected length from the second group.
+            var groupLength = groupLengths[1];
+
+            // we consider groups of 1 digit irregular.
+            // first should not be bigger.
+            if (groupLength < 2 || groupLengths[0] > groupLength)
+            {
+                return true;
+            }
+
+            return groupLengths.Skip(1).Any(l => l != groupLength);
         }
     }
 }
