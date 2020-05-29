@@ -137,10 +137,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            // the second group is assumed to be leading.
+            // the first group is allowed to contain less digits that the other ones,
+            // so take the expected length from the second group.
             var groupLength = groupLengths[1];
 
-            // first should not be bigger, and the size per group should be at least 2.
+            // we consider groups of 1 digit irregular.
+            // first should not be bigger.
             if (groupLength < 2 || groupLengths[0] > groupLength)
             {
                 return true;

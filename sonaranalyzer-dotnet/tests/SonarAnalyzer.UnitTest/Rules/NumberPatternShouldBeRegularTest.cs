@@ -60,6 +60,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("0xFFFF_FFFF_FFFFF", "Last group bigger than 4")]
         [DataRow("0xFFFF_FFFF_FFFFF", "Last group bigger than 4")]
         [DataRow("1.234_5678E2", "Exponential format with bigger last group")]
+        [DataRow("____", "Only underscores")]
+        [DataRow("__.__", "Only underscores and a dot")]
+        [DataRow("0xFF___FF___FF", "Multiple _'s as separator")]
+        [DataRow("0xFF________FF___FF", "Multiple irregular _'s as separator")]
         public void HasIrregularPattern(string numericToken, string message)
         {
             Assert.IsTrue(NumberPatternShouldBeRegular.HasIrregularPattern(numericToken), message);
