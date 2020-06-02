@@ -73,8 +73,7 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
         {
             constraints[constraint.GetType()] = constraint;
 
-            if (constraint is BoolConstraint ||
-                constraint is DisposableConstraint)
+            if (constraint is BoolConstraint)
             {
                 constraints[typeof(ObjectConstraint)] = ObjectConstraint.NotNull;
                 if (constraints.ContainsKey(typeof(NullableValueConstraint)))

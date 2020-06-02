@@ -10,9 +10,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
             {
                 using var resource = GetNullResource();
 
-                if (resource == null) // Noncompliant - FP resource can be null
+                if (resource == null)
                 { throw new Exception(); }
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
             }
 
             private static IDisposable GetNullResource() => null;

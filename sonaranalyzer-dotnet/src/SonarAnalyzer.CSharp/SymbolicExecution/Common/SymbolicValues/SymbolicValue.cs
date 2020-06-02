@@ -263,6 +263,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 return new[] { programState };
             }
 
+            if (oldConstraints.HasConstraint<DisposableConstraint>())
+            {
+                return new[] { programState.SetConstraint(this, constraint) };
+            }
+
             var oldObjectConstraint = oldConstraints.GetConstraintOrDefault<ObjectConstraint>();
             if (oldObjectConstraint != null)
             {
@@ -275,7 +280,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}," +
-                $"{nameof(StringConstraint)}.");
+                $"{nameof(StringConstraint)} or {nameof(DisposableConstraint)}.");
         }
 
         private IEnumerable<ProgramState> TrySetStringConstraint(StringConstraint constraint,
@@ -364,7 +369,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             // constraints are mixed space Related
             if ((newEmptyStringConstraint && oldFullNotWhiteSpaceStringConstraint)
-               || (newEmptyStringConstraint && oldWhiteSpaceStringConstraint)            
+               || (newEmptyStringConstraint && oldWhiteSpaceStringConstraint)
                || (newFullNotWhiteSpaceStringConstraint && oldEmptyStringConstraint)
                || (newWhiteSpaceStringConstraint && oldEmptyStringConstraint))
             {
