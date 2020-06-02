@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 explodedGraph.AddExplodedGraphCheck(objectDisposedPointerCheck);
             }
 
-            public bool SupportsPartialResults => false;
+            public bool SupportsPartialResults => true;
 
             public void Dispose() => objectDisposedPointerCheck.ObjectDisposed -= ObjectDisposedHandler;
 

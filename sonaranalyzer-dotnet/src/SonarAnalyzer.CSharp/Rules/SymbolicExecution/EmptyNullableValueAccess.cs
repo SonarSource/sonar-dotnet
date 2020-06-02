@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
             }
 
-            public bool SupportsPartialResults => false;
+            public bool SupportsPartialResults => true;
 
             private void AddIdentifier(object sender, MemberAccessedEventArgs args) => nullIdentifiers.Add(args.Identifier);
 

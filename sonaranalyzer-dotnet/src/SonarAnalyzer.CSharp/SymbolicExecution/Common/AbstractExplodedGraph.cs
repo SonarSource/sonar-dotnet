@@ -32,7 +32,7 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     internal abstract class AbstractExplodedGraph
     {
-        internal const int MaxStepCount = 1000;
+        internal const int MaxStepCount = 1500;
         internal const int MaxInternalStateCount = 10000;
         private const int MaxProgramPointExecutionCount = 2;
 

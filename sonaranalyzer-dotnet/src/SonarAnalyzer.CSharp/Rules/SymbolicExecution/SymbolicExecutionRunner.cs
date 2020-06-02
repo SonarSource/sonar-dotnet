@@ -79,8 +79,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             // reached or if an exception was thrown during analysis.
             ReportDiagnostics(analyzerContexts, context, true);
 
-            analyzerContexts.ForEach(analyzerContext => analyzerContext.Dispose());
-
             void ExplorationEndedHandler(object sender, EventArgs args)
             {
                 ReportDiagnostics(analyzerContexts, context, false);
@@ -89,11 +87,14 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private static void ReportDiagnostics(IEnumerable<ISymbolicExecutionAnalysisContext> analyzerContexts, SyntaxNodeAnalysisContext context, bool supportsPartialResults)
         {
-            foreach (var diagnostic in analyzerContexts
-                .Where(analyzerContext => analyzerContext.SupportsPartialResults == supportsPartialResults)
-                .SelectMany(analyzerContext => analyzerContext.GetDiagnostics()))
+            foreach (var analyzerContext in analyzerContexts.Where(analyzerContext => analyzerContext.SupportsPartialResults == supportsPartialResults))
             {
-                context.ReportDiagnosticWhenActive(diagnostic);
+                foreach (var diagnostic in analyzerContext.GetDiagnostics())
+                {
+                    context.ReportDiagnosticWhenActive(diagnostic);
+                }
+
+                analyzerContext.Dispose();
             }
         }
 
