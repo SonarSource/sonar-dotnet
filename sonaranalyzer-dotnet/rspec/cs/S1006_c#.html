@@ -28,7 +28,7 @@ public class Program
     derived.Write(); // writes 5
     Print(derived);  // writes 42; was that expected?
   }
-  private void Print(Base item)
+  private static void Print(Base item)
   {
     item.Write();
   }
@@ -60,7 +60,7 @@ public class Program
     derived.Write(); // writes 42
     Print(derived);  // writes 42
   }
-  private void Print(Base item)
+  private static void Print(Base item)
   {
     item.Write();
   }
