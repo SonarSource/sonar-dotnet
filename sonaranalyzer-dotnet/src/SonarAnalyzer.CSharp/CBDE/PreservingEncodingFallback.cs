@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -22,7 +22,6 @@ using System.Text;
 
 namespace SonarAnalyzer.CBDE
 {
-
     /// <summary>
     /// C# source code can contain any character, but MLIR only handle 8-bits chars. We must therefore encode C# names
     /// so that two different strings in C# always result in two different strings in the generated code (by default, all
@@ -33,9 +32,7 @@ namespace SonarAnalyzer.CBDE
     {
         public override int MaxCharCount => 4;
 
-        public override EncoderFallbackBuffer CreateFallbackBuffer()
-        {
-            return new PreservingEncodingBuffer();
-        }
+        public override EncoderFallbackBuffer CreateFallbackBuffer() =>
+            new PreservingEncodingBuffer();
     }
 }

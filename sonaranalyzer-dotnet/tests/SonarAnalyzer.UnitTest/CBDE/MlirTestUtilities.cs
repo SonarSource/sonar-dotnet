@@ -35,16 +35,14 @@ namespace SonarAnalyzer.UnitTest.CBDE
 {
     public static class MlirTestUtilities
     {
-        private static string cbdeDialectCheckerPath =
+        private static readonly string cbdeDialectCheckerPath =
             Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 @"CBDE\windows\cbde-dialect-checker.exe");
 
-        public static void checkExecutableExists()
-        {
+        public static void CheckExecutableExists() =>
             Assert.IsTrue(File.Exists(cbdeDialectCheckerPath),
                 $"We need cbde-dialect-checker.exe to validate the generated IR, searched in path {cbdeDialectCheckerPath}");
-        }
 
         public static string ValidateCodeGeneration(string code, string testName, bool withLoc)
         {
@@ -76,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
             Console.WriteLine();
             Console.WriteLine("Actual:");
             Console.WriteLine(trimmedActual);
-            for (int i = 0; i < maxLines; ++i)
+            for (var i = 0; i < maxLines; ++i)
             {
                 if (expectedLines[i] != actualLines[i])
                 {
@@ -89,14 +87,11 @@ namespace SonarAnalyzer.UnitTest.CBDE
         public static IControlFlowGraph GetCfgForMethod(string code, string methodName)
         {
             (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
-
             return CSharpControlFlowGraph.Create(method.Body, semanticModel);
         }
 
-        public static string GetCfgGraph(string code, string methodName)
-        {
-            return CfgSerializer.Serialize(methodName, GetCfgForMethod(code, methodName));
-        }
+        public static string GetCfgGraph(string code, string methodName) =>
+            CfgSerializer.Serialize(methodName, GetCfgForMethod(code, methodName));
 
         private static string ValidateIR(string path)
         {
@@ -120,13 +115,6 @@ namespace SonarAnalyzer.UnitTest.CBDE
                 return p.StandardOutput.ReadToEnd();
             }
         }
-        private static void ExportMethod(string code, TextWriter writer, string functionName)
-        {
-            (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(functionName);
-            var exporterMetrics = new MlirExporterMetrics();
-            var exporter = new MlirExporter(writer, semanticModel, exporterMetrics, false);
-            exporter.ExportFunction(method);
-        }
 
         private static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
         {
@@ -137,7 +125,6 @@ namespace SonarAnalyzer.UnitTest.CBDE
             {
                 exporter.ExportFunction(method);
             }
-
         }
     }
 }

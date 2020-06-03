@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
         [ClassInitialize]
         public static void checkExecutableExists(TestContext tc)
         {
-            MlirTestUtilities.checkExecutableExists();
+            MlirTestUtilities.CheckExecutableExists();
         }
 
         [TestMethod]
