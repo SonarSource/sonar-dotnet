@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,15 +30,13 @@ namespace SonarAnalyzer.UnitTest.CBDE
     [TestClass]
     public class MlirExportTest
     {
+        public TestContext TestContext { get; set; } // Set automatically by MsTest
 
         [ClassInitialize]
-        public static void checkExecutableExists(TestContext tc)
+        public static void CheckExecutableExists(TestContext tc)
         {
             MlirTestUtilities.checkExecutableExists();
         }
-
-        public TestContext TestContext { get; set; } // Set automatically by MsTest
-
 
         [TestMethod]
         public void SimpleMethod()
@@ -86,10 +84,10 @@ int WithReturn(int i) {
         }
     }
     return i;
-}";
+}
+";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
-
 
         [TestMethod]
         public void WhileLoops()
@@ -128,7 +126,6 @@ private int WhileLoopContinue(int i)
 }
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
-
         }
 
         [TestMethod]
@@ -157,7 +154,7 @@ private int WhileLoopBreak(int i)
 }
 private int WhileLoopContinue(int i)
 {
-    do 
+    do
     {
         if (i == 42)
         {
@@ -168,9 +165,7 @@ private int WhileLoopContinue(int i)
 }
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
-
         }
-
 
         [TestMethod]
         public void ForLoops()
@@ -213,8 +208,8 @@ private int ForLoopContinue(int i)
 }
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
-
         }
+
         [TestMethod]
         public void ForEachLoops()
         {
@@ -256,6 +251,7 @@ long withLong()
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
+
         [TestMethod]
         public void TryCatchFinally()
         {
@@ -393,6 +389,7 @@ int g(A a, int i)
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
+
         [TestMethod]
         public void Using()
         {
@@ -413,7 +410,6 @@ class A {
     }
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -487,7 +483,6 @@ void f()
 //          ^^^^^^^^^
     new A() { i = 4 };
 }
-
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
@@ -513,7 +508,6 @@ public Type f()
     return (null);
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -530,7 +524,6 @@ public void f(int i, int j)
     }
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -674,9 +667,7 @@ public void Łódź() { }
 public void AsciiThen你好ThenAsciiAgain() { }
 
 public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }
-
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -688,7 +679,6 @@ public void f(__arglist)
 {
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -700,8 +690,6 @@ public void f(params int[] args)
         {
         }
 ";
-
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -734,7 +722,6 @@ public int UncheckedExpr(int i)
     return unchecked(i * 2);
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -757,7 +744,6 @@ unsafe private static void ModifyFixedStorage()
     }
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -773,7 +759,6 @@ namespace Tests
     }
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
         [TestMethod]
@@ -798,7 +783,6 @@ class B {
     int F(int i) {return 2*i;}
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -815,7 +799,6 @@ void f()
     }
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -834,7 +817,6 @@ void f(Point p)
     p.x = 2;
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -866,7 +848,6 @@ void f()
     array[0] = 2;
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -889,7 +870,6 @@ char h(bool c)
     return c;
     }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -902,7 +882,6 @@ void f(int a, int b)
     a = (b = 2);
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -919,7 +898,6 @@ int f(int a, int b)
     return 1;
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -932,7 +910,6 @@ void f(int a, int b)
     a = (b = 2) + 1;
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -947,7 +924,6 @@ Label:
     return;
 }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -964,7 +940,6 @@ class A
             NullConst.ToString();
         }
 ";
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1017,8 +992,8 @@ public static Func<string, bool> CreateFilter()
 }
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
-
         }
+
         [TestMethod]
         public void MemberFieldAccess()
         {
@@ -1040,7 +1015,6 @@ class A
 }
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
-
         }
 
         [TestMethod]
@@ -1062,7 +1036,6 @@ class B
 }
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
-
         }
 
         [TestMethod]
@@ -1188,8 +1161,6 @@ int InfiniteLoop(int i) {
     // No return here
 }
 ";
-            var dot = MlirTestUtilities.GetCfgGraph(code, "InfiniteLoop");
-
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1344,6 +1315,7 @@ public bool plus()
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
+
         [TestMethod]
         public void MixingUintAndNeg()
         {
@@ -1372,7 +1344,6 @@ int f() {
   int j += i;
   return j;
 }
-
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
@@ -1388,7 +1359,6 @@ unsafe class C {
     return j+1;
   }
 }
-
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
@@ -1415,11 +1385,8 @@ protected bool j;
     }
   }
 }
-
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
     } // Class
-
 } // Namespace
-

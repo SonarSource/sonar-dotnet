@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.CBDE
     [TestClass]
     public class CheckMlirWithReference
     {
+        public TestContext TestContext { get; set; } // Set automatically by MsTest
+
         [ClassInitialize]
         public static void checkExecutableExists(TestContext tc)
         {
             MlirTestUtilities.checkExecutableExists();
         }
-
-        public TestContext TestContext { get; set; } // Set automatically by MsTest
 
         [TestMethod]
         public void TestAssignToLocalVarAndParam()
@@ -71,7 +71,6 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
 }
 ";
             MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
-
         }
 
         [TestMethod]
@@ -130,7 +129,6 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
 }
 ";
             MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
-
         }
 
         [TestMethod]
@@ -187,13 +185,9 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
 ^bb2:	// pred: ^bb1
   return
 }
-
-
 ";
             MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
-
         }
-
 
         [TestMethod]
         public void LeftRightShift()
@@ -233,7 +227,6 @@ func @_$invalid$global$code$.f$int$(%arg0: i32) {
 ^bb2:	// pred: ^bb1
   return
 }
-
 ";
             MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
         }
