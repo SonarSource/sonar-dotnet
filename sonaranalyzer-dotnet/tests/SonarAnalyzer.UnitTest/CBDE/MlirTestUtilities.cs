@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -71,6 +71,11 @@ namespace SonarAnalyzer.UnitTest.CBDE
             var expectedLines = trimmedExpected.Split('\n');
             var actualLines = trimmedActual.Split('\n');
             var maxLines = Math.Min(expectedLines.Length, actualLines.Length);
+            Console.WriteLine("Expected:");
+            Console.WriteLine(trimmedExpected);
+            Console.WriteLine();
+            Console.WriteLine("Actual:");
+            Console.WriteLine(trimmedActual);
             for (int i = 0; i < maxLines; ++i)
             {
                 if (expectedLines[i] != actualLines[i])

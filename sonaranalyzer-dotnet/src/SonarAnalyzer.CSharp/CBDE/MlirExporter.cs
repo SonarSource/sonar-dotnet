@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -283,8 +283,8 @@ namespace SonarAnalyzer.CBDE
         {
             /*
                      * Currently, we do exactly the same for all cases that may have created a BinaryBranchBlock
-                     * (this block can be created for ConditionalExpression, IfStatement, ForEachStatement, 
-                     * CoalesceExpression, ConditionalAccessExpression, LogicalAndExpression, LogicalOrExpression, 
+                     * (this block can be created for ConditionalExpression, IfStatement, ForEachStatement,
+                     * CoalesceExpression, ConditionalAccessExpression, LogicalAndExpression, LogicalOrExpression,
                      * ForStatement and CatchFilterClause) maybe later, we'll do something different depending on
                      * the control structure
                      */
@@ -577,6 +577,15 @@ namespace SonarAnalyzer.CBDE
                         ExportPrePostIncrementDecrement(postfixExp, postfixExp.OperatorToken, postfixExp.Operand, true);
                         break;
                     }
+
+                case SyntaxKind.SimpleMemberAccessExpression:
+                    var constant  = semanticModel.GetConstantValue(op);
+                    if(constant.HasValue && constant.Value is int intConstant) // Only Int32 types are currently supported by CBDE engine
+                    {
+                        ExportConstant(op, semanticModel.GetTypeInfo(op).Type, intConstant.ToString());
+                        break;
+                    }
+                    goto default;
                 default:
                     if (op is ExpressionSyntax expr && !(op.Kind() is SyntaxKind.NullLiteralExpression))
                     {
