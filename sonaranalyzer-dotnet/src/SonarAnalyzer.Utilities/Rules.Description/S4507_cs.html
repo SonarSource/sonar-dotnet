@@ -11,7 +11,7 @@ detailed information on both the system running the application and users. </p>
   <li> the code or configuration enabling the application debug features is deployed on production servers. </li>
   <li> the application runs by default with debug features activated. </li>
 </ul>
-<p>You are at risk if you answered yes to any of these questions.</p>
+<p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <p>Do not enable debug features on production servers.</p>
 <p>The .Net Core framework offers multiple features which help during debug.
@@ -22,8 +22,26 @@ production.</p>
 <h2>Sensitive Code Example</h2>
 <p>This rule raises issues when the following .Net Core methods are called:
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDeveloperExceptionPage</code>,
-<code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDatabaseErrorPage</code>. No Issue is raised when those calls are disabled by <code>if
-(env.IsDevelopment())</code>.</p>
+<code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDatabaseErrorPage</code>. </p>
+<pre>
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+
+namespace mvcApp
+{
+    public class Startup2
+    {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            // Those calls are Sensitive because it seems that they will run in production
+            app.UseDeveloperExceptionPage(); // Sensitive
+            app.UseDatabaseErrorPage(); // Sensitive
+        }
+    }
+}
+
+</pre>
+<h2>Compliant Solution</h2>
 <pre>
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,12 +55,9 @@ namespace mvcApp
             if (env.IsDevelopment())
             {
                 // The following calls are ok because they are disabled in production
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                app.UseDeveloperExceptionPage(); // Compliant
+                app.UseDatabaseErrorPage(); // Compliant
             }
-            // Those calls are Sensitive because it seems that they will run in production
-            app.UseDeveloperExceptionPage(); // Sensitive
-            app.UseDatabaseErrorPage(); // Sensitive
         }
     }
 }
