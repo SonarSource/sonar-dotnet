@@ -73,7 +73,10 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly Action<SyntaxNode> addNode;
             private readonly ImmutableArray<KnownType> typesWithBinder =
                 ImmutableArray.Create(
-                    KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter);
+                    KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter,
+                    KnownType.System_Runtime_Serialization_NetDataContractSerializer,
+                    KnownType.System_Runtime_Serialization_Formatters_Soap_SoapFormatter,
+                    KnownType.System_Web_UI_ObjectStateFormatter);
 
             public SerializationBinderCheck(AbstractExplodedGraph explodedGraph, Action<SyntaxNode> addNode)
                 : base(explodedGraph)
@@ -103,6 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     return VisitInvocationExpression(invocation, programState);
                 }
+
                 return base.PreProcessInstruction(programPoint, programState);
             }
 
@@ -143,4 +147,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

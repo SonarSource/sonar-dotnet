@@ -19,9 +19,12 @@
  */
 
 extern alias csharp;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -36,13 +39,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RestrictDeserializedTypes() =>
             Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.cs",
                 GetAnalyzer(),
-                ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8,
+                additionalReferences: GetAdditionalReferences());
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             // Symbolic execution analyzers are run by the SymbolicExecutionRunner
             new SymbolicExecutionRunner(
                 new SymbolicExecutionAnalyzerFactory(
                     ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new RestrictDeserializedTypes())));
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            FrameworkMetadataReference.SystemRuntimeSerialization
+            .Union(FrameworkMetadataReference.SystemRuntimeSerializationFormattersSoap)
+            .Union(FrameworkMetadataReference.SystemWeb);
     }
 }
 
