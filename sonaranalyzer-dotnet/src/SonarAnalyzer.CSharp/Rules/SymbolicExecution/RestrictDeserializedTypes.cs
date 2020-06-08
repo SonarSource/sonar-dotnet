@@ -18,14 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Common.Constraints;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -40,27 +44,102 @@ namespace SonarAnalyzer.Rules.CSharp
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
-            new AnalysisContext(explodedGraph, context);
+            new AnalysisContext(explodedGraph);
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            private readonly CSharpExplodedGraph explodedGraph;
-            private readonly SyntaxNodeAnalysisContext context;
+            private readonly List<SyntaxNode> nodes = new List<SyntaxNode>();
 
-            public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+            public AnalysisContext(AbstractExplodedGraph explodedGraph)
             {
-                this.explodedGraph = explodedGraph;
-                this.context = context;
+                explodedGraph.AddExplodedGraphCheck(new SerializationBinderCheck(explodedGraph, AddNode));
             }
 
             public bool SupportsPartialResults => true;
 
-            public IEnumerable<Diagnostic> GetDiagnostics() => Enumerable.Empty<Diagnostic>();
+            public IEnumerable<Diagnostic> GetDiagnostics() =>
+                nodes.Select(node => Diagnostic.Create(rule, node.GetLocation()));
 
             public void Dispose()
             {
                 // Nothing to do here.
             }
+
+            private void AddNode(SyntaxNode syntaxNode) => nodes.Add(syntaxNode);
+        }
+
+        private sealed class SerializationBinderCheck : ExplodedGraphCheck
+        {
+            private readonly Action<SyntaxNode> addNode;
+            private readonly ImmutableArray<KnownType> typesWithBinder =
+                ImmutableArray.Create(
+                    KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter);
+
+            public SerializationBinderCheck(AbstractExplodedGraph explodedGraph, Action<SyntaxNode> addNode)
+                : base(explodedGraph)
+            {
+                this.addNode = addNode ?? throw new ArgumentNullException(nameof(addNode));
+            }
+
+            public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
+                SyntaxNode instruction)
+            {
+                if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
+                {
+                    var typeSymbol = semanticModel.GetTypeInfo(instruction).Type;
+                    if (typeSymbol.IsAny(typesWithBinder))
+                    {
+                        programState = AddInvalidSerializationBinderConstraint(instruction, symbolicValue, programState);
+                    }
+                }
+
+                return base.ObjectCreated(programState, symbolicValue, instruction);
+            }
+
+            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
+            {
+                var instruction = programPoint.Block.Instructions[programPoint.Offset];
+                if (instruction is InvocationExpressionSyntax invocation)
+                {
+                    return VisitInvocationExpression(invocation, programState);
+                }
+                return base.PreProcessInstruction(programPoint, programState);
+            }
+
+            private ProgramState VisitInvocationExpression(InvocationExpressionSyntax invocation, ProgramState programState)
+            {
+                var symbol = semanticModel.GetSymbolInfo(invocation).Symbol.ContainingSymbol;
+                var type = symbol.GetSymbolType();
+                if (type.IsAny(typesWithBinder))
+                {
+                    var symbolicValue = programState.GetSymbolValue(symbol);
+
+                    if (programState.HasConstraint(symbolicValue, InvalidSerializationBinder.Invalid))
+                    {
+                        addNode(invocation);
+                    }
+                }
+
+                // Check constraint and raise issue
+                return programState;
+            }
+
+            private ProgramState AddInvalidSerializationBinderConstraint(SyntaxNode instruction,
+                SymbolicValue symbolicValue, ProgramState programState)
+            {
+                var symbol = semanticModel.GetSymbolInfo(instruction).Symbol.ContainingSymbol;
+
+                programState = programState.StoreSymbolicValue(symbol, symbolicValue);
+
+                return symbol.SetConstraint(InvalidSerializationBinder.Invalid, programState);
+            }
+
+            // ToDo:
+            // - add symbolic value constraint when objects are created   - done
+            // - on property set update binder status
+            //      - check if the binder exists and is not null
+            //      - validate binder
+            // - when Deserialize is called check the binder status       - done
         }
     }
 }

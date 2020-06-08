@@ -30,27 +30,15 @@ namespace SonarAnalyzer.SymbolicExecution
         protected ExplodedGraphCheck(AbstractExplodedGraph explodedGraph)
         {
             this.explodedGraph = explodedGraph;
-            this.semanticModel = explodedGraph.SemanticModel;
+            semanticModel = explodedGraph.SemanticModel;
         }
 
-        public virtual ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
-        {
-            return programState;
-        }
+        public virtual ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState) => programState;
 
-        public virtual ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
-        {
-            return programState;
-        }
+        public virtual ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState) => programState;
 
-        public virtual ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
-        {
-            return programState;
-        }
+        public virtual ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction) => programState;
 
-        public virtual ProgramState ObjectCreating(ProgramState programState, SyntaxNode instruction)
-        {
-            return programState;
-        }
+        public virtual ProgramState ObjectCreating(ProgramState programState, SyntaxNode instruction) => programState;
     }
 }
