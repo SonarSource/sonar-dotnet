@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.CodeAnalysis.CSharp;
@@ -38,17 +37,16 @@ namespace SonarAnalyzer.CBDE
             unsupportedSyntaxes = new Dictionary<SyntaxKind, int>();
         }
 
-        public void AddSupportedFunction()
-        {
-            ++supportedFunctionsCount;
-        }
+        public void AddSupportedFunction() =>
+            supportedFunctionsCount++;
+
         public void AddUnsupportedFunction(SyntaxKind unsupportedSyntax)
         {
-            ++unsupportedFunctionsCount;
-            unsupportedSyntaxes[unsupportedSyntax] = unsupportedSyntaxes.TryGetValue(unsupportedSyntax, out int currentVal) ? ++currentVal : 1;
+            unsupportedFunctionsCount++;
+            unsupportedSyntaxes[unsupportedSyntax] = unsupportedSyntaxes.TryGetValue(unsupportedSyntax, out var currentVal) ? currentVal + 1 : 1;
         }
 
-        public String Dump()
+        public string Dump()
         {
             if (supportedFunctionsCount == 0 && unsupportedFunctionsCount == 0)
             {
@@ -56,9 +54,9 @@ namespace SonarAnalyzer.CBDE
             }
             var metricsStr = new StringBuilder($"exported {supportedFunctionsCount} \n" +
                 $"unsupported {unsupportedFunctionsCount} \n");
-            foreach (KeyValuePair<SyntaxKind, int> entry in unsupportedSyntaxes)
+            foreach (var entry in unsupportedSyntaxes)
             {
-                metricsStr.AppendLine($"{entry.Key.ToString()} {entry.Value}");
+                metricsStr.AppendLine($"{entry.Key} {entry.Value}");
             }
             metricsStr.AppendLine();
             return metricsStr.ToString();

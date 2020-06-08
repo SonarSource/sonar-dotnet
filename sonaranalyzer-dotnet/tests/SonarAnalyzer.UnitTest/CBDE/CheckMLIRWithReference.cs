@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.CBDE
     [TestClass]
     public class CheckMlirWithReference
     {
+        public TestContext TestContext { get; set; } // Set automatically by MsTest
+
         [ClassInitialize]
         public static void checkExecutableExists(TestContext tc)
         {
-            MlirTestUtilities.checkExecutableExists();
+            MlirTestUtilities.CheckExecutableExists();
         }
-
-        public TestContext TestContext { get; set; } // Set automatically by MsTest
 
         [TestMethod]
         public void TestAssignToLocalVarAndParam()
@@ -71,7 +71,6 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
 }
 ";
             MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
-
         }
 
         [TestMethod]
@@ -130,7 +129,6 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
 }
 ";
             MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
-
         }
 
         [TestMethod]
@@ -187,13 +185,9 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
 ^bb2:	// pred: ^bb1
   return
 }
-
-
 ";
             MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
-
         }
-
 
         [TestMethod]
         public void LeftRightShift()
@@ -233,7 +227,6 @@ func @_$invalid$global$code$.f$int$(%arg0: i32) {
 ^bb2:	// pred: ^bb1
   return
 }
-
 ";
             MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
         }
@@ -309,7 +302,48 @@ func @_A.g$int$(%arg0: i32) {
 ^bb2:	// pred: ^bb1
   return
 }
+";
+            MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
+        }
 
+        [TestMethod]
+        public void Int32_Constant()
+        {
+            var code = @"
+void Func() {
+    const int Value = 42;
+    var a = int.MaxValue;
+    var b = int.MinValue;
+    var c = System.Int32.MaxValue;
+    var d = Value;
+}
+";
+            var expected = @"
+func @_$invalid$global$code$.Func$$() {
+  br ^bb1
+^bb1:	// pred: ^bb0
+  %c42_i32 = constant 42 : i32
+  %0 = cbde.alloca i32
+  cbde.store %c42_i32, %0 : memref<i32>
+  %1 = cbde.unknown : i32
+  %c2147483647_i32 = constant 2147483647 : i32
+  %2 = cbde.alloca i32
+  cbde.store %c2147483647_i32, %2 : memref<i32>
+  %3 = cbde.unknown : i32
+  %c-2147483648_i32 = constant -2147483648 : i32
+  %4 = cbde.alloca i32
+  cbde.store %c-2147483648_i32, %4 : memref<i32>
+  %5 = cbde.unknown : i32
+  %c2147483647_i32_0 = constant 2147483647 : i32
+  %6 = cbde.alloca i32
+  cbde.store %c2147483647_i32_0, %6 : memref<i32>
+  %7 = cbde.load %0 : memref<i32>
+  %8 = cbde.alloca i32
+  cbde.store %7, %8 : memref<i32>
+  br ^bb2
+^bb2:	// pred: ^bb1
+  return
+}
 ";
             MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
         }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,46 +18,45 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using System;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.IO;
+using System.Text;
+using System.Threading;
+using System.Xml;
+using System.Xml.Linq;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Threading;
-using System.Xml.Linq;
-using System.Xml;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.CBDE
 {
     public class CbdeHandler
     {
-        private const int processStatPeriodMs = 1000;
-        private const string cbdeOutputFileName = "cbdeSEout.xml";
+        private const int ProcessStatPeriodMs = 1000;
+        private const string CbdeOutputFileName = "cbdeSEout.xml";
 
-        private static bool initialized = false;
+        private static bool initialized;
         // this is the place where the cbde executable is unpacked. It is in a temp folder
         private static string extractedCbdeBinaryPath;
-        private static readonly object logFileLock = new Object();
-        private static readonly object metricsFileLock = new Object();
-        private static readonly object perfFileLock = new Object();
-        private static readonly object staticInitLock = new Object();
+        private static readonly object logFileLock = new object();
+        private static readonly object metricsFileLock = new object();
+        private static readonly object perfFileLock = new object();
+        private static readonly object staticInitLock = new object();
 
-        private readonly Action<String, String, Location, CompilationAnalysisContext> raiseIssue;
+        private readonly Action<string, string, Location, CompilationAnalysisContext> raiseIssue;
         private readonly Func<CompilationAnalysisContext, bool> shouldRunInContext;
         private readonly Func<string> getOutputDirectory;
+
         // This is used by unit tests that want to check the log (whose path is the parameter of this action) contains
         // what is expected
         private readonly Action<string> onCbdeExecution;
-
         protected HashSet<string> csSourceFileNames= new HashSet<string>();
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
-
         private StringBuilder logStringBuilder;
 
         // cbdePath is inside .sonarqube/out/<n>/
@@ -66,7 +65,7 @@ namespace SonarAnalyzer.CBDE
         // cbdeLogFile, cbdeMetricsLogFile and cbdePerfLogFile are inside cbdeProcessSpecificPath
         private string cbdePath;
         // the cbdeExecutablePath is normally the extractedCbdeBinaryPath, but can be different in tests
-        private string cbdeExecutablePath;
+        private readonly string cbdeExecutablePath;
         private string cbdeDirectoryRoot;
         private string cbdeDirectoryAssembly;
         private string cbdeResultsPath;
@@ -74,16 +73,14 @@ namespace SonarAnalyzer.CBDE
         private string cbdeMetricsLogFile;
         private string cbdePerfLogFile;
         private string moreDetailsMessage;
-        private bool emitLog = false;
-
-        // Used for test only
+        private readonly bool emitLog;
 
         public CbdeHandler(SonarAnalysisContext context,
-            Action<String, String, Location, CompilationAnalysisContext> raiseIssue,
+            Action<string, string, Location, CompilationAnalysisContext> raiseIssue,
             Func<CompilationAnalysisContext, bool> shouldRunInContext,
             Func<string> getOutputDirectory,
             string testCbdeBinaryPath = null, //  Used by unit tests
-            Action<String> onCbdeExecution = null) // Used by unit tests
+            Action<string> onCbdeExecution = null) // Used by unit tests
         {
             this.raiseIssue = raiseIssue;
             this.shouldRunInContext = shouldRunInContext;
@@ -100,13 +97,13 @@ namespace SonarAnalyzer.CBDE
             if (testCbdeBinaryPath == null)
             {
                 emitLog = Environment.GetEnvironmentVariables().Contains("SONAR_DOTNET_INTERNAL_LOG_CBDE");
-                this.cbdeExecutablePath = extractedCbdeBinaryPath;
+                cbdeExecutablePath = extractedCbdeBinaryPath;
             }
             else
             {
                 // we are in test mode
                 emitLog = true;
-                this.cbdeExecutablePath = testCbdeBinaryPath;
+                cbdeExecutablePath = testCbdeBinaryPath;
             }
             if (cbdeExecutablePath != null)
             {
@@ -158,7 +155,7 @@ namespace SonarAnalyzer.CBDE
 
         private static void UnpackCbdeExe()
         {
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var assembly = typeof(CbdeHandler).Assembly;
             const string res = "SonarAnalyzer.CBDE.windows.dotnet-symbolic-execution.exe";
             extractedCbdeBinaryPath = Path.Combine(extractedCbdeBinaryPath, "windows/dotnet-symbolic-execution.exe");
             Directory.CreateDirectory(Path.GetDirectoryName(extractedCbdeBinaryPath));
@@ -211,7 +208,7 @@ namespace SonarAnalyzer.CBDE
                     {
                         Log("An exception has occured: " + e.Message + "\n" + e.StackTrace);
                         var message = $@"Top level error in CBDE handling: {e.Message}
-Details: {this.moreDetailsMessage}
+Details: {moreDetailsMessage}
 Inner exception: {e.InnerException}
 Stack trace: {e.StackTrace}";
                         // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
@@ -228,10 +225,9 @@ Stack trace: {e.StackTrace}";
         private string ManglePath(string path)
         {
             path = Path.GetFileNameWithoutExtension(path);
-            int count = 0;
-            fileNameDuplicateNumbering.TryGetValue(path, out count);
+            fileNameDuplicateNumbering.TryGetValue(path, out var count);
             fileNameDuplicateNumbering[path] = ++count;
-            path += "_" + Convert.ToString(count);
+            path += "_" + count.ToString();
             return path;
         }
 
@@ -244,7 +240,7 @@ Stack trace: {e.StackTrace}";
                 Directory.Delete(cbdeDirectoryAssembly, true);
             }
             Directory.CreateDirectory(cbdeDirectoryAssembly);
-            cbdeResultsPath = Path.Combine(cbdeDirectoryAssembly, cbdeOutputFileName);
+            cbdeResultsPath = Path.Combine(cbdeDirectoryAssembly, CbdeOutputFileName);
             logStringBuilder = new StringBuilder();
             LogIfFailure($">> New Cbde Run triggered at {DateTime.Now.ToShortTimeString()}");
         }
@@ -273,33 +269,31 @@ Stack trace: {e.StackTrace}";
 
         private void ExportFunctionMlir(SyntaxTree tree, SemanticModel model, MlirExporterMetrics exporterMetrics, string mlirFileName)
         {
-            using (var mlirStreamWriter = new StreamWriter(Path.Combine(cbdeDirectoryAssembly, mlirFileName)))
+            using var mlirStreamWriter = new StreamWriter(Path.Combine(cbdeDirectoryAssembly, mlirFileName));
+            var perfLog = new StringBuilder();
+            perfLog.AppendLine(tree.GetRoot().GetLocation().GetLineSpan().Path);
+            var mlirExporter = new MlirExporter(mlirStreamWriter, model, exporterMetrics, true);
+            foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
             {
-                StringBuilder perfLog = new StringBuilder();
-                perfLog.AppendLine(tree.GetRoot().GetLocation().GetLineSpan().Path);
-                var mlirExporter = new MlirExporter(mlirStreamWriter, model, exporterMetrics, true);
-                foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
-                {
-                    var watch = System.Diagnostics.Stopwatch.StartNew();
-                    var cpuWatch = ThreadCpuStopWatch.StartNew();
-                    mlirExporter.ExportFunction(method);
-                    perfLog.AppendLine(method.Identifier + " " + watch.ElapsedMilliseconds);
-                    perfLog.AppendLine(method.Identifier + " " + cpuWatch.ElapsedMilliseconds);
-                }
-                PerformanceLog(perfLog.ToString() + "\n");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                var cpuWatch = ThreadCpuStopWatch.StartNew();
+                mlirExporter.ExportFunction(method);
+                perfLog.AppendLine(method.Identifier + " " + watch.ElapsedMilliseconds);
+                perfLog.AppendLine(method.Identifier + " " + cpuWatch.ElapsedMilliseconds);
             }
+            perfLog.AppendLine();
+            PerformanceLog(perfLog.ToString());
         }
 
         private void RunCbdeAndRaiseIssues(CompilationAnalysisContext c)
         {
             Log("Running CBDE");
-            using (Process cbdeProcess = new Process())
+            using (var cbdeProcess = new Process())
             {
                 LogIfFailure("- Cbde process");
                 cbdeProcess.StartInfo.FileName = cbdeExecutablePath;
                 cbdeProcess.StartInfo.WorkingDirectory = cbdeDirectoryAssembly;
                 var cbdeExePerfLogFile = Path.Combine(cbdeDirectoryAssembly, "perfLogFile.log");
-
                 cbdeProcess.StartInfo.Arguments = $"-i \"{cbdeDirectoryAssembly}\" -o \"{cbdeResultsPath}\" -s \"{cbdeExePerfLogFile}\"";
 
                 LogIfFailure($"  * binary_location: '{cbdeProcess.StartInfo.FileName}'");
@@ -313,7 +307,7 @@ Stack trace: {e.StackTrace}";
                 try
                 {
                     cbdeProcess.Start();
-                    while (!cbdeProcess.WaitForExit(processStatPeriodMs))
+                    while (!cbdeProcess.WaitForExit(ProcessStatPeriodMs))
                     {
                         try
                         {
@@ -332,7 +326,7 @@ Stack trace: {e.StackTrace}";
                 {
                     Log("Running CBDE: Cannot start process");
                     ReportEndOfCbdeExecution();
-                    throw new CbdeException($"Exception while running CBDE process: {e.Message}{this.moreDetailsMessage}");
+                    throw new CbdeException($"Exception while running CBDE process: {e.Message}{moreDetailsMessage}");
                 }
 
                 var logString = $@" *exit code: {cbdeProcess.ExitCode}
@@ -359,18 +353,11 @@ Stack trace: {e.StackTrace}";
             ReportEndOfCbdeExecution();
         }
 
-        private void ReportEndOfCbdeExecution()
-        {
-            if (onCbdeExecution != null)
-            {
-                onCbdeExecution(cbdeLogFile);
-            }
-        }
+        private void ReportEndOfCbdeExecution() =>
+            onCbdeExecution?.Invoke(cbdeLogFile);
 
-        private void Cleanup()
-        {
+        private void Cleanup() =>
             logStringBuilder.Clear();
-        }
 
         private void RaiseIssueFromXElement(XElement issue, CompilationAnalysisContext context)
         {
@@ -389,7 +376,7 @@ Stack trace: {e.StackTrace}";
 
         private void LogFailedCbdeRunAndThrow(Process pProcess)
         {
-            StringBuilder failureString = new StringBuilder("CBDE Failure Report :\n  C# souces files involved are:\n");
+            var failureString = new StringBuilder("CBDE Failure Report :\n  C# souces files involved are:\n");
             foreach (var fileName in csSourceFileNames)
             {
                 failureString.Append("  - " + fileName + "\n");
@@ -397,10 +384,10 @@ Stack trace: {e.StackTrace}";
             // we dispose the StreamWriter to unlock the log file
             LogIfFailure($"- parsing json file {cbdeResultsPath}");
             failureString.Append("  content of stderr is:\n" + pProcess.StandardError.ReadToEnd());
-            failureString.Append("  content of the CBDE handler log file is :\n" + logStringBuilder.ToString());
+            failureString.Append("  content of the CBDE handler log file is :\n" + logStringBuilder);
             Log(failureString.ToString());
             ReportEndOfCbdeExecution();
-            throw new CbdeException($"CBDE external process reported an error{this.moreDetailsMessage}");
+            throw new CbdeException($"CBDE external process reported an error{moreDetailsMessage}");
         }
 
         private void RaiseIssuesFromResultFile(CompilationAnalysisContext context)
@@ -418,10 +405,10 @@ Stack trace: {e.StackTrace}";
             {
                 if (exception is XmlException || exception is NullReferenceException)
                 {
-                    LogIfFailure($"- error parsing result file {cbdeResultsPath}: {exception.ToString()}");
+                    LogIfFailure($"- error parsing result file {cbdeResultsPath}: {exception}");
                     Log(logStringBuilder.ToString());
                     ReportEndOfCbdeExecution();
-                    throw new CbdeException($"Error parsing output from CBDE: {exception.Message}{this.moreDetailsMessage}");
+                    throw new CbdeException($"Error parsing output from CBDE: {exception.Message}{moreDetailsMessage}");
                 }
                 ReportEndOfCbdeExecution();
                 throw;
@@ -434,10 +421,8 @@ Stack trace: {e.StackTrace}";
 
             private readonly ProcessThread currentProcessThread;
 
-            public void Reset()
-            {
+            public void Reset() =>
                 totalMsStart = currentProcessThread?.TotalProcessorTime.TotalMilliseconds ?? 0;
-            }
 
             public long ElapsedMilliseconds =>
                 (long)((currentProcessThread?.TotalProcessorTime.TotalMilliseconds ?? -1) - totalMsStart);
@@ -459,10 +444,8 @@ Stack trace: {e.StackTrace}";
                 return null;
             }
 
-            private ThreadCpuStopWatch()
-            {
+            private ThreadCpuStopWatch() =>
                 currentProcessThread = GetCurrentProcessThread();
-            }
 
             // We are copying the interface of the class StopWatch
             public static ThreadCpuStopWatch StartNew()
