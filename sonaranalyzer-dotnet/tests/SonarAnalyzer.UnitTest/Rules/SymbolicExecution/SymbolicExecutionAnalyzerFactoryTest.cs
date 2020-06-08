@@ -41,6 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         private const string ConditionEvaluatesToConstantCodeSmell = "S2589";
         private const string InvalidCastToInterface = "S1944";
         private const string NullPointerDereference = "S2259";
+        private const string RestrictDeserializedTypes = "S5773";
 
         [TestMethod]
         public void SupportedDiagnostics_ReturnsSymbolicExecutionRuleDescriptors()
@@ -57,7 +58,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 ConditionEvaluatesToConstantBug,
                 ConditionEvaluatesToConstantCodeSmell,
                 InvalidCastToInterface,
-                NullPointerDereference
+                NullPointerDereference,
+                RestrictDeserializedTypes
             });
         }
 
@@ -80,7 +82,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 {ConditionEvaluatesToConstantBug, ReportDiagnostic.Suppress},
                 {ConditionEvaluatesToConstantCodeSmell, ReportDiagnostic.Suppress},
                 {InvalidCastToInterface, ReportDiagnostic.Suppress},
-                {NullPointerDereference, ReportDiagnostic.Suppress}
+                {NullPointerDereference, ReportDiagnostic.Suppress},
+                {RestrictDeserializedTypes, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
@@ -104,7 +107,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 {ConditionEvaluatesToConstantBug, ReportDiagnostic.Suppress},
                 {ConditionEvaluatesToConstantCodeSmell, ReportDiagnostic.Suppress},
                 {InvalidCastToInterface, ReportDiagnostic.Suppress},
-                {NullPointerDereference, ReportDiagnostic.Suppress}
+                {NullPointerDereference, ReportDiagnostic.Suppress},
+                {RestrictDeserializedTypes, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
