@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                var binderSymbol = semanticModel.GetSymbolInfo(assignmentExpression.Right).Symbol.ContainingType;
+                var binderSymbol = semanticModel.GetSymbolInfo(assignmentExpression.Right).Symbol;
                 var binderSymbolValue = programState.GetSymbolValue(binderSymbol);
                 if (binderSymbolValue != null &&
                     programState.HasConstraint(binderSymbolValue, ObjectConstraint.Null))

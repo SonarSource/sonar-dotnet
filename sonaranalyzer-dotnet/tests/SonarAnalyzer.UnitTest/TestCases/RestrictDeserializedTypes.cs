@@ -34,6 +34,7 @@ namespace Tests.Diagnostics
         {
             var safeBinder = new SafeBinderStatementWithReturnNull();
             var unsafeBinder = new UnsafeBinder();
+            SerializationBinder nullBinder = null;
 
             var formatter1 = new BinaryFormatter();
             formatter1.Binder = safeBinder;
@@ -42,6 +43,10 @@ namespace Tests.Diagnostics
             var formatter2 = new BinaryFormatter();
             formatter2.Binder = unsafeBinder;
             formatter2.Deserialize(stream); // Noncompliant: unsafe binder used
+
+            var formatter3 = new BinaryFormatter();
+            formatter3.Binder = nullBinder;
+            formatter3.Deserialize(stream); // Noncompliant: the binder is null
         }
 
         internal void BinderCases(MemoryStream memoryStream)
