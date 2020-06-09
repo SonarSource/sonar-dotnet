@@ -70,13 +70,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class SerializationBinderCheck : ExplodedGraphCheck
         {
-            private readonly Action<SyntaxNode> addNode;
-            private readonly ImmutableArray<KnownType> typesWithBinder =
+            private static readonly ImmutableArray<KnownType> typesWithBinder =
                 ImmutableArray.Create(
                     KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter,
                     KnownType.System_Runtime_Serialization_NetDataContractSerializer,
                     KnownType.System_Runtime_Serialization_Formatters_Soap_SoapFormatter,
                     KnownType.System_Web_UI_ObjectStateFormatter);
+
+            private readonly Action<SyntaxNode> addNode;
 
             public SerializationBinderCheck(AbstractExplodedGraph explodedGraph, Action<SyntaxNode> addNode)
                 : base(explodedGraph)
@@ -90,9 +91,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
                 {
                     var typeSymbol = semanticModel.GetTypeInfo(instruction).Type;
-                    if (typeSymbol.IsAny(typesWithBinder))
+                    if (IsFormatterWithBinder(typeSymbol))
                     {
-                        programState = AddInvalidSerializationBinderConstraint(instruction, symbolicValue, programState);
+                        // These types are marked as invalid on creation since they are insecure by default.
+                        programState = SetInvalidSerializationBinderConstraint(instruction, symbolicValue, programState);
+                    }
+
+                    // ? is this the right moment to validate the binder ?
+                    // can this be cached?
+                    if (IsSerializationBinder(typeSymbol))
+                    {
+                        var declaration = GetBindToTypeMethodDeclaration(instruction);
+                        if (declaration != null)
+                        {
+                            var isValid = declaration.ThrowsOrReturnsNull();
+                            var symbol = semanticModel.GetSymbolInfo(instruction).Symbol.ContainingType;
+                            programState = programState.StoreSymbolicValue(symbol, symbolicValue);
+                            return symbol.SetConstraint(isValid ? SerializationBinder.Valid : SerializationBinder.Invalid, programState);
+                        }
                     }
                 }
 
@@ -102,48 +118,127 @@ namespace SonarAnalyzer.Rules.CSharp
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
                 var instruction = programPoint.Block.Instructions[programPoint.Offset];
-                if (instruction is InvocationExpressionSyntax invocation)
+
+                programState = instruction switch
                 {
-                    return VisitInvocationExpression(invocation, programState);
-                }
+                    InvocationExpressionSyntax invocation => VisitInvocationExpression(invocation, programState),
+                    AssignmentExpressionSyntax assignmentExpressionSyntax => VisitAssignmentExpression(assignmentExpressionSyntax, programState),
+                    _ => programState
+                };
 
                 return base.PreProcessInstruction(programPoint, programState);
             }
 
             private ProgramState VisitInvocationExpression(InvocationExpressionSyntax invocation, ProgramState programState)
             {
+                if (!IsDeserializeMethod(invocation))
+                {
+                    return programState;
+                }
+
                 var symbol = semanticModel.GetSymbolInfo(invocation).Symbol.ContainingSymbol;
-                var type = symbol.GetSymbolType();
-                if (type.IsAny(typesWithBinder))
+                if (IsFormatterWithBinder(symbol.GetSymbolType()))
                 {
                     var symbolicValue = programState.GetSymbolValue(symbol);
 
-                    if (programState.HasConstraint(symbolicValue, InvalidSerializationBinder.Invalid))
+                    if (programState.HasConstraint(symbolicValue, SerializationBinder.Invalid))
                     {
                         addNode(invocation);
                     }
                 }
 
-                // Check constraint and raise issue
                 return programState;
             }
 
-            private ProgramState AddInvalidSerializationBinderConstraint(SyntaxNode instruction,
+            private ProgramState VisitAssignmentExpression(AssignmentExpressionSyntax assignmentExpression, ProgramState programState)
+            {
+                if (!(assignmentExpression.Left is MemberAccessExpressionSyntax memberAccess) || !IsBinderProperty(memberAccess))
+                {
+                    return programState;
+                }
+
+                var typeSymbol = semanticModel.GetTypeInfo(memberAccess.Expression).Type;
+                if (!typeSymbol.IsAny(typesWithBinder))
+                {
+                    return programState;
+                }
+
+                var formatterSymbol = semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
+                var formatterSymbolValue = programState.GetSymbolValue(formatterSymbol);
+                if (formatterSymbolValue == null)
+                {
+                    return programState;
+                }
+
+                var binderSymbol = semanticModel.GetSymbolInfo(assignmentExpression.Right).Symbol.ContainingType;
+                var binderSymbolValue = programState.GetSymbolValue(binderSymbol);
+                if (binderSymbolValue == null)
+                {
+                    return programState;
+                }
+
+                // Copy the symbolic execution constraint from binder to the formatter.
+                if (programState.HasConstraint(binderSymbolValue, SerializationBinder.Valid))
+                {
+                    return programState.SetConstraint(formatterSymbolValue, SerializationBinder.Valid);
+                }
+
+                return programState.HasConstraint(binderSymbolValue, SerializationBinder.Invalid)
+                    ? programState.SetConstraint(formatterSymbolValue, SerializationBinder.Invalid)
+                    : programState;
+            }
+
+            private ProgramState SetInvalidSerializationBinderConstraint(SyntaxNode instruction,
                 SymbolicValue symbolicValue, ProgramState programState)
             {
                 var symbol = semanticModel.GetSymbolInfo(instruction).Symbol.ContainingSymbol;
 
                 programState = programState.StoreSymbolicValue(symbol, symbolicValue);
 
-                return symbol.SetConstraint(InvalidSerializationBinder.Invalid, programState);
+                return symbol.SetConstraint(SerializationBinder.Invalid, programState);
             }
 
+            private MethodDeclarationSyntax GetBindToTypeMethodDeclaration(SyntaxNode instruction) =>
+                semanticModel.GetSymbolInfo(instruction)
+                    .Symbol
+                    .ContainingSymbol
+                    .DeclaringSyntaxReferences
+                    .SelectMany(GetDescendantNodes)
+                    .OfType<MethodDeclarationSyntax>()
+                    .FirstOrDefault(IsBindToType);
+
+            private static IEnumerable<SyntaxNode> GetDescendantNodes(SyntaxReference syntaxReference) =>
+                syntaxReference.SyntaxTree.GetRoot().FindNode(syntaxReference.Span).DescendantNodes();
+
+            private static bool IsBindToType(MethodDeclarationSyntax methodDeclaration) =>
+                methodDeclaration.Identifier.Text == "BindToType" &&
+                methodDeclaration.ReturnType.NameIs("Type") &&
+                methodDeclaration.ParameterList.Parameters.Count == 2 &&
+                methodDeclaration.ParameterList.Parameters[0].IsString() &&
+                methodDeclaration.ParameterList.Parameters[1].IsString();
+
+            private static bool IsFormatterWithBinder(ITypeSymbol typeSymbol) =>
+                typeSymbol.IsAny(typesWithBinder);
+
+            private static bool IsSerializationBinder(ITypeSymbol typeSymbol) =>
+                typeSymbol.DerivesFrom(KnownType.System_Runtime_Serialization_SerializationBinder);
+
+            private static bool IsBinderProperty(ExpressionSyntax memberAccess) =>
+                memberAccess.NameIs("Binder");
+
+            private static bool IsDeserializeMethod(InvocationExpressionSyntax invocation) =>
+                invocation.Expression.NameIs("Deserialize");
+
+            // - Done: add symbolic value constraint when serializers are created
+            // - Done: when Deserialize is called check the binder status
+            // - Done: check if the binder is valid
+
             // ToDo:
-            // - add symbolic value constraint when objects are created   - done
+            // - in progress: when binder is created add constraint (valid or invalid)
             // - on property set update binder status
             //      - check if the binder exists and is not null
-            //      - validate binder
-            // - when Deserialize is called check the binder status       - done
+            // - add test cases
+            // - add integration tests
         }
     }
 }

@@ -18,25 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Common.Constraints
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+namespace SonarAnalyzer.Helpers
 {
-    internal sealed class InvalidSerializationBinder : SymbolicValueConstraint
+    internal static class ParameterSyntaxExtensions
     {
-        internal static readonly InvalidSerializationBinder Invalid = new InvalidSerializationBinder();
-        internal static readonly InvalidSerializationBinder Valid = new InvalidSerializationBinder();
+        /// <summary>
+        /// Returns true if the parameter is of type string. For performance reasons the check is done at the syntax level.
+        /// </summary>
+        internal static bool IsString(this ParameterSyntax parameterSyntax) =>
+            IsString(parameterSyntax.Type.ToString());
 
-        private InvalidSerializationBinder()
-        {
-        }
-
-        public override SymbolicValueConstraint OppositeForLogicalNot =>
-            this == Valid
-                ? Invalid
-                : Valid;
-
-        public override string ToString() =>
-            this == Valid
-                ? "Valid"
-                : "Invalid";
+        private static bool IsString(string parameterTypeName) =>
+            parameterTypeName == "string" ||
+            parameterTypeName == "String" ||
+            parameterTypeName == "System.String";
     }
 }

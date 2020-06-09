@@ -37,7 +37,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypes() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.cs",
+            Verifier.VerifyAnalyzer(new []
+                {
+                    @"TestCases\RestrictDeserializedTypes.cs",
+                    @"TestCases\RestrictDeserializedTypes.Binders.cs"
+                },
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetAdditionalReferences());

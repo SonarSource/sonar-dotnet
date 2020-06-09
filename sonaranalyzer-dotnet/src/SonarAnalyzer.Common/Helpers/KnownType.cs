@@ -315,6 +315,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_Serialization_OnSerializedAttribute = new KnownType("System.Runtime.Serialization.OnSerializedAttribute");
         internal static readonly KnownType System_Runtime_Serialization_OnSerializingAttribute = new KnownType("System.Runtime.Serialization.OnSerializingAttribute");
         internal static readonly KnownType System_Runtime_Serialization_OptionalFieldAttribute = new KnownType("System.Runtime.Serialization.OptionalFieldAttribute");
+        internal static readonly KnownType System_Runtime_Serialization_SerializationBinder = new KnownType("System.Runtime.Serialization.SerializationBinder");
         internal static readonly KnownType System_Runtime_Serialization_SerializationInfo = new KnownType("System.Runtime.Serialization.SerializationInfo");
         internal static readonly KnownType System_Runtime_Serialization_StreamingContext = new KnownType("System.Runtime.Serialization.StreamingContext");
         internal static readonly KnownType System_SByte = new KnownType(SpecialType.System_SByte, "sbyte");
