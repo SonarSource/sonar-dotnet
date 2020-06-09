@@ -22,21 +22,21 @@ namespace SonarAnalyzer.SymbolicExecution.Common.Constraints
 {
     internal sealed class SerializationBinder : SymbolicValueConstraint
     {
-        internal static readonly SerializationBinder Invalid = new SerializationBinder();
-        internal static readonly SerializationBinder Valid = new SerializationBinder();
+        internal static readonly SerializationBinder Unsafe = new SerializationBinder();
+        internal static readonly SerializationBinder Safe = new SerializationBinder();
 
         private SerializationBinder()
         {
         }
 
         public override SymbolicValueConstraint OppositeForLogicalNot =>
-            this == Valid
-                ? Invalid
-                : Valid;
+            this == Safe
+                ? Unsafe
+                : Safe;
 
         public override string ToString() =>
-            this == Valid
-                ? "Valid"
-                : "Invalid";
+            this == Safe
+                ? "Safe"
+                : "Unsafe";
     }
 }

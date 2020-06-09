@@ -30,6 +30,7 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Common.Constraints;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -96,20 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsFormatterWithBinder(typeSymbol))
                     {
                         // These types are marked as invalid on creation since they are insecure by default.
-                        programState = SetInvalidSerializationBinderConstraint(instruction, symbolicValue, programState);
-                    }
-
-                    // ToDo: ? is this the right moment to validate the binder ?
-                    if (IsSerializationBinder(typeSymbol))
-                    {
-                        var symbol = semanticModel.GetSymbolInfo(instruction).Symbol.ContainingType;
-                        programState = programState.StoreSymbolicValue(symbol, symbolicValue);
-
-                        var constraint = IsBinderValid(instruction, symbol)
-                            ? SerializationBinder.Valid
-                            : SerializationBinder.Invalid;
-
-                        programState = symbol.SetConstraint(constraint , programState);
+                        programState = SetUnsafeSerializationBinderConstraint(instruction, symbolicValue, programState);
                     }
                 }
 
@@ -142,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var formatterSymbolValue = programState.GetSymbolValue(formatterSymbol);
 
-                    if (programState.HasConstraint(formatterSymbolValue, SerializationBinder.Invalid))
+                    if (programState.HasConstraint(formatterSymbolValue, SerializationBinder.Unsafe))
                     {
                         addNode(invocation);
                     }
@@ -159,7 +147,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var typeSymbol = semanticModel.GetTypeInfo(memberAccess.Expression).Type;
-                if (!typeSymbol.IsAny(typesWithBinder))
+                if (!IsFormatterWithBinder(typeSymbol))
                 {
                     return programState;
                 }
@@ -173,33 +161,31 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var binderSymbol = semanticModel.GetSymbolInfo(assignmentExpression.Right).Symbol.ContainingType;
                 var binderSymbolValue = programState.GetSymbolValue(binderSymbol);
-                if (binderSymbolValue == null)
+                if (binderSymbolValue != null &&
+                    programState.HasConstraint(binderSymbolValue, ObjectConstraint.Null))
                 {
-                    return programState;
+                    // The formatter is considered unsafe if the binder is null.
+                    return programState.SetConstraint(formatterSymbolValue, SerializationBinder.Unsafe);
                 }
 
-                // Copy the symbolic execution constraint from binder to the formatter.
-                if (programState.HasConstraint(binderSymbolValue, SerializationBinder.Valid))
-                {
-                    return programState.SetConstraint(formatterSymbolValue, SerializationBinder.Valid);
-                }
+                var constraint = IsBinderSafe(assignmentExpression.Right, binderSymbol)
+                    ? SerializationBinder.Safe
+                    : SerializationBinder.Unsafe;
 
-                return programState.HasConstraint(binderSymbolValue, SerializationBinder.Invalid)
-                    ? programState.SetConstraint(formatterSymbolValue, SerializationBinder.Invalid)
-                    : programState;
+                return programState.SetConstraint(formatterSymbolValue, constraint);
             }
 
-            private ProgramState SetInvalidSerializationBinderConstraint(SyntaxNode instruction,
+            private ProgramState SetUnsafeSerializationBinderConstraint(SyntaxNode instruction,
                 SymbolicValue symbolicValue, ProgramState programState)
             {
                 var symbol = semanticModel.GetSymbolInfo(instruction).Symbol.ContainingSymbol;
 
                 programState = programState.StoreSymbolicValue(symbol, symbolicValue);
 
-                return symbol.SetConstraint(SerializationBinder.Invalid, programState);
+                return symbol.SetConstraint(SerializationBinder.Unsafe, programState);
             }
 
-            private bool IsBinderValid(SyntaxNode instruction, ITypeSymbol symbol) =>
+            private bool IsBinderSafe(SyntaxNode instruction, ITypeSymbol symbol) =>
                 binderValidityMap.GetOrAdd(symbol, typeSymbol =>
                 {
                     var declaration = GetBindToTypeMethodDeclaration(instruction);
@@ -230,9 +216,6 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool IsFormatterWithBinder(ITypeSymbol typeSymbol) =>
                 typeSymbol.IsAny(typesWithBinder);
 
-            private static bool IsSerializationBinder(ITypeSymbol typeSymbol) =>
-                typeSymbol.DerivesFrom(KnownType.System_Runtime_Serialization_SerializationBinder);
-
             private static bool IsBinderProperty(ExpressionSyntax memberAccess) =>
                 memberAccess.NameIs("Binder");
 
@@ -244,7 +227,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // - Done: check if the binder is valid
 
             // ToDo:
-            // - in progress: when binder is created add constraint (valid or invalid)
+            // - in progress: when binder is created add constraint (safe or unsafe)
             // - on property set update binder status
             //      - check if the binder exists and is not null
             // - add test cases
