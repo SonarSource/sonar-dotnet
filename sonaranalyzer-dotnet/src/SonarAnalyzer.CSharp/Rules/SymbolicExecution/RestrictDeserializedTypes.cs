@@ -168,7 +168,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState.SetConstraint(formatterSymbolValue, SerializationBinder.Unsafe);
                 }
 
-                var constraint = IsBinderSafe(assignmentExpression.Right, binderSymbol)
+                var binderType = semanticModel.GetTypeInfo(assignmentExpression.Right).Type;
+                var constraint = IsBinderSafe(binderType)
                     ? SerializationBinder.Safe
                     : SerializationBinder.Unsafe;
 
@@ -185,20 +186,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 return symbol.SetConstraint(SerializationBinder.Unsafe, programState);
             }
 
-            private bool IsBinderSafe(SyntaxNode instruction, ITypeSymbol symbol) =>
+            private bool IsBinderSafe(ITypeSymbol symbol) =>
                 binderValidityMap.GetOrAdd(symbol, typeSymbol =>
                 {
-                    var declaration = GetBindToTypeMethodDeclaration(instruction);
+                    var declaration = GetBindToTypeMethodDeclaration(typeSymbol);
 
                     // The binder is considered safe by default (e.g. if the declaration cannot be found).
                     return declaration == null || declaration.ThrowsOrReturnsNull();
                 });
 
-            private MethodDeclarationSyntax GetBindToTypeMethodDeclaration(SyntaxNode instruction) =>
-                semanticModel.GetSymbolInfo(instruction)
-                    .Symbol
-                    .ContainingSymbol
-                    .DeclaringSyntaxReferences
+            private static MethodDeclarationSyntax GetBindToTypeMethodDeclaration(ISymbol symbol) =>
+                symbol.DeclaringSyntaxReferences
                     .SelectMany(GetDescendantNodes)
                     .OfType<MethodDeclarationSyntax>()
                     .FirstOrDefault(IsBindToType);
@@ -224,15 +222,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // - Done: add symbolic value constraint when serializers are created
             // - Done: when Deserialize is called check the binder status
+            // - Done: check if the binder exists and is not null
             // - Done: check if the binder is valid
 
             // ToDo:
-            // - in progress: when binder is created add constraint (safe or unsafe)
-            // - on property set update binder status
-            //      - check if the binder exists and is not null
+            // - add handling for null coalescence
             // - add test cases
             // - add integration tests
-            // - add handling for null coalescence
         }
     }
 }

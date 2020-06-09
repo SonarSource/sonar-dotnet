@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Tests.Diagnostics
 {
-    internal sealed class ValidBinderStatementWithReturnNull : SerializationBinder
+    internal sealed class SafeBinderStatementWithReturnNull : SerializationBinder
     {
         public override Type BindToType(String assemblyName, System.String typeName)
         {
@@ -17,7 +17,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    internal sealed class ValidBinderExpressionWithNull : SerializationBinder
+    internal sealed class SafeBinderExpressionWithNull : SerializationBinder
     {
         public override Type BindToType(string assemblyName, string typeName) =>
             typeName == "typeT"
@@ -25,7 +25,7 @@ namespace Tests.Diagnostics
                 : null;
     }
 
-    internal sealed class ValidBinderWithThrowStatement : SerializationBinder
+    internal sealed class SafeBinderWithThrowStatement : SerializationBinder
     {
         public override Type BindToType(string assemblyName, string typeName)
         {
@@ -36,7 +36,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    internal sealed class ValidBinderWithThrowExpression : SerializationBinder
+    internal sealed class SafeBinderWithThrowExpression : SerializationBinder
     {
         public override Type BindToType(string assemblyName, string typeName) =>
             typeName == "typeT"
@@ -44,7 +44,7 @@ namespace Tests.Diagnostics
                 : throw new SerializationException("Only typeT is allowed");
     }
 
-    internal sealed class InvalidBinder : SerializationBinder
+    internal sealed class UnsafeBinder : SerializationBinder
     {
         public override Type BindToType(string assemblyName, string typeName)
         {
@@ -52,7 +52,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    internal sealed class InvalidBinderExpressionBody : SerializationBinder
+    internal sealed class UnsafeBinderExpressionBody : SerializationBinder
     {
         public override Type BindToType(string assemblyName, string typeName) =>
             Assembly.Load(assemblyName).GetType(typeName);
