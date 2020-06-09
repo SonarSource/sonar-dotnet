@@ -77,6 +77,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     KnownType.System_Runtime_Serialization_Formatters_Soap_SoapFormatter,
                     KnownType.System_Web_UI_ObjectStateFormatter);
 
+            private readonly Dictionary<ITypeSymbol, bool> binderValidityMap = new Dictionary<ITypeSymbol, bool>();
+
             private readonly Action<SyntaxNode> addNode;
 
             public SerializationBinderCheck(AbstractExplodedGraph explodedGraph, Action<SyntaxNode> addNode)
@@ -97,18 +99,17 @@ namespace SonarAnalyzer.Rules.CSharp
                         programState = SetInvalidSerializationBinderConstraint(instruction, symbolicValue, programState);
                     }
 
-                    // ? is this the right moment to validate the binder ?
-                    // can this be cached?
+                    // ToDo: ? is this the right moment to validate the binder ?
                     if (IsSerializationBinder(typeSymbol))
                     {
-                        var declaration = GetBindToTypeMethodDeclaration(instruction);
-                        if (declaration != null)
-                        {
-                            var isValid = declaration.ThrowsOrReturnsNull();
-                            var symbol = semanticModel.GetSymbolInfo(instruction).Symbol.ContainingType;
-                            programState = programState.StoreSymbolicValue(symbol, symbolicValue);
-                            return symbol.SetConstraint(isValid ? SerializationBinder.Valid : SerializationBinder.Invalid, programState);
-                        }
+                        var symbol = semanticModel.GetSymbolInfo(instruction).Symbol.ContainingType;
+                        programState = programState.StoreSymbolicValue(symbol, symbolicValue);
+
+                        var constraint = IsBinderValid(instruction, symbol)
+                            ? SerializationBinder.Valid
+                            : SerializationBinder.Invalid;
+
+                        programState = symbol.SetConstraint(constraint , programState);
                     }
                 }
 
@@ -136,12 +137,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                var symbol = semanticModel.GetSymbolInfo(invocation).Symbol.ContainingSymbol;
-                if (IsFormatterWithBinder(symbol.GetSymbolType()))
+                var formatterSymbol = semanticModel.GetSymbolInfo(invocation).Symbol.ContainingSymbol;
+                if (IsFormatterWithBinder(formatterSymbol.GetSymbolType()))
                 {
-                    var symbolicValue = programState.GetSymbolValue(symbol);
+                    var formatterSymbolValue = programState.GetSymbolValue(formatterSymbol);
 
-                    if (programState.HasConstraint(symbolicValue, SerializationBinder.Invalid))
+                    if (programState.HasConstraint(formatterSymbolValue, SerializationBinder.Invalid))
                     {
                         addNode(invocation);
                     }
@@ -198,6 +199,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 return symbol.SetConstraint(SerializationBinder.Invalid, programState);
             }
 
+            private bool IsBinderValid(SyntaxNode instruction, ITypeSymbol symbol) =>
+                binderValidityMap.GetOrAdd(symbol, typeSymbol =>
+                {
+                    var declaration = GetBindToTypeMethodDeclaration(instruction);
+
+                    // The binder is considered safe by default (e.g. if the declaration cannot be found).
+                    return declaration == null || declaration.ThrowsOrReturnsNull();
+                });
+
             private MethodDeclarationSyntax GetBindToTypeMethodDeclaration(SyntaxNode instruction) =>
                 semanticModel.GetSymbolInfo(instruction)
                     .Symbol
@@ -239,6 +249,7 @@ namespace SonarAnalyzer.Rules.CSharp
             //      - check if the binder exists and is not null
             // - add test cases
             // - add integration tests
+            // - add handling for null coalescence
         }
     }
 }
