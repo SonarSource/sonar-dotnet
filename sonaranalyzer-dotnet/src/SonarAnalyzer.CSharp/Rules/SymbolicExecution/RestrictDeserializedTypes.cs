@@ -71,6 +71,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class SerializationBinderCheck : ExplodedGraphCheck
         {
+            private const int BindToTypeParameterCount = 2;
+
             private static readonly ImmutableArray<KnownType> typesWithBinder =
                 ImmutableArray.Create(
                     KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter,
@@ -208,7 +210,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool IsBindToType(MethodDeclarationSyntax methodDeclaration) =>
                 methodDeclaration.Identifier.Text == "BindToType" &&
                 methodDeclaration.ReturnType.NameIs("Type") &&
-                methodDeclaration.ParameterList.Parameters.Count == 2 &&
+                methodDeclaration.ParameterList.Parameters.Count == BindToTypeParameterCount &&
                 methodDeclaration.ParameterList.Parameters[0].IsString() &&
                 methodDeclaration.ParameterList.Parameters[1].IsString();
 
