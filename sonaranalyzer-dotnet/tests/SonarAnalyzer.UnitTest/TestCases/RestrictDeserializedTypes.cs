@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
             new ObjectStateFormatter().Deserialize(new MemoryStream()); // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
         }
 
-        internal void BinderAsVariable(Stream stream)
+        internal void BinderAsVariable(Stream stream, bool condition)
         {
             var safeBinder = new SafeBinderStatementWithReturnNull();
             var unsafeBinder = new UnsafeBinder();
@@ -47,6 +47,32 @@ namespace Tests.Diagnostics
             var formatter3 = new BinaryFormatter();
             formatter3.Binder = nullBinder;
             formatter3.Deserialize(stream); // Noncompliant: the binder is null
+
+            var possibleNullBinder = condition ? null : new SafeBinderStatementWithReturnNull();
+            var formatter4 = new BinaryFormatter();
+            formatter4.Binder = possibleNullBinder;
+            formatter4.Deserialize(stream); // Noncompliant: the binder can be null
+
+            var formatter5 = new BinaryFormatter();
+            if (condition)
+            {
+                formatter5.Binder = new SafeBinderStatementWithReturnNull();
+            }
+            formatter5.Deserialize(stream); // Noncompliant: the binder can be null
+        }
+
+        internal void DeserializeOnExpression(MemoryStream memoryStream, bool condition)
+        {
+            new BinaryFormatter().Deserialize(memoryStream); // Noncompliant - Unsafe by default
+            new BinaryFormatter {Binder = null}.Deserialize(memoryStream); // Noncompliant - Unsafe when the binder is null
+            (condition ? new BinaryFormatter() : null).Deserialize(memoryStream); // Noncompliant - Unsafe in ternary operator
+            BinaryFormatter bin = null;
+            (bin ??= new BinaryFormatter()).Deserialize(memoryStream); // Noncompliant - unsafe in null coalescence
+            new BinaryFormatter {Binder = new SafeBinderStatementWithReturnNull()}.Deserialize(memoryStream); // safe binder set in initializer
+            new BinaryFormatter {Binder = new UnsafeBinder()}.Deserialize(memoryStream); // Noncompliant - unsafe binder set in initializer
+            (condition
+                ? new BinaryFormatter {Binder = new SafeBinderStatementWithReturnNull()}
+                : new BinaryFormatter {Binder = new SafeBinderWithThrowStatement()}).Deserialize(memoryStream); // Safe in ternary operator
         }
 
         internal void BinderCases(MemoryStream memoryStream)

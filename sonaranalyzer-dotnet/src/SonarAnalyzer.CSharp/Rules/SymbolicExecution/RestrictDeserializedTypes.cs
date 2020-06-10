@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                nodes.Select(node => Diagnostic.Create(rule, node.GetLocation()));
+                nodes.Distinct().Select(node => Diagnostic.Create(rule, node.GetLocation()));
 
             public void Dispose()
             {
@@ -91,13 +91,13 @@ namespace SonarAnalyzer.Rules.CSharp
             public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
                 SyntaxNode instruction)
             {
-                if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
+                if (instruction is ObjectCreationExpressionSyntax objectCreation)
                 {
                     var typeSymbol = semanticModel.GetTypeInfo(instruction).Type;
-                    if (IsFormatterWithBinder(typeSymbol))
+                    if (IsFormatterWithBinder(typeSymbol) &&
+                        !HasSafeBinderInitialization(objectCreation.Initializer))
                     {
-                        // These types are marked as invalid on creation since they are insecure by default.
-                        programState = SetUnsafeSerializationBinderConstraint(instruction, symbolicValue, programState);
+                        programState = programState.SetConstraint(symbolicValue, SerializationBinder.Unsafe);
                     }
                 }
 
@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 programState = instruction switch
                 {
-                    InvocationExpressionSyntax invocation => VisitInvocationExpression(invocation, programState),
+                    MemberAccessExpressionSyntax memberAccess => VisitMemberAccess(memberAccess, programState),
                     AssignmentExpressionSyntax assignmentExpressionSyntax => VisitAssignmentExpression(assignmentExpressionSyntax, programState),
                     _ => programState
                 };
@@ -118,21 +118,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 return base.PreProcessInstruction(programPoint, programState);
             }
 
-            private ProgramState VisitInvocationExpression(InvocationExpressionSyntax invocation, ProgramState programState)
+            private ProgramState VisitMemberAccess(MemberAccessExpressionSyntax memberAccess, ProgramState programState)
             {
-                if (!IsDeserializeMethod(invocation))
+                if (IsFormatterDeserialize(memberAccess) && programState.HasValue)
                 {
-                    return programState;
-                }
+                    // If Deserialize is called on an expression which returns a formatter (e.g. new BinaryFormatter().Deserialize()),
+                    // the symbolic value corresponding to the returned value will be available on the top of the stack.
+                    var symbolValue = programState.PeekValue();
 
-                var formatterSymbol = semanticModel.GetSymbolInfo(invocation).Symbol.ContainingSymbol;
-                if (IsFormatterWithBinder(formatterSymbol.GetSymbolType()))
-                {
-                    var formatterSymbolValue = programState.GetSymbolValue(formatterSymbol);
-
-                    if (programState.HasConstraint(formatterSymbolValue, SerializationBinder.Unsafe))
+                    if (programState.HasConstraint(symbolValue, SerializationBinder.Unsafe))
                     {
-                        addNode(invocation);
+                        addNode(memberAccess);
                     }
                 }
 
@@ -176,14 +172,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 return programState.SetConstraint(formatterSymbolValue, constraint);
             }
 
-            private ProgramState SetUnsafeSerializationBinderConstraint(SyntaxNode instruction,
-                SymbolicValue symbolicValue, ProgramState programState)
+            private bool HasSafeBinderInitialization(InitializerExpressionSyntax initializer)
             {
-                var symbol = semanticModel.GetSymbolInfo(instruction).Symbol.ContainingSymbol;
+                var binderAssignment = initializer?.Expressions
+                    .OfType<AssignmentExpressionSyntax>()
+                    .SingleOrDefault(assignment => IsBinderProperty(assignment.Left));
 
-                programState = programState.StoreSymbolicValue(symbol, symbolicValue);
+                if (binderAssignment == null)
+                {
+                    return false;
+                }
 
-                return symbol.SetConstraint(SerializationBinder.Unsafe, programState);
+                var typeSymbol = semanticModel.GetTypeInfo(binderAssignment.Right).Type;
+                return typeSymbol != null && IsBinderSafe(typeSymbol);
             }
 
             private bool IsBinderSafe(ITypeSymbol symbol) =>
@@ -211,14 +212,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodDeclaration.ParameterList.Parameters[0].IsString() &&
                 methodDeclaration.ParameterList.Parameters[1].IsString();
 
+            private bool IsFormatterDeserialize(MemberAccessExpressionSyntax memberAccess) =>
+                IsDeserializeMethod(memberAccess) &&
+                semanticModel.GetTypeInfo(memberAccess.Expression).Type is {} typeSymbol &&
+                IsFormatterWithBinder(typeSymbol);
+
             private static bool IsFormatterWithBinder(ITypeSymbol typeSymbol) =>
                 typeSymbol.IsAny(typesWithBinder);
 
-            private static bool IsBinderProperty(ExpressionSyntax memberAccess) =>
-                memberAccess.NameIs("Binder");
+            private static bool IsBinderProperty(ExpressionSyntax expression) =>
+                expression.NameIs("Binder");
 
-            private static bool IsDeserializeMethod(InvocationExpressionSyntax invocation) =>
-                invocation.Expression.NameIs("Deserialize");
+            private static bool IsDeserializeMethod(ExpressionSyntax expression) =>
+                expression.NameIs("Deserialize");
 
             // - Done: add symbolic value constraint when serializers are created
             // - Done: when Deserialize is called check the binder status
