@@ -225,16 +225,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsDeserializeMethod(ExpressionSyntax expression) =>
                 expression.NameIs("Deserialize");
-
-            // - Done: add symbolic value constraint when serializers are created
-            // - Done: when Deserialize is called check the binder status
-            // - Done: check if the binder exists and is not null
-            // - Done: check if the binder is valid
-
-            // ToDo:
-            // - add handling for null coalescence
-            // - add test cases
-            // - add integration tests
         }
     }
 }

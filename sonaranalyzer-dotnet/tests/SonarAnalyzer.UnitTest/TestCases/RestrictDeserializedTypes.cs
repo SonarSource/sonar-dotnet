@@ -59,6 +59,36 @@ namespace Tests.Diagnostics
                 formatter5.Binder = new SafeBinderStatementWithReturnNull();
             }
             formatter5.Deserialize(stream); // Noncompliant: the binder can be null
+
+            var formatter6 = new BinaryFormatter();
+            formatter6.Binder = new SafeBinderExpressionWithNull();
+            formatter6.Binder = new UnsafeBinder();
+            formatter6.Deserialize(stream); // Noncompliant: the last binder set is unsafe
+
+            var formatter7 = new BinaryFormatter {Binder = new SafeBinderExpressionWithNull()};
+            formatter7.Binder = new UnsafeBinder();
+            formatter7.Deserialize(stream); // Noncompliant: the last binder set is unsafe
+
+            var formatter8 = new BinaryFormatter();
+            formatter8.Binder = new UnsafeBinder();
+            formatter8.Binder = new SafeBinderExpressionWithNull();
+            formatter8.Deserialize(stream); // Compliant: the last binder set is safe
+
+            var formatter9 = new BinaryFormatter {Binder = new UnsafeBinder()};
+            formatter9.Binder = new SafeBinderExpressionWithNull();
+            formatter9.Deserialize(stream); // Compliant: the last binder set is safe
+
+            var formatter10 = new BinaryFormatter {Binder = new UnsafeBinder()};
+            formatter10.Deserialize(stream); // Noncompliant: the safe binder was set after deserialize call
+            formatter10.Binder = new SafeBinderExpressionWithNull();
+
+            var formatter11 = new BinaryFormatter();
+            formatter11.Binder ??= new SafeBinderExpressionWithNull();
+            formatter11.Deserialize(stream); // Compliant: safe binder using null coalescence
+
+            var formatter12 = new BinaryFormatter();
+            formatter12.Binder ??= new UnsafeBinder();
+            formatter12.Deserialize(stream); // Noncompliant: unsafe binder
         }
 
         internal void DeserializeOnExpression(MemoryStream memoryStream, bool condition)
@@ -96,6 +126,19 @@ namespace Tests.Diagnostics
 
             formatter.Binder = new UnsafeBinderExpressionBody();
             formatter.Deserialize(memoryStream); // Noncompliant: the used binder does not validate the deserialized types
+        }
+
+        internal void UnknownBindersAreSafe(SerializationBinder binder, bool condition)
+        {
+            new BinaryFormatter {Binder = binder}.Deserialize(new MemoryStream()); // Compliant: Unknown binders are considered safe
+
+            var formatter = new BinaryFormatter {Binder = binder};
+            formatter.Deserialize(new MemoryStream()); // Compliant: Unknown binders are considered safe
+
+            new BinaryFormatter()
+            {
+                Binder = condition ? (SerializationBinder) new SafeBinderExpressionWithNull() : new UnsafeBinder()
+            }.Deserialize(new MemoryStream()); // Compliant - FN: common type is SerializationBinder
         }
     }
 }
