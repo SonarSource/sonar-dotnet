@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5773",
+"message":  "Restrict types of objects allowed to be deserialized.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultObjectSerializer.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  28,
+"endLine":  54,
+"endColumn":  49
+}
+}
+}
+]
+}
