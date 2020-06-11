@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsFormatterWithBinder(typeSymbol) &&
                         !HasSafeBinderInitialization(objectCreation.Initializer))
                     {
-                        programState = programState.SetConstraint(symbolicValue, SerializationBinder.Unsafe);
+                        programState = programState.SetConstraint(symbolicValue, SerializationBinderConstraint.Unsafe);
                     }
                 }
 
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     // the symbolic value corresponding to the returned value will be available on the top of the stack.
                     var symbolValue = programState.PeekValue();
 
-                    if (programState.HasConstraint(symbolValue, SerializationBinder.Unsafe))
+                    if (programState.HasConstraint(symbolValue, SerializationBinderConstraint.Unsafe))
                     {
                         addNode(memberAccess);
                     }
@@ -163,13 +163,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     programState.HasConstraint(binderSymbolValue, ObjectConstraint.Null))
                 {
                     // The formatter is considered unsafe if the binder is null.
-                    return programState.SetConstraint(formatterSymbolValue, SerializationBinder.Unsafe);
+                    return programState.SetConstraint(formatterSymbolValue, SerializationBinderConstraint.Unsafe);
                 }
 
                 var binderType = semanticModel.GetTypeInfo(assignmentExpression.Right).Type;
                 var constraint = IsBinderSafe(binderType)
-                    ? SerializationBinder.Safe
-                    : SerializationBinder.Unsafe;
+                    ? SerializationBinderConstraint.Safe
+                    : SerializationBinderConstraint.Unsafe;
 
                 return programState.SetConstraint(formatterSymbolValue, constraint);
             }

@@ -173,7 +173,7 @@ namespace SonarAnalyzer.SymbolicExecution
             if (constraint is NullableValueConstraint ||
                 constraint is DisposableConstraint ||
                 constraint is CollectionCapacityConstraint ||
-                constraint is SerializationBinder)
+                constraint is SerializationBinderConstraint)
             {
                 return new[] { programState };
             }

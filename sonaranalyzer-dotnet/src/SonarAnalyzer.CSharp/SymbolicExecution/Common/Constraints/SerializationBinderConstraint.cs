@@ -20,12 +20,12 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Common.Constraints
 {
-    internal sealed class SerializationBinder : SymbolicValueConstraint
+    internal sealed class SerializationBinderConstraint : SymbolicValueConstraint
     {
-        internal static readonly SerializationBinder Unsafe = new SerializationBinder();
-        internal static readonly SerializationBinder Safe = new SerializationBinder();
+        internal static readonly SerializationBinderConstraint Unsafe = new SerializationBinderConstraint();
+        internal static readonly SerializationBinderConstraint Safe = new SerializationBinderConstraint();
 
-        private SerializationBinder()
+        private SerializationBinderConstraint()
         {
         }
 
