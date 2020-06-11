@@ -89,7 +89,70 @@ namespace Tests.Diagnostics
             var formatter12 = new BinaryFormatter();
             formatter12.Binder ??= new UnsafeBinder();
             formatter12.Deserialize(stream); // Noncompliant: unsafe binder
+
+            BinaryFormatter formatter13 = null;
+            formatter13 ??= new BinaryFormatter();
+            formatter13.Binder = new SafeBinderExpressionWithNull();
+            formatter13.Deserialize(stream); // Compliant: safe binder
+
+            BinaryFormatter formatter14 = null;
+            formatter14 ??= new BinaryFormatter();
+            formatter14.Binder = new UnsafeBinder();
+            formatter14.Deserialize(stream); // Noncompliant: unsafe binder
+
+            var formatter15 = new BinaryFormatter();
+            var formatter16 = new BinaryFormatter();
+            try
+            {
+                formatter15.Binder = new SafeBinderExpressionWithNull();
+                formatter15.Deserialize(stream); // Compliant: safe binder
+
+                formatter16.Binder = new UnsafeBinder();
+                formatter16.Deserialize(stream); // Noncompliant: unsafe binder
+            }
+            catch
+            {
+                formatter15.Deserialize(stream); // Compliant: safe binder
+                formatter16.Deserialize(stream); // Noncompliant: unsafe binder
+            }
+
+            while (true)
+            {
+                var formatter17 = new BinaryFormatter {Binder = new SafeBinderExpressionWithNull()};
+                formatter17.Deserialize(stream); // Compliant: safe binder
+
+                var formatter18 = new BinaryFormatter {Binder = new UnsafeBinder()};
+                formatter18.Deserialize(stream); // Noncompliant: unsafe binder
+            }
         }
+
+        private void Functions(Stream stream)
+        {
+            void LocalFunction()
+            {
+                new BinaryFormatter {Binder = new SafeBinderExpressionWithNull()}.Deserialize(stream); // Compliant: safe binder
+
+                new BinaryFormatter {Binder = new UnsafeBinder()}.Deserialize(stream); // Compliant - FN: local functions are not verified by SE
+            }
+
+            Func<UnsafeBinder> binderFactoryUnsafe = () => new UnsafeBinder();
+            new BinaryFormatter {Binder = binderFactoryUnsafe()}.Deserialize(stream); // Noncompliant: unsafe binder used
+
+            Func<SafeBinderExpressionWithNull> binderFactorySafe = () => new SafeBinderExpressionWithNull();
+            new BinaryFormatter {Binder = binderFactorySafe()}.Deserialize(stream); // Compliant: safe binder used
+
+            static UnsafeBinder LocalBinderFactoryUnsafe() => new UnsafeBinder();
+            new BinaryFormatter {Binder = LocalBinderFactoryUnsafe()}.Deserialize(stream); // Noncompliant: unsafe binder used
+
+            static SafeBinderExpressionWithNull LocalBinderFactorySafe() => new SafeBinderExpressionWithNull();
+            new BinaryFormatter {Binder = LocalBinderFactorySafe()}.Deserialize(stream); // Compliant: safe binder used
+
+            new BinaryFormatter {Binder = BinderFactoryUnsafe()}.Deserialize(stream); // Noncompliant: unsafe binder used
+            new BinaryFormatter {Binder = BinderFactorySafe()}.Deserialize(stream); // Compliant: safe binder used
+        }
+
+        private static UnsafeBinder BinderFactoryUnsafe() => new UnsafeBinder();
+        private static SafeBinderExpressionWithNull BinderFactorySafe() => new SafeBinderExpressionWithNull();
 
         internal void DeserializeOnExpression(MemoryStream memoryStream, bool condition)
         {
@@ -103,6 +166,15 @@ namespace Tests.Diagnostics
             (condition
                 ? new BinaryFormatter {Binder = new SafeBinderStatementWithReturnNull()}
                 : new BinaryFormatter {Binder = new SafeBinderWithThrowStatement()}).Deserialize(memoryStream); // Safe in ternary operator
+        }
+
+        internal void WithInitializeInsideIf(Stream stream)
+        {
+            BinaryFormatter formatter;
+            if ((formatter = new BinaryFormatter()) != null)
+            {
+                formatter.Deserialize(stream); // Noncompliant - Unsafe by default
+            }
         }
 
         internal void BinderCases(MemoryStream memoryStream)
