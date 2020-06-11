@@ -25,22 +25,22 @@ using SonarAnalyzer.SymbolicExecution.Common.Constraints;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Constraints
 {
     [TestClass]
-    public class SerializationBinderConstraintTest
+    public class SerializationConstraintTest
     {
         [TestMethod]
         public void GivenBinderIsSafe_OppositeShouldBe_Unsafe() =>
-            SerializationBinderConstraint.Safe.OppositeForLogicalNot.Should().Be(SerializationBinderConstraint.Unsafe);
+            SerializationConstraint.Safe.OppositeForLogicalNot.Should().Be(SerializationConstraint.Unsafe);
 
         [TestMethod]
         public void GivenBinderIsUnsafe_OppositeShouldBe_Safe() =>
-            SerializationBinderConstraint.Unsafe.OppositeForLogicalNot.Should().Be(SerializationBinderConstraint.Safe);
+            SerializationConstraint.Unsafe.OppositeForLogicalNot.Should().Be(SerializationConstraint.Safe);
 
         [TestMethod]
         public void GivenBinderIsSafe_ToStringShouldBe_Safe() =>
-            SerializationBinderConstraint.Safe.ToString().Should().Be("Safe");
+            SerializationConstraint.Safe.ToString().Should().Be("Safe");
 
         [TestMethod]
         public void GivenBinderIsUnsafe_ToStringShouldBe_Unsafe() =>
-            SerializationBinderConstraint.Unsafe.ToString().Should().Be("Unsafe");
+            SerializationConstraint.Unsafe.ToString().Should().Be("Unsafe");
     }
 }

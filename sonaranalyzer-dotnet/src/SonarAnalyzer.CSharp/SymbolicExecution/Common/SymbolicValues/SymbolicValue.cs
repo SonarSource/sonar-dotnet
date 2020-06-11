@@ -173,14 +173,14 @@ namespace SonarAnalyzer.SymbolicExecution
             if (constraint is NullableValueConstraint ||
                 constraint is DisposableConstraint ||
                 constraint is CollectionCapacityConstraint ||
-                constraint is SerializationBinderConstraint)
+                constraint is SerializationConstraint)
             {
                 return new[] { programState };
             }
 
             throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}, " +
                 $"{nameof(ObjectConstraint)}, {nameof(DisposableConstraint)}, {nameof(CollectionCapacityConstraint)}," +
-                $"{nameof(StringConstraint)} or {nameof(SerializationBinderConstraint)}.");
+                $"{nameof(StringConstraint)} or {nameof(SerializationConstraint)}.");
         }
 
         public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint,

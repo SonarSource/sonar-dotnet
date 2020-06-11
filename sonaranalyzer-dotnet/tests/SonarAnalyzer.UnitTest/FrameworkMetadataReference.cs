@@ -107,6 +107,9 @@ namespace SonarAnalyzer.UnitTest
         internal static IEnumerable<MetadataReference> SystemWeb { get; }
             = Create("System.Web.dll");
 
+        internal static IEnumerable<MetadataReference> SystemWebExtensions { get; }
+            = Create("System.Web.Extensions.dll");
+
         internal static IEnumerable<MetadataReference> SystemWindowsForms { get; }
             = Create("System.Windows.Forms.dll");
 

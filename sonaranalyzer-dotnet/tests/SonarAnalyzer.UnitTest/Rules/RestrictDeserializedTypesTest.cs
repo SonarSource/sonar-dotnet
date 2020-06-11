@@ -36,11 +36,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RestrictDeserializedTypes() =>
+        public void RestrictDeserializedTypesFormatters() =>
             Verifier.VerifyAnalyzer(new []
                 {
                     @"TestCases\RestrictDeserializedTypes.cs",
                     @"TestCases\RestrictDeserializedTypes.Binders.cs"
+                },
+                GetAnalyzer(),
+                ParseOptionsHelper.FromCSharp8,
+                additionalReferences: GetAdditionalReferences());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RestrictDeserializedTypesJavaScriptSerializer() =>
+            Verifier.VerifyAnalyzer(new []
+                {
+                    @"TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs"
                 },
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
@@ -55,7 +66,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             FrameworkMetadataReference.SystemRuntimeSerialization
             .Union(FrameworkMetadataReference.SystemRuntimeSerializationFormattersSoap)
-            .Union(FrameworkMetadataReference.SystemWeb);
+            .Union(FrameworkMetadataReference.SystemWeb)
+            .Union(FrameworkMetadataReference.SystemWebExtensions);
     }
 }
 
