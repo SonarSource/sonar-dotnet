@@ -32,7 +32,6 @@ namespace SonarAnalyzer.Helpers
         /// Returns true if the method throws exceptions or returns null.
         /// </summary>
         internal static bool ThrowsOrReturnsNull(this MethodDeclarationSyntax syntaxNode) =>
-            syntaxNode == null ||
             syntaxNode.DescendantNodes().OfType<ThrowStatementSyntax>().Any() ||
             syntaxNode.DescendantNodes().OfType<ExpressionSyntax>().Any(expression => expression.IsKind(SyntaxKindEx.ThrowExpression)) ||
             syntaxNode.DescendantNodes().OfType<ReturnStatementSyntax>().Any(returnStatement => returnStatement.Expression.IsKind(SyntaxKind.NullLiteralExpression)) ||

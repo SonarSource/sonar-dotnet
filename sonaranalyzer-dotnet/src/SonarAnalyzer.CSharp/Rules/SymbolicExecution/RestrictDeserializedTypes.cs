@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public SerializationBinderCheck(AbstractExplodedGraph explodedGraph, Action<SyntaxNode> addNode)
                 : base(explodedGraph)
             {
-                this.addNode = addNode ?? throw new ArgumentNullException(nameof(addNode));
+                this.addNode = addNode;
             }
 
             public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
@@ -157,6 +157,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
+                if (assignmentExpression.Right.IsNullLiteral())
+                {
+                    // The formatter is considered unsafe if the binder is null.
+                    return programState.SetConstraint(formatterSymbolValue, SerializationBinderConstraint.Unsafe);
+                }
+
                 var binderSymbol = semanticModel.GetSymbolInfo(assignmentExpression.Right).Symbol;
                 var binderSymbolValue = programState.GetSymbolValue(binderSymbol);
                 if (binderSymbolValue != null &&
@@ -180,7 +186,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     .OfType<AssignmentExpressionSyntax>()
                     .SingleOrDefault(assignment => IsBinderProperty(assignment.Left));
 
-                if (binderAssignment == null)
+                if (binderAssignment == null ||
+                    binderAssignment.Right.IsNullLiteral())
                 {
                     return false;
                 }

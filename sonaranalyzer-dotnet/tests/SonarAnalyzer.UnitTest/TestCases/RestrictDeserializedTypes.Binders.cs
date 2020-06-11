@@ -57,4 +57,22 @@ namespace Tests.Diagnostics
         public override Type BindToType(string assemblyName, string typeName) =>
             Assembly.Load(assemblyName).GetType(typeName);
     }
+
+    internal sealed class UnsafeBinderWithOtherMethods : SerializationBinder
+    {
+        public void Accept()
+        {
+        }
+
+        public override Type BindToType(string assemblyName, string typeName) =>
+            Assembly.Load(assemblyName).GetType(typeName);
+    }
+
+    internal sealed class SafeBinderWithOtherMethods : SerializationBinder
+    {
+        public void Accept() { }
+
+        public override Type BindToType(string assemblyName, string typeName) =>
+            throw new SerializationException("Only typeT is allowed");
+    }
 }
