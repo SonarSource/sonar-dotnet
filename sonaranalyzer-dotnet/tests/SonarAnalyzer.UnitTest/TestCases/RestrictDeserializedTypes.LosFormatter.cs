@@ -7,13 +7,13 @@ namespace SonarAnalyzer.UnitTest.TestCases
     {
         public void DefaultConstructor()
         {
-            new LosFormatter(); // Noncompliant - MAC filtering should be enabled
+            new LosFormatter(); // Noncompliant {{Serialized data signature (MAC) should be verified.}}
         }
 
         public void LiteralExpression()
         {
-            new LosFormatter(false, ""); // Noncompliant - MAC filtering should be enabled
-            new LosFormatter(false, new byte[0]); // Noncompliant - MAC filtering should be enabled
+            new LosFormatter(false, ""); // Noncompliant {{Serialized data signature (MAC) should be verified.}}
+            new LosFormatter(false, new byte[0]); // Noncompliant {{Serialized data signature (MAC) should be verified.}}
 
             new LosFormatter(true, ""); // Compliant - MAC filtering is enabled
             new LosFormatter(true, new byte[0]); // Compliant - MAC filtering is enabled

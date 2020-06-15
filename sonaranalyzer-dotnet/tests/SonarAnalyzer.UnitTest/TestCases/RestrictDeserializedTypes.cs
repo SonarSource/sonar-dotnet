@@ -37,7 +37,7 @@ namespace Tests.Diagnostics
 
             var formatter2 = new BinaryFormatter();
             formatter2.Binder = unsafeBinder;
-            formatter2.Deserialize(stream); // Noncompliant: unsafe binder used
+            formatter2.Deserialize(stream); // Noncompliant [unsafeBinder1]: unsafe binder used
 
             var formatter3 = new BinaryFormatter();
             formatter3.Binder = nullBinder;
@@ -58,11 +58,11 @@ namespace Tests.Diagnostics
             var formatter6 = new BinaryFormatter();
             formatter6.Binder = new SafeBinderExpressionWithNull();
             formatter6.Binder = new UnsafeBinder();
-            formatter6.Deserialize(stream); // Noncompliant: the last binder set is unsafe
+            formatter6.Deserialize(stream); // Noncompliant [unsafeBinder2]: the last binder set is unsafe
 
             var formatter7 = new BinaryFormatter {Binder = new SafeBinderExpressionWithNull()};
             formatter7.Binder = new UnsafeBinder();
-            formatter7.Deserialize(stream); // Noncompliant: the last binder set is unsafe
+            formatter7.Deserialize(stream); // Noncompliant [unsafeBinder3]: the last binder set is unsafe
 
             var formatter8 = new BinaryFormatter();
             formatter8.Binder = new UnsafeBinder();
@@ -74,7 +74,7 @@ namespace Tests.Diagnostics
             formatter9.Deserialize(stream); // Compliant: the last binder set is safe
 
             var formatter10 = new BinaryFormatter {Binder = new UnsafeBinder()};
-            formatter10.Deserialize(stream); // Noncompliant: the safe binder was set after deserialize call
+            formatter10.Deserialize(stream); // Noncompliant [unsafeBinder4]: the safe binder was set after deserialize call
             formatter10.Binder = new SafeBinderExpressionWithNull();
 
             var formatter11 = new BinaryFormatter();
@@ -83,7 +83,7 @@ namespace Tests.Diagnostics
 
             var formatter12 = new BinaryFormatter();
             formatter12.Binder ??= new UnsafeBinder();
-            formatter12.Deserialize(stream); // Noncompliant: unsafe binder
+            formatter12.Deserialize(stream); // Noncompliant [unsafeBinder5]: unsafe binder
 
             BinaryFormatter formatter13 = null;
             formatter13 ??= new BinaryFormatter();
@@ -93,7 +93,7 @@ namespace Tests.Diagnostics
             BinaryFormatter formatter14 = null;
             formatter14 ??= new BinaryFormatter();
             formatter14.Binder = new UnsafeBinder();
-            formatter14.Deserialize(stream); // Noncompliant: unsafe binder
+            formatter14.Deserialize(stream); // Noncompliant [unsafeBinder6]: unsafe binder
 
             var formatter15 = new BinaryFormatter();
             var formatter16 = new BinaryFormatter();
@@ -103,12 +103,12 @@ namespace Tests.Diagnostics
                 formatter15.Deserialize(stream); // Compliant: safe binder
 
                 formatter16.Binder = new UnsafeBinder();
-                formatter16.Deserialize(stream); // Noncompliant: unsafe binder
+                formatter16.Deserialize(stream); // Noncompliant [unsafeBinder7]: unsafe binder
             }
             catch
             {
                 formatter15.Deserialize(stream); // Compliant: safe binder
-                formatter16.Deserialize(stream); // Noncompliant: unsafe binder
+                formatter16.Deserialize(stream); // Noncompliant [unsafeBinder8]: unsafe binder
             }
 
             while (true)
@@ -117,7 +117,7 @@ namespace Tests.Diagnostics
                 formatter17.Deserialize(stream); // Compliant: safe binder
 
                 var formatter18 = new BinaryFormatter {Binder = new UnsafeBinder()};
-                formatter18.Deserialize(stream); // Noncompliant: unsafe binder
+                formatter18.Deserialize(stream); // Noncompliant [unsafeBinder9]: unsafe binder
             }
         }
 
@@ -131,18 +131,18 @@ namespace Tests.Diagnostics
             }
 
             Func<UnsafeBinder> binderFactoryUnsafe = () => new UnsafeBinder();
-            new BinaryFormatter {Binder = binderFactoryUnsafe()}.Deserialize(stream); // Noncompliant: unsafe binder used
+            new BinaryFormatter {Binder = binderFactoryUnsafe()}.Deserialize(stream); // Noncompliant [unsafeBinder10]: unsafe binder used
 
             Func<SafeBinderExpressionWithNull> binderFactorySafe = () => new SafeBinderExpressionWithNull();
             new BinaryFormatter {Binder = binderFactorySafe()}.Deserialize(stream); // Compliant: safe binder used
 
             static UnsafeBinder LocalBinderFactoryUnsafe() => new UnsafeBinder();
-            new BinaryFormatter {Binder = LocalBinderFactoryUnsafe()}.Deserialize(stream); // Noncompliant: unsafe binder used
+            new BinaryFormatter {Binder = LocalBinderFactoryUnsafe()}.Deserialize(stream); // Noncompliant [unsafeBinder11]: unsafe binder used
 
             static SafeBinderExpressionWithNull LocalBinderFactorySafe() => new SafeBinderExpressionWithNull();
             new BinaryFormatter {Binder = LocalBinderFactorySafe()}.Deserialize(stream); // Compliant: safe binder used
 
-            new BinaryFormatter {Binder = BinderFactoryUnsafe()}.Deserialize(stream); // Noncompliant: unsafe binder used
+            new BinaryFormatter {Binder = BinderFactoryUnsafe()}.Deserialize(stream); // Noncompliant [unsafeBinder12]: unsafe binder used
             new BinaryFormatter {Binder = BinderFactorySafe()}.Deserialize(stream); // Compliant: safe binder used
         }
 
@@ -157,7 +157,7 @@ namespace Tests.Diagnostics
             BinaryFormatter bin = null;
             (bin ??= new BinaryFormatter()).Deserialize(memoryStream); // Noncompliant - unsafe in null coalescence
             new BinaryFormatter {Binder = new SafeBinderStatementWithReturnNull()}.Deserialize(memoryStream); // safe binder set in initializer
-            new BinaryFormatter {Binder = new UnsafeBinder()}.Deserialize(memoryStream); // Noncompliant - unsafe binder set in initializer
+            new BinaryFormatter {Binder = new UnsafeBinder()}.Deserialize(memoryStream); // Noncompliant [unsafeBinder13]: unsafe binder set in initializer
             (condition
                 ? new BinaryFormatter {Binder = new SafeBinderStatementWithReturnNull()}
                 : new BinaryFormatter {Binder = new SafeBinderWithThrowStatement()}).Deserialize(memoryStream); // Safe in ternary operator
@@ -176,7 +176,7 @@ namespace Tests.Diagnostics
         {
             var formatter1 = new BinaryFormatter();
             formatter1.Binder = condition switch {true => new UnsafeBinder(), false => null};
-            formatter1.Deserialize(stream); // Noncompliant: binder can be null or unsafe
+            formatter1.Deserialize(stream); // Noncompliant [unsafeBinder14]: binder can be null or unsafe
 
             var formatter2 = new BinaryFormatter();
             formatter2.Binder = condition switch {true => new UnsafeBinder(), false => new UnsafeBinderExpressionBody()};
@@ -198,7 +198,7 @@ namespace Tests.Diagnostics
                     break;
                 case 3:
                     formatter4.Binder = new UnsafeBinder();
-                    formatter4.Deserialize(stream); // Noncompliant: unsafe binder
+                    formatter4.Deserialize(stream); // Noncompliant [unsafeBinder15]: unsafe binder
                     break;
                 default:
                     formatter4.Binder = new SafeBinderExpressionWithNull();
@@ -224,7 +224,7 @@ namespace Tests.Diagnostics
             formatter.Deserialize(memoryStream); // Compliant: a safe binder was used
 
             formatter.Binder = new UnsafeBinder();
-            formatter.Deserialize(memoryStream); // Noncompliant: the used binder does not validate the deserialized types
+            formatter.Deserialize(memoryStream); // Noncompliant [unsafeBinder16]: the used binder does not validate the deserialized types
 
             formatter.Binder = new UnsafeBinderExpressionBody();
             formatter.Deserialize(memoryStream); // Noncompliant: the used binder does not validate the deserialized types
@@ -254,5 +254,91 @@ namespace Tests.Diagnostics
             formatter.Binder = new UnsafeBinder();
             formatter.Deserialize(new MemoryStream());
         }
+    }
+
+    internal sealed class SafeBinderStatementWithReturnNull : SerializationBinder
+    {
+        public override Type BindToType(String assemblyName, System.String typeName)
+        {
+            if (typeName == "typeT")
+            {
+                return Assembly.Load(assemblyName).GetType(typeName);
+            }
+
+            return null;
+        }
+    }
+
+    internal sealed class SafeBinderExpressionWithNull : SerializationBinder
+    {
+        public override Type BindToType(string assemblyName, string typeName) =>
+            typeName == "typeT"
+                ? Assembly.Load(assemblyName).GetType(typeName)
+                : null;
+    }
+
+    internal sealed class SafeBinderWithThrowStatement : SerializationBinder
+    {
+        public override Type BindToType(string assemblyName, string typeName)
+        {
+            if (typeName == "typeT")
+                return Assembly.Load(assemblyName).GetType(typeName);
+
+            throw new SerializationException("Only typeT is allowed");
+        }
+    }
+
+    internal sealed class SafeBinderWithThrowExpression : SerializationBinder
+    {
+        public override Type BindToType(string assemblyName, string typeName) =>
+            typeName == "typeT"
+                ? Assembly.Load(assemblyName).GetType(typeName)
+                : throw new SerializationException("Only typeT is allowed");
+    }
+
+    internal sealed class UnsafeBinder : SerializationBinder
+    {
+        public override Type BindToType(string assemblyName, string typeName)
+//                           ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13, unsafeBinder14, unsafeBinder15, unsafeBinder16]
+        {
+            return Assembly.Load(assemblyName).GetType(typeName);
+        }
+    }
+
+    internal sealed class UnsafeBinderExpressionBody : SerializationBinder
+    {
+        public override Type BindToType(string assemblyName, string typeName) =>
+//                           ^^^^^^^^^^ Secondary
+            Assembly.Load(assemblyName).GetType(typeName);
+    }
+
+    internal sealed class UnsafeBinderWithOtherMethods : SerializationBinder
+    {
+        public void Accept()
+        {
+        }
+
+        public Type ResolveType(string id) =>
+            throw new SerializationException("Not implemented.");
+
+        public Type BindToType(string assemblyName) =>
+            throw new SerializationException("Not implemented.");
+
+        public Type BindToType(string assemblyName, int typeName) =>
+            throw new SerializationException("Not implemented.");
+
+        public override Type BindToType(string assemblyName, string typeName) =>
+//                           ^^^^^^^^^^ Secondary
+            Assembly.Load(assemblyName).GetType(typeName);
+    }
+
+    internal sealed class SafeBinderWithOtherMethods : SerializationBinder
+    {
+        public void Accept() { }
+
+        public Type ResolveType(string id) => Type.GetType(id);
+
+        public override Type BindToType(string assemblyName, string typeName) =>
+            throw new SerializationException("Only typeT is allowed");
     }
 }
