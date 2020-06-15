@@ -103,9 +103,48 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         programState = programState.SetConstraint(symbolicValue, SerializationConstraint.Unsafe);
                     }
+
+                    if (IsLosFormatter(typeSymbol) &&
+                        !HasSafeConstructorInitialization(objectCreation, programState))
+                    {
+                        // For LosFormatter the rule is raised directly on the constructor.
+                        addNode(objectCreation);
+                    }
                 }
 
                 return base.ObjectCreated(programState, symbolicValue, instruction);
+            }
+
+            private bool HasSafeConstructorInitialization(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
+            {
+                // The constructor is safe only if it has 2 arguments and the first argument value is true.
+                if (objectCreation.ArgumentList.Arguments.Count != 2)
+                {
+                    return false;
+                }
+
+                var firstArgument = objectCreation.ArgumentList.Arguments[0].Expression;
+                if (firstArgument.IsKind(SyntaxKind.FalseLiteralExpression))
+                {
+                    return false;
+                }
+
+                if (firstArgument.IsKind(SyntaxKind.TrueLiteralExpression))
+                {
+                    return true;
+                }
+
+                var symbol = semanticModel.GetSymbolInfo(firstArgument).Symbol;
+                if (symbol == null)
+                {
+                    // In this case we cannot determine if the first parameter is true or false so we
+                    // assume it's true to avoid FPs.
+                    return true;
+                }
+
+                var symbolicValue = programState.GetSymbolValue(symbol);
+                return symbolicValue == null ||
+                       !programState.HasConstraint(symbolicValue, BoolConstraint.False);
             }
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
@@ -276,6 +315,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsJavaScriptSerializer(ITypeSymbol typeSymbol) =>
                 typeSymbol.Is(KnownType.System_Web_Script_Serialization_JavaScriptSerializer);
+
+            private static bool IsLosFormatter(ITypeSymbol typeSymbol) =>
+                typeSymbol.Is(KnownType.System_Web_UI_LosFormatter);
         }
     }
 }

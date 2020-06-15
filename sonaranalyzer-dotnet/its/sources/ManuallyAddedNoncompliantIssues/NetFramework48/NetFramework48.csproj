@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="BinaryFormatterTest.cs" />
     <Compile Include="JavaScriptSerializerTest.cs" />
+    <Compile Include="LosFormatterTest.cs" />
     <Compile Include="NetDataContractSerializerDeserializeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SafeBinder.cs" />
