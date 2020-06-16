@@ -71,14 +71,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class SerializationBinderCheck : ExplodedGraphCheck
         {
-            private const int BindToTypeParameterCount = 2;
-
             private static readonly ImmutableArray<KnownType> typesWithBinder =
                 ImmutableArray.Create(
                     KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter,
                     KnownType.System_Runtime_Serialization_NetDataContractSerializer,
-                    KnownType.System_Runtime_Serialization_Formatters_Soap_SoapFormatter,
-                    KnownType.System_Web_UI_ObjectStateFormatter);
+                    KnownType.System_Runtime_Serialization_Formatters_Soap_SoapFormatter);
 
             private readonly Dictionary<ITypeSymbol, bool> binderValidityMap = new Dictionary<ITypeSymbol, bool>();
 
@@ -90,8 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.addNode = addNode;
             }
 
-            public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
-                SyntaxNode instruction)
+            public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
             {
                 if (instruction is ObjectCreationExpressionSyntax objectCreation)
                 {
@@ -212,12 +208,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     .FirstOrDefault(IsBindToType);
 
             private static IEnumerable<SyntaxNode> GetDescendantNodes(SyntaxReference syntaxReference) =>
-                syntaxReference.SyntaxTree.GetRoot().FindNode(syntaxReference.Span).DescendantNodes();
+                syntaxReference.GetSyntax().DescendantNodes();
 
             private static bool IsBindToType(MethodDeclarationSyntax methodDeclaration) =>
                 methodDeclaration.Identifier.Text == "BindToType" &&
                 methodDeclaration.ReturnType.NameIs("Type") &&
-                methodDeclaration.ParameterList.Parameters.Count == BindToTypeParameterCount &&
+                methodDeclaration.ParameterList.Parameters.Count == 2 &&
                 methodDeclaration.ParameterList.Parameters[0].IsString() &&
                 methodDeclaration.ParameterList.Parameters[1].IsString();
 

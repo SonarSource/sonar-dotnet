@@ -180,7 +180,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}, " +
                 $"{nameof(ObjectConstraint)}, {nameof(DisposableConstraint)}, {nameof(CollectionCapacityConstraint)}," +
-                $"{nameof(StringConstraint)}.");
+                $"{nameof(StringConstraint)} or {nameof(SerializationBinderConstraint)}.");
         }
 
         public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint,

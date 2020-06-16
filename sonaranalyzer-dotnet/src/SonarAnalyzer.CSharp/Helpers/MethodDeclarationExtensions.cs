@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Helpers
             syntaxNode.DescendantNodes().OfType<ThrowStatementSyntax>().Any() ||
             syntaxNode.DescendantNodes().OfType<ExpressionSyntax>().Any(expression => expression.IsKind(SyntaxKindEx.ThrowExpression)) ||
             syntaxNode.DescendantNodes().OfType<ReturnStatementSyntax>().Any(returnStatement => returnStatement.Expression.IsKind(SyntaxKind.NullLiteralExpression)) ||
-            // For simplicity this returns true for any method witch contains a NullLiteralExpression but this could be a source of FNs/FPs
+            // For simplicity this returns true for any method witch contains a NullLiteralExpression but this could be a source of FNs
             syntaxNode.DescendantNodes().OfType<ExpressionSyntax>().Any(expression => expression.IsKind(SyntaxKind.NullLiteralExpression));
     }
 }

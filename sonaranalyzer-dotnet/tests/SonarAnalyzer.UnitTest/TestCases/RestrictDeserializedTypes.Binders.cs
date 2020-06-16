@@ -64,6 +64,12 @@ namespace Tests.Diagnostics
         {
         }
 
+        public Type BindToType(string assemblyName) =>
+            throw new SerializationException("Not implemented.");
+
+        public Type BindToType(string assemblyName, int typeName) =>
+            throw new SerializationException("Not implemented.");
+
         public override Type BindToType(string assemblyName, string typeName) =>
             Assembly.Load(assemblyName).GetType(typeName);
     }

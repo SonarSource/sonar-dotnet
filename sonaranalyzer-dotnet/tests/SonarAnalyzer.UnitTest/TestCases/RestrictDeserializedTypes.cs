@@ -25,11 +25,6 @@ namespace Tests.Diagnostics
             new SoapFormatter().Deserialize(new MemoryStream()); // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
         }
 
-        internal void ObjectStateFormatterDeserialize()
-        {
-            new ObjectStateFormatter().Deserialize(new MemoryStream()); // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
-        }
-
         internal void BinderAsVariable(Stream stream, bool condition)
         {
             var safeBinder = new SafeBinderStatementWithReturnNull();
