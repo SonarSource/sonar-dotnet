@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4586",
+"message":  "Do not return null from this method, instead return 'Task.FromResult<T>(null)', 'Task.CompletedTask' or 'Task.Delay(0)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  28,
+"endLine":  119,
+"endColumn":  32
+}
+}
+}
+]
+}
