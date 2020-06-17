@@ -92,6 +92,9 @@ namespace SonarAnalyzer.UnitTest
         internal static IEnumerable<MetadataReference> SystemRuntimeSerialization { get; }
             = Create("System.Runtime.Serialization.dll");
 
+        internal static IEnumerable<MetadataReference> SystemRuntimeSerializationFormattersSoap { get; }
+            = Create("System.Runtime.Serialization.Formatters.Soap.dll");
+
         internal static IEnumerable<MetadataReference> SystemSecurityCryptographyAlgorithms { get; }
             = Create("System.Security.Cryptography.Algorithms.dll");
 

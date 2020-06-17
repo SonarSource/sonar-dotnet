@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.Common.Constraints;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
@@ -171,14 +172,15 @@ namespace SonarAnalyzer.SymbolicExecution
 
             if (constraint is NullableValueConstraint ||
                 constraint is DisposableConstraint ||
-                constraint is CollectionCapacityConstraint)
+                constraint is CollectionCapacityConstraint ||
+                constraint is SerializationBinderConstraint)
             {
                 return new[] { programState };
             }
 
             throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}, " +
                 $"{nameof(ObjectConstraint)}, {nameof(DisposableConstraint)}, {nameof(CollectionCapacityConstraint)}," +
-                $"{nameof(StringConstraint)}.");
+                $"{nameof(StringConstraint)} or {nameof(SerializationBinderConstraint)}.");
         }
 
         public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint,

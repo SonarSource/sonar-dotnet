@@ -36,6 +36,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     [Rule(ConditionEvaluatesToConstant.S2589DiagnosticId, LanguageNames.CSharp)]
     [Rule(InvalidCastToInterfaceRuleConstants.DiagnosticId, LanguageNames.CSharp)]
     [Rule(NullPointerDereference.DiagnosticId, LanguageNames.CSharp)]
+    [Rule(RestrictDeserializedTypes.DiagnosticId, LanguageNames.CSharp)]
     internal sealed class SymbolicExecutionAnalyzerFactory : IRuleFactory
     {
         private readonly ImmutableArray<ISymbolicExecutionAnalyzer> analyzers;
@@ -50,7 +51,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 new EmptyCollectionsShouldNotBeEnumerated(),
                 new ConditionEvaluatesToConstant(),
                 new InvalidCastToInterfaceSymbolicExecution(),
-                new NullPointerDereference()))
+                new NullPointerDereference(),
+                new RestrictDeserializedTypes()))
         {
         }
 

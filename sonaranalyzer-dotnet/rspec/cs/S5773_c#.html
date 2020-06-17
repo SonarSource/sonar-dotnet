@@ -1,0 +1,105 @@
+<p>Failure to control types during deserialization can lead to runtime errors and vulnerabilities. There are many types, called "gadgets" (see <a
+href="https://github.com/pwntester/ysoserial.net">ysoserial.net</a>) which are known to be not secure when deserializing. </p>
+<p>During the deserialization process, the state of an object will be reconstructed from the serialized data stream which can contain dangerous
+operations. For example, a well-known attack vector consists in serializing an object of type <code><a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.codedom.compiler.tempfilecollection.-ctor?view=netframework-4.8#System_CodeDom_Compiler_TempFileCollection__ctor">TempFileCollection</a></code>
+with arbitrary files defined by the attacker which will be deleted on the application deserializing this object (more precisely when the <a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.codedom.compiler.tempfilecollection.finalize?view=netframework-4.8">finalize() </a>method of
+the TempFileCollection object is called).</p>
+<p>To restrict the types allowed to be deserialized:</p>
+<ul>
+  <li> implement a whitelist of safe and required types that can be deserialized. </li>
+  <li> or/and implement tamper protection, such as <a href="https://en.wikipedia.org/wiki/HMAC">message authentication codes</a> (MAC), this way only
+  objects serialized with the correct MAC hash will be deserialized. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<p>For <a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.binary.binaryformatter?view=netframework-4.8">BinaryFormatter</a>,
+<a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.netdatacontractserializer?view=netframework-4.8">NetDataContractSerializer
+</a>, <a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.objectstateformatter?view=netframework-4.8">ObjectStateFormatter</a>, <a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.soap.soapformatter?view=netframework-4.8">SoapFormatter</a>
+serializers:</p>
+<pre>
+var myBinaryFormatter = new BinaryFormatter();
+myBinaryFormatter.Deserialize(stream); // Noncompliant: a binder is not used to limit types during deserialization
+</pre>
+<p><a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.web.script.serialization.javascriptserializer?view=netframework-4.8">JavaScriptSerializer</a>
+should not use SimpleTypeResolver or other weak resolvers:</p>
+<pre>
+JavaScriptSerializer serializer1 = new JavaScriptSerializer(new SimpleTypeResolver()); // Noncompliant: SimpleTypeResolver is unsecure (every types is resolved)
+serializer1.Deserialize&lt;ExpectedType&gt;(json);
+</pre>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.losformatter?view=netframework-4.8">LosFormatter</a> should not be used without
+MAC validation:</p>
+<pre>
+LosFormatter formatter = new LosFormatter(); // Noncompliant
+formatter.Deserialize(fs);
+</pre>
+<h2>Compliant Solution</h2>
+<p><a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.binary.binaryformatter?view=netframework-4.8">BinaryFormatter</a>,
+<a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.netdatacontractserializer?view=netframework-4.8">NetDataContractSerializer
+</a>, <a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.objectstateformatter?view=netframework-4.8">ObjectStateFormatter</a>, <a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.soap.soapformatter?view=netframework-4.8">SoapFormatter</a>
+serializers should use a binder implementing a whitelist approach to limit types during deserialization (at least one exception should be thrown or a
+null value returned):</p>
+<pre>
+sealed class CustomBinder : SerializationBinder
+{
+   public override Type BindToType(string assemblyName, string typeName)
+   {
+       if (!(typeName == "type1" || typeName == "type2" || typeName == "type3"))
+       {
+          throw new SerializationException("Only type1, type2 and type3 are allowed"); // Compliant
+       }
+       return Assembly.Load(assemblyName).GetType(typeName);
+   }
+}
+
+var myBinaryFormatter = new BinaryFormatter();
+myBinaryFormatter.Binder = new CustomBinder();
+myBinaryFormatter.Deserialize(stream);
+</pre>
+<p><a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.web.script.serialization.javascriptserializer?view=netframework-4.8">JavaScriptSerializer</a>
+should use a resolver implementing a whitelist to limit types during deserialization (at least one exception should be thrown or a null value
+returned):</p>
+<pre>
+public class CustomSafeTypeResolver : JavaScriptTypeResolver
+{
+   public override Type ResolveType(string id)
+   {
+      if(id != "ExpectedType") {
+         throw new ArgumentNullException("Only ExpectedType is allowed during deserialization"); // Compliant
+      }
+      return Type.GetType(id);
+   }
+}
+
+JavaScriptSerializer serializer = new JavaScriptSerializer(new CustomSafeTypeResolver()); // Compliant
+serializer.Deserialize&lt;ExpectedType&gt;(json);
+</pre>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.losformatter?view=netframework-4.8">LosFormatter</a> serializer with MAC
+validation:</p>
+<pre>
+LosFormatter formatter = new LosFormatter(true, secret); // Compliant
+formatter.Deserialize(fs);
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://media.blackhat.com/bh-us-12/Briefings/Forshaw/BH_US_12_Forshaw_Are_You_My_Type_WP.pdf">Are You My Type?</a> - James Forshaw -
+  BlackHat 2012 </li>
+  <li> <a href="https://www.youtube.com/watch?v=oxlD8VWWHE8">BlueHat v17 - Dangerous Contents - Securing .Net Deserialization</a> </li>
+  <li> <a href="https://www.youtube.com/watch?v=qDoBlLwREYk0">Alvaro Muñoz: .NET Serialization: Detecting and Defending Vulnerable Endpoints</a> </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A8-Insecure_Deserialization">OWASP Top 10 2017 Category A8</a> - Insecure Deserialization
+  </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/134.html">MITRE, CWE-134</a> - Use of Externally-Controlled Format String </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/502.html">MITRE, CWE-502</a> - Deserialization of Untrusted Data </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat2">SANS Top 25</a> - Risky Resource Management </li>
+  <li> <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Deserialization_Cheat_Sheet.md">OWASP Deserialization Cheat
+  Sheet</a> </li>
+</ul>
+
