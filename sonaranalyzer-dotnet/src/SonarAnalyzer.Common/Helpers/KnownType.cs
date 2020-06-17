@@ -391,6 +391,9 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Web_Mvc_HttpPostAttribute = new KnownType("System.Web.Mvc.HttpPostAttribute");
         internal static readonly KnownType System_Web_Mvc_UrlHelper = new KnownType("System.Web.Mvc.UrlHelper");
         internal static readonly KnownType System_Web_Mvc_ValidateInputAttribute = new KnownType("System.Web.Mvc.ValidateInputAttribute");
+        internal static readonly KnownType System_Web_Script_Serialization_JavaScriptSerializer = new KnownType("System.Web.Script.Serialization.JavaScriptSerializer");
+        internal static readonly KnownType System_Web_Script_Serialization_JavaScriptTypeResolver = new KnownType("System.Web.Script.Serialization.JavaScriptTypeResolver");
+        internal static readonly KnownType System_Web_Script_Serialization_SimpleTypeResolver = new KnownType("System.Web.Script.Serialization.SimpleTypeResolver");
         internal static readonly KnownType System_Web_VirtualPathUtility = new KnownType("System.Web.VirtualPathUtility");
         internal static readonly KnownType System_Windows_DependencyObject = new KnownType("System.Windows.DependencyObject");
         internal static readonly KnownType System_Windows_Forms_Application = new KnownType("System.Windows.Forms.Application");

@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     KnownType.System_Runtime_Serialization_NetDataContractSerializer,
                     KnownType.System_Runtime_Serialization_Formatters_Soap_SoapFormatter);
 
-            private readonly Dictionary<ITypeSymbol, bool> binderValidityMap = new Dictionary<ITypeSymbol, bool>();
+            private readonly Dictionary<ITypeSymbol, bool> symbolValidityMap = new Dictionary<ITypeSymbol, bool>();
 
             private readonly Action<SyntaxNode> addNode;
 
@@ -95,7 +95,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsFormatterWithBinder(typeSymbol) &&
                         !HasSafeBinderInitialization(objectCreation.Initializer))
                     {
-                        programState = programState.SetConstraint(symbolicValue, SerializationBinderConstraint.Unsafe);
+                        programState = programState.SetConstraint(symbolicValue, SerializationConstraint.Unsafe);
+                    }
+
+                    if (IsJavaScriptSerializer(typeSymbol) &&
+                        !HasSafeResolverInitialization(objectCreation))
+                    {
+                        programState = programState.SetConstraint(symbolicValue, SerializationConstraint.Unsafe);
                     }
                 }
 
@@ -118,13 +124,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState VisitMemberAccess(MemberAccessExpressionSyntax memberAccess, ProgramState programState)
             {
-                if (IsFormatterDeserialize(memberAccess) && programState.HasValue)
+                if (IsDeserializeOnKnownType(memberAccess) && programState.HasValue)
                 {
                     // If Deserialize is called on an expression which returns a formatter (e.g. new BinaryFormatter().Deserialize()),
                     // the symbolic value corresponding to the returned value will be available on the top of the stack.
                     var symbolValue = programState.PeekValue();
 
-                    if (programState.HasConstraint(symbolValue, SerializationBinderConstraint.Unsafe))
+                    if (programState.HasConstraint(symbolValue, SerializationConstraint.Unsafe))
                     {
                         addNode(memberAccess);
                     }
@@ -156,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (assignmentExpression.Right.IsNullLiteral())
                 {
                     // The formatter is considered unsafe if the binder is null.
-                    return programState.SetConstraint(formatterSymbolValue, SerializationBinderConstraint.Unsafe);
+                    return programState.SetConstraint(formatterSymbolValue, SerializationConstraint.Unsafe);
                 }
 
                 var binderSymbol = semanticModel.GetSymbolInfo(assignmentExpression.Right).Symbol;
@@ -165,15 +171,38 @@ namespace SonarAnalyzer.Rules.CSharp
                     programState.HasConstraint(binderSymbolValue, ObjectConstraint.Null))
                 {
                     // The formatter is considered unsafe if the binder is null.
-                    return programState.SetConstraint(formatterSymbolValue, SerializationBinderConstraint.Unsafe);
+                    return programState.SetConstraint(formatterSymbolValue, SerializationConstraint.Unsafe);
                 }
 
                 var binderType = semanticModel.GetTypeInfo(assignmentExpression.Right).Type;
-                var constraint = IsBinderSafe(binderType)
-                    ? SerializationBinderConstraint.Safe
-                    : SerializationBinderConstraint.Unsafe;
+                var constraint = IsTypeSafe(binderType)
+                    ? SerializationConstraint.Safe
+                    : SerializationConstraint.Unsafe;
 
                 return programState.SetConstraint(formatterSymbolValue, constraint);
+            }
+
+            private bool HasSafeResolverInitialization(ObjectCreationExpressionSyntax objectCreation)
+            {
+                // JavaScriptSerializer has 2 constructors:
+                // - JavaScriptSerializer(): unsafe since it doesn't give the option to set a provider
+                // - JavaScriptSerializer(JavaScriptTypeResolver): this one is safe only if the given resolver is safe
+                // See: https://docs.microsoft.com/en-us/dotnet/api/system.web.script.serialization.javascriptserializer.-ctor?view=netframework-4.8
+
+                if (objectCreation.ArgumentList.Arguments.Count == 0)
+                {
+                    return false;
+                }
+
+                var resolverType = objectCreation.ArgumentList.Arguments[0];
+                if (resolverType.Expression.IsNullLiteral())
+                {
+                    return false;
+                }
+
+                return semanticModel.GetTypeInfo(resolverType.Expression).Type is {} typeSymbol &&
+                       !typeSymbol.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver) &&
+                       IsTypeSafe(typeSymbol);
             }
 
             private bool HasSafeBinderInitialization(InitializerExpressionSyntax initializer)
@@ -188,16 +217,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                var typeSymbol = semanticModel.GetTypeInfo(binderAssignment.Right).Type;
-                return typeSymbol != null && IsBinderSafe(typeSymbol);
+                return semanticModel.GetTypeInfo(binderAssignment.Right).Type is {} typeSymbol &&
+                       IsTypeSafe(typeSymbol);
             }
 
-            private bool IsBinderSafe(ITypeSymbol symbol) =>
-                binderValidityMap.GetOrAdd(symbol, typeSymbol =>
+            private bool IsTypeSafe(ITypeSymbol symbol) =>
+                symbolValidityMap.GetOrAdd(symbol, typeSymbol =>
                 {
-                    var declaration = GetBindToTypeMethodDeclaration(typeSymbol);
+                    var declaration = typeSymbol.DerivesFrom(KnownType.System_Web_Script_Serialization_JavaScriptTypeResolver)
+                        ? GetResolveTypeMethodDeclaration(typeSymbol)
+                        : GetBindToTypeMethodDeclaration(typeSymbol);
 
-                    // The binder is considered safe by default (e.g. if the declaration cannot be found).
+                    // Binders and resolvers are considered safe by default (e.g. if the declaration cannot be found).
                     return declaration == null || declaration.ThrowsOrReturnsNull();
                 });
 
@@ -206,6 +237,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     .SelectMany(GetDescendantNodes)
                     .OfType<MethodDeclarationSyntax>()
                     .FirstOrDefault(IsBindToType);
+
+            private static MethodDeclarationSyntax GetResolveTypeMethodDeclaration(ISymbol symbol) =>
+                symbol.DeclaringSyntaxReferences
+                    .SelectMany(GetDescendantNodes)
+                    .OfType<MethodDeclarationSyntax>()
+                    .FirstOrDefault(IsResolveType);
 
             private static IEnumerable<SyntaxNode> GetDescendantNodes(SyntaxReference syntaxReference) =>
                 syntaxReference.GetSyntax().DescendantNodes();
@@ -217,10 +254,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodDeclaration.ParameterList.Parameters[0].IsString() &&
                 methodDeclaration.ParameterList.Parameters[1].IsString();
 
-            private bool IsFormatterDeserialize(MemberAccessExpressionSyntax memberAccess) =>
+            private static bool IsResolveType(MethodDeclarationSyntax methodDeclaration) =>
+                methodDeclaration.Identifier.Text == "ResolveType" &&
+                methodDeclaration.ReturnType.NameIs("Type") &&
+                methodDeclaration.ParameterList.Parameters.Count == 1 &&
+                methodDeclaration.ParameterList.Parameters[0].IsString();
+
+            private bool IsDeserializeOnKnownType(MemberAccessExpressionSyntax memberAccess) =>
                 IsDeserializeMethod(memberAccess) &&
                 semanticModel.GetTypeInfo(memberAccess.Expression).Type is {} typeSymbol &&
-                IsFormatterWithBinder(typeSymbol);
+                (IsFormatterWithBinder(typeSymbol) || IsJavaScriptSerializer(typeSymbol));
 
             private static bool IsFormatterWithBinder(ITypeSymbol typeSymbol) =>
                 typeSymbol.IsAny(typesWithBinder);
@@ -230,6 +273,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsDeserializeMethod(ExpressionSyntax expression) =>
                 expression.NameIs("Deserialize");
+
+            private static bool IsJavaScriptSerializer(ITypeSymbol typeSymbol) =>
+                typeSymbol.Is(KnownType.System_Web_Script_Serialization_JavaScriptSerializer);
         }
     }
 }

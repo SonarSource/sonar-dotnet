@@ -64,6 +64,9 @@ namespace Tests.Diagnostics
         {
         }
 
+        public Type ResolveType(string id) =>
+            throw new SerializationException("Not implemented.");
+
         public Type BindToType(string assemblyName) =>
             throw new SerializationException("Not implemented.");
 
@@ -77,6 +80,8 @@ namespace Tests.Diagnostics
     internal sealed class SafeBinderWithOtherMethods : SerializationBinder
     {
         public void Accept() { }
+
+        public Type ResolveType(string id) => Type.GetType(id);
 
         public override Type BindToType(string assemblyName, string typeName) =>
             throw new SerializationException("Only typeT is allowed");
