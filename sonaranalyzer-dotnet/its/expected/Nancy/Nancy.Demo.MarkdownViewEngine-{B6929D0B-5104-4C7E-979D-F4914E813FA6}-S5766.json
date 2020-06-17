@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  9,
+"endLine":  60,
+"endColumn":  10
+}
+}
+}
+]
+}

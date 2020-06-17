@@ -1,0 +1,21 @@
+{
+  "title": "Deserializing objects without performing data validation is security-sensitive",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "tags": [
+    "cwe",
+    "owasp-a8"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-5766",
+  "sqKey": "S5766",
+  "scope": "All",
+  "securityStandards": {
+    "CWE": [
+      502
+    ],
+    "OWASP": [
+      "A8"
+    ]
+  }
+}

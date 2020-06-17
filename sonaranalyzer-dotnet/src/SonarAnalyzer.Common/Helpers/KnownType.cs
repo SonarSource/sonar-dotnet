@@ -285,6 +285,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_Serialization_Formatters_Binary_BinaryFormatter = new KnownType("System.Runtime.Serialization.Formatters.Binary.BinaryFormatter");
         internal static readonly KnownType System_Runtime_Serialization_Formatters_Soap_SoapFormatter = new KnownType("System.Runtime.Serialization.Formatters.Soap.SoapFormatter");
         internal static readonly KnownType System_Runtime_Serialization_ISerializable = new KnownType("System.Runtime.Serialization.ISerializable");
+        internal static readonly KnownType System_Runtime_Serialization_IDeserializationCallback  = new KnownType("System.Runtime.Serialization.IDeserializationCallback");
         internal static readonly KnownType System_Runtime_Serialization_NetDataContractSerializer = new KnownType("System.Runtime.Serialization.NetDataContractSerializer");
         internal static readonly KnownType System_Runtime_Serialization_OnDeserializedAttribute = new KnownType("System.Runtime.Serialization.OnDeserializedAttribute");
         internal static readonly KnownType System_Runtime_Serialization_OnDeserializingAttribute = new KnownType("System.Runtime.Serialization.OnDeserializingAttribute");
