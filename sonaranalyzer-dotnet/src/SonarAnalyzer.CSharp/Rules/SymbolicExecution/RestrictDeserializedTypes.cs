@@ -200,14 +200,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                var typeSymbol = semanticModel.GetTypeInfo(resolverType.Expression).Type;
-                // If the symbol cannot be determined we consider the resolver safe to avoid FPs.
-                if (typeSymbol == null)
-                {
-                    return true;
-                }
-
-                return !typeSymbol.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver) && IsTypeSafe(typeSymbol);
+                return semanticModel.GetTypeInfo(resolverType.Expression).Type is {} typeSymbol &&
+                       !typeSymbol.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver) &&
+                       IsTypeSafe(typeSymbol);
             }
 
             private bool HasSafeBinderInitialization(InitializerExpressionSyntax initializer)
@@ -229,8 +224,9 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool IsTypeSafe(ITypeSymbol symbol) =>
                 symbolValidityMap.GetOrAdd(symbol, typeSymbol =>
                 {
-                    var declaration = GetBindToTypeMethodDeclaration(typeSymbol) ??
-                                      GetResolveTypeMethodDeclaration(typeSymbol);
+                    var declaration = typeSymbol.DerivesFrom(KnownType.System_Web_Script_Serialization_JavaScriptTypeResolver)
+                        ? GetResolveTypeMethodDeclaration(typeSymbol)
+                        : GetBindToTypeMethodDeclaration(typeSymbol);
 
                     // Binders and resolvers are considered safe by default (e.g. if the declaration cannot be found).
                     return declaration == null || declaration.ThrowsOrReturnsNull();

@@ -40,9 +40,6 @@
     <None Include="TestCasesForRuleFailure\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
