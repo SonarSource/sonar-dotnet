@@ -36,15 +36,15 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [TestMethod]
         public void GivenListWithAnotherNamedArgument_GetArgumentByName_ReturnsNull() =>
-            CreateNamedArgumentList("p1").GetArgumentByName("p2").Should().Be(null);
+            CreateNamedArgumentList("p1").GetArgumentByName("p2").Should().BeNull();
 
         [TestMethod]
         public void GivenListWithNamedArgument_GetArgumentByName_ReturnsArgument() =>
-            CreateNamedArgumentList("p1").GetArgumentByName("p1").Should().Match(p => ((ArgumentSyntax)p).NameIs("p1"));
+            CreateNamedArgumentList("p1").GetArgumentByName("p1").Should().Match(p => ((ArgumentSyntax)p).NameColon.Name.Identifier.Text == "p1");
 
         [TestMethod]
         public void GivenListWithMultipleNamedArguments_GetArgumentByName_ReturnsArgument() =>
-            CreateNamedArgumentList("p1", "p2", "p3").GetArgumentByName("p2").Should().Match(p => ((ArgumentSyntax)p).NameIs("p2"));
+            CreateNamedArgumentList("p1", "p2", "p3").GetArgumentByName("p2").Should().Match(p =>  ((ArgumentSyntax)p).NameColon.Name.Identifier.Text == "p2");
 
         [TestMethod]
         public void GivenListWithNotNamedArguments_GetArgumentByName_ReturnsNull() =>
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                         CreateNotNamedArgument("p3")
                     }))
                 .GetArgumentByName("p1")
-                .Should().Match(p => ((ArgumentSyntax)p).NameIs("p1"));
+                .Should().Match(p =>  ((ArgumentSyntax)p).NameColon.Name.Identifier.Text == "p1");
 
         private static ArgumentListSyntax CreateNamedArgumentList(params string[] names) =>
             SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(names.Select(CreateNamedArgument)));
