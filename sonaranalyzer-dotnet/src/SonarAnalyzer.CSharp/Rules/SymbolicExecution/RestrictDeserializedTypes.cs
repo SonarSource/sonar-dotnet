@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     if (IsLosFormatter(typeSymbol) &&
-                        !HasSafeConstructorInitialization(objectCreation, programState))
+                        !IsLosFormatterSafe(objectCreation, programState))
                     {
                         // For LosFormatter the rule is raised directly on the constructor.
                         addNode(objectCreation);
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return base.ObjectCreated(programState, symbolicValue, instruction);
             }
 
-            private bool HasSafeConstructorInitialization(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
+            private bool IsLosFormatterSafe(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
             {
                 // The constructor is safe only if it has 2 arguments and the first argument value is true.
                 if (objectCreation.ArgumentList.Arguments.Count != 2)
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                var firstArgument = objectCreation.ArgumentList.Arguments[0].Expression;
+                var firstArgument = GetEnableMacArgumentSyntax(objectCreation.ArgumentList);
                 if (firstArgument.IsKind(SyntaxKind.FalseLiteralExpression))
                 {
                     return false;
@@ -146,6 +146,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return symbolicValue == null ||
                        !programState.HasConstraint(symbolicValue, BoolConstraint.False);
             }
+
+            private static ExpressionSyntax GetEnableMacArgumentSyntax(BaseArgumentListSyntax list) =>
+                (list.GetArgumentByName("enableMac") ?? list.Arguments[0]).Expression;
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {

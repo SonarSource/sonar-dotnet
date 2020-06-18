@@ -18,25 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal static class ArgumentSyntaxExtensions
+    internal static class BaseArgumentListSyntaxExtensions
     {
-        internal static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
-            syntaxList
-                .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.Is(knownType));
-
-        internal static IEnumerable<ISymbol> GetSymbolsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
-            syntaxList
-                .GetArgumentsOfKnownType(knownType, semanticModel)
-                .Select(argument => semanticModel.GetSymbolInfo(argument.Expression).Symbol);
-
-        internal static bool NameIs(this ArgumentSyntax argument, string name) =>
-            argument.NameColon?.Name.Identifier.Text == name;
+        internal static ArgumentSyntax GetArgumentByName(this BaseArgumentListSyntax list, string name) =>
+            list.Arguments.FirstOrDefault(argument => argument.NameIs(name));
     }
 }

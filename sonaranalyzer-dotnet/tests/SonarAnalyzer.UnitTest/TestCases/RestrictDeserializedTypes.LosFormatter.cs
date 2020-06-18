@@ -17,6 +17,9 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
             new LosFormatter(true, ""); // Compliant - MAC filtering is enabled
             new LosFormatter(true, new byte[0]); // Compliant - MAC filtering is enabled
+
+            new LosFormatter(macKeyModifier: new byte[0], enableMac: false); // Noncompliant
+            new LosFormatter(macKeyModifier: new byte[0], enableMac: true); // Compliant
         }
 
         public void FunctionParameter(bool condition)
