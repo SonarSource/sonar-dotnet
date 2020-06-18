@@ -57,6 +57,17 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetAdditionalReferences());
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RestrictDeserializedTypesLosFormatter() =>
+            Verifier.VerifyAnalyzer(new []
+                {
+                    @"TestCases\RestrictDeserializedTypes.LosFormatter.cs"
+                },
+                GetAnalyzer(),
+                ParseOptionsHelper.FromCSharp8,
+                additionalReferences: GetAdditionalReferences());
+
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             // Symbolic execution analyzers are run by the SymbolicExecutionRunner
             new SymbolicExecutionRunner(
