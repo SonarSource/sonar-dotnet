@@ -137,7 +137,8 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool IsLosFormatterSafe(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
             {
                 // The constructor is safe only if it has 2 arguments and the first argument value is true.
-                if (objectCreation.ArgumentList.Arguments.Count != 2)
+                if (objectCreation.ArgumentList == null ||
+                    objectCreation.ArgumentList.Arguments.Count != 2)
                 {
                     return false;
                 }
@@ -273,7 +274,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 // - JavaScriptSerializer(JavaScriptTypeResolver): this one is safe only if the given resolver is safe
                 // See: https://docs.microsoft.com/en-us/dotnet/api/system.web.script.serialization.javascriptserializer.-ctor?view=netframework-4.8
 
-                if (objectCreation.ArgumentList.Arguments.Count == 0)
+                if (objectCreation.ArgumentList == null ||
+                    objectCreation.ArgumentList.Arguments.Count == 0)
                 {
                     return new TypeDeclarationInfo(false);
                 }

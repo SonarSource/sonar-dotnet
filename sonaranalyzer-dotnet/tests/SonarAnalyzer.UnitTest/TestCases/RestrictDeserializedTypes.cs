@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization.Formatters.Soap;
 using System.Web.UI;
@@ -13,16 +14,19 @@ namespace Tests.Diagnostics
         internal void BinaryFormatterDeserialize(MemoryStream memoryStream)
         {
             new BinaryFormatter().Deserialize(memoryStream); // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
+            new BinaryFormatter {TypeFormat = FormatterTypeStyle.TypesWhenNeeded};
         }
 
         internal void NetDataContractSerializerDeserialize()
         {
             new NetDataContractSerializer().Deserialize(new MemoryStream()); // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
+            new NetDataContractSerializer { }.Deserialize(new MemoryStream()); // Noncompliant
         }
 
         internal void SoapFormatterDeserialize()
         {
             new SoapFormatter().Deserialize(new MemoryStream()); // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
+            new SoapFormatter { }.Deserialize(new MemoryStream()); // Noncompliant
         }
 
         internal void BinderAsVariable(Stream stream, bool condition)
