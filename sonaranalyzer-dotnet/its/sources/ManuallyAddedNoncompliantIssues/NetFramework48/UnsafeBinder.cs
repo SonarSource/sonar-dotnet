@@ -18,20 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System;
+using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace NetFramework48
 {
-    public class BinaryFormatterTest
+    internal sealed class UnsafeBinder : SerializationBinder
     {
-        internal void BinaryFormatterDeserialize(Stream stream)
+        public override Type BindToType(string assemblyName, string typeName)
         {
-            new BinaryFormatter().Deserialize(stream); // Noncompliant (S5773) {{Restrict types of objects allowed to be deserialized.}}
-
-            new BinaryFormatter {Binder = new SafeBinder()}.Deserialize(stream);
-
-            new BinaryFormatter {Binder = new UnsafeBinder()}.Deserialize(stream); // Noncompliant
+            return Assembly.Load(assemblyName).GetType(typeName);
         }
     }
 }

@@ -37,11 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesFormatters() =>
-            Verifier.VerifyAnalyzer(new []
-                {
-                    @"TestCases\RestrictDeserializedTypes.cs",
-                    @"TestCases\RestrictDeserializedTypes.Binders.cs"
-                },
+            Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetAdditionalReferences());
@@ -49,10 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesJavaScriptSerializer() =>
-            Verifier.VerifyAnalyzer(new []
-                {
-                    @"TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs"
-                },
+            Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetAdditionalReferences());
@@ -60,10 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesLosFormatter() =>
-            Verifier.VerifyAnalyzer(new []
-                {
-                    @"TestCases\RestrictDeserializedTypes.LosFormatter.cs"
-                },
+            Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.LosFormatter.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetAdditionalReferences());

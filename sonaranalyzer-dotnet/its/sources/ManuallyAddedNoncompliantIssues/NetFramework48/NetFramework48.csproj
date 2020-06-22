@@ -54,6 +54,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SafeBinder.cs" />
     <Compile Include="SoapFormatterTest.cs" />
+    <Compile Include="UnsafeBinder.cs" />
+    <Compile Include="UnsafeTypeResolver.cs" />
     <Compile Include="XmlDocumentTest.cs" />
     <Compile Include="XmlReaderTest.cs" />
     <Compile Include="XmlTextReaderTest.cs" />

@@ -10,6 +10,8 @@ namespace NetFramework48
             new JavaScriptSerializer(new SimpleTypeResolver()).Deserialize<string>(json); // Noncompliant (S5773) {{Restrict types of objects allowed to be deserialized.}}
 
             new JavaScriptSerializer(new SafeTypeResolver()).Deserialize<string>(json);
+
+            new JavaScriptSerializer(new UnsafeTypeResolver()).Deserialize<string>(json); // Noncompliant
         }
 
         private sealed class SafeTypeResolver : JavaScriptTypeResolver

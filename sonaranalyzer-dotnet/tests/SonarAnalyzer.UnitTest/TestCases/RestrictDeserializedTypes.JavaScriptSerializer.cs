@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
     {
         public void SimpleTypeResolverDefaultConstructorIsNotSafe(string json)
         {
-            new JavaScriptSerializer().Deserialize<string>(json); // Noncompliant: default constructor is not safe
+            new JavaScriptSerializer().Deserialize<string>(json); // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
         }
 
         public void NullReolverIsNotSafe(string json)
@@ -22,9 +22,9 @@ namespace Tests.Diagnostics
 
         public void CustomResolver(string json)
         {
-            new JavaScriptSerializer(new UnsafeTypeResolver()).Deserialize<string>(json); // Noncompliant: unsafe resolver
+            new JavaScriptSerializer(new UnsafeTypeResolver()).Deserialize<string>(json); // Noncompliant [unsafeResolver1]: unsafe resolver
             new JavaScriptSerializer(new SafeTypeResolver()).Deserialize<string>(json); // Compliant: safe resolver
-            new JavaScriptSerializer(new UnsafeResolverWithOtherMethods()).Deserialize<string>(json); // Noncompliant: unsafe resolver
+            new JavaScriptSerializer(new UnsafeResolverWithOtherMethods()).Deserialize<string>(json); // Noncompliant [unsafeResolver2]: unsafe resolver
             new JavaScriptSerializer(new SafeTypeResolverWithOtherMethods()).Deserialize<string>(json); // Compliant: safe resolver
         }
 
@@ -39,7 +39,7 @@ namespace Tests.Diagnostics
             var safeResolver = new SafeTypeResolver();
 
             var serializer1 = new JavaScriptSerializer(unsafeResolver);
-            serializer1.Deserialize<string>(json); // Noncompliant: unsafe resolver
+            serializer1.Deserialize<string>(json); // Noncompliant [unsafeResolver3]: unsafe resolver
 
             var serializer2 = new JavaScriptSerializer(safeResolver);
             serializer2.Deserialize<string>(json); // Compliant: safe resolver
@@ -49,12 +49,13 @@ namespace Tests.Diagnostics
             new JavaScriptSerializer(new SafeTypeResolver()).Deserialize<string>(json); // Compliant: safe resolver
 
         public string LambdaUnsafe(string json) =>
-            new JavaScriptSerializer(new UnsafeTypeResolver()).Deserialize<string>(json); // Noncompliant: unsafe resolver
+            new JavaScriptSerializer(new UnsafeTypeResolver()).Deserialize<string>(json); // Noncompliant [unsafeResolver4] unsafe resolver
     }
 
     internal class UnsafeTypeResolver : JavaScriptTypeResolver
     {
         public override Type ResolveType(string id) => Type.GetType(id);
+//                           ^^^^^^^^^^^ Secondary [unsafeResolver1, unsafeResolver3, unsafeResolver4]
 
         public override string ResolveTypeId(Type type) => throw new NotImplementedException();
     }
@@ -84,6 +85,7 @@ namespace Tests.Diagnostics
         public Type ResolveType(string id, string wrongNumberOfParameters) => throw new NotImplementedException();
 
         public override Type ResolveType(string id) => Type.GetType(id);
+//                           ^^^^^^^^^^^ Secondary [unsafeResolver2]
 
         public override string ResolveTypeId(Type type) => throw new NotImplementedException();
     }

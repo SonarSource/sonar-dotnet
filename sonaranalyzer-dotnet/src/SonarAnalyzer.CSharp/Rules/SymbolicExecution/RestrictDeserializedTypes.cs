@@ -37,7 +37,9 @@ namespace SonarAnalyzer.Rules.CSharp
     internal sealed class RestrictDeserializedTypes : ISymbolicExecutionAnalyzer
     {
         internal const string DiagnosticId = "S5773";
-        private const string MessageFormat = "Restrict types of objects allowed to be deserialized.";
+        private const string MessageFormat = "{0}";
+        private const string RestrictTypesMessage = "Restrict types of objects allowed to be deserialized.";
+        private const string VerifyMacMessage = "Serialized data signature (MAC) should be verified.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -49,24 +51,32 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            private readonly List<SyntaxNode> nodes = new List<SyntaxNode>();
+            private readonly List<LocationInfo> locations = new List<LocationInfo>();
 
             public AnalysisContext(AbstractExplodedGraph explodedGraph)
             {
-                explodedGraph.AddExplodedGraphCheck(new SerializationBinderCheck(explodedGraph, AddNode));
+                explodedGraph.AddExplodedGraphCheck(new SerializationBinderCheck(explodedGraph, AddIssueLocation));
             }
 
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                nodes.Distinct().Select(node => Diagnostic.Create(rule, node.GetLocation()));
+                locations.Select(location => Diagnostic.Create(rule, location.Primary,  location.SecondaryLocations, location.Message));
 
             public void Dispose()
             {
                 // Nothing to do here.
             }
 
-            private void AddNode(SyntaxNode syntaxNode) => nodes.Add(syntaxNode);
+            private void AddIssueLocation(LocationInfo locationInfo)
+            {
+                // An issue can appear multiple times for the same node while exploring the exploded graph.
+                // In this case the location is added one single time to avoid duplicates.
+                if (!locations.Any(location => location.Primary.Equals(locationInfo.Primary)))
+                {
+                    locations.Add(locationInfo);
+                }
+            }
         }
 
         private sealed class SerializationBinderCheck : ExplodedGraphCheck
@@ -77,14 +87,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     KnownType.System_Runtime_Serialization_NetDataContractSerializer,
                     KnownType.System_Runtime_Serialization_Formatters_Soap_SoapFormatter);
 
-            private readonly Dictionary<ITypeSymbol, bool> symbolValidityMap = new Dictionary<ITypeSymbol, bool>();
+            private readonly Dictionary<ITypeSymbol, TypeDeclarationInfo> sanitizerDeclarations = new Dictionary<ITypeSymbol, TypeDeclarationInfo>();
+            private readonly Dictionary<SymbolicValue, Location> secondaryLocations = new Dictionary<SymbolicValue, Location>();
 
-            private readonly Action<SyntaxNode> addNode;
+            private readonly Action<LocationInfo> addLocation;
 
-            public SerializationBinderCheck(AbstractExplodedGraph explodedGraph, Action<SyntaxNode> addNode)
+            public SerializationBinderCheck(AbstractExplodedGraph explodedGraph, Action<LocationInfo> addLocation)
                 : base(explodedGraph)
             {
-                this.addNode = addNode;
+                this.addLocation = addLocation;
             }
 
             public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
@@ -92,23 +103,31 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (instruction is ObjectCreationExpressionSyntax objectCreation)
                 {
                     var typeSymbol = semanticModel.GetTypeInfo(instruction).Type;
-                    if (IsFormatterWithBinder(typeSymbol) &&
-                        !HasSafeBinderInitialization(objectCreation.Initializer))
+                    if (IsFormatterWithBinder(typeSymbol))
                     {
-                        programState = programState.SetConstraint(symbolicValue, SerializationConstraint.Unsafe);
+                        var declarationInfo = GetBinderDeclaration(objectCreation.Initializer);
+                        if (!declarationInfo.IsSafe)
+                        {
+                            AddSecondaryLocation(symbolicValue, declarationInfo);
+                            programState = programState.SetConstraint(symbolicValue, SerializationConstraint.Unsafe);
+                        }
                     }
 
-                    if (IsJavaScriptSerializer(typeSymbol) &&
-                        !HasSafeResolverInitialization(objectCreation))
+                    if (IsJavaScriptSerializer(typeSymbol))
                     {
-                        programState = programState.SetConstraint(symbolicValue, SerializationConstraint.Unsafe);
+                        var declarationInfo = GetResolverDeclaration(objectCreation);
+                        if (!declarationInfo.IsSafe)
+                        {
+                            AddSecondaryLocation(symbolicValue, declarationInfo);
+                            programState = programState.SetConstraint(symbolicValue, SerializationConstraint.Unsafe);
+                        }
                     }
 
                     if (IsLosFormatter(typeSymbol) &&
                         !IsLosFormatterSafe(objectCreation, programState))
                     {
                         // For LosFormatter the rule is raised directly on the constructor.
-                        addNode(objectCreation);
+                        addLocation(new LocationInfo(objectCreation.GetLocation(), VerifyMacMessage));
                     }
                 }
 
@@ -174,7 +193,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (programState.HasConstraint(symbolValue, SerializationConstraint.Unsafe))
                     {
-                        addNode(memberAccess);
+                        var locationInfo = secondaryLocations.TryGetValue(symbolValue, out var location)
+                            ? new LocationInfo(memberAccess.Name.GetLocation(), RestrictTypesMessage, location)
+                            : new LocationInfo(memberAccess.Name.GetLocation(), RestrictTypesMessage);
+
+                        addLocation(locationInfo);
                     }
                 }
 
@@ -217,14 +240,33 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var binderType = semanticModel.GetTypeInfo(assignmentExpression.Right).Type;
-                var constraint = IsTypeSafe(binderType)
+                if (binderType == null)
+                {
+                    return programState;
+                }
+
+                var declaration = GetOrAddSanitizerDeclaration(binderType);
+                if (!declaration.IsSafe)
+                {
+                    AddSecondaryLocation(formatterSymbolValue, declaration);
+                }
+
+                var constraint = declaration.IsSafe
                     ? SerializationConstraint.Safe
                     : SerializationConstraint.Unsafe;
 
                 return programState.SetConstraint(formatterSymbolValue, constraint);
             }
 
-            private bool HasSafeResolverInitialization(ObjectCreationExpressionSyntax objectCreation)
+            private void AddSecondaryLocation(SymbolicValue symbolicValue, TypeDeclarationInfo declarationInfo)
+            {
+                if (declarationInfo.Location != null)
+                {
+                    secondaryLocations[symbolicValue] = declarationInfo.Location;
+                }
+            }
+
+            private TypeDeclarationInfo GetResolverDeclaration(ObjectCreationExpressionSyntax objectCreation)
             {
                 // JavaScriptSerializer has 2 constructors:
                 // - JavaScriptSerializer(): unsafe since it doesn't give the option to set a provider
@@ -233,21 +275,30 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (objectCreation.ArgumentList.Arguments.Count == 0)
                 {
-                    return false;
+                    return new TypeDeclarationInfo(false);
                 }
 
                 var resolverType = objectCreation.ArgumentList.Arguments[0];
                 if (resolverType.Expression.IsNullLiteral())
                 {
-                    return false;
+                    return new TypeDeclarationInfo(false);
                 }
 
                 return semanticModel.GetTypeInfo(resolverType.Expression).Type is {} typeSymbol &&
-                       !typeSymbol.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver) &&
-                       IsTypeSafe(typeSymbol);
+                       !typeSymbol.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver)
+                    ? GetOrAddSanitizerDeclaration(typeSymbol)
+                    : new TypeDeclarationInfo(false);
             }
 
-            private bool HasSafeBinderInitialization(InitializerExpressionSyntax initializer)
+            private TypeDeclarationInfo GetBinderDeclaration(InitializerExpressionSyntax initializer)
+            {
+                var typeSymbol = GetBinderTypeSymbol(initializer);
+                return typeSymbol == null
+                    ? new TypeDeclarationInfo(false)
+                    : GetOrAddSanitizerDeclaration(typeSymbol);
+            }
+
+            private ITypeSymbol GetBinderTypeSymbol(InitializerExpressionSyntax initializer)
             {
                 var binderAssignment = initializer?.Expressions
                     .OfType<AssignmentExpressionSyntax>()
@@ -256,22 +307,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (binderAssignment == null ||
                     binderAssignment.Right.IsNullLiteral())
                 {
-                    return false;
+                    return null;
                 }
 
-                return semanticModel.GetTypeInfo(binderAssignment.Right).Type is {} typeSymbol &&
-                       IsTypeSafe(typeSymbol);
+                return semanticModel.GetTypeInfo(binderAssignment.Right).Type;
             }
 
-            private bool IsTypeSafe(ITypeSymbol symbol) =>
-                symbolValidityMap.GetOrAdd(symbol, typeSymbol =>
+            private TypeDeclarationInfo GetOrAddSanitizerDeclaration(ITypeSymbol symbol) =>
+                sanitizerDeclarations.GetOrAdd(symbol, typeSymbol =>
                 {
                     var declaration = typeSymbol.DerivesFrom(KnownType.System_Web_Script_Serialization_JavaScriptTypeResolver)
                         ? GetResolveTypeMethodDeclaration(typeSymbol)
                         : GetBindToTypeMethodDeclaration(typeSymbol);
 
-                    // Binders and resolvers are considered safe by default (e.g. if the declaration cannot be found).
-                    return declaration == null || declaration.ThrowsOrReturnsNull();
+                    return new TypeDeclarationInfo(declaration);
                 });
 
             private static MethodDeclarationSyntax GetBindToTypeMethodDeclaration(ISymbol symbol) =>
@@ -321,6 +370,44 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsLosFormatter(ITypeSymbol typeSymbol) =>
                 typeSymbol.Is(KnownType.System_Web_UI_LosFormatter);
+        }
+
+        private sealed class LocationInfo
+        {
+            internal Location Primary { get; }
+
+            internal string Message { get; }
+
+            internal IEnumerable<Location> SecondaryLocations { get; }
+
+            public LocationInfo(Location primary, string message, Location secondary = null)
+            {
+                Primary = primary;
+                Message = message;
+                SecondaryLocations = secondary == null
+                    ? Enumerable.Empty<Location>()
+                    : new[] {secondary};
+            }
+        }
+
+        private sealed class TypeDeclarationInfo
+        {
+            internal Location Location { get; }
+
+            internal bool IsSafe { get; }
+
+            public TypeDeclarationInfo(MethodDeclarationSyntax declaration)
+            {
+                Location = declaration?.Identifier.GetLocation();
+
+                IsSafe = declaration == null || declaration.ThrowsOrReturnsNull();
+            }
+
+            public TypeDeclarationInfo(bool isSafe)
+            {
+                IsSafe = isSafe;
+                Location = null;
+            }
         }
     }
 }

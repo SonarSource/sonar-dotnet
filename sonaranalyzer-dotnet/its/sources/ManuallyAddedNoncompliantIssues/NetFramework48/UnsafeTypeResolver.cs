@@ -18,20 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System;
+using System.Web.Script.Serialization;
 
 namespace NetFramework48
 {
-    public class BinaryFormatterTest
+    internal class UnsafeTypeResolver : JavaScriptTypeResolver
     {
-        internal void BinaryFormatterDeserialize(Stream stream)
-        {
-            new BinaryFormatter().Deserialize(stream); // Noncompliant (S5773) {{Restrict types of objects allowed to be deserialized.}}
+        public override Type ResolveType(string id) => Type.GetType(id);
 
-            new BinaryFormatter {Binder = new SafeBinder()}.Deserialize(stream);
-
-            new BinaryFormatter {Binder = new UnsafeBinder()}.Deserialize(stream); // Noncompliant
-        }
+        public override string ResolveTypeId(Type type) => throw new NotSupportedException();
     }
 }
