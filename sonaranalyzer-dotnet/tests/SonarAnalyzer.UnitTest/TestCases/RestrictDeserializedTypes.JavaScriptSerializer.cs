@@ -10,6 +10,9 @@ namespace Tests.Diagnostics
             new JavaScriptSerializer().Deserialize<string>(json); // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
         }
 
+        private static JavaScriptSerializer CtorInitializer() =>
+            new JavaScriptSerializer { MaxJsonLength = int.MaxValue }; // Compliant: deserialize method is not called
+
         public void NullReolverIsNotSafe(string json)
         {
             new JavaScriptSerializer(null).Deserialize<string>(json); // Noncompliant: a resolver is required for safe deserialization

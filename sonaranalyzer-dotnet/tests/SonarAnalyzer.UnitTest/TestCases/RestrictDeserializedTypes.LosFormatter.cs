@@ -8,6 +8,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
         public void DefaultConstructor()
         {
             new LosFormatter(); // Noncompliant {{Serialized data signature (MAC) should be verified.}}
+            new LosFormatter { }; // Noncompliant
         }
 
         public void LiteralExpression()
