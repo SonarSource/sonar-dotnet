@@ -41,8 +41,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions = new KnownType("Microsoft.AspNetCore.Hosting.HostingEnvironmentExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions = new KnownType("Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Http_CookieOptions = new KnownType("Microsoft.AspNetCore.Http.CookieOptions");
-        internal static readonly KnownType Microsoft_AspNetCore_Http_HttpRequest = new KnownType("Microsoft.AspNetCore.Http.HttpRequest");
-        internal static readonly KnownType Microsoft_AspNetCore_Http_HttpResponse = new KnownType("Microsoft.AspNetCore.Http.HttpResponse");
         internal static readonly KnownType Microsoft_AspNetCore_Http_IHeaderDictionary = new KnownType("Microsoft.AspNetCore.Http.IHeaderDictionary");
         internal static readonly KnownType Microsoft_AspNetCore_Http_IRequestCookieCollection = new KnownType("Microsoft.AspNetCore.Http.IRequestCookieCollection");
         internal static readonly KnownType Microsoft_AspNetCore_Http_IResponseCookies = new KnownType("Microsoft.AspNetCore.Http.IResponseCookies");
@@ -51,8 +49,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
-        internal static readonly KnownType Microsoft_AspNetCore_Mvc_VirtualFileResult = new KnownType("Microsoft.AspNetCore.Mvc.VirtualFileResult");
-        internal static readonly KnownType Microsoft_AspNetCore_Routing_VirtualPathData = new KnownType("Microsoft.AspNetCore.Routing.VirtualPathData");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RawSqlString = new KnownType("Microsoft.EntityFrameworkCore.RawSqlString");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalQueryableExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalQueryableExtensions");
@@ -80,7 +76,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute");
         internal static readonly KnownType Microsoft_Web_XmlTransform_XmlFileInfoDocument = new KnownType("Microsoft.Web.XmlTransform.XmlFileInfoDocument");
         internal static readonly KnownType Microsoft_Web_XmlTransform_XmlTransformableDocument = new KnownType("Microsoft.Web.XmlTransform.XmlTransformableDocument");
-        internal static readonly KnownType Microsoft_Win32_SafeHandles_SafeFileHandle = new KnownType("Microsoft.Win32.SafeHandles.SafeFileHandle");
         internal static readonly KnownType Nancy_Cookies_NancyCookie = new KnownType("Nancy.Cookies.NancyCookie");
         internal static readonly KnownType NLog_LogManager = new KnownType("NLog.LogManager");
         internal static readonly KnownType NUnit_Framework_Assert = new KnownType("NUnit.Framework.Assert");
@@ -99,7 +94,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Org_BouncyCastle_Crypto_Generators_DHParametersGenerator = new KnownType("Org.BouncyCastle.Crypto.Generators.DHParametersGenerator");
         internal static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new KnownType("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         internal static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new KnownType("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
-        internal static readonly KnownType RestSharp_IRestRequest = new KnownType("RestSharp.IRestRequest");
         internal static readonly KnownType Serilog_LoggerConfiguration = new KnownType("Serilog.LoggerConfiguration");
         internal static readonly KnownType System_Action = new KnownType("System.Action");
         internal static readonly KnownType System_Action_T = new KnownType("System.Action<T>");
@@ -125,13 +119,10 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Collections_Generic_Dictionary_TKey_TValue = new KnownType("System.Collections.Generic.Dictionary<TKey, TValue>");
         internal static readonly KnownType System_Collections_Generic_HashSet_T = new KnownType("System.Collections.Generic.HashSet<T>");
         internal static readonly KnownType System_Collections_Generic_ICollection_T = new KnownType(SpecialType.System_Collections_Generic_ICollection_T, "System.Collections.Generic.ICollection<T>");
-        internal static readonly KnownType System_Collections_Generic_ICollection_T_VB = new KnownType(SpecialType.System_Collections_Generic_ICollection_T, "System.Collections.Generic.ICollection(Of T)");
         internal static readonly KnownType System_Collections_Generic_IDictionary_TKey_TValue = new KnownType("System.Collections.Generic.IDictionary<TKey, TValue>");
         internal static readonly KnownType System_Collections_Generic_IDictionary_TKey_TValue_VB = new KnownType("System.Collections.Generic.IDictionary(Of TKey, TValue)");
         internal static readonly KnownType System_Collections_Generic_IEnumerable_T = new KnownType(SpecialType.System_Collections_Generic_IEnumerable_T, "System.Collections.Generic.IEnumerable<T>");
         internal static readonly KnownType System_Collections_Generic_IList_T = new KnownType(SpecialType.System_Collections_Generic_IList_T, "System.Collections.Generic.IList<T>");
-        internal static readonly KnownType System_Collections_Generic_IReadOnlyCollection_T = new KnownType("System.Collections.Generic.IReadOnlyCollection<T>");
-        internal static readonly KnownType System_Collections_Generic_IReadOnlyDictionary_TKey_TValue = new KnownType("System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>");
         internal static readonly KnownType System_Collections_Generic_ISet_T = new KnownType("System.Collections.Generic.ISet<T>");
         internal static readonly KnownType System_Collections_Generic_KeyValuePair_TKey_TValue = new KnownType("System.Collections.Generic.KeyValuePair<TKey, TValue>");
         internal static readonly KnownType System_Collections_Generic_List_T = new KnownType("System.Collections.Generic.List<T>");
@@ -200,8 +191,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Diagnostics_Contracts_PureAttribute = new KnownType("System.Diagnostics.Contracts.PureAttribute");
         internal static readonly KnownType System_Diagnostics_Debug = new KnownType("System.Diagnostics.Debug");
         internal static readonly KnownType System_Diagnostics_DebuggerDisplayAttribute = new KnownType("System.Diagnostics.DebuggerDisplayAttribute");
-        internal static readonly KnownType System_Diagnostics_Process = new KnownType("System.Diagnostics.Process");
-        internal static readonly KnownType System_Diagnostics_ProcessStartInfo = new KnownType("System.Diagnostics.ProcessStartInfo");
         internal static readonly KnownType System_Diagnostics_Trace = new KnownType("System.Diagnostics.Trace");
         internal static readonly KnownType System_Diagnostics_TraceSource = new KnownType("System.Diagnostics.TraceSource");
         internal static readonly KnownType System_DirectoryServices_AuthenticationTypes = new KnownType("System.DirectoryServices.AuthenticationTypes");
@@ -218,7 +207,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Exception = new KnownType("System.Exception");
         internal static readonly KnownType System_ExecutionEngineException = new KnownType("System.ExecutionEngineException");
         internal static readonly KnownType System_FlagsAttribute = new KnownType("System.FlagsAttribute");
-        internal static readonly KnownType System_FormattableString = new KnownType("System.FormattableString");
         internal static readonly KnownType System_Func_TResult = new KnownType("System.Func<TResult>");
         internal static readonly KnownType System_Func_T_TResult = new KnownType("System.Func<T, TResult>");
         internal static readonly KnownType System_Func_T1_T2_TResult = new KnownType("System.Func<T1, T2, TResult>");
@@ -242,17 +230,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_IntPtr = new KnownType(SpecialType.System_IntPtr, "IntPtr");
         internal static readonly KnownType System_InvalidOperationException = new KnownType("System.InvalidOperationException");
         internal static readonly KnownType System_IO_Compression_ZipArchiveEntry = new KnownType("System.IO.Compression.ZipArchiveEntry");
-        internal static readonly KnownType System_IO_Compression_ZipFile = new KnownType("System.IO.Compression.ZipFile");
         internal static readonly KnownType System_IO_Compression_ZipFileExtensions = new KnownType("System.IO.Compression.ZipFileExtensions");
-        internal static readonly KnownType System_IO_Directory = new KnownType("System.IO.Directory");
-        internal static readonly KnownType System_IO_DirectoryInfo = new KnownType("System.IO.DirectoryInfo");
-        internal static readonly KnownType System_IO_File = new KnownType("System.IO.File");
-        internal static readonly KnownType System_IO_FileInfo = new KnownType("System.IO.FileInfo");
         internal static readonly KnownType System_IO_FileStream = new KnownType("System.IO.FileStream");
-        internal static readonly KnownType System_IO_IsolatedStorage_IsolatedStorageFile = new KnownType("System.IO.IsolatedStorage.IsolatedStorageFile");
-        internal static readonly KnownType System_IO_IsolatedStorage_IsolatedStorageFileStream = new KnownType("System.IO.IsolatedStorage.IsolatedStorageFileStream");
-        internal static readonly KnownType System_IO_MemoryMappedFiles_MemoryMappedFile = new KnownType("System.IO.MemoryMappedFiles.MemoryMappedFile");
-        internal static readonly KnownType System_IO_Path = new KnownType("System.IO.Path");
         internal static readonly KnownType System_IO_Stream = new KnownType("System.IO.Stream");
         internal static readonly KnownType System_IO_StreamReader = new KnownType("System.IO.StreamReader");
         internal static readonly KnownType System_IO_StreamWriter = new KnownType("System.IO.StreamWriter");
@@ -263,7 +242,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Linq_ImmutableArrayExtensions = new KnownType("System.Linq.ImmutableArrayExtensions");
         internal static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
         internal static readonly KnownType System_MTAThreadAttribute = new KnownType("System.MTAThreadAttribute");
-        internal static readonly KnownType System_Net_Http_HttpClient = new KnownType("System.Net.Http.HttpClient");
         internal static readonly KnownType System_Net_NetworkCredential = new KnownType("System.Net.NetworkCredential");
         internal static readonly KnownType System_Net_Security_RemoteCertificateValidationCallback = new KnownType("System.Net.Security.RemoteCertificateValidationCallback");
         internal static readonly KnownType System_Net_Security_SslPolicyErrors = new KnownType("System.Net.Security.SslPolicyErrors");
@@ -271,8 +249,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Net_Sockets_TcpClient = new KnownType("System.Net.Sockets.TcpClient");
         internal static readonly KnownType System_Net_Sockets_UdpClient = new KnownType("System.Net.Sockets.UdpClient");
         internal static readonly KnownType System_Net_WebClient = new KnownType("System.Net.WebClient");
-        internal static readonly KnownType System_Net_WebRequest = new KnownType("System.Net.WebRequest");
-        internal static readonly KnownType System_NonSerializedAttribute = new KnownType("System.NonSerializedAttribute");
         internal static readonly KnownType System_NotImplementedException = new KnownType("System.NotImplementedException");
         internal static readonly KnownType System_NotSupportedException = new KnownType("System.NotSupportedException");
         internal static readonly KnownType System_Nullable_T = new KnownType(SpecialType.System_Nullable_T, "System.Nullable<T>");
@@ -318,7 +294,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_Serialization_SerializationInfo = new KnownType("System.Runtime.Serialization.SerializationInfo");
         internal static readonly KnownType System_Runtime_Serialization_StreamingContext = new KnownType("System.Runtime.Serialization.StreamingContext");
         internal static readonly KnownType System_SByte = new KnownType(SpecialType.System_SByte, "sbyte");
-        internal static readonly KnownType System_Security_AccessControl_FileSecurity = new KnownType("System.Security.AccessControl.FileSecurity");
         internal static readonly KnownType System_Security_AllowPartiallyTrustedCallersAttribute = new KnownType("System.Security.AllowPartiallyTrustedCallersAttribute");
         internal static readonly KnownType System_Security_Cryptography_AesManaged = new KnownType("System.Security.Cryptography.AesManaged");
         internal static readonly KnownType System_Security_Cryptography_AsymmetricAlgorithm = new KnownType("System.Security.Cryptography.AsymmetricAlgorithm");
@@ -383,27 +358,20 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Web_HttpCookie = new KnownType("System.Web.HttpCookie");
         internal static readonly KnownType System_Web_HttpContext = new KnownType("System.Web.HttpContext");
         internal static readonly KnownType System_Web_Http_ApiController = new KnownType("System.Web.Http.ApiController");
-        internal static readonly KnownType System_Web_HttpRequestBase = new KnownType("System.Web.HttpRequestBase");
-        internal static readonly KnownType System_Web_HttpResponseBase = new KnownType("System.Web.HttpResponseBase");
-        internal static readonly KnownType System_Web_HttpServerUtilityBase = new KnownType("System.Web.HttpServerUtilityBase");
         internal static readonly KnownType System_Web_Mvc_NonActionAttribute = new KnownType("System.Web.Mvc.NonActionAttribute");
         internal static readonly KnownType System_Web_Mvc_Controller = new KnownType("System.Web.Mvc.Controller");
         internal static readonly KnownType System_Web_Mvc_HttpPostAttribute = new KnownType("System.Web.Mvc.HttpPostAttribute");
-        internal static readonly KnownType System_Web_Mvc_UrlHelper = new KnownType("System.Web.Mvc.UrlHelper");
         internal static readonly KnownType System_Web_Mvc_ValidateInputAttribute = new KnownType("System.Web.Mvc.ValidateInputAttribute");
         internal static readonly KnownType System_Web_Script_Serialization_JavaScriptSerializer = new KnownType("System.Web.Script.Serialization.JavaScriptSerializer");
         internal static readonly KnownType System_Web_Script_Serialization_JavaScriptTypeResolver = new KnownType("System.Web.Script.Serialization.JavaScriptTypeResolver");
         internal static readonly KnownType System_Web_Script_Serialization_SimpleTypeResolver = new KnownType("System.Web.Script.Serialization.SimpleTypeResolver");
         internal static readonly KnownType System_Web_UI_LosFormatter = new KnownType("System.Web.UI.LosFormatter");
-        internal static readonly KnownType System_Web_VirtualPathUtility = new KnownType("System.Web.VirtualPathUtility");
         internal static readonly KnownType System_Windows_DependencyObject = new KnownType("System.Windows.DependencyObject");
         internal static readonly KnownType System_Windows_Forms_Application = new KnownType("System.Windows.Forms.Application");
         internal static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute = new KnownType("System.Windows.Markup.ConstructorArgumentAttribute");
         internal static readonly KnownType System_Xml_XmlDocument = new KnownType("System.Xml.XmlDocument");
         internal static readonly KnownType System_Xml_XmlDataDocument = new KnownType("System.Xml.XmlDataDocument");
         internal static readonly KnownType System_Xml_XmlNode = new KnownType("System.Xml.XmlNode");
-        internal static readonly KnownType System_Xml_XPath_XPathNavigator = new KnownType("System.Xml.XPath.XPathNavigator");
-        internal static readonly KnownType System_Xml_XPath_XPathExpression = new KnownType("System.Xml.XPath.XPathExpression");
         internal static readonly KnownType System_Xml_XPath_XPathDocument = new KnownType("System.Xml.XPath.XPathDocument");
         internal static readonly KnownType System_Xml_XmlReader = new KnownType("System.Xml.XmlReader");
         internal static readonly KnownType System_Xml_XmlReaderSettings = new KnownType("System.Xml.XmlReaderSettings");
@@ -521,23 +489,17 @@ namespace SonarAnalyzer.Helpers
         private KnownType(SpecialType specialType, string typeName)
         {
             TypeName = typeName;
-            this.shortName = new Lazy<string>(() => typeName.Split('.').Last());
+            shortName = new Lazy<string>(() => typeName.Split('.').Last());
             this.specialType = specialType;
-            this.isSpecialType = specialType != SpecialType.None;
+            isSpecialType = specialType != SpecialType.None;
         }
 
         public string TypeName { get; }
 
         public string ShortName => shortName.Value;
 
-        internal bool Matches(string type)
-        {
-            return !this.isSpecialType && TypeName == type;
-        }
+        internal bool Matches(string type) => !isSpecialType && TypeName == type;
 
-        internal bool Matches(SpecialType type)
-        {
-            return this.isSpecialType && this.specialType == type;
-        }
+        internal bool Matches(SpecialType type) => isSpecialType && specialType == type;
     }
 }
