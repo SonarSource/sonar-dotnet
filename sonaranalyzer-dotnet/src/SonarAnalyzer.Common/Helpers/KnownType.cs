@@ -36,6 +36,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType log4net_Config_XmlConfigurator = new KnownType("log4net.Config.XmlConfigurator");
         internal static readonly KnownType log4net_Config_DOMConfigurator = new KnownType("log4net.Config.DOMConfigurator");
         internal static readonly KnownType log4net_Config_BasicConfigurator = new KnownType("log4net.Config.BasicConfigurator");
+        internal static readonly KnownType Microsoft_AspNet_SignalR_Hub = new KnownType("Microsoft.AspNet.SignalR.Hub");
         internal static readonly KnownType Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions = new KnownType("Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions = new KnownType("Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions = new KnownType("Microsoft.AspNetCore.Hosting.HostingEnvironmentExtensions");

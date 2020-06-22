@@ -51,13 +51,13 @@ namespace SonarAnalyzer.Helpers
             methodSymbol.MethodKind == MethodKind.Ordinary &&
             methodSymbol.GetEffectiveAccessibility() == Accessibility.Public &&
             !methodSymbol.GetAttributes().Any(d => d.AttributeClass.IsAny(nonActionTypes)) &&
-            IsControllerType(methodSymbol?.ContainingType);
+            IsControllerType(methodSymbol.ContainingType);
 
         /// <summary>
         /// Returns a value indicating whether the provided type symbol is a ASP.NET MVC
         /// controller.
         /// </summary>
-        public static bool IsControllerType(this INamedTypeSymbol containingType) =>
+        private static bool IsControllerType(this INamedTypeSymbol containingType) =>
             containingType != null &&
             (containingType.DerivesFromAny(controllerTypes)
                 || containingType.GetAttributes(controllerAttributeTypes).Any()) &&

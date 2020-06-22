@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR;
 
 namespace Tests.Diagnostics
 {
@@ -139,5 +140,22 @@ namespace Tests.Diagnostics
     {
         [System.ComponentModel.Browsable(true)]
         public async Task OtherAttributes() { } // Noncompliant
+    }
+
+    public class MyHub : Hub
+    {
+        public MyHub()
+        {
+        }
+
+        public Task<string> MyMethod() // Compliant - Public methods from types derived from `Microsoft.AspNet.SignalR.Hub` are considered an exception.
+        {
+            return Task.FromResult("foo");
+        }
+
+        private Task<string> PrivateMethod() // Noncompliant
+        {
+            return Task.FromResult("foo");
+        }
     }
 }
