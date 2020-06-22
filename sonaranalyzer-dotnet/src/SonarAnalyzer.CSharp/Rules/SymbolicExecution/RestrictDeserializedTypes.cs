@@ -245,8 +245,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                var declaration = GetSanitizerDeclaration(binderType);
-                AddSecondaryLocation(formatterSymbolValue, declaration);
+                var declaration = GetOrAddSanitizerDeclaration(binderType);
+                if (!declaration.IsSafe)
+                {
+                    AddSecondaryLocation(formatterSymbolValue, declaration);
+                }
 
                 var constraint = declaration.IsSafe
                     ? SerializationConstraint.Safe
@@ -257,13 +260,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void AddSecondaryLocation(SymbolicValue symbolicValue, TypeDeclarationInfo declarationInfo)
             {
-                if (declarationInfo.IsSafe ||
-                    declarationInfo.Location == null)
+                if (declarationInfo.Location != null)
                 {
-                    return;
+                    secondaryLocations[symbolicValue] = declarationInfo.Location;
                 }
-
-                secondaryLocations[symbolicValue] = declarationInfo.Location;
             }
 
             private TypeDeclarationInfo GetResolverDeclaration(ObjectCreationExpressionSyntax objectCreation)
@@ -286,7 +286,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return semanticModel.GetTypeInfo(resolverType.Expression).Type is {} typeSymbol &&
                        !typeSymbol.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver)
-                    ? GetSanitizerDeclaration(typeSymbol)
+                    ? GetOrAddSanitizerDeclaration(typeSymbol)
                     : new TypeDeclarationInfo(false);
             }
 
@@ -295,7 +295,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var typeSymbol = GetBinderTypeSymbol(initializer);
                 return typeSymbol == null
                     ? new TypeDeclarationInfo(false)
-                    : GetSanitizerDeclaration(typeSymbol);
+                    : GetOrAddSanitizerDeclaration(typeSymbol);
             }
 
             private ITypeSymbol GetBinderTypeSymbol(InitializerExpressionSyntax initializer)
@@ -313,7 +313,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return semanticModel.GetTypeInfo(binderAssignment.Right).Type;
             }
 
-            private TypeDeclarationInfo GetSanitizerDeclaration(ITypeSymbol symbol) =>
+            private TypeDeclarationInfo GetOrAddSanitizerDeclaration(ITypeSymbol symbol) =>
                 sanitizerDeclarations.GetOrAdd(symbol, typeSymbol =>
                 {
                     var declaration = typeSymbol.DerivesFrom(KnownType.System_Web_Script_Serialization_JavaScriptTypeResolver)
