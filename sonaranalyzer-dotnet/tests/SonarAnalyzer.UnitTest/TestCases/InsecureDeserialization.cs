@@ -21,6 +21,17 @@ namespace Tests.Diagnostics
     }
 
     [Serializable]
+    public class ClassWithDefaultConstructorWithConditionalsIsSafe
+    {
+        public string Name { get; set; }
+
+        public ClassWithDefaultConstructorWithConditionalsIsSafe()
+        {
+            Name ??= string.Empty;
+        }
+    }
+
+    [Serializable]
     public class CtorParameterIsNotInConditional
     {
         public string Name { get; set; }
@@ -267,9 +278,9 @@ namespace Tests.Diagnostics
     {
         private string Name { get; }
 
-        public WithoutConditionsInCtor()
+        public WithoutConditionsInCtor(string name)
         {
-            Name = string.Empty;
+            Name = name;
         }
 
         public void OnDeserialization(object sender)
@@ -334,6 +345,42 @@ namespace Tests.Diagnostics
         {
             FirstName = (string)sender;
             LastName = true ? "a" : "b";
+        }
+    }
+
+    [Serializable]
+    public abstract class AbstractSerializable : ISerializable
+    {
+        public string Name { get; private set; }
+
+        public AbstractSerializable(string name) // Noncompliant
+        {
+            Name = name ?? string.Empty;
+        }
+
+        public abstract void GetObjectData(SerializationInfo info, StreamingContext context);
+    }
+
+    [Serializable]
+    public abstract class AbstractDeserializationCallback : IDeserializationCallback
+    {
+        public string Name { get; private set; }
+
+        public AbstractDeserializationCallback(string name) // Noncompliant
+        {
+            Name = name ?? string.Empty;
+        }
+
+        public abstract void OnDeserialization(object sender);
+    }
+
+    public class ClassWithoutSerializableAttributeIsSafe
+    {
+        public string Name { get; set; }
+
+        public ClassWithoutSerializableAttributeIsSafe(string name)
+        {
+            Name = name ?? string.Empty;
         }
     }
 }

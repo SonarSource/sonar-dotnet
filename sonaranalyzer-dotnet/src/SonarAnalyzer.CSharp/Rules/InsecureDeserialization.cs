@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (implementsIDeserializationCallback &&
                 !OnDeserializationHasConditions(classDeclaration, context.SemanticModel))
             {
-                foreach (var ctorInfo in walker.GetConstructorsInfo())
+                foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ctorInfo.Declaration.GetLocation()));
                 }
@@ -134,7 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly SemanticModel semanticModel;
             private readonly List<ConstructorInfo> constructorsInfo = new List<ConstructorInfo>();
 
-            private int classLevel;
+            private bool visitedFirstLevel;
 
             public ConstructorDeclarationWalker(SemanticModel semanticModel)
             {
@@ -162,13 +162,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitClassDeclaration(ClassDeclarationSyntax node)
             {
-                if (classLevel != 0)
+                if (visitedFirstLevel)
                 {
                     // Skip nested class visits. The rule will be triggered for them also.
                     return;
                 }
 
-                classLevel++;
+                visitedFirstLevel = true;
                 base.VisitClassDeclaration(node);
             }
 
@@ -194,11 +194,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static ImmutableArray<ISymbol> GetConstructorParameterSymbols(BaseMethodDeclarationSyntax node, SemanticModel semanticModel) =>
                 node.ParameterList.Parameters
-                    .Select(syntax => GetParameterSymbols(syntax, semanticModel))
+                    .Select(syntax => (ISymbol)semanticModel.GetDeclaredSymbol(syntax))
                     .ToImmutableArray();
-
-            private static ISymbol GetParameterSymbols(SyntaxNode parameterSyntax, SemanticModel semanticModel) =>
-                semanticModel.GetDeclaredSymbol(parameterSyntax);
         }
 
         /// <summary>
