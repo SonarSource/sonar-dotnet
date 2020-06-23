@@ -95,6 +95,76 @@ namespace Tests.Diagnostics
     }
 
     [Serializable]
+    public class CtorParameterInSwitchStatement
+    {
+        public string Name { get; private set; }
+
+        public CtorParameterInSwitchStatement(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        {
+            switch (name)
+            {
+                case "1":
+                case "2":
+                case "3":
+                    throw new NotSupportedException();
+            }
+        }
+
+        public CtorParameterInSwitchStatement(int tmp) // Compliant - no checks done on the parameter
+        {
+            switch (DateTime.Now.Kind)
+            {
+                case DateTimeKind.Unspecified:
+                case DateTimeKind.Utc:
+                case DateTimeKind.Local:
+                    Name = tmp.ToString();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+    }
+
+    [Serializable]
+    public class CtorParameterInSwitchExpression
+    {
+        public string Name { get; set; }
+
+        public CtorParameterInSwitchExpression(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        {
+            Name = name switch
+            {
+                "1" => "one",
+                _ => "else"
+            };
+        }
+
+        public CtorParameterInSwitchExpression(int tmp)  // Compliant - no checks done on the parameter
+        {
+            Name = DateTime.Now.Kind switch
+            {
+                DateTimeKind.Unspecified => tmp.ToString(),
+                _ => "else"
+            };
+        }
+    }
+
+    [Serializable]
+    public class CtorParameterInSwitchExpressionArm
+    {
+        public string Name { get; set; }
+
+        public CtorParameterInSwitchExpressionArm(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        {
+            Name = "" switch
+            {
+                { } s when s == name => "one",
+                _ => "else"
+            };
+        }
+    }
+
+    [Serializable]
     public class MultipleConstructorsOneUnsafe
     {
         public string Name { get; set; }

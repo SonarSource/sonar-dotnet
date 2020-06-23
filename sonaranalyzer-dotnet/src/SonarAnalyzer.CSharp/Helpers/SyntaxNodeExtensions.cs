@@ -32,6 +32,8 @@ namespace SonarAnalyzer.Helpers
                 .Any(descendant => descendant.IsAnyKind(SyntaxKind.IfStatement,
                     SyntaxKind.ConditionalExpression,
                     SyntaxKind.CoalesceExpression,
+                    SyntaxKind.SwitchStatement,
+                    SyntaxKindEx.SwitchExpression,
                     SyntaxKindEx.CoalesceAssignmentExpression));
     }
 }

@@ -230,6 +230,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 base.VisitConditionalExpression(node);
             }
 
+            public override void VisitSwitchStatement(SwitchStatementSyntax node)
+            {
+                UpdateParameterValidationStatus(node.Expression);
+
+                base.VisitSwitchStatement(node);
+            }
+
             public override void VisitBinaryExpression(BinaryExpressionSyntax node)
             {
                 if (node.IsKind(SyntaxKind.CoalesceExpression))
@@ -248,6 +255,31 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 base.VisitAssignmentExpression(node);
+            }
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (node.IsKind(SyntaxKindEx.SwitchExpression))
+                {
+                    UpdateParameterValidationStatus(((SwitchExpressionSyntaxWrapper)node).GoverningExpression);
+                }
+
+                if (node.IsKind(SyntaxKindEx.SwitchExpressionArm))
+                {
+                    var arm = (SwitchExpressionArmSyntaxWrapper)node;
+
+                    if (arm.Pattern.SyntaxNode != null)
+                    {
+                        UpdateParameterValidationStatus(arm.Pattern);
+                    }
+
+                    if (arm.WhenClause.SyntaxNode != null)
+                    {
+                        UpdateParameterValidationStatus(arm.WhenClause);
+                    }
+                }
+
+                base.Visit(node);
             }
 
             private void UpdateParameterValidationStatus(SyntaxNode node) =>
