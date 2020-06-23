@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  13,
+"endLine":  57,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  13,
+"endLine":  76,
+"endColumn":  14
+}
+}
+}
+]
+}

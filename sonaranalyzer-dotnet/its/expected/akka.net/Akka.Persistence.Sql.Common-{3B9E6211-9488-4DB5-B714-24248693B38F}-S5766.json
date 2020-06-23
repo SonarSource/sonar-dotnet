@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  9,
+"endLine":  72,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  9,
+"endLine":  107,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  9,
+"endLine":  153,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  9,
+"endLine":  39,
+"endColumn":  10
+}
+}
+}
+]
+}

@@ -1,0 +1,173 @@
+<p>Deserialization process extracts data from the serialized representation of an object and reconstruct it directly, without calling constructors.
+Thus, data validation implemented in constructors can be bypassed if serialized objects are controlled by an attacker.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> The data validation implemented in constructors enforces a relevant security check. </li>
+  <li> Objects instantiated via deserialization don't run the same security checks as the ones executed when objects are created through constructors.
+  </li>
+</ul>
+<p>There is a risk if you answered yes to any of those questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<ul>
+  <li> At the end of the deserialization process it is recommended to perform the same validation checks as the ones performed in constructors,
+  especially when the serialized object can be controlled by an attacker. </li>
+</ul>
+<h2>Sensitive Code Example</h2>
+<p>When a <code>serializable</code> class doesn't inherit from <a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable?view=netframework-4.8">ISerializable</a> or <a
+href="https://docs.microsoft.com/fr-fr/dotnet/api/system.runtime.serialization.ideserializationcallback?view=netframework-4.8">IDeserializationCallback</a>
+types and has a constructor using its parameters in conditions:</p>
+<pre>
+[Serializable]
+public class InternalUrl
+{
+    private string url;
+
+    public InternalUrl(string tmpUrl) // Sensitive
+    {
+       if(!tmpUrl.StartsWith("http://localhost/") { // there is some input validation
+          url= "http://localhost/default";
+       }
+       else {
+          url= tmpUrl;
+       }
+    }
+}
+</pre>
+<p>When a class inherit from <a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable?view=netframework-4.8">ISerializable</a> type, has a
+regular constructor using its parameters in conditions, but doesn't perform the same validation after deserialization:</p>
+<pre>
+[Serializable]
+public class InternalUrl : ISerializable
+{
+    private string url;
+
+    public InternalUrl(string tmpUrl) // Sensitive
+    {
+       if(!tmpUrl.StartsWith("http://localhost/") { // there is some input validation
+          url= "http://localhost/default";
+       }
+       else {
+          url= tmpUrl;
+       }
+    }
+
+    // special constructor used during deserialization
+    protected InternalUrl(SerializationInfo info, StreamingContext context) // Sensitive
+    {
+       url= (string) info.GetValue("url", typeof(string));
+       // the same validation as seen in the regular constructor is not performed
+     }
+
+    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        info.AddValue("url", url);
+    }
+}
+</pre>
+<p>When a class inherit from <a
+href="https://docs.microsoft.com/fr-fr/dotnet/api/system.runtime.serialization.ideserializationcallback?view=netframework-4.8">IDeserializationCallback</a>
+type, has a constructor using its parameters in conditions but the <code>IDeserializationCallback.OnDeserialization</code> method doesn't perform any
+conditional checks:</p>
+<pre>
+[Serializable]
+public class InternalUrl : IDeserializationCallback
+{
+    private string url;
+
+    public InternalUrl(string tmpUrl) // Sensitive
+    {
+       if(!tmpUrl.StartsWith("http://localhost/") { // there is some input validation
+          url= "http://localhost/default";
+       }
+       else {
+          url= tmpUrl;
+       }
+    }
+
+    void IDeserializationCallback.OnDeserialization(object sender) // Sensitive
+    {
+       // the same validation as seen in the constructor is not performed
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<p>When using <a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable?view=netframework-4.8">ISerializable</a>
+type to control deserialization, perform the same checks inside regular constructors than in the special constructor <code>SerializationInfo info,
+StreamingContext context</code> used during deserialization:</p>
+<pre>
+[Serializable]
+public class InternalUrl : ISerializable
+{
+    private string url;
+
+    public InternalUrl(string tmpUrl)
+    {
+       if(!tmpUrl.StartsWith("http://localhost/") { // there is some input validation
+          url= "http://localhost/default";
+       }
+       else {
+          url= tmpUrl;
+       }
+    }
+
+    // special constructor used during deserialization
+    protected InternalUrl(SerializationInfo info, StreamingContext context)
+    {
+       string tmpUrl= (string) info.GetValue("url", typeof(string));
+
+       if(!tmpUrl.StartsWith("http://localhost/") { // Compliant
+          url= "http://localhost/default";
+       }
+       else {
+          url= tmpUrl;
+       }
+     }
+
+    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        info.AddValue("url", url);
+    }
+}
+</pre>
+<p>When using <a
+href="https://docs.microsoft.com/fr-fr/dotnet/api/system.runtime.serialization.ideserializationcallback?view=netframework-4.8">IDeserializationCallback</a>
+type to control deserialization, perform the same checks inside regular constructors than after deserialization with
+<code>IDeserializationCallback.OnDeserialization</code> method:</p>
+<pre>
+[Serializable]
+public class InternalUrl : IDeserializationCallback
+{
+    private string url;
+
+    public InternalUrl(string tmpUrl)
+    {
+       if(!tmpUrl.StartsWith("http://localhost/") { // there is some input validation
+          url= "http://localhost/default";
+       }
+       else {
+          url= tmpUrl;
+       }
+    }
+
+    void IDeserializationCallback.OnDeserialization(object sender) // Compliant
+    {
+       if(!url.StartsWith("http://localhost/") {
+          url= "http://localhost/default";
+       }
+       else {
+          url= tmpUrl;
+       }
+    }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A8-Insecure_Deserialization">OWASP Top 10 2017 Category A8</a> - Insecure Deserialization
+  </li>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/framework/misc/security-and-serialization">docs.microsoft.com</a> - security-and-serialization
+  </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/502.html">MITRE, CWE-502</a> - Deserialization of Untrusted Data </li>
+</ul>
+

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  9,
+"endLine":  82,
+"endColumn":  10
+}
+}
+}
+]
+}
