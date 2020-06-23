@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -84,7 +83,7 @@ namespace SonarAnalyzer.Rules
 
             if (declaredSymbol.IsExtern &&
                 declaredSymbol.IsStatic &&
-                declaredSymbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).Any())
+                declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
             {
                 // P/Invoke method is defined externally.
                 // Do not raise

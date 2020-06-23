@@ -43,10 +43,10 @@ namespace SonarAnalyzer.Rules
             if (methodSymbol != null &&
                 methodSymbol.IsMainMethod() &&
                 !methodSymbol.IsAsync &&
-                !methodSymbol.GetAttributes(KnownType.System_STAThreadAttribute).Any() &&
+                !methodSymbol.HasAttribute(KnownType.System_STAThreadAttribute) &&
                 IsAssemblyReferencingWindowsForms(c.SemanticModel.Compilation))
             {
-                string message = methodSymbol.GetAttributes(KnownType.System_MTAThreadAttribute).Any()
+                string message = methodSymbol.HasAttribute(KnownType.System_MTAThreadAttribute)
                     ? ChangeMtaThreadToStaThreadMessage
                     : AddStaThreadMessage;
 

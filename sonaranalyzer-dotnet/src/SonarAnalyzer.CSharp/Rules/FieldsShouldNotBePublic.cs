@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
                     var parentSymbol = c.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Parent);
                     if (fieldDeclaration.Modifiers.Any(m => ValidModifiers.Contains(m.Kind())) ||
-                        parentSymbol.GetAttributes(KnownType.System_Runtime_InteropServices_StructLayoutAttribute).Any())
+                        parentSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute))
                     {
                         return;
                     }

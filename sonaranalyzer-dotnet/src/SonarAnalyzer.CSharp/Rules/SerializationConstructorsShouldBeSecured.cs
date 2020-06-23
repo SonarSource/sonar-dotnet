@@ -71,8 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var isAssemblyIsPartiallyTrusted = c.SemanticModel.Compilation.Assembly
-                .GetAttributes(KnownType.System_Security_AllowPartiallyTrustedCallersAttribute)
-                .Any();
+                .HasAttribute(KnownType.System_Security_AllowPartiallyTrustedCallersAttribute);
             if (!isAssemblyIsPartiallyTrusted)
             {
                 return;

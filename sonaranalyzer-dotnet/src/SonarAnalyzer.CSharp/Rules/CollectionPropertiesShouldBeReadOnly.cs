@@ -82,8 +82,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsObservedCollectionType(IPropertySymbol propertySymbol) =>
             !propertySymbol.IsOverride &&
-            !propertySymbol.GetAttributes(KnownType.System_Runtime_Serialization_DataMemberAttribute).Any() &&
-            !propertySymbol.ContainingType.GetAttributes(KnownType.System_SerializableAttribute).Any() &&
+            !propertySymbol.HasAttribute(KnownType.System_Runtime_Serialization_DataMemberAttribute) &&
+            !propertySymbol.ContainingType.HasAttribute(KnownType.System_SerializableAttribute) &&
              propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(collectionTypes) &&
             !propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(ignoredCollectionTypes) &&
             !IsInterfaceImplementation(propertySymbol);

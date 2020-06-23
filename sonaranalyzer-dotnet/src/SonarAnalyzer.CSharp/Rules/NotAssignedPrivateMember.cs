@@ -114,8 +114,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SymbolKind.NamedType);
         }
 
-        private static bool HasStructLayoutAttribute(INamedTypeSymbol namedTypeSymbol) =>
-            namedTypeSymbol.GetAttributes(KnownType.System_Runtime_InteropServices_StructLayoutAttribute).Any();
+        private static bool HasStructLayoutAttribute(ISymbol namedTypeSymbol) =>
+            namedTypeSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute);
 
         private static bool IsInitializedOrFixed(VariableDeclaratorSyntax declarator)
         {

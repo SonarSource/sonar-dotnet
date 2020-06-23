@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Helpers.CSharp
         public static bool HasOverloadWithType(InvocationExpressionSyntax invocation, SemanticModel semanticModel, ImmutableArray<KnownType> types) =>
             semanticModel.GetMemberGroup(invocation.Expression)
                 .OfType<IMethodSymbol>()
-                .Where(m => !m.GetAttributes(KnownType.System_ObsoleteAttribute).Any())
+                .Where(m => !m.HasAttribute(KnownType.System_ObsoleteAttribute))
                 .Where(method => IsCompatibleOverload(invocation, method))
                 .Any(methodSignature => SameParametersExceptWantedType(methodSignature, GetInvocationParameters(invocation, semanticModel), types));
 
