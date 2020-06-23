@@ -5,22 +5,22 @@ namespace Tests.Diagnostics
 {
     internal class Serializer
     {
-        public void SimpleTypeResolverDefaultConstructorIsNotSafe(string json)
+        public void JavaScriptSerializerDefaultConstructorIsSafe(string json)
         {
-            new JavaScriptSerializer().Deserialize<string>(json); // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
+            new JavaScriptSerializer().Deserialize<string>(json); // Compliant - default constructor is considered safe
         }
 
         private static JavaScriptSerializer CtorInitializer() =>
             new JavaScriptSerializer { MaxJsonLength = int.MaxValue }; // Compliant: deserialize method is not called
 
-        public void NullReolverIsNotSafe(string json)
+        public void NullResolverIsSafe(string json)
         {
-            new JavaScriptSerializer(null).Deserialize<string>(json); // Noncompliant: a resolver is required for safe deserialization
+            new JavaScriptSerializer(null).Deserialize<string>(json); // Compliant - a null resolver is considered safe
         }
 
         public void SimpleTypeResolverIsNotSafe(string json)
         {
-            new JavaScriptSerializer(new SimpleTypeResolver()).Deserialize<string>(json); // Noncompliant: SimpleTypeResolver is not safe
+            new JavaScriptSerializer(new SimpleTypeResolver()).Deserialize<string>(json); // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
         }
 
         public void CustomResolver(string json)

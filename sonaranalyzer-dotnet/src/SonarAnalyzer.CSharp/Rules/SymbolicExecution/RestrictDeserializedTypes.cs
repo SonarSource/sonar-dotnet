@@ -270,23 +270,18 @@ namespace SonarAnalyzer.Rules.CSharp
             private TypeDeclarationInfo GetResolverDeclaration(ObjectCreationExpressionSyntax objectCreation)
             {
                 // JavaScriptSerializer has 2 constructors:
-                // - JavaScriptSerializer(): unsafe since it doesn't give the option to set a provider
+                // - JavaScriptSerializer(): safe
                 // - JavaScriptSerializer(JavaScriptTypeResolver): this one is safe only if the given resolver is safe
                 // See: https://docs.microsoft.com/en-us/dotnet/api/system.web.script.serialization.javascriptserializer.-ctor?view=netframework-4.8
 
                 if (objectCreation.ArgumentList == null ||
-                    objectCreation.ArgumentList.Arguments.Count == 0)
+                    objectCreation.ArgumentList.Arguments.Count == 0 ||
+                    objectCreation.ArgumentList.Arguments[0].Expression.IsNullLiteral())
                 {
-                    return new TypeDeclarationInfo(false);
+                    return new TypeDeclarationInfo(true);
                 }
 
-                var resolverType = objectCreation.ArgumentList.Arguments[0];
-                if (resolverType.Expression.IsNullLiteral())
-                {
-                    return new TypeDeclarationInfo(false);
-                }
-
-                return semanticModel.GetTypeInfo(resolverType.Expression).Type is {} typeSymbol &&
+                return semanticModel.GetTypeInfo(objectCreation.ArgumentList.Arguments[0].Expression).Type is {} typeSymbol &&
                        !typeSymbol.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver)
                     ? GetOrAddSanitizerDeclaration(typeSymbol)
                     : new TypeDeclarationInfo(false);
