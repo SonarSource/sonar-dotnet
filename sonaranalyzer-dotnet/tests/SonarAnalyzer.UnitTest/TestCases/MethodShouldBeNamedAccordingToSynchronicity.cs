@@ -158,4 +158,29 @@ namespace Tests.Diagnostics
             return Task.FromResult("foo");
         }
     }
+
+    public interface IChatClient
+    {
+        Task ReceiveMessage(string user, string message); // Noncompliant
+
+        Task ReceiveMessage(string message); // Noncompliant
+    }
+
+    public class StronglyTypedChatHub : Hub<IChatClient>
+    {
+        public async Task SendMessage(string user, string message)
+        {
+            await Clients.All.ReceiveMessage(user, message);
+        }
+
+        public Task SendMessageToCaller(string message)
+        {
+            return Clients.Caller.ReceiveMessage(message);
+        }
+
+        public Task ThrowException()
+        {
+            throw new HubException("This error will be sent to the client!");
+        }
+    }
 }
