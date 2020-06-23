@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class MethodShouldBeNamedAccordingToSynchronicity : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4261";
+        private const string DiagnosticId = "S4261";
         private const string MessageFormat = "{0}";
         private const string AddAsyncSuffixMessage = "Add the 'Async' suffix to the name of this method.";
         private const string RemoveAsyncSuffixMessage = "Remove the 'Async' suffix to the name of this method.";
@@ -50,8 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Threading_Tasks_ValueTask_TResult
             );
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -67,7 +66,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.GetInterfaceMember() != null ||
                         methodSymbol.GetOverriddenMember() != null ||
                         methodSymbol.IsTestMethod() ||
-                        methodSymbol.IsControllerMethod())
+                        methodSymbol.IsControllerMethod() ||
+                        IsSignalRHubMethod(methodSymbol))
                     {
                         return;
                     }
@@ -89,6 +89,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
+
+        private static bool IsSignalRHubMethod(ISymbol methodSymbol) =>
+            methodSymbol.GetEffectiveAccessibility() == Accessibility.Public &&
+            IsSignalRHubMethod(methodSymbol.ContainingType);
+
+        private static bool IsSignalRHubMethod(ITypeSymbol typeSymbol) =>
+            typeSymbol.DerivesFrom(KnownType.Microsoft_AspNet_SignalR_Hub);
     }
 }
