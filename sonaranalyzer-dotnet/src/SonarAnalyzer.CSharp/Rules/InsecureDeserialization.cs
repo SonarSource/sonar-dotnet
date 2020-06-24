@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
             typeDeclaration
                 .Members
                 .OfType<MethodDeclarationSyntax>()
-                .Single(methodDeclaration => IsOnDeserialization(methodDeclaration, semanticModel))
+                .FirstOrDefault(methodDeclaration => IsOnDeserialization(methodDeclaration, semanticModel))
                 .ContainsConditionalConstructs();
 
         private static bool IsOnDeserialization(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel) =>
