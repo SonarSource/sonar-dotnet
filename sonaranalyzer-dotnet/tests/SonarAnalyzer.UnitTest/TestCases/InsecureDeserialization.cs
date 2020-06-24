@@ -453,4 +453,22 @@ namespace Tests.Diagnostics
             Name = name ?? string.Empty;
         }
     }
+
+    public class DeserializationCallback : IDeserializationCallback
+    {
+        public void OnDeserialization(object sender)
+        {
+        }
+    }
+
+    [Serializable]
+    public class IndirectImplementationIDeserializationCallback : DeserializationCallback
+    {
+        public string Name { get; private set; }
+
+        public IndirectImplementationIDeserializationCallback(string name) // Noncompliant
+        {
+            Name = name ?? string.Empty;
+        }
+    }
 }

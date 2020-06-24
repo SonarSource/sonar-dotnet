@@ -28,6 +28,7 @@ namespace SonarAnalyzer.Helpers
     internal static class SyntaxNodeExtensions
     {
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
+            node != null &&
             node.DescendantNodes()
                 .Any(descendant => descendant.IsAnyKind(SyntaxKind.IfStatement,
                     SyntaxKind.ConditionalExpression,
