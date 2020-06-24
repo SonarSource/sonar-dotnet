@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -52,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.IsExtern &&
                         methodSymbol.IsStatic &&
                         methodSymbol.IsPubliclyAccessible() &&
-                        methodSymbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).Any())
+                        methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
                     }

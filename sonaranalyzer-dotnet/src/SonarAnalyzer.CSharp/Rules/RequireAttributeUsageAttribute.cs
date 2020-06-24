@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (classSymbol == null ||
                     !classSymbol.DerivesFrom(KnownType.System_Attribute) ||
-                    classSymbol.GetAttributes(KnownType.System_AttributeUsageAttribute).Any())
+                    classSymbol.HasAttribute(KnownType.System_AttributeUsageAttribute))
                 {
                     return;
                 }
@@ -69,6 +69,6 @@ namespace SonarAnalyzer.Rules.CSharp
             classSymbol.GetSelfAndBaseTypes()
                 // System.Attribute already has AttributeUsage, we don't want to report it
                 .TakeWhile(t => !t.Is(KnownType.System_Attribute))
-                .Any(t => t.GetAttributes(KnownType.System_AttributeUsageAttribute).Any());
+                .Any(t => t.HasAttribute(KnownType.System_AttributeUsageAttribute));
     }
 }

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
@@ -36,7 +35,7 @@ namespace SonarAnalyzer.Rules
                     c.RegisterCompilationEndAction(
                         cc =>
                         {
-                            var requiredAttributeFound = cc.Compilation.Assembly.GetAttributes(AttributeToFind).Any();
+                            var requiredAttributeFound = cc.Compilation.Assembly.HasAttribute(AttributeToFind);
                             if (!requiredAttributeFound)
                             {
                                 cc.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], null, cc.Compilation.AssemblyName));

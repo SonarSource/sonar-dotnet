@@ -125,10 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     c.RegisterCompilationEndAction(
                         cc =>
                         {
-                            var foundInternalsVisibleTo = cc.Compilation.Assembly
-                                .GetAttributes(KnownType.System_Runtime_CompilerServices_InternalsVisibleToAttribute)
-                                .Any();
-
+                            var foundInternalsVisibleTo = cc.Compilation.Assembly.HasAttribute(KnownType.System_Runtime_CompilerServices_InternalsVisibleToAttribute);
                             if (foundInternalsVisibleTo ||
                                 removableInternalTypes.Count == 0)
                             {

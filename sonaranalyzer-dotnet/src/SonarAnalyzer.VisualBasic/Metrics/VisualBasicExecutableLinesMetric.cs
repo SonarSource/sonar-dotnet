@@ -178,7 +178,7 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                     case SymbolKind.Method:
                     case SymbolKind.NamedType:
                         return hasExcludeFromCodeCoverageAttribute ||
-                            nodeSymbol.GetAttributes(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute).Any();
+                            nodeSymbol.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute);
 
                     default:
                         return hasExcludeFromCodeCoverageAttribute;

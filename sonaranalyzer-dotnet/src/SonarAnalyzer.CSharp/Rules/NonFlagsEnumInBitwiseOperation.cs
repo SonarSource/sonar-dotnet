@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!operation.ReturnType.GetAttributes(KnownType.System_FlagsAttribute).Any())
+            if (!operation.ReturnType.HasAttribute(KnownType.System_FlagsAttribute))
             {
                 var friendlyTypeName = operation.ReturnType.ToMinimalDisplayString(context.SemanticModel, context.Node.SpanStart);
                 var messageFormat = operation.ReturnType.DeclaringSyntaxReferences.Any()
