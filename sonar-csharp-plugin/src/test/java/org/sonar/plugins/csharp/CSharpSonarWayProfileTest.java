@@ -192,7 +192,19 @@ public class CSharpSonarWayProfileTest {
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
+
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1313"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S2068"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S2092"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S2245"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S2255"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S3330"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4507"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4784"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4792"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4790"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4834"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S5042"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S2077"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S5766"))).isNotNull();
   }
 }

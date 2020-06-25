@@ -5,7 +5,6 @@
   "tags": [
     "cwe",
     "privacy",
-    "owasp-a6",
     "sans-top25-porous",
     "owasp-a3"
   ],
@@ -19,8 +18,7 @@
       326
     ],
     "OWASP": [
-      "A3",
-      "A6"
+      "A3"
     ]
   }
 }

@@ -29,7 +29,7 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpSonarRulesDefinitionTest {
-  private static final String SECURITY_HOTSPOT_RULE_KEY = "S2255";
+  private static final String SECURITY_HOTSPOT_RULE_KEY = "S5766";
   private static final String VULNERABILITY_RULE_KEY = "S4426";
 
   @Test
@@ -70,7 +70,7 @@ public class CSharpSonarRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:312", "cwe:315", "cwe:565", "cwe:807", "owaspTop10:a3");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:502", "owaspTop10:a8");
   }
 
   @Test

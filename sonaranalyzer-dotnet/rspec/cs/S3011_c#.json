@@ -7,15 +7,10 @@
     "constantCost": "30min"
   },
   "tags": [
-    "owasp-a3"
+    
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-3011",
   "sqKey": "S3011",
-  "scope": "Main",
-  "securityStandards": {
-    "OWASP": [
-      "A3"
-    ]
-  }
+  "scope": "Main"
 }
