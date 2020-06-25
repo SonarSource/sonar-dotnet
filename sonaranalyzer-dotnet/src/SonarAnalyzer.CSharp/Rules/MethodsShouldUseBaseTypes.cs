@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -132,14 +132,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (identifierParent is ConditionalAccessExpressionSyntax conditionalAccess)
             {
-                if (conditionalAccess.WhenNotNull is MemberBindingExpressionSyntax binding)
+                var conditionalAccessExpression = conditionalAccess.WhenNotNull is ConditionalAccessExpressionSyntax subsequentConditionalAccess
+                    ? subsequentConditionalAccess.Expression
+                    : conditionalAccess.WhenNotNull;
+
+                if (conditionalAccessExpression is MemberBindingExpressionSyntax binding)
                 {
                     return binding.Name != null
                         ? HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(binding.Name).Symbol, callSite)
                         : null;
                 }
 
-                if (conditionalAccess.WhenNotNull is InvocationExpressionSyntax invocationExpression &&
+                if (conditionalAccessExpression is InvocationExpressionSyntax invocationExpression &&
                     invocationExpression.Expression is MemberBindingExpressionSyntax memberBinding)
                 {
                     return HandleInvocation(identifier, semanticModel.GetSymbolInfo(memberBinding).Symbol, semanticModel, callSite);
