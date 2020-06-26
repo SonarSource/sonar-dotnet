@@ -22,7 +22,8 @@ production.</p>
 <h2>Sensitive Code Example</h2>
 <p>This rule raises issues when the following .Net Core methods are called:
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDeveloperExceptionPage</code>,
-<code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDatabaseErrorPage</code>. </p>
+<code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDatabaseErrorPage</code>. No Issue is raised when those calls are disabled by <code>if
+(env.IsDevelopment())</code>.</p>
 <pre>
 Imports Microsoft.AspNetCore.Builder
 Imports Microsoft.AspNetCore.Hosting
@@ -30,6 +31,11 @@ Imports Microsoft.AspNetCore.Hosting
 Namespace MyMvcApp
     Public Class Startup
         Public Sub Configure(ByVal app As IApplicationBuilder, ByVal env As IHostingEnvironment)
+            If env.IsDevelopment() Then
+                ' The following calls are ok because they are disabled in production
+                app.UseDeveloperExceptionPage()
+                app.UseDatabaseErrorPage()
+            End If
             ' Those calls are Sensitive because it seems that they will run in production
             app.UseDeveloperExceptionPage() 'Sensitive
             app.UseDatabaseErrorPage() 'Sensitive
@@ -37,23 +43,8 @@ Namespace MyMvcApp
     End Class
 End Namespace
 </pre>
-<h2>Compliant Solution</h2>
-<pre>
-Imports Microsoft.AspNetCore.Builder
-Imports Microsoft.AspNetCore.Hosting
-
-Namespace MyMvcApp
-    Public Class Startup
-        Public Sub Configure(ByVal app As IApplicationBuilder, ByVal env As IHostingEnvironment)
-            If env.IsDevelopment() Then ' Compliant
-                ' The following calls are ok because they are disabled in production
-                app.UseDeveloperExceptionPage()
-                app.UseDatabaseErrorPage()
-            End If
-        End Sub
-    End Class
-End Namespace
-</pre>
+<h2>Exceptions</h2>
+<p>This rule does not analyze configuration files. Make sure that debug mode is not enabled by default in those files.</p>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
