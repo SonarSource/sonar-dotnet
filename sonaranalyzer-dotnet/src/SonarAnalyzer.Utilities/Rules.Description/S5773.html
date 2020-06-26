@@ -17,7 +17,7 @@ the TempFileCollection object is called).</p>
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.binary.binaryformatter?view=netframework-4.8">BinaryFormatter</a>,
 <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.netdatacontractserializer?view=netframework-4.8">NetDataContractSerializer
-</a>, <a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.objectstateformatter?view=netframework-4.8">ObjectStateFormatter</a>, <a
+</a>, <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.soap.soapformatter?view=netframework-4.8">SoapFormatter</a>
 serializers:</p>
 <pre>
@@ -32,7 +32,7 @@ JavaScriptSerializer serializer1 = new JavaScriptSerializer(new SimpleTypeResolv
 serializer1.Deserialize&lt;ExpectedType&gt;(json);
 </pre>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.losformatter?view=netframework-4.8">LosFormatter</a> should not be used without
-MAC validation:</p>
+MAC verification:</p>
 <pre>
 LosFormatter formatter = new LosFormatter(); // Noncompliant
 formatter.Deserialize(fs);
@@ -42,7 +42,7 @@ formatter.Deserialize(fs);
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.binary.binaryformatter?view=netframework-4.8">BinaryFormatter</a>,
 <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.netdatacontractserializer?view=netframework-4.8">NetDataContractSerializer
-</a>, <a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.objectstateformatter?view=netframework-4.8">ObjectStateFormatter</a>, <a
+</a>, <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.soap.soapformatter?view=netframework-4.8">SoapFormatter</a>
 serializers should use a binder implementing a whitelist approach to limit types during deserialization (at least one exception should be thrown or a
 null value returned):</p>
@@ -83,7 +83,7 @@ JavaScriptSerializer serializer = new JavaScriptSerializer(new CustomSafeTypeRes
 serializer.Deserialize&lt;ExpectedType&gt;(json);
 </pre>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.ui.losformatter?view=netframework-4.8">LosFormatter</a> serializer with MAC
-validation:</p>
+verification:</p>
 <pre>
 LosFormatter formatter = new LosFormatter(true, secret); // Compliant
 formatter.Deserialize(fs);

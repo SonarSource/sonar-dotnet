@@ -41,6 +41,14 @@ public class VbNetSonarWayProfileTest {
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("vbnet", "Sonar way");
-    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4823"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4792"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4834"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4507"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S5042"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S2077"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S2068"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S1313"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4784"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4790"))).isNotNull();
   }
 }

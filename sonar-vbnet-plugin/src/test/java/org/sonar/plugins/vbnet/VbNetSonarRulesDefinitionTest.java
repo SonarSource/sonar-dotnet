@@ -29,7 +29,7 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VbNetSonarRulesDefinitionTest {
-  private static final String SECURITY_HOTSPOT_RULE_KEY = "S2255";
+  private static final String SECURITY_HOTSPOT_RULE_KEY = "S4792";
 
   @Test
   public void test() {
@@ -69,7 +69,7 @@ public class VbNetSonarRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:312", "cwe:315", "cwe:565", "cwe:807", "owaspTop10:a3");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:117", "cwe:532", "cwe:778", "owaspTop10:a10", "owaspTop10:a3");
   }
 
 }
