@@ -152,15 +152,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? subsequentConditionalAccess.Expression
                 : conditionalAccess.WhenNotNull;
 
-            if (conditionalAccessExpression is MemberBindingExpressionSyntax binding)
+            if (conditionalAccessExpression is MemberBindingExpressionSyntax binding
+                && binding.Name != null)
             {
-                return binding.Name != null
-                    ? HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(binding.Name).Symbol, callSite)
-                    : null;
+                return HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(binding.Name).Symbol, callSite);
             }
 
-            if (conditionalAccessExpression is InvocationExpressionSyntax invocationExpression &&
-                invocationExpression.Expression is MemberBindingExpressionSyntax memberBinding)
+            if (conditionalAccessExpression is InvocationExpressionSyntax invocationExpression
+                && invocationExpression.Expression is MemberBindingExpressionSyntax memberBinding)
             {
                 return HandleInvocation(identifier, semanticModel.GetSymbolInfo(memberBinding).Symbol, semanticModel, callSite);
             }
@@ -269,17 +268,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var mostGeneralType = FindMostGeneralType();
 
-                return !Equals(mostGeneralType, parameterSymbol.Type) && CanSuggestBaseType(mostGeneralType.GetSymbolType())
-                    ? Diagnostic.Create(rule, parameterSymbol.Locations.First(), mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString())
-                    : null;
+                return Equals(mostGeneralType, parameterSymbol.Type) || IsIgnoredBaseType(mostGeneralType.GetSymbolType())
+                    ? null
+                    : Diagnostic.Create(rule, parameterSymbol.Locations.First(), mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
             }
 
-            private static bool CanSuggestBaseType(ITypeSymbol typeSymbol) =>
-                !typeSymbol.IsAny(KnownType.System_Object, KnownType.System_ValueType, KnownType.System_Enum)
-                && !typeSymbol.Name.StartsWith("_", StringComparison.Ordinal)
-                && !IsCollectionKvp(typeSymbol);
+            private static bool IsIgnoredBaseType(ITypeSymbol typeSymbol) =>
+                typeSymbol.IsAny(KnownType.System_Object, KnownType.System_ValueType, KnownType.System_Enum)
+                || typeSymbol.Name.StartsWith("_", StringComparison.Ordinal)
+                || IsCollectionOfKeyValuePair(typeSymbol);
 
-            private static bool IsCollectionKvp(ITypeSymbol typeSymbol) =>
+            private static bool IsCollectionOfKeyValuePair(ITypeSymbol typeSymbol) =>
                 typeSymbol is INamedTypeSymbol namedType
                 && namedType.TypeArguments.FirstOrDefault() is INamedTypeSymbol firstGenericType
                 && namedType.ConstructedFrom.Is(KnownType.System_Collections_Generic_ICollection_T)
@@ -305,7 +304,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return mostGeneralType;
 
                 static bool HasMultipleUseOfIEnumerable(KeyValuePair<ITypeSymbol, int> kvp) =>
-                    kvp.Value > 1 && (kvp.Key.OriginalDefinition.Is(KnownType.System_Collections_Generic_IEnumerable_T) || kvp.Key.Is(KnownType.System_Collections_IEnumerable));
+                    kvp.Value > 1
+                    && (kvp.Key.OriginalDefinition.Is(KnownType.System_Collections_Generic_IEnumerable_T) || kvp.Key.Is(KnownType.System_Collections_IEnumerable));
 
                 ITypeSymbol FindMostGeneralAccessibleClassOrSelf(ITypeSymbol typeSymbol)
                 {
