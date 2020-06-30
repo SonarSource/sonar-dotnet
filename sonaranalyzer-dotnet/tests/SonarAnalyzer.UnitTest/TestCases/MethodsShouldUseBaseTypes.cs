@@ -832,3 +832,65 @@ namespace Test_27
         }
     }
 }
+
+namespace MultiConditionalAccess
+{
+    public class BaseItem
+    {
+        public string this[int i] => null;
+
+        public string BaseMethod() => null;
+    }
+
+    public class MainItem : BaseItem
+    {
+        public string Property => null;
+    }
+
+    public class Usage
+    {
+        public void Basic(MainItem item) // Noncompliant
+        {
+            var value = item[42];
+            var length = item[42].Length;
+        }
+
+        public void ConditionalAccess(MainItem item) // False negative, binding syntax is not supported in ConditionalAccessExpressionSyntax
+        {
+            var value = item?[42];
+            var length = item?[42].Length;
+        }
+
+        public void DoubleConditionalAccess(MainItem item) // False negative, binding syntax is not supported in ConditionalAccessExpressionSyntax
+        {
+            var length = item?[42]?.ToString()?.Length;
+        }
+
+        public void CompliantDouble(System.ArgumentException ex)
+        {
+            var length = ex?.ParamName?.Length;
+            var message = ex.Message;
+        }
+
+        public void CompliantTriple(System.ArgumentException ex)
+        {
+            var length = ex?.ParamName?.ToString()?.Length;
+            var message = ex.Message;
+        }
+
+        public void NoncompliantDouble(System.ArgumentException ex) // Noncompliant
+        {
+            var length = ex?.Message?.Length;
+        }
+
+        public void NoncompliantTriple(System.ArgumentException ex) // Noncompliant
+        {
+            var length = ex?.Message?.ToString()?.Length;
+        }
+
+        public void NoncompliantTripleMethod(MainItem ex) // Noncompliant
+        {
+            var length = ex?.BaseMethod()?.ToString()?.Length;
+        }
+    }
+}
