@@ -46,6 +46,12 @@
           "System.Composition": "1.0.31"
         }
       },
+      "Microsoft.Composition": {
+        "type": "Direct",
+        "requested": "[1.0.27, )",
+        "resolved": "1.0.27",
+        "contentHash": "pwu80Ohe7SBzZ6i69LVdzowp6V+LaVRzd5F7A6QlD42vQkX0oT7KXKWWPlM/S00w1gnMQMRnEdbtOV12z6rXdQ=="
+      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[16.4.0, )",
@@ -260,6 +266,7 @@
           "Google.Protobuf": "3.6.1",
           "Google.Protobuf.Tools": "3.6.1",
           "Microsoft.CodeAnalysis.Workspaces.Common": "1.3.2",
+          "Microsoft.Composition": "1.0.27",
           "System.Collections.Immutable": "1.1.37"
         }
       },
@@ -267,6 +274,7 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "1.3.2",
+          "Microsoft.Composition": "1.0.27",
           "System.Collections.Immutable": "1.1.37"
         }
       },

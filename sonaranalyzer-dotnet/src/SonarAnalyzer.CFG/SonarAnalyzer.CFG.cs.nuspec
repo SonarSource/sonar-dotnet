@@ -18,8 +18,7 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <!-- If these are changed than the build\release.ps1 should also be changed -->
-    <file src="bin\Release\net46\SonarAnalyzer.CFG.dll" target="lib" />
+    <file src="bin\Release\netstandard2.0\SonarAnalyzer.CFG.dll" target="lib" />
     <file src="License.txt" />
   </files>
 </package>
