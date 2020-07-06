@@ -16,7 +16,6 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <!-- If these are changed than the build\release.ps1 should also be changed -->
     <file src="bin\Release\net461\cs\rules.xml"  target="xml\" />
     <file src="bin\Release\net461\cs\profile.xml"  target="xml\" />
   </files>
