@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETFramework,Version=v4.6": {
+    ".NETFramework,Version=v4.6.1": {
       "Google.Protobuf": {
         "type": "Direct",
         "requested": "[3.6.1, )",

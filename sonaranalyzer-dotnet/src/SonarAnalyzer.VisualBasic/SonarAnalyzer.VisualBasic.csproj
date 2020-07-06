@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <AssemblyName>SonarAnalyzer.VisualBasic</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
