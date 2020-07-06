@@ -27,6 +27,12 @@
           "Microsoft.Composition": "1.0.27"
         }
       },
+      "Microsoft.Composition": {
+        "type": "Direct",
+        "requested": "[1.0.27, )",
+        "resolved": "1.0.27",
+        "contentHash": "pwu80Ohe7SBzZ6i69LVdzowp6V+LaVRzd5F7A6QlD42vQkX0oT7KXKWWPlM/S00w1gnMQMRnEdbtOV12z6rXdQ=="
+      },
       "NETStandard.Library": {
         "type": "Direct",
         "requested": "[2.0.3, )",
@@ -92,11 +98,6 @@
           "System.Xml.XPath.XDocument": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1"
         }
-      },
-      "Microsoft.Composition": {
-        "type": "Transitive",
-        "resolved": "1.0.27",
-        "contentHash": "pwu80Ohe7SBzZ6i69LVdzowp6V+LaVRzd5F7A6QlD42vQkX0oT7KXKWWPlM/S00w1gnMQMRnEdbtOV12z6rXdQ=="
       },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
