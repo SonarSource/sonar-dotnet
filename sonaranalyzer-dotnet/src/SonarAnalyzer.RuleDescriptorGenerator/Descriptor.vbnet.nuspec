@@ -17,7 +17,7 @@
   </metadata>
   <files>
     <!-- If these are changed than the build\release.ps1 should also be changed -->
-    <file src="bin\Release\net46\vbnet\rules.xml"  target="xml\" />
-    <file src="bin\Release\net46\vbnet\profile.xml"  target="xml\" />
+    <file src="bin\Release\net461\vbnet\rules.xml"  target="xml\" />
+    <file src="bin\Release\net461\vbnet\profile.xml"  target="xml\" />
   </files>
 </package>
