@@ -32,20 +32,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CryptographicKeyShouldNotBeTooShortTest
     {
-
-        private static IEnumerable<MetadataReference> NetFrameworkCryptographyReferences =>
-            FrameworkMetadataReference.SystemSecurityCryptographyAlgorithms
-            .Concat(NuGetMetadataReference.SystemSecurityCryptographyOpenSsl())
-            .Concat(NuGetMetadataReference.BouncyCastle());
-
         [TestMethod]
         [TestCategory("Rule")]
-        public void CryptographicKeyShouldNotBeTooShort()
-        {
+        public void CryptographicKeyShouldNotBeTooShort() =>
             Verifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.cs",
                 new CryptographicKeyShouldNotBeTooShort(),
                 ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NetFrameworkCryptographyReferences);
-        }
+                additionalReferences: GetAdditionalReferences());
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemSecurityCryptography()
+                .Concat(NuGetMetadataReference.SystemSecurityCryptographyOpenSsl())
+                .Concat(NuGetMetadataReference.BouncyCastle());
     }
 }

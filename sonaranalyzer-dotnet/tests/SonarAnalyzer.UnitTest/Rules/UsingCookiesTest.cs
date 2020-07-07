@@ -35,68 +35,58 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UsingCookies
     {
-        private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore(string packageVersion) =>
-            NetStandardMetadataReference.Netstandard
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(packageVersion))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(packageVersion))
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsPrimitives(packageVersion));
-
-        private static IEnumerable<MetadataReference> GetAdditionalReferences_Net46() =>
-            FrameworkMetadataReference.SystemWeb;
-
+#if NETFRAMEWORK // HttpCookie is available only when targeting .Net Framework
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCookies_CS_Net46()
-        {
+        public void UsingCookies_CS_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_Net46.cs",
                 new CSharp.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences_Net46());
-        }
+                additionalReferences: GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCookies_CS_NetCore()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.cs",
-                new CSharp.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences_NetCore(Constants.DotNetCore220Version));
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void UsingCookies_CS_Disabled()
-        {
+        public void UsingCookies_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingCookies_Net46.cs",
                 new CSharp.UsingCookies(),
-                additionalReferences: GetAdditionalReferences_Net46());
-        }
+                additionalReferences: GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCookies_VB_Net46()
-        {
+        public void UsingCookies_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_Net46.vb",
                 new VisualBasic.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences_Net46());
-        }
+                additionalReferences: GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCookies_VB_NetCore()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.vb",
-                new VisualBasic.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences_NetCore(Constants.DotNetCore220Version));
-
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void UsingCookies_VB_Disabled()
-        {
+        public void UsingCookies_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingCookies_Net46.vb",
                 new VisualBasic.UsingCookies(),
-                additionalReferences: GetAdditionalReferences_Net46());
-        }
+                additionalReferences: GetAdditionalReferencesForNet46());
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferencesForNet46() =>
+            FrameworkMetadataReference.SystemWeb;
+
+#else
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UsingCookies_CS_NetCore() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.cs",
+                new CSharp.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: GetNetCoreAdditionalReferences(Constants.DotNetCore220Version));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UsingCookies_VB_NetCore() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.vb",
+                new VisualBasic.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: GetNetCoreAdditionalReferences(Constants.DotNetCore220Version));
+
+        private static IEnumerable<MetadataReference> GetNetCoreAdditionalReferences(string packageVersion) =>
+            NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(packageVersion)
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(packageVersion))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsPrimitives(packageVersion));
+#endif
+
     }
 }

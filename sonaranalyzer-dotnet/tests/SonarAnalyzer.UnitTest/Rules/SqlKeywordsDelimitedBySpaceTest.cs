@@ -19,9 +19,11 @@
  */
 
 extern alias csharp;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -32,31 +34,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SqlKeywordsDelimitedBySpace()
-        {
+        public void SqlKeywordsDelimitedBySpace() =>
             Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace.cs",
                 new SqlKeywordsDelimitedBySpace(),
-                additionalReferences: FrameworkMetadataReference.SystemData,
+                additionalReferences: GetAdditionalReferences(),
                 options: ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace()
-        {
+        public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
             Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
                 new SqlKeywordsDelimitedBySpace(),
-                additionalReferences: FrameworkMetadataReference.SystemData);
-        }
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SqlKeywordsDelimitedBySpace_DefaultNamespace()
-        {
+        public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\SqlKeywordsDelimitedBySpace_DefaultNamespace.cs",
                 new SqlKeywordsDelimitedBySpace(),
-                additionalReferences: FrameworkMetadataReference.SystemData);
-        }
+                GetAdditionalReferences());
 
         [DataRow("System.Data")]
         [DataRow("System.Data.SqlClient")]
@@ -72,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_DotnetFramework(string sqlNamespace)
         {
-            var references = FrameworkMetadataReference.SystemData
+            var references = MetadataReferenceFacade.GetSystemData()
                 .Concat(NuGetMetadataReference.Dapper())
                 .Concat(NuGetMetadataReference.EntityFramework())
                 .Concat(NuGetMetadataReference.MicrosoftDataSqliteCore())
@@ -107,7 +103,7 @@ namespace TestNamespace
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_DotnetCore(string sqlNamespace)
         {
-            var references = FrameworkMetadataReference.SystemData
+            var references = MetadataReferenceFacade.GetSystemData()
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.0"))
                 .Concat(NuGetMetadataReference.ServiceStackOrmLite())
                 .Concat(NuGetMetadataReference.SystemDataSqlClient())
@@ -128,5 +124,8 @@ namespace TestNamespace
                 new SqlKeywordsDelimitedBySpace(),
                 additionalReferences: references.ToArray());
         }
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            NuGetMetadataReference.SystemDataSqlClient();
     }
 }

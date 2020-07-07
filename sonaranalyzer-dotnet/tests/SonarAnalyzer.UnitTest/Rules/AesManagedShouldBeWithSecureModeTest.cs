@@ -21,6 +21,7 @@
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,10 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void AesManagedShouldBeWithSecureMode()
-        {
+        public void AesManagedShouldBeWithSecureMode() =>
             Verifier.VerifyAnalyzer(@"TestCases\AesManagedShouldBeWithSecureMode.cs",
-                new AesManagedShouldBeWithSecureMode());
-        }
+                                    new AesManagedShouldBeWithSecureMode(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
     }
 }

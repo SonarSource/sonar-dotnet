@@ -30,27 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GetHashCodeMutable()
-        {
+        public void GetHashCodeMutable() =>
             Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs",
-                new GetHashCodeMutable());
-        }
+                                    new GetHashCodeMutable());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void GetHashCodeMutable_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\GetHashCodeMutable.cs",
-                @"TestCases\GetHashCodeMutable.Fixed.cs",
-                new GetHashCodeMutable(),
-                new GetHashCodeMutableCodeFixProvider());
-        }
+        public void GetHashCodeMutable_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\GetHashCodeMutable.cs",
+                                   @"TestCases\GetHashCodeMutable.Fixed.cs",
+                                   new GetHashCodeMutable(),
+                                   new GetHashCodeMutableCodeFixProvider());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void GetHashCodeMutable_InvalidCode()
-        {
+        public void GetHashCodeMutable_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"class
 {
     int i;
@@ -59,6 +53,5 @@ namespace SonarAnalyzer.UnitTest.Rules
         return i; // we don't report on this
     }
 }", new GetHashCodeMutable(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }

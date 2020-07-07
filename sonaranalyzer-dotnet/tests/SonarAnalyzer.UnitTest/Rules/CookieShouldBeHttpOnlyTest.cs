@@ -33,35 +33,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CookieShouldBeHttpOnlyTest
     {
+#if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
         [TestMethod]
         [TestCategory("Rule")]
-        public void CookiesShouldBeHttpOnly()
-        {
+        public void CookiesShouldBeHttpOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly.cs",
                 new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: FrameworkMetadataReference.SystemWeb);
-        }
-
+                additionalReferences: MetadataReferenceFacade.GetSystemWeb());
+#else
         [TestMethod]
         [TestCategory("Rule")]
-        public void CookiesShouldBeHttpOnly_NetCore()
-        {
+        public void CookiesShouldBeHttpOnly_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly_NetCore.cs",
                 new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_NetCore());
-        }
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
+            NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CookiesShouldBeHttpOnly_Nancy()
-        {
+        public void CookiesShouldBeHttpOnly_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly_Nancy.cs",
                 new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.Nancy());
-        }
-
-        private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
-            NetStandardMetadataReference.Netstandard
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion));
     }
 }

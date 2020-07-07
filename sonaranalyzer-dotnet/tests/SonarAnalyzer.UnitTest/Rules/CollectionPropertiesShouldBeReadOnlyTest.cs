@@ -31,11 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CollectionPropertiesShouldBeReadOnly()
-        {
+        public void CollectionPropertiesShouldBeReadOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
                 new CollectionPropertiesShouldBeReadOnly(),
-                additionalReferences: FrameworkMetadataReference.SystemRuntimeSerialization);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemRuntimeSerialization());
     }
 }

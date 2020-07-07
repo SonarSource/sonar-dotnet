@@ -19,9 +19,11 @@
  */
 
 extern alias csharp;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -32,23 +34,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CertificateValidationCheck_CS()
-        {
+        public void CertificateValidationCheck_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs",
                 new CertificateValidationCheck(),
-                additionalReferences : FrameworkMetadataReference.SystemNetHttp.Concat(NetStandardMetadataReference.Netstandard)
-                );
-        }
+                additionalReferences : GetAdditionalReferences()
+            );
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CertificateValidationCheck_VB()
-        {
+        public void CertificateValidationCheck_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
                 new SonarAnalyzer.Rules.VisualBasic.CertificateValidationCheck(),
-                additionalReferences: FrameworkMetadataReference.SystemNetHttp.Concat(NetStandardMetadataReference.Netstandard)
-                );
-        }
+                additionalReferences: GetAdditionalReferences()
+            );
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemNetHttp()
+                .Concat(MetadataReferenceFacade.GetSystemSecurityCryptography())
+                .Concat(NetStandardMetadataReference.Netstandard);
     }
 }
 

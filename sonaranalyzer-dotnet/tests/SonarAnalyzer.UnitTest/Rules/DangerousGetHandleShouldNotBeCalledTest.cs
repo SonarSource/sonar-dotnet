@@ -18,7 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using csharp = SonarAnalyzer.Rules.CSharp;
 using vbnet = SonarAnalyzer.Rules.VisualBasic;
@@ -30,19 +34,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DangerousGetHandleShouldNotBeCalled_CS()
-        {
+        public void DangerousGetHandleShouldNotBeCalled_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
-                new csharp.DangerousGetHandleShouldNotBeCalled());
-        }
+                new csharp.DangerousGetHandleShouldNotBeCalled(),
+                additionalReferences: MetadataReferenceFacade.GetMicrosoftWin32Registry());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DangerousGetHandleShouldNotBeCalled_VB()
-        {
+        public void DangerousGetHandleShouldNotBeCalled_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
                 new vbnet.DangerousGetHandleShouldNotBeCalled());
-        }
     }
 }
 

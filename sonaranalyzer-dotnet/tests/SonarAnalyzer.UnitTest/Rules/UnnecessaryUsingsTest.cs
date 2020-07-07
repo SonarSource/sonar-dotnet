@@ -18,7 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using CS = SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -29,23 +33,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnnecessaryUsings()
-        {
+        public void UnnecessaryUsings() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.cs",
-                new CS.UnnecessaryUsings());
-        }
+                                    new CS.UnnecessaryUsings(),
+                                    additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void UnnecessaryUsings_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\UnnecessaryUsings.cs",
-                @"TestCases\UnnecessaryUsings.Fixed.cs",
-                @"TestCases\UnnecessaryUsings.Fixed.Batch.cs",
-                new CS.UnnecessaryUsings(),
-                new CS.UnnecessaryUsingsCodeFixProvider());
-        }
+        public void UnnecessaryUsings_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\UnnecessaryUsings.cs",
+                                   @"TestCases\UnnecessaryUsings.Fixed.cs",
+                                   @"TestCases\UnnecessaryUsings.Fixed.Batch.cs",
+                                   new CS.UnnecessaryUsings(),
+                                   new CS.UnnecessaryUsingsCodeFixProvider(),
+                                   additionalReferences: GetAdditionalReferences());
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetMicrosoftWin32Primitives()
+                                   .Union(MetadataReferenceFacade.GetSystemSecurityCryptography());
     }
 }
 

@@ -31,20 +31,24 @@ namespace SonarAnalyzer.UnitTest.Helpers
     {
         public AssertIgnoreScope()
         {
+#if NETFRAMEWORK // Not needed on .Net Core
             var listener = Debug.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
             if (listener != null)
             {
                 listener.AssertUiEnabled = false;
             }
+#endif
         }
 
         public void Dispose()
         {
+#if NETFRAMEWORK // Not needed on .Net Core
             var listener = Debug.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
             if (listener != null)
             {
                 listener.AssertUiEnabled = true;
             }
+#endif
         }
     }
 }

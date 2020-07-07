@@ -31,11 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SetLocaleForDataTypes()
-        {
+        public void SetLocaleForDataTypes() =>
             Verifier.VerifyAnalyzer(@"TestCases\SetLocaleForDataTypes.cs",
                 new SetLocaleForDataTypes(),
-                additionalReferences: FrameworkMetadataReference.SystemData);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemData());
     }
 }

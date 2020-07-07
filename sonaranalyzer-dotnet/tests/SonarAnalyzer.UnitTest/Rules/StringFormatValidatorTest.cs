@@ -25,6 +25,7 @@ using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -44,29 +45,23 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringFormatRuntimeExceptionFreeValidator()
-        {
+        public void StringFormatRuntimeExceptionFreeValidator() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringFormatRuntimeExceptionFreeValidator.cs",
-                new StringFormatValidator(),
-                workingOptions);
-        }
+                                    new StringFormatValidator(),
+                                    workingOptions);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringFormatTypoFreeValidator()
-        {
+        public void StringFormatTypoFreeValidator() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs",
-                new StringFormatValidator(),
-                workingOptions);
-        }
+                                    new StringFormatValidator(),
+                                    workingOptions);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringFormatEdgeCasesValidator()
-        {
+        public void StringFormatEdgeCasesValidator() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs",
-                new StringFormatValidator(),
-                workingOptions);
-        }
+                                    new StringFormatValidator(),
+                                    workingOptions);
     }
 }

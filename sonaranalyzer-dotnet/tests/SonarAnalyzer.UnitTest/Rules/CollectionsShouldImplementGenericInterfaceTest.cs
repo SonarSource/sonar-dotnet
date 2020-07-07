@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,11 +31,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CollectionsShouldImplementGenericInterface()
-        {
+        public void CollectionsShouldImplementGenericInterface() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionsShouldImplementGenericInterface.cs",
-                new CollectionsShouldImplementGenericInterface(),
-                checkMode:CompilationErrorBehavior.Ignore); // It would be too tedious to implement all those interfaces
-        }
+                                    new CollectionsShouldImplementGenericInterface(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemCollections(),
+                                    checkMode:CompilationErrorBehavior.Ignore); // It would be too tedious to implement all those interfaces
     }
 }

@@ -36,8 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.0.0", "3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion)
-        {
+        public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.cs",
                 new MemberShouldBeStatic(),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
@@ -45,24 +44,34 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion))
-                    .Concat(FrameworkMetadataReference.SystemWeb)
                     .ToImmutableArray());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MemberShouldBeStatic_CSharp8()
-        {
+        public void MemberShouldBeStatic_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.FromCSharp8.cs",
                 new MemberShouldBeStatic(),
-                options: ParseOptionsHelper.FromCSharp8,
+                ParseOptionsHelper.FromCSharp8,
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-        }
+
+#if NETFRAMEWORK // HttpApplication is available only on .Net Framework
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MemberShouldBeStatic_HttpApplication() =>
+            Verifier.VerifyCSharpAnalyzer(@"
+public class HttpApplication1 : System.Web.HttpApplication
+{
+    public int Foo() => 0;
+
+    protected int FooFoo() => 0; // Noncompliant
+}",
+                new MemberShouldBeStatic(),
+                checkMode: CompilationErrorBehavior.Ignore);
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MemberShouldBeStatic_InvalidCode()
-        {
+        public void MemberShouldBeStatic_InvalidCode() =>
             // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-csharp/issues/819
             Verifier.VerifyCSharpAnalyzer(@"
 public class Class7
@@ -74,6 +83,5 @@ public class Class7
         return result;
     }
 }", new MemberShouldBeStatic(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }

@@ -36,102 +36,82 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_AspNetCore_CS()
-        {
+        public void ConfiguringLoggers_AspNetCore_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_AspNetCore.cs",
                 new ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AspNetCoreLoggingReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_AspNetCore_VB()
-        {
+        public void ConfiguringLoggers_AspNetCore_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_AspNetCore.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AspNetCoreLoggingReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_Log4Net_CS()
-        {
+        public void ConfiguringLoggers_Log4Net_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Log4Net.cs",
                 new ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: Log4NetReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_Log4Net_VB()
-        {
+        public void ConfiguringLoggers_Log4Net_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Log4Net.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: Log4NetReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_NLog_CS()
-        {
+        public void ConfiguringLoggers_NLog_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_NLog.cs",
                 new ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NLogReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_NLog_VB()
-        {
+        public void ConfiguringLoggers_NLog_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_NLog.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NLogReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_Serilog_CS()
-        {
+        public void ConfiguringLoggers_Serilog_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Serilog.cs",
                 new ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: SeriLogReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_Serilog_VB()
-        {
+        public void ConfiguringLoggers_Serilog_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Serilog.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: SeriLogReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_CS_RuleDisabled()
-        {
+        public void ConfiguringLoggers_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ConfiguringLoggers_AspNetCore.cs",
                 new ConfiguringLoggers(),
                 additionalReferences: AspNetCoreLoggingReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_VB_RuleDisabled()
-        {
+        public void ConfiguringLoggers_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ConfiguringLoggers_AspNetCore.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(),
                 additionalReferences: AspNetCoreLoggingReferences);
-        }
 
         private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
             NetStandardMetadataReference.Netstandard
@@ -146,7 +126,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> Log4NetReferences =>
             NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "net45-full")
-            .Concat(FrameworkMetadataReference.SystemXml);
+            .Concat(MetadataReferenceFacade.GetSystemXml());
 
         private static IEnumerable<MetadataReference> NLogReferences =>
             NuGetMetadataReference.NLog(Constants.NuGetLatestVersion);

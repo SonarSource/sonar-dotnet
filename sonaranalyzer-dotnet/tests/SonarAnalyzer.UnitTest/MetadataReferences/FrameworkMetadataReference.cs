@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NETFRAMEWORK
+
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
@@ -112,3 +114,5 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             = Create("System.Xml.XDocument.dll");
     }
 }
+
+#endif

@@ -31,20 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS()
-        {
+        public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
                 new csharp.PartCreationPolicyShouldBeUsedWithExportAttribute(),
-                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB()
-        {
+        public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
                 new vbnet.PartCreationPolicyShouldBeUsedWithExportAttribute(),
-                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
     }
 }

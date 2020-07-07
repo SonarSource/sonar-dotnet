@@ -57,20 +57,28 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void NetFrameworkVersionProvider_CurrentAssemblyMscorlib()
         {
-            var compilation = GetRawCompilation(FrameworkMetadataReference.Mscorlib.Concat(FrameworkMetadataReference.System));
+            var compilation = GetRawCompilation(GetAdditionalReferences());
             var versionProvider = new NetFrameworkVersionProvider();
+
+#if NETFRAMEWORK
             versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.After452);
+#else
+            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Unknown);
+#endif
         }
 
         [TestMethod]
         public void NetFrameworkVersionProvider_CurrentAssemblyMscorlib_Netstandard()
         {
-            var compilation = GetRawCompilation(FrameworkMetadataReference.Mscorlib
-                .Concat(FrameworkMetadataReference.System)
-                .Concat(NetStandardMetadataReference.Netstandard));
+            var compilation = GetRawCompilation(GetAdditionalReferences());
             var versionProvider = new NetFrameworkVersionProvider();
+
+#if NETFRAMEWORK
             // the local .net framework mscorlib is actually used
             versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.After452);
+#else
+            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Unknown);
+#endif
         }
 
         [TestMethod]
@@ -129,5 +137,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             return Path.Combine(Path.GetDirectoryName(assembly.Location), "../../../../FrameworkMocks/lib/", mockName);
         }
 
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetMsCorLib()
+                .Concat(MetadataReferenceFacade.GetSystemComponentModelComposition());
     }
 }

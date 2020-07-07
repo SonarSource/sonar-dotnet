@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NETFRAMEWORK // IdentityModel is not available on .Net Core
+
 extern alias csharp;
 extern alias vbnet;
 
@@ -43,39 +45,32 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ControllingPermissions_CS()
-        {
+        public void ControllingPermissions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ControllingPermissions.cs",
                 new CSharp.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ControllingPermissions_CS_Disabled()
-        {
+        public void ControllingPermissions_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ControllingPermissions.cs",
                 new CSharp.ControllingPermissions(),
                 additionalReferences: AdditionalReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ControllingPermissions_VB()
-        {
+        public void ControllingPermissions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ControllingPermissions.vb",
                 new VisualBasic.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferences);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ControllingPermissions_VB_Disabled()
-        {
+        public void ControllingPermissions_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ControllingPermissions.vb",
                 new VisualBasic.ControllingPermissions(),
                 additionalReferences: AdditionalReferences);
-        }
     }
 }
 
+#endif

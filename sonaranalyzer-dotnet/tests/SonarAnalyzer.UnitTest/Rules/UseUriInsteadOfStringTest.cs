@@ -31,17 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseUriInsteadOfString()
-        {
+        public void UseUriInsteadOfString() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
                 new UseUriInsteadOfString(),
-                additionalReferences: FrameworkMetadataReference.SystemDrawing);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemDrawing());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseUriInsteadOfString_InvalidCode()
-        {
+        public void UseUriInsteadOfString_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class Foo
 {
@@ -57,6 +54,5 @@ public class Bar : Foo
         Uri.TryCreate(new object(), UriKind.Absolute, out result); // Compliant - invalid code
     }
 }", new UseUriInsteadOfString(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }

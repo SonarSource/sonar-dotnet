@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Tests.Diagnostics
 {

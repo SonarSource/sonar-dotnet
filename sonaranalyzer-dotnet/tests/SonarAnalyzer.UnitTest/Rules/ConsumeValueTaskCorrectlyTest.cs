@@ -34,17 +34,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConsumeValueTaskCorrectly()
-        {
+        public void ConsumeValueTaskCorrectly() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConsumeValueTaskCorrectly.cs",
                 new ConsumeValueTaskCorrectly(),
                 additionalReferences: GetReferences());
-        }
 
         private static IEnumerable<MetadataReference> GetReferences() =>
             Enumerable.Empty<MetadataReference>()
-                .Concat(FrameworkMetadataReference.SystemThreadingTasks)
-                .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"));
+                .Concat(MetadataReferenceFacade.GetSystemThreadingTasks());
     }
 }
 

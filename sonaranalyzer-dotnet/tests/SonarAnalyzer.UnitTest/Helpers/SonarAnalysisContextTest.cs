@@ -25,6 +25,7 @@ using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -54,10 +55,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             try
             {
-                foreach (var testCase in this.TestCases)
+                foreach (var testCase in TestCases)
                 {
                     // ToDo: We should find a way to ack the fact the action was not run
-                    Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer, ParseOptionsHelper.FromCSharp8);
+                    Verifier.VerifyNoIssueReported(testCase.Path,
+                                                   testCase.Analyzer,
+                                                   ParseOptionsHelper.FromCSharp8,
+                                                   additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
                 }
             }
             finally
@@ -69,24 +73,27 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void SonarAnalysis_ByDefault_ExecuteRule()
         {
-            foreach (var testCase in this.TestCases)
+            foreach (var testCase in TestCases)
             {
                 // FIX ME: We test that a rule is enabled only by checking the issues are reported
-                Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer, ParseOptionsHelper.FromCSharp8);
+                Verifier.VerifyAnalyzer(testCase.Path,
+                                        testCase.Analyzer,
+                                        ParseOptionsHelper.FromCSharp8,
+                                        additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
             }
         }
 
         [TestMethod]
         public void SonarAnalysis_WhenAnalysisDisabledBaseOnSyntaxTree_ReportIssuesForEnabledRules()
         {
-            this.TestCases.Should().HaveCountGreaterThan(2);
+            TestCases.Should().HaveCountGreaterThan(2);
 
             try
             {
                 SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) =>
-                    tree.FilePath.EndsWith(new FileInfo(this.TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
-                Verifier.VerifyAnalyzer(this.TestCases[0].Path, this.TestCases[0].Analyzer);
-                Verifier.VerifyNoIssueReported(this.TestCases[1].Path, this.TestCases[1].Analyzer);
+                    tree.FilePath.EndsWith(new FileInfo(TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
+                Verifier.VerifyAnalyzer(TestCases[0].Path, TestCases[0].Analyzer);
+                Verifier.VerifyNoIssueReported(TestCases[1].Path, TestCases[1].Analyzer);
             }
             finally
             {
@@ -114,15 +121,21 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 // where the Debug.Assert of the AnalysisContextExtensions.ReportDiagnostic() method will raise.
                 using (new AssertIgnoreScope())
                 {
-                    foreach (var testCase in this.TestCases)
+                    foreach (var testCase in TestCases)
                     {
                         if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe)
                         {
-                            Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer, ParseOptionsHelper.FromCSharp8);
+                            Verifier.VerifyNoIssueReported(testCase.Path,
+                                                           testCase.Analyzer,
+                                                           ParseOptionsHelper.FromCSharp8,
+                                                           additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
                         }
                         else
                         {
-                            Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer, ParseOptionsHelper.FromCSharp8);
+                            Verifier.VerifyAnalyzer(testCase.Path,
+                                                    testCase.Analyzer,
+                                                    ParseOptionsHelper.FromCSharp8,
+                                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
                         }
                     }
                 }

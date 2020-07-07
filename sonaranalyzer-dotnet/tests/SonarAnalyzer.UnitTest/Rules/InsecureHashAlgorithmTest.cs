@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NETFRAMEWORK // SHA1Managed is sealed in .Net Core and HMACRIPEMD160 is not available
+
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
@@ -30,9 +32,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void InsecureHashAlgorithm()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureHashAlgorithm.cs", new InsecureHashAlgorithm());
-        }
+        public void InsecureHashAlgorithm() =>
+            Verifier.VerifyAnalyzer(@"TestCases\InsecureHashAlgorithm.cs",
+                                    new InsecureHashAlgorithm());
     }
 }
+
+#endif

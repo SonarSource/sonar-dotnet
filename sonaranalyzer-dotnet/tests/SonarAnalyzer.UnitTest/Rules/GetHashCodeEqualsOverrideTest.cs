@@ -19,8 +19,13 @@
  */
 
 extern alias csharp;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,9 +35,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GetHashCodeEqualsOverride()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs", new GetHashCodeEqualsOverride());
-        }
+        public void GetHashCodeEqualsOverride() =>
+            Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs",
+                new GetHashCodeEqualsOverride(),
+                additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
     }
 }

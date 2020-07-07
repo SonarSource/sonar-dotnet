@@ -19,6 +19,10 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+// ToDo: add support for windows forms in .Net Core
+// https://github.com/SonarSource/sonar-dotnet/issues/3426
+#if NETFRAMEWORK
+
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -31,11 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotCallExitMethods()
-        {
+        public void DoNotCallExitMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
                 new DoNotCallExitMethods(),
-                additionalReferences:FrameworkMetadataReference.SystemWindowsForms);
-        }
+                additionalReferences:MetadataReferenceFacade.GetSystemWindowsForms());
     }
 }
+
+#endif

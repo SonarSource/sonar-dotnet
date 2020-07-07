@@ -29,21 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ArrayCreationLongSyntax()
-        {
+        public void ArrayCreationLongSyntax() =>
             Verifier.VerifyAnalyzer(@"TestCases\ArrayCreationLongSyntax.vb",
                 new ArrayCreationLongSyntax());
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void ArrayCreationLongSyntax_CodeFix()
-        {
+        public void ArrayCreationLongSyntax_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\ArrayCreationLongSyntax.vb",
                 @"TestCases\ArrayCreationLongSyntax.Fixed.vb",
                 new ArrayCreationLongSyntax(),
                 new ArrayCreationLongSyntaxCodeFixProvider());
-        }
     }
 }

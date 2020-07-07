@@ -19,9 +19,12 @@
  */
 
 extern alias csharp;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -31,34 +34,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptingData_CS()
-        {
+        public void EncryptingData_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptingData.cs",
-                new EncryptingData(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                new EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptingData_VB()
-        {
+        public void EncryptingData_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptingData.vb",
-                new SonarAnalyzer.Rules.VisualBasic.EncryptingData(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                new SonarAnalyzer.Rules.VisualBasic.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptingData_CS_RuleDisabled()
-        {
+        public void EncryptingData_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\EncryptingData.cs",
-                new EncryptingData());
-        }
+                new EncryptingData(),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptingData_VB_RuleDisabled()
-        {
+        public void EncryptingData_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\EncryptingData.vb",
-                new SonarAnalyzer.Rules.VisualBasic.EncryptingData());
-        }
+                new SonarAnalyzer.Rules.VisualBasic.EncryptingData(),
+                additionalReferences: GetAdditionalReferences());
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemSecurityCryptography();
     }
 }

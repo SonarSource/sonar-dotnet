@@ -34,36 +34,32 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UriShouldNotBeHardcoded_CSharp_General()
-        {
+        public void UriShouldNotBeHardcoded_CSharp_General() =>
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.cs",
-                new UriShouldNotBeHardcoded());
-        }
+                                    new UriShouldNotBeHardcoded());
 
+#if NETFRAMEWORK // HttpContext is available only when targeting .Net Framework
         [DataTestMethod]
         [TestCategory("Rule")]
         [DataRow("3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion)]
-        public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion)
-        {
+        public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
-                new UriShouldNotBeHardcoded(),
-                additionalReferences: FrameworkMetadataReference.SystemWeb
-                    .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion))
-                    .ToImmutableArray());
-        }
+                                    new UriShouldNotBeHardcoded(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemWeb()
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion)));
+#endif
 
         [DataTestMethod]
         [TestCategory("Rule")]
         [DataRow("2.0.4", "2.0.3", "2.1.1")]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
-        public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion)
-        {
+        public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNetCore.cs",
                 new UriShouldNotBeHardcoded(),
                 additionalReferences:
-                    // for VirtualFileResult
-                    NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion)
+                // for VirtualFileResult
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion)
                     // for Controller
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreMvcVersion))
                     // for IRouter and VirtualPathData
@@ -74,14 +70,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreMvcVersion))
                     .Concat(NuGetMetadataReference.MicrosoftNetHttpHeaders(netHttpHeadersVersion))
                     .ToImmutableArray());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UriShouldNotBeHardcoded_VB()
-        {
+        public void UriShouldNotBeHardcoded_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.vb",
-                new SonarAnalyzer.Rules.VisualBasic.UriShouldNotBeHardcoded());
-        }
+                                    new SonarAnalyzer.Rules.VisualBasic.UriShouldNotBeHardcoded());
     }
 }

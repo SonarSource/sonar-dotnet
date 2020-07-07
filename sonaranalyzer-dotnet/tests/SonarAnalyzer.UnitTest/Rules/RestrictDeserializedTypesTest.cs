@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NETFRAMEWORK // These serializers are available only when targeting .Net Framework
+
 extern alias csharp;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -73,3 +75,4 @@ namespace SonarAnalyzer.UnitTest.Rules
     }
 }
 
+#endif

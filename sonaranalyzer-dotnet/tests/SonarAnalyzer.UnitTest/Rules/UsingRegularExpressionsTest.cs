@@ -22,6 +22,7 @@ extern alias csharp;
 extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -33,34 +34,30 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingRegularExpressions_CS()
-        {
+        public void UsingRegularExpressions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingRegularExpressions.cs",
-                new CSharp.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                new CSharp.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingRegularExpressions_CS_Disabled()
-        {
+        public void UsingRegularExpressions_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingRegularExpressions.cs",
-                new CSharp.UsingRegularExpressions());
-        }
+                new CSharp.UsingRegularExpressions(),
+                additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingRegularExpressions_VB()
-        {
+        public void UsingRegularExpressions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingRegularExpressions.vb",
-                new VisualBasic.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                new VisualBasic.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingRegularExpressions_VB_Disabled()
-        {
+        public void UsingRegularExpressions_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingRegularExpressions.vb",
-                new VisualBasic.UsingRegularExpressions());
-        }
+                new VisualBasic.UsingRegularExpressions(),
+                additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
     }
 }

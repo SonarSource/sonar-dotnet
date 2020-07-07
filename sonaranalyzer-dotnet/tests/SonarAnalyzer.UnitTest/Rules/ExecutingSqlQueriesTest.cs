@@ -35,62 +35,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExecutingSqlQueriesTest
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ExecutingSqlQueries_CS_NetCore()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.cs",
-                new CSharp.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                options: ParseOptionsHelper.FromCSharp8,
-                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
-        }
+#if NETFRAMEWORK // System.Data.OracleClient.dll is not available on .Net Core
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExecutingSqlQueries_CS_Net46()
-        {
+        public void ExecutingSqlQueries_CS_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_Net46.cs",
                 new CSharp.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetReferencesNet46(Constants.NuGetLatestVersion));
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExecutingSqlQueries_CS_Disabled()
-        {
-            Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.cs",
-                new CSharp.ExecutingSqlQueries(),
-                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ExecutingSqlQueries_VB_NetCore()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.vb",
-                new VisualBasic.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                options: ParseOptionsHelper.FromVisualBasic15,
-                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ExecutingSqlQueries_VB_Net46()
-        {
+        public void ExecutingSqlQueries_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_Net46.vb",
                 new VisualBasic.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 options: ParseOptionsHelper.FromVisualBasic15,
                 additionalReferences: GetReferencesNet46(Constants.NuGetLatestVersion));
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ExecutingSqlQueries_VB_Disabled()
-        {
-            Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.vb",
-                new VisualBasic.ExecutingSqlQueries(),
-                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
-        }
 
         private static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
             Enumerable.Empty<MetadataReference>()
@@ -98,10 +58,43 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(FrameworkMetadataReference.SystemDataOracleClient)
                 .Concat(NuGetMetadataReference.SystemDataSqlServerCe(sqlServerCeVersion));
 
+#else
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ExecutingSqlQueries_CS_NetCore() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.cs",
+                new CSharp.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
+
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ExecutingSqlQueries_CS_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.cs",
+                new CSharp.ExecutingSqlQueries(),
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ExecutingSqlQueries_VB_NetCore() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.vb",
+                new VisualBasic.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                options: ParseOptionsHelper.FromVisualBasic15,
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ExecutingSqlQueries_VB_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.vb",
+                new VisualBasic.ExecutingSqlQueries(),
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
+
         private static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()
-                .Concat(NetStandardMetadataReference.Netstandard)
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
+#endif
     }
 }

@@ -30,16 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveClassCoupling()
-        {
+        public void AvoidExcessiveClassCoupling() =>
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs",
                 new AvoidExcessiveClassCoupling { Threshold = 1 });
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveClassCoupling_Generic_No_Constraints()
-        {
+        public void AvoidExcessiveClassCoupling_Generic_No_Constraints() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
@@ -49,12 +46,10 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveClassCoupling_Generic_With_Constraints()
-        {
+        public void AvoidExcessiveClassCoupling_Generic_With_Constraints() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
@@ -68,12 +63,10 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveClassCoupling_Generic_Bounded()
-        {
+        public void AvoidExcessiveClassCoupling_Generic_Bounded() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
@@ -85,12 +78,10 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveClassCoupling_Generic_Bounded_Deep_Nesting()
-        {
+        public void AvoidExcessiveClassCoupling_Generic_Bounded_Deep_Nesting() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections.Generic;
@@ -103,7 +94,6 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -163,8 +153,7 @@ public class Pointers // Compliant, pointers are not counted
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveClassCoupling_Enums_Not_Counted()
-        {
+        public void AvoidExcessiveClassCoupling_Enums_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 public class Pointers // Compliant, enums are not counted
@@ -173,7 +162,6 @@ public class Pointers // Compliant, enums are not counted
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
-        }
 
         [TestMethod]
         [TestCategory("Rule")]

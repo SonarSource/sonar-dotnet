@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -31,36 +34,35 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptionAlgorithmsShouldBeSecure_CS()
-        {
+        public void EncryptionAlgorithmsShouldBeSecure_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
-                new CSharp.EncryptionAlgorithmsShouldBeSecure());
-        }
+                new CSharp.EncryptionAlgorithmsShouldBeSecure(),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21()
-        {
+        public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
                 new CSharp.EncryptionAlgorithmsShouldBeSecure(),
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-        }
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0
+                    .Concat(GetAdditionalReferences()));
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptionAlgorithmsShouldBeSecure_VB()
-        {
+        public void EncryptionAlgorithmsShouldBeSecure_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
-                new VisualBasic.EncryptionAlgorithmsShouldBeSecure());
-        }
+                new VisualBasic.EncryptionAlgorithmsShouldBeSecure(),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21()
-        {
+        public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
                 new VisualBasic.EncryptionAlgorithmsShouldBeSecure(),
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-        }
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0
+                    .Concat(GetAdditionalReferences()));
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemSecurityCryptography();
     }
 }

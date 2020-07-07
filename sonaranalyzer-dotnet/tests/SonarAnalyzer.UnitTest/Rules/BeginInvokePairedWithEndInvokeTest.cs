@@ -30,11 +30,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void BeginInvokePairedWithEndInvoke()
-        {
+        public void BeginInvokePairedWithEndInvoke() =>
             Verifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.cs",
                 new BeginInvokePairedWithEndInvoke());
-        }
     }
 }
 

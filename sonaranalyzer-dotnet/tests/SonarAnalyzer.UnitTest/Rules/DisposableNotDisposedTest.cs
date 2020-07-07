@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,11 +31,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DisposableNotDisposed()
-        {
+        public void DisposableNotDisposed() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs",
                 new DisposableNotDisposed(),
-                ParseOptionsHelper.FromCSharp8);
-        }
+                ParseOptionsHelper.FromCSharp8,
+                additionalReferences: MetadataReferenceFacade.GetSystemNetHttp());
     }
 }

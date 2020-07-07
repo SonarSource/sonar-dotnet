@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Versioning;
-using System.Windows.Forms;
 
 namespace Tests.Diagnostics
 {
@@ -561,52 +560,52 @@ namespace Tests.Diagnostics
 
     public class ReproGithubIssue2311
     {
-        private void SwitchCaseWithWhenAndLocalScope(object sender, KeyEventArgs e)
+        private void SwitchCaseWithWhenAndLocalScope(object sender, DateTimeKind e)
         {
             var tab = new string(' ', 2);
-            switch (e.KeyCode)
+            switch (e)
             {
-                case Keys.Tab:
+                case DateTimeKind.Local:
                     {
                         Console.WriteLine(tab);
                         break;
                     }
 
-                case Keys.A when e.Control:
+                case DateTimeKind.Unspecified when tab == "  ":
                     {
                         break;
                     }
             }
         }
 
-        private void SwitchCaseWithLocalScope(object sender, KeyEventArgs e)
+        private void SwitchCaseWithLocalScope(object sender, DateTimeKind e)
         {
             var tab = new string(' ', 2);
-            switch (e.KeyCode)
+            switch (e)
             {
-                case Keys.Tab:
+                case DateTimeKind.Local:
                     {
                         Console.WriteLine(tab);
                         break;
                     }
 
-                case Keys.A:
+                case DateTimeKind.Unspecified:
                     {
                         break;
                     }
             }
         }
 
-        private void SwitchCase(object sender, KeyEventArgs e)
+        private void SwitchCase(object sender, DateTimeKind e)
         {
             var tab = new string(' ', 2);
-            switch (e.KeyCode)
+            switch (e)
             {
-                case Keys.Tab:
+                case DateTimeKind.Utc:
                     Console.WriteLine(tab);
                     break;
 
-                case Keys.A:
+                case DateTimeKind.Unspecified:
                     break;
             }
         }

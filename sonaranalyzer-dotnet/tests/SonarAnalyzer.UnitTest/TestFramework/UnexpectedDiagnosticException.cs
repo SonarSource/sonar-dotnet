@@ -19,9 +19,12 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
+
+#if NETFRAMEWORK
+
 using System.IO;
 using System.Resources;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
@@ -67,3 +70,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             Path.GetFullPath(Path.Combine(@"..\..\..\TestCases", path));
     }
 }
+
+#else // Resources cannot be accessed in the same way on .Net Core
+
+namespace SonarAnalyzer.UnitTest.TestFramework
+{
+    public class UnexpectedDiagnosticException : Exception
+    {
+        public UnexpectedDiagnosticException(Location location, string message)
+            : base(message)
+        {
+        }
+    }
+}
+
+#endif

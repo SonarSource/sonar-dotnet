@@ -31,33 +31,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ShouldImplementExportedInterfaces_CS()
-        {
+        public void ShouldImplementExportedInterfaces_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
                 new ShouldImplementExportedInterfaces(),
-                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ShouldImplementExportedInterfaces_VB()
-        {
+        public void ShouldImplementExportedInterfaces_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ShouldImplementExportedInterfaces(),
-                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ShouldImplementExportedInterfaces_Partial()
-        {
+        public void ShouldImplementExportedInterfaces_Partial() =>
             Verifier.VerifyAnalyzer(new[]
                 {
                     @"TestCases\ShouldImplementExportedInterfaces_Part1.cs",
                     @"TestCases\ShouldImplementExportedInterfaces_Part2.cs",
                 },
                 new ShouldImplementExportedInterfaces(),
-                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
     }
 }
