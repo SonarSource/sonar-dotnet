@@ -85,7 +85,7 @@
     <dependency>
       <groupId>org.sonarsource.analyzer-commons</groupId>
       <artifactId>sonar-analyzer-commons</artifactId>
-      <version>1.7.0.243</version>
+      <version>1.11.0.541</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
@@ -291,14 +291,13 @@
                         <include name="Google.Protobuf.dll"/>
                       </fileset>
                     </copy>
-                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
-                         basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
+                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip" basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net461/vbnet">
                         <include name="rules.xml"/>
                       </fileset>
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/vbnet">
-                        <include name="*.json" /> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
+                        <include name="*.json"/> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
                       </fileset>
                     </copy>
 
@@ -308,7 +307,7 @@
                       </fileset>
                     </copy>
 
-                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
+                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8"/>
                   </tasks>
                 </configuration>
                 <goals>
@@ -392,13 +391,10 @@
                   <exportAntProperties>true</exportAntProperties>
                   <tasks>
                     <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
-                    <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic-${analyzer.version}.nupkg"
-                           dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic/" />
-                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
-                         basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
+                    <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic-${analyzer.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic/"/>
+                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip" basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
 
-                    <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.VisualBasic-${analyzer.version}.nupkg"
-                           dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.VisualBasic/" />
+                    <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.VisualBasic-${analyzer.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.VisualBasic/"/>
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
                         <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.VisualBasic/xml">
                         <include name="*.xml"/>
@@ -406,10 +402,10 @@
                     </copy>
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/vbnet">
-                        <include name="*.json" /> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
+                        <include name="*.json"/> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
                       </fileset>
                     </copy>
-                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
+                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8"/>
                   </tasks>
                 </configuration>
                 <goals>
