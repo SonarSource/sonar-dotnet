@@ -16,6 +16,17 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
+      - task: UseDotNet@2
+        inputs:
+        packageType: sdk
+        version: 5.0.100-preview.6.20318.15
+        installationPath: $(Agent.ToolsDirectory)/dotnet
+
+      - powershell: |
+          dotnet --list-sdks
+          dotnet --version
+        displayName: 'Read Sonar project version from the versions.props file'
+
       - task: Cache@2
         displayName: Cache NuGet packages
         inputs:
