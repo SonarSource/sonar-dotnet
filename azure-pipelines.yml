@@ -40,9 +40,9 @@ stages:
 
       - task: UseDotNet@2
         inputs:
-        packageType: sdk
-        version: 5.0.100-preview.6.20318.15
-        installationPath: $(Agent.ToolsDirectory)/dotnet
+          packageType: sdk
+          version: 5.0.100-preview.6.20318.15
+          installationPath: $(Agent.ToolsDirectory)/dotnet
 
       - powershell: |
           dotnet --list-sdks
@@ -50,7 +50,7 @@ stages:
         displayName: 'Read Sonar project version from the versions.props file'
 
       - task: DotNetCoreCLI@2
-        displayName: 'Build .NET 5'
+        displayName: Build .NET 5
         inputs:
           command: 'build'
           projects: i-will-remove-this/net5.sln
