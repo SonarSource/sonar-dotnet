@@ -43,7 +43,14 @@ stages:
           packageType: sdk
           version: 5.0.100-preview.6.20318.15
           installationPath: $(Agent.ToolsDirectory)/dotnet
-        displayName: "Use NET 5 SDK preview"
+        displayName: "Install NET 5 SDK preview"
+
+      - task: UseDotNet@2
+        inputs:
+          packageType: sdk
+          version: 3.1.105
+          installationPath: $(Agent.ToolsDirectory)/dotnet
+        displayName: "Install dotnet 3.1 LTS"
 
       - powershell: |
           dotnet --list-sdks
