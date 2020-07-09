@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UsingCookies
     {
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore(string packageVersion) =>
-            FrameworkMetadataReference.Netstandard
+            NetStandardMetadataReference.Netstandard
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(packageVersion))
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(packageVersion))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsPrimitives(packageVersion));

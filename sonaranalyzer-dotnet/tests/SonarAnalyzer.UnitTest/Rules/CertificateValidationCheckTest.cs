@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs",
                 new CertificateValidationCheck(),
-                additionalReferences : FrameworkMetadataReference.SystemNetHttp.Concat(FrameworkMetadataReference.Netstandard)
+                additionalReferences : FrameworkMetadataReference.SystemNetHttp.Concat(NetStandardMetadataReference.Netstandard)
                 );
         }
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
                 new SonarAnalyzer.Rules.VisualBasic.CertificateValidationCheck(),
-                additionalReferences: FrameworkMetadataReference.SystemNetHttp.Concat(FrameworkMetadataReference.Netstandard)
+                additionalReferences: FrameworkMetadataReference.SystemNetHttp.Concat(NetStandardMetadataReference.Netstandard)
                 );
         }
     }

@@ -100,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()
-                .Concat(FrameworkMetadataReference.Netstandard)
+                .Concat(NetStandardMetadataReference.Netstandard)
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
     }

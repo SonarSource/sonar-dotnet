@@ -123,7 +123,7 @@ namespace SonarAnalyzer.UnitTest.Performance
 
         private static IEnumerable<MetadataReference> GetEntityFrameworkReferencesNetCore(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()
-                .Concat(FrameworkMetadataReference.Netstandard)
+                .Concat(NetStandardMetadataReference.Netstandard)
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(entityFrameworkVersion))
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
 

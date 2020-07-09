@@ -33,9 +33,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static IEnumerable<MetadataReference> Mscorlib { get; }
             = Create("mscorlib.dll");
 
-        internal static IEnumerable<MetadataReference> Netstandard { get; }
-            = Create("netstandard.dll");
-
         internal static IEnumerable<MetadataReference> System { get; }
             = Create("System.dll");
 

@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var compilation = GetRawCompilation(FrameworkMetadataReference.Mscorlib
                 .Concat(FrameworkMetadataReference.System)
-                .Concat(FrameworkMetadataReference.Netstandard));
+                .Concat(NetStandardMetadataReference.Netstandard));
             var versionProvider = new NetFrameworkVersionProvider();
             // the local .net framework mscorlib is actually used
             versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.After452);
