@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <AssemblyName>SonarAnalyzer.RuleDescriptorGenerator</AssemblyName>
     <RootNamespace>SonarAnalyzer.RuleDescriptorGenerator</RootNamespace>
@@ -9,6 +8,7 @@
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <RestoreLockedMode>true</RestoreLockedMode>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,17 +20,19 @@
     <Compile Include="..\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
   </ItemGroup>
 
-  <!--
-    This PropertyGroup is used as a hack to prevent the NU1605 issue to be reported as an error. The rule is detecting
-    the downgrade of System.Collections.Immutable from 1.2.0 to 1.1.37 (VS 2015 Update 3 only embeds 1.1.37).
-    Do not use NoWarn in order to avoid hiding other issues.
-  -->
-  <PropertyGroup>
-    <WarningsAsErrors />
-    <NoWarn>NU1605</NoWarn>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-  </PropertyGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <ItemGroup>
+    <PackageReference Include="System.Collections.Immutable" Version="1.1.37">
+      <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
+      <NoWarn>NU1605, NU1701</NoWarn>
+    </PackageReference>
+  </ItemGroup>
+  
+  <!-- 
+    RuleDescriptorGenerator targets both .Net 4.8 and .Net Core 3.1 to allow referencing in the tests project.
+    Since we want to generate resources only once, we will run the tool only after .Net build. This is done by
+    checking the file extension.  
+   -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(TargetFileName.EndsWith(&quot;exe&quot;))" >
     <Exec Command="cd $(OutDir)&#xD;&#xA;$(TargetFileName) cs&#xD;&#xA;$(TargetFileName) vbnet" />
   </Target>
 

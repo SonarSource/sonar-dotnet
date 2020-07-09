@@ -16,7 +16,7 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="bin\Release\net461\cs\rules.xml"  target="xml\" />
-    <file src="bin\Release\net461\cs\profile.xml"  target="xml\" />
+    <file src="bin\Release\net48\cs\rules.xml"  target="xml\" />
+    <file src="bin\Release\net48\cs\profile.xml"  target="xml\" />
   </files>
 </package>
