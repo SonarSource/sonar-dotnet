@@ -178,4 +178,64 @@ namespace Tests.Diagnostics
         }
     }
 
+
+    public enum MyEnum
+    {
+        ONE,
+        TWO,
+        THREE,
+        FOUR,
+        FIVE
+    }
+
+    public class ValueHolder
+    {
+        public string Value { get; }
+        public MyEnum MyEnum { get; }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3416
+    public class ReproCommunityIssue3416
+    {
+        public int Compare(ValueHolder left, ValueHolder right)
+        {
+            string leftName = left?.Value;
+            string rightName = right?.Value;
+
+            if (string.Equals(leftName, rightName))
+                // this will return if both are NULL or if they have equal non-null values
+                return 0;
+
+            // at this point, leftName can be NULL if rightName is not NULL
+            if (leftName == null)
+            {
+                // rightName is not null
+                if (rightName.EndsWith("foo")) // Noncompliant FP
+                    return 1;
+                return 0;
+            }
+
+            return 0;
+        }
+
+        public string Foo(ValueHolder valueHolder)
+        {
+            switch (valueHolder?.MyEnum)
+            {
+                case MyEnum.ONE:
+                    return valueHolder.Value;
+                case MyEnum.TWO:
+                case MyEnum.THREE:
+                    return valueHolder.Value;
+                case MyEnum.FOUR:
+                    return valueHolder.Value;
+                case MyEnum.FIVE:
+                case null:
+                    return valueHolder.Value; // Noncompliant Ok
+                default:
+                    return string.Empty;
+            }
+        }
+    }
+
 }
