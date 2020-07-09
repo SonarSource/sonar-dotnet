@@ -99,35 +99,33 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExtensionMethodInvocation(SyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
-                !methodSymbol.IsExtensionOn(KnownType.System_Collections_IEnumerable) ||
-                !CastIEnumerableMethods.Contains(methodSymbol.Name))
-            {
-                return;
-            }
-
-            var returnType = methodSymbol.ReturnType;
-            if (GetGenericTypeArgument(returnType) is { } castType)
+            if (context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                && methodSymbol.IsExtensionOn(KnownType.System_Collections_IEnumerable)
+                && CastIEnumerableMethods.Contains(methodSymbol.Name))
             {
 
-                if (methodSymbol.Name == "OfType" && CanHaveNullValue(castType))
+                var returnType = methodSymbol.ReturnType;
+                if (GetGenericTypeArgument(returnType) is { } castType)
                 {
-                    // OfType() filters 'null' values from enumerables
-                    return;
-                }
 
-                var elementType = GetElementType(invocation, methodSymbol, context.SemanticModel);
-                if (elementType != null && elementType.Equals(castType))
-                {
-                    var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(invocation, methodCalledAsStatic),
-                        returnType.ToMinimalDisplayString(context.SemanticModel, invocation.SpanStart)));
+                    if (methodSymbol.Name == "OfType" && CanHaveNullValue(castType))
+                    {
+                        // OfType() filters 'null' values from enumerables
+                        return;
+                    }
+
+                    var elementType = GetElementType(invocation, methodSymbol, context.SemanticModel);
+                    if (elementType != null && elementType.Equals(castType))
+                    {
+                        var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(invocation, methodCalledAsStatic),
+                            returnType.ToMinimalDisplayString(context.SemanticModel, invocation.SpanStart)));
+                    }
                 }
             }
 
             static ITypeSymbol GetGenericTypeArgument(ITypeSymbol type) =>
-                type is INamedTypeSymbol returnType &&
-                    returnType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
+                type is INamedTypeSymbol returnType && returnType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
                     ? returnType.TypeArguments.Single()
                     : null;
 
