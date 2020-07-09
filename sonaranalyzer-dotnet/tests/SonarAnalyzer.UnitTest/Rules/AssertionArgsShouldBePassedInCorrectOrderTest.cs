@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
                 additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion)
-                    .Concat(FrameworkMetadataReference.Netstandard)
+                    .Concat(NetStandardMetadataReference.Netstandard)
                     .ToArray());
         }
     }

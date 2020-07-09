@@ -111,7 +111,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (additionalReferences != null &&
                 additionalReferences.Any(r => r.Display.Contains("\\netstandard")))
             {
-                project = project.AddReferences(FrameworkMetadataReference.Netstandard);
+                project = project.AddReferences(NetStandardMetadataReference.Netstandard);
             }
 
             return project.GetSolution();

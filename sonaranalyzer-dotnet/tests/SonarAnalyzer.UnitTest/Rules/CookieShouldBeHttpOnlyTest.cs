@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
-            FrameworkMetadataReference.Netstandard
+            NetStandardMetadataReference.Netstandard
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion));
     }
 }

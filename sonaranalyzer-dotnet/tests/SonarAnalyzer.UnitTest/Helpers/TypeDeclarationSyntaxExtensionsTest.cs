@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -84,7 +83,7 @@ namespace Test
     }
 }
 ";
-            var snippet = new SnippetCompiler(code, NuGetMetadataReference.NETStandardV2_1_0);
+            var snippet = new SnippetCompiler(code);
 
             var typeDeclaration = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>().Single();
 

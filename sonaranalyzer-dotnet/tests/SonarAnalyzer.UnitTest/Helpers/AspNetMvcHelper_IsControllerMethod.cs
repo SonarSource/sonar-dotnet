@@ -118,7 +118,7 @@ public class Foo
 ";
             var compilation = TestHelper.Compile(code,
                 additionalReferences:
-                    FrameworkMetadataReference.Netstandard
+                    NetStandardMetadataReference.Netstandard
                         .Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion))
                         .ToArray());
 
@@ -143,7 +143,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 ";
             var compilation = TestHelper.Compile(code,
                 additionalReferences:
-                    FrameworkMetadataReference.Netstandard
+                    NetStandardMetadataReference.Netstandard
                         .Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion))
                         .ToArray());
 

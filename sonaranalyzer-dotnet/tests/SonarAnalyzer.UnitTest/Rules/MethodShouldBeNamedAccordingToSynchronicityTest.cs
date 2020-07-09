@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             string aspNetCoreRoutingVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.MVC.Core.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
-                additionalReferences: FrameworkMetadataReference.Netstandard
+                additionalReferences: NetStandardMetadataReference.Netstandard
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreMvcVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspNetCoreRoutingVersion)));
