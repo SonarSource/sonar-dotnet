@@ -96,4 +96,18 @@ namespace Tests.Diagnostics
             intValues.Cast<int, int, int>();
         }
     }
+
+    public class MoreTests
+    {
+        public void Foo(IEnumerable enumerable, IEnumerable<object> genericEnumerable)
+        {
+            enumerable.OfType<int>();
+            enumerable.OfType<string>();
+
+            genericEnumerable.Select(x => x).Select(x => x).OfType<string>();
+            genericEnumerable.Select(x => x).Select(x => x).OfType<string>().OfType<string>();
+            genericEnumerable.Select(x => x).Select(x => x).OfType<int>();
+            genericEnumerable.Select(x => x).Select(x => x).OfType<int>(); // Fixed
+        }
+    }
 }
