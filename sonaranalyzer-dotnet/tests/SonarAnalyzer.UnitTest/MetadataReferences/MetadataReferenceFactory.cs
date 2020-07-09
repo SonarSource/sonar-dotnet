@@ -18,24 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.MetadataReferences;
-using SonarAnalyzer.UnitTest.TestFramework;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
+using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
-    [TestClass]
-    public class SetLocaleForDataTypesTest
+    internal static class MetadataReferenceFactory
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void SetLocaleForDataTypes()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\SetLocaleForDataTypes.cs",
-                new SetLocaleForDataTypes(),
-                additionalReferences: FrameworkMetadataReference.SystemData);
-        }
+        private static readonly string SystemAssembliesFolder = new FileInfo(typeof(object).Assembly.Location).Directory.FullName;
+
+        public static IEnumerable<MetadataReference> Create(string assemblyName) =>
+            ImmutableArray.Create(CreateReference(assemblyName));
+
+        internal static MetadataReference CreateReference(string assemblyName) =>
+            MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, assemblyName));
     }
 }

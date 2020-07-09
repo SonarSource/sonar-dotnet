@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CSharp = SonarAnalyzer.Rules.CSharp;
 using VisualBasic = SonarAnalyzer.Rules.VisualBasic;

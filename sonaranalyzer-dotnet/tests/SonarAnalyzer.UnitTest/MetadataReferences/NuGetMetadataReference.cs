@@ -23,7 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.UnitTest.TestFramework;
 
-namespace SonarAnalyzer.UnitTest
+namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class NuGetMetadataReference
     {

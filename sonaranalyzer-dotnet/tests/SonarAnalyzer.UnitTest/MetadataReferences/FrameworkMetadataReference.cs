@@ -19,25 +19,14 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.IO;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.UnitTest
+using static SonarAnalyzer.UnitTest.MetadataReferences.MetadataReferenceFactory;
+
+namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class FrameworkMetadataReference
     {
-        #region Helpers
-
-        private static readonly string systemAssembliesFolder =
-            new FileInfo(typeof(object).Assembly.Location).Directory.FullName;
-
-        private static IEnumerable<MetadataReference> Create(string assemblyName) =>
-            ImmutableArray.Create((MetadataReference)MetadataReference.CreateFromFile(
-                Path.Combine(systemAssembliesFolder, assemblyName)));
-
-        #endregion Helpers
-
         internal static IEnumerable<MetadataReference> MicrosoftVisualBasic { get; }
             = Create("Microsoft.VisualBasic.dll");
 
