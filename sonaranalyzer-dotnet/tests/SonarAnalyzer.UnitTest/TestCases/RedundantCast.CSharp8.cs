@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Tests.Diagnostics
 {
+    // https://github.com/SonarSource/sonar-dotnet/issues/3273
     public class CastOnNullable
     {
         public static IEnumerable<string> UsefulCast()

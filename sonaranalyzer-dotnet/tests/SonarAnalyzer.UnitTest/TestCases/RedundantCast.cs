@@ -42,5 +42,15 @@ namespace Tests.Diagnostics
         {
             numbers.Cast<int>().Where(x => x > 0); // Compliant, multidimensional arrays need to be cast
         }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/3273
+        public void ReferenceTypes()
+        {
+            var stringArrayWithNull = new string[] { "one", "two", null, "three" };
+            var filteredStringArray = stringArrayWithNull.OfType<string>(); // Compliant, has 3 items, without 'null'
+
+            var enumerableOfObjects = new object[] { 1, "one", null };
+            var filteredObjectArray = enumerableOfObjects.OfType<object>(); // Compliant, has 2 items, without 'null'
+        }
     }
 }
