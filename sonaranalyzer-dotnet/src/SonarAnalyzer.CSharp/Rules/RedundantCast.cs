@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -106,31 +106,32 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(methodSymbol.ReturnType is INamedTypeSymbol returnType) ||
-                !returnType.TypeArguments.Any())
+            var returnType = methodSymbol.ReturnType;
+            if (GetGenericTypeArgument(returnType) is { } castType)
             {
-                return;
+
+                if (methodSymbol.Name == "OfType" && CanHaveNullValue(castType))
+                {
+                    // OfType() filters 'null' values from enumerables
+                    return;
+                }
+
+                var elementType = GetElementType(invocation, methodSymbol, context.SemanticModel);
+                if (elementType != null && elementType.Equals(castType))
+                {
+                    var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(invocation, methodCalledAsStatic),
+                        returnType.ToMinimalDisplayString(context.SemanticModel, invocation.SpanStart)));
+                }
             }
 
-            var castType = returnType.TypeArguments.First();
-            if (methodSymbol.Name == "OfType"
-                && (castType.IsReferenceType || castType.Name == "Nullable"))
-            {
-                return;
-            }
+            static ITypeSymbol GetGenericTypeArgument(ITypeSymbol type) =>
+                type is INamedTypeSymbol returnType &&
+                    returnType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
+                    ? returnType.TypeArguments.Single()
+                    : null;
 
-            var elementType = GetElementType(invocation, methodSymbol, context.SemanticModel);
-            if (elementType == null)
-            {
-                return;
-            }
-
-            if (elementType.Equals(castType))
-            {
-                var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(invocation, methodCalledAsStatic),
-                    returnType.ToMinimalDisplayString(context.SemanticModel, invocation.SpanStart)));
-            }
+            static bool CanHaveNullValue(ITypeSymbol type) => type.IsReferenceType || type.Name == "Nullable";
         }
 
         private static Location GetReportLocation(InvocationExpressionSyntax invocation, bool methodCalledAsStatic)

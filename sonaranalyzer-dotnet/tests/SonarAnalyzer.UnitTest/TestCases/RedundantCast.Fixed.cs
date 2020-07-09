@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,7 +42,7 @@ namespace Tests.Diagnostics
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/3273
-        public void OfTypeWithReferenceTypes()
+        public void OfTypeWithReferenceTypes(IEnumerable<object> param)
         {
             var stringArrayWithNull = new string[] { "one", "two", null, "three" };
             var filteredStringArray = stringArrayWithNull.OfType<string>(); // Compliant, has 3 items, without 'null'
@@ -51,9 +52,13 @@ namespace Tests.Diagnostics
 
             var enumerableOfNullableInt = new int?[] { 1, 2, null };
             var filteredInts = enumerableOfNullableInt.OfType<int?>(); // Compliant, has 2 items, without 'null'
+
+            param.OfType<object>(); // Compliant, may contain null values
+
+            var useless = new string[] { "one", "two" }.OfType<string>(); // FN
         }
 
-        public void CastWithReferenceTypes()
+        public void CastWithReferenceTypes(IEnumerable<object> param)
         {
             var stringArrayWithNull = new string[] { "one", "two", null, "three" };
             var castStringArray = stringArrayWithNull; // Fixed
@@ -63,6 +68,32 @@ namespace Tests.Diagnostics
 
             var enumerableOfNullableInt = new int?[] { 1, 2, null };
             var filteredInts = enumerableOfNullableInt; // Fixed
+
+            param; // Fixed
+        }
+    }
+
+    public static class MyEnumerableExtensions
+    {
+        public static IEnumerable<T1> OfType<T1, T2>(this IEnumerable source) =>
+            source.OfType<T1>();
+        public static IEnumerable<T1> Cast<T1, T2>(this IEnumerable source) =>
+            source.Cast<T1>();
+        public static int OfType<T1, T2, T3>(this IEnumerable source) => 0;
+        public static int Cast<T1, T2, T3>(this IEnumerable source) => 0;
+    }
+
+    public class TestWithCustomExtension
+    {
+        public void UnlikelyCases(IEnumerable<int> intValues, List<string> stringValues)
+        {
+            intValues; // Fixed
+            intValues; // Fixed
+            stringValues.OfType<string, string>();
+            stringValues; // Fixed
+
+            intValues.OfType<int, int, int>();
+            intValues.Cast<int, int, int>();
         }
     }
 }
