@@ -99,16 +99,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExtensionMethodInvocation(SyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (invocation.GetMethodCallIdentifier() is { } methodName
-                && CastIEnumerableMethods.Contains(methodName.ValueText)
-                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-                && methodSymbol.IsExtensionOn(KnownType.System_Collections_IEnumerable))
+            if (GetEnumerableExtensionSymbol(invocation, context.SemanticModel) is { } methodSymbol)
             {
-
                 var returnType = methodSymbol.ReturnType;
                 if (GetGenericTypeArgument(returnType) is { } castType)
                 {
-
                     if (methodSymbol.Name == "OfType" && CanHaveNullValue(castType))
                     {
                         // OfType() filters 'null' values from enumerables
@@ -124,8 +119,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
             }
-
         }
+
+        /// If the invocation one of the <see cref="CastIEnumerableMethods"/> extensions, returns the method symbol.
+        private static IMethodSymbol GetEnumerableExtensionSymbol(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            invocation.GetMethodCallIdentifier() is { } methodName
+            && CastIEnumerableMethods.Contains(methodName.ValueText)
+            && semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+            && methodSymbol.IsExtensionOn(KnownType.System_Collections_IEnumerable)
+                ? methodSymbol
+                : null;
 
         private static ITypeSymbol GetGenericTypeArgument(ITypeSymbol type) =>
             type is INamedTypeSymbol returnType && returnType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
