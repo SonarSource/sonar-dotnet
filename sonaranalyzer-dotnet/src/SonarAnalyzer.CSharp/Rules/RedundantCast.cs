@@ -99,9 +99,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExtensionMethodInvocation(SyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-                && methodSymbol.IsExtensionOn(KnownType.System_Collections_IEnumerable)
-                && CastIEnumerableMethods.Contains(methodSymbol.Name))
+            if (invocation.GetMethodCallIdentifier() is { } methodName
+                && CastIEnumerableMethods.Contains(methodName.ValueText)
+                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                && methodSymbol.IsExtensionOn(KnownType.System_Collections_IEnumerable))
             {
 
                 var returnType = methodSymbol.ReturnType;
@@ -124,13 +125,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            static ITypeSymbol GetGenericTypeArgument(ITypeSymbol type) =>
-                type is INamedTypeSymbol returnType && returnType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
-                    ? returnType.TypeArguments.Single()
-                    : null;
-
-            static bool CanHaveNullValue(ITypeSymbol type) => type.IsReferenceType || type.Name == "Nullable";
         }
+
+        private static ITypeSymbol GetGenericTypeArgument(ITypeSymbol type) =>
+            type is INamedTypeSymbol returnType && returnType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
+                ? returnType.TypeArguments.Single()
+                : null;
+
+        private static bool CanHaveNullValue(ITypeSymbol type) => type.IsReferenceType || type.Name == "Nullable";
 
         private static Location GetReportLocation(InvocationExpressionSyntax invocation, bool methodCalledAsStatic)
         {
