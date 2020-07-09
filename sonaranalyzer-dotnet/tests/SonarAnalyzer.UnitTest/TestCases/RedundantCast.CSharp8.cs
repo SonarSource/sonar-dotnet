@@ -10,7 +10,7 @@ namespace Tests.Diagnostics
         public static IEnumerable<string> UsefulCast()
         {
             var nullableStrings = new string?[] { "one", "two", null, "three" };
-            return nullableStrings.OfType<string>(); // Noncompliant FP - filters out the null
+            return nullableStrings.OfType<string>(); // Compliant - filters out the null
         }
      }
 }

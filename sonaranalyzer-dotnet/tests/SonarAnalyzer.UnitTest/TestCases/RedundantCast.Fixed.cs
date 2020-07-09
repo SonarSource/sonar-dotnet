@@ -41,13 +41,28 @@ namespace Tests.Diagnostics
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/3273
-        public void ReferenceTypes()
+        public void OfTypeWithReferenceTypes()
         {
             var stringArrayWithNull = new string[] { "one", "two", null, "three" };
             var filteredStringArray = stringArrayWithNull.OfType<string>(); // Compliant, has 3 items, without 'null'
 
             var enumerableOfObjects = new object[] { 1, "one", null };
             var filteredObjectArray = enumerableOfObjects.OfType<object>(); // Compliant, has 2 items, without 'null'
+
+            var enumerableOfNullableInt = new int?[] { 1, 2, null };
+            var filteredInts = enumerableOfNullableInt.OfType<int?>(); // Compliant, has 2 items, without 'null'
+        }
+
+        public void CastWithReferenceTypes()
+        {
+            var stringArrayWithNull = new string[] { "one", "two", null, "three" };
+            var castStringArray = stringArrayWithNull; // Fixed
+
+            var enumerableOfObjects = new object[] { 1, "one", null };
+            var filteredObjectArray = enumerableOfObjects; // Fixed
+
+            var enumerableOfNullableInt = new int?[] { 1, 2, null };
+            var filteredInts = enumerableOfNullableInt; // Fixed
         }
     }
 }

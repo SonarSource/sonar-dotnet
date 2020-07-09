@@ -106,12 +106,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var elementType = GetElementType(invocation, methodSymbol, context.SemanticModel);
-            if (elementType == null)
-            {
-                return;
-            }
-
             if (!(methodSymbol.ReturnType is INamedTypeSymbol returnType) ||
                 !returnType.TypeArguments.Any())
             {
@@ -119,6 +113,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var castType = returnType.TypeArguments.First();
+            if (methodSymbol.Name == "OfType"
+                && (castType.IsReferenceType || castType.Name == "Nullable"))
+            {
+                return;
+            }
+
+            var elementType = GetElementType(invocation, methodSymbol, context.SemanticModel);
+            if (elementType == null)
+            {
+                return;
+            }
 
             if (elementType.Equals(castType))
             {
