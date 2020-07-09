@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis;
 using System.Linq;
 using System.Collections.Generic;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
