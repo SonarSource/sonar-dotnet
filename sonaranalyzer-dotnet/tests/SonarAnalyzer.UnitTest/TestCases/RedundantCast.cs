@@ -112,5 +112,7 @@ namespace Tests.Diagnostics
             genericEnumerable.Select(x => x).Select(x => x).OfType<int>();
             genericEnumerable.Select(x => x).Select(x => x).OfType<int>().OfType<int>(); // Noncompliant
         }
+
+        public void OfType() => OfType();
     }
 }

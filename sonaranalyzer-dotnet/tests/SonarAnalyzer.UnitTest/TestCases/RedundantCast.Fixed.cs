@@ -109,5 +109,7 @@ namespace Tests.Diagnostics
             genericEnumerable.Select(x => x).Select(x => x).OfType<int>();
             genericEnumerable.Select(x => x).Select(x => x).OfType<int>(); // Fixed
         }
+
+        public void OfType() => OfType();
     }
 }
