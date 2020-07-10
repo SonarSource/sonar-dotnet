@@ -92,23 +92,6 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2]"
         }
       },
-      "Microsoft.CodeAnalysis.VisualBasic": {
-        "type": "Transitive",
-        "resolved": "1.3.2",
-        "contentHash": "yllH3rSYEc0bV15CJ2T9Jtx+tSXO5/OVNb+xofuWrACn65Q5VqeFBKgcbgwpyVY/98ypPcGQIWNQL2A/L1seJg==",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.Common": "1.3.2"
-        }
-      },
-      "Microsoft.CodeAnalysis.VisualBasic.Workspaces": {
-        "type": "Transitive",
-        "resolved": "1.3.2",
-        "contentHash": "I5Z2WBgFsx0G22Na1uVFPDkT6Ob4XI+g91GPN8JWldYUMlmIBcUDBfGmfr8oQPdUipvThpaU1x1xZrnNwRR8JA==",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.VisualBasic": "[1.3.2]",
-          "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2]"
-        }
-      },
       "Microsoft.CodeAnalysis.Workspaces.Common": {
         "type": "Transitive",
         "resolved": "1.3.2",
@@ -925,12 +908,7 @@
         }
       },
       "sonaranalyzer.visualbasic": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "1.3.2",
-          "SonarAnalyzer": "1.0.0",
-          "System.Collections.Immutable": "1.1.37"
-        }
+        "type": "Project"
       }
     }
   }
