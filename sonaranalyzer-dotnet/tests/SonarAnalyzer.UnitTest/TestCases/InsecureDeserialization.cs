@@ -48,6 +48,7 @@ namespace Tests.Diagnostics
         public string Name { get; set; }
 
         public CtorParameterInIfStatement(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^
         {
             if (string.IsNullOrEmpty(name))
                 Name = name;

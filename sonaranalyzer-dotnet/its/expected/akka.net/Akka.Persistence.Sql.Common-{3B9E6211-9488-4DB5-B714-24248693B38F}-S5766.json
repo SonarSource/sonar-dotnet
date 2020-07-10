@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
 "region":  {
 "startLine":  68,
-"startColumn":  9,
-"endLine":  72,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  68,
+"endColumn":  28
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
 "region":  {
 "startLine":  103,
-"startColumn":  9,
-"endLine":  107,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  103,
+"endColumn":  34
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
 "region":  {
 "startLine":  143,
-"startColumn":  9,
-"endLine":  153,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  143,
+"endColumn":  30
 }
 }
 },
@@ -46,9 +46,9 @@
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
 "region":  {
 "startLine":  32,
-"startColumn":  9,
-"endLine":  39,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  32,
+"endColumn":  21
 }
 }
 }

@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
 "region":  {
 "startLine":  62,
-"startColumn":  13,
-"endLine":  65,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  62,
+"endColumn":  28
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionistSettings.cs",
 "region":  {
 "startLine":  52,
-"startColumn":  9,
-"endLine":  57,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  52,
+"endColumn":  43
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedMessages.cs",
 "region":  {
 "startLine":  90,
-"startColumn":  13,
-"endLine":  97,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  90,
+"endColumn":  29
 }
 }
 },
@@ -46,9 +46,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedMessages.cs",
 "region":  {
 "startLine":  137,
-"startColumn":  13,
-"endLine":  144,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  137,
+"endColumn":  31
 }
 }
 },
@@ -59,9 +59,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedMessages.cs",
 "region":  {
 "startLine":  406,
-"startColumn":  13,
-"endLine":  409,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  406,
+"endColumn":  33
 }
 }
 },
@@ -72,9 +72,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
 "region":  {
 "startLine":  72,
-"startColumn":  9,
-"endLine":  75,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  72,
+"endColumn":  22
 }
 }
 },
@@ -85,9 +85,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
 "region":  {
 "startLine":  83,
-"startColumn":  9,
-"endLine":  86,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  83,
+"endColumn":  21
 }
 }
 },
@@ -98,9 +98,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManagerSettings.cs",
 "region":  {
 "startLine":  64,
-"startColumn":  9,
-"endLine":  77,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  64,
+"endColumn":  47
 }
 }
 }
