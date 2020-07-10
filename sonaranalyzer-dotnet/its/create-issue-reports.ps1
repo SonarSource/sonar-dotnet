@@ -15,7 +15,7 @@ $jsonserial= New-Object -TypeName System.Web.Script.Serialization.JavaScriptSeri
 $jsonserial.MaxJsonLength = 100000000
 
 function Restore-UriDeclaration($files, $pathPrefix) {
-	$files | Foreach-Object {
+    $files | Foreach-Object {
         if ($_.uri) {
             # Remove the URI prefix
             $_.uri = $_.uri -replace "file:///", ""
@@ -110,9 +110,9 @@ function GetActualIssues([string]$sarifReportPath){
 
     # Change spaces to %20
     $allIssues.location | Foreach-Object {
-	    if ($_.uri) {
-	        $_.uri = $_.uri.replace(' ', '%20')
-	    }
+        if ($_.uri) {
+            $_.uri = $_.uri.replace(' ', '%20')
+        }
     }
 
     return $allIssues
@@ -147,7 +147,7 @@ function New-IssueReports([string]$sarifReportPath) {
             (
                 (ConvertTo-Json $object -Depth 42 |
                     ForEach-Object { [System.Text.RegularExpressions.Regex]::Unescape($_) }  # Unescape powershell to json automatic escape
-                ) -split "`r`n"										            	         # Convert JSON to String and split lines
+                ) -split "`r`n"                                                              # Convert JSON to String and split lines
             ) | Foreach-Object { $_.TrimStart() }                                            # Remove leading spaces
         Set-Content $path $lines
     }
