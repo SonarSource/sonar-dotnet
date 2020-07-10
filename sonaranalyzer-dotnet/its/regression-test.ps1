@@ -395,6 +395,7 @@ try {
     $msBuildImportBeforeCurrent = Get-MSBuildImportBeforePath "Current"
 
     Push-Location $PSScriptRoot
+    Test-FileExists ".\binaries\Google.Protobuf.dll"
     Test-FileExists ".\binaries\SonarAnalyzer.dll"
     Test-FileExists ".\binaries\SonarAnalyzer.CFG.dll"
 
