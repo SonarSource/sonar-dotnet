@@ -4,8 +4,6 @@
     <LangVersion>8.0</LangVersion>
     <AssemblyName>SonarAnalyzer.CSharp</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <RestoreLockedMode>true</RestoreLockedMode>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
   </PropertyGroup>

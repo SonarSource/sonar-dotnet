@@ -5,8 +5,6 @@
     <LangVersion>8.0</LangVersion>
     <AssemblyName>SonarAnalyzer.Utilities</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
-    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <RestoreLockedMode>true</RestoreLockedMode>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 

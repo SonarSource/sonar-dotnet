@@ -57,15 +57,6 @@ stages:
           dotnet --version
         displayName: 'List dotnet versions and current version'
 
-      - task: Cache@2
-        displayName: Cache NuGet packages
-        inputs:
-          key: 'nuget | "$(Agent.OS)" | **/packages.lock.json'
-          restoreKeys: |
-            nuget | "$(Agent.OS)"
-            nuget
-          path: $(NUGET_PACKAGES)
-
       - task: NuGetCommand@2
         displayName: "Restore NuGet packages"
         inputs:
@@ -161,15 +152,6 @@ stages:
       steps:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
-
-      - task: Cache@2
-        displayName: Cache NuGet packages
-        inputs:
-          key: 'nuget | "$(Agent.OS)" | **/packages.lock.json'
-          restoreKeys: |
-            nuget | "$(Agent.OS)"
-            nuget
-          path: $(NUGET_PACKAGES)
 
       - task: NuGetCommand@2
         displayName: "Restore NuGet packages"
