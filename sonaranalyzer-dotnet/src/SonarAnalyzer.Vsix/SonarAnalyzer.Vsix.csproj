@@ -96,12 +96,16 @@
       <Name>SonarAnalyzer.VisualBasic</Name>
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
+      <!-- https://github.com/dotnet/sdk/issues/433 -->
+      <AdditionalProperties>TargetFramework=net461</AdditionalProperties>
     </ProjectReference>
     <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
       <Project>{39ccd086-a7f8-42a0-b402-3c9bd9eb4825}</Project>
       <Name>SonarAnalyzer.CSharp</Name>
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
+      <!-- https://github.com/dotnet/sdk/issues/433 -->
+      <AdditionalProperties>TargetFramework=net461</AdditionalProperties>
     </ProjectReference>
     <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj">
       <Project>{d1ae804f-ae78-4883-b3d6-9e3c4026def6}</Project>
