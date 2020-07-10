@@ -28,7 +28,7 @@ if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
 }
 
-function Build-Project([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
+function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
     if ($project -And -Not ($ProjectName -eq $project)) {
         Write-Host "Build skipped: $ProjectName"
         return
@@ -419,16 +419,16 @@ try {
     # redirects the outputs of the different configurations in separate folders.
 
     # Do not forget to update ValidateSet of -project parameter when new project is added.
-    Build-Project "AnalyzeGenerated" "AnalyzeGeneratedFiles.sln"
-    Build-Project "AnalyzeGeneratedVb" "AnalyzeGeneratedVb.sln"
-    Build-Project "akka.net" "src\Akka.sln"
-    Build-Project "Automapper" "Automapper.sln" -CpuCount 1
-    Build-Project "Ember-MM" "Ember Media Manager.sln"
-    Build-Project "ManuallyAddedNoncompliantIssues" "ManuallyAddedNoncompliantIssues.sln"
-    Build-Project "ManuallyAddedNoncompliantIssuesVB" "ManuallyAddedNoncompliantIssuesVB.sln"
-    Build-Project "Nancy" "src\Nancy.sln"
-    Build-Project "SkipGenerated" "SkipGeneratedFiles.sln"
-    Build-Project "SkipGeneratedVb" "SkipGeneratedVb.sln"
+    Build-Project-MSBuild "AnalyzeGenerated" "AnalyzeGeneratedFiles.sln"
+    Build-Project-MSBuild "AnalyzeGeneratedVb" "AnalyzeGeneratedVb.sln"
+    Build-Project-MSBuild "akka.net" "src\Akka.sln"
+    Build-Project-MSBuild "Automapper" "Automapper.sln" -CpuCount 1
+    Build-Project-MSBuild "Ember-MM" "Ember Media Manager.sln"
+    Build-Project-MSBuild "ManuallyAddedNoncompliantIssues" "ManuallyAddedNoncompliantIssues.sln"
+    Build-Project-MSBuild "ManuallyAddedNoncompliantIssuesVB" "ManuallyAddedNoncompliantIssuesVB.sln"
+    Build-Project-MSBuild "Nancy" "src\Nancy.sln"
+    Build-Project-MSBuild "SkipGenerated" "SkipGeneratedFiles.sln"
+    Build-Project-MSBuild "SkipGeneratedVb" "SkipGeneratedVb.sln"
 
     Write-Header "Processing analyzer results"
 
