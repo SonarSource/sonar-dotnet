@@ -22,10 +22,10 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="bin\Release\SonarAnalyzer.CFG.dll" target="analyzers" />
-    <file src="bin\Release\SonarAnalyzer.dll" target="analyzers" />
-    <file src="bin\Release\SonarAnalyzer.CSharp.dll" target="analyzers" />
-    <file src="bin\Release\Google.Protobuf.dll" target="analyzers" />
+    <file src="bin\Release\netstandard2.0\publish\SonarAnalyzer.CFG.dll" target="analyzers" />
+    <file src="bin\Release\netstandard2.0\publish\SonarAnalyzer.dll" target="analyzers" />
+    <file src="bin\Release\netstandard2.0\publish\SonarAnalyzer.CSharp.dll" target="analyzers" />
+    <file src="bin\Release\netstandard2.0\publish\Google.Protobuf.dll" target="analyzers" />
     <file src="tools-cs\*.ps1" target="tools\" />
     <file src="License.txt" />
   </files>

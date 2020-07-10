@@ -22,10 +22,9 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <!-- If these are changed than the build\release.ps1 should also be changed -->
-    <file src="bin\Release\SonarAnalyzer.dll" target="analyzers" />
-    <file src="bin\Release\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
-    <file src="bin\Release\Google.Protobuf.dll" target="analyzers" />
+    <file src="bin\Release\netstandard2.0\publish\SonarAnalyzer.dll" target="analyzers" />
+    <file src="bin\Release\netstandard2.0\publish\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
+    <file src="bin\Release\netstandard2.0\publish\Google.Protobuf.dll" target="analyzers" />
     <file src="tools-vbnet\*.ps1" target="tools\" />
     <file src="License.txt" />
   </files>
