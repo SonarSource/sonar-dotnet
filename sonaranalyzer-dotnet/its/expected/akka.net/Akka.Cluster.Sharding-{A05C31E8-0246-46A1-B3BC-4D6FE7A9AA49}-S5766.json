@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
 "region":  {
 "startLine":  44,
-"startColumn":  13,
-"endLine":  57,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  44,
+"endColumn":  25
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
 "region":  {
 "startLine":  68,
-"startColumn":  13,
-"endLine":  76,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  68,
+"endColumn":  30
 }
 }
 }

@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  133,
-"startColumn":  9,
-"endLine":  140,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  133,
+"endColumn":  34
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  53,
-"startColumn":  9,
-"endLine":  59,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  53,
+"endColumn":  24
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  72,
-"startColumn":  13,
-"endLine":  78,
-"endColumn":  14
+"startColumn":  20,
+"endLine":  72,
+"endColumn":  33
 }
 }
 },
@@ -46,9 +46,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  100,
-"startColumn":  9,
-"endLine":  106,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  100,
+"endColumn":  37
 }
 }
 },
@@ -59,9 +59,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  140,
-"startColumn":  9,
-"endLine":  147,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  140,
+"endColumn":  32
 }
 }
 },
@@ -72,9 +72,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  193,
-"startColumn":  9,
-"endLine":  199,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  193,
+"endColumn":  41
 }
 }
 },
@@ -85,9 +85,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  310,
-"startColumn":  9,
-"endLine":  316,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  310,
+"endColumn":  35
 }
 }
 },
@@ -98,9 +98,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  398,
-"startColumn":  9,
-"endLine":  406,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  398,
+"endColumn":  35
 }
 }
 },
@@ -111,9 +111,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  692,
-"startColumn":  9,
-"endLine":  698,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  692,
+"endColumn":  37
 }
 }
 },
@@ -124,9 +124,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  818,
-"startColumn":  9,
-"endLine":  824,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  818,
+"endColumn":  44
 }
 }
 },
@@ -137,9 +137,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  120,
-"startColumn":  9,
-"endLine":  128,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  120,
+"endColumn":  26
 }
 }
 },
@@ -150,9 +150,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  440,
-"startColumn":  9,
-"endLine":  447,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  440,
+"endColumn":  28
 }
 }
 },
@@ -163,9 +163,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  485,
-"startColumn":  9,
-"endLine":  491,
-"endColumn":  10
+"startColumn":  16,
+"endLine":  485,
+"endColumn":  30
 }
 }
 }

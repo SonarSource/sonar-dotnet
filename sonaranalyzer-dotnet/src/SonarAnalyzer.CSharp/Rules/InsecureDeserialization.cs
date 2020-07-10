@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class InsecureDeserialization : SonarDiagnosticAnalyzer
+    public sealed class InsecureDeserialization : HotspotDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S5766";
         private const string MessageFormat = "Make sure not performing data validation after deserialization is safe here.";
@@ -44,6 +44,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 .WithNotConfigurable();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        public InsecureDeserialization()
+            : base(AnalyzerConfiguration.Hotspot)
+        {
+        }
+
+        public InsecureDeserialization(IAnalyzerConfiguration analyzerConfiguration)
+            : base(analyzerConfiguration)
+        {
+        }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(VisitClassDeclaration, SyntaxKind.ClassDeclaration);
@@ -75,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ctorInfo.Declaration.GetLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
                 }
             }
 
@@ -84,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => !info.IsDeserializationConstructor && info.HasConditionalConstructs))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ctorInfo.Declaration.GetLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
                 }
             }
 
@@ -93,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ctorInfo.Declaration.GetLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ctorInfo.GetReportLocation()));
                 }
             }
         }
@@ -293,20 +303,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class ConstructorInfo
         {
+            private readonly ConstructorDeclarationSyntax declarationSyntax;
+
             public ConstructorInfo(ConstructorDeclarationSyntax declaration,
                 bool hasConditionalConstructs,
                 bool isDeserializationConstructor)
             {
-                Declaration = declaration;
+                declarationSyntax = declaration;
                 HasConditionalConstructs = hasConditionalConstructs;
                 IsDeserializationConstructor = isDeserializationConstructor;
             }
 
-            public ConstructorDeclarationSyntax Declaration { get; }
-
             public bool HasConditionalConstructs { get; }
 
             public bool IsDeserializationConstructor { get; }
+
+            public Location GetReportLocation() =>
+                declarationSyntax.Identifier.GetLocation();
         }
     }
 }
