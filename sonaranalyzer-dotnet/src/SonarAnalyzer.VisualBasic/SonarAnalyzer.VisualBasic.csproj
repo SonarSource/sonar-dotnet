@@ -5,7 +5,7 @@
     <AssemblyName>SonarAnalyzer.VisualBasic</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
-    <TargetFrameworks>net461;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
