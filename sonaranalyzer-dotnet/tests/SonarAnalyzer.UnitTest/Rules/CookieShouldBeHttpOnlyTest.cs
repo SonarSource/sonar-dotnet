@@ -20,7 +20,6 @@
 
 extern alias csharp;
 using System.Collections.Generic;
-using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

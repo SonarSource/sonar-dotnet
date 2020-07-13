@@ -37,7 +37,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     ParseOptionsHelper.FromCSharp8,
                                     additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
 
-#if NETFRAMEWORK // ToDo: Fix this when running on .Net Core
+// On .Net Core 3.1 the generated code cannot be compiled.
+// See: https://github.com/SonarSource/sonar-dotnet/issues/3430
+#if NETFRAMEWORK
         [TestMethod]
         [TestCategory("CodeFix")]
         public void RedundantArgument_CodeFix_No_Named_Arguments() =>

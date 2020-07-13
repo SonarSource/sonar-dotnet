@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     {
         public AssertIgnoreScope()
         {
-#if NETFRAMEWORK // Not needed on .Net Core
+#if NETFRAMEWORK // .Net Framework specific API
             var listener = Debug.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
             if (listener != null)
             {
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         public void Dispose()
         {
-#if NETFRAMEWORK // Not needed on .Net Core
+#if NETFRAMEWORK // .Net Framework specific API
             var listener = Debug.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
             if (listener != null)
             {

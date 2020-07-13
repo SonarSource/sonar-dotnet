@@ -50,6 +50,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 #else
             new[] {CoreMetadataReference.MicrosoftWin32Registry};
 #endif
+
         internal static IEnumerable<MetadataReference> GetMicrosoftWin32Primitives() =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();

@@ -150,7 +150,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static void VerifyNoIssueReportedInTest(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            IEnumerable<MetadataReference> additionalReferences = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
+            IEnumerable<MetadataReference> additionalReferences = null)
         {
             var compilation = SolutionBuilder.Create()
                 .AddTestProject(AnalyzerLanguage.FromPath(path))

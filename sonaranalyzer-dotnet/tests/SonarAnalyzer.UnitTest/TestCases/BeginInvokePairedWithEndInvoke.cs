@@ -270,12 +270,17 @@ namespace Tests.Diagnostics
         }
     }
 
+    // Dummy implementation of IAsyncResult compatible with both .Net Framework and .Net Core
     internal class AsyncResult : IAsyncResult
     {
         public object AsyncState { get; }
+
         public WaitHandle AsyncWaitHandle { get; }
+
         public bool CompletedSynchronously { get; }
+
         public bool IsCompleted { get; }
+
         public virtual object AsyncDelegate { get; }
     }
 }

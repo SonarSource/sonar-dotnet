@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             NugetMetadataFactory.Create("Microsoft.AspNetCore.Http.Abstractions", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHttpFeatures(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Http.Features", packageVersion);
+            NugetMetadataFactory.CreateWithCommandLine("Microsoft.AspNetCore.Http.Features", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcAbstractions(string packageVersion) =>
             NugetMetadataFactory.Create("Microsoft.AspNetCore.Mvc.Abstractions", packageVersion);

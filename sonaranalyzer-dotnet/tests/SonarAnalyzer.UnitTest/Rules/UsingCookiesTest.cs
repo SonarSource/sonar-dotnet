@@ -24,8 +24,8 @@ using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.CodeAnalysis;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -73,16 +73,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCookies_CS_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.cs",
                 new CSharp.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetNetCoreAdditionalReferences(Constants.DotNetCore220Version));
+                additionalReferences: GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_VB_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.vb",
                 new VisualBasic.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetNetCoreAdditionalReferences(Constants.DotNetCore220Version));
+                additionalReferences: GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
-        private static IEnumerable<MetadataReference> GetNetCoreAdditionalReferences(string packageVersion) =>
+        private static IEnumerable<MetadataReference> GetAdditionalReferencesForNetCore(string packageVersion) =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(packageVersion)
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(packageVersion))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsPrimitives(packageVersion));

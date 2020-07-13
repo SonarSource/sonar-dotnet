@@ -20,7 +20,6 @@
 
 extern alias csharp;
 using System.Collections.Generic;
-using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -44,8 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotInstantiateSharedClasses_CS_InTest() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.cs",
                 new DoNotInstantiateSharedClasses(),
-                GetAdditionalReferences(),
-                CompilationErrorBehavior.Ignore);
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
