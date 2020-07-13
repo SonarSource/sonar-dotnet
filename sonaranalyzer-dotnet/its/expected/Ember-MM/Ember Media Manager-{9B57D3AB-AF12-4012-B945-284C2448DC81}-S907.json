@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1311,
+"startColumn":  80,
+"endLine":  1311,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1331,
+"startColumn":  80,
+"endLine":  1331,
+"endColumn":  84
+}
+}
+}
+]
+}
