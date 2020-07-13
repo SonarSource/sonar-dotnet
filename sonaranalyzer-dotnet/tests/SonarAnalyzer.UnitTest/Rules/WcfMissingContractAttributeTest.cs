@@ -31,12 +31,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void WcfMissingContractAttribute()
-        {
+        public void WcfMissingContractAttribute() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\WcfMissingContractAttribute.cs",
                 new WcfMissingContractAttribute(),
-                additionalReferences: FrameworkMetadataReference.SystemServiceModel);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemServiceModel());
     }
 }

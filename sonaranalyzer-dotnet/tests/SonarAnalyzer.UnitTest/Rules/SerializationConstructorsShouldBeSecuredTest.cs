@@ -19,8 +19,11 @@
  */
 
 extern alias csharp;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,16 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SerializationConstructorsShouldBeSecured()
-        {
+        public void SerializationConstructorsShouldBeSecured() =>
             Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured.cs",
-                new SerializationConstructorsShouldBeSecured());
-        }
+                                    new SerializationConstructorsShouldBeSecured(),
+                                    additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SerializationConstructorsShouldBeSecured_InvalidCode()
-        {
+        public void SerializationConstructorsShouldBeSecured_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 [Serializable]
     public partial class InvalidCode : ISerializable
@@ -52,27 +53,27 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }", new SerializationConstructorsShouldBeSecured(), checkMode: CompilationErrorBehavior.Ignore);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute()
-        {
+        public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs",
-                new SerializationConstructorsShouldBeSecured());
-        }
+                                    new SerializationConstructorsShouldBeSecured(),
+                                    additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SerializationConstructorsShouldBeSecured_PartialClasses()
-        {
+        public void SerializationConstructorsShouldBeSecured_PartialClasses() =>
             Verifier.VerifyAnalyzer(
-                new[]
-                {
-                    @"TestCases\SerializationConstructorsShouldBeSecured_Part1.cs",
-                    @"TestCases\SerializationConstructorsShouldBeSecured_Part2.cs",
-                },
-                new SerializationConstructorsShouldBeSecured());
-        }
+                                    new[]
+                                    {
+                                        @"TestCases\SerializationConstructorsShouldBeSecured_Part1.cs",
+                                        @"TestCases\SerializationConstructorsShouldBeSecured_Part2.cs",
+                                    },
+                                    new SerializationConstructorsShouldBeSecured(),
+                                    additionalReferences: GetAdditionalReferences());
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemSecurityPermissions();
     }
 }

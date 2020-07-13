@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,10 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void LiteralsShouldNotBePassedAsLocalizedParameters()
-        {
+        public void LiteralsShouldNotBePassedAsLocalizedParameters() =>
             Verifier.VerifyAnalyzer(@"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.cs",
-                new LiteralsShouldNotBePassedAsLocalizedParameters());
-        }
+                                    new LiteralsShouldNotBePassedAsLocalizedParameters(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
     }
 }

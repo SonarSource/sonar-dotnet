@@ -29,39 +29,35 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MarkWindowsFormsMainWithStaThreadTest
     {
+// ToDo: Add support for windows forms on .Net Core
+// https://github.com/SonarSource/sonar-dotnet/issues/3426
+#if NETFRAMEWORK
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkWindowsFormsMainWithStaThread_CS()
-        {
+        public void MarkWindowsFormsMainWithStaThread_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
-                new csharp.MarkWindowsFormsMainWithStaThread(),
-                additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
-        }
+                                    new csharp.MarkWindowsFormsMainWithStaThread(),
+                                    additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
-                new csharp.MarkWindowsFormsMainWithStaThread());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void MarkWindowsFormsMainWithStaThread_VB()
-        {
+        public void MarkWindowsFormsMainWithStaThread_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.vb",
-                new vbnet.MarkWindowsFormsMainWithStaThread(),
-                additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
-        }
+                                    new vbnet.MarkWindowsFormsMainWithStaThread(),
+                                    additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms()
-        {
+        public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
+                                    new csharp.MarkWindowsFormsMainWithStaThread());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
-                new vbnet.MarkWindowsFormsMainWithStaThread(),
-                checkMode: CompilationErrorBehavior.Ignore);
-        }
+                                    new vbnet.MarkWindowsFormsMainWithStaThread(),
+                                    checkMode: CompilationErrorBehavior.Ignore);
     }
 }

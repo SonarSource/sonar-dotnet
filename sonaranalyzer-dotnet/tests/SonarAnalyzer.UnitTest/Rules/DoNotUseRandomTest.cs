@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -31,18 +32,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotUseRandom()
-        {
+        public void DoNotUseRandom() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseRandom.cs",
-                new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotUseRandom_Not_Enabled()
-        {
+        public void DoNotUseRandom_Not_Enabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DoNotUseRandom.cs",
-                new DoNotUseRandom());
-        }
+                new DoNotUseRandom(),
+                additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
     }
 }

@@ -121,7 +121,7 @@ namespace Test
     }
 }
 ";
-            var snippet = new SnippetCompiler(code, FrameworkMetadataReference.SystemXml);
+            var snippet = new SnippetCompiler(code, MetadataReferenceFacade.GetSystemXml());
             CheckExactMatch_DoesNotMatchOverrides(snippet);
         }
 
@@ -140,7 +140,7 @@ Namespace Test
 End Namespace
 ";
             var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic,
-                FrameworkMetadataReference.SystemXml);
+                MetadataReferenceFacade.GetSystemXml());
             CheckExactMatch_DoesNotMatchOverrides(snippet);
         }
 
@@ -179,7 +179,7 @@ namespace Test
     }
 }
 ";
-            var snippet = new SnippetCompiler(code, FrameworkMetadataReference.SystemXml);
+            var snippet = new SnippetCompiler(code, MetadataReferenceFacade.GetSystemXml());
             CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(snippet);
         }
 
@@ -197,7 +197,7 @@ Namespace Test
     End Class
 End Namespace
 ";
-            var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic, FrameworkMetadataReference.SystemXml);
+            var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic, MetadataReferenceFacade.GetSystemXml());
             CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(snippet);
         }
 

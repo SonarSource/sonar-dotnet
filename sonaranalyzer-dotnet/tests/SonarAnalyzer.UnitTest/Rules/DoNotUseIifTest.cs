@@ -29,23 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotUseIif()
-        {
+        public void DoNotUseIif() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIif(),
-                additionalReferences: FrameworkMetadataReference.MicrosoftVisualBasic);
-        }
+                additionalReferences: MetadataReferenceFacade.GetMicrosoftVisualBasic());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void DoNotUseIif_CodeFix()
-        {
+        public void DoNotUseIif_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\DoNotUseIif.vb",
                 @"TestCases\DoNotUseIif.Fixed.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIif(),
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIifCodeFixProvider(),
-                additionalReferences: FrameworkMetadataReference.MicrosoftVisualBasic);
-        }
+                additionalReferences: MetadataReferenceFacade.GetMicrosoftVisualBasic());
     }
 }

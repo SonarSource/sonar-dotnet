@@ -19,9 +19,7 @@
  */
 
 extern alias csharp;
-
 using System.Collections.Generic;
-using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -36,42 +34,40 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CookiesShouldBeSecure()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: FrameworkMetadataReference.SystemWeb);
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void CookiesShouldBeSecure_NetCore()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_NetCore.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences_NetCore());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void CookiesShouldBeSecure_Not_Enabled()
-        {
-            Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldBeSecure.cs",
-                new CookieShouldBeSecure(),
-                additionalReferences: FrameworkMetadataReference.SystemWeb);
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void CookiesShouldBeSecure_Nancy()
-        {
+        public void CookiesShouldBeSecure_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookiesShouldBeSecure_Nancy.cs",
                 new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.Nancy());
-        }
+
+#if NETFRAMEWORK // HttpCookie is not available on .Net Core
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CookiesShouldBeSecure() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure.cs",
+                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: MetadataReferenceFacade.GetSystemWeb());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CookiesShouldBeSecure_Not_Enabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldBeSecure.cs",
+                new CookieShouldBeSecure(),
+                additionalReferences: MetadataReferenceFacade.GetSystemWeb());
+
+#else
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CookiesShouldBeSecure_NetCore() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_NetCore.cs",
+                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: GetAdditionalReferences_NetCore());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
-            NetStandardMetadataReference.Netstandard
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion));
+            NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
+
+#endif
+
     }
 }

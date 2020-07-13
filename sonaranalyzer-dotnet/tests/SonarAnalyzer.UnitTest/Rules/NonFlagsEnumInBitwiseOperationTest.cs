@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,21 +31,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonFlagsEnumInBitwiseOperation()
-        {
+        public void NonFlagsEnumInBitwiseOperation() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
-                new NonFlagsEnumInBitwiseOperation());
-        }
+                                    new NonFlagsEnumInBitwiseOperation(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void NonFlagsEnumInBitwiseOperation_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\NonFlagsEnumInBitwiseOperation.cs",
-                @"TestCases\NonFlagsEnumInBitwiseOperation.Fixed.cs",
-                new NonFlagsEnumInBitwiseOperation(),
-                new NonFlagsEnumInBitwiseOperationCodeFixProvider());
-        }
+        public void NonFlagsEnumInBitwiseOperation_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
+                                   @"TestCases\NonFlagsEnumInBitwiseOperation.Fixed.cs",
+                                   new NonFlagsEnumInBitwiseOperation(),
+                                   new NonFlagsEnumInBitwiseOperationCodeFixProvider());
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
 using System.Threading;
 
 namespace Tests.Diagnostics
@@ -268,9 +267,20 @@ namespace Tests.Diagnostics
                     return caller.BeginInvoke("method", null, null); // Noncompliant
                 }
             }
-
         }
-
     }
 
+    // Dummy implementation of IAsyncResult compatible with both .Net Framework and .Net Core
+    internal class AsyncResult : IAsyncResult
+    {
+        public object AsyncState { get; }
+
+        public WaitHandle AsyncWaitHandle { get; }
+
+        public bool CompletedSynchronously { get; }
+
+        public bool IsCompleted { get; }
+
+        public virtual object AsyncDelegate { get; }
+    }
 }

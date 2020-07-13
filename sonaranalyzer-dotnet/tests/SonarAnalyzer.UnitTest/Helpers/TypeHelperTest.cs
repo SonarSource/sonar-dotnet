@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -43,19 +42,16 @@ namespace SonarAnalyzer.UnitTest.Helpers
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReferences(FrameworkMetadataReference.Mscorlib)
-                    .AddMetadataReferences(FrameworkMetadataReference.System)
-                    .AddMetadataReferences(FrameworkMetadataReference.SystemCore)
                     .AddDocument("test", SymbolHelperTest.TestInput);
                 var compilation = document.Project.GetCompilationAsync().Result;
                 var tree = compilation.SyntaxTrees.First();
-                this.semanticModel = compilation.GetSemanticModel(tree);
+                semanticModel = compilation.GetSemanticModel(tree);
 
-                this.baseClassDeclaration = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
+                baseClassDeclaration = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
                     .First(m => m.Identifier.ValueText == "Base");
-                this.derivedClassDeclaration1 = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
+                derivedClassDeclaration1 = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
                     .First(m => m.Identifier.ValueText == "Derived1");
-                this.derivedClassDeclaration2 = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
+                derivedClassDeclaration2 = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
                     .First(m => m.Identifier.ValueText == "Derived2");
             }
         }
@@ -69,8 +65,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var baseType = (KnownType)ctor.Invoke(new object[] { "NS.Base" });
             var interfaceType = (KnownType)ctor.Invoke(new object[] { "NS.IInterface" });
 
-            var derived1Type = this.semanticModel.GetDeclaredSymbol(this.derivedClassDeclaration1) as INamedTypeSymbol;
-            var derived2Type = this.semanticModel.GetDeclaredSymbol(this.derivedClassDeclaration2) as INamedTypeSymbol;
+            var derived1Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration1) as INamedTypeSymbol;
+            var derived2Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration2) as INamedTypeSymbol;
 
             derived2Type.DerivesOrImplements(interfaceType).Should().BeTrue();
             derived1Type.DerivesOrImplements(interfaceType).Should().BeFalse();
@@ -88,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var baseKnownType = (KnownType)ctor.Invoke(new object[] { "NS.Base" });
             var baseKnownTypes = ImmutableArray.Create(new[] { baseKnownType });
 
-            var baseType = this.semanticModel.GetDeclaredSymbol(this.baseClassDeclaration) as INamedTypeSymbol;
+            var baseType = semanticModel.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;
 
             baseType.Is(baseKnownType).Should().BeTrue();
             baseType.IsAny(baseKnownTypes).Should().BeTrue();

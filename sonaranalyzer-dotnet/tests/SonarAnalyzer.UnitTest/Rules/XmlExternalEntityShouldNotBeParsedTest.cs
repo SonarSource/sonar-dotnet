@@ -46,9 +46,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
             // act & verify
             Verifier.VerifyAnalyzer(testFilePath, rule,
-                additionalReferences: FrameworkMetadataReference.SystemXml
-                    .Concat(FrameworkMetadataReference.SystemData)
-                    .Concat(FrameworkMetadataReference.SystemXmlLinq)
+                additionalReferences: MetadataReferenceFacade.GetSystemXml()
+                    .Concat(MetadataReferenceFacade.GetSystemData())
+                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
                     .Concat(NuGetMetadataReference.MicrosoftWebXdt())
                     .ToArray(),
                 options: ParseOptionsHelper.FromCSharp8);
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
             // act & verify
             Verifier.VerifyAnalyzer(testFilePath, rule,
-                additionalReferences: FrameworkMetadataReference.SystemXml.ToArray(),
+                additionalReferences: MetadataReferenceFacade.GetSystemXml().ToArray(),
                 options: ParseOptionsHelper.FromCSharp8);
         }
 
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ParameterProvider.cs"
                 },
                 new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                additionalReferences: FrameworkMetadataReference.SystemXml);
+                additionalReferences: MetadataReferenceFacade.GetSystemXml());
         }
 
         private static void VerifyRule(NetFrameworkVersion version, string testFilePath)
@@ -112,9 +112,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
 
             Verifier.VerifyAnalyzer(testFilePath, rule,
-                additionalReferences: FrameworkMetadataReference.SystemXml
-                    .Concat(FrameworkMetadataReference.SystemData)
-                    .Concat(FrameworkMetadataReference.SystemXmlLinq)
+                additionalReferences: MetadataReferenceFacade.GetSystemXml()
+                    .Concat(MetadataReferenceFacade.GetSystemData())
+                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
                     .ToArray());
         }
 

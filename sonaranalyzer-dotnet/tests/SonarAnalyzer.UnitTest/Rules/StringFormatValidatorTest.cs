@@ -44,29 +44,23 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringFormatRuntimeExceptionFreeValidator()
-        {
+        public void StringFormatRuntimeExceptionFreeValidator() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringFormatRuntimeExceptionFreeValidator.cs",
-                new StringFormatValidator(),
-                workingOptions);
-        }
+                                    new StringFormatValidator(),
+                                    workingOptions);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringFormatTypoFreeValidator()
-        {
+        public void StringFormatTypoFreeValidator() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs",
-                new StringFormatValidator(),
-                workingOptions);
-        }
+                                    new StringFormatValidator(),
+                                    workingOptions);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringFormatEdgeCasesValidator()
-        {
+        public void StringFormatEdgeCasesValidator() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs",
-                new StringFormatValidator(),
-                workingOptions);
-        }
+                                    new StringFormatValidator(),
+                                    workingOptions);
     }
 }

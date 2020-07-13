@@ -18,6 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+// ToDo: Add WPF support in unit tests when targeting .Net Core
+// https://github.com/SonarSource/sonar-dotnet/issues/3425
+#if NETFRAMEWORK
+
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,23 +33,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConstructorArgumentValueShouldExistTest
     {
+
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConstructorArgumentValueShouldExist_CS()
-        {
+        public void ConstructorArgumentValueShouldExist_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.cs",
                 new ConstructorArgumentValueShouldExist(),
-                additionalReferences: FrameworkMetadataReference.SystemXaml);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemXaml());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConstructorArgumentValueShouldExist_VB()
-        {
+        public void ConstructorArgumentValueShouldExist_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ConstructorArgumentValueShouldExist(),
-                additionalReferences: FrameworkMetadataReference.SystemXaml);
-        }
+                additionalReferences: MetadataReferenceFacade.GetSystemXaml());
     }
 }
-
+#endif

@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,21 +31,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GenericTypeParameterEmptinessChecking()
-        {
+        public void GenericTypeParameterEmptinessChecking() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
-                new GenericTypeParameterEmptinessChecking());
-        }
+                new GenericTypeParameterEmptinessChecking(),
+                additionalReferences: MetadataReferenceFacade.GetSystemCollections(),
+                checkMode: CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void GenericTypeParameterEmptinessChecking_CodeFix()
-        {
+        public void GenericTypeParameterEmptinessChecking_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\GenericTypeParameterEmptinessChecking.cs",
                 @"TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs",
                 new GenericTypeParameterEmptinessChecking(),
                 new GenericTypeParameterEmptinessCheckingCodeFixProvider());
-        }
     }
 }

@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,9 +31,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void AssemblyLoadShouldBeUsed()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\AssemblyLoadShouldBeUsed.cs", new DoNotCallAssemblyLoadInvalidMethods());
-        }
+        public void AssemblyLoadShouldBeUsed() =>
+            Verifier.VerifyAnalyzer(@"TestCases\AssemblyLoadShouldBeUsed.cs",
+                                    new DoNotCallAssemblyLoadInvalidMethods(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemSecurityPermissions());
+
+#if NETFRAMEWORK // The overloads with Evidence are obsolete on .Net Framework 4.8 and not available on .Net Core
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AssemblyLoadWithEvidenceShouldBeUsed() =>
+            Verifier.VerifyAnalyzer(@"TestCases\AssemblyLoadShouldBeUsed.Evidence.cs",
+                                    new DoNotCallAssemblyLoadInvalidMethods());
+#endif
     }
 }

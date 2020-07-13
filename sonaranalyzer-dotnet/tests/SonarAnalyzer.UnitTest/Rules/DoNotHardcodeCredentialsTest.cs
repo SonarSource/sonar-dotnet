@@ -20,8 +20,12 @@
 
 extern alias csharp;
 extern alias vbnet;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
@@ -33,67 +37,63 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_CS_DefaultValues()
-        {
+        public void DoNotHardcodeCredentials_CS_DefaultValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
-                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_CS_CustomValues()
-        {
+        public void DoNotHardcodeCredentials_CS_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
-                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " });
-        }
+                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive()
-        {
+        public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
-                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE, x\*+?|}{][)(^$.# " });
-        }
+                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE, x\*+?|}{][)(^$.# " },
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_CS_DefaultConfiguration()
-        {
+        public void DoNotHardcodeCredentials_CS_DefaultConfiguration() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
-                new CSharp.DoNotHardcodeCredentials());
-        }
+                new CSharp.DoNotHardcodeCredentials(),
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_VB_DefaultValues()
-        {
+        public void DoNotHardcodeCredentials_VB_DefaultValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
-                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_VB_CustomValues()
-        {
+        public void DoNotHardcodeCredentials_VB_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
-                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " });
-        }
+                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive()
-        {
+        public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
-                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE,x\*+?|}{][)(^$.# " });
-        }
+                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE,x\*+?|}{][)(^$.# " },
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_VB_DefaultConfiguration()
-        {
+        public void DoNotHardcodeCredentials_VB_DefaultConfiguration() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
-                new VisualBasic.DoNotHardcodeCredentials());
-        }
+                new VisualBasic.DoNotHardcodeCredentials(),
+                GetAdditionalReferences());
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemSecurityCryptography()
+                .Union(MetadataReferenceFacade.GetSystemNetHttp());
     }
 }
 

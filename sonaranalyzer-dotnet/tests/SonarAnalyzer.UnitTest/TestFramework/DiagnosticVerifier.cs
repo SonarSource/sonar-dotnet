@@ -306,7 +306,7 @@ Actual  : '{message}'");
                 // why we require each diagnostic to be reported through the extension methods at least once.
                 return analyzers
                     .SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                    .Select(d => counters.GetValueOrDefault(d.Id))
+                    .Select(d => DictionaryExtensions.GetValueOrDefault(counters, d.Id))
                     .Any(count => count > 0);
             }
         }

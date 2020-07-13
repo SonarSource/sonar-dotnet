@@ -19,7 +19,9 @@
  */
 
 extern alias csharp;
+using System.Collections.Generic;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -31,38 +33,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotInstantiateSharedClasses_CS()
-        {
+        public void DoNotInstantiateSharedClasses_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.cs",
                 new DoNotInstantiateSharedClasses(),
-                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
-        }
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotInstantiateSharedClasses_CS_InTest()
-        {
+        public void DoNotInstantiateSharedClasses_CS_InTest() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.cs",
                 new DoNotInstantiateSharedClasses(),
-                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
-        }
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotInstantiateSharedClasses_VB()
-        {
+        public void DoNotInstantiateSharedClasses_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotInstantiateSharedClasses(),
-                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
-        }
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotInstantiateSharedClasses_VB_InTest()
-        {
+        public void DoNotInstantiateSharedClasses_VB_InTest() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotInstantiateSharedClasses(),
-                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
-        }
+                GetAdditionalReferences());
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemComponentModelComposition();
     }
 }

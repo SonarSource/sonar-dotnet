@@ -61,6 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
             new MemberDescriptor(KnownType.System_Text_StringBuilder, "AppendFormat"),
             new MemberDescriptor(KnownType.System_IO_TextWriter, "Write"),
             new MemberDescriptor(KnownType.System_IO_TextWriter, "WriteLine"),
+            new MemberDescriptor(KnownType.System_IO_StreamWriter, "Write"),
+            new MemberDescriptor(KnownType.System_IO_StreamWriter, "WriteLine"),
             new MemberDescriptor(KnownType.System_Diagnostics_Debug, "WriteLine"),
             new MemberDescriptor(KnownType.System_Diagnostics_Trace, "TraceError"),
             new MemberDescriptor(KnownType.System_Diagnostics_Trace, "TraceInformation"),

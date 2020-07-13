@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using csharp = SonarAnalyzer.Rules.CSharp;
 using vbnet = SonarAnalyzer.Rules.VisualBasic;
@@ -30,19 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DangerousGetHandleShouldNotBeCalled_CS()
-        {
+        public void DangerousGetHandleShouldNotBeCalled_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
-                new csharp.DangerousGetHandleShouldNotBeCalled());
-        }
+                new csharp.DangerousGetHandleShouldNotBeCalled(),
+                additionalReferences: MetadataReferenceFacade.GetMicrosoftWin32Registry());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DangerousGetHandleShouldNotBeCalled_VB()
-        {
+        public void DangerousGetHandleShouldNotBeCalled_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
                 new vbnet.DangerousGetHandleShouldNotBeCalled());
-        }
     }
 }
 

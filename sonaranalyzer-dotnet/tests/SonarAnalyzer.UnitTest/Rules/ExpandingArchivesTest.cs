@@ -21,7 +21,6 @@
 extern alias csharp;
 extern alias vbnet;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -37,42 +36,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpandingArchives_CS()
-        {
+        public void ExpandingArchives_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.cs",
                 new CSharp.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpandingArchives_CS_Disabled()
-        {
+        public void ExpandingArchives_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.cs",
                 new CSharp.ExpandingArchives(),
                 additionalReferences: GetAdditionalReferences());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpandingArchives_VB()
-        {
+        public void ExpandingArchives_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.vb",
                 new VisualBasic.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpandingArchives_VB_Disabled()
-        {
+        public void ExpandingArchives_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.vb",
                 new VisualBasic.ExpandingArchives(),
                 additionalReferences: GetAdditionalReferences());
-        }
 
-        private IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            FrameworkMetadataReference.SystemIOCompression
-                .Concat(FrameworkMetadataReference.SystemIOCompressionFileSystem);
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemIoCompression();
     }
 }

@@ -19,9 +19,12 @@
  */
 
 extern alias csharp;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -32,37 +35,36 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void CreatingHashAlgorithms_CS()
-        {
+        public void CreatingHashAlgorithms_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.cs",
-                new CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                new CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void CreatingHashAlgorithms_VB()
-        {
+        public void CreatingHashAlgorithms_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.vb",
-                new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void CreatingHashAlgorithms_CS_RuleDisabled()
-        {
+        public void CreatingHashAlgorithms_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CreatingHashAlgorithms.cs",
-                new CreatingHashAlgorithms());
-        }
+                new CreatingHashAlgorithms(),
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void CreatingHashAlgorithms_VB_RuleDisabled()
-        {
+        public void CreatingHashAlgorithms_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CreatingHashAlgorithms.vb",
-                new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms());
-        }
+                new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(),
+                additionalReferences: GetAdditionalReferences());
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemSecurityCryptography();
     }
 }

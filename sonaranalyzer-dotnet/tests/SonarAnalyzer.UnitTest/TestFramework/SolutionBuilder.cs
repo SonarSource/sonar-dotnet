@@ -59,18 +59,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var project = Solution.AddProject(projectName, projectName, languageName);
 
+
             var projectBuilder = ProjectBuilder
                 .FromProject(project)
-                .AddReferences(FrameworkMetadataReference.Mscorlib)
-                .AddReferences(FrameworkMetadataReference.System)
-                .AddReferences(FrameworkMetadataReference.SystemCore)
-                .AddReferences(FrameworkMetadataReference.SystemRuntime)
-                .AddReferences(FrameworkMetadataReference.SystemGlobalization);
+                .AddReferences(MetadataReferenceFacade.GetProjectDefaultReferences());
 
             if (language == AnalyzerLanguage.VisualBasic)
             {
                 // Need a reference to the VB dll to be able to use the Module keyword
-                projectBuilder = projectBuilder.AddReferences(FrameworkMetadataReference.MicrosoftVisualBasic);
+                projectBuilder = projectBuilder.AddReferences(MetadataReferenceFacade.GetMicrosoftVisualBasic());
             }
 
             if (createExtraEmptyFile)

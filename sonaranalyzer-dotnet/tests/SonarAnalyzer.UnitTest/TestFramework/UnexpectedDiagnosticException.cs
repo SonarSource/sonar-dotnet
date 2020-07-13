@@ -20,9 +20,9 @@
 
 using System;
 using System.IO;
-using System.Resources;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
+using System.Resources;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -37,10 +37,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     ///
     public class UnexpectedDiagnosticException : Exception
     {
-        private static readonly ResourceManager mscorlibResources = new ResourceManager("mscorlib", typeof(object).Assembly);
-        private static readonly string at = mscorlibResources.GetString("Word_At");
-        private static readonly string stackTraceFormat = mscorlibResources.GetString("StackTrace_InFileLineNumber");
-
         private readonly string additionalLine;
 
         public UnexpectedDiagnosticException(Location location, string message) : base(message)
@@ -54,16 +50,38 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var testCasePath = GetTestCasePath(locationPath);
             var testCaseLine = location.GetLineNumberToReport();
 
-            additionalLine = $"{at} Test Case {GetStackTraceLocation(testCasePath, testCaseLine)}" + Environment.NewLine;
+#if NETFRAMEWORK
+            additionalLine = NetFrameworkFormatter.GetAdditionalLine(testCasePath, testCaseLine) + Environment.NewLine;
+#else
+            additionalLine = NetCoreFormatter.GetAdditionalLine(testCasePath, testCaseLine) + Environment.NewLine;
+#endif
         }
 
         public override string StackTrace =>
             additionalLine + base.StackTrace;
 
-        private static string GetStackTraceLocation(string testCasePath, int testCaseLine) =>
-            string.Format(stackTraceFormat, testCasePath, testCaseLine);
-
         private static string GetTestCasePath(string path) =>
             Path.GetFullPath(Path.Combine(@"..\..\..\TestCases", path));
+
+#if NETFRAMEWORK
+        private static class NetFrameworkFormatter
+        {
+            private static readonly ResourceManager mscorlibResources = new ResourceManager("mscorlib", typeof(object).Assembly);
+            private static readonly string at = mscorlibResources.GetString("Word_At");
+            private static readonly string stackTraceFormat = mscorlibResources.GetString("StackTrace_InFileLineNumber");
+
+            internal static string GetAdditionalLine(string path, int line) =>
+                $"{at} Test Case {GetStackTraceLocation(path, line)}";
+
+            private static string GetStackTraceLocation(string testCasePath, int testCaseLine) =>
+                string.Format(stackTraceFormat, testCasePath, testCaseLine);
+        }
+#else
+        private static class NetCoreFormatter
+        {
+            internal static string GetAdditionalLine(string path, int line) =>
+                $"at Test Case in {path}:line {line}";
+        }
+#endif
     }
 }
