@@ -12,7 +12,7 @@ param
     $ruleId,
 
     [Parameter(HelpMessage = "The name of single project to build. If ommited, all projects will be build.")]
-    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb")]
+    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb")]
     [string]
     $project
 )
@@ -51,6 +51,39 @@ function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePa
         /clp:"Summary;ErrorsOnly" `
         /fl `
         /flp:"logFile=output\${ProjectName}.log;verbosity=d"
+}
+
+function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativePath) {
+    if ($project -And -Not ($ProjectName -eq $project)) {
+        Write-Host "Build skipped: $ProjectName"
+        return
+    }
+
+    New-Item -ItemType directory -Path .\output\$ProjectName | out-null
+
+    $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
+
+    # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
+    Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
+    $Env:PROJECT = $ProjectName
+
+    # TODO create the global.json based on target SDK version (passed by parameter) and then clean it in this function
+    $globalJsonPath = Resolve-Path ".\sources\${ProjectName}\global.json"
+    Copy-Item $globalJsonPath .
+
+    # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
+    Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
+
+    $Env:PROJECT = $ProjectName
+    dotnet restore $solutionPath
+    dotnet msbuild $solutionPath `
+        -t:rebuild `
+        -p:Configuration=Debug `
+        -clp:"Summary;ErrorsOnly" `
+        -fl `
+        -flp:"logFile=output\${ProjectName}.log;verbosity=d"
+
+    Remove-Item .\global.json
 }
 
 function Initialize-ActualFolder() {
@@ -429,6 +462,9 @@ try {
     Build-Project-MSBuild "Nancy" "src\Nancy.sln"
     Build-Project-MSBuild "SkipGenerated" "SkipGeneratedFiles.sln"
     Build-Project-MSBuild "SkipGeneratedVb" "SkipGeneratedVb.sln"
+
+    Build-Project-DotnetTool "NetCore31" "NetCore31.sln"
+    Build-Project-DotnetTool "Net5" "Net5.sln"
 
     Write-Header "Processing analyzer results"
 

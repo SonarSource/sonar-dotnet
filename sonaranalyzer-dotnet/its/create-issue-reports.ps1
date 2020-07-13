@@ -118,6 +118,7 @@ function GetActualIssues([string]$sarifReportPath){
     return $allIssues
 }
 
+# This function expects the 'actual/$project' folder to be populated with JSON files for each rule
 function New-IssueReports([string]$sarifReportPath) {
     $allIssues = GetActualIssues($sarifReportPath)
 
@@ -142,13 +143,23 @@ function New-IssueReports([string]$sarifReportPath) {
         $object = New-Object –Type System.Object
         $object | Add-Member –Type NoteProperty –Name issues –Value $_.Group
 
-        $path = Join-Path (Join-Path 'actual' $project) ($file.BaseName + '-' + $_.Name + $file.Extension)
+        $actualProjectFolder = Join-Path 'actual' $project
+        $issueFileName = $file.BaseName + '-' + $_.Name + $file.Extension
+        $path = Join-Path $actualProjectFolder $issueFileName
+
         $lines =
             (
                 (ConvertTo-Json $object -Depth 42 |
                     ForEach-Object { [System.Text.RegularExpressions.Regex]::Unescape($_) }  # Unescape powershell to json automatic escape
                 ) -split "`r`n"                                                              # Convert JSON to String and split lines
             ) | Foreach-Object { $_.TrimStart() }                                            # Remove leading spaces
-        Set-Content $path $lines
+
+        if (Test-Path $path) {
+            Set-Content $path $lines
+        } else {
+            Write-Host "The path '${path}' does not exist, will first create the file."
+            New-Item -Path $actualProjectFolder -Name $issueFileName -ItemType "file" -Force
+            Set-Content $path $lines
+        }
     }
 }
