@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CognitiveComplexity_StackOverflow_CS()
         {
-            if (!TestContextHelper.IsAzureDevOpsContext) // FIX ME: Test throws OOM on Azure DevOps
+            if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test throws OOM on Azure DevOps
             {
                 Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs",
                     new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CognitiveComplexity_StackOverflow_VB()
         {
-            if (!TestContextHelper.IsAzureDevOpsContext) // FIX ME: Test throws OOM on Azure DevOps
+            if (!TestContextHelper.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps
             {
                 Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.vb",
                     new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });

@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             foreach (var testCase in TestCases)
             {
-                // FIX ME: We test that a rule is enabled only by checking the issues are reported
+                // ToDo: We test that a rule is enabled only by checking the issues are reported
                 Verifier.VerifyAnalyzer(testCase.Path,
                                         testCase.Analyzer,
                                         ParseOptionsHelper.FromCSharp8,

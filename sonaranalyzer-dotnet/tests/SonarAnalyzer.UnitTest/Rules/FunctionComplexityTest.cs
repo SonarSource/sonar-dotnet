@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void FunctionComplexity_InsufficientExecutionStack_CSharp()
         {
-            if (!TestContextHelper.IsAzureDevOpsContext) // FIX ME: Test doesn't work on Azure DevOps
+            if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test doesn't work on Azure DevOps
             {
                 var diagnostic = new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 };
                 Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", diagnostic);
