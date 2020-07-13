@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()' on a string.",
+"location":  {
+"uri":  "sources\NetCore31\Program.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  42,
+"endLine":  12,
+"endColumn":  53
+}
+}
+}
+]
+}

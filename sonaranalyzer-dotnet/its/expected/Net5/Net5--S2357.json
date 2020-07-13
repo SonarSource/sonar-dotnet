@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'FirstName' private.",
+"location":  {
+"uri":  "sources\Net5\MyClass.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  52,
+"endLine":  14,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LastName' private.",
+"location":  {
+"uri":  "sources\Net5\MyClass.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  77,
+"endLine":  14,
+"endColumn":  85
+}
+}
+}
+]
+}
