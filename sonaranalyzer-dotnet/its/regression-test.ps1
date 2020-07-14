@@ -214,7 +214,7 @@ function Show-DiffResults() {
     if (!$ruleId)
     {
         Write-Debug "Running 'git diff' between 'actual' and 'expected'"
-        Exec { & git diff --no-index --quiet --exit-code ./expected ./actual `
+        Exec { & git diff --no-index --exit-code ./expected ./actual `
         } -errorMessage $errorMsg
         return
     }
