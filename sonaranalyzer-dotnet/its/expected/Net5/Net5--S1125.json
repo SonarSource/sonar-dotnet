@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Net5\MyClass.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  40,
+"endLine":  24,
+"endColumn":  47
+}
+}
+}
+]
+}

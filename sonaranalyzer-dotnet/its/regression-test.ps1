@@ -12,7 +12,7 @@ param
     $ruleId,
 
     [Parameter(HelpMessage = "The name of single project to build. If ommited, all projects will be build.")]
-    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb")]
+    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb")]
     [string]
     $project
 )
@@ -28,7 +28,7 @@ if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
 }
 
-function Build-Project([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
+function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
     if ($project -And -Not ($ProjectName -eq $project)) {
         Write-Host "Build skipped: $ProjectName"
         return
@@ -51,6 +51,37 @@ function Build-Project([string]$ProjectName, [string]$SolutionRelativePath, [int
         /clp:"Summary;ErrorsOnly" `
         /fl `
         /flp:"logFile=output\${ProjectName}.log;verbosity=d"
+}
+
+function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativePath, [string]$dotnetVersion) {
+    if ($project -And -Not ($ProjectName -eq $project)) {
+        Write-Host "Build skipped: $ProjectName"
+        return
+    }
+
+    Write-Host "Will build dotnet project: '${ProjectName}', version ${dotnetVersion}."
+
+    New-Item -ItemType directory -Path .\output\$ProjectName | out-null
+
+    $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
+
+    # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
+    Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
+    $Env:PROJECT = $ProjectName
+
+    $globalJsonPath = ".\global.json"
+    Set-Content -Path $globalJsonPath -Value "{ ""sdk"": { ""version"": ""${dotnetVersion}"" } }"
+
+    dotnet --version
+
+    dotnet build $solutionPath `
+        -t:rebuild `
+        -p:Configuration=Debug `
+        -clp:"Summary;ErrorsOnly" `
+        -fl `
+        -flp:"logFile=output\${ProjectName}.log;verbosity=d"
+
+    Remove-Item $globalJsonPath
 }
 
 function Initialize-ActualFolder() {
@@ -155,7 +186,7 @@ function Copy-FolderRecursively($From, $To, $Include, $Exclude) {
         if (-Not (Test-Path $parent)) {
             New-Item $parent -Type Directory -Force | out-null
         }
-        Copy-Item $file -Destination $path
+        Copy-Item $file.FullName -Destination $path
     }
 }
 
@@ -180,22 +211,45 @@ function Show-DiffResults() {
     }
 
     $errorMsg = "ERROR: There are differences between the actual and the expected issues."
-    if (!$ruleId)
+
+
+    if (!$ruleId -And !$project)
     {
-        Write-Debug "Running 'git diff' between 'actual' and 'expected'"
-        Exec { & git diff --no-index --quiet --exit-code ./expected ./actual `
+        Write-Host "Will find differences for all projects, all rules."
+
+        Write-Debug "Running 'git diff' between 'actual' and 'expected'."
+
+        Exec { & git diff --no-index --exit-code ./expected ./actual `
         } -errorMessage $errorMsg
+
         return
     }
 
+    # do a partial diff
     New-Item ".\diff" -Type Directory | out-null
     New-Item ".\diff\actual" -Type Directory | out-null
     New-Item ".\diff\expected" -Type Directory | out-null
 
-    Copy-FolderRecursively -From .\expected -To .\diff\expected -Include "*${ruleId}.json"
-    Copy-FolderRecursively -From .\actual   -To .\diff\actual   -Include "*${ruleId}.json"
+    if (!$ruleId -And $project) {
+        Write-Host "Will find differences for '${project}', all rules."
 
-    Exec { & git diff --no-index --quiet --exit-code .\diff\expected .\diff\actual `
+        Copy-FolderRecursively -From ".\expected\${project}" -To .\diff\expected
+        Copy-FolderRecursively -From ".\actual\${project}"   -To .\diff\actual
+
+    } elseif ($ruleId -And !$project) {
+        Write-Host "Will find differences for all projects, rule ${ruleId}."
+
+        Copy-FolderRecursively -From .\expected -To .\diff\expected -Include "*${ruleId}.json"
+        Copy-FolderRecursively -From .\actual   -To .\diff\actual   -Include "*${ruleId}.json"
+
+    } else {
+        Write-Host "Will find differences for '${project}', rule ${ruleId}."
+
+        Copy-FolderRecursively -From ".\expected\${project}" -To .\diff\expected -Include "*${ruleId}.json"
+        Copy-FolderRecursively -From ".\actual\${project}"   -To .\diff\actual   -Include "*${ruleId}.json"
+    }
+
+    Exec { & git diff --no-index --exit-code .\diff\expected .\diff\actual `
     } -errorMessage $errorMsg
 }
 
@@ -419,16 +473,19 @@ try {
     # redirects the outputs of the different configurations in separate folders.
 
     # Do not forget to update ValidateSet of -project parameter when new project is added.
-    Build-Project "AnalyzeGenerated" "AnalyzeGeneratedFiles.sln"
-    Build-Project "AnalyzeGeneratedVb" "AnalyzeGeneratedVb.sln"
-    Build-Project "akka.net" "src\Akka.sln"
-    Build-Project "Automapper" "Automapper.sln" -CpuCount 1
-    Build-Project "Ember-MM" "Ember Media Manager.sln"
-    Build-Project "ManuallyAddedNoncompliantIssues" "ManuallyAddedNoncompliantIssues.sln"
-    Build-Project "ManuallyAddedNoncompliantIssuesVB" "ManuallyAddedNoncompliantIssuesVB.sln"
-    Build-Project "Nancy" "src\Nancy.sln"
-    Build-Project "SkipGenerated" "SkipGeneratedFiles.sln"
-    Build-Project "SkipGeneratedVb" "SkipGeneratedVb.sln"
+    Build-Project-MSBuild "AnalyzeGenerated" "AnalyzeGeneratedFiles.sln"
+    Build-Project-MSBuild "AnalyzeGeneratedVb" "AnalyzeGeneratedVb.sln"
+    Build-Project-MSBuild "akka.net" "src\Akka.sln"
+    Build-Project-MSBuild "Automapper" "Automapper.sln" -CpuCount 1
+    Build-Project-MSBuild "Ember-MM" "Ember Media Manager.sln"
+    Build-Project-MSBuild "ManuallyAddedNoncompliantIssues" "ManuallyAddedNoncompliantIssues.sln"
+    Build-Project-MSBuild "ManuallyAddedNoncompliantIssuesVB" "ManuallyAddedNoncompliantIssuesVB.sln"
+    Build-Project-MSBuild "Nancy" "src\Nancy.sln"
+    Build-Project-MSBuild "SkipGenerated" "SkipGeneratedFiles.sln"
+    Build-Project-MSBuild "SkipGeneratedVb" "SkipGeneratedVb.sln"
+
+    Build-Project-DotnetTool "NetCore31" "NetCore31.sln" "3.1.201"
+    Build-Project-DotnetTool "Net5" "Net5.sln" "5.0.100-preview.6.20318.15"
 
     Write-Header "Processing analyzer results"
 

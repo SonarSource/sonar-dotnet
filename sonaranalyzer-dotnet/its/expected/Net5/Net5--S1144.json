@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'FirstName'.",
+"location":  {
+"uri":  "sources\Net5\MyClass.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  44,
+"endLine":  32,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Deconstruct'.",
+"location":  {
+"uri":  "sources\Net5\MyClass.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  13,
+"endLine":  37,
+"endColumn":  64
+}
+}
+}
+]
+}

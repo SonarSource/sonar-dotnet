@@ -15,7 +15,7 @@ $jsonserial= New-Object -TypeName System.Web.Script.Serialization.JavaScriptSeri
 $jsonserial.MaxJsonLength = 100000000
 
 function Restore-UriDeclaration($files, $pathPrefix) {
-	$files | Foreach-Object {
+    $files | Foreach-Object {
         if ($_.uri) {
             # Remove the URI prefix
             $_.uri = $_.uri -replace "file:///", ""
@@ -110,9 +110,9 @@ function GetActualIssues([string]$sarifReportPath){
 
     # Change spaces to %20
     $allIssues.location | Foreach-Object {
-	    if ($_.uri) {
-	        $_.uri = $_.uri.replace(' ', '%20')
-	    }
+        if ($_.uri) {
+            $_.uri = $_.uri.replace(' ', '%20')
+        }
     }
 
     return $allIssues
@@ -138,17 +138,28 @@ function New-IssueReports([string]$sarifReportPath) {
 
     $project = ([System.IO.FileInfo]$file.DirectoryName).Name
 
+    $actualProjectFolder = Join-Path 'actual' $project
+
+    # When a new project is added, the 'actual' folder does not get created in 'Initialize-ActualFolder'
+    if (!(Test-Path $actualProjectFolder)) {
+        Write-Host "The folder '${actualProjectFolder}' does not exist, will create it."
+        New-Item -Path $actualProjectFolder -ItemType "directory"
+    }
+
     $issuesByRule | Foreach-Object {
         $object = New-Object –Type System.Object
         $object | Add-Member –Type NoteProperty –Name issues –Value $_.Group
 
-        $path = Join-Path (Join-Path 'actual' $project) ($file.BaseName + '-' + $_.Name + $file.Extension)
+        $issueFileName = $file.BaseName + '-' + $_.Name + $file.Extension
+        $path = Join-Path $actualProjectFolder $issueFileName
+
         $lines =
             (
                 (ConvertTo-Json $object -Depth 42 |
                     ForEach-Object { [System.Text.RegularExpressions.Regex]::Unescape($_) }  # Unescape powershell to json automatic escape
-                ) -split "`r`n"										            	         # Convert JSON to String and split lines
+                ) -split "`r`n"                                                              # Convert JSON to String and split lines
             ) | Foreach-Object { $_.TrimStart() }                                            # Remove leading spaces
+
         Set-Content $path $lines
     }
 }

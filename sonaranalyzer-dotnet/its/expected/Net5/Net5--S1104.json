@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\MyClass.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  52,
+"endLine":  14,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\MyClass.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  77,
+"endLine":  14,
+"endColumn":  85
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\Net5\Main.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  19,
+"endLine":  4,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\Net5\MyClass.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  31,
+"endLine":  18,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\Net5\MyClass.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  35,
+"endLine":  23,
+"endColumn":  47
+}
+}
+}
+]
+}
