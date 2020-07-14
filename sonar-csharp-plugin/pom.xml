@@ -295,7 +295,7 @@
                     <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                          basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net48/cs">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/cs">
                         <include name="rules.xml"/>
                       </fileset>
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/cs">
