@@ -32,7 +32,7 @@ Namespace Tests.TestCases
     Public Class MySocket
         Inherits Socket
         Sub New()
-            MyBase.New(Nothing)
+            MyBase.New(CType(Nothing, SocketInformation))
         End Sub
     End Class
 
