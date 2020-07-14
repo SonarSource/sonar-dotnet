@@ -186,7 +186,7 @@ function Copy-FolderRecursively($From, $To, $Include, $Exclude) {
         if (-Not (Test-Path $parent)) {
             New-Item $parent -Type Directory -Force | out-null
         }
-        Copy-Item $file -Destination $path
+        Copy-Item $file.FullName -Destination $path
     }
 }
 
@@ -211,22 +211,45 @@ function Show-DiffResults() {
     }
 
     $errorMsg = "ERROR: There are differences between the actual and the expected issues."
-    if (!$ruleId)
+
+
+    if (!$ruleId -And !$project)
     {
-        Write-Debug "Running 'git diff' between 'actual' and 'expected'"
+        Write-Host "Will find differences for all projects, all rules."
+
+        Write-Debug "Running 'git diff' between 'actual' and 'expected'."
+
         Exec { & git diff --no-index --exit-code ./expected ./actual `
         } -errorMessage $errorMsg
+
         return
     }
 
+    # do a partial diff
     New-Item ".\diff" -Type Directory | out-null
     New-Item ".\diff\actual" -Type Directory | out-null
     New-Item ".\diff\expected" -Type Directory | out-null
 
-    Copy-FolderRecursively -From .\expected -To .\diff\expected -Include "*${ruleId}.json"
-    Copy-FolderRecursively -From .\actual   -To .\diff\actual   -Include "*${ruleId}.json"
+    if (!$ruleId -And $project) {
+        Write-Host "Will find differences for '${project}', all rules."
 
-    Exec { & git diff --no-index --quiet --exit-code .\diff\expected .\diff\actual `
+        Copy-FolderRecursively -From ".\expected\${project}" -To .\diff\expected
+        Copy-FolderRecursively -From ".\actual\${project}"   -To .\diff\actual
+
+    } elseif ($ruleId -And !$project) {
+        Write-Host "Will find differences for all projects, rule ${ruleId}."
+
+        Copy-FolderRecursively -From .\expected -To .\diff\expected -Include "*${ruleId}.json"
+        Copy-FolderRecursively -From .\actual   -To .\diff\actual   -Include "*${ruleId}.json"
+
+    } else {
+        Write-Host "Will find differences for '${project}', rule ${ruleId}."
+
+        Copy-FolderRecursively -From ".\expected\${project}" -To .\diff\expected -Include "*${ruleId}.json"
+        Copy-FolderRecursively -From ".\actual\${project}"   -To .\diff\actual   -Include "*${ruleId}.json"
+    }
+
+    Exec { & git diff --no-index --exit-code .\diff\expected .\diff\actual `
     } -errorMessage $errorMsg
 }
 
