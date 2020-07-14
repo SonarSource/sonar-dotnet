@@ -46,9 +46,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Threading_Tasks_Task,
                 KnownType.System_Threading_Tasks_Task_T,
                 KnownType.System_Threading_Tasks_ValueTask, // NetCore 2.2+
-                KnownType.System_Threading_Tasks_ValueTask_TResult,
-                KnownType.System_Collections_Generic_IAsyncEnumerable_T
-            );
+                KnownType.System_Threading_Tasks_ValueTask_TResult);
+
+        private static readonly ImmutableArray<KnownType> asyncReturnInterfaces =
+            ImmutableArray.Create(KnownType.System_Collections_Generic_IAsyncEnumerable_T);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -86,8 +87,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.MethodDeclaration);
 
-        private static bool HasAsyncReturnType(IMethodSymbol methodSymbol) =>
-            (methodSymbol.ReturnType as INamedTypeSymbol)?.ConstructedFrom.DerivesFromAny(asyncReturnTypes) ?? false;
+        private static bool HasAsyncReturnType(IMethodSymbol methodSymbol)
+        {
+            var returnSymbol = (methodSymbol.ReturnType as INamedTypeSymbol)?.ConstructedFrom;
+            if (returnSymbol == null || returnSymbol.Is(KnownType.Void))
+            {
+                return false;
+            }
+
+            return returnSymbol.DerivesFromAny(asyncReturnTypes) ||
+                   returnSymbol.IsAny(asyncReturnInterfaces) ||
+                   returnSymbol.ImplementsAny(asyncReturnInterfaces);
+
+        }
 
         private static bool HasAsyncSuffix(MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.Identifier.ValueText.ToUpper().EndsWith("ASYNC");
