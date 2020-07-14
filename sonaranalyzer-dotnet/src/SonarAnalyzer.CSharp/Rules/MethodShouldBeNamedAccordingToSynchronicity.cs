@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -42,13 +41,15 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ImmutableArray<KnownType> TaskTypes =
+        private static readonly ImmutableArray<KnownType> asyncReturnTypes =
             ImmutableArray.Create(
                 KnownType.System_Threading_Tasks_Task,
                 KnownType.System_Threading_Tasks_Task_T,
                 KnownType.System_Threading_Tasks_ValueTask, // NetCore 2.2+
-                KnownType.System_Threading_Tasks_ValueTask_TResult
-            );
+                KnownType.System_Threading_Tasks_ValueTask_TResult);
+
+        private static readonly ImmutableArray<KnownType> asyncReturnInterfaces =
+            ImmutableArray.Create(KnownType.System_Collections_Generic_IAsyncEnumerable_T);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -72,23 +73,36 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var isTaskReturnType = (methodSymbol.ReturnType as INamedTypeSymbol)?.ConstructedFrom.DerivesFromAny(TaskTypes) ?? false;
-                    var hasAsyncSuffix = methodDeclaration.Identifier.ValueText.SplitCamelCaseToWords().LastOrDefault() == "ASYNC";
+                    var hasAsyncReturnType = HasAsyncReturnType(methodSymbol);
+                    var hasAsyncSuffix = HasAsyncSuffix(methodDeclaration);
 
-                    if (hasAsyncSuffix && !isTaskReturnType)
+                    if (hasAsyncSuffix && !hasAsyncReturnType)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(), RemoveAsyncSuffixMessage));
                     }
-                    else if (!hasAsyncSuffix && isTaskReturnType)
+                    else if (!hasAsyncSuffix && hasAsyncReturnType)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(), AddAsyncSuffixMessage));
                     }
-                    else
-                    {
-                        // do nothing
-                    }
                 },
                 SyntaxKind.MethodDeclaration);
+
+        private static bool HasAsyncReturnType(IMethodSymbol methodSymbol)
+        {
+            var returnSymbol = (methodSymbol.ReturnType as INamedTypeSymbol)?.ConstructedFrom;
+            if (returnSymbol == null || returnSymbol.Is(KnownType.Void))
+            {
+                return false;
+            }
+
+            return returnSymbol.DerivesFromAny(asyncReturnTypes) ||
+                   returnSymbol.IsAny(asyncReturnInterfaces) ||
+                   returnSymbol.ImplementsAny(asyncReturnInterfaces);
+
+        }
+
+        private static bool HasAsyncSuffix(MethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.Identifier.ValueText.ToUpper().EndsWith("ASYNC");
 
         private static bool IsSignalRHubMethod(ISymbol methodSymbol) =>
             methodSymbol.GetEffectiveAccessibility() == Accessibility.Public &&
