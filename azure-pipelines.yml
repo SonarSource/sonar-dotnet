@@ -213,18 +213,26 @@ stages:
             sonar.analysis.sha1=$(Build.SourceVersion)
             sonar.analysis.repository=$(Build.Repository.ID)
 
-      - task: VSBuild@1
-        displayName: 'Build SonarAnalyzer solution'
-        inputs:
-          solution: '$(solution)'
-          platform: '$(buildPlatform)'
-          configuration: '$(buildConfiguration)'
-          msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
-
       - powershell: |
-          cd sonaranalyzer-dotnet\tests
-          $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage.xml -oldStyle -register:Path32
-          cd ..
+          cd sonaranalyzer-dotnet
+          
+          $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
+
+          Write-Host "Add .Net 5 target for UnitTest project"
+          ((Get-Content -Path $testProjFileName -raw) -Replace "net48;netcoreapp3.1","net48;netcoreapp3.1;net5") | Set-Content -Path $testProjFileName
+
+          Write-Host "Build UnitTest project"
+          dotnet msbuild $testProjFileName -property:Configuration=$(BuildConfiguration)
+
+          Write-Host "Run tests on .Net 4.8 and compute coverage"
+          $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.xml -oldStyle -register:Path32
+
+          Write-Host "Run tests on .Net Core 3.1"
+          dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore -f netcoreapp3.1
+
+          Write-Host "Run tests on .Net 5"
+          dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore -f net5
+          
           cd ..
         displayName: 'Run .Net unit tests'
 
