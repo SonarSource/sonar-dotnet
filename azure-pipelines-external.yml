@@ -26,7 +26,7 @@ stages:
       - task: UseDotNet@2
         inputs:
           packageType: sdk
-          version: 3.1.105
+          version: 3.1.201
           installationPath: $(Agent.ToolsDirectory)/dotnet
         displayName: "Install dotnet 3.1 LTS"
 
