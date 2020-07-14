@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3992",
-"message":  "Provide a 'ComVisible' attribute for assembly 'NetCore31'.",
+"message":  "Mark this assembly with 'System.Runtime.InteropServices.ComVisibleAttribute'",
 "location":  null
 }
 ]

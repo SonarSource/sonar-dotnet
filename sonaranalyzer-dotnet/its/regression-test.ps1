@@ -59,6 +59,8 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
         return
     }
 
+    Write-Host "Will build dotnet project: '${ProjectName}', version ${dotnetVersion}."
+
     New-Item -ItemType directory -Path .\output\$ProjectName | out-null
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
@@ -68,10 +70,9 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
     $Env:PROJECT = $ProjectName
 
     $globalJsonPath = ".\global.json"
-    Set-Content -Path $globalJsonPath -Value '{ "sdk": { "version": "${dotnetVersion}" } }'
+    Set-Content -Path $globalJsonPath -Value "{ ""sdk"": { ""version"": ""${dotnetVersion}"" } }"
 
-    # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
-    Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
+    dotnet --version
 
     dotnet build $solutionPath `
         -t:rebuild `
