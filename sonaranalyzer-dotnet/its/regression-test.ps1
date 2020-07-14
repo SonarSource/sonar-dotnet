@@ -53,7 +53,7 @@ function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePa
         /flp:"logFile=output\${ProjectName}.log;verbosity=d"
 }
 
-function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativePath) {
+function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativePath, [string]$dotnetVersion) {
     if ($project -And -Not ($ProjectName -eq $project)) {
         Write-Host "Build skipped: $ProjectName"
         return
@@ -67,23 +67,20 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
     $Env:PROJECT = $ProjectName
 
-    # TODO create the global.json based on target SDK version (passed by parameter) and then clean it in this function
-    $globalJsonPath = Resolve-Path ".\sources\${ProjectName}\global.json"
-    Copy-Item $globalJsonPath .
+    $globalJsonPath = ".\global.json"
+    Set-Content -Path $globalJsonPath -Value '{ "sdk": { "version": "${dotnetVersion}" } }'
 
     # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
 
-    $Env:PROJECT = $ProjectName
-    dotnet restore $solutionPath
-    dotnet msbuild $solutionPath `
+    dotnet build $solutionPath `
         -t:rebuild `
         -p:Configuration=Debug `
         -clp:"Summary;ErrorsOnly" `
         -fl `
         -flp:"logFile=output\${ProjectName}.log;verbosity=d"
 
-    Remove-Item .\global.json
+    Remove-Item $globalJsonPath
 }
 
 function Initialize-ActualFolder() {
@@ -463,8 +460,8 @@ try {
     Build-Project-MSBuild "SkipGenerated" "SkipGeneratedFiles.sln"
     Build-Project-MSBuild "SkipGeneratedVb" "SkipGeneratedVb.sln"
 
-    Build-Project-DotnetTool "NetCore31" "NetCore31.sln"
-    Build-Project-DotnetTool "Net5" "Net5.sln"
+    Build-Project-DotnetTool "NetCore31" "NetCore31.sln" "3.1.201"
+    Build-Project-DotnetTool "Net5" "Net5.sln" "5.0.100-preview.6.20318.15"
 
     Write-Header "Processing analyzer results"
 

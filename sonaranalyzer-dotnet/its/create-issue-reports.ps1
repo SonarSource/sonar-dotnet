@@ -118,7 +118,6 @@ function GetActualIssues([string]$sarifReportPath){
     return $allIssues
 }
 
-# This function expects the 'actual/$project' folder to be populated with JSON files for each rule
 function New-IssueReports([string]$sarifReportPath) {
     $allIssues = GetActualIssues($sarifReportPath)
 
@@ -139,11 +138,18 @@ function New-IssueReports([string]$sarifReportPath) {
 
     $project = ([System.IO.FileInfo]$file.DirectoryName).Name
 
+    $actualProjectFolder = Join-Path 'actual' $project
+
+    # When a new project is added, the 'actual' folder does not get created in 'Initialize-ActualFolder'
+    if (!(Test-Path $actualProjectFolder)) {
+        Write-Host "The folder '${actualProjectFolder}' does not exist, will create it."
+        New-Item -Path $actualProjectFolder -ItemType "directory"
+    }
+
     $issuesByRule | Foreach-Object {
         $object = New-Object –Type System.Object
         $object | Add-Member –Type NoteProperty –Name issues –Value $_.Group
 
-        $actualProjectFolder = Join-Path 'actual' $project
         $issueFileName = $file.BaseName + '-' + $_.Name + $file.Extension
         $path = Join-Path $actualProjectFolder $issueFileName
 
@@ -154,12 +160,6 @@ function New-IssueReports([string]$sarifReportPath) {
                 ) -split "`r`n"                                                              # Convert JSON to String and split lines
             ) | Foreach-Object { $_.TrimStart() }                                            # Remove leading spaces
 
-        if (Test-Path $path) {
-            Set-Content $path $lines
-        } else {
-            Write-Host "The path '${path}' does not exist, will first create the file."
-            New-Item -Path $actualProjectFolder -Name $issueFileName -ItemType "file" -Force
-            Set-Content $path $lines
-        }
+        Set-Content $path $lines
     }
 }
