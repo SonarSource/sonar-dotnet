@@ -74,12 +74,13 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
 
     dotnet --version
 
-    dotnet build $solutionPath `
+    Exec { & dotnet build $solutionPath `
         -t:rebuild `
         -p:Configuration=Debug `
         -clp:"Summary;ErrorsOnly" `
         -fl `
-        -flp:"logFile=output\${ProjectName}.log;verbosity=d"
+        -flp:"logFile=output\${ProjectName}.log;verbosity=d" `
+    } -errorMessage "ERROR: Build FAILED."
 
     Remove-Item $globalJsonPath
 }
