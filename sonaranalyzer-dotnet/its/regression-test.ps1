@@ -77,6 +77,7 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
     Exec { & dotnet build $solutionPath `
         -t:rebuild `
         -p:Configuration=Debug `
+        # To change the verbosity, comment out the '-clp' parameter and add the '-v' parameter.
         -clp:"Summary;ErrorsOnly" `
         -fl `
         -flp:"logFile=output\${ProjectName}.log;verbosity=d" `
@@ -133,16 +134,18 @@ function Initialize-OutputFolder() {
     New-Item -ItemType directory -Path .\output | out-null
 
     if ($ruleId) {
-        Write-Host "Running ITs with only rule ${ruleId} turned on"
+        Write-Host "Running ITs with only rule ${ruleId} turned on."
         $template = Get-Content -Path ".\SingleRule.ruleset.template" -Raw
         $rulesetWithOneRule = $template.Replace("<Rule Id=`"$ruleId`" Action=`"None`" />", `
                                                 "<Rule Id=`"$ruleId`" Action=`"Warning`" />")
         Set-Content -Path ".\output\AllSonarAnalyzerRules.ruleset" -Value $rulesetWithOneRule
     }
     else {
-        Write-Host "Running ITs with all rules turned on"
+        Write-Host "Running ITs with all rules turned on."
         Copy-Item ".\AllSonarAnalyzerRules.ruleset" -Destination ".\output"
     }
+
+    Write-Host "The rule set we use is .\output\AllSonarAnalyzerRules.ruleset."
 
     $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
     Write-Debug "Initialized output folder in '${methodTimerElapsed}'"
@@ -441,6 +444,27 @@ function CheckInternalProjectsDifferences(){
     Write-Debug "Internal project differences verified in '${internalProjTimerElapsed}'"
 }
 
+function ChangeRuleset([string]$before, [string]$after) {
+    $rulesetFile=".\output\AllSonarAnalyzerRules.ruleset"
+    ((Get-Content -Path $rulesetFile -raw) -Replace $before,$after) | Set-Content -Path $rulesetFile
+}
+
+function DisableRule([string]$ruleId) {
+    Write-Host "Will disable rule ${ruleId}."
+
+    $toModify="<Rule Id=""${ruleId}"" Action=""Warning"" />"
+    $modifyWith="<Rule Id=""${ruleId}"" Action=""None"" />"
+    ChangeRuleset $toModify $modifyWith
+}
+
+function EnableRule([string]$ruleId) {
+    Write-Host "Will enable rule ${ruleId}."
+
+    $toModify="<Rule Id=""${ruleId}"" Action=""None"" />"
+    $modifyWith="<Rule Id=""${ruleId}"" Action=""Warning"" />"
+    ChangeRuleset $toModify $modifyWith
+}
+
 try {
     $scriptTimer = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
@@ -486,7 +510,11 @@ try {
     Build-Project-MSBuild "SkipGeneratedVb" "SkipGeneratedVb.sln"
 
     Build-Project-DotnetTool "NetCore31" "NetCore31.sln" "3.1.201"
+
+    # The CBDE rule is failing for C# 9 syntax. See https://github.com/SonarSource/sonar-dotnet/issues/3439
+    DisableRule "S3949"
     Build-Project-DotnetTool "Net5" "Net5.sln" "5.0.100-preview.6.20318.15"
+    EnableRule "S3949"
 
     Write-Header "Processing analyzer results"
 
