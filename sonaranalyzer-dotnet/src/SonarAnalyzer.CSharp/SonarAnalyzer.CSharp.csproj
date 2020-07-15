@@ -6,6 +6,7 @@
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+    <ProjectGuid>{ca8eec07-8775-42e3-91eb-e51f4db72a48}</ProjectGuid>
   </PropertyGroup>
 
   <!-- Warning: when adding a package reference, we must make sure this package is available on oldest supported .NET version (currently net46) or packaged with the analyzer.

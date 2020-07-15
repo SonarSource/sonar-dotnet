@@ -8,6 +8,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+    <ProjectGuid>{e11606ca-a186-4fee-ba30-b1688747cd1a}</ProjectGuid>
   </PropertyGroup>
 
   <PropertyGroup>
