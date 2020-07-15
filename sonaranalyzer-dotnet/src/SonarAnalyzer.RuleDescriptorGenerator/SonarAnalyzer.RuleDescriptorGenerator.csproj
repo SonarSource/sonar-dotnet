@@ -6,7 +6,7 @@
     <RootNamespace>SonarAnalyzer.RuleDescriptorGenerator</RootNamespace>
     <OutputType>Exe</OutputType>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
-    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,7 +30,7 @@
     Since we want to generate resources only once, we will run the tool only after .Net build. This is done by
     checking the file extension.  
    -->
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(TargetFileName.EndsWith(&quot;exe&quot;))" >
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(TargetFileName.EndsWith(&quot;exe&quot;))">
     <Exec Command="cd $(OutDir)&#xD;&#xA;$(TargetFileName) cs&#xD;&#xA;$(TargetFileName) vbnet" />
   </Target>
 

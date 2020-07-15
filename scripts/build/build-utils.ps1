@@ -69,7 +69,7 @@ function New-NuGetPackages([string]$binPath) {
 
         $fixedBinPath = $binPath
         if ($_.Name -Like "Descriptor.*.nuspec" -Or $_.Name -Like "SonarAnalyzer.CFG.*.nuspec") {
-            $fixedBinPath = "${binPath}\net461"
+            $fixedBinPath = "${binPath}\net46"
         }
 
         if (Test-Debug) {
