@@ -74,10 +74,10 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
 
     dotnet --version
 
+    # To change the verbosity, comment out the '-clp' parameter and add the '-v' parameter.
     Exec { & dotnet build $solutionPath `
         -t:rebuild `
         -p:Configuration=Debug `
-        # To change the verbosity, comment out the '-clp' parameter and add the '-v' parameter.
         -clp:"Summary;ErrorsOnly" `
         -fl `
         -flp:"logFile=output\${ProjectName}.log;verbosity=d" `
