@@ -35,6 +35,9 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static IEnumerable<MetadataReference> Mscorlib { get; }
             = Create("mscorlib.dll");
 
+        internal static IEnumerable<MetadataReference> PresentationFramework { get; }
+            = new[] { CreateReference("PresentationFramework.dll", "WPF"), CreateReference("PresentationCore.dll", "WPF") };
+
         internal static IEnumerable<MetadataReference> System { get; }
             = Create("System.dll");
 
@@ -112,6 +115,9 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         internal static IEnumerable<MetadataReference> SystemXmlXDocument { get; }
             = Create("System.Xml.XDocument.dll");
+
+        internal static IEnumerable<MetadataReference> WindowsBase { get; }
+            = new[] { CreateReference("WindowsBase.dll", "WPF") };
     }
 }
 

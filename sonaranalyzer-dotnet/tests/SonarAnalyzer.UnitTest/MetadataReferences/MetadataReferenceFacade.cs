@@ -58,6 +58,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             new[] {CoreMetadataReference.MicrosoftWin32Primitives};
 #endif
 
+        internal static IEnumerable<MetadataReference> GetPresentationFramework() =>
+#if NETFRAMEWORK
+            FrameworkMetadataReference.PresentationFramework;
+#else
+            Enumerable.Empty<MetadataReference>();
+#endif
+
         internal static IEnumerable<MetadataReference> GetSystemCollections() =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();
@@ -256,6 +263,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             Enumerable.Empty<MetadataReference>();
 #else
             new[] {CoreMetadataReference.SystemNetPrimitives};
+#endif
+
+        internal static IEnumerable<MetadataReference> GetWindowsBase() =>
+#if NETFRAMEWORK
+            FrameworkMetadataReference.WindowsBase;
+#else
+            Enumerable.Empty<MetadataReference>();
 #endif
 
         internal static IEnumerable<MetadataReference> GetProjectDefaultReferences() =>

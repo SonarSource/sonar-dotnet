@@ -34,5 +34,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         internal static MetadataReference CreateReference(string assemblyName) =>
             MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, assemblyName));
+
+        internal static MetadataReference CreateReference(string assemblyName, string subFolder) =>
+            MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, subFolder, assemblyName));
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using GalaSoft.MvvmLight;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace Tests.Diagnostics
 {
@@ -704,6 +706,35 @@ namespace Tests.Diagnostics
         {
             [DebuggerStepThrough]
             get;
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3441
+    public class Repro3441
+    {
+        private readonly List<int> _data = new List<int>();
+        public List<int> Data
+        {
+            get => _data;
+            // The setter in this case is only executed by a deserializer, but we don’t want to replace the field instance.
+            private set // Noncompliant
+            {
+                foreach (var item in value)
+                {
+                    _data.Add(item);
+                }
+            }
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3442
+    public class Repro3442 : System.Windows.Controls.Primitives.ButtonBase
+    {
+        public static readonly DependencyProperty IsSpinningProperty = DependencyProperty.Register("IsSpinning", typeof(Boolean),typeof(Repro3442));
+        public bool IsSpinning
+        {
+            get { return (bool)GetValue(IsSpinningProperty); }
+            set { SetValue(IsSpinningProperty, value); }
         }
     }
 }
