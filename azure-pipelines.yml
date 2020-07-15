@@ -195,7 +195,7 @@ stages:
             sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
             sonar.analysis.prNumber=$(System.PullRequest.PullRequestNumber)
             sonar.analysis.repository=$(Build.Repository.ID)
-      
+
       - task: SonarCloudPrepare@1
         displayName: 'Run Code Analysis - Begin Step (master or branch)'
         condition: ne(variables['Build.Reason'], 'PullRequest')
@@ -215,7 +215,7 @@ stages:
 
       - powershell: |
           cd sonaranalyzer-dotnet
-          
+
           $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
 
           Write-Host "Add .Net 5 target for UnitTest project"
@@ -232,7 +232,7 @@ stages:
 
           Write-Host "Run tests on .Net 5"
           dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore -f net5
-          
+
           cd ..
         displayName: 'Run .Net unit tests'
 
@@ -372,7 +372,7 @@ stages:
         inputs:
           artifact: Binaries
           targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
-          
+
       - task: DownloadPipelineArtifact@2
         displayName: 'Download rule descriptor binaries'
         inputs:
@@ -439,7 +439,7 @@ stages:
         inputs:
           artifact: Binaries
           targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
-          
+
       - task: DownloadPipelineArtifact@2
         displayName: 'Download rule descriptor binaries'
         inputs:
@@ -516,7 +516,7 @@ stages:
         - task: UsePythonVersion@0
           inputs:
             versionSpec: '3.x'
-        
+
         - bash: pip3 install requests
 
         - task: PythonScript@0
@@ -528,7 +528,7 @@ stages:
               import requests
               import os
               import sys
-              
+
               version = '$(SONAR_PROJECT_VERSION).$(Build.BuildId)'
               isPr = '$(Build.Reason)' == 'PullRequest'
               sourceRepo = os.environ['ARTIFACTORY_NUGET_REPO']
@@ -537,14 +537,14 @@ stages:
                 targetRepo = sourceRepo.replace('qa', 'dev')
               else:
                 targetRepo = sourceRepo.replace('qa', 'public')
-              
+
               artifact = f'SonarAnalyzer.CFG.CSharp.{version}.nupkg'
               print(f'Promoting nuget {artifact} from {sourceRepo} to {targetRepo}')
 
               url = f'$(ARTIFACTORY_URL)/api/move/{sourceRepo}/{artifact}?to=/{targetRepo}/{artifact}'
               headers = {'Content-Type': 'application/json'}
               response = requests.post(url, headers=headers, auth=('$(ARTIFACTORY_API_USER)', '$(ARTIFACTORY_API_KEY)'))
-              
+
               fixedBranch = ''
               if not isPr:
                 # Cannot use BUILD_SOURCEBRANCHNAME because of https://github.com/Microsoft/azure-pipelines-agent/issues/838
