@@ -33,7 +33,7 @@ stages:
 
     jobs:
     - job: runUnitTestsJob
-      displayName: 'Run dotnet unit tests'
+      displayName: 'Run dotnet analisys and unit tests'
 
       steps:
       - task: NuGetToolInstaller@1
