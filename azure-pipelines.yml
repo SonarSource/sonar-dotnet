@@ -153,11 +153,6 @@ stages:
           dotnet --version
         displayName: 'List dotnet versions and current version'
 
-      - task: NuGetCommand@2
-        displayName: "Restore NuGet packages"
-        inputs:
-          restoreSolution: '$(solution)'
-
       - powershell: |
           # Calculate the file path
           $versionFilePath = "$env:BUILD_SOURCESDIRECTORY\scripts\version\Version.props"
@@ -195,7 +190,7 @@ stages:
             sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
             sonar.analysis.prNumber=$(System.PullRequest.PullRequestNumber)
             sonar.analysis.repository=$(Build.Repository.ID)
-      
+
       - task: SonarCloudPrepare@1
         displayName: 'Run Code Analysis - Begin Step (master or branch)'
         condition: ne(variables['Build.Reason'], 'PullRequest')
@@ -213,18 +208,26 @@ stages:
             sonar.analysis.sha1=$(Build.SourceVersion)
             sonar.analysis.repository=$(Build.Repository.ID)
 
-      - task: VSBuild@1
-        displayName: 'Build SonarAnalyzer solution'
-        inputs:
-          solution: '$(solution)'
-          platform: '$(buildPlatform)'
-          configuration: '$(buildConfiguration)'
-          msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
-
       - powershell: |
-          cd sonaranalyzer-dotnet\tests
-          $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:coverage.xml -oldStyle -register:Path32
-          cd ..
+          cd sonaranalyzer-dotnet
+
+          $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
+
+          Write-Host "Add .Net 5 target for UnitTest project"
+          ((Get-Content -Path $testProjFileName -raw) -Replace "net48;netcoreapp3.1","net48;netcoreapp3.1;net5") | Set-Content -Path $testProjFileName
+
+          Write-Host "Build UnitTest project"
+          dotnet build $testProjFileName -c $(BuildConfiguration)
+
+          Write-Host "Run tests for .Net 4.8 binary and compute coverage"
+          $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --nologo" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.xml -oldStyle -register:Path32
+
+          Write-Host "Run tests on .Net Core 3.1"
+          dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f netcoreapp3.1
+
+          Write-Host "Run tests on .Net 5"
+          dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f net5
+
           cd ..
         displayName: 'Run .Net unit tests'
 
@@ -235,7 +238,6 @@ stages:
         displayName: 'Run Code Analysis - Publish QG'
         inputs:
           pollingTimeoutSec: '300'
-
 
     - job: runIntegrationTestsJob
       displayName: 'Run SonarAnalyzer integration tests'
@@ -364,7 +366,7 @@ stages:
         inputs:
           artifact: Binaries
           targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
-          
+
       - task: DownloadPipelineArtifact@2
         displayName: 'Download rule descriptor binaries'
         inputs:
@@ -431,7 +433,7 @@ stages:
         inputs:
           artifact: Binaries
           targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
-          
+
       - task: DownloadPipelineArtifact@2
         displayName: 'Download rule descriptor binaries'
         inputs:
@@ -508,7 +510,7 @@ stages:
         - task: UsePythonVersion@0
           inputs:
             versionSpec: '3.x'
-        
+
         - bash: pip3 install requests
 
         - task: PythonScript@0
@@ -520,7 +522,7 @@ stages:
               import requests
               import os
               import sys
-              
+
               version = '$(SONAR_PROJECT_VERSION).$(Build.BuildId)'
               isPr = '$(Build.Reason)' == 'PullRequest'
               sourceRepo = os.environ['ARTIFACTORY_NUGET_REPO']
@@ -529,14 +531,14 @@ stages:
                 targetRepo = sourceRepo.replace('qa', 'dev')
               else:
                 targetRepo = sourceRepo.replace('qa', 'public')
-              
+
               artifact = f'SonarAnalyzer.CFG.CSharp.{version}.nupkg'
               print(f'Promoting nuget {artifact} from {sourceRepo} to {targetRepo}')
 
               url = f'$(ARTIFACTORY_URL)/api/move/{sourceRepo}/{artifact}?to=/{targetRepo}/{artifact}'
               headers = {'Content-Type': 'application/json'}
               response = requests.post(url, headers=headers, auth=('$(ARTIFACTORY_API_USER)', '$(ARTIFACTORY_API_KEY)'))
-              
+
               fixedBranch = ''
               if not isPr:
                 # Cannot use BUILD_SOURCEBRANCHNAME because of https://github.com/Microsoft/azure-pipelines-agent/issues/838

@@ -6,6 +6,7 @@
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+    <ProjectGuid>{8a8a663e-1318-4361-bc97-2e63666feadb}</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
