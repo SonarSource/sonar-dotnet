@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
+using System.Linq;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -39,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
                 new CS.PropertiesAccessCorrectField(),
-                additionalReferences: MvvmLightReference);
+                additionalReferences: AdditionalReferences);
         }
 
         [TestMethod]
@@ -48,12 +49,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
                 new VB.PropertiesAccessCorrectField(),
-                additionalReferences: MvvmLightReference);
+                additionalReferences: AdditionalReferences);
         }
 
-        private static IEnumerable<MetadataReference> MvvmLightReference =>
-            NuGetMetadataReference.MvvmLightLibs("5.4.1.1");
-
+        private static IEnumerable<MetadataReference> AdditionalReferences =>
+            NuGetMetadataReference.MvvmLightLibs("5.4.1.1")
+                .Concat(MetadataReferenceFacade.GetWindowsBase())
+                .Concat(MetadataReferenceFacade.GetPresentationFramework());
     }
 }
 

@@ -1,4 +1,6 @@
 ﻿Imports System
+Imports System.Collections.Generic
+Imports System.Windows
 Imports GalaSoft.MvvmLight
 
 Namespace Tests.Diagnostics
@@ -576,4 +578,35 @@ Namespace Tests.Diagnostics
 
     End Class
 
+    ' https://github.com/SonarSource/sonar-dotnet/issues/3441
+    Public Class Repro3441
+        Private ReadOnly _data As List(Of Integer) = New List(Of Integer)()
+
+        Public Property Data As List(Of Integer)
+            Get
+                Return _data
+            End Get
+            Private Set(ByVal value As List(Of Integer)) ' Noncompliant
+                For Each item In value
+                    _data.Add(item)
+                Next
+            End Set
+        End Property
+    End Class
+
+    ' https://github.com/SonarSource/sonar-dotnet/issues/3442
+    Public Class SampleFor3442
+        Inherits System.Windows.Controls.Primitives.ButtonBase
+
+        Public Shared ReadOnly IsSpinningProperty As DependencyProperty = DependencyProperty.Register("IsSpinning", GetType(Boolean), GetType(SampleFor3442))
+
+        Public Property IsSpinning As Boolean
+            Get
+                Return CBool(GetValue(IsSpinningProperty))
+            End Get
+            Set(ByVal value As Boolean)
+                SetValue(IsSpinningProperty, value)
+            End Set
+        End Property
+    End Class
 End Namespace
