@@ -219,7 +219,7 @@ stages:
           Write-Host "Build UnitTest project"
           dotnet build $testProjFileName -c $(BuildConfiguration)
 
-          Write-Host "Run tests on .Net 4.8 and compute coverage"
+          Write-Host "Run tests for .Net 4.8 binary and compute coverage"
           $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --nologo" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.xml -oldStyle -register:Path32
 
           Write-Host "Run tests on .Net Core 3.1"
