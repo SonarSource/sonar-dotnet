@@ -6,7 +6,15 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFrameworks>net48;netcoreapp3.1;net5</TargetFrameworks>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+    <!--
+      This allows, on AzureDevops builds, to restore the NuGet packages which are not targeting .Net Standard or a compatible version by
+      usign as fallbacks .Net Framwework 4.0 client profile (net40-client) and Portable profile (portable-net45+win8+wp8+wpa81).
+      The following packages are affected:
+      - Microsoft.Composition 1.0.27 (portable-net45+win8+wp8+wpa81)
+      - Microsoft.Web.Xdt 2.1.0 (net40-client)
+      - NuGet.Core 2.14.0 (net40-client)
+      -->
     <AssetTargetFallback>$(AssetTargetFallback);net40-client;portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <ProjectGuid>{e11606ca-a186-4fee-ba30-b1688747cd1a}</ProjectGuid>
   </PropertyGroup>
