@@ -128,10 +128,10 @@ stages:
           $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.xml -oldStyle -register:Path32
 
           Write-Host "Run tests on .Net Core 3.1"
-          dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore -f netcoreapp3.1
+          dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f netcoreapp3.1
 
           Write-Host "Run tests on .Net 5"
-          dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore -f net5
+          dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f net5
 
           cd ..
         displayName: 'Run .Net unit tests'
