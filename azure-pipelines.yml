@@ -59,20 +59,6 @@ stages:
         displayName: 'List dotnet versions and current version'
 
       - powershell: |
-          cd sonaranalyzer-dotnet
-
-          $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
-
-          Write-Host "Add .Net 5 target for UnitTest project"
-          ((Get-Content -Path $testProjFileName -raw) -Replace "net48;netcoreapp3.1","net48;netcoreapp3.1;net5") | Set-Content -Path $testProjFileName
-        displayName: 'Add .Net 5 target'
-
-      - task: NuGetCommand@2
-        displayName: "Restore NuGet packages"
-        inputs:
-          restoreSolution: '$(solution)'
-
-      - powershell: |
           # Calculate the file path
           $versionFilePath = "$env:BUILD_SOURCESDIRECTORY\scripts\version\Version.props"
           Write-Host "Reading the Sonar project version from '${versionFilePath}' ..."
@@ -132,13 +118,14 @@ stages:
 
           $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
 
+          Write-Host "Add .Net 5 target for UnitTest project"
+          ((Get-Content -Path $testProjFileName -raw) -Replace "net48;netcoreapp3.1","net48;netcoreapp3.1;net5") | Set-Content -Path $testProjFileName
+
           Write-Host "Build UnitTest project"
           dotnet build $testProjFileName -c $(BuildConfiguration)
 
           Write-Host "Run tests on .Net 4.8 and compute coverage"
           $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.xml -oldStyle -register:Path32
-
-          Get-ChildItem -Recurse tests\SonarAnalyzer.UnitTest\bin\
 
           Write-Host "Run tests on .Net Core 3.1"
           dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore -f netcoreapp3.1
