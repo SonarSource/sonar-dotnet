@@ -727,7 +727,7 @@ namespace Tests.Diagnostics
         }
     }
 
-#if NETFRAMEWORK // System.Windows.Controls.Primitives.ButtonBase is not defined in NETCOREAPP
+#if NETFRAMEWORK // System.Windows.Controls.Primitives.ButtonBase is in a different assembly in NETCOREAPP
     // https://github.com/SonarSource/sonar-dotnet/issues/3442
     public class SampleFor3442 : System.Windows.Controls.Primitives.ButtonBase
     {

@@ -594,7 +594,7 @@ Namespace Tests.Diagnostics
         End Property
     End Class
 
-#If NETFRAMEWORK ' System.Windows.Controls.Primitives.ButtonBase is not defined in NETCOREAPP
+#If NETFRAMEWORK ' System.Windows.Controls.Primitives.ButtonBase is in a different assembly in NETCOREAPP
     ' https://github.com/SonarSource/sonar-dotnet/issues/3442
     Public Class SampleFor3442
         Inherits System.Windows.Controls.Primitives.ButtonBase
