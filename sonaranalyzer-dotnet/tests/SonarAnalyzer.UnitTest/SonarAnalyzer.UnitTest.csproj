@@ -30,21 +30,14 @@
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
     <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
-    <PackageReference Include="NuGet.Core" Version="2.14.0">
-      <!-- Not yet marked as compatible with .Net 5  -->
-      <NoWarn>NU1202</NoWarn>
-    </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.4.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.4.0" />
     <PackageReference Include="Microsoft.Composition" Version="1.0.27">
       <!-- This package is a dependency of Microsoft.CodeAnalysis.CSharp.Workspaces. It is safe to use since it's compatible with .Net Portable runtime -->
-      <NoWarn>NU1701, NU1202</NoWarn>
+      <NoWarn>NU1701</NoWarn>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="3.4.0" />
-    <PackageReference Include="Microsoft.Web.Xdt" Version="2.1.0">
-      <!-- Not yet marked as compatible with .Net 5  -->
-      <NoWarn>NU1202</NoWarn>
-    </PackageReference>
+    <PackageReference Include="NuGet.Core" Version="2.14.0"/>
     <!-- OpenCover is used by the build script to generate the code coverage report -->
     <PackageReference Include="OpenCover" Version="4.7.922" />
   </ItemGroup>
