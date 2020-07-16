@@ -596,6 +596,7 @@ Namespace Tests.Diagnostics
 
 #If NETFRAMEWORK ' System.Windows.Controls.Primitives.ButtonBase is in a different assembly in NETCOREAPP
     ' https://github.com/SonarSource/sonar-dotnet/issues/3442
+    ' Also see "Add WinForms support in unit tests when targeting .Net Core" https://github.com/SonarSource/sonar-dotnet/issues/3426
     Public Class SampleFor3442
         Inherits System.Windows.Controls.Primitives.ButtonBase
 
