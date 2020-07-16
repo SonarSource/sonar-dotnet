@@ -728,9 +728,9 @@ namespace Tests.Diagnostics
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/3442
-    public class Repro3442 : System.Windows.Controls.Primitives.ButtonBase
+    public class SampleFor3442 : System.Windows.Controls.Primitives.ButtonBase
     {
-        public static readonly DependencyProperty IsSpinningProperty = DependencyProperty.Register("IsSpinning", typeof(Boolean),typeof(Repro3442));
+        public static readonly DependencyProperty IsSpinningProperty = DependencyProperty.Register("IsSpinning", typeof(Boolean),typeof(SampleFor3442));
         public bool IsSpinning
         {
             get { return (bool)GetValue(IsSpinningProperty); }

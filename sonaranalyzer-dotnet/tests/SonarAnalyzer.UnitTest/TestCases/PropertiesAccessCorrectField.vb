@@ -595,10 +595,10 @@ Namespace Tests.Diagnostics
     End Class
 
     ' https://github.com/SonarSource/sonar-dotnet/issues/3442
-    Public Class Repro3442
+    Public Class SampleFor3442
         Inherits System.Windows.Controls.Primitives.ButtonBase
 
-        Public Shared ReadOnly IsSpinningProperty As DependencyProperty = DependencyProperty.Register("IsSpinning", GetType(Boolean), GetType(Repro3442))
+        Public Shared ReadOnly IsSpinningProperty As DependencyProperty = DependencyProperty.Register("IsSpinning", GetType(Boolean), GetType(SampleFor3442))
 
         Public Property IsSpinning As Boolean
             Get
