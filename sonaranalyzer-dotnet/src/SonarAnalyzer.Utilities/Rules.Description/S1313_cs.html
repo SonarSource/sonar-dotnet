@@ -13,16 +13,11 @@ delivery and deployment:</p>
 <p>Last but not least it has an effect on application security. Attackers might be able to decompile the code and thereby discover a potentially
 sensitive address. They can perform a Denial of Service attack on the service at this address or spoof the IP address. Such an attack is always
 possible, but in the case of a hardcoded IP address the fix will be much slower, which will increase an attack's impact.</p>
-<h2>Ask Yourself Whether</h2>
-<p>The disclosed IP address is sensitive, eg:</p>
-<ul>
-  <li> Can give information to an attacker about the network topology. </li>
-  <li> It's a personal (assigned to an identifiable person) IP address. </li>
-</ul>
-<p>There is a risk if you answered yes to any of these questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
-<p>Don't hard-code the IP address in the source code, instead make it configurable.</p>
-<h2>Sensitive Code Example</h2>
+<ul>
+  <li> make the IP address configurable. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
 <pre>
 var ip = "192.168.12.42";
 var address = IPAddress.Parse(ip);
@@ -33,13 +28,9 @@ var ip = ConfigurationManager.AppSettings["myapplication.ip"];
 var address = IPAddress.Parse(ip);
 </pre>
 <h2>Exceptions</h2>
-<p>No issue is reported for the following cases because they are not considered sensitive:</p>
 <ul>
-  <li> Loopback addresses 127.0.0.0/8 in CIDR notation (from 127.0.0.0 to 127.255.255.255) </li>
-  <li> Broadcast address 255.255.255.255 </li>
-  <li> Non routable address 0.0.0.0 </li>
-  <li> Strings of the form <code>2.5.&lt;number&gt;.&lt;number&gt;</code> as they <a href="http://www.oid-info.com/introduction.htm">often match
-  Object Identifiers</a> (OID). </li>
+  <li> Although "::" is a valid IPv6 address, the rule doesn't report on it. </li>
+  <li> No issue is reported for 127.0.0.1 because loopback is not considered as sensitive </li>
 </ul>
 <h2>See</h2>
 <ul>
