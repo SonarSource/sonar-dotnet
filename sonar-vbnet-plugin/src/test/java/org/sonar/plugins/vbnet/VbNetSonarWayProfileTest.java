@@ -48,7 +48,6 @@ public class VbNetSonarWayProfileTest {
     assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S2077"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S2068"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S1313"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4784"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4790"))).isNotNull();
   }
 }
