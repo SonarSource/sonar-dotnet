@@ -19,10 +19,6 @@
  */
 
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle("SonarAnalyzer.UnitTest")]
 [assembly: AssemblyProduct("SonarAnalyzer.UnitTest")]
-[assembly: AssemblyDescription("")]
-
-[assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest.CSharp9")]
