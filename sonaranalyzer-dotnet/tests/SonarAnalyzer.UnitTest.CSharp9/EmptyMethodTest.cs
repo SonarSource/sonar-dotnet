@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,11 +18,30 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
-[assembly: AssemblyTitle("SonarAnalyzer.UnitTest")]
-[assembly: AssemblyProduct("SonarAnalyzer.UnitTest")]
-[assembly: AssemblyDescription("")]
+namespace SonarAnalyzer.UnitTest.CSharp9
+{
+    [TestClass]
+    public class EmptyMethodTest
+    {
+        [TestMethod]
+        public void EmptyMethod_InsideRecord()
+        {
+            const string code = @"
+namespace CSharp9Playground
+{
+    public record Person
+    {
+        public void EmptyMethod() { } // Noncompliant
+    }
+}
+";
 
-[assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest.CSharp9")]
+            Verifier.VerifyCSharpAnalyzer(code, new EmptyMethod(), new[] { new CSharpParseOptions(LanguageVersion.CSharp9) });
+        }
+    }
+}
