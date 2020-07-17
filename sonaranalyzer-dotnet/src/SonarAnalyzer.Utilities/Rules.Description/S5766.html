@@ -25,10 +25,12 @@ public class InternalUrl
 
     public InternalUrl(string tmpUrl) // Sensitive
     {
-       if(!tmpUrl.StartsWith("http://localhost/") { // there is some input validation
+       if(!tmpUrl.StartsWith("http://localhost/")) // there is some input validation
+       {
           url= "http://localhost/default";
        }
-       else {
+       else
+       {
           url= tmpUrl;
        }
     }
@@ -45,12 +47,14 @@ public class InternalUrl : ISerializable
 
     public InternalUrl(string tmpUrl) // Sensitive
     {
-       if(!tmpUrl.StartsWith("http://localhost/") { // there is some input validation
-          url= "http://localhost/default";
-       }
-       else {
-          url= tmpUrl;
-       }
+        if(!tmpUrl.StartsWith("http://localhost/")) // there is some input validation
+        {
+            url= "http://localhost/default";
+        }
+        else
+        {
+            url= tmpUrl;
+        }
     }
 
     // special constructor used during deserialization
@@ -78,12 +82,14 @@ public class InternalUrl : IDeserializationCallback
 
     public InternalUrl(string tmpUrl) // Sensitive
     {
-       if(!tmpUrl.StartsWith("http://localhost/") { // there is some input validation
-          url= "http://localhost/default";
-       }
-       else {
-          url= tmpUrl;
-       }
+        if(!tmpUrl.StartsWith("http://localhost/")) // there is some input validation
+        {
+            url= "http://localhost/default";
+        }
+        else
+        {
+            url= tmpUrl;
+        }
     }
 
     void IDeserializationCallback.OnDeserialization(object sender) // Sensitive
@@ -104,12 +110,14 @@ public class InternalUrl : ISerializable
 
     public InternalUrl(string tmpUrl)
     {
-       if(!tmpUrl.StartsWith("http://localhost/") { // there is some input validation
-          url= "http://localhost/default";
-       }
-       else {
-          url= tmpUrl;
-       }
+        if(!tmpUrl.StartsWith("http://localhost/")) // there is some input validation
+        {
+            url= "http://localhost/default";
+        }
+        else
+        {
+            url= tmpUrl;
+        }
     }
 
     // special constructor used during deserialization
@@ -143,22 +151,25 @@ public class InternalUrl : IDeserializationCallback
 
     public InternalUrl(string tmpUrl)
     {
-       if(!tmpUrl.StartsWith("http://localhost/") { // there is some input validation
+       if(!tmpUrl.StartsWith("http://localhost/")) // there is some input validation
+       {
           url= "http://localhost/default";
        }
-       else {
+       else
+       {
           url= tmpUrl;
        }
     }
 
     void IDeserializationCallback.OnDeserialization(object sender) // Compliant
     {
-       if(!url.StartsWith("http://localhost/") {
-          url= "http://localhost/default";
-       }
-       else {
-          url= tmpUrl;
-       }
+        if(!url.StartsWith("http://localhost/"))
+        {
+            url= "http://localhost/default";
+        }
+        else
+        {
+        }
     }
 }
 </pre>
