@@ -53,13 +53,15 @@ function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePa
         /flp:"logFile=output\${ProjectName}.log;verbosity=d"
 }
 
-function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativePath, [string]$dotnetVersion) {
+function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativePath) {
     if ($project -And -Not ($ProjectName -eq $project)) {
         Write-Host "Build skipped: $ProjectName"
         return
     }
 
-    Write-Host "Will build dotnet project: '${ProjectName}', version ${dotnetVersion}."
+    $projectGlobalJsonPath = ".\sources\${ProjectName}\global.json"
+    $globalJsonContent = $(Get-Content $projectGlobalJsonPath)
+    Write-Host "Will build dotnet project: '${ProjectName}' (with ${projectGlobalJsonPath}) with dotnet version '${globalJsonContent}'."
 
     New-Item -ItemType directory -Path .\output\$ProjectName | out-null
 
@@ -69,8 +71,9 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
     $Env:PROJECT = $ProjectName
 
-    $globalJsonPath = ".\global.json"
-    Set-Content -Path $globalJsonPath -Value "{ ""sdk"": { ""version"": ""${dotnetVersion}"" } }"
+    # Copy the global.json in the folder where we do analysis.
+    $tempGlobalJsonPath = ".\global.json"
+    Copy-Item $projectGlobalJsonPath $tempGlobalJsonPath
 
     dotnet --version
 
@@ -83,7 +86,7 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
         -flp:"logFile=output\${ProjectName}.log;verbosity=d" `
     } -errorMessage "ERROR: Build FAILED."
 
-    Remove-Item $globalJsonPath
+    Remove-Item $tempGlobalJsonPath
 }
 
 function Initialize-ActualFolder() {
@@ -509,11 +512,11 @@ try {
     Build-Project-MSBuild "SkipGenerated" "SkipGeneratedFiles.sln"
     Build-Project-MSBuild "SkipGeneratedVb" "SkipGeneratedVb.sln"
 
-    Build-Project-DotnetTool "NetCore31" "NetCore31.sln" "3.1.201"
+    Build-Project-DotnetTool "NetCore31" "NetCore31.sln"
 
     # The CBDE rule is failing for C# 9 syntax. See https://github.com/SonarSource/sonar-dotnet/issues/3439
     DisableRule "S3949"
-    Build-Project-DotnetTool "Net5" "Net5.sln" "5.0.100-preview.6.20318.15"
+    Build-Project-DotnetTool "Net5" "Net5.sln"
     EnableRule "S3949"
 
     Write-Header "Processing analyzer results"
