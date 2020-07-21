@@ -2,12 +2,10 @@
 using Net5;
 
 Console.WriteLine("Hello World!");
-MyClass.Foo();
 
-var x = new MyClass.PublicPerson { FirstName = "C#", LastName = "9" };
-Console.WriteLine(x.FirstName + x.LastName);
+new Records().TestRecords();
+new SkipLocalsInit().Method();
+new TargetTypedNew().Method();
+new LambdaDiscardParameters().Method();
 
-LocalRecord y = new("1", "2");
-Console.WriteLine(y.A + y.B);
 
-public record LocalRecord(string A, string B);
