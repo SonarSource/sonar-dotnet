@@ -58,8 +58,13 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(VisitClassDeclaration, SyntaxKind.ClassDeclaration);
 
-        private static void VisitClassDeclaration(SyntaxNodeAnalysisContext context)
+        private void VisitClassDeclaration(SyntaxNodeAnalysisContext context)
         {
+            if (!IsEnabled(context.Options))
+            {
+                return;
+            }
+
             var classDeclaration = (ClassDeclarationSyntax)context.Node;
             if (!HasConstructorsWithParameters(classDeclaration))
             {
