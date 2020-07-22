@@ -39,30 +39,30 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExpandingArchives_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.cs",
                 new CSharp.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences());
+                additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpandingArchives_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.cs",
                 new CSharp.ExpandingArchives(),
-                additionalReferences: GetAdditionalReferences());
+                additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpandingArchives_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.vb",
                 new VisualBasic.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences());
+                additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpandingArchives_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.vb",
                 new VisualBasic.ExpandingArchives(),
-                additionalReferences: GetAdditionalReferences());
+                additionalReferences: AdditionalReferences);
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+        internal static IEnumerable<MetadataReference> AdditionalReferences =>
             MetadataReferenceFacade.GetSystemIoCompression();
     }
 }

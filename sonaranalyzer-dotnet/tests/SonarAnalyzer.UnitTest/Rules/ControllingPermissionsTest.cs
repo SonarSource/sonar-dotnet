@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ControllingPermissionsTest
     {
-        private static readonly IEnumerable<MetadataReference> AdditionalReferences =
+        internal static readonly IEnumerable<MetadataReference> AdditionalReferences =
             Enumerable.Empty<MetadataReference>()
                 .Concat(FrameworkMetadataReference.SystemIdentityModel)
                 .Concat(FrameworkMetadataReference.SystemWeb);

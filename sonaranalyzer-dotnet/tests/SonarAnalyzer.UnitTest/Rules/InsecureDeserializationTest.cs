@@ -31,17 +31,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void InsecureDeserialization() =>
             Verifier.VerifyAnalyzer(@"TestCases\InsecureDeserialization.cs",
                 new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.CSharp8);
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void InsecureDeserialization_Not_Enabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\InsecureDeserialization.cs",
-                                           new InsecureDeserialization(),
-                                           ParseOptionsHelper.CSharp8);
     }
 }
 

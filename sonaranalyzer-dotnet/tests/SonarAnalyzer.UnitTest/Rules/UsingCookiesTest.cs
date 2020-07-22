@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new VisualBasic.UsingCookies(),
                 additionalReferences: GetAdditionalReferencesForNet46());
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferencesForNet46() =>
+        internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNet46() =>
             FrameworkMetadataReference.SystemWeb;
 
 #else
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new VisualBasic.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferencesForNetCore(string packageVersion) =>
+        internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNetCore(string packageVersion) =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(packageVersion)
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(packageVersion))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsPrimitives(packageVersion));
