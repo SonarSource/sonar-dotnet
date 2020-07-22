@@ -1,11 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Net5
 {
+    public class Food { public bool HasTaste; }
+    public class Meat : Food { public bool IsRed; }
+
+    public abstract class Animal
+    {
+        public abstract Food GetFood();
+    }
+
+    // The feature is in progress
+
+    //public class Tiger : Animal
+    //{
+        // public override Meat GetFood() => null;
+    //}
+
     public class CovariantReturn
     {
         public virtual IEnumerable<int> OverrideMe(string m) => null;

@@ -6,8 +6,8 @@ namespace Net5
 {
     public class TargetTypedNew
     {
-        Dictionary<string, string> dict = new();
-        List<int> list;
+        private Dictionary<string, string> dict = new();
+        private List<int> list;
 
         public void Method()
         {

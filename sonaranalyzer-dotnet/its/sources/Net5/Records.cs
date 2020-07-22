@@ -13,7 +13,8 @@ namespace Net5
         public void TestRecords()
         {
             var x = new PropertyOnlyRecord { FirstName = "C#", LastName = "9" };
-            Console.WriteLine(x.FirstName + x.LastName);
+            var b = new RecordInheritance { ID = 1 };
+            Console.WriteLine(x.FirstName + x.LastName + b.ID);
 
             ConstructorOnlyRecord y = new("1", "2");
             Console.WriteLine(y.A + y.B);
@@ -33,6 +34,8 @@ namespace Net5
     
 
     public record PropertyOnlyRecord { public string FirstName; public string LastName; }
+
+    public record RecordInheritance : PropertyOnlyRecord { public int ID; }
 
     public record ConstructorOnlyRecord(string A, string B);
 
