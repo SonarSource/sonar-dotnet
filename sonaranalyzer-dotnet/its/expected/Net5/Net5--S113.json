@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CallIndirectAttribute.cs'.",
+"location":  {
+"uri":  "sources\Net5\CallIndirectAttribute.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  2
+}
+}
+}
+]
+}

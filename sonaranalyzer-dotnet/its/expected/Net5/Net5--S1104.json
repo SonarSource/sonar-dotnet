@@ -4,12 +4,12 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\Net5\MyClass.cs",
+"uri":  "sources\Net5\CovariantReturn.cs",
 "region":  {
-"startLine":  14,
-"startColumn":  52,
-"endLine":  14,
-"endColumn":  61
+"startLine":  5,
+"startColumn":  37,
+"endLine":  5,
+"endColumn":  45
 }
 }
 },
@@ -17,12 +17,103 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\Net5\MyClass.cs",
+"uri":  "sources\Net5\CovariantReturn.cs",
 "region":  {
-"startLine":  14,
-"startColumn":  77,
-"endLine":  14,
-"endColumn":  85
+"startLine":  6,
+"startColumn":  44,
+"endLine":  6,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  54,
+"endLine":  36,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  79,
+"endLine":  36,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  71,
+"endLine":  38,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  55,
+"endLine":  67,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedConditionals.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  45,
+"endLine":  5,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedConditionals.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  52,
+"endLine":  6,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedConditionals.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  54,
+"endLine":  7,
+"endColumn":  62
 }
 }
 }

@@ -4,11 +4,11 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Net5\MyClass.cs",
+"uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  24,
+"startLine":  28,
 "startColumn":  40,
-"endLine":  24,
+"endLine":  28,
 "endColumn":  47
 }
 }

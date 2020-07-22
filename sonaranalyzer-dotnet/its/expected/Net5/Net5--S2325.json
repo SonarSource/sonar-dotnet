@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'DoNotOverrideMe' a static method.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  33,
+"endLine":  24,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TryParse' a static method.",
+"location":  {
+"uri":  "sources\Net5\ExtendingPartial.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  31,
+"endLine":  32,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net5\ExtensionGetEnumerator.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  21,
+"endLine":  20,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net5\FunctionPointers.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  21,
+"endLine":  7,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Bar' a static method.",
+"location":  {
+"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  22,
+"endLine":  25,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NoOp' a static method.",
+"location":  {
+"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  34,
+"endLine":  35,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net5\NativeInts.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  21,
+"endLine":  7,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TypePatterns' a static method.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  24,
+"endLine":  41,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'RelationalPatterns' a static method.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  24,
+"endLine":  51,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'LogicalPatterns' a static method.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  24,
+"endLine":  58,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NotPattern' a static method.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  21,
+"endLine":  65,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  21,
+"endLine":  53,
+"endColumn":  27
+}
+}
+}
+]
+}

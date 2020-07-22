@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Net5\RelaxRefPartialOrder.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  12,
+"endLine":  3,
+"endColumn":  19
+}
+}
+}
+]
+}

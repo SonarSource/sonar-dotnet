@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "Remove the type specification; it is redundant.",
+"location":  {
+"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  44,
+"endLine":  18,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the type specification; it is redundant.",
+"location":  {
+"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  51,
+"endLine":  18,
+"endColumn":  57
+}
+}
+}
+]
+}

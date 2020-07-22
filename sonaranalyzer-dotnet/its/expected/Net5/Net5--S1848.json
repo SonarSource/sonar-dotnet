@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1848",
+"message":  "Either remove this useless object instantiation of class 'InitOnlyProperties' or use it.",
+"location":  {
+"uri":  "sources\Net5\Main.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  50
+}
+}
+}
+]
+}

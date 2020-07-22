@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3251",
+"message":  "Supply an implementation for this partial method.",
+"location":  {
+"uri":  "sources\Net5\ExtendingPartial.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  9,
+"endLine":  12,
+"endColumn":  16
+}
+}
+}
+]
+}

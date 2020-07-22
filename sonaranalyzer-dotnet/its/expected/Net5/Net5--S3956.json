@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  20,
+"endLine":  33,
+"endColumn":  29
+}
+}
+}
+]
+}

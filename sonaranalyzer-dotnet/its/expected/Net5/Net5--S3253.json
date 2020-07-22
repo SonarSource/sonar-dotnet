@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant destructor.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  9,
+"endLine":  79,
+"endColumn":  10
+}
+}
+}
+]
+}

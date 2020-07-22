@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  5,
+"endLine":  16,
+"endColumn":  8
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  9,
+"endLine":  30,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\ExtensionGetEnumerator.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\FunctionPointers.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\Main.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\Main.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\ModuleInitializers.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  9,
+"endLine":  15,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\ParameterValidation.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  9,
+"endLine":  8,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\RelaxRefPartialOrder.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  5,
+"endLine":  8,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\StaticLambdas.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  9,
+"endLine":  12,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedConditionals.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  39
+}
+}
+}
+]
+}

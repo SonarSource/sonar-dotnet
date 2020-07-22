@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to an interface.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  27,
+"endLine":  8,
+"endColumn":  33
+}
+}
+}
+]
+}

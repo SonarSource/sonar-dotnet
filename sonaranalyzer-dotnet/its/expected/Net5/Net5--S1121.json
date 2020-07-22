@@ -4,11 +4,11 @@
 "id":  "S1121",
 "message":  "Extract the assignment of 'LastName' from this expression.",
 "location":  {
-"uri":  "sources\Net5\MyClass.cs",
+"uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  20,
+"startLine":  24,
 "startColumn":  54,
-"endLine":  20,
+"endLine":  24,
 "endColumn":  55
 }
 }
