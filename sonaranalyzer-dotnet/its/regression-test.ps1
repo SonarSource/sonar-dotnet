@@ -577,6 +577,8 @@ finally {
     Remove-Item -Force (Join-Path $msBuildImportBeforeCurrent "\SonarAnalyzer.Testing.ImportBefore.targets") `
         -ErrorAction Ignore
 
+    Remove-Item -Force global.json -ErrorAction Ignore
+
     $scriptTimer.Stop()
     $totalTimeInSeconds = [int]$scriptTimer.Elapsed.TotalSeconds
     if ($ruleId) {
