@@ -91,9 +91,9 @@ namespace SonarAnalyzer.UnitTest.Common
             new RuleFinder().GetAnalyzerTypes(language)
                             .Where(type => type.Implements(typeof(DiagnosticAnalyzer)))
                             .Select(type => (SonarDiagnosticAnalyzer)Activator.CreateInstance(type))
-                            .Where(IsHotSpot);
+                            .Where(IsSecurityHotspot);
 
-        private static bool IsHotSpot(DiagnosticAnalyzer analyzer) =>
+        private static bool IsSecurityHotspot(DiagnosticAnalyzer analyzer) =>
             analyzer.SupportedDiagnostics
                     .Any(diagnostic => CsRuleTypeMapping.RuleTypesCs.GetValueOrDefault(diagnostic.Id.TrimStart('S')) == "SECURITY_HOTSPOT");
 
