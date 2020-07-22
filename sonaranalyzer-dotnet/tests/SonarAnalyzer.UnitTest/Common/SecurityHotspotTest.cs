@@ -37,10 +37,10 @@ using SonarAnalyzer.Utilities;
 namespace SonarAnalyzer.UnitTest.Common
 {
     [TestClass]
-    public class HotSpotTest
+    public class SecurityHotspotTest
     {
         [TestMethod]
-        public void HotSpotsRules_AreDisabledByDefault()
+        public void SecurityHotspotRules_AreDisabledByDefault()
         {
             VerifyNoIssueReported(AnalyzerLanguage.CSharp);
             VerifyNoIssueReported(AnalyzerLanguage.VisualBasic);
