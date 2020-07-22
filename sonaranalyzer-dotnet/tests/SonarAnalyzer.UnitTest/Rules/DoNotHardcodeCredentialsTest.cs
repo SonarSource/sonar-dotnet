@@ -40,58 +40,58 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_CS_DefaultValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
                 new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences());
+                additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_CS_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
                 new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
-                additionalReferences: GetAdditionalReferences());
+                additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
                 new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE, x\*+?|}{][)(^$.# " },
-                additionalReferences: GetAdditionalReferences());
+                additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_CS_DefaultConfiguration() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
                 new CSharp.DoNotHardcodeCredentials(),
-                GetAdditionalReferences());
+                AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_VB_DefaultValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
                 new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences());
+                additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_VB_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
                 new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
-                additionalReferences: GetAdditionalReferences());
+                additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
                 new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE,x\*+?|}{][)(^$.# " },
-                additionalReferences: GetAdditionalReferences());
+                additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_VB_DefaultConfiguration() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
                 new VisualBasic.DoNotHardcodeCredentials(),
-                GetAdditionalReferences());
+                AdditionalReferences);
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+        internal static IEnumerable<MetadataReference> AdditionalReferences =>
             MetadataReferenceFacade.GetSystemSecurityCryptography()
                 .Union(MetadataReferenceFacade.GetSystemNetHttp());
     }

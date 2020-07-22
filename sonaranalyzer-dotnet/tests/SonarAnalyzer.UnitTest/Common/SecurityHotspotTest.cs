@@ -109,6 +109,9 @@ namespace SonarAnalyzer.UnitTest.Common
 #endif
                                   .Concat(DeliveringDebugFeaturesInProductionTest.AdditionalReferences)
                                   .Concat(ExpandingArchivesTest.AdditionalReferences)
+                                  .Concat(DoNotHardcodeCredentialsTest.AdditionalReferences)
+                                  .Concat(MetadataReferenceFacade.GetRegularExpressions()) // Needed by UsingRegularExpressions
+                                  .Concat(MetadataReferenceFacade.GetSystemSecurityCryptography()) // Needed by DoNotUseRandom
                                   .Concat(NuGetMetadataReference.Nancy());// Needed by CookieShouldBeHttpOnly, CookiesShouldBeSecure
     }
 }
