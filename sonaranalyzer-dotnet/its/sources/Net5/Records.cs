@@ -49,5 +49,34 @@ namespace Net5
 
         public void Deconstruct(out string firstName, out string lastName)
           => (firstName, lastName) = (FirstName, LastName);
+
+        public bool Method() => true;
+
+        public virtual bool VirtualMethod() => true;
     }
+
+    public record InheritFromPositionalConstructorRecod : PositionalConstructorRecord
+    {
+        public InheritFromPositionalConstructorRecod(string firstName, string lastName) : base(firstName, lastName)
+        {
+        }
+
+        public override bool VirtualMethod() => false;
+    }
+
+    public sealed record SealedRecord { public string Name; }
+
+    public record FieldAndProperty
+    {
+        private int field = 42;
+        public int Property => field;
+    }
+
+    public record Finalizer
+    {
+        ~Finalizer()
+        {
+        }
+    }
+
 }
