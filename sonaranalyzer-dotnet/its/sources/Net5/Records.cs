@@ -31,7 +31,7 @@ namespace Net5
             Console.WriteLine($"{otherPerson.FirstName} + {otherPerson.LastName}");
         }
     }
-    
+
 
     public record PropertyOnlyRecord { public string FirstName; public string LastName; }
 
@@ -79,4 +79,47 @@ namespace Net5
         }
     }
 
+    public record OperatorOverload
+    {
+        public static OperatorOverload operator +(OperatorOverload a) => a;
+    }
+
+    public record HashCodeRecord
+    {
+        private readonly int x;
+        private int y;
+        public HashCodeRecord(int x)
+        {
+            this.x = x;
+        }
+        public override int GetHashCode()
+        {
+            return x.GetHashCode() ^ y.GetHashCode() ^ base.GetHashCode();
+        }
+    }
+
+    public record W<T>
+    {
+    }
+
+    public record X<T> where T: class
+    {
+        public readonly T Property;
+    }
+
+    public record Y<T> where T : struct
+    {
+        public readonly T Property;
+        private void Method<T>(T value)
+        {
+            if (value == null)
+            {
+                // ...
+            }
+        }
+    }
+
+    public record Z<T> : X<Z<Z<T>>>
+    {
+    }
 }
