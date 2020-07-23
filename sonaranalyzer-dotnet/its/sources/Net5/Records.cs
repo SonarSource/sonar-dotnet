@@ -1,11 +1,5 @@
 ﻿using System;
 
-// needed for Records due to a bug - see https://github.com/dotnet/roslyn/issues/45510 , it should get fixed in Preview 7
-namespace System.Runtime.CompilerServices
-{
-    public class IsExternalInit { }
-}
-
 namespace Net5
 {
     public class Records
