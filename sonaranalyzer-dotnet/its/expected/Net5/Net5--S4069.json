@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4069",
+"message":  "Implement alternative method 'Plus' for the operator '+'.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  49,
+"endLine":  84,
+"endColumn":  50
+}
+}
+}
+]
+}

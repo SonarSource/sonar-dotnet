@@ -1,0 +1,264 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  20,
+"endLine":  43,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3.50' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  21,
+"endLine":  44,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  20,
+"endLine":  45,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  30,
+"endLine":  46,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  15,
+"endLine":  53,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  23,
+"endLine":  53,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  32,
+"endLine":  53,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  15,
+"endLine":  54,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  23,
+"endLine":  54,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  32,
+"endLine":  54,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  18,
+"endLine":  55,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  16,
+"endLine":  60,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  28,
+"endLine":  60,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  36,
+"endLine":  60,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  22,
+"endLine":  61,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  31,
+"endLine":  61,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  40,
+"endLine":  61,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  20,
+"endLine":  62,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  28,
+"endLine":  62,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  37,
+"endLine":  62,
+"endColumn":  42
+}
+}
+}
+]
+}

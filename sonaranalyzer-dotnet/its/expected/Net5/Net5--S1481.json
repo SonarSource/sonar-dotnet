@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'y'.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  23,
+"endLine":  40,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'ptr1'.",
+"location":  {
+"uri":  "sources\Net5\FunctionPointers.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  29,
+"endLine":  9,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'explicitTypes'.",
+"location":  {
+"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  36,
+"endLine":  18,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'isNull'.",
+"location":  {
+"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  17,
+"endLine":  67,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'i'.",
+"location":  {
+"uri":  "sources\Net5\SkipLocalsInit.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  17,
+"endLine":  10,
+"endColumn":  18
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3880",
+"message":  "Remove this empty finalizer.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  9,
+"endLine":  79,
+"endColumn":  10
+}
+}
+}
+]
+}

@@ -5,20 +5,20 @@
 "message":  "Correct one of the identical expressions on both sides of operator '=='.",
 "location":  [
 {
-"uri":  "sources\Net5\MyClass.cs",
+"uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  24,
+"startLine":  22,
 "startColumn":  43,
-"endLine":  24,
+"endLine":  22,
 "endColumn":  47
 }
 },
 {
-"uri":  "sources\Net5\MyClass.cs",
+"uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  24,
+"startLine":  22,
 "startColumn":  35,
-"endLine":  24,
+"endLine":  22,
 "endColumn":  39
 }
 }

@@ -2,14 +2,53 @@
 "issues":  [
 {
 "id":  "S2357",
+"message":  "Make 'HasTaste' private.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  37,
+"endLine":  5,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'IsRed' private.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  44,
+"endLine":  6,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Nested' private.",
+"location":  {
+"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  43,
+"endLine":  25,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2357",
 "message":  "Make 'FirstName' private.",
 "location":  {
-"uri":  "sources\Net5\MyClass.cs",
+"uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  14,
-"startColumn":  52,
-"endLine":  14,
-"endColumn":  61
+"startLine":  29,
+"startColumn":  54,
+"endLine":  29,
+"endColumn":  63
 }
 }
 },
@@ -17,12 +56,103 @@
 "id":  "S2357",
 "message":  "Make 'LastName' private.",
 "location":  {
-"uri":  "sources\Net5\MyClass.cs",
+"uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  14,
-"startColumn":  77,
-"endLine":  14,
-"endColumn":  85
+"startLine":  29,
+"startColumn":  79,
+"endLine":  29,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ID' private.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  71,
+"endLine":  31,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Name' private.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  55,
+"endLine":  67,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Property' private.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  27,
+"endLine":  115,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Property' private.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  27,
+"endLine":  120,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Name' private.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedConditionals.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  45,
+"endLine":  5,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Grade' private.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedConditionals.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  52,
+"endLine":  6,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'HasMoney' private.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedConditionals.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  54,
+"endLine":  7,
+"endColumn":  62
 }
 }
 }

@@ -2,12 +2,17 @@
 using Net5;
 
 Console.WriteLine("Hello World!");
-MyClass.Foo();
 
-var x = new MyClass.PublicPerson { FirstName = "C#", LastName = "9" };
-Console.WriteLine(x.FirstName + x.LastName);
+new AttributesOnLocalFunctions().Method();
+new ExtensionGetEnumerator().Method();
+new FunctionPointers().Method();
+new InitOnlyProperties { FirstName = "not null" };
+new LambdaDiscardParameters().Method();
+new NativeInts().Method();
+new Records().TestRecords();
+new SkipLocalsInit().Method();
+new TargetTypedNew().Method();
 
-LocalRecord y = new("1", "2");
-Console.WriteLine(y.A + y.B);
+LocalMethodInMain();
 
-public record LocalRecord(string A, string B);
+void LocalMethodInMain() { }

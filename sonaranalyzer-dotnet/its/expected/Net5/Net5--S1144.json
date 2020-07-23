@@ -2,27 +2,53 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove the unused private set accessor in property 'FirstName'.",
+"message":  "Remove the unused private method 'M1'.",
 "location":  {
-"uri":  "sources\Net5\MyClass.cs",
+"uri":  "sources\Net5\ExtendingPartial.cs",
 "region":  {
-"startLine":  32,
-"startColumn":  44,
-"endLine":  32,
-"endColumn":  49
+"startLine":  6,
+"startColumn":  9,
+"endLine":  6,
+"endColumn":  27
 }
 }
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private method 'Deconstruct'.",
+"message":  "Remove the unused private method 'M2'.",
 "location":  {
-"uri":  "sources\Net5\MyClass.cs",
+"uri":  "sources\Net5\ExtendingPartial.cs",
 "region":  {
-"startLine":  36,
-"startColumn":  13,
-"endLine":  37,
-"endColumn":  64
+"startLine":  9,
+"startColumn":  9,
+"endLine":  9,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Method'.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  9,
+"endLine":  127,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'dict'.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedNew.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  9,
+"endLine":  9,
+"endColumn":  57
 }
 }
 }

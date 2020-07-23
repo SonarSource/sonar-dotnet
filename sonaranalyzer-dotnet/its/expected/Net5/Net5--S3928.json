@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "The parameter name 'FirstName' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\Net5\InitOnlyProperties.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  49,
+"endLine":  13,
+"endColumn":  93
+}
+}
+}
+]
+}

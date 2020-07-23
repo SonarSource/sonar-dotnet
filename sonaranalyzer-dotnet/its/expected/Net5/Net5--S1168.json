@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  65,
+"endLine":  22,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  62,
+"endLine":  24,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  59,
+"endLine":  33,
+"endColumn":  63
+}
+}
+}
+]
+}
