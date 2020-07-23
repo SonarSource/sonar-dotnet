@@ -48,13 +48,23 @@ namespace SonarAnalyzer.UnitTest.Common
 
         private static void VerifyNoIssueReported(AnalyzerLanguage language)
         {
-            foreach (var analyzer in GetHotspotAnalyzers(language).Where(IsValid))
+            foreach (var analyzer in GetHotspotAnalyzers(language).Where(IsTestValid))
             {
                 Verifier.VerifyNoIssueReported($"TestCases\\{GetTestCaseFileName(analyzer)}.{language.FileExtension}",
                                                analyzer,
                                                additionalReferences: GetAdditionalReferences());
             }
         }
+
+        private static IEnumerable<SonarDiagnosticAnalyzer> GetHotspotAnalyzers(AnalyzerLanguage language) =>
+            new RuleFinder().GetAnalyzerTypes(language)
+                .Where(type => type.Implements(typeof(DiagnosticAnalyzer)))
+                .Select(type => (SonarDiagnosticAnalyzer)Activator.CreateInstance(type))
+                .Where(IsSecurityHotspot);
+
+        private static bool IsSecurityHotspot(DiagnosticAnalyzer analyzer) =>
+            analyzer.SupportedDiagnostics
+                    .Any(diagnostic => CsRuleTypeMapping.RuleTypesCs.GetValueOrDefault(diagnostic.Id.TrimStart('S')) == "SECURITY_HOTSPOT");
 
         private static string GetTestCaseFileName(DiagnosticAnalyzer analyzer)
         {
@@ -77,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Common
             };
         }
 
-        private static bool IsValid(DiagnosticAnalyzer analyzer)
+        private static bool IsTestValid(DiagnosticAnalyzer analyzer)
         {
 #if NETFRAMEWORK
             return true;
@@ -86,16 +96,6 @@ namespace SonarAnalyzer.UnitTest.Common
             return analyzer.GetType().Name != "ControllingPermissions";
 #endif
         }
-
-        private static IEnumerable<SonarDiagnosticAnalyzer> GetHotspotAnalyzers(AnalyzerLanguage language) =>
-            new RuleFinder().GetAnalyzerTypes(language)
-                            .Where(type => type.Implements(typeof(DiagnosticAnalyzer)))
-                            .Select(type => (SonarDiagnosticAnalyzer)Activator.CreateInstance(type))
-                            .Where(IsSecurityHotspot);
-
-        private static bool IsSecurityHotspot(DiagnosticAnalyzer analyzer) =>
-            analyzer.SupportedDiagnostics
-                    .Any(diagnostic => CsRuleTypeMapping.RuleTypesCs.GetValueOrDefault(diagnostic.Id.TrimStart('S')) == "SECURITY_HOTSPOT");
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             ConfiguringLoggersTest.AspNetCoreLoggingReferences
