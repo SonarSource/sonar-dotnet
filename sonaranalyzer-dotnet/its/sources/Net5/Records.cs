@@ -92,6 +92,14 @@ namespace Net5
         }
     }
 
+    public record DisposableRecord : IDisposable
+    {
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public record W<T>
     {
     }

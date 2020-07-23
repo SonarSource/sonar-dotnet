@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Net5\InitOnlyProperties.cs",
 "region":  {
-"startLine":  15,
+"startLine":  13,
 "startColumn":  49,
-"endLine":  15,
+"endLine":  13,
 "endColumn":  93
 }
 }

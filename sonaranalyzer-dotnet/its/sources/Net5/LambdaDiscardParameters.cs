@@ -15,12 +15,14 @@ namespace Net5
 
             _ = Bar(_ => { return true; });
 
-            Func<int, string, int> func = (int _, string _) => 1;
+            Func<int, string, int> explicitTypes = (int _, string _) => 1;
 
             LocalFunction(1, 1);
 
             void LocalFunction(int _, int _2) { }
         }
+
+        public Func<int, Func<int, bool>> Nested = _ => _ => true;
 
         private bool Bar(Func<bool, bool> func)
         {

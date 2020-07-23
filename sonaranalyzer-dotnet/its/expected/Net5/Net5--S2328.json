@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2328",
+"message":  " Refactor 'GetHashCode' to not reference mutable fields.",
+"location":  [
+{
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  29,
+"endLine":  89,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  38,
+"endLine":  91,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

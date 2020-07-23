@@ -13,7 +13,9 @@ namespace Net5
         {
             list = new();
             StringBuilder sb = new();
-            Console.WriteLine(sb);
+            StringBuilder sb2 = new(null);
+            StringBuilder sb3 = new(length: 4, capacity: 3, startIndex: 1, value: "fooBar");
+            Console.WriteLine(sb.ToString() + sb2.ToString() + sb3.ToString());
         }
     }
 }

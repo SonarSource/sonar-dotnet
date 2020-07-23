@@ -15,13 +15,26 @@
 },
 {
 "id":  "S2325",
+"message":  "Make 'Consume' a static method.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  21,
+"endLine":  38,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
 "message":  "Make 'TryParse' a static method.",
 "location":  {
 "uri":  "sources\Net5\ExtendingPartial.cs",
 "region":  {
-"startLine":  32,
+"startLine":  25,
 "startColumn":  31,
-"endLine":  32,
+"endLine":  25,
 "endColumn":  39
 }
 }
@@ -58,9 +71,9 @@
 "location":  {
 "uri":  "sources\Net5\LambdaDiscardParameters.cs",
 "region":  {
-"startLine":  25,
+"startLine":  27,
 "startColumn":  22,
-"endLine":  25,
+"endLine":  27,
 "endColumn":  25
 }
 }
@@ -71,9 +84,9 @@
 "location":  {
 "uri":  "sources\Net5\LambdaDiscardParameters.cs",
 "region":  {
-"startLine":  35,
+"startLine":  37,
 "startColumn":  34,
-"endLine":  35,
+"endLine":  37,
 "endColumn":  38
 }
 }
@@ -149,10 +162,23 @@
 "location":  {
 "uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  53,
+"startLine":  47,
 "startColumn":  21,
-"endLine":  53,
+"endLine":  47,
 "endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  22,
+"endLine":  115,
+"endColumn":  28
 }
 }
 }

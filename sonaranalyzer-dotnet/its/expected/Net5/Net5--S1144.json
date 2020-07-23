@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\Net5\ExtendingPartial.cs",
 "region":  {
-"startLine":  12,
+"startLine":  6,
 "startColumn":  9,
-"endLine":  12,
+"endLine":  6,
 "endColumn":  27
 }
 }
@@ -19,10 +19,23 @@
 "location":  {
 "uri":  "sources\Net5\ExtendingPartial.cs",
 "region":  {
-"startLine":  15,
+"startLine":  9,
 "startColumn":  9,
-"endLine":  15,
+"endLine":  9,
 "endColumn":  35
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Method'.",
+"location":  {
+"uri":  "sources\Net5\Records.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  9,
+"endLine":  121,
+"endColumn":  10
 }
 }
 },

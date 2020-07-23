@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Net5
+﻿namespace Net5
 {
     public partial class C
     {
@@ -13,7 +7,6 @@ namespace Net5
 
         // Okay because M2 has a definition
         private partial void M2();
-
     }
 
     public partial class C

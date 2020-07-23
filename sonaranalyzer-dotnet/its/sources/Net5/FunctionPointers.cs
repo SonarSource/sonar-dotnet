@@ -9,7 +9,7 @@
             delegate*<void> ptr1 = &FunctionPointers.Log;
 
             // This should work but it does not
-            // void* v = &Util.Log;
+            // void* v = &FunctionPointers.Log;
         }
     }
 }

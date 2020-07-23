@@ -48,33 +48,7 @@
 "startLine":  12,
 "startColumn":  13,
 "endLine":  12,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S125",
-"message":  "Remove this commented out code.",
-"location":  {
-"uri":  "sources\Net5\Main.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  1,
-"endLine":  7,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S125",
-"message":  "Remove this commented out code.",
-"location":  {
-"uri":  "sources\Net5\Main.cs",
-"region":  {
-"startLine":  14,
-"startColumn":  1,
-"endLine":  14,
-"endColumn":  26
+"endColumn":  48
 }
 }
 },
@@ -84,9 +58,9 @@
 "location":  {
 "uri":  "sources\Net5\ModuleInitializers.cs",
 "region":  {
-"startLine":  15,
+"startLine":  9,
 "startColumn":  9,
-"endLine":  15,
+"endLine":  9,
 "endColumn":  12
 }
 }
@@ -123,9 +97,9 @@
 "location":  {
 "uri":  "sources\Net5\StaticLambdas.cs",
 "region":  {
-"startLine":  12,
+"startLine":  6,
 "startColumn":  9,
-"endLine":  12,
+"endLine":  6,
 "endColumn":  77
 }
 }

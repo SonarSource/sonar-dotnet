@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()', the compiler will do it for you.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedNew.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  33,
+"endLine":  18,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()', the compiler will do it for you.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedNew.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  50,
+"endLine":  18,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()', the compiler will do it for you.",
+"location":  {
+"uri":  "sources\Net5\TargetTypedNew.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  67,
+"endLine":  18,
+"endColumn":  78
+}
+}
+}
+]
+}

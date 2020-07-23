@@ -30,11 +30,24 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
+"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  43,
+"endLine":  25,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
 "uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  36,
+"startLine":  30,
 "startColumn":  54,
-"endLine":  36,
+"endLine":  30,
 "endColumn":  63
 }
 }
@@ -45,9 +58,9 @@
 "location":  {
 "uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  36,
+"startLine":  30,
 "startColumn":  79,
-"endLine":  36,
+"endLine":  30,
 "endColumn":  87
 }
 }
@@ -58,9 +71,9 @@
 "location":  {
 "uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  38,
+"startLine":  32,
 "startColumn":  71,
-"endLine":  38,
+"endLine":  32,
 "endColumn":  73
 }
 }
@@ -71,9 +84,9 @@
 "location":  {
 "uri":  "sources\Net5\Records.cs",
 "region":  {
-"startLine":  67,
+"startLine":  61,
 "startColumn":  55,
-"endLine":  67,
+"endLine":  61,
 "endColumn":  59
 }
 }

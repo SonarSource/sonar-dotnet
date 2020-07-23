@@ -32,4 +32,12 @@ namespace Net5
         // hides the member
         public new List<int> DoNotOverrideMe(string m) => null;
     }
+
+    public class Consumer
+    {
+        public void Consume()
+        {
+            List<int> y = new InheritCovariantReturn().DoNotOverrideMe(string.Empty);
+        }
+    }
 }

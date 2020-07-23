@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S1481",
+"message":  "Remove the unused local variable 'y'.",
+"location":  {
+"uri":  "sources\Net5\CovariantReturn.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  23,
+"endLine":  40,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
 "message":  "Remove the unused local variable 'ptr1'.",
 "location":  {
 "uri":  "sources\Net5\FunctionPointers.cs",
@@ -15,14 +28,14 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'func'.",
+"message":  "Remove the unused local variable 'explicitTypes'.",
 "location":  {
 "uri":  "sources\Net5\LambdaDiscardParameters.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  36,
 "endLine":  18,
-"endColumn":  40
+"endColumn":  49
 }
 }
 },
