@@ -19,7 +19,7 @@ namespace NetFramework48
     {
         public string Name { get; set; }
 
-        public CtorParameterConditionalConstruct(string name) // Noncompliant (S5766) {{Make sure not performing data validation after deserialization is safe here.}}
+        public CtorParameterConditionalConstruct(string name) // Issue is raised only when using SonarScanner for MSBuild
         {
             if (string.IsNullOrEmpty(name))
                 Name = name;
@@ -37,11 +37,11 @@ namespace NetFramework48
     }
 
     [Serializable]
-    public class CtorWithConditionsAndMissingDeserializationCtor : ISerializable
+    public class CtorWithConditionsAndMissingDeserializationCtor : ISerializable // Noncompliant (S3925)
     {
         private string name;
 
-        public CtorWithConditionsAndMissingDeserializationCtor(string name) // Noncompliant
+        public CtorWithConditionsAndMissingDeserializationCtor(string name) // Issue is raised only when using SonarScanner for MSBuild
         {
             this.name = name ?? string.Empty;
         }
@@ -54,7 +54,7 @@ namespace NetFramework48
     {
         internal string Name { get; private set; }
 
-        public DifferentConditionsInCtor(string name) // Noncompliant
+        public DifferentConditionsInCtor(string name) // Issue is raised only when using SonarScanner for MSBuild
         {
             Name = name ?? string.Empty;
         }

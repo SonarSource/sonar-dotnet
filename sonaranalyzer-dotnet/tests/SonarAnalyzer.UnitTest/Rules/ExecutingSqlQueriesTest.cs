@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 options: ParseOptionsHelper.FromVisualBasic15,
                 additionalReferences: GetReferencesNet46(Constants.NuGetLatestVersion));
 
-        private static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
+        internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
             Enumerable.Empty<MetadataReference>()
                 .Concat(FrameworkMetadataReference.SystemData)
                 .Concat(FrameworkMetadataReference.SystemDataOracleClient)
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new VisualBasic.ExecutingSqlQueries(),
                 additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
 
-        private static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
+        internal static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));

@@ -58,8 +58,13 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(VisitClassDeclaration, SyntaxKind.ClassDeclaration);
 
-        private static void VisitClassDeclaration(SyntaxNodeAnalysisContext context)
+        private void VisitClassDeclaration(SyntaxNodeAnalysisContext context)
         {
+            if (!IsEnabled(context.Options))
+            {
+                return;
+            }
+
             var classDeclaration = (ClassDeclarationSyntax)context.Node;
             if (!HasConstructorsWithParameters(classDeclaration))
             {
@@ -74,11 +79,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
+            ReportDiagnostics(classDeclaration, typeSymbol, context);
+        }
+
+        private static void ReportDiagnostics(TypeDeclarationSyntax declaration, ITypeSymbol typeSymbol, SyntaxNodeAnalysisContext context)
+        {
             var implementsISerializable = ImplementsISerializable(typeSymbol);
             var implementsIDeserializationCallback = ImplementsIDeserializationCallback(typeSymbol);
 
             var walker = new ConstructorDeclarationWalker(context.SemanticModel);
-            walker.SafeVisit(classDeclaration);
+            walker.SafeVisit(declaration);
 
             if (!implementsISerializable &&
                 !implementsIDeserializationCallback)
@@ -99,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (implementsIDeserializationCallback &&
-                !OnDeserializationHasConditions(classDeclaration, context.SemanticModel))
+                !OnDeserializationHasConditions(declaration, context.SemanticModel))
             {
                 foreach (var ctorInfo in walker.GetConstructorsInfo().Where(info => info.HasConditionalConstructs))
                 {

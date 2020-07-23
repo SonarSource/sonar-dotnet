@@ -113,7 +113,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(),
                 additionalReferences: AspNetCoreLoggingReferences);
 
-        private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
+        internal static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
             NetStandardMetadataReference.Netstandard
             .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))
             .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.DotNetCore220Version))

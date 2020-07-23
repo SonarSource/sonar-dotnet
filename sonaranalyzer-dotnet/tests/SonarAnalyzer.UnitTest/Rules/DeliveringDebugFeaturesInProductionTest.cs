@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: AdditionalReferences);
         }
 
-        private static IEnumerable<MetadataReference> AdditionalReferences =>
+        internal static IEnumerable<MetadataReference> AdditionalReferences =>
             Enumerable.Empty<MetadataReference>()
                 .Concat(NetStandardMetadataReference.Netstandard)
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))
