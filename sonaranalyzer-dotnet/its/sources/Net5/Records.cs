@@ -26,14 +26,18 @@ namespace Net5
         }
     }
 
-
     public record PropertyOnlyRecord { public string FirstName; public string LastName; }
 
     public record RecordInheritance : PropertyOnlyRecord { public int ID; }
 
     public record ConstructorOnlyRecord(string A, string B);
 
-    public record PositionalConstructorRecord
+    public abstract record AbstractRecord
+    {
+        public abstract void AbstractMethod();
+    }
+
+    public record PositionalConstructorRecord : AbstractRecord
     {
         public string FirstName { get; init; }
         public string LastName { get; init; }
@@ -47,6 +51,8 @@ namespace Net5
         public bool Method() => true;
 
         public virtual bool VirtualMethod() => true;
+
+        public override void AbstractMethod() { }
     }
 
     public record InheritFromPositionalConstructorRecod : PositionalConstructorRecord
