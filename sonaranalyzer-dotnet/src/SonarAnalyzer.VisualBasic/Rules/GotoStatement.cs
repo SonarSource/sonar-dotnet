@@ -19,29 +19,24 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class GotoStatement : GotoStatementBase<SyntaxKind>
     {
         public GotoStatement() : base(RspecStrings.ResourceManager) { }
 
-        protected override SyntaxKind[] GotoSyntaxKinds => new[]
-        {
-            SyntaxKind.GotoStatement,
-            SyntaxKind.GotoCaseStatement,
-            SyntaxKind.GotoDefaultStatement
-        };
-
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-           Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+           Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override string GoToLabel => "goto";
-    }        
+        protected override SyntaxKind[] GotoSyntaxKinds => new[] { SyntaxKind.GoToStatement };
+
+        protected override string GoToLabel => "GoTo";
+    }
 }

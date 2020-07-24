@@ -1,0 +1,446 @@
+{
+"issues":  [
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  132,
+"startColumn":  9,
+"endLine":  132,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  160,
+"startColumn":  47,
+"endLine":  160,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  165,
+"startColumn":  47,
+"endLine":  165,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  170,
+"startColumn":  47,
+"endLine":  170,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  175,
+"startColumn":  47,
+"endLine":  175,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  223,
+"startColumn":  12,
+"endLine":  223,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  271,
+"startColumn":  12,
+"endLine":  271,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  288,
+"startColumn":  45,
+"endLine":  288,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  294,
+"startColumn":  45,
+"endLine":  294,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  300,
+"startColumn":  45,
+"endLine":  300,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  306,
+"startColumn":  45,
+"endLine":  306,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  318,
+"startColumn":  10,
+"endLine":  318,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  322,
+"startColumn":  10,
+"endLine":  322,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  326,
+"startColumn":  10,
+"endLine":  326,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  330,
+"startColumn":  10,
+"endLine":  330,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  334,
+"startColumn":  10,
+"endLine":  334,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  345,
+"startColumn":  10,
+"endLine":  345,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  349,
+"startColumn":  10,
+"endLine":  349,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  353,
+"startColumn":  10,
+"endLine":  353,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  357,
+"startColumn":  10,
+"endLine":  357,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  361,
+"startColumn":  10,
+"endLine":  361,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  493,
+"startColumn":  10,
+"endLine":  493,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  589,
+"startColumn":  12,
+"endLine":  589,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  598,
+"startColumn":  12,
+"endLine":  598,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  607,
+"startColumn":  12,
+"endLine":  607,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  621,
+"startColumn":  10,
+"endLine":  621,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  627,
+"startColumn":  10,
+"endLine":  627,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  633,
+"startColumn":  10,
+"endLine":  633,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  448,
+"startColumn":  41,
+"endLine":  448,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  452,
+"startColumn":  37,
+"endLine":  452,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  862,
+"startColumn":  32,
+"endLine":  862,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  876,
+"startColumn":  32,
+"endLine":  876,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  890,
+"startColumn":  32,
+"endLine":  890,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'GoTo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  909,
+"startColumn":  32,
+"endLine":  909,
+"endColumn":  36
+}
+}
+}
+]
+}
