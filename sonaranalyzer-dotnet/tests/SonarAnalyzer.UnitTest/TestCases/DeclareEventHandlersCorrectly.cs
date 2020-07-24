@@ -46,4 +46,18 @@ namespace Tests.Diagnostics
 
         public event EventHandler<TParamWithoutConstraint> IncorrectEvent; // Noncompliant
     }
+
+    public class ProviderChangedEventArgs : EventArgs {}
+
+    public delegate void ProviderChangedEventHandler(object sender, ProviderChangedEventArgs args);
+
+    public interface ILocalizationProvider
+    {
+        event ProviderChangedEventHandler ProviderChanged; // Noncompliant
+    }
+
+    public class Repro3453 : ILocalizationProvider
+    {
+        public event ProviderChangedEventHandler ProviderChanged; // Noncompliant (See https://github.com/SonarSource/sonar-dotnet/issues/3453)
+    }
 }
