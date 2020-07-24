@@ -216,8 +216,14 @@ stages:
           Write-Host "Add .Net 5 target for UnitTest project"
           ((Get-Content -Path $testProjFileName -raw) -Replace "net48;netcoreapp3.1","net48;netcoreapp3.1;net5") | Set-Content -Path $testProjFileName
 
+          Write-Host "Show test project after we modified the target frameworks to also include net5"
+          Get-Content -Path $testProjFileName
+
           Write-Host "Build UnitTest project"
           dotnet build $testProjFileName -c $(BuildConfiguration)
+
+          Write-Host "List Sonar*.dll files"
+          Get-ChildItem -Recurse .\tests\SonarAnalyzer.UnitTest\bin\${BuildConfiguration}\ -Filter Sonar*.dll
 
           Write-Host "Run tests for .Net 4.8 binary and compute coverage"
           $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --nologo" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.xml -oldStyle -register:Path32
