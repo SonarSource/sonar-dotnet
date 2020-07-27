@@ -160,5 +160,15 @@ namespace Tests.Diagnostics
         {
             return nameof(Task<object>.Result); // Compliant, nameof() does not execute async code.
         }
+
+        // See https://github.com/SonarSource/sonar-dotnet/issues/3452
+        public async Task Repro3452()
+        {
+            var task = Task.FromResult(1);
+
+            await Task.WhenAll(task).ConfigureAwait(false);
+
+            var result1 = task.Result; // Noncompliant, FP: at this point the task is completed and Result can be read
+        }
     }
 }

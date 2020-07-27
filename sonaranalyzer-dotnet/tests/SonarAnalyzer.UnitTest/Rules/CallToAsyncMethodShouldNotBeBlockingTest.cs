@@ -30,10 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CallToAsyncMethodShouldNotBeBlocking()
-        {
+        public void CallToAsyncMethodShouldNotBeBlocking() =>
             Verifier.VerifyAnalyzer(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.cs",
-                new CallToAsyncMethodShouldNotBeBlocking());
-        }
+                                    new CallToAsyncMethodShouldNotBeBlocking());
     }
 }
