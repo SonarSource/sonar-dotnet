@@ -39,6 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
+        [TestCategory("Rule")]
+        public void UnnecessaryUsings_TupleDeconstruct() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.cs",
+                                    new CS.UnnecessaryUsings());
+
+        [TestMethod]
         [TestCategory("CodeFix")]
         public void UnnecessaryUsings_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\UnnecessaryUsings.cs",
