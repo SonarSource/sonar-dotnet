@@ -545,3 +545,38 @@ namespace CSharp8
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/3400
+namespace Repro_3400
+{
+    using System.Text;
+
+    public class Repro_3400
+    {
+        public void ReassignedFromMethod(StringBuilder parameter)
+        {
+            parameter = Create();
+            parameter.Capacity = 1; // Noncompliant FP
+        }
+
+        public void ReassignedFromConstructor(StringBuilder parameter)
+        {
+            parameter = new StringBuilder();
+            parameter.Capacity = 1;
+        }
+
+        public void ReassignedFromMethodOut(out StringBuilder parameter)
+        {
+            parameter = Create();
+            parameter.Capacity = 1; // Noncompliant FP
+        }
+
+        public void ReassignedFromConstructorOut(out StringBuilder parameter)
+        {
+            parameter = new StringBuilder();
+            parameter.Capacity = 1;
+        }
+
+        private StringBuilder Create() => null;
+    }
+}
