@@ -22,10 +22,10 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.scanner.ScannerSide;
 
 /**
  * This class is a non-global sensor used to collect all Roslyn reports and all protobufs resulting from the analysis of each and every C#/VB.NET project.

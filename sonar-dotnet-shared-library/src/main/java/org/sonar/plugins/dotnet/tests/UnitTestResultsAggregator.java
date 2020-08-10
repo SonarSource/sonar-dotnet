@@ -21,8 +21,8 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import java.util.function.Predicate;
-import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 

@@ -20,8 +20,8 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import org.sonar.api.batch.InstantiationStrategy;
-import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
+import org.sonar.api.scanner.ScannerSide;
 
 /**
  * This configuration is at the level of the solution ("project" in scanner-cli terminology).
