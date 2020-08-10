@@ -16,7 +16,7 @@ namespace myLibrary
       Value1 = value1;
     }
 
-    [ConstructorArgument("value2")]
+    [ConstructorArgument("value2")]   // Noncompliant
     public object Value1 { get; set; }
   }
 }

@@ -14,6 +14,9 @@ Microsoft.</p>
   <li> A derived type has a <code>ISerializable.GetObjectData</code> method that does not call the <code>base</code> method. </li>
   <li> A derived type has serializable fields but the <code>ISerializable.GetObjectData</code> method is not overridden. </li>
 </ul>
+<p>Classes which inherit from <code>Exception</code> are implementing <code>ISerializable</code>. Make sure <code>[Serializable]</code> attribute is
+used and that <code>ISerializable</code>&nbsp;is correctly implemented.&nbsp;Even it you don’t plan to explicitly serialize the object yourself, it
+might still require serialization, for instance when crossing the boundary of an <code>AppDomain</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class Foo : ISerializable // Noncompliant the [Serializable] attribute is missing
