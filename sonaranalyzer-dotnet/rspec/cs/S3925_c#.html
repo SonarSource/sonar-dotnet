@@ -3,17 +3,18 @@ in an invalid serialization and hard to detect bugs.</p>
 <p>This rules raises an issue on types that implement <code>ISerializable</code> without following the serialization pattern recommended by
 Microsoft.</p>
 <p>Specifically this rule checks for these problems:</p>
-<ul>
-  <li> The <code>System.SerializableAttribute</code> attribute is missing. </li>
-  <li> Non-serializable fields are not marked with the <code>System.NonSerializedAttribute</code> attribute. </li>
-  <li> There is no serialization constructor. </li>
-  <li> An unsealed type has a serialization constructor that is not <code>protected</code>. </li>
-  <li> A sealed type has a serialization constructor that is not <code>private</code>. </li>
-  <li> An unsealed type has a <code>ISerializable.GetObjectData</code> that is not both <code>public</code> and <code>virtual</code>. </li>
-  <li> A derived type has a serialization constructor that does not call the <code>base</code> constructor. </li>
-  <li> A derived type has a <code>ISerializable.GetObjectData</code> method that does not call the <code>base</code> method. </li>
-  <li> A derived type has serializable fields but the <code>ISerializable.GetObjectData</code> method is not overridden. </li>
-</ul>
+<p> * The <code>System.SerializableAttribute</code> attribute is missing.</p>
+<p> * Non-serializable fields are not marked with the <code>System.NonSerializedAttribute</code> attribute.</p>
+<p> * There is no serialization constructor.</p>
+<p> * An unsealed type has a serialization constructor that is not <code>protected</code>.</p>
+<p> * A sealed type has a serialization constructor that is not <code>private</code>.</p>
+<p> * An unsealed type has a <code>ISerializable.GetObjectData</code> that is not both <code>public</code> and <code>virtual</code>.</p>
+<p> * A derived type has a serialization constructor that does not call the <code>base</code> constructor.</p>
+<p> * A derived type has a <code>ISerializable.GetObjectData</code> method that does not call the <code>base</code> method.</p>
+<p> * A derived type has serializable fields but the <code>ISerializable.GetObjectData</code> method is not overridden.</p>
+<p>Classes which inherit from <code>Exception</code> are implementing <code>ISerializable</code>. Make sure <code>[Serializable]</code> attribute is
+used and that <code>ISerializable</code>&nbsp;is correctly implemented.&nbsp;Even it you don’t plan to explicitly serialize the object yourself, it
+might still require serialization, for instance when crossing the boundary of an <code>AppDomain</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class Foo : ISerializable // Noncompliant the [Serializable] attribute is missing
@@ -84,7 +85,5 @@ public sealed class SubFoo : Foo
 }
 </pre>
 <h2>Exceptions</h2>
-<ul>
-  <li> Classes in test projects are not checked. </li>
-</ul>
+<p> * Classes in test projects are not checked.</p>
 

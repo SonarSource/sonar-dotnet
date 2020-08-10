@@ -8,7 +8,8 @@
   },
   "tags": [
     "tests",
-    "suspicious"
+    "bad-practice",
+    "confusing"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-1607",

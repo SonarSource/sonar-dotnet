@@ -2383,7 +2383,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["2383"],
             //["2384"],
             //["2385"],
-            ["2386"] = "VULNERABILITY",
+            ["2386"] = "CODE_SMELL",
             ["2387"] = "CODE_SMELL",
             //["2388"],
             //["2389"],
