@@ -46,10 +46,12 @@ import org.sonarqube.ws.Measures;
   CasingAppTest.class,
   CoverageTest.class,
   DoNotAnalyzeTestFilesTest.class,
+  EnsureAllTestsRunTest.class,
   MetricsIncludeHeaderCommentTest.class,
   MetricsTest.class,
   MultiTargetAppTest.class,
   NoSonarTest.class,
+  RuleParameterCustomizationTest.class,
   SharedFilesTest.class,
   UnitTestResultsTest.class
 })
