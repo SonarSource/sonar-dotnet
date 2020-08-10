@@ -337,3 +337,18 @@ namespace Tests.TestCases
         private static void Bar(string name, bool? value) { }
     }
 }
+
+public class Repro_3468
+{
+    public int NestedTernary(bool condition1, bool condition2, int a, int b, int c)
+    {
+        if (condition1) // Noncompliant FP, will lead to nested conditionals
+        {
+            return condition2 ? a : b;
+        }
+        else
+        {
+            return c;
+        }
+    }
+}

@@ -222,3 +222,11 @@ namespace Tests.TestCases
         private static void Bar(string name, bool? value) { }
     }
 }
+
+public class Repro_3468
+{
+    public int NestedTernary(bool condition1, bool condition2, int a, int b, int c)
+    {
+        return condition1 ? condition2 ? a : b : c;
+    }
+}
