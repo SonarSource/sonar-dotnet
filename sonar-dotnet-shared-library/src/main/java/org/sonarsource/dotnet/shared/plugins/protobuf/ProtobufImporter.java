@@ -21,7 +21,6 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import com.google.protobuf.Parser;
 import java.net.URI;
-import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
@@ -30,7 +29,6 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-
 import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 
 /**

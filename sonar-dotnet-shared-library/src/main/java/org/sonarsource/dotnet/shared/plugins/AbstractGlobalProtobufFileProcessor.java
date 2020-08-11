@@ -19,6 +19,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -55,8 +56,8 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
 
   private final String languageKey;
 
-  private final Map<Path, Charset> roslynEncodingPerPath = new HashMap<>();
-  private final Set<Path> generatedFilePaths = new HashSet<>();
+  private final Map<URI, Charset> roslynEncodingPerUri = new HashMap<>();
+  private final Set<URI> generatedFileUris = new HashSet<>();
 
   public AbstractGlobalProtobufFileProcessor(String languageKey) {
     this.languageKey = languageKey;
@@ -77,17 +78,17 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
       LOG.debug("Processing {}", metadataReportProtobuf);
       FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();
       fileMetadataImporter.accept(metadataReportProtobuf);
-      this.generatedFilePaths.addAll(fileMetadataImporter.getGeneratedFilePaths());
-      this.roslynEncodingPerPath.putAll(fileMetadataImporter.getEncodingPerPath());
+      this.generatedFileUris.addAll(fileMetadataImporter.getGeneratedFileUris());
+      this.roslynEncodingPerUri.putAll(fileMetadataImporter.getEncodingPerUri());
     }
   }
 
-  public Map<Path, Charset> getRoslynEncodingPerPath() {
-    return Collections.unmodifiableMap(roslynEncodingPerPath);
+  public Map<URI, Charset> getRoslynEncodingPerUri() {
+    return Collections.unmodifiableMap(roslynEncodingPerUri);
   }
 
-  public Set<Path> getGeneratedFilePaths() {
-    return Collections.unmodifiableSet(generatedFilePaths);
+  public Set<URI> getGeneratedFileUris() {
+    return Collections.unmodifiableSet(generatedFileUris);
   }
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {

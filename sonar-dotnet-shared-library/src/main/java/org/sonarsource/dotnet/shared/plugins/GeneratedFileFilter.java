@@ -52,7 +52,7 @@ public class GeneratedFileFilter implements InputFileFilter {
     if (analyzeGeneratedCode) {
       return true;
     }
-    boolean isGenerated = globalReportProcessor.getGeneratedFilePaths().contains(inputFile.path());
+    boolean isGenerated = globalReportProcessor.getGeneratedFileUris().contains(inputFile.uri());
     if (isGenerated) {
       LOG.debug("Skipping auto generated file: {}", inputFile);
     }

@@ -22,6 +22,7 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -79,8 +80,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
   @Test
   public void do_nothing_if_no_properties() {
     underTest.build(context);
-    assertThat(underTest.getGeneratedFilePaths()).isEmpty();
-    assertThat(underTest.getRoslynEncodingPerPath()).isEmpty();
+    assertThat(underTest.getGeneratedFileUris()).isEmpty();
+    assertThat(underTest.getRoslynEncodingPerUri()).isEmpty();
   }
 
   @Test
@@ -89,10 +90,10 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPath", mockMetadataProtoReport("generated2").toString());
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFilePaths()).containsExactlyInAnyOrder(Paths.get("generated1"), Paths.get("generated2"));
-    Map.Entry<Path, Charset> expected1 = new HashMap.SimpleEntry<>(Paths.get("generated1"), null);
-    Map.Entry<Path, Charset> expected2 = new HashMap.SimpleEntry<>(Paths.get("generated2"), null);
-    assertThat(underTest.getRoslynEncodingPerPath()).containsExactly(expected1, expected2);
+    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUri("generated1"), toUri("generated2"));
+    Map.Entry<URI, Charset> expected1 = new HashMap.SimpleEntry<>(toUri("generated1"), null);
+    Map.Entry<URI, Charset> expected2 = new HashMap.SimpleEntry<>(toUri("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerUri()).containsExactly(expected2, expected1);
   }
 
   @Test
@@ -101,9 +102,9 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockMetadataProtoReport("generated2").toString());
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFilePaths()).containsExactlyInAnyOrder(Paths.get("generated11"), Paths.get("generated12"), Paths.get("generated2"));
-    Map.Entry<Path, Charset> expected = new HashMap.SimpleEntry<>(Paths.get("generated2"), null);
-    assertThat(underTest.getRoslynEncodingPerPath()).contains(expected);
+    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUri("generated11"), toUri("generated12"), toUri("generated2"));
+    Map.Entry<URI, Charset> expected = new HashMap.SimpleEntry<>(Paths.get("generated2").toUri(), null);
+    assertThat(underTest.getRoslynEncodingPerUri()).contains(expected);
   }
 
   @Test
@@ -113,9 +114,9 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockMetadataProtoReport("generated2").toString());
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFilePaths()).containsExactlyInAnyOrder(Paths.get("generated11"), Paths.get("generated12"), Paths.get("generated2"));
-    Map.Entry<Path, Charset> expected = new HashMap.SimpleEntry<>(Paths.get("generated2"), null);
-    assertThat(underTest.getRoslynEncodingPerPath()).contains(expected);
+    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUri("generated11"), toUri("generated12"), toUri("generated2"));
+    Map.Entry<URI, Charset> expected = new HashMap.SimpleEntry<>(toUri("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerUri()).contains(expected);
   }
 
   @Test
@@ -123,8 +124,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncodingProtoReport("UTF-8", "encodingutf8").toString());
 
     underTest.build(context);
-    assertThat(underTest.getRoslynEncodingPerPath()).containsOnly(entry(Paths.get("encodingutf8"), StandardCharsets.UTF_8));
-    assertThat(underTest.getGeneratedFilePaths()).isEmpty();
+    assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(entry(toUri("encodingutf8"), StandardCharsets.UTF_8));
+    assertThat(underTest.getGeneratedFileUris()).isEmpty();
   }
 
   @Test
@@ -132,8 +133,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncodingProtoReport(null, "encodingnull").toString());
 
     underTest.build(context);
-    assertThat(underTest.getRoslynEncodingPerPath()).containsOnly(entry(Paths.get("encodingnull"), null));
-    assertThat(underTest.getGeneratedFilePaths()).isEmpty();
+    assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(entry(toUri("encodingnull"), null));
+    assertThat(underTest.getGeneratedFileUris()).isEmpty();
   }
 
   @Test
@@ -142,9 +143,9 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPath", mockMetadataProtoReport("generated2").toString());
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFilePaths()).containsExactlyInAnyOrder(Paths.get("generated2"));
-    Map.Entry<Path, Charset> expected = new HashMap.SimpleEntry<>(Paths.get("generated2"), null);
-    assertThat(underTest.getRoslynEncodingPerPath()).containsExactly(expected);
+    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUri("generated2"));
+    Map.Entry<URI, Charset> expected = new HashMap.SimpleEntry<>(toUri("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerUri()).containsExactly(expected);
   }
 
   private File mockMetadataProtoReport(String... paths) throws IOException {
@@ -154,7 +155,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
     try (OutputStream fos = Files.newOutputStream(analyzerPath.resolve("file-metadata.pb"), StandardOpenOption.CREATE)) {
       Stream.of(paths).forEach(p -> {
         try {
-          FileMetadataInfo.newBuilder().setFilePath(p.toString()).setIsGenerated(true).build().writeDelimitedTo(fos);
+          FileMetadataInfo.newBuilder().setFilePath(p).setIsGenerated(true).build().writeDelimitedTo(fos);
         } catch (IOException e) {
           fail(e.getMessage(), e);
         }
@@ -183,4 +184,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
     return reportPath;
   }
 
+  private URI toUri(String path) {
+    return Paths.get(path).toUri();
+  }
 }

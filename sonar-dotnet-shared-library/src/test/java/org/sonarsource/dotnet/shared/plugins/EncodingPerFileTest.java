@@ -20,10 +20,9 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
@@ -40,11 +39,11 @@ public class EncodingPerFileTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
-  private Path filePath;
+  private URI fileUri;
 
   @Before
   public void prepareTestFile() throws IOException {
-    filePath = temp.newFile().toPath();
+    fileUri = temp.newFile().toURI();
   }
 
   @Test
@@ -52,16 +51,16 @@ public class EncodingPerFileTest {
     Charset roslynCharset = StandardCharsets.UTF_8;
     Charset sqCharset = StandardCharsets.UTF_16;
 
-    HashMap<Path, Charset> encodingByPath = new HashMap<>();
-    encodingByPath.put(filePath, roslynCharset);
-    assertEncodingMatch(encodingByPath, Paths.get("dummy"), sqCharset, true);
+    HashMap<URI, Charset> encodingPerUri = new HashMap<>();
+    encodingPerUri.put(fileUri, roslynCharset);
+    assertEncodingMatch(encodingPerUri, URI.create("dummy"), sqCharset, true);
   }
 
   @Test
   public void should_treat_as_mismatch_when_roslyn_encoding_missing() throws IOException {
-    HashMap<Path, Charset> encodingByPath = new HashMap<>();
-    encodingByPath.put(filePath, null);
-    assertEncodingMatch(encodingByPath, filePath, null, false);
+    HashMap<URI, Charset> encodingPerUri = new HashMap<>();
+    encodingPerUri.put(fileUri, null);
+    assertEncodingMatch(encodingPerUri, fileUri, null, false);
   }
 
   @Test
@@ -69,9 +68,9 @@ public class EncodingPerFileTest {
     Charset roslynCharset = StandardCharsets.UTF_8;
     Charset sqCharset = StandardCharsets.UTF_16;
 
-    HashMap<Path, Charset> encodingByPath = new HashMap<>();
-    encodingByPath.put(filePath, roslynCharset);
-    assertEncodingMatch(encodingByPath, filePath, sqCharset, false);
+    HashMap<URI, Charset> encodingPerUri = new HashMap<>();
+    encodingPerUri.put(fileUri, roslynCharset);
+    assertEncodingMatch(encodingPerUri, fileUri, sqCharset, false);
   }
 
   @Test
@@ -79,22 +78,22 @@ public class EncodingPerFileTest {
     Charset roslynCharset = StandardCharsets.UTF_16;
     Charset sqCharset = StandardCharsets.UTF_16LE;
 
-    HashMap<Path, Charset> encodingByPath = new HashMap<>();
-    encodingByPath.put(filePath, roslynCharset);
-    assertEncodingMatch(encodingByPath, filePath, sqCharset, true);
+    HashMap<URI, Charset> encodingPerUri = new HashMap<>();
+    encodingPerUri.put(fileUri, roslynCharset);
+    assertEncodingMatch(encodingPerUri, fileUri, sqCharset, true);
   }
 
-  private void assertEncodingMatch(Map<Path, Charset> encodingByPath, Path filePath, Charset sqCharset, boolean result) throws IOException {
+  private void assertEncodingMatch(Map<URI, Charset> encodingPerUri, URI fileUri, Charset sqCharset, boolean result) throws IOException {
     AbstractGlobalProtobufFileProcessor processor = mock(AbstractGlobalProtobufFileProcessor.class);
-    when(processor.getRoslynEncodingPerPath()).thenReturn(encodingByPath);
+    when(processor.getRoslynEncodingPerUri()).thenReturn(encodingPerUri);
     EncodingPerFile encodingPerFile = new EncodingPerFile(processor);
-    InputFile inputFile = newInputFile(filePath, sqCharset);
+    InputFile inputFile = newInputFile(fileUri, sqCharset);
     assertThat(encodingPerFile.encodingMatch(inputFile)).isEqualTo(result);
   }
 
-  private InputFile newInputFile(Path path, Charset charset) {
+  private InputFile newInputFile(URI uri, Charset charset) {
     InputFile inputFile = mock(InputFile.class);
-    when(inputFile.path()).thenReturn(path);
+    when(inputFile.uri()).thenReturn(uri);
     when(inputFile.charset()).thenReturn(charset);
     return inputFile;
   }

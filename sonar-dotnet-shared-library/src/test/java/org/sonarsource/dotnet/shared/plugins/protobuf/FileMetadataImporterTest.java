@@ -24,9 +24,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Set;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,10 +39,6 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -61,13 +60,13 @@ public class FileMetadataImporterTest {
   private File invalidProtobuf = new File(TEST_DATA_DIR, "invalid-encoding.pb");
 
   @Test
-  public void getGeneratedFilePaths_returns_only_generated_paths() {
+  public void getGeneratedFilePaths_returns_only_generated_uris() {
     SonarAnalyzer.FileMetadataInfo.Builder builder = SonarAnalyzer.FileMetadataInfo.newBuilder();
 
-    SonarAnalyzer.FileMetadataInfo message1 = builder.setIsGenerated(true).setFilePath("c:/file1").build();
-    SonarAnalyzer.FileMetadataInfo message2 = builder.setIsGenerated(true).setFilePath("c:/file2").build();
-    SonarAnalyzer.FileMetadataInfo message3 = builder.setIsGenerated(false).setFilePath("c:/file3").build();
-    SonarAnalyzer.FileMetadataInfo messageSamePath = builder.setIsGenerated(false).setFilePath("c:/file3").build();
+    SonarAnalyzer.FileMetadataInfo message1 = builder.setIsGenerated(true).setFilePath("c:\\file1").build();
+    SonarAnalyzer.FileMetadataInfo message2 = builder.setIsGenerated(true).setFilePath("/usr/local/src/project/file2").build();
+    SonarAnalyzer.FileMetadataInfo message3 = builder.setIsGenerated(false).setFilePath("c:\\file3").build();
+    SonarAnalyzer.FileMetadataInfo messageSamePath = builder.setIsGenerated(false).setFilePath("c:\\file3").build();
 
     fileMetadataImporter.consume(message1);
     fileMetadataImporter.consume(message2);
@@ -75,24 +74,24 @@ public class FileMetadataImporterTest {
     fileMetadataImporter.consume(messageSamePath);
 
     // Act
-    Set<Path> paths = fileMetadataImporter.getGeneratedFilePaths();
+    Set<URI> uris = fileMetadataImporter.getGeneratedFileUris();
 
     // Assert
-    assertThat(paths.size()).isEqualTo(2);
-    assertThat(paths.contains(Paths.get("c:/file1"))).isTrue();
-    assertThat(paths.contains(Paths.get("c:/file2"))).isTrue();
-    assertThat(paths.contains(Paths.get("c:/file3"))).isFalse();
+    assertThat(uris.size()).isEqualTo(2);
+    assertThat(uris.contains(Paths.get("c:\\file1").toUri())).isTrue();
+    assertThat(uris.contains(Paths.get("/usr/local/src/project/file2").toUri())).isTrue();
+    assertThat(uris.contains(Paths.get("c:\\file3").toUri())).isFalse();
   }
 
   @Test
-  public void getGeneratedFilePaths_returns_empty_set_when_protobuf_is_empty() {
+  public void getGeneratedFileUris_returns_empty_set_when_protobuf_is_empty() {
     // No consume calls means that the protobuf contained no messages
 
     // Act
-    Set<Path> paths = fileMetadataImporter.getGeneratedFilePaths();
+    Set<URI> uris = fileMetadataImporter.getGeneratedFileUris();
 
     // Assert
-    assertThat(paths.isEmpty()).isTrue();
+    assertThat(uris.isEmpty()).isTrue();
   }
 
   @Ignore("this can be used to regenerate the files in case of a change in the protobuf definition")
@@ -116,9 +115,9 @@ public class FileMetadataImporterTest {
     FileMetadataImporter metadataImporter = new FileMetadataImporter();
     metadataImporter.accept(protobuf.toPath());
 
-    Map<Path, Charset> encodingPerPath = metadataImporter.getEncodingPerPath();
-    assertThat(encodingPerPath.size()).isEqualTo(1);
-    assertThat(encodingPerPath.get(Paths.get(TEST_FILE_PATH))).isEqualTo(StandardCharsets.UTF_8);
+    Map<URI, Charset> encodingPerUri = metadataImporter.getEncodingPerUri();
+    assertThat(encodingPerUri.size()).isEqualTo(1);
+    assertThat(encodingPerUri.get(Paths.get(TEST_FILE_PATH).toUri())).isEqualTo(StandardCharsets.UTF_8);
   }
 
   @Test
