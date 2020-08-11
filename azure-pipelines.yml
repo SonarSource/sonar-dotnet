@@ -30,7 +30,7 @@ stages:
     burgrType: 'build'
     stageName: 'build'
     # Build the dotnet analyzers and stage to repox
-    stageDisplayName: 'Build'
+    stageDisplayName: 'Build:'
     jobs:
     - job: dotnetBuildjob
       displayName: 'Build and package'
@@ -125,7 +125,7 @@ stages:
     burgrType: 'qa'
     stageName: 'qa'
     # .NET analyzers UTs, ITs, build Java and publish SC QG
-    stageDisplayName: 'Tests'
+    stageDisplayName: 'Tests:'
     stageDependencies: build
 
     jobs:

@@ -10,7 +10,7 @@ stages:
   displayName: Build
   jobs:
     - job: runUnitTestsJob
-      displayName: 'Build and test'
+      displayName: 'Build and tests:'
 
       steps:
       - task: NuGetToolInstaller@1
