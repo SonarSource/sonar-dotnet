@@ -156,7 +156,7 @@ public class CoverageReportImportSensorTest {
   @Test
   public void execute_coverage_no_main_file() throws IOException {
     Coverage coverage = mock(Coverage.class);
-    String fooPath = new File(baseDir, "Foo.cs").getCanonicalPath();
+    String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
     when(coverage.files()).thenReturn(new HashSet<>(Collections.singletonList(fooPath)));
 
     context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
@@ -166,9 +166,9 @@ public class CoverageReportImportSensorTest {
       .analyze(context, coverage);
 
     assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Coverage Report Statistics: " +
-        "1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.");
+      "1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.");
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("The Code Coverage report doesn't contain any coverage "
-        + "data for the included files. For troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
+      + "data for the included files. For troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains(
       "Analyzing coverage with wildcardPatternFileProvider with base dir '" + CoverageReportImportSensor.BASE_DIR.getAbsolutePath() + "' and file separator '\\'.",
       "Analyzing coverage after aggregate found '1' coverage files.",
@@ -177,10 +177,10 @@ public class CoverageReportImportSensorTest {
     assertThat(logTester.logs(LoggerLevel.TRACE)).contains("Counting statistics for '" + fooPath + "'.");
   }
 
-    @Test
+  @Test
   public void execute_coverage_main_file_no_coverage_for_file() throws IOException {
     Coverage coverage = mock(Coverage.class);
-    String fooPath = new File(baseDir, "Foo.cs").getCanonicalPath();
+    String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
     when(coverage.files()).thenReturn(new HashSet<>(Collections.singletonList(fooPath)));
 
     context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
@@ -190,9 +190,9 @@ public class CoverageReportImportSensorTest {
       .analyze(context, coverage);
 
     assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Coverage Report Statistics: " +
-        "1 files, 1 main files, 0 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+      "1 files, 1 main files, 0 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("The Code Coverage report doesn't contain any coverage "
-        + "data for the included files. For troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
+      + "data for the included files. For troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains(
       "Analyzing coverage with wildcardPatternFileProvider with base dir '" + CoverageReportImportSensor.BASE_DIR.getAbsolutePath() + "' and file separator '\\'.",
       "Analyzing coverage after aggregate found '1' coverage files.",
@@ -244,7 +244,6 @@ public class CoverageReportImportSensorTest {
       .add(new BranchCoverage(6, 3, 2))
       .build());
 
-
     DefaultInputFile inputFile = new TestInputFileBuilder("foo", baseDir, new File(baseDir, "Foo.cs"))
       .setLanguage("cs")
       .initMetadata("a\na\na\na\na\na\na\na\na\na\n")
@@ -266,7 +265,7 @@ public class CoverageReportImportSensorTest {
     // expect the project to be under the VSTS sources directory
     File baseDirectory = null;
 
-    if (VstsUtils.isRunningUnderVsts()){
+    if (VstsUtils.isRunningUnderVsts()) {
       String vstsSourcePath = VstsUtils.getSourcesDirectory();
       baseDirectory = new File(vstsSourcePath);
     }
