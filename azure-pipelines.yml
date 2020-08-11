@@ -29,7 +29,8 @@ stages:
     burgrName: 'build'
     burgrType: 'build'
     stageName: 'build'
-    stageDisplayName: 'Build the dotnet analyzers and stage to repox'
+    # Build the dotnet analyzers and stage to repox
+    stageDisplayName: 'Build'
     jobs:
     - job: dotnetBuildjob
       displayName: 'Build and package'
@@ -123,12 +124,13 @@ stages:
     burgrName: 'qa'
     burgrType: 'qa'
     stageName: 'qa'
-    stageDisplayName: 'Run dotnet analyzers ITs and publish SC QG'
+    # .NET analyzers UTs, ITs, build Java and publish SC QG
+    stageDisplayName: 'Tests'
     stageDependencies: build
 
     jobs:
     - job: runUnitTestsJob
-      displayName: 'Run dotnet unit tests'
+      displayName: '.NET UTs'
 
       steps:
       - task: NuGetToolInstaller@1
@@ -174,7 +176,7 @@ stages:
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
 
       - task: SonarCloudPrepare@1
-        displayName: 'Run Code Analysis - Begin Step (Pull Request)'
+        displayName: 'Code Analysis - Begin Step (Pull Request)'
         condition: eq(variables['Build.Reason'], 'PullRequest')
         inputs:
           SonarCloud: 'SonarCloud'
@@ -192,7 +194,7 @@ stages:
             sonar.analysis.repository=$(Build.Repository.ID)
 
       - task: SonarCloudPrepare@1
-        displayName: 'Run Code Analysis - Begin Step (master or branch)'
+        displayName: 'Code Analysis - Begin Step (master or branch)'
         condition: ne(variables['Build.Reason'], 'PullRequest')
         inputs:
           SonarCloud: 'SonarCloud'
@@ -225,28 +227,28 @@ stages:
           Write-Host "List Sonar*.dll files"
           Get-ChildItem -Recurse .\tests\SonarAnalyzer.UnitTest\bin\${BuildConfiguration}\ -Filter Sonar*.dll
 
-          Write-Host "Run tests for .Net 4.8 binary and compute coverage"
+          Write-Host "UTs .Net 4.8 and compute coverage"
           $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --nologo" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.xml -oldStyle -register:Path32
 
-          Write-Host "Run tests on .Net Core 3.1"
+          Write-Host "UTs .Net Core 3.1"
           dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f netcoreapp3.1
 
-          Write-Host "Run tests on .Net 5"
+          Write-Host "UTs .Net 5"
           dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f net5
 
           cd ..
-        displayName: 'Run .Net unit tests'
+        displayName: '.Net UTs'
 
       - task: SonarCloudAnalyze@1
-        displayName: 'Run Code Analysis - End Step'
+        displayName: 'Code Analysis - End Step'
 
       - task: SonarCloudPublish@1
-        displayName: 'Run Code Analysis - Publish QG'
+        displayName: 'Code Analysis - Publish QG'
         inputs:
           pollingTimeoutSec: '300'
 
     - job: runIntegrationTestsJob
-      displayName: 'Run SonarAnalyzer integration tests'
+      displayName: '.NET ITs'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -278,13 +280,13 @@ stages:
         displayName: 'List dotnet versions and current version'
 
       - task: PowerShell@2
-        displayName: 'Run SonarAnalyzer integration tests'
+        displayName: 'Run ITs'
         inputs:
           filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
           workingDirectory: 'sonaranalyzer-dotnet/its'
 
     - job: runJavaBuild
-      displayName: 'Run Java build'
+      displayName: 'Java build'
 
       steps:
 
@@ -320,7 +322,7 @@ stages:
           mavenSettingsFilePath: $(mavenSettings.secureFilePath)
 
       - task: Maven@3
-        displayName: 'Run Maven deploy'
+        displayName: 'Maven deploy'
         env:
           ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
           ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
@@ -336,9 +338,8 @@ stages:
           jdkVersionOption: '1.11'
           mavenOptions: $(MAVEN_OPTS)
 
-
     - job: runJavaUnitTests
-      displayName: 'Run Java Unit Tests'
+      displayName: 'Java UTs'
       dependsOn: runJavaBuild
 
       steps:
@@ -396,7 +397,7 @@ stages:
           scannerMode: 'Other'
 
       - task: Maven@3
-        displayName: 'Run Maven verify, UTs with SonarCloud'
+        displayName: 'Maven verify, UTs with SonarCloud'
         inputs:
           goals: 'verify sonar:sonar'
           options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage -Dsonar.projectVersion=$(SONAR_PROJECT_VERSION)
@@ -410,7 +411,7 @@ stages:
           sqMavenPluginVersionChoice: 'latest'
 
       - task: SonarCloudPublish@1
-        displayName: 'Run Code Analysis - Publish QG'
+        displayName: 'Code Analysis - Publish QG'
         inputs:
           pollingTimeoutSec: '300'
 
@@ -419,7 +420,7 @@ stages:
         displayName: Revert changes made to pom.xml to not break cache feature
 
     - job: runJavaIntegrationTests
-      displayName: 'Run Java Integration Tests'
+      displayName: 'Java ITs'
       dependsOn: runJavaBuild
 
       steps:
@@ -456,7 +457,7 @@ stages:
           path: $(MAVEN_CACHE_FOLDER)
 
       - task: Maven@3
-        displayName: 'Run Maven install'
+        displayName: 'Maven install'
         env:
           ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
           ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
@@ -472,7 +473,7 @@ stages:
           mavenOptions: $(MAVEN_OPTS)
 
       - task: Maven@3
-        displayName: 'Run MVN ITs'
+        displayName: 'Maven ITs'
         env:
           ARTIFACTORY_API_KEY: $(ARTIFACTORY_API_KEY)
           GITHUB_TOKEN: $(GITHUB_TOKEN)

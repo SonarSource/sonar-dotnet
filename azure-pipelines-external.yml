@@ -7,10 +7,10 @@ variables:
 
 stages:
 - stage: buildAndTests
-  displayName: Build and run tests
+  displayName: Build
   jobs:
     - job: runUnitTestsJob
-      displayName: 'Run dotnet unit tests'
+      displayName: 'Build and test'
 
       steps:
       - task: NuGetToolInstaller@1
@@ -78,7 +78,7 @@ stages:
           msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
 
       - task: VSTest@2
-        displayName: "Run SonarAnalyzer unit tests"
+        displayName: ".NET UTs"
         inputs:
           testAssemblyVer2: |
             **\$(BuildConfiguration)\**\*.UnitTest.dll
@@ -91,7 +91,7 @@ stages:
           rerunFailedTests: false
 
       - task: PowerShell@2
-        displayName: 'Run SonarAnalyzer integration tests'
+        displayName: '.NET ITs'
         inputs:
           filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
           workingDirectory: 'sonaranalyzer-dotnet/its'
