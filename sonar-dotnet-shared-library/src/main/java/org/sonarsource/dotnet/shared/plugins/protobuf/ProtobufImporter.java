@@ -20,6 +20,7 @@
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import com.google.protobuf.Parser;
+import java.net.URI;
 import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,7 +45,7 @@ public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
   private final Function<T, String> toFilePath;
   private final UnaryOperator<String> toRealPath;
   private final SensorContext context;
-  private final Set<Path> filesProcessed = new HashSet<>();
+  private final Set<URI> filesProcessed = new HashSet<>();
 
   ProtobufImporter(Parser<T> parser, SensorContext context, Function<T, String> toFilePath, UnaryOperator<String> toRealPath) {
     super(parser);
@@ -77,6 +78,6 @@ public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
   abstract void consumeFor(InputFile inputFile, T message);
 
   boolean isProcessed(InputFile inputFile) {
-    return !filesProcessed.add(inputFile.path().toAbsolutePath());
+    return !filesProcessed.add(inputFile.uri());
   }
 }
