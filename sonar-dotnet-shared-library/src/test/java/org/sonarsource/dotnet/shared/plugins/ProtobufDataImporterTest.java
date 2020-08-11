@@ -85,7 +85,7 @@ public class ProtobufDataImporterTest {
 
     // create metrics.pb
     try (OutputStream os = Files.newOutputStream(workDir.resolve("metrics.pb"))) {
-      MetricsInfo.newBuilder().setFilePath(firstFile.relativePath()).addCodeLine(12).addCodeLine(13).build().writeDelimitedTo(os);
+      MetricsInfo.newBuilder().setFilePath(firstFile.filename()).addCodeLine(12).addCodeLine(13).build().writeDelimitedTo(os);
     }
   }
 
