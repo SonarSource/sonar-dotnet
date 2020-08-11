@@ -19,18 +19,10 @@
  */
 package com.sonar.it.csharp;
 
-import io.github.classgraph.AnnotationClassRef;
-import io.github.classgraph.ClassGraph;
-import io.github.classgraph.ClassInfo;
-import io.github.classgraph.ScanResult;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import com.sonar.it.shared.EnsureAllTestsRunBase;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class EnsureAllTestsRunTest {
+public class EnsureAllTestsRunTest extends EnsureAllTestsRunBase {
 
   private static final String PACKAGE_NAME = "com.sonar.it.csharp";
 
@@ -42,46 +34,6 @@ public class EnsureAllTestsRunTest {
    */
   @Test
   public void testClassesAreListedInTestsSuite() {
-    try (ScanResult scanResult = new ClassGraph()
-             .enableAllInfo()
-             .acceptPackages(PACKAGE_NAME)
-             .scan()) {
-
-      List<String> classNamesInTestsSuiteAnnotation = getClassNamesMentionedInSuiteClasses(scanResult);
-      String[] testClassesInPackage = getTestClassesInThisPackage(scanResult).toArray(new String[0]);
-
-      assertThat(classNamesInTestsSuiteAnnotation).containsExactlyInAnyOrder(testClassesInPackage );
-    }
-  }
-
-  private List<String> getClassNamesMentionedInSuiteClasses(ScanResult scanResult)
-  {
-    Object[] suiteAnnotationParams = (Object[]) scanResult.getClassInfo(TEST_SUITE_CLASS)
-      .getAnnotationInfo("org.junit.runners.Suite$SuiteClasses")
-      .getParameterValues()
-      .getValue("value");
-
-    List<String> classNamesInTestsSuite = new ArrayList<>();
-    for (Object annotation : suiteAnnotationParams)
-    {
-      classNamesInTestsSuite.add(((AnnotationClassRef)annotation).getName());
-    }
-
-    return classNamesInTestsSuite;
-  }
-
-  private List<String> getTestClassesInThisPackage(ScanResult scanResult)
-  {
-    Map<String, ClassInfo> allClasses = scanResult.getAllClassesAsMap();
-    List<String> testClassesInPackage = new ArrayList<>();
-    for (String name : allClasses.keySet())
-    {
-      if (name.startsWith(PACKAGE_NAME)
-        && !name.equals(TEST_SUITE_CLASS)
-        && allClasses.get(name).getMethodAnnotations().getNames().contains("org.junit.Test")) {
-        testClassesInPackage.add(allClasses.get(name).getName());
-      }
-    }
-    return testClassesInPackage;
+    assertAllTestClassesAreReferencedInTestSuite(PACKAGE_NAME, TEST_SUITE_CLASS);
   }
 }
