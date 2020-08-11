@@ -62,4 +62,16 @@ namespace MyLibrary
             static void DoSomethingElse(ICollection<ICollection<int>> outerCollect) { } // Noncompliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3277
+    public class Repro_3277
+    {
+        public void QuestionMark(List<int?> list)  // Noncompliant FP
+        {
+        }
+
+        public void Explicit(List<Nullable<int>> list) // Noncompliant, there's a nice way out of this
+        {
+        }
+    }
 }
