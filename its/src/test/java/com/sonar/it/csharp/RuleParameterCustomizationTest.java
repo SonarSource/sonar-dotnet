@@ -23,18 +23,19 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
-import org.junit.*;
-import org.junit.rules.TemporaryFolder;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-
-import org.sonarqube.ws.Issues.Issue;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import static com.sonar.it.csharp.Tests.getComponent;
-import static com.sonar.it.csharp.Tests.getIssues;
+import static com.sonar.it.csharp.Tests.getHotspots;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 
 public class RuleParameterCustomizationTest {
   private static final String LANGUAGE_KEY = "cs";
@@ -62,17 +63,16 @@ public class RuleParameterCustomizationTest {
 
     assertThat(getComponent(componentKey)).isNotNull();
 
-    List<Issue> issues = getIssues(componentKey);
+    List<Hotspot> hotspots = getHotspots(CustomParametersProjectName);
 
-    assertThat(issues.size()).isEqualTo(2);
+    assertThat(hotspots.size()).isEqualTo(1);
 
-    assertIssue(issues.get(0), 6, "Make sure hard-coded credential is safe.");
-    assertIssue(issues.get(1), 7, "Make sure hard-coded credential is safe.");
+    assertHotspot(hotspots.get(0), 7, "\"senha\" detected here, make sure this is not a hard-coded credential.");
   }
 
-  private void assertIssue(Issue issue, int line, String message){
-    assertThat(issue.getLine()).isEqualTo(line);
-    assertThat(issue.getMessage()).contains(message);
+  private void assertHotspot(Hotspot hotspot, int line, String message){
+    assertThat(hotspot.getLine()).isEqualTo(line);
+    assertThat(hotspot.getMessage()).isEqualTo(message);
   }
 
   private void provisionProject() {

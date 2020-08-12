@@ -46,11 +46,11 @@ import org.sonarqube.ws.client.HttpConnector;
 import org.sonarqube.ws.client.WsClient;
 import org.sonarqube.ws.client.WsClientFactories;
 import org.sonarqube.ws.client.components.ShowRequest;
-import org.sonarqube.ws.client.issues.SearchRequest;
 import org.sonarqube.ws.client.measures.ComponentRequest;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 
 public class TestUtils {
 
@@ -155,7 +155,11 @@ public class TestUtils {
   }
 
   public static List<Issues.Issue> getIssues(Orchestrator orch, String componentKey) {
-    return newWsClient(orch).issues().search(new SearchRequest().setComponentKeys(Collections.singletonList(componentKey))).getIssuesList();
+    return newWsClient(orch).issues().search(new org.sonarqube.ws.client.issues.SearchRequest().setComponentKeys(Collections.singletonList(componentKey))).getIssuesList();
+  }
+
+  public static List<Hotspot> getHotspots(Orchestrator orch, String projectKey) {
+    return newWsClient(orch).hotspots().search(new org.sonarqube.ws.client.hotspots.SearchRequest().setProjectKey(projectKey)).getHotspotsList();
   }
 
   // Versions of SonarQube and plugins support aliases:
