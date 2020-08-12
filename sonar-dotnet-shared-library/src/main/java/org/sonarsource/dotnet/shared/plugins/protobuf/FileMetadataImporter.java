@@ -20,8 +20,8 @@
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import com.google.protobuf.Parser;
+import java.net.URI;
 import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
@@ -39,8 +39,8 @@ public class FileMetadataImporter extends RawProtobufImporter<FileMetadataInfo> 
 
   private static final Logger LOG = Loggers.get(FileMetadataImporter.class);
 
-  private final Map<String, Charset> encodingPerPath = new HashMap<>();
-  private final Set<Path> generatedFilePaths = new HashSet<>();
+  private final Map<URI, Charset> encodingPerUri = new HashMap<>();
+  private final Set<URI> generatedFileUris = new HashSet<>();
 
   // For testing
   FileMetadataImporter(Parser<FileMetadataInfo> parser) {
@@ -53,8 +53,9 @@ public class FileMetadataImporter extends RawProtobufImporter<FileMetadataInfo> 
 
   @Override
   void consume(FileMetadataInfo message) {
+    URI fileUri = Paths.get(message.getFilePath()).toUri();
     if (message.getIsGenerated()) {
-      generatedFilePaths.add(Paths.get(message.getFilePath()));
+      generatedFileUris.add(fileUri);
     }
     String roslynEncoding = message.getEncoding();
     Charset charset = null;
@@ -65,19 +66,14 @@ public class FileMetadataImporter extends RawProtobufImporter<FileMetadataInfo> 
         LOG.warn(String.format("Unrecognized encoding %s for file %s", roslynEncoding, message.getFilePath()), e);
       }
     }
-    encodingPerPath.put(message.getFilePath(), charset);
+    encodingPerUri.put(fileUri, charset);
   }
 
-  public Map<Path, Charset> getEncodingPerPath() {
-    // stream collector can't handle null values
-    HashMap<Path, Charset> map = new HashMap<>();
-    for (Map.Entry<String, Charset> e : encodingPerPath.entrySet()) {
-      map.put(Paths.get(e.getKey()), e.getValue());
-    }
-    return Collections.unmodifiableMap(map);
+  public Map<URI, Charset> getEncodingPerUri() {
+    return Collections.unmodifiableMap(encodingPerUri);
   }
 
-  public Set<Path> getGeneratedFilePaths() {
-    return generatedFilePaths;
+  public Set<URI> getGeneratedFileUris() {
+    return generatedFileUris;
   }
 }
