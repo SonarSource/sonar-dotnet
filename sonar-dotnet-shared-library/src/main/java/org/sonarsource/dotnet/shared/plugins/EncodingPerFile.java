@@ -29,7 +29,6 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 @ScannerSide
-@InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public class EncodingPerFile {
   private static final Logger LOG = Loggers.get(EncodingPerFile.class);
   private final AbstractGlobalProtobufFileProcessor globalReportProcessor;

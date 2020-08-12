@@ -32,7 +32,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
@@ -49,7 +48,6 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
  * "modules" are still a core concept of the SQ scanner.
  */
 @ScannerSide
-@InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
 public abstract class AbstractProjectConfiguration {
   private static final Logger LOG = Loggers.get(AbstractProjectConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
