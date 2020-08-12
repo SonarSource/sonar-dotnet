@@ -21,11 +21,11 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
-import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.notifications.AnalysisWarnings;
+import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
@@ -33,7 +33,7 @@ import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 /**
  * This class is responsible to handle all the C# and VB.NET unit test results reports (parse and report back to SonarQube).
  */
-public class UnitTestResultsImportSensor implements Sensor {
+public class UnitTestResultsImportSensor implements ProjectSensor {
 
   private static final Logger LOG = Loggers.get(UnitTestResultsImportSensor.class);
 
@@ -45,7 +45,7 @@ public class UnitTestResultsImportSensor implements Sensor {
   private final AnalysisWarnings analysisWarnings;
 
   public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef,
-                                     DotNetPluginMetadata pluginMetadata, AnalysisWarnings analysisWarnings) {
+    DotNetPluginMetadata pluginMetadata, AnalysisWarnings analysisWarnings) {
     this(unitTestResultsAggregator, projectDef, pluginMetadata.languageKey(), pluginMetadata.languageName(), analysisWarnings);
   }
 
@@ -62,7 +62,6 @@ public class UnitTestResultsImportSensor implements Sensor {
   public void describe(SensorDescriptor descriptor) {
     String name = String.format("%s Unit Test Results Import", this.languageName);
     descriptor.name(name);
-    descriptor.global();
     descriptor.onlyOnLanguage(this.languageKey);
     descriptor.onlyWhenConfiguration(c -> unitTestResultsAggregator.hasUnitTestResultsProperty(c::hasKey));
   }
@@ -87,7 +86,7 @@ public class UnitTestResultsImportSensor implements Sensor {
     }
   }
 
-  private void saveTestMetrics(SensorContext context, UnitTestResults unitTestResults){
+  private void saveTestMetrics(SensorContext context, UnitTestResults unitTestResults) {
     UnitTestResults aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider, unitTestResults);
 
     context.<Integer>newMeasure()

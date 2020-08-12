@@ -31,6 +31,7 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.notifications.AnalysisWarnings;
+import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -151,7 +152,7 @@ public class UnitTestResultsImportSensorTest {
   }
 
   @Test
-  public void describe_is_global_and_only_on_language() {
+  public void describe_only_on_language() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
@@ -159,8 +160,12 @@ public class UnitTestResultsImportSensorTest {
     new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", analysisWarnings)
       .describe(descriptor);
 
-    assertThat(descriptor.isGlobal()).isTrue();
     assertThat(descriptor.languages()).containsOnly("cs");
+  }
+
+  @Test
+  public void isProjectSensor() {
+    assertThat(ProjectSensor.class.isAssignableFrom(UnitTestResultsImportSensor.class)).isTrue();
   }
 
   @Test
