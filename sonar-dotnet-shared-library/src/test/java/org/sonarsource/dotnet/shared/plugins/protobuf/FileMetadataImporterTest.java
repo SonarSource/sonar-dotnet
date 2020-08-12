@@ -116,8 +116,8 @@ public class FileMetadataImporterTest {
     metadataImporter.accept(protobuf.toPath());
 
     Map<URI, Charset> encodingPerUri = metadataImporter.getEncodingPerUri();
-    assertThat(encodingPerUri.size()).isEqualTo(1);
-    assertThat(encodingPerUri.get(Paths.get(TEST_FILE_PATH).toUri())).isEqualTo(StandardCharsets.UTF_8);
+    assertThat(encodingPerUri).hasSize(1);
+    assertThat(encodingPerUri).containsEntry(Paths.get(TEST_FILE_PATH).toUri(), StandardCharsets.UTF_8);
   }
 
   @Test
