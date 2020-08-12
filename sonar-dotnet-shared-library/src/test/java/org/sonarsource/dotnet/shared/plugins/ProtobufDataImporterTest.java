@@ -79,13 +79,15 @@ public class ProtobufDataImporterTest {
       .setLanguage("cs")
       .initMetadata(new String(Files.readAllBytes(csFile), StandardCharsets.UTF_8))
       .build();
-    tester.fileSystem().add(firstFile);
+    tester.fileSystem().add(secondFile);
 
     when(fileLinesContextFactory.createFor(firstFile)).thenReturn(fileLinesContext);
+    when(fileLinesContextFactory.createFor(secondFile)).thenReturn(fileLinesContext);
 
     // create metrics.pb
     try (OutputStream os = Files.newOutputStream(workDir.resolve("metrics.pb"))) {
       MetricsInfo.newBuilder().setFilePath(firstFile.filename()).addCodeLine(12).addCodeLine(13).build().writeDelimitedTo(os);
+      MetricsInfo.newBuilder().setFilePath(secondFile.filename()).addCodeLine(42).addCodeLine(43).build().writeDelimitedTo(os);
     }
   }
 
@@ -122,10 +124,6 @@ public class ProtobufDataImporterTest {
 
   @Test
   public void do_not_warn_about_unique_files() throws Exception {
-    try (OutputStream os = Files.newOutputStream(workDir.resolve("metrics.pb"))) {
-      MetricsInfo.newBuilder().setFilePath(firstFile.filename()).addCodeLine(12).addCodeLine(13).build().writeDelimitedTo(os);
-      MetricsInfo.newBuilder().setFilePath(secondFile.filename()).addCodeLine(42).addCodeLine(43).build().writeDelimitedTo(os);
-    }
     dataImporter.importResults(tester, Collections.singletonList(workDir), String::toString);
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();

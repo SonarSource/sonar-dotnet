@@ -58,8 +58,7 @@ public class GeneratedFileFilterTest {
       SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
     };
     MapSettings settings = new MapSettings(new PropertyDefinitions(definitions.create()));
-    defaultConfiguration = new AbstractSolutionConfiguration(settings.asConfig(), "cs") {
-    };
+    defaultConfiguration = new AbstractSolutionConfiguration(settings.asConfig(), "cs") { };
   }
 
   @Test
