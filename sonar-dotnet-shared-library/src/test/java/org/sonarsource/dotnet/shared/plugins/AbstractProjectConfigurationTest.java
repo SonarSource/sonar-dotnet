@@ -19,23 +19,22 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.config.PropertyDefinitions;
-import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.utils.Version;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AbstractProjectConfigurationTest {
   @Rule
@@ -44,70 +43,42 @@ public class AbstractProjectConfigurationTest {
   public LogTester logTester = new LogTester();
 
   private Path workDir;
-  private MapSettings settings;
-
-  private AbstractProjectConfiguration config;
 
   @Before
   public void setUp() {
     workDir = temp.getRoot().toPath();
-    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions("cs", "C#", ".cs", SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
-    };
-    settings = new MapSettings(new PropertyDefinitions(definitions.create()));
-  }
-
-  private Path createProtobufOut(String name) throws IOException {
-    Path path = workDir.resolve(name);
-    Path outputCs = path.resolve("output-cs");
-    Files.createDirectories(outputCs);
-    Files.createFile(outputCs.resolve("dummy.pb"));
-    return path;
-  }
-
-  private void setProtobufOut() throws IOException {
-    Path path1 = createProtobufOut("report1");
-    Path path2 = createProtobufOut("report2");
-    settings.setProperty("sonar.cs.analyzer.projectOutPaths", new String[] {path1.toString(), path2.toString()});
-  }
-
-  private void setOldProtobufOut() throws IOException {
-    Path path = createProtobufOut("report");
-    settings.setProperty("sonar.cs.analyzer.projectOutPath", path.toString());
-  }
-
-  private void createOldRoslynOut() throws IOException {
-    Path path = temp.newFile("roslyn-report.json").toPath();
-    settings.setProperty("sonar.cs.roslyn.reportFilePath", path.toString());
-  }
-
-  private void createRoslynOut() throws IOException {
-    Path path = temp.newFile("roslyn-report.json").toPath();
-    Path path2 = temp.newFile("roslyn-report2.json").toPath();
-    settings.setProperty("sonar.cs.roslyn.reportFilePaths", new String[] {path.toString(), path2.toString()});
   }
 
   @Test
   public void onlyNewRoslynReportPresent() throws IOException {
-    createRoslynOut();
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+    Path path = temp.newFile("roslyn-report.json").toPath();
+    Path path2 = temp.newFile("roslyn-report2.json").toPath();
+
+    Configuration configuration = createEmptyConfiguration();
+    when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[]{path.toString(), path2.toString()});
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"), workDir.resolve("roslyn-report2.json"));
   }
 
   @Test
   public void onlyOldRoslynReportPresent() throws IOException {
-    createOldRoslynOut();
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+    Path path = temp.newFile("roslyn-report.json").toPath();
+
+    Configuration configuration = createEmptyConfiguration();
+    when(configuration.get("sonar.cs.roslyn.reportFilePath")).thenReturn(Optional.of(path.toString()));
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"));
   }
 
   @Test
   public void giveWarningsWhenGettingProtobufPathAndNoPropertyAvailable() {
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+    Configuration configuration = createEmptyConfiguration();
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.");
   }
@@ -115,9 +86,10 @@ public class AbstractProjectConfigurationTest {
   @Test
   public void noWarningsWhenGettingProtobufPathAndNoPropertyAvailable_TestProject() {
     // Test projects have sonar.tests property set, main projects don't
-    settings.setProperty("sonar.tests", "");
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+    Configuration configuration = createEmptyConfiguration();
+    when(configuration.hasKey("sonar.tests")).thenReturn(true);
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
   }
@@ -125,9 +97,11 @@ public class AbstractProjectConfigurationTest {
   @Test
   public void giveWarningsWhenGettingProtobufPathAndNoFolderAvailable() throws IOException {
     Path path1 = createProtobufOut("report");
-    settings.setProperty("sonar.cs.analyzer.projectOutPaths", new String[] {path1.toString(), "non-existing"});
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+
+    Configuration configuration = createEmptyConfiguration();
+    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[] {path1.toString(), "non-existing"});
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).containsOnly(path1.resolve("output-cs"));
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.WARN).get(0)).matches(s -> s.startsWith("Analyzer working directory does not exist"));
@@ -135,9 +109,10 @@ public class AbstractProjectConfigurationTest {
 
   @Test
   public void giveWarningsWhenGettingOldProtobufPathAndNoFolderAvailable() {
-    settings.setProperty("sonar.cs.analyzer.projectOutPath", "non-existing");
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+    Configuration configuration = createEmptyConfiguration();
+    when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of("non-existing"));
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.WARN).get(0)).matches(s -> s.startsWith("Analyzer working directory does not exist"));
@@ -145,9 +120,10 @@ public class AbstractProjectConfigurationTest {
 
   @Test
   public void informHowManyProtoFilesAreFound() throws IOException {
-    setProtobufOut();
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+    Configuration configuration = createEmptyConfiguration();
+    mockProtobufOutPaths(configuration);
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(2);
     assertThat(logTester.logs(LoggerLevel.WARN)).allMatch(s -> s.endsWith("contains no .pb file(s). No protobuf files will be loaded from this directory."));
@@ -158,9 +134,11 @@ public class AbstractProjectConfigurationTest {
     Path path = workDir.resolve("report");
     Path outputCs = path.resolve("output-cs");
     Files.createDirectories(outputCs);
-    settings.setProperty("sonar.cs.analyzer.projectOutPath", path.toString());
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+
+    Configuration configuration = createEmptyConfiguration();
+    when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of(path.toString()));
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.WARN).get(0))
@@ -169,9 +147,10 @@ public class AbstractProjectConfigurationTest {
 
   @Test
   public void onlyProtobufReportsPresent() throws IOException {
-    setProtobufOut();
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+    Configuration configuration = createEmptyConfiguration();
+    mockProtobufOutPaths(configuration);
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(config.roslynReportPaths()).isEmpty();
     assertThat(config.protobufReportPaths()).containsOnly(workDir.resolve("report1").resolve("output-cs"), workDir.resolve("report2").resolve("output-cs"));
@@ -179,9 +158,12 @@ public class AbstractProjectConfigurationTest {
 
   @Test
   public void onlyOldProtobufReportsPresent() throws IOException {
-    setOldProtobufOut();
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+    Path path = createProtobufOut("report");
+
+    Configuration configuration = createEmptyConfiguration();
+    when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of(path.toString()));
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(config.roslynReportPaths()).isEmpty();
     assertThat(config.protobufReportPaths()).containsOnly(workDir.resolve("report").resolve("output-cs"));
@@ -189,16 +171,46 @@ public class AbstractProjectConfigurationTest {
 
   @Test
   public void ignoreExternalIssuesIsFalseByDefault() {
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+    Configuration configuration = mock(Configuration.class);
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.ignoreThirdPartyIssues()).isFalse();
   }
 
   @Test
   public void optOutExternalIssues() {
-    settings.setProperty("sonar.cs.roslyn.ignoreIssues", "true");
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.getBoolean("sonar.cs.roslyn.ignoreIssues")).thenReturn(Optional.of(true));
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.ignoreThirdPartyIssues()).isTrue();
+  }
+
+  private Path createProtobufOut(String name) throws IOException {
+    Path path = workDir.resolve(name);
+    Path outputCs = path.resolve("output-cs");
+    Files.createDirectories(outputCs);
+    Files.createFile(outputCs.resolve("dummy.pb"));
+    return path;
+  }
+
+  private void mockProtobufOutPaths(Configuration configuration) throws IOException{
+    Path path1 = createProtobufOut("report1");
+    Path path2 = createProtobufOut("report2");
+    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[] {path1.toString(), path2.toString()});
+  }
+
+  private Configuration createEmptyConfiguration(){
+    Configuration configuration = mock(Configuration.class);
+
+    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[0]);
+    when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[0]);
+
+    return configuration;
+  }
+
+  private AbstractProjectConfiguration createAbstractProjectConfiguration(Configuration configuration){
+    return new AbstractProjectConfiguration(configuration, "cs"){
+    };
   }
 }
