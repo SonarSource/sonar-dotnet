@@ -19,15 +19,14 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.io.File;
+import java.io.IOException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-
-import java.io.File;
-import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toInputFile;
@@ -51,7 +50,7 @@ public class SensorContextUtilsTest {
     fs.add(new TestInputFileBuilder("dummy", file.getName())
       .setModuleBaseDir(file.getParentFile().toPath())
       .build());
-    assertThat(toInputFile(fs, file.getName()).file()).isEqualTo(file);
+    assertThat(toInputFile(fs, file.getName()).uri()).isEqualTo(file.toURI());
   }
 
   @Test
