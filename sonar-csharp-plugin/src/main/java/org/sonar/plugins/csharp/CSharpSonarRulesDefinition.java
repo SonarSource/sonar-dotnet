@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonarsource.dotnet.shared.plugins.AbstractRulesDefinition;
 
 import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_KEY;
