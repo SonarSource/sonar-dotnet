@@ -176,7 +176,7 @@ stages:
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
 
       - task: SonarCloudPrepare@1
-        displayName: 'Code Analysis - Begin Step (Pull Request)'
+        displayName: 'Code Analysis - Begin (PR)'
         condition: eq(variables['Build.Reason'], 'PullRequest')
         inputs:
           SonarCloud: 'SonarCloud'
@@ -194,7 +194,7 @@ stages:
             sonar.analysis.repository=$(Build.Repository.ID)
 
       - task: SonarCloudPrepare@1
-        displayName: 'Code Analysis - Begin Step (master or branch)'
+        displayName: 'Code Analysis - Begin (master or branch)'
         condition: ne(variables['Build.Reason'], 'PullRequest')
         inputs:
           SonarCloud: 'SonarCloud'
@@ -240,7 +240,7 @@ stages:
         displayName: '.Net UTs'
 
       - task: SonarCloudAnalyze@1
-        displayName: 'Code Analysis - End Step'
+        displayName: 'Code Analysis - End'
 
       - task: SonarCloudPublish@1
         displayName: 'Code Analysis - Publish QG'
