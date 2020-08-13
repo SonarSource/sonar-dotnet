@@ -20,10 +20,10 @@
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import java.util.function.UnaryOperator;
-import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
