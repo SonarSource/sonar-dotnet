@@ -71,9 +71,11 @@ $roslynLanguageMap = @{
 }
 
 function FindResGen(){
+    Write-Host "Finding ResGen.exe path"
     foreach ($SDK in $SupportedSDKs){
         $Ret = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX ${SDK} Tools\\ResGen.exe"
         if (Test-Path $Ret) {
+            Write-Host "Path found: $Ret"
             return $Ret
         }
     }
@@ -82,6 +84,7 @@ function FindResGen(){
 
 # Returns a string array with rule keys for the specified language.
 function GetRules() {
+    Write-Host "Retrieving rules for language: $language"
     $suffix = $ruleapiLanguageMap.Get_Item($language)
 
     $htmlFiles = Get-ChildItem "${rspecFolder}\\*" -Include "*.html"
@@ -93,6 +96,7 @@ function GetRules() {
 }
 
 function CreateStringResources($rules, $resgenPath) {
+    Write-Host "Creating resources"
     $suffix = $ruleapiLanguageMap.Get_Item($language)
 
     $sonarWayRules = Get-Content -Raw "${rspecFolder}\\Sonar_way_profile.json" | ConvertFrom-Json
@@ -142,15 +146,19 @@ function CreateStringResources($rules, $resgenPath) {
 
     $rawResourcesPath = "${PSScriptRoot}\\${lang}_strings.restext"
 
+    Write-Host "Writing raw resources at $rawResourcesPath"
     Set-Content $rawResourcesPath $resources
 
-    # generate resx file
+    Write-Host "Generating resx files at $resxFile"
     Invoke-Expression "& `"${resgenPath}`" ${rawResourcesPath} ${resxFile}"
 }
 
 ### SCRIPT START ###
-
-$resgenPath = FindResGen
-$rules = GetRules
-CreateStringResources $rules $resgenPath
-
+Try {
+    $resgenPath = FindResGen
+    $rules = GetRules
+    CreateStringResources $rules $resgenPath
+}
+Catch{
+    Write-Host -Foreground Red -Background Black $_.Exception.Message
+}
