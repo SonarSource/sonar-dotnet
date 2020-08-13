@@ -54,7 +54,7 @@ public class AbstractProjectConfigurationTest {
     Path path = temp.newFile("roslyn-report.json").toPath();
     Path path2 = temp.newFile("roslyn-report2.json").toPath();
 
-    Configuration configuration = createEmptyConfiguration();
+    Configuration configuration = createEmptyMockConfiguration();
     when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[]{path.toString(), path2.toString()});
 
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
@@ -66,7 +66,7 @@ public class AbstractProjectConfigurationTest {
   public void onlyOldRoslynReportPresent() throws IOException {
     Path path = temp.newFile("roslyn-report.json").toPath();
 
-    Configuration configuration = createEmptyConfiguration();
+    Configuration configuration = createEmptyMockConfiguration();
     when(configuration.get("sonar.cs.roslyn.reportFilePath")).thenReturn(Optional.of(path.toString()));
 
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
@@ -76,7 +76,7 @@ public class AbstractProjectConfigurationTest {
 
   @Test
   public void giveWarningsWhenGettingProtobufPathAndNoPropertyAvailable() {
-    Configuration configuration = createEmptyConfiguration();
+    Configuration configuration = createEmptyMockConfiguration();
 
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
@@ -86,7 +86,7 @@ public class AbstractProjectConfigurationTest {
   @Test
   public void noWarningsWhenGettingProtobufPathAndNoPropertyAvailable_TestProject() {
     // Test projects have sonar.tests property set, main projects don't
-    Configuration configuration = createEmptyConfiguration();
+    Configuration configuration = createEmptyMockConfiguration();
     when(configuration.hasKey("sonar.tests")).thenReturn(true);
 
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
@@ -98,35 +98,36 @@ public class AbstractProjectConfigurationTest {
   public void giveWarningsWhenGettingProtobufPathAndNoFolderAvailable() throws IOException {
     Path path1 = createProtobufOut("report");
 
-    Configuration configuration = createEmptyConfiguration();
+    Configuration configuration = createEmptyMockConfiguration();
     when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[] {path1.toString(), "non-existing"});
 
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).containsOnly(path1.resolve("output-cs"));
-    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.WARN).get(0)).matches(s -> s.startsWith("Analyzer working directory does not exist"));
+    assertThat(logTester.logs(LoggerLevel.WARN)).hasOnlyOneElementSatisfying(s -> s.startsWith("Analyzer working directory does not exist"));
   }
 
   @Test
   public void giveWarningsWhenGettingOldProtobufPathAndNoFolderAvailable() {
-    Configuration configuration = createEmptyConfiguration();
+    Configuration configuration = createEmptyMockConfiguration();
     when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of("non-existing"));
 
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.WARN).get(0)).matches(s -> s.startsWith("Analyzer working directory does not exist"));
+    assertThat(logTester.logs(LoggerLevel.WARN)).hasOnlyOneElementSatisfying(s -> s.startsWith("Analyzer working directory does not exist"));
   }
 
   @Test
   public void informHowManyProtoFilesAreFound() throws IOException {
-    Configuration configuration = createEmptyConfiguration();
+    Configuration configuration = createEmptyMockConfiguration();
     mockProtobufOutPaths(configuration);
 
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isNotEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(2);
-    assertThat(logTester.logs(LoggerLevel.WARN)).allMatch(s -> s.endsWith("contains no .pb file(s). No protobuf files will be loaded from this directory."));
+    assertThat(logTester.logs(LoggerLevel.DEBUG))
+      .containsExactly(
+        "Analyzer working directory '" + workDir.toString() + "\\report1\\output-cs' contains 1 .pb file(s)",
+        "Analyzer working directory '" + workDir.toString() + "\\report2\\output-cs' contains 1 .pb file(s)");
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
   }
 
   @Test
@@ -135,19 +136,17 @@ public class AbstractProjectConfigurationTest {
     Path outputCs = path.resolve("output-cs");
     Files.createDirectories(outputCs);
 
-    Configuration configuration = createEmptyConfiguration();
+    Configuration configuration = createEmptyMockConfiguration();
     when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of(path.toString()));
 
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.WARN).get(0))
-      .matches(s -> s.endsWith("contains no .pb file(s). Analyzer results won't be loaded from this directory."));
+    assertThat(logTester.logs(LoggerLevel.WARN).get(0)).matches(s -> s.endsWith("contains no .pb file(s). Analyzer results won't be loaded from this directory."));
   }
 
   @Test
   public void onlyProtobufReportsPresent() throws IOException {
-    Configuration configuration = createEmptyConfiguration();
+    Configuration configuration = createEmptyMockConfiguration();
     mockProtobufOutPaths(configuration);
 
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
@@ -160,7 +159,7 @@ public class AbstractProjectConfigurationTest {
   public void onlyOldProtobufReportsPresent() throws IOException {
     Path path = createProtobufOut("report");
 
-    Configuration configuration = createEmptyConfiguration();
+    Configuration configuration = createEmptyMockConfiguration();
     when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of(path.toString()));
 
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
@@ -200,7 +199,7 @@ public class AbstractProjectConfigurationTest {
     when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[] {path1.toString(), path2.toString()});
   }
 
-  private Configuration createEmptyConfiguration(){
+  private Configuration createEmptyMockConfiguration(){
     Configuration configuration = mock(Configuration.class);
 
     when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[0]);
