@@ -19,8 +19,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.batch.InstantiationStrategy;
-import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.config.Configuration;
 
 /**
@@ -29,7 +28,6 @@ import org.sonar.api.config.Configuration;
  * This class is consumed by the GeneratedFileFilter, thus needs to be at solution (scanner "project") level.
  */
 @ScannerSide
-@InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public abstract class AbstractSolutionConfiguration {
 
   private final Configuration configuration;
