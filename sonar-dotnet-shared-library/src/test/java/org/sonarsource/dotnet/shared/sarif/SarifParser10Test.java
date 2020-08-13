@@ -189,7 +189,7 @@ public class SarifParser10Test {
   public void dont_fail_on_empty_report() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
     new SarifParser10(null, getRoot("v1_0_empty.json"), String::toString).accept(callback);
-    verify(callback, Mockito.never()).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.any(Location.class), Mockito.anyCollectionOf(Location.class));
+    verify(callback, Mockito.never()).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.any(Location.class), Mockito.anyCollection());
   }
 
   @Test
