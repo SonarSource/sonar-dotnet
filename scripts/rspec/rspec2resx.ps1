@@ -144,7 +144,7 @@ function CreateStringResources($rules, $resgenPath) {
     [void]$resources.Add("HelpLinkFormat=https://rules.sonarsource.com/$($helpLanguageMap.Get_Item($language))/RSPEC-{0}")
     [void]$resources.Add("RoslynLanguage=$($roslynLanguageMap.Get_Item($language))")
 
-    $rawResourcesPath = "${PSScriptRoot}\\${lang}_strings.restext"
+    $rawResourcesPath = "${PSScriptRoot}\${language}_strings.restext"
 
     Write-Host "Writing raw resources at $rawResourcesPath"
     Set-Content $rawResourcesPath $resources
