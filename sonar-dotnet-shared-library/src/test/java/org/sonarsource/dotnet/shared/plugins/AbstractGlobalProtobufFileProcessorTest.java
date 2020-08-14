@@ -91,7 +91,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
     assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED1"), toUpperCaseUriString("GENERATED2"));
     Map.Entry<String, Charset> expected1 = entry(toUpperCaseUriString("GENERATED1"), null);
     Map.Entry<String, Charset> expected2 = entry(toUpperCaseUriString("GENERATED2"), null);
-    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).containsExactly(expected1, expected2);
+    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).containsOnly(expected1, expected2);
   }
 
   @Test
