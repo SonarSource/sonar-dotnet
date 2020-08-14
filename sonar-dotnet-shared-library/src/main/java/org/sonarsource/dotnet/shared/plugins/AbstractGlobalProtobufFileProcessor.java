@@ -78,7 +78,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
       LOG.debug("Processing {}", metadataReportProtobuf);
       FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();
       fileMetadataImporter.accept(metadataReportProtobuf);
-      this.generatedFileUris.addAll(fileMetadataImporter.getGeneratedFileUris().stream().map(x -> x.toString()).collect(Collectors.toList()));
+      this.generatedFileUris.addAll(fileMetadataImporter.getGeneratedFileUris().stream().map(URI::toString).collect(Collectors.toList()));
       for (Map.Entry<URI, Charset> entry : fileMetadataImporter.getEncodingPerUri().entrySet()) {
         this.roslynEncodingPerUri.put(entry.getKey().toString(), entry.getValue());
       }
