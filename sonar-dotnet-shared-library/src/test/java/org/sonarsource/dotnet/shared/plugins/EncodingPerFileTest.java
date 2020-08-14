@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+import java.util.TreeMap;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -85,9 +85,9 @@ public class EncodingPerFileTest {
 
   private void assertEncodingMatch(Charset roslynCharset, URI fileUri, Charset sqCharset, boolean result) throws IOException {
     AbstractGlobalProtobufFileProcessor processor = mock(AbstractGlobalProtobufFileProcessor.class);
-    HashMap<String, Charset> encodingPerUpperCaseUri = new HashMap<>();
-    encodingPerUpperCaseUri.put(this.fileUri.toString().toUpperCase(), roslynCharset);
-    when(processor.getRoslynEncodingPerUpperCaseUri()).thenReturn(encodingPerUpperCaseUri);
+    TreeMap<String, Charset> encodingPerUri = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    encodingPerUri.put(this.fileUri.toString(), roslynCharset);
+    when(processor.getRoslynEncodingPerUri()).thenReturn(encodingPerUri);
     EncodingPerFile encodingPerFile = new EncodingPerFile(processor);
     InputFile inputFile = newInputFile(fileUri, sqCharset);
     assertThat(encodingPerFile.encodingMatch(inputFile)).isEqualTo(result);

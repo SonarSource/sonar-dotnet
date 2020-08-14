@@ -21,8 +21,7 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.TreeSet;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -125,8 +124,9 @@ public class GeneratedFileFilterTest {
 
   private GeneratedFileFilter createFilter(String generatedPath, AbstractSolutionConfiguration configuration) throws IOException {
     AbstractGlobalProtobufFileProcessor processor = mock(AbstractGlobalProtobufFileProcessor.class);
-    when(processor.getGeneratedFileUppercaseUris()).thenReturn(new HashSet<>(Arrays.asList(Paths.get(generatedPath.toUpperCase()).toUri().toString().toUpperCase())));
-
+    TreeSet<String> generatedFileUris = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+    generatedFileUris.add(Paths.get(generatedPath).toUri().toString());
+    when(processor.getGeneratedFileUris()).thenReturn(generatedFileUris);
     return new GeneratedFileFilter(processor, configuration);
   }
 }

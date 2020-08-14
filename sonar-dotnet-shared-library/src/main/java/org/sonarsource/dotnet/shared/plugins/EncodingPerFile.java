@@ -38,16 +38,16 @@ public class EncodingPerFile {
   }
 
   boolean encodingMatch(InputFile inputFile) {
-    String upperCaseUri = inputFile.uri().toString().toUpperCase();
+    String uri = inputFile.uri().toString();
 
-    if (!globalReportProcessor.getRoslynEncodingPerUpperCaseUri().containsKey(upperCaseUri)) {
+    if (!globalReportProcessor.getRoslynEncodingPerUri().containsKey(uri)) {
       // When there is no entry for a file, it means it was not processed by Roslyn. So we consider encoding to be ok.
       return true;
     }
 
-    Charset roslynEncoding = globalReportProcessor.getRoslynEncodingPerUpperCaseUri().get(upperCaseUri);
+    Charset roslynEncoding = globalReportProcessor.getRoslynEncodingPerUri().get(uri);
     if (roslynEncoding == null) {
-      LOG.warn("File '{}' does not have encoding information. Skip it.", inputFile.uri());
+      LOG.warn("File '{}' does not have encoding information. Skip it.", uri);
       return false;
     }
 
@@ -60,7 +60,7 @@ public class EncodingPerFile {
       } else {
         LOG.warn("Encoding detected by Roslyn and encoding used by SonarQube do not match for file {}. "
           + "SonarQube encoding is '{}', Roslyn encoding is '{}'. File will be skipped.",
-          inputFile.uri(), sqEncoding, roslynEncoding);
+          uri, sqEncoding, roslynEncoding);
       }
     }
     return sameEncoding;

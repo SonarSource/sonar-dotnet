@@ -25,12 +25,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.Phase;
@@ -56,8 +56,8 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
 
   private final String languageKey;
 
-  private final Map<String, Charset> roslynEncodingPerUpperCaseUri = new HashMap<>();
-  private final Set<String> generatedFileUpperCaseUris = new HashSet<>();
+  private final Map<String, Charset> roslynEncodingPerUri = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+  private final Set<String> generatedFileUris = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
   public AbstractGlobalProtobufFileProcessor(String languageKey) {
     this.languageKey = languageKey;
@@ -78,19 +78,19 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
       LOG.debug("Processing {}", metadataReportProtobuf);
       FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();
       fileMetadataImporter.accept(metadataReportProtobuf);
-      this.generatedFileUpperCaseUris.addAll(fileMetadataImporter.getGeneratedFileUris().stream().map(x -> x.toString().toUpperCase()).collect(Collectors.toList()));
+      this.generatedFileUris.addAll(fileMetadataImporter.getGeneratedFileUris().stream().map(x -> x.toString()).collect(Collectors.toList()));
       for (Map.Entry<URI, Charset> entry : fileMetadataImporter.getEncodingPerUri().entrySet()) {
-        this.roslynEncodingPerUpperCaseUri.put(entry.getKey().toString().toUpperCase(), entry.getValue());
+        this.roslynEncodingPerUri.put(entry.getKey().toString(), entry.getValue());
       }
     }
   }
 
-  public Map<String, Charset> getRoslynEncodingPerUpperCaseUri() {
-    return Collections.unmodifiableMap(roslynEncodingPerUpperCaseUri);
+  public Map<String, Charset> getRoslynEncodingPerUri() {
+    return Collections.unmodifiableMap(roslynEncodingPerUri);
   }
 
-  public Set<String> getGeneratedFileUppercaseUris() {
-    return Collections.unmodifiableSet(generatedFileUpperCaseUris);
+  public Set<String> getGeneratedFileUris() {
+    return Collections.unmodifiableSet(generatedFileUris);
   }
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {

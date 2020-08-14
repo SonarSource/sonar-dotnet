@@ -29,7 +29,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
-import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Rule;
@@ -64,127 +63,131 @@ public class AbstractGlobalProtobufFileProcessorTest {
     rootProject.addSubProject(project1);
     rootProject.addSubProject(project2);
     context = new ProjectBuilder.Context() {
-
       @Override
       public ProjectReactor projectReactor() {
         return new ProjectReactor(rootProject);
       }
     };
     underTest = new AbstractGlobalProtobufFileProcessor("foo") {
-
     };
   }
 
   @Test
   public void do_nothing_if_no_properties() {
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUppercaseUris()).isEmpty();
-    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).isEmpty();
+    assertThat(underTest.getGeneratedFileUris()).isEmpty();
+    assertThat(underTest.getRoslynEncodingPerUri()).isEmpty();
   }
 
   @Test
   public void process_generated_old_prop() throws IOException {
-    project1.setProperty("sonar.foo.analyzer.projectOutPath", mockMetadataProtoReport("generated1").toString());
-    project2.setProperty("sonar.foo.analyzer.projectOutPath", mockMetadataProtoReport("generated2").toString());
+    project1.setProperty("sonar.foo.analyzer.projectOutPath", mockGenerated("generated1"));
+    project2.setProperty("sonar.foo.analyzer.projectOutPath", mockGenerated("generated2"));
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED1"), toUpperCaseUriString("GENERATED2"));
-    Map.Entry<String, Charset> expected1 = entry(toUpperCaseUriString("GENERATED1"), null);
-    Map.Entry<String, Charset> expected2 = entry(toUpperCaseUriString("GENERATED2"), null);
-    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).containsOnly(expected1, expected2);
+    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUriString("generated1"), toUriString("generated2"));
+    Map.Entry<String, Charset> expected1 = entry(toUriString("generated1"), null);
+    Map.Entry<String, Charset> expected2 = entry(toUriString("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(expected1, expected2);
   }
 
   @Test
   public void process_generated_new_prop() throws IOException {
-    project1.setProperty("sonar.foo.analyzer.projectOutPaths", mockMetadataProtoReport("generated11").toString() + "," + mockMetadataProtoReport("generated12").toString());
-    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockMetadataProtoReport("generated2").toString());
+    project1.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("generated11") + "," + mockGenerated("generated12"));
+    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("generated2"));
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED11"), toUpperCaseUriString("GENERATED12"),
-      toUpperCaseUriString("GENERATED2"));
-    Map.Entry<String, Charset> expected = entry(toUpperCaseUriString("GENERATED2"), null);
-    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).contains(expected);
+    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUriString("generated11"), toUriString("generated12"),
+      toUriString("generated2"));
+    Map.Entry<String, Charset> expected = entry(toUriString("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerUri()).contains(expected);
   }
 
   @Test
   public void process_generated_new_prop_escaped_csv() throws IOException {
     project1.setProperty("sonar.foo.analyzer.projectOutPaths",
-      "\"" + mockMetadataProtoReport("generated11").toString() + "\",\"" + mockMetadataProtoReport("generated12").toString() + "\"");
-    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockMetadataProtoReport("generated2").toString());
+      "\"" + mockGenerated("generated11") + "\",\"" + mockGenerated("generated12") + "\"");
+    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("generated2"));
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED11"), toUpperCaseUriString("GENERATED12"),
-      toUpperCaseUriString("GENERATED2"));
-    Map.Entry<String, Charset> expected = entry(toUpperCaseUriString("GENERATED2"), null);
-    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).contains(expected);
+    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUriString("generated11"), toUriString("generated12"),
+      toUriString("generated2"));
+    Map.Entry<String, Charset> expected = entry(toUriString("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerUri()).contains(expected);
   }
 
   @Test
   public void process_encoding_new_prop() throws IOException {
-    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncodingProtoReport("UTF-8", "encodingutf8").toString());
+    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncoding("UTF-8", "encodingutf8"));
 
     underTest.build(context);
-    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).containsOnly(entry(toUpperCaseUriString("ENCODINGUTF8"), StandardCharsets.UTF_8));
-    assertThat(underTest.getGeneratedFileUppercaseUris()).isEmpty();
+    assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(entry(toUriString("encodingutf8"), StandardCharsets.UTF_8));
+    assertThat(underTest.getGeneratedFileUris()).isEmpty();
+  }
+
+  @Test
+  public void is_not_case_sensitive() throws IOException {
+    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("upper/lower/mixed"));
+
+    underTest.build(context);
+    assertThat(underTest.getRoslynEncodingPerUri()).hasSize(1).containsKey(toUriString("UPPER/lower/MiXeD"));
+    assertThat(underTest.getGeneratedFileUris()).hasSize(1);
+    assertThat(underTest.getGeneratedFileUris().contains(toUriString("UPPER/lower/MiXeD"))).isTrue();
   }
 
   @Test
   public void process_encoding_preserve_null_values() throws IOException {
-    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncodingProtoReport(null, "encodingnull").toString());
+    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncoding(null, "encodingnull").toString());
 
     underTest.build(context);
-    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).containsOnly(entry(toUpperCaseUriString("ENCODINGNULL"), null));
-    assertThat(underTest.getGeneratedFileUppercaseUris()).isEmpty();
+    assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(entry(toUriString("encodingnull"), null));
+    assertThat(underTest.getGeneratedFileUris()).isEmpty();
   }
 
   @Test
   public void ignore_missing_files() throws IOException {
     project1.setProperty("sonar.foo.analyzer.projectOutPath", "notExisiting.pb");
-    project2.setProperty("sonar.foo.analyzer.projectOutPath", mockMetadataProtoReport("generated2").toString());
+    project2.setProperty("sonar.foo.analyzer.projectOutPath", mockGenerated("generated2"));
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED2"));
-    Map.Entry<String, Charset> expected = entry(toUpperCaseUriString("GENERATED2"), null);
-    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).containsExactly(expected);
+    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUriString("generated2"));
+    Map.Entry<String, Charset> expected = entry(toUriString("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerUri()).containsExactly(expected);
   }
 
-  private File mockMetadataProtoReport(String... paths) throws IOException {
+  private String mockGenerated(String path) throws IOException {
     File reportPath = temp.newFolder();
     Path analyzerPath = reportPath.toPath().resolve("output-foo");
     Files.createDirectories(analyzerPath);
     try (OutputStream fos = Files.newOutputStream(analyzerPath.resolve("file-metadata.pb"), StandardOpenOption.CREATE)) {
-      Stream.of(paths).forEach(p -> {
-        try {
-          FileMetadataInfo.newBuilder().setFilePath(p).setIsGenerated(true).build().writeDelimitedTo(fos);
-        } catch (IOException e) {
-          fail(e.getMessage(), e);
-        }
-      });
+      try {
+        FileMetadataInfo.newBuilder().setFilePath(path).setIsGenerated(true).build().writeDelimitedTo(fos);
+      } catch (IOException e) {
+        fail(e.getMessage(), e);
+      }
     }
-    return reportPath;
+    return reportPath.toString();
   }
 
-  private File mockEncodingProtoReport(@Nullable String encoding, String... paths) throws IOException {
+  private String mockEncoding(@Nullable String encoding, String path) throws IOException {
     File reportPath = temp.newFolder();
     Path analyzerPath = reportPath.toPath().resolve("output-foo");
     Files.createDirectories(analyzerPath);
     try (OutputStream fos = Files.newOutputStream(analyzerPath.resolve("file-metadata.pb"), StandardOpenOption.CREATE)) {
-      Stream.of(paths).forEach(p -> {
-        try {
-          FileMetadataInfo.Builder builder = FileMetadataInfo.newBuilder().setFilePath(p);
-          if (encoding != null) {
-            builder.setEncoding(encoding);
-          }
-          builder.build().writeDelimitedTo(fos);
-        } catch (IOException e) {
-          fail(e.getMessage(), e);
+      try {
+        FileMetadataInfo.Builder builder = FileMetadataInfo.newBuilder().setFilePath(path);
+        if (encoding != null) {
+          builder.setEncoding(encoding);
         }
-      });
+        builder.build().writeDelimitedTo(fos);
+      } catch (IOException e) {
+        fail(e.getMessage(), e);
+      }
     }
-    return reportPath;
+    return reportPath.toString();
   }
 
-  private String toUpperCaseUriString(String path) {
-    return Paths.get(path).toUri().toString().toUpperCase();
+  private String toUriString(String path) {
+    return Paths.get(path).toUri().toString();
   }
 }
