@@ -80,7 +80,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
   @Test
   public void do_nothing_if_no_properties() {
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUris()).isEmpty();
+    assertThat(underTest.getGeneratedFileUppercaseUris()).isEmpty();
     assertThat(underTest.getRoslynEncodingPerUri()).isEmpty();
   }
 
@@ -90,7 +90,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPath", mockMetadataProtoReport("generated2").toString());
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUri("generated1"), toUri("generated2"));
+    assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED1"), toUpperCaseUriString("GENERATED2"));
     Map.Entry<URI, Charset> expected1 = new HashMap.SimpleEntry<>(toUri("generated1"), null);
     Map.Entry<URI, Charset> expected2 = new HashMap.SimpleEntry<>(toUri("generated2"), null);
     assertThat(underTest.getRoslynEncodingPerUri()).containsExactly(expected2, expected1);
@@ -102,7 +102,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockMetadataProtoReport("generated2").toString());
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUri("generated11"), toUri("generated12"), toUri("generated2"));
+    assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED11"), toUpperCaseUriString("GENERATED12"),
+      toUpperCaseUriString("GENERATED2"));
     Map.Entry<URI, Charset> expected = new HashMap.SimpleEntry<>(Paths.get("generated2").toUri(), null);
     assertThat(underTest.getRoslynEncodingPerUri()).contains(expected);
   }
@@ -114,7 +115,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockMetadataProtoReport("generated2").toString());
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUri("generated11"), toUri("generated12"), toUri("generated2"));
+    assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED11"), toUpperCaseUriString("GENERATED12"),
+      toUpperCaseUriString("GENERATED2"));
     Map.Entry<URI, Charset> expected = new HashMap.SimpleEntry<>(toUri("generated2"), null);
     assertThat(underTest.getRoslynEncodingPerUri()).contains(expected);
   }
@@ -125,7 +127,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(entry(toUri("encodingutf8"), StandardCharsets.UTF_8));
-    assertThat(underTest.getGeneratedFileUris()).isEmpty();
+    assertThat(underTest.getGeneratedFileUppercaseUris()).isEmpty();
   }
 
   @Test
@@ -134,7 +136,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(entry(toUri("encodingnull"), null));
-    assertThat(underTest.getGeneratedFileUris()).isEmpty();
+    assertThat(underTest.getGeneratedFileUppercaseUris()).isEmpty();
   }
 
   @Test
@@ -143,7 +145,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPath", mockMetadataProtoReport("generated2").toString());
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUri("generated2"));
+    assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED2"));
     Map.Entry<URI, Charset> expected = new HashMap.SimpleEntry<>(toUri("generated2"), null);
     assertThat(underTest.getRoslynEncodingPerUri()).containsExactly(expected);
   }
@@ -184,6 +186,11 @@ public class AbstractGlobalProtobufFileProcessorTest {
     return reportPath;
   }
 
+  private String toUpperCaseUriString(String path) {
+    return Paths.get(path).toUri().toString().toUpperCase();
+  }
+
+  // FIXME: Remove after encoding update
   private URI toUri(String path) {
     return Paths.get(path).toUri();
   }

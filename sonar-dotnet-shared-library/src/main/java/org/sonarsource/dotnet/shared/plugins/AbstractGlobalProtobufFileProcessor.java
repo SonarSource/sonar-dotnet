@@ -57,7 +57,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
   private final String languageKey;
 
   private final Map<URI, Charset> roslynEncodingPerUri = new HashMap<>();
-  private final Set<URI> generatedFileUris = new HashSet<>();
+  private final Set<String> generatedFileUpperCaseUris = new HashSet<>();
 
   public AbstractGlobalProtobufFileProcessor(String languageKey) {
     this.languageKey = languageKey;
@@ -78,7 +78,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
       LOG.debug("Processing {}", metadataReportProtobuf);
       FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();
       fileMetadataImporter.accept(metadataReportProtobuf);
-      this.generatedFileUris.addAll(fileMetadataImporter.getGeneratedFileUris());
+      this.generatedFileUpperCaseUris.addAll(fileMetadataImporter.getGeneratedFileUris().stream().map(x -> x.toString().toUpperCase()).collect(Collectors.toList()));
       this.roslynEncodingPerUri.putAll(fileMetadataImporter.getEncodingPerUri());
     }
   }
@@ -87,8 +87,8 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
     return Collections.unmodifiableMap(roslynEncodingPerUri);
   }
 
-  public Set<URI> getGeneratedFileUris() {
-    return Collections.unmodifiableSet(generatedFileUris);
+  public Set<String> getGeneratedFileUppercaseUris() {
+    return Collections.unmodifiableSet(generatedFileUpperCaseUris);
   }
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {

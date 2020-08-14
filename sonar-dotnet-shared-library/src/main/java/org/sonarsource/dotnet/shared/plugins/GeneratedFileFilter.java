@@ -52,11 +52,10 @@ public class GeneratedFileFilter implements InputFileFilter {
     if (analyzeGeneratedCode) {
       return true;
     }
-    boolean isGenerated = globalReportProcessor.getGeneratedFileUris().contains(inputFile.uri());
+    boolean isGenerated = globalReportProcessor.getGeneratedFileUppercaseUris().contains(inputFile.uri().toString().toUpperCase());
     if (isGenerated) {
       LOG.debug("Skipping auto generated file: {}", inputFile);
     }
     return !isGenerated;
   }
-
 }
