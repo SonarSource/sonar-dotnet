@@ -22,14 +22,12 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
@@ -81,7 +79,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
   public void do_nothing_if_no_properties() {
     underTest.build(context);
     assertThat(underTest.getGeneratedFileUppercaseUris()).isEmpty();
-    assertThat(underTest.getRoslynEncodingPerUri()).isEmpty();
+    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).isEmpty();
   }
 
   @Test
@@ -91,9 +89,9 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED1"), toUpperCaseUriString("GENERATED2"));
-    Map.Entry<URI, Charset> expected1 = new HashMap.SimpleEntry<>(toUri("generated1"), null);
-    Map.Entry<URI, Charset> expected2 = new HashMap.SimpleEntry<>(toUri("generated2"), null);
-    assertThat(underTest.getRoslynEncodingPerUri()).containsExactly(expected2, expected1);
+    Map.Entry<String, Charset> expected1 = entry(toUpperCaseUriString("GENERATED1"), null);
+    Map.Entry<String, Charset> expected2 = entry(toUpperCaseUriString("GENERATED2"), null);
+    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).containsExactly(expected1, expected2);
   }
 
   @Test
@@ -104,8 +102,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
     underTest.build(context);
     assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED11"), toUpperCaseUriString("GENERATED12"),
       toUpperCaseUriString("GENERATED2"));
-    Map.Entry<URI, Charset> expected = new HashMap.SimpleEntry<>(Paths.get("generated2").toUri(), null);
-    assertThat(underTest.getRoslynEncodingPerUri()).contains(expected);
+    Map.Entry<String, Charset> expected = entry(toUpperCaseUriString("GENERATED2"), null);
+    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).contains(expected);
   }
 
   @Test
@@ -117,8 +115,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
     underTest.build(context);
     assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED11"), toUpperCaseUriString("GENERATED12"),
       toUpperCaseUriString("GENERATED2"));
-    Map.Entry<URI, Charset> expected = new HashMap.SimpleEntry<>(toUri("generated2"), null);
-    assertThat(underTest.getRoslynEncodingPerUri()).contains(expected);
+    Map.Entry<String, Charset> expected = entry(toUpperCaseUriString("GENERATED2"), null);
+    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).contains(expected);
   }
 
   @Test
@@ -126,7 +124,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncodingProtoReport("UTF-8", "encodingutf8").toString());
 
     underTest.build(context);
-    assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(entry(toUri("encodingutf8"), StandardCharsets.UTF_8));
+    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).containsOnly(entry(toUpperCaseUriString("ENCODINGUTF8"), StandardCharsets.UTF_8));
     assertThat(underTest.getGeneratedFileUppercaseUris()).isEmpty();
   }
 
@@ -135,7 +133,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncodingProtoReport(null, "encodingnull").toString());
 
     underTest.build(context);
-    assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(entry(toUri("encodingnull"), null));
+    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).containsOnly(entry(toUpperCaseUriString("ENCODINGNULL"), null));
     assertThat(underTest.getGeneratedFileUppercaseUris()).isEmpty();
   }
 
@@ -146,8 +144,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getGeneratedFileUppercaseUris()).containsExactlyInAnyOrder(toUpperCaseUriString("GENERATED2"));
-    Map.Entry<URI, Charset> expected = new HashMap.SimpleEntry<>(toUri("generated2"), null);
-    assertThat(underTest.getRoslynEncodingPerUri()).containsExactly(expected);
+    Map.Entry<String, Charset> expected = entry(toUpperCaseUriString("GENERATED2"), null);
+    assertThat(underTest.getRoslynEncodingPerUpperCaseUri()).containsExactly(expected);
   }
 
   private File mockMetadataProtoReport(String... paths) throws IOException {
@@ -188,10 +186,5 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
   private String toUpperCaseUriString(String path) {
     return Paths.get(path).toUri().toString().toUpperCase();
-  }
-
-  // FIXME: Remove after encoding update
-  private URI toUri(String path) {
-    return Paths.get(path).toUri();
   }
 }
