@@ -37,6 +37,7 @@ import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.Phase.Name;
 import org.sonar.api.batch.bootstrap.ProjectBuilder;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
@@ -56,6 +57,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
 
   private final String languageKey;
 
+  // We need case-insensitive string matching for Uri, because Uri for "file://D:/Something" is not equal to "file://d:/something"
   private final Map<String, Charset> roslynEncodingPerUri = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
   private final Set<String> generatedFileUris = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
@@ -89,8 +91,8 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
     return Collections.unmodifiableMap(roslynEncodingPerUri);
   }
 
-  public Set<String> getGeneratedFileUris() {
-    return Collections.unmodifiableSet(generatedFileUris);
+  public boolean isGenerated(InputFile inputFile) {
+    return generatedFileUris.contains(inputFile.uri().toString()); // Case-Insensitive check
   }
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {

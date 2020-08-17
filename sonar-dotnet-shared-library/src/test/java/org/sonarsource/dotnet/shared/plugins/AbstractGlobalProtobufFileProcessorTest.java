@@ -38,11 +38,14 @@ import org.sonar.api.batch.bootstrap.ProjectBuilder;
 import org.sonar.api.batch.bootstrap.ProjectBuilder.Context;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.bootstrap.ProjectReactor;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AbstractGlobalProtobufFileProcessorTest {
 
@@ -75,7 +78,6 @@ public class AbstractGlobalProtobufFileProcessorTest {
   @Test
   public void do_nothing_if_no_properties() {
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUris()).isEmpty();
     assertThat(underTest.getRoslynEncodingPerUri()).isEmpty();
   }
 
@@ -85,7 +87,9 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPath", mockGenerated("generated2"));
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUriString("generated1"), toUriString("generated2"));
+    assertThat(underTest.isGenerated(mockInputFile("generated1"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("generated2"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("generated3"))).isFalse();
     Map.Entry<String, Charset> expected1 = entry(toUriString("generated1"), null);
     Map.Entry<String, Charset> expected2 = entry(toUriString("generated2"), null);
     assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(expected1, expected2);
@@ -97,8 +101,10 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("generated2"));
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUriString("generated11"), toUriString("generated12"),
-      toUriString("generated2"));
+    assertThat(underTest.isGenerated(mockInputFile("generated11"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("generated12"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("generated2"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("generated3"))).isFalse();
     Map.Entry<String, Charset> expected = entry(toUriString("generated2"), null);
     assertThat(underTest.getRoslynEncodingPerUri()).contains(expected);
   }
@@ -110,8 +116,10 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("generated2"));
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUriString("generated11"), toUriString("generated12"),
-      toUriString("generated2"));
+    assertThat(underTest.isGenerated(mockInputFile("generated11"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("generated12"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("generated2"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("generated3"))).isFalse();
     Map.Entry<String, Charset> expected = entry(toUriString("generated2"), null);
     assertThat(underTest.getRoslynEncodingPerUri()).contains(expected);
   }
@@ -122,7 +130,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(entry(toUriString("encodingutf8"), StandardCharsets.UTF_8));
-    assertThat(underTest.getGeneratedFileUris()).isEmpty();
+    assertThat(underTest.isGenerated(mockInputFile("encodingutf8"))).isFalse();
   }
 
   @Test
@@ -131,8 +139,10 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getRoslynEncodingPerUri()).hasSize(1).containsKey(toUriString("UPPER/lower/MiXeD"));
-    assertThat(underTest.getGeneratedFileUris()).hasSize(1);
-    assertThat(underTest.getGeneratedFileUris().contains(toUriString("UPPER/lower/MiXeD"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("UPPER/lower/MiXeD"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("UPPER/LOWER/MIXED"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("upper/lower/mixed"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("upper/LOWER/mIxEd"))).isTrue();
   }
 
   @Test
@@ -141,7 +151,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(entry(toUriString("encodingnull"), null));
-    assertThat(underTest.getGeneratedFileUris()).isEmpty();
+    assertThat(underTest.isGenerated(mockInputFile("encodingnull"))).isFalse();
   }
 
   @Test
@@ -150,7 +160,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPath", mockGenerated("generated2"));
 
     underTest.build(context);
-    assertThat(underTest.getGeneratedFileUris()).containsExactlyInAnyOrder(toUriString("generated2"));
+    assertThat(underTest.isGenerated(mockInputFile("generated2"))).isTrue();
+    assertThat(underTest.isGenerated(mockInputFile("generated3"))).isFalse();
     Map.Entry<String, Charset> expected = entry(toUriString("generated2"), null);
     assertThat(underTest.getRoslynEncodingPerUri()).containsExactly(expected);
   }
@@ -189,5 +200,11 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
   private String toUriString(String path) {
     return Paths.get(path).toUri().toString();
+  }
+
+  private InputFile mockInputFile(String path) {
+    InputFile inputFile = mock(InputFile.class);
+    when(inputFile.uri()).thenReturn(Paths.get(path).toUri());
+    return inputFile;
   }
 }
