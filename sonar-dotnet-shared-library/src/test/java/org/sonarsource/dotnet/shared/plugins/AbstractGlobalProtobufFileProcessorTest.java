@@ -39,6 +39,8 @@ import org.sonar.api.batch.bootstrap.ProjectBuilder.Context;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.bootstrap.ProjectReactor;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,6 +53,9 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
+
+  @Rule
+  public LogTester logs = new LogTester();
 
   private Context context;
   private AbstractGlobalProtobufFileProcessor underTest;
@@ -143,6 +148,28 @@ public class AbstractGlobalProtobufFileProcessorTest {
     assertThat(underTest.isGenerated(mockInputFile("UPPER/LOWER/MIXED"))).isTrue();
     assertThat(underTest.isGenerated(mockInputFile("upper/lower/mixed"))).isTrue();
     assertThat(underTest.isGenerated(mockInputFile("upper/LOWER/mIxEd"))).isTrue();
+  }
+
+  @Test
+  public void warn_about_casing_colission() throws IOException {
+    project1.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncoding("UTF-8", "collision") + "," + mockEncoding("UTF-16", "COLLISION"));
+    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncoding("ASCII", "CoLLiSioN"));
+
+    underTest.build(context);
+    assertThat(underTest.getRoslynEncodingPerUri()).hasSize(1).containsKey(toUriString("collision"));
+    assertThat(logs.logs(LoggerLevel.WARN)).contains(
+      String.format("Different encodings UTF-8 vs. UTF-16 were detected for single file %s. Case-Sensitive paths are not supported.", toUriString("COLLISION")));
+    assertThat(logs.logs(LoggerLevel.WARN)).contains(
+      String.format("Different encodings UTF-8 vs. US-ASCII were detected for single file %s. Case-Sensitive paths are not supported.", toUriString("CoLLiSioN")));
+  }
+
+  @Test
+  public void do_not_warn_about_casing_colission_for_same_encoding() throws IOException {
+    project1.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncoding("UTF-8", "collision") + "," + mockEncoding("UTF-8", "COLLISION"));
+
+    underTest.build(context);
+    assertThat(underTest.getRoslynEncodingPerUri()).hasSize(1).containsKey(toUriString("collision"));
+    assertThat(logs.logs(LoggerLevel.WARN).stream().filter(x -> x.contains("COLLISION"))).isEmpty();
   }
 
   @Test

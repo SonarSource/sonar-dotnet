@@ -82,7 +82,13 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
       fileMetadataImporter.accept(metadataReportProtobuf);
       this.generatedFileUris.addAll(fileMetadataImporter.getGeneratedFileUris().stream().map(URI::toString).collect(Collectors.toList()));
       for (Map.Entry<URI, Charset> entry : fileMetadataImporter.getEncodingPerUri().entrySet()) {
-        this.roslynEncodingPerUri.put(entry.getKey().toString(), entry.getValue());
+        String key = entry.getKey().toString();
+        if (!this.roslynEncodingPerUri.containsKey(key)) {
+          this.roslynEncodingPerUri.put(key, entry.getValue());
+        } else if (this.roslynEncodingPerUri.get(key) != entry.getValue()) {
+          LOG.warn("Different encodings {} vs. {} were detected for single file {}. Case-Sensitive paths are not supported.",
+            this.roslynEncodingPerUri.get(key), entry.getValue(), key);
+        }
       }
     }
   }
