@@ -130,6 +130,16 @@ public class AbstractGlobalProtobufFileProcessorTest {
   }
 
   @Test
+  public void process_generated_is_not_case_sensitive() throws IOException {
+    project1.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("generated"));
+    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("GENERATED"));
+
+    underTest.build(context);
+    assertThat(underTest.getRoslynEncodingPerUri()).hasSize(1);
+    assertThat(underTest.isGenerated(mockInputFile("GeNeRaTeD"))).isTrue();
+  }
+
+  @Test
   public void process_encoding_new_prop() throws IOException {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncoding("UTF-8", "encodingutf8"));
 
@@ -143,7 +153,13 @@ public class AbstractGlobalProtobufFileProcessorTest {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("upper/lower/mixed"));
 
     underTest.build(context);
-    assertThat(underTest.getRoslynEncodingPerUri()).hasSize(1).containsKey(toUriString("UPPER/lower/MiXeD"));
+    assertThat(underTest.getRoslynEncodingPerUri())
+      .hasSize(1)
+      .containsKey(toUriString("UPPER/lower/MiXeD"))
+      .containsKey(toUriString("UPPER/LOWER/MIXED"))
+      .containsKey(toUriString("upper/lower/mixed"))
+      .containsKey(toUriString("upper/LOWER/mIxEd"));
+
     assertThat(underTest.isGenerated(mockInputFile("UPPER/lower/MiXeD"))).isTrue();
     assertThat(underTest.isGenerated(mockInputFile("UPPER/LOWER/MIXED"))).isTrue();
     assertThat(underTest.isGenerated(mockInputFile("upper/lower/mixed"))).isTrue();

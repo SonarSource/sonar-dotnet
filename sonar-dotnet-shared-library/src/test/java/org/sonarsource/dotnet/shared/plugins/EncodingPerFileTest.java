@@ -77,10 +77,11 @@ public class EncodingPerFileTest {
   @Test
   public void encoding_per_file_is_not_case_sensitive() throws IOException {
     Charset sqCharset = StandardCharsets.UTF_16;
-    Charset roslynCharset = StandardCharsets.UTF_8;
 
-    assertEncodingMatch(roslynCharset, URI.create(fileUri.toString().toUpperCase()), sqCharset, false);
-    assertEncodingMatch(roslynCharset, URI.create(fileUri.toString().toLowerCase()), sqCharset, false);
+    assertEncodingMatch(StandardCharsets.UTF_8, URI.create(fileUri.toString().toUpperCase()), sqCharset, false);
+    assertEncodingMatch(StandardCharsets.UTF_8, URI.create(fileUri.toString().toLowerCase()), sqCharset, false);
+    assertEncodingMatch(StandardCharsets.UTF_16, URI.create(fileUri.toString().toUpperCase()), sqCharset, true);
+    assertEncodingMatch(StandardCharsets.UTF_16, URI.create(fileUri.toString().toLowerCase()), sqCharset, true);
   }
 
   private void assertEncodingMatch(Charset roslynCharset, URI fileUri, Charset sqCharset, boolean result) throws IOException {
