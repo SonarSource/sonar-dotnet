@@ -65,7 +65,7 @@ public class CasingAppTest {
 
     orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
-    String class1ComponentKey = TestUtils.hasModules(ORCHESTRATOR) ? "CasingApp:CasingApp:600E8C27-9AB2-48E9-AA48-2713E4B34288:SRC/Class1.cs" : "CasingApp:SRC/Class1.cs";
+    String class1ComponentKey = "CasingApp:SRC/Class1.cs";
 
     assertThat(getComponent(class1ComponentKey)).isNotNull();
 

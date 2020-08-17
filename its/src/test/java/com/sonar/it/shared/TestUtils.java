@@ -177,10 +177,6 @@ public class TestUtils {
     return version;
   }
 
-  public static boolean hasModules(Orchestrator orch) {
-    return !orch.getServer().version().isGreaterThanOrEquals(7, 6);
-  }
-
   static WsClient newWsClient(Orchestrator orch) {
     return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
       .url(orch.getServer().getUrl())
