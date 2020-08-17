@@ -66,8 +66,6 @@ public class MultipleProjectsTest {
     assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
 
     // Scanner for MSBuild caches the analyzer, so running the test twice in a row means the old binary is used.
-    // This code deletes the cache, but there should be a way to run without cache.
-    // Ticket: https://jira.sonarsource.com/browse/SONARMSBRU-346
     String localAppData = System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube";
     try {
       FileUtils.deleteDirectory(new File(localAppData));
@@ -116,7 +114,7 @@ public class MultipleProjectsTest {
   }
 
   @Test
-  public void barIssuesAreFound() {
+  public void firstProjectFirstClassIssues() {
     List<Issues.Issue> barIssues = getIssues(FIRST_PROJECT_FIRST_CLASS_FILE)
       .stream()
       .filter(x -> x.getRule().startsWith("csharpsquid:"))
@@ -136,7 +134,7 @@ public class MultipleProjectsTest {
   }
 
   @Test
-  public void simpleClassIssueIsFound() {
+  public void secondProjectFirstClassIssues() {
     List<Issues.Issue> barIssues = getIssues(SECOND_PROJECT_FIRST_CLASS_FILE)
       .stream()
       .filter(x -> x.getRule().startsWith("csharpsquid:"))
