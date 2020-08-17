@@ -11332,6 +11332,36 @@
   <data name="S5773_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
   </data>
+  <data name="S5842_Category" xml:space="preserve">
+    <value>Minor Bug</value>
+  </data>
+  <data name="S5842_Description" xml:space="preserve">
+    <value>A regex should never include a repetitive pattern whose body would match the empty String. This is usually a sign that a part of the regex is redundant or does not do what the author intended.</value>
+  </data>
+  <data name="S5842_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S5842_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S5842_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S5842_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S5842_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S5842_Tags" xml:space="preserve">
+    <value>regex</value>
+  </data>
+  <data name="S5842_Title" xml:space="preserve">
+    <value>Regex repetition pattern's body should not match the empty String</value>
+  </data>
+  <data name="S5842_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>
