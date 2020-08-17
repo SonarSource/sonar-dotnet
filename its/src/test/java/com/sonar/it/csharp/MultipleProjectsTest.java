@@ -349,9 +349,32 @@ public class MultipleProjectsTest {
 
   @Test
   public void linesOfCodeByLine() {
-    String simpleClassNloc = getFileMeasure(SECOND_PROJECT_FIRST_CLASS_FILE, "ncloc_data").getValue();
-    // here we test all expected LOC
-    assertThat(simpleClassNloc)
+    String firstProjectFirstClass = getFileMeasure(FIRST_PROJECT_FIRST_CLASS_FILE, "ncloc_data").getValue();
+    assertThat(firstProjectFirstClass)
+      .contains("1=1")
+      .contains("2=1")
+      .contains("4=1")
+      .contains("5=1")
+      .contains("6=1")
+      .contains("7=1")
+      .contains("8=1")
+      .contains("10=1")
+      .contains("12=1")
+      .contains("14=1")
+      .contains("16=1")
+      .contains("17=1")
+      .contains("18=1")
+      .contains("20=1")
+      .contains("22=1")
+      .contains("23=1")
+      .contains("25=1")
+      .contains("26=1")
+      .contains("27=1")
+      .contains("28=1");
+    assertThat(firstProjectFirstClass.length()).isEqualTo(92); // No other line
+
+    String secondProjectFirstClassNcloc = getFileMeasure(SECOND_PROJECT_FIRST_CLASS_FILE, "ncloc_data").getValue();
+    assertThat(secondProjectFirstClassNcloc)
       .contains("2=1")
       .contains("3=1")
       .contains("4=1")
@@ -377,16 +400,7 @@ public class MultipleProjectsTest {
       .contains("26=1")
       .contains("27=1");
 
-    assertThat(simpleClassNloc.length()).isEqualTo(111); // No other line
-
-    String barNloc = getFileMeasure(FIRST_PROJECT_FIRST_CLASS_FILE, "ncloc_data").getValue();
-    // here we just test some of the values
-    assertThat(barNloc)
-      .contains("1=1")
-      .contains("2=1")
-      .contains("8=1")
-      .contains("28=1");
-    assertThat(barNloc.length()).isEqualTo(92); // No other line
+    assertThat(secondProjectFirstClassNcloc.length()).isEqualTo(111); // No other line
   }
 
   /* Helper methods */
