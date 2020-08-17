@@ -222,7 +222,8 @@ stages:
           Get-Content -Path $testProjFileName
 
           Write-Host "Build UnitTest project"
-          dotnet build $testProjFileName -c $(BuildConfiguration)
+          # Parallel build is disabled in order to avoid concurrent resx file generation (RspecStrings.resx) which results in unpredictable build failures
+          dotnet build $testProjFileName -c $(BuildConfiguration) /m:1
 
           Write-Host "List Sonar*.dll files"
           Get-ChildItem -Recurse .\tests\SonarAnalyzer.UnitTest\bin\${BuildConfiguration}\ -Filter Sonar*.dll
