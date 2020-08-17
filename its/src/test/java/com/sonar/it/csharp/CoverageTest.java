@@ -94,6 +94,30 @@ public class CoverageTest {
   }
 
   @Test
+  public void open_cover_on_MultipleProjects() throws Exception {
+    Path projectDir = Tests.projectDir(temp, "MultipleProjects");
+
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("MultipleProjects", projectDir)
+      .setProperty("sonar.cs.opencover.reportsPaths", "opencover.xml");
+
+    orchestrator.executeBuild(beginStep);
+
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+
+    BuildResult buildResult = orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 5 files, 3 main files, 3 main files with coverage, 2 test files, 0 project excluded files, 0 other language files");
+
+    assertCoverageMetrics("MultipleProjects", 25, 3, 12, 5);
+    assertCoverageMetrics("MultipleProjects:FirstProject/FirstClass.cs", 10, 0, 2, 1);
+    assertLineCoverageMetrics("MultipleProjects:FirstProject/SecondClass.cs", 4, 0);
+    assertNoCoverageMetrics("MultipleProjects:FirstProject/Properties/AssemblyInfo.cs");
+    assertCoverageMetrics("MultipleProjects:SecondProject/FirstClass.cs", 11, 3, 10, 4);
+  }
+
+  @Test
   public void dotcover() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
 
@@ -166,5 +190,29 @@ public class CoverageTest {
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
     return orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+  }
+
+  private void assertCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines, int conditionsToCover, int uncoveredConditions)
+  {
+    assertThat(getMeasureAsInt(componentKey, "lines_to_cover")).isEqualTo(linesToCover);
+    assertThat(getMeasureAsInt(componentKey, "uncovered_lines")).isEqualTo(uncoveredLines);
+    assertThat(getMeasureAsInt(componentKey, "conditions_to_cover")).isEqualTo(conditionsToCover);
+    assertThat(getMeasureAsInt(componentKey, "uncovered_conditions")).isEqualTo(uncoveredConditions);
+  }
+
+  private void assertLineCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines)
+  {
+    assertThat(getMeasureAsInt(componentKey, "lines_to_cover")).isEqualTo(linesToCover);
+    assertThat(getMeasureAsInt(componentKey, "uncovered_lines")).isEqualTo(uncoveredLines);
+    assertThat(getMeasureAsInt(componentKey, "conditions_to_cover")).isNull();
+    assertThat(getMeasureAsInt(componentKey, "uncovered_conditions")).isNull();
+  }
+
+  private void assertNoCoverageMetrics(String componentKey)
+  {
+    assertThat(getMeasureAsInt(componentKey, "lines_to_cover")).isNull();
+    assertThat(getMeasureAsInt(componentKey, "uncovered_lines")).isNull();
+    assertThat(getMeasureAsInt(componentKey, "conditions_to_cover")).isNull();
+    assertThat(getMeasureAsInt(componentKey, "uncovered_conditions")).isNull();
   }
 }
