@@ -10,9 +10,9 @@ The `sonarpedia.json` file is used by:
 
 Script must be run from project root directory. For more details, you can read the powershell code inside `rspec.ps1`.
 
-**Usage 1**: Update all rules or language metadata. 
+**Usage 1**: Update all rules or language metadata.
 
-Basically, the rule-api JAR will update: `sonarway_profile*`, `*.html` and `*.json`, `sonarpedia.json`.
+Basically, the rule-api JAR will update: `sonarway_profile*`, `*.html` and `*.json`, `sonarpedia.json` and will generate `RspecStrings.resx`.
 
 ```
 ./scripts/rspec/rspec cs

@@ -42,12 +42,6 @@
     <NoWarn>NU1605</NoWarn>
   </PropertyGroup>
 
-  <!-- Generation of resx files from the Rspec file-->
-  <Import Project="..\Rspec2Resx.targets" />
-  <PropertyGroup>
-    <Rspec2Resx>cs</Rspec2Resx>
-  </PropertyGroup>
-
   <Import Project=".\DownloadCBDE.targets" />
 
   <ItemGroup>

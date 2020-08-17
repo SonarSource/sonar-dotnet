@@ -35,12 +35,6 @@
     <NoWarn>NU1605</NoWarn>
   </PropertyGroup>
 
-  <!-- Generation of resx files from the Rspec file-->
-  <Import Project="..\Rspec2Resx.targets" />
-  <PropertyGroup>
-    <Rspec2Resx>vbnet</Rspec2Resx>
-  </PropertyGroup>
-
   <ItemGroup>
     <AdditionalFiles Include="..\..\.sonarlint\SonarLint.xml">
       <Link>Properties\SonarLint.xml</Link>

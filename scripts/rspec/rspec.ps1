@@ -273,3 +273,6 @@ if ($className -And $ruleKey) {
         Remove-Item -Recurse -Force $vsTempFolder
     }
 }
+
+# Generate RspecStrings.resx using the new metadata
+Invoke-Expression -Command "& { scripts\rspec\rspec2resx.ps1 $language .\sonaranalyzer-dotnet\rspec\$language $sonarpediaFolder\RspecStrings.resx }"
