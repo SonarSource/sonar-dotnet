@@ -19,6 +19,10 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -26,11 +30,6 @@ import org.junit.rules.TemporaryFolder;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -117,7 +116,7 @@ public class AbstractProjectConfigurationTest {
   }
 
   @Test
-  public void informHowManyProtoFilesAreFound() throws IOException {
+  public void whenProtobufReportsArePresent_informHowManyProtoFilesAreFound() throws IOException {
     Configuration configuration = createEmptyMockConfiguration();
     mockProtobufOutPaths(configuration);
 
@@ -128,6 +127,19 @@ public class AbstractProjectConfigurationTest {
         "Analyzer working directory '" + workDir.toString() + "\\report1\\output-cs' contains 1 .pb file(s)",
         "Analyzer working directory '" + workDir.toString() + "\\report2\\output-cs' contains 1 .pb file(s)");
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+  }
+
+  @Test
+  public void whenProtobufReportsArePresent_protobufReportPathsContainsCorrectElements() throws IOException {
+    Configuration configuration = createEmptyMockConfiguration();
+    mockProtobufOutPaths(configuration);
+
+    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    assertThat(config.protobufReportPaths()).isNotEmpty();
+    assertThat(config.roslynReportPaths()).isEmpty();
+    assertThat(config.protobufReportPaths()).containsOnly(
+      workDir.resolve("report1").resolve("output-cs"),
+      workDir.resolve("report2").resolve("output-cs"));
   }
 
   @Test
@@ -142,17 +154,6 @@ public class AbstractProjectConfigurationTest {
     AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN).get(0)).matches(s -> s.endsWith("contains no .pb file(s). Analyzer results won't be loaded from this directory."));
-  }
-
-  @Test
-  public void onlyProtobufReportsPresent() throws IOException {
-    Configuration configuration = createEmptyMockConfiguration();
-    mockProtobufOutPaths(configuration);
-
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
-    assertThat(config.protobufReportPaths()).isNotEmpty();
-    assertThat(config.roslynReportPaths()).isEmpty();
-    assertThat(config.protobufReportPaths()).containsOnly(workDir.resolve("report1").resolve("output-cs"), workDir.resolve("report2").resolve("output-cs"));
   }
 
   @Test
