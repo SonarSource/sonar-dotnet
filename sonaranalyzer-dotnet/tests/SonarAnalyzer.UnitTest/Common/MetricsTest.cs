@@ -386,11 +386,13 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { switch (p) { default: break; } } }")
                 .Should().Be(1);
             Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { var x = p switch { _ => 1  }; } }")
-                .Should().Be(1);
+                .Should().Be(2);
             Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { switch (p) { case 0: break; default: break; } } }")
                 .Should().Be(2);
-            Complexity(AnalyzerLanguage.CSharp, @"class MyClass { void MyMethod(int p) { var x = p switch { 1 => ""one"", _ => string.Empty  }; } }")
-                .Should().Be(1); // Switch arms should increase complexity. See: https://github.com/SonarSource/sonar-dotnet/issues/3513
+            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { var x = p switch { 0 => \"zero\", 1 => \"one\", _ => \"other\"  }; } }")
+                .Should().Be(4);
+            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(bool first, bool second) { var _ = first switch { true => second switch { true => 1, _ => 2}, _ => 3}; } }")
+                .Should().Be(5);
             Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { foo: ; } }")
                 .Should().Be(1);
             Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int p) { do { } while (false); } }")

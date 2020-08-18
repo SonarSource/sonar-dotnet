@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Metrics.CSharp
 {
@@ -156,15 +157,20 @@ namespace SonarAnalyzer.Metrics.CSharp
                 base.VisitCaseSwitchLabel(node);
             }
 
-            private void AddLocation(SyntaxToken node)
+            public override void Visit(SyntaxNode node)
             {
-                IncrementLocations.Add(new SecondaryLocation(node.GetLocation(), "+1"));
+                if (SwitchExpressionArmSyntaxWrapper.IsInstance(node))
+                {
+                    var arm = (SwitchExpressionArmSyntaxWrapper)node;
+                    AddLocation(arm.EqualsGreaterThanToken);
+                }
+
+                base.Visit(node);
             }
 
-            private static bool HasBody(SyntaxNode node)
-            {
-                return node.ChildNodes().AnyOfKind(SyntaxKind.Block);
-            }
+            private void AddLocation(SyntaxToken node) => IncrementLocations.Add(new SecondaryLocation(node.GetLocation(), "+1"));
+
+            private static bool HasBody(SyntaxNode node) => node.ChildNodes().AnyOfKind(SyntaxKind.Block);
         }
     }
 }
