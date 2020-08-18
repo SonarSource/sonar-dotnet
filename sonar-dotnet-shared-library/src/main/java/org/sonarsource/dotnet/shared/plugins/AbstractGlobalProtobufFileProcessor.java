@@ -25,18 +25,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.Phase.Name;
 import org.sonar.api.batch.bootstrap.ProjectBuilder;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
@@ -56,8 +57,9 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
 
   private final String languageKey;
 
-  private final Map<URI, Charset> roslynEncodingPerUri = new HashMap<>();
-  private final Set<URI> generatedFileUris = new HashSet<>();
+  // We need case-insensitive string matching for Uri, because Uri for "file://D:/Something" is not equal to "file://d:/something"
+  private final Map<String, Charset> roslynEncodingPerUri = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+  private final Set<String> generatedFileUris = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
   public AbstractGlobalProtobufFileProcessor(String languageKey) {
     this.languageKey = languageKey;
@@ -78,17 +80,28 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
       LOG.debug("Processing {}", metadataReportProtobuf);
       FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();
       fileMetadataImporter.accept(metadataReportProtobuf);
-      this.generatedFileUris.addAll(fileMetadataImporter.getGeneratedFileUris());
-      this.roslynEncodingPerUri.putAll(fileMetadataImporter.getEncodingPerUri());
+      this.generatedFileUris.addAll(fileMetadataImporter.getGeneratedFileUris().stream().map(URI::toString).collect(Collectors.toList()));
+      for (Map.Entry<URI, Charset> entry : fileMetadataImporter.getEncodingPerUri().entrySet()) {
+        String key = entry.getKey().toString();
+        if (!this.roslynEncodingPerUri.containsKey(key)) {
+          this.roslynEncodingPerUri.put(key, entry.getValue());
+        } else if (this.roslynEncodingPerUri.get(key) != entry.getValue()) {
+          LOG.warn("Different encodings {} vs. {} were detected for single file {}. Case-Sensitive paths are not supported.",
+            this.roslynEncodingPerUri.get(key), entry.getValue(), key);
+        }
+      }
     }
   }
 
-  public Map<URI, Charset> getRoslynEncodingPerUri() {
+  public Map<String, Charset> getRoslynEncodingPerUri() {
     return Collections.unmodifiableMap(roslynEncodingPerUri);
   }
 
-  public Set<URI> getGeneratedFileUris() {
-    return Collections.unmodifiableSet(generatedFileUris);
+  /**
+   * Uri check is Case-Insensitive.
+   */
+  public boolean isGenerated(InputFile inputFile) {
+    return generatedFileUris.contains(inputFile.uri().toString());
   }
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {

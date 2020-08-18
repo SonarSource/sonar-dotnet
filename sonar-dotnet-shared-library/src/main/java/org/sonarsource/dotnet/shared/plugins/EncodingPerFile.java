@@ -19,7 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import org.sonar.api.batch.InstantiationStrategy;
@@ -39,16 +38,17 @@ public class EncodingPerFile {
   }
 
   boolean encodingMatch(InputFile inputFile) {
-    URI inputFileUri = inputFile.uri();
+    String uri = inputFile.uri().toString();
 
-    if (!globalReportProcessor.getRoslynEncodingPerUri().containsKey(inputFileUri)) {
+    if (!globalReportProcessor.getRoslynEncodingPerUri().containsKey(uri)) {
       // When there is no entry for a file, it means it was not processed by Roslyn. So we consider encoding to be ok.
       return true;
     }
 
-    Charset roslynEncoding = globalReportProcessor.getRoslynEncodingPerUri().get(inputFileUri);
+    // Case-Insensitive check
+    Charset roslynEncoding = globalReportProcessor.getRoslynEncodingPerUri().get(uri); 
     if (roslynEncoding == null) {
-      LOG.warn("File '{}' does not have encoding information. Skip it.", inputFileUri);
+      LOG.warn("File '{}' does not have encoding information. Skip it.", uri);
       return false;
     }
 
@@ -61,7 +61,7 @@ public class EncodingPerFile {
       } else {
         LOG.warn("Encoding detected by Roslyn and encoding used by SonarQube do not match for file {}. "
           + "SonarQube encoding is '{}', Roslyn encoding is '{}'. File will be skipped.",
-          inputFileUri, sqEncoding, roslynEncoding);
+          uri, sqEncoding, roslynEncoding);
       }
     }
     return sameEncoding;

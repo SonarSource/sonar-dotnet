@@ -23,8 +23,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.TreeMap;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -51,16 +50,12 @@ public class EncodingPerFileTest {
     Charset roslynCharset = StandardCharsets.UTF_8;
     Charset sqCharset = StandardCharsets.UTF_16;
 
-    HashMap<URI, Charset> encodingPerUri = new HashMap<>();
-    encodingPerUri.put(fileUri, roslynCharset);
-    assertEncodingMatch(encodingPerUri, URI.create("dummy"), sqCharset, true);
+    assertEncodingMatch(roslynCharset, URI.create("dummy"), sqCharset, true);
   }
 
   @Test
   public void should_treat_as_mismatch_when_roslyn_encoding_missing() throws IOException {
-    HashMap<URI, Charset> encodingPerUri = new HashMap<>();
-    encodingPerUri.put(fileUri, null);
-    assertEncodingMatch(encodingPerUri, fileUri, null, false);
+    assertEncodingMatch(null, fileUri, null, false);
   }
 
   @Test
@@ -68,9 +63,7 @@ public class EncodingPerFileTest {
     Charset roslynCharset = StandardCharsets.UTF_8;
     Charset sqCharset = StandardCharsets.UTF_16;
 
-    HashMap<URI, Charset> encodingPerUri = new HashMap<>();
-    encodingPerUri.put(fileUri, roslynCharset);
-    assertEncodingMatch(encodingPerUri, fileUri, sqCharset, false);
+    assertEncodingMatch(roslynCharset, fileUri, sqCharset, false);
   }
 
   @Test
@@ -78,13 +71,25 @@ public class EncodingPerFileTest {
     Charset roslynCharset = StandardCharsets.UTF_16;
     Charset sqCharset = StandardCharsets.UTF_16LE;
 
-    HashMap<URI, Charset> encodingPerUri = new HashMap<>();
-    encodingPerUri.put(fileUri, roslynCharset);
-    assertEncodingMatch(encodingPerUri, fileUri, sqCharset, true);
+    assertEncodingMatch(roslynCharset, fileUri, sqCharset, true);
   }
 
-  private void assertEncodingMatch(Map<URI, Charset> encodingPerUri, URI fileUri, Charset sqCharset, boolean result) throws IOException {
+  @Test
+  public void encoding_per_file_is_not_case_sensitive() throws IOException {
+    Charset sqCharset = StandardCharsets.UTF_16;
+
+    // AbstractGlobalProtobufFileProcessor.getRoslynEncodingPerUri() case-insensitivity is mocked in assertEncodingMatch.
+    // We test that encodingMatch() uses this underlying tree and doesn't change the expected case insensitive behavior.
+    assertEncodingMatch(StandardCharsets.UTF_8, URI.create(fileUri.toString().toUpperCase()), sqCharset, false);
+    assertEncodingMatch(StandardCharsets.UTF_8, URI.create(fileUri.toString().toLowerCase()), sqCharset, false);
+    assertEncodingMatch(StandardCharsets.UTF_16, URI.create(fileUri.toString().toUpperCase()), sqCharset, true);
+    assertEncodingMatch(StandardCharsets.UTF_16, URI.create(fileUri.toString().toLowerCase()), sqCharset, true);
+  }
+
+  private void assertEncodingMatch(Charset roslynCharset, URI fileUri, Charset sqCharset, boolean result) throws IOException {
     AbstractGlobalProtobufFileProcessor processor = mock(AbstractGlobalProtobufFileProcessor.class);
+    TreeMap<String, Charset> encodingPerUri = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    encodingPerUri.put(this.fileUri.toString(), roslynCharset);
     when(processor.getRoslynEncodingPerUri()).thenReturn(encodingPerUri);
     EncodingPerFile encodingPerFile = new EncodingPerFile(processor);
     InputFile inputFile = newInputFile(fileUri, sqCharset);
