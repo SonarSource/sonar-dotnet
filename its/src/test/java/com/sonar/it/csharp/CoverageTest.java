@@ -77,8 +77,7 @@ public class CoverageTest {
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
-    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
+    assertLineCoverageMetrics("CoverageTest", 2, 1);
   }
 
   @Test
@@ -89,8 +88,7 @@ public class CoverageTest {
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
-    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(0);
+    assertLineCoverageMetrics("CoverageTest", 2, 0);
   }
 
   @Test
@@ -125,8 +123,7 @@ public class CoverageTest {
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
-    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
+    assertLineCoverageMetrics("CoverageTest", 2, 1);
   }
 
   @Test
@@ -137,8 +134,7 @@ public class CoverageTest {
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
-    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
+    assertLineCoverageMetrics("CoverageTest", 2, 1);
   }
 
   @Test
@@ -163,8 +159,7 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
 
     assertThat(Tests.getComponent("NoCoverageOnTests:MyLib.Tests/UnitTest1.cs")).isNotNull();
-    assertThat(getMeasureAsInt("NoCoverageOnTests", "lines_to_cover")).isNull();
-    assertThat(getMeasureAsInt("NoCoverageOnTests", "uncovered_lines")).isNull();
+    assertNoCoverageMetrics("NoCoverageOnTests");
   }
 
   @Test
