@@ -78,6 +78,8 @@ public class EncodingPerFileTest {
   public void encoding_per_file_is_not_case_sensitive() throws IOException {
     Charset sqCharset = StandardCharsets.UTF_16;
 
+    // AbstractGlobalProtobufFileProcessor.getRoslynEncodingPerUri() case-insensitivity is mocked in assertEncodingMatch.
+    // We test that encodingMatch() uses this underlying tree and doesn't change the expected case insensitive behavior.
     assertEncodingMatch(StandardCharsets.UTF_8, URI.create(fileUri.toString().toUpperCase()), sqCharset, false);
     assertEncodingMatch(StandardCharsets.UTF_8, URI.create(fileUri.toString().toLowerCase()), sqCharset, false);
     assertEncodingMatch(StandardCharsets.UTF_16, URI.create(fileUri.toString().toUpperCase()), sqCharset, true);
