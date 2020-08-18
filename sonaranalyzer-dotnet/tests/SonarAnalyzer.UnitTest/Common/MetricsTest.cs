@@ -419,6 +419,8 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
                 .Should().Be(2);
             Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { var t = null ?? 0; } }")
                 .Should().Be(2);
+            Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod(int? t) { t ??= 0; } }")
+                .Should().Be(1); // null-coalescing assignment is not considered when computing cyclomatic complexity. See: https://github.com/SonarSource/sonar-dotnet/issues/3518
             Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { int? t = null; t?.ToString(); } }")
                 .Should().Be(2);
             Complexity(AnalyzerLanguage.CSharp, "class MyClass { void MyMethod() { throw new Exception(); } }")
