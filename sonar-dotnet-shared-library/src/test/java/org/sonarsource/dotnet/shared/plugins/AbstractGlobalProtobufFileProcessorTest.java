@@ -150,7 +150,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
   @Test
   public void is_not_case_sensitive() throws IOException {
-    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("upper/lower/mixed"));
+    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("UPPER/lower/MiXeD"));
 
     underTest.build(context);
     assertThat(underTest.getRoslynEncodingPerUri())

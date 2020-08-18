@@ -97,8 +97,11 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
     return Collections.unmodifiableMap(roslynEncodingPerUri);
   }
 
+  /**
+   * Uri check is Case-Insensitive.
+   */
   public boolean isGenerated(InputFile inputFile) {
-    return generatedFileUris.contains(inputFile.uri().toString()); // Case-Insensitive check
+    return generatedFileUris.contains(inputFile.uri().toString());
   }
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {

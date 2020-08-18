@@ -45,7 +45,8 @@ public class EncodingPerFile {
       return true;
     }
 
-    Charset roslynEncoding = globalReportProcessor.getRoslynEncodingPerUri().get(uri); // Case-Insensitive check
+    // Case-Insensitive check
+    Charset roslynEncoding = globalReportProcessor.getRoslynEncodingPerUri().get(uri); 
     if (roslynEncoding == null) {
       LOG.warn("File '{}' does not have encoding information. Skip it.", uri);
       return false;
