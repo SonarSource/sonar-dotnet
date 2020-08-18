@@ -111,7 +111,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
 
     if (analyzerWorkDirPaths.isEmpty()) {
       // fallback to old property
-      Optional<String> oldValue = ofNullable(moduleProps.get(AbstractProjectConfiguration.getOldAnalyzerWorkDirProperty(languageKey)));
+      Optional<String> oldValue = ofNullable(moduleProps.get(AbstractModuleConfiguration.getOldAnalyzerWorkDirProperty(languageKey)));
       analyzerWorkDirPaths = oldValue
         .map(Paths::get)
         .map(Collections::singletonList)
@@ -119,7 +119,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
     }
 
     return analyzerWorkDirPaths.stream()
-      .map(x -> x.resolve(AbstractProjectConfiguration.getAnalyzerReportDir(languageKey)))
+      .map(x -> x.resolve(AbstractModuleConfiguration.getAnalyzerReportDir(languageKey)))
       .collect(Collectors.toList());
   }
 

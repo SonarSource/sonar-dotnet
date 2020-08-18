@@ -50,15 +50,15 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
  */
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
-public abstract class AbstractProjectConfiguration {
-  private static final Logger LOG = Loggers.get(AbstractProjectConfiguration.class);
+public abstract class AbstractModuleConfiguration {
+  private static final Logger LOG = Loggers.get(AbstractModuleConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
   private static final String PROP_PREFIX = "sonar.";
 
   private final Configuration configuration;
   private final String languageKey;
 
-  public AbstractProjectConfiguration(Configuration configuration, String languageKey) {
+  public AbstractModuleConfiguration(Configuration configuration, String languageKey) {
     this.configuration = configuration;
     this.languageKey = languageKey;
   }
@@ -109,7 +109,7 @@ public abstract class AbstractProjectConfiguration {
 
     return analyzerWorkDirPaths.stream()
       .map(x -> x.resolve(getAnalyzerReportDir(languageKey)))
-      .filter(AbstractProjectConfiguration::validateOutputDir)
+      .filter(AbstractModuleConfiguration::validateOutputDir)
       .collect(Collectors.toList());
   }
 

@@ -35,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AbstractProjectConfigurationTest {
+public class AbstractModuleConfigurationTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
   @Rule
@@ -56,7 +56,7 @@ public class AbstractProjectConfigurationTest {
     Configuration configuration = createEmptyMockConfiguration();
     when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[]{path.toString(), path2.toString()});
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"), workDir.resolve("roslyn-report2.json"));
   }
@@ -68,7 +68,7 @@ public class AbstractProjectConfigurationTest {
     Configuration configuration = createEmptyMockConfiguration();
     when(configuration.get("sonar.cs.roslyn.reportFilePath")).thenReturn(Optional.of(path.toString()));
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"));
   }
@@ -77,7 +77,7 @@ public class AbstractProjectConfigurationTest {
   public void giveWarningsWhenGettingProtobufPathAndNoPropertyAvailable() {
     Configuration configuration = createEmptyMockConfiguration();
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.");
   }
@@ -88,7 +88,7 @@ public class AbstractProjectConfigurationTest {
     Configuration configuration = createEmptyMockConfiguration();
     when(configuration.hasKey("sonar.tests")).thenReturn(true);
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
   }
@@ -100,7 +100,7 @@ public class AbstractProjectConfigurationTest {
     Configuration configuration = createEmptyMockConfiguration();
     when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[] {path1.toString(), "non-existing"});
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).containsOnly(path1.resolve("output-cs"));
     assertThat(logTester.logs(LoggerLevel.WARN)).hasOnlyOneElementSatisfying(s -> s.startsWith("Analyzer working directory does not exist"));
   }
@@ -110,7 +110,7 @@ public class AbstractProjectConfigurationTest {
     Configuration configuration = createEmptyMockConfiguration();
     when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of("non-existing"));
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).hasOnlyOneElementSatisfying(s -> s.startsWith("Analyzer working directory does not exist"));
   }
@@ -120,7 +120,7 @@ public class AbstractProjectConfigurationTest {
     Configuration configuration = createEmptyMockConfiguration();
     mockProtobufOutPaths(configuration);
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG))
       .containsExactly(
@@ -134,7 +134,7 @@ public class AbstractProjectConfigurationTest {
     Configuration configuration = createEmptyMockConfiguration();
     mockProtobufOutPaths(configuration);
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(config.roslynReportPaths()).isEmpty();
     assertThat(config.protobufReportPaths()).containsOnly(
@@ -151,7 +151,7 @@ public class AbstractProjectConfigurationTest {
     Configuration configuration = createEmptyMockConfiguration();
     when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of(path.toString()));
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN).get(0)).matches(s -> s.endsWith("contains no .pb file(s). Analyzer results won't be loaded from this directory."));
   }
@@ -163,7 +163,7 @@ public class AbstractProjectConfigurationTest {
     Configuration configuration = createEmptyMockConfiguration();
     when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of(path.toString()));
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(config.roslynReportPaths()).isEmpty();
     assertThat(config.protobufReportPaths()).containsOnly(workDir.resolve("report").resolve("output-cs"));
@@ -173,7 +173,7 @@ public class AbstractProjectConfigurationTest {
   public void ignoreExternalIssuesIsFalseByDefault() {
     Configuration configuration = mock(Configuration.class);
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.ignoreThirdPartyIssues()).isFalse();
   }
 
@@ -182,7 +182,7 @@ public class AbstractProjectConfigurationTest {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getBoolean("sonar.cs.roslyn.ignoreIssues")).thenReturn(Optional.of(true));
 
-    AbstractProjectConfiguration config = createAbstractProjectConfiguration(configuration);
+    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.ignoreThirdPartyIssues()).isTrue();
   }
 
@@ -209,8 +209,8 @@ public class AbstractProjectConfigurationTest {
     return configuration;
   }
 
-  private AbstractProjectConfiguration createAbstractProjectConfiguration(Configuration configuration){
-    return new AbstractProjectConfiguration(configuration, "cs"){
+  private AbstractModuleConfiguration createAbstractModuleConfiguration(Configuration configuration){
+    return new AbstractModuleConfiguration(configuration, "cs"){
     };
   }
 }

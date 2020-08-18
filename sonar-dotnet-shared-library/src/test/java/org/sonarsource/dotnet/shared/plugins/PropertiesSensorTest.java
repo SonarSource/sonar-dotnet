@@ -34,7 +34,7 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class PropertiesSensorTest {
-  private AbstractProjectConfiguration config = mock(AbstractProjectConfiguration.class);
+  private AbstractModuleConfiguration config = mock(AbstractModuleConfiguration.class);
   private ReportPathCollector reportPathCollector = mock(ReportPathCollector.class);
 
   PropertiesSensor underTest = new PropertiesSensor(config, reportPathCollector, pluginMetadata());

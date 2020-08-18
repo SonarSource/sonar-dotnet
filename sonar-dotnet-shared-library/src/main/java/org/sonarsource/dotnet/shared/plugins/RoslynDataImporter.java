@@ -23,9 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.UnaryOperator;
-import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -35,9 +35,9 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 @ScannerSide
 public class RoslynDataImporter {
   private static final Logger LOG = Loggers.get(RoslynDataImporter.class);
-  private final AbstractProjectConfiguration config;
+  private final AbstractModuleConfiguration config;
 
-  public RoslynDataImporter(AbstractProjectConfiguration config) {
+  public RoslynDataImporter(AbstractModuleConfiguration config) {
     this.config = config;
   }
 

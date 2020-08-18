@@ -61,7 +61,7 @@ public class RoslynDataImporterTest {
   @Rule
   public LogTester logTester = new LogTester();
 
-  private RoslynDataImporter roslynDataImporter = new RoslynDataImporter(mock(AbstractProjectConfiguration.class));
+  private RoslynDataImporter roslynDataImporter = new RoslynDataImporter(mock(AbstractModuleConfiguration.class));
   private SensorContextTester tester;
   private Path workDir;
 

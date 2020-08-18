@@ -1,6 +1,6 @@
 /*
- * SonarVB
- * Copyright (C) 2012-2020 SonarSource SA
+ * SonarC#
+ * Copyright (C) 2014-2020 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -17,13 +17,13 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.vbnet;
+package org.sonar.plugins.csharp;
 
 import org.sonar.api.config.Configuration;
-import org.sonarsource.dotnet.shared.plugins.AbstractProjectConfiguration;
+import org.sonarsource.dotnet.shared.plugins.AbstractModuleConfiguration;
 
-public class VbNetProjectConfiguration extends AbstractProjectConfiguration {
-  public VbNetProjectConfiguration(Configuration configuration) {
-    super(configuration, VbNetPlugin.LANGUAGE_KEY);
+public class CSharpModuleConfiguration extends AbstractModuleConfiguration {
+  public CSharpModuleConfiguration(Configuration configuration) {
+    super(configuration, CSharpPlugin.LANGUAGE_KEY);
   }
 }
