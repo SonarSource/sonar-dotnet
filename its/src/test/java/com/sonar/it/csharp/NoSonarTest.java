@@ -21,9 +21,8 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
-import java.nio.file.Path;
-
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+import java.nio.file.Path;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -44,7 +43,7 @@ public class NoSonarTest {
 
   @BeforeClass
   public static void init() throws Exception {
-    orchestrator.resetData();
+    TestUtils.reset(orchestrator);
 
     Path projectDir = Tests.projectDir(temp, "NoSonarTest");
 

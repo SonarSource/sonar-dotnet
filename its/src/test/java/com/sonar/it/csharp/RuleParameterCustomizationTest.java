@@ -50,7 +50,7 @@ public class RuleParameterCustomizationTest {
 
   @Before
   public void init() {
-    orchestrator.resetData();
+    TestUtils.reset(orchestrator);
 
     provisionProject();
   }

@@ -20,6 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,8 +28,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-
-import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.ClassRule;
@@ -79,7 +78,7 @@ public class MetricsIncludeHeaderCommentTest {
       .around(new ExternalResource() {
         @Override
         protected void before() throws Throwable {
-          ORCHESTRATOR.resetData();
+          TestUtils.reset(ORCHESTRATOR);
 
           Path projectDir = Tests.projectDir(temp, "MetricsTest");
 

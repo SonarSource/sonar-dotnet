@@ -23,12 +23,9 @@ import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.util.Command;
 import com.sonar.orchestrator.util.CommandExecutor;
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -80,7 +77,7 @@ public class MultipleProjectsTest {
       .around(new ExternalResource() {
         @Override
         protected void before() throws Throwable {
-          ORCHESTRATOR.resetData();
+          TestUtils.reset(ORCHESTRATOR);
 
           Path projectDir = Tests.projectDir(temp, PROJECT);
 

@@ -22,18 +22,21 @@ package com.sonar.it.shared;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.Build;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+import com.sonar.orchestrator.http.HttpMethod;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.Location;
 import com.sonar.orchestrator.locator.MavenLocation;
 import com.sonar.orchestrator.util.Command;
 import com.sonar.orchestrator.util.CommandExecutor;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.rules.TemporaryFolder;
 import org.slf4j.Logger;
@@ -175,6 +178,13 @@ public class TestUtils {
       return "LATEST_RELEASE[7.9]";
     }
     return version;
+  }
+
+  public static void reset(Orchestrator orchestrator) {
+    orchestrator.getServer().newHttpCall("api/orchestrator/reset")
+      .setMethod(HttpMethod.POST)
+      .setAdminCredentials()
+      .execute();
   }
 
   static WsClient newWsClient(Orchestrator orch) {

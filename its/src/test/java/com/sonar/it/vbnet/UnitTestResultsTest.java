@@ -20,17 +20,15 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+import java.io.IOException;
+import java.nio.file.Path;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-
-import com.sonar.orchestrator.Orchestrator;
-
-import java.io.IOException;
-import java.nio.file.Path;
 
 import static com.sonar.it.vbnet.Tests.getMeasure;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
@@ -46,7 +44,7 @@ public class UnitTestResultsTest {
 
   @Before
   public void init() {
-    orchestrator.resetData();
+    TestUtils.reset(orchestrator);
   }
 
   @Test

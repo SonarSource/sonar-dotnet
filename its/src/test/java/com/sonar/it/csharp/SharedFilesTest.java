@@ -21,11 +21,9 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
-
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.nio.file.Path;
 import java.util.List;
-
-import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -48,7 +46,7 @@ public class SharedFilesTest {
 
   @Before
   public void init() {
-    orchestrator.resetData();
+    TestUtils.reset(orchestrator);
   }
   
   @Test

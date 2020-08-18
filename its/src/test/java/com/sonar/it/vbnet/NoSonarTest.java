@@ -20,15 +20,13 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+import java.nio.file.Path;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-
-import com.sonar.orchestrator.Orchestrator;
-
-import java.nio.file.Path;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
@@ -44,7 +42,7 @@ public class NoSonarTest {
 
   @BeforeClass
   public static void init() throws Exception {
-    orchestrator.resetData();
+    TestUtils.reset(orchestrator);
 
     Path projectDir = Tests.projectDir(temp, "VbNoSonarTest");
 

@@ -21,6 +21,7 @@ package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+import java.nio.file.Path;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -28,8 +29,6 @@ import org.junit.rules.ExternalResource;
 import org.junit.rules.RuleChain;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Measures.Measure;
-
-import java.nio.file.Path;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getComponent;
@@ -55,7 +54,7 @@ public class MetricsTest {
       .around(new ExternalResource() {
         @Override
         protected void before() throws Throwable {
-          ORCHESTRATOR.resetData();
+          TestUtils.reset(ORCHESTRATOR);
 
           Path projectDir = Tests.projectDir(temp, "VbMetricsTest");
 
