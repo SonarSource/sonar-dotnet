@@ -138,6 +138,21 @@ public class CoverageTest {
   }
 
   @Test
+  public void visual_studio_on_MultipleProjects() throws Exception {
+    BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml");
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 4 files, 3 main files, 3 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.");
+
+    assertLineCoverageMetrics("MultipleProjects", 22, 2);
+    assertLineCoverageMetrics("MultipleProjects:FirstProject/FirstClass.cs", 10, 0);
+    assertLineCoverageMetrics("MultipleProjects:FirstProject/SecondClass.cs", 4, 0);
+    assertNoCoverageMetrics("MultipleProjects:FirstProject/Properties/AssemblyInfo.cs");
+    assertLineCoverageMetrics("MultipleProjects:SecondProject/FirstClass.cs", 8, 2);
+  }
+
+  @Test
   public void no_coverage_on_tests() throws Exception {
     Path projectDir = Tests.projectDir(temp, "NoCoverageOnTests");
 
@@ -173,10 +188,20 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
   }
 
-  private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
-    Path projectDir = Tests.projectDir(temp, "CoverageTest");
 
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("CoverageTest", projectDir)
+
+  private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
+    return analyzeProject("CoverageTest", keyValues);
+  }
+
+  private BuildResult analyzeMultipleProjectsTestProject(String coverageProperty, String coverageFileName) throws IOException {
+    return analyzeProject("MultipleProjects", coverageProperty, coverageFileName);
+  }
+
+  private BuildResult analyzeProject(String projectName, String... keyValues) throws IOException {
+    Path projectDir = Tests.projectDir(temp, projectName);
+
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir)
       .setProfile("no_rule")
       .setProperties(keyValues);
 
