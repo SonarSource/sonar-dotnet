@@ -208,12 +208,12 @@ public class MultipleProjectsTest {
   @Test
   public void cognitiveComplexityAtDirectoryLevel() {
     assertThat(getDirectoryMeasureAsInt(FIRST_PROJECT_DIRECTORY, "cognitive_complexity")).isEqualTo(2);
-    assertThat(getDirectoryMeasureAsInt(SECOND_PROJECT_DIRECTORY, "cognitive_complexity")).isEqualTo(2);
+    assertThat(getDirectoryMeasureAsInt(SECOND_PROJECT_DIRECTORY, "cognitive_complexity")).isEqualTo(3);
   }
 
   @Test
   public void cognitiveComplexityAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("cognitive_complexity")).isEqualTo(4);
+    assertThat(getProjectMeasureAsInt("cognitive_complexity")).isEqualTo(5);
   }
 
   @Test
@@ -222,7 +222,7 @@ public class MultipleProjectsTest {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "cognitive_complexity")).isEqualTo(0);
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "cognitive_complexity")).isEqualTo(0);
 
-    assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "cognitive_complexity")).isEqualTo(2);
+    assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "cognitive_complexity")).isEqualTo(3);
   }
 
   /* Lines */

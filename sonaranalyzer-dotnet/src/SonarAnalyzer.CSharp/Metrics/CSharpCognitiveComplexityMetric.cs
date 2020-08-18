@@ -50,6 +50,13 @@ namespace SonarAnalyzer.Metrics.CSharp
                 {
                     State.VisitWithNesting(node, base.Visit);
                 }
+                else if (SwitchExpressionSyntaxWrapper.IsInstance(node))
+                {
+                    var switchExpression = (SwitchExpressionSyntaxWrapper)node;
+
+                    State.IncreaseComplexityByNestingPlusOne(switchExpression.SwitchKeyword);
+                    State.VisitWithNesting(node, base.Visit);
+                }
                 else
                 {
                     base.Visit(node);
@@ -173,15 +180,11 @@ namespace SonarAnalyzer.Metrics.CSharp
                 base.VisitGotoStatement(node);
             }
 
-            public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
-            {
+            public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node) =>
                 State.VisitWithNesting(node, base.VisitSimpleLambdaExpression);
-            }
 
-            public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
-            {
+            public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node) =>
                 State.VisitWithNesting(node, base.VisitParenthesizedLambdaExpression);
-            }
         }
     }
 }
