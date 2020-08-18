@@ -185,13 +185,13 @@ public class MultipleProjectsTest {
 
   @Test
   public void complexityAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("complexity")).isEqualTo(17);
+    assertThat(getProjectMeasureAsInt("complexity")).isEqualTo(20);
   }
 
   @Test
   public void complexityAtDirectoryLevel() {
     assertThat(getDirectoryMeasureAsInt(FIRST_PROJECT_DIRECTORY, "complexity")).isEqualTo(14);
-    assertThat(getDirectoryMeasureAsInt(SECOND_PROJECT_DIRECTORY, "complexity")).isEqualTo(3);
+    assertThat(getDirectoryMeasureAsInt(SECOND_PROJECT_DIRECTORY, "complexity")).isEqualTo(6);
   }
 
   @Test
@@ -200,7 +200,7 @@ public class MultipleProjectsTest {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "complexity")).isEqualTo(1);
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "complexity")).isEqualTo(0);
 
-    assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "complexity")).isEqualTo(3);
+    assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "complexity")).isEqualTo(6);
   }
 
   /* Cognitive Complexity */
