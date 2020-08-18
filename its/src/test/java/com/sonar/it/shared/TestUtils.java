@@ -214,4 +214,15 @@ public class TestUtils {
     return folder;
   }
 
+  public static void deleteLocalCache() {
+    // Scanner for MSBuild caches the analyzer, so running the test twice in a row means the old binary is used.
+    String localAppData = System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube";
+    try {
+      FileUtils.deleteDirectory(new File(localAppData));
+    }
+    catch (IOException ioe) {
+      throw new IllegalStateException("could not delete Scanner for MSBuild cache folder", ioe);
+    }
+  }
+
 }
