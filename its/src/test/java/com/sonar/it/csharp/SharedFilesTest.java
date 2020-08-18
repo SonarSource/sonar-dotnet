@@ -31,7 +31,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues.Issue;
 
-import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
