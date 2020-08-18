@@ -214,15 +214,16 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Classes(AnalyzerLanguage.CSharp, "class MyClass {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "interface IMyInterface {}").Should().Be(1);
             Classes(AnalyzerLanguage.CSharp, "struct MyClass {}").Should().Be(1);
+            Classes(AnalyzerLanguage.CSharp, "enum MyEnum {}").Should().Be(0);
             Classes(AnalyzerLanguage.CSharp, "class MyClass1 {} namespace MyNamespace { class MyClass2 {} }").Should().Be(2);
 
             Classes(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
             Classes(AnalyzerLanguage.VisualBasic, "Class M \n End Class").Should().Be(1);
             Classes(AnalyzerLanguage.VisualBasic, "Structure M \n End Structure").Should().Be(1);
+            Classes(AnalyzerLanguage.VisualBasic, "Enum M \n End Enum").Should().Be(0);
             Classes(AnalyzerLanguage.VisualBasic, "Interface M \n End Interface").Should().Be(1);
             Classes(AnalyzerLanguage.VisualBasic, "Module M \n End Module").Should().Be(1);
             Classes(AnalyzerLanguage.VisualBasic, "Class M \n End Class \n Namespace MyNamespace \n Class MyClass2 \n End Class \n End Namespace").Should().Be(2);
-
         }
 
         private static int Classes(AnalyzerLanguage language, string text) => MetricsFor(language, text).ClassCount;
