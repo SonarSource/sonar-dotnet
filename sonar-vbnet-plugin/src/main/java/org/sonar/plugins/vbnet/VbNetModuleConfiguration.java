@@ -22,6 +22,7 @@ package org.sonar.plugins.vbnet;
 import org.sonar.api.config.Configuration;
 import org.sonarsource.dotnet.shared.plugins.AbstractModuleConfiguration;
 
+@Deprecated
 public class VbNetModuleConfiguration extends AbstractModuleConfiguration {
   public VbNetModuleConfiguration(Configuration configuration) {
     super(configuration, VbNetPlugin.LANGUAGE_KEY);

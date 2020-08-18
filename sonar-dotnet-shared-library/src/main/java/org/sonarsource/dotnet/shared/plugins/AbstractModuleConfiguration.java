@@ -26,10 +26,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.sonar.api.batch.InstantiationStrategy;
@@ -38,7 +36,6 @@ import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import static java.util.Arrays.asList;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getRoslynJsonReportPathProperty;
 
@@ -47,9 +44,12 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
  *
  * Note: even if the concept of "module" was dropped from the SQ server side,
  * "modules" are still a core concept of the SQ scanner.
+ *
+ * Module-independent functionality is in AbstractLanguageConfiguration.
  */
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
+@Deprecated
 public abstract class AbstractModuleConfiguration {
   private static final Logger LOG = Loggers.get(AbstractModuleConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
@@ -158,21 +158,5 @@ public abstract class AbstractModuleConfiguration {
         return Collections.singletonList(path.get());
       }
     }
-  }
-
-  public boolean ignoreThirdPartyIssues() {
-    return configuration.getBoolean(AbstractPropertyDefinitions.getIgnoreIssuesProperty(languageKey)).orElse(false);
-  }
-
-  public Set<String> bugCategories() {
-    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getBugCategoriesProperty(languageKey))));
-  }
-
-  public Set<String> codeSmellCategories() {
-    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getCodeSmellCategoriesProperty(languageKey))));
-  }
-
-  public Set<String> vulnerabilityCategories() {
-    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getVulnerabilityCategoriesProperty(languageKey))));
   }
 }

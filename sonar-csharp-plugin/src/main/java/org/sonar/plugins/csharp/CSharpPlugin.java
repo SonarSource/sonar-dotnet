@@ -58,6 +58,7 @@ public class CSharpPlugin implements Plugin {
       ReportPathCollector.class,
       CSharpSonarRulesDefinition.class,
       DotNetSensor.class,
+      CSharpLanguageConfiguration.class,
       CSharpModuleConfiguration.class,
       CSharpGlobalProtobufFileProcessor.class,
       CSharpSolutionConfiguration.class,

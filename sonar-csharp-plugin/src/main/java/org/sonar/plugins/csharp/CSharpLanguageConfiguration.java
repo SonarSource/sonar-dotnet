@@ -20,11 +20,10 @@
 package org.sonar.plugins.csharp;
 
 import org.sonar.api.config.Configuration;
-import org.sonarsource.dotnet.shared.plugins.AbstractModuleConfiguration;
+import org.sonarsource.dotnet.shared.plugins.AbstractLanguageConfiguration;
 
-@Deprecated
-public class CSharpModuleConfiguration extends AbstractModuleConfiguration {
-  public CSharpModuleConfiguration(Configuration configuration) {
+public class CSharpLanguageConfiguration extends AbstractLanguageConfiguration {
+  public CSharpLanguageConfiguration(Configuration configuration) {
     super(configuration, CSharpPlugin.LANGUAGE_KEY);
   }
 }

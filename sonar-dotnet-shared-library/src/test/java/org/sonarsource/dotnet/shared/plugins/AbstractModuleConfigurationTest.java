@@ -54,7 +54,7 @@ public class AbstractModuleConfigurationTest {
     Path path2 = temp.newFile("roslyn-report2.json").toPath();
 
     Configuration configuration = createEmptyMockConfiguration();
-    when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[]{path.toString(), path2.toString()});
+    when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[] {path.toString(), path2.toString()});
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
@@ -169,23 +169,6 @@ public class AbstractModuleConfigurationTest {
     assertThat(config.protobufReportPaths()).containsOnly(workDir.resolve("report").resolve("output-cs"));
   }
 
-  @Test
-  public void ignoreExternalIssuesIsFalseByDefault() {
-    Configuration configuration = mock(Configuration.class);
-
-    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
-    assertThat(config.ignoreThirdPartyIssues()).isFalse();
-  }
-
-  @Test
-  public void optOutExternalIssues() {
-    Configuration configuration = mock(Configuration.class);
-    when(configuration.getBoolean("sonar.cs.roslyn.ignoreIssues")).thenReturn(Optional.of(true));
-
-    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
-    assertThat(config.ignoreThirdPartyIssues()).isTrue();
-  }
-
   private Path createProtobufOut(String name) throws IOException {
     Path path = workDir.resolve(name);
     Path outputCs = path.resolve("output-cs");
@@ -194,13 +177,13 @@ public class AbstractModuleConfigurationTest {
     return path;
   }
 
-  private void mockProtobufOutPaths(Configuration configuration) throws IOException{
+  private void mockProtobufOutPaths(Configuration configuration) throws IOException {
     Path path1 = createProtobufOut("report1");
     Path path2 = createProtobufOut("report2");
     when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[] {path1.toString(), path2.toString()});
   }
 
-  private Configuration createEmptyMockConfiguration(){
+  private Configuration createEmptyMockConfiguration() {
     Configuration configuration = mock(Configuration.class);
 
     when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[0]);

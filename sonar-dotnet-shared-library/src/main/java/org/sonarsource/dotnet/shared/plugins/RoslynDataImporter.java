@@ -35,9 +35,9 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 @ScannerSide
 public class RoslynDataImporter {
   private static final Logger LOG = Loggers.get(RoslynDataImporter.class);
-  private final AbstractModuleConfiguration config;
+  private final AbstractLanguageConfiguration config;
 
-  public RoslynDataImporter(AbstractModuleConfiguration config) {
+  public RoslynDataImporter(AbstractLanguageConfiguration config) {
     this.config = config;
   }
 
