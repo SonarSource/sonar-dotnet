@@ -22,15 +22,13 @@ package com.sonar.it.vbnet;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+import java.nio.file.Path;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import java.nio.file.Path;
-
-import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,7 +41,7 @@ public class DoNotAnalyzeTestFilesTest {
 
   @Before
   public void init() {
-    orchestrator.resetData();
+    TestUtils.reset(orchestrator);
   }
 
   @Test

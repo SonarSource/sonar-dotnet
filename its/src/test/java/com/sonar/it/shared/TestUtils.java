@@ -22,18 +22,21 @@ package com.sonar.it.shared;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.Build;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+import com.sonar.orchestrator.http.HttpMethod;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.Location;
 import com.sonar.orchestrator.locator.MavenLocation;
 import com.sonar.orchestrator.util.Command;
 import com.sonar.orchestrator.util.CommandExecutor;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.rules.TemporaryFolder;
 import org.slf4j.Logger;
@@ -177,6 +180,17 @@ public class TestUtils {
     return version;
   }
 
+  public static void reset(Orchestrator orchestrator) {
+    orchestrator.getServer().newHttpCall("api/orchestrator/reset")
+      .setMethod(HttpMethod.POST)
+      .setAdminCredentials()
+      .execute();
+    // api/orchestrator/reset will clear the license, so reinstall it
+    if (orchestrator.getDistribution().isActivateLicense()) {
+      orchestrator.activateLicense();
+    }
+  }
+
   static WsClient newWsClient(Orchestrator orch) {
     return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
       .url(orch.getServer().getUrl())
@@ -202,6 +216,17 @@ public class TestUtils {
     TemporaryFolder folder = new TemporaryFolder(baseDirectory);
     LOG.info("TEST SETUP: Temporary folder created. Base directory: " + baseDirectory);
     return folder;
+  }
+
+  public static void deleteLocalCache() {
+    // Scanner for MSBuild caches the analyzer, so running the test twice in a row means the old binary is used.
+    String localAppData = System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube";
+    try {
+      FileUtils.deleteDirectory(new File(localAppData));
+    }
+    catch (IOException ioe) {
+      throw new IllegalStateException("could not delete Scanner for MSBuild cache folder", ioe);
+    }
   }
 
 }

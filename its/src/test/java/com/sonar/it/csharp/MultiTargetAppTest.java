@@ -20,10 +20,11 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-
-import java.util.stream.Collectors;
-
+import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -31,12 +32,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
-import com.sonar.orchestrator.Orchestrator;
-
-import java.nio.file.Path;
-import java.util.List;
-
-import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,7 +45,7 @@ public class MultiTargetAppTest {
 
   @Before
   public void init() {
-    orchestrator.resetData();
+    TestUtils.reset(orchestrator);
   }
 
   @Test
