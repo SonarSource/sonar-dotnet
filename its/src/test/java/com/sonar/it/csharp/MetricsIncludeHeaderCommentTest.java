@@ -52,8 +52,8 @@ public class MetricsIncludeHeaderCommentTest {
   public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   private static final String PROJECT = "MetricsTest";
-  private static final String DIRECTORY = TestUtils.hasModules(ORCHESTRATOR) ? "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo" : "MetricsTest:foo";
-  private static final String FILE = TestUtils.hasModules(ORCHESTRATOR) ? "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo/Class1.cs" : "MetricsTest:foo/Class1.cs";
+  private static final String DIRECTORY = "MetricsTest:foo";
+  private static final String FILE = "MetricsTest:foo/Class1.cs";
   private static final int NUMBER_OF_HEADER_COMMENT_LINES = 2;
 
   @ClassRule

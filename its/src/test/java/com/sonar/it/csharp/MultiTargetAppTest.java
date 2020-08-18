@@ -65,7 +65,7 @@ public class MultiTargetAppTest {
 
     orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
-    String programCsComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "MultiTargetConsoleApp:MultiTargetConsoleApp:9D7FB932-3B1E-446D-9D34-A63410458B88:Program.cs" : "MultiTargetConsoleApp:Program.cs";
+    String programCsComponentId = "MultiTargetConsoleApp:Program.cs";
     assertThat(getComponent(programCsComponentId)).isNotNull();
 
     List<Issues.Issue> issues = getIssues(programCsComponentId)

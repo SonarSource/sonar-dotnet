@@ -140,9 +140,8 @@ public class CoverageTest {
       "WARN: The Code Coverage report doesn't contain any coverage data for the included files.");
 
     assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
-    String unitTestComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "NoCoverageOnTests:NoCoverageOnTests:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs" : "NoCoverageOnTests:MyLib.Tests/UnitTest1.cs";
 
-    assertThat(Tests.getComponent(unitTestComponentId)).isNotNull();
+    assertThat(Tests.getComponent("NoCoverageOnTests:MyLib.Tests/UnitTest1.cs")).isNotNull();
     assertThat(getMeasureAsInt("NoCoverageOnTests", "lines_to_cover")).isNull();
     assertThat(getMeasureAsInt("NoCoverageOnTests", "uncovered_lines")).isNull();
   }

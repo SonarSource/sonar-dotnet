@@ -60,8 +60,7 @@ public class DoNotAnalyzeTestFilesTest {
 
     orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
-    String unitTest1ComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "VbDoNotAnalyzeTestFilesTest:VbDoNotAnalyzeTestFilesTest:039CD4D5-8C38-47EB-AE09-F2457DE61EFC:UnitTest1.vb" : "VbDoNotAnalyzeTestFilesTest:UnitTest1.vb";
-    assertThat(Tests.getComponent(unitTest1ComponentId)).isNotNull();
+    assertThat(Tests.getComponent("VbDoNotAnalyzeTestFilesTest:UnitTest1.vb")).isNotNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "files")).isNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "lines")).isNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "ncloc")).isNull();

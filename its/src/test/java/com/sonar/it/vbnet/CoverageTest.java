@@ -39,6 +39,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
 
+  private final String programComponentIdCs = "CSharpVBNetCoverage:CSharpConsoleApp/Program.cs";
+  private final String programComponentIdVb = "CSharpVBNetCoverage:VBNetConsoleApp/Module1.vb";
+
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
@@ -131,7 +134,7 @@ public class CoverageTest {
       "WARN: The Code Coverage report doesn't contain any coverage data for the included files.");
 
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
-    String class1VbComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "VbNoCoverageOnTests:VbNoCoverageOnTests:7E4004A5-75CF-475C-9922-589EF95517D8:Class1.vb" : "VbNoCoverageOnTests:MyLib/Class1.vb";
+    String class1VbComponentId = "VbNoCoverageOnTests:MyLib/Class1.vb";
     assertThat(Tests.getComponent(class1VbComponentId)).isNotNull();
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "lines_to_cover")).isNull();
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "uncovered_lines")).isNull();
@@ -175,11 +178,11 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "lines_to_cover")).isEqualTo(10);
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "uncovered_lines")).isEqualTo(4);
 
-    assertThat(getMeasureAsInt(getProgramCsComponentId(), "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt(getProgramCsComponentId(), "uncovered_lines")).isEqualTo(2);
+    assertThat(getMeasureAsInt(programComponentIdCs, "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt(programComponentIdCs, "uncovered_lines")).isEqualTo(2);
 
-    assertThat(getMeasureAsInt(getModule1VbComponentId(), "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt(getModule1VbComponentId(), "uncovered_lines")).isEqualTo(2);
+    assertThat(getMeasureAsInt(programComponentIdVb, "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt(programComponentIdVb, "uncovered_lines")).isEqualTo(2);
   }
 
   @Test
@@ -189,11 +192,11 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "lines_to_cover")).isEqualTo(6);
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "uncovered_lines")).isEqualTo(3);
 
-    assertThat(getMeasureAsInt(getProgramCsComponentId(), "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt(getProgramCsComponentId(), "uncovered_lines")).isEqualTo(2);
+    assertThat(getMeasureAsInt(programComponentIdCs, "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt(programComponentIdCs, "uncovered_lines")).isEqualTo(2);
 
-    assertThat(getMeasureAsInt(getModule1VbComponentId(), "lines_to_cover")).isEqualTo(1);
-    assertThat(getMeasureAsInt(getModule1VbComponentId(), "uncovered_lines")).isEqualTo(1);
+    assertThat(getMeasureAsInt(programComponentIdVb, "lines_to_cover")).isEqualTo(1);
+    assertThat(getMeasureAsInt(programComponentIdVb, "uncovered_lines")).isEqualTo(1);
   }
 
   @Test
@@ -203,11 +206,11 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "lines_to_cover")).isEqualTo(6);
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "uncovered_lines")).isEqualTo(3);
 
-    assertThat(getMeasureAsInt(getProgramCsComponentId(), "lines_to_cover")).isEqualTo(1);
-    assertThat(getMeasureAsInt(getProgramCsComponentId(), "uncovered_lines")).isEqualTo(1);
+    assertThat(getMeasureAsInt(programComponentIdCs, "lines_to_cover")).isEqualTo(1);
+    assertThat(getMeasureAsInt(programComponentIdCs, "uncovered_lines")).isEqualTo(1);
 
-    assertThat(getMeasureAsInt(getModule1VbComponentId(), "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt(getModule1VbComponentId(), "uncovered_lines")).isEqualTo(2);
+    assertThat(getMeasureAsInt(programComponentIdVb, "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt(programComponentIdVb, "uncovered_lines")).isEqualTo(2);
   }
 
   private BuildResult analyzeCoverageMixProject(String... keyValues) throws IOException {
@@ -222,8 +225,4 @@ public class CoverageTest {
 
     return orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
   }
-
-  private static final String getProgramCsComponentId() { return TestUtils.hasModules(orchestrator) ? "CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs" : "CSharpVBNetCoverage:CSharpConsoleApp/Program.cs"; }
-
-  private static final String getModule1VbComponentId() { return TestUtils.hasModules(orchestrator) ? "CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb" : "CSharpVBNetCoverage:VBNetConsoleApp/Module1.vb"; }
 }

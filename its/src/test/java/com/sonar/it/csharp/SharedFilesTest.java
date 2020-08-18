@@ -65,8 +65,8 @@ public class SharedFilesTest {
     orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
     assertThat(getComponent("SharedFilesTest:Class1.cs")).isNotNull();
-    assertThat(getComponent(TestUtils.hasModules(ORCHESTRATOR) ? "SharedFilesTest:SharedFilesTest:77C8C6B5-18EC-45D4-8DA8-17A6525450A4:Program1.cs" : "SharedFilesTest:ConsoleApp1/Program1.cs")).isNotNull();
-    assertThat(getComponent(TestUtils.hasModules(ORCHESTRATOR) ? "SharedFilesTest:SharedFilesTest:0FAF9365-FC72-4DF6-A466-7C432E85F2A8:Program.cs" : "SharedFilesTest:ConsoleApp2/Program.cs")).isNotNull();
+    assertThat(getComponent("SharedFilesTest:ConsoleApp1/Program1.cs")).isNotNull();
+    assertThat(getComponent("SharedFilesTest:ConsoleApp2/Program.cs")).isNotNull();
 
     // shared file in the solution should have measures and issues
     assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "files")).isEqualTo(1);
