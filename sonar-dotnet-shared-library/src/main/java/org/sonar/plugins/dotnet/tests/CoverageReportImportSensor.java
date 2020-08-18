@@ -25,18 +25,18 @@ import java.util.Set;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
+import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
-import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 /**
  * This class is responsible to handle all the C# and VB.NET code coverage reports (parse and report back to SonarQube).
  */
-public class CoverageReportImportSensor implements ProjectSensor {
+public class CoverageReportImportSensor implements Sensor {
   @VisibleForTesting
   static final File BASE_DIR = new File(".");
 
@@ -65,7 +65,9 @@ public class CoverageReportImportSensor implements ProjectSensor {
     } else {
       descriptor.name(this.languageName + " Tests Coverage Report Import");
     }
+    descriptor.global();
     descriptor.onlyWhenConfiguration(c -> coverageAggregator.hasCoverageProperty(c::hasKey));
+
     descriptor.onlyOnLanguage(this.languageKey);
   }
 
@@ -150,7 +152,7 @@ public class CoverageReportImportSensor implements ProjectSensor {
       newCoverage.lineHits(entry.getKey(), entry.getValue());
     }
 
-    for (BranchCoverage branchCoverage : coverage.getBranchCoverage(filePath)) {
+    for (BranchCoverage branchCoverage : coverage.getBranchCoverage(filePath)){
       LOG.trace("Found branch coverage entry on line '{}', with total conditions '{}' and covered conditions '{}'.",
         branchCoverage.getLine(), branchCoverage.getConditions(), branchCoverage.getCoveredConditions());
       fileHasCoverage = true;
