@@ -93,16 +93,7 @@ public class CoverageTest {
 
   @Test
   public void open_cover_on_MultipleProjects() throws Exception {
-    Path projectDir = Tests.projectDir(temp, "MultipleProjects");
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("MultipleProjects", projectDir)
-      .setProperty("sonar.cs.opencover.reportsPaths", "opencover.xml");
-
-    orchestrator.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore,Rebuild");
-
-    BuildResult buildResult = orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.opencover.reportsPaths", "opencover.xml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -187,8 +178,6 @@ public class CoverageTest {
 
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
   }
-
-
 
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
     return analyzeProject("CoverageTest", keyValues);
