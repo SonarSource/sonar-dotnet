@@ -132,6 +132,28 @@ namespace Tests.Diagnostics
             }
         }
 
+        void SwitchExpression(int count) // FN - Switch expression should increase the Cognitive Complexity by 1
+        {
+            var x = count switch
+            {
+                0 => "zero",
+                _ => "other"
+            };
+        }
+
+        void NestedSwitchExpression(bool first, bool second) // FN - Switch expression should increase the Cognitive Complexity by 1
+        {
+            var x = first switch
+            {
+                true => second switch
+                {
+                    true => 1,
+                    false => 2
+                },
+                _ => 3
+            };
+        }
+
         void TernaryOperator() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
         {
             var t = true ? 0 : 1;
