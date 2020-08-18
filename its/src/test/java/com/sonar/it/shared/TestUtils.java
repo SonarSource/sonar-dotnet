@@ -185,6 +185,10 @@ public class TestUtils {
       .setMethod(HttpMethod.POST)
       .setAdminCredentials()
       .execute();
+    // api/orchestrator/reset will clear the license, so reinstall it
+    if (orchestrator.getDistribution().isActivateLicense()) {
+      orchestrator.activateLicense();
+    }
   }
 
   static WsClient newWsClient(Orchestrator orch) {

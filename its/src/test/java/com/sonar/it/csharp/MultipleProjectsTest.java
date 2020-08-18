@@ -229,12 +229,12 @@ public class MultipleProjectsTest {
 
   @Test
   public void linesAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("lines")).isEqualTo(108);
+    assertThat(getProjectMeasureAsInt("lines")).isEqualTo(86);
   }
 
   @Test
   public void linesAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt(FIRST_PROJECT_DIRECTORY, "lines")).isEqualTo(80);
+    assertThat(getDirectoryMeasureAsInt(FIRST_PROJECT_DIRECTORY, "lines")).isEqualTo(58);
     assertThat(getDirectoryMeasureAsInt(SECOND_PROJECT_DIRECTORY, "lines")).isEqualTo(28);
   }
 
@@ -242,7 +242,7 @@ public class MultipleProjectsTest {
   public void linesAtFileLevel() {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_FIRST_CLASS_FILE, "lines")).isEqualTo(29);
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "lines")).isEqualTo(14);
-    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "lines")).isEqualTo(37);
+    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "lines")).isEqualTo(15);
 
     assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "lines")).isEqualTo(28);
   }
@@ -251,12 +251,12 @@ public class MultipleProjectsTest {
 
   @Test
   public void linesOfCodeAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("ncloc")).isEqualTo(71);
+    assertThat(getProjectMeasureAsInt("ncloc")).isEqualTo(59);
   }
 
   @Test
   public void linesOfCodeAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt(FIRST_PROJECT_DIRECTORY, "ncloc")).isEqualTo(47);
+    assertThat(getDirectoryMeasureAsInt(FIRST_PROJECT_DIRECTORY, "ncloc")).isEqualTo(35);
     assertThat(getDirectoryMeasureAsInt(SECOND_PROJECT_DIRECTORY, "ncloc")).isEqualTo(24);
   }
 
@@ -264,7 +264,7 @@ public class MultipleProjectsTest {
   public void linesOfCodeAtFileLevel() {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_FIRST_CLASS_FILE, "ncloc")).isEqualTo(20);
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "ncloc")).isEqualTo(12);
-    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "ncloc")).isEqualTo(15);
+    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "ncloc")).isEqualTo(3);
 
     assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "ncloc")).isEqualTo(24);
   }
@@ -273,12 +273,12 @@ public class MultipleProjectsTest {
 
   @Test
   public void commentLinesAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("comment_lines")).isEqualTo(17);
+    assertThat(getProjectMeasureAsInt("comment_lines")).isEqualTo(10);
   }
 
   @Test
   public void commentLinesAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt(FIRST_PROJECT_DIRECTORY, "comment_lines")).isEqualTo(16);
+    assertThat(getDirectoryMeasureAsInt(FIRST_PROJECT_DIRECTORY, "comment_lines")).isEqualTo(9);
     assertThat(getDirectoryMeasureAsInt(SECOND_PROJECT_DIRECTORY, "comment_lines")).isEqualTo(1);
   }
 
@@ -286,7 +286,7 @@ public class MultipleProjectsTest {
   public void commentLinesAtFileLevel() {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_FIRST_CLASS_FILE, "comment_lines")).isEqualTo(1);
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "comment_lines")).isEqualTo(0);
-    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "comment_lines")).isEqualTo(15);
+    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "comment_lines")).isEqualTo(8);
 
     assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "comment_lines")).isEqualTo(1);
   }
