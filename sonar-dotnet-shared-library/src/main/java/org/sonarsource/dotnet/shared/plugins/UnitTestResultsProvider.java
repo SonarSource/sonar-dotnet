@@ -21,10 +21,10 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.util.Arrays;
 import java.util.List;
-import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.plugins.dotnet.tests.UnitTestConfiguration;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsAggregator;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsImportSensor;
