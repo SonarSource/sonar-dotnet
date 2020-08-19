@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.io.IOException;
 import java.util.function.Predicate;
 import org.junit.Rule;
 import org.junit.Test;
@@ -173,4 +174,36 @@ public class UnitTestResultsImportSensorTest {
     verify(analysisWarnings).addUnique("Could not import unit test report for 'VB.NET'. Please check the logs for more details.");
   }
 
+  @Test
+  public void execute_saves_metrics_when_key_is_present() throws IOException {
+    UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
+    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
+    UnitTestResults results = new UnitTestResults();
+    results.add(42, 43, 44, 45, null);
+    when(aggregator.hasUnitTestResultsProperty()).thenReturn(true);
+    when(aggregator.aggregate(any(), any())).thenReturn(results);
+    SensorContextTester context = SensorContextTester.create(temp.newFolder());
+
+    UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(aggregator, "cs", "C#", analysisWarnings);
+    sensor.execute(context);
+
+    assertThat(context.measures("projectKey"))
+      .extracting("metric.key", "value")
+      .containsOnly(
+        tuple(CoreMetrics.TESTS_KEY, 42),
+        tuple(CoreMetrics.SKIPPED_TESTS_KEY, 43),
+        tuple(CoreMetrics.TEST_FAILURES_KEY, 44),
+        tuple(CoreMetrics.TEST_ERRORS_KEY, 45));
+  }
+
+  @Test
+  public void execute_warns_when_no_key_is_present() throws IOException {
+    UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
+    when(aggregator.hasUnitTestResultsProperty()).thenReturn(false);
+
+    UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(aggregator, "cs", "C#", null);
+    sensor.execute(null);
+
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("No unit test results property. Skip Sensor");
+  }
 }
