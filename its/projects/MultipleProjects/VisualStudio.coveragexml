@@ -29,7 +29,7 @@
         </function>
       </functions>
       <source_files>
-        <source_file id="0" path="C:\Workspace\sonar-dotnet\its\projects\MultipleProjects\SecondProjectTests\FirstClassTests.cs" checksum_type="unknown">
+        <source_file id="0" path="SecondProjectTests\FirstClassTests.cs" checksum_type="unknown">
         </source_file>
       </source_files>
     </module>

@@ -134,7 +134,7 @@ public class CoverageTest {
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
-      "Coverage Report Statistics: 4 files, 3 main files, 3 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.");
+      "Coverage Report Statistics: 5 files, 3 main files, 3 main files with coverage, 2 test files, 0 project excluded files, 0 other language files.");
 
     assertLineCoverageMetrics("MultipleProjects", 22, 2);
     assertLineCoverageMetrics("MultipleProjects:FirstProject/FirstClass.cs", 10, 0);
