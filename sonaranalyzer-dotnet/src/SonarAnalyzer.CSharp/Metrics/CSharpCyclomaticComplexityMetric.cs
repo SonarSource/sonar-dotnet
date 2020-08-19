@@ -151,6 +151,16 @@ namespace SonarAnalyzer.Metrics.CSharp
                 base.VisitBinaryExpression(node);
             }
 
+            public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
+            {
+                if (node.IsKind(SyntaxKindEx.CoalesceAssignmentExpression))
+                {
+                    AddLocation(node.OperatorToken);
+                }
+
+                base.VisitAssignmentExpression(node);
+            }
+
             public override void VisitCaseSwitchLabel(CaseSwitchLabelSyntax node)
             {
                 AddLocation(node.Keyword);
