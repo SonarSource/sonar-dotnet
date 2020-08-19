@@ -28,7 +28,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.sonar.api.batch.InstantiationStrategy;
@@ -56,7 +55,6 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
 public abstract class AbstractModuleConfiguration {
   private static final Logger LOG = Loggers.get(AbstractModuleConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
-  private static final String PROP_PREFIX = "sonar.";
 
   private final Configuration configuration;
   private final String languageKey;
@@ -64,20 +62,6 @@ public abstract class AbstractModuleConfiguration {
   public AbstractModuleConfiguration(Configuration configuration, String languageKey) {
     this.configuration = configuration;
     this.languageKey = languageKey;
-  }
-
-  /**
-   * To support Scanner for MSBuild <= 3.0
-   */
-  private String getOldRoslynJsonReportPathProperty() {
-    return PROP_PREFIX + languageKey + ".roslyn.reportFilePath";
-  }
-
-  /**
-   * To support Scanner for MSBuild <= 3.0
-   */
-  static String getOldAnalyzerWorkDirProperty(String languageKey) {
-    return PROP_PREFIX + languageKey + ".analyzer.projectOutPath";
   }
 
   static String getAnalyzerReportDir(String languageKey) {
@@ -95,23 +79,12 @@ public abstract class AbstractModuleConfiguration {
       .map(Paths::get)
       .collect(Collectors.toList());
 
-    if (analyzerWorkDirPaths.isEmpty()) {
-      // fallback to old property
-      Optional<String> oldValue = configuration.get(getOldAnalyzerWorkDirProperty(languageKey));
-      if (oldValue.isPresent()) {
-        analyzerWorkDirPaths = Collections.singletonList(Paths.get(oldValue.get()));
-      } else {
-        // we don't generate sonar.cs.analyzer.projectOutPaths for test projects on purpose
-        boolean isTestProject = configuration.hasKey("sonar.tests");
-        if (!isTestProject) {
-          LOG.warn("Property missing: '" + getAnalyzerWorkDirProperty(languageKey) + "'. No protobuf files will be loaded for this project.");
-        }
-        return Collections.emptyList();
-      }
+    // we don't generate sonar.cs.analyzer.projectOutPaths for test projects on purpose
+    if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests")) {
+      LOG.warn("Property missing: '" + getAnalyzerWorkDirProperty(languageKey) + "'. No protobuf files will be loaded for this project.");
     }
 
-    return analyzerWorkDirPaths.stream()
-      .map(x -> x.resolve(getAnalyzerReportDir(languageKey)))
+    return analyzerWorkDirPaths.stream().map(x -> x.resolve(getAnalyzerReportDir(languageKey)))
       .filter(AbstractModuleConfiguration::validateOutputDir)
       .collect(Collectors.toList());
   }
@@ -151,15 +124,8 @@ public abstract class AbstractModuleConfiguration {
         .map(Paths::get)
         .collect(Collectors.toList());
     } else {
-      // fallback to old property
-      Optional<Path> path = configuration.get(getOldRoslynJsonReportPathProperty()).map(Paths::get);
-      if (!path.isPresent()) {
-        LOG.warn("No Roslyn issues report found for this project.");
-        return Collections.emptyList();
-      } else {
-        LOG.debug("Found Roslyn issues report");
-        return Collections.singletonList(path.get());
-      }
+      LOG.warn("No Roslyn issues report found for this project.");
+      return Collections.emptyList();
     }
   }
 }

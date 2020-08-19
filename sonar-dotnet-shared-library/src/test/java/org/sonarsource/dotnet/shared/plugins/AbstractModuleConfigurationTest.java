@@ -62,18 +62,6 @@ public class AbstractModuleConfigurationTest {
   }
 
   @Test
-  public void onlyOldRoslynReportPresent() throws IOException {
-    Path path = temp.newFile("roslyn-report.json").toPath();
-
-    Configuration configuration = createEmptyMockConfiguration();
-    when(configuration.get("sonar.cs.roslyn.reportFilePath")).thenReturn(Optional.of(path.toString()));
-
-    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
-    assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"));
-  }
-
-  @Test
   public void giveWarningsWhenGettingProtobufPathAndNoPropertyAvailable() {
     Configuration configuration = createEmptyMockConfiguration();
 
@@ -149,24 +137,11 @@ public class AbstractModuleConfigurationTest {
     Files.createDirectories(outputCs);
 
     Configuration configuration = createEmptyMockConfiguration();
-    when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of(path.toString()));
+    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[] {path.toString()});
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN).get(0)).matches(s -> s.endsWith("contains no .pb file(s). Analyzer results won't be loaded from this directory."));
-  }
-
-  @Test
-  public void onlyOldProtobufReportsPresent() throws IOException {
-    Path path = createProtobufOut("report");
-
-    Configuration configuration = createEmptyMockConfiguration();
-    when(configuration.get("sonar.cs.analyzer.projectOutPath")).thenReturn(Optional.of(path.toString()));
-
-    AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
-    assertThat(config.protobufReportPaths()).isNotEmpty();
-    assertThat(config.roslynReportPaths()).isEmpty();
-    assertThat(config.protobufReportPaths()).containsOnly(workDir.resolve("report").resolve("output-cs"));
   }
 
   private Path createProtobufOut(String name) throws IOException {

@@ -87,21 +87,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
   }
 
   @Test
-  public void process_generated_old_prop() throws IOException {
-    project1.setProperty("sonar.foo.analyzer.projectOutPath", mockGenerated("generated1"));
-    project2.setProperty("sonar.foo.analyzer.projectOutPath", mockGenerated("generated2"));
-
-    underTest.build(context);
-    assertThat(underTest.isGenerated(mockInputFile("generated1"))).isTrue();
-    assertThat(underTest.isGenerated(mockInputFile("generated2"))).isTrue();
-    assertThat(underTest.isGenerated(mockInputFile("generated3"))).isFalse();
-    Map.Entry<String, Charset> expected1 = entry(toUriString("generated1"), null);
-    Map.Entry<String, Charset> expected2 = entry(toUriString("generated2"), null);
-    assertThat(underTest.getRoslynEncodingPerUri()).containsOnly(expected1, expected2);
-  }
-
-  @Test
-  public void process_generated_new_prop() throws IOException {
+  public void process_generated() throws IOException {
     project1.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("generated11") + "," + mockGenerated("generated12"));
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("generated2"));
 
@@ -115,7 +101,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
   }
 
   @Test
-  public void process_generated_new_prop_escaped_csv() throws IOException {
+  public void process_generated_escaped_csv() throws IOException {
     project1.setProperty("sonar.foo.analyzer.projectOutPaths",
       "\"" + mockGenerated("generated11") + "\",\"" + mockGenerated("generated12") + "\"");
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("generated2"));
@@ -140,7 +126,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
   }
 
   @Test
-  public void process_encoding_new_prop() throws IOException {
+  public void process_encoding() throws IOException {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncoding("UTF-8", "encodingutf8"));
 
     underTest.build(context);
@@ -199,8 +185,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
   @Test
   public void ignore_missing_files() throws IOException {
-    project1.setProperty("sonar.foo.analyzer.projectOutPath", "notExisiting.pb");
-    project2.setProperty("sonar.foo.analyzer.projectOutPath", mockGenerated("generated2"));
+    project1.setProperty("sonar.foo.analyzer.projectOutPaths", "notExisiting.pb");
+    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockGenerated("generated2"));
 
     underTest.build(context);
     assertThat(underTest.isGenerated(mockInputFile("generated2"))).isTrue();
