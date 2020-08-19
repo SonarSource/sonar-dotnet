@@ -31,12 +31,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
+import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
+import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -84,11 +85,8 @@ public class CoverageReportImportSensorTest {
   }
 
   @Test
-  public void describe_global_sensor() {
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
-      .describe(descriptor);
-
-    assertThat(descriptor.isGlobal()).isTrue();
+  public void isProjectSensor() {
+    assertThat(ProjectSensor.class.isAssignableFrom(CoverageReportImportSensor.class)).isTrue();
   }
 
   @Test
