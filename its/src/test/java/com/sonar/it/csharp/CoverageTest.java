@@ -100,7 +100,7 @@ public class CoverageTest {
 
     orchestrator.executeBuild(beginStep);
 
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild", "/t:Restore");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore,Rebuild");
 
     BuildResult buildResult = orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
