@@ -185,6 +185,19 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node) =>
                 State.VisitWithNesting(node, base.VisitParenthesizedLambdaExpression);
+
+            public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
+            {
+                if (node.IsKind(SyntaxKindEx.CoalesceAssignmentExpression))
+                {
+                    State.IncreaseComplexityByNestingPlusOne(node.OperatorToken);
+                    State.VisitWithNesting(node, base.VisitAssignmentExpression);
+                }
+                else
+                {
+                    base.VisitAssignmentExpression(node);
+                }
+            }
         }
     }
 }

@@ -34,8 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class CognitiveComplexity : CognitiveComplexityBase
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager, false);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

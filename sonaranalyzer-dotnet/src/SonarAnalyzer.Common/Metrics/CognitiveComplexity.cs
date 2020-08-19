@@ -40,6 +40,8 @@ namespace SonarAnalyzer.Common
     public class CognitiveComplexityWalkerState<TMethodSyntax>
         where TMethodSyntax : SyntaxNode
     {
+        private int nestingLevel;
+
         public TMethodSyntax CurrentMethod { get; set; }
 
         public List<SecondaryLocation> IncrementLocations { get; }
@@ -51,25 +53,20 @@ namespace SonarAnalyzer.Common
 
         public bool HasDirectRecursiveCall { get; set; }
 
-        public int NestingLevel { get; set; }
-
-        public int Complexity { get; set; }
+        public int Complexity { get; private set; }
 
         public void VisitWithNesting<TSyntaxNode>(TSyntaxNode node, Action<TSyntaxNode> visit)
         {
-            NestingLevel++;
+            nestingLevel++;
             visit(node);
-            NestingLevel--;
+            nestingLevel--;
         }
 
-        public void IncreaseComplexityByOne(SyntaxToken token)
-        {
-            IncreaseComplexity(token, 1, "+1");
-        }
+        public void IncreaseComplexityByOne(SyntaxToken token) => IncreaseComplexity(token, 1, "+1");
 
         public void IncreaseComplexityByNestingPlusOne(SyntaxToken token)
         {
-            var increment = NestingLevel + 1;
+            var increment = nestingLevel + 1;
             var message = increment == 1
                 ? "+1"
                 : $"+{increment} (incl {increment - 1} for nesting)";

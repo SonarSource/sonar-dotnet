@@ -759,5 +759,25 @@ namespace Tests.Diagnostics
                     }
                 };
         }
+
+        void NullCoalescence(string first, string second) // Compliant - FN: null-coalescing operator is not considered: https://github.com/SonarSource/sonar-dotnet/issues/3528
+        {
+            var x = first ?? second;
+        }
+
+        void NullCoalescenceAssignment(int? first, int? second, int? third, int? fourth) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 8 to the 0 allowed.}}
+        {
+            var a = first ??= 0;
+//                        ^^^ Secondary {{+1}}
+
+            var b = first ??= second ??= third ??= fourth;
+//                        ^^^ Secondary {{+1}}
+//                                   ^^^ Secondary@-1 {{+2 (incl 1 for nesting)}}
+//                                             ^^^ Secondary@-2 {{+3 (incl 2 for nesting)}}
+
+            var c = first ??= second ?? third; // null-coalescing operator is not considered: https://github.com/SonarSource/sonar-dotnet/issues/3528
+//                        ^^^ Secondary {{+1}}
+
+        }
     }
 }
