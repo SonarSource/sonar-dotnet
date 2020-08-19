@@ -1,5 +1,5 @@
 /*
- * SonarSource :: .NET :: Shared library
+ * SonarC#
  * Copyright (C) 2014-2020 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *

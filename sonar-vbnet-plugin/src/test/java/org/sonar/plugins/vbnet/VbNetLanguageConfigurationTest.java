@@ -1,6 +1,6 @@
 /*
- * SonarSource :: .NET :: Shared library
- * Copyright (C) 2014-2020 SonarSource SA
+ * SonarVB
+ * Copyright (C) 2012-2020 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
