@@ -1,5 +1,5 @@
 /*
- * SonarSource :: .NET :: Shared library
+ * SonarC#
  * Copyright (C) 2014-2020 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,30 +17,24 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonarsource.dotnet.shared.plugins;
+package org.sonar.plugins.csharp;
 
-import org.sonar.api.ExtensionPoint;
-import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.server.ServerSide;
+import org.junit.Test;
+import org.sonar.api.config.Configuration;
 
-@ScannerSide
-@ServerSide
-@ExtensionPoint
-public interface DotNetPluginMetadata {
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-  String languageKey();
-  String pluginKey();
-  String languageName();
-  String shortLanguageName();
-  String sonarAnalyzerName();
-  String repositoryKey();
+public class CSharpLanguageConfigurationTest {
 
-  default String ignoreHeaderCommentPropertyKey() {
-    return AbstractPropertyDefinitions.getIgnoreHeaderCommentsProperty(languageKey());
+  @Test
+  public void reads_correct_language() {
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.getStringArray("sonar.cs.roslyn.bugCategories")).thenReturn(new String[] {"C#"});
+    when(configuration.getStringArray("sonar.vbnet.roslyn.bugCategories")).thenReturn(new String[] {"VB.NET"});
+    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration);
+
+    assertThat(config.bugCategories()).containsExactly("C#");
   }
-
-  default String analyzeGeneratedCodePropertyKey() {
-    return AbstractPropertyDefinitions.getAnalyzeGeneratedCode(languageKey());
-  }
-
 }

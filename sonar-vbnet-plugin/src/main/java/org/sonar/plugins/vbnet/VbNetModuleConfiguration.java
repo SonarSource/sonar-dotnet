@@ -1,6 +1,6 @@
 /*
- * SonarSource :: .NET :: Shared library
- * Copyright (C) 2014-2020 SonarSource SA
+ * SonarVB
+ * Copyright (C) 2012-2020 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -17,30 +17,17 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonarsource.dotnet.shared.plugins;
+package org.sonar.plugins.vbnet;
 
-import org.sonar.api.ExtensionPoint;
-import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.server.ServerSide;
+import org.sonar.api.config.Configuration;
+import org.sonarsource.dotnet.shared.plugins.AbstractModuleConfiguration;
 
-@ScannerSide
-@ServerSide
-@ExtensionPoint
-public interface DotNetPluginMetadata {
-
-  String languageKey();
-  String pluginKey();
-  String languageName();
-  String shortLanguageName();
-  String sonarAnalyzerName();
-  String repositoryKey();
-
-  default String ignoreHeaderCommentPropertyKey() {
-    return AbstractPropertyDefinitions.getIgnoreHeaderCommentsProperty(languageKey());
+/**
+ * @deprecated due to base class  {@link AbstractModuleConfiguration} deprecation.
+ */
+@Deprecated
+public class VbNetModuleConfiguration extends AbstractModuleConfiguration {
+  public VbNetModuleConfiguration(Configuration configuration) {
+    super(configuration, VbNetPlugin.LANGUAGE_KEY);
   }
-
-  default String analyzeGeneratedCodePropertyKey() {
-    return AbstractPropertyDefinitions.getAnalyzeGeneratedCode(languageKey());
-  }
-
 }

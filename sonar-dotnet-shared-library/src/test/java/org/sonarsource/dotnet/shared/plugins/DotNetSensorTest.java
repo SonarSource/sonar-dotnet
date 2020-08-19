@@ -38,6 +38,7 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.internal.google.common.collect.ImmutableList;
 import org.sonar.api.internal.google.common.collect.ImmutableMap;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -93,9 +94,13 @@ public class DotNetSensorTest {
   public void checkDescriptor() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     sensor.describe(sensorDescriptor);
-    assertThat(sensorDescriptor.isGlobal()).isTrue();
     assertThat(sensorDescriptor.languages()).containsOnly(LANG_KEY);
     assertThat(sensorDescriptor.name()).isEqualTo("LangName");
+  }
+
+  @Test
+  public void isProjectSensor() {
+    assertThat(ProjectSensor.class.isAssignableFrom(sensor.getClass())).isTrue();
   }
 
   @Test
@@ -116,7 +121,8 @@ public class DotNetSensorTest {
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
       "sonaranalyzer-langKey", ImmutableList.of(RuleKey.of(REPO_KEY, "S1186"), RuleKey.of(REPO_KEY, "[parameters_key]")),
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
-    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap), any(RealPathProvider.class));
+    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap),
+      any(RealPathProvider.class));
   }
 
   @Test

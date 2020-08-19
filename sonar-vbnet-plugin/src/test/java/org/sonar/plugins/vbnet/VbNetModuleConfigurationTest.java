@@ -19,11 +19,23 @@
  */
 package org.sonar.plugins.vbnet;
 
+import java.nio.file.Paths;
+import org.junit.Test;
 import org.sonar.api.config.Configuration;
-import org.sonarsource.dotnet.shared.plugins.AbstractProjectConfiguration;
 
-public class VbNetProjectConfiguration extends AbstractProjectConfiguration {
-  public VbNetProjectConfiguration(Configuration configuration) {
-    super(configuration, VbNetPlugin.LANGUAGE_KEY);
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+public class VbNetModuleConfigurationTest {
+
+  @Test
+  public void reads_correct_language() {
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[] {"C#"});
+    when(configuration.getStringArray("sonar.vbnet.roslyn.reportFilePaths")).thenReturn(new String[] {"VB.NET"});
+    VbNetModuleConfiguration config = new VbNetModuleConfiguration(configuration);
+
+    assertThat(config.roslynReportPaths()).containsExactly(Paths.get("VB.NET"));
   }
 }
