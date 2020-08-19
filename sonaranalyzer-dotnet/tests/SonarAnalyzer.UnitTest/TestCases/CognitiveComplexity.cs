@@ -132,25 +132,45 @@ namespace Tests.Diagnostics
             }
         }
 
-        void SwitchExpression(int count) // FN - Switch expression should increase the Cognitive Complexity by 1
+        void SwitchExpression(int count) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
         {
             var x = count switch
+//                        ^^^^^^ Secondary {{+1}}
             {
                 0 => "zero",
                 _ => "other"
             };
         }
 
-        void NestedSwitchExpression(bool first, bool second) // FN - Switch expression should increase the Cognitive Complexity by 1
+        void NestedSwitchExpression(bool first, bool second) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
         {
             var x = first switch
+//                        ^^^^^^ Secondary {{+1}}
             {
                 true => second switch
+//                             ^^^^^^ Secondary {{+2 (incl 1 for nesting)}}
                 {
                     true => 1,
                     false => 2
                 },
                 _ => 3
+            };
+        }
+
+        void MultipleSwitchExpression(bool first, bool second) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+        {
+            var x = first switch
+//                        ^^^^^^ Secondary {{+1}}
+            {
+                true => 1,
+                _ => 2
+            };
+
+            x = second switch
+//                     ^^^^^^ Secondary {{+1}}
+            {
+                true => 3,
+                _ => 4
             };
         }
 

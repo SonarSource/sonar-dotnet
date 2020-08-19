@@ -517,7 +517,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         public void CognitiveComplexity()
         {
             var csharpText = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.cs");
-            CognitiveComplexity(AnalyzerLanguage.CSharp, csharpText).Should().Be(103);
+            CognitiveComplexity(AnalyzerLanguage.CSharp, csharpText).Should().Be(109);
 
             var visualBasicCode = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.vb");
             CognitiveComplexity(AnalyzerLanguage.VisualBasic, visualBasicCode).Should().Be(122);
