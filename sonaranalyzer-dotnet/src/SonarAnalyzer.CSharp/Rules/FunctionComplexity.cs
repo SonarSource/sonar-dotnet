@@ -78,13 +78,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RemoveAccessorDeclaration);
         }
 
-        protected void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, string declarationType)
-            where TSyntax : SyntaxNode
-        {
+        private void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, string declarationType)
+            where TSyntax : SyntaxNode =>
             CheckComplexity(context, getLocation, n => n, declarationType);
-        }
 
-        protected void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, Func<TSyntax, SyntaxNode> getNodeToCheck, string declarationType)
+        private void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, Location> getLocation, Func<TSyntax, SyntaxNode> getNodeToCheck, string declarationType)
             where TSyntax : SyntaxNode
         {
             var node = (TSyntax)context.Node;
@@ -104,7 +102,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         getLocation(node),
                         complexityMetric.Locations.ToAdditionalLocations(),
                         complexityMetric.Locations.ToProperties(),
-                        new object[] { Maximum, complexityMetric.Complexity, declarationType}));
+                        Maximum,
+                        complexityMetric.Complexity,
+                        declarationType));
             }
         }
     }
