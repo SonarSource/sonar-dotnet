@@ -24,7 +24,6 @@ import java.util.function.Predicate;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.mockito.Mockito;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
@@ -62,57 +61,22 @@ public class UnitTestResultsImportSensorTest {
   }
 
   @Test
-  public void analyze() throws Exception {
-    UnitTestResults results = mock(UnitTestResults.class);
-    when(results.tests()).thenReturn(42);
-    when(results.skipped()).thenReturn(1);
-    when(results.failures()).thenReturn(2);
-    when(results.errors()).thenReturn(3);
-    when(results.executionTime()).thenReturn(321L);
-
-    UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    SensorContextTester context = SensorContextTester.create(temp.newFolder());
+  public void should_not_save_metrics_with_empty_results() throws Exception {
+    UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
+    UnitTestResults results = new UnitTestResults();
+    results.add(42, 1, 2, 3, null);
+    when(aggregator.hasUnitTestResultsProperty()).thenReturn(true);
+    when(aggregator.aggregate(any())).thenReturn(results);
+    SensorContextTester context = SensorContextTester.create(temp.newFolder());
+    when(aggregator.aggregate(any())).thenReturn(results);
 
-    when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class)))
-      .thenReturn(results);
-
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, "cs", "C#", analysisWarnings).analyze(context, results);
-
-    verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
+    new UnitTestResultsImportSensor(aggregator, "cs", "C#", analysisWarnings).execute(context);
 
     assertThat(context.measures("projectKey"))
       .extracting("metric.key", "value")
       .containsOnly(
         tuple(CoreMetrics.TESTS_KEY, 42),
-        tuple(CoreMetrics.SKIPPED_TESTS_KEY, 1),
-        tuple(CoreMetrics.TEST_FAILURES_KEY, 2),
-        tuple(CoreMetrics.TEST_ERRORS_KEY, 3),
-        tuple(CoreMetrics.TEST_EXECUTION_TIME_KEY, 321L));
-  }
-
-  @Test
-  public void should_not_save_metrics_with_empty_results() throws Exception {
-    SensorContextTester context = SensorContextTester.create(temp.newFolder());
-
-    UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
-    UnitTestResults results = mock(UnitTestResults.class);
-    when(results.tests()).thenReturn(0);
-    when(results.skipped()).thenReturn(1);
-    when(results.failures()).thenReturn(2);
-    when(results.errors()).thenReturn(3);
-    when(results.executionTime()).thenReturn(null);
-    when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class))).thenReturn(results);
-
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, "cs", "C#", analysisWarnings).analyze(context, results);
-
-    verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
-
-    assertThat(context.measures("projectKey"))
-      .extracting("metric.key", "value")
-      .containsOnly(
-        tuple(CoreMetrics.TESTS_KEY, 0),
         tuple(CoreMetrics.SKIPPED_TESTS_KEY, 1),
         tuple(CoreMetrics.TEST_FAILURES_KEY, 2),
         tuple(CoreMetrics.TEST_ERRORS_KEY, 3));
@@ -158,30 +122,28 @@ public class UnitTestResultsImportSensorTest {
 
   @Test
   public void import_two_reports_for_same_project_should_not_throw() throws Exception {
-    UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
     UnitTestResults results = mock(UnitTestResults.class);
+    when(aggregator.hasUnitTestResultsProperty()).thenReturn(true);
+    when(aggregator.aggregate(any())).thenReturn(results);
 
-    when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class)))
-      .thenReturn(results);
-
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, "cs", "C#", analysisWarnings).analyze(context, results);
-
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, "vb", "VB.NET", analysisWarnings).analyze(context, results);
+    new UnitTestResultsImportSensor(aggregator, "cs", "C#", analysisWarnings).execute(context);
+    new UnitTestResultsImportSensor(aggregator, "vb", "VB.NET", analysisWarnings).execute(context);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Could not import unit test report: 'Can not add the same measure twice'");
     verify(analysisWarnings).addUnique("Could not import unit test report for 'VB.NET'. Please check the logs for more details.");
   }
 
   @Test
-  public void execute_saves_metrics_when_key_is_present() throws IOException {
+  public void execute_saves_metrics() throws IOException {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     UnitTestResults results = new UnitTestResults();
-    results.add(42, 43, 44, 45, null);
+    results.add(42, 1, 2, 3, 321L);
     when(aggregator.hasUnitTestResultsProperty()).thenReturn(true);
-    when(aggregator.aggregate(any(), any())).thenReturn(results);
+    when(aggregator.aggregate(any())).thenReturn(results);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
 
     UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(aggregator, "cs", "C#", analysisWarnings);
@@ -191,9 +153,10 @@ public class UnitTestResultsImportSensorTest {
       .extracting("metric.key", "value")
       .containsOnly(
         tuple(CoreMetrics.TESTS_KEY, 42),
-        tuple(CoreMetrics.SKIPPED_TESTS_KEY, 43),
-        tuple(CoreMetrics.TEST_FAILURES_KEY, 44),
-        tuple(CoreMetrics.TEST_ERRORS_KEY, 45));
+        tuple(CoreMetrics.SKIPPED_TESTS_KEY, 1),
+        tuple(CoreMetrics.TEST_FAILURES_KEY, 2),
+        tuple(CoreMetrics.TEST_ERRORS_KEY, 3),
+        tuple(CoreMetrics.TEST_EXECUTION_TIME_KEY, 321L));
   }
 
   @Test

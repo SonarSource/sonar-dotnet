@@ -33,7 +33,8 @@ import org.sonar.api.utils.log.LoggerLevel;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -98,10 +99,9 @@ public class UnitTestResultsAggregatorTest {
     VisualStudioTestResultsFileParser visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
     NUnitTestResultsFileParser nunitTestResultsFileParser = mock(NUnitTestResultsFileParser.class);
     XUnitTestResultsFileParser xunitTestResultsFileParser = mock(XUnitTestResultsFileParser.class);
-    UnitTestResults results = mock(UnitTestResults.class);
     new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), visualStudioTestResultsFileParser, nunitTestResultsFileParser, xunitTestResultsFileParser)
-      .aggregate(wildcardPatternFileProvider, results);
-    verify(visualStudioTestResultsFileParser).accept(new File("foo.trx"), results);
+      .aggregate(wildcardPatternFileProvider);
+    verify(visualStudioTestResultsFileParser).accept(eq(new File("foo.trx")), notNull());
     verify(nunitTestResultsFileParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(UnitTestResults.class));
 
     // NUnit test results only
@@ -111,11 +111,10 @@ public class UnitTestResultsAggregatorTest {
     visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
     nunitTestResultsFileParser = mock(NUnitTestResultsFileParser.class);
     xunitTestResultsFileParser = mock(XUnitTestResultsFileParser.class);
-    results = mock(UnitTestResults.class);
     new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), visualStudioTestResultsFileParser, nunitTestResultsFileParser, xunitTestResultsFileParser)
-      .aggregate(wildcardPatternFileProvider, results);
+      .aggregate(wildcardPatternFileProvider);
     verify(visualStudioTestResultsFileParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(UnitTestResults.class));
-    verify(nunitTestResultsFileParser).accept(new File("foo.xml"), results);
+    verify(nunitTestResultsFileParser).accept(eq(new File("foo.xml")), notNull());
 
     // XUnit test results only
     settings.clear();
@@ -124,11 +123,10 @@ public class UnitTestResultsAggregatorTest {
     visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
     nunitTestResultsFileParser = mock(NUnitTestResultsFileParser.class);
     xunitTestResultsFileParser = mock(XUnitTestResultsFileParser.class);
-    results = mock(UnitTestResults.class);
     new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), visualStudioTestResultsFileParser, nunitTestResultsFileParser, xunitTestResultsFileParser)
-      .aggregate(wildcardPatternFileProvider, results);
+      .aggregate(wildcardPatternFileProvider);
     verify(visualStudioTestResultsFileParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(UnitTestResults.class));
-    verify(xunitTestResultsFileParser).accept(new File("foo.xml"), results);
+    verify(xunitTestResultsFileParser).accept(eq(new File("foo.xml")), notNull());
 
     // All configured
     settings.clear();
@@ -140,21 +138,19 @@ public class UnitTestResultsAggregatorTest {
     visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
     nunitTestResultsFileParser = mock(NUnitTestResultsFileParser.class);
     xunitTestResultsFileParser = mock(XUnitTestResultsFileParser.class);
-    results = mock(UnitTestResults.class);
     new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), visualStudioTestResultsFileParser, nunitTestResultsFileParser, xunitTestResultsFileParser)
-      .aggregate(wildcardPatternFileProvider, results);
-    verify(visualStudioTestResultsFileParser).accept(new File("foo.trx"), results);
-    verify(nunitTestResultsFileParser).accept(new File("foo.xml"), results);
-    verify(xunitTestResultsFileParser).accept(new File("foo.xml"), results);
+      .aggregate(wildcardPatternFileProvider);
+    verify(visualStudioTestResultsFileParser).accept(eq(new File("foo.trx")), notNull());
+    verify(nunitTestResultsFileParser).accept(eq(new File("foo.xml")), notNull());
+    verify(xunitTestResultsFileParser).accept(eq(new File("foo.xml")), notNull());
 
     // None configured
     settings.clear();
     visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
     nunitTestResultsFileParser = mock(NUnitTestResultsFileParser.class);
     xunitTestResultsFileParser = mock(XUnitTestResultsFileParser.class);
-    results = mock(UnitTestResults.class);
     new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), visualStudioTestResultsFileParser, nunitTestResultsFileParser, xunitTestResultsFileParser)
-      .aggregate(wildcardPatternFileProvider, results);
+      .aggregate(wildcardPatternFileProvider);
     verify(visualStudioTestResultsFileParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(UnitTestResults.class));
     verify(nunitTestResultsFileParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(UnitTestResults.class));
     verify(xunitTestResultsFileParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(UnitTestResults.class));
@@ -174,22 +170,21 @@ public class UnitTestResultsAggregatorTest {
     visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
     nunitTestResultsFileParser = mock(NUnitTestResultsFileParser.class);
     xunitTestResultsFileParser = mock(XUnitTestResultsFileParser.class);
-    results = mock(UnitTestResults.class);
 
     new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), visualStudioTestResultsFileParser, nunitTestResultsFileParser, xunitTestResultsFileParser)
-      .aggregate(wildcardPatternFileProvider, results);
+      .aggregate(wildcardPatternFileProvider);
 
     verify(wildcardPatternFileProvider).listFiles("*.trx");
     verify(wildcardPatternFileProvider).listFiles("bar.trx");
     verify(wildcardPatternFileProvider).listFiles("foo.xml");
     verify(wildcardPatternFileProvider).listFiles("bar.xml");
 
-    verify(visualStudioTestResultsFileParser).accept(new File("foo.trx"), results);
-    verify(visualStudioTestResultsFileParser).accept(new File("bar.trx"), results);
-    verify(nunitTestResultsFileParser).accept(new File("foo.xml"), results);
-    verify(nunitTestResultsFileParser).accept(new File("bar.xml"), results);
-    verify(xunitTestResultsFileParser).accept(new File("foo2.xml"), results);
-    verify(xunitTestResultsFileParser).accept(new File("bar2.xml"), results);
+    verify(visualStudioTestResultsFileParser).accept(eq(new File("foo.trx")), notNull());
+    verify(visualStudioTestResultsFileParser).accept(eq(new File("bar.trx")), notNull());
+    verify(nunitTestResultsFileParser).accept(eq(new File("foo.xml")), notNull());
+    verify(nunitTestResultsFileParser).accept(eq(new File("bar.xml")), notNull());
+    verify(xunitTestResultsFileParser).accept(eq(new File("foo2.xml")), notNull());
+    verify(xunitTestResultsFileParser).accept(eq(new File("bar2.xml")), notNull());
   }
 
   @Test
@@ -202,10 +197,10 @@ public class UnitTestResultsAggregatorTest {
     when(wildcardPatternFileProvider.listFiles("foo.trx")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.trx"))));
 
     VisualStudioTestResultsFileParser visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
-    doThrow(IllegalStateException.class).when(visualStudioTestResultsFileParser).accept(any(), any());
+    doThrow(IllegalStateException.class).when(visualStudioTestResultsFileParser).accept(notNull(), notNull());
 
     new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), visualStudioTestResultsFileParser, null, null)
-      .aggregate(wildcardPatternFileProvider, null);
+      .aggregate(wildcardPatternFileProvider);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Could not import unit test report 'foo.trx'");
   }

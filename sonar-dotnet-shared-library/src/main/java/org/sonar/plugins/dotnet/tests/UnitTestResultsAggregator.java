@@ -77,21 +77,22 @@ public class UnitTestResultsAggregator {
     return hasKeyPredicate.test(unitTestConf.xunitTestResultsFilePropertyKey());
   }
 
-  UnitTestResults aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, UnitTestResults unitTestResults) {
+  UnitTestResults aggregate(WildcardPatternFileProvider wildcardPatternFileProvider) {
+    UnitTestResults results = new UnitTestResults();
+
     if (hasVisualStudioTestResultsFile(configuration::hasKey)) {
-      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser,
-        unitTestResults);
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser, results);
     }
 
     if (hasNUnitTestResultsFile(configuration::hasKey)) {
-      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()), nunitTestResultsFileParser, unitTestResults);
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()), nunitTestResultsFileParser, results);
     }
 
     if (hasXUnitTestResultsFile(configuration::hasKey)) {
-      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsFileParser, unitTestResults);
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsFileParser, results);
     }
 
-    return unitTestResults;
+    return results;
   }
 
   private static void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String[] reportPaths, UnitTestResultsParser parser, UnitTestResults unitTestResults) {

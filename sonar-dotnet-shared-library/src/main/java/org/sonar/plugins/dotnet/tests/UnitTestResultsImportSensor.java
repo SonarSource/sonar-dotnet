@@ -64,23 +64,19 @@ public class UnitTestResultsImportSensor implements ProjectSensor {
   @Override
   public void execute(SensorContext context) {
     if (unitTestResultsAggregator.hasUnitTestResultsProperty()) {
-      analyze(context, new UnitTestResults()); // FIXME: Refactoring
+      try {
+        saveTestMetrics(context);
+      } catch (Exception e) {
+        LOG.warn("Could not import unit test report: '{}'", e.getMessage());
+        analysisWarnings.addUnique(String.format("Could not import unit test report for '%s'. Please check the logs for more details.", languageName));
+      }
     } else {
       LOG.debug("No unit test results property. Skip Sensor");
     }
   }
 
-  void analyze(SensorContext context, UnitTestResults unitTestResults) {
-    try {
-      saveTestMetrics(context, unitTestResults);
-    } catch (Exception e) {
-      LOG.warn("Could not import unit test report: '{}'", e.getMessage());
-      analysisWarnings.addUnique(String.format("Could not import unit test report for '%s'. Please check the logs for more details.", languageName));
-    }
-  }
-
-  private void saveTestMetrics(SensorContext context, UnitTestResults unitTestResults) {
-    UnitTestResults aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider, unitTestResults);
+  private void saveTestMetrics(SensorContext context) {
+    UnitTestResults aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider);
 
     context.<Integer>newMeasure()
       .forMetric(CoreMetrics.TESTS)
