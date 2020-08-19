@@ -22,6 +22,9 @@ package org.sonar.plugins.vbnet;
 import org.sonar.api.config.Configuration;
 import org.sonarsource.dotnet.shared.plugins.AbstractModuleConfiguration;
 
+/**
+ * @deprecated due to base class  {@link AbstractModuleConfiguration} deprecation.
+ */
 @Deprecated
 public class VbNetModuleConfiguration extends AbstractModuleConfiguration {
   public VbNetModuleConfiguration(Configuration configuration) {

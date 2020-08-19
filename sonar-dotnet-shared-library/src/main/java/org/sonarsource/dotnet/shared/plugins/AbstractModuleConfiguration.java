@@ -27,6 +27,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -45,7 +46,9 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
  * Note: even if the concept of "module" was dropped from the SQ server side,
  * "modules" are still a core concept of the SQ scanner.
  *
- * Module-independent functionality is in AbstractLanguageConfiguration.
+ * Module-independent configuration is in {@link AbstractLanguageConfiguration}.
+ *
+ * @deprecated due to deprecation of module support and {@link org.sonar.api.batch.ScannerSide}.
  */
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
@@ -137,7 +140,7 @@ public abstract class AbstractModuleConfiguration {
   }
 
   private static DirectoryStream.Filter<Path> protoFileFilter() {
-    return p -> p.getFileName().toString().toLowerCase().endsWith(".pb");
+    return p -> p.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".pb");
   }
 
   public List<Path> roslynReportPaths() {

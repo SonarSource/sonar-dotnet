@@ -192,8 +192,8 @@ public class AbstractModuleConfigurationTest {
     return configuration;
   }
 
-  private AbstractModuleConfiguration createAbstractModuleConfiguration(Configuration configuration){
-    return new AbstractModuleConfiguration(configuration, "cs"){
+  private AbstractModuleConfiguration createAbstractModuleConfiguration(Configuration configuration) {
+    return new AbstractModuleConfiguration(configuration, "cs") {
     };
   }
 }

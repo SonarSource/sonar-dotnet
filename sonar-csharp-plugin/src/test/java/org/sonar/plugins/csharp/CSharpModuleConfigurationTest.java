@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: .NET :: Shared library
  * Copyright (C) 2014-2020 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -19,15 +19,23 @@
  */
 package org.sonar.plugins.csharp;
 
+import java.nio.file.Paths;
+import org.junit.Test;
 import org.sonar.api.config.Configuration;
-import org.sonarsource.dotnet.shared.plugins.AbstractModuleConfiguration;
 
-/**
- * @deprecated due to base class  {@link AbstractModuleConfiguration} deprecation.
- */
-@Deprecated
-public class CSharpModuleConfiguration extends AbstractModuleConfiguration {
-  public CSharpModuleConfiguration(Configuration configuration) {
-    super(configuration, CSharpPlugin.LANGUAGE_KEY);
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+public class CSharpModuleConfigurationTest {
+
+  @Test
+  public void reads_correct_language() {
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[] {"C#"});
+    when(configuration.getStringArray("sonar.vbnet.roslyn.reportFilePaths")).thenReturn(new String[] {"VB.NET"});
+    CSharpModuleConfiguration config = new CSharpModuleConfiguration(configuration);
+
+    assertThat(config.roslynReportPaths()).containsExactly(Paths.get("C#"));
   }
 }
