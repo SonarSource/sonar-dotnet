@@ -9,10 +9,8 @@
     <license type="file">License.txt</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>CFG library for SonarSource C# plugins</description>
-    <releaseNotes></releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2019 SonarSource SA</copyright>
-    <tags></tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />
     </frameworkAssemblies>
