@@ -36,4 +36,8 @@ public class VbNet extends AbstractLanguage {
     return configuration.getStringArray(VbNetPlugin.FILE_SUFFIXES_KEY);
   }
 
+  @Override
+  public boolean equals(Object o) {
+    return super.equals(o) && configuration == ((VbNet) o).configuration;
+  }
 }

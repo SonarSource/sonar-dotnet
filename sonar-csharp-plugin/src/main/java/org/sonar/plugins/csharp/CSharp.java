@@ -36,4 +36,8 @@ public class CSharp extends AbstractLanguage {
     return configuration.getStringArray(CSharpPlugin.FILE_SUFFIXES_KEY);
   }
 
+  @Override
+  public boolean equals(Object o) {
+    return super.equals(o) && configuration == ((CSharp) o).configuration;
+  }
 }
