@@ -74,9 +74,9 @@ public class VisualStudioTestResultsFileParserTest {
     new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/valid_missing_attributes.trx"), results);
 
     assertThat(results.tests()).isEqualTo(3);
-    assertThat(results.skipped()).isEqualTo(0);
-    assertThat(results.failures()).isEqualTo(0);
-    assertThat(results.errors()).isEqualTo(0);
+    assertThat(results.skipped()).isZero();
+    assertThat(results.failures()).isZero();
+    assertThat(results.errors()).isZero();
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(2);

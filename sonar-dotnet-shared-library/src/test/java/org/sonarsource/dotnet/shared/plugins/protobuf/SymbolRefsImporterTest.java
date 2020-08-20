@@ -45,7 +45,7 @@ public class SymbolRefsImporterTest {
 
   @Before
   public void setUp() {
-    assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
+    assertThat(protobuf).withFailMessage("no such file: " + protobuf).isFile();
   }
 
   @Test

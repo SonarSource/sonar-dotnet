@@ -19,14 +19,13 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.io.File;
 import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
-
-import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -45,10 +44,10 @@ public class XUnitTestResultsFileParserTest {
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/no_counters.xml"), results);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
-    assertThat(results.tests()).isEqualTo(0);
-    assertThat(results.skipped()).isEqualTo(0);
-    assertThat(results.failures()).isEqualTo(0);
-    assertThat(results.errors()).isEqualTo(0);
+    assertThat(results.tests()).isZero();
+    assertThat(results.skipped()).isZero();
+    assertThat(results.failures()).isZero();
+    assertThat(results.errors()).isZero();
     assertThat(results.executionTime()).isNull();
   }
 
@@ -96,7 +95,7 @@ public class XUnitTestResultsFileParserTest {
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid_xunit-1.9.2.xml"), results);
 
     assertThat(results.failures()).isEqualTo(1);
-    assertThat(results.errors()).isEqualTo(0);
+    assertThat(results.errors()).isZero();
     assertThat(results.skipped()).isEqualTo(2);
     assertThat(results.tests()).isEqualTo(6);
 
@@ -128,10 +127,10 @@ public class XUnitTestResultsFileParserTest {
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/empty.xml"), results);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
-    assertThat(results.tests()).isEqualTo(0);
-    assertThat(results.skipped()).isEqualTo(0);
-    assertThat(results.failures()).isEqualTo(0);
-    assertThat(results.errors()).isEqualTo(0);
+    assertThat(results.tests()).isZero();
+    assertThat(results.skipped()).isZero();
+    assertThat(results.failures()).isZero();
+    assertThat(results.errors()).isZero();
     assertThat(results.executionTime()).isNull();
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
@@ -144,10 +143,10 @@ public class XUnitTestResultsFileParserTest {
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid_no_total.xml"), results);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
-    assertThat(results.tests()).isEqualTo(0);
-    assertThat(results.skipped()).isEqualTo(0);
-    assertThat(results.failures()).isEqualTo(0);
-    assertThat(results.errors()).isEqualTo(0);
+    assertThat(results.tests()).isZero();
+    assertThat(results.skipped()).isZero();
+    assertThat(results.failures()).isZero();
+    assertThat(results.errors()).isZero();
     assertThat(results.executionTime()).isNull();
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);

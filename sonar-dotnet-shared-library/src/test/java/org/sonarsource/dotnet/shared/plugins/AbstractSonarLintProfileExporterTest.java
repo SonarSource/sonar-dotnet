@@ -24,13 +24,10 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
@@ -87,7 +84,7 @@ public class AbstractSonarLintProfileExporterTest {
   public void exporter_should_write_file() {
     StringWriter writer = new StringWriter();
     exporter.exportProfile(rulesProfile, writer);
-    assertThat(writer.toString()).isEqualTo(
+    assertThat(writer).hasToString(
       "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
         "<RuleSet Name=\"Rules for SonarLint\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">\r\n" +
         "  <Rules AnalyzerId=\"SonarAnalyzer.CSharp\" RuleNamespace=\"SonarAnalyzer.CSharp\">\r\n" +
