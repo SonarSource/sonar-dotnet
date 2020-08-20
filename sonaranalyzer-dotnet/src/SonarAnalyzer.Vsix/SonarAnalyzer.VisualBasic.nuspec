@@ -8,7 +8,7 @@
     <owners>SonarSource</owners>
     <license type="file">License.txt</license>
     <projectUrl>http://vs.sonarlint.org</projectUrl>
-    <iconUrl>https://sonarsource.github.io/analyzers-github-static-resources/sonar-dotnet/SonarLint-icon-64px.png</iconUrl>
+    <icon>images\sonarlint_64.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Analyzers which spot bugs and code smells in your code. This package is best used together with SonarLint for Visual Studio and/or the SonarQube platform.</summary>
     <description>Analyzers which spot bugs and code smells in your code. This package is best used together with SonarLint for Visual Studio (http://vs.sonarlint.org) and/or the SonarQube platform (http://www.sonarqube.org).</description>
@@ -22,11 +22,11 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <!-- If these are changed than the build\release.ps1 should also be changed -->
     <file src="bin\Release\SonarAnalyzer.dll" target="analyzers" />
     <file src="bin\Release\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
     <file src="bin\Release\Google.Protobuf.dll" target="analyzers" />
     <file src="tools-vbnet\*.ps1" target="tools\" />
     <file src="License.txt" />
+    <file src="logos\sonarlint_64.png" target="images\" />
   </files>
 </package>
