@@ -190,7 +190,22 @@ namespace Tests.Diagnostics
             }
         }
 
-        void NullCoalescenceAssignment() // Compliant - FN: Null coalescence assignment is not considered
+        void NullConditional() // Compliant - Null conditional operators should be ignored
+        {
+            var a = new int[1];
+
+            var b = a?.Length;
+            var c = a?[0];
+        }
+
+        void NullCoalescence() // Compliant - Null coalescence operators should be ignored
+        {
+            bool? value = null;
+
+            value ??= true;
+        }
+
+        void NullCoalescenceAssignment() // Compliant - Null coalescence operators should be ignored
         {
             bool? value = null;
 
