@@ -12,7 +12,6 @@
 
         * or run the following commands:
             1. `msbuild /t:rebuild .\sonaranalyzer-dotnet\SonarAnalyzer.sln`
-            1. `.\sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin\Debug\net46\SonarAnalyzer.RuleDescriptorGenerator.exe cs`
             1. `mvn clean install -P local-analyzer -D analyzer.configuration=Debug`
 
     * To build the plugin while relying on a released analyzer run `mvn clean install -P download-analyzer -D analyzer.version=<VERSION>`
