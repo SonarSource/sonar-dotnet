@@ -89,6 +89,7 @@ public class UnitTestResultsAggregatorTest {
   @Test
   public void aggregate_visual_studio_only() {
     AggregateTestContext context = new AggregateTestContext("visualStudioTestResultsFile", "foo.trx");
+    context.run();
 
     verify(context.visualStudio).accept(eq(new File("foo.trx")), notNull());
     verify(context.nunit, Mockito.never()).accept(any(), any());
@@ -98,6 +99,7 @@ public class UnitTestResultsAggregatorTest {
   @Test
   public void aggregate_nunit_only() {
     AggregateTestContext context = new AggregateTestContext("nunitTestResultsFile", "foo.xml");
+    context.run();
 
     verify(context.visualStudio, Mockito.never()).accept(any(), any());
     verify(context.nunit).accept(eq(new File("foo.xml")), notNull());
@@ -107,6 +109,7 @@ public class UnitTestResultsAggregatorTest {
   @Test
   public void aggregate_xunit_only() {
     AggregateTestContext context = new AggregateTestContext("xunitTestResultsFile", "foo.xml");
+    context.run();
 
     verify(context.visualStudio, Mockito.never()).accept(any(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
@@ -195,7 +198,6 @@ public class UnitTestResultsAggregatorTest {
 
     public AggregateTestContext(String propertyName, String fileName) {
       add(propertyName, fileName);
-      run();
     }
 
     public void add(String propertyName, String fileName) {
