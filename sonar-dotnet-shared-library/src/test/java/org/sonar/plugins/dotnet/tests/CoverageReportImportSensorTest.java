@@ -168,7 +168,7 @@ public class CoverageReportImportSensorTest {
     assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Coverage Report Statistics: " +
       "1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.");
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("The Code Coverage report doesn't contain any coverage "
-      + "data for the included files. For troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
+      + "data for the included files. For troubleshooting help, please visit our community forum at https://community.sonarsource.com");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains(
       "Analyzing coverage with wildcardPatternFileProvider with base dir '" + CoverageReportImportSensor.BASE_DIR.getAbsolutePath() + "' and file separator '\\'.",
       "Analyzing coverage after aggregate found '1' coverage files.",
@@ -192,7 +192,7 @@ public class CoverageReportImportSensorTest {
     assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Coverage Report Statistics: " +
       "1 files, 1 main files, 0 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("The Code Coverage report doesn't contain any coverage "
-      + "data for the included files. For troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
+      + "data for the included files. For troubleshooting help, please visit our community forum at https://community.sonarsource.com");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains(
       "Analyzing coverage with wildcardPatternFileProvider with base dir '" + CoverageReportImportSensor.BASE_DIR.getAbsolutePath() + "' and file separator '\\'.",
       "Analyzing coverage after aggregate found '1' coverage files.",

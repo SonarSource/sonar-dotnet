@@ -135,7 +135,7 @@ public class CoverageReportImportSensor implements Sensor {
       LOG.info(fileCountStatistics.toString());
       if (fileCountStatistics.mainWithCoverage == 0) {
         LOG.warn("The Code Coverage report doesn't contain any coverage data for the included files. For "
-          + "troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
+          + "troubleshooting help, please visit our community forum at https://community.sonarsource.com");
       }
     }
   }
