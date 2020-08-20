@@ -49,6 +49,7 @@ import org.sonar.api.internal.google.common.collect.ImmutableMap;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -126,6 +127,10 @@ public class RoslynDataImporterTest {
   public void roslynEmptyReportShouldNotFail() {
     Map<String, List<RuleKey>> activeRules = createActiveRules();
     roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report-empty.json"))), tester, activeRules, String::toString);
+
+    assertThat(tester.allIssues()).isEmpty();
+    assertThat(tester.allExternalIssues()).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("Importing 1 Roslyn report");
   }
 
   @Test
