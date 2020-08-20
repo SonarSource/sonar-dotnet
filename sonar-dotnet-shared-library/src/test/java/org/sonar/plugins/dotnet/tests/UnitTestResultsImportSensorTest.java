@@ -33,6 +33,7 @@ import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
+import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
@@ -53,16 +54,18 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void coverage() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    DotNetPluginMetadata metadata = mockCSharpMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, "cs", "C#", analysisWarnings).describe(new DefaultSensorDescriptor());
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, metadata, analysisWarnings).describe(new DefaultSensorDescriptor());
     SensorContext sensorContext = mock(SensorContext.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, "cs", "C#", analysisWarnings).execute(sensorContext);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, metadata, analysisWarnings).execute(sensorContext);
     verifyZeroInteractions(sensorContext);
   }
 
   @Test
   public void should_not_save_metrics_with_empty_results() throws Exception {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
+    DotNetPluginMetadata metadata = mockCSharpMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     UnitTestResults results = new UnitTestResults();
     results.add(42, 1, 2, 3, null);
@@ -71,7 +74,7 @@ public class UnitTestResultsImportSensorTest {
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
     when(aggregator.aggregate(any())).thenReturn(results);
 
-    new UnitTestResultsImportSensor(aggregator, "cs", "C#", analysisWarnings).execute(context);
+    new UnitTestResultsImportSensor(aggregator, metadata, analysisWarnings).execute(context);
 
     assertThat(context.measures("projectKey"))
       .extracting("metric.key", "value")
@@ -85,6 +88,7 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void describe_execute_only_when_key_present() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    DotNetPluginMetadata metadata = mockCSharpMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
 
     Configuration configWithKey = mock(Configuration.class);
@@ -98,7 +102,7 @@ public class UnitTestResultsImportSensorTest {
     });
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, "cs", "C#", analysisWarnings).describe(descriptor);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, metadata, analysisWarnings).describe(descriptor);
 
     assertThat(descriptor.configurationPredicate()).accepts(configWithKey);
     assertThat(descriptor.configurationPredicate()).rejects(configWithoutKey);
@@ -107,10 +111,11 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void describe_only_on_language() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    DotNetPluginMetadata metadata = mockCSharpMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, "cs", "C#", analysisWarnings).describe(descriptor);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, metadata, analysisWarnings).describe(descriptor);
 
     assertThat(descriptor.languages()).containsOnly("cs");
   }
@@ -123,14 +128,18 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void import_two_reports_for_same_project_should_not_throw() throws Exception {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
+    DotNetPluginMetadata cSharpMetadata = mockCSharpMetadata();
+    DotNetPluginMetadata vbNetMetadata = mock(DotNetPluginMetadata.class);
+    when(vbNetMetadata.languageKey()).thenReturn("vb");
+    when(vbNetMetadata.languageName()).thenReturn("VB.NET");
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
     UnitTestResults results = mock(UnitTestResults.class);
     when(aggregator.hasUnitTestResultsProperty()).thenReturn(true);
     when(aggregator.aggregate(any())).thenReturn(results);
 
-    new UnitTestResultsImportSensor(aggregator, "cs", "C#", analysisWarnings).execute(context);
-    new UnitTestResultsImportSensor(aggregator, "vb", "VB.NET", analysisWarnings).execute(context);
+    new UnitTestResultsImportSensor(aggregator, cSharpMetadata, analysisWarnings).execute(context);
+    new UnitTestResultsImportSensor(aggregator, vbNetMetadata, analysisWarnings).execute(context);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Could not import unit test report: 'Can not add the same measure twice'");
     verify(analysisWarnings).addUnique("Could not import unit test report for 'VB.NET'. Please check the logs for more details.");
@@ -139,6 +148,7 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void execute_saves_metrics() throws IOException {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
+    DotNetPluginMetadata metadata = mockCSharpMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     UnitTestResults results = new UnitTestResults();
     results.add(42, 1, 2, 3, 321L);
@@ -146,7 +156,7 @@ public class UnitTestResultsImportSensorTest {
     when(aggregator.aggregate(any())).thenReturn(results);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
 
-    UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(aggregator, "cs", "C#", analysisWarnings);
+    UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(aggregator, metadata, analysisWarnings);
     sensor.execute(context);
 
     assertThat(context.measures("projectKey"))
@@ -162,11 +172,19 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void execute_warns_when_no_key_is_present() throws IOException {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
+    DotNetPluginMetadata metadata = mockCSharpMetadata();
     when(aggregator.hasUnitTestResultsProperty()).thenReturn(false);
 
-    UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(aggregator, "cs", "C#", null);
+    UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(aggregator, metadata, null);
     sensor.execute(null);
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("No unit test results property. Skip Sensor");
+  }
+
+  private DotNetPluginMetadata mockCSharpMetadata() {
+    DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
+    when(metadata.languageKey()).thenReturn("cs");
+    when(metadata.languageName()).thenReturn("C#");
+    return metadata;
   }
 }

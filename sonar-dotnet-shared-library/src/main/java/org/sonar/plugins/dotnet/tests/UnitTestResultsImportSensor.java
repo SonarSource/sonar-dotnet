@@ -43,13 +43,9 @@ public class UnitTestResultsImportSensor implements ProjectSensor {
   private final AnalysisWarnings analysisWarnings;
 
   public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, DotNetPluginMetadata pluginMetadata, AnalysisWarnings analysisWarnings) {
-    this(unitTestResultsAggregator, pluginMetadata.languageKey(), pluginMetadata.languageName(), analysisWarnings);
-  }
-
-  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, String languageKey, String languageName, AnalysisWarnings analysisWarnings) {
     this.unitTestResultsAggregator = unitTestResultsAggregator;
-    this.languageKey = languageKey;
-    this.languageName = languageName;
+    this.languageKey = pluginMetadata.languageKey();
+    this.languageName = pluginMetadata.languageName();
     this.analysisWarnings = analysisWarnings;
   }
 
