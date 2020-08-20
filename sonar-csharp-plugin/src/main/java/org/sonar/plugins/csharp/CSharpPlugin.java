@@ -61,7 +61,6 @@ public class CSharpPlugin implements Plugin {
       CSharpLanguageConfiguration.class,
       CSharpModuleConfiguration.class,
       CSharpGlobalProtobufFileProcessor.class,
-      CSharpSolutionConfiguration.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       GeneratedFileFilter.class,

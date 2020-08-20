@@ -51,4 +51,8 @@ public abstract class AbstractLanguageConfiguration {
   public Set<String> vulnerabilityCategories() {
     return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getVulnerabilityCategoriesProperty(languageKey))));
   }
+
+  public boolean analyzeGeneratedCode() {
+    return configuration.getBoolean(AbstractPropertyDefinitions.getAnalyzeGeneratedCode(languageKey)).orElse(false);
+  }
 }

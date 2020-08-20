@@ -61,7 +61,6 @@ public class VbNetPlugin implements Plugin {
       VbNetLanguageConfiguration.class,
       VbNetModuleConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
-      VbNetSolutionConfiguration.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       GeneratedFileFilter.class,
