@@ -20,15 +20,14 @@
 package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.base.Joiner;
+import java.io.File;
 import java.util.List;
+import java.util.Set;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
-
-import java.io.File;
-import java.util.Set;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -76,19 +75,19 @@ public class WildcardPatternFileProviderTest {
     assertThat(debugLogs.get(2)).startsWith("Pattern matcher returns '1' files.");
 
     List<String> traceLogs = logTester.logs((LoggerLevel.TRACE));
-    assertThat(traceLogs).hasSize(13);
     // we don't know the order of logging, so we're just doing a sanity check
-    assertThat(traceLogs).contains("Skipping file '" +
-      tmpRoot +
-      "\\c\\c22\\c31\\foo.txt'" +
-      " because it does not match pattern '**\\c\\c21\\foo.txt'.");
-    assertThat(traceLogs).contains("Adding file '" + tmpRoot + "\\c\\c21\\foo.txt" + "' to result list.");
+    assertThat(traceLogs).hasSize(13)
+      .contains("Skipping file '" +
+        tmpRoot +
+        "\\c\\c22\\c31\\foo.txt'" +
+        " because it does not match pattern '**\\c\\c21\\foo.txt'.")
+      .contains("Adding file '" + tmpRoot + "\\c\\c21\\foo.txt" + "' to result list.");
   }
 
   @Test
   public void logging_early_return_absolute_path() {
     File tmpRoot = tmp.getRoot();
-    String absoluteFilePath = new File(tmpRoot,  "foo.txt").getAbsolutePath();
+    String absoluteFilePath = new File(tmpRoot, "foo.txt").getAbsolutePath();
     listFiles(absoluteFilePath);
 
     List<String> logs = logTester.logs((LoggerLevel.DEBUG));
@@ -100,7 +99,7 @@ public class WildcardPatternFileProviderTest {
   @Test
   public void logging_early_return_no_file_found() {
     File tmpRoot = tmp.getRoot();
-    String nonExistingFilePath = new File(tmpRoot,  "not-existing-file").getAbsolutePath();
+    String nonExistingFilePath = new File(tmpRoot, "not-existing-file").getAbsolutePath();
     listFiles(nonExistingFilePath);
 
     List<String> logs = logTester.logs((LoggerLevel.DEBUG));

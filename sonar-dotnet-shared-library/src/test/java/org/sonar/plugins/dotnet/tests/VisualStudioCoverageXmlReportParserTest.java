@@ -19,13 +19,12 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.io.File;
 import java.util.function.Predicate;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.io.File;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -112,8 +111,7 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(coverage.files()).containsOnly(
       filePath,
-      new File("GetSetTests\\BarTests.cs").getCanonicalPath()
-    );
+      new File("GetSetTests\\BarTests.cs").getCanonicalPath());
 
     assertThat(coverage.hits(filePath)).containsExactly(Assertions.entry(11, 1));
     assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
@@ -137,8 +135,7 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(coverage.files()).containsOnly(
       filePath,
-      new File("GetSetTests\\BarTests.cs").getCanonicalPath()
-    );
+      new File("GetSetTests\\BarTests.cs").getCanonicalPath());
 
     assertThat(coverage.hits(filePath)).containsOnly(Assertions.entry(11, 2));
     assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
@@ -169,8 +166,7 @@ public class VisualStudioCoverageXmlReportParserTest {
     assertThat(coverage.files()).containsOnly(
       filePath,
       new File("GetSet\\FooCallsBar.cs").getCanonicalPath(),
-      new File("GetSetTests\\BarTests.cs").getCanonicalPath()
-    );
+      new File("GetSetTests\\BarTests.cs").getCanonicalPath());
 
     assertThat(coverage.hits(filePath))
       .hasSize(10)
@@ -203,9 +199,7 @@ public class VisualStudioCoverageXmlReportParserTest {
     new VisualStudioCoverageXmlReportParser(s -> false).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
 
     assertThat(coverage.files()).isEmpty();
-
-    assertThat(coverage.hits(new File("MyLibrary\\Calc.cs").getCanonicalPath()))
-      .hasSize(0);
+    assertThat(coverage.hits(new File("MyLibrary\\Calc.cs").getCanonicalPath())).isEmpty();
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");

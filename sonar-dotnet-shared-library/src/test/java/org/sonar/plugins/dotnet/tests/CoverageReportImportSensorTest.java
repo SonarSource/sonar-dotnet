@@ -31,9 +31,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
+import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
@@ -135,7 +135,7 @@ public class CoverageReportImportSensorTest {
   public void analyze() throws Exception {
     SensorContextTester context = computeCoverageMeasures(false);
     assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
-    assertThat(context.lineHits("foo:Foo.cs", 4)).isEqualTo(0);
+    assertThat(context.lineHits("foo:Foo.cs", 4)).isZero();
     assertThat(context.coveredConditions("foo:Foo.cs", 1)).isNull();
     assertThat(context.coveredConditions("foo:Foo.cs", 4)).isNull();
     assertThat(context.coveredConditions("foo:Foo.cs", 5)).isEqualTo(1);
@@ -146,7 +146,7 @@ public class CoverageReportImportSensorTest {
   public void analyzeIntegrationTests() throws Exception {
     SensorContextTester context = computeCoverageMeasures(true);
     assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
-    assertThat(context.lineHits("foo:Foo.cs", 4)).isEqualTo(0);
+    assertThat(context.lineHits("foo:Foo.cs", 4)).isZero();
     assertThat(context.coveredConditions("foo:Foo.cs", 1)).isNull();
     assertThat(context.coveredConditions("foo:Foo.cs", 4)).isNull();
     assertThat(context.coveredConditions("foo:Foo.cs", 5)).isEqualTo(1);

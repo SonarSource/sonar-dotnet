@@ -19,19 +19,11 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Collection;
 import java.util.Collections;
-
 import org.assertj.core.groups.Tuple;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +38,13 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
+
 public class MetricsImporterTest {
 
   // see src/test/resources/ProtobufImporterTest/README.md for explanation
@@ -58,7 +57,7 @@ public class MetricsImporterTest {
 
   @Before
   public void before() {
-    assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
+    assertThat(protobuf).withFailMessage("no such file: " + protobuf).isFile();
   }
 
   @Test

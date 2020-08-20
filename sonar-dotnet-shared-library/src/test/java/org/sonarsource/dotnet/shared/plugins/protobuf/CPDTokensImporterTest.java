@@ -53,7 +53,7 @@ public class CPDTokensImporterTest {
 
   @Before
   public void before() {
-    assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
+    assertThat(protobuf).withFailMessage("no such file: " + protobuf).isFile();
   }
 
   @Test

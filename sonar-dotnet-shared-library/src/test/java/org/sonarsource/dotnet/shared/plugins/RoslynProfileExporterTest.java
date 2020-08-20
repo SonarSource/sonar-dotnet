@@ -294,25 +294,25 @@ public class RoslynProfileExporterTest {
 
   @Test
   public void activeRoslynRulesByPluginKey() {
-    assertThat(activeRoslynRulesByPartialRepoKey(pluginMetadata, Collections.emptyList()).size()).isEqualTo(0);
+    assertThat(activeRoslynRulesByPartialRepoKey(pluginMetadata, Collections.emptyList())).isEmpty();
 
     RuleKey randomActiveRuleKey = mock(RuleKey.class);
     when(randomActiveRuleKey.rule()).thenReturn("1");
     when(randomActiveRuleKey.repository()).thenReturn("1");
-    assertThat(activeRoslynRulesByPartialRepoKey(pluginMetadata, Collections.singletonList(randomActiveRuleKey)).size()).isEqualTo(0);
+    assertThat(activeRoslynRulesByPartialRepoKey(pluginMetadata, Collections.singletonList(randomActiveRuleKey))).isEmpty();
 
     RuleKey sonarLintActiveRuleKey = mock(RuleKey.class);
     when(sonarLintActiveRuleKey.rule()).thenReturn("2");
     when(sonarLintActiveRuleKey.repository()).thenReturn("csharpsquid");
     Map<String, List<RuleKey>> activeRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, Collections.singletonList(sonarLintActiveRuleKey));
-    assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
+    assertThat(activeRulesByPartialRepoKey).hasSize(1);
     assertThat(activeRulesByPartialRepoKey.get("sonaranalyzer-cs")).containsOnly(sonarLintActiveRuleKey);
 
     RuleKey customRoslynActiveRuleKey = mock(RuleKey.class);
     when(customRoslynActiveRuleKey.rule()).thenReturn("3");
     when(customRoslynActiveRuleKey.repository()).thenReturn("roslyn.foo");
     activeRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, Collections.singletonList(customRoslynActiveRuleKey));
-    assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
+    assertThat(activeRulesByPartialRepoKey).hasSize(1);
     assertThat(activeRulesByPartialRepoKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
 
     activeRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata,
@@ -320,7 +320,7 @@ public class RoslynProfileExporterTest {
         randomActiveRuleKey,
         sonarLintActiveRuleKey,
         customRoslynActiveRuleKey));
-    assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(2);
+    assertThat(activeRulesByPartialRepoKey).hasSize(2);
     assertThat(activeRulesByPartialRepoKey.get("sonaranalyzer-cs")).containsOnly(sonarLintActiveRuleKey);
     assertThat(activeRulesByPartialRepoKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
   }
