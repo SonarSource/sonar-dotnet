@@ -37,7 +37,8 @@ public class VbNetTest {
 
   @Before
   public void init() {
-    PropertyDefinitions defs = new PropertyDefinitions(new VbNetPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
+    PropertyDefinitions defs = new PropertyDefinitions(
+      new VbNetPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
     settings = new MapSettings(defs);
     vbnet = new VbNet(settings.asConfig());
   }
@@ -53,4 +54,16 @@ public class VbNetTest {
     assertThat(vbnet.getFileSuffixes()).containsOnly(".vb", ".vbnet");
   }
 
+  @Test
+  public void equals_and_hashCode_considers_configuration() {
+    MapSettings otherSettings = new MapSettings();
+    otherSettings.setProperty("key", "value");
+    VbNet otherVbNet = new VbNet(otherSettings.asConfig());
+    VbNet sameVbNet = new VbNet(settings.asConfig());
+
+    assertThat(vbnet).isEqualTo(sameVbNet)
+      .isNotEqualTo(otherVbNet)
+      .hasSameHashCodeAs(sameVbNet);
+    assertThat(vbnet.hashCode()).isNotEqualTo(otherVbNet.hashCode());
+  }
 }

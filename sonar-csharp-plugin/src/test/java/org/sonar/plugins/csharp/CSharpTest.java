@@ -37,7 +37,8 @@ public class CSharpTest {
 
   @Before
   public void init() {
-    PropertyDefinitions defs = new PropertyDefinitions(new CSharpPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
+    PropertyDefinitions defs = new PropertyDefinitions(
+      new CSharpPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
     settings = new MapSettings(defs);
     csharp = new CSharp(settings.asConfig());
   }
@@ -53,4 +54,16 @@ public class CSharpTest {
     assertThat(csharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
   }
 
+  @Test
+  public void equals_and_hashCode_considers_configuration() {
+    MapSettings otherSettings = new MapSettings();
+    otherSettings.setProperty("key", "value");
+    CSharp otherCSharp = new CSharp(otherSettings.asConfig());
+    CSharp sameCSharp = new CSharp(settings.asConfig());
+
+    assertThat(csharp).isEqualTo(sameCSharp)
+      .isNotEqualTo(otherCSharp)
+      .hasSameHashCodeAs(sameCSharp);
+    assertThat(csharp.hashCode()).isNotEqualTo(otherCSharp.hashCode());
+  }
 }
