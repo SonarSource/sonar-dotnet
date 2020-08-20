@@ -20,12 +20,11 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
-import org.sonar.api.batch.bootstrap.ProjectDefinition;
-import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.notifications.AnalysisWarnings;
+import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
@@ -33,28 +32,20 @@ import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 /**
  * This class is responsible to handle all the C# and VB.NET unit test results reports (parse and report back to SonarQube).
  */
-public class UnitTestResultsImportSensor implements Sensor {
+public class UnitTestResultsImportSensor implements ProjectSensor {
 
   private static final Logger LOG = Loggers.get(UnitTestResultsImportSensor.class);
 
   private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(new File("."), File.separator);
   private final UnitTestResultsAggregator unitTestResultsAggregator;
-  private final ProjectDefinition projectDef;
   private final String languageKey;
   private final String languageName;
   private final AnalysisWarnings analysisWarnings;
 
-  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef,
-                                     DotNetPluginMetadata pluginMetadata, AnalysisWarnings analysisWarnings) {
-    this(unitTestResultsAggregator, projectDef, pluginMetadata.languageKey(), pluginMetadata.languageName(), analysisWarnings);
-  }
-
-  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef,
-    String languageKey, String languageName, AnalysisWarnings analysisWarnings) {
+  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, DotNetPluginMetadata pluginMetadata, AnalysisWarnings analysisWarnings) {
     this.unitTestResultsAggregator = unitTestResultsAggregator;
-    this.projectDef = projectDef;
-    this.languageKey = languageKey;
-    this.languageName = languageName;
+    this.languageKey = pluginMetadata.languageKey();
+    this.languageName = pluginMetadata.languageName();
     this.analysisWarnings = analysisWarnings;
   }
 
@@ -62,33 +53,26 @@ public class UnitTestResultsImportSensor implements Sensor {
   public void describe(SensorDescriptor descriptor) {
     String name = String.format("%s Unit Test Results Import", this.languageName);
     descriptor.name(name);
-    descriptor.global();
     descriptor.onlyOnLanguage(this.languageKey);
     descriptor.onlyWhenConfiguration(c -> unitTestResultsAggregator.hasUnitTestResultsProperty(c::hasKey));
   }
 
   @Override
   public void execute(SensorContext context) {
-    if (!unitTestResultsAggregator.hasUnitTestResultsProperty()) {
+    if (unitTestResultsAggregator.hasUnitTestResultsProperty()) {
+      try {
+        saveTestMetrics(context);
+      } catch (Exception e) {
+        LOG.warn("Could not import unit test report: '{}'", e.getMessage());
+        analysisWarnings.addUnique(String.format("Could not import unit test report for '%s'. Please check the logs for more details.", languageName));
+      }
+    } else {
       LOG.debug("No unit test results property. Skip Sensor");
-      return;
-    }
-    if (projectDef.getParent() == null) {
-      analyze(context, new UnitTestResults());
     }
   }
 
-  void analyze(SensorContext context, UnitTestResults unitTestResults) {
-    try {
-      saveTestMetrics(context, unitTestResults);
-    } catch (Exception e) {
-      LOG.warn("Could not import unit test report: '{}'", e.getMessage());
-      analysisWarnings.addUnique(String.format("Could not import unit test report for '%s'. Please check the logs for more details.", languageName));
-    }
-  }
-
-  private void saveTestMetrics(SensorContext context, UnitTestResults unitTestResults){
-    UnitTestResults aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider, unitTestResults);
+  private void saveTestMetrics(SensorContext context) {
+    UnitTestResults aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider);
 
     context.<Integer>newMeasure()
       .forMetric(CoreMetrics.TESTS)
