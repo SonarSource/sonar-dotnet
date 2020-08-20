@@ -9,16 +9,15 @@
     <license type="file">License.txt</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>CFG library for SonarSource C# plugins</description>
-    <releaseNotes></releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2019 SonarSource SA</copyright>
-    <tags></tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="bin\Release\net46\SonarAnalyzer.CFG.dll" target="lib" />
+    <file src="bin\Release\net46\SonarAnalyzer.CFG.dll" target="lib\net46" />
+    <file src="bin\Release\netstandard2.0\SonarAnalyzer.CFG.dll" target="lib\netstandard2.0" />
     <file src="License.txt" />
   </files>
 </package>
