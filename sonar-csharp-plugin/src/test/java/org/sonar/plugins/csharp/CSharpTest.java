@@ -63,6 +63,7 @@ public class CSharpTest {
 
     assertThat(csharp).isEqualTo(sameCSharp)
       .isNotEqualTo(otherCSharp)
+      .isNotEqualTo(null)
       .hasSameHashCodeAs(sameCSharp);
     assertThat(csharp.hashCode()).isNotEqualTo(otherCSharp.hashCode());
   }

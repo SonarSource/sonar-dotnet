@@ -63,6 +63,7 @@ public class VbNetTest {
 
     assertThat(vbnet).isEqualTo(sameVbNet)
       .isNotEqualTo(otherVbNet)
+      .isNotEqualTo(null)
       .hasSameHashCodeAs(sameVbNet);
     assertThat(vbnet.hashCode()).isNotEqualTo(otherVbNet.hashCode());
   }
