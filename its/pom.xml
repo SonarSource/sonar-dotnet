@@ -7,10 +7,11 @@
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
     <version>54</version>
+    <relativePath/>
   </parent>
 
   <groupId>com.sonarsource.it</groupId>
-  <artifactId>it-csharp-plugin</artifactId>
+  <artifactId>it-dotnet-plugin</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>SonarSource :: C# :: ITs :: Plugin</name>
