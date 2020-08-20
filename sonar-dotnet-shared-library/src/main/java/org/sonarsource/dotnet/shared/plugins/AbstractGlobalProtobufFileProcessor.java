@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -42,7 +41,6 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
 
-import static java.util.Optional.ofNullable;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
 
@@ -105,21 +103,8 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
   }
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {
-    List<Path> analyzerWorkDirPaths = Arrays.stream(parseAsStringArray(moduleProps.get(getAnalyzerWorkDirProperty(languageKey))))
-      .map(Paths::get)
-      .collect(Collectors.toList());
-
-    if (analyzerWorkDirPaths.isEmpty()) {
-      // fallback to old property
-      Optional<String> oldValue = ofNullable(moduleProps.get(AbstractModuleConfiguration.getOldAnalyzerWorkDirProperty(languageKey)));
-      analyzerWorkDirPaths = oldValue
-        .map(Paths::get)
-        .map(Collections::singletonList)
-        .orElse(Collections.emptyList());
-    }
-
-    return analyzerWorkDirPaths.stream()
-      .map(x -> x.resolve(AbstractModuleConfiguration.getAnalyzerReportDir(languageKey)))
+    return Arrays.stream(parseAsStringArray(moduleProps.get(getAnalyzerWorkDirProperty(languageKey))))
+      .map(x -> Paths.get(x).resolve(AbstractModuleConfiguration.getAnalyzerReportDir(languageKey)))
       .collect(Collectors.toList());
   }
 
