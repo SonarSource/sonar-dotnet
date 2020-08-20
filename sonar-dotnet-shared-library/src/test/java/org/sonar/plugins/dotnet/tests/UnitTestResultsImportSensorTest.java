@@ -21,10 +21,11 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.IOException;
 import java.util.function.Predicate;
+import org.assertj.core.api.Condition;
+import org.assertj.core.groups.Tuple;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
@@ -40,7 +41,6 @@ import static org.assertj.core.groups.Tuple.tuple;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class UnitTestResultsImportSensorTest {
@@ -50,17 +50,6 @@ public class UnitTestResultsImportSensorTest {
 
   @Rule
   public LogTester logTester = new LogTester();
-
-  @Test
-  public void coverage() {
-    UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    DotNetPluginMetadata metadata = mockCSharpMetadata();
-    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, metadata, analysisWarnings).describe(new DefaultSensorDescriptor());
-    SensorContext sensorContext = mock(SensorContext.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, metadata, analysisWarnings).execute(sensorContext);
-    verifyZeroInteractions(sensorContext);
-  }
 
   @Test
   public void should_not_save_metrics_with_empty_results() throws Exception {
@@ -73,6 +62,7 @@ public class UnitTestResultsImportSensorTest {
     when(aggregator.aggregate(any())).thenReturn(results);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
     when(aggregator.aggregate(any())).thenReturn(results);
+    Condition<Tuple> executionTimeMetric = new Condition<>(x -> x.toList().get(0) == CoreMetrics.TEST_EXECUTION_TIME_KEY, CoreMetrics.TEST_EXECUTION_TIME_KEY);
 
     new UnitTestResultsImportSensor(aggregator, metadata, analysisWarnings).execute(context);
 
@@ -82,7 +72,8 @@ public class UnitTestResultsImportSensorTest {
         tuple(CoreMetrics.TESTS_KEY, 42),
         tuple(CoreMetrics.SKIPPED_TESTS_KEY, 1),
         tuple(CoreMetrics.TEST_FAILURES_KEY, 2),
-        tuple(CoreMetrics.TEST_ERRORS_KEY, 3));
+        tuple(CoreMetrics.TEST_ERRORS_KEY, 3))
+      .doNotHave(executionTimeMetric);
   }
 
   @Test
@@ -129,9 +120,7 @@ public class UnitTestResultsImportSensorTest {
   public void import_two_reports_for_same_project_should_not_throw() throws Exception {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
     DotNetPluginMetadata cSharpMetadata = mockCSharpMetadata();
-    DotNetPluginMetadata vbNetMetadata = mock(DotNetPluginMetadata.class);
-    when(vbNetMetadata.languageKey()).thenReturn("vb");
-    when(vbNetMetadata.languageName()).thenReturn("VB.NET");
+    DotNetPluginMetadata vbNetMetadata = mockVbNetMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
     UnitTestResults results = mock(UnitTestResults.class);
@@ -185,6 +174,13 @@ public class UnitTestResultsImportSensorTest {
     DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
     when(metadata.languageKey()).thenReturn("cs");
     when(metadata.languageName()).thenReturn("C#");
+    return metadata;
+  }
+
+  private DotNetPluginMetadata mockVbNetMetadata() {
+    DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
+    when(metadata.languageKey()).thenReturn("vb");
+    when(metadata.languageName()).thenReturn("VB.NET");
     return metadata;
   }
 }
