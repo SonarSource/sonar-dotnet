@@ -93,16 +93,7 @@ public class CoverageTest {
 
   @Test
   public void open_cover_on_MultipleProjects() throws Exception {
-    Path projectDir = Tests.projectDir(temp, "MultipleProjects");
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("MultipleProjects", projectDir)
-      .setProperty("sonar.cs.opencover.reportsPaths", "opencover.xml");
-
-    orchestrator.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore,Rebuild");
-
-    BuildResult buildResult = orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.opencover.reportsPaths", "opencover.xml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -135,6 +126,21 @@ public class CoverageTest {
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
     assertLineCoverageMetrics("CoverageTest", 2, 1);
+  }
+
+  @Test
+  public void visual_studio_on_MultipleProjects() throws Exception {
+    BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml");
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 5 files, 3 main files, 3 main files with coverage, 2 test files, 0 project excluded files, 0 other language files.");
+
+    assertLineCoverageMetrics("MultipleProjects", 22, 2);
+    assertLineCoverageMetrics("MultipleProjects:FirstProject/FirstClass.cs", 10, 0);
+    assertLineCoverageMetrics("MultipleProjects:FirstProject/SecondClass.cs", 4, 0);
+    assertNoCoverageMetrics("MultipleProjects:FirstProject/Properties/AssemblyInfo.cs");
+    assertLineCoverageMetrics("MultipleProjects:SecondProject/FirstClass.cs", 8, 2);
   }
 
   @Test
@@ -174,15 +180,23 @@ public class CoverageTest {
   }
 
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
-    Path projectDir = Tests.projectDir(temp, "CoverageTest");
+    return analyzeProject("CoverageTest", keyValues);
+  }
 
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("CoverageTest", projectDir)
+  private BuildResult analyzeMultipleProjectsTestProject(String coverageProperty, String coverageFileName) throws IOException {
+    return analyzeProject("MultipleProjects", coverageProperty, coverageFileName);
+  }
+
+  private BuildResult analyzeProject(String projectName, String... keyValues) throws IOException {
+    Path projectDir = Tests.projectDir(temp, projectName);
+
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir)
       .setProfile("no_rule")
       .setProperties(keyValues);
 
     orchestrator.executeBuild(beginStep);
 
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore,Rebuild");
 
     return orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
   }
