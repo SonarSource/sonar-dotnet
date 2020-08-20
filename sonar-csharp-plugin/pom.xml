@@ -282,7 +282,7 @@
                 <phase>validate</phase>
                 <configuration>
                   <exportAntProperties>true</exportAntProperties>
-                  <tasks>
+                  <target>
                     <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                     <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.configuration}/">
@@ -310,7 +310,7 @@
                     </copy>
 
                     <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
-                  </tasks>
+                  </target>
                 </configuration>
                 <goals>
                   <goal>run</goal>
