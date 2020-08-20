@@ -60,7 +60,7 @@ public class CodeCoverageProvider {
       SONAR_PROPERTY_PREFIX + languageKey + ".vscoveragexml.it.reportsPaths");
   }
 
-  public List extensions() {
+  public List<Object> extensions() {
     String category = pluginMetadata.shortLanguageName();
 
     return Arrays.asList(

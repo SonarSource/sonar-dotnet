@@ -46,7 +46,7 @@ public class UnitTestResultsProvider {
     return "sonar." + pluginMetadata.languageKey() + "." + testType + ".reportsPaths";
   }
 
-  public List extensions() {
+  public List<Object> extensions() {
     String category = pluginMetadata.shortLanguageName();
     return Arrays.asList(
       this,

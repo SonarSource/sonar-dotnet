@@ -239,7 +239,8 @@ public class RoslynProfileExporterTest {
     RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, mock(Configuration.class), new RulesDefinition[0]);
 
     try {
-      exporter.exportProfile(rulesProfile, new StringWriter());
+      StringWriter writer = new StringWriter();
+      exporter.exportProfile(rulesProfile, writer);
       fail("was expecting an exception");
     } catch (IllegalStateException ex) {
       assertThat(ex.getMessage()).isEqualTo("The mandatory property \"foo.analyzerId\" must be set by the Roslyn plugin.");
