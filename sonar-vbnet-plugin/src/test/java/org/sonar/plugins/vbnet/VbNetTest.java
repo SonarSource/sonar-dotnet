@@ -26,6 +26,7 @@ import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,7 +38,8 @@ public class VbNetTest {
 
   @Before
   public void init() {
-    PropertyDefinitions defs = new PropertyDefinitions(new VbNetPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
+    PropertyDefinitions defs = new PropertyDefinitions(
+      new VbNetPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
     settings = new MapSettings(defs);
     vbnet = new VbNet(settings.asConfig());
   }
@@ -53,4 +55,31 @@ public class VbNetTest {
     assertThat(vbnet.getFileSuffixes()).containsOnly(".vb", ".vbnet");
   }
 
+  @Test
+  public void equals_and_hashCode_considers_configuration() {
+    MapSettings otherSettings = new MapSettings();
+    otherSettings.setProperty("key", "value");
+    VbNet otherVbNet = new VbNet(otherSettings.asConfig());
+    VbNet sameVbNet = new VbNet(settings.asConfig());
+    FakeVbNet fakeVbNet = new FakeVbNet();
+
+    assertThat(vbnet).isEqualTo(sameVbNet)
+      .isNotEqualTo(otherVbNet)
+      .isNotEqualTo(fakeVbNet)
+      .isNotEqualTo(null)
+      .hasSameHashCodeAs(sameVbNet);
+    assertThat(vbnet.hashCode()).isNotEqualTo(otherVbNet.hashCode());
+  }
+
+  private class FakeVbNet extends AbstractLanguage {
+
+    public FakeVbNet() {
+      super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.LANGUAGE_NAME);
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+      return new String[0];
+    }
+  }
 }

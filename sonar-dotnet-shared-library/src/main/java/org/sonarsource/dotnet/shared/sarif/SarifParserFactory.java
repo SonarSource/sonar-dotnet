@@ -19,14 +19,12 @@
  */
 package org.sonarsource.dotnet.shared.sarif;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.function.Function;
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import java.util.function.UnaryOperator;
 import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 
@@ -49,7 +47,7 @@ public class SarifParserFactory {
             return new SarifParser01And04(report.getProject(), root, toRealPath);
           case "1.0":
           default:
-            return new SarifParser10(report.getProject(),root, toRealPath);
+            return new SarifParser10(report.getProject(), root, toRealPath);
         }
       }
     } catch (IOException e) {

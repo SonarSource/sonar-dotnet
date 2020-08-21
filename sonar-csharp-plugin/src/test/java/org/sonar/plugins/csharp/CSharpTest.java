@@ -26,6 +26,7 @@ import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,7 +38,8 @@ public class CSharpTest {
 
   @Before
   public void init() {
-    PropertyDefinitions defs = new PropertyDefinitions(new CSharpPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
+    PropertyDefinitions defs = new PropertyDefinitions(
+      new CSharpPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
     settings = new MapSettings(defs);
     csharp = new CSharp(settings.asConfig());
   }
@@ -53,4 +55,31 @@ public class CSharpTest {
     assertThat(csharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
   }
 
+  @Test
+  public void equals_and_hashCode_considers_configuration() {
+    MapSettings otherSettings = new MapSettings();
+    otherSettings.setProperty("key", "value");
+    CSharp otherCSharp = new CSharp(otherSettings.asConfig());
+    CSharp sameCSharp = new CSharp(settings.asConfig());
+    FakeCSharp fakeCSharp = new FakeCSharp();
+
+    assertThat(csharp).isEqualTo(sameCSharp)
+      .isNotEqualTo(otherCSharp)
+      .isNotEqualTo(fakeCSharp)
+      .isNotEqualTo(null)
+      .hasSameHashCodeAs(sameCSharp);
+    assertThat(csharp.hashCode()).isNotEqualTo(otherCSharp.hashCode());
+  }
+
+  private class FakeCSharp extends AbstractLanguage {
+
+    public FakeCSharp() {
+      super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME);
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+      return new String[0];
+    }
+  }
 }

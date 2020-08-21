@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
+import java.util.Objects;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
 
@@ -36,4 +37,13 @@ public class CSharp extends AbstractLanguage {
     return configuration.getStringArray(CSharpPlugin.FILE_SUFFIXES_KEY);
   }
 
+  @Override
+  public boolean equals(Object o) {
+    return super.equals(o) && o instanceof CSharp && configuration == ((CSharp) o).configuration;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), configuration.hashCode());
+  }
 }

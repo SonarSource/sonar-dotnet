@@ -97,9 +97,7 @@ public class CoverageReportImportSensor implements ProjectSensor {
     LOG.debug("Analyzing coverage after aggregate found '{}' coverage files.", coverageFiles.size());
 
     for (String filePath : coverageFiles) {
-
       LOG.trace("Counting statistics for '{}'.", filePath);
-
       FilePredicates p = context.fileSystem().predicates();
       InputFile inputFile = context.fileSystem().inputFile(p.hasAbsolutePath(filePath));
 
@@ -107,24 +105,17 @@ public class CoverageReportImportSensor implements ProjectSensor {
         fileCountStatistics.projectExcluded++;
         LOG.debug("The file '{}' is either excluded or outside of your solution folder therefore Code "
           + "Coverage will not be imported.", filePath);
-        continue;
-      }
-
-      if (inputFile.type().equals(Type.TEST)) {
+      } else if (inputFile.type().equals(Type.TEST)) {
         fileCountStatistics.test++;
         LOG.debug("Skipping '{}' as it is a test file.", filePath);
         // Do not log for test files to avoid pointless noise
-        continue;
-      }
-
-      if (!coverageConf.languageKey().equals(inputFile.language())) {
+      } else if (!coverageConf.languageKey().equals(inputFile.language())) {
         LOG.debug("Skipping '{}' as conf lang '{}' does not equal file lang '{}'.",
           filePath, coverageConf.languageKey(), inputFile.language());
         fileCountStatistics.otherLanguageExcluded++;
-        continue;
+      } else {
+        analyzeCoverage(context, coverage, fileCountStatistics, filePath, inputFile);
       }
-
-      analyzeCoverage(context, coverage, fileCountStatistics, filePath, inputFile);
     }
 
     LOG.debug("The total number of file count statistics is '{}'.", fileCountStatistics.total);
