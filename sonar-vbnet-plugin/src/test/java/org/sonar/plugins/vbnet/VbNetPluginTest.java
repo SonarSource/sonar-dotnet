@@ -63,7 +63,6 @@ public class VbNetPluginTest {
       VbNetLanguageConfiguration.class,
       VbNetModuleConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
-      VbNetSolutionConfiguration.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       ReportPathCollector.class,

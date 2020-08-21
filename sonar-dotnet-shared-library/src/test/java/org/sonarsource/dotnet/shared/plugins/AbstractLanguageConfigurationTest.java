@@ -73,6 +73,36 @@ public class AbstractLanguageConfigurationTest {
     assertThat(config.vulnerabilityCategories()).containsExactly("A", "B", "C");
   }
 
+  @Test
+  public void whenSettingIsTrue_analyzeGeneratedCode_returnsTrue() {
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.getBoolean("sonar.cs.analyzeGeneratedCode")).thenReturn(Optional.of(true));
+
+    AbstractLanguageConfiguration config = createConfiguration(configuration);
+
+    assertThat(config.analyzeGeneratedCode()).isTrue();
+  }
+
+  @Test
+  public void whenSettingIsFalse_analyzeGeneratedCode_returnsFalse() {
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.getBoolean("sonar.cs.analyzeGeneratedCode")).thenReturn(Optional.of(false));
+
+    AbstractLanguageConfiguration config = createConfiguration(configuration);
+
+    assertThat(config.analyzeGeneratedCode()).isFalse();
+  }
+
+  @Test
+  public void whenSettingIsEmpty_analyzeGeneratedCode_returnsFalse() {
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.getBoolean("sonar.cs.analyzeGeneratedCode")).thenReturn(Optional.empty());
+
+    AbstractLanguageConfiguration config = createConfiguration(configuration);
+
+    assertThat(config.analyzeGeneratedCode()).isFalse();
+  }
+
   private AbstractLanguageConfiguration createConfiguration(Configuration configuration) {
     return new AbstractLanguageConfiguration(configuration, "cs") {
     };

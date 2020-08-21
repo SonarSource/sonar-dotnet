@@ -28,9 +28,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.rules.RuleType;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 

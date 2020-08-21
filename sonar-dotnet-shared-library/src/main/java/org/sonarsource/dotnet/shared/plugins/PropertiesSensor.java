@@ -22,7 +22,6 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
@@ -32,7 +31,6 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
  *
  * Note that this is required because a global sensor cannot access to module specific properties.
  */
-@ScannerSide
 public class PropertiesSensor implements Sensor {
   private final AbstractModuleConfiguration configuration;
   private final ReportPathCollector reportPathCollector;

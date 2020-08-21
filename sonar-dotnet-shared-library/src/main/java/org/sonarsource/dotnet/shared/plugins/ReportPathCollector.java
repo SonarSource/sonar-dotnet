@@ -23,11 +23,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.sonar.api.batch.InstantiationStrategy;
-import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.scanner.ScannerSide;
 
 @ScannerSide
-@InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public class ReportPathCollector {
   private final List<Path> protobufDirs = new ArrayList<>();
   private final List<RoslynReport> roslynDirs = new ArrayList<>();

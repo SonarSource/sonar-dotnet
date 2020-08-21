@@ -63,7 +63,6 @@ public class CSharpPluginTest {
       CSharpLanguageConfiguration.class,
       CSharpModuleConfiguration.class,
       CSharpGlobalProtobufFileProcessor.class,
-      CSharpSolutionConfiguration.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       ReportPathCollector.class,

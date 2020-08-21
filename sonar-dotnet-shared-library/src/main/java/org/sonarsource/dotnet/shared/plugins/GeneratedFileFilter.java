@@ -37,7 +37,7 @@ public class GeneratedFileFilter implements InputFileFilter {
   private final AbstractGlobalProtobufFileProcessor globalReportProcessor;
   private final boolean analyzeGeneratedCode;
 
-  public GeneratedFileFilter(AbstractGlobalProtobufFileProcessor globalReportProcessor, AbstractSolutionConfiguration configuration) {
+  public GeneratedFileFilter(AbstractGlobalProtobufFileProcessor globalReportProcessor, AbstractLanguageConfiguration configuration) {
     this.globalReportProcessor = globalReportProcessor;
     this.analyzeGeneratedCode = configuration.analyzeGeneratedCode();
     if (analyzeGeneratedCode) {
