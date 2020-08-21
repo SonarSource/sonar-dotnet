@@ -54,6 +54,7 @@ import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
   MultipleProjectsTest.class,
   MultiTargetAppTest.class,
   NoSonarTest.class,
+  QualityProfileExportTest.class,
   RuleParameterCustomizationTest.class,
   SharedFilesTest.class,
   UnitTestResultsTest.class
