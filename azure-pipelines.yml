@@ -72,16 +72,22 @@ stages:
 
       - task: DownloadSecureFile@1
         displayName: 'Download pfx file'
+        name: pfx
         inputs:
           secureFile: 'sonarsource-2019-2021.pfx'
 
       - task: VSBuild@1
-        displayName: "Build SonarAnalyzer solution"
+        displayName: "Build and sign SonarAnalyzer solution"
+        env:
+          SIGNTOOL_PATH: 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\signtool.exe'
+          PFX_PASSWORD: $(pfxPassword)
+          PFX_SHA1: $(pfxSha1)
+          PFX_PATH: $(pfx.secureFilePath)
         inputs:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
-          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
+          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish analyzer binaries as pipeline artifact'
