@@ -72,6 +72,7 @@ stages:
 
       - task: DownloadSecureFile@1
         displayName: 'Download pfx file'
+        name: pfx
         inputs:
           secureFile: 'sonarsource-2019-2021.pfx'
 
@@ -104,6 +105,12 @@ stages:
           packDestination: '$(Build.ArtifactStagingDirectory)/packages'
           verbosityPack: 'Detailed'
           publishPackageMetadata: true
+
+      - task: NuGetCommand@2
+        displayName: "Sign NuGet packages"
+        inputs:
+          command: 'custom'
+          arguments: 'sign $(Build.ArtifactStagingDirectory)\packages\*.nupkg -CertificatePath $(pfx.secureFilePath) -CertificatePassword $(pfxPassword) -Timestamper http://sha256timestamp.ws.symantec.com/sha256/timestamp'
 
       - task: PublishBuildArtifacts@1
         displayName: 'Publish NuGet packages as build artifacts'
