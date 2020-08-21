@@ -66,7 +66,6 @@ public class VbNetPlugin implements Plugin {
       GeneratedFileFilter.class,
       PropertiesSensor.class,
       SonarLintProfileExporter.class,
-      SonarLintFakeProfileImporter.class,
       ProtobufDataImporter.class,
       RoslynDataImporter.class,
       RoslynProfileExporter.class);
