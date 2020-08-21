@@ -45,4 +45,9 @@
       <Link>Properties\SonarLint.xml</Link>
     </AdditionalFiles>
   </ItemGroup>
+
+  <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true' and $(TargetFramework) != ''" AfterTargets="Build">
+    <Message Importance="high" Text="Signing SonarAnalyzer.CFG assemblies from $(OutDir)" />
+    <Exec WorkingDirectory="$(OutDir)" Command="&quot;$(SIGNTOOL_PATH)&quot; sign /fd SHA256 /f $(PFX_PATH) /p $(PFX_PASSWORD) /tr http://sha256timestamp.ws.symantec.com/sha256/timestamp SonarAnalyzer.CFG.dll" />
+  </Target>
 </Project>
