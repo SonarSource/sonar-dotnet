@@ -74,7 +74,7 @@ public class AbstractLanguageConfigurationTest {
   }
 
   @Test
-  public void analyzeGeneratedCodeIsTrue() {
+  public void whenSettingIsTrue_analyzeGeneratedCode_returnsTrue() {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getBoolean("sonar.cs.analyzeGeneratedCode")).thenReturn(Optional.of(true));
 
@@ -84,7 +84,7 @@ public class AbstractLanguageConfigurationTest {
   }
 
   @Test
-  public void analyzeGeneratedCodeIsFalse() {
+  public void whenSettingIsFalse_analyzeGeneratedCode_returnsFalse() {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getBoolean("sonar.cs.analyzeGeneratedCode")).thenReturn(Optional.of(false));
 
@@ -94,7 +94,7 @@ public class AbstractLanguageConfigurationTest {
   }
 
   @Test
-  public void analyzeGeneratedCodeIsEmpty() {
+  public void whenSettingIsEmpty_analyzeGeneratedCode_returnsFalse() {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getBoolean("sonar.cs.analyzeGeneratedCode")).thenReturn(Optional.empty());
 
