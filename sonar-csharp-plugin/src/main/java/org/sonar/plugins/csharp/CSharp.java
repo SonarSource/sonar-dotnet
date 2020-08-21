@@ -39,7 +39,7 @@ public class CSharp extends AbstractLanguage {
 
   @Override
   public boolean equals(Object o) {
-    return super.equals(o) && configuration == ((CSharp) o).configuration;
+    return super.equals(o) && o instanceof CSharp && configuration == ((CSharp) o).configuration;
   }
 
   @Override

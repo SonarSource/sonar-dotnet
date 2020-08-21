@@ -39,7 +39,7 @@ public class VbNet extends AbstractLanguage {
 
   @Override
   public boolean equals(Object o) {
-    return super.equals(o) && configuration == ((VbNet) o).configuration;
+    return super.equals(o) && o instanceof VbNet && configuration == ((VbNet) o).configuration;
   }
 
   @Override

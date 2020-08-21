@@ -26,6 +26,7 @@ import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,11 +61,25 @@ public class VbNetTest {
     otherSettings.setProperty("key", "value");
     VbNet otherVbNet = new VbNet(otherSettings.asConfig());
     VbNet sameVbNet = new VbNet(settings.asConfig());
+    FakeVbNet fakeVbNet = new FakeVbNet();
 
     assertThat(vbnet).isEqualTo(sameVbNet)
       .isNotEqualTo(otherVbNet)
+      .isNotEqualTo(fakeVbNet)
       .isNotEqualTo(null)
       .hasSameHashCodeAs(sameVbNet);
     assertThat(vbnet.hashCode()).isNotEqualTo(otherVbNet.hashCode());
+  }
+
+  private class FakeVbNet extends AbstractLanguage {
+
+    public FakeVbNet() {
+      super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.LANGUAGE_NAME);
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+      return new String[0];
+    }
   }
 }

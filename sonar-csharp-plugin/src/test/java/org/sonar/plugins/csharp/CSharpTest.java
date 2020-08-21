@@ -26,6 +26,7 @@ import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,11 +61,25 @@ public class CSharpTest {
     otherSettings.setProperty("key", "value");
     CSharp otherCSharp = new CSharp(otherSettings.asConfig());
     CSharp sameCSharp = new CSharp(settings.asConfig());
+    FakeCSharp fakeCSharp = new FakeCSharp();
 
     assertThat(csharp).isEqualTo(sameCSharp)
       .isNotEqualTo(otherCSharp)
+      .isNotEqualTo(fakeCSharp)
       .isNotEqualTo(null)
       .hasSameHashCodeAs(sameCSharp);
     assertThat(csharp.hashCode()).isNotEqualTo(otherCSharp.hashCode());
+  }
+
+  private class FakeCSharp extends AbstractLanguage {
+
+    public FakeCSharp() {
+      super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME);
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+      return new String[0];
+    }
   }
 }
