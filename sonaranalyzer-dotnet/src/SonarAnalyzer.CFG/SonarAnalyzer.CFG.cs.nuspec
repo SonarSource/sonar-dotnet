@@ -16,7 +16,8 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="bin\Release\net46\SonarAnalyzer.CFG.dll" target="lib" />
+    <file src="bin\Release\net46\SonarAnalyzer.CFG.dll" target="lib\net46" />
+    <file src="bin\Release\netstandard2.0\SonarAnalyzer.CFG.dll" target="lib\netstandard2.0" />
     <file src="License.txt" />
   </files>
 </package>
