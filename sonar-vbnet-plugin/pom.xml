@@ -132,8 +132,6 @@
       <version>19.0</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- FIXME the following 3 dependencies are due to some issue of integrating unit tests with sonar-plugin-api 7.3+ -->
     <dependency>
       <groupId>org.codehaus.woodstox</groupId>
       <artifactId>stax2-api</artifactId>
@@ -146,18 +144,7 @@
       </exclusions>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.codehaus.woodstox</groupId>
-      <artifactId>woodstox-core-lgpl</artifactId>
-      <version>4.4.0</version>
-      <exclusions>
-        <exclusion>
-          <groupId>javax.xml.stream</groupId>
-          <artifactId>stax-api</artifactId>
-        </exclusion>
-      </exclusions>
-      <scope>test</scope>
-    </dependency>
+
     <dependency>
       <groupId>org.codehaus.staxmate</groupId>
       <artifactId>staxmate</artifactId>

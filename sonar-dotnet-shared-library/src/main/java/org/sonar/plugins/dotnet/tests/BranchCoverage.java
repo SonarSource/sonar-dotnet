@@ -28,7 +28,7 @@ class BranchCoverage {
   private int conditions;
   private int coveredConditions;
 
-  BranchCoverage(int line, int conditions, int coveredConditions){
+  BranchCoverage(int line, int conditions, int coveredConditions) {
     this.line = line;
     this.conditions = conditions;
     this.coveredConditions = coveredConditions;
@@ -46,7 +46,7 @@ class BranchCoverage {
     return coveredConditions;
   }
 
-  public void add(int conditions, int coveredConditions){
+  public void add(int conditions, int coveredConditions) {
     this.conditions += conditions;
     this.coveredConditions += coveredConditions;
   }

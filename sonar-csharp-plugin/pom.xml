@@ -113,7 +113,7 @@
       <version>3.6.1</version>
       <scope>test</scope>
     </dependency>
-     <dependency>
+    <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
       <version>2.6</version>
@@ -131,8 +131,6 @@
       <version>19.0</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- FIXME the following 3 dependencies are due to some issue of integrating unit tests with sonar-plugin-api 7.3+ -->
     <dependency>
       <groupId>org.codehaus.woodstox</groupId>
       <artifactId>stax2-api</artifactId>
@@ -140,18 +138,6 @@
       <exclusions>
         <exclusion>
           <groupId>stax</groupId>
-          <artifactId>stax-api</artifactId>
-        </exclusion>
-      </exclusions>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.woodstox</groupId>
-      <artifactId>woodstox-core-lgpl</artifactId>
-      <version>4.4.0</version>
-      <exclusions>
-        <exclusion>
-          <groupId>javax.xml.stream</groupId>
           <artifactId>stax-api</artifactId>
         </exclusion>
       </exclusions>
@@ -205,7 +191,7 @@
           <sonarQubeMinVersion>${sonarLTS.version}</sonarQubeMinVersion> <!-- runtime minimal API version -->
         </configuration>
       </plugin>
-       <plugin>
+      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <executions>
           <execution>
@@ -401,7 +387,7 @@
                     <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp-${analyzer.version}.nupkg"
                            dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/" />
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                        <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/xml">
+                      <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/xml">
                         <include name="*.xml"/>
                       </fileset>
                     </copy>
