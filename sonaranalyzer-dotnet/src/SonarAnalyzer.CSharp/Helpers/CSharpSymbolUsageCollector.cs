@@ -293,22 +293,22 @@ namespace SonarAnalyzer.Helpers
                 ? GetCandidateSymbols(getSemanticModel(node).GetSymbolInfo(node))
                 : Enumerable.Empty<ISymbol>();
 
-            IEnumerable<ISymbol> GetCandidateSymbols(SymbolInfo symbolInfo)
+            static IEnumerable<ISymbol> GetCandidateSymbols(SymbolInfo symbolInfo)
             {
                 return new[] { symbolInfo.Symbol }
                     .Concat(symbolInfo.CandidateSymbols)
                     .Select(GetOriginalDefinition)
                     .WhereNotNull();
+            }
 
-                ISymbol GetOriginalDefinition(ISymbol candidateSymbol)
+            static ISymbol GetOriginalDefinition(ISymbol candidateSymbol)
+            {
+                if (candidateSymbol is IMethodSymbol methodSymbol &&
+                    methodSymbol.MethodKind == MethodKind.ReducedExtension)
                 {
-                    if (candidateSymbol is IMethodSymbol methodSymbol &&
-                        methodSymbol.MethodKind == MethodKind.ReducedExtension)
-                    {
-                        return methodSymbol.ReducedFrom?.OriginalDefinition;
-                    }
-                    return candidateSymbol?.OriginalDefinition;
+                    return methodSymbol.ReducedFrom?.OriginalDefinition;
                 }
+                return candidateSymbol?.OriginalDefinition;
             }
         }
 
