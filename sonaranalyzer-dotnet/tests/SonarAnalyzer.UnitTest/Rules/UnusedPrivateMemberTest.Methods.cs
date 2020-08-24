@@ -28,8 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_Method_Accessibility()
-        {
+        public void UnusedPrivateMember_Method_Accessibility() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateMembers
 {
@@ -84,12 +83,10 @@ public class InterfaceImpl : IInterface
     int IInterface.InterfaceMethod() => 0;
 }
 ", new CS.UnusedPrivateMember());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_Methods_DirectReferences()
-        {
+        public void UnusedPrivateMember_Methods_DirectReferences() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Linq;
@@ -137,12 +134,10 @@ public class MethodUsages
     }
 }
 ", new CS.UnusedPrivateMember());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_Methods_Main()
-        {
+        public void UnusedPrivateMember_Methods_Main() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Threading.Tasks;
 public class NewClass1
@@ -171,6 +166,5 @@ public class NewClass5
     static async Task<string> Main(string[] args) { return ""a""; } // Noncompliant
 }
 ", new CS.UnusedPrivateMember());
-        }
     }
 }
