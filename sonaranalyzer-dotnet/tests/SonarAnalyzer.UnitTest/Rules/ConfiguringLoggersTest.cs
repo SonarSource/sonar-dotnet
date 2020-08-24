@@ -125,7 +125,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version));
 
         private static IEnumerable<MetadataReference> Log4NetReferences =>
-            NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "net45-full")
+            // See: https://github.com/SonarSource/sonar-dotnet/issues/3548
+            NuGetMetadataReference.Log4Net("2.0.8", "net45-full")
             .Concat(MetadataReferenceFacade.GetSystemXml());
 
         private static IEnumerable<MetadataReference> NLogReferences =>
