@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitAttribute(AttributeSyntax node)
         {
-            var semanticModel = this.getSemanticModel(node);
+            var semanticModel = getSemanticModel(node);
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
             if (symbol != null &&
                 symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute) &&
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.Helpers
                     // node++
                     return SymbolAccess.Write | ParentAccessType(expressionSyntax);
                 case ArrowExpressionClauseSyntax arrowExpressionClause when arrowExpressionClause.Parent is MethodDeclarationSyntax arrowMethod:
-                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, this.getSemanticModel(arrowMethod))
+                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, getSemanticModel(arrowMethod))
                         ? SymbolAccess.None
                         : SymbolAccess.Read;
                 default:
@@ -225,7 +225,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
         {
-            if (this.knownSymbolNames.Contains(node.Identifier.ValueText))
+            if (knownSymbolNames.Contains(node.Identifier.ValueText))
             {
                 var usage = GetFieldSymbolUsage(GetDeclaredSymbol(node));
                 usage.Declaration = node;
@@ -290,7 +290,7 @@ namespace SonarAnalyzer.Helpers
             where TSyntaxNode : SyntaxNode
         {
             return condition(node)
-                ? GetCandidateSymbols(this.getSemanticModel(node).GetSymbolInfo(node))
+                ? GetCandidateSymbols(getSemanticModel(node).GetSymbolInfo(node))
                 : Enumerable.Empty<ISymbol>();
 
             IEnumerable<ISymbol> GetCandidateSymbols(SymbolInfo symbolInfo)
@@ -359,7 +359,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             // nameof(Prop) --> get/set
-            if (node.IsInNameOfArgument(this.getSemanticModel(node)))
+            if (node.IsInNameOfArgument(getSemanticModel(node)))
             {
                 return AccessorAccess.Both;
             }
@@ -388,9 +388,9 @@ namespace SonarAnalyzer.Helpers
         }
 
         private bool IsKnownIdentifier(SimpleNameSyntax nameSyntax) =>
-            this.knownSymbolNames.Contains(nameSyntax.Identifier.ValueText);
+            knownSymbolNames.Contains(nameSyntax.Identifier.ValueText);
 
         private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
-            this.getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
+            getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
     }
 }
