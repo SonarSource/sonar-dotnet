@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -41,11 +42,15 @@ namespace SonarAnalyzer.Helpers
             SyntaxKind.PreDecrementExpression
         };
 
+        // The types names (from .Net) defined here are very common and can slow down the analysis significantly
+        // (see entity framework migration files) but use this list carefully since it can lead to false positives
+        // if the names are redefined in the user code.
+        private static readonly ImmutableHashSet<string> ignoredConstructors = ImmutableHashSet.Create("Guid", "System.Guid");
+
         private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
         private readonly HashSet<string> knownSymbolNames;
 
-        public HashSet<ISymbol> UsedSymbols { get; } =
-            new HashSet<ISymbol>();
+        public HashSet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
 
         [Flags]
         private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write }
@@ -89,7 +94,7 @@ namespace SonarAnalyzer.Helpers
 
             base.VisitAttribute(node);
 
-            bool IsValueNameOrType(AttributeArgumentSyntax a) =>
+            static bool IsValueNameOrType(AttributeArgumentSyntax a) =>
                 a.NameColon == null || // Value
                 a.NameColon.Name.Identifier.ValueText == "Value" ||
                 a.NameColon.Name.Identifier.ValueText == "Name" ||
@@ -123,7 +128,7 @@ namespace SonarAnalyzer.Helpers
                 fieldSymbolUsagesList.ForEach(usage => usage.Writings.Add(node));
             }
 
-            bool HasFlag(SymbolAccess symbolAccess, SymbolAccess flag) => (symbolAccess & flag) != 0;
+            static bool HasFlag(SymbolAccess symbolAccess, SymbolAccess flag) => (symbolAccess & flag) != 0;
         }
 
         private SymbolAccess ParentAccessType(SyntaxNode node)
@@ -133,7 +138,7 @@ namespace SonarAnalyzer.Helpers
                 case ParenthesizedExpressionSyntax parenthesizedExpression:
                     // (node)
                     return ParentAccessType(parenthesizedExpression);
-                case ExpressionStatementSyntax statement:
+                case ExpressionStatementSyntax _:
                     // node;
                     return SymbolAccess.None;
                 case InvocationExpressionSyntax invocation:
@@ -179,7 +184,11 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
-            UsedSymbols.UnionWith(GetSymbols(node, x => true));
+            if (!ignoredConstructors.Contains(node.Type.GetName()))
+            {
+                UsedSymbols.UnionWith(GetSymbols(node, x => true));
+            }
+
             base.VisitObjectCreationExpression(node);
         }
 
@@ -249,7 +258,7 @@ namespace SonarAnalyzer.Helpers
             base.VisitPropertyDeclaration(node);
         }
 
-        private IMethodSymbol GetImplicitlyCalledConstructor(IMethodSymbol constructor)
+        private static IMethodSymbol GetImplicitlyCalledConstructor(IMethodSymbol constructor)
         {
             // In case there is no other explicitly called constructor in a constructor declaration
             // the compiler will automatically put a call to the current class' default constructor,
@@ -314,7 +323,7 @@ namespace SonarAnalyzer.Helpers
 
         private void TryStorePropertyAccess(ExpressionSyntax node, List<ISymbol> identifierSymbols)
         {
-            var propertySymbols = identifierSymbols.OfType<IPropertySymbol>();
+            var propertySymbols = identifierSymbols.OfType<IPropertySymbol>().ToList();
             if (propertySymbols.Any())
             {
                 var access = EvaluatePropertyAccesses(node);
@@ -370,7 +379,7 @@ namespace SonarAnalyzer.Helpers
                 : AccessorAccess.Get;
         }
 
-        private SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
+        private static SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
         {
             // All of the cases below could be parts of invocation or other expressions
             switch (identifier.Parent)
