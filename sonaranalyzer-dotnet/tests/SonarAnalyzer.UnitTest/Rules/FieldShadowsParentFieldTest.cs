@@ -30,18 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FieldShadowsParentField()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.cs",
-                new FieldShadowsParentField());
-        }
+        public void FieldShadowsParentField() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.cs", new FieldShadowsParentField());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void FieldsShouldNotDifferByCapitalization()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs",
-                new FieldShadowsParentField());
-        }
+        public void FieldsShouldNotDifferByCapitalization() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new FieldShadowsParentField());
     }
 }
