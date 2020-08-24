@@ -340,7 +340,7 @@ stages:
           GITHUB_BRANCH: $(Build.SourceBranchName)
           GIT_SHA1: $(Build.SourceVersion)
         inputs:
-          goals: 'deploy'
+          goals: 'deploy -P release'
           options: >-
             $(commonMavenArguments)
             --settings $(mavenSettings.secureFilePath)
