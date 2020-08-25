@@ -258,38 +258,6 @@ namespace SonarAnalyzer.Helpers
             base.VisitPropertyDeclaration(node);
         }
 
-        private static IMethodSymbol GetImplicitlyCalledConstructor(IMethodSymbol constructor)
-        {
-            // In case there is no other explicitly called constructor in a constructor declaration
-            // the compiler will automatically put a call to the current class' default constructor,
-            // or if the declaration is the default constructor or there is no default constructor,
-            // the compiler will put a call the base class' default constructor.
-            if (IsDefaultConstructor(constructor))
-            {
-                // Call default ctor of base type
-                return GetDefaultConstructor(constructor.ContainingType.BaseType);
-            }
-            else
-            {
-                // Call default ctor of current type, or if undefined - default ctor of base type
-                return GetDefaultConstructor(constructor.ContainingType)
-                    ?? GetDefaultConstructor(constructor.ContainingType.BaseType);
-            }
-        }
-
-        private static IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType)
-        {
-            // See https://github.com/SonarSource/sonar-dotnet/issues/3155
-            if (namedType != null && namedType.InstanceConstructors != null)
-            {
-                return namedType.InstanceConstructors.FirstOrDefault(IsDefaultConstructor);
-            }
-            return null;
-        }
-
-        private static bool IsDefaultConstructor(IMethodSymbol constructor) =>
-            constructor.Parameters.Length == 0;
-
         /// <summary>
         /// Given a node, it tries to get the symbol or the candidate symbols (if the compiler cannot find the symbol,
         /// .e.g when the code cannot compile).
@@ -379,6 +347,12 @@ namespace SonarAnalyzer.Helpers
                 : AccessorAccess.Get;
         }
 
+        private bool IsKnownIdentifier(SimpleNameSyntax nameSyntax) =>
+            knownSymbolNames.Contains(nameSyntax.Identifier.ValueText);
+
+        private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
+            getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
+
         private static SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
         {
             // All of the cases below could be parts of invocation or other expressions
@@ -396,10 +370,36 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private bool IsKnownIdentifier(SimpleNameSyntax nameSyntax) =>
-            knownSymbolNames.Contains(nameSyntax.Identifier.ValueText);
+        private static IMethodSymbol GetImplicitlyCalledConstructor(IMethodSymbol constructor)
+        {
+            // In case there is no other explicitly called constructor in a constructor declaration
+            // the compiler will automatically put a call to the current class' default constructor,
+            // or if the declaration is the default constructor or there is no default constructor,
+            // the compiler will put a call the base class' default constructor.
+            if (IsDefaultConstructor(constructor))
+            {
+                // Call default ctor of base type
+                return GetDefaultConstructor(constructor.ContainingType.BaseType);
+            }
+            else
+            {
+                // Call default ctor of current type, or if undefined - default ctor of base type
+                return GetDefaultConstructor(constructor.ContainingType)
+                       ?? GetDefaultConstructor(constructor.ContainingType.BaseType);
+            }
+        }
 
-        private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
-            getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
+        private static IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType)
+        {
+            // See https://github.com/SonarSource/sonar-dotnet/issues/3155
+            if (namedType != null && namedType.InstanceConstructors != null)
+            {
+                return namedType.InstanceConstructors.FirstOrDefault(IsDefaultConstructor);
+            }
+            return null;
+        }
+
+        private static bool IsDefaultConstructor(IMethodSymbol constructor) =>
+            constructor.Parameters.Length == 0;
     }
 }
