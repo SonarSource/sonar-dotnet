@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,9 +37,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     ParseOptionsHelper.FromCSharp8,
                                     additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
 
-// On .Net Core 3.1 the generated code cannot be compiled.
-// See: https://github.com/SonarSource/sonar-dotnet/issues/3430
-#if NETFRAMEWORK
         [TestMethod]
         [TestCategory("CodeFix")]
         public void RedundantArgument_CodeFix_No_Named_Arguments() =>
@@ -48,9 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new RedundantArgument(),
                                    new RedundantArgumentCodeFixProvider(),
                                    RedundantArgumentCodeFixProvider.TitleRemove,
-                                   ParseOptionsHelper.FromCSharp8,
-                                   NuGetMetadataReference.NETStandardV2_1_0);
-#endif
+                                   ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -60,7 +55,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new RedundantArgument(),
                                    new RedundantArgumentCodeFixProvider(),
                                    RedundantArgumentCodeFixProvider.TitleRemoveWithNameAdditions,
-                                   ParseOptionsHelper.FromCSharp8,
-                                   NuGetMetadataReference.NETStandardV2_1_0);
+                                   ParseOptionsHelper.FromCSharp8);
     }
 }
