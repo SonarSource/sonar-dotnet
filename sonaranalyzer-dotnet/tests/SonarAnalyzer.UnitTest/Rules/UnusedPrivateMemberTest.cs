@@ -18,6 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions;
+using FluentAssertions.Extensions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -193,5 +199,25 @@ namespace UnityEditor
                                     },
                                     new CS.UnusedPrivateMember());
 
+        [TestMethod]
+        [TestCategory("Performance")]
+        public void UnusedPrivateMember_Performance()
+        {
+            Action verifyAnalyzer = () => Verifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
+                                                                  new CS.UnusedPrivateMember(),
+                                                                  additionalReferences:
+                                                                  GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
+
+            // Once the NuGet packages are downloaded, the time to execute the analyzer on the given file is
+            // about ~1 sec. It was reduced from ~11 min by skipping Guids when processing ObjectCreationExpression.
+            // The threshold is set here to 30 seconds to avoid flaky builds due to slow build agents or network connections.
+            verifyAnalyzer.ExecutionTime().Should().BeLessOrEqualTo(30.Seconds());
+        }
+
+        private static IEnumerable<MetadataReference> GetEntityFrameworkCoreReferences(string entityFrameworkVersion) =>
+            Enumerable.Empty<MetadataReference>()
+                      .Concat(NetStandardMetadataReference.Netstandard)
+                      .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(entityFrameworkVersion))
+                      .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
     }
 }
