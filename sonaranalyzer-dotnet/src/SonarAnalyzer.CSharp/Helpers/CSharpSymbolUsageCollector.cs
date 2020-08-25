@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Helpers
         private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
         private readonly HashSet<string> knownSymbolNames;
 
-        public HashSet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
+        public ISet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
 
         [Flags]
         private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write }
