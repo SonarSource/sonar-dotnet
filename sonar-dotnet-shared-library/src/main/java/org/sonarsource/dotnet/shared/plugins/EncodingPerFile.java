@@ -21,8 +21,8 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -44,10 +44,11 @@ public class EncodingPerFile {
     }
 
     // Case-Insensitive check
-    Charset roslynEncoding = globalReportProcessor.getRoslynEncodingPerUri().get(uri); 
+    Charset roslynEncoding = globalReportProcessor.getRoslynEncodingPerUri().get(uri);
     if (roslynEncoding == null) {
-      LOG.warn("File '{}' does not have encoding information. Skip it.", uri);
-      return false;
+      // Roslyn saw the file, but it didn't recognized it's encoding. We fall back to the default encoding and accept the file.
+      LOG.warn("Roslyn encoding was not found for '{}', using default instead.", uri);
+      return true;
     }
 
     Charset sqEncoding = inputFile.charset();
