@@ -52,12 +52,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 fadeOutCode: true);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(ruleS1144, ruleS4487);
 
-        private static readonly ImmutableArray<KnownType> IgnoredTypes =
+        private static readonly ImmutableArray<KnownType> ignoredTypes =
             ImmutableArray.Create(
                 KnownType.UnityEditor_AssetModificationProcessor,
                 KnownType.UnityEditor_AssetPostprocessor,
                 KnownType.UnityEngine_MonoBehaviour,
-                KnownType.UnityEngine_ScriptableObject
+                KnownType.UnityEngine_ScriptableObject,
+                KnownType.Microsoft_EntityFrameworkCore_Migrations_Migration
             );
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -85,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             }
 
                             if (namedType.ContainingType != null ||
-                                namedType.DerivesFromAny(IgnoredTypes))
+                                namedType.DerivesFromAny(ignoredTypes))
                             {
                                 return;
                             }
