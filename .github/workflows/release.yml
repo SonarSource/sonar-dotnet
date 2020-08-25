@@ -36,7 +36,7 @@ jobs:
           RELEASE_SSH_USER: ${{ secrets.RELEASE_SSH_USER }}
           RELEASE_SSH_KEY: ${{ secrets.RELEASE_SSH_KEY }}
         # Put your action repo here
-        uses: SonarSource/gh-action_LT_release@refactor
+        uses: SonarSource/gh-action_LT_release@v2
 
       - name: Check outputs
         if: always()
