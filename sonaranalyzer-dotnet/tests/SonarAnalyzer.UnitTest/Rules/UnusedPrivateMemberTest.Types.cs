@@ -28,8 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_Types_Accessibility()
-        {
+        public void UnusedPrivateMember_Types_Accessibility() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateTypes
 {
@@ -59,12 +58,10 @@ public class NonPrivateTypes
     public struct PublicStruct { }
 }
 ", new CS.UnusedPrivateMember());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_Types_InternalsVisibleTo()
-        {
+        public void UnusedPrivateMember_Types_InternalsVisibleTo() =>
             Verifier.VerifyCSharpAnalyzer(@"
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo("""")]
 public class PrivateTypes
@@ -73,12 +70,10 @@ public class PrivateTypes
     internal class InternalClass { } // Compliant, internal types are not reported when InternalsVisibleTo is present
 }
 ", new CS.UnusedPrivateMember());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_Types_Internals()
-        {
+        public void UnusedPrivateMember_Types_Internals() =>
             Verifier.VerifyCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-csharp/issues/1225
 // https://github.com/SonarSource/sonar-csharp/issues/904
@@ -98,12 +93,10 @@ public class Sample
         public const int X = 5;
     }
 }", new CS.UnusedPrivateMember());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_Types_DirectReferences()
-        {
+        public void UnusedPrivateMember_Types_DirectReferences() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Linq;
 public class PrivateTypes
@@ -130,12 +123,10 @@ public class PrivateTypes
     }
 }
 ", new CS.UnusedPrivateMember());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_SupportTypeKinds()
-        {
+        public void UnusedPrivateMember_SupportTypeKinds() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateTypes
 {
@@ -166,6 +157,27 @@ public class PrivateTypes
     public static int PerformCalculation(int x, int y) => x + y;
 }
 ", new CS.UnusedPrivateMember());
+
+        [TestMethod]
+        public void UnusedPrivateMember_GuidFP() =>
+            Verifier.VerifyCSharpAnalyzer(@"
+public class Consumer
+{
+    public void Method()
+    {
+        var a = new Guid(1);
+    }
+
+    private class Guid
+    {
+        public Guid(int x) // Noncompliant - FP
+        {
+            X = x;
         }
+
+        private int X { get; set; }
+    }
+}
+", new CS.UnusedPrivateMember());
     }
 }

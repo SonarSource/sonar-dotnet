@@ -28,8 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_Property_Accessibility()
-        {
+        public void UnusedPrivateMember_Property_Accessibility() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateMembers
 {
@@ -85,12 +84,10 @@ public class InterfaceImpl : IInterface
     int IInterface.InterfaceProperty { get { return 0; } set { } }
 }
 ", new CS.UnusedPrivateMember());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_Properties_DirectReferences()
-        {
+        public void UnusedPrivateMember_Properties_DirectReferences() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 public class PropertyUsages
@@ -144,6 +141,5 @@ public class PropertyUsages
     }
 }
 ", new CS.UnusedPrivateMember());
-        }
     }
 }
