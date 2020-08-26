@@ -236,7 +236,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return diagnostics;
 
-            IEnumerable<VariableDeclaratorSyntax> GetSiblingDeclarators(SyntaxNode variableDeclarator)
+            static IEnumerable<VariableDeclaratorSyntax> GetSiblingDeclarators(SyntaxNode variableDeclarator)
             {
                 var nodeGrandParent = variableDeclarator.Parent.Parent;
 
@@ -284,7 +284,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // do nothing
             }
 
-            AccessorDeclarationSyntax GetAccessorSyntax(IMethodSymbol methodSymbol) =>
+            static AccessorDeclarationSyntax GetAccessorSyntax(IMethodSymbol methodSymbol) =>
                 methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
         }
 
@@ -336,6 +336,7 @@ namespace SonarAnalyzer.Rules.CSharp
             bool IsGenerated(SyntaxReference syntaxReference) =>
                 syntaxReference.SyntaxTree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation);
         }
+
         /// <summary>
         /// Collects private or internal member symbols that could potentially be removed if they are not used.
         /// Members that are overridden, overridable, have specific use, etc. are not removable.
@@ -352,11 +353,9 @@ namespace SonarAnalyzer.Rules.CSharp
             public BidirectionalDictionary<ISymbol, SyntaxNode> FieldLikeSymbols { get; } =
                 new BidirectionalDictionary<ISymbol, SyntaxNode>();
 
-            public HashSet<ISymbol> InternalSymbols { get; } =
-                new HashSet<ISymbol>();
+            public HashSet<ISymbol> InternalSymbols { get; } = new HashSet<ISymbol>();
 
-            public HashSet<ISymbol> PrivateSymbols { get; } =
-                 new HashSet<ISymbol>();
+            public HashSet<ISymbol> PrivateSymbols { get; } = new HashSet<ISymbol>();
 
             public override void VisitClassDeclaration(ClassDeclarationSyntax node)
             {
@@ -434,10 +433,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 base.VisitStructDeclaration(node);
             }
 
-            private static bool IsEmptyConstructor(ConstructorDeclarationSyntax constructorDeclaration) =>
-                !constructorDeclaration.HasBodyOrExpressionBody() ||
-                (constructorDeclaration.Body != null && constructorDeclaration.Body.Statements.Count == 0);
-
             private void ConditionalStore<TSymbol>(TSymbol symbol, Func<TSymbol, bool> condition)
                 where TSymbol : ISymbol
             {
@@ -455,48 +450,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
-                this.getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
-
-            private bool IsDeclaredInPartialClass(IMethodSymbol methodSymbol)
-            {
-                return methodSymbol.DeclaringSyntaxReferences
-                    .Select(GetContainingTypeDeclaration)
-                    .Any(IsPartial);
-
-                TypeDeclarationSyntax GetContainingTypeDeclaration(SyntaxReference syntaxReference) =>
-                    syntaxReference.GetSyntax().FirstAncestorOrSelf<TypeDeclarationSyntax>();
-
-                bool IsPartial(TypeDeclarationSyntax typeDeclaration) =>
-                    typeDeclaration.Modifiers.AnyOfKind(SyntaxKind.PartialKeyword);
-            }
-
-            private bool IsRemovable(ISymbol symbol) =>
-                symbol != null &&
-                !symbol.IsImplicitlyDeclared &&
-                !symbol.IsVirtual &&
-                !symbol.GetAttributes().Any() &&
-                !symbol.ContainingType.IsInterface() &&
-                symbol.GetInterfaceMember() == null &&
-                symbol.GetOverriddenMember() == null;
-
-            private bool IsRemovableMember(ISymbol symbol) =>
-                symbol.GetEffectiveAccessibility() == Accessibility.Private &&
-                IsRemovable(symbol);
-
-            private bool IsRemovableMethod(IMethodSymbol methodSymbol) =>
-                IsRemovableMember(methodSymbol) &&
-                (methodSymbol.MethodKind == MethodKind.Ordinary || methodSymbol.MethodKind == MethodKind.Constructor) &&
-                !methodSymbol.IsMainMethod() &&
-                (!methodSymbol.IsEventHandler() || !IsDeclaredInPartialClass(methodSymbol)) && // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
-                !methodSymbol.IsSerializationConstructor();
-
-            private bool IsRemovableType(ISymbol typeSymbol)
-            {
-                var accessibility = typeSymbol.GetEffectiveAccessibility();
-                return typeSymbol.ContainingType != null
-                    && (accessibility == Accessibility.Private || accessibility == Accessibility.Internal)
-                    && IsRemovable(typeSymbol);
-            }
+                getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
 
             private void StoreRemovableVariableDeclarations(BaseFieldDeclarationSyntax node)
             {
@@ -509,6 +463,51 @@ namespace SonarAnalyzer.Rules.CSharp
                         FieldLikeSymbols.Add(symbol, variable);
                     }
                 }
+            }
+
+            private static bool IsEmptyConstructor(ConstructorDeclarationSyntax constructorDeclaration) =>
+                !constructorDeclaration.HasBodyOrExpressionBody() ||
+                (constructorDeclaration.Body != null && constructorDeclaration.Body.Statements.Count == 0);
+
+            private static bool IsDeclaredInPartialClass(IMethodSymbol methodSymbol)
+            {
+                return methodSymbol.DeclaringSyntaxReferences
+                    .Select(GetContainingTypeDeclaration)
+                    .Any(IsPartial);
+
+                static TypeDeclarationSyntax GetContainingTypeDeclaration(SyntaxReference syntaxReference) =>
+                    syntaxReference.GetSyntax().FirstAncestorOrSelf<TypeDeclarationSyntax>();
+
+                static bool IsPartial(TypeDeclarationSyntax typeDeclaration) =>
+                    typeDeclaration.Modifiers.AnyOfKind(SyntaxKind.PartialKeyword);
+            }
+
+            private static bool IsRemovableMethod(IMethodSymbol methodSymbol) =>
+                IsRemovableMember(methodSymbol) &&
+                (methodSymbol.MethodKind == MethodKind.Ordinary || methodSymbol.MethodKind == MethodKind.Constructor) &&
+                !methodSymbol.IsMainMethod() &&
+                (!methodSymbol.IsEventHandler() || !IsDeclaredInPartialClass(methodSymbol)) && // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
+                !methodSymbol.IsSerializationConstructor();
+
+            private static bool IsRemovable(ISymbol symbol) =>
+                symbol != null &&
+                !symbol.IsImplicitlyDeclared &&
+                !symbol.IsVirtual &&
+                !symbol.GetAttributes().Any() &&
+                !symbol.ContainingType.IsInterface() &&
+                symbol.GetInterfaceMember() == null &&
+                symbol.GetOverriddenMember() == null;
+
+            private static bool IsRemovableMember(ISymbol symbol) =>
+                symbol.GetEffectiveAccessibility() == Accessibility.Private &&
+                IsRemovable(symbol);
+
+            private static bool IsRemovableType(ISymbol typeSymbol)
+            {
+                var accessibility = typeSymbol.GetEffectiveAccessibility();
+                return typeSymbol.ContainingType != null
+                       && (accessibility == Accessibility.Private || accessibility == Accessibility.Internal)
+                       && IsRemovable(typeSymbol);
             }
         }
     }
