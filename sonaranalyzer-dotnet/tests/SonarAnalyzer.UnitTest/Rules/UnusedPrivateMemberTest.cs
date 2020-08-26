@@ -214,30 +214,6 @@ namespace UnityEditor
             verifyAnalyzer.ExecutionTime().Should().BeLessOrEqualTo(30.Seconds());
         }
 
-        [TestMethod]
-        public void UnusedPrivateMember_GuidFP()
-        {
-            const string code = @"public class Consumer
-{
-    public void Method()
-    {
-        var a = new Guid(1);
-    }
-
-    private class Guid
-    {
-        public Guid(int x) // Noncompliant - FP
-        {
-            X = x;
-        }
-
-        private int X { get; set; }
-    }
-}
-";
-            Verifier.VerifyCSharpAnalyzer(code, new CS.UnusedPrivateMember());
-        }
-
         private static IEnumerable<MetadataReference> GetEntityFrameworkCoreReferences(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()
                       .Concat(NetStandardMetadataReference.Netstandard)
