@@ -171,7 +171,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsMentionedInDebuggerDisplay(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
                 usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
 
-        private static IEnumerable<Diagnostic> GetDiagnosticsForUsedButUnreadFields(CSharpSymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols)
+        private static IEnumerable<Diagnostic> GetDiagnosticsForUsedButUnreadFields(CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols)
         {
             var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 
@@ -185,7 +185,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return GetDiagnosticsForUnreadFields(usedButUnreadFields);
         }
 
-        private static HashSet<ISymbol> GetUnusedSymbols(CSharpSymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols) =>
+        private static HashSet<ISymbol> GetUnusedSymbols(CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols) =>
             removableSymbols
                 .Except(usageCollector.UsedSymbols)
                 .Where(symbol => !IsMentionedInDebuggerDisplay(symbol, usageCollector))
@@ -197,7 +197,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
             symbol.DeclaredAccessibility == Accessibility.Private ? "private" : "private class";
 
-        private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(HashSet<ISymbol> unusedSymbols, string accessibility,
+        private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(ICollection<ISymbol> unusedSymbols, string accessibility,
             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var alreadyReportedFieldLikeSymbols = new HashSet<ISymbol>();
@@ -258,7 +258,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForProperty(IPropertySymbol property,
-            Dictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
+            IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
         {
             var access = propertyAccessorAccess[property];
             if (access == AccessorAccess.Get && property.SetMethod != null)
@@ -284,8 +284,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 // do nothing
             }
 
-            static AccessorDeclarationSyntax GetAccessorSyntax(IMethodSymbol methodSymbol) =>
-                methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
+            static AccessorDeclarationSyntax GetAccessorSyntax(ISymbol symbol) =>
+                symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
         }
 
         private static string GetMemberName(ISymbol symbol) =>
@@ -316,12 +316,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool VisitDeclaringReferences(INamedTypeSymbol namedType, CSharpSyntaxWalker visitor, Compilation compilation,
+        private static bool VisitDeclaringReferences(ISymbol symbol, CSharpSyntaxWalker visitor, Compilation compilation,
             bool includeGeneratedFile)
         {
             var syntaxReferencesToVisit = includeGeneratedFile
-                ? namedType.DeclaringSyntaxReferences
-                : namedType.DeclaringSyntaxReferences.Where(r => !IsGenerated(r));
+                ? symbol.DeclaringSyntaxReferences
+                : symbol.DeclaringSyntaxReferences.Where(r => !IsGenerated(r));
 
             foreach (var reference in syntaxReferencesToVisit)
             {
@@ -465,11 +465,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private static bool IsEmptyConstructor(ConstructorDeclarationSyntax constructorDeclaration) =>
+            private static bool IsEmptyConstructor(BaseMethodDeclarationSyntax constructorDeclaration) =>
                 !constructorDeclaration.HasBodyOrExpressionBody() ||
                 (constructorDeclaration.Body != null && constructorDeclaration.Body.Statements.Count == 0);
 
-            private static bool IsDeclaredInPartialClass(IMethodSymbol methodSymbol)
+            private static bool IsDeclaredInPartialClass(ISymbol methodSymbol)
             {
                 return methodSymbol.DeclaringSyntaxReferences
                     .Select(GetContainingTypeDeclaration)
