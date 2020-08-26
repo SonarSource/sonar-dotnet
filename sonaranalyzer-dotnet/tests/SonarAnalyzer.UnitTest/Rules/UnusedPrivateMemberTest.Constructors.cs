@@ -82,7 +82,7 @@ public abstract class PrivateConstructors
     public class Constructor2
     {
         public Constructor2(int a) { }
-        private Constructor2() { var x = 5; }
+        private Constructor2() { var x = 5; } // Compliant - FN
     }
 
     public class Constructor3
