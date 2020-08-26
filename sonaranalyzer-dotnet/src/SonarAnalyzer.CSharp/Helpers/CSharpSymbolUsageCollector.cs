@@ -131,57 +131,6 @@ namespace SonarAnalyzer.Helpers
             static bool HasFlag(SymbolAccess symbolAccess, SymbolAccess flag) => (symbolAccess & flag) != 0;
         }
 
-        private SymbolAccess ParentAccessType(SyntaxNode node)
-        {
-            switch (node.Parent)
-            {
-                case ParenthesizedExpressionSyntax parenthesizedExpression:
-                    // (node)
-                    return ParentAccessType(parenthesizedExpression);
-                case ExpressionStatementSyntax _:
-                    // node;
-                    return SymbolAccess.None;
-                case InvocationExpressionSyntax invocation:
-                    // node(_) : <unexpected>
-                    return node == invocation.Expression ? SymbolAccess.Read : SymbolAccess.None;
-                case MemberAccessExpressionSyntax memberAccess:
-                    // _.node : node._
-                    return node == memberAccess.Name ? ParentAccessType(memberAccess) : SymbolAccess.Read;
-                case MemberBindingExpressionSyntax memberBinding:
-                    // _?.node : node?._
-                    return node == memberBinding.Name ? ParentAccessType(memberBinding) : SymbolAccess.Read;
-                case AssignmentExpressionSyntax assignmentExpression:
-                    // Ignoring distinction assignmentExpression.IsKind(SyntaxKind.SimpleAssignmentExpression) between
-                    // "node = _" and "node += _" both are considered as Write and rely on the parent to know if its read.
-                    //  node = _ : _ = node
-                    return node == assignmentExpression.Left ? SymbolAccess.Write | ParentAccessType(assignmentExpression) : SymbolAccess.Read;
-                case ArgumentSyntax argument:
-                    if (argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword))
-                    {
-                        //  out Type node : out node
-                        return SymbolAccess.Write;
-                    }
-                    else if (argument.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
-                    {
-                        //  ref node
-                        return SymbolAccess.ReadWrite;
-                    }
-                    else
-                    {
-                        return SymbolAccess.Read;
-                    }
-                case ExpressionSyntax expressionSyntax when expressionSyntax.IsAnyKind(IncrementKinds):
-                    // node++
-                    return SymbolAccess.Write | ParentAccessType(expressionSyntax);
-                case ArrowExpressionClauseSyntax arrowExpressionClause when arrowExpressionClause.Parent is MethodDeclarationSyntax arrowMethod:
-                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, getSemanticModel(arrowMethod))
-                        ? SymbolAccess.None
-                        : SymbolAccess.Read;
-                default:
-                    return SymbolAccess.Read;
-            }
-        }
-
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
             if (!ignoredConstructors.Contains(node.Type.GetName()))
@@ -256,6 +205,57 @@ namespace SonarAnalyzer.Helpers
                 StorePropertyAccess((IPropertySymbol)symbol, AccessorAccess.Set);
             }
             base.VisitPropertyDeclaration(node);
+        }
+
+        private SymbolAccess ParentAccessType(SyntaxNode node)
+        {
+            switch (node.Parent)
+            {
+                case ParenthesizedExpressionSyntax parenthesizedExpression:
+                    // (node)
+                    return ParentAccessType(parenthesizedExpression);
+                case ExpressionStatementSyntax _:
+                    // node;
+                    return SymbolAccess.None;
+                case InvocationExpressionSyntax invocation:
+                    // node(_) : <unexpected>
+                    return node == invocation.Expression ? SymbolAccess.Read : SymbolAccess.None;
+                case MemberAccessExpressionSyntax memberAccess:
+                    // _.node : node._
+                    return node == memberAccess.Name ? ParentAccessType(memberAccess) : SymbolAccess.Read;
+                case MemberBindingExpressionSyntax memberBinding:
+                    // _?.node : node?._
+                    return node == memberBinding.Name ? ParentAccessType(memberBinding) : SymbolAccess.Read;
+                case AssignmentExpressionSyntax assignmentExpression:
+                    // Ignoring distinction assignmentExpression.IsKind(SyntaxKind.SimpleAssignmentExpression) between
+                    // "node = _" and "node += _" both are considered as Write and rely on the parent to know if its read.
+                    //  node = _ : _ = node
+                    return node == assignmentExpression.Left ? SymbolAccess.Write | ParentAccessType(assignmentExpression) : SymbolAccess.Read;
+                case ArgumentSyntax argument:
+                    if (argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword))
+                    {
+                        //  out Type node : out node
+                        return SymbolAccess.Write;
+                    }
+                    else if (argument.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
+                    {
+                        //  ref node
+                        return SymbolAccess.ReadWrite;
+                    }
+                    else
+                    {
+                        return SymbolAccess.Read;
+                    }
+                case ExpressionSyntax expressionSyntax when expressionSyntax.IsAnyKind(IncrementKinds):
+                    // node++
+                    return SymbolAccess.Write | ParentAccessType(expressionSyntax);
+                case ArrowExpressionClauseSyntax arrowExpressionClause when arrowExpressionClause.Parent is MethodDeclarationSyntax arrowMethod:
+                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, getSemanticModel(arrowMethod))
+                        ? SymbolAccess.None
+                        : SymbolAccess.Read;
+                default:
+                    return SymbolAccess.Read;
+            }
         }
 
         /// <summary>
