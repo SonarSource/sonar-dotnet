@@ -50,6 +50,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new KnownType("Microsoft.EntityFrameworkCore.Migrations.Migration");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RawSqlString = new KnownType("Microsoft.EntityFrameworkCore.RawSqlString");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalQueryableExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalQueryableExtensions");

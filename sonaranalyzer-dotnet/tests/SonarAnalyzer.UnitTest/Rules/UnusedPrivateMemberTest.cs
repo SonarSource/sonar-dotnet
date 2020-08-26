@@ -161,6 +161,23 @@ namespace UnityEditor
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void EntityFrameworkMigration_Ignored() =>
+            Verifier.VerifyCSharpAnalyzer(@"
+namespace EntityFrameworkMigrations
+{
+    using Microsoft.EntityFrameworkCore.Migrations;
+
+    public class SkipMigration : Migration
+    {
+        private void SomeMethod(bool condition) { } // Compliant
+
+        protected override void Up(MigrationBuilder migrationBuilder) { }
+    }
+}
+", new CS.UnusedPrivateMember(), additionalReferences: GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void UnusedPrivateMember() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs",
                                     new CS.UnusedPrivateMember());
