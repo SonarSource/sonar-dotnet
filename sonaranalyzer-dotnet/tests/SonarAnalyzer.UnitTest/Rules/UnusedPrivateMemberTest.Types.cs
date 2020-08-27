@@ -157,27 +157,5 @@ public class PrivateTypes
     public static int PerformCalculation(int x, int y) => x + y;
 }
 ", new CS.UnusedPrivateMember());
-
-        [TestMethod]
-        public void UnusedPrivateMember_GuidFP() =>
-            Verifier.VerifyCSharpAnalyzer(@"
-public class Consumer
-{
-    public void Method()
-    {
-        var a = new Guid(1);
-    }
-
-    private class Guid
-    {
-        public Guid(int x) // Noncompliant - FP
-        {
-            X = x;
-        }
-
-        private int X { get; set; }
-    }
-}
-", new CS.UnusedPrivateMember());
     }
 }
