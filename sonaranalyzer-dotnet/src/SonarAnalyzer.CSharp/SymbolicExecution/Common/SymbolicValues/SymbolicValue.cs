@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -39,59 +39,35 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private class BoolLiteralSymbolicValue : SymbolicValue
         {
-            internal BoolLiteralSymbolicValue(bool value)
-                : base(value)
-            {
-            }
+            internal BoolLiteralSymbolicValue(bool value) : base(value) { }
         }
 
         private class ThisSymbolicValue : SymbolicValue
         {
-            internal ThisSymbolicValue()
-                : base(new object())
-            {
-            }
+            internal ThisSymbolicValue() : base(new object()) { }
 
-            public override string ToString()
-            {
-                return "SV_THIS";
-            }
+            public override string ToString() => "SV_THIS";
         }
 
         private class BaseSymbolicValue : SymbolicValue
         {
-            internal BaseSymbolicValue()
-                : base(new object())
-            {
-            }
+            internal BaseSymbolicValue() : base(new object()) { }
 
-            public override string ToString()
-            {
-                return "SV_BASE";
-            }
+            public override string ToString() => "SV_BASE";
         }
 
         private class NullSymbolicValue : SymbolicValue
         {
-            internal NullSymbolicValue()
-                : base(new object())
-            {
-            }
+            internal NullSymbolicValue() : base(new object()) { }
 
-            public override string ToString()
-            {
-                return "SV_NULL";
-            }
+            public override string ToString() => "SV_NULL";
         }
 
         protected readonly object identifier;
 
-        private static int SymbolicValueCounter;
+        private static int symbolicValueCounter;
 
-        public SymbolicValue()
-            : this(SymbolicValueCounter++)
-        {
-        }
+        public SymbolicValue() : this(symbolicValueCounter++) { }
 
         private SymbolicValue(object identifier)
         {
@@ -152,7 +128,7 @@ namespace SonarAnalyzer.SymbolicExecution
             // when the value doesnt exist is different than the other types of constraints
             if (constraint is StringConstraint stringConstraint)
             {
-                return TrySetStringConstraint(stringConstraint,  programState);
+                return TrySetStringConstraint(stringConstraint, programState);
             }
 
             if (!programState.Constraints.TryGetValue(this, out var oldConstraints))
@@ -204,7 +180,7 @@ namespace SonarAnalyzer.SymbolicExecution
         private IEnumerable<ProgramState> TrySetConstraints(SymbolicValueConstraints constraints,
             ProgramState programState, bool isOppositeConstraints)
         {
-            IEnumerable<ProgramState> programStates = new [] { programState };
+            IEnumerable<ProgramState> programStates = new[] { programState };
 
             if (constraints == null)
             {
@@ -324,7 +300,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
             else
             {
-                if(constraint == StringConstraint.FullOrNullString)
+                if (constraint == StringConstraint.FullOrNullString)
                 {
                     return new[] { programState.SetConstraint(this, StringConstraint.FullString) };
                 }
@@ -380,7 +356,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
 
             if ((newWhiteSpaceStringConstraint && oldFullStringConstraint)
-                ||(newFullNotWhiteSpaceStringConstraint && oldFullStringConstraint))
+                || (newFullNotWhiteSpaceStringConstraint && oldFullStringConstraint))
             {
                 return new[] { programState.SetConstraint(sv, constraint) };
             }
