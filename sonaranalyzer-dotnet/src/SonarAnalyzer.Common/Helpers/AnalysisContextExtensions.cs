@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -66,8 +66,7 @@ namespace SonarAnalyzer.Helpers
             // This is the new way SonarLint will handle how and what to report...
             if (SonarAnalysisContext.ReportDiagnostic != null)
             {
-                Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the " +
-                    "old and the new delegates.");
+                Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the old and the new delegates.");
                 SonarAnalysisContext.ReportDiagnostic(reportingContext);
                 return;
             }
