@@ -76,17 +76,17 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             var namedType = (INamedTypeSymbol)cc.Symbol;
 
-                            if (namedType.TypeKind != TypeKind.Struct &&
-                                namedType.TypeKind != TypeKind.Class &&
-                                namedType.TypeKind != TypeKind.Delegate &&
-                                namedType.TypeKind != TypeKind.Enum &&
-                                namedType.TypeKind != TypeKind.Interface)
+                            if (namedType.TypeKind != TypeKind.Struct
+                                && namedType.TypeKind != TypeKind.Class
+                                && namedType.TypeKind != TypeKind.Delegate
+                                && namedType.TypeKind != TypeKind.Enum
+                                && namedType.TypeKind != TypeKind.Interface)
                             {
                                 return;
                             }
 
-                            if (namedType.ContainingType != null ||
-                                namedType.DerivesFromAny(ignoredTypes))
+                            if (namedType.ContainingType != null
+                                || namedType.DerivesFromAny(ignoredTypes))
                             {
                                 return;
                             }
@@ -127,8 +127,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         cc =>
                         {
                             var foundInternalsVisibleTo = cc.Compilation.Assembly.HasAttribute(KnownType.System_Runtime_CompilerServices_InternalsVisibleToAttribute);
-                            if (foundInternalsVisibleTo ||
-                                removableInternalTypes.Count == 0)
+                            if (foundInternalsVisibleTo
+                                || removableInternalTypes.Count == 0)
                             {
                                 return;
                             }
@@ -176,8 +176,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 
             var usedButUnreadFields = usageCollector.FieldSymbolUsages.Values
-                .Where(usage => usage.Symbol.DeclaredAccessibility == Accessibility.Private ||
-                                usage.Symbol.ContainingType?.DeclaredAccessibility == Accessibility.Private)
+                .Where(usage => usage.Symbol.DeclaredAccessibility == Accessibility.Private
+                                || usage.Symbol.ContainingType?.DeclaredAccessibility == Accessibility.Private)
                 .Where(usage => usage.Symbol.Kind == SymbolKind.Field || usage.Symbol.Kind == SymbolKind.Event)
                 .Where(usage => !unusedSymbols.Contains(usage.Symbol) && !IsMentionedInDebuggerDisplay(usage.Symbol, usageCollector))
                 .Where(usage => usage.Declaration != null && !usage.Readings.Any());
@@ -212,8 +212,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var syntaxForLocation = unused.Syntax;
 
                 var isFieldOrEvent = unused.Symbol.Kind == SymbolKind.Field || unused.Symbol.Kind == SymbolKind.Event;
-                if (isFieldOrEvent &&
-                    unused.Syntax.IsKind(SyntaxKind.VariableDeclarator))
+                if (isFieldOrEvent
+                    && unused.Syntax.IsKind(SyntaxKind.VariableDeclarator))
                 {
                     if (alreadyReportedFieldLikeSymbols.Contains(unused.Symbol))
                     {
@@ -490,17 +490,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 && !methodSymbol.IsSerializationConstructor();
 
             private static bool IsRemovable(ISymbol symbol) =>
-                symbol != null &&
-                !symbol.IsImplicitlyDeclared &&
-                !symbol.IsVirtual &&
-                !symbol.GetAttributes().Any() &&
-                !symbol.ContainingType.IsInterface() &&
-                symbol.GetInterfaceMember() == null &&
-                symbol.GetOverriddenMember() == null;
+                symbol != null
+                && !symbol.IsImplicitlyDeclared
+                && !symbol.IsVirtual
+                && !symbol.GetAttributes().Any()
+                && !symbol.ContainingType.IsInterface()
+                && symbol.GetInterfaceMember() == null
+                && symbol.GetOverriddenMember() == null;
 
             private static bool IsRemovableMember(ISymbol symbol) =>
-                symbol.GetEffectiveAccessibility() == Accessibility.Private &&
-                IsRemovable(symbol);
+                symbol.GetEffectiveAccessibility() == Accessibility.Private
+                && IsRemovable(symbol);
 
             private static bool IsRemovableType(ISymbol typeSymbol)
             {
