@@ -249,15 +249,13 @@ namespace SonarAnalyzer.Helpers
         private ImmutableArray<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node)
             where TSyntaxNode : SyntaxNode
         {
-            return GetCandidateSymbols(GetSemanticModel(node).GetSymbolInfo(node)).ToImmutableArray();
+            var symbolInfo = GetSemanticModel(node).GetSymbolInfo(node);
 
-            static IEnumerable<ISymbol> GetCandidateSymbols(SymbolInfo symbolInfo)
-            {
-                return new[] { symbolInfo.Symbol }
-                    .Concat(symbolInfo.CandidateSymbols)
-                    .Select(GetOriginalDefinition)
-                    .WhereNotNull();
-            }
+            return new[] { symbolInfo.Symbol }
+                .Concat(symbolInfo.CandidateSymbols)
+                .Select(GetOriginalDefinition)
+                .WhereNotNull()
+                .ToImmutableArray();
 
             static ISymbol GetOriginalDefinition(ISymbol candidateSymbol)
             {
