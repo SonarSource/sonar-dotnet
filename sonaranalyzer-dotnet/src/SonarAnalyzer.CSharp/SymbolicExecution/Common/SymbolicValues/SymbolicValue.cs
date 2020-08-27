@@ -229,31 +229,30 @@ namespace SonarAnalyzer.SymbolicExecution
         private static IEnumerable<ProgramState> UpdateStringConstraint(StringConstraint constraint, ProgramState programState, StringConstraint oldStringConstraint, SymbolicValue sv)
         {
             //FIXME: Redesing
+            // oldStringConstraint is never FullOrNullString or NotWhiteSpaceString
             var newFullStringConstraint = constraint == StringConstraint.FullString;
             var newEmptyStringConstraint = constraint == StringConstraint.EmptyString;
             var newFullOrNullStringConstraint = constraint == StringConstraint.FullOrNullString;
+            var newFullNotWhiteSpaceStringConstraint = constraint == StringConstraint.FullNotWhiteSpaceString;
+            var newWhiteSpaceStringConstraint = constraint == StringConstraint.WhiteSpaceString;
+            var newNotWhiteSpaceStringConstraint = constraint == StringConstraint.NotWhiteSpaceString;
             var oldFullStringConstraint = oldStringConstraint == StringConstraint.FullString;
             var oldEmptyStringConstraint = oldStringConstraint == StringConstraint.EmptyString;
+            var oldFullNotWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.FullNotWhiteSpaceString;
+            var oldWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.WhiteSpaceString;
 
-            // oldStringConstraint is never FullOrNullString or NotWhiteSpaceString
             // constraints are empty Related Related
-            if (((newFullStringConstraint && oldEmptyStringConstraint)
-                || (newEmptyStringConstraint && oldFullStringConstraint))
+            if ((newFullStringConstraint && oldEmptyStringConstraint)
+                || (newEmptyStringConstraint && oldFullStringConstraint)
                 || (newFullOrNullStringConstraint && oldEmptyStringConstraint))
             {
                 return Enumerable.Empty<ProgramState>();
             }
 
-            var newFullNotWhiteSpaceStringConstraint = constraint == StringConstraint.FullNotWhiteSpaceString;
-            var newWhiteSpaceStringConstraint = constraint == StringConstraint.WhiteSpaceString;
-            var newNotWhiteSpaceStringConstraint = constraint == StringConstraint.NotWhiteSpaceString;
-            var oldFullNotWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.FullNotWhiteSpaceString;
-            var oldWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.WhiteSpaceString;
-
             // constraints are white space Related
-            if (((newFullNotWhiteSpaceStringConstraint && oldWhiteSpaceStringConstraint //FIXME: Bad parenthesis pairs
-                || (newWhiteSpaceStringConstraint && oldFullNotWhiteSpaceStringConstraint))
-                || (newNotWhiteSpaceStringConstraint && oldWhiteSpaceStringConstraint)))
+            if ((newFullNotWhiteSpaceStringConstraint && oldWhiteSpaceStringConstraint)
+                || (newWhiteSpaceStringConstraint && oldFullNotWhiteSpaceStringConstraint)
+                || (newNotWhiteSpaceStringConstraint && oldWhiteSpaceStringConstraint))
             {
                 return Enumerable.Empty<ProgramState>();
             }
@@ -268,8 +267,8 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             return (newWhiteSpaceStringConstraint && oldFullStringConstraint) || (newFullNotWhiteSpaceStringConstraint && oldFullStringConstraint)
-                ? (new[] { programState.SetConstraint(sv, constraint) })
-                : (new[] { programState });
+                ? new[] { programState.SetConstraint(sv, constraint) }
+                : new[] { programState };
         }
 
         private static Exception UnexpectedConstraintException(SymbolicValueConstraint constraint) =>
