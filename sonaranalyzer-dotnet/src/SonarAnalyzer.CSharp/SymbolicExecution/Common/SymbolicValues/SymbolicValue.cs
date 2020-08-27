@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,175 +37,87 @@ namespace SonarAnalyzer.SymbolicExecution
         public static readonly SymbolicValue This = new ThisSymbolicValue();
         public static readonly SymbolicValue Base = new BaseSymbolicValue();
 
-        private class BoolLiteralSymbolicValue : SymbolicValue
-        {
-            internal BoolLiteralSymbolicValue(bool value)
-                : base(value)
-            {
-            }
-        }
-
-        private class ThisSymbolicValue : SymbolicValue
-        {
-            internal ThisSymbolicValue()
-                : base(new object())
-            {
-            }
-
-            public override string ToString()
-            {
-                return "SV_THIS";
-            }
-        }
-
-        private class BaseSymbolicValue : SymbolicValue
-        {
-            internal BaseSymbolicValue()
-                : base(new object())
-            {
-            }
-
-            public override string ToString()
-            {
-                return "SV_BASE";
-            }
-        }
-
-        private class NullSymbolicValue : SymbolicValue
-        {
-            internal NullSymbolicValue()
-                : base(new object())
-            {
-            }
-
-            public override string ToString()
-            {
-                return "SV_NULL";
-            }
-        }
-
         protected readonly object identifier;
 
-        private static int SymbolicValueCounter;
+        private static int symbolicValueCounter;
 
-        public SymbolicValue()
-            : this(SymbolicValueCounter++)
-        {
-        }
+        public SymbolicValue() : this(symbolicValueCounter++) { }
 
-        private SymbolicValue(object identifier)
-        {
-            this.identifier = identifier;
-        }
+        private SymbolicValue(object identifier) => this.identifier = identifier;
 
-        internal static SymbolicValue Create(ITypeSymbol type = null)
+        internal static SymbolicValue Create(ITypeSymbol type = null) =>
+            type != null && type.OriginalDefinition.Is(KnownType.System_Nullable_T)
+                ? new NullableSymbolicValue(new SymbolicValue())
+                : new SymbolicValue();
+
+        public override string ToString() =>
+            identifier == null ? base.ToString() : "SV_" + identifier;
+
+        public bool TryGetConstraints(ProgramState programState, out SymbolicValueConstraints constraints) =>
+            programState.Constraints.TryGetValue(this, out constraints);
+
+        public bool IsNull(ProgramState programState) =>
+            programState.HasConstraint(this, ObjectConstraint.Null);
+
+        public virtual IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
         {
-            if (type != null &&
-                type.OriginalDefinition.Is(KnownType.System_Nullable_T))
+            if (constraint == null)
             {
-                return new NullableSymbolicValue(new SymbolicValue());
+                return new[] { programState };
             }
-
-            return new SymbolicValue();
-        }
-
-        public override string ToString()
-        {
-            if (this.identifier != null)
+            // This condition is added first because the way of setting string constraints
+            // when the value doesnt exist is different than the other types of constraints
+            else if (constraint is StringConstraint stringConstraint)
             {
-                return "SV_" + this.identifier;
+                return TrySetStringConstraint(stringConstraint, programState);
             }
-
-            return base.ToString();
+            else if (!programState.Constraints.TryGetValue(this, out var oldConstraints))
+            {
+                return new[] { programState.SetConstraint(this, constraint) };
+            }
+            else if (constraint is BoolConstraint boolConstraint)
+            {
+                return TrySetBoolConstraint(boolConstraint, oldConstraints, programState);
+            }
+            else if (constraint is ObjectConstraint objectConstraint)
+            {
+                return TrySetObjectConstraint(objectConstraint, oldConstraints, programState);
+            }
+            else if (constraint is NullableValueConstraint
+                || constraint is DisposableConstraint
+                || constraint is CollectionCapacityConstraint
+                || constraint is SerializationConstraint)
+            {
+                return new[] { programState };
+            }
+            else
+            {
+                throw UnexpectedConstraintException(constraint);
+            }
         }
 
-        public bool TryGetConstraints(ProgramState programState, out SymbolicValueConstraints constraints)
-        {
-            return programState.Constraints.TryGetValue(this, out constraints);
-        }
+        public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState) =>
+            TrySetConstraint(constraint?.OppositeForLogicalNot, programState);
 
-        public bool IsNull(ProgramState programState)
-        {
-            return programState.HasConstraint(this, ObjectConstraint.Null);
-        }
+        public IEnumerable<ProgramState> TrySetConstraints(SymbolicValueConstraints constraints, ProgramState programState) =>
+            TrySetConstraints(constraints, programState, false);
 
-        protected IEnumerable<ProgramState> ThrowIfTooMany(IEnumerable<ProgramState> states)
+        public IEnumerable<ProgramState> TrySetOppositeConstraints(SymbolicValueConstraints constraints, ProgramState programState) =>
+            TrySetConstraints(constraints, programState, true);
+
+        protected static IEnumerable<ProgramState> ThrowIfTooMany(IEnumerable<ProgramState> states)
         {
             var stateList = states.ToList();
             if (stateList.Count >= AbstractExplodedGraph.MaxInternalStateCount)
             {
                 throw new TooManyInternalStatesException();
             }
-
             return stateList;
         }
 
-        public virtual IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint,
-            ProgramState programState)
+        private IEnumerable<ProgramState> TrySetConstraints(SymbolicValueConstraints constraints, ProgramState programState, bool isOppositeConstraints)
         {
-            if (constraint == null)
-            {
-                return new[] { programState };
-            }
-
-            // This condition is added first because the way of setting string constraints
-            // when the value doesnt exist is different than the other types of constraints
-            if (constraint is StringConstraint stringConstraint)
-            {
-                return TrySetStringConstraint(stringConstraint,  programState);
-            }
-
-            if (!programState.Constraints.TryGetValue(this, out var oldConstraints))
-            {
-                return new[] { programState.SetConstraint(this, constraint) };
-            }
-
-            if (constraint is BoolConstraint boolConstraint)
-            {
-                return TrySetBoolConstraint(boolConstraint, oldConstraints, programState);
-            }
-
-            if (constraint is ObjectConstraint objectConstraint)
-            {
-                return TrySetObjectConstraint(objectConstraint, oldConstraints, programState);
-            }
-
-            if (constraint is NullableValueConstraint ||
-                constraint is DisposableConstraint ||
-                constraint is CollectionCapacityConstraint ||
-                constraint is SerializationConstraint)
-            {
-                return new[] { programState };
-            }
-
-            throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}, " +
-                $"{nameof(ObjectConstraint)}, {nameof(DisposableConstraint)}, {nameof(CollectionCapacityConstraint)}," +
-                $"{nameof(StringConstraint)} or {nameof(SerializationConstraint)}.");
-        }
-
-        public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint,
-            ProgramState programState)
-        {
-            return TrySetConstraint(constraint?.OppositeForLogicalNot, programState);
-        }
-
-        public IEnumerable<ProgramState> TrySetConstraints(SymbolicValueConstraints constraints,
-            ProgramState programState)
-        {
-            return TrySetConstraints(constraints, programState, false);
-        }
-
-        public IEnumerable<ProgramState> TrySetOppositeConstraints(SymbolicValueConstraints constraints,
-            ProgramState programState)
-        {
-            return TrySetConstraints(constraints, programState, true);
-        }
-
-        private IEnumerable<ProgramState> TrySetConstraints(SymbolicValueConstraints constraints,
-            ProgramState programState, bool isOppositeConstraints)
-        {
-            IEnumerable<ProgramState> programStates = new [] { programState };
-
+            IEnumerable<ProgramState> programStates = new[] { programState };
             if (constraints == null)
             {
                 return programStates;
@@ -213,80 +125,54 @@ namespace SonarAnalyzer.SymbolicExecution
 
             foreach (var constraint in constraints.GetConstraints())
             {
-                programStates = programStates.SelectMany(ps =>
-                    isOppositeConstraints
-                    ? TrySetOppositeConstraint(constraint, ps)
-                    : TrySetConstraint(constraint, ps));
+                programStates = programStates.SelectMany(ps => isOppositeConstraints ? TrySetOppositeConstraint(constraint, ps) : TrySetConstraint(constraint, ps));
             }
-
             return programStates;
         }
 
-        private IEnumerable<ProgramState> TrySetBoolConstraint(BoolConstraint constraint,
-            SymbolicValueConstraints oldConstraints, ProgramState programState)
+        private IEnumerable<ProgramState> TrySetBoolConstraint(BoolConstraint constraint, SymbolicValueConstraints oldConstraints, ProgramState programState)
         {
             if (oldConstraints.HasConstraint(ObjectConstraint.Null))
             {
                 // It was null, and now it should be true or false
                 return new[] { programState };
             }
-
-            var oldBoolConstraint = oldConstraints.GetConstraintOrDefault<BoolConstraint>();
-            if (oldBoolConstraint != null &&
-                oldBoolConstraint != constraint)
+            else if (oldConstraints.GetConstraintOrDefault<BoolConstraint>() is { }  oldBoolConstraint && oldBoolConstraint != constraint)
             {
                 return Enumerable.Empty<ProgramState>();
             }
-
-            // Either same bool constraint, or previously not null, and now a bool constraint
-            return new[] { programState.SetConstraint(this, constraint) };
+            else
+            {
+                // Either same bool constraint, or previously not null, and now a bool constraint
+                return new[] { programState.SetConstraint(this, constraint) };
+            }
         }
 
-        private IEnumerable<ProgramState> TrySetObjectConstraint(ObjectConstraint constraint,
-            SymbolicValueConstraints oldConstraints, ProgramState programState)
+        private IEnumerable<ProgramState> TrySetObjectConstraint(ObjectConstraint constraint, SymbolicValueConstraints oldConstraints, ProgramState programState)
         {
             if (oldConstraints.HasConstraint<StringConstraint>())
             {
-                if (constraint == ObjectConstraint.Null)
-                {
-                    return Enumerable.Empty<ProgramState>();
-                }
-
-                return new[] { programState.SetConstraint(this, constraint) };
+                return constraint == ObjectConstraint.Null ? Enumerable.Empty<ProgramState>() : new[] { programState.SetConstraint(this, constraint) };
             }
-
-            if (oldConstraints.HasConstraint<BoolConstraint>())
+            else if (oldConstraints.HasConstraint<BoolConstraint>())
             {
-                if (constraint == ObjectConstraint.Null)
-                {
-                    return Enumerable.Empty<ProgramState>();
-                }
-
-                return new[] { programState };
+                return constraint == ObjectConstraint.Null ? Enumerable.Empty<ProgramState>() : new[] { programState };
             }
-
-            if (oldConstraints.HasConstraint<DisposableConstraint>())
+            else if (oldConstraints.HasConstraint<DisposableConstraint>())
             {
                 return new[] { programState.SetConstraint(this, constraint) };
             }
-
-            var oldObjectConstraint = oldConstraints.GetConstraintOrDefault<ObjectConstraint>();
-            if (oldObjectConstraint != null)
+            else if (oldConstraints.GetConstraintOrDefault<ObjectConstraint>() is { } oldObjectConstraint)
             {
-                if (oldObjectConstraint != constraint)
-                {
-                    return Enumerable.Empty<ProgramState>();
-                }
-
-                return new[] { programState.SetConstraint(this, constraint) };
+                return oldObjectConstraint != constraint ? Enumerable.Empty<ProgramState>() : new[] { programState.SetConstraint(this, constraint) };
             }
-
-            throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}," +
-                $"{nameof(StringConstraint)} or {nameof(DisposableConstraint)}.");
+            else
+            {
+                throw UnexpectedConstraintException(constraint);
+            }
         }
 
-        private IEnumerable<ProgramState> TrySetStringConstraint(StringConstraint constraint,
-             ProgramState programState)
+        private IEnumerable<ProgramState> TrySetStringConstraint(StringConstraint constraint, ProgramState programState)
         {
             // Currently FullOrNullString is never set as a constraint. the combination of Fullstring + NotNull is equivalent to it.
             // it is used to express the oposite of EmptyString Constraint
@@ -294,127 +180,113 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 return SetNewStringConstraint(constraint, ref programState);
             }
-
-            var oldStringConstraint = oldConstraints.GetConstraintOrDefault<StringConstraint>();
-            if (oldStringConstraint != null)
+            else if (oldConstraints.GetConstraintOrDefault<StringConstraint>() is { } oldStringConstraint)
             {
                 return UpdateStringConstraint(constraint, programState, oldStringConstraint, this);
             }
-
-            var oldObjectConstraint = oldConstraints.GetConstraintOrDefault<ObjectConstraint>();
-            if (oldObjectConstraint != null)
+            else if (oldConstraints.GetConstraintOrDefault<ObjectConstraint>() is { } oldObjectConstraint)
             {
                 return UpdateObjectConstraint(constraint, programState, oldObjectConstraint);
             }
-
-            throw new NotSupportedException($"Neither one of {nameof(ObjectConstraint)}," +
-                $"{nameof(StringConstraint)}.");
+            else
+            {
+                throw UnexpectedConstraintException(constraint);
+            }
         }
 
         private IEnumerable<ProgramState> UpdateObjectConstraint(StringConstraint constraint, ProgramState programState, ObjectConstraint oldObjectConstraint)
         {
             if (oldObjectConstraint == ObjectConstraint.Null)
             {
-                if (constraint == StringConstraint.FullString || constraint == StringConstraint.EmptyString
-                    || constraint == StringConstraint.FullNotWhiteSpaceString || constraint == StringConstraint.WhiteSpaceString)
-                {
-                    return Enumerable.Empty<ProgramState>();
-                }
-                return new[] { programState };
+                return StringConstraint.IsNotNullConstraint(constraint) ? Enumerable.Empty<ProgramState>() : new[] { programState };
+            }
+            else if (constraint == StringConstraint.FullOrNullString)
+            {
+                return new[] { programState.SetConstraint(this, StringConstraint.FullString) };
+            }
+            else if (constraint == StringConstraint.NotWhiteSpaceString)
+            {
+                return new[] { programState.SetConstraint(this, StringConstraint.FullNotWhiteSpaceString) };
             }
             else
             {
-                if(constraint == StringConstraint.FullOrNullString)
-                {
-                    return new[] { programState.SetConstraint(this, StringConstraint.FullString) };
-                }
-
-                if (constraint == StringConstraint.NotWhiteSpaceString)
-                {
-                    return new[] { programState.SetConstraint(this, StringConstraint.FullNotWhiteSpaceString) };
-                }
-
                 return new[] { programState.SetConstraint(this, constraint) };
             }
         }
 
-        private static IEnumerable<ProgramState> UpdateStringConstraint(StringConstraint constraint, ProgramState programState, StringConstraint oldStringConstraint, SymbolicValue sv)
+        private static IEnumerable<ProgramState> UpdateStringConstraint(StringConstraint constraint, ProgramState programState, StringConstraint oldConstraint, SymbolicValue sv)
         {
-            var newFullStringConstraint = constraint == StringConstraint.FullString;
-            var newEmptyStringConstraint = constraint == StringConstraint.EmptyString;
-            var newFullOrNullStringConstraint = constraint == StringConstraint.FullOrNullString;
-            var oldFullStringConstraint = oldStringConstraint == StringConstraint.FullString;
-            var oldEmptyStringConstraint = oldStringConstraint == StringConstraint.EmptyString;
+            // oldConstraint is never FullOrNullString nor NotWhiteSpaceString
+            var newFullString = constraint == StringConstraint.FullString;
+            var newEmptyString = constraint == StringConstraint.EmptyString;
+            var newFullOrNullString = constraint == StringConstraint.FullOrNullString;
+            var newFullNotWhiteSpaceString = constraint == StringConstraint.FullNotWhiteSpaceString;
+            var newWhiteSpaceString = constraint == StringConstraint.WhiteSpaceString;
+            var newNotWhiteSpaceString = constraint == StringConstraint.NotWhiteSpaceString;
 
-            // oldStringConstraint is never FullOrNullString or NotWhiteSpaceString
-            // constraints are empty Related Related
-            if (((newFullStringConstraint && oldEmptyStringConstraint)
-                || (newEmptyStringConstraint && oldFullStringConstraint))
-                || (newFullOrNullStringConstraint && oldEmptyStringConstraint))
+            if (oldConstraint == StringConstraint.EmptyString && (newFullString || newFullOrNullString || newFullNotWhiteSpaceString || newWhiteSpaceString))
             {
                 return Enumerable.Empty<ProgramState>();
             }
-
-            var newFullNotWhiteSpaceStringConstraint = constraint == StringConstraint.FullNotWhiteSpaceString;
-            var newWhiteSpaceStringConstraint = constraint == StringConstraint.WhiteSpaceString;
-            var newNotWhiteSpaceStringConstraint = constraint == StringConstraint.NotWhiteSpaceString;
-            var oldFullNotWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.FullNotWhiteSpaceString;
-            var oldWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.WhiteSpaceString;
-
-            // constraints are white space Related
-            if (((newFullNotWhiteSpaceStringConstraint && oldWhiteSpaceStringConstraint
-                || (newWhiteSpaceStringConstraint && oldFullNotWhiteSpaceStringConstraint))
-                || (newNotWhiteSpaceStringConstraint && oldWhiteSpaceStringConstraint)))
+            else if (oldConstraint == StringConstraint.WhiteSpaceString && (newFullNotWhiteSpaceString || newNotWhiteSpaceString || newEmptyString))
             {
                 return Enumerable.Empty<ProgramState>();
             }
-
-            // constraints are mixed space Related
-            if ((newEmptyStringConstraint && oldFullNotWhiteSpaceStringConstraint)
-               || (newEmptyStringConstraint && oldWhiteSpaceStringConstraint)
-               || (newFullNotWhiteSpaceStringConstraint && oldEmptyStringConstraint)
-               || (newWhiteSpaceStringConstraint && oldEmptyStringConstraint))
+            else if (oldConstraint == StringConstraint.FullNotWhiteSpaceString && (newWhiteSpaceString || newEmptyString))
             {
                 return Enumerable.Empty<ProgramState>();
             }
-
-
-            if ((newWhiteSpaceStringConstraint && oldFullStringConstraint)
-                ||(newFullNotWhiteSpaceStringConstraint && oldFullStringConstraint))
+            else if (oldConstraint == StringConstraint.FullString && newEmptyString)
+            {
+                return Enumerable.Empty<ProgramState>();
+            }
+            else if (oldConstraint == StringConstraint.FullString && (newWhiteSpaceString || newFullNotWhiteSpaceString))
             {
                 return new[] { programState.SetConstraint(sv, constraint) };
             }
-
-            return new[] { programState };
+            else
+            {
+                return new[] { programState };
+            }
         }
 
         private IEnumerable<ProgramState> SetNewStringConstraint(StringConstraint constraint, ref ProgramState programState)
         {
-            if (constraint == StringConstraint.FullString)
+            if (StringConstraint.IsNotNullConstraint(constraint))
             {
-                programState = programState.SetConstraint(this, StringConstraint.FullString);
+                programState = programState.SetConstraint(this, constraint);
                 programState = programState.SetConstraint(this, ObjectConstraint.NotNull);
             }
-
-            else if (constraint == StringConstraint.EmptyString)
-            {
-                programState = programState.SetConstraint(this, StringConstraint.EmptyString);
-                programState = programState.SetConstraint(this, ObjectConstraint.NotNull);
-            }
-
-            else if (constraint == StringConstraint.WhiteSpaceString)
-            {
-                programState = programState.SetConstraint(this, StringConstraint.WhiteSpaceString);
-                programState = programState.SetConstraint(this, ObjectConstraint.NotNull);
-            }
-
-            else if (constraint == StringConstraint.FullNotWhiteSpaceString)
-            {
-                programState = programState.SetConstraint(this, StringConstraint.FullNotWhiteSpaceString);
-                programState = programState.SetConstraint(this, ObjectConstraint.NotNull);
-            }
-
             return new[] { programState };
+        }
+
+        private static Exception UnexpectedConstraintException(SymbolicValueConstraint constraint) =>
+            new NotSupportedException($"Unexpected constraint type: {constraint.GetType().Name}.");
+
+        private class BoolLiteralSymbolicValue : SymbolicValue
+        {
+            internal BoolLiteralSymbolicValue(bool value) : base(value) { }
+        }
+
+        private class ThisSymbolicValue : SymbolicValue
+        {
+            internal ThisSymbolicValue() : base(new object()) { }
+
+            public override string ToString() => "SV_THIS";
+        }
+
+        private class BaseSymbolicValue : SymbolicValue
+        {
+            internal BaseSymbolicValue() : base(new object()) { }
+
+            public override string ToString() => "SV_BASE";
+        }
+
+        private class NullSymbolicValue : SymbolicValue
+        {
+            internal NullSymbolicValue() : base(new object()) { }
+
+            public override string ToString() => "SV_NULL";
         }
     }
 }
