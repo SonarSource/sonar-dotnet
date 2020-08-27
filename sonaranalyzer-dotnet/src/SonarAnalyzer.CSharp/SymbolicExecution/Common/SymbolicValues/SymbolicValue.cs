@@ -237,8 +237,6 @@ namespace SonarAnalyzer.SymbolicExecution
             var newWhiteSpaceStringConstraint = constraint == StringConstraint.WhiteSpaceString;
             var newNotWhiteSpaceStringConstraint = constraint == StringConstraint.NotWhiteSpaceString;
             var oldFullStringConstraint = oldStringConstraint == StringConstraint.FullString;
-            var oldFullNotWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.FullNotWhiteSpaceString;
-            var oldWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.WhiteSpaceString;
 
             if (oldStringConstraint == StringConstraint.EmptyString
                 && (newFullStringConstraint || newFullOrNullStringConstraint || newFullNotWhiteSpaceStringConstraint || newWhiteSpaceStringConstraint))
@@ -246,23 +244,19 @@ namespace SonarAnalyzer.SymbolicExecution
                 return Enumerable.Empty<ProgramState>();
             }
 
-            // constraints are empty Related Related
+            if(oldStringConstraint == StringConstraint.WhiteSpaceString
+                && (newFullNotWhiteSpaceStringConstraint || newNotWhiteSpaceStringConstraint || newEmptyStringConstraint))
+            {
+                return Enumerable.Empty<ProgramState>();
+            }
+
+            if(oldStringConstraint == StringConstraint.FullNotWhiteSpaceString
+                && (newWhiteSpaceStringConstraint || newEmptyStringConstraint))
+            {
+                return Enumerable.Empty<ProgramState>();
+            }
+
             if (newEmptyStringConstraint && oldFullStringConstraint)
-            {
-                return Enumerable.Empty<ProgramState>();
-            }
-
-            // constraints are white space Related
-            if ((newFullNotWhiteSpaceStringConstraint && oldWhiteSpaceStringConstraint)
-                || (newWhiteSpaceStringConstraint && oldFullNotWhiteSpaceStringConstraint)
-                || (newNotWhiteSpaceStringConstraint && oldWhiteSpaceStringConstraint))
-            {
-                return Enumerable.Empty<ProgramState>();
-            }
-
-            // constraints are mixed space Related
-            if ((newEmptyStringConstraint && oldFullNotWhiteSpaceStringConstraint)
-               || (newEmptyStringConstraint && oldWhiteSpaceStringConstraint))
             {
                 return Enumerable.Empty<ProgramState>();
             }
