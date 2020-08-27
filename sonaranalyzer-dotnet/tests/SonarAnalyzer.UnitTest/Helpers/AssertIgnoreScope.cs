@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,26 +29,23 @@ namespace SonarAnalyzer.UnitTest.Helpers
     /// </summary>
     public sealed class AssertIgnoreScope : IDisposable
     {
+        private readonly DefaultTraceListener listener;
+
         public AssertIgnoreScope()
         {
-#if NETFRAMEWORK // .Net Framework specific API
-            var listener = Debug.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
+            listener = Trace.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
             if (listener != null)
             {
                 listener.AssertUiEnabled = false;
             }
-#endif
         }
 
         public void Dispose()
         {
-#if NETFRAMEWORK // .Net Framework specific API
-            var listener = Debug.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
             if (listener != null)
             {
                 listener.AssertUiEnabled = true;
             }
-#endif
         }
     }
 }
