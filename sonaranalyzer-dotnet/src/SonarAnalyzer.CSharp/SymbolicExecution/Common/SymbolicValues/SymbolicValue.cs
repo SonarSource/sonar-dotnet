@@ -37,32 +37,6 @@ namespace SonarAnalyzer.SymbolicExecution
         public static readonly SymbolicValue This = new ThisSymbolicValue();
         public static readonly SymbolicValue Base = new BaseSymbolicValue();
 
-        private class BoolLiteralSymbolicValue : SymbolicValue
-        {
-            internal BoolLiteralSymbolicValue(bool value) : base(value) { }
-        }
-
-        private class ThisSymbolicValue : SymbolicValue
-        {
-            internal ThisSymbolicValue() : base(new object()) { }
-
-            public override string ToString() => "SV_THIS";
-        }
-
-        private class BaseSymbolicValue : SymbolicValue
-        {
-            internal BaseSymbolicValue() : base(new object()) { }
-
-            public override string ToString() => "SV_BASE";
-        }
-
-        private class NullSymbolicValue : SymbolicValue
-        {
-            internal NullSymbolicValue() : base(new object()) { }
-
-            public override string ToString() => "SV_NULL";
-        }
-
         protected readonly object identifier;
 
         private static int symbolicValueCounter;
@@ -391,6 +365,32 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             return new[] { programState };
+        }
+
+        private class BoolLiteralSymbolicValue : SymbolicValue
+        {
+            internal BoolLiteralSymbolicValue(bool value) : base(value) { }
+        }
+
+        private class ThisSymbolicValue : SymbolicValue
+        {
+            internal ThisSymbolicValue() : base(new object()) { }
+
+            public override string ToString() => "SV_THIS";
+        }
+
+        private class BaseSymbolicValue : SymbolicValue
+        {
+            internal BaseSymbolicValue() : base(new object()) { }
+
+            public override string ToString() => "SV_BASE";
+        }
+
+        private class NullSymbolicValue : SymbolicValue
+        {
+            internal NullSymbolicValue() : base(new object()) { }
+
+            public override string ToString() => "SV_NULL";
         }
     }
 }
