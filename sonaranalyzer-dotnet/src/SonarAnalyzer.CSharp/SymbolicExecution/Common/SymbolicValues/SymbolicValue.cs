@@ -235,34 +235,31 @@ namespace SonarAnalyzer.SymbolicExecution
             var newFullNotWhiteSpaceString = constraint == StringConstraint.FullNotWhiteSpaceString;
             var newWhiteSpaceString = constraint == StringConstraint.WhiteSpaceString;
             var newNotWhiteSpaceString = constraint == StringConstraint.NotWhiteSpaceString;
-            var oldFullString = oldConstraint == StringConstraint.FullString;
 
-            if (oldConstraint == StringConstraint.EmptyString
-                && (newFullString || newFullOrNullString || newFullNotWhiteSpaceString || newWhiteSpaceString))
+            if (oldConstraint == StringConstraint.EmptyString && (newFullString || newFullOrNullString || newFullNotWhiteSpaceString || newWhiteSpaceString))
             {
                 return Enumerable.Empty<ProgramState>();
             }
-
-            if(oldConstraint == StringConstraint.WhiteSpaceString
-                && (newFullNotWhiteSpaceString || newNotWhiteSpaceString || newEmptyString))
+            else if (oldConstraint == StringConstraint.WhiteSpaceString && (newFullNotWhiteSpaceString || newNotWhiteSpaceString || newEmptyString))
             {
                 return Enumerable.Empty<ProgramState>();
             }
-
-            if(oldConstraint == StringConstraint.FullNotWhiteSpaceString
-                && (newWhiteSpaceString || newEmptyString))
+            else if (oldConstraint == StringConstraint.FullNotWhiteSpaceString && (newWhiteSpaceString || newEmptyString))
             {
                 return Enumerable.Empty<ProgramState>();
             }
-
-            if (newEmptyString && oldFullStringConstraint)
+            else if (oldConstraint == StringConstraint.FullString && newEmptyString)
             {
                 return Enumerable.Empty<ProgramState>();
             }
-
-            return (newWhiteSpaceString && oldFullStringConstraint) || (newFullNotWhiteSpaceString && oldFullStringConstraint)
-                ? new[] { programState.SetConstraint(sv, constraint) }
-                : new[] { programState };
+            else if (oldConstraint == StringConstraint.FullString && (newWhiteSpaceString || newFullNotWhiteSpaceString))
+            {
+                return new[] { programState.SetConstraint(sv, constraint) };
+            }
+            else
+            {
+                return new[] { programState };
+            }
         }
 
         private static Exception UnexpectedConstraintException(SymbolicValueConstraint constraint) =>
