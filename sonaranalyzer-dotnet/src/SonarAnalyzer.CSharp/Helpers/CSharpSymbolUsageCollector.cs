@@ -42,12 +42,7 @@ namespace SonarAnalyzer.Helpers
             SyntaxKind.PreDecrementExpression
         };
 
-        // The types names (from .Net) defined here are very common and can slow down the analysis significantly
-        // (see entity framework migration files) but use this list carefully since it can lead to false positives
-        // if the names are redefined in the user code.
-        private static readonly ImmutableHashSet<string> ignoredConstructors = ImmutableHashSet.Create("Guid", "System.Guid");
-
-        private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
+        private readonly Compilation compilation;
         private readonly HashSet<string> knownSymbolNames;
 
         public ISet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
@@ -58,25 +53,21 @@ namespace SonarAnalyzer.Helpers
         public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } =
             new Dictionary<ISymbol, SymbolUsage>();
 
-        private List<SymbolUsage> GetFieldSymbolUsagesList(List<ISymbol> symbols) => symbols.Select(GetFieldSymbolUsage).ToList();
-
-        private SymbolUsage GetFieldSymbolUsage(ISymbol symbol) => FieldSymbolUsages.GetOrAdd(symbol, s => new SymbolUsage(s));
-
         public HashSet<string> DebuggerDisplayValues { get; } =
             new HashSet<string>();
 
         public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } =
             new Dictionary<IPropertySymbol, AccessorAccess>();
 
-        public CSharpSymbolUsageCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel, HashSet<string> knownSymbolNames)
+        public CSharpSymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
         {
-            this.getSemanticModel = node => getSemanticModel(node.SyntaxTree, false);
-            this.knownSymbolNames = knownSymbolNames;
+            this.compilation = compilation;
+            knownSymbolNames = knownSymbols.SelectMany(GetNames).ToHashSet();
         }
 
         public override void VisitAttribute(AttributeSyntax node)
         {
-            var semanticModel = getSemanticModel(node);
+            var semanticModel = GetSemanticModel(node);
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
             if (symbol != null &&
                 symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute) &&
@@ -103,32 +94,97 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
-            var symbols = GetSymbols(node, IsKnownIdentifier).ToList();
-
-            TryStoreFieldAccess(node, symbols);
-
-            UsedSymbols.UnionWith(symbols);
-
-            TryStorePropertyAccess(node, symbols);
+            if (IsKnownIdentifier(node.Identifier))
+            {
+                var symbols = GetSymbols(node);
+                TryStoreFieldAccess(node, symbols);
+                UsedSymbols.UnionWith(symbols);
+                TryStorePropertyAccess(node, symbols);
+            }
 
             base.VisitIdentifierName(node);
         }
 
-        private void TryStoreFieldAccess(IdentifierNameSyntax node, List<ISymbol> symbols)
+        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
-            var access = ParentAccessType(node);
-            var fieldSymbolUsagesList = GetFieldSymbolUsagesList(symbols);
-            if (HasFlag(access, SymbolAccess.Read))
+            if (knownSymbolNames.Contains(node.Type.GetName()))
             {
-                fieldSymbolUsagesList.ForEach(usage => usage.Readings.Add(node));
+                UsedSymbols.UnionWith(GetSymbols(node));
             }
 
-            if (HasFlag(access, SymbolAccess.Write))
+            base.VisitObjectCreationExpression(node);
+        }
+
+        public override void VisitGenericName(GenericNameSyntax node)
+        {
+            if (IsKnownIdentifier(node.Identifier))
             {
-                fieldSymbolUsagesList.ForEach(usage => usage.Writings.Add(node));
+                UsedSymbols.UnionWith(GetSymbols(node));
             }
 
-            static bool HasFlag(SymbolAccess symbolAccess, SymbolAccess flag) => (symbolAccess & flag) != 0;
+            base.VisitGenericName(node);
+        }
+
+        public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
+        {
+            var symbols = GetSymbols(node);
+            UsedSymbols.UnionWith(symbols);
+            TryStorePropertyAccess(node, symbols);
+            base.VisitElementAccessExpression(node);
+        }
+
+        public override void VisitConstructorInitializer(ConstructorInitializerSyntax node)
+        {
+            // In this case (":base()") we cannot check at the syntax level if the constructor name is in the list
+            // of known names so we have to check for symbols.
+            UsedSymbols.UnionWith(GetSymbols(node));
+
+            base.VisitConstructorInitializer(node);
+        }
+
+        public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
+        {
+            // We are visiting a ctor with no initializer and the compiler will automatically
+            // call the default constructor of the type if declared, or the base type if the
+            // current type does not declare a default constructor.
+            if (node.Initializer == null && IsKnownIdentifier(node.Identifier))
+            {
+                var constructor = (IMethodSymbol)GetDeclaredSymbol(node);
+                var implicitlyCalledConstructor = GetImplicitlyCalledConstructor(constructor);
+                if (implicitlyCalledConstructor != null)
+                {
+                    UsedSymbols.Add(implicitlyCalledConstructor);
+                }
+            }
+
+            base.VisitConstructorDeclaration(node);
+        }
+
+        public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
+        {
+            if (IsKnownIdentifier(node.Identifier))
+            {
+                var usage = GetFieldSymbolUsage(GetDeclaredSymbol(node));
+                usage.Declaration = node;
+                if (node.Initializer != null)
+                {
+                    usage.Initializer = node;
+                }
+            }
+
+            base.VisitVariableDeclarator(node);
+        }
+
+        public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
+        {
+            if (node.Initializer != null &&
+                IsKnownIdentifier(node.Identifier))
+            {
+                var symbol = GetDeclaredSymbol(node);
+                UsedSymbols.Add(symbol);
+                StorePropertyAccess((IPropertySymbol)symbol, AccessorAccess.Set);
+            }
+            base.VisitPropertyDeclaration(node);
         }
 
         private SymbolAccess ParentAccessType(SyntaxNode node)
@@ -174,7 +230,7 @@ namespace SonarAnalyzer.Helpers
                     // node++
                     return SymbolAccess.Write | ParentAccessType(expressionSyntax);
                 case ArrowExpressionClauseSyntax arrowExpressionClause when arrowExpressionClause.Parent is MethodDeclarationSyntax arrowMethod:
-                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, getSemanticModel(arrowMethod))
+                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, GetSemanticModel(arrowMethod))
                         ? SymbolAccess.None
                         : SymbolAccess.Read;
                 default:
@@ -182,101 +238,21 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
-        {
-            if (!ignoredConstructors.Contains(node.Type.GetName()))
-            {
-                UsedSymbols.UnionWith(GetSymbols(node, x => true));
-            }
-
-            base.VisitObjectCreationExpression(node);
-        }
-
-        public override void VisitGenericName(GenericNameSyntax node)
-        {
-            UsedSymbols.UnionWith(GetSymbols(node, IsKnownIdentifier));
-            base.VisitGenericName(node);
-        }
-
-        public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
-        {
-            var symbols = GetSymbols(node, x => true).ToList();
-            UsedSymbols.UnionWith(symbols);
-
-            TryStorePropertyAccess(node, symbols);
-
-            base.VisitElementAccessExpression(node);
-        }
-
-        public override void VisitConstructorInitializer(ConstructorInitializerSyntax node)
-        {
-            UsedSymbols.UnionWith(GetSymbols(node, x => true));
-            base.VisitConstructorInitializer(node);
-        }
-
-        public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
-        {
-            // We are visiting a ctor with no initializer and the compiler will automatically
-            // call the default constructor of the type if declared, or the base type if the
-            // current type does not declare a default constructor.
-            if (node.Initializer == null)
-            {
-                var constructor = (IMethodSymbol)GetDeclaredSymbol(node);
-                var implicitlyCalledConstructor = GetImplicitlyCalledConstructor(constructor);
-                if (implicitlyCalledConstructor != null)
-                {
-                    UsedSymbols.Add(implicitlyCalledConstructor);
-                }
-            }
-
-            base.VisitConstructorDeclaration(node);
-        }
-
-        public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
-        {
-            if (knownSymbolNames.Contains(node.Identifier.ValueText))
-            {
-                var usage = GetFieldSymbolUsage(GetDeclaredSymbol(node));
-                usage.Declaration = node;
-                if (node.Initializer != null)
-                {
-                    usage.Initializer = node;
-                }
-            }
-
-            base.VisitVariableDeclarator(node);
-        }
-
-        public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
-        {
-            if (node.Initializer != null)
-            {
-                var symbol = GetDeclaredSymbol(node);
-                UsedSymbols.Add(symbol);
-                StorePropertyAccess((IPropertySymbol)symbol, AccessorAccess.Set);
-            }
-            base.VisitPropertyDeclaration(node);
-        }
-
         /// <summary>
         /// Given a node, it tries to get the symbol or the candidate symbols (if the compiler cannot find the symbol,
         /// .e.g when the code cannot compile).
         /// </summary>
         /// <returns>List of symbols</returns>
-        private IEnumerable<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node, Func<TSyntaxNode, bool> condition)
+        private ImmutableArray<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node)
             where TSyntaxNode : SyntaxNode
         {
-            return condition(node)
-                ? GetCandidateSymbols(getSemanticModel(node).GetSymbolInfo(node))
-                : Enumerable.Empty<ISymbol>();
+            var symbolInfo = GetSemanticModel(node).GetSymbolInfo(node);
 
-            static IEnumerable<ISymbol> GetCandidateSymbols(SymbolInfo symbolInfo)
-            {
-                return new[] { symbolInfo.Symbol }
-                    .Concat(symbolInfo.CandidateSymbols)
-                    .Select(GetOriginalDefinition)
-                    .WhereNotNull();
-            }
+            return new[] { symbolInfo.Symbol }
+                .Concat(symbolInfo.CandidateSymbols)
+                .Select(GetOriginalDefinition)
+                .WhereNotNull()
+                .ToImmutableArray();
 
             static ISymbol GetOriginalDefinition(ISymbol candidateSymbol)
             {
@@ -289,7 +265,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private void TryStorePropertyAccess(ExpressionSyntax node, List<ISymbol> identifierSymbols)
+        private void TryStorePropertyAccess(ExpressionSyntax node, IEnumerable<ISymbol> identifierSymbols)
         {
             var propertySymbols = identifierSymbols.OfType<IPropertySymbol>().ToList();
             if (propertySymbols.Any())
@@ -336,7 +312,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             // nameof(Prop) --> get/set
-            if (node.IsInNameOfArgument(getSemanticModel(node)))
+            if (node.IsInNameOfArgument(GetSemanticModel(node)))
             {
                 return AccessorAccess.Both;
             }
@@ -347,11 +323,36 @@ namespace SonarAnalyzer.Helpers
                 : AccessorAccess.Get;
         }
 
-        private bool IsKnownIdentifier(SimpleNameSyntax nameSyntax) =>
-            knownSymbolNames.Contains(nameSyntax.Identifier.ValueText);
+        private bool IsKnownIdentifier(SyntaxToken identifier) =>
+            knownSymbolNames.Contains(identifier.ValueText);
 
         private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
-            getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
+            GetSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
+
+        private void TryStoreFieldAccess(IdentifierNameSyntax node, IEnumerable<ISymbol> symbols)
+        {
+            var access = ParentAccessType(node);
+            var fieldSymbolUsagesList = GetFieldSymbolUsagesList(symbols);
+            if (HasFlag(access, SymbolAccess.Read))
+            {
+                fieldSymbolUsagesList.ForEach(usage => usage.Readings.Add(node));
+            }
+
+            if (HasFlag(access, SymbolAccess.Write))
+            {
+                fieldSymbolUsagesList.ForEach(usage => usage.Writings.Add(node));
+            }
+
+            static bool HasFlag(SymbolAccess symbolAccess, SymbolAccess flag) => (symbolAccess & flag) != 0;
+        }
+
+        private List<SymbolUsage> GetFieldSymbolUsagesList(IEnumerable<ISymbol> symbols) =>
+            symbols.Select(GetFieldSymbolUsage).ToList();
+
+        private SymbolUsage GetFieldSymbolUsage(ISymbol symbol) =>
+            FieldSymbolUsages.GetOrAdd(symbol, s => new SymbolUsage(s));
+
+        private SemanticModel GetSemanticModel(SyntaxNode node) => compilation.GetSemanticModel(node.SyntaxTree);
 
         private static SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
         {
@@ -401,5 +402,15 @@ namespace SonarAnalyzer.Helpers
 
         private static bool IsDefaultConstructor(IMethodSymbol constructor) =>
             constructor.Parameters.Length == 0;
+
+        private static IEnumerable<string> GetNames(ISymbol symbol)
+        {
+            if (symbol.IsConstructor())
+            {
+                yield return symbol.ContainingType.Name;
+            }
+
+            yield return symbol.Name;
+        }
     }
 }
