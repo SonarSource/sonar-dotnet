@@ -50,8 +50,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         internal static SymbolicValue Create(ITypeSymbol type = null)
         {
-            if (type != null &&
-                type.OriginalDefinition.Is(KnownType.System_Nullable_T))
+            if (type != null && type.OriginalDefinition.Is(KnownType.System_Nullable_T))
             {
                 return new NullableSymbolicValue(new SymbolicValue());
             }
@@ -77,17 +76,6 @@ namespace SonarAnalyzer.SymbolicExecution
         public bool IsNull(ProgramState programState)
         {
             return programState.HasConstraint(this, ObjectConstraint.Null);
-        }
-
-        protected IEnumerable<ProgramState> ThrowIfTooMany(IEnumerable<ProgramState> states)
-        {
-            var stateList = states.ToList();
-            if (stateList.Count >= AbstractExplodedGraph.MaxInternalStateCount)
-            {
-                throw new TooManyInternalStatesException();
-            }
-
-            return stateList;
         }
 
         public virtual IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint,
@@ -149,6 +137,17 @@ namespace SonarAnalyzer.SymbolicExecution
             ProgramState programState)
         {
             return TrySetConstraints(constraints, programState, true);
+        }
+
+        protected IEnumerable<ProgramState> ThrowIfTooMany(IEnumerable<ProgramState> states)
+        {
+            var stateList = states.ToList();
+            if (stateList.Count >= AbstractExplodedGraph.MaxInternalStateCount)
+            {
+                throw new TooManyInternalStatesException();
+            }
+
+            return stateList;
         }
 
         private IEnumerable<ProgramState> TrySetConstraints(SymbolicValueConstraints constraints,
