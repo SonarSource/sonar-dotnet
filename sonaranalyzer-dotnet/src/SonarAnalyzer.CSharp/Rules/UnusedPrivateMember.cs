@@ -466,8 +466,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private static bool IsEmptyConstructor(BaseMethodDeclarationSyntax constructorDeclaration) =>
-                !constructorDeclaration.HasBodyOrExpressionBody() ||
-                (constructorDeclaration.Body != null && constructorDeclaration.Body.Statements.Count == 0);
+                !constructorDeclaration.HasBodyOrExpressionBody()
+                || (constructorDeclaration.Body != null && constructorDeclaration.Body.Statements.Count == 0);
 
             private static bool IsDeclaredInPartialClass(ISymbol methodSymbol)
             {
@@ -483,11 +483,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private static bool IsRemovableMethod(IMethodSymbol methodSymbol) =>
-                IsRemovableMember(methodSymbol) &&
-                (methodSymbol.MethodKind == MethodKind.Ordinary || methodSymbol.MethodKind == MethodKind.Constructor) &&
-                !methodSymbol.IsMainMethod() &&
-                (!methodSymbol.IsEventHandler() || !IsDeclaredInPartialClass(methodSymbol)) && // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
-                !methodSymbol.IsSerializationConstructor();
+                IsRemovableMember(methodSymbol)
+                && (methodSymbol.MethodKind == MethodKind.Ordinary || methodSymbol.MethodKind == MethodKind.Constructor)
+                && !methodSymbol.IsMainMethod()
+                && (!methodSymbol.IsEventHandler() || !IsDeclaredInPartialClass(methodSymbol)) // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
+                && !methodSymbol.IsSerializationConstructor();
 
             private static bool IsRemovable(ISymbol symbol) =>
                 symbol != null &&
