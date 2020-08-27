@@ -128,11 +128,8 @@ namespace SonarAnalyzer.Helpers
         public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
         {
             var symbols = GetSymbols(node);
-
             UsedSymbols.UnionWith(symbols);
-
             TryStorePropertyAccess(node, symbols);
-
             base.VisitElementAccessExpression(node);
         }
 
