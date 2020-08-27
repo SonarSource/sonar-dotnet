@@ -47,7 +47,7 @@ public class EncodingPerFile {
     Charset roslynEncoding = globalReportProcessor.getRoslynEncodingPerUri().get(uri);
     if (roslynEncoding == null) {
       // Roslyn saw the file, but it didn't recognized it's encoding. We fall back to the default encoding and accept the file.
-      LOG.warn("Roslyn encoding was not detected for '{}', using default instead.", uri);
+      LOG.warn("Roslyn can not detect encoding for '{}', using default instead.", uri);
       return true;
     }
 
