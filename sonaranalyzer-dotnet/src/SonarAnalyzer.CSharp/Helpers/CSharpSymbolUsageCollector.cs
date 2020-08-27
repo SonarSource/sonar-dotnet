@@ -150,8 +150,7 @@ namespace SonarAnalyzer.Helpers
             // We are visiting a ctor with no initializer and the compiler will automatically
             // call the default constructor of the type if declared, or the base type if the
             // current type does not declare a default constructor.
-            if (node.Initializer == null &&
-                IsKnownIdentifier(node.Identifier))
+            if (node.Initializer == null && IsKnownIdentifier(node.Identifier))
             {
                 var constructor = (IMethodSymbol)GetDeclaredSymbol(node);
                 var implicitlyCalledConstructor = GetImplicitlyCalledConstructor(constructor);
