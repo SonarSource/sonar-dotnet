@@ -99,9 +99,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return new[] { programState };
             }
 
-            throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}, " +
-                $"{nameof(ObjectConstraint)}, {nameof(DisposableConstraint)}, {nameof(CollectionCapacityConstraint)}," +
-                $"{nameof(StringConstraint)} or {nameof(SerializationConstraint)}.");
+            throw UnexpectedConstraintException(constraint);
         }
 
         public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState) =>
@@ -181,8 +179,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return oldObjectConstraint != constraint ? Enumerable.Empty<ProgramState>() : new[] { programState.SetConstraint(this, constraint) };
             }
 
-            throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}," +
-                $"{nameof(StringConstraint)} or {nameof(DisposableConstraint)}.");
+            throw UnexpectedConstraintException(constraint);
         }
 
         private IEnumerable<ProgramState> TrySetStringConstraint(StringConstraint constraint, ProgramState programState)
@@ -206,8 +203,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return UpdateObjectConstraint(constraint, programState, oldObjectConstraint);
             }
 
-            throw new NotSupportedException($"Neither one of {nameof(ObjectConstraint)}," +
-                $"{nameof(StringConstraint)}.");
+            throw UnexpectedConstraintException(constraint);
         }
 
         private IEnumerable<ProgramState> UpdateObjectConstraint(StringConstraint constraint, ProgramState programState, ObjectConstraint oldObjectConstraint)
@@ -275,6 +271,9 @@ namespace SonarAnalyzer.SymbolicExecution
                 ? (new[] { programState.SetConstraint(sv, constraint) })
                 : (new[] { programState });
         }
+
+        private static Exception UnexpectedConstraintException(SymbolicValueConstraint constraint) =>
+            new NotSupportedException($"Unexpected constraint type: {constraint.GetType().Name}.");
 
         private IEnumerable<ProgramState> SetNewStringConstraint(StringConstraint constraint, ref ProgramState programState)
         {
