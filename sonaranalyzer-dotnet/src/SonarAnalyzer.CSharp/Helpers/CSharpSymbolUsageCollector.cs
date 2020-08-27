@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
-            if (HasKnownIdentifier(node))
+            if (IsKnownIdentifier(node.Identifier))
             {
                 var symbols = GetSymbols(node);
                 TryStoreFieldAccess(node, symbols);
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitGenericName(GenericNameSyntax node)
         {
-            if (HasKnownIdentifier(node))
+            if (IsKnownIdentifier(node.Identifier))
             {
                 UsedSymbols.UnionWith(GetSymbols(node));
             }
@@ -325,9 +325,6 @@ namespace SonarAnalyzer.Helpers
                 ? AccessorAccess.Both
                 : AccessorAccess.Get;
         }
-
-        private bool HasKnownIdentifier(SimpleNameSyntax nameSyntax) =>
-            IsKnownIdentifier(nameSyntax.Identifier);
 
         private bool IsKnownIdentifier(SyntaxToken identifier) =>
             knownSymbolNames.Contains(identifier.ValueText);
