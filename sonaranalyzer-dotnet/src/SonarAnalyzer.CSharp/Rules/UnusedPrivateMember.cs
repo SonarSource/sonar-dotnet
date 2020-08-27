@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 removableInternalTypes.Add(internalSymbol);
                             }
 
-                            var usageCollector = new CSharpSymbolUsageCollector(c.Compilation.GetSemanticModel, removableSymbolsCollector.PrivateSymbols);
+                            var usageCollector = new CSharpSymbolUsageCollector(c.Compilation, removableSymbolsCollector.PrivateSymbols);
 
                             if (!VisitDeclaringReferences(namedType, usageCollector, c.Compilation, includeGeneratedFile: true))
                             {
@@ -131,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 return;
                             }
 
-                            var usageCollector = new CSharpSymbolUsageCollector(c.Compilation.GetSemanticModel, removableInternalTypes.ToHashSet());
+                            var usageCollector = new CSharpSymbolUsageCollector(c.Compilation, removableInternalTypes.ToHashSet());
 
                             foreach (var syntaxTree in c.Compilation.SyntaxTrees
                                                         .Where(tree => !tree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, c.Compilation)))

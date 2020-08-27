@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Helpers
             SyntaxKind.PreDecrementExpression
         };
 
-        private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
+        private readonly Compilation compilation;
         private readonly HashSet<string> knownSymbolNames;
 
         public ISet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
@@ -59,15 +59,15 @@ namespace SonarAnalyzer.Helpers
         public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } =
             new Dictionary<IPropertySymbol, AccessorAccess>();
 
-        public CSharpSymbolUsageCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel, IEnumerable<ISymbol> knownSymbols)
+        public CSharpSymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
         {
-            this.getSemanticModel = node => getSemanticModel(node.SyntaxTree, false);
+            this.compilation = compilation;
             knownSymbolNames = knownSymbols.SelectMany(GetNames).ToHashSet();
         }
 
         public override void VisitAttribute(AttributeSyntax node)
         {
-            var semanticModel = getSemanticModel(node);
+            var semanticModel = GetSemanticModel(node);
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
             if (symbol != null &&
                 symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute) &&
@@ -233,7 +233,7 @@ namespace SonarAnalyzer.Helpers
                     // node++
                     return SymbolAccess.Write | ParentAccessType(expressionSyntax);
                 case ArrowExpressionClauseSyntax arrowExpressionClause when arrowExpressionClause.Parent is MethodDeclarationSyntax arrowMethod:
-                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, getSemanticModel(arrowMethod))
+                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, GetSemanticModel(arrowMethod))
                         ? SymbolAccess.None
                         : SymbolAccess.Read;
                 default:
@@ -249,7 +249,7 @@ namespace SonarAnalyzer.Helpers
         private ImmutableArray<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node)
             where TSyntaxNode : SyntaxNode
         {
-            return GetCandidateSymbols(getSemanticModel(node).GetSymbolInfo(node)).ToImmutableArray();
+            return GetCandidateSymbols(GetSemanticModel(node).GetSymbolInfo(node)).ToImmutableArray();
 
             static IEnumerable<ISymbol> GetCandidateSymbols(SymbolInfo symbolInfo)
             {
@@ -317,7 +317,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             // nameof(Prop) --> get/set
-            if (node.IsInNameOfArgument(getSemanticModel(node)))
+            if (node.IsInNameOfArgument(GetSemanticModel(node)))
             {
                 return AccessorAccess.Both;
             }
@@ -335,7 +335,7 @@ namespace SonarAnalyzer.Helpers
             knownSymbolNames.Contains(identifier.ValueText);
 
         private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
-            getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
+            GetSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
 
         private void TryStoreFieldAccess(IdentifierNameSyntax node, IEnumerable<ISymbol> symbols)
         {
@@ -359,6 +359,8 @@ namespace SonarAnalyzer.Helpers
 
         private SymbolUsage GetFieldSymbolUsage(ISymbol symbol) =>
             FieldSymbolUsages.GetOrAdd(symbol, s => new SymbolUsage(s));
+
+        private SemanticModel GetSemanticModel(SyntaxNode node) => compilation.GetSemanticModel(node.SyntaxTree);
 
         private static SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
         {
