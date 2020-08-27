@@ -237,14 +237,17 @@ namespace SonarAnalyzer.SymbolicExecution
             var newWhiteSpaceStringConstraint = constraint == StringConstraint.WhiteSpaceString;
             var newNotWhiteSpaceStringConstraint = constraint == StringConstraint.NotWhiteSpaceString;
             var oldFullStringConstraint = oldStringConstraint == StringConstraint.FullString;
-            var oldEmptyStringConstraint = oldStringConstraint == StringConstraint.EmptyString;
             var oldFullNotWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.FullNotWhiteSpaceString;
             var oldWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.WhiteSpaceString;
 
+            if (oldStringConstraint == StringConstraint.EmptyString
+                && (newFullStringConstraint || newFullOrNullStringConstraint || newFullNotWhiteSpaceStringConstraint || newWhiteSpaceStringConstraint))
+            {
+                return Enumerable.Empty<ProgramState>();
+            }
+
             // constraints are empty Related Related
-            if ((newFullStringConstraint && oldEmptyStringConstraint)
-                || (newEmptyStringConstraint && oldFullStringConstraint)
-                || (newFullOrNullStringConstraint && oldEmptyStringConstraint))
+            if (newEmptyStringConstraint && oldFullStringConstraint)
             {
                 return Enumerable.Empty<ProgramState>();
             }
@@ -259,9 +262,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             // constraints are mixed space Related
             if ((newEmptyStringConstraint && oldFullNotWhiteSpaceStringConstraint)
-               || (newEmptyStringConstraint && oldWhiteSpaceStringConstraint)
-               || (newFullNotWhiteSpaceStringConstraint && oldEmptyStringConstraint)
-               || (newWhiteSpaceStringConstraint && oldEmptyStringConstraint))
+               || (newEmptyStringConstraint && oldWhiteSpaceStringConstraint))
             {
                 return Enumerable.Empty<ProgramState>();
             }
