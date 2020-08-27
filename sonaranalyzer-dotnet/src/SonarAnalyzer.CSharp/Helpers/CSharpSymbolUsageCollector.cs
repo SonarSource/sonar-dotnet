@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -95,12 +96,9 @@ namespace SonarAnalyzer.Helpers
         {
             if (HasKnownIdentifier(node))
             {
-                var symbols = GetSymbols(node).ToList();
-
+                var symbols = GetSymbols(node);
                 TryStoreFieldAccess(node, symbols);
-
                 UsedSymbols.UnionWith(symbols);
-
                 TryStorePropertyAccess(node, symbols);
             }
 
@@ -129,7 +127,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
         {
-            var symbols = GetSymbols(node).ToList();
+            var symbols = GetSymbols(node);
 
             UsedSymbols.UnionWith(symbols);
 
@@ -249,10 +247,10 @@ namespace SonarAnalyzer.Helpers
         /// .e.g when the code cannot compile).
         /// </summary>
         /// <returns>List of symbols</returns>
-        private IEnumerable<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node)
+        private ImmutableArray<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node)
             where TSyntaxNode : SyntaxNode
         {
-            return GetCandidateSymbols(getSemanticModel(node).GetSymbolInfo(node));
+            return GetCandidateSymbols(getSemanticModel(node).GetSymbolInfo(node)).ToImmutableArray();
 
             static IEnumerable<ISymbol> GetCandidateSymbols(SymbolInfo symbolInfo)
             {
@@ -273,7 +271,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private void TryStorePropertyAccess(ExpressionSyntax node, List<ISymbol> identifierSymbols)
+        private void TryStorePropertyAccess(ExpressionSyntax node, IEnumerable<ISymbol> identifierSymbols)
         {
             var propertySymbols = identifierSymbols.OfType<IPropertySymbol>().ToList();
             if (propertySymbols.Any())
@@ -340,7 +338,7 @@ namespace SonarAnalyzer.Helpers
         private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
             getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
 
-        private void TryStoreFieldAccess(IdentifierNameSyntax node, List<ISymbol> symbols)
+        private void TryStoreFieldAccess(IdentifierNameSyntax node, IEnumerable<ISymbol> symbols)
         {
             var access = ParentAccessType(node);
             var fieldSymbolUsagesList = GetFieldSymbolUsagesList(symbols);
@@ -357,7 +355,7 @@ namespace SonarAnalyzer.Helpers
             static bool HasFlag(SymbolAccess symbolAccess, SymbolAccess flag) => (symbolAccess & flag) != 0;
         }
 
-        private List<SymbolUsage> GetFieldSymbolUsagesList(List<ISymbol> symbols) =>
+        private List<SymbolUsage> GetFieldSymbolUsagesList(IEnumerable<ISymbol> symbols) =>
             symbols.Select(GetFieldSymbolUsage).ToList();
 
         private SymbolUsage GetFieldSymbolUsage(ISymbol symbol) =>
