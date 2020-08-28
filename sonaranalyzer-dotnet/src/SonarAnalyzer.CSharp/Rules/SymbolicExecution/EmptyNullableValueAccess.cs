@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -75,15 +75,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public event EventHandler<MemberAccessedEventArgs> ValuePropertyAccessed;
 
-            public NullValueAccessedCheck(CSharpExplodedGraph explodedGraph)
-                : base(explodedGraph)
-            {
-            }
+            public NullValueAccessedCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
 
-            private void OnValuePropertyAccessed(IdentifierNameSyntax identifier)
-            {
+            private void OnValuePropertyAccessed(IdentifierNameSyntax identifier) =>
                 ValuePropertyAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier));
-            }
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
@@ -117,19 +112,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 return programState;
             }
 
-            private bool IsNullableLocalScoped(ISymbol symbol)
-            {
-                var type = symbol.GetSymbolType();
-                return type != null &&
-                    type.OriginalDefinition.Is(KnownType.System_Nullable_T) &&
-                    explodedGraph.IsSymbolTracked(symbol);
-            }
+            private bool IsNullableLocalScoped(ISymbol symbol) =>
+                symbol.GetSymbolType() is { } type
+                    && type.OriginalDefinition.Is(KnownType.System_Nullable_T)
+                    && explodedGraph.IsSymbolTracked(symbol);
 
-            private bool IsHasValueAccess(MemberAccessExpressionSyntax memberAccess)
-            {
-                return memberAccess.Name.Identifier.ValueText == HasValueLiteral &&
-                    (semanticModel.GetTypeInfo(memberAccess.Expression).Type?.OriginalDefinition).Is(KnownType.System_Nullable_T);
-            }
+            private bool IsHasValueAccess(MemberAccessExpressionSyntax memberAccess) =>
+                memberAccess.Name.Identifier.ValueText == HasValueLiteral
+                && (semanticModel.GetTypeInfo(memberAccess.Expression).Type?.OriginalDefinition).Is(KnownType.System_Nullable_T);
 
             internal bool TryProcessInstruction(MemberAccessExpressionSyntax instruction, ProgramState programState, out ProgramState newProgramState)
             {
@@ -147,10 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class HasValueAccessSymbolicValue : MemberAccessSymbolicValue
         {
-            public HasValueAccessSymbolicValue(SymbolicValue nullable)
-                : base(nullable, HasValueLiteral)
-            {
-            }
+            public HasValueAccessSymbolicValue(SymbolicValue nullable) : base(nullable, HasValueLiteral) { }
 
             public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
             {

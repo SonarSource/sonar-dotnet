@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -93,10 +93,8 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly Action<LocationInfo> addLocation;
 
             public SerializationBinderCheck(AbstractExplodedGraph explodedGraph, Action<LocationInfo> addLocation)
-                : base(explodedGraph)
-            {
+                : base(explodedGraph) =>
                 this.addLocation = addLocation;
-            }
 
             public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
             {
@@ -123,8 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     }
 
-                    if (IsLosFormatter(typeSymbol) &&
-                        !IsLosFormatterSafe(objectCreation, programState))
+                    if (IsLosFormatter(typeSymbol) && !IsLosFormatterSafe(objectCreation, programState))
                     {
                         // For LosFormatter the rule is raised directly on the constructor.
                         addLocation(new LocationInfo(objectCreation.GetLocation(), VerifyMacMessage));
@@ -137,8 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool IsLosFormatterSafe(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
             {
                 // The constructor is safe only if it has 2 arguments and the first argument value is true.
-                if (objectCreation.ArgumentList == null ||
-                    objectCreation.ArgumentList.Arguments.Count != 2)
+                if (objectCreation.ArgumentList == null || objectCreation.ArgumentList.Arguments.Count != 2)
                 {
                     return false;
                 }
@@ -163,8 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var symbolicValue = programState.GetSymbolValue(symbol);
-                return symbolicValue == null ||
-                       !programState.HasConstraint(symbolicValue, BoolConstraint.False);
+                return symbolicValue == null || !programState.HasConstraint(symbolicValue, BoolConstraint.False);
             }
 
             private static ExpressionSyntax GetEnableMacArgumentSyntax(BaseArgumentListSyntax list) =>
@@ -301,13 +296,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     .OfType<AssignmentExpressionSyntax>()
                     .SingleOrDefault(assignment => IsBinderProperty(assignment.Left));
 
-                if (binderAssignment == null ||
-                    binderAssignment.Right.IsNullLiteral())
-                {
-                    return null;
-                }
-
-                return semanticModel.GetTypeInfo(binderAssignment.Right).Type;
+                return binderAssignment == null || binderAssignment.Right.IsNullLiteral()
+                    ? null
+                    : semanticModel.GetTypeInfo(binderAssignment.Right).Type;
             }
 
             private TypeDeclarationInfo GetOrAddSanitizerDeclaration(ITypeSymbol symbol) =>
@@ -336,22 +327,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 syntaxReference.GetSyntax().DescendantNodes();
 
             private static bool IsBindToType(MethodDeclarationSyntax methodDeclaration) =>
-                methodDeclaration.Identifier.Text == "BindToType" &&
-                methodDeclaration.ReturnType.NameIs("Type") &&
-                methodDeclaration.ParameterList.Parameters.Count == 2 &&
-                methodDeclaration.ParameterList.Parameters[0].IsString() &&
-                methodDeclaration.ParameterList.Parameters[1].IsString();
+                methodDeclaration.Identifier.Text == "BindToType"
+                && methodDeclaration.ReturnType.NameIs("Type")
+                && methodDeclaration.ParameterList.Parameters.Count == 2
+                && methodDeclaration.ParameterList.Parameters[0].IsString()
+                && methodDeclaration.ParameterList.Parameters[1].IsString();
 
             private static bool IsResolveType(MethodDeclarationSyntax methodDeclaration) =>
-                methodDeclaration.Identifier.Text == "ResolveType" &&
-                methodDeclaration.ReturnType.NameIs("Type") &&
-                methodDeclaration.ParameterList.Parameters.Count == 1 &&
-                methodDeclaration.ParameterList.Parameters[0].IsString();
+                methodDeclaration.Identifier.Text == "ResolveType"
+                && methodDeclaration.ReturnType.NameIs("Type")
+                && methodDeclaration.ParameterList.Parameters.Count == 1
+                && methodDeclaration.ParameterList.Parameters[0].IsString();
 
             private bool IsDeserializeOnKnownType(MemberAccessExpressionSyntax memberAccess) =>
-                IsDeserializeMethod(memberAccess) &&
-                semanticModel.GetTypeInfo(memberAccess.Expression).Type is {} typeSymbol &&
-                (IsFormatterWithBinder(typeSymbol) || IsJavaScriptSerializer(typeSymbol));
+                IsDeserializeMethod(memberAccess)
+                && semanticModel.GetTypeInfo(memberAccess.Expression).Type is {} typeSymbol
+                && (IsFormatterWithBinder(typeSymbol) || IsJavaScriptSerializer(typeSymbol));
 
             private static bool IsFormatterWithBinder(ITypeSymbol typeSymbol) =>
                 typeSymbol.IsAny(typesWithBinder);
@@ -372,9 +363,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class LocationInfo
         {
             internal Location Primary { get; }
-
             internal string Message { get; }
-
             internal IEnumerable<Location> SecondaryLocations { get; }
 
             public LocationInfo(Location primary, string message, Location secondary = null)
@@ -390,13 +379,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class TypeDeclarationInfo
         {
             internal Location Location { get; }
-
             internal bool IsSafe { get; }
 
             public TypeDeclarationInfo(MethodDeclarationSyntax declaration)
             {
                 Location = declaration?.Identifier.GetLocation();
-
                 IsSafe = declaration == null || declaration.ThrowsOrReturnsNull();
             }
 
