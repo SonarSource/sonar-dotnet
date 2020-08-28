@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,8 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             WrappedValue = wrappedValue;
         }
 
-        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint,
-            ProgramState programState)
+        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
         {
             if (constraint == null)
             {
@@ -51,8 +50,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 return TrySetConstraint(optionalConstraint, programState);
             }
 
-            var oldConstraint = programState.Constraints.GetValueOrDefault(this)?
-                .GetConstraintOrDefault<NullableValueConstraint>();
+            var oldConstraint = programState.Constraints.GetValueOrDefault(this)?.GetConstraintOrDefault<NullableValueConstraint>();
             if (constraint is NullableValueConstraint)
             {
                 if (oldConstraint == null)
@@ -68,31 +66,19 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 return new[] { programState };
             }
 
-            return TrySetConstraint(NullableValueConstraint.HasValue, programState)
-                .SelectMany(ps => WrappedValue.TrySetConstraint(constraint, ps));
+            return TrySetConstraint(NullableValueConstraint.HasValue, programState).SelectMany(ps => WrappedValue.TrySetConstraint(constraint, ps));
         }
 
         public override IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState)
         {
             var negateConstraint = constraint?.OppositeForLogicalNot;
 
-            if (constraint is BoolConstraint)
-            {
-                return TrySetConstraint(negateConstraint, programState)
-                  .Union(TrySetConstraint(NullableValueConstraint.NoValue, programState));
-            }
-
-            return TrySetConstraint(negateConstraint, programState);
+            return constraint is BoolConstraint
+                ? TrySetConstraint(negateConstraint, programState).Union(TrySetConstraint(NullableValueConstraint.NoValue, programState))
+                : TrySetConstraint(negateConstraint, programState);
         }
 
-        public override string ToString()
-        {
-            if (base.identifier != null)
-            {
-                return $"NULLABLE_SV_{base.identifier}";
-            }
-
-            return WrappedValue?.ToString() ?? base.ToString();
-        }
+        public override string ToString() =>
+            identifier == null ? WrappedValue?.ToString() ?? base.ToString() : $"NULLABLE_SV_{identifier}" ;
     }
 }
