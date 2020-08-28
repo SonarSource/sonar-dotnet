@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,33 +26,39 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
     public class SymbolicValueConstraints
     {
-        private readonly Dictionary<Type, SymbolicValueConstraint> constraints
-            = new Dictionary<Type, SymbolicValueConstraint>();
-
+        private readonly Dictionary<Type, SymbolicValueConstraint> constraints = new Dictionary<Type, SymbolicValueConstraint>();
         private readonly int hashCode;
 
-        public static SymbolicValueConstraints Create(SymbolicValueConstraint constraint)
-        {
-            return new SymbolicValueConstraints(constraint);
-        }
+        public static SymbolicValueConstraints Create(SymbolicValueConstraint constraint) =>
+            new SymbolicValueConstraints(constraint);
 
         private SymbolicValueConstraints(SymbolicValueConstraint constraint)
         {
-            SetConstraint(constraint, this.constraints);
-            this.hashCode = ComputeHashcode();
+            SetConstraint(constraint, constraints);
+            hashCode = ComputeHashcode();
         }
 
         private SymbolicValueConstraints(Dictionary<Type, SymbolicValueConstraint> constraints)
         {
             this.constraints = constraints;
-            this.hashCode = ComputeHashcode();
+            hashCode = ComputeHashcode();
         }
 
-        internal IEnumerable<SymbolicValueConstraint> GetConstraints() => this.constraints.Values;
+        public override int GetHashCode() => hashCode;
+
+        public override bool Equals(object obj) =>
+            obj is SymbolicValueConstraints other
+            && constraints.DictionaryEquals(other.constraints);
+
+        // for debugging and error logging
+        public override string ToString() =>
+            string.Join(", ", constraints.Values);
+
+        internal IEnumerable<SymbolicValueConstraint> GetConstraints() => constraints.Values;
 
         internal SymbolicValueConstraints WithConstraint(SymbolicValueConstraint constraint)
         {
-            var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(this.constraints);
+            var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(constraints);
             SetConstraint(constraint, constraintsCopy);
 
             return new SymbolicValueConstraints(constraintsCopy);
@@ -60,16 +66,30 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         internal SymbolicValueConstraints WithoutConstraint(SymbolicValueConstraint constraint)
         {
-            var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(this.constraints);
-            if (constraintsCopy.Remove(constraint.GetType()))
+            if (constraints.ContainsKey(constraint.GetType()))
             {
+                var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(constraints);
+                constraintsCopy.Remove(constraint.GetType());
                 return new SymbolicValueConstraints(constraintsCopy);
             }
             return this;
         }
 
+        internal T GetConstraintOrDefault<T>()
+            where T : SymbolicValueConstraint =>
+            constraints.TryGetValue(typeof(T), out var constraint)
+                ? (T)constraint
+                : null;
+
+        internal bool HasConstraint(SymbolicValueConstraint constraint) =>
+            constraints.TryGetValue(constraint.GetType(), out var storedConstraint)
+            && storedConstraint == constraint;
+
+        internal bool HasConstraint<T>() =>
+            constraints.ContainsKey(typeof(T));
+
         private static void SetConstraint(SymbolicValueConstraint constraint,
-            Dictionary<Type, SymbolicValueConstraint> constraints)
+            IDictionary<Type, SymbolicValueConstraint> constraints)
         {
             constraints[constraint.GetType()] = constraint;
 
@@ -83,37 +103,11 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             }
         }
 
-        internal T GetConstraintOrDefault<T>()
-            where T : SymbolicValueConstraint
-        {
-            return this.constraints.TryGetValue(typeof(T), out var constraint)
-                ? (T)constraint
-                : null;
-        }
-
-        internal SymbolicValueConstraint GetConstraintOrDefault(Type constraintType)
-        {
-            return this.constraints.TryGetValue(constraintType, out var constraint)
-                ? constraint
-                : null;
-        }
-
-        internal bool HasConstraint(SymbolicValueConstraint constraint)
-        {
-            return this.constraints.TryGetValue(constraint.GetType(), out var storedConstraint) &&
-                   storedConstraint == constraint;
-        }
-
-        internal bool HasConstraint<T>()
-        {
-            return this.constraints.TryGetValue(typeof(T), out var storedConstraint);
-        }
-
         private int ComputeHashcode()
         {
-            var hash = 17 * this.constraints.Count;
+            var hash = 17 * constraints.Count;
 
-            foreach (var item in this.constraints)
+            foreach (var item in constraints)
             {
                 hash = hash * 23 + item.Value.GetHashCode();
             }
@@ -121,18 +115,5 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             return hash;
         }
 
-        public override int GetHashCode()
-        {
-            return this.hashCode;
-        }
-
-        public override bool Equals(object obj) => obj is SymbolicValueConstraints other &&
-                this.constraints.DictionaryEquals(other.constraints);
-
-        // for debugging and error logging
-        public override string ToString()
-        {
-            return string.Join(", ", this.constraints.Values);
-        }
     }
 }
