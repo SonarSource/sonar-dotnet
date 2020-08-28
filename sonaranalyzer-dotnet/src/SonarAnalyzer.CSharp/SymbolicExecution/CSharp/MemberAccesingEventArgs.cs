@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,15 +26,15 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     internal class MemberAccessingEventArgs : EventArgs
     {
+        public IdentifierNameSyntax Identifier { get; }
+        public ISymbol Symbol { get; }
+        public ProgramState ProgramState { get; }
+
         public MemberAccessingEventArgs(IdentifierNameSyntax identifier, ISymbol symbol, ProgramState programState)
         {
             Identifier = identifier;
             Symbol = symbol;
             ProgramState = programState;
         }
-
-        public IdentifierNameSyntax Identifier { get; }
-        public ISymbol Symbol { get; }
-        public ProgramState ProgramState { get; }
     }
 }
