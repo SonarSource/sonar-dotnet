@@ -51,31 +51,29 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
             private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
-            private readonly NullValueAccessedCheck nullPointerCheck;
+            private readonly NullableValueAccessedCheck nullableValueCheck;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(rule, nullIdentifier.Parent.GetLocation(), nullIdentifier.Identifier.ValueText));
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph)
             {
-                nullPointerCheck = new NullValueAccessedCheck(explodedGraph);
-                nullPointerCheck.ValuePropertyAccessed += AddIdentifier;
-
-                explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
+                nullableValueCheck = explodedGraph.NullableValueAccessedCheck;
+                nullableValueCheck.ValuePropertyAccessed += AddIdentifier;
             }
 
             public bool SupportsPartialResults => true;
 
             private void AddIdentifier(object sender, MemberAccessedEventArgs args) => nullIdentifiers.Add(args.Identifier);
 
-            public void Dispose() => nullPointerCheck.ValuePropertyAccessed -= AddIdentifier;
+            public void Dispose() => nullableValueCheck.ValuePropertyAccessed -= AddIdentifier;
         }
 
-        internal sealed class NullValueAccessedCheck : ExplodedGraphCheck
+        internal sealed class NullableValueAccessedCheck : ExplodedGraphCheck
         {
             public event EventHandler<MemberAccessedEventArgs> ValuePropertyAccessed;
 
-            public NullValueAccessedCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
+            public NullableValueAccessedCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
 
             private void OnValuePropertyAccessed(IdentifierNameSyntax identifier) =>
                 ValuePropertyAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier));
