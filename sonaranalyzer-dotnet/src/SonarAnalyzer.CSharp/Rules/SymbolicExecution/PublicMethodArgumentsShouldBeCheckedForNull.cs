@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -47,8 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
 
-       private static void CollectMemberAccesses(MemberAccessingEventArgs args, ISet<IdentifierNameSyntax> identifiers,
-            SemanticModel semanticModel)
+       private static void CollectMemberAccesses(MemberAccessingEventArgs args, ISet<IdentifierNameSyntax> identifiers, SemanticModel semanticModel)
         {
             if (args.Symbol is IParameterSymbol &&
                 !semanticModel.IsExtensionMethod(args.Identifier.Parent) &&
@@ -60,6 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
+            public bool SupportsPartialResults => true;
+
             private readonly HashSet<IdentifierNameSyntax> identifiers = new HashSet<IdentifierNameSyntax>();
             private readonly NullPointerDereference.NullPointerCheck nullPointerCheck;
             private readonly SyntaxNodeAnalysisContext syntaxNodeAnalysisContext;
@@ -72,12 +73,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 syntaxNodeAnalysisContext = context;
-
                 nullPointerCheck = explodedGraph.NullPointerCheck;
                 nullPointerCheck.MemberAccessing += MemberAccessingHandler;
             }
-
-            public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 identifiers.Select(identifier => Diagnostic.Create(rule, identifier.GetLocation(), GetMessage(identifier)));
