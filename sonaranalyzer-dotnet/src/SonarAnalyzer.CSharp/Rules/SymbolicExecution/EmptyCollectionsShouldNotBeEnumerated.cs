@@ -93,37 +93,32 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
+            public bool SupportsPartialResults => false;
+
             private readonly HashSet<SyntaxNode> emptyCollections = new HashSet<SyntaxNode>();
             private readonly HashSet<SyntaxNode> nonEmptyCollections = new HashSet<SyntaxNode>();
-            private readonly EmptyCollectionAccessedCheck check;
 
-            public AnalysisContext(CSharpExplodedGraph explodedGraph)
-            {
-                check = new EmptyCollectionAccessedCheck(explodedGraph);
-                check.CollectionAccessed += CollectionAccessedHandler;
-
-                explodedGraph.AddExplodedGraphCheck(check);
-            }
-
-            public bool SupportsPartialResults => false;
+            public AnalysisContext(CSharpExplodedGraph explodedGraph) =>
+                explodedGraph.AddExplodedGraphCheck(new EmptyCollectionAccessedCheck(explodedGraph, this));
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 emptyCollections.Except(nonEmptyCollections).Select(node => Diagnostic.Create(rule, node.GetLocation()));
 
-            public void Dispose() => check.CollectionAccessed -= CollectionAccessedHandler;
+            public void Dispose()
+            {
+                // Nothing to dispose
+            }
 
-            private void CollectionAccessedHandler(object sender, CollectionAccessedEventArgs args) =>
-                (args.IsEmpty ? emptyCollections : nonEmptyCollections).Add(args.Node);
+            public void AddCollectionAccess(SyntaxNode node, bool isEmpty) =>
+                (isEmpty ? emptyCollections : nonEmptyCollections).Add(node);
         }
 
         private sealed class EmptyCollectionAccessedCheck : ExplodedGraphCheck
         {
-            public event EventHandler<CollectionAccessedEventArgs> CollectionAccessed;
+            private readonly AnalysisContext context;
 
-            public EmptyCollectionAccessedCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
-
-            private void OnCollectionAccessed(SyntaxNode node, bool empty) =>
-                CollectionAccessed?.Invoke(this, new CollectionAccessedEventArgs(node, empty));
+            public EmptyCollectionAccessedCheck(CSharpExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
+                this.context = context;
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
@@ -183,8 +178,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     else
                     {
                         // ... notify we are accessing the collection
-                        OnCollectionAccessed(invocation,
-                            collectionSymbol.HasConstraint(CollectionCapacityConstraint.Empty, newProgramState));
+                        context.AddCollectionAccess(invocation, collectionSymbol.HasConstraint(CollectionCapacityConstraint.Empty, newProgramState));
                     }
                 }
 
@@ -208,7 +202,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     else
                     {
                         // ... notify we are accessing the collection
-                        OnCollectionAccessed(elementAccess, collectionSymbol.HasConstraint(CollectionCapacityConstraint.Empty, programState));
+                        context.AddCollectionAccess(elementAccess, collectionSymbol.HasConstraint(CollectionCapacityConstraint.Empty, programState));
                     }
                 }
 
@@ -340,18 +334,6 @@ namespace SonarAnalyzer.Rules.CSharp
             private static INamedTypeSymbol GetCollectionType(ISymbol collectionSymbol) =>
                 (collectionSymbol.GetSymbolType() as INamedTypeSymbol)?.ConstructedFrom  // collections
                 ?? collectionSymbol.GetSymbolType()?.BaseType; // arrays
-        }
-
-        private sealed class CollectionAccessedEventArgs : EventArgs
-        {
-            public SyntaxNode Node { get; }
-            public bool IsEmpty { get; }
-
-            public CollectionAccessedEventArgs(SyntaxNode node, bool isEmpty)
-            {
-                Node = node;
-                IsEmpty = isEmpty;
-            }
         }
     }
 }

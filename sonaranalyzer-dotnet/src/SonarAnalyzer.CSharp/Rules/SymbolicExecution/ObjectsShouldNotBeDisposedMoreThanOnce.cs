@@ -58,49 +58,35 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
+            public bool SupportsPartialResults => true;
+
             // Store the nodes that should be reported and ignore duplicate reports for the same node.
             // This is needed because we generate two CFG blocks for the finally statements and even
             // though the syntax nodes are the same, when there is a return inside a try/catch block
             // the walked CFG paths could be different and FPs will appear.
             private readonly Dictionary<SyntaxNode, string> nodesToReport = new Dictionary<SyntaxNode, string>();
-            private readonly ObjectDisposedPointerCheck objectDisposedPointerCheck;
+
+            public AnalysisContext(CSharpExplodedGraph explodedGraph) =>
+                explodedGraph.AddExplodedGraphCheck(new ObjectDisposedPointerCheck(explodedGraph, this));
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 nodesToReport.Select(item => Diagnostic.Create(rule, item.Key.GetLocation(), item.Value));
 
-            public AnalysisContext(CSharpExplodedGraph explodedGraph)
+            public void Dispose()
             {
-                objectDisposedPointerCheck = new ObjectDisposedPointerCheck(explodedGraph);
-                objectDisposedPointerCheck.ObjectDisposed += ObjectDisposedHandler;
-
-                explodedGraph.AddExplodedGraphCheck(objectDisposedPointerCheck);
+                // Nothing to dispose
             }
 
-            public bool SupportsPartialResults => true;
-
-            public void Dispose() => objectDisposedPointerCheck.ObjectDisposed -= ObjectDisposedHandler;
-
-            private void ObjectDisposedHandler(object sender, ObjectDisposedEventArgs args) =>
-                nodesToReport[args.SyntaxNode] = args.SymbolName;
-        }
-
-        private class ObjectDisposedEventArgs : EventArgs
-        {
-            public string SymbolName { get; }
-            public SyntaxNode SyntaxNode { get; }
-
-            public ObjectDisposedEventArgs(string symbolName, SyntaxNode syntaxNode)
-            {
-                SymbolName = symbolName;
-                SyntaxNode = syntaxNode;
-            }
+            public void AddDisposed(string symbolName, SyntaxNode node) =>
+                nodesToReport[node] = symbolName;
         }
 
         private sealed class ObjectDisposedPointerCheck : ExplodedGraphCheck
         {
-            public event EventHandler<ObjectDisposedEventArgs> ObjectDisposed;
+            private readonly AnalysisContext context;
 
-            public ObjectDisposedPointerCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
+            public ObjectDisposedPointerCheck(CSharpExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
+                this.context = context;
 
             public override ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
             {
@@ -235,7 +221,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (disposableSymbol.HasConstraint(DisposableConstraint.Disposed, programState))
                 {
-                    ObjectDisposed?.Invoke(this, new ObjectDisposedEventArgs(disposableSymbol.Name, disposeInstruction));
+                    context.AddDisposed(disposableSymbol.Name, disposeInstruction);
                     return programState;
                 }
 
