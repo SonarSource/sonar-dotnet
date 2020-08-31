@@ -116,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var actualWithUnixLineEnding = state.ActualCode.Replace(WindowsLineEnding, UnixLineEnding);
             var expectedWithUnixLineEnding = File.ReadAllText(pathToExpected).Replace(WindowsLineEnding, UnixLineEnding);
-            actualWithUnixLineEnding.Should().Be(expectedWithUnixLineEnding);
+            actualWithUnixLineEnding.Should().Be(expectedWithUnixLineEnding, state.Compilation.LanguageVersionString());
         }
 
         private static void RunFixAllProvider(DiagnosticAnalyzer diagnosticAnalyzer, CodeFixProvider codeFixProvider,
