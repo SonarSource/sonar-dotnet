@@ -31,6 +31,34 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 {
     internal static class ParseOptionsHelper
     {
+        public static IEnumerable<ParseOptions> FromCSharp6 { get; }
+        public static IEnumerable<ParseOptions> FromCSharp7 { get; }
+        public static IEnumerable<ParseOptions> FromCSharp8 { get; }
+        public static IEnumerable<ParseOptions> BeforeCSharp7 { get; }
+        public static IEnumerable<ParseOptions> BeforeCSharp8 { get; }
+        public static IEnumerable<ParseOptions> CSharp5 { get; } = ImmutableArray.Create(new CS.CSharpParseOptions(CS.LanguageVersion.CSharp5));
+        public static IEnumerable<ParseOptions> CSharp6 { get; } = ImmutableArray.Create(new CS.CSharpParseOptions(CS.LanguageVersion.CSharp6));
+        public static IEnumerable<ParseOptions> CSharp7 { get; } = ImmutableArray.Create(
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_1),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_2),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_3));
+
+        public static IEnumerable<ParseOptions> CSharp8 { get; } = ImmutableArray.Create(new CS.CSharpParseOptions(CS.LanguageVersion.CSharp8));
+
+        public static IEnumerable<ParseOptions> FromVisualBasic12 { get; }
+        public static IEnumerable<ParseOptions> FromVisualBasic14 { get; }
+        public static IEnumerable<ParseOptions> FromVisualBasic15 { get; }
+        public static IEnumerable<ParseOptions> VisualBasic12 { get; } = ImmutableArray.Create(new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic12));
+        public static IEnumerable<ParseOptions> VisualBasic14 { get; } = ImmutableArray.Create(new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic14));
+        public static IEnumerable<ParseOptions> VisualBasic15 { get; } = ImmutableArray.Create(
+                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15),
+                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15_3),
+                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15_5));
+        public static IEnumerable<ParseOptions> VisualBasic16 { get; } = ImmutableArray.Create(new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic16));
+
+        private static readonly Func<ParseOptions, bool> VisualBasicFilter = (options) => options is VB.VisualBasicParseOptions;
+        private static readonly Func<ParseOptions, bool> CSharpFilter = (options) => options is CS.CSharpParseOptions;
         private static readonly IEnumerable<ParseOptions> defaultParseOptions;
 
 #pragma warning disable S3963 // The static fields are dependent between them so the values cannot be set inline
@@ -89,35 +117,5 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             throw new NotSupportedException($"Not supported language extension '{extension}'");
         }
-
-        private static readonly Func<ParseOptions, bool> VisualBasicFilter = (options) => options is VB.VisualBasicParseOptions;
-        private static readonly Func<ParseOptions, bool> CSharpFilter = (options) => options is CS.CSharpParseOptions;
-
-        public static IEnumerable<ParseOptions> FromCSharp6 { get; }
-        public static IEnumerable<ParseOptions> FromCSharp7 { get; }
-        public static IEnumerable<ParseOptions> FromCSharp8 { get; }
-        public static IEnumerable<ParseOptions> BeforeCSharp7 { get; }
-        public static IEnumerable<ParseOptions> BeforeCSharp8 { get; }
-        public static IEnumerable<ParseOptions> CSharp5 { get; } = ImmutableArray.Create(new CS.CSharpParseOptions(CS.LanguageVersion.CSharp5));
-        public static IEnumerable<ParseOptions> CSharp6 { get; } = ImmutableArray.Create(new CS.CSharpParseOptions(CS.LanguageVersion.CSharp6));
-        public static IEnumerable<ParseOptions> CSharp7 { get; } = ImmutableArray.Create(
-                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7),
-                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_1),
-                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_2),
-                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_3));
-
-        public static IEnumerable<ParseOptions> CSharp8 { get; } = ImmutableArray.Create(new CS.CSharpParseOptions(CS.LanguageVersion.CSharp8));
-
-        public static IEnumerable<ParseOptions> FromVisualBasic12 { get; }
-        public static IEnumerable<ParseOptions> FromVisualBasic14 { get; }
-        public static IEnumerable<ParseOptions> FromVisualBasic15 { get; }
-        public static IEnumerable<ParseOptions> VisualBasic12 { get; } = ImmutableArray.Create(new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic12));
-        public static IEnumerable<ParseOptions> VisualBasic14 { get; } = ImmutableArray.Create(new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic14));
-        public static IEnumerable<ParseOptions> VisualBasic15 { get; } = ImmutableArray.Create(
-                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15),
-                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15_3),
-                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15_5));
-
-        public static IEnumerable<ParseOptions> VisualBasic16 { get; } = ImmutableArray.Create(new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic16));
     }
 }
