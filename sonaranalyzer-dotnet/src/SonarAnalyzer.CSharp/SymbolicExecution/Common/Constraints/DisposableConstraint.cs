@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
-    public class DisposableConstraint : SymbolicValueConstraint
+    public sealed class DisposableConstraint : SymbolicValueConstraint
     {
         public static readonly DisposableConstraint Disposed = new DisposableConstraint();
         public static readonly DisposableConstraint NotDisposed = new DisposableConstraint();

@@ -168,7 +168,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
             else
             {
-                throw UnexpectedConstraintException(constraint);
+                throw UnexpectedConstraintException(constraint, oldConstraints);
             }
         }
 
@@ -190,7 +190,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
             else
             {
-                throw UnexpectedConstraintException(constraint);
+                throw UnexpectedConstraintException(constraint, oldConstraints);
             }
         }
 
@@ -260,8 +260,8 @@ namespace SonarAnalyzer.SymbolicExecution
             return new[] { programState };
         }
 
-        private static Exception UnexpectedConstraintException(SymbolicValueConstraint constraint) =>
-            new NotSupportedException($"Unexpected constraint type: {constraint.GetType().Name}.");
+        private static Exception UnexpectedConstraintException(SymbolicValueConstraint constraint, SymbolicValueConstraints oldConstraints = null) =>
+            new NotSupportedException($"Unexpected constraint type: {constraint.GetType().Name}." + (oldConstraints == null ? null : "Old constraints: " + oldConstraints));
 
         private class BoolLiteralSymbolicValue : SymbolicValue
         {
