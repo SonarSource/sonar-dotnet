@@ -54,6 +54,9 @@ namespace Tests.Diagnostics
             int field3; // Fixed
         private delegate void Delegate();
         private event Delegate MyEvent; //Fixed
+        private Dictionary<int, int> used = new Dictionary<int, int>();
+
+        public int GetItem(int i) => used[i];
 
         private event EventHandler<EventArgs> MyUsedEvent
         {
