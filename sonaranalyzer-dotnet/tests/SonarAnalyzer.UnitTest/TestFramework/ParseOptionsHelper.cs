@@ -76,8 +76,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static Func<ParseOptions, bool> GetFilterByLanguage(string language) =>
             language switch
             {
-                LanguageNames.CSharp => x => x is VB.VisualBasicParseOptions,
-                LanguageNames.VisualBasic => x => x is CS.CSharpParseOptions,
+                LanguageNames.CSharp => x => x is CS.CSharpParseOptions,
+                LanguageNames.VisualBasic => x => x is VB.VisualBasicParseOptions,
                 _ => throw new NotSupportedException($"Not supported language '{language}'")
             };
 
