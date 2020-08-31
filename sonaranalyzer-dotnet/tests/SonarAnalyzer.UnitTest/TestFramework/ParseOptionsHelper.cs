@@ -78,14 +78,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 #pragma warning restore S3963
 
-
         public static IEnumerable<ParseOptions> GetParseOptionsOrDefault(IEnumerable<ParseOptions> parseOptions) =>
             parseOptions != null && parseOptions.WhereNotNull().Any()
-                ? parseOptions
+                ? parseOptions.WhereNotNull()
                 : defaultParseOptions;
-
-        public static IEnumerable<ParseOptions> GetParseOptionsByFileExtension(string extension) =>
-            defaultParseOptions.Where(GetFilterByFileExtension(extension));
 
         public static Func<ParseOptions, bool> GetFilterByLanguage(string language)
         {
@@ -100,21 +96,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
 
             throw new NotSupportedException($"Not supported language '{language}'");
-        }
-
-        public static Func<ParseOptions, bool> GetFilterByFileExtension(string extension)
-        {
-            if (extension == ".cs")
-            {
-                return CSharpFilter;
-            }
-
-            if (extension == ".vb")
-            {
-                return VisualBasicFilter;
-            }
-
-            throw new NotSupportedException($"Not supported language extension '{extension}'");
         }
 
         private static IEnumerable<ParseOptions> CreateOptions(params CS.LanguageVersion[] options) =>

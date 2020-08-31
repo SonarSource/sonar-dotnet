@@ -39,12 +39,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
             IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
         {
-            var parseOptions = options ?? ParseOptionsHelper.GetParseOptionsByFileExtension(Path.GetExtension(path));
+            var document = CreateDocument(path, additionalReferences);
+            var parseOptions = ParseOptionsHelper.GetParseOptionsOrDefault(options)
+                .Where(ParseOptionsHelper.GetFilterByLanguage(document.Project.Language));
 
             foreach (var parseOption in parseOptions)
             {
-                RunCodeFixWhileDocumentChanges(diagnosticAnalyzer, codeFixProvider, codeFixTitle,
-                    CreateDocument(path, additionalReferences), parseOption, pathToExpected);
+                RunCodeFixWhileDocumentChanges(diagnosticAnalyzer, codeFixProvider, codeFixTitle, document, parseOption, pathToExpected);
             }
 
             var fixAllProvider = codeFixProvider.GetFixAllProvider();
