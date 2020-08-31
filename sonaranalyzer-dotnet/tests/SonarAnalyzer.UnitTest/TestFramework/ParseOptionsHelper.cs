@@ -27,54 +27,44 @@ using SonarAnalyzer.Helpers;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
+using static Microsoft.CodeAnalysis.CSharp.LanguageVersion;
+using static Microsoft.CodeAnalysis.VisualBasic.LanguageVersion;
+
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
     internal static class ParseOptionsHelper
     {
         public static IEnumerable<ParseOptions> BeforeCSharp7 { get; }
         public static IEnumerable<ParseOptions> BeforeCSharp8 { get; }
+
         public static IEnumerable<ParseOptions> FromCSharp6 { get; }
         public static IEnumerable<ParseOptions> FromCSharp7 { get; }
         public static IEnumerable<ParseOptions> FromCSharp8 { get; }
 
-        private static IEnumerable<ParseOptions> CSharp5 { get; } = CreateOptions(CS.LanguageVersion.CSharp5);
-        private static IEnumerable<ParseOptions> CSharp6 { get; } = CreateOptions(CS.LanguageVersion.CSharp6);
-        private static IEnumerable<ParseOptions> CSharp7 { get; } = CreateOptions(
-                CS.LanguageVersion.CSharp7,
-                CS.LanguageVersion.CSharp7_1,
-                CS.LanguageVersion.CSharp7_2,
-                CS.LanguageVersion.CSharp7_3);
-        private static IEnumerable<ParseOptions> CSharp8 { get; } = CreateOptions(CS.LanguageVersion.CSharp8);
-
         public static IEnumerable<ParseOptions> FromVisualBasic12 { get; }
         public static IEnumerable<ParseOptions> FromVisualBasic14 { get; }
         public static IEnumerable<ParseOptions> FromVisualBasic15 { get; }
-
-        private static IEnumerable<ParseOptions> VisualBasic12 { get; } = CreateOptions(VB.LanguageVersion.VisualBasic12);
-        private static IEnumerable<ParseOptions> VisualBasic14 { get; } = CreateOptions(VB.LanguageVersion.VisualBasic14);
-        private static IEnumerable<ParseOptions> VisualBasic15 { get; } = CreateOptions(
-            VB.LanguageVersion.VisualBasic15,
-            VB.LanguageVersion.VisualBasic15_3,
-            VB.LanguageVersion.VisualBasic15_5);
-        private static IEnumerable<ParseOptions> VisualBasic16 { get; } = CreateOptions(VB.LanguageVersion.VisualBasic16);
 
         private static readonly IEnumerable<ParseOptions> defaultParseOptions;
 
 #pragma warning disable S3963 // The static fields are dependent between them so the values cannot be set inline
         static ParseOptionsHelper()
         {
-            BeforeCSharp7 = CSharp5.Concat(CSharp6);
-            BeforeCSharp8 = BeforeCSharp7.Concat(CSharp7);
+            var cs7 = CreateOptions(CSharp7, CSharp7_1, CSharp7_2, CSharp7_3);
+            var vb15 = CreateOptions(VisualBasic15, VisualBasic15_3, VisualBasic15_5);
 
-            FromCSharp8 = CSharp8;
-            FromCSharp7 = CSharp7.Concat(FromCSharp8);
-            FromCSharp6 = CSharp6.Concat(FromCSharp7);
+            BeforeCSharp7 = CreateOptions(CSharp5).Concat(CreateOptions(CSharp6));
+            BeforeCSharp8 = BeforeCSharp7.Concat(cs7);
 
-            FromVisualBasic15 = VisualBasic15.Concat(VisualBasic16);
-            FromVisualBasic14 = VisualBasic14.Concat(FromVisualBasic15);
-            FromVisualBasic12 = VisualBasic12.Concat(FromVisualBasic14);
+            FromCSharp8 = CreateOptions(CSharp8);
+            FromCSharp7 = cs7.Concat(FromCSharp8);
+            FromCSharp6 = CreateOptions(CSharp6).Concat(FromCSharp7);
 
-            defaultParseOptions = FromCSharp7.Concat(FromVisualBasic12);
+            FromVisualBasic15 = vb15.Concat(CreateOptions(VisualBasic16));
+            FromVisualBasic14 = CreateOptions(VisualBasic14).Concat(FromVisualBasic15);
+            FromVisualBasic12 = CreateOptions(VisualBasic12).Concat(FromVisualBasic14);
+
+            defaultParseOptions = FromCSharp7.Concat(FromVisualBasic12); // List of values depends on the build environment
         }
 #pragma warning restore S3963
 
