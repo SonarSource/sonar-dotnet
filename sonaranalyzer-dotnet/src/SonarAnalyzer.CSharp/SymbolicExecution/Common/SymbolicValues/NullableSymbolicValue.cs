@@ -78,7 +78,6 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 : TrySetConstraint(negateConstraint, programState);
         }
 
-        public override string ToString() =>
-            identifier == null ? WrappedValue?.ToString() ?? base.ToString() : $"NULLABLE_SV_{identifier}" ;
+        public override string ToString() => $"NULLABLE_SV_{identifier}" ;
     }
 }
