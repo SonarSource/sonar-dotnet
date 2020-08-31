@@ -36,25 +36,27 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static IEnumerable<ParseOptions> FromCSharp6 { get; }
         public static IEnumerable<ParseOptions> FromCSharp7 { get; }
         public static IEnumerable<ParseOptions> FromCSharp8 { get; }
-        public static IEnumerable<ParseOptions> CSharp5 { get; } = CreateOptions(CS.LanguageVersion.CSharp5);
-        public static IEnumerable<ParseOptions> CSharp6 { get; } = CreateOptions(CS.LanguageVersion.CSharp6);
-        public static IEnumerable<ParseOptions> CSharp7 { get; } = CreateOptions(
+
+        private static IEnumerable<ParseOptions> CSharp5 { get; } = CreateOptions(CS.LanguageVersion.CSharp5);
+        private static IEnumerable<ParseOptions> CSharp6 { get; } = CreateOptions(CS.LanguageVersion.CSharp6);
+        private static IEnumerable<ParseOptions> CSharp7 { get; } = CreateOptions(
                 CS.LanguageVersion.CSharp7,
                 CS.LanguageVersion.CSharp7_1,
                 CS.LanguageVersion.CSharp7_2,
                 CS.LanguageVersion.CSharp7_3);
-        public static IEnumerable<ParseOptions> CSharp8 { get; } = CreateOptions(CS.LanguageVersion.CSharp8);
+        private static IEnumerable<ParseOptions> CSharp8 { get; } = CreateOptions(CS.LanguageVersion.CSharp8);
 
         public static IEnumerable<ParseOptions> FromVisualBasic12 { get; }
         public static IEnumerable<ParseOptions> FromVisualBasic14 { get; }
         public static IEnumerable<ParseOptions> FromVisualBasic15 { get; }
-        public static IEnumerable<ParseOptions> VisualBasic12 { get; } = CreateOptions(VB.LanguageVersion.VisualBasic12);
-        public static IEnumerable<ParseOptions> VisualBasic14 { get; } = CreateOptions(VB.LanguageVersion.VisualBasic14);
-        public static IEnumerable<ParseOptions> VisualBasic15 { get; } = CreateOptions(
+
+        private static IEnumerable<ParseOptions> VisualBasic12 { get; } = CreateOptions(VB.LanguageVersion.VisualBasic12);
+        private static IEnumerable<ParseOptions> VisualBasic14 { get; } = CreateOptions(VB.LanguageVersion.VisualBasic14);
+        private static IEnumerable<ParseOptions> VisualBasic15 { get; } = CreateOptions(
             VB.LanguageVersion.VisualBasic15,
             VB.LanguageVersion.VisualBasic15_3,
             VB.LanguageVersion.VisualBasic15_5);
-        public static IEnumerable<ParseOptions> VisualBasic16 { get; } = CreateOptions(VB.LanguageVersion.VisualBasic16);
+        private static IEnumerable<ParseOptions> VisualBasic16 { get; } = CreateOptions(VB.LanguageVersion.VisualBasic16);
 
         private static readonly IEnumerable<ParseOptions> defaultParseOptions;
 
