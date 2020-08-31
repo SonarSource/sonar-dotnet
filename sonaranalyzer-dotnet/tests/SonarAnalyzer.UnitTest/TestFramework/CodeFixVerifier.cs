@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -56,8 +57,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             foreach (var parseOption in parseOptions)
             {
-                RunFixAllProvider(diagnosticAnalyzer, codeFixProvider, codeFixTitle, fixAllProvider,
-                    CreateDocument(path, additionalReferences), parseOption, pathToBatchExpected);
+                RunFixAllProvider(diagnosticAnalyzer, codeFixProvider, codeFixTitle, fixAllProvider, document, parseOption, pathToBatchExpected);
             }
         }
 
@@ -72,21 +72,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             string codeFixTitle, Document document, ParseOptions parseOption, string pathToExpected)
         {
             var currentDocument = document;
-            CalculateDiagnosticsAndCode(diagnosticAnalyzer, currentDocument, parseOption, out var diagnostics, out var actualCode);
-
-            diagnostics.Should().NotBeEmpty();
+            var state = new DocumentState(diagnosticAnalyzer, currentDocument, parseOption);
+            state.Diagnostics.Should().NotBeEmpty();
 
             string codeBeforeFix;
             var codeFixExecutedAtLeastOnce = false;
-
             do
             {
-                codeBeforeFix = actualCode;
+                codeBeforeFix = state.ActualCode;
 
                 var codeFixExecuted = false;
-                for (var diagnosticIndexToFix = 0; !codeFixExecuted && diagnosticIndexToFix < diagnostics.Count; diagnosticIndexToFix++)
+                for (var diagnosticIndexToFix = 0; !codeFixExecuted && diagnosticIndexToFix < state.Diagnostics.Length; diagnosticIndexToFix++)
                 {
-                    var diagnostic = diagnostics[diagnosticIndexToFix];
+                    var diagnostic = state.Diagnostics[diagnosticIndexToFix];
                     if (!codeFixProvider.FixableDiagnosticIds.Contains(diagnostic.Id))
                     {
                         // a Diagnostic can raise issues for different rules, but provide fixes for only one of them
@@ -95,28 +93,28 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     }
                     var codeActionsForDiagnostic = GetCodeActionsForDiagnostic(codeFixProvider, currentDocument, diagnostic);
 
-                    if (TryGetCodeActionToApply(codeFixTitle, codeActionsForDiagnostic, out var codeActionToExecute))
+                    if (CodeActionToApply(codeFixTitle, codeActionsForDiagnostic) is { } codeActionToApply)
                     {
-                        currentDocument = ApplyCodeFix(currentDocument, codeActionToExecute);
-                        CalculateDiagnosticsAndCode(diagnosticAnalyzer, currentDocument, parseOption, out diagnostics, out actualCode);
+                        currentDocument = ApplyCodeFix(currentDocument, codeActionToApply);
+                        state = new DocumentState(diagnosticAnalyzer, currentDocument, parseOption);
 
                         codeFixExecutedAtLeastOnce = true;
                         codeFixExecuted = true;
                     }
                 }
-            } while (codeBeforeFix != actualCode);
+            } while (codeBeforeFix != state.ActualCode);
 
             codeFixExecutedAtLeastOnce.Should().BeTrue();
 
-            AreEqualIgnoringLineEnding(pathToExpected, actualCode);
+            AreEqualIgnoringLineEnding(pathToExpected, state);
         }
 
-        private static void AreEqualIgnoringLineEnding(string pathToExpected, string actualCode)
+        private static void AreEqualIgnoringLineEnding(string pathToExpected, DocumentState state)
         {
             const string WindowsLineEnding = "\r\n";
             const string UnixLineEnding = "\n";
 
-            var actualWithUnixLineEnding = actualCode.Replace(WindowsLineEnding, UnixLineEnding);
+            var actualWithUnixLineEnding = state.ActualCode.Replace(WindowsLineEnding, UnixLineEnding);
             var expectedWithUnixLineEnding = File.ReadAllText(pathToExpected).Replace(WindowsLineEnding, UnixLineEnding);
             actualWithUnixLineEnding.Should().Be(expectedWithUnixLineEnding);
         }
@@ -125,13 +123,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             string codeFixTitle, FixAllProvider fixAllProvider, Document document, ParseOptions parseOption, string pathToExpected)
         {
             var currentDocument = document;
-            CalculateDiagnosticsAndCode(diagnosticAnalyzer, currentDocument, parseOption, out var diagnostics, out var actualCode);
+            var state = new DocumentState(diagnosticAnalyzer, currentDocument, parseOption);
 
-            diagnostics.Should().NotBeEmpty();
+            state.Diagnostics.Should().NotBeEmpty();
 
             var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(
                 codeFixProvider.FixableDiagnosticIds.ToHashSet(),
-                (doc, ids, ct) => Task.FromResult(diagnostics.AsEnumerable()),
+                (doc, ids, ct) => Task.FromResult(state.Diagnostics.AsEnumerable()),
                 null);
 
             var fixAllContext = new FixAllContext(currentDocument, codeFixProvider, FixAllScope.Document,
@@ -141,25 +139,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             codeActionToExecute.Should().NotBeNull();
 
             currentDocument = ApplyCodeFix(currentDocument, codeActionToExecute);
-
-            CalculateDiagnosticsAndCode(diagnosticAnalyzer, currentDocument, parseOption, out diagnostics, out actualCode);
-
-            AreEqualIgnoringLineEnding(pathToExpected, actualCode);
-        }
-
-        private static void CalculateDiagnosticsAndCode(DiagnosticAnalyzer diagnosticAnalyzer, Document document, ParseOptions parseOption,
-            out List<Diagnostic> diagnostics,
-            out string actualCode)
-        {
-            var project = document.Project;
-            if (parseOption != null)
-            {
-                project = project.WithParseOptions(parseOption);
-            }
-
-            diagnostics = DiagnosticVerifier.GetDiagnostics(project.GetCompilationAsync().Result,
-                diagnosticAnalyzer, CompilationErrorBehavior.Ignore).ToList(); // ToDo: Is that the right choice?
-            actualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
+            state = new DocumentState(diagnosticAnalyzer, currentDocument, parseOption);
+            AreEqualIgnoringLineEnding(pathToExpected, state);
         }
 
         private static Document ApplyCodeFix(Document document, CodeAction codeAction)
@@ -169,24 +150,39 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return solution.GetDocument(document.Id);
         }
 
-        private static bool TryGetCodeActionToApply(string codeFixTitle, IEnumerable<CodeAction> codeActions,
-            out CodeAction codeAction)
-        {
-            codeAction = codeFixTitle != null
-                ? codeActions.SingleOrDefault(action => action.Title == codeFixTitle)
-                : codeActions.FirstOrDefault();
+        private static CodeAction CodeActionToApply(string codeFixTitle, IEnumerable<CodeAction> codeActions) =>
+            codeFixTitle == null
+                ? codeActions.FirstOrDefault()
+                : codeActions.SingleOrDefault(action => action.Title == codeFixTitle);
 
-            return codeAction != null;
-        }
-
-        private static IEnumerable<CodeAction> GetCodeActionsForDiagnostic(CodeFixProvider codeFixProvider, Document document,
-            Diagnostic diagnostic)
+        private static IEnumerable<CodeAction> GetCodeActionsForDiagnostic(CodeFixProvider codeFixProvider, Document document, Diagnostic diagnostic)
         {
             var actions = new List<CodeAction>();
             var context = new CodeFixContext(document, diagnostic, (a, d) => actions.Add(a), CancellationToken.None);
 
             codeFixProvider.RegisterCodeFixesAsync(context).Wait();
             return actions;
+        }
+
+        private class DocumentState
+        {
+            public readonly Compilation Compilation;
+            public readonly ImmutableArray<Diagnostic> Diagnostics;
+            public readonly string ActualCode;
+
+            public DocumentState(DiagnosticAnalyzer diagnosticAnalyzer, Document document, ParseOptions parseOption)
+            {
+                var project = document.Project;
+                if (parseOption != null)
+                {
+                    project = project.WithParseOptions(parseOption);
+                }
+
+                Compilation = project.GetCompilationAsync().Result;
+                Diagnostics = DiagnosticVerifier.GetDiagnostics(Compilation, diagnosticAnalyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
+                ActualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
+            }
+
         }
     }
 }
