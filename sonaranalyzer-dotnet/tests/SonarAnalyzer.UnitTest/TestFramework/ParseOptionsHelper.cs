@@ -29,42 +29,50 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 using static Microsoft.CodeAnalysis.CSharp.LanguageVersion;
 using static Microsoft.CodeAnalysis.VisualBasic.LanguageVersion;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
+
+    /// <summary>
+    /// Returned values depend on the build environment.
+    /// Local run: Only the latest language version is used to simplify debugging.
+    /// CI run: All configured versions are returned.
+    /// </summary>
     internal static class ParseOptionsHelper
     {
-        public static IEnumerable<ParseOptions> BeforeCSharp7 { get; }
-        public static IEnumerable<ParseOptions> BeforeCSharp8 { get; }
+        public static ImmutableArray<ParseOptions> BeforeCSharp7 { get; }
+        public static ImmutableArray<ParseOptions> BeforeCSharp8 { get; }
 
-        public static IEnumerable<ParseOptions> FromCSharp6 { get; }
-        public static IEnumerable<ParseOptions> FromCSharp7 { get; }
-        public static IEnumerable<ParseOptions> FromCSharp8 { get; }
+        public static ImmutableArray<ParseOptions> FromCSharp6 { get; }
+        public static ImmutableArray<ParseOptions> FromCSharp7 { get; }
+        public static ImmutableArray<ParseOptions> FromCSharp8 { get; }
 
-        public static IEnumerable<ParseOptions> FromVisualBasic12 { get; }
-        public static IEnumerable<ParseOptions> FromVisualBasic14 { get; }
-        public static IEnumerable<ParseOptions> FromVisualBasic15 { get; }
+        public static ImmutableArray<ParseOptions> FromVisualBasic12 { get; }
+        public static ImmutableArray<ParseOptions> FromVisualBasic14 { get; }
+        public static ImmutableArray<ParseOptions> FromVisualBasic15 { get; }
 
-        private static readonly IEnumerable<ParseOptions> defaultParseOptions;
+        private static readonly ImmutableArray<ParseOptions> defaultParseOptions;
 
 #pragma warning disable S3963 // The static fields are dependent between them so the values cannot be set inline
+
         static ParseOptionsHelper()
         {
             var cs7 = CreateOptions(CSharp7, CSharp7_1, CSharp7_2, CSharp7_3);
             var vb15 = CreateOptions(VisualBasic15, VisualBasic15_3, VisualBasic15_5);
 
-            BeforeCSharp7 = CreateOptions(CSharp5).Concat(CreateOptions(CSharp6));
-            BeforeCSharp8 = BeforeCSharp7.Concat(cs7);
+            BeforeCSharp7 = CreateOptions(CSharp5).Concat(CreateOptions(CSharp6)).FilterByEnvironment();
+            BeforeCSharp8 = BeforeCSharp7.Concat(cs7).FilterByEnvironment();
 
-            FromCSharp8 = CreateOptions(CSharp8);
-            FromCSharp7 = cs7.Concat(FromCSharp8);
-            FromCSharp6 = CreateOptions(CSharp6).Concat(FromCSharp7);
+            FromCSharp8 = CreateOptions(CSharp8).FilterByEnvironment();
+            FromCSharp7 = cs7.Concat(FromCSharp8).FilterByEnvironment();
+            FromCSharp6 = CreateOptions(CSharp6).Concat(FromCSharp7).FilterByEnvironment();
 
-            FromVisualBasic15 = vb15.Concat(CreateOptions(VisualBasic16));
-            FromVisualBasic14 = CreateOptions(VisualBasic14).Concat(FromVisualBasic15);
-            FromVisualBasic12 = CreateOptions(VisualBasic12).Concat(FromVisualBasic14);
+            FromVisualBasic15 = vb15.Concat(CreateOptions(VisualBasic16)).FilterByEnvironment();
+            FromVisualBasic14 = CreateOptions(VisualBasic14).Concat(FromVisualBasic15).FilterByEnvironment();
+            FromVisualBasic12 = CreateOptions(VisualBasic12).Concat(FromVisualBasic14).FilterByEnvironment();
 
-            defaultParseOptions = FromCSharp7.Concat(FromVisualBasic12); // List of values depends on the build environment
+            defaultParseOptions = FromCSharp7.Concat(FromVisualBasic12).ToImmutableArray(); // Values depends on the build environment
         }
 #pragma warning restore S3963
 
@@ -81,10 +89,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 _ => throw new NotSupportedException($"Not supported language '{language}'")
             };
 
+        private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
+            TestContextHelper.IsAzureDevOpsContext
+                ? options.ToImmutableArray()
+                : ImmutableArray.Create(options.Last());    // Use only the latest version for local test run and debug
+
         private static IEnumerable<ParseOptions> CreateOptions(params CS.LanguageVersion[] options) =>
-            options.Select(x => new CS.CSharpParseOptions(x)).ToImmutableArray();
+            options.Select(x => new CS.CSharpParseOptions(x));
 
         private static IEnumerable<ParseOptions> CreateOptions(params VB.LanguageVersion[] options) =>
-            options.Select(x => new VB.VisualBasicParseOptions(x)).ToImmutableArray();
+            options.Select(x => new VB.VisualBasicParseOptions(x));
     }
 }
