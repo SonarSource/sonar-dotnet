@@ -56,8 +56,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             VB.LanguageVersion.VisualBasic15_5);
         public static IEnumerable<ParseOptions> VisualBasic16 { get; } = CreateOptions(VB.LanguageVersion.VisualBasic16);
 
-        private static readonly Func<ParseOptions, bool> VisualBasicFilter = (options) => options is VB.VisualBasicParseOptions;
-        private static readonly Func<ParseOptions, bool> CSharpFilter = (options) => options is CS.CSharpParseOptions;
         private static readonly IEnumerable<ParseOptions> defaultParseOptions;
 
 #pragma warning disable S3963 // The static fields are dependent between them so the values cannot be set inline
@@ -83,20 +81,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 ? parseOptions.WhereNotNull()
                 : defaultParseOptions;
 
-        public static Func<ParseOptions, bool> GetFilterByLanguage(string language)
-        {
-            if (language == LanguageNames.CSharp)
+        public static Func<ParseOptions, bool> GetFilterByLanguage(string language) =>
+            language switch
             {
-                return CSharpFilter;
-            }
-
-            if (language == LanguageNames.VisualBasic)
-            {
-                return VisualBasicFilter;
-            }
-
-            throw new NotSupportedException($"Not supported language '{language}'");
-        }
+                LanguageNames.CSharp => x => x is VB.VisualBasicParseOptions,
+                LanguageNames.VisualBasic => x => x is CS.CSharpParseOptions,
+                _ => throw new NotSupportedException($"Not supported language '{language}'")
+            };
 
         private static IEnumerable<ParseOptions> CreateOptions(params CS.LanguageVersion[] options) =>
             options.Select(x => new CS.CSharpParseOptions(x)).ToImmutableArray();
