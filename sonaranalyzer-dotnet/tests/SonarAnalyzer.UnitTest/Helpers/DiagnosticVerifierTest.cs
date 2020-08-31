@@ -45,9 +45,9 @@ public class UnexpectedSecondary
     }",
                     new BinaryOperationWithIdenticalExpressions());
 
-            action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage($"Unexpected primary issue on line 7, span (6,21)-(6,22) with message 'Correct one of the identical expressions on both sides of operator '=='.'.{Environment.NewLine}" +
-                  $"See output to see all actual diagnostics raised on the file");
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
+                "CSharp*: Unexpected primary issue on line 7, span (6,21)-(6,22) with message 'Correct one of the identical expressions on both sides of operator '=='.'." + Environment.NewLine +
+                "See output to see all actual diagnostics raised on the file");
         }
 
         [TestMethod]
@@ -65,9 +65,9 @@ public class UnexpectedSecondary
     }",
                     new BinaryOperationWithIdenticalExpressions());
 
-            action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage($"Unexpected secondary issue on line 6, span (5,16)-(5,17) with message ''.{Environment.NewLine}" +
-                  $"See output to see all actual diagnostics raised on the file");
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
+                "CSharp*: Unexpected secondary issue on line 6, span (5,16)-(5,17) with message ''." + Environment.NewLine +
+                "See output to see all actual diagnostics raised on the file");
         }
 
         [TestMethod]
@@ -86,9 +86,9 @@ public class UnexpectedSecondary
     }",
                     new BinaryOperationWithIdenticalExpressions());
 
-            action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage($"Unexpected secondary issue [myId] on line 7, span (6,16)-(6,17) with message ''.{Environment.NewLine}" +
-                  $"See output to see all actual diagnostics raised on the file");
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
+                "CSharp*: Unexpected secondary issue [myId] on line 7, span (6,16)-(6,17) with message ''." + Environment.NewLine +
+                "See output to see all actual diagnostics raised on the file");
         }
 
         [TestMethod]
@@ -107,10 +107,10 @@ public class UnexpectedSecondary
     }",
                     new BinaryOperationWithIdenticalExpressions());
 
-            action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage(@"Expected secondary message on line 7 does not match actual message.
-Expected: 'Wrong message'
-Actual  : ''");
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
+                @"CSharp*: Expected secondary message on line 7 does not match actual message." + Environment.NewLine +
+                "Expected: 'Wrong message'" + Environment.NewLine +
+                "Actual  : ''");
         }
 
         [TestMethod]
@@ -131,7 +131,7 @@ public class UnexpectedSecondary
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage("Expected secondary issue on line 6 to start on column 14 but got column 16.");
+                  .WithMessage("CSharp*: Expected secondary issue on line 6 to start on column 14 but got column 16.");
         }
 
         [TestMethod]
@@ -152,7 +152,7 @@ public class UnexpectedSecondary
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage("Expected secondary issue on line 6 to have a length of 4 but got a length of 1.");
+                  .WithMessage("CSharp*: Expected secondary issue on line 6 to have a length of 4 but got a length of 1.");
         }
 
         [TestMethod]
@@ -186,7 +186,7 @@ public class UnexpectedSecondaryWithBuildError
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage("Unexpected build error [CS1514]: { * on line 2");
+                  .WithMessage("CSharp*: Unexpected build error [CS1514]: { * on line 2");
         }
 
         [TestMethod]
@@ -242,11 +242,11 @@ public class ExpectedIssuesNotRaised
     }",
                     new BinaryOperationWithIdenticalExpressions());
 
-            action.Should().Throw<AssertFailedException>()
-                  .WithMessage(@"Issue(s) expected but not raised on line(s):
-Line: 4, Type: primary, Id: 'MyId0'
-Line: 6, Type: primary, Id: ''
-Line: 7, Type: secondary, Id: 'MyId1'");
+            action.Should().Throw<AssertFailedException>().WithMessage(
+                @"CSharp*: Issue(s) expected but not raised on line(s):" + Environment.NewLine +
+                "Line: 4, Type: primary, Id: 'MyId0'" + Environment.NewLine +
+                "Line: 6, Type: primary, Id: ''" + Environment.NewLine +
+                "Line: 7, Type: secondary, Id: 'MyId1'");
         }
     }
 }
