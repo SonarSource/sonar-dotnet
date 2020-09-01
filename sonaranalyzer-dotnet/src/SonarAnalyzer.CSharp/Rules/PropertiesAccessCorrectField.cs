@@ -118,12 +118,12 @@ namespace SonarAnalyzer.Rules.CSharp
             (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter &&
             getter.DescendantNodes().Any());
 
-        private static void FillAssignments(Dictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
+        private static void FillAssignments(IDictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
         {
             foreach (var node in root.DescendantNodes())
             {
                 FieldData? foundField = null;
-                if (node is AssignmentExpressionSyntax assignment && node.IsKind(SyntaxKind.SimpleAssignmentExpression))
+                if (node is AssignmentExpressionSyntax assignment && node.IsAnyKind(SyntaxKind.SimpleAssignmentExpression, SyntaxKindEx.CoalesceAssignmentExpression))
                 {
                     foundField = assignment.Left.DescendantNodesAndSelf().OfType<ExpressionSyntax>()
                         .Select(x => ExtractFieldFromExpression(AccessorKind.Setter, x, compilation, useFieldLocation))
@@ -140,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static ExpressionSyntax SingleReturn(BlockSyntax body)
+        private static ExpressionSyntax SingleReturn(SyntaxNode body)
         {
             if (body == null)
             {
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return returns.Length == 1 ? returns.Single().Expression : null;
         }
 
-        private static ExpressionSyntax SingleInvocation(BlockSyntax body)
+        private static ExpressionSyntax SingleInvocation(SyntaxNode body)
         {
             if (body == null)
             {
