@@ -76,13 +76,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private static void CompareActualToExpected(Compilation compilation, IEnumerable<Diagnostic> diagnostics, List<IIssueLocation> expectedIssues, bool compareIdToMessage)
+        private static void CompareActualToExpected(Compilation compilation, IEnumerable<Diagnostic> diagnostics, ICollection<IIssueLocation> expectedIssues, bool compareIdToMessage)
         {
             DumpActualDiagnostics(compilation, diagnostics);
 
             foreach (var diagnostic in diagnostics)
             {
-                var issueId = VerifyPrimaryIssue(compilation,
+                var issueId = VerifyPrimaryIssue(compilation.LanguageVersionString(),
                     expectedIssues,
                     issue => issue.IsPrimary,
                     diagnostic.Location,
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
                 foreach (var secondaryLocation in secondaryLocations)
                 {
-                    VerifySecondaryIssue(compilation,
+                    VerifySecondaryIssue(compilation.LanguageVersionString(),
                         expectedIssues,
                         issue => issue.IssueId == issueId && !issue.IsPrimary,
                         secondaryLocation.Location,
@@ -203,15 +203,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);
 
-        private static string VerifyPrimaryIssue(Compilation compilation, IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+        private static string VerifyPrimaryIssue(string languageVersion, ICollection<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
             Location location, string message, string extraInfo) =>
-            VerifyIssue(compilation, expectedIssues, issueFilter, location, message, extraInfo, true, null);
+            VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, extraInfo, true, null);
 
-        private static void VerifySecondaryIssue(Compilation compilation, IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+        private static void VerifySecondaryIssue(string languageVersion, ICollection<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
             Location location, string message, string issueId) =>
-            VerifyIssue(compilation, expectedIssues, issueFilter, location, message, null, false, issueId);
+            VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, null, false, issueId);
 
-        private static string VerifyIssue(Compilation compilation, IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+        private static string VerifyIssue(string languageVersion, ICollection<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
             Location location, string message, string extraInfo, bool isPrimary, string primaryIssueId)
         {
             var lineNumber = location.GetLineNumberToReport();
@@ -219,7 +219,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Where(issueFilter)
                 .FirstOrDefault(issue => issue.LineNumber == lineNumber);
             var issueType = IssueType(isPrimary);
-            var languageVersion = compilation.LanguageVersionString();
 
             if (expectedIssue == null)
             {

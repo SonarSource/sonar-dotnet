@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<ParseOptions> FromCSharp7 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp8 { get; }
 
-        public static ImmutableArray<ParseOptions> FromVisualBasic12 { get; }
+        private static ImmutableArray<ParseOptions> FromVisualBasic12 { get; }
         public static ImmutableArray<ParseOptions> FromVisualBasic14 { get; }
         public static ImmutableArray<ParseOptions> FromVisualBasic15 { get; }
 

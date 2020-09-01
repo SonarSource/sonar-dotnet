@@ -42,7 +42,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             var document = CreateDocument(path, additionalReferences);
             var parseOptions = ParseOptionsHelper.GetParseOptionsOrDefault(options)
-                .Where(ParseOptionsHelper.GetFilterByLanguage(document.Project.Language));
+                .Where(ParseOptionsHelper.GetFilterByLanguage(document.Project.Language))
+                .ToArray();
 
             foreach (var parseOption in parseOptions)
             {
