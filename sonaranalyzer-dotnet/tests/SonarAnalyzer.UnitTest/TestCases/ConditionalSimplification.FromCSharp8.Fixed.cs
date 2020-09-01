@@ -227,6 +227,37 @@ public class Repro_3468
 {
     public int NestedTernary(bool condition1, bool condition2, int a, int b, int c)
     {
-        return condition1 ? condition2 ? a : b : c;
+        if (condition1) // Compliant, changing this will lead to nested conditionals
+        {
+            return condition2 ? a : b;
+        }
+        else
+        {
+            return c;
+        }
+    }
+
+    public int? NestedNullCoalescing(bool condition, int? a, int b)
+    {
+        if (condition) // Compliant, changing this will lead to nested conditionals
+        {
+            return b;
+        }
+        else
+        {
+            return a ?? b;
+        }
+    }
+
+    public int? NestedNullCoalescingAssignment(bool condition, int? a, int b)
+    {
+        if (condition) // Compliant, changing this will lead to nested conditionals
+        {
+            return b;
+        }
+        else
+        {
+            return a ??= b;
+        }
     }
 }

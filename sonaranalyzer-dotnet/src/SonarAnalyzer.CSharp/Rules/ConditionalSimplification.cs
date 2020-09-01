@@ -201,7 +201,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 var retExpr1 = return1.Expression.RemoveParentheses();
                 var retExpr2 = return2.Expression.RemoveParentheses();
 
-                if (!AreTypesCompatible(return1.Expression, return2.Expression, semanticModel))
+                if (IsConditionalStructure(retExpr1)
+                    || IsConditionalStructure(retExpr2)
+                    || !AreTypesCompatible(return1.Expression, return2.Expression, semanticModel))
                 {
                     return false;
                 }
@@ -365,5 +367,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return ret.ToImmutableDictionary();
         }
+
+        private static bool IsConditionalStructure(SyntaxNode syntaxNode) =>
+            syntaxNode.IsAnyKind(SyntaxKind.ConditionalExpression, SyntaxKind.CoalesceExpression, SyntaxKindEx.CoalesceAssignmentExpression);
     }
 }
