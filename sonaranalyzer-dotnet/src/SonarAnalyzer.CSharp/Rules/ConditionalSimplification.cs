@@ -191,7 +191,7 @@ namespace SonarAnalyzer.Rules.CSharp
             typeNull == null && typeValue != null && typeValue.IsValueType;
 
         private static bool CanBeSimplified(SyntaxNodeAnalysisContext context, StatementSyntax statement1, StatementSyntax statement2,
-                                            ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
+                                            SyntaxNode comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
         {
             simplifiedOperator = "?:";
 
@@ -247,7 +247,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool AreCandidateAssignments(ExpressionSyntax expression1, ExpressionSyntax expression2,
-            ExpressionSyntax compared, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
+            SyntaxNode compared, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
         {
             simplifiedOperator = "?:";
             var assignment1 = expression1 as AssignmentExpressionSyntax;
@@ -331,7 +331,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return numberOfDifferences == 1 && (comparedToNull == null || numberOfComparisonsToCondition == 1);
         }
 
-        private static bool CanExpressionBeCoalescing(ExpressionSyntax whenTrue, ExpressionSyntax whenFalse, ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue)
+        private static bool CanExpressionBeCoalescing(ExpressionSyntax whenTrue, ExpressionSyntax whenFalse, SyntaxNode comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue)
         {
             if (CSharpEquivalenceChecker.AreEquivalent(whenTrue, comparedToNull))
             {
