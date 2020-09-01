@@ -61,7 +61,7 @@ namespace Tests.Diagnostics
 
         public int GetItem(int i) => used[i];
 
-        private Dictionary<int, int> GetDictionary() => used;
+        private Dictionary<int, int> GetDictionary() => null;
 
         public int GetDictionaryItem(int i) => GetDictionary()[i];
 
