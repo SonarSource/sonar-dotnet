@@ -27,15 +27,15 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class MetadataReferenceFactory
     {
-        private static readonly string SystemAssembliesFolder = new FileInfo(typeof(object).Assembly.Location).Directory.FullName;
+        private static readonly string SystemAssembliesFolder = Path.GetDirectoryName(typeof(object).Assembly.Location);
 
         public static IEnumerable<MetadataReference> Create(string assemblyName) =>
             ImmutableArray.Create(CreateReference(assemblyName));
 
-        internal static MetadataReference CreateReference(string assemblyName) =>
+        public static MetadataReference CreateReference(string assemblyName) =>
             MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, assemblyName));
 
-        internal static MetadataReference CreateReference(string assemblyName, string subFolder) =>
+        public static MetadataReference CreateReference(string assemblyName, string subFolder) =>
             MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, subFolder, assemblyName));
     }
 }
