@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var node in root.DescendantNodes())
             {
                 FieldData? foundField = null;
-                if (node is AssignmentExpressionSyntax assignment && node.IsKind(SyntaxKind.SimpleAssignmentExpression))
+                if (node is AssignmentExpressionSyntax assignment && node.IsAnyKind(SyntaxKind.SimpleAssignmentExpression, SyntaxKindEx.CoalesceAssignmentExpression))
                 {
                     foundField = assignment.Left.DescendantNodesAndSelf().OfType<ExpressionSyntax>()
                         .Select(x => ExtractFieldFromExpression(AccessorKind.Setter, x, compilation, useFieldLocation))
