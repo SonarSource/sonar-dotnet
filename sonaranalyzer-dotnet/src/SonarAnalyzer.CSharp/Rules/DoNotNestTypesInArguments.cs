@@ -38,25 +38,29 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S4017";
         private const string MessageFormat = "Refactor this method to remove the nested type argument.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-            c =>
-            {
-                var argumentTypeSymbols = GetParametersSyntaxNodes(c.Node)
-                    .Where(p => GetNestingDepth(p, c) > 1);
-
-                foreach (var argument in argumentTypeSymbols)
+                c =>
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, argument.GetLocation()));
-                }
-            },
-            SyntaxKind.MethodDeclaration,
-            SyntaxKindEx.LocalFunctionStatement);
+                    var argumentTypeSymbols = GetParametersSyntaxNodes(c.Node).Where(p => MaxDepthReached(p, c.SemanticModel));
+
+                    foreach (var argument in argumentTypeSymbols)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, argument.GetLocation()));
+                    }
+                },
+                SyntaxKind.MethodDeclaration,
+                SyntaxKindEx.LocalFunctionStatement);
+
+        private static bool MaxDepthReached(SyntaxNode parameterSyntax, SemanticModel model)
+        {
+            var walker = new GenericWalker(2, model);
+            walker.SafeVisit(parameterSyntax);
+            return walker.HasReachedMaxDepth;
         }
 
         private static IEnumerable<ParameterSyntax> GetParametersSyntaxNodes(SyntaxNode node) =>
@@ -67,37 +71,52 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => Enumerable.Empty<ParameterSyntax>()
             };
 
-        private static int GetNestingDepth(ParameterSyntax parameterSyntax, SyntaxNodeAnalysisContext context) =>
-            GetNestingDepth(context.SemanticModel.GetDeclaredSymbol(parameterSyntax)?.Type, 0 , true);
-
-        private static readonly ImmutableArray<KnownType> expressionFuncActionTypes =
-            KnownType.SystemFuncVariants
-            .Union(KnownType.SystemActionVariants)
-            .Union(new[] { KnownType.System_Linq_Expressions_Expression_T })
-            .ToImmutableArray();
-
-        private static int GetNestingDepth(ITypeSymbol argumentSymbol, int depth, bool ignoreExpressions)
+        private sealed class GenericWalker : CSharpSyntaxWalker
         {
-            var currentOrNestedArgument = argumentSymbol;
-            if (currentOrNestedArgument is IArrayTypeSymbol arrayTypeSymbol)
+            private static readonly ImmutableArray<KnownType> ignoredTypes =
+                KnownType.SystemFuncVariants
+                         .Union(KnownType.SystemActionVariants)
+                         .Union(new[] { KnownType.System_Linq_Expressions_Expression_T })
+                         .ToImmutableArray();
+
+            private readonly int maxDepth;
+            private readonly SemanticModel model;
+
+            private int depth;
+
+            public bool HasReachedMaxDepth { get; private set; }
+
+            public GenericWalker(int maxDepth, SemanticModel model)
             {
-                currentOrNestedArgument = arrayTypeSymbol.ElementType;
+                this.maxDepth = maxDepth;
+                this.model = model;
             }
 
-            if (!(currentOrNestedArgument is INamedTypeSymbol namedTypeSymbol))
+            public override void VisitGenericName(GenericNameSyntax node)
             {
-                return depth;
+                if (!(model.GetSymbolInfo(node).Symbol is INamedTypeSymbol namedTypeSymbol))
+                {
+                    return;
+                }
+
+                if (!namedTypeSymbol.ConstructedFrom.IsAny(ignoredTypes))
+                {
+                    if (depth == maxDepth - 1)
+                    {
+                        HasReachedMaxDepth = true;
+                    }
+                    else
+                    {
+                        depth++;
+                        base.VisitGenericName(node);
+                        depth--;
+                    }
+                }
+                else
+                {
+                    base.VisitGenericName(node);
+                }
             }
-
-            var nextDepth = ignoreExpressions && namedTypeSymbol.ConstructedFrom.IsAny(expressionFuncActionTypes) ? depth : depth + 1;
-
-            var typeArguments = namedTypeSymbol.TypeArguments;
-            if (typeArguments != null && typeArguments.Any())
-            {
-                return typeArguments.Max(p => GetNestingDepth(p, nextDepth, false));
-            }
-
-            return depth;
         }
     }
 }
