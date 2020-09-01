@@ -18,7 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -29,7 +32,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4507";
         protected const string MessageFormat = "Make sure this debug feature is deactivated before delivering the code in production.";
 
-        protected static readonly ImmutableArray<MemberDescriptor> isDevelopmentMethods = ImmutableArray.Create(
+        private static readonly ImmutableArray<MemberDescriptor> isDevelopmentMethods = ImmutableArray.Create(
             new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment"),
             new MemberDescriptor(KnownType.Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions, "IsDevelopment")
             );
@@ -46,5 +49,11 @@ namespace SonarAnalyzer.Rules
         }
 
         protected abstract InvocationCondition IsInvokedConditionally();
+
+        protected static bool IsValidationMethod(SemanticModel semanticModel, SyntaxNode condition, string methodName, bool caseInsensitiveComparison = false)
+        {
+            var methodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol);
+            return isDevelopmentMethods.Any(x => x.IsMatch(methodName, methodSymbol, caseInsensitiveComparison));
+        }
     }
 }
