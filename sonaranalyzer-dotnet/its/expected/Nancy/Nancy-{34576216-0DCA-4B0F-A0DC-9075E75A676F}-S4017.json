@@ -4,32 +4,6 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
-"region":  {
-"startLine":  68,
-"startColumn":  91,
-"endLine":  68,
-"endColumn":  138
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
-"region":  {
-"startLine":  71,
-"startColumn":  101,
-"endLine":  71,
-"endColumn":  156
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
 "region":  {
 "startLine":  25,
@@ -69,45 +43,6 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
-"region":  {
-"startLine":  18,
-"startColumn":  41,
-"endLine":  18,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
-"region":  {
-"startLine":  29,
-"startColumn":  36,
-"endLine":  29,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
-"region":  {
-"startLine":  278,
-"startColumn":  70,
-"endLine":  278,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
 "region":  {
 "startLine":  28,
@@ -140,45 +75,6 @@
 "startColumn":  76,
 "endLine":  19,
 "endColumn":  136
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  77,
-"endLine":  20,
-"endColumn":  134
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Owin\DelegateExtensions.cs",
-"region":  {
-"startLine":  23,
-"startColumn":  48,
-"endLine":  23,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Owin\DelegateExtensions.cs",
-"region":  {
-"startLine":  38,
-"startColumn":  48,
-"endLine":  38,
-"endColumn":  76
 }
 }
 },
