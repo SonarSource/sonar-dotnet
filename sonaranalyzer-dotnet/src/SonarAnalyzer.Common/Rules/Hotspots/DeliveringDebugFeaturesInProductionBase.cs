@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -28,8 +29,10 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4507";
         protected const string MessageFormat = "Make sure this debug feature is deactivated before delivering the code in production.";
 
-        protected static readonly MemberDescriptor isDevelopmentMethod =
-            new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment");
+        protected static readonly ImmutableArray<MemberDescriptor> isDevelopmentMethods = ImmutableArray.Create(
+            new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment"),
+            new MemberDescriptor(KnownType.Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions, "IsDevelopment")
+            );
 
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
 

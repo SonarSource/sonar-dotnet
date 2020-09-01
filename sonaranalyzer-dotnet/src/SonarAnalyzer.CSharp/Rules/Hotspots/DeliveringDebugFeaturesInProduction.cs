@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -79,10 +79,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsMatch(SemanticModel semanticModel, InvocationExpressionSyntax condition)
         {
             var methodName = condition.Expression.GetIdentifier()?.Identifier.ValueText;
-
             var methodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol);
 
-            return isDevelopmentMethod.IsMatch(methodName, methodSymbol);
+            return isDevelopmentMethods.Any(x => x.IsMatch(methodName, methodSymbol));
         }
     }
 }
