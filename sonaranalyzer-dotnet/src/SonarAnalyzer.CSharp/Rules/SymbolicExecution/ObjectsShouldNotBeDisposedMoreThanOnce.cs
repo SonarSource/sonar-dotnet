@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -100,17 +100,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public event EventHandler<ObjectDisposedEventArgs> ObjectDisposed;
 
-            public ObjectDisposedPointerCheck(CSharpExplodedGraph explodedGraph)
-                : base(explodedGraph)
-            {
-            }
+            public ObjectDisposedPointerCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
 
             public override ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
             {
                 var newProgramState = programState;
-
                 var usingFinalizer = (UsingEndBlock)programPoint.Block;
-
                 var disposables = usingFinalizer.Identifiers
                     .Select(i =>
                     new
@@ -125,10 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     newProgramState = ProcessDisposableSymbol(newProgramState, disposable.SyntaxNode, disposable.Symbol);
                 }
 
-                newProgramState = ProcessStreamDisposingTypes(newProgramState,
-                    (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
-
-                return newProgramState;
+                return ProcessStreamDisposingTypes(newProgramState, (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
             }
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
@@ -181,9 +173,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var disposableSymbol = semanticModel.GetSymbolInfo(disposedObject).Symbol;
 
-                        if (disposableSymbol is IMethodSymbol ||
+                        if (disposableSymbol is IMethodSymbol
                             // Special case - if the parameter symbol is "this" then resolve it to the containing type
-                            (disposableSymbol is IParameterSymbol parameter && parameter.IsThis))
+                            || (disposableSymbol is IParameterSymbol parameter && parameter.IsThis))
                         {
                             disposableSymbol = disposableSymbol.ContainingType;
                         }
@@ -197,16 +189,15 @@ namespace SonarAnalyzer.Rules.CSharp
             private ProgramState ProcessStreamDisposingTypes(ProgramState programState, SyntaxNode usingExpression)
             {
                 var newProgramState = programState;
-                var objectCreationExpressions = usingExpression.DescendantNodes()
-                    .OfType<ObjectCreationExpressionSyntax>();
+                var objectCreationExpressions = usingExpression.DescendantNodes().OfType<ObjectCreationExpressionSyntax>();
 
                 foreach (var objectCreationExpression in objectCreationExpressions)
                 {
-                    if (semanticModel.GetSymbolInfo(objectCreationExpression.Type).Symbol is ISymbol symbol &&
-                        symbol.GetSymbolType() is ITypeSymbol objectType &&
-                        objectType.DerivesOrImplementsAny(typesDisposingUnderlyingStreamWithLeaveOpenArgumentIndex.Keys.ToImmutableArray()) &&
-                        objectCreationExpression.ArgumentList?.Arguments is IEnumerable<ArgumentSyntax> argumentList &&
-                        argumentList.Any())
+                    if (semanticModel.GetSymbolInfo(objectCreationExpression.Type).Symbol is ISymbol symbol
+                        && symbol.GetSymbolType() is ITypeSymbol objectType
+                        && objectType.DerivesOrImplementsAny(typesDisposingUnderlyingStreamWithLeaveOpenArgumentIndex.Keys.ToImmutableArray())
+                        && objectCreationExpression.ArgumentList?.Arguments is IEnumerable<ArgumentSyntax> argumentList
+                        && argumentList.Any())
                     {
                         // Checks for the 'leaveOpen' argument. It is at position 4 if present for StreamReader constructor, while it is at position 3 for StreamWriter.
                         // See #2491 for more details
@@ -214,8 +205,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             .Where(entry => objectType.DerivesOrImplements(entry.Key))
                             .Select(entry => entry.Value)
                             .First();
-                        if (!HasLeaveOpenTrueArgument(argumentList, leaveOpenArgumentIndex) &&
-                            GetArgument(argumentList, StreamParameterName, 0) is ArgumentSyntax argument)
+                        if (!HasLeaveOpenTrueArgument(argumentList, leaveOpenArgumentIndex)
+                            && GetArgument(argumentList, StreamParameterName, 0) is ArgumentSyntax argument)
                         {
                             var streamSymbol = semanticModel.GetSymbolInfo(argument.Expression).Symbol;
                             newProgramState = ProcessDisposableSymbol(newProgramState, argument.Expression, streamSymbol);
@@ -227,21 +218,15 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private static bool HasLeaveOpenTrueArgument(IEnumerable<ArgumentSyntax> argumentList, int leaveOpenArgumentIndex) =>
-                GetArgument(argumentList, LeaveOpenParameterName, leaveOpenArgumentIndex) is ArgumentSyntax leaveOpenArgument &&
-                CSharpEquivalenceChecker.AreEquivalent(leaveOpenArgument.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
+                GetArgument(argumentList, LeaveOpenParameterName, leaveOpenArgumentIndex) is ArgumentSyntax leaveOpenArgument
+                && CSharpEquivalenceChecker.AreEquivalent(leaveOpenArgument.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
 
-            private static ArgumentSyntax GetArgument(IEnumerable<ArgumentSyntax> argumentList, string argumentName, int defaultArgumentIndex)
-            {
-                var argument = argumentList.FirstOrDefault(arg => argumentName.Equals(arg.NameColon?.Name.Identifier.ValueText));
-                if (argument == null)
-                {
-                    return argumentList.ElementAtOrDefault(defaultArgumentIndex);
-                }
-                return argument;
-            }
+            private static ArgumentSyntax GetArgument(IEnumerable<ArgumentSyntax> argumentList, string argumentName, int defaultArgumentIndex) =>
+                argumentList.FirstOrDefault(arg => argumentName.Equals(arg.NameColon?.Name.Identifier.ValueText)) is { } argument
+                    ? argument
+                    : argumentList.ElementAtOrDefault(defaultArgumentIndex);
 
-            private ProgramState ProcessDisposableSymbol(ProgramState programState, SyntaxNode disposeInstruction,
-                ISymbol disposableSymbol)
+            private ProgramState ProcessDisposableSymbol(ProgramState programState, SyntaxNode disposeInstruction, ISymbol disposableSymbol)
             {
                 if (disposableSymbol == null) // DisposableSymbol is null when we invoke an array element
                 {
@@ -262,8 +247,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var newProgramState = programState;
-                if (disposableSymbol is INamedTypeSymbol &&
-                    newProgramState.GetSymbolValue(disposableSymbol) == null)
+                if (disposableSymbol is INamedTypeSymbol && newProgramState.GetSymbolValue(disposableSymbol) == null)
                 {
                     // Dispose is called on current instance but we don't usually store a symbol for this
                     // so we store it and then associate the Disposed constraint.

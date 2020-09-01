@@ -18,23 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SonarAnalyzer.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 {
-    internal class MemberAccessingEventArgs : EventArgs
+    [TestClass]
+    public class NullableSymbolicValueTest
     {
-        public IdentifierNameSyntax Identifier { get; }
-        public ISymbol Symbol { get; }
-        public ProgramState ProgramState { get; }
-
-        public MemberAccessingEventArgs(IdentifierNameSyntax identifier, ISymbol symbol, ProgramState programState)
+        [TestMethod]
+        public void ToString_ContainsIdentifier()
         {
-            Identifier = identifier;
-            Symbol = symbol;
-            ProgramState = programState;
+            var value = new NullableSymbolicValue(null);
+            value.ToString().Should().MatchRegex(@"NULLABLE_SV_\d+");
         }
     }
 }

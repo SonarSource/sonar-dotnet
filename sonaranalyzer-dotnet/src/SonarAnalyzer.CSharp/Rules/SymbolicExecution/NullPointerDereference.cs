@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -50,14 +50,9 @@ namespace SonarAnalyzer.Rules.CSharp
         internal sealed class NullPointerCheck : ExplodedGraphCheck
         {
             public event EventHandler<MemberAccessingEventArgs> MemberAccessing;
-
             public event EventHandler<MemberAccessedEventArgs> MemberAccessed;
 
-            public NullPointerCheck(CSharpExplodedGraph explodedGraph)
-                : base(explodedGraph)
-            {
-
-            }
+            public NullPointerCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
 
             private void OnMemberAccessing(IdentifierNameSyntax identifier, ISymbol symbol, ProgramState programState) =>
                 MemberAccessing?.Invoke(this, new MemberAccessingEventArgs(identifier, symbol, programState));
@@ -88,32 +83,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private ProgramState ProcessAwait(ProgramState programState, AwaitExpressionSyntax awaitExpression)
-            {
-                if (!(awaitExpression.Expression is IdentifierNameSyntax identifier))
-                {
-                    return programState;
-                }
+            private ProgramState ProcessAwait(ProgramState programState, AwaitExpressionSyntax awaitExpression) =>
+                awaitExpression.Expression is IdentifierNameSyntax identifier
+                    ? ProcessIdentifier(programState, identifier, semanticModel.GetSymbolInfo(identifier).Symbol)
+                    : programState;
 
-                var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
-                return ProcessIdentifier(programState, identifier, symbol);
-            }
-
-            private ProgramState ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax elementAccess)
-            {
-                if (!(elementAccess.Expression is IdentifierNameSyntax identifier))
-                {
-                    return programState;
-                }
-
-                var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
-                if (symbol == null)
-                {
-                    return programState;
-                }
-
-                return ProcessIdentifier(programState, identifier, symbol);
-            }
+            private ProgramState ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax elementAccess) =>
+                elementAccess.Expression is IdentifierNameSyntax identifier
+                && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol
+                    ? ProcessIdentifier(programState, identifier, symbol)
+                    : programState;
 
             private static MemberAccessIdentifierScope GetIdentifierFromMemberAccess(MemberAccessExpressionSyntax memberAccess)
             {
@@ -129,8 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return new MemberAccessIdentifierScope(subMemberBinding.Name as IdentifierNameSyntax, true);
                 }
 
-                if (expressionWithoutParentheses is MemberAccessExpressionSyntax subMemberAccess &&
-                    subMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                if (expressionWithoutParentheses is MemberAccessExpressionSyntax subMemberAccess && subMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
                 {
                     var isThisAccess = subMemberAccess.Expression.RemoveParentheses() is ThisExpressionSyntax;
                     return new MemberAccessIdentifierScope(subMemberAccess.Name as IdentifierNameSyntax, isThisAccess);
@@ -158,8 +136,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                if ((IsNullableValueType(symbol) && !IsGetTypeCall(memberAccess)) ||
-                    semanticModel.IsExtensionMethod(memberAccess))
+                if ((IsNullableValueType(symbol) && !IsGetTypeCall(memberAccess))
+                    || semanticModel.IsExtensionMethod(memberAccess))
                 {
                     return programState;
                 }
@@ -172,15 +150,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState ProcessIdentifier(ProgramPoint programPoint, ProgramState programState, IdentifierNameSyntax identifier)
             {
-                if (programPoint.Block.Instructions.Last() != identifier ||
-                    programPoint.Block.SuccessorBlocks.Count != 1 ||
-                    (!IsSuccessorForeachBranch(programPoint) && !IsExceptionThrow(identifier)))
+                if (programPoint.Block.Instructions.Last() == identifier
+                    && programPoint.Block.SuccessorBlocks.Count == 1
+                    && (IsSuccessorForeachBranch(programPoint) || IsExceptionThrow(identifier)))
                 {
-                    return programState;
+                    return ProcessIdentifier(programState, identifier, semanticModel.GetSymbolInfo(identifier).Symbol);
                 }
 
-                var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
-                return ProcessIdentifier(programState, identifier, symbol);
+                return programState;
             }
 
             private ProgramState ProcessIdentifier(ProgramState programState, IdentifierNameSyntax identifier, ISymbol symbol)
@@ -199,50 +176,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 return SetNotNullConstraintOnSymbol(symbol, programState);
             }
 
-            private static ProgramState SetNotNullConstraintOnSymbol(ISymbol symbol, ProgramState programState)
-            {
-                if (programState == null)
-                {
-                    return null;
-                }
-
-                if (symbol == null)
-                {
-                    return programState;
-                }
-
-                if (!IsNullableValueType(symbol))
-                {
-                    return symbol.SetConstraint(ObjectConstraint.NotNull, programState);
-                }
-
-                return programState;
-            }
+            private static ProgramState SetNotNullConstraintOnSymbol(ISymbol symbol, ProgramState programState) =>
+                programState == null || symbol == null || IsNullableValueType(symbol)
+                    ? programState
+                    : symbol.SetConstraint(ObjectConstraint.NotNull, programState);
 
             private static bool IsNullableValueType(ISymbol symbol)
             {
                 var type = symbol.GetSymbolType();
-                return type.IsStruct() &&
-                    type.OriginalDefinition.Is(KnownType.System_Nullable_T);
+                return type.IsStruct() && type.OriginalDefinition.Is(KnownType.System_Nullable_T);
             }
 
             private static bool IsExceptionThrow(SyntaxNode syntaxNode) =>
                 syntaxNode.GetFirstNonParenthesizedParent().IsKind(SyntaxKind.ThrowStatement);
 
             private static bool IsSuccessorForeachBranch(ProgramPoint programPoint) =>
-                programPoint.Block.SuccessorBlocks.First() is BinaryBranchBlock successorBlock &&
-                successorBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement);
+                programPoint.Block.SuccessorBlocks.First() is BinaryBranchBlock successorBlock
+                && successorBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement);
 
             private class MemberAccessIdentifierScope
             {
+                public IdentifierNameSyntax Identifier { get; }
+                public bool IsOnCurrentInstance { get; }
+
                 public MemberAccessIdentifierScope(IdentifierNameSyntax identifier, bool isOnCurrentInstance)
                 {
                     Identifier = identifier;
                     IsOnCurrentInstance = isOnCurrentInstance;
                 }
-
-                public IdentifierNameSyntax Identifier { get; }
-                public bool IsOnCurrentInstance { get; }
             }
         }
 
@@ -270,8 +231,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private void MemberAccessedHandler(object sender, MemberAccessedEventArgs args) =>
                 CollectMemberAccesses(args, nullIdentifiers, context.SemanticModel);
 
-            private static void CollectMemberAccesses(MemberAccessedEventArgs args, ISet<IdentifierNameSyntax> nullIdentifiers,
-                SemanticModel semanticModel)
+            private static void CollectMemberAccesses(MemberAccessedEventArgs args, ISet<IdentifierNameSyntax> nullIdentifiers, SemanticModel semanticModel)
             {
                 if (!semanticModel.IsExtensionMethod(args.Identifier.Parent))
                 {

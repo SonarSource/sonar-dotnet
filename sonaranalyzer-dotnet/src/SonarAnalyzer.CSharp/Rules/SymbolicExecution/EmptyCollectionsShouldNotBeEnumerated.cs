@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -120,15 +120,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public event EventHandler<CollectionAccessedEventArgs> CollectionAccessed;
 
-            public EmptyCollectionAccessedCheck(CSharpExplodedGraph explodedGraph)
-                : base(explodedGraph)
-            {
-            }
+            public EmptyCollectionAccessedCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
 
-            private void OnCollectionAccessed(SyntaxNode node, bool empty)
-            {
+            private void OnCollectionAccessed(SyntaxNode node, bool empty) =>
                 CollectionAccessed?.Invoke(this, new CollectionAccessedEventArgs(node, empty));
-            }
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
@@ -183,8 +178,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (addMethods.Contains(methodSymbol.Name))
                     {
                         // ... set constraint if we are adding items
-                        newProgramState = collectionSymbol.SetConstraint(CollectionCapacityConstraint.NotEmpty,
-                            newProgramState);
+                        newProgramState = collectionSymbol.SetConstraint(CollectionCapacityConstraint.NotEmpty, newProgramState);
                     }
                     else
                     {
@@ -206,8 +200,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (collectionType?.ConstructedFrom != null &&
                     collectionType.ConstructedFrom.IsAny(trackedCollectionTypes))
                 {
-                    if (collectionType.ConstructedFrom.Is(KnownType.System_Collections_Generic_Dictionary_TKey_TValue) &&
-                        IsDictionarySetItem(elementAccess))
+                    if (collectionType.ConstructedFrom.Is(KnownType.System_Collections_Generic_Dictionary_TKey_TValue) && IsDictionarySetItem(elementAccess))
                     {
                         // ... set constraint if we are calling the Dictionary set accessor
                         return collectionSymbol.SetConstraint(CollectionCapacityConstraint.NotEmpty, programState);
@@ -215,8 +208,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     else
                     {
                         // ... notify we are accessing the collection
-                        OnCollectionAccessed(elementAccess,
-                            collectionSymbol.HasConstraint(CollectionCapacityConstraint.Empty, programState));
+                        OnCollectionAccessed(elementAccess, collectionSymbol.HasConstraint(CollectionCapacityConstraint.Empty, programState));
                     }
                 }
 
@@ -238,8 +230,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return programState;
             }
 
-            public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
-                SyntaxNode instruction)
+            public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
             {
                 var newProgramState = programState;
                 CollectionCapacityConstraint constraint = null;
@@ -252,9 +243,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsCollectionConstructor(constructor))
                     {
                         // ... try to devise what constraint could be applied by the constructor or the initializer
-                        constraint =
-                            GetInitializerConstraint(objectCreationSyntax.Initializer) ??
-                            GetCollectionConstraint(constructor);
+                        constraint = GetInitializerConstraint(objectCreationSyntax.Initializer)
+                            ?? GetCollectionConstraint(constructor);
                     }
                 }
                 else if (instruction.IsKind(SyntaxKind.ArrayCreationExpression))
@@ -263,28 +253,24 @@ namespace SonarAnalyzer.Rules.CSharp
                     var arrayCreationSyntax = (ArrayCreationExpressionSyntax)instruction;
 
                     // ... try to devise what constraint could be applied by the array size or the initializer
-                    constraint =
-                        GetInitializerConstraint(arrayCreationSyntax.Initializer) ??
-                        GetArrayConstraint(arrayCreationSyntax);
+                    constraint = GetInitializerConstraint(arrayCreationSyntax.Initializer)
+                        ?? GetArrayConstraint(arrayCreationSyntax);
                 }
 
-                return constraint != null
-                    ? newProgramState.SetConstraint(symbolicValue, constraint)
-                    : newProgramState;
+                return constraint == null
+                    ? newProgramState
+                    : newProgramState.SetConstraint(symbolicValue, constraint);
             }
 
-            private static bool IsIgnoredMethod(ISymbol methodSymbol)
-            {
-                return methodSymbol == null
-                    || ignoredMethods.Contains(methodSymbol.Name);
-            }
+            private static bool IsIgnoredMethod(ISymbol methodSymbol) =>
+                methodSymbol == null || ignoredMethods.Contains(methodSymbol.Name);
 
             private static CollectionCapacityConstraint GetArrayConstraint(ArrayCreationExpressionSyntax arrayCreation)
             {
                 // Only one-dimensional arrays can be empty, others are indeterminate, this can be improved in the future
-                if (arrayCreation?.Type?.RankSpecifiers == null ||
-                    arrayCreation.Type.RankSpecifiers.Count != 1 ||
-                    arrayCreation.Type.RankSpecifiers[0].Sizes.Count != 1)
+                if (arrayCreation?.Type?.RankSpecifiers == null
+                    || arrayCreation.Type.RankSpecifiers.Count != 1
+                    || arrayCreation.Type.RankSpecifiers[0].Sizes.Count != 1)
                 {
                     return null;
                 }
@@ -296,16 +282,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     : null;
             }
 
-            private static CollectionCapacityConstraint GetCollectionConstraint(IMethodSymbol constructor)
-            {
+            private static CollectionCapacityConstraint GetCollectionConstraint(IMethodSymbol constructor) =>
                 // Default constructor, or constructor that specifies capacity means empty collection,
                 // otherwise do not apply constraint because we cannot be sure what has been passed
                 // as arguments.
-                var defaultCtorOrCapacityCtor = !constructor.Parameters.Any()
-                    || constructor.Parameters.Count(p => p.IsType(KnownType.System_Int32)) == 1;
-
-                return defaultCtorOrCapacityCtor ? CollectionCapacityConstraint.Empty : null;
-            }
+                !constructor.Parameters.Any() || constructor.Parameters.Count(p => p.IsType(KnownType.System_Int32)) == 1
+                    ? CollectionCapacityConstraint.Empty
+                    : null;
 
             private static CollectionCapacityConstraint GetInitializerConstraint(InitializerExpressionSyntax initializer)
             {
@@ -319,16 +302,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     : CollectionCapacityConstraint.NotEmpty;
             }
 
-            private static ProgramState RemoveCollectionConstraintsFromArguments(BaseArgumentListSyntax argumentList,
-                ProgramState programState)
-            {
-                return GetArgumentSymbolicValues(argumentList, programState)
-                    .Aggregate(programState,
-                        (state, value) => state.RemoveConstraint(value, CollectionCapacityConstraint.Empty));
-            }
+            private static ProgramState RemoveCollectionConstraintsFromArguments(BaseArgumentListSyntax argumentList, ProgramState programState) =>
+                GetArgumentSymbolicValues(argumentList, programState)
+                .Aggregate(programState, (state, value) => state.RemoveConstraint(value, CollectionCapacityConstraint.Empty));
 
-            private static IEnumerable<SymbolicValue> GetArgumentSymbolicValues(BaseArgumentListSyntax argumentList,
-                ProgramState programState)
+            private static IEnumerable<SymbolicValue> GetArgumentSymbolicValues(BaseArgumentListSyntax argumentList, ProgramState programState)
             {
                 if (argumentList?.Arguments == null)
                 {
@@ -347,29 +325,21 @@ namespace SonarAnalyzer.Rules.CSharp
                     });
             }
 
-            private static bool HasAssociatedSymbolicValue(ArgumentSyntax argumentSyntax)
-            {
+            private static bool HasAssociatedSymbolicValue(ArgumentSyntax argumentSyntax) =>
                 // e.g. Method(out var _)
-                if (DeclarationExpressionSyntaxWrapper.IsInstance(argumentSyntax.Expression) &&
-                    ((DeclarationExpressionSyntaxWrapper)argumentSyntax.Expression).Designation.SyntaxNode.IsKind(SyntaxKindEx.DiscardDesignation))
-                {
-                    return false;
-                }
-
-                return true;
-            }
+                !DeclarationExpressionSyntaxWrapper.IsInstance(argumentSyntax.Expression)
+                || !((DeclarationExpressionSyntaxWrapper)argumentSyntax.Expression).Designation.SyntaxNode.IsKind(SyntaxKindEx.DiscardDesignation);
 
             private static bool IsDictionarySetItem(SyntaxNode elementAccess) =>
-                (elementAccess.GetFirstNonParenthesizedParent() as AssignmentExpressionSyntax)
-                    ?.Left.RemoveParentheses() == elementAccess;
+                (elementAccess.GetFirstNonParenthesizedParent() as AssignmentExpressionSyntax)?.Left.RemoveParentheses() == elementAccess;
 
             private static bool IsCollectionConstructor(ISymbol constructorSymbol) =>
-                constructorSymbol?.ContainingType?.ConstructedFrom != null &&
-                constructorSymbol.ContainingType.ConstructedFrom.IsAny(trackedCollectionTypes);
+                constructorSymbol?.ContainingType?.ConstructedFrom != null
+                && constructorSymbol.ContainingType.ConstructedFrom.IsAny(trackedCollectionTypes);
 
             private static INamedTypeSymbol GetCollectionType(ISymbol collectionSymbol) =>
-                (collectionSymbol.GetSymbolType() as INamedTypeSymbol)?.ConstructedFrom ?? // collections
-                collectionSymbol.GetSymbolType()?.BaseType; // arrays
+                (collectionSymbol.GetSymbolType() as INamedTypeSymbol)?.ConstructedFrom  // collections
+                ?? collectionSymbol.GetSymbolType()?.BaseType; // arrays
         }
 
         private sealed class CollectionAccessedEventArgs : EventArgs
