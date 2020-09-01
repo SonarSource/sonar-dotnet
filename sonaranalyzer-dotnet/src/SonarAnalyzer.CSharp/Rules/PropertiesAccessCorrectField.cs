@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
             (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter &&
             getter.DescendantNodes().Any());
 
-        private static void FillAssignments(Dictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
+        private static void FillAssignments(IDictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
         {
             foreach (var node in root.DescendantNodes())
             {
@@ -140,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static ExpressionSyntax SingleReturn(BlockSyntax body)
+        private static ExpressionSyntax SingleReturn(SyntaxNode body)
         {
             if (body == null)
             {
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return returns.Length == 1 ? returns.Single().Expression : null;
         }
 
-        private static ExpressionSyntax SingleInvocation(BlockSyntax body)
+        private static ExpressionSyntax SingleInvocation(SyntaxNode body)
         {
             if (body == null)
             {
