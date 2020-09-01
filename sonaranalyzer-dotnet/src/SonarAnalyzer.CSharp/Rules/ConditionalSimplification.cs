@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Use the '{0}' operator here.";
 
         private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly ISet<SyntaxKind> EqualsOrNotEquals = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> equalsOrNotEquals = new HashSet<SyntaxKind>
         {
             SyntaxKind.EqualsExpression,
             SyntaxKind.NotEqualsExpression
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             compared = null;
             comparedIsNullInTrue = false;
-            if (expression.RemoveParentheses() is BinaryExpressionSyntax binary && EqualsOrNotEquals.Contains(binary.Kind()))
+            if (expression.RemoveParentheses() is BinaryExpressionSyntax binary && equalsOrNotEquals.Contains(binary.Kind()))
             {
                 comparedIsNullInTrue = binary.IsKind(SyntaxKind.EqualsExpression);
                 if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
@@ -85,17 +85,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckConditionalExpression,
-                SyntaxKind.ConditionalExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckIfStatement,
-                SyntaxKind.IfStatement);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckCoalesceExpression,
-                SyntaxKind.CoalesceExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckConditionalExpression, SyntaxKind.ConditionalExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckIfStatement, SyntaxKind.IfStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckCoalesceExpression, SyntaxKind.CoalesceExpression);
         }
 
         private static void CheckCoalesceExpression(SyntaxNodeAnalysisContext context)
@@ -124,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || (ifStatement.Else != null && whenFalse == null)
                 || (whenFalse != null && CSharpEquivalenceChecker.AreEquivalent(whenTrue, whenFalse)))
             {
-                /// Equivalence handled by S1871, <see cref="ConditionalStructureSameImplementation"/>
+                // Equivalence handled by S1871, <see cref="ConditionalStructureSameImplementation"/>
                 return;
             }
             var possiblyCoalescing =
@@ -148,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (CSharpEquivalenceChecker.AreEquivalent(whenTrue, whenFalse))
             {
-                /// handled by S2758, <see cref="TernaryOperatorPointless"/>
+                // handled by S2758, <see cref="TernaryOperatorPointless"/>
                 return;
             }
             if (TryGetExpressionComparedToNull(condition, out var comparedToNull, out var comparedIsNullInTrue)
@@ -195,13 +187,11 @@ namespace SonarAnalyzer.Rules.CSharp
             return type1.Equals(type2);
         }
 
-        private static bool CheckNullAndValueType(ITypeSymbol typeNull, ITypeSymbol typeValue)
-        {
-            return typeNull == null && typeValue != null && typeValue.IsValueType;
-        }
+        private static bool CheckNullAndValueType(ITypeSymbol typeNull, ITypeSymbol typeValue) =>
+            typeNull == null && typeValue != null && typeValue.IsValueType;
 
         private static bool CanBeSimplified(SyntaxNodeAnalysisContext context, StatementSyntax statement1, StatementSyntax statement2,
-            ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
+                                            ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
         {
             simplifiedOperator = "?:";
 
@@ -277,11 +267,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool AreCandidateInvocations(ExpressionSyntax expression1, ExpressionSyntax expression2, ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue)
+        private static bool AreCandidateInvocations(ExpressionSyntax expression1, ExpressionSyntax expression2, SyntaxNode comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue)
         {
-            var methodCall2 = expression2 as InvocationExpressionSyntax;
-
-            if (!(expression1 is InvocationExpressionSyntax methodCall1) || methodCall2 == null)
+            if (!(expression1 is InvocationExpressionSyntax methodCall1) || !(expression2 is InvocationExpressionSyntax methodCall2))
             {
                 return false;
             }
@@ -370,8 +358,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ImmutableDictionary<string, string> BuildCodeFixProperties(SyntaxNodeAnalysisContext c, string simplifiedOperator = null)
         {
-            var ret = new Dictionary<string, string>();
-            ret.Add(IsCoalesceAssignmentSupportedKey, IsCoalesceAssignmentSupported(c).ToString());
+            var ret = new Dictionary<string, string> {{IsCoalesceAssignmentSupportedKey, IsCoalesceAssignmentSupported(c).ToString()}};
             if (simplifiedOperator != null)
             {
                 ret.Add(SimplifiedOperatorKey, simplifiedOperator);
