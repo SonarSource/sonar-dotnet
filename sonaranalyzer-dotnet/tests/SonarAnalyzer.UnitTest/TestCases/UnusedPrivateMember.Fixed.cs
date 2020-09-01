@@ -54,9 +54,16 @@ namespace Tests.Diagnostics
             int field3; // Fixed
         private delegate void Delegate();
         private event Delegate MyEvent; //Fixed
+        private int[][] array = new int[0][];
         private Dictionary<int, int> used = new Dictionary<int, int>();
 
+        public int GetValue(int x, int y) => array[x][y];
+
         public int GetItem(int i) => used[i];
+
+        private Dictionary<int, int> GetDictionary() => used;
+
+        public int GetDictionaryItem(int i) => GetDictionary()[i];
 
         private event EventHandler<EventArgs> MyUsedEvent
         {
