@@ -107,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.Common
                                   .Concat(ExecutingSqlQueriesTest.GetReferencesNetCore(Constants.DotNetCore220Version))
                                   .Concat(UsingCookies.GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
 #endif
-                                  .Concat(DeliveringDebugFeaturesInProductionTest.AdditionalReferences)
+                                  .Concat(DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2)
                                   .Concat(ExpandingArchivesTest.AdditionalReferences)
                                   .Concat(DoNotHardcodeCredentialsTest.AdditionalReferences)
                                   .Concat(MetadataReferenceFacade.GetRegularExpressions()) // Needed by UsingRegularExpressions

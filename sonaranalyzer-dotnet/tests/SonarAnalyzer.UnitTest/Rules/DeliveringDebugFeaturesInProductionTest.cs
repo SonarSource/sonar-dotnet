@@ -37,41 +37,33 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeliveringDebugFeaturesInProduction_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.cs",
+        public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.cs",
                 new CSharp.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferences);
-        }
+                additionalReferences: AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeliveringDebugFeaturesInProduction_CS_Disabled()
-        {
-            Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.cs",
+        public void DeliveringDebugFeaturesInProduction_NetCore2_CS_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.cs",
                 new CSharp.DeliveringDebugFeaturesInProduction(),
-                additionalReferences: AdditionalReferences);
-        }
+                additionalReferences: AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeliveringDebugFeaturesInProduction_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.vb",
+        public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.vb",
                 new VisualBasic.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferences);
-        }
+                additionalReferences: AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeliveringDebugFeaturesInProduction_VB_Disabled()
-        {
-            Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.vb",
+        public void DeliveringDebugFeaturesInProduction_NetCore2_VB_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.vb",
                 new VisualBasic.DeliveringDebugFeaturesInProduction(),
-                additionalReferences: AdditionalReferences);
-        }
+                additionalReferences: AdditionalReferencesNetCore2);
 
-        internal static IEnumerable<MetadataReference> AdditionalReferences =>
+        internal static IEnumerable<MetadataReference> AdditionalReferencesNetCore2 =>
             Enumerable.Empty<MetadataReference>()
                 .Concat(NetStandardMetadataReference.Netstandard)
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))
