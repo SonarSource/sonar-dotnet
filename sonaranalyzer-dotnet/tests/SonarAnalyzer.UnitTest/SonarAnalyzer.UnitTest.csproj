@@ -23,7 +23,7 @@
     <CodeAnalysisRuleSet>..\SonarAnalyzer.Test.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+  <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
     <!-- Class AspNetCoreMetadataReference needs this FrameworkReference to generate metadata references for ASP.NET Core 3 related test cases. -->
     <!-- We cannot remove netcoreapp3.1 target framework from UnitTest project to preserve dependent test cases. -->
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
