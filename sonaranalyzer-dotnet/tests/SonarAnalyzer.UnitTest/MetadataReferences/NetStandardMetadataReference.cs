@@ -26,7 +26,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class NetStandardMetadataReference
     {
-        internal static IEnumerable<MetadataReference> Netstandard { get; }
-            = Create("netstandard.dll");
+        internal static IEnumerable<MetadataReference> Netstandard { get; } = Create("netstandard.dll");
     }
 }
