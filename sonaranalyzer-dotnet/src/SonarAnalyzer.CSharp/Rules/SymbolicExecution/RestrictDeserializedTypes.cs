@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -53,10 +52,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly List<LocationInfo> locations = new List<LocationInfo>();
 
-            public AnalysisContext(AbstractExplodedGraph explodedGraph)
-            {
-                explodedGraph.AddExplodedGraphCheck(new SerializationBinderCheck(explodedGraph, AddIssueLocation));
-            }
+            public AnalysisContext(AbstractExplodedGraph explodedGraph) =>
+                explodedGraph.AddExplodedGraphCheck(new SerializationBinderCheck(explodedGraph, this));
 
             public bool SupportsPartialResults => true;
 
@@ -68,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Nothing to do here.
             }
 
-            private void AddIssueLocation(LocationInfo locationInfo)
+            public void AddIssueLocation(LocationInfo locationInfo)
             {
                 // An issue can appear multiple times for the same node while exploring the exploded graph.
                 // In this case the location is added one single time to avoid duplicates.
@@ -89,12 +86,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private readonly Dictionary<ITypeSymbol, TypeDeclarationInfo> sanitizerDeclarations = new Dictionary<ITypeSymbol, TypeDeclarationInfo>();
             private readonly Dictionary<SymbolicValue, Location> secondaryLocations = new Dictionary<SymbolicValue, Location>();
+            private readonly AnalysisContext context;
 
-            private readonly Action<LocationInfo> addLocation;
-
-            public SerializationBinderCheck(AbstractExplodedGraph explodedGraph, Action<LocationInfo> addLocation)
-                : base(explodedGraph) =>
-                this.addLocation = addLocation;
+            public SerializationBinderCheck(AbstractExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
+                this.context = context;
 
             public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
             {
@@ -124,7 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsLosFormatter(typeSymbol) && !IsLosFormatterSafe(objectCreation, programState))
                     {
                         // For LosFormatter the rule is raised directly on the constructor.
-                        addLocation(new LocationInfo(objectCreation.GetLocation(), VerifyMacMessage));
+                        context.AddIssueLocation(new LocationInfo(objectCreation.GetLocation(), VerifyMacMessage));
                     }
                 }
 
@@ -193,7 +188,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             ? new LocationInfo(memberAccess.Name.GetLocation(), RestrictTypesMessage, location)
                             : new LocationInfo(memberAccess.Name.GetLocation(), RestrictTypesMessage);
 
-                        addLocation(locationInfo);
+                        context.AddIssueLocation(locationInfo);
                     }
                 }
 

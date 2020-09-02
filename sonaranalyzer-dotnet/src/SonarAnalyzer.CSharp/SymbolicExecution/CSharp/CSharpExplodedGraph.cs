@@ -40,16 +40,16 @@ namespace SonarAnalyzer.SymbolicExecution
     {
         private const string isNullOrEmpty = "IsNullOrEmpty";
         private const string isNullOrWhiteSpace = "IsNullOrWhiteSpace";
-        private readonly NullPointerDereference.NullPointerCheck nullPointerCheck;
 
         public CSharpExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
             : base(cfg, declaration, semanticModel, lva)
         {
-            nullPointerCheck = new NullPointerDereference.NullPointerCheck(this);
+            NullPointerCheck = new NullPointerDereference.NullPointerCheck(this);
+            NullableValueAccessedCheck = new EmptyNullableValueAccess.NullableValueAccessedCheck(this);
 
             // Add mandatory checks
-            AddExplodedGraphCheck(nullPointerCheck);
-            AddExplodedGraphCheck(new EmptyNullableValueAccess.NullValueAccessedCheck(this));
+            AddExplodedGraphCheck(NullPointerCheck);
+            AddExplodedGraphCheck(NullableValueAccessedCheck);
             AddExplodedGraphCheck(new InvalidCastToInterfaceSymbolicExecution.NullableCastCheck(this));
         }
 
@@ -61,9 +61,8 @@ namespace SonarAnalyzer.SymbolicExecution
         /// instead of replace, this check in dependent analyzers (e.g. PublicMethodArgumentsShouldBeCheckedForNull
         /// and NullPointerDereference).
         /// </summary>
-        internal NullPointerDereference.NullPointerCheck NullPointerCheck => nullPointerCheck;
-
-        #region Visit*
+        internal NullPointerDereference.NullPointerCheck NullPointerCheck { get; }
+        internal EmptyNullableValueAccess.NullableValueAccessedCheck NullableValueAccessedCheck { get; }
 
         protected override void VisitSimpleBlock(SimpleBlock block, ExplodedGraphNode node)
         {
@@ -308,9 +307,8 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.SimpleMemberAccessExpression:
                     {
                         var memberAccess = (MemberAccessExpressionSyntax)instruction;
-                        var check = this.explodedGraphChecks.OfType<EmptyNullableValueAccess.NullValueAccessedCheck>().FirstOrDefault();
-                        if (check == null ||
-                            !check.TryProcessInstruction(memberAccess, newProgramState, out newProgramState))
+                        var check = this.explodedGraphChecks.OfType<EmptyNullableValueAccess.NullableValueAccessedCheck>().FirstOrDefault();
+                        if (check == null || !check.TryProcessInstruction(memberAccess, newProgramState, out newProgramState))
                         {
                             // Default behavior
                             newProgramState = VisitMemberAccess(memberAccess, newProgramState);
@@ -1330,7 +1328,5 @@ namespace SonarAnalyzer.SymbolicExecution
             }
             return null;
         }
-
-        #endregion Visit*
     }
 }
