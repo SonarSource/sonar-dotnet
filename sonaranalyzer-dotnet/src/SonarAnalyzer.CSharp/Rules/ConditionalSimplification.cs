@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -369,6 +370,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsConditionalStructure(SyntaxNode syntaxNode) =>
-            syntaxNode.IsAnyKind(SyntaxKind.ConditionalExpression, SyntaxKindEx.SwitchExpression);
+            syntaxNode.DescendantNodesAndSelf()
+                      .Any(node => node.IsAnyKind(SyntaxKind.ConditionalExpression, SyntaxKindEx.SwitchExpression));
     }
 }
