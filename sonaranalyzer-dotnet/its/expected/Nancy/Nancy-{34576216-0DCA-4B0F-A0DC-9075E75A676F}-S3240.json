@@ -327,19 +327,6 @@
 },
 {
 "id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3261,
-"startColumn":  17,
-"endLine":  3261,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
