@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -58,8 +57,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            public bool SupportsPartialResults => true;
-
             // Store the nodes that should be reported and ignore duplicate reports for the same node.
             // This is needed because we generate two CFG blocks for the finally statements and even
             // though the syntax nodes are the same, when there is a return inside a try/catch block
@@ -68,6 +65,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new ObjectDisposedPointerCheck(explodedGraph, this));
+
+            public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 nodesToReport.Select(item => Diagnostic.Create(rule, item.Key.GetLocation(), item.Value));

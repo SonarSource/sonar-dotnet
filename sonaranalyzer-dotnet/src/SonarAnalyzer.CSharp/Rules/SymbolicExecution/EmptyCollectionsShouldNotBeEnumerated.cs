@@ -93,13 +93,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            public bool SupportsPartialResults => false;
-
             private readonly HashSet<SyntaxNode> emptyCollections = new HashSet<SyntaxNode>();
             private readonly HashSet<SyntaxNode> nonEmptyCollections = new HashSet<SyntaxNode>();
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new EmptyCollectionAccessedCheck(explodedGraph, this));
+
+            public bool SupportsPartialResults => false;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 emptyCollections.Except(nonEmptyCollections).Select(node => Diagnostic.Create(rule, node.GetLocation()));

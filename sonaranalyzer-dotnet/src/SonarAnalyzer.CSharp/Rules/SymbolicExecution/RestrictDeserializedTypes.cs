@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -51,12 +50,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            public bool SupportsPartialResults => true;
-
             private readonly List<LocationInfo> locations = new List<LocationInfo>();
 
             public AnalysisContext(AbstractExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new SerializationBinderCheck(explodedGraph, this));
+
+            public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 locations.Select(location => Diagnostic.Create(rule, location.Primary,  location.SecondaryLocations, location.Message));
