@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,12 +20,14 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,14 +35,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class VariableUnused : VariableUnusedBase
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(cbc =>
             {
                 var collector = new UnusedLocalsCollector();
@@ -49,12 +48,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
                 cbc.RegisterCodeBlockEndAction(collector.GetReportUnusedVariablesAction(rule));
             });
-        }
 
         private class UnusedLocalsCollector : UnusedLocalsCollectorBase<LocalDeclarationStatementSyntax>
         {
             protected override IEnumerable<SyntaxNode> GetDeclaredVariables(LocalDeclarationStatementSyntax localDeclaration) =>
-                localDeclaration.Declaration.Variables;
+                localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword)
+                ? Enumerable.Empty<SyntaxNode>()
+                : localDeclaration.Declaration.Variables;
         }
     }
 }

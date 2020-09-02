@@ -102,10 +102,11 @@ namespace Tests.Diagnostics
     {
         public void GoGoGo(Logger log)
         {
-            using var _ = log.BeginScope("XXX"); // Noncompliant FP, discard pattern cannot be used
+            using var scope = log.BeginScope("Abc"); // Compliant, existence of variable represents a state until it's disposed
+            using var _ = log.BeginScope("XXX"); // Underscore is a variable in this case, it's not a discard pattern
 
-            // This is a real noncompliant that should be reported. File.Create(path).Dispose(); should be used instead
-            using var stream = File.Create("path"); // Noncompliant
+            // Locked file represents a state until it's disposed
+            using var stream = File.Create("path");
         }
 
         public class Logger
