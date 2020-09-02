@@ -50,7 +50,7 @@ namespace MyLibrary
 
         public void Method_NestedAction_Level2(Action<ICollection<ICollection<int>>> arg) { } // Noncompliant
 
-        public void Method_WithUsing(ComplexType arg) { } // Noncompliant
+        public void Method_WithUsing(ComplexType arg) { } // Compliant, alias is used to hide complexity
     }
 
     public class WithLocalFunctions
@@ -66,7 +66,7 @@ namespace MyLibrary
     // https://github.com/SonarSource/sonar-dotnet/issues/3277
     public class Repro_3277
     {
-        public void QuestionMark(List<int?> list)  // Noncompliant FP
+        public void QuestionMark(List<int?> list)
         {
         }
 
