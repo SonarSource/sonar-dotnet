@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
@@ -32,10 +33,16 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static IEnumerable<MetadataReference> Create(string assemblyName) =>
             ImmutableArray.Create(CreateReference(assemblyName));
 
+        public static IEnumerable<MetadataReference> Create(Type type) =>
+            ImmutableArray.Create(CreateReference(type));
+
         public static MetadataReference CreateReference(string assemblyName) =>
             MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, assemblyName));
 
         public static MetadataReference CreateReference(string assemblyName, string subFolder) =>
             MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, subFolder, assemblyName));
+
+        public static MetadataReference CreateReference(Type type) =>
+            MetadataReference.CreateFromFile(type.Assembly.Location);
     }
 }

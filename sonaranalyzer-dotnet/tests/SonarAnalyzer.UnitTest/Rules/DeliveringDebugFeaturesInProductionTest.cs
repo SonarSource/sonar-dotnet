@@ -51,13 +51,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore3.cs",
-                new CSharp.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferencesNetCore3);
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.vb",
                 new VisualBasic.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
@@ -70,12 +63,31 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new VisualBasic.DeliveringDebugFeaturesInProduction(),
                 additionalReferences: AdditionalReferencesNetCore2);
 
+
+#if NETCOREAPP
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore3.cs",
+                new CSharp.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: AdditionalReferencesNetCore3);
+
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore3.vb",
                 new VisualBasic.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferencesNetCore3);
+
+        internal static IEnumerable<MetadataReference> AdditionalReferencesNetCore3 =>
+            Enumerable.Empty<MetadataReference>()
+                .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics)
+                .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions)
+                .Concat(AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions)
+                .Concat(AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions);
+
+#endif
 
         internal static IEnumerable<MetadataReference> AdditionalReferencesNetCore2 =>
             Enumerable.Empty<MetadataReference>()
@@ -84,13 +96,5 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(Constants.DotNetCore220Version))
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version));
-
-        //FIXME: Rework this
-        internal static IEnumerable<MetadataReference> AdditionalReferencesNetCore3 =>
-            Enumerable.Empty<MetadataReference>()
-                .Concat(new[] { MetadataReference.CreateFromFile(@"c:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.4\Microsoft.AspNetCore.Http.Abstractions.dll") })
-                .Concat(new[] { MetadataReference.CreateFromFile(@"c:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.4\Microsoft.AspNetCore.Hosting.Abstractions.dll") })
-                .Concat(new[] { MetadataReference.CreateFromFile(@"c:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.4\Microsoft.Extensions.Hosting.Abstractions.dll") })
-                .Concat(new[] { MetadataReference.CreateFromFile(@"c:\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\3.1.4\Microsoft.AspNetCore.Diagnostics.dll") });
     }
 }
