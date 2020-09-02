@@ -18,25 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.UnitTest.TestFramework;
+using System;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Helpers
 {
-    [TestClass]
-    public class InsecureDeserializationTest
+    internal static class CompilationExtensions
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
-        public void InsecureDeserialization() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureDeserialization.cs",
-                new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromCSharp8);
-
+        public static string LanguageVersionString(this Compilation compilation) =>
+            compilation switch
+            {
+                CSharpCompilation csharp => csharp.LanguageVersion.ToString(),
+                VisualBasicCompilation vb => vb.LanguageVersion.ToString(),
+                _ => throw new NotSupportedException($"Not supported compilation: {compilation.GetType()}")
+            };
     }
 }
-

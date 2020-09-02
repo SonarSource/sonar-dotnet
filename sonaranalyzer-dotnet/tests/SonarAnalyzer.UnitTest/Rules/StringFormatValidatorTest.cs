@@ -20,10 +20,7 @@
 
 extern alias csharp;
 
-using System.Collections.Generic;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -32,35 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StringFormatValidatorTest
     {
-        private static readonly IEnumerable<ParseOptions> workingOptions =
-            new[]
-            {
-                new CSharpParseOptions(LanguageVersion.CSharp5),
-                new CSharpParseOptions(LanguageVersion.CSharp6),
-                new CSharpParseOptions(LanguageVersion.CSharp7),
-                new CSharpParseOptions(LanguageVersion.CSharp7_1),
-                new CSharpParseOptions(LanguageVersion.CSharp7_2)
-            };
-
         [TestMethod]
         [TestCategory("Rule")]
         public void StringFormatRuntimeExceptionFreeValidator() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringFormatRuntimeExceptionFreeValidator.cs",
-                                    new StringFormatValidator(),
-                                    workingOptions);
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatRuntimeExceptionFreeValidator.cs", new StringFormatValidator());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void StringFormatTypoFreeValidator() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs",
-                                    new StringFormatValidator(),
-                                    workingOptions);
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs", new StringFormatValidator());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void StringFormatEdgeCasesValidator() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs",
-                                    new StringFormatValidator(),
-                                    workingOptions);
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs", new StringFormatValidator());
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,7 @@ using SonarAnalyzer.UnitTest.MetadataReferences;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class AspNetMvcHelper_IsControllerMethod
+    public class AspNetMvcHelperTest
     {
         [DataTestMethod]
         [DataRow("3.0.20105.1")]

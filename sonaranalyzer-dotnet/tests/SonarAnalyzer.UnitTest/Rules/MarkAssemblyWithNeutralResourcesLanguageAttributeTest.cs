@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -62,8 +62,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs",
                     @"ResourceTests\SomeResources.Designer.cs"
                 }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage($"Unexpected primary issue on line 1, span (0,0)-(0,0) with message 'Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.'.{Environment.NewLine}" +
-                $"See output to see all actual diagnostics raised on the file");
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
+                "CSharp*: Unexpected primary issue on line 1, span (0,0)-(0,0) with message 'Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.'." + Environment.NewLine +
+                "See output to see all actual diagnostics raised on the file");
         }
     }
 }

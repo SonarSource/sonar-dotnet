@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddDocument(path)
                 .GetCompilation();
 
-            var diagnostics = DiagnosticVerifier.GetAllDiagnostics(compilation, diagnosticAnalyzers, checkMode);
+            DiagnosticVerifier.GetAllDiagnostics(compilation, diagnosticAnalyzers, checkMode);
         }
 
         public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
@@ -190,24 +190,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
             IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
         {
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
-                null, options, additionalReferences);
+            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, null, options, additionalReferences);
         }
 
         public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
             IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
         {
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider,
-                null, options, additionalReferences);
+            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, null, options, additionalReferences);
         }
 
         public static void VerifyCodeFix(string path, string pathToExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
             IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
         {
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
-                codeFixTitle, options, additionalReferences);
+            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, options, additionalReferences);
         }
     }
 }

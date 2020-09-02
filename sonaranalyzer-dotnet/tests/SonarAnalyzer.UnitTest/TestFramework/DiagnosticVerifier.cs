@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         };
 
         public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode) =>
-            Verify(compilation, new [] {diagnosticAnalyzer}, checkMode);
+            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode);
 
         public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode)
         {
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
                     .ToList();
 
-                CompareActualToExpected(diagnostics, expectedIssues, false);
+                CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
                 // does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension
@@ -76,17 +76,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private static void CompareActualToExpected(IEnumerable<Diagnostic> diagnostics, List<IIssueLocation> expectedIssues, bool compareIdToMessage)
+        private static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, ICollection<IIssueLocation> expectedIssues, bool compareIdToMessage)
         {
-            DumpActualDiagnostics(diagnostics);
+            DumpActualDiagnostics(languageVersion, diagnostics);
 
             foreach (var diagnostic in diagnostics)
             {
-                var issueId = VerifyPrimaryIssue(expectedIssues,
+                var issueId = VerifyPrimaryIssue(languageVersion,
+                    expectedIssues,
                     issue => issue.IsPrimary,
                     diagnostic.Location,
                     compareIdToMessage ? diagnostic.Id : diagnostic.GetMessage(),
-                    compareIdToMessage ? $"Unexpected build error [{diagnostic.Id}]: {diagnostic.GetMessage()} on line {diagnostic.Location.GetLineNumberToReport()}" : null);
+                    compareIdToMessage
+                        ? $"{languageVersion}: Unexpected build error [{diagnostic.Id}]: {diagnostic.GetMessage()} on line {diagnostic.Location.GetLineNumberToReport()}"
+                        : null);
 
                 var secondaryLocations = diagnostic.AdditionalLocations
                     .Select((location, i) => diagnostic.GetSecondaryLocation(i))
@@ -95,7 +98,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
                 foreach (var secondaryLocation in secondaryLocations)
                 {
-                    VerifySecondaryIssue(expectedIssues,
+                    VerifySecondaryIssue(languageVersion,
+                        expectedIssues,
                         issue => issue.IssueId == issueId && !issue.IsPrimary,
                         secondaryLocation.Location,
                         secondaryLocation.Message,
@@ -106,25 +110,24 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (expectedIssues.Count != 0)
             {
                 var expectedIssuesDescription = expectedIssues.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
-                Execute.Assertion.FailWith($"Issue(s) expected but not raised on line(s):{expectedIssuesDescription.JoinStr("")}");
+                Execute.Assertion.FailWith($"{languageVersion}: Issue(s) expected but not raised on line(s):{expectedIssuesDescription.JoinStr("")}");
             }
         }
 
-        private static void DumpActualDiagnostics(IEnumerable<Diagnostic> diagnostics)
+        private static void DumpActualDiagnostics(string languageVersion, IEnumerable<Diagnostic> diagnostics)
         {
-            Console.WriteLine($"Actual diagnostics: {diagnostics.Count()}");
-            foreach(var d in diagnostics.OrderBy(x => x.GetLineNumberToReport()))
+            Console.WriteLine($"{languageVersion}: Actual diagnostics: {diagnostics.Count()}");
+            foreach (var d in diagnostics.OrderBy(x => x.GetLineNumberToReport()))
             {
                 var lineSpan = d.Location.GetLineSpan();
-                Console.WriteLine($"  Id: {d.Id}, Line: {d.Location.GetLineNumberToReport()}, " +
-                    $"[{lineSpan.StartLinePosition.Character}, {lineSpan.EndLinePosition.Character}]");
+                Console.WriteLine($"  Id: {d.Id}, Line: {d.Location.GetLineNumberToReport()}, [{lineSpan.StartLinePosition.Character}, {lineSpan.EndLinePosition.Character}]");
             }
         }
 
         public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
             DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode,
             bool verifyNoExceptionIsThrown = true) =>
-            GetDiagnostics(compilation, new[] {diagnosticAnalyzer}, checkMode, verifyNoExceptionIsThrown);
+            GetDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, verifyNoExceptionIsThrown);
 
         private static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
             DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode,
@@ -140,11 +143,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Where(d => ids.Contains(d.Id));
         }
 
-        public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer,
-            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
-        {
+        public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default) =>
             GetDiagnostics(compilation, diagnosticAnalyzer, checkMode).Should().BeEmpty();
-        }
 
         public static ImmutableArray<Diagnostic> GetAllDiagnostics(Compilation compilation,
             IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode,
@@ -157,16 +157,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var supportedDiagnostics = diagnosticAnalyzers
                     .SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                    .Select(diagnostic =>
-                        new KeyValuePair<string, ReportDiagnostic>(diagnostic.Id, ReportDiagnostic.Warn))
-                    .Concat(new[]
-                    {
-                        new KeyValuePair<string, ReportDiagnostic>(AnalyzerFailedDiagnosticId, ReportDiagnostic.Error)
-                    });
+                    .Select(diagnostic => new KeyValuePair<string, ReportDiagnostic>(diagnostic.Id, ReportDiagnostic.Warn))
+                    .Concat(new[] { new KeyValuePair<string, ReportDiagnostic>(AnalyzerFailedDiagnosticId, ReportDiagnostic.Error) });
 
             compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(supportedDiagnostics);
 
-            var actualToken = cancellationToken.HasValue ? cancellationToken.Value : CancellationToken.None;
+            var actualToken = cancellationToken ?? CancellationToken.None;
 
             var diagnostics = compilation
                 .WithOptions(compilationOptions)
@@ -196,7 +192,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var expectedBuildErrors = new IssueLocationCollector()
                 .GetExpectedBuildErrors(compilation.SyntaxTrees.Skip(1).FirstOrDefault()?.GetText().Lines)
                 .ToList();
-            CompareActualToExpected(buildErrors, expectedBuildErrors, true);
+            CompareActualToExpected(compilation.LanguageVersionString(), buildErrors, expectedBuildErrors, true);
         }
 
         private static IEnumerable<Diagnostic> GetBuildErrors(IEnumerable<Diagnostic> diagnostics) =>
@@ -207,19 +203,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);
 
-        private static string VerifyPrimaryIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
-            Location location, string message, string extraInfo)
-        {
-            return VerifyIssue(expectedIssues, issueFilter, location, message, extraInfo, true, null);
-        }
+        private static string VerifyPrimaryIssue(string languageVersion, ICollection<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+            Location location, string message, string extraInfo) =>
+            VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, extraInfo, true, null);
 
-        private static void VerifySecondaryIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
-            Location location, string message, string issueId)
-        {
-            VerifyIssue(expectedIssues, issueFilter, location, message, null, false, issueId);
-        }
+        private static void VerifySecondaryIssue(string languageVersion, ICollection<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+            Location location, string message, string issueId) =>
+            VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, null, false, issueId);
 
-        private static string VerifyIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+        private static string VerifyIssue(string languageVersion, ICollection<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
             Location location, string message, string extraInfo, bool isPrimary, string primaryIssueId)
         {
             var lineNumber = location.GetLineNumberToReport();
@@ -230,17 +222,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssue == null)
             {
-                var issueId = primaryIssueId == null ?  "" : $" [{ primaryIssueId}]";
+                var issueId = primaryIssueId == null ? "" : $" [{ primaryIssueId}]";
                 var seeOutputMessage = $"{Environment.NewLine}See output to see all actual diagnostics raised on the file";
                 var lineSpan = location.GetLineSpan().Span.ToString();
-                var exceptionMessage = string.IsNullOrEmpty(extraInfo) ? $"Unexpected {issueType} issue{issueId} on line {lineNumber}, span {lineSpan} with message '{message}'.{seeOutputMessage}" : extraInfo;
+                var exceptionMessage = string.IsNullOrEmpty(extraInfo)
+                    ? $"{languageVersion}: Unexpected {issueType} issue{issueId} on line {lineNumber}, span {lineSpan} with message '{message}'.{seeOutputMessage}"
+                    : extraInfo;
                 throw new UnexpectedDiagnosticException(location, exceptionMessage);
             }
 
             if (expectedIssue.Message != null && expectedIssue.Message != message)
             {
                 throw new UnexpectedDiagnosticException(location,
-$@"Expected {issueType} message on line {lineNumber} does not match actual message.
+$@"{languageVersion}: Expected {issueType} message on line {lineNumber} does not match actual message.
 Expected: '{expectedIssue.Message}'
 Actual  : '{message}'");
             }
@@ -250,13 +244,13 @@ Actual  : '{message}'");
             if (expectedIssue.Start.HasValue && expectedIssue.Start != diagnosticStart)
             {
                 throw new UnexpectedDiagnosticException(location,
-                    $"Expected {issueType} issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
+                    $"{languageVersion}: Expected {issueType} issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
             }
 
             if (expectedIssue.Length.HasValue && expectedIssue.Length != location.SourceSpan.Length)
             {
                 throw new UnexpectedDiagnosticException(location,
-                    $"Expected {issueType} issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}.");
+                    $"{languageVersion}: Expected {issueType} issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}.");
             }
 
             expectedIssues.Remove(expectedIssue);
@@ -279,7 +273,11 @@ Actual  : '{message}'");
                 }
                 isHooked = true;
 
-                SonarAnalysisContext.ShouldDiagnosticBeReported = (s, d) => { IncrementReportCount(d.Id); return true; };
+                SonarAnalysisContext.ShouldDiagnosticBeReported = (s, d) =>
+                {
+                    IncrementReportCount(d.Id);
+                    return true;
+                };
             }
 
             public static void UnHookSuppression()
@@ -293,22 +291,17 @@ Actual  : '{message}'");
                 SonarAnalysisContext.ShouldDiagnosticBeReported = null;
             }
 
-            public static void IncrementReportCount(string ruleId)
-            {
+            public static void IncrementReportCount(string ruleId) =>
                 counters.AddOrUpdate(ruleId, addValueFactory: key => 1, updateValueFactory: (key, count) => count + 1);
-            }
 
-            public static bool ExtensionMethodsCalledForAllDiagnostics(IEnumerable<DiagnosticAnalyzer> analyzers)
-            {
+            public static bool ExtensionMethodsCalledForAllDiagnostics(IEnumerable<DiagnosticAnalyzer> analyzers) =>
                 // In general this check is not very precise, because when the tests are run in parallel
                 // we cannot determine which diagnostic was reported from which analyzer instance. In other
                 // words, we cannot distinguish between diagnostics reported from different tests. That's
                 // why we require each diagnostic to be reported through the extension methods at least once.
-                return analyzers
-                    .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics)
                     .Select(d => DictionaryExtensions.GetValueOrDefault(counters, d.Id))
                     .Any(count => count > 0);
-            }
         }
     }
 }
