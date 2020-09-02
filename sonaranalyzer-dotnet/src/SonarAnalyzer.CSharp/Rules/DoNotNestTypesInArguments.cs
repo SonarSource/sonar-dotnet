@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var walker = new GenericWalker(2, model);
             walker.SafeVisit(parameterSyntax);
-            return walker.HasReachedMaxDepth;
+            return walker.MaxDepthReached;
         }
 
         private static IEnumerable<ParameterSyntax> GetParametersSyntaxNodes(SyntaxNode node) =>
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private int depth;
 
-            public bool HasReachedMaxDepth { get; private set; }
+            public bool MaxDepthReached { get; private set; }
 
             public GenericWalker(int maxDepth, SemanticModel model)
             {
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (depth == maxDepth - 1)
                     {
-                        HasReachedMaxDepth = true;
+                        MaxDepthReached = true;
                     }
                     else
                     {
