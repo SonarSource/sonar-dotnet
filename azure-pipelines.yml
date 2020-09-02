@@ -86,7 +86,7 @@ stages:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
-          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
+          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish analyzer binaries as pipeline artifact'

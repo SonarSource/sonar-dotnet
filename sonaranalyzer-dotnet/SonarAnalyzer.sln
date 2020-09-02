@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Solution Items", "Co
 		tests\SonarAnalyzer.Test.ruleset = tests\SonarAnalyzer.Test.ruleset
 		src\SonarLint.xml = src\SonarLint.xml
 		NuGet.Config = NuGet.Config
+		src\targets\CommonProperties.targets = src\targets\CommonProperties.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7233F78-E142-4882-B084-7C83BE472109}"
