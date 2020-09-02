@@ -237,27 +237,29 @@ public class Repro_3468
         }
     }
 
-    public int? NestedNullCoalescing(bool condition, int? a, int b)
+    public int NestedSwitch(bool condition1, bool condition2, int a, int b, int c)
     {
-        if (condition) // Compliant, changing this will lead to nested conditionals
+        if (condition1) // Compliant, changing this will lead to nested conditionals
         {
-            return b;
+            return condition2 switch
+            {
+                true => a,
+                false => b
+            };
         }
         else
         {
-            return a ?? b;
+            return c;
         }
+    }
+
+    public int? NestedNullCoalescing(bool condition, int? a, int b)
+    {
+        return condition ? b : a ?? b;
     }
 
     public int? NestedNullCoalescingAssignment(bool condition, int? a, int b)
     {
-        if (condition) // Compliant, changing this will lead to nested conditionals
-        {
-            return b;
-        }
-        else
-        {
-            return a ??= b;
-        }
+        return condition ? b : a ??= b;
     }
 }
