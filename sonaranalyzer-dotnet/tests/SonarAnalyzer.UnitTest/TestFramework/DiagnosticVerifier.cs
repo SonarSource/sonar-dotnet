@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
                     .ToList();
 
-                CompareActualToExpected(compilation, diagnostics, expectedIssues, false);
+                CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
                 // does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension
@@ -76,19 +76,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private static void CompareActualToExpected(Compilation compilation, IEnumerable<Diagnostic> diagnostics, ICollection<IIssueLocation> expectedIssues, bool compareIdToMessage)
+        private static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, ICollection<IIssueLocation> expectedIssues, bool compareIdToMessage)
         {
-            DumpActualDiagnostics(compilation, diagnostics);
+            DumpActualDiagnostics(languageVersion, diagnostics);
 
             foreach (var diagnostic in diagnostics)
             {
-                var issueId = VerifyPrimaryIssue(compilation.LanguageVersionString(),
+                var issueId = VerifyPrimaryIssue(languageVersion,
                     expectedIssues,
                     issue => issue.IsPrimary,
                     diagnostic.Location,
                     compareIdToMessage ? diagnostic.Id : diagnostic.GetMessage(),
                     compareIdToMessage
-                        ? $"{compilation.LanguageVersionString()}: Unexpected build error [{diagnostic.Id}]: {diagnostic.GetMessage()} on line {diagnostic.Location.GetLineNumberToReport()}"
+                        ? $"{languageVersion}: Unexpected build error [{diagnostic.Id}]: {diagnostic.GetMessage()} on line {diagnostic.Location.GetLineNumberToReport()}"
                         : null);
 
                 var secondaryLocations = diagnostic.AdditionalLocations
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
                 foreach (var secondaryLocation in secondaryLocations)
                 {
-                    VerifySecondaryIssue(compilation.LanguageVersionString(),
+                    VerifySecondaryIssue(languageVersion,
                         expectedIssues,
                         issue => issue.IssueId == issueId && !issue.IsPrimary,
                         secondaryLocation.Location,
@@ -110,13 +110,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (expectedIssues.Count != 0)
             {
                 var expectedIssuesDescription = expectedIssues.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
-                Execute.Assertion.FailWith($"{compilation.LanguageVersionString()}: Issue(s) expected but not raised on line(s):{expectedIssuesDescription.JoinStr("")}");
+                Execute.Assertion.FailWith($"{languageVersion}: Issue(s) expected but not raised on line(s):{expectedIssuesDescription.JoinStr("")}");
             }
         }
 
-        private static void DumpActualDiagnostics(Compilation compilation, IEnumerable<Diagnostic> diagnostics)
+        private static void DumpActualDiagnostics(string languageVersion, IEnumerable<Diagnostic> diagnostics)
         {
-            Console.WriteLine($"{compilation.LanguageVersionString()}: Actual diagnostics: {diagnostics.Count()}");
+            Console.WriteLine($"{languageVersion}: Actual diagnostics: {diagnostics.Count()}");
             foreach (var d in diagnostics.OrderBy(x => x.GetLineNumberToReport()))
             {
                 var lineSpan = d.Location.GetLineSpan();
@@ -192,7 +192,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var expectedBuildErrors = new IssueLocationCollector()
                 .GetExpectedBuildErrors(compilation.SyntaxTrees.Skip(1).FirstOrDefault()?.GetText().Lines)
                 .ToList();
-            CompareActualToExpected(compilation, buildErrors, expectedBuildErrors, true);
+            CompareActualToExpected(compilation.LanguageVersionString(), buildErrors, expectedBuildErrors, true);
         }
 
         private static IEnumerable<Diagnostic> GetBuildErrors(IEnumerable<Diagnostic> diagnostics) =>
