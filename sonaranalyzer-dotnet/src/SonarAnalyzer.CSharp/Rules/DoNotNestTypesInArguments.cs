@@ -99,7 +99,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                if (!namedTypeSymbol.ConstructedFrom.IsAny(ignoredTypes))
+                if (namedTypeSymbol.ConstructedFrom.IsAny(ignoredTypes))
+                {
+                    base.VisitGenericName(node);
+                }
+                else
                 {
                     if (depth == maxDepth - 1)
                     {
@@ -111,10 +115,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         base.VisitGenericName(node);
                         depth--;
                     }
-                }
-                else
-                {
-                    base.VisitGenericName(node);
                 }
             }
         }
