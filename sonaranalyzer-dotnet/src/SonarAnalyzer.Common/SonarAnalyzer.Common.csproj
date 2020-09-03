@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\targets\CommonProperties.targets" />
-
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>
     <AssemblyName>SonarAnalyzer</AssemblyName>
