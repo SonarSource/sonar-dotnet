@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,39 +33,29 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class TaskConfigureAwait : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3216";
-        private const string MessageFormat =
-            "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.";
+        private const string MessageFormat = "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.SemanticModel.Compilation.Options.OutputKind != OutputKind.DynamicallyLinkedLibrary)
+                    if (c.Compilation.Options.OutputKind != OutputKind.DynamicallyLinkedLibrary)
                     {
                         //this rule only makes sense in libraries
                         return;
                     }
 
-                    var awaitExpression = (AwaitExpressionSyntax)c.Node;
-                    var expression = awaitExpression.Expression;
-                    if (expression == null)
-                    {
-                        return;
-                    }
-
-                    var type = c.SemanticModel.GetTypeInfo(expression).Type;
-                    if (type.DerivesFrom(KnownType.System_Threading_Tasks_Task))
+                    if ((c.Node as AwaitExpressionSyntax).Expression is { } expression
+                        && c.SemanticModel.GetTypeInfo(expression).Type is { } type
+                        && type.DerivesFrom(KnownType.System_Threading_Tasks_Task))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, expression.GetLocation()));
                     }
                 },
                 SyntaxKind.AwaitExpression);
-        }
     }
 }
