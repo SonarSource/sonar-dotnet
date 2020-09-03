@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,11 +31,38 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DisposableMemberInNonDisposableClass()
-        {
+        public void DisposableMemberInNonDisposableClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs",
-                new DisposableMemberInNonDisposableClass(),
-                ParseOptionsHelper.FromCSharp8);
+                                    new DisposableMemberInNonDisposableClass(),
+                                    ParseOptionsHelper.FromCSharp8);
+
+#if NETCOREAPP // IAsyncDisposable is available only on .Net Core
+        [TestMethod]
+        public void DisposableMemberInNonDisposableClass_IAsyncDisposable() =>
+            Verifier.VerifyCSharpAnalyzer(@"
+namespace AsyncDisposable
+{
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    public class TestClass : IAsyncDisposable
+    {
+        private CancellationTokenSource cancellationTokenSource;
+
+        public Task MethodAsync()
+        {
+            this.cancellationTokenSource = new CancellationTokenSource();
+            return Task.Delay(1000, this.cancellationTokenSource.Token);
         }
+
+        public ValueTask DisposeAsync()
+        {
+            this.cancellationTokenSource?.Dispose();
+            return new ValueTask();
+        }
+    }
+}", new DisposableMemberInNonDisposableClass(), additionalReferences: NetStandardMetadataReference.Netstandard);
+#endif
     }
 }

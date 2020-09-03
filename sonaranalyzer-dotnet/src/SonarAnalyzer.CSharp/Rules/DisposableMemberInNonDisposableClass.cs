@@ -69,7 +69,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ShouldExclude(ITypeSymbol typeSymbol) =>
             !typeSymbol.IsClass()
-            || typeSymbol.Implements(KnownType.System_IDisposable);
+            || typeSymbol.Implements(KnownType.System_IDisposable)
+            || typeSymbol.Implements(KnownType.System_IAsyncDisposable);
 
         private static string GetMessage(INamespaceOrTypeSymbol namedType, SymbolAnalysisContext analysisContext)
         {
