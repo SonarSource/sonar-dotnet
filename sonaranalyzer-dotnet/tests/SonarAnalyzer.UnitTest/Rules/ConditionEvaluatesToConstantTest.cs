@@ -35,11 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionEvaluatesToConstant_CSharp6()
+        public void ConditionEvaluatesToConstant()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp6.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
                 GetAnalyzer(),
-                new[] { new CSharpParseOptions(LanguageVersion.CSharp6) });
+                additionalReferences: NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7"));
         }
 
         [TestMethod]
