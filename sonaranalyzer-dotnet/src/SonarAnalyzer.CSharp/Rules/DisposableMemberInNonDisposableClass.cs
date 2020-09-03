@@ -27,7 +27,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -99,15 +98,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Enumerable.Empty<IFieldSymbol>();
             }
 
-            var methodNodes = method.Body == null
-                                  ? method.ExpressionBody().DescendantNodes()
-                                  : method.Body.DescendantNodes();
-
-            return methodNodes
-                   .OfType<AssignmentExpressionSyntax>()
-                   .Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression) && n.Right is ObjectCreationExpressionSyntax)
-                   .Select(n => compilation.GetSemanticModel(method.SyntaxTree).GetSymbolInfo(n.Left).Symbol)
-                   .OfType<IFieldSymbol>();
+            return method.GetBodyDescendantNodes()
+                         .OfType<AssignmentExpressionSyntax>()
+                         .Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression) && n.Right is ObjectCreationExpressionSyntax)
+                         .Select(n => compilation.GetSemanticModel(method.SyntaxTree).GetSymbolInfo(n.Left).Symbol)
+                         .OfType<IFieldSymbol>();
         }
 
         private static bool IsOwnerSinceDeclaration(IFieldSymbol field) =>
