@@ -18,22 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class MetadataReferenceFacade
     {
-        internal static IEnumerable<MetadataReference> GetMsCorLib() =>
+        internal static References GetMsCorLib() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.Mscorlib;
 #else
             new[] {CoreMetadataReference.MsCorLib};
 #endif
 
-        internal static IEnumerable<MetadataReference> GetMicrosoftVisualBasic() =>
+        internal static References GetMicrosoftVisualBasic() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.MicrosoftVisualBasic;
 #else
@@ -44,28 +44,28 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 #endif
 
-        internal static IEnumerable<MetadataReference> GetMicrosoftWin32Registry() =>
+        internal static References GetMicrosoftWin32Registry() =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();
 #else
             new[] {CoreMetadataReference.MicrosoftWin32Registry};
 #endif
 
-        internal static IEnumerable<MetadataReference> GetMicrosoftWin32Primitives() =>
+        internal static References GetMicrosoftWin32Primitives() =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();
 #else
             new[] {CoreMetadataReference.MicrosoftWin32Primitives};
 #endif
 
-        internal static IEnumerable<MetadataReference> GetPresentationFramework() =>
+        internal static References GetPresentationFramework() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.PresentationFramework;
 #else
             Enumerable.Empty<MetadataReference>();
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemCollections() =>
+        internal static References GetSystemCollections() =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();
 #else
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemData() =>
+        internal static References GetSystemData() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemData;
 #else
@@ -87,21 +87,21 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemDrawing() =>
+        internal static References GetSystemDrawing() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemDrawing;
 #else
             NuGetMetadataReference.SystemDrawingCommon();
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemDirectoryServices() =>
+        internal static References GetSystemDirectoryServices() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemDirectoryServices;
 #else
             NuGetMetadataReference.SystemDDirectoryServices();
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemIoCompression() =>
+        internal static References GetSystemIoCompression() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemIOCompression
                 .Concat(FrameworkMetadataReference.SystemIOCompressionFileSystem);
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemServiceModel() =>
+        internal static References GetSystemServiceModel() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemServiceModel;
 #else
@@ -121,7 +121,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 .Concat(NuGetMetadataReference.SystemServiceModelPrimitives());
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemNetHttp() =>
+        internal static References GetSystemNetHttp() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemNetHttp;
 #else
@@ -137,7 +137,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemSecurityCryptography() =>
+        internal static References GetSystemSecurityCryptography() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemSecurityCryptographyAlgorithms;
 #else
@@ -151,14 +151,14 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemSecurityPermissions() =>
+        internal static References GetSystemSecurityPermissions() =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();
 #else
             NuGetMetadataReference.SystemSecurityPermissions();
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemThreadingTasks() =>
+        internal static References GetSystemThreadingTasks() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemThreadingTasks
                 .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"));
@@ -166,21 +166,21 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             new[] {CoreMetadataReference.SystemThreadingTasks};
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemThreadingTasksExtensions(string version) =>
+        internal static References GetSystemThreadingTasksExtensions(string version) =>
 #if NETFRAMEWORK
             NuGetMetadataReference.SystemThreadingTasksExtensions(version);
 #else
             new[] {CoreMetadataReference.SystemThreadingTasks};
 #endif
 
-        internal static IEnumerable<MetadataReference> GetRegularExpressions() =>
+        internal static References GetRegularExpressions() =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();
 #else
             NuGetMetadataReference.SystemTextRegularExpressions();
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemRuntimeSerialization() =>
+        internal static References GetSystemRuntimeSerialization() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemRuntimeSerialization;
 #else
@@ -191,7 +191,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemXaml() =>
+        internal static References GetSystemXaml() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemXaml;
 #else
@@ -202,7 +202,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemXml() =>
+        internal static References GetSystemXml() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemXml;
 #else
@@ -217,62 +217,62 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             .Union(NuGetMetadataReference.SystemConfigurationConfigurationManager());
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemXmlLinq() =>
+        internal static References GetSystemXmlLinq() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemXmlLinq;
 #else
             new[] {CoreMetadataReference.SystemXmlLinq};
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemWeb() =>
+        internal static References GetSystemWeb() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemWeb;
 #else
             new[] {CoreMetadataReference.SystemWeb};
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemWindowsForms() =>
+        internal static References GetSystemWindowsForms() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemWindowsForms;
 #else
             Enumerable.Empty<MetadataReference>();
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemComponentModelComposition() =>
+        internal static References GetSystemComponentModelComposition() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemComponentModelComposition;
 #else
             NuGetMetadataReference.SystemComponentModelComposition();
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemComponentModelPrimitives() =>
+        internal static References GetSystemComponentModelPrimitives() =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();
 #else
             new[] {CoreMetadataReference.SystemComponentModelPrimitives};
 #endif
 
-        internal static IEnumerable<MetadataReference> GetSystemNetSockets() =>
+        internal static References GetSystemNetSockets() =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();
 #else
             new[] {CoreMetadataReference.SystemNetSockets};
 #endif
-        internal static IEnumerable<MetadataReference> GetSystemNetPrimitives() =>
+        internal static References GetSystemNetPrimitives() =>
 #if NETFRAMEWORK
             Enumerable.Empty<MetadataReference>();
 #else
             new[] {CoreMetadataReference.SystemNetPrimitives};
 #endif
 
-        internal static IEnumerable<MetadataReference> GetWindowsBase() =>
+        internal static References GetWindowsBase() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.WindowsBase;
 #else
             Enumerable.Empty<MetadataReference>();
 #endif
 
-        internal static IEnumerable<MetadataReference> GetProjectDefaultReferences() =>
+        internal static References GetProjectDefaultReferences() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.Mscorlib
                 .Concat(FrameworkMetadataReference.System)
