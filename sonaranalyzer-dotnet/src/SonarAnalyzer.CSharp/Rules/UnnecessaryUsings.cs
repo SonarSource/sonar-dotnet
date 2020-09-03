@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -160,6 +161,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 linqQueryVisited = true;
                 base.VisitQueryExpression(node);
+            }
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (node.IsKind(SyntaxKindEx.ParenthesizedVariableDesignation)) // Tuple deconstruction declaration
+                {
+                    necessaryNamespaces.Add(context.Compilation.GetSpecialType(SpecialType.System_Object).ContainingNamespace);
+                }
+                base.Visit(node);
             }
 
             private bool TryGetSystemLinkNamespace(out INamespaceSymbol systemLinqNamespace)
