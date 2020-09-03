@@ -43,9 +43,10 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.Compilation.Options.OutputKind != OutputKind.DynamicallyLinkedLibrary)
+                    if (c.Compilation.Options.OutputKind != OutputKind.DynamicallyLinkedLibrary
+                        || !c.Compilation.IsNetFrameworkTarget())
                     {
-                        //this rule only makes sense in libraries
+                        // This rule only makes sense in libraries under .NET Framework
                         return;
                     }
 

@@ -28,9 +28,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TaskConfigureAwaitTest
     {
+#if NETFRAMEWORK
+
         [TestMethod]
         [TestCategory("Rule")]
-        public void TaskConfigureAwait() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.cs", new TaskConfigureAwait());
+        public void TaskConfigureAwait_NetFx() =>
+            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetFx.cs", new TaskConfigureAwait());
+#else
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TaskConfigureAwait_NetCore() =>
+            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
+#endif
+
     }
 }
