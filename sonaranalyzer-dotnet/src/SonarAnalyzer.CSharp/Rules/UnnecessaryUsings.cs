@@ -36,17 +36,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
     {
-
         internal const string DiagnosticId = "S1128";
         private const string MessageFormat = "Remove this unnecessary 'using'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -65,32 +62,26 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.CompilationUnit);
 
-        }
-
-        private static void VisitContent(CSharpRemovableUsingWalker visitor, SyntaxList<MemberDeclarationSyntax> members, IEnumerable<SyntaxTrivia> trivias)
+        private static void VisitContent(CSharpSyntaxWalker visitor, SyntaxList<MemberDeclarationSyntax> members, IEnumerable<SyntaxTrivia> trivias)
         {
-            var comments = trivias.Where(trivia => trivia.Kind() == SyntaxKind.SingleLineDocumentationCommentTrivia ||
-                trivia.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
+            var comments = trivias.Where(trivia => trivia.Kind() == SyntaxKind.SingleLineDocumentationCommentTrivia || trivia.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
 
             foreach (var member in members)
             {
                 visitor.SafeVisit(member);
             }
-            foreach (var comment in comments)
+            foreach (var comment in comments.Where(x => x.HasStructure))
             {
-                if (comment.HasStructure)
-                {
-                    visitor.SafeVisit(comment.GetStructure());
-                }
+                visitor.SafeVisit(comment.GetStructure());
             }
         }
 
-        private static void CheckUnnecessaryUsings(SyntaxNodeAnalysisContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, HashSet<INamespaceSymbol> necessaryNamespaces)
+        private static void CheckUnnecessaryUsings(SyntaxNodeAnalysisContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, IEnumerable<INamespaceSymbol> necessaryNamespaces)
         {
             foreach (var usingDirective in usingDirectives)
             {
                 if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
-                && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
+                    && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingDirective.GetLocation()));
                 }
@@ -99,17 +90,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class CSharpRemovableUsingWalker : CSharpSyntaxWalker
         {
+            public readonly HashSet<INamespaceSymbol> necessaryNamespaces = new HashSet<INamespaceSymbol>();
+
             private readonly SyntaxNodeAnalysisContext context;
             private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;
             private readonly INamespaceSymbol currentNamespace;
-            public readonly HashSet<INamespaceSymbol> necessaryNamespaces;
-            private bool linqQueryVisited = false;
+            private bool linqQueryVisited;
 
-            public CSharpRemovableUsingWalker(SyntaxNodeAnalysisContext context, IImmutableSet<EquivalentNameSyntax> usingDirectives, INamespaceSymbol currentNamespace)
+            public CSharpRemovableUsingWalker(SyntaxNodeAnalysisContext context, IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent, INamespaceSymbol currentNamespace)
             {
                 this.context = context;
-                this.usingDirectivesFromParent = usingDirectives;
-                this.necessaryNamespaces = new HashSet<INamespaceSymbol>();
+                this.usingDirectivesFromParent = usingDirectivesFromParent;
                 this.currentNamespace = currentNamespace;
             }
 
@@ -125,7 +116,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
 
                 VisitContent(visitor, node.Members, node.DescendantTrivia());
-
                 CheckUnnecessaryUsings(context, simpleNamespaces, visitor.necessaryNamespaces);
 
                 necessaryNamespaces.UnionWith(visitor.necessaryNamespaces);
@@ -143,10 +133,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 base.VisitInitializerExpression(node);
             }
 
-            public override void VisitIdentifierName(IdentifierNameSyntax node)
-            {
+            public override void VisitIdentifierName(IdentifierNameSyntax node) =>
                 VisitNameNode(node);
-            }
 
             public override void VisitGenericName(GenericNameSyntax node)
             {
@@ -166,20 +154,20 @@ namespace SonarAnalyzer.Rules.CSharp
             /// </summary>
             public override void VisitQueryExpression(QueryExpressionSyntax node)
             {
-                if (!this.linqQueryVisited && TryGetSystemLinkNamespace(out var systemLinqNamespaceSymbol))
+                if (!linqQueryVisited && TryGetSystemLinkNamespace(out var systemLinqNamespaceSymbol))
                 {
-                    this.necessaryNamespaces.Add(systemLinqNamespaceSymbol);
+                    necessaryNamespaces.Add(systemLinqNamespaceSymbol);
                 }
-                this.linqQueryVisited = true;
+                linqQueryVisited = true;
                 base.VisitQueryExpression(node);
             }
 
             private bool TryGetSystemLinkNamespace(out INamespaceSymbol systemLinqNamespace)
             {
-                foreach (var usingDirective in this.usingDirectivesFromParent)
+                foreach (var usingDirective in usingDirectivesFromParent)
                 {
-                    if (this.context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol &&
-                        namespaceSymbol.ToDisplayString() == "System.Linq")
+                    if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
+                        && namespaceSymbol.ToDisplayString() == "System.Linq")
                     {
                         systemLinqNamespace = namespaceSymbol;
                         return true;
@@ -194,16 +182,14 @@ namespace SonarAnalyzer.Rules.CSharp
             /// neither the current namespace or one of its parent, it is then added to the necessary namespace set, as
             /// importing that namespace is indeed necessary.
             /// </summary>
-            private void VisitNameNode(SimpleNameSyntax node)
-            {
+            private void VisitNameNode(ExpressionSyntax node) =>
                 VisitSymbol(context.SemanticModel.GetSymbolInfo(node).Symbol);
-            }
 
             private void VisitSymbol(ISymbol symbol)
             {
-                if (symbol != null &&
-                    symbol.ContainingNamespace is INamespaceSymbol namespaceSymbol &&
-                    (currentNamespace == null || !namespaceSymbol.IsSameOrAncestorOf(currentNamespace)))
+                if (symbol != null
+                    && symbol.ContainingNamespace is INamespaceSymbol namespaceSymbol
+                    && (currentNamespace == null || !namespaceSymbol.IsSameOrAncestorOf(currentNamespace)))
                 {
                     necessaryNamespaces.Add(namespaceSymbol);
                 }
@@ -215,25 +201,16 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public NameSyntax Name { get; private set; }
 
-        public EquivalentNameSyntax(NameSyntax name)
-        {
+        public EquivalentNameSyntax(NameSyntax name) =>
             Name = name;
-        }
 
-        public override int GetHashCode()
-        {
-            return Name.ToString().GetHashCode();
-        }
+        public override int GetHashCode() =>
+            Name.ToString().GetHashCode();
 
-        public override bool Equals(object obj)
-        {
-            return obj is EquivalentNameSyntax equivalentName
-                && Equals(equivalentName);
-        }
+        public override bool Equals(object obj) =>
+            obj is EquivalentNameSyntax equivalentName && Equals(equivalentName);
 
-        public bool Equals(EquivalentNameSyntax other)
-        {
-            return other != null && CSharpEquivalenceChecker.AreEquivalent(Name, other.Name);
-        }
+        public bool Equals(EquivalentNameSyntax other) =>
+            other != null && CSharpEquivalenceChecker.AreEquivalent(Name, other.Name);
     }
 }
