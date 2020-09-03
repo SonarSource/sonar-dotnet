@@ -53,7 +53,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var message = GetMessage(namedType, analysisContext);
-
                     if (string.IsNullOrEmpty(message))
                     {
                         return;
@@ -80,9 +79,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var disposableFieldsWithInitializer = disposableFields.Where(IsOwnerSinceDeclaration);
 
-            var otherInitializationsOfFields = namedType.GetMembers().OfType<IMethodSymbol>().
-                                                         SelectMany(m => GetAssignmentsToFieldsIn(m, analysisContext.Compilation)).
-                                                         Where(f => disposableFields.Contains(f));
+            var otherInitializationsOfFields = namedType.GetMembers()
+                                                        .OfType<IMethodSymbol>()
+                                                        .SelectMany(m => GetAssignmentsToFieldsIn(m, analysisContext.Compilation))
+                                                        .Where(f => disposableFields.Contains(f));
 
             return string.Join(", ", disposableFieldsWithInitializer.Union(otherInitializationsOfFields)
                                                                     .Distinct()
@@ -92,42 +92,26 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<IFieldSymbol> GetAssignmentsToFieldsIn(ISymbol m, Compilation compilation)
         {
-            var empty = Enumerable.Empty<IFieldSymbol>();
-            if (m.DeclaringSyntaxReferences.Length != 1)
+            if (m.DeclaringSyntaxReferences.Length != 1
+                || !(m.DeclaringSyntaxReferences[0].GetSyntax() is BaseMethodDeclarationSyntax method)
+                || !method.HasBodyOrExpressionBody())
             {
-                return empty;
+                return Enumerable.Empty<IFieldSymbol>();
             }
-            if (m.DeclaringSyntaxReferences[0].GetSyntax() is BaseMethodDeclarationSyntax method)
-            {
-                if (!method.HasBodyOrExpressionBody())
-                {
-                    return empty;
-                }
-                var semanticModel = compilation.GetSemanticModel(method.SyntaxTree);
-                var methodNodes = method.Body == null ?
-                    method.ExpressionBody().DescendantNodes() :
-                    method.Body.DescendantNodes();
-                return methodNodes.
-                    OfType<AssignmentExpressionSyntax>().
-                    Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression) && n.Right is ObjectCreationExpressionSyntax).
-                    Select(n => semanticModel.GetSymbolInfo(n.Left).Symbol).
-                    OfType<IFieldSymbol>();
-            }
-            return empty;
+
+            var methodNodes = method.Body == null
+                                  ? method.ExpressionBody().DescendantNodes()
+                                  : method.Body.DescendantNodes();
+
+            return methodNodes
+                   .OfType<AssignmentExpressionSyntax>()
+                   .Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression) && n.Right is ObjectCreationExpressionSyntax)
+                   .Select(n => compilation.GetSemanticModel(method.SyntaxTree).GetSymbolInfo(n.Left).Symbol)
+                   .OfType<IFieldSymbol>();
         }
 
-        private static bool IsOwnerSinceDeclaration(IFieldSymbol field)
-        {
-            var syntaxRef = field.DeclaringSyntaxReferences.SingleOrDefault();
-            if (syntaxRef == null)
-            {
-                return false;
-            }
-            if (syntaxRef.GetSyntax() is VariableDeclaratorSyntax varDeclarator)
-            {
-                return varDeclarator.Initializer?.Value is ObjectCreationExpressionSyntax;
-            }
-            return false;
-        }
+        private static bool IsOwnerSinceDeclaration(IFieldSymbol field) =>
+            field.DeclaringSyntaxReferences.SingleOrDefault()?.GetSyntax() is VariableDeclaratorSyntax varDeclarator
+            && varDeclarator.Initializer?.Value is ObjectCreationExpressionSyntax;
     }
 }
