@@ -2619,7 +2619,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class NullOrWhiteSoace
+    public class NullOrWhiteSpace
     {
         public void Method1(string s)
         {
@@ -2672,4 +2672,21 @@ namespace Tests.Diagnostics
         }
     }
 
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/3565
+namespace Repro_3565
+{
+    using Microsoft.Extensions.Primitives;
+
+    public class Repro_3565
+    {
+        public void DoWork(StringSegment segment)
+        {
+            if (segment == null)    // Noncompliant FP, StringSegment has custom equality operator that can return true if the StringSegment contains a null string
+            {                       // Secondary
+                throw new ArgumentException("May not point to a null string", nameof(segment));
+            }
+        }
+    }
 }
