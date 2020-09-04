@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 
@@ -59,6 +60,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var project = Solution.AddProject(projectName, projectName, languageName);
 
+            var compilationOptions = project.CompilationOptions.WithOutputKind(OutputKind.DynamicallyLinkedLibrary);
+            if (languageName == LanguageNames.CSharp)
+            {
+                compilationOptions = ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(true);
+            }
+            project = project.WithCompilationOptions(compilationOptions);
 
             var projectBuilder = ProjectBuilder
                 .FromProject(project)

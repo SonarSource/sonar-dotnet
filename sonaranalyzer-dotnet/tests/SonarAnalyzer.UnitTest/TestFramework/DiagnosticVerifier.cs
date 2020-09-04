@@ -151,17 +151,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             bool verifyNoException = true,
             CancellationToken? cancellationToken = null)
         {
-            var compilationOptions = compilation.Language == LanguageNames.CSharp
-                ? (CompilationOptions)new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)
-                : new VB.VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
-
             var supportedDiagnostics = diagnosticAnalyzers
                     .SelectMany(analyzer => analyzer.SupportedDiagnostics)
                     .Select(diagnostic => new KeyValuePair<string, ReportDiagnostic>(diagnostic.Id, ReportDiagnostic.Warn))
                     .Concat(new[] { new KeyValuePair<string, ReportDiagnostic>(AnalyzerFailedDiagnosticId, ReportDiagnostic.Error) });
 
-            compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(supportedDiagnostics);
-
+            var compilationOptions = compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics);
             var actualToken = cancellationToken ?? CancellationToken.None;
 
             var diagnostics = compilation

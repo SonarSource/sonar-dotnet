@@ -22,6 +22,9 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,12 +37,29 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TaskConfigureAwait_NetFx() =>
             Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetFx.cs", new TaskConfigureAwait());
+
 #else
+
         [TestMethod]
         [TestCategory("Rule")]
         public void TaskConfigureAwait_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
+
 #endif
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TaskConfigureAwait_ConsoleApp()
+        {
+            var projectBuilder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddDocument(@"TestCases\TaskConfigureAwait.ConsoleApp.cs");
+            var compilationOptions = new CSharpCompilationOptions(OutputKind.ConsoleApplication);
+            var analyzer = new TaskConfigureAwait();
+
+            foreach (var parseOptions in ParseOptionsHelper.FromCSharp6)
+            {
+                var compilation = projectBuilder.GetCompilation(parseOptions, compilationOptions);
+                DiagnosticVerifier.Verify(compilation, analyzer, CompilationErrorBehavior.Default);
+            }
+        }
     }
 }
