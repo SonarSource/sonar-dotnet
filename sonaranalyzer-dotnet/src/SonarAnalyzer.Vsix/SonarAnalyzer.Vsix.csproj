@@ -85,8 +85,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="logos\sonarlint_64.png" />
-    <Content Include="logos\sonarlint_32.png">
+    <Content Include="logos\sonarsource_64.png" />
+    <Content Include="logos\sonarsource_32.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>

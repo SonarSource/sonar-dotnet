@@ -8,7 +8,7 @@
     <owners>SonarSource</owners>
     <license type="file">License.txt</license>
     <projectUrl>http://vs.sonarlint.org</projectUrl>
-    <icon>images\sonarlint_64.png</icon>
+    <icon>images\sonarsource_64.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Analyzers which spot bugs, vulnerabilities and code smells in your code. To have a better integration with SonarQube and/or SonarCloud, you can use the SonarLint for Visual Studio extension.</summary>
     <description>Analyzers which spot bugs, vulnerabilities and code smells in your code. To have a better integration with SonarQube (https://www.sonarqube.org/) and/or SonarCloud (sonarcloud.io/), you can use the SonarLint for Visual Studio extension (https://www.sonarlint.org/visualstudio/).</description>
@@ -27,6 +27,6 @@
     <file src="bin\Release\Google.Protobuf.dll" target="analyzers" />
     <file src="tools-vbnet\*.ps1" target="tools\" />
     <file src="License.txt" />
-    <file src="logos\sonarlint_64.png" target="images\" />
+    <file src="logos\sonarsource_64.png" target="images\" />
   </files>
 </package>
