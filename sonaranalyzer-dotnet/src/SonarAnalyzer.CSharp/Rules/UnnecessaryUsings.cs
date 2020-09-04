@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void VisitContent(CSharpSyntaxWalker visitor, SyntaxList<MemberDeclarationSyntax> members, IEnumerable<SyntaxTrivia> trivias)
         {
-            var comments = trivias.Where(trivia => trivia.Kind() == SyntaxKind.SingleLineDocumentationCommentTrivia || trivia.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
+            var comments = trivias.Where(trivia => trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia));
 
             foreach (var member in members)
             {
