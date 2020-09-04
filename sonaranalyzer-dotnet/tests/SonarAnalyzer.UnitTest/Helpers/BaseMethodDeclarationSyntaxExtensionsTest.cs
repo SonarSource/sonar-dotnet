@@ -32,11 +32,17 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void GivenNullMethodDeclaration_GetBodyDescendantNodes_ThrowsArgumentNullException()
         {
+#if NETFRAMEWORK
+             var messageFormat = "Value cannot be null." + Environment.NewLine +"Parameter name: {0}";
+#else
+             var messageFormat = "Value cannot be null. (Parameter '{0}')";
+#endif
+
             BaseMethodDeclarationSyntax sut = null;
 
             var exception = Assert.ThrowsException<ArgumentNullException>(() => sut.GetBodyDescendantNodes());
 
-            exception.Message.Should().Be($"Value cannot be null.{Environment.NewLine}Parameter name: method");
+            exception.Message.Should().Be(string.Format(messageFormat, "method"));
         }
     }
 }
