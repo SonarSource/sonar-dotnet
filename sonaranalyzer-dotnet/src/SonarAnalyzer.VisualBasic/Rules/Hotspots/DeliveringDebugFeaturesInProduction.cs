@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -39,59 +38,28 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                 .WithNotConfigurable();
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        public DeliveringDebugFeaturesInProduction()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
+        public DeliveringDebugFeaturesInProduction() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analyzerConfiguration)
-        {
+        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analyzerConfiguration) =>
             InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
-        }
 
         protected override InvocationCondition IsInvokedConditionally() =>
-            (context) =>
+            context =>
+                context.Invocation.FirstAncestorOrSelf<StatementSyntax>() is { } invocationStatement
+                && invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));
+
+        private static bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>
+            FindCondition(node).RemoveParentheses() is InvocationExpressionSyntax condition
+            && IsValidationMethod(semanticModel, condition, condition.Expression.GetIdentifier()?.Identifier.ValueText, caseInsensitiveComparison: true);
+
+        private static ExpressionSyntax FindCondition(SyntaxNode node) =>
+            node switch
             {
-                var invocationStatement = context.Invocation.FirstAncestorOrSelf<StatementSyntax>();
-                return invocationStatement != null &&
-                    invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));
+                MultiLineIfBlockSyntax multiline => multiline.IfStatement.Condition,
+                SingleLineIfStatementSyntax singleline => singleline.Condition,
+                _ => null
             };
-
-        private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel)
-        {
-            ExpressionSyntax condition;
-            if (node.IsKind(SyntaxKind.MultiLineIfBlock))
-            {
-                condition = ((MultiLineIfBlockSyntax)node).IfStatement?.Condition.RemoveParentheses();
-            }
-            else if (node.IsKind(SyntaxKind.SingleLineIfStatement))
-            {
-                condition = ((SingleLineIfStatementSyntax)node).Condition.RemoveParentheses();
-            }
-            else
-            {
-                return false;
-            }
-
-            if (condition != null &&
-                condition.IsKind(SyntaxKind.InvocationExpression))
-            {
-                return IsMatch(semanticModel, (InvocationExpressionSyntax)condition);
-            }
-
-            return false;
-        }
-
-        private static bool IsMatch(SemanticModel semanticModel, InvocationExpressionSyntax condition)
-        {
-            var methodName = condition.Expression.GetIdentifier()?.Identifier.ValueText;
-
-            var methodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol);
-
-            return isDevelopmentMethod.IsMatch(methodName, methodSymbol, caseInsensitiveComparison: true);
-        }
     }
 }

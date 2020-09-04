@@ -18,14 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
+#if NETCOREAPP
+
+using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 using static SonarAnalyzer.UnitTest.MetadataReferences.MetadataReferenceFactory;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
-    internal static class NetStandardMetadataReference
+    internal static class AspNetCoreMetadataReference
     {
-        internal static IEnumerable<MetadataReference> Netstandard { get; } = Create("netstandard.dll");
+        internal static References MicrosoftAspNetCoreDiagnostics { get; } = Create(typeof(Microsoft.AspNetCore.Diagnostics.StatusCodeContext));
+        internal static References MicrosoftAspNetCoreHostingAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Hosting.IWebHost));
+        internal static References MicrosoftAspNetCoreHttpAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Http.IHttpContextFactory));
+        internal static References MicrosoftExtensionsHostingAbstractions { get; } = Create(typeof(Microsoft.Extensions.Hosting.IHost));
     }
 }
+#endif

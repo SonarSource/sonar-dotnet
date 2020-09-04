@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -76,6 +76,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 "CookieShouldBeHttpOnly" => "CookieShouldBeHttpOnly_Nancy",
                 "CookieShouldBeSecure" => "CookiesShouldBeSecure_Nancy",
                 "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials_DefaultValues",
+                "DeliveringDebugFeaturesInProduction" => "DeliveringDebugFeaturesInProduction.NetCore2",
 #if NETFRAMEWORK
                 "ExecutingSqlQueries" => "ExecutingSqlQueries_Net46",
                 "UsingCookies" => "UsingCookies_Net46",
@@ -107,7 +108,7 @@ namespace SonarAnalyzer.UnitTest.Common
                                   .Concat(ExecutingSqlQueriesTest.GetReferencesNetCore(Constants.DotNetCore220Version))
                                   .Concat(UsingCookies.GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
 #endif
-                                  .Concat(DeliveringDebugFeaturesInProductionTest.AdditionalReferences)
+                                  .Concat(DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2)
                                   .Concat(ExpandingArchivesTest.AdditionalReferences)
                                   .Concat(DoNotHardcodeCredentialsTest.AdditionalReferences)
                                   .Concat(MetadataReferenceFacade.GetRegularExpressions()) // Needed by UsingRegularExpressions

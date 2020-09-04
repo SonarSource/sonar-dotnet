@@ -1,32 +1,29 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
-namespace Tests.Diagnostics
+namespace NetCore3
 {
     public class Startup
     {
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // Invoking as extension methods
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage(); // Compliant
-                app.UseDatabaseErrorPage(); // Compliant
             }
 
             // Invoking as static methods
-            if (HostingEnvironmentExtensions.IsDevelopment(env))
+            if (HostEnvironmentEnvExtensions.IsDevelopment(env))
             {
                 DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Compliant
-                DatabaseErrorPageExtensions.UseDatabaseErrorPage(app); // Compliant
             }
 
             // Not in development
             if (!env.IsDevelopment())
             {
                 DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
-                DatabaseErrorPageExtensions.UseDatabaseErrorPage(app); // Noncompliant
             }
 
             // Custom conditions are deliberately ignored
@@ -34,14 +31,20 @@ namespace Tests.Diagnostics
             if (isDevelopment)
             {
                 app.UseDeveloperExceptionPage(); // Noncompliant, False Positive
-                app.UseDatabaseErrorPage(); // Noncompliant, False Positive
+            }
+
+            while (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage(); // Noncompliant FP, we inspect only IF statements
+                break;
             }
 
             // These are called unconditionally
             app.UseDeveloperExceptionPage(); // Noncompliant
-            app.UseDatabaseErrorPage(); // Noncompliant
             DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
-            DatabaseErrorPageExtensions.UseDatabaseErrorPage(app); // Noncompliant
         }
+
+        public void ConfigureAsArrow(IApplicationBuilder app, IWebHostEnvironment env) =>
+            DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
     }
 }

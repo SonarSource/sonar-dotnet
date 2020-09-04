@@ -55,6 +55,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalQueryableExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalQueryableExtensions");
         internal static readonly KnownType Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions = new KnownType("Microsoft.Extensions.DependencyInjection.LoggingServiceCollectionExtensions");
+        internal static readonly KnownType Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions = new KnownType("Microsoft.Extensions.Hosting.HostEnvironmentEnvExtensions");
         internal static readonly KnownType Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions = new KnownType("Microsoft.Extensions.Logging.AzureAppServicesLoggerFactoryExtensions");
         internal static readonly KnownType Microsoft_Extensions_Logging_ConsoleLoggerExtensions = new KnownType("Microsoft.Extensions.Logging.ConsoleLoggerExtensions");
         internal static readonly KnownType Microsoft_Extensions_Logging_DebugLoggerFactoryExtensions = new KnownType("Microsoft.Extensions.Logging.DebugLoggerFactoryExtensions");

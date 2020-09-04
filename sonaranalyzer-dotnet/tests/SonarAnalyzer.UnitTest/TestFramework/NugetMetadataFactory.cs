@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -56,20 +56,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static readonly PackageManager packageManager =
             new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
 
-        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion)
-        {
-            return Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, InstallPackage);
-        }
+        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion) =>
+            Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, InstallPackage);
 
-        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework)
-        {
-            return Create(packageId, packageVersion, new string[] { targetFramework }, InstallPackage);
-        }
+        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework) =>
+            Create(packageId, packageVersion, new string[] { targetFramework }, InstallPackage);
 
-        public static IEnumerable<MetadataReference> CreateWithCommandLine(string packageId, string packageVersion)
-        {
-            return Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, InstallWithCommandLine);
-        }
+        public static IEnumerable<MetadataReference> CreateWithCommandLine(string packageId, string packageVersion) =>
+            Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, InstallWithCommandLine);
 
         public static IEnumerable<MetadataReference> CreateNETStandard21()
         {
@@ -99,8 +93,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             EnsurePackageIsInstalled(packageId, packageVersion, installPackage);
 
-            var allowedNugetLibDirectoriesByPreference = allowedTargetFrameworks.
-                Zip(Enumerable.Range(0, allowedTargetFrameworks.Length), (folder, priority) => new { folder, priority });
+            var allowedNugetLibDirectoriesByPreference = allowedTargetFrameworks.Select((folder, priority) => new { folder, priority });
             var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
             LogMessage($"Download package directory: {packageDirectory}");
             if (!Directory.Exists(packageDirectory))
@@ -125,8 +118,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             DumpSelectedGroup(packageId, packageVersion, selectedGroup);
 
-            return selectedGroup.Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName))
-                .ToImmutableArray();
+            return selectedGroup.Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName)).ToImmutableArray();
         }
 
         private static void DumpSelectedGroup(string packageId, string packageVersion, IGrouping<string, FileInfo> fileGroup)
@@ -218,46 +210,29 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             // the actual number of parts, as long as there is at least one.
             var matcher = new Regex($"{packageId}(.\\d+)+$");
 
-            if (!Directory.Exists(PackagesFolderRelativePath))
-            {
-                return Enumerable.Empty<string>();
-            }
-
-            var directories = Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}.*", SearchOption.TopDirectoryOnly)
-                .Where(path => matcher.IsMatch(path))
-                .OrderBy(name => name)
-                .ToArray();
-            return directories;
+            return Directory.Exists(PackagesFolderRelativePath)
+                ? Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}.*", SearchOption.TopDirectoryOnly)
+                    .Where(path => matcher.IsMatch(path))
+                    .OrderBy(name => name)
+                    .ToArray()
+                : Enumerable.Empty<string>();
         }
 
         private static string GetLastCheckFilePath(string packageId)
         {
-            // The file containing the last-check timestamp is stored in folder of the
-            // latest version of the package.
+            // The file containing the last-check timestamp is stored in folder of the latest version of the package.
             const string LastUpdateFileName = "LastCheckedForUpdate.txt";
 
-            var directory = GetSortedPackageFolders(packageId)
-                .LastOrDefault();
-
-            if (directory == null)
-            {
-                return null;
-            }
-
-            return Path.Combine(directory, LastUpdateFileName);
+            var directory = GetSortedPackageFolders(packageId).LastOrDefault();
+            return directory == null ? null : Path.Combine(directory, LastUpdateFileName);
         }
 
-        private static DateTime GetLastCheckTime(string packageId)
-        {
-            var filePath = GetLastCheckFilePath(packageId);
-            if (filePath == null ||
-                !File.Exists(filePath) ||
-                !DateTime.TryParse(File.ReadAllText(filePath), out var timestamp))
-            {
-                return DateTime.MinValue;
-            }
-            return timestamp;
-        }
+        private static DateTime GetLastCheckTime(string packageId) =>
+            GetLastCheckFilePath(packageId) is { } filePath
+            && File.Exists(filePath)
+            && DateTime.TryParse(File.ReadAllText(filePath), out var timestamp)
+            ? timestamp
+            : DateTime.MinValue;
 
         private static void InstallPackage(string packageId, string packageVersion)
         {
@@ -312,7 +287,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 }
             }
 
-            void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
+            static void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
             {
                 if (e.Data != null)
                 {
@@ -352,10 +327,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return (DateTime.Now.Subtract(lastCheck).TotalDays > VersionCheckDelayInDays);
         }
 
-        private static void LogMessage(string message)
-        {
-            Console.WriteLine($"[{DateTime.Now}] Test setup: {message}");
-        }
+        private static void LogMessage(string message) =>
+             Console.WriteLine($"[{DateTime.Now}] Test setup: {message}");
 
         private static void WriteLastUpdateFile(string packageId)
         {

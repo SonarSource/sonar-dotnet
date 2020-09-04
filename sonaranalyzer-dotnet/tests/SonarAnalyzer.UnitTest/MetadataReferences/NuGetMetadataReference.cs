@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.UnitTest.TestFramework;
+using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
+using static SonarAnalyzer.UnitTest.TestFramework.NugetMetadataFactory;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
@@ -29,218 +28,88 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
     {
         // hardcoded version
 
-        public static IEnumerable<MetadataReference> MicrosoftVisualStudioQualityToolsUnitTestFramework =>
-            NugetMetadataFactory.Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2");
-
-        public static IEnumerable<MetadataReference> MSTestTestFrameworkV1 =>
-            NugetMetadataFactory.Create("MSTest.TestFramework", "1.1.11");
-
-        public static IEnumerable<MetadataReference> XunitFrameworkV1 =>
-            NugetMetadataFactory.Create("xunit", "1.9.1")
-            .Concat(NugetMetadataFactory.Create("xunit.extensions", "1.9.1"));
-
-        public static IEnumerable<MetadataReference> NETStandardV2_1_0 =>
-            NugetMetadataFactory.CreateNETStandard21();
+        public static References MicrosoftVisualStudioQualityToolsUnitTestFramework => Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2");
+        public static References MSTestTestFrameworkV1 => Create("MSTest.TestFramework", "1.1.11");
+        public static References XunitFrameworkV1 =>
+            Create("xunit", "1.9.1")
+            .Concat(Create("xunit.extensions", "1.9.1"));
+        public static References NETStandardV2_1_0 => CreateNETStandard21();
 
         // passed version
 
-        public static IEnumerable<MetadataReference> BouncyCastle(string packageVersion = "1.8.5") =>
-            NugetMetadataFactory.Create("BouncyCastle", packageVersion);
-
-        public static IEnumerable<MetadataReference> Dapper(string packageVersion = "1.50.5") =>
-            NugetMetadataFactory.Create("Dapper", packageVersion);
-
-        public static IEnumerable<MetadataReference> EntityFramework(string packageVersion = "6.2.0") =>
-            NugetMetadataFactory.Create("EntityFramework", packageVersion);
-
-        public static IEnumerable<MetadataReference> FluentAssertions(string packageVersion) =>
-            NugetMetadataFactory.Create("FluentAssertions", packageVersion);
-
-        public static IEnumerable<MetadataReference> JWT(string packageVersion = "6.1.0") =>
-            NugetMetadataFactory.Create("JWT", packageVersion);
-
-        public static IEnumerable<MetadataReference> Log4Net(string packageVersion, string targetFramework) =>
-            NugetMetadataFactory.Create("log4net", packageVersion, targetFramework);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCore(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreDiagnostics(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Diagnostics", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHosting(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Hosting", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHostingAbstractions(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Hosting.Abstractions", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHttpAbstractions(string packageVersion = "2.2.0") =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Http.Abstractions", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHttpFeatures(string packageVersion) =>
-            NugetMetadataFactory.CreateWithCommandLine("Microsoft.AspNetCore.Http.Features", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcAbstractions(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Mvc.Abstractions", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcCore(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Mvc.Core", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcViewFeatures(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Mvc.ViewFeatures", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcWebApiCompatShim(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Mvc.WebApiCompatShim", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreRouting(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Routing", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcRazorPages(string packageVersion = "2.2.5") =>
-            NugetMetadataFactory.CreateWithCommandLine("Microsoft.AspNetCore.Mvc.RazorPages", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetMvc(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.AspNet.Mvc", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftAspNetSignalRCore(string packageVersion = "2.4.1") =>
-            NugetMetadataFactory.Create("Microsoft.AspNet.SignalR.Core", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftDataSqliteCore(string packageVersion = "2.0.0") =>
-            NugetMetadataFactory.Create("Microsoft.Data.Sqlite.Core", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCore(string packageVersion) =>
-            NugetMetadataFactory.CreateWithCommandLine("Microsoft.EntityFrameworkCore", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCoreSqlServer(string packageVersion) =>
-            NugetMetadataFactory.CreateWithCommandLine("Microsoft.EntityFrameworkCore.SqlServer", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCoreRelational(string packageVersion) =>
-            NugetMetadataFactory.CreateWithCommandLine("Microsoft.EntityFrameworkCore.Relational", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftExtensionsConfigurationAbstractions(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftExtensionsDependencyInjectionAbstractions(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.Extensions.DependencyInjection.Abstractions", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftExtensionsLoggingPackages(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.Extensions.Logging", packageVersion)
-            .Concat(NugetMetadataFactory.Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion))
-            .Concat(NugetMetadataFactory.Create("Microsoft.Extensions.Logging.Abstractions", packageVersion))
-            .Concat(NugetMetadataFactory.Create("Microsoft.Extensions.Logging.Console", packageVersion))
-            .Concat(NugetMetadataFactory.Create("Microsoft.Extensions.Logging.Debug", packageVersion))
-            .Concat(NugetMetadataFactory.Create("Microsoft.Extensions.Logging.EventLog", packageVersion));
-
-        public static IEnumerable<MetadataReference> MicrosoftExtensionsOptions(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.Extensions.Options", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftExtensionsPrimitives(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.Extensions.Primitives", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftNetHttpHeaders(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.Net.Http.Headers", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") =>
-            NugetMetadataFactory.CreateWithCommandLine("Microsoft.SqlServer.Compact", packageVersion);
-
-        public static IEnumerable<MetadataReference> MicrosoftWebXdt(string packageVersion = "3.0.0") =>
-            NugetMetadataFactory.Create("Microsoft.Web.Xdt", packageVersion);
-
-        public static IEnumerable<MetadataReference> MSTestTestFramework(string packageVersion) =>
-            NugetMetadataFactory.Create("MSTest.TestFramework", packageVersion);
-
-        public static IEnumerable<MetadataReference> MvvmLightLibs(string packageVersion) =>
-            NugetMetadataFactory.Create("MvvmLightLibs", packageVersion);
-
-        public static IEnumerable<MetadataReference> Nancy(string packageVersion = "2.0.0") =>
-            NugetMetadataFactory.Create("Nancy", packageVersion);
-
-        public static IEnumerable<MetadataReference> NLog(string packageVersion) =>
-            NugetMetadataFactory.Create("NLog", packageVersion);
-
-        public static IEnumerable<MetadataReference> NHibernate(string packageVersion = "5.2.2") =>
-            NugetMetadataFactory.Create("NHibernate", packageVersion);
-
-        public static IEnumerable<MetadataReference> NSubstitute(string packageVersion) =>
-            NugetMetadataFactory.Create("NSubstitute", packageVersion);
-
-        public static IEnumerable<MetadataReference> NUnit(string packageVersion) =>
-            NugetMetadataFactory.Create("NUnit", packageVersion);
-
-        public static IEnumerable<MetadataReference> PetaPocoCompiled(string packageVersion = "6.0.353") =>
-            NugetMetadataFactory.Create("PetaPoco.Compiled", packageVersion);
-
-        public static IEnumerable<MetadataReference> RestSharp(string packageVersion) =>
-            NugetMetadataFactory.Create("RestSharp", packageVersion);
-
-        public static IEnumerable<MetadataReference> SerilogPackages(string packageVersion) =>
-            NugetMetadataFactory.Create("Serilog", packageVersion)
-                .Concat(NugetMetadataFactory.Create("Serilog.Sinks.Console", packageVersion));
-
-        public static IEnumerable<MetadataReference> ServiceStackOrmLite(string packageVersion = "5.1.0") =>
-             NugetMetadataFactory.Create("ServiceStack.OrmLite", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemCollectionsImmutable(string packageVersion) =>
-            NugetMetadataFactory.Create("System.Collections.Immutable", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemConfigurationConfigurationManager(string packageVersion = "4.7.0") =>
-            NugetMetadataFactory.CreateWithCommandLine("System.Configuration.ConfigurationManager", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemComponentModelComposition(string packageVersion = "4.7.0") =>
-            NugetMetadataFactory.CreateWithCommandLine("System.ComponentModel.Composition", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemDataSqlServerCe(string packageVersion) =>
-            NugetMetadataFactory.Create("Microsoft.SqlServer.Compact", packageVersion);
-
-        internal static IEnumerable<MetadataReference> SystemDataOdbc(string packageVersion = "4.5.0") =>
-            NugetMetadataFactory.Create("System.Data.Odbc", packageVersion);
-
-        internal static IEnumerable<MetadataReference> SystemDataSqlClient(string packageVersion = "4.5.0") =>
-            NugetMetadataFactory.Create("System.Data.SqlClient", packageVersion);
-
-        internal static IEnumerable<MetadataReference> SystemDataSQLiteCore(string packageVersion = "1.0.109.0") =>
-            NugetMetadataFactory.Create("System.Data.SQLite.Core", packageVersion);
-
-        internal static IEnumerable<MetadataReference> SystemDataOracleClient(string packageVersion = "1.0.8") =>
-            NugetMetadataFactory.Create("System.Data.OracleClient", packageVersion);
-
-        internal static IEnumerable<MetadataReference> SystemDDirectoryServices(string packageVersion = "4.7.0") =>
-            NugetMetadataFactory.CreateWithCommandLine("System.DirectoryServices", packageVersion);
-
-        internal static IEnumerable<MetadataReference> SystemDrawingCommon(string packageVersion = "4.7.0") =>
-            NugetMetadataFactory.CreateWithCommandLine("System.Drawing.Common", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemSecurityCryptographyOpenSsl(string packageVersion = "4.7.0") =>
-            NugetMetadataFactory.Create("System.Security.Cryptography.OpenSsl", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemSecurityPermissions(string packageVersion = "4.7.0") =>
-            NugetMetadataFactory.CreateWithCommandLine("System.Security.Permissions", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemPrivateServiceModel(string packageVersion = "4.7.0") =>
-            NugetMetadataFactory.CreateWithCommandLine("System.Private.ServiceModel", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemServiceModelPrimitives(string packageVersion = "4.7.0") =>
-            NugetMetadataFactory.CreateWithCommandLine("System.ServiceModel.Primitives", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemTextRegularExpressions(string packageVersion = "4.3.1") =>
-            NugetMetadataFactory.CreateWithCommandLine("System.Text.RegularExpressions", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemThreadingTasksExtensions(string packageVersion) =>
-            NugetMetadataFactory.Create("System.Threading.Tasks.Extensions", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemValueTuple(string packageVersion) =>
-            NugetMetadataFactory.Create("System.ValueTuple", packageVersion);
-
-        public static IEnumerable<MetadataReference> SystemNetHttp(string packageVersion = "4.3.4") =>
-            NugetMetadataFactory.CreateWithCommandLine("System.Net.Http", packageVersion);
-
-        public static IEnumerable<MetadataReference> XunitFramework(string packageVersion) =>
-            NugetMetadataFactory.Create("xunit.assert", packageVersion)
-                .Concat(NugetMetadataFactory.Create("xunit.extensibility.core", packageVersion));
+        public static References BouncyCastle(string packageVersion = "1.8.5") => Create("BouncyCastle", packageVersion);
+        public static References Dapper(string packageVersion = "1.50.5") => Create("Dapper", packageVersion);
+        public static References EntityFramework(string packageVersion = "6.2.0") => Create("EntityFramework", packageVersion);
+        public static References FluentAssertions(string packageVersion) => Create("FluentAssertions", packageVersion);
+        public static References JWT(string packageVersion = "6.1.0") => Create("JWT", packageVersion);
+        public static References Log4Net(string packageVersion, string targetFramework) => Create("log4net", packageVersion, targetFramework);
+        public static References MicrosoftAspNetCore(string packageVersion) => Create("Microsoft.AspNetCore", packageVersion);
+        public static References MicrosoftAspNetCoreDiagnostics(string packageVersion) => Create("Microsoft.AspNetCore.Diagnostics", packageVersion);
+        public static References MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(string packageVersion) => Create("Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore", packageVersion);
+        public static References MicrosoftAspNetCoreHosting(string packageVersion) => Create("Microsoft.AspNetCore.Hosting", packageVersion);
+        public static References MicrosoftAspNetCoreHostingAbstractions(string packageVersion) => Create("Microsoft.AspNetCore.Hosting.Abstractions", packageVersion);
+        public static References MicrosoftAspNetCoreHttpAbstractions(string packageVersion = "2.2.0") => Create("Microsoft.AspNetCore.Http.Abstractions", packageVersion);
+        public static References MicrosoftAspNetCoreHttpFeatures(string packageVersion) => CreateWithCommandLine("Microsoft.AspNetCore.Http.Features", packageVersion);
+        public static References MicrosoftAspNetCoreMvcAbstractions(string packageVersion) => Create("Microsoft.AspNetCore.Mvc.Abstractions", packageVersion);
+        public static References MicrosoftAspNetCoreMvcCore(string packageVersion) => Create("Microsoft.AspNetCore.Mvc.Core", packageVersion);
+        public static References MicrosoftAspNetCoreMvcViewFeatures(string packageVersion) => Create("Microsoft.AspNetCore.Mvc.ViewFeatures", packageVersion);
+        public static References MicrosoftAspNetCoreMvcWebApiCompatShim(string packageVersion) => Create("Microsoft.AspNetCore.Mvc.WebApiCompatShim", packageVersion);
+        public static References MicrosoftAspNetCoreRouting(string packageVersion) => Create("Microsoft.AspNetCore.Routing", packageVersion);
+        public static References MicrosoftAspNetCoreMvcRazorPages(string packageVersion = "2.2.5") => CreateWithCommandLine("Microsoft.AspNetCore.Mvc.RazorPages", packageVersion);
+        public static References MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) => Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
+        public static References MicrosoftAspNetMvc(string packageVersion) => Create("Microsoft.AspNet.Mvc", packageVersion);
+        public static References MicrosoftAspNetSignalRCore(string packageVersion = "2.4.1") => Create("Microsoft.AspNet.SignalR.Core", packageVersion);
+        public static References MicrosoftDataSqliteCore(string packageVersion = "2.0.0") => Create("Microsoft.Data.Sqlite.Core", packageVersion);
+        public static References MicrosoftEntityFrameworkCore(string packageVersion) => CreateWithCommandLine("Microsoft.EntityFrameworkCore", packageVersion);
+        public static References MicrosoftEntityFrameworkCoreSqlServer(string packageVersion) => CreateWithCommandLine("Microsoft.EntityFrameworkCore.SqlServer", packageVersion);
+        public static References MicrosoftEntityFrameworkCoreRelational(string packageVersion) => CreateWithCommandLine("Microsoft.EntityFrameworkCore.Relational", packageVersion);
+        public static References MicrosoftExtensionsConfigurationAbstractions(string packageVersion) => Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
+        public static References MicrosoftExtensionsDependencyInjectionAbstractions(string packageVersion) => Create("Microsoft.Extensions.DependencyInjection.Abstractions", packageVersion);
+        public static References MicrosoftExtensionsLoggingPackages(string packageVersion) =>
+            Create("Microsoft.Extensions.Logging", packageVersion)
+            .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Abstractions", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Console", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Debug", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.EventLog", packageVersion));
+        public static References MicrosoftExtensionsOptions(string packageVersion) => Create("Microsoft.Extensions.Options", packageVersion);
+        public static References MicrosoftExtensionsPrimitives(string packageVersion) => Create("Microsoft.Extensions.Primitives", packageVersion);
+        public static References MicrosoftNetHttpHeaders(string packageVersion) => Create("Microsoft.Net.Http.Headers", packageVersion);
+        public static References MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") => CreateWithCommandLine("Microsoft.SqlServer.Compact", packageVersion);
+        public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => Create("Microsoft.Web.Xdt", packageVersion);
+        public static References MSTestTestFramework(string packageVersion) => Create("MSTest.TestFramework", packageVersion);
+        public static References MvvmLightLibs(string packageVersion) => Create("MvvmLightLibs", packageVersion);
+        public static References Nancy(string packageVersion = "2.0.0") => Create("Nancy", packageVersion);
+        public static References NLog(string packageVersion) => Create("NLog", packageVersion);
+        public static References NHibernate(string packageVersion = "5.2.2") => Create("NHibernate", packageVersion);
+        public static References NSubstitute(string packageVersion) => Create("NSubstitute", packageVersion);
+        public static References NUnit(string packageVersion) => Create("NUnit", packageVersion);
+        public static References PetaPocoCompiled(string packageVersion = "6.0.353") => Create("PetaPoco.Compiled", packageVersion);
+        public static References RestSharp(string packageVersion) => Create("RestSharp", packageVersion);
+        public static References SerilogPackages(string packageVersion) =>
+            Create("Serilog", packageVersion)
+            .Concat(Create("Serilog.Sinks.Console", packageVersion));
+        public static References ServiceStackOrmLite(string packageVersion = "5.1.0") => Create("ServiceStack.OrmLite", packageVersion);
+        public static References SystemCollectionsImmutable(string packageVersion) => Create("System.Collections.Immutable", packageVersion);
+        public static References SystemConfigurationConfigurationManager(string packageVersion = "4.7.0") => CreateWithCommandLine("System.Configuration.ConfigurationManager", packageVersion);
+        public static References SystemComponentModelComposition(string packageVersion = "4.7.0") => CreateWithCommandLine("System.ComponentModel.Composition", packageVersion);
+        public static References SystemDataSqlServerCe(string packageVersion) => Create("Microsoft.SqlServer.Compact", packageVersion);
+        public static References SystemDataOdbc(string packageVersion = "4.5.0") => Create("System.Data.Odbc", packageVersion);
+        public static References SystemDataSqlClient(string packageVersion = "4.5.0") => Create("System.Data.SqlClient", packageVersion);
+        public static References SystemDataSQLiteCore(string packageVersion = "1.0.109.0") => Create("System.Data.SQLite.Core", packageVersion);
+        public static References SystemDataOracleClient(string packageVersion = "1.0.8") => Create("System.Data.OracleClient", packageVersion);
+        public static References SystemDDirectoryServices(string packageVersion = "4.7.0") => CreateWithCommandLine("System.DirectoryServices", packageVersion);
+        public static References SystemDrawingCommon(string packageVersion = "4.7.0") => CreateWithCommandLine("System.Drawing.Common", packageVersion);
+        public static References SystemSecurityCryptographyOpenSsl(string packageVersion = "4.7.0") => Create("System.Security.Cryptography.OpenSsl", packageVersion);
+        public static References SystemSecurityPermissions(string packageVersion = "4.7.0") => CreateWithCommandLine("System.Security.Permissions", packageVersion);
+        public static References SystemPrivateServiceModel(string packageVersion = "4.7.0") => CreateWithCommandLine("System.Private.ServiceModel", packageVersion);
+        public static References SystemServiceModelPrimitives(string packageVersion = "4.7.0") => CreateWithCommandLine("System.ServiceModel.Primitives", packageVersion);
+        public static References SystemTextRegularExpressions(string packageVersion = "4.3.1") => CreateWithCommandLine("System.Text.RegularExpressions", packageVersion);
+        public static References SystemThreadingTasksExtensions(string packageVersion) => Create("System.Threading.Tasks.Extensions", packageVersion);
+        public static References SystemValueTuple(string packageVersion) => Create("System.ValueTuple", packageVersion);
+        public static References SystemNetHttp(string packageVersion = "4.3.4") => CreateWithCommandLine("System.Net.Http", packageVersion);
+        public static References XunitFramework(string packageVersion) =>
+            Create("xunit.assert", packageVersion)
+            .Concat(Create("xunit.extensibility.core", packageVersion));
     }
 }
