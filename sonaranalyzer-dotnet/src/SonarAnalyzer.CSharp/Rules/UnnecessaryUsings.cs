@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckUnnecessaryUsings(SyntaxNodeAnalysisContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, IEnumerable<INamespaceSymbol> necessaryNamespaces)
+        private static void CheckUnnecessaryUsings(SyntaxNodeAnalysisContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, ISet<INamespaceSymbol> necessaryNamespaces)
         {
             foreach (var usingDirective in usingDirectives)
             {
