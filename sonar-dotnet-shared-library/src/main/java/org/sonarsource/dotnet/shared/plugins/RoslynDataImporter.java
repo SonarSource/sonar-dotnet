@@ -41,16 +41,16 @@ public class RoslynDataImporter {
     this.config = config;
   }
 
-  public void importRoslynReports(List<RoslynReport> reportPaths, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey,
+  public void importRoslynReports(List<RoslynReport> reports, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey,
     UnaryOperator<String> toRealPath) {
     Map<String, String> repositoryKeyByRoslynRuleKey = getRepoKeyByRoslynRuleKey(activeRoslynRulesByPartialRepoKey);
     boolean ignoreThirdPartyIssues = config.ignoreThirdPartyIssues() || !context.runtime().getApiVersion().isGreaterThanOrEqual(Version.create(7, 4));
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey, ignoreThirdPartyIssues, config.bugCategories(),
       config.codeSmellCategories(), config.vulnerabilityCategories());
 
-    LOG.info("Importing {} Roslyn {}", reportPaths.size(), pluralize("report", reportPaths.size()));
+    LOG.info("Importing {} Roslyn {}", reports.size(), pluralize("report", reports.size()));
 
-    for (RoslynReport report : reportPaths) {
+    for (RoslynReport report : reports) {
       SarifParserFactory.create(report, toRealPath).accept(callback);
     }
   }

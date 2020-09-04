@@ -108,7 +108,7 @@ public class DotNetSensorTest {
   public void noProtobufFilesShouldNotFail() {
     addFileToFs();
     when(reportPathCollector.protobufDirs()).thenReturn(Collections.emptyList());
-    when(reportPathCollector.roslynDirs()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
+    when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
     tester.setActiveRules(new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "S1186")).build())
       .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "[parameters_key]")).build())

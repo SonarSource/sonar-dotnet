@@ -57,7 +57,7 @@ public class PropertiesSensor implements Sensor {
 
     List<Path> roslynReportPaths = configuration.roslynReportPaths();
     if (!roslynReportPaths.isEmpty()) {
-      reportPathCollector.addRoslynDirs(roslynReportPaths.stream().map(path -> new RoslynReport(context.project(), path)).collect(Collectors.toList()));
+      reportPathCollector.addRoslynReport(roslynReportPaths.stream().map(path -> new RoslynReport(context.project(), path)).collect(Collectors.toList()));
     }
   }
 }
