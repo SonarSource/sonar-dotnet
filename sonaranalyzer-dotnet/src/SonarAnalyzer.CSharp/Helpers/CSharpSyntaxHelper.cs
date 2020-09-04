@@ -188,6 +188,9 @@ namespace SonarAnalyzer.Helpers
         public static bool IsAnyKind(this SyntaxToken syntaxToken, ISet<SyntaxKind> syntaxKinds) =>
             syntaxKinds.Contains((SyntaxKind)syntaxToken.RawKind);
 
+        public static bool IsAnyKind(this SyntaxTrivia syntaxTravia, params SyntaxKind[] syntaxKinds) =>
+            syntaxKinds.Contains((SyntaxKind)syntaxTravia.RawKind);
+
         public static bool ContainsMethodInvocation(this BaseMethodDeclarationSyntax methodDeclarationBase,
             SemanticModel semanticModel,
             Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)

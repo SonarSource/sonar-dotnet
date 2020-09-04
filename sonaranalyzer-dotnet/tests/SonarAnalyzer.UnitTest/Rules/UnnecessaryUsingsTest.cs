@@ -25,6 +25,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using CS = SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis.CSharp;
+using FluentAssertions;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -53,6 +55,31 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new CS.UnnecessaryUsings(),
                                    new CS.UnnecessaryUsingsCodeFixProvider(),
                                    additionalReferences: GetAdditionalReferences());
+
+        [TestMethod]
+        public void EquivalentNameSyntax_Equals_Object()
+        {
+            var main = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
+            object same = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
+            object different = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Ipsum"));
+
+            main.Equals(same).Should().BeTrue();
+            main.Equals(null).Should().BeFalse();
+            main.Equals("different type").Should().BeFalse();
+            main.Equals(different).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void EquivalentNameSyntax_Equals_EquivalentNameSyntax()
+        {
+            var main = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
+            var same = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
+            var different = new CS.EquivalentNameSyntax(SyntaxFactory.IdentifierName("Ipsum"));
+
+            main.Equals(same).Should().BeTrue();
+            main.Equals(null).Should().BeFalse();
+            main.Equals(different).Should().BeFalse();
+        }
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.GetMicrosoftWin32Primitives()
