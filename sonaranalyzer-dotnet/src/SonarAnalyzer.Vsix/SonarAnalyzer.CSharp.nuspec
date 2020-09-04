@@ -11,7 +11,7 @@
     <icon>images\sonarsource_64.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Analyzers which spot Bugs, Vulnerabilities and Code Smells in your code. For a better integration with SonarQube and/or SonarCloud, you can use SonarLint for Visual Studio, a free extension.</summary>
-    <description>Analyzers for the C# and VB.NET languages which spot Bugs, Vulnerabilities and Code Smells in your code. For better integration with SonarQube (https://www.sonarqube.org/) and/or SonarCloud (sonarcloud.io/), you can use SonarLint for Visual Studio, which is a free extension (https://www.sonarlint.org/visualstudio/).</description>
+    <description>Analyzers for the C# and VB.NET languages which spot Bugs, Vulnerabilities and Code Smells in your code. For better integration with SonarQube (https://www.sonarqube.org/) and/or SonarCloud (sonarcloud.io/), you can use SonarLint for Visual Studio, which is a free extension (https://www.sonarlint.org/visualstudio/), which can also be used standalone.</description>
     <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/8.12.0.0</releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2020 SonarSource SA</copyright>
