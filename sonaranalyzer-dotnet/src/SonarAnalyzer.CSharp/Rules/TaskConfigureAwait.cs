@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class TaskConfigureAwait : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3216";
+        private const string DiagnosticId = "S3216";
         private const string MessageFormat = "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.";
 
         private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if ((c.Node as AwaitExpressionSyntax).Expression is { } expression
+                    if (((AwaitExpressionSyntax)c.Node).Expression is { } expression
                         && c.SemanticModel.GetTypeInfo(expression).Type is { } type
                         && type.DerivesFrom(KnownType.System_Threading_Tasks_Task))
                     {
