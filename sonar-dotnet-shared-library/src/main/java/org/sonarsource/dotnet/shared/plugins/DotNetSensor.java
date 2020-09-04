@@ -94,13 +94,14 @@ public class DotNetSensor implements ProjectSensor {
     }
 
     List<RoslynReport> roslynDirs = reportPathCollector.roslynDirs();
-    if (!roslynDirs.isEmpty()) {
-      Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
-        .findAll()
-        .stream()
-        .map(ActiveRule::ruleKey)
-        .collect(toList()));
-      roslynDataImporter.importRoslynReports(roslynDirs, context, activeRoslynRulesByPartialRepoKey, toRealPath);
+    if (roslynDirs.isEmpty()) {
+      throw new IllegalStateException("No Roslyn issues report were found.");
     }
+    Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
+      .findAll()
+      .stream()
+      .map(ActiveRule::ruleKey)
+      .collect(toList()));
+    roslynDataImporter.importRoslynReports(roslynDirs, context, activeRoslynRulesByPartialRepoKey, toRealPath);
   }
 }

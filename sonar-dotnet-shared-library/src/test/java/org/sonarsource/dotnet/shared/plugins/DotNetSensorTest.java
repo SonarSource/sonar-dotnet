@@ -43,6 +43,7 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -126,9 +127,10 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void noRoslynReportShouldNotFail() {
+  public void noRoslynReportShouldFail() {
     addFileToFs();
-    sensor.execute(tester);
+    assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> sensor.execute(tester))
+      .withMessage("No Roslyn issues report were found.");
 
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
