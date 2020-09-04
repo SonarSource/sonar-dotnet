@@ -130,7 +130,7 @@ public class DotNetSensorTest {
   public void noRoslynReportShouldFail() {
     addFileToFs();
     assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> sensor.execute(tester))
-      .withMessage("No Roslyn issues report were found.");
+      .withMessage("No Roslyn issue reports were found.");
 
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));

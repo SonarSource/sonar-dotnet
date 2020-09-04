@@ -95,7 +95,7 @@ public class DotNetSensor implements ProjectSensor {
 
     List<RoslynReport> roslynReports = reportPathCollector.roslynReports();
     if (roslynReports.isEmpty()) {
-      throw new IllegalStateException("No Roslyn issues report were found.");
+      throw new IllegalStateException("No Roslyn issue reports were found.");
     }
     Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
       .findAll()
