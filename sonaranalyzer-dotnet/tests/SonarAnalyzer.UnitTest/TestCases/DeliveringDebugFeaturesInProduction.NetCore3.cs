@@ -33,9 +33,18 @@ namespace NetCore3
                 app.UseDeveloperExceptionPage(); // Noncompliant, False Positive
             }
 
+            while (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage(); // Noncompliant FP, we inspect only IF statements
+                break;
+            }
+
             // These are called unconditionally
             app.UseDeveloperExceptionPage(); // Noncompliant
             DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
         }
+
+        public void ConfigureAsArrow(IApplicationBuilder app, IWebHostEnvironment env) =>
+            DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
     }
 }

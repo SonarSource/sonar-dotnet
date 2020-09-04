@@ -37,11 +37,22 @@ namespace Tests.Diagnostics
                 app.UseDatabaseErrorPage(); // Noncompliant, False Positive
             }
 
+            // Only simple IF checks are considered
+            while (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage(); // Noncompliant FP
+                app.UseDatabaseErrorPage(); // Noncompliant FP
+                break;
+            }
+
             // These are called unconditionally
             app.UseDeveloperExceptionPage(); // Noncompliant
             app.UseDatabaseErrorPage(); // Noncompliant
             DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
             DatabaseErrorPageExtensions.UseDatabaseErrorPage(app); // Noncompliant
         }
+
+        public void ConfigureAsArrow(IApplicationBuilder app, IHostingEnvironment env) =>
+            DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
     }
 }

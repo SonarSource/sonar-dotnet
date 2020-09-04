@@ -6,6 +6,9 @@ Namespace Tests.Diagnostics
 
     Public Class Startup
 
+        Public Shared DefaultBuilder As IApplicationBuilder
+        Public Builder As IApplicationBuilder = DefaultBuilder.UseDeveloperExceptionPage() ' Noncompliant
+
         Public Sub Configure(ByVal app As IApplicationBuilder, ByVal env As IHostingEnvironment)
             ' Invoking as extension methods
             If env.IsDevelopment() Then
@@ -31,6 +34,13 @@ Namespace Tests.Diagnostics
                 app.UseDeveloperExceptionPage() ' Noncompliant, False Positive
                 app.UseDatabaseErrorPage() ' Noncompliant, False Positive
             End If
+
+            ' Only simple IF checks are considered
+            While env.IsDevelopment
+                app.UseDeveloperExceptionPage   ' Noncompliant FP
+                app.UseDatabaseErrorPage        ' Noncompliant FP
+                Exit While
+            End While
 
             ' These are called unconditionally
             app.UseDeveloperExceptionPage() ' Noncompliant

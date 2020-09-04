@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static ExpressionSyntax FindCondition(SyntaxNode node) =>
             node switch
             {
-                MultiLineIfBlockSyntax multiline => multiline.IfStatement?.Condition,
+                MultiLineIfBlockSyntax multiline => multiline.IfStatement.Condition,
                 SingleLineIfStatementSyntax singleline => singleline.Condition,
                 _ => null
             };
