@@ -26,7 +26,7 @@ using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
-    public static class BaseMethodDeclarationSyntaxExtensions
+    internal static class BaseMethodDeclarationSyntaxExtensions
     {
         public static IEnumerable<SyntaxNode> GetBodyDescendantNodes(this BaseMethodDeclarationSyntax method) =>
             (method ?? throw new ArgumentNullException(nameof(method))).Body == null
