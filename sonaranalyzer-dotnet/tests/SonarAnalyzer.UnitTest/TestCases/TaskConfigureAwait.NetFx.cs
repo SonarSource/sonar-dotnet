@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
             var t2 = GetNumber();
         }
 
-        private Task<int> GetNumber() 
+        private Task<int> GetNumber()
         {
             return Task.FromResult(5);
         }

@@ -22,17 +22,48 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class TaskConfigureAwaitTest
     {
+#if NETFRAMEWORK
+
         [TestMethod]
         [TestCategory("Rule")]
-        public void TaskConfigureAwait()
+        public void TaskConfigureAwait_NetFx() =>
+            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetFx.cs", new TaskConfigureAwait());
+
+#else
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TaskConfigureAwait_NetCore() =>
+            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
+
+#endif
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TaskConfigureAwait_ConsoleApp()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.cs", new TaskConfigureAwait());
+            const string code = @"
+using System.Threading.Tasks;
+
+public static class EntryPoint
+{
+    public async static Task Main() => await Task.Delay(1000); // Compliant
+}";
+            var projectBuilder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(code);
+            var compilationOptions = new CSharpCompilationOptions(OutputKind.ConsoleApplication);
+            var analyzer = new TaskConfigureAwait();
+            var compilation = projectBuilder.GetCompilation(null, compilationOptions);
+
+            DiagnosticVerifier.Verify(compilation, analyzer, CompilationErrorBehavior.Default);
         }
     }
 }

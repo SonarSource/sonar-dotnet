@@ -29,5 +29,10 @@ namespace SonarAnalyzer.Helpers
             (IMethodSymbol)compilation.GetSpecialType(type)
                 .GetMembers(methodName)
                 .SingleOrDefault();
+
+        public static bool IsNetFrameworkTarget(this Compilation compilation) =>
+            // There's no direct way of checking compilation target framework yet (09/2020).
+            // See https://github.com/dotnet/roslyn/issues/3798
+            compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
     }
 }
