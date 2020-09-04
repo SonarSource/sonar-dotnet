@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -28,7 +29,7 @@ namespace SonarAnalyzer.Helpers
     public static class BaseMethodDeclarationSyntaxExtensions
     {
         public static IEnumerable<SyntaxNode> GetBodyDescendantNodes(this BaseMethodDeclarationSyntax method) =>
-            method.Body == null
+            (method ?? throw new ArgumentNullException(nameof(method))).Body == null
                 ? method.ExpressionBody().DescendantNodes()
                 : method.Body.DescendantNodes();
     }

@@ -105,8 +105,8 @@ namespace SonarAnalyzer.Rules.CSharp
                          .OfType<IFieldSymbol>();
         }
 
-        private static bool IsOwnerSinceDeclaration(IFieldSymbol field) =>
-            field.DeclaringSyntaxReferences.SingleOrDefault()?.GetSyntax() is VariableDeclaratorSyntax varDeclarator
+        private static bool IsOwnerSinceDeclaration(ISymbol symbol) =>
+            symbol.DeclaringSyntaxReferences.SingleOrDefault()?.GetSyntax() is VariableDeclaratorSyntax varDeclarator
             && varDeclarator.Initializer?.Value is ObjectCreationExpressionSyntax;
     }
 }
