@@ -74,19 +74,24 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var disposableFields = namedType.GetMembers()
                                             .OfType<IFieldSymbol>()
-                                            .Where(fs => fs.IsNonStaticNonPublicDisposableField(analysisContext.Compilation.GetLanguageVersion())).ToHashSet();
+                                            .Where(fs => fs.IsNonStaticNonPublicDisposableField(analysisContext.Compilation.GetLanguageVersion()))
+                                            .ToHashSet();
 
-            var disposableFieldsWithInitializer = disposableFields.Where(IsOwnerSinceDeclaration);
+            if (disposableFields.Count == 0)
+            {
+                return string.Empty;
+            }
 
             var otherInitializationsOfFields = namedType.GetMembers()
                                                         .OfType<IMethodSymbol>()
                                                         .SelectMany(m => GetAssignmentsToFieldsIn(m, analysisContext.Compilation))
                                                         .Where(f => disposableFields.Contains(f));
 
-            return string.Join(", ", disposableFieldsWithInitializer.Union(otherInitializationsOfFields)
-                                                                    .Distinct()
-                                                                    .Select(symbol => $"'{symbol.Name}'")
-                                                                    .OrderBy(name => name));
+            return string.Join(", ", disposableFields.Where(IsOwnerSinceDeclaration)
+                                                     .Union(otherInitializationsOfFields)
+                                                     .Distinct()
+                                                     .Select(symbol => $"'{symbol.Name}'")
+                                                     .OrderBy(name => name));
         }
 
         private static IEnumerable<IFieldSymbol> GetAssignmentsToFieldsIn(ISymbol m, Compilation compilation)
