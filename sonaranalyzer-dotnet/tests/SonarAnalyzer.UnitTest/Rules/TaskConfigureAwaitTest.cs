@@ -51,15 +51,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TaskConfigureAwait_ConsoleApp()
         {
-            var projectBuilder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddDocument(@"TestCases\TaskConfigureAwait.ConsoleApp.cs");
+            const string code = @"
+using System.Threading.Tasks;
+
+public static class EntryPoint
+{
+    public async static Task Main() => await Task.Delay(1000); // Compliant
+}";
+            var projectBuilder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(code);
             var compilationOptions = new CSharpCompilationOptions(OutputKind.ConsoleApplication);
             var analyzer = new TaskConfigureAwait();
+            var compilation = projectBuilder.GetCompilation(null, compilationOptions);
 
-            foreach (var parseOptions in ParseOptionsHelper.FromCSharp6)
-            {
-                var compilation = projectBuilder.GetCompilation(parseOptions, compilationOptions);
-                DiagnosticVerifier.Verify(compilation, analyzer, CompilationErrorBehavior.Default);
-            }
+            DiagnosticVerifier.Verify(compilation, analyzer, CompilationErrorBehavior.Default);
         }
     }
 }
