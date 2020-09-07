@@ -11180,7 +11180,7 @@
     <value>Critical Security Hotspot</value>
   </data>
   <data name="S5042_Description" xml:space="preserve">
-    <value>Successful Zip Bomb attacks occur when an application expands untrusted archive files without controlling the size of the expanded data, which can lead to denial of service. A Zip bomb is usually a malicious archive file of a few kilobytes of compressed data but turned into gigabytes of uncompressed data, to achieve this extreme compression ratio, attackers will compress irrelevant data, a long string of repeated bytes. </value>
+    <value>Expanding archive files is security-sensitive. For example, expanding archive files has led in the past to the following vulnerabilities:</value>
   </data>
   <data name="S5042_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -11198,10 +11198,10 @@
     <value>Critical</value>
   </data>
   <data name="S5042_Tags" xml:space="preserve">
-    <value>cwe,owasp-a6,owasp-a5</value>
+    <value>cwe,owasp-a5</value>
   </data>
   <data name="S5042_Title" xml:space="preserve">
-    <value>Expanding archive files without controlling resource consumption is security sensitive</value>
+    <value>Expanding archive files is security-sensitive</value>
   </data>
   <data name="S5042_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
