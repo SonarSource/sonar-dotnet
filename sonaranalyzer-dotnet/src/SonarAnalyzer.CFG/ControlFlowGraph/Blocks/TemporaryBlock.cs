@@ -26,10 +26,6 @@ namespace SonarAnalyzer.ControlFlowGraph
 {
     public sealed class TemporaryBlock : Block
     {
-        public TemporaryBlock()
-        {
-        }
-
         public Block SuccessorBlock { get; set; }
 
         public override IReadOnlyList<Block> SuccessorBlocks => ImmutableArray.Create(SuccessorBlock);
