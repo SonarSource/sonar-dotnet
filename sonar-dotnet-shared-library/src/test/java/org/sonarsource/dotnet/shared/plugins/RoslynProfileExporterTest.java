@@ -237,9 +237,9 @@ public class RoslynProfileExporterTest {
     when(rulesProfile.getActiveRules()).thenReturn(Collections.singletonList(activeRule));
 
     RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, mock(Configuration.class), new RulesDefinition[0]);
+    StringWriter writer = new StringWriter();
 
     try {
-      StringWriter writer = new StringWriter();
       exporter.exportProfile(rulesProfile, writer);
       fail("was expecting an exception");
     } catch (IllegalStateException ex) {
