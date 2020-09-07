@@ -7,7 +7,7 @@
     <MoreInfo>http://vs.sonarlint.org</MoreInfo>
     <License>License.txt</License>
     <ReleaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/8.13.0.0</ReleaseNotes>
-    <Icon>logos\sonarlint_32.png</Icon>
+    <Icon>logos\sonarsource_32.png</Icon>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0,)" />
