@@ -11234,7 +11234,7 @@
     <value>Critical Vulnerability</value>
   </data>
   <data name="S5547_Description" xml:space="preserve">
-    <value>Strong cipher algorithms are cryptographic systems resistant to cryptanalysis, they are not vulnerable to well-known attacks like brute force attacks for example. </value>
+    <value>Strong cipher algorithms are cryptographic systems resistant to cryptanalysis, they are not vulnerable to well-known attacks like brute force attacks for example.</value>
   </data>
   <data name="S5547_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
