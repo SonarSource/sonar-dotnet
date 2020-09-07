@@ -43,6 +43,7 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -107,7 +108,7 @@ public class DotNetSensorTest {
   public void noProtobufFilesShouldNotFail() {
     addFileToFs();
     when(reportPathCollector.protobufDirs()).thenReturn(Collections.emptyList());
-    when(reportPathCollector.roslynDirs()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
+    when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
     tester.setActiveRules(new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "S1186")).build())
       .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "[parameters_key]")).build())
@@ -126,9 +127,10 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void noRoslynReportShouldNotFail() {
+  public void noRoslynReportShouldFail() {
     addFileToFs();
-    sensor.execute(tester);
+    assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> sensor.execute(tester))
+      .withMessage("No Roslyn issue reports were found.");
 
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));

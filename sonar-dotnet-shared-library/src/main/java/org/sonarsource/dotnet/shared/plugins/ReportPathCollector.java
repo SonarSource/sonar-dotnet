@@ -28,7 +28,7 @@ import org.sonar.api.scanner.ScannerSide;
 @ScannerSide
 public class ReportPathCollector {
   private final List<Path> protobufDirs = new ArrayList<>();
-  private final List<RoslynReport> roslynDirs = new ArrayList<>();
+  private final List<RoslynReport> roslynReports = new ArrayList<>();
 
   public void addProtobufDirs(List<Path> paths) {
     protobufDirs.addAll(paths);
@@ -38,11 +38,11 @@ public class ReportPathCollector {
     return Collections.unmodifiableList(new ArrayList<>(protobufDirs));
   }
 
-  public void addRoslynDirs(List<RoslynReport> paths) {
-    roslynDirs.addAll(paths);
+  public void addRoslynReport(List<RoslynReport> reports) {
+    roslynReports.addAll(reports);
   }
 
-  public List<RoslynReport> roslynDirs() {
-    return Collections.unmodifiableList(new ArrayList<>(roslynDirs));
+  public List<RoslynReport> roslynReports() {
+    return Collections.unmodifiableList(new ArrayList<>(roslynReports));
   }
 }
