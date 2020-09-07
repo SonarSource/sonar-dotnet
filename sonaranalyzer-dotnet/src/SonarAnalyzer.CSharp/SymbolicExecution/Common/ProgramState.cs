@@ -113,7 +113,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             var relationships = GetAllRelationshipsWith(relationship);
-            if (relationships == null)
+            if (relationships.IsEmpty)
             {
                 return null;
             }
@@ -143,7 +143,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
                 if (newRelationship.IsContradicting(allRelationships))
                 {
-                    return null;
+                    return ImmutableHashSet<BinaryRelationship>.Empty;
                 }
 
                 foreach (var transitive in newRelationship.GetTransitiveRelationships(allRelationships))
