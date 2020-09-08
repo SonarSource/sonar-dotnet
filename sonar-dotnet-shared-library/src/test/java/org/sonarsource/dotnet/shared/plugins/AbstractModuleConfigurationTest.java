@@ -67,7 +67,7 @@ public class AbstractModuleConfigurationTest {
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for project '<NONE>'.");
   }
 
   @Test
@@ -112,8 +112,8 @@ public class AbstractModuleConfigurationTest {
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG))
       .containsExactly(
-        "Analyzer working directory '" + workDir.toString() + "\\report1\\output-cs' contains 1 .pb file(s)",
-        "Analyzer working directory '" + workDir.toString() + "\\report2\\output-cs' contains 1 .pb file(s)");
+        "For project '<NONE>', analyzer working directory '" + workDir.toString() + "\\report1\\output-cs' contains 1 .pb file(s)",
+        "For project '<NONE>', analyzer working directory '" + workDir.toString() + "\\report2\\output-cs' contains 1 .pb file(s)");
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
   }
 
