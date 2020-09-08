@@ -43,6 +43,8 @@ stages:
         displayName: "Restore NuGet packages"
         inputs:
           restoreSolution: '$(solution)'
+          feedsToUse: 'config'
+          nugetConfigPath: 'sonaranalyzer-dotnet\NuGet.Config'
 
       - powershell: |
           # Calculate the file path

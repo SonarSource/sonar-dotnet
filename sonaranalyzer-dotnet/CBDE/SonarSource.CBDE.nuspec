@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>SonarSource.CBDE</id>
+    <version>1.0.0.14843</version>
+    <title>Common Bug Detection Engine</title>
+    <authors>SonarSource</authors>
+    <owners>SonarSource</owners>
+    <license type="file">LICENSE.txt</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Common Bug Detection Engine</description>
+    <language>en-US</language>
+    <copyright>Copyright © 2015-2020 SonarSource SA</copyright>
+  </metadata>
+
+  <files>
+    <file src="cbde-dialect-checker.exe" target="tools\CBDE\windows\"/>
+    <file src="dotnet-symbolic-execution.exe" target="tools\CBDE\windows\"/>
+    <file src="SonarSource.CBDE.targets" target="build"/>
+    <file src="LICENSE.txt" />
+    <file src="LICENSE_THIRD_PARTY.txt" />
+  </files>
+</package>

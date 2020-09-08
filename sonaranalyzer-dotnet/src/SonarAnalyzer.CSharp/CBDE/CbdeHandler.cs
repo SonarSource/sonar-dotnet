@@ -156,7 +156,7 @@ namespace SonarAnalyzer.CBDE
         private static void UnpackCbdeExe()
         {
             var assembly = typeof(CbdeHandler).Assembly;
-            const string res = "SonarAnalyzer.CBDE.windows.dotnet-symbolic-execution.exe";
+            const string res = "SonarAnalyzer.dotnet-symbolic-execution.exe";
             extractedCbdeBinaryPath = Path.Combine(extractedCbdeBinaryPath, "windows/dotnet-symbolic-execution.exe");
             Directory.CreateDirectory(Path.GetDirectoryName(extractedCbdeBinaryPath));
             var stream = assembly.GetManifestResourceStream(res);

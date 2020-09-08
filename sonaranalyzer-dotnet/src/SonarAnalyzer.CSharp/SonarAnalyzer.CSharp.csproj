@@ -13,6 +13,10 @@
        For instance, System.ValueTuple is not available in 4.6.1 and must be added to the final packaging if we add it here -->
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="1.3.2" />
+    <PackageReference Include="SonarSource.CBDE" Version="1.0.0.14843">
+      <!-- Development dependency, these assets will be consumed but won't flow to the parent project -->
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="System.Collections.Immutable" Version="1.1.37">
       <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
       <NoWarn>NU1701</NoWarn>
@@ -29,7 +33,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="CBDE/windows/dotnet-symbolic-execution.exe" />
+    <EmbeddedResource Include="$(dotnet_symbolic_execution_windows)"  />
+    
+    <Content Include="$(dotnet_symbolic_execution_windows)" >
+      <Link>CBDE\windows\dotnet-symbolic-execution.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    
+    <Content Include="$(cbde_dialect_checker_windows)" >
+      <Link>CBDE\windows\cbde-dialect-checker.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <!--
@@ -42,11 +56,10 @@
     <NoWarn>NU1605</NoWarn>
   </PropertyGroup>
 
-  <Import Project=".\DownloadCBDE.targets" />
-
   <ItemGroup>
     <AdditionalFiles Include="..\..\.sonarlint\SonarLint.xml">
       <Link>Properties\SonarLint.xml</Link>
     </AdditionalFiles>
   </ItemGroup>
+
 </Project>

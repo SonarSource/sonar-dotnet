@@ -1,0 +1,5 @@
+Copyright (C) 2012-2020 SonarSource SA
+All rights reserved
+mailto:info AT sonarsource DOT com
+
+The C/C++ binary can be used as part of sonar-dotnet, but can not be copied and/or distributed without the express permission of SonarSource SA.

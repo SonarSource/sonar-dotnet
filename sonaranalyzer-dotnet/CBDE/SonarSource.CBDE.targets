@@ -1,0 +1,7 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <cbde_tools>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)/../tools/CBDE/'))</cbde_tools>
+        <cbde_dialect_checker_windows>$([System.IO.Path]::GetFullPath('$(cbde_tools)/windows/cbde-dialect-checker.exe'))</cbde_dialect_checker_windows>
+        <dotnet_symbolic_execution_windows>$([System.IO.Path]::GetFullPath('$(cbde_tools)/windows/dotnet-symbolic-execution.exe'))</dotnet_symbolic_execution_windows>
+    </PropertyGroup>
+</Project>
