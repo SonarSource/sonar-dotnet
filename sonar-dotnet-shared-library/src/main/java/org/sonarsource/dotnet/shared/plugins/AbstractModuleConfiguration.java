@@ -93,6 +93,19 @@ public abstract class AbstractModuleConfiguration {
       .collect(Collectors.toList());
   }
 
+  public List<Path> roslynReportPaths() {
+    String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(languageKey));
+    LOG.debug("For project '{}', the Roslyn JSON report path has '{}'", projectKey, String.join(",", strPaths));
+    if (strPaths.length > 0) {
+      return Arrays.stream(strPaths)
+        .map(Paths::get)
+        .collect(Collectors.toList());
+    } else {
+      LOG.warn( "For project '{}', no Roslyn issues reports have been found.", projectKey);
+      return Collections.emptyList();
+    }
+  }
+
   private static boolean validateOutputDir(Path analyzerOutputDir, String projectKey) {
     String path = analyzerOutputDir.toString();
     try {
@@ -118,18 +131,5 @@ public abstract class AbstractModuleConfiguration {
 
   private static DirectoryStream.Filter<Path> protoFileFilter() {
     return p -> p.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".pb");
-  }
-
-  public List<Path> roslynReportPaths() {
-    String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(languageKey));
-    LOG.debug("For project '{}', the Roslyn JSON report path has '{}'", projectKey, String.join(",", strPaths));
-    if (strPaths.length > 0) {
-      return Arrays.stream(strPaths)
-        .map(Paths::get)
-        .collect(Collectors.toList());
-    } else {
-      LOG.warn( "For project '{}', no Roslyn issues reports have been found.", projectKey);
-      return Collections.emptyList();
-    }
   }
 }
