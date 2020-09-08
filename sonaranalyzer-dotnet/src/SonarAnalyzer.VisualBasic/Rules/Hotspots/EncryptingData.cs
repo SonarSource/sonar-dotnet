@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
             ImmutableArray.Create(rule);
-			
+
         public EncryptingData()
             : this(AnalyzerConfiguration.Hotspot)
         {

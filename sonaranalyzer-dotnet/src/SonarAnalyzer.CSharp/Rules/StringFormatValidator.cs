@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "{0}";
 
         // This is the value as defined in .Net Framework
-        private const int MaxValueForArgumentIndexAndAlignment = 1000000;
+        private const int MaxValueForArgumentIndexAndAlignment = 1_000_000;
 
         private static readonly DiagnosticDescriptor bugRule =
           DiagnosticDescriptorBuilder.GetDescriptor(BugDiagnosticId, MessageFormat, RspecStrings.ResourceManager);

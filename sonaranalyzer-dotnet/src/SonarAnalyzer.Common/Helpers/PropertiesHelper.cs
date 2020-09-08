@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Helpers
                 var xml = XDocument.Load(sonarLintAdditionalFile.Path);
                 return xml.Descendants("Setting");
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 // ignoring exception as we cannot log it
                 return Enumerable.Empty<XElement>();

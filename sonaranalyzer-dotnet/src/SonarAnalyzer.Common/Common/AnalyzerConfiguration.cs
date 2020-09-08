@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Common
         /// </summary>
         private class HotspotConfiguration : IAnalyzerConfiguration
         {
-            private bool isInitialized = false;
+            private bool isInitialized;
             private HashSet<string> enabledRules;
 
             /// <summary>

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotCallExitMethods : DoNotCallMethodsCSharpBase
     {
-        internal const string DiagnosticId = "S1147";
+        private const string DiagnosticId = "S1147";
         private const string MessageFormat = "Remove this call to '{0}' or ensure it is really required.";
 
         private static readonly DiagnosticDescriptor rule =
@@ -47,18 +47,17 @@ namespace SonarAnalyzer.Rules.CSharp
             new MemberDescriptor(KnownType.System_Environment, "Exit"),
             new MemberDescriptor(KnownType.System_Windows_Forms_Application, "Exit")
         };
+
         internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
 
         protected override bool IsInValidContext(InvocationExpressionSyntax invocationSyntax,
-            SemanticModel semanticModel)
-        {
+            SemanticModel semanticModel) =>
             // Do not report if call is inside Main.
-            return !invocationSyntax
+            !invocationSyntax
                 .Ancestors()
                 .OfType<BaseMethodDeclarationSyntax>()
-                .Select(m => semanticModel.GetDeclaredSymbol(m) as IMethodSymbol)
+                .Select(m => semanticModel.GetDeclaredSymbol(m))
                 .Select(s => s.IsMainMethod())
                 .FirstOrDefault();
-        }
     }
 }
