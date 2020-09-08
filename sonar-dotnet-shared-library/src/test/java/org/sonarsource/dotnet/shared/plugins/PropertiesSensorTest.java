@@ -76,7 +76,6 @@ public class PropertiesSensorTest {
     underTest.describe(desc);
 
     verify(desc).name("Lang Name Properties");
-    verify(desc).onlyOnLanguage("languageKey");
   }
 
   @Test
