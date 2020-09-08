@@ -1,4 +1,4 @@
-Copyright (C) 2012-2019 SonarSource SA
+Copyright (C) 2012-2020 SonarSource SA
 All rights reserved
 mailto:info AT sonarsource DOT com
 

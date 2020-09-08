@@ -20,4 +20,4 @@ XML manifest that contains the package metadata. Used to generate `SonarSource.C
 Adds build variables for paths to ease build configuration:
 - `cbde_tools`: root folder for CBDE tools
 - `cbde_dialect_checker_windows`: windows version of `cbde-dialect-checker.exe`
-- `dotnet_symbolic_execution_windows`: windows version of `otnet-symbolic-execution.exe` engine
+- `dotnet_symbolic_execution_windows`: windows version of `dotnet-symbolic-execution.exe` engine
