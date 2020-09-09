@@ -20,8 +20,6 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import java.nio.file.Path;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -45,17 +43,7 @@ public class DoNotAnalyzeTestFilesTest {
 
   @Test
   public void should_not_increment_test() throws Exception {
-    Path projectDir = Tests.projectDir(temp, PROJECT);
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir, "MyLib.Tests")
-      .setProfile("no_rule")
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
-
-    ORCHESTRATOR.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
-
-    ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+    Tests.analyzeProjectWithSubProject(temp, PROJECT, "MyLib.Tests", "no_rule", "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(Tests.getComponent("DoNotAnalyzeTestFilesTest:UnitTest1.cs")).isNotNull();
     assertThat(getMeasureAsInt(PROJECT, "files")).isNull();

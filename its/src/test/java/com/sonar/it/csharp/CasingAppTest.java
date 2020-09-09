@@ -20,9 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
@@ -48,15 +46,7 @@ public class CasingAppTest {
 
   @Test
   public void class1_should_have_metrics_and_issues() throws IOException {
-    Path projectDir = Tests.projectDir(temp, "CasingApp");
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("CasingApp", projectDir, "CasingApp");
-
-    ORCHESTRATOR.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
-
-    ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+    Tests.analyzeProjectWithSubProject(temp, "CasingApp", "CasingApp", null);
 
     String class1ComponentKey = "CasingApp:SRC/Class1.cs";
 

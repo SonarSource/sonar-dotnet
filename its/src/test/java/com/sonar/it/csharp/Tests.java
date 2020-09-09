@@ -87,6 +87,20 @@ public class Tests {
     return tmpProjectDir;
   }
 
+  static BuildResult analyzeProjectWithSubProject(TemporaryFolder temp, String projectName, String subProjectName, @Nullable String profileKey, String... keyValues) throws IOException {
+    Path projectDir = Tests.projectDir(temp, projectName);
+
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir, subProjectName)
+      .setProfile(profileKey)
+      .setProperties(keyValues);
+
+    ORCHESTRATOR.executeBuild(beginStep);
+
+    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
+
+    return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+  }
+
   static BuildResult analyzeProject(TemporaryFolder temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, projectName);
 
