@@ -63,11 +63,15 @@ public class AbstractModuleConfigurationTest {
 
   @Test
   public void giveWarningsWhenGettingProtobufPathAndNoPropertyAvailable() {
-    Configuration configuration = createEmptyMockConfiguration();
+    Configuration configuration = mock(Configuration.class);
+
+    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[0]);
+    when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[0]);
+    // no projectKey is set
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for project '<NONE>'.");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Project '<NONE>': Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.");
   }
 
   @Test
@@ -90,7 +94,10 @@ public class AbstractModuleConfigurationTest {
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).containsOnly(path1.resolve("output-cs"));
-    assertThat(logTester.logs(LoggerLevel.WARN)).hasOnlyOneElementSatisfying(s -> s.startsWith("Analyzer working directory does not exist"));
+    assertThat(logTester.logs(LoggerLevel.WARN))
+        .containsExactly(
+          "Project 'Test Project': Analyzer working directory '" + workDir.toString() + "\\report1\\output-cs' contains 1 .pb file(s)",
+          "Project 'Test Project': Analyzer working directory '" + workDir.toString() + "\\report2\\output-cs' contains 1 .pb file(s)");
   }
 
   @Test
@@ -112,8 +119,8 @@ public class AbstractModuleConfigurationTest {
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG))
       .containsExactly(
-        "For project '<NONE>', analyzer working directory '" + workDir.toString() + "\\report1\\output-cs' contains 1 .pb file(s)",
-        "For project '<NONE>', analyzer working directory '" + workDir.toString() + "\\report2\\output-cs' contains 1 .pb file(s)");
+        "Project 'Test Project': Analyzer working directory '" + workDir.toString() + "\\report1\\output-cs' contains 1 .pb file(s)",
+        "Project 'Test Project': Analyzer working directory '" + workDir.toString() + "\\report2\\output-cs' contains 1 .pb file(s)");
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
   }
 
@@ -163,6 +170,7 @@ public class AbstractModuleConfigurationTest {
 
     when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(new String[0]);
     when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[0]);
+    when(configuration.get("sonar.projectKey")).thenReturn(Optional.of("Test Project"));
 
     return configuration;
   }

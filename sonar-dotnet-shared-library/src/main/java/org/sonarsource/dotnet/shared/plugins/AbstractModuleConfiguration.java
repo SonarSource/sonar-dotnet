@@ -58,14 +58,13 @@ public abstract class AbstractModuleConfiguration {
 
   private final Configuration configuration;
   private final String languageKey;
-  // we store the project key for logging
   private final String projectKey;
 
   public AbstractModuleConfiguration(Configuration configuration, String languageKey) {
     this.configuration = configuration;
     this.languageKey = languageKey;
     this.projectKey = configuration.get("sonar.projectKey").orElse("<NONE>");
-    LOG.trace("AbstractModuleConfiguration for {} has been created.", projectKey);
+    LOG.trace("Project '{}': AbstractModuleConfiguration has been created.", projectKey);
   }
 
   static String getAnalyzerReportDir(String languageKey) {
@@ -85,43 +84,43 @@ public abstract class AbstractModuleConfiguration {
 
     // we don't generate sonar.cs.analyzer.projectOutPaths for test projects on purpose
     if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests")) {
-      LOG.warn("Property missing: '{}'. No protobuf files will be loaded for project '{}'.", getAnalyzerWorkDirProperty(languageKey), projectKey);
+      LOG.warn("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, getAnalyzerWorkDirProperty(languageKey));
     }
 
     return analyzerWorkDirPaths.stream().map(x -> x.resolve(getAnalyzerReportDir(languageKey)))
-      .filter(dir -> validateOutputDir(dir, projectKey))
+      .filter(this::validateOutputDir)
       .collect(Collectors.toList());
   }
 
   public List<Path> roslynReportPaths() {
     String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(languageKey));
-    LOG.debug("For project '{}', the Roslyn JSON report path has '{}'", projectKey, String.join(",", strPaths));
+    LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, String.join(",", strPaths));
     if (strPaths.length > 0) {
       return Arrays.stream(strPaths)
         .map(Paths::get)
         .collect(Collectors.toList());
     } else {
-      LOG.warn( "For project '{}', no Roslyn issues reports have been found.", projectKey);
+      LOG.warn( "Project '{}': No Roslyn issues reports have been found.", projectKey);
       return Collections.emptyList();
     }
   }
 
-  private static boolean validateOutputDir(Path analyzerOutputDir, String projectKey) {
+  private boolean validateOutputDir(Path analyzerOutputDir) {
     String path = analyzerOutputDir.toString();
     try {
       if (!analyzerOutputDir.toFile().exists()) {
-        LOG.warn("For project '{}', analyzer working directory does not exist: '{}'. {}", projectKey, path, MSG_SUFFIX);
+        LOG.warn("Project '{}': Analyzer working directory does not exist: '{}'. {}", projectKey, path, MSG_SUFFIX);
         return false;
       }
 
       try (DirectoryStream<Path> files = Files.newDirectoryStream(analyzerOutputDir, protoFileFilter())) {
         long count = StreamSupport.stream(files.spliterator(), false).count();
         if (count == 0) {
-          LOG.warn("For project '{}', analyzer working directory '{}' contains no .pb file(s). {}", projectKey, path, MSG_SUFFIX);
+          LOG.warn("Project '{}': Analyzer working directory '{}' contains no .pb file(s). {}", projectKey, path, MSG_SUFFIX);
           return false;
         }
 
-        LOG.debug("For project '{}', analyzer working directory '{}' contains {} .pb file(s)", projectKey, path, count);
+        LOG.debug("Project '{}': Analyzer working directory '{}' contains {} .pb file(s)", projectKey, path, count);
         return true;
       }
     } catch (IOException e) {
