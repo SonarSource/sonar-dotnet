@@ -49,6 +49,13 @@ public class AbstractModuleConfigurationTest {
   }
 
   @Test
+  public void traceObjectCreation() {
+    Configuration configuration = createEmptyMockConfiguration();
+    createAbstractModuleConfiguration(configuration);
+    assertThat(logTester.logs(LoggerLevel.TRACE)).containsOnly("Project 'Test Project': AbstractModuleConfiguration has been created.");
+  }
+
+  @Test
   public void onlyNewRoslynReportPresent() throws IOException {
     Path path = temp.newFile("roslyn-report.json").toPath();
     Path path2 = temp.newFile("roslyn-report2.json").toPath();
@@ -59,6 +66,10 @@ public class AbstractModuleConfigurationTest {
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"), workDir.resolve("roslyn-report2.json"));
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly(
+      "Project 'Test Project': The Roslyn JSON report path has '"
+        + workDir.toString() + "\\roslyn-report.json,"
+        + workDir.toString() + "\\roslyn-report2.json'");
   }
 
   @Test
@@ -83,6 +94,7 @@ public class AbstractModuleConfigurationTest {
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
 
   @Test
@@ -106,7 +118,9 @@ public class AbstractModuleConfigurationTest {
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).hasOnlyOneElementSatisfying(s -> s.startsWith("Analyzer working directory does not exist"));
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly(
+      "Project 'Test Project': Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project."
+    );
   }
 
   @Test
@@ -134,6 +148,7 @@ public class AbstractModuleConfigurationTest {
     assertThat(config.protobufReportPaths()).containsOnly(
       workDir.resolve("report1").resolve("output-cs"),
       workDir.resolve("report2").resolve("output-cs"));
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Project 'Test Project': No Roslyn issues reports have been found.");
   }
 
   @Test
