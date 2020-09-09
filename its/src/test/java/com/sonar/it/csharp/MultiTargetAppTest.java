@@ -20,18 +20,17 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,12 +39,9 @@ public class MultiTargetAppTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
   @Before
   public void init() {
-    TestUtils.reset(orchestrator);
+    TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
@@ -54,11 +50,11 @@ public class MultiTargetAppTest {
 
     ScannerForMSBuild beginStep = TestUtils.createBeginStep("MultiTargetConsoleApp", projectDir, "MultiTargetConsoleApp");
 
-    orchestrator.executeBuild(beginStep);
+    ORCHESTRATOR.executeBuild(beginStep);
 
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore", "/t:Rebuild");
+    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore", "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
 
     String programCsComponentId = "MultiTargetConsoleApp:Program.cs";
     assertThat(getComponent(programCsComponentId)).isNotNull();

@@ -20,33 +20,27 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
-    TestUtils.reset(orchestrator);
+    TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
@@ -145,17 +139,7 @@ public class CoverageTest {
 
   @Test
   public void no_coverage_on_tests() throws Exception {
-    Path projectDir = Tests.projectDir(temp, "NoCoverageOnTests");
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("NoCoverageOnTests", projectDir)
-      .setProfile("no_rule")
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
-
-    orchestrator.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
-
-    BuildResult buildResult = orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    BuildResult buildResult = Tests.analyzeProject(temp, "NoCoverageOnTests", "no_rule", "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -180,25 +164,11 @@ public class CoverageTest {
   }
 
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
-    return analyzeProject("CoverageTest", keyValues);
+    return Tests.analyzeProject(temp, "CoverageTest", "no_rule", keyValues);
   }
 
   private BuildResult analyzeMultipleProjectsTestProject(String coverageProperty, String coverageFileName) throws IOException {
-    return analyzeProject("MultipleProjects", coverageProperty, coverageFileName);
-  }
-
-  private BuildResult analyzeProject(String projectName, String... keyValues) throws IOException {
-    Path projectDir = Tests.projectDir(temp, projectName);
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir)
-      .setProfile("no_rule")
-      .setProperties(keyValues);
-
-    orchestrator.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore,Rebuild");
-
-    return orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    return Tests.analyzeProject(temp, "MultipleProjects", "no_rule", coverageProperty, coverageFileName);
   }
 
   private void assertCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines, int conditionsToCover, int uncoveredConditions)

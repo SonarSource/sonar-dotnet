@@ -20,9 +20,6 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import java.nio.file.Path;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -37,24 +34,12 @@ public class NoSourcesTest {
   @ClassRule
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
   private static final String PROJECT = "ProjectWithNoSources";
 
   @BeforeClass
   public static void init() throws Exception {
-    TestUtils.reset(orchestrator);
-
-    Path projectDir = Tests.projectDir(temp, PROJECT);
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
-
-    ORCHESTRATOR.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
-
-    ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+    TestUtils.reset(ORCHESTRATOR);
+    Tests.analyzeProject(temp, PROJECT, null);
   }
 
   @Test

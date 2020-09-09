@@ -21,17 +21,13 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getHotspots;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,22 +38,19 @@ public class RuleParameterCustomizationTest {
   private static final String PROFILE_NAME = "custom_parameters";
   private static final String CustomParametersProjectName = "DefaultRuleParametersCanBeCustomized";
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
-    TestUtils.reset(orchestrator);
+    TestUtils.reset(ORCHESTRATOR);
 
     provisionProject();
   }
 
   @Test
   public void doNotHardcodeCredentials_defaultParameters_canBeCustomized() throws Exception {
-    runAnalysis();
+    Tests.analyzeProject(temp, CustomParametersProjectName, null);
 
     final String componentKey = "DefaultRuleParametersCanBeCustomized:DefaultRuleParametersCanBeCustomized/DefaultRuleParametersCanBeCustomized.cs";
 
@@ -76,19 +69,7 @@ public class RuleParameterCustomizationTest {
   }
 
   private void provisionProject() {
-    orchestrator.getServer().provisionProject(CustomParametersProjectName, CustomParametersProjectName);
-    orchestrator.getServer().associateProjectToQualityProfile(CustomParametersProjectName, LANGUAGE_KEY, PROFILE_NAME);
-  }
-
-  private void runAnalysis() throws IOException {
-    Path projectDir = com.sonar.it.vbnet.Tests.projectDir(temp, CustomParametersProjectName);
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(CustomParametersProjectName, projectDir);
-
-    orchestrator.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
-
-    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    ORCHESTRATOR.getServer().provisionProject(CustomParametersProjectName, CustomParametersProjectName);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(CustomParametersProjectName, LANGUAGE_KEY, PROFILE_NAME);
   }
 }

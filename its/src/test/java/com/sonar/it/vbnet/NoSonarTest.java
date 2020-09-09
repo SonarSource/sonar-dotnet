@@ -45,19 +45,7 @@ public class NoSonarTest {
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(orchestrator);
-
-    Path projectDir = Tests.projectDir(temp, PROJECT);
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir)
-      .setProfile("vbnet_class_name")
-      // Without that, the NoSonarTest project is considered as a Test project :)
-      .setProperty("sonar.msbuild.testProjectPattern", "noTests");
-
-    ORCHESTRATOR.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
-
-    ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+    Tests.analyzeProject(temp, PROJECT, "vbnet_class_name", "sonar.msbuild.testProjectPattern", "noTests");
   }
 
   @Test

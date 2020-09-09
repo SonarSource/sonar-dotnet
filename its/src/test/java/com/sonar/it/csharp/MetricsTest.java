@@ -59,19 +59,7 @@ public class MetricsTest {
         @Override
         protected void before() throws Throwable {
           TestUtils.reset(ORCHESTRATOR);
-
-          Path projectDir = Tests.projectDir(temp, PROJECT);
-
-          ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir)
-            .setProfile("no_rule")
-            // Without that, the MetricsTest project is considered as a Test project :)
-            .setProperty("sonar.msbuild.testProjectPattern", "noTests");
-
-          ORCHESTRATOR.executeBuild(beginStep);
-
-          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
-
-          ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+          Tests.analyzeProject(temp, PROJECT, "no_rule", "sonar.msbuild.testProjectPattern", "noTests");
         }
       });
   }
@@ -292,16 +280,8 @@ public class MetricsTest {
 
   /* Helper methods */
 
-  private Measure getProjectMeasure(String metricKey) {
-    return getMeasure(PROJECT, metricKey);
-  }
-
   private Integer getProjectMeasureAsInt(String metricKey) {
     return getMeasureAsInt(PROJECT, metricKey);
-  }
-
-  private Measure getDirectoryMeasure(String metricKey) {
-    return getMeasure(DIRECTORY, metricKey);
   }
 
   private Integer getDirectoryMeasureAsInt(String metricKey) {

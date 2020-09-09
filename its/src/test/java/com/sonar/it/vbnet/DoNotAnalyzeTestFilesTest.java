@@ -20,28 +20,25 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.nio.file.Path;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DoNotAnalyzeTestFilesTest {
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
-    TestUtils.reset(orchestrator);
+    TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
@@ -52,11 +49,11 @@ public class DoNotAnalyzeTestFilesTest {
       .setProfile("vbnet_no_rule")
       .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
-    orchestrator.executeBuild(beginStep);
+    ORCHESTRATOR.executeBuild(beginStep);
 
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
 
     assertThat(Tests.getComponent("VbDoNotAnalyzeTestFilesTest:UnitTest1.vb")).isNotNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "files")).isNull();

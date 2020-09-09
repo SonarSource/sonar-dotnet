@@ -20,9 +20,6 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import java.nio.file.Path;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -37,27 +34,14 @@ public class NoSonarTest {
   @ClassRule
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
   private static final String PROJECT = "NoSonarTest";
 
   @BeforeClass
   public static void init() throws Exception {
-    TestUtils.reset(orchestrator);
+    TestUtils.reset(ORCHESTRATOR);
 
-    Path projectDir = Tests.projectDir(temp, PROJECT);
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir)
-      .setProfile("class_name")
-      // Without that, the NoSonarTest project is considered as a Test project :)
-      .setProperty("sonar.msbuild.testProjectPattern", "noTests");
-
-    ORCHESTRATOR.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
-
-    ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+    // Without that, the NoSonarTest project is considered as a Test project :)
+    Tests.analyzeProject(temp, PROJECT, "class_name", "sonar.msbuild.testProjectPattern", "noTests");
   }
 
   @Test

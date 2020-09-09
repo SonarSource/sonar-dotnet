@@ -20,25 +20,19 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.io.IOException;
-import java.nio.file.Path;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UnitTestResultsTest {
-
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
@@ -47,7 +41,7 @@ public class UnitTestResultsTest {
 
   @Before
   public void init() {
-    TestUtils.reset(orchestrator);
+    TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
@@ -91,16 +85,6 @@ public class UnitTestResultsTest {
   }
 
   private BuildResult analyzeTestProject(String... keyValues) throws IOException {
-    Path projectDir = Tests.projectDir(temp, PROJECT);
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir)
-      .setProfile("no_rule")
-      .setProperties(keyValues);
-
-    orchestrator.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
-
-    return orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    return Tests.analyzeProject(temp, PROJECT, "no_rule", keyValues);
   }
 }

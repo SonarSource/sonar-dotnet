@@ -30,14 +30,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasure;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UnitTestResultsTest {
-
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
@@ -45,8 +43,8 @@ public class UnitTestResultsTest {
   private static final String PROJECT = "VbUnitTestResultsTest";
 
   @Before
-  public void init() {
-    TestUtils.reset(orchestrator);
+  public void init(){
+    TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
@@ -57,20 +55,6 @@ public class UnitTestResultsTest {
     assertThat(getMeasure(PROJECT, "test_errors")).isNull();
     assertThat(getMeasure(PROJECT, "test_failures")).isNull();
     assertThat(getMeasure(PROJECT, "skipped_tests")).isNull();
-  }
-
-  private void analyzeTestProject(String... keyValues) throws IOException {
-    Path projectDir = Tests.projectDir(temp, PROJECT);
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir)
-      .setProfile("vbnet_no_rule")
-      .setProperties(keyValues);
-
-    orchestrator.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
-
-    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
   }
 
   @Test
@@ -98,5 +82,9 @@ public class UnitTestResultsTest {
     analyzeTestProject("sonar.vbnet.vstest.reportsPaths", "reports/*.trx");
 
     assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
+  }
+
+  private void analyzeTestProject(String... keyValues) throws IOException {
+    Tests.analyzeProject(temp, PROJECT, "vbnet_no_rule", keyValues);
   }
 }

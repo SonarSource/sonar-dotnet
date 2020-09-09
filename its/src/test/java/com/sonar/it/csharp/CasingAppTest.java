@@ -20,18 +20,17 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
@@ -42,12 +41,9 @@ public class CasingAppTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
   @Before
   public void init() {
-    TestUtils.reset(orchestrator);
+    TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
@@ -56,11 +52,11 @@ public class CasingAppTest {
 
     ScannerForMSBuild beginStep = TestUtils.createBeginStep("CasingApp", projectDir, "CasingApp");
 
-    orchestrator.executeBuild(beginStep);
+    ORCHESTRATOR.executeBuild(beginStep);
 
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
 
     String class1ComponentKey = "CasingApp:SRC/Class1.cs";
 
