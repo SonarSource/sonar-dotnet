@@ -91,6 +91,8 @@ public class DotNetSensor implements ProjectSensor {
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
     if (!protobufPaths.isEmpty()) {
       protobufDataImporter.importResults(context, protobufPaths, toRealPath);
+    } else {
+      LOG.warn("No protobuf reports found - no metrics and highlighting will be imported.");
     }
 
     List<RoslynReport> roslynReports = reportPathCollector.roslynReports();

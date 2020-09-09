@@ -84,7 +84,7 @@ public abstract class AbstractModuleConfiguration {
 
     // we don't generate sonar.cs.analyzer.projectOutPaths for test projects on purpose
     if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests")) {
-      LOG.warn("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, getAnalyzerWorkDirProperty(languageKey));
+      LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, getAnalyzerWorkDirProperty(languageKey));
     }
 
     return analyzerWorkDirPaths.stream().map(x -> x.resolve(getAnalyzerReportDir(languageKey)))
@@ -94,13 +94,13 @@ public abstract class AbstractModuleConfiguration {
 
   public List<Path> roslynReportPaths() {
     String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(languageKey));
-    LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, String.join(",", strPaths));
     if (strPaths.length > 0) {
+      LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, String.join(",", strPaths));
       return Arrays.stream(strPaths)
         .map(Paths::get)
         .collect(Collectors.toList());
     } else {
-      LOG.warn( "Project '{}': No Roslyn issues reports have been found.", projectKey);
+      LOG.debug( "Project '{}': No Roslyn issues reports have been found.", projectKey);
       return Collections.emptyList();
     }
   }
@@ -109,14 +109,14 @@ public abstract class AbstractModuleConfiguration {
     String path = analyzerOutputDir.toString();
     try {
       if (!analyzerOutputDir.toFile().exists()) {
-        LOG.warn("Project '{}': Analyzer working directory does not exist: '{}'. {}", projectKey, path, MSG_SUFFIX);
+        LOG.debug("Project '{}': Analyzer working directory does not exist: '{}'. {}", projectKey, path, MSG_SUFFIX);
         return false;
       }
 
       try (DirectoryStream<Path> files = Files.newDirectoryStream(analyzerOutputDir, protoFileFilter())) {
         long count = StreamSupport.stream(files.spliterator(), false).count();
         if (count == 0) {
-          LOG.warn("Project '{}': Analyzer working directory '{}' contains no .pb file(s). {}", projectKey, path, MSG_SUFFIX);
+          LOG.debug("Project '{}': Analyzer working directory '{}' contains no .pb file(s). {}", projectKey, path, MSG_SUFFIX);
           return false;
         }
 

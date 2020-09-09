@@ -117,6 +117,7 @@ public class DotNetSensorTest {
 
     sensor.execute(tester);
 
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("No protobuf reports found - no metrics and highlighting will be imported.");
     verify(reportPathCollector).protobufDirs();
     verifyZeroInteractions(protobufDataImporter);
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
