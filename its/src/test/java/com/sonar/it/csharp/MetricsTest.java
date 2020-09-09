@@ -59,6 +59,7 @@ public class MetricsTest {
         @Override
         protected void before() throws Throwable {
           TestUtils.reset(ORCHESTRATOR);
+          // Without setting the testProjectPattern, the MetricsTest project is considered as a Test project :)
           Tests.analyzeProject(temp, PROJECT, "no_rule", "sonar.msbuild.testProjectPattern", "noTests");
         }
       });

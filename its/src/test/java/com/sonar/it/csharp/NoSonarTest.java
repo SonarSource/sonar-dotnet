@@ -40,7 +40,7 @@ public class NoSonarTest {
   public static void init() throws Exception {
     TestUtils.reset(ORCHESTRATOR);
 
-    // Without that, the NoSonarTest project is considered as a Test project :)
+    // Without setting the testProjectPattern, the NoSonarTest project is considered as a Test project :)
     Tests.analyzeProject(temp, PROJECT, "class_name", "sonar.msbuild.testProjectPattern", "noTests");
   }
 

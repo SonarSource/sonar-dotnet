@@ -41,7 +41,7 @@ public class SharedFilesTest {
   public void init(){
     TestUtils.reset(ORCHESTRATOR);
   }
-  
+
   @Test
   public void should_analyze_shared_files() throws Exception {
     Tests.analyzeProject(temp, "SharedFilesTest", null, "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
@@ -54,7 +54,7 @@ public class SharedFilesTest {
     assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "files")).isEqualTo(1);
     assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "lines")).isEqualTo(7);
     assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "ncloc")).isEqualTo(6);
-    
+
     List<Issue> issues = getIssues("SharedFilesTest:Class1.cs");
     assertThat(issues).hasSize(1);
   }

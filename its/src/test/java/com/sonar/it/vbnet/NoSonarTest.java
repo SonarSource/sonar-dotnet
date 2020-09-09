@@ -45,6 +45,8 @@ public class NoSonarTest {
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(orchestrator);
+
+    // Without setting the testProjectPattern, the VbNoSonarTest project is considered as a Test project :)
     Tests.analyzeProject(temp, PROJECT, "vbnet_class_name", "sonar.msbuild.testProjectPattern", "noTests");
   }
 
