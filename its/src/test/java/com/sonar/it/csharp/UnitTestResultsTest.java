@@ -43,6 +43,8 @@ public class UnitTestResultsTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
+  private static final String PROJECT = "UnitTestResultsTest";
+
   @Before
   public void init() {
     TestUtils.reset(orchestrator);
@@ -53,10 +55,10 @@ public class UnitTestResultsTest {
     BuildResult buildResult = analyzeTestProject();
 
     assertThat(buildResult.getLogs()).doesNotContain("C# Unit Test Results Import");
-    assertThat(getMeasure("UnitTestResultsTest", "tests")).isNull();
-    assertThat(getMeasure("UnitTestResultsTest", "test_errors")).isNull();
-    assertThat(getMeasure("UnitTestResultsTest", "test_failures")).isNull();
-    assertThat(getMeasure("UnitTestResultsTest", "skipped_tests")).isNull();
+    assertThat(getMeasure(PROJECT, "tests")).isNull();
+    assertThat(getMeasure(PROJECT, "test_errors")).isNull();
+    assertThat(getMeasure(PROJECT, "test_failures")).isNull();
+    assertThat(getMeasure(PROJECT, "skipped_tests")).isNull();
   }
 
   @Test
@@ -64,10 +66,10 @@ public class UnitTestResultsTest {
     BuildResult buildResult = analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/vstest.trx");
 
     assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(42);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(1);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(10);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "skipped_tests")).isEqualTo(2);
+    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
+    assertThat(getMeasureAsInt(PROJECT, "test_errors")).isEqualTo(1);
+    assertThat(getMeasureAsInt(PROJECT, "test_failures")).isEqualTo(10);
+    assertThat(getMeasureAsInt(PROJECT, "skipped_tests")).isEqualTo(2);
   }
 
   @Test
@@ -75,23 +77,23 @@ public class UnitTestResultsTest {
     BuildResult buildResult = analyzeTestProject("sonar.cs.nunit.reportsPaths", "reports/nunit.xml");
 
     assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(200);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(30);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(20);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "skipped_tests")).isEqualTo(9);
+    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(200);
+    assertThat(getMeasureAsInt(PROJECT, "test_errors")).isEqualTo(30);
+    assertThat(getMeasureAsInt(PROJECT, "test_failures")).isEqualTo(20);
+    assertThat(getMeasureAsInt(PROJECT, "skipped_tests")).isEqualTo(9);
   }
 
   @Test
   public void should_support_wildcard_patterns() throws Exception {
     analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/*.trx");
 
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(42);
+    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
   }
 
   private BuildResult analyzeTestProject(String... keyValues) throws IOException {
-    Path projectDir = Tests.projectDir(temp, "UnitTestResultsTest");
+    Path projectDir = Tests.projectDir(temp, PROJECT);
 
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("UnitTestResultsTest", projectDir)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir)
       .setProfile("no_rule")
       .setProperties(keyValues);
 

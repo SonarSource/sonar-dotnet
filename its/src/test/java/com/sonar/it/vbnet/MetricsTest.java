@@ -56,9 +56,9 @@ public class MetricsTest {
         protected void before() throws Throwable {
           TestUtils.reset(ORCHESTRATOR);
 
-          Path projectDir = Tests.projectDir(temp, "VbMetricsTest");
+          Path projectDir = Tests.projectDir(temp, PROJECT);
 
-          ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbMetricsTest", projectDir)
+          ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir)
             .setProfile("vbnet_no_rule")
             // Without that, the MetricsTest project is considered as a Test project :)
             .setProperty("sonar.msbuild.testProjectPattern", "noTests");
@@ -74,7 +74,7 @@ public class MetricsTest {
 
   @Test
   public void projectIsAnalyzed() {
-    assertThat(getComponent(PROJECT).getName()).isEqualTo("VbMetricsTest");
+    assertThat(getComponent(PROJECT).getName()).isEqualTo(PROJECT);
     assertThat(getComponent(DIRECTORY).getName()).isEqualTo("foo");
     assertThat(getComponent(FILE).getName()).isEqualTo("Module1.vb");
   }

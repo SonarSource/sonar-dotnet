@@ -37,9 +37,10 @@ public class NoSourcesTest {
   @ClassRule
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
-  private static final String PROJECT = "ProjectWithNoSources";
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
+
+  private static final String PROJECT = "ProjectWithNoSources";
 
   @BeforeClass
   public static void init() throws Exception {
@@ -58,12 +59,7 @@ public class NoSourcesTest {
 
   @Test
   public void filesAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("violations")).isEqualTo(4);
+    assertThat(getMeasureAsInt(PROJECT, "violations")).isEqualTo(4);
   }
 
-  /* Helper methods */
-
-  private Integer getProjectMeasureAsInt(String metricKey) {
-    return getMeasureAsInt(PROJECT, metricKey);
-  }
 }

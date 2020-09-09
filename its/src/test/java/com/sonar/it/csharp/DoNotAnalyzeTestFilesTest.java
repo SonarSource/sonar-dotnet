@@ -40,6 +40,8 @@ public class DoNotAnalyzeTestFilesTest {
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
+  private static final String PROJECT = "DoNotAnalyzeTestFilesTest";
+
   @Before
   public void init() {
     TestUtils.reset(orchestrator);
@@ -47,9 +49,9 @@ public class DoNotAnalyzeTestFilesTest {
 
   @Test
   public void should_not_increment_test() throws Exception {
-    Path projectDir = Tests.projectDir(temp, "DoNotAnalyzeTestFilesTest");
+    Path projectDir = Tests.projectDir(temp, PROJECT);
 
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("DoNotAnalyzeTestFilesTest", projectDir, "MyLib.Tests")
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir, "MyLib.Tests")
       .setProfile("no_rule")
       .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
@@ -60,8 +62,8 @@ public class DoNotAnalyzeTestFilesTest {
     orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
     assertThat(Tests.getComponent("DoNotAnalyzeTestFilesTest:UnitTest1.cs")).isNotNull();
-    assertThat(getMeasureAsInt("DoNotAnalyzeTestFilesTest", "files")).isNull();
-    assertThat(getMeasureAsInt("DoNotAnalyzeTestFilesTest", "lines")).isNull();
-    assertThat(getMeasureAsInt("DoNotAnalyzeTestFilesTest", "ncloc")).isNull();
+    assertThat(getMeasureAsInt(PROJECT, "files")).isNull();
+    assertThat(getMeasureAsInt(PROJECT, "lines")).isNull();
+    assertThat(getMeasureAsInt(PROJECT, "ncloc")).isNull();
   }
 }

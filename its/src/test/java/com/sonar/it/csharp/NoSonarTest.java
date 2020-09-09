@@ -35,19 +35,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NoSonarTest {
 
   @ClassRule
-  public static TemporaryFolder temp = TestUtils.createTempFolder();
+  public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
-  private static final String PROJECT = "NoSonarTest";
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
+
+  private static final String PROJECT = "NoSonarTest";
 
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(orchestrator);
 
-    Path projectDir = Tests.projectDir(temp, "NoSonarTest");
+    Path projectDir = Tests.projectDir(temp, PROJECT);
 
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("NoSonarTest", projectDir)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir)
       .setProfile("class_name")
       // Without that, the NoSonarTest project is considered as a Test project :)
       .setProperty("sonar.msbuild.testProjectPattern", "noTests");
@@ -61,13 +62,7 @@ public class NoSonarTest {
 
   @Test
   public void filesAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("violations")).isEqualTo(3);
-  }
-
-  /* Helper methods */
-
-  private Integer getProjectMeasureAsInt(String metricKey) {
-    return getMeasureAsInt(PROJECT, metricKey);
+    assertThat(getMeasureAsInt(PROJECT, "violations")).isEqualTo(3);
   }
 
 }
