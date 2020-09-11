@@ -21,6 +21,8 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.build.BuildResult;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.MavenLocation;
@@ -30,6 +32,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 import org.junit.ClassRule;
 import org.junit.rules.TemporaryFolder;
@@ -54,9 +57,11 @@ import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
   MultipleProjectsTest.class,
   MultiTargetAppTest.class,
   NoSonarTest.class,
+  NoSourcesTest.class,
   QualityProfileExportTest.class,
   RuleParameterCustomizationTest.class,
   SharedFilesTest.class,
+  TestProjectTest.class,
   UnitTestResultsTest.class
 })
 public class Tests {
@@ -81,6 +86,34 @@ public class Tests {
     Path tmpProjectDir = Paths.get(newFolder.getCanonicalPath());
     FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
     return tmpProjectDir;
+  }
+
+  static BuildResult analyzeProjectWithSubProject(TemporaryFolder temp, String projectName, String subProjectName, @Nullable String profileKey, String... keyValues) throws IOException {
+    Path projectDir = Tests.projectDir(temp, projectName);
+
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir, subProjectName)
+      .setProfile(profileKey)
+      .setProperties(keyValues);
+
+    ORCHESTRATOR.executeBuild(beginStep);
+
+    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
+
+    return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+  }
+
+  static BuildResult analyzeProject(TemporaryFolder temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
+    Path projectDir = Tests.projectDir(temp, projectName);
+
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir)
+      .setProfile(profileKey)
+      .setProperties(keyValues);
+
+    ORCHESTRATOR.executeBuild(beginStep);
+
+    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
+
+    return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
   }
 
   static Components.Component getComponent(String componentKey) {

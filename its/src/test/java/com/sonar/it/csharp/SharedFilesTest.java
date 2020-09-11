@@ -20,17 +20,14 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import java.nio.file.Path;
 import java.util.List;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues.Issue;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
@@ -40,26 +37,14 @@ public class SharedFilesTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
   @Before
-  public void init() {
-    TestUtils.reset(orchestrator);
+  public void init(){
+    TestUtils.reset(ORCHESTRATOR);
   }
-  
+
   @Test
   public void should_analyze_shared_files() throws Exception {
-    Path projectDir = Tests.projectDir(temp, "SharedFilesTest");
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("SharedFilesTest", projectDir)
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
-
-    orchestrator.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore", "/t:Rebuild");
-
-    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    Tests.analyzeProject(temp, "SharedFilesTest", null, "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(getComponent("SharedFilesTest:Class1.cs")).isNotNull();
     assertThat(getComponent("SharedFilesTest:ConsoleApp1/Program1.cs")).isNotNull();
@@ -69,7 +54,7 @@ public class SharedFilesTest {
     assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "files")).isEqualTo(1);
     assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "lines")).isEqualTo(7);
     assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "ncloc")).isEqualTo(6);
-    
+
     List<Issue> issues = getIssues("SharedFilesTest:Class1.cs");
     assertThat(issues).hasSize(1);
   }

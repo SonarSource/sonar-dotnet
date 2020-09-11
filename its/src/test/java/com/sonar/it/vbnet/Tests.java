@@ -21,12 +21,15 @@ package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.build.BuildResult;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 import org.junit.ClassRule;
 import org.junit.rules.TemporaryFolder;
@@ -63,6 +66,20 @@ public class Tests {
     Path tmpProjectDir = temp.newFolder(projectName).toPath();
     FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
     return tmpProjectDir;
+  }
+
+  static BuildResult analyzeProject(TemporaryFolder temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
+    Path projectDir = com.sonar.it.csharp.Tests.projectDir(temp, projectName);
+
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectName, projectDir)
+      .setProfile(profileKey)
+      .setProperties(keyValues);
+
+    ORCHESTRATOR.executeBuild(beginStep);
+
+    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
+
+    return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
   }
 
   static Components.Component getComponent(String componentKey) {

@@ -26,27 +26,25 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
-import static com.sonar.it.csharp.Tests.getMeasureAsInt;
+import static com.sonar.it.csharp.Tests.getComponent;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NoSonarTest {
-
+public class TestProjectTest {
   @ClassRule
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
-  private static final String PROJECT = "NoSonarTest";
+  private static final String PROJECT = "TestOnlyProject";
 
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(ORCHESTRATOR);
-
-    // Without setting the testProjectPattern, the NoSonarTest project is considered as a Test project :)
-    Tests.analyzeProject(temp, PROJECT, "class_name", "sonar.msbuild.testProjectPattern", "noTests");
+    Tests.analyzeProject(temp, PROJECT, null);
   }
 
   @Test
-  public void filesAtProjectLevel() {
-    assertThat(getMeasureAsInt(PROJECT, "violations")).isEqualTo(3);
-  }
+  public void projectIsAnalyzed() {
+    assertThat(getComponent(PROJECT).getName()).isEqualTo("TestOnlyProject");
 
+    assertThat(getComponent("TestOnlyProject:UnitTest1.cs").getName()).isEqualTo("UnitTest1.cs");
+  }
 }

@@ -20,32 +20,28 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.io.IOException;
-import java.nio.file.Path;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UnitTestResultsTest {
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
+  private static final String PROJECT = "UnitTestResultsTest";
+
   @Before
   public void init() {
-    TestUtils.reset(orchestrator);
+    TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
@@ -53,10 +49,10 @@ public class UnitTestResultsTest {
     BuildResult buildResult = analyzeTestProject();
 
     assertThat(buildResult.getLogs()).doesNotContain("C# Unit Test Results Import");
-    assertThat(getMeasure("UnitTestResultsTest", "tests")).isNull();
-    assertThat(getMeasure("UnitTestResultsTest", "test_errors")).isNull();
-    assertThat(getMeasure("UnitTestResultsTest", "test_failures")).isNull();
-    assertThat(getMeasure("UnitTestResultsTest", "skipped_tests")).isNull();
+    assertThat(getMeasure(PROJECT, "tests")).isNull();
+    assertThat(getMeasure(PROJECT, "test_errors")).isNull();
+    assertThat(getMeasure(PROJECT, "test_failures")).isNull();
+    assertThat(getMeasure(PROJECT, "skipped_tests")).isNull();
   }
 
   @Test
@@ -64,10 +60,10 @@ public class UnitTestResultsTest {
     BuildResult buildResult = analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/vstest.trx");
 
     assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(42);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(1);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(10);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "skipped_tests")).isEqualTo(2);
+    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
+    assertThat(getMeasureAsInt(PROJECT, "test_errors")).isEqualTo(1);
+    assertThat(getMeasureAsInt(PROJECT, "test_failures")).isEqualTo(10);
+    assertThat(getMeasureAsInt(PROJECT, "skipped_tests")).isEqualTo(2);
   }
 
   @Test
@@ -75,30 +71,20 @@ public class UnitTestResultsTest {
     BuildResult buildResult = analyzeTestProject("sonar.cs.nunit.reportsPaths", "reports/nunit.xml");
 
     assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(200);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(30);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(20);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "skipped_tests")).isEqualTo(9);
+    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(200);
+    assertThat(getMeasureAsInt(PROJECT, "test_errors")).isEqualTo(30);
+    assertThat(getMeasureAsInt(PROJECT, "test_failures")).isEqualTo(20);
+    assertThat(getMeasureAsInt(PROJECT, "skipped_tests")).isEqualTo(9);
   }
 
   @Test
   public void should_support_wildcard_patterns() throws Exception {
     analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/*.trx");
 
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(42);
+    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
   }
 
   private BuildResult analyzeTestProject(String... keyValues) throws IOException {
-    Path projectDir = Tests.projectDir(temp, "UnitTestResultsTest");
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("UnitTestResultsTest", projectDir)
-      .setProfile("no_rule")
-      .setProperties(keyValues);
-
-    orchestrator.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
-
-    return orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    return Tests.analyzeProject(temp, PROJECT, "no_rule", keyValues);
   }
 }

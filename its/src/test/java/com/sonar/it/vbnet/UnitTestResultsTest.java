@@ -30,71 +30,61 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasure;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UnitTestResultsTest {
 
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
+  private static final String PROJECT = "VbUnitTestResultsTest";
+
   @Before
-  public void init() {
-    TestUtils.reset(orchestrator);
+  public void init(){
+    TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
   public void should_not_import_unit_test_results_without_report() throws Exception {
     analyzeTestProject();
 
-    assertThat(getMeasure("VbUnitTestResultsTest", "tests")).isNull();
-    assertThat(getMeasure("VbUnitTestResultsTest", "test_errors")).isNull();
-    assertThat(getMeasure("VbUnitTestResultsTest", "test_failures")).isNull();
-    assertThat(getMeasure("VbUnitTestResultsTest", "skipped_tests")).isNull();
-  }
-
-  private void analyzeTestProject(String... keyValues) throws IOException {
-    Path projectDir = Tests.projectDir(temp, "VbUnitTestResultsTest");
-
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbUnitTestResultsTest", projectDir)
-      .setProfile("vbnet_no_rule")
-      .setProperties(keyValues);
-
-    orchestrator.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
-
-    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
+    assertThat(getMeasure(PROJECT, "tests")).isNull();
+    assertThat(getMeasure(PROJECT, "test_errors")).isNull();
+    assertThat(getMeasure(PROJECT, "test_failures")).isNull();
+    assertThat(getMeasure(PROJECT, "skipped_tests")).isNull();
   }
 
   @Test
   public void vstest() throws Exception {
     analyzeTestProject("sonar.vbnet.vstest.reportsPaths", "reports/vstest.trx");
 
-    assertThat(getMeasureAsInt("VbUnitTestResultsTest", "tests")).isEqualTo(42);
-    assertThat(getMeasureAsInt("VbUnitTestResultsTest", "test_errors")).isEqualTo(1);
-    assertThat(getMeasureAsInt("VbUnitTestResultsTest", "test_failures")).isEqualTo(10);
-    assertThat(getMeasureAsInt("VbUnitTestResultsTest", "skipped_tests")).isEqualTo(2);
+    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
+    assertThat(getMeasureAsInt(PROJECT, "test_errors")).isEqualTo(1);
+    assertThat(getMeasureAsInt(PROJECT, "test_failures")).isEqualTo(10);
+    assertThat(getMeasureAsInt(PROJECT, "skipped_tests")).isEqualTo(2);
   }
 
   @Test
   public void nunit() throws Exception {
     analyzeTestProject("sonar.vbnet.nunit.reportsPaths", "reports/nunit.xml");
 
-    assertThat(getMeasureAsInt("VbUnitTestResultsTest", "tests")).isEqualTo(200);
-    assertThat(getMeasureAsInt("VbUnitTestResultsTest", "test_errors")).isEqualTo(30);
-    assertThat(getMeasureAsInt("VbUnitTestResultsTest", "test_failures")).isEqualTo(20);
-    assertThat(getMeasureAsInt("VbUnitTestResultsTest", "skipped_tests")).isEqualTo(9);
+    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(200);
+    assertThat(getMeasureAsInt(PROJECT, "test_errors")).isEqualTo(30);
+    assertThat(getMeasureAsInt(PROJECT, "test_failures")).isEqualTo(20);
+    assertThat(getMeasureAsInt(PROJECT, "skipped_tests")).isEqualTo(9);
   }
 
   @Test
   public void should_support_wildcard_patterns() throws Exception {
     analyzeTestProject("sonar.vbnet.vstest.reportsPaths", "reports/*.trx");
 
-    assertThat(getMeasureAsInt("VbUnitTestResultsTest", "tests")).isEqualTo(42);
+    assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
+  }
+
+  private void analyzeTestProject(String... keyValues) throws IOException {
+    Tests.analyzeProject(temp, PROJECT, "vbnet_no_rule", keyValues);
   }
 }

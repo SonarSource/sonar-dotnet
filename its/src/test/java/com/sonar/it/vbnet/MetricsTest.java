@@ -41,6 +41,7 @@ public class MetricsTest {
   private static final String PROJECT = "VbMetricsTest";
   private static final String DIRECTORY = "VbMetricsTest:foo";
   private static final String FILE = "VbMetricsTest:foo/Module1.vb";
+
   public static TemporaryFolder temp = TestUtils.createTempFolder();
   @ClassRule
   public static RuleChain chain = getRuleChain();
@@ -55,26 +56,15 @@ public class MetricsTest {
         @Override
         protected void before() throws Throwable {
           TestUtils.reset(ORCHESTRATOR);
-
-          Path projectDir = Tests.projectDir(temp, "VbMetricsTest");
-
-          ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbMetricsTest", projectDir)
-            .setProfile("vbnet_no_rule")
-            // Without that, the MetricsTest project is considered as a Test project :)
-            .setProperty("sonar.msbuild.testProjectPattern", "noTests");
-
-          ORCHESTRATOR.executeBuild(beginStep);
-
-          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
-
-          ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+          // Without setting the testProjectPattern, the VbMetricsTest project is considered as a Test project :)
+          Tests.analyzeProject(temp, PROJECT, "vbnet_no_rule", "sonar.msbuild.testProjectPattern", "noTests");
         }
       });
   }
 
   @Test
   public void projectIsAnalyzed() {
-    assertThat(getComponent(PROJECT).getName()).isEqualTo("VbMetricsTest");
+    assertThat(getComponent(PROJECT).getName()).isEqualTo(PROJECT);
     assertThat(getComponent(DIRECTORY).getName()).isEqualTo("foo");
     assertThat(getComponent(FILE).getName()).isEqualTo("Module1.vb");
   }

@@ -44,8 +44,9 @@ public class PropertiesSensor implements Sensor {
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor.name(pluginMetadata.shortLanguageName() + " Properties")
-      .onlyOnLanguage(pluginMetadata.languageKey());
+    descriptor.name(pluginMetadata.shortLanguageName() + " Properties");
+    // we do not filter by language because we want to be called on projects without sources
+    // (that could reference only shared sources e.g. in .projitems)
   }
 
   @Override

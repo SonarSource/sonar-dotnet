@@ -20,7 +20,6 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.http.HttpMethod;
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,24 +30,23 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class QualityProfileExportTest {
-  @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @ClassRule
   public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
-    TestUtils.reset(orchestrator);
+    TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
   public void sonarLintRuleSet_can_be_downloaded_from_SonarQube_UI() throws Exception {
     // Regression test for SONAR-6969: This URL is called to manually download a ruleset for SL4VS from SQ UI
-    File file = orchestrator.getServer()
+    File file = ORCHESTRATOR.getServer()
       .newHttpCall("/api/qualityprofiles/export")
       .setAdminCredentials()
       .setMethod(HttpMethod.GET)
