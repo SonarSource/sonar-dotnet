@@ -90,6 +90,7 @@ public class DotNetSensor implements ProjectSensor {
 
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
     if (protobufPaths.isEmpty()) {
+      // We should consider failing fast in this case, see https://github.com/SonarSource/sonar-dotnet/issues/3603
       LOG.warn("No protobuf reports found - no metrics and highlighting will be imported.");
     } else {
       protobufDataImporter.importResults(context, protobufPaths, toRealPath);

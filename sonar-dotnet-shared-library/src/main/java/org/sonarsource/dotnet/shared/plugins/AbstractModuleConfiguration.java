@@ -82,7 +82,6 @@ public abstract class AbstractModuleConfiguration {
       .map(Paths::get)
       .collect(Collectors.toList());
 
-    // we don't generate sonar.cs.analyzer.projectOutPaths for test projects on purpose
     if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests")) {
       LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, getAnalyzerWorkDirProperty(languageKey));
     }

@@ -61,6 +61,7 @@ import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
   QualityProfileExportTest.class,
   RuleParameterCustomizationTest.class,
   SharedFilesTest.class,
+  TestProjectTest.class,
   UnitTestResultsTest.class
 })
 public class Tests {
