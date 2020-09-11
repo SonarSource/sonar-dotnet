@@ -89,10 +89,10 @@ public class DotNetSensor implements ProjectSensor {
     UnaryOperator<String> toRealPath = new RealPathProvider();
 
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
-    if (!protobufPaths.isEmpty()) {
-      protobufDataImporter.importResults(context, protobufPaths, toRealPath);
-    } else {
+    if (protobufPaths.isEmpty()) {
       LOG.warn("No protobuf reports found - no metrics and highlighting will be imported.");
+    } else {
+      protobufDataImporter.importResults(context, protobufPaths, toRealPath);
     }
 
     List<RoslynReport> roslynReports = reportPathCollector.roslynReports();
