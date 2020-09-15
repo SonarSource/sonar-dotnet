@@ -1,0 +1,16 @@
+{
+  "title": "\"Array.Empty<TElement>()\" should be used to instantiate empty arrays",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bad-practice"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-5939",
+  "sqKey": "S5939",
+  "scope": "All"
+}

@@ -1,0 +1,26 @@
+<p>Method for creating empty arrays <code>Array.Empty(Of TElement)</code> was introduced in .NET 4.6 to optimize object instantiation and memory
+allocation. It also improves code readability by making developer's intent more explicit. This new method should be preferred over empty array
+declaration.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Sub Method()
+    Dim Values1(-1) As Integer ' Noncompliant
+    Dim Values2 As Integer() = New Integer() {} ' Noncompliant
+    Dim Values3 As Integer() = {} ' Noncompliant
+    Dim Values4() As Integer = {} ' Noncompliant
+End Sub
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Sub Method()
+    Dim Values1 As Integer() = Array.Empty(Of Integer)
+    Dim Values2 As Integer() = Array.Empty(Of Integer)
+    Dim Values3 As Integer() = Array.Empty(Of Integer)
+    Dim Values4() As Integer = Array.Empty(Of Integer)
+End Sub
+</pre>
+<h2>See</h2>
+<p> * <a href="https://docs.microsoft.com/en-us/dotnet/api/system.array.empty?view=netcore-3.1">.Net documentation - <code>Array.Empty&lt;T&gt;</code>
+Method</a></p>
+<p> * <a href="https://justinvp.com/2015/07/20/array-empty/"><code>Array.Empty&lt;T&gt;() - by Justin Van Patten</code></a></p>
+
