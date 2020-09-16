@@ -4290,9 +4290,18 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
 
         [TestMethod]
         [TestCategory("CFG")]
-        public void Cfg_SwitchExpression_VarPattern_IsNotSupported()
+        public void Cfg_VarPattern_InSwitchExpression_IsNotSupported()
         {
             var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"string a = taintedString switch {var x => null};"));
+
+            exception.Message.Should().Be("VarPattern");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_VarPattern_InIf_IsNotSupported()
+        {
+            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is var x) { }"));
 
             exception.Message.Should().Be("VarPattern");
         }
