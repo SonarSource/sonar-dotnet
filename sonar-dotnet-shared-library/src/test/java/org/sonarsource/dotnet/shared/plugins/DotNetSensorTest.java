@@ -53,8 +53,9 @@ import static org.mockito.Mockito.when;
 
 public class DotNetSensorTest {
 
-  public static final String REPO_KEY = "repoKey";
-  public static final String LANG_KEY = "langKey";
+  public static final String REPO_KEY = "REPO_KEY";
+  public static final String LANG_KEY = "LANG_KEY";
+  public static final String LANG_NAME = "LANG_NAME";
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -82,7 +83,7 @@ public class DotNetSensorTest {
     DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
     when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
-    when(pluginMetadata.shortLanguageName()).thenReturn("LangName");
+    when(pluginMetadata.shortLanguageName()).thenReturn(LANG_NAME);
     sensor = new DotNetSensor(pluginMetadata, reportPathCollector, protobufDataImporter, roslynDataImporter);
   }
 
@@ -96,7 +97,7 @@ public class DotNetSensorTest {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     sensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.languages()).containsOnly(LANG_KEY);
-    assertThat(sensorDescriptor.name()).isEqualTo("LangName");
+    assertThat(sensorDescriptor.name()).isEqualTo(LANG_NAME);
   }
 
   @Test
@@ -117,25 +118,35 @@ public class DotNetSensorTest {
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("No protobuf reports found - no metrics and highlighting will be imported.");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(
+      "No protobuf reports found. The " + LANG_NAME + " files will not have highlighting and metrics.",
+      "Your project contains " + LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
+        " To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, read more on https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html ." +
+        " For any questions you may have, open a topic on https://community.sonarsource.com .");
     verify(reportPathCollector).protobufDirs();
     verifyZeroInteractions(protobufDataImporter);
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
-      "sonaranalyzer-langKey", ImmutableList.of(RuleKey.of(REPO_KEY, "S1186"), RuleKey.of(REPO_KEY, "[parameters_key]")),
+      "sonaranalyzer-" + LANG_KEY, ImmutableList.of(RuleKey.of(REPO_KEY, "S1186"), RuleKey.of(REPO_KEY, "[parameters_key]")),
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
     verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap),
       any(RealPathProvider.class));
   }
 
   @Test
-  public void noRoslynReportShouldFail() {
+  public void noRoslynReportShouldNotFail() {
     addFileToFs();
-    assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> sensor.execute(tester))
-      .withMessage("No Roslyn issue reports were found.");
+
+    sensor.execute(tester);
 
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     verifyZeroInteractions(roslynDataImporter);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(
+      "No Roslyn issue reports were found. The " + LANG_NAME + " files have not been analyzed.",
+      "Your project contains " + LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
+        " To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, read more on https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html ." +
+        " For any questions you may have, open a topic on https://community.sonarsource.com .");
   }
 
   @Test

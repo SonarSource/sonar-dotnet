@@ -88,23 +88,34 @@ public class DotNetSensor implements ProjectSensor {
   private void executeInternal(SensorContext context) {
     UnaryOperator<String> toRealPath = new RealPathProvider();
 
+    boolean shouldSuggestScannerForMSBuild = false;
+
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
     if (protobufPaths.isEmpty()) {
-      // We should consider failing fast in this case, see https://github.com/SonarSource/sonar-dotnet/issues/3603
-      LOG.warn("No protobuf reports found - no metrics and highlighting will be imported.");
+      LOG.warn("No protobuf reports found. The {} files will not have highlighting and metrics.", pluginMetadata.shortLanguageName());
+      shouldSuggestScannerForMSBuild = true;
     } else {
       protobufDataImporter.importResults(context, protobufPaths, toRealPath);
     }
 
     List<RoslynReport> roslynReports = reportPathCollector.roslynReports();
     if (roslynReports.isEmpty()) {
-      throw new IllegalStateException("No Roslyn issue reports were found.");
+      LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed.", pluginMetadata.shortLanguageName());
+      shouldSuggestScannerForMSBuild = true;
+    } else {
+      Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
+        .findAll()
+        .stream()
+        .map(ActiveRule::ruleKey)
+        .collect(toList()));
+      roslynDataImporter.importRoslynReports(roslynReports, context, activeRoslynRulesByPartialRepoKey, toRealPath);
     }
-    Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
-      .findAll()
-      .stream()
-      .map(ActiveRule::ruleKey)
-      .collect(toList()));
-    roslynDataImporter.importRoslynReports(roslynReports, context, activeRoslynRulesByPartialRepoKey, toRealPath);
+
+    if (shouldSuggestScannerForMSBuild) {
+      LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
+        + " To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, read more on https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html ."
+        + " For any questions you may have, open a topic on https://community.sonarsource.com .",
+        pluginMetadata.shortLanguageName());
+    }
   }
 }
