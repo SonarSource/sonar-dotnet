@@ -150,6 +150,23 @@ public class DotNetSensorTest {
   }
 
   @Test
+  public void whenReportsArePresentThereAreNoWarnings() {
+    addFileToFs();
+    when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
+    tester.setActiveRules(new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "S1186")).build())
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "[parameters_key]")).build())
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of("roslyn.foo", "custom-roslyn")).build())
+      .build());
+
+    sensor.execute(tester);
+
+    verify(reportPathCollector).protobufDirs();
+    verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+  }
+
+  @Test
   public void noAnalysisIfNoFilesDetected() {
     sensor.execute(tester);
 
