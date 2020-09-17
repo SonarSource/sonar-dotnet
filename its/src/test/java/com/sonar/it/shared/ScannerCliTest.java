@@ -20,10 +20,12 @@
 package com.sonar.it.shared;
 
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.locator.MavenLocation;
 import java.io.File;
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 
@@ -42,17 +44,34 @@ public class ScannerCliTest {
     .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE")))
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
     .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
+    // Fixed version for the HTML plugin as we don't want to have failures in case of changes there.
     .addPlugin(MavenLocation.of("org.sonarsource.html", "sonar-html-plugin", "3.2.0.2082"))
     .setEdition(Edition.DEVELOPER)
     .activateLicense()
     .build();
+
+  @Before
+  public void init(){
+    TestUtils.deleteLocalCache();
+  }
 
   @Test
   public void scannerCliWithRazorPages() {
     // As done for java, "AppSec" mode is activated to properly test sanitizers,
     // so every unknown method is processes as a pass-through for all arguments
     SonarScanner scanner = getSonarScanner(RAZOR_PAGES_PROJECT, "projects/" + RAZOR_PAGES_PROJECT);
-    ORCHESTRATOR.executeBuild(scanner);
+    BuildResult result = ORCHESTRATOR.executeBuild(scanner);
+
+    assertThat(result.getLogsLines(l -> l.contains("WARN")))
+      .containsExactlyInAnyOrder(
+        "WARN: No protobuf reports found. The C# files will not have highlighting and metrics.",
+        "WARN: No Roslyn issue reports were found. The C# files have not been analyzed.",
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, read more on https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html . For any questions you may have, open a topic on https://community.sonarsource.com .",
+        "WARN: No protobuf reports found. The VB.NET files will not have highlighting and metrics.",
+        "WARN: No Roslyn issue reports were found. The VB.NET files have not been analyzed.",
+        "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, read more on https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html . For any questions you may have, open a topic on https://community.sonarsource.com ."
+      );
+    // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(1);
   }
 
