@@ -64,10 +64,10 @@ public class ScannerCliTest {
       .containsExactlyInAnyOrder(
         "WARN: No protobuf reports found. The C# files will not have highlighting and metrics.",
         "WARN: No Roslyn issue reports were found. The C# files have not been analyzed.",
-        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the Scanner for MSBuild 4.x, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         "WARN: No protobuf reports found. The VB.NET files will not have highlighting and metrics.",
         "WARN: No Roslyn issue reports were found. The VB.NET files have not been analyzed.",
-        "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
+        "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the Scanner for MSBuild 4.x, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
       );
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
