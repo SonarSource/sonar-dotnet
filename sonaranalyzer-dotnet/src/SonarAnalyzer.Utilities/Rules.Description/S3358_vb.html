@@ -4,18 +4,18 @@ scratching their heads and cursing.</p>
 <p>Instead, err on the side of clarity, and use another line to express the nested operation as a separate statement.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Function GetTitle(ByVal p As Person) As String
-    Return If(p.Gender = Gender.MALE, "Mr. ", If(p.IsMarried, "Mrs. ", "Miss ")) ' Noncompliant
+Public Function GetReadableStatus(ByVal job As Job) As String
+    Return If(job.IsRunning, "Running", If(job.HasErrors, "Failed", "Succeeded")) ' Noncompliant
 End Function
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Function GetTitle(ByVal p As Person) As String
-    If p.Gender = Gender.MALE Then
-        Return "Mr. "
+Public Function GetReadableStatus(ByVal job As Job) As String
+    If job.Gender Then
+        Return "Running"
     End If
 
-    Return If(p.IsMarried, "Mrs. ", "Miss ")
+    Return If(job.HasErrors, "Failed", "Succeeded")
 End Function
 </pre>
 
