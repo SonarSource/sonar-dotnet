@@ -4,17 +4,14 @@ scratching their heads and cursing.</p>
 <p>Instead, err on the side of clarity, and use another line to express the nested operation as a separate statement.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Function GetReadableStatus(ByVal job As Job) As String
+Public Function GetReadableStatus(job As Job) As String
     Return If(job.IsRunning, "Running", If(job.HasErrors, "Failed", "Succeeded")) ' Noncompliant
 End Function
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Function GetReadableStatus(ByVal job As Job) As String
-    If job.Gender Then
-        Return "Running"
-    End If
-
+Public Function GetReadableStatus(job As Job) As String
+    If job.IsRunning Then Return "Running"
     Return If(job.HasErrors, "Failed", "Succeeded")
 End Function
 </pre>
