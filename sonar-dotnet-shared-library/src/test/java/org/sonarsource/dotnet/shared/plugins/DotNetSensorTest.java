@@ -121,8 +121,7 @@ public class DotNetSensorTest {
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(
       "No protobuf reports found. The " + LANG_NAME + " files will not have highlighting and metrics.",
       "Your project contains " + LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
-        " To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, read more on https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html ." +
-        " For any questions you may have, open a topic on https://community.sonarsource.com .");
+        " To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
     verify(reportPathCollector).protobufDirs();
     verifyZeroInteractions(protobufDataImporter);
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
@@ -141,12 +140,10 @@ public class DotNetSensorTest {
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     verifyZeroInteractions(roslynDataImporter);
-
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(
       "No Roslyn issue reports were found. The " + LANG_NAME + " files have not been analyzed.",
       "Your project contains " + LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
-        " To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, read more on https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html ." +
-        " For any questions you may have, open a topic on https://community.sonarsource.com .");
+        " To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
   }
 
   @Test

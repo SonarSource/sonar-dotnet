@@ -113,8 +113,7 @@ public class DotNetSensor implements ProjectSensor {
 
     if (shouldSuggestScannerForMSBuild) {
       LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
-        + " To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, read more on https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html ."
-        + " For any questions you may have, open a topic on https://community.sonarsource.com .",
+        + " To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         pluginMetadata.shortLanguageName());
     }
   }

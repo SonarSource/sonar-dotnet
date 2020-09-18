@@ -57,8 +57,6 @@ public class ScannerCliTest {
 
   @Test
   public void scannerCliWithRazorPages() {
-    // As done for java, "AppSec" mode is activated to properly test sanitizers,
-    // so every unknown method is processes as a pass-through for all arguments
     SonarScanner scanner = getSonarScanner(RAZOR_PAGES_PROJECT, "projects/" + RAZOR_PAGES_PROJECT);
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
@@ -66,13 +64,13 @@ public class ScannerCliTest {
       .containsExactlyInAnyOrder(
         "WARN: No protobuf reports found. The C# files will not have highlighting and metrics.",
         "WARN: No Roslyn issue reports were found. The C# files have not been analyzed.",
-        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, read more on https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html . For any questions you may have, open a topic on https://community.sonarsource.com .",
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         "WARN: No protobuf reports found. The VB.NET files will not have highlighting and metrics.",
         "WARN: No Roslyn issue reports were found. The VB.NET files have not been analyzed.",
-        "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, read more on https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html . For any questions you may have, open a topic on https://community.sonarsource.com ."
+        "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET files, you must use the Scanner for MSBuild 4.x, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
       );
     // The HTML plugin works
-    assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(1);
+    assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
   }
 
   private SonarScanner getSonarScanner(String projectKey, String projectDir) {
