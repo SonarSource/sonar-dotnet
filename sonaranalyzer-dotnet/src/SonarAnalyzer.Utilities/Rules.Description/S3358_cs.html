@@ -4,20 +4,20 @@ scratching their heads and cursing.</p>
 <p>Instead, err on the side of clarity, and use another line to express the nested operation as a separate statement.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public string GetTitle(Person p)
+public string GetReadableStatus(Job j)
 {
-  return p.Gender == Gender.MALE ? "Mr. " : p.IsMarried ? "Mrs. " : "Miss ";  // Noncompliant
+  return j.IsRunning ? "Running" : j.HasErrors ? "Failed" : "Succeeded";  // Noncompliant
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public string GetTitle(Person p)
+public string GetReadableStatus(Job j)
 {
-  if (p.Gender == Gender.MALE)
+  if (j.IsRunning)
   {
-    return "Mr. ";
+    return "Running";
   }
-  return p.IsMarried ? "Mrs. " : "Miss ";
+  return j.HasErrors ? "Failed" : "Succeeded";
 }
 </pre>
 
