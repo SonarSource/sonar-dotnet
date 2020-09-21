@@ -1,0 +1,17 @@
+{
+  "title": "\"Return\" statements should be used instead of assigning values to function names",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bad-practice",
+    "confusing"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-5944",
+  "sqKey": "S5944",
+  "scope": "All"
+}

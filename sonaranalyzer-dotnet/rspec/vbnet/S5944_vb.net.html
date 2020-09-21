@@ -1,0 +1,33 @@
+<p>Functions can return values using two different syntaxes. The modern, and correct, way to do it is to use a <code>Return</code> statement. The VB6
+way, i.e. old way, is to assign a return value to the function's name .</p>
+<p>The VB6 syntax is obsolete as it was introduced to simplify migration from VB6 projects. The compiler will create a local variable which is
+implicitly returned when execution exits the function's scope.</p>
+<p><code>Return</code> statement should be used instead as they are easier to read and understand.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Function FunctionName() As Integer
+    FunctionName = 42 ' Noncompliant
+End Function
+
+Public Function FunctionNameFromVariable() As Integer
+    Dim Value As Integer = 42
+    FunctionNameFromVariable = Value ' Noncompliant
+End Function
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Function FunctionName() As Integer
+    Return 42
+End Function
+
+Public Function FunctionNameFromVariable() As Integer
+    Dim Value As Integer = 42
+    Return Value
+End Function
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/function-statement#returning-from-a-function">.Net
+  documentation - Returning from a Function</a> </li>
+</ul>
+
