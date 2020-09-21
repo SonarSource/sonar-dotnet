@@ -135,9 +135,9 @@ namespace Tests.Diagnostics
 
         void InternalRecursion(int i)
         {
-            start:
+        start:
             goto end;
-            end:
+        end:
             goto start; // Noncompliant
 
             switch (i)
@@ -249,5 +249,40 @@ namespace Tests.Diagnostics
             return Count * Price + Total();
         }
     }
+}
 
+// https://github.com/SonarSource/sonar-dotnet/issues/3624
+namespace Repro_3624
+{
+    public class Repro : Base
+    {
+        public string Name
+        {
+            get // Noncompliant
+            {
+                return Name;
+            }
+            set // FN
+            {
+                Name = value;
+            }
+        }
+
+        public virtual string Arrow
+        {
+            get => Arrow;           // Noncompliant
+            set => Arrow = value;   // FN
+        }
+
+        public override string Overriden
+        {
+            get => base.Overriden;          // Compliant
+            set => base.Overriden = value;  // Compliant
+        }
+    }
+
+    public class Base
+    {
+        public virtual string Overriden { get; set; }
+    }
 }
