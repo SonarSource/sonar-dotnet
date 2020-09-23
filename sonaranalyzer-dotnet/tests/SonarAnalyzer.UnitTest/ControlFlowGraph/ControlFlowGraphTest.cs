@@ -18,6 +18,7 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+using System;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -4285,6 +4286,24 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
 
             assignment.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(assignment, @"result = first switch {""a"" when second == ""bar"" => 1, ""a"" => 2, ""b"" => 3, _ => 4}");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_VarPattern_InSwitchExpression_IsNotSupported()
+        {
+            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"string a = taintedString switch {var x => null};"));
+
+            exception.Message.Should().Be("VarPattern");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_VarPattern_InIf_IsNotSupported()
+        {
+            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is var x) { }"));
+
+            exception.Message.Should().Be("VarPattern");
         }
 
         [TestMethod]
