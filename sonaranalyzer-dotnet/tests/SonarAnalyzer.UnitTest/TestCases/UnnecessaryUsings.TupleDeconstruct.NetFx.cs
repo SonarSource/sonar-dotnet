@@ -71,7 +71,7 @@ namespace Repro_3631
 
     namespace KVP_OuterVarConsumer
     {
-        using Extensions;   //Noncompliant FP, it's needed for tuple deconstruction
+        using Extensions;   //Noncompliant FP, it's needed for tuple deconstruction under .NET Framework
 
         public class Repro
         {
@@ -84,7 +84,7 @@ namespace Repro_3631
 
     namespace KVP_InnerVarConsumer
     {
-        using Extensions;   //Noncompliant FP, it's needed for tuple deconstruction
+        using Extensions;   //Noncompliant FP, it's needed for tuple deconstruction under .NET Framework
 
         public class Repro
         {
