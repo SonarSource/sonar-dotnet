@@ -74,4 +74,16 @@ namespace Tests.Diagnostics
             b = num is float;
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3605
+    public class Repro_3605
+    {
+        public string StringProperty { get; set; }
+        public const string Example = "Lorem Ipsum";
+
+        public void Go(Repro_3605 value)
+        {
+            bool result = value.StringProperty != null; // Fixed
+        }
+    }
 }
