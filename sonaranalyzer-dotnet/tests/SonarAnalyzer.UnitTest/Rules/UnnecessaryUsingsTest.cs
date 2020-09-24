@@ -40,11 +40,21 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new CS.UnnecessaryUsings(),
                                     additionalReferences: GetAdditionalReferences());
 
+#if NETCOREAPP
+
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnnecessaryUsings_TupleDeconstruct() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.cs",
-                                    new CS.UnnecessaryUsings());
+        public void UnnecessaryUsings_TupleDeconstruct_NetCore() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetCore.cs", new CS.UnnecessaryUsings());
+
+#elif NETFRAMEWORK
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnnecessaryUsings_TupleDeconstruct_NetFx() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.TupleDeconstruct.NetFx.cs", new CS.UnnecessaryUsings());
+
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]
