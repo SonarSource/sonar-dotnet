@@ -193,5 +193,12 @@ public class Foo
                 NuGetMetadataReference.NUnit(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                     .Concat(MetadataReferenceFacade.GetSystemThreadingTasks()));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Custom.cs",
+                new TestMethodShouldContainAssertion(),
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion));
     }
 }
