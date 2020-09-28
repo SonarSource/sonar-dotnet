@@ -37,6 +37,8 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S2699";
         private const string MessageFormat = "Add at least one assertion to this test case.";
+        private const string CustomAssertionAttributeName = "AssertionMethodAttribute";
+
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -78,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .OfType<InvocationExpressionSyntax>()
                         .Select(expression => c.SemanticModel.GetSymbolInfo(expression).Symbol)
                         .OfType<IMethodSymbol>()
-                        .Any(symbol => IsKnownAssertion(symbol)))
+                        .Any(symbol => IsKnownAssertion(symbol) || IsCustomAssertion(symbol)))
                     {
                         return;
                     }
@@ -121,5 +123,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var type = knownAssertions.GetValueOrDefault(methodSymbol.Name);
             return (type != null) && methodSymbol.ContainingType.ConstructedFrom.Is(type);
         }
+
+        private static bool IsCustomAssertion(IMethodSymbol methodSymbol) =>
+            methodSymbol.GetAttributes().Any(x => x.AttributeClass.Name == CustomAssertionAttributeName);
     }
 }

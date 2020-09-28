@@ -16,7 +16,7 @@ namespace CustomTests
         }
 
         [TestMethod]
-        public void TestMethod2() // Noncompliant FP
+        public void TestMethod2() // Compliant
         {
             Validator.StaticWithAttribute();
         }
@@ -34,14 +34,14 @@ namespace CustomTests
         }
 
         [TestMethod]
-        public void TestMethod5() // Noncompliant FP
+        public void TestMethod5() // Compliant
         {
             var validator = new Validator();
             validator.InstanceWithAttribute();
         }
 
         [TestMethod]
-        public void TestMethod6() => // Noncompliant FP
+        public void TestMethod6() => // Compliant
             new Validator().InstanceWithAttributeAndArg(null);
     }
 }
