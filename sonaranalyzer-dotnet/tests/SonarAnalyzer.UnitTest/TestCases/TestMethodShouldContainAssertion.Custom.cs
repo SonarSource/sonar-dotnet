@@ -43,6 +43,10 @@ namespace CustomTests
         [TestMethod]
         public void TestMethod6() => // Compliant
             new Validator().InstanceWithAttributeAndArg(null);
+
+        [TestMethod]
+        public void TestMethod7() => // Noncompliant, attribute must be on the method itself
+            AttributedType.AttributeOnType();
     }
 }
 
