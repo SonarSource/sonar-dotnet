@@ -27,7 +27,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -118,13 +117,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Intersect(UnitTestHelper.KnownAssertionMethodParts)
                 .Any();
 
-        private static bool IsKnownAssertion(IMethodSymbol methodSymbol)
+        private static bool IsKnownAssertion(ISymbol methodSymbol)
         {
             var type = knownAssertions.GetValueOrDefault(methodSymbol.Name);
             return (type != null) && methodSymbol.ContainingType.ConstructedFrom.Is(type);
         }
 
-        private static bool IsCustomAssertion(IMethodSymbol methodSymbol) =>
+        private static bool IsCustomAssertion(ISymbol methodSymbol) =>
             methodSymbol.GetAttributes().Any(x => x.AttributeClass.Name == CustomAssertionAttributeName);
     }
 }
