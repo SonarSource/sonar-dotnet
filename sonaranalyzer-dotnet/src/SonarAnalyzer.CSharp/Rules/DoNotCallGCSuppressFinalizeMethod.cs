@@ -33,11 +33,10 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotCallGCSuppressFinalizeMethod : DoNotCallMethodsCSharpBase
     {
-        internal const string DiagnosticId = "S3971";
+        private const string DiagnosticId = "S3971";
         private const string MessageFormat = "Do not call 'GC.SuppressFinalize'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly IEnumerable<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
