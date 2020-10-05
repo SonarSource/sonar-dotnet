@@ -316,6 +316,19 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MembersToExpand_ExpressionArray.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  28,
+"endLine":  46,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
 "uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
 "region":  {
 "startLine":  112,

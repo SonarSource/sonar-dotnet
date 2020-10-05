@@ -27,4 +27,25 @@ public void MyMethod_WhenSomething_ExpectsSomething()
     Assert.IsTrue(result);
 }
 </pre>
+<h2>Exceptions</h2>
+<p>To create a custom assertion method declare an attribute with name <code>AssertionMethodAttribute</code> and mark the method with it:</p>
+<pre>
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+[TestClass]
+public class CustomTest
+{
+    [TestMethod]
+    public void TestMethod1() =&gt; Validator.CustomMethod(42);    // Compliant
+}
+
+public static class Validator
+{
+    [AssertionMethod]
+    public static void CustomMethod(int value) { }
+}
+
+public class AssertionMethodAttribute : Attribute { }
+</pre>
 
