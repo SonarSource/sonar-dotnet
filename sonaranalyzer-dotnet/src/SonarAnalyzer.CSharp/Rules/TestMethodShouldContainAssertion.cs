@@ -34,13 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2699";
+        private const string DiagnosticId = "S2699";
         private const string MessageFormat = "Add at least one assertion to this test case.";
         private const string CustomAssertionAttributeName = "AssertionMethodAttribute";
 
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
@@ -59,18 +57,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    if (methodDeclaration.Identifier.IsMissing ||
-                        (methodDeclaration.Body == null && methodDeclaration.ExpressionBody == null))
+                    if (methodDeclaration.Identifier.IsMissing
+                        || (methodDeclaration.Body == null && methodDeclaration.ExpressionBody == null))
                     {
                         return;
                     }
 
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol == null ||
-                        !methodSymbol.IsTestMethod() ||
-                        methodSymbol.HasExpectedExceptionAttribute() ||
-                        methodSymbol.HasAssertionInAttribute() ||
-                        IsTestIgnored(methodSymbol))
+                    if (methodSymbol == null
+                        || !methodSymbol.IsTestMethod()
+                        || methodSymbol.HasExpectedExceptionAttribute()
+                        || methodSymbol.HasAssertionInAttribute()
+                        || IsTestIgnored(methodSymbol))
                     {
                         return;
                     }
@@ -95,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        public static bool IsTestIgnored(IMethodSymbol method)
+        private static bool IsTestIgnored(IMethodSymbol method)
         {
             if (method.IsMsTestOrNUnitTestIgnored())
             {
@@ -106,8 +104,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var factAttributeSyntax = method.FindXUnitTestAttribute()
                 ?.ApplicationSyntaxReference.GetSyntax() as AttributeSyntax;
 
-            return factAttributeSyntax?.ArgumentList != null &&
-                factAttributeSyntax.ArgumentList.Arguments.Any(x => x.NameEquals.Name.Identifier.ValueText == "Skip");
+            return factAttributeSyntax?.ArgumentList != null
+                && factAttributeSyntax.ArgumentList.Arguments.Any(x => x.NameEquals.Name.Identifier.ValueText == "Skip");
         }
 
         private static bool IsAssertion(InvocationExpressionSyntax invocation) =>

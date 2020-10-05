@@ -200,7 +200,5 @@ public class Foo
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Custom.cs",
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion));
-
-
     }
 }
