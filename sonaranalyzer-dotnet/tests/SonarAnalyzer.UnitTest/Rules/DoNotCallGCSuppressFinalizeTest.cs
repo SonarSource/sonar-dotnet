@@ -30,10 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotCallGCSuppressFinalize()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.cs",
-                new DoNotCallGCSuppressFinalizeMethod());
-        }
+        public void DoNotCallGCSuppressFinalize() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.cs", new DoNotCallGCSuppressFinalizeMethod());
+
+#if NETCOREAPP
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotCallGCSuppressFinalize_NetCore() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.NetCore.cs", new DoNotCallGCSuppressFinalizeMethod(), ParseOptionsHelper.FromCSharp8);
+#endif
     }
 }
