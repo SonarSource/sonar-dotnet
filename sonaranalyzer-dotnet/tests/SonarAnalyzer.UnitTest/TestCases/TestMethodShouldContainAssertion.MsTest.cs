@@ -92,6 +92,15 @@
         {
         }
 
+        [TestMethod]
+        public void ArrowMethod1() => DoNothing(); // Noncompliant
+//                  ^^^^^^^^^^^^
+
+        [TestMethod]
+        public void ArrowMethod2() => AssertSomething();
+
+        public void DoNothing() { }
+
         public void AssertSomething()
         {
             Assert.IsTrue(true);
