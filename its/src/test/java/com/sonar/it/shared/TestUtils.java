@@ -195,6 +195,8 @@ public class TestUtils {
       .withZone( ZoneId.of("UTC"))
       .format(instant);
 
+    LOG.info("TEST SETUP: deleting projects analyzed before: " + currentDateTime);
+
     orchestrator.getServer()
       .newHttpCall("/api/projects/bulk_delete")
       .setAdminCredentials()
