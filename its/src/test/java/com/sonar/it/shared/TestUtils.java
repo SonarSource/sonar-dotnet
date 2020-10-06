@@ -33,7 +33,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.apache.commons.io.FileUtils;
@@ -181,14 +187,20 @@ public class TestUtils {
   }
 
   public static void reset(Orchestrator orchestrator) {
-    orchestrator.getServer().newHttpCall("api/orchestrator/reset")
-      .setMethod(HttpMethod.POST)
+    // We add one day to ensure that today's entries are deleted.
+    Instant instant = Instant.now().plus(1, ChronoUnit.DAYS);
+
+    // The expected format is yyyy-MM-dd.
+    String currentDateTime = DateTimeFormatter.ISO_LOCAL_DATE
+      .withZone( ZoneId.of("UTC"))
+      .format(instant);
+
+    orchestrator.getServer()
+      .newHttpCall("/api/projects/bulk_delete")
       .setAdminCredentials()
+      .setMethod(HttpMethod.POST)
+      .setParams("analyzedBefore", currentDateTime)
       .execute();
-    // api/orchestrator/reset will clear the license, so reinstall it
-    if (orchestrator.getDistribution().isActivateLicense()) {
-      orchestrator.activateLicense();
-    }
   }
 
   static WsClient newWsClient(Orchestrator orch) {
