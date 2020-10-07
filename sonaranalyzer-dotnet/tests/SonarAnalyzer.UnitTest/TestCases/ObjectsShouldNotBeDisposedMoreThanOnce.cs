@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 
 namespace Tests.Diagnostics
 {
@@ -7,14 +6,14 @@ namespace Tests.Diagnostics
 
     class Program
     {
-        public void DisposedTwise()
+        public void DisposedTwice()
         {
             var d = new Disposable();
             d.Dispose();
             d.Dispose(); // Noncompliant
         }
 
-        public void DisposedTwise_Conditional()
+        public void DisposedTwice_Conditional()
         {
             IDisposable d = null;
             d = new Disposable();
@@ -26,7 +25,7 @@ namespace Tests.Diagnostics
 //          ^
         }
 
-        public void DisposedTwise_Try()
+        public void DisposedTwice_Try()
         {
             IDisposable d = null;
             try
@@ -41,7 +40,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void DisposedTwise_Array()
+        public void DisposedTwice_Array()
         {
             var a = new[] { new Disposable() };
             a[0].Dispose();
@@ -65,67 +64,20 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void Disposed_Using3(Stream str)
-        {
-            using (var s = new FileStream("path", FileMode.Open)) // Noncompliant
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            {
-                using (var sr = new StreamReader(s))
-                {
-                }
-            }
-
-            Stream stream;
-            using (stream = new FileStream("path", FileMode.Open)) // Noncompliant
-//                 ^^^^^^
-            {
-                using (var sr = new StreamReader(stream))
-                {
-                }
-            }
-
-            using (str)
-            {
-                var sr = new StreamReader(str);
-                using (sr) // Compliant, we cannot detect if 'str' was argument of the 'sr' constructor or not
-                {
-                }
-            }
-        }
-
-        public void Disposed_Using4()
-        {
-            Stream s = new FileStream("path", FileMode.Open);
-            try
-            {
-                using (var sr = new StreamReader(s))
-                {
-                    s = null;
-                }
-            }
-            finally
-            {
-                if (s != null)
-                {
-                    s.Dispose();
-                }
-            }
-        }
-
         public void Disposed_Using_Parameters(IDisposable param1)
         {
             param1.Dispose();
             param1.Dispose(); // Noncompliant
         }
 
-        public void Close_ParametersOfDifferenceTypes(IInterface1 interface1, IDisposable interface2)
+        public void Close_ParametersOfDifferentTypes(IInterface1 interface1, IDisposable interface2)
         {
             // Regression test for https://github.com/SonarSource/sonar-csharp/issues/1038
             interface1.Dispose(); // ok, only called once on each parameter
             interface2.Dispose();
         }
 
-        public void Close_ParametersOfSameTypes(IInterface1 instance1, IInterface1 instance2)
+        public void Close_ParametersOfSameType(IInterface1 instance1, IInterface1 instance2)
         {
             // Regression test for https://github.com/SonarSource/sonar-csharp/issues/1038
             instance1.Dispose();
@@ -140,7 +92,6 @@ namespace Tests.Diagnostics
 
             instance2.Dispose(); // ok - only disposed once
         }
-
     }
 
     public class Disposable : IDisposable
@@ -162,137 +113,6 @@ namespace Tests.Diagnostics
         public void DoSomething()
         {
             Dispose();
-        }
-    }
-
-    public class UsingWithLeaveOpenArgument
-    {
-        public void LeaveOpenTrue1()
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, true))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenTrue2()
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: true))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenTrue3()
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), leaveOpen: true, bufferSize: 1024))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenTrue4()
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), false, 1024, true))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenTrue5()
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), bufferSize: 2014, leaveOpen: true, detectEncodingFromByteOrderMarks: false))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenTrue6()
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), leaveOpen: true, bufferSize: 1024))
-            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), bufferSize: 2014, leaveOpen: true, detectEncodingFromByteOrderMarks: false))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenTrue7()
-        {
-            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
-            using (StreamWriter writer = new StreamWriter(memoryStream))
-            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), bufferSize: 2014, leaveOpen: true, detectEncodingFromByteOrderMarks: false))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenTrue8()
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            using (StreamWriter writer = new StreamWriter(leaveOpen: true, stream: memoryStream, encoding: new System.Text.UTF8Encoding(false), bufferSize: 1024))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenFalse1()
-        {
-            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
-            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, false))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenFalse2()
-        {
-            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
-            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: false))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenFalse3()
-        {
-            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
-            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), leaveOpen: false, bufferSize: 1024))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenFalse4()
-        {
-            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
-            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), true, 1024, false))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenFalse5()
-        {
-            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
-            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), bufferSize: 2014, leaveOpen: false, detectEncodingFromByteOrderMarks: true))
-            {
-                string str = null;
-            }
-        }
-
-        public void LeaveOpenFalse6()
-        {
-            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
-            using (StreamWriter writer = new StreamWriter(leaveOpen: false, stream: memoryStream, encoding: new System.Text.UTF8Encoding(false), bufferSize: 1024))
-            {
-                string str = null;
-            }
         }
     }
 
@@ -330,70 +150,21 @@ namespace Tests.Diagnostics
                 using var d = new Disposable();
                 d.Dispose(); // Noncompliant {{Refactor this code to make sure 'd' is disposed only once.}}
             }
-
-            public void Implicit_Disposed_UsingDeclaration(Stream str)
-            {
-                using var s = new FileStream("path", FileMode.Open);
-                using var sr = new StreamReader(s); // Noncompliant {{Refactor this code to make sure 's' is disposed only once.}}
-            }
-
-            public void Disposed_Using_Valid()
-            {
-                var s = new FileStream("path", FileMode.Open);
-                try
-                {
-                    using var sr = new StreamReader(s);
-                    s = null;
-                }
-                finally
-                {
-                    if (s != null)
-                    {
-                        s.Dispose();
-                    }
-                }
-            }
-
-            public void Mixed_Usings_Disposed(Stream str)
-            {
-                using var s = new FileStream("path", FileMode.Open);
-                using (var sr = new StreamReader(s)) // Noncompliant {{Refactor this code to make sure 's' is disposed only once.}}
-                {
-                }
-            }
-
-            public void Mixed_Usings_ComplexCFG_Disposed(Stream str)
-            {
-                using var s = new FileStream("path1", FileMode.Open);
-                using (var sr1 = new FileStream("path2", FileMode.Open))
-                {
-                    if (str != null)
-                    {
-                        using (var sr2 = new StreamReader(s)) // Noncompliant
-                        {
-                        }
-                    }
-                }
-            }
-
-            public void FileStream_Using_Null(Stream str)
-            {
-                using FileStream s = null;
-                s.Dispose(); // Ok - s is null here, so it will raise a null pointer dereference instead
-            }
         }
 
         public class NullCoalescenceAssignment
         {
-            public void NullCoalescenceAssignment_NotNull(Stream s)
+            public void NullCoalescenceAssignment_Compliant(IDisposable s)
             {
-                if (s == null)
+                s ??= new Disposable();
+                s.Dispose();
+            }
+
+            public void NullCoalescenceAssignment_NonCompliant(IDisposable s)
+            {
+                using (s ??= new Disposable()) // Noncompliant
                 {
-                    s ??= new FileStream("path", FileMode.Open);
-                    using (var sr = new StreamReader(s))
-                    {
-                    }
-                    s.Dispose(); // Noncompliant
+                    s.Dispose();
                 }
             }
         }
@@ -446,7 +217,6 @@ namespace Tests.Diagnostics
                 (myObject1, myObject2) = (1, null);
             }
         }
-
 
         public ref struct Struct
         {

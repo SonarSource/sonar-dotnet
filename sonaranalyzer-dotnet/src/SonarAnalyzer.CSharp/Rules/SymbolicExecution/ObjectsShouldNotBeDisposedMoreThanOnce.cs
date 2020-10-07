@@ -27,7 +27,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.SymbolicExecution;
@@ -39,13 +38,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S3966";
         private const string MessageFormat = "Refactor this code to make sure '{0}' is disposed only once.";
-        private const string LeaveOpenParameterName = "leaveOpen";
-        private const string StreamParameterName = "stream";
-
-        private static readonly ImmutableDictionary<KnownType, int> typesDisposingUnderlyingStreamWithLeaveOpenArgumentIndex =
-            ImmutableDictionary<KnownType, int>.Empty
-                .Add(KnownType.System_IO_StreamReader, 4)
-                .Add(KnownType.System_IO_StreamWriter, 3);
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -105,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     newProgramState = ProcessDisposableSymbol(newProgramState, disposable.SyntaxNode, disposable.Symbol);
                 }
 
-                return ProcessStreamDisposingTypes(newProgramState, (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
+                return newProgramState;
             }
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
@@ -138,8 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var disposableSymbol = semanticModel.GetDeclaredSymbol(declarator);
                 var newProgramState = programState.StoreSymbolicValue(disposableSymbol, programState.PeekValue());
 
-                newProgramState = ProcessDisposableSymbol(newProgramState, declarator, disposableSymbol);
-                return ProcessStreamDisposingTypes(newProgramState, declarator);
+                return ProcessDisposableSymbol(newProgramState, declarator, disposableSymbol);
             }
 
             private ProgramState VisitInvocationExpression(InvocationExpressionSyntax instruction, ProgramState programState)
@@ -170,46 +161,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return newProgramState;
             }
-
-            private ProgramState ProcessStreamDisposingTypes(ProgramState programState, SyntaxNode usingExpression)
-            {
-                var newProgramState = programState;
-                var objectCreationExpressions = usingExpression.DescendantNodes().OfType<ObjectCreationExpressionSyntax>();
-
-                foreach (var objectCreationExpression in objectCreationExpressions)
-                {
-                    if (semanticModel.GetSymbolInfo(objectCreationExpression.Type).Symbol is ISymbol symbol
-                        && symbol.GetSymbolType() is ITypeSymbol objectType
-                        && objectType.DerivesOrImplementsAny(typesDisposingUnderlyingStreamWithLeaveOpenArgumentIndex.Keys.ToImmutableArray())
-                        && objectCreationExpression.ArgumentList?.Arguments is IEnumerable<ArgumentSyntax> argumentList
-                        && argumentList.Any())
-                    {
-                        // Checks for the 'leaveOpen' argument. It is at position 4 if present for StreamReader constructor, while it is at position 3 for StreamWriter.
-                        // See #2491 for more details
-                        var leaveOpenArgumentIndex = typesDisposingUnderlyingStreamWithLeaveOpenArgumentIndex
-                            .Where(entry => objectType.DerivesOrImplements(entry.Key))
-                            .Select(entry => entry.Value)
-                            .First();
-                        if (!HasLeaveOpenTrueArgument(argumentList, leaveOpenArgumentIndex)
-                            && GetArgument(argumentList, StreamParameterName, 0) is ArgumentSyntax argument)
-                        {
-                            var streamSymbol = semanticModel.GetSymbolInfo(argument.Expression).Symbol;
-                            newProgramState = ProcessDisposableSymbol(newProgramState, argument.Expression, streamSymbol);
-                        }
-                    }
-                }
-
-                return newProgramState;
-            }
-
-            private static bool HasLeaveOpenTrueArgument(IEnumerable<ArgumentSyntax> argumentList, int leaveOpenArgumentIndex) =>
-                GetArgument(argumentList, LeaveOpenParameterName, leaveOpenArgumentIndex) is ArgumentSyntax leaveOpenArgument
-                && CSharpEquivalenceChecker.AreEquivalent(leaveOpenArgument.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
-
-            private static ArgumentSyntax GetArgument(IEnumerable<ArgumentSyntax> argumentList, string argumentName, int defaultArgumentIndex) =>
-                argumentList.FirstOrDefault(arg => argumentName.Equals(arg.NameColon?.Name.Identifier.ValueText)) is { } argument
-                    ? argument
-                    : argumentList.ElementAtOrDefault(defaultArgumentIndex);
 
             private ProgramState ProcessDisposableSymbol(ProgramState programState, SyntaxNode disposeInstruction, ISymbol disposableSymbol)
             {
