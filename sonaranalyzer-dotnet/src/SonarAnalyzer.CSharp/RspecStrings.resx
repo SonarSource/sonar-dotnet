@@ -8531,13 +8531,13 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S3966_Category" xml:space="preserve">
-    <value>Critical Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S3966_Description" xml:space="preserve">
     <value>A proper implementation of IDisposable.Dispose should allow for it to be called multiple times on the same object, however this is not guaranteed and could result in an exception being thrown.</value>
   </data>
   <data name="S3966_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S3966_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -8549,7 +8549,7 @@
     <value>All</value>
   </data>
   <data name="S3966_Severity" xml:space="preserve">
-    <value>Critical</value>
+    <value>Major</value>
   </data>
   <data name="S3966_Tags" xml:space="preserve">
     <value>pitfall</value>
