@@ -33,6 +33,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
@@ -181,14 +185,22 @@ public class TestUtils {
   }
 
   public static void reset(Orchestrator orchestrator) {
-    orchestrator.getServer().newHttpCall("api/orchestrator/reset")
-      .setMethod(HttpMethod.POST)
+    // We add one day to ensure that today's entries are deleted.
+    Instant instant = Instant.now().plus(1, ChronoUnit.DAYS);
+
+    // The expected format is yyyy-MM-dd.
+    String currentDateTime = DateTimeFormatter.ISO_LOCAL_DATE
+      .withZone(ZoneId.of("UTC"))
+      .format(instant);
+
+    LOG.info("TEST SETUP: deleting projects analyzed before: " + currentDateTime);
+
+    orchestrator.getServer()
+      .newHttpCall("/api/projects/bulk_delete")
       .setAdminCredentials()
+      .setMethod(HttpMethod.POST)
+      .setParams("analyzedBefore", currentDateTime)
       .execute();
-    // api/orchestrator/reset will clear the license, so reinstall it
-    if (orchestrator.getDistribution().isActivateLicense()) {
-      orchestrator.activateLicense();
-    }
   }
 
   static WsClient newWsClient(Orchestrator orch) {
@@ -196,7 +208,7 @@ public class TestUtils {
       .url(orch.getServer().getUrl())
       .build());
   }
-  
+
   // This method has been taken from SonarSource/sonar-scanner-msbuild
   public static TemporaryFolder createTempFolder() {
     LOG.info("TEST SETUP: creating temporary folder...");
