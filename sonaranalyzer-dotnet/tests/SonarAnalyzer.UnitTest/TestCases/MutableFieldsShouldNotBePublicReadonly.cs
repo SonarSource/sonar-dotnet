@@ -124,7 +124,7 @@ namespace Tests.Diagnostics
         public readonly ISet<string> set1, set2;
     }
 
-    // Issue #1491: https://github.com/SonarSource/sonar-csharp/issues/1491
+    // Issue #1491: https://github.com/SonarSource/sonar-dotnet/issues/1491
     public class MutableInitializedWithImmutableInConstructor
     {
         public readonly string[] foo; // Compliant - set to null in ctor

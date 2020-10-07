@@ -1569,7 +1569,7 @@ namespace Tests.Diagnostics
     public class StaticMethods
     {
         object _foo1;
-        // https://github.com/SonarSource/sonar-csharp/issues/947
+        // https://github.com/SonarSource/sonar-dotnet/issues/947
         void CallToMonitorWaitShouldResetFieldConstraints()
         {
             object o = null;

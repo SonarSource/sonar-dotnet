@@ -582,7 +582,7 @@ namespace Tests.Diagnostics
             o.ToString(); // Noncompliant, local variable constraints are not cleared
         }
 
-        // https://github.com/SonarSource/sonar-csharp/issues/947
+        // https://github.com/SonarSource/sonar-dotnet/issues/947
         void CallToMonitorWaitShouldResetFieldConstraints()
         {
             object o = null;
@@ -662,7 +662,7 @@ namespace Tests.Diagnostics
         public static void MyExtension(this object o) { }
     }
 
-    class Foo // https://github.com/SonarSource/sonar-csharp/issues/538
+    class Foo // https://github.com/SonarSource/sonar-dotnet/issues/538
     {
         private string bar;
 

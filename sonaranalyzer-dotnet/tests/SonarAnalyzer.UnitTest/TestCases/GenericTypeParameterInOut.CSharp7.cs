@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
-    // https://github.com/SonarSource/sonar-csharp/issues/1513
+    // https://github.com/SonarSource/sonar-dotnet/issues/1513
     public interface IFoo1<T> // Compliant, T cannot be in or out when used in a tuple
     {
         (T, object) Process(T item);

@@ -116,7 +116,7 @@ namespace Tests.Diagnostics
             get => null; // Noncompliant
         }
 
-        // See https://github.com/SonarSource/sonar-csharp/issues/1845
+        // See https://github.com/SonarSource/sonar-dotnet/issues/1845
         public Task<object> GetObjectTask()
         {
             object GetObject()

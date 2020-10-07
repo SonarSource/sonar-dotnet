@@ -142,7 +142,7 @@ public class MethodUsages
 using System.Threading.Tasks;
 public class NewClass1
 {
-    // See https://github.com/SonarSource/sonar-csharp/issues/888
+    // See https://github.com/SonarSource/sonar-dotnet/issues/888
     static async Task Main() { } // Compliant - valid main method since C# 7.1
 }
 

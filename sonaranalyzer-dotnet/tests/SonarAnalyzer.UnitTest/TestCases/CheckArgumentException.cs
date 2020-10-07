@@ -163,7 +163,7 @@ namespace Tests.Diagnostics
 
         void Bar2(int a)
         {
-            // See https://github.com/SonarSource/sonar-csharp/issues/1867
+            // See https://github.com/SonarSource/sonar-dotnet/issues/1867
             throw new ArgumentNullException(null, string.Empty); // Noncompliant
         }
     }

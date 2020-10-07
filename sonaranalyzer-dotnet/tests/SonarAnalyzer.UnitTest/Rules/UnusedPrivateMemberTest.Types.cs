@@ -75,8 +75,8 @@ public class PrivateTypes
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Types_Internals() =>
             Verifier.VerifyCSharpAnalyzer(@"
-// https://github.com/SonarSource/sonar-csharp/issues/1225
-// https://github.com/SonarSource/sonar-csharp/issues/904
+// https://github.com/SonarSource/sonar-dotnet/issues/1225
+// https://github.com/SonarSource/sonar-dotnet/issues/904
 using System;
 public class Class1
 {

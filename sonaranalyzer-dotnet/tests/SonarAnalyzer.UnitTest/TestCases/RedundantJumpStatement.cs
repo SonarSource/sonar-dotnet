@@ -116,7 +116,7 @@ namespace Tests.Diagnostics
             { }
         }
 
-        // https://github.com/SonarSource/sonar-csharp/issues/1265
+        // https://github.com/SonarSource/sonar-dotnet/issues/1265
         void RegressionTest_1265()
         {
             try

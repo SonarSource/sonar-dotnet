@@ -166,7 +166,7 @@ Tests(); // Noncompliant
         {
             try {
               if (a)
-                Console.WriteLine(); // This statement is aligned with the '{' of the try on purpose to fix https://github.com/SonarSource/sonar-csharp/issues/264
+                Console.WriteLine(); // This statement is aligned with the '{' of the try on purpose to fix https://github.com/SonarSource/sonar-dotnet/issues/264
             } finally { }
         }
     }

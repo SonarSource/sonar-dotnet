@@ -76,7 +76,7 @@ namespace Tests.Diagnostics
 
         public int Age { get; private set; }
 
-        // See https://github.com/SonarSource/sonar-csharp/issues/761
+        // See https://github.com/SonarSource/sonar-dotnet/issues/761
         public List<int> Method()
         {
             Func<int?> aFunc = () =>

@@ -159,7 +159,7 @@ namespace Tests.Diagnostics
 
     public class MyAttribute : Attribute { }
 
-    // See https://github.com/SonarSource/sonar-csharp/issues/1009
+    // See https://github.com/SonarSource/sonar-dotnet/issues/1009
     // Issue with leading trivia not moved to the readonly modifier
     public class MyClassWithField
     {
