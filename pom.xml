@@ -9,7 +9,7 @@
   </parent>
 
   <groupId>org.sonarsource.dotnet</groupId>
-  <artifactId>sonar-csharp</artifactId>
+  <artifactId>sonar-dotnet</artifactId>
   <version>8.14-SNAPSHOT</version>
   <packaging>pom</packaging>
 
