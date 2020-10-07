@@ -15,19 +15,31 @@ Ordering of class members should be the following:
 1. Constants
 1. Fields
 1. Abstract members
-1. Constructors
 1. Properties
+1. Constructors
 1. Methods 
 1. Private nested classes
 
 Furthermore, each of these categories should be ordered from higher to lower accessibility level (public, internal, protected, private).
 
+## Multi-line statements
+
+* Operators (&&, ||, +, :, ?, ?? and others) are placed at the beginning of a line.
+* Dots with invocation `.Method()` are placed at the beginning of a line.
+* Comma separating arguments is placed at the end of a line.
+
+## Code structure
+
+* Field and property initializations are done directly in the member declaration instead of in a constructor.
+* `if`/`else if` and explicit `else` is used
+  * when it helps to understand overall structure of the method,
+  * especially when each branch ends with a `return` statement.
+* Explicit `else` is not used after input validation.
+
 ## Comments
 
 * Code should contain as few comments as necessary in favor of well-named members and variables.
-
 * Comments should generally be on separate lines.
-
 * Comments on the same line with code are acceptable for short lines of code and short comments.
 
 ## FIXME and ToDo
