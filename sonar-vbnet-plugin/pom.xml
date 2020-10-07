@@ -28,34 +28,6 @@
     </license>
   </licenses>
 
-  <developers>
-    <developer>
-      <id>aleve</id>
-      <name>Amaury Levé</name>
-      <organization>SonarSource</organization>
-    </developer>
-    <developer>
-      <id>vhristov</id>
-      <name>Valeri Hristov</name>
-      <organization>SonarSource</organization>
-    </developer>
-    <developer>
-      <id>jgyerik</id>
-      <name>Janos Gyerik</name>
-      <organization>SonarSource</organization>
-    </developer>
-    <developer>
-      <id>dmeneses</id>
-      <name>Duarte Meneses</name>
-      <organization>SonarSource</organization>
-    </developer>
-    <developer>
-      <id>jhenry</id>
-      <name>Julien Henry</name>
-      <organization>SonarSource</organization>
-    </developer>
-  </developers>
-
   <scm>
     <connection>scm:git:git@github.com:SonarSource/sonar-dotnet.git</connection>
     <developerConnection>scm:git:git@github.com:SonarSource/sonar-dotnet.git</developerConnection>

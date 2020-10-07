@@ -13,9 +13,9 @@
   <version>8.14-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>SonarC# parent</name>
-  <description>Code Analyzer for C#</description>
-  <url>http://redirect.sonarsource.com/plugins/csharp.html</url>
+  <name>.NET Analyzers parent</name>
+  <description>Code Analyzers for .NET</description>
+  <url>https://github.com/SonarSource/sonar-dotnet</url>
   <inceptionYear>2014</inceptionYear>
   <organization>
     <name>SonarSource</name>
@@ -28,34 +28,6 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
-  <developers>
-    <developer>
-      <id>aleve</id>
-      <name>Amaury Levé</name>
-      <organization>SonarSource</organization>
-    </developer>
-	<developer>
-      <id>vhristov</id>
-      <name>Valeri Hristov</name>
-      <organization>SonarSource</organization>
-    </developer>
-	<developer>
-      <id>jgyerik</id>
-      <name>Janos Gyerik</name>
-      <organization>SonarSource</organization>
-    </developer>
-	<developer>
-      <id>dmeneses</id>
-      <name>Duarte Meneses</name>
-      <organization>SonarSource</organization>
-    </developer>
-	<developer>
-      <id>jhenry</id>
-      <name>Julien Henry</name>
-      <organization>SonarSource</organization>
-    </developer>
-  </developers>
 
   <modules>
     <module>sonar-dotnet-shared-library</module>
