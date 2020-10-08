@@ -31,7 +31,7 @@ namespace Tests.Diagnostics
 //                      ^^^^^^^^^^^^^
 
             ip = "300.0.0.0"; // Compliant, not a valid IP
-            ip = "127.0.0.1"; // Compliant, this is an exception in the rule (see: https://github.com/SonarSource/sonar-csharp/issues/1540)
+            ip = "127.0.0.1"; // Compliant, this is an exception in the rule (see: https://github.com/SonarSource/sonar-dotnet/issues/1540)
             ip = "    127.0.0.0    "; // Compliant
             ip = @"    ""127.0.0.0""    "; // Compliant
 

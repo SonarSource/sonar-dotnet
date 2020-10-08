@@ -40,7 +40,7 @@ namespace Tests.Diagnostics
             F2(1, 2, 3, 4);
         }
 
-        // see https://github.com/SonarSource/sonar-csharp/issues/1459
+        // see https://github.com/SonarSource/sonar-dotnet/issues/1459
         // We should not raise for imported methods according to external definition.
         [DllImport("foo.dll")]
         public static extern void Extern(int p1, int p2, int p3, int p4); // Compliant, external definition
@@ -62,7 +62,7 @@ namespace Tests.Diagnostics
 
     public class SubClass : MyWrongClass
     {
-        // See https://github.com/SonarSource/sonar-csharp/issues/1015
+        // See https://github.com/SonarSource/sonar-dotnet/issues/1015
         // We should not raise when parent base class forces usage of too many args
         public SubClass(string a, string b, string c, string d, string e, string f, string g, string h) // Compliant (base class requires them)
             : base(a, b, c, d, e, f, g, h)

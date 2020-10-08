@@ -199,7 +199,7 @@ namespace SonarAnalyzer.Helpers
                 ?? methodDeclarationBase?.ExpressionBody()?.DescendantNodes()
                 ?? Enumerable.Empty<SyntaxNode>();
 
-            // See issue: https://github.com/SonarSource/sonar-csharp/issues/416
+            // See issue: https://github.com/SonarSource/sonar-dotnet/issues/416
             // Where clause excludes nodes that are not defined on the same SyntaxTree as the SemanticModel
             // (because of partial definition).
             // More details: https://github.com/dotnet/roslyn/issues/18730

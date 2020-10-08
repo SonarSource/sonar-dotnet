@@ -82,7 +82,7 @@ namespace Tests.Diagnostics
         public void M(ref int f) { }
     }
 
-    // https://github.com/SonarSource/sonar-csharp/issues/242
+    // https://github.com/SonarSource/sonar-dotnet/issues/242
     public class MyClass2
     {
         [StructLayout(LayoutKind.Sequential)]

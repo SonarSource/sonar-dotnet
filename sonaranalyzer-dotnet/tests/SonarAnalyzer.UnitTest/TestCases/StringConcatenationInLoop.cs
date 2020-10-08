@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
 
             while (true)
             {
-                // See https://github.com/SonarSource/sonar-csharp/issues/1138
+                // See https://github.com/SonarSource/sonar-dotnet/issues/1138
                 s = s ?? "b";
             }
         }
