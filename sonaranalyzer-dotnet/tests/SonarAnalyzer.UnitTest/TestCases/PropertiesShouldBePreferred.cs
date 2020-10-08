@@ -62,7 +62,7 @@ namespace MyLibrary
 
     public interface IFoo
     {
-        // See https://github.com/SonarSource/sonar-csharp/issues/1593
+        // See https://github.com/SonarSource/sonar-dotnet/issues/1593
         // and https://msdn.microsoft.com/en-us/magazine/mt797654.aspx
         IMyEnumerator GetEnumerator();
     }

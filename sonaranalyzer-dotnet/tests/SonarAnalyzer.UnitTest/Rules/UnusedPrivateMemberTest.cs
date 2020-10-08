@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UnusedPrivateMember_DebuggerDisplay_Attribute() =>
             Verifier.VerifyCSharpAnalyzer(@"
-// https://github.com/SonarSource/sonar-csharp/issues/1195
+// https://github.com/SonarSource/sonar-dotnet/issues/1195
 [System.Diagnostics.DebuggerDisplay(""{field1}"", Name = ""{Property1} {Property3}"", Type = ""{Method1()}"")]
 public class MethodUsages
 {
@@ -125,7 +125,7 @@ public partial class PartialClass
         [TestCategory("Rule")]
         public void UnusedPrivateMember_Unity3D_Ignored() =>
             Verifier.VerifyCSharpAnalyzer(@"
-// https://github.com/SonarSource/sonar-csharp/issues/159
+// https://github.com/SonarSource/sonar-dotnet/issues/159
 public class UnityMessages1 : UnityEngine.MonoBehaviour
 {
     private void SomeMethod(bool hasFocus) { } // Compliant

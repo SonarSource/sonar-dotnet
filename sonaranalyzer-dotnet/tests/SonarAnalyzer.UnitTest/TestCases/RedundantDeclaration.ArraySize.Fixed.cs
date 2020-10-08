@@ -33,7 +33,7 @@ namespace Tests.Diagnostics
             var xxx = new int[,] { { 1, 1, 1 }, { 2, 2, 2 }, { 3, 3, 3 } };
             var yyy = new int[,] { { 1, 1, 1 }, { 2, 2, 2 }, { 3, 3, 3 } };
 
-            // see https://github.com/SonarSource/sonar-csharp/issues/1840
+            // see https://github.com/SonarSource/sonar-dotnet/issues/1840
             var multiDimIntArray = new int[][] // Compliant - type specifier is mandatory here
             {
                 new int[] { 1 } // Fixed

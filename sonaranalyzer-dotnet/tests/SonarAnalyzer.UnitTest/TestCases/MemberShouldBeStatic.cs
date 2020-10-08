@@ -129,7 +129,7 @@ namespace Tests.Diagnostics
         public int InterfaceMethod1() => 0;
     }
 
-    // Adding exception for SuppressMessage https://github.com/SonarSource/sonar-csharp/issues/631
+    // Adding exception for SuppressMessage https://github.com/SonarSource/sonar-dotnet/issues/631
     public class Class5
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Foo", "Bar", Justification = "baz")]
@@ -157,7 +157,7 @@ namespace Tests.Diagnostics
     }
 
     // The following test cases are linked to FP when using ASP controllers.
-    // See https://github.com/SonarSource/sonar-csharp/issues/733
+    // See https://github.com/SonarSource/sonar-dotnet/issues/733
     public class WebClass1 : System.Web.Mvc.Controller
     {
         public int Foo() => 0;

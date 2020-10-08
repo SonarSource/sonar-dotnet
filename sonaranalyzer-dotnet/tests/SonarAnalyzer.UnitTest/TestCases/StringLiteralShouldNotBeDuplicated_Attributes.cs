@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 // Issue #1419 - false positive in S1192 - shouldn't look at string in attributes
-// https://github.com/SonarSource/sonar-csharp/issues/1419
+// https://github.com/SonarSource/sonar-dotnet/issues/1419
 
 // compliant - outside class and in attribute -> ignored
 [assembly: DebuggerDisplay("foo", Name = "foo", TargetTypeName = "foo")]

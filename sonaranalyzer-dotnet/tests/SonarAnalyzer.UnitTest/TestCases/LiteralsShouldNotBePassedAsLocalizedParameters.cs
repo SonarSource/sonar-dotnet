@@ -82,7 +82,7 @@ namespace Tests.Diagnostics
 
         public void LogStuff()
         {
-            // Regression tests for https://github.com/SonarSource/sonar-csharp/issues/1464
+            // Regression tests for https://github.com/SonarSource/sonar-dotnet/issues/1464
             // S4055 should not raise issues for string literal used in the 'message' of Debug.XXX
             Debug.Assert(true, "Assertion message");                    // compliant - method on Debug
             Debug.WriteLine("Stuff happened");                          // compliant - method on Debug

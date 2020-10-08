@@ -723,7 +723,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    // See https://github.com/SonarSource/sonar-csharp/issues/1002
+    // See https://github.com/SonarSource/sonar-dotnet/issues/1002
     class Program
     {
         public Program(string id)
@@ -735,7 +735,7 @@ namespace Tests.Diagnostics
     class LargeCfg
     {
         // Large CFG that causes the exploded graph to hit the exploration limit
-        // See https://github.com/SonarSource/sonar-csharp/issues/767 (comments!)
+        // See https://github.com/SonarSource/sonar-dotnet/issues/767 (comments!)
         private static void MethodName(object[] table, object[][] aoTable2, ref Dictionary<double, string> dictPorts)
         {
             try

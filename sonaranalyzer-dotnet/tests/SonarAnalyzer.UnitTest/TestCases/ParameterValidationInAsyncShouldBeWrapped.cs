@@ -102,7 +102,7 @@ namespace Tests.Diagnostics
             return func();
         }
 
-        // See https://github.com/SonarSource/sonar-csharp/issues/1819
+        // See https://github.com/SonarSource/sonar-dotnet/issues/1819
         public async Task DoSomethingAsync(string value)
         {
             await Task.Delay(0);

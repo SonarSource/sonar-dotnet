@@ -120,14 +120,14 @@ namespace Tests.Diagnostics
 
         public void Close_ParametersOfDifferenceTypes(IInterface1 interface1, IDisposable interface2)
         {
-            // Regression test for https://github.com/SonarSource/sonar-csharp/issues/1038
+            // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
             interface1.Dispose(); // ok, only called once on each parameter
             interface2.Dispose();
         }
 
         public void Close_ParametersOfSameTypes(IInterface1 instance1, IInterface1 instance2)
         {
-            // Regression test for https://github.com/SonarSource/sonar-csharp/issues/1038
+            // Regression test for https://github.com/SonarSource/sonar-dotnet/issues/1038
             instance1.Dispose();
             instance2.Dispose();
         }

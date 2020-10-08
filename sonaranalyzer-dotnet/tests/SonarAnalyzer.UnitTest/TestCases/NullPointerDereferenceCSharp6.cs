@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
             return o.ToString(); // If e.Message is null, the exception won't be caught and this is not reachable
         }
 
-        // https://github.com/SonarSource/sonar-csharp/issues/1324
+        // https://github.com/SonarSource/sonar-dotnet/issues/1324
         public void FlasePositive(object o)
         {
             try

@@ -93,7 +93,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    // See https://github.com/SonarSource/sonar-csharp/issues/1219
+    // See https://github.com/SonarSource/sonar-dotnet/issues/1219
     public class EventAccessor
     {
         private event EventHandler privateEvent;

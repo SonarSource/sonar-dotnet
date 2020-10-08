@@ -85,7 +85,7 @@ namespace Tests.Diagnostics
         public void Foo_WhenFoo_ExpectsFoo() { }
     }
 
-    // See https://github.com/SonarSource/sonar-csharp/issues/1196
+    // See https://github.com/SonarSource/sonar-dotnet/issues/1196
     [TestFixture]
     public class TestSubFoo : TestFooBase // Compliant - base abstract and at least 1 test in base
     {

@@ -156,7 +156,7 @@ namespace Tests.Diagnostics
         void InitTowns(IDictionary<string, string> towns, string y)
         {
             towns.Add(y, "Boston"); // Secondary
-            towns[y] = "Paris"; // Noncompliant, https://github.com/SonarSource/sonar-csharp/issues/1908
+            towns[y] = "Paris"; // Noncompliant, https://github.com/SonarSource/sonar-dotnet/issues/1908
         }
 
         void MemberBinding(IDictionary<string, string> dictionary)
@@ -205,7 +205,7 @@ namespace Tests.Diagnostics
 
         public Dictionary<string, string> Map { get; }
 
-        // See https://github.com/SonarSource/sonar-csharp/issues/1967
+        // See https://github.com/SonarSource/sonar-dotnet/issues/1967
         public void NullReference()
         {
             var act = new Action<int, int>((x, y) => x++);

@@ -53,7 +53,7 @@ namespace Tests.Diagnostics
         List<string> GenericList { get; set; } // Noncompliant
     }
 
-    // Ignore collections marked with DataMember attribute: https://github.com/SonarSource/sonar-csharp/issues/795
+    // Ignore collections marked with DataMember attribute: https://github.com/SonarSource/sonar-dotnet/issues/795
     [DataContract]
     public class Message
     {

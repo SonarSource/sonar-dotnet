@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -72,7 +72,7 @@ public class HttpApplication1 : System.Web.HttpApplication
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldBeStatic_InvalidCode() =>
-            // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-csharp/issues/819
+            // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-dotnet/issues/819
             Verifier.VerifyCSharpAnalyzer(@"
 public class Class7
 {

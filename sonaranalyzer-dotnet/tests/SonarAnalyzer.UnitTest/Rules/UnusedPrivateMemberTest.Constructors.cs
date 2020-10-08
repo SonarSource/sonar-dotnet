@@ -114,7 +114,7 @@ public class Inheritance
         public DerivedClass1() : base() { }
     }
 
-    // https://github.com/SonarSource/sonar-csharp/issues/1398
+    // https://github.com/SonarSource/sonar-dotnet/issues/1398
     private abstract class BaseClass2
     {
         protected BaseClass2() { var x = 5; }

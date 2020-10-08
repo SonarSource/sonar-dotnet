@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -210,7 +210,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 // Because of partial classes we cannot always rely on the current semantic model.
-                // See issue: https://github.com/SonarSource/sonar-csharp/issues/690
+                // See issue: https://github.com/SonarSource/sonar-dotnet/issues/690
                 var disposeMethodSymbol = disposeMethod.SyntaxTree.GetSemanticModelOrDefault(this.semanticModel)
                     ?.GetDeclaredSymbol(disposeMethod);
                 if (disposeMethodSymbol == null)

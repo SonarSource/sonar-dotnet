@@ -61,7 +61,7 @@ namespace Tests.Diagnostics
         public void Foo_WhenFoo_ExpectsFoo() { }
     }
 
-    // See https://github.com/SonarSource/sonar-csharp/issues/1196
+    // See https://github.com/SonarSource/sonar-dotnet/issues/1196
     [TestClass]
     public class TestSubFoo : TestFooBase // Compliant - base abstract and at least 1 test in base
     {
@@ -73,7 +73,7 @@ namespace TestSetupAndCleanupAttributes
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    // Regression tests for Bug 1486: https://github.com/SonarSource/sonar-csharp/issues/1486
+    // Regression tests for Bug 1486: https://github.com/SonarSource/sonar-dotnet/issues/1486
     // Don't raise for classes that test setup or cleanup attributes
 
     [TestClass]
