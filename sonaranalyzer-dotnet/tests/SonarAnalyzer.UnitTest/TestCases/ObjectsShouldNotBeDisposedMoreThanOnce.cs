@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Tests.Diagnostics
 {
@@ -45,6 +46,22 @@ namespace Tests.Diagnostics
             var a = new[] { new Disposable() };
             a[0].Dispose();
             a[0].Dispose(); // Compliant, we don't handle arrays
+        }
+
+        public void Dispose_Stream_LeaveOpenFalse()
+        {
+            using (MemoryStream memoryStream = new MemoryStream()) // Compliant
+            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: false))
+            {
+            }
+        }
+
+        public void Dispose_Stream_LeaveOpenTrue()
+        {
+            using (MemoryStream memoryStream = new MemoryStream()) // Compliant
+            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: true))
+            {
+            }
         }
 
         public void Disposed_Using_WithDeclaration()
