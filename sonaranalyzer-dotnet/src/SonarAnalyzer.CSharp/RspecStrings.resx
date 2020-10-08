@@ -8534,10 +8534,10 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S3966_Description" xml:space="preserve">
-    <value>A proper implementation of IDisposable.Dispose should allow for it to be called multiple times on the same object, however this is not guaranteed and could result in an exception being thrown.</value>
+    <value>Disposing an object twice, either with the using keyword or by calling Dispose directly, in the same method is at best confusing and at worst error-prone. The next developer might see only one of the Dispose/using and try to use an already-disposed object.</value>
   </data>
   <data name="S3966_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3966_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -8552,7 +8552,7 @@
     <value>Major</value>
   </data>
   <data name="S3966_Tags" xml:space="preserve">
-    <value>pitfall</value>
+    <value>confusing,pitfall</value>
   </data>
   <data name="S3966_Title" xml:space="preserve">
     <value>Objects should not be disposed more than once</value>

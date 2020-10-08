@@ -1,7 +1,11 @@
-<p>A proper implementation of <code>IDisposable.Dispose</code> should allow for it to be called multiple times on the same object, however this is not
-guaranteed and could result in an exception being thrown.</p>
-<p>It is best not to rely on this behavior and therefore make sure an object is disposed only once on all execution paths. This is particularly true
-when dealing with nested <code>using</code> statements.</p>
+<p>Disposing an object twice, either with the <code>using</code> keyword or by calling <code>Dispose</code> directly, in the same method is at best
+confusing and at worst error-prone. The next developer might see only one of the <code>Dispose</code>/<code>using</code> and try to use an
+already-disposed object.</p>
+<p>In addition, even if <a href="https://docs.microsoft.com/en-us/dotnet/api/system.idisposable.dispose?view=netcore-3.1">the documentation of
+<code>Disposable</code></a> explicitly states that calling the <code>Dispose</code> method multiple times should not throw an exception, some
+implementation still do it. Thus it is safer to not dispose an object twice when possible.</p>
+<p>This rule raises an issue when, in the same method, the <code>Dispose</code> method is explicitly called twice on the same object, or when
+<code>using</code> is used with a direct call to <code>Dispose()</code>.</p>
 <h2>Noncompliant Code Examples</h2>
 <pre>
 using (var d = new Disposable()) // Noncompliant
