@@ -169,7 +169,7 @@
     <value>Critical</value>
   </data>
   <data name="S1006_Tags" xml:space="preserve">
-    <value>pitfall</value>
+    <value>cppcoreguidelines,pitfall</value>
   </data>
   <data name="S1006_Title" xml:space="preserve">
     <value>Method overrides should not change parameter defaults</value>
@@ -769,7 +769,7 @@
     <value>Major</value>
   </data>
   <data name="S112_Tags" xml:space="preserve">
-    <value>cwe,error-handling</value>
+    <value>cppcoreguidelines,cwe,error-handling</value>
   </data>
   <data name="S112_Title" xml:space="preserve">
     <value>General exceptions should never be thrown</value>
@@ -1117,7 +1117,7 @@
     <value>Minor</value>
   </data>
   <data name="S1155_Tags" xml:space="preserve">
-    <value>clumsy</value>
+    <value>cppcoreguidelines,clumsy</value>
   </data>
   <data name="S1155_Title" xml:space="preserve">
     <value>"Any()" should be used to test for emptiness</value>
@@ -10496,7 +10496,7 @@
     <value>Blocker</value>
   </data>
   <data name="S4426_Tags" xml:space="preserve">
-    <value>cwe,owasp-a9,privacy,owasp-a3</value>
+    <value>cwe,privacy,owasp-a6,owasp-a3</value>
   </data>
   <data name="S4426_Title" xml:space="preserve">
     <value>Cryptographic keys should be robust</value>
@@ -10736,7 +10736,7 @@
     <value>Minor</value>
   </data>
   <data name="S4507_Tags" xml:space="preserve">
-    <value>cwe,error-handling,user-experience,owasp-a3</value>
+    <value>cwe,error-handling,debug,user-experience,owasp-a3</value>
   </data>
   <data name="S4507_Title" xml:space="preserve">
     <value>Delivering code in production with debug features activated is security-sensitive</value>
@@ -11198,7 +11198,7 @@
     <value>Critical</value>
   </data>
   <data name="S5042_Tags" xml:space="preserve">
-    <value>cwe,owasp-a5</value>
+    <value>cwe,owasp-a6,owasp-a5</value>
   </data>
   <data name="S5042_Title" xml:space="preserve">
     <value>Expanding archive files is security-sensitive</value>
