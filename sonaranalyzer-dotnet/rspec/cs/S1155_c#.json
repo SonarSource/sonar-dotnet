@@ -7,7 +7,6 @@
     "constantCost": "2min"
   },
   "tags": [
-    "cppcoreguidelines",
     "clumsy"
   ],
   "defaultSeverity": "Minor",

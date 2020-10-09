@@ -169,7 +169,7 @@
     <value>Critical</value>
   </data>
   <data name="S1006_Tags" xml:space="preserve">
-    <value>cppcoreguidelines,pitfall</value>
+    <value>pitfall</value>
   </data>
   <data name="S1006_Title" xml:space="preserve">
     <value>Method overrides should not change parameter defaults</value>
@@ -769,7 +769,7 @@
     <value>Major</value>
   </data>
   <data name="S112_Tags" xml:space="preserve">
-    <value>cppcoreguidelines,cwe,error-handling</value>
+    <value>cwe,error-handling</value>
   </data>
   <data name="S112_Title" xml:space="preserve">
     <value>General exceptions should never be thrown</value>
@@ -1117,7 +1117,7 @@
     <value>Minor</value>
   </data>
   <data name="S1155_Tags" xml:space="preserve">
-    <value>cppcoreguidelines,clumsy</value>
+    <value>clumsy</value>
   </data>
   <data name="S1155_Title" xml:space="preserve">
     <value>"Any()" should be used to test for emptiness</value>
