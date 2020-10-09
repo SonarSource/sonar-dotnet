@@ -9,6 +9,7 @@
   "tags": [
     "cwe",
     "error-handling",
+    "debug",
     "user-experience",
     "owasp-a3"
   ],
