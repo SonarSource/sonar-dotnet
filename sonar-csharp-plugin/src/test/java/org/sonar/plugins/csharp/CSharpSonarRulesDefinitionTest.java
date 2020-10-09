@@ -82,6 +82,6 @@ public class CSharpSonarRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:326", "owaspTop10:a3", "owaspTop10:a9");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:326", "owaspTop10:a3", "owaspTop10:a6");
   }
 }
