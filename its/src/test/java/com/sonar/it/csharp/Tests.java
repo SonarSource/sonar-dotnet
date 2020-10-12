@@ -52,6 +52,7 @@ import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
   CoverageTest.class,
   DoNotAnalyzeTestFilesTest.class,
   EnsureAllTestsRunTest.class,
+  ExternalIssuesTest.class,
   MetricsIncludeHeaderCommentTest.class,
   MetricsTest.class,
   MultipleProjectsTest.class,
