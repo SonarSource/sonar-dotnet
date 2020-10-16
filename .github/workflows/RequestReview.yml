@@ -1,0 +1,102 @@
+name: Request review
+
+on:
+  pull_request:
+    types: ["review_requested"]
+
+jobs:
+    assign_and_move_card:
+        name: Assign issue to reviewer and move Kanban card
+        runs-on: ubuntu-latest
+
+        steps:
+            # https://github.com/actions/github-script
+            - uses: actions/github-script@v3
+              with:
+                    github-token: ${{secrets.GITHUB_TOKEN}}
+                    script: |
+                        const toDoColumn = 4971951;
+                        const inProgressColumn = 4971952;
+                        const reviewInProgressColumn = 4971953;
+                        const reviewApprovedColumn = 4971954;
+                        const doneColumn = 4971955;
+                        //
+                        async function getIssue(issue_number) {
+                            try {
+                                return (await github.issues.get({
+                                    owner: context.repo.owner,
+                                    repo: context.repo.repo,
+                                    issue_number
+                                })).data;
+                            }
+                            catch{
+                                console.log("Issue not found: #" + issue_number);
+                                return null;
+                            }
+                        }
+                        //
+                        async function findCard(content_url) {
+                            // Columns are searched from the most probable one
+                            const allColumns = [reviewInProgressColumn, reviewApprovedColumn, inProgressColumn, toDoColumn, doneColumn];
+                            for (let i = 0; i < allColumns.length; i++) {
+                                let cards = await github.projects.listCards({ column_id: allColumns[i] });
+                                let card = cards.data.find(x => x.content_url == content_url);
+                                if (card) {
+                                    return card;
+                                }
+                            }
+                            console.log("Card not found for: " + content_url);
+                            return null;
+                        }
+                        //
+                        async function processIssue(issue) {
+                            const oldAssignees = issue.assignees.map(x => x.login);
+                            if (oldAssignees.length) {
+                                console.log("Removing assignees: " + oldAssignees.join(", "));
+                                github.issues.removeAssignees({
+                                    owner: context.repo.owner,
+                                    repo: context.repo.repo,
+                                    issue_number: issue.number,
+                                    assignees: oldAssignees
+                                });
+                            }
+                            console.log("Assigning to: " + context.payload.requested_reviewer.login);
+                            github.issues.addAssignees({
+                                owner: context.repo.owner,
+                                repo: context.repo.repo,
+                                issue_number: issue.number,
+                                assignees: [context.payload.requested_reviewer.login]
+                            });
+                            const card = await findCard(issue.url);
+                            if (card) {
+                                console.log("Moving card");
+                                github.projects.moveCard({ card_id: card.id, position: "bottom", column_id: reviewInProgressColumn });
+                            } else if (issue.pull_request) {
+                                console.log("Creating PR card");
+                                github.projects.createCard({ column_id: reviewInProgressColumn, content_id: context.payload.pull_request.id, content_type: "PullRequest" });
+                            } else {
+                                console.log("Creating Issue card");
+                                github.projects.createCard({ column_id: reviewInProgressColumn, content_id: issue.id, content_type: "Issue" });
+                            }
+                        }
+                        //
+                        let processPR = true;
+                        const matches = context.payload.pull_request.body.match(/Fixes\s*#\d+/gi);
+                        if (matches) {
+                            for (let i = 0; i < matches.length; i++) {
+                                console.log("Processing linked issue: " + matches[i]);
+                                let linkedIssue = await getIssue(matches[i].split("#")[1]);
+                                if (linkedIssue) {
+                                    processPR = false;
+                                    processIssue(linkedIssue);
+                                }
+                            }
+                        }
+                        if (processPR) {
+                            console.log("Processing PR: #" + context.payload.number);
+                            const issue = await getIssue(context.payload.number);
+                            if (issue) {
+                                processIssue(issue);
+                            }
+                        }
+                        console.log("Done");
