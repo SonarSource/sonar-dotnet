@@ -300,5 +300,16 @@ namespace Tests.Diagnostics
             var flag = true; // Noncompliant FP
             (flag, tmp) = (false, 5);
         }
+
+        public struct StructWithImplicitOperator
+        {
+            public static implicit operator StructWithImplicitOperator(int value) { return new StructWithImplicitOperator(); }
+        }
+
+        public StructWithImplicitOperator ImplicitOperator()
+        {
+            StructWithImplicitOperator x = 1; // Noncompliant FP
+            return x;
+        }
     }
 }
