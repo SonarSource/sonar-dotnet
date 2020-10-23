@@ -73,7 +73,6 @@ jobs:
             }
             //
             async function processIssue(issue) {
-
                 removeAssignees(issue);
                 addAssignee(issue, context.payload.requested_reviewer.login);
                 const card = await findCard(issue.url);
