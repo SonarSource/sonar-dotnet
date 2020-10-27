@@ -62,12 +62,13 @@ try {
     Write-Host "Bin folder to use: $binPath"
     Write-Host "MSBuild: ${msbuildVersion}"
 
+    $buildTarget = "Rebuild"
     if ($restore) {
-        Restore-Packages $msbuildVersion $solutionName
+        $buildTarget = "Restore,Rebuild"
     }
 
     if ($build) {
-        Invoke-MSBuild $msbuildVersion $solutionName `
+        Invoke-MSBuild $msbuildVersion $solutionName /t:"$buildTarget" `
             /consoleloggerparameters:Summary `
             /m `
             /p:configuration=$buildConfiguration `
