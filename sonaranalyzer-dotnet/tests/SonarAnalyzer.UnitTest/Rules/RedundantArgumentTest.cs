@@ -34,8 +34,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantArgument() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantArgument.cs",
                                     new RedundantArgument(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+#if NETFRAMEWORK
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                options: ParseOptionsHelper.FromCSharp8);
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]

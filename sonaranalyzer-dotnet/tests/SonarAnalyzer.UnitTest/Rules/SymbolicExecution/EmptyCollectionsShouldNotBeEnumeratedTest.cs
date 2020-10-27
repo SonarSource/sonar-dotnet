@@ -42,8 +42,12 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             Verifier.VerifyAnalyzer(
                 @"TestCases\EmptyCollectionsShouldNotBeEnumerated.cs",
                 runner,
-                ParseOptionsHelper.FromCSharp8,
+#if NETFRAMEWORK
+                options: ParseOptionsHelper.FromCSharp8,
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                options: ParseOptionsHelper.FromCSharp8);
+#endif
         }
     }
 }

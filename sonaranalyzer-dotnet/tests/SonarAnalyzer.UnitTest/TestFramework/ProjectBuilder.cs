@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -64,8 +64,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public Document FindDocument(string name) =>
             Project.Documents.Single(d => d.Name == name);
 
-        public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references) =>
-            FromProject(Project.AddMetadataReferences(references ?? Enumerable.Empty<MetadataReference>()));
+        public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
+        {
+            var existingReferences = Project.MetadataReferences;
+            IEnumerable<MetadataReference> deduplicated;
+            if (references == null)
+            {
+                deduplicated = Enumerable.Empty<MetadataReference>();
+            }
+            else
+            {
+                deduplicated = references.Where(mr => !existingReferences.Contains(mr)).GroupBy(x => x.Display).Select(g => g.First()).ToHashSet();
+            }
+            return FromProject(Project.AddMetadataReferences(deduplicated));
+        }
 
         public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>
             FromProject(Project.AddProjectReference(new ProjectReference(getProjectId(GetSolution()))));
