@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'RelatedAuthors' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsAndNullability\Program.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  26,
+"endLine":  43,
+"endColumn":  40
+}
+}
+}
+]
+}

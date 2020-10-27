@@ -4,7 +4,7 @@
 "id":  "S1121",
 "message":  "Extract the assignment of 'LastName' from this expression.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  54,

@@ -4,7 +4,7 @@
 "id":  "S3251",
 "message":  "Supply an implementation for this partial method.",
 "location":  {
-"uri":  "sources\Net5\ExtendingPartial.cs",
+"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
 "region":  {
 "startLine":  6,
 "startColumn":  9,

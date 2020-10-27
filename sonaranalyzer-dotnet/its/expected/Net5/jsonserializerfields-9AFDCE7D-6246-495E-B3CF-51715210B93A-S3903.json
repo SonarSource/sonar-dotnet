@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'Forecast' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  14,
+"endLine":  22,
+"endColumn":  22
+}
+}
+}
+]
+}

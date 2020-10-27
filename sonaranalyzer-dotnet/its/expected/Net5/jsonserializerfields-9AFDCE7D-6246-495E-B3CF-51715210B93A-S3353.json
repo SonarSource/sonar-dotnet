@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'json'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  5,
+"endLine":  4,
+"endColumn":  9
+}
+}
+}
+]
+}

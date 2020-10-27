@@ -4,7 +4,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\AttributesOnLocalFunctions.cs",
+"uri":  "sources\Net5\Net5\AttributesOnLocalFunctions.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  47,
@@ -30,7 +30,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Main.cs",
+"uri":  "sources\Net5\Net5\Main.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  26,

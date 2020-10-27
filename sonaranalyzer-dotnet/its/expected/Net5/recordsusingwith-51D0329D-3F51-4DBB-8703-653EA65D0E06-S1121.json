@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'RemainingCapacityPercentage' from this expression.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsUsingWith\Program.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  72,
+"endLine":  9,
+"endColumn":  73
+}
+}
+}
+]
+}

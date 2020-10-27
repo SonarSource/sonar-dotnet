@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2013' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsAndNullability\Program.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  53,
+"endLine":  15,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2015' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsAndNullability\Program.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  37,
+"endLine":  16,
+"endColumn":  41
+}
+}
+}
+]
+}

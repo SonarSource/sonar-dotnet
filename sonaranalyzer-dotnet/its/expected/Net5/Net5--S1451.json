@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\AttributesOnLocalFunctions.cs",
+"uri":  "sources\Net5\Net5\AttributesOnLocalFunctions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\CovariantReturn.cs",
+"uri":  "sources\Net5\Net5\CovariantReturn.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\ExtendingPartial.cs",
+"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\ExtensionGetEnumerator.cs",
+"uri":  "sources\Net5\Net5\ExtensionGetEnumerator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\FunctionPointers.cs",
+"uri":  "sources\Net5\Net5\FunctionPointers.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\InitOnlyProperties.cs",
+"uri":  "sources\Net5\Net5\InitOnlyProperties.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\Main.cs",
+"uri":  "sources\Net5\Net5\Main.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\ModuleInitializers.cs",
+"uri":  "sources\Net5\Net5\ModuleInitializers.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\NativeInts.cs",
+"uri":  "sources\Net5\Net5\NativeInts.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\ParameterValidation.cs",
+"uri":  "sources\Net5\Net5\ParameterValidation.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\RelaxRefPartialOrder.cs",
+"uri":  "sources\Net5\Net5\RelaxRefPartialOrder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\SkipLocalsInit.cs",
+"uri":  "sources\Net5\Net5\SkipLocalsInit.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\StaticLambdas.cs",
+"uri":  "sources\Net5\Net5\StaticLambdas.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\TargetTypedConditionals.cs",
+"uri":  "sources\Net5\Net5\TargetTypedConditionals.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\TargetTypedNew.cs",
+"uri":  "sources\Net5\Net5\TargetTypedNew.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

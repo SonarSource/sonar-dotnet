@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Net5\ExtendingPartial.cs",
+"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  63,

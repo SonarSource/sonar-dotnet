@@ -5,7 +5,7 @@
 "message":  " Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  29,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  38,

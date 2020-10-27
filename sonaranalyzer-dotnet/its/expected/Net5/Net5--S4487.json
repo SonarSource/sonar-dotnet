@@ -4,7 +4,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field 'list' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\Net5\TargetTypedNew.cs",
+"uri":  "sources\Net5\Net5\TargetTypedNew.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  27,

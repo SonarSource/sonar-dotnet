@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'LoginResourceClass' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsVsClasses\Program.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  14,
+"endLine":  26,
+"endColumn":  32
+}
+}
+}
+]
+}

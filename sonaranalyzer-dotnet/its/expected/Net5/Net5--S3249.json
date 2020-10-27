@@ -4,7 +4,7 @@
 "id":  "S3249",
 "message":  "Remove this 'base' call to 'object.GetHashCode', which is directly based on the object reference.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  56,

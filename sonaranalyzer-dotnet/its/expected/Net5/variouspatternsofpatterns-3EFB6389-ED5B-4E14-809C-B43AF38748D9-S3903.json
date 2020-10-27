@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'UserManager' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  14,
+"endLine":  73,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'AccessType' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  13,
+"endLine":  120,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'ContentType' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  13,
+"endLine":  128,
+"endColumn":  24
+}
+}
+}
+]
+}

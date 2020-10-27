@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'serviceURL'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\GetWeatherForecastWithRecords\Program.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  8,
+"endLine":  5,
+"endColumn":  18
+}
+}
+}
+]
+}
