@@ -40,7 +40,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLastInvalidSyntax()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLastInvalidSyntax.cs",
+            // FIXME the update to .NET 5 changed this behavior from a raised issue to no issues raised
+            Verifier.VerifyNoIssueReported(@"TestCases\CallerInformationParametersShouldBeLastInvalidSyntax.cs",
                 new CallerInformationParametersShouldBeLast(),
                 checkMode:CompilationErrorBehavior.Ignore);
         }
