@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,7 +31,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DisposableMemberInNonDisposableClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs",
                                     new DisposableMemberInNonDisposableClass(),
                                     ParseOptionsHelper.FromCSharp8);
@@ -63,7 +62,7 @@ namespace Namespace
         }
     }
 
-    public class C1
+    public class C1 // Noncompliant, needs to implement IDisposable or IAsyncDisposable
     {
         private IAsyncDisposable disposable;
 
