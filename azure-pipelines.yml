@@ -60,6 +60,20 @@ stages:
           Write-Host "##vso[task.setvariable variable=SONAR_PROJECT_VERSION;]$sonarProjectVersion"
         displayName: 'Read Sonar project version from the versions.props file'
 
+      - powershell: |
+          cd sonaranalyzer-dotnet
+          $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
+
+          Write-Host "Remove .Net 5 target for UnitTest project"
+
+          ((Get-Content -Path $testProjFileName -raw) -Replace "net48;netcoreapp3.1;net5.0","net48;netcoreapp3.1") | Set-Content -Path $testProjFileName
+
+          Write-Host "Show test project after we modified the target frameworks to exclude net5"
+          Get-Content -Path $testProjFileName
+
+          cd ..
+        displayName: 'Exclude net5 from the main build'
+
       - task: VSBuild@1
         displayName: 'Set BranchName, Sha1 and BuildNumber'
         inputs:
@@ -228,10 +242,7 @@ stages:
 
           $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
 
-          Write-Host "Add .Net 5 target for UnitTest project"
-          ((Get-Content -Path $testProjFileName -raw) -Replace "net48;netcoreapp3.1","net48;netcoreapp3.1;net5") | Set-Content -Path $testProjFileName
-
-          Write-Host "Show test project after we modified the target frameworks to also include net5"
+          Write-Host "Show test project"
           Get-Content -Path $testProjFileName
 
           Write-Host "Build UnitTest project"

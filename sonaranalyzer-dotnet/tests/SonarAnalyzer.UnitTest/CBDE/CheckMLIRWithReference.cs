@@ -42,14 +42,16 @@ namespace SonarAnalyzer.UnitTest.CBDE
         public void TestAssignToLocalVarAndParam()
         {
             var code = @"
-void Func(int i) {
-    var j = 12;
-    j = j + 1;
-    i = i + 1;
+class Foo {
+    void Func(int i) {
+        var j = 12;
+        j = j + 1;
+        i = i + 1;
+    }
 }
 ";
             var expected = @"
-func @_$invalid$global$code$.Func$int$(%arg0: i32) {
+func @_Foo.Func$int$(%arg0: i32) {
   %0 = cbde.alloca i32
   cbde.store %arg0, %0 : memref<i32>
   br ^bb1
@@ -77,21 +79,23 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
         public void TestBitwiseAndOrXor()
         {
             var code = @"
-void Func(int i) {
-    var j = 12;
+class Foo {
+    void Func(int i) {
+        var j = 12;
 
-    j = j & i;
-    j &= i;
+        j = j & i;
+        j &= i;
 
-    j = j | i;
-    j |= i;
+        j = j | i;
+        j |= i;
 
-    j = j ^ i;
-    j ^= i;
+        j = j ^ i;
+        j ^= i;
+    }
 }
 ";
             var expected = @"
-func @_$invalid$global$code$.Func$int$(%arg0: i32) {
+func @_Foo.Func$int$(%arg0: i32) {
   %0 = cbde.alloca i32
   cbde.store %arg0, %0 : memref<i32>
   br ^bb1
@@ -135,21 +139,23 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
         public void MultiplicationDivisionModulo()
         {
             var code = @"
-void Func(int i) {
-    var j = 12;
+class Foo {
+    void Func(int i) {
+        var j = 12;
 
-    j = j * i;
-    j *= i;
+        j = j * i;
+        j *= i;
 
-    j = j / i;
-    j /= i;
+        j = j / i;
+        j /= i;
 
-    j = j % i;
-    j %= i;
+        j = j % i;
+        j %= i;
+    }
 }
 ";
             var expected = @"
-func @_$invalid$global$code$.Func$int$(%arg0: i32) {
+func @_Foo.Func$int$(%arg0: i32) {
   %0 = cbde.alloca i32
   cbde.store %arg0, %0 : memref<i32>
   br ^bb1
@@ -193,16 +199,18 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
         public void LeftRightShift()
         {
             var code = @"
-void f( int i )
-{
-    i << 1;
-    i <<= 2;
-    i >> 3;
-    i >>= 4;
+class Foo {
+    void f( int i )
+    {
+        i << 1;
+        i <<= 2;
+        i >> 3;
+        i >>= 4;
+    }
 }
 ";
             var expected = @"
-func @_$invalid$global$code$.f$int$(%arg0: i32) {
+func @_Foo.f$int$(%arg0: i32) {
   %0 = cbde.alloca i32
   cbde.store %arg0, %0 : memref<i32>
   br ^bb1
@@ -310,16 +318,18 @@ func @_A.g$int$(%arg0: i32) {
         public void Int32_Constant()
         {
             var code = @"
-void Func() {
-    const int Value = 42;
-    var a = int.MaxValue;
-    var b = int.MinValue;
-    var c = System.Int32.MaxValue;
-    var d = Value;
+class Foo {
+    void Func() {
+        const int Value = 42;
+        var a = int.MaxValue;
+        var b = int.MinValue;
+        var c = System.Int32.MaxValue;
+        var d = Value;
+    }
 }
 ";
             var expected = @"
-func @_$invalid$global$code$.Func$$() {
+func @_Foo.Func$$() {
   br ^bb1
 ^bb1:	// pred: ^bb0
   %c42_i32 = constant 42 : i32

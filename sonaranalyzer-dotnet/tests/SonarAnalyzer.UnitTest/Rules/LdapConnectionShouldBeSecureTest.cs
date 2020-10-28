@@ -35,8 +35,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void LdapConnectionsShouldBeSecure() =>
             Verifier.VerifyAnalyzer(@"TestCases\LdapConnectionShouldBeSecure.cs",
                 new LdapConnectionShouldBeSecure(),
-                additionalReferences: MetadataReferenceFacade.GetSystemDirectoryServices()
-                    .Concat(NuGetMetadataReference.NETStandardV2_1_0),
+#if NETFRAMEWORK
+                additionalReferences: MetadataReferenceFacade.GetSystemDirectoryServices().Concat(NuGetMetadataReference.NETStandardV2_1_0),
+#else
+                additionalReferences: MetadataReferenceFacade.GetSystemDirectoryServices(),
+#endif
                 options: ParseOptionsHelper.FromCSharp8);
     }
 }
