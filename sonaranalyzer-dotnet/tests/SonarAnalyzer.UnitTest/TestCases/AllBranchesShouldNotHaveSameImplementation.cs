@@ -6,7 +6,8 @@ namespace Tests.Diagnostics
     {
         public void IfElseCases(int b, int c)
         {
-            if (b == 0)
+            if (b == 0)  // Noncompliant {{Remove this conditional structure or edit its code blocks so that they're not all the same.}}
+//          ^^
             {
                 DoSomething();
             }

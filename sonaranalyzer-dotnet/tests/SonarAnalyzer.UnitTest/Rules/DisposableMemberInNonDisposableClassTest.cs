@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -63,7 +63,7 @@ namespace Namespace
         }
     }
 
-    public class C1 // Noncompliant, needs to implement IDisposable or IAsyncDisposable
+    public class C1
     {
         private IAsyncDisposable disposable;
 
