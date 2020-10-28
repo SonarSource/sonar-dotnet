@@ -50,7 +50,7 @@ public void Test_TypeThatCannotBeConst(int arg)
 // invalid code
 public void (int arg)
 {
-    int intVar = 1;
+    int intVar = 1; // Noncompliant
 }", new UnchangedLocalVariablesShouldBeConst(), checkMode: CompilationErrorBehavior.Ignore);
         }
     }

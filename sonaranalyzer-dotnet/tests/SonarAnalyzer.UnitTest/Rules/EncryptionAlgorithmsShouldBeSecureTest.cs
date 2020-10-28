@@ -44,8 +44,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
                 new CSharp.EncryptionAlgorithmsShouldBeSecure(),
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0
-                    .Concat(GetAdditionalReferences()));
+#if NETFRAMEWORK
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));
+#else
+                additionalReferences: GetAdditionalReferences());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -59,8 +62,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
                 new VisualBasic.EncryptionAlgorithmsShouldBeSecure(),
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0
-                    .Concat(GetAdditionalReferences()));
+#if NETFRAMEWORK
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));
+#else
+                additionalReferences: GetAdditionalReferences());
+#endif
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.GetSystemSecurityCryptography();

@@ -100,7 +100,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodShouldBeNamedAccordingToSynchronicity_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.CSharp8.cs",
                                     new MethodShouldBeNamedAccordingToSynchronicity(),
-                                    ParseOptionsHelper.FromCSharp8,
-                                    additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+#if NETFRAMEWORK
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+#endif
+                options: ParseOptionsHelper.FromCSharp8);
     }
 }

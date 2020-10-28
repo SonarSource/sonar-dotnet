@@ -21,7 +21,7 @@ namespace Tests.TestCases
         {
             Console.WriteLine(j);
         }
-        public int this[[DefaultParameterValue(5), Optional]int index] //Fixed
+        public int this[[DefaultParameterValue(5), Optional] int index] //Fixed
         {
             get { return 42; }
         }

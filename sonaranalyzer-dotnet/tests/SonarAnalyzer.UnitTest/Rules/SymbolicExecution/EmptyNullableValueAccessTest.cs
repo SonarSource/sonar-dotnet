@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -41,8 +41,10 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
             Verifier.VerifyAnalyzer(@"TestCases\EmptyNullableValueAccess.cs",
                 runner,
-                ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+#if NETFRAMEWORK
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+#endif
+                options: ParseOptionsHelper.FromCSharp8);
         }
     }
 }

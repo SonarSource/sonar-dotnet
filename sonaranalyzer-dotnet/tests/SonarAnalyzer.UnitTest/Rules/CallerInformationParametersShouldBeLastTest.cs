@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLastInvalidSyntax()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLastInvalidSyntax.cs",
+            Verifier.VerifyNoIssueReported(@"TestCases\CallerInformationParametersShouldBeLastInvalidSyntax.cs",
                 new CallerInformationParametersShouldBeLast(),
                 checkMode:CompilationErrorBehavior.Ignore);
         }

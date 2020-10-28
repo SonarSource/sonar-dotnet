@@ -51,8 +51,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MemberShouldBeStatic_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.FromCSharp8.cs",
                 new MemberShouldBeStatic(),
-                ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+#if NETFRAMEWORK
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+#endif
+                options: ParseOptionsHelper.FromCSharp8);
 
 #if NETFRAMEWORK // HttpApplication is available only on .Net Framework
         [TestMethod]

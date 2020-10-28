@@ -14,7 +14,9 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void VerifySymbolicExecutionRules() =>
             Verifier.VerifyAnalyzer(@"TestCases\SymbolicExecutionRules.cs",
                 new SymbolicExecutionRunner(),
-                ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+#if NETFRAMEWORK
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+#endif
+                options: ParseOptionsHelper.FromCSharp8);
     }
 }

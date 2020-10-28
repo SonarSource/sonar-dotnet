@@ -85,6 +85,7 @@ function New-NuGetPackages([string]$binPath) {
     }
 }
 
+# Used by the integration tests in sonaranalyzer-dotnet\its\regression-test.ps1
 function Restore-Packages (
     [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0", "16.0", "Current")][string]$msbuildVersion,
     [Parameter(Mandatory = $true, Position = 1)][string]$solutionPath) {
