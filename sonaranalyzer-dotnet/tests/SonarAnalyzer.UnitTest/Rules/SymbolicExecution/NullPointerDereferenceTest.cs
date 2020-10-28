@@ -88,11 +88,9 @@ public static class Utils
             Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp8.cs",
                 GetAnalyzer(),
 #if NETFRAMEWORK
-                options: ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                options: ParseOptionsHelper.FromCSharp8);
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
+                options: ParseOptionsHelper.FromCSharp8);
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             // Symbolic execution analyzers are run by the SymbolicExecutionRunner

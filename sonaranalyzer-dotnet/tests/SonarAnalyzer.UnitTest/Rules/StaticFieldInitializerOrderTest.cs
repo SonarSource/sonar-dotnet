@@ -41,11 +41,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 },
                 new StaticFieldInitializerOrder(),
 #if NETFRAMEWORK
-                options: ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                options: ParseOptionsHelper.FromCSharp8);
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
+                options: ParseOptionsHelper.FromCSharp8);
         }
     }
 }

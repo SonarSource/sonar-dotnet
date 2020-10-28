@@ -65,11 +65,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp8.cs",
                 new CS.MethodParameterUnused(),
 #if NETFRAMEWORK
-                options: ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                options: ParseOptionsHelper.FromCSharp8);
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
+                options: ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]

@@ -37,11 +37,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\InfiniteRecursion.cs",
                 new InfiniteRecursion(),
 #if NETFRAMEWORK
-                options: ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-#else
-                options: ParseOptionsHelper.FromCSharp8);
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
+                options: ParseOptionsHelper.FromCSharp8);
         }
     }
 }
