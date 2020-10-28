@@ -25,7 +25,6 @@ Usage: build.ps1
 [CmdletBinding(PositionalBinding = $false)]
 param (
     # Steps to execute
-    [switch]$restore = $false,
     [switch]$build = $false,
     [switch]$buildJava = $false,
     [switch]$coverage = $false,
@@ -62,13 +61,8 @@ try {
     Write-Host "Bin folder to use: $binPath"
     Write-Host "MSBuild: ${msbuildVersion}"
 
-    $buildTarget = "Rebuild"
-    if ($restore) {
-        $buildTarget = "Restore,Rebuild"
-    }
-
     if ($build) {
-        Invoke-MSBuild $msbuildVersion $solutionName /t:"$buildTarget" `
+        Invoke-MSBuild $msbuildVersion $solutionName /t:"Restore,Rebuild" `
             /consoleloggerparameters:Summary `
             /m `
             /p:configuration=$buildConfiguration `

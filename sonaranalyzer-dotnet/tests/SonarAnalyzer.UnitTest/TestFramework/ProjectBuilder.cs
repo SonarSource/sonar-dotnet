@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
             else
             {
-                deduplicated = references.Where(mr => !existingReferences.Contains(mr)).GroupBy(x => x.Display).Select(g => g.First()).ToHashSet();
+                deduplicated = references.Where(mr => !existingReferences.Contains(mr)).Distinct().ToHashSet();
             }
             return FromProject(Project.AddMetadataReferences(deduplicated));
         }

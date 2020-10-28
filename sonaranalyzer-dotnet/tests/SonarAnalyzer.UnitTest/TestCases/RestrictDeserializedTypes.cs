@@ -184,7 +184,7 @@ namespace Tests.Diagnostics
 
             var formatter2 = new BinaryFormatter();
             formatter2.Binder = condition switch {true => new UnsafeBinder(), false => new UnsafeBinderExpressionBody()};
-            formatter2.Deserialize(stream); // Compliant: FN - common type is SerializationBinder for which we don't know if it's safe or not.
+            formatter2.Deserialize(stream); // Noncompliant: common type is SerializationBinder for which we don't know if it's safe or not.
 
             var formatter3 = new BinaryFormatter();
             formatter3.Binder = condition switch {true => new SafeBinderStatementWithReturnNull(), false => new SafeBinderStatementWithReturnNull()};
