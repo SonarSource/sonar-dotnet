@@ -31,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NoPublicConstructor() =>
+        public void AbstractTypesShouldNotHaveConstructors() =>
             Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.cs", new AbstractTypesShouldNotHaveConstructors());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NoPublicConstructor_Records() =>
+        public void AbstractTypesShouldNotHaveConstructors_Records() =>
             Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.Records.cs", new AbstractTypesShouldNotHaveConstructors(),
                 options: ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NoPublicConstructor_TopLevelStatements() =>
+        public void AbstractTypesShouldNotHaveConstructors_TopLevelStatements() =>
             Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs", new AbstractTypesShouldNotHaveConstructors(),
                 options: ParseOptionsHelper.FromCSharp9,
                 outputKind: OutputKind.ConsoleApplication);

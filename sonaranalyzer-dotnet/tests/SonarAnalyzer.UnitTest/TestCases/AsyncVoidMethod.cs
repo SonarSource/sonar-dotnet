@@ -45,10 +45,10 @@ namespace Tests.Diagnostics
         {
             await Task.Run(() => Console.WriteLine("test"));
         }
+
         private async void OnSuspending(object sender, ISuspendingEventArgs e)
         {
             await Task.Run(() => Console.WriteLine("test"));
         }
     }
 }
-
