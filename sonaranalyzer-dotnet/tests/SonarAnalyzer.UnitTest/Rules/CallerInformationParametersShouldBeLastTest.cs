@@ -38,6 +38,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void CallerInformationParametersShouldBeLast_CSharp9()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs",
+                new CallerInformationParametersShouldBeLast(),
+                options: ParseOptionsHelper.FromCSharp9);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLastInvalidSyntax()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\CallerInformationParametersShouldBeLastInvalidSyntax.cs",
