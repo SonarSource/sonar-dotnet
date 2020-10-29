@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,17 +32,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void VariableUnused_CS()
-        {
+        public void VariableUnused_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new CSharp.VariableUnused(), ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void VariableUnused_VB()
-        {
+        public void VariableUnused_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.CSharp9.cs", new CSharp.VariableUnused(), ParseOptionsHelper.FromCSharp9, checkMode: CompilationErrorBehavior.Ignore);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void VariableUnused_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.vb", new VisualBasic.VariableUnused());
-        }
     }
 }
 
