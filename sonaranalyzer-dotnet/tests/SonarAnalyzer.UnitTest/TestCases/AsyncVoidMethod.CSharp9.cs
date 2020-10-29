@@ -5,10 +5,11 @@ namespace Tests.Diagnostics
 {
     public class Foo : EventArgs { }
 
-    public class EventHandlerCases
+    public record EventHandlerCasesInRecord
     {
-        async void MyMethod() {  // Noncompliant {{Return 'Task' instead.}}
+        async void MyMethod() // Noncompliant {{Return 'Task' instead.}}
 //            ^^^^
+        {
             await Task.Run(() => Console.WriteLine("test"));
         }
 
@@ -29,28 +30,12 @@ namespace Tests.Diagnostics
 
         public event EventHandler<bool> MyEvent;
 
-        public EventHandlerCases()
+        public EventHandlerCasesInRecord()
         {
             MyEvent += EventHandlerCases_MyEvent;
         }
 
-        private async void EventHandlerCases_MyEvent(object sender, bool e)
-        {
-            await Task.Run(() => Console.WriteLine("test"));
-        }
-    }
-
-    public class UwpCases
-    {
-        // A lot of classes/interfaces in UWP do not inherit from EventArgs so we had to change the detection mechanism
-        // See issue https://github.com/SonarSource/sonar-dotnet/issues/704
-        private interface ISuspendingEventArgs { }
-
-        async void MyOtherMethod1(object o, ISuspendingEventArgs args)
-        {
-            await Task.Run(() => Console.WriteLine("test"));
-        }
-        private async void OnSuspending(object sender, ISuspendingEventArgs e)
+        private async void EventHandlerCases_MyEvent(object sender, bool e) // Noncompliant FP
         {
             await Task.Run(() => Console.WriteLine("test"));
         }

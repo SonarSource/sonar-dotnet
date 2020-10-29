@@ -36,6 +36,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
         }
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AsyncVoidMethod_CSharp9()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.CSharp9.cs", new AsyncVoidMethod(),
+                options: ParseOptionsHelper.FromCSharp9);
+        }
+
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]

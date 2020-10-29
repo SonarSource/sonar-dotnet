@@ -80,8 +80,8 @@ namespace SonarAnalyzer.Rules.CSharp
             HasAnyMsTestV1AllowedAttribute(methodSymbol);
 
         private static bool IsUsedAsEventHandler(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>()
-                .DescendantNodes()
+            methodDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>() is ClassDeclarationSyntax parentClass
+            && parentClass.DescendantNodes()
                 .OfType<AssignmentExpressionSyntax>()
                 .Where(aes => aes.IsKind(SyntaxKind.AddAssignmentExpression))
                 .Select(aes => aes.Right)
