@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -6,13 +7,20 @@ namespace Tests.Diagnostics
 
     public class EventHandlerCases
     {
-        async void MyMethod() { } // Noncompliant {{Return 'Task' instead.}}
+        async void MyMethod() {  // Noncompliant {{Return 'Task' instead.}}
 //            ^^^^
-        async void MyMethod(object sender, EventArgs args) { }
+            await Task.Run(() => Console.WriteLine("test"));
+        }
 
-        async void MyMethod1(object o, EventArgs e) { }
+        async void MyMethod(object sender, EventArgs args)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
 
-        async void MyMethod2(object o, Foo e) { }
+        async void MyMethod2(object o, Foo e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
 
         public event EventHandler<bool> MyEvent;
 
@@ -23,6 +31,7 @@ namespace Tests.Diagnostics
 
         private async void EventHandlerCases_MyEvent(object sender, bool e)
         {
+            await Task.Run(() => Console.WriteLine("test"));
         }
     }
 
@@ -32,7 +41,14 @@ namespace Tests.Diagnostics
         // See issue https://github.com/SonarSource/sonar-dotnet/issues/704
         private interface ISuspendingEventArgs { }
 
-        async void MyOtherMethod1(object o, ISuspendingEventArgs args) { }
-        private async void OnSuspending(object sender, ISuspendingEventArgs e) { }
+        async void MyOtherMethod1(object o, ISuspendingEventArgs args)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
+
+        private async void OnSuspending(object sender, ISuspendingEventArgs e)
+        {
+            await Task.Run(() => Console.WriteLine("test"));
+        }
     }
 }

@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            IEnumerable<CSharpParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
             IEnumerable<MetadataReference> additionalReferences = null)
         {
             var solution = SolutionBuilder
@@ -91,18 +91,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-            IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, checkMode, additionalReferences);
-        }
+                                          IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                          IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, checkMode, outputKind, additionalReferences);
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer[] diagnosticAnalyzers,
-            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-            IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, additionalReferences);
-        }
+                                          IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                          IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, outputKind, additionalReferences);
 
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths, UtilityAnalyzerBase diagnosticAnalyzer,
             string protobufPath, Action<IList<TMessage>> verifyProtobuf, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
@@ -134,14 +132,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         // project for enabling testing of different scenarios.
         public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
             IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyAnalyzer(paths, new []{ diagnosticAnalyzer}, options, checkMode, additionalReferences);
+            VerifyAnalyzer(paths, new []{ diagnosticAnalyzer}, options, checkMode, outputKind, additionalReferences);
 
         private static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer[] diagnosticAnalyzers,
             IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
             IEnumerable<MetadataReference> additionalReferences = null)
         {
-            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, additionalReferences);
+            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences);
 
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
