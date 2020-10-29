@@ -31,37 +31,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void AsyncVoidMethod()
-        {
+        public void AsyncVoidMethod() =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AsyncVoidMethod_CSharp9()
-        {
+        public void AsyncVoidMethod_CSharp9() =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.CSharp9.cs", new AsyncVoidMethod(),
                 options: ParseOptionsHelper.FromCSharp9);
-        }
 
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void AsyncVoidMethod_MsTestV2(string testFwkVersion)
-        {
+        public void AsyncVoidMethod_MsTestV2(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV2.cs",
                 new AsyncVoidMethod(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AsyncVoidMethod_MsTestV1()
-        {
+        public void AsyncVoidMethod_MsTestV1() =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
                 new AsyncVoidMethod(),
                 additionalReferences: NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
-        }
     }
 }

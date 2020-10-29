@@ -17,11 +17,6 @@ namespace Tests.Diagnostics
             await Task.Run(() => Console.WriteLine("test"));
         }
 
-        async void MyMethod1(object o, EventArgs e)
-        {
-            await Task.Run(() => Console.WriteLine("test"));
-        }
-
         async void MyMethod2(object o, Foo e)
         {
             await Task.Run(() => Console.WriteLine("test"));
@@ -56,3 +51,4 @@ namespace Tests.Diagnostics
         }
     }
 }
+

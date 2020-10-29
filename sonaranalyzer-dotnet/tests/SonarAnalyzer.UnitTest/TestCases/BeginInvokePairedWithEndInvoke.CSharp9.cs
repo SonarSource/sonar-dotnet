@@ -3,38 +3,21 @@ using System.Threading;
 
 namespace Tests.Diagnostics
 {
-    public delegate void AsyncMethodCaller(String name);
+    public delegate void AsyncMethodCaller(string name, int i);
 
     class Program
     {
-        static void Main(string[] args)
-        {
-            BeginInvokeAndEndInvokeOnDelegateWithoutCallback();
-        }
-
         private static void BeginInvokeOnDelegateWithLambdaCallback_DiscardParam()
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
-            caller.BeginInvoke("delegate", (_, _) => { }, null); // Noncompliant
+            // here the "_" is actually an identifier, not a discard parameter
+            caller.BeginInvoke("delegate", 1, (_) => { }, null); // Noncompliant
         }
 
-        private static void BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback1_DiscardParam()
+        private static void AsyncMethod(string msg, int i)
         {
-            var caller = new AsyncMethodCaller(AsyncMethod);
-            caller.BeginInvoke(name: "delegate", @object: null, callback: (_, _) => caller.EndInvoke(null)); // Compliant
+            Console.WriteLine($"AsyncMethod: {msg} {i}");
         }
 
-        private static void BeginInvokeOnDelegateWithDelegateCallback_DiscardParam()
-        {
-            var caller = new AsyncMethodCaller(AsyncMethod);
-            caller.BeginInvoke("delegate", delegate (IAsyncResult _, int _) { Console.WriteLine(); }, null); // Noncompliant
-        }
-
-        private static void BeginInvokeAndEndInvokeOnDelegateWithVariableCallback_DiscardParam()
-        {
-            var caller = new AsyncMethodCaller(AsyncMethod);
-            AsyncCallback callback = (_, _) => { caller.EndInvoke(null); };
-            caller.BeginInvoke("delegate", callback, null); // Compliant
-        }
     }
 }

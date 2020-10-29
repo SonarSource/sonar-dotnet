@@ -38,8 +38,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AesManagedShouldBeWithSecureMode_TargetTyped() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AesManagedShouldBeWithSecureMode.TargetTyped.cs",
+        public void AesManagedShouldBeWithSecureMode_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\AesManagedShouldBeWithSecureMode.CSharp9.cs",
                             new AesManagedShouldBeWithSecureMode(),
                             options: ParseOptionsHelper.FromCSharp9,
                             additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
