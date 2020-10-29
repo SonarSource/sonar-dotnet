@@ -43,10 +43,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         public static ImmutableArray<ParseOptions> BeforeCSharp7 { get; }
         public static ImmutableArray<ParseOptions> BeforeCSharp8 { get; }
+        public static ImmutableArray<ParseOptions> BeforeCSharp9 { get; }
 
         public static ImmutableArray<ParseOptions> FromCSharp6 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp7 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp8 { get; }
+        public static ImmutableArray<ParseOptions> FromCSharp9 { get; }
 
         private static ImmutableArray<ParseOptions> FromVisualBasic12 { get; }
         public static ImmutableArray<ParseOptions> FromVisualBasic14 { get; }
@@ -58,13 +60,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         static ParseOptionsHelper()
         {
+            var cs8 = CreateOptions(CSharp8);
             var cs7 = CreateOptions(CSharp7, CSharp7_1, CSharp7_2, CSharp7_3);
             var vb15 = CreateOptions(VisualBasic15, VisualBasic15_3, VisualBasic15_5);
 
             BeforeCSharp7 = CreateOptions(CSharp5).Concat(CreateOptions(CSharp6)).FilterByEnvironment();
             BeforeCSharp8 = BeforeCSharp7.Concat(cs7).FilterByEnvironment();
+            BeforeCSharp9 = BeforeCSharp8.Concat(cs8).FilterByEnvironment();
 
-            FromCSharp8 = CreateOptions(CSharp8).FilterByEnvironment();
+            FromCSharp9 = CreateOptions(CSharp9).FilterByEnvironment();
+            FromCSharp8 = cs8.Concat(FromCSharp9).FilterByEnvironment();
             FromCSharp7 = cs7.Concat(FromCSharp8).FilterByEnvironment();
             FromCSharp6 = CreateOptions(CSharp6).Concat(FromCSharp7).FilterByEnvironment();
 
@@ -92,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
             TestContextHelper.IsAzureDevOpsContext
                 ? options.ToImmutableArray()
-                : ImmutableArray.Create(options.Last());    // Use only the latest version for local test run and debug
+                : ImmutableArray.Create(options.Last()); // Use only the latest version for local test run and debug
 
         private static IEnumerable<ParseOptions> CreateOptions(params CS.LanguageVersion[] options) =>
             options.Select(x => new CS.CSharpParseOptions(x));

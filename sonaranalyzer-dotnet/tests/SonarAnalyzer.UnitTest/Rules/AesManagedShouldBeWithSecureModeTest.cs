@@ -35,5 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\AesManagedShouldBeWithSecureMode.cs",
                                     new AesManagedShouldBeWithSecureMode(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AesManagedShouldBeWithSecureMode_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\AesManagedShouldBeWithSecureMode.CSharp9.cs",
+                            new AesManagedShouldBeWithSecureMode(),
+                            options: ParseOptionsHelper.FromCSharp9,
+                            additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
+
     }
 }

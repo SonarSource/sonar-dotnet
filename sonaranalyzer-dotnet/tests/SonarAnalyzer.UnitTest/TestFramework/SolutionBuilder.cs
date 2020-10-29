@@ -42,17 +42,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             Solution = solution;
         }
 
-        public ProjectBuilder AddTestProject(AnalyzerLanguage language, bool createExtraEmptyFile = true)
-        {
-            return AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}.Tests", createExtraEmptyFile);
-        }
+        public ProjectBuilder AddTestProject(AnalyzerLanguage language, bool createExtraEmptyFile = true) =>
+            AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}.Tests", createExtraEmptyFile);
 
-        public ProjectBuilder AddProject(AnalyzerLanguage language, bool createExtraEmptyFile = true)
-        {
-            return AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}", createExtraEmptyFile);
-        }
+        public ProjectBuilder AddProject(AnalyzerLanguage language, bool createExtraEmptyFile = true, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
+            AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}", createExtraEmptyFile, outputKind);
 
-        private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, bool createExtraEmptyFile)
+        private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, bool createExtraEmptyFile, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
             var languageName = language == AnalyzerLanguage.CSharp
                 ? LanguageNames.CSharp
@@ -60,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var project = Solution.AddProject(projectName, projectName, languageName);
 
-            var compilationOptions = project.CompilationOptions.WithOutputKind(OutputKind.DynamicallyLinkedLibrary);
+            var compilationOptions = project.CompilationOptions.WithOutputKind(outputKind);
             if (languageName == LanguageNames.CSharp)
             {
                 compilationOptions = ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(true);
@@ -93,6 +89,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             FromSolution(new AdhocWorkspace().CurrentSolution);
 
         public static SolutionBuilder CreateSolutionFromPaths(IEnumerable<string> paths,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
             IEnumerable<MetadataReference> additionalReferences = null)
         {
             if (paths == null ||
@@ -108,7 +105,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
 
             var project = Create()
-                .AddProject(AnalyzerLanguage.FromPath(paths.First()))
+                .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
                 .AddDocuments(paths)
                 .AddReferences(additionalReferences);
 

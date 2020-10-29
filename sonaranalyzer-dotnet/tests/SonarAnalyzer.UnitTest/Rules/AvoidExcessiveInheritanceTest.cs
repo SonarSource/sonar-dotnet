@@ -30,26 +30,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveInheritance_DefaultValues()
-        {
+        public void AvoidExcessiveInheritance_DefaultValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_DefaultValues.cs",
                 new AvoidExcessiveInheritance());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveInheritance_CustomValuesFullyNamedFilteredClass()
-        {
+        public void AvoidExcessiveInheritance_DefaultValues_Records() =>
+            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_DefaultValues.Records.cs",
+                new AvoidExcessiveInheritance(), options: ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AvoidExcessiveInheritance_CustomValuesFullyNamedFilteredClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
                 new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.SecondSubClass" });
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredClass()
-        {
+        public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
                 new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubClass" });
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredRecord() =>
+            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.Records.cs",
+                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubRecord" },
+                options: ParseOptionsHelper.FromCSharp9);
+
     }
 }

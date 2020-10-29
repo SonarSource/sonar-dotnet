@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,9 +31,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NoPublicConstructor()
-        {
+        public void AbstractTypesShouldNotHaveConstructors() =>
             Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.cs", new AbstractTypesShouldNotHaveConstructors());
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AbstractTypesShouldNotHaveConstructors_Records() =>
+            Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.Records.cs", new AbstractTypesShouldNotHaveConstructors(),
+                options: ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AbstractTypesShouldNotHaveConstructors_TopLevelStatements() =>
+            Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs", new AbstractTypesShouldNotHaveConstructors(),
+                options: ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication);
+
     }
 }
