@@ -34,5 +34,22 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.cs", new AbstractTypesShouldNotHaveConstructors());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NoPublicConstructor_Records()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.Records.cs", new AbstractTypesShouldNotHaveConstructors(),
+                options: ParseOptionsHelper.FromCSharp9);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NoPublicConstructor_TopLevelStatements()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs", new AbstractTypesShouldNotHaveConstructors(),
+                options: ParseOptionsHelper.FromCSharp9, checkMode: CompilationErrorBehavior.Ignore);
+        }
+
     }
 }
