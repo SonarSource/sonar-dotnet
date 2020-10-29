@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  21,
+"endLine":  23,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  16,
+"endLine":  24,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  16,
+"endLine":  25,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  19,
+"endLine":  26,
+"endColumn":  26
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  43,
+"endLine":  91,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'c.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  39,
+"endLine":  93,
+"endColumn":  69
+}
+}
+}
+]
+}

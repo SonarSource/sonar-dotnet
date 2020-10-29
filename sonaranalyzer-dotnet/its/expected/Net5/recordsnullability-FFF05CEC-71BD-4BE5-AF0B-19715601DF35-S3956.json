@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsAndNullability\Program.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  12,
+"endLine":  39,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsAndNullability\Program.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  12,
+"endLine":  43,
+"endColumn":  25
+}
+}
+}
+]
+}

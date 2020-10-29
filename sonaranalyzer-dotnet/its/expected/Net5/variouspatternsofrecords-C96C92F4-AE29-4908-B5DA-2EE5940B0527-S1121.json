@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'Prop1' from this expression.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  32,
+"endLine":  5,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'Prop2' from this expression.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  45,
+"endLine":  5,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'Prop1' from this expression.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  32,
+"endLine":  12,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'Prop2' from this expression.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  45,
+"endLine":  12,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'Prop1' from this expression.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfRecords\Program.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  36,
+"endLine":  18,
+"endColumn":  37
+}
+}
+}
+]
+}

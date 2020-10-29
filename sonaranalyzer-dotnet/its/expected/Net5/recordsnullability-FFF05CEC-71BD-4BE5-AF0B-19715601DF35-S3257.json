@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsAndNullability\Program.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsAndNullability\Program.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  9,
+"endLine":  21,
+"endColumn":  15
+}
+}
+}
+]
+}

@@ -4,7 +4,7 @@
 "id":  "S3241",
 "message":  "Change return type to 'void'; not a single caller uses the returned value.",
 "location":  {
-"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  17,

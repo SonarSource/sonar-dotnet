@@ -4,7 +4,7 @@
 "id":  "S3400",
 "message":  "Remove this method and declare a constant for this value.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  21,

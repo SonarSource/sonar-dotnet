@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Reports' private.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerPreserveReference\Program.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  27,
+"endLine":  47,
+"endColumn":  34
+}
+}
+}
+]
+}

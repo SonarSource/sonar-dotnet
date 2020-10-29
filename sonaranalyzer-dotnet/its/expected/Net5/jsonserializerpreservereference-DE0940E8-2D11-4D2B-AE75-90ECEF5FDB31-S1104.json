@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerPreserveReference\Program.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  27,
+"endLine":  47,
+"endColumn":  34
+}
+}
+}
+]
+}

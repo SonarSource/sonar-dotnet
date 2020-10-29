@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2.20462262' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordWithStaticHelper\Program.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  69,
+"endLine":  15,
+"endColumn":  79
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerImmutableTypes\Program.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  40,
+"endLine":  6,
+"endColumn":  42
+}
+}
+}
+]
+}

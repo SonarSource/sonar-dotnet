@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'weight'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordWithStaticHelper\Program.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  11
+}
+}
+}
+]
+}

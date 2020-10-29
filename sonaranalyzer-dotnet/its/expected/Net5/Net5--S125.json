@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\CovariantReturn.cs",
+"uri":  "sources\Net5\Net5\CovariantReturn.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  5,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\CovariantReturn.cs",
+"uri":  "sources\Net5\Net5\CovariantReturn.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\ExtensionGetEnumerator.cs",
+"uri":  "sources\Net5\Net5\ExtensionGetEnumerator.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\FunctionPointers.cs",
+"uri":  "sources\Net5\Net5\FunctionPointers.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\ModuleInitializers.cs",
+"uri":  "sources\Net5\Net5\ModuleInitializers.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\ParameterValidation.cs",
+"uri":  "sources\Net5\Net5\ParameterValidation.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  9,
@@ -82,7 +82,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\RelaxRefPartialOrder.cs",
+"uri":  "sources\Net5\Net5\RelaxRefPartialOrder.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  5,
@@ -95,7 +95,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\StaticLambdas.cs",
+"uri":  "sources\Net5\Net5\StaticLambdas.cs",
 "region":  {
 "startLine":  6,
 "startColumn":  9,
@@ -108,7 +108,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\TargetTypedConditionals.cs",
+"uri":  "sources\Net5\Net5\TargetTypedConditionals.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  13,

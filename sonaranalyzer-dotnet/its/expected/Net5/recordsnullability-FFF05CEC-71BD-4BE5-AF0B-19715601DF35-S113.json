@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Program.cs'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsAndNullability\Program.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  62,
+"endLine":  46,
+"endColumn":  63
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'Employee' into a named namespace.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerPreserveReference\Program.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  14,
+"endLine":  38,
+"endColumn":  22
+}
+}
+}
+]
+}

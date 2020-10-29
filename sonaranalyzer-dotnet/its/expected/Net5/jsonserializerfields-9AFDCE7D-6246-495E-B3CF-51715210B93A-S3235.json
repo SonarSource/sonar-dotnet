@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  40,
+"endLine":  5,
+"endColumn":  42
+}
+}
+}
+]
+}

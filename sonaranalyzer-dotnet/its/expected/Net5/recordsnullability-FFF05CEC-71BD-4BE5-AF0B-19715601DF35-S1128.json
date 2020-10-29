@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsAndNullability\Program.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  1,
+"endLine":  3,
+"endColumn":  39
+}
+}
+}
+]
+}

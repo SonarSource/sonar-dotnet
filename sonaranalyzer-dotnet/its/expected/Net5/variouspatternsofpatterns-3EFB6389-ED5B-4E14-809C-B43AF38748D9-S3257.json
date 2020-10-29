@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  16,
+"endLine":  33,
+"endColumn":  23
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '55' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonDictionaryKeys\Program.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  30,
+"endLine":  25,
+"endColumn":  32
+}
+}
+}
+]
+}

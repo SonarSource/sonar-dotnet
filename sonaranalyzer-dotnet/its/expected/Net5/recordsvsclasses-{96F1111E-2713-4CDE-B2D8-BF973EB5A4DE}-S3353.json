@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'user'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsVsClasses\Program.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  9
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'password'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsVsClasses\Program.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'rememberMe'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsVsClasses\Program.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  5,
+"endLine":  7,
+"endColumn":  15
+}
+}
+}
+]
+}

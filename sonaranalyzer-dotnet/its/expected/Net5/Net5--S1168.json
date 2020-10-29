@@ -4,7 +4,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Net5\CovariantReturn.cs",
+"uri":  "sources\Net5\Net5\CovariantReturn.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  65,
@@ -17,7 +17,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Net5\CovariantReturn.cs",
+"uri":  "sources\Net5\Net5\CovariantReturn.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  62,
@@ -30,7 +30,7 @@
 "id":  "S1168",
 "message":  "Return an empty collection instead of null.",
 "location":  {
-"uri":  "sources\Net5\CovariantReturn.cs",
+"uri":  "sources\Net5\Net5\CovariantReturn.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  59,

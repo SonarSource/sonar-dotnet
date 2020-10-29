@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'DoNotOverrideMe' a static method.",
 "location":  {
-"uri":  "sources\Net5\CovariantReturn.cs",
+"uri":  "sources\Net5\Net5\CovariantReturn.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Consume' a static method.",
 "location":  {
-"uri":  "sources\Net5\CovariantReturn.cs",
+"uri":  "sources\Net5\Net5\CovariantReturn.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'TryParse' a static method.",
 "location":  {
-"uri":  "sources\Net5\ExtendingPartial.cs",
+"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  31,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net5\ExtensionGetEnumerator.cs",
+"uri":  "sources\Net5\Net5\ExtensionGetEnumerator.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net5\FunctionPointers.cs",
+"uri":  "sources\Net5\Net5\FunctionPointers.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'Bar' a static method.",
 "location":  {
-"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'NoOp' a static method.",
 "location":  {
-"uri":  "sources\Net5\LambdaDiscardParameters.cs",
+"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  34,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net5\NativeInts.cs",
+"uri":  "sources\Net5\Net5\NativeInts.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'TypePatterns' a static method.",
 "location":  {
-"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  24,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'RelationalPatterns' a static method.",
 "location":  {
-"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  24,
@@ -134,7 +134,7 @@
 "id":  "S2325",
 "message":  "Make 'LogicalPatterns' a static method.",
 "location":  {
-"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  24,
@@ -147,7 +147,7 @@
 "id":  "S2325",
 "message":  "Make 'NotPattern' a static method.",
 "location":  {
-"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  21,
@@ -173,7 +173,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  22,

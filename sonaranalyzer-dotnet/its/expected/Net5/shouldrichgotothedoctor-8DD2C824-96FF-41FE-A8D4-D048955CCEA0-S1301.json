@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' expression with a ternary conditional operator to increase readability.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\ShouldRichGoToTheDoctor\Program.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  53,
+"endLine":  10,
+"endColumn":  59
+}
+}
+}
+]
+}

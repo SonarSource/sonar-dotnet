@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2178",
+"message":  "Correct this '|' to '||'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  58,
+"endLine":  77,
+"endColumn":  59
+}
+}
+}
+]
+}

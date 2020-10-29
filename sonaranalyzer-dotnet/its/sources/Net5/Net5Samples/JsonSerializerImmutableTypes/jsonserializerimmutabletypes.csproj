@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <ProjectGuid>723C2A23-18CA-421D-9458-F71B06A0553A</ProjectGuid>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Date' private.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  21,
+"endLine":  23,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'TemperatureC' private.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  16,
+"endLine":  24,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'TemperatureF' private.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  16,
+"endLine":  25,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Summary' private.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerSupportsFields\Program.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  19,
+"endLine":  26,
+"endColumn":  26
+}
+}
+}
+]
+}

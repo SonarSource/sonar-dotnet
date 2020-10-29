@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Net5\Main.cs",
+"uri":  "sources\Net5\Net5\Main.cs",
 "region":  {
 "startLine":  4,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Net5\PatternMatchingImprovements.cs",
+"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  35,
@@ -30,7 +30,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  31,
@@ -43,7 +43,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  35,

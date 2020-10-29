@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\GetWeatherForecastWithRecords\Program.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  61
+}
+}
+}
+]
+}

@@ -5,7 +5,7 @@
 "message":  "Correct one of the identical expressions on both sides of operator '=='.",
 "location":  [
 {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  43,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  35,

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\GetWeatherForecastWithRecords\Program.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  117
+}
+}
+}
+]
+}

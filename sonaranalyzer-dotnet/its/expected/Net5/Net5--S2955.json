@@ -4,7 +4,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  26,
