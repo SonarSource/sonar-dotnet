@@ -238,6 +238,8 @@ stages:
             sonar.analysis.repository=$(Build.Repository.ID)
 
       - powershell: |
+          . .\scripts\utils.ps1
+
           cd sonaranalyzer-dotnet
 
           $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
@@ -246,19 +248,23 @@ stages:
           Get-Content -Path $testProjFileName
 
           Write-Host "Build UnitTest project"
-          dotnet build $testProjFileName -c $(BuildConfiguration)
+          & dotnet build $testProjFileName -c $(BuildConfiguration)
+          Test-ExitCode "ERROR: UnitTest project build FAILED."
 
           Write-Host "List Sonar*.dll files"
           Get-ChildItem -Recurse .\tests\SonarAnalyzer.UnitTest\bin\${BuildConfiguration}\ -Filter Sonar*.dll
 
           Write-Host "UTs .Net 4.8 and compute coverage"
-          $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --nologo" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.xml -oldStyle -register:Path32
+          & $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --nologo" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.xml -oldStyle -register:Path32
+          Test-ExitCode "ERROR: Unit tests for .NET 4.8 and compute coverage FAILED."
 
           Write-Host "UTs .Net Core 3.1"
-          dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f netcoreapp3.1
+          & dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f netcoreapp3.1
+          Test-ExitCode "ERROR: Unit tests for .NET Core 3.1 FAILED."
 
           Write-Host "UTs .Net 5"
-          dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f net5
+          & dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f net5
+          Test-ExitCode "ERROR: Unit tests for .NET 5 FAILED."
 
           cd ..
         displayName: '.Net UTs'
