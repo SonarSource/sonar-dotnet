@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            IEnumerable<CSharpParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
             IEnumerable<MetadataReference> additionalReferences = null)
         {
             var solution = SolutionBuilder
