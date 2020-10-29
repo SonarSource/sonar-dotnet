@@ -30,20 +30,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void VirtualEventField()
-        {
+        public void VirtualEventField() =>
             Verifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new VirtualEventField());
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void VirtualEventField_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\VirtualEventField.CSharp9.cs",
+                new VirtualEventField(),
+                options: ParseOptionsHelper.FromCSharp9,
+                checkMode: CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void VirtualEventField_CodeFix()
-        {
+        public void VirtualEventField_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\VirtualEventField.cs",
                 @"TestCases\VirtualEventField.Fixed.cs",
                 new VirtualEventField(),
                 new VirtualEventFieldCodeFixProvider());
-        }
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void VirtualEventField_CSharp9_CodeFix() =>
+            Verifier.VerifyCodeFix(
+                @"TestCases\VirtualEventField.CSharp9.cs",
+                @"TestCases\VirtualEventField.CSharp9.Fixed.cs",
+                new VirtualEventField(),
+                new VirtualEventFieldCodeFixProvider(),
+                options: ParseOptionsHelper.FromCSharp9);
     }
 }
