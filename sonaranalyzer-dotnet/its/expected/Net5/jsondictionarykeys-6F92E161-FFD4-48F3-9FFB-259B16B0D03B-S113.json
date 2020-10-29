@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Program.cs'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonDictionaryKeys\Program.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  34,
+"endLine":  25,
+"endColumn":  35
+}
+}
+}
+]
+}

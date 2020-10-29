@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'field' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make 'dict' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\TargetTypedNew.cs",
+"uri":  "sources\Net5\Net5\TargetTypedNew.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  44,

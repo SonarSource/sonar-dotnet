@@ -4,7 +4,7 @@
 "id":  "S3874",
 "message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S3874",
 "message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  55,

@@ -4,7 +4,7 @@
 "id":  "S1123",
 "message":  "Add an explanation.",
 "location":  {
-"uri":  "sources\Net5\AttributesOnLocalFunctions.cs",
+"uri":  "sources\Net5\Net5\AttributesOnLocalFunctions.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  14,

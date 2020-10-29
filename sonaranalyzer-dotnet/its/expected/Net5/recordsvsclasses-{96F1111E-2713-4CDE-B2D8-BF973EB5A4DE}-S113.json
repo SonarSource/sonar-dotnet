@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Program.cs'.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\RecordsVsClasses\Program.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+}
+]
+}

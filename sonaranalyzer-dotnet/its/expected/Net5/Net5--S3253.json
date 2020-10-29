@@ -4,7 +4,7 @@
 "id":  "S3253",
 "message":  "Remove this redundant destructor.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  9,

@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
+    <ProjectGuid>{96F1111E-2713-4CDE-B2D8-BF973EB5A4DE}</ProjectGuid>
+  </PropertyGroup>
+</Project>

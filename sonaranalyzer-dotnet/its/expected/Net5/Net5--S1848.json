@@ -4,7 +4,7 @@
 "id":  "S1848",
 "message":  "Either remove this useless object instantiation of class 'InitOnlyProperties' or use it.",
 "location":  {
-"uri":  "sources\Net5\Main.cs",
+"uri":  "sources\Net5\Net5\Main.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  1,

@@ -1,0 +1,9 @@
+{
+"issues":  [
+{
+"id":  "S3990",
+"message":  "Provide a 'CLSCompliant' attribute for assembly 'variouspatternsofrecords'.",
+"location":  null
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\Net5\Net5Samples\JsonSerializerPreserveReference\Program.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  15,
+"endLine":  35,
+"endColumn":  64
+}
+}
+}
+]
+}

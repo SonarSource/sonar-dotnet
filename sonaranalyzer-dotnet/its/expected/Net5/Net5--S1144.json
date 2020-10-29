@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'M1'.",
 "location":  {
-"uri":  "sources\Net5\ExtendingPartial.cs",
+"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
 "region":  {
 "startLine":  6,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'M2'.",
 "location":  {
-"uri":  "sources\Net5\ExtendingPartial.cs",
+"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Method'.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'dict'.",
 "location":  {
-"uri":  "sources\Net5\TargetTypedNew.cs",
+"uri":  "sources\Net5\Net5\TargetTypedNew.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  9,

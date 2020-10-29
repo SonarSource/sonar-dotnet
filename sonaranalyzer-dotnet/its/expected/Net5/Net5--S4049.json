@@ -4,7 +4,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetFood' a property.",
 "location":  {
-"uri":  "sources\Net5\CovariantReturn.cs",
+"uri":  "sources\Net5\Net5\CovariantReturn.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetName' a property.",
 "location":  {
-"uri":  "sources\Net5\ExtendingPartial.cs",
+"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  16,

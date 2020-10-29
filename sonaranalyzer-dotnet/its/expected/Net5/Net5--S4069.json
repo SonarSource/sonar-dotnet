@@ -4,7 +4,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Plus' for the operator '+'.",
 "location":  {
-"uri":  "sources\Net5\Records.cs",
+"uri":  "sources\Net5\Net5\Records.cs",
 "region":  {
 "startLine":  84,
 "startColumn":  49,
