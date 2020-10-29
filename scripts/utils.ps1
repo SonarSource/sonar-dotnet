@@ -13,6 +13,7 @@ function Exec ([scriptblock]$command, [string]$errorMessage = "ERROR: Command '$
     return $output
 }
 
+# Also used in the azure-pipelines.yml
 function Test-ExitCode([string]$errorMessage = "ERROR: Command FAILED.") {
     if ((-not $?) -or ($lastexitcode -ne 0)) {
         throw $errorMessage
