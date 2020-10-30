@@ -23,6 +23,7 @@ extern alias vbnet;
 
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -32,7 +33,7 @@ using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class ClassNameTest
+    public class ClassAndMethodNameTest
     {
         [TestMethod]
         [TestCategory("Rule")]
@@ -49,6 +50,16 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ClassName_TopLevelStatement() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ClassName.TopLevelStatement.cs", new CSharp.ClassAndMethodName(), options: ParseOptionsHelper.FromCSharp9, outputKind: OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RecordName() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RecordName.cs", new CSharp.ClassAndMethodName(), options: ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -69,6 +80,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 },
                 new CSharp.ClassAndMethodName(),
                 ParseOptionsHelper.FromCSharp8);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodName_CSharp9()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodName.CSharp9.cs",
+                new CSharp.ClassAndMethodName(),
+                ParseOptionsHelper.FromCSharp9);
         }
 
         [TestMethod]
