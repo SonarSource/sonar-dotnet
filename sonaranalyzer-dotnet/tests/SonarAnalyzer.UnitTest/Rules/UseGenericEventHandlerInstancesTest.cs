@@ -39,6 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UseGenericEventHandlerInstances_CSharp9() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseGenericEventHandlerInstances.CSharp9.cs",
                                     new UseGenericEventHandlerInstances(),
-                                    ParseOptionsHelper.FromCSharp8);
+                                    ParseOptionsHelper.FromCSharp9);
     }
 }
