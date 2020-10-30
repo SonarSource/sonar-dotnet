@@ -70,6 +70,11 @@ try {
     }
 
     if ($test) {
+        # in ParseOptionsHelper.FilterByEnvironment, it does not run tests for all C# versions unless it detects it's on the CI/CD
+        # It considers to run under CI/CD only if the following environment variable is set.
+        # When running this script, we want to run all unit tests.
+        # see sonaranalyzer-dotnet\tests\SonarAnalyzer.UnitTest\TestFramework\ParseOptionsHelper.cs
+        $env:SYSTEM_DEFINITIONID="set"
         Invoke-UnitTests $binPath $true
     }
 
