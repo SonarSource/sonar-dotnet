@@ -30,9 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ClassShouldNotBeAbstract()
-        {
+        public void ClassShouldNotBeAbstract() =>
             Verifier.VerifyAnalyzer(@"TestCases\ClassShouldNotBeAbstract.cs", new ClassShouldNotBeAbstract());
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ClassShouldNotBeAbstract_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ClassShouldNotBeAbstract.CSharp9.cs", new ClassShouldNotBeAbstract(), ParseOptionsHelper.FromCSharp9);
+
     }
 }
