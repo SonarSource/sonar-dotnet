@@ -23,7 +23,6 @@ namespace Tests.Diagnostics
         }
         public int Count3
         {
-            //get { return count; }
             set // Noncompliant
             {
                 var val = 5;
