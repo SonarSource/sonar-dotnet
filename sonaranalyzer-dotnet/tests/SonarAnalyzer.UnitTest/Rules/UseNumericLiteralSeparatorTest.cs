@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,6 +20,7 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -30,21 +31,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseNumericLiteralSeparator_BeforeCSharp7()
-        {
+        public void UseNumericLiteralSeparator_BeforeCSharp7() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UseNumericLiteralSeparator.cs",
-                new UseNumericLiteralSeparator(),
-                ParseOptionsHelper.BeforeCSharp7,
-                CompilationErrorBehavior.Ignore);
-        }
+                                           new UseNumericLiteralSeparator(),
+                                           ParseOptionsHelper.BeforeCSharp7,
+                                           CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseNumericLiteralSeparator_FromCSharp7()
-        {
+        public void UseNumericLiteralSeparator_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseNumericLiteralSeparator.cs",
-                new UseNumericLiteralSeparator(),
-                ParseOptionsHelper.FromCSharp7);
-        }
+                                    new UseNumericLiteralSeparator(),
+                                    ParseOptionsHelper.FromCSharp7);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UseNumericLiteralSeparator_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UseNumericLiteralSeparator.CSharp9.cs",
+                                    new UseNumericLiteralSeparator(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
     }
 }
