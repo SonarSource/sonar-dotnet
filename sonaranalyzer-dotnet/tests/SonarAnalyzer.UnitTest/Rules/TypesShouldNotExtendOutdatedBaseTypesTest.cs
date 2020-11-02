@@ -34,8 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TypesShouldNotExtendOutdatedBaseTypes() =>
             Verifier.VerifyAnalyzer(@"TestCases\TypesShouldNotExtendOutdatedBaseTypes.cs",
-                new TypesShouldNotExtendOutdatedBaseTypes(),
-                additionalReferences: MetadataReferenceFacade.GetSystemXml()
-                    .Concat(MetadataReferenceFacade.GetSystemCollections()));
+                                    new TypesShouldNotExtendOutdatedBaseTypes(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemXml().Concat(MetadataReferenceFacade.GetSystemCollections()));
     }
 }
