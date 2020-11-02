@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         // Based on https://msdn.microsoft.com/en-us/library/gg145045%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396
-        private static ISet<string> frameworkNamespaces =
+        private static readonly ISet<string> frameworkNamespaces =
             new HashSet<string>
             {
                 "accessibility", "activities", "addin", "build", "codedom", "collections",
@@ -56,8 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 "windows", "workflow", "xaml", "xamlgeneratednamespace", "xml"
             };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 if (IsDeclaredPublic(c.Node, c.SemanticModel))
@@ -70,7 +69,6 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.EnumDeclaration,
             SyntaxKind.DelegateDeclaration);
-        }
 
         private static SyntaxToken? GetIdentifier(SyntaxNode declaration)
         {
@@ -87,8 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private static void ReportIfNameClashesWithFrameworkNamespace(SyntaxToken? identifier,
-            SyntaxNodeAnalysisContext context)
+        private static void ReportIfNameClashesWithFrameworkNamespace(SyntaxToken? identifier, SyntaxNodeAnalysisContext context)
         {
             var typeName = identifier?.ValueText;
             var typeNameLocation = identifier?.GetLocation();
