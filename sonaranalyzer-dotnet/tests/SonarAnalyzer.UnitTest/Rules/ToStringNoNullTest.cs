@@ -30,9 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ToStringNoNull()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ToStringNoNull.cs", new ToStringNoNull());
-        }
+        public void ToStringNoNull() => Verifier.VerifyAnalyzer(@"TestCases\ToStringNoNull.cs", new ToStringNoNull());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ToStringNoNull_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ToStringNoNull.CSharp9.cs",
+                                    new ToStringNoNull(),
+                                    ParseOptionsHelper.FromCSharp9);
     }
 }
