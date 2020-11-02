@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,16 +31,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnchangedLocalVariablesShouldBeConst()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs",
-                new UnchangedLocalVariablesShouldBeConst());
-        }
+        public void UnchangedLocalVariablesShouldBeConst() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs", new UnchangedLocalVariablesShouldBeConst());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnchangedLocalVariablesShouldBeConst_InvalidCode()
-        {
+        public void UnchangedLocalVariablesShouldBeConst_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp9.cs",
+                                    new UnchangedLocalVariablesShouldBeConst(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnchangedLocalVariablesShouldBeConst_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 // invalid code
 public void Test_TypeThatCannotBeConst(int arg)
@@ -52,6 +57,5 @@ public void (int arg)
 {
     int intVar = 1; // Noncompliant
 }", new UnchangedLocalVariablesShouldBeConst(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +31,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedReturnValue()
-        {
+        public void UnusedReturnValue() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedReturnValue.cs",
-                new UnusedReturnValue(),
-                ParseOptionsHelper.FromCSharp8);
-        }
+                                    new UnusedReturnValue(),
+                                    ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedReturnValueWithPartialClasses()
-        {
+        public void UnusedReturnValueWithPartialClasses() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\UnusedReturnValue.part1.cs", @"TestCases\UnusedReturnValue.part2.cs", @"TestCases\UnusedReturnValue.External.cs" },
-                 new UnusedReturnValue(),
-                 ParseOptionsHelper.FromCSharp8);
-        }
+                                    new UnusedReturnValue(),
+                                    ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnusedReturnValue_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UnusedReturnValue.CSharp9.cs",
+                                    new UnusedReturnValue(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
     }
 }
