@@ -278,6 +278,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
+        [TestCategory("Rule")]
+        public void CheckFileLicenseCodeFix_CSharp9_ShouldBeNoncompliant_CS() =>
+            Verifier.VerifyCodeFix(
+                @"TestCases\CheckFileLicense_CSharp9.cs",
+                @"TestCases\CheckFileLicense_CSharp9.Fixed.cs",
+                new CheckFileLicense(),
+                new CheckFileLicenseCodeFixProvider(),
+                options: ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
         [TestCategory("CodeFix")]
         public void CheckFileLicenseCodeFix_WhenNoLicenseStartingWithUsing_ShouldBeFixedAsExpected_CS()
         {

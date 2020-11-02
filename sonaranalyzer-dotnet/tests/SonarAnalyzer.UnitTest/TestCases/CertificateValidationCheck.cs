@@ -54,6 +54,8 @@ namespace Tests.Diagnostics
             CreateRQ().ServerCertificateValidationCallback = InvalidValidation;    //Noncompliant  [flow4]
             CreateRQ().ServerCertificateValidationCallback = (sender, certificate, chain, SslPolicyErrors) => { return true; };    //Noncompliant
                                                                                                                                    //Secondary@-1
+            CreateRQ().ServerCertificateValidationCallback += LocalFunction; // FN
+            bool LocalFunction(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true;
 
             //Do not test this one. It's .NET Standard 2.1 target only. It should work since we're hunting RemoteCertificateValidationCallback and method signature
             //var ws = new System.Net.WebSockets.ClientWebSocket();

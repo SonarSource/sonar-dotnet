@@ -40,6 +40,12 @@ namespace Tests.Diagnostics
             throw new CustomArgumentException(); // Compliant - ignored from analysis
         }
 
+        void Foo0(int a)
+        {
+            var exception = new ArgumentNullException(); // Noncompliant
+            throw exception;
+        }
+
         void Foo1(int a)
         {
             throw new ArgumentException("foo"); // Compliant - foo is the message
