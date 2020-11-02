@@ -54,6 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestClassShouldHaveTestMethod_CSharp9() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
                             new TestClassShouldHaveTestMethod(),
+                            ParseOptionsHelper.FromCSharp9,
                             additionalReferences: NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)
                                                     .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)));
     }
