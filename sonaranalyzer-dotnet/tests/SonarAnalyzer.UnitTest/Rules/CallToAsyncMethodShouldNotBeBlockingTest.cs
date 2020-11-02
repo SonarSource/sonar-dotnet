@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,5 +34,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CallToAsyncMethodShouldNotBeBlocking() =>
             Verifier.VerifyAnalyzer(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.cs",
                                     new CallToAsyncMethodShouldNotBeBlocking());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CallToAsyncMethodShouldNotBeBlocking_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.CSharp9.cs",
+                            new CallToAsyncMethodShouldNotBeBlocking(),
+                            ParseOptionsHelper.FromCSharp9,
+                            outputKind: OutputKind.ConsoleApplication);
+
     }
 }
