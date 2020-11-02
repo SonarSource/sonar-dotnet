@@ -27,6 +27,7 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using System.Linq;
 using SonarAnalyzer.UnitTest.MetadataReferences;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -39,20 +40,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_UnknownFrameworkVersion.cs")]
         [DataTestMethod]
         [TestCategory("Rule")]
-        public void XmlExternalEntityShouldNotBeParsed_XmlDocument(NetFrameworkVersion version, string testFilePath)
-        {
-            // setup
-            var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
+        public void XmlExternalEntityShouldNotBeParsed_XmlDocument(NetFrameworkVersion version, string testFilePath) =>
+            Verifier.VerifyAnalyzer(testFilePath,
+                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
+                additionalReferences: MetadataReferenceFacade.GetSystemXml()
+                    .Concat(MetadataReferenceFacade.GetSystemData())
+                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                    .Concat(NuGetMetadataReference.MicrosoftWebXdt())
+                    .ToArray());
 
-            // act & verify
-            Verifier.VerifyAnalyzer(testFilePath, rule,
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9.cs",
+                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
                 additionalReferences: MetadataReferenceFacade.GetSystemXml()
                     .Concat(MetadataReferenceFacade.GetSystemData())
                     .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
                     .Concat(NuGetMetadataReference.MicrosoftWebXdt())
                     .ToArray(),
-                options: ParseOptionsHelper.FromCSharp8);
-        }
+                options: ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication);
+
 
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs")]
         [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net35.cs")]
@@ -60,16 +69,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_UnknownFrameworkVersion.cs")]
         [DataTestMethod]
         [TestCategory("Rule")]
-        public void XmlExternalEntityShouldNotBeParsed_XmlTextReader(NetFrameworkVersion version, string testFilePath)
-        {
-            // setup
-            var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
+        public void XmlExternalEntityShouldNotBeParsed_XmlTextReader(NetFrameworkVersion version, string testFilePath) =>
+            Verifier.VerifyAnalyzer(testFilePath, new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
+                ParseOptionsHelper.FromCSharp8, 
+                additionalReferences: MetadataReferenceFacade.GetSystemXml().ToArray());
 
-            // act & verify
-            Verifier.VerifyAnalyzer(testFilePath, rule,
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9.cs",
+                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
                 additionalReferences: MetadataReferenceFacade.GetSystemXml().ToArray(),
-                options: ParseOptionsHelper.FromCSharp8);
-        }
+                options: ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication);
 
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
         [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
@@ -85,6 +97,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlReader(NetFrameworkVersion version, string testFilePath) => VerifyRule(version, testFilePath);
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9() =>
+            VerifyRule(NetFrameworkVersion.After452,
+                @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9.cs",
+                OutputKind.ConsoleApplication,
+                ParseOptionsHelper.FromCSharp9);
+
         [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net35.cs")]
         [DataRow(NetFrameworkVersion.Between4And451, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net4.cs")]
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net452.cs")]
@@ -95,8 +115,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void XmlExternalEntityShouldNotBeParsed_NoCrashOnExternalParameterUse()
-        {
+        public void XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9()
+            => VerifyRule(NetFrameworkVersion.After452,
+                @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9.cs",
+                outputKind: OutputKind.ConsoleApplication,
+                options: ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void XmlExternalEntityShouldNotBeParsed_NoCrashOnExternalParameterUse() =>
             Verifier.VerifyAnalyzer(
                 new[]
                 {
@@ -105,18 +132,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                 },
                 new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
                 additionalReferences: MetadataReferenceFacade.GetSystemXml());
-        }
 
-        private static void VerifyRule(NetFrameworkVersion version, string testFilePath)
-        {
-            var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
-
-            Verifier.VerifyAnalyzer(testFilePath, rule,
+        private static void VerifyRule(NetFrameworkVersion version, string testFilePath, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<ParseOptions> options = null) =>
+            Verifier.VerifyAnalyzer(testFilePath,
+                new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
                 additionalReferences: MetadataReferenceFacade.GetSystemXml()
                     .Concat(MetadataReferenceFacade.GetSystemData())
                     .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
-                    .ToArray());
-        }
+                    .ToArray(),
+                outputKind: outputKind,
+                options: options);
 
         private static INetFrameworkVersionProvider GetVersionProviderMock(NetFrameworkVersion version)
         {
