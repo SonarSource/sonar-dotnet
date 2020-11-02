@@ -1,12 +1,10 @@
 ﻿using System;
 
-int a = 0; // Compliant - FN
-
+int a = 0;
 int b = 1;
 Console.WriteLine(b);
 
-Product c = new("name", 1); // Compliant - FN
-
+Product c = new("name", 1);
 Product d = new("name", 2);
 Console.WriteLine(d);
 
