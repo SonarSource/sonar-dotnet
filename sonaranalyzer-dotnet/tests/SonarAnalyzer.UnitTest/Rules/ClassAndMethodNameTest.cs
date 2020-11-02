@@ -37,8 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ClassName_CSharp()
-        {
+        public void ClassName_CSharp() =>
             Verifier.VerifyAnalyzer(
                 new[]
                 {
@@ -49,7 +48,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -63,15 +61,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ClassName_VB()
-        {
+        public void ClassName_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VisualBasic.ClassName());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodName()
-        {
+        public void MethodName() =>
             Verifier.VerifyAnalyzer(
                 new[]
                 {
@@ -80,20 +75,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                 },
                 new CSharp.ClassAndMethodName(),
                 ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodName_CSharp9()
-        {
+        public void MethodName_CSharp9() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodName.CSharp9.cs",
                 new CSharp.ClassAndMethodName(),
                 ParseOptionsHelper.FromCSharp9);
-        }
 
         [TestMethod]
-        public void TestSplitToParts()
-        {
+        public void TestSplitToParts() =>
             new[]
             {
                 ("foo", new [] { "foo" }),
@@ -115,6 +106,5 @@ namespace SonarAnalyzer.UnitTest.Rules
             ))
             .ToList()
             .ForEach(x => x.actual.Should().Equal(x.expected));
-        }
     }
 }
