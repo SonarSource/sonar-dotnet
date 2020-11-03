@@ -30,11 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void StaticFieldWrittenFromInstanceConstructor()
-        {
+        public void StaticFieldWrittenFromInstanceConstructor() =>
             Verifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceConstructor.cs",
-                new StaticFieldWrittenFromInstanceConstructor(),
-                ParseOptionsHelper.FromCSharp8);
-        }
+                                    new StaticFieldWrittenFromInstanceConstructor(),
+                                    ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void StaticFieldWrittenFromInstanceConstructor_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldWrittenFromInstanceConstructor.CSharp9.cs",
+                                    new StaticFieldWrittenFromInstanceConstructor(),
+                                    ParseOptionsHelper.FromCSharp9);
     }
 }
