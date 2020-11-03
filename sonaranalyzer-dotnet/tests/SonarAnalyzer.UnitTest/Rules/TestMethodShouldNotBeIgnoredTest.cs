@@ -33,73 +33,72 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void TestMethodShouldNotBeIgnored_MsTest_Legacy()
-        {
+        public void TestMethodShouldNotBeIgnored_MsTest_Legacy() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
-                new TestMethodShouldNotBeIgnored(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework("1.1.11"),
-                checkMode: CompilationErrorBehavior.Ignore); // IgnoreAttribute doesn't contain any reason param
-        }
+                                    new TestMethodShouldNotBeIgnored(),
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFramework("1.1.11"),
+                                    checkMode: CompilationErrorBehavior.Ignore); // IgnoreAttribute doesn't contain any reason param
 
         [DataTestMethod]
         [DataRow("1.2.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion)
-        {
+        public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
-                new TestMethodShouldNotBeIgnored(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
-        }
+                                    new TestMethodShouldNotBeIgnored(),
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow("2.7.0")]
         [TestCategory("Rule")]
-        public void TestMethodShouldNotBeIgnored_NUnit_V2(string testFwkVersion)
-        {
+        public void TestMethodShouldNotBeIgnored_NUnit_V2(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.V2.cs",
-                new TestMethodShouldNotBeIgnored(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
-                    .Concat(NuGetMetadataReference.NUnit(testFwkVersion))
-                    .ToArray());
-        }
+                                    new TestMethodShouldNotBeIgnored(),
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                        .Concat(NuGetMetadataReference.NUnit(testFwkVersion))
+                                        .ToArray());
 
         [DataTestMethod]
         [DataRow("3.0.0")] // Ignore without reason no longer exist
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestMethodShouldNotBeIgnored_NUnit(string testFwkVersion)
-        {
+        public void TestMethodShouldNotBeIgnored_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.cs",
-                new TestMethodShouldNotBeIgnored(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
-                    .Concat(NuGetMetadataReference.NUnit(testFwkVersion))
-                    .ToArray());
-        }
+                                    new TestMethodShouldNotBeIgnored(),
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                        .Concat(NuGetMetadataReference.NUnit(testFwkVersion))
+                                        .ToArray());
 
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion)
-        {
+        public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.cs",
-                new TestMethodShouldNotBeIgnored(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
-                    .Concat(NuGetMetadataReference.XunitFramework(testFwkVersion))
-                    .ToArray());
-        }
+                                    new TestMethodShouldNotBeIgnored(),
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                        .Concat(NuGetMetadataReference.XunitFramework(testFwkVersion))
+                                        .ToArray());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void TestMethodShouldNotBeIgnored_Xunit_v1()
-        {
+        public void TestMethodShouldNotBeIgnored_Xunit_v1() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.v1.cs",
-                new TestMethodShouldNotBeIgnored(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
-                    .Concat(NuGetMetadataReference.XunitFrameworkV1)
-                    .ToArray());
-        }
+                                    new TestMethodShouldNotBeIgnored(),
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                        .Concat(NuGetMetadataReference.XunitFrameworkV1)
+                                        .ToArray());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldNotBeIgnored_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.CSharp9.cs",
+                                    new TestMethodShouldNotBeIgnored(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                        .Concat(NuGetMetadataReference.XunitFrameworkV1)
+                                        .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                                        .ToArray());
     }
 }

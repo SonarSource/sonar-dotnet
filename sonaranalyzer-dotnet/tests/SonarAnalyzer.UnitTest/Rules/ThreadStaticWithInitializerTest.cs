@@ -30,9 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ThreadStaticWithInitializer()
-        {
+        public void ThreadStaticWithInitializer() =>
             Verifier.VerifyAnalyzer(@"TestCases\ThreadStaticWithInitializer.cs", new ThreadStaticWithInitializer());
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ThreadStaticWithInitializer_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ThreadStaticWithInitializer.CSharp9.cs",
+                                    new ThreadStaticWithInitializer(),
+                                    ParseOptionsHelper.FromCSharp9);
     }
 }

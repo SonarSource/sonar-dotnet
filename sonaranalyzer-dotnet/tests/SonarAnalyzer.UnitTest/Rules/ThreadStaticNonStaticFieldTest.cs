@@ -30,20 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ThreadStaticNonStaticField()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ThreadStaticNonStaticField.cs", new ThreadStaticNonStaticField());
-        }
+        public void ThreadStaticNonStaticField() => Verifier.VerifyAnalyzer(@"TestCases\ThreadStaticNonStaticField.cs", new ThreadStaticNonStaticField());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ThreadStaticNonStaticField_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ThreadStaticNonStaticField.CSharp9.cs",
+                                    new ThreadStaticNonStaticField(),
+                                    ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void ThreadStaticNonStaticField_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\ThreadStaticNonStaticField.cs",
-                @"TestCases\ThreadStaticNonStaticField.Fixed.cs",
-                new ThreadStaticNonStaticField(),
-                new ThreadStaticNonStaticFieldCodeFixProvider());
-        }
+        public void ThreadStaticNonStaticField_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\ThreadStaticNonStaticField.cs",
+                                   @"TestCases\ThreadStaticNonStaticField.Fixed.cs",
+                                   new ThreadStaticNonStaticField(),
+                                   new ThreadStaticNonStaticFieldCodeFixProvider());
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Collections_Stack
             );
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var classDeclaration = (ClassDeclarationSyntax)c.Node;
@@ -67,6 +66,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             },
             SyntaxKind.ClassDeclaration);
-        }
     }
 }
