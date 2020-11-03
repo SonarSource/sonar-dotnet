@@ -31,10 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void StaticFieldInitializerOrder()
-        {
+        public void StaticFieldInitializerOrder() =>
             Verifier.VerifyAnalyzer(
-                new []
+                new[]
                 {
                     @"TestCases\StaticFieldInitializerOrder.cs",
                     @"TestCases\StaticFieldInitializerOrder_PartialClass.cs"
@@ -44,6 +43,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void StaticFieldInitializerOrder_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldInitializerOrder.CSharp9.cs",
+                                    new StaticFieldInitializerOrder(),
+                                    options: ParseOptionsHelper.FromCSharp9);
     }
 }
