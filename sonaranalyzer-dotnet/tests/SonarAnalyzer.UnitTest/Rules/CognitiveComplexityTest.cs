@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,6 +19,8 @@
  */
 
 extern alias csharp;
+
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -32,20 +34,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CognitiveComplexity_CS()
-        {
+        public void CognitiveComplexity_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.cs",
                 new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 },
                 options: ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CognitiveComplexity_VB()
-        {
+        public void CognitiveComplexity_CS_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.CSharp9.cs",
+                new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 },
+                options: ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication);
+
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CognitiveComplexity_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.vb",
                 new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
