@@ -24,6 +24,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,29 +33,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnaryPrefixOperatorRepeated()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs",
-                new CSharp.UnaryPrefixOperatorRepeated());
-        }
+        public void UnaryPrefixOperatorRepeated() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs", new CSharp.UnaryPrefixOperatorRepeated());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnaryPrefixOperatorRepeated_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.CSharp9.cs",
+                new CSharp.UnaryPrefixOperatorRepeated(),
+                ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void UnaryPrefixOperatorRepeated_CodeFix()
-        {
+        public void UnaryPrefixOperatorRepeated_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\UnaryPrefixOperatorRepeated.cs",
                 @"TestCases\UnaryPrefixOperatorRepeated.Fixed.cs",
                 new CSharp.UnaryPrefixOperatorRepeated(),
                 new CSharp.UnaryPrefixOperatorRepeatedCodeFixProvider());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnaryPrefixOperatorRepeated_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.vb",
-                new VisualBasic.UnaryPrefixOperatorRepeated());
-        }
+        public void UnaryPrefixOperatorRepeated_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.vb", new VisualBasic.UnaryPrefixOperatorRepeated());
     }
 }

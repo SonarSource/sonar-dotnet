@@ -30,10 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ThisShouldNotBeExposedFromConstructors()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ThisShouldNotBeExposedFromConstructors.cs",
-                new ThisShouldNotBeExposedFromConstructors());
-        }
+        public void ThisShouldNotBeExposedFromConstructors() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ThisShouldNotBeExposedFromConstructors.cs", new ThisShouldNotBeExposedFromConstructors());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ThisShouldNotBeExposedFromConstructors_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp9.cs",
+                                    new ThisShouldNotBeExposedFromConstructors(),
+                                    ParseOptionsHelper.FromCSharp9);
     }
 }

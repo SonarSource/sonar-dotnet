@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -90,23 +90,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        private static string GetTypeKeyword(TypeDeclarationSyntax typeDeclaration)
-        {
-            switch (typeDeclaration.Kind())
+        private static string GetTypeKeyword(TypeDeclarationSyntax typeDeclaration) =>
+            typeDeclaration.Kind() switch
             {
-                case SyntaxKind.ClassDeclaration:
-                    return "class";
+                SyntaxKind.ClassDeclaration => "class",
+                SyntaxKind.StructDeclaration => "struct",
+                SyntaxKind.InterfaceDeclaration => "interface",
+                _ => GetUnknownType(typeDeclaration)
+            };
 
-                case SyntaxKind.StructDeclaration:
-                    return "struct";
-
-                case SyntaxKind.InterfaceDeclaration:
-                    return "interface";
-
-                default:
-                    Debug.Fail($"Unexpected type: {typeDeclaration.ToString()}");
-                    return "type";
-            }
+        private static string GetUnknownType(TypeDeclarationSyntax typeDeclaration)
+        {
+            Debug.Fail($"Unexpected type: {typeDeclaration}");
+            return "type";
         }
 
         private static string GetEnclosingTypeName(MethodDeclarationSyntax methodDeclaration)
@@ -127,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return ((InterfaceDeclarationSyntax)parent).Identifier.ValueText;
 
                     default:
-                        parent = methodDeclaration.Parent;
+                        parent = parent.Parent;
                         break;
                 }
             }
