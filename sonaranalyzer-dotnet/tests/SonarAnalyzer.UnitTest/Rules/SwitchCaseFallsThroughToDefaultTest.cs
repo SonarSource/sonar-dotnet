@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,21 +31,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchCaseFallsThroughToDefault()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchCaseFallsThroughToDefault.cs",
-                new SwitchCaseFallsThroughToDefault());
-        }
+        public void SwitchCaseFallsThroughToDefault() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchCaseFallsThroughToDefault.cs", new SwitchCaseFallsThroughToDefault());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SwitchCaseFallsThroughToDefault_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchCaseFallsThroughToDefault.CSharp9.cs",
+                                    new SwitchCaseFallsThroughToDefault(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void SwitchCaseFallsThroughToDefault_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\SwitchCaseFallsThroughToDefault.cs",
-                @"TestCases\SwitchCaseFallsThroughToDefault.Fixed.cs",
-                new SwitchCaseFallsThroughToDefault(),
-                new SwitchCaseFallsThroughToDefaultCodeFixProvider());
-        }
+        public void SwitchCaseFallsThroughToDefault_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\SwitchCaseFallsThroughToDefault.cs",
+                                   @"TestCases\SwitchCaseFallsThroughToDefault.Fixed.cs",
+                                   new SwitchCaseFallsThroughToDefault(),
+                                   new SwitchCaseFallsThroughToDefaultCodeFixProvider());
     }
 }
