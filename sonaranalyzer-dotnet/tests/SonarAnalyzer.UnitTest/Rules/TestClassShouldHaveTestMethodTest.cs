@@ -19,6 +19,8 @@
  */
 
 extern alias csharp;
+
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -33,22 +35,27 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion)
-        {
+        public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
-                new TestClassShouldHaveTestMethod(),
-                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
-        }
+                                    new TestClassShouldHaveTestMethod(),
+                                    additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion)
-        {
+        public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
-                new TestClassShouldHaveTestMethod(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
-        }
+                                    new TestClassShouldHaveTestMethod(),
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+
+        [DataTestMethod]
+        [TestCategory("Rule")]
+        public void TestClassShouldHaveTestMethod_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
+                            new TestClassShouldHaveTestMethod(),
+                            ParseOptionsHelper.FromCSharp9,
+                            additionalReferences: NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)
+                                                    .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)));
     }
 }

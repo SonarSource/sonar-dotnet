@@ -200,5 +200,16 @@ public class Foo
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Custom.cs",
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldContainAssertion_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.CSharp9.cs",
+                                    new TestMethodShouldContainAssertion(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                                            .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
+                                                            .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                                                            .ToArray());
     }
 }

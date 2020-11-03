@@ -19,6 +19,8 @@
  */
 
 extern alias csharp;
+
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -33,54 +35,55 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestMethodShouldHaveCorrectSignature_MsTest(string testFwkVersion)
-        {
+        public void TestMethodShouldHaveCorrectSignature_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.MsTest.cs",
-                new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
-        }
+                                    new TestMethodShouldHaveCorrectSignature(),
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestMethodShouldHaveCorrectSignature_NUnit(string testFwkVersion)
-        {
+        public void TestMethodShouldHaveCorrectSignature_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.NUnit.cs",
-                new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
-        }
+                                    new TestMethodShouldHaveCorrectSignature(),
+                                    additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestMethodShouldHaveCorrectSignature_Xunit(string testFwkVersion)
-        {
+        public void TestMethodShouldHaveCorrectSignature_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.cs",
-                new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion));
-        }
+                                    new TestMethodShouldHaveCorrectSignature(),
+                                    additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void TestMethodShouldHaveCorrectSignature_Xunit_Legacy()
-        {
+        public void TestMethodShouldHaveCorrectSignature_Xunit_Legacy() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.Legacy.cs",
-                new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: NuGetMetadataReference.XunitFrameworkV1);
-        }
+                                    new TestMethodShouldHaveCorrectSignature(),
+                                    additionalReferences: NuGetMetadataReference.XunitFrameworkV1);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void TestMethodShouldHaveCorrectSignature_MSTest_Miscellaneous()
-        {
+        public void TestMethodShouldHaveCorrectSignature_MSTest_Miscellaneous() =>
             // Additional test cases e.g. partial classes, and methods with multiple faults.
             // We have to specify a test framework for the tests, but it doesn't really matter which
             // one, so we're using MSTest and only testing a single version.
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Misc.cs",
-                new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1);
-        }
+                                    new TestMethodShouldHaveCorrectSignature(),
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldHaveCorrectSignature_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.CSharp9.cs",
+                                    new TestMethodShouldHaveCorrectSignature(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                        .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
+                                        .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                                        .ToArray());
     }
 }
