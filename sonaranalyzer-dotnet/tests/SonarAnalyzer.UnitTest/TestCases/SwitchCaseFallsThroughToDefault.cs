@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     public class SwitchCaseFallsThroughToDefault
     {
@@ -54,6 +50,13 @@ namespace Tests.Diagnostics
                     break;
                 case 'a':
                     handleA();
+                    break;
+            }
+
+            switch (ch)
+            {
+                case 'b': // Compliant - FN
+                default:
                     break;
             }
         }

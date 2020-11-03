@@ -30,9 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringOrIntegralTypesForIndexers()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\StringOrIntegralTypesForIndexers.cs", new StringOrIntegralTypesForIndexers());
-        }
+        public void StringOrIntegralTypesForIndexers() => Verifier.VerifyAnalyzer(@"TestCases\StringOrIntegralTypesForIndexers.cs", new StringOrIntegralTypesForIndexers());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void StringOrIntegralTypesForIndexers_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\StringOrIntegralTypesForIndexers.cs",
+                                    new StringOrIntegralTypesForIndexers(),
+                                    ParseOptionsHelper.FromCSharp9);
     }
 }

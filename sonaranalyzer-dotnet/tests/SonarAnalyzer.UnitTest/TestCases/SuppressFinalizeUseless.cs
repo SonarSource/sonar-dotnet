@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -39,6 +38,7 @@ namespace Tests.Diagnostics
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^
         }
     }
+
     class C2
     {
         public void M()
@@ -73,6 +73,14 @@ namespace Tests.Diagnostics
         public void M()
         {
             GC.SuppressFinalize(this);
+        }
+    }
+
+    class NoThis
+    {
+        public void M()
+        {
+            GC.SuppressFinalize(new object()); // Compliant - should we raise if `this` is not passed as parameter?
         }
     }
 }

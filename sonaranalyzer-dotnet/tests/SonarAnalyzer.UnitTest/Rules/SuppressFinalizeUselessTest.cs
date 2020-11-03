@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +31,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SuppressFinalizeUseless()
-        {
+        public void SuppressFinalizeUseless() =>
             Verifier.VerifyAnalyzer(@"TestCases\SuppressFinalizeUseless.cs", new SuppressFinalizeUseless());
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SuppressFinalizeUseless_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SuppressFinalizeUseless.CSharp9.cs",
+                                    new SuppressFinalizeUseless(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind:OutputKind.ConsoleApplication);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void SuppressFinalizeUseless_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\SuppressFinalizeUseless.cs",
-                @"TestCases\SuppressFinalizeUseless.Fixed.cs",
-                new SuppressFinalizeUseless(),
-                new SuppressFinalizeUselessCodeFixProvider());
-        }
+        public void SuppressFinalizeUseless_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\SuppressFinalizeUseless.cs",
+                                   @"TestCases\SuppressFinalizeUseless.Fixed.cs",
+                                   new SuppressFinalizeUseless(),
+                                   new SuppressFinalizeUselessCodeFixProvider());
     }
 }
