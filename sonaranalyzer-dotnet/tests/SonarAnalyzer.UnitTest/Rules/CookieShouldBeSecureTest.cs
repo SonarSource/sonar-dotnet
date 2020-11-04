@@ -64,6 +64,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_NetCore());
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CookiesShouldBeSecure_NetCore_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_NetCore.CSharp9.cs",
+                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication,
+                additionalReferences: GetAdditionalReferences_NetCore());
+
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
 
