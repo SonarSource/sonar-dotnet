@@ -20,6 +20,7 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -33,7 +34,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SetLocaleForDataTypes() =>
             Verifier.VerifyAnalyzer(@"TestCases\SetLocaleForDataTypes.cs",
-                new SetLocaleForDataTypes(),
-                additionalReferences: MetadataReferenceFacade.GetSystemData());
+                                    new SetLocaleForDataTypes(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemData());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SetLocaleForDataTypes_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SetLocaleForDataTypes.CSharp9.cs",
+                                    new SetLocaleForDataTypes(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    additionalReferences: MetadataReferenceFacade.GetSystemData(),
+                                    outputKind: OutputKind.ConsoleApplication);
     }
 }
