@@ -22,6 +22,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,16 +31,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SingleStatementPerLine_CSharp()
-        {
+        public void SingleStatementPerLine_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.cs", new CS.SingleStatementPerLine());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SingleStatementPerLine_VisualBasic()
-        {
+        public void SingleStatementPerLine_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.CSharp9.cs",
+                                    new CS.SingleStatementPerLine(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SingleStatementPerLine_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.vb", new VB.SingleStatementPerLine());
-        }
     }
 }

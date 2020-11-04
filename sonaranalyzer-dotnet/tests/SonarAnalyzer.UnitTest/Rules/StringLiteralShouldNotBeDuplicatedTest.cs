@@ -20,6 +20,7 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -30,19 +31,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringLiteralShouldNotBeDuplicated()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.cs",
-                new StringLiteralShouldNotBeDuplicated());
-        }
+        public void StringLiteralShouldNotBeDuplicated() => Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.cs", new StringLiteralShouldNotBeDuplicated());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringLiteralShouldNotBeDuplicated_Attributes()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.cs",
-                new StringLiteralShouldNotBeDuplicated { Threshold = 2 });
-        }
+        public void StringLiteralShouldNotBeDuplicated_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp9.cs",
+                                    new StringLiteralShouldNotBeDuplicated(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void StringLiteralShouldNotBeDuplicated_Attributes() =>
+            Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.cs",
+                                    new StringLiteralShouldNotBeDuplicated { Threshold = 2 });
     }
 }
