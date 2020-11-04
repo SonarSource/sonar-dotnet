@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,21 +31,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantParenthesesObjectCreation()
-        {
+        public void RedundantParenthesesObjectCreation() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesObjectCreation.cs",
-                new RedundantParenthesesObjectsCreation());
-        }
+                                    new RedundantParenthesesObjectsCreation());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundantParenthesesObjectCreation_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesObjectCreation.CSharp9.cs",
+                                    new RedundantParenthesesObjectsCreation(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void RedundantParenthesesObjectCreation_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\RedundantParenthesesObjectCreation.cs",
-                @"TestCases\RedundantParenthesesObjectCreation.Fixed.cs",
-                new RedundantParenthesesObjectsCreation(),
-                new RedundantParenthesesCodeFixProvider());
-        }
+        public void RedundantParenthesesObjectCreation_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantParenthesesObjectCreation.cs",
+                                   @"TestCases\RedundantParenthesesObjectCreation.Fixed.cs",
+                                   new RedundantParenthesesObjectsCreation(),
+                                   new RedundantParenthesesCodeFixProvider());
     }
 }
