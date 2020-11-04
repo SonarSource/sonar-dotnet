@@ -43,7 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.CSharp9.cs",
                                     new ReturnEmptyCollectionInsteadOfNull(),
                                     ParseOptionsHelper.FromCSharp9,
-                                    additionalReferences: MetadataReferenceFacade.GetSystemXml(),
                                     outputKind: OutputKind.ConsoleApplication);
     }
 }

@@ -7,9 +7,12 @@ var y = i >> 4; // Compliant
 nint j = 1;
 var z = j >> 4; // Compliant
 
-x = d >> new MyRecord();
+x = d >> new ImplicitCast();
+x = d >> new NoImplicitCast(); // Noncompliant
 
-record MyRecord
+record ImplicitCast
 {
-    public static implicit operator int(MyRecord self) => 1;
+    public static implicit operator int(ImplicitCast self) => 1;
 }
+
+record NoImplicitCast { }

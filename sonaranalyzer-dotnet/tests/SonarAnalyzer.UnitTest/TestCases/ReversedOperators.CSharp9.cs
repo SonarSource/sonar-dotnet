@@ -1,8 +1,8 @@
 ﻿nint nintTarget = -5;
 nint nintNum = 3;
 
-nintTarget = -nintNum; // Compliant - FN
-nintTarget = +nintNum; // Compliant - FN
+nintTarget =- nintNum; // Noncompliant
+nintTarget =+ nintNum; // Noncompliant
 
 nintTarget = -nintNum; // Compliant; intent to assign inverse value of num is clear
 
@@ -14,7 +14,7 @@ nintTarget =
 nuint nuintTarget = +5;
 nuint nuintNum = 3;
 
-nuintTarget = +nuintNum; // Compliant - FN
+nuintTarget =+ nuintNum; // Noncompliant
 
 nuintTarget += nuintNum;
 nuintTarget += +nuintNum;
