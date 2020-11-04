@@ -20,6 +20,7 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -33,7 +34,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ReturnEmptyCollectionInsteadOfNull() =>
             Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
-                new ReturnEmptyCollectionInsteadOfNull(),
-                additionalReferences: MetadataReferenceFacade.GetSystemXml());
+                                    new ReturnEmptyCollectionInsteadOfNull(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemXml());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ReturnEmptyCollectionInsteadOfNull_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.CSharp9.cs",
+                                    new ReturnEmptyCollectionInsteadOfNull(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
     }
 }

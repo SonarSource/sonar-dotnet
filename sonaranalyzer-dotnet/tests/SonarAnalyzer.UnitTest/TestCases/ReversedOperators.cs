@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     public class ReversedOperators
     {
