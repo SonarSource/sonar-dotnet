@@ -34,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         // See https://github.com/dotnet/roslyn/issues/45510
         private const string InitSnippet = @"namespace System.Runtime.CompilerServices { public class IsExternalInit { } }";
         private const string GeneratedAssemblyName = "project";
-        private const string InitSnippet = @"namespace System.Runtime.CompilerServices { public class IsExternalInit { } } // See https://github.com/dotnet/roslyn/issues/45510";
 
         private Solution Solution { get; }
 
