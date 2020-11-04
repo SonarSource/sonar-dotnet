@@ -30,20 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantToStringCall()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantToStringCall.cs", new RedundantToStringCall());
-        }
+        public void RedundantToStringCall() => Verifier.VerifyAnalyzer(@"TestCases\RedundantToStringCall.cs", new RedundantToStringCall());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundantToStringCall_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantToStringCall.CSharp9.cs",
+                                    new RedundantToStringCall(),
+                                    ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void RedundantToStringCall_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\RedundantToStringCall.cs",
-                @"TestCases\RedundantToStringCall.Fixed.cs",
-                new RedundantToStringCall(),
-                new RedundantToStringCallCodeFixProvider());
-        }
+        public void RedundantToStringCall_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantToStringCall.cs",
+                                   @"TestCases\RedundantToStringCall.Fixed.cs",
+                                   new RedundantToStringCall(),
+                                   new RedundantToStringCallCodeFixProvider());
     }
 }
