@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace System.Runtime.CompilerServices
-{
-    public class IsExternalInit { }
-}
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     record Program
     {

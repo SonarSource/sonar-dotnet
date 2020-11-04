@@ -1,8 +1,4 @@
-﻿namespace System.Runtime.CompilerServices
-{
-    public class IsExternalInit { }
-}
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     public interface IMyInterface
     {
