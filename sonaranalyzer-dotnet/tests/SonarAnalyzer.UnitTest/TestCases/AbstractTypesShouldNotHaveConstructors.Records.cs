@@ -1,10 +1,4 @@
-﻿// See https://github.com/dotnet/roslyn/issues/45510
-namespace System.Runtime.CompilerServices
-{
-    public class IsExternalInit { }
-}
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     abstract record AbstractRecordOne
     {

@@ -32,6 +32,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     internal struct SolutionBuilder
     {
         private const string GeneratedAssemblyName = "project";
+        private const string InitSnippet = @"namespace System.Runtime.CompilerServices { public class IsExternalInit { } } // See https://github.com/dotnet/roslyn/issues/45510";
 
         private Solution Solution { get; }
 
@@ -89,8 +90,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             FromSolution(new AdhocWorkspace().CurrentSolution);
 
         public static SolutionBuilder CreateSolutionFromPaths(IEnumerable<string> paths,
-            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-            IEnumerable<MetadataReference> additionalReferences = null)
+                                                              OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                              IEnumerable<MetadataReference> additionalReferences = null,
+                                                              bool isSupportForCSharp9InitNeeded = false)
         {
             if (paths == null ||
                 !paths.Any())
@@ -108,6 +110,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddProject(AnalyzerLanguage.FromPath(paths.First()), outputKind: outputKind)
                 .AddDocuments(paths)
                 .AddReferences(additionalReferences);
+
+            if (isSupportForCSharp9InitNeeded)
+            {
+                project = project.AddSnippet(InitSnippet);
+            }
 
             if (additionalReferences != null &&
                 additionalReferences.Any(r => r.Display.Contains("\\netstandard")))

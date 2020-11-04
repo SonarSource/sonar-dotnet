@@ -141,7 +141,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
             IEnumerable<MetadataReference> additionalReferences = null)
         {
-            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences);
+            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences, IsSupportForCSharp9InitNeeded(options));
 
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
@@ -206,5 +206,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, options, additionalReferences);
         }
+
+        private static bool IsSupportForCSharp9InitNeeded(IEnumerable<ParseOptions> options) =>
+            options != null
+            && options.OfType<CSharpParseOptions>().Select(option => option.LanguageVersion).Contains(LanguageVersion.CSharp9);
     }
 }
