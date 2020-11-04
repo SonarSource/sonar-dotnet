@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,21 +31,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SillyBitwiseOperation()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.cs",
-                new SillyBitwiseOperation());
-        }
+        public void SillyBitwiseOperation() => Verifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.cs", new SillyBitwiseOperation());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SillyBitwiseOperation_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.CSharp9.cs",
+                                    new SillyBitwiseOperation(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void SillyBitwiseOperation_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\SillyBitwiseOperation.cs",
-                @"TestCases\SillyBitwiseOperation.Fixed.cs",
-                new SillyBitwiseOperation(),
-                new SillyBitwiseOperationCodeFixProvider());
-        }
+        public void SillyBitwiseOperation_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\SillyBitwiseOperation.cs",
+                                   @"TestCases\SillyBitwiseOperation.Fixed.cs",
+                                   new SillyBitwiseOperation(),
+                                   new SillyBitwiseOperationCodeFixProvider());
     }
 }
