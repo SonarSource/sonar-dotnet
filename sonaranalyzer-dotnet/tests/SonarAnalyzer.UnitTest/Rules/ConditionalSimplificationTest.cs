@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -43,6 +44,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
+        [TestCategory("Rule")]
+        public void ConditionalSimplification_FromCSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
+                                    new ConditionalSimplification(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    OutputKind.ConsoleApplication);
+
+        [TestMethod]
         [TestCategory("CodeFix")]
         public void ConditionalSimplification_BeforeCSharp8_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
@@ -59,5 +68,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new ConditionalSimplification(),
                                    new ConditionalSimplificationCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void ConditionalSimplification_FromCSharp9_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
+                                   @"TestCases\ConditionalSimplification.FromCSharp9.Fixed.cs",
+                                   new ConditionalSimplification(),
+                                   new ConditionalSimplificationCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp9,
+                                   OutputKind.ConsoleApplication);
     }
 }
