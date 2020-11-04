@@ -38,7 +38,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConditionalsWithSameCondition_CSharp9() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalsWithSameCondition.CSharp9.cs", new ConditionalsWithSameCondition(),
-                ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
+                ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ConditionalsWithSameCondition_CSharp9_TopLevelStatements() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalsWithSameCondition.CSharp9.TopLevelStatements.cs",
+                new ConditionalsWithSameCondition(), ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
 
     }
 }

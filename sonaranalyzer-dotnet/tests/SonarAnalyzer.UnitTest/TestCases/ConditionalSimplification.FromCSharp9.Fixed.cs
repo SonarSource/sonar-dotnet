@@ -25,7 +25,7 @@ b = (a is not null) ? Identity(a) : Identity(new()); // FN ??
 a ??= new(); // Fixed
 
 Fruit elem;
-if (condition) // FN, in C# 9 has target typed conditionals
+if (condition) // FN, C# 9 has target typed conditionals
 {
     elem = new Apple();
 }
