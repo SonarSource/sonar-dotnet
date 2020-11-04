@@ -30,20 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantInheritanceList()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.cs", new RedundantInheritanceList());
-        }
+        public void RedundantInheritanceList() => Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.cs", new RedundantInheritanceList());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundantInheritanceList_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.CSharp9.cs",
+                                    new RedundantInheritanceList(),
+                                    ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void RedundantInheritanceList_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\RedundantInheritanceList.cs",
-                @"TestCases\RedundantInheritanceList.Fixed.cs",
-                new RedundantInheritanceList(),
-                new RedundantInheritanceListCodeFixProvider());
-        }
+        public void RedundantInheritanceList_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantInheritanceList.cs",
+                                   @"TestCases\RedundantInheritanceList.Fixed.cs",
+                                   new RedundantInheritanceList(),
+                                   new RedundantInheritanceListCodeFixProvider());
     }
 }
