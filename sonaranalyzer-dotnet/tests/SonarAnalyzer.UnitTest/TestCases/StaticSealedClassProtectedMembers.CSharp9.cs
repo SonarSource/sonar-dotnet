@@ -1,26 +1,26 @@
 ﻿using System;
 
-record Record
+sealed record Record
 {
     public int field0; // Compliant
 
-    protected int field1; // Compliant - FN
+    protected int field1; // Noncompliant
 
-    internal protected int field2; // Compliant - FN
+    internal protected int field2; // Noncompliant
 
-    internal readonly protected int field3; // Compliant - FN
+    internal readonly protected int field3; // Noncompliant
 
-    protected static int field4; // Compliant - FN
+    protected static int field4; // Noncompliant
 
-    internal protected static int field5; // Compliant - FN
+    internal protected static int field5; // Noncompliant
 
-    internal readonly protected static int field6; // Compliant - FN
+    internal readonly protected static int field6; // Noncompliant
 
-    protected const int const1 = 5; // Compliant - FN
+    protected const int const1 = 5; // Noncompliant
 
-    internal protected const int const2 = 10; // Compliant - FN
+    internal protected const int const2 = 10; // Noncompliant
 
-    protected Record() { } // Compliant - FN
+    protected Record() { } // Noncompliant
 
-    internal protected Record(string name) { } // Compliant - FN
+    internal protected Record(string name) { } // Noncompliant
 }

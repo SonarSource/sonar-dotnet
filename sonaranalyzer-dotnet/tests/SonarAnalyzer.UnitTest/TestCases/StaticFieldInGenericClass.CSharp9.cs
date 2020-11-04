@@ -1,4 +1,4 @@
-﻿record StaticFieldInGenericClass<T, U>
+﻿record StaticFieldInGenericClass<T>
     where T : class
 {
     internal static string field; //Noncompliant

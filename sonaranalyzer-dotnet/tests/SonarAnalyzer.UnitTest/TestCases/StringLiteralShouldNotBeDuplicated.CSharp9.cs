@@ -3,6 +3,8 @@
 string compliant = "compliant";
 string noncompliant = "foobar";
 
+var x = "foobar"; // Compliant - FN
+
 record Record
 {
     private string name = "foobar"; // Compliant - FN
