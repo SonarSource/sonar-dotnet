@@ -31,9 +31,3 @@ record Record
         init { x = value; }
     }
 }
-
-// See https://github.com/dotnet/roslyn/issues/45510
-namespace System.Runtime.CompilerServices
-{
-    public class IsExternalInit { }
-}
