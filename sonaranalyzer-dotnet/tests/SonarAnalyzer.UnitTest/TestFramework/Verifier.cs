@@ -187,27 +187,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public static void VerifyCodeFix(string path, string pathToExpected,
-            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, null, options, additionalReferences);
-        }
-
-        public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
-            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, null, options, additionalReferences);
-        }
-
-        public static void VerifyCodeFix(string path, string pathToExpected,
-            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, options, additionalReferences);
-        }
-
         public static void VerifyCodeFix(string path,
                                         string pathToExpected,
                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
