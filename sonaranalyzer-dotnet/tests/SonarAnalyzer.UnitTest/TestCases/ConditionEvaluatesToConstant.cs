@@ -2691,7 +2691,6 @@ namespace Repro_3565
     }
 }
 
-
 // https://github.com/SonarSource/sonar-dotnet/issues/3701 for S2589
 // https://github.com/SonarSource/sonar-dotnet/issues/3161 for S2583
 namespace Repro_LocalFunction
