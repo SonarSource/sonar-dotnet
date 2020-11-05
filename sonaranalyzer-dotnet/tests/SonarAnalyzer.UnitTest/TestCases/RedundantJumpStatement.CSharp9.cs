@@ -1,11 +1,5 @@
 ﻿using System;
 
-var a = new Action(() =>
-{
-    return; // Noncompliant
-//  ^^^^^^^
-});
-
 goto A; // Compliant - FN
 A:
 return; // Compliant - FN
