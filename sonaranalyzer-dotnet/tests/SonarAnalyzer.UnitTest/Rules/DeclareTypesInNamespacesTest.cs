@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,6 +20,8 @@
 
 extern alias csharp;
 extern alias vbnet;
+
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
@@ -32,11 +34,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeclareTypesInNamespaces_CS()
-        {
+        public void DeclareTypesInNamespaces_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.cs",
                 new CSharp.DeclareTypesInNamespaces());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -54,11 +54,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeclareTypesInNamespaces_VB()
-        {
+        public void DeclareTypesInNamespaces_CS_AfterCSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs",
+                new CSharp.DeclareTypesInNamespaces(),
+                ParseOptionsHelper.FromCSharp9,
+                OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DeclareTypesInNamespaces_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.vb",
                 new VisualBasic.DeclareTypesInNamespaces());
-        }
     }
 }
 
