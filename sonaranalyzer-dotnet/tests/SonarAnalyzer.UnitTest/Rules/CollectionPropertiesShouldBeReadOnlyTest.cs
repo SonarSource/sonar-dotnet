@@ -20,6 +20,7 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -35,5 +36,15 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
                 new CollectionPropertiesShouldBeReadOnly(),
                 additionalReferences: MetadataReferenceFacade.GetSystemRuntimeSerialization());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CollectionPropertiesShouldBeReadOnly_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.CSharp9.cs",
+                new CollectionPropertiesShouldBeReadOnly(),
+                ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication,
+                additionalReferences: MetadataReferenceFacade.GetSystemRuntimeSerialization());
+
     }
 }

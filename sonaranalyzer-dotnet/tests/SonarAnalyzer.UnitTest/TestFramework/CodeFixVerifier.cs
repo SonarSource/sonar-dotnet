@@ -38,9 +38,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
+            IEnumerable<ParseOptions> options = null,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+            IEnumerable<MetadataReference> additionalReferences = null)
         {
-            var document = CreateDocument(path, additionalReferences);
+            var document = CreateDocument(path, outputKind, additionalReferences);
             var parseOptions = ParseOptionsHelper.GetParseOptionsOrDefault(options)
                 .Where(ParseOptionsHelper.GetFilterByLanguage(document.Project.Language))
                 .ToArray();
@@ -62,9 +64,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private static Document CreateDocument(string path, IEnumerable<MetadataReference> additionalReferences) =>
+        private static Document CreateDocument(string path, OutputKind outputKind, IEnumerable<MetadataReference> additionalReferences) =>
             SolutionBuilder.Create()
-                .AddProject(AnalyzerLanguage.FromPath(path))
+                .AddProject(AnalyzerLanguage.FromPath(path), outputKind: outputKind)
                 .AddReferences(additionalReferences)
                 .AddDocument(path, true)
                 .FindDocument(Path.GetFileName(path));
