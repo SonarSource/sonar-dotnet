@@ -91,8 +91,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-                                          IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                          IEnumerable<ParseOptions> options = null,
                                           OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                          CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, checkMode, outputKind, additionalReferences);
 
@@ -186,26 +187,36 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public static void VerifyCodeFix(string path, string pathToExpected,
-            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, null, options, additionalReferences);
-        }
+        public static void VerifyCodeFix(string path,
+                                        string pathToExpected,
+                                        SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                        SonarCodeFixProvider codeFixProvider,
+                                        IEnumerable<ParseOptions> options = null,
+                                        OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                        IEnumerable<MetadataReference> additionalReferences = null) =>
+            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, null, options, outputKind, additionalReferences);
 
-        public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
-            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, null, options, additionalReferences);
-        }
+        // verifies batch code fix
+        public static void VerifyCodeFix(string path,
+                                        string pathToExpected,
+                                        string pathToBatchExpected,
+                                        SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                        SonarCodeFixProvider codeFixProvider,
+                                        IEnumerable<ParseOptions> options = null,
+                                        OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                        IEnumerable<MetadataReference> additionalReferences = null) =>
+            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, null, options, outputKind, additionalReferences);
 
-        public static void VerifyCodeFix(string path, string pathToExpected,
-            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
-        {
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, options, additionalReferences);
-        }
+        // verifies code fix with title
+        public static void VerifyCodeFix(string path,
+                                        string pathToExpected,
+                                        SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                        SonarCodeFixProvider codeFixProvider,
+                                        string codeFixTitle,
+                                        IEnumerable<ParseOptions> options = null,
+                                        OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                        IEnumerable<MetadataReference> additionalReferences = null) =>
+            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, options, outputKind, additionalReferences);
 
         private static bool IsSupportForCSharp9InitNeeded(IEnumerable<ParseOptions> options) =>
             options != null

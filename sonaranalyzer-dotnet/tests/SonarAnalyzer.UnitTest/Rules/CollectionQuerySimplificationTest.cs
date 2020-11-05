@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,9 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CollectionQuerySimplification()
-        {
+        public void CollectionQuerySimplification() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionQuerySimplification.cs", new CollectionQuerySimplification());
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CollectionQuerySimplification_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CollectionQuerySimplification.CSharp9.cs", new CollectionQuerySimplification(),
+                ParseOptionsHelper.FromCSharp9, outputKind: OutputKind.ConsoleApplication);
+
     }
 }
