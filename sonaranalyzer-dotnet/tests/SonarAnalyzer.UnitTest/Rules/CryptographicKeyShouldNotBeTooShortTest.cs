@@ -40,6 +40,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetAdditionalReferences());
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.CSharp9.cs",
+                new CryptographicKeyShouldNotBeTooShort(),
+                ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication,
+                additionalReferences: GetAdditionalReferences());
+
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.GetSystemSecurityCryptography()
                 .Concat(NuGetMetadataReference.SystemSecurityCryptographyOpenSsl())
