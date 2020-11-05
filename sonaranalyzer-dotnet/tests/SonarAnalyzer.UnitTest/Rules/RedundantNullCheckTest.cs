@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -30,30 +31,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantNullCheck_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.cs", new CS.RedundantNullCheck());
-        }
-
-        [TestMethod]
-        [TestCategory("CodeFix")]
-        public void RedundantNullCheck_CS_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\RedundantNullCheck.cs",
-                @"TestCases\RedundantNullCheck.Fixed.cs",
-                @"TestCases\RedundantNullCheck.Fixed.Batch.cs",
-                new CS.RedundantNullCheck(),
-                new CS.RedundantNullCheckCodeFixProvider());
-        }
+        public void RedundantNullCheck_CS() => Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.cs", new CS.RedundantNullCheck());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantNullCheck_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.vb",
-                new VB.RedundantNullCheck());
-        }
+        public void RedundantNullCheck_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.CSharp9.cs",
+                                    new CS.RedundantNullCheck(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void RedundantNullCheck_CS_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantNullCheck.cs",
+                                   @"TestCases\RedundantNullCheck.Fixed.cs",
+                                   @"TestCases\RedundantNullCheck.Fixed.Batch.cs",
+                                   new CS.RedundantNullCheck(),
+                                   new CS.RedundantNullCheckCodeFixProvider());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundantNullCheck_VB() => Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.vb", new VB.RedundantNullCheck());
     }
 }
 

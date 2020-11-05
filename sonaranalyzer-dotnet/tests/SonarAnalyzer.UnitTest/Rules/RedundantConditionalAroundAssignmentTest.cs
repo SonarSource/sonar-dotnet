@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,22 +31,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantConditionalAroundAssignment()
-        {
-            Verifier.VerifyAnalyzer(
-                @"TestCases\RedundantConditionalAroundAssignment.cs",
-                new RedundantConditionalAroundAssignment());
-        }
+        public void RedundantConditionalAroundAssignment() => Verifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.cs", new RedundantConditionalAroundAssignment());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundantConditionalAroundAssignment_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs",
+                                    new RedundantConditionalAroundAssignment(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void RedundantConditionalAroundAssignment_CodeFix()
-        {
-            Verifier.VerifyCodeFix(
-                @"TestCases\RedundantConditionalAroundAssignment.cs",
-                @"TestCases\RedundantConditionalAroundAssignment.Fixed.cs",
-                new RedundantConditionalAroundAssignment(),
-                new RedundantConditionalAroundAssignmentCodeFixProvider());
-        }
+        public void RedundantConditionalAroundAssignment_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.cs",
+                                   @"TestCases\RedundantConditionalAroundAssignment.Fixed.cs",
+                                   new RedundantConditionalAroundAssignment(),
+                                   new RedundantConditionalAroundAssignmentCodeFixProvider());
     }
 }
