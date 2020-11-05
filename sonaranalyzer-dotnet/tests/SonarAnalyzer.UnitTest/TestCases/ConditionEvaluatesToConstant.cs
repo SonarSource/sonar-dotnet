@@ -2690,3 +2690,34 @@ namespace Repro_3565
         }
     }
 }
+
+
+// https://github.com/SonarSource/sonar-dotnet/issues/3701 for S2589
+// https://github.com/SonarSource/sonar-dotnet/issues/3161 for S2583
+namespace Repro_LocalFunction
+{
+    public class Repro
+    {
+        public void DoWork(bool condition)
+        {
+            string value = null;
+            LocalFunction();
+            if (value != null) // Noncompliant False Positive S2583
+            {                  // Secondary
+                throw new InvalidOperationException();
+            }
+            if (value == null) // Noncompliant False Positive S2589
+            {
+                throw new InvalidOperationException();
+            }
+
+            void LocalFunction()
+            {
+                if (condition)
+                {
+                    value = "Not null";
+                }
+            }
+        }
+    }
+}
