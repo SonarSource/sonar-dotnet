@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,19 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PropertyToAutoProperty()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.cs",
-                new PropertyToAutoProperty());
-        }
+        public void PropertyToAutoProperty() => Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.cs", new PropertyToAutoProperty());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void PropertyToAutoProperty_FromCSharp7()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.CSharp7.cs",
-                new PropertyToAutoProperty(),
-                ParseOptionsHelper.FromCSharp7);
-        }
+        public void PropertyToAutoProperty_FromCSharp7() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.CSharp7.cs", new PropertyToAutoProperty(), ParseOptionsHelper.FromCSharp7);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PropertyToAutoProperty_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.CSharp9.cs", new PropertyToAutoProperty(), ParseOptionsHelper.FromCSharp9);
     }
 }
