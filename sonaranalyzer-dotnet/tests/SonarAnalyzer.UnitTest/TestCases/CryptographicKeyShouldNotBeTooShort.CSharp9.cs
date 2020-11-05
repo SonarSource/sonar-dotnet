@@ -61,9 +61,3 @@ record Program
         ec3.GenerateKey(ECCurve.NamedCurves.brainpoolP192t1); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
     }
 }
-
-// See https://github.com/dotnet/roslyn/issues/45510
-namespace System.Runtime.CompilerServices
-{
-    public class IsExternalInit { }
-}

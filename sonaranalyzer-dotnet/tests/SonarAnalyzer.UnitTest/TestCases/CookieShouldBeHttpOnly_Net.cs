@@ -24,9 +24,3 @@ class Program
         CookieOptions c2 = new () { Secure = true }; // FN, as HttpOnly is not set
     }
 }
-
-// See https://github.com/dotnet/roslyn/issues/45510
-namespace System.Runtime.CompilerServices
-{
-    public class IsExternalInit { }
-}

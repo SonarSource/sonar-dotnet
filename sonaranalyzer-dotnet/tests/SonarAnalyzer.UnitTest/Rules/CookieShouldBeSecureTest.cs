@@ -66,8 +66,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CookiesShouldBeSecure_NetCore_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_NetCore.CSharp9.cs",
+        public void CookiesShouldBeSecure_Net() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_Net.cs",
                 new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp9,
                 outputKind: OutputKind.ConsoleApplication,
