@@ -24,6 +24,7 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -39,6 +40,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConstructorArgumentValueShouldExist_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.cs",
                 new ConstructorArgumentValueShouldExist(),
+                additionalReferences: MetadataReferenceFacade.GetSystemXaml());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ConstructorArgumentValueShouldExist_CS_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.CSharp9.cs",
+                new ConstructorArgumentValueShouldExist(),
+                ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication,
                 additionalReferences: MetadataReferenceFacade.GetSystemXaml());
 
         [TestMethod]

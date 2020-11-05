@@ -21,7 +21,7 @@
 extern alias csharp;
 using System.Collections.Immutable;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
@@ -35,33 +35,42 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionEvaluatesToConstant()
-        {
+        public void ConditionEvaluatesToConstant() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
                 GetAnalyzer(),
                 additionalReferences: NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7"));
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionEvaluatesToConstant_FromCSharp7()
-        {
+        public void ConditionEvaluatesToConstant_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp7);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionEvaluatesToConstant_FromCSharp8()
-        {
+        public void ConditionEvaluatesToConstant_FromCSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
                 GetAnalyzer(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ConditionEvaluatesToConstant_FromCSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp9.cs",
+                GetAnalyzer(),
+                ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ConditionEvaluatesToConstant_FromCSharp9_TopLevelStatements() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs",
+                GetAnalyzer(),
+                ParseOptionsHelper.FromCSharp9,
+                outputKind: OutputKind.ConsoleApplication);
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             new SymbolicExecutionRunner(
