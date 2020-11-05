@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,10 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DebugAssertHasNoSideEffects()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DebugAssertHasNoSideEffects.cs",
-                new DebugAssertHasNoSideEffects());
-        }
+        public void DebugAssertHasNoSideEffects() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DebugAssertHasNoSideEffects.cs", new DebugAssertHasNoSideEffects());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DebugAssertHasNoSideEffects_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DebugAssertHasNoSideEffects.CSharp9.cs", new DebugAssertHasNoSideEffects(),
+                ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
+
     }
 }
