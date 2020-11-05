@@ -23,6 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,9 +36,17 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\RedundantArgument.cs",
                                     new RedundantArgument(),
 #if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                                    additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
-                options: ParseOptionsHelper.FromCSharp8);
+                                    options: ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundantArgument_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantArgument.CSharp9.cs",
+                                    new RedundantArgument(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    outputKind: OutputKind.ConsoleApplication);
 
         [TestMethod]
         [TestCategory("CodeFix")]
