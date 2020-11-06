@@ -47,6 +47,29 @@ void PatternMatch(object param)
     }
 }
 
+void PatternMatchFalseNegative(int a, int b)
+{
+    if (b is not 5)
+    {
+        a = 1;
+    }
+    else if (b is 5)
+    {
+        a = 2; // Compliant - FN, the parameter value is overwritten on all possible paths
+    }
+
+    var c = 5;
+    switch (c)
+    {
+        case < 5:
+            c = 6; // Compliant, FN
+            break;
+        case >= 5:
+            c = 7; // Compliant, FN
+            break;
+    }
+}
+
 Action<int, int, int> StaticLambda() =>
     (int a, int _, int _) =>
     {
