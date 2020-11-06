@@ -30,18 +30,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ProvideDeserializationMethodsForOptionalFields_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.cs",
-                new ProvideDeserializationMethodsForOptionalFields());
-        }
+        public void ProvideDeserializationMethodsForOptionalFields_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.cs", new ProvideDeserializationMethodsForOptionalFields());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ProvideDeserializationMethodsForOptionalFields_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ProvideDeserializationMethodsForOptionalFields());
-        }
+        public void ProvideDeserializationMethodsForOptionalFields_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.CSharp9.cs",
+                                    new ProvideDeserializationMethodsForOptionalFields(),
+                                    ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ProvideDeserializationMethodsForOptionalFields_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.vb", new SonarAnalyzer.Rules.VisualBasic.ProvideDeserializationMethodsForOptionalFields());
     }
 }
