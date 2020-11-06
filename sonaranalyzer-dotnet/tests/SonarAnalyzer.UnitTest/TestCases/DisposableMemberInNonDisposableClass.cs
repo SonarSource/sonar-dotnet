@@ -32,7 +32,7 @@ namespace Tests.Diagnostics
             this.fs.Close();
         }
 
-        public void Dispose()
+        public void Dispose() // FN, it does not dispose fs
         {
         }
     }
@@ -123,6 +123,24 @@ namespace Tests.Diagnostics
         private sealed class DisposableStuff : IDisposable
         {
             public void Dispose() { }
+        }
+    }
+
+    partial class PartialMethod : IDisposable
+    {
+        private readonly IDisposable _disposable = new FileStream("a", FileMode.Open);
+        public void Dispose()
+        {
+            MyDispose();
+        }
+        partial void MyDispose();
+    }
+
+    partial class PartialMethod : IDisposable
+    {
+        partial void MyDispose()
+        {
+            _disposable.Dispose();
         }
     }
 }
