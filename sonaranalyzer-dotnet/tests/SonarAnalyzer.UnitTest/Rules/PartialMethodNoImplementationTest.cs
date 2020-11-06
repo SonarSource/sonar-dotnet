@@ -30,10 +30,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PartialMethodNoImplementation()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\PartialMethodNoImplementation.cs",
-                new PartialMethodNoImplementation());
-        }
+        public void PartialMethodNoImplementation() => Verifier.VerifyAnalyzer(@"TestCases\PartialMethodNoImplementation.cs", new PartialMethodNoImplementation());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PartialMethodNoImplementation_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PartialMethodNoImplementation.CSharp9.cs",
+                                    new PartialMethodNoImplementation(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    // Compilation errors are ignored since they are intented.
+                                    checkMode: CompilationErrorBehavior.Ignore);
     }
 }
