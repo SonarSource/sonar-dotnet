@@ -1,4 +1,6 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+
+namespace Tests.Diagnostics
 {
     public class MyClass
     {
@@ -38,6 +40,20 @@
             s = m.ToString() + "";
 
             s = base.ToString() + "";
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3665
+    public class Repro_3665
+    {
+        public void Repro(Uri a, Uri b, Uri c, Uri d)
+        {
+            var two = a + b.ToString();  // First occurance is False Positive, second is True Positive
+
+            var four = a + b.ToString() + c + d;   // Fixed
+            // Fixed
+            // Fixed
+            // Fixed
         }
     }
 }
