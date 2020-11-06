@@ -31,14 +31,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParameterNamesInPartialMethod()
-        {
+        public void ParameterNamesInPartialMethod() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesInPartialMethod.cs",
-                new ParameterNamesInPartialMethod(),
+                                    new ParameterNamesInPartialMethod(),
 #if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                                    additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
-                options: ParseOptionsHelper.FromCSharp8);
-        }
+                                    options: ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ParameterNamesInPartialMethod_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesInPartialMethod.CSharp9.cs",
+                                    new ParameterNamesInPartialMethod(),
+                                    ParseOptionsHelper.FromCSharp9);
     }
 }
