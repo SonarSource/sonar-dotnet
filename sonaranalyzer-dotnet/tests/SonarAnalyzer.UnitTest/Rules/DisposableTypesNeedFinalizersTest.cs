@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,21 +30,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DisposableTypesNeedFinalizers()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs",
-                new DisposableTypesNeedFinalizers());
-        }
+        public void DisposableTypesNeedFinalizers() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new DisposableTypesNeedFinalizers());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DisposableTypesNeedFinalizers_InvalidCode()
-        {
+        public void DisposableTypesNeedFinalizers_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.CSharp9.cs", new DisposableTypesNeedFinalizers(),
+                ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DisposableTypesNeedFinalizers_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class Foo_05 : IDisposable
 {
     private HandleRef;
 }", new DisposableTypesNeedFinalizers(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }
