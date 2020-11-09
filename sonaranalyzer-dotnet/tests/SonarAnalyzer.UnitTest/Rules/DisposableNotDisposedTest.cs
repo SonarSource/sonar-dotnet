@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,6 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,5 +37,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new DisposableNotDisposed(),
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: MetadataReferenceFacade.GetSystemNetHttp());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DisposableNotDisposed_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.CSharp9.cs",
+                new DisposableNotDisposed(),
+                ParseOptionsHelper.FromCSharp9,
+                OutputKind.ConsoleApplication,
+                additionalReferences: MetadataReferenceFacade.GetSystemNetHttp());
+
     }
 }
