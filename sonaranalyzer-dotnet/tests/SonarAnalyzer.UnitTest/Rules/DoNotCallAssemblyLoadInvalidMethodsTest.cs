@@ -23,24 +23,34 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class AssemblyLoadShouldBeUsedTest
+    public class DoNotCallAssemblyLoadInvalidMethodsTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void AssemblyLoadShouldBeUsed() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AssemblyLoadShouldBeUsed.cs",
+        public void DoNotCallAssemblyLoadInvalidMethods() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.cs",
                                     new DoNotCallAssemblyLoadInvalidMethods(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemSecurityPermissions());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs",
+                                    new DoNotCallAssemblyLoadInvalidMethods(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    OutputKind.ConsoleApplication,
                                     additionalReferences: MetadataReferenceFacade.GetSystemSecurityPermissions());
 
 #if NETFRAMEWORK // The overloads with Evidence are obsolete on .Net Framework 4.8 and not available on .Net Core
         [TestMethod]
         [TestCategory("Rule")]
-        public void AssemblyLoadWithEvidenceShouldBeUsed() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AssemblyLoadShouldBeUsed.Evidence.cs",
+        public void DoNotCallAssemblyLoadInvalidMethods_EvidenceParameter() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.Evidence.cs",
                                     new DoNotCallAssemblyLoadInvalidMethods());
 #endif
     }
