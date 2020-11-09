@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
         [TestMethod]
         public void SimpleMethod()
         {
-            var code = @"
+            const string code = @"
 class C
 {
     int Mult(int i, int j)
@@ -67,7 +67,7 @@ class C
         [TestMethod]
         public void IfThenElse()
         {
-            var code = @"
+            const string code = @"
 void UselessCondition(int i) {
     if (i == 0) {
         if (i != 0) {
@@ -90,7 +90,7 @@ int WithReturn(int i) {
         [TestMethod]
         public void WhileLoops()
         {
-            var code = @"
+            const string code = @"
 private int WhileLoop(int i)
 {
     while (i<100)
@@ -128,7 +128,7 @@ private int WhileLoopContinue(int i)
         [TestMethod]
         public void DoWhileLoops()
         {
-            var code = @"
+            const string code = @"
 private int WhileLoop(int i)
 {
     do
@@ -166,7 +166,7 @@ private int WhileLoopContinue(int i)
         [TestMethod]
         public void ForLoops()
         {
-            var code = @"
+            const string code = @"
 private int ForLoop(int i)
 {
     int total = 0;
@@ -208,7 +208,7 @@ private int ForLoopContinue(int i)
         [TestMethod]
         public void ForEachLoops()
         {
-            var code = @"
+            const string code = @"
 int ForEachLoop()
 {
     var a = new int [10];
@@ -227,7 +227,7 @@ int ForEachLoop()
         [TestMethod]
         public void WorkWithLong()
         {
-            var code = @"
+            const string code = @"
 long withLong()
 {
     long l = 10;
@@ -248,7 +248,7 @@ long withLong()
         [TestMethod]
         public void TryCatchFinally()
         {
-            var code = @"
+            const string code = @"
 int TryCatch(int i)
 {
     int j = 3;
@@ -349,7 +349,7 @@ int TryThrow(int i)
         [TestMethod]
         public void FuncCall()
         {
-            var code = @"
+            const string code = @"
 
 class S {
     public static void stat(){}
@@ -384,7 +384,7 @@ int g(A a, int i)
         [TestMethod]
         public void Using()
         {
-            var code = @"
+            const string code = @"
 using System;
 
 class Resource : IDisposable
@@ -406,7 +406,7 @@ class A {
         [TestMethod]
         public void Enum()
         {
-            var code = @"
+            const string code = @"
 using System;
 
 public enum Color { Red, Green, Blue };
@@ -456,7 +456,7 @@ class A {
         [TestMethod]
         public void EmptyBody()
         {
-            var code = @"
+            const string code = @"
 public static extern void Extern(int p1);
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
@@ -465,7 +465,7 @@ public static extern void Extern(int p1);
         [TestMethod]
         public void CommentsWithNewLine()
         {
-            var code = @"
+            const string code = @"
 void f()
 {
     new A() { i = 3 }; // Noncompliant
@@ -478,7 +478,7 @@ void f()
         [TestMethod]
         public void ReturnNullLitteral()
         {
-            var code = @"
+            const string code = @"
 public Type f()
 {
     return null;
@@ -489,7 +489,7 @@ public Type f()
         [TestMethod]
         public void ReturnParenthesizedNullLitteral()
         {
-            var code = @"
+            const string code = @"
 public Type f()
 {
     return (null);
@@ -500,7 +500,7 @@ public Type f()
         [TestMethod]
         public void ParenthesizedExpressions()
         {
-            var code = @"
+            const string code = @"
 public void f(int i, int j)
 {
     var k = ((i) + j);
@@ -515,7 +515,7 @@ public void f(int i, int j)
         [TestMethod]
         public void UnknownMethodOnMultipleLines()
         {
-            var code = @"
+            const string code = @"
 void f(int i, int j)
 {
     g(i,
@@ -527,7 +527,7 @@ void f(int i, int j)
         [TestMethod]
         public void ForWithoutCondition()
         {
-            var code = @"
+            const string code = @"
 void f(int i)
 {
     for (;;)
@@ -541,7 +541,7 @@ void f(int i)
         [TestMethod]
         public void ChainingAssignments()
         {
-            var code = @"
+            const string code = @"
 void f(int i)
 {
     int j = i = 0;
@@ -553,7 +553,7 @@ void f(int i)
         [TestMethod]
         public void UseOfReadonlyClassField()
         {
-            var code = @"
+            const string code = @"
 public class A
 {
     readonly int a = 0;
@@ -569,7 +569,7 @@ public class A
         [TestMethod]
         public void UseOfConstantClassField()
         {
-            var code = @"
+            const string code = @"
 public class A
 {
     const int a = 0;
@@ -585,7 +585,7 @@ public class A
         [TestMethod]
         public void UnnamedFunctionParameter()
         {
-            var code = @"
+            const string code = @"
 int Func(int, int, int i)
 {
     return 2*i;
@@ -596,7 +596,7 @@ int Func(int, int, int i)
         [TestMethod]
         public void SimpleLambdaExpression()
         {
-            var code = @"
+            const string code = @"
 public System.Linq.Expressions.Expression<Func<int, int>> F()
 {
     return x => 2*x;
@@ -607,7 +607,7 @@ public System.Linq.Expressions.Expression<Func<int, int>> F()
         [TestMethod]
         public void ParenthesizedLambdaExpression()
         {
-            var code = @"
+            const string code = @"
 Action f()
 {
     return () => Y();
@@ -618,7 +618,7 @@ Action f()
         [TestMethod]
         public void SwitchStatement()
         {
-            var code = @"
+            const string code = @"
 int f(int i)
 {
     switch (i)
@@ -635,7 +635,7 @@ int f(int i)
         [TestMethod]
         public void NonASCIIEncodings()
         {
-            var code = @"
+            const string code = @"
 public void 你好() { }
 
 public void Łódź() { }
@@ -649,7 +649,7 @@ public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }";
         [TestMethod]
         public void Arglist()
         {
-            var code = @"
+            const string code = @"
 public void f(__arglist)
 {
 }";
@@ -659,7 +659,7 @@ public void f(__arglist)
         [TestMethod]
         public void ParamsKeyword()
         {
-            var code = @"
+            const string code = @"
 public void f(params int[] args)
         {
         }";
@@ -669,7 +669,7 @@ public void f(params int[] args)
         [TestMethod]
         public void CheckedUnchecked()
         {
-            var code = @"
+            const string code = @"
 public int CheckedStmt(int i)
 {
     checked
@@ -700,7 +700,7 @@ public int UncheckedExpr(int i)
         [TestMethod]
         public void Fixed()
         {
-            var code = @"
+            const string code = @"
 class Point
 {
     public int x;
@@ -721,7 +721,7 @@ unsafe private static void ModifyFixedStorage()
         [TestMethod]
         public void Namespace()
         {
-            var code = @"
+            const string code = @"
 namespace Tests
 {
     public static void f()
@@ -734,7 +734,7 @@ namespace Tests
         [TestMethod]
         public void Overloads()
         {
-            var code = @"
+            const string code = @"
 namespace N
 {
     class A {
@@ -758,7 +758,7 @@ class B {
         [TestMethod]
         public void NestedFunction()
         {
-            var code = @"
+            const string code = @"
 void f()
 {
     var s = g();
@@ -773,7 +773,7 @@ void f()
         [TestMethod]
         public void FieldAssignment()
         {
-            var code = @"
+            const string code = @"
 class Point
 {
     public int x;
@@ -790,7 +790,7 @@ void f(Point p)
         [TestMethod]
         public void FieldOfThisAssignment()
         {
-            var code = @"
+            const string code = @"
 class Point
 {
     public int x;
@@ -807,7 +807,7 @@ class Point
         [TestMethod]
         public void ArrayAssignment()
         {
-            var code = @"
+            const string code = @"
 void f()
 {
     int[] array = new int[5];
@@ -819,7 +819,7 @@ void f()
         [TestMethod]
         public void CastOnReturn()
         {
-            var code = @"
+            const string code = @"
 int f(char c)
 {
     return c;
@@ -840,7 +840,7 @@ char h(bool c)
         [TestMethod]
         public void IgnoreParenthesesInAssignment()
         {
-            var code = @"
+            const string code = @"
 void f(int a, int b)
 {
     a = (b = 2);
@@ -851,7 +851,7 @@ void f(int a, int b)
         [TestMethod]
         public void AssignmentInComparison()
         {
-            var code = @"
+            const string code = @"
 int f(int a, int b)
 {
     if ((a = 3) < (b = 2))
@@ -866,7 +866,7 @@ int f(int a, int b)
         [TestMethod]
         public void AssignmentInBinaryOperator()
         {
-            var code = @"
+            const string code = @"
 void f(int a, int b)
 {
     a = (b = 2) + 1;
@@ -877,7 +877,7 @@ void f(int a, int b)
         [TestMethod]
         public void Goto()
         {
-            var code = @"
+            const string code = @"
 void f()
 {
     goto Label;
@@ -890,7 +890,7 @@ Label:
         [TestMethod]
         public void UnknownConstant()
         {
-            var code = @"
+            const string code = @"
 class A
 {
         private const object NullConst = null;
@@ -905,7 +905,7 @@ class A
         [TestMethod]
         public void Property()
         {
-            var code = @"
+            const string code = @"
 class A {
     public void DoSomething1() { }
     public bool someCondition1 { get; set; }
@@ -929,7 +929,7 @@ class A {
         [TestMethod]
         public void AsyncFunction()
         {
-            var code = @"
+            const string code = @"
 class A {
     async System.Threading.Tasks.Task<int> FuncAsync()
     {
@@ -942,7 +942,7 @@ class A {
         [TestMethod]
         public void MethodGroup()
         {
-            var code = @"
+            const string code = @"
 public static Func<string, bool> CreateFilter()
 {
     return string.IsNullOrEmpty;
@@ -953,7 +953,7 @@ public static Func<string, bool> CreateFilter()
         [TestMethod]
         public void MemberFieldAccess()
         {
-            var code = @"
+            const string code = @"
 class M
 {
     public int[] Parameters => new int[12];
@@ -975,7 +975,7 @@ class A
         [TestMethod]
         public void BoolProperty()
         {
-            var code = @"
+            const string code = @"
 class A
 {
     public bool Toto => true;
@@ -995,7 +995,7 @@ class B
         [TestMethod]
         public void MethodsCallsOnMultipleLines()
         {
-            var code = @"
+            const string code = @"
 class A
 {
     public const string myString = ""Blabla"";
@@ -1014,7 +1014,7 @@ class A
         [TestMethod]
         public void AnonymousMethodExpression()
         {
-            var code = @"
+            const string code = @"
 class A
 {
     public delegate object anonymousMethod(params object[] args);
@@ -1030,7 +1030,7 @@ class A
         [TestMethod]
         public void AnonymousObjectCreation()
         {
-            var code = @"
+            const string code = @"
 public int f()
 {
     var v = new { a = 108, m = ""Hello"" };
@@ -1042,7 +1042,7 @@ public int f()
         [TestMethod]
         public void AssignmentInReturn()
         {
-            var code = @"
+            const string code = @"
 class A
 {
     protected int a;
@@ -1058,7 +1058,7 @@ class A
         [TestMethod]
         public void BooleanConstant()
         {
-            var code = @"
+            const string code = @"
 public class A
 {
     internal const bool myBool = true;
@@ -1074,7 +1074,7 @@ public class A
         [TestMethod]
         public void PropertyFromAnotherAssembly()
         {
-            var code = @"
+            const string code = @"
 
 using System;
 using System.Collections.ObjectModel;
@@ -1099,7 +1099,7 @@ public class A<T> : Collection<T>
         [TestMethod]
         public void InfiniteLoop()
         {
-            var code = @"
+            const string code = @"
 int InfiniteLoop(int i) {
     while (true) {
         if (++i == 42) {
@@ -1114,7 +1114,7 @@ int InfiniteLoop(int i) {
         [TestMethod]
         public void IfDynamic()
         {
-            var code = @"
+            const string code = @"
 internal class A
 {
     public dynamic HasValue => true;
@@ -1137,7 +1137,7 @@ internal class B
         [TestMethod]
         public void ModifyFieldParameterAndLocalVariable()
         {
-            var code = @"
+            const string code = @"
 class A
 {
     private int p;
@@ -1156,7 +1156,7 @@ class A
         [TestMethod]
         public void BinaryOperatorAssignment()
         {
-            var code = @"
+            const string code = @"
 public void f(int i)
 {
     i -= 1;
@@ -1182,7 +1182,7 @@ public void g(int[] array1, long[] array2)
         [TestMethod]
         public void NoIdentifier()
         {
-            var code = @"
+            const string code = @"
 public class A
 {
     public int count;
@@ -1207,7 +1207,7 @@ public int f()
         [TestMethod]
         public void IncompatibleAssignmentTypes()
         {
-            var code = @"
+            const string code = @"
 public int f(int i)
 {
     byte b = (byte)i;
@@ -1227,7 +1227,7 @@ public int f(int i)
         [TestMethod]
         public void UnaryNeg()
         {
-            var code = @"
+            const string code = @"
 public bool neg()
 {
     int i = -12;
@@ -1243,7 +1243,7 @@ public bool neg()
         [TestMethod]
         public void UnaryPlus()
         {
-            var code = @"
+            const string code = @"
 public bool plus()
 {
     int i = +12;
@@ -1259,7 +1259,7 @@ public bool plus()
         [TestMethod]
         public void MixingUintAndNeg()
         {
-            var code = @"
+            const string code = @"
 void f() {
   int j = -10u;
 }
@@ -1273,7 +1273,7 @@ void g() {
         [TestMethod]
         public void UnsafeStatement()
         {
-            var code = @"
+            const string code = @"
 int f() {
   int i = 0;
   unsafe
@@ -1289,7 +1289,7 @@ int f() {
         [TestMethod]
         public void UnsafeClass()
         {
-            var code = @"
+            const string code = @"
 unsafe class C {
   int f()
   {
@@ -1303,7 +1303,7 @@ unsafe class C {
         [TestMethod]
         public void BoolAssignmentInsideIfCondition()
         {
-            var code = @"
+            const string code = @"
 public class Derived {
 
 protected bool j;
@@ -1324,5 +1324,5 @@ protected bool j;
 }";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
-    } // Class
-} // Namespace
+    }
+}
