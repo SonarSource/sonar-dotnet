@@ -22,18 +22,22 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class GcCollectShouldNotBeCalledTest
+    public class DoNotCallGCCollectMethodTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GcCollectShouldNotBeCalled()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\GcCollectShouldNotBeCalled.cs",
-                new DoNotCallGCCollectMethod());
-        }
+        public void DoNotCallGCCollectMethod() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCCollectMethod.cs", new DoNotCallGCCollectMethod());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotCallGCCollectMethod_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCCollectMethod.CSharp9.cs", new DoNotCallGCCollectMethod(),
+                ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
     }
 }
