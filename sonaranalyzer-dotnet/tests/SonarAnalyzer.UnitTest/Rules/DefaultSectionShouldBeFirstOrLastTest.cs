@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,10 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DefaultSectionShouldBeFirstOrLast()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DefaultSectionShouldBeFirstOrLast.cs",
-                new DefaultSectionShouldBeFirstOrLast());
-        }
+        public void DefaultSectionShouldBeFirstOrLast() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DefaultSectionShouldBeFirstOrLast.cs", new DefaultSectionShouldBeFirstOrLast());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DefaultSectionShouldBeFirstOrLast_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DefaultSectionShouldBeFirstOrLast.CSharp9.cs",
+                new DefaultSectionShouldBeFirstOrLast(), ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
     }
 }
