@@ -447,27 +447,6 @@ function CheckInternalProjectsDifferences(){
     Write-Debug "Internal project differences verified in '${internalProjTimerElapsed}'"
 }
 
-function ChangeRuleset([string]$before, [string]$after) {
-    $rulesetFile=".\output\AllSonarAnalyzerRules.ruleset"
-    ((Get-Content -Path $rulesetFile -raw) -Replace $before,$after) | Set-Content -Path $rulesetFile
-}
-
-function DisableRule([string]$ruleId) {
-    Write-Host "Will disable rule ${ruleId}."
-
-    $toModify="<Rule Id=""${ruleId}"" Action=""Warning"" />"
-    $modifyWith="<Rule Id=""${ruleId}"" Action=""None"" />"
-    ChangeRuleset $toModify $modifyWith
-}
-
-function EnableRule([string]$ruleId) {
-    Write-Host "Will enable rule ${ruleId}."
-
-    $toModify="<Rule Id=""${ruleId}"" Action=""None"" />"
-    $modifyWith="<Rule Id=""${ruleId}"" Action=""Warning"" />"
-    ChangeRuleset $toModify $modifyWith
-}
-
 try {
     $scriptTimer = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
@@ -513,11 +492,7 @@ try {
     Build-Project-MSBuild "SkipGeneratedVb" "SkipGeneratedVb.sln"
 
     Build-Project-DotnetTool "NetCore31" "NetCore31.sln"
-
-    # The CBDE rule is failing for C# 9 syntax. See https://github.com/SonarSource/sonar-dotnet/issues/3439
-    DisableRule "S3949"
     Build-Project-DotnetTool "Net5" "Net5.sln"
-    EnableRule "S3949"
 
     Write-Header "Processing analyzer results"
 
