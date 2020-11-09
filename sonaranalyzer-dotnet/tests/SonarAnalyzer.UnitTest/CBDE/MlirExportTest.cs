@@ -61,7 +61,7 @@ class C
             return i*3 +1;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ int WithReturn(int i) {
     }
     return i;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -122,7 +122,7 @@ private int WhileLoopContinue(int i)
     }
     return i;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -160,7 +160,7 @@ private int WhileLoopContinue(int i)
     } while (i < 100)
     return i;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -202,7 +202,7 @@ private int ForLoopContinue(int i)
     }
     return total;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -221,7 +221,7 @@ int ForEachLoop()
     }
     return 0;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -242,7 +242,7 @@ long withLong()
     }
     return total;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -343,7 +343,7 @@ int TryThrow(int i)
     }
     return 20;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -378,7 +378,7 @@ int g(A a, int i)
     return result;
 }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -400,7 +400,7 @@ class A {
         }
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -450,7 +450,7 @@ class A {
         }
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -459,7 +459,7 @@ class A {
             const string code = @"
 public static extern void Extern(int p1);
 ";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -472,7 +472,7 @@ void f()
 //          ^^^^^^^^^
     new A() { i = 4 };
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -483,7 +483,7 @@ public Type f()
 {
     return null;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -494,7 +494,7 @@ public Type f()
 {
     return (null);
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -509,7 +509,7 @@ public void f(int i, int j)
         (i = k);
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -521,7 +521,7 @@ void f(int i, int j)
     g(i,
     j);
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -535,7 +535,7 @@ void f(int i)
         i = i + 1;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -547,7 +547,7 @@ void f(int i)
     int j = i = 0;
     i = j = 10;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -563,7 +563,7 @@ public class A
         return a;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -579,7 +579,7 @@ public class A
         return a;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -590,7 +590,7 @@ int Func(int, int, int i)
 {
     return 2*i;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -601,7 +601,7 @@ public System.Linq.Expressions.Expression<Func<int, int>> F()
 {
     return x => 2*x;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -612,7 +612,7 @@ Action f()
 {
     return () => Y();
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -629,7 +629,7 @@ int f(int i)
             return 1;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -643,7 +643,7 @@ public void Łódź() { }
 public void AsciiThen你好ThenAsciiAgain() { }
 
 public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -653,7 +653,7 @@ public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }";
 public void f(__arglist)
 {
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -663,7 +663,7 @@ public void f(__arglist)
 public void f(params int[] args)
         {
         }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -694,7 +694,7 @@ public int UncheckedExpr(int i)
 {
     return unchecked(i * 2);
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -715,7 +715,7 @@ unsafe private static void ModifyFixedStorage()
         *p = 1;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -729,7 +729,7 @@ namespace Tests
         Tests.g();
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
         [TestMethod]
         public void Overloads()
@@ -752,7 +752,7 @@ class A {
 class B {
     int F(int i) {return 2*i;}
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -767,7 +767,7 @@ void f()
         return 0;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -784,7 +784,7 @@ void f(Point p)
 {
     p.x = 2;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -801,7 +801,7 @@ class Point
         this.x = a;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -813,7 +813,7 @@ void f()
     int[] array = new int[5];
     array[0] = 2;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -834,7 +834,7 @@ char h(bool c)
 {
     return c;
     }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -845,7 +845,7 @@ void f(int a, int b)
 {
     a = (b = 2);
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -860,7 +860,7 @@ int f(int a, int b)
     }
     return 1;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -871,7 +871,7 @@ void f(int a, int b)
 {
     a = (b = 2) + 1;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -884,7 +884,7 @@ void f()
 Label:
     return;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -899,7 +899,7 @@ class A
         {
             NullConst.ToString();
         }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -923,7 +923,7 @@ class A {
         }
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -936,7 +936,7 @@ class A {
         return 3;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -947,7 +947,7 @@ public static Func<string, bool> CreateFilter()
 {
     return string.IsNullOrEmpty;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -969,7 +969,7 @@ class A
         return true;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -989,7 +989,7 @@ class B
         return a.Toto;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1008,7 +1008,7 @@ class A
         return result;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1024,7 +1024,7 @@ class A
         return delegate (object[] args) { return 0; };
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1036,7 +1036,7 @@ public int f()
     var v = new { a = 108, m = ""Hello"" };
     return v.a;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1052,7 +1052,7 @@ class A
         return a = 1;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1068,7 +1068,7 @@ public class A
         var b = myBool;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1093,7 +1093,7 @@ public class A<T> : Collection<T>
         }
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1108,7 +1108,7 @@ int InfiniteLoop(int i) {
     }
     // No return here
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1131,7 +1131,7 @@ internal class B
         return 3;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1150,7 +1150,7 @@ class A
         p = 3;
     }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1176,7 +1176,7 @@ public void g(int[] array1, long[] array2)
     array1[0] += 2;
     array2[0] += 3;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1201,7 +1201,7 @@ public int f()
     }
     return 0;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1221,7 +1221,7 @@ public int f(int i)
 
     return b;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1237,7 +1237,7 @@ public bool neg()
     }
     return false;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1253,7 +1253,7 @@ public bool plus()
     }
     return false;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1267,7 +1267,7 @@ void f() {
 void g() {
   int someInt = -2147483648;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1283,7 +1283,7 @@ int f() {
   int j += i;
   return j;
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1297,7 +1297,7 @@ unsafe class C {
     return j+1;
   }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
@@ -1322,7 +1322,10 @@ protected bool j;
     }
   }
 }";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
+
+        private void ValidateCodeGeneration(string code) =>
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
     }
 }
