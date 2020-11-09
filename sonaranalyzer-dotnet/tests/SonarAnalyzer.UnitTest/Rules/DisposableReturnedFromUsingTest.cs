@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,11 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DisposableReturnedFromUsing()
-        {
+        public void DisposableReturnedFromUsing() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableReturnedFromUsing.cs",
-                new DisposableReturnedFromUsing(),
-                ParseOptionsHelper.FromCSharp8);
-        }
+                new DisposableReturnedFromUsing(), ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DisposableReturnedFromUsing_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableReturnedFromUsing.CSharp9.cs",
+                new DisposableReturnedFromUsing(), ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
     }
 }
