@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -24,6 +24,7 @@ using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,18 +33,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DisposeFromDispose()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
-        }
+        public void DisposeFromDispose_BeforeCSharp8() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.BeforeCSharp8.cs", new DisposeFromDispose(),
+                ImmutableArray.Create(new CSharpParseOptions(LanguageVersion.CSharp7_2)));
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DisposeFromDispose_BeforeCSharp8()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.BeforeCSharp8.cs", new DisposeFromDispose(),
-                ImmutableArray.Create(new CSharpParseOptions(LanguageVersion.CSharp7_2)));
-        }
+        public void DisposeFromDispose_CSharp8() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DisposeFromDispose_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp9.cs", new DisposeFromDispose(),
+                ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
     }
 }
