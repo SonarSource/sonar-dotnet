@@ -60,8 +60,7 @@ class C
         else
             return i*3 +1;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -84,8 +83,7 @@ int WithReturn(int i) {
         }
     }
     return i;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -123,8 +121,7 @@ private int WhileLoopContinue(int i)
         }
     }
     return i;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -162,8 +159,7 @@ private int WhileLoopContinue(int i)
         }
     } while (i < 100)
     return i;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -205,8 +201,7 @@ private int ForLoopContinue(int i)
         total += j;
     }
     return total;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -225,8 +220,7 @@ int ForEachLoop()
         }
     }
     return 0;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -247,8 +241,7 @@ long withLong()
         return total;
     }
     return total;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -349,8 +342,7 @@ int TryThrow(int i)
         i+= 12;
     }
     return 20;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -385,8 +377,7 @@ int g(A a, int i)
     a.log(result);
     return result;
 }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -408,8 +399,7 @@ class A {
             return i;
         }
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -459,8 +449,7 @@ class A {
             return ConsoleColor.Red;
         }
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -482,8 +471,7 @@ void f()
     new A() { i = 3 }; // Noncompliant
 //          ^^^^^^^^^
     new A() { i = 4 };
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -494,8 +482,7 @@ void f()
 public Type f()
 {
     return null;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -506,8 +493,7 @@ public Type f()
 public Type f()
 {
     return (null);
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -522,8 +508,7 @@ public void f(int i, int j)
     {
         (i = k);
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -535,8 +520,7 @@ void f(int i, int j)
 {
     g(i,
     j);
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -550,8 +534,7 @@ void f(int i)
     {
         i = i + 1;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -563,8 +546,7 @@ void f(int i)
 {
     int j = i = 0;
     i = j = 10;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -580,8 +562,7 @@ public class A
     {
         return a;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -597,8 +578,7 @@ public class A
     {
         return a;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -609,8 +589,7 @@ public class A
 int Func(int, int, int i)
 {
     return 2*i;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -621,8 +600,7 @@ int Func(int, int, int i)
 public System.Linq.Expressions.Expression<Func<int, int>> F()
 {
     return x => 2*x;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -633,8 +611,7 @@ public System.Linq.Expressions.Expression<Func<int, int>> F()
 Action f()
 {
     return () => Y();
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -651,8 +628,7 @@ int f(int i)
         default:
             return 1;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -666,8 +642,7 @@ public void Łódź() { }
 
 public void AsciiThen你好ThenAsciiAgain() { }
 
-public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }
-";
+public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -677,8 +652,7 @@ public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }
             var code = @"
 public void f(__arglist)
 {
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -688,8 +662,7 @@ public void f(__arglist)
             var code = @"
 public void f(params int[] args)
         {
-        }
-";
+        }";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -720,8 +693,7 @@ public int UncheckedStmt(int i)
 public int UncheckedExpr(int i)
 {
     return unchecked(i * 2);
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -742,8 +714,7 @@ unsafe private static void ModifyFixedStorage()
     {
         *p = 1;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -757,8 +728,7 @@ namespace Tests
     {
         Tests.g();
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
         [TestMethod]
@@ -781,8 +751,7 @@ class A {
 
 class B {
     int F(int i) {return 2*i;}
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -797,8 +766,7 @@ void f()
     {
         return 0;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -815,8 +783,7 @@ class Point
 void f(Point p)
 {
     p.x = 2;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -833,8 +800,7 @@ class Point
     {
         this.x = a;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -846,8 +812,7 @@ void f()
 {
     int[] array = new int[5];
     array[0] = 2;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -868,8 +833,7 @@ short g(char c)
 char h(bool c)
 {
     return c;
-    }
-";
+    }";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -880,8 +844,7 @@ char h(bool c)
 void f(int a, int b)
 {
     a = (b = 2);
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -896,8 +859,7 @@ int f(int a, int b)
         return 0;
     }
     return 1;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -908,8 +870,7 @@ int f(int a, int b)
 void f(int a, int b)
 {
     a = (b = 2) + 1;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -922,8 +883,7 @@ void f()
     goto Label;
 Label:
     return;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -938,8 +898,7 @@ class A
         void f()
         {
             NullConst.ToString();
-        }
-";
+        }";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -963,8 +922,7 @@ class A {
             DoSomething1();
         }
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -977,8 +935,7 @@ class A {
     {
         return 3;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -989,8 +946,7 @@ class A {
 public static Func<string, bool> CreateFilter()
 {
     return string.IsNullOrEmpty;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1012,8 +968,7 @@ class A
         }
         return true;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1033,8 +988,7 @@ class B
         A a = new A();
         return a.Toto;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1053,8 +1007,7 @@ class A
             .Replace('d', 'e');
         return result;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1070,8 +1023,7 @@ class A
     {
         return delegate (object[] args) { return 0; };
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1083,8 +1035,7 @@ public int f()
 {
     var v = new { a = 108, m = ""Hello"" };
     return v.a;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1100,8 +1051,7 @@ class A
     {
         return a = 1;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1117,8 +1067,7 @@ public class A
     {
         var b = myBool;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1143,8 +1092,7 @@ public class A<T> : Collection<T>
             }
         }
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1159,8 +1107,7 @@ int InfiniteLoop(int i) {
         }
     }
     // No return here
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1183,8 +1130,7 @@ internal class B
         }
         return 3;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1203,8 +1149,7 @@ class A
         dim = 2;
         p = 3;
     }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1230,8 +1175,7 @@ public void g(int[] array1, long[] array2)
 {
     array1[0] += 2;
     array2[0] += 3;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1256,8 +1200,7 @@ public int f()
         return 1;
     }
     return 0;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1277,8 +1220,7 @@ public int f(int i)
     }
 
     return b;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1294,8 +1236,7 @@ public bool neg()
         return true;
     }
     return false;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1311,8 +1252,7 @@ public bool plus()
         return true;
     }
     return false;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1326,8 +1266,7 @@ void f() {
 
 void g() {
   int someInt = -2147483648;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1343,8 +1282,7 @@ int f() {
   }
   int j += i;
   return j;
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1358,8 +1296,7 @@ unsafe class C {
     int j = 1;
     return j+1;
   }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
@@ -1384,8 +1321,7 @@ protected bool j;
       k=2;
     }
   }
-}
-";
+}";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
     } // Class
