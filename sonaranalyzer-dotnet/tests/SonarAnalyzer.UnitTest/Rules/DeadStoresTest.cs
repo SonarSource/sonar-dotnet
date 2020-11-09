@@ -20,6 +20,7 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -38,5 +39,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                                     options: ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DeadStores_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DeadStores.CSharp9.cs",
+                                    new DeadStores(),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    OutputKind.ConsoleApplication);
+
     }
 }
