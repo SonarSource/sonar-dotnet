@@ -2,7 +2,7 @@
 
 namespace Tests.Diagnostics
 {
-    public class IfConditionalAlwaysTrueOrFalse
+    public class Sample
     {
         public void PositiveOverflow() {
             int i = 2147483600;
