@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2201",
+"message":  "Use the return value of method 'Select'.",
+"location":  {
+"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  13,
+"endLine":  14,
+"endColumn":  38
+}
+}
+}
+]
+}

@@ -17,19 +17,6 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
-"region":  {
-"startLine":  22,
-"startColumn":  47,
-"endLine":  22,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
 "uri":  "sources\Net5\Net5\Main.cs",
 "region":  {
 "startLine":  18,
