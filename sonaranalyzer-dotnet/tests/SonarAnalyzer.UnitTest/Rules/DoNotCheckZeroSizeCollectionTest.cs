@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -28,19 +29,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotCheckZeroSizeCollection()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs",
-                new SonarAnalyzer.Rules.CSharp.DoNotCheckZeroSizeCollection());
-        }
+        public void DoNotCheckZeroSizeCollection() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs", new SonarAnalyzer.Rules.CSharp.DoNotCheckZeroSizeCollection());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotCheckZeroSizeCollection_VB()
-        {
+        public void DoNotCheckZeroSizeCollection_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.CSharp9.cs", new SonarAnalyzer.Rules.CSharp.DoNotCheckZeroSizeCollection(),
+                ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotCheckZeroSizeCollection_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotCheckZeroSizeCollection());
-        }
     }
 }
 
