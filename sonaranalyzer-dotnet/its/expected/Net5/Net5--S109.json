@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S109",
+"message":  "Assign this magic number '40' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
 "message":  "Assign this magic number '2.00' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",

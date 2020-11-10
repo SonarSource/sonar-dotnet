@@ -28,14 +28,27 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'explicitTypes'.",
+"message":  "Remove the unused local variable 'explicitTypes2'.",
 "location":  {
 "uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
 "region":  {
-"startLine":  18,
+"startLine":  19,
 "startColumn":  36,
-"endLine":  18,
-"endColumn":  49
+"endLine":  19,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'explicitTypes3'.",
+"location":  {
+"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  42,
+"endLine":  20,
+"endColumn":  56
 }
 }
 },
