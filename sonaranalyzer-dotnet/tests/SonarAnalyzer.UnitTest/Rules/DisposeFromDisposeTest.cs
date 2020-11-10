@@ -19,8 +19,11 @@
  */
 
 extern alias csharp;
+
+using System.Collections.Immutable;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -31,13 +34,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DisposeFromDispose_BeforeCSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.BeforeCSharp8.cs", new DisposeFromDispose(), ParseOptionsHelper.BeforeCSharp8);
+        public void DisposeFromDispose_CSharp7_2() =>
+            // Readonly structs have been introduced in C# 7.2.
+            // In C# 8, readonly structs can be disposed of, and the behavior is different.
+            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp7_2.cs", new DisposeFromDispose(),
+                ImmutableArray.Create(new CSharpParseOptions(LanguageVersion.CSharp7_2)));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposeFromDispose_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp8.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
