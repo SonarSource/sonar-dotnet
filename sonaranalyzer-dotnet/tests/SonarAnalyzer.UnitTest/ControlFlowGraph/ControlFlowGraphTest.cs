@@ -5170,6 +5170,28 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
 
         #endregion
 
+        #region Instance creation
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_New()
+        {
+            var cfg = Build(@"var x = new Object()");
+
+            VerifyMinimalCfg(cfg);
+            VerifyAllInstructions(cfg.EntryBlock, "new Object()", "x = new Object()");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_New_TargetTyped()
+        {
+            Action a = () => Build(@"Object x = new()");
+            a.Should().Throw<NotSupportedException>(); // C# 9 ImplicitObjectCreationExpressionSyntax is not supported yet
+        }
+
+        #endregion
+
         #region Helpers to build the CFG for the tests
 
         internal const string TestInput = @"

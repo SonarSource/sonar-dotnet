@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
         [TestMethod]
         public void SimpleMethod()
         {
-            var code = @"
+            const string code = @"
 class C
 {
     int Mult(int i, int j)
@@ -60,15 +60,14 @@ class C
         else
             return i*3 +1;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void IfThenElse()
         {
-            var code = @"
+            const string code = @"
 void UselessCondition(int i) {
     if (i == 0) {
         if (i != 0) {
@@ -84,15 +83,14 @@ int WithReturn(int i) {
         }
     }
     return i;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void WhileLoops()
         {
-            var code = @"
+            const string code = @"
 private int WhileLoop(int i)
 {
     while (i<100)
@@ -123,15 +121,14 @@ private int WhileLoopContinue(int i)
         }
     }
     return i;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void DoWhileLoops()
         {
-            var code = @"
+            const string code = @"
 private int WhileLoop(int i)
 {
     do
@@ -162,15 +159,14 @@ private int WhileLoopContinue(int i)
         }
     } while (i < 100)
     return i;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ForLoops()
         {
-            var code = @"
+            const string code = @"
 private int ForLoop(int i)
 {
     int total = 0;
@@ -205,15 +201,14 @@ private int ForLoopContinue(int i)
         total += j;
     }
     return total;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ForEachLoops()
         {
-            var code = @"
+            const string code = @"
 int ForEachLoop()
 {
     var a = new int [10];
@@ -225,15 +220,14 @@ int ForEachLoop()
         }
     }
     return 0;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void WorkWithLong()
         {
-            var code = @"
+            const string code = @"
 long withLong()
 {
     long l = 10;
@@ -247,15 +241,14 @@ long withLong()
         return total;
     }
     return total;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void TryCatchFinally()
         {
-            var code = @"
+            const string code = @"
 int TryCatch(int i)
 {
     int j = 3;
@@ -349,15 +342,14 @@ int TryThrow(int i)
         i+= 12;
     }
     return 20;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void FuncCall()
         {
-            var code = @"
+            const string code = @"
 
 class S {
     public static void stat(){}
@@ -385,15 +377,14 @@ int g(A a, int i)
     a.log(result);
     return result;
 }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void Using()
         {
-            var code = @"
+            const string code = @"
 using System;
 
 class Resource : IDisposable
@@ -408,15 +399,14 @@ class A {
             return i;
         }
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void Enum()
         {
-            var code = @"
+            const string code = @"
 using System;
 
 public enum Color { Red, Green, Blue };
@@ -459,62 +449,58 @@ class A {
             return ConsoleColor.Red;
         }
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void EmptyBody()
         {
-            var code = @"
+            const string code = @"
 public static extern void Extern(int p1);
 ";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void CommentsWithNewLine()
         {
-            var code = @"
+            const string code = @"
 void f()
 {
     new A() { i = 3 }; // Noncompliant
 //          ^^^^^^^^^
     new A() { i = 4 };
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ReturnNullLitteral()
         {
-            var code = @"
+            const string code = @"
 public Type f()
 {
     return null;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ReturnParenthesizedNullLitteral()
         {
-            var code = @"
+            const string code = @"
 public Type f()
 {
     return (null);
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ParenthesizedExpressions()
         {
-            var code = @"
+            const string code = @"
 public void f(int i, int j)
 {
     var k = ((i) + j);
@@ -522,56 +508,52 @@ public void f(int i, int j)
     {
         (i = k);
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void UnknownMethodOnMultipleLines()
         {
-            var code = @"
+            const string code = @"
 void f(int i, int j)
 {
     g(i,
     j);
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ForWithoutCondition()
         {
-            var code = @"
+            const string code = @"
 void f(int i)
 {
     for (;;)
     {
         i = i + 1;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ChainingAssignments()
         {
-            var code = @"
+            const string code = @"
 void f(int i)
 {
     int j = i = 0;
     i = j = 10;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void UseOfReadonlyClassField()
         {
-            var code = @"
+            const string code = @"
 public class A
 {
     readonly int a = 0;
@@ -580,15 +562,14 @@ public class A
     {
         return a;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void UseOfConstantClassField()
         {
-            var code = @"
+            const string code = @"
 public class A
 {
     const int a = 0;
@@ -597,51 +578,47 @@ public class A
     {
         return a;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void UnnamedFunctionParameter()
         {
-            var code = @"
+            const string code = @"
 int Func(int, int, int i)
 {
     return 2*i;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void SimpleLambdaExpression()
         {
-            var code = @"
+            const string code = @"
 public System.Linq.Expressions.Expression<Func<int, int>> F()
 {
     return x => 2*x;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ParenthesizedLambdaExpression()
         {
-            var code = @"
+            const string code = @"
 Action f()
 {
     return () => Y();
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void SwitchStatement()
         {
-            var code = @"
+            const string code = @"
 int f(int i)
 {
     switch (i)
@@ -651,52 +628,48 @@ int f(int i)
         default:
             return 1;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void NonASCIIEncodings()
         {
-            var code = @"
+            const string code = @"
 public void 你好() { }
 
 public void Łódź() { }
 
 public void AsciiThen你好ThenAsciiAgain() { }
 
-public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void Arglist()
         {
-            var code = @"
+            const string code = @"
 public void f(__arglist)
 {
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ParamsKeyword()
         {
-            var code = @"
+            const string code = @"
 public void f(params int[] args)
         {
-        }
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void CheckedUnchecked()
         {
-            var code = @"
+            const string code = @"
 public int CheckedStmt(int i)
 {
     checked
@@ -720,15 +693,14 @@ public int UncheckedStmt(int i)
 public int UncheckedExpr(int i)
 {
     return unchecked(i * 2);
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void Fixed()
         {
-            var code = @"
+            const string code = @"
 class Point
 {
     public int x;
@@ -742,29 +714,27 @@ unsafe private static void ModifyFixedStorage()
     {
         *p = 1;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void Namespace()
         {
-            var code = @"
+            const string code = @"
 namespace Tests
 {
     public static void f()
     {
         Tests.g();
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
         [TestMethod]
         public void Overloads()
         {
-            var code = @"
+            const string code = @"
 namespace N
 {
     class A {
@@ -781,15 +751,14 @@ class A {
 
 class B {
     int F(int i) {return 2*i;}
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void NestedFunction()
         {
-            var code = @"
+            const string code = @"
 void f()
 {
     var s = g();
@@ -797,15 +766,14 @@ void f()
     {
         return 0;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void FieldAssignment()
         {
-            var code = @"
+            const string code = @"
 class Point
 {
     public int x;
@@ -815,15 +783,14 @@ class Point
 void f(Point p)
 {
     p.x = 2;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void FieldOfThisAssignment()
         {
-            var code = @"
+            const string code = @"
 class Point
 {
     public int x;
@@ -833,28 +800,26 @@ class Point
     {
         this.x = a;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ArrayAssignment()
         {
-            var code = @"
+            const string code = @"
 void f()
 {
     int[] array = new int[5];
     array[0] = 2;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void CastOnReturn()
         {
-            var code = @"
+            const string code = @"
 int f(char c)
 {
     return c;
@@ -868,27 +833,25 @@ short g(char c)
 char h(bool c)
 {
     return c;
-    }
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+    }";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void IgnoreParenthesesInAssignment()
         {
-            var code = @"
+            const string code = @"
 void f(int a, int b)
 {
     a = (b = 2);
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void AssignmentInComparison()
         {
-            var code = @"
+            const string code = @"
 int f(int a, int b)
 {
     if ((a = 3) < (b = 2))
@@ -896,41 +859,38 @@ int f(int a, int b)
         return 0;
     }
     return 1;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void AssignmentInBinaryOperator()
         {
-            var code = @"
+            const string code = @"
 void f(int a, int b)
 {
     a = (b = 2) + 1;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void Goto()
         {
-            var code = @"
+            const string code = @"
 void f()
 {
     goto Label;
 Label:
     return;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void UnknownConstant()
         {
-            var code = @"
+            const string code = @"
 class A
 {
         private const object NullConst = null;
@@ -938,15 +898,14 @@ class A
         void f()
         {
             NullConst.ToString();
-        }
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void Property()
         {
-            var code = @"
+            const string code = @"
 class A {
     public void DoSomething1() { }
     public bool someCondition1 { get; set; }
@@ -963,41 +922,38 @@ class A {
             DoSomething1();
         }
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void AsyncFunction()
         {
-            var code = @"
+            const string code = @"
 class A {
     async System.Threading.Tasks.Task<int> FuncAsync()
     {
         return 3;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void MethodGroup()
         {
-            var code = @"
+            const string code = @"
 public static Func<string, bool> CreateFilter()
 {
     return string.IsNullOrEmpty;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void MemberFieldAccess()
         {
-            var code = @"
+            const string code = @"
 class M
 {
     public int[] Parameters => new int[12];
@@ -1012,15 +968,14 @@ class A
         }
         return true;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void BoolProperty()
         {
-            var code = @"
+            const string code = @"
 class A
 {
     public bool Toto => true;
@@ -1033,15 +988,14 @@ class B
         A a = new A();
         return a.Toto;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void MethodsCallsOnMultipleLines()
         {
-            var code = @"
+            const string code = @"
 class A
 {
     public const string myString = ""Blabla"";
@@ -1053,15 +1007,14 @@ class A
             .Replace('d', 'e');
         return result;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void AnonymousMethodExpression()
         {
-            var code = @"
+            const string code = @"
 class A
 {
     public delegate object anonymousMethod(params object[] args);
@@ -1070,28 +1023,26 @@ class A
     {
         return delegate (object[] args) { return 0; };
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void AnonymousObjectCreation()
         {
-            var code = @"
+            const string code = @"
 public int f()
 {
     var v = new { a = 108, m = ""Hello"" };
     return v.a;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void AssignmentInReturn()
         {
-            var code = @"
+            const string code = @"
 class A
 {
     protected int a;
@@ -1100,15 +1051,14 @@ class A
     {
         return a = 1;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void BooleanConstant()
         {
-            var code = @"
+            const string code = @"
 public class A
 {
     internal const bool myBool = true;
@@ -1117,15 +1067,14 @@ public class A
     {
         var b = myBool;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void PropertyFromAnotherAssembly()
         {
-            var code = @"
+            const string code = @"
 
 using System;
 using System.Collections.ObjectModel;
@@ -1143,15 +1092,14 @@ public class A<T> : Collection<T>
             }
         }
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void InfiniteLoop()
         {
-            var code = @"
+            const string code = @"
 int InfiniteLoop(int i) {
     while (true) {
         if (++i == 42) {
@@ -1159,15 +1107,14 @@ int InfiniteLoop(int i) {
         }
     }
     // No return here
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void IfDynamic()
         {
-            var code = @"
+            const string code = @"
 internal class A
 {
     public dynamic HasValue => true;
@@ -1183,15 +1130,14 @@ internal class B
         }
         return 3;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void ModifyFieldParameterAndLocalVariable()
         {
-            var code = @"
+            const string code = @"
 class A
 {
     private int p;
@@ -1203,15 +1149,14 @@ class A
         dim = 2;
         p = 3;
     }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void BinaryOperatorAssignment()
         {
-            var code = @"
+            const string code = @"
 public void f(int i)
 {
     i -= 1;
@@ -1230,15 +1175,14 @@ public void g(int[] array1, long[] array2)
 {
     array1[0] += 2;
     array2[0] += 3;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void NoIdentifier()
         {
-            var code = @"
+            const string code = @"
 public class A
 {
     public int count;
@@ -1256,15 +1200,14 @@ public int f()
         return 1;
     }
     return 0;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void IncompatibleAssignmentTypes()
         {
-            var code = @"
+            const string code = @"
 public int f(int i)
 {
     byte b = (byte)i;
@@ -1277,15 +1220,14 @@ public int f(int i)
     }
 
     return b;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void UnaryNeg()
         {
-            var code = @"
+            const string code = @"
 public bool neg()
 {
     int i = -12;
@@ -1294,15 +1236,14 @@ public bool neg()
         return true;
     }
     return false;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void UnaryPlus()
         {
-            var code = @"
+            const string code = @"
 public bool plus()
 {
     int i = +12;
@@ -1311,30 +1252,28 @@ public bool plus()
         return true;
     }
     return false;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void MixingUintAndNeg()
         {
-            var code = @"
+            const string code = @"
 void f() {
   int j = -10u;
 }
 
 void g() {
   int someInt = -2147483648;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void UnsafeStatement()
         {
-            var code = @"
+            const string code = @"
 int f() {
   int i = 0;
   unsafe
@@ -1343,30 +1282,28 @@ int f() {
   }
   int j += i;
   return j;
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void UnsafeClass()
         {
-            var code = @"
+            const string code = @"
 unsafe class C {
   int f()
   {
     int j = 1;
     return j+1;
   }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
 
         [TestMethod]
         public void BoolAssignmentInsideIfCondition()
         {
-            var code = @"
+            const string code = @"
 public class Derived {
 
 protected bool j;
@@ -1384,9 +1321,79 @@ protected bool j;
       k=2;
     }
   }
-}
-";
-            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+}";
+            ValidateCodeGeneration(code);
         }
-    } // Class
-} // Namespace
+
+        [TestMethod]
+        public void TargetTypedNew()
+        {
+            const string code = @"
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+public class TargetTypedNew
+{
+    private List<int> list;
+
+    public void Method()
+    {
+        list = new();
+        StringBuilder sb = new();
+        StringBuilder sb2 = new(null);
+        StringBuilder sb3 = new(length: 4, capacity: 3, startIndex: 1, value: ""fooBar"");
+        Console.WriteLine(sb.ToString() + sb2.ToString() + sb3.ToString());
+    }
+}";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void LambdaDiscardParameters()
+        {
+            const string code = @"
+using System;
+using System.Linq;
+
+public class LambdaDiscardParameters
+{
+    public void Method()
+    {
+        var items = Enumerable.Range(0, 2).SelectMany((_, _) => Enumerable.Range(0, 1).SelectMany((_, _) => Enumerable.Range(0, 1))).ToList();
+        items.Select((_, _) => 0);
+
+        _ = InvokeFunc((_, _) => true);
+        _ = InvokeFunc((_, _) => { return true; });
+
+        Func<int, string, int> explicitTypes2 = (int _, string _) => 1;
+        Func<int, string, bool, int> explicitTypes3 = (int _, string _, bool _) => 1;
+    }
+
+    public Func<int, int, Func<int, int, bool>> Nested = (_, _) => (_, _) => true;
+
+    private bool InvokeFunc(Func<bool, bool, bool> func) =>
+        func(true, true);
+}";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void NativeInts()
+        {
+            const string code = @"
+public class NativeInts
+{
+    public void Method()
+    {
+        nint i = -1;
+        nuint i2 = 42;
+    }
+}";
+            ValidateCodeGeneration(code);
+        }
+
+        private void ValidateCodeGeneration(string code) =>
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+    }
+}
