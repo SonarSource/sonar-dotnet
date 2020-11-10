@@ -38,6 +38,8 @@ namespace SonarAnalyzer.CBDE
 {
     public class MlirExporter
     {
+        private const LanguageVersion supportedVersion = LanguageVersionEx.CSharp8;
+
         internal static readonly ImmutableList<SyntaxKind> unsupportedSyntaxes = new List<SyntaxKind>
         {
             SyntaxKind.AnonymousMethodExpression,
@@ -137,6 +139,19 @@ namespace SonarAnalyzer.CBDE
                 writer.WriteLine();
                 return;
             }
+
+            IControlFlowGraph cfg;
+            try
+            {
+                cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            }
+            catch (Exception ex) when (semanticModel.Compilation.GetLanguageVersion() > supportedVersion && !Debugger.IsAttached)
+            {
+                // We don't want to fail when the exception occurs for an unsupported language version
+                writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, failed to generate CFG: {ex.Message}");
+                writer.WriteLine();
+                return;
+            }
             blockCounter = 0;
             blockMap.Clear();
 
@@ -149,11 +164,10 @@ namespace SonarAnalyzer.CBDE
             writer.WriteLine($"func @{GetMangling(method)}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
             CreateEntryBlock(method);
 
-            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
-            foreach (var block in cfg.Blocks)
-            {
-                ExportBlock(block, method, returnType);
-            }
+                foreach (var block in cfg.Blocks)
+                {
+                    ExportBlock(block, method, returnType);
+                }
             writer.WriteLine("}");
         }
 

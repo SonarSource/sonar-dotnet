@@ -1,4 +1,4 @@
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -42,6 +42,17 @@ namespace SonarAnalyzer.UnitTest.Rules
             System.Environment.SetEnvironmentVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
             Verifier.VerifyAnalyzer(@"TestCases\CbdeHandler.cs",
                 CS.CbdeHandlerRule.MakeUnitTestInstance(null, null));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CbdeHandler_CS_FromCSharp9()
+        {
+            System.Environment.SetEnvironmentVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
+            Verifier.VerifyAnalyzer(@"TestCases\CbdeHandler.CSharp9.cs",
+                CS.CbdeHandlerRule.MakeUnitTestInstance(null, null),
+                ParseOptionsHelper.FromCSharp9,
+                OutputKind.ConsoleApplication);
         }
 
         [TestMethod]
