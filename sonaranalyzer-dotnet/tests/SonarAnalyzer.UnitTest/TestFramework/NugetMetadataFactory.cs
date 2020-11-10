@@ -38,6 +38,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static readonly string[] allowedNugetLibDirectoriesInOrderOfPreference =
             new string[] {
+                "netstandard2.1",
                 "netstandard2.0",
                 "net47",
                 "net461",
