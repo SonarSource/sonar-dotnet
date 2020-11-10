@@ -147,7 +147,7 @@ namespace SonarAnalyzer.CBDE
             }
             catch (Exception ex) when (semanticModel.Compilation.GetLanguageVersion() > supportedVersion && !Debugger.IsAttached)
             {
-                // We don't want to fail when exception occurs for unsupported language version
+                // We don't want to fail when the exception occurs for an unsupported language version
                 writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, failed to generate CFG: {ex.Message}");
                 writer.WriteLine();
                 return;

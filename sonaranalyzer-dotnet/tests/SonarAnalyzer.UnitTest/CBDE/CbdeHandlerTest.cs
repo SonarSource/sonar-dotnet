@@ -51,7 +51,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             System.Environment.SetEnvironmentVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
             Verifier.VerifyAnalyzer(@"TestCases\CbdeHandler.CSharp9.cs",
                 CS.CbdeHandlerRule.MakeUnitTestInstance(null, null),
-                ParseOptionsHelper.FromCSharp9);
+                ParseOptionsHelper.FromCSharp9,
+                OutputKind.ConsoleApplication);
         }
 
         [TestMethod]

@@ -1344,7 +1344,6 @@ public class TargetTypedNew
         StringBuilder sb2 = new(null);
         StringBuilder sb3 = new(length: 4, capacity: 3, startIndex: 1, value: ""fooBar"");
         Console.WriteLine(sb.ToString() + sb2.ToString() + sb3.ToString());
-        }
     }
 }";
             ValidateCodeGeneration(code);
@@ -1355,41 +1354,26 @@ public class TargetTypedNew
         {
             const string code = @"
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 public class LambdaDiscardParameters
 {
     public void Method()
     {
-        var items = Enumerable.Range(0, 2).SelectMany(_ => Enumerable.Range(0, 1).SelectMany(_ => Enumerable.Range(0, 1))).ToList(); // i don't need parameters in nested
-        items.ForEach(_ => Console.WriteLine($""Discard test { _}""));
+        var items = Enumerable.Range(0, 2).SelectMany((_, _) => Enumerable.Range(0, 1).SelectMany((_, _) => Enumerable.Range(0, 1))).ToList();
+        items.Select((_, _) => 0);
 
-        LinqQuery(items);
+        _ = InvokeFunc((_, _) => true);
+        _ = InvokeFunc((_, _) => { return true; });
 
-        _ = Bar(_ => { return true; });
-
-        Func<int, string, int> explicitTypes = (int _, string _) => 1;
-
-        LocalFunction(1, 1);
-
-        void LocalFunction(int _, int _2)
-        { }
+        Func<int, string, int> explicitTypes2 = (int _, string _) => 1;
+        Func<int, string, bool, int> explicitTypes3 = (int _, string _, bool _) => 1;
     }
 
-    public Func<int, Func<int, bool>> Nested = _ => _ => true;
+    public Func<int, int, Func<int, int, bool>> Nested = (_, _) => (_, _) => true;
 
-    private bool Bar(Func<bool, bool> func)
-    {
-        return func(true);
-    }
-
-    private IEnumerable<int> LinqQuery(List<int> list) =>
-        from _ in NoOp()
-        from k in list
-        select k;
-
-    private IEnumerable<int> NoOp() => new[] { 1 };
+    private bool InvokeFunc(Func<bool, bool, bool> func) =>
+        func(true, true);
 }";
             ValidateCodeGeneration(code);
         }
