@@ -32,10 +32,10 @@
 "location":  {
 "uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
 "region":  {
-"startLine":  25,
-"startColumn":  43,
-"endLine":  25,
-"endColumn":  49
+"startLine":  28,
+"startColumn":  53,
+"endLine":  28,
+"endColumn":  59
 }
 }
 },
