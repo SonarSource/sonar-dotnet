@@ -43,6 +43,14 @@ FileStream TargetTypedNew()
     return fs1;
 }
 
+FileStream TargetTypedNew2()
+{
+    using (FileStream fs1 = new(@"c:\foo.txt", FileMode.Open)) // Noncompliant
+    {
+        return fs1;
+    }
+}
+
 record R
 {
     public FileStream Method(string path)

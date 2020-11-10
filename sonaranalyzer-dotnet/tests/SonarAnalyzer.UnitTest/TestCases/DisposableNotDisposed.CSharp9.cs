@@ -11,6 +11,8 @@ NoOperation(fs2);
 FileStream fs3; // Compliant - not instantiated
 using var fs5 = new FileStream(@"c:\foo.txt", FileMode.Open); // Compliant
 
+using FileStream fs6 = new(@"c:\foo.txt", FileMode.Open); // Compliant
+
 void NoOperation(object x) { }
 
 class Foo
@@ -32,7 +34,7 @@ class Foo
     {
         Action<int, int> a = static (int v, int w) => {
             var fs = new FileStream("", FileMode.Open); // Noncompliant
-                                                        // Noncompliant@-1
+                                                        // Noncompliant@-1 - duplicate
         };
         Action<int, int> b = (_, _) => {
             var fs = new FileStream("", FileMode.Open);
@@ -69,10 +71,15 @@ record MyRecord
             // do nothing but dispose
         }
 
+        using (fs5 = new(@"c:\foo.txt", FileMode.Open))
+        {
+            // do nothing but dispose
+        }
+
         FileStream fs1 = new(@"c:\foo.txt", FileMode.Open); // FN
         var fs2 = File.Open(@"c:\foo.txt", FileMode.Open); // Noncompliant - instantiated with factory method
-            // Noncompliant@-1
+            // Noncompliant@-1 - duplicate
         var s = new WebClient(); // Noncompliant - another tracked type
-            // Noncompliant@-1
+            // Noncompliant@-1 - duplicate
     }
 }

@@ -52,3 +52,29 @@ public record RecordDispose : IDisposable
         this.fs.Dispose();
     }
 }
+
+partial class PartialMethod1 : IDisposable
+{
+    private readonly IDisposable _disposable = new FileStream("a", FileMode.Open);
+    public partial void Dispose();
+    partial void MyDispose();
+}
+
+partial class PartialMethod1
+{
+    public partial void Dispose() => MyDispose();
+    partial void MyDispose() => _disposable.Dispose();
+}
+
+partial class PartialMethod2 // Noncompliant
+{
+    public partial void Dispose();
+    partial void MyDispose();
+}
+
+partial class PartialMethod2 // Noncompliant
+{
+    private readonly IDisposable _disposable = new FileStream("a", FileMode.Open);
+    public partial void Dispose() => MyDispose();
+    partial void MyDispose() => _disposable.Dispose();
+}

@@ -20,19 +20,14 @@ public record GarbageDisposalExceptionBase : IDisposable
     }
 }
 
-public partial record MyPartial : IDisposable
+public partial record MyPartial // FN, partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
 {
-    public void Dispose()
-    {
-        // Dispose(10)
-    }
+    public partial void Dispose();
 }
 
 public partial record MyPartial
 {
-    public void Dispose(int i) // FN, partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
-    {
-    }
+    public partial void Dispose() { }
 }
 
 public ref partial struct RefStruct
