@@ -34,7 +34,7 @@ namespace Tests.Diagnostics
 
         public void Foo()
         {
-            Action<List<int>> x = (List<int> x) => { };
+            Action<List<int>> x = (List<int> y) => { };
         }
     }
 }
