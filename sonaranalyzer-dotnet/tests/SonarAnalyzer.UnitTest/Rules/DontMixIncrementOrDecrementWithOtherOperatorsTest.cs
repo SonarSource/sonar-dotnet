@@ -30,10 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DontMixIncrementOrDecrementWithOtherOperators()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.cs",
-                new DontMixIncrementOrDecrementWithOtherOperators());
-        }
+        public void DontMixIncrementOrDecrementWithOtherOperators() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.cs", new DontMixIncrementOrDecrementWithOtherOperators());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DontMixIncrementOrDecrementWithOtherOperators_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.CSharp9.cs", new DontMixIncrementOrDecrementWithOtherOperators(),
+                ParseOptionsHelper.FromCSharp9);
+
     }
 }
