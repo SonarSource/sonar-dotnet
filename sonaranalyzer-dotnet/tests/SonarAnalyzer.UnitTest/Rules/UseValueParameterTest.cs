@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseValueParameter_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.CSharp9.cs", new UseValueParameter(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new UseValueParameter());
 
         [TestMethod]
         [TestCategory("Rule")]

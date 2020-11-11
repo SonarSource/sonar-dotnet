@@ -31,15 +31,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs",
-                new AvoidExcessiveClassCoupling { Threshold = 1 });
+            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.CSharp9.cs",
-                new AvoidExcessiveClassCoupling { Threshold = 1 },
-                options: ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveClassCoupling.CSharp9.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
 
         [TestMethod]
         [TestCategory("Rule")]

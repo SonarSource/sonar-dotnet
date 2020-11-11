@@ -36,8 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ThreadStaticWithInitializer_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ThreadStaticWithInitializer.CSharp9.cs",
-                                    new ThreadStaticWithInitializer(),
-                                    ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThreadStaticWithInitializer.CSharp9.cs", new ThreadStaticWithInitializer());
     }
 }

@@ -24,7 +24,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -39,10 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnaryPrefixOperatorRepeated_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.CSharp9.cs",
-                new CSharp.UnaryPrefixOperatorRepeated(),
-                ParseOptionsHelper.FromCSharp9,
-                outputKind: OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnaryPrefixOperatorRepeated.CSharp9.cs", new CSharp.UnaryPrefixOperatorRepeated());
 
         [TestMethod]
         [TestCategory("CodeFix")]

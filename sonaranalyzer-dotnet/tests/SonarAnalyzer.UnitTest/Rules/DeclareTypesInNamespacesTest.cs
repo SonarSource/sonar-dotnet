@@ -21,7 +21,6 @@
 extern alias csharp;
 extern alias vbnet;
 
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
@@ -55,10 +54,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_AfterCSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs",
-                new CSharp.DeclareTypesInNamespaces(),
-                ParseOptionsHelper.FromCSharp9,
-                OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs",
+                new CSharp.DeclareTypesInNamespaces());
 
         [TestMethod]
         [TestCategory("Rule")]

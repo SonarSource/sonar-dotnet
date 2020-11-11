@@ -78,12 +78,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.CSharp9.cs",
-                                    new TestMethodShouldHaveCorrectSignature(),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
-                                        .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
-                                        .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
-                                        .ToArray());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldHaveCorrectSignature.CSharp9.cs",
+                                                new TestMethodShouldHaveCorrectSignature(),
+                                                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                                    .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
+                                                    .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                                                    .ToArray());
     }
 }

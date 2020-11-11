@@ -35,9 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ThreadStaticNonStaticField_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ThreadStaticNonStaticField.CSharp9.cs",
-                                    new ThreadStaticNonStaticField(),
-                                    ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThreadStaticNonStaticField.CSharp9.cs", new ThreadStaticNonStaticField());
 
         [TestMethod]
         [TestCategory("CodeFix")]

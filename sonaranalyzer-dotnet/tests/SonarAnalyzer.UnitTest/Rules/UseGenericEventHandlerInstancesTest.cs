@@ -31,14 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseGenericEventHandlerInstances() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseGenericEventHandlerInstances.cs",
-                                    new UseGenericEventHandlerInstances());
+            Verifier.VerifyAnalyzer(@"TestCases\UseGenericEventHandlerInstances.cs", new UseGenericEventHandlerInstances());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UseGenericEventHandlerInstances_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseGenericEventHandlerInstances.CSharp9.cs",
-                                    new UseGenericEventHandlerInstances(),
-                                    ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseGenericEventHandlerInstances.CSharp9.cs", new UseGenericEventHandlerInstances());
     }
 }

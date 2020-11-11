@@ -21,7 +21,6 @@
 extern alias csharp;
 extern alias vbnet;
 
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
@@ -34,19 +33,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PureAttributeOnVoidMethod_CS() => Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.cs", new CSharp.PureAttributeOnVoidMethod());
+        public void PureAttributeOnVoidMethod_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.cs", new CSharp.PureAttributeOnVoidMethod());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PureAttributeOnVoidMethod_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.CSharp9.cs",
-                                    new CSharp.PureAttributeOnVoidMethod(),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    outputKind: OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\PureAttributeOnVoidMethod.CSharp9.cs", new CSharp.PureAttributeOnVoidMethod());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void PureAttributeOnVoidMethod_VB() => Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.vb", new VisualBasic.PureAttributeOnVoidMethod());
+        public void PureAttributeOnVoidMethod_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.vb", new VisualBasic.PureAttributeOnVoidMethod());
     }
 }
 

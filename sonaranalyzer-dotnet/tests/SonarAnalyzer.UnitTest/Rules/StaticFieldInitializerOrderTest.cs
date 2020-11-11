@@ -47,8 +47,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldInitializerOrder_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldInitializerOrder.CSharp9.cs",
-                                    new StaticFieldInitializerOrder(),
-                                    options: ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldInitializerOrder.CSharp9.cs", new StaticFieldInitializerOrder());
     }
 }

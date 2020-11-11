@@ -23,7 +23,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -40,11 +39,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseUriInsteadOfString_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseUriInsteadOfString.CSharp9.cs",
                 new UseUriInsteadOfString(),
-                ParseOptionsHelper.FromCSharp9,
-                additionalReferences: MetadataReferenceFacade.GetSystemDrawing(),
-                outputKind: OutputKind.ConsoleApplication);
+                MetadataReferenceFacade.GetSystemDrawing());
 
         [TestMethod]
         [TestCategory("Rule")]
