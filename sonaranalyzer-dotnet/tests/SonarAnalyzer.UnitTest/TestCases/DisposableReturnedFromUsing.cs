@@ -82,6 +82,17 @@ namespace Tests.Diagnostics
             return fs2;
         }
 
+        public FileStream MethodWithSwitch(string x)
+        {
+            using var fs1 = File.Create(x);
+            var result = x switch
+            {
+                "" => fs1,
+                "1" => null
+            };
+            return result; // FN, we don't track aliasing
+        }
+
         public ref struct Struct
         {
             public void Dispose()

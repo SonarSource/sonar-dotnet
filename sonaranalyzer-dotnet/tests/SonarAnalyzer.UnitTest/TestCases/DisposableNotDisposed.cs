@@ -109,6 +109,15 @@ namespace Tests.Diagnostics
             NoOperation(this.field_fs8);
         }
 
+        private void Conditions(bool cond, string x)
+        {
+            var fs1 = new FileStream(@"c:\foo.txt", FileMode.Open); // FN - not disposed on all paths
+            if (cond)
+            {
+                fs1.Dispose();
+            }
+        }
+
         private void NoOperation(FileStream fs)
         {
             // do nothing

@@ -37,21 +37,8 @@ namespace MyLibrary
             private IntPtr myResource;
             private bool disposed = false;
 
-            protected virtual void Dispose(bool disposing)
-            {
-                if (!disposed)
-                {
-                    // Dispose of resources held by this instance.
-                    FreeResource(myResource); // Error [CS0103] - method doesn't exist
-                    disposed = true;
+            protected virtual void Dispose(bool disposing) { }
 
-                    // Suppress finalization of this disposed instance.
-                    if (disposing)
-                    {
-                        GC.SuppressFinalize(this);
-                    }
-                }
-            }
             ~Foo_Compliant()
             {
                 Dispose(false);
