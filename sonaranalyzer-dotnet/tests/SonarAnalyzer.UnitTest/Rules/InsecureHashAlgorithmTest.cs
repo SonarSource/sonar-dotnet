@@ -18,24 +18,39 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NETFRAMEWORK // SHA1Managed is sealed in .Net Core and HMACRIPEMD160 is not available
 
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class InsecureHashAlgorithmTest
     {
+
+#if NETFRAMEWORK // SHA1Managed is sealed in .Net Core and HMACRIPEMD160 is not available
+
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureHashAlgorithm() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureHashAlgorithm.cs",
-                                    new InsecureHashAlgorithm());
+            Verifier.VerifyAnalyzer(@"TestCases\InsecureHashAlgorithm.NetFx.cs", new InsecureHashAlgorithm());
+
+#else
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void InsecureHashAlgorithm() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.NetCore.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.GetSystemSecurityCryptography());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void InsecureHashAlgorithm_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.CSharp9.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.GetSystemSecurityCryptography());
+
+#endif
     }
 }
 
-#endif
