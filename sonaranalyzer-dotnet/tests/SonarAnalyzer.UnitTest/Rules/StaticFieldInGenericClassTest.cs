@@ -35,6 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldInGenericClass_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldInGenericClass.cs", new StaticFieldInGenericClass());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldInGenericClass.CSharp9.cs", new StaticFieldInGenericClass());
     }
 }
