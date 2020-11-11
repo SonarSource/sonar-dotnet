@@ -30,10 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void IndentSingleLineFollowingConditional()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\IndentSingleLineFollowingConditional.cs",
-                new IndentSingleLineFollowingConditional());
-        }
+        public void IndentSingleLineFollowingConditional() =>
+            Verifier.VerifyAnalyzer(@"TestCases\IndentSingleLineFollowingConditional.cs", new IndentSingleLineFollowingConditional());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void IndentSingleLineFollowingConditional_FromCSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\IndentSingleLineFollowingConditional.CSharp9.cs", new IndentSingleLineFollowingConditional());
     }
 }
