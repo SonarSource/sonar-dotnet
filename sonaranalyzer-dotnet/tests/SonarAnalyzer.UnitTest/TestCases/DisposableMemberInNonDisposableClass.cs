@@ -126,7 +126,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    partial class PartialMethod : IDisposable
+    partial class PartialMethod1 : IDisposable
     {
         private readonly IDisposable _disposable = new FileStream("a", FileMode.Open);
         public void Dispose()
@@ -136,11 +136,48 @@ namespace Tests.Diagnostics
         partial void MyDispose();
     }
 
-    partial class PartialMethod : IDisposable
+    partial class PartialMethod1 : IDisposable
     {
         partial void MyDispose()
         {
             _disposable.Dispose();
         }
     }
+
+    partial class PartialMethod2 // Noncompliant
+    {
+        private readonly IDisposable _disposable = new FileStream("a", FileMode.Open);
+        public void Dispose()
+        {
+            MyDispose();
+        }
+        partial void MyDispose();
+    }
+
+    partial class PartialMethod2 // Noncompliant
+    {
+        partial void MyDispose()
+        {
+            _disposable.Dispose();
+        }
+    }
+
+    partial class PartialMethod3 : IDisposable
+    {
+        private readonly IDisposable _disposable = new FileStream("a", FileMode.Open);
+        public void Dispose()
+        {
+            MyDispose();
+        }
+        partial void MyDispose();
+    }
+
+    partial class PartialMethod3
+    {
+        partial void MyDispose()
+        {
+            _disposable.Dispose();
+        }
+    }
+
 }
