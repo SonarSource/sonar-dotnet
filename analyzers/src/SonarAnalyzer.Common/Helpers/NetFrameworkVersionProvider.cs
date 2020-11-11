@@ -57,22 +57,29 @@ namespace SonarAnalyzer.Helpers
                 return NetFrameworkVersion.Unknown;
             }
 
-            if (!debuggerConstructorSymbol.GetAttributes().Any(attribute => attribute.AttributeClass.Name.Equals("ObsoleteAttribute")))
+            if (Probably35(debuggerConstructorSymbol))
             {
-                // the constructor was still not deprecated in .NET Framework 3.5
                 return NetFrameworkVersion.Probably35;
             }
-
-            if (AtLeast46(mscorlibAssembly))
+            else if (AtLeast46(mscorlibAssembly))
             {
                 return NetFrameworkVersion.After46;
             }
-            if (AtLeast452(mscorlibAssembly))
+            else if (AtLeast452(mscorlibAssembly))
             {
                 return NetFrameworkVersion.After452;
             }
-            return NetFrameworkVersion.Between4And451;
+            else
+            {
+                return NetFrameworkVersion.Between4And451;
+            }
         }
+
+        /// <remarks>the constructor was still not deprecated in .NET Framework 3.5</remarks>
+        private static bool Probably35(ISymbol debuggerConstructorSymbol)
+            => !debuggerConstructorSymbol
+            .GetAttributes()
+            .Any(attribute => attribute.AttributeClass.Name.Equals("ObsoleteAttribute"));
 
         /// <summary>Returns true if the .NET version was at least 4.5.2.</summary>
         /// <remarks>
@@ -80,12 +87,10 @@ namespace SonarAnalyzer.Helpers
         /// introduced in .NET 4.5.2
         /// </remarks>
         private static bool AtLeast452(IAssemblySymbol mscorlibAssembly)
-        {
-            return mscorlibAssembly
-                .GetTypeByMetadataName("System.IO.UnmanagedMemoryStream")?
-                .GetMembers("FlushAsync")
-                .Any() == true;
-        }
+            => mscorlibAssembly
+            .GetTypeByMetadataName("System.IO.UnmanagedMemoryStream")?
+            .GetMembers("FlushAsync")
+            .Any() == true;
 
         /// <summary>Returns true if the .NET version was at least 4.6.</summary>
         /// <remarks>
@@ -93,11 +98,9 @@ namespace SonarAnalyzer.Helpers
         /// introduced in .NET 4.6
         /// </remarks>
         private static bool AtLeast46(IAssemblySymbol mscorlibAssembly)
-        {
-            return mscorlibAssembly
-                .GetTypeByMetadataName("System.Array")?
-                .GetMembers("Empty")
-                .Any() == true;
-        }
+            => mscorlibAssembly
+            .GetTypeByMetadataName("System.Array")?
+            .GetMembers("Empty")
+            .Any() == true;
     }
 }
