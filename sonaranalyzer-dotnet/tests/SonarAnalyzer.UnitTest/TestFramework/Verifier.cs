@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             // then add ability to shift result reports with this line number
             foreach (var compilation in solution.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, new DiagnosticAnalyzer[] {diagnosticAnalyzer}, checkMode);
+                DiagnosticVerifier.Verify(compilation, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, checkMode);
             }
         }
 
@@ -89,6 +89,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
             }
         }
+
+        /// <summary>
+        /// Verify analyzer from C# 9 with top level statements.
+        /// </summary>
+        public static void VerifyAnalyzerFromCSharp9Console(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.ConsoleApplication, additionalReferences);
+
+        /// <summary>
+        /// Verify analyzer from C# 9 without top level statements.
+        /// </summary>
+        public static void VerifyAnalyzerFromCSharp9Library(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+        VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                           IEnumerable<ParseOptions> options = null,
@@ -135,7 +147,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
             OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
             IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyAnalyzer(paths, new []{ diagnosticAnalyzer}, options, checkMode, outputKind, additionalReferences);
+            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, checkMode, outputKind, additionalReferences);
 
         private static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer[] diagnosticAnalyzers,
             IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
