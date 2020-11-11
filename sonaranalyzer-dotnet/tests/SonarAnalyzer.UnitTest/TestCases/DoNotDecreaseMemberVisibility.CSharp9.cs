@@ -158,7 +158,7 @@ namespace SomeNamespace
     }
 }
 
-namespace FalsePositiveOnIndexers
+namespace Indexers
 {
     public record BaseClass
     {

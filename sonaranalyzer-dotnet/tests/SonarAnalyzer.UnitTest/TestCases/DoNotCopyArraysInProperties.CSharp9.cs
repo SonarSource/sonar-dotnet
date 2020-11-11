@@ -18,4 +18,9 @@ record R
     {
         get => foo.ToArray();
     }
+
+    public string[] Property3
+    {
+        init => stringArray = value.ToArray();
+    }
 }

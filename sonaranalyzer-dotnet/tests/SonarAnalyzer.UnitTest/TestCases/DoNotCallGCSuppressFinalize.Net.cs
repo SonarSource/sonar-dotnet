@@ -15,11 +15,17 @@ record R1 : IAsyncDisposable
     protected virtual ValueTask DisposeAsyncCore() => default;
 }
 
-record R2
+record R2 : IDisposable
 {
     public string Prop
     {
         init => GC.SuppressFinalize(this); // Noncompliant
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this); // Compliant
     }
 
     public async ValueTask DisposeAsync()
