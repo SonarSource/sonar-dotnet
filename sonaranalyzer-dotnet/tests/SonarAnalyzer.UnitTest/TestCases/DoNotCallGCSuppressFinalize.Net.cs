@@ -24,7 +24,6 @@ record R2 : IDisposable
 
     public void Dispose()
     {
-        Dispose(true);
         GC.SuppressFinalize(this); // Compliant
     }
 
