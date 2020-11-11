@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,10 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotShiftByZeroOrIntSize()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotShiftByZeroOrIntSize.cs",
-                new DoNotShiftByZeroOrIntSize());
-        }
+        public void DoNotShiftByZeroOrIntSize() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotShiftByZeroOrIntSize.cs", new DoNotShiftByZeroOrIntSize());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotShiftByZeroOrIntSize_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotShiftByZeroOrIntSize.CSharp9.cs", new DoNotShiftByZeroOrIntSize(),
+                ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
+
     }
 }
