@@ -147,6 +147,15 @@ function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
 
     & (Get-VsTestPath) $testFiles /Parallel /Enablecodecoverage /InIsolation /Logger:trx /TestAdapterPath:$testDirs
     Test-ExitCode "ERROR: Unit Tests execution FAILED."
+
+    $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
+    & dotnet build $testProjFileName
+
+    dotnet test  $testProjFileName --no-build --no-restore --nologo -f netcoreapp3.1
+    Test-ExitCode "ERROR: Unit tests for .NET Core 3.1 FAILED."
+
+    dotnet test  $testProjFileName --no-build --no-restore --nologo -f net5
+    Test-ExitCode "ERROR: Unit tests for .NET 5 FAILED."
 }
 
 function Invoke-IntegrationTests([ValidateSet("14.0", "15.0", "16.0", "Current")][string] $msbuildVersion) {
