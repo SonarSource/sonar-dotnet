@@ -30,9 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DotNotOverloadOperatorEqual()
-        {
+        public void DotNotOverloadOperatorEqual() =>
             Verifier.VerifyAnalyzer(@"TestCases\DotNotOverloadOperatorEqual.cs", new DotNotOverloadOperatorEqual());
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DotNotOverloadOperatorEqual_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DotNotOverloadOperatorEqual.CSharp9.cs", new DotNotOverloadOperatorEqual(),
+                ParseOptionsHelper.FromCSharp9);
+
     }
 }
