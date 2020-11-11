@@ -120,20 +120,13 @@ namespace Tests.Diagnostics
         }
     }
 
-    public partial class MyPartial : IDisposable
+    public partial class MyPartial // FN, partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
     {
-        public void Dispose()
-        {
-            // Dispose(10)
-        }
     }
 
     public partial class MyPartial
     {
-        public void Dispose(int i) // FN, partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
-        {
-
-        }
+        void Dispose() { }
     }
 
     public ref struct RefStruct

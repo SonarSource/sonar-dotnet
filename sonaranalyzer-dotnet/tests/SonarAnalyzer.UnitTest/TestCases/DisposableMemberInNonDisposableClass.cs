@@ -32,7 +32,7 @@ namespace Tests.Diagnostics
             this.fs.Close();
         }
 
-        public void Dispose()
+        public void Dispose() // FN, it does not dispose fs
         {
         }
     }
@@ -125,4 +125,59 @@ namespace Tests.Diagnostics
             public void Dispose() { }
         }
     }
+
+    partial class PartialMethod1 : IDisposable
+    {
+        private readonly IDisposable _disposable = new FileStream("a", FileMode.Open);
+        public void Dispose()
+        {
+            MyDispose();
+        }
+        partial void MyDispose();
+    }
+
+    partial class PartialMethod1 : IDisposable
+    {
+        partial void MyDispose()
+        {
+            _disposable.Dispose();
+        }
+    }
+
+    partial class PartialMethod2 // Noncompliant
+    {
+        private readonly IDisposable _disposable = new FileStream("a", FileMode.Open);
+        public void Dispose()
+        {
+            MyDispose();
+        }
+        partial void MyDispose();
+    }
+
+    partial class PartialMethod2 // Noncompliant
+    {
+        partial void MyDispose()
+        {
+            _disposable.Dispose();
+        }
+    }
+
+    partial class PartialMethod3 : IDisposable
+    {
+        private readonly IDisposable _disposable = new FileStream("a", FileMode.Open);
+        public void Dispose()
+        {
+            MyDispose();
+        }
+        partial void MyDispose();
+    }
+
+    partial class PartialMethod3
+    {
+        partial void MyDispose()
+        {
+            _disposable.Dispose();
+        }
+    }
+
 }
