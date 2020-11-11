@@ -60,4 +60,12 @@ namespace Tests.Diagnostics
 
         public abstract void F3();
     }
+
+    public class WithProp
+    {
+        public string Prop
+        {
+            set { }
+        }
+    }
 }
