@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -33,14 +30,53 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class UseArrayEmpty : UseArrayEmptyBase
+    public sealed class UseArrayEmpty : UseArrayEmptyBase<SyntaxKind, ObjectCreationExpressionSyntax, CollectionInitializerSyntax>
     {
         public UseArrayEmpty() : base(RspecStrings.ResourceManager) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override SyntaxKind[] SyntaxKindsOfInterest => new[]
         {
-            throw new NotImplementedException();
+            SyntaxKind.VariableDeclarator,
+            SyntaxKind.ObjectCreationExpression,
+            SyntaxKind.CollectionInitializer,
+        };
+
+        protected override string ArrayEmptySuffix => "(Of T)";
+
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
+           => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+
+        protected override bool ShouldReport(SyntaxNode node)
+            => base.ShouldReport(node)
+            || (node is VariableDeclaratorSyntax variableDeclaratorNode
+            && IsEmpyVariableDeclarator(variableDeclaratorNode));
+
+        private bool IsEmpyVariableDeclarator(VariableDeclaratorSyntax variableDeclaratorNode)
+        {
+            var arguments = variableDeclaratorNode
+                .ChildNodes()
+                .OfType<ModifiedIdentifierSyntax>()
+                .FirstOrDefault()?
+                .ArrayBounds?
+                .ChildNodes()
+                .OfType<SimpleArgumentSyntax>()
+                .ToArray();
+
+            return arguments?.Length == 1
+                && int.TryParse(arguments[0].ToFullString(), out var arg)
+                && arg == -1;
         }
+
+        protected override bool IsEmptyCreation(ObjectCreationExpressionSyntax creationNode)
+            => int.TryParse(SimpleArugment(creationNode)?.ToString(), out var count)
+            && count == 0;
+
+        private static SimpleArgumentSyntax SimpleArugment(ObjectCreationExpressionSyntax creationNode) => creationNode
+            .ChildNodes()
+            .OfType<ArgumentListSyntax>()
+            .FirstOrDefault()?
+            .Arguments.Cast<SimpleArgumentSyntax>()
+            .FirstOrDefault();
     }
 }
 

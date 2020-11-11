@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -33,14 +30,38 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class UseArrayEmpty : UseArrayEmptyBase
+    public sealed class UseArrayEmpty : UseArrayEmptyBase<SyntaxKind, ArrayCreationExpressionSyntax, InitializerExpressionSyntax>
     {
         public UseArrayEmpty() : base(RspecStrings.ResourceManager) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override SyntaxKind[] SyntaxKindsOfInterest => new SyntaxKind[]
         {
-            throw new NotImplementedException();
+            SyntaxKind.ArrayCreationExpression,
+            SyntaxKind.ArrayInitializerExpression,
+        };
+
+        protected override string ArrayEmptySuffix => "<T>";
+
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
+            => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+
+        protected override bool IsEmptyCreation(ArrayCreationExpressionSyntax creationNode)
+        {
+            var rankSpecifier = RankSpecifier(creationNode);
+            return rankSpecifier != null
+                && rankSpecifier.Rank == 1
+                && int.TryParse(rankSpecifier.Sizes[0].ToString(), out var size)
+                && size == 0;
         }
+
+        private static ArrayRankSpecifierSyntax RankSpecifier(ArrayCreationExpressionSyntax creationNode)
+            => creationNode
+                .ChildNodes()
+                .OfType<ArrayTypeSyntax>()
+                .FirstOrDefault()?
+                .ChildNodes()
+                .OfType<ArrayRankSpecifierSyntax>()
+                .FirstOrDefault();
     }
 }
 
