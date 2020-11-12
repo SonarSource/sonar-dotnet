@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -53,7 +53,7 @@ namespace Tests.Diagnostics
             result = someEnumerable.Count() >= localVariable;
             result = someEnumerable.Count() >= -1;
             result = someEnumerable.Count() <= 0;
-            result = someEnumerable.Count() < 0;
+            result = someEnumerable.Count() < 0; // FN https://github.com/SonarSource/sonar-dotnet/issues/3735
             result = 0 >= someEnumerable.Count();
 
             result = someEnumerable.Count() >= localConst_Zero; // Noncompliant
