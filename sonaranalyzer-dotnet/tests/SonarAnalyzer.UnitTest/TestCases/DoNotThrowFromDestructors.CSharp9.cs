@@ -18,7 +18,7 @@ namespace Tests.Diagnostics
 
             void Inner()
             {
-                throw new Exception(); // Noncompliant, C# 7+
+                throw new Exception(); // Noncompliant
             };
 
             try
@@ -40,7 +40,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    class C
+    record C
     {
         ~C() => throw new Exception(); // Noncompliant
     }

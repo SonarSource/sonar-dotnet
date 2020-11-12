@@ -1,7 +1,7 @@
 ﻿using System;
 
 // Native Integers can be either 32b or 64b depending on the underlying system.
-// We should only raise when the shift is done with values >= 64.
+// It's best not to raise, to avoid FPs.
 
 nint i = 1 << 10;
 
@@ -13,9 +13,9 @@ i = i >> 32; // Compliant
 i = i << 48; // Compliant
 i = i << 63; // Compliant
 
-i = i << 64; // FN
-i = i >> 64; // FN
-i = i << 128; // FN
+i = i << 64; // Compliant
+i = i >> 64; // Compliant
+i = i << 128; // Compliant
 
 nuint ui = 1 << 10;
 
