@@ -30,25 +30,24 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class InsecureHashAlgorithmTest
     {
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void InsecureHashAlgorithm() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.GetSystemSecurityCryptography());
 
 #if NETFRAMEWORK // SHA1Managed is sealed in .Net Core and HMACRIPEMD160 is not available
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void InsecureHashAlgorithm() =>
+        public void InsecureHashAlgorithm_NetFx() =>
             Verifier.VerifyAnalyzer(@"TestCases\InsecureHashAlgorithm.NetFx.cs", new InsecureHashAlgorithm());
 
 #else
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void InsecureHashAlgorithm() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.NetCore.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.GetSystemSecurityCryptography());
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void InsecureHashAlgorithm_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.CSharp9.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.GetSystemSecurityCryptography());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureHashAlgorithm.CSharp9.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.GetSystemSecurityCryptography());
 
 #endif
     }
