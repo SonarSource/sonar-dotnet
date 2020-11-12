@@ -202,13 +202,12 @@ namespace EntityFrameworkMigrations
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp9.cs",
-                                    new CS.UnusedPrivateMember(),
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.cs",
+                                    new CS.UnusedPrivateMember()
 #if NETFRAMEWORK
-                                    additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                                    , NuGetMetadataReference.NETStandardV2_1_0
 #endif
-                                    options: ParseOptionsHelper.FromCSharp9,
-                                    outputKind: OutputKind.ConsoleApplication);
+                                    );
 
         [TestMethod]
         [TestCategory("CodeFix")]

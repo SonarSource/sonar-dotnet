@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassNotInstantiatable_CS_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.CSharp9.cs", new ClassNotInstantiatable(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ClassNotInstantiatable.CSharp9.cs", new ClassNotInstantiatable());
 
         [TestMethod]
         [TestCategory("Rule")]

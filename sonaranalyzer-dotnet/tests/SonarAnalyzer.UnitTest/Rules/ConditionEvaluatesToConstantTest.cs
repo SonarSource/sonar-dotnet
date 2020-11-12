@@ -60,17 +60,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp9.cs",
-                GetAnalyzer(),
-                ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ConditionEvaluatesToConstant.CSharp9.cs", GetAnalyzer());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp9_TopLevelStatements() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs",
-                GetAnalyzer(),
-                ParseOptionsHelper.FromCSharp9,
-                outputKind: OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs", GetAnalyzer());
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             new SymbolicExecutionRunner(

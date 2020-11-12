@@ -1,9 +1,9 @@
 ﻿record StaticFieldInGenericClass<T>
     where T : class
 {
-    internal static string field; //Noncompliant
+    internal static string field; // FN
 
-    public static string Prop1 { get; set; } //Noncompliant
+    public static string Prop1 { get; set; } // FN
 
     public string Prop2 { get; set; }
 

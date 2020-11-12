@@ -21,9 +21,10 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using Microsoft.CodeAnalysis;
+#if NETCOREAPP
+using SonarAnalyzer.UnitTest.MetadataReferences;
+#endif
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -40,10 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs",
-                                    new DisposableMemberInNonDisposableClass(),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    outputKind: OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new DisposableMemberInNonDisposableClass());
 
 #if NETCOREAPP // IAsyncDisposable is available only on .Net Core
         [TestMethod]

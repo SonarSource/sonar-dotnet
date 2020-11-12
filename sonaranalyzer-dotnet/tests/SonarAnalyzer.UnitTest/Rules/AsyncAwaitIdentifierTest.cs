@@ -30,18 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void AsyncAwaitIdentifier()
-        {
+        public void AsyncAwaitIdentifier() =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncAwaitIdentifier.cs", new AsyncAwaitIdentifier());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AsyncAwaitIdentifier_CSharp9()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\AsyncAwaitIdentifier.CSharp9.cs", new AsyncAwaitIdentifier(),
-                options: ParseOptionsHelper.FromCSharp9);
-        }
-
+        public void AsyncAwaitIdentifier_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AsyncAwaitIdentifier.CSharp9.cs", new AsyncAwaitIdentifier());
     }
 }

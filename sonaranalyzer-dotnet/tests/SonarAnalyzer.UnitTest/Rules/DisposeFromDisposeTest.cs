@@ -22,7 +22,6 @@ extern alias csharp;
 
 using System.Collections.Immutable;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -48,7 +47,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposeFromDispose_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp9.cs", new DisposeFromDispose(),
-                ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposeFromDispose.CSharp9.cs", new DisposeFromDispose());
     }
 }

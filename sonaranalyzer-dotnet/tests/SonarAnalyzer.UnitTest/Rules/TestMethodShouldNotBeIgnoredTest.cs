@@ -93,12 +93,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.CSharp9.cs",
-                                    new TestMethodShouldNotBeIgnored(),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
-                                        .Concat(NuGetMetadataReference.XunitFrameworkV1)
-                                        .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
-                                        .ToArray());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldNotBeIgnored.CSharp9.cs",
+                                                new TestMethodShouldNotBeIgnored(),
+                                                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                                    .Concat(NuGetMetadataReference.XunitFrameworkV1)
+                                                    .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                                                    .ToArray());
     }
 }

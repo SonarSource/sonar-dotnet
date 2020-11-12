@@ -21,7 +21,6 @@
 extern alias csharp;
 extern alias vbnet;
 
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -41,10 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReadingStandardInput_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReadingStandardInput.CSharp9.cs",
-                                    new CSharp.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    outputKind: OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReadingStandardInput.CSharp9.cs", new CSharp.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]

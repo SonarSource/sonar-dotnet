@@ -36,6 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UninvokedEventDeclaration_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UninvokedEventDeclaration.CSharp9.cs", new UninvokedEventDeclaration(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UninvokedEventDeclaration.CSharp9.cs", new UninvokedEventDeclaration());
     }
 }

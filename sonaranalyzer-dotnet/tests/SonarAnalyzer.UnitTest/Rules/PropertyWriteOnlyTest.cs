@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyWriteOnly_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.CSharp9.cs", new CS.PropertyWriteOnly(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyWriteOnly.CSharp9.cs", new CS.PropertyWriteOnly());
 
         [TestMethod]
         [TestCategory("Rule")]

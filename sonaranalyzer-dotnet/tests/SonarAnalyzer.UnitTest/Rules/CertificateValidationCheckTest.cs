@@ -37,27 +37,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CertificateValidationCheck_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs",
                 new CertificateValidationCheck(),
-                additionalReferences : GetAdditionalReferences()
-            );
+                additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CertificateValidationCheck.CSharp9.cs",
                 new CertificateValidationCheck(),
-                options: ParseOptionsHelper.FromCSharp9,
-                additionalReferences: GetAdditionalReferences()
-            );
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
                 new CertificateValidationCheck(),
-                options: ParseOptionsHelper.FromCSharp9,
-                additionalReferences: GetAdditionalReferences(),
-                outputKind: OutputKind.ConsoleApplication
-            );
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]

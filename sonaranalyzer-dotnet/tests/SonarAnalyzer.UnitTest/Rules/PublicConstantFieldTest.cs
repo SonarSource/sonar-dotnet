@@ -30,15 +30,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PublicConstantField_CSharp() => Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.cs", new CS.PublicConstantField());
+        public void PublicConstantField_CSharp() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.cs", new CS.PublicConstantField());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PublicConstantField_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.CSharp9.cs", new CS.PublicConstantField(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicConstantField.CSharp9.cs", new CS.PublicConstantField());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void PublicConstantField_VB() => Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.vb", new VB.PublicConstantField());
+        public void PublicConstantField_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PublicConstantField.vb", new VB.PublicConstantField());
     }
 }

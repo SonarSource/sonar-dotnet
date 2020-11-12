@@ -35,9 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantInheritanceList_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.CSharp9.cs",
-                                    new RedundantInheritanceList(),
-                                    ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantInheritanceList.CSharp9.cs", new RedundantInheritanceList());
 
         [TestMethod]
         [TestCategory("CodeFix")]

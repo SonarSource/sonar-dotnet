@@ -22,7 +22,6 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,22 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLast() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLast.cs",
-                new CallerInformationParametersShouldBeLast());
+            Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLast.cs", new CallerInformationParametersShouldBeLast());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLast_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs",
-                new CallerInformationParametersShouldBeLast(),
-                options: ParseOptionsHelper.FromCSharp9,
-                outputKind: OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs", new CallerInformationParametersShouldBeLast());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CallerInformationParametersShouldBeLastInvalidSyntax.cs",
                 new CallerInformationParametersShouldBeLast(),
-                checkMode:CompilationErrorBehavior.Ignore);
+                checkMode: CompilationErrorBehavior.Ignore);
     }
 }
