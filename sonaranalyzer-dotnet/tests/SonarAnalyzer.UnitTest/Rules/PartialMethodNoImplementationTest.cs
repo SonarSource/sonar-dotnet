@@ -35,6 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PartialMethodNoImplementation_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PartialMethodNoImplementation.CSharp9.cs", new PartialMethodNoImplementation(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartialMethodNoImplementation.CSharp9.cs", new PartialMethodNoImplementation());
     }
 }

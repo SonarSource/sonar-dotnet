@@ -40,6 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyToAutoProperty_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.CSharp9.cs", new PropertyToAutoProperty(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyToAutoProperty.CSharp9.cs", new PropertyToAutoProperty());
     }
 }

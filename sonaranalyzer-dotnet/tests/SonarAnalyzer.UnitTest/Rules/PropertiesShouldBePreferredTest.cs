@@ -39,8 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesShouldBePreferred_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesShouldBePreferred.CSharp9.cs",
-                                    new PropertiesShouldBePreferred(),
-                                    ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesShouldBePreferred.CSharp9.cs", new PropertiesShouldBePreferred());
     }
 }

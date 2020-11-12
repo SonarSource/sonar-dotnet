@@ -42,8 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterNamesInPartialMethod_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesInPartialMethod.CSharp9.cs",
-                                    new ParameterNamesInPartialMethod(),
-                                    ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ParameterNamesInPartialMethod.CSharp9.cs", new ParameterNamesInPartialMethod());
     }
 }

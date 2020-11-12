@@ -39,10 +39,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs",
                                     new csharp.PartCreationPolicyShouldBeUsedWithExportAttribute(),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
+                                    MetadataReferenceFacade.GetSystemComponentModelComposition());
 
         [TestMethod]
         [TestCategory("Rule")]

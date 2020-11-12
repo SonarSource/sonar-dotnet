@@ -51,9 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.CSharp9.cs",
-                                    new CS.PropertiesAccessCorrectField(),
-                                    ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesAccessCorrectField.CSharp9.cs", new CS.PropertiesAccessCorrectField());
 
         [TestMethod]
         [TestCategory("Rule")]
