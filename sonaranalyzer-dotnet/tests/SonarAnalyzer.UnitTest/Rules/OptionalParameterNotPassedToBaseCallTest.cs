@@ -30,18 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void OptionalParameterNotPassedToBaseCall_CS()
-        {
+        public void OptionalParameterNotPassedToBaseCall_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.cs", new OptionalParameterNotPassedToBaseCall());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void OptionalParameterNotPassedToBaseCall_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.vb",
-                new SonarAnalyzer.Rules.VisualBasic.OptionalParameterNotPassedToBaseCall());
-        }
+        public void OptionalParameterNotPassedToBaseCall_CSharp9() =>
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.CSharp9.cs", new OptionalParameterNotPassedToBaseCall());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void OptionalParameterNotPassedToBaseCall_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.vb", new SonarAnalyzer.Rules.VisualBasic.OptionalParameterNotPassedToBaseCall());
     }
 }
 
