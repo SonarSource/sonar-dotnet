@@ -43,9 +43,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotDecreaseMemberVisibility_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotDecreaseMemberVisibility.CSharp9.cs",
-                new DoNotDecreaseMemberVisibility(),
-                options: ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotDecreaseMemberVisibility.CSharp9.cs",
+                new DoNotDecreaseMemberVisibility());
 #endif
     }
 }

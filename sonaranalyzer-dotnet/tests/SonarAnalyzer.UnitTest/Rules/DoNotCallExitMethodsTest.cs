@@ -21,7 +21,6 @@
 
 
 using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -46,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallExitMethods_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.CSharp9.cs",
-                new DoNotCallExitMethods(), ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs",
+                new DoNotCallExitMethods());
     }
 }

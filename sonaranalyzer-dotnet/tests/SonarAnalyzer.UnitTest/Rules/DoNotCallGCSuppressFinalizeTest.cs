@@ -19,10 +19,9 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -45,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallGCSuppressFinalize_Net5() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.Net5.cs", new DoNotCallGCSuppressFinalize(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotCallGCSuppressFinalize.Net5.cs", new DoNotCallGCSuppressFinalize());
 #endif
     }
 }

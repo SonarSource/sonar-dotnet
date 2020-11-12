@@ -19,11 +19,10 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -40,10 +39,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs",
                                     new DoNotCallAssemblyLoadInvalidMethods(),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    OutputKind.ConsoleApplication,
                                     additionalReferences: MetadataReferenceFacade.GetSystemSecurityPermissions());
 
 #if NETFRAMEWORK // The overloads with Evidence are obsolete on .Net Framework 4.8 and not available on .Net Core
