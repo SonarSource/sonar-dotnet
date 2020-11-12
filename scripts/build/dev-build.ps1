@@ -75,7 +75,7 @@ try {
         # When running this script, we want to run all unit tests.
         # see sonaranalyzer-dotnet\tests\SonarAnalyzer.UnitTest\TestFramework\ParseOptionsHelper.cs
         $env:SYSTEM_DEFINITIONID="set"
-        Invoke-UnitTests $binPath $true
+        Invoke-UnitTests $binPath $buildConfiguration
     }
 
     if ($its) {
