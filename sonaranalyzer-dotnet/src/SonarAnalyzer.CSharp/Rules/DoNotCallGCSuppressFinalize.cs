@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallGCSuppressFinalizeMethod : DoNotCallMethodsCSharpBase
+    public sealed class DoNotCallGCSuppressFinalize : DoNotCallMethodsCSharpBase
     {
         private const string DiagnosticId = "S3971";
         private const string MessageFormat = "Do not call 'GC.SuppressFinalize'.";

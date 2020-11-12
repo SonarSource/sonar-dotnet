@@ -31,14 +31,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotDecreaseMemberVisibility()
-        {
+        public void DoNotDecreaseMemberVisibility() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotDecreaseMemberVisibility.cs",
                 new DoNotDecreaseMemberVisibility(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
+
+#if NET5_0
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotDecreaseMemberVisibility_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotDecreaseMemberVisibility.CSharp9.cs",
+                new DoNotDecreaseMemberVisibility());
+#endif
     }
 }

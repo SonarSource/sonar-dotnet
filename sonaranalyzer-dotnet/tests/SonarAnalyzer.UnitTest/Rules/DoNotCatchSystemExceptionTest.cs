@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,10 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotCatchSystemException()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCatchSystemException.cs",
-                new DoNotCatchSystemException());
-        }
+        public void DoNotCatchSystemException() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCatchSystemException.cs", new DoNotCatchSystemException());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotCatchSystemException_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchSystemException.CSharp9.cs", new DoNotCatchSystemException());
     }
 }

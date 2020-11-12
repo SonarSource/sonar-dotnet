@@ -4,6 +4,8 @@ namespace Tests.Diagnostics
 {
     class FooNotIDisposable
     {
+        Action x = () => GC.SuppressFinalize(new object()); // Noncompliant
+
         void Foo()
         {
             GC.SuppressFinalize(this); // Noncompliant {{Do not call 'GC.SuppressFinalize'.}}
