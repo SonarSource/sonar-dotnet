@@ -37,8 +37,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_DefaultValues_Records() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_DefaultValues.Records.cs",
-                new AvoidExcessiveInheritance(), options: ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveInheritance_DefaultValues.Records.cs",
+                new AvoidExcessiveInheritance());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -55,9 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredRecord() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.Records.cs",
-                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubRecord" },
-                options: ParseOptionsHelper.FromCSharp9);
-
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveInheritance_CustomValues.Records.cs",
+                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubRecord" });
     }
 }

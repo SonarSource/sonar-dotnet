@@ -52,12 +52,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_TopLevelStatement() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassName.TopLevelStatement.cs", new CSharp.ClassAndMethodName(), options: ParseOptionsHelper.FromCSharp9, outputKind: OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassName.TopLevelStatement.cs", new CSharp.ClassAndMethodName());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void RecordName() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RecordName.cs", new CSharp.ClassAndMethodName(), options: ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RecordName.cs", new CSharp.ClassAndMethodName());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -79,9 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodName_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodName.CSharp9.cs",
-                new CSharp.ClassAndMethodName(),
-                ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodName.CSharp9.cs", new CSharp.ClassAndMethodName());
 
         [TestMethod]
         public void TestSplitToParts() =>

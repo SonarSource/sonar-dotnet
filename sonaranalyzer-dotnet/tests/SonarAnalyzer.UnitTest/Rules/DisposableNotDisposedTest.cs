@@ -23,7 +23,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -41,11 +40,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableNotDisposed_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
                 new DisposableNotDisposed(),
-                ParseOptionsHelper.FromCSharp9,
-                OutputKind.ConsoleApplication,
-                additionalReferences: MetadataReferenceFacade.GetSystemNetHttp());
+                MetadataReferenceFacade.GetSystemNetHttp());
 
     }
 }

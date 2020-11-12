@@ -35,8 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void StringOrIntegralTypesForIndexers_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringOrIntegralTypesForIndexers.cs",
-                                    new StringOrIntegralTypesForIndexers(),
-                                    ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StringOrIntegralTypesForIndexers.cs", new StringOrIntegralTypesForIndexers());
     }
 }

@@ -52,10 +52,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
                             new TestClassShouldHaveTestMethod(),
-                            ParseOptionsHelper.FromCSharp9,
-                            additionalReferences: NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)
-                                                    .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)));
+                            NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)
+                                .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)));
     }
 }

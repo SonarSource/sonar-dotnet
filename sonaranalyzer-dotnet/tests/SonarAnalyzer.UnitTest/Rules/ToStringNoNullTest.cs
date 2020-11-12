@@ -22,7 +22,6 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,9 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ToStringNoNull_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ToStringNoNull.CSharp9.cs",
-                                    new ToStringNoNull(),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    outputKind: OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ToStringNoNull.CSharp9.cs", new ToStringNoNull());
     }
 }

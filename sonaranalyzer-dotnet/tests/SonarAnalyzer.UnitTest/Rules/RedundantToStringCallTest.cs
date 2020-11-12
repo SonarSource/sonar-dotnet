@@ -35,9 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantToStringCall_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantToStringCall.CSharp9.cs",
-                                    new RedundantToStringCall(),
-                                    ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantToStringCall.CSharp9.cs", new RedundantToStringCall());
 
         [TestMethod]
         [TestCategory("CodeFix")]

@@ -204,12 +204,11 @@ public class Foo
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.CSharp9.cs",
-                                    new TestMethodShouldContainAssertion(),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
-                                                            .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
-                                                            .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
-                                                            .ToArray());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldContainAssertion.CSharp9.cs",
+                                                new TestMethodShouldContainAssertion(),
+                                                NuGetMetadataReference.MSTestTestFrameworkV1
+                                                    .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
+                                                    .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                                                    .ToArray());
     }
 }

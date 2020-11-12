@@ -22,7 +22,6 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -43,9 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyGenericParameters_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyGenericParameters.CSharp9.cs",
-                                    new TooManyGenericParameters(),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    outputKind: OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyGenericParameters.CSharp9.cs", new TooManyGenericParameters());
     }
 }

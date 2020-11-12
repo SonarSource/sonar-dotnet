@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class UseShortCircuitingOperatorTest
     {
         [TestMethod, TestCategory("Rule")]
-        public void UseShortCircuitingOperators_VisualBasic() => 
+        public void UseShortCircuitingOperators_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.vb", new VB.UseShortCircuitingOperator());
 
         [TestMethod, TestCategory("CodeFix")]
@@ -46,10 +46,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod, TestCategory("Rule")]
         public void UseShortCircuitingOperators_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
-                                    new CS.UseShortCircuitingOperator(),
-                                    ParseOptionsHelper.FromCSharp9,
-                                    outputKind: OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
+                                    new CS.UseShortCircuitingOperator());
 
         [TestMethod, TestCategory("CodeFix")]
         public void UseShortCircuitingOperators_CSharp_CodeFix() =>
