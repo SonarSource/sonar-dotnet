@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_FromCSharp9()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.CSharp9.cs", new ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ImplementIDisposableCorrectly.CSharp9.cs", new ImplementIDisposableCorrectly());
         }
 
         [TestMethod]
