@@ -19,9 +19,9 @@ stages:
       - task: UseDotNet@2
         inputs:
           packageType: sdk
-          version: 5.0.100-rc.2.20479.15
+          version: 5.0.100
           installationPath: $(Agent.ToolsDirectory)/dotnet
-        displayName: "Install NET 5 SDK preview"
+        displayName: "Install .NET 5 SDK"
 
       - task: UseDotNet@2
         inputs:
