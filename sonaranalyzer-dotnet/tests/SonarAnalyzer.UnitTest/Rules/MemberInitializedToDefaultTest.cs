@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MemberInitializedToDefault_FromCSharp9() =>
+        public void MemberInitializedToDefault_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializedToDefault.CSharp9.cs", new MemberInitializedToDefault());
 
         [TestMethod]
