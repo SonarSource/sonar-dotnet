@@ -11,14 +11,6 @@ namespace Tests.Diagnostics
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
-    [Serializable]
-    public class SerializableClass : ISerializable
-    {
-        public SerializableClass() { }
-        protected SerializableClass(SerializationInfo info, StreamingContext context) { }
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
-    }
-
     public abstract record SerializableAbstract : ISerializable
     {
         public SerializableAbstract() { }
@@ -199,6 +191,14 @@ namespace Tests.Diagnostics
     {
         public override partial void GetObjectData(SerializationInfo info, StreamingContext context) { }
         //FN, should be second location with Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
+    }
+
+    [Serializable]
+    public class SerializableClass : ISerializable
+    {
+        public SerializableClass() { }
+        protected SerializableClass(SerializationInfo info, StreamingContext context) { }
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
     [Serializable]
