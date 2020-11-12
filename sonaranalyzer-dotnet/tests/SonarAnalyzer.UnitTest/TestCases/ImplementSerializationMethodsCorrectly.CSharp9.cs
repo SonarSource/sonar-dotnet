@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 
 [OnSerialized]
-int OnSerialized(StreamingContext context) => 42 ; // FN, top level statement is not supported
+int OnSerialized(StreamingContext context) => 42; // FN, top level statement is not supported
 
 [Serializable]
 public record Foo
@@ -74,4 +74,21 @@ public record Foo
         static void OnDeserializedStatic(StreamingContext context) // FN, attribute should not be on a local nor static method
         { }
     }
+}
+
+[Serializable]
+public partial class Partial
+{
+    [OnSerialized]
+    private partial int OnSerialized(StreamingContext context);             // Noncompliant
+
+    [OnDeserialized()]
+    private partial void OnDeserializedMethod(StreamingContext context);    // Compliant
+}
+
+public partial class Partial
+{
+    private partial int OnSerialized(StreamingContext context) => 42;           // Noncompliant
+
+    private partial void OnDeserializedMethod(StreamingContext context) { }     // Compliant
 }

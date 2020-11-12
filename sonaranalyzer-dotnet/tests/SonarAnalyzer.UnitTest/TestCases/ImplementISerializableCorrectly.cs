@@ -52,10 +52,16 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class NonSerializedType
+    {
+    }
+
     public class Serializable_NoAttribute : ISerializable
 //               ^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
 //         ^^^^^ Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'Serializable_NoAttribute' because it implements 'ISerializable'.}}
     {
+        private readonly NonSerializedType field; // FN, should be marked with [NonSerialized]
+
         public Serializable_NoAttribute() { }
         protected Serializable_NoAttribute(SerializationInfo info, StreamingContext context) { }
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
