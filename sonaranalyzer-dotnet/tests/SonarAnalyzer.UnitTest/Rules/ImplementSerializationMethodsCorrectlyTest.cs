@@ -30,16 +30,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ImplementSerializationMethodsCorrectly_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs",
-                new ImplementSerializationMethodsCorrectly());
-        }
+        public void ImplementSerializationMethodsCorrectly_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs", new ImplementSerializationMethodsCorrectly());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ImplementSerializationMethodsCorrectly_CS_InvalidCode()
-        {
+        public void ImplementSerializationMethodsCorrectly_CS_FromCSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new ImplementSerializationMethodsCorrectly());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ImplementSerializationMethodsCorrectly_CS_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 [Serializable]
 public class Foo
@@ -47,15 +48,11 @@ public class Foo
     [OnDeserializing]
     public int  { throw new NotImplementedException(); }
 }", new ImplementSerializationMethodsCorrectly(), checkMode: CompilationErrorBehavior.Ignore);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ImplementSerializationMethodsCorrectly_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ImplementSerializationMethodsCorrectly());
-        }
+        public void ImplementSerializationMethodsCorrectly_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new SonarAnalyzer.Rules.VisualBasic.ImplementSerializationMethodsCorrectly());
     }
 }
 
