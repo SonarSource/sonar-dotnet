@@ -31,20 +31,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodOverrideChangedDefaultValue()
-        {
+        public void MethodOverrideChangedDefaultValue() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
                 new MethodOverrideChangedDefaultValue(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodOverrideChangedDefaultValue_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new MethodOverrideChangedDefaultValue());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void MethodOverrideChangedDefaultValue_CodeFix()
-        {
+        public void MethodOverrideChangedDefaultValue_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideChangedDefaultValue.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.cs",
@@ -53,6 +55,5 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new MethodOverrideChangedDefaultValueCodeFixProvider(),
                 options: ParseOptionsHelper.FromCSharp8,
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
-        }
     }
 }
