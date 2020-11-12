@@ -1,14 +1,22 @@
 ﻿record Record
 {
-    private int F0 = 0; // Compliant - unused
-    private int F1 = 0; // Compliant - FN
-    public int F2 = 0; // Compliant - Public
+    private int privateUnused = 0; // Compliant - unused
+    private int privateUsed = 0; // Compliant - FN
+    private protected int privateProtected = 0; // Compliant
+    internal int @internal = 0; // Compliant
+    protected internal int protectedInternal = 0; // Compliant
+    protected int @protected = 0; // Compliant
+    public int @public = 0; // Compliant - Public
 
     void Foo()
     {
-        ((F1)) = 42;
-        F2 = 42;
-        Bar(F1);
+        ((privateUsed)) = 42;
+        privateProtected = 42;
+        @internal = 42;
+        protectedInternal = 42;
+        @protected = 42;
+        @public = 42;
+        Bar(privateUsed);
     }
 
     void Bar(int i) { }

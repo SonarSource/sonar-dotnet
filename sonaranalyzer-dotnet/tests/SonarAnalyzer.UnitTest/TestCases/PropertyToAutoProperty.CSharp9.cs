@@ -14,7 +14,7 @@ public record Record
     public int Compliant
     {
         get { return field1; }
-        set { field1 = value + 1; }
+        set { field1 = value; }
     }
 
     public int Compliant2 //Compliant
@@ -34,4 +34,6 @@ public record Record
         get { return field3; }
         init { field3 = value; }
     }
+
+    public string PropWithGetAndInit { get; init; } // Compliant
 }
