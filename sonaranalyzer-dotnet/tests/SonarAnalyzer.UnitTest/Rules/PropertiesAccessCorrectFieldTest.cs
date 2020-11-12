@@ -38,22 +38,27 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
-                new CS.PropertiesAccessCorrectField(),
-                additionalReferences: AdditionalReferences);
+                                    new CS.PropertiesAccessCorrectField(),
+                                    additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.CSharp8.cs",
-                new CS.PropertiesAccessCorrectField(),
-                ParseOptionsHelper.FromCSharp8);
+                                    new CS.PropertiesAccessCorrectField(),
+                                    ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PropertiesAccessCorrectField_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesAccessCorrectField.CSharp9.cs", new CS.PropertiesAccessCorrectField());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
-                new VB.PropertiesAccessCorrectField(),
-                additionalReferences: AdditionalReferences);
+                                    new VB.PropertiesAccessCorrectField(),
+                                    additionalReferences: AdditionalReferences);
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             NuGetMetadataReference.MvvmLightLibs("5.4.1.1")

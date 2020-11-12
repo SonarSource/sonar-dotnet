@@ -30,10 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PInvokesShouldNotBeVisible()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\PInvokesShouldNotBeVisible.cs",
-                new PInvokesShouldNotBeVisible());
-        }
+        public void PInvokesShouldNotBeVisible() => Verifier.VerifyAnalyzer(@"TestCases\PInvokesShouldNotBeVisible.cs", new PInvokesShouldNotBeVisible());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PInvokesShouldNotBeVisible_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PInvokesShouldNotBeVisible.CSharp9.cs", new PInvokesShouldNotBeVisible());
     }
 }

@@ -33,14 +33,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
-                new csharp.PartCreationPolicyShouldBeUsedWithExportAttribute(),
-                additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
+                                    new csharp.PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs",
+                                    new csharp.PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                                    MetadataReferenceFacade.GetSystemComponentModelComposition());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
-                new vbnet.PartCreationPolicyShouldBeUsedWithExportAttribute(),
-                additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
+                                    new vbnet.PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
     }
 }
