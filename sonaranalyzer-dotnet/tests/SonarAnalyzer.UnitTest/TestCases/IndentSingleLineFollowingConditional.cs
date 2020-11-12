@@ -46,24 +46,20 @@ namespace Tests.Diagnostics
 //          ^^^^^^^^^^^^^^^^^^ Secondary
             while (total < 10);
 
-
             while (total < 20)          // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'while'}}
 //          ^^^^^^^^^^^^^^^^^^
            total = total + 1;           // trivia not included in secondary location for single line statements...
 //         ^^^^^^^^^^^^^^^^^^ Secondary
-
 
             for(int i = 0; i < 10; i++) // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'for'}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
        total = total + i;               // trivia not included in secondary location for single line statements...
 //     ^^^^^^^^^^^^^^^^^^ Secondary
 
-
             foreach(char item in data)  // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'foreach'}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^
             total++;                    // trivia not included in secondary location for single line statements...
 //          ^^^^^^^^ Secondary
-
 
             if (total < 100)            // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'if'}}
 //          ^^^^^^^^^^^^^^^^
@@ -75,14 +71,12 @@ namespace Tests.Diagnostics
 //          ^^^^^^^^^^^^ Secondary
         }
 
-
         public int SpecialElseIfCase(int i)
         {
             if (i > 100)
                 return 1;
             else if (i > 200)
                 return 2;  // compliant - common pattern used in Akka, and used Ember and Nancy too.
-
 
             if (i > 300)
                 return 3;
