@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -66,17 +66,16 @@ internal class Bar
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodsShouldUseBaseTypes()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldUseBaseTypes.cs",
-                new MethodsShouldUseBaseTypes());
-        }
+        public void MethodsShouldUseBaseTypes() => Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldUseBaseTypes.cs", new MethodsShouldUseBaseTypes());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodsShouldUseBaseTypes_InvalidCode()
-        {
-            Verifier.VerifyCSharpAnalyzer(@"
+        public void MethodsShouldUseBaseTypes_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodsShouldUseBaseTypes_InvalidCode() => Verifier.VerifyCSharpAnalyzer(@"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -95,6 +94,5 @@ public class Foo
         a.ToList();
     }
 }", new MethodsShouldUseBaseTypes(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }
