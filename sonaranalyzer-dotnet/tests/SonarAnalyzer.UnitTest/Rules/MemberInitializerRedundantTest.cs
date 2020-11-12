@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,22 +30,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MemberInitializerRedundant()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs",
-                new MemberInitializerRedundant(),
-                ParseOptionsHelper.FromCSharp8);
-        }
+        public void MemberInitializerRedundant() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant(), ParseOptionsHelper.FromCSharp8);
+
+#if NET
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MemberInitializerRedundant_FromCSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializerRedundant.CSharp9.cs", new MemberInitializerRedundant());
+
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void MemberInitializerRedundant_CodeFix()
-        {
+        public void MemberInitializerRedundant_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MemberInitializerRedundant.cs",
                 @"TestCases\MemberInitializerRedundant.Fixed.cs",
                 new MemberInitializerRedundant(),
                 new MemberInitializedToDefaultCodeFixProvider());
-        }
     }
 }
