@@ -263,7 +263,7 @@ stages:
           Test-ExitCode "ERROR: Unit tests for .NET Core 3.1 FAILED."
 
           Write-Host "UTs .Net 5"
-          & dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f net5
+          & dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f net5.0
           Test-ExitCode "ERROR: Unit tests for .NET 5 FAILED."
 
           cd ..

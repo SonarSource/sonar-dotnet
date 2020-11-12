@@ -127,7 +127,7 @@ function Invoke-MSBuild (
 }
 
 # Tests
-function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
+function Invoke-UnitTests([string]$binPath, [string]$buildConfiguration) {
     Write-Header "Running unit tests"
 
     $escapedPath = (Join-Path $binPath "net48") -Replace '\\', '\\'
@@ -145,16 +145,18 @@ function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
         }
     $testDirs = $testDirs | Select-Object -Uniq
 
-    & (Get-VsTestPath) $testFiles /Parallel /Enablecodecoverage /InIsolation /Logger:trx /TestAdapterPath:$testDirs
+    Write-Header "Running unit tests .NET Framework 4.8"
+    & (Get-VsTestPath) $testFiles /Logger:"console;verbosity=minimal"  /Parallel /Enablecodecoverage /InIsolation  /TestAdapterPath:$testDirs
     Test-ExitCode "ERROR: Unit Tests execution FAILED."
 
     $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
-    & dotnet build $testProjFileName
 
-    dotnet test  $testProjFileName --no-build --no-restore --nologo -f netcoreapp3.1
+    Write-Header "Running unit tests .NET Core 3.1"
+    dotnet test  $testProjFileName -f netcoreapp3.1 -v minimal -c $buildConfiguration --no-build --no-restore
     Test-ExitCode "ERROR: Unit tests for .NET Core 3.1 FAILED."
 
-    dotnet test  $testProjFileName --no-build --no-restore --nologo -f net5
+    Write-Header "Running unit tests .NET 5"
+    dotnet test  $testProjFileName -f net5.0 -v minimal -c $buildConfiguration --no-build --no-restore
     Test-ExitCode "ERROR: Unit tests for .NET 5 FAILED."
 }
 
