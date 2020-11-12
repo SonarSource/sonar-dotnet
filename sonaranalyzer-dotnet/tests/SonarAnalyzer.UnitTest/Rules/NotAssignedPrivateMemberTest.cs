@@ -31,17 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NotAssignedPrivateMember()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs",
-                new NotAssignedPrivateMember());
-        }
+        public void NotAssignedPrivateMember() => Verifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs", new NotAssignedPrivateMember());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NotAssignedPrivateMember_IndexingMovableFixedBuffer()
-        {
-            Verifier.VerifyCSharpAnalyzer(@"
+        public void NotAssignedPrivateMember_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NotAssignedPrivateMember.CSharp9.cs", new NotAssignedPrivateMember());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NotAssignedPrivateMember_IndexingMovableFixedBuffer() => Verifier.VerifyCSharpAnalyzer(@"
 unsafe struct FixedArray
 {
     private fixed int a[42]; // Compliant, because of the fixed modifier
@@ -54,6 +53,5 @@ unsafe struct FixedArray
         b[0] = 42;
     }
 }", new NotAssignedPrivateMember(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_3) });
-        }
     }
 }
