@@ -36,7 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotTestThisWithIsOperator_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotTestThisWithIsOperator.CSharp9.cs", new DoNotTestThisWithIsOperator(),
-                ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp9.cs", new DoNotTestThisWithIsOperator());
     }
 }

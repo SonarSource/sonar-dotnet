@@ -36,8 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHideBaseClassMethods_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotHideBaseClassMethods.CSharp9.cs", new DoNotHideBaseClassMethods(),
-                ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotHideBaseClassMethods.CSharp9.cs", new DoNotHideBaseClassMethods());
 
     }
 }

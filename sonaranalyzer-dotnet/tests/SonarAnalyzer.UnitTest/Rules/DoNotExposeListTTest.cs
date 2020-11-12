@@ -19,10 +19,9 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,14 +36,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT_CSharp9_TopLevelStatements() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp9.TopLevel.cs", new DoNotExposeListT(),
-                ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.TopLevel.cs", new DoNotExposeListT());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT_CSharp9_Records() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp9.Records.cs", new DoNotExposeListT(),
-                ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotExposeListT.CSharp9.Records.cs", new DoNotExposeListT());
 
         [TestMethod]
         [TestCategory("Rule")]

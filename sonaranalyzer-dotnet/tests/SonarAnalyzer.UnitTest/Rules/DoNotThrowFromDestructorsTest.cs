@@ -36,8 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotThrowFromDestructors_CS_CSharp9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.CSharp9.cs", new DoNotThrowFromDestructors(),
-                ParseOptionsHelper.FromCSharp9);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotThrowFromDestructors.CSharp9.cs", new DoNotThrowFromDestructors());
 
         [TestMethod]
         [TestCategory("Rule")]
