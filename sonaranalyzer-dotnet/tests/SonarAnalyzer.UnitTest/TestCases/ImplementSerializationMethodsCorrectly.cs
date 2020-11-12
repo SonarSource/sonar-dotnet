@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
 
         [OnDeserialized]
         void OnDeserialized<T>(StreamingContext context) { } // Noncompliant {{Make this method have no type parameters.}}
-
+        
         [OnDeserializing]
         public int OnDeserializing2(StreamingContext context) { throw new NotImplementedException(); } // Noncompliant {{Make this method 'private' and return 'void'.}}
 
@@ -35,5 +35,20 @@ namespace Tests.Diagnostics
 
         [OnDeserializing]
         public int OnDeserializing5<T>() { throw new NotImplementedException(); } // Noncompliant {{Make this method 'private', return 'void', have no type parameters and have a single parameter of type 'StreamingContext'.}}
+
+        [OnSerializing]
+        private static void OnSerializingStatic(StreamingContext context) { } // FN
+
+        [OnSerializing()]
+        internal void OnSerializingMethod(StreamingContext context) { }     // Noncompliant FP, method is not public and gets invoked
+
+        [OnSerialized()]
+        protected void OnSerializedMethod(StreamingContext context) { }      // Noncompliant FP, method is not public and gets invoked
+
+        [OnDeserializing()]
+        private void OnDeserializingMethod(StreamingContext context) { }    // Compliant
+
+        [OnDeserialized()]
+        private void OnDeserializedMethod(StreamingContext context) { }     // Compliant
     }
 }

@@ -2,11 +2,13 @@
 Imports System.Runtime.Serialization
 
 Namespace Tests.Diagnostics
+
     <Serializable>
     Public Class Foo
+
         <OnSerializing>
         Public Sub OnSerializing(ByVal context As StreamingContext) ' Noncompliant {{Make this method 'Private'.}}
-'                  ^^^^^^^^^^^^^
+            '      ^^^^^^^^^^^^^
         End Sub
 
         <OnSerialized>
@@ -52,5 +54,27 @@ Namespace Tests.Diagnostics
         Public Function () As String ' Noncompliant ' Error [BC30203]
             Throw New NotImplementedException()
         End Function
+
+        <OnSerializing>
+        Private Shared Sub OnSerializingStatic(Context As StreamingContext)  ' FN
+        End Sub
+
+        <OnSerializing>
+        Friend Sub OnSerializingMethod(Context As StreamingContext)     ' Noncompliant FP, method Is Not Public And gets invoked
+        End Sub
+
+        <OnSerialized>
+        Protected Sub OnSerializedMethod(Context As StreamingContext)   ' Noncompliant FP, method Is Not Public And gets invoked
+        End Sub
+
+        <OnDeserializing>
+        Private Sub OnDeserializingMethod(Context As StreamingContext)  ' Compliant
+        End Sub
+
+        <OnDeserialized>
+        Private Sub OnDeserializedMethod(Context As StreamingContext)   ' Compliant
+        End Sub
+
     End Class
+
 End Namespace
