@@ -1,5 +1,4 @@
-﻿
-record NativeInts
+﻿record NativeInts
 {
     public const nint myConst = 0;  // Compliant
     public nint field1 = 0;         // FN

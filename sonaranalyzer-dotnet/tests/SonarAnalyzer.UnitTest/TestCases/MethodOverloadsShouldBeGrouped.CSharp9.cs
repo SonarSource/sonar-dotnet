@@ -1,5 +1,4 @@
-﻿
-record R
+﻿record R
 {
     void a() { } // FN {{All 'a' method overloads should be adjacent.}}
 

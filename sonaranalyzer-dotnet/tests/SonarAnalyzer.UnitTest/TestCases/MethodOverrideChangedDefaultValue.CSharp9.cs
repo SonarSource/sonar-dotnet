@@ -1,5 +1,4 @@
-﻿
-public interface IMyInterface
+﻿public interface IMyInterface
 {
     void Read(int i, int j = 5);
     void Write(int i, int j = 5);

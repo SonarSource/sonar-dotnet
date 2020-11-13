@@ -1,5 +1,4 @@
-﻿
-class Base
+﻿class Base
 {
     public virtual int MyProperty1 { get; init; }
     public virtual int MyProperty2 { get; init; }

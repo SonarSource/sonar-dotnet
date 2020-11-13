@@ -1,5 +1,4 @@
-﻿
-abstract record Base
+﻿abstract record Base
 {
     public virtual void Method(int[] numbers) { }
 

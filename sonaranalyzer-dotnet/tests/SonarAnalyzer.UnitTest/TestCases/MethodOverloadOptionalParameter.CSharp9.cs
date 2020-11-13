@@ -1,5 +1,4 @@
-﻿
-public record Record
+﻿public record Record
 {
     void Method(string[] messages) { }
     void Method(string[] messages, string delimiter = "\n") { }                 // Noncompliant

@@ -1,5 +1,4 @@
-﻿
-abstract class Base
+﻿abstract class Base
 {
     public virtual void Method(params int[] numbers) { }
     public virtual void Method(string s, params int[] numbers) { }
