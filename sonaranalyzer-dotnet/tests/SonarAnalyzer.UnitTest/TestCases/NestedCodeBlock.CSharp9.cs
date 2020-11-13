@@ -1,6 +1,6 @@
 ﻿using System;
 
-{ // Compliant - FN
+{ // FN
     if (1 < 2)
     {
     }

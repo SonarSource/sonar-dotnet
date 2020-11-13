@@ -1,4 +1,9 @@
-﻿public record A
+﻿int LocalMethod(B b) // FN
+{
+    return b.Property;
+}
+
+public record A
 {
     public A(A a) { }
 
@@ -9,7 +14,7 @@
 
 public record B : A
 {
-    public B(B b) : base(b) // Compliant - FN? only base class property is copied
+    public B(B b) : base(b) // FN - only base class property is copied
     {
         Property = b.Property;
     }

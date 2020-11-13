@@ -24,6 +24,6 @@ public record R : Interface
     }
 }
 
-public record R<T> // Compliant - FN
+public record R<T> // FN
 {
 }
