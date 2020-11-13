@@ -6,8 +6,8 @@ namespace Tests.Diagnostics
     {
         public void Foo()
         {
-            int val1 = 0;
-            long val2 = 0;
+            nint val1 = 0;
+            nint val2 = 0;
 
             var result = ++val1 + val2; // Noncompliant {{Extract this increment operation into a dedicated statement.}}
 //                       ^^
@@ -28,6 +28,9 @@ namespace Tests.Diagnostics
             val2--;
             var res = val1 + val2;
             var other = val2 / 4;
+
+            nuint val3 = 0;
+            var result2 = (++val3) + 1; // Noncompliant
         }
     }
 }
