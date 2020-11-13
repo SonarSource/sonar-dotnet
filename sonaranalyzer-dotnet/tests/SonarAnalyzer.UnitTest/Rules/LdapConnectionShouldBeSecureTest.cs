@@ -41,5 +41,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: MetadataReferenceFacade.GetSystemDirectoryServices(),
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
+
+#if NET
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LdapConnectionsShouldBeSecure_FromCSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LdapConnectionShouldBeSecure.CSharp9.cs",
+                new LdapConnectionShouldBeSecure(),
+                MetadataReferenceFacade.GetSystemDirectoryServices());
+#endif
     }
 }

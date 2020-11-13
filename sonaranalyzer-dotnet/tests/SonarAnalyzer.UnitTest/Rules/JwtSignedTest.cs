@@ -31,21 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void JwtSigned_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.cs",
-                new csharp.JwtSigned(),
-                additionalReferences: NuGetMetadataReference.JWT());
-        }
+        public void JwtSigned_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.cs", new csharp.JwtSigned(), additionalReferences: NuGetMetadataReference.JWT());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void JwtSigned_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.vb",
-                new vbnet.JwtSigned(),
-                additionalReferences: NuGetMetadataReference.JWT());
-        }
+        public void JwtSigned_CS_FromCSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\JwtSigned.CSharp9.cs", new csharp.JwtSigned(), NuGetMetadataReference.JWT());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void JwtSigned_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.vb", new vbnet.JwtSigned(), additionalReferences: NuGetMetadataReference.JWT());
     }
 }
 
