@@ -30,10 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void OverrideGetHashCodeOnOverridingEquals()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\OverrideGetHashCodeOnOverridingEquals.cs",
-                new OverrideGetHashCodeOnOverridingEquals());
-        }
+        public void OverrideGetHashCodeOnOverridingEquals() =>
+            Verifier.VerifyAnalyzer(@"TestCases\OverrideGetHashCodeOnOverridingEquals.cs", new OverrideGetHashCodeOnOverridingEquals());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void OverrideGetHashCodeOnOverridingEquals_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OverrideGetHashCodeOnOverridingEquals.CSharp9.cs", new OverrideGetHashCodeOnOverridingEquals());
     }
 }
