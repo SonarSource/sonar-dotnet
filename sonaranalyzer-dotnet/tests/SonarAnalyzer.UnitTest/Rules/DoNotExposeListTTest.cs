@@ -35,13 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotExposeListT_CSharp9_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.TopLevel.cs", new DoNotExposeListT());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DoNotExposeListT_CSharp9_Records() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotExposeListT.CSharp9.Records.cs", new DoNotExposeListT());
+        public void DoNotExposeListT_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
 
         [TestMethod]
         [TestCategory("Rule")]
