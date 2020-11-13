@@ -28,18 +28,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FunctionNestingDepth_CSharp()
-        {
-            var diagnostic = new SonarAnalyzer.Rules.CSharp.FunctionNestingDepth { Maximum = 3 };
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.cs", diagnostic);
-        }
+        public void FunctionNestingDepth_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.cs", new SonarAnalyzer.Rules.CSharp.FunctionNestingDepth { Maximum = 3 });
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void FunctionNestingDepth_VisualBasic()
-        {
-            var diagnostic = new SonarAnalyzer.Rules.VisualBasic.FunctionNestingDepth { Maximum = 3 };
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.vb", diagnostic);
-        }
+        public void FunctionNestingDepth_CS_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionNestingDepth.CSharp9.cs", new SonarAnalyzer.Rules.CSharp.FunctionNestingDepth { Maximum = 3 });
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FunctionNestingDepth_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.vb", new SonarAnalyzer.Rules.VisualBasic.FunctionNestingDepth { Maximum = 3 });
     }
 }
