@@ -30,10 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotTestThisWithIsOperator()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotTestThisWithIsOperator.cs",
-                new DoNotTestThisWithIsOperator());
-        }
+        public void DoNotTestThisWithIsOperator() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotTestThisWithIsOperator.cs", new DoNotTestThisWithIsOperator());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotTestThisWithIsOperator_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotTestThisWithIsOperator.CSharp9.cs", new DoNotTestThisWithIsOperator());
     }
 }

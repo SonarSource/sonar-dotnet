@@ -31,5 +31,10 @@ namespace Tests.Diagnostics
         protected internal List<int> ProtectedInternalMethod() => null; // Noncompliant
 
         internal List<int> InternalMethod() => null;
+
+        public void Foo()
+        {
+            Action<List<int>> x = (List<int> y) => { };
+        }
     }
 }
