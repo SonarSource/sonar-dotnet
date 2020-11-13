@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,6 +34,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
                 diagnostic,
                 options: ParseOptionsHelper.FromCSharp8);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ExpressionComplexity_CSharp9()
+        {
+            var diagnostic = new SonarAnalyzer.Rules.CSharp.ExpressionComplexity { Maximum = 3};
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExpressionComplexity.CSharp9.cs", diagnostic);
         }
 
         [TestMethod]
