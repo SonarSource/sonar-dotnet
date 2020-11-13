@@ -46,6 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldsShouldNotDifferByCapitalization_CShar9() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.CSharp9.cs", new FieldShadowsParentField());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldNotDifferByCapitalization.CSharp9.cs", new FieldShadowsParentField());
     }
 }
