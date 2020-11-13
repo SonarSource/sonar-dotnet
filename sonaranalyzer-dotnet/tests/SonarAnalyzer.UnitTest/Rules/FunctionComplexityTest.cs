@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,31 +29,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FunctionComplexity_CSharp()
-        {
-            var diagnostic = new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 };
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.cs",
-                diagnostic,
-                options: ParseOptionsHelper.FromCSharp8);
-        }
+        public void FunctionComplexity_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.cs", new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void FunctionComplexity_InsufficientExecutionStack_CSharp()
+        public void FunctionComplexity_CS_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionComplexity.CSharp9.cs", new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 });
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FunctionComplexity_InsufficientExecutionStack_CS()
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test doesn't work on Azure DevOps
             {
-                var diagnostic = new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 };
-                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", diagnostic);
+                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 });
             }
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void FunctionComplexity_VisualBasic()
-        {
-            var diagnostic = new SonarAnalyzer.Rules.VisualBasic.FunctionComplexity { Maximum = 3 };
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.vb", diagnostic);
-        }
+        public void FunctionComplexity_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.vb", new SonarAnalyzer.Rules.VisualBasic.FunctionComplexity { Maximum = 3 });
     }
 }
