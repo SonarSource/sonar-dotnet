@@ -30,20 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodParameterMissingOptional()
-        {
+        public void MethodParameterMissingOptional() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterMissingOptional.cs", new MethodParameterMissingOptional());
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodParameterMissingOptional_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodParameterMissingOptional.CSharp9.cs", new MethodParameterMissingOptional());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void MethodParameterMissingOptional_CodeFix()
-        {
+        public void MethodParameterMissingOptional_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodParameterMissingOptional.cs",
                 @"TestCases\MethodParameterMissingOptional.Fixed.cs",
                 new MethodParameterMissingOptional(),
                 new MethodParameterMissingOptionalCodeFixProvider());
-        }
     }
 }

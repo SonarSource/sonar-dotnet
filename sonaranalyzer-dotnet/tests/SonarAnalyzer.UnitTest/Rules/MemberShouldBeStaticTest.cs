@@ -48,8 +48,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void MemberShouldBeStatic_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new MemberShouldBeStatic());
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void MemberShouldBeStatic_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.FromCSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.CSharp8.cs",
                 new MemberShouldBeStatic(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,

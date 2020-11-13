@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,20 +34,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodsShouldNotHaveIdenticalImplementations()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs",
-                new CSharp.MethodsShouldNotHaveIdenticalImplementations(),
-                options: ParseOptionsHelper.FromCSharp8);
-        }
+        public void MethodsShouldNotHaveIdenticalImplementations() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs", new CSharp.MethodsShouldNotHaveIdenticalImplementations(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodsShouldNotHaveIdenticalImplementations_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.vb",
-                new VisualBasic.MethodsShouldNotHaveIdenticalImplementations());
-        }
+        public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs", new CSharp.MethodsShouldNotHaveIdenticalImplementations());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodsShouldNotHaveIdenticalImplementations_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.vb", new VisualBasic.MethodsShouldNotHaveIdenticalImplementations());
     }
 }
 

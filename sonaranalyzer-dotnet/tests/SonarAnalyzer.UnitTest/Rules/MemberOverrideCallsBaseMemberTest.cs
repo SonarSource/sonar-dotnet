@@ -30,20 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MemberOverrideCallsBaseMember()
-        {
+        public void MemberOverrideCallsBaseMember() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberOverrideCallsBaseMember.cs", new MemberOverrideCallsBaseMember());
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MemberOverrideCallsBaseMember_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs", new MemberOverrideCallsBaseMember());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void MemberOverrideCallsBaseMember_CodeFix()
-        {
+        public void MemberOverrideCallsBaseMember_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MemberOverrideCallsBaseMember.cs",
                 @"TestCases\MemberOverrideCallsBaseMember.Fixed.cs",
                 new MemberOverrideCallsBaseMember(),
                 new MemberOverrideCallsBaseMemberCodeFixProvider());
-        }
     }
 }
