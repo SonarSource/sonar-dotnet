@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,11 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GenericTypeParameterUnused()
-        {
-            Verifier.VerifyAnalyzer(new [] { @"TestCases\GenericTypeParameterUnused.cs", @"TestCases\GenericTypeParameterUnused.Partial.cs" },
-                new GenericTypeParameterUnused(),
-                options: ParseOptionsHelper.FromCSharp8);
-        }
+        public void GenericTypeParameterUnused() =>
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\GenericTypeParameterUnused.cs", @"TestCases\GenericTypeParameterUnused.Partial.cs" },
+                                    new GenericTypeParameterUnused(),
+                                    options: ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void GenericTypeParameterUnused_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterUnused.CSharp9.cs", new GenericTypeParameterUnused());
     }
 }
