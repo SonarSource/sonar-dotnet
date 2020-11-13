@@ -30,19 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GenericInheritanceShouldNotBeRecursive_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.cs",
-                new GenericInheritanceShouldNotBeRecursive());
-        }
+        public void GenericInheritanceShouldNotBeRecursive_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.cs", new GenericInheritanceShouldNotBeRecursive());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void GenericInheritanceShouldNotBeRecursive_VB()
-        {
+        public void GenericInheritanceShouldNotBeRecursive_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GenericInheritanceShouldNotBeRecursive.CSharp9.cs",
+                                                      new GenericInheritanceShouldNotBeRecursive());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void GenericInheritanceShouldNotBeRecursive_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.vb",
-                new SonarAnalyzer.Rules.VisualBasic.GenericInheritanceShouldNotBeRecursive());
-        }
+                                    new SonarAnalyzer.Rules.VisualBasic.GenericInheritanceShouldNotBeRecursive());
     }
 }
 
