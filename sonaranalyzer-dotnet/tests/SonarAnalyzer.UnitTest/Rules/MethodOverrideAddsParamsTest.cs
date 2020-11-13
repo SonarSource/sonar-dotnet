@@ -31,25 +31,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodOverrideAddsParams()
-        {
+        public void MethodOverrideAddsParams() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideAddsParams.cs",
                 new MethodOverrideAddsParams(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodOverrideAddsParams_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideAddsParams.CSharp9.cs", new MethodOverrideAddsParams());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void MethodOverrideAddsParams_CodeFix()
-        {
+        public void MethodOverrideAddsParams_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideAddsParams.cs",
                 @"TestCases\MethodOverrideAddsParams.Fixed.cs",
                 new MethodOverrideAddsParams(),
                 new MethodOverrideAddsParamsCodeFixProvider());
-        }
     }
 }

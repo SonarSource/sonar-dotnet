@@ -30,19 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodOverloadsShouldBeGrouped_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.cs",
-                new CS.MethodOverloadsShouldBeGrouped());
-        }
+        public void MethodOverloadsShouldBeGrouped_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.cs", new CS.MethodOverloadsShouldBeGrouped());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodOverloadsShouldBeGrouped_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.vb",
-                new VB.MethodOverloadsShouldBeGrouped());
-        }
+        public void MethodOverloadsShouldBeGrouped_CS_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverloadsShouldBeGrouped.CSharp9.cs", new CS.MethodOverloadsShouldBeGrouped());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodOverloadsShouldBeGrouped_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.vb", new VB.MethodOverloadsShouldBeGrouped());
     }
 }
 
