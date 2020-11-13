@@ -30,22 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NumberPatternShouldBeRegular_BeforeCSharp7()
-        {
+        public void NumberPatternShouldBeRegular_BeforeCSharp7() =>
             Verifier.VerifyNoIssueReported(@"TestCases\NumberPatternShouldBeRegular.cs",
-                new NumberPatternShouldBeRegular(),
-                ParseOptionsHelper.BeforeCSharp7,
-                CompilationErrorBehavior.Ignore);
-        }
+                                           new NumberPatternShouldBeRegular(),
+                                           ParseOptionsHelper.BeforeCSharp7,
+                                           CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NumberPatternShouldBeRegular_FromCSharp7()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs",
-                new NumberPatternShouldBeRegular(),
-                ParseOptionsHelper.FromCSharp7);
-        }
+        public void NumberPatternShouldBeRegular_FromCSharp7() =>
+            Verifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs", new NumberPatternShouldBeRegular(), ParseOptionsHelper.FromCSharp7);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NumberPatternShouldBeRegular_FromCSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NumberPatternShouldBeRegular.CSharp9.cs", new NumberPatternShouldBeRegular());
 
         [DataTestMethod]
         [TestCategory("Rule")]
@@ -64,10 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("__.__", "Only underscores and a dot")]
         [DataRow("0xFF___FF___FF", "Multiple _'s as separator")]
         [DataRow("0xFF________FF___FF", "Multiple irregular _'s as separator")]
-        public void HasIrregularPattern(string numericToken, string message)
-        {
-            Assert.IsTrue(NumberPatternShouldBeRegular.HasIrregularPattern(numericToken), message);
-        }
+        public void HasIrregularPattern(string numericToken, string message) => Assert.IsTrue(NumberPatternShouldBeRegular.HasIrregularPattern(numericToken), message);
 
         [DataTestMethod]
         [TestCategory("Rule")]
@@ -98,9 +94,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("5M", "Floating point with M suffix")]
         [DataRow("6m", "Floating point with m suffix")]
         [DataRow("3_000.5F", "Floating point with group size")]
-        public void HasRegularPattern(string numericToken, string message)
-        {
-            Assert.IsFalse(NumberPatternShouldBeRegular.HasIrregularPattern(numericToken), message);
-        }
+        public void HasRegularPattern(string numericToken, string message) => Assert.IsFalse(NumberPatternShouldBeRegular.HasIrregularPattern(numericToken), message);
     }
 }

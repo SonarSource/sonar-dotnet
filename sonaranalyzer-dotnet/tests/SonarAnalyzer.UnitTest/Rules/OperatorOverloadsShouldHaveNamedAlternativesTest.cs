@@ -30,10 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void OperatorOverloadsShouldHaveNamedAlternatives()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.cs",
-                new OperatorOverloadsShouldHaveNamedAlternatives());
-        }
+        public void OperatorOverloadsShouldHaveNamedAlternatives() =>
+            Verifier.VerifyAnalyzer(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.cs", new OperatorOverloadsShouldHaveNamedAlternatives());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void OperatorOverloadsShouldHaveNamedAlternatives_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OperatorOverloadsShouldHaveNamedAlternatives.CSharp9.cs", new OperatorOverloadsShouldHaveNamedAlternatives());
     }
 }
