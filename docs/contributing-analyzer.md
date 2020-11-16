@@ -6,7 +6,7 @@ All C# and VB.NET code analyzers present in SonarLint for Visual Studio, SonarQu
 
 1. Clone [this repository](https://github.com/SonarSource/sonar-dotnet.git)
 1. Download sub-modules `git submodule update --init --recursive`
-1. Run `.\scripts\build\dev-build.ps1 -restore -build -test`
+1. Run `.\scripts\build\dev-build.ps1 -build -test`
 
 In general, it is best to run commands from the Visual Studio Developer Command Prompt (if you're using ConEmu, you can setup a console task like `-new_console:C:\Workspace\sonar-dotnet cmd /k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"` - it starts the Developer Console inside the folder `C:\Workspace\sonar-dotnet`)
 
