@@ -47,29 +47,36 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ControllingPermissions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ControllingPermissions.cs",
-                new CSharp.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferences);
+                                    new CSharp.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
+                                    additionalReferences: AdditionalReferences);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ControllingPermissions_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ControllingPermissions.CSharp9.cs",
+                                                      new CSharp.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
+                                                      additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ControllingPermissions_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ControllingPermissions.cs",
-                new CSharp.ControllingPermissions(),
-                additionalReferences: AdditionalReferences);
+                                           new CSharp.ControllingPermissions(),
+                                           additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ControllingPermissions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ControllingPermissions.vb",
-                new VisualBasic.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferences);
+                                    new VisualBasic.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
+                                    additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ControllingPermissions_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ControllingPermissions.vb",
-                new VisualBasic.ControllingPermissions(),
-                additionalReferences: AdditionalReferences);
+                                           new VisualBasic.ControllingPermissions(),
+                                           additionalReferences: AdditionalReferences);
     }
 }
 
