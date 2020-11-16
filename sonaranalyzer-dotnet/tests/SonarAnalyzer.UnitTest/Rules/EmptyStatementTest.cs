@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +31,32 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EmptyStatement()
-        {
+        public void EmptyStatement() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EmptyStatement_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new EmptyStatement());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void EmptyStatement_CodeFix()
-        {
+        public void EmptyStatement_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\EmptyStatement.cs",
                 @"TestCases\EmptyStatement.Fixed.cs",
                 new EmptyStatement(),
                 new EmptyStatementCodeFixProvider());
-        }
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void EmptyStatement_CodeFix_CSharp9() =>
+            Verifier.VerifyCodeFix(
+                @"TestCases\EmptyStatement.CSharp9.cs",
+                @"TestCases\EmptyStatement.CSharp9.Fixed.cs",
+                new EmptyStatement(),
+                new EmptyStatementCodeFixProvider(),
+                ParseOptionsHelper.FromCSharp9,
+                OutputKind.ConsoleApplication);
     }
 }

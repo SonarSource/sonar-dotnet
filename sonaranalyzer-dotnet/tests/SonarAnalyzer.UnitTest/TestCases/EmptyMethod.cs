@@ -55,4 +55,12 @@ namespace Tests.Diagnostics
 
         public abstract void F3();
     }
+
+    public class WithProp
+    {
+        public string Prop
+        {
+            set { } // FN https://github.com/SonarSource/sonar-dotnet/issues/3753
+        }
+    }
 }
