@@ -32,37 +32,34 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void BypassingAccessibility_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.cs",
-                new BypassingAccessibility(AnalyzerConfiguration.AlwaysEnabled));
-        }
+        public void BypassingAccessibility_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.cs", new BypassingAccessibility(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void BypassingAccessibility_VB()
-        {
+        public void BypassingAccessibility_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\BypassingAccessibility.CSharp9.cs", new BypassingAccessibility(AnalyzerConfiguration.AlwaysEnabled));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void BypassingAccessibility_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.vb",
-                new SonarAnalyzer.Rules.VisualBasic.BypassingAccessibility(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                                    new SonarAnalyzer.Rules.VisualBasic.BypassingAccessibility(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void BypassingAccessibility_CS_RuleDisabled()
-        {
+        public void BypassingAccessibility_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\BypassingAccessibility.cs",
-                new BypassingAccessibility());
-        }
+                                           new BypassingAccessibility());
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void BypassingAccessibility_VB_RuleDisabled()
-        {
+        public void BypassingAccessibility_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\BypassingAccessibility.vb",
-                new SonarAnalyzer.Rules.VisualBasic.BypassingAccessibility());
-        }
+                                           new SonarAnalyzer.Rules.VisualBasic.BypassingAccessibility());
     }
 }
