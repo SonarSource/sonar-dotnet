@@ -26,16 +26,16 @@ using SonarAnalyzer.UnitTest.TestFramework;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class FieldsShouldNotBePublicTest
+    public class FieldsShouldBeEncapsulatedInPropertiesTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FieldsShouldNotBePublic() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotBePublic.cs", new FieldsShouldNotBePublic());
+        public void FieldsShouldBeEncapsulatedInProperties() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldBeEncapsulatedInProperties.cs", new FieldsShouldBeEncapsulatedInProperties());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void FieldsShouldNotBePublic_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldNotBePublic.CSharp9.cs", new FieldsShouldNotBePublic());
+        public void FieldsShouldBeEncapsulatedInProperties_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldBeEncapsulatedInProperties.CSharp9.cs", new FieldsShouldBeEncapsulatedInProperties());
     }
 }
