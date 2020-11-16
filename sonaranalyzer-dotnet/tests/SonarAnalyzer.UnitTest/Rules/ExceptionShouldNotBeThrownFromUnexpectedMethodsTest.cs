@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,11 +30,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExceptionShouldNotBeThrownFromUnexpectedMethods()
-        {
+        public void ExceptionShouldNotBeThrownFromUnexpectedMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.cs",
                 new ExceptionShouldNotBeThrownFromUnexpectedMethods(),
                 ParseOptionsHelper.FromCSharp8);
-        }
+ #if NET5_0
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs",
+                new ExceptionShouldNotBeThrownFromUnexpectedMethods());
+#endif
+
     }
 }
