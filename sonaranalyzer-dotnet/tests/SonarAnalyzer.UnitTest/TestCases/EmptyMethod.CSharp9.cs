@@ -59,7 +59,7 @@ class WithProp
 {
     public string Prop
     {
-        init { }
+        init { } // FN https://github.com/SonarSource/sonar-dotnet/issues/3753
     }
 }
 

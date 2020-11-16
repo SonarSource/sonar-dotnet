@@ -25,7 +25,10 @@ namespace Tests.Diagnostics
             SomeStaticEvent?.Invoke(this, e); // Noncompliant {{Make the sender on this static event invocation null.}}
             SomeStaticEvent?.Invoke(null, null); // Noncompliant {{Use 'EventArgs.Empty' instead of null as the event args of this event invocation.}}
             SomeStaticEvent?.Invoke(this, null); // Noncompliant
-                                                // Noncompliant@-1
+                                                 // Noncompliant@-1
+
+            SomeEvent(null, e); // Noncompliant
+            SomeStaticEvent(null, null); // Noncompliant
         }
     }
 }

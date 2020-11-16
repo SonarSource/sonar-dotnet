@@ -60,7 +60,7 @@ namespace Tests.Diagnostics
     {
         public string Prop
         {
-            set { }
+            set { } // FN https://github.com/SonarSource/sonar-dotnet/issues/3753
         }
     }
 }

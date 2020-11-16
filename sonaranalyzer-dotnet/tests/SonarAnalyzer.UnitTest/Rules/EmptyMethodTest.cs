@@ -47,8 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EmptyMethod_CSharp9()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.CSharp9.cs",
-                new EmptyMethod(), ParseOptionsHelper.FromCSharp9, OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new EmptyMethod());
         }
 #endif
 
