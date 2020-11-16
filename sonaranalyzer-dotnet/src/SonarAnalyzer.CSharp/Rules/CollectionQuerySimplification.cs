@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -95,16 +95,12 @@ namespace SonarAnalyzer.Rules.CSharp
             const string CountName = "Count";
 
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
-                methodSymbol.Name != CountName ||
-                invocation.ArgumentList == null ||
+            if (invocation.ArgumentList == null ||
                 invocation.ArgumentList.Arguments.Any() ||
+                !(invocation.Expression is MemberAccessExpressionSyntax memberAccess) ||
+                !(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
+                methodSymbol.Name != CountName ||
                 !methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
-            {
-                return;
-            }
-
-            if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
             {
                 return;
             }
