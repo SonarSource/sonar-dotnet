@@ -30,23 +30,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FieldShouldBeReadonly()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs",
-                new FieldShouldBeReadonly(),
-                ParseOptionsHelper.FromCSharp8);
-        }
+        public void FieldShouldBeReadonly() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs", new FieldShouldBeReadonly(), ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldShouldBeReadonly_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShouldBeReadonly.CSharp9.cs", new FieldShouldBeReadonly());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void FieldShouldBeReadonly_CodeFix()
-        {
+        public void FieldShouldBeReadonly_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\FieldShouldBeReadonly.cs",
                 @"TestCases\FieldShouldBeReadonly.Fixed.cs",
                 new FieldShouldBeReadonly(),
                 new FieldShouldBeReadonlyCodeFixProvider(),
                 ParseOptionsHelper.FromCSharp8);
-        }
     }
 }
