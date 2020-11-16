@@ -26,6 +26,12 @@ public record FunctionComplexity
         if (false) { } // Secondary [3] {{+1}}
     }
 
+    public bool PatternMatchingAnd(object arg) =>
+        arg is true and true and true and true;         // FN
+
+    public bool PatternMatchingOr(object arg) =>
+        arg is true or true or true or true;            // FN
+
     public int Property
     {
         get
