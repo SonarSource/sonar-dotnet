@@ -71,26 +71,31 @@ public static class Utils
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp6() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp6.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp6.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp6);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp7() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp7.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp7.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp7);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp8() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp8.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp8.cs",
                 GetAnalyzer(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NullPointerDereference_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NullPointerDereference.CSharp9.cs", GetAnalyzer());
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             // Symbolic execution analyzers are run by the SymbolicExecutionRunner
