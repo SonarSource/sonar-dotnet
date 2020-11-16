@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -56,12 +56,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (!IsStringEqualsMethod(memberAccessExpression, c.SemanticModel))
+                    if (!TryGetFirstArgument(invocationExpression, out var firstArgument))
                     {
                         return;
                     }
 
-                    if (!TryGetFirstArgument(invocationExpression, out var firstArgument))
+                    if (!IsStringEqualsMethod(memberAccessExpression, c.SemanticModel))
                     {
                         return;
                     }
