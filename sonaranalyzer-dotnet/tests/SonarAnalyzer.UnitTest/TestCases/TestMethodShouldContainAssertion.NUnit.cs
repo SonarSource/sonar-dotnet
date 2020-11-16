@@ -282,6 +282,21 @@
         public void TestCaseSource15() // Don't raise on skipped test methods
         {
         }
+
+        private static readonly TestCaseData[] Cases =
+        {
+          new TestCaseData("foo", "bar").Returns(false),
+          new TestCaseData(100, 100).Returns(true),
+        };
+
+        // See: https://github.com/SonarSource/sonar-dotnet/issues/3751
+        // Returned value is verified by the framework and no assertion is needed.
+        [Test]
+        [TestCaseSource(nameof(Cases))] 
+        public bool Test(object obj1, object obj2) // Noncompliant - FP
+        {
+            return obj1.Equals(obj2);
+        }
     }
 
     [TestFixture]
