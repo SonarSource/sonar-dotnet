@@ -33,17 +33,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GenericTypeParameterEmptinessChecking() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
-                new GenericTypeParameterEmptinessChecking(),
-                additionalReferences: MetadataReferenceFacade.GetSystemCollections(),
-                checkMode: CompilationErrorBehavior.Ignore);
+                                    new GenericTypeParameterEmptinessChecking(),
+                                    additionalReferences: MetadataReferenceFacade.GetSystemCollections(),
+                                    checkMode: CompilationErrorBehavior.Ignore);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void GenericTypeParameterEmptinessChecking_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
+                                                      new GenericTypeParameterEmptinessChecking(),
+                                                      MetadataReferenceFacade.GetSystemCollections());
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void GenericTypeParameterEmptinessChecking_CodeFix() =>
-            Verifier.VerifyCodeFix(
-                @"TestCases\GenericTypeParameterEmptinessChecking.cs",
-                @"TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs",
-                new GenericTypeParameterEmptinessChecking(),
-                new GenericTypeParameterEmptinessCheckingCodeFixProvider());
+            Verifier.VerifyCodeFix(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
+                                   @"TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs",
+                                   new GenericTypeParameterEmptinessChecking(),
+                                   new GenericTypeParameterEmptinessCheckingCodeFixProvider());
     }
 }
