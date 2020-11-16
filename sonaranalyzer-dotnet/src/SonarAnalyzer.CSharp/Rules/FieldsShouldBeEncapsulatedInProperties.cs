@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class FieldsShouldNotBePublic : SonarDiagnosticAnalyzer
+    public sealed class FieldsShouldBeEncapsulatedInProperties : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1104";
         private const string MessageFormat = "Make this field 'private' and encapsulate it in a 'public' property.";

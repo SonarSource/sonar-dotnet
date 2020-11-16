@@ -129,5 +129,17 @@ namespace Tests.Diagnostics
 //                                   ^^^ Secondary@-2 [11] {{+1}}
 //                                          ^^^ Secondary@-3 [11] {{+1}}
         }
+
+
+        public void MethodWithLocalfunction() // Noncompliant [12]
+                                              // Secondary@-1 [12] {{+1}}
+        {
+            void LocalFunction()
+            {
+                if (false) { }  // Secondary [12] {{+1}}
+                if (false) { }  // Secondary [12] {{+1}}
+                if (false) { }  // Secondary [12] {{+1}}
+            }
+        }
     }
 }
