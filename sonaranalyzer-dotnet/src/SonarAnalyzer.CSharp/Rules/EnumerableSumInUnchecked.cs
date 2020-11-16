@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -46,21 +46,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-
-                    if (!IsSumOnInteger(methodSymbol) ||
-                        !IsSumInsideUnchecked(invocation))
-                    {
-                        return;
-                    }
-
                     var expression = invocation.Expression;
                     if (!(expression is MemberAccessExpressionSyntax memberAccess))
                     {
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
+                    if (IsSumInsideUnchecked(invocation))
+                    {
+                        var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+                        if (IsSumOnInteger(methodSymbol))
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
+                        }
+                    }
                 },
                 SyntaxKind.InvocationExpression);
         }
