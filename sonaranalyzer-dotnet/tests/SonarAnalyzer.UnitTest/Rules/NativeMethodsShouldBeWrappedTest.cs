@@ -30,18 +30,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NativeMethodsShouldBeWrapped()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs",
-                new NativeMethodsShouldBeWrapped(),
-                checkMode: CompilationErrorBehavior.Ignore);
-        }
+        public void NativeMethodsShouldBeWrapped() =>
+            Verifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs", new NativeMethodsShouldBeWrapped(), checkMode: CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NativeMethodsShouldBeWrapped_InvalidCode()
-        {
-            Verifier.VerifyCSharpAnalyzer(@"
+        public void NativeMethodsShouldBeWrapped_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NativeMethodsShouldBeWrapped.CSharp9.cs", new NativeMethodsShouldBeWrapped());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NativeMethodsShouldBeWrapped_InvalidCode() => Verifier.VerifyCSharpAnalyzer(@"
 public class InvalidSyntax
 {
     extern public void Extern1
@@ -60,6 +59,5 @@ public class InvalidSyntax
         Extern3(x);
     }
 }", new NativeMethodsShouldBeWrapped(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }

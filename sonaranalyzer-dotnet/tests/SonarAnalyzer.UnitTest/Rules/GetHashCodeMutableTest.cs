@@ -30,9 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GetHashCodeMutable() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs",
-                                    new GetHashCodeMutable());
+        public void GetHashCodeMutable() => Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs", new GetHashCodeMutable());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void GetHashCodeMutable_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeMutable.CSharp9.cs", new GetHashCodeMutable());
 
         [TestMethod]
         [TestCategory("CodeFix")]
