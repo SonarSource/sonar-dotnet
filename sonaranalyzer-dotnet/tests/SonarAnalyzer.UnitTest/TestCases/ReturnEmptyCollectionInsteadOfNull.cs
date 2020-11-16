@@ -35,6 +35,7 @@ namespace Tests.Diagnostics
         string[] ArrowedGetStrings3() => null; // Noncompliant
         ICollection<string> ArrowedGetStrings4() => null; // Noncompliant
         Array ArrowedGetArray() => null; // Noncompliant
+        object ArrowedGetObject() => null; // Compliant
 
         IEnumerable<char> GetValues(string str)
         {
