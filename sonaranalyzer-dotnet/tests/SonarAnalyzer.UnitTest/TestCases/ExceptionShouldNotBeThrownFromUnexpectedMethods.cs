@@ -262,4 +262,10 @@ namespace Tests.Diagnostics
             throw new Exception(); // Noncompliant
         }
     }
+
+    class ArrowMethods : IDisposable
+    {
+        static ArrowMethods() => throw new Exception(); // FN, needs support for throw expressions
+        public void Dispose() => throw new Exception(); // FN
+    }
 }

@@ -28,28 +28,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpressionComplexity_CSharp()
-        {
-            var diagnostic = new SonarAnalyzer.Rules.CSharp.ExpressionComplexity { Maximum = 3};
+        public void ExpressionComplexity_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
-                diagnostic,
+                new SonarAnalyzer.Rules.CSharp.ExpressionComplexity { Maximum = 3},
                 options: ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpressionComplexity_CSharp9()
-        {
-            var diagnostic = new SonarAnalyzer.Rules.CSharp.ExpressionComplexity { Maximum = 3};
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExpressionComplexity.CSharp9.cs", diagnostic);
-        }
+        public void ExpressionComplexity_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExpressionComplexity.CSharp9.cs",
+                new SonarAnalyzer.Rules.CSharp.ExpressionComplexity { Maximum = 3});
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpressionComplexity_VisualBasic()
-        {
-            var diagnostic = new SonarAnalyzer.Rules.VisualBasic.ExpressionComplexity { Maximum = 3 };
-            Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.vb", diagnostic);
-        }
+        public void ExpressionComplexity_VisualBasic() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.vb",
+                new SonarAnalyzer.Rules.VisualBasic.ExpressionComplexity { Maximum = 3 });
     }
 }

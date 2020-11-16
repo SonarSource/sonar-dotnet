@@ -1,4 +1,7 @@
-﻿object x = null;
+﻿var d1 = true && false && true && false && true && true; // Noncompliant
+
+object x = null;
+
 if (x is true or true or true or true or true) { } // FN
 
 if (x is true and true and true and true and true) { } // FN

@@ -1,6 +1,11 @@
-﻿var x = 1;
+﻿var isTopLevelFile = true;
 
 public record GlobalRecord { }
+
+public static class GlobalExtensions
+{
+    public static void Bar(this GlobalRecord r) { } // Noncompliant
+}
 
 namespace MyLibrary
 {
