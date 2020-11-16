@@ -30,10 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EquatableClassShouldBeSealed()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\EquatableClassShouldBeSealed.cs",
-                new EquatableClassShouldBeSealed());
-        }
+        public void EquatableClassShouldBeSealed() =>
+            Verifier.VerifyAnalyzer(@"TestCases\EquatableClassShouldBeSealed.cs", new EquatableClassShouldBeSealed());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EquatableClassShouldBeSealed_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\EquatableClassShouldBeSealed.CSharp9.cs", new EquatableClassShouldBeSealed());
     }
 }
