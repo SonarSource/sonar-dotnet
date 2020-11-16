@@ -6,7 +6,7 @@
 1. Download sub-modules `git submodule update --init --recursive`
 1. Build the plugin
     * To build the plugin while embedding a local build of the analyzer you can either:
-        * run `.\scripts\build\dev-build.ps1 -restore -build -test -buildJava`
+        * run `.\scripts\build\dev-build.ps1 -build -test -buildJava`
 
             The flags `-restore -build -test` need to be run only when you have changed the analyzer. Otherwise you can run only `-buildJava`
 
