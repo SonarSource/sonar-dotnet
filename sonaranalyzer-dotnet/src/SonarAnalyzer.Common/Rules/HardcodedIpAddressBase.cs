@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -57,6 +57,18 @@ namespace SonarAnalyzer.Rules
                 var stringLiteral = (TLiteralExpression)c.Node;
                 var literalValue = GetValueText(stringLiteral);
 
+                var variableName = GetAssignedVariableName(stringLiteral);
+                if (variableName != null &&
+                    IgnoredVariableNames.Any(variableName.Contains))
+                {
+                    return;
+                }
+
+                if (HasAttributes(stringLiteral))
+                {
+                    return;
+                }
+
                 if (literalValue == "::" ||
                     literalValue == "127.0.0.1" ||
                     !IPAddress.TryParse(literalValue, out var address))
@@ -66,18 +78,6 @@ namespace SonarAnalyzer.Rules
 
                 if (address.AddressFamily == AddressFamily.InterNetwork &&
                     literalValue.Split('.').Length != 4)
-                {
-                    return;
-                }
-
-                var variableName = GetAssignedVariableName(stringLiteral);
-                if (variableName != null &&
-                    IgnoredVariableNames.Any(variableName.Contains))
-                {
-                    return;
-                }
-
-                if (HasAttributes(stringLiteral))
                 {
                     return;
                 }
