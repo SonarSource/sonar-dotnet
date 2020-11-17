@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -46,17 +46,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var outerInvocation = (InvocationExpressionSyntax)c.Node;
-                    if (!IsMethodOrderByExtension(outerInvocation, c.SemanticModel))
-                    {
-                        return;
-                    }
-
                     if (!(outerInvocation.Expression is MemberAccessExpressionSyntax memberAccess))
                     {
                         return;
                     }
 
                     var innerInvocation = memberAccess.Expression as InvocationExpressionSyntax;
+                    if (innerInvocation == null)
+                    {
+                        return;
+                    }
+
+                    if (!IsMethodOrderByExtension(outerInvocation, c.SemanticModel))
+                    {
+                        return;
+                    }
+
                     if (!IsMethodOrderByExtension(innerInvocation, c.SemanticModel) &&
                         !IsMethodThenByExtension(innerInvocation, c.SemanticModel))
                     {
@@ -67,39 +72,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.InvocationExpression);
         }
-        private static bool IsMethodOrderByExtension(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
-        {
-            if (invocation == null)
-            {
-                return false;
-            }
+        private static bool IsMethodOrderByExtension(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            invocation.Expression.ToString().Contains("OrderBy") &&
+            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+               methodSymbol.Name == "OrderBy" &&
+               methodSymbol.MethodKind == MethodKind.ReducedExtension &&
+               methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
+        private static bool IsMethodThenByExtension(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            invocation.Expression.ToString().Contains("ThenBy") &&
+            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+               methodSymbol.Name == "ThenBy" &&
+               methodSymbol.MethodKind == MethodKind.ReducedExtension &&
+               MethodIsOnIOrderedEnumerable(methodSymbol);
 
-            return semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
-                   methodSymbol.Name == "OrderBy" &&
-                   methodSymbol.MethodKind == MethodKind.ReducedExtension &&
-                   methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
-        }
-        private static bool IsMethodThenByExtension(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
-        {
-            if (invocation == null)
-            {
-                return false;
-            }
-
-
-            return semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
-                   methodSymbol.Name == "ThenBy" &&
-                   methodSymbol.MethodKind == MethodKind.ReducedExtension &&
-                   MethodIsOnIOrderedEnumerable(methodSymbol);
-        }
-
-        private static bool MethodIsOnIOrderedEnumerable(IMethodSymbol methodSymbol)
-        {
-
-            return methodSymbol.ReceiverType is INamedTypeSymbol receiverType &&
-                   receiverType.ConstructedFrom.ContainingNamespace.ToString() == "System.Linq" &&
-                   receiverType.ConstructedFrom.MetadataName == "IOrderedEnumerable`1";
-        }
+        private static bool MethodIsOnIOrderedEnumerable(IMethodSymbol methodSymbol) =>
+            methodSymbol.ReceiverType is INamedTypeSymbol receiverType &&
+               receiverType.ConstructedFrom.ContainingNamespace.ToString() == "System.Linq" &&
+               receiverType.ConstructedFrom.MetadataName == "IOrderedEnumerable`1";
     }
 }
