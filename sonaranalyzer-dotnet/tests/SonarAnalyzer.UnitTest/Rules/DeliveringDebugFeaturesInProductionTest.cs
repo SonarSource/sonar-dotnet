@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new VisualBasic.DeliveringDebugFeaturesInProduction(),
                 additionalReferences: AdditionalReferencesNetCore2);
 
-#if NET5_0
+#if NET
 
         [TestMethod]
         [TestCategory("Rule")]

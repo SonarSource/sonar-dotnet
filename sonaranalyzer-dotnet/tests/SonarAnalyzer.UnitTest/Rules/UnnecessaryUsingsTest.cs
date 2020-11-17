@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new CS.UnnecessaryUsings(),
                                     additionalReferences: GetAdditionalReferences());
 
-#if NET5_0
+#if NET
 
         [TestMethod]
         [TestCategory("Rule")]

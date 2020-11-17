@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NET5_0
+#if NET
 
 using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 using static SonarAnalyzer.UnitTest.MetadataReferences.MetadataReferenceFactory;

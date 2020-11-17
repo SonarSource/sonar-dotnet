@@ -22,7 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-#if NET5_0
+#if NET
 using SonarAnalyzer.UnitTest.MetadataReferences;
 #endif
 
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisposableMemberInNonDisposableClass_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new DisposableMemberInNonDisposableClass());
 
-#if NET5_0 // IAsyncDisposable is available only on .Net
+#if NET // IAsyncDisposable is available only on .Net
         [TestMethod]
         public void DisposableMemberInNonDisposableClass_IAsyncDisposable() =>
             Verifier.VerifyCSharpAnalyzer(@"
