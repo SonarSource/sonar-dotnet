@@ -39,5 +39,10 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EmptyNullableValueAccess_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyNullableValueAccess.CSharp9.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
     }
 }
