@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,11 +33,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCommandLineArguments_CS()
-        {
+        public void UsingCommandLineArguments_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCommandLineArguments.cs",
-                new CSharp.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                                    new CSharp.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UsingCommandLineArguments_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UsingCommandLineArguments.CSharp9.cs",
+                                                      new CSharp.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -68,19 +72,14 @@ partial class Program1
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCommandLineArguments_CS_Disabled()
-        {
-            Verifier.VerifyNoIssueReported(@"TestCases\UsingCommandLineArguments.cs",
-                new CSharp.UsingCommandLineArguments());
-        }
+        public void UsingCommandLineArguments_CS_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\UsingCommandLineArguments.cs", new CSharp.UsingCommandLineArguments());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCommandLineArguments_VB()
-        {
+        public void UsingCommandLineArguments_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCommandLineArguments.vb",
-                new VisualBasic.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                                    new VisualBasic.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -111,10 +110,8 @@ End Class
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCommandLineArguments_VB_Disabled()
-        {
+        public void UsingCommandLineArguments_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingCommandLineArguments.vb",
-                new VisualBasic.UsingCommandLineArguments());
-        }
+                                           new VisualBasic.UsingCommandLineArguments());
     }
 }
