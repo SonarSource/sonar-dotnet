@@ -9,11 +9,11 @@ topLevel.ToString();
 
 void TopLevelLocalFunction()
 {
-    object local = null;
+    object local = "Value";
     local.ToString();
 
-    local = "Value";
-    local.ToString();
+    local = null;
+    local.ToString();   // FN
 }
 
 public class Sample
@@ -22,16 +22,20 @@ public class Sample
 
     public void TargetTypedNew()
     {
-        StringBuilder sb = null;
-        sb.ToString(); // FN, can't build CFG for this method
+        StringBuilder sb;
+
+        sb = new();
+        sb.Append("Value");
 
         sb = new(42);
         sb.Append("Value");
+
+        sb = null;
+        sb.ToString(); // FN, can't build CFG for this method
     }
 
     public void PatternMatching(object arg)
     {
-
         if (arg is string)
         {
             arg.ToString();     // Compliant
@@ -48,6 +52,18 @@ public class Sample
         }
 
         if (arg is null)
+        {
+            arg.ToString();     // FN
+        }
+        if (arg is int or bool or null)
+        {
+            arg.ToString();     // FN
+        }
+        else if (arg is not not null)
+        {
+            arg.ToString();     // FN
+        }
+        else if (!(arg is not null))
         {
             arg.ToString();     // FN
         }
