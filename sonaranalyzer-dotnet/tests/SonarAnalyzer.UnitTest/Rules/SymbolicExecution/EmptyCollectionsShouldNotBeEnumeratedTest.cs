@@ -22,7 +22,9 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
+#if NETFRAMEWORK
 using SonarAnalyzer.UnitTest.MetadataReferences;
+#endif
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
@@ -32,8 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EmptyCollectionsShouldNotBeEnumerated()
-        {
+        public void EmptyCollectionsShouldNotBeEnumerated() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\EmptyCollectionsShouldNotBeEnumerated.cs",
                 new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()),
@@ -41,6 +42,10 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs", new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
     }
 }
