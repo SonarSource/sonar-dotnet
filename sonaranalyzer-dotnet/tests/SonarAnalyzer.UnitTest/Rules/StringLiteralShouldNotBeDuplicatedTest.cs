@@ -32,10 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void StringLiteralShouldNotBeDuplicated() => Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.cs", new StringLiteralShouldNotBeDuplicated());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void StringLiteralShouldNotBeDuplicated_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StringLiteralShouldNotBeDuplicated.CSharp9.cs", new StringLiteralShouldNotBeDuplicated());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

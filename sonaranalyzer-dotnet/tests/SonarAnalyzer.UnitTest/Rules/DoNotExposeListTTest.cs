@@ -33,10 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotExposeListT() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs", new DoNotExposeListT());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotExposeListT_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotExposeListT.CSharp9.cs", new DoNotExposeListT());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

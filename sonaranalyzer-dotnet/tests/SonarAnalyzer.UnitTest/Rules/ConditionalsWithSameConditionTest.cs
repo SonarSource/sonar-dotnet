@@ -33,6 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionalsWithSameCondition() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalsWithSameCondition.cs", new ConditionalsWithSameCondition());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalsWithSameCondition_CSharp9() =>
@@ -42,5 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConditionalsWithSameCondition_CSharp9_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalsWithSameCondition.CSharp9.TopLevelStatements.cs", new ConditionalsWithSameCondition());
+#endif
     }
 }

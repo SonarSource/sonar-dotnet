@@ -33,9 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DefaultSectionShouldBeFirstOrLast() =>
             Verifier.VerifyAnalyzer(@"TestCases\DefaultSectionShouldBeFirstOrLast.cs", new DefaultSectionShouldBeFirstOrLast());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void DefaultSectionShouldBeFirstOrLast_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DefaultSectionShouldBeFirstOrLast.CSharp9.cs", new DefaultSectionShouldBeFirstOrLast());
+#endif
     }
 }

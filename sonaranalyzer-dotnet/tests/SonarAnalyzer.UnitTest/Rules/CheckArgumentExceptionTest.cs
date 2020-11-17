@@ -32,6 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CheckArgumentException() => Verifier.VerifyAnalyzer(@"TestCases\CheckArgumentException.cs", new CheckArgumentException());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckArgumentException_CSharp9() =>
@@ -41,5 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CheckArgumentException_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CheckArgumentException.TopLevelStatements.cs", new CheckArgumentException());
+#endif
     }
 }

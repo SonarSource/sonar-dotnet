@@ -41,10 +41,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NumberPatternShouldBeRegular_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs", new NumberPatternShouldBeRegular(), ParseOptionsHelper.FromCSharp7);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void NumberPatternShouldBeRegular_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NumberPatternShouldBeRegular.CSharp9.cs", new NumberPatternShouldBeRegular());
+#endif
 
         [DataTestMethod]
         [TestCategory("Rule")]

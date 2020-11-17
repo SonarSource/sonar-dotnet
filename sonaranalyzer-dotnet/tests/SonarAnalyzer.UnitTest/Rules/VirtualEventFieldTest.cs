@@ -33,10 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void VirtualEventField() =>
             Verifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new VirtualEventField());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void VirtualEventField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\VirtualEventField.CSharp9.cs", new VirtualEventField());
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]

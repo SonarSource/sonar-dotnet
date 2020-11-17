@@ -36,12 +36,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new ShouldImplementExportedInterfaces(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_CSharp9() =>
            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ShouldImplementExportedInterfaces.CSharp9.cs",
                                               new ShouldImplementExportedInterfaces(),
                                               MetadataReferenceFacade.GetSystemComponentModelComposition());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

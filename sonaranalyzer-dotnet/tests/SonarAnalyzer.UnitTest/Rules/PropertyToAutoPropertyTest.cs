@@ -37,9 +37,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PropertyToAutoProperty_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.CSharp7.cs", new PropertyToAutoProperty(), ParseOptionsHelper.FromCSharp7);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyToAutoProperty_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyToAutoProperty.CSharp9.cs", new PropertyToAutoProperty());
+#endif
     }
 }

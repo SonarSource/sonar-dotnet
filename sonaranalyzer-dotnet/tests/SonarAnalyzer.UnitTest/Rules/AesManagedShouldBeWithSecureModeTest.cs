@@ -35,13 +35,13 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\AesManagedShouldBeWithSecureMode.cs",
                                     new AesManagedShouldBeWithSecureMode(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
-
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void AesManagedShouldBeWithSecureMode_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AesManagedShouldBeWithSecureMode.CSharp9.cs",
                             new AesManagedShouldBeWithSecureMode(),
                             MetadataReferenceFacade.GetSystemSecurityCryptography());
-
+#endif
     }
 }

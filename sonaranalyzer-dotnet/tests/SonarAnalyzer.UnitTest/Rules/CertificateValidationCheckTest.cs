@@ -39,6 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CertificateValidationCheck(),
                 additionalReferences: GetAdditionalReferences());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_CSharp9() =>
@@ -52,6 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
                 new CertificateValidationCheck(),
                 GetAdditionalReferences());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -32,9 +32,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void StaticFieldVisible() => Verifier.VerifyAnalyzer(@"TestCases\StaticFieldVisible.cs", new StaticFieldVisible());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldVisible_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldVisible.CSharp9.cs", new StaticFieldVisible());
+#endif
     }
 }

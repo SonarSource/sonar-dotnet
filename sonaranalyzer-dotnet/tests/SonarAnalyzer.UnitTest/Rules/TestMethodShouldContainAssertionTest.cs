@@ -201,6 +201,7 @@ public class Foo
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion));
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_CSharp9() =>
@@ -210,5 +211,6 @@ public class Foo
                                                     .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
                                                     .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
                                                     .ToArray());
+#endif
     }
 }

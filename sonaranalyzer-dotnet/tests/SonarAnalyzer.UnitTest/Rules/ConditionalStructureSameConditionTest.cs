@@ -32,11 +32,13 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
                 new SonarAnalyzer.Rules.CSharp.ConditionalStructureSameCondition());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalStructureSameCondition.CSharp9.cs",
                 new SonarAnalyzer.Rules.CSharp.ConditionalStructureSameCondition());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

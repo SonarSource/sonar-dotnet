@@ -44,10 +44,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UseShortCircuitingOperators_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseShortCircuitingOperator.cs", new CS.UseShortCircuitingOperator());
 
+#if NET5_0
         [TestMethod, TestCategory("Rule")]
         public void UseShortCircuitingOperators_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
                                     new CS.UseShortCircuitingOperator());
+#endif
 
         [TestMethod, TestCategory("CodeFix")]
         public void UseShortCircuitingOperators_CSharp_CodeFix() =>

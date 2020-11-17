@@ -34,10 +34,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyStatement() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyStatement_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new EmptyStatement());
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]

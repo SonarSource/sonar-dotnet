@@ -33,10 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FieldShouldBeReadonly() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs", new FieldShouldBeReadonly(), ParseOptionsHelper.FromCSharp8);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShouldBeReadonly_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShouldBeReadonly.CSharp9.cs", new FieldShouldBeReadonly());
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]

@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 
-#if NET
+#if NET5_0
 
         [TestMethod]
         [TestCategory("Rule")]

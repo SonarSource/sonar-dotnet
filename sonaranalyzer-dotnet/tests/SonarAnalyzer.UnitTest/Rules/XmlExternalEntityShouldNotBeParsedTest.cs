@@ -49,6 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(NuGetMetadataReference.MicrosoftWebXdt())
                     .ToArray());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9() =>
@@ -59,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
                     .Concat(NuGetMetadataReference.MicrosoftWebXdt())
                     .ToArray());
-
+#endif
 
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs")]
         [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net35.cs")]
@@ -72,12 +73,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: MetadataReferenceFacade.GetSystemXml().ToArray());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9.cs",
                 new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
                 MetadataReferenceFacade.GetSystemXml().ToArray());
+#endif
 
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
         [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]

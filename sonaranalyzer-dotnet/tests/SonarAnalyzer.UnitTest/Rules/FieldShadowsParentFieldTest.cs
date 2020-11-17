@@ -33,19 +33,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FieldShadowsParentField() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.cs", new FieldShadowsParentField());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShadowsParentField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShadowsParentField.CSharp9.cs", new FieldShadowsParentField());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldsShouldNotDifferByCapitalization() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new FieldShadowsParentField());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldsShouldNotDifferByCapitalization_CShar9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldNotDifferByCapitalization.CSharp9.cs", new FieldShadowsParentField());
+#endif
     }
 }

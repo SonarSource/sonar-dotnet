@@ -32,10 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundantDeclaration() => Verifier.VerifyAnalyzer(@"TestCases\RedundantDeclaration.cs", new RedundantDeclaration());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantDeclaration_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantDeclaration.CSharp9.cs", new RedundantDeclaration());
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]

@@ -32,10 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PropertyWriteOnly_CSharp() => Verifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.cs", new CS.PropertyWriteOnly());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertyWriteOnly_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertyWriteOnly.CSharp9.cs", new CS.PropertyWriteOnly());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

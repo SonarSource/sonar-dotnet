@@ -33,9 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ThisShouldNotBeExposedFromConstructors() =>
             Verifier.VerifyAnalyzer(@"TestCases\ThisShouldNotBeExposedFromConstructors.cs", new ThisShouldNotBeExposedFromConstructors());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void ThisShouldNotBeExposedFromConstructors_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ThisShouldNotBeExposedFromConstructors.CSharp9.cs", new ThisShouldNotBeExposedFromConstructors());
+#endif
     }
 }

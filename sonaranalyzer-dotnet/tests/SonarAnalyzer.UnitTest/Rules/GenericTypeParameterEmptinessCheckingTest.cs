@@ -37,12 +37,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     additionalReferences: MetadataReferenceFacade.GetSystemCollections(),
                                     checkMode: CompilationErrorBehavior.Ignore);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
                                                       new GenericTypeParameterEmptinessChecking(),
                                                       MetadataReferenceFacade.GetSystemCollections());
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]

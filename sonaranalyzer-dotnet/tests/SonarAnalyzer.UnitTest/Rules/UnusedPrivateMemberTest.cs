@@ -198,16 +198,14 @@ namespace EntityFrameworkMigrations
                                     additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                                     options: ParseOptionsHelper.FromCSharp8);
-
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedPrivateMember.CSharp9.cs",
-                                    new CS.UnusedPrivateMember()
-#if NETFRAMEWORK
-                                    , NuGetMetadataReference.NETStandardV2_1_0
+                                                      new CS.UnusedPrivateMember(),
+                                                      NuGetMetadataReference.NETStandardV2_1_0);
 #endif
-                                    );
 
         [TestMethod]
         [TestCategory("CodeFix")]

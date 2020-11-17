@@ -33,10 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void OptionalParameterNotPassedToBaseCall_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.cs", new OptionalParameterNotPassedToBaseCall());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalParameterNotPassedToBaseCall_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OptionalParameterNotPassedToBaseCall.CSharp9.cs", new OptionalParameterNotPassedToBaseCall());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

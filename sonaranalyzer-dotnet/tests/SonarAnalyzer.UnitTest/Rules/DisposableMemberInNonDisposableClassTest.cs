@@ -38,14 +38,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new DisposableMemberInNonDisposableClass(),
                                     ParseOptionsHelper.FromCSharp8);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new DisposableMemberInNonDisposableClass());
 
-#if NET // IAsyncDisposable is available only on .Net
         [TestMethod]
-        public void DisposableMemberInNonDisposableClass_IAsyncDisposable() =>
+        public void DisposableMemberInNonDisposableClass_IAsyncDisposable() => // IAsyncDisposable is available only on .Net Core
             Verifier.VerifyCSharpAnalyzer(@"
 namespace Namespace
 {

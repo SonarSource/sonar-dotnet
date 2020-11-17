@@ -43,9 +43,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new UseNumericLiteralSeparator(),
                                     ParseOptionsHelper.FromCSharp7);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void UseNumericLiteralSeparator_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseNumericLiteralSeparator.CSharp9.cs", new UseNumericLiteralSeparator());
+#endif
     }
 }

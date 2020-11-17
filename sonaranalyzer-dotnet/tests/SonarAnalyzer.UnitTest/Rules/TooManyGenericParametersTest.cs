@@ -39,9 +39,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\TooManyGenericParameters_CustomValues.cs",
                 new TooManyGenericParameters { MaxNumberOfGenericParametersInClass = 4, MaxNumberOfGenericParametersInMethod = 4 });
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyGenericParameters_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyGenericParameters.CSharp9.cs", new TooManyGenericParameters());
+#endif
     }
 }

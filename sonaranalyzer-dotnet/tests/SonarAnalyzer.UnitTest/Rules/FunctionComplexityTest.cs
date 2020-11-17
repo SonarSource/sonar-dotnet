@@ -32,10 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FunctionComplexity_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.cs", new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 }, ParseOptionsHelper.FromCSharp8);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void FunctionComplexity_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\FunctionComplexity.CSharp9.cs", new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 });
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

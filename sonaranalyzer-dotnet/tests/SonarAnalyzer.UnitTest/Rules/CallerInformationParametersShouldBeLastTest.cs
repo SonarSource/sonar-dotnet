@@ -33,10 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CallerInformationParametersShouldBeLast() =>
             Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLast.cs", new CallerInformationParametersShouldBeLast());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLast_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs", new CallerInformationParametersShouldBeLast());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

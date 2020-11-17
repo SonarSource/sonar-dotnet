@@ -33,6 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AbstractTypesShouldNotHaveConstructors() =>
             Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.cs", new AbstractTypesShouldNotHaveConstructors());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void AbstractTypesShouldNotHaveConstructors_Records() =>
@@ -42,5 +43,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void AbstractTypesShouldNotHaveConstructors_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs", new AbstractTypesShouldNotHaveConstructors());
+#endif
     }
 }

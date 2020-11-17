@@ -33,9 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MemberShadowsOuterStaticMember() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShadowsOuterStaticMember.cs", new MemberShadowsOuterStaticMember());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShadowsOuterStaticMember_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberShadowsOuterStaticMember.CSharp9.cs", new MemberShadowsOuterStaticMember());
+#endif
     }
 }

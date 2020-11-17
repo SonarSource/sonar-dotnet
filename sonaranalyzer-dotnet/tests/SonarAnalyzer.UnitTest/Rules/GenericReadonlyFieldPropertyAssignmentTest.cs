@@ -35,11 +35,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new GenericReadonlyFieldPropertyAssignment(),
                                     ParseOptionsHelper.FromCSharp8);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericReadonlyFieldPropertyAssignment_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp9.cs",
                                                       new GenericReadonlyFieldPropertyAssignment());
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]

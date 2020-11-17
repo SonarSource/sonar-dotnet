@@ -37,11 +37,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp8);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void InsecureDeserialization_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureDeserialization.CSharp9.cs", new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
+#endif
     }
 }
 

@@ -42,10 +42,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences:MetadataReferenceFacade.GetSystemWindowsForms());
 #endif
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallExitMethods_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs",
-                new DoNotCallExitMethods());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallExitMethods.CSharp9.cs", new DoNotCallExitMethods());
+#endif
     }
 }

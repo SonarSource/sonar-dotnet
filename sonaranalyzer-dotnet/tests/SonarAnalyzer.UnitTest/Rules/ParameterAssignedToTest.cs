@@ -32,10 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ParameterAssignedTo_CSharp() => Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.cs", new CS.ParameterAssignedTo());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void ParameterAssignedTo_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ParameterAssignedTo.CSharp9.cs", new CS.ParameterAssignedTo());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

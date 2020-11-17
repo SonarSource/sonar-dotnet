@@ -39,9 +39,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
                                     options: ParseOptionsHelper.FromCSharp8);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantJumpStatement_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantJumpStatement.CSharp9.cs", new RedundantJumpStatement());
+#endif
     }
 }

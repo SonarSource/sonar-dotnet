@@ -42,9 +42,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new UnusedReturnValue(),
                                     ParseOptionsHelper.FromCSharp8);
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedReturnValue_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnusedReturnValue.CSharp9.cs", new UnusedReturnValue());
+#endif
     }
 }

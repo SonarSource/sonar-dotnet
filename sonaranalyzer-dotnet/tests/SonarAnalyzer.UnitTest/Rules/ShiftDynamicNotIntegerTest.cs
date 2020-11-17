@@ -35,10 +35,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ShiftDynamicNotInteger_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.cs", new CSharp.ShiftDynamicNotInteger());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void ShiftDynamicNotInteger_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ShiftDynamicNotInteger.CSharp9.cs", new CSharp.ShiftDynamicNotInteger());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

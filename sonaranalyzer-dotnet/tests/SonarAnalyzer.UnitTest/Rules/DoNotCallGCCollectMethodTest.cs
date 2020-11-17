@@ -33,9 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotCallGCCollectMethod() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCCollectMethod.cs", new DoNotCallGCCollectMethod());
 
+#if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallGCCollectMethod_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallGCCollectMethod.CSharp9.cs", new DoNotCallGCCollectMethod());
+#endif
     }
 }
