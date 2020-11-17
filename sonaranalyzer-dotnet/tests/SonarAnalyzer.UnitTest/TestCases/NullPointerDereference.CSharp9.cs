@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Text;
 
-object topLevel = null;
-topLevel.ToString();   // FN
-
-topLevel = "Value";
+object topLevel = "Value";
 topLevel.ToString();
+
+topLevel = null;
+topLevel.ToString();   // FN
 
 void TopLevelLocalFunction()
 {
