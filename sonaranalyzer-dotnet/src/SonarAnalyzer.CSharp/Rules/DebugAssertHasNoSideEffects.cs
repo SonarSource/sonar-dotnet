@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -53,8 +53,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invokedMethodSyntax = c.Node as InvocationExpressionSyntax;
 
-                    if (IsDebugAssert(invokedMethodSyntax, c) &&
-                        ContainsCallsWithSideEffects(invokedMethodSyntax))
+                    if (ContainsCallsWithSideEffects(invokedMethodSyntax) &&
+                        IsDebugAssert(invokedMethodSyntax, c))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invokedMethodSyntax.ArgumentList.GetLocation()));
                     }
