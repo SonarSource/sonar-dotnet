@@ -11,5 +11,7 @@ b = f as Apple is not null; // FN
 b = true && (apple) is Apple; // Noncompliant
 b = !(apple is Apple); // Noncompliant
 
+if (apple is { }) { } // Compliant
+
 record Fruit { }
 sealed record Apple : Fruit { }

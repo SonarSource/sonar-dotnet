@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -59,15 +59,20 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-                    if (!methodSymbol.IsInType(KnownType.System_Type))
+                    var invocationString = invocation.ToString();
+                    if (invocationString.Contains("IsInstanceOfType") ||
+                        invocationString.Contains("IsAssignableFrom"))
                     {
-                        return;
-                    }
+                        var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+                        if (!methodSymbol.IsInType(KnownType.System_Type))
+                        {
+                            return;
+                        }
 
-                    var argument = invocation.ArgumentList.Arguments.First().Expression;
-                    CheckForIsAssignableFrom(c, invocation, memberAccess, methodSymbol, argument);
-                    CheckForIsInstanceOfType(c, invocation, memberAccess, methodSymbol);
+                        var argument = invocation.ArgumentList.Arguments.First().Expression;
+                        CheckForIsAssignableFrom(c, invocation, memberAccess, methodSymbol, argument);
+                        CheckForIsInstanceOfType(c, invocation, memberAccess, methodSymbol);
+                    }
                 },
                 SyntaxKind.InvocationExpression);
 
@@ -92,12 +97,16 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckIfIsExpressionCanBeReplacedByNullCheck(SyntaxNodeAnalysisContext context)
         {
             var binary = (BinaryExpressionSyntax)context.Node;
-            var typeExpression = context.SemanticModel.GetTypeInfo(binary.Left).Type;
-            var typeCastTo = context.SemanticModel.GetTypeInfo(binary.Right).Type;
 
+            var typeExpression = context.SemanticModel.GetTypeInfo(binary.Left).Type;
             if (typeExpression == null ||
-                typeCastTo == null ||
-                !typeExpression.IsClass() ||
+                !typeExpression.IsClass())
+            {
+                return;
+            }
+
+            var typeCastTo = context.SemanticModel.GetTypeInfo(binary.Right).Type;
+            if (typeCastTo == null ||
                 !typeCastTo.IsClass() ||
                 typeCastTo.Is(KnownType.System_Object))
             {
@@ -129,13 +138,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckGetTypeAndTypeOfEquality(ExpressionSyntax sideA, ExpressionSyntax sideB, Location location,
             SyntaxNodeAnalysisContext context)
         {
-            if (!TypeExaminationOnSystemType.IsGetTypeCall(sideA as InvocationExpressionSyntax, context.SemanticModel))
+            var typeSyntax = (sideB as TypeOfExpressionSyntax)?.Type;
+            if (typeSyntax == null)
             {
                 return;
             }
 
-            var typeSyntax = (sideB as TypeOfExpressionSyntax)?.Type;
-            if (typeSyntax == null)
+            if (!sideA.ToString().Contains("GetType") ||
+                !TypeExaminationOnSystemType.IsGetTypeCall(sideA as InvocationExpressionSyntax, context.SemanticModel))
             {
                 return;
             }
