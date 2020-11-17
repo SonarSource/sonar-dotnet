@@ -44,6 +44,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisposableMemberInNonDisposableClass_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new DisposableMemberInNonDisposableClass());
 
+<<<<<<< HEAD
+#if NET // IAsyncDisposable is available only on .Net
+=======
+>>>>>>> 10acf0a33 (Run C#9 test cases only on .Net 5)
         [TestMethod]
         public void DisposableMemberInNonDisposableClass_IAsyncDisposable() => // IAsyncDisposable is available only on .Net Core
             Verifier.VerifyCSharpAnalyzer(@"

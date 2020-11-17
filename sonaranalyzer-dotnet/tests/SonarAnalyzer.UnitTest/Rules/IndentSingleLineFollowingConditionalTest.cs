@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void IndentSingleLineFollowingConditional() =>
             Verifier.VerifyAnalyzer(@"TestCases\IndentSingleLineFollowingConditional.cs", new IndentSingleLineFollowingConditional());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void IndentSingleLineFollowingConditional_FromCSharp9() =>

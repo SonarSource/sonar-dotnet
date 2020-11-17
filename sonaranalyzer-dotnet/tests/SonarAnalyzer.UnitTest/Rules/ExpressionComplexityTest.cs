@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new SonarAnalyzer.Rules.CSharp.ExpressionComplexity { Maximum = 3},
                 options: ParseOptionsHelper.FromCSharp8);
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpressionComplexity_CSharp9() =>

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SillyBitwiseOperation() => Verifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.cs", new SillyBitwiseOperation());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SillyBitwiseOperation_CSharp9() =>

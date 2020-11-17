@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_DefaultValues.cs",
                 new AvoidExcessiveInheritance());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_DefaultValues_Records() =>
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
                 new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubClass" });
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredRecord() =>

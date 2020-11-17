@@ -201,7 +201,7 @@ public class Foo
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion));
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_CSharp9() =>

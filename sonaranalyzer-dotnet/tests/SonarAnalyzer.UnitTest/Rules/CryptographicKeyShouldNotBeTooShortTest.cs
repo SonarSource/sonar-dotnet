@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetAdditionalReferences());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>

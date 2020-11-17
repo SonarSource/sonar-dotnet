@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
                                     new ConditionalSimplification(),
                                     ParseOptionsHelper.FromCSharp8);
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalSimplification_FromCSharp9() =>

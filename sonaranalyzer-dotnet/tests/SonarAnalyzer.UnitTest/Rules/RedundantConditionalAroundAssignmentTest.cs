@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundantConditionalAroundAssignment() => Verifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.cs", new RedundantConditionalAroundAssignment());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantConditionalAroundAssignment_CSharp9() =>

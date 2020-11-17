@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodParameterMissingOptional() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterMissingOptional.cs", new MethodParameterMissingOptional());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodParameterMissingOptional_CSharp9() =>

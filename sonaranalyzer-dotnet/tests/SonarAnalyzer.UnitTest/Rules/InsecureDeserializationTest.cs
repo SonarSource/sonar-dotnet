@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp8);
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]

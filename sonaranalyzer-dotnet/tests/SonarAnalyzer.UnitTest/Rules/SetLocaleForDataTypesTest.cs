@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new SetLocaleForDataTypes(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemData());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SetLocaleForDataTypes_CSharp9() =>

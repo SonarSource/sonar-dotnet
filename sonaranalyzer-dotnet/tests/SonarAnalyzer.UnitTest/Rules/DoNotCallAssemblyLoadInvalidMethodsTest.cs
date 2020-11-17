@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new DoNotCallAssemblyLoadInvalidMethods(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemSecurityPermissions());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>

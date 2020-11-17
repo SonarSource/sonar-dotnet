@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new TestMethodShouldHaveCorrectSignature(),
                                     additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1);
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_CSharp9() =>

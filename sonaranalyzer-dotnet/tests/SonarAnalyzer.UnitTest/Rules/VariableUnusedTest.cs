@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void VariableUnused_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new CSharp.VariableUnused(), ParseOptionsHelper.FromCSharp8);
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableUnused_CSharp9() =>

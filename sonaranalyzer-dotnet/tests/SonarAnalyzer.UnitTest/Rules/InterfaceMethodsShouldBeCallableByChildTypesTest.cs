@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void InterfaceMethodsShouldBeCallableByChildTypes() =>
             Verifier.VerifyAnalyzer(@"TestCases\InterfaceMethodsShouldBeCallableByChildTypes.cs", new InterfaceMethodsShouldBeCallableByChildTypes());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void InterfaceMethodsShouldBeCallableByChildTypes_CSharp9() =>

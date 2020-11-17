@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ClassWithEqualityShouldImplementIEquatable() =>
             Verifier.VerifyAnalyzer(@"TestCases\ClassWithEqualityShouldImplementIEquatable.cs", new ClassWithEqualityShouldImplementIEquatable());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassWithEqualityShouldImplementIEquatable_CSharp9() =>

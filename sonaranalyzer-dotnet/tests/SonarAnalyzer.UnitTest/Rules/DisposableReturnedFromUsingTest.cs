@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisposableReturnedFromUsing() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableReturnedFromUsing.cs", new DisposableReturnedFromUsing(), ParseOptionsHelper.FromCSharp8);
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableReturnedFromUsing_CSharp9() =>

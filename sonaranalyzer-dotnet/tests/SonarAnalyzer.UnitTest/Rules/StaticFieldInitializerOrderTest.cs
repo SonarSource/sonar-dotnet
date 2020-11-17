@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldInitializerOrder_CSharp9() =>

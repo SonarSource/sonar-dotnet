@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundantInheritanceList() => Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.cs", new RedundantInheritanceList());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantInheritanceList_CSharp9() =>

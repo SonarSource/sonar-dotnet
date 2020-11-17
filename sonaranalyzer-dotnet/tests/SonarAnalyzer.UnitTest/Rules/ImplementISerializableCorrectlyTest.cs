@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ImplementISerializableCorrectly() =>
             Verifier.VerifyAnalyzer(@"TestCases\ImplementISerializableCorrectly.cs", new ImplementISerializableCorrectly());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementISerializableCorrectly_FromCSharp9() =>

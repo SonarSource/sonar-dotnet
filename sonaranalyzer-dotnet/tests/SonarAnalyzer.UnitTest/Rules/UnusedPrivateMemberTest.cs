@@ -198,7 +198,7 @@ namespace EntityFrameworkMigrations
                                     additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                                     options: ParseOptionsHelper.FromCSharp8);
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void UnusedPrivateMember_FromCSharp9() =>

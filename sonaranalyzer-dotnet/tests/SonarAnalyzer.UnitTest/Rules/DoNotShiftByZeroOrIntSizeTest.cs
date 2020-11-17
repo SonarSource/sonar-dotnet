@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotShiftByZeroOrIntSize() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotShiftByZeroOrIntSize.cs", new DoNotShiftByZeroOrIntSize());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotShiftByZeroOrIntSize_CSharp9() =>

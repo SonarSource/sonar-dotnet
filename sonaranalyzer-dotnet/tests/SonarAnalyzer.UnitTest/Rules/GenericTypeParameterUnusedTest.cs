@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new GenericTypeParameterUnused(),
                                     options: ParseOptionsHelper.FromCSharp8);
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericTypeParameterUnused_CSharp9() =>

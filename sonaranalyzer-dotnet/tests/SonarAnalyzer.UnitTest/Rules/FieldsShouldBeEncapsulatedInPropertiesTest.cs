@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FieldsShouldBeEncapsulatedInProperties() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldBeEncapsulatedInProperties.cs", new FieldsShouldBeEncapsulatedInProperties());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldsShouldBeEncapsulatedInProperties_CSharp9() =>

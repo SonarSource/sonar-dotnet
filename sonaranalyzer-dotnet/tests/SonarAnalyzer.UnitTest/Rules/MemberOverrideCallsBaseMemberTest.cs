@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MemberOverrideCallsBaseMember() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberOverrideCallsBaseMember.cs", new MemberOverrideCallsBaseMember());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberOverrideCallsBaseMember_CSharp9() =>

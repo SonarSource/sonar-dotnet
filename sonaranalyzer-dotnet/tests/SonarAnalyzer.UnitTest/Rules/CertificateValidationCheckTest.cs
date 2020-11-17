@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CertificateValidationCheck(),
                 additionalReferences: GetAdditionalReferences());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_CSharp9() =>

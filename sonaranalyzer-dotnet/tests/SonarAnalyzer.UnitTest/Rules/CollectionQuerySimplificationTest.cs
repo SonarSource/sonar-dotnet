@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CollectionQuerySimplification() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionQuerySimplification.cs", new CollectionQuerySimplification());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CollectionQuerySimplification_CSharp9() =>

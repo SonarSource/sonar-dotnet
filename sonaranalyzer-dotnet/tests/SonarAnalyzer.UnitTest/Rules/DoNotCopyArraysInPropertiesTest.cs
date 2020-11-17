@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotCopyArraysInProperties() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCopyArraysInProperties.cs", new DoNotCopyArraysInProperties());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCopyArraysInProperties_CSharp9() =>

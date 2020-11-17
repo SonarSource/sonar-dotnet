@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SingleStatementPerLine_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.cs", new CS.SingleStatementPerLine());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SingleStatementPerLine_CSharp9() =>

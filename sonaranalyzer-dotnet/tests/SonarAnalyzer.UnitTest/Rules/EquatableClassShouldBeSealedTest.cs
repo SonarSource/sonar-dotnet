@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EquatableClassShouldBeSealed() =>
             Verifier.VerifyAnalyzer(@"TestCases\EquatableClassShouldBeSealed.cs", new EquatableClassShouldBeSealed());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EquatableClassShouldBeSealed_CSharp9() =>

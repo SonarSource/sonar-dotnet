@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FunctionNestingDepth_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\FunctionNestingDepth.cs", new SonarAnalyzer.Rules.CSharp.FunctionNestingDepth { Maximum = 3 });
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void FunctionNestingDepth_CS_CSharp9() =>

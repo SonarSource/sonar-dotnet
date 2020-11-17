@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void StaticFieldInGenericClass() => Verifier.VerifyAnalyzer(@"TestCases\StaticFieldInGenericClass.cs", new StaticFieldInGenericClass());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldInGenericClass_CSharp9() =>

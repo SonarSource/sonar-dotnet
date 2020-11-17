@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MemberInitializedToDefault() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberInitializedToDefault.cs", new MemberInitializedToDefault());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberInitializedToDefault_CSharp9() =>

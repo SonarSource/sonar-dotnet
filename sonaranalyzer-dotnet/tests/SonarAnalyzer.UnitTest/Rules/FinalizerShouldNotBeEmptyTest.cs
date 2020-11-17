@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FinalizerShouldNotBeEmpty() =>
             Verifier.VerifyAnalyzer(@"TestCases\FinalizerShouldNotBeEmpty.cs", new FinalizerShouldNotBeEmpty());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void FinalizerShouldNotBeEmpty_CSharp9() =>

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void IssueSuppression() =>
             Verifier.VerifyAnalyzer(@"TestCases\IssueSuppression.cs", new IssueSuppression());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void IssueSuppression_CSharp9() =>

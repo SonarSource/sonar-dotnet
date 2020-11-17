@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyStatement() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyStatement_CSharp9() =>

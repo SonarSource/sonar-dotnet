@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantParenthesesObjectCreation() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesObjectCreation.cs", new RedundantParenthesesObjectsCreation());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantParenthesesObjectCreation_CSharp9() =>

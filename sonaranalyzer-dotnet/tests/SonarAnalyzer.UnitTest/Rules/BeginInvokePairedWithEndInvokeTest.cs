@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void BeginInvokePairedWithEndInvoke() =>
             Verifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.cs", new BeginInvokePairedWithEndInvoke());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void BeginInvokePairedWithEndInvoke_CSharp9() =>

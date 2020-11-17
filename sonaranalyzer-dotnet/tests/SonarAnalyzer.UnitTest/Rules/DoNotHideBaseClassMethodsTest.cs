@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHideBaseClassMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHideBaseClassMethods.cs", new DoNotHideBaseClassMethods());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHideBaseClassMethods_CSharp9() =>

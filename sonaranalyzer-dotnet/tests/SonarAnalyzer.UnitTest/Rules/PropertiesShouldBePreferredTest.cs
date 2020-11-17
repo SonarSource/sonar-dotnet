@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new PropertiesShouldBePreferred(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemThreadingTasks());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesShouldBePreferred_CSharp9() =>

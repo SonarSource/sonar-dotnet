@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodOverrideNoParams() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideNoParams.cs", new MethodOverrideNoParams());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideNoParams_CSharp9() =>

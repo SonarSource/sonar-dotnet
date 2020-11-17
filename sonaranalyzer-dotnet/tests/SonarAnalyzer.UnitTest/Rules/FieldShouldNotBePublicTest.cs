@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FieldShouldNotBePublic_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldShouldNotBePublic.cs", new CS.FieldShouldNotBePublic());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShouldNotBePublic_CS_CSharp9() =>

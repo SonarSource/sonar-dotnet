@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ReturnValueIgnored() => Verifier.VerifyAnalyzer(@"TestCases\ReturnValueIgnored.cs", new ReturnValueIgnored());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ReturnValueIgnored_CSharp9() =>

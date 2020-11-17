@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SwitchCaseFallsThroughToDefault() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchCaseFallsThroughToDefault.cs", new SwitchCaseFallsThroughToDefault());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchCaseFallsThroughToDefault_CSharp9() =>

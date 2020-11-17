@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AsyncAwaitIdentifier() =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncAwaitIdentifier.cs", new AsyncAwaitIdentifier());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AsyncAwaitIdentifier_CSharp9() =>

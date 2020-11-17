@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CheckArgumentException() => Verifier.VerifyAnalyzer(@"TestCases\CheckArgumentException.cs", new CheckArgumentException());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckArgumentException_CSharp9() =>

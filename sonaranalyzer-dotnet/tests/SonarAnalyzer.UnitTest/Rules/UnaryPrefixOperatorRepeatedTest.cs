@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UnaryPrefixOperatorRepeated() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs", new CSharp.UnaryPrefixOperatorRepeated());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void UnaryPrefixOperatorRepeated_CSharp9() =>

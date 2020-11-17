@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionalsWithSameCondition() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalsWithSameCondition.cs", new ConditionalsWithSameCondition());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalsWithSameCondition_CSharp9() =>

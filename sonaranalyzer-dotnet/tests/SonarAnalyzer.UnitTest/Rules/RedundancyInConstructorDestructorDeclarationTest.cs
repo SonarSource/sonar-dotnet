@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundancyInConstructorDestructorDeclaration() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs", new RedundancyInConstructorDestructorDeclaration());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundancyInConstructorDestructorDeclaration_CSharp9() =>

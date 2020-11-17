@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: MetadataReferenceFacade.GetSystemNetHttp());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableNotDisposed_CSharp9() =>

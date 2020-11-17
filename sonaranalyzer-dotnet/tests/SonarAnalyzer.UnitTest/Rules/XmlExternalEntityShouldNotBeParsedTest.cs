@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(NuGetMetadataReference.MicrosoftWebXdt())
                     .ToArray());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9() =>
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: MetadataReferenceFacade.GetSystemXml().ToArray());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9() =>

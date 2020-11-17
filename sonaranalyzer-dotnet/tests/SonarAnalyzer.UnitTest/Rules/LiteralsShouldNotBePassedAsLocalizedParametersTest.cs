@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.cs",
                                     new LiteralsShouldNotBePassedAsLocalizedParameters(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void LiteralsShouldNotBePassedAsLocalizedParameters_CSharp9() =>

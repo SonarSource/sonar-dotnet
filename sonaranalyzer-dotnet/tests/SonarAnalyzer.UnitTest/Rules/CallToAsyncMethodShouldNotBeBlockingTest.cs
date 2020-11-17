@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CallToAsyncMethodShouldNotBeBlocking() =>
             Verifier.VerifyAnalyzer(@"TestCases\CallToAsyncMethodShouldNotBeBlocking.cs", new CallToAsyncMethodShouldNotBeBlocking());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CallToAsyncMethodShouldNotBeBlocking_CSharp9() =>

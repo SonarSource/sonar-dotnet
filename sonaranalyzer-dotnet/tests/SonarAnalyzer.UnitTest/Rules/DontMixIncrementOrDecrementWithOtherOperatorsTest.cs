@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DontMixIncrementOrDecrementWithOtherOperators() =>
             Verifier.VerifyAnalyzer(@"TestCases\DontMixIncrementOrDecrementWithOtherOperators.cs", new DontMixIncrementOrDecrementWithOtherOperators());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DontMixIncrementOrDecrementWithOtherOperators_CSharp9() =>

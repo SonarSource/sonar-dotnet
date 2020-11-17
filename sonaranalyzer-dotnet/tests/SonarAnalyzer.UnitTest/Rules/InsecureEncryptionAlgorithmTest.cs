@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new InsecureEncryptionAlgorithm(),
                 additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureEncryptionAlgorithm_CSharp9() =>

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DelegateSubtraction() =>
             Verifier.VerifyAnalyzer(@"TestCases\DelegateSubtraction.cs", new DelegateSubtraction());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DelegateSubtraction_CSharp9() =>

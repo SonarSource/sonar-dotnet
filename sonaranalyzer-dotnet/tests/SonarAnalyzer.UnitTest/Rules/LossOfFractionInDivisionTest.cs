@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void LossOfFractionInDivision() =>
             Verifier.VerifyAnalyzer(@"TestCases\LossOfFractionInDivision.cs", new LossOfFractionInDivision());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void LossOfFractionInDivision_FromCSharp9() =>

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new SerializationConstructorsShouldBeSecured(),
                                     additionalReferences: GetAdditionalReferences());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_CSharp9() =>

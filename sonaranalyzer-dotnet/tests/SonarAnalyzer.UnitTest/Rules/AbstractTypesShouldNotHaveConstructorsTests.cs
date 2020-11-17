@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AbstractTypesShouldNotHaveConstructors() =>
             Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.cs", new AbstractTypesShouldNotHaveConstructors());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AbstractTypesShouldNotHaveConstructors_Records() =>

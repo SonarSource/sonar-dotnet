@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void NotAssignedPrivateMember() => Verifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs", new NotAssignedPrivateMember());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void NotAssignedPrivateMember_CSharp9() =>

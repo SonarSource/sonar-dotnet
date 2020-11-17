@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotTestThisWithIsOperator() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotTestThisWithIsOperator.cs", new DoNotTestThisWithIsOperator());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotTestThisWithIsOperator_CSharp9() =>

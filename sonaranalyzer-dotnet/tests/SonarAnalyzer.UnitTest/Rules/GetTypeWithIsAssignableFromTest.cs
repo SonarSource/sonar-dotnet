@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GetTypeWithIsAssignableFrom() => Verifier.VerifyAnalyzer(@"TestCases\GetTypeWithIsAssignableFrom.cs", new GetTypeWithIsAssignableFrom());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void GetTypeWithIsAssignableFrom_CSharp9() =>

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new GenericReadonlyFieldPropertyAssignment(),
                                     ParseOptionsHelper.FromCSharp8);
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericReadonlyFieldPropertyAssignment_CSharp9() =>

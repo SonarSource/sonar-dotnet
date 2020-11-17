@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UseGenericEventHandlerInstances() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseGenericEventHandlerInstances.cs", new UseGenericEventHandlerInstances());
 
-#if NET5_0
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void UseGenericEventHandlerInstances_CSharp9() =>
