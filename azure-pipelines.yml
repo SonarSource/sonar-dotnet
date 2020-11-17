@@ -251,8 +251,9 @@ stages:
           & dotnet build $testProjFileName -c $(BuildConfiguration)
           Test-ExitCode "ERROR: UnitTest project build FAILED."
 
-          Write-Host "Register OpenCover profilers. This step needs to be done manually on CI agents. See https://github.com/OpenCover/opencover/raw/master/main/OpenCover.Documentation/Usage.pdf"
-          regsvr32 $(NUGET_PACKAGES)\opencover\4.7.922\tools\x86\OpenCover.Profiler.dll
+          Write-Host "Register OpenCover profilers!"
+
+          # This step needs to be manually done on CI agents. See https://github.com/OpenCover/opencover/raw/master/main/OpenCover.Documentation/Usage.pdf
           regsvr32 $(NUGET_PACKAGES)\opencover\4.7.922\tools\x64\OpenCover.Profiler.dll
 
           $supportedFrameworks = @('net48', 'net5.0')
