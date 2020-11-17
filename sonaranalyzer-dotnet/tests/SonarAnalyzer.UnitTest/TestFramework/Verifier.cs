@@ -116,12 +116,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, outputKind, additionalReferences);
 
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths, UtilityAnalyzerBase diagnosticAnalyzer,
-            string protobufPath, Action<IList<TMessage>> verifyProtobuf, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
+                                                        string protobufPath, Action<IList<TMessage>> verifyProtobuf,
+                                                        IEnumerable<ParseOptions> options = null,
+                                                        CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
             where TMessage : IMessage<TMessage>, new()
         {
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths);
 
-            foreach (var compilation in solutionBuilder.Compile())
+            foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
 
