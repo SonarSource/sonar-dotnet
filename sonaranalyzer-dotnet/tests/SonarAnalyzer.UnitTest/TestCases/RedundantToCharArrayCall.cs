@@ -24,5 +24,16 @@ namespace Tests.Diagnostics
 
             c = this.ToCharArray()[10];
         }
+
+        public void Coverage()
+        {
+            "x".ToString();
+            this.Foo();
+            foreach (var v in Foo()) { }
+            Foo();
+            var x = "x".ToCharArray(1, 2)[0]; // Compliant, it does a substring
+        }
+
+        public IEnumerable<string> Foo() => null;
     }
 }
