@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -63,6 +63,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
+                    var firstArgument = methodCall.ArgumentList.Arguments[0];
+                    var secondArgument = methodCall.ArgumentList.Arguments[1];
+                    if (firstArgument.Expression is LiteralExpressionSyntax ||
+                        !(secondArgument.Expression is LiteralExpressionSyntax))
+                    {
+                        return;
+                    }
+
                     var methodCallExpression = (MemberAccessExpressionSyntax)methodCall.Expression;
 
                     var methodKnownTypes = methodsWithType.GetValueOrDefault(methodCallExpression.Name.Identifier.ValueText);
@@ -78,14 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var firstArgument = methodCall.ArgumentList.Arguments[0];
-                    var secondArgument = methodCall.ArgumentList.Arguments[1];
-
-                    if (!(firstArgument.Expression is LiteralExpressionSyntax) &&
-                        secondArgument.Expression is LiteralExpressionSyntax)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstArgument.CreateLocation(secondArgument)));
-                    }
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstArgument.CreateLocation(secondArgument)));
                 }, SyntaxKind.InvocationExpression);
         }
     }
