@@ -45,21 +45,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void BypassingAccessibility_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.vb",
-                                    new SonarAnalyzer.Rules.VisualBasic.BypassingAccessibility(AnalyzerConfiguration.AlwaysEnabled));
+            Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.vb", new SonarAnalyzer.Rules.VisualBasic.BypassingAccessibility(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void BypassingAccessibility_CS_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\BypassingAccessibility.cs",
-                                           new BypassingAccessibility());
+            Verifier.VerifyNoIssueReported(@"TestCases\BypassingAccessibility.cs", new BypassingAccessibility());
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void BypassingAccessibility_VB_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\BypassingAccessibility.vb",
-                                           new SonarAnalyzer.Rules.VisualBasic.BypassingAccessibility());
+            Verifier.VerifyNoIssueReported(@"TestCases\BypassingAccessibility.vb", new SonarAnalyzer.Rules.VisualBasic.BypassingAccessibility());
     }
 }

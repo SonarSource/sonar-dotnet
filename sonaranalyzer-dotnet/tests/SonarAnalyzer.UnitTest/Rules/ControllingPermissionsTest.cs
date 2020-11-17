@@ -52,13 +52,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ControllingPermissions_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ControllingPermissions.CSharp9.cs",
-                                                      new CSharp.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                                      additionalReferences: AdditionalReferences);
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void ControllingPermissions_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ControllingPermissions.cs",
                                            new CSharp.ControllingPermissions(),
