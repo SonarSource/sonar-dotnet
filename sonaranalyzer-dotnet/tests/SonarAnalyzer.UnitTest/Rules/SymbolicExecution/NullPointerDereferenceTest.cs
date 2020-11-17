@@ -19,7 +19,6 @@
  */
 
 extern alias csharp;
-using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -98,9 +97,6 @@ public static class Utils
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NullPointerDereference.CSharp9.cs", GetAnalyzer());
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            // Symbolic execution analyzers are run by the SymbolicExecutionRunner
-            new SymbolicExecutionRunner(
-                new SymbolicExecutionAnalyzerFactory(
-                    ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new NullPointerDereference())));
+            new SymbolicExecutionRunner(new NullPointerDereference());
     }
 }

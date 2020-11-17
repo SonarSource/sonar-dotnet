@@ -19,7 +19,6 @@
  */
 
 extern alias csharp;
-using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
@@ -35,13 +34,9 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestCategory("Rule")]
         public void EmptyCollectionsShouldNotBeEnumerated()
         {
-            // Symbolic execution analyzers are run by the SymbolicExecutionRunner
-            var analyzers = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new EmptyCollectionsShouldNotBeEnumerated());
-            var runner = new SymbolicExecutionRunner(new SymbolicExecutionAnalyzerFactory(analyzers));
-
             Verifier.VerifyAnalyzer(
                 @"TestCases\EmptyCollectionsShouldNotBeEnumerated.cs",
-                runner,
+                new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif

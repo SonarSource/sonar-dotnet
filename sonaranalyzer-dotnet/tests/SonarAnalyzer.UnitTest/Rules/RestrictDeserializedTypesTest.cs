@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -22,7 +22,6 @@
 
 extern alias csharp;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
@@ -62,10 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: GetAdditionalReferences());
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            // Symbolic execution analyzers are run by the SymbolicExecutionRunner
-            new SymbolicExecutionRunner(
-                new SymbolicExecutionAnalyzerFactory(
-                    ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new RestrictDeserializedTypes())));
+            new SymbolicExecutionRunner(new RestrictDeserializedTypes());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             FrameworkMetadataReference.SystemRuntimeSerialization

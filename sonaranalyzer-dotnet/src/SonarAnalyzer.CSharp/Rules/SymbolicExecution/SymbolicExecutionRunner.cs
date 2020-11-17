@@ -37,23 +37,18 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
         // This constructor is needed by the Roslyn framework. Please do not delete this.
-        public SymbolicExecutionRunner()
+        public SymbolicExecutionRunner() =>
+            SupportedDiagnostics = symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
+
+        // Only testing purposes.
+        internal SymbolicExecutionRunner(ISymbolicExecutionAnalyzer analyzer)
         {
+            symbolicExecutionAnalyzerFactory = new SymbolicExecutionAnalyzerFactory(ImmutableArray.Create(analyzer));
             SupportedDiagnostics = symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
         }
 
-        // Only testing purposes.
-        internal SymbolicExecutionRunner(SymbolicExecutionAnalyzerFactory symbolicExecutionAnalyzerFactory)
-        {
-            this.symbolicExecutionAnalyzerFactory = symbolicExecutionAnalyzerFactory;
-
-            SupportedDiagnostics = this.symbolicExecutionAnalyzerFactory.SupportedDiagnostics;
-        }
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterExplodedGraphBasedAnalysis(Analyze);
-        }
 
         private void Analyze(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
         {

@@ -19,7 +19,6 @@
  */
 
 extern alias csharp;
-using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
@@ -33,18 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ObjectsShouldNotBeDisposedMoreThanOnce()
-        {
-            // Symbolic execution analyzers are run by the SymbolicExecutionRunner
-            var analyzers = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new ObjectsShouldNotBeDisposedMoreThanOnce());
-            var runner = new SymbolicExecutionRunner(new SymbolicExecutionAnalyzerFactory(analyzers));
-
+        public void ObjectsShouldNotBeDisposedMoreThanOnce() =>
             Verifier.VerifyAnalyzer(@"TestCases\ObjectsShouldNotBeDisposedMoreThanOnce.cs",
-                runner,
+                new SymbolicExecutionRunner(new ObjectsShouldNotBeDisposedMoreThanOnce()),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
     }
 }
