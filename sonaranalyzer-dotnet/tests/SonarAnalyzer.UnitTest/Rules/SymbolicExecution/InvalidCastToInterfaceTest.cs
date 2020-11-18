@@ -35,14 +35,22 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         [TestCategory("Rule")]
         public void InvalidCastToInterface() =>
             Verifier.VerifyAnalyzer(@"TestCases\InvalidCastToInterface.cs",
-                new SonarDiagnosticAnalyzer[]
-                {
-                    new SymbolicExecutionRunner(new InvalidCastToInterfaceSymbolicExecution()),
-                    new InvalidCastToInterface()
-                },
+                GetAnalyzers(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void InvalidCastToInterface_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InvalidCastToInterface.CSharp9.cs", GetAnalyzers());
+
+        private static SonarDiagnosticAnalyzer[] GetAnalyzers() =>
+            new SonarDiagnosticAnalyzer[]
+                {
+                    new SymbolicExecutionRunner(new InvalidCastToInterfaceSymbolicExecution()),
+                    new InvalidCastToInterface()
+                };
     }
 }

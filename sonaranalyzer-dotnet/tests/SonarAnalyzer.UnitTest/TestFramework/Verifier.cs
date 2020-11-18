@@ -97,6 +97,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.ConsoleApplication, additionalReferences);
 
         /// <summary>
+        /// Verify analyzer from C# 9 with top level statements.
+        /// </summary>
+        public static void VerifyAnalyzerFromCSharp9Console(string path, SonarDiagnosticAnalyzer[] diagnosticAnalyzers, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.ConsoleApplication, additionalReferences);
+
+        /// <summary>
         /// Verify analyzer from C# 9 without top level statements.
         /// </summary>
         public static void VerifyAnalyzerFromCSharp9Library(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
