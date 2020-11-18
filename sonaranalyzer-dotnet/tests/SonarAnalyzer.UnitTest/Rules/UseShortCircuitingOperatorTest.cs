@@ -48,15 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod, TestCategory("Rule")]
         public void UseShortCircuitingOperators_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseShortCircuitingOperator.CSharp9.cs",
-                                    new CS.UseShortCircuitingOperator());
-#endif
-
-        [TestMethod, TestCategory("CodeFix")]
-        public void UseShortCircuitingOperators_CSharp_CodeFix() =>
-            Verifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.cs",
-                                   @"TestCases\UseShortCircuitingOperator.Fixed.cs",
-                                   new CS.UseShortCircuitingOperator(),
-                                   new CS.UseShortCircuitingOperatorFixProvider());
+                                                      new CS.UseShortCircuitingOperator());
 
         [TestMethod, TestCategory("CodeFix")]
         public void UseShortCircuitingOperators_CSharp9_CodeFix() =>
@@ -65,5 +57,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                                    new CS.UseShortCircuitingOperator(),
                                    new CS.UseShortCircuitingOperatorFixProvider(),
                                    ParseOptionsHelper.FromCSharp9);
+#endif
+
+        [TestMethod, TestCategory("CodeFix")]
+        public void UseShortCircuitingOperators_CSharp_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\UseShortCircuitingOperator.cs",
+                                   @"TestCases\UseShortCircuitingOperator.Fixed.cs",
+                                   new CS.UseShortCircuitingOperator(),
+                                   new CS.UseShortCircuitingOperatorFixProvider());
     }
 }

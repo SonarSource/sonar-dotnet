@@ -33,13 +33,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AvoidExcessiveClassCoupling() =>
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveClassCoupling.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
 
-#if NET
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void AvoidExcessiveClassCoupling_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveClassCoupling.CSharp9.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
-#endif
-
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Generic_No_Constraints() =>
@@ -163,19 +156,6 @@ public class Pointers // Compliant, enums are not counted
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveClassCoupling_InRecord_Enums_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
-using System;
-public record Pointers // Compliant, enums are not counted
-{
-    public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
-}
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 },
-                options: ParseOptionsHelper.FromCSharp9);
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Lazy_Not_Counted() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -186,25 +166,6 @@ public class Lazyness // Noncompliant {{Split this class into smaller and more s
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void AvoidExcessiveClassCoupling_Primitive_Types_Not_Counted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
-using System;
-public class Types // Compliant, pointers are not counted
-{
-    public void Foo(bool b1,
-        byte b2, sbyte b3, int i1, uint i2, long i3, ulong i4,
-        nint ni1, nuint ni2,
-        IntPtr p1, UIntPtr p2,
-        char c1, float d1,
-        double d2, string s1,
-        object o1) { }
-}
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 },
-                options: ParseOptionsHelper.FromCSharp9);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -408,23 +369,6 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveClassCoupling_Base_Records_Interfaces_NotCounted() =>
-            Verifier.VerifyCSharpAnalyzer(@"
-using System;
-using System.Runtime.Serialization;
-public record Base {}
-public record Self // FN
-    : Base, ISerializable
-{
-    public void GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-    }
-}
-",
-                new AvoidExcessiveClassCoupling { Threshold = 0 }, options: ParseOptionsHelper.FromCSharp9);
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Catch_Statements() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
@@ -470,5 +414,56 @@ public class A // Compliant, types referenced by the nameof expression are not c
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
+
+#if NET
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AvoidExcessiveClassCoupling_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveClassCoupling.CSharp9.cs", new AvoidExcessiveClassCoupling { Threshold = 1 });
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AvoidExcessiveClassCoupling_InRecord_Enums_Not_Counted() =>
+            Verifier.VerifyCSharpAnalyzer(@"
+using System;
+public record Pointers // Compliant, enums are not counted
+{
+    public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
+}
+", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AvoidExcessiveClassCoupling_Base_Records_Interfaces_NotCounted() =>
+            Verifier.VerifyCSharpAnalyzer(@"
+using System;
+using System.Runtime.Serialization;
+public record Base {}
+public record Self // FN
+    : Base, ISerializable
+{
+    public void GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+    }
+}
+", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AvoidExcessiveClassCoupling_Primitive_Types_Not_Counted() =>
+            Verifier.VerifyCSharpAnalyzer(@"
+using System;
+public class Types // Compliant, pointers are not counted
+{
+    public void Foo(bool b1,
+        byte b2, sbyte b3, int i1, uint i2, long i3, ulong i4,
+        nint ni1, nuint ni2,
+        IntPtr p1, UIntPtr p2,
+        char c1, float d1,
+        double d2, string s1,
+        object o1) { }
+}
+", new AvoidExcessiveClassCoupling { Threshold = 0 }, ParseOptionsHelper.FromCSharp9);
+#endif
     }
 }

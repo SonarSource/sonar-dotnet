@@ -43,17 +43,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\CbdeHandler.cs",
                 CS.CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
-
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CbdeHandler_CS_FromCSharp9()
         {
             System.Environment.SetEnvironmentVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
-            Verifier.VerifyAnalyzer(@"TestCases\CbdeHandler.CSharp9.cs",
-                CS.CbdeHandlerRule.MakeUnitTestInstance(null, null),
-                ParseOptionsHelper.FromCSharp9,
-                OutputKind.ConsoleApplication);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CbdeHandler.CSharp9.cs",
+                                                      CS.CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
+#endif
 
         [TestMethod]
         [TestCategory("CBDE")]
