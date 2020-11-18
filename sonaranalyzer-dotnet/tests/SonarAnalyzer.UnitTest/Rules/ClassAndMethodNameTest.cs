@@ -49,6 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_TopLevelStatement() =>
@@ -58,6 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RecordName() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RecordName.cs", new CSharp.ClassAndMethodName());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -76,10 +78,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CSharp.ClassAndMethodName(),
                 ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodName_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodName.CSharp9.cs", new CSharp.ClassAndMethodName());
+#endif
 
         [TestMethod]
         public void TestSplitToParts() =>

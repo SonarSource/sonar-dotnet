@@ -33,10 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ProvideDeserializationMethodsForOptionalFields_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.cs", new ProvideDeserializationMethodsForOptionalFields());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ProvideDeserializationMethodsForOptionalFields_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ProvideDeserializationMethodsForOptionalFields.CSharp9.cs", new ProvideDeserializationMethodsForOptionalFields());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

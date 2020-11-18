@@ -34,10 +34,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyStatement() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyStatement_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new EmptyStatement());
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -48,15 +50,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new EmptyStatement(),
                 new EmptyStatementCodeFixProvider());
 
+#if NET
         [TestMethod]
         [TestCategory("CodeFix")]
         public void EmptyStatement_CodeFix_CSharp9() =>
-            Verifier.VerifyCodeFix(
-                @"TestCases\EmptyStatement.CSharp9.cs",
-                @"TestCases\EmptyStatement.CSharp9.Fixed.cs",
-                new EmptyStatement(),
-                new EmptyStatementCodeFixProvider(),
-                ParseOptionsHelper.FromCSharp9,
-                OutputKind.ConsoleApplication);
+            Verifier.VerifyCodeFix(@"TestCases\EmptyStatement.CSharp9.cs",
+                                   @"TestCases\EmptyStatement.CSharp9.Fixed.cs",
+                                   new EmptyStatement(),
+                                   new EmptyStatementCodeFixProvider(),
+                                   ParseOptionsHelper.FromCSharp9,
+                                   OutputKind.ConsoleApplication);
+#endif
     }
 }

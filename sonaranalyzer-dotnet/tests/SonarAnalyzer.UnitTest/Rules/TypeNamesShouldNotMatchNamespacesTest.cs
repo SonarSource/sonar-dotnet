@@ -33,9 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TypeNamesShouldNotMatchNamespaces() =>
             Verifier.VerifyAnalyzer(@"TestCases\TypeNamesShouldNotMatchNamespaces.cs", new TypeNamesShouldNotMatchNamespaces());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void TypeNamesShouldNotMatchNamespaces_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TypeNamesShouldNotMatchNamespaces.CSharp9.cs", new TypeNamesShouldNotMatchNamespaces());
+#endif
     }
 }

@@ -68,10 +68,12 @@ internal class Bar
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes() => Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldUseBaseTypes.cs", new MethodsShouldUseBaseTypes());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

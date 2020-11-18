@@ -38,12 +38,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new SerializationConstructorsShouldBeSecured(),
                                     additionalReferences: GetAdditionalReferences());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\SerializationConstructorsShouldBeSecured.CSharp9.cs",
                                     new SerializationConstructorsShouldBeSecured(),
                                     GetAdditionalReferences());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

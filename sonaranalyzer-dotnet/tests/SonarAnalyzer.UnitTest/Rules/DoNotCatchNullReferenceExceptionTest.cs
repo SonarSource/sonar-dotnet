@@ -33,10 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotCatchNullReferenceException() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCatchNullReferenceException.cs", new DoNotCatchNullReferenceException());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCatchNullReferenceException_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCatchNullReferenceException.CSharp9.cs", new DoNotCatchNullReferenceException());
-
+#endif
     }
 }

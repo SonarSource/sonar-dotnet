@@ -49,6 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new TestClassShouldHaveTestMethod(),
                                     additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
+#if NET
         [DataTestMethod]
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
@@ -56,5 +57,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                             new TestClassShouldHaveTestMethod(),
                             NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)
                                 .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)));
+#endif
     }
 }

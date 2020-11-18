@@ -35,13 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
                 new csharp.DangerousGetHandleShouldNotBeCalled(),
                 additionalReferences: MetadataReferenceFacade.GetMicrosoftWin32Registry());
-
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DangerousGetHandleShouldNotBeCalled.CSharp9.cs",
                 new csharp.DangerousGetHandleShouldNotBeCalled(),
                 MetadataReferenceFacade.GetMicrosoftWin32Registry());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

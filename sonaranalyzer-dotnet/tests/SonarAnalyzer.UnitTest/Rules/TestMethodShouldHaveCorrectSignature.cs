@@ -75,6 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new TestMethodShouldHaveCorrectSignature(),
                                     additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldHaveCorrectSignature_CSharp9() =>
@@ -84,5 +85,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                     .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
                                                     .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
                                                     .ToArray());
+#endif
     }
 }

@@ -48,10 +48,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new CS.PropertiesAccessCorrectField(),
                                     ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesAccessCorrectField.CSharp9.cs", new CS.PropertiesAccessCorrectField());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

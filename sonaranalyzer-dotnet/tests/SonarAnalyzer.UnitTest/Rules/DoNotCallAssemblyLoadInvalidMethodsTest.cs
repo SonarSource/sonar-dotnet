@@ -36,12 +36,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new DoNotCallAssemblyLoadInvalidMethods(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemSecurityPermissions());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs",
                                     new DoNotCallAssemblyLoadInvalidMethods(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemSecurityPermissions());
+#endif
 
 #if NETFRAMEWORK // The overloads with Evidence are obsolete on .Net Framework 4.8 and not available on .Net Core
         [TestMethod]

@@ -33,9 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EnumerableSumInUnchecked() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumerableSumInUnchecked.cs", new EnumerableSumInUnchecked());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EnumerableSumInUnchecked_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EnumerableSumInUnchecked.CSharp9.cs", new EnumerableSumInUnchecked());
+#endif
     }
 }

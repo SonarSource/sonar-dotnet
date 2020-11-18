@@ -34,10 +34,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void JwtSigned_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.cs", new csharp.JwtSigned(), additionalReferences: NuGetMetadataReference.JWT());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_CS_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\JwtSigned.CSharp9.cs", new csharp.JwtSigned(), NuGetMetadataReference.JWT());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

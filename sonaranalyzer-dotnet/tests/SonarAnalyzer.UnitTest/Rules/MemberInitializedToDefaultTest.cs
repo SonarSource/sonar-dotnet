@@ -33,10 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MemberInitializedToDefault() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberInitializedToDefault.cs", new MemberInitializedToDefault());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberInitializedToDefault_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberInitializedToDefault.CSharp9.cs", new MemberInitializedToDefault());
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]

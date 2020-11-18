@@ -50,11 +50,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeHttpOnly_Net() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly_Net.cs",
-                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromCSharp9,
-                outputKind: OutputKind.ConsoleApplication,
-                additionalReferences: GetAdditionalReferences_NetCore());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CookieShouldBeHttpOnly_Net.cs",
+                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled), GetAdditionalReferences_NetCore());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);

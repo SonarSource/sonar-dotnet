@@ -33,10 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisposableTypesNeedFinalizers() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new DisposableTypesNeedFinalizers());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableTypesNeedFinalizers_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DisposableTypesNeedFinalizers.CSharp9.cs", new DisposableTypesNeedFinalizers());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

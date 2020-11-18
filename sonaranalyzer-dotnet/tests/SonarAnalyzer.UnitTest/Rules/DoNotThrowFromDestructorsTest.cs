@@ -33,10 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotThrowFromDestructors_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.cs", new DoNotThrowFromDestructors());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotThrowFromDestructors_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotThrowFromDestructors.CSharp9.cs", new DoNotThrowFromDestructors());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
