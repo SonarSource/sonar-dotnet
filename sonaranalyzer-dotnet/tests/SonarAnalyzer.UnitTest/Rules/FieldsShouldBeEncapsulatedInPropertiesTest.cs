@@ -33,9 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FieldsShouldBeEncapsulatedInProperties() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldBeEncapsulatedInProperties.cs", new FieldsShouldBeEncapsulatedInProperties());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldsShouldBeEncapsulatedInProperties_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldBeEncapsulatedInProperties.CSharp9.cs", new FieldsShouldBeEncapsulatedInProperties());
+#endif
     }
 }

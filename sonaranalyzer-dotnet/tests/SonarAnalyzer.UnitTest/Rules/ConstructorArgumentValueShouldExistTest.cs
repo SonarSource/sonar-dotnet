@@ -40,13 +40,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.cs",
                 new ConstructorArgumentValueShouldExist(),
                 additionalReferences: MetadataReferenceFacade.GetSystemXaml());
-
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ConstructorArgumentValueShouldExist_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConstructorArgumentValueShouldExist.CSharp9.cs",
                 new ConstructorArgumentValueShouldExist(),
                 MetadataReferenceFacade.GetSystemXaml());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

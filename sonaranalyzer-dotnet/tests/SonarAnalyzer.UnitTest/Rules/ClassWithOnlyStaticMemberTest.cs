@@ -33,9 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ClassWithOnlyStaticMember() =>
             Verifier.VerifyAnalyzer(@"TestCases\ClassWithOnlyStaticMember.cs", new ClassWithOnlyStaticMember());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassWithOnlyStaticMember_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassWithOnlyStaticMember.CSharp9.cs", new ClassWithOnlyStaticMember());
+#endif
     }
 }

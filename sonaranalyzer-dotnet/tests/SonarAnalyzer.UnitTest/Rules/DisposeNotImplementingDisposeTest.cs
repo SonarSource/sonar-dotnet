@@ -34,10 +34,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\DisposeNotImplementingDispose.cs", new DisposeNotImplementingDispose(),
                 ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposeNotImplementingDispose_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposeNotImplementingDispose.CSharp9.cs", new DisposeNotImplementingDispose());
-
+#endif
     }
 }

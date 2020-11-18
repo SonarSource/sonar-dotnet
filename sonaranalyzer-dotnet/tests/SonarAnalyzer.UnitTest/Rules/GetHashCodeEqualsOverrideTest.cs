@@ -36,11 +36,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new GetHashCodeEqualsOverride(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void GetHashCodeEqualsOverride_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeEqualsOverride.CSharp9.cs",
                                                       new GetHashCodeEqualsOverride(),
                                                       additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
+#endif
     }
 }

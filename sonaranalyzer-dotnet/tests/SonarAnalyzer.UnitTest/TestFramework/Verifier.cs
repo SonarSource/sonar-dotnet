@@ -100,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         /// Verify analyzer from C# 9 without top level statements.
         /// </summary>
         public static void VerifyAnalyzerFromCSharp9Library(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-        VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                           IEnumerable<ParseOptions> options = null,

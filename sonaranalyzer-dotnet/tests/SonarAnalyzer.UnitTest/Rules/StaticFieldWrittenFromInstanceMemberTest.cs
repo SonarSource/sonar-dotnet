@@ -38,10 +38,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                                     options: ParseOptionsHelper.FromCSharp8);
-
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldWrittenFromInstanceMember_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\StaticFieldWrittenFromInstanceMember.CSharp9.cs", new StaticFieldWrittenFromInstanceMember());
+#endif
     }
 }

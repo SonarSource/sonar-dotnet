@@ -36,9 +36,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new ReturnEmptyCollectionInsteadOfNull(),
                                     additionalReferences: MetadataReferenceFacade.GetSystemXml());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ReturnEmptyCollectionInsteadOfNull_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReturnEmptyCollectionInsteadOfNull.CSharp9.cs", new ReturnEmptyCollectionInsteadOfNull());
+#endif
     }
 }

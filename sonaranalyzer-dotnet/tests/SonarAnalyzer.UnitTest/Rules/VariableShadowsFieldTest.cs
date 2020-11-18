@@ -33,9 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void VariableShadowsField() =>
             Verifier.VerifyAnalyzer(@"TestCases\VariableShadowsField.cs", new VariableShadowsField(), ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableShadowsField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\VariableShadowsField.CSharp9.cs", new VariableShadowsField());
+#endif
     }
 }

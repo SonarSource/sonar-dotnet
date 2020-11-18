@@ -46,10 +46,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion))
                     .ToImmutableArray());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldBeStatic_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new MemberShouldBeStatic());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

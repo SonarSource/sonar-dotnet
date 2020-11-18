@@ -33,10 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EqualityOnModulus() =>
             Verifier.VerifyAnalyzer(@"TestCases\EqualityOnModulus.cs", new EqualityOnModulus());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EqualityOnModulus_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new EqualityOnModulus());
-
+#endif
     }
 }

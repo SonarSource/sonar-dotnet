@@ -39,10 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideChangedDefaultValue_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new MethodOverrideChangedDefaultValue());
+#endif
 
         [TestMethod]
         [TestCategory("CodeFix")]

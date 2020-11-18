@@ -33,10 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void StaticSealedClassProtectedMembers() =>
             Verifier.VerifyAnalyzer(@"TestCases\StaticSealedClassProtectedMembers.cs", new StaticSealedClassProtectedMembers());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticSealedClassProtectedMembers_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticSealedClassProtectedMembers.CSharp9.cs", new StaticSealedClassProtectedMembers());
-
+#endif
     }
 }

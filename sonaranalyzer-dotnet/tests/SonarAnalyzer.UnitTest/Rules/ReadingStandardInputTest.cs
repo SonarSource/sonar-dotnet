@@ -37,10 +37,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ReadingStandardInput_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ReadingStandardInput.cs", new CSharp.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ReadingStandardInput_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReadingStandardInput.CSharp9.cs", new CSharp.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

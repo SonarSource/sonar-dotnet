@@ -51,11 +51,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CSharp.DeclareTypesInNamespaces(),
                 options: ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_AfterCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs",
                 new CSharp.DeclareTypesInNamespaces());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

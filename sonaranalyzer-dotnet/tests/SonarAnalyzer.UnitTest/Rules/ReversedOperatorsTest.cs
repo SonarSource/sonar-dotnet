@@ -33,10 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ReversedOperators_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ReversedOperators.cs", new CS.ReversedOperators());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ReversedOperators_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReversedOperators.CSharp9.cs", new CS.ReversedOperators());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

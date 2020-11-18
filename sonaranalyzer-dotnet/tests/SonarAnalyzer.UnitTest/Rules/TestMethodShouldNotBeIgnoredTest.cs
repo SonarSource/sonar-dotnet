@@ -90,6 +90,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                         .Concat(NuGetMetadataReference.XunitFrameworkV1)
                                         .ToArray());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_CSharp9() =>
@@ -99,5 +100,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                     .Concat(NuGetMetadataReference.XunitFrameworkV1)
                                                     .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
                                                     .ToArray());
+#endif
     }
 }

@@ -44,9 +44,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisposeFromDispose_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.CSharp8.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposeFromDispose_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposeFromDispose.CSharp9.cs", new DisposeFromDispose());
+#endif
     }
 }

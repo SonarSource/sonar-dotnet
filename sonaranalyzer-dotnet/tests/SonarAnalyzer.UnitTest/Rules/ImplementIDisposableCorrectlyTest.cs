@@ -35,12 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp8);
         }
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_FromCSharp9()
         {
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ImplementIDisposableCorrectly.CSharp9.cs", new ImplementIDisposableCorrectly());
         }
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

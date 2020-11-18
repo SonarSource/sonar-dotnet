@@ -33,9 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AnonymousDelegateEventUnsubscribe() =>
             Verifier.VerifyAnalyzer(@"TestCases\AnonymousDelegateEventUnsubscribe.cs", new AnonymousDelegateEventUnsubscribe());
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AnonymousDelegateEventUnsubscribe_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AnonymousDelegateEventUnsubscribe.CSharp9.cs", new AnonymousDelegateEventUnsubscribe());
+#endif
     }
 }
