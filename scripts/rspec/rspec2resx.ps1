@@ -2,7 +2,7 @@
 
 .SYNOPSIS
 This script allows to convert a directory full of rspec files into a resx file
-You should not call it manually, it will be called during the build
+You should not call it manually, it will be called during the rspec update.
 
 .DESCRIPTION
 
