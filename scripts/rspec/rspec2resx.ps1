@@ -129,6 +129,7 @@ function CreateStringResources($rules, $resgenPath) {
         [void]$resources.Add("${rule}_Category=${severity} $($categoriesMap.Get_Item(${json}.type))")
         [void]$resources.Add("${rule}_IsActivatedByDefault=$(${sonarWayRules}.ruleKeys -Contains ${rule})")
         [void]$resources.Add("${rule}_Severity=${severity}") # TODO see how can we implement lowering the severity for certain rules
+        [void]$resources.Add("${rule}_Status=$(${json}.status)")
         [void]$resources.Add("${rule}_Tags=" + (${json}.tags -Join ","))
         [void]$resources.Add("${rule}_Scope=$(${json}.scope)")
 
