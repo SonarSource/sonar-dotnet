@@ -46,6 +46,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void RestrictDeserializedTypesFormatters_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RestrictDeserializedTypes.CSharp9.cs", GetAnalyzer());
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void RestrictDeserializedTypesJavaScriptSerializer() =>
             Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs",
                 GetAnalyzer(),
