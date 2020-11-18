@@ -40,12 +40,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new CS.UnnecessaryUsings(),
                                     additionalReferences: GetAdditionalReferences());
 
+#if NET
+
         [TestMethod]
         [TestCategory("Rule")]
         public void UnnecessaryUsings_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnnecessaryUsings.CSharp9.cs", new CS.UnnecessaryUsings());
-
-#if NETCOREAPP
 
         [TestMethod]
         [TestCategory("Rule")]

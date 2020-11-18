@@ -151,10 +151,6 @@ function Invoke-UnitTests([string]$binPath, [string]$buildConfiguration) {
 
     $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
 
-    Write-Header "Running unit tests .NET Core 3.1"
-    dotnet test  $testProjFileName -f netcoreapp3.1 -v minimal -c $buildConfiguration --no-build --no-restore
-    Test-ExitCode "ERROR: Unit tests for .NET Core 3.1 FAILED."
-
     Write-Header "Running unit tests .NET 5"
     dotnet test  $testProjFileName -f net5.0 -v minimal -c $buildConfiguration --no-build --no-restore
     Test-ExitCode "ERROR: Unit tests for .NET 5 FAILED."

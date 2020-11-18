@@ -66,7 +66,7 @@ stages:
 
           Write-Host "Remove .Net 5 target for UnitTest project"
 
-          ((Get-Content -Path $testProjFileName -raw) -Replace "net48;netcoreapp3.1;net5.0","net48;netcoreapp3.1") | Set-Content -Path $testProjFileName
+          ((Get-Content -Path $testProjFileName -raw) -Replace "net48;net5.0","net48") | Set-Content -Path $testProjFileName
 
           Write-Host "Show test project after we modified the target frameworks to exclude net5"
           Get-Content -Path $testProjFileName
@@ -213,7 +213,7 @@ stages:
           projectName: 'SonarAnalyzer .Net'
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
-            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.xml"
+            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.**.xml"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
@@ -231,7 +231,7 @@ stages:
           projectName: 'SonarAnalyzer .Net'
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
-            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.xml"
+            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/**/coverage.**.xml"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(Build.SourceVersion)
@@ -251,20 +251,18 @@ stages:
           & dotnet build $testProjFileName -c $(BuildConfiguration)
           Test-ExitCode "ERROR: UnitTest project build FAILED."
 
-          Write-Host "List Sonar*.dll files"
-          Get-ChildItem -Recurse .\tests\SonarAnalyzer.UnitTest\bin\${BuildConfiguration}\ -Filter Sonar*.dll
+          Write-Host "Register OpenCover profilers!"
 
-          Write-Host "UTs .Net 4.8 and compute coverage"
-          & $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test tests\SonarAnalyzer.UnitTest\bin\$(BuildConfiguration)\net48\SonarAnalyzer.UnitTest.dll --nologo" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.xml -oldStyle -register:Path32
-          Test-ExitCode "ERROR: Unit tests for .NET 4.8 and compute coverage FAILED."
+          # This step needs to be manually done on CI agents. See https://github.com/OpenCover/opencover/raw/master/main/OpenCover.Documentation/Usage.pdf
+          regsvr32 $(NUGET_PACKAGES)\opencover\4.7.922\tools\x86\OpenCover.Profiler.dll
+          regsvr32 $(NUGET_PACKAGES)\opencover\4.7.922\tools\x64\OpenCover.Profiler.dll
 
-          Write-Host "UTs .Net Core 3.1"
-          & dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f netcoreapp3.1
-          Test-ExitCode "ERROR: Unit tests for .NET Core 3.1 FAILED."
-
-          Write-Host "UTs .Net 5"
-          & dotnet test $testProjFileName -c $(BuildConfiguration) --no-build --no-restore --nologo -f net5.0
-          Test-ExitCode "ERROR: Unit tests for .NET 5 FAILED."
+          $supportedFrameworks = @('net48', 'net5.0')
+          Foreach ($framework in $supportedFrameworks)
+          {
+            & $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test $testProjFileName --no-build -c $(BuildConfiguration) -f $framework" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.$framework.xml -oldStyle
+            Test-ExitCode "ERROR: Unit tests for $framework FAILED."
+          }
 
           cd ..
         displayName: '.Net UTs'
