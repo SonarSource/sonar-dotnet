@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var literal = (LiteralExpressionSyntax)c.Node;
                     var text = literal.Token.Text;
 
-                    if (text[text.Length - 1] == 'l' && NotUnsigned(text))
+                    if (text[text.Length - 1] == 'l' && !ShouldIgnore(text))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(literal.SyntaxTree,
                             new TextSpan(literal.Span.End - 1, 1))));
@@ -58,8 +58,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.NumericLiteralExpression);
         }
 
-        // a number may be `2ul` or `2Ul` and it's easier to read
-        private static bool NotUnsigned(string text) =>
-            text.Length >= 2 && char.ToUpperInvariant(text[text.Length - 2]) != 'U';
+        // We know that @text is a number that ends with 'l'. Being a number, it has at least one digit (thus 2 characters).
+        // If it has 3 characters or more, it could be `2ul` or `2Ul` and we ignore this, because 'l' is easier to read.
+        private static bool ShouldIgnore(string text) =>
+            text.Length > 2 && char.ToUpperInvariant(text[text.Length - 2]) == 'U';
     }
 }

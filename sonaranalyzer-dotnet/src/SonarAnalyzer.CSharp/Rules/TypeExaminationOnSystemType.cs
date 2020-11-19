@@ -51,14 +51,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     var invocation = (InvocationExpressionSyntax)c.Node;
 
                     var invocationString = invocation.ToString();
-                    if (invocationString.Contains("IsInstanceOfType") ||
-                        invocationString.Contains("GetType"))
+                    if ((invocationString.Contains("IsInstanceOfType") || invocationString.Contains("GetType")) &&
+                        c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
                     {
-                        if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
-                        {
-                            return;
-                        }
-
                         CheckGetTypeCallOnType(invocation, methodSymbol, c);
                         CheckIsInstanceOfTypeCallWithTypeArgument(invocation, methodSymbol, c);
                     }

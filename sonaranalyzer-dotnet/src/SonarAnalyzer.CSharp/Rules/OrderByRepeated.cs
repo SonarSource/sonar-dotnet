@@ -46,29 +46,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var outerInvocation = (InvocationExpressionSyntax)c.Node;
-                    if (!(outerInvocation.Expression is MemberAccessExpressionSyntax memberAccess))
+                    if (outerInvocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+                        memberAccess.Expression is InvocationExpressionSyntax innerInvocation &&
+                        IsMethodOrderByExtension(outerInvocation, c.SemanticModel) &&
+                        IsOrderByOrThenBy(innerInvocation, c.SemanticModel))
                     {
-                        return;
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
                     }
 
-                    var innerInvocation = memberAccess.Expression as InvocationExpressionSyntax;
-                    if (innerInvocation == null)
-                    {
-                        return;
-                    }
-
-                    if (!IsMethodOrderByExtension(outerInvocation, c.SemanticModel))
-                    {
-                        return;
-                    }
-
-                    if (!IsMethodOrderByExtension(innerInvocation, c.SemanticModel) &&
-                        !IsMethodThenByExtension(innerInvocation, c.SemanticModel))
-                    {
-                        return;
-                    }
-
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
+                    static bool IsOrderByOrThenBy(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+                        IsMethodOrderByExtension(invocation, semanticModel) || IsMethodThenByExtension(invocation, semanticModel);
                 },
                 SyntaxKind.InvocationExpression);
         }

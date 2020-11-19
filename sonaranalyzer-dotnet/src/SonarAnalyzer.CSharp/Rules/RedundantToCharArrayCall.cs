@@ -47,27 +47,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
 
-                    if (!(invocation.Parent is ElementAccessExpressionSyntax) &&
-                        !(invocation.Parent is ForEachStatementSyntax))
+                    if ((invocation.Parent is ElementAccessExpressionSyntax || invocation.Parent is ForEachStatementSyntax) &&
+                        invocation.ToString().Contains("ToCharArray") &&
+                        invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+                        c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+                        methodSymbol.Name == "ToCharArray" &&
+                        methodSymbol.IsInType(KnownType.System_String) &&
+                        methodSymbol.Parameters.Length == 0)
                     {
-                        return;
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
                     }
-
-                    if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
-                    {
-                        return;
-                    }
-
-                    if (!invocation.ToString().Contains("ToCharArray") ||
-                        !(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
-                        methodSymbol.Name != "ToCharArray" ||
-                        !methodSymbol.IsInType(KnownType.System_String) ||
-                        methodSymbol.Parameters.Length != 0)
-                    {
-                        return;
-                    }
-
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
                 },
                 SyntaxKind.InvocationExpression);
         }

@@ -47,18 +47,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     var expression = invocation.Expression;
-                    if (!(expression is MemberAccessExpressionSyntax memberAccess))
+                    if (expression is MemberAccessExpressionSyntax memberAccess &&
+                        IsSumInsideUnchecked(invocation) &&
+                        c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+                        IsSumOnInteger(methodSymbol))
                     {
-                        return;
-                    }
-
-                    if (IsSumInsideUnchecked(invocation))
-                    {
-                        var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-                        if (IsSumOnInteger(methodSymbol))
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
-                        }
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);

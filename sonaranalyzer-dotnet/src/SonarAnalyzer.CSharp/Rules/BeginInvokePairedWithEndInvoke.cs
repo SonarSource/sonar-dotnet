@@ -62,36 +62,24 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.LocalFunctionStatement,
         }.ToImmutableHashSet();
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-
-                    if (!invocation.ToString().Contains("BeginInvoke"))
-                    {
-                        return;
-                    }
-
-                    var callbackArg = GetCallbackArg(invocation);
-                    if (callbackArg == null)
-                    {
-                        return;
-                    }
-
-                    var semantic = c.SemanticModel;
-                    var methodSymbol = GetMethodSymbol(invocation, semantic);
-                    if (methodSymbol?.Name == "BeginInvoke" &&
+                    const string BeginInvoke = "BeginInvoke";
+                    if (invocation.ToString().Contains(BeginInvoke) &&
+                        GetCallbackArg(invocation) is { } callbackArg &&
+                        GetMethodSymbol(invocation, c.SemanticModel) is { } methodSymbol &&
+                        methodSymbol.Name == BeginInvoke &&
                         IsDelegate(methodSymbol) &&
-                        (callbackArg.IsNullLiteral() || !CallbackMayContainEndInvoke(callbackArg, semantic)) &&
-                        !ParentMethodContainsEndInvoke(invocation, semantic))
+                        (callbackArg.IsNullLiteral() || !CallbackMayContainEndInvoke(callbackArg, c.SemanticModel)) &&
+                        !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
                     {
                         var location = ((SyntaxToken)invocation.GetMethodCallIdentifier()).GetLocation();
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
                     }
                 },
                 SyntaxKind.InvocationExpression);
-        }
 
         private static bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
         {

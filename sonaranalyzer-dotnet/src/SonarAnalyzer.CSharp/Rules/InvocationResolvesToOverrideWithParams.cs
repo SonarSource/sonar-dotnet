@@ -66,12 +66,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 argumentList.Arguments.Count == 0 ||
                 !(context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol invokedMethodSymbol) ||
                 !invokedMethodSymbol.Parameters.Any() ||
-                !invokedMethodSymbol.Parameters.Last().IsParams)
-            {
-                return;
-            }
-
-            if (IsInvocationWithExplicitArray(argumentList, invokedMethodSymbol, context.SemanticModel))
+                !invokedMethodSymbol.Parameters.Last().IsParams ||
+                IsInvocationWithExplicitArray(argumentList, invokedMethodSymbol, context.SemanticModel))
             {
                 return;
             }

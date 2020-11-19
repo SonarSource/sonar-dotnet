@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -103,35 +104,20 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var addExpression = (TBinaryExpressionSyntax)c.Node;
+                    var isInCheckedContext = new Lazy<bool>(() => IsInCheckedContext(addExpression, c.SemanticModel));
+
                     var leftNode = GetLeftNode(addExpression);
-
-                    var isInCheckedContext = false;
-                    // SemanticModel calls are expensive
-                    var ranSemanticCheck = false;
-
-                    if (IsPathDelimiter(leftNode))
+                    if (IsPathDelimiter(leftNode) && isInCheckedContext.Value)
                     {
-                        isInCheckedContext = IsInCheckedContext(addExpression, c.SemanticModel);
-                        ranSemanticCheck = true;
-                        if (isInCheckedContext)
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], leftNode.GetLocation(),
-                                PathDelimiterMessage));
-                        }
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], leftNode.GetLocation(),
+                            PathDelimiterMessage));
                     }
 
                     var rightNode = GetRightNode(addExpression);
-                    if (IsPathDelimiter(rightNode))
+                    if (IsPathDelimiter(rightNode) && isInCheckedContext.Value)
                     {
-                        if (!ranSemanticCheck)
-                        {
-                            isInCheckedContext = IsInCheckedContext(addExpression, c.SemanticModel);
-                        }
-                        if (isInCheckedContext)
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], rightNode.GetLocation(),
-                                PathDelimiterMessage));
-                        }
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], rightNode.GetLocation(),
+                            PathDelimiterMessage));
                     }
                 },
                 StringConcatenateExpressions);

@@ -35,7 +35,6 @@ namespace Tests.Diagnostics
         }
 
         public void Foo() { }
-
     }
 
     static class MyExtensions

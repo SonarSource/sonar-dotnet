@@ -56,6 +56,10 @@ namespace SonarAnalyzer.Rules
             {
                 var stringLiteral = (TLiteralExpression)c.Node;
                 var literalValue = GetValueText(stringLiteral);
+                if (IsLocalHost(literalValue))
+                {
+                    return;
+                }
 
                 var variableName = GetAssignedVariableName(stringLiteral);
                 if (variableName != null &&
@@ -69,9 +73,7 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                if (literalValue == "::" ||
-                    literalValue == "127.0.0.1" ||
-                    !IPAddress.TryParse(literalValue, out var address))
+                if (!IPAddress.TryParse(literalValue, out var address))
                 {
                     return;
                 }
@@ -84,5 +86,8 @@ namespace SonarAnalyzer.Rules
 
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
             };
+
+        private static bool IsLocalHost(string s) =>
+            s == "::" || s == "127.0.0.1";
     }
 }
