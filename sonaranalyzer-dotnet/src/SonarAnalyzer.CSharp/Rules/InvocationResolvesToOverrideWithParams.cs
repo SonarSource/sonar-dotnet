@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -62,15 +62,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckCall(SyntaxNode node, ArgumentListSyntax argumentList, SyntaxNodeAnalysisContext context)
         {
-            if (!(context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol invokedMethodSymbol) ||
+            if (argumentList == null ||
+                argumentList.Arguments.Count == 0 ||
+                !(context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol invokedMethodSymbol) ||
                 !invokedMethodSymbol.Parameters.Any() ||
                 !invokedMethodSymbol.Parameters.Last().IsParams ||
-                argumentList == null)
-            {
-                return;
-            }
-
-            if (IsInvocationWithExplicitArray(argumentList, invokedMethodSymbol, context.SemanticModel))
+                IsInvocationWithExplicitArray(argumentList, invokedMethodSymbol, context.SemanticModel))
             {
                 return;
             }

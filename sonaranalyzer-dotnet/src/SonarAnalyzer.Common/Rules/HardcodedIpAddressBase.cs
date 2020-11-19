@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -56,16 +56,7 @@ namespace SonarAnalyzer.Rules
             {
                 var stringLiteral = (TLiteralExpression)c.Node;
                 var literalValue = GetValueText(stringLiteral);
-
-                if (literalValue == "::" ||
-                    literalValue == "127.0.0.1" ||
-                    !IPAddress.TryParse(literalValue, out var address))
-                {
-                    return;
-                }
-
-                if (address.AddressFamily == AddressFamily.InterNetwork &&
-                    literalValue.Split('.').Length != 4)
+                if (IsLocalHost(literalValue))
                 {
                     return;
                 }
@@ -82,7 +73,21 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
+                if (!IPAddress.TryParse(literalValue, out var address))
+                {
+                    return;
+                }
+
+                if (address.AddressFamily == AddressFamily.InterNetwork &&
+                    literalValue.Split('.').Length != 4)
+                {
+                    return;
+                }
+
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
             };
+
+        private static bool IsLocalHost(string s) =>
+            s == "::" || s == "127.0.0.1";
     }
 }

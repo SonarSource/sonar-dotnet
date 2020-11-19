@@ -28,7 +28,7 @@ namespace Tests.TestCases
         public void TestOk()
         {
             const uint a = 0U;
-            const long b = 0L;
+            const long b = 100L;
             const ulong c = 0UL;
             const ulong d = 0UL;
             const decimal e = 1.2M;

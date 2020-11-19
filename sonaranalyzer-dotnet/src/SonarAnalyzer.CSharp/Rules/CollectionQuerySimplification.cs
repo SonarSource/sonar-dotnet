@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -95,26 +95,19 @@ namespace SonarAnalyzer.Rules.CSharp
             const string CountName = "Count";
 
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
-                methodSymbol.Name != CountName ||
-                invocation.ArgumentList == null ||
-                invocation.ArgumentList.Arguments.Any() ||
-                !methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
-            {
-                return;
-            }
-
-            if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
-            {
-                return;
-            }
-
-            var symbol = context.SemanticModel.GetTypeInfo(memberAccess.Expression).Type;
-            if (symbol.GetMembers(CountName).OfType<IPropertySymbol>().Any())
+            if (invocation.ArgumentList?.Arguments.Count == 0 &&
+                invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+                context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+                methodSymbol.Name == CountName &&
+                methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T) &&
+                HasCountProperty(memberAccess.Expression, context.SemanticModel))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(invocation),
                     string.Format(MessageUseInstead, $"'{CountName}' property")));
             }
+
+            static bool HasCountProperty(ExpressionSyntax expression, SemanticModel semanticModel) =>
+                semanticModel.GetTypeInfo(expression).Type.GetMembers(CountName).OfType<IPropertySymbol>().Any();
         }
 
         private static void CheckToCollectionCalls(SyntaxNodeAnalysisContext context)

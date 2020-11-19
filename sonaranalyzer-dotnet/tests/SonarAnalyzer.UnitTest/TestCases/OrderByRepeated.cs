@@ -20,5 +20,26 @@ namespace Tests.Diagnostics
                 .ThenBy(i => i, StringComparer.CurrentCultureIgnoreCase)
                 .OrderBy(i => i); //Noncompliant
         }
+
+        public void Coverage()
+        {
+            new int[] { 1, 2, 3 }.OrderBy(i => i).Count();
+            new int[] { 1, 2, 3 }.Select(i => i).OrderBy(i => i);
+            new int[] { 1, 2, 3 }.OrderBy("x").ThenBy("x");
+            new int[] { 1, 2, 3 }.OrderBy(i => i).ThenBy("x");
+            new int[] { 1, 2, 3 }.OrderBy(i => i).OrderBy("x"); // Noncompliant
+            new int[] { 1, 2, 3 }.OrderBy("x").ThenBy(i => i);
+            var array = new int[] { 1, 2, 3 };
+            MyExtensions.OrderBy(MyExtensions.OrderBy(array, "x"), "x");
+            Foo();
+        }
+
+        public void Foo() { }
+    }
+
+    static class MyExtensions
+    {
+        public static IOrderedEnumerable<int> OrderBy(this IEnumerable<int> source, string x) => null;
+        public static IEnumerable<int> ThenBy(this IEnumerable<int> source, string x) => null;
     }
 }
