@@ -40,9 +40,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyNullableValueAccess_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyNullableValueAccess.CSharp9.cs", new SymbolicExecutionRunner(new EmptyNullableValueAccess()));
+#endif
     }
 }

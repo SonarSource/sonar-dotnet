@@ -41,10 +41,12 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void InvalidCastToInterface_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InvalidCastToInterface.CSharp9.cs", GetAnalyzers());
+#endif
 
         private static SonarDiagnosticAnalyzer[] GetAnalyzers() =>
             new SonarDiagnosticAnalyzer[]

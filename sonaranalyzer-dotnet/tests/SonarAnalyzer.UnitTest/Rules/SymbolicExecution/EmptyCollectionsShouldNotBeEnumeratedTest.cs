@@ -43,9 +43,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs", new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
+#endif
     }
 }

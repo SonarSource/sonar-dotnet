@@ -18,24 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NETFRAMEWORK // These serializers are available only when targeting .Net Framework
+#if NET || NETFRAMEWORK
 
 extern alias csharp;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+#if NETFRAMEWORK
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.UnitTest.MetadataReferences;
+#endif
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class RestrictDeserializedTypesTest
     {
+#if NETFRAMEWORK // These serializers are available only when targeting .Net Framework
         [TestMethod]
         [TestCategory("Rule")]
         public void RestrictDeserializedTypesFormatters() =>
@@ -43,11 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetAdditionalReferences());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void RestrictDeserializedTypesFormatters_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RestrictDeserializedTypes.CSharp9.cs", GetAnalyzer());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -65,14 +63,22 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetAdditionalReferences());
 
-        private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            new SymbolicExecutionRunner(new RestrictDeserializedTypes());
-
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             FrameworkMetadataReference.SystemRuntimeSerialization
             .Union(FrameworkMetadataReference.SystemRuntimeSerializationFormattersSoap)
             .Union(FrameworkMetadataReference.SystemWeb)
             .Union(FrameworkMetadataReference.SystemWebExtensions);
+#endif
+
+#if NET
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RestrictDeserializedTypesFormatters_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RestrictDeserializedTypes.CSharp9.cs", GetAnalyzer());
+#endif
+
+        private static SonarDiagnosticAnalyzer GetAnalyzer() =>
+            new SymbolicExecutionRunner(new RestrictDeserializedTypes());
     }
 }
 

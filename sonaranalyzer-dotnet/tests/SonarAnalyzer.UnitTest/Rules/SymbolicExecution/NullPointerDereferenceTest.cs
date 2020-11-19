@@ -91,10 +91,12 @@ public static class Utils
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NullPointerDereference.CSharp9.cs", GetAnalyzer());
+#endif
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             new SymbolicExecutionRunner(new NullPointerDereference());

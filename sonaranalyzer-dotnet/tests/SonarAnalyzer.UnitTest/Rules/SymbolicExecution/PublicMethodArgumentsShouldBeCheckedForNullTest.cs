@@ -40,10 +40,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs",
                 new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()));
+#endif
+
     }
 }
