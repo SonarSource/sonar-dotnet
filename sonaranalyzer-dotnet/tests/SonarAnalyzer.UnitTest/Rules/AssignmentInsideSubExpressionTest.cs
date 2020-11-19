@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,11 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void AssignmentInsideSubExpression()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\AssignmentInsideSubExpression.cs",
-                new AssignmentInsideSubExpression(),
-                options: ParseOptionsHelper.FromCSharp8);
-        }
+        public void AssignmentInsideSubExpression() =>
+            Verifier.VerifyAnalyzer(@"TestCases\AssignmentInsideSubExpression.cs", new AssignmentInsideSubExpression(), options: ParseOptionsHelper.FromCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AssignmentInsideSubExpression_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AssignmentInsideSubExpression.CSharp9.cs", new AssignmentInsideSubExpression());
     }
 }
