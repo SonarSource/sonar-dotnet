@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -343,6 +343,10 @@ class Program
                     {
                         string text = null;
                         return text.ToLower();
+                        string Method(string s)
+                        {
+                            return s.ToLower();
+                        }
                     }
 
                     [SomeAttribute]
@@ -350,9 +354,37 @@ class Program
                     {
                         string text = null;
                         return text.ToLower(); // +1
+                        string Method(string s)
+                        {
+                            return s.ToLower(); // +1
+                        }
                     }
                 }",
-                15);
+                19, 22);
+        }
+
+        [TestMethod]
+        public void ExcludeFromTestCoverage_AttributeOnLocalFunction()
+        {
+            AssertLinesOfCode(
+              @"using System.Diagnostics.CodeAnalysis;
+                public class ComplicatedCode
+                {
+                    [SomeAttribute]
+                    public string ComplexFoo2()
+                    {
+                        string text = null;
+                        return text.ToLower(); // +1
+
+                        [ExcludeFromCodeCoverage]
+                        string ComplexFoo()
+                        {
+                            string text = null;
+                            return text.ToLower(); // +1 , FP
+                        }
+                    }
+                }",
+                8, 14);
         }
 
         [TestMethod]

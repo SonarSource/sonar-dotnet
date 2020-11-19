@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -238,6 +238,29 @@ End Module";
     }
 }";
 
+            var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance);
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void IsGenerated_On_GeneratedLocalFunctionTree()
+        {
+            const string source =
+@"namespace Generated
+{
+    class MyClass
+    {
+        void M()
+        {
+            ;;;;
+            [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            void LocalFunction()
+            {
+                ;;;
+            }
+        }
+    }
+}";
             var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance);
             result.Should().BeTrue();
         }
