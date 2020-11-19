@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -42,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<string> ReservedMethods = new HashSet<string> { nameof(string.Equals) };
+        private const string EqualsName = nameof(string.Equals);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -61,7 +60,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (!IsStringEqualsMethod(memberAccessExpression, c.SemanticModel))
+                    if (!memberAccessExpression.ToStringContains(EqualsName) ||
+                        !IsStringEqualsMethod(memberAccessExpression, c.SemanticModel))
                     {
                         return;
                     }
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodName = semanticModel.GetSymbolInfo(memberAccessExpression.Name);
 
             return methodName.Symbol.IsInType(KnownType.System_String) &&
-                   ReservedMethods.Contains(methodName.Symbol.Name);
+                   methodName.Symbol.Name == EqualsName;
         }
 
         private static bool IsStringIdentifier(ExpressionSyntax expression, SemanticModel semanticModel)
