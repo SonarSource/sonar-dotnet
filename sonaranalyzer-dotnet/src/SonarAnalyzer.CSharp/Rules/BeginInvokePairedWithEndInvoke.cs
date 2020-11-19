@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,7 +28,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.CSharp;
 using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -63,27 +62,24 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.LocalFunctionStatement,
         }.ToImmutableHashSet();
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    var semantic = c.SemanticModel;
-                    var methodSymbol = GetMethodSymbol(invocation, semantic);
-                    if (methodSymbol?.Name == "BeginInvoke" && IsDelegate(methodSymbol))
+                    const string BeginInvoke = "BeginInvoke";
+                    if (invocation.ToStringContains(BeginInvoke) &&
+                        GetCallbackArg(invocation) is { } callbackArg &&
+                        GetMethodSymbol(invocation, c.SemanticModel) is { } methodSymbol &&
+                        methodSymbol.Name == BeginInvoke &&
+                        IsDelegate(methodSymbol) &&
+                        (callbackArg.IsNullLiteral() || !CallbackMayContainEndInvoke(callbackArg, c.SemanticModel)) &&
+                        !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
                     {
-                        var callbackArg = GetCallbackArg(invocation);
-                        if (callbackArg != null &&
-                            (callbackArg.IsNullLiteral() || !CallbackMayContainEndInvoke(callbackArg, semantic)) &&
-                            !ParentMethodContainsEndInvoke(invocation, semantic))
-                        {
-                            var location = ((SyntaxToken)invocation.GetMethodCallIdentifier()).GetLocation();
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
-                        }
+                        var location = ((SyntaxToken)invocation.GetMethodCallIdentifier()).GetLocation();
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
                     }
                 },
                 SyntaxKind.InvocationExpression);
-        }
 
         private static bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
         {
@@ -94,10 +90,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private ExpressionSyntax GetCallbackArg(InvocationExpressionSyntax invocationExpression)
         {
-            var callbackArgPos = invocationExpression.ArgumentList.Arguments.Count - 2;
-            var callbackArg = GetArgumentExpressionByNameOrPosition(invocationExpression, "callback", callbackArgPos)
-                ?.RemoveParentheses();
-            return callbackArg;
+            if (invocationExpression.ArgumentList.Arguments.Count >= 2)
+            {
+                var callbackArgPos = invocationExpression.ArgumentList.Arguments.Count - 2;
+                var callbackArg = GetArgumentExpressionByNameOrPosition(invocationExpression, "callback", callbackArgPos)
+                    ?.RemoveParentheses();
+                return callbackArg;
+            }
+
+            return null;
         }
 
         /// <summary>

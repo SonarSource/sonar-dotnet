@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -47,26 +47,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
 
-                    if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
-                        methodSymbol.Name != "ToCharArray" ||
-                        !methodSymbol.IsInType(KnownType.System_String) ||
-                        methodSymbol.Parameters.Length != 0)
+                    if ((invocation.Parent is ElementAccessExpressionSyntax || invocation.Parent is ForEachStatementSyntax) &&
+                        invocation.ToStringContains("ToCharArray") &&
+                        invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+                        c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+                        methodSymbol.Name == "ToCharArray" &&
+                        methodSymbol.IsInType(KnownType.System_String) &&
+                        methodSymbol.Parameters.Length == 0)
                     {
-                        return;
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
                     }
-
-                    if (!(invocation.Parent is ElementAccessExpressionSyntax) &&
-                        !(invocation.Parent is ForEachStatementSyntax))
-                    {
-                        return;
-                    }
-
-                    if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
-                    {
-                        return;
-                    }
-
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
                 },
                 SyntaxKind.InvocationExpression);
         }

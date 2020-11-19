@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -59,15 +59,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-                    if (!methodSymbol.IsInType(KnownType.System_Type))
+                    if (invocation.ToStringContainsEitherOr("IsInstanceOfType", "IsAssignableFrom") &&
+                        c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+                        methodSymbol.IsInType(KnownType.System_Type))
                     {
-                        return;
+                        var argument = invocation.ArgumentList.Arguments.First().Expression;
+                        CheckForIsAssignableFrom(c, invocation, memberAccess, methodSymbol, argument);
+                        CheckForIsInstanceOfType(c, invocation, memberAccess, methodSymbol);
                     }
-
-                    var argument = invocation.ArgumentList.Arguments.First().Expression;
-                    CheckForIsAssignableFrom(c, invocation, memberAccess, methodSymbol, argument);
-                    CheckForIsInstanceOfType(c, invocation, memberAccess, methodSymbol);
                 },
                 SyntaxKind.InvocationExpression);
 
@@ -91,22 +90,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckIfIsExpressionCanBeReplacedByNullCheck(SyntaxNodeAnalysisContext context)
         {
-            var binary = (BinaryExpressionSyntax)context.Node;
-            var typeExpression = context.SemanticModel.GetTypeInfo(binary.Left).Type;
-            var typeCastTo = context.SemanticModel.GetTypeInfo(binary.Right).Type;
-
-            if (typeExpression == null ||
-                typeCastTo == null ||
-                !typeExpression.IsClass() ||
-                !typeCastTo.IsClass() ||
-                typeCastTo.Is(KnownType.System_Object))
+            var isExpression = (BinaryExpressionSyntax)context.Node;
+            if (context.SemanticModel.GetTypeInfo(isExpression.Left).Type is { } objectToCast &&
+                objectToCast.IsClass() &&
+                context.SemanticModel.GetTypeInfo(isExpression.Right).Type is { } typeCastTo &&
+                typeCastTo.IsClass() &&
+                !typeCastTo.Is(KnownType.System_Object) &&
+                objectToCast.DerivesOrImplements(typeCastTo))
             {
-                return;
-            }
-
-            if (typeExpression.DerivesOrImplements(typeCastTo))
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, binary.GetLocation(), MessageNullCheck));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, isExpression.GetLocation(), MessageNullCheck));
             }
         }
 
@@ -129,26 +121,16 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckGetTypeAndTypeOfEquality(ExpressionSyntax sideA, ExpressionSyntax sideB, Location location,
             SyntaxNodeAnalysisContext context)
         {
-            if (!TypeExaminationOnSystemType.IsGetTypeCall(sideA as InvocationExpressionSyntax, context.SemanticModel))
+            if (sideA.ToStringContains("GetType") &&
+                sideB is TypeOfExpressionSyntax sideBeTypeOf &&
+                sideBeTypeOf.Type is { } typeSyntax &&
+                TypeExaminationOnSystemType.IsGetTypeCall(sideA as InvocationExpressionSyntax, context.SemanticModel) &&
+                context.SemanticModel.GetTypeInfo(typeSyntax).Type is { } typeSymbol &&
+                typeSymbol.IsSealed &&
+                !typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
             {
-                return;
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageIsOperator));
             }
-
-            var typeSyntax = (sideB as TypeOfExpressionSyntax)?.Type;
-            if (typeSyntax == null)
-            {
-                return;
-            }
-
-            var typeSymbol = context.SemanticModel.GetTypeInfo(typeSyntax).Type;
-            if (typeSymbol == null ||
-                !typeSymbol.IsSealed ||
-                typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
-            {
-                return;
-            }
-
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageIsOperator));
         }
 
         private static void CheckForIsInstanceOfType(SyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation,

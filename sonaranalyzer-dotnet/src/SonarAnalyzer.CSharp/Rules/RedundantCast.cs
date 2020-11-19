@@ -170,13 +170,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 collection = memberAccess.Expression;
             }
 
-            if (semanticModel.GetTypeInfo(collection).Type is INamedTypeSymbol collectionType &&
+            var typeInfo = semanticModel.GetTypeInfo(collection);
+            if (typeInfo.Type is INamedTypeSymbol collectionType &&
                 collectionType.TypeArguments.Length == 1)
             {
                 return collectionType.TypeArguments.First();
             }
 
-            if (semanticModel.GetTypeInfo(collection).Type is IArrayTypeSymbol arrayType &&
+            if (typeInfo.Type is IArrayTypeSymbol arrayType &&
                 arrayType.Rank == 1) // casting is necessary for multidimensional arrays
             {
                 return arrayType.ElementType;

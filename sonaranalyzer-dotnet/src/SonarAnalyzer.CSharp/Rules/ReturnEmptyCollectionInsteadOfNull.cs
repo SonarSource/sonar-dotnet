@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -58,16 +58,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportIfReturnsNull(SyntaxNodeAnalysisContext context)
         {
-            if (!IsReturningCollection(context))
-            {
-                return;
-            }
-
             var expressionBody = GetExpressionBody(context.Node);
             if (expressionBody != null)
             {
                 var arrowedNullLiteral = GetNullLiteralOrDefault(expressionBody);
-                if (arrowedNullLiteral != null)
+                if (arrowedNullLiteral != null &&
+                    IsReturningCollection(context))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, arrowedNullLiteral.GetLocation()));
                 }
@@ -81,7 +77,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var returnNullStatements = GetReturnNullStatements(body)
                     .Select(returnStatement => returnStatement.GetLocation())
                     .ToList();
-                if (returnNullStatements.Count > 0)
+                if (returnNullStatements.Count > 0 &&
+                    IsReturningCollection(context))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, returnNullStatements[0],
                         additionalLocations: returnNullStatements.Skip(1)));

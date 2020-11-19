@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -50,13 +50,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
 
-                    if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
+                    if (invocation.ToStringContainsEitherOr("IsInstanceOfType", "GetType") &&
+                        c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
                     {
-                        return;
+                        CheckGetTypeCallOnType(invocation, methodSymbol, c);
+                        CheckIsInstanceOfTypeCallWithTypeArgument(invocation, methodSymbol, c);
                     }
-
-                    CheckGetTypeCallOnType(invocation, methodSymbol, c);
-                    CheckIsInstanceOfTypeCallWithTypeArgument(invocation, methodSymbol, c);
                 },
                 SyntaxKind.InvocationExpression);
         }

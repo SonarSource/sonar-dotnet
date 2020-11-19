@@ -86,4 +86,22 @@ namespace Tests.Diagnostics
             bool result = value.StringProperty != null; // Fixed
         }
     }
+
+    public class Coverage
+    {
+        public void Foo()
+        {
+            var b = typeof(Apple).IsEquivalentTo(null);
+            this.IsInstanceOfType("x");
+            this.IsAssignableFrom("x");
+            this.GetType(null);
+            var c = this.GetType() == typeof(Apple);
+            var d = GetType() == null;
+        }
+
+        public bool IsInstanceOfType(string x) => true;
+        public bool IsAssignableFrom(string x) => true;
+        public bool GetType(object x) => true;
+        public Type GetType() => null;
+    }
 }

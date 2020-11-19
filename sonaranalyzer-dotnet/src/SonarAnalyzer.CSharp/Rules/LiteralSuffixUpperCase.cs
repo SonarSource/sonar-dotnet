@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -48,8 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var literal = (LiteralExpressionSyntax)c.Node;
                     var text = literal.Token.Text;
 
-                    if (text[text.Length - 1] == 'l' &&
-                        c.SemanticModel.GetTypeInfo(literal).Type.Is(KnownType.System_Int64))
+                    if (text[text.Length - 1] == 'l' && !ShouldIgnore(text))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(literal.SyntaxTree,
                             new TextSpan(literal.Span.End - 1, 1))));
@@ -57,5 +57,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.NumericLiteralExpression);
         }
+
+        // We know that @text is a number that ends with 'l'. Being a number, it has at least one digit (thus 2 characters).
+        // If it has 3 characters or more, it could be `2ul` or `2Ul` and we ignore this, because 'l' is easier to read.
+        private static bool ShouldIgnore(string text) =>
+            text.Length > 2 && char.ToUpperInvariant(text[text.Length - 2]) == 'U';
     }
 }

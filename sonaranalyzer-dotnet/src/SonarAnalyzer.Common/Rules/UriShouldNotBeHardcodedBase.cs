@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -91,8 +92,8 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var stringLiteral = (TLiteralExpressionSyntax)c.Node;
-                    if (IsInCheckedContext(stringLiteral, c.SemanticModel) &&
-                        UriRegex.IsMatch(GetLiteralText(stringLiteral)))
+                    if (UriRegex.IsMatch(GetLiteralText(stringLiteral)) &&
+                        IsInCheckedContext(stringLiteral, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], stringLiteral.GetLocation(), AbsoluteUriMessage));
                     }
@@ -103,19 +104,17 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var addExpression = (TBinaryExpressionSyntax)c.Node;
-                    if (!IsInCheckedContext(addExpression, c.SemanticModel))
-                    {
-                        return;
-                    }
+                    var isInCheckedContext = new Lazy<bool>(() => IsInCheckedContext(addExpression, c.SemanticModel));
+
                     var leftNode = GetLeftNode(addExpression);
-                    if (IsPathDelimiter(leftNode))
+                    if (IsPathDelimiter(leftNode) && isInCheckedContext.Value)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], leftNode.GetLocation(),
                             PathDelimiterMessage));
                     }
 
                     var rightNode = GetRightNode(addExpression);
-                    if (IsPathDelimiter(rightNode))
+                    if (IsPathDelimiter(rightNode) && isInCheckedContext.Value)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], rightNode.GetLocation(),
                             PathDelimiterMessage));
