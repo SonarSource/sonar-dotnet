@@ -59,9 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var invocationString = invocation.ToString();
-                    if (invocationString.Contains("IsInstanceOfType") ||
-                        invocationString.Contains("IsAssignableFrom"))
+                    if (invocation.ToStringContainsEitherOr("IsInstanceOfType", "IsAssignableFrom"))
                     {
                         var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
                         if (!methodSymbol.IsInType(KnownType.System_Type))
@@ -127,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckGetTypeAndTypeOfEquality(ExpressionSyntax sideA, ExpressionSyntax sideB, Location location,
             SyntaxNodeAnalysisContext context)
         {
-            if (sideA.ToString().Contains("GetType") &&
+            if (sideA.ToStringContains("GetType") &&
                 sideB is TypeOfExpressionSyntax sideBeTypeOf &&
                 sideBeTypeOf.Type is { } typeSyntax &&
                 TypeExaminationOnSystemType.IsGetTypeCall(sideA as InvocationExpressionSyntax, context.SemanticModel) &&

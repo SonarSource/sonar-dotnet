@@ -60,14 +60,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
         private static bool IsMethodOrderByExtension(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            invocation.Expression.ToString().Contains("OrderBy") &&
+            invocation.Expression.ToStringContains("OrderBy") &&
             semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
                methodSymbol.Name == "OrderBy" &&
                methodSymbol.MethodKind == MethodKind.ReducedExtension &&
                methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
         private static bool IsMethodThenByExtension(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            invocation.Expression.ToString().Contains("ThenBy") &&
+            invocation.Expression.ToStringContains("ThenBy") &&
             semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
                methodSymbol.Name == "ThenBy" &&
                methodSymbol.MethodKind == MethodKind.ReducedExtension &&

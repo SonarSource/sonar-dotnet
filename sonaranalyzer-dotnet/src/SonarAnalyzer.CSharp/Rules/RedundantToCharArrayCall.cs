@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var invocation = (InvocationExpressionSyntax)c.Node;
 
                     if ((invocation.Parent is ElementAccessExpressionSyntax || invocation.Parent is ForEachStatementSyntax) &&
-                        invocation.ToString().Contains("ToCharArray") &&
+                        invocation.ToStringContains("ToCharArray") &&
                         invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
                         c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
                         methodSymbol.Name == "ToCharArray" &&
