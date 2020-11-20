@@ -1561,7 +1561,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S1821_Description" xml:space="preserve">
-    <value>Nested switch structures are difficult to understand because you can easily confuse the cases of an inner switch as belonging to an outer statement. Therefore nested switch statements should be avoided.</value>
+    <value>Nested Select Case structures are difficult to understand because you can easily confuse the cases of an inner Select Case as belonging to an outer statement. Therefore nested Select Case statements should be avoided.</value>
   </data>
   <data name="S1821_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -1585,7 +1585,7 @@
     <value>pitfall</value>
   </data>
   <data name="S1821_Title" xml:space="preserve">
-    <value>"switch" statements should not be nested</value>
+    <value>"Select Case" statements should not be nested</value>
   </data>
   <data name="S1821_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
@@ -4255,7 +4255,7 @@
     <value>ready</value>
   </data>
   <data name="S4586_Tags" xml:space="preserve">
-    <value />
+    <value>async-await</value>
   </data>
   <data name="S4586_Title" xml:space="preserve">
     <value>Non-async "Task/Task&lt;T&gt;" methods should not return null</value>
@@ -4537,10 +4537,10 @@
     <value>ready</value>
   </data>
   <data name="S5042_Tags" xml:space="preserve">
-    <value>cwe,owasp-a5</value>
+    <value>cwe,owasp-a6,owasp-a5</value>
   </data>
   <data name="S5042_Title" xml:space="preserve">
-    <value>Expanding archive files is security-sensitive</value>
+    <value>Expanding archive files without controlling resource consumption is security sensitive</value>
   </data>
   <data name="S5042_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
