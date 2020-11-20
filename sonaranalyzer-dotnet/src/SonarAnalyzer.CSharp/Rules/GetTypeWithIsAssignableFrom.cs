@@ -59,7 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (invocation.ToStringContainsEitherOr("IsInstanceOfType", "IsAssignableFrom") &&
+                    var methodName = memberAccess.Name.Identifier.ValueText;
+                    if ((methodName == "IsInstanceOfType" || methodName == "IsAssignableFrom") &&
                         c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
                         methodSymbol.IsInType(KnownType.System_Type))
                     {
