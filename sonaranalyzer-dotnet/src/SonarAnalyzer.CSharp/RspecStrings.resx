@@ -138,6 +138,9 @@
   <data name="S100_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S100_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S100_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -167,6 +170,9 @@
   </data>
   <data name="S1006_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S1006_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1006_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -198,6 +204,9 @@
   <data name="S101_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S101_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S101_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -227,6 +236,9 @@
   </data>
   <data name="S103_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S103_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S103_Tags" xml:space="preserve">
     <value>convention</value>
@@ -258,6 +270,9 @@
   <data name="S104_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S104_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S104_Tags" xml:space="preserve">
     <value>brain-overload</value>
   </data>
@@ -287,6 +302,9 @@
   </data>
   <data name="S1048_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S1048_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1048_Tags" xml:space="preserve">
     <value />
@@ -318,6 +336,9 @@
   <data name="S105_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S105_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S105_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -347,6 +368,9 @@
   </data>
   <data name="S106_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S106_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S106_Tags" xml:space="preserve">
     <value>bad-practice</value>
@@ -378,6 +402,9 @@
   <data name="S1066_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1066_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1066_Tags" xml:space="preserve">
     <value>clumsy</value>
   </data>
@@ -407,6 +434,9 @@
   </data>
   <data name="S1067_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S1067_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1067_Tags" xml:space="preserve">
     <value>brain-overload</value>
@@ -438,6 +468,9 @@
   <data name="S107_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S107_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S107_Tags" xml:space="preserve">
     <value>brain-overload</value>
   </data>
@@ -467,6 +500,9 @@
   </data>
   <data name="S1075_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1075_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1075_Tags" xml:space="preserve">
     <value />
@@ -498,6 +534,9 @@
   <data name="S108_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S108_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S108_Tags" xml:space="preserve">
     <value>suspicious</value>
   </data>
@@ -527,6 +566,9 @@
   </data>
   <data name="S109_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S109_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S109_Tags" xml:space="preserve">
     <value>brain-overload</value>
@@ -558,6 +600,9 @@
   <data name="S110_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S110_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S110_Tags" xml:space="preserve">
     <value>design</value>
   </data>
@@ -587,6 +632,9 @@
   </data>
   <data name="S1104_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1104_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1104_Tags" xml:space="preserve">
     <value>cwe</value>
@@ -618,6 +666,9 @@
   <data name="S1109_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1109_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1109_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -647,6 +698,9 @@
   </data>
   <data name="S1110_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1110_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1110_Tags" xml:space="preserve">
     <value>confusing</value>
@@ -678,6 +732,9 @@
   <data name="S1116_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1116_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1116_Tags" xml:space="preserve">
     <value>unused</value>
   </data>
@@ -707,6 +764,9 @@
   </data>
   <data name="S1117_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1117_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1117_Tags" xml:space="preserve">
     <value>suspicious,pitfall</value>
@@ -738,6 +798,9 @@
   <data name="S1118_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1118_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1118_Tags" xml:space="preserve">
     <value>design</value>
   </data>
@@ -767,6 +830,9 @@
   </data>
   <data name="S112_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S112_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S112_Tags" xml:space="preserve">
     <value>cwe,error-handling</value>
@@ -798,6 +864,9 @@
   <data name="S1121_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1121_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1121_Tags" xml:space="preserve">
     <value>cwe,suspicious</value>
   </data>
@@ -827,6 +896,9 @@
   </data>
   <data name="S1123_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1123_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1123_Tags" xml:space="preserve">
     <value>obsolete,bad-practice</value>
@@ -858,6 +930,9 @@
   <data name="S1125_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1125_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1125_Tags" xml:space="preserve">
     <value>clumsy</value>
   </data>
@@ -887,6 +962,9 @@
   </data>
   <data name="S1128_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1128_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1128_Tags" xml:space="preserve">
     <value>unused</value>
@@ -918,6 +996,9 @@
   <data name="S113_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S113_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S113_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -942,6 +1023,9 @@
   <data name="S1134_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1134_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1134_Tags" xml:space="preserve">
     <value>cwe</value>
   </data>
@@ -965,6 +1049,9 @@
   </data>
   <data name="S1135_Severity" xml:space="preserve">
     <value>Info</value>
+  </data>
+  <data name="S1135_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1135_Tags" xml:space="preserve">
     <value>cwe</value>
@@ -996,6 +1083,9 @@
   <data name="S1144_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1144_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1144_Tags" xml:space="preserve">
     <value>unused</value>
   </data>
@@ -1025,6 +1115,9 @@
   </data>
   <data name="S1145_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1145_Status" xml:space="preserve">
+    <value>deprecated</value>
   </data>
   <data name="S1145_Tags" xml:space="preserve">
     <value>cwe</value>
@@ -1056,6 +1149,9 @@
   <data name="S1147_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S1147_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1147_Tags" xml:space="preserve">
     <value>cwe,suspicious</value>
   </data>
@@ -1085,6 +1181,9 @@
   </data>
   <data name="S1151_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1151_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1151_Tags" xml:space="preserve">
     <value>brain-overload</value>
@@ -1116,6 +1215,9 @@
   <data name="S1155_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1155_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1155_Tags" xml:space="preserve">
     <value>clumsy</value>
   </data>
@@ -1145,6 +1247,9 @@
   </data>
   <data name="S1163_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S1163_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1163_Tags" xml:space="preserve">
     <value>error-handling,suspicious</value>
@@ -1176,6 +1281,9 @@
   <data name="S1168_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1168_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1168_Tags" xml:space="preserve">
     <value />
   </data>
@@ -1205,6 +1313,9 @@
   </data>
   <data name="S1172_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1172_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1172_Tags" xml:space="preserve">
     <value>unused</value>
@@ -1236,6 +1347,9 @@
   <data name="S1185_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1185_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1185_Tags" xml:space="preserve">
     <value>redundant,clumsy</value>
   </data>
@@ -1265,6 +1379,9 @@
   </data>
   <data name="S1186_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S1186_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1186_Tags" xml:space="preserve">
     <value>suspicious</value>
@@ -1296,6 +1413,9 @@
   <data name="S1192_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1192_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1192_Tags" xml:space="preserve">
     <value>design</value>
   </data>
@@ -1325,6 +1445,9 @@
   </data>
   <data name="S1199_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1199_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1199_Tags" xml:space="preserve">
     <value>bad-practice</value>
@@ -1356,6 +1479,9 @@
   <data name="S1200_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1200_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1200_Tags" xml:space="preserve">
     <value>brain-overload</value>
   </data>
@@ -1385,6 +1511,9 @@
   </data>
   <data name="S1206_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1206_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1206_Tags" xml:space="preserve">
     <value>cwe</value>
@@ -1416,6 +1545,9 @@
   <data name="S121_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S121_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S121_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -1445,6 +1577,9 @@
   </data>
   <data name="S1210_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1210_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1210_Tags" xml:space="preserve">
     <value />
@@ -1476,6 +1611,9 @@
   <data name="S1215_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S1215_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1215_Tags" xml:space="preserve">
     <value>performance,unpredictable,bad-practice</value>
   </data>
@@ -1505,6 +1643,9 @@
   </data>
   <data name="S122_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S122_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S122_Tags" xml:space="preserve">
     <value>style</value>
@@ -1536,6 +1677,9 @@
   <data name="S1226_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1226_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1226_Tags" xml:space="preserve">
     <value />
   </data>
@@ -1565,6 +1709,9 @@
   </data>
   <data name="S1227_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1227_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1227_Tags" xml:space="preserve">
     <value />
@@ -1596,6 +1743,9 @@
   <data name="S1244_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1244_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1244_Tags" xml:space="preserve">
     <value />
   </data>
@@ -1625,6 +1775,9 @@
   </data>
   <data name="S125_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S125_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S125_Tags" xml:space="preserve">
     <value>unused</value>
@@ -1656,6 +1809,9 @@
   <data name="S126_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S126_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S126_Tags" xml:space="preserve">
     <value />
   </data>
@@ -1685,6 +1841,9 @@
   </data>
   <data name="S1264_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1264_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1264_Tags" xml:space="preserve">
     <value>clumsy</value>
@@ -1716,6 +1875,9 @@
   <data name="S127_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S127_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S127_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -1745,6 +1907,9 @@
   </data>
   <data name="S1301_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1301_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1301_Tags" xml:space="preserve">
     <value>bad-practice</value>
@@ -1776,6 +1941,9 @@
   <data name="S1309_Severity" xml:space="preserve">
     <value>Info</value>
   </data>
+  <data name="S1309_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1309_Tags" xml:space="preserve">
     <value />
   </data>
@@ -1805,6 +1973,9 @@
   </data>
   <data name="S131_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S131_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S131_Tags" xml:space="preserve">
     <value>cwe</value>
@@ -1836,6 +2007,9 @@
   <data name="S1313_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1313_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1313_Tags" xml:space="preserve">
     <value>owasp-a3</value>
   </data>
@@ -1865,6 +2039,9 @@
   </data>
   <data name="S134_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S134_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S134_Tags" xml:space="preserve">
     <value>brain-overload</value>
@@ -1896,6 +2073,9 @@
   <data name="S138_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S138_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S138_Tags" xml:space="preserve">
     <value>brain-overload</value>
   </data>
@@ -1925,6 +2105,9 @@
   </data>
   <data name="S1449_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1449_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1449_Tags" xml:space="preserve">
     <value>unpredictable</value>
@@ -1956,6 +2139,9 @@
   <data name="S1450_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1450_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1450_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -1985,6 +2171,9 @@
   </data>
   <data name="S1451_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S1451_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1451_Tags" xml:space="preserve">
     <value />
@@ -2016,6 +2205,9 @@
   <data name="S1479_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1479_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1479_Tags" xml:space="preserve">
     <value>brain-overload</value>
   </data>
@@ -2045,6 +2237,9 @@
   </data>
   <data name="S1481_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1481_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1481_Tags" xml:space="preserve">
     <value>unused</value>
@@ -2076,6 +2271,9 @@
   <data name="S1541_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S1541_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1541_Tags" xml:space="preserve">
     <value>brain-overload</value>
   </data>
@@ -2105,6 +2303,9 @@
   </data>
   <data name="S1607_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1607_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1607_Tags" xml:space="preserve">
     <value>tests,bad-practice,confusing</value>
@@ -2136,6 +2337,9 @@
   <data name="S1643_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1643_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1643_Tags" xml:space="preserve">
     <value>performance</value>
   </data>
@@ -2165,6 +2369,9 @@
   </data>
   <data name="S1656_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1656_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1656_Tags" xml:space="preserve">
     <value />
@@ -2196,6 +2403,9 @@
   <data name="S1659_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1659_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1659_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -2225,6 +2435,9 @@
   </data>
   <data name="S1694_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1694_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1694_Tags" xml:space="preserve">
     <value>convention</value>
@@ -2256,6 +2469,9 @@
   <data name="S1696_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1696_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1696_Tags" xml:space="preserve">
     <value>cwe,error-handling</value>
   </data>
@@ -2285,6 +2501,9 @@
   </data>
   <data name="S1697_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1697_Status" xml:space="preserve">
+    <value>deprecated</value>
   </data>
   <data name="S1697_Tags" xml:space="preserve">
     <value />
@@ -2316,6 +2535,9 @@
   <data name="S1698_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1698_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1698_Tags" xml:space="preserve">
     <value>cwe,suspicious</value>
   </data>
@@ -2345,6 +2567,9 @@
   </data>
   <data name="S1699_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S1699_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1699_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -2376,6 +2601,9 @@
   <data name="S1751_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1751_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1751_Tags" xml:space="preserve">
     <value />
   </data>
@@ -2405,6 +2633,9 @@
   </data>
   <data name="S1764_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1764_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1764_Tags" xml:space="preserve">
     <value />
@@ -2436,6 +2667,9 @@
   <data name="S1821_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S1821_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1821_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -2465,6 +2699,9 @@
   </data>
   <data name="S1848_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1848_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1848_Tags" xml:space="preserve">
     <value />
@@ -2496,6 +2733,9 @@
   <data name="S1854_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1854_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1854_Tags" xml:space="preserve">
     <value>cwe,unused</value>
   </data>
@@ -2525,6 +2765,9 @@
   </data>
   <data name="S1858_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1858_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1858_Tags" xml:space="preserve">
     <value>finding,clumsy</value>
@@ -2556,6 +2799,9 @@
   <data name="S1862_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S1862_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1862_Tags" xml:space="preserve">
     <value>unused,pitfall</value>
   </data>
@@ -2585,6 +2831,9 @@
   </data>
   <data name="S1871_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S1871_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1871_Tags" xml:space="preserve">
     <value>design,suspicious</value>
@@ -2616,6 +2865,9 @@
   <data name="S1905_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1905_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1905_Tags" xml:space="preserve">
     <value>redundant,clumsy</value>
   </data>
@@ -2645,6 +2897,9 @@
   </data>
   <data name="S1939_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S1939_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1939_Tags" xml:space="preserve">
     <value>clumsy</value>
@@ -2676,6 +2931,9 @@
   <data name="S1940_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S1940_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1940_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -2705,6 +2963,9 @@
   </data>
   <data name="S1944_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S1944_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S1944_Tags" xml:space="preserve">
     <value>cwe,suspicious</value>
@@ -2736,6 +2997,9 @@
   <data name="S1994_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S1994_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S1994_Tags" xml:space="preserve">
     <value>confusing</value>
   </data>
@@ -2765,6 +3029,9 @@
   </data>
   <data name="S2068_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S2068_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2068_Tags" xml:space="preserve">
     <value>cwe,sans-top25-porous,owasp-a2</value>
@@ -2796,6 +3063,9 @@
   <data name="S2070_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2070_Status" xml:space="preserve">
+    <value>deprecated</value>
+  </data>
   <data name="S2070_Tags" xml:space="preserve">
     <value />
   </data>
@@ -2825,6 +3095,9 @@
   </data>
   <data name="S2077_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S2077_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2077_Tags" xml:space="preserve">
     <value>cwe,owasp-a1,sans-top25-insecure,bad-practice,sql</value>
@@ -2856,6 +3129,9 @@
   <data name="S2092_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S2092_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2092_Tags" xml:space="preserve">
     <value>cwe,privacy,sans-top25-porous,owasp-a3</value>
   </data>
@@ -2885,6 +3161,9 @@
   </data>
   <data name="S2114_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2114_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2114_Tags" xml:space="preserve">
     <value />
@@ -2916,6 +3195,9 @@
   <data name="S2123_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2123_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2123_Tags" xml:space="preserve">
     <value>unused</value>
   </data>
@@ -2945,6 +3227,9 @@
   </data>
   <data name="S2148_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2148_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2148_Tags" xml:space="preserve">
     <value>convention</value>
@@ -2976,6 +3261,9 @@
   <data name="S2156_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S2156_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2156_Tags" xml:space="preserve">
     <value>confusing</value>
   </data>
@@ -3005,6 +3293,9 @@
   </data>
   <data name="S2178_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S2178_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2178_Tags" xml:space="preserve">
     <value />
@@ -3036,6 +3327,9 @@
   <data name="S2183_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S2183_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2183_Tags" xml:space="preserve">
     <value />
   </data>
@@ -3065,6 +3359,9 @@
   </data>
   <data name="S2184_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2184_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2184_Tags" xml:space="preserve">
     <value>cwe,overflow,sans-top25-risky</value>
@@ -3096,6 +3393,9 @@
   <data name="S2187_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S2187_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2187_Tags" xml:space="preserve">
     <value>tests,unused,confusing</value>
   </data>
@@ -3125,6 +3425,9 @@
   </data>
   <data name="S2190_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S2190_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2190_Tags" xml:space="preserve">
     <value>suspicious</value>
@@ -3156,6 +3459,9 @@
   <data name="S2197_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2197_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2197_Tags" xml:space="preserve">
     <value>suspicious</value>
   </data>
@@ -3185,6 +3491,9 @@
   </data>
   <data name="S2201_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2201_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2201_Tags" xml:space="preserve">
     <value />
@@ -3216,6 +3525,9 @@
   <data name="S2219_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S2219_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2219_Tags" xml:space="preserve">
     <value>clumsy</value>
   </data>
@@ -3245,6 +3557,9 @@
   </data>
   <data name="S2221_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2221_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2221_Tags" xml:space="preserve">
     <value>cwe,error-handling</value>
@@ -3276,6 +3591,9 @@
   <data name="S2223_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2223_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2223_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -3305,6 +3623,9 @@
   </data>
   <data name="S2225_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2225_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2225_Tags" xml:space="preserve">
     <value>cwe</value>
@@ -3336,6 +3657,9 @@
   <data name="S2228_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S2228_Status" xml:space="preserve">
+    <value>deprecated</value>
+  </data>
   <data name="S2228_Tags" xml:space="preserve">
     <value>owasp-a3</value>
   </data>
@@ -3365,6 +3689,9 @@
   </data>
   <data name="S2234_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2234_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2234_Tags" xml:space="preserve">
     <value />
@@ -3396,6 +3723,9 @@
   <data name="S2245_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2245_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2245_Tags" xml:space="preserve">
     <value>cwe,owasp-a3</value>
   </data>
@@ -3425,6 +3755,9 @@
   </data>
   <data name="S2251_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2251_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2251_Tags" xml:space="preserve">
     <value />
@@ -3456,6 +3789,9 @@
   <data name="S2252_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2252_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2252_Tags" xml:space="preserve">
     <value />
   </data>
@@ -3485,6 +3821,9 @@
   </data>
   <data name="S2255_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2255_Status" xml:space="preserve">
+    <value>deprecated</value>
   </data>
   <data name="S2255_Tags" xml:space="preserve">
     <value />
@@ -3516,6 +3855,9 @@
   <data name="S2259_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2259_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2259_Tags" xml:space="preserve">
     <value>cwe</value>
   </data>
@@ -3545,6 +3887,9 @@
   </data>
   <data name="S2275_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S2275_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2275_Tags" xml:space="preserve">
     <value />
@@ -3576,6 +3921,9 @@
   <data name="S2278_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S2278_Status" xml:space="preserve">
+    <value>deprecated</value>
+  </data>
   <data name="S2278_Tags" xml:space="preserve">
     <value>cwe,owasp-a6,sans-top25-porous</value>
   </data>
@@ -3605,6 +3953,9 @@
   </data>
   <data name="S2290_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S2290_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2290_Tags" xml:space="preserve">
     <value />
@@ -3636,6 +3987,9 @@
   <data name="S2291_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2291_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2291_Tags" xml:space="preserve">
     <value>error-handling</value>
   </data>
@@ -3665,6 +4019,9 @@
   </data>
   <data name="S2292_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2292_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2292_Tags" xml:space="preserve">
     <value>clumsy</value>
@@ -3696,6 +4053,9 @@
   <data name="S2302_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2302_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2302_Tags" xml:space="preserve">
     <value>c#6</value>
   </data>
@@ -3725,6 +4085,9 @@
   </data>
   <data name="S2306_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S2306_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2306_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -3756,6 +4119,9 @@
   <data name="S2325_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S2325_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2325_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -3785,6 +4151,9 @@
   </data>
   <data name="S2326_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2326_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2326_Tags" xml:space="preserve">
     <value>unused</value>
@@ -3816,6 +4185,9 @@
   <data name="S2327_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2327_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2327_Tags" xml:space="preserve">
     <value>clumsy</value>
   </data>
@@ -3845,6 +4217,9 @@
   </data>
   <data name="S2328_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2328_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2328_Tags" xml:space="preserve">
     <value />
@@ -3876,6 +4251,9 @@
   <data name="S2330_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2330_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2330_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -3905,6 +4283,9 @@
   </data>
   <data name="S2333_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2333_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2333_Tags" xml:space="preserve">
     <value>unused,finding,clumsy</value>
@@ -3936,6 +4317,9 @@
   <data name="S2339_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2339_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2339_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -3965,6 +4349,9 @@
   </data>
   <data name="S2342_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2342_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2342_Tags" xml:space="preserve">
     <value>convention</value>
@@ -3996,6 +4383,9 @@
   <data name="S2344_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S2344_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2344_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -4025,6 +4415,9 @@
   </data>
   <data name="S2345_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2345_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2345_Tags" xml:space="preserve">
     <value />
@@ -4056,6 +4449,9 @@
   <data name="S2346_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2346_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2346_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -4085,6 +4481,9 @@
   </data>
   <data name="S2357_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2357_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2357_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -4116,6 +4515,9 @@
   <data name="S2360_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2360_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2360_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -4145,6 +4547,9 @@
   </data>
   <data name="S2365_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S2365_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2365_Tags" xml:space="preserve">
     <value>api-design,performance</value>
@@ -4176,6 +4581,9 @@
   <data name="S2368_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S2368_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2368_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -4205,6 +4613,9 @@
   </data>
   <data name="S2372_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2372_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2372_Tags" xml:space="preserve">
     <value>error-handling</value>
@@ -4236,6 +4647,9 @@
   <data name="S2376_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2376_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2376_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -4265,6 +4679,9 @@
   </data>
   <data name="S2386_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2386_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2386_Tags" xml:space="preserve">
     <value>cwe,unpredictable</value>
@@ -4296,6 +4713,9 @@
   <data name="S2387_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S2387_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2387_Tags" xml:space="preserve">
     <value>confusing</value>
   </data>
@@ -4326,6 +4746,9 @@
   <data name="S2436_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2436_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2436_Tags" xml:space="preserve">
     <value>brain-overload</value>
   </data>
@@ -4355,6 +4778,9 @@
   </data>
   <data name="S2437_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S2437_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2437_Tags" xml:space="preserve">
     <value>suspicious</value>
@@ -4387,6 +4813,9 @@
   <data name="S2479_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2479_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2479_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -4416,6 +4845,9 @@
   </data>
   <data name="S2486_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2486_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2486_Tags" xml:space="preserve">
     <value>cwe,error-handling,owasp-a10,suspicious</value>
@@ -4447,6 +4879,9 @@
   <data name="S2551_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2551_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2551_Tags" xml:space="preserve">
     <value>multi-threading</value>
   </data>
@@ -4476,6 +4911,9 @@
   </data>
   <data name="S2583_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2583_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2583_Tags" xml:space="preserve">
     <value>cwe,unused,suspicious,pitfall</value>
@@ -4507,6 +4945,9 @@
   <data name="S2589_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2589_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2589_Tags" xml:space="preserve">
     <value>cwe,suspicious,redundant</value>
   </data>
@@ -4536,6 +4977,9 @@
   </data>
   <data name="S2674_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2674_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2674_Tags" xml:space="preserve">
     <value />
@@ -4567,6 +5011,9 @@
   <data name="S2681_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2681_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2681_Tags" xml:space="preserve">
     <value>cwe</value>
   </data>
@@ -4596,6 +5043,9 @@
   </data>
   <data name="S2688_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2688_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2688_Tags" xml:space="preserve">
     <value />
@@ -4627,6 +5077,9 @@
   <data name="S2692_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2692_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2692_Tags" xml:space="preserve">
     <value>suspicious</value>
   </data>
@@ -4656,6 +5109,9 @@
   </data>
   <data name="S2696_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S2696_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2696_Tags" xml:space="preserve">
     <value>multi-threading</value>
@@ -4687,6 +5143,9 @@
   <data name="S2699_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S2699_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2699_Tags" xml:space="preserve">
     <value>tests</value>
   </data>
@@ -4716,6 +5175,9 @@
   </data>
   <data name="S2701_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S2701_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2701_Tags" xml:space="preserve">
     <value>tests</value>
@@ -4747,6 +5209,9 @@
   <data name="S2737_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S2737_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2737_Tags" xml:space="preserve">
     <value>error-handling,unused,finding,clumsy</value>
   </data>
@@ -4776,6 +5241,9 @@
   </data>
   <data name="S2743_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2743_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2743_Tags" xml:space="preserve">
     <value />
@@ -4807,6 +5275,9 @@
   <data name="S2755_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S2755_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2755_Tags" xml:space="preserve">
     <value>cwe,owasp-a4</value>
   </data>
@@ -4836,6 +5307,9 @@
   </data>
   <data name="S2757_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2757_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2757_Tags" xml:space="preserve">
     <value />
@@ -4867,6 +5341,9 @@
   <data name="S2758_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2758_Status" xml:space="preserve">
+    <value>deprecated</value>
+  </data>
   <data name="S2758_Tags" xml:space="preserve">
     <value />
   </data>
@@ -4896,6 +5373,9 @@
   </data>
   <data name="S2760_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2760_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2760_Tags" xml:space="preserve">
     <value>suspicious,clumsy</value>
@@ -4927,6 +5407,9 @@
   <data name="S2761_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2761_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2761_Tags" xml:space="preserve">
     <value />
   </data>
@@ -4956,6 +5439,9 @@
   </data>
   <data name="S2857_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S2857_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2857_Tags" xml:space="preserve">
     <value>sql</value>
@@ -4987,6 +5473,9 @@
   <data name="S2930_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S2930_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2930_Tags" xml:space="preserve">
     <value>cwe,denial-of-service</value>
   </data>
@@ -5016,6 +5505,9 @@
   </data>
   <data name="S2931_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S2931_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2931_Tags" xml:space="preserve">
     <value>cwe,denial-of-service</value>
@@ -5047,6 +5539,9 @@
   <data name="S2933_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2933_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2933_Tags" xml:space="preserve">
     <value>confusing</value>
   </data>
@@ -5076,6 +5571,9 @@
   </data>
   <data name="S2934_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S2934_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2934_Tags" xml:space="preserve">
     <value />
@@ -5107,6 +5605,9 @@
   <data name="S2952_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S2952_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2952_Tags" xml:space="preserve">
     <value>cwe,denial-of-service</value>
   </data>
@@ -5136,6 +5637,9 @@
   </data>
   <data name="S2953_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S2953_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2953_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -5167,6 +5671,9 @@
   <data name="S2955_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S2955_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2955_Tags" xml:space="preserve">
     <value />
   </data>
@@ -5196,6 +5703,9 @@
   </data>
   <data name="S2971_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2971_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2971_Tags" xml:space="preserve">
     <value>clumsy</value>
@@ -5227,6 +5737,9 @@
   <data name="S2995_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2995_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2995_Tags" xml:space="preserve">
     <value />
   </data>
@@ -5256,6 +5769,9 @@
   </data>
   <data name="S2996_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S2996_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S2996_Tags" xml:space="preserve">
     <value>multi-threading</value>
@@ -5287,6 +5803,9 @@
   <data name="S2997_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S2997_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S2997_Tags" xml:space="preserve">
     <value />
   </data>
@@ -5316,6 +5835,9 @@
   </data>
   <data name="S3005_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3005_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3005_Tags" xml:space="preserve">
     <value>unused</value>
@@ -5347,6 +5869,9 @@
   <data name="S3010_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3010_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3010_Tags" xml:space="preserve">
     <value />
   </data>
@@ -5376,6 +5901,9 @@
   </data>
   <data name="S3011_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3011_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3011_Tags" xml:space="preserve">
     <value />
@@ -5407,6 +5935,9 @@
   <data name="S3052_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3052_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3052_Tags" xml:space="preserve">
     <value>convention,finding</value>
   </data>
@@ -5436,6 +5967,9 @@
   </data>
   <data name="S3060_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S3060_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3060_Tags" xml:space="preserve">
     <value>api-design,bad-practice</value>
@@ -5467,6 +6001,9 @@
   <data name="S3168_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3168_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3168_Tags" xml:space="preserve">
     <value>multi-threading,async-await</value>
   </data>
@@ -5496,6 +6033,9 @@
   </data>
   <data name="S3169_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3169_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3169_Tags" xml:space="preserve">
     <value>performance</value>
@@ -5527,6 +6067,9 @@
   <data name="S3172_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3172_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3172_Tags" xml:space="preserve">
     <value />
   </data>
@@ -5556,6 +6099,9 @@
   </data>
   <data name="S3215_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S3215_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3215_Tags" xml:space="preserve">
     <value>design</value>
@@ -5587,6 +6133,9 @@
   <data name="S3216_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3216_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3216_Tags" xml:space="preserve">
     <value>multi-threading,suspicious</value>
   </data>
@@ -5616,6 +6165,9 @@
   </data>
   <data name="S3217_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S3217_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3217_Tags" xml:space="preserve">
     <value>suspicious</value>
@@ -5647,6 +6199,9 @@
   <data name="S3218_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3218_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3218_Tags" xml:space="preserve">
     <value>design,pitfall</value>
   </data>
@@ -5676,6 +6231,9 @@
   </data>
   <data name="S3220_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3220_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3220_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -5707,6 +6265,9 @@
   <data name="S3234_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3234_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3234_Tags" xml:space="preserve">
     <value>unused,confusing</value>
   </data>
@@ -5736,6 +6297,9 @@
   </data>
   <data name="S3235_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3235_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3235_Tags" xml:space="preserve">
     <value>unused,finding</value>
@@ -5767,6 +6331,9 @@
   <data name="S3236_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3236_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3236_Tags" xml:space="preserve">
     <value>suspicious</value>
   </data>
@@ -5796,6 +6363,9 @@
   </data>
   <data name="S3237_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S3237_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3237_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -5827,6 +6397,9 @@
   <data name="S3240_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3240_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3240_Tags" xml:space="preserve">
     <value>clumsy</value>
   </data>
@@ -5856,6 +6429,9 @@
   </data>
   <data name="S3241_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3241_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3241_Tags" xml:space="preserve">
     <value>design,unused</value>
@@ -5887,6 +6463,9 @@
   <data name="S3242_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3242_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3242_Tags" xml:space="preserve">
     <value>api-design</value>
   </data>
@@ -5916,6 +6495,9 @@
   </data>
   <data name="S3244_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3244_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3244_Tags" xml:space="preserve">
     <value />
@@ -5947,6 +6529,9 @@
   <data name="S3246_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3246_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3246_Tags" xml:space="preserve">
     <value>api-design</value>
   </data>
@@ -5976,6 +6561,9 @@
   </data>
   <data name="S3247_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3247_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3247_Tags" xml:space="preserve">
     <value>performance</value>
@@ -6007,6 +6595,9 @@
   <data name="S3249_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3249_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3249_Tags" xml:space="preserve">
     <value />
   </data>
@@ -6036,6 +6627,9 @@
   </data>
   <data name="S3251_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3251_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3251_Tags" xml:space="preserve">
     <value>suspicious</value>
@@ -6067,6 +6661,9 @@
   <data name="S3253_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3253_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3253_Tags" xml:space="preserve">
     <value>finding,clumsy</value>
   </data>
@@ -6096,6 +6693,9 @@
   </data>
   <data name="S3254_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3254_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3254_Tags" xml:space="preserve">
     <value>finding,clumsy</value>
@@ -6127,6 +6727,9 @@
   <data name="S3256_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3256_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3256_Tags" xml:space="preserve">
     <value>clumsy</value>
   </data>
@@ -6156,6 +6759,9 @@
   </data>
   <data name="S3257_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3257_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3257_Tags" xml:space="preserve">
     <value>finding,clumsy</value>
@@ -6187,6 +6793,9 @@
   <data name="S3261_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3261_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3261_Tags" xml:space="preserve">
     <value>unused</value>
   </data>
@@ -6216,6 +6825,9 @@
   </data>
   <data name="S3262_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3262_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3262_Tags" xml:space="preserve">
     <value>confusing</value>
@@ -6247,6 +6859,9 @@
   <data name="S3263_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3263_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3263_Tags" xml:space="preserve">
     <value />
   </data>
@@ -6276,6 +6891,9 @@
   </data>
   <data name="S3264_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3264_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3264_Tags" xml:space="preserve">
     <value>unused</value>
@@ -6307,6 +6925,9 @@
   <data name="S3265_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3265_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3265_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -6336,6 +6957,9 @@
   </data>
   <data name="S3330_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3330_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3330_Tags" xml:space="preserve">
     <value>cwe,sans-top25-insecure,privacy,owasp-a7</value>
@@ -6367,6 +6991,9 @@
   <data name="S3343_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3343_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3343_Tags" xml:space="preserve">
     <value>api-design</value>
   </data>
@@ -6396,6 +7023,9 @@
   </data>
   <data name="S3346_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3346_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3346_Tags" xml:space="preserve">
     <value />
@@ -6427,6 +7057,9 @@
   <data name="S3353_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3353_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3353_Tags" xml:space="preserve">
     <value />
   </data>
@@ -6456,6 +7089,9 @@
   </data>
   <data name="S3358_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3358_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3358_Tags" xml:space="preserve">
     <value>confusing</value>
@@ -6487,6 +7123,9 @@
   <data name="S3366_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3366_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3366_Tags" xml:space="preserve">
     <value>multi-threading,suspicious</value>
   </data>
@@ -6516,6 +7155,9 @@
   </data>
   <data name="S3376_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3376_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3376_Tags" xml:space="preserve">
     <value>convention</value>
@@ -6547,6 +7189,9 @@
   <data name="S3397_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3397_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3397_Tags" xml:space="preserve">
     <value />
   </data>
@@ -6576,6 +7221,9 @@
   </data>
   <data name="S3400_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3400_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3400_Tags" xml:space="preserve">
     <value>confusing</value>
@@ -6607,6 +7255,9 @@
   <data name="S3415_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3415_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3415_Tags" xml:space="preserve">
     <value>tests,suspicious</value>
   </data>
@@ -6636,6 +7287,9 @@
   </data>
   <data name="S3427_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S3427_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3427_Tags" xml:space="preserve">
     <value>unused,pitfall</value>
@@ -6667,6 +7321,9 @@
   <data name="S3431_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3431_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3431_Tags" xml:space="preserve">
     <value>tests</value>
   </data>
@@ -6696,6 +7353,9 @@
   </data>
   <data name="S3433_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S3433_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3433_Tags" xml:space="preserve">
     <value>tests</value>
@@ -6727,6 +7387,9 @@
   <data name="S3440_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3440_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3440_Tags" xml:space="preserve">
     <value>confusing</value>
   </data>
@@ -6756,6 +7419,9 @@
   </data>
   <data name="S3441_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3441_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3441_Tags" xml:space="preserve">
     <value>finding,clumsy</value>
@@ -6787,6 +7453,9 @@
   <data name="S3442_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3442_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3442_Tags" xml:space="preserve">
     <value>confusing</value>
   </data>
@@ -6816,6 +7485,9 @@
   </data>
   <data name="S3443_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S3443_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3443_Tags" xml:space="preserve">
     <value>suspicious</value>
@@ -6847,6 +7519,9 @@
   <data name="S3444_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3444_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3444_Tags" xml:space="preserve">
     <value>design</value>
   </data>
@@ -6876,6 +7551,9 @@
   </data>
   <data name="S3445_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3445_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3445_Tags" xml:space="preserve">
     <value>error-handling,confusing</value>
@@ -6907,6 +7585,9 @@
   <data name="S3447_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3447_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3447_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -6936,6 +7617,9 @@
   </data>
   <data name="S3449_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S3449_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3449_Tags" xml:space="preserve">
     <value />
@@ -6967,6 +7651,9 @@
   <data name="S3450_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3450_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3450_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -6996,6 +7683,9 @@
   </data>
   <data name="S3451_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S3451_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3451_Tags" xml:space="preserve">
     <value>suspicious</value>
@@ -7027,6 +7717,9 @@
   <data name="S3453_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3453_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3453_Tags" xml:space="preserve">
     <value>design</value>
   </data>
@@ -7056,6 +7749,9 @@
   </data>
   <data name="S3456_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3456_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3456_Tags" xml:space="preserve">
     <value>clumsy</value>
@@ -7087,6 +7783,9 @@
   <data name="S3457_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3457_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3457_Tags" xml:space="preserve">
     <value>confusing</value>
   </data>
@@ -7116,6 +7815,9 @@
   </data>
   <data name="S3458_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3458_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3458_Tags" xml:space="preserve">
     <value>finding,clumsy</value>
@@ -7147,6 +7849,9 @@
   <data name="S3459_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3459_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3459_Tags" xml:space="preserve">
     <value>suspicious</value>
   </data>
@@ -7176,6 +7881,9 @@
   </data>
   <data name="S3464_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S3464_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3464_Tags" xml:space="preserve">
     <value />
@@ -7207,6 +7915,9 @@
   <data name="S3466_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3466_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3466_Tags" xml:space="preserve">
     <value />
   </data>
@@ -7236,6 +7947,9 @@
   </data>
   <data name="S3532_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3532_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3532_Tags" xml:space="preserve">
     <value>unused,finding,clumsy</value>
@@ -7267,6 +7981,9 @@
   <data name="S3597_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3597_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3597_Tags" xml:space="preserve">
     <value>api-design</value>
   </data>
@@ -7296,6 +8013,9 @@
   </data>
   <data name="S3598_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3598_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3598_Tags" xml:space="preserve">
     <value />
@@ -7327,6 +8047,9 @@
   <data name="S3600_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3600_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3600_Tags" xml:space="preserve">
     <value>confusing</value>
   </data>
@@ -7356,6 +8079,9 @@
   </data>
   <data name="S3603_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3603_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3603_Tags" xml:space="preserve">
     <value />
@@ -7387,6 +8113,9 @@
   <data name="S3604_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3604_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3604_Tags" xml:space="preserve">
     <value />
   </data>
@@ -7416,6 +8145,9 @@
   </data>
   <data name="S3610_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3610_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3610_Tags" xml:space="preserve">
     <value>redundant</value>
@@ -7447,6 +8179,9 @@
   <data name="S3626_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3626_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3626_Tags" xml:space="preserve">
     <value>redundant,clumsy</value>
   </data>
@@ -7476,6 +8211,9 @@
   </data>
   <data name="S3655_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3655_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3655_Tags" xml:space="preserve">
     <value>cwe</value>
@@ -7507,6 +8245,9 @@
   <data name="S3693_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S3693_Status" xml:space="preserve">
+    <value>deprecated</value>
+  </data>
   <data name="S3693_Tags" xml:space="preserve">
     <value />
   </data>
@@ -7530,6 +8271,9 @@
   </data>
   <data name="S3717_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3717_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3717_Tags" xml:space="preserve">
     <value />
@@ -7561,6 +8305,9 @@
   <data name="S3776_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3776_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3776_Tags" xml:space="preserve">
     <value>brain-overload</value>
   </data>
@@ -7590,6 +8337,9 @@
   </data>
   <data name="S3869_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S3869_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3869_Tags" xml:space="preserve">
     <value>leak,unpredictable</value>
@@ -7621,6 +8371,9 @@
   <data name="S3871_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3871_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3871_Tags" xml:space="preserve">
     <value>error-handling,api-design,owasp-a10</value>
   </data>
@@ -7650,6 +8403,9 @@
   </data>
   <data name="S3872_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3872_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3872_Tags" xml:space="preserve">
     <value>convention,confusing</value>
@@ -7681,6 +8437,9 @@
   <data name="S3874_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3874_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3874_Tags" xml:space="preserve">
     <value>suspicious</value>
   </data>
@@ -7710,6 +8469,9 @@
   </data>
   <data name="S3875_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S3875_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3875_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -7741,6 +8503,9 @@
   <data name="S3876_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3876_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3876_Tags" xml:space="preserve">
     <value>design</value>
   </data>
@@ -7770,6 +8535,9 @@
   </data>
   <data name="S3877_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S3877_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3877_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -7801,6 +8569,9 @@
   <data name="S3880_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3880_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3880_Tags" xml:space="preserve">
     <value>performance</value>
   </data>
@@ -7830,6 +8601,9 @@
   </data>
   <data name="S3881_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3881_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3881_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -7861,6 +8635,9 @@
   <data name="S3884_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S3884_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3884_Tags" xml:space="preserve">
     <value>owasp-a6</value>
   </data>
@@ -7890,6 +8667,9 @@
   </data>
   <data name="S3885_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3885_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3885_Tags" xml:space="preserve">
     <value>unpredictable</value>
@@ -7921,6 +8701,9 @@
   <data name="S3887_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3887_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3887_Tags" xml:space="preserve">
     <value />
   </data>
@@ -7950,6 +8733,9 @@
   </data>
   <data name="S3889_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S3889_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3889_Tags" xml:space="preserve">
     <value>multi-threading,unpredictable</value>
@@ -7981,6 +8767,9 @@
   <data name="S3897_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3897_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3897_Tags" xml:space="preserve">
     <value>api-design</value>
   </data>
@@ -8010,6 +8799,9 @@
   </data>
   <data name="S3898_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3898_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3898_Tags" xml:space="preserve">
     <value>performance</value>
@@ -8041,6 +8833,9 @@
   <data name="S3900_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3900_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3900_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -8070,6 +8865,9 @@
   </data>
   <data name="S3902_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3902_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3902_Tags" xml:space="preserve">
     <value>performance</value>
@@ -8101,6 +8899,9 @@
   <data name="S3903_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3903_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3903_Tags" xml:space="preserve">
     <value />
   </data>
@@ -8130,6 +8931,9 @@
   </data>
   <data name="S3904_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S3904_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3904_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -8161,6 +8965,9 @@
   <data name="S3906_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3906_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3906_Tags" xml:space="preserve">
     <value>convention</value>
   </data>
@@ -8190,6 +8997,9 @@
   </data>
   <data name="S3908_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3908_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3908_Tags" xml:space="preserve">
     <value />
@@ -8221,6 +9031,9 @@
   <data name="S3909_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3909_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3909_Tags" xml:space="preserve">
     <value />
   </data>
@@ -8250,6 +9063,9 @@
   </data>
   <data name="S3923_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3923_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3923_Tags" xml:space="preserve">
     <value />
@@ -8281,6 +9097,9 @@
   <data name="S3925_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3925_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3925_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -8310,6 +9129,9 @@
   </data>
   <data name="S3926_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3926_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3926_Tags" xml:space="preserve">
     <value>serialization</value>
@@ -8341,6 +9163,9 @@
   <data name="S3927_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3927_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3927_Tags" xml:space="preserve">
     <value />
   </data>
@@ -8370,6 +9195,9 @@
   </data>
   <data name="S3928_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3928_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3928_Tags" xml:space="preserve">
     <value />
@@ -8401,6 +9229,9 @@
   <data name="S3937_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3937_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3937_Tags" xml:space="preserve">
     <value>suspicious</value>
   </data>
@@ -8430,6 +9261,9 @@
   </data>
   <data name="S3949_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3949_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3949_Tags" xml:space="preserve">
     <value>overflow,based-on-misra</value>
@@ -8461,6 +9295,9 @@
   <data name="S3956_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3956_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3956_Tags" xml:space="preserve">
     <value>api-design</value>
   </data>
@@ -8490,6 +9327,9 @@
   </data>
   <data name="S3962_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S3962_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3962_Tags" xml:space="preserve">
     <value>performance</value>
@@ -8521,6 +9361,9 @@
   <data name="S3963_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3963_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3963_Tags" xml:space="preserve">
     <value />
   </data>
@@ -8550,6 +9393,9 @@
   </data>
   <data name="S3966_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3966_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3966_Tags" xml:space="preserve">
     <value>confusing,pitfall</value>
@@ -8581,6 +9427,9 @@
   <data name="S3967_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S3967_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3967_Tags" xml:space="preserve">
     <value>design</value>
   </data>
@@ -8610,6 +9459,9 @@
   </data>
   <data name="S3971_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3971_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3971_Tags" xml:space="preserve">
     <value />
@@ -8641,6 +9493,9 @@
   <data name="S3972_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S3972_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3972_Tags" xml:space="preserve">
     <value>suspicious</value>
   </data>
@@ -8670,6 +9525,9 @@
   </data>
   <data name="S3973_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S3973_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3973_Tags" xml:space="preserve">
     <value>confusing,suspicious</value>
@@ -8701,6 +9559,9 @@
   <data name="S3981_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3981_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3981_Tags" xml:space="preserve">
     <value />
   </data>
@@ -8730,6 +9591,9 @@
   </data>
   <data name="S3984_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3984_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3984_Tags" xml:space="preserve">
     <value>error-handling</value>
@@ -8761,6 +9625,9 @@
   <data name="S3990_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3990_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3990_Tags" xml:space="preserve">
     <value>api-design</value>
   </data>
@@ -8790,6 +9657,9 @@
   </data>
   <data name="S3992_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3992_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3992_Tags" xml:space="preserve">
     <value>api-design</value>
@@ -8821,6 +9691,9 @@
   <data name="S3993_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3993_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3993_Tags" xml:space="preserve">
     <value>api-design</value>
   </data>
@@ -8850,6 +9723,9 @@
   </data>
   <data name="S3994_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3994_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3994_Tags" xml:space="preserve">
     <value />
@@ -8881,6 +9757,9 @@
   <data name="S3995_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3995_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3995_Tags" xml:space="preserve">
     <value />
   </data>
@@ -8910,6 +9789,9 @@
   </data>
   <data name="S3996_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S3996_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3996_Tags" xml:space="preserve">
     <value />
@@ -8941,6 +9823,9 @@
   <data name="S3997_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S3997_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S3997_Tags" xml:space="preserve">
     <value />
   </data>
@@ -8970,6 +9855,9 @@
   </data>
   <data name="S3998_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S3998_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S3998_Tags" xml:space="preserve">
     <value>multi-threading,pitfall</value>
@@ -9001,6 +9889,9 @@
   <data name="S4000_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4000_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4000_Tags" xml:space="preserve">
     <value />
   </data>
@@ -9024,6 +9915,9 @@
   </data>
   <data name="S4002_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4002_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4002_Tags" xml:space="preserve">
     <value />
@@ -9055,6 +9949,9 @@
   <data name="S4004_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4004_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4004_Tags" xml:space="preserve">
     <value />
   </data>
@@ -9084,6 +9981,9 @@
   </data>
   <data name="S4005_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4005_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4005_Tags" xml:space="preserve">
     <value />
@@ -9115,6 +10015,9 @@
   <data name="S4015_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4015_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4015_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -9144,6 +10047,9 @@
   </data>
   <data name="S4016_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4016_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4016_Tags" xml:space="preserve">
     <value />
@@ -9175,6 +10081,9 @@
   <data name="S4017_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4017_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4017_Tags" xml:space="preserve">
     <value>confusing</value>
   </data>
@@ -9204,6 +10113,9 @@
   </data>
   <data name="S4018_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4018_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4018_Tags" xml:space="preserve">
     <value />
@@ -9235,6 +10147,9 @@
   <data name="S4019_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4019_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4019_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -9264,6 +10179,9 @@
   </data>
   <data name="S4022_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4022_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4022_Tags" xml:space="preserve">
     <value />
@@ -9295,6 +10213,9 @@
   <data name="S4023_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S4023_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4023_Tags" xml:space="preserve">
     <value />
   </data>
@@ -9324,6 +10245,9 @@
   </data>
   <data name="S4025_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4025_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4025_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -9355,6 +10279,9 @@
   <data name="S4026_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S4026_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4026_Tags" xml:space="preserve">
     <value>performance</value>
   </data>
@@ -9384,6 +10311,9 @@
   </data>
   <data name="S4027_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4027_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4027_Tags" xml:space="preserve">
     <value>convention</value>
@@ -9415,6 +10345,9 @@
   <data name="S4035_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4035_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4035_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -9444,6 +10377,9 @@
   </data>
   <data name="S4039_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4039_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4039_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -9475,6 +10411,9 @@
   <data name="S4040_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S4040_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4040_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -9504,6 +10443,9 @@
   </data>
   <data name="S4041_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4041_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4041_Tags" xml:space="preserve">
     <value>convention</value>
@@ -9535,6 +10477,9 @@
   <data name="S4047_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S4047_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4047_Tags" xml:space="preserve">
     <value />
   </data>
@@ -9564,6 +10509,9 @@
   </data>
   <data name="S4049_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4049_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4049_Tags" xml:space="preserve">
     <value>convention</value>
@@ -9595,6 +10543,9 @@
   <data name="S4050_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4050_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4050_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -9624,6 +10575,9 @@
   </data>
   <data name="S4052_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4052_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4052_Tags" xml:space="preserve">
     <value />
@@ -9655,6 +10609,9 @@
   <data name="S4055_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4055_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4055_Tags" xml:space="preserve">
     <value>localisation,pitfall</value>
   </data>
@@ -9684,6 +10641,9 @@
   </data>
   <data name="S4056_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4056_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4056_Tags" xml:space="preserve">
     <value>localisation,pitfall</value>
@@ -9715,6 +10675,9 @@
   <data name="S4057_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4057_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4057_Tags" xml:space="preserve">
     <value>localisation</value>
   </data>
@@ -9744,6 +10707,9 @@
   </data>
   <data name="S4058_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4058_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4058_Tags" xml:space="preserve">
     <value />
@@ -9775,6 +10741,9 @@
   <data name="S4059_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4059_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4059_Tags" xml:space="preserve">
     <value>confusing</value>
   </data>
@@ -9804,6 +10773,9 @@
   </data>
   <data name="S4060_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4060_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4060_Tags" xml:space="preserve">
     <value>performance</value>
@@ -9835,6 +10807,9 @@
   <data name="S4061_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S4061_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4061_Tags" xml:space="preserve">
     <value />
   </data>
@@ -9864,6 +10839,9 @@
   </data>
   <data name="S4069_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4069_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4069_Tags" xml:space="preserve">
     <value>convention</value>
@@ -9895,6 +10873,9 @@
   <data name="S4070_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4070_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4070_Tags" xml:space="preserve">
     <value />
   </data>
@@ -9924,6 +10905,9 @@
   </data>
   <data name="S4136_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4136_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4136_Tags" xml:space="preserve">
     <value>convention</value>
@@ -9955,6 +10939,9 @@
   <data name="S4142_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4142_Status" xml:space="preserve">
+    <value>deprecated</value>
+  </data>
   <data name="S4142_Tags" xml:space="preserve">
     <value />
   </data>
@@ -9984,6 +10971,9 @@
   </data>
   <data name="S4143_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4143_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4143_Tags" xml:space="preserve">
     <value>suspicious</value>
@@ -10015,6 +11005,9 @@
   <data name="S4144_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4144_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4144_Tags" xml:space="preserve">
     <value>confusing,duplicate,suspicious</value>
   </data>
@@ -10044,6 +11037,9 @@
   </data>
   <data name="S4158_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4158_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4158_Tags" xml:space="preserve">
     <value />
@@ -10075,6 +11071,9 @@
   <data name="S4159_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S4159_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4159_Tags" xml:space="preserve">
     <value>mef,pitfall</value>
   </data>
@@ -10104,6 +11103,9 @@
   </data>
   <data name="S4200_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4200_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4200_Tags" xml:space="preserve">
     <value>pitfall</value>
@@ -10135,6 +11137,9 @@
   <data name="S4201_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S4201_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4201_Tags" xml:space="preserve">
     <value>redundant</value>
   </data>
@@ -10164,6 +11169,9 @@
   </data>
   <data name="S4210_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4210_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4210_Tags" xml:space="preserve">
     <value>winforms,pitfall</value>
@@ -10195,6 +11203,9 @@
   <data name="S4211_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4211_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4211_Tags" xml:space="preserve">
     <value>owasp-a6,pitfall</value>
   </data>
@@ -10224,6 +11235,9 @@
   </data>
   <data name="S4212_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4212_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4212_Tags" xml:space="preserve">
     <value>serialization,owasp-a8</value>
@@ -10255,6 +11269,9 @@
   <data name="S4214_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4214_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4214_Tags" xml:space="preserve">
     <value>pinvoke</value>
   </data>
@@ -10284,6 +11301,9 @@
   </data>
   <data name="S4220_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4220_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4220_Tags" xml:space="preserve">
     <value>event,pitfall</value>
@@ -10315,6 +11335,9 @@
   <data name="S4225_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S4225_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4225_Tags" xml:space="preserve">
     <value />
   </data>
@@ -10344,6 +11367,9 @@
   </data>
   <data name="S4226_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4226_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4226_Tags" xml:space="preserve">
     <value>confusing</value>
@@ -10375,6 +11401,9 @@
   <data name="S4260_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4260_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4260_Tags" xml:space="preserve">
     <value>xaml,wpf</value>
   </data>
@@ -10404,6 +11433,9 @@
   </data>
   <data name="S4261_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4261_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4261_Tags" xml:space="preserve">
     <value>convention,async-await,confusing</value>
@@ -10435,6 +11467,9 @@
   <data name="S4275_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4275_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4275_Tags" xml:space="preserve">
     <value>pitfall</value>
   </data>
@@ -10464,6 +11499,9 @@
   </data>
   <data name="S4277_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4277_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4277_Tags" xml:space="preserve">
     <value>mef,pitfall</value>
@@ -10495,6 +11533,9 @@
   <data name="S4426_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S4426_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4426_Tags" xml:space="preserve">
     <value>cwe,privacy,owasp-a6,owasp-a3</value>
   </data>
@@ -10524,6 +11565,9 @@
   </data>
   <data name="S4428_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4428_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4428_Tags" xml:space="preserve">
     <value>mef,pitfall</value>
@@ -10555,6 +11599,9 @@
   <data name="S4432_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4432_Status" xml:space="preserve">
+    <value>deprecated</value>
+  </data>
   <data name="S4432_Tags" xml:space="preserve">
     <value />
   </data>
@@ -10584,6 +11631,9 @@
   </data>
   <data name="S4433_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4433_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4433_Tags" xml:space="preserve">
     <value>cwe,owasp-a2</value>
@@ -10615,6 +11665,9 @@
   <data name="S4456_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4456_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4456_Tags" xml:space="preserve">
     <value>yield</value>
   </data>
@@ -10644,6 +11697,9 @@
   </data>
   <data name="S4457_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4457_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4457_Tags" xml:space="preserve">
     <value>async-await</value>
@@ -10675,6 +11731,9 @@
   <data name="S4462_Severity" xml:space="preserve">
     <value>Blocker</value>
   </data>
+  <data name="S4462_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4462_Tags" xml:space="preserve">
     <value>async-await,deadlock</value>
   </data>
@@ -10704,6 +11763,9 @@
   </data>
   <data name="S4487_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4487_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4487_Tags" xml:space="preserve">
     <value>cwe,unused</value>
@@ -10735,6 +11797,9 @@
   <data name="S4507_Severity" xml:space="preserve">
     <value>Minor</value>
   </data>
+  <data name="S4507_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4507_Tags" xml:space="preserve">
     <value>cwe,error-handling,debug,user-experience,owasp-a3</value>
   </data>
@@ -10764,6 +11829,9 @@
   </data>
   <data name="S4524_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4524_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4524_Tags" xml:space="preserve">
     <value />
@@ -10795,6 +11863,9 @@
   <data name="S4564_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S4564_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4564_Tags" xml:space="preserve">
     <value />
   </data>
@@ -10824,6 +11895,9 @@
   </data>
   <data name="S4581_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S4581_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4581_Tags" xml:space="preserve">
     <value />
@@ -10855,6 +11929,9 @@
   <data name="S4583_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4583_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4583_Tags" xml:space="preserve">
     <value />
   </data>
@@ -10884,6 +11961,9 @@
   </data>
   <data name="S4586_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4586_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4586_Tags" xml:space="preserve">
     <value />
@@ -10915,6 +11995,9 @@
   <data name="S4635_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4635_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4635_Tags" xml:space="preserve">
     <value>performance</value>
   </data>
@@ -10938,6 +12021,9 @@
   </data>
   <data name="S4784_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4784_Status" xml:space="preserve">
+    <value>deprecated</value>
   </data>
   <data name="S4784_Tags" xml:space="preserve">
     <value />
@@ -10963,6 +12049,9 @@
   <data name="S4787_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4787_Status" xml:space="preserve">
+    <value>deprecated</value>
+  </data>
   <data name="S4787_Tags" xml:space="preserve">
     <value />
   </data>
@@ -10986,6 +12075,9 @@
   </data>
   <data name="S4790_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4790_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4790_Tags" xml:space="preserve">
     <value>cwe,spring,owasp-a6,sans-top25-porous,owasp-a3</value>
@@ -11011,6 +12103,9 @@
   <data name="S4792_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4792_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4792_Tags" xml:space="preserve">
     <value>cwe,owasp-a10,sans-top25-porous,owasp-a3</value>
   </data>
@@ -11034,6 +12129,9 @@
   </data>
   <data name="S4818_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4818_Status" xml:space="preserve">
+    <value>deprecated</value>
   </data>
   <data name="S4818_Tags" xml:space="preserve">
     <value />
@@ -11059,6 +12157,9 @@
   <data name="S4823_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4823_Status" xml:space="preserve">
+    <value>deprecated</value>
+  </data>
   <data name="S4823_Tags" xml:space="preserve">
     <value />
   </data>
@@ -11082,6 +12183,9 @@
   </data>
   <data name="S4829_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S4829_Status" xml:space="preserve">
+    <value>deprecated</value>
   </data>
   <data name="S4829_Tags" xml:space="preserve">
     <value />
@@ -11113,6 +12217,9 @@
   <data name="S4830_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S4830_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S4830_Tags" xml:space="preserve">
     <value>cwe,privacy,owasp-a6,ssl,owasp-a3</value>
   </data>
@@ -11136,6 +12243,9 @@
   </data>
   <data name="S4834_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S4834_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S4834_Tags" xml:space="preserve">
     <value>cwe,sans-top25-porous,owasp-a5</value>
@@ -11167,6 +12277,9 @@
   <data name="S5034_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S5034_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S5034_Tags" xml:space="preserve">
     <value />
   </data>
@@ -11197,6 +12310,9 @@
   <data name="S5042_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S5042_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S5042_Tags" xml:space="preserve">
     <value>cwe,owasp-a5</value>
   </data>
@@ -11220,6 +12336,9 @@
   </data>
   <data name="S5542_Severity" xml:space="preserve">
     <value>Blocker</value>
+  </data>
+  <data name="S5542_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S5542_Tags" xml:space="preserve">
     <value>cwe,privacy,owasp-a6,sans-top25-porous,owasp-a3</value>
@@ -11245,6 +12364,9 @@
   <data name="S5547_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S5547_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S5547_Tags" xml:space="preserve">
     <value>cwe,privacy,owasp-a6,sans-top25-porous,owasp-a3</value>
   </data>
@@ -11269,6 +12391,9 @@
   <data name="S5659_Severity" xml:space="preserve">
     <value>Critical</value>
   </data>
+  <data name="S5659_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S5659_Tags" xml:space="preserve">
     <value>cwe,privacy,owasp-a3</value>
   </data>
@@ -11292,6 +12417,9 @@
   </data>
   <data name="S5766_Severity" xml:space="preserve">
     <value>Major</value>
+  </data>
+  <data name="S5766_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S5766_Tags" xml:space="preserve">
     <value>cwe,owasp-a8</value>
@@ -11323,6 +12451,9 @@
   <data name="S5773_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S5773_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S5773_Tags" xml:space="preserve">
     <value>cwe,owasp-a8</value>
   </data>
@@ -11352,6 +12483,9 @@
   </data>
   <data name="S818_Severity" xml:space="preserve">
     <value>Minor</value>
+  </data>
+  <data name="S818_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S818_Tags" xml:space="preserve">
     <value>convention,pitfall</value>
@@ -11383,6 +12517,9 @@
   <data name="S881_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S881_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S881_Tags" xml:space="preserve">
     <value />
   </data>
@@ -11413,6 +12550,9 @@
   <data name="S907_Severity" xml:space="preserve">
     <value>Major</value>
   </data>
+  <data name="S907_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
   <data name="S907_Tags" xml:space="preserve">
     <value>brain-overload</value>
   </data>
@@ -11442,6 +12582,9 @@
   </data>
   <data name="S927_Severity" xml:space="preserve">
     <value>Critical</value>
+  </data>
+  <data name="S927_Status" xml:space="preserve">
+    <value>ready</value>
   </data>
   <data name="S927_Tags" xml:space="preserve">
     <value>suspicious</value>

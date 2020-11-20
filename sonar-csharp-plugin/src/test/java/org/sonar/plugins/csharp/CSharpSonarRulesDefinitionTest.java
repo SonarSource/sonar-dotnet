@@ -84,4 +84,16 @@ public class CSharpSonarRulesDefinitionTest {
     assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:326", "owaspTop10:a3", "owaspTop10:a6");
   }
+
+  @Test
+  public void test_all_rules_have_status_set(){
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition();
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    definition.define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    for (RulesDefinition.Rule rule:repository.rules()) {
+      assertThat(rule.status()).isNotNull();
+    }
+  }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,31 +32,30 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
     {
         private const string CardinalitySingle = "SINGLE";
 
-        public static RuleDetail Convert(RuleDescriptors.RuleDetail ruleDetail)
-        {
-            return new RuleDetail
+        public static RuleDetail Convert(RuleDescriptors.RuleDetail ruleDetail) =>
+            new RuleDetail
             {
                 Key = ruleDetail.Key,
                 Type = ruleDetail.Type,
                 Title = ruleDetail.Title,
                 Severity = ruleDetail.Severity.ToUpper(CultureInfo.InvariantCulture),
+                Status = ruleDetail.Status.ToUpper(CultureInfo.InvariantCulture),
                 Description = ruleDetail.Description,
                 IsActivatedByDefault = ruleDetail.IsActivatedByDefault,
                 Tags = ruleDetail.Tags,
                 Parameters = ruleDetail.Parameters.Select(
-                    parameter =>
-                        new RuleParameter
-                        {
-                            Type = parameter.Type,
-                            Key = parameter.Key,
-                            Description = parameter.Description,
-                            DefaultValue = parameter.DefaultValue
-                        }).ToList(),
+                        parameter =>
+                            new RuleParameter
+                            {
+                                Type = parameter.Type,
+                                Key = parameter.Key,
+                                Description = parameter.Description,
+                                DefaultValue = parameter.DefaultValue
+                            }).ToList(),
                 Cardinality = CardinalitySingle,
                 RemediationFunction = ruleDetail.Remediation,
                 RemediationFunctionBaseEffort = ruleDetail.RemediationCost
             };
-        }
 
         public RuleDetail()
         {
@@ -75,6 +74,9 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
 
         [XmlElement("severity")]
         public string Severity { get; set; }
+
+        [XmlElement("status")]
+        public string Status { get; set; }
 
         [XmlElement("cardinality")]
         public string Cardinality { get; set; }
