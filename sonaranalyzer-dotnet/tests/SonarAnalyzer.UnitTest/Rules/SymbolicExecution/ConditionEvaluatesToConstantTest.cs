@@ -19,9 +19,7 @@
  */
 
 extern alias csharp;
-using System.Collections.Immutable;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
@@ -70,8 +68,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            new SymbolicExecutionRunner(
-                new SymbolicExecutionAnalyzerFactory(
-                    ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new ConditionEvaluatesToConstant())));
+            new SymbolicExecutionRunner(new ConditionEvaluatesToConstant());
     }
 }
