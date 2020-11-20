@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     var expression = invocation.Expression;
                     if (expression is MemberAccessExpressionSyntax memberAccess &&
-                        invocation.ToStringContains("Sum") &&
+                        memberAccess.Name.Identifier.ValueText == "Sum" &&
                         IsSumInsideUnchecked(invocation) &&
                         c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
                         IsSumOnInteger(methodSymbol))
