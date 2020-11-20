@@ -12314,7 +12314,7 @@
     <value>ready</value>
   </data>
   <data name="S5042_Tags" xml:space="preserve">
-    <value>cwe,owasp-a6,owasp-a5</value>
+    <value>cwe,owasp-a5</value>
   </data>
   <data name="S5042_Title" xml:space="preserve">
     <value>Expanding archive files is security-sensitive</value>
