@@ -66,6 +66,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference SystemRuntimeExtensions { get; } = CreateReference("System.Runtime.Extensions.dll");
         internal static MetadataReference SystemRuntimeInteropServices { get; } = CreateReference("System.Runtime.InteropServices.dll");
         internal static MetadataReference SystemRuntimeSerialization { get; } = CreateReference("System.Runtime.Serialization.dll");
+        internal static MetadataReference SystemRuntimeSerializationFormatters { get; } = CreateReference("System.Runtime.Serialization.Formatters.dll");
         internal static MetadataReference SystemRuntimeSerializationPrimitives { get; } = CreateReference("System.Runtime.Serialization.Primitives.dll");
         internal static MetadataReference SystemSecurityCryptographyAlgorithms { get; } = CreateReference("System.Security.Cryptography.Algorithms.dll");
         internal static MetadataReference SystemSecurityCryptographyX509Certificates { get; } = CreateReference("System.Security.Cryptography.X509Certificates.dll");

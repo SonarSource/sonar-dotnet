@@ -19,11 +19,12 @@
  */
 
 extern alias csharp;
-using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
+#if NETFRAMEWORK
 using SonarAnalyzer.UnitTest.MetadataReferences;
+#endif
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
@@ -33,19 +34,20 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EmptyCollectionsShouldNotBeEnumerated()
-        {
-            // Symbolic execution analyzers are run by the SymbolicExecutionRunner
-            var analyzers = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new EmptyCollectionsShouldNotBeEnumerated());
-            var runner = new SymbolicExecutionRunner(new SymbolicExecutionAnalyzerFactory(analyzers));
-
+        public void EmptyCollectionsShouldNotBeEnumerated() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\EmptyCollectionsShouldNotBeEnumerated.cs",
-                runner,
+                new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
+
+#if NET
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EmptyCollectionsShouldNotBeEnumerated_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.CSharp9.cs", new SymbolicExecutionRunner(new EmptyCollectionsShouldNotBeEnumerated()));
+#endif
     }
 }

@@ -19,7 +19,6 @@
  */
 
 extern alias csharp;
-using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
@@ -33,18 +32,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PublicMethodArgumentsShouldBeCheckedForNull()
-        {
-            // Symbolic execution analyzers are run by the SymbolicExecutionRunner
-            var analyzers = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(new PublicMethodArgumentsShouldBeCheckedForNull());
-            var runner = new SymbolicExecutionRunner(new SymbolicExecutionAnalyzerFactory(analyzers));
-
+        public void PublicMethodArgumentsShouldBeCheckedForNull() =>
             Verifier.VerifyAnalyzer(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.cs",
-                runner,
+                new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
+
+#if NET
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs",
+                new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()));
+#endif
+
     }
 }
