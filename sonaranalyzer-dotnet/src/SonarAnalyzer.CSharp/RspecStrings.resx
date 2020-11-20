@@ -373,7 +373,7 @@
     <value>ready</value>
   </data>
   <data name="S106_Tags" xml:space="preserve">
-    <value>bad-practice</value>
+    <value>bad-practice,owasp-a3</value>
   </data>
   <data name="S106_Title" xml:space="preserve">
     <value>Standard outputs should not be used directly to log anything</value>
@@ -4994,7 +4994,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S2681_Description" xml:space="preserve">
-    <value>Curly braces can be omitted from a one-line block, such as with an if statement or for loop, but doing so can be misleading and induce bugs. </value>
+    <value>Curly braces can be omitted from a one-line block, such as with an if statement or for loop, but doing so can be misleading and induce bugs.</value>
   </data>
   <data name="S2681_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6137,7 +6137,7 @@
     <value>ready</value>
   </data>
   <data name="S3216_Tags" xml:space="preserve">
-    <value>multi-threading,suspicious</value>
+    <value>multi-threading,async-await,suspicious</value>
   </data>
   <data name="S3216_Title" xml:space="preserve">
     <value>"ConfigureAwait(false)" should be used</value>
@@ -10034,7 +10034,7 @@
     <value>If an enum member's name contains the word "reserved" it implies it is not currently used and will be change in the future. However changing an enum member is a breaking change and can create significant problems. There is no need to reserve an enum member since a new member can be added in the future, and such an addition will usually not be a breaking change.</value>
   </data>
   <data name="S4016_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S4016_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -11966,7 +11966,7 @@
     <value>ready</value>
   </data>
   <data name="S4586_Tags" xml:space="preserve">
-    <value />
+    <value>async-await</value>
   </data>
   <data name="S4586_Title" xml:space="preserve">
     <value>Non-async "Task/Task&lt;T&gt;" methods should not return null</value>
@@ -12281,7 +12281,7 @@
     <value>ready</value>
   </data>
   <data name="S5034_Tags" xml:space="preserve">
-    <value />
+    <value>async-await</value>
   </data>
   <data name="S5034_Title" xml:space="preserve">
     <value>"ValueTask" should be consumed correctly</value>
@@ -12353,7 +12353,7 @@
     <value>Critical Vulnerability</value>
   </data>
   <data name="S5547_Description" xml:space="preserve">
-    <value>Strong cipher algorithms are cryptographic systems resistant to cryptanalysis, they are not vulnerable to well-known attacks like brute force attacks for example. </value>
+    <value>Strong cipher algorithms are cryptographic systems resistant to cryptanalysis, they are not vulnerable to well-known attacks like brute force attacks for example.</value>
   </data>
   <data name="S5547_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -12590,7 +12590,7 @@
     <value>suspicious</value>
   </data>
   <data name="S927_Title" xml:space="preserve">
-    <value>parameter names should match base declaration and other partial definitions</value>
+    <value>Parameter names should match base declaration and other partial definitions</value>
   </data>
   <data name="S927_Type" xml:space="preserve">
     <value>CODE_SMELL</value>

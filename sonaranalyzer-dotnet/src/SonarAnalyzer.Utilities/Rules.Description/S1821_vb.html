@@ -1,5 +1,44 @@
-<p>Nested <code>switch</code> structures are difficult to understand because you can easily confuse the cases of an inner <code>switch</code> as
-belonging to an outer statement. Therefore nested <code>switch</code> statements should be avoided.</p>
-<p>Specifically, you should structure your code to avoid the need for nested <code>switch</code> statements, but if you cannot, then consider moving
-the inner <code>switch</code> to another function.</p>
+<p>Nested <code>Select Case</code> structures are difficult to understand because you can easily confuse the cases of an inner <code>Select
+Case</code> as belonging to an outer statement. Therefore nested <code>Select Case</code> statements should be avoided.</p>
+<p>Specifically, you should structure your code to avoid the need for nested <code>Select Case</code> statements, but if you cannot, then consider
+moving the inner <code>Select Case</code> to another function.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Sub Foo(A As Integer, B As Integer)
+    Select Case A
+        Case 0
+            ' ...
+        Case 1
+            Select Case B   ' Noncompliant; nested Select Case
+                Case 2
+                    ' ...
+                Case 3
+                    ' ...
+                Case 4
+                    ' ...
+                Case Else
+                    ' ...
+            End Select
+        Case 2
+            ' ...
+        Case Else
+            ' ...
+    End Select
+End Sub
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Sub Foo(A As Integer, B As Integer)
+    Select Case A
+        Case 0
+            ' ...
+        Case 1
+            HandleB(B)
+        Case 2
+            ' ...
+        Case Else
+            ' ...
+    End Select
+End Sub
+</pre>
 
