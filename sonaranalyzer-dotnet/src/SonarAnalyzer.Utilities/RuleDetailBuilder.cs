@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -69,6 +69,7 @@ namespace SonarAnalyzer.Utilities
                 Type = GetBackwardsCompatibleType(resources.GetString($"{rule.Key}_Type")),
                 Title = resources.GetString($"{rule.Key}_Title"),
                 Severity = resources.GetString($"{rule.Key}_Severity"),
+                Status = resources.GetString($"{rule.Key}_Status"),
                 IsActivatedByDefault = bool.Parse(resources.GetString($"{rule.Key}_IsActivatedByDefault")),
                 Description = GetResourceHtml(rule, language),
                 Remediation = ToSonarQubeRemediationFunction(resources.GetString($"{rule.Key}_Remediation")),

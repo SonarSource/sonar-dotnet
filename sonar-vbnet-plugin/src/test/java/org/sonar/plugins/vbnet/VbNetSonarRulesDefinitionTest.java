@@ -72,4 +72,15 @@ public class VbNetSonarRulesDefinitionTest {
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:117", "cwe:532", "cwe:778", "owaspTop10:a10", "owaspTop10:a3");
   }
 
+  @Test
+  public void test_all_rules_have_status_set(){
+    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition();
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    definition.define(context);
+    RulesDefinition.Repository repository = context.repository("vbnet");
+
+    for (RulesDefinition.Rule rule:repository.rules()) {
+      assertThat(rule.status()).isNotNull();
+    }
+  }
 }

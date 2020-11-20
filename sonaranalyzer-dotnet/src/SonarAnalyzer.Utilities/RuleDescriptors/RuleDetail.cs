@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -35,6 +35,7 @@ namespace SonarAnalyzer.RuleDescriptors
         public string Type { get; set; }
         public string Title { get; set; }
         public string Severity { get; set; }
+        public string Status { get; set; }
         public string Description { get; set; }
         public List<string> Tags { get; private set; }
         public List<RuleParameter> Parameters { get; private set; }

@@ -6,7 +6,6 @@ This script controls the analyzer build process (from buildling to creating the 
 .DESCRIPTION
 Usage: build.ps1
     Steps
-        -restore            Restore packages
         -build              Build the analyzer solution
         -buildJava          Build the plugin (java)
         -coverage           Compute the code coverage of the analyzer
