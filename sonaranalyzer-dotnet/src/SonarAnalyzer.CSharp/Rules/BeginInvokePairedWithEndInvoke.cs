@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     const string BeginInvoke = "BeginInvoke";
-                    if (invocation.ToStringContains(BeginInvoke) &&
+                    if (invocation.Expression.ToStringContains(BeginInvoke) &&
                         GetCallbackArg(invocation) is { } callbackArg &&
                         GetMethodSymbol(invocation, c.SemanticModel) is { } methodSymbol &&
                         methodSymbol.Name == BeginInvoke &&

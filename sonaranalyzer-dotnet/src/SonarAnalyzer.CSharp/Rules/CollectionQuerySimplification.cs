@@ -97,6 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var invocation = (InvocationExpressionSyntax)context.Node;
             if (invocation.ArgumentList?.Arguments.Count == 0 &&
                 invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+                memberAccess.Name.Identifier.ValueText == CountName &&
                 context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
                 methodSymbol.Name == CountName &&
                 methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T) &&

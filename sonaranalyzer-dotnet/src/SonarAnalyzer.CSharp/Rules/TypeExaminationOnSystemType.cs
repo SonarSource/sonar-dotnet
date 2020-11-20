@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
 
-                    if (invocation.ToStringContainsEitherOr("IsInstanceOfType", "GetType") &&
+                    if (invocation.Expression.ToStringContainsEitherOr("IsInstanceOfType", "GetType") &&
                         c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
                     {
                         CheckGetTypeCallOnType(invocation, methodSymbol, c);
