@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
 {
     public class EnumerableSumInUnchecked
     {
-        public void Test(List<int> list)
+        public void Test(List<int> list, List<float> list2)
         {
             int a = list.Sum();  // Compliant
 
@@ -20,6 +20,8 @@ namespace Tests.Diagnostics
 
                 e = Enumerable.Sum(list); // Noncompliant
 //                             ^^^
+
+                float floatSum = list2.Sum(); // Compliant
             }
 
             checked
@@ -50,6 +52,16 @@ namespace Tests.Diagnostics
             {
                 var y = l2.Sum(ll => ll);  // Noncompliant
             }
+
+            // coverage
+            list.Count();
+            MySum();
+            unchecked
+            {
+                MySum();
+            }
         }
+
+        void MySum() { }
     }
 }
