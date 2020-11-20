@@ -1,5 +1,5 @@
 {
-  "title": "parameter names should match base declaration and other partial definitions",
+  "title": "Parameter names should match base declaration and other partial definitions",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

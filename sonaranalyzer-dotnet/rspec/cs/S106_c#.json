@@ -7,10 +7,16 @@
     "constantCost": "10min"
   },
   "tags": [
-    "bad-practice"
+    "bad-practice",
+    "owasp-a3"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-106",
   "sqKey": "S106",
-  "scope": "Main"
+  "scope": "Main",
+  "securityStandards": {
+    "OWASP": [
+      "A3"
+    ]
+  }
 }

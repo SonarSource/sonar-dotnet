@@ -1,8 +1,13 @@
 <p>Most of the time a block of code is empty when a piece of code is really missing. So such empty block must be either filled or removed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-' Empty on purpose or missing piece of code?
-For index As Integer = 1 To 42 ' NonCompliant
+For Index As Integer = 1 To 42 ' Empty on purpose or missing piece of code?
+Next
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+For Index As Integer = 1 To 42
+    Process(Index)
 Next
 </pre>
 <h2>Exceptions</h2>

@@ -9,7 +9,7 @@
 Sub DoSomething()
 End Sub
 
-Function DoSomething()
+Function DoSomething() As String
 End Function
 </pre>
 <h2>Compliant Solution</h2>
@@ -18,7 +18,7 @@ Sub DoSomething()
     ' Not implemented because of reason
 End Sub
 
-Function DoSomething()
+Function DoSomething() As String
     Throw New NotSupportedException
 End Function
 </pre>
