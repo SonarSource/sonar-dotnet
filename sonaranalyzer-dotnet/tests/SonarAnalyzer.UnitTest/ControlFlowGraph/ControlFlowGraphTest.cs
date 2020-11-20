@@ -4308,6 +4308,33 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
 
         [TestMethod]
         [TestCategory("CFG")]
+        public void Cfg_NotPattern_InIf_IsNotSupported()
+        {
+            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is not null) { }"));
+
+            exception.Message.Should().Be("NotPattern");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_AndPattern_InIf_IsNotSupported()
+        {
+            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is int and > 0) { }"));
+
+            exception.Message.Should().Be("AndPattern");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_OrPattern_InIf_IsNotSupported()
+        {
+            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is string or int) { }"));
+
+            exception.Message.Should().Be("OrPattern");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
         public void Cfg_Switch_Patterns_NoDefault()
         {
             var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); break; case double d: cw2(); break; } cw3();");

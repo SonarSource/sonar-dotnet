@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NET || NETFRAMEWORK
-
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
@@ -83,5 +81,3 @@ namespace SonarAnalyzer.UnitTest.Rules
             new SymbolicExecutionRunner(new RestrictDeserializedTypes());
     }
 }
-
-#endif

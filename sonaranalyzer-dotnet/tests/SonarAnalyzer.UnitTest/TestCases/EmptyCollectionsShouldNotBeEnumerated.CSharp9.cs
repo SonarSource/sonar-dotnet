@@ -82,3 +82,20 @@ public partial class Partial
         list.Clear();       // Noncompliant
     }
 }
+
+public class TartetTypedConditional
+{
+    public void Go(bool condition)
+    {
+        var filled = new List<string>() { "a" };
+        var empty = new LinkedList<string>();
+        ICollection<string> collection = condition ? filled : empty;
+        collection.Clear(); // FN
+
+        var filledLinked = new LinkedList<string>();
+        filledLinked.AddLast("b");
+        collection = condition ? filled : filledLinked;
+        collection.Clear();
+    }
+}
+

@@ -78,6 +78,34 @@ public class Sample
         }
     }
 
+    public void PatternMatchingSwitch(object arg)
+    {
+        var res = arg switch
+        {
+            not null => arg,
+            _ => ""
+        };
+        res.ToString();
+
+        res = arg switch
+        {
+            string and not null => arg,
+            _ => ""
+        };
+        res.ToString();
+
+        res = arg switch
+        {
+            string x => x,
+            not not null => arg,
+            _ => ""
+        };
+        res.ToString();     // FN
+
+        object o = null;
+        o.ToString();       // FN, can't build CFG for this method
+    }
+
     public void StaticLambda()
     {
         Func<string> a = static () =>
@@ -152,4 +180,3 @@ namespace TartetTypedConditional
         }
     }
 }
-
