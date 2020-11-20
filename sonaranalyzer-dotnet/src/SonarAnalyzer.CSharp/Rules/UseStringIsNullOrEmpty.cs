@@ -50,22 +50,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocationExpression = (InvocationExpressionSyntax)c.Node;
 
-                    if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression &&
-                        TryGetFirstArgument(invocationExpression, out var firstArgument) &&
-                        memberAccessExpression.ToStringContains(EqualsName) &&
-                        IsStringEqualsMethod(memberAccessExpression, c.SemanticModel))
+                    if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression
+                        && memberAccessExpression.Name.Identifier.ValueText == EqualsName
+                        && TryGetFirstArgument(invocationExpression, out var firstArgument)
+                        && IsStringEqualsMethod(memberAccessExpression, c.SemanticModel))
                     {
                         // x.Equals(value), where x is string.Empty, "" or const "", and value is some string
-                        if (IsStringIdentifier(firstArgument.Expression, c.SemanticModel) &&
-                            IsConstantEmptyString(memberAccessExpression.Expression, c.SemanticModel))
+                        if (IsStringIdentifier(firstArgument.Expression, c.SemanticModel)
+                            && IsConstantEmptyString(memberAccessExpression.Expression, c.SemanticModel))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation(), MessageFormat));
                             return;
                         }
 
                         // value.Equals(x), where x is string.Empty, "" or const "", and value is some string
-                        if (IsStringIdentifier(memberAccessExpression.Expression, c.SemanticModel) &&
-                            IsConstantEmptyString(firstArgument.Expression, c.SemanticModel))
+                        if (IsStringIdentifier(memberAccessExpression.Expression, c.SemanticModel)
+                            && IsConstantEmptyString(firstArgument.Expression, c.SemanticModel))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation(), MessageFormat));
                         }
@@ -85,13 +85,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var methodName = semanticModel.GetSymbolInfo(memberAccessExpression.Name);
 
-            return methodName.Symbol.IsInType(KnownType.System_String) &&
-                   methodName.Symbol.Name == EqualsName;
+            return methodName.Symbol.IsInType(KnownType.System_String)
+                && methodName.Symbol.Name == EqualsName;
         }
 
         private static bool IsStringIdentifier(ExpressionSyntax expression, SemanticModel semanticModel)
         {
-
             if (!(expression is IdentifierNameSyntax identifierNameExpression))
             {
                 return false;
@@ -102,23 +101,16 @@ namespace SonarAnalyzer.Rules.CSharp
             return expressionType != null && expressionType.Is(KnownType.System_String);
         }
 
-        private static bool IsConstantEmptyString(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            return IsStringEmptyLiteral(expression) ||
-                   IsStringEmptyConst(expression, semanticModel) ||
-                   expression.IsStringEmpty(semanticModel);
-        }
+        private static bool IsConstantEmptyString(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            IsStringEmptyLiteral(expression)
+            || IsStringEmptyConst(expression, semanticModel)
+            || expression.IsStringEmpty(semanticModel);
 
         private static bool IsStringEmptyConst(ExpressionSyntax expression, SemanticModel semanticModel)
         {
             var constValue = semanticModel.GetConstantValue(expression);
-            if (!constValue.HasValue)
-            {
-                return false;
-            }
-
-
-            return constValue.Value is string stringConstValue && stringConstValue == string.Empty;
+            return constValue.HasValue
+                && constValue.Value is string stringConstValue && stringConstValue == string.Empty;
         }
 
         private static bool IsStringEmptyLiteral(ExpressionSyntax expression)

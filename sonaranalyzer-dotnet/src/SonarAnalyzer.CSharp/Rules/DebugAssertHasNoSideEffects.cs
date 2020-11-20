@@ -47,21 +47,18 @@ namespace SonarAnalyzer.Rules.CSharp
             "INSERT", "PUSH", "APPEND", "CLEAR", "DEQUEUE", "ENQUEUE", "DISPOSE"
         };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var invokedMethodSyntax = c.Node as InvocationExpressionSyntax;
 
-                    if (invokedMethodSyntax.ToStringContains("Assert") &&
-                        ContainsCallsWithSideEffects(invokedMethodSyntax) &&
-                        IsDebugAssert(invokedMethodSyntax, c))
+                    if (IsDebugAssert(invokedMethodSyntax, c)
+                        && ContainsCallsWithSideEffects(invokedMethodSyntax))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invokedMethodSyntax.ArgumentList.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
-        }
 
         private static string GetIdentifierName(InvocationExpressionSyntax invocation)
         {
@@ -75,21 +72,18 @@ namespace SonarAnalyzer.Rules.CSharp
             return memberBinding?.Name?.Identifier.ValueText;
         }
 
-        private bool IsDebugAssert(InvocationExpressionSyntax invocation, SyntaxNodeAnalysisContext context)
-        {
-            var invokedMethodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-            return invokedMethodSymbol.IsDebugAssert();
-        }
+        private static bool IsDebugAssert(InvocationExpressionSyntax invocation, SyntaxNodeAnalysisContext context) =>
+            invocation.Expression is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.Name.Identifier.ValueText == nameof(System.Diagnostics.Debug.Assert)
+            && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol symbol
+            && symbol.IsDebugAssert();
 
-        private bool ContainsCallsWithSideEffects(InvocationExpressionSyntax invocation)
-        {
-            return invocation
-                .DescendantNodes()
+        private static bool ContainsCallsWithSideEffects(InvocationExpressionSyntax invocation) =>
+            invocation.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .Select(GetIdentifierName)
-                .Any(name => !string.IsNullOrEmpty(name) &&
-                        name != "SetEquals" &&
-                        sideEffectWords.Contains(name.SplitCamelCaseToWords().First()));
-        }
+                .Any(name => !string.IsNullOrEmpty(name)
+                        && name != "SetEquals"
+                        && sideEffectWords.Contains(name.SplitCamelCaseToWords().First()));
     }
 }
