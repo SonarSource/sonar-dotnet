@@ -50,35 +50,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocationExpression = (InvocationExpressionSyntax)c.Node;
 
-                    if (!(invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression))
+                    if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression &&
+                        TryGetFirstArgument(invocationExpression, out var firstArgument) &&
+                        memberAccessExpression.ToStringContains(EqualsName) &&
+                        IsStringEqualsMethod(memberAccessExpression, c.SemanticModel))
                     {
-                        return;
-                    }
+                        // x.Equals(value), where x is string.Empty, "" or const "", and value is some string
+                        if (IsStringIdentifier(firstArgument.Expression, c.SemanticModel) &&
+                            IsConstantEmptyString(memberAccessExpression.Expression, c.SemanticModel))
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation(), MessageFormat));
+                            return;
+                        }
 
-                    if (!TryGetFirstArgument(invocationExpression, out var firstArgument))
-                    {
-                        return;
-                    }
-
-                    if (!memberAccessExpression.ToStringContains(EqualsName) ||
-                        !IsStringEqualsMethod(memberAccessExpression, c.SemanticModel))
-                    {
-                        return;
-                    }
-
-                    // x.Equals(value), where x is string.Empty, "" or const "", and value is some string
-                    if (IsStringIdentifier(firstArgument.Expression, c.SemanticModel) &&
-                        IsConstantEmptyString(memberAccessExpression.Expression, c.SemanticModel))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation(), MessageFormat));
-                        return;
-                    }
-
-                    // value.Equals(x), where x is string.Empty, "" or const "", and value is some string
-                    if (IsStringIdentifier(memberAccessExpression.Expression, c.SemanticModel) &&
-                        IsConstantEmptyString(firstArgument.Expression, c.SemanticModel))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation(), MessageFormat));
+                        // value.Equals(x), where x is string.Empty, "" or const "", and value is some string
+                        if (IsStringIdentifier(memberAccessExpression.Expression, c.SemanticModel) &&
+                            IsConstantEmptyString(firstArgument.Expression, c.SemanticModel))
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation(), MessageFormat));
+                        }
                     }
                 },
                 SyntaxKind.InvocationExpression);
