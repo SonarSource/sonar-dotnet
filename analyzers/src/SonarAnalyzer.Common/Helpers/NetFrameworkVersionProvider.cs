@@ -101,6 +101,6 @@ namespace SonarAnalyzer.Helpers
             => mscorlibAssembly
             .GetTypeByMetadataName("System.Array")?
             .GetMembers("Empty")
-            .Any() == true;
+            .Any();
     }
 }
