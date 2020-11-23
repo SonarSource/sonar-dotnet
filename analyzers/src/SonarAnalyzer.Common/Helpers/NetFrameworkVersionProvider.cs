@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        /// <remarks>the constructor was still not deprecated in .NET Framework 3.5</remarks>
+        /// <remarks>The constructor was still not deprecated in .NET Framework 3.5</remarks>
         private static bool Probably35(ISymbol debuggerConstructorSymbol)
             => !debuggerConstructorSymbol
             .GetAttributes()
