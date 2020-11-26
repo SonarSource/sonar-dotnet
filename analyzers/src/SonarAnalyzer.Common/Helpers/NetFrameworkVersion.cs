@@ -22,15 +22,15 @@ namespace SonarAnalyzer.Helpers
 {
     public enum NetFrameworkVersion
     {
-        // cannot tell
+        /// <summary>Unknown (cannot tell)</summary>
         Unknown,
-        // probably .NET 3.5
+        /// <summary>Probably .NET 3.5</summary>
         Probably35,
-        // between .NET 4.0 (inclusive) and .NET 4.5.1 (inclusive)
+        /// <summary>Between .NET 4.0 (inclusive) and .NET 4.5.1 (inclusive)</summary>
         Between4And451,
-        // after .NET 4.5.2 (inclusive)
-        After452,
-        // after .NET 4.6 (inclusive)
+        /// <summary>Is .NET 4.5.2</summary>
+        Is452,
+        /// <summary>After .NET 4.6 (inclusive)</summary>
         After46,
     }
 }

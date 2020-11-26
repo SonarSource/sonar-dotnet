@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var versionProvider = new NetFrameworkVersionProvider();
 
 #if NETFRAMEWORK
-            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.After452);
+            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Is452);
 #else
             versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Unknown);
 #endif
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
 #if NETFRAMEWORK
             // the local .net framework mscorlib is actually used
-            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.After452);
+            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Is452);
 #else
             versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Unknown);
 #endif
