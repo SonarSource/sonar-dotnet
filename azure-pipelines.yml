@@ -44,7 +44,7 @@ stages:
         inputs:
           restoreSolution: '$(solution)'
           feedsToUse: 'config'
-          nugetConfigPath: 'sonaranalyzer-dotnet\NuGet.Config'
+          nugetConfigPath: 'analyzers\NuGet.Config'
 
       - powershell: |
           # Calculate the file path
@@ -61,7 +61,7 @@ stages:
         displayName: 'Read Sonar project version from the versions.props file'
 
       - powershell: |
-          cd sonaranalyzer-dotnet
+          cd analyzers
           $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
 
           Write-Host "Remove .Net 5 target for UnitTest project"
@@ -107,20 +107,20 @@ stages:
       - task: PublishPipelineArtifact@1
         displayName: 'Publish analyzer binaries as pipeline artifact'
         inputs:
-          path: sonaranalyzer-dotnet/its/binaries/
+          path: analyzers/its/binaries/
           artifact: Binaries
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish rule descriptor binaries as pipeline artifact'
         inputs:
-          path: sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin
+          path: analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin
           artifact: RuleDescriptorBin
 
       - task: NuGetCommand@2
         displayName: "Build NuGet packages"
         inputs:
           command: pack
-          packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
+          packagesToPack: 'analyzers/src/**/*.nuspec'
           configuration: '$(BuildConfiguration)'
           packDestination: '$(Build.ArtifactStagingDirectory)/packages'
           verbosityPack: 'Detailed'
@@ -240,7 +240,7 @@ stages:
       - powershell: |
           . .\scripts\utils.ps1
 
-          cd sonaranalyzer-dotnet
+          cd analyzers
 
           $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
 
@@ -283,7 +283,7 @@ stages:
         displayName: 'Download binaries to test'
         inputs:
           artifact: Binaries
-          targetPath: 'sonaranalyzer-dotnet/its/binaries/'
+          targetPath: 'analyzers/its/binaries/'
 
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
@@ -310,8 +310,8 @@ stages:
       - task: PowerShell@2
         displayName: 'Run ITs'
         inputs:
-          filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
-          workingDirectory: 'sonaranalyzer-dotnet/its'
+          filePath: 'analyzers/its/regression-test.ps1'
+          workingDirectory: 'analyzers/its'
 
     - job: runJavaBuild
       displayName: 'Java build'
@@ -322,13 +322,13 @@ stages:
         displayName: 'Download .Net binaries for Maven build'
         inputs:
           artifact: Binaries
-          targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
+          targetPath: 'analyzers/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download rule descriptor binaries'
         inputs:
           artifact: RuleDescriptorBin
-          targetPath: sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin
+          targetPath: analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin
 
       - task: Cache@2
         displayName: "Cache Maven local repo"
@@ -400,13 +400,13 @@ stages:
         displayName: 'Download .Net binaries for Maven build'
         inputs:
           artifact: Binaries
-          targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
+          targetPath: 'analyzers/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download rule descriptor binaries'
         inputs:
           artifact: RuleDescriptorBin
-          targetPath: 'sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
+          targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
 
       - task: Cache@2
         displayName: "Cache Maven local repo"
@@ -467,13 +467,13 @@ stages:
         displayName: 'Download .Net binaries for Maven build'
         inputs:
           artifact: Binaries
-          targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
+          targetPath: 'analyzers/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download rule descriptor binaries'
         inputs:
           artifact: RuleDescriptorBin
-          targetPath: 'sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
+          targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
 
       - task: Cache@2
         displayName: "Cache Maven local repo"

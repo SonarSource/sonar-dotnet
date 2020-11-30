@@ -135,7 +135,7 @@
             </goals>
             <configuration>
               <target>
-                <property name="proto.path" location="${project.basedir}/../sonaranalyzer-dotnet/src/SonarAnalyzer.Common/Protobuf"/>
+                <property name="proto.path" location="${project.basedir}/../analyzers/src/SonarAnalyzer.Common/Protobuf"/>
                 <fileset id="fileset" dir="${proto.path}">
                   <include name="*.proto" />
                 </fileset>

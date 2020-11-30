@@ -37,7 +37,7 @@ In general, it is best to run commands from the Visual Studio Developer Command 
         - the path to the JDK bin folder
         - %M2_HOME%\bin
         - the path to the Scanner For MSBuild folder and to the Scanner CLI
-1. Open `sonaranalyzer-dotnet/SonarAnalyzer.sln`
+1. Open `analyzers/SonarAnalyzer.sln`
 
 ## Running Tests
 
@@ -51,7 +51,7 @@ To run the ITs you will need to follow this pattern:
 
 1. Make sure the project is built: Integration tests don't build the analyzer, but use the results of the latest build (debug or release)
 1. Open the `Developer Command Prompt for VS2019` from the start menu
-1. Go to `PATH_TO_CLONED_REPOSITORY/sonaranalyzer-dotnet/its`
+1. Go to `PATH_TO_CLONED_REPOSITORY/analyzers/its`
 1. Run `powershell`
 1. Run `.\regression-test.ps1`
 

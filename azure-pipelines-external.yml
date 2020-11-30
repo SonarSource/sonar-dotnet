@@ -40,7 +40,7 @@ stages:
         inputs:
           restoreSolution: '$(solution)'
           feedsToUse: 'config'
-          nugetConfigPath: 'sonaranalyzer-dotnet\NuGet.Config'
+          nugetConfigPath: 'analyzers\NuGet.Config'
 
       - powershell: |
           # Calculate the file path
@@ -86,5 +86,5 @@ stages:
       - task: PowerShell@2
         displayName: '.NET ITs'
         inputs:
-          filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
-          workingDirectory: 'sonaranalyzer-dotnet/its'
+          filePath: 'analyzers/its/regression-test.ps1'
+          workingDirectory: 'analyzers/its'

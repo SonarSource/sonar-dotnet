@@ -246,7 +246,7 @@
                     <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                     <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic">
                       <fileset
-                        dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.configuration}/">
+                        dir="${project.build.directory}/../../analyzers/src/SonarAnalyzer.Vsix/bin/${analyzer.configuration}/">
                         <include name="SonarAnalyzer.dll"/>
                         <include name="SonarAnalyzer.VisualBasic.dll"/>
                         <include name="Google.Protobuf.dll"/>
@@ -256,10 +256,10 @@
                          basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
                       <fileset
-                        dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/vbnet">
+                        dir="${project.build.directory}/../../analyzers/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/vbnet">
                         <include name="rules.xml"/>
                       </fileset>
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/vbnet">
+                      <fileset dir="${project.build.directory}/../../analyzers/rspec/vbnet">
                         <include name="*.json"/> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
                       </fileset>
                     </copy>
@@ -367,7 +367,7 @@
                       </fileset>
                     </copy>
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/vbnet">
+                      <fileset dir="${project.build.directory}/../../analyzers/rspec/vbnet">
                         <include name="*.json"/> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
                       </fileset>
                     </copy>

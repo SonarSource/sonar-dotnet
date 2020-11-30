@@ -31,7 +31,7 @@ param (
 Set-StrictMode -version 1.0
 $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
-$sonaranalyzerPath = "${PSScriptRoot}\\..\\..\\sonaranalyzer-dotnet"
+$sonaranalyzerPath = "${PSScriptRoot}\\..\\..\\analyzers"
 $SupportedSDKs = @("4.8", "4.7.2", "4.6.1")
 
 $categoriesMap = @{
