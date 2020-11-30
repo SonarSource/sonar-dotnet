@@ -142,7 +142,28 @@ namespace MyLibrary
         [NoProperty]
         public int GetRandom() => rnd.Next(); // Compliant
 
+        [NoProperty]
+        [PropertyOrMethod]
+        public string GetBothSupportedAndNotSupportedPropertyUsage() => ""; // Compliant
+
+        [PropertyOrMethod]
+        public int GetUsageIncludingProperty => 42; // Noncompliant
+
+        [AllTargets]
+        public int GetUsageForAll() => 17; // Noncompliant
+
+        [AllTargets]
+        [PropertyOrMethod]
+        public int GetUsageForAll2() => 17; // Noncompliant
+
+
+        [AttributeUsage(AttributeTargets.All)]
+        private sealed class AllTargetsAttribute : Attribute { }
+
+        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
+        private sealed class PropertyOrMethodAttribute : Attribute { }
+
         [AttributeUsage(AttributeTargets.All ^ AttributeTargets.Property)]
-        private class NoPropertyAttribute : Attribute { }
+        private sealed class NoPropertyAttribute : Attribute { }
     }
 }
