@@ -140,7 +140,7 @@ namespace MyLibrary
         private static readonly Random rnd = new Random();
 
         [NoProperty]
-        public int GetRandom() => rnd.Next(); // Noncompliant FP, attribute is needed and cannot be applied to property (Web API Controller)
+        public int GetRandom() => rnd.Next(); // Compliant
 
         [AttributeUsage(AttributeTargets.All ^ AttributeTargets.Property)]
         private class NoPropertyAttribute : Attribute { }
