@@ -1,16 +1,23 @@
-﻿Imports System
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
+﻿﻿Public Class UseReturnStatement
 
-Namespace Tests.TestCases
+    Public Function FunctionName() As Integer
+    FunctionName = 42 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+'       ^^^^^^^^^^^^
+End Function
 
-    Class Foo
+Public Function ReturnStatement() As Integer
+    Return 42 ' Compliant
+End Function
 
-        Public Sub Test()
+Public Function ReturnWithVariable() As Integer
+    Dim value As Integer = 42
+    Return value  ' Compliant
+End Function
 
-        End Sub
 
-    End Class
+Public Function ReturnWithFunctionName() As Integer
+    ReturnWithFunctionName = 42 ' Noncompliant
+    Return ReturnWithFunctionName  ' Noncompliant
+End Function
 
-End Namespace
+End Class

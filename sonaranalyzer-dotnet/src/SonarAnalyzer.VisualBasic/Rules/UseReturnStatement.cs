@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -27,7 +27,6 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -36,15 +35,29 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class UseReturnStatement : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S5944";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Use a 'Return' statement; assigning returned values to function names is obsolete.";
 
         private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            throw new System.NotImplementedException();
-        }
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var name = (IdentifierNameSyntax)c.Node;
+                if (name.Ancestors()?.FirstOrDefault(IsFunctionBlockSyntax) is MethodBlockSyntax methodBlock)
+                {
+                    var statement = (MethodStatementSyntax)methodBlock.BlockStatement;
+                    if (name.Identifier.ValueText.Equals(statement?.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, name.GetLocation()));
+                    }
+                }
+            },
+            SyntaxKind.IdentifierName);
+
+        private bool IsFunctionBlockSyntax(SyntaxNode node) =>
+            node is MethodBlockSyntax methodBlock &&
+            methodBlock.BlockStatement.DeclarationKeyword.IsKind(SyntaxKind.FunctionKeyword);
     }
 }
 
