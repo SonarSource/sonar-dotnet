@@ -156,6 +156,8 @@ namespace MyLibrary
         [PropertyOrMethod]
         public int GetUsageForAll2() => 17; // Noncompliant
 
+        [NoUsageDefined]
+        public int GetNoUsagedDefined() => 666; // Noncompliant
 
         [AttributeUsage(AttributeTargets.All)]
         private sealed class AllTargetsAttribute : Attribute { }
@@ -165,5 +167,7 @@ namespace MyLibrary
 
         [AttributeUsage(AttributeTargets.All ^ AttributeTargets.Property)]
         private sealed class NoPropertyAttribute : Attribute { }
+
+        private sealed class NoUsageDefinedAttribute : Attribute { }
     }
 }
