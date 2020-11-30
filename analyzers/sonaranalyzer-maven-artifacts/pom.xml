@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.sonarsource.dotnet</groupId>
-    <artifactId>sonaranalyzer-dotnet</artifactId>
+    <artifactId>analyzers</artifactId>
     <version>8.16-SNAPSHOT</version>
   </parent>
 
@@ -46,6 +46,6 @@
 
   <properties>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-    <gitRepositoryName>sonaranalyzer-dotnet</gitRepositoryName>
+    <gitRepositoryName>analyzers</gitRepositoryName>
   </properties>
 </project>

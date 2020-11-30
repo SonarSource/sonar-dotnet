@@ -7,9 +7,9 @@
     <version>8.16-SNAPSHOT</version>
   </parent>
 
-  <artifactId>sonaranalyzer-dotnet</artifactId>
+  <artifactId>analyzers</artifactId>
   <packaging>pom</packaging>
-  <name>sonaranalyzer-dotnet</name>
+  <name>analyzers</name>
   <inceptionYear>2016</inceptionYear>
 
   <organization>
@@ -43,6 +43,6 @@
 
   <properties>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-    <gitRepositoryName>sonaranalyzer-dotnet</gitRepositoryName>
+    <gitRepositoryName>analyzers</gitRepositoryName>
   </properties>
 </project>
