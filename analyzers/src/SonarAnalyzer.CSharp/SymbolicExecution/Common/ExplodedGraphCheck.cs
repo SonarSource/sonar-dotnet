@@ -35,6 +35,8 @@ namespace SonarAnalyzer.SymbolicExecution
 
         public virtual ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState) => programState;
 
+        public virtual ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) => programState;
+
         public virtual ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState) => programState;
 
         public virtual ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction) => programState;

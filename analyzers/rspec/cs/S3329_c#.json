@@ -1,0 +1,25 @@
+{
+  "title": "Cipher Block Chaining IV's should be random and unique",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "cwe",
+    "owasp-a6"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-3329",
+  "sqKey": "S3329",
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      330
+    ],
+    "OWASP": [
+      "A6"
+    ]
+  }
+}

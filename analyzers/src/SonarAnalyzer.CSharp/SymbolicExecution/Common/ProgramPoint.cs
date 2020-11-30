@@ -19,6 +19,7 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.ControlFlowGraph;
 
 namespace SonarAnalyzer.SymbolicExecution
@@ -70,5 +71,8 @@ namespace SonarAnalyzer.SymbolicExecution
         }
 
         public override int GetHashCode() => this.hash.Value;
+
+        public SyntaxNode GetCurrentInstruction() =>
+            Block.Instructions[Offset];
     }
 }
