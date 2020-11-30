@@ -1,0 +1,183 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+    <IsPackable>false</IsPackable>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>
+    <!--
+      This allows, on AzureDevops builds, to restore the NuGet packages which are not targeting .Net Standard or a compatible version by
+      usign as fallbacks .Net Framwework 4.0 client profile (net40-client) and Portable profile (portable-net45+win8+wp8+wpa81).
+      The following packages are affected:
+      - Microsoft.Composition 1.0.27 (portable-net45+win8+wp8+wpa81)
+      - Microsoft.Web.Xdt 2.1.0 (net40-client)
+      - NuGet.Core 2.14.0 (net40-client)
+      -->
+    <AssetTargetFallback>$(AssetTargetFallback);net40-client;portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <ProjectGuid>{e11606ca-a186-4fee-ba30-b1688747cd1a}</ProjectGuid>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\SonarAnalyzer.Test.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
+    <!-- Class AspNetCoreMetadataReference needs this FrameworkReference to generate metadata references for ASP.NET Core related test cases. -->
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="FluentAssertions.Analyzers" Version="0.11.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.8.0-5.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0-5.final" />
+    <PackageReference Include="Microsoft.Composition" Version="1.0.27">
+      <!-- This package is a dependency of Microsoft.CodeAnalysis.CSharp.Workspaces. It is safe to use since it's compatible with .Net Portable runtime -->
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="3.8.0-5.final" />
+    <PackageReference Include="NuGet.Core" Version="2.14.0" />
+    <!-- OpenCover is used by the build script to generate the code coverage report -->
+    <PackageReference Include="OpenCover" Version="4.7.922" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestCases\**\*" />
+    <None Include="TestCases\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Compile Remove="TestCasesForRuleFailure\**\*" />
+    <None Include="TestCasesForRuleFailure\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="CBDEMocks\CBDEArguments.dll" />
+    <None Remove="CBDEMocks\CBDEFails.exe" />
+    <None Remove="CBDEMocks\CBDESucceedsWithIncorrectResults.exe" />
+    <None Remove="CBDEMocks\CBDEWaitAndSucceeds.exe" />
+    <None Remove="ResourceTests\RuleWithBooleanParameter\SonarLint.xml" />
+    <None Remove="ResourceTests\StringInsteadOfBoolean\SonarLint.xml" />
+    <None Remove="ResourceTests\RuleWithStringParameter\SonarLint.xml" />
+    <None Remove="ResourceTests\StringInsteadOfInt\SonarLint.xml" />
+    <None Remove="ResourceTests\ToChange\SonarLint.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ResourceTests\SomeResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SomeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Update="ResourceTests\SomeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SomeResources.resx</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\.sonarlint\SonarLint.xml">
+      <Link>Properties\SonarLint.xml</Link>
+    </AdditionalFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="CBDEMocks\CBDEArguments.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CBDEMocks\CBDEFails.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CBDEMocks\CBDESucceedsWithIncorrectResults.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CBDEMocks\CBDEWaitAndSucceeds.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\AnalyzeGeneratedFalseVbnet\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\AnalyzeGeneratedFalse\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\AnalyzeGeneratedTrueVbnet\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\IgnoreHeaderCommentsFalseVbnet\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\IgnoreHeaderCommentsFalseCSharp\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\IgnoreHeaderCommentsTrueCSharp\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\IgnoreHeaderCommentsTrueVbnet\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\RuleWithBooleanParameter\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\StringInsteadOfBoolean\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\Malformed\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\NoSettings\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\AnalyzeGeneratedTrue\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\NotBoolean\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\RuleWithStringParameter\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\StringInsteadOfInt\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\ToChange\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\ProjectOutFolderPath.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Common\Resources\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
+    <ProjectReference Include="..\..\src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
+    <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
+      <Aliases>global,csharp</Aliases>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj" />
+    <ProjectReference Include="..\..\src\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.csproj" />
+    <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
+      <Aliases>global,vbnet</Aliases>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>
