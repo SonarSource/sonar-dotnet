@@ -147,7 +147,7 @@ namespace MyLibrary
         public string GetBothSupportedAndNotSupportedPropertyUsage() => ""; // Compliant
 
         [PropertyOrMethod]
-        public int GetUsageIncludingProperty => 42; // Noncompliant
+        public int GetUsageIncludingProperty() => 42; // Noncompliant
 
         [AllTargets]
         public int GetUsageForAll() => 17; // Noncompliant
