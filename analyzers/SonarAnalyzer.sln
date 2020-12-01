@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Solution Items", "Co
 		..\scripts\build\dev-build.ps1 = ..\scripts\build\dev-build.ps1
 		Directory.Build.props = Directory.Build.props
 		NuGet.Config = NuGet.Config
+		src\Signing.cs = src\Signing.cs
 		src\SonarAnalyzer.ruleset = src\SonarAnalyzer.ruleset
 		tests\SonarAnalyzer.Test.ruleset = tests\SonarAnalyzer.Test.ruleset
 		src\SonarLint.xml = src\SonarLint.xml
