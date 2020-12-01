@@ -73,8 +73,8 @@ namespace SonarAnalyzer.Rules.CSharp
             // The available platform ids are documented here: https://docs.microsoft.com/en-us/dotnet/api/system.platformid?view=netframework-4.8
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => WorkDirectoryBasePath,
-                    testCbdeBinaryPath, onCbdeExecution);
+                var handler = new CbdeHandler(OnCbdeIssue, ShouldRunCbdeInContext, () => WorkDirectoryBasePath, testCbdeBinaryPath, onCbdeExecution);
+                handler.RegisterMlirAndCbdeInOneStep(context);
             }
         }
 

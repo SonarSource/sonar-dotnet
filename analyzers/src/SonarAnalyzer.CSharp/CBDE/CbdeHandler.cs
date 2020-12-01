@@ -75,8 +75,7 @@ namespace SonarAnalyzer.CBDE
         private string moreDetailsMessage;
         private readonly bool emitLog;
 
-        public CbdeHandler(SonarAnalysisContext context,
-            Action<string, string, Location, CompilationAnalysisContext> raiseIssue,
+        public CbdeHandler(Action<string, string, Location, CompilationAnalysisContext> raiseIssue,
             Func<CompilationAnalysisContext, bool> shouldRunInContext,
             Func<string> getOutputDirectory,
             string testCbdeBinaryPath = null, //  Used by unit tests
@@ -105,10 +104,64 @@ namespace SonarAnalyzer.CBDE
                 emitLog = true;
                 cbdeExecutablePath = testCbdeBinaryPath;
             }
-            if (cbdeExecutablePath != null)
+        }
+
+        public void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
+        {
+            if (cbdeExecutablePath == null)
             {
-                RegisterMlirAndCbdeInOneStep(context);
+                return;
             }
+
+            context.RegisterCompilationAction(
+                c =>
+                {
+                    if (!shouldRunInContext(c))
+                    {
+                        return;
+                    }
+                    var compilationHash = c.Compilation.GetHashCode();
+                    InitializePathsAndLog(c.Compilation.Assembly.Name, compilationHash);
+                    Log("CBDE: Compilation phase");
+                    var exporterMetrics = new MlirExporterMetrics();
+                    try
+                    {
+                        var watch = Stopwatch.StartNew();
+                        var cpuWatch = ThreadCpuStopWatch.StartNew();
+                        foreach (var tree in c.Compilation.SyntaxTrees)
+                        {
+                            csSourceFileNames.Add(tree.FilePath);
+                            Log($"CBDE: Generating MLIR for source file {tree.FilePath} in context {compilationHash}");
+                            var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
+                            ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), exporterMetrics, mlirFileName);
+                            LogIfFailure($"- generated mlir file {mlirFileName}");
+                            Log($"CBDE: Done with file {tree.FilePath} in context {compilationHash}");
+                        }
+                        Log($"CBDE: MLIR generation time: {watch.ElapsedMilliseconds} ms");
+                        Log($"CBDE: MLIR generation cpu time: {cpuWatch.ElapsedMilliseconds} ms");
+                        watch.Restart();
+                        RunCbdeAndRaiseIssues(c);
+                        Log($"CBDE: CBDE execution and reporting time: {watch.ElapsedMilliseconds} ms");
+                        Log($"CBDE: CBDE execution and reporting cpu time: {cpuWatch.ElapsedMilliseconds} ms");
+                        Log("CBDE: End of compilation");
+                        lock (metricsFileLock)
+                        {
+                            File.AppendAllText(cbdeMetricsLogFile, exporterMetrics.Dump());
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Log("An exception has occured: " + e.Message + "\n" + e.StackTrace);
+                        var message = $@"Top level error in CBDE handling: {e.Message}
+Details: {moreDetailsMessage}
+Inner exception: {e.InnerException}
+Stack trace: {e.StackTrace}";
+                        // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
+                        // of displaying the full message. As a workaround, we replace the line ending with ' ## '.
+                        // See https://github.com/dotnet/roslyn/issues/1455 and https://github.com/dotnet/roslyn/issues/24346
+                        throw new CbdeException(message.Replace("\n", " ## ").Replace("\r", ""));
+                    }
+                });
         }
 
         private void LogIfFailure(string s)
@@ -164,59 +217,6 @@ namespace SonarAnalyzer.CBDE
             stream.Seek(0, SeekOrigin.Begin);
             stream.CopyTo(fileStream);
             fileStream.Close();
-        }
-
-        private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
-        {
-            context.RegisterCompilationAction(
-                c =>
-                {
-                    if (!shouldRunInContext(c))
-                    {
-                        return;
-                    }
-                    var compilationHash = c.Compilation.GetHashCode();
-                    InitializePathsAndLog(c.Compilation.Assembly.Name, compilationHash);
-                    Log("CBDE: Compilation phase");
-                    var exporterMetrics = new MlirExporterMetrics();
-                    try
-                    {
-                        var watch = Stopwatch.StartNew();
-                        var cpuWatch = ThreadCpuStopWatch.StartNew();
-                        foreach (var tree in c.Compilation.SyntaxTrees)
-                        {
-                            csSourceFileNames.Add(tree.FilePath);
-                            Log($"CBDE: Generating MLIR for source file {tree.FilePath} in context {compilationHash}");
-                            var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
-                            ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), exporterMetrics, mlirFileName);
-                            LogIfFailure($"- generated mlir file {mlirFileName}");
-                            Log($"CBDE: Done with file {tree.FilePath} in context {compilationHash}");
-                        }
-                        Log($"CBDE: MLIR generation time: {watch.ElapsedMilliseconds} ms");
-                        Log($"CBDE: MLIR generation cpu time: {cpuWatch.ElapsedMilliseconds} ms");
-                        watch.Restart();
-                        RunCbdeAndRaiseIssues(c);
-                        Log($"CBDE: CBDE execution and reporting time: {watch.ElapsedMilliseconds} ms");
-                        Log($"CBDE: CBDE execution and reporting cpu time: {cpuWatch.ElapsedMilliseconds} ms");
-                        Log("CBDE: End of compilation");
-                        lock (metricsFileLock)
-                        {
-                            File.AppendAllText(cbdeMetricsLogFile, exporterMetrics.Dump());
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        Log("An exception has occured: " + e.Message + "\n" + e.StackTrace);
-                        var message = $@"Top level error in CBDE handling: {e.Message}
-Details: {moreDetailsMessage}
-Inner exception: {e.InnerException}
-Stack trace: {e.StackTrace}";
-                        // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
-                        // of displaying the full message. As a workaround, we replace the line ending with ' ## '.
-                        // See https://github.com/dotnet/roslyn/issues/1455 and https://github.com/dotnet/roslyn/issues/24346
-                        throw new CbdeException(message.Replace("\n", " ## ").Replace("\r", ""));
-                    }
-                });
         }
 
         // In big projects, multiple source files can have the same name.
