@@ -735,7 +735,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             foreach (var section in switchStatement.Sections.Reverse())
             {
                 Block sectionBlock;
-                if (section == defaultSection)
+                if (defaultSection != null && section == defaultSection)
                 {
                     // Skip the default section if it contains a single default label; we already handled it
                     if (section.Labels.Count == 1)
