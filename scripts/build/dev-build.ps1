@@ -47,7 +47,7 @@ if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
 
 try {
     . (Join-Path $PSScriptRoot "build-utils.ps1")
-    Push-Location "${PSScriptRoot}\..\..\sonaranalyzer-dotnet"
+    Push-Location "${PSScriptRoot}\..\..\analyzers"
 
     Write-Header "Script configuration"
     $buildConfiguration = if ($release) { "Release" } else { "Debug" }
@@ -72,7 +72,7 @@ try {
         # in ParseOptionsHelper.FilterByEnvironment, it does not run tests for all C# versions unless it detects it's on the CI/CD
         # It considers to run under CI/CD only if the following environment variable is set.
         # When running this script, we want to run all unit tests.
-        # see sonaranalyzer-dotnet\tests\SonarAnalyzer.UnitTest\TestFramework\ParseOptionsHelper.cs
+        # see analyzers\tests\SonarAnalyzer.UnitTest\TestFramework\ParseOptionsHelper.cs
         $env:SYSTEM_DEFINITIONID="set"
         Invoke-UnitTests $binPath $buildConfiguration
     }

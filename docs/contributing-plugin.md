@@ -11,7 +11,7 @@
             The flags `-restore -build -test` need to be run only when you have changed the analyzer. Otherwise you can run only `-buildJava`
 
         * or run the following commands:
-            1. `msbuild /t:rebuild .\sonaranalyzer-dotnet\SonarAnalyzer.sln`
+            1. `msbuild /t:rebuild .\analyzers\SonarAnalyzer.sln`
             1. `mvn clean install -P local-analyzer -D analyzer.configuration=Debug`
 
     * To build the plugin while relying on a released analyzer run `mvn clean install -P download-analyzer -D analyzer.version=<VERSION>`

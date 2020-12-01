@@ -60,7 +60,7 @@
     <profile>
       <id>sonaranalyzer</id>
       <modules>
-        <module>sonaranalyzer-dotnet</module>
+        <module>analyzers</module>
       </modules>
     </profile>
     <profile>

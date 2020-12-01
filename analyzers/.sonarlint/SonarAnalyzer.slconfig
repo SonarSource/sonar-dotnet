@@ -1,0 +1,15 @@
+{
+  "ServerUri": "https://sonarcloud.io/",
+  "Organization": {
+    "Key": "sonarsource",
+    "Name": "SonarSource"
+  },
+  "ProjectKey": "sonaranalyzer-dotnet",
+  "ProjectName": "SonarAnalyzer .Net",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AWT63_RpV-oLu4FdMlyI",
+      "ProfileTimestamp": "2020-03-06T12:07:49+01:00"
+    }
+  }
+}

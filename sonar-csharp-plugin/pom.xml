@@ -243,7 +243,7 @@
                   <target>
                     <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                     <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.configuration}/">
+                      <fileset dir="${project.build.directory}/../../analyzers/src/SonarAnalyzer.Vsix/bin/${analyzer.configuration}/">
                         <include name="SonarAnalyzer.dll"/>
                         <include name="SonarAnalyzer.CFG.dll"/>
                         <include name="SonarAnalyzer.CSharp.dll"/>
@@ -253,10 +253,10 @@
                     <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                          basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/cs">
+                      <fileset dir="${project.build.directory}/../../analyzers/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/cs">
                         <include name="rules.xml"/>
                       </fileset>
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/cs">
+                      <fileset dir="${project.build.directory}/../../analyzers/rspec/cs">
                         <include name="*.json" /> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
                       </fileset>
                     </copy>
@@ -364,7 +364,7 @@
                       </fileset>
                     </copy>
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/cs">
+                      <fileset dir="${project.build.directory}/../../analyzers/rspec/cs">
                         <include name="*.json" /> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
                       </fileset>
                     </copy>

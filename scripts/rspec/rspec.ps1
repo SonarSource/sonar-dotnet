@@ -48,7 +48,7 @@ if (-Not (Test-Path $rule_api_jar)) {
     throw $rule_api_error
 }
 
-$sonaranalyzerPath = "${PSScriptRoot}\\..\\..\\sonaranalyzer-dotnet"
+$sonaranalyzerPath = "${PSScriptRoot}\\..\\..\\analyzers"
 
 $projectsMap = @{
     "cs" = "SonarAnalyzer.CSharp";
@@ -66,8 +66,8 @@ $resourceLanguageMap = @{
 }
 
 $sonarpediaMap = @{
-    "cs" = ".\sonaranalyzer-dotnet\src\SonarAnalyzer.CSharp";
-    "vbnet" = ".\sonaranalyzer-dotnet\src\SonarAnalyzer.VisualBasic";
+    "cs" = ".\analyzers\src\SonarAnalyzer.CSharp";
+    "vbnet" = ".\analyzers\src\SonarAnalyzer.VisualBasic";
 }
 
 # Returns the path to the folder where the RSPEC html and json files for the specified language will be downloaded.
@@ -275,4 +275,4 @@ if ($className -And $ruleKey) {
 }
 
 # Generate RspecStrings.resx using the new metadata
-Invoke-Expression -Command "& { scripts\rspec\rspec2resx.ps1 $language .\sonaranalyzer-dotnet\rspec\$language $sonarpediaFolder\RspecStrings.resx }"
+Invoke-Expression -Command "& { scripts\rspec\rspec2resx.ps1 $language .\analyzers\rspec\$language $sonarpediaFolder\RspecStrings.resx }"
