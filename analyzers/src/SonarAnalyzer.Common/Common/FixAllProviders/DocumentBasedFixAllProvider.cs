@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Common
                         ct => GetFixedSolutionAsync(fixAllContext)));
 
                 default:
-                    return null;
+                    return Task.FromResult<CodeAction>(null);
             }
         }
 
