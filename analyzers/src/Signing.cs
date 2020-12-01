@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-internal static class Signing
+namespace SonarAnalyzer
 {
+    internal static class Signing
+    {
 #if SignAssembly
     private const string PublicKey =
         "002400000480000094000000060200000024000052534131000400000100010081b4345a022cc0" +
@@ -29,6 +31,8 @@ internal static class Signing
         "35e67dc6";
     internal const string InternalsVisibleToPublicKey = ", PublicKey = " + PublicKey;
 #else
-    internal const string InternalsVisibleToPublicKey = "";
+        internal const string InternalsVisibleToPublicKey = "";
 #endif
+    }
 }
+
