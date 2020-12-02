@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     internal static class VbRuleTypeMapping
     {
         #region RuleTypesVb
-
+#pragma warning disable SA1005, SA1507 // SingleLineCommentsMustBeginWithSingleSpace
         // The empty lines below are so the rule number aligns nicely with the line number.
 
 

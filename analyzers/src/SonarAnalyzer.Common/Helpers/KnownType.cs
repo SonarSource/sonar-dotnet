@@ -27,6 +27,7 @@ namespace SonarAnalyzer.Helpers
 {
     internal sealed class KnownType
     {
+#pragma warning disable SA1310 // FieldNamesMustNotContainUnderscore
         #region Known types
 
         internal static readonly KnownType Void = new KnownType(SpecialType.System_Void, "void");
@@ -482,6 +483,7 @@ namespace SonarAnalyzer.Helpers
                 System_UInt16
             );
         #endregion Known types
+#pragma warning restore SA1310 // FieldNamesMustNotContainUnderscore
 
         private readonly bool isSpecialType;
         private readonly SpecialType specialType;
