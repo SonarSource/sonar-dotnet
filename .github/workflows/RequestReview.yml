@@ -8,6 +8,8 @@ jobs:
   assign_and_move_card:
     name: Assign issue to reviewer and move Kanban card
     runs-on: ubuntu-latest
+    # PRs from forks don't have required token authorization
+    if: github.event.pull_request.head.repo.full_name == github.repository
 
     steps:
       # https://github.com/actions/github-script
