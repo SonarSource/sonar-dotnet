@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,18 +31,19 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
+    [Rule(diagnosticId)]
     public sealed class StringLiteralShouldNotBeDuplicated : ParameterLoadingDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1192";
+
+        private const int MinimumStringLength = 5;
+        internal const string diagnosticId = "S1192";
         private const string MessageFormat = "Define a constant instead of using this literal '{0}' {1} times.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+            DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private const int MinimumStringLength = 5;
 
         private const int ThresholdDefaultValue = 3;
         [RuleParameter("threshold", PropertyType.Integer, "Number of times a literal must be duplicated to trigger an issue.",
@@ -68,6 +69,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
+
+
             var stringLiterals = context.Node
                 .DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
                 .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
@@ -78,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var literal in stringLiterals)
             {
                 // Remove leading and trailing double quotes
-                var stringValue = ExtractStringContent(literal.Token.Text);
+                var stringValue = extractStringContent(literal.Token.Text);
 
                 if (stringValue != null &&
                     stringValue.Length >= MinimumStringLength &&
@@ -101,18 +104,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value[0].GetLocation(),
                         additionalLocations: item.Value.Skip(1).Select(x => x.GetLocation()),
                         messageArgs: new object[] { item.Key, item.Value.Count }));
-                }
-            }
+                } }
+
         }
 
-        private static bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
+        internal static bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
             literalExpression.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>()
                 ?.ParameterList
                 ?.Parameters
                 .Any(p => p.Identifier.ValueText == literalExpression.Token.ValueText)
                 ?? false;
 
-        private static string ExtractStringContent(string literal)
+        private static string extractStringContent(string literal)
         {
             if (literal.StartsWith("@\""))
             {
