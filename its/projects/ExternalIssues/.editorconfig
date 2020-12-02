@@ -1,5 +1,7 @@
 # SyleCop.Analyzers rules - only the ones used in the test are enabled
 
+root = true
+
 dotnet_diagnostic.SA1200.severity = warning
 dotnet_diagnostic.SA1400.severity = warning
 dotnet_diagnostic.SA1633.severity = warning
@@ -77,7 +79,6 @@ dotnet_diagnostic.SA1139.severity = none
 dotnet_diagnostic.SA1140.severity = none
 dotnet_diagnostic.SA1141.severity = none
 dotnet_diagnostic.SA1142.severity = none
-
 
 dotnet_diagnostic.SA1201.severity = none
 dotnet_diagnostic.SA1202.severity = none
