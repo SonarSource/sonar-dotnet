@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,17 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Runtime.CompilerServices;
-using SonarAnalyzer.Helpers;
-using SonarAnalyzer.CBDE;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
+using System;
 using System.Collections.Immutable;
-using System.Linq;
-using System.IO;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using SonarAnalyzer;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.CBDE;
 
 [assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest" + Signing.InternalsVisibleToPublicKey)]
 
@@ -72,8 +73,8 @@ namespace SonarAnalyzer.Rules.CSharp
             // The available platform ids are documented here: https://docs.microsoft.com/en-us/dotnet/api/system.platformid?view=netframework-4.8
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => WorkDirectoryBasePath,
-                    testCbdeBinaryPath, onCbdeExecution);
+                var handler = new CbdeHandler(OnCbdeIssue, ShouldRunCbdeInContext, () => WorkDirectoryBasePath, testCbdeBinaryPath, onCbdeExecution);
+                handler.RegisterMlirAndCbdeInOneStep(context);
             }
         }
 

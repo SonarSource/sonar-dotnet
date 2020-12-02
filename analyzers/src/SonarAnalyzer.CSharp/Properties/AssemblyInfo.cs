@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,6 +20,7 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using SonarAnalyzer;
 
 [assembly: AssemblyTitle("SonarAnalyzer C#")]
 [assembly: AssemblyProduct("SonarAnalyzer")]
