@@ -62,6 +62,6 @@
     </AdditionalFiles>
   </ItemGroup>
 
-  <Import Project="..\StyleCopAnalyzers.targets" />
+  <Import Project="..\..\StyleCopAnalyzers.targets" />
 
 </Project>

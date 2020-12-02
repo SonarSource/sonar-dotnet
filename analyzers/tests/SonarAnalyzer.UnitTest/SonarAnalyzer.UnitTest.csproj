@@ -180,4 +180,6 @@
     </ProjectReference>
   </ItemGroup>
 
+  <Import Project="..\..\StyleCopAnalyzers.targets" />
+
 </Project>
