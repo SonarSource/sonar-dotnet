@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -94,6 +94,12 @@ namespace SonarAnalyzer.Helpers
                 KnownType.NUnit_Framework_TestFixtureAttribute
             );
 
+        private static readonly ImmutableArray<KnownType> NoExpectedResultTestMethodReturnTypes =
+            ImmutableArray.Create(
+                KnownType.Void,
+                KnownType.System_Threading_Tasks_Task
+            );
+
         /// <summary>
         /// Returns whether the class has an attribute that marks the class
         /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes)
@@ -108,11 +114,16 @@ namespace SonarAnalyzer.Helpers
             method.GetAttributes().Any(a => a.AttributeClass.IsAny(KnownExpectedExceptionAttributes));
 
         public static bool HasAssertionInAttribute(this IMethodSymbol method) =>
-            method.GetAttributes().Any(IsTestCaseAttributeWithExpectedResult);
+            !NoExpectedResultTestMethodReturnTypes.Any(method.ReturnType.Is)
+            && method.GetAttributes().Any(IsAnyTestCaseAttributeWithExpectedResult);
+
+        private static bool IsAnyTestCaseAttributeWithExpectedResult(AttributeData a) =>
+            IsTestCaseAttributeWithExpectedResult(a)
+            || a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute);
 
         private static bool IsTestCaseAttributeWithExpectedResult(AttributeData a) =>
-            a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseAttribute) &&
-            a.NamedArguments.Any(arg => arg.Key == "ExpectedResult");
+            a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseAttribute)
+            && a.NamedArguments.Any(arg => arg.Key == "ExpectedResult");
 
         public static bool IsMsTestOrNUnitTestIgnored(this IMethodSymbol method)
         {

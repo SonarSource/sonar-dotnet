@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using FluentAssertions;
     using NSubstitute;
     using NUnit.Framework;
@@ -200,6 +201,39 @@
         public void TestCase15() // Don't raise on skipped test methods
         {
         }
+
+        [TestCase]
+        public async Task TestCase16() // Noncompliant {{Add at least one assertion to this test case.}}
+//                        ^^^^^^^^^^
+        {
+            var x = 42;
+        }
+
+        [TestCase("foo", ExpectedResult = "foo")]
+        public void TestCase17(string str) // Noncompliant {{Add at least one assertion to this test case.}}
+//                  ^^^^^^^^^^
+        {
+            var x = str;
+        }
+
+        [TestCase("foo", ExpectedResult = "foo")]
+        public async Task TestCase18(string str) // Noncompliant {{Add at least one assertion to this test case.}}
+//                        ^^^^^^^^^^
+        {
+            var x = str;
+        }
+
+        [TestCase("foo", ExpectedResult = "foo")]
+        public string TestCase19(string str)
+        {
+            return str;
+        }
+
+        [TestCase("foo", ExpectedResult = "foo")]
+        public async Task<string> TestCase20(string str)
+        {
+            return str;
+        }
     }
 
     [TestFixture]
@@ -283,17 +317,29 @@
         {
         }
 
+        [TestCaseSource("Foo")]
+        public async Task TestCaseSource16() // Noncompliant {{Add at least one assertion to this test case.}}
+//                        ^^^^^^^^^^^^^^^^
+        {
+            var x = 42;
+        }
+
         private static readonly TestCaseData[] Cases =
         {
           new TestCaseData("foo", "bar").Returns(false),
           new TestCaseData(100, 100).Returns(true),
         };
 
-        // See: https://github.com/SonarSource/sonar-dotnet/issues/3751
-        // Returned value is verified by the framework and no assertion is needed.
         [Test]
         [TestCaseSource(nameof(Cases))] 
-        public bool Test(object obj1, object obj2) // Noncompliant - FP
+        public bool TestCaseSource17(object obj1, object obj2)
+        {
+            return obj1.Equals(obj2);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(Cases))]
+        public async Task<bool> TestCaseSource18(object obj1, object obj2)
         {
             return obj1.Equals(obj2);
         }
