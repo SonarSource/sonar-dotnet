@@ -73,23 +73,26 @@ jobs:
             }
             //
             async function processIssue(issue) {
-                removeAssignees(issue);
-                addAssignee(issue, context.payload.requested_reviewer.login);
-                const card = await findCard(issue.url);
-                if (card) {
-                    console.log("Moving card");
-                    github.projects.moveCard({ card_id: card.id, position: "bottom", column_id: REVIEW_IN_PROGRESS_COLUMN });
-                } else if (issue.pull_request) {
-                    console.log("Creating PR card");
-                    github.projects.createCard({ column_id: REVIEW_IN_PROGRESS_COLUMN, content_id: context.payload.pull_request.id, content_type: "PullRequest" });
-                } else {
-                    console.log("Creating Issue card");
-                    github.projects.createCard({ column_id: REVIEW_IN_PROGRESS_COLUMN, content_id: issue.id, content_type: "Issue" });
+                if(issue.state == "open") {
+                  removeAssignees(issue);
+                  addAssignee(issue, context.payload.requested_reviewer.login);
+                  const card = await findCard(issue.url);
+                  if (card) {
+                      console.log("Moving card");
+                      github.projects.moveCard({ card_id: card.id, position: "bottom", column_id: REVIEW_IN_PROGRESS_COLUMN });
+                  } else if (issue.pull_request) {
+                      console.log("Creating PR card");
+                      github.projects.createCard({ column_id: REVIEW_IN_PROGRESS_COLUMN, content_id: context.payload.pull_request.id, content_type: "PullRequest" });
+                  } else {
+                      console.log("Creating Issue card");
+                      github.projects.createCard({ column_id: REVIEW_IN_PROGRESS_COLUMN, content_id: issue.id, content_type: "Issue" });
+                  }
                 }
             }
             //
             let processPR = true;
-            const matches = context.payload.pull_request.body.match(/Fixes\s*#\d+/gi);
+            const pr = context.payload.pull_request;
+            const matches = pr.body.match(/Fixes\s*#\d+/gi);
             if (matches) {
                 for (let i = 0; i < matches.length; i++) {
                     console.log("Processing linked issue: " + matches[i]);
@@ -101,9 +104,9 @@ jobs:
                 }
             }
             if (processPR) {
-                console.log("Processing PR: #" + context.payload.number);
-                const issue = await getIssue(context.payload.number);
-                if (issue && issue.state == "open") {
+                console.log("Processing PR: #" + pr.number);
+                const issue = await getIssue(pr.number);
+                if (issue) {
                     processIssue(issue);
                 }
             }
