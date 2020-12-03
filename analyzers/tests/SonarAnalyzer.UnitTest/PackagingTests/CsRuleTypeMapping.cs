@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,7 +26,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     internal static class CsRuleTypeMapping
     {
         #region RuleTypesCs
-
+#pragma warning disable SA1005, SA1507 // SingleLineCommentsMustBeginWithSingleSpace, CodeMustNotContainMultipleBlankLinesInARow
         // The empty lines below are so the rule number aligns nicely with the line number.
 
 

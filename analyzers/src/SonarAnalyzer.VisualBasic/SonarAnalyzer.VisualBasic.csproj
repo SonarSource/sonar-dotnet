@@ -40,4 +40,7 @@
       <Link>Properties\SonarLint.xml</Link>
     </AdditionalFiles>
   </ItemGroup>
+
+  <Import Project="..\..\StyleCopAnalyzers.targets" />
+
 </Project>
