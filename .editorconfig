@@ -249,7 +249,7 @@ dotnet_diagnostic.SA1009.severity = none # needs discussion
 dotnet_diagnostic.SA1010.severity = warning
 dotnet_diagnostic.SA1011.severity = warning
 dotnet_diagnostic.SA1012.severity = none # noisy on collection initializers
-dotnet_diagnostic.SA1013.severity = none
+dotnet_diagnostic.SA1013.severity = none # noisy on collection initializers
 dotnet_diagnostic.SA1014.severity = warning
 dotnet_diagnostic.SA1015.severity = warning
 dotnet_diagnostic.SA1016.severity = warning
@@ -268,8 +268,8 @@ dotnet_diagnostic.SA1028.severity = warning
 
 # Ordering Rules (SA1200-) https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/1.1.118/documentation/OrderingRules.md
 
-dotnet_diagnostic.SA1200.severity = none
-dotnet_diagnostic.SA1201.severity = none
+dotnet_diagnostic.SA1200.severity = none # needs configuration to be "outsideNamespace"
+dotnet_diagnostic.SA1201.severity = none # needs configuration for our coding style order
 dotnet_diagnostic.SA1202.severity = warning
 dotnet_diagnostic.SA1203.severity = warning
 dotnet_diagnostic.SA1204.severity = warning
@@ -309,25 +309,25 @@ dotnet_diagnostic.SA1314.severity = warning
 
 dotnet_diagnostic.SA1400.severity = warning
 dotnet_diagnostic.SA1401.severity = warning
-dotnet_diagnostic.SA1402.severity = none
+dotnet_diagnostic.SA1402.severity = none # we use the pattern of keeping 2 base classes in the same file to split generic from non-generic logic
 dotnet_diagnostic.SA1403.severity = warning
 dotnet_diagnostic.SA1404.severity = warning
 dotnet_diagnostic.SA1405.severity = warning
 dotnet_diagnostic.SA1406.severity = warning
-dotnet_diagnostic.SA1407.severity = none
+dotnet_diagnostic.SA1407.severity = none # very noisy on hash calculations; can lead to less readable code
 dotnet_diagnostic.SA1408.severity = warning
 # SA1409 is not part of StyleCop.Analyzers
 dotnet_diagnostic.SA1410.severity = warning
 dotnet_diagnostic.SA1411.severity = warning
 dotnet_diagnostic.SA1412.severity = warning
-dotnet_diagnostic.SA1413.severity = none
+dotnet_diagnostic.SA1413.severity = none # needs discussion
 dotnet_diagnostic.SA1414.severity = warning
 
 # Layout Rules (SA1500-) https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/1.1.118/documentation/LayoutRules.md
 
 dotnet_diagnostic.SA1500.severity = warning
 dotnet_diagnostic.SA1501.severity = warning
-dotnet_diagnostic.SA1502.severity = none
+dotnet_diagnostic.SA1502.severity = none # needs discussion
 dotnet_diagnostic.SA1503.severity = warning
 dotnet_diagnostic.SA1504.severity = warning
 dotnet_diagnostic.SA1505.severity = warning
@@ -338,16 +338,17 @@ dotnet_diagnostic.SA1509.severity = warning
 dotnet_diagnostic.SA1510.severity = warning
 dotnet_diagnostic.SA1511.severity = warning
 dotnet_diagnostic.SA1512.severity = warning
-dotnet_diagnostic.SA1513.severity = none
+dotnet_diagnostic.SA1513.severity = none # on short methods, it does not apply
 dotnet_diagnostic.SA1514.severity = warning
-dotnet_diagnostic.SA1515.severity = none
-dotnet_diagnostic.SA1516.severity = none
+dotnet_diagnostic.SA1515.severity = none # we do not respect this
+dotnet_diagnostic.SA1516.severity = none # needs discussion
 dotnet_diagnostic.SA1517.severity = warning
 dotnet_diagnostic.SA1518.severity = warning
 dotnet_diagnostic.SA1519.severity = warning
 dotnet_diagnostic.SA1520.severity = warning
 
 # Documentation Rules (SA1600-) https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/1.1.118/documentation/DocumentationRules.md
+# We don't require code documentation, however, when we do add it, we want it to be valid.
 
 dotnet_diagnostic.SA1600.severity = none
 dotnet_diagnostic.SA1601.severity = none
