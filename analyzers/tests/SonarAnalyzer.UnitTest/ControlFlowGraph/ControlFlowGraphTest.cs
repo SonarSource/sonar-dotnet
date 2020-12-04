@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -56,7 +57,6 @@ namespace NS
     public int Bar() => 4 + 5;
   }
 }";
-
             var method = CompileWithMethodBody(input, "Bar", out var semanticModel);
             var expression = method.ExpressionBody.Expression;
             var cfg = CSharpControlFlowGraph.Create(expression, semanticModel);
@@ -82,9 +82,7 @@ namespace NS
         public Foo(int i) {}
     }
 }";
-
             var (ctor, semanticModel) = TestHelper.Compile(input).GetConstructor("Foo");
-
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
 
             VerifyCfg(cfg, 5);
@@ -126,7 +124,6 @@ namespace NS
     }
 }";
             var (ctor, semanticModel) = TestHelper.Compile(input).GetConstructor("Foo");
-
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
 
             VerifyCfg(cfg, 2);
@@ -160,7 +157,6 @@ namespace NS
     }
 }";
             var (ctor, semanticModel) = TestHelper.Compile(input).GetConstructor("Foo");
-
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
 
             VerifyCfg(cfg, 2);
@@ -175,6 +171,52 @@ namespace NS
 
             VerifyAllInstructions(constructorBody, "5", ": base(5)");
             VerifyAllInstructions(exit);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ExtremelyNestedExpression_NotSupported_FromExpression()
+        {
+            var method = CompileWithMethodBody(string.Format(TestInput, $"var x = {ExtremelyNestedExpression()};"), "Bar", out var semanticModel);
+            Action a = () => CSharpControlFlowGraph.Create(method.Body, semanticModel);
+
+            a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
+            CSharpControlFlowGraph.TryGet(method.Body, semanticModel, out _).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ExtremelyNestedExpression_NotSupported_FromBodyMethod()
+        {
+            var input = @$"
+public class Sample
+{{
+    public string Main()
+    {{
+        return {ExtremelyNestedExpression()};
+    }}
+}}";
+            var (method, semanticModel) = TestHelper.Compile(input).GetMethod("Main");
+            Action a = () => CSharpControlFlowGraph.Create(method.Body, semanticModel);
+
+            a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
+            CSharpControlFlowGraph.TryGet(method.Body, semanticModel, out _).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ExtremelyNestedExpression_NotSupported_FromArrowMethod()
+        {
+            var input = @$"
+public class Sample
+{{
+    public string Main() =>{ExtremelyNestedExpression()};
+}}";
+            var (method, semanticModel) = TestHelper.Compile(input).GetMethod("Main");
+            Action a = () => CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel);
+
+            a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
+            CSharpControlFlowGraph.TryGet(method.Body, semanticModel, out _).Should().BeFalse();
         }
 
         #endregion
@@ -5260,6 +5302,13 @@ namespace NS
             System.Diagnostics.Debug.WriteLine(dot);
 
             return cfg;
+        }
+
+        private static string ExtremelyNestedExpression()
+        {
+            const int count = 2000;
+            const string dna = "ACGT";
+            return Enumerable.Repeat($@"""{dna}""", count).JoinStr(" +\n");
         }
 
         #endregion

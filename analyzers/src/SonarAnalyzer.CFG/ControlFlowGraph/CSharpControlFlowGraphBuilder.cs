@@ -31,6 +31,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
     public sealed class CSharpControlFlowGraphBuilder : AbstractControlFlowGraphBuilder
     {
+        private const int SupportedExpressionNodeCountLimit = 500;
+
         private readonly Stack<Block> breakTarget = new Stack<Block>();
         private readonly Stack<Block> continueTargets = new Stack<Block>();
         private readonly Stack<Dictionary<object, List<JumpBlock>>> switchGotoJumpBlocks = new Stack<Dictionary<object, List<JumpBlock>>>();
@@ -217,6 +219,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             if (expression == null)
             {
                 return currentBlock;
+            }
+            if (!IsTooComplex(expression))
+            {
+                throw new NotSupportedException("Too complex expression");
             }
 
             switch (expression.Kind())
@@ -526,6 +532,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             throw new NotSupportedException($"{patternSyntaxWrapper.SyntaxNode.Kind()}");
+        }
+
+        private static bool IsTooComplex(SyntaxNode node)
+        {
+            var count = 0;  // Limit descending for performance reasons
+            return node.DescendantNodes(x => ++count < SupportedExpressionNodeCountLimit).Count() < SupportedExpressionNodeCountLimit;
         }
 
         #endregion Top level Build*
