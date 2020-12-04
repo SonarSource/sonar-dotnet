@@ -15,7 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Solution Items", "Co
 		src\Signing.cs = src\Signing.cs
 		src\SonarAnalyzer.ruleset = src\SonarAnalyzer.ruleset
 		tests\SonarAnalyzer.Test.ruleset = tests\SonarAnalyzer.Test.ruleset
-		src\SonarLint.xml = src\SonarLint.xml
 		StyleCopAnalyzers.targets = StyleCopAnalyzers.targets
 		..\scripts\utils.ps1 = ..\scripts\utils.ps1
 	EndProjectSection
