@@ -178,7 +178,8 @@ namespace NS
         public void Cfg_ExtremelyNestedExpression_NotSupported_FromExpression()
         {
             var method = CompileWithMethodBody(string.Format(TestInput, $"var x = {ExtremelyNestedExpression()};"), "Bar", out var semanticModel);
-            Action a = () => CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var equalsValueSyntax = method.DescendantNodes(x => !(x is ExpressionSyntax)).OfType<EqualsValueClauseSyntax>().Single();
+            Action a = () => CSharpControlFlowGraph.Create(equalsValueSyntax.Value, semanticModel);
 
             a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
             CSharpControlFlowGraph.TryGet(method.Body, semanticModel, out _).Should().BeFalse();
