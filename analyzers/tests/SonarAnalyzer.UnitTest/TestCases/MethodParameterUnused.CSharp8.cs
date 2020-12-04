@@ -1,4 +1,6 @@
-﻿namespace Tests.TestCases
+﻿using System.Collections.Generic;
+
+namespace Tests.TestCases
 {
     public interface IWithDefaultImplementation
     {
@@ -65,6 +67,14 @@
             {
                 var result = a + c;
             }
+        }
+
+        // See: https://github.com/SonarSource/sonar-dotnet/issues/3803
+        private void AddValue(uint id1, uint id2, string value) // Noncompliant - FP: id1 and id2 are used inside the tuple
+                                                                // Noncompliant@-1
+        {
+            var x = new Dictionary<(uint, uint), string>();
+            x[(id1, id2)] = value;
         }
     }
 
