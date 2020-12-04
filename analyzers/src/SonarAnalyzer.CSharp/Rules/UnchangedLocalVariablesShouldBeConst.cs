@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,14 +37,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3353";
         private const string MessageFormat = "Add the 'const' modifier to '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private enum DeclarationType { CannotBeConst, Value, Reference, String };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var localDeclaration = (LocalDeclarationStatementSyntax)c.Node;
@@ -69,10 +67,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         .ForEach(ss => Report(ss.Syntax, c));
                 },
                 SyntaxKind.LocalDeclarationStatement);
-        }
 
-        private static DeclarationType FindDeclarationType(LocalDeclarationStatementSyntax localDeclaration,
-            SemanticModel semanticModel)
+        private static DeclarationType FindDeclarationType(LocalDeclarationStatementSyntax localDeclaration, SemanticModel semanticModel)
         {
             var declaredTypeSyntax = localDeclaration.Declaration?.Type;
             if (declaredTypeSyntax == null)
@@ -85,25 +81,22 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return DeclarationType.CannotBeConst;
             }
-
-            if (declaredType.Is(KnownType.System_String))
+            else if (declaredType.Is(KnownType.System_String))
             {
                 return DeclarationType.String;
             }
-
-            if (declaredType.OriginalDefinition?.DerivesFrom(KnownType.System_Nullable_T) ?? false)
+            else if (declaredType.OriginalDefinition?.DerivesFrom(KnownType.System_Nullable_T) ?? false)
             {
                 // Defining nullable as const raises error CS0283.
                 return DeclarationType.CannotBeConst;
             }
-
-            return declaredType.IsValueType
-                ? DeclarationType.Value
-                : DeclarationType.Reference;
+            else
+            {
+                return declaredType.IsValueType ? DeclarationType.Value : DeclarationType.Reference;
+            }
         }
 
-        private static bool IsInitializedWithCompatibleConstant(VariableDeclaratorSyntax variableDeclarator,
-            SemanticModel semanticModel, DeclarationType declarationType)
+        private static bool IsInitializedWithCompatibleConstant(VariableDeclaratorSyntax variableDeclarator, SemanticModel semanticModel, DeclarationType declarationType)
         {
             var initializer = variableDeclarator?.Initializer?.Value;
             if (initializer == null)
@@ -121,18 +114,17 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return declarationType == DeclarationType.String;
             }
-
-            if (constantValue is ValueType)
+            else if (constantValue is ValueType)
             {
                 return declarationType == DeclarationType.Value;
             }
-
-            return declarationType == DeclarationType.Reference ||
-                   declarationType == DeclarationType.String;
+            else
+            {
+                return declarationType == DeclarationType.Reference || declarationType == DeclarationType.String;
+            }
         }
 
-        private static bool HasMutableUsagesInMethod(VariableDeclaratorSyntax parameter, ISymbol parameterSymbol,
-            SemanticModel semanticModel)
+        private static bool HasMutableUsagesInMethod(VariableDeclaratorSyntax parameter, ISymbol parameterSymbol, SemanticModel semanticModel)
         {
             var methodSyntax = parameter?.Ancestors()?.FirstOrDefault(IsMethodLike);
             if (methodSyntax == null)
@@ -147,44 +139,27 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any(IsMutatingUse);
 
             static bool IsMethodLike(SyntaxNode arg) =>
-                arg is BaseMethodDeclarationSyntax ||
-                arg is IndexerDeclarationSyntax ||
-                arg is AccessorDeclarationSyntax ||
-                arg is LambdaExpressionSyntax;
+                arg is BaseMethodDeclarationSyntax
+                || arg is IndexerDeclarationSyntax
+                || arg is AccessorDeclarationSyntax
+                || arg is LambdaExpressionSyntax;
 
-            bool MatchesIdentifier(IdentifierNameSyntax id)
-            {
-                var symbol = semanticModel.GetSymbolInfo(id).Symbol;
-                return Equals(parameterSymbol, symbol);
-            }
+            bool MatchesIdentifier(IdentifierNameSyntax id) =>
+                Equals(parameterSymbol, semanticModel.GetSymbolInfo(id).Symbol);
         }
 
-        private static bool IsMutatingUse(IdentifierNameSyntax id)
-        {
-            var parent = id.Parent;
-            if (parent is AssignmentExpressionSyntax assignmentExpression &&
-                Equals(id, assignmentExpression?.Left))
+        private static bool IsMutatingUse(IdentifierNameSyntax identifier) =>
+            identifier.Parent switch
             {
-                return true;
-            }
-
-            if (parent is PostfixUnaryExpressionSyntax ||
-                parent is PrefixUnaryExpressionSyntax)
-            {
-                return true;
-            }
-
-            if (parent is ArgumentSyntax argumentSyntax &&
-                !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None))
-            {
-                return true;
-            }
-
-            return false;
-        }
+                AssignmentExpressionSyntax assignmentExpression => Equals(identifier, assignmentExpression?.Left),
+                ArgumentSyntax argumentSyntax => !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
+                PostfixUnaryExpressionSyntax _ => true,
+                PrefixUnaryExpressionSyntax _ => true,
+                _ => false
+            };
 
         private static void Report(VariableDeclaratorSyntax declaratorSyntax, SyntaxNodeAnalysisContext c) =>
-            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
+            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
                 declaratorSyntax.Identifier.GetLocation(),
                 declaratorSyntax.Identifier.ValueText));
     }
