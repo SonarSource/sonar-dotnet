@@ -91,6 +91,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Defining nullable as const raises error CS0283.
                 return DeclarationType.CannotBeConst;
             }
+            else if (declaredType.IsStruct() && declaredType.SpecialType == SpecialType.None && declaredType.GetMembers("op_Implicit").Any(x => !x.IsImplicitlyDeclared))
+            {
+                // Struct with explicitly declared "implicit operator"
+                return DeclarationType.CannotBeConst;
+            }
             else
             {
                 return declaredType.IsValueType ? DeclarationType.Value : DeclarationType.Reference;
