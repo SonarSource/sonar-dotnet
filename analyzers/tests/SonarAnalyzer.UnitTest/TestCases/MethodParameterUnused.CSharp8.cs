@@ -104,7 +104,7 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/3255
     public class Repro_3255
     {
-        private string UsedInTuple(string value) // Noncompliant FP
+        private string UsedInTuple(string value)
         {
             var x = (value, 7);
             return x.value;

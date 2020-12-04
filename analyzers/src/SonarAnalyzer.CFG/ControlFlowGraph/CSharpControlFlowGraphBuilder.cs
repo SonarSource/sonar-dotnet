@@ -317,9 +317,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 case SyntaxKind.QueryExpression:
 
                 case SyntaxKind.ArgListExpression:
-
-                case SyntaxKindEx.TupleExpression:
-
                 case SyntaxKindEx.RangeExpression:
                 case SyntaxKindEx.IndexExpression:
                     currentBlock.ReversedInstructions.Add(expression);
@@ -492,52 +489,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 case SyntaxKindEx.SwitchExpression:
                     return BuildSwitchExpression((SwitchExpressionSyntaxWrapper)expression, currentBlock);
 
+                case SyntaxKindEx.TupleExpression:
+                    return BuildTupleExpression((TupleExpressionSyntaxWrapper)expression, currentBlock);
+
                 default:
                     throw new NotSupportedException($"{expression.Kind()}");
             }
-        }
-
-        private Block BuildIsPatternExpression(IsPatternExpressionSyntaxWrapper isPatternExpression, Block currentBlock)
-        {
-            currentBlock.ReversedInstructions.Add(isPatternExpression);
-
-            return BuildPatternExpression(isPatternExpression.Pattern, currentBlock);
-        }
-
-        private Block BuildPatternExpression(PatternSyntaxWrapper patternSyntaxWrapper, Block currentBlock)
-        {
-            if (ConstantPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
-            {
-                var constantPattern = (ConstantPatternSyntaxWrapper)patternSyntaxWrapper;
-
-                return BuildExpression(constantPattern.Expression, currentBlock);
-            }
-            else if (DeclarationPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
-            {
-                // Do nothing, this is just variable assignment and the Pattern itself contains
-                // only the new variable(s), which are not enough to evaluate the assignment.
-                // The handling should be done in CSharpExplodedGraph and UcfgInstructionFactory.
-
-                return currentBlock;
-            }
-            else if (DiscardPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
-            {
-                return currentBlock;
-            }
-            else if (RecursivePatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
-            {
-                // The recursive pattern will be handled in CSharpExplodedGraph and UcfgInstructionFactory.
-                currentBlock.ReversedInstructions.Add(patternSyntaxWrapper);
-                return currentBlock;
-            }
-
-            throw new NotSupportedException($"{patternSyntaxWrapper.SyntaxNode.Kind()}");
-        }
-
-        private static bool IsTooComplex(SyntaxNode node)
-        {
-            var count = 0;  // Limit descending for performance reasons
-            return node.DescendantNodes(x => ++count < SupportedExpressionNodeCountLimit).Count() >= SupportedExpressionNodeCountLimit;
         }
 
         #endregion Top level Build*
@@ -1287,6 +1244,53 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             var arraySizes = arrayType.RankSpecifiers.SelectMany(rs => rs.Sizes);
             return BuildExpressions(arraySizes, currentBlock);
+        }
+
+        private Block BuildIsPatternExpression(IsPatternExpressionSyntaxWrapper isPatternExpression, Block currentBlock)
+        {
+            currentBlock.ReversedInstructions.Add(isPatternExpression);
+
+            return BuildPatternExpression(isPatternExpression.Pattern, currentBlock);
+        }
+
+        private Block BuildPatternExpression(PatternSyntaxWrapper patternSyntaxWrapper, Block currentBlock)
+        {
+            if (ConstantPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
+            {
+                var constantPattern = (ConstantPatternSyntaxWrapper)patternSyntaxWrapper;
+
+                return BuildExpression(constantPattern.Expression, currentBlock);
+            }
+            else if (DeclarationPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
+            {
+                // Do nothing, this is just variable assignment and the Pattern itself contains
+                // only the new variable(s), which are not enough to evaluate the assignment.
+                // The handling should be done in CSharpExplodedGraph and UcfgInstructionFactory.
+
+                return currentBlock;
+            }
+            else if (DiscardPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
+            {
+                return currentBlock;
+            }
+            else if (RecursivePatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
+            {
+                // The recursive pattern will be handled in CSharpExplodedGraph and UcfgInstructionFactory.
+                currentBlock.ReversedInstructions.Add(patternSyntaxWrapper);
+                return currentBlock;
+            }
+
+            throw new NotSupportedException($"{patternSyntaxWrapper.SyntaxNode.Kind()}");
+        }
+
+        private Block BuildTupleExpression(TupleExpressionSyntaxWrapper tuple, Block currentBlock)
+        {
+            currentBlock.ReversedInstructions.Add(tuple);
+            foreach (var arg in tuple.Arguments.Reverse())
+            {
+                currentBlock = BuildExpression(arg.Expression, currentBlock);
+            }
+            return currentBlock;
         }
 
         #endregion Build expressions

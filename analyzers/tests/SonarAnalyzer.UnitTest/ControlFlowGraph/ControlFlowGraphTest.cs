@@ -5262,6 +5262,20 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
 
         #endregion
 
+        #region "Tuples"
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Tuple()
+        {
+            var cfg = Build(@"var x = (true, 42);");
+
+            VerifyMinimalCfg(cfg);
+            VerifyAllInstructions(cfg.EntryBlock, "true", "42", "(true, 42)", "x = (true, 42)");
+        }
+
+        #endregion
+
         #region Helpers to build the CFG for the tests
 
         internal const string TestInput = @"
