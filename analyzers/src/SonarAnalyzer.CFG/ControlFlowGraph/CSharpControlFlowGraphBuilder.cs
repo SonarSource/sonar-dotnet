@@ -220,7 +220,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             {
                 return currentBlock;
             }
-            if (!IsTooComplex(expression))
+            if (IsTooComplex(expression))
             {
                 throw new NotSupportedException("Too complex expression");
             }
@@ -537,7 +537,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private static bool IsTooComplex(SyntaxNode node)
         {
             var count = 0;  // Limit descending for performance reasons
-            return node.DescendantNodes(x => ++count < SupportedExpressionNodeCountLimit).Count() < SupportedExpressionNodeCountLimit;
+            return node.DescendantNodes(x => ++count < SupportedExpressionNodeCountLimit).Count() >= SupportedExpressionNodeCountLimit;
         }
 
         #endregion Top level Build*
