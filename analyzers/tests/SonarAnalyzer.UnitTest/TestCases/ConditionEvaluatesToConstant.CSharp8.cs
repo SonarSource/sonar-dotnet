@@ -258,4 +258,36 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class Tuples
+    {
+        public void DoSomething(bool arg)
+        {
+            var trueValue = true;
+            var tuple = (arg, trueValue);
+
+            if (tuple.arg)
+            {
+            }
+
+            if (tuple.trueValue)    // FN
+            {
+            }
+        }
+
+        public void AssignmentTarget(bool arg)
+        {
+            var trueValue = true;
+            bool a, b;
+            (a, b) = (arg, trueValue);
+
+            if (a)
+            {
+            }
+
+            if (b)    // FN
+            {
+            }
+        }
+    }
 }
