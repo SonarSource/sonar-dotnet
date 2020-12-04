@@ -11545,6 +11545,39 @@
   <data name="S4277_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S4423_Category" xml:space="preserve">
+    <value>Major Vulnerability</value>
+  </data>
+  <data name="S4423_Description" xml:space="preserve">
+    <value>Older versions of SSL/TLS protocol like "SSLv3" have been proven to be insecure.</value>
+  </data>
+  <data name="S4423_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4423_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4423_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4423_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S4423_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4423_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S4423_Tags" xml:space="preserve">
+    <value>cwe,privacy,owasp-a6,sans-top25-porous,owasp-a3</value>
+  </data>
+  <data name="S4423_Title" xml:space="preserve">
+    <value>Weak SSL/TLS protocols should not be used</value>
+  </data>
+  <data name="S4423_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S4426_Category" xml:space="preserve">
     <value>Blocker Vulnerability</value>
   </data>
