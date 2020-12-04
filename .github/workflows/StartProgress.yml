@@ -35,5 +35,3 @@ jobs:
                 addAssignee(issue, context.payload.sender.login);
             }
             console.log(`Done`);
-
-
