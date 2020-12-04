@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,33 +37,30 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class MethodParameterUnused : MethodParameterUnusedBase
     {
-        private const string MessageFormat = "Remove this {0}.";
         internal const string MessageUnused = "unused method parameter '{0}'";
         internal const string MessageDead = "parameter '{0}', whose value is ignored in the method";
+        private const string MessageFormat = "Remove this {0}.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         internal const string IsRemovableKey = "IsRemovable";
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var declaration = CreateContext(c);
 
-                    if ((declaration.Body == null && declaration.ExpressionBody == null) ||
-                        declaration.Body?.Statements.Count == 0) // Don't report on empty methods
+                    if ((declaration.Body == null && declaration.ExpressionBody == null) ||  declaration.Body?.Statements.Count == 0) // Don't report on empty methods
                     {
                         return;
                     }
 
-                    if (declaration.Symbol == null ||
-                        !declaration.Symbol.ContainingType.IsClassOrStruct() ||
-                        declaration.Symbol.IsMainMethod() ||
-                        OnlyThrowsNotImplementedException(declaration))
+                    if (declaration.Symbol == null
+                        || !declaration.Symbol.ContainingType.IsClassOrStruct()
+                        || declaration.Symbol.IsMainMethod()
+                        || OnlyThrowsNotImplementedException(declaration))
                     {
                         return;
                     }
@@ -73,7 +70,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
-        }
 
         private static MethodContext CreateContext(SyntaxNodeAnalysisContext c)
         {
@@ -87,14 +83,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                throw new System.InvalidOperationException("Unexpected Node: " + c.Node.ToString());
+                throw new System.InvalidOperationException("Unexpected Node: " + c.Node);
             }
         }
 
         private static bool OnlyThrowsNotImplementedException(MethodContext declaration)
         {
-            if (declaration.Body != null &&
-                declaration.Body.Statements.Count != 1)
+            if (declaration.Body != null && declaration.Body.Statements.Count != 1)
             {
                 return false;
             }
@@ -110,16 +105,14 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                throwExpressions = declaration.Body.Statements
-                    .OfType<ThrowStatementSyntax>()
-                    .Select(tss => tss.Expression);
+                throwExpressions = declaration.Body.Statements.OfType<ThrowStatementSyntax>().Select(tss => tss.Expression);
             }
 
             return throwExpressions
                 .OfType<ObjectCreationExpressionSyntax>()
-                .Select(oces => declaration.Context.SemanticModel.GetSymbolInfo(oces).Symbol)
+                .Select(x => declaration.Context.SemanticModel.GetSymbolInfo(x).Symbol)
                 .OfType<IMethodSymbol>()
-                .Any(s => s != null && s.ContainingType.Is(KnownType.System_NotImplementedException));
+                .Any(x => x != null && x.ContainingType.Is(KnownType.System_NotImplementedException));
         }
 
         private static void ReportUnusedParametersOnMethod(MethodContext declaration)
@@ -130,9 +123,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var unusedParameters = GetUnusedParameters(declaration);
-            if (unusedParameters.Any() &&
-                !IsUsedAsEventHandlerFunctionOrAction(declaration) &&
-                !IsCandidateSerializableConstructor(unusedParameters, declaration.Symbol))
+            if (unusedParameters.Any()
+                && !IsUsedAsEventHandlerFunctionOrAction(declaration)
+                && !IsCandidateSerializableConstructor(unusedParameters, declaration.Symbol))
             {
                 ReportOnUnusedParameters(declaration, unusedParameters, MessageUnused);
             }
@@ -188,34 +181,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (parametersToReportOn.Contains(parameter.Symbol))
                 {
                     declaration.Context.ReportDiagnosticWhenActive(
-                        Diagnostic.Create(rule, parameter.Syntax.GetLocation(),
+                        Diagnostic.Create(Rule, parameter.Syntax.GetLocation(),
                         ImmutableDictionary<string, string>.Empty.Add(IsRemovableKey, isRemovable.ToString()),
                         string.Format(messagePattern, parameter.Symbol.Name)));
                 }
             }
         }
 
-        private static bool MethodCanBeSafelyChanged(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.GetEffectiveAccessibility() == Accessibility.Private &&
-                !methodSymbol.GetAttributes().Any() &&
-                methodSymbol.IsChangeable() &&
-                !methodSymbol.IsEventHandler();
-        }
+        private static bool MethodCanBeSafelyChanged(IMethodSymbol methodSymbol) =>
+            methodSymbol.GetEffectiveAccessibility() == Accessibility.Private
+                && !methodSymbol.GetAttributes().Any()
+                && methodSymbol.IsChangeable()
+                && !methodSymbol.IsEventHandler();
 
         private static IImmutableList<IParameterSymbol> GetUnusedParameters(MethodContext declaration)
         {
             var usedParameters = new HashSet<IParameterSymbol>();
-            SyntaxNode[] bodies;
-
-            if (declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration))
-            {
-                bodies = new SyntaxNode[] { declaration.Body, declaration.ExpressionBody, ((ConstructorDeclarationSyntax)declaration.Context.Node).Initializer };
-            }
-            else
-            {
-                bodies = new SyntaxNode[] { declaration.Body, declaration.ExpressionBody };
-            }
+            var bodies = declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration)
+                ? new SyntaxNode[] { declaration.Body, declaration.ExpressionBody, ((ConstructorDeclarationSyntax)declaration.Context.Node).Initializer }
+                : new SyntaxNode[] { declaration.Body, declaration.ExpressionBody };
 
             foreach (var body in bodies.WhereNotNull())
             {
@@ -231,55 +215,45 @@ namespace SonarAnalyzer.Rules.CSharp
             return unusedParameter.Except(usedParameters).ToImmutableArray();
         }
 
-        private static ISet<IParameterSymbol> GetUsedParameters(ImmutableArray<IParameterSymbol> parameters, SyntaxNode body, SemanticModel semanticModel)
-        {
-            return body.DescendantNodes()
-                .Where(n => n.IsKind(SyntaxKind.IdentifierName))
-                .Select(identierName => semanticModel.GetSymbolInfo(identierName).Symbol as IParameterSymbol)
-                .Where(symbol => symbol != null && parameters.Contains(symbol))
-                .ToHashSet();
-        }
+        private static ISet<IParameterSymbol> GetUsedParameters(ImmutableArray<IParameterSymbol> parameters, SyntaxNode body, SemanticModel semanticModel) =>
+            body.DescendantNodes()
+            .Where(n => n.IsKind(SyntaxKind.IdentifierName))
+            .Select(identierName => semanticModel.GetSymbolInfo(identierName).Symbol as IParameterSymbol)
+            .Where(symbol => symbol != null && parameters.Contains(symbol))
+            .ToHashSet();
 
-        private static bool IsUsedAsEventHandlerFunctionOrAction(MethodContext declaration)
-        {
-            return declaration.Symbol.ContainingType.DeclaringSyntaxReferences
-                .Select(r => r.GetSyntax())
-                .Any(n => IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(declaration.Symbol, n, declaration.Context.SemanticModel.Compilation.GetSemanticModel(n.SyntaxTree)));
-        }
+        private static bool IsUsedAsEventHandlerFunctionOrAction(MethodContext declaration) =>
+            declaration.Symbol.ContainingType.DeclaringSyntaxReferences
+            .Select(r => r.GetSyntax())
+            .Any(n => IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(declaration.Symbol, n, declaration.Context.SemanticModel.Compilation.GetSemanticModel(n.SyntaxTree)));
 
-        private static bool IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(IMethodSymbol methodSymbol, SyntaxNode typeDeclaration, SemanticModel semanticModel)
-        {
-            return typeDeclaration.DescendantNodes()
-                .OfType<ExpressionSyntax>()
-                .Any(n => IsMethodUsedAsEventHandlerFunctionOrActionInExpression(methodSymbol, n, semanticModel));
-        }
+        private static bool IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(IMethodSymbol methodSymbol, SyntaxNode typeDeclaration, SemanticModel semanticModel) =>
+            typeDeclaration.DescendantNodes()
+            .OfType<ExpressionSyntax>()
+            .Any(n => IsMethodUsedAsEventHandlerFunctionOrActionInExpression(methodSymbol, n, semanticModel));
 
-        private static bool IsMethodUsedAsEventHandlerFunctionOrActionInExpression(IMethodSymbol methodSymbol, ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            return !expression.IsKind(SyntaxKind.InvocationExpression) &&
-                IsStandaloneExpression(expression) &&
-                methodSymbol.Equals(semanticModel.GetSymbolInfo(expression).Symbol?.OriginalDefinition);
-        }
+        private static bool IsMethodUsedAsEventHandlerFunctionOrActionInExpression(IMethodSymbol methodSymbol, ExpressionSyntax expression, SemanticModel semanticModel) =>
+            !expression.IsKind(SyntaxKind.InvocationExpression)
+            && IsStandaloneExpression(expression)
+            && methodSymbol.Equals(semanticModel.GetSymbolInfo(expression).Symbol?.OriginalDefinition);
 
         private static bool IsStandaloneExpression(ExpressionSyntax expression)
         {
             var parentAsAssignment = expression.Parent as AssignmentExpressionSyntax;
 
-            return !(expression.Parent is ExpressionSyntax) ||
-                (parentAsAssignment != null && object.ReferenceEquals(expression, parentAsAssignment.Right));
+            return !(expression.Parent is ExpressionSyntax)
+                || (parentAsAssignment != null && object.ReferenceEquals(expression, parentAsAssignment.Right));
         }
 
-        private static bool IsCandidateSerializableConstructor(IImmutableList<IParameterSymbol> unusedParameters, IMethodSymbol methodSymbol)
-        {
-            return unusedParameters.Count == 1 &&
-                methodSymbol.MethodKind == MethodKind.Constructor &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Parameters.All(parameter => !parameter.IsOptional) &&
-                unusedParameters[0].Equals(methodSymbol.Parameters[1]) &&
-                methodSymbol.ContainingType.Implements(KnownType.System_Runtime_Serialization_ISerializable) &&
-                methodSymbol.Parameters[0].IsType(KnownType.System_Runtime_Serialization_SerializationInfo) &&
-                methodSymbol.Parameters[1].IsType(KnownType.System_Runtime_Serialization_StreamingContext);
-        }
+        private static bool IsCandidateSerializableConstructor(IImmutableList<IParameterSymbol> unusedParameters, IMethodSymbol methodSymbol) =>
+            unusedParameters.Count == 1
+            && methodSymbol.MethodKind == MethodKind.Constructor
+            && methodSymbol.Parameters.Length == 2
+            && methodSymbol.Parameters.All(parameter => !parameter.IsOptional)
+            && unusedParameters[0].Equals(methodSymbol.Parameters[1])
+            && methodSymbol.ContainingType.Implements(KnownType.System_Runtime_Serialization_ISerializable)
+            && methodSymbol.Parameters[0].IsType(KnownType.System_Runtime_Serialization_SerializationInfo)
+            && methodSymbol.Parameters[1].IsType(KnownType.System_Runtime_Serialization_StreamingContext);
 
         private class MethodContext
         {
@@ -290,21 +264,20 @@ namespace SonarAnalyzer.Rules.CSharp
             public readonly BlockSyntax Body;
             public readonly ArrowExpressionClauseSyntax ExpressionBody;
 
-            private MethodContext(SyntaxNodeAnalysisContext context, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
-            {
-                this.Context = context;
-                this.Symbol = context.SemanticModel.GetDeclaredSymbol(context.Node) as IMethodSymbol;
-                this.ParameterList = parameterList;
-                this.Body = body;
-                this.ExpressionBody = expressionBody;
-            }
-
             public MethodContext(SyntaxNodeAnalysisContext context, BaseMethodDeclarationSyntax declaration)
                 : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody()) { }
 
             public MethodContext(SyntaxNodeAnalysisContext context, LocalFunctionStatementSyntaxWrapper declaration)
                 : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody) { }
 
+            private MethodContext(SyntaxNodeAnalysisContext context, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
+            {
+                Context = context;
+                Symbol = context.SemanticModel.GetDeclaredSymbol(context.Node) as IMethodSymbol;
+                ParameterList = parameterList;
+                Body = body;
+                ExpressionBody = expressionBody;
+            }
         }
 
     }
