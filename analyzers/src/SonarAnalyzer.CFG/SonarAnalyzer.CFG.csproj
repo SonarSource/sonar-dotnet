@@ -41,9 +41,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="..\..\.sonarlint\SonarLint.xml">
-      <Link>Properties\SonarLint.xml</Link>
-    </AdditionalFiles>
+    <AdditionalFiles Include="..\..\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
   </ItemGroup>
 
   <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true' and $(TargetFramework) != ''" AfterTargets="Build">

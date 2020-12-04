@@ -9,8 +9,5 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\..\.sonarlint\SonarLint.xml" Link="Properties\SonarLint.xml" />
-  </ItemGroup>
 
 </Project>

@@ -33,14 +33,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="$(dotnet_symbolic_execution_windows)"  />
+    <EmbeddedResource Include="$(dotnet_symbolic_execution_windows)" />
 
-    <Content Include="$(dotnet_symbolic_execution_windows)" >
+    <Content Include="$(dotnet_symbolic_execution_windows)">
       <Link>CBDE\windows\dotnet-symbolic-execution.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
 
-    <Content Include="$(cbde_dialect_checker_windows)" >
+    <Content Include="$(cbde_dialect_checker_windows)">
       <Link>CBDE\windows\cbde-dialect-checker.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -57,9 +57,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="..\..\.sonarlint\SonarLint.xml">
-      <Link>Properties\SonarLint.xml</Link>
-    </AdditionalFiles>
+    <AdditionalFiles Include="..\..\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
   </ItemGroup>
 
   <Import Project="..\..\StyleCopAnalyzers.targets" />
