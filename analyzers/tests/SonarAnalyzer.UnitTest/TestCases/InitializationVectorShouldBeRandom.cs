@@ -83,5 +83,28 @@ namespace Tests.Diagnostics
 
             sa.CreateDecryptor(sa.Key, initializationVectorConstant); // Compliant, not relevant for decrypting
         }
+
+        public void AesCryptoServiceProviderCreateEncryptor()
+        {
+            using var aes = new AesCryptoServiceProvider();
+            using var rng = new RNGCryptoServiceProvider();
+
+            var noParamsNoKeyAndNoIV = aes.CreateEncryptor(); // Noncompliant
+
+            aes.GenerateKey();
+            var noParamsNoIV = aes.CreateEncryptor(); // Noncompliant
+
+            var constantIV = new byte[16];
+            var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
+
+            aes.GenerateIV();
+            var noParams = aes.CreateEncryptor();
+            var withGeneratedKeyAndIV = aes.CreateEncryptor(aes.Key, aes.IV);
+
+            aes.CreateDecryptor(aes.Key, constantIV); // Compliant, we do not check CreateDecryptor
+
+            rng.GetBytes(constantIV);
+            var fromRng = aes.CreateEncryptor(aes.Key, constantIV);
+        }
     }
 }

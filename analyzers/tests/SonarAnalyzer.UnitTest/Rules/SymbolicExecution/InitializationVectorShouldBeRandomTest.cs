@@ -35,6 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void InitializationVectorShouldBeRandom() =>
             Verifier.VerifyAnalyzer(@"TestCases\InitializationVectorShouldBeRandom.cs",
                                     GetAnalyzer(),
+                                    ParseOptionsHelper.FromCSharp8,
                                     additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>

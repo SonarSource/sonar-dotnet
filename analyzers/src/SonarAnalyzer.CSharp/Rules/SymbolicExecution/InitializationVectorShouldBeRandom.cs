@@ -82,6 +82,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
                 programState = instruction switch
                 {
+                    ObjectCreationExpressionSyntax objectCreation => ObjectCreationPostProcess(objectCreation, programState),
                     InvocationExpressionSyntax invocation => InvocationExpressionPostProcess(invocation, programState),
                     ArrayCreationExpressionSyntax arrayCreation => ArrayCreationPostProcess(arrayCreation, programState),
                     AssignmentExpressionSyntax assignment => AssignmentExpressionPostProcess(assignment, programState),
@@ -101,25 +102,37 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 return base.PreProcessInstruction(programPoint, programState);
             }
 
+            private ProgramState ObjectCreationPostProcess(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
+            {
+                if (semanticModel.GetSymbolInfo(objectCreation).Symbol is {} symbol
+                    && symbol.ContainingType is {} symbolType
+                    && symbolType.IsAny(vulnerableTypes))
+                {
+                    var symbolicValue = programState.PeekValue();
+                    programState = programState.SetConstraint(symbolicValue, IVInitializationSymbolicValueConstraint.NotInitialized);
+                    programState = programState.SetConstraint(symbolicValue, KeyInitializationSymbolicValueConstraint.NotInitialized);
+                }
+
+                return programState;
+            }
+
             private ProgramState InvocationExpressionPostProcess(InvocationExpressionSyntax invocation, ProgramState programState)
             {
-                var newProgramState = programState;
-
                 if (IsCreateMethod(invocation, semanticModel))
                 {
-                    var symbolicValue = newProgramState.PeekValue();
-                    newProgramState = newProgramState.SetConstraint(symbolicValue, IVInitializationSymbolicValueConstraint.NotInitialized);
-                    newProgramState = newProgramState.SetConstraint(symbolicValue, KeyInitializationSymbolicValueConstraint.NotInitialized);
+                    var symbolicValue = programState.PeekValue();
+                    programState = programState.SetConstraint(symbolicValue, IVInitializationSymbolicValueConstraint.NotInitialized);
+                    programState = programState.SetConstraint(symbolicValue, KeyInitializationSymbolicValueConstraint.NotInitialized);
                 }
                 else if (IsGenerateKeyMethod(invocation, semanticModel))
                 {
                     var symbolicValue = GetSymbolicValue(invocation, programState);
-                    newProgramState = newProgramState.SetConstraint(symbolicValue, KeyInitializationSymbolicValueConstraint.Initialized);
+                    programState = programState.SetConstraint(symbolicValue, KeyInitializationSymbolicValueConstraint.Initialized);
                 }
                 else if (IsGenerateIVMethod(invocation, semanticModel))
                 {
                     var symbolicValue = GetSymbolicValue(invocation, programState);
-                    newProgramState = newProgramState.SetConstraint(symbolicValue, IVInitializationSymbolicValueConstraint.Initialized);
+                    programState = programState.SetConstraint(symbolicValue, IVInitializationSymbolicValueConstraint.Initialized);
                 }
                 else if (IsRNGCryptoServiceProviderSanitizer(invocation, semanticModel))
                 {
@@ -128,11 +141,11 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                         && symbol.HasConstraint(ConstantByteArraySymbolicValueConstraint.Constant, programState))
                     {
                         var symbolicValue = programState.GetSymbolValue(symbol);
-                        newProgramState = newProgramState.RemoveConstraint(symbolicValue, ConstantByteArraySymbolicValueConstraint.Constant);
+                        programState = programState.RemoveConstraint(symbolicValue, ConstantByteArraySymbolicValueConstraint.Constant);
                     }
                 }
 
-                return newProgramState;
+                return programState;
             }
 
             private ProgramState AssignmentExpressionPostProcess(AssignmentExpressionSyntax assignment, ProgramState programState) =>
