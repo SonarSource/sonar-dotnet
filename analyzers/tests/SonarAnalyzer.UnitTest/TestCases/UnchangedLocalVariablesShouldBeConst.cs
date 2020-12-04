@@ -296,8 +296,8 @@ namespace Tests.Diagnostics
     {
         public void GoGoGo()
         {
-            var tmp = 0; // Noncompliant FP
-            var flag = true; // Noncompliant FP
+            var tmp = 0;
+            var flag = true;
             (flag, tmp) = (false, 5);
         }
 

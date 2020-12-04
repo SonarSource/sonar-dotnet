@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -124,9 +125,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool HasMutableUsagesInMethod(VariableDeclaratorSyntax parameter, ISymbol parameterSymbol, SemanticModel semanticModel)
+        private static bool HasMutableUsagesInMethod(VariableDeclaratorSyntax variable, ISymbol variableSymbol, SemanticModel semanticModel)
         {
-            var methodSyntax = parameter?.Ancestors()?.FirstOrDefault(IsMethodLike);
+            var methodSyntax = variable?.Ancestors()?.FirstOrDefault(IsMethodLike);
             if (methodSyntax == null)
             {
                 return false;
@@ -145,18 +146,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 || arg is LambdaExpressionSyntax;
 
             bool MatchesIdentifier(IdentifierNameSyntax id) =>
-                Equals(parameterSymbol, semanticModel.GetSymbolInfo(id).Symbol);
+                Equals(variableSymbol, semanticModel.GetSymbolInfo(id).Symbol);
         }
 
         private static bool IsMutatingUse(IdentifierNameSyntax identifier) =>
             identifier.Parent switch
             {
                 AssignmentExpressionSyntax assignmentExpression => Equals(identifier, assignmentExpression?.Left),
-                ArgumentSyntax argumentSyntax => !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
+                ArgumentSyntax argumentSyntax => IsAssignmentToTuple(argumentSyntax) || !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
                 PostfixUnaryExpressionSyntax _ => true,
                 PrefixUnaryExpressionSyntax _ => true,
                 _ => false
             };
+
+        // (arg, b) = something
+        private static bool IsAssignmentToTuple(ArgumentSyntax argument) =>
+            TupleExpressionSyntaxWrapper.IsInstance(argument.Parent)
+            && argument.Parent.Parent is AssignmentExpressionSyntax assignment
+            && assignment.Left == argument.Parent;
 
         private static void Report(VariableDeclaratorSyntax declaratorSyntax, SyntaxNodeAnalysisContext c) =>
             c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
