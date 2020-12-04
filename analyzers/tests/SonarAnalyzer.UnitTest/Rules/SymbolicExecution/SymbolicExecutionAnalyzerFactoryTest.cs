@@ -42,6 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         private const string InvalidCastToInterface = "S1944";
         private const string NullPointerDereference = "S2259";
         private const string RestrictDeserializedTypes = "S5773";
+        private const string InitializationVectorShouldBeRandom = "S3329";
 
         [TestMethod]
         public void SupportedDiagnostics_ReturnsSymbolicExecutionRuleDescriptors()
@@ -59,7 +60,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 ConditionEvaluatesToConstantCodeSmell,
                 InvalidCastToInterface,
                 NullPointerDereference,
-                RestrictDeserializedTypes
+                RestrictDeserializedTypes,
+                InitializationVectorShouldBeRandom
             });
         }
 
