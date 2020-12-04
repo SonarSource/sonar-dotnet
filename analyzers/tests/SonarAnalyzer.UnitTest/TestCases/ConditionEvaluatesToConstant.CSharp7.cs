@@ -135,29 +135,29 @@ namespace Tests.Diagnostics
             }
         }
 
-    public class A
-    {
-      public object booleanVal { get; set; }
+        public class A
+        {
+            public object booleanVal { get; set; }
+        }
+
+        void Compliant1(A a)
+        {
+            if (a?.booleanVal is null)
+            {
+
+            }
+        }
+
+        void NonCompliant1()
+        {
+            A a = null;
+            if (a?.booleanVal is null) // Noncompliant
+            {
+
+            }
+        }
+
     }
-
-    void Compliant1(A a)
-    {
-      if (a?.booleanVal is null)
-      {
-
-      }
-    }
-
-    void NonCompliant1()
-    {
-      A a = null;
-      if (a?.booleanVal is null) // Noncompliant
-      {
-
-      }
-    }
-
-  }
 
 
     // https://github.com/SonarSource/sonar-dotnet/issues/2592
@@ -285,7 +285,7 @@ namespace Tests.Diagnostics
                 value is null ? 1 : 2,
                 value is bool b ? 3 : 4,
                 value is null ? 5 : 6); // Noncompliant FP, conditions are parallel and should not distribute constraints
-                //Secondary@-1
+                                        //Secondary@-1
 
         public static void IsBoolWithoutB(object value)
             => DoSomething(
@@ -308,6 +308,23 @@ namespace Tests.Diagnostics
 
         private static void DoSomething(int a, int b, int c)
         {
+        }
+    }
+
+    public class Tuples
+    {
+        public void DoSomething(bool arg)
+        {
+            var trueValue = true;
+            var tuple = (arg, trueValue);
+
+            if (tuple.arg)
+            {
+            }
+
+            if (tuple.trueValue)    // FN
+            {
+            }
         }
     }
 }

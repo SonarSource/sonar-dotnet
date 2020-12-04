@@ -153,7 +153,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     return;
 
                 case SyntaxKindEx.SwitchExpressionArm:
-                    VisitSwitchExpressionArmBinaryBranch(binaryBranchBlock, node, (SwitchExpressionArmSyntaxWrapper) binaryBranchBlock.BranchingNode);
+                    VisitSwitchExpressionArmBinaryBranch(binaryBranchBlock, node, (SwitchExpressionArmSyntaxWrapper)binaryBranchBlock.BranchingNode);
                     return;
 
                 default:
@@ -552,11 +552,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKindEx.TupleExpression:
-                    // TupleExpressions are not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/2933
-                    // ToDo: Constraints should be set correctly
-                    var typeSymbol = SemanticModel.GetTypeInfo(instruction).Type;
-                    var tupleSV = SymbolicValue.Create(typeSymbol);
-                    newProgramState = newProgramState.PushValue(tupleSV);
+                    newProgramState = VisitTuple((TupleExpressionSyntaxWrapper)instruction, newProgramState);
                     break;
 
                 case SyntaxKindEx.RefExpression:
@@ -745,7 +741,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private void VisitConditionalAccessBinaryBranch(BinaryBranchBlock binaryBranchBlock, ProgramState programState)
         {
-            if(!programState.HasValue)
+            if (!programState.HasValue)
             {
                 return;
             }
@@ -860,18 +856,18 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 OnConditionEvaluated(instruction, evaluationValue: true);
                 // this inner loop is to give the possibility of handling the same block with different constraints/programstate.
-                foreach (var innerNewProgramState  in GenerateNewProgramTrueState(binaryBranchBlock, sv, newProgramState))
+                foreach (var innerNewProgramState in GenerateNewProgramTrueState(binaryBranchBlock, sv, newProgramState))
                 {
-                    EnqueueNewNode(new ProgramPoint(binaryBranchBlock.TrueSuccessorBlock), CleanStateAfterBlock(innerNewProgramState , node.ProgramPoint.Block));
+                    EnqueueNewNode(new ProgramPoint(binaryBranchBlock.TrueSuccessorBlock), CleanStateAfterBlock(innerNewProgramState, node.ProgramPoint.Block));
                 }
             }
 
             foreach (var newProgramState in sv.TrySetOppositeConstraint(BoolConstraint.True, ps))
             {
                 OnConditionEvaluated(instruction, evaluationValue: false);
-                foreach (var innerNewProgramState  in GenerateNewProgramFalseState(binaryBranchBlock, sv, newProgramState))
+                foreach (var innerNewProgramState in GenerateNewProgramFalseState(binaryBranchBlock, sv, newProgramState))
                 {
-                    EnqueueNewNode(new ProgramPoint(binaryBranchBlock.FalseSuccessorBlock), CleanStateAfterBlock(innerNewProgramState , node.ProgramPoint.Block));
+                    EnqueueNewNode(new ProgramPoint(binaryBranchBlock.FalseSuccessorBlock), CleanStateAfterBlock(innerNewProgramState, node.ProgramPoint.Block));
                 }
             }
         }
@@ -1164,7 +1160,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             // Taking a an argument by ref will remove its constraint.
-            if(argument.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
+            if (argument.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
             {
                 newProgramState = newProgramState.RemoveConstraint(sv);
             }
@@ -1258,6 +1254,20 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             return SetNonNullConstraintIfValueType(leftSymbol, sv, newProgramState);
+        }
+
+        private ProgramState VisitTuple(TupleExpressionSyntaxWrapper tuple, ProgramState programState)
+        {
+            // TupleExpressions are not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/2933
+            // ToDo: Constraints should be set correctly
+            for (var i = 0; i < tuple.Arguments.Count; i++)
+            {
+                programState = programState.PopValue();
+            }
+
+            var typeSymbol = SemanticModel.GetTypeInfo(tuple).Type;
+            var tupleSV = SymbolicValue.Create(typeSymbol);
+            return programState.PushValue(tupleSV);
         }
 
         #endregion VisitExpression
