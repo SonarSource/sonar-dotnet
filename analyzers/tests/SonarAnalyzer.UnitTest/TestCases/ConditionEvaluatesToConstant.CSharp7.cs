@@ -326,5 +326,19 @@ namespace Tests.Diagnostics
             {
             }
         }
+
+        public void AssignmentTarget(bool arg) {
+            var trueValue = true;
+            bool a, b;
+            (a, b) = (arg, trueValue);
+
+            if (a)
+            {
+            }
+
+            if (b)    // FN
+            {
+            }
+        }
     }
 }
