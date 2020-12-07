@@ -18,7 +18,7 @@ namespace Tests.Diagnostics
 //                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
                 sa.GenerateKey();
-                var ivIsNotInitiazed = sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant - iv is not generated
+                var ivIsNotInitialized = sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant - iv is not generated
                 var constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant); // Noncompliant
 
                 sa.GenerateIV();
