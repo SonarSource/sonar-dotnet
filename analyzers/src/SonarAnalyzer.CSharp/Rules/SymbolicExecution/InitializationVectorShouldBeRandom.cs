@@ -67,9 +67,9 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         private sealed class InitializationVectorCheck : ExplodedGraphCheck
         {
             private static readonly ImmutableArray<KnownType> vulnerableTypes =
-                // ToDo: implement for all types.
-                ImmutableArray.Create(KnownType.System_Security_Cryptography_SymmetricAlgorithm,
-                                      KnownType.System_Security_Cryptography_AesCryptoServiceProvider);
+                ImmutableArray.Create(KnownType.System_Security_Cryptography_Aes,
+                                      KnownType.System_Security_Cryptography_AesCryptoServiceProvider,
+                                      KnownType.System_Security_Cryptography_SymmetricAlgorithm);
 
             private readonly AnalysisContext context;
 
