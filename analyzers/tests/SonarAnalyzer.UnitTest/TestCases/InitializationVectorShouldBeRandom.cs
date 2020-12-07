@@ -152,5 +152,35 @@ namespace Tests.Diagnostics
             rng.GetBytes(constantIV);
             var fromRng = aes.CreateEncryptor(aes.Key, constantIV);
         }
+
+        public void InConditionals(int a)
+        {
+            using var aesNotInitialized = new AesCng();
+            using var rng = new RNGCryptoServiceProvider();
+
+            using var aesInitialized = Aes.Create();
+            aesInitialized.GenerateKey();
+            aesInitialized.GenerateIV();
+
+            var e = a switch
+            {
+                1 => aesNotInitialized.CreateEncryptor(), // Noncompliant
+                2 => aesNotInitialized.CreateEncryptor(aesNotInitialized.Key, aesNotInitialized.IV), // Noncompliant
+                3 => aesInitialized.CreateEncryptor(),
+                _ => null
+            };
+
+            using var aes2 = new AesCng();
+            if (a == 1)
+            {
+                aes2.GenerateKey();
+                aes2.GenerateIV();
+                aes2.CreateEncryptor();
+            }
+            aes2.CreateEncryptor(); // Noncompliant
+
+            var aes3 = a == 2 ? aesInitialized : aesNotInitialized;
+            aes3.CreateEncryptor(); // Noncompliant
+        }
     }
 }
