@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<results>
+  <modules>
+    <module name="coveragewithdeterministicsourcepaths.tests.dll" path="coveragewithdeterministicsourcepaths.tests.dll" id="D56BC170BF52284F8137CB445BC6115201000000" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+      <functions>
+        <function id="8284" token="0x6000003" name="TestMethod1()" namespace="Repro3362.Tests" type_name="UnitTest1" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="9" start_column="38" end_line="9" end_column="57" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\FooTests.cs" checksum_type="unknown">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="coveragewithdeterministicsourcepaths.dll" path="coveragewithdeterministicsourcepaths.dll" id="DCBBF5335692704B877E036875DA445301000000" block_coverage="50.00" line_coverage="50.00" blocks_covered="1" blocks_not_covered="1" lines_covered="3" lines_partially_covered="0" lines_not_covered="3">
+      <functions>
+        <function id="8272" token="0x6000001" name="Covered()" namespace="Repro3362" type_name="Foo" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="6" start_column="9" end_line="6" end_column="10" />
+            <range source_id="0" covered="yes" start_line="7" start_column="13" end_line="7" end_column="27" />
+            <range source_id="0" covered="yes" start_line="8" start_column="9" end_line="8" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8288" token="0x6000002" name="NotCovered()" namespace="Repro3362" type_name="Foo" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="0" covered="no" start_line="11" start_column="9" end_line="11" end_column="10" />
+            <range source_id="0" covered="no" start_line="12" start_column="13" end_line="12" end_column="27" />
+            <range source_id="0" covered="no" start_line="13" start_column="9" end_line="13" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs" checksum_type="unknown">
+        </source_file>
+      </source_files>
+    </module>
+  </modules>
+</results>
