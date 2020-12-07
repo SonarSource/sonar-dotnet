@@ -34,6 +34,9 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     internal class CSharpSymbolUsageCollector : CSharpSyntaxWalker
     {
+        [Flags]
+        private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write }
+
         private static readonly ISet<SyntaxKind> IncrementKinds = new HashSet<SyntaxKind>
         {
             SyntaxKind.PostIncrementExpression,
@@ -41,9 +44,6 @@ namespace SonarAnalyzer.Helpers
             SyntaxKind.PostDecrementExpression,
             SyntaxKind.PreDecrementExpression
         };
-
-        [Flags]
-        private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write }
 
         private readonly Compilation compilation;
         private readonly HashSet<string> knownSymbolNames;
@@ -287,16 +287,29 @@ namespace SonarAnalyzer.Helpers
                     return AccessorAccess.Both;
                 }
             }
-
-            // nameof(Prop) --> get/set
-            if (node.IsInNameOfArgument(GetSemanticModel(node)))
+            else if (topmostSyntax.Parent is ArgumentSyntax argument && IsAssignmentToTuple(argument))
             {
+                return AccessorAccess.Set;
+            }
+            else if (node.IsInNameOfArgument(GetSemanticModel(node)))
+            {
+                // nameof(Prop) --> get/set
                 return AccessorAccess.Both;
             }
-
-            // Prop++ --> get/set
-            return topmostSyntax.Parent.IsAnyKind(IncrementKinds) ? AccessorAccess.Both : AccessorAccess.Get;
+            else
+            {
+                // Prop++ --> get/set
+                return topmostSyntax.Parent.IsAnyKind(IncrementKinds) ? AccessorAccess.Both : AccessorAccess.Get;
+            }
         }
+
+        //FIXME: Rebase and extract into an extension method
+        // (arg, b) = something
+        private static bool IsAssignmentToTuple(ArgumentSyntax argument) =>
+            argument.Parent is { } tupleExpression
+            && ShimLayer.CSharp.TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
+            && tupleExpression.Parent is AssignmentExpressionSyntax assignment
+            && assignment.Left == tupleExpression;
 
         private bool IsKnownIdentifier(SyntaxToken identifier) =>
             knownSymbolNames.Contains(identifier.ValueText);
