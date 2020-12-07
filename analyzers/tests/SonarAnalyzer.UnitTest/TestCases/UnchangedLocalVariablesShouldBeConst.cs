@@ -301,6 +301,13 @@ namespace Tests.Diagnostics
             (flag, tmp) = (false, 5);
         }
 
+        public void UninitializedTuple()
+        {
+            int tmp;
+            bool flag;
+            (flag, tmp) = (false, 5);
+        }
+
         public struct StructWithImplicitOperator
         {
             public static implicit operator StructWithImplicitOperator(int value) { return new StructWithImplicitOperator(); }

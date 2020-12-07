@@ -166,9 +166,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // (arg, b) = something
         private static bool IsAssignmentToTuple(ArgumentSyntax argument) =>
-            TupleExpressionSyntaxWrapper.IsInstance(argument.Parent)
-            && argument.Parent.Parent is AssignmentExpressionSyntax assignment
-            && assignment.Left == argument.Parent;
+            argument.Parent is { } tupleExpression
+            && TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
+            && tupleExpression.Parent is AssignmentExpressionSyntax assignment
+            && assignment.Left == tupleExpression;
 
         private static void Report(VariableDeclaratorSyntax declaratorSyntax, SyntaxNodeAnalysisContext c) =>
             c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
