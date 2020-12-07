@@ -19,22 +19,20 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import java.util.function.Predicate;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class OpenCoverReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(OpenCoverReportParser.class);
-  private final Predicate<String> isSupported;
+  private final CoverageFileValidator coverageFileValidator;
 
-  OpenCoverReportParser(Predicate<String> isSupported) {
-    this.isSupported = isSupported;
+  OpenCoverReportParser(CoverageFileValidator coverageFileValidator) {
+    this.coverageFileValidator = coverageFileValidator;
   }
 
   @Override
@@ -112,7 +110,7 @@ public class OpenCoverReportParser implements CoverageParser {
       if (files.containsKey(fileId)) {
         String filePath = files.get(fileId);
 
-        if (isSupported.test(filePath)) {
+        if (coverageFileValidator.isSupported(filePath)) {
           LOG.trace("OpenCover parser: add hits for fileId '{}', filePath '{}', line '{}', visitCount '{}'",
             fileId, filePath, line, visitCount);
 
@@ -147,7 +145,7 @@ public class OpenCoverReportParser implements CoverageParser {
         int path = xmlParserHelper.getRequiredIntAttribute("path");
         int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
 
-        if (isSupported.test(filePath)) {
+        if (coverageFileValidator.isSupported(filePath)) {
           coverage.add(new BranchPoint(filePath, line, offset, offsetEnd, path, visitCount));
         } else {
           LOG.debug("OpenCover parser: Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +

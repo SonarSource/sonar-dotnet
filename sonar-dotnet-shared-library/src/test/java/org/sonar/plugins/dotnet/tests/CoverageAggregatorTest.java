@@ -41,6 +41,7 @@ import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -100,7 +101,9 @@ public class CoverageAggregatorTest {
   }
 
   private CoverageAggregator getCoverageAggregator(Configuration configuration, CoverageConfiguration coverageConf) {
-    return new CoverageAggregator(coverageConf, configuration, new DefaultFileSystem(new File("")), mock(AnalysisWarnings.class));
+    FileSystemCoverageFileValidator alwaysTrue = mock(FileSystemCoverageFileValidator.class);
+    when(alwaysTrue.isSupported(anyString())).thenReturn(true);
+    return new CoverageAggregator(coverageConf, configuration, alwaysTrue, mock(AnalysisWarnings.class));
   }
 
   @Test

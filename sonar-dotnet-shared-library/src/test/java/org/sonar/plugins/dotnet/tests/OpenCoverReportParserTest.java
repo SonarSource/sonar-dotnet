@@ -19,19 +19,20 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.io.File;
 import java.util.List;
-import java.util.function.Predicate;
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.io.File;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class OpenCoverReportParserTest {
 
@@ -40,8 +41,16 @@ public class OpenCoverReportParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
-  private final Predicate<String> alwaysTrue = s -> true;
-  private final Predicate<String> alwaysFalse = s -> false;
+  private CoverageFileValidator alwaysTrue;
+  private CoverageFileValidator alwaysFalse;
+
+  @Before
+  public void prepare() {
+    alwaysTrue = mock(CoverageFileValidator.class);
+    when(alwaysTrue.isSupported(anyString())).thenReturn(true);
+    alwaysFalse = mock(CoverageFileValidator.class);
+    when(alwaysFalse.isSupported(anyString())).thenReturn(false);
+  }
 
   @Test
   public void invalid_root() {

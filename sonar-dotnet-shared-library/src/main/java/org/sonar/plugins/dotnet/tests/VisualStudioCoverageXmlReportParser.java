@@ -25,17 +25,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(VisualStudioCoverageXmlReportParser.class);
-  private final Predicate<String> isSupported;
+  private final CoverageFileValidator coverageFileValidator;
 
-  public  VisualStudioCoverageXmlReportParser(Predicate<String> isSupported) {
-    this.isSupported = isSupported;
+  public VisualStudioCoverageXmlReportParser(CoverageFileValidator coverageFileValidator) {
+    this.coverageFileValidator = coverageFileValidator;
   }
 
   @Override
@@ -114,7 +113,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         return;
       }
 
-      if (!isSupported.test(canonicalPath)) {
+      if (!coverageFileValidator.isSupported(canonicalPath)) {
         LOG.debug("Skipping file with path '{}' because it is not indexed or does not have the supported language.", canonicalPath);
         return;
       }

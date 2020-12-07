@@ -20,8 +20,8 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
-import java.util.function.Predicate;
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -29,7 +29,9 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class VisualStudioCoverageXmlReportParserTest {
 
@@ -38,7 +40,16 @@ public class VisualStudioCoverageXmlReportParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
-  private Predicate<String> alwaysTrue = s -> true;
+  private CoverageFileValidator alwaysTrue;
+  private CoverageFileValidator alwaysFalse;
+
+  @Before
+  public void prepare() {
+    alwaysTrue = mock(CoverageFileValidator.class);
+    when(alwaysTrue.isSupported(anyString())).thenReturn(true);
+    alwaysFalse = mock(CoverageFileValidator.class);
+    when(alwaysFalse.isSupported(anyString())).thenReturn(false);
+  }
 
   @Test
   public void invalid_root() {
@@ -196,7 +207,7 @@ public class VisualStudioCoverageXmlReportParserTest {
   @Test
   public void valid_with_wrong_file_language() throws Exception {
     Coverage coverage = new Coverage();
-    new VisualStudioCoverageXmlReportParser(s -> false).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
+    new VisualStudioCoverageXmlReportParser(alwaysFalse).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
 
     assertThat(coverage.files()).isEmpty();
     assertThat(coverage.hits(new File("MyLibrary\\Calc.cs").getCanonicalPath())).isEmpty();

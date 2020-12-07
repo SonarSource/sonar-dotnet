@@ -19,18 +19,19 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import java.util.function.Predicate;
+import java.io.File;
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.io.File;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class DotCoverReportParserTest {
 
@@ -39,7 +40,16 @@ public class DotCoverReportParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
-  private Predicate<String> alwaysTrue = s -> true;
+  private CoverageFileValidator alwaysTrue;
+  private CoverageFileValidator alwaysFalse;
+
+  @Before
+  public void prepare() {
+    alwaysTrue = mock(CoverageFileValidator.class);
+    when(alwaysTrue.isSupported(anyString())).thenReturn(true);
+    alwaysFalse = mock(CoverageFileValidator.class);
+    when(alwaysFalse.isSupported(anyString())).thenReturn(false);
+  }
 
   @Test
   public void no_title() {
@@ -121,7 +131,6 @@ public class DotCoverReportParserTest {
   @Test
   public void predicate_false() {
     Coverage coverage = new Coverage();
-    Predicate<String> alwaysFalse = s -> false;
     new DotCoverReportParser(alwaysFalse).accept(new File("src/test/resources/dotcover/valid.html"), coverage);
 
     assertThat(coverage.files()).isEmpty();
