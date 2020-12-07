@@ -48,17 +48,31 @@ namespace Tests.Diagnostics
 
     public class ReproIssue2333
     {
-        public void M()
+        public void Method()
         {
-            OtherClass oc = new OtherClass();
-            (oc.Name, oc.Type) = ("A", "B");
-            Console.WriteLine(oc.Name + " " + oc.Type);
+            PrivateNestedClass x = new PrivateNestedClass();
+            (x.ReadAndWrite, x.OnlyWriteNoBody, x.OnlyWrite) = ("A", "B", "C");
+            var tuple = (x.ReadAndWrite, x.OnlyRead);
         }
 
-        class OtherClass
+        private class PrivateNestedClass
         {
-            public string Name { get; set; } // Setters are compliant, they are used in tuple assignment
-            public string Type { get; set; }
+            private string hasOnlyWrite;
+
+            public string ReadAndWrite { get; set; }        // Setters are compliant, they are used in tuple assignment
+            public string OnlyWriteNoBody { get; set; }     // Compliant, we don't raise on get without body
+
+            public string OnlyRead
+            {
+                get;
+                set;    // Noncompliant
+            }
+
+            public string OnlyWrite
+            {
+                get => hasOnlyWrite;    // Noncompliant
+                set => hasOnlyWrite = value;
+            }
         }
     }
 
