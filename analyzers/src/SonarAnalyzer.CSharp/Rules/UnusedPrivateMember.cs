@@ -145,10 +145,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Intersect(usageCollector.UsedSymbols)
                 .OfType<IPropertySymbol>()
                 .Where(usageCollector.PropertyAccess.ContainsKey)
-                .Where(symbol => !IsMentionedInDebuggerDisplay(symbol, usageCollector));
+                .Where(symbol => !IsMentionedInDebuggerDisplay(symbol, usageCollector))
+                .Select(symbol => GetDiagnosticsForProperty(symbol, usageCollector.PropertyAccess))
+                .WhereNotNull();
 
-            return GetDiagnosticsForMembers(unusedSymbols, accessibility, fieldLikeSymbols)
-                .Concat(propertiesWithUnusedAccessor.SelectMany(propertySymbol => GetDiagnosticsForProperty(propertySymbol, usageCollector.PropertyAccess)));
+            return GetDiagnosticsForMembers(unusedSymbols, accessibility, fieldLikeSymbols).Concat(propertiesWithUnusedAccessor);
         }
 
         private static bool IsMentionedInDebuggerDisplay(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
@@ -222,29 +223,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 Diagnostic.Create(RuleS1144, syntaxNode.GetLocation(), accessibility, GetMemberType(symbol), GetMemberName(symbol));
         }
 
-        //FIXME: Deobfuscate in a separate commit
-        private static IEnumerable<Diagnostic> GetDiagnosticsForProperty(IPropertySymbol property, IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
+        private static Diagnostic GetDiagnosticsForProperty(IPropertySymbol property, IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
         {
             var access = propertyAccessorAccess[property];
-            if (access == AccessorAccess.Get && property.SetMethod != null)
+            if (access == AccessorAccess.Get
+                && property.SetMethod != null
+                && GetAccessorSyntax(property.SetMethod) is { } setter)
             {
-                var accessorSyntax = GetAccessorSyntax(property.SetMethod);
-                if (accessorSyntax != null)
-                {
-                    yield return Diagnostic.Create(RuleS1144, accessorSyntax.GetLocation(), "private", "set accessor in property", property.Name);
-                }
+                return Diagnostic.Create(RuleS1144, setter.GetLocation(), "private", "set accessor in property", property.Name);
             }
-            else if (access == AccessorAccess.Set && property.GetMethod != null)
+            else if (access == AccessorAccess.Set
+                && property.GetMethod != null
+                && GetAccessorSyntax(property.GetMethod) is { } getter
+                && getter.HasBodyOrExpressionBody())
             {
-                var accessorSyntax = GetAccessorSyntax(property.GetMethod);
-                if (accessorSyntax != null && accessorSyntax.HasBodyOrExpressionBody())
-                {
-                    yield return Diagnostic.Create(RuleS1144, accessorSyntax.GetLocation(), "private", "get accessor in property", property.Name);
-                }
+                return Diagnostic.Create(RuleS1144, getter.GetLocation(), "private", "get accessor in property", property.Name);
             }
             else
             {
-                // do nothing
+                return null;
             }
 
             static AccessorDeclarationSyntax GetAccessorSyntax(ISymbol symbol) =>
