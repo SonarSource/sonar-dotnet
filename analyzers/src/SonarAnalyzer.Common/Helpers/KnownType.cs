@@ -304,6 +304,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_SByte = new KnownType(SpecialType.System_SByte, "sbyte");
         internal static readonly KnownType System_Security_AllowPartiallyTrustedCallersAttribute = new KnownType("System.Security.AllowPartiallyTrustedCallersAttribute");
         internal static readonly KnownType System_Security_Cryptography_Aes = new KnownType("System.Security.Cryptography.Aes");
+        internal static readonly KnownType System_Security_Cryptography_AesCng = new KnownType("System.Security.Cryptography.AesCng");
         internal static readonly KnownType System_Security_Cryptography_AesCryptoServiceProvider = new KnownType("System.Security.Cryptography.AesCryptoServiceProvider");
         internal static readonly KnownType System_Security_Cryptography_AesManaged = new KnownType("System.Security.Cryptography.AesManaged");
         internal static readonly KnownType System_Security_Cryptography_AsymmetricAlgorithm = new KnownType("System.Security.Cryptography.AsymmetricAlgorithm");

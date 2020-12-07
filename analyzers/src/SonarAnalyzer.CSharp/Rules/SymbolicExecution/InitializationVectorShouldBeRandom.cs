@@ -68,6 +68,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         {
             private static readonly ImmutableArray<KnownType> vulnerableTypes =
                 ImmutableArray.Create(KnownType.System_Security_Cryptography_Aes,
+                                      KnownType.System_Security_Cryptography_AesCng,
                                       KnownType.System_Security_Cryptography_AesCryptoServiceProvider,
                                       KnownType.System_Security_Cryptography_SymmetricAlgorithm);
 
