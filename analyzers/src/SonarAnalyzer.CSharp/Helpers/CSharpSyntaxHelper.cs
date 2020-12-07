@@ -411,11 +411,17 @@ namespace SonarAnalyzer.Helpers
         public static ImmutableArray<ExpressionSyntax> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
         {
             var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, semanticModel);
-            if (methodParameterLookup.TryGetSyntax(parameterName, out var argumentSyntax))
-            {
-                return argumentSyntax.Select(x => x.Expression).ToImmutableArray();
-            }
-            return ImmutableArray<ExpressionSyntax>.Empty;
+            return methodParameterLookup.TryGetSyntax(parameterName, out var argumentSyntax)
+                ? argumentSyntax.Select(x => x.Expression).ToImmutableArray()
+                : ImmutableArray<ExpressionSyntax>.Empty;
         }
+
+        // (arg, b) = something
+        public static bool IsAssignmentToTuple(this ArgumentSyntax argument) =>
+            argument.Parent is { } tupleExpression
+            && TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
+            && tupleExpression.Parent is AssignmentExpressionSyntax assignment
+            && assignment.Left == tupleExpression;
+
     }
 }

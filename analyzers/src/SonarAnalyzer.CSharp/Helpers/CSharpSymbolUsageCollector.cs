@@ -287,7 +287,7 @@ namespace SonarAnalyzer.Helpers
                     return AccessorAccess.Both;
                 }
             }
-            else if (topmostSyntax.Parent is ArgumentSyntax argument && IsAssignmentToTuple(argument))
+            else if (topmostSyntax.Parent is ArgumentSyntax argument && argument.IsAssignmentToTuple())
             {
                 return AccessorAccess.Set;
             }
@@ -302,14 +302,6 @@ namespace SonarAnalyzer.Helpers
                 return topmostSyntax.Parent.IsAnyKind(IncrementKinds) ? AccessorAccess.Both : AccessorAccess.Get;
             }
         }
-
-        //FIXME: Rebase and extract into an extension method
-        // (arg, b) = something
-        private static bool IsAssignmentToTuple(ArgumentSyntax argument) =>
-            argument.Parent is { } tupleExpression
-            && ShimLayer.CSharp.TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
-            && tupleExpression.Parent is AssignmentExpressionSyntax assignment
-            && assignment.Left == tupleExpression;
 
         private bool IsKnownIdentifier(SyntaxToken identifier) =>
             knownSymbolNames.Contains(identifier.ValueText);

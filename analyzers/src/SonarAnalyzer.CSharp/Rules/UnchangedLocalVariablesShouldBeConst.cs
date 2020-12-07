@@ -158,18 +158,12 @@ namespace SonarAnalyzer.Rules.CSharp
             identifier.Parent switch
             {
                 AssignmentExpressionSyntax assignmentExpression => Equals(identifier, assignmentExpression?.Left),
-                ArgumentSyntax argumentSyntax => IsAssignmentToTuple(argumentSyntax) || !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
+                ArgumentSyntax argumentSyntax => argumentSyntax.IsAssignmentToTuple() || !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
                 PostfixUnaryExpressionSyntax _ => true,
                 PrefixUnaryExpressionSyntax _ => true,
                 _ => false
             };
 
-        // (arg, b) = something
-        private static bool IsAssignmentToTuple(ArgumentSyntax argument) =>
-            argument.Parent is { } tupleExpression
-            && TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
-            && tupleExpression.Parent is AssignmentExpressionSyntax assignment
-            && assignment.Left == tupleExpression;
 
         private static void Report(VariableDeclaratorSyntax declaratorSyntax, SyntaxNodeAnalysisContext c) =>
             c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
