@@ -285,7 +285,7 @@ namespace Tests.Diagnostics
             {
             }
 
-            if (b)    // FN
+            if (b)  // FN
             {
             }
         }

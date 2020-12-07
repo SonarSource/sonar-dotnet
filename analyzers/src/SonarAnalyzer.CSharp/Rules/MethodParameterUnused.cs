@@ -52,7 +52,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var declaration = CreateContext(c);
 
-                    if ((declaration.Body == null && declaration.ExpressionBody == null) ||  declaration.Body?.Statements.Count == 0) // Don't report on empty methods
+                    // Don't report on empty methods
+                    if ((declaration.Body == null && declaration.ExpressionBody == null) ||  declaration.Body?.Statements.Count == 0)
                     {
                         return;
                     }

@@ -5276,6 +5276,23 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
 
         [TestMethod]
         [TestCategory("CFG")]
+        public void Cfg_Tuple_ComplexExpression()
+        {
+            const string code = @"
+
+var x = (LocalBool(), LocalInt() + 2);
+
+bool LocalBool() => true;
+int LocalInt() => 40;
+";
+            var cfg = Build(code);
+
+            VerifyMinimalCfg(cfg);
+            VerifyAllInstructions(cfg.EntryBlock, "LocalBool", "LocalBool()", "LocalInt", "LocalInt()", "2", "LocalInt() + 2", "(LocalBool(), LocalInt() + 2)", "x = (LocalBool(), LocalInt() + 2)");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
         public void Cfg_Tuple_InDeclaration()
         {
             var cfg = Build(@"var (a, b) = (true, 42);");
