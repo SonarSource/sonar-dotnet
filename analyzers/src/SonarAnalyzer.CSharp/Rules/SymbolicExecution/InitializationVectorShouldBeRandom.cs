@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
-                if (programPoint.CurrentInstruction is {} instruction && instruction is InvocationExpressionSyntax invocation)
+                if (programPoint.CurrentInstruction is InvocationExpressionSyntax invocation)
                 {
                     programState = InvocationExpressionPreProcess(invocation, programState);
                 }

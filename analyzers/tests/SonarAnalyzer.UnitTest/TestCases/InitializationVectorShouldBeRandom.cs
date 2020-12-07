@@ -25,6 +25,11 @@ namespace Tests.Diagnostics
                 var defaultConstructor = sa.CreateEncryptor(); // Compliant - key and IV are used by default and now they are generated
                 var compliant = sa.CreateEncryptor(sa.Key, sa.IV);
 
+                sa.KeySize = 12;
+                sa.CreateEncryptor(); // Compliant - updating key size does not change the status
+                sa.CreateEncryptor(sa.Key, new CustomAlg().IV);
+                sa.CreateEncryptor(sa.Key, new CustomAlg().Key);
+
                 sa.IV = initializationVectorConstant;
                 var ivReplacedDefaultConstructor = sa.CreateEncryptor(); // Noncompliant
                 var ivReplaced = sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant
@@ -182,5 +187,18 @@ namespace Tests.Diagnostics
             var aes3 = a == 2 ? aesInitialized : aesNotInitialized;
             aes3.CreateEncryptor(); // Noncompliant
         }
+
+        public void DifferentCases()
+        {
+            var alg = new CustomAlg();
+            alg.IV = new byte[16];
+        }
+    }
+
+    public class CustomAlg
+    {
+        public virtual byte[] IV { get; set; }
+
+        public virtual byte[] Key { get; set; }
     }
 }
