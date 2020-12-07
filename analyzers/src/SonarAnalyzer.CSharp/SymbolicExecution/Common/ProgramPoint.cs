@@ -49,6 +49,9 @@ namespace SonarAnalyzer.SymbolicExecution
             : this(block, 0)
         { }
 
+        public SyntaxNode CurrentInstruction =>
+            Block.Instructions[Offset];
+
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -71,8 +74,5 @@ namespace SonarAnalyzer.SymbolicExecution
         }
 
         public override int GetHashCode() => this.hash.Value;
-
-        public SyntaxNode GetCurrentInstruction() =>
-            Block.Instructions[Offset];
     }
 }
