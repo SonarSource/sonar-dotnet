@@ -41,15 +41,15 @@ public class OpenCoverReportParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
-  private CoverageFileValidator alwaysTrue;
-  private CoverageFileValidator alwaysFalse;
+  private FileService alwaysTrue;
+  private FileService alwaysFalse;
 
   @Before
   public void prepare() {
-    alwaysTrue = mock(CoverageFileValidator.class);
-    when(alwaysTrue.isSupported(anyString())).thenReturn(true);
-    alwaysFalse = mock(CoverageFileValidator.class);
-    when(alwaysFalse.isSupported(anyString())).thenReturn(false);
+    alwaysTrue = mock(FileService.class);
+    when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
+    alwaysFalse = mock(FileService.class);
+    when(alwaysFalse.isSupportedAbsolute(anyString())).thenReturn(false);
   }
 
   @Test

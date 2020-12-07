@@ -20,11 +20,14 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.net.URI;
+import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -40,15 +43,13 @@ public class VisualStudioCoverageXmlReportParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
-  private CoverageFileValidator alwaysTrue;
-  private CoverageFileValidator alwaysFalse;
+  private FileService alwaysTrue;
 
   @Before
   public void prepare() {
-    alwaysTrue = mock(CoverageFileValidator.class);
-    when(alwaysTrue.isSupported(anyString())).thenReturn(true);
-    alwaysFalse = mock(CoverageFileValidator.class);
-    when(alwaysFalse.isSupported(anyString())).thenReturn(false);
+    alwaysTrue = mock(FileService.class);
+    when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
+
   }
 
   @Test
@@ -205,8 +206,11 @@ public class VisualStudioCoverageXmlReportParserTest {
   }
 
   @Test
-  public void valid_with_wrong_file_language() throws Exception {
+  public void valid_with_no_absolute_path_no_relative_path() throws Exception {
     Coverage coverage = new Coverage();
+    FileService alwaysFalse = mock(FileService.class);
+    when(alwaysFalse.isSupportedAbsolute(anyString())).thenReturn(false);
+    when(alwaysFalse.getFilesByRelativePath(anyString())).thenReturn(Optional.empty());
     new VisualStudioCoverageXmlReportParser(alwaysFalse).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
 
     assertThat(coverage.files()).isEmpty();
@@ -215,8 +219,48 @@ public class VisualStudioCoverageXmlReportParserTest {
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(1))
-      .startsWith("Skipping file with path '")
-      .endsWith("\\CalcMultiplyTest\\MultiplyTest.cs' because it is not indexed or does not have the supported language.");
+      .startsWith("The path '")
+      .endsWith("\\CalcMultiplyTest\\MultiplyTest.cs' is not indexed by the scanner as an absolute or relative path. This file will be skipped. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
+  }
+
+  @Test
+  public void valid_with_no_absolute_path_relative_path_found() {
+    Coverage coverage = new Coverage();
+    FileService mockFileValidator = mock(FileService.class);
+    when(mockFileValidator.isSupportedAbsolute(anyString())).thenReturn(false);
+    InputFile mockInput = mock(InputFile.class);
+    URI file = URI.create("/test/file/Calc.cs");
+    when(mockInput.uri()).thenReturn(file);
+    when(mockFileValidator.getFilesByRelativePath(anyString())).thenReturn(Optional.of(mockInput));
+    new VisualStudioCoverageXmlReportParser(mockFileValidator).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
+
+    assertThat(coverage.files()).hasSize(1);
+    assertThat(coverage.hits(file.getPath())).hasSize(17)
+      // because we return the mockInput for all entries, the below stats are the aggregated stats for all files
+      .containsOnly(
+        Assertions.entry(12, 0),
+        Assertions.entry(13, 1),
+        Assertions.entry(14, 1),
+        Assertions.entry(15, 1),
+        Assertions.entry(17, 1),
+        Assertions.entry(18, 1),
+        Assertions.entry(19, 1),
+        Assertions.entry(22, 0),
+        Assertions.entry(23, 0),
+        Assertions.entry(24, 0),
+        Assertions.entry(25, 0),
+        Assertions.entry(26, 0),
+        Assertions.entry(28, 0),
+        Assertions.entry(29, 0),
+        Assertions.entry(32, 0),
+        Assertions.entry(33, 0),
+        Assertions.entry(34, 0));
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1))
+      .startsWith("Found indexed file '/test/file/Calc.cs' for coverage entry '")
+      .endsWith("\\CalcMultiplyTest\\MultiplyTest.cs'.");
   }
 
   @Test

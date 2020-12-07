@@ -29,7 +29,6 @@ import org.junit.rules.ExpectedException;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.notifications.AnalysisWarnings;
@@ -102,7 +101,7 @@ public class CoverageAggregatorTest {
 
   private CoverageAggregator getCoverageAggregator(Configuration configuration, CoverageConfiguration coverageConf) {
     FileSystemCoverageFileValidator alwaysTrue = mock(FileSystemCoverageFileValidator.class);
-    when(alwaysTrue.isSupported(anyString())).thenReturn(true);
+    when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
     return new CoverageAggregator(coverageConf, configuration, alwaysTrue, mock(AnalysisWarnings.class));
   }
 

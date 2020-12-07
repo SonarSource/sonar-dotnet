@@ -19,11 +19,19 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.scanner.ScannerSide;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 @ScannerSide
-public class FileSystemCoverageFileValidator implements CoverageFileValidator {
+public class FileSystemCoverageFileValidator implements FileService {
+  private static final Logger LOG = Loggers.get(FileSystemCoverageFileValidator.class);
+  private static final Pattern DETERMINISTIC_SOURCE_PATH_PREFIX = Pattern.compile("^(([a-zA-Z]:)?[\\\\][_][\\\\])|([\\/][_][\\/])");
   private FileSystem fileSystem;
   private String languageKey;
 
@@ -32,11 +40,50 @@ public class FileSystemCoverageFileValidator implements CoverageFileValidator {
     this.fileSystem = fileSystem;
   }
 
-  public boolean isSupported(String absolutePath) {
+  public boolean isSupportedAbsolute(String absolutePath) {
     return fileSystem.hasFiles(
       fileSystem.predicates().and(
         fileSystem.predicates().hasAbsolutePath(absolutePath),
         fileSystem.predicates().hasLanguage(languageKey)));
+  }
+
+  public Optional<InputFile> getFilesByRelativePath(String filePath) {
+    String normalizedRelativePath = getNormalizedRelativePath(filePath);
+    Iterable<InputFile> files = fileSystem.inputFiles(fileSystem.predicates().all());
+    int count = 0;
+    InputFile foundFile = null;
+    for (InputFile file : files) {
+      String path = file.uri().getPath();
+      if (path.endsWith(normalizedRelativePath)) {
+        count++;
+        foundFile = file;
+      }
+    }
+    if (count == 0) {
+      LOG.trace("Did not find any indexed file for '{}'", normalizedRelativePath);
+      return Optional.empty();
+    } else if (count > 1) {
+      LOG.debug("Found {} indexed files for relative path '{}'. Will skip this coverage entry.", count, normalizedRelativePath);
+      return Optional.empty();
+    } else {
+      LOG.trace("Found indexed file '{}' for coverage entry '{}'", foundFile.uri().getPath(), normalizedRelativePath);
+      return Optional.of(foundFile);
+    }
+  }
+
+  private String getNormalizedRelativePath(String filePath) {
+    String relativePath = replaceDeterministicSourcePath(filePath);
+    return relativePath.replace('\\', '/');
+  }
+
+  private String replaceDeterministicSourcePath(String filePath) {
+
+    Matcher matcher = DETERMINISTIC_SOURCE_PATH_PREFIX.matcher(filePath);
+    String subPath = matcher.replaceFirst("");
+    if (!filePath.equals(subPath)) {
+      LOG.trace("It seems Deterministic Source Paths are used, replacing '{}' with '{}'", filePath, subPath);
+    }
+    return subPath;
   }
 
 }

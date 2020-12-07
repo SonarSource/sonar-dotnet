@@ -25,15 +25,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(VisualStudioCoverageXmlReportParser.class);
-  private final CoverageFileValidator coverageFileValidator;
+  private final FileService coverageFileValidator;
 
-  public VisualStudioCoverageXmlReportParser(CoverageFileValidator coverageFileValidator) {
+  public VisualStudioCoverageXmlReportParser(FileService coverageFileValidator) {
     this.coverageFileValidator = coverageFileValidator;
   }
 
@@ -113,9 +115,17 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         return;
       }
 
-      if (!coverageFileValidator.isSupported(canonicalPath)) {
-        LOG.debug("Skipping file with path '{}' because it is not indexed or does not have the supported language.", canonicalPath);
-        return;
+      if (!coverageFileValidator.isSupportedAbsolute(canonicalPath)) {
+        Optional<InputFile> foundFiles = coverageFileValidator.getFilesByRelativePath(canonicalPath);
+        if (foundFiles.isPresent()) {
+          InputFile foundFile = foundFiles.get();
+          String newPath = foundFile.uri().getPath();
+          LOG.debug("Found indexed file '{}' for coverage entry '{}'.", newPath, canonicalPath);
+          canonicalPath = newPath;
+        } else {
+          LOG.debug("The path '{}' is not indexed by the scanner as an absolute or relative path. This file will be skipped. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.", canonicalPath);
+          return;
+        }
       }
 
       if (coveredLines.containsKey(id)) {

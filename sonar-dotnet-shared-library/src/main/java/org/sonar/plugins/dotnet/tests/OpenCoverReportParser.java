@@ -29,9 +29,9 @@ import org.sonar.api.utils.log.Loggers;
 public class OpenCoverReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(OpenCoverReportParser.class);
-  private final CoverageFileValidator coverageFileValidator;
+  private final FileService coverageFileValidator;
 
-  OpenCoverReportParser(CoverageFileValidator coverageFileValidator) {
+  OpenCoverReportParser(FileService coverageFileValidator) {
     this.coverageFileValidator = coverageFileValidator;
   }
 
@@ -110,7 +110,7 @@ public class OpenCoverReportParser implements CoverageParser {
       if (files.containsKey(fileId)) {
         String filePath = files.get(fileId);
 
-        if (coverageFileValidator.isSupported(filePath)) {
+        if (coverageFileValidator.isSupportedAbsolute(filePath)) {
           LOG.trace("OpenCover parser: add hits for fileId '{}', filePath '{}', line '{}', visitCount '{}'",
             fileId, filePath, line, visitCount);
 
@@ -145,7 +145,7 @@ public class OpenCoverReportParser implements CoverageParser {
         int path = xmlParserHelper.getRequiredIntAttribute("path");
         int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
 
-        if (coverageFileValidator.isSupported(filePath)) {
+        if (coverageFileValidator.isSupportedAbsolute(filePath)) {
           coverage.add(new BranchPoint(filePath, line, offset, offsetEnd, path, visitCount));
         } else {
           LOG.debug("OpenCover parser: Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +

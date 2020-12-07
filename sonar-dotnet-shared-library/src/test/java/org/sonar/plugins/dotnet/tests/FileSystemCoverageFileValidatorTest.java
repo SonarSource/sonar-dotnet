@@ -20,83 +20,206 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.mockito.ArgumentCaptor;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyCollection;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(Parameterized.class)
 public class FileSystemCoverageFileValidatorTest {
-  private boolean hasAbsolutePath;
-  private boolean hasLanguage;
-  private boolean hasFiles;
-  private boolean expectedResult;
+  @Rule
+  public LogTester logTester = new LogTester();
 
-  public FileSystemCoverageFileValidatorTest(boolean hasAbsolutePath, boolean hasLanguage, boolean hasFiles, boolean expectedResult) {
-    this.hasAbsolutePath = hasAbsolutePath;
-    this.hasLanguage = hasLanguage;
-    this.hasFiles = hasFiles;
-    this.expectedResult = expectedResult;
-  }
+  @Test
+  public void isSupportedAbsolute_passes_correct_argument() {
+    // arrange
+    FileSystem fs = mock(FileSystem.class);
+    FilePredicates filePredicates = mock(FilePredicates.class);
 
-  @Parameterized.Parameters
-  public static Collection input() {
-    return Arrays.asList(new Object[][] {
-        // hasAbsolutePath, hasLanguage, hasFiles, expectedResult
-        // expectedResult should always be what hasFiles returns
-        {false, false, false, false},
-        {true, false, false, false},
-        {false, true, false, false},
-        {true, true, false, false},
-        {false, false, true, true},
-        {false, true, true, true},
-        {true, false, true, true},
-        {true, true, true, true},
-      }
-    );
+    ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+    when(filePredicates.hasAbsolutePath(argumentCaptor.capture())).thenReturn(mock(FilePredicate.class));
+    when(fs.predicates()).thenReturn(filePredicates);
+    when(fs.hasFiles(any())).thenReturn(true);
+
+    // act
+    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    sut.isSupportedAbsolute("/_/some/path/file.cs");
+
+    // assert
+    assertThat(argumentCaptor.getValue()).isEqualTo("/_/some/path/file.cs");
+    assertThat(logTester.logs()).isEmpty();
   }
 
   @Test
-  public void isSupported_returns_hasFiles_result() {
-    // arrange
-    FilePredicates predicatesFilePredicate = mock(FilePredicates.class);
-
-    FilePredicate hasAbsolutePathFilePredicate = createFilePredicate(hasAbsolutePath);
-    when(predicatesFilePredicate.hasAbsolutePath(anyString())).thenReturn(hasAbsolutePathFilePredicate);
-
-    FilePredicate hasLanguageFilePredicate = createFilePredicate(hasLanguage);
-    when(predicatesFilePredicate.hasLanguage(anyString())).thenReturn(hasLanguageFilePredicate);
-
-    FilePredicate andFilePredicate = mock(FilePredicate.class);
-    when(predicatesFilePredicate.and(anyCollection())).thenReturn(andFilePredicate);
-
-    FileSystem fs = mock(FileSystem.class);
-    when(fs.predicates()).thenReturn(predicatesFilePredicate);
-    when(fs.hasFiles(any())).thenReturn(hasFiles);
+  public void isSupportedAbsolute_returns_fileSystem_result_when_true() {
+    FileSystem fs = createFileSystemForHasFiles(true);
 
     FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    boolean result = sut.isSupportedAbsolute("/_/some/path/file.cs");
 
-    // act & assert
-    assertThat(sut.isSupported("x")).isEqualTo(expectedResult);
+    assertThat(result).isTrue();
+    assertThat(logTester.logs()).isEmpty();
   }
 
-  private FilePredicate createFilePredicate(boolean result) {
-    return new FilePredicate() {
-      @Override
-      public boolean apply(InputFile inputFile) {
-        return result;
-      }
-    };
+  @Test
+  public void isSupportedAbsolute_returns_fileSystem_result_when_false() {
+    FileSystem fs = createFileSystemForHasFiles(false);
+
+    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    boolean result = sut.isSupportedAbsolute("/_/some/path/file.cs");
+
+    assertThat(result).isFalse();
+    assertThat(logTester.logs()).isEmpty();
   }
+
+  @Test
+  public void getFilesByRelativePath_retrieves_all_files() {
+    // arrange
+    FileSystem fs = mock(FileSystem.class);
+    FilePredicates filePredicates = mock(FilePredicates.class);
+    FilePredicate allMock = mock(FilePredicate.class);
+
+    ArgumentCaptor<FilePredicate> argumentCaptor = ArgumentCaptor.forClass(FilePredicate.class);
+    when(fs.inputFiles(argumentCaptor.capture())).thenReturn(Collections.emptyList());
+    when(filePredicates.all()).thenReturn(allMock);
+    when(fs.predicates()).thenReturn(filePredicates);
+
+    // act
+    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    sut.getFilesByRelativePath("foo");
+
+    // assert
+    assertThat(argumentCaptor.getValue()).isEqualTo(allMock);
+  }
+
+  @Test
+  public void getFilesByRelativePath_when_no_indexed_files_returns_empty() {
+    FileSystem fs = createFileSystemForInputFiles(Collections.emptyList());
+
+    // act
+    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    Optional<InputFile> result = sut.getFilesByRelativePath("C:\\_\\some\\path\\file.cs");
+
+    // assert
+    assertThat(result).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly(
+      "It seems Deterministic Source Paths are used, replacing 'C:\\_\\some\\path\\file.cs' with 'some\\path\\file.cs'",
+      "Did not find any indexed file for 'some/path/file.cs'");
+  }
+
+  @Test
+  public void getFilesByRelativePath_when_indexed_files_do_not_match_returns_empty() {
+    FileSystem fs = createFileSystemForInputFiles(Arrays.asList(mockInput("another/path/file.cs"), mockInput("some/file.cs")));
+
+    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    Optional<InputFile> result = sut.getFilesByRelativePath("/_/some/path/file.cs");
+
+    assertThat(result).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly(
+      "It seems Deterministic Source Paths are used, replacing '/_/some/path/file.cs' with 'some/path/file.cs'",
+      "Did not find any indexed file for 'some/path/file.cs'");
+  }
+
+  @Test
+  public void getFilesByRelativePath_when_multiple_indexed_files_match_returns_empty() {
+    FileSystem fs = createFileSystemForInputFiles(Arrays.asList(mockInput("root1/some/path/file.cs"), mockInput("root2/some/path/file.cs")));
+
+    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    Optional<InputFile> result = sut.getFilesByRelativePath("/_/some/path/file.cs");
+
+    assertThat(result).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly(
+      "It seems Deterministic Source Paths are used, replacing '/_/some/path/file.cs' with 'some/path/file.cs'");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Found 2 indexed files for relative path 'some/path/file.cs'. Will skip this coverage entry.");
+  }
+
+  @Test
+  public void getFilesByRelativePath_when_single_indexed_files_match_returns_file() {
+    InputFile expectedResult = mockInput("root/some/path/file.cs");
+    FileSystem fs = createFileSystemForInputFiles(Arrays.asList(
+      mockInput("one"),
+      mockInput("two"),
+      expectedResult,
+      mockInput("four")));
+
+    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    Optional<InputFile> result = sut.getFilesByRelativePath("/_/some/path/file.cs");
+
+    assertThat(result).contains(expectedResult);
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
+      .startsWith("Found indexed file ")
+      .endsWith("root/some/path/file.cs' for coverage entry 'some/path/file.cs'");
+  }
+
+  @Test
+  public void getFilesByRelativePath_with_various_deterministic_source_path_when_match_returns_file() {
+    InputFile expectedResult = mockInput("root/some/path/file.cs");
+    FileSystem fs = createFileSystemForInputFiles(Collections.singletonList(expectedResult));
+
+    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    Optional<InputFile> result = sut.getFilesByRelativePath("C:\\_\\some\\path\\file.cs");
+
+    assertThat(result).contains(expectedResult);
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0)).isEqualTo("It seems Deterministic Source Paths are used, replacing 'C:\\_\\some\\path\\file.cs' with 'some\\path\\file.cs'");
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
+      .startsWith("Found indexed file ")
+      .endsWith("root/some/path/file.cs' for coverage entry 'some/path/file.cs'");
+
+    result = sut.getFilesByRelativePath("D:\\_\\some\\path\\file.cs");
+    assertThat(result).contains(expectedResult);
+
+    result = sut.getFilesByRelativePath("\\_\\some\\path\\file.cs");
+    assertThat(result).contains(expectedResult);
+
+    result = sut.getFilesByRelativePath("/_/some/path/file.cs");
+    assertThat(result).contains(expectedResult);
+  }
+
+  @Test
+  public void getFilesByRelativePath_with_no_deterministic_source_path_when_single_indexed_files_match_returns_file() {
+    InputFile expectedResult = mockInput("root/some/path/file.cs");
+    FileSystem fs = createFileSystemForInputFiles(Collections.singletonList(expectedResult));
+
+    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    Optional<InputFile> result = sut.getFilesByRelativePath("some/path/file.cs");
+
+    assertThat(result).contains(expectedResult);
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+      .startsWith("Found indexed file '")
+      .endsWith("some/path/file.cs' for coverage entry 'some/path/file.cs'");
+  }
+
+  private FileSystem createFileSystemForInputFiles(Iterable<InputFile> inputFilesResult) {
+    FileSystem fs = mock(FileSystem.class);
+    when(fs.predicates()).thenReturn(mock(FilePredicates.class));
+    when(fs.inputFiles(any())).thenReturn(inputFilesResult);
+    return fs;
+  }
+
+  private FileSystem createFileSystemForHasFiles(boolean result) {
+    FileSystem fs = mock(FileSystem.class);
+    when(fs.hasFiles(any())).thenReturn(result);
+    when(fs.predicates()).thenReturn(mock(FilePredicates.class));
+    return fs;
+  }
+
+  private InputFile mockInput(String path) {
+    return new TestInputFileBuilder("mod", path).setLanguage("cs").build();
+  }
+
 }

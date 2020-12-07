@@ -45,7 +45,9 @@ public class CoverageTest {
 
   @Test
   public void should_import_coverage_with_deterministic_source_paths() throws Exception {
-    BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "no_rule", "sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml");
+    BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "no_rule",
+      "sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml",
+      "sonar.verbose", "true");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
