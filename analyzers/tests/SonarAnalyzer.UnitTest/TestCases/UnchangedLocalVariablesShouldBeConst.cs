@@ -296,8 +296,15 @@ namespace Tests.Diagnostics
     {
         public void GoGoGo()
         {
-            var tmp = 0; // Noncompliant FP
-            var flag = true; // Noncompliant FP
+            var tmp = 0;
+            var flag = true;
+            (flag, tmp) = (false, 5);
+        }
+
+        public void UninitializedTuple()
+        {
+            int tmp;
+            bool flag;
             (flag, tmp) = (false, 5);
         }
 
@@ -306,10 +313,30 @@ namespace Tests.Diagnostics
             public static implicit operator StructWithImplicitOperator(int value) { return new StructWithImplicitOperator(); }
         }
 
-        public StructWithImplicitOperator ImplicitOperator()
+        public StructWithImplicitOperator ImplicitOperatorStruct()
         {
-            StructWithImplicitOperator x = 1; // Noncompliant FP
+            StructWithImplicitOperator x = 1;
             return x;
         }
+
+        public class ClassWithImplicitOperator
+        {
+            public static implicit operator ClassWithImplicitOperator(int value) { return new ClassWithImplicitOperator(); }
+        }
+
+        public ClassWithImplicitOperator ImplicitOperatorClass()
+        {
+            ClassWithImplicitOperator x = 1;
+            return x;
+        }
+
+        public class NormalClass { }
+
+        public NormalClass NormalClassSetToNull()
+        {
+            NormalClass x = null; // Noncompliant
+            return x;
+        }
+
     }
 }

@@ -29,7 +29,7 @@ Func<int, int, int> withDiscard = static (_, _) =>
     return v;
 };
 
-record Rec
+public record Rec
 {
     public Rec()
     {
@@ -38,6 +38,26 @@ record Rec
         if (target == 1)
         {
         }
+    }
+}
+
+public record RecordWithImplicitOperator
+{
+    public static implicit operator RecordWithImplicitOperator(string value) { return new RecordWithImplicitOperator(); }
+}
+
+public class Repro_3271
+{
+    public RecordWithImplicitOperator ImplicitOperator()
+    {
+        RecordWithImplicitOperator x = "Lorem";
+        return x;
+    }
+
+    public Rec NormalRecordSetToNull()
+    {
+        Rec x = null;   // Noncompliant
+        return x;
     }
 }
 
