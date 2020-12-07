@@ -1159,7 +1159,7 @@ namespace Namespace
                     }
                 };
 
-            context.WalkWithInstructions(7);
+            context.WalkWithInstructions(15);
         }
 
         [TestMethod]

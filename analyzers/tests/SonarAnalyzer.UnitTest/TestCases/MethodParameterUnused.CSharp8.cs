@@ -70,8 +70,7 @@ namespace Tests.TestCases
         }
 
         // See: https://github.com/SonarSource/sonar-dotnet/issues/3803
-        private void AddValue(uint id1, uint id2, string value) // Noncompliant - FP: id1 and id2 are used inside the tuple
-                                                                // Noncompliant@-1
+        private void AddValue(uint id1, uint id2, string value)
         {
             var x = new Dictionary<(uint, uint), string>();
             x[(id1, id2)] = value;
@@ -104,7 +103,7 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/3255
     public class Repro_3255
     {
-        public string UsedInTuple(string value) // Compliant - the value is used in tuple
+        private string UsedInTuple(string value)
         {
             var x = (value, 7);
             return x.value;

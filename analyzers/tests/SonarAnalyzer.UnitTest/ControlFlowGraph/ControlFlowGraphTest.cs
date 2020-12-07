@@ -1529,7 +1529,7 @@ public class Sample
         {
             var cfg = Build("var a = b ?? c;");
             VerifyCfg(cfg, 4);
-            var branchBlock = (BinaryBranchBlock) cfg.EntryBlock;
+            var branchBlock = (BinaryBranchBlock)cfg.EntryBlock;
             var blocks = cfg.Blocks.ToList();
             var bNullBlock = blocks[1];
             var assignmentBlock = blocks[2];
@@ -1553,7 +1553,7 @@ public class Sample
             var cfg = Build("a = a ?? c;");
             VerifyCfg(cfg, 4);
 
-            var branchBlock = (BinaryBranchBlock) cfg.EntryBlock;
+            var branchBlock = (BinaryBranchBlock)cfg.EntryBlock;
             var blocks = cfg.Blocks.ToList();
             var bNullBlock = blocks[1];
             var afterOp = blocks[2];
@@ -1579,9 +1579,9 @@ public class Sample
             var cfg = Build("var a = b ?? c ?? d;");
             VerifyCfg(cfg, 5);
 
-            var bBlock = (BinaryBranchBlock) cfg.EntryBlock;
+            var bBlock = (BinaryBranchBlock)cfg.EntryBlock;
             var blocks = cfg.Blocks.ToList();
-            var cBlock = (BinaryBranchBlock) blocks[1];
+            var cBlock = (BinaryBranchBlock)blocks[1];
             var dBlock = blocks[2];
             var bcdBlock = blocks[3];   // b ?? c ?? d
             var exitBlock = cfg.ExitBlock;
@@ -1610,12 +1610,12 @@ public class Sample
             var cfg = Build("a = a ?? (b = b ?? c);");
             VerifyCfg(cfg, 6);
 
-            var firstBranchBlockWithA = (BinaryBranchBlock) cfg.EntryBlock;
+            var firstBranchBlockWithA = (BinaryBranchBlock)cfg.EntryBlock;
             var blocks = cfg.Blocks.ToList();
-            var secondBranchBlockWithB = (BinaryBranchBlock) blocks[1];
-            var simpleBlockWithC = (SimpleBlock) blocks[2];
-            var simpleBlockWithAssignmentToB = (SimpleBlock) blocks[3];
-            var simpleBlockWithFullExpression = (SimpleBlock) blocks[4];
+            var secondBranchBlockWithB = (BinaryBranchBlock)blocks[1];
+            var simpleBlockWithC = (SimpleBlock)blocks[2];
+            var simpleBlockWithAssignmentToB = (SimpleBlock)blocks[3];
+            var simpleBlockWithFullExpression = (SimpleBlock)blocks[4];
             var exitBlock = cfg.ExitBlock;
 
             firstBranchBlockWithA.TrueSuccessorBlock.Should().Be(secondBranchBlockWithB);
@@ -1708,7 +1708,7 @@ public class Sample
             var cfg = Build("a ??= b;");
             VerifyCfg(cfg, 4);
 
-            var branchBlock = (BinaryBranchBlock) cfg.EntryBlock;
+            var branchBlock = (BinaryBranchBlock)cfg.EntryBlock;
             var blocks = cfg.Blocks.ToList();
             var blockWithB = blocks[1];
             var assignmentBlock = blocks[2];
@@ -1735,12 +1735,12 @@ public class Sample
             var cfg = Build("a ??= b ??= c;");
             VerifyCfg(cfg, 6);
 
-            var firstBranchBlockWithA = (BinaryBranchBlock) cfg.EntryBlock;
+            var firstBranchBlockWithA = (BinaryBranchBlock)cfg.EntryBlock;
             var blocks = cfg.Blocks.ToList();
-            var secondBranchBlockWithB = (BinaryBranchBlock) blocks[1];
-            var simpleBlockWithC = (SimpleBlock) blocks[2];
-            var simpleBlockWithAssignmentToB = (SimpleBlock) blocks[3];
-            var simpleBlockWithFullExpression = (SimpleBlock) blocks[4];
+            var secondBranchBlockWithB = (BinaryBranchBlock)blocks[1];
+            var simpleBlockWithC = (SimpleBlock)blocks[2];
+            var simpleBlockWithAssignmentToB = (SimpleBlock)blocks[3];
+            var simpleBlockWithFullExpression = (SimpleBlock)blocks[4];
             var exitBlock = cfg.ExitBlock;
 
             firstBranchBlockWithA.TrueSuccessorBlock.Should().Be(secondBranchBlockWithB);
@@ -1771,10 +1771,10 @@ public class Sample
             var cfg = Build("a ??= b ?? c;");
             VerifyCfg(cfg, 5);
 
-            var coalesceAssignmentBranchBlock = (BinaryBranchBlock) cfg.EntryBlock;
+            var coalesceAssignmentBranchBlock = (BinaryBranchBlock)cfg.EntryBlock;
             var blocks = cfg.Blocks.ToList();
-            var coalesceBranchBlock = (BinaryBranchBlock) blocks[1];
-            var blockWithC = (SimpleBlock) blocks[2];
+            var coalesceBranchBlock = (BinaryBranchBlock)blocks[1];
+            var blockWithC = (SimpleBlock)blocks[2];
             var assignmentBlock = blocks[3];
             var exitBlock = cfg.ExitBlock;
 
@@ -1802,12 +1802,12 @@ public class Sample
             var cfg = Build("a ??= b ? c : d;");
             VerifyCfg(cfg, 6);
 
-            var nullCoalesceAssignmentBranchBlock = (BinaryBranchBlock) cfg.EntryBlock;
+            var nullCoalesceAssignmentBranchBlock = (BinaryBranchBlock)cfg.EntryBlock;
             var blocks = cfg.Blocks.ToList();
-            var conditionalBranchBlock = (BinaryBranchBlock) blocks[1];
-            var cBlock = (SimpleBlock) blocks[2];
-            var dBlock = (SimpleBlock) blocks[3];
-            var simpleBlockWithFullExpression = (SimpleBlock) blocks[4];
+            var conditionalBranchBlock = (BinaryBranchBlock)blocks[1];
+            var cBlock = (SimpleBlock)blocks[2];
+            var dBlock = (SimpleBlock)blocks[3];
+            var simpleBlockWithFullExpression = (SimpleBlock)blocks[4];
             var exitBlock = cfg.ExitBlock;
 
             nullCoalesceAssignmentBranchBlock.TrueSuccessorBlock.Should().Be(conditionalBranchBlock);
@@ -5258,6 +5258,57 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         {
             Action a = () => Build(@"Object x = new()");
             a.Should().Throw<NotSupportedException>(); // C# 9 ImplicitObjectCreationExpressionSyntax is not supported yet
+        }
+
+        #endregion
+
+        #region "Tuples"
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Tuple_Create()
+        {
+            var cfg = Build(@"var x = (true, 42);");
+
+            VerifyMinimalCfg(cfg);
+            VerifyAllInstructions(cfg.EntryBlock, "true", "42", "(true, 42)", "x = (true, 42)");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Tuple_ComplexExpression()
+        {
+            const string code = @"
+
+var x = (LocalBool(), LocalInt() + 2);
+
+bool LocalBool() => true;
+int LocalInt() => 40;
+";
+            var cfg = Build(code);
+
+            VerifyMinimalCfg(cfg);
+            VerifyAllInstructions(cfg.EntryBlock, "LocalBool", "LocalBool()", "LocalInt", "LocalInt()", "2", "LocalInt() + 2", "(LocalBool(), LocalInt() + 2)", "x = (LocalBool(), LocalInt() + 2)");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Tuple_InDeclaration()
+        {
+            var cfg = Build(@"var (a, b) = (true, 42);");
+
+            VerifyMinimalCfg(cfg);
+            VerifyAllInstructions(cfg.EntryBlock, "var (a, b)", "true", "42", "(true, 42)", "var (a, b) = (true, 42)");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Tuple_AssignmentTarget()
+        {
+            var cfg = Build(@"bool a; int b; (a, b) = (true, 42);");
+
+            VerifyMinimalCfg(cfg);
+            VerifyAllInstructions(cfg.EntryBlock, "a", "b", "a", "b", "(a, b)", "true", "42", "(true, 42)", "(a, b) = (true, 42)");
         }
 
         #endregion
