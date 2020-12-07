@@ -57,8 +57,8 @@ namespace Tests.Diagnostics
 
         class OtherClass
         {
-            public string Name { get; set; } // Noncompliant FP #2333
-            public string Type { get; set; } // Noncompliant FP #2333
+            public string Name { get; set; } // Setters are compliant, they are used in tuple assignment
+            public string Type { get; set; }
         }
     }
 
