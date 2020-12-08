@@ -25,22 +25,22 @@ using SonarAnalyzer.SymbolicExecution.Common.Constraints;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Constraints
 {
     [TestClass]
-    public class KeyInitializationSymbolicValueConstraintTest
+    public class ByteArraySymbolicValueConstraintTest
     {
         [TestMethod]
-        public void GivenKeyIsInitialized_OppositeShouldBe_NotInitialized() =>
-            KeyInitializationSymbolicValueConstraint.Initialized.OppositeForLogicalNot.Should().Be(KeyInitializationSymbolicValueConstraint.NotInitialized);
+        public void GivenByteArrayIsInitialized_OppositeShouldBe_NotInitialized() =>
+            ByteArraySymbolicValueConstraint.Constant.OppositeForLogicalNot.Should().Be(ByteArraySymbolicValueConstraint.Modified);
 
         [TestMethod]
-        public void GivenKeyIsNotInitialized_OppositeShouldBe_Initialized() =>
-            KeyInitializationSymbolicValueConstraint.NotInitialized.OppositeForLogicalNot.Should().Be(KeyInitializationSymbolicValueConstraint.Initialized);
+        public void GivenByteArrayIsNotInitialized_OppositeShouldBe_Initialized() =>
+            ByteArraySymbolicValueConstraint.Modified.OppositeForLogicalNot.Should().Be(ByteArraySymbolicValueConstraint.Constant);
 
         [TestMethod]
-        public void GivenKeyIsInitialized_ToStringShouldBe_Initialized() =>
-            KeyInitializationSymbolicValueConstraint.Initialized.ToString().Should().Be("Initialized");
+        public void GivenByteArrayIsInitialized_ToStringShouldBe_Initialized() =>
+            ByteArraySymbolicValueConstraint.Constant.ToString().Should().Be("Constant");
 
         [TestMethod]
-        public void GivenKeyIsNotInitialized_ToStringShouldBe_NotInitialized() =>
-            KeyInitializationSymbolicValueConstraint.NotInitialized.ToString().Should().Be("NotInitialized");
+        public void GivenByteArrayIsNotInitialized_ToStringShouldBe_NotInitialized() =>
+            ByteArraySymbolicValueConstraint.Modified.ToString().Should().Be("Modified");
     }
 }

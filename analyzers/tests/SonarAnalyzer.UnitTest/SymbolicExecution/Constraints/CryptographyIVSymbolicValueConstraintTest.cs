@@ -25,22 +25,22 @@ using SonarAnalyzer.SymbolicExecution.Common.Constraints;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Constraints
 {
     [TestClass]
-    public class ConstantByteArraySymbolicValueConstraintTest
+    public class CryptographyIVSymbolicValueConstraintTest
     {
         [TestMethod]
-        public void GivenByteArrayIsInitialized_OppositeShouldBe_NotInitialized() =>
-            ConstantByteArraySymbolicValueConstraint.Constant.OppositeForLogicalNot.Should().Be(ConstantByteArraySymbolicValueConstraint.Modified);
+        public void GivenIvIsInitialized_OppositeShouldBe_NotInitialized() =>
+            CryptographyIVSymbolicValueConstraint.Initialized.OppositeForLogicalNot.Should().Be(CryptographyIVSymbolicValueConstraint.NotInitialized);
 
         [TestMethod]
-        public void GivenByteArrayIsNotInitialized_OppositeShouldBe_Initialized() =>
-            ConstantByteArraySymbolicValueConstraint.Modified.OppositeForLogicalNot.Should().Be(ConstantByteArraySymbolicValueConstraint.Constant);
+        public void GivenIvIsNotInitialized_OppositeShouldBe_Initialized() =>
+            CryptographyIVSymbolicValueConstraint.NotInitialized.OppositeForLogicalNot.Should().Be(CryptographyIVSymbolicValueConstraint.Initialized);
 
         [TestMethod]
-        public void GivenByteArrayIsInitialized_ToStringShouldBe_Initialized() =>
-            ConstantByteArraySymbolicValueConstraint.Constant.ToString().Should().Be("Constant");
+        public void GivenIvIsInitialized_ToStringShouldBe_Initialized() =>
+            CryptographyIVSymbolicValueConstraint.Initialized.ToString().Should().Be("Initialized");
 
         [TestMethod]
-        public void GivenByteArrayIsNotInitialized_ToStringShouldBe_NotInitialized() =>
-            ConstantByteArraySymbolicValueConstraint.Modified.ToString().Should().Be("Modified");
+        public void GivenIvIsNotInitialized_ToStringShouldBe_NotInitialized() =>
+            CryptographyIVSymbolicValueConstraint.NotInitialized.ToString().Should().Be("NotInitialized");
     }
 }

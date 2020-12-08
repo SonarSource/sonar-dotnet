@@ -14,7 +14,7 @@ namespace Tests.Diagnostics
                 ICryptoTransform notInitialized = sa.CreateEncryptor(); // Noncompliant {{Use a dynamically-generated, random IV.}}
 //                                                ^^^^^^^^^^^^^^^^^^^^
 
-                var keyAndIVareNotInitialized = sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant - key and iv are not generated
+                var keyAndIVareNotInitialized = sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant - iv is not generated
 //                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
                 sa.GenerateKey();
@@ -22,7 +22,7 @@ namespace Tests.Diagnostics
                 var constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant); // Noncompliant
 
                 sa.GenerateIV();
-                var defaultConstructor = sa.CreateEncryptor(); // Compliant - key and IV are used by default and now they are generated
+                var defaultConstructor = sa.CreateEncryptor(); // Compliant
                 var compliant = sa.CreateEncryptor(sa.Key, sa.IV);
 
                 sa.KeySize = 12;

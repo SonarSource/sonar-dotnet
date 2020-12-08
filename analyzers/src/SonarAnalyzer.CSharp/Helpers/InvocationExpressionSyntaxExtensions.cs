@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -28,14 +27,10 @@ namespace SonarAnalyzer.Helpers
     internal static class InvocationExpressionSyntaxExtensions
     {
         internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccessExpressionSyntax &&
-            memberAccessExpressionSyntax.NameIs(identifierName) &&
-            semanticModel.GetTypeInfo(invocation).Type.Is(knownType);
-
-        internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, ImmutableArray<KnownType> knownTypes, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccessExpressionSyntax &&
-            memberAccessExpressionSyntax.NameIs(identifierName) &&
-            semanticModel.GetSymbolInfo(invocation).Symbol.ContainingType.IsAny(knownTypes);
+            invocation.Expression is MemberAccessExpressionSyntax memberAccessExpressionSyntax
+            && memberAccessExpressionSyntax.NameIs(identifierName)
+            && semanticModel.GetSymbolInfo(invocation).Symbol is {} symbol
+            && symbol.ContainingType.DerivesFrom(knownType);
 
         internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
             invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);

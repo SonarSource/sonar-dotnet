@@ -36,13 +36,12 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         internal const string DiagnosticId = "S3329";
         private const string MessageFormat = "Use a dynamically-generated, random IV.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
-            => new AnalysisContext(explodedGraph);
+        public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
+            new AnalysisContext(explodedGraph);
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
@@ -66,20 +65,18 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private sealed class InitializationVectorCheck : ExplodedGraphCheck
         {
-            private static readonly ImmutableArray<KnownType> VulnerableTypes =
-                ImmutableArray.Create(KnownType.System_Security_Cryptography_Aes,
-                                      KnownType.System_Security_Cryptography_AesCng,
-                                      KnownType.System_Security_Cryptography_AesCryptoServiceProvider,
-                                      KnownType.System_Security_Cryptography_SymmetricAlgorithm);
-
             private readonly AnalysisContext context;
 
             public InitializationVectorCheck(AbstractExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
                 this.context = context;
 
-            public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState)
-            {
-                programState = programPoint.CurrentInstruction switch
+            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
+                programPoint.CurrentInstruction is InvocationExpressionSyntax invocation
+                    ? InvocationExpressionPreProcess(invocation, programState)
+                    : programState;
+
+            public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
+                programPoint.CurrentInstruction switch
                 {
                     ObjectCreationExpressionSyntax objectCreation => ObjectCreationPostProcess(objectCreation, programState),
                     InvocationExpressionSyntax invocation => InvocationExpressionPostProcess(invocation, programState),
@@ -88,28 +85,14 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     _ => programState
                 };
 
-                return base.PostProcessInstruction(programPoint, programState);
-            }
-
-            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
-            {
-                if (programPoint.CurrentInstruction is InvocationExpressionSyntax invocation)
-                {
-                    programState = InvocationExpressionPreProcess(invocation, programState);
-                }
-
-                return base.PreProcessInstruction(programPoint, programState);
-            }
-
             private ProgramState ObjectCreationPostProcess(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
             {
                 if (semanticModel.GetSymbolInfo(objectCreation).Symbol is {} symbol
                     && symbol.ContainingType is {} symbolType
-                    && symbolType.IsAny(VulnerableTypes))
+                    && symbolType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm))
                 {
                     var symbolicValue = programState.PeekValue();
-                    programState = programState.SetConstraint(symbolicValue, IVInitializationSymbolicValueConstraint.NotInitialized);
-                    programState = programState.SetConstraint(symbolicValue, KeyInitializationSymbolicValueConstraint.NotInitialized);
+                    programState = programState.SetConstraint(symbolicValue, CryptographyIVSymbolicValueConstraint.NotInitialized);
                 }
 
                 return programState;
@@ -120,26 +103,20 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 if (IsCreateMethod(invocation, semanticModel))
                 {
                     var symbolicValue = programState.PeekValue();
-                    programState = programState.SetConstraint(symbolicValue, IVInitializationSymbolicValueConstraint.NotInitialized);
-                    programState = programState.SetConstraint(symbolicValue, KeyInitializationSymbolicValueConstraint.NotInitialized);
-                }
-                else if (IsGenerateKeyMethod(invocation, semanticModel))
-                {
-                    var symbolicValue = GetSymbolicValue(invocation, programState);
-                    programState = programState.SetConstraint(symbolicValue, KeyInitializationSymbolicValueConstraint.Initialized);
+                    programState = programState.SetConstraint(symbolicValue, CryptographyIVSymbolicValueConstraint.NotInitialized);
                 }
                 else if (IsGenerateIVMethod(invocation, semanticModel))
                 {
                     var symbolicValue = GetSymbolicValue(invocation, programState);
-                    programState = programState.SetConstraint(symbolicValue, IVInitializationSymbolicValueConstraint.Initialized);
+                    programState = programState.SetConstraint(symbolicValue, CryptographyIVSymbolicValueConstraint.Initialized);
                 }
                 else if (IsRngCryptoServiceProviderSanitizer(invocation, semanticModel)
                          && semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression).Symbol is {} symbol
                          && symbol.GetSymbolType().Is(KnownType.System_Byte_Array)
-                         && symbol.HasConstraint(ConstantByteArraySymbolicValueConstraint.Constant, programState))
+                         && symbol.HasConstraint(ByteArraySymbolicValueConstraint.Constant, programState))
                 {
                     var symbolicValue = programState.GetSymbolValue(symbol);
-                    programState = programState.RemoveConstraint(symbolicValue, ConstantByteArraySymbolicValueConstraint.Constant);
+                    programState = programState.SetConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Modified);
                 }
 
                 return programState;
@@ -152,8 +129,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 && programState.GetSymbolValue(leftSymbol) is {} leftSymbolicValue
                 && semanticModel.GetSymbolInfo(assignment.Right).Symbol is {} rightSymbol
                 && programState.GetSymbolValue(rightSymbol) is {} rightSymbolicValue
-                && programState.HasConstraint(rightSymbolicValue, ConstantByteArraySymbolicValueConstraint.Constant)
-                    ? programState.SetConstraint(leftSymbolicValue, IVInitializationSymbolicValueConstraint.NotInitialized)
+                && programState.HasConstraint(rightSymbolicValue, ByteArraySymbolicValueConstraint.Constant)
+                    ? programState.SetConstraint(leftSymbolicValue, CryptographyIVSymbolicValueConstraint.NotInitialized)
                     : programState;
 
             private ProgramState InvocationExpressionPreProcess(InvocationExpressionSyntax invocation, ProgramState programState)
@@ -163,21 +140,14 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     if (invocation.ArgumentList.Arguments.Count == 0)
                     {
                         var symbolicValue = GetSymbolicValue(invocation, programState);
-                        if (symbolicValue != null && HasInvalidConstraints(symbolicValue, programState))
+                        if (symbolicValue != null && HasNotInitializedIVConstraint(symbolicValue, programState))
                         {
                             context.AddLocation(invocation.GetLocation());
                         }
                     }
-                    else
+                    else if (IsInvalidIV(invocation.ArgumentList.Arguments[1], programState))
                     {
-                        if (IsInvalidKey(invocation.ArgumentList.Arguments[0], programState))
-                        {
-                            context.AddLocation(invocation.GetLocation());
-                        }
-                        else if (IsInvalidIV(invocation.ArgumentList.Arguments[1], programState))
-                        {
-                            context.AddLocation(invocation.GetLocation());
-                        }
+                        context.AddLocation(invocation.GetLocation());
                     }
                 }
 
@@ -186,14 +156,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
             private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState) =>
                 semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array) && programState.HasValue
-                    ? programState.SetConstraint(programState.PeekValue(), ConstantByteArraySymbolicValueConstraint.Constant)
+                    ? programState.SetConstraint(programState.PeekValue(), ByteArraySymbolicValueConstraint.Constant)
                     : programState;
-
-            private bool IsInvalidKey(ArgumentSyntax argument, ProgramState programState) =>
-                argument.Expression is MemberAccessExpressionSyntax memberAccess
-                && memberAccess.NameIs("Key")
-                && programState.GetSymbolValue(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol) is {} symbolicValue
-                && HasNotInitializedKeyConstraint(symbolicValue, programState);
 
             private bool IsInvalidIV(ArgumentSyntax argument, ProgramState programState) =>
                 argument.Expression switch
@@ -202,7 +166,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                                                                  && programState.GetSymbolValue(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol) is {} symbolicValue
                                                                  && HasNotInitializedIVConstraint(symbolicValue, programState),
                     IdentifierNameSyntax identifier => programState.GetSymbolValue(semanticModel.GetSymbolInfo(identifier).Symbol) is {} symbolicValue
-                                                       && programState.HasConstraint(symbolicValue, ConstantByteArraySymbolicValueConstraint.Constant),
+                                                       && programState.HasConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Constant),
                     _ => false
                 };
 
@@ -216,33 +180,29 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
             private bool IsIVMemberAccess(MemberAccessExpressionSyntax memberAccess) =>
                 memberAccess.NameIs("IV")
-                && semanticModel.GetSymbolInfo(memberAccess).Symbol.ContainingType.IsAny(VulnerableTypes);
-
-            private static bool HasInvalidConstraints(SymbolicValue value, ProgramState programState) =>
-                HasNotInitializedIVConstraint(value, programState) || HasNotInitializedKeyConstraint(value, programState);
+                && semanticModel.GetSymbolInfo(memberAccess).Symbol is {} symbol
+                && symbol.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm);
 
             private static bool HasNotInitializedIVConstraint(SymbolicValue value, ProgramState programState) =>
-                programState.Constraints[value].HasConstraint(IVInitializationSymbolicValueConstraint.NotInitialized);
-
-            private static bool HasNotInitializedKeyConstraint(SymbolicValue value, ProgramState programState) =>
-                programState.Constraints[value].HasConstraint(KeyInitializationSymbolicValueConstraint.NotInitialized);
+                programState.Constraints[value].HasConstraint(CryptographyIVSymbolicValueConstraint.NotInitialized);
 
             private static bool IsCreateMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-                invocation.IsMemberAccessOnKnownType("Create", VulnerableTypes, semanticModel);
+                invocation.IsMemberAccessOnKnownType("Create", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
 
             private static bool IsCreateEncryptorMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-                invocation.IsMemberAccessOnKnownType("CreateEncryptor", VulnerableTypes, semanticModel);
+                invocation.IsMemberAccessOnKnownType("CreateEncryptor", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
 
             private static bool IsGenerateKeyMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-                invocation.IsMemberAccessOnKnownType("GenerateKey", VulnerableTypes, semanticModel);
+                invocation.IsMemberAccessOnKnownType("GenerateKey", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
 
             private static bool IsGenerateIVMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-                invocation.IsMemberAccessOnKnownType("GenerateIV", VulnerableTypes, semanticModel);
+                invocation.IsMemberAccessOnKnownType("GenerateIV", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
 
             private static bool IsRngCryptoServiceProviderSanitizer(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
                 invocation.Expression is MemberAccessExpressionSyntax memberAccessExpressionSyntax
                 && (memberAccessExpressionSyntax.NameIs("GetBytes") || memberAccessExpressionSyntax.NameIs("GetNonZeroBytes"))
-                && semanticModel.GetSymbolInfo(invocation).Symbol.ContainingType.Is(KnownType.System_Security_Cryptography_RNGCryptoServiceProvider);
+                && semanticModel.GetSymbolInfo(invocation).Symbol is {} symbol
+                && symbol.ContainingType.Is(KnownType.System_Security_Cryptography_RNGCryptoServiceProvider);
         }
     }
 }

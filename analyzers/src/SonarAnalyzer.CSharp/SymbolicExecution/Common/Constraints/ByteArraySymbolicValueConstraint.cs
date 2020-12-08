@@ -20,21 +20,17 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Common.Constraints
 {
-    public class KeyInitializationSymbolicValueConstraint : SymbolicValueConstraint
+    public class ByteArraySymbolicValueConstraint : SymbolicValueConstraint
     {
-        internal static readonly KeyInitializationSymbolicValueConstraint NotInitialized = new KeyInitializationSymbolicValueConstraint();
-        internal static readonly KeyInitializationSymbolicValueConstraint Initialized = new KeyInitializationSymbolicValueConstraint();
+        internal static readonly ByteArraySymbolicValueConstraint Constant = new ByteArraySymbolicValueConstraint();
+        internal static readonly ByteArraySymbolicValueConstraint Modified = new ByteArraySymbolicValueConstraint();
 
-        private KeyInitializationSymbolicValueConstraint() { }
+        private ByteArraySymbolicValueConstraint() { }
 
         public override SymbolicValueConstraint OppositeForLogicalNot =>
-            this == Initialized
-                ? NotInitialized
-                : Initialized;
+            this == Modified ? Constant : Modified;
 
         public override string ToString() =>
-            this == Initialized
-                ? "Initialized"
-                : "NotInitialized";
+            this == Modified ? nameof(Modified) : nameof(Constant);
     }
 }
