@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
 
-        private sealed class AnalysisContext : DefaultAnalysisContext
+        private sealed class AnalysisContext : DefaultAnalysisContext<Location>
         {
             public AnalysisContext(AbstractExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new InitializationVectorCheck(explodedGraph, this));

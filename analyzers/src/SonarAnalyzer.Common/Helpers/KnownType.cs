@@ -327,6 +327,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_Cryptography_PasswordDeriveBytes = new KnownType("System.Security.Cryptography.PasswordDeriveBytes");
         internal static readonly KnownType System_Security_Cryptography_RC2 = new KnownType("System.Security.Cryptography.RC2");
         internal static readonly KnownType System_Security_Cryptography_RandomNumberGenerator = new KnownType("System.Security.Cryptography.RandomNumberGenerator");
+        internal static readonly KnownType System_Security_Cryptography_Rfc2898DeriveBytes = new KnownType("System.Security.Cryptography.Rfc2898DeriveBytes");
         internal static readonly KnownType System_Security_Cryptography_RIPEMD160 = new KnownType("System.Security.Cryptography.RIPEMD160");
         internal static readonly KnownType System_Security_Cryptography_RNGCryptoServiceProvider = new KnownType("System.Security.Cryptography.RNGCryptoServiceProvider");
         internal static readonly KnownType System_Security_Cryptography_RSA = new KnownType("System.Security.Cryptography.RSA");

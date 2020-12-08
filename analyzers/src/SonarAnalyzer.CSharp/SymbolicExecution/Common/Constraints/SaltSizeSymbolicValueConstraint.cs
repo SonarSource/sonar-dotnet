@@ -18,28 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-
-namespace SonarAnalyzer.Rules.SymbolicExecution
+namespace SonarAnalyzer.SymbolicExecution.Common.Constraints
 {
-    internal abstract class DefaultAnalysisContext<T> : ISymbolicExecutionAnalysisContext
+    public class SaltSizeSymbolicValueConstraint : SymbolicValueConstraint
     {
-        private readonly List<T> locations = new List<T>();
+        internal static readonly SaltSizeSymbolicValueConstraint Short = new SaltSizeSymbolicValueConstraint();
+        internal static readonly SaltSizeSymbolicValueConstraint Safe = new SaltSizeSymbolicValueConstraint();
 
-        public bool SupportsPartialResults => false;
+        private SaltSizeSymbolicValueConstraint() { }
 
-        public IEnumerable<Diagnostic> GetDiagnostics() =>
-            locations.Distinct().Select(CreateDiagnostic);
+        public override SymbolicValueConstraint OppositeForLogicalNot =>
+            this == Safe
+                ? Short
+                : Safe;
 
-        public void AddLocation(T location) => locations.Add(location);
-
-        public void Dispose()
-        {
-            // Nothing to do here.
-        }
-
-        protected abstract Diagnostic CreateDiagnostic(T location);
+        public override string ToString() =>
+            this == Safe
+                ? "Safe"
+                : "Short";
     }
 }

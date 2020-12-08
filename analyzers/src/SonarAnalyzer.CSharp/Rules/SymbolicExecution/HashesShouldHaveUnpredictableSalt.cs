@@ -20,11 +20,13 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Common.Constraints;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
 {
@@ -36,29 +38,97 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         private const string MakeSaltUnpredictableMessage = "Make this salt unpredictable.";
         private const string MakeThisSaltLongerMessage = "Make this salt longer.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
 
-        private sealed class AnalysisContext : DefaultAnalysisContext
+        private sealed class AnalysisContext : DefaultAnalysisContext<LocationContext>
         {
             public AnalysisContext(AbstractExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new SaltCheck(explodedGraph, this));
 
-            protected override Diagnostic CreateDiagnostic(Location location) =>
-                Diagnostic.Create(Rule, location);
+            protected override Diagnostic CreateDiagnostic(LocationContext locationContext) =>
+                Diagnostic.Create(Rule, locationContext.Location, locationContext.Message);
+        }
+
+        private sealed class LocationContext
+        {
+            public Location Location { get; }
+
+            public string Message { get; }
+
+            public LocationContext(Location location, string message)
+            {
+                Location = location;
+                Message = message;
+            }
         }
 
         private sealed class SaltCheck : ExplodedGraphCheck
         {
+            private static readonly ImmutableArray<KnownType> VulnerableTypes =
+                ImmutableArray.Create(KnownType.System_Security_Cryptography_PasswordDeriveBytes,
+                                      KnownType.System_Security_Cryptography_Rfc2898DeriveBytes);
+
             private readonly AnalysisContext context;
 
             public SaltCheck(AbstractExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
                 this.context = context;
+
+            public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState)
+            {
+                programState = programPoint.CurrentInstruction switch
+                {
+                    ArrayCreationExpressionSyntax arrayCreation => ArrayCreationPostProcess(arrayCreation, programState),
+                    ObjectCreationExpressionSyntax objectCreation => ObjectCreationPostProcess(objectCreation, programState),
+                    _ => programState
+                };
+
+                return base.PostProcessInstruction(programPoint, programState);
+            }
+
+            private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState)
+            {
+                if (programState.HasValue && semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array))
+                {
+                    var size = GetSize(arrayCreation);
+                    if (size.HasValue && size.Value < 32)
+                    {
+                        programState = programState.SetConstraint(programState.PeekValue(), SaltSizeSymbolicValueConstraint.Short);
+                    }
+                }
+
+                return programState;
+            }
+
+            private ProgramState ObjectCreationPostProcess(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
+            {
+                if (semanticModel.GetSymbolInfo(objectCreation).Symbol is {} symbol
+                    && symbol.ContainingType is {} symbolType
+                    && symbolType.IsAny(VulnerableTypes)
+                    && semanticModel.GetSymbolInfo(objectCreation.ArgumentList.Arguments[1].Expression).Symbol is {} saltSymbol
+                    && programState.GetSymbolValue(saltSymbol) is {} symbolicValue
+                    && programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
+                {
+                    context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeThisSaltLongerMessage));
+                }
+
+                return programState;
+            }
+
+            private Optional<int> GetSize(ArrayCreationExpressionSyntax arrayCreation) =>
+                arrayCreation.Type.RankSpecifiers is {} rankSpecifiers &&
+                rankSpecifiers.Count == 1 &&
+                rankSpecifiers[0].Sizes[0] is {} rankSpecifier &&
+                rankSpecifier.IsKind(SyntaxKind.NumericLiteralExpression) &&
+                semanticModel.GetConstantValue(rankSpecifier) is {} constantValue &&
+                constantValue.HasValue &&
+                constantValue.Value is int size
+                    ? new Optional<int>(size)
+                    : new Optional<int>();
         }
     }
 }
