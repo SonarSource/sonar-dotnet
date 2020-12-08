@@ -89,7 +89,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                     case SyntaxKind.ParenthesizedLambdaExpression:
                     case SyntaxKind.SimpleLambdaExpression:
                     case SyntaxKind.QueryExpression:
-                        CollectAllCapturedLocal(instruction);
+                        CollectAllCapturedLocal(instruction, state);
                         break;
                 }
             }
@@ -192,7 +192,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             }
         }
 
-        private void CollectAllCapturedLocal(SyntaxNode instruction)
+        private void CollectAllCapturedLocal(SyntaxNode instruction, State state)
         {
             var allCapturedSymbols = instruction.DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
@@ -201,7 +201,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
             // Collect captured locals
             // Read and write both affects liveness
-            capturedVariables.UnionWith(allCapturedSymbols);
+            state.CapturedVariables.UnionWith(allCapturedSymbols);
         }
 
         private bool IsLocalScoped(ISymbol symbol) =>

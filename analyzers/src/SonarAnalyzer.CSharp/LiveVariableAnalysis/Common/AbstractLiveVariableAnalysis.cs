@@ -31,10 +31,9 @@ namespace SonarAnalyzer.LiveVariableAnalysis
     {
         private readonly IControlFlowGraph controlFlowGraph;
         private readonly List<Block> reversedBlocks;
-        private readonly Dictionary<Block, HashSet<ISymbol>> liveOutStates = new Dictionary<Block, HashSet<ISymbol>>();
-        private readonly Dictionary<Block, HashSet<ISymbol>> liveInStates = new Dictionary<Block, HashSet<ISymbol>>();
-
-        protected readonly ISet<ISymbol> capturedVariables = new HashSet<ISymbol>();
+        private readonly IDictionary<Block, HashSet<ISymbol>> liveOutStates = new Dictionary<Block, HashSet<ISymbol>>();
+        private readonly IDictionary<Block, HashSet<ISymbol>> liveInStates = new Dictionary<Block, HashSet<ISymbol>>();
+        private readonly ISet<ISymbol> capturedVariables = new HashSet<ISymbol>();
 
         protected abstract State ProcessBlock(Block block);
 
@@ -58,7 +57,9 @@ namespace SonarAnalyzer.LiveVariableAnalysis
             var states = new Dictionary<Block, State>();
             foreach (var block in reversedBlocks)
             {
-                states.Add(block, ProcessBlock(block));
+                var state = ProcessBlock(block);
+                capturedVariables.UnionWith(state.CapturedVariables);
+                states.Add(block, state);
             }
 
             AnalyzeCfg(states);
@@ -113,10 +114,11 @@ namespace SonarAnalyzer.LiveVariableAnalysis
 
         protected class State
         {
-            public HashSet<ISymbol> Assigned { get; } = new HashSet<ISymbol>();             // Kill: The set of variables that are assigned a value.
-            public HashSet<ISymbol> UsedBeforeAssigned { get; } = new HashSet<ISymbol>();   // Gen:  The set of variables that are used before any assignment.
-            public HashSet<ISymbol> ProcessedLocalFunctions { get; } = new HashSet<ISymbol>();
-            public HashSet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
+            public ISet<ISymbol> Assigned { get; } = new HashSet<ISymbol>();             // Kill: The set of variables that are assigned a value.
+            public ISet<ISymbol> UsedBeforeAssigned { get; } = new HashSet<ISymbol>();   // Gen:  The set of variables that are used before any assignment.
+            public ISet<ISymbol> ProcessedLocalFunctions { get; } = new HashSet<ISymbol>();
+            public ISet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
+            public ISet<ISymbol> CapturedVariables { get; } = new HashSet<ISymbol>();
         }
     }
 }
