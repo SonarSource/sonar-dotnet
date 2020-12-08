@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -32,23 +34,38 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class WeakSslTlsProtocols : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4423";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Change this code to use a stronger protocol.";
 
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        private readonly HashSet<string> weakProtocols = new HashSet<string>
         {
+            "Ssl2",
+            "Ssl3",
+            "Tls",
+            "Tls11",
+            "Default",
+        };
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var node = c.Node;
+                var semanticModel = c.SemanticModel;
+
+                if (node is IdentifierNameSyntax identifierNameSyntax
+                && IsWeakProtocol(identifierNameSyntax, semanticModel))
                 {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
-        }
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifierNameSyntax.GetLocation()));
+                }
+            },
+            SyntaxKind.IdentifierName);
+
+        private bool IsWeakProtocol(IdentifierNameSyntax identifierNameSyntax, SemanticModel semanticModel) =>
+                    weakProtocols.Contains(identifierNameSyntax.Identifier.Text)
+                    && (semanticModel.GetTypeInfo(identifierNameSyntax).Type.Is(KnownType.System_Net_SecurityProtocolType)
+                    || semanticModel.GetTypeInfo(identifierNameSyntax).Type.Is(KnownType.System_Security_Authentication_SslProtocols));
     }
 }

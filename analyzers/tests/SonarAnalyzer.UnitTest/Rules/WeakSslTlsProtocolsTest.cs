@@ -19,8 +19,13 @@
  */
 
 extern alias csharp;
+
+using System.Collections.Generic;
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -33,7 +38,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void WeakSslTlsProtocols()
         {
             Verifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.cs",
-                new WeakSslTlsProtocols());
+                new WeakSslTlsProtocols(),
+                additionalReferences: GetAdditionalReferences());
         }
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+           MetadataReferenceFacade.GetSystemNetHttp()
+               .Concat(MetadataReferenceFacade.GetSystemSecurityCryptography());
     }
 }
