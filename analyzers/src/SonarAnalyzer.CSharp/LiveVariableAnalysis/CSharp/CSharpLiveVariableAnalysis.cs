@@ -153,28 +153,26 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         private void ProcessIdentifier(IdentifierNameSyntax identifier, State state)
         {
-            var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
-            if (symbol == null)
+            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
+                && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol)
             {
-                return;
-            }
-
-            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel) && IsLocalScoped(symbol))
-            {
-                if (IsOutArgument(identifier))
+                if (IsLocalScoped(symbol))
                 {
-                    state.Assigned.Add(symbol);
-                    state.UsedBeforeAssigned.Remove(symbol);
+                    if (IsOutArgument(identifier))
+                    {
+                        state.Assigned.Add(symbol);
+                        state.UsedBeforeAssigned.Remove(symbol);
+                    }
+                    else if (!state.AssignmentLhs.Contains(identifier))
+                    {
+                        state.UsedBeforeAssigned.Add(symbol);
+                    }
                 }
-                else if (!state.AssignmentLhs.Contains(identifier))
-                {
-                    state.UsedBeforeAssigned.Add(symbol);
-                }
-            }
 
-            if (symbol is IMethodSymbol method && method.MethodKind == MethodKindEx.LocalFunction)
-            {
-                ProcessLocalFunction(symbol, state);
+                if (symbol is IMethodSymbol method && method.MethodKind == MethodKindEx.LocalFunction)
+                {
+                    ProcessLocalFunction(symbol, state);
+                }
             }
         }
 

@@ -470,5 +470,12 @@ namespace Tests.TestCases
         {
             bool Unused() => condition;
         }
+
+        private void LocalFunctionUnusedWithNameOf(bool condition)    // Noncompliant
+        {
+            var name = nameof(Unused);
+
+            bool Unused() => condition;
+        }
     }
 }

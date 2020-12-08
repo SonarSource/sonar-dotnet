@@ -464,8 +464,15 @@ namespace Tests.TestCases
             }
         }
 
-        private void LocalFunctionRecursive(bool condition)    // Fixed
+        private void LocalFunctionUnused(bool condition)    // Fixed
         {
+            bool Unused() => condition;
+        }
+
+        private void LocalFunctionUnusedWithNameOf(bool condition)    // Fixed
+        {
+            var name = nameof(Unused);
+
             bool Unused() => condition;
         }
     }
