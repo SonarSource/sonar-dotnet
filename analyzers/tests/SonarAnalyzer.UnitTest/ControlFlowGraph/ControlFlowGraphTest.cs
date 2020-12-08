@@ -29,8 +29,9 @@ using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.ShimLayer.CSharp;
+using SonarAnalyzer.UnitTest.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
     [TestClass]
     public class ControlFlowGraphTest
@@ -5356,7 +5357,7 @@ namespace NS
             return cfg;
         }
 
-        private static string ExtremelyNestedExpression()
+        internal static string ExtremelyNestedExpression()
         {
             const int count = 2000;
             const string dna = "ACGT";
