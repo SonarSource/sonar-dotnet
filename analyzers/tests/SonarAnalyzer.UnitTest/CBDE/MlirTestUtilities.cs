@@ -93,6 +93,17 @@ namespace SonarAnalyzer.UnitTest.CBDE
         public static string GetCfgGraph(string code, string methodName) =>
             CfgSerializer.Serialize(methodName, GetCfgForMethod(code, methodName));
 
+        public static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
+        {
+            (var ast, var semanticModel) = TestHelper.Compile(code);
+            var exporterMetrics = new MlirExporterMetrics();
+            var exporter = new MlirExporter(writer, semanticModel, exporterMetrics, withLoc);
+            foreach (var method in ast.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
+            {
+                exporter.ExportFunction(method);
+            }
+        }
+
         private static string ValidateIR(string path)
         {
             var pi = new ProcessStartInfo
@@ -113,17 +124,6 @@ namespace SonarAnalyzer.UnitTest.CBDE
             else
             {
                 return p.StandardOutput.ReadToEnd();
-            }
-        }
-
-        private static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
-        {
-            (var ast, var semanticModel) = TestHelper.Compile(code);
-            var exporterMetrics = new MlirExporterMetrics();
-            var exporter = new MlirExporter(writer, semanticModel, exporterMetrics, withLoc);
-            foreach (var method in ast.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
-            {
-                exporter.ExportFunction(method);
             }
         }
     }

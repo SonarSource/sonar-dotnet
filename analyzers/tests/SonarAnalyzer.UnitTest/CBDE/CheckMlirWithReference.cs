@@ -18,7 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.ControlFlowGraph;
 
 namespace SonarAnalyzer.UnitTest.CBDE
 {
@@ -356,6 +359,22 @@ func @_Foo.Func$$() {
 }
 ";
             MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void ExtremlyNestedExpression_NotSupportedByCfg()
+        {
+            var code = @$"
+public class Sample
+{{
+    public string Main()
+    {{
+        return {ControlFlowGraphTest.ExtremelyNestedExpression()};
+    }}
+}}";
+            using var writer = new StringWriter();
+            MlirTestUtilities.ExportAllMethods(code, writer, false);
+            writer.ToString().Should().StartWith("// Skipping function Main(), failed to generate CFG");
         }
     }
 }
