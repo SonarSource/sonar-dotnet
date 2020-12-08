@@ -75,7 +75,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 switch (instruction.Kind())
                 {
                     case SyntaxKind.IdentifierName:
-                        ProcessIdentifier(instruction, assignedInBlock, usedInBlock, assignmentLhs);
+                        ProcessIdentifier(instruction, assignedInBlock, usedInBlock, assignmentLhs, processedLocalFunctions);
                         break;
 
                     case SyntaxKind.SimpleAssignmentExpression:
@@ -84,10 +84,6 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
                     case SyntaxKind.VariableDeclarator:
                         ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction, assignedInBlock, usedInBlock);
-                        break;
-
-                    case SyntaxKind.InvocationExpression:
-                        ProcessLocalFunction(instruction, assignedInBlock, usedInBlock, processedLocalFunctions);
                         break;
 
                     case SyntaxKind.AnonymousMethodExpression:
@@ -170,7 +166,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             }
         }
 
-        private void ProcessIdentifier(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned, HashSet<SyntaxNode> assignmentLhs)
+        private void ProcessIdentifier(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned, HashSet<SyntaxNode> assignmentLhs, HashSet<ISymbol> processedLocalFunctions)
         {
             var identifier = (IdentifierNameSyntax)instruction;
             var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
@@ -191,18 +187,18 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                     usedBeforeAssigned.Add(symbol);
                 }
             }
+
+            if (symbol is IMethodSymbol method && method.MethodKind == MethodKindEx.LocalFunction)
+            {
+                ProcessLocalFunction(symbol, assignedInBlock, usedBeforeAssigned, processedLocalFunctions);
+            }
         }
 
-        private void ProcessLocalFunction(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned, HashSet<ISymbol> processedLocalFunctions)
+        private void ProcessLocalFunction(ISymbol symbol, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned, HashSet<ISymbol> processedLocalFunctions)
         {
-            var symbol = semanticModel.GetSymbolInfo(((InvocationExpressionSyntax)instruction).Expression).Symbol;
-            // Local function invocation
-            if (symbol != null
-                && (processedLocalFunctions == null || !processedLocalFunctions.Contains(symbol))
-                && symbol.ContainingSymbol is IMethodSymbol
+            if ((processedLocalFunctions == null || !processedLocalFunctions.Contains(symbol))
                 && symbol.DeclaringSyntaxReferences.Length == 1
-                && symbol.DeclaringSyntaxReferences.Single().GetSyntax() is CSharpSyntaxNode node
-                && node.Kind() == SyntaxKindEx.LocalFunctionStatement
+                && symbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } node
                 && (LocalFunctionStatementSyntaxWrapper)node is LocalFunctionStatementSyntaxWrapper function
                 && CSharpControlFlowGraph.TryGet(function.Body ?? function.ExpressionBody as CSharpSyntaxNode, semanticModel, out var cfg))
             {

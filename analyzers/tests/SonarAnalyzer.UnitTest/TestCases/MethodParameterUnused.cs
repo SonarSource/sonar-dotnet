@@ -466,7 +466,7 @@ namespace Tests.TestCases
             }
         }
 
-        private void LocalFunctionRecursive(bool condition)    // Noncompliant
+        private void LocalFunctionUnused(bool condition)    // Noncompliant
         {
             bool Unused() => condition;
         }
