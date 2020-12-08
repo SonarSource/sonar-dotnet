@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -40,23 +40,22 @@ namespace SonarAnalyzer.LiveVariableAnalysis
 
         protected readonly ISet<ISymbol> capturedVariables = new HashSet<ISymbol>();
 
+        protected abstract void ProcessBlock(Block block, out HashSet<ISymbol> assignedInBlock, out HashSet<ISymbol> usedInBlock);
+
         protected AbstractLiveVariableAnalysis(IControlFlowGraph controlFlowGraph)
         {
             this.controlFlowGraph = controlFlowGraph;
-            this.reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();
+            reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();
         }
 
-        public IReadOnlyList<ISymbol> GetLiveOut(Block block)
-        {
-            return this.liveOutStates[block].Except(this.capturedVariables).ToImmutableArray();
-        }
+        public IReadOnlyList<ISymbol> GetLiveOut(Block block) =>
+            liveOutStates[block].Except(capturedVariables).ToImmutableArray();
 
-        public IReadOnlyList<ISymbol> GetLiveIn(Block block)
-        {
-            return this.liveInStates[block].Except(this.capturedVariables).ToImmutableArray();
-        }
+        public IReadOnlyList<ISymbol> GetLiveIn(Block block) =>
+            liveInStates[block].Except(capturedVariables).ToImmutableArray();
 
-        public IReadOnlyList<ISymbol> CapturedVariables => this.capturedVariables.ToImmutableArray();
+        public IReadOnlyList<ISymbol> CapturedVariables =>
+            capturedVariables.ToImmutableArray();
 
         protected void PerformAnalysis()
         {
@@ -64,13 +63,13 @@ namespace SonarAnalyzer.LiveVariableAnalysis
             {
                 ProcessBlock(block, out var assignedInBlock, out var usedInBlock);
 
-                this.assigned[block] = assignedInBlock;
-                this.used[block] = usedInBlock;
+                assigned[block] = assignedInBlock;
+                used[block] = usedInBlock;
             }
 
             AnalyzeCfg();
 
-            if (this.liveOutStates[this.controlFlowGraph.ExitBlock].Any())
+            if (liveOutStates[controlFlowGraph.ExitBlock].Any())
             {
                 throw new InvalidOperationException("Out of exit block should be empty");
             }
@@ -79,40 +78,39 @@ namespace SonarAnalyzer.LiveVariableAnalysis
         private void AnalyzeCfg()
         {
             var workList = new Queue<Block>();
-            this.reversedBlocks.ForEach(b => workList.Enqueue(b));
+            reversedBlocks.ForEach(b => workList.Enqueue(b));
 
             while (workList.Any())
             {
                 var block = workList.Dequeue();
 
-                if (!this.liveOutStates.ContainsKey(block))
+                if (!liveOutStates.ContainsKey(block))
                 {
-                    this.liveOutStates.Add(block, new HashSet<ISymbol>());
+                    liveOutStates.Add(block, new HashSet<ISymbol>());
                 }
 
-                var liveOut = this.liveOutStates[block];
+                var liveOut = liveOutStates[block];
 
                 // note that on the PHP LVA impl, the `liveOut` gets cleared before being updated
                 foreach (var successor in block.SuccessorBlocks)
                 {
-                    if (this.liveInStates.ContainsKey(successor))
+                    if (liveInStates.ContainsKey(successor))
                     {
-                        liveOut.UnionWith(this.liveInStates[successor]);
+                        liveOut.UnionWith(liveInStates[successor]);
                     }
                 }
 
                 // in = used + (out - assigned)
-                var liveIn = new HashSet<ISymbol>(this.used[block]);
-                liveIn.UnionWith(liveOut.Except(this.assigned[block]));
+                var liveIn = new HashSet<ISymbol>(used[block]);
+                liveIn.UnionWith(liveOut.Except(assigned[block]));
 
                 // if things have not changed, skip adding the predecessors to the workList
-                if (this.liveInStates.ContainsKey(block) &&
-                    liveIn.SetEquals(this.liveInStates[block]))
+                if (liveInStates.ContainsKey(block) && liveIn.SetEquals(liveInStates[block]))
                 {
                     continue;
                 }
 
-                this.liveInStates[block] = liveIn;
+                liveInStates[block] = liveIn;
 
                 foreach (var predecessor in block.PredecessorBlocks)
                 {
@@ -120,8 +118,5 @@ namespace SonarAnalyzer.LiveVariableAnalysis
                 }
             }
         }
-
-        protected abstract void ProcessBlock(Block block, out HashSet<ISymbol> assignedInBlock,
-            out HashSet<ISymbol> usedInBlock);
     }
 }

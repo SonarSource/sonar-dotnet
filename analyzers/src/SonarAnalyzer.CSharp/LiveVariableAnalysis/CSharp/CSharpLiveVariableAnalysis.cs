@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -25,8 +27,6 @@ using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.ShimLayer.CSharp;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 {
@@ -35,34 +35,26 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
         private readonly ISymbol declaration;
         private readonly SemanticModel semanticModel;
 
-        private CSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration,
-            SemanticModel semanticModel)
-            : base(controlFlowGraph)
+        private CSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel) : base(controlFlowGraph)
         {
             this.declaration = declaration;
             this.semanticModel = semanticModel;
         }
 
-        public static AbstractLiveVariableAnalysis Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration,
-            SemanticModel semanticModel)
+        public static AbstractLiveVariableAnalysis Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel)
         {
             var lva = new CSharpLiveVariableAnalysis(controlFlowGraph, declaration, semanticModel);
             lva.PerformAnalysis();
             return lva;
         }
 
-        protected override void ProcessBlock(Block block, out HashSet<ISymbol> assignedInBlock,
-            out HashSet<ISymbol> usedInBlock)
-        {
+        protected override void ProcessBlock(Block block, out HashSet<ISymbol> assignedInBlock, out HashSet<ISymbol> usedInBlock) =>
             ProcessBlockInternal(block, null, out assignedInBlock, out usedInBlock);
-        }
 
-        private void ProcessBlockInternal(Block block, HashSet<ISymbol> processedLocalFunctions
-            , out HashSet<ISymbol> assignedInBlock, out HashSet<ISymbol> usedInBlock)
+        private void ProcessBlockInternal(Block block, HashSet<ISymbol> processedLocalFunctions, out HashSet<ISymbol> assignedInBlock, out HashSet<ISymbol> usedInBlock)
         {
             assignedInBlock = new HashSet<ISymbol>(); // Kill (The set of variables that are assigned a value.)
             usedInBlock = new HashSet<ISymbol>(); // Gen (The set of variables that are used before any assignment.)
-
             var assignmentLhs = new HashSet<SyntaxNode>();
 
             foreach (var instruction in block.Instructions.Reverse())
@@ -100,8 +92,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             }
 
             // Variable declaration in a foreach statement is not a VariableDeclarator, so handling it separately:
-            if (block is BinaryBranchBlock foreachBlock &&
-                foreachBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement))
+            if (block is BinaryBranchBlock foreachBlock && foreachBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement))
             {
                 var foreachNode = (ForEachStatementSyntax)foreachBlock.BranchingNode;
                 ProcessVariableInForeach(foreachNode, assignedInBlock, usedInBlock);
@@ -111,8 +102,8 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             if (block is UsingEndBlock usingFinalizerBlock)
             {
                 var disposableSymbols = usingFinalizerBlock.Identifiers
-                    .Select(i => this.semanticModel.GetDeclaredSymbol(i.Parent)
-                                ?? this.semanticModel.GetSymbolInfo(i.Parent).Symbol)
+                    .Select(i => semanticModel.GetDeclaredSymbol(i.Parent)
+                                ?? semanticModel.GetSymbolInfo(i.Parent).Symbol)
                     .WhereNotNull();
                 foreach (var disposableSymbol in disposableSymbols)
                 {
@@ -121,10 +112,9 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             }
         }
 
-        private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode, HashSet<ISymbol> assignedInBlock,
-            HashSet<ISymbol> usedBeforeAssigned)
+        private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned)
         {
-            var symbol = this.semanticModel.GetDeclaredSymbol(foreachNode);
+            var symbol = semanticModel.GetDeclaredSymbol(foreachNode);
             if (symbol == null)
             {
                 return;
@@ -134,10 +124,9 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             usedBeforeAssigned.Remove(symbol);
         }
 
-        private void ProcessVariableDeclarator(VariableDeclaratorSyntax instruction, HashSet<ISymbol> assignedInBlock,
-            HashSet<ISymbol> usedBeforeAssigned)
+        private void ProcessVariableDeclarator(VariableDeclaratorSyntax instruction, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned)
         {
-            var symbol = this.semanticModel.GetDeclaredSymbol(instruction);
+            var symbol = semanticModel.GetDeclaredSymbol(instruction);
             if (symbol == null)
             {
                 return;
@@ -147,14 +136,13 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             usedBeforeAssigned.Remove(symbol);
         }
 
-        private void ProcessSimpleAssignment(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock,
-            HashSet<ISymbol> usedBeforeAssigned, HashSet<SyntaxNode> assignmentLhs)
+        private void ProcessSimpleAssignment(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned, HashSet<SyntaxNode> assignmentLhs)
         {
             var assignment = (AssignmentExpressionSyntax)instruction;
             var left = assignment.Left.RemoveParentheses();
             if (left.IsKind(SyntaxKind.IdentifierName))
             {
-                var symbol = this.semanticModel.GetSymbolInfo(left).Symbol;
+                var symbol = semanticModel.GetSymbolInfo(left).Symbol;
                 if (symbol == null)
                 {
                     return;
@@ -169,36 +157,30 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             }
         }
 
-        private void ProcessIdentifier(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock,
-            HashSet<ISymbol> usedBeforeAssigned, HashSet<SyntaxNode> assignmentLhs)
+        private void ProcessIdentifier(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned, HashSet<SyntaxNode> assignmentLhs)
         {
             var identifier = (IdentifierNameSyntax)instruction;
-            var symbol = this.semanticModel.GetSymbolInfo(identifier).Symbol;
+            var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
             if (symbol == null)
             {
                 return;
             }
 
-            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(this.semanticModel) &&
-                IsLocalScoped(symbol))
+            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(this.semanticModel) && IsLocalScoped(symbol))
             {
                 if (IsOutArgument(identifier))
                 {
                     assignedInBlock.Add(symbol);
                     usedBeforeAssigned.Remove(symbol);
                 }
-                else
+                else if (!assignmentLhs.Contains(instruction))
                 {
-                    if (!assignmentLhs.Contains(instruction))
-                    {
-                        usedBeforeAssigned.Add(symbol);
-                    }
+                    usedBeforeAssigned.Add(symbol);
                 }
             }
         }
 
-        private void ProcessLocalFunction(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock,
-            HashSet<ISymbol> usedBeforeAssigned, HashSet<ISymbol> processedLocalFunctions)
+        private void ProcessLocalFunction(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned, HashSet<ISymbol> processedLocalFunctions)
         {
             var symbol = semanticModel.GetSymbolInfo(((InvocationExpressionSyntax)instruction).Expression).Symbol;
             // Local function invocation
@@ -211,7 +193,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 && (LocalFunctionStatementSyntaxWrapper)node is LocalFunctionStatementSyntaxWrapper function
                 && CSharpControlFlowGraph.TryGet(function.Body ?? function.ExpressionBody as CSharpSyntaxNode, semanticModel, out var cfg))
             {
-                processedLocalFunctions = processedLocalFunctions ?? new HashSet<ISymbol>();
+                processedLocalFunctions ??= new HashSet<ISymbol>();
                 processedLocalFunctions.Add(symbol);
                 foreach (var block in cfg.Blocks.Reverse())
                 {
@@ -226,24 +208,19 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
         {
             var allCapturedSymbols = instruction.DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
-                .Select(i => this.semanticModel.GetSymbolInfo(i).Symbol)
+                .Select(i => semanticModel.GetSymbolInfo(i).Symbol)
                 .Where(s => s != null && IsLocalScoped(s));
 
             // Collect captured locals
             // Read and write both affects liveness
-            this.capturedVariables.UnionWith(allCapturedSymbols);
+            capturedVariables.UnionWith(allCapturedSymbols);
         }
 
-        internal static bool IsOutArgument(IdentifierNameSyntax identifier)
-        {
-            return identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument &&
-                argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
-        }
+        internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
+            identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
 
-        private bool IsLocalScoped(ISymbol symbol)
-        {
-            return IsLocalScoped(symbol, this.declaration);
-        }
+        private bool IsLocalScoped(ISymbol symbol) =>
+            IsLocalScoped(symbol, declaration);
 
         internal static bool IsLocalScoped(ISymbol symbol, ISymbol declaration)
         {
@@ -253,8 +230,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 return false;
             }
 
-            return symbol.ContainingSymbol != null &&
-                symbol.ContainingSymbol.Equals(declaration);
+            return symbol.ContainingSymbol != null && symbol.ContainingSymbol.Equals(declaration);
         }
     }
 }
