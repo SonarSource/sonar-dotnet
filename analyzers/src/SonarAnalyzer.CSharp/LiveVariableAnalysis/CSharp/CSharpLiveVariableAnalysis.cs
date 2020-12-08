@@ -48,6 +48,19 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             return lva;
         }
 
+        internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
+            identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
+
+        internal static bool IsLocalScoped(ISymbol symbol, ISymbol declaration)
+        {
+            return IsLocalOrParameterSymbol()
+                && symbol.ContainingSymbol != null
+                && symbol.ContainingSymbol.Equals(declaration);
+
+            bool IsLocalOrParameterSymbol() =>
+                symbol is ILocalSymbol || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
+        }
+
         protected override void ProcessBlock(Block block, out HashSet<ISymbol> assignedInBlock, out HashSet<ISymbol> usedInBlock) =>
             ProcessBlockInternal(block, null, out assignedInBlock, out usedInBlock);
 
@@ -166,7 +179,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 return;
             }
 
-            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(this.semanticModel) && IsLocalScoped(symbol))
+            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel) && IsLocalScoped(symbol))
             {
                 if (IsOutArgument(identifier))
                 {
@@ -216,20 +229,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             capturedVariables.UnionWith(allCapturedSymbols);
         }
 
-        internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
-            identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
-
         private bool IsLocalScoped(ISymbol symbol) =>
             IsLocalScoped(symbol, declaration);
-
-        internal static bool IsLocalScoped(ISymbol symbol, ISymbol declaration)
-        {
-            return IsLocalOrParameter()
-                && symbol.ContainingSymbol != null
-                && symbol.ContainingSymbol.Equals(declaration);
-
-            bool IsLocalOrParameter() =>
-                symbol is ILocalSymbol || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
-        }
     }
 }
