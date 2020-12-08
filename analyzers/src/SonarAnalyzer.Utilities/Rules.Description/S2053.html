@@ -1,0 +1,46 @@
+<p>In cryptography, "salt" is extra piece of data which is included in a hashing algorithm. It makes dictionary attacks more difficult. Using a
+cryptographic hash function without an unpredictable salt increases the likelihood that an attacker will be able to successfully guess a hashed value
+such as a password with a dictionary attack.</p>
+<p>This rule raises an issue when a hashing function which has been specifically designed for hashing sensitive data, such as pbkdf2, is used with a
+non-random, reused or too short salt value. It does not raise an issue on base hashing algorithms such as sha1 or md5 as these are often used for
+other purposes.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<ul>
+  <li> Use hashing functions generating their own salt or generate a long random salt of at least 32 bytes. </li>
+  <li> The salt is at least as long as the resulting hash value. </li>
+  <li> Provide the salt to a safe hashing function such as PBKDF2. </li>
+  <li> Save both the salt and the hashed value in the relevant database record; during future validation operations, the salt and hash can then be
+  retrieved from the database. The hash is recalculated with the stored salt and the value being validated, and the result compared to the stored
+  hash. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void Hash(string password)
+{
+    var salt = Encoding.UTF8.GetBytes("Hardcoded salt");
+    var fromHardcoded = new Rfc2898DeriveBytes(password, salt);     // Noncompliant, salt is hardcoded
+
+    salt = Encoding.UTF8.GetBytes(password);
+    var fromPassword = new Rfc2898DeriveBytes(password, salt);     // Noncompliant, password should not be used as a salt as it makes it predictable
+
+    var shortSalt = new byte[8];
+    RandomNumberGenerator.Create().GetBytes(shortSalt);
+    var fromShort = new Rfc2898DeriveBytes(password, shortSalt);   // Noncompliant, salt is too short (should be at least 32 bytes, not 8)
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public DeriveBytes Hash(string password)
+{
+    return new Rfc2898DeriveBytes(password, 64);
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/759.html">MITRE, CWE-759</a> - Use of a One-Way Hash without a Salt </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/760.html">MITRE, CWE-760</a> - Use of a One-Way Hash with a Predictable Salt </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
+</ul>
+
