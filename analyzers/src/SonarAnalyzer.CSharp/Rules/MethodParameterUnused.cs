@@ -258,7 +258,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class MethodContext
         {
-
             public readonly SyntaxNodeAnalysisContext Context;
             public readonly IMethodSymbol Symbol;
             public readonly ParameterListSyntax ParameterList;
@@ -280,6 +279,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 ExpressionBody = expressionBody;
             }
         }
-
     }
 }

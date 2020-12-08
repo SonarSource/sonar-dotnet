@@ -424,27 +424,27 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/3134
     public class Repro_3134
     {
-        private static Predicate<DateTime> LocalFunctionReturned(DateTime dateTime) // Fixed
+        private static Predicate<DateTime> LocalFunctionReturned(DateTime dateTime)
         {
             bool Filter(DateTime time) => time.Year == dateTime.Year;
             return Filter;
         }
 
-        private void LocalFunctionReferencedArrow(bool condition)   // Fixed
+        private void LocalFunctionReferencedArrow(bool condition)
         {
             Enumerable.Empty<object>().Where(IsTrue);
 
             bool IsTrue(object x) => condition;
         }
 
-        private void LocalFunctionReferencedBody(bool condition)    // Fixed
+        private void LocalFunctionReferencedBody(bool condition)
         {
             Enumerable.Empty<object>().Where(IsTrue);
 
             bool IsTrue(object x) => condition;
         }
 
-        private void LocalFunctionCrossReferenced(bool condition)   // Fixed
+        private void LocalFunctionCrossReferenced(bool condition)
         {
             Enumerable.Empty<object>().Where(IsTrueOuter);
 
@@ -453,7 +453,7 @@ namespace Tests.TestCases
             bool IsTrueInner() => condition;
         }
 
-        private void LocalFunctionRecursive(int arg)                // Fixed
+        private void LocalFunctionRecursive(int arg)
         {
             Enumerable.Empty<object>().Where(IsTrue);
 
@@ -462,6 +462,11 @@ namespace Tests.TestCases
                 arg--;
                 return arg <= 0 || new[] { x }.Any(IsTrue);
             }
+        }
+
+        private void LocalFunctionRecursive(bool condition)    // Fixed
+        {
+            bool Unused() => condition;
         }
     }
 }
