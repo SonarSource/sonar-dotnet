@@ -43,24 +43,13 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
 
-        private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
+        private sealed class AnalysisContext : DefaultAnalysisContext
         {
-            private readonly List<Location> locations = new List<Location>();
-
-            public bool SupportsPartialResults => false;
-
             public AnalysisContext(AbstractExplodedGraph explodedGraph) =>
                 explodedGraph.AddExplodedGraphCheck(new InitializationVectorCheck(explodedGraph, this));
 
-            public IEnumerable<Diagnostic> GetDiagnostics() =>
-                locations.Distinct().Select(location => Diagnostic.Create(Rule, location));
-
-            public void AddLocation(Location location) => locations.Add(location);
-
-            public void Dispose()
-            {
-                // Nothing to do here.
-            }
+            protected override Diagnostic CreateDiagnostic(Location location) =>
+                Diagnostic.Create(Rule, location);
         }
 
         private sealed class InitializationVectorCheck : ExplodedGraphCheck
