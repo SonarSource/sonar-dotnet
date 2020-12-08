@@ -38,8 +38,6 @@ namespace SonarAnalyzer.CBDE
 {
     public class MlirExporter
     {
-        private const LanguageVersion supportedVersion = LanguageVersionEx.CSharp8;
-
         internal static readonly ImmutableList<SyntaxKind> unsupportedSyntaxes = new List<SyntaxKind>
         {
             SyntaxKind.AnonymousMethodExpression,
