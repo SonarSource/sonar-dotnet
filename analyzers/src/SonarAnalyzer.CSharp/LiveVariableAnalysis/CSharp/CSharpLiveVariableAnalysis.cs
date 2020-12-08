@@ -224,13 +224,12 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         internal static bool IsLocalScoped(ISymbol symbol, ISymbol declaration)
         {
-            if (!(symbol is ILocalSymbol local) &&
-                (!(symbol is IParameterSymbol parameter) || parameter.RefKind != RefKind.None))
-            {
-                return false;
-            }
+            return IsLocalOrParameter()
+                && symbol.ContainingSymbol != null
+                && symbol.ContainingSymbol.Equals(declaration);
 
-            return symbol.ContainingSymbol != null && symbol.ContainingSymbol.Equals(declaration);
+            bool IsLocalOrParameter() =>
+                symbol is ILocalSymbol || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
         }
     }
 }
