@@ -31,16 +31,12 @@ namespace SonarAnalyzer.LiveVariableAnalysis
     {
         private readonly IControlFlowGraph controlFlowGraph;
         private readonly List<Block> reversedBlocks;
-
         private readonly Dictionary<Block, HashSet<ISymbol>> liveOutStates = new Dictionary<Block, HashSet<ISymbol>>();
         private readonly Dictionary<Block, HashSet<ISymbol>> liveInStates = new Dictionary<Block, HashSet<ISymbol>>();
 
-        private readonly Dictionary<Block, HashSet<ISymbol>> assigned = new Dictionary<Block, HashSet<ISymbol>>();
-        private readonly Dictionary<Block, HashSet<ISymbol>> used = new Dictionary<Block, HashSet<ISymbol>>();
-
         protected readonly ISet<ISymbol> capturedVariables = new HashSet<ISymbol>();
 
-        protected abstract void ProcessBlock(Block block, out HashSet<ISymbol> assignedInBlock, out HashSet<ISymbol> usedInBlock);
+        protected abstract State ProcessBlock(Block block);
 
         protected AbstractLiveVariableAnalysis(IControlFlowGraph controlFlowGraph)
         {
@@ -59,15 +55,13 @@ namespace SonarAnalyzer.LiveVariableAnalysis
 
         protected void PerformAnalysis()
         {
-            foreach (var block in this.reversedBlocks)
+            var states = new Dictionary<Block, State>();
+            foreach (var block in reversedBlocks)
             {
-                ProcessBlock(block, out var assignedInBlock, out var usedInBlock);
-
-                assigned[block] = assignedInBlock;
-                used[block] = usedInBlock;
+                states.Add(block, ProcessBlock(block));
             }
 
-            AnalyzeCfg();
+            AnalyzeCfg(states);
 
             if (liveOutStates[controlFlowGraph.ExitBlock].Any())
             {
@@ -75,7 +69,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis
             }
         }
 
-        private void AnalyzeCfg()
+        private void AnalyzeCfg(Dictionary<Block, State> states)
         {
             var workList = new Queue<Block>();
             reversedBlocks.ForEach(b => workList.Enqueue(b));
@@ -88,7 +82,6 @@ namespace SonarAnalyzer.LiveVariableAnalysis
                 {
                     liveOutStates.Add(block, new HashSet<ISymbol>());
                 }
-
                 var liveOut = liveOutStates[block];
 
                 // note that on the PHP LVA impl, the `liveOut` gets cleared before being updated
@@ -100,9 +93,8 @@ namespace SonarAnalyzer.LiveVariableAnalysis
                     }
                 }
 
-                // in = used + (out - assigned)
-                var liveIn = new HashSet<ISymbol>(used[block]);
-                liveIn.UnionWith(liveOut.Except(assigned[block]));
+                // in = usedBeforeAssigned + (out - assigned)
+                var liveIn = new HashSet<ISymbol>(states[block].UsedBeforeAssigned.Concat(liveOut.Except(states[block].Assigned)));
 
                 // if things have not changed, skip adding the predecessors to the workList
                 if (liveInStates.ContainsKey(block) && liveIn.SetEquals(liveInStates[block]))
@@ -117,6 +109,14 @@ namespace SonarAnalyzer.LiveVariableAnalysis
                     workList.Enqueue(predecessor);
                 }
             }
+        }
+
+        protected class State
+        {
+            public HashSet<ISymbol> Assigned { get; } = new HashSet<ISymbol>();             // Kill: The set of variables that are assigned a value.
+            public HashSet<ISymbol> UsedBeforeAssigned { get; } = new HashSet<ISymbol>();   // Gen:  The set of variables that are used before any assignment.
+            public HashSet<ISymbol> ProcessedLocalFunctions { get; } = new HashSet<ISymbol>();
+            public HashSet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
         }
     }
 }
