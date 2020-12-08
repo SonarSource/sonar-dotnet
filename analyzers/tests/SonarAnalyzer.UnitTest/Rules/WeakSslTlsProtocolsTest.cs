@@ -39,6 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.cs",
                 new WeakSslTlsProtocols(),
+                ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetAdditionalReferences());
         }
 
