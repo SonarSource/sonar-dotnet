@@ -102,7 +102,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (fieldSymbol != null
                         && fieldSymbol.IsPubliclyAccessible()
-                        && !fieldSymbol.IsOverride
                         && !HasXmlElementAttribute(fieldSymbol))
                     {
                         ReportIfListT(fieldDeclaration.Declaration.Type, c, "field");
