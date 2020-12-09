@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,88 +31,79 @@ namespace SonarAnalyzer.LiveVariableAnalysis
     {
         private readonly IControlFlowGraph controlFlowGraph;
         private readonly List<Block> reversedBlocks;
+        private readonly IDictionary<Block, HashSet<ISymbol>> liveOutStates = new Dictionary<Block, HashSet<ISymbol>>();
+        private readonly IDictionary<Block, HashSet<ISymbol>> liveInStates = new Dictionary<Block, HashSet<ISymbol>>();
+        private readonly ISet<ISymbol> capturedVariables = new HashSet<ISymbol>();
 
-        private readonly Dictionary<Block, HashSet<ISymbol>> liveOutStates = new Dictionary<Block, HashSet<ISymbol>>();
-        private readonly Dictionary<Block, HashSet<ISymbol>> liveInStates = new Dictionary<Block, HashSet<ISymbol>>();
-
-        private readonly Dictionary<Block, HashSet<ISymbol>> assigned = new Dictionary<Block, HashSet<ISymbol>>();
-        private readonly Dictionary<Block, HashSet<ISymbol>> used = new Dictionary<Block, HashSet<ISymbol>>();
-
-        protected readonly ISet<ISymbol> capturedVariables = new HashSet<ISymbol>();
+        protected abstract State ProcessBlock(Block block);
 
         protected AbstractLiveVariableAnalysis(IControlFlowGraph controlFlowGraph)
         {
             this.controlFlowGraph = controlFlowGraph;
-            this.reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();
+            reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();
         }
 
-        public IReadOnlyList<ISymbol> GetLiveOut(Block block)
-        {
-            return this.liveOutStates[block].Except(this.capturedVariables).ToImmutableArray();
-        }
+        public IReadOnlyList<ISymbol> GetLiveOut(Block block) =>
+            liveOutStates[block].Except(capturedVariables).ToImmutableArray();
 
-        public IReadOnlyList<ISymbol> GetLiveIn(Block block)
-        {
-            return this.liveInStates[block].Except(this.capturedVariables).ToImmutableArray();
-        }
+        public IReadOnlyList<ISymbol> GetLiveIn(Block block) =>
+            liveInStates[block].Except(capturedVariables).ToImmutableArray();
 
-        public IReadOnlyList<ISymbol> CapturedVariables => this.capturedVariables.ToImmutableArray();
+        public IReadOnlyList<ISymbol> CapturedVariables =>
+            capturedVariables.ToImmutableArray();
 
         protected void PerformAnalysis()
         {
-            foreach (var block in this.reversedBlocks)
+            var states = new Dictionary<Block, State>();
+            foreach (var block in reversedBlocks)
             {
-                ProcessBlock(block, out var assignedInBlock, out var usedInBlock);
-
-                this.assigned[block] = assignedInBlock;
-                this.used[block] = usedInBlock;
+                var state = ProcessBlock(block);
+                capturedVariables.UnionWith(state.CapturedVariables);
+                states.Add(block, state);
             }
 
-            AnalyzeCfg();
+            AnalyzeCfg(states);
 
-            if (this.liveOutStates[this.controlFlowGraph.ExitBlock].Any())
+            if (liveOutStates[controlFlowGraph.ExitBlock].Any())
             {
                 throw new InvalidOperationException("Out of exit block should be empty");
             }
         }
 
-        private void AnalyzeCfg()
+        private void AnalyzeCfg(Dictionary<Block, State> states)
         {
             var workList = new Queue<Block>();
-            this.reversedBlocks.ForEach(b => workList.Enqueue(b));
+            reversedBlocks.ForEach(b => workList.Enqueue(b));
 
             while (workList.Any())
             {
                 var block = workList.Dequeue();
 
-                if (!this.liveOutStates.ContainsKey(block))
+                if (!liveOutStates.ContainsKey(block))
                 {
-                    this.liveOutStates.Add(block, new HashSet<ISymbol>());
+                    liveOutStates.Add(block, new HashSet<ISymbol>());
                 }
-
-                var liveOut = this.liveOutStates[block];
+                var liveOut = liveOutStates[block];
 
                 // note that on the PHP LVA impl, the `liveOut` gets cleared before being updated
                 foreach (var successor in block.SuccessorBlocks)
                 {
-                    if (this.liveInStates.ContainsKey(successor))
+                    if (liveInStates.ContainsKey(successor))
                     {
-                        liveOut.UnionWith(this.liveInStates[successor]);
+                        liveOut.UnionWith(liveInStates[successor]);
                     }
                 }
 
-                // in = used + (out - assigned)
-                var liveIn = new HashSet<ISymbol>(this.used[block]);
-                liveIn.UnionWith(liveOut.Except(this.assigned[block]));
+                // in = usedBeforeAssigned + (out - assigned)
+                var liveIn = new HashSet<ISymbol>(states[block].UsedBeforeAssigned.Concat(liveOut.Except(states[block].Assigned)));
 
                 // if things have not changed, skip adding the predecessors to the workList
-                if (this.liveInStates.ContainsKey(block) &&
-                    liveIn.SetEquals(this.liveInStates[block]))
+                if (liveInStates.ContainsKey(block) && liveIn.SetEquals(liveInStates[block]))
                 {
                     continue;
                 }
 
-                this.liveInStates[block] = liveIn;
+                liveInStates[block] = liveIn;
 
                 foreach (var predecessor in block.PredecessorBlocks)
                 {
@@ -121,7 +112,13 @@ namespace SonarAnalyzer.LiveVariableAnalysis
             }
         }
 
-        protected abstract void ProcessBlock(Block block, out HashSet<ISymbol> assignedInBlock,
-            out HashSet<ISymbol> usedInBlock);
+        protected class State
+        {
+            public ISet<ISymbol> Assigned { get; } = new HashSet<ISymbol>();             // Kill: The set of variables that are assigned a value.
+            public ISet<ISymbol> UsedBeforeAssigned { get; } = new HashSet<ISymbol>();   // Gen:  The set of variables that are used before any assignment.
+            public ISet<ISymbol> ProcessedLocalFunctions { get; } = new HashSet<ISymbol>();
+            public ISet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
+            public ISet<ISymbol> CapturedVariables { get; } = new HashSet<ISymbol>();
+        }
     }
 }
