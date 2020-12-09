@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Common.Checks;
 using SonarAnalyzer.SymbolicExecution.Common.Constraints;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
@@ -44,8 +45,11 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private sealed class AnalysisContext : DefaultAnalysisContext<Location>
         {
-            public AnalysisContext(AbstractExplodedGraph explodedGraph) =>
+            public AnalysisContext(AbstractExplodedGraph explodedGraph)
+            {
+                explodedGraph.AddExplodedGraphCheck(new ByteArrayCheck(explodedGraph));
                 explodedGraph.AddExplodedGraphCheck(new InitializationVectorCheck(explodedGraph, this));
+            }
 
             protected override Diagnostic CreateDiagnostic(Location location) =>
                 Diagnostic.Create(Rule, location);
@@ -67,7 +71,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 programPoint.CurrentInstruction switch
                 {
                     InvocationExpressionSyntax invocation => InvocationExpressionPostProcess(invocation, programState),
-                    ArrayCreationExpressionSyntax arrayCreation => ArrayCreationPostProcess(arrayCreation, programState),
                     AssignmentExpressionSyntax assignment => AssignmentExpressionPostProcess(assignment, programState),
                     _ => programState
                 };
@@ -78,14 +81,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     && GetSymbolicValue(invocation, programState) is {} ivSymbolicValue)
                 {
                     programState = programState.SetConstraint(ivSymbolicValue, CryptographyIVSymbolicValueConstraint.Initialized);
-                }
-                else if (IsSanitizer(invocation, semanticModel)
-                         && semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression).Symbol is {} symbol
-                         && symbol.GetSymbolType().Is(KnownType.System_Byte_Array)
-                         && symbol.HasConstraint(ByteArraySymbolicValueConstraint.Constant, programState))
-                {
-                    var symbolicValue = programState.GetSymbolValue(symbol);
-                    programState = programState.SetConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Modified);
                 }
 
                 return programState;
@@ -121,11 +116,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 return programState;
             }
 
-            private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState) =>
-                semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array) && programState.HasValue
-                    ? programState.SetConstraint(programState.PeekValue(), ByteArraySymbolicValueConstraint.Constant)
-                    : programState;
-
             private bool IsInvalidIV(ArgumentSyntax argument, ProgramState programState) =>
                 argument.Expression switch
                 {
@@ -158,13 +148,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
             private static bool IsSymmetricAlgorithmGenerateIVMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
                 invocation.IsMemberAccessOnKnownType("GenerateIV", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
-
-            private static bool IsSanitizer(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-                invocation.Expression is MemberAccessExpressionSyntax memberAccessExpressionSyntax
-                && (memberAccessExpressionSyntax.NameIs("GetBytes") || memberAccessExpressionSyntax.NameIs("GetNonZeroBytes"))
-                && semanticModel.GetSymbolInfo(invocation).Symbol is {} symbol
-                && symbol.ContainingType.IsAny(KnownType.System_Security_Cryptography_RNGCryptoServiceProvider,
-                                               KnownType.System_Security_Cryptography_RandomNumberGenerator);
         }
     }
 }

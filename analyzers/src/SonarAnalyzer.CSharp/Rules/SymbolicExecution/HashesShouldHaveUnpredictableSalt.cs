@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Common.Checks;
 using SonarAnalyzer.SymbolicExecution.Common.Constraints;
 
 namespace SonarAnalyzer.Rules.SymbolicExecution
@@ -47,8 +48,11 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private sealed class AnalysisContext : DefaultAnalysisContext<LocationContext>
         {
-            public AnalysisContext(AbstractExplodedGraph explodedGraph) =>
+            public AnalysisContext(AbstractExplodedGraph explodedGraph)
+            {
+                explodedGraph.AddExplodedGraphCheck(new ByteArrayCheck(explodedGraph));
                 explodedGraph.AddExplodedGraphCheck(new SaltCheck(explodedGraph, this));
+            }
 
             protected override Diagnostic CreateDiagnostic(LocationContext locationContext) =>
                 Diagnostic.Create(Rule, locationContext.Location, locationContext.Message);
@@ -110,10 +114,16 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     && symbol.ContainingType is {} symbolType
                     && symbolType.IsAny(VulnerableTypes)
                     && semanticModel.GetSymbolInfo(objectCreation.ArgumentList.Arguments[1].Expression).Symbol is {} saltSymbol
-                    && programState.GetSymbolValue(saltSymbol) is {} symbolicValue
-                    && programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
+                    && programState.GetSymbolValue(saltSymbol) is {} symbolicValue)
                 {
-                    context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeThisSaltLongerMessage));
+                    if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
+                    {
+                        context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeThisSaltLongerMessage));
+                    }
+                    else if (programState.HasConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Constant))
+                    {
+                        context.AddLocation(new LocationContext(objectCreation.ArgumentList.Arguments[1].Expression.GetLocation(), MakeSaltUnpredictableMessage));
+                    }
                 }
 
                 return programState;
