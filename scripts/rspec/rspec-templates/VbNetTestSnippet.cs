@@ -1,4 +1,4 @@
-        [TestMethod]
+﻿        [TestMethod]
         [TestCategory("Rule")]
         public void $DiagnosticClassName$_VB()
         {
