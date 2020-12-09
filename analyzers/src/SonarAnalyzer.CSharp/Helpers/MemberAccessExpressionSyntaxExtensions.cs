@@ -18,19 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal static class InvocationExpressionSyntaxExtensions
+    internal static class MemberAccessExpressionSyntaxExtensions
     {
-        internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccess
-            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
-
-        internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
+        public static bool IsMemberAccessOnKnownType(this MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
+            memberAccess.NameIs(name)
+            && semanticModel.GetSymbolInfo(memberAccess).Symbol is {} symbol
+            && symbol.ContainingType.DerivesFrom(knownType);
     }
 }

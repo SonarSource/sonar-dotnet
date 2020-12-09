@@ -18,19 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.SymbolicExecution.Common.Constraints
 {
-    internal static class InvocationExpressionSyntaxExtensions
+    public class CryptographyIVSymbolicValueConstraint : SymbolicValueConstraint
     {
-        internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccess
-            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
+        internal static readonly CryptographyIVSymbolicValueConstraint NotInitialized = new CryptographyIVSymbolicValueConstraint();
+        internal static readonly CryptographyIVSymbolicValueConstraint Initialized = new CryptographyIVSymbolicValueConstraint();
 
-        internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
+        private CryptographyIVSymbolicValueConstraint() { }
+
+        public override SymbolicValueConstraint OppositeForLogicalNot =>
+            this == Initialized ? NotInitialized : Initialized;
+
+        public override string ToString() =>
+            this == Initialized ? nameof(Initialized) : nameof(NotInitialized);
     }
 }

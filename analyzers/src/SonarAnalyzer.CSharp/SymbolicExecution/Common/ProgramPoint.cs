@@ -19,6 +19,7 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.ControlFlowGraph;
 
 namespace SonarAnalyzer.SymbolicExecution
@@ -47,6 +48,9 @@ namespace SonarAnalyzer.SymbolicExecution
         internal ProgramPoint(Block block)
             : this(block, 0)
         { }
+
+        public SyntaxNode CurrentInstruction =>
+            Block.Instructions[Offset];
 
         public override bool Equals(object obj)
         {

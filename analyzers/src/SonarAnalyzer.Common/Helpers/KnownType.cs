@@ -115,6 +115,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_AttributeUsageAttribute = new KnownType("System.AttributeUsageAttribute");
         internal static readonly KnownType System_Boolean = new KnownType(SpecialType.System_Boolean, "bool");
         internal static readonly KnownType System_Byte = new KnownType(SpecialType.System_Byte, "byte");
+        internal static readonly KnownType System_Byte_Array = new KnownType("byte[]");
         internal static readonly KnownType System_Char = new KnownType(SpecialType.System_Char, "char");
         internal static readonly KnownType System_CLSCompliantAttribute = new KnownType("System.CLSCompliantAttribute");
         internal static readonly KnownType System_CodeDom_Compiler_GeneratedCodeAttribute = new KnownType("System.CodeDom.Compiler.GeneratedCodeAttribute");
@@ -317,7 +318,9 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_Cryptography_MD5 = new KnownType("System.Security.Cryptography.MD5");
         internal static readonly KnownType System_Security_Cryptography_PasswordDeriveBytes = new KnownType("System.Security.Cryptography.PasswordDeriveBytes");
         internal static readonly KnownType System_Security_Cryptography_RC2 = new KnownType("System.Security.Cryptography.RC2");
+        internal static readonly KnownType System_Security_Cryptography_RandomNumberGenerator = new KnownType("System.Security.Cryptography.RandomNumberGenerator");
         internal static readonly KnownType System_Security_Cryptography_RIPEMD160 = new KnownType("System.Security.Cryptography.RIPEMD160");
+        internal static readonly KnownType System_Security_Cryptography_RNGCryptoServiceProvider = new KnownType("System.Security.Cryptography.RNGCryptoServiceProvider");
         internal static readonly KnownType System_Security_Cryptography_RSA = new KnownType("System.Security.Cryptography.RSA");
         internal static readonly KnownType System_Security_Cryptography_RSACryptoServiceProvider = new KnownType("System.Security.Cryptography.RSACryptoServiceProvider");
         internal static readonly KnownType System_Security_Cryptography_SHA1 = new KnownType("System.Security.Cryptography.SHA1");

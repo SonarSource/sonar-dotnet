@@ -564,6 +564,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     throw new NotSupportedException($"{instruction.Kind()}");
             }
 
+            newProgramState = InvokeChecks(newProgramState, (ps, check) => check.PostProcessInstruction(node.ProgramPoint, ps));
             newProgramState = EnsureStackState(parenthesizedExpression, newProgramState);
             OnInstructionProcessed(instruction, node.ProgramPoint, newProgramState);
             EnqueueNewNode(newProgramPoint, newProgramState);

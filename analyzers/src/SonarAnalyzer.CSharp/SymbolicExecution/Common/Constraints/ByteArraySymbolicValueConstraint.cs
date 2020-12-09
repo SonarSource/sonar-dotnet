@@ -18,19 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.SymbolicExecution.Common.Constraints
 {
-    internal static class InvocationExpressionSyntaxExtensions
+    public class ByteArraySymbolicValueConstraint : SymbolicValueConstraint
     {
-        internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccess
-            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
+        internal static readonly ByteArraySymbolicValueConstraint Constant = new ByteArraySymbolicValueConstraint();
+        internal static readonly ByteArraySymbolicValueConstraint Modified = new ByteArraySymbolicValueConstraint();
 
-        internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
+        private ByteArraySymbolicValueConstraint() { }
+
+        public override SymbolicValueConstraint OppositeForLogicalNot =>
+            this == Modified ? Constant : Modified;
+
+        public override string ToString() =>
+            this == Modified ? nameof(Modified) : nameof(Constant);
     }
 }

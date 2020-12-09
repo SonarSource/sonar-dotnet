@@ -1,0 +1,50 @@
+<p>In encryption, when Cipher Block Chaining (CBC) is used, the Initialization Vector (IV) must be random and unpredictable. Otherwise, the encrypted
+value is vulnerable to crypto-analysis attacks such as the "Chosen-Plaintext Attack".</p>
+<p>An IV value should be associated to one, and only one encryption cycle, because the IV's purpose is to ensure that the same plaintext encrypted
+twice will yield two different ciphertexts.</p>
+<p>To that end, IV's should be:</p>
+<ul>
+  <li> random </li>
+  <li> unpredictable </li>
+  <li> publishable (IVs are frequently published) </li>
+  <li> authenticated, along with the ciphertext, with a Message Authentication Code (MAC) </li>
+</ul>
+<p>This rule raises an issue when the IV is hard-coded.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void Encrypt(byte[] key, byte[] data, MemoryStream target)
+{
+    byte[] initializationVector = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+    using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+    {
+        ICryptoTransform encryptor = aes.CreateEncryptor(key, initializationVector);     // Noncompliant, hardcoded value is used
+        using (CryptoStream cryptoStream = new CryptoStream(target, encryptor, CryptoStreamMode.Write))
+        {
+            cryptoStream.Write(data);
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public byte[] Encrypt(byte[] key, byte[] data, MemoryStream target)
+{
+    using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
+    {
+        aes.GenerateIV();
+        ICryptoTransform encryptor = aes.CreateEncryptor(key, aes.IV);
+        using (CryptoStream cryptoStream = new CryptoStream(target, encryptor, CryptoStreamMode.Write))
+        {
+            cryptoStream.Write(data);
+        }
+        return aes.IV;
+    }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
+  Misconfiguration </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/330">MITRE, CWE-330</a> - Use of Insufficiently Random Values </li>
+</ul>
+
