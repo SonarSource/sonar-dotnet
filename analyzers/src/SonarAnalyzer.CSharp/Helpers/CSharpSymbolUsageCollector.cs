@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,6 +34,9 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     internal class CSharpSymbolUsageCollector : CSharpSyntaxWalker
     {
+        [Flags]
+        private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write }
+
         private static readonly ISet<SyntaxKind> IncrementKinds = new HashSet<SyntaxKind>
         {
             SyntaxKind.PostIncrementExpression,
@@ -46,32 +49,23 @@ namespace SonarAnalyzer.Helpers
         private readonly HashSet<string> knownSymbolNames;
 
         public ISet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
-
-        [Flags]
-        private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write }
-
-        public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } =
-            new Dictionary<ISymbol, SymbolUsage>();
-
-        public HashSet<string> DebuggerDisplayValues { get; } =
-            new HashSet<string>();
-
-        public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } =
-            new Dictionary<IPropertySymbol, AccessorAccess>();
+        public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } = new Dictionary<ISymbol, SymbolUsage>();
+        public HashSet<string> DebuggerDisplayValues { get; } = new HashSet<string>();
+        public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } = new Dictionary<IPropertySymbol, AccessorAccess>();
 
         public CSharpSymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
         {
             this.compilation = compilation;
-            knownSymbolNames = knownSymbols.SelectMany(GetNames).ToHashSet();
+            knownSymbolNames = knownSymbols.Select(GetName).ToHashSet();
         }
 
         public override void VisitAttribute(AttributeSyntax node)
         {
             var semanticModel = GetSemanticModel(node);
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-            if (symbol != null &&
-                symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute) &&
-                node.ArgumentList != null)
+            if (symbol != null
+                && symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
+                && node.ArgumentList != null)
             {
                 var arguments = node.ArgumentList.Arguments
                     .Where(IsValueNameOrType)
@@ -86,10 +80,10 @@ namespace SonarAnalyzer.Helpers
             base.VisitAttribute(node);
 
             static bool IsValueNameOrType(AttributeArgumentSyntax a) =>
-                a.NameColon == null || // Value
-                a.NameColon.Name.Identifier.ValueText == "Value" ||
-                a.NameColon.Name.Identifier.ValueText == "Name" ||
-                a.NameColon.Name.Identifier.ValueText == "Type";
+                a.NameColon == null  // Value
+                || a.NameColon.Name.Identifier.ValueText == "Value"
+                || a.NameColon.Name.Identifier.ValueText == "Name"
+                || a.NameColon.Name.Identifier.ValueText == "Type";
         }
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)
@@ -127,8 +121,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
         {
-            if (node.Expression.IsKind(SyntaxKind.ThisExpression)
-                || knownSymbolNames.Contains(node.Expression.GetIdentifier()?.Identifier.ValueText))
+            if (node.Expression.IsKind(SyntaxKind.ThisExpression) || knownSymbolNames.Contains(node.Expression.GetIdentifier()?.Identifier.ValueText))
             {
                 var symbols = GetSymbols(node);
                 UsedSymbols.UnionWith(symbols);
@@ -182,8 +175,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
         {
-            if (node.Initializer != null &&
-                IsKnownIdentifier(node.Identifier))
+            if (node.Initializer != null && IsKnownIdentifier(node.Identifier))
             {
                 var symbol = GetDeclaredSymbol(node);
                 UsedSymbols.Add(symbol);
@@ -192,56 +184,44 @@ namespace SonarAnalyzer.Helpers
             base.VisitPropertyDeclaration(node);
         }
 
-        private SymbolAccess ParentAccessType(SyntaxNode node)
-        {
-            switch (node.Parent)
+        private SymbolAccess ParentAccessType(SyntaxNode node) =>
+            node.Parent switch
             {
-                case ParenthesizedExpressionSyntax parenthesizedExpression:
-                    // (node)
-                    return ParentAccessType(parenthesizedExpression);
-                case ExpressionStatementSyntax _:
-                    // node;
-                    return SymbolAccess.None;
-                case InvocationExpressionSyntax invocation:
-                    // node(_) : <unexpected>
-                    return node == invocation.Expression ? SymbolAccess.Read : SymbolAccess.None;
-                case MemberAccessExpressionSyntax memberAccess:
-                    // _.node : node._
-                    return node == memberAccess.Name ? ParentAccessType(memberAccess) : SymbolAccess.Read;
-                case MemberBindingExpressionSyntax memberBinding:
-                    // _?.node : node?._
-                    return node == memberBinding.Name ? ParentAccessType(memberBinding) : SymbolAccess.Read;
-                case AssignmentExpressionSyntax assignmentExpression:
-                    // Ignoring distinction assignmentExpression.IsKind(SyntaxKind.SimpleAssignmentExpression) between
-                    // "node = _" and "node += _" both are considered as Write and rely on the parent to know if its read.
-                    //  node = _ : _ = node
-                    return node == assignmentExpression.Left ? SymbolAccess.Write | ParentAccessType(assignmentExpression) : SymbolAccess.Read;
-                case ArgumentSyntax argument:
-                    if (argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword))
-                    {
-                        //  out Type node : out node
-                        return SymbolAccess.Write;
-                    }
-                    else if (argument.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
-                    {
-                        //  ref node
-                        return SymbolAccess.ReadWrite;
-                    }
-                    else
-                    {
-                        return SymbolAccess.Read;
-                    }
-                case ExpressionSyntax expressionSyntax when expressionSyntax.IsAnyKind(IncrementKinds):
-                    // node++
-                    return SymbolAccess.Write | ParentAccessType(expressionSyntax);
-                case ArrowExpressionClauseSyntax arrowExpressionClause when arrowExpressionClause.Parent is MethodDeclarationSyntax arrowMethod:
-                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, GetSemanticModel(arrowMethod))
-                        ? SymbolAccess.None
-                        : SymbolAccess.Read;
-                default:
-                    return SymbolAccess.Read;
-            }
-        }
+                // (node)
+                ParenthesizedExpressionSyntax parenthesizedExpression => ParentAccessType(parenthesizedExpression),
+                // node;
+                ExpressionStatementSyntax _ => SymbolAccess.None,
+                // node(_) : <unexpected>
+                InvocationExpressionSyntax invocation => node == invocation.Expression ? SymbolAccess.Read : SymbolAccess.None,
+                // _.node : node._
+                MemberAccessExpressionSyntax memberAccess => node == memberAccess.Name ? ParentAccessType(memberAccess) : SymbolAccess.Read,
+                // _?.node : node?._
+                MemberBindingExpressionSyntax memberBinding => node == memberBinding.Name ? ParentAccessType(memberBinding) : SymbolAccess.Read,
+                // Ignoring distinction assignmentExpression.IsKind(SyntaxKind.SimpleAssignmentExpression) between
+                // "node = _" and "node += _" both are considered as Write and rely on the parent to know if its read.
+                //  node = _ : _ = node
+                AssignmentExpressionSyntax assignmentExpression => node == assignmentExpression.Left ? SymbolAccess.Write | ParentAccessType(assignmentExpression) : SymbolAccess.Read,
+                // Invocation(node), Invocation(out node), Invocation(ref node)
+                ArgumentSyntax argument => ArgumentAccessType(argument),
+                // node++
+                ExpressionSyntax expressionSyntax when expressionSyntax.IsAnyKind(IncrementKinds) => SymbolAccess.Write | ParentAccessType(expressionSyntax),
+                // => node
+                ArrowExpressionClauseSyntax arrowExpressionClause when arrowExpressionClause.Parent is MethodDeclarationSyntax arrowMethod =>
+                        arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, GetSemanticModel(arrowMethod))
+                            ? SymbolAccess.None
+                            : SymbolAccess.Read,
+                _ => SymbolAccess.Read
+            };
+
+        private static SymbolAccess ArgumentAccessType(ArgumentSyntax argument) =>
+            argument.RefOrOutKeyword.Kind() switch
+            {
+                //  out Type node : out node
+                SyntaxKind.OutKeyword => SymbolAccess.Write,
+                //  ref node
+                SyntaxKind.RefKeyword => SymbolAccess.ReadWrite,
+                _ => SymbolAccess.Read
+            };
 
         /// <summary>
         /// Given a node, it tries to get the symbol or the candidate symbols (if the compiler cannot find the symbol,
@@ -259,15 +239,10 @@ namespace SonarAnalyzer.Helpers
                 .WhereNotNull()
                 .ToImmutableArray();
 
-            static ISymbol GetOriginalDefinition(ISymbol candidateSymbol)
-            {
-                if (candidateSymbol is IMethodSymbol methodSymbol &&
-                    methodSymbol.MethodKind == MethodKind.ReducedExtension)
-                {
-                    return methodSymbol.ReducedFrom?.OriginalDefinition;
-                }
-                return candidateSymbol?.OriginalDefinition;
-            }
+            static ISymbol GetOriginalDefinition(ISymbol candidateSymbol) =>
+                candidateSymbol is IMethodSymbol methodSymbol && methodSymbol.MethodKind == MethodKind.ReducedExtension
+                    ? (methodSymbol.ReducedFrom?.OriginalDefinition)
+                    : (candidateSymbol?.OriginalDefinition);
         }
 
         private void TryStorePropertyAccess(ExpressionSyntax node, IEnumerable<ISymbol> identifierSymbols)
@@ -298,16 +273,13 @@ namespace SonarAnalyzer.Helpers
         private AccessorAccess EvaluatePropertyAccesses(ExpressionSyntax node)
         {
             var topmostSyntax = GetTopmostSyntaxWithTheSameSymbol(node);
-
             if (topmostSyntax.Parent is AssignmentExpressionSyntax assignmentExpression)
             {
                 if (assignmentExpression.IsKind(SyntaxKind.SimpleAssignmentExpression))
                 {
                     // Prop = value --> set
                     // value = Prop --> get
-                    return assignmentExpression.Left == topmostSyntax
-                        ? AccessorAccess.Set
-                        : AccessorAccess.Get;
+                    return assignmentExpression.Left == topmostSyntax ? AccessorAccess.Set : AccessorAccess.Get;
                 }
                 else
                 {
@@ -315,17 +287,20 @@ namespace SonarAnalyzer.Helpers
                     return AccessorAccess.Both;
                 }
             }
-
-            // nameof(Prop) --> get/set
-            if (node.IsInNameOfArgument(GetSemanticModel(node)))
+            else if (topmostSyntax.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget())
             {
+                return AccessorAccess.Set;
+            }
+            else if (node.IsInNameOfArgument(GetSemanticModel(node)))
+            {
+                // nameof(Prop) --> get/set
                 return AccessorAccess.Both;
             }
-
-            // Prop++ --> get/set
-            return topmostSyntax.Parent.IsAnyKind(IncrementKinds)
-                ? AccessorAccess.Both
-                : AccessorAccess.Get;
+            else
+            {
+                // Prop++ --> get/set
+                return topmostSyntax.Parent.IsAnyKind(IncrementKinds) ? AccessorAccess.Both : AccessorAccess.Get;
+            }
         }
 
         private bool IsKnownIdentifier(SyntaxToken identifier) =>
@@ -357,65 +332,40 @@ namespace SonarAnalyzer.Helpers
         private SymbolUsage GetFieldSymbolUsage(ISymbol symbol) =>
             FieldSymbolUsages.GetOrAdd(symbol, s => new SymbolUsage(s));
 
-        private SemanticModel GetSemanticModel(SyntaxNode node) => compilation.GetSemanticModel(node.SyntaxTree);
+        private SemanticModel GetSemanticModel(SyntaxNode node) =>
+            compilation.GetSemanticModel(node.SyntaxTree);
 
-        private static SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
-        {
+        private static SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier) =>
             // All of the cases below could be parts of invocation or other expressions
-            switch (identifier.Parent)
+            identifier.Parent switch
             {
-                case MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier:
-                    // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
-                    return memberAccess.GetSelfOrTopParenthesizedExpression();
-                case MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier:
-                    // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
-                    return memberBinding.Parent.GetSelfOrTopParenthesizedExpression();
-                default:
-                    // identifier or ((identifier))
-                    return identifier.GetSelfOrTopParenthesizedExpression();
-            }
-        }
+                // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
+                MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier => memberAccess.GetSelfOrTopParenthesizedExpression(),
+                // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
+                MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier => memberBinding.Parent.GetSelfOrTopParenthesizedExpression(),
+                // identifier or ((identifier))
+                _ => identifier.GetSelfOrTopParenthesizedExpression()
+            };
 
-        private static IMethodSymbol GetImplicitlyCalledConstructor(IMethodSymbol constructor)
-        {
+        private static IMethodSymbol GetImplicitlyCalledConstructor(IMethodSymbol constructor) =>
             // In case there is no other explicitly called constructor in a constructor declaration
             // the compiler will automatically put a call to the current class' default constructor,
             // or if the declaration is the default constructor or there is no default constructor,
             // the compiler will put a call the base class' default constructor.
-            if (IsDefaultConstructor(constructor))
-            {
-                // Call default ctor of base type
-                return GetDefaultConstructor(constructor.ContainingType.BaseType);
-            }
-            else
-            {
-                // Call default ctor of current type, or if undefined - default ctor of base type
-                return GetDefaultConstructor(constructor.ContainingType)
-                       ?? GetDefaultConstructor(constructor.ContainingType.BaseType);
-            }
-        }
+            IsDefaultConstructor(constructor)
+                ? GetDefaultConstructor(constructor.ContainingType.BaseType)
+                : GetDefaultConstructor(constructor.ContainingType) ?? GetDefaultConstructor(constructor.ContainingType.BaseType);
 
-        private static IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType)
-        {
+        private static IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType) =>
             // See https://github.com/SonarSource/sonar-dotnet/issues/3155
-            if (namedType != null && namedType.InstanceConstructors != null)
-            {
-                return namedType.InstanceConstructors.FirstOrDefault(IsDefaultConstructor);
-            }
-            return null;
-        }
+            namedType != null && namedType.InstanceConstructors != null
+                ? namedType.InstanceConstructors.FirstOrDefault(IsDefaultConstructor)
+                : null;
 
         private static bool IsDefaultConstructor(IMethodSymbol constructor) =>
             constructor.Parameters.Length == 0;
 
-        private static IEnumerable<string> GetNames(ISymbol symbol)
-        {
-            if (symbol.IsConstructor())
-            {
-                yield return symbol.ContainingType.Name;
-            }
-
-            yield return symbol.Name;
-        }
+        private static string GetName(ISymbol symbol) =>
+            symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
     }
 }

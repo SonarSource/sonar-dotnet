@@ -21,11 +21,12 @@
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using CSharp = Microsoft.CodeAnalysis.CSharp.Syntax;
-using VisualBasic = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.VisualBasic;
+
+using CSharp = Microsoft.CodeAnalysis.CSharp.Syntax;
+using VisualBasic = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -88,6 +89,49 @@ End Class";
             toString.NameIs("test").Should().BeFalse();
             toString.NameIs("").Should().BeFalse();
             toString.NameIs(null).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsAssignmentToTuple_IsTrue()
+        {
+            const string code = @"
+public class Sample
+{
+    public void Method()
+    {
+        int a, b;
+        (a, b) = (42, 42);
+    }
+}";
+            var argument = Parse_CS(code).OfType<CSharp.ArgumentSyntax>().First();
+            argument.IsInTupleAssignmentTarget().Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void IsAssignmentToTuple_IsFalse()
+        {
+            const string code = @"
+public class Sample
+{
+    public void TupleArg((int, int) tuple) { }
+
+    public void Method(int methodArgument)
+    {
+        int a = 42;
+        var t = (a, methodArgument);
+        var x = (42, 42);
+        var nested = (42, (42, 42));
+        TupleArg((42, 42));
+        Method(0);
+    }
+}";
+            var arguments = Parse_CS(code).OfType<CSharp.ArgumentSyntax>().ToArray();
+
+            arguments.Should().HaveCount(12);
+            foreach (var argument in arguments)
+            {
+                argument.IsInTupleAssignmentTarget().Should().BeFalse();
+            }
         }
 
         private static SyntaxNode[] Parse_CS(string source) =>
