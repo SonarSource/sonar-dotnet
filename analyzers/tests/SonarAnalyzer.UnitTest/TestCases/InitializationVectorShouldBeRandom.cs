@@ -180,6 +180,29 @@ namespace Tests.Diagnostics
             var fromRng = aes.CreateEncryptor(aes.Key, constantIV);
         }
 
+        public void CustomImplementationOfAes()
+        {
+            using var aes = new CustomAes();
+            using var rng = new RNGCryptoServiceProvider();
+
+            var noParamsNoKeyAndNoIV = aes.CreateEncryptor(); // Noncompliant
+
+            aes.GenerateKey();
+            var noParamsNoIV = aes.CreateEncryptor(); // Noncompliant
+
+            var constantIV = new byte[16];
+            var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
+
+            aes.GenerateIV();
+            var noParams = aes.CreateEncryptor();
+            var withGeneratedKeyAndIV = aes.CreateEncryptor(aes.Key, aes.IV);
+
+            aes.CreateDecryptor(aes.Key, constantIV); // Compliant, we do not check CreateDecryptor
+
+            rng.GetBytes(constantIV);
+            var fromRng = aes.CreateEncryptor(aes.Key, constantIV);
+        }
+
         public void InConditionals(int a)
         {
             using var aesNotInitialized = new AesCng();
@@ -217,10 +240,34 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class CodeWhichDoesNotCompile
+    {
+        public void Check()
+        {
+            var initializationVectorConstant = new byte[16];
+
+            using (FakeUnresolvedType sa = SymmetricAlgorithm.Create("AES")) // Error [CS0246]
+            {
+                sa.IV = initializationVectorConstant;
+            }
+        }
+    }
+
     public class CustomAlg
     {
         public virtual byte[] IV { get; set; }
 
         public virtual byte[] Key { get; set; }
+    }
+
+    public class CustomAes : Aes
+    {
+        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV) => throw new NotImplementedException();
+
+        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV) => throw new NotImplementedException();
+
+        public override void GenerateIV() => throw new NotImplementedException();
+
+        public override void GenerateKey() => throw new NotImplementedException();
     }
 }
