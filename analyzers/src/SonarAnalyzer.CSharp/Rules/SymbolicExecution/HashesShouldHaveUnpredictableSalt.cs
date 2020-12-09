@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     {
         internal const string DiagnosticId = "S2053";
         private const string MessageFormat = "{0}";
-        private const string AddSaltMessage = "Add an unpredictable salt value to this hash.";
         private const string MakeSaltUnpredictableMessage = "Make this salt unpredictable.";
         private const string MakeThisSaltLongerMessage = "Make this salt longer.";
 
@@ -69,6 +68,20 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 Location = location;
                 Message = message;
             }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return ((Location != null ? Location.GetHashCode() : 0) * 397) ^ (Message != null ? Message.GetHashCode() : 0);
+                }
+            }
+
+            public override bool Equals(object obj) =>
+                ReferenceEquals(this, obj) || (obj is LocationContext other && Equals(other));
+
+            private bool Equals(LocationContext other) =>
+                Equals(Location, other.Location) && Message == other.Message;
         }
 
         private sealed class SaltCheck : ExplodedGraphCheck

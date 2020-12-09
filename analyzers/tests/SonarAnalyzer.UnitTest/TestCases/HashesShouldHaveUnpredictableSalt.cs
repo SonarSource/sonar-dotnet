@@ -66,5 +66,80 @@ namespace Tests.Diagnostics
             var pdb3 = new PasswordDeriveBytes(passwordBytes, shortHash); // Noncompliant
             var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortHash); // Noncompliant
         }
+
+        public void RandomNumberGeneratorIsCompliant()
+        {
+            var getBytesSalt = new byte[32];
+
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(getBytesSalt);
+            var pdb1 = new PasswordDeriveBytes(passwordBytes, getBytesSalt);
+            var pbkdf1 = new Rfc2898DeriveBytes(passwordString, getBytesSalt);
+
+            var getNonZeroBytesSalt = new byte[32];
+            rng.GetNonZeroBytes(getNonZeroBytesSalt);
+            var pdb2 = new PasswordDeriveBytes(passwordBytes, getBytesSalt);
+            var pbkdf2 = new Rfc2898DeriveBytes(passwordString, getBytesSalt);
+
+            var shortHash = new byte[31];
+            rng.GetBytes(shortHash);
+            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortHash); // Noncompliant
+            var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortHash); // Noncompliant
+        }
+
+        public void SaltAsParameter(byte[] salt)
+        {
+            var pdb = new PasswordDeriveBytes(passwordBytes, salt); // Compliant, we know nothing about salt
+            var pbkdf = new Rfc2898DeriveBytes(passwordString, salt); // Compliant, we know nothing about salt
+        }
+
+        public void ImplicitSaltIsCompliant(string password)
+        {
+            var withAutomaticSalt1 = new Rfc2898DeriveBytes(passwordString, saltSize: 32);
+            var withAutomaticSalt2 = new Rfc2898DeriveBytes(passwordString, 32, 1000);
+            var withAutomaticSalt3 = new Rfc2898DeriveBytes(passwordString, 32, 1000, HashAlgorithmName.SHA512);
+
+            var withAutomaticSalt4 = new Rfc2898DeriveBytes(passwordString, saltSize: 16);
+            var withAutomaticSalt5 = new Rfc2898DeriveBytes(passwordString, 16, 1000);
+            var withAutomaticSalt6 = new Rfc2898DeriveBytes(passwordString, 16, 1000, HashAlgorithmName.SHA512);
+        }
+
+        public void DifferentCases(int a, string password)
+        {
+            var rng = RandomNumberGenerator.Create();
+            var salt = new byte[32];
+
+            DeriveBytes e = a switch
+            {
+                1 => new Rfc2898DeriveBytes(password, salt), // Noncompliant
+                2 => new PasswordDeriveBytes(passwordBytes, salt), // Noncompliant
+                _ => null
+            };
+
+            var salt2 = new byte[32];
+            if (a == 1)
+            {
+                rng.GetBytes(salt2);
+                new PasswordDeriveBytes(passwordBytes, salt2); // Compliant
+            }
+            new PasswordDeriveBytes(passwordBytes, salt2); // Noncompliant {{Make this salt unpredictable.}}
+
+            var noncompliantSalt = new byte[32];
+            var compliantSalt = new byte[32];
+            rng.GetBytes(compliantSalt);
+
+            var salt3 = a == 2 ? compliantSalt : noncompliantSalt;
+            new PasswordDeriveBytes(passwordBytes, salt3); // Noncompliant
+
+
+            var salt4 = compliantSalt;
+            new PasswordDeriveBytes(passwordBytes, salt4);
+
+            var salt5 = noncompliantSalt;
+            new PasswordDeriveBytes(passwordBytes, salt5); // Noncompliant
+
+            noncompliantSalt = compliantSalt;
+            new PasswordDeriveBytes(passwordBytes, noncompliantSalt);
+        }
     }
 }
