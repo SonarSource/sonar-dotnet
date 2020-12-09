@@ -38,6 +38,13 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                                     ParseOptionsHelper.FromCSharp8,
                                     additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void InitializationVectorShouldBeRandom_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InitializationVectorShouldBeRandom.CSharp9.cs",
+                                                      GetAnalyzer(),
+                                                      MetadataReferenceFacade.GetSystemSecurityCryptography());
+
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             new SymbolicExecutionRunner(new InitializationVectorShouldBeRandom());
     }

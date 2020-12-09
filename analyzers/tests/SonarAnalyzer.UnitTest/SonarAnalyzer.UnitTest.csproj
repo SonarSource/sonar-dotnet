@@ -56,6 +56,9 @@
     <None Include="TestCasesForRuleFailure\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestCases\InitializationVectorShouldBeRandom.CSharp9.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

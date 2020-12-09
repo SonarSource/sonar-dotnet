@@ -89,6 +89,28 @@ namespace Tests.Diagnostics
             sa.CreateDecryptor(sa.Key, initializationVectorConstant); // Compliant, not relevant for decrypting
         }
 
+        public void UsingRandomNumberGeneratorIsCompliant()
+        {
+            var initializationVectorConstant = new byte[16];
+            var initializationVectorRng = new byte[16];
+            var initializationVectorRngNonZero = new byte[16];
+
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(initializationVectorRng);
+            rng.GetNonZeroBytes(initializationVectorRngNonZero);
+
+            using var sa = SymmetricAlgorithm.Create("AES");
+
+            sa.GenerateKey();
+            var fromRng = sa.CreateEncryptor(sa.Key, initializationVectorRng);
+            var fromRngNonZero = sa.CreateEncryptor(sa.Key, initializationVectorRngNonZero);
+
+            sa.GenerateIV();
+            var fromGenerateIV = sa.CreateEncryptor(sa.Key, sa.IV);
+
+            sa.CreateDecryptor(sa.Key, initializationVectorConstant); // Compliant, not relevant for decrypting
+        }
+
         public void AesCryptoServiceProviderCreateEncryptor()
         {
             using var aes = new AesCryptoServiceProvider();

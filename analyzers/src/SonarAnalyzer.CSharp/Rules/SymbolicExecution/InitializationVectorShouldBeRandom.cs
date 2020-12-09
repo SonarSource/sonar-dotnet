@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     var symbolicValue = GetSymbolicValue(invocation, programState);
                     programState = programState.SetConstraint(symbolicValue, CryptographyIVSymbolicValueConstraint.Initialized);
                 }
-                else if (IsRngCryptoServiceProviderSanitizer(invocation, semanticModel)
+                else if (IsSanitizer(invocation, semanticModel)
                          && semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression).Symbol is {} symbol
                          && symbol.GetSymbolType().Is(KnownType.System_Byte_Array)
                          && symbol.HasConstraint(ByteArraySymbolicValueConstraint.Constant, programState))
@@ -195,11 +195,12 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             private static bool IsGenerateIVMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
                 invocation.IsMemberAccessOnKnownType("GenerateIV", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
 
-            private static bool IsRngCryptoServiceProviderSanitizer(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            private static bool IsSanitizer(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
                 invocation.Expression is MemberAccessExpressionSyntax memberAccessExpressionSyntax
                 && (memberAccessExpressionSyntax.NameIs("GetBytes") || memberAccessExpressionSyntax.NameIs("GetNonZeroBytes"))
                 && semanticModel.GetSymbolInfo(invocation).Symbol is {} symbol
-                && symbol.ContainingType.Is(KnownType.System_Security_Cryptography_RNGCryptoServiceProvider);
+                && symbol.ContainingType.IsAny(KnownType.System_Security_Cryptography_RNGCryptoServiceProvider,
+                                               KnownType.System_Security_Cryptography_RandomNumberGenerator);
         }
     }
 }
