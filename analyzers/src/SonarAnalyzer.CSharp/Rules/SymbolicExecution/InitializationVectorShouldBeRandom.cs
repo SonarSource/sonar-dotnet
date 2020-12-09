@@ -192,9 +192,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             private static bool IsCreateEncryptorMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
                 invocation.IsMemberAccessOnKnownType("CreateEncryptor", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
 
-            private static bool IsGenerateKeyMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-                invocation.IsMemberAccessOnKnownType("GenerateKey", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
-
             private static bool IsGenerateIVMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
                 invocation.IsMemberAccessOnKnownType("GenerateIV", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
 
