@@ -48,7 +48,7 @@ namespace Tests.Diagnostics
             // Property changed implementation goes here
         }
 
-        private async void ArbreDesClefs_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args) { }    // Noncompliant FP
+        private async void ArbreDesClefs_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args) { }    // Compliant, doesn't inherit from EventArgs, but looks like it
 
 
         // Substitute for reference to Xamarin.Forms, Windows.UI.Xaml.Controls
