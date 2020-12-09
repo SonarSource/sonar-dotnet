@@ -46,5 +46,25 @@ namespace Tests.Diagnostics
             var pbkdf2c = new Rfc2898DeriveBytes(passwordBytes, constantSalt, 1000); // Noncompliant
             var pbkdf2d = new Rfc2898DeriveBytes(passwordString, constantSalt, 1000, HashAlgorithmName.SHA512); // Noncompliant
         }
+
+        public void RNGCryptoServiceProviderIsCompliant()
+        {
+            var getBytesSalt = new byte[32];
+
+            using var rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(getBytesSalt);
+            var pdb1 = new PasswordDeriveBytes(passwordBytes, getBytesSalt);
+            var pbkdf1 = new Rfc2898DeriveBytes(passwordString, getBytesSalt);
+
+            var getNonZeroBytesSalt = new byte[32];
+            rng.GetNonZeroBytes(getNonZeroBytesSalt);
+            var pdb2 = new PasswordDeriveBytes(passwordBytes, getBytesSalt);
+            var pbkdf2 = new Rfc2898DeriveBytes(passwordString, getBytesSalt);
+
+            var shortHash = new byte[31];
+            rng.GetBytes(shortHash);
+            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortHash); // Noncompliant
+            var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortHash); // Noncompliant
+        }
     }
 }
