@@ -15,16 +15,17 @@ In general, it is best to run commands from the Visual Studio Developer Command 
 1. [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
 1. Ensure to install Workloads:
     - ASP.NET and web development
-    - .NET desktop development (C#, VB and F# with .NET Core and .NET Framework)
+    - .NET desktop development
     - Visual Studio extension development
+    - .NET Core cross-platform development
 1. Ensure to install Individual components:
     - .NET Core 3.1 SDK
     - .NET Framework 4.8 SDK
     - .NET Framework 4.8 Targeting pack
     - .NET 3.5 SDK (SP1)
+    - .NET Compiler Platform SDK
 1. The following environment variables must be set:
     - **JAVA_HOME**
-    - **MAVEN_HOME** / **M2_HOME**
     - **MSBUILD_PATH** - path to the MSBuild.exe executable from the Visual Studio installation folder - to MSBuild 16
     - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests))
     - **ORCHESTRATOR_CONFIG_URL** - url to orchestrator.properties file (for integration tests) in uri form (i.e. file:///c:/something/orchestrator.properties)
