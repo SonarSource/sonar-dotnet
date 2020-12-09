@@ -79,7 +79,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (propertySymbol != null
                         && propertySymbol.IsPubliclyAccessible()
-                        && !propertySymbol.IsOverride)
+                        && !propertySymbol.IsOverride
+                        && !HasXmlElementAttribute(propertySymbol))
                     {
                         ReportIfListT(propertyDeclaration.Type, c, "property");
                     }
@@ -101,7 +102,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (fieldSymbol != null
                         && fieldSymbol.IsPubliclyAccessible()
-                        && !fieldSymbol.IsOverride)
+                        && !fieldSymbol.IsOverride
+                        && !HasXmlElementAttribute(fieldSymbol))
                     {
                         ReportIfListT(fieldDeclaration.Declaration.Type, c, "field");
                     }
@@ -119,5 +121,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsOrdinaryMethodOrConstructor(IMethodSymbol method) =>
             method.MethodKind == MethodKind.Ordinary || method.MethodKind == MethodKind.Constructor;
+
+        private static bool HasXmlElementAttribute(ISymbol symbol) =>
+            symbol.GetAttributes(KnownType.System_Xml_Serialization_XmlElementAttribute).Any();
     }
 }
