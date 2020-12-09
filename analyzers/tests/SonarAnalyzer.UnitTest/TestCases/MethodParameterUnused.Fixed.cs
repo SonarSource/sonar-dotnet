@@ -441,7 +441,10 @@ namespace Tests.TestCases
         {
             Enumerable.Empty<object>().Where(IsTrue);
 
-            bool IsTrue(object x) => condition;
+            bool IsTrue(object x)
+            {
+                return condition;
+            };
         }
 
         private void LocalFunctionCrossReferenced(bool condition)
