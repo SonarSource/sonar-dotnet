@@ -27,6 +27,8 @@ Furthermore, each of these categories should be ordered from higher to lower acc
 * Operators (&&, ||, +, :, ?, ?? and others) are placed at the beginning of a line.
 * Dots with invocation `.Method()` are placed at the beginning of a line.
 * Comma separating arguments is placed at the end of a line.
+* Expression body of arrow property should be on the same line, as the property declaration. It should be on next line only when S103 is violated.
+* Expression body of method should be on the same line only for trivial cases: literal or simple identifier. Member access, indexer, invocation and other complex structures should be on the next line.
 
 ## Code structure
 
