@@ -1,4 +1,4 @@
-extern alias vbnet;
+﻿extern alias vbnet;
 /*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA

@@ -1,4 +1,4 @@
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     using System.Configuration.Assemblies;
     using System.Reflection;

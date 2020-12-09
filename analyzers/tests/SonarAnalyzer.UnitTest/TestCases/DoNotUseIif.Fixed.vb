@@ -1,4 +1,4 @@
-Imports Microsoft.VisualBasic
+﻿Imports Microsoft.VisualBasic
 
 Namespace Tests.TestCases
     Class Foo
