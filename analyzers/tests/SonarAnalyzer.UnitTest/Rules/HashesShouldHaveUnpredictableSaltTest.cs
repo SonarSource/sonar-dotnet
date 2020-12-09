@@ -32,8 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void HashesShouldHaveUnpredictableSalt() =>
-            Verifier.VerifyAnalyzer(@"TestCases\HashesShouldHaveUnpredictableSalt.cs",
-                                    GetAnalyzer());
+            Verifier.VerifyAnalyzer(@"TestCases\HashesShouldHaveUnpredictableSalt.cs", GetAnalyzer());
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             new SymbolicExecutionRunner(new HashesShouldHaveUnpredictableSalt());
