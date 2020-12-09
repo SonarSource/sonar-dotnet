@@ -34,6 +34,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs", new DoNotExposeListT(),
                 additionalReferences: MetadataReferences.MetadataReferenceFacade.GetSystemXml());
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotExposeListT_CSharp8() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.CSharp8.cs", new DoNotExposeListT(), ParseOptionsHelper.FromCSharp8);
+
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
