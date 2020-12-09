@@ -125,10 +125,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             private ProgramState AssignmentExpressionPostProcess(AssignmentExpressionSyntax assignment, ProgramState programState) =>
                 assignment.Left is MemberAccessExpressionSyntax memberAccess
                 && IsSymmetricAlgorithmIVMemberAccess(memberAccess)
-                && semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is {} leftSymbol
-                && programState.GetSymbolValue(leftSymbol) is {} leftSymbolicValue
-                && semanticModel.GetSymbolInfo(assignment.Right).Symbol is {} rightSymbol
-                && programState.GetSymbolValue(rightSymbol) is {} rightSymbolicValue
+                && GetSymbolicValue(memberAccess.Expression, programState) is {} leftSymbolicValue
+                && GetSymbolicValue(assignment.Right, programState) is {} rightSymbolicValue
                 && programState.HasConstraint(rightSymbolicValue, ByteArraySymbolicValueConstraint.Constant)
                     ? programState.SetConstraint(leftSymbolicValue, CryptographyIVSymbolicValueConstraint.NotInitialized)
                     : programState;
@@ -170,13 +168,14 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     _ => false
                 };
 
-            private SymbolicValue GetSymbolicValue(InvocationExpressionSyntax invocation, ProgramState programState)
-            {
-                var invocationTarget = ((MemberAccessExpressionSyntax)invocation.Expression).Expression;
-                var targetSymbol = semanticModel.GetSymbolInfo(invocationTarget).Symbol;
+            private SymbolicValue GetSymbolicValue(InvocationExpressionSyntax invocation, ProgramState programState) =>
+                GetSymbolicValue(((MemberAccessExpressionSyntax)invocation.Expression).Expression, programState);
 
-                return programState.GetSymbolValue(targetSymbol);
-            }
+            private SymbolicValue GetSymbolicValue(ExpressionSyntax expression, ProgramState programState) =>
+                semanticModel.GetSymbolInfo(expression).Symbol is {} symbol
+                && programState.GetSymbolValue(symbol) is {} symbolicValue
+                    ? symbolicValue
+                    : null;
 
             private bool IsSymmetricAlgorithmIVMemberAccess(MemberAccessExpressionSyntax memberAccess) =>
                 memberAccess.IsMemberAccessOnKnownType("IV", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
