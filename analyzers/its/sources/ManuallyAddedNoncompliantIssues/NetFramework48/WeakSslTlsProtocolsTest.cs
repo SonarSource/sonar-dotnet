@@ -24,7 +24,7 @@ using System.Security.Authentication;
 
 namespace NetFramework48
 {
-    public class WeakSslTlsProtocols
+    public class WeakSslTlsProtocolsTest
     {
         public void WeakProtocols()
         {
@@ -36,7 +36,7 @@ namespace NetFramework48
             };
         }
 
-        public void StringProtocols()
+        public void StrongProtocols()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; // Compliant
 

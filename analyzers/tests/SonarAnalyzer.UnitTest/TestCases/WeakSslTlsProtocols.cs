@@ -86,7 +86,6 @@ namespace Tests.Diagnostics
 
             sslStream.BeginAuthenticateAsServer(null, true, SslProtocols.Tls, true, null, null); // Noncompliant {{Change this code to use a stronger protocol.}}
 //                                                                       ^^^
-
         }
 
         public void SecurityProtocolTypeCompliant()
