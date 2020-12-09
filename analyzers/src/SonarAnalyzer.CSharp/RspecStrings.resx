@@ -6944,7 +6944,7 @@
     <value>In encryption, when Cipher Block Chaining (CBC) is used, the Initialization Vector (IV) must be random and unpredictable. Otherwise, the encrypted value is vulnerable to crypto-analysis attacks such as the "Chosen-Plaintext Attack".</value>
   </data>
   <data name="S3329_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3329_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>

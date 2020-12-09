@@ -85,6 +85,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 {ConditionEvaluatesToConstantCodeSmell, ReportDiagnostic.Suppress},
                 {InvalidCastToInterface, ReportDiagnostic.Suppress},
                 {NullPointerDereference, ReportDiagnostic.Suppress},
+                {InitializationVectorShouldBeRandom, ReportDiagnostic.Suppress},
                 {RestrictDeserializedTypes, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
@@ -110,6 +111,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                 {ConditionEvaluatesToConstantCodeSmell, ReportDiagnostic.Suppress},
                 {InvalidCastToInterface, ReportDiagnostic.Suppress},
                 {NullPointerDereference, ReportDiagnostic.Suppress},
+                {InitializationVectorShouldBeRandom, ReportDiagnostic.Suppress},
                 {RestrictDeserializedTypes, ReportDiagnostic.Suppress}
             }.ToImmutableDictionary();
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
