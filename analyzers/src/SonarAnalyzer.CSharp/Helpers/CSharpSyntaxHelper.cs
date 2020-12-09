@@ -417,7 +417,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         // (arg, b) = something
-        public static bool IsAssignmentToTuple(this ArgumentSyntax argument) =>
+        public static bool IsInTupleAssignmentTarget(this ArgumentSyntax argument) =>
             argument.Parent is { } tupleExpression
             && TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
             && tupleExpression.Parent is AssignmentExpressionSyntax assignment

@@ -308,6 +308,13 @@ namespace Tests.Diagnostics
             (flag, tmp) = (false, 5);
         }
 
+        public void ReadInTuple()
+        {
+            int tmp = 5;            // Noncompliant
+            bool flag = false;      // Noncompliant
+            var x = (flag, tmp);
+        }
+
         public struct StructWithImplicitOperator
         {
             public static implicit operator StructWithImplicitOperator(int value) { return new StructWithImplicitOperator(); }

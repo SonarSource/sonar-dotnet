@@ -104,7 +104,7 @@ public class Sample
     }
 }";
             var argument = Parse_CS(code).OfType<CSharp.ArgumentSyntax>().First();
-            argument.IsAssignmentToTuple().Should().BeTrue();
+            argument.IsInTupleAssignmentTarget().Should().BeTrue();
         }
 
         [TestMethod]
@@ -117,6 +117,8 @@ public class Sample
 
     public void Method(int methodArgument)
     {
+        int a = 42;
+        var t = (a, methodArgument);
         var x = (42, 42);
         var nested = (42, (42, 42));
         TupleArg((42, 42));
@@ -125,10 +127,10 @@ public class Sample
 }";
             var arguments = Parse_CS(code).OfType<CSharp.ArgumentSyntax>().ToArray();
 
-            arguments.Should().HaveCount(10);
+            arguments.Should().HaveCount(12);
             foreach (var argument in arguments)
             {
-                argument.IsAssignmentToTuple().Should().BeFalse();
+                argument.IsInTupleAssignmentTarget().Should().BeFalse();
             }
         }
 

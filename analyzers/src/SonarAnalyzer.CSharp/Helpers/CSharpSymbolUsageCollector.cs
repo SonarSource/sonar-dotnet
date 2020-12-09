@@ -287,7 +287,7 @@ namespace SonarAnalyzer.Helpers
                     return AccessorAccess.Both;
                 }
             }
-            else if (topmostSyntax.Parent is ArgumentSyntax argument && argument.IsAssignmentToTuple())
+            else if (topmostSyntax.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget())
             {
                 return AccessorAccess.Set;
             }
