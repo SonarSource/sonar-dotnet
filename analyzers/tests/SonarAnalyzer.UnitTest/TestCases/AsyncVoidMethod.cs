@@ -7,8 +7,9 @@ namespace Tests.Diagnostics
 
     public class EventHandlerCases
     {
-        async void MyMethod() {  // Noncompliant {{Return 'Task' instead.}}
+        async void MyMethod()   // Noncompliant {{Return 'Task' instead.}}
 //            ^^^^
+        {
             await Task.Run(() => Console.WriteLine("test"));
         }
 
@@ -33,6 +34,27 @@ namespace Tests.Diagnostics
         {
             await Task.Run(() => Console.WriteLine("test"));
         }
+
+        static async void OnValueChanged()  // Noncompliant FP, has OnXxx name
+        {
+        }
+
+        static async void Onboard()         // Noncompliant
+        {
+        }
+
+        static async void OnEventNameChanged(BindableObject bindable, object oldValue, object newValue) // Noncompliant FP Xamarin style, has OnXxx name
+        {
+            // Property changed implementation goes here
+        }
+
+        private async void ArbreDesClefs_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args) { }    // Noncompliant FP
+
+
+        // Substitute for reference to Xamarin.Forms, Windows.UI.Xaml.Controls
+        public class BindableObject { }
+        public class TreeView { }
+        public class TreeViewItemInvokedEventArgs { }   // Type doesn't inherit from event args
     }
 
     public class UwpCases
