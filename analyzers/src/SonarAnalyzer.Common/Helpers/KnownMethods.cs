@@ -31,194 +31,162 @@ namespace SonarAnalyzer.Helpers
         {
             // Based on Microsoft definition: https://msdn.microsoft.com/en-us/library/1y814bzs.aspx
             // Adding support for new async main: https://blogs.msdn.microsoft.com/mazhou/2017/05/30/c-7-series-part-2-async-main
-            return methodSymbol != null &&
-                methodSymbol.IsStatic &&
-                // vb.net is case insensitive
-                methodSymbol.Name.Equals("Main", StringComparison.OrdinalIgnoreCase) &&
-                (
-                    methodSymbol.Parameters.Length == 0 ||
-                    (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].IsType(KnownType.System_String_Array)) ||
-                    (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].IsType(KnownType.System_String_Array_VB))
-                ) &&
-                (
-                    methodSymbol.ReturnsVoid ||
-                    methodSymbol.ReturnType.Is(KnownType.System_Int32) ||
-                    methodSymbol.ReturnType.Is(KnownType.System_Threading_Tasks_Task) ||
-                    (methodSymbol.ReturnType.OriginalDefinition.Is(KnownType.System_Threading_Tasks_Task_T) &&
-                    ((methodSymbol.ReturnType as INamedTypeSymbol)?.TypeArguments.FirstOrDefault().Is(KnownType.System_Int32) ?? false))
-                );
+            return methodSymbol != null
+                && methodSymbol.IsStatic
+                && methodSymbol.Name.Equals("Main", StringComparison.OrdinalIgnoreCase) // VB.NET is case insensitive
+                && HasMainParameters()
+                && HasMainReturnType();
+
+            bool HasMainParameters() =>
+                methodSymbol.Parameters.Length == 0
+                || (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].Type.IsAny(KnownType.System_String_Array, KnownType.System_String_Array_VB));
+
+            bool HasMainReturnType() =>
+                methodSymbol.ReturnsVoid
+                || methodSymbol.ReturnType.IsAny(KnownType.System_Int32, KnownType.System_Threading_Tasks_Task)
+                || (
+                    methodSymbol.ReturnType.OriginalDefinition.Is(KnownType.System_Threading_Tasks_Task_T)
+                    && ((methodSymbol.ReturnType as INamedTypeSymbol)?.TypeArguments.FirstOrDefault().Is(KnownType.System_Int32) ?? false));
         }
 
-        public static bool IsObjectEquals(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object)) &&
-                methodSymbol.MethodKind == MethodKind.Ordinary &&
-                methodSymbol.Name == nameof(object.Equals) &&
-                methodSymbol.Parameters.Length == 1 &&
-                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
-                methodSymbol.ReturnType.Is(KnownType.System_Boolean);
-        }
+        public static bool IsObjectEquals(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+                && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
+                && methodSymbol.MethodKind == MethodKind.Ordinary
+                && methodSymbol.Name == nameof(object.Equals)
+                && methodSymbol.Parameters.Length == 1
+                && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
+                && methodSymbol.ReturnType.Is(KnownType.System_Boolean);
 
         public static bool IsStaticObjectEquals(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol != null &&
-                !methodSymbol.IsOverride &&
-                methodSymbol.IsStatic &&
-                methodSymbol.MethodKind == MethodKind.Ordinary &&
-                methodSymbol.Name == nameof(object.Equals) &&
-                methodSymbol.IsInType(KnownType.System_Object) &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
-                methodSymbol.Parameters[1].Type.Is(KnownType.System_Object) &&
-                methodSymbol.ReturnType.Is(KnownType.System_Boolean);
+            return methodSymbol != null
+                && !methodSymbol.IsOverride
+                && methodSymbol.IsStatic
+                && methodSymbol.MethodKind == MethodKind.Ordinary
+                && methodSymbol.Name == nameof(object.Equals)
+                && methodSymbol.IsInType(KnownType.System_Object)
+                && HasCorrectArguments()
+                && methodSymbol.ReturnType.Is(KnownType.System_Boolean);
+
+            bool HasCorrectArguments() =>
+                methodSymbol.Parameters.Length == 2
+                && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
+                && methodSymbol.Parameters[1].Type.Is(KnownType.System_Object);
         }
 
-        public static bool IsObjectGetHashCode(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object)) &&
-                methodSymbol.MethodKind == MethodKind.Ordinary &&
-                methodSymbol.Name == nameof(object.GetHashCode) &&
-                methodSymbol.Parameters.Length == 0 &&
-                methodSymbol.ReturnType.Is(KnownType.System_Int32);
-        }
+        public static bool IsObjectGetHashCode(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
+            && methodSymbol.MethodKind == MethodKind.Ordinary
+            && methodSymbol.Name == nameof(object.GetHashCode)
+            && methodSymbol.Parameters.Length == 0
+            && methodSymbol.ReturnType.Is(KnownType.System_Int32);
 
-        public static bool IsObjectToString(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object)) &&
-                methodSymbol.MethodKind == MethodKind.Ordinary &&
-                methodSymbol.Name == nameof(object.ToString) &&
-                methodSymbol.Parameters.Length == 0 &&
-                methodSymbol.ReturnType.Is(KnownType.System_String);
-        }
+        public static bool IsObjectToString(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
+            && methodSymbol.MethodKind == MethodKind.Ordinary
+            && methodSymbol.Name == nameof(object.ToString)
+            && methodSymbol.Parameters.Length == 0
+            && methodSymbol.ReturnType.Is(KnownType.System_String);
 
         public static bool IsIDisposableDispose(this IMethodSymbol methodSymbol)
         {
             const string explicitName = "System.IDisposable.Dispose";
-            return methodSymbol != null &&
-                methodSymbol.ReturnsVoid &&
-                methodSymbol.Parameters.Length == 0 &&
-                (methodSymbol.Name == nameof(IDisposable.Dispose) ||
-                 methodSymbol.Name == explicitName);
+            return methodSymbol != null
+                && methodSymbol.ReturnsVoid
+                && methodSymbol.Parameters.Length == 0
+                && (methodSymbol.Name == nameof(IDisposable.Dispose) || methodSymbol.Name == explicitName);
         }
 
         public static bool IsIEquatableEquals(this IMethodSymbol methodSymbol)
         {
             const string explicitName = "System.IEquatable.Equals";
-            return methodSymbol != null &&
-                methodSymbol.Parameters.Length == 1 &&
-                methodSymbol.ReturnType.Is(KnownType.System_Boolean) &&
-                (methodSymbol.Name == nameof(object.Equals) ||
-                methodSymbol.Name == explicitName);
+            return methodSymbol != null
+                && methodSymbol.Parameters.Length == 1
+                && methodSymbol.ReturnType.Is(KnownType.System_Boolean)
+                && (methodSymbol.Name == nameof(object.Equals) || methodSymbol.Name == explicitName);
         }
 
         public static bool IsGetObjectData(this IMethodSymbol methodSymbol)
         {
             const string explicitName = "System.Runtime.Serialization.ISerializable.GetObjectData";
-            return methodSymbol != null &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo) &&
-                methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext) &&
-                methodSymbol.ReturnsVoid &&
-                (methodSymbol.Name == "GetObjectData" ||
-                methodSymbol.Name == explicitName);
+            return methodSymbol != null
+                && methodSymbol.Parameters.Length == 2
+                && methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo)
+                && methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext)
+                && methodSymbol.ReturnsVoid
+                && (methodSymbol.Name == "GetObjectData" || methodSymbol.Name == explicitName);
         }
 
-        public static bool IsSerializationConstructor(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.MethodKind == MethodKind.Constructor &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo) &&
-                methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext);
-        }
+        public static bool IsSerializationConstructor(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.MethodKind == MethodKind.Constructor
+            && methodSymbol.Parameters.Length == 2
+            && methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo)
+            && methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext);
 
-        public static bool IsArrayClone(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.MethodKind == MethodKind.Ordinary &&
-                methodSymbol.Parameters.Length == 0 &&
-                methodSymbol.Name == nameof(Array.Clone) &&
-                methodSymbol.ContainingType.Is(KnownType.System_Array);
-        }
+        public static bool IsArrayClone(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.MethodKind == MethodKind.Ordinary
+            && methodSymbol.Parameters.Length == 0
+            && methodSymbol.Name == nameof(Array.Clone)
+            && methodSymbol.ContainingType.Is(KnownType.System_Array);
 
-        public static bool IsGcSuppressFinalize(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.Parameters.Length == 1 &&
-                methodSymbol.Name == nameof(GC.SuppressFinalize) &&
-                methodSymbol.ContainingType.Is(KnownType.System_GC);
-        }
+        public static bool IsGcSuppressFinalize(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.Parameters.Length == 1
+            && methodSymbol.Name == nameof(GC.SuppressFinalize)
+            && methodSymbol.ContainingType.Is(KnownType.System_GC);
 
-        public static bool IsDebugAssert(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.Name == nameof(Debug.Assert) &&
-                methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
-        }
+        public static bool IsDebugAssert(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.Name == nameof(Debug.Assert)
+            && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
 
-        public static bool IsDiagnosticDebugMethod(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
-        }
+        public static bool IsDiagnosticDebugMethod(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
 
-        public static bool IsOperatorBinaryPlus(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.MethodKind == MethodKind.UserDefinedOperator &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Name == "op_Addition";
-        }
+        public static bool IsOperatorBinaryPlus(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
+            && methodSymbol.Parameters.Length == 2
+            && methodSymbol.Name == "op_Addition";
 
-        public static bool IsOperatorBinaryMinus(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.MethodKind == MethodKind.UserDefinedOperator &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Name == "op_Subtraction";
-        }
+        public static bool IsOperatorBinaryMinus(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
+            && methodSymbol.Parameters.Length == 2
+            && methodSymbol.Name == "op_Subtraction";
 
-        public static bool IsOperatorEquals(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.MethodKind == MethodKind.UserDefinedOperator &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Name == "op_Equality";
-        }
+        public static bool IsOperatorEquals(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
+            && methodSymbol.Parameters.Length == 2
+            && methodSymbol.Name == "op_Equality";
 
-        public static bool IsOperatorNotEquals(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.MethodKind == MethodKind.UserDefinedOperator &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Name == "op_Inequality";
-        }
+        public static bool IsOperatorNotEquals(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
+            && methodSymbol.Parameters.Length == 2
+            && methodSymbol.Name == "op_Inequality";
 
-        public static bool IsConsoleWriteLine(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.IsInType(KnownType.System_Console) &&
-                methodSymbol.Name == nameof(Console.WriteLine);
-        }
+        public static bool IsConsoleWriteLine(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.IsInType(KnownType.System_Console)
+            && methodSymbol.Name == nameof(Console.WriteLine);
 
-        public static bool IsConsoleWrite(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.IsInType(KnownType.System_Console) &&
-                methodSymbol.Name == nameof(Console.Write);
-        }
+        public static bool IsConsoleWrite(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.IsInType(KnownType.System_Console)
+            && methodSymbol.Name == nameof(Console.Write);
 
-        private static bool IsEnumerableMethod(this IMethodSymbol methodSymbol, string methodName,
-            params int[] parametersCount)
-        {
-            return methodSymbol != null &&
-                methodSymbol.Name == methodName &&
-                parametersCount.Any(count => methodSymbol.HasExactlyNParameters(count)) &&
-                methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
-        }
+        private static bool IsEnumerableMethod(this IMethodSymbol methodSymbol, string methodName, params int[] parametersCount) =>
+            methodSymbol != null
+            && methodSymbol.Name == methodName
+            && parametersCount.Any(count => methodSymbol.HasExactlyNParameters(count))
+            && methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
 
         public static bool IsEnumerableConcat(this IMethodSymbol methodSymbol) =>
             methodSymbol.IsEnumerableMethod(nameof(Enumerable.Concat), 2);
@@ -244,14 +212,12 @@ namespace SonarAnalyzer.Helpers
         public static bool IsEnumerableUnion(this IMethodSymbol methodSymbol) =>
             methodSymbol.IsEnumerableMethod(nameof(Enumerable.Union), 2, 3);
 
-        public static bool IsListAddRange(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.Name == "AddRange" &&
-                methodSymbol.MethodKind == MethodKind.Ordinary &&
-                methodSymbol.Parameters.Length == 1 &&
-                methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T);
-        }
+        public static bool IsListAddRange(this IMethodSymbol methodSymbol) =>
+            methodSymbol != null
+            && methodSymbol.Name == "AddRange"
+            && methodSymbol.MethodKind == MethodKind.Ordinary
+            && methodSymbol.Parameters.Length == 1
+            && methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T);
 
         public static bool IsEventHandler(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
@@ -264,19 +230,8 @@ namespace SonarAnalyzer.Helpers
                     methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs)
                 );
 
-        private static bool HasExactlyNParameters(this IMethodSymbol methodSymbol, int parametersCount)
-        {
-            if (methodSymbol.MethodKind == MethodKind.Ordinary)
-            {
-                return methodSymbol.Parameters.Length == parametersCount;
-            }
-
-            if (methodSymbol.MethodKind == MethodKind.ReducedExtension)
-            {
-                return methodSymbol.Parameters.Length == (parametersCount - 1);
-            }
-
-            return false;
-        }
+        private static bool HasExactlyNParameters(this IMethodSymbol methodSymbol, int parametersCount) =>
+            (methodSymbol.MethodKind == MethodKind.Ordinary && methodSymbol.Parameters.Length == parametersCount)
+            || (methodSymbol.MethodKind == MethodKind.ReducedExtension && methodSymbol.Parameters.Length == parametersCount - 1);
     }
 }
