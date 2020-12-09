@@ -422,6 +422,5 @@ namespace SonarAnalyzer.Helpers
             && TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
             && tupleExpression.Parent is AssignmentExpressionSyntax assignment
             && assignment.Left == tupleExpression;
-
     }
 }
