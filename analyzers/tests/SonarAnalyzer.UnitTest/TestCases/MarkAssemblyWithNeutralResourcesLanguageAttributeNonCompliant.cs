@@ -1,3 +1,3 @@
-using System.Reflection;
+﻿using System.Reflection;
 
 [assembly: AssemblyCompany("SonarSource")]

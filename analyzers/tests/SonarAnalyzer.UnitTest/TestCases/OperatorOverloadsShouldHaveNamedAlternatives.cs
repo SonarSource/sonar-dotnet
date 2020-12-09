@@ -1,4 +1,4 @@
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     public class FooNotCompliant
     {
