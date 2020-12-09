@@ -36,6 +36,7 @@ using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.UnitTest.ControlFlowGraph;
 using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution

@@ -1,4 +1,4 @@
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,7 @@ using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.LiveVariableAnalysis;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.UnitTest.ControlFlowGraph;
 
 namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
 {

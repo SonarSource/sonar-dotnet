@@ -38,8 +38,6 @@ namespace SonarAnalyzer.CBDE
 {
     public class MlirExporter
     {
-        private const LanguageVersion supportedVersion = LanguageVersionEx.CSharp8;
-
         internal static readonly ImmutableList<SyntaxKind> unsupportedSyntaxes = new List<SyntaxKind>
         {
             SyntaxKind.AnonymousMethodExpression,
@@ -140,34 +138,25 @@ namespace SonarAnalyzer.CBDE
                 return;
             }
 
-            IControlFlowGraph cfg;
-            try
+            if (!CSharpControlFlowGraph.TryGet(method.Body, semanticModel, out var cfg))
             {
-                cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
-            }
-            catch (Exception ex) when (semanticModel.Compilation.GetLanguageVersion() > supportedVersion && !Debugger.IsAttached)
-            {
-                // We don't want to fail when the exception occurs for an unsupported language version
-                writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, failed to generate CFG: {ex.Message}");
+                writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, failed to generate CFG");
                 writer.WriteLine();
                 return;
             }
             blockCounter = 0;
             blockMap.Clear();
-
             opCounter = 0;
             opMap.Clear();
 
-            var returnType = HasNoReturn(method) ?
-                "()" :
-                MlirType(method.ReturnType);
+            var returnType = HasNoReturn(method) ? "()" : MlirType(method.ReturnType);
             writer.WriteLine($"func @{GetMangling(method)}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
             CreateEntryBlock(method);
 
-                foreach (var block in cfg.Blocks)
-                {
-                    ExportBlock(block, method, returnType);
-                }
+            foreach (var block in cfg.Blocks)
+            {
+                ExportBlock(block, method, returnType);
+            }
             writer.WriteLine("}");
         }
 

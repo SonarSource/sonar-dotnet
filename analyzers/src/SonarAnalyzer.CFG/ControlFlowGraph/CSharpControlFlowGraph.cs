@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,11 +27,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
     public static class CSharpControlFlowGraph
     {
-        public static IControlFlowGraph Create(CSharpSyntaxNode node, SemanticModel semanticModel)
-        {
-            return new CSharpControlFlowGraphBuilder(node, semanticModel).Build();
-        }
-
         public static bool TryGet(CSharpSyntaxNode node, SemanticModel semanticModel, out IControlFlowGraph cfg)
         {
             cfg = null;
@@ -61,5 +56,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             return cfg != null;
         }
+
+        internal /* for testing */ static IControlFlowGraph Create(CSharpSyntaxNode node, SemanticModel semanticModel) =>
+            new CSharpControlFlowGraphBuilder(node, semanticModel).Build();
     }
 }
