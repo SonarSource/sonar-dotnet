@@ -93,6 +93,13 @@ namespace Tests.Diagnostics
             var pbkdf = new Rfc2898DeriveBytes(passwordString, salt); // Compliant, we know nothing about salt
         }
 
+        public void SaltWithEncodingGetBytes(string value)
+        {
+            var salt = Encoding.UTF8.GetBytes(value);
+            var pdb = new PasswordDeriveBytes(passwordString, salt); // Compliant, we don't know how to salt was created
+            var rfcPdb = new Rfc2898DeriveBytes(passwordString, salt); // Compliant
+        }
+
         public void ImplicitSaltIsCompliant(string password)
         {
             var withAutomaticSalt1 = new Rfc2898DeriveBytes(passwordString, saltSize: 32);
@@ -130,7 +137,6 @@ namespace Tests.Diagnostics
 
             var salt3 = a == 2 ? compliantSalt : noncompliantSalt;
             new PasswordDeriveBytes(passwordBytes, salt3); // Noncompliant
-
 
             var salt4 = compliantSalt;
             new PasswordDeriveBytes(passwordBytes, salt4);
