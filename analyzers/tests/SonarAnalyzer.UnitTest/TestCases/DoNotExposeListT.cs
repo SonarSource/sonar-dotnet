@@ -29,9 +29,12 @@ namespace Tests.Diagnostics
 
         protected List<int> ProtectedMethod() => null; // Noncompliant
 
+
         protected internal List<int> ProtectedInternalMethod() => null; // Noncompliant
 
         internal List<int> InternalMethod() => null;
+
+        internal List<int> InternalProperty { get; set; }
 
         public void Foo()
         {
