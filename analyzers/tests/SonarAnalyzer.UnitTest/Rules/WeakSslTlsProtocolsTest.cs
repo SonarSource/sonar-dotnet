@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void WeakSslTlsProtocols() =>
+        public void WeakSslTlsProtocols_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.cs",
                                     new WeakSslTlsProtocols(),
                                     ParseOptionsHelper.FromCSharp8,

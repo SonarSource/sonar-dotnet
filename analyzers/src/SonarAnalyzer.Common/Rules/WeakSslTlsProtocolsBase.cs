@@ -18,19 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class WeakSslTlsProtocolsBase : SonarDiagnosticAnalyzer
+    public abstract class WeakSslTlsProtocolsBase <TSyntaxKind, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
+        where TIdentifierNameSyntax : SyntaxNode
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4423";
 
         protected const string MessageFormat = "Change this code to use a stronger protocol.";
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected HashSet<string> WeakProtocols { get; } = new HashSet<string>
         {
@@ -41,20 +44,31 @@ namespace SonarAnalyzer.Rules
             "Default",
         };
 
-        protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
-            c =>
-            {
-                var node = c.Node;
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-                if (IsWeakProtocolUsed(node, c.SemanticModel))
+        protected abstract TSyntaxKind SyntaxKind { get; }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
+                c =>
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
-                }
-            };
+                    if (c.Node is TIdentifierNameSyntax identifierNameSyntax
+                        && IsWeakProtocolUsed(identifierNameSyntax, c.SemanticModel))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    }
+                },
+                SyntaxKind);
 
-        protected abstract bool IsWeakProtocolUsed(SyntaxNode node, SemanticModel semanticModel);
+        protected abstract string GetIdentifierText(TIdentifierNameSyntax identifierNameSyntax);
 
-        protected bool IsSecurityProtocolType(ITypeSymbol typeSymbol) =>
+        private bool IsWeakProtocolUsed(TIdentifierNameSyntax identifierNameSyntax, SemanticModel semanticModel) =>
+            WeakProtocols.Contains(GetIdentifierText(identifierNameSyntax))
+            && IsSecurityProtocolType(semanticModel.GetTypeInfo(identifierNameSyntax).Type);
+
+        private bool IsSecurityProtocolType(ITypeSymbol typeSymbol) =>
             typeSymbol.IsAny(KnownType.System_Net_SecurityProtocolType, KnownType.System_Security_Authentication_SslProtocols);
     }
 }

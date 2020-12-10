@@ -18,33 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class WeakSslTlsProtocols : WeakSslTlsProtocolsBase
+    public sealed class WeakSslTlsProtocols : WeakSslTlsProtocolsBase<SyntaxKind, IdentifierNameSyntax>
     {
-        private static readonly DiagnosticDescriptor Rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.IdentifierName;
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-           context.RegisterSyntaxNodeActionInNonGenerated(GetAnalysisAction(Rule),
-           SyntaxKind.IdentifierName);
+        protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override bool IsWeakProtocolUsed(SyntaxNode node, SemanticModel semanticModel) =>
-            node is IdentifierNameSyntax identifierNameSyntax
-            && WeakProtocols.Contains(identifierNameSyntax.Identifier.Text)
-            && IsSecurityProtocolType(semanticModel.GetTypeInfo(identifierNameSyntax).Type);
+        protected override string GetIdentifierText(IdentifierNameSyntax identifierNameSyntax) =>
+            identifierNameSyntax.Identifier.Text;
     }
 }

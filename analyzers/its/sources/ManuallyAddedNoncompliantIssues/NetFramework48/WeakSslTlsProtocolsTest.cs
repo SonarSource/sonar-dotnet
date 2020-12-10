@@ -1,6 +1,6 @@
 ﻿/*
  * SonarQube, open source software quality management tool.
- * Copyright (C) 2008-2013 SonarSource
+ * Copyright (C) 2008-2020 SonarSource
  * mailto:contact AT sonarsource DOT com
  *
  * SonarQube is free software; you can redistribute it and/or
