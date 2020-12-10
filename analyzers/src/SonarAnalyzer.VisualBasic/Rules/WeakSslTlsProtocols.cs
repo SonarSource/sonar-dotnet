@@ -39,6 +39,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override string GetIdentifierText(IdentifierNameSyntax identifierNameSyntax) =>
-             identifierNameSyntax.Identifier.Text;
+            identifierNameSyntax.Identifier.Text;
     }
 }

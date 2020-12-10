@@ -25,17 +25,18 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class WeakSslTlsProtocolsBase <TSyntaxKind, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
+    public abstract class WeakSslTlsProtocolsBase<TSyntaxKind, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
         where TIdentifierNameSyntax : SyntaxNode
         where TSyntaxKind : struct
     {
+        private static bool IsSecurityProtocolType(ITypeSymbol typeSymbol) =>
+            typeSymbol.IsAny(KnownType.System_Net_SecurityProtocolType, KnownType.System_Security_Authentication_SslProtocols);
+
         protected const string DiagnosticId = "S4423";
 
         protected const string MessageFormat = "Change this code to use a stronger protocol.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        protected HashSet<string> WeakProtocols { get; } = new HashSet<string>
+        private readonly HashSet<string> weakProtocols = new HashSet<string>
         {
             "Ssl2",
             "Ssl3",
@@ -50,25 +51,23 @@ namespace SonarAnalyzer.Rules
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
+        protected abstract string GetIdentifierText(TIdentifierNameSyntax identifierNameSyntax);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (c.Node is TIdentifierNameSyntax identifierNameSyntax
-                        && IsWeakProtocolUsed(identifierNameSyntax, c.SemanticModel))
+                    if (IsWeakProtocolUsed((TIdentifierNameSyntax)c.Node, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
                     }
                 },
                 SyntaxKind);
 
-        protected abstract string GetIdentifierText(TIdentifierNameSyntax identifierNameSyntax);
-
         private bool IsWeakProtocolUsed(TIdentifierNameSyntax identifierNameSyntax, SemanticModel semanticModel) =>
-            WeakProtocols.Contains(GetIdentifierText(identifierNameSyntax))
+            weakProtocols.Contains(GetIdentifierText(identifierNameSyntax))
             && IsSecurityProtocolType(semanticModel.GetTypeInfo(identifierNameSyntax).Type);
-
-        private bool IsSecurityProtocolType(ITypeSymbol typeSymbol) =>
-            typeSymbol.IsAny(KnownType.System_Net_SecurityProtocolType, KnownType.System_Security_Authentication_SslProtocols);
     }
 }
