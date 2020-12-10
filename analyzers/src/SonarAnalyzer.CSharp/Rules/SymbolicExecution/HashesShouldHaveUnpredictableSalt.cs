@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -95,17 +96,19 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             public SaltCheck(AbstractExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
                 this.context = context;
 
-            public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState)
-            {
-                programState = programPoint.CurrentInstruction switch
+            public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
+                programPoint.CurrentInstruction switch
                 {
                     ArrayCreationExpressionSyntax arrayCreation => ArrayCreationPostProcess(arrayCreation, programState),
-                    ObjectCreationExpressionSyntax objectCreation => ObjectCreationPostProcess(objectCreation, programState),
                     _ => programState
                 };
 
-                return base.PostProcessInstruction(programPoint, programState);
-            }
+            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
+                programPoint.CurrentInstruction switch
+                {
+                    ObjectCreationExpressionSyntax objectCreation => ObjectCreationPreProcess(objectCreation, programState),
+                    _ => programState
+                };
 
             private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState)
             {
@@ -121,13 +124,15 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 return programState;
             }
 
-            private ProgramState ObjectCreationPostProcess(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
+            private ProgramState ObjectCreationPreProcess(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
             {
                 if (semanticModel.GetSymbolInfo(objectCreation).Symbol is {} symbol
                     && symbol.ContainingType is {} symbolType
                     && symbolType.IsAny(VulnerableTypes)
-                    && semanticModel.GetSymbolInfo(objectCreation.ArgumentList.Arguments[1].Expression).Symbol is {} saltSymbol
-                    && programState.GetSymbolValue(saltSymbol) is {} symbolicValue)
+                    // We don't always have a symbol for the salt parameter (e.g. the byte[] is created directly when calling the ctor)
+                    // but we should always have a symbolic value for them.
+                    // We take here the symbolic value corresponding to the salt parameter which is always on the second position.
+                    && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - 2).Take(1).SingleOrDefault() is {} symbolicValue)
                 {
                     if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
                     {
