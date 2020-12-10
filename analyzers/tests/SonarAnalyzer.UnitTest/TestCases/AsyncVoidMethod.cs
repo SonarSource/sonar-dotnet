@@ -35,15 +35,24 @@ namespace Tests.Diagnostics
             await Task.Run(() => Console.WriteLine("test"));
         }
 
-        static async void OnValueChanged()  // Noncompliant FP, has OnXxx name
+        static async void OnValueChanged()  // Compliant, has OnXxx name
         {
         }
 
-        static async void Onboard()         // Noncompliant
-        {
-        }
+        static async void O() { }       // Noncompliant
+        static async void On() { }      // Noncompliant
+        static async void Onboard() { } // Noncompliant
+        static async void ToX() { }     // Noncompliant
+        static async void OnX() { }
 
-        static async void OnEventNameChanged(BindableObject bindable, object oldValue, object newValue) // Noncompliant FP Xamarin style, has OnXxx name
+        static async void OnŘád() { }
+        static async void Onřád() { }   // Noncompliant
+
+        static async void OnΘ() { }     // Compliant, Uppercase Theta
+        static async void Onθ() { }     // Noncompliant, Lowercase Theta
+
+
+        static async void OnEventNameChanged(BindableObject bindable, object oldValue, object newValue) // Compliant, Xamarin style, has OnXxx name
         {
             // Property changed implementation goes here
         }

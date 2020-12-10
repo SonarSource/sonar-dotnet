@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -73,6 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsExceptionToTheRule(MethodDeclarationSyntax methodDeclaration, IMethodSymbol methodSymbol) =>
             methodSymbol.IsEventHandler()
             || IsUsedAsEventHandler(methodDeclaration)
+            || IsNamedAsEventHandler(methodSymbol)
             || HasAnyMsTestV1AllowedAttribute(methodSymbol);
 
         private static bool IsUsedAsEventHandler(MethodDeclarationSyntax methodDeclaration) =>
@@ -83,6 +84,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(aes => aes.Right)
                 .OfType<IdentifierNameSyntax>()
                 .Any(ins => ins.Identifier.ValueText == methodDeclaration.Identifier.ValueText);
+
+        private static bool IsNamedAsEventHandler(ISymbol symbol) =>
+            symbol.Name.Length > 2
+            && symbol.Name.StartsWith("On")
+            && char.IsUpper(symbol.Name[2]);
 
         private static bool HasAnyMsTestV1AllowedAttribute(IMethodSymbol methodSymbol) =>
             methodSymbol.GetAttributes().Any(a =>
