@@ -391,7 +391,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if(args.ProgramPoint.Block is BinaryBranchBlock bbb
                 && bbb.BranchingNode.IsAnyKind(coalesceExpressions)
                 && args.ProgramPoint.Offset == args.ProgramPoint.Block.Instructions.Count - 1 //Last instruction of BBB holds ??= left operand value
-                && args.ProgramPoint.Block.Instructions[args.ProgramPoint.Offset] is ExpressionSyntax left)
+                && args.ProgramPoint.CurrentInstruction is ExpressionSyntax left)
             {
                 ProcessOperand(left, true);
             }

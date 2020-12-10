@@ -160,19 +160,13 @@ namespace SonarAnalyzer.Rules.CSharp
             private static ExpressionSyntax GetEnableMacArgumentSyntax(BaseArgumentListSyntax list) =>
                 (list.GetArgumentByName("enableMac") ?? list.Arguments[0]).Expression;
 
-            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
-            {
-                var instruction = programPoint.Block.Instructions[programPoint.Offset];
-
-                programState = instruction switch
+            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
+                programPoint.CurrentInstruction switch
                 {
                     MemberAccessExpressionSyntax memberAccess => VisitMemberAccess(memberAccess, programState),
                     AssignmentExpressionSyntax assignmentExpressionSyntax => VisitAssignmentExpression(assignmentExpressionSyntax, programState),
                     _ => programState
                 };
-
-                return base.PreProcessInstruction(programPoint, programState);
-            }
 
             private ProgramState VisitMemberAccess(MemberAccessExpressionSyntax memberAccess, ProgramState programState)
             {

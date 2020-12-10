@@ -164,7 +164,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         protected override void VisitInstruction(ExplodedGraphNode node)
         {
-            var instruction = node.ProgramPoint.Block.Instructions[node.ProgramPoint.Offset];
+            var instruction = node.ProgramPoint.CurrentInstruction;
             var expression = instruction as ExpressionSyntax;
             var parenthesizedExpression = expression?.GetSelfOrTopParenthesizedExpression();
             var newProgramPoint = new ProgramPoint(node.ProgramPoint.Block, node.ProgramPoint.Offset + 1);
