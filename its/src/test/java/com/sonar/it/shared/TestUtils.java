@@ -127,7 +127,7 @@ public class TestUtils {
 
     LOG.info(String.format("Running MSBuild in working directory '%s'", command.getDirectory()));
 
-    int r = CommandExecutor.create().execute(command, 60 * 1000);
+    int r = CommandExecutor.create().execute(command, 2 * 60 * 1000);
     assertThat(r).isEqualTo(0);
   }
 
