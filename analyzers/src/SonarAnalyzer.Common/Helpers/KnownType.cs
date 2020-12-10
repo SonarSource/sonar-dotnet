@@ -379,6 +379,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Windows_DependencyObject = new KnownType("System.Windows.DependencyObject");
         internal static readonly KnownType System_Windows_Forms_Application = new KnownType("System.Windows.Forms.Application");
         internal static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute = new KnownType("System.Windows.Markup.ConstructorArgumentAttribute");
+        internal static readonly KnownType System_Xml_Serialization_XmlElementAttribute = new KnownType("System.Xml.Serialization.XmlElementAttribute");
         internal static readonly KnownType System_Xml_XmlDocument = new KnownType("System.Xml.XmlDocument");
         internal static readonly KnownType System_Xml_XmlDataDocument = new KnownType("System.Xml.XmlDataDocument");
         internal static readonly KnownType System_Xml_XmlNode = new KnownType("System.Xml.XmlNode");

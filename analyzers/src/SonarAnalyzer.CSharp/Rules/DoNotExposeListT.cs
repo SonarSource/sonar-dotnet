@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -36,9 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3956";
         private const string MessageFormat = "Refactor this {0} to use a generic collection designed for inheritance.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -48,10 +47,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     var baseMethodDeclaration = (BaseMethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(baseMethodDeclaration);
 
-                    if (methodSymbol == null ||
-                        !methodSymbol.IsPubliclyAccessible() ||
-                        methodSymbol.IsOverride ||
-                        !IsOrdinaryMethodOrConstructor(methodSymbol))
+                    if (methodSymbol == null
+                        || !methodSymbol.IsPubliclyAccessible()
+                        || methodSymbol.IsOverride
+                        || !IsOrdinaryMethodOrConstructor(methodSymbol))
                     {
                         return;
                     }
@@ -78,9 +77,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
                     var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
 
-                    if (propertySymbol != null &&
-                        propertySymbol.IsPubliclyAccessible() &&
-                        !propertySymbol.IsOverride)
+                    if (propertySymbol != null
+                        && propertySymbol.IsPubliclyAccessible()
+                        && !propertySymbol.IsOverride
+                        && !HasXmlElementAttribute(propertySymbol))
                     {
                         ReportIfListT(propertyDeclaration.Type, c, "property");
                     }
@@ -100,9 +100,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var fieldSymbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaration);
 
-                    if (fieldSymbol != null &&
-                        fieldSymbol.IsPubliclyAccessible() &&
-                        !fieldSymbol.IsOverride)
+                    if (fieldSymbol != null
+                        && fieldSymbol.IsPubliclyAccessible()
+                        && !HasXmlElementAttribute(fieldSymbol))
                     {
                         ReportIfListT(fieldDeclaration.Declaration.Type, c, "field");
                     }
@@ -112,18 +112,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportIfListT(TypeSyntax typeSyntax, SyntaxNodeAnalysisContext context, string memberType)
         {
-            if (typeSyntax != null
-                && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.SemanticModel))
+            if (typeSyntax != null && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.SemanticModel))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeSyntax.GetLocation(),
-                    messageArgs: memberType));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, typeSyntax.GetLocation(), messageArgs: memberType));
             }
         }
 
-        private static bool IsOrdinaryMethodOrConstructor(IMethodSymbol method)
-        {
-            return method.MethodKind == MethodKind.Ordinary ||
-                   method.MethodKind == MethodKind.Constructor;
-        }
+        private static bool IsOrdinaryMethodOrConstructor(IMethodSymbol method) =>
+            method.MethodKind == MethodKind.Ordinary || method.MethodKind == MethodKind.Constructor;
+
+        private static bool HasXmlElementAttribute(ISymbol symbol) =>
+            symbol.GetAttributes(KnownType.System_Xml_Serialization_XmlElementAttribute).Any();
     }
 }
