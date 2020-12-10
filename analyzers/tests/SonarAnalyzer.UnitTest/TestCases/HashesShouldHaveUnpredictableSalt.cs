@@ -140,6 +140,8 @@ namespace Tests.Diagnostics
 
             noncompliantSalt = compliantSalt;
             new PasswordDeriveBytes(passwordBytes, noncompliantSalt);
+
+            new PasswordDeriveBytes(passwordBytes, new byte[32]); // Noncompliant
         }
     }
 }
