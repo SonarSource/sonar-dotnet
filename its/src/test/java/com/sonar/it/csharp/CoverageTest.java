@@ -45,19 +45,17 @@ public class CoverageTest {
 
   @Test
   public void should_import_coverage_with_deterministic_source_paths() throws Exception {
-    BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "no_rule",
-      "sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml",
-      "sonar.verbose", "true");
+    BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "no_rule", "sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
-      "Coverage Report Statistics: 1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.");
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
     org.sonarqube.ws.Measures.Measure linesToCover = getMeasure("CoverageWithDeterministicSourcePaths", "lines_to_cover");
     org.sonarqube.ws.Measures.Measure uncoveredLines = getMeasure("CoverageWithDeterministicSourcePaths", "uncovered_lines");
 
-    assertThat(linesToCover.getValue()).isEqualTo("0");
-    assertThat(uncoveredLines.getValue()).isEqualTo("0");
+    assertThat(linesToCover.getValue()).isEqualTo("6");
+    assertThat(uncoveredLines.getValue()).isEqualTo("3");
   }
 
   @Test
