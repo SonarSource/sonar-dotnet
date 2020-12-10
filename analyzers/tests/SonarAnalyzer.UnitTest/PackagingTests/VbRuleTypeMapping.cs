@@ -4420,7 +4420,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4420"],
             //["4421"],
             //["4422"],
-            //["4423"],
+            ["4423"] = "VULNERABILITY",
             //["4424"],
             //["4425"],
             //["4426"],

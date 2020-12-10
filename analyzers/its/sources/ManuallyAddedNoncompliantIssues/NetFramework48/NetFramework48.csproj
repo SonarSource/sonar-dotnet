@@ -61,6 +61,7 @@
     <Compile Include="SymmetricAlgorithmTest.cs" />
     <Compile Include="UnsafeBinder.cs" />
     <Compile Include="UnsafeTypeResolver.cs" />
+    <Compile Include="WeakSslTlsProtocolsTest.cs" />
     <Compile Include="XmlDocumentTest.cs" />
     <Compile Include="XmlReaderTest.cs" />
     <Compile Include="XmlTextReaderTest.cs" />

@@ -252,6 +252,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Net_NetworkCredential = new KnownType("System.Net.NetworkCredential");
         internal static readonly KnownType System_Net_Security_RemoteCertificateValidationCallback = new KnownType("System.Net.Security.RemoteCertificateValidationCallback");
         internal static readonly KnownType System_Net_Security_SslPolicyErrors = new KnownType("System.Net.Security.SslPolicyErrors");
+        internal static readonly KnownType System_Net_SecurityProtocolType = new KnownType("System.Net.SecurityProtocolType");
         internal static readonly KnownType System_Net_Sockets_Socket = new KnownType("System.Net.Sockets.Socket");
         internal static readonly KnownType System_Net_Sockets_TcpClient = new KnownType("System.Net.Sockets.TcpClient");
         internal static readonly KnownType System_Net_Sockets_UdpClient = new KnownType("System.Net.Sockets.UdpClient");
@@ -303,6 +304,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_Serialization_StreamingContext = new KnownType("System.Runtime.Serialization.StreamingContext");
         internal static readonly KnownType System_SByte = new KnownType(SpecialType.System_SByte, "sbyte");
         internal static readonly KnownType System_Security_AllowPartiallyTrustedCallersAttribute = new KnownType("System.Security.AllowPartiallyTrustedCallersAttribute");
+        internal static readonly KnownType System_Security_Authentication_SslProtocols = new KnownType("System.Security.Authentication.SslProtocols");
         internal static readonly KnownType System_Security_Cryptography_AesManaged = new KnownType("System.Security.Cryptography.AesManaged");
         internal static readonly KnownType System_Security_Cryptography_AsymmetricAlgorithm = new KnownType("System.Security.Cryptography.AsymmetricAlgorithm");
         internal static readonly KnownType System_Security_Cryptography_CspParameters = new KnownType("System.Security.Cryptography.CspParameters");

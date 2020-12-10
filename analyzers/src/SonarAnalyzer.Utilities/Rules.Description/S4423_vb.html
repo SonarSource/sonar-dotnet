@@ -1,0 +1,42 @@
+<p>Older versions of SSL/TLS protocol like "SSLv3" have been proven to be insecure.</p>
+<p>This rule raises an issue when an SSL/TLS is configured at application level with an insecure version (ie: a protocol different from "TLSv1.2" or
+"TLSv1.3").</p>
+<p>No issue is raised when the choice of the SSL/TLS version relies on the OS configuration. Be aware that the latest version of <a
+href="https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-">Windows 10 and Windows Server 2016 have TLSv1.0 and
+TLSv1.1 enabled by default</a>. Administrators can configure the OS to enforce TLSv1.2 minumum by <a
+href="https://docs.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings">updateing registry settings</a> or by applying a group
+policy.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls ' Noncompliant; legacy version TLSv1 is enabled
+</pre>
+<p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient">System.Net.Http.HttpClient</a></p>
+<pre>
+Dim Handler As New HttpClientHandler With {.SslProtocols = SslProtocols.Tls} ' Noncompliant; legacy version TLSv1 Is enabled
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault  ' Compliant; choice Of the SSL/TLS versions rely On the OS configuration
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 Or SecurityProtocolType.Tls13  ' Compliant
+</pre>
+<p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient">System.Net.Http.HttpClient</a></p>
+<pre>
+Dim HandlerA As New HttpClientHandler With {.SslProtocols = SslProtocols.Tls12} ' Compliant
+Dim HandlerB As New HttpClientHandler With {.SslProtocols = SslProtocols.None}  ' Compliant; choice Of the TLS versions rely On the OS configuration
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
+  Misconfiguration </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/326.html">MITRE, CWE-327</a> - Inadequate Encryption Strength </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/327.html">MITRE, CWE-326</a> - Use of a Broken or Risky Cryptographic Algorithm </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
+  <li> <a href="https://blogs.oracle.com/java-platform-group/diagnosing-tls,-ssl,-and-https">Diagnosing TLS, SSL, and HTTPS</a> </li>
+  <li> <a href="https://github.com/ssllabs/research/wiki/SSL-and-TLS-Deployment-Best-Practices#22-use-secure-protocols">SSL and TLS Deployment Best
+  Practices - Use secure protocols</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/framework/network-programming/tls">Transport Layer Security (TLS) best practices with the .NET
+  Framework</a> </li>
+</ul>
+
