@@ -57,6 +57,10 @@ public class ScannerFileService implements FileService {
         fp.all(),
         fp.hasLanguage(languageKey)
       ));
+    return findUniqueFile(normalizedRelativePath, files);
+  }
+
+  private Optional<InputFile> findUniqueFile(String normalizedRelativePath, Iterable<InputFile> files) {
     int count = 0;
     InputFile foundFile = null;
     for (InputFile file : files) {
