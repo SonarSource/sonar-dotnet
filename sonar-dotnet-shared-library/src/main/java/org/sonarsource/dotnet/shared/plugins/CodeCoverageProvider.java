@@ -30,7 +30,7 @@ import org.sonar.api.scanner.ScannerSide;
 import org.sonar.plugins.dotnet.tests.CoverageAggregator;
 import org.sonar.plugins.dotnet.tests.CoverageConfiguration;
 import org.sonar.plugins.dotnet.tests.CoverageReportImportSensor;
-import org.sonar.plugins.dotnet.tests.FileSystemCoverageFileValidator;
+import org.sonar.plugins.dotnet.tests.ScannerFileService;
 
 @ScannerSide
 public class CodeCoverageProvider {
@@ -141,7 +141,7 @@ public class CodeCoverageProvider {
       AnalysisWarnings analysisWarnings) {
       super(coverageConf,
             configuration,
-            new FileSystemCoverageFileValidator(coverageConf.languageKey(), fileSystem),
+            new ScannerFileService(coverageConf.languageKey(), fileSystem),
             analysisWarnings);
     }
 
@@ -161,7 +161,7 @@ public class CodeCoverageProvider {
       AnalysisWarnings analysisWarnings) {
       super(itCoverageConf,
             configuration,
-            new FileSystemCoverageFileValidator(coverageConf.languageKey(), fileSystem),
+            new ScannerFileService(coverageConf.languageKey(), fileSystem),
             analysisWarnings);
     }
 

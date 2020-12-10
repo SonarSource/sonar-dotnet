@@ -100,7 +100,7 @@ public class CoverageAggregatorTest {
   }
 
   private CoverageAggregator getCoverageAggregator(Configuration configuration, CoverageConfiguration coverageConf) {
-    FileSystemCoverageFileValidator alwaysTrue = mock(FileSystemCoverageFileValidator.class);
+    ScannerFileService alwaysTrue = mock(ScannerFileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
     return new CoverageAggregator(coverageConf, configuration, alwaysTrue, mock(AnalysisWarnings.class));
   }

@@ -47,7 +47,7 @@ public class CoverageAggregator {
 
   public CoverageAggregator(CoverageConfiguration coverageConf,
                             Configuration configuration,
-                            FileSystemCoverageFileValidator validator,
+                            ScannerFileService validator,
                             AnalysisWarnings analysisWarnings) {
     this.coverageConf = coverageConf;
     this.configuration = configuration;

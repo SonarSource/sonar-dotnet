@@ -29,13 +29,13 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 @ScannerSide
-public class FileSystemCoverageFileValidator implements FileService {
-  private static final Logger LOG = Loggers.get(FileSystemCoverageFileValidator.class);
+public class ScannerFileService implements FileService {
+  private static final Logger LOG = Loggers.get(ScannerFileService.class);
   private static final Pattern DETERMINISTIC_SOURCE_PATH_PREFIX = Pattern.compile("^(([a-zA-Z]:)?[\\\\][_][\\\\])|([\\/][_][\\/])");
   private FileSystem fileSystem;
   private String languageKey;
 
-  public FileSystemCoverageFileValidator(String languageKey, FileSystem fileSystem) {
+  public ScannerFileService(String languageKey, FileSystem fileSystem) {
     this.languageKey = languageKey;
     this.fileSystem = fileSystem;
   }

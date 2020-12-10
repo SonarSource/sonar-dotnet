@@ -38,7 +38,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class FileSystemCoverageFileValidatorTest {
+public class ScannerFileServiceTest {
   @Rule
   public LogTester logTester = new LogTester();
 
@@ -54,7 +54,7 @@ public class FileSystemCoverageFileValidatorTest {
     when(fs.hasFiles(any())).thenReturn(true);
 
     // act
-    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    ScannerFileService sut = new ScannerFileService("key", fs);
     sut.isSupportedAbsolute("/_/some/path/file.cs");
 
     // assert
@@ -66,7 +66,7 @@ public class FileSystemCoverageFileValidatorTest {
   public void isSupportedAbsolute_returns_fileSystem_result_when_true() {
     FileSystem fs = createFileSystemForHasFiles(true);
 
-    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    ScannerFileService sut = new ScannerFileService("key", fs);
     boolean result = sut.isSupportedAbsolute("/_/some/path/file.cs");
 
     assertThat(result).isTrue();
@@ -77,7 +77,7 @@ public class FileSystemCoverageFileValidatorTest {
   public void isSupportedAbsolute_returns_fileSystem_result_when_false() {
     FileSystem fs = createFileSystemForHasFiles(false);
 
-    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    ScannerFileService sut = new ScannerFileService("key", fs);
     boolean result = sut.isSupportedAbsolute("/_/some/path/file.cs");
 
     assertThat(result).isFalse();
@@ -97,7 +97,7 @@ public class FileSystemCoverageFileValidatorTest {
     when(fs.predicates()).thenReturn(filePredicates);
 
     // act
-    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    ScannerFileService sut = new ScannerFileService("key", fs);
     sut.getFilesByRelativePath("foo");
 
     // assert
@@ -109,7 +109,7 @@ public class FileSystemCoverageFileValidatorTest {
     FileSystem fs = createFileSystemForInputFiles(Collections.emptyList());
 
     // act
-    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    ScannerFileService sut = new ScannerFileService("key", fs);
     Optional<InputFile> result = sut.getFilesByRelativePath("C:\\_\\some\\path\\file.cs");
 
     // assert
@@ -123,7 +123,7 @@ public class FileSystemCoverageFileValidatorTest {
   public void getFilesByRelativePath_when_indexed_files_do_not_match_returns_empty() {
     FileSystem fs = createFileSystemForInputFiles(Arrays.asList(mockInput("another/path/file.cs"), mockInput("some/file.cs")));
 
-    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    ScannerFileService sut = new ScannerFileService("key", fs);
     Optional<InputFile> result = sut.getFilesByRelativePath("/_/some/path/file.cs");
 
     assertThat(result).isEmpty();
@@ -136,7 +136,7 @@ public class FileSystemCoverageFileValidatorTest {
   public void getFilesByRelativePath_when_multiple_indexed_files_match_returns_empty() {
     FileSystem fs = createFileSystemForInputFiles(Arrays.asList(mockInput("root1/some/path/file.cs"), mockInput("root2/some/path/file.cs")));
 
-    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    ScannerFileService sut = new ScannerFileService("key", fs);
     Optional<InputFile> result = sut.getFilesByRelativePath("/_/some/path/file.cs");
 
     assertThat(result).isEmpty();
@@ -154,7 +154,7 @@ public class FileSystemCoverageFileValidatorTest {
       expectedResult,
       mockInput("four")));
 
-    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    ScannerFileService sut = new ScannerFileService("key", fs);
     Optional<InputFile> result = sut.getFilesByRelativePath("/_/some/path/file.cs");
 
     assertThat(result).contains(expectedResult);
@@ -169,7 +169,7 @@ public class FileSystemCoverageFileValidatorTest {
     InputFile expectedResult = mockInput("root/some/path/file.cs");
     FileSystem fs = createFileSystemForInputFiles(Collections.singletonList(expectedResult));
 
-    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    ScannerFileService sut = new ScannerFileService("key", fs);
     Optional<InputFile> result = sut.getFilesByRelativePath("C:\\_\\some\\path\\file.cs");
 
     assertThat(result).contains(expectedResult);
@@ -194,7 +194,7 @@ public class FileSystemCoverageFileValidatorTest {
     InputFile expectedResult = mockInput("root/some/path/file.cs");
     FileSystem fs = createFileSystemForInputFiles(Collections.singletonList(expectedResult));
 
-    FileSystemCoverageFileValidator sut = new FileSystemCoverageFileValidator("key", fs);
+    ScannerFileService sut = new ScannerFileService("key", fs);
     Optional<InputFile> result = sut.getFilesByRelativePath("some/path/file.cs");
 
     assertThat(result).contains(expectedResult);
