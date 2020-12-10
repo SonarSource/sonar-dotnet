@@ -90,10 +90,16 @@ public class ScannerFileServiceTest {
     FileSystem fs = mock(FileSystem.class);
     FilePredicates filePredicates = mock(FilePredicates.class);
     FilePredicate allMock = mock(FilePredicate.class);
+    FilePredicate languageKeyMock = mock(FilePredicate.class);
+    FilePredicate andMock = mock(FilePredicate.class);
 
     ArgumentCaptor<FilePredicate> argumentCaptor = ArgumentCaptor.forClass(FilePredicate.class);
+
     when(fs.inputFiles(argumentCaptor.capture())).thenReturn(Collections.emptyList());
+
+    when(filePredicates.hasLanguage("key")).thenReturn(languageKeyMock);
     when(filePredicates.all()).thenReturn(allMock);
+    when(filePredicates.and(allMock, languageKeyMock)).thenReturn(andMock);
     when(fs.predicates()).thenReturn(filePredicates);
 
     // act
@@ -101,7 +107,7 @@ public class ScannerFileServiceTest {
     sut.getFilesByRelativePath("foo");
 
     // assert
-    assertThat(argumentCaptor.getValue()).isEqualTo(allMock);
+    assertThat(argumentCaptor.getValue()).isEqualTo(andMock);
   }
 
   @Test

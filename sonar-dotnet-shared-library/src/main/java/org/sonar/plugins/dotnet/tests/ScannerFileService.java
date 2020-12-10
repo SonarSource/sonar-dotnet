@@ -22,6 +22,7 @@ package org.sonar.plugins.dotnet.tests;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.scanner.ScannerSide;
@@ -41,15 +42,21 @@ public class ScannerFileService implements FileService {
   }
 
   public boolean isSupportedAbsolute(String absolutePath) {
+    FilePredicates fp = fileSystem.predicates();
     return fileSystem.hasFiles(
-      fileSystem.predicates().and(
-        fileSystem.predicates().hasAbsolutePath(absolutePath),
-        fileSystem.predicates().hasLanguage(languageKey)));
+      fp.and(
+        fp.hasAbsolutePath(absolutePath),
+        fp.hasLanguage(languageKey)));
   }
 
   public Optional<InputFile> getFilesByRelativePath(String filePath) {
     String normalizedRelativePath = getNormalizedRelativePath(filePath);
-    Iterable<InputFile> files = fileSystem.inputFiles(fileSystem.predicates().all());
+    FilePredicates fp = fileSystem.predicates();
+    Iterable<InputFile> files = fileSystem.inputFiles(
+      fp.and(
+        fp.all(),
+        fp.hasLanguage(languageKey)
+      ));
     int count = 0;
     InputFile foundFile = null;
     for (InputFile file : files) {
