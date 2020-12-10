@@ -121,8 +121,8 @@ public class ScannerFileServiceTest {
     // assert
     assertThat(result).isEmpty();
     assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly(
-      "It seems Deterministic Source Paths are used, replacing 'C:\\_\\some\\path\\file.cs' with 'some\\path\\file.cs'",
-      "Did not find any indexed file for 'some/path/file.cs'");
+      "It seems Deterministic Source Paths are used, replacing 'C:\\_\\some\\path\\file.cs' with 'some\\path\\file.cs'.",
+      "Did not find any indexed file for 'some/path/file.cs'.");
   }
 
   @Test
@@ -134,8 +134,8 @@ public class ScannerFileServiceTest {
 
     assertThat(result).isEmpty();
     assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly(
-      "It seems Deterministic Source Paths are used, replacing '/_/some/path/file.cs' with 'some/path/file.cs'",
-      "Did not find any indexed file for 'some/path/file.cs'");
+      "It seems Deterministic Source Paths are used, replacing '/_/some/path/file.cs' with 'some/path/file.cs'.",
+      "Did not find any indexed file for 'some/path/file.cs'.");
   }
 
   @Test
@@ -147,7 +147,7 @@ public class ScannerFileServiceTest {
 
     assertThat(result).isEmpty();
     assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly(
-      "It seems Deterministic Source Paths are used, replacing '/_/some/path/file.cs' with 'some/path/file.cs'");
+      "It seems Deterministic Source Paths are used, replacing '/_/some/path/file.cs' with 'some/path/file.cs'.");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Found 2 indexed files for relative path 'some/path/file.cs'. Will skip this coverage entry.");
   }
 
@@ -167,7 +167,7 @@ public class ScannerFileServiceTest {
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
       .startsWith("Found indexed file ")
-      .endsWith("root/some/path/file.cs' for coverage entry 'some/path/file.cs'");
+      .endsWith("root/some/path/file.cs' for coverage entry 'some/path/file.cs'.");
   }
 
   @Test
@@ -180,10 +180,11 @@ public class ScannerFileServiceTest {
 
     assertThat(result).contains(expectedResult);
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
-    assertThat(logTester.logs(LoggerLevel.TRACE).get(0)).isEqualTo("It seems Deterministic Source Paths are used, replacing 'C:\\_\\some\\path\\file.cs' with 'some\\path\\file.cs'");
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+      .isEqualTo("It seems Deterministic Source Paths are used, replacing 'C:\\_\\some\\path\\file.cs' with 'some\\path\\file.cs'.");
     assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
       .startsWith("Found indexed file ")
-      .endsWith("root/some/path/file.cs' for coverage entry 'some/path/file.cs'");
+      .endsWith("root/some/path/file.cs' for coverage entry 'some/path/file.cs'.");
 
     result = sut.getFilesByRelativePath("D:\\_\\some\\path\\file.cs");
     assertThat(result).contains(expectedResult);
@@ -207,7 +208,7 @@ public class ScannerFileServiceTest {
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
       .startsWith("Found indexed file '")
-      .endsWith("some/path/file.cs' for coverage entry 'some/path/file.cs'");
+      .endsWith("some/path/file.cs' for coverage entry 'some/path/file.cs'.");
   }
 
   private FileSystem createFileSystemForInputFiles(Iterable<InputFile> inputFilesResult) {
