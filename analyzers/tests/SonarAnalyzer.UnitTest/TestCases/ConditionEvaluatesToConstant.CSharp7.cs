@@ -263,6 +263,13 @@ namespace Tests.Diagnostics
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/3123
+    public class Repro_3123
+    {
+        public bool FooA(object x) => x is bool value && value;
+        public bool FooB(object x) => x is bool value && value == true;
+    }
+
     // https://github.com/SonarSource/sonar-dotnet/issues/3239
     public class Repro_3239
     {
