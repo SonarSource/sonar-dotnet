@@ -21,6 +21,7 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -38,19 +39,39 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
+        private static readonly ImmutableArray<KnownType> NonInheritableClassesAndInterfaces = ImmutableArray.Create<KnownType>(
+            new[]
+            {
+                KnownType.System_Security_Cryptography_AsymmetricAlgorithm,
+                KnownType.System_Security_Cryptography_AsymmetricKeyExchangeDeformatter,
+                KnownType.System_Security_Cryptography_AsymmetricKeyExchangeFormatter,
+                KnownType.System_Security_Cryptography_AsymmetricSignatureDeformatter,
+                KnownType.System_Security_Cryptography_AsymmetricSignatureFormatter,
+                KnownType.System_Security_Cryptography_DeriveBytes,
+                KnownType.System_Security_Cryptography_HashAlgorithm,
+                KnownType.System_Security_Cryptography_ICryptoTransform,
+                KnownType.System_Security_Cryptography_SymmetricAlgorithm,
+            });
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalizeDeclaration, SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration);
+
+        private void AnalizeDeclaration(SyntaxNodeAnalysisContext analysisContext)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
+            var declaration = (BaseTypeDeclarationSyntax)analysisContext.Node;
+            if (declaration.BaseList == null
+                || !declaration.BaseList.Types.Any())
+            {
+                return;
+            }
+
+            var classSymbol = analysisContext.SemanticModel.GetDeclaredSymbol(declaration);
+            if (classSymbol.DerivesOrImplementsAny(NonInheritableClassesAndInterfaces))
+            {
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, declaration.Identifier.GetLocation()));
+            }
         }
     }
 }

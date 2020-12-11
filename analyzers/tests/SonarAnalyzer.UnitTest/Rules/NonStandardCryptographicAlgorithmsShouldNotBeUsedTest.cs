@@ -21,6 +21,7 @@
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,10 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonStandardCryptographicAlgorithmsShouldNotBeUsed()
-        {
+        public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.cs",
-                new NonStandardCryptographicAlgorithmsShouldNotBeUsed());
-        }
+                new NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
+                additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
     }
 }
