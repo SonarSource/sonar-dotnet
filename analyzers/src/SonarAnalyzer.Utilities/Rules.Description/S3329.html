@@ -17,7 +17,7 @@ public void Encrypt(byte[] key, byte[] data, MemoryStream target)
     byte[] initializationVector = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
     using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
     {
-        ICryptoTransform encryptor = aes.CreateEncryptor(key, initializationVector);     // Noncompliant, hardcoded value is used
+        ICryptoTransform encryptor = aes.CreateEncryptor(key, initializationVector); // Noncompliant, hardcoded value is used
         using (CryptoStream cryptoStream = new CryptoStream(target, encryptor, CryptoStreamMode.Write))
         {
             cryptoStream.Write(data);
@@ -29,16 +29,13 @@ public void Encrypt(byte[] key, byte[] data, MemoryStream target)
 <pre>
 public byte[] Encrypt(byte[] key, byte[] data, MemoryStream target)
 {
-    using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
-    {
-        aes.GenerateIV();
-        ICryptoTransform encryptor = aes.CreateEncryptor(key, aes.IV);
-        using (CryptoStream cryptoStream = new CryptoStream(target, encryptor, CryptoStreamMode.Write))
-        {
-            cryptoStream.Write(data);
-        }
-        return aes.IV;
-    }
+    using AesCryptoServiceProvider aes = new AesCryptoServiceProvider();
+    var encryptor = aes.CreateEncryptor(key, aes.IV);
+
+    using CryptoStream cryptoStream = new CryptoStream(target, encryptor, CryptoStreamMode.Write);
+    cryptoStream.Write(data);
+
+    return aes.IV;
 }
 </pre>
 <h2>See</h2>
