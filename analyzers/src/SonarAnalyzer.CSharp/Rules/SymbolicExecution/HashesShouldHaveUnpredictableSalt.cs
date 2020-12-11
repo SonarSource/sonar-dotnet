@@ -129,9 +129,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 if (semanticModel.GetSymbolInfo(objectCreation).Symbol is {} symbol
                     && symbol.ContainingType is {} symbolType
                     && symbolType.IsAny(VulnerableTypes)
-                    // We don't always have a symbol for the salt parameter (e.g. the byte[] is created directly when calling the ctor)
-                    // but we should always have a symbolic value for them.
-                    // We take here the symbolic value corresponding to the salt parameter which is always on the second position.
+                    // There are cases when the symbol corresponding to the salt parameter does not exists (e.g. the byte[] is created directly when calling the ctor)
+                    // but we should always have a symbolic value for it.
                     && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - 2).Take(1).SingleOrDefault() is {} symbolicValue)
                 {
                     if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
