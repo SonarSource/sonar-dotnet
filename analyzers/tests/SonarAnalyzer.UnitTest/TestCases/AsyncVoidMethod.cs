@@ -39,17 +39,22 @@ namespace Tests.Diagnostics
         {
         }
 
-        static async void O() { }       // Noncompliant
-        static async void On() { }      // Noncompliant
-        static async void Onboard() { } // Noncompliant
-        static async void ToX() { }     // Noncompliant
-        static async void OnX() { }
+        async void OnX() { }
 
-        static async void OnŘád() { }
-        static async void Onřád() { }   // Noncompliant
+        async void O() { }          // Noncompliant
+        async void On() { }         // Noncompliant
+        async void Onboard() { }    // Noncompliant
+        async void ToX() { }        // Noncompliant
+        async void ONCAPS() { }     // Noncompliant
+        async void On3People() { }  // Noncompliant, 3People is not a valid event name
+        async void On_Underscore() { }  // Noncompliant
+        async void onEvent() { }    // Noncompliant
 
-        static async void OnΘ() { }     // Compliant, Uppercase Theta
-        static async void Onθ() { }     // Noncompliant, Lowercase Theta
+        async void Onřád() { }      // Noncompliant
+        async void OnŘád() { }
+
+        async void OnΘ() { }        // Compliant, Uppercase Theta
+        async void Onθ() { }        // Noncompliant, Lowercase Theta
 
 
         static async void OnEventNameChanged(BindableObject bindable, object oldValue, object newValue) // Compliant, Xamarin style, has OnXxx name
@@ -57,7 +62,7 @@ namespace Tests.Diagnostics
             // Property changed implementation goes here
         }
 
-        private async void ArbreDesClefs_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args) { }    // Compliant, doesn't inherit from EventArgs, but looks like it
+        private async void ArbreDesClefs_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args) { }    // Compliant, doesn't have sender as object and doesn't inherit from EventArgs, but looks like it by argument names
 
 
         // Substitute for reference to Xamarin.Forms, Windows.UI.Xaml.Controls

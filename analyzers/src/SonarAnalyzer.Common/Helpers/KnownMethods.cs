@@ -51,9 +51,9 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsObjectEquals(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
-                && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
                 && methodSymbol.MethodKind == MethodKind.Ordinary
                 && methodSymbol.Name == nameof(object.Equals)
+                && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
                 && methodSymbol.Parameters.Length == 1
                 && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
                 && methodSymbol.ReturnType.Is(KnownType.System_Boolean);
@@ -66,10 +66,10 @@ namespace SonarAnalyzer.Helpers
                 && methodSymbol.MethodKind == MethodKind.Ordinary
                 && methodSymbol.Name == nameof(object.Equals)
                 && methodSymbol.IsInType(KnownType.System_Object)
-                && HasCorrectArguments()
+                && HasCorrectParameters()
                 && methodSymbol.ReturnType.Is(KnownType.System_Boolean);
 
-            bool HasCorrectArguments() =>
+            bool HasCorrectParameters() =>
                 methodSymbol.Parameters.Length == 2
                 && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
                 && methodSymbol.Parameters[1].Type.Is(KnownType.System_Object);
@@ -77,17 +77,17 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsObjectGetHashCode(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
-            && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
             && methodSymbol.MethodKind == MethodKind.Ordinary
             && methodSymbol.Name == nameof(object.GetHashCode)
+            && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
             && methodSymbol.Parameters.Length == 0
             && methodSymbol.ReturnType.Is(KnownType.System_Int32);
 
         public static bool IsObjectToString(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
-            && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
             && methodSymbol.MethodKind == MethodKind.Ordinary
             && methodSymbol.Name == nameof(object.ToString)
+            && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
             && methodSymbol.Parameters.Length == 0
             && methodSymbol.ReturnType.Is(KnownType.System_String);
 
@@ -95,29 +95,29 @@ namespace SonarAnalyzer.Helpers
         {
             const string explicitName = "System.IDisposable.Dispose";
             return methodSymbol != null
+                && (methodSymbol.Name == nameof(IDisposable.Dispose) || methodSymbol.Name == explicitName)
                 && methodSymbol.ReturnsVoid
-                && methodSymbol.Parameters.Length == 0
-                && (methodSymbol.Name == nameof(IDisposable.Dispose) || methodSymbol.Name == explicitName);
+                && methodSymbol.Parameters.Length == 0;
         }
 
         public static bool IsIEquatableEquals(this IMethodSymbol methodSymbol)
         {
             const string explicitName = "System.IEquatable.Equals";
             return methodSymbol != null
+                && (methodSymbol.Name == nameof(object.Equals) || methodSymbol.Name == explicitName)
                 && methodSymbol.Parameters.Length == 1
-                && methodSymbol.ReturnType.Is(KnownType.System_Boolean)
-                && (methodSymbol.Name == nameof(object.Equals) || methodSymbol.Name == explicitName);
+                && methodSymbol.ReturnType.Is(KnownType.System_Boolean);
         }
 
         public static bool IsGetObjectData(this IMethodSymbol methodSymbol)
         {
             const string explicitName = "System.Runtime.Serialization.ISerializable.GetObjectData";
             return methodSymbol != null
+                && (methodSymbol.Name == "GetObjectData" || methodSymbol.Name == explicitName)
                 && methodSymbol.Parameters.Length == 2
                 && methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo)
                 && methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext)
-                && methodSymbol.ReturnsVoid
-                && (methodSymbol.Name == "GetObjectData" || methodSymbol.Name == explicitName);
+                && methodSymbol.ReturnsVoid;
         }
 
         public static bool IsSerializationConstructor(this IMethodSymbol methodSymbol) =>
@@ -130,14 +130,14 @@ namespace SonarAnalyzer.Helpers
         public static bool IsArrayClone(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
             && methodSymbol.MethodKind == MethodKind.Ordinary
-            && methodSymbol.Parameters.Length == 0
             && methodSymbol.Name == nameof(Array.Clone)
+            && methodSymbol.Parameters.Length == 0
             && methodSymbol.ContainingType.Is(KnownType.System_Array);
 
         public static bool IsGcSuppressFinalize(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
-            && methodSymbol.Parameters.Length == 1
             && methodSymbol.Name == nameof(GC.SuppressFinalize)
+            && methodSymbol.Parameters.Length == 1
             && methodSymbol.ContainingType.Is(KnownType.System_GC);
 
         public static bool IsDebugAssert(this IMethodSymbol methodSymbol) =>
@@ -151,36 +151,36 @@ namespace SonarAnalyzer.Helpers
         public static bool IsOperatorBinaryPlus(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
             && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
-            && methodSymbol.Parameters.Length == 2
-            && methodSymbol.Name == "op_Addition";
+            && methodSymbol.Name == "op_Addition"
+            && methodSymbol.Parameters.Length == 2;
 
         public static bool IsOperatorBinaryMinus(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
             && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
-            && methodSymbol.Parameters.Length == 2
-            && methodSymbol.Name == "op_Subtraction";
+            && methodSymbol.Name == "op_Subtraction"
+            && methodSymbol.Parameters.Length == 2;
 
         public static bool IsOperatorEquals(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
             && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
-            && methodSymbol.Parameters.Length == 2
-            && methodSymbol.Name == "op_Equality";
+            && methodSymbol.Name == "op_Equality"
+            && methodSymbol.Parameters.Length == 2;
 
         public static bool IsOperatorNotEquals(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
             && methodSymbol.MethodKind == MethodKind.UserDefinedOperator
-            && methodSymbol.Parameters.Length == 2
-            && methodSymbol.Name == "op_Inequality";
+            && methodSymbol.Name == "op_Inequality"
+            && methodSymbol.Parameters.Length == 2;
 
         public static bool IsConsoleWriteLine(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
-            && methodSymbol.IsInType(KnownType.System_Console)
-            && methodSymbol.Name == nameof(Console.WriteLine);
+            && methodSymbol.Name == nameof(Console.WriteLine)
+            && methodSymbol.IsInType(KnownType.System_Console);
 
         public static bool IsConsoleWrite(this IMethodSymbol methodSymbol) =>
             methodSymbol != null
-            && methodSymbol.IsInType(KnownType.System_Console)
-            && methodSymbol.Name == nameof(Console.Write);
+            && methodSymbol.Name == nameof(Console.Write)
+            && methodSymbol.IsInType(KnownType.System_Console);
 
         private static bool IsEnumerableMethod(this IMethodSymbol methodSymbol, string methodName, params int[] parametersCount) =>
             methodSymbol != null
@@ -223,7 +223,7 @@ namespace SonarAnalyzer.Helpers
             methodSymbol != null
             && methodSymbol.ReturnsVoid
             && methodSymbol.Parameters.Length == 2
-            && (methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) || methodSymbol.Parameters[0].Name.Equals("sender", StringComparison.OrdinalIgnoreCase))
+            && (methodSymbol.Parameters[0].Name.Equals("sender", StringComparison.OrdinalIgnoreCase) || methodSymbol.Parameters[0].Type.Is(KnownType.System_Object))
             && (
                     // Inheritance from EventArgs is not enough for UWP or Xamarin as it uses other kind of event args (e.g. ILeavingBackgroundEventArgs)
                     methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal) ||
