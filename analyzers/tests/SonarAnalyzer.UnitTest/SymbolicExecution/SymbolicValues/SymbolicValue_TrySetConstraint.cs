@@ -45,6 +45,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [DynamicData(nameof(NotWhiteSpaceStringConstraintData))]
         [DynamicData(nameof(ByteArraySymbolicValueConstraintData))]
         [DynamicData(nameof(CryptographyIVSymbolicValueConstraintData))]
+        [DynamicData(nameof(SaltSizeSymbolicValueConstraintData))]
         public void TrySetConstraint(SymbolicValueConstraint constraint,
                                      IList<SymbolicValueConstraint> existingConstraints,
                                      IList<IList<SymbolicValueConstraint>> expectedConstraintsPerProgramState)
@@ -593,6 +594,22 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 CryptographyIVSymbolicValueConstraint.NotInitialized, // constraint to set
                 ConstraintList(CryptographyIVSymbolicValueConstraint.Initialized), // existing
                 ProgramStateList(ConstraintList(CryptographyIVSymbolicValueConstraint.NotInitialized)) // Expected
+            }
+        };
+
+        public static IEnumerable<object[]> SaltSizeSymbolicValueConstraintData { get; } = new[]
+        {
+            new object[]
+            {
+                SaltSizeSymbolicValueConstraint.Safe, // constraint to set
+                ConstraintList(SaltSizeSymbolicValueConstraint.Short), // existing
+                ProgramStateList(ConstraintList(SaltSizeSymbolicValueConstraint.Safe)) // Expected
+            },
+            new object[]
+            {
+                SaltSizeSymbolicValueConstraint.Short, // constraint to set
+                ConstraintList(SaltSizeSymbolicValueConstraint.Safe), // existing
+                ProgramStateList(ConstraintList(SaltSizeSymbolicValueConstraint.Short)) // Expected
             }
         };
 
