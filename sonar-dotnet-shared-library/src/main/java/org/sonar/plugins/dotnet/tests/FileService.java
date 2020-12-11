@@ -26,5 +26,5 @@ public interface FileService {
 
   boolean isSupportedAbsolute(String absolutePath);
 
-  Optional<InputFile> getFilesByRelativePath(String relativePath);
+  Optional<InputFile> getFileByRelativePath(String relativePath);
 }

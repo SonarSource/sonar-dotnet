@@ -49,7 +49,6 @@ public class VisualStudioCoverageXmlReportParserTest {
   public void prepare() {
     alwaysTrue = mock(FileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
-
   }
 
   @Test
@@ -210,7 +209,7 @@ public class VisualStudioCoverageXmlReportParserTest {
     Coverage coverage = new Coverage();
     FileService alwaysFalse = mock(FileService.class);
     when(alwaysFalse.isSupportedAbsolute(anyString())).thenReturn(false);
-    when(alwaysFalse.getFilesByRelativePath(anyString())).thenReturn(Optional.empty());
+    when(alwaysFalse.getFileByRelativePath(anyString())).thenReturn(Optional.empty());
     new VisualStudioCoverageXmlReportParser(alwaysFalse).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
 
     assertThat(coverage.files()).isEmpty();
@@ -218,21 +217,20 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1))
-      .startsWith("The path '")
-      .endsWith("\\CalcMultiplyTest\\MultiplyTest.cs' is not indexed by the scanner as an absolute or relative path. This file will be skipped. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).isEqualTo("The path 'CalcMultiplyTest\\MultiplyTest.cs'" +
+      " is not indexed by the scanner as an absolute or relative path. This file will be skipped. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
   @Test
   public void valid_with_no_absolute_path_relative_path_found() {
     Coverage coverage = new Coverage();
-    FileService mockFileValidator = mock(FileService.class);
-    when(mockFileValidator.isSupportedAbsolute(anyString())).thenReturn(false);
+    FileService mockFileService = mock(FileService.class);
+    when(mockFileService.isSupportedAbsolute(anyString())).thenReturn(false);
     InputFile mockInput = mock(InputFile.class);
     URI file = URI.create("/test/file/Calc.cs");
     when(mockInput.uri()).thenReturn(file);
-    when(mockFileValidator.getFilesByRelativePath(anyString())).thenReturn(Optional.of(mockInput));
-    new VisualStudioCoverageXmlReportParser(mockFileValidator).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
+    when(mockFileService.getFileByRelativePath(anyString())).thenReturn(Optional.of(mockInput));
+    new VisualStudioCoverageXmlReportParser(mockFileService).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
 
     assertThat(coverage.files()).hasSize(1);
     assertThat(coverage.hits(file.getPath())).hasSize(17)
@@ -258,9 +256,39 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1))
-      .startsWith("Found indexed file '/test/file/Calc.cs' for coverage entry '")
-      .endsWith("\\CalcMultiplyTest\\MultiplyTest.cs'.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).isEqualTo("Found indexed file '/test/file/Calc.cs' for coverage entry 'CalcMultiplyTest\\MultiplyTest.cs'.");
+  }
+
+  @Test
+  public void valid_with_deterministic_source_path_returns_found_path() {
+    Coverage coverage = new Coverage();
+    FileService mockFileService = mock(FileService.class);
+    when(mockFileService.isSupportedAbsolute(anyString())).thenReturn(false);
+    InputFile mockInput = mock(InputFile.class);
+    URI file = URI.create("/full/path/to/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs");
+    when(mockInput.uri()).thenReturn(file);
+    when(mockFileService.getFileByRelativePath("/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs")).thenReturn(Optional.of(mockInput));
+    new VisualStudioCoverageXmlReportParser(mockFileService).accept(new File("src/test/resources/visualstudio_coverage_xml/deterministic_source_paths.coveragexml"), coverage);
+
+    assertThat(coverage.files()).hasSize(1);
+    assertThat(coverage.hits(file.getPath())).hasSize(6)
+      .containsOnly(
+        Assertions.entry(6, 1),
+        Assertions.entry(7, 1),
+        Assertions.entry(8, 1),
+        Assertions.entry(11, 0),
+        Assertions.entry(12, 0),
+        Assertions.entry(13, 0));
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(3);
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).isEqualTo("The path " +
+      "'C:\\Workspace\\sonar-dotnet\\its\\projects\\CoverageWithDeterministicSourcePaths\\CoverageWithDeterministicSourcePaths.Tests\\FooTests.cs'" +
+      " is not indexed by the scanner as an absolute or relative path. This file will be skipped. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(2)).isEqualTo("Found indexed file " +
+      "'/full/path/to/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'" +
+      " for coverage entry '/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'.");
   }
 
   @Test

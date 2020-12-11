@@ -35,11 +35,11 @@ public class NCover3ReportParser implements CoverageParser {
 
   private static final String EXCLUDED_ID = "0";
   private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
-  private final FileService coverageFileValidator;
+  private final FileService fileService;
   private final AnalysisWarnings analysisWarnings;
 
-  NCover3ReportParser(FileService validator, AnalysisWarnings analysisWarnings) {
-    this.coverageFileValidator = validator;
+  NCover3ReportParser(FileService fileService, AnalysisWarnings analysisWarnings) {
+    this.fileService = fileService;
     this.analysisWarnings = analysisWarnings;
   }
 
@@ -119,7 +119,7 @@ public class NCover3ReportParser implements CoverageParser {
 
       if (documents.containsKey(doc) && !isExcludedLine(line)) {
         String path = documents.get(doc);
-        if (coverageFileValidator.isSupportedAbsolute(path)) {
+        if (fileService.isSupportedAbsolute(path)) {
 
           LOG.trace("Found coverage for line '{}', vc '{}' when analyzing the doc '{}' with the path '{}'.",
             line, vc, doc, path);

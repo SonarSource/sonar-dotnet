@@ -49,7 +49,7 @@ public class ScannerFileService implements FileService {
         fp.hasLanguage(languageKey)));
   }
 
-  public Optional<InputFile> getFilesByRelativePath(String filePath) {
+  public Optional<InputFile> getFileByRelativePath(String filePath) {
     String normalizedRelativePath = getNormalizedRelativePath(filePath);
     FilePredicates fp = fileSystem.predicates();
     Iterable<InputFile> files = fileSystem.inputFiles(

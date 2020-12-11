@@ -47,15 +47,15 @@ public class CoverageAggregator {
 
   public CoverageAggregator(CoverageConfiguration coverageConf,
                             Configuration configuration,
-                            ScannerFileService validator,
+                            ScannerFileService fileService,
                             AnalysisWarnings analysisWarnings) {
     this.coverageConf = coverageConf;
     this.configuration = configuration;
     this.coverageCache = new CoverageCache();
-    this.ncover3ReportParser = new NCover3ReportParser(validator, analysisWarnings);
-    this.openCoverReportParser = new OpenCoverReportParser(validator);
-    this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(validator));
-    this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(validator);
+    this.ncover3ReportParser = new NCover3ReportParser(fileService, analysisWarnings);
+    this.openCoverReportParser = new OpenCoverReportParser(fileService);
+    this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(fileService));
+    this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(fileService);
   }
 
   @VisibleForTesting

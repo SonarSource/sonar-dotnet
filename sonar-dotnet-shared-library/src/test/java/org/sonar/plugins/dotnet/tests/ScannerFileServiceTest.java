@@ -85,7 +85,7 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFilesByRelativePath_retrieves_all_files() {
+  public void getFileByRelativePath_retrieves_all_files() {
     // arrange
     FileSystem fs = mock(FileSystem.class);
     FilePredicates filePredicates = mock(FilePredicates.class);
@@ -104,19 +104,19 @@ public class ScannerFileServiceTest {
 
     // act
     ScannerFileService sut = new ScannerFileService("key", fs);
-    sut.getFilesByRelativePath("foo");
+    sut.getFileByRelativePath("foo");
 
     // assert
     assertThat(argumentCaptor.getValue()).isEqualTo(andMock);
   }
 
   @Test
-  public void getFilesByRelativePath_when_no_indexed_files_returns_empty() {
+  public void getFileByRelativePath_when_no_indexed_files_returns_empty() {
     FileSystem fs = createFileSystemForInputFiles(Collections.emptyList());
 
     // act
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFilesByRelativePath("C:\\_\\some\\path\\file.cs");
+    Optional<InputFile> result = sut.getFileByRelativePath("C:\\_\\some\\path\\file.cs");
 
     // assert
     assertThat(result).isEmpty();
@@ -126,11 +126,11 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFilesByRelativePath_when_indexed_files_do_not_match_returns_empty() {
+  public void getFileByRelativePath_when_indexed_files_do_not_match_returns_empty() {
     FileSystem fs = createFileSystemForInputFiles(Arrays.asList(mockInput("another/path/file.cs"), mockInput("some/file.cs")));
 
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFilesByRelativePath("/_/some/path/file.cs");
+    Optional<InputFile> result = sut.getFileByRelativePath("/_/some/path/file.cs");
 
     assertThat(result).isEmpty();
     assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly(
@@ -139,11 +139,11 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFilesByRelativePath_when_multiple_indexed_files_match_returns_empty() {
+  public void getFileByRelativePath_when_multiple_indexed_files_match_returns_empty() {
     FileSystem fs = createFileSystemForInputFiles(Arrays.asList(mockInput("root1/some/path/file.cs"), mockInput("root2/some/path/file.cs")));
 
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFilesByRelativePath("/_/some/path/file.cs");
+    Optional<InputFile> result = sut.getFileByRelativePath("/_/some/path/file.cs");
 
     assertThat(result).isEmpty();
     assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly(
@@ -152,7 +152,7 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFilesByRelativePath_when_single_indexed_files_match_returns_file() {
+  public void getFileByRelativePath_when_single_indexed_files_match_returns_file() {
     InputFile expectedResult = mockInput("root/some/path/file.cs");
     FileSystem fs = createFileSystemForInputFiles(Arrays.asList(
       mockInput("one"),
@@ -161,7 +161,7 @@ public class ScannerFileServiceTest {
       mockInput("four")));
 
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFilesByRelativePath("/_/some/path/file.cs");
+    Optional<InputFile> result = sut.getFileByRelativePath("/_/some/path/file.cs");
 
     assertThat(result).contains(expectedResult);
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
@@ -171,12 +171,12 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFilesByRelativePath_with_various_deterministic_source_path_when_match_returns_file() {
+  public void getFileByRelativePath_with_various_deterministic_source_path_when_match_returns_file() {
     InputFile expectedResult = mockInput("root/some/path/file.cs");
     FileSystem fs = createFileSystemForInputFiles(Collections.singletonList(expectedResult));
 
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFilesByRelativePath("C:\\_\\some\\path\\file.cs");
+    Optional<InputFile> result = sut.getFileByRelativePath("C:\\_\\some\\path\\file.cs");
 
     assertThat(result).contains(expectedResult);
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
@@ -186,23 +186,29 @@ public class ScannerFileServiceTest {
       .startsWith("Found indexed file ")
       .endsWith("root/some/path/file.cs' for coverage entry 'some/path/file.cs'.");
 
-    result = sut.getFilesByRelativePath("D:\\_\\some\\path\\file.cs");
+    result = sut.getFileByRelativePath("D:\\_\\some\\path\\file.cs");
     assertThat(result).contains(expectedResult);
 
-    result = sut.getFilesByRelativePath("\\_\\some\\path\\file.cs");
+    result = sut.getFileByRelativePath("\\_\\some\\path\\file.cs");
     assertThat(result).contains(expectedResult);
 
-    result = sut.getFilesByRelativePath("/_/some/path/file.cs");
+    result = sut.getFileByRelativePath("/_/some/path/file.cs");
+    assertThat(result).contains(expectedResult);
+
+    result = sut.getFileByRelativePath("/_1/some/path/file.cs");
+    assertThat(result).contains(expectedResult);
+
+    result = sut.getFileByRelativePath("/_23/some/path/file.cs");
     assertThat(result).contains(expectedResult);
   }
 
   @Test
-  public void getFilesByRelativePath_with_no_deterministic_source_path_when_single_indexed_files_match_returns_file() {
+  public void getFileByRelativePath_with_no_deterministic_source_path_when_single_indexed_files_match_returns_file() {
     InputFile expectedResult = mockInput("root/some/path/file.cs");
     FileSystem fs = createFileSystemForInputFiles(Collections.singletonList(expectedResult));
 
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFilesByRelativePath("some/path/file.cs");
+    Optional<InputFile> result = sut.getFileByRelativePath("some/path/file.cs");
 
     assertThat(result).contains(expectedResult);
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(1);

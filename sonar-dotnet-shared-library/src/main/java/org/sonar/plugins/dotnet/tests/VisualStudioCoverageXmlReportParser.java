@@ -33,10 +33,10 @@ import org.sonar.api.utils.log.Loggers;
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(VisualStudioCoverageXmlReportParser.class);
-  private final FileService coverageFileValidator;
+  private final FileService fileService;
 
-  public VisualStudioCoverageXmlReportParser(FileService coverageFileValidator) {
-    this.coverageFileValidator = coverageFileValidator;
+  public VisualStudioCoverageXmlReportParser(FileService fileService) {
+    this.fileService = fileService;
   }
 
   @Override
@@ -115,8 +115,8 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         return;
       }
 
-      if (!coverageFileValidator.isSupportedAbsolute(canonicalPath)) {
-        Optional<InputFile> foundFiles = coverageFileValidator.getFilesByRelativePath(canonicalPath);
+      if (!fileService.isSupportedAbsolute(canonicalPath)) {
+        Optional<InputFile> foundFiles = fileService.getFileByRelativePath(canonicalPath);
         if (foundFiles.isPresent()) {
           InputFile foundFile = foundFiles.get();
           String newPath = foundFile.uri().getPath();
