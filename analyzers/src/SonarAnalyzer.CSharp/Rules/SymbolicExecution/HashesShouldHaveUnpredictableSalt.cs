@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -54,8 +54,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 explodedGraph.AddExplodedGraphCheck(new SaltCheck(explodedGraph, this));
             }
 
-            protected override Diagnostic CreateDiagnostic(LocationContext locationContext) =>
-                Diagnostic.Create(Rule, locationContext.Location, locationContext.Message);
+            protected override Diagnostic CreateDiagnostic(LocationContext location) =>
+                Diagnostic.Create(Rule, location.Location, location.Message);
         }
 
         private sealed class LocationContext
@@ -87,6 +87,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
         private sealed class SaltCheck : ExplodedGraphCheck
         {
+            private const int MinimumSafeLength = 32;
+
             private static readonly ImmutableArray<KnownType> VulnerableTypes =
                 ImmutableArray.Create(KnownType.System_Security_Cryptography_PasswordDeriveBytes,
                                       KnownType.System_Security_Cryptography_Rfc2898DeriveBytes);
@@ -97,25 +99,21 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 this.context = context;
 
             public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
-                programPoint.CurrentInstruction switch
-                {
-                    ArrayCreationExpressionSyntax arrayCreation => ArrayCreationPostProcess(arrayCreation, programState),
-                    _ => programState
-                };
+                programPoint.CurrentInstruction is ArrayCreationExpressionSyntax arrayCreation
+                    ? ArrayCreationPostProcess(arrayCreation, programState)
+                    : programState;
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
-                programPoint.CurrentInstruction switch
-                {
-                    ObjectCreationExpressionSyntax objectCreation => ObjectCreationPreProcess(objectCreation, programState),
-                    _ => programState
-                };
+                programPoint.CurrentInstruction is ObjectCreationExpressionSyntax objectCreation
+                    ? ObjectCreationPreProcess(objectCreation, programState)
+                    : programState;
 
             private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState)
             {
                 if (programState.HasValue && semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array))
                 {
                     var size = GetSize(arrayCreation);
-                    if (size.HasValue && size.Value < 32)
+                    if (size.HasValue && size.Value < MinimumSafeLength)
                     {
                         programState = programState.SetConstraint(programState.PeekValue(), SaltSizeSymbolicValueConstraint.Short);
                     }
@@ -159,4 +157,3 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         }
     }
 }
-
