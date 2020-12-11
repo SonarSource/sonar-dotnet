@@ -102,7 +102,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
-                var instruction = programPoint.Block.Instructions[programPoint.Offset];
+                var instruction = programPoint.CurrentInstruction;
+
                 if (instruction is InvocationExpressionSyntax invocation)
                 {
                     return VisitInvocationExpression(invocation, programState);
