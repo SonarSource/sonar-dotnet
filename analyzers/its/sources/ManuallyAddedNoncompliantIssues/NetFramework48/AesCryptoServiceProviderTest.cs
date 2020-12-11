@@ -28,12 +28,8 @@ namespace NetFramework48
         {
             using (var sa = new AesCryptoServiceProvider())
             {
-                sa.CreateEncryptor(); // Noncompliant (S3329) {{Use a dynamically-generated, random IV.}}
-                sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant
-
-                sa.GenerateKey();
-                sa.GenerateIV();
-                sa.CreateEncryptor(sa.Key, sa.IV);
+                sa.CreateEncryptor();
+                sa.CreateEncryptor(sa.Key, new byte[16]); // Noncompliant (S3329) {{Use a dynamically-generated, random IV.}}
             }
         }
     }

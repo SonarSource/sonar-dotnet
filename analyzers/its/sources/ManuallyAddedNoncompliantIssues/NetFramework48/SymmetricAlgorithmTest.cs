@@ -26,14 +26,10 @@ namespace NetFramework48
     {
         public static void TestCases()
         {
-            using (var sa = SymmetricAlgorithm.Create("AES"))
+            using (var sa = SymmetricAlgorithm.Create("Rijndael"))
             {
-                sa.CreateEncryptor(); // Noncompliant (S3329) {{Use a dynamically-generated, random IV.}}
-                sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant
-
-                sa.GenerateKey();
-                sa.GenerateIV();
-                sa.CreateEncryptor(sa.Key, sa.IV);
+                sa.CreateEncryptor();
+                sa.CreateEncryptor(sa.Key, new byte[16]); // Noncompliant (S3329) {{Use a dynamically-generated, random IV.}}
             }
         }
     }

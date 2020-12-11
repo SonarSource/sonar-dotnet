@@ -26,15 +26,9 @@ namespace NetFramework48
     {
         public static void TestCases()
         {
-            using (var sa = new AesCng())
-            {
-                sa.CreateEncryptor(); // Noncompliant (S3329) {{Use a dynamically-generated, random IV.}}
-                sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant
-
-                sa.GenerateKey();
-                sa.GenerateIV();
-                sa.CreateEncryptor(sa.Key, sa.IV);
-            }
+            var aes = new AesCng();
+            aes.CreateEncryptor();
+            aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant (S3329) {{Use a dynamically-generated, random IV.}}
         }
     }
 }
