@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.SymbolicExecution.Common.Constraints;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
@@ -30,21 +31,23 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
     public class SymbolicValue_TrySetConstraint
     {
         [TestMethod]
-        [DynamicData(nameof(TrueConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(FalseConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(NullConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(NotNullConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(NoValueConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(HasValueConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(EmptyStringConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(FullStringConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(FullOrNullStringConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(WhiteSpaceStringConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(FullNotWhiteSpaceStringConstraintData), DynamicDataSourceType.Property)]
-        [DynamicData(nameof(NotWhiteSpaceStringConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(TrueConstraintData))]
+        [DynamicData(nameof(FalseConstraintData))]
+        [DynamicData(nameof(NullConstraintData))]
+        [DynamicData(nameof(NotNullConstraintData))]
+        [DynamicData(nameof(NoValueConstraintData))]
+        [DynamicData(nameof(HasValueConstraintData))]
+        [DynamicData(nameof(EmptyStringConstraintData))]
+        [DynamicData(nameof(FullStringConstraintData))]
+        [DynamicData(nameof(FullOrNullStringConstraintData))]
+        [DynamicData(nameof(WhiteSpaceStringConstraintData))]
+        [DynamicData(nameof(FullNotWhiteSpaceStringConstraintData))]
+        [DynamicData(nameof(NotWhiteSpaceStringConstraintData))]
+        [DynamicData(nameof(ByteArraySymbolicValueConstraintData))]
+        [DynamicData(nameof(CryptographyIVSymbolicValueConstraintData))]
         public void TrySetConstraint(SymbolicValueConstraint constraint,
-            IList<SymbolicValueConstraint> existingConstraints,
-            IList<IList<SymbolicValueConstraint>> expectedConstraintsPerProgramState)
+                                     IList<SymbolicValueConstraint> existingConstraints,
+                                     IList<IList<SymbolicValueConstraint>> expectedConstraintsPerProgramState)
         {
             // Arrange
             var sv = new SymbolicValue();
@@ -561,20 +564,43 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        private static IList<IList<SymbolicValueConstraint>> ProgramStateList(params IList<SymbolicValueConstraint>[] programStates)
+        public static IEnumerable<object[]> ByteArraySymbolicValueConstraintData { get; } = new[]
         {
-            return programStates;
-        }
+            new object[]
+            {
+                ByteArraySymbolicValueConstraint.Constant, // constraint to set
+                ConstraintList(ByteArraySymbolicValueConstraint.Modified), // existing
+                ProgramStateList(ConstraintList(ByteArraySymbolicValueConstraint.Constant)) // Expected
+            },
+            new object[]
+            {
+                ByteArraySymbolicValueConstraint.Modified, // constraint to set
+                ConstraintList(ByteArraySymbolicValueConstraint.Constant), // existing
+                ProgramStateList(ConstraintList(ByteArraySymbolicValueConstraint.Modified)) // Expected
+            }
+        };
 
-        private static IList<SymbolicValueConstraint> ConstraintList(params SymbolicValueConstraint[] constraints)
+        public static IEnumerable<object[]> CryptographyIVSymbolicValueConstraintData { get; } = new[]
         {
-            return constraints;
-        }
+            new object[]
+            {
+                CryptographyIVSymbolicValueConstraint.Initialized, // constraint to set
+                ConstraintList(CryptographyIVSymbolicValueConstraint.NotInitialized), // existing
+                ProgramStateList(ConstraintList(CryptographyIVSymbolicValueConstraint.Initialized)) // Expected
+            },
+            new object[]
+            {
+                CryptographyIVSymbolicValueConstraint.NotInitialized, // constraint to set
+                ConstraintList(CryptographyIVSymbolicValueConstraint.Initialized), // existing
+                ProgramStateList(ConstraintList(CryptographyIVSymbolicValueConstraint.NotInitialized)) // Expected
+            }
+        };
 
-        private ProgramState SetupProgramState(SymbolicValue sv, IEnumerable<SymbolicValueConstraint> constraints)
-        {
-            return constraints.Aggregate(new ProgramState(),
-                (ps, constraint) => ps.SetConstraint(sv, constraint));
-        }
+        private static IList<IList<SymbolicValueConstraint>> ProgramStateList(params IList<SymbolicValueConstraint>[] programStates) => programStates;
+
+        private static IList<SymbolicValueConstraint> ConstraintList(params SymbolicValueConstraint[] constraints) => constraints;
+
+        private static ProgramState SetupProgramState(SymbolicValue sv, IEnumerable<SymbolicValueConstraint> constraints) =>
+            constraints.Aggregate(new ProgramState(), (ps, constraint) => ps.SetConstraint(sv, constraint));
     }
 }
