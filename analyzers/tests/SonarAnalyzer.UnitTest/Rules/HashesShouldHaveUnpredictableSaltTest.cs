@@ -22,6 +22,7 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -32,12 +33,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void HashesShouldHaveUnpredictableSalt() =>
-            Verifier.VerifyAnalyzer(@"TestCases\HashesShouldHaveUnpredictableSalt.cs", GetAnalyzer(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\HashesShouldHaveUnpredictableSalt.cs",
+                                    GetAnalyzer(),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void HashesShouldHaveUnpredictableSalt_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\HashesShouldHaveUnpredictableSalt.CSharp9.cs", GetAnalyzer());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\HashesShouldHaveUnpredictableSalt.CSharp9.cs",
+                                                      GetAnalyzer(),
+                                                      MetadataReferenceFacade.GetSystemSecurityCryptography());
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             new SymbolicExecutionRunner(new HashesShouldHaveUnpredictableSalt());
