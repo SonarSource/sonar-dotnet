@@ -649,7 +649,7 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 // Push value for the discard, it will be popped when visiting the block for the
                 // corresponding case statement.
-                newProgramState = newProgramState.PushValue(SymbolicValue.Create());
+                newProgramState = newProgramState.PushValue(new SymbolicValue());
             }
             else if (SingleVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
             {
@@ -660,12 +660,12 @@ namespace SonarAnalyzer.SymbolicExecution
                 var variableSymbol = SemanticModel.GetDeclaredSymbol(singleVariableDesignation);
                 var newSymbolicValue = SymbolicValue.Create();
                 newProgramState = SetNewSymbolicValueIfTracked(variableSymbol, newSymbolicValue, newProgramState);
+                // When the pattern is "x is Type t" we know that "t != null", hence (SV != null)
+                newProgramState = newProgramState.SetConstraint(newSymbolicValue, ObjectConstraint.NotNull);
 
                 if (singleVariable)
                 {
-                    // When the pattern is "x is Type t" we know that "t != null", hence (SV != null)
-                    newProgramState = newProgramState.SetConstraint(newSymbolicValue, ObjectConstraint.NotNull);
-                    newProgramState = newProgramState.PushValue(newSymbolicValue);
+                    newProgramState = newProgramState.PushValue(new SymbolicValue());
                 }
             }
             else if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))

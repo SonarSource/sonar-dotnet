@@ -252,12 +252,12 @@ namespace Tests.Diagnostics
             if (!(value is bool valueBool))
                 return -1;
 
-            if (valueBool)  // Noncompliant, FP - valueBool can be true or false
+            if (valueBool)  // Compliant - valueBool can be true or false
             {
                 return 42;
             }
             else
-            { // Secondary, FN
+            {
                 return 0;
             }
         }
