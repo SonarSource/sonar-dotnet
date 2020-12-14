@@ -51,16 +51,7 @@ public class ScannerFileService implements FileService {
 
   public Optional<InputFile> getFileByRelativePath(String filePath) {
     String normalizedRelativePath = getNormalizedRelativePath(filePath);
-    FilePredicates fp = fileSystem.predicates();
-    Iterable<InputFile> files = fileSystem.inputFiles(
-      fp.and(
-        fp.all(),
-        fp.hasLanguage(languageKey)
-      ));
-    return findUniqueFile(normalizedRelativePath, files);
-  }
-
-  private static Optional<InputFile> findUniqueFile(String normalizedRelativePath, Iterable<InputFile> files) {
+    Iterable<InputFile> files = fileSystem.inputFiles(fileSystem.predicates().hasLanguage(languageKey));
     int count = 0;
     InputFile foundFile = null;
     for (InputFile file : files) {
@@ -70,15 +61,12 @@ public class ScannerFileService implements FileService {
         foundFile = file;
       }
     }
-    if (count == 0) {
-      LOG.trace("Did not find any indexed file for '{}'.", normalizedRelativePath);
-      return Optional.empty();
-    } else if (count > 1) {
-      LOG.debug("Found {} indexed files for relative path '{}'. Will skip this coverage entry.", count, normalizedRelativePath);
-      return Optional.empty();
-    } else {
-      LOG.trace("Found indexed file '{}' for coverage entry '{}'.", foundFile.uri().getPath(), normalizedRelativePath);
+    if (count == 1) {
+      LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile.uri().getPath(), filePath, normalizedRelativePath);
       return Optional.of(foundFile);
+    } else {
+      LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry.", count, filePath, normalizedRelativePath);
+      return Optional.empty();
     }
   }
 
@@ -88,13 +76,13 @@ public class ScannerFileService implements FileService {
   }
 
   private static String replaceDeterministicSourcePath(String filePath) {
-
     Matcher matcher = DETERMINISTIC_SOURCE_PATH_PREFIX.matcher(filePath);
-    String subPath = matcher.replaceFirst("");
-    if (!filePath.equals(subPath)) {
-      LOG.trace("It seems Deterministic Source Paths are used, replacing '{}' with '{}'.", filePath, subPath);
+    if (matcher.find())
+    {
+      String relativePath = matcher.replaceFirst("");
+      LOG.trace("It seems Deterministic Source Paths are used, replacing '{}' with '{}'.", filePath, relativePath);
+      return relativePath;
     }
-    return subPath;
+    return filePath;
   }
-
 }

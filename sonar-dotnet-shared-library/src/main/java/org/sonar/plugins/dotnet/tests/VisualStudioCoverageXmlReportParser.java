@@ -116,10 +116,9 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
       }
 
       if (!fileService.isSupportedAbsolute(canonicalPath)) {
-        Optional<InputFile> foundFiles = fileService.getFileByRelativePath(canonicalPath);
-        if (foundFiles.isPresent()) {
-          InputFile foundFile = foundFiles.get();
-          String newPath = foundFile.uri().getPath();
+        Optional<InputFile> foundFile = fileService.getFileByRelativePath(canonicalPath);
+        if (foundFile.isPresent()) {
+          String newPath = foundFile.get().uri().getPath();
           LOG.debug("Found indexed file '{}' for coverage entry '{}'.", newPath, canonicalPath);
           canonicalPath = newPath;
         } else {
