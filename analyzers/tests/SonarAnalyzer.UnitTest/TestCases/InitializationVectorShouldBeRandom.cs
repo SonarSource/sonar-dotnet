@@ -257,4 +257,25 @@ namespace Tests.Diagnostics
 
         public override void GenerateKey() => throw new NotImplementedException();
     }
+
+    public class SymmetricalEncryptorWrapper
+    {
+        private readonly SymmetricAlgorithm algorithm;
+
+        public SymmetricalEncryptorWrapper()
+        {
+            algorithm = Aes.Create();
+        }
+
+
+        public void GenerateIV()
+        {
+            algorithm.GenerateIV();
+        }
+
+        public ICryptoTransform CreateEncryptor()
+        {
+            return algorithm.CreateEncryptor();
+        }
+    }
 }

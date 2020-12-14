@@ -86,10 +86,10 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
             private ProgramState InvocationExpressionPostProcess(InvocationExpressionSyntax invocation, ProgramState programState)
             {
-                if (IsSymmetricAlgorithmGenerateIVMethod(invocation, semanticModel))
+                if (IsSymmetricAlgorithmGenerateIVMethod(invocation, semanticModel)
+                    && GetSymbolicValue(invocation, programState) is {} ivSymbolicValue)
                 {
-                    var symbolicValue = GetSymbolicValue(invocation, programState);
-                    programState = programState.SetConstraint(symbolicValue, CryptographyIVSymbolicValueConstraint.Initialized);
+                    programState = programState.SetConstraint(ivSymbolicValue, CryptographyIVSymbolicValueConstraint.Initialized);
                 }
                 else if (IsSanitizer(invocation, semanticModel)
                          && semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression).Symbol is {} symbol
