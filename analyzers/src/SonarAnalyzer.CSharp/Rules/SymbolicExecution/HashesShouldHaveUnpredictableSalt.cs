@@ -46,19 +46,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph);
 
-        private sealed class AnalysisContext : DefaultAnalysisContext<LocationContext>
-        {
-            public AnalysisContext(AbstractExplodedGraph explodedGraph)
-            {
-                explodedGraph.AddExplodedGraphCheck(new ByteArrayCheck(explodedGraph));
-                explodedGraph.AddExplodedGraphCheck(new SaltCheck(explodedGraph, this));
-            }
-
-            protected override Diagnostic CreateDiagnostic(LocationContext location) =>
-                Diagnostic.Create(Rule, location.Location, location.Message);
-        }
-
-        private sealed class LocationContext
+        internal sealed class LocationContext
         {
             public Location Location { get; }
 
@@ -74,7 +62,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             {
                 unchecked
                 {
-                    return ((Location != null ? Location.GetHashCode() : 0) * 397) ^ (Message != null ? Message.GetHashCode() : 0);
+                    return Location.GetHashCode() * 397 ^ Message.GetHashCode();
                 }
             }
 
@@ -83,6 +71,18 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
             private bool Equals(LocationContext other) =>
                 Equals(Location, other.Location) && Message == other.Message;
+        }
+
+        private sealed class AnalysisContext : DefaultAnalysisContext<LocationContext>
+        {
+            public AnalysisContext(AbstractExplodedGraph explodedGraph)
+            {
+                explodedGraph.AddExplodedGraphCheck(new ByteArrayCheck(explodedGraph));
+                explodedGraph.AddExplodedGraphCheck(new SaltCheck(explodedGraph, this));
+            }
+
+            protected override Diagnostic CreateDiagnostic(LocationContext location) =>
+                Diagnostic.Create(Rule, location.Location, location.Message);
         }
 
         private sealed class SaltCheck : ExplodedGraphCheck
@@ -144,16 +144,23 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 return programState;
             }
 
-            private Optional<int> GetSize(ArrayCreationExpressionSyntax arrayCreation) =>
-                arrayCreation.Type.RankSpecifiers is {} rankSpecifiers &&
-                rankSpecifiers.Count == 1 &&
-                rankSpecifiers[0].Sizes[0] is {} rankSpecifier &&
-                rankSpecifier.IsKind(SyntaxKind.NumericLiteralExpression) &&
-                semanticModel.GetConstantValue(rankSpecifier) is {} constantValue &&
-                constantValue.HasValue &&
-                constantValue.Value is int size
-                    ? new Optional<int>(size)
-                    : new Optional<int>();
+            private Optional<int> GetSize(ArrayCreationExpressionSyntax arrayCreation)
+            {
+                if (arrayCreation.Initializer != null)
+                {
+                    return new Optional<int>(arrayCreation.Initializer.Expressions.Count);
+                }
+
+                if (arrayCreation.Type.RankSpecifiers.Count == 1
+                    && arrayCreation.Type.RankSpecifiers[0].Sizes[0] is {} rankSpecifierSize
+                    && semanticModel.GetConstantValue(rankSpecifierSize) is {} constantValue
+                    && constantValue.HasValue && constantValue.Value is int size)
+                {
+                    return new Optional<int>(size);
+                }
+
+                return new Optional<int>();
+            }
         }
     }
 }

@@ -149,5 +149,23 @@ namespace Tests.Diagnostics
 
             new PasswordDeriveBytes(passwordBytes, new byte[32]); // Noncompliant
         }
+
+        public void ByteArrayCases(byte[] passwordBytes)
+        {
+            var rng = RandomNumberGenerator.Create();
+            var a1 = new byte[1,1];
+
+            var a2 = new byte[1][];
+            rng.GetBytes(a2[0]);
+            new PasswordDeriveBytes(passwordBytes, a2[0]); // FN, not supported
+
+            var a3 = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+            rng.GetBytes(a3);
+            new PasswordDeriveBytes(passwordBytes, a3); // Noncompliant
+
+            var a4 = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+            rng.GetBytes(a4);
+            new PasswordDeriveBytes(passwordBytes, a4); // Compliant
+        }
     }
 }

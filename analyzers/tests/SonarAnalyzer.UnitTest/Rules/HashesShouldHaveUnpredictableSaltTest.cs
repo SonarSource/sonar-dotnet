@@ -19,6 +19,10 @@
  */
 
 extern alias csharp;
+using System;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
@@ -44,6 +48,26 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\HashesShouldHaveUnpredictableSalt.CSharp9.cs",
                                                       GetAnalyzer(),
                                                       MetadataReferenceFacade.GetSystemSecurityCryptography());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void HashesShouldHaveUnpredictableSalt_LocationContext_Equals()
+        {
+            var tree = SyntaxFactory.ParseSyntaxTree("public class Test {}");
+            var location = Location.Create(tree, TextSpan.FromBounds(0, 6));
+
+            var context1 = new HashesShouldHaveUnpredictableSalt.LocationContext(location, "message");
+            var context2 = new HashesShouldHaveUnpredictableSalt.LocationContext(location, "2nd message");
+            var context3 = new HashesShouldHaveUnpredictableSalt.LocationContext(null, "message");
+            var context4 = new HashesShouldHaveUnpredictableSalt.LocationContext(location, "message");
+
+            Assert.AreEqual(false, context1.Equals(null));
+            Assert.AreEqual(false, context1.Equals(new object()));
+            Assert.AreEqual(false, context1.Equals(context2));
+            Assert.AreEqual(false, context1.Equals(context3));
+            Assert.AreEqual(true, context1.Equals(context1));
+            Assert.AreEqual(true, context1.Equals(context4));
+        }
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
             new SymbolicExecutionRunner(new HashesShouldHaveUnpredictableSalt());
