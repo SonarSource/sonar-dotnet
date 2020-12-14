@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ClassBlock, SyntaxKind.InterfaceBlock };
 
-        protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
 
         public NonStandardCryptographicAlgorithmsShouldNotBeUsed()
             : this(AnalyzerConfiguration.Hotspot)
