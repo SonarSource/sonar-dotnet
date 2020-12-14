@@ -35,12 +35,11 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S3168";
         private const string MessageFormat = "Return 'Task' instead.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         private const string MsTestV1AssemblyName = "Microsoft.VisualStudio.QualityTools.UnitTestFramework";
+
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
         private static readonly ImmutableArray<KnownType> AllowedAsyncVoidMsTestAttributes =
             ImmutableArray.Create(
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute,
@@ -51,33 +50,31 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute
             );
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-                    if (IsViolatingRule(methodSymbol) &&
-                        !IsExceptionToTheRule(methodDeclaration, methodSymbol))
+                    if (IsViolatingRule(methodSymbol) && !IsExceptionToTheRule(methodDeclaration, methodSymbol))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.ReturnType.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.ReturnType.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
 
         private static bool IsViolatingRule(IMethodSymbol methodSymbol) =>
-            methodSymbol != null &&
-            methodSymbol.IsAsync &&
-            methodSymbol.ReturnsVoid &&
-            methodSymbol.IsChangeable();
+            methodSymbol != null
+            && methodSymbol.IsAsync
+            && methodSymbol.ReturnsVoid
+            && methodSymbol.IsChangeable();
 
         private static bool IsExceptionToTheRule(MethodDeclarationSyntax methodDeclaration, IMethodSymbol methodSymbol) =>
-            methodSymbol.IsEventHandler() ||
-            IsUsedAsEventHandler(methodDeclaration) ||
-            HasAnyMsTestV1AllowedAttribute(methodSymbol);
+            methodSymbol.IsEventHandler()
+            || IsUsedAsEventHandler(methodDeclaration)
+            || IsNamedAsEventHandler(methodSymbol)
+            || HasAnyMsTestV1AllowedAttribute(methodSymbol);
 
         private static bool IsUsedAsEventHandler(MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>() is ClassDeclarationSyntax parentClass
@@ -88,9 +85,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IdentifierNameSyntax>()
                 .Any(ins => ins.Identifier.ValueText == methodDeclaration.Identifier.ValueText);
 
+        private static bool IsNamedAsEventHandler(ISymbol symbol) =>
+            symbol.Name.Length > 2
+            && symbol.Name.StartsWith("On")
+            && char.IsUpper(symbol.Name[2]);
+
         private static bool HasAnyMsTestV1AllowedAttribute(IMethodSymbol methodSymbol) =>
             methodSymbol.GetAttributes().Any(a =>
-                a.AttributeClass.ContainingAssembly.Name == MsTestV1AssemblyName &&
-                a.AttributeClass.IsAny(AllowedAsyncVoidMsTestAttributes));
+                a.AttributeClass.ContainingAssembly.Name == MsTestV1AssemblyName
+                && a.AttributeClass.IsAny(AllowedAsyncVoidMsTestAttributes));
     }
 }
