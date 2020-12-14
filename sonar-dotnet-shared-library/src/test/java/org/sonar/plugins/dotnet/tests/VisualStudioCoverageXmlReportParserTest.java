@@ -44,11 +44,16 @@ public class VisualStudioCoverageXmlReportParserTest {
   @Rule
   public ExpectedException thrown = ExpectedException.none();
   private FileService alwaysTrue;
+  private FileService alwaysFalseAndEmpty;
 
   @Before
   public void prepare() {
     alwaysTrue = mock(FileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
+    when(alwaysTrue.getFileByRelativePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
+    alwaysFalseAndEmpty = mock(FileService.class);
+    when(alwaysFalseAndEmpty.isSupportedAbsolute(anyString())).thenReturn(false);
+    when(alwaysFalseAndEmpty.getFileByRelativePath(anyString())).thenReturn(Optional.empty());
   }
 
   @Test
@@ -207,10 +212,8 @@ public class VisualStudioCoverageXmlReportParserTest {
   @Test
   public void valid_with_no_absolute_path_no_relative_path() throws Exception {
     Coverage coverage = new Coverage();
-    FileService alwaysFalse = mock(FileService.class);
-    when(alwaysFalse.isSupportedAbsolute(anyString())).thenReturn(false);
-    when(alwaysFalse.getFileByRelativePath(anyString())).thenReturn(Optional.empty());
-    new VisualStudioCoverageXmlReportParser(alwaysFalse).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
+
+    new VisualStudioCoverageXmlReportParser(alwaysFalseAndEmpty).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
 
     assertThat(coverage.files()).isEmpty();
     assertThat(coverage.hits(new File("MyLibrary\\Calc.cs").getCanonicalPath())).isEmpty();
