@@ -648,8 +648,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var newProgramState = programState;
             if (DiscardDesignationSyntaxWrapper.IsInstance(variableDesignation))
             {
-                // Push value for the discard, it will be popped when visiting the block for the
-                // corresponding case statement.
+                // Push value for the discard, it will be popped when visiting the block for the corresponding case statement.
                 newProgramState = newProgramState.PushValue(new SymbolicValue());
             }
             else if (SingleVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
@@ -677,6 +676,8 @@ namespace SonarAnalyzer.SymbolicExecution
                     // the variables in the deconstruction should not receive "Not Null" constraint
                     newProgramState = VisitVariableDesignation(variable, newProgramState, true);
                 }
+                // Push value for the result of "var (string s, int i) when ....", it will be popped when visiting the block for the corresponding case statement.
+                newProgramState = newProgramState.PushValue(new SymbolicValue());
             }
             else
             {

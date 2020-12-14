@@ -64,23 +64,24 @@ namespace Tests.Diagnostics
             switch ((arg, true))
             {
                 case var (o, b) when b: // "when" should add true constraint on "b"
-                    if (b) { } // FN, var pattern above doesn't push any value to stack and this branch is never visited.
+                    if (b) { }          // Noncompliant
                     break;
 
                 case var (o, b) when o != null: // "when" should add NotNull constraint on "o"
-                    if (o == null) { } // FN, var pattern above doesn't push any value to stack and this branch is never visited.
+                    if (o == null) { }  // Noncompliant
+                                        // Secondary@-1
                     break;
 
                 case var (o, b):
                     if (o == null) { }  // Compliant, no constraint should be added on "o" from the ParenthesizedVariableDesignationSyntax above
 
                     o = null;
-                    if (o == null) { }  // FN, var pattern above doesn't push any value to stack and this branch is never visited.
+                    if (o == null) { }  // Noncompliant
                     break;
             }
 
             var isTrue = true;
-            if (isTrue) { } // FN, var pattern above doesn't push any value to stack and this branch is never visited.
+            if (isTrue) { } // Noncompliant
         }
 
         public void ParenthesizedVariableDesignation_Nested(object arg)
@@ -88,14 +89,14 @@ namespace Tests.Diagnostics
             switch ((arg, true, (arg, ("NotNull", 42))))
             {
                 case var (argA, b, (argB, (notNull, i))):
-                    if (argA == null) { }   // Compliant
-                    if (argB == null) { }   // Compliant
-                    if (notNull == null) { }    // FN as we don't propagate the constraint AND var pattern above doesn't push any value to stack and this branch is never visited
+                    if (argA == null) { }       // Compliant, no constraint should be added
+                    if (argB == null) { }       // Compliant, no constraint should be added
+                    if (notNull == null) { }    // FN as we don't propagate the constraint
                     break;
             }
 
             var isTrue = true;
-            if (isTrue) { } // FN, var pattern above doesn't push any value to stack and this branch is never visited.
+            if (isTrue) { } // Noncompliant
         }
 
         void Patterns_In_Loops(object o, object[] items)
