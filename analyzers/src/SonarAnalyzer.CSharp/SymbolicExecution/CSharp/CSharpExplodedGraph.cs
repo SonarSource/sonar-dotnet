@@ -635,15 +635,15 @@ namespace SonarAnalyzer.SymbolicExecution
             //   - VarKeyword                                 - PredefinedType
             //   - SingleVariableDesignation                  - SingleVariableDesignation
             //      - IdentifierToken                             - IdentifierToken
-            VisitVariableDesignation(varPatternSyntax.Designation, programState, singleVariable: true);
+            VisitVariableDesignation(varPatternSyntax.Designation, programState);
 
         private ProgramState VisitDeclarationPattern(DeclarationPatternSyntaxWrapper declarationPattern, ProgramState newProgramState) =>
             // "x is string s" is equivalent to "s = x" and "s" gets NotNull constraint
             // "x is (string s, int i)" is recursive pattern with PositionalPatternClause and doesn't reach this path
-            VisitVariableDesignation(declarationPattern.Designation, newProgramState, singleVariable: true);
+            VisitVariableDesignation(declarationPattern.Designation, newProgramState);
 
-        /// <param name="singleVariable">True for top-level designated variables in "x is string s". NotNull constraint is added. False for variables nested in "var (string s, int i)".</param>
-        private ProgramState VisitVariableDesignation(VariableDesignationSyntaxWrapper variableDesignation, ProgramState programState, bool singleVariable)
+        /// <param name="isInParanthesizedVariableDesignation">True for variables nested in ParenthesizedVariableDesignationSyntax "var (string s, int i)".</param>
+        private ProgramState VisitVariableDesignation(VariableDesignationSyntaxWrapper variableDesignation, ProgramState programState, bool isInParanthesizedVariableDesignation = false)
         {
             var newProgramState = programState;
             if (DiscardDesignationSyntaxWrapper.IsInstance(variableDesignation))
@@ -662,7 +662,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 var newSymbolicValue = SymbolicValue.Create();
                 newProgramState = SetNewSymbolicValueIfTracked(variableSymbol, newSymbolicValue, newProgramState);
 
-                if (singleVariable)
+                if (!isInParanthesizedVariableDesignation)
                 {
                     // When the pattern is "x is Type t" we know that "t != null", hence (SV != null)
                     newProgramState = newProgramState.SetConstraint(newSymbolicValue, ObjectConstraint.NotNull);
@@ -675,7 +675,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 foreach (var variable in parenthesizedVariableDesignation.Variables)
                 {
                     // the variables in the deconstruction should not receive "Not Null" constraint
-                    newProgramState = VisitVariableDesignation(variable, newProgramState, singleVariable: false);
+                    newProgramState = VisitVariableDesignation(variable, newProgramState, true);
                 }
             }
             else
