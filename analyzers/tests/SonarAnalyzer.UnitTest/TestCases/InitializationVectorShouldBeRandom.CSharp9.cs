@@ -6,19 +6,14 @@ var constantIV = new byte[16];
 using var aes = new AesCng();
 using var rng = new RNGCryptoServiceProvider();
 
-aes.CreateEncryptor(); // FN
-aes.CreateEncryptor(aes.Key, constantIV); // FN
-
-aes.GenerateIV();
 aes.CreateEncryptor();
-aes.CreateEncryptor(aes.Key, aes.IV);
+aes.CreateEncryptor(aes.Key, new byte[16]); // FN
 
 void TopLevelLocalFunction()
 {
     using var aes = new AesCng();
-    aes.CreateEncryptor(); // FN
-    aes.GenerateIV();
     aes.CreateEncryptor();
+    aes.CreateEncryptor(aes.Key, new byte[16]); // FN
 }
 
 public class Sample
@@ -26,9 +21,8 @@ public class Sample
     public void TargetTypedNew()
     {
         AesCng aes = new();
-        aes.CreateEncryptor(); // FN
-        aes.GenerateIV();
         aes.CreateEncryptor();
+        aes.CreateEncryptor(aes.Key, new byte[16]); // FN
     }
 
     public void StaticLambda()
@@ -36,7 +30,8 @@ public class Sample
         Action a = static () =>
         {
             AesCng aes = new AesCng();
-            aes.CreateEncryptor(); // Noncompliant
+            aes.CreateEncryptor();
+            aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
         };
         a();
     }
@@ -59,9 +54,8 @@ public record Record
     public void Method()
     {
         AesCng aes = new AesCng();
-        aes.CreateEncryptor(); // Noncompliant
-        aes.GenerateIV();
         aes.CreateEncryptor();
+        aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
     }
 }
 
@@ -75,9 +69,8 @@ public partial class Partial
     public partial void Method()
     {
         AesCng aes = new AesCng();
-        aes.CreateEncryptor(); // Noncompliant
-        aes.GenerateIV();
         aes.CreateEncryptor();
+        aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
     }
 }
 
@@ -88,9 +81,8 @@ namespace TartetTypedConditional
         public void Go(bool condition)
         {
             SymmetricAlgorithm aes = condition ? new AesCng() : new AesCryptoServiceProvider();
-            aes.CreateEncryptor();  // Noncompliant
-            aes.GenerateIV();
             aes.CreateEncryptor();
+            aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
         }
     }
 }

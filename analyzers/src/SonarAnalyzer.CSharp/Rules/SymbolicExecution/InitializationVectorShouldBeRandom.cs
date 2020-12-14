@@ -78,37 +78,18 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
                 programPoint.CurrentInstruction switch
                 {
-                    ObjectCreationExpressionSyntax objectCreation => ObjectCreationPostProcess(objectCreation, programState),
                     InvocationExpressionSyntax invocation => InvocationExpressionPostProcess(invocation, programState),
                     ArrayCreationExpressionSyntax arrayCreation => ArrayCreationPostProcess(arrayCreation, programState),
                     AssignmentExpressionSyntax assignment => AssignmentExpressionPostProcess(assignment, programState),
                     _ => programState
                 };
 
-            private ProgramState ObjectCreationPostProcess(ObjectCreationExpressionSyntax objectCreation, ProgramState programState)
-            {
-                if (semanticModel.GetSymbolInfo(objectCreation).Symbol is {} symbol
-                    && symbol.ContainingType is {} symbolType
-                    && symbolType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm))
-                {
-                    var symbolicValue = programState.PeekValue();
-                    programState = programState.SetConstraint(symbolicValue, CryptographyIVSymbolicValueConstraint.NotInitialized);
-                }
-
-                return programState;
-            }
-
             private ProgramState InvocationExpressionPostProcess(InvocationExpressionSyntax invocation, ProgramState programState)
             {
-                if (IsSymmetricAlgorithmCreateMethod(invocation, semanticModel))
+                if (IsSymmetricAlgorithmGenerateIVMethod(invocation, semanticModel)
+                    && GetSymbolicValue(invocation, programState) is {} ivSymbolicValue)
                 {
-                    var symbolicValue = programState.PeekValue();
-                    programState = programState.SetConstraint(symbolicValue, CryptographyIVSymbolicValueConstraint.NotInitialized);
-                }
-                else if (IsSymmetricAlgorithmGenerateIVMethod(invocation, semanticModel))
-                {
-                    var symbolicValue = GetSymbolicValue(invocation, programState);
-                    programState = programState.SetConstraint(symbolicValue, CryptographyIVSymbolicValueConstraint.Initialized);
+                    programState = programState.SetConstraint(ivSymbolicValue, CryptographyIVSymbolicValueConstraint.Initialized);
                 }
                 else if (IsSanitizer(invocation, semanticModel)
                          && semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression).Symbol is {} symbol
@@ -165,6 +146,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                                                                  && HasNotInitializedIVConstraint(symbolicValue, programState),
                     IdentifierNameSyntax identifier => programState.GetSymbolValue(semanticModel.GetSymbolInfo(identifier).Symbol) is {} symbolicValue
                                                        && programState.HasConstraint(symbolicValue, ByteArraySymbolicValueConstraint.Constant),
+                    ArrayCreationExpressionSyntax _ => true,
                     _ => false
                 };
 
@@ -182,9 +164,6 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
 
             private static bool HasNotInitializedIVConstraint(SymbolicValue value, ProgramState programState) =>
                 programState.Constraints[value].HasConstraint(CryptographyIVSymbolicValueConstraint.NotInitialized);
-
-            private static bool IsSymmetricAlgorithmCreateMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-                invocation.IsMemberAccessOnKnownType("Create", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);
 
             private static bool IsSymmetricAlgorithmCreateEncryptorMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
                 invocation.IsMemberAccessOnKnownType("CreateEncryptor", KnownType.System_Security_Cryptography_SymmetricAlgorithm, semanticModel);

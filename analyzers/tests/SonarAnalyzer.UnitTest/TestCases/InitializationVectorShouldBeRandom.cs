@@ -11,15 +11,13 @@ namespace Tests.Diagnostics
 
             using (SymmetricAlgorithm sa = SymmetricAlgorithm.Create("AES"))
             {
-                ICryptoTransform notInitialized = sa.CreateEncryptor(); // Noncompliant {{Use a dynamically-generated, random IV.}}
-//                                                ^^^^^^^^^^^^^^^^^^^^
-
-                var keyAndIVareNotInitialized = sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant - iv is not generated
-//                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                ICryptoTransform noParams = sa.CreateEncryptor(); // Compliant - IV is automatically generated
+                var defaultKeyAndIV = sa.CreateEncryptor(sa.Key, sa.IV); // Compliant
 
                 sa.GenerateKey();
-                var ivIsNotInitialized = sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant - iv is not generated
-                var constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant); // Noncompliant
+                var generateIVNotCalled = sa.CreateEncryptor(sa.Key, sa.IV);
+                var constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant); // Noncompliant {{Use a dynamically-generated, random IV.}}
+//                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
                 sa.GenerateIV();
                 var defaultConstructor = sa.CreateEncryptor(); // Compliant
@@ -31,6 +29,8 @@ namespace Tests.Diagnostics
                 sa.CreateEncryptor(sa.Key, new CustomAlg().Key);
 
                 sa.IV = initializationVectorConstant;
+                sa.GenerateKey();
+
                 var ivReplacedDefaultConstructor = sa.CreateEncryptor(); // Noncompliant
                 var ivReplaced = sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant
             }
@@ -42,9 +42,6 @@ namespace Tests.Diagnostics
             new Random().NextBytes(initializationVectorWeakBytes);
 
             var sa = SymmetricAlgorithm.Create("AES");
-            sa.GenerateKey();
-            sa.GenerateIV();
-
             var encryptor = sa.CreateEncryptor(sa.Key, initializationVectorWeakBytes); // Noncompliant
         }
 
@@ -59,9 +56,6 @@ namespace Tests.Diagnostics
             }
 
             var sa = SymmetricAlgorithm.Create("AES");
-            sa.GenerateKey();
-            sa.GenerateIV();
-
             sa.CreateEncryptor(sa.Key, initializationVectorWeakFor); // Noncompliant
         }
 
@@ -116,16 +110,14 @@ namespace Tests.Diagnostics
             using var aes = new AesCryptoServiceProvider();
             using var rng = new RNGCryptoServiceProvider();
 
-            var noParamsNoKeyAndNoIV = aes.CreateEncryptor(); // Noncompliant
-
-            aes.GenerateKey();
-            var noParamsNoIV = aes.CreateEncryptor(); // Noncompliant
+            var noParams = aes.CreateEncryptor(); // Compliant
 
             var constantIV = new byte[16];
             var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
 
+            aes.GenerateKey();
             aes.GenerateIV();
-            var noParams = aes.CreateEncryptor();
+            aes.CreateEncryptor();
             var withGeneratedKeyAndIV = aes.CreateEncryptor(aes.Key, aes.IV);
 
             aes.CreateDecryptor(aes.Key, constantIV); // Compliant, we do not check CreateDecryptor
@@ -139,16 +131,16 @@ namespace Tests.Diagnostics
             using var aes = Aes.Create();
             using var rng = new RNGCryptoServiceProvider();
 
-            var noParamsNoKeyAndNoIV = aes.CreateEncryptor(); // Noncompliant
+            var noParams = aes.CreateEncryptor(); // Compliant
 
             aes.GenerateKey();
-            var noParamsNoIV = aes.CreateEncryptor(); // Noncompliant
+            var reGeneratedKey = aes.CreateEncryptor(); // Compliant
 
             var constantIV = new byte[16];
             var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
 
             aes.GenerateIV();
-            var noParams = aes.CreateEncryptor();
+            aes.CreateEncryptor();
             var withGeneratedKeyAndIV = aes.CreateEncryptor(aes.Key, aes.IV);
 
             aes.CreateDecryptor(aes.Key, constantIV); // Compliant, we do not check CreateDecryptor
@@ -162,16 +154,16 @@ namespace Tests.Diagnostics
             using var aes = new AesCng();
             using var rng = new RNGCryptoServiceProvider();
 
-            var noParamsNoKeyAndNoIV = aes.CreateEncryptor(); // Noncompliant
+            var noParams = aes.CreateEncryptor(); // Compliant
 
             aes.GenerateKey();
-            var noParamsNoIV = aes.CreateEncryptor(); // Noncompliant
+            var withGeneratedKey = aes.CreateEncryptor(); // Compliant
 
             var constantIV = new byte[16];
             var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
 
             aes.GenerateIV();
-            var noParams = aes.CreateEncryptor();
+            aes.CreateEncryptor();
             var withGeneratedKeyAndIV = aes.CreateEncryptor(aes.Key, aes.IV);
 
             aes.CreateDecryptor(aes.Key, constantIV); // Compliant, we do not check CreateDecryptor
@@ -185,16 +177,16 @@ namespace Tests.Diagnostics
             using var aes = new CustomAes();
             using var rng = new RNGCryptoServiceProvider();
 
-            var noParamsNoKeyAndNoIV = aes.CreateEncryptor(); // Noncompliant
+            var noParams = aes.CreateEncryptor(); // Compliant
 
             aes.GenerateKey();
-            var noParamsNoIV = aes.CreateEncryptor(); // Noncompliant
+            var withGeneratedKey = aes.CreateEncryptor(); // Compliant
 
             var constantIV = new byte[16];
             var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
 
             aes.GenerateIV();
-            var noParams = aes.CreateEncryptor();
+            aes.CreateEncryptor();
             var withGeneratedKeyAndIV = aes.CreateEncryptor(aes.Key, aes.IV);
 
             aes.CreateDecryptor(aes.Key, constantIV); // Compliant, we do not check CreateDecryptor
@@ -205,31 +197,28 @@ namespace Tests.Diagnostics
 
         public void InConditionals(int a)
         {
-            using var aesNotInitialized = new AesCng();
-            using var rng = new RNGCryptoServiceProvider();
+            var constantIV = new byte[16];
 
-            using var aesInitialized = Aes.Create();
-            aesInitialized.GenerateKey();
-            aesInitialized.GenerateIV();
+            using var aes = new AesCng();
+            using var rng = new RNGCryptoServiceProvider();
 
             var e = a switch
             {
-                1 => aesNotInitialized.CreateEncryptor(), // Noncompliant
-                2 => aesNotInitialized.CreateEncryptor(aesNotInitialized.Key, aesNotInitialized.IV), // Noncompliant
-                3 => aesInitialized.CreateEncryptor(),
+                1 => aes.CreateEncryptor(), // Compliant
+                2 => aes.CreateEncryptor(aes.Key, constantIV), // Noncompliant
                 _ => null
             };
+
+            var iv = new byte[16];
 
             using var aes2 = new AesCng();
             if (a == 1)
             {
-                aes2.GenerateKey();
-                aes2.GenerateIV();
-                aes2.CreateEncryptor();
+                aes2.IV = iv; // Set IV to constant
             }
             aes2.CreateEncryptor(); // Noncompliant
 
-            var aes3 = a == 2 ? aesInitialized : aesNotInitialized;
+            var aes3 = a == 2 ? aes2 : aes;
             aes3.CreateEncryptor(); // Noncompliant
         }
 
@@ -269,5 +258,25 @@ namespace Tests.Diagnostics
         public override void GenerateIV() => throw new NotImplementedException();
 
         public override void GenerateKey() => throw new NotImplementedException();
+    }
+
+    public class SymmetricalEncryptorWrapper
+    {
+        private readonly SymmetricAlgorithm algorithm;
+
+        public SymmetricalEncryptorWrapper()
+        {
+            algorithm = Aes.Create();
+        }
+
+        public void GenerateIV()
+        {
+            algorithm.GenerateIV();
+        }
+
+        public ICryptoTransform CreateEncryptor()
+        {
+            return algorithm.CreateEncryptor();
+        }
     }
 }
