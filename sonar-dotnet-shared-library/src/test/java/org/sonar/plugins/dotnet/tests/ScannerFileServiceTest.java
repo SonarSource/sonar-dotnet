@@ -157,7 +157,7 @@ public class ScannerFileServiceTest {
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
       .startsWith("Found indexed file ")
-      .endsWith("sonar-dotnet/sonar-dotnet-shared-library/mod/root/some/path/file.cs' for '/_/path/file.cs' (normalized to 'path/file.cs').");
+      .endsWith("/sonar-dotnet-shared-library/mod/root/some/path/file.cs' for '/_/path/file.cs' (normalized to 'path/file.cs').");
   }
 
   @Test
