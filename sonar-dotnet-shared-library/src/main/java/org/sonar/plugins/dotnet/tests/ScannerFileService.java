@@ -32,7 +32,8 @@ import org.sonar.api.utils.log.Loggers;
 @ScannerSide
 public class ScannerFileService implements FileService {
   private static final Logger LOG = Loggers.get(ScannerFileService.class);
-  private static final Pattern DETERMINISTIC_SOURCE_PATH_PREFIX = Pattern.compile("^(([a-zA-Z]:)?[\\\\][_][\\\\]|([/][_][/]))");
+  // the pattern is defensive and accepts both forward and back slash
+  private static final Pattern DETERMINISTIC_SOURCE_PATH_PREFIX = Pattern.compile("^([/\\\\]_\\d*[/\\\\])");
   private FileSystem fileSystem;
   private String languageKey;
 
@@ -65,7 +66,7 @@ public class ScannerFileService implements FileService {
       LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile.uri().getPath(), filePath, normalizedRelativePath);
       return Optional.of(foundFile);
     } else {
-      LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry.", count, filePath, normalizedRelativePath);
+      LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.", count, filePath, normalizedRelativePath);
       return Optional.empty();
     }
   }

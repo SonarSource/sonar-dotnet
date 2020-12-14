@@ -220,8 +220,6 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).isEqualTo("The path 'CalcMultiplyTest\\MultiplyTest.cs'" +
-      " is not indexed by the scanner as an absolute or relative path. This file will be skipped. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
   @Test
@@ -284,12 +282,9 @@ public class VisualStudioCoverageXmlReportParserTest {
         Assertions.entry(13, 0));
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(3);
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(2);
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).isEqualTo("The path " +
-      "'C:\\Workspace\\sonar-dotnet\\its\\projects\\CoverageWithDeterministicSourcePaths\\CoverageWithDeterministicSourcePaths.Tests\\FooTests.cs'" +
-      " is not indexed by the scanner as an absolute or relative path. This file will be skipped. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(2)).isEqualTo("Found indexed file " +
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).isEqualTo("Found indexed file " +
       "'/full/path/to/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'" +
       " for coverage entry '/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'.");
   }
