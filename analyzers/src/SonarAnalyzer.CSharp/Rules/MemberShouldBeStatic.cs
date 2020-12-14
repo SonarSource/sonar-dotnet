@@ -39,9 +39,8 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2325";
         internal const string MessageFormat = "Make '{0}' a static {1}.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableHashSet<string> MethodNameWhitelist =
             ImmutableHashSet.Create(
@@ -100,24 +99,23 @@ namespace SonarAnalyzer.Rules.CSharp
             where TDeclarationSyntax : MemberDeclarationSyntax
         {
             var declaration = (TDeclarationSyntax)context.Node;
-
             var methodOrPropertySymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
 
-            if (methodOrPropertySymbol == null ||
-                methodOrPropertySymbol.IsStatic ||
-                methodOrPropertySymbol.IsVirtual ||
-                methodOrPropertySymbol.IsAbstract ||
-                methodOrPropertySymbol.IsOverride ||
-                MethodNameWhitelist.Contains(methodOrPropertySymbol.Name) ||
-                methodOrPropertySymbol.ContainingType.IsInterface() ||
-                methodOrPropertySymbol.GetInterfaceMember() != null ||
-                methodOrPropertySymbol.GetOverriddenMember() != null ||
-                methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute) ||
-                IsNewMethod(methodOrPropertySymbol) ||
-                IsEmptyMethod(declaration) ||
-                IsNewProperty(methodOrPropertySymbol) ||
-                IsAutoProperty(methodOrPropertySymbol) ||
-                IsPublicControllerMethod(methodOrPropertySymbol))
+            if (methodOrPropertySymbol == null
+                || methodOrPropertySymbol.IsStatic
+                || methodOrPropertySymbol.IsVirtual
+                || methodOrPropertySymbol.IsAbstract
+                || methodOrPropertySymbol.IsOverride
+                || MethodNameWhitelist.Contains(methodOrPropertySymbol.Name)
+                || methodOrPropertySymbol.ContainingType.IsInterface()
+                || methodOrPropertySymbol.GetInterfaceMember() != null
+                || methodOrPropertySymbol.GetOverriddenMember() != null
+                || methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute)
+                || IsNewMethod(methodOrPropertySymbol)
+                || IsEmptyMethod(declaration)
+                || IsNewProperty(methodOrPropertySymbol)
+                || IsAutoProperty(methodOrPropertySymbol)
+                || IsPublicControllerMethod(methodOrPropertySymbol))
             {
                 return;
             }
@@ -129,7 +127,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var identifier = getIdentifier(declaration);
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(), identifier.Text, memberKind));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, memberKind));
         }
 
         private static bool IsIgnoredAttribute(AttributeData attribute) =>
@@ -196,12 +194,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return true;
             }
-
-            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-
-            return symbol != null &&
-                !symbol.IsStatic &&
-                InstanceSymbolKinds.Contains(symbol.Kind);
+            return semanticModel.GetSymbolInfo(node).Symbol is { } symbol
+                && !symbol.IsStatic
+                && InstanceSymbolKinds.Contains(symbol.Kind);
         }
     }
 }
