@@ -29,6 +29,8 @@ namespace Tests.Diagnostics
                 sa.CreateEncryptor(sa.Key, new CustomAlg().Key);
 
                 sa.IV = initializationVectorConstant;
+                sa.GenerateKey();
+
                 var ivReplacedDefaultConstructor = sa.CreateEncryptor(); // Noncompliant
                 var ivReplaced = sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant
             }
@@ -266,7 +268,6 @@ namespace Tests.Diagnostics
         {
             algorithm = Aes.Create();
         }
-
 
         public void GenerateIV()
         {
