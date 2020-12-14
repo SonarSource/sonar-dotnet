@@ -34,15 +34,50 @@ namespace Tests.Diagnostics
     {
         public void SomeMethod()
         {
-            var (a, b) = new SomeDeconstructibleType();
+            var (a, b) = new Foo();
+
+            var (_, _, c) = new Baz();
+
+            var qix = new Qix();
+            (a, b, c) = qix;
+
+            var (a, b) = ReturnFromMethod();
         }
 
-        private sealed class SomeDeconstructibleType
+        internal void InternalMethod(Bar bar)
         {
-            public void Deconstruct(out object a, out object b) // Noncompliant FP #2478
+            var (a, b) = bar;
+        }
+
+        private sealed class Foo
+        {
+            public void Deconstruct(out object a, out object b) { a = b = null; }
+        }
+
+        internal sealed class Bar
+        {
+            internal void Deconstruct(out object a, out object b) { a = b = null; }
+        }
+
+        private sealed class Baz
+        {
+            public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; }
+        }
+
+        private sealed class Qix
+        {
+            public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; }
+
+            public void Deconstruct(out object a, out object b) // Noncompliant
             {
                 a = b = null;
             }
+        }
+
+        private ForMethod ReturnFromMethod() => null;
+        private sealed class ForMethod
+        {
+            public void Deconstruct(out object a, out object b) { a = b = null; }
         }
     }
 
