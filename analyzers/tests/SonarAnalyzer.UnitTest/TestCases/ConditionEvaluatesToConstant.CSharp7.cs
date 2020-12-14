@@ -59,6 +59,30 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void ParenthesizedVariableDesignation(object arg)
+        {
+            switch ((arg, true))
+            {
+                case var (o, b) when b: // "when" should add true constraint on "b"
+                    if (b) { } // FN, var pattern above doesn't push any value to stack and this branch is never visited.
+                    break;
+
+                case var (o, b) when o != null: // "when" should add NotNull constraint on "o"
+                    if (o == null) { } // FN, var pattern above doesn't push any value to stack and this branch is never visited.
+                    break;
+
+                case var (o, b):
+                    if (o == null) { }  // Compliant, no constraint should be added on "o" from the ParenthesizedVariableDesignationSyntax above
+
+                    o = null;
+                    if (o == null) { }  // FN, var pattern above doesn't push any value to stack and this branch is never visited.
+                    break;
+            }
+
+            var isTrue = true;
+            if (isTrue) { } // FN, var pattern above doesn't push any value to stack and this branch is never visited.
+        }
+
         void Patterns_In_Loops(object o, object[] items)
         {
             while (o is string s)

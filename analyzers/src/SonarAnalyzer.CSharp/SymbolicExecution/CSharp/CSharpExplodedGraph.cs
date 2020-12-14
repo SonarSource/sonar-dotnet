@@ -638,10 +638,11 @@ namespace SonarAnalyzer.SymbolicExecution
             VisitVariableDesignation(varPatternSyntax.Designation, programState, singleVariable: true);
 
         private ProgramState VisitDeclarationPattern(DeclarationPatternSyntaxWrapper declarationPattern, ProgramState newProgramState) =>
-            // "x is string s" is equivalent to "s = x" and "s" should get NotNull constraint
-            // "x is (string s, int i)" is equivalent to "s = new string(); i = new int()" and no constraints should be added
+            // "x is string s" is equivalent to "s = x" and "s" gets NotNull constraint
+            // "x is (string s, int i)" is recursive pattern with PositionalPatternClause and doesn't reach this path
             VisitVariableDesignation(declarationPattern.Designation, newProgramState, singleVariable: true);
 
+        /// <param name="singleVariable">True for top-level designated variables in "x is string s". NotNull constraint is added. False for variables nested in "var (string s, int i)".</param>
         private ProgramState VisitVariableDesignation(VariableDesignationSyntaxWrapper variableDesignation, ProgramState programState, bool singleVariable)
         {
             var newProgramState = programState;
@@ -660,11 +661,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 var variableSymbol = SemanticModel.GetDeclaredSymbol(singleVariableDesignation);
                 var newSymbolicValue = SymbolicValue.Create();
                 newProgramState = SetNewSymbolicValueIfTracked(variableSymbol, newSymbolicValue, newProgramState);
-                // When the pattern is "x is Type t" we know that "t != null", hence (SV != null)
-                newProgramState = newProgramState.SetConstraint(newSymbolicValue, ObjectConstraint.NotNull);
 
                 if (singleVariable)
                 {
+                    // When the pattern is "x is Type t" we know that "t != null", hence (SV != null)
+                    newProgramState = newProgramState.SetConstraint(newSymbolicValue, ObjectConstraint.NotNull);
                     newProgramState = newProgramState.PushValue(new SymbolicValue());
                 }
             }
