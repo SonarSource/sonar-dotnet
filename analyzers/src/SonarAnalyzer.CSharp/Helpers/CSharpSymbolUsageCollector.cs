@@ -216,9 +216,9 @@ namespace SonarAnalyzer.Helpers
         private static SymbolAccess ArgumentAccessType(ArgumentSyntax argument) =>
             argument.RefOrOutKeyword.Kind() switch
             {
-                //  out Type node : out node
+                // out Type node : out node
                 SyntaxKind.OutKeyword => SymbolAccess.Write,
-                //  ref node
+                // ref node
                 SyntaxKind.RefKeyword => SymbolAccess.ReadWrite,
                 _ => SymbolAccess.Read
             };
