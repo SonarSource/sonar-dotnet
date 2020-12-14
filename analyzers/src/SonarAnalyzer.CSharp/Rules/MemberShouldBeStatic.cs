@@ -102,18 +102,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodOrPropertySymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
 
             if (methodOrPropertySymbol == null
-                || methodOrPropertySymbol.IsStatic
-                || methodOrPropertySymbol.IsVirtual
-                || methodOrPropertySymbol.IsAbstract
-                || methodOrPropertySymbol.IsOverride
+                || IsStaticVirtualAbstractOrOverride()
                 || MethodNameWhitelist.Contains(methodOrPropertySymbol.Name)
-                || methodOrPropertySymbol.ContainingType.IsInterface()
-                || methodOrPropertySymbol.GetInterfaceMember() != null
-                || methodOrPropertySymbol.GetOverriddenMember() != null
+                || IsOverrideOrInterface()
                 || methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute)
-                || IsNewMethod(methodOrPropertySymbol)
                 || IsEmptyMethod(declaration)
-                || IsNewProperty(methodOrPropertySymbol)
                 || IsAutoProperty(methodOrPropertySymbol)
                 || IsPublicControllerMethod(methodOrPropertySymbol))
             {
@@ -128,6 +121,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var identifier = getIdentifier(declaration);
             context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, memberKind));
+
+            bool IsStaticVirtualAbstractOrOverride() =>
+                methodOrPropertySymbol.IsStatic || methodOrPropertySymbol.IsVirtual || methodOrPropertySymbol.IsAbstract || methodOrPropertySymbol.IsOverride;
+
+            bool IsOverrideOrInterface() =>
+                methodOrPropertySymbol.ContainingType.IsInterface()
+                || methodOrPropertySymbol.GetInterfaceMember() != null
+                || methodOrPropertySymbol.GetOverriddenMember() != null
+                || IsNewMethod(methodOrPropertySymbol)
+                || IsNewProperty(methodOrPropertySymbol);
         }
 
         private static bool IsIgnoredAttribute(AttributeData attribute) =>
