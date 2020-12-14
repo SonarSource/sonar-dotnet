@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -57,6 +58,78 @@ namespace SonarAnalyzer.Helpers
         {
             this.compilation = compilation;
             knownSymbolNames = knownSymbols.Select(GetName).ToHashSet();
+        }
+
+        // TupleExpression "(a, b) = qix"
+        // ParenthesizedVariableDesignation "var (a, b) = quix" inside a VarPattern or inside a DeclarationExpression
+        // FIXME PositionalPatternClause inside a RecursivePattern "qix is (string x, string y)" or inside a switch arm - another topic
+        public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
+        {
+            // in a newer Roslyn API, we could check the Operation to be DeconstructionAssignment
+            if (TupleExpressionSyntaxWrapper.IsInstance(node.Left))
+            {
+                var semanticModel = GetSemanticModel(node.Right);
+                var namedTypeSymbol = GetNamedTypeSymbol(semanticModel.GetSymbolInfo(node.Right).Symbol);
+                if (namedTypeSymbol != null)
+                {
+                    var deconstructors = namedTypeSymbol.GetMembers("Deconstruct");
+                    if (deconstructors.Length == 1)
+                    {
+                        UsedSymbols.Add(deconstructors.First()); // FIXME cover
+                    }
+                    else if (deconstructors.Length > 1)
+                    {
+                        var tupleArgumentsCount = ((TupleExpressionSyntaxWrapper)node.Left).Arguments.Count;
+                        var deconstructorWithNumberOfArguments = deconstructors.FirstOrDefault(m => m.GetParameters().Count() == tupleArgumentsCount);
+                        if (deconstructorWithNumberOfArguments != null)
+                        {
+                            UsedSymbols.Add(deconstructorWithNumberOfArguments);
+                        }
+                    }
+                }
+            }
+            else if (DeclarationExpressionSyntaxWrapper.IsInstance(node.Left)
+                && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(((DeclarationExpressionSyntaxWrapper)node.Left).Designation))
+            {
+                var declarationExpression = (ParenthesizedVariableDesignationSyntaxWrapper)((DeclarationExpressionSyntaxWrapper)node.Left).Designation;
+                var semanticModel = GetSemanticModel(node.Right);
+                var namedTypeSymbol = GetNamedTypeSymbol(semanticModel.GetSymbolInfo(node.Right).Symbol);
+                if (namedTypeSymbol != null)
+                {
+                    var deconstructors = namedTypeSymbol.GetMembers("Deconstruct");
+                    if (deconstructors.Length == 1)
+                    {
+                        UsedSymbols.Add(deconstructors.First());
+                    }
+                    else if (deconstructors.Length > 1) // FIXME cover
+                    {
+                        var tupleArgumentsCount = declarationExpression.Variables.Count;
+                        var deconstructorWithNumberOfArguments = deconstructors.FirstOrDefault(m => m.GetParameters().Count() == tupleArgumentsCount);
+                        if (deconstructorWithNumberOfArguments != null)
+                        {
+                            UsedSymbols.Add(deconstructorWithNumberOfArguments);
+                        }
+                    }
+                }
+            }
+
+            base.VisitAssignmentExpression(node);
+
+            INamedTypeSymbol GetNamedTypeSymbol(ISymbol symbol)
+            {
+                if (symbol != null)
+                {
+                    if (symbol.GetSymbolType() is INamedTypeSymbol namedType)
+                    {
+                        return namedType;
+                    }
+                    else if (symbol.ContainingType is INamedTypeSymbol ny)
+                    {
+                        return ny;
+                    }
+                }
+                return null;
+            }
         }
 
         public override void VisitAttribute(AttributeSyntax node)

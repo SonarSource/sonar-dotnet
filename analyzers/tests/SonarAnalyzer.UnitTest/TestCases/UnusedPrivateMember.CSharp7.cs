@@ -41,7 +41,7 @@ namespace Tests.Diagnostics
             var qix = new Qix();
             (a, b, c) = qix;
 
-            var (a, b) = ReturnFromMethod();
+            (a, b) = ReturnFromMethod();
         }
 
         internal void InternalMethod(Bar bar)
