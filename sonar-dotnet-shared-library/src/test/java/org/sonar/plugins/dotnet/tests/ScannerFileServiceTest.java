@@ -100,7 +100,7 @@ public class ScannerFileServiceTest {
 
     // act
     ScannerFileService sut = new ScannerFileService("key", fs);
-    sut.getFileByRelativePath("foo");
+    sut.getFileByRelativePath("/_/foo");
 
     // assert
     assertThat(argumentCaptor.getValue()).isEqualTo(languageKeyMock);
@@ -116,7 +116,6 @@ public class ScannerFileServiceTest {
 
     // assert
     assertThat(result).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly("It seems Deterministic Source Paths are used, replacing '/_/some/path/file.cs' with 'some/path/file.cs'.");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Found 0 indexed files for '/_/some/path/file.cs' (normalized to 'some/path/file.cs'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
@@ -128,7 +127,6 @@ public class ScannerFileServiceTest {
     Optional<InputFile> result = sut.getFileByRelativePath("/_/some/path/file.cs");
 
     assertThat(result).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly("It seems Deterministic Source Paths are used, replacing '/_/some/path/file.cs' with 'some/path/file.cs'.");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Found 0 indexed files for '/_/some/path/file.cs' (normalized to 'some/path/file.cs'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
@@ -140,7 +138,6 @@ public class ScannerFileServiceTest {
     Optional<InputFile> result = sut.getFileByRelativePath("/_/some/path/file.cs");
 
     assertThat(result).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.TRACE)).containsExactly("It seems Deterministic Source Paths are used, replacing '/_/some/path/file.cs' with 'some/path/file.cs'.");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Found 2 indexed files for '/_/some/path/file.cs' (normalized to 'some/path/file.cs'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
@@ -157,10 +154,10 @@ public class ScannerFileServiceTest {
     Optional<InputFile> result = sut.getFileByRelativePath("/_/path/file.cs");
 
     assertThat(result).hasValue(expectedResult);
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
-    assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
       .startsWith("Found indexed file ")
-      .endsWith("root/some/path/file.cs' for '/_/path/file.cs' (normalized to 'path/file.cs').");
+      .endsWith("sonar-dotnet/sonar-dotnet-shared-library/mod/root/some/path/file.cs' for '/_/path/file.cs' (normalized to 'path/file.cs').");
   }
 
   @Test
@@ -172,10 +169,8 @@ public class ScannerFileServiceTest {
     Optional<InputFile> result = sut.getFileByRelativePath("\\_\\some\\path\\file.cs");
 
     assertThat(result).hasValue(expectedResult);
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
-      .isEqualTo("It seems Deterministic Source Paths are used, replacing '\\_\\some\\path\\file.cs' with 'some\\path\\file.cs'.");
-    assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
       .startsWith("Found indexed file ")
       .endsWith("root/some/path/file.cs' for '\\_\\some\\path\\file.cs' (normalized to 'some/path/file.cs').");
 
@@ -206,23 +201,19 @@ public class ScannerFileServiceTest {
     assertThat(result).isEmpty();
     assertThat(logTester.logs(LoggerLevel.TRACE)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).isEqualTo("Found 0 indexed files for 'C:\\_\\some\\path\\file.cs'" +
-      " (normalized to 'C:/_/some/path/file.cs'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).isEqualTo("Did not find deterministic source path in 'C:\\_\\some\\path\\file.cs'." +
+      " Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
   @Test
-  public void getFileByRelativePath_with_no_deterministic_source_path_when_single_indexed_files_match_returns_file() {
-    InputFile expectedResult = mockInput("root/some/path/file.cs");
-    FileSystem fs = createFileSystemForInputFiles(Collections.singletonList(expectedResult));
+  public void getFileByRelativePath_with_no_deterministic_source_path_when_single_indexed_files_match_returns_empty() {
+    FileSystem fs = createFileSystemForInputFiles(Collections.singletonList(mock(InputFile.class)));
 
     ScannerFileService sut = new ScannerFileService("key", fs);
     Optional<InputFile> result = sut.getFileByRelativePath("some/path/file.cs");
 
-    assertThat(result).hasValue(expectedResult);
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
-      .startsWith("Found indexed file '")
-      .endsWith("root/some/path/file.cs' for 'some/path/file.cs' (normalized to 'some/path/file.cs').");
+    assertThat(result).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.TRACE)).isEmpty();
   }
 
   private FileSystem createFileSystemForInputFiles(Iterable<InputFile> inputFilesResult) {

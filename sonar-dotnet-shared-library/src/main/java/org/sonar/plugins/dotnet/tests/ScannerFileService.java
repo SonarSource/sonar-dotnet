@@ -32,8 +32,7 @@ import org.sonar.api.utils.log.Loggers;
 @ScannerSide
 public class ScannerFileService implements FileService {
   private static final Logger LOG = Loggers.get(ScannerFileService.class);
-  // the pattern is defensive and accepts both forward and back slash
-  private static final Pattern DETERMINISTIC_SOURCE_PATH_PREFIX = Pattern.compile("^([/\\\\]_\\d*[/\\\\])");
+  private static final Pattern DETERMINISTIC_SOURCE_PATH_PREFIX = Pattern.compile("^(/_\\d*/)");
   private FileSystem fileSystem;
   private String languageKey;
 
@@ -51,39 +50,29 @@ public class ScannerFileService implements FileService {
   }
 
   public Optional<InputFile> getFileByRelativePath(String filePath) {
-    String normalizedRelativePath = getNormalizedRelativePath(filePath);
-    Iterable<InputFile> files = fileSystem.inputFiles(fileSystem.predicates().hasLanguage(languageKey));
-    int count = 0;
-    InputFile foundFile = null;
-    for (InputFile file : files) {
-      String path = file.uri().getPath();
-      if (path.endsWith(normalizedRelativePath)) {
-        count++;
-        foundFile = file;
+    Matcher matcher = DETERMINISTIC_SOURCE_PATH_PREFIX.matcher(filePath.replace('\\', '/'));
+    if (matcher.find()) {
+      String relativePath = matcher.replaceFirst("");
+      Iterable<InputFile> files = fileSystem.inputFiles(fileSystem.predicates().hasLanguage(languageKey));
+      int count = 0;
+      InputFile foundFile = null;
+      for (InputFile file : files) {
+        String path = file.uri().getPath();
+        if (path.endsWith(relativePath)) {
+          count++;
+          foundFile = file;
+        }
+      }
+      if (count == 1) {
+        LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile.uri().getPath(), filePath, relativePath);
+        return Optional.of(foundFile);
+      } else {
+        LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+          count, filePath, relativePath);
+        return Optional.empty();
       }
     }
-    if (count == 1) {
-      LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile.uri().getPath(), filePath, normalizedRelativePath);
-      return Optional.of(foundFile);
-    } else {
-      LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.", count, filePath, normalizedRelativePath);
-      return Optional.empty();
-    }
-  }
-
-  private static String getNormalizedRelativePath(String filePath) {
-    String relativePath = replaceDeterministicSourcePath(filePath);
-    return relativePath.replace('\\', '/');
-  }
-
-  private static String replaceDeterministicSourcePath(String filePath) {
-    Matcher matcher = DETERMINISTIC_SOURCE_PATH_PREFIX.matcher(filePath);
-    if (matcher.find())
-    {
-      String relativePath = matcher.replaceFirst("");
-      LOG.trace("It seems Deterministic Source Paths are used, replacing '{}' with '{}'.", filePath, relativePath);
-      return relativePath;
-    }
-    return filePath;
+    LOG.debug("Did not find deterministic source path in '{}'. Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.", filePath);
+    return Optional.empty();
   }
 }
