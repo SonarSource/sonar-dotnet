@@ -83,6 +83,21 @@ namespace Tests.Diagnostics
             if (isTrue) { } // FN, var pattern above doesn't push any value to stack and this branch is never visited.
         }
 
+        public void ParenthesizedVariableDesignation_Nested(object arg)
+        {
+            switch ((arg, true, (arg, ("NotNull", 42))))
+            {
+                case var (argA, b, (argB, (notNull, i))):
+                    if (argA == null) { }   // Compliant
+                    if (argB == null) { }   // Compliant
+                    if (notNull == null) { }    // FN as we don't propagate the constraint AND var pattern above doesn't push any value to stack and this branch is never visited
+                    break;
+            }
+
+            var isTrue = true;
+            if (isTrue) { } // FN, var pattern above doesn't push any value to stack and this branch is never visited.
+        }
+
         void Patterns_In_Loops(object o, object[] items)
         {
             while (o is string s)
