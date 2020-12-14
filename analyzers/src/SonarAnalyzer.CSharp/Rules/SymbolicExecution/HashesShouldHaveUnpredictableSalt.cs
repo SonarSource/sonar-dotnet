@@ -88,6 +88,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         private sealed class SaltCheck : ExplodedGraphCheck
         {
             private const int MinimumSafeLength = 32;
+            private const int SaltParameterIndex = 2;
 
             private static readonly ImmutableArray<KnownType> VulnerableTypes =
                 ImmutableArray.Create(KnownType.System_Security_Cryptography_PasswordDeriveBytes,
@@ -129,7 +130,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     && symbolType.IsAny(VulnerableTypes)
                     // There are cases when the symbol corresponding to the salt parameter does not exists (e.g. the byte[] is created directly when calling the ctor)
                     // but we should always have a symbolic value for it.
-                    && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - 2).Take(1).SingleOrDefault() is {} symbolicValue)
+                    && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - SaltParameterIndex).Take(1).SingleOrDefault() is {} symbolicValue)
                 {
                     if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
                     {
