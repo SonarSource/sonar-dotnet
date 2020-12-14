@@ -59,46 +59,6 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void ParenthesizedVariableDesignation(object arg)
-        {
-            switch ((arg, true))
-            {
-                case var (o, b) when b: // "when" should add true constraint on "b"
-                    if (b) { }          // Noncompliant
-                    break;
-
-                case var (o, b) when o != null: // "when" should add NotNull constraint on "o"
-                    if (o == null) { }  // Noncompliant
-                                        // Secondary@-1
-                    break;
-
-                case var (o, b):
-                    if (o == null) { }  // Compliant, no constraint should be added on "o" from the ParenthesizedVariableDesignationSyntax above
-
-                    o = null;
-                    if (o == null) { }  // Noncompliant
-                    break;
-            }
-
-            var isTrue = true;
-            if (isTrue) { } // Noncompliant
-        }
-
-        public void ParenthesizedVariableDesignation_Nested(object arg)
-        {
-            switch ((arg, true, (arg, ("NotNull", 42))))
-            {
-                case var (argA, b, (argB, (notNull, i))):
-                    if (argA == null) { }       // Compliant, no constraint should be added
-                    if (argB == null) { }       // Compliant, no constraint should be added
-                    if (notNull == null) { }    // FN as we don't propagate the constraint
-                    break;
-            }
-
-            var isTrue = true;
-            if (isTrue) { } // Noncompliant
-        }
-
         void Patterns_In_Loops(object o, object[] items)
         {
             while (o is string s)
