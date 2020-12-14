@@ -35,5 +35,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.cs",
                 new NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
                 additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.vb",
+                new SonarAnalyzer.Rules.VisualBasic.NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
+                 additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
     }
 }

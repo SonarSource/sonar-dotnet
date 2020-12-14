@@ -1854,6 +1854,39 @@
   <data name="S2255_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
   </data>
+  <data name="S2257_Category" xml:space="preserve">
+    <value>Critical Security Hotspot</value>
+  </data>
+  <data name="S2257_Description" xml:space="preserve">
+    <value>The use of a non-standard algorithm is dangerous because a determined attacker may be able to break the algorithm and compromise whatever data has been protected. Standard algorithms like AES, RSA, SHA, ... should be used instead.</value>
+  </data>
+  <data name="S2257_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2257_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2257_RemediationCost" xml:space="preserve">
+    <value>1d</value>
+  </data>
+  <data name="S2257_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S2257_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S2257_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S2257_Tags" xml:space="preserve">
+    <value>cwe,sans-top25-porous,owasp-a3</value>
+  </data>
+  <data name="S2257_Title" xml:space="preserve">
+    <value>Using non-standard cryptographic algorithms is security-sensitive</value>
+  </data>
+  <data name="S2257_Type" xml:space="preserve">
+    <value>SECURITY_HOTSPOT</value>
+  </data>
   <data name="S2302_Category" xml:space="preserve">
     <value>Critical Code Smell</value>
   </data>

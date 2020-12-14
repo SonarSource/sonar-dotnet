@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace Tests.Diagnostics
 {
-    public class CustomHashAlgorithm : HashAlgorithm // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class CustomHashAlgorithm : HashAlgorithm  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
 //               ^^^^^^^^^^^^^^^^^^^
     {
         public override void Initialize()
@@ -52,6 +52,33 @@ namespace Tests.Diagnostics
     public interface ICustomCryptoTransform : ICryptoTransform  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
 //                   ^^^^^^^^^^^^^^^^^^^^^^
     {
+    }
+
+    public class CustomCryptoTransformWithInterface : ICustomCryptoTransform  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    {
+        public int InputBlockSize => throw new NotImplementedException();
+
+        public int OutputBlockSize => throw new NotImplementedException();
+
+        public bool CanTransformMultipleBlocks => throw new NotImplementedException();
+
+        public bool CanReuseTransform => throw new NotImplementedException();
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     internal class CustomDerivebytes : DeriveBytes  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
@@ -194,5 +221,25 @@ namespace Tests.Diagnostics
         {
             throw new NotImplementedException();
         }
+    }
+}
+
+public class ClassThatDoesNotInheritOrImplementAnything // Compliant
+{
+}
+
+public interface InterfaceThatDoesNotInheritOrImplementAnything // Compliant
+{
+}
+
+public interface InterfaceThatDoesNotInheritCryptographic : IDisposable // Compliant
+{
+}
+
+public sealed class ClassThatDoesNotInheritCryptographic : IDisposable // Compliant
+{
+    public void Dispose()
+    {
+        throw new NotImplementedException();
     }
 }

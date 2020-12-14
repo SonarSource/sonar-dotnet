@@ -19,22 +19,22 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.CSharp;
+using SonarAnalyzer.Helpers.VisualBasic;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class NonStandardCryptographicAlgorithmsShouldNotBeUsed : NonStandardCryptographicAlgorithmsShouldNotBeUsedBase<SyntaxKind, TypeDeclarationSyntax>
+    public sealed class NonStandardCryptographicAlgorithmsShouldNotBeUsed : NonStandardCryptographicAlgorithmsShouldNotBeUsedBase<SyntaxKind, TypeBlockSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration };
+        protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ClassBlock, SyntaxKind.InterfaceBlock };
 
         protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -48,13 +48,18 @@ namespace SonarAnalyzer.Rules.CSharp
         {
         }
 
-        protected override INamedTypeSymbol GetDeclaredSymbol(TypeDeclarationSyntax typeDeclarationSyntax, SemanticModel semanticModel) =>
+        protected override INamedTypeSymbol GetDeclaredSymbol(TypeBlockSyntax typeDeclarationSyntax, SemanticModel semanticModel) =>
             semanticModel.GetDeclaredSymbol(typeDeclarationSyntax);
 
-        protected override Location GetLocation(TypeDeclarationSyntax typeDeclarationSyntax) =>
-            typeDeclarationSyntax.Identifier.GetLocation();
+        protected override Location GetLocation(TypeBlockSyntax typeDeclarationSyntax) =>
+            typeDeclarationSyntax switch
+            {
+                ClassBlockSyntax c => c.ClassStatement.Identifier.GetLocation(),
+                InterfaceBlockSyntax i => i.InterfaceStatement.Identifier.GetLocation(),
+                _ => null,
+            };
 
-        protected override bool DerivesOrImplementsAny(TypeDeclarationSyntax typeDeclarationSyntax) =>
-            typeDeclarationSyntax.BaseList != null && typeDeclarationSyntax.BaseList.Types.Any();
+        protected override bool DerivesOrImplementsAny(TypeBlockSyntax typeDeclarationSyntax) =>
+            typeDeclarationSyntax.Implements.Any() || typeDeclarationSyntax.Inherits.Any();
     }
 }
