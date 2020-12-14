@@ -116,14 +116,14 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
       }
 
       if (!fileService.isSupportedAbsolute(canonicalPath)) {
-        Optional<InputFile> foundFile = fileService.getFileByRelativePath(canonicalPath);
+        Optional<InputFile> foundFile = fileService.getFileByRelativePath(path);
         if (foundFile.isPresent()) {
           String newPath = foundFile.get().uri().getPath();
-          LOG.debug("Found indexed file '{}' for coverage entry '{}'.", newPath, canonicalPath);
+          LOG.debug("Found indexed file '{}' for coverage entry '{}'.", newPath, path);
           canonicalPath = newPath;
         } else {
           LOG.debug("The path '{}' is not indexed by the scanner as an absolute or relative path. This file will be skipped." +
-            " Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.", canonicalPath);
+            " Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.", path);
           return;
         }
       }
