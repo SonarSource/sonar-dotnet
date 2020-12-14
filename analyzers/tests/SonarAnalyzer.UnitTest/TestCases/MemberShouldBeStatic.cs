@@ -216,10 +216,16 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/3204
     public class Repro_3204<TFirst, TSecond>
     {
-        public int BuildSomething() // Noncompliant FP
+        public int BuildSomething() // Compliant, we don't raise inside generic class, so it doesn't have to be invoked like Repro_3204<SomethingA, SomethingB>.BuildSomething() - too difficult to read
         {
             return 42;
         }
+
+        public int WithGenericArguments<TFirst, TSecond>() // Compliant
+        {
+            return 42;
+        }
+
     }
 
     public class Repro_3204_OK
