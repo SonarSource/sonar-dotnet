@@ -171,32 +171,6 @@
 },
 {
 "id":  "S2325",
-"message":  "Make 'GoTo' a static method.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
-"region":  {
-"startLine":  444,
-"startColumn":  37,
-"endLine":  444,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Transform' a static method.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
-"region":  {
-"startLine":  635,
-"startColumn":  32,
-"endLine":  635,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2325",
 "message":  "Make 'GetSourceString' a static method.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
@@ -504,58 +478,6 @@
 "startColumn":  27,
 "endLine":  58,
 "endColumn":  36
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'IsLeft' a static property.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Either.cs",
-"region":  {
-"startLine":  123,
-"startColumn":  21,
-"endLine":  123,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'IsRight' a static property.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Either.cs",
-"region":  {
-"startLine":  128,
-"startColumn":  21,
-"endLine":  128,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'IsLeft' a static property.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Either.cs",
-"region":  {
-"startLine":  165,
-"startColumn":  21,
-"endLine":  165,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'IsRight' a static property.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Either.cs",
-"region":  {
-"startLine":  170,
-"startColumn":  21,
-"endLine":  170,
-"endColumn":  28
 }
 }
 },
