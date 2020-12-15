@@ -61,39 +61,31 @@ namespace SonarAnalyzer.Helpers
         }
 
         // TupleExpression "(a, b) = qix"
-        // ParenthesizedVariableDesignation "var (a, b) = quix" inside a VarPattern or inside a DeclarationExpression
-        // FIXME PositionalPatternClause inside a RecursivePattern "qix is (string x, string y)" or inside a switch arm - another topic
+        // ParenthesizedVariableDesignation "var (a, b) = quix" inside a DeclarationExpression
         public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
         {
+            var assignmentLeft = node.Left;
+            Func<int> getLeftTupleCount = null;
             // in a newer Roslyn API, we could check the Operation to be DeconstructionAssignment
-            if (TupleExpressionSyntaxWrapper.IsInstance(node.Left))
+            if (TupleExpressionSyntaxWrapper.IsInstance(assignmentLeft))
             {
-                var semanticModel = GetSemanticModel(node.Right);
-                var namedTypeSymbol = GetNamedTypeSymbol(semanticModel.GetSymbolInfo(node.Right).Symbol);
-                if (namedTypeSymbol != null)
-                {
-                    var deconstructors = namedTypeSymbol.GetMembers("Deconstruct");
-                    if (deconstructors.Length == 1)
-                    {
-                        UsedSymbols.Add(deconstructors.First()); // FIXME cover
-                    }
-                    else if (deconstructors.Length > 1)
-                    {
-                        var tupleArgumentsCount = ((TupleExpressionSyntaxWrapper)node.Left).Arguments.Count;
-                        var deconstructorWithNumberOfArguments = deconstructors.FirstOrDefault(m => m.GetParameters().Count() == tupleArgumentsCount);
-                        if (deconstructorWithNumberOfArguments != null)
-                        {
-                            UsedSymbols.Add(deconstructorWithNumberOfArguments);
-                        }
-                    }
-                }
+                getLeftTupleCount = () => ((TupleExpressionSyntaxWrapper)assignmentLeft).Arguments.Count;
             }
-            else if (DeclarationExpressionSyntaxWrapper.IsInstance(node.Left)
-                && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(((DeclarationExpressionSyntaxWrapper)node.Left).Designation))
+            else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignmentLeft)
+                && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(((DeclarationExpressionSyntaxWrapper)assignmentLeft).Designation))
             {
-                var declarationExpression = (ParenthesizedVariableDesignationSyntaxWrapper)((DeclarationExpressionSyntaxWrapper)node.Left).Designation;
-                var semanticModel = GetSemanticModel(node.Right);
-                var namedTypeSymbol = GetNamedTypeSymbol(semanticModel.GetSymbolInfo(node.Right).Symbol);
+                getLeftTupleCount = () =>
+                {
+                    var declarationExpression = (ParenthesizedVariableDesignationSyntaxWrapper)((DeclarationExpressionSyntaxWrapper)assignmentLeft).Designation;
+                    return declarationExpression.Variables.Count;
+                };
+            }
+
+            if (getLeftTupleCount != null)
+            {
+                var assignmentRight = node.Right;
+                var semanticModel = GetSemanticModel(assignmentRight);
+                var namedTypeSymbol = GetNamedTypeSymbol(semanticModel.GetSymbolInfo(assignmentRight).Symbol);
                 if (namedTypeSymbol != null)
                 {
                     var deconstructors = namedTypeSymbol.GetMembers("Deconstruct");
@@ -101,21 +93,17 @@ namespace SonarAnalyzer.Helpers
                     {
                         UsedSymbols.Add(deconstructors.First());
                     }
-                    else if (deconstructors.Length > 1) // FIXME cover
+                    else if (deconstructors.Length > 1
+                        && FindDeconstructor(deconstructors, getLeftTupleCount()) is ISymbol deconstructor)
                     {
-                        var tupleArgumentsCount = declarationExpression.Variables.Count;
-                        var deconstructorWithNumberOfArguments = deconstructors.FirstOrDefault(m => m.GetParameters().Count() == tupleArgumentsCount);
-                        if (deconstructorWithNumberOfArguments != null)
-                        {
-                            UsedSymbols.Add(deconstructorWithNumberOfArguments);
-                        }
+                        UsedSymbols.Add(deconstructor);
                     }
                 }
             }
 
             base.VisitAssignmentExpression(node);
 
-            INamedTypeSymbol GetNamedTypeSymbol(ISymbol symbol)
+            static INamedTypeSymbol GetNamedTypeSymbol(ISymbol symbol)
             {
                 if (symbol != null)
                 {
@@ -132,6 +120,9 @@ namespace SonarAnalyzer.Helpers
                 }
                 return null;
             }
+
+            ISymbol FindDeconstructor(IEnumerable<ISymbol> deconstructors, int numberOfArguments) =>
+                deconstructors.FirstOrDefault(m => m.GetParameters().Count() == numberOfArguments);
         }
 
         public override void VisitAttribute(AttributeSyntax node)
