@@ -123,9 +123,11 @@ namespace SonarAnalyzer.Helpers
                     {
                         return namedType;
                     }
-                    else if (symbol.ContainingType is INamedTypeSymbol ny)
+                    else if (symbol is IMethodSymbol methodSymbol)
                     {
-                        return ny;
+                        return methodSymbol.MethodKind == MethodKind.Constructor
+                            ? methodSymbol.ContainingType
+                            : methodSymbol.ReturnType as INamedTypeSymbol;
                     }
                 }
                 return null;
