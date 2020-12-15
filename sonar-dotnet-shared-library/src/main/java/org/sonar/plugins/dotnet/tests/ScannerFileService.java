@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,22 +55,19 @@ public class ScannerFileService implements FileService {
     Matcher matcher = DETERMINISTIC_SOURCE_PATH_PREFIX.matcher(filePath.replace('\\', '/'));
     if (matcher.find()) {
       String relativePath = matcher.replaceFirst("");
-      Iterable<InputFile> files = fileSystem.inputFiles(fileSystem.predicates().hasLanguage(languageKey));
-      int count = 0;
-      InputFile foundFile = null;
-      for (InputFile file : files) {
-        String path = file.uri().getPath();
-        if (path.endsWith(relativePath)) {
-          count++;
-          foundFile = file;
-        }
-      }
-      if (count == 1) {
+      List<InputFile> foundFiles = new ArrayList<>();
+      FilePredicates fp = fileSystem.predicates();
+
+      fileSystem.inputFiles(fp.and(fp.hasLanguage(languageKey), new RelativePathPredicate(relativePath))).forEach(foundFiles::add);
+
+      int foundFilesCount = foundFiles.size();
+      if (foundFilesCount == 1) {
+        InputFile foundFile = foundFiles.get(0);
         LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile.uri().getPath(), filePath, relativePath);
         return Optional.of(foundFile);
       } else {
         LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
-          count, filePath, relativePath);
+          foundFilesCount, filePath, relativePath);
         return Optional.empty();
       }
     }
