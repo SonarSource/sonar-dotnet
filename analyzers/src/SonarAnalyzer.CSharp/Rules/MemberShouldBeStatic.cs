@@ -133,16 +133,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             bool IsExcludedByEnclosingType() =>
                 methodOrPropertySymbol.ContainingType.IsInterface()
-                || (methodOrPropertySymbol.ContainingType.IsGenericType && IsAccessibleOutsideTheType());
+                || (methodOrPropertySymbol.ContainingType.IsGenericType && IsAccessibleOutsideTheType(methodOrPropertySymbol.GetEffectiveAccessibility()))
+                || (methodOrPropertySymbol.ContainingType.TypeArguments.Any() && IsAccessibleOutsideTheType(methodOrPropertySymbol.DeclaredAccessibility));
 
-            bool IsAccessibleOutsideTheType() =>
-                methodOrPropertySymbol.GetEffectiveAccessibility() switch
-                {
-                    Accessibility.Public => true,
-                    Accessibility.Internal => true,
-                    Accessibility.ProtectedOrInternal => true,
-                    _ => false
-                };
+            bool IsAccessibleOutsideTheType(Accessibility accessibility) =>
+                accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedOrInternal;
         }
 
         private static bool IsIgnoredAttribute(AttributeData attribute) =>

@@ -256,7 +256,12 @@ namespace Tests.Diagnostics
         {
             private class Generic<TFirst, TSecond>
             {
-                public int BuildSomething() => 42;  // Noncompliant FP, should not be raised as it's directly in generic type
+                public int BuildSomething() => 42;      // Compliant
+
+                private class NestedNongeneric
+                {
+                    public int BuildSomething() => 42;  // Noncompliant, it can be accessed as NestedNongeneric.BuildSomething() from Generic<TFirst, TSecond> scope
+                }
             }
         }
 
