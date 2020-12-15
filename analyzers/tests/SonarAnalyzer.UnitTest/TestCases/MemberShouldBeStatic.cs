@@ -251,6 +251,22 @@ namespace Tests.Diagnostics
         {
             public static int BuildSomething() => 42;  // Compliant
         }
+
+        public class Nongeneric
+        {
+            private class Generic<TFirst, TSecond>
+            {
+                public int BuildSomething() => 42;  // Noncompliant FP, should not be raised as it's directly in generic type
+            }
+        }
+
+        public class GenericOuter<TFirst, TSecond>
+        {
+            private class NongenericInner
+            {
+                public int BuildSomething() => 42;  // Noncompliant
+            }
+        }
     }
 
     public class Repro_3204_OK
