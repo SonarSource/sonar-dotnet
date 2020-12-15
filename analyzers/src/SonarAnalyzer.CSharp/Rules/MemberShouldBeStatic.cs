@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || IsStaticVirtualAbstractOrOverride()
                 || MethodNameWhitelist.Contains(methodOrPropertySymbol.Name)
                 || IsOverrideInterfaceOrNew()
-                || IsInExcludedType()
+                || IsExcludedByEnclosingType()
                 || methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute)
                 || IsEmptyMethod(declaration)
                 || IsAutoProperty(methodOrPropertySymbol)
@@ -132,8 +132,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 || IsNewMethod(methodOrPropertySymbol)
                 || IsNewProperty(methodOrPropertySymbol);
 
-            bool IsInExcludedType() =>
-                methodOrPropertySymbol.ContainingType.IsInterface() || methodOrPropertySymbol.ContainingType.IsGenericType;
+            bool IsExcludedByEnclosingType() =>
+                methodOrPropertySymbol.ContainingType.IsInterface()
+                || (methodOrPropertySymbol.ContainingType.IsGenericType && IsAccessibleOutsideTheType());
+
+            bool IsAccessibleOutsideTheType() =>
+                methodOrPropertySymbol.DeclaredAccessibility switch
+                {
+                    Accessibility.Public => true,
+                    Accessibility.Internal => true,
+                    Accessibility.ProtectedOrInternal => true,
+                    _ => false
+                };
         }
 
         private static bool IsIgnoredAttribute(AttributeData attribute) =>

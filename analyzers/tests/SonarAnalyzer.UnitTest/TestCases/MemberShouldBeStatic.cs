@@ -226,6 +226,16 @@ namespace Tests.Diagnostics
             return 42;
         }
 
+        private int PrivateMethod() => 42;      // Noncompliant, private member is easy to invoke => should be private
+        protected int ProtectedMethod() => 42;  // Noncompliant
+
+        internal int InternalMethod() => 42;                // Compliant
+        protected internal int ProtectedInternal() => 42;   // Compliant as internal invocation would be hard
+
+        public class NestedInGenericType
+        {
+            public int BuildSomething() => 42;  // Compliant
+        }
     }
 
     public class Repro_3204_OK
