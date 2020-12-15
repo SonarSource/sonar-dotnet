@@ -14,6 +14,9 @@
     <Rule>
       <Key>S2255</Key>
     </Rule>
+    <Rule>
+      <Key>S2257</Key>
+    </Rule>
   </Rules>
   <Settings>
     <Setting>
