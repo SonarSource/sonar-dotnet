@@ -137,7 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || (methodOrPropertySymbol.ContainingType.IsGenericType && IsAccessibleOutsideTheType());
 
             bool IsAccessibleOutsideTheType() =>
-                methodOrPropertySymbol.DeclaredAccessibility switch
+                methodOrPropertySymbol.GetEffectiveAccessibility() switch
                 {
                     Accessibility.Public => true,
                     Accessibility.Internal => true,

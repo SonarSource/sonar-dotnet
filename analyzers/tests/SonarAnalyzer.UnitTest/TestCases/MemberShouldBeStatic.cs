@@ -232,9 +232,24 @@ namespace Tests.Diagnostics
         internal int InternalMethod() => 42;                // Compliant
         protected internal int ProtectedInternal() => 42;   // Compliant as internal invocation would be hard
 
-        public class NestedInGenericType
+        public class PublicNestedInGenericType
         {
             public int BuildSomething() => 42;  // Compliant
+        }
+
+        private class PrivateNestedInGenericType
+        {
+            public int BuildSomething() => 42;  // Noncompliant
+        }
+
+        public static class PublicStaticNestedInGenericType
+        {
+            public static int BuildSomething() => 42;  // Compliant
+        }
+
+        private static class PrivateStaticNestedInGenericType
+        {
+            public static int BuildSomething() => 42;  // Compliant
         }
     }
 
