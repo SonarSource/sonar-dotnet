@@ -19,17 +19,15 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class DotCoverReportParser implements CoverageParser {
 
@@ -40,10 +38,10 @@ public class DotCoverReportParser implements CoverageParser {
   private static final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)\\]");
 
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
-  private final Predicate<String> isSupported;
+  private final FileService fileService;
 
-  public DotCoverReportParser(Predicate<String> isSupported) {
-    this.isSupported = isSupported;
+  public DotCoverReportParser(FileService fileService) {
+    this.fileService = fileService;
   }
 
   @Override
@@ -71,7 +69,7 @@ public class DotCoverReportParser implements CoverageParser {
       }
 
       String fileCanonicalPath = extractFileCanonicalPath(contents);
-      if (fileCanonicalPath != null && isSupported.test(fileCanonicalPath)) {
+      if (fileCanonicalPath != null && fileService.isSupportedAbsolute(fileCanonicalPath)) {
         collectCoverage(fileCanonicalPath, contents);
       } else {
         LOG.debug("Skipping the import of dotCover code coverage for file '{}'"

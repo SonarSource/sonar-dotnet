@@ -19,21 +19,22 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.io.File;
 import java.util.List;
-import java.util.function.Predicate;
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.io.File;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class NCover3ReportParserTest {
 
@@ -42,7 +43,18 @@ public class NCover3ReportParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
-  private Predicate<String> alwaysTrue = s -> true;
+  private FileService alwaysTrue;
+  private FileService alwaysFalse;
+
+  @Before
+  public void prepare() {
+    alwaysTrue = mock(FileService.class);
+    when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
+    when(alwaysTrue.getFileByRelativePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
+    alwaysFalse = mock(FileService.class);
+    when(alwaysFalse.isSupportedAbsolute(anyString())).thenReturn(false);
+    when(alwaysFalse.getFileByRelativePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
+  }
 
   private String deprecationMessage = "NCover3 coverage import is deprecated since version 8.6 of the plugin. " +
     "Consider using a different code coverage tool instead.";
@@ -118,7 +130,6 @@ public class NCover3ReportParserTest {
   public void log_unsupported_file_extension() throws Exception {
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     Coverage coverage = new Coverage();
-    Predicate<String> alwaysFalse = s -> false;
     // use "one_file.nccov" to easily check the logs (it has only one coverage entry)
     new NCover3ReportParser(alwaysFalse, analysisWarnings).accept(new File("src/test/resources/ncover3/one_file.nccov"), coverage);
 

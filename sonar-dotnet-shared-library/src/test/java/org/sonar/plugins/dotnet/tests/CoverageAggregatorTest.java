@@ -29,7 +29,6 @@ import org.junit.rules.ExpectedException;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.notifications.AnalysisWarnings;
@@ -41,6 +40,7 @@ import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -100,7 +100,9 @@ public class CoverageAggregatorTest {
   }
 
   private CoverageAggregator getCoverageAggregator(Configuration configuration, CoverageConfiguration coverageConf) {
-    return new CoverageAggregator(coverageConf, configuration, new DefaultFileSystem(new File("")), mock(AnalysisWarnings.class));
+    ScannerFileService alwaysTrue = mock(ScannerFileService.class);
+    when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
+    return new CoverageAggregator(coverageConf, configuration, alwaysTrue, mock(AnalysisWarnings.class));
   }
 
   @Test

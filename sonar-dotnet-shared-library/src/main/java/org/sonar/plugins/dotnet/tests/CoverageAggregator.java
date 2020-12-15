@@ -22,7 +22,6 @@ package org.sonar.plugins.dotnet.tests;
 import java.io.File;
 import java.util.Set;
 import java.util.function.Predicate;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 import org.sonar.api.notifications.AnalysisWarnings;
@@ -46,21 +45,17 @@ public class CoverageAggregator {
   private final DotCoverReportsAggregator dotCoverReportsAggregator;
   private final VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser;
 
-  public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration, FileSystem fs,
-    AnalysisWarnings analysisWarnings) {
-
-    Predicate<String> isIndexedAndSupportedLanguage = absolutePath -> fs.hasFiles(
-      fs.predicates().and(
-        fs.predicates().hasAbsolutePath(absolutePath),
-        fs.predicates().hasLanguage(coverageConf.languageKey())));
-
+  public CoverageAggregator(CoverageConfiguration coverageConf,
+                            Configuration configuration,
+                            ScannerFileService fileService,
+                            AnalysisWarnings analysisWarnings) {
     this.coverageConf = coverageConf;
     this.configuration = configuration;
     this.coverageCache = new CoverageCache();
-    this.ncover3ReportParser = new NCover3ReportParser(isIndexedAndSupportedLanguage, analysisWarnings);
-    this.openCoverReportParser = new OpenCoverReportParser(isIndexedAndSupportedLanguage);
-    this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(isIndexedAndSupportedLanguage));
-    this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(isIndexedAndSupportedLanguage);
+    this.ncover3ReportParser = new NCover3ReportParser(fileService, analysisWarnings);
+    this.openCoverReportParser = new OpenCoverReportParser(fileService);
+    this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(fileService));
+    this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(fileService);
   }
 
   @VisibleForTesting

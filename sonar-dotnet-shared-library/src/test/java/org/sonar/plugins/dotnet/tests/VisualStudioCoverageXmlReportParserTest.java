@@ -20,16 +20,21 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
-import java.util.function.Predicate;
+import java.net.URI;
+import java.util.Optional;
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class VisualStudioCoverageXmlReportParserTest {
 
@@ -38,7 +43,18 @@ public class VisualStudioCoverageXmlReportParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
-  private Predicate<String> alwaysTrue = s -> true;
+  private FileService alwaysTrue;
+  private FileService alwaysFalseAndEmpty;
+
+  @Before
+  public void prepare() {
+    alwaysTrue = mock(FileService.class);
+    when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
+    when(alwaysTrue.getFileByRelativePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
+    alwaysFalseAndEmpty = mock(FileService.class);
+    when(alwaysFalseAndEmpty.isSupportedAbsolute(anyString())).thenReturn(false);
+    when(alwaysFalseAndEmpty.getFileByRelativePath(anyString())).thenReturn(Optional.empty());
+  }
 
   @Test
   public void invalid_root() {
@@ -194,18 +210,83 @@ public class VisualStudioCoverageXmlReportParserTest {
   }
 
   @Test
-  public void valid_with_wrong_file_language() throws Exception {
+  public void valid_with_no_absolute_path_no_relative_path() throws Exception {
     Coverage coverage = new Coverage();
-    new VisualStudioCoverageXmlReportParser(s -> false).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
+
+    new VisualStudioCoverageXmlReportParser(alwaysFalseAndEmpty).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
 
     assertThat(coverage.files()).isEmpty();
     assertThat(coverage.hits(new File("MyLibrary\\Calc.cs").getCanonicalPath())).isEmpty();
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1))
-      .startsWith("Skipping file with path '")
-      .endsWith("\\CalcMultiplyTest\\MultiplyTest.cs' because it is not indexed or does not have the supported language.");
+  }
+
+  @Test
+  public void valid_with_no_absolute_path_relative_path_found() {
+    Coverage coverage = new Coverage();
+    FileService mockFileService = mock(FileService.class);
+    when(mockFileService.isSupportedAbsolute(anyString())).thenReturn(false);
+    InputFile mockInput = mock(InputFile.class);
+    URI file = URI.create("/test/file/Calc.cs");
+    when(mockInput.uri()).thenReturn(file);
+    when(mockFileService.getFileByRelativePath(anyString())).thenReturn(Optional.of(mockInput));
+    new VisualStudioCoverageXmlReportParser(mockFileService).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
+
+    assertThat(coverage.files()).hasSize(1);
+    assertThat(coverage.hits(file.getPath())).hasSize(17)
+      // because we return the mockInput for all entries, the below stats are the aggregated stats for all files
+      .containsOnly(
+        Assertions.entry(12, 0),
+        Assertions.entry(13, 1),
+        Assertions.entry(14, 1),
+        Assertions.entry(15, 1),
+        Assertions.entry(17, 1),
+        Assertions.entry(18, 1),
+        Assertions.entry(19, 1),
+        Assertions.entry(22, 0),
+        Assertions.entry(23, 0),
+        Assertions.entry(24, 0),
+        Assertions.entry(25, 0),
+        Assertions.entry(26, 0),
+        Assertions.entry(28, 0),
+        Assertions.entry(29, 0),
+        Assertions.entry(32, 0),
+        Assertions.entry(33, 0),
+        Assertions.entry(34, 0));
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).isEqualTo("Found indexed file '/test/file/Calc.cs' for coverage entry 'CalcMultiplyTest\\MultiplyTest.cs'.");
+  }
+
+  @Test
+  public void valid_with_deterministic_source_path_returns_found_path() {
+    Coverage coverage = new Coverage();
+    FileService mockFileService = mock(FileService.class);
+    when(mockFileService.isSupportedAbsolute(anyString())).thenReturn(false);
+    InputFile mockInput = mock(InputFile.class);
+    URI file = URI.create("/full/path/to/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs");
+    when(mockInput.uri()).thenReturn(file);
+    when(mockFileService.getFileByRelativePath("/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs")).thenReturn(Optional.of(mockInput));
+    new VisualStudioCoverageXmlReportParser(mockFileService).accept(new File("src/test/resources/visualstudio_coverage_xml/deterministic_source_paths.coveragexml"), coverage);
+
+    assertThat(coverage.files()).hasSize(1);
+    assertThat(coverage.hits(file.getPath())).hasSize(6)
+      .containsOnly(
+        Assertions.entry(6, 1),
+        Assertions.entry(7, 1),
+        Assertions.entry(8, 1),
+        Assertions.entry(11, 0),
+        Assertions.entry(12, 0),
+        Assertions.entry(13, 0));
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).isEqualTo("Found indexed file " +
+      "'/full/path/to/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'" +
+      " for coverage entry '/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'.");
   }
 
   @Test

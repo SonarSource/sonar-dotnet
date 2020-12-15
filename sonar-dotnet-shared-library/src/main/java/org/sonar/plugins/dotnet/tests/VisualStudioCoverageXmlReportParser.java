@@ -25,17 +25,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
+import java.util.Optional;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(VisualStudioCoverageXmlReportParser.class);
-  private final Predicate<String> isSupported;
+  private final FileService fileService;
 
-  public  VisualStudioCoverageXmlReportParser(Predicate<String> isSupported) {
-    this.isSupported = isSupported;
+  public VisualStudioCoverageXmlReportParser(FileService fileService) {
+    this.fileService = fileService;
   }
 
   @Override
@@ -114,9 +115,15 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         return;
       }
 
-      if (!isSupported.test(canonicalPath)) {
-        LOG.debug("Skipping file with path '{}' because it is not indexed or does not have the supported language.", canonicalPath);
-        return;
+      if (!fileService.isSupportedAbsolute(canonicalPath)) {
+        Optional<InputFile> foundFile = fileService.getFileByRelativePath(path);
+        if (foundFile.isPresent()) {
+          canonicalPath = foundFile.get().uri().getPath();
+          LOG.debug("Found indexed file '{}' for coverage entry '{}'.", canonicalPath, path);
+        } else {
+          // debug logging should be done in the fileService
+          return;
+        }
       }
 
       if (coveredLines.containsKey(id)) {

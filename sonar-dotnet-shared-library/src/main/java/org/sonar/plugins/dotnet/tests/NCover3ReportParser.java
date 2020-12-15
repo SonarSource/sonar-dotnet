@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Predicate;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -36,11 +35,11 @@ public class NCover3ReportParser implements CoverageParser {
 
   private static final String EXCLUDED_ID = "0";
   private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
-  private final Predicate<String> isSupported;
+  private final FileService fileService;
   private final AnalysisWarnings analysisWarnings;
 
-  NCover3ReportParser(Predicate<String> isSupported, AnalysisWarnings analysisWarnings) {
-    this.isSupported = isSupported;
+  NCover3ReportParser(FileService fileService, AnalysisWarnings analysisWarnings) {
+    this.fileService = fileService;
     this.analysisWarnings = analysisWarnings;
   }
 
@@ -120,7 +119,7 @@ public class NCover3ReportParser implements CoverageParser {
 
       if (documents.containsKey(doc) && !isExcludedLine(line)) {
         String path = documents.get(doc);
-        if (isSupported.test(path)) {
+        if (fileService.isSupportedAbsolute(path)) {
 
           LOG.trace("Found coverage for line '{}', vc '{}' when analyzing the doc '{}' with the path '{}'.",
             line, vc, doc, path);
