@@ -128,7 +128,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             bool IsOverrideInterfaceOrNew() =>
                 methodOrPropertySymbol.GetInterfaceMember() != null
-                || methodOrPropertySymbol.GetOverriddenMember() != null
                 || IsNewMethod(methodOrPropertySymbol)
                 || IsNewProperty(methodOrPropertySymbol);
 
