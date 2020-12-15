@@ -34,9 +34,8 @@ namespace SonarAnalyzer.Rules
 
         protected const string MessageFormat = "Make sure using a non-standard cryptographic algorithm is safe here.";
 
-        private readonly ImmutableArray<KnownType> nonInheritableClassesAndInterfaces = ImmutableArray.Create<KnownType>(
-            new[]
-            {
+        private readonly ImmutableArray<KnownType> nonInheritableClassesAndInterfaces =
+            ImmutableArray.Create(
                 KnownType.System_Security_Cryptography_AsymmetricAlgorithm,
                 KnownType.System_Security_Cryptography_AsymmetricKeyExchangeDeformatter,
                 KnownType.System_Security_Cryptography_AsymmetricKeyExchangeFormatter,
@@ -45,8 +44,8 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Security_Cryptography_DeriveBytes,
                 KnownType.System_Security_Cryptography_HashAlgorithm,
                 KnownType.System_Security_Cryptography_ICryptoTransform,
-                KnownType.System_Security_Cryptography_SymmetricAlgorithm,
-            });
+                KnownType.System_Security_Cryptography_SymmetricAlgorithm
+            );
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
@@ -68,10 +67,15 @@ namespace SonarAnalyzer.Rules
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, AnalizeDeclaration, SyntaxKinds);
+            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, AnalyzeDeclaration, SyntaxKinds);
 
-        private void AnalizeDeclaration(SyntaxNodeAnalysisContext analysisContext)
+        private void AnalyzeDeclaration(SyntaxNodeAnalysisContext analysisContext)
         {
+            if (!IsEnabled(analysisContext.Options))
+            {
+                return;
+            }
+
             var declaration = (TTypeDeclarationSyntax)analysisContext.Node;
             if (!DerivesOrImplementsAny(declaration))
             {

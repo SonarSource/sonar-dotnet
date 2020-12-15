@@ -34,20 +34,11 @@ namespace NetFramework48
 
         private class CustomHashAlgorithm : HashAlgorithm // Noncompliant (S2257)
         {
-            public override void Initialize()
-            {
-                throw new NotImplementedException();
-            }
+            public override void Initialize() => throw new NotImplementedException();
 
-            protected override void HashCore(byte[] array, int ibStart, int cbSize)
-            {
-                throw new NotImplementedException();
-            }
+            protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw new NotImplementedException();
 
-            protected override byte[] HashFinal()
-            {
-                throw new NotImplementedException();
-            }
+            protected override byte[] HashFinal() => throw new NotImplementedException();
         }
     }
 
@@ -65,20 +56,11 @@ namespace NetFramework48
 
         public bool CanReuseTransform => throw new NotImplementedException();
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        public void Dispose() => throw new NotImplementedException();
 
-        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
-        {
-            throw new NotImplementedException();
-        }
+        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset) => throw new NotImplementedException();
 
-        public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)
-        {
-            throw new NotImplementedException();
-        }
+        public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount) => throw new NotImplementedException();
     }
 
     public class CustomAsymmetricAlgorithm : AsymmetricAlgorithm  // Noncompliant

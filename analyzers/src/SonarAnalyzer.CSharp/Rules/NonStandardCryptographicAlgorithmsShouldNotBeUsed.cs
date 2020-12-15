@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration };
+        protected override SyntaxKind[] SyntaxKinds { get; } = { SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration };
 
         protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
 
