@@ -12454,6 +12454,33 @@
   <data name="S5042_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
   </data>
+  <data name="S5332_Category" xml:space="preserve">
+    <value>Critical Security Hotspot</value>
+  </data>
+  <data name="S5332_Description" xml:space="preserve">
+    <value>Clear-text protocols as ftp, telnet or non secure http are lacking encryption of transported data. They are also missing the capability to build an authenticated connection. This mean that any attacker who can sniff traffic from the network can read, modify or corrupt the transported content. These protocol are not secure as they expose applications to a large range of risk:</value>
+  </data>
+  <data name="S5332_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S5332_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S5332_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S5332_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S5332_Tags" xml:space="preserve">
+    <value>cwe,owasp-a3</value>
+  </data>
+  <data name="S5332_Title" xml:space="preserve">
+    <value>Using clear-text protocols is security-sensitive</value>
+  </data>
+  <data name="S5332_Type" xml:space="preserve">
+    <value>SECURITY_HOTSPOT</value>
+  </data>
   <data name="S5542_Category" xml:space="preserve">
     <value>Blocker Vulnerability</value>
   </data>
