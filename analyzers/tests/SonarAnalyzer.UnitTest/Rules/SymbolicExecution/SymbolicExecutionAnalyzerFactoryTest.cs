@@ -26,6 +26,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
@@ -33,17 +35,20 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class SymbolicExecutionAnalyzerFactoryTest
     {
-        private const string EmptyNullableValueAccess = "S3655";
-        private const string ObjectsShouldNotBeDisposedMoreThanOnce = "S3966";
-        private const string PublicMethodArgumentsShouldBeCheckedForNull = "S3900";
-        private const string EmptyCollectionsShouldNotBeEnumerated = "S4158";
-        private const string ConditionEvaluatesToConstantBug = "S2583";
-        private const string ConditionEvaluatesToConstantCodeSmell = "S2589";
-        private const string InvalidCastToInterface = "S1944";
-        private const string NullPointerDereference = "S2259";
-        private const string RestrictDeserializedTypes = "S5773";
-        private const string InitializationVectorShouldBeRandom = "S3329";
-        private const string HashesShouldHaveUnpredictableSalt = "S2053";
+        private readonly List<string> symbolicExecutionRuleIds = new ()
+        {
+            EmptyNullableValueAccess.DiagnosticId,
+            ObjectsShouldNotBeDisposedMoreThanOnce.DiagnosticId,
+            PublicMethodArgumentsShouldBeCheckedForNull.DiagnosticId,
+            EmptyCollectionsShouldNotBeEnumerated.DiagnosticId,
+            ConditionEvaluatesToConstant.S2583DiagnosticId,
+            ConditionEvaluatesToConstant.S2589DiagnosticId,
+            InvalidCastToInterfaceRuleConstants.DiagnosticId,
+            NullPointerDereference.DiagnosticId,
+            RestrictDeserializedTypes.DiagnosticId,
+            InitializationVectorShouldBeRandom.DiagnosticId,
+            HashesShouldHaveUnpredictableSalt.DiagnosticId
+        };
 
         [TestMethod]
         public void SupportedDiagnostics_ReturnsSymbolicExecutionRuleDescriptors()
@@ -51,20 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             var sut = new SymbolicExecutionAnalyzerFactory();
             var supportedDiagnostics = sut.SupportedDiagnostics.Select(descriptor => descriptor.Id).ToList();
 
-            CollectionAssert.AreEquivalent(supportedDiagnostics, new[]
-            {
-                EmptyNullableValueAccess,
-                ObjectsShouldNotBeDisposedMoreThanOnce,
-                PublicMethodArgumentsShouldBeCheckedForNull,
-                EmptyCollectionsShouldNotBeEnumerated,
-                ConditionEvaluatesToConstantBug,
-                ConditionEvaluatesToConstantCodeSmell,
-                InvalidCastToInterface,
-                NullPointerDereference,
-                RestrictDeserializedTypes,
-                InitializationVectorShouldBeRandom,
-                HashesShouldHaveUnpredictableSalt
-            });
+            CollectionAssert.AreEquivalent(supportedDiagnostics, symbolicExecutionRuleIds);
         }
 
         [DataTestMethod]
@@ -78,19 +70,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
         public void GetEnabledAnalyzers_ReturnsDiagnostic_WhenEnabled(ReportDiagnostic reportDiagnostic)
         {
             var sut = new SymbolicExecutionAnalyzerFactory();
-            var diagnostics = new Dictionary<string, ReportDiagnostic>
-            {
-                {EmptyNullableValueAccess, reportDiagnostic},
-                {ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress},
-                {EmptyCollectionsShouldNotBeEnumerated, ReportDiagnostic.Suppress},
-                {ConditionEvaluatesToConstantBug, ReportDiagnostic.Suppress},
-                {ConditionEvaluatesToConstantCodeSmell, ReportDiagnostic.Suppress},
-                {InvalidCastToInterface, ReportDiagnostic.Suppress},
-                {NullPointerDereference, ReportDiagnostic.Suppress},
-                {RestrictDeserializedTypes, ReportDiagnostic.Suppress},
-                {InitializationVectorShouldBeRandom, ReportDiagnostic.Suppress},
-                {HashesShouldHaveUnpredictableSalt, ReportDiagnostic.Suppress}
-            }.ToImmutableDictionary();
+            var diagnostics = symbolicExecutionRuleIds.ToImmutableDictionary(v => v, v => v == EmptyNullableValueAccess.DiagnosticId ? reportDiagnostic : ReportDiagnostic.Suppress);
+
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
             var enabledAnalyzers =
@@ -98,26 +79,14 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
                     .SelectMany(analyzer => analyzer.SupportedDiagnostics.Select(descriptor => descriptor.Id))
                     .ToList();
 
-            CollectionAssert.AreEquivalent(enabledAnalyzers, new[] {EmptyNullableValueAccess});
+            CollectionAssert.AreEquivalent(enabledAnalyzers, new[] {EmptyNullableValueAccess.DiagnosticId});
         }
 
         [TestMethod]
         public void GetEnabledAnalyzers_ReturnsEmptyList_WhenDiagnosticsAreDisabled()
         {
             var sut = new SymbolicExecutionAnalyzerFactory();
-            var diagnostics = new Dictionary<string, ReportDiagnostic>
-            {
-                {EmptyNullableValueAccess, ReportDiagnostic.Suppress},
-                {ObjectsShouldNotBeDisposedMoreThanOnce, ReportDiagnostic.Suppress},
-                {EmptyCollectionsShouldNotBeEnumerated, ReportDiagnostic.Suppress},
-                {ConditionEvaluatesToConstantBug, ReportDiagnostic.Suppress},
-                {ConditionEvaluatesToConstantCodeSmell, ReportDiagnostic.Suppress},
-                {InvalidCastToInterface, ReportDiagnostic.Suppress},
-                {NullPointerDereference, ReportDiagnostic.Suppress},
-                {RestrictDeserializedTypes, ReportDiagnostic.Suppress},
-                {InitializationVectorShouldBeRandom, ReportDiagnostic.Suppress},
-                {HashesShouldHaveUnpredictableSalt, ReportDiagnostic.Suppress}
-            }.ToImmutableDictionary();
+            var diagnostics = symbolicExecutionRuleIds.ToImmutableDictionary(v => v, _ => ReportDiagnostic.Suppress);
             var context = CreateSyntaxNodeAnalysisContext(diagnostics);
             var analyzers = sut.GetEnabledAnalyzers(context).ToList();
             var enabledAnalyzers =
@@ -133,11 +102,11 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             var syntaxTree = CSharpSyntaxTree.ParseText(@"public class Empty { }", new CSharpParseOptions());
 
             return new SyntaxNodeAnalysisContext(syntaxTree.GetRoot(),
-                CreateCSharpCompilation(diagnostics, syntaxTree).GetSemanticModel(syntaxTree),
-                new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty),
-                diagnostic => { },
-                diagnostic => true,
-                CancellationToken.None);
+                                                 CreateCSharpCompilation(diagnostics, syntaxTree).GetSemanticModel(syntaxTree),
+                                                 new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty),
+                                                 _ => { },
+                                                 _ => true,
+                                                 CancellationToken.None);
         }
 
         private static CSharpCompilation CreateCSharpCompilation(ImmutableDictionary<string, ReportDiagnostic> diagnostics, SyntaxTree syntaxTree) =>
