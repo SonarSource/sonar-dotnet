@@ -32,7 +32,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ImplementSerializationMethodsCorrectly : ImplementSerializationMethodsCorrectlyBase
     {
-        private const string problemMakePrivateText = "'Private'";
         private const string problemReturnVoidText = "a 'Sub' not a 'Function'";
 
         private static readonly DiagnosticDescriptor rule =
@@ -42,9 +41,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
             Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
-
-        protected override string MethodShouldBePrivateMessage =>
-            problemMakePrivateText;
 
         protected override string MethodReturnTypeShouldBeVoidMessage =>
             problemReturnVoidText;

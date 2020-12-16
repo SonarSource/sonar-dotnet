@@ -32,7 +32,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ImplementSerializationMethodsCorrectly : ImplementSerializationMethodsCorrectlyBase
     {
-        private const string problemMakePrivateText = "'private'";
         private const string problemReturnVoidText = "return 'void'";
 
         private static readonly DiagnosticDescriptor rule =
@@ -42,9 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
             Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
-
-        protected override string MethodShouldBePrivateMessage =>
-            problemMakePrivateText;
 
         protected override string MethodReturnTypeShouldBeVoidMessage =>
             problemReturnVoidText;

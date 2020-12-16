@@ -32,6 +32,7 @@ namespace SonarAnalyzer.Rules
         protected const string MessageFormat = "Make this method {0}.";
         private const string problemParameterText = "have a single parameter of type 'StreamingContext'";
         private const string problemGenericParameterText = "have no type parameters";
+        private const string problemPublicText = "non-public";
 
         private static readonly ImmutableArray<KnownType> serializationAttributes =
             ImmutableArray.Create(
@@ -69,16 +70,15 @@ namespace SonarAnalyzer.Rules
         }
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract string MethodShouldBePrivateMessage { get; }
         protected abstract string MethodReturnTypeShouldBeVoidMessage { get; }
 
         protected abstract Location GetIdentifierLocation(IMethodSymbol methodSymbol);
 
         private IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
         {
-            if (methodSymbol.DeclaredAccessibility != Accessibility.Private)
+            if (methodSymbol.DeclaredAccessibility == Accessibility.Public)
             {
-                yield return MethodShouldBePrivateMessage;
+                yield return problemPublicText;
             }
 
             if (!methodSymbol.ReturnsVoid)
