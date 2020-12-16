@@ -25,6 +25,8 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -39,21 +41,77 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            //context.RegisterCodeFix(
-            //    CodeAction.Create(
-            //        Title,
-            //        c => Task.FromResult(Simplify(root, context)),
-            //    context.Diagnostics);
+            var diagnosticSpan = diagnostic.Location.SourceSpan;
+            var binary = root.FindNode(diagnosticSpan)?.FirstAncestorOrSelf<BinaryExpressionSyntax>();
 
-            return Task.CompletedTask;
+            if (binary is null)
+            {
+                return Task.CompletedTask;
+            }
+            else
+            {
+                var countExpression = binary.Left as InvocationExpressionSyntax;
+                var literal = binary.Right as LiteralExpressionSyntax;
+                var invocationFirst = countExpression != null;
+
+                if (!invocationFirst)
+                {
+                    literal = binary.Left as LiteralExpressionSyntax;
+                    countExpression = binary.Right as InvocationExpressionSyntax;
+                }
+
+                if (countExpression is null || literal is null)
+                {
+                    return Task.CompletedTask;
+                }
+                else
+                {
+                    var isEmpty = IsEmpty(literal, binary.OperatorToken, invocationFirst);
+                    context.RegisterCodeFix(
+                       CodeAction.Create(
+                           Title,
+                           c => Task.FromResult(Simplify(root, binary, countExpression, isEmpty, context))),
+                           context.Diagnostics);
+
+                    return Task.CompletedTask;
+                }
+            }
         }
 
-        internal static Document Simplify(SyntaxNode root, CodeFixContext context)
+        private Document Simplify(
+            SyntaxNode root,
+            BinaryExpressionSyntax binary,
+            InvocationExpressionSyntax countExpression,
+            bool isEmpty,
+            CodeFixContext context)
         {
-
-            // if == 0
-            // else if > 0 || >= 1 || != 0
-            throw new NotImplementedException();
+            var countNode = countExpression.ChildNodes().OfType<MemberAccessExpressionSyntax>().FirstOrDefault();
+            var anyNode = countNode.WithName(SyntaxFactory.IdentifierName("Any"));
+            ExpressionSyntax anyExpression = countExpression.ReplaceNode(countNode, anyNode);
+            if (isEmpty)
+            {
+                anyExpression = SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, anyExpression);
+            }
+            return context.Document.WithSyntaxRoot(root.ReplaceNode(binary, anyExpression));
         }
+
+        private static bool IsEmpty(LiteralExpressionSyntax literal, SyntaxToken logicalOperator, bool invocationFirst)
+            => EqualsZero(literal, logicalOperator)
+            || (invocationFirst ? LessThenOne(literal, logicalOperator) : OneGreaterThan(literal, logicalOperator));
+
+        private static bool EqualsZero(LiteralExpressionSyntax literal, SyntaxToken logicalOperator)
+            => logicalOperator.IsKind(SyntaxKind.EqualsEqualsToken) &&
+                ExpressionNumericConverter.TryGetConstantIntValue(literal, out var value) &&
+                value == 0;
+
+        private static bool LessThenOne(LiteralExpressionSyntax literal, SyntaxToken logicalOperator)
+            => logicalOperator.IsKind(SyntaxKind.LessThanToken) &&
+                ExpressionNumericConverter.TryGetConstantIntValue(literal, out var value) &&
+                value == 1;
+
+        private static bool OneGreaterThan(LiteralExpressionSyntax literal, SyntaxToken logicalOperator)
+            => logicalOperator.IsKind(SyntaxKind.GreaterThanToken) &&
+                ExpressionNumericConverter.TryGetConstantIntValue(literal, out var value) &&
+                value == 1;
     }
 }
