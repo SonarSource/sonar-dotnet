@@ -2,32 +2,6 @@
 "issues":  [
 {
 "id":  "S2325",
-"message":  "Make 'GoTo' a static method.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
-"region":  {
-"startLine":  182,
-"startColumn":  45,
-"endLine":  182,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Transform' a static method.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
-"region":  {
-"startLine":  321,
-"startColumn":  32,
-"endLine":  321,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2325",
 "message":  "Make 'GetSourceString' a static method.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",

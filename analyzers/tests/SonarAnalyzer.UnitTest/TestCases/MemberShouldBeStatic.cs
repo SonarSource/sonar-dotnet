@@ -216,9 +216,61 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/3204
     public class Repro_3204<TFirst, TSecond>
     {
-        public int BuildSomething() // Noncompliant FP
+        public int BuildSomething() // Compliant, we don't raise inside generic class, so it doesn't have to be invoked like Repro_3204<SomethingA, SomethingB>.BuildSomething() - too difficult to read
         {
             return 42;
+        }
+
+        public int WithGenericArguments<TFirst, TSecond>() // Compliant
+        {
+            return 42;
+        }
+
+        private int PrivateMethod() => 42;      // Noncompliant, private member is easy to invoke => should be private
+        protected int ProtectedMethod() => 42;  // Noncompliant
+
+        internal int InternalMethod() => 42;                // Compliant
+        protected internal int ProtectedInternal() => 42;   // Compliant as internal invocation would be hard
+
+        public class PublicNestedInGenericType
+        {
+            public int BuildSomething() => 42;  // Compliant
+        }
+
+        private class PrivateNestedInGenericType
+        {
+            public int BuildSomething() => 42;  // Noncompliant
+        }
+
+        public static class PublicStaticNestedInGenericType
+        {
+            public static int BuildSomething() => 42;  // Compliant
+        }
+
+        private static class PrivateStaticNestedInGenericType
+        {
+            public static int BuildSomething() => 42;  // Compliant
+        }
+
+        public class Nongeneric
+        {
+            private class Generic<TFirst, TSecond>
+            {
+                public int BuildSomething() => 42;      // Compliant
+
+                private class NestedNongeneric
+                {
+                    public int BuildSomething() => 42;  // Noncompliant, it can be accessed as NestedNongeneric.BuildSomething() from Generic<TFirst, TSecond> scope
+                }
+            }
+        }
+
+        public class GenericOuter<TFirst, TSecond>
+        {
+            private class NongenericInner
+            {
+                public int BuildSomething() => 42;  // Noncompliant
+            }
         }
     }
 

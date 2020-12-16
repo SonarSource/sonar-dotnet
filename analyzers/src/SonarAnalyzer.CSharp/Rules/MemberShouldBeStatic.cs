@@ -39,9 +39,8 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2325";
         internal const string MessageFormat = "Make '{0}' a static {1}.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableHashSet<string> MethodNameWhitelist =
             ImmutableHashSet.Create(
@@ -100,24 +99,17 @@ namespace SonarAnalyzer.Rules.CSharp
             where TDeclarationSyntax : MemberDeclarationSyntax
         {
             var declaration = (TDeclarationSyntax)context.Node;
-
             var methodOrPropertySymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
 
-            if (methodOrPropertySymbol == null ||
-                methodOrPropertySymbol.IsStatic ||
-                methodOrPropertySymbol.IsVirtual ||
-                methodOrPropertySymbol.IsAbstract ||
-                methodOrPropertySymbol.IsOverride ||
-                MethodNameWhitelist.Contains(methodOrPropertySymbol.Name) ||
-                methodOrPropertySymbol.ContainingType.IsInterface() ||
-                methodOrPropertySymbol.GetInterfaceMember() != null ||
-                methodOrPropertySymbol.GetOverriddenMember() != null ||
-                methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute) ||
-                IsNewMethod(methodOrPropertySymbol) ||
-                IsEmptyMethod(declaration) ||
-                IsNewProperty(methodOrPropertySymbol) ||
-                IsAutoProperty(methodOrPropertySymbol) ||
-                IsPublicControllerMethod(methodOrPropertySymbol))
+            if (methodOrPropertySymbol == null
+                || IsStaticVirtualAbstractOrOverride()
+                || MethodNameWhitelist.Contains(methodOrPropertySymbol.Name)
+                || IsOverrideInterfaceOrNew()
+                || IsExcludedByEnclosingType()
+                || methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute)
+                || IsEmptyMethod(declaration)
+                || IsAutoProperty(methodOrPropertySymbol)
+                || IsPublicControllerMethod(methodOrPropertySymbol))
             {
                 return;
             }
@@ -129,7 +121,25 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var identifier = getIdentifier(declaration);
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(), identifier.Text, memberKind));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, memberKind));
+
+            bool IsStaticVirtualAbstractOrOverride() =>
+                methodOrPropertySymbol.IsStatic || methodOrPropertySymbol.IsVirtual || methodOrPropertySymbol.IsAbstract || methodOrPropertySymbol.IsOverride;
+
+            bool IsOverrideInterfaceOrNew() =>
+                methodOrPropertySymbol.GetInterfaceMember() != null
+                || IsNewMethod(methodOrPropertySymbol)
+                || IsNewProperty(methodOrPropertySymbol);
+
+            bool IsExcludedByEnclosingType() =>
+                methodOrPropertySymbol.ContainingType.IsInterface()
+                // Any generic type in nesting chain with member accessible from outside (through the whole nesting chain) is excluded.
+                || (methodOrPropertySymbol.ContainingType.IsGenericType && IsAccessibleOutsideTheType(methodOrPropertySymbol.GetEffectiveAccessibility()))
+                // Any nested private generic type with member accessible from outside that type (not the whole nesting chain) is also excluded.
+                || (methodOrPropertySymbol.ContainingType.TypeArguments.Any() && IsAccessibleOutsideTheType(methodOrPropertySymbol.DeclaredAccessibility));
+
+            bool IsAccessibleOutsideTheType(Accessibility accessibility) =>
+                accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedOrInternal;
         }
 
         private static bool IsIgnoredAttribute(AttributeData attribute) =>
@@ -196,12 +206,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return true;
             }
-
-            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-
-            return symbol != null &&
-                !symbol.IsStatic &&
-                InstanceSymbolKinds.Contains(symbol.Kind);
+            return semanticModel.GetSymbolInfo(node).Symbol is { } symbol
+                && !symbol.IsStatic
+                && InstanceSymbolKinds.Contains(symbol.Kind);
         }
     }
 }
