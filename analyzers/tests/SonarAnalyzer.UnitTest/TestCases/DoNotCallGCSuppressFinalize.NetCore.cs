@@ -15,7 +15,7 @@ namespace Tests.Diagnostics
         {
             await DisposeAsyncCore();
 
-            GC.SuppressFinalize(this); // Noncompliant - FP, see: https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync#the-disposeasync-method
+            GC.SuppressFinalize(this); // Compliant, see: https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync#the-disposeasync-method
         }
 
         protected virtual ValueTask DisposeAsyncCore() => default;
@@ -32,7 +32,7 @@ namespace Tests.Diagnostics
         {
             await DisposeAsyncCore();
 
-            GC.SuppressFinalize(this); // Noncompliant - FP, see: https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync#the-disposeasync-method
+            GC.SuppressFinalize(this); // Compliant, see: https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync#the-disposeasync-method
         }
 
         protected virtual ValueTask DisposeAsyncCore() => default;
