@@ -12,19 +12,6 @@
 "endColumn":  183
 }
 }
-},
-{
-"id":  "S107",
-"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianActorRef.cs",
-"region":  {
-"startLine":  21,
-"startColumn":  36,
-"endLine":  22,
-"endColumn":  148
-}
-}
 }
 ]
 }
