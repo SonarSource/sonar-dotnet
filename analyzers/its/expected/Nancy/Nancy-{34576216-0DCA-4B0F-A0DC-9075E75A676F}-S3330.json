@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3330",
+"message":  "Make sure creating this cookie without the "HttpOnly" flag is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  38,
+"endLine":  367,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S3330",
+"message":  "Make sure creating this cookie without the "HttpOnly" flag is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  41,
+"endLine":  81,
+"endColumn":  121
+}
+}
+}
+]
+}
