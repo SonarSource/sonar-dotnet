@@ -35,13 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.ParameterList };
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
 
         private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
@@ -53,6 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
             { SyntaxKind.SimpleLambdaExpression, "Lambda" },
             { SyntaxKindEx.LocalFunctionStatement, "Local function" }
         }.ToImmutableDictionary();
+
+        public TooManyParameters() : base(RspecStrings.ResourceManager) { }
 
         protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
 

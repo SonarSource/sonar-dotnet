@@ -35,15 +35,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ParameterList };
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-
-        private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
+        private static readonly ImmutableDictionary<SyntaxKind, string> NodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
             { SyntaxKind.SubNewStatement, "Constructor" },
             { SyntaxKind.FunctionStatement, "Function" },
@@ -60,21 +55,23 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.SubLambdaHeader
         };
 
-        protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
+        public TooManyParameters() : base(RspecStrings.ResourceManager) { }
+
+        protected override string UserFriendlyNameForNode(SyntaxNode node) => NodeToDeclarationName[node.Kind()];
 
         protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
 
         protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
         {
-            if (!nodeToDeclarationName.ContainsKey(node.Kind()))
+            if (!NodeToDeclarationName.ContainsKey(node.Kind()))
             {
                 return false;
             }
 
-            if ((node as SubNewStatementSyntax)?.ParameterList?.Parameters.Count is int parameterCount &&
-                parameterCount > Maximum &&
-                node.Parent is ConstructorBlockSyntax constructorBlock &&
-                ContainsMyBaseNewInvocation(constructorBlock, Maximum))
+            if ((node as SubNewStatementSyntax)?.ParameterList?.Parameters.Count is int parameterCount
+                && parameterCount > Maximum
+                && node.Parent is ConstructorBlockSyntax constructorBlock
+                && constructorBlock.Statements.Any(x => IsMyBaseNewInvocation(x, Maximum)))
             {
                 return false;
             }
@@ -87,12 +84,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return VerifyCanBeChangedBySymbol(node, semanticModel);
         }
 
-        private static bool ContainsMyBaseNewInvocation(ConstructorBlockSyntax constructorBlock, int maximum) =>
-                constructorBlock.Statements.Any(s => s is ExpressionStatementSyntax expression &&
-                    expression.Expression is InvocationExpressionSyntax invocation &&
-                    invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                    memberAccess.Expression is MyBaseExpressionSyntax myBase &&
-                    memberAccess.Name.Identifier.Text.Equals("New", System.StringComparison.OrdinalIgnoreCase) &&
-                    invocation.ArgumentList.Arguments.Count > maximum);
+        private static bool IsMyBaseNewInvocation(StatementSyntax statement, int maximum) =>
+            statement is ExpressionStatementSyntax expression
+            && expression.Expression is InvocationExpressionSyntax invocation
+            && invocation.Expression is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.Expression is MyBaseExpressionSyntax
+            && memberAccess.Name.Identifier.Text.Equals("New", System.StringComparison.OrdinalIgnoreCase)
+            && invocation.ArgumentList.Arguments.Count > maximum;
     }
 }
