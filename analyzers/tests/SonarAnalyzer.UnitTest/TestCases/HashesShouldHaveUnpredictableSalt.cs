@@ -187,12 +187,20 @@ namespace Tests.Diagnostics
 
     public class Foo
     {
-        private readonly byte[] salt = new byte[32]; // Salt as field is not tracked by the SE engine
+        private byte[] salt = new byte[32]; // Salt as field is not tracked by the SE engine
 
         public void Bar(byte[] passwordBytes)
         {
             new PasswordDeriveBytes(passwordBytes, salt); // Compliant
             new Rfc2898DeriveBytes(passwordBytes, salt, 16); // Compliant
+
+            salt = new byte[32];
+            var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(salt);
+            new PasswordDeriveBytes(passwordBytes, salt); // Compliant
+
+            salt = new byte[31];
+            new PasswordDeriveBytes(passwordBytes, salt); // Noncompliant
         }
     }
 }
