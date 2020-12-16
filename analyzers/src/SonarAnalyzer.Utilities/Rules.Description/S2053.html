@@ -1,7 +1,7 @@
 <p>In cryptography, "salt" is extra piece of data which is included in a hashing algorithm. It makes dictionary attacks more difficult. Using a
 cryptographic hash function without an unpredictable salt increases the likelihood that an attacker will be able to successfully guess a hashed value
 such as a password with a dictionary attack.</p>
-<p>This rule raises an issue when a hashing function which has been specifically designed for hashing sensitive data, such as pbkdf2, is used with a
+<p>This rule raises an issue when a hashing function which has been specifically designed for hashing sensitive data, such as PBKDF2, is used with a
 non-random, reused or too short salt value. It does not raise an issue on base hashing algorithms such as sha1 or md5 as these are often used for
 other purposes.</p>
 <h2>Recommended Secure Coding Practices</h2>
