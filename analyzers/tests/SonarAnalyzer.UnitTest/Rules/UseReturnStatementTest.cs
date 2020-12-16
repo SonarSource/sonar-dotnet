@@ -29,7 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseReturnStatement() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseReturnStatement.cs", new SonarAnalyzer.Rules.VisualBasic.UseReturnStatement());
+            Verifier.VerifyAnalyzer(@"TestCases\UseReturnStatement.vb", new SonarAnalyzer.Rules.VisualBasic.UseReturnStatement());
     }
 }
-

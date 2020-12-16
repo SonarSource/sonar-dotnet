@@ -36,7 +36,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private const string DiagnosticId = "S5944";
         private const string MessageFormat = "Use a 'Return' statement; assigning returned values to function names is obsolete.";
-
         private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -44,7 +43,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var name = (IdentifierNameSyntax)c.Node;
-                if (name.Ancestors()?.FirstOrDefault(IsFunctionBlockSyntax) is MethodBlockSyntax methodBlock)
+                if (!Excluded(name.Parent) && name.Ancestors().FirstOrDefault(IsFunctionBlockSyntax) is MethodBlockSyntax methodBlock)
                 {
                     var statement = (MethodStatementSyntax)methodBlock.BlockStatement;
                     if (name.Identifier.ValueText.Equals(statement?.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase))
@@ -55,9 +54,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             },
             SyntaxKind.IdentifierName);
 
-        private bool IsFunctionBlockSyntax(SyntaxNode node) =>
+        private static bool IsFunctionBlockSyntax(SyntaxNode node) =>
             node is MethodBlockSyntax methodBlock &&
             methodBlock.BlockStatement.DeclarationKeyword.IsKind(SyntaxKind.FunctionKeyword);
+
+        private static bool Excluded(SyntaxNode node) =>
+            node is InvocationExpressionSyntax ||
+            node is MemberAccessExpressionSyntax ||
+            node is NamedFieldInitializerSyntax;
     }
 }
-
