@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -61,15 +62,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
-            {
-                if (IsImplicitReturnValue(node))
                 {
+                if (IsImplicitReturnValue(node))
+                    {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(),
                         IsAssignmentStatement(node)
                         ? UseReturnStatementMessage
                         : DontUseImplicitMessage));
+                    }
                 }
-            }
 
             public override void VisitImplementsClause(ImplementsClauseSyntax node) { /* Skip */ }
 
@@ -88,3 +89,4 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
     }
 }
+
