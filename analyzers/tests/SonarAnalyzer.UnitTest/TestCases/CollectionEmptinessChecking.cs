@@ -28,6 +28,14 @@ namespace Tests.Diagnostics
         {
             return l.Any();
         }
+        private static bool IsNotEmpty1(List<string> l)
+        {
+            return l.Count() != 0; // Noncompliant
+        }
+        private static bool IsNotEmpty2(List<string> l)
+        {
+            return 0 != l.Count(); // Noncompliant
+        }
         private static bool IsEmpty1(List<string> l)
         {
             return l.Count() == 0; // Noncompliant
@@ -51,6 +59,14 @@ namespace Tests.Diagnostics
         private static bool IsEmpty4b(List<string> l)
         {
             return 1 > l.Count(); // Noncompliant
+        }
+        private static bool HasContentWithCondition(List<int> numbers)
+        {
+            return numbers.Count(n => n % 2 == 0) > 0; // Noncompliant
+        }
+        private static bool IsEmptyWithCondition(List<int> numbers)
+        {
+            return numbers.Count(n => n % 2 == 0) == 0; // Noncompliant
         }
     }
 }

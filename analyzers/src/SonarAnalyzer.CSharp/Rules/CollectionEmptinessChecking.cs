@@ -83,6 +83,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     CheckCountZero(binary.Right, binary.Left, c);
                 },
                 SyntaxKind.EqualsExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var binary = (BinaryExpressionSyntax)c.Node;
+                    CheckCountZero(binary.Left, binary.Right, c);
+                    CheckCountZero(binary.Right, binary.Left, c);
+                },
+                SyntaxKind.NotEqualsExpression);
         }
 
         private static void CheckCountZero(ExpressionSyntax zero, ExpressionSyntax count, SyntaxNodeAnalysisContext context)
