@@ -67,6 +67,10 @@ Namespace Tests.Diagnostics
         Protected Sub OnSerializedMethod(Context As StreamingContext)   ' Noncompliant FP, method Is Not Public And gets invoked
         End Sub
 
+        <OnSerialized>
+        Protected Friend Sub OnProtectedFriend(Context As StreamingContext)     ' Noncompliant FP, method Is Not Public And gets invoked
+        End Sub
+
         <OnDeserializing>
         Private Sub OnDeserializingMethod(Context As StreamingContext)  ' Compliant
         End Sub
