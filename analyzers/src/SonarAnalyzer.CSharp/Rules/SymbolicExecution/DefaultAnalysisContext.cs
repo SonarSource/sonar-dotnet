@@ -29,12 +29,15 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     {
         private readonly List<T> locations = new List<T>();
 
+        protected abstract Diagnostic CreateDiagnostic(T location);
+
         public bool SupportsPartialResults => false;
 
         public IEnumerable<Diagnostic> GetDiagnostics() =>
             locations.Distinct().Select(CreateDiagnostic);
 
-        public void AddLocation(T location) => locations.Add(location);
+        public void AddLocation(T location) =>
+            locations.Add(location);
 
         public void Dispose()
         {
@@ -46,7 +49,5 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
         {
             // Nothing to do here
         }
-
-        protected abstract Diagnostic CreateDiagnostic(T location);
     }
 }

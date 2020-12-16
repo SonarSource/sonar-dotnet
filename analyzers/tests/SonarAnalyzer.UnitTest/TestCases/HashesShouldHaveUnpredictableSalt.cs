@@ -1,3 +1,4 @@
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -9,7 +10,7 @@ namespace Tests.Diagnostics
         private CspParameters cspParams = new CspParameters();
         private readonly byte[] passwordBytes = Encoding.UTF8.GetBytes(passwordString);
 
-        public void ShortHashIsNotCompliant()
+        public void ShortSaltIsNotCompliant()
         {
             var shortSalt = new byte[31];
             var pdb1 = new PasswordDeriveBytes(passwordBytes, shortSalt); // Noncompliant {{Make this salt longer.}}
@@ -61,10 +62,10 @@ namespace Tests.Diagnostics
             var pdb2 = new PasswordDeriveBytes(passwordBytes, getBytesSalt);
             var pbkdf2 = new Rfc2898DeriveBytes(passwordString, getBytesSalt);
 
-            var shortHash = new byte[31];
-            rng.GetBytes(shortHash);
-            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortHash); // Noncompliant
-            var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortHash); // Noncompliant
+            var shortSalt = new byte[31];
+            rng.GetBytes(shortSalt);
+            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt); // Noncompliant
+            var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortSalt); // Noncompliant
         }
 
         public void RandomNumberGeneratorIsCompliant()
@@ -81,10 +82,10 @@ namespace Tests.Diagnostics
             var pdb2 = new PasswordDeriveBytes(passwordBytes, getBytesSalt);
             var pbkdf2 = new Rfc2898DeriveBytes(passwordString, getBytesSalt);
 
-            var shortHash = new byte[31];
-            rng.GetBytes(shortHash);
-            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortHash); // Noncompliant
-            var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortHash); // Noncompliant
+            var shortSalt = new byte[31];
+            rng.GetBytes(shortSalt);
+            var pdb3 = new PasswordDeriveBytes(passwordBytes, shortSalt); // Noncompliant
+            var pbkdf3 = new Rfc2898DeriveBytes(passwordString, shortSalt); // Noncompliant
         }
 
         public void SaltAsParameter(byte[] salt)
@@ -148,6 +149,14 @@ namespace Tests.Diagnostics
             new PasswordDeriveBytes(passwordBytes, noncompliantSalt);
 
             new PasswordDeriveBytes(passwordBytes, new byte[32]); // Noncompliant
+
+            var rnd = new Random();
+            var saltCustom = new byte[32];
+            for (int i = 0; i < saltCustom.Length; i++)
+            {
+                saltCustom[i] = (byte)rnd.Next(255);
+            }
+            new PasswordDeriveBytes(passwordBytes, saltCustom); // Noncompliant
         }
 
         public void ByteArrayCases(byte[] passwordBytes)
@@ -166,6 +175,24 @@ namespace Tests.Diagnostics
             var a4 = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
             rng.GetBytes(a4);
             new PasswordDeriveBytes(passwordBytes, a4); // Compliant
+
+            new PasswordDeriveBytes(passwordBytes, GetSalt()); // Compliant
+
+            var a5 = GetSalt();
+            new PasswordDeriveBytes(passwordBytes, a5); // Compliant
+        }
+
+        private byte[] GetSalt() => new byte[16];
+    }
+
+    public class Foo
+    {
+        private readonly byte[] salt = new byte[32]; // Salt as field is not tracked by the SE engine
+
+        public void Bar(byte[] passwordBytes)
+        {
+            new PasswordDeriveBytes(passwordBytes, salt); // Compliant
+            new Rfc2898DeriveBytes(passwordBytes, salt, 16); // Compliant
         }
     }
 }

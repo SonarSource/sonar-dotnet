@@ -28,13 +28,9 @@ namespace SonarAnalyzer.SymbolicExecution.Common.Constraints
         private SaltSizeSymbolicValueConstraint() { }
 
         public override SymbolicValueConstraint OppositeForLogicalNot =>
-            this == Safe
-                ? Short
-                : Safe;
+            this == Safe ? Short : Safe;
 
         public override string ToString() =>
-            this == Safe
-                ? "Safe"
-                : "Short";
+            this == Safe ? nameof(Safe) : nameof(Short);
     }
 }

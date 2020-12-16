@@ -58,13 +58,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 Message = message;
             }
 
-            public override int GetHashCode()
-            {
-                unchecked
-                {
-                    return Location.GetHashCode() * 397 ^ Message.GetHashCode();
-                }
-            }
+            public override int GetHashCode() =>
+                Location.GetHashCode() * 397 ^ Message.GetHashCode();
 
             public override bool Equals(object obj) =>
                 ReferenceEquals(this, obj) || (obj is LocationContext other && Equals(other));
@@ -99,25 +94,23 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             public SaltCheck(AbstractExplodedGraph explodedGraph, AnalysisContext context) : base(explodedGraph) =>
                 this.context = context;
 
-            public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
-                programPoint.CurrentInstruction is ArrayCreationExpressionSyntax arrayCreation
-                    ? ArrayCreationPostProcess(arrayCreation, programState)
-                    : programState;
-
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
                 programPoint.CurrentInstruction is ObjectCreationExpressionSyntax objectCreation
                     ? ObjectCreationPreProcess(objectCreation, programState)
                     : programState;
 
+            public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
+                programPoint.CurrentInstruction is ArrayCreationExpressionSyntax arrayCreation
+                    ? ArrayCreationPostProcess(arrayCreation, programState)
+                    : programState;
+
             private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState)
             {
-                if (programState.HasValue && semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array))
+                if (programState.HasValue
+                    && semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array)
+                    && GetSize(arrayCreation) < MinimumSafeLength)
                 {
-                    var size = GetSize(arrayCreation);
-                    if (size.HasValue && size.Value < MinimumSafeLength)
-                    {
-                        programState = programState.SetConstraint(programState.PeekValue(), SaltSizeSymbolicValueConstraint.Short);
-                    }
+                    programState = programState.SetConstraint(programState.PeekValue(), SaltSizeSymbolicValueConstraint.Short);
                 }
 
                 return programState;
@@ -130,7 +123,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                     && symbolType.IsAny(VulnerableTypes)
                     // There are cases when the symbol corresponding to the salt parameter does not exists (e.g. the byte[] is created directly when calling the ctor)
                     // but we should always have a symbolic value for it.
-                    && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - SaltParameterIndex).Take(1).SingleOrDefault() is {} symbolicValue)
+                    && programState.ExpressionStack.Skip(objectCreation.ArgumentList.Arguments.Count - SaltParameterIndex).FirstOrDefault() is {} symbolicValue)
                 {
                     if (programState.HasConstraint(symbolicValue, SaltSizeSymbolicValueConstraint.Short))
                     {
@@ -145,22 +138,21 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 return programState;
             }
 
-            private Optional<int> GetSize(ArrayCreationExpressionSyntax arrayCreation)
+            private int? GetSize(ArrayCreationExpressionSyntax arrayCreation)
             {
                 if (arrayCreation.Initializer != null)
                 {
-                    return new Optional<int>(arrayCreation.Initializer.Expressions.Count);
+                    return arrayCreation.Initializer.Expressions.Count;
                 }
 
                 if (arrayCreation.Type.RankSpecifiers.Count == 1
                     && arrayCreation.Type.RankSpecifiers[0].Sizes[0] is {} rankSpecifierSize
-                    && semanticModel.GetConstantValue(rankSpecifierSize) is {} constantValue
-                    && constantValue.HasValue && constantValue.Value is int size)
+                    && semanticModel.GetConstantValue(rankSpecifierSize) is {HasValue: true, Value: int size})
                 {
-                    return new Optional<int>(size);
+                    return size;
                 }
 
-                return new Optional<int>();
+                return null;
             }
         }
     }
