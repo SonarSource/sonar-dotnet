@@ -28,13 +28,16 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class ImplementSerializationMethodsCorrectlyBase : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3927";
-        protected const string MessageFormat = "Make this method {0}.";
-        private const string problemParameterText = "have a single parameter of type 'StreamingContext'";
-        private const string problemGenericParameterText = "have no type parameters";
-        private const string problemPublicText = "non-public";
+        protected const string DiagnosticId = "S3927";
+        private const string MessageFormat = "Make this method {0}.";
+        private const string ProblemParameterText = "have a single parameter of type 'StreamingContext'";
+        private const string ProblemGenericParameterText = "have no type parameters";
+        private const string ProblemPublicText = "non-public";
 
-        private static readonly ImmutableArray<KnownType> serializationAttributes =
+        private readonly DiagnosticDescriptor rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        private static readonly ImmutableArray<KnownType> SerializationAttributes =
             ImmutableArray.Create(
                 KnownType.System_Runtime_Serialization_OnSerializingAttribute,
                 KnownType.System_Runtime_Serialization_OnSerializedAttribute,
@@ -42,18 +45,24 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Runtime_Serialization_OnDeserializedAttribute
             );
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract string MethodReturnTypeShouldBeVoidMessage { get; }
+        protected abstract Location GetIdentifierLocation(IMethodSymbol methodSymbol);
+
+        protected ImplementSerializationMethodsCorrectlyBase(System.Resources.ResourceManager rspecResources) =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
                     var methodSymbol = (IMethodSymbol)c.Symbol;
-                    if (!methodSymbol.GetAttributes(serializationAttributes).Any())
+                    if (!methodSymbol.GetAttributes(SerializationAttributes).Any())
                     {
                         return;
                     }
 
-                    var issues = FindIssues(methodSymbol).ToList();
+                    var issues = FindIssues(methodSymbol);
                     if (issues.Count == 0)
                     {
                         return;
@@ -62,39 +71,26 @@ namespace SonarAnalyzer.Rules
                     var location = GetIdentifierLocation(methodSymbol);
                     if (location != null)
                     {
-                        c.ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer, Diagnostic.Create(SupportedDiagnostics[0],
-                            location, issues.ToSentence()));
+                        c.ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer, Diagnostic.Create(SupportedDiagnostics[0], location, issues.ToSentence()));
                     }
                 },
                 SymbolKind.Method);
-        }
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract string MethodReturnTypeShouldBeVoidMessage { get; }
-
-        protected abstract Location GetIdentifierLocation(IMethodSymbol methodSymbol);
-
-        private IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
+        private List<string> FindIssues(IMethodSymbol methodSymbol)
         {
-            if (methodSymbol.DeclaredAccessibility == Accessibility.Public)
-            {
-                yield return problemPublicText;
-            }
+            var ret = new List<string>();
+            Evaluate(ProblemPublicText, methodSymbol.DeclaredAccessibility == Accessibility.Public);
+            Evaluate(MethodReturnTypeShouldBeVoidMessage, !methodSymbol.ReturnsVoid);
+            Evaluate(ProblemGenericParameterText, !methodSymbol.TypeParameters.IsEmpty);
+            Evaluate(ProblemParameterText, methodSymbol.Parameters.Length != 1 || !methodSymbol.Parameters.First().IsType(KnownType.System_Runtime_Serialization_StreamingContext));
+            return ret;
 
-            if (!methodSymbol.ReturnsVoid)
+            void Evaluate(string message, bool condition)
             {
-                yield return MethodReturnTypeShouldBeVoidMessage;
-            }
-
-            if (!methodSymbol.TypeParameters.IsEmpty)
-            {
-                yield return problemGenericParameterText;
-            }
-
-            if (methodSymbol.Parameters.Length != 1 ||
-                !methodSymbol.Parameters.First().IsType(KnownType.System_Runtime_Serialization_StreamingContext))
-            {
-                yield return problemParameterText;
+                if (condition)
+                {
+                    ret.Add(message);
+                }
             }
         }
     }

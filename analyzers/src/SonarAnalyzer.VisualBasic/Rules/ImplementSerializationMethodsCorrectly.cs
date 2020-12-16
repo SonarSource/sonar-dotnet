@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -32,18 +31,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ImplementSerializationMethodsCorrectly : ImplementSerializationMethodsCorrectlyBase
     {
-        private const string problemReturnVoidText = "a 'Sub' not a 'Function'";
+        private const string ProblemReturnVoidText = "a 'Sub' not a 'Function'";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
-            = ImmutableArray.Create(rule);
+        public ImplementSerializationMethodsCorrectly() : base(RspecStrings.ResourceManager) { }
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override string MethodReturnTypeShouldBeVoidMessage =>
-            problemReturnVoidText;
+        protected override string MethodReturnTypeShouldBeVoidMessage => ProblemReturnVoidText;
 
         protected override Location GetIdentifierLocation(IMethodSymbol methodSymbol) =>
             methodSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax())
