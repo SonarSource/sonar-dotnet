@@ -43,7 +43,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var name = (IdentifierNameSyntax)c.Node;
-                if (!Excluded(name.Parent) && name.Ancestors().FirstOrDefault(IsFunctionBlockSyntax) is MethodBlockSyntax methodBlock)
+                if (!Excluded(name.Parent) &&
+                    name.FirstAncestorOrSelf<MethodBlockSyntax>() is MethodBlockSyntax methodBlock &&
+                    methodBlock.BlockStatement.DeclarationKeyword.IsKind(SyntaxKind.FunctionKeyword))
                 {
                     var statement = (MethodStatementSyntax)methodBlock.BlockStatement;
                     if (name.Identifier.ValueText.Equals(statement?.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase))
@@ -53,10 +55,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 }
             },
             SyntaxKind.IdentifierName);
-
-        private static bool IsFunctionBlockSyntax(SyntaxNode node) =>
-            node is MethodBlockSyntax methodBlock &&
-            methodBlock.BlockStatement.DeclarationKeyword.IsKind(SyntaxKind.FunctionKeyword);
 
         private static bool Excluded(SyntaxNode node) =>
             node is InvocationExpressionSyntax ||
