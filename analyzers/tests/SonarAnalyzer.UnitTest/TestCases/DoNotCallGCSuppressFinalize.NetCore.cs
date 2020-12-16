@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace Tests.Diagnostics
 {
     // https://github.com/SonarSource/sonar-dotnet/issues/3639
-    public class Custom : IAsyncDisposable
+    public class Implicit : IAsyncDisposable
     {
         public void Method()
         {
@@ -12,6 +12,23 @@ namespace Tests.Diagnostics
         }
 
         public async ValueTask DisposeAsync()
+        {
+            await DisposeAsyncCore();
+
+            GC.SuppressFinalize(this); // Noncompliant - FP, see: https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync#the-disposeasync-method
+        }
+
+        protected virtual ValueTask DisposeAsyncCore() => default;
+    }
+
+    public class Explicit : IAsyncDisposable
+    {
+        public void Method()
+        {
+            GC.SuppressFinalize(this); // Noncompliant
+        }
+
+        async ValueTask IAsyncDisposable.DisposeAsync()
         {
             await DisposeAsyncCore();
 
