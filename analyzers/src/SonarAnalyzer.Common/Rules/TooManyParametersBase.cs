@@ -43,6 +43,7 @@ namespace SonarAnalyzer.Rules
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract string UserFriendlyNameForNode(SyntaxNode node);
         protected abstract int CountParameters(TParameterListSyntax parameterList);
+        protected abstract int BaseParameterCount(SyntaxNode node);
         protected abstract bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel);
 
         protected TooManyParametersBase(System.Resources.ResourceManager rspecResources) =>
@@ -54,9 +55,11 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var parametersCount = CountParameters((TParameterListSyntax)c.Node);
-                    if (parametersCount > Maximum && c.Node.Parent != null && CanBeChanged(c.Node.Parent, c.SemanticModel))
+                    var baseCount = BaseParameterCount(c.Node.Parent);
+                    if (parametersCount - baseCount > Maximum && c.Node.Parent != null && CanBeChanged(c.Node.Parent, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), UserFriendlyNameForNode(c.Node.Parent), parametersCount, Maximum));
+                        var valueText = baseCount == 0 ? parametersCount.ToString() : parametersCount - baseCount + " new";
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), UserFriendlyNameForNode(c.Node.Parent), valueText, Maximum));
                     }
                 },
                 SyntaxKinds);

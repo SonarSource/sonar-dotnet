@@ -29,8 +29,8 @@ namespace Tests.Diagnostics
 
         public void F()
         {
-            var v1 = new Action<int, int, int>(delegate(int p1, int p2, int p3) { Console.WriteLine(); });
-            var v2 = new Action<int, int, int, int>(delegate(int p1, int p2, int p3, int p4) { Console.WriteLine(); }); // Noncompliant {{Delegate has 4 parameters, which is greater than the 3 authorized.}}
+            var v1 = new Action<int, int, int>(delegate (int p1, int p2, int p3) { Console.WriteLine(); });
+            var v2 = new Action<int, int, int, int>(delegate (int p1, int p2, int p3, int p4) { Console.WriteLine(); }); // Noncompliant {{Delegate has 4 parameters, which is greater than the 3 authorized.}}
             var v3 = new Action(delegate { });
             var v4 = new Action<int, int, int>((int p1, int p2, int p3) => Console.WriteLine());
             var v5 = new Action<int, int, int, int>((int p1, int p2, int p3, int p4) => Console.WriteLine()); // Noncompliant {{Lambda has 4 parameters, which is greater than the 3 authorized.}}
@@ -76,11 +76,11 @@ namespace Tests.Diagnostics
 
     public class SubClass2 : TooManyParameters
     {
-        public SubClass2(int p1, int p2, int p3, string s1, string s2) // Noncompliant
-            : base(p1, p2, p3)
-        {
+        public SubClass2(int p1, int p2, int p3, string s1, string s2, string s3) // Compliant, base class has 3. This adds only 3 new parameters.
+            : base(p1, p2, p3) { }
 
-        }
+        public SubClass2(int p1, int p2, int p3, string s1, string s2, string s3, string s4) // Noncompliant {{Constructor has 4 new parameters, which is greater than the 3 authorized.}}
+            : base(p1, p2, p3) { }
     }
 
     public class TooManyParametersLocalFunctions

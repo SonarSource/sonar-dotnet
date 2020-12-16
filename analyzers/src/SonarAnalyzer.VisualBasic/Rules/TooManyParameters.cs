@@ -61,35 +61,23 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
 
-        protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
-        {
-            if (!NodeToDeclarationName.ContainsKey(node.Kind()))
-            {
-                return false;
-            }
+        protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel) =>
+            node.IsAnyKind(LambdaHeaders)
+            || (NodeToDeclarationName.ContainsKey(node.Kind()) && VerifyCanBeChangedBySymbol(node, semanticModel));
 
-            if ((node as SubNewStatementSyntax)?.ParameterList?.Parameters.Count is int parameterCount
-                && parameterCount > Maximum
-                && node.Parent is ConstructorBlockSyntax constructorBlock
-                && constructorBlock.Statements.Any(x => IsMyBaseNewInvocation(x, Maximum)))
-            {
-                return false;
-            }
+        protected override int BaseParameterCount(SyntaxNode node) =>
+            node.Parent is ConstructorBlockSyntax constructorBlock
+            && constructorBlock.SubNewStatement.ParameterList?.Parameters.Count > Maximum   // Performance optimalization
+                ? constructorBlock.Statements.Select(x => MyBaseNewParameterCount(x)).SingleOrDefault(x => x > 0)
+                : 0;
 
-            if (node.IsAnyKind(LambdaHeaders))
-            {
-                return true;
-            }
-
-            return VerifyCanBeChangedBySymbol(node, semanticModel);
-        }
-
-        private static bool IsMyBaseNewInvocation(StatementSyntax statement, int maximum) =>
+        private static int MyBaseNewParameterCount(StatementSyntax statement) =>
             statement is ExpressionStatementSyntax expression
             && expression.Expression is InvocationExpressionSyntax invocation
             && invocation.Expression is MemberAccessExpressionSyntax memberAccess
             && memberAccess.Expression is MyBaseExpressionSyntax
             && memberAccess.Name.Identifier.Text.Equals("New", System.StringComparison.OrdinalIgnoreCase)
-            && invocation.ArgumentList.Arguments.Count > maximum;
+            ? invocation.ArgumentList.Arguments.Count
+            : 0;
     }
 }

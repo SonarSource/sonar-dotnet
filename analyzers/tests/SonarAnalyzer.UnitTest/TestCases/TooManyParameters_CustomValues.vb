@@ -122,7 +122,11 @@ End Class
 Public Class SubClass2
     Inherits TooManyParameters
 
-    Public Sub New(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal s1 As String, ByVal s2 As String) ' Noncompliant
+    Public Sub New(p1 As Integer, p2 As Integer, p3 As Integer, s1 As String, s2 As String, s3 As String) ' Compliant, base class has 3. This adds only 3 new parameters.
+        MyBase.New(p1, p2, p3)
+    End Sub
+
+    Public Sub New(p1 As Integer, p2 As Integer, p3 As Integer, s1 As String, s2 As String, s3 As String, s4 As String) ' Noncompliant {{Constructor has 4 new parameters, which is greater than the 3 authorized.}}
         MyBase.New(p1, p2, p3)
     End Sub
 
