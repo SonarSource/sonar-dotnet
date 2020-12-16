@@ -307,8 +307,13 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_Authentication_SslProtocols = new KnownType("System.Security.Authentication.SslProtocols");
         internal static readonly KnownType System_Security_Cryptography_AesManaged = new KnownType("System.Security.Cryptography.AesManaged");
         internal static readonly KnownType System_Security_Cryptography_AsymmetricAlgorithm = new KnownType("System.Security.Cryptography.AsymmetricAlgorithm");
+        internal static readonly KnownType System_Security_Cryptography_AsymmetricKeyExchangeDeformatter = new KnownType("System.Security.Cryptography.AsymmetricKeyExchangeDeformatter");
+        internal static readonly KnownType System_Security_Cryptography_AsymmetricKeyExchangeFormatter = new KnownType("System.Security.Cryptography.AsymmetricKeyExchangeFormatter");
+        internal static readonly KnownType System_Security_Cryptography_AsymmetricSignatureDeformatter = new KnownType("System.Security.Cryptography.AsymmetricSignatureDeformatter");
+        internal static readonly KnownType System_Security_Cryptography_AsymmetricSignatureFormatter = new KnownType("System.Security.Cryptography.AsymmetricSignatureFormatter");
         internal static readonly KnownType System_Security_Cryptography_CspParameters = new KnownType("System.Security.Cryptography.CspParameters");
         internal static readonly KnownType System_Security_Cryptography_DES = new KnownType("System.Security.Cryptography.DES");
+        internal static readonly KnownType System_Security_Cryptography_DeriveBytes = new KnownType("System.Security.Cryptography.DeriveBytes");
         internal static readonly KnownType System_Security_Cryptography_DSA = new KnownType("System.Security.Cryptography.DSA");
         internal static readonly KnownType System_Security_Cryptography_DSACryptoServiceProvider = new KnownType("System.Security.Cryptography.DSACryptoServiceProvider");
         internal static readonly KnownType System_Security_Cryptography_ECDiffieHellman = new KnownType("System.Security.Cryptography.ECDiffieHellman");
@@ -317,6 +322,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_Cryptography_HMACMD5 = new KnownType("System.Security.Cryptography.HMACMD5");
         internal static readonly KnownType System_Security_Cryptography_HMACRIPEMD160 = new KnownType("System.Security.Cryptography.HMACRIPEMD160");
         internal static readonly KnownType System_Security_Cryptography_HMACSHA1 = new KnownType("System.Security.Cryptography.HMACSHA1");
+        internal static readonly KnownType System_Security_Cryptography_ICryptoTransform = new KnownType("System.Security.Cryptography.ICryptoTransform");
         internal static readonly KnownType System_Security_Cryptography_MD5 = new KnownType("System.Security.Cryptography.MD5");
         internal static readonly KnownType System_Security_Cryptography_PasswordDeriveBytes = new KnownType("System.Security.Cryptography.PasswordDeriveBytes");
         internal static readonly KnownType System_Security_Cryptography_RC2 = new KnownType("System.Security.Cryptography.RC2");
