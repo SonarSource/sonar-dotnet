@@ -18,9 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -32,26 +35,47 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ClearTextProtocolsAreSensitive : HotspotDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S5332";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Using {0} protocol is insecure. Use {1} instead";
+
+        private readonly ImmutableArray<string> unsafeProtocols = ImmutableArray.Create("http://", "ftp://", "telnet://");
+        private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>
+        {
+            {"telnet", "ssh"},
+            {"ftp", "sftp, scp or ftps"},
+            {"http", "https"},
+            {"clear-text SMTP", "SMTP over SSL/TLS or SMTP with STARTTLS" }
+        };
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
-        {
-        }
+        public ClearTextProtocolsAreSensitive() : base(AnalyzerConfiguration.Hotspot) { }
+
+        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                {
-                   var node = c.Node;
-                   if (true)
+                   var text = GetText(c.Node);
+                   if (ContainsUnsafeProtocol(text))
                    {
-                       c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+                       c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
                    }
                },
-               SyntaxKind.InvocationExpression);
+               SyntaxKind.StringLiteralExpression,
+               SyntaxKind.InterpolatedStringText);
+
+        private bool ContainsUnsafeProtocol(string text) =>
+            unsafeProtocols.Any(text.Contains);
+
+        private static string GetText(SyntaxNode node) =>
+            node switch
+            {
+                InterpolatedStringTextSyntax interpolatedStringText => interpolatedStringText.TextToken.Text,
+                LiteralExpressionSyntax literalExpression => literalExpression.Token.Text,
+                _ => string.Empty
+            };
     }
 }
 
