@@ -38,6 +38,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
     [Rule(NullPointerDereference.DiagnosticId, LanguageNames.CSharp)]
     [Rule(RestrictDeserializedTypes.DiagnosticId, LanguageNames.CSharp)]
     [Rule(InitializationVectorShouldBeRandom.DiagnosticId, LanguageNames.CSharp)]
+    [Rule(HashesShouldHaveUnpredictableSalt.DiagnosticId, LanguageNames.CSharp)]
     internal sealed class SymbolicExecutionAnalyzerFactory : IRuleFactory
     {
         private readonly ImmutableArray<ISymbolicExecutionAnalyzer> analyzers;
@@ -54,7 +55,8 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
                 new InvalidCastToInterfaceSymbolicExecution(),
                 new NullPointerDereference(),
                 new RestrictDeserializedTypes(),
-                new InitializationVectorShouldBeRandom()))
+                new InitializationVectorShouldBeRandom(),
+                new HashesShouldHaveUnpredictableSalt()))
         {
         }
 

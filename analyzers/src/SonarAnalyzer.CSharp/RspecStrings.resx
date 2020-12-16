@@ -3009,6 +3009,39 @@
   <data name="S1994_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2053_Category" xml:space="preserve">
+    <value>Critical Vulnerability</value>
+  </data>
+  <data name="S2053_Description" xml:space="preserve">
+    <value>In cryptography, "salt" is extra piece of data which is included in a hashing algorithm. It makes dictionary attacks more difficult. Using a cryptographic hash function without an unpredictable salt increases the likelihood that an attacker will be able to successfully guess a hashed value such as a password with a dictionary attack.</value>
+  </data>
+  <data name="S2053_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2053_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2053_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S2053_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S2053_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S2053_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S2053_Tags" xml:space="preserve">
+    <value>cwe,sans-top25-porous,owasp-a3</value>
+  </data>
+  <data name="S2053_Title" xml:space="preserve">
+    <value>Hashes should include an unpredictable salt</value>
+  </data>
+  <data name="S2053_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S2068_Category" xml:space="preserve">
     <value>Blocker Security Hotspot</value>
   </data>
