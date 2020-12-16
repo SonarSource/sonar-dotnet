@@ -3,21 +3,25 @@
   <Rules>
     <!-- Temporary workaround to enable security hotspot rules so that we could get issues -->
     <Rule><Key>S1313</Key></Rule>
+    <Rule><Key>S2068</Key></Rule>
+    <Rule><Key>S2077</Key></Rule>
     <Rule><Key>S2092</Key></Rule>
     <Rule><Key>S2245</Key></Rule>
     <Rule><Key>S2255</Key></Rule>
     <Rule><Key>S2257</Key></Rule>
-    <Rule><Key>S4834</Key></Rule>
+    <Rule><Key>S3011</Key></Rule>
+    <Rule><Key>S3330</Key></Rule>
+    <Rule><Key>S4507</Key></Rule>
     <Rule><Key>S4784</Key></Rule>
     <Rule><Key>S4787</Key></Rule>
-    <Rule><Key>S3011</Key></Rule>
     <Rule><Key>S4790</Key></Rule>
+    <Rule><Key>S4792</Key></Rule>
     <Rule><Key>S4818</Key></Rule>
     <Rule><Key>S4823</Key></Rule>
-    <Rule><Key>S2077</Key></Rule>
-    <Rule><Key>S4507</Key></Rule>
-    <Rule><Key>S4792</Key></Rule>
     <Rule><Key>S4829</Key></Rule>
+    <Rule><Key>S4834</Key></Rule>
+    <Rule><Key>S5042</Key></Rule>
+    <Rule><Key>S5766</Key></Rule>
     <!-- End of workaround -->
   </Rules>
   <Settings>
