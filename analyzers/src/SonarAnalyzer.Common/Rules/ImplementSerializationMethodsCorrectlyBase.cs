@@ -46,6 +46,7 @@ namespace SonarAnalyzer.Rules
             );
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract string MethodStaticMessage { get; }
         protected abstract string MethodReturnTypeShouldBeVoidMessage { get; }
         protected abstract Location GetIdentifierLocation(IMethodSymbol methodSymbol);
 
@@ -80,6 +81,7 @@ namespace SonarAnalyzer.Rules
         {
             var ret = new List<string>();
             Evaluate(ProblemPublicText, methodSymbol.DeclaredAccessibility == Accessibility.Public);
+            Evaluate(MethodStaticMessage, methodSymbol.IsStatic);
             Evaluate(MethodReturnTypeShouldBeVoidMessage, !methodSymbol.ReturnsVoid);
             Evaluate(ProblemGenericParameterText, !methodSymbol.TypeParameters.IsEmpty);
             Evaluate(ProblemParameterText, methodSymbol.Parameters.Length != 1 || !methodSymbol.Parameters.First().IsType(KnownType.System_Runtime_Serialization_StreamingContext));

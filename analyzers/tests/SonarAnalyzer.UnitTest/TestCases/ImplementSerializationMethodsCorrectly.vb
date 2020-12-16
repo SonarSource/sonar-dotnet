@@ -56,7 +56,11 @@ Namespace Tests.Diagnostics
         End Function
 
         <OnSerializing>
-        Private Shared Sub OnSerializingStatic(Context As StreamingContext)  ' FN
+        Private Shared Sub OnSerializingStatic(Context As StreamingContext)  ' Noncompliant {{Make this method non-shared.}}
+        End Sub
+
+        <OnSerializing>
+        Public Shared Sub OnSerializingPublicStatic(Context As StreamingContext)  ' Noncompliant {{Make this method non-public and non-shared.}}
         End Sub
 
         <OnSerializing>

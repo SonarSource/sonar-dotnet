@@ -31,11 +31,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ImplementSerializationMethodsCorrectly : ImplementSerializationMethodsCorrectlyBase
     {
+        private const string ProblemStatic = "non-static";
         private const string ProblemReturnVoidText = "return 'void'";
 
         public ImplementSerializationMethodsCorrectly() : base(RspecStrings.ResourceManager) { }
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+
+        protected override string MethodStaticMessage => ProblemStatic;
 
         protected override string MethodReturnTypeShouldBeVoidMessage => ProblemReturnVoidText;
 

@@ -31,11 +31,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ImplementSerializationMethodsCorrectly : ImplementSerializationMethodsCorrectlyBase
     {
+        private const string ProblemStatic = "non-shared";
         private const string ProblemReturnVoidText = "a 'Sub' not a 'Function'";
 
         public ImplementSerializationMethodsCorrectly() : base(RspecStrings.ResourceManager) { }
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+
+        protected override string MethodStaticMessage => ProblemStatic;
 
         protected override string MethodReturnTypeShouldBeVoidMessage => ProblemReturnVoidText;
 

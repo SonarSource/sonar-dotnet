@@ -38,7 +38,10 @@ public record Foo
     public int OnDeserializing5<T>() { throw new NotImplementedException(); } // Noncompliant {{Make this method non-public, return 'void', have no type parameters and have a single parameter of type 'StreamingContext'.}}
 
     [OnSerializing]
-    private static void OnSerializingStatic(StreamingContext context) { } // FN
+    private static void OnSerializingStatic(StreamingContext context) { } // Noncompliant {{Make this method non-static.}}
+
+    [OnSerializing]
+    public static void OnSerializingPublicStatic(StreamingContext context) { } // Noncompliant {{Make this method non-public and non-static.}}
 
     [OnSerializing()]
     internal void OnSerializingMethod(StreamingContext context) { }     // Compliant, method is not public and gets invoked
