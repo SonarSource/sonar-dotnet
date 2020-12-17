@@ -44,6 +44,8 @@ namespace Tests.Diagnostics
         // We should not raise for imported methods according to external definition.
         [DllImport("foo.dll")]
         public static extern void Extern(int p1, int p2, int p3, int p4); // Compliant, external definition
+        public static extern void ExternNoAttribute(int p1, int p2, int p3, int p4);    // Noncompliant
+        public extern void ExternNoStatic(int p1, int p2, int p3, int p4);              // Noncompliant
     }
 
     public interface If
@@ -56,6 +58,10 @@ namespace Tests.Diagnostics
     {
         public MyWrongClass(string a, string b, string c, string d, string e, string f, string g, string h) // Noncompliant {{Constructor has 8 parameters, which is greater than the 3 authorized.}}
 //                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        {
+        }
+
+        public virtual void Method(int a, int b, int c, int d) // Noncompliant
         {
         }
     }
@@ -72,6 +78,10 @@ namespace Tests.Diagnostics
         public SubClass()
             : base("", "", "", "", "", "", "", "")
         { }
+
+        public override void Method(int a, int b, int c, int d) // Compliant, cannot be changed
+        {
+        }
     }
 
     public class SubClass2 : TooManyParameters
