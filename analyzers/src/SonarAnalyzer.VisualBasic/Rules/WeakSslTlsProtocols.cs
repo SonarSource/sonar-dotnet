@@ -34,11 +34,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.IdentifierName;
+        protected override SyntaxKind SyntaxKindOfInterest { get; } = SyntaxKind.IdentifierName;
 
         protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override string GetIdentifierText(IdentifierNameSyntax identifierNameSyntax) =>
             identifierNameSyntax.Identifier.Text;
+
+        protected override bool IsNodeOfInterest(SyntaxNode node) =>
+            !node.Parent.GetSelfOrTopParenthesizedExpression().Parent.Parent.IsKind(SyntaxKind.IfStatement);
     }
 }

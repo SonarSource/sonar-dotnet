@@ -34,11 +34,18 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.IdentifierName;
+        protected override SyntaxKind SyntaxKindOfInterest { get; } = SyntaxKind.IdentifierName;
 
         protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override string GetIdentifierText(IdentifierNameSyntax identifierNameSyntax) =>
             identifierNameSyntax.Identifier.Text;
+
+        protected override bool IsNodeOfInterest(SyntaxNode node)
+        {
+            var topNode = node.Parent.GetSelfOrTopParenthesizedExpression();
+            return !topNode.Parent.IsKind(SyntaxKind.BitwiseNotExpression)
+                   && !topNode.Parent.Parent.IsKind(SyntaxKind.IfStatement);
+        }
     }
 }

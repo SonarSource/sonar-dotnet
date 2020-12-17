@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Security;
@@ -13,6 +14,9 @@ namespace Tests.Diagnostics
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3; // Noncompliant {{Change this code to use a stronger protocol.}}
 //                                                                      ^^^^
+
+            ServicePointManager.SecurityProtocol = ~((SecurityProtocolType.Ssl3)) | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls; // Noncompliant {{Change this code to use a stronger protocol.}}
+//                                                                                                                                    ^^^
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls; // Noncompliant {{Change this code to use a stronger protocol.}}
 //                                                                      ^^^
@@ -86,6 +90,58 @@ namespace Tests.Diagnostics
 
             sslStream.BeginAuthenticateAsServer(null, true, SslProtocols.Tls, true, null, null); // Noncompliant {{Change this code to use a stronger protocol.}}
 //                                                                       ^^^
+
+            SslProtocols[] protocols = new[]
+            {
+                SslProtocols.Default, // Noncompliant
+//                           ^^^^^^^
+                SslProtocols.None
+            };
+
+            var listExample = new List<SslProtocols>()
+            {
+                SslProtocols.Default, // Noncompliant
+//                           ^^^^^^^
+                SslProtocols.None
+            };
+
+            Dictionary<SslProtocols, bool> shouldUseProtocol = new Dictionary<SslProtocols, bool>()
+            {
+                { SslProtocols.Default, false },  // NonCompliant
+//                             ^^^^^^^
+
+                { SslProtocols.None, true }
+            };
+
+            var numbers = new Dictionary<SslProtocols, string>
+            {
+                [SslProtocols.None] = "None",
+                [SslProtocols.Default] = "Default", // Noncompliant
+//                            ^^^^^^^
+            };
+        }
+
+        private class Dummy1
+        {
+            public Dummy1() : this(SslProtocols.Default) // Noncompliant
+//                                              ^^^^^^^
+            {
+
+            }
+
+            public Dummy1(SslProtocols protocol)
+            {
+
+            }
+        }
+
+        private class Dummy2 : Dummy1
+        {
+            public Dummy2() : base(SslProtocols.Default) // Noncompliant
+    //                                          ^^^^^^^
+            {
+
+            }
         }
 
         public void SecurityProtocolTypeCompliant()
@@ -93,6 +149,9 @@ namespace Tests.Diagnostics
             ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault; // Compliant
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; // Compliant
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13; // Compliant
+
+            ServicePointManager.SecurityProtocol = ~((SecurityProtocolType.Ssl3)); // Compliant
+            ServicePointManager.SecurityProtocol = ~SecurityProtocolType.Ssl3; // Compliant
         }
 
         public void SslProtocolsCompliant()
@@ -108,6 +167,13 @@ namespace Tests.Diagnostics
             };
 
             handler.SslProtocols = SslProtocols.Tls12; // Compliant
+
+            var sslProtocol = SslProtocols.None;
+
+            if (sslProtocol != SslProtocols.Default) // Compliant
+            {
+
+            }
         }
     }
 }

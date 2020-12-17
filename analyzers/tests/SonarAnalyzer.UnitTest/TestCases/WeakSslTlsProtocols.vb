@@ -10,6 +10,7 @@ Imports System.Security.Authentication
 
 Namespace Tests.Diagnostics
     Public Class WeakSslTlsProtocols
+
         Public Sub SecurityProtocolTypeNonComplaint()
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 ' Noncompliant {{Change this code to use a stronger protocol.}}
 '                                                                       ^^^^
@@ -63,7 +64,33 @@ Namespace Tests.Diagnostics
 
             sslStream.BeginAuthenticateAsServer(Nothing, true, SslProtocols.Tls, true, Nothing, Nothing) ' Noncompliant {{Change this code to use a stronger protocol.}}
 '                                                                           ^^^
+        
+            Dim protocols = New SslProtocols() {SslProtocols.None, SslProtocols.Default } ' Noncompliant
+'                                                                               ^^^^^^^
         End Sub
+
+        Private Class Dummy1
+
+            Sub New()
+                Me.New(SslProtocols.Default) ' Noncompliant
+'                                   ^^^^^^^
+            End Sub
+
+            Sub New(protocol As SslProtocols)
+
+            End Sub
+
+        End Class
+
+        Private Class Dumym2
+            Inherits Dummy1
+
+            Sub New()
+                MyBase.New(SslProtocols.Default) ' Noncompliant
+'                                       ^^^^^^^
+            End Sub
+
+        End Class
 
         Public Sub SecurityProtocolTypeCompliant()
             ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault ' Compliant
@@ -77,6 +104,13 @@ Namespace Tests.Diagnostics
             HttpHandler.SslProtocols = SslProtocols.Tls12 ' Compliant
 
             HttpHandler.SslProtocols = SslProtocols.None ' Compliant
+
+            Dim protocols = SslProtocols.None ' Compliant
+
+            if protocols <> SslProtocols.Default Then ' Compliant
+
+            End If
         End Sub
+
     End Class
 End Namespace
