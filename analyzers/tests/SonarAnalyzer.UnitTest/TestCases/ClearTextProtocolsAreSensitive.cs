@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
@@ -121,6 +122,12 @@ namespace Tests.Diagnostics
         private static Stream TelNet() => null;
         private Stream Telnetwork() => null;
         private Stream HotelNetwork() => null;
+
+        private readonly List<string> links = new List<string>
+        {
+            "http://example.com", // Noncompliant
+            "https://example.com"
+        };
     }
 }
 

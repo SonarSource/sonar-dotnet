@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text.RegularExpressions;
@@ -63,16 +64,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private readonly ImmutableArray<string> validServerValues = ImmutableArray.Create(LocalHost, LocalHostIp);
 
-        private readonly CSharpObjectInitializationTracker objectInitializationTracker;
+        private readonly CSharpObjectInitializationTracker objectInitializationTracker =
+            new CSharpObjectInitializationTracker(constantValue => constantValue is bool value && value,
+                                                  ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient, KnownType.System_Net_FtpWebRequest),
+                                                  propertyName => EnableSslName == propertyName);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DefaultRule, EnableSslRule);
 
-        public ClearTextProtocolsAreSensitive() : base(AnalyzerConfiguration.Hotspot) { }
+        public ClearTextProtocolsAreSensitive() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
-            objectInitializationTracker = new CSharpObjectInitializationTracker(constantValue => constantValue is bool value && value,
-                                                                                ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient, KnownType.System_Net_FtpWebRequest),
-                                                                                propertyName => EnableSslName == propertyName);
+        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(ccc =>
@@ -133,7 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
             });
 
         private bool IsServerSafe(ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation.ArgumentList.Arguments.Count > 0
+            objectCreation.ArgumentList?.Arguments.Count > 0
             && validServerValues.Contains(GetText(objectCreation.ArgumentList.Arguments[0].Expression));
 
         private static bool TryGetUnsafeProtocol(string text, out string unsafeProtocol)
