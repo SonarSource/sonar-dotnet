@@ -43,9 +43,32 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsNodeOfInterest(SyntaxNode node)
         {
+            if (!(node.Parent is MemberAccessExpressionSyntax))
+            {
+                return false;
+            }
+
             var topNode = node.Parent.GetSelfOrTopParenthesizedExpression();
-            return !topNode.Parent.IsKind(SyntaxKind.BitwiseNotExpression)
-                   && !topNode.Parent.Parent.IsKind(SyntaxKind.IfStatement);
+
+            if (topNode.Parent != null && topNode.Parent.IsKind(SyntaxKind.BitwiseNotExpression))
+            {
+                return false;
+            }
+
+            var current = topNode;
+            var parent = current.Parent;
+            while (parent != null && !parent.IsKind(SyntaxKind.IfStatement))
+            {
+                current = parent;
+                parent = parent.Parent;
+            }
+
+            if (parent != null && parent.IsKind(SyntaxKind.IfStatement) && current != null)
+            {
+                return (parent as IfStatementSyntax).Condition != current;
+            }
+
+            return true;
         }
     }
 }

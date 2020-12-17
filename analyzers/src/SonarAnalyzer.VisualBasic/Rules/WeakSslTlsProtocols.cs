@@ -41,7 +41,27 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override string GetIdentifierText(IdentifierNameSyntax identifierNameSyntax) =>
             identifierNameSyntax.Identifier.Text;
 
-        protected override bool IsNodeOfInterest(SyntaxNode node) =>
-            !node.Parent.GetSelfOrTopParenthesizedExpression().Parent.Parent.IsKind(SyntaxKind.IfStatement);
+        protected override bool IsNodeOfInterest(SyntaxNode node)
+        {
+            if (!(node.Parent is MemberAccessExpressionSyntax))
+            {
+                return false;
+            }
+
+            var current = node;
+            var parent = current.Parent;
+            while (parent != null && !parent.IsKind(SyntaxKind.IfStatement))
+            {
+                current = parent;
+                parent = parent.Parent;
+            }
+
+            if (parent != null && parent.IsKind(SyntaxKind.IfStatement) && current != null)
+            {
+                return (parent as IfStatementSyntax).Condition != current;
+            }
+
+            return true;
+        }
     }
 }
