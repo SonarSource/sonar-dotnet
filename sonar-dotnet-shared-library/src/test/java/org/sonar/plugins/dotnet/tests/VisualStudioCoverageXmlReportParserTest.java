@@ -20,14 +20,12 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
-import java.net.URI;
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -50,10 +48,10 @@ public class VisualStudioCoverageXmlReportParserTest {
   public void prepare() {
     alwaysTrue = mock(FileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
-    when(alwaysTrue.getFileByRelativePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
+    when(alwaysTrue.getAbsolutePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
     alwaysFalseAndEmpty = mock(FileService.class);
     when(alwaysFalseAndEmpty.isSupportedAbsolute(anyString())).thenReturn(false);
-    when(alwaysFalseAndEmpty.getFileByRelativePath(anyString())).thenReturn(Optional.empty());
+    when(alwaysFalseAndEmpty.getAbsolutePath(anyString())).thenReturn(Optional.empty());
   }
 
   @Test
@@ -227,14 +225,12 @@ public class VisualStudioCoverageXmlReportParserTest {
     Coverage coverage = new Coverage();
     FileService mockFileService = mock(FileService.class);
     when(mockFileService.isSupportedAbsolute(anyString())).thenReturn(false);
-    InputFile mockInput = mock(InputFile.class);
-    URI file = URI.create("/test/file/Calc.cs");
-    when(mockInput.uri()).thenReturn(file);
-    when(mockFileService.getFileByRelativePath(anyString())).thenReturn(Optional.of(mockInput));
+    String testAbsolutePath = "/test/file/Calc.cs";
+    when(mockFileService.getAbsolutePath(anyString())).thenReturn(Optional.of(testAbsolutePath));
     new VisualStudioCoverageXmlReportParser(mockFileService).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
 
     assertThat(coverage.files()).hasSize(1);
-    assertThat(coverage.hits(file.getPath())).hasSize(17)
+    assertThat(coverage.hits(testAbsolutePath)).hasSize(17)
       // because we return the mockInput for all entries, the below stats are the aggregated stats for all files
       .containsOnly(
         Assertions.entry(12, 0),
@@ -265,14 +261,12 @@ public class VisualStudioCoverageXmlReportParserTest {
     Coverage coverage = new Coverage();
     FileService mockFileService = mock(FileService.class);
     when(mockFileService.isSupportedAbsolute(anyString())).thenReturn(false);
-    InputFile mockInput = mock(InputFile.class);
-    URI file = URI.create("/full/path/to/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs");
-    when(mockInput.uri()).thenReturn(file);
-    when(mockFileService.getFileByRelativePath("/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs")).thenReturn(Optional.of(mockInput));
+    String testAbsolutePath = "/full/path/to/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs";
+    when(mockFileService.getAbsolutePath("/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs")).thenReturn(Optional.of(testAbsolutePath));
     new VisualStudioCoverageXmlReportParser(mockFileService).accept(new File("src/test/resources/visualstudio_coverage_xml/deterministic_source_paths.coveragexml"), coverage);
 
     assertThat(coverage.files()).hasSize(1);
-    assertThat(coverage.hits(file.getPath())).hasSize(6)
+    assertThat(coverage.hits(testAbsolutePath)).hasSize(6)
       .containsOnly(
         Assertions.entry(6, 1),
         Assertions.entry(7, 1),

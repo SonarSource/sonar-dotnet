@@ -26,7 +26,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -51,19 +50,19 @@ public class ScannerFileService implements FileService {
         fp.hasLanguage(languageKey)));
   }
 
-  public Optional<InputFile> getFileByRelativePath(String filePath) {
+  public Optional<String> getAbsolutePath(String filePath) {
     Matcher matcher = DETERMINISTIC_SOURCE_PATH_PREFIX.matcher(filePath.replace('\\', '/'));
     if (matcher.find()) {
       String relativePath = matcher.replaceFirst("");
-      List<InputFile> foundFiles = new ArrayList<>();
+      List<String> foundFiles = new ArrayList<>();
       FilePredicates fp = fileSystem.predicates();
 
-      fileSystem.inputFiles(fp.and(fp.hasLanguage(languageKey), new RelativePathPredicate(relativePath))).forEach(foundFiles::add);
+      fileSystem.inputFiles(fp.and(fp.hasLanguage(languageKey), new RelativePathPredicate(relativePath))).forEach(x -> foundFiles.add(x.uri().getPath()));
 
       int foundFilesCount = foundFiles.size();
       if (foundFilesCount == 1) {
-        InputFile foundFile = foundFiles.get(0);
-        LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile.uri().getPath(), filePath, relativePath);
+        String foundFile = foundFiles.get(0);
+        LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile, filePath, relativePath);
         return Optional.of(foundFile);
       } else {
         LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",

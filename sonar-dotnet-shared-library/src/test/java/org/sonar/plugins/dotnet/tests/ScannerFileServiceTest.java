@@ -104,7 +104,7 @@ public class ScannerFileServiceTest {
 
     // act
     ScannerFileService sut = new ScannerFileService("key", fs);
-    sut.getFileByRelativePath("/_/foo");
+    sut.getAbsolutePath("/_/foo");
 
     // assert
     verify(filePredicates).and(andArg1.capture(), andArg2.capture());
@@ -117,7 +117,7 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFileByRelativePath_regex_test() {
+  public void getAbsolutePath_regex_test() {
     // arrange
     FileSystem fs = mock(FileSystem.class);
     FilePredicates filePredicates = mock(FilePredicates.class);
@@ -133,7 +133,7 @@ public class ScannerFileServiceTest {
 
     // act
     ScannerFileService sut = new ScannerFileService("key", fs);
-    testInput.forEach(sut::getFileByRelativePath);
+    testInput.forEach(sut::getAbsolutePath);
 
     // assert
     verify(filePredicates, times(testInput.size())).and(any(), captor.capture());
@@ -144,12 +144,12 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFileByRelativePath_when_filesystem_returns_empty_returns_empty() {
+  public void getAbsolutePath_when_filesystem_returns_empty_returns_empty() {
     FileSystem fs = createFileSystemForInputFiles(Collections.emptyList());
 
     // act
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFileByRelativePath("/_/some/path/file.cs");
+    Optional<String> result = sut.getAbsolutePath("/_/some/path/file.cs");
 
     // assert
     assertThat(result).isEmpty();
@@ -157,25 +157,25 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFileByRelativePath_when_multiple_indexed_files_match_returns_empty_and_logs() {
+  public void getAbsolutePath_when_multiple_indexed_files_match_returns_empty_and_logs() {
     FileSystem fs = createFileSystemForInputFiles(Arrays.asList(mockInput("foo"), mockInput("bar")));
 
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFileByRelativePath("/_/some/path/file.cs");
+    Optional<String> result = sut.getAbsolutePath("/_/some/path/file.cs");
 
     assertThat(result).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Found 2 indexed files for '/_/some/path/file.cs' (normalized to 'some/path/file.cs'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
   @Test
-  public void getFileByRelativePath_when_single_indexed_files_match_returns_file_logs_trace() {
+  public void getAbsolutePath_when_single_indexed_files_match_returns_file_logs_trace() {
     InputFile expectedResult = mockInput("root/some/path/file.cs");
     FileSystem fs = createFileSystemForInputFiles(Collections.singleton(expectedResult));
 
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFileByRelativePath("/_/path/file.cs");
+    Optional<String> result = sut.getAbsolutePath("/_/path/file.cs");
 
-    assertThat(result).hasValue(expectedResult);
+    assertThat(result).hasValue(expectedResult.uri().getPath());
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
       .startsWith("Found indexed file ")
@@ -183,11 +183,11 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFileByRelativePath_with_no_deterministic_path_in_windows_path_returns_empty() {
+  public void getAbsolutePath_with_no_deterministic_path_in_windows_path_returns_empty() {
     FileSystem fs = mock(FileSystem.class);
 
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFileByRelativePath("C:\\_\\some\\path\\file.cs");
+    Optional<String> result = sut.getAbsolutePath("C:\\_\\some\\path\\file.cs");
 
     assertThat(result).isEmpty();
     verify(fs, never()).predicates();
@@ -198,11 +198,11 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFileByRelativePath_with_no_deterministic_source_path_in_unix_path_returns_empty() {
+  public void getAbsolutePath_with_no_deterministic_source_path_in_unix_path_returns_empty() {
     FileSystem fs = mock(FileSystem.class);
 
     ScannerFileService sut = new ScannerFileService("key", fs);
-    Optional<InputFile> result = sut.getFileByRelativePath("some/path/file.cs");
+    Optional<String> result = sut.getAbsolutePath("some/path/file.cs");
 
     assertThat(result).isEmpty();
     verify(fs, never()).predicates();

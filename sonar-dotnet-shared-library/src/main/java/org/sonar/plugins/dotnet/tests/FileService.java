@@ -20,11 +20,14 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.util.Optional;
-import org.sonar.api.batch.fs.InputFile;
 
 public interface FileService {
 
   boolean isSupportedAbsolute(String absolutePath);
 
-  Optional<InputFile> getFileByRelativePath(String relativePath);
+  /**
+   * Note that the absolute path returned by the Scanner may be different from the absolute path returned by the Operating System
+   * @see org.sonar.api.batch.fs.InputFile#uri()
+   */
+  Optional<String> getAbsolutePath(String relativePath);
 }

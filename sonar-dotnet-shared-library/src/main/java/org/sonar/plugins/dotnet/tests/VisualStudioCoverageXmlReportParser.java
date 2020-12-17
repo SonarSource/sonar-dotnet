@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -116,9 +115,9 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
       }
 
       if (!fileService.isSupportedAbsolute(canonicalPath)) {
-        Optional<InputFile> foundFile = fileService.getFileByRelativePath(path);
-        if (foundFile.isPresent()) {
-          canonicalPath = foundFile.get().uri().getPath();
+        Optional<String> absolutePath = fileService.getAbsolutePath(path);
+        if (absolutePath.isPresent()) {
+          canonicalPath = absolutePath.get();
           LOG.debug("Found indexed file '{}' for coverage entry '{}'.", canonicalPath, path);
         } else {
           // debug logging should be done in the fileService

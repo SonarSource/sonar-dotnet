@@ -47,10 +47,10 @@ public class DotCoverReportParserTest {
   public void prepare() {
     alwaysTrue = mock(FileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
-    when(alwaysTrue.getFileByRelativePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
+    when(alwaysTrue.getAbsolutePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
     alwaysFalse = mock(FileService.class);
     when(alwaysFalse.isSupportedAbsolute(anyString())).thenReturn(false);
-    when(alwaysFalse.getFileByRelativePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
+    when(alwaysFalse.getAbsolutePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
   }
 
   @Test
