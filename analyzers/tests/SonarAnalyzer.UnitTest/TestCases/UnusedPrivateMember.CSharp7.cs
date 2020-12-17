@@ -35,40 +35,40 @@ namespace Tests.Diagnostics
     {
         public void SomeMethod()
         {
-            var (a, (barA, barB)) = new Foo();
+            var (a, (barA, barB)) = new PublicDeconstructWithInnerType();
 
-            var (_, _, c) = new Baz();
+            var (_, _, c) = new PublicDeconstruct();
 
-            var qix = new Qix();
+            var qix = new MultipleDeconstructors();
             object b;
             (a, b, c) = qix;
 
             (a, b) = ReturnFromMethod();
 
-            (a, b) = new Bee();
+            (a, b) = new ProtectedInternalDeconstruct();
 
             (a, b, c) = new Ambiguous(); // Error [CS0121]
         }
 
-        internal void InternalMethod(Bar bar)
+        internal void InternalMethod(InternalDeconstruct bar)
         {
             var (a, b) = bar;
         }
 
-        private sealed class Foo
+        private sealed class PublicDeconstructWithInnerType
         {
-            public void Deconstruct(out object a, out Bar b) { a = b = null; }
+            public void Deconstruct(out object a, out InternalDeconstruct b) { a = b = null; }
 
             // deconstructors must be public, internal or protected internal
             private void Deconstruct(out object a, out object b) { a = b = null; } // Noncompliant
         }
 
-        internal sealed class Bar
+        internal sealed class InternalDeconstruct
         {
             internal void Deconstruct(out object a, out object b) { a = b = null; }
         }
 
-        private class Baz
+        private class PublicDeconstruct
         {
             public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; }
 
@@ -76,7 +76,7 @@ namespace Tests.Diagnostics
             protected void Deconstruct(out string a, out string b, out string c) { a = b = c = null; } // Noncompliant
         }
 
-        private sealed class Qix
+        private sealed class MultipleDeconstructors
         {
             public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; }
 
@@ -86,7 +86,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        internal class Bee
+        internal class ProtectedInternalDeconstruct
         {
             protected internal void Deconstruct(out object a, out object b) { a = b = null; }
         }
