@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Net.Mail;
 
 namespace Tests.Diagnostics
 {
@@ -43,6 +44,22 @@ namespace Tests.Diagnostics
             using var wc = new WebClient();
             wc.DownloadData("http://example.com"); // Noncompliant
             wc.DownloadData("https://example.com");
+        }
+
+        public void Smtp()
+        {
+            using var notSet = new SmtpClient("host", 25); // Noncompliant, EnableSsl is not set
+            using var constructorFalse = new SmtpClient("host", 25) { EnableSsl = false }; // Noncompliant
+
+            using var localhost = new SmtpClient("localhost", 25); // Compliant due to well known value
+            using var loopback = new SmtpClient("127.0.0.1", 25); // Compliant due to well known value
+            using var constructorTrue = new SmtpClient("host", 25) { EnableSsl = true };
+
+            using var propertyTrue = new SmtpClient("host", 25); // Compliant, property is set below
+            propertyTrue.EnableSsl = true;
+
+            using var propertyFalse = new SmtpClient("host", 25); // Noncompliant
+            propertyFalse.EnableSsl = false;
         }
     }
 }

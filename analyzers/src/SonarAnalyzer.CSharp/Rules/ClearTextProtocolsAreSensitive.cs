@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -28,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -37,9 +37,15 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S5332";
         private const string MessageFormat = "Using {0} protocol is insecure. Use {1} instead.";
+        private const string EnableSslMessage = "EnableSsl should be set to true.";
         private const string HttpPattern = @"^http:\/\/(?!localhost|127.0.0.1).+";
         private const string FtpPattern = @"^ftp:\/\/.*@(?!localhost|127.0.0.1)";
         private const string TelnetPattern = @"^telnet:\/\/.*@(?!localhost|127.0.0.1)";
+        private const string LocalHost = "localhost";
+        private const string LocalHostIp = "127.0.0.1";
+
+        private static readonly DiagnosticDescriptor DefaultRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor EnableSslRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, EnableSslMessage, RspecStrings.ResourceManager);
 
         private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>
         {
@@ -49,25 +55,52 @@ namespace SonarAnalyzer.Rules.CSharp
             {"clear-text SMTP", "SMTP over SSL/TLS or SMTP with STARTTLS" }
         };
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private readonly ImmutableArray<string> validServerValues = ImmutableArray.Create(LocalHost, LocalHostIp);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        private readonly CSharpObjectInitializationTracker objectInitializationTracker;
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DefaultRule, EnableSslRule);
 
         public ClearTextProtocolsAreSensitive() : base(AnalyzerConfiguration.Hotspot) { }
 
-        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
+        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
+            objectInitializationTracker = new CSharpObjectInitializationTracker(constantValue => constantValue is bool value && value,
+                                                                                ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient),
+                                                                                propertyName => "EnableSsl" == propertyName);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-               {
-                   var text = GetText(c.Node);
-                   if (TryGetUnsafeProtocol(text, out var unsafeProtocol))
-                   {
-                       c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation(), unsafeProtocol, recommendedProtocols[unsafeProtocol]));
-                   }
-               },
-               SyntaxKind.StringLiteralExpression,
-               SyntaxKind.InterpolatedStringExpression);
+            context.RegisterCompilationStartAction(ccc =>
+            {
+                if (!IsEnabled(ccc.Options))
+                {
+                    return;
+                }
+
+                context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var text = GetText(c.Node);
+                    if (TryGetUnsafeProtocol(text, out var unsafeProtocol))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, c.Node.GetLocation(), unsafeProtocol, recommendedProtocols[unsafeProtocol]));
+                    }
+                },
+                SyntaxKind.StringLiteralExpression,
+                SyntaxKind.InterpolatedStringExpression);
+
+                context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
+                    if (!IsServerSafe(objectCreation) && objectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, objectCreation.GetLocation()));
+                    }
+                },
+                SyntaxKind.ObjectCreationExpression);
+            });
+
+        private bool IsServerSafe(ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation.ArgumentList.Arguments.Count > 0
+            && validServerValues.Contains(GetText(objectCreation.ArgumentList.Arguments[0].Expression));
 
         private static bool TryGetUnsafeProtocol(string text, out string unsafeProtocol)
         {
