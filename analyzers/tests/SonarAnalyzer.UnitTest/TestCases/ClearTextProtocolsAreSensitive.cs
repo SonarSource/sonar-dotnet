@@ -6,8 +6,19 @@ namespace Tests.Diagnostics
     class ClearTextProtocols
     {
         private const string a = "http://example.com"; // Noncompliant {{Using http protocol is insecure. Use https instead.}}
-        private const string c = @"telnet://anonymous@example.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
-        private readonly string b = $"ftp://anonymous@example.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
+        private const string b = "https://example.com";
+        private const string c = "http://localhost";
+        private const string d = "http://127.0.0.1";
+
+        private const string e = @"telnet://anonymous@example.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
+        private const string f = @"ssh://anonymous@example.com";
+        private const string g = @"telnet://anonymous@localhost";
+        private const string h = "telnet://anonymous@127.0.0.1";
+
+        private readonly string i = $"ftp://anonymous@example.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
+        private readonly string j = $"sftp://anonymous@example.com";
+        private readonly string k = $"ftp://anonymous@localhost";
+        private readonly string l = $"ftp://anonymous@127.0.0.1";
 
         public void Method(string part)
         {

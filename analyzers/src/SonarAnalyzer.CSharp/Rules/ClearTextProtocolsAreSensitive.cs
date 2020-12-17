@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -36,8 +37,10 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S5332";
         private const string MessageFormat = "Using {0} protocol is insecure. Use {1} instead.";
+        private const string HttpPattern = @"^http:\/\/(?!localhost|127.0.0.1).*";
+        private const string FtpPattern = "^ftp:\\/\\/.*@(?!localhost|127.0.0.1)";
+        private const string TelnetPattern = "^telnet:\\/\\/.*@(?!localhost|127.0.0.1)";
 
-        private readonly ImmutableArray<string> unsafeProtocols = ImmutableArray.Create("http", "ftp", "telnet");
         private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>
         {
             {"telnet", "ssh"},
@@ -64,19 +67,33 @@ namespace SonarAnalyzer.Rules.CSharp
                    }
                },
                SyntaxKind.StringLiteralExpression,
-               SyntaxKind.InterpolatedStringText);
+               SyntaxKind.InterpolatedStringExpression);
 
-        private bool TryGetUnsafeProtocol(string text, out string unsafeProtocol)
+        private static bool TryGetUnsafeProtocol(string text, out string unsafeProtocol)
         {
-            unsafeProtocol = unsafeProtocols.FirstOrDefault(protocol => text.Contains(protocol));
+            unsafeProtocol = null;
+
+            if (Regex.IsMatch(text, HttpPattern))
+            {
+                unsafeProtocol = "http";
+            }
+            else if (Regex.IsMatch(text, FtpPattern))
+            {
+                unsafeProtocol = "ftp";
+            }
+            else if (Regex.IsMatch(text, TelnetPattern))
+            {
+                unsafeProtocol = "telnet";
+            }
+
             return unsafeProtocol != null;
         }
 
         private static string GetText(SyntaxNode node) =>
             node switch
             {
-                InterpolatedStringTextSyntax interpolatedStringText => interpolatedStringText.TextToken.Text,
-                LiteralExpressionSyntax literalExpression => literalExpression.Token.Text,
+                InterpolatedStringExpressionSyntax interpolatedStringExpression => interpolatedStringExpression.GetContentsText(),
+                LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
                 _ => string.Empty
             };
     }
