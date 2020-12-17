@@ -188,6 +188,8 @@ namespace Tests.Diagnostics
     public class Foo
     {
         private byte[] salt = new byte[32]; // Salt as field is not tracked by the SE engine
+        private const int UnsafeSaltSize = 16;
+        private const int SafeSaltSize = 32;
 
         public void Bar(byte[] passwordBytes)
         {
@@ -201,6 +203,14 @@ namespace Tests.Diagnostics
 
             salt = new byte[31];
             new PasswordDeriveBytes(passwordBytes, salt); // Noncompliant
+
+            var unsafeSalt = new byte[UnsafeSaltSize];
+            rng.GetBytes(unsafeSalt);
+            new PasswordDeriveBytes(passwordBytes, unsafeSalt); // Noncompliant
+
+            var safeSalt = new byte[SafeSaltSize];
+            rng.GetBytes(safeSalt);
+            new PasswordDeriveBytes(passwordBytes, safeSalt); // Compliant
         }
     }
 }

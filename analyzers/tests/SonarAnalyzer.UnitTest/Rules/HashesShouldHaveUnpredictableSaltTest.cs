@@ -19,7 +19,6 @@
  */
 
 extern alias csharp;
-using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
