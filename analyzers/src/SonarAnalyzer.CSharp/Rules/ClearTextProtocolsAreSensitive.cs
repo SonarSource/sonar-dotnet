@@ -43,6 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string TelnetPattern = @"^telnet:\/\/.*@(?!localhost|127.0.0.1)";
         private const string LocalHost = "localhost";
         private const string LocalHostIp = "127.0.0.1";
+        private const string EnableSslName = "EnableSsl";
 
         private static readonly DiagnosticDescriptor DefaultRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         private static readonly DiagnosticDescriptor EnableSslRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, EnableSslMessage, RspecStrings.ResourceManager);
@@ -65,8 +66,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
             objectInitializationTracker = new CSharpObjectInitializationTracker(constantValue => constantValue is bool value && value,
-                                                                                ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient),
-                                                                                propertyName => "EnableSsl" == propertyName);
+                                                                                ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient, KnownType.System_Net_FtpWebRequest),
+                                                                                propertyName => EnableSslName == propertyName);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(ccc =>
@@ -96,6 +97,19 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.ObjectCreationExpression);
+
+                context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var assignment = (AssignmentExpressionSyntax)c.Node;
+                    if (assignment.Left is MemberAccessExpressionSyntax memberAccess
+                        && memberAccess.IsMemberAccessOnKnownType(EnableSslName, KnownType.System_Net_FtpWebRequest, c.SemanticModel)
+                        && c.SemanticModel.GetConstantValue(assignment.Right) is { HasValue: true, Value: bool enableSslValue }
+                        && !enableSslValue)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, assignment.GetLocation()));
+                    }
+                },
+                SyntaxKind.SimpleAssignmentExpression);
             });
 
         private bool IsServerSafe(ObjectCreationExpressionSyntax objectCreation) =>

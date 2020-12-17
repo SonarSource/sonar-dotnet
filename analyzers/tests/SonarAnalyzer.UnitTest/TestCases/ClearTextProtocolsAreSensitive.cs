@@ -48,7 +48,7 @@ namespace Tests.Diagnostics
 
         public void Smtp()
         {
-            using var notSet = new SmtpClient("host", 25); // Noncompliant, EnableSsl is not set
+            using var notSet = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
             using var constructorFalse = new SmtpClient("host", 25) { EnableSsl = false }; // Noncompliant
 
             using var localhost = new SmtpClient("localhost", 25); // Compliant due to well known value
@@ -58,8 +58,19 @@ namespace Tests.Diagnostics
             using var propertyTrue = new SmtpClient("host", 25); // Compliant, property is set below
             propertyTrue.EnableSsl = true;
 
-            using var propertyFalse = new SmtpClient("host", 25); // Noncompliant
+            using var propertyFalse = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
             propertyFalse.EnableSsl = false;
+        }
+
+        public void Ftp()
+        {
+            var notSet = (FtpWebRequest)WebRequest.Create(UntrackedSource()); // Compliant, FN
+
+            var setToFalse = (FtpWebRequest)WebRequest.Create(UntrackedSource());
+            setToFalse.EnableSsl = false; // Noncompliant {{EnableSsl should be set to true.}}
+
+            var setToTrue = (FtpWebRequest)WebRequest.Create(UntrackedSource());
+            setToTrue.EnableSsl = true;
         }
     }
 }
