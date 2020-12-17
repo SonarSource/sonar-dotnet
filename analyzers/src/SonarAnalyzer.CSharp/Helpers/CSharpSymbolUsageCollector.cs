@@ -64,7 +64,6 @@ namespace SonarAnalyzer.Helpers
         // ParenthesizedVariableDesignation "var (a, b) = quix" inside a DeclarationExpression
         public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
         {
-            var assignmentLeft = node.Left;
             var leftTupleCount = GetTupleCount(node.Left);
             if (leftTupleCount != 0)
             {
