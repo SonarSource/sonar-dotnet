@@ -24,19 +24,19 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 
 class PathSuffixPredicate implements FilePredicate {
-  private final String relativePath;
+  private final String pathSuffix;
 
-  PathSuffixPredicate(String relativePath) {
-    this.relativePath = relativePath;
+  PathSuffixPredicate(String pathSuffix) {
+    this.pathSuffix = pathSuffix;
   }
 
   @Override
   public boolean apply(InputFile inputFile) {
-    return inputFile.uri().getPath().endsWith(relativePath);
+    return inputFile.uri().getPath().endsWith(pathSuffix);
   }
 
   @VisibleForTesting
-  String getRelativePath() {
-    return relativePath;
+  String getPathSuffix() {
+    return pathSuffix;
   }
 }

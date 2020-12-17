@@ -208,7 +208,7 @@ public class VisualStudioCoverageXmlReportParserTest {
   }
 
   @Test
-  public void valid_with_no_absolute_path_no_relative_path() throws Exception {
+  public void valid_with_no_absolute_path_no_deterministic_build_path() throws Exception {
     Coverage coverage = new Coverage();
 
     new VisualStudioCoverageXmlReportParser(alwaysFalseAndEmpty).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
@@ -221,7 +221,7 @@ public class VisualStudioCoverageXmlReportParserTest {
   }
 
   @Test
-  public void valid_with_no_absolute_path_relative_path_found() {
+  public void valid_with_no_absolute_path_deterministic_build_path_found() {
     Coverage coverage = new Coverage();
     FileService mockFileService = mock(FileService.class);
     when(mockFileService.isSupportedAbsolute(anyString())).thenReturn(false);

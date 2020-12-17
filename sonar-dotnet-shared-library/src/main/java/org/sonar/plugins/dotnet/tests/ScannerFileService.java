@@ -51,29 +51,29 @@ public class ScannerFileService implements FileService {
         fp.hasLanguage(languageKey)));
   }
 
-  public Optional<String> getAbsolutePath(String filePath) {
-    Matcher matcher = DETERMINISTIC_SOURCE_PATH_PREFIX.matcher(filePath.replace('\\', '/'));
+  public Optional<String> getAbsolutePath(String deterministicBuildPath) {
+    Matcher matcher = DETERMINISTIC_SOURCE_PATH_PREFIX.matcher(deterministicBuildPath.replace('\\', '/'));
     if (matcher.find()) {
-      String relativePath = matcher.replaceFirst("");
+      String pathSuffix = matcher.replaceFirst("");
       FilePredicates fp = fileSystem.predicates();
       List<String> foundFiles = StreamSupport
         .stream(
-          fileSystem.inputFiles(fp.and(fp.hasLanguage(languageKey), new PathSuffixPredicate(relativePath))).spliterator(),
+          fileSystem.inputFiles(fp.and(fp.hasLanguage(languageKey), new PathSuffixPredicate(pathSuffix))).spliterator(),
           false)
         .map(x -> x.uri().getPath())
         .collect(Collectors.toList());
 
       if (foundFiles.size() == 1) {
         String foundFile = foundFiles.get(0);
-        LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile, filePath, relativePath);
+        LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile, deterministicBuildPath, pathSuffix);
         return Optional.of(foundFile);
       } else {
         LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
-          foundFiles.size(), filePath, relativePath);
+          foundFiles.size(), deterministicBuildPath, pathSuffix);
         return Optional.empty();
       }
     }
-    LOG.debug("Did not find deterministic source path in '{}'. Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.", filePath);
+    LOG.debug("Did not find deterministic source path in '{}'. Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.", deterministicBuildPath);
     return Optional.empty();
   }
 }

@@ -35,12 +35,12 @@ import static org.mockito.Mockito.when;
 @RunWith(Parameterized.class)
 public class PathSuffixPredicateTest {
 
-  private String relativePath;
+  private String pathSuffix;
   private String absolutePath;
   private boolean expectedResult;
 
-  public PathSuffixPredicateTest(String relativePath, String absolutePath, boolean expectedResult) {
-    this.relativePath = relativePath;
+  public PathSuffixPredicateTest(String pathSuffix, String absolutePath, boolean expectedResult) {
+    this.pathSuffix = pathSuffix;
     this.absolutePath = absolutePath;
     this.expectedResult = expectedResult;
   }
@@ -70,7 +70,7 @@ public class PathSuffixPredicateTest {
 
   @Test
   public void test_apply() throws URISyntaxException {
-    PathSuffixPredicate predicate = new PathSuffixPredicate(relativePath);
+    PathSuffixPredicate predicate = new PathSuffixPredicate(pathSuffix);
     assertThat(predicate.apply(mockInput(absolutePath))).isEqualTo(expectedResult);
   }
 

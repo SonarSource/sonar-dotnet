@@ -90,7 +90,7 @@ public class ScannerFileServiceTest {
   }
 
   @Test
-  public void getFileByRelativePath_passes_correct_arguments_to_filesystem_api() {
+  public void getAbsolutePath_passes_correct_arguments_to_filesystem_api() {
     // arrange
     FileSystem fs = mock(FileSystem.class);
     FilePredicates filePredicates = mock(FilePredicates.class);
@@ -112,7 +112,7 @@ public class ScannerFileServiceTest {
     Object argument = andArg2.getValue();
     assertThat(andArg2.getValue()).isExactlyInstanceOf(PathSuffixPredicate.class);
     PathSuffixPredicate pathPredicate = (PathSuffixPredicate)argument;
-    assertThat(pathPredicate.getRelativePath()).isEqualTo("foo");
+    assertThat(pathPredicate.getPathSuffix()).isEqualTo("foo");
     verify(fs).inputFiles(any());
   }
 
@@ -139,7 +139,7 @@ public class ScannerFileServiceTest {
     verify(filePredicates, times(testInput.size())).and(any(), captor.capture());
     List<PathSuffixPredicate> predicates = captor.getAllValues().stream().map(obj -> (PathSuffixPredicate) obj).collect(Collectors.toList());
     for (PathSuffixPredicate predicate : predicates) {
-      assertThat(predicate.getRelativePath()).isEqualTo("some/path/file.cs");
+      assertThat(predicate.getPathSuffix()).isEqualTo("some/path/file.cs");
     }
   }
 

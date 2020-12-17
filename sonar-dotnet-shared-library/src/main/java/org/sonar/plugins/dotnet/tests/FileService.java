@@ -28,6 +28,8 @@ public interface FileService {
   /**
    * Note that the absolute path returned by the Scanner may be different from the absolute path returned by the Operating System
    * @see org.sonar.api.batch.fs.InputFile#uri()
+   *
+   * @param deterministicBuildPath - the path in the code coverage report when builds are done with the `-deterministic` option
    */
-  Optional<String> getAbsolutePath(String relativePath);
+  Optional<String> getAbsolutePath(String deterministicBuildPath);
 }
