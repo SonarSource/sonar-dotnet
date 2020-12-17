@@ -38,7 +38,38 @@ namespace Tests.Diagnostics
         protected virtual ValueTask DisposeAsyncCore() => default;
     }
 
-    public class Fake
+    public class FakeA
+    {
+        public async ValueTask DisposeAsync()
+        {
+            await DisposeAsyncCore();
+
+            GC.SuppressFinalize(this); // Noncompliant - ok; it does not implement IAsyncDisposable
+        }
+
+        public async ValueTask DisposeAsync(bool argument)
+        {
+            await DisposeAsyncCore();
+
+            GC.SuppressFinalize(this); // Noncompliant - ok; it does not implement IAsyncDisposable
+        }
+
+        protected virtual ValueTask DisposeAsyncCore() => default;
+    }
+
+    public class FakeB
+    {
+        public async void DisposeAsync()
+        {
+            await DisposeAsyncCore();
+
+            GC.SuppressFinalize(this); // Noncompliant - ok; it does not implement IAsyncDisposable
+        }
+
+        protected virtual ValueTask DisposeAsyncCore() => default;
+    }
+
+    public class FakeInterface : IFake
     {
         public async ValueTask DisposeAsync()
         {
@@ -48,5 +79,10 @@ namespace Tests.Diagnostics
         }
 
         protected virtual ValueTask DisposeAsyncCore() => default;
+    }
+
+    public interface IFake
+    {
+        ValueTask DisposeAsync();
     }
 }
