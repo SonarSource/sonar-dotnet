@@ -18,10 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -34,14 +37,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ClearTextProtocolsAreSensitive() =>
             Verifier.VerifyAnalyzer(@"TestCases\ClearTextProtocolsAreSensitive.cs",
                                     new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
-                                    ParseOptionsHelper.FromCSharp8);
+                                    ParseOptionsHelper.FromCSharp8,
+                                    additionalReferences: GetAdditionalReferences());
 
 #if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClearTextProtocolsAreSensitive.CSharp9.cs", new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled));
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClearTextProtocolsAreSensitive.CSharp9.cs",
+                                                      new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
+                                                      GetAdditionalReferences());
 #endif
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemNetHttp().Concat(MetadataReferenceFacade.GetSystemComponentModelPrimitives());
     }
 }
 

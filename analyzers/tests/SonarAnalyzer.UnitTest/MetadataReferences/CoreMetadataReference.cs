@@ -51,6 +51,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference SystemLinqExpressions { get; } = CreateReference("System.Linq.Expressions.dll");
         internal static MetadataReference SystemLinqQueryable { get; } = CreateReference("System.Linq.Queryable.dll");
         internal static MetadataReference SystemNetHttp { get; } = CreateReference("System.Net.Http.dll");
+        internal static MetadataReference SystemNetMail { get; } = CreateReference("System.Net.Mail.dll");
         internal static MetadataReference SystemNetRequests { get; } = CreateReference("System.Net.Requests.dll");
         internal static MetadataReference SystemNetSecurity { get; } = CreateReference("System.Net.Security.dll");
         internal static MetadataReference SystemNetServicePoint { get; } = CreateReference("System.Net.ServicePoint.dll");

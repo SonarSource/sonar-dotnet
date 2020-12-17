@@ -32,7 +32,7 @@ public record Record
     public void Method()
     {
         using var notSet = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
-        using SmtpClient targetNew = new ("host", 25); // Noncompliant
-        using SmtpClient targetNewWithInitializer = new("host", 25) {EnableSsl = false }; // Noncompliant
+        using SmtpClient targetNew = new ("host", 25); // FN
+        using SmtpClient targetNewWithInitializer = new("host", 25) {EnableSsl = false }; // FN
     }
 }
