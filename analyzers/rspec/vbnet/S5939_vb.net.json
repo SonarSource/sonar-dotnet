@@ -1,4 +1,4 @@
-{
+﻿{
   "title": "\"Array.Empty(Of TElement)\" should be used to instantiate empty arrays",
   "type": "CODE_SMELL",
   "status": "ready",
