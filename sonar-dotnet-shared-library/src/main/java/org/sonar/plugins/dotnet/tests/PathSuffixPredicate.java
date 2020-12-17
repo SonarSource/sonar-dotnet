@@ -23,10 +23,10 @@ import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 
-class RelativePathPredicate implements FilePredicate {
+class PathSuffixPredicate implements FilePredicate {
   private final String relativePath;
 
-  RelativePathPredicate(String relativePath) {
+  PathSuffixPredicate(String relativePath) {
     this.relativePath = relativePath;
   }
 

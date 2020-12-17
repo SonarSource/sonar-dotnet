@@ -33,27 +33,34 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(Parameterized.class)
-public class RelativePathPredicateTest {
+public class PathSuffixPredicateTest {
 
   private String relativePath;
-  private String testInput;
+  private String absolutePath;
   private boolean expectedResult;
 
-  public RelativePathPredicateTest(String relativePath, String testInput, boolean expectedResult) {
+  public PathSuffixPredicateTest(String relativePath, String absolutePath, boolean expectedResult) {
     this.relativePath = relativePath;
-    this.testInput = testInput;
+    this.absolutePath = absolutePath;
     this.expectedResult = expectedResult;
   }
 
   @Parameterized.Parameters
   public static Collection input() {
     return Arrays.asList(new Object[][] {
+        // Match
         {"", "", true},
+        {"", "file.cs", true},
         {"some/path/file.cs", "/_/some/path/file.cs", true},
+        {"some/path/file.cs", "/_/X/Y/some/path/file.cs", true},
         {"some/path/file.cs", "/home/test/long/path/some/path/file.cs", true},
         {"some/path/file.cs", "some/path/file.cs", true},
+        // No match
+        {"some/PATH/file.cs", "some/path/file.cs", false},
+        {"some/path/file.cs", "some/PATH/file.cs", false},
+        {"some/path/file.cs", "/_/some/PATH/file.cs", false},
         {"some/path/file.cs", "/path/file.cs", false},
-        {"SOME/path/file.cs", "some/path/file.cs", false},
+        {"file.cs", "", false},
         {"foo", "bar", false},
         {"foo", "", false},
         {"\\some\\path\\file.cs", "/some/path/file.cs", false}
@@ -63,8 +70,8 @@ public class RelativePathPredicateTest {
 
   @Test
   public void test_apply() throws URISyntaxException {
-    RelativePathPredicate predicate = new RelativePathPredicate(relativePath);
-    assertThat(predicate.apply(mockInput(testInput))).isEqualTo(expectedResult);
+    PathSuffixPredicate predicate = new PathSuffixPredicate(relativePath);
+    assertThat(predicate.apply(mockInput(absolutePath))).isEqualTo(expectedResult);
   }
 
   private InputFile mockInput(String path) throws URISyntaxException {
