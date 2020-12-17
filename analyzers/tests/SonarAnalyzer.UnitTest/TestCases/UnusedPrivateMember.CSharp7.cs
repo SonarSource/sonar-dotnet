@@ -48,6 +48,8 @@ namespace Tests.Diagnostics
             (a, b) = new ProtectedInternalDeconstruct();
 
             (a, b, c) = new Ambiguous(); // Error [CS0121]
+            (a, b) = new NotUsedDifferentArgumentCount(); // Error [CS7036,CS8129]
+            (a, b) = new NotUsedNotVisible(); // Error [CS7036,CS8129]
         }
 
         internal void InternalMethod(InternalDeconstruct bar)
@@ -66,6 +68,9 @@ namespace Tests.Diagnostics
         internal sealed class InternalDeconstruct
         {
             internal void Deconstruct(out object a, out object b) { a = b = null; }
+
+            // deconstructors must be public, internal or protected internal
+            private void Deconstruct(out object a, out string b, out string c) { a = b = c = null; } // Noncompliant
         }
 
         private class PublicDeconstruct
@@ -74,6 +79,7 @@ namespace Tests.Diagnostics
 
             // deconstructors must be public, internal or protected internal
             protected void Deconstruct(out string a, out string b, out string c) { a = b = c = null; } // Noncompliant
+            private void Deconstruct(out object a, out string b, out string c) { a = b = c = null; } // Noncompliant
         }
 
         private sealed class MultipleDeconstructors
@@ -95,6 +101,18 @@ namespace Tests.Diagnostics
         {
             public void Deconstruct(out string a, out string b, out string c) { a = b = c = null; }
             public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; } // Noncompliant FP, actually the one above is not used
+        }
+
+        private class NotUsedDifferentArgumentCount
+        {
+            public void Deconstruct(out string a, out string b, out string c) { a = b = c = null; } // Noncompliant
+            public void Deconstruct(out string a, out string b, out string c, out string d) { a = b = c = d = null; } // Noncompliant
+        }
+
+        private class NotUsedNotVisible
+        {
+            protected void Deconstruct(out object a, out object b) { a = b = null; } // Noncompliant
+            private void Deconstruct(out string a, out string b) { a = b = null; } // Noncompliant
         }
 
         private ForMethod ReturnFromMethod() => null;
