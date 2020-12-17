@@ -34,10 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         public UseArrayEmpty() : base(RspecStrings.ResourceManager) { }
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
-            => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
-
-        protected override SyntaxKind[] SyntaxKindsOfInterest => new []
+        protected override SyntaxKind[] SyntaxKindsOfInterest => new[]
         {
             SyntaxKind.VariableDeclarator,
             SyntaxKind.ObjectCreationExpression,
@@ -46,12 +43,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override string ArrayEmptySuffix => "(Of T)";
 
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
+           => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+
         protected override bool ShouldReport(SyntaxNode node)
-        {
-            return base.ShouldReport(node)
-                || (node is VariableDeclaratorSyntax variableDeclaratorNode
-                && IsEmpyVariableDeclarator(variableDeclaratorNode));
-        }
+            => base.ShouldReport(node)
+            || (node is VariableDeclaratorSyntax variableDeclaratorNode
+            && IsEmpyVariableDeclarator(variableDeclaratorNode));
 
         private bool IsEmpyVariableDeclarator(VariableDeclaratorSyntax variableDeclaratorNode)
         {
@@ -70,17 +68,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         protected override bool IsEmptyCreation(ObjectCreationExpressionSyntax creationNode)
-        {
-            var simpleArgument = creationNode
-                .ChildNodes()
-                .OfType<ArgumentListSyntax>()
-                .FirstOrDefault()?
-                .Arguments.Cast<SimpleArgumentSyntax>()
-                .FirstOrDefault();
+            => int.TryParse(SimpleArugment(creationNode)?.ToString(), out var count)
+            && count == 0;
 
-            return simpleArgument != null
-                && int.TryParse(simpleArgument.ToString(), out var count)
-                && count == 0;
-        }
+        private static SimpleArgumentSyntax SimpleArugment(ObjectCreationExpressionSyntax creationNode) => creationNode
+            .ChildNodes()
+            .OfType<ArgumentListSyntax>()
+            .FirstOrDefault()?
+            .Arguments.Cast<SimpleArgumentSyntax>()
+            .FirstOrDefault();
     }
 }
+

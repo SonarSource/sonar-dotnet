@@ -30,22 +30,20 @@ namespace SonarAnalyzer.Rules
         where TCreation : SyntaxNode
         where TInitialization : SyntaxNode
     {
-        internal const string DiagnosticId = "S666";
-        internal const string MessageFormat = "Declare this empty array using Array.Empty{0}.";
-
-        private readonly DiagnosticDescriptor rule;
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected const string DiagnosticId = "S5939";
+        private const string MessageFormat = "Declare this empty array using Array.Empty{0}.";
 
         protected readonly INetFrameworkVersionProvider VersionProvider = new NetFrameworkVersionProvider();
+
+        private readonly DiagnosticDescriptor rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected UseArrayEmptyBase(System.Resources.ResourceManager rspecResources) =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, string.Format(MessageFormat, ArrayEmptySuffix), rspecResources);
 
         protected abstract string ArrayEmptySuffix { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TLanguageKindEnum[] SyntaxKindsOfInterest { get; }
-
-        protected UseArrayEmptyBase(System.Resources.ResourceManager rspecResources)
-        {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, string.Format(MessageFormat, ArrayEmptySuffix), rspecResources);
-        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -53,29 +51,28 @@ namespace SonarAnalyzer.Rules
                GeneratedCodeRecognizer,
                c =>
                {
-                   if (VersionProvider.GetDotNetFrameworkVersion(c.Compilation) < NetFrameworkVersion.After46)
+                   if (VersionProvider.GetDotNetFrameworkVersion(c.Compilation) >= NetFrameworkVersion.After46)
                    {
-                       return;
-                   }
-                   var node = c.Node;
-                   if (ShouldReport(node))
-                   {
-                       c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                       var node = c.Node;
+                       if (ShouldReport(node))
+                       {
+                           c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                       }
                    }
                },
                SyntaxKindsOfInterest);
         }
 
         protected virtual bool ShouldReport(SyntaxNode node)
-        {
-            return (node is TInitialization initializationNode
-                && IsEmptyInitialization(initializationNode))
-                || (node is TCreation creationNode
-                && IsEmptyCreation(creationNode));
-        }
+            => (node is TInitialization initializationNode
+            && IsEmptyInitialization(initializationNode))
+            || (node is TCreation creationNode
+            && IsEmptyCreation(creationNode));
 
-        protected bool IsEmptyInitialization(TInitialization initializationNode) => !initializationNode.ChildNodes().Any();
+        protected bool IsEmptyInitialization(TInitialization initializationNode)
+            => !initializationNode.ChildNodes().Any();
 
         protected abstract bool IsEmptyCreation(TCreation creationNode);
     }
 }
+

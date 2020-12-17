@@ -47,18 +47,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsEmptyCreation(ArrayCreationExpressionSyntax creationNode)
         {
-            var rankSpecifier = creationNode
+            var rankSpecifier = RankSpecifier(creationNode);
+            return rankSpecifier != null
+                && rankSpecifier.Rank == 1
+                && int.TryParse(rankSpecifier.Sizes[0].ToString(), out var size)
+                && size == 0;
+        }
+
+        private static ArrayRankSpecifierSyntax RankSpecifier(ArrayCreationExpressionSyntax creationNode)
+            => creationNode
                 .ChildNodes()
                 .OfType<ArrayTypeSyntax>()
                 .FirstOrDefault()?
                 .ChildNodes()
                 .OfType<ArrayRankSpecifierSyntax>()
                 .FirstOrDefault();
-
-            return rankSpecifier != null
-                && rankSpecifier.Rank == 1
-                && int.TryParse(rankSpecifier.Sizes[0].ToString(), out var size)
-                && size == 0;
-        }
     }
 }
+
