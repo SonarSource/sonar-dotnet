@@ -27,7 +27,9 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Formatting;
 using SonarAnalyzer.Helpers;
+using static SonarAnalyzer.Rules.CSharp.CollectionEmptinessChecking;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -36,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string Title = "Use Any() instead";
         public override ImmutableArray<string> FixableDiagnosticIds =>
-            ImmutableArray.Create(CollectionEmptinessChecking.DiagnosticId);
+            ImmutableArray.Create(DiagnosticId);
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
@@ -55,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? binary.Right as InvocationExpressionSyntax
                     : binary.Left as InvocationExpressionSyntax;
 
-                if (countExpression is null || type.NoValues)
+                if (countExpression is null || !type.IsValid)
                 {
                     return Task.CompletedTask;
                 }
@@ -86,49 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 anyExpression = SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, anyExpression);
             }
-            return context.Document.WithSyntaxRoot(root.ReplaceNode(binary, anyExpression));
-        }
-
-        internal readonly struct CountType
-        {
-            public CountType(int? left, SyntaxKind logical, int? right )
-            {
-                Left = left;
-                Right = right;
-                LogicalOperator = logical;
-            }
-
-            public int? Left { get; }
-            public int? Right { get; }
-            public SyntaxKind LogicalOperator { get; }
-            public bool NoValues => !Left.HasValue && !Right.HasValue;
-            public bool IsEmpty => Empties.Contains(this);
-            public override string ToString() => $"{Left} {LogicalOperator} {Right}";
-
-            public static CountType FromExpression(BinaryExpressionSyntax binary)
-            {
-                int? left = default;
-                int? right = default;
-                if (binary.Left is LiteralExpressionSyntax l && ExpressionNumericConverter.TryGetConstantIntValue(l, out var l_out))
-                {
-                    left = l_out;
-                };
-                if (binary.Right is LiteralExpressionSyntax r && ExpressionNumericConverter.TryGetConstantIntValue(r, out var r_out))
-                {
-                    right = r_out;
-                };
-                return new CountType(left, binary.Kind(), right);
-            }
-
-            private static readonly CountType[] Empties = new[]
-            {
-                new CountType(default, SyntaxKind.EqualsEqualsToken, 0),
-                new CountType(default, SyntaxKind.LessThanToken, 1),
-                new CountType(default, SyntaxKind.LessThanEqualsToken, 0),
-                new CountType(0, SyntaxKind.EqualsEqualsToken, default),
-                new CountType(1, SyntaxKind.GreaterThanToken, default),
-                new CountType(0, SyntaxKind.GreaterThanGreaterThanToken, default),
-            };
+            return context.Document.WithSyntaxRoot(root.ReplaceNode(binary, anyExpression).WithAdditionalAnnotations(Formatter.Annotation));
         }
     }
 }

@@ -43,77 +43,28 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax) c.Node;
-                    CheckCountZero(binary.Right, binary.Left, c);
-                    CheckCountOne(binary.Left, binary.Right, c);
-                },
-                SyntaxKind.GreaterThanExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckCountZero(binary.Left, binary.Right, c);
-                    CheckCountOne(binary.Right, binary.Left, c);
-                },
-                SyntaxKind.LessThanExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckCountOne(binary.Right, binary.Left, c);
-                    CheckCountZero(binary.Left, binary.Right, c);
-                },
-                SyntaxKind.GreaterThanOrEqualExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckCountOne(binary.Left, binary.Right, c);
-                    CheckCountZero(binary.Right, binary.Left, c);
-                },
-                SyntaxKind.LessThanOrEqualExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckCountZero(binary.Left, binary.Right, c);
-                    CheckCountZero(binary.Right, binary.Left, c);
-                },
-                SyntaxKind.EqualsExpression);
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var binary = (BinaryExpressionSyntax)c.Node;
-                    CheckCountZero(binary.Left, binary.Right, c);
-                    CheckCountZero(binary.Right, binary.Left, c);
-                },
+                c => CheckCount((BinaryExpressionSyntax)c.Node, c),
+                SyntaxKind.GreaterThanExpression,
+                SyntaxKind.GreaterThanOrEqualExpression,
+                SyntaxKind.LessThanExpression,
+                SyntaxKind.LessThanOrEqualExpression,
+                SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
-        }
 
-        private static void CheckCountZero(ExpressionSyntax zero, ExpressionSyntax count, SyntaxNodeAnalysisContext context)
+        private static void CheckCount(BinaryExpressionSyntax binary, SyntaxNodeAnalysisContext context)
         {
-            if (ExpressionNumericConverter.TryGetConstantIntValue(zero, out var value) &&
-                value == 0 &&
-                TryGetCountCall(count, context.SemanticModel, out var reportLocation, out var typeArgument))
+            var countType = CountType.FromExpression(binary);
+            if (countType.IsValid)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, reportLocation, typeArgument));
+                var count = countType.Left.HasValue ? binary.Right : binary.Left;
+                if (TryGetCountCall(count, context.SemanticModel, out var reportLocation, out var typeArgument))
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, reportLocation, typeArgument));
+                }
             }
         }
-        private static void CheckCountOne(ExpressionSyntax one, ExpressionSyntax count, SyntaxNodeAnalysisContext context)
-        {
-            if (ExpressionNumericConverter.TryGetConstantIntValue(one, out var value) &&
-                value == 1 &&
-                TryGetCountCall(count, context.SemanticModel, out var reportLocation, out var typeArgument))
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, reportLocation, typeArgument));
-            }
-        }
-
         private static bool TryGetCountCall(ExpressionSyntax expression, SemanticModel semanticModel, out Location countLocation, out string typeArgument)
         {
             countLocation = null;
@@ -144,5 +95,57 @@ namespace SonarAnalyzer.Rules.CSharp
             methodSymbol.Name == "Count" &&
             methodSymbol.IsExtensionMethod &&
             methodSymbol.ReceiverType != null;
+
+        internal readonly struct CountType
+        {
+            public CountType(int? left, SyntaxKind logical, int? right)
+            {
+                Left = left;
+                Right = right;
+                LogicalOperator = logical;
+            }
+
+            public int? Left { get; }
+            public int? Right { get; }
+            public SyntaxKind LogicalOperator { get; }
+            public bool IsValid => (Left.HasValue ^ Right.HasValue) && (IsEmpty || HasAny);
+            public bool IsEmpty => Empties.Contains(this);
+            public bool HasAny => Anys.Contains(this);
+            public override string ToString() => $"{Left} {LogicalOperator} {Right}";
+            public static CountType FromExpression(BinaryExpressionSyntax binary)
+            {
+                int? left = default;
+                int? right = default;
+                if (binary.Left is LiteralExpressionSyntax l && ExpressionNumericConverter.TryGetConstantIntValue(l, out var l_out))
+                {
+                    left = l_out;
+                };
+                if (binary.Right is LiteralExpressionSyntax r && ExpressionNumericConverter.TryGetConstantIntValue(r, out var r_out))
+                {
+                    right = r_out;
+                };
+                return new CountType(left, binary.Kind(), right);
+            }
+
+            private static int? Count() => default;
+            private static readonly CountType[] Empties = new[]
+            {
+                new CountType(Count(), SyntaxKind.EqualsExpression, 0),
+                new CountType(Count(), SyntaxKind.LessThanExpression, 1),
+                new CountType(Count(), SyntaxKind.LessThanOrEqualExpression, 0),
+                new CountType(0, SyntaxKind.EqualsExpression, Count()),
+                new CountType(1, SyntaxKind.GreaterThanExpression, Count()),
+                new CountType(0, SyntaxKind.GreaterThanOrEqualExpression, Count()),
+            };
+            private static readonly CountType[] Anys = new[]
+            {
+                new CountType(Count(), SyntaxKind.NotEqualsExpression, 0),
+                new CountType(Count(), SyntaxKind.GreaterThanExpression, 0),
+                new CountType(Count(), SyntaxKind.GreaterThanOrEqualExpression, 1),
+                new CountType(0, SyntaxKind.NotEqualsExpression, Count()),
+                new CountType(0, SyntaxKind.LessThanExpression, Count()),
+                new CountType(1, SyntaxKind.LessThanOrEqualExpression, Count()),
+            };
+        }
     }
 }
