@@ -147,9 +147,9 @@ Public Class SubClass2
         'For coverage, other expressions
         Dim V As Integer
         V = 0
-        Method(p1, p2, p3, p4)
-        Me.Method(p1, p2, p3, p4)
-        MyBase.F4(p1, p2, p3, p4)
+        Method(p1, p2, p3, V)
+        Me.Method(p1, p2, p3, V)
+        MyBase.F4(p1, p2, p3, V)
     End Sub
 
     Public Sub New(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Compliant (needs arguments for base constructor)
