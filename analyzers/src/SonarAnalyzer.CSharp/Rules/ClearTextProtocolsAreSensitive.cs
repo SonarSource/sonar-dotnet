@@ -35,9 +35,9 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ClearTextProtocolsAreSensitive : HotspotDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S5332";
-        private const string MessageFormat = "Using {0} protocol is insecure. Use {1} instead";
+        private const string MessageFormat = "Using {0} protocol is insecure. Use {1} instead.";
 
-        private readonly ImmutableArray<string> unsafeProtocols = ImmutableArray.Create("http://", "ftp://", "telnet://");
+        private readonly ImmutableArray<string> unsafeProtocols = ImmutableArray.Create("http", "ftp", "telnet");
         private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>
         {
             {"telnet", "ssh"},
@@ -58,16 +58,19 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                {
                    var text = GetText(c.Node);
-                   if (ContainsUnsafeProtocol(text))
+                   if (TryGetUnsafeProtocol(text, out var unsafeProtocol))
                    {
-                       c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                       c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation(), unsafeProtocol, recommendedProtocols[unsafeProtocol]));
                    }
                },
                SyntaxKind.StringLiteralExpression,
                SyntaxKind.InterpolatedStringText);
 
-        private bool ContainsUnsafeProtocol(string text) =>
-            unsafeProtocols.Any(text.Contains);
+        private bool TryGetUnsafeProtocol(string text, out string unsafeProtocol)
+        {
+            unsafeProtocol = unsafeProtocols.FirstOrDefault(protocol => text.Contains(protocol));
+            return unsafeProtocol != null;
+        }
 
         private static string GetText(SyntaxNode node) =>
             node switch

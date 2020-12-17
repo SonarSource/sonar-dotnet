@@ -33,7 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ClearTextProtocolsAreSensitive() =>
             Verifier.VerifyAnalyzer(@"TestCases\ClearTextProtocolsAreSensitive.cs",
-                                    new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled));
+                                    new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
+                                    ParseOptionsHelper.FromCSharp8);
     }
 }
 
