@@ -35,6 +35,13 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ClearTextProtocolsAreSensitive.cs",
                                     new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8);
+
+#if NET5_0
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ClearTextProtocolsAreSensitive_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClearTextProtocolsAreSensitive.CSharp9.cs", new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled));
+#endif
     }
 }
 
