@@ -50,27 +50,21 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                var countExpression = binary.Left as InvocationExpressionSyntax;
-                var literal = binary.Right as LiteralExpressionSyntax;
-                var invocationFirst = countExpression != null;
+                var type = CountType.FromExpression(binary);
+                var countExpression = type.Left.HasValue
+                    ? binary.Right as InvocationExpressionSyntax
+                    : binary.Left as InvocationExpressionSyntax;
 
-                if (!invocationFirst)
-                {
-                    literal = binary.Left as LiteralExpressionSyntax;
-                    countExpression = binary.Right as InvocationExpressionSyntax;
-                }
-
-                if (countExpression is null || literal is null)
+                if (countExpression is null || type.NoValues)
                 {
                     return Task.CompletedTask;
                 }
                 else
                 {
-                    var isEmpty = IsEmpty(literal, binary.OperatorToken, invocationFirst);
                     context.RegisterCodeFix(
                        CodeAction.Create(
                            Title,
-                           c => Task.FromResult(Simplify(root, binary, countExpression, isEmpty, context))),
+                           c => Task.FromResult(Simplify(root, binary, countExpression, type, context))),
                            context.Diagnostics);
 
                     return Task.CompletedTask;
@@ -82,36 +76,59 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxNode root,
             BinaryExpressionSyntax binary,
             InvocationExpressionSyntax countExpression,
-            bool isEmpty,
+            CountType type,
             CodeFixContext context)
         {
             var countNode = countExpression.ChildNodes().OfType<MemberAccessExpressionSyntax>().FirstOrDefault();
             var anyNode = countNode.WithName(SyntaxFactory.IdentifierName("Any"));
             ExpressionSyntax anyExpression = countExpression.ReplaceNode(countNode, anyNode);
-            if (isEmpty)
+            if (type.IsEmpty)
             {
                 anyExpression = SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, anyExpression);
             }
             return context.Document.WithSyntaxRoot(root.ReplaceNode(binary, anyExpression));
         }
 
-        private static bool IsEmpty(LiteralExpressionSyntax literal, SyntaxToken logicalOperator, bool invocationFirst)
-            => EqualsZero(literal, logicalOperator)
-            || (invocationFirst ? LessThenOne(literal, logicalOperator) : OneGreaterThan(literal, logicalOperator));
+        internal readonly struct CountType
+        {
+            public CountType(int? left, SyntaxKind logical, int? right )
+            {
+                Left = left;
+                Right = right;
+                LogicalOperator = logical;
+            }
 
-        private static bool EqualsZero(LiteralExpressionSyntax literal, SyntaxToken logicalOperator)
-            => logicalOperator.IsKind(SyntaxKind.EqualsEqualsToken) &&
-                ExpressionNumericConverter.TryGetConstantIntValue(literal, out var value) &&
-                value == 0;
+            public int? Left { get; }
+            public int? Right { get; }
+            public SyntaxKind LogicalOperator { get; }
+            public bool NoValues => !Left.HasValue && !Right.HasValue;
+            public bool IsEmpty => Empties.Contains(this);
+            public override string ToString() => $"{Left} {LogicalOperator} {Right}";
 
-        private static bool LessThenOne(LiteralExpressionSyntax literal, SyntaxToken logicalOperator)
-            => logicalOperator.IsKind(SyntaxKind.LessThanToken) &&
-                ExpressionNumericConverter.TryGetConstantIntValue(literal, out var value) &&
-                value == 1;
+            public static CountType FromExpression(BinaryExpressionSyntax binary)
+            {
+                int? left = default;
+                int? right = default;
+                if (binary.Left is LiteralExpressionSyntax l && ExpressionNumericConverter.TryGetConstantIntValue(l, out var l_out))
+                {
+                    left = l_out;
+                };
+                if (binary.Right is LiteralExpressionSyntax r && ExpressionNumericConverter.TryGetConstantIntValue(r, out var r_out))
+                {
+                    right = r_out;
+                };
+                return new CountType(left, binary.Kind(), right);
+            }
 
-        private static bool OneGreaterThan(LiteralExpressionSyntax literal, SyntaxToken logicalOperator)
-            => logicalOperator.IsKind(SyntaxKind.GreaterThanToken) &&
-                ExpressionNumericConverter.TryGetConstantIntValue(literal, out var value) &&
-                value == 1;
+            private static readonly CountType[] Empties = new[]
+            {
+                new CountType(default, SyntaxKind.EqualsEqualsToken, 0),
+                new CountType(default, SyntaxKind.LessThanToken, 1),
+                new CountType(default, SyntaxKind.LessThanEqualsToken, 0),
+                new CountType(0, SyntaxKind.EqualsEqualsToken, default),
+                new CountType(1, SyntaxKind.GreaterThanToken, default),
+                new CountType(0, SyntaxKind.GreaterThanGreaterThanToken, default),
+            };
+        }
     }
 }

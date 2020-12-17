@@ -140,11 +140,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool IsMethodCountExtension(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.Name == "Count" &&
-                methodSymbol.IsExtensionMethod &&
-                methodSymbol.ReceiverType != null;
-        }
+        private static bool IsMethodCountExtension(IMethodSymbol methodSymbol) =>
+            methodSymbol.Name == "Count" &&
+            methodSymbol.IsExtensionMethod &&
+            methodSymbol.ReceiverType != null;
     }
 }
