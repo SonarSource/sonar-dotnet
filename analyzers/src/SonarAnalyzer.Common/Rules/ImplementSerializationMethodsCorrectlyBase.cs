@@ -64,20 +64,14 @@ namespace SonarAnalyzer.Rules
                     }
 
                     var issues = FindIssues(methodSymbol);
-                    if (issues.Count == 0)
-                    {
-                        return;
-                    }
-
-                    var location = GetIdentifierLocation(methodSymbol);
-                    if (location != null)
+                    if (issues.Any() && GetIdentifierLocation(methodSymbol) is { } location)
                     {
                         c.ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer, Diagnostic.Create(SupportedDiagnostics[0], location, issues.ToSentence()));
                     }
                 },
                 SymbolKind.Method);
 
-        private List<string> FindIssues(IMethodSymbol methodSymbol)
+        private IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
         {
             var ret = new List<string>();
             Evaluate(ProblemPublicText, methodSymbol.DeclaredAccessibility == Accessibility.Public);
