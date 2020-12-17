@@ -100,6 +100,17 @@ namespace SonarAnalyzer.Helpers
                 && methodSymbol.Parameters.Length == 0;
         }
 
+        public static bool IsIAsyncDisposableDisposeAsync(this IMethodSymbol methodSymbol)
+        {
+            const string explicitNameAsync = "System.IAsyncDisposable.DisposeAsync";
+            return methodSymbol != null
+                && (methodSymbol.Name == "DisposeAsync" || methodSymbol.Name == explicitNameAsync)
+                && methodSymbol.ReturnType.Is(KnownType.System_Threading_Tasks_ValueTask)
+                && methodSymbol.Parameters.Length == 0
+                && methodSymbol.GetInterfaceMember() is { } interfaceMember
+                && interfaceMember.ContainingType.Is(KnownType.System_IAsyncDisposable);
+        }
+
         public static bool IsIEquatableEquals(this IMethodSymbol methodSymbol)
         {
             const string explicitName = "System.IEquatable.Equals";

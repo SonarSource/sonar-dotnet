@@ -36,17 +36,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S3971";
         private const string MessageFormat = "Do not call 'GC.SuppressFinalize'.";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly IEnumerable<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
+        private static readonly IEnumerable<MemberDescriptor> CheckedMethodList = new List<MemberDescriptor>
         {
             new MemberDescriptor(KnownType.System_GC, "SuppressFinalize")
         };
-        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
 
-        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
-            SemanticModel semanticModel, MemberDescriptor memberDescriptor)
+        internal override IEnumerable<MemberDescriptor> CheckedMethods => CheckedMethodList;
+
+        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor)
         {
             var methodDeclaration = invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>();
             if (methodDeclaration == null)
@@ -56,12 +56,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var methodSymbol = semanticModel.GetDeclaredSymbol(methodDeclaration);
-            if (!methodSymbol.IsIDisposableDispose())
-            {
-                return true;
-            }
-
-            return false;
+            return !methodSymbol.IsIDisposableDispose()
+                && !methodSymbol.IsIAsyncDisposableDisposeAsync();
         }
     }
 }
