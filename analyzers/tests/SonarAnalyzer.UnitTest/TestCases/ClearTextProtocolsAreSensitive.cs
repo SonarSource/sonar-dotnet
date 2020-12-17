@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 
@@ -72,5 +73,103 @@ namespace Tests.Diagnostics
             var setToTrue = (FtpWebRequest)WebRequest.Create(UntrackedSource());
             setToTrue.EnableSsl = true;
         }
+
+        private string UntrackedSource() => string.Empty;
+
+        public void TelnetExample() // This line is compliant, even when it contains "Telnet" keyword
+        {
+            // Method names
+            var a1 = Telnet(); // Noncompliant
+            var a2 = TelnetClient(); // Noncompliant
+            var a3 = TcpTelnet40(); // Noncompliant
+            var a4 = TcpTelnetClient(); // Noncompliant
+            var a5 = Tcp_Telnet_Client(); // Noncompliant
+
+            // Namespaces
+            var b1 = new Company.Telnet.Client(); // Noncompliant
+            var b2 = new Telnet.Stream(); // Noncompliant
+            var b3 = new Company.TcpTelnetClient.Implementation(); // Noncompliant
+            var b4 = Company.TcpTelnetClient.Implementation.Connect(); // Noncompliant
+
+            // Types
+            var c1 = new ClassNames.Telnet(); // Noncompliant
+            var c2 = new ClassNames.TelnetClient(); // Noncompliant
+            var c3 = new ClassNames.TcpTelnetClient(); // Noncompliant
+
+            // Method names
+            var d1 = TelNet();
+            var d2 = Telnetwork();
+            var d3 = HotelNetwork();
+
+            // Namespaces
+            var e1 = new Company.TelNet.Client();
+            var e2 = new TelNet.Stream();
+            var e3 = new Company.TcpTelnetwork.Implementation();
+            var e4 = Company.TcpTelnetwork.Implementation.Connect();
+
+            // Types
+            var f1 = new ClassNames.TelNet();
+            var f2 = new ClassNames.TelNet();
+            var f3 = new ClassNames.HotelNetwork();
+        }
+
+        private static Stream Telnet() => null;
+        private Stream TelnetClient() => null;
+        private Stream TcpTelnet40() => null; // With protocol version
+        private Stream TcpTelnetClient() => null;
+        private Stream Tcp_Telnet_Client() => null;
+        private static Stream TelNet() => null;
+        private Stream Telnetwork() => null;
+        private Stream HotelNetwork() => null;
     }
+}
+
+namespace Company.Telnet
+{
+    public class Client { }
+}
+
+namespace Telnet
+{
+    public class Stream { }
+}
+
+namespace Company.TcpTelnetClient
+{
+    public class Implementation
+    {
+        public static Stream Connect() => null;
+    }
+}
+
+namespace ClassNames
+{
+    public class Telnet { }
+    public class TelnetClient { }
+    public class TcpTelnetClient { }
+}
+
+namespace Company.TelNet
+{
+    public class Client { }
+}
+
+namespace TelNet
+{
+    public class Stream { }
+}
+
+namespace Company.TcpTelnetwork
+{
+    public class Implementation
+    {
+        public static Stream Connect() => null;
+    }
+}
+
+namespace ClassNames
+{
+    public class TelNet { }
+    public class Telnetwork { }
+    public class HotelNetwork { }
 }

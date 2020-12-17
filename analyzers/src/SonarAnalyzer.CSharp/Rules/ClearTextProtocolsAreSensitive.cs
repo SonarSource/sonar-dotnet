@@ -40,13 +40,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string EnableSslMessage = "EnableSsl should be set to true.";
         private const string HttpPattern = @"^http:\/\/(?!localhost|127.0.0.1).+";
         private const string FtpPattern = @"^ftp:\/\/.*@(?!localhost|127.0.0.1)";
+        private const string Telnet = "telnet";
         private const string TelnetPattern = @"^telnet:\/\/.*@(?!localhost|127.0.0.1)";
+        private const string TelnetPatternForIdentifier = @"(Telnet)(?![a-z])";
         private const string LocalHost = "localhost";
         private const string LocalHostIp = "127.0.0.1";
         private const string EnableSslName = "EnableSsl";
 
-        private static readonly DiagnosticDescriptor DefaultRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor EnableSslRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, EnableSslMessage, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor DefaultRule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
+
+        private static readonly DiagnosticDescriptor EnableSslRule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, EnableSslMessage, RspecStrings.ResourceManager).WithNotConfigurable();
 
         private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>
         {
@@ -95,8 +100,23 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, objectCreation.GetLocation()));
                     }
+
+                    if (Regex.IsMatch(objectCreation.Type.ToString(), TelnetPatternForIdentifier))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, objectCreation.GetLocation(), Telnet, recommendedProtocols[Telnet]));
+                    }
                 },
                 SyntaxKind.ObjectCreationExpression);
+
+                context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var invocation = (InvocationExpressionSyntax)c.Node;
+                    if (Regex.IsMatch(invocation.Expression.ToString(), TelnetPatternForIdentifier))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, invocation.GetLocation(), Telnet, recommendedProtocols[Telnet]));
+                    }
+                },
+                SyntaxKind.InvocationExpression);
 
                 context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
@@ -145,4 +165,3 @@ namespace SonarAnalyzer.Rules.CSharp
             };
     }
 }
-
