@@ -23,15 +23,26 @@ namespace Tests.Diagnostics
         public void Method(string part)
         {
             var a = "http://example.com"; // Noncompliant
-            var b = $"ftp://anonymous@example.com"; // Noncompliant
-            var c = $"ftp://{part}@example.com"; // Noncompliant
-            var d = @"telnet://anonymous@example.com"; // Noncompliant
-            var e = "http://localservername"; // Noncompliant, it's not a "localhost"
+            var b = "https://example.com";
+            var c = "http://localservername"; // Noncompliant, it's not a "localhost"
+            var d = "See http://www.example.com for more information";
+            var httpProtocolScheme = "http://"; // It's compliant when standalone
+
+            var e = $"ftp://anonymous@example.com"; // Noncompliant
+            var f = $"ftp://{part}@example.com"; // Noncompliant
+            var g = "ssh://anonymous@example.com";
+            var h = "sftp://anonymous@example.com";
+            var ftpProtocolScheme = "ftp://"; // It's compliant when standalone
+
+            var i = @"telnet://anonymous@example.com"; // Noncompliant
+            var telnetProtocolScheme = "telnet://"; // It's compliant when standalone
 
             var uri = new Uri("http://example.com"); // Noncompliant
+            var uriSafe = new Uri("https://example.com");
 
             using var wc = new WebClient();
             wc.DownloadData("http://example.com"); // Noncompliant
+            wc.DownloadData("https://example.com");
         }
     }
 }

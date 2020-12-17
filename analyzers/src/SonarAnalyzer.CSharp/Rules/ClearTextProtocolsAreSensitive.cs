@@ -37,9 +37,9 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S5332";
         private const string MessageFormat = "Using {0} protocol is insecure. Use {1} instead.";
-        private const string HttpPattern = @"^http:\/\/(?!localhost|127.0.0.1).*";
-        private const string FtpPattern = "^ftp:\\/\\/.*@(?!localhost|127.0.0.1)";
-        private const string TelnetPattern = "^telnet:\\/\\/.*@(?!localhost|127.0.0.1)";
+        private const string HttpPattern = @"^http:\/\/(?!localhost|127.0.0.1).+";
+        private const string FtpPattern = @"^ftp:\/\/.*@(?!localhost|127.0.0.1)";
+        private const string TelnetPattern = @"^telnet:\/\/.*@(?!localhost|127.0.0.1)";
 
         private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>
         {
