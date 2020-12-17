@@ -13,6 +13,7 @@
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/3842
     public class ReproIssue3842
     {
         public void SomeMethod()

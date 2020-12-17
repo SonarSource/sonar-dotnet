@@ -245,6 +245,13 @@ namespace SonarAnalyzer.Helpers
                 return aliasSymbol.Target as ITypeSymbol;
             }
 
+            if (symbol is IMethodSymbol methodSymbol)
+            {
+                return methodSymbol.MethodKind == MethodKind.Constructor
+                    ? methodSymbol.ContainingType
+                    : methodSymbol.ReturnType as INamedTypeSymbol;
+            }
+
             return symbol as ITypeSymbol;
         }
     }

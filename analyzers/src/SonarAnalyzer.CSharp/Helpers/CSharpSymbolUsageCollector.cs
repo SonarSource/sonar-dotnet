@@ -65,27 +65,11 @@ namespace SonarAnalyzer.Helpers
         public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
         {
             var assignmentLeft = node.Left;
-            Func<int> getLeftTupleCount = null;
-            // in a newer Roslyn API, we could check the Operation to be DeconstructionAssignment
-            if (TupleExpressionSyntaxWrapper.IsInstance(assignmentLeft))
-            {
-                getLeftTupleCount = () => ((TupleExpressionSyntaxWrapper)assignmentLeft).Arguments.Count;
-            }
-            else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignmentLeft)
-                && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(((DeclarationExpressionSyntaxWrapper)assignmentLeft).Designation))
-            {
-                getLeftTupleCount = () =>
-                {
-                    var declarationExpression = (ParenthesizedVariableDesignationSyntaxWrapper)((DeclarationExpressionSyntaxWrapper)assignmentLeft).Designation;
-                    return declarationExpression.Variables.Count;
-                };
-            }
-
-            if (getLeftTupleCount != null)
+            var leftTupleCount = GetTupleCount(node.Left);
+            if (leftTupleCount != 0)
             {
                 var assignmentRight = node.Right;
-                var semanticModel = GetSemanticModel(assignmentRight);
-                var namedTypeSymbol = GetNamedTypeSymbol(semanticModel.GetSymbolInfo(assignmentRight).Symbol);
+                var namedTypeSymbol = GetSemanticModel(assignmentRight).GetSymbolInfo(assignmentRight).Symbol?.GetSymbolType();
                 if (namedTypeSymbol != null)
                 {
                     var deconstructors = namedTypeSymbol.GetMembers("Deconstruct");
@@ -93,8 +77,7 @@ namespace SonarAnalyzer.Helpers
                     {
                         UsedSymbols.Add(deconstructors.First());
                     }
-                    else if (deconstructors.Length > 1
-                        && FindDeconstructor(deconstructors, getLeftTupleCount()) is ISymbol deconstructor)
+                    else if (deconstructors.Length > 1 && FindDeconstructor(deconstructors, leftTupleCount) is {} deconstructor)
                     {
                         UsedSymbols.Add(deconstructor);
                     }
@@ -103,26 +86,28 @@ namespace SonarAnalyzer.Helpers
 
             base.VisitAssignmentExpression(node);
 
-            static INamedTypeSymbol GetNamedTypeSymbol(ISymbol symbol)
+            static int GetTupleCount(ExpressionSyntax assignmentLeft)
             {
-                if (symbol != null)
+                var result = 0;
+                if (TupleExpressionSyntaxWrapper.IsInstance(assignmentLeft))
                 {
-                    if (symbol.GetSymbolType() is INamedTypeSymbol namedType)
-                    {
-                        return namedType;
-                    }
-                    else if (symbol is IMethodSymbol methodSymbol)
-                    {
-                        return methodSymbol.MethodKind == MethodKind.Constructor
-                            ? methodSymbol.ContainingType
-                            : methodSymbol.ReturnType as INamedTypeSymbol;
-                    }
+                    result = ((TupleExpressionSyntaxWrapper)assignmentLeft).Arguments.Count;
                 }
-                return null;
+                else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignmentLeft)
+                    && (DeclarationExpressionSyntaxWrapper)assignmentLeft is { } leftDeclaration
+                    && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(((DeclarationExpressionSyntaxWrapper)assignmentLeft).Designation))
+                {
+                    var declarationExpression = (ParenthesizedVariableDesignationSyntaxWrapper)((DeclarationExpressionSyntaxWrapper)assignmentLeft).Designation;
+                    result = declarationExpression.Variables.Count;
+                }
+                return result;
             }
 
-            ISymbol FindDeconstructor(IEnumerable<ISymbol> deconstructors, int numberOfArguments) =>
-                deconstructors.FirstOrDefault(m => m.GetParameters().Count() == numberOfArguments);
+            static ISymbol FindDeconstructor(IEnumerable<ISymbol> deconstructors, int numberOfArguments) =>
+                deconstructors.FirstOrDefault(m => m.GetParameters().Count() == numberOfArguments && IsAccessibleOutsideTheType(m.DeclaredAccessibility));
+
+            static bool IsAccessibleOutsideTheType(Accessibility accessibility) =>
+                accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedAndInternal;
         }
 
         public override void VisitAttribute(AttributeSyntax node)

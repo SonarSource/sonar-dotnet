@@ -30,18 +30,24 @@ namespace Tests.Diagnostics
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/2478
     public class ReproIssue2478
     {
         public void SomeMethod()
         {
-            var (a, b) = new Foo();
+            var (a, (barA, barB)) = new Foo();
 
             var (_, _, c) = new Baz();
 
             var qix = new Qix();
+            object b;
             (a, b, c) = qix;
 
             (a, b) = ReturnFromMethod();
+
+            (a, b) = new Bee();
+
+            (a, b, c) = new Ambiguous(); // Error [CS0121]
         }
 
         internal void InternalMethod(Bar bar)
@@ -51,7 +57,10 @@ namespace Tests.Diagnostics
 
         private sealed class Foo
         {
-            public void Deconstruct(out object a, out object b) { a = b = null; }
+            public void Deconstruct(out object a, out Bar b) { a = b = null; }
+
+            // deconstructors must be public, internal or protected internal
+            private void Deconstruct(out object a, out object b) { a = b = null; } // Noncompliant
         }
 
         internal sealed class Bar
@@ -59,9 +68,12 @@ namespace Tests.Diagnostics
             internal void Deconstruct(out object a, out object b) { a = b = null; }
         }
 
-        private sealed class Baz
+        private class Baz
         {
             public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; }
+
+            // deconstructors must be public, internal or protected internal
+            protected void Deconstruct(out string a, out string b, out string c) { a = b = c = null; } // Noncompliant
         }
 
         private sealed class Qix
@@ -72,6 +84,17 @@ namespace Tests.Diagnostics
             {
                 a = b = null;
             }
+        }
+
+        internal class Bee
+        {
+            protected internal void Deconstruct(out object a, out object b) { a = b = null; }
+        }
+
+        private class Ambiguous
+        {
+            public void Deconstruct(out string a, out string b, out string c) { a = b = c = null; }
+            public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; } // Noncompliant FP, actually the one above is not used
         }
 
         private ForMethod ReturnFromMethod() => null;
