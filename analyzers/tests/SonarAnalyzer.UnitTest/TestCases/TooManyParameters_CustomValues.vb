@@ -4,6 +4,9 @@ Imports System.Runtime.InteropServices
 Public Class TooManyParameters
     Implements MyInterface
 
+    Public Event GoodEvent(Sender As Object, e As EventArgs)
+    Public Event Fire(Sender As Object, a As String, b As String, c As String, d As String) ' Noncompliant
+
     Public Sub New()
     End Sub
 
@@ -83,11 +86,24 @@ Public Class TooManyParameters
         F2(1, 2, 3, 4)
     End Sub
 
+    Default Public ReadOnly Property Indexer(a As Integer, b As Integer, c As Integer, d As Integer) As Integer ' Noncompliant
+        Get
+            Return a + b + c + d + 42
+        End Get
+    End Property
+
+    Public ReadOnly Property ParametrizedProperty(a As Integer, b As Integer, c As Integer, d As Integer) As Integer ' Noncompliant
+        Get
+            Return a + b + c + d + 42
+        End Get
+    End Property
+
     ' We should not raise for imported methods according to external definition.
     <DllImport("foo.dll")>
     Public Shared Sub Extern(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Compliant, external definition
     End Sub
 
+    Public Declare Function ExternSyntax Lib "user32.dll" (hwnd As IntPtr, a As String, b As String, c As String, d As String) As Integer  ' Compliant
 End Class
 
 Interface MyInterface

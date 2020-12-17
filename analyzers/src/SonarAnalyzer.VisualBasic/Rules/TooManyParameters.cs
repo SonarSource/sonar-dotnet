@@ -47,6 +47,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             { SyntaxKind.DelegateSubStatement, "Delegate" },
             { SyntaxKind.SubLambdaHeader, "Lambda" },
             { SyntaxKind.FunctionLambdaHeader, "Lambda" },
+            { SyntaxKind.PropertyStatement, "Property" },
+            { SyntaxKind.EventStatement, "Event" },
         }.ToImmutableDictionary();
 
         private static readonly SyntaxKind[] LambdaHeaders = new[]
