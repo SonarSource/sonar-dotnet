@@ -144,12 +144,21 @@ Public Class SubClass2
 
     Public Sub New(p1 As Integer, p2 As Integer, p3 As Integer, s1 As String, s2 As String, s3 As String, s4 As String) ' Noncompliant {{Constructor has 4 new parameters, which is greater than the 3 authorized.}}
         MyBase.New(p1, p2, p3)
+        'For coverage, other expressions
+        Dim V As Integer
+        V = 0
+        Method(p1, p2, p3, p4)
+        Me.Method(p1, p2, p3, p4)
+        MyBase.F4(p1, p2, p3, p4)
     End Sub
 
     Public Sub New(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Compliant (needs arguments for base constructor)
         MyBase.New(p1, p2, p3, p4)
         F5(p1, p2, p3, p4)
         F2(p1, p2, p3, p4)
+    End Sub
+
+    Private Sub Method(p1 As Integer, p2 As Integer, p3 As Integer, p4 As Integer)  ' Noncompliant
     End Sub
 
 End Class
