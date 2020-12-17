@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyParameters_CS_DefaultValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new VB.TooManyParameters(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CS.TooManyParameters(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
