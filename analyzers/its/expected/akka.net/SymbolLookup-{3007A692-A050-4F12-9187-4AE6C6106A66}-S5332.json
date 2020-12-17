@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  68,
+"endLine":  14,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  70,
+"endLine":  18,
+"endColumn":  116
+}
+}
+}
+]
+}
