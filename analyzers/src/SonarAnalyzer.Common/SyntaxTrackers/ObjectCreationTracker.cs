@@ -70,8 +70,6 @@ namespace SonarAnalyzer.Helpers
 
         internal abstract ObjectCreationCondition ArgumentAtIndexIsConst(int index);
 
-        internal abstract ObjectCreationCondition WhenHasInitializer();
-
         internal abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
 
         internal ObjectCreationCondition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>

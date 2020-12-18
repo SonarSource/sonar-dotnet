@@ -46,9 +46,6 @@ namespace SonarAnalyzer.Helpers
                     argumentList.Arguments[index].Expression.IsConstant(context.SemanticModel);
             };
 
-        internal override ObjectCreationCondition WhenHasInitializer() =>
-            context => ((ObjectCreationExpressionSyntax)context.Expression).Initializer != null;
-
         internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName)
         {
             var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
