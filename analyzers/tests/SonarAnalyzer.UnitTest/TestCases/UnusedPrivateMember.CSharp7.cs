@@ -92,9 +92,11 @@ namespace Tests.Diagnostics
             }
         }
 
-        internal class ProtectedInternalDeconstruct
+        private class ProtectedInternalDeconstruct
         {
             protected internal void Deconstruct(out object a, out object b) { a = b = null; }
+
+            protected internal void Deconstruct(out object a, out object b, out object c) { a = b = c = null; } // Noncompliant
         }
 
         private class Ambiguous

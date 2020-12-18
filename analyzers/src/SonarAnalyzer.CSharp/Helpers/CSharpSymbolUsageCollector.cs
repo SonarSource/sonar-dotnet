@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Helpers
                 deconstructors.FirstOrDefault(m => m.GetParameters().Count() == numberOfArguments && IsAccessibleOutsideTheType(m.DeclaredAccessibility));
 
             static bool IsAccessibleOutsideTheType(Accessibility accessibility) =>
-                accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedAndInternal;
+                accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedOrInternal;
         }
 
         public override void VisitAttribute(AttributeSyntax node)
