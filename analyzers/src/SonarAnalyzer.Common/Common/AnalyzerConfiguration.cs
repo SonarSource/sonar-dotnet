@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Common
         /// <summary>
         /// Hotspot rules are not configurable (from ruleset) to prevent them from appearing in SonarLint.
         /// They are enabled by default and we check if SonarLint.xml contains the rule key on CompilationStart
-        /// to determine whether to run the analysis or not. SonarLint.xml is added by Scanner for MSBuild
+        /// to determine whether to run the analysis or not. SonarLint.xml is added by SonarScanner for .NET
         /// and not by SonarLint, hence the hotspots run only when run through the CLI.
         /// </summary>
         public static IAnalyzerConfiguration Hotspot { get; } =

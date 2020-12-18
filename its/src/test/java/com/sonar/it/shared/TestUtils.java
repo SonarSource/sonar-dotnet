@@ -113,7 +113,7 @@ public class TestUtils {
 
       // In order to be able to run tests on Azure pipelines, the AGENT_BUILDDIRECTORY environment variable
       // needs to be set to the analyzed project directory.
-      // This is necessary because the scanner for MsBuild will use this variable to set the correct work directory.
+      // This is necessary because the SonarScanner for .NET will use this variable to set the correct work directory.
       .setEnvironmentVariable(VstsUtils.ENV_BUILD_DIRECTORY, projectDir.toString());
   }
 
@@ -231,13 +231,13 @@ public class TestUtils {
   }
 
   public static void deleteLocalCache() {
-    // Scanner for MSBuild caches the analyzer, so running the test twice in a row means the old binary is used.
+    // SonarScanner for .NET caches the analyzer, so running the test twice in a row means the old binary is used.
     String localAppData = System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube";
     try {
       FileUtils.deleteDirectory(new File(localAppData));
     }
     catch (IOException ioe) {
-      throw new IllegalStateException("could not delete Scanner for MSBuild cache folder", ioe);
+      throw new IllegalStateException("Could not delete SonarScanner for .NET cache folder", ioe);
     }
   }
 

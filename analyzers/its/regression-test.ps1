@@ -476,7 +476,7 @@ try {
     # it happens that a the same project is built in parallel in different configurations. The
     # protobuf-generating rules try to write their output in the same folder and fail, even
     # though there is a basic lock, because it is process-wide and not machine-wide.
-    # Parallel builds are not a problem when run through the Scanner for MSBuild because it
+    # Parallel builds are not a problem when run through the SonarScanner for .NET because it
     # redirects the outputs of the different configurations in separate folders.
 
     # Do not forget to update ValidateSet of -project parameter when new project is added.

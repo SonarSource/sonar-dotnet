@@ -52,7 +52,7 @@ import org.sonar.api.utils.log.Loggers;
 import static java.util.stream.Collectors.toList;
 
 /**
- * This profile exporter was build to be used by the SonarQube Scanner for MSBuild (S4MSB) during the Begin step,
+ * This profile exporter was build to be used by the SonarQube SonarScanner for .NET (S4MSB) during the Begin step,
  * to download the SonarLint.xml.
  *
  * However, starting 2016, it is not used anymore. See commit ce945d inside the S4MSB repo.

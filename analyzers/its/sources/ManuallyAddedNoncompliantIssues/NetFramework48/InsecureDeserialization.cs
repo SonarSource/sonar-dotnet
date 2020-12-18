@@ -19,7 +19,7 @@ namespace NetFramework48
     {
         public string Name { get; set; }
 
-        public CtorParameterConditionalConstruct(string name) // Issue is raised only when using SonarScanner for MSBuild
+        public CtorParameterConditionalConstruct(string name) // Issue is raised only when using SonarScanner for .NET
         {
             if (string.IsNullOrEmpty(name))
                 Name = name;
@@ -41,7 +41,7 @@ namespace NetFramework48
     {
         private string name;
 
-        public CtorWithConditionsAndMissingDeserializationCtor(string name) // Issue is raised only when using SonarScanner for MSBuild
+        public CtorWithConditionsAndMissingDeserializationCtor(string name) // Issue is raised only when using SonarScanner for .NET
         {
             this.name = name ?? string.Empty;
         }
@@ -54,7 +54,7 @@ namespace NetFramework48
     {
         internal string Name { get; private set; }
 
-        public DifferentConditionsInCtor(string name) // Issue is raised only when using SonarScanner for MSBuild
+        public DifferentConditionsInCtor(string name) // Issue is raised only when using SonarScanner for .NET
         {
             Name = name ?? string.Empty;
         }
