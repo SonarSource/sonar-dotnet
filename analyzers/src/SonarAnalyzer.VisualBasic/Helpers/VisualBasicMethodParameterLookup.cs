@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -35,7 +34,7 @@ namespace SonarAnalyzer.Helpers
             : base(argumentList.Arguments, semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol)
         {
         }
-        
+
         protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
             (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
     }
