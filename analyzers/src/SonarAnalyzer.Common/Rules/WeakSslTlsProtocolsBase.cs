@@ -48,23 +48,23 @@ namespace SonarAnalyzer.Rules
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-        protected abstract TSyntaxKind SyntaxKindOfInterest { get; }
+        protected abstract TSyntaxKind SyntaxKind { get; }
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
         protected abstract string GetIdentifierText(TIdentifierNameSyntax identifierNameSyntax);
 
-        protected abstract bool IsNodeOfInterest(SyntaxNode node);
+        protected abstract bool IsBinaryNegationOrInsideIfCondition(SyntaxNode node);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, AnalyzeSyntax, SyntaxKindOfInterest);
+            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, AnalyzeSyntax, SyntaxKind);
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
             var node = context.Node;
-            if (IsNodeOfInterest(node) && IsWeakProtocolUsed((TIdentifierNameSyntax)node, context.SemanticModel))
+            if (IsBinaryNegationOrInsideIfCondition(node) && IsWeakProtocolUsed((TIdentifierNameSyntax)node, context.SemanticModel))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
             }

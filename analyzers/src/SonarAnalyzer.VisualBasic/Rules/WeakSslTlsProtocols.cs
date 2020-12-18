@@ -34,14 +34,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxKind SyntaxKindOfInterest { get; } = SyntaxKind.IdentifierName;
+        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.IdentifierName;
 
         protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override string GetIdentifierText(IdentifierNameSyntax identifierNameSyntax) =>
             identifierNameSyntax.Identifier.Text;
 
-        protected override bool IsNodeOfInterest(SyntaxNode node)
+        protected override bool IsBinaryNegationOrInsideIfCondition(SyntaxNode node)
         {
             if (!(node.Parent is MemberAccessExpressionSyntax))
             {
@@ -49,16 +49,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             var current = node;
-            var parent = current.Parent;
-            while (parent != null && !parent.IsKind(SyntaxKind.IfStatement))
+            while (current.Parent != null && !current.Parent.IsKind(SyntaxKind.IfStatement))
             {
-                current = parent;
-                parent = parent.Parent;
+                current = current.Parent;
             }
 
-            if (parent != null && parent.IsKind(SyntaxKind.IfStatement))
+            if (current.Parent != null && current.Parent.IsKind(SyntaxKind.IfStatement))
             {
-                return (parent as IfStatementSyntax).Condition != current;
+                return ((IfStatementSyntax)current.Parent).Condition != current;
             }
 
             return true;

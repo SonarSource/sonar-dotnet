@@ -119,6 +119,11 @@ namespace Tests.Diagnostics
                 [SslProtocols.Default] = "Default", // Noncompliant
 //                            ^^^^^^^
             };
+
+            var protocol = SslProtocols.None;
+
+            // FP - the following cases should be valid
+            bool isSafe = protocol == SslProtocols.Tls ? true : false; // Noncompliant
         }
 
         private class Dummy1
