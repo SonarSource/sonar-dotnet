@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2328",
-"message":  " Refactor 'GetHashCode' to not reference mutable fields.",
+"message":  "Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
@@ -26,7 +26,7 @@
 },
 {
 "id":  "S2328",
-"message":  " Refactor 'GetHashCode' to not reference mutable fields.",
+"message":  "Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
@@ -59,7 +59,7 @@
 },
 {
 "id":  "S2328",
-"message":  " Refactor 'GetHashCode' to not reference mutable fields.",
+"message":  "Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
