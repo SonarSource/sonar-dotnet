@@ -19,17 +19,24 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import java.util.Optional;
+import org.sonar.api.batch.fs.FilePredicate;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 
-public interface FileService {
+class PathSuffixPredicate implements FilePredicate {
+  private final String pathSuffix;
 
-  boolean isSupportedAbsolute(String absolutePath);
+  PathSuffixPredicate(String pathSuffix) {
+    this.pathSuffix = pathSuffix;
+  }
 
-  /**
-   * Note that the absolute path returned by the Scanner may be different from the absolute path returned by the Operating System
-   * @see org.sonar.api.batch.fs.InputFile#uri()
-   *
-   * @param deterministicBuildPath - the path in the code coverage report when builds are done with the `-deterministic` option
-   */
-  Optional<String> getAbsolutePath(String deterministicBuildPath);
+  @Override
+  public boolean apply(InputFile inputFile) {
+    return inputFile.uri().getPath().endsWith(pathSuffix);
+  }
+
+  @VisibleForTesting
+  String getPathSuffix() {
+    return pathSuffix;
+  }
 }
