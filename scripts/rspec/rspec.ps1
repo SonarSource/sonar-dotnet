@@ -127,7 +127,7 @@ function UpdateTestEntry($rule) {
     $ruleTypeTestCase = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\PackagingTests\\$fileToEdit.cs"
     $ruleId = $ruleKey.Substring(1)
     (Get-Content "${ruleTypeTestCase}") -replace "//\[`"$ruleId`"\]", "[`"$ruleId`"] = `"$ruleType`"" |
-        Set-Content "${ruleTypeTestCase}"
+        Set-Content "${ruleTypeTestCase}" -Encoding utf8BOM
 }
 
 function GetRulesInfo($lang, $rules) {
