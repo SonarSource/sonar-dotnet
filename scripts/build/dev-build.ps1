@@ -61,6 +61,11 @@ try {
     Write-Host "MSBuild: ${msbuildVersion}"
 
     if ($build) {
+        # Restore VSIX (special project)
+        Push-Location "src\SonarAnalyzer.Vsix"
+        nuget restore .\packages.SonarAnalyzer.Vsix.config -PackagesDirectory "../../packages"
+        Pop-Location
+
         Invoke-MSBuild $msbuildVersion $solutionName /t:"Restore,Rebuild" `
             /consoleloggerparameters:Summary `
             /m `
