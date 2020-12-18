@@ -1,9 +1,7 @@
 <p>If a JSON Web Token (JWT) is not signed with a strong cipher algorithm (or not signed at all) an attacker can forge it and impersonate user
 identities.</p>
-<ul>
-  <li> Don't use <code>none</code> algorithm to sign or verify the validity of an algorithm. </li>
-  <li> Don't use a token without verifying its signature before. </li>
-</ul>
+<p> * Don't use <code>none</code> algorithm to sign or verify the validity of a token.</p>
+<p> * Don't use a token without verifying its signature before.</p>
 <h2>Noncompliant Code Example</h2>
 <p><a href="https://github.com/jwt-dotnet/jwt">jwt-dotnet</a> library:</p>
 <pre>
@@ -24,9 +22,6 @@ var decodedtoken2 = new JwtBuilder()
    .Decode(token); // Compliant
 </pre>
 <h2>See</h2>
-<ul>
-  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
-  </li>
-  <li> <a href="https://cwe.mitre.org/data/definitions/347.html">MITRE, CWE-347</a> - Improper Verification of Cryptographic Signature </li>
-</ul>
+<p> * <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure</p>
+<p> * <a href="https://cwe.mitre.org/data/definitions/347.html">MITRE, CWE-347</a> - Improper Verification of Cryptographic Signature</p>
 

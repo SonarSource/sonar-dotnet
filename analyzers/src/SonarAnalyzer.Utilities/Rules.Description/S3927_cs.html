@@ -1,6 +1,6 @@
 <p>Serialization event handlers that don't have the correct signature will simply not be called, thus bypassing any attempts to augment the automated
 de/serialization.</p>
-<p>This rule raises issue when a method marked with one of the following attributes is <code>public</code>, <code>static</code>, does not return
+<p>This rule raises an issue when a method marked with one of the following attributes is <code>public</code>, <code>static</code>, does not return
 <code>void</code>, has type parameters, or does not have a single parameter of type <code>System.Runtime.Serialization.StreamingContext</code>:</p>
 <ul>
   <li> <code>System.Runtime.Serialization.OnSerializingAttribute</code> </li>

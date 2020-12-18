@@ -1,4 +1,5 @@
 <p><code>GC.SuppressFinalize</code> requests that the system not call the finalizer for the specified object. This should only be done when
-implementing <code>Dispose</code> as part of the <a href="https://msdn.microsoft.com/en-us/library/b1yfkh5e.aspx">Dispose Pattern</a>.</p>
+implementing <code>Dispose</code> as part of the <a
+href="https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">Dispose Pattern</a>.</p>
 <p>This rule raises an issue when <code>GC.SuppressFinalize</code> is called outside that pattern.</p>
 

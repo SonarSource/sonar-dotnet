@@ -1,53 +1,87 @@
-<p>Expanding archive files is security-sensitive. For example, expanding archive files has led in the past to the following vulnerabilities:</p>
-<ul>
-  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1263">CVE-2018-1263</a> </li>
-  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16131">CVE-2018-16131</a> </li>
-</ul>
-<p>Applications that expand archive files (zip, tar, jar, war, 7z, ...) should verify the path where the archive's files are expanded and not trust
-blindly the content of the archive. Archive's files should not be expanded outside of the root directory where the archive is supposed to be expanded.
-Also, applications should control the size of the expanded data to not be a victim of Zip Bomb attack. Failure to do so could allow an attacker to use
-a specially crafted archive that holds directory traversal paths (e.g. ../../attacker.sh) or the attacker could overload the file system, processors
-or memory of the operating system where the archive is expanded making the target OS completely unusable.</p>
-<p>This rule raises an issue when code handle archives. The goal is to guide security code reviews.</p>
+<p>Successful Zip Bomb attacks occur when an application expands untrusted archive files without controlling the size of the expanded data, which can
+lead to denial of service. A Zip bomb is usually a malicious archive file of a few kilobytes of compressed data but turned into gigabytes of
+uncompressed data. To achieve this extreme <a href="https://en.wikipedia.org/wiki/Data_compression_ratio">compression ratio</a>, attackers will
+compress irrelevant data (eg: a long string of repeated bytes). </p>
 <h2>Ask Yourself Whether</h2>
+<p>Archives to expand are untrusted and:</p>
 <ul>
-  <li> there is no validation of the name of the archive entry </li>
-  <li> there is no validation of the effective path where the archive entry is going to be expanded </li>
-  <li> there is no validation of the size of the expanded archive entry </li>
-  <li> there is no validation of the ratio between the compressed and uncompressed archive entry </li>
+  <li> There is no validation of the number of entries in the archive. </li>
+  <li> There is no validation of the total size of the uncompressed data. </li>
+  <li> There is no validation of the ratio between the compressed and uncompressed archive entry. </li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <p> </p>
 <h2>Recommended Secure Coding Practices</h2>
-<p>Validate the full path of the extracted file against the full path of the directory where files are expanded:</p>
 <ul>
-  <li> the canonical path of the expanded file must start with the canonical path of the directory where files are extracted. </li>
-  <li> the name of the archive entry must not contain "..", i.e. reference to a parent directory. </li>
+  <li> Define and control the ratio between compressed and uncompressed data, in general the data compression ratio for most of the legit archives is
+  1 to 3. </li>
+  <li> Define and control the threshold for maximum total size of the uncompressed data. </li>
+  <li> Count the number of file entries extracted from the archive and abort the extraction if their number is greater than a predefined threshold, in
+  particular it's not recommended to recursively expand archives (an entry of an archive could be also an archive). </li>
 </ul>
-<p>Stop extracting the archive if any of its entries has been tainted with a directory traversal path.</p>
-<p>Define and control the ratio between compressed and uncompress bytes.</p>
-<p>Define and control the maximum allowed expanded file size.</p>
-<p>Count the number of file entries extracted from the archive and abort the extraction if their number is greater than a predefined threshold.</p>
 <h2>Sensitive Code Example</h2>
 <pre>
+FileStream zipToOpen = new FileStream(@"ZipBomb.zip", FileMode.Open);
+ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Read);
 foreach (ZipArchiveEntry entry in archive.Entries)
 {
-    //  entry.FullName could contain parent directory references ".." and the destinationPath variable could become outside of the desired path
-    string destinationPath = Path.GetFullPath(Path.Combine(path, entry.FullName));
+  entry.ExtractToFile("./output_onlyfortesting.txt", true); // Sensitive
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+int THRESHOLD_ENTRIES = 10000;
+int THRESHOLD_SIZE = 1000000000; // 1 GB
+double THRESHOLD_RATIO = 10;
+int totalSizeArchive = 0;
+int totalEntryArchive = 0;
 
-    entry.ExtractToFile(destinationPath); // Sensitive, extracts the entry in a file
+FileStream zipToOpen = new FileStream(@"ZipBomb.zip", FileMode.Open);
+ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Read);
+foreach (ZipArchiveEntry entry in archive.Entries)
+{
+  totalEntryArchive ++;
 
-    Stream stream;
-    stream = entry.Open(); // Sensitive, the entry is about to be extracted
+  Stream st = entry.Open();
+  byte[] buffer = new byte[1024];
+  int totalSizeEntry = 0;
+  int numBytesRead = 0;
+
+  do
+  {
+      numBytesRead = st.Read(buffer, 0, 1024);
+      totalSizeEntry += numBytesRead;
+      totalSizeArchive += numBytesRead;
+      double compressionRatio = totalSizeEntry / entry.CompressedLength;
+
+      if(compressionRatio &gt; THRESHOLD_RATIO) {
+        // ratio between compressed and uncompressed data is highly suspicious, looks like a Zip Bomb Attack
+        break;
+      }
+  }
+  while (numBytesRead &gt; 0);
+
+  st.Close();
+
+  if(totalSizeArchive &gt; THRESHOLD_SIZE) {
+      // the uncompressed data size is too much for the application resource capacity
+      break;
+  }
+
+  if(totalEntryArchive &gt; THRESHOLD_ENTRIES) {
+      // too much entries in this archive, can lead to inodes exhaustion of the system
+      break;
+  }
 }
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A5-Broken_Access_Control">OWASP Top 10 2017 Category A5</a> - Broken Access Control </li>
+  <li> <a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> -
+  Security Misconfiguration </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/409.html">MITRE, CWE-409</a> - Improper Handling of Highly Compressed Data (Data Amplification)
   </li>
   <li> <a href="https://wiki.sei.cmu.edu/confluence/display/java/IDS04-J.+Safely+extract+files+from+ZipInputStream">CERT, IDS04-J.</a> - Safely
   extract files from ZipInputStream </li>
-  <li> Snyk Research Team: <a href="https://snyk.io/research/zip-slip-vulnerability">Zip Slip Vulnerability</a> </li>
+  <li> <a href="https://www.bamsoftware.com/hacks/zipbomb/">bamsoftware.com</a> - A better Zip Bomb </li>
 </ul>
 

@@ -1,7 +1,10 @@
 <p><a href="https://en.wikipedia.org/wiki/Strong_cryptography">Strong cipher algorithms</a> are cryptographic systems resistant to cryptanalysis, they
-are not vulnerable to well-known attacks like brute force attacks for example. </p>
-<p>It is recommended to use only cipher algorithms intensively tested and promoted by the cryptographic community.</p>
+are not vulnerable to well-known attacks like brute force attacks for example.</p>
+<p>A general recommendation is to only use cipher algorithms intensively tested and promoted by the cryptographic community.</p>
+<p>More specifically for block cipher, it's not recommended to use algorithm with a block size inferior than 128 bits.</p>
 <h2>Noncompliant Code Example</h2>
+<p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netcore-3.1">System.Security.Cryptography</a> library,
+these old cryptographic algorithms should no longer be used for any reason:</p>
 <pre>
 var tripleDES1 = new TripleDESCryptoServiceProvider(); // Noncompliant: Triple DES is vulnerable to meet-in-the-middle attack
 
@@ -9,16 +12,27 @@ var simpleDES = new DESCryptoServiceProvider(); // Noncompliant: DES works with 
 
 var RC2 = new RC2CryptoServiceProvider(); // Noncompliant: RC2 is vulnerable to a related-key attack
 </pre>
+<p>For Bouncycastle library, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-1000339">AESFastEngine has a side channel leak</a>, it
+is possible to gain information about the key used to initialize the cipher:</p>
+<pre>
+AesFastEngine aesfast = new AesFastEngine(); // Noncompliant
+</pre>
 <h2>Compliant Solution</h2>
+<p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netcore-3.1">System.Security.Cryptography</a> library,
+it's recommended to use <code>AesCryptoServiceProvider</code>:</p>
 <pre>
 var AES = new AesCryptoServiceProvider(); // Compliant
+</pre>
+<p>For Bouncycastle library, it's recommended to use <code>AESEngine</code>:</p>
+<pre>
+var AES = new AESEngine(); // Compliant
 </pre>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
   </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/327.html">MITRE, CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm </li>
-  <li> <a href="https://www.securecoding.cert.org/confluence/x/VwAZAg">CERT, MSC61-J.</a> - Do not use insecure or weak cryptographic algorithms </li>
+  <li> <a href="https://wiki.sei.cmu.edu/confluence/x/hDdGBQ">CERT, MSC61-J.</a> - Do not use insecure or weak cryptographic algorithms </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
 </ul>
 
