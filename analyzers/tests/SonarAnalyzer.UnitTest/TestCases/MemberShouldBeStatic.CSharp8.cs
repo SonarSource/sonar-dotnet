@@ -17,4 +17,10 @@
             return a + b;
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3204
+    public class Repro_3204<TFirst, TSecond>
+    {
+        private protected int ProtectedInternal() => 42;    // Noncompliant, not accessible from outside this class
+    }
 }
