@@ -140,9 +140,34 @@ namespace MyLibrary
         private static readonly Random rnd = new Random();
 
         [NoProperty]
-        public int GetRandom() => rnd.Next(); // Noncompliant FP, attribute is needed and cannot be applied to property (Web API Controller)
+        public int GetRandom() => rnd.Next(); // Compliant
+
+        [NoProperty]
+        [PropertyOrMethod]
+        public string GetBothSupportedAndNotSupportedPropertyUsage() => ""; // Compliant
+
+        [PropertyOrMethod]
+        public int GetUsageIncludingProperty() => 42; // Noncompliant
+
+        [AllTargets]
+        public int GetUsageForAll() => 17; // Noncompliant
+
+        [AllTargets]
+        [PropertyOrMethod]
+        public int GetUsageForAll2() => 17; // Noncompliant
+
+        [NoUsageDefined]
+        public int GetNoUsagedDefined() => 666; // Noncompliant
+
+        [AttributeUsage(AttributeTargets.All)]
+        private sealed class AllTargetsAttribute : Attribute { }
+
+        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
+        private sealed class PropertyOrMethodAttribute : Attribute { }
 
         [AttributeUsage(AttributeTargets.All ^ AttributeTargets.Property)]
-        private class NoPropertyAttribute : Attribute { }
+        private sealed class NoPropertyAttribute : Attribute { }
+
+        private sealed class NoUsageDefinedAttribute : Attribute { }
     }
 }

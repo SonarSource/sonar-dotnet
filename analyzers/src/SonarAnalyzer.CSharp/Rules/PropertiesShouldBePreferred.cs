@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -52,8 +53,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     var propertyCandidates = typeSymbol
                         .GetMembers()
                         .OfType<IMethodSymbol>()
-                        .Where(SymbolHelper.IsPubliclyAccessible)
-                        .Where(IsPropertyCanditate);
+                        .Where(HasCandidateName)
+                        .Where(HasCandidateReturnType)
+                        .Where(HasCandidateSignature)
+                        .Where(UsageAttributesAllowProperties);
 
                     foreach (var candidate in propertyCandidates)
                     {
@@ -67,32 +70,39 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InterfaceDeclaration);
         }
 
-        private bool IsPropertyCanditate(IMethodSymbol method)
+        private static bool HasCandidateSignature(IMethodSymbol method) =>
+            method.IsPubliclyAccessible()
+            && method.Parameters.Length == 0
+            && !method.IsConstructor()
+            && !method.IsOverride
+            && method.MethodKind != MethodKind.PropertyGet
+            && method.GetInterfaceMember() is null;
+
+        private static bool HasCandidateReturnType(IMethodSymbol method) =>
+            !method.ReturnsVoid
+            && !method.IsAsync
+            && !method.ReturnType.Is(TypeKind.Array)
+            && !method.ReturnType.OriginalDefinition.IsAny(KnownType.SystemTasks);
+
+        private static bool HasCandidateName(IMethodSymbol method)
         {
-            if (method.IsConstructor() ||
-                method.MethodKind == MethodKind.PropertyGet ||
-                method.IsOverride ||
-                method.GetInterfaceMember() != null ||
-                method.IsAsync ||
-                method.ReturnType.OriginalDefinition.IsAny(KnownType.SystemTasks))
+            if (method.Name == "GetEnumerator" || method.Name == "GetAwaiter")
             {
                 return false;
             }
-
-            return method.Parameters.Length == 0 &&
-                   !method.ReturnsVoid &&
-                   !method.ReturnType.Is(TypeKind.Array) &&
-                   method.Name != "GetEnumerator" &&
-                   method.Name != "GetAwaiter" &&
-                   NameStartsWithGet(method);
+            else
+            {
+                var nameParts = method.Name.SplitCamelCaseToWords().ToList();
+                return nameParts.Count > 1 && nameParts[0] == "GET";
+            }
         }
 
-        private bool NameStartsWithGet(IMethodSymbol method)
-        {
-            var nameParts = method.Name.SplitCamelCaseToWords().ToList();
-
-            return nameParts.Count > 1 &&
-                   nameParts[0] == "GET";
-        }
+        private static bool UsageAttributesAllowProperties(IMethodSymbol method) =>
+            method.GetAttributes()
+                .Select(attribute => attribute.AttributeClass)
+                .SelectMany(cls => cls.GetAttributes(KnownType.System_AttributeUsageAttribute))
+                .Select(attr => attr.ConstructorArguments[0].Value)
+                .Cast<AttributeTargets>()
+                .All(targets => targets.HasFlag(AttributeTargets.Property));
     }
 }
