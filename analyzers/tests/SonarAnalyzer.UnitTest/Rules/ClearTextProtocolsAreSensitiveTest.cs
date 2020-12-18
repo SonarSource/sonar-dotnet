@@ -40,6 +40,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     ParseOptionsHelper.FromCSharp8,
                                     additionalReferences: GetAdditionalReferences());
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ControllingPermissions_CS_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\ClearTextProtocolsAreSensitive.cs",
+                                           new ClearTextProtocolsAreSensitive(),
+                                           ParseOptionsHelper.FromCSharp8,
+                                           additionalReferences: GetAdditionalReferences());
+
 #if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
