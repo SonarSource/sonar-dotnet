@@ -13,7 +13,7 @@ public record GetHashCodeMutable : AnyOther
     public string name;
     int foo, bar;
 
-    public override int GetHashCode() // Noncompliant {{ Refactor 'GetHashCode' to not reference mutable fields.}}
+    public override int GetHashCode() // Noncompliant {{Refactor 'GetHashCode' to not reference mutable fields.}}
     {
         int hash = Zero;
         hash += foo.GetHashCode(); // Secondary {{Remove this use of 'foo' or make it 'readonly'.}}
