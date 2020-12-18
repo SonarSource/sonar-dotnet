@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override int BaseParameterCount(SyntaxNode node) =>
             node.Parent is ConstructorBlockSyntax constructorBlock
-            && constructorBlock.SubNewStatement.ParameterList?.Parameters.Count > Maximum   // Performance optimalization
+            && constructorBlock.SubNewStatement.ParameterList?.Parameters.Count > Maximum   // Performance optimization
                 ? constructorBlock.Statements.Select(x => MyBaseNewParameterCount(x)).SingleOrDefault(x => x > 0)
                 : 0;
 
