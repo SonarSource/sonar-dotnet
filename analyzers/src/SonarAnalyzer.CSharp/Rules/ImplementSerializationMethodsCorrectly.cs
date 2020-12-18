@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,22 +31,16 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ImplementSerializationMethodsCorrectly : ImplementSerializationMethodsCorrectlyBase
     {
-        private const string problemMakePrivateText = "'private'";
-        private const string problemReturnVoidText = "return 'void'";
+        private const string ProblemStatic = "non-static";
+        private const string ProblemReturnVoidText = "return 'void'";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
-            = ImmutableArray.Create(rule);
+        public ImplementSerializationMethodsCorrectly() : base(RspecStrings.ResourceManager) { }
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override string MethodShouldBePrivateMessage =>
-            problemMakePrivateText;
+        protected override string MethodStaticMessage => ProblemStatic;
 
-        protected override string MethodReturnTypeShouldBeVoidMessage =>
-            problemReturnVoidText;
+        protected override string MethodReturnTypeShouldBeVoidMessage => ProblemReturnVoidText;
 
         protected override Location GetIdentifierLocation(IMethodSymbol methodSymbol) =>
             methodSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax())

@@ -7,7 +7,7 @@ Namespace Tests.Diagnostics
     Public Class Foo
 
         <OnSerializing>
-        Public Sub OnSerializing(ByVal context As StreamingContext) ' Noncompliant {{Make this method 'Private'.}}
+        Public Sub OnSerializing(ByVal context As StreamingContext) ' Noncompliant {{Make this method non-public.}}
             '      ^^^^^^^^^^^^^
         End Sub
 
@@ -31,12 +31,12 @@ Namespace Tests.Diagnostics
         End Sub
 
         <OnDeserializing>
-        Public Function OnDeserializing2(ByVal context As StreamingContext) As Integer ' Noncompliant {{Make this method 'Private' and a 'Sub' not a 'Function'.}}
+        Public Function OnDeserializing2(ByVal context As StreamingContext) As Integer ' Noncompliant {{Make this method non-public and a 'Sub' not a 'Function'.}}
             Throw New NotImplementedException()
         End Function
 
         <OnDeserializing>
-        Public Sub OnDeserializing3() ' Noncompliant {{Make this method 'Private' and have a single parameter of type 'StreamingContext'.}}
+        Public Sub OnDeserializing3() ' Noncompliant {{Make this method non-public and have a single parameter of type 'StreamingContext'.}}
             Throw New NotImplementedException()
         End Sub
 
@@ -46,7 +46,7 @@ Namespace Tests.Diagnostics
         End Function
 
         <OnDeserializing>
-        Public Function OnDeserializing5(Of T)() As Integer ' Noncompliant {{Make this method 'Private', a 'Sub' not a 'Function', have no type parameters and have a single parameter of type 'StreamingContext'.}}
+        Public Function OnDeserializing5(Of T)() As Integer ' Noncompliant {{Make this method non-public, a 'Sub' not a 'Function', have no type parameters and have a single parameter of type 'StreamingContext'.}}
             Throw New NotImplementedException()
         End Function
 
@@ -56,15 +56,23 @@ Namespace Tests.Diagnostics
         End Function
 
         <OnSerializing>
-        Private Shared Sub OnSerializingStatic(Context As StreamingContext)  ' FN
+        Private Shared Sub OnSerializingStatic(Context As StreamingContext)  ' Noncompliant {{Make this method non-shared.}}
         End Sub
 
         <OnSerializing>
-        Friend Sub OnSerializingMethod(Context As StreamingContext)     ' Noncompliant FP, method Is Not Public And gets invoked
+        Public Shared Sub OnSerializingPublicStatic(Context As StreamingContext)  ' Noncompliant {{Make this method non-public and non-shared.}}
+        End Sub
+
+        <OnSerializing>
+        Friend Sub OnSerializingMethod(Context As StreamingContext)     ' Compliant, method is not public and gets invoked
         End Sub
 
         <OnSerialized>
-        Protected Sub OnSerializedMethod(Context As StreamingContext)   ' Noncompliant FP, method Is Not Public And gets invoked
+        Protected Sub OnSerializedMethod(Context As StreamingContext)   ' Compliant, method is not public and gets invoked
+        End Sub
+
+        <OnSerialized>
+        Protected Friend Sub OnProtectedFriend(Context As StreamingContext) ' Compliant, method is not public and gets invoked
         End Sub
 
         <OnDeserializing>
