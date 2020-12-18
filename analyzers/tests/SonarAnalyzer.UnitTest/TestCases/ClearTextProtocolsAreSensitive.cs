@@ -61,6 +61,7 @@ namespace Tests.Diagnostics
             using var notSet = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
             using var constructorFalse = new SmtpClient("host", 25) { EnableSsl = false }; // Noncompliant
 
+            using var localhosting = new SmtpClient("localhosting", 25); // Noncompliant
             using var localhost = new SmtpClient("localhost", 25); // Compliant due to well known value
             using var loopback = new SmtpClient("127.0.0.1", 25); // Compliant due to well known value
             using var constructorTrue = new SmtpClient("host", 25) { EnableSsl = true };
@@ -140,7 +141,13 @@ namespace Tests.Diagnostics
         private readonly List<string> links = new List<string>
         {
             "http://example.com", // Noncompliant
-            "https://example.com"
+            "Http://example.com", // Noncompliant
+            "HTTP://example.com", // Noncompliant
+            "https://example.com",
+            "telnet://anonymous@example.com", // Noncompliant
+            "TELNET://anonymous@example.com", // Noncompliant
+            "ftp://anonymous@example.com", // Noncompliant
+            "FTP://anonymous@example.com" // Noncompliant
         };
     }
 }

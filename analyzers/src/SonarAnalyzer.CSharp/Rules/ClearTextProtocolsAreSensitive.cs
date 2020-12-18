@@ -46,11 +46,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor DefaultRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
         private static readonly DiagnosticDescriptor EnableSslRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, EnableSslMessage, RspecStrings.ResourceManager).WithNotConfigurable();
 
-        private readonly Regex httpRegex = CreateCompiledRegex(@$"^http:\/\/(?!{ValidServerPattern}).+");
-        private readonly Regex ftpRegex = CreateCompiledRegex(@$"^ftp:\/\/.*@(?!{ValidServerPattern})");
-        private readonly Regex telnetRegex = CreateCompiledRegex(@$"^telnet:\/\/.*@(?!{ValidServerPattern})");
-        private readonly Regex telnetRegexForIdentifier = CreateCompiledRegex(@"Telnet(?![a-z])");
-        private readonly Regex validServerRegex = CreateCompiledRegex(ValidServerPattern);
+        private readonly Regex httpRegex = CompileRegex(@$"^http:\/\/(?!{ValidServerPattern}).");
+        private readonly Regex ftpRegex = CompileRegex(@$"^ftp:\/\/.*@(?!{ValidServerPattern})");
+        private readonly Regex telnetRegex = CompileRegex(@$"^telnet:\/\/.*@(?!{ValidServerPattern})");
+        private readonly Regex telnetRegexForIdentifier = CompileRegex(@"Telnet(?![a-z])", false);
+        private readonly Regex validServerRegex = CompileRegex($"^({ValidServerPattern})$");
 
         private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>
         {
@@ -147,8 +147,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return "telnet";
             }
-
-            return null;
+            else
+            {
+                return null;
+            }
         }
 
         private static string GetText(SyntaxNode node) =>
@@ -159,7 +161,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => string.Empty
             };
 
-        private static Regex CreateCompiledRegex(string pattern) =>
-            new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled);
+        private static Regex CompileRegex(string pattern, bool ignoreCase = true) =>
+            new Regex(pattern, ignoreCase
+                          ? RegexOptions.Compiled | RegexOptions.IgnoreCase
+                          : RegexOptions.Compiled);
     }
 }
