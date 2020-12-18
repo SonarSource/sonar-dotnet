@@ -56,7 +56,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var current = topNode;
-            var parent = current.Parent;
             while (current.Parent != null && !current.Parent.IsKind(SyntaxKind.IfStatement))
             {
                 current = current.Parent;
