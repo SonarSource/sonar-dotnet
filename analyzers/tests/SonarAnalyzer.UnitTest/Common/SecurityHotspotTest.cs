@@ -111,8 +111,9 @@ namespace SonarAnalyzer.UnitTest.Common
                                   .Concat(DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2)
                                   .Concat(ExpandingArchivesTest.AdditionalReferences)
                                   .Concat(DoNotHardcodeCredentialsTest.AdditionalReferences)
+                                  .Concat(MetadataReferenceFacade.GetSystemComponentModelPrimitives())
                                   .Concat(MetadataReferenceFacade.GetRegularExpressions()) // Needed by UsingRegularExpressions
                                   .Concat(MetadataReferenceFacade.GetSystemSecurityCryptography()) // Needed by DoNotUseRandom
-                                  .Concat(NuGetMetadataReference.Nancy());// Needed by CookieShouldBeHttpOnly, CookiesShouldBeSecure
+                                  .Concat(NuGetMetadataReference.Nancy()); // Needed by CookieShouldBeHttpOnly, CookiesShouldBeSecure
     }
 }
