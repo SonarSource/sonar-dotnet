@@ -109,10 +109,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             static ISymbol FindDeconstructor(IEnumerable<ISymbol> deconstructors, int numberOfArguments) =>
-                deconstructors.FirstOrDefault(m => m.GetParameters().Count() == numberOfArguments && IsAccessibleOutsideTheType(m.DeclaredAccessibility));
-
-            static bool IsAccessibleOutsideTheType(Accessibility accessibility) =>
-                accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedAndInternal;
+                deconstructors.FirstOrDefault(m => m.GetParameters().Count() == numberOfArguments && m.DeclaredAccessibility.IsAccessibleOutsideTheType());
         }
 
         public override void VisitAttribute(AttributeSyntax node)
