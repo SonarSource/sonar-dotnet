@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 parent = parent.Parent;
             }
 
-            if (parent != null && parent.IsKind(SyntaxKind.IfStatement) && current != null)
+            if (parent != null && parent.IsKind(SyntaxKind.IfStatement))
             {
                 return (parent as IfStatementSyntax).Condition != current;
             }
