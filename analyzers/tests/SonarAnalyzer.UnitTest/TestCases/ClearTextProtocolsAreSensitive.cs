@@ -12,32 +12,40 @@ namespace Tests.Diagnostics
         private const string b = "https://example.com";
         private const string c = "http://localhost";
         private const string d = "http://127.0.0.1";
+        private const string e = "http://::1";
 
-        private const string e = @"telnet://anonymous@example.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
-        private const string f = @"ssh://anonymous@example.com";
-        private const string g = @"telnet://anonymous@localhost";
-        private const string h = "telnet://anonymous@127.0.0.1";
+        private const string f = @"telnet://anonymous@example.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
+        private const string g = @"ssh://anonymous@example.com";
+        private const string h = @"telnet://anonymous@localhost";
+        private const string i = "telnet://anonymous@127.0.0.1";
+        private const string j = "telnet://anonymous@::1";
 
-        private readonly string i = $"ftp://anonymous@example.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
-        private readonly string j = $"sftp://anonymous@example.com";
-        private readonly string k = $"ftp://anonymous@localhost";
-        private readonly string l = $"ftp://anonymous@127.0.0.1";
+        private readonly string k = $"ftp://anonymous@example.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
+        private readonly string l = $"sftp://anonymous@example.com";
+        private readonly string m = $"ftp://anonymous@localhost";
+        private readonly string n = $"ftp://anonymous@127.0.0.1";
+        private readonly string o = $"ftp://anonymous@::1";
 
-        public void Method(string part)
+        public void Method(string part, string user, string domain, string ftp)
         {
             var a = "http://example.com"; // Noncompliant
             var b = "https://example.com";
             var c = "http://localservername"; // Noncompliant, it's not a "localhost"
-            var d = "See http://www.example.com for more information";
+            var d = "http://localhosting";
+            var e = "See http://www.example.com for more information";
             var httpProtocolScheme = "http://"; // It's compliant when standalone
 
-            var e = $"ftp://anonymous@example.com"; // Noncompliant
-            var f = $"ftp://{part}@example.com"; // Noncompliant
-            var g = "ssh://anonymous@example.com";
-            var h = "sftp://anonymous@example.com";
+            var f = $"ftp://anonymous@example.com"; // Noncompliant
+            var g = $"ftp://{part}@example.com"; // Noncompliant
+            var h = "ssh://anonymous@example.com";
+            var i = "sftp://anonymous@example.com";
             var ftpProtocolScheme = "ftp://"; // It's compliant when standalone
+            var j = "ftp://" + user + "@example.com"; // Compliant - FN (protocol is compliant when standallone, check previous case)
+            var k = "ftp://anonymous@" + domain;// Noncompliant
+            var l = $"ftp://anonymous@{domain}"; // Noncompliant
+            var m = $"{ftp}://anonymous@example.com"; // Compliant - FN
 
-            var i = @"telnet://anonymous@example.com"; // Noncompliant
+            var n = @"telnet://anonymous@example.com"; // Noncompliant
             var telnetProtocolScheme = "telnet://"; // It's compliant when standalone
 
             var uri = new Uri("http://example.com"); // Noncompliant
@@ -62,6 +70,9 @@ namespace Tests.Diagnostics
 
             using var propertyFalse = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
             propertyFalse.EnableSsl = false;
+
+            using var setReset = new SmtpClient("host", 25) { EnableSsl = true }; // FN - it is later set to false
+            setReset.EnableSsl = false;
         }
 
         public void Ftp()
@@ -85,6 +96,7 @@ namespace Tests.Diagnostics
             var a3 = TcpTelnet40(); // Noncompliant
             var a4 = TcpTelnetClient(); // Noncompliant
             var a5 = Tcp_Telnet_Client(); // Noncompliant
+            var a6 = TelnetLocalMethod(); // Noncompliant
 
             // Namespaces
             var b1 = new Company.Telnet.Client(); // Noncompliant
@@ -97,7 +109,7 @@ namespace Tests.Diagnostics
             var c2 = new ClassNames.TelnetClient(); // Noncompliant
             var c3 = new ClassNames.TcpTelnetClient(); // Noncompliant
 
-            // Method names
+            // Class names
             var d1 = TelNet();
             var d2 = Telnetwork();
             var d3 = HotelNetwork();
@@ -112,6 +124,8 @@ namespace Tests.Diagnostics
             var f1 = new ClassNames.TelNet();
             var f2 = new ClassNames.TelNet();
             var f3 = new ClassNames.HotelNetwork();
+
+            string TelnetLocalMethod() => string.Empty;
         }
 
         private static Stream Telnet() => null;

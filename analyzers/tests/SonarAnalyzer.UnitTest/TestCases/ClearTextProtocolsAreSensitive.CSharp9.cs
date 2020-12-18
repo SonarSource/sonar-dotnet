@@ -34,5 +34,9 @@ public record Record
         using var notSet = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
         using SmtpClient targetNew = new ("host", 25); // FN
         using SmtpClient targetNewWithInitializer = new("host", 25) {EnableSsl = false }; // FN
+
+        new TelnetRecord(); // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
     }
 }
+
+public record TelnetRecord { }

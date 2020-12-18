@@ -183,8 +183,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (expression is InterpolatedStringExpressionSyntax interpolatedString)
                 {
-                    var interpolatedStringText = interpolatedString.Contents.JoinStr("", content => content.ToString());
-                    stringWrapper = new StringWrapper(interpolatedString, interpolatedStringText);
+                    stringWrapper = new StringWrapper(interpolatedString, interpolatedString.GetContentsText());
                     return true;
                 }
 
