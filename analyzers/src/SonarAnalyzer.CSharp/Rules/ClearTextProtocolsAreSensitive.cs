@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text.RegularExpressions;
@@ -83,55 +82,55 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var text = GetText(c.Node);
-                    if (TryGetUnsafeProtocol(text, out var unsafeProtocol))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, c.Node.GetLocation(), unsafeProtocol, recommendedProtocols[unsafeProtocol]));
-                    }
-                },
-                SyntaxKind.StringLiteralExpression,
-                SyntaxKind.InterpolatedStringExpression);
-
-                context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                    if (!IsServerSafe(objectCreation) && objectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, objectCreation.GetLocation()));
-                    }
-
-                    if (Regex.IsMatch(objectCreation.Type.ToString(), TelnetPatternForIdentifier))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, objectCreation.GetLocation(), Telnet, recommendedProtocols[Telnet]));
-                    }
-                },
-                SyntaxKind.ObjectCreationExpression);
-
-                context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (Regex.IsMatch(invocation.Expression.ToString(), TelnetPatternForIdentifier))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, invocation.GetLocation(), Telnet, recommendedProtocols[Telnet]));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
-
-                context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var assignment = (AssignmentExpressionSyntax)c.Node;
-                    if (assignment.Left is MemberAccessExpressionSyntax memberAccess
-                        && memberAccess.IsMemberAccessOnKnownType(EnableSslName, KnownType.System_Net_FtpWebRequest, c.SemanticModel)
-                        && c.SemanticModel.GetConstantValue(assignment.Right) is { HasValue: true, Value: bool enableSslValue }
-                        && !enableSslValue)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, assignment.GetLocation()));
-                    }
-                },
-                SyntaxKind.SimpleAssignmentExpression);
+                context.RegisterSyntaxNodeActionInNonGenerated(VisitStringExpressions, SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression);
+                context.RegisterSyntaxNodeActionInNonGenerated(VisitObjectCreation, SyntaxKind.ObjectCreationExpression);
+                context.RegisterSyntaxNodeActionInNonGenerated(VisitInvocationExpression, SyntaxKind.InvocationExpression);
+                context.RegisterSyntaxNodeActionInNonGenerated(VisitAssignments, SyntaxKind.SimpleAssignmentExpression);
             });
+
+        private void VisitObjectCreation(SyntaxNodeAnalysisContext context)
+        {
+            var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
+            if (!IsServerSafe(objectCreation) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, objectCreation.GetLocation()));
+            }
+
+            if (Regex.IsMatch(objectCreation.Type.ToString(), TelnetPatternForIdentifier))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, objectCreation.GetLocation(), Telnet, recommendedProtocols[Telnet]));
+            }
+        }
+
+        private void VisitInvocationExpression(SyntaxNodeAnalysisContext context)
+        {
+            var invocation = (InvocationExpressionSyntax)context.Node;
+            if (Regex.IsMatch(invocation.Expression.ToString(), TelnetPatternForIdentifier))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, invocation.GetLocation(), Telnet, recommendedProtocols[Telnet]));
+            }
+        }
+
+        private void VisitAssignments(SyntaxNodeAnalysisContext context)
+        {
+            var assignment = (AssignmentExpressionSyntax)context.Node;
+            if (assignment.Left is MemberAccessExpressionSyntax memberAccess
+                && memberAccess.IsMemberAccessOnKnownType(EnableSslName, KnownType.System_Net_FtpWebRequest, context.SemanticModel)
+                && context.SemanticModel.GetConstantValue(assignment.Right) is { HasValue: true, Value: bool enableSslValue }
+                && !enableSslValue)
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, assignment.GetLocation()));
+            }
+        }
+
+        private void VisitStringExpressions(SyntaxNodeAnalysisContext c)
+        {
+            var text = GetText(c.Node);
+            if (TryGetUnsafeProtocol(text, out var unsafeProtocol))
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, c.Node.GetLocation(), unsafeProtocol, recommendedProtocols[unsafeProtocol]));
+            }
+        }
 
         private bool IsServerSafe(ObjectCreationExpressionSyntax objectCreation) =>
             objectCreation.ArgumentList?.Arguments.Count > 0
