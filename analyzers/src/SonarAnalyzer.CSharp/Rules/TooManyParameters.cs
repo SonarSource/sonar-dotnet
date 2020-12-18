@@ -35,15 +35,10 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.ParameterList };
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-
-        private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
+        private static readonly ImmutableDictionary<SyntaxKind, string> NodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
             { SyntaxKind.ConstructorDeclaration, "Constructor" },
             { SyntaxKind.MethodDeclaration, "Method" },
@@ -54,25 +49,16 @@ namespace SonarAnalyzer.Rules.CSharp
             { SyntaxKindEx.LocalFunctionStatement, "Local function" }
         }.ToImmutableDictionary();
 
-        protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
+        public TooManyParameters() : base(RspecStrings.ResourceManager) { }
+
+        protected override string UserFriendlyNameForNode(SyntaxNode node) => NodeToDeclarationName[node.Kind()];
 
         protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
 
-        protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
-        {
-            if (!nodeToDeclarationName.ContainsKey(node.Kind()))
-            {
-                return false;
-            }
-            if ((node as ConstructorDeclarationSyntax)?.Initializer?.ArgumentList?.Arguments.Count > Maximum)
-            {
-                // Base class is already not compliant so let's ignore current constructor.
-                // Another option could be to substract current number of parameters from base count and raise only if greater
-                // than threshold.
-                return false;
-            }
+        protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel) =>
+            NodeToDeclarationName.ContainsKey(node.Kind()) && VerifyCanBeChangedBySymbol(node, semanticModel);
 
-            return VerifyCanBeChangedBySymbol(node, semanticModel);
-        }
+        protected override int BaseParameterCount(SyntaxNode node) =>
+            (node as ConstructorDeclarationSyntax)?.Initializer?.ArgumentList?.Arguments.Count ?? 0;
     }
 }

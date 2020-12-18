@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -30,68 +31,59 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S107";
         protected const string MessageFormat = "{0} has {1} parameters, which is greater than the {2} authorized.";
-
-        protected abstract TSyntaxKind[] SyntaxKinds { get; }
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
-        protected abstract string UserFriendlyNameForNode(SyntaxNode node);
-
-        protected abstract int CountParameters(TParameterListSyntax parameterList);
-
-        protected abstract bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel);
-
         private const int DefaultValueMaximum = 7;
+
+        private readonly DiagnosticDescriptor rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of parameters", DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
-        {
+        protected abstract TSyntaxKind[] SyntaxKinds { get; }
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract string UserFriendlyNameForNode(SyntaxNode node);
+        protected abstract int CountParameters(TParameterListSyntax parameterList);
+        protected abstract int BaseParameterCount(SyntaxNode node);
+        protected abstract bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel);
+
+        protected TooManyParametersBase(System.Resources.ResourceManager rspecResources) =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources, isEnabledByDefault: false);
+
+        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    var parameterListNode = (TParameterListSyntax)c.Node;
-                    var parametersCount = CountParameters(parameterListNode);
-
-                    if (parametersCount > Maximum &&
-                        parameterListNode.Parent != null &&
-                        CanBeChanged(parameterListNode.Parent, c.SemanticModel))
+                    var parametersCount = CountParameters((TParameterListSyntax)c.Node);
+                    var baseCount = BaseParameterCount(c.Node.Parent);
+                    if (parametersCount - baseCount > Maximum && c.Node.Parent != null && CanBeChanged(c.Node.Parent, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], parameterListNode.GetLocation(),
-                            UserFriendlyNameForNode(parameterListNode.Parent), parametersCount, Maximum));
+                        var valueText = baseCount == 0 ? parametersCount.ToString() : $"{parametersCount - baseCount} new";
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), UserFriendlyNameForNode(c.Node.Parent), valueText, Maximum));
                     }
                 },
                 SyntaxKinds);
-        }
 
-        protected bool VerifyCanBeChangedBySymbol(SyntaxNode node, SemanticModel semanticModel)
+        protected static bool VerifyCanBeChangedBySymbol(SyntaxNode node, SemanticModel semanticModel)
         {
             var declaredSymbol = semanticModel.GetDeclaredSymbol(node);
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
             if (declaredSymbol == null && symbol == null)
             {
-                // no information
                 return false;
             }
 
             if (symbol != null)
             {
-                // Not a declaration, such as Action
-                return true;
+                return true;    // Not a declaration, such as Action
             }
 
-            if (declaredSymbol.IsExtern &&
-                declaredSymbol.IsStatic &&
-                declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
+            if (declaredSymbol.IsExtern && declaredSymbol.IsStatic && declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
             {
-                // P/Invoke method is defined externally.
-                // Do not raise
-                return false;
+                return false;   // P/Invoke method is defined externally.
             }
 
-            return declaredSymbol.GetOverriddenMember() == null &&
-                   declaredSymbol.GetInterfaceMember() == null;
+            return declaredSymbol.GetOverriddenMember() == null && declaredSymbol.GetInterfaceMember() == null;
         }
     }
 }

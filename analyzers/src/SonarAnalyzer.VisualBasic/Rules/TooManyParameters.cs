@@ -35,15 +35,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ParameterList };
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-
-        private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
+        private static readonly ImmutableDictionary<SyntaxKind, string> NodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
             { SyntaxKind.SubNewStatement, "Constructor" },
             { SyntaxKind.FunctionStatement, "Function" },
@@ -52,6 +47,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             { SyntaxKind.DelegateSubStatement, "Delegate" },
             { SyntaxKind.SubLambdaHeader, "Lambda" },
             { SyntaxKind.FunctionLambdaHeader, "Lambda" },
+            { SyntaxKind.PropertyStatement, "Property" },
+            { SyntaxKind.EventStatement, "Event" },
         }.ToImmutableDictionary();
 
         private static readonly SyntaxKind[] LambdaHeaders = new[]
@@ -60,39 +57,29 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.SubLambdaHeader
         };
 
-        protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
+        public TooManyParameters() : base(RspecStrings.ResourceManager) { }
+
+        protected override string UserFriendlyNameForNode(SyntaxNode node) => NodeToDeclarationName[node.Kind()];
 
         protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
 
-        protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
-        {
-            if (!nodeToDeclarationName.ContainsKey(node.Kind()))
-            {
-                return false;
-            }
+        protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel) =>
+            node.IsAnyKind(LambdaHeaders)
+            || (NodeToDeclarationName.ContainsKey(node.Kind()) && VerifyCanBeChangedBySymbol(node, semanticModel));
 
-            if ((node as SubNewStatementSyntax)?.ParameterList?.Parameters.Count is int parameterCount &&
-                parameterCount > Maximum &&
-                node.Parent is ConstructorBlockSyntax constructorBlock &&
-                ContainsMyBaseNewInvocation(constructorBlock, Maximum))
-            {
-                return false;
-            }
+        protected override int BaseParameterCount(SyntaxNode node) =>
+            node.Parent is ConstructorBlockSyntax constructorBlock
+            && constructorBlock.SubNewStatement.ParameterList?.Parameters.Count > Maximum   // Performance optimization
+                ? constructorBlock.Statements.Select(x => MyBaseNewParameterCount(x)).SingleOrDefault(x => x > 0)
+                : 0;
 
-            if (node.IsAnyKind(LambdaHeaders))
-            {
-                return true;
-            }
-
-            return VerifyCanBeChangedBySymbol(node, semanticModel);
-        }
-
-        private static bool ContainsMyBaseNewInvocation(ConstructorBlockSyntax constructorBlock, int maximum) =>
-                constructorBlock.Statements.Any(s => s is ExpressionStatementSyntax expression &&
-                    expression.Expression is InvocationExpressionSyntax invocation &&
-                    invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                    memberAccess.Expression is MyBaseExpressionSyntax myBase &&
-                    memberAccess.Name.Identifier.Text.Equals("New", System.StringComparison.OrdinalIgnoreCase) &&
-                    invocation.ArgumentList.Arguments.Count > maximum);
+        private static int MyBaseNewParameterCount(StatementSyntax statement) =>
+            statement is ExpressionStatementSyntax expression
+            && expression.Expression is InvocationExpressionSyntax invocation
+            && invocation.Expression is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.Expression is MyBaseExpressionSyntax
+            && memberAccess.Name.Identifier.Text.Equals("New", System.StringComparison.OrdinalIgnoreCase)
+            ? invocation.ArgumentList.Arguments.Count
+            : 0;
     }
 }
