@@ -29,8 +29,8 @@ Please provide a description of any known workarounds.
 
 ### Related information
 
-* C#/VB.NET Plugins Version
-* Visual Studio Version
+* C#/VB.NET Plugins version
+* Visual Studio version
 * MSBuild / dotnet version
-* If running through the Scanner for MSBuild, its version
+* SonarScanner for .NET version (if used)
 * Operating System

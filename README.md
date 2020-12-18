@@ -32,7 +32,7 @@ languages in [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarc
 
 ### Integration with SonarQube and SonarCloud
 
-* [Analyze projects with Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
+* [Analyze projects with SonarScanner for .NET](https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html)
 * [Importing code coverage](https://community.sonarsource.com/t/coverage-test-data-generate-reports-for-c-vb-net/9871)
 * [SonarQube and the code coverage](https://community.sonarsource.com/t/sonarqube-and-the-code-coverage/4725)
 
@@ -85,7 +85,7 @@ To request new rules, Contact us on [our Community Forum](https://community.sona
 
 If you have an idea for a rule but you are not sure that everyone needs it, you can implement your own Roslyn analyzer.
 - You can start with [this tutorial from Microsoft](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/tutorials/how-to-write-csharp-analyzer-code-fix) to write an analyzer.
-- All Roslyn-based issues are picked up by the [Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
+- All Roslyn-based issues are picked up by the [SonarScanner for .NET](https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html)
 and pushed to SonarQube / SonarCloud as external issues.
 - Also check out [SonarQube Roslyn SDK](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk) to embed
 your Roslyn analyzer in a SonarQube plugin, if you want to manage your rules from SonarQube.

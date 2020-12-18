@@ -21,10 +21,10 @@ Currently an error will be thrown when an issue is raised on a line of code cont
 
 ## Scanner compatibility
 
-To analyze VB.NET code, you need to use the [SonarScanner for MSBuild](/analysis/scan/sonarscanner-for-msbuild/) version 4.x or newer.
+To analyze VB.NET code, you need to use the [SonarScanner for .NET](/analysis/scan/sonarscanner-for-msbuild/) version 4.x or newer.
 
 ## Related Pages
 * [Importing External Issues](/analysis/external-issues/) (VSTest, NUnit, MSTest, xUnit)
 * [Test Coverage & Execution](/analysis/coverage/) (Visual Studio Code Coverage, dotCover, OpenCover, NCover 3)
-* [SonarScanner for MSBuild](/analysis/scan/sonarscanner-for-msbuild/)
+* [SonarScanner for .NET](/analysis/scan/sonarscanner-for-msbuild/)
 * [SonarScanner for Azure DevOps](/analysis/scan/sonarscanner-for-azure-devops/)

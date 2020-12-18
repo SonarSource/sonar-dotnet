@@ -37,7 +37,7 @@ In general, it is best to run commands from the Visual Studio Developer Command 
         - the path to the nuget executable folder (e.g. C:\Program Files\nuget)
         - the path to the JDK bin folder
         - %M2_HOME%\bin
-        - the path to the Scanner For MSBuild folder and to the Scanner CLI
+        - the path to the SonarScanner for .NET folder and to the Scanner CLI
 1. Open `analyzers/SonarAnalyzer.sln`
 
 ## Running Tests

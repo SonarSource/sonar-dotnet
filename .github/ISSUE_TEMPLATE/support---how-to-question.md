@@ -19,7 +19,7 @@ That includes problems with:
 The community forum is monitored by more SonarSourcers and community members so your question is likely to be answered more quickly (if the answer isn't already available in the forum).
 
 Also, the following documentation might be of help:
-- Using [Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
+- Using [SonarScanner for .NET](https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html)
 - [Importing code coverage](https://community.sonarsource.com/t/coverage-test-data-generate-reports-for-c-vb-net/9871)
 - [SonarQube and the code coverage](https://community.sonarsource.com/t/sonarqube-and-the-code-coverage/4725)
 
