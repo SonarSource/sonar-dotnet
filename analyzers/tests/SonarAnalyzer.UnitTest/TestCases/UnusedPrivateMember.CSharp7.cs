@@ -30,19 +30,95 @@ namespace Tests.Diagnostics
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/2478
     public class ReproIssue2478
     {
         public void SomeMethod()
         {
-            var (a, b) = new SomeDeconstructibleType();
+            var (a, (barA, barB)) = new PublicDeconstructWithInnerType();
+
+            var (_, _, c) = new PublicDeconstruct();
+
+            var qix = new MultipleDeconstructors();
+            object b;
+            (a, b, c) = qix;
+
+            (a, b) = ReturnFromMethod();
+
+            (a, b) = new ProtectedInternalDeconstruct();
+
+            (a, b, c) = new Ambiguous(); // Error [CS0121]
+            (a, b) = new NotUsedDifferentArgumentCount(); // Error [CS7036,CS8129]
+            (a, b) = new NotUsedNotVisible(); // Error [CS7036,CS8129]
         }
 
-        private sealed class SomeDeconstructibleType
+        internal void InternalMethod(InternalDeconstruct bar)
         {
-            public void Deconstruct(out object a, out object b) // Noncompliant FP #2478
+            var (a, b) = bar;
+        }
+
+        private sealed class PublicDeconstructWithInnerType
+        {
+            public void Deconstruct(out object a, out InternalDeconstruct b) { a = b = null; }
+
+            // deconstructors must be public, internal or protected internal
+            private void Deconstruct(out object a, out object b) { a = b = null; } // Noncompliant
+        }
+
+        internal sealed class InternalDeconstruct
+        {
+            internal void Deconstruct(out object a, out object b) { a = b = null; }
+
+            // deconstructors must be public, internal or protected internal
+            private void Deconstruct(out object a, out string b, out string c) { a = b = c = null; } // Noncompliant
+        }
+
+        private class PublicDeconstruct
+        {
+            public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; }
+
+            // deconstructors must be public, internal or protected internal
+            protected void Deconstruct(out string a, out string b, out string c) { a = b = c = null; } // Noncompliant
+            private void Deconstruct(out object a, out string b, out string c) { a = b = c = null; } // Noncompliant
+        }
+
+        private sealed class MultipleDeconstructors
+        {
+            public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; }
+
+            public void Deconstruct(out object a, out object b) // Noncompliant
             {
                 a = b = null;
             }
+        }
+
+        internal class ProtectedInternalDeconstruct
+        {
+            protected internal void Deconstruct(out object a, out object b) { a = b = null; }
+        }
+
+        private class Ambiguous
+        {
+            public void Deconstruct(out string a, out string b, out string c) { a = b = c = null; }
+            public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; } // Noncompliant FP, actually the one above is not used
+        }
+
+        private class NotUsedDifferentArgumentCount
+        {
+            public void Deconstruct(out string a, out string b, out string c) { a = b = c = null; } // Noncompliant
+            public void Deconstruct(out string a, out string b, out string c, out string d) { a = b = c = d = null; } // Noncompliant
+        }
+
+        private class NotUsedNotVisible
+        {
+            protected void Deconstruct(out object a, out object b) { a = b = null; } // Noncompliant
+            private void Deconstruct(out string a, out string b) { a = b = null; } // Noncompliant
+        }
+
+        private ForMethod ReturnFromMethod() => null;
+        private sealed class ForMethod
+        {
+            public void Deconstruct(out object a, out object b) { a = b = null; }
         }
     }
 

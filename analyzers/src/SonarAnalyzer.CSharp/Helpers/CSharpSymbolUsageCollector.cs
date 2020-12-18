@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -47,6 +48,7 @@ namespace SonarAnalyzer.Helpers
 
         private readonly Compilation compilation;
         private readonly HashSet<string> knownSymbolNames;
+        private SemanticModel semanticModel;
 
         public ISet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
         public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } = new Dictionary<ISymbol, SymbolUsage>();
@@ -59,9 +61,62 @@ namespace SonarAnalyzer.Helpers
             knownSymbolNames = knownSymbols.Select(GetName).ToHashSet();
         }
 
+        public override void Visit(SyntaxNode node)
+        {
+            semanticModel = compilation.GetSemanticModel(node.SyntaxTree);
+            base.Visit(node);
+        }
+
+        // TupleExpression "(a, b) = qix"
+        // ParenthesizedVariableDesignation "var (a, b) = quix" inside a DeclarationExpression
+        public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
+        {
+            var leftTupleCount = GetTupleCount(node.Left);
+            if (leftTupleCount != 0)
+            {
+                var assignmentRight = node.Right;
+                var namedTypeSymbol = semanticModel.GetSymbolInfo(assignmentRight).Symbol?.GetSymbolType();
+                if (namedTypeSymbol != null)
+                {
+                    var deconstructors = namedTypeSymbol.GetMembers("Deconstruct");
+                    if (deconstructors.Length == 1)
+                    {
+                        UsedSymbols.Add(deconstructors.First());
+                    }
+                    else if (deconstructors.Length > 1 && FindDeconstructor(deconstructors, leftTupleCount) is {} deconstructor)
+                    {
+                        UsedSymbols.Add(deconstructor);
+                    }
+                }
+            }
+
+            base.VisitAssignmentExpression(node);
+
+            static int GetTupleCount(ExpressionSyntax assignmentLeft)
+            {
+                var result = 0;
+                if (TupleExpressionSyntaxWrapper.IsInstance(assignmentLeft))
+                {
+                    result = ((TupleExpressionSyntaxWrapper)assignmentLeft).Arguments.Count;
+                }
+                else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignmentLeft)
+                    && (DeclarationExpressionSyntaxWrapper)assignmentLeft is { } leftDeclaration
+                    && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftDeclaration.Designation))
+                {
+                    result = ((ParenthesizedVariableDesignationSyntaxWrapper)leftDeclaration.Designation).Variables.Count;
+                }
+                return result;
+            }
+
+            static ISymbol FindDeconstructor(IEnumerable<ISymbol> deconstructors, int numberOfArguments) =>
+                deconstructors.FirstOrDefault(m => m.GetParameters().Count() == numberOfArguments && IsAccessibleOutsideTheType(m.DeclaredAccessibility));
+
+            static bool IsAccessibleOutsideTheType(Accessibility accessibility) =>
+                accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedAndInternal;
+        }
+
         public override void VisitAttribute(AttributeSyntax node)
         {
-            var semanticModel = GetSemanticModel(node);
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
             if (symbol != null
                 && symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
@@ -147,7 +202,7 @@ namespace SonarAnalyzer.Helpers
             // current type does not declare a default constructor.
             if (node.Initializer == null && IsKnownIdentifier(node.Identifier))
             {
-                var constructor = (IMethodSymbol)GetDeclaredSymbol(node);
+                var constructor = semanticModel.GetDeclaredSymbol(node);
                 var implicitlyCalledConstructor = GetImplicitlyCalledConstructor(constructor);
                 if (implicitlyCalledConstructor != null)
                 {
@@ -162,7 +217,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (IsKnownIdentifier(node.Identifier))
             {
-                var usage = GetFieldSymbolUsage(GetDeclaredSymbol(node));
+                var usage = GetFieldSymbolUsage(semanticModel.GetDeclaredSymbol(node));
                 usage.Declaration = node;
                 if (node.Initializer != null)
                 {
@@ -177,9 +232,9 @@ namespace SonarAnalyzer.Helpers
         {
             if (node.Initializer != null && IsKnownIdentifier(node.Identifier))
             {
-                var symbol = GetDeclaredSymbol(node);
+                var symbol = semanticModel.GetDeclaredSymbol(node);
                 UsedSymbols.Add(symbol);
-                StorePropertyAccess((IPropertySymbol)symbol, AccessorAccess.Set);
+                StorePropertyAccess(symbol, AccessorAccess.Set);
             }
             base.VisitPropertyDeclaration(node);
         }
@@ -207,7 +262,7 @@ namespace SonarAnalyzer.Helpers
                 ExpressionSyntax expressionSyntax when expressionSyntax.IsAnyKind(IncrementKinds) => SymbolAccess.Write | ParentAccessType(expressionSyntax),
                 // => node
                 ArrowExpressionClauseSyntax arrowExpressionClause when arrowExpressionClause.Parent is MethodDeclarationSyntax arrowMethod =>
-                        arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, GetSemanticModel(arrowMethod))
+                        arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, semanticModel)
                             ? SymbolAccess.None
                             : SymbolAccess.Read,
                 _ => SymbolAccess.Read
@@ -216,9 +271,9 @@ namespace SonarAnalyzer.Helpers
         private static SymbolAccess ArgumentAccessType(ArgumentSyntax argument) =>
             argument.RefOrOutKeyword.Kind() switch
             {
-                //  out Type node : out node
+                // out Type node : out node
                 SyntaxKind.OutKeyword => SymbolAccess.Write,
-                //  ref node
+                // ref node
                 SyntaxKind.RefKeyword => SymbolAccess.ReadWrite,
                 _ => SymbolAccess.Read
             };
@@ -231,7 +286,7 @@ namespace SonarAnalyzer.Helpers
         private ImmutableArray<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node)
             where TSyntaxNode : SyntaxNode
         {
-            var symbolInfo = GetSemanticModel(node).GetSymbolInfo(node);
+            var symbolInfo = semanticModel.GetSymbolInfo(node);
 
             return new[] { symbolInfo.Symbol }
                 .Concat(symbolInfo.CandidateSymbols)
@@ -291,7 +346,7 @@ namespace SonarAnalyzer.Helpers
             {
                 return AccessorAccess.Set;
             }
-            else if (node.IsInNameOfArgument(GetSemanticModel(node)))
+            else if (node.IsInNameOfArgument(semanticModel))
             {
                 // nameof(Prop) --> get/set
                 return AccessorAccess.Both;
@@ -305,9 +360,6 @@ namespace SonarAnalyzer.Helpers
 
         private bool IsKnownIdentifier(SyntaxToken identifier) =>
             knownSymbolNames.Contains(identifier.ValueText);
-
-        private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
-            GetSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
 
         private void TryStoreFieldAccess(IdentifierNameSyntax node, IEnumerable<ISymbol> symbols)
         {
@@ -331,9 +383,6 @@ namespace SonarAnalyzer.Helpers
 
         private SymbolUsage GetFieldSymbolUsage(ISymbol symbol) =>
             FieldSymbolUsages.GetOrAdd(symbol, s => new SymbolUsage(s));
-
-        private SemanticModel GetSemanticModel(SyntaxNode node) =>
-            compilation.GetSemanticModel(node.SyntaxTree);
 
         private static SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier) =>
             // All of the cases below could be parts of invocation or other expressions
