@@ -46,11 +46,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor DefaultRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
         private static readonly DiagnosticDescriptor EnableSslRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, EnableSslMessage, RspecStrings.ResourceManager).WithNotConfigurable();
 
-        private readonly Regex httpRegex = new Regex(@$"^http:\/\/(?!{ValidServerPattern}).+", RegexOptions.Singleline | RegexOptions.Compiled);
-        private readonly Regex ftpRegex = new Regex(@$"^ftp:\/\/.*@(?!{ValidServerPattern})", RegexOptions.Singleline | RegexOptions.Compiled);
-        private readonly Regex telnetRegex = new Regex(@$"^telnet:\/\/.*@(?!{ValidServerPattern})", RegexOptions.Singleline | RegexOptions.Compiled);
-        private readonly Regex telnetRegexForIdentifier = new Regex(@"Telnet(?![a-z])", RegexOptions.Singleline | RegexOptions.Compiled);
-        private readonly Regex validServerRegex = new Regex(ValidServerPattern, RegexOptions.Singleline | RegexOptions.Compiled);
+        private readonly Regex httpRegex = CreateCompiledRegex(@$"^http:\/\/(?!{ValidServerPattern}).+");
+        private readonly Regex ftpRegex = CreateCompiledRegex(@$"^ftp:\/\/.*@(?!{ValidServerPattern})");
+        private readonly Regex telnetRegex = CreateCompiledRegex(@$"^telnet:\/\/.*@(?!{ValidServerPattern})");
+        private readonly Regex telnetRegexForIdentifier = CreateCompiledRegex(@"Telnet(?![a-z])");
+        private readonly Regex validServerRegex = CreateCompiledRegex(ValidServerPattern);
 
         private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>
         {
@@ -158,5 +158,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
                 _ => string.Empty
             };
+
+        private static Regex CreateCompiledRegex(string pattern) =>
+            new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled);
     }
 }
