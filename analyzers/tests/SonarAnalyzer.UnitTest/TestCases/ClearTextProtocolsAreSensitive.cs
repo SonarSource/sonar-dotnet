@@ -11,20 +11,23 @@ namespace Tests.Diagnostics
         private const string a = "http://example.com"; // Noncompliant {{Using http protocol is insecure. Use https instead.}}
         private const string b = "https://example.com";
         private const string c = "http://localhost";
-        private const string d = "http://127.0.0.1";
-        private const string e = "http://::1";
+        private const string d = "http://localhost/path/query?query=xxx";
+        private const string e = "http://example.com/localhost/?query=xxx"; // Noncompliant
+        private const string f = "http://example.com/path/?query=localhost"; // Noncompliant
+        private const string g = "http://127.0.0.1";
+        private const string h = "http://::1";
 
-        private const string f = @"telnet://anonymous@example.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
-        private const string g = @"ssh://anonymous@example.com";
-        private const string h = @"telnet://anonymous@localhost";
-        private const string i = "telnet://anonymous@127.0.0.1";
-        private const string j = "telnet://anonymous@::1";
+        private const string i = @"telnet://anonymous@example.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
+        private const string j = @"ssh://anonymous@example.com";
+        private const string k = @"telnet://anonymous@localhost";
+        private const string l = "telnet://anonymous@127.0.0.1";
+        private const string m = "telnet://anonymous@::1";
 
-        private readonly string k = $"ftp://anonymous@example.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
-        private readonly string l = $"sftp://anonymous@example.com";
-        private readonly string m = $"ftp://anonymous@localhost";
-        private readonly string n = $"ftp://anonymous@127.0.0.1";
-        private readonly string o = $"ftp://anonymous@::1";
+        private readonly string n = $"ftp://anonymous@example.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
+        private readonly string o = $"sftp://anonymous@example.com";
+        private readonly string p = $"ftp://anonymous@localhost";
+        private readonly string q = $"ftp://anonymous@127.0.0.1";
+        private readonly string r = $"ftp://anonymous@::1";
 
         public void Method(string part, string user, string domain, string ftp)
         {
