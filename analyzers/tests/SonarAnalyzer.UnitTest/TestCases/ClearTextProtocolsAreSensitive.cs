@@ -43,7 +43,7 @@ namespace Tests.Diagnostics
             var j = "ftp://" + user + "@example.com"; // Compliant - FN (protocol is compliant when standallone, check previous case)
             var k = "ftp://anonymous@" + domain;// Noncompliant
             var l = $"ftp://anonymous@{domain}"; // Noncompliant
-            var m = $"{ftp}://anonymous@example.com"; // Compliant - FN
+            var m = $"{ftp}://anonymous@example.com"; // Compliant
 
             var n = @"telnet://anonymous@example.com"; // Noncompliant
             var telnetProtocolScheme = "telnet://"; // It's compliant when standalone
