@@ -5329,7 +5329,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
                 //["5329"],
                 //["5330"],
                 //["5331"],
-                //["5332"],
+                ["5332"] = "SECURITY_HOTSPOT",
                 //["5333"],
                 //["5334"],
                 //["5335"],

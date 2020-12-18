@@ -128,6 +128,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             new[]
             {
                 CoreMetadataReference.SystemNetHttp,
+                CoreMetadataReference.SystemNetMail,
                 CoreMetadataReference.SystemNetRequests,
                 CoreMetadataReference.SystemNetSecurity,
                 CoreMetadataReference.SystemNetServicePoint,
