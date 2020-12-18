@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -53,18 +54,21 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string GetIdentifierText(TIdentifierNameSyntax identifierNameSyntax);
 
+        protected abstract bool IsBinaryNegationOrInsideIfCondition(SyntaxNode node);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
-                c =>
-                {
-                    if (IsWeakProtocolUsed((TIdentifierNameSyntax)c.Node, c.SemanticModel))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                    }
-                },
-                SyntaxKind);
+            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, AnalyzeSyntax, SyntaxKind);
+
+        private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
+        {
+            var node = context.Node;
+            if (IsBinaryNegationOrInsideIfCondition(node) && IsWeakProtocolUsed((TIdentifierNameSyntax)node, context.SemanticModel))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+            }
+        }
 
         private bool IsWeakProtocolUsed(TIdentifierNameSyntax identifierNameSyntax, SemanticModel semanticModel) =>
             weakProtocols.Contains(GetIdentifierText(identifierNameSyntax))
