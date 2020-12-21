@@ -336,7 +336,7 @@ public class MultipleProjectsTest {
   public void linesOfCodeByLine() {
     String firstProjectFirstClass = getFileMeasure(FIRST_PROJECT_FIRST_CLASS_FILE, "ncloc_data").getValue();
     assertThat(firstProjectFirstClass)
-      .hasSize(91) // No other line
+      .hasSize(92) // No other line
       .contains("1=1")
       .contains("2=1")
       .contains("4=1")
