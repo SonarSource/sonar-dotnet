@@ -4582,7 +4582,7 @@
     <value>Critical Security Hotspot</value>
   </data>
   <data name="S5042_Description" xml:space="preserve">
-    <value>Expanding archive files is security-sensitive. For example, expanding archive files has led in the past to the following vulnerabilities:</value>
+    <value>Successful Zip Bomb attacks occur when an application expands untrusted archive files without controlling the size of the expanded data, which can lead to denial of service. A Zip bomb is usually a malicious archive file of a few kilobytes of compressed data but turned into gigabytes of uncompressed data. To achieve this extreme compression ratio, attackers will compress irrelevant data (eg: a long string of repeated bytes). </value>
   </data>
   <data name="S5042_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>

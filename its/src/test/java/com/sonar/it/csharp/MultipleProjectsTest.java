@@ -110,11 +110,8 @@ public class MultipleProjectsTest {
       .filter(x -> x.getRule().startsWith("csharpsquid:"))
       .collect(Collectors.toList());
 
-    assertThat(barIssues).hasSize(3);
+    assertThat(barIssues).hasSize(2);
 
-    assertThat(barIssues)
-      .filteredOn(e -> e.getRule().equalsIgnoreCase("csharpsquid:S1128"))
-      .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(2));
     assertThat(barIssues)
       .filteredOn(e -> e.getRule().equalsIgnoreCase("csharpsquid:S907"))
       .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(18));
@@ -176,7 +173,7 @@ public class MultipleProjectsTest {
   public void statementsAtFileLevel() {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_FIRST_CLASS_FILE, "statements")).isEqualTo(8);
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "statements")).isEqualTo(2);
-    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "statements")).isEqualTo(0);
+    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "statements")).isZero();
 
     assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "statements")).isEqualTo(3);
   }
@@ -198,7 +195,7 @@ public class MultipleProjectsTest {
   public void complexityAtFileLevel() {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_FIRST_CLASS_FILE, "complexity")).isEqualTo(13);
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "complexity")).isEqualTo(1);
-    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "complexity")).isEqualTo(0);
+    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "complexity")).isZero();
 
     assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "complexity")).isEqualTo(6);
   }
@@ -219,8 +216,8 @@ public class MultipleProjectsTest {
   @Test
   public void cognitiveComplexityAtFileLevel() {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_FIRST_CLASS_FILE, "cognitive_complexity")).isEqualTo(2);
-    assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "cognitive_complexity")).isEqualTo(0);
-    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "cognitive_complexity")).isEqualTo(0);
+    assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "cognitive_complexity")).isZero();
+    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "cognitive_complexity")).isZero();
 
     assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "cognitive_complexity")).isEqualTo(3);
   }
@@ -285,7 +282,7 @@ public class MultipleProjectsTest {
   @Test
   public void commentLinesAtFileLevel() {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_FIRST_CLASS_FILE, "comment_lines")).isEqualTo(1);
-    assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "comment_lines")).isEqualTo(0);
+    assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "comment_lines")).isZero();
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "comment_lines")).isEqualTo(8);
 
     assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "comment_lines")).isEqualTo(1);
@@ -308,7 +305,7 @@ public class MultipleProjectsTest {
   public void functionsAtFileLevel() {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_FIRST_CLASS_FILE, "functions")).isEqualTo(12);
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "functions")).isEqualTo(1);
-    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "functions")).isEqualTo(0);
+    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "functions")).isZero();
 
     assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "functions")).isEqualTo(2);
   }
@@ -330,7 +327,7 @@ public class MultipleProjectsTest {
   public void classesAtFileLevel() {
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_FIRST_CLASS_FILE, "classes")).isEqualTo(1);
     assertThat(getFileMeasureAsInt(FIRST_PROJECT_SECOND_CLASS_FILE, "classes")).isEqualTo(1);
-    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "classes")).isEqualTo(0);
+    assertThat(getFileMeasureAsInt(FIRST_PROJECT_ASSEMBLY_INFO_FILE, "classes")).isZero();
 
     assertThat(getFileMeasureAsInt(SECOND_PROJECT_FIRST_CLASS_FILE, "classes")).isEqualTo(1);
   }
@@ -339,6 +336,7 @@ public class MultipleProjectsTest {
   public void linesOfCodeByLine() {
     String firstProjectFirstClass = getFileMeasure(FIRST_PROJECT_FIRST_CLASS_FILE, "ncloc_data").getValue();
     assertThat(firstProjectFirstClass)
+      .hasSize(92) // No other line
       .contains("1=1")
       .contains("2=1")
       .contains("4=1")
@@ -359,10 +357,10 @@ public class MultipleProjectsTest {
       .contains("26=1")
       .contains("27=1")
       .contains("28=1");
-    assertThat(firstProjectFirstClass.length()).isEqualTo(92); // No other line
 
     String secondProjectFirstClassNcloc = getFileMeasure(SECOND_PROJECT_FIRST_CLASS_FILE, "ncloc_data").getValue();
     assertThat(secondProjectFirstClassNcloc)
+      .hasSize(111) // No other line
       .contains("2=1")
       .contains("3=1")
       .contains("4=1")
@@ -387,8 +385,6 @@ public class MultipleProjectsTest {
       .contains("24=1")
       .contains("26=1")
       .contains("27=1");
-
-    assertThat(secondProjectFirstClassNcloc.length()).isEqualTo(111); // No other line
   }
 
   /* Helper methods */

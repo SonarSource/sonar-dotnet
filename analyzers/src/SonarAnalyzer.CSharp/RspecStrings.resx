@@ -949,7 +949,7 @@
     <value>Although unnecessary using won't change anything to the produced application, removing them:</value>
   </data>
   <data name="S1128_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S1128_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4237,7 +4237,7 @@
     <value>When multiple, adjacent try statements have duplicate catch and/or finally blocks, they should be merged to consolidate the catch/finally logic for cleaner, more readable code. Note that this applies even when there is intervening code outside any try block.</value>
   </data>
   <data name="S2327_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S2327_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -12425,7 +12425,7 @@
     <value>Critical Security Hotspot</value>
   </data>
   <data name="S5042_Description" xml:space="preserve">
-    <value>Expanding archive files is security-sensitive. For example, expanding archive files has led in the past to the following vulnerabilities:</value>
+    <value>Successful Zip Bomb attacks occur when an application expands untrusted archive files without controlling the size of the expanded data, which can lead to denial of service. A Zip bomb is usually a malicious archive file of a few kilobytes of compressed data but turned into gigabytes of uncompressed data. To achieve this extreme compression ratio, attackers will compress irrelevant data (eg: a long string of repeated bytes). </value>
   </data>
   <data name="S5042_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -12446,10 +12446,10 @@
     <value>ready</value>
   </data>
   <data name="S5042_Tags" xml:space="preserve">
-    <value>cwe,owasp-a5</value>
+    <value>cwe,owasp-a6,owasp-a5</value>
   </data>
   <data name="S5042_Title" xml:space="preserve">
-    <value>Expanding archive files is security-sensitive</value>
+    <value>Expanding archive files without controlling resource consumption is security sensitive</value>
   </data>
   <data name="S5042_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
