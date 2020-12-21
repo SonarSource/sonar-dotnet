@@ -20,13 +20,14 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
-import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NoSourcesTest {
@@ -44,7 +45,12 @@ public class NoSourcesTest {
 
   @Test
   public void filesAtProjectLevel() {
-    assertThat(getMeasureAsInt(PROJECT, "violations")).isEqualTo(4);
+    List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
+    assertThat(issues).hasSize(1).hasOnlyOneElementSatisfying(e ->
+    {
+      assertThat(e.getLine()).isEqualTo(5);
+      assertThat(e.getRule()).isEqualTo("csharpsquid:S1186");
+    });
   }
 
 }
