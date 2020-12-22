@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
         where TExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S2077";
-        protected const string MessageFormat = "Make sure that executing SQL queries is safe here.";
+        protected const string MessageFormat = "Make sure that formatting this SQL query is safe here.";
 
         private readonly KnownType[] constructors = {
             KnownType.Microsoft_EntityFrameworkCore_RawSqlString,

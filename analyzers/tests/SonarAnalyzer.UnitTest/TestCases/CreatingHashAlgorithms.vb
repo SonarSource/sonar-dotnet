@@ -10,27 +10,26 @@ Namespace NS
 
             ' Review all instantiations of classes that inherit from HashAlgorithm, for example:
             Dim hashAlgo As HashAlgorithm = HashAlgorithm.Create()
-'                                           ^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that hashing data is safe here.}}
+'                                           ^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
             Dim hashAlgo2 As HashAlgorithm = HashAlgorithm.Create("SHA1")
-'                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that hashing data is safe here.}}
-
+'                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
 
             Dim sha As SHA1 = New SHA1CryptoServiceProvider()
-'                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that hashing data is safe here.}}
+'                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
 
             Dim md5 As MD5 = New MD5CryptoServiceProvider()
-'                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that hashing data is safe here.}}
+'                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
 
             ' ...
         End Sub
 
         Public Sub AdditionalTests(sha As SHA1CryptoServiceProvider)
             Dim myHash = New MyHashAlgorithm()
-'                        ^^^^^^^^^^^^^^^^^^^^^    {{Make sure that hashing data is safe here.}}
+'                        ^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
             myHash = New MyHashAlgorithm(123)       ' Noncompliant
 
             myHash = MyHashAlgorithm.Create()       ' Noncompliant
-'                    ^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that hashing data is safe here.}}
+'                    ^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
             myHash = MyHashAlgorithm.Create(42)     ' Noncompliant
 
             myHash = MyHashAlgorithm.CreateHash()  ' compliant - method name is not Create

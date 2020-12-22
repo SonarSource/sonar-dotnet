@@ -8,7 +8,7 @@ Imports System.Web
 Namespace Tests.Diagnostics
     Class Program
         Class MyIdentity
-            Implements IIdentity ' Noncompliant {{Make sure that permissions are controlled safely here.}}
+            Implements IIdentity ' Noncompliant {{Make sure controlling this permission is safe here.}}
 '                      ^^^^^^^^^
             Public ReadOnly Property Name As String Implements IIdentity.Name
                 Get

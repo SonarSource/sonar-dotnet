@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4834";
-        protected const string MessageFormat = "Make sure that permissions are controlled safely here.";
+        protected const string MessageFormat = "Make sure controlling this permission is safe here.";
 
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
 

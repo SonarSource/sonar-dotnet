@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4790",
-"message":  "Make sure that hashing data is safe here.",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4790",
-"message":  "Make sure that hashing data is safe here.",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4790",
-"message":  "Make sure that hashing data is safe here.",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4790",
-"message":  "Make sure that hashing data is safe here.",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
 "region":  {
