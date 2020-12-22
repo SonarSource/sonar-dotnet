@@ -30,9 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CollectionEmptinessChecking()
-        {
+        public void CollectionEmptinessChecking() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionEmptinessChecking.cs", new CollectionEmptinessChecking());
-        }
     }
 }
