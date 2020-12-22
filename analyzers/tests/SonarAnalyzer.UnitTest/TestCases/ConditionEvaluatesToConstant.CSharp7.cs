@@ -317,4 +317,21 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2528
+    public class Repro_2528
+    {
+        public int Count { get; }
+        public int Foo()
+        {
+            Repro_2528 x = null;
+            if (x == null) { } // Noncompliant
+            if ((x?.Count ?? 0) == 0) // FN
+            {
+                return -1;
+            }
+
+            return 1;
+        }
+    }
 }
