@@ -9,15 +9,15 @@
         {
             // Review all instantiations of classes that inherit from HashAlgorithm, for example:
             HashAlgorithm hashAlgo = HashAlgorithm.Create();
-//                                   ^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that hashing data is safe here.}}
+//                                   ^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
             HashAlgorithm hashAlgo2 = HashAlgorithm.Create("SHA1");
-//                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that hashing data is safe here.}}
+//                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
 
             SHA1 sha = new SHA1CryptoServiceProvider();
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that hashing data is safe here.}}
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
 
             MD5 md5 = new MD5CryptoServiceProvider();
-//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that hashing data is safe here.}}
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
 
             // ...
         }
