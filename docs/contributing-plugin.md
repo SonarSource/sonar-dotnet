@@ -1,5 +1,12 @@
 # Building, Testing and Debugging the SonarQube plugin
 
+## Setup your Java environment
+
+- Install the Java Development Kit (JDK) version 11 or later (make sure it's an LTS version) - you can install it from [here](https://www.azul.com/downloads/zulu-community/?version=java-11-lts&os=windows&architecture=x86-64-bit&package=jdk)
+- Install IntelliJ IDEA Community Edition
+- Install Apache Maven 
+- Setup the Maven Settings ([internal link](https://xtranet-sonarsource.atlassian.net/wiki/spaces/DEV/pages/776711/Developer+Box))
+
 ## Working with the code
 
 1. Clone [this repository](https://github.com/SonarSource/sonar-dotnet.git)
