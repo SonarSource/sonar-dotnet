@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
 {
     class Program
     {
-        class MyIdentity : IIdentity // Noncompliant {{Make sure that permissions are controlled safely here.}}
+        class MyIdentity : IIdentity // Noncompliant {{Make sure controlling this permission is safe here.}}
 //                         ^^^^^^^^^
         {
             public string Name => throw new NotImplementedException();
