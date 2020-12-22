@@ -261,5 +261,16 @@ namespace Tests.Diagnostics
       }
       var s = obj.ToString();
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2528
+    public int Repro_2528(Dictionary<string, string> dict)
+    {
+        if ((dict?.Count ?? 0) == 0)
+        {
+            return -1;
+        }
+
+        return dict.Count; // Noncompliant FP
+    }
   }
 }
