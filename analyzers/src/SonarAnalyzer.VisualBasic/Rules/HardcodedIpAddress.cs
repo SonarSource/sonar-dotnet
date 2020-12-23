@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -31,10 +30,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class HardcodedIpAddress : HardcodedIpAddressBase<LiteralExpressionSyntax>
+    public sealed class HardcodedIpAddress : HardcodedIpAddressBase<SyntaxKind, LiteralExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static bool IsVariableIdentifier(SyntaxNode syntaxNode) =>
+            syntaxNode is StatementSyntax
+            || syntaxNode is VariableDeclaratorSyntax
+            || syntaxNode is ParameterSyntax;
+
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
+
+        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
+
+        protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
 
         public HardcodedIpAddress()
             : base(AnalyzerConfiguration.Hotspot)
@@ -46,25 +53,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
         }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterCompilationStartAction(
-                ccc =>
-                {
-                    if (!IsEnabled(ccc.Options))
-                    {
-                        return;
-                    }
-
-                    context.RegisterSyntaxNodeActionInNonGenerated(
-                        GetAnalysisAction(rule),
-                        SyntaxKind.StringLiteralExpression);
-                });
-        }
-
         protected override string GetValueText(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Token.ValueText;
 
@@ -73,10 +61,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override string GetAssignedVariableName(LiteralExpressionSyntax stringLiteral) =>
             stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsVariableIdentifier)?.ToString().ToUpperInvariant();
-
-        private static bool IsVariableIdentifier(SyntaxNode syntaxNode) =>
-            syntaxNode is StatementSyntax ||
-            syntaxNode is VariableDeclaratorSyntax ||
-            syntaxNode is ParameterSyntax;
     }
 }

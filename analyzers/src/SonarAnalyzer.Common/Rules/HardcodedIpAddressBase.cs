@@ -20,9 +20,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -30,9 +32,22 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class HardcodedIpAddressBase<TLiteralExpression> : HotspotDiagnosticAnalyzer
+    public abstract class HardcodedIpAddressBase<TSyntaxKind, TLiteralExpression> : HotspotDiagnosticAnalyzer
+        where TSyntaxKind : struct
         where TLiteralExpression : SyntaxNode
     {
+        private static bool IsBroadcast(string ip) =>
+            ip.Equals("255.255.255.255", StringComparison.InvariantCultureIgnoreCase);
+
+        private static bool IsLoopbackAddress(string ip) =>
+            ip.StartsWith("127.") || IPv6LoopbackPattern.IsMatch(ip);
+
+        private static bool IsNonRoutableAddress(string ip) =>
+             ip.Equals("0.0.0.0") || IPv6NonRoutablePattern.IsMatch(ip);
+
+        private static bool DoesItLookLikeObjectIdentifier(string s) =>
+            s.StartsWith("2.5.");
+
         protected const string DiagnosticId = "S1313";
         protected const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
 
@@ -43,51 +58,87 @@ namespace SonarAnalyzer.Rules
                 "ASSEMBLY",
             };
 
+        private static readonly Regex IPv6LoopbackPattern = new Regex("^(?:0*:)*?:?0*1$", RegexOptions.Compiled);
+
+        private static readonly Regex IPv6NonRoutablePattern = new Regex("^(?:0*:)*?:?0*$", RegexOptions.Compiled);
+
+        private ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
+
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+
+        protected abstract TSyntaxKind SyntaxKind { get; }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
         protected abstract string GetAssignedVariableName(TLiteralExpression stringLiteral);
         protected abstract string GetValueText(TLiteralExpression literalExpression);
         protected abstract bool HasAttributes(TLiteralExpression literalExpression);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
+        {
+            get
+            {
+                if (supportedDiagnostics == null)
+                {
+                    supportedDiagnostics = ImmutableArray.Create(Rule);
+                }
+
+                return supportedDiagnostics;
+            }
+        }
 
         protected HardcodedIpAddressBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration)
         {
         }
 
-        protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
-            c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, AnalyzeLiteral, SyntaxKind);
+
+        private void AnalyzeLiteral(SyntaxNodeAnalysisContext context)
+        {
+            if (!IsEnabled(context.Options))
             {
-                var stringLiteral = (TLiteralExpression)c.Node;
-                var literalValue = GetValueText(stringLiteral);
-                if (IsLocalHost(literalValue))
-                {
-                    return;
-                }
+                return;
+            }
 
-                var variableName = GetAssignedVariableName(stringLiteral);
-                if (variableName != null &&
-                    IgnoredVariableNames.Any(variableName.Contains))
-                {
-                    return;
-                }
+            CheckForHardcodedIpAddresses(context);
+        }
 
-                if (HasAttributes(stringLiteral))
-                {
-                    return;
-                }
+        private void CheckForHardcodedIpAddresses(SyntaxNodeAnalysisContext context)
+        {
+            var stringLiteral = (TLiteralExpression)context.Node;
+            var variableName = GetAssignedVariableName(stringLiteral);
 
-                if (!IPAddress.TryParse(literalValue, out var address))
-                {
-                    return;
-                }
+            if (variableName != null &&
+                IgnoredVariableNames.Any(variableName.Contains))
+            {
+                return;
+            }
 
-                if (address.AddressFamily == AddressFamily.InterNetwork &&
-                    literalValue.Split('.').Length != 4)
-                {
-                    return;
-                }
+            if (HasAttributes(stringLiteral))
+            {
+                return;
+            }
 
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
-            };
+            var literalValue = GetValueText(stringLiteral);
 
-        private static bool IsLocalHost(string s) =>
-            s == "::" || s == "127.0.0.1";
+            if (!IPAddress.TryParse(literalValue, out var address))
+            {
+                return;
+            }
+
+            if (IsLoopbackAddress(literalValue) || IsNonRoutableAddress(literalValue) || IsBroadcast(literalValue) || DoesItLookLikeObjectIdentifier(literalValue))
+            {
+                return;
+            }
+
+            if (address.AddressFamily == AddressFamily.InterNetwork &&
+                literalValue.Split('.').Length != 4)
+            {
+                return;
+            }
+
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, stringLiteral.GetLocation(), literalValue));
+        }
     }
 }

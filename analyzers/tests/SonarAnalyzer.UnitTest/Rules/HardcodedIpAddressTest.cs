@@ -33,30 +33,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void HardcodedIpAddress_CS()
-        {
+        public void HardcodedIpAddress_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.cs",
-                new CSharp.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                                    new CSharp.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void HardcodedIpAddress_VB()
-        {
+        public void HardcodedIpAddress_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.vb",
-                new VisualBasic.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
-        }
+                                    new VisualBasic.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void HardcodedIpAddress_Not_Enabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\HardcodedIpAddress.cs",
-                new CSharp.HardcodedIpAddress());
+                                           new CSharp.HardcodedIpAddress());
 
             Verifier.VerifyNoIssueReported(@"TestCases\HardcodedIpAddress.vb",
-                new VisualBasic.HardcodedIpAddress());
+                                           new VisualBasic.HardcodedIpAddress());
         }
     }
 }
-
