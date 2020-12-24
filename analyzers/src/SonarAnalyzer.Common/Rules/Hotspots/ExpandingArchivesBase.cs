@@ -32,10 +32,7 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
-                    new MemberDescriptor(KnownType.System_IO_Compression_ZipFileExtensions, "ExtractToFile"),
-                    new MemberDescriptor(KnownType.System_IO_Compression_ZipArchiveEntry, "Open")));
+            InvocationTracker.Track(context, InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_IO_Compression_ZipFileExtensions, "ExtractToFile")));
         }
     }
 }

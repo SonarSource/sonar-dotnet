@@ -31,12 +31,12 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ExpandingArchives : ExpandingArchivesBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                 .WithNotConfigurable();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
+            ImmutableArray.Create(Rule);
 
         public ExpandingArchives() : this(AnalyzerConfiguration.Hotspot)
         {
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ExpandingArchives(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
+            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, Rule);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace ClassLibrary1
             ZipFileExtensions.ExtractToFile(entry, ""); // Noncompliant
             ZipFileExtensions.ExtractToFile(entry, "", true); // Noncompliant
 
-            stream = entry.Open(); // Noncompliant
+            stream = entry.Open(); // Compliant, method is not tracked
 
             entry.Delete(); // Compliant, method is not tracked
 

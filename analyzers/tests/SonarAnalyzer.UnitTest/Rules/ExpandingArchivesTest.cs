@@ -38,29 +38,29 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExpandingArchives_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.cs",
-                new CSharp.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferences);
+                                    new CSharp.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
+                                    additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpandingArchives_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.cs",
-                new CSharp.ExpandingArchives(),
-                additionalReferences: AdditionalReferences);
+                                           new CSharp.ExpandingArchives(),
+                                           additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpandingArchives_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.vb",
-                new VisualBasic.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferences);
+                                    new VisualBasic.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
+                                    additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpandingArchives_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.vb",
-                new VisualBasic.ExpandingArchives(),
-                additionalReferences: AdditionalReferences);
+                                           new VisualBasic.ExpandingArchives(),
+                                           additionalReferences: AdditionalReferences);
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
             MetadataReferenceFacade.GetSystemIoCompression();
