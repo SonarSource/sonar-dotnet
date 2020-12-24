@@ -39,28 +39,25 @@ namespace SonarAnalyzer.Rules
         private static bool IsBroadcast(string ip) =>
             ip.Equals("255.255.255.255", StringComparison.InvariantCultureIgnoreCase);
 
-        private static bool IsLoopbackAddress(string ip) =>
-            ip.StartsWith("127.") || IPv6LoopbackPattern.IsMatch(ip);
-
-        private static bool IsNonRoutableAddress(string ip) =>
-             ip.Equals("0.0.0.0") || IPv6NonRoutablePattern.IsMatch(ip);
-
         private static bool DoesItLookLikeObjectIdentifier(string s) =>
             s.StartsWith("2.5.");
 
         protected const string DiagnosticId = "S1313";
+
         protected const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
 
-        private static readonly ISet<string> IgnoredVariableNames =
+        private const int NumOfIPv4AddressParts = 4;
+
+        private readonly ISet<string> ignoredVariableNames =
             new HashSet<string>
             {
                 "VERSION",
                 "ASSEMBLY",
             };
 
-        private static readonly Regex IPv6LoopbackPattern = new Regex("^(?:0*:)*?:?0*1$", RegexOptions.Compiled);
+        private readonly Regex ipv6LoopbackPattern = new Regex("^(?:0*:)*?:?0*1$", RegexOptions.Compiled);
 
-        private static readonly Regex IPv6NonRoutablePattern = new Regex("^(?:0*:)*?:?0*$", RegexOptions.Compiled);
+        private readonly Regex ipv6NonRoutablePattern = new Regex("^(?:0*:)*?:?0*$", RegexOptions.Compiled);
 
         private ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
 
@@ -71,7 +68,9 @@ namespace SonarAnalyzer.Rules
         protected abstract DiagnosticDescriptor Rule { get; }
 
         protected abstract string GetAssignedVariableName(TLiteralExpression stringLiteral);
+
         protected abstract string GetValueText(TLiteralExpression literalExpression);
+
         protected abstract bool HasAttributes(TLiteralExpression literalExpression);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
@@ -109,8 +108,8 @@ namespace SonarAnalyzer.Rules
             var stringLiteral = (TLiteralExpression)context.Node;
             var variableName = GetAssignedVariableName(stringLiteral);
 
-            if (variableName != null &&
-                IgnoredVariableNames.Any(variableName.Contains))
+            if (variableName != null
+                && ignoredVariableNames.Any(variableName.Contains))
             {
                 return;
             }
@@ -132,13 +131,19 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            if (address.AddressFamily == AddressFamily.InterNetwork &&
-                literalValue.Split('.').Length != 4)
+            if (address.AddressFamily == AddressFamily.InterNetwork
+                && literalValue.Split('.').Length != NumOfIPv4AddressParts)
             {
                 return;
             }
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, stringLiteral.GetLocation(), literalValue));
         }
+
+        private bool IsLoopbackAddress(string ip) =>
+            ip.StartsWith("127.") || ipv6LoopbackPattern.IsMatch(ip);
+
+        private bool IsNonRoutableAddress(string ip) =>
+             ip.Equals("0.0.0.0") || ipv6NonRoutablePattern.IsMatch(ip);
     }
 }
