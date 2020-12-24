@@ -35,9 +35,11 @@ namespace SonarAnalyzer.Rules.CSharp
         // S2278 was deprecated in favor of S5547. Technically, there is no difference in the C# analyzer between
         // the 2 rules, but to be coherent with all the other languages, we still replace it with the new one
         private const string S2278DiagnosticId = "S2278";
+
         private const string S2278MessageFormat = "Use the recommended AES (Advanced Encryption Standard) instead.";
 
         private const string S5547DiagnosticId = "S5547";
+
         private const string S5547MessageFormat = "Use a strong cipher algorithm.";
 
         private static readonly DiagnosticDescriptor S2278 =
@@ -48,26 +50,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2278, S5547);
 
-        private static readonly ImmutableArray<KnownType> algorithmTypes =
+        internal override ImmutableArray<KnownType> AlgorithmTypes { get; } =
             ImmutableArray.Create(
                 KnownType.System_Security_Cryptography_DES,
                 KnownType.System_Security_Cryptography_TripleDES,
-                KnownType.System_Security_Cryptography_RC2
+                KnownType.System_Security_Cryptography_RC2,
+                KnownType.Org_BouncyCastle_Crypto_Engines_AesFastEngine
             );
-        internal override ImmutableArray<KnownType> AlgorithmTypes => algorithmTypes;
 
-        private static readonly ISet<string> algorithmParameterlessFactoryMethods = new HashSet<string>();
-        protected override ISet<string> AlgorithmParameterlessFactoryMethods => algorithmParameterlessFactoryMethods;
+        protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } = new HashSet<string>();
 
-        private static readonly ISet<string> algorithmParameteredFactoryMethods = new HashSet<string>
-        {
-            "System.Security.Cryptography.CryptoConfig.CreateFromName",
-            "System.Security.Cryptography.SymmetricAlgorithm.Create"
-        };
-        protected override ISet<string> AlgorithmParameteredFactoryMethods => algorithmParameteredFactoryMethods;
+        protected override ISet<string> AlgorithmParameteredFactoryMethods { get; } =
+            new HashSet<string>
+            {
+                "System.Security.Cryptography.CryptoConfig.CreateFromName",
+                "System.Security.Cryptography.SymmetricAlgorithm.Create"
+            };
 
-        private static readonly ISet<string> factoryParameterNames =
-            new HashSet<string> { "DES", "3DES", "TripleDES", "RC2" };
-        protected override ISet<string> FactoryParameterNames => factoryParameterNames;
+        protected override ISet<string> FactoryParameterNames { get; } = new HashSet<string> { "DES", "3DES", "TripleDES", "RC2" };
     }
 }

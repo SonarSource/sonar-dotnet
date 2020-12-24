@@ -19,8 +19,11 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -33,16 +36,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void InsecureEncryptionAlgorithm() =>
             Verifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.cs",
-                new InsecureEncryptionAlgorithm(),
-                additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
+                                    new InsecureEncryptionAlgorithm(),
+                                    additionalReferences: GetAdditionalReferences());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureEncryptionAlgorithm_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureEncryptionAlgorithm.CSharp9.cs",
-                new InsecureEncryptionAlgorithm(),
-                MetadataReferenceFacade.GetSystemSecurityCryptography());
+                                                      new InsecureEncryptionAlgorithm(),
+                                                      GetAdditionalReferences());
 #endif
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+            MetadataReferenceFacade.GetSystemSecurityCryptography()
+                .Concat(NuGetMetadataReference.BouncyCastle());
     }
 }

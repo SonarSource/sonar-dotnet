@@ -95,6 +95,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Org_BouncyCastle_Asn1_TeleTrust_TeleTrusTNamedCurves = new KnownType("Org.BouncyCastle.Asn1.TeleTrust.TeleTrusTNamedCurves");
         internal static readonly KnownType Org_BouncyCastle_Asn1_X9_ECNamedCurveTable = new KnownType("Org.BouncyCastle.Asn1.X9.ECNamedCurveTable");
         internal static readonly KnownType Org_BouncyCastle_Asn1_X9_X962NamedCurves = new KnownType("Org.BouncyCastle.Asn1.X9.X962NamedCurves");
+        internal static readonly KnownType Org_BouncyCastle_Crypto_Engines_AesFastEngine = new KnownType("Org.BouncyCastle.Crypto.Engines.AesFastEngine");
         internal static readonly KnownType Org_BouncyCastle_Crypto_Generators_DHParametersGenerator = new KnownType("Org.BouncyCastle.Crypto.Generators.DHParametersGenerator");
         internal static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new KnownType("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         internal static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new KnownType("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");

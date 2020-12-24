@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Org.BouncyCastle.Crypto.Engines;
 
 namespace Tests.Diagnostics
 {
@@ -83,6 +84,10 @@ namespace Tests.Diagnostics
 
                                                              // Noncompliant@+1
             var crypto = CryptoConfig.CreateFromName("DES"); // Noncompliant
+
+                                                     // Noncompliant@+1
+            var aesFastEngine = new AesFastEngine(); // Noncompliant
+//                                  ^^^^^^^^^^^^^
         }
     }
 }

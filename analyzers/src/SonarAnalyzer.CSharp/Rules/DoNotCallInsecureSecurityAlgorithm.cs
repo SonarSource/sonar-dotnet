@@ -33,8 +33,11 @@ namespace SonarAnalyzer.Rules.CSharp
     public abstract class DoNotCallInsecureSecurityAlgorithm : SonarDiagnosticAnalyzer
     {
         internal abstract ImmutableArray<KnownType> AlgorithmTypes { get; }
+
         protected abstract ISet<string> AlgorithmParameterlessFactoryMethods { get; }
+
         protected abstract ISet<string> AlgorithmParameteredFactoryMethods { get; }
+
         protected abstract ISet<string> FactoryParameterNames { get; }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
@@ -60,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) ||
                 IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation.ArgumentList))
             {
-                reportAllDiagnostics(context, invocation.GetLocation());
+                ReportAllDiagnostics(context, invocation.GetLocation());
             }
         }
 
@@ -108,11 +111,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (typeInfo.ConvertedType.DerivesFromAny(AlgorithmTypes))
             {
-                reportAllDiagnostics(context, objectCreation.Type.GetLocation());
+                ReportAllDiagnostics(context, objectCreation.Type.GetLocation());
             }
         }
 
-        private void reportAllDiagnostics(SyntaxNodeAnalysisContext context, Location location)
+        private void ReportAllDiagnostics(SyntaxNodeAnalysisContext context, Location location)
         {
             foreach (var supportedDiagnostic in SupportedDiagnostics)
             {
