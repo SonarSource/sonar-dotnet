@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text;
 
 namespace ClassLibrary1
 {
@@ -23,6 +24,9 @@ namespace ClassLibrary1
             archive.Entries.ToList()
                 .ForEach(e => e.ExtractToFile("")); // Noncompliant
 //                            ^^^^^^^^^^^^^^^^^^^
+
+            ZipFileExtensions.ExtractToDirectory(archive, ""); // Noncompliant
+            archive.ExtractToDirectory(""); // Noncompliant
         }
 
         public void ExtractEntry(ZipArchiveEntry entry)
@@ -35,6 +39,9 @@ namespace ClassLibrary1
 
             ZipFileExtensions.ExtractToFile(entry, ""); // Noncompliant
             ZipFileExtensions.ExtractToFile(entry, "", true); // Noncompliant
+
+            ZipFile.ExtractToDirectory("", ""); // Noncompliant
+            ZipFile.ExtractToDirectory("", "", Encoding.Default); // Noncompliant
 
             stream = entry.Open(); // Compliant, method is not tracked
 

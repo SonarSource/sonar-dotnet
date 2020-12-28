@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.IO.Compression
 Imports System.Linq
+Imports System.Text
 
 Namespace ClassLibrary1
     Public Class Class1
@@ -17,6 +18,9 @@ Namespace ClassLibrary1
 
             archive.Entries.ToList().ForEach(Sub(e) e.ExtractToFile("")) ' Noncompliant
 '                                                   ^^^^^^^^^^^^^^^^^^^
+
+            ZipFileExtensions.ExtractToDirectory(archive, "") ' Noncompliant
+            archive.ExtractToDirectory("") ' Noncompliant
         End Sub
 
         Public Sub ExtractEntry(ByVal entry As ZipArchiveEntry)
@@ -28,6 +32,9 @@ Namespace ClassLibrary1
 
             ZipFileExtensions.ExtractToFile(entry, "") ' Noncompliant
             ZipFileExtensions.ExtractToFile(entry, "", True) ' Noncompliant
+
+            ZipFile.ExtractToDirectory("", "") ' Noncompliant
+            ZipFile.ExtractToDirectory("", "", Encoding.Default) ' Noncompliant
 
             stream = entry.Open() ' Compliant, method is not tracked
 
