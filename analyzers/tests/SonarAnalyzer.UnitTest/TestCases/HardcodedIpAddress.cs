@@ -72,6 +72,12 @@ namespace Tests.Diagnostics
             string nonRoutableAddressV6_2 = "0:0:0:0:0:0:0:0"; //Compliant
             string nonRoutableAddressV6_3 = "0::0"; //Compliant
             string nonRoutableAddressV6_4 = "0000:0000:0000:0000:0000:0000:0000:0000"; //Compliant
+
+            // IPV6 invalid form
+            string invalidIPv6 = "1::2::3"; //Compliant
+            invalidIPv6 = "20015555:db8:1234:ffff:ffff:ffff:ffff:ffff"; // Compliant
+            invalidIPv6 = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff:1623:2316"; // Compliant
+            invalidIPv6 = ":::4"; // Compliant
         }
     }
 }

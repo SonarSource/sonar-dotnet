@@ -36,17 +36,10 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
         where TLiteralExpression : SyntaxNode
     {
-        private static bool IsBroadcast(string ip) =>
-            ip.Equals("255.255.255.255", StringComparison.InvariantCultureIgnoreCase);
-
-        private static bool DoesItLookLikeObjectIdentifier(string s) =>
-            s.StartsWith("2.5.");
-
         protected const string DiagnosticId = "S1313";
-
         protected const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
-
         private const int NumOfIPv4AddressParts = 4;
+        private const string IPv4Broadcast = "255.255.255.255";
 
         private readonly ISet<string> ignoredVariableNames =
             new HashSet<string>
@@ -55,9 +48,9 @@ namespace SonarAnalyzer.Rules
                 "ASSEMBLY",
             };
 
-        private readonly Regex ipv6LoopbackPattern = new Regex("^(?:0*:)*?:?0*1$", RegexOptions.Compiled);
+        private static readonly Regex IPv6LoopbackPattern = new Regex("^(?:0*:)*?:?0*1$", RegexOptions.Compiled);
 
-        private readonly Regex ipv6NonRoutablePattern = new Regex("^(?:0*:)*?:?0*$", RegexOptions.Compiled);
+        private static readonly Regex IPv6NonRoutablePattern = new Regex("^(?:0*:)*?:?0*$", RegexOptions.Compiled);
 
         private ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
 
@@ -126,13 +119,13 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            if (IsLoopbackAddress(literalValue) || IsNonRoutableAddress(literalValue) || IsBroadcast(literalValue) || DoesItLookLikeObjectIdentifier(literalValue))
+            if (IsLoopbackAddress(literalValue) || IsNonRoutableAddress(literalValue) || literalValue == IPv4Broadcast || LooksLikeOid(literalValue))
             {
                 return;
             }
 
             if (address.AddressFamily == AddressFamily.InterNetwork
-                && literalValue.Split('.').Length != NumOfIPv4AddressParts)
+                && literalValue.Count(x => x == '.') != NumOfIPv4AddressParts - 1)
             {
                 return;
             }
@@ -140,10 +133,13 @@ namespace SonarAnalyzer.Rules
             context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, stringLiteral.GetLocation(), literalValue));
         }
 
-        private bool IsLoopbackAddress(string ip) =>
-            ip.StartsWith("127.") || ipv6LoopbackPattern.IsMatch(ip);
+        private static bool IsLoopbackAddress(string ip) =>
+            ip.StartsWith("127.") || IPv6LoopbackPattern.IsMatch(ip);
 
-        private bool IsNonRoutableAddress(string ip) =>
-             ip.Equals("0.0.0.0") || ipv6NonRoutablePattern.IsMatch(ip);
+        private static bool IsNonRoutableAddress(string ip) =>
+             ip.Equals("0.0.0.0") || IPv6NonRoutablePattern.IsMatch(ip);
+
+        private static bool LooksLikeOid(string s) =>
+            s.StartsWith("2.5.");
     }
 }

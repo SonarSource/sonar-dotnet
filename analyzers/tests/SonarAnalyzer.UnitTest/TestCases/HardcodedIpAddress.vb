@@ -13,7 +13,7 @@ Namespace Tests.Diagnostics
 
         Public Sub Foo()
             Dim ip As String = "192.168.0.1" ' Noncompliant {{Make sure using this hardcoded IP address '192.168.0.1' is safe here.}}
-'                              ^^^^^^^^^^^^^
+            '                  ^^^^^^^^^^^^^
             ip = "300.0.0.0" ' Compliant, invalid IP
             ip = "127.0.0.1" ' Compliant, exception from the rule
             ip = "    127.0.0.0    " ' Compliant
@@ -40,7 +40,7 @@ Namespace Tests.Diagnostics
             Dim country_oid As String = "2.5.6.2" ' Compliant
             Dim subschema_oid As String = "2.5.20.1" ' Compliant
             Dim not_considered_as_an_oid As String = "2.59.6.2" ' Noncompliant
-'                                                    ^^^^^^^^^^
+            '                                        ^^^^^^^^^^
 
             ' IPV6 loopback
             Dim loopbackAddressV6_1 As String = "::1" ' Compliant
@@ -53,6 +53,12 @@ Namespace Tests.Diagnostics
             Dim nonRoutableAddressV6_2 As String = "0:0:0:0:0:0:0:0" ' Compliant
             Dim nonRoutableAddressV6_3 As String = "0::0" ' Compliant
             Dim nonRoutableAddressV6_4 As String = "0000:0000:0000:0000:0000:0000:0000:0000" ' Compliant
+
+            ' IPV6 invalid form
+            Dim invalidIPv6 As String = "1::2::3" ' Compliant
+            invalidIPv6 = "20015555:db8:1234:ffff:ffff:ffff:ffff:ffff" ' Compliant
+            invalidIPv6 = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff:1623:2316" ' Compliant
+            invalidIPv6 = ":::4" ' Compliant
         End Sub
     End Class
 End Namespace

@@ -32,11 +32,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class HardcodedIpAddress : HardcodedIpAddressBase<SyntaxKind, LiteralExpressionSyntax>
     {
-        private static bool IsVariableIdentifier(SyntaxNode syntaxNode) =>
-            syntaxNode is StatementSyntax
-            || syntaxNode is VariableDeclaratorSyntax
-            || syntaxNode is ParameterSyntax;
-
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
@@ -61,5 +56,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override string GetAssignedVariableName(LiteralExpressionSyntax stringLiteral) =>
             stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsVariableIdentifier)?.ToString().ToUpperInvariant();
+
+        private static bool IsVariableIdentifier(SyntaxNode syntaxNode) =>
+            syntaxNode is StatementSyntax
+            || syntaxNode is VariableDeclaratorSyntax
+            || syntaxNode is ParameterSyntax;
     }
 }
