@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References Dapper(string packageVersion = "1.50.5") => CreateWithCommandLine("Dapper", packageVersion);
         public static References EntityFramework(string packageVersion = "6.2.0") => CreateWithCommandLine("EntityFramework", packageVersion);
         public static References FluentAssertions(string packageVersion) => CreateWithCommandLine("FluentAssertions", packageVersion);
-        public static References JWT(string packageVersion = "6.1.0") => CreateWithCommandLine("JWT", packageVersion);
+        public static References JWT(string packageVersion) => CreateWithCommandLine("JWT", packageVersion);
         public static References Log4Net(string packageVersion, string targetFramework) => Create("log4net", packageVersion, targetFramework);
         public static References MicrosoftAspNetCore(string packageVersion) => CreateWithCommandLine("Microsoft.AspNetCore", packageVersion);
         public static References MicrosoftAspNetCoreDiagnostics(string packageVersion) => CreateWithCommandLine("Microsoft.AspNetCore.Diagnostics", packageVersion);

@@ -18,28 +18,22 @@ Namespace Tests.Diagnostics
             Dim byteArray As Byte() = { 16, 23 }
 
             Dim Decoded As String = Decoder.Decode(invalidToken) ' Noncompliant
-
             Decoded = Decoder.Decode(invalidParts) ' Noncompliant
 
             Decoded = Decoder.Decode(invalidToken, byteArray, false) ' Noncompliant
-
-            Decoded = Decoder.Decode(invalidToken, secret, false) ' Noncompliant
-
-            Dim DecodedObject As Object = Decoder.DecodeToObject(Of Object)(invalidToken, byteArray, false) ' Noncompliant
-
-            DecodedObject = Decoder.DecodeToObject(Of Object)(invalidToken, secret, false) ' Noncompliant
-
-            DecodedObject = Decoder.DecodeToObject(Of Object)(invalidToken) ' Noncompliant
-
-            Dim DecodedMap As IDictionary(Of String, Object) = decoder.DecodeToObject(invalidToken) ' Noncompliant
-
             Decoded = Decoder.Decode(invalidToken, byteArray, true) ' Compliant
 
-            DecodedObject = Decoder.DecodeToObject(Of Object)(invalidToken, byteArray, true) ' Compliant
-
+            Decoded = Decoder.Decode(invalidToken, secret, false) ' Noncompliant
             Decoded = Decoder.Decode(invalidToken, secret, true) ' Compliant
 
+            Dim DecodedObject As Object = Decoder.DecodeToObject(Of Object)(invalidToken, byteArray, false) ' Noncompliant
+            DecodedObject = Decoder.DecodeToObject(Of Object)(invalidToken, byteArray, true) ' Compliant
+
+            DecodedObject = Decoder.DecodeToObject(Of Object)(invalidToken, secret, false) ' Noncompliant
             DecodedObject = Decoder.DecodeToObject(Of Object)(invalidToken, secret, true) ' Compliant
+
+            DecodedObject = Decoder.DecodeToObject(Of Object)(invalidToken) ' Noncompliant
+            Dim DecodedMap As IDictionary(Of String, Object) = decoder.DecodeToObject(invalidToken) ' Noncompliant
 
         End Sub
 
@@ -48,28 +42,22 @@ Namespace Tests.Diagnostics
             Dim byteArray As Byte() = { 16, 23 }
 
             Dim Decoded As String = JwtDecoderExtensions.Decode(Decoder, invalidToken) ' Noncompliant
-
             Decoded = JwtDecoderExtensions.Decode(Decoder, invalidParts) ' Noncompliant
 
             Decoded = JwtDecoderExtensions.Decode(Decoder, invalidToken, byteArray, false) ' Noncompliant
-
-            Decoded = JwtDecoderExtensions.Decode(Decoder, invalidToken, secret, false) ' Noncompliant
-
-            Dim DecodedObject As Object = JwtDecoderExtensions.DecodeToObject(Of Object)(Decoder, invalidToken, byteArray, false) ' Noncompliant
-
-            DecodedObject = JwtDecoderExtensions.DecodeToObject(Of Object)(Decoder, invalidToken, secret, false) ' Noncompliant
-
-            DecodedObject = JwtDecoderExtensions.DecodeToObject(Of Object)(Decoder, invalidToken) ' Noncompliant
-
-            Dim DecodedMap As IDictionary(Of String, Object) = JwtDecoderExtensions.DecodeToObject(Decoder, invalidToken) ' Noncompliant
-
             Decoded = JwtDecoderExtensions.Decode(Decoder, invalidToken, byteArray, true) ' Compliant
 
-            DecodedObject = JwtDecoderExtensions.DecodeToObject(Of Object)(Decoder, invalidToken, byteArray, true) ' Compliant
-
+            Decoded = JwtDecoderExtensions.Decode(Decoder, invalidToken, secret, false) ' Noncompliant
             Decoded = JwtDecoderExtensions.Decode(Decoder, invalidToken, secret, true) ' Compliant
 
+            Dim DecodedObject As Object = JwtDecoderExtensions.DecodeToObject(Of Object)(Decoder, invalidToken, byteArray, false) ' Noncompliant
+            DecodedObject = JwtDecoderExtensions.DecodeToObject(Of Object)(Decoder, invalidToken, byteArray, true) ' Compliant
+
+            DecodedObject = JwtDecoderExtensions.DecodeToObject(Of Object)(Decoder, invalidToken, secret, false) ' Noncompliant
             DecodedObject = JwtDecoderExtensions.DecodeToObject(Of Object)(Decoder, invalidToken, secret, true) ' Compliant
+
+            DecodedObject = JwtDecoderExtensions.DecodeToObject(Of Object)(Decoder, invalidToken) ' Noncompliant
+            Dim DecodedMap As IDictionary(Of String, Object) = JwtDecoderExtensions.DecodeToObject(Decoder, invalidToken) ' Noncompliant
 
         End Sub
 

@@ -30,19 +30,13 @@ namespace SonarAnalyzer.Rules
         where TInvocationSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S5659";
-
         protected const bool JwtBuilderConstructorIsSafe = false;
-
         private const string MessageFormat = "Use only strong cipher algorithms when {0} this JWT.";
-
         private const string MessageVerifying = "verifying the signature of";
-
-        private const int NumberOfParametersInCaseOfStaticCall = 2;
+        private const int ExtensionStaticCallParameters = 2;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(VerifyingRule);
-
         protected DiagnosticDescriptor VerifyingRule { get; }
-
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
 
         protected abstract BuilderPatternCondition<TInvocationSyntax> CreateBuilderPatternCondition();
@@ -70,7 +64,7 @@ namespace SonarAnalyzer.Rules
                 Conditions.Or(
                     InvocationTracker.ArgumentIsBoolConstant("verify", false),
                     InvocationTracker.MethodHasParameters(1),
-                    InvocationTracker.MethodHasParameters(NumberOfParametersInCaseOfStaticCall)
+                    InvocationTracker.MethodHasParameters(ExtensionStaticCallParameters)
                     ));
 
             InvocationTracker.Track(context,
