@@ -35,18 +35,13 @@ namespace SonarAnalyzer.Rules.CSharp
         // S2278 was deprecated in favor of S5547. Technically, there is no difference in the C# analyzer between
         // the 2 rules, but to be coherent with all the other languages, we still replace it with the new one
         private const string S2278DiagnosticId = "S2278";
-
         private const string S2278MessageFormat = "Use the recommended AES (Advanced Encryption Standard) instead.";
 
         private const string S5547DiagnosticId = "S5547";
-
         private const string S5547MessageFormat = "Use a strong cipher algorithm.";
 
-        private static readonly DiagnosticDescriptor S2278 =
-            DiagnosticDescriptorBuilder.GetDescriptor(S2278DiagnosticId, S2278MessageFormat, RspecStrings.ResourceManager);
-
-        private static readonly DiagnosticDescriptor S5547 =
-            DiagnosticDescriptorBuilder.GetDescriptor(S5547DiagnosticId, S5547MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor S2278 = DiagnosticDescriptorBuilder.GetDescriptor(S2278DiagnosticId, S2278MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor S5547 = DiagnosticDescriptorBuilder.GetDescriptor(S5547DiagnosticId, S5547MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2278, S5547);
 

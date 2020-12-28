@@ -33,11 +33,8 @@ namespace SonarAnalyzer.Rules.CSharp
     public abstract class DoNotCallInsecureSecurityAlgorithm : SonarDiagnosticAnalyzer
     {
         internal abstract ImmutableArray<KnownType> AlgorithmTypes { get; }
-
         protected abstract ISet<string> AlgorithmParameterlessFactoryMethods { get; }
-
         protected abstract ISet<string> AlgorithmParameteredFactoryMethods { get; }
-
         protected abstract ISet<string> FactoryParameterNames { get; }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
@@ -60,8 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) ||
-                IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation.ArgumentList))
+            if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) || IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation.ArgumentList))
             {
                 ReportAllDiagnostics(context, invocation.GetLocation());
             }
@@ -70,9 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol,
             ArgumentListSyntax argumentList)
         {
-            if (argumentList == null ||
-                methodSymbol?.ContainingType == null ||
-                methodSymbol.Name == null)
+            if (argumentList == null || methodSymbol?.ContainingType == null || methodSymbol.Name == null)
             {
                 return false;
             }
@@ -84,8 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return AlgorithmParameterlessFactoryMethods.Contains(methodFullName);
             }
 
-            if (argumentList.Arguments.Count > 1 ||
-                !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
+            if (argumentList.Arguments.Count > 1 || !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
             {
                 return false;
             }
