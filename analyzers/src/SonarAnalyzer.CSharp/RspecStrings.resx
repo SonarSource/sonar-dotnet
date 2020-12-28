@@ -5393,7 +5393,7 @@
     <value>When the second and third operands of a ternary operator are the same, the operator will always return the same value regardless of the condition. Either the operator itself is pointless, or a mistake was made in coding it. </value>
   </data>
   <data name="S2758_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S2758_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
