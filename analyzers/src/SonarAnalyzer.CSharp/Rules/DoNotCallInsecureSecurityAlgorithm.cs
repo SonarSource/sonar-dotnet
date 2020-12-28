@@ -57,7 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) || IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation.ArgumentList))
+            if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes)
+                || IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation.ArgumentList))
             {
                 ReportAllDiagnostics(context, invocation.GetLocation());
             }
@@ -66,7 +67,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol,
             ArgumentListSyntax argumentList)
         {
-            if (argumentList == null || methodSymbol?.ContainingType == null || methodSymbol.Name == null)
+            if (argumentList == null
+                || methodSymbol?.ContainingType == null
+                || methodSymbol.Name == null)
             {
                 return false;
             }
@@ -78,7 +81,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return AlgorithmParameterlessFactoryMethods.Contains(methodFullName);
             }
 
-            if (argumentList.Arguments.Count > 1 || !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
+            if (argumentList.Arguments.Count > 1
+                || !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
             {
                 return false;
             }
@@ -97,7 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
 
             var typeInfo = context.SemanticModel.GetTypeInfo(objectCreation);
-            if (typeInfo.ConvertedType == null || typeInfo.ConvertedType is IErrorTypeSymbol)
+            if (typeInfo.ConvertedType == null
+                || typeInfo.ConvertedType is IErrorTypeSymbol)
             {
                 return;
             }
