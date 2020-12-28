@@ -40,6 +40,7 @@ namespace SonarAnalyzer.Rules
         protected const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
         private const int NumOfIPv4AddressParts = 4;
         private const string IPv4Broadcast = "255.255.255.255";
+        private const string IPv4NonRoutable = "0.0.0.0";
 
         private readonly ISet<string> ignoredVariableNames =
             new HashSet<string>
@@ -137,7 +138,7 @@ namespace SonarAnalyzer.Rules
             ip.StartsWith("127.") || IPv6LoopbackPattern.IsMatch(ip);
 
         private static bool IsNonRoutableAddress(string ip) =>
-             ip.Equals("0.0.0.0") || IPv6NonRoutablePattern.IsMatch(ip);
+             ip == IPv4NonRoutable || IPv6NonRoutablePattern.IsMatch(ip);
 
         private static bool LooksLikeOid(string s) =>
             s.StartsWith("2.5.");
