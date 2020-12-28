@@ -88,6 +88,8 @@ namespace Tests.Diagnostics
                                                      // Noncompliant@+1
             var aesFastEngine = new AesFastEngine(); // Noncompliant
 //                                  ^^^^^^^^^^^^^
+
+            var oid = CryptoConfig.MapNameToOID("DES"); // Compliant
         }
     }
 }
