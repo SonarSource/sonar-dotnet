@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Net;
@@ -39,8 +39,7 @@ namespace SonarAnalyzer.Rules
         private const int IPv4AddressParts  = 4;
         private const string IPv4Broadcast = "255.255.255.255";
 
-        private readonly ISet<string> ignoredVariableNames =
-            new HashSet<string>
+        private readonly string[] ignoredVariableNames =
             {
                 "VERSION",
                 "ASSEMBLY",
@@ -78,7 +77,7 @@ namespace SonarAnalyzer.Rules
             var stringLiteral = (TLiteralExpression)context.Node;
             var variableName = GetAssignedVariableName(stringLiteral);
 
-            if (variableName != null && ignoredVariableNames.Any(variableName.Contains))
+            if (variableName != null && ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
             {
                 return;
             }

@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             literalExpression.Ancestors().AnyOfKind(SyntaxKind.Attribute);
 
         protected override string GetAssignedVariableName(LiteralExpressionSyntax stringLiteral) =>
-            stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsVariableIdentifier)?.ToString().ToUpperInvariant();
+            stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsVariableIdentifier)?.ToString();
 
         private static bool IsVariableIdentifier(SyntaxNode syntaxNode) =>
             syntaxNode is StatementSyntax
