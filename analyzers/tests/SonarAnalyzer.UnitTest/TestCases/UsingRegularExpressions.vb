@@ -81,8 +81,8 @@ Namespace Tests.Diagnostics
 
         Public Sub Go()
             Const LocalUnsafeRegex As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
-            Dim a As New Regex(ClassUnsafeRegex)    ' False Negative
-            Dim b As New Regex(LocalUnsafeRegex)      ' False Negative
+            Dim a As New Regex(ClassUnsafeRegex)    ' Noncompliant
+            Dim b As New Regex(LocalUnsafeRegex)    ' Noncompliant
         End Sub
 
     End Class

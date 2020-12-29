@@ -98,8 +98,8 @@ namespace Tests.Diagnostics
         {
             const string LocalUnsafeRegex = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
 
-            new Regex(ClassUnsafeRegex); // False Negative
-            new Regex(LocalUnsafeRegex); // False Negative
+            new Regex(ClassUnsafeRegex);    // Noncompliant
+            new Regex(LocalUnsafeRegex);    // Noncompliant
         }
     }
 }
