@@ -34,7 +34,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class CertificateValidationCheck : CertificateValidationCheckBase<MethodBlockSyntax, ArgumentSyntax, ExpressionSyntax, IdentifierNameSyntax, AssignmentStatementSyntax, InvocationExpressionSyntax, ParameterSyntax, ModifiedIdentifierSyntax, LambdaExpressionSyntax>
+    public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
+        MethodBlockSyntax,
+        ArgumentSyntax,
+        ExpressionSyntax,
+        IdentifierNameSyntax,
+        AssignmentStatementSyntax,
+        InvocationExpressionSyntax,
+        ParameterSyntax,
+        ModifiedIdentifierSyntax,
+        LambdaExpressionSyntax,
+        MemberAccessExpressionSyntax>
     {
         public CertificateValidationCheck() : base(RspecStrings.ResourceManager) { }
 

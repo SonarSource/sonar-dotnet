@@ -27,7 +27,18 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CertificateValidationCheckBase<TMethodSyntax, TArgumentSyntax, TExpressionSyntax, TIdentifierNameSyntax, TAssignmentExpressionSyntax, TInvocationExpressionSyntax, TParameterSyntax, TVariableSyntax, TLambdaSyntax> : SonarDiagnosticAnalyzer
+    public abstract class CertificateValidationCheckBase<
+        TMethodSyntax,
+        TArgumentSyntax,
+        TExpressionSyntax,
+        TIdentifierNameSyntax,
+        TAssignmentExpressionSyntax,
+        TInvocationExpressionSyntax,
+        TParameterSyntax,
+        TVariableSyntax,
+        TLambdaSyntax,
+        TMemberAccessSyntax
+        > : SonarDiagnosticAnalyzer
         where TMethodSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
@@ -37,6 +48,7 @@ namespace SonarAnalyzer.Rules
         where TParameterSyntax : SyntaxNode
         where TVariableSyntax : SyntaxNode
         where TLambdaSyntax : SyntaxNode
+        where TMemberAccessSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4830";
         protected const string MessageFormat = "Enable server certificate validation on this SSL/TLS connection";
@@ -169,8 +181,7 @@ namespace SonarAnalyzer.Rules
             switch (ExtractArgumentExpressionNode(expression))
             {
                 case TIdentifierNameSyntax identifier:
-                    var identSymbol = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
-                    if (identSymbol != null && identSymbol.DeclaringSyntaxReferences.Length == 1)
+                    if (c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol is { }  identSymbol && identSymbol.DeclaringSyntaxReferences.Length == 1)
                     {
                         return IdentifierLocations(c, SyntaxFromReference(identSymbol.DeclaringSyntaxReferences.Single()));
                     }
@@ -178,11 +189,20 @@ namespace SonarAnalyzer.Rules
                 case TLambdaSyntax lambda:
                     return LambdaLocations(c, lambda);
                 case TInvocationExpressionSyntax invocation:
-                    var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-                    if (invSymbol != null && invSymbol.DeclaringSyntaxReferences.Length == 1 && SyntaxFromReference(invSymbol.DeclaringSyntaxReferences.Single()) is TMethodSyntax syntax)
+                    if (c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol is { } invSymbol
+                        && invSymbol.DeclaringSyntaxReferences.Length == 1
+                        && SyntaxFromReference(invSymbol.DeclaringSyntaxReferences.Single()) is TMethodSyntax syntax)
                     {
                         c.VisitedMethods.Add(syntax);
                         return InvocationLocations(c, syntax);
+                    }
+                    break;
+                case TMemberAccessSyntax memberAccess:
+                    if (c.Context.SemanticModel.GetSymbolInfo(memberAccess).Symbol is { } maSymbol
+                        && maSymbol.IsInType(KnownType.System_Net_Http_HttpClientHandler)
+                        && maSymbol.Name == "DangerousAcceptAnyServerCertificateValidator")
+                    {
+                        return new[] { memberAccess.GetLocation() }.ToImmutableArray();
                     }
                     break;
             }

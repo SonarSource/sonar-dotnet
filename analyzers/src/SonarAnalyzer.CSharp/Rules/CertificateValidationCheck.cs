@@ -33,7 +33,17 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class CertificateValidationCheck : CertificateValidationCheckBase<MethodDeclarationSyntax, ArgumentSyntax, ExpressionSyntax, IdentifierNameSyntax, AssignmentExpressionSyntax, InvocationExpressionSyntax, ParameterSyntax, VariableDeclaratorSyntax, ParenthesizedLambdaExpressionSyntax>
+    public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
+        MethodDeclarationSyntax,
+        ArgumentSyntax,
+        ExpressionSyntax,
+        IdentifierNameSyntax,
+        AssignmentExpressionSyntax,
+        InvocationExpressionSyntax,
+        ParameterSyntax,
+        VariableDeclaratorSyntax,
+        ParenthesizedLambdaExpressionSyntax,
+        MemberAccessExpressionSyntax>
     {
         public CertificateValidationCheck() : base(RspecStrings.ResourceManager) { }
 

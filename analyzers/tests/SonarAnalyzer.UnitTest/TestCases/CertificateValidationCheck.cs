@@ -87,6 +87,7 @@ namespace Tests.Diagnostics
             var httpHandler = new HttpClientHandler();          //This is not RemoteCertificateValidationCallback delegate type, but Func<...>
             httpHandler.ServerCertificateCustomValidationCallback += InvalidValidation;            //Noncompliant [flow9]
             httpHandler.ServerCertificateCustomValidationCallback += HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;    // Noncompliant [flow19]
+                                                                                                                                        // Secondary@-1 [flow19]
 
             //Generic signature check without RemoteCertificateValidationCallback
             var ShouldTrigger = new RelatedSignatureType();

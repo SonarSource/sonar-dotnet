@@ -250,6 +250,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
         internal static readonly KnownType System_MTAThreadAttribute = new KnownType("System.MTAThreadAttribute");
         internal static readonly KnownType System_Net_FtpWebRequest = new KnownType("System.Net.FtpWebRequest");
+        internal static readonly KnownType System_Net_Http_HttpClientHandler = new KnownType("System.Net.Http.HttpClientHandler");
         internal static readonly KnownType System_Net_Mail_SmtpClient = new KnownType("System.Net.Mail.SmtpClient");
         internal static readonly KnownType System_Net_NetworkCredential = new KnownType("System.Net.NetworkCredential");
         internal static readonly KnownType System_Net_Security_RemoteCertificateValidationCallback = new KnownType("System.Net.Security.RemoteCertificateValidationCallback");

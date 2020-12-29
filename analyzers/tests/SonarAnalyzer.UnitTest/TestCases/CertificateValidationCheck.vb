@@ -83,8 +83,10 @@ Namespace Tests.TestCases
         Private Sub GenericHandlerSignature()
             Dim Handler As New HttpClientHandler()          'This is not RemoteCertificateValidationCallback delegate type, but Func<...>
             Handler.ServerCertificateCustomValidationCallback = AddressOf InvalidValidation            'Noncompliant
+            ' Secondary@+1
             Handler.ServerCertificateCustomValidationCallback = Handler.DangerousAcceptAnyServerCertificateValidator            'Noncompliant
-            Handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator      'Noncompliant
+            ' Secondary@+1
+            Handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator  'Noncompliant
 
             'Generic signature check without RemoteCertificateValidationCallback
             Dim ShouldTrigger As New RelatedSignatureType()
