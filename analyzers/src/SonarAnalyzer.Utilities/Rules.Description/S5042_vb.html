@@ -30,6 +30,30 @@ For Each entry As ZipArchiveEntry in archive.Entries
     stream = entry.Open() ' Sensitive, the entry is about to be extracted
 Next
 </pre>
+<h2>Compliant Solution</h2>
+<pre>
+Const ThresholdRatio As Double = 10
+Const ThresholdSize As Integer = 1024 * 1024 * 1024 ' 1 GB
+Const ThresholdEntries As Integer = 10000
+Dim TotalSizeArchive, TotalEntryArchive, TotalEntrySize, Cnt As Integer
+Dim Buffer(1023) As Byte
+Using ZipToOpen As New FileStream("ZipBomb.zip", FileMode.Open), Archive As New ZipArchive(ZipToOpen, ZipArchiveMode.Read)
+    For Each Entry As ZipArchiveEntry In Archive.Entries
+        Using s As Stream = Entry.Open
+            TotalEntryArchive += 1
+            TotalEntrySize = 0
+            Do
+                Cnt = s.Read(Buffer, 0, Buffer.Length)
+                TotalEntrySize += Cnt
+                TotalSizeArchive += Cnt
+                If TotalEntrySize / Entry.CompressedLength &gt; ThresholdRatio Then Exit Do    ' Ratio between compressed And uncompressed data Is highly suspicious, looks Like a Zip Bomb Attack
+            Loop While Cnt &gt; 0
+        End Using
+        If TotalSizeArchive &gt; ThresholdSize Then Exit For       ' The uncompressed data size Is too much for the application resource capacity
+        If TotalEntryArchive &gt; ThresholdEntries Then Exit For   ' Too much entries in this archive, can lead to inodes exhaustion of the system
+    Next
+End Using
+</pre>
 <h2>See</h2>
 <ul>
   <li> <a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> -
