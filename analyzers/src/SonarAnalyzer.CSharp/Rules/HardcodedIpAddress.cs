@@ -36,15 +36,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
 
-        protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
-
         public HardcodedIpAddress()
-            : base(AnalyzerConfiguration.Hotspot)
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
         public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
+            : base(analyzerConfiguration, RspecStrings.ResourceManager)
         {
         }
 
