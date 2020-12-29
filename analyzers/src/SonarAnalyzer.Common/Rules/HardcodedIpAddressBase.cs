@@ -48,13 +48,10 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
         protected abstract TSyntaxKind SyntaxKind { get; }
 
         protected abstract string GetAssignedVariableName(TLiteralExpression stringLiteral);
-
         protected abstract string GetValueText(TLiteralExpression literalExpression);
-
         protected abstract bool HasAttributes(TLiteralExpression literalExpression);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
@@ -89,22 +86,13 @@ namespace SonarAnalyzer.Rules
 
             var literalValue = GetValueText(stringLiteral);
 
-            IPAddress address;
-
-            if (!IPAddress.TryParse(literalValue, out address))
-            {
-                return;
-            }
-
-            if (IPAddress.IsLoopback(address)
-                || address.GetAddressBytes().All(x => x == 0)
+            if (!IPAddress.TryParse(literalValue, out var address)
+                || IPAddress.IsLoopback(address)
+                || address.GetAddressBytes().All(x => x == 0)                       // Nonroutable 0.0.0.0 or 0::0
                 || literalValue == IPv4Broadcast
-                || literalValue.StartsWith("2.5."))
-            {
-                return;
-            }
-
-            if (address.AddressFamily == AddressFamily.InterNetwork && literalValue.Count(x => x == '.') != IPv4AddressParts  - 1)
+                || literalValue.StartsWith("2.5.")                                  // Looks like OID
+                || (address.AddressFamily == AddressFamily.InterNetwork
+                    && literalValue.Count(x => x == '.') != IPv4AddressParts - 1))
             {
                 return;
             }
