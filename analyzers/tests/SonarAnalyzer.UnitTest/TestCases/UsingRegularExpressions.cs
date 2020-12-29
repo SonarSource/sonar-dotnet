@@ -93,13 +93,18 @@ namespace Tests.Diagnostics
     class Repro_3298
     {
         private const string ClassUnsafeRegex = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
+        private string nontrackedField = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
 
         void Go()
         {
             const string LocalUnsafeRegex = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
+            string nontrackedVariable = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
 
             new Regex(ClassUnsafeRegex);    // Noncompliant
             new Regex(LocalUnsafeRegex);    // Noncompliant
+
+            new Regex(nontrackedField);     // not hardcoded strings are compliant
+            new Regex(nontrackedVariable);  // not hardcoded strings are compliant
         }
     }
 }

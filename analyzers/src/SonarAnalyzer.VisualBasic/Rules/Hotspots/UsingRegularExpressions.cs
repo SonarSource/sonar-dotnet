@@ -42,15 +42,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override string GetStringLiteralAtIndex(InvocationContext context, int index) =>
             context.Invocation is InvocationExpressionSyntax invocation
-                ? GetStringValue(invocation.ArgumentList, index)
+                ? GetStringValue(context.SemanticModel, invocation.ArgumentList, index)
                 : null;
 
         protected override string GetStringLiteralAtIndex(ObjectCreationContext context, int index) =>
             context.Expression is ObjectCreationExpressionSyntax objectCreation
-                ? GetStringValue(objectCreation.ArgumentList, index)
+                ? GetStringValue(context.SemanticModel, objectCreation.ArgumentList, index)
                 : null;
 
-        private string GetStringValue(ArgumentListSyntax argumentList, int index) =>
-            argumentList.Get(index).GetStringValue();
+        private static string GetStringValue(SemanticModel semanticModel, ArgumentListSyntax argumentList, int index) =>
+            argumentList.Get(index) is { } argument
+                ? argument.GetStringValue() ?? semanticModel.GetConstantValue(argument).Value as string
+                : null;
     }
 }

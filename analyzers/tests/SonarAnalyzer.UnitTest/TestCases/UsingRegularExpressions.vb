@@ -78,11 +78,15 @@ Namespace Tests.Diagnostics
     Class Repro_3298
 
         Private Const ClassUnsafeRegex As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
+        Private NontrackedField As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
 
         Public Sub Go()
             Const LocalUnsafeRegex As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
+            Dim NontrackedVariable As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
             Dim a As New Regex(ClassUnsafeRegex)    ' Noncompliant
             Dim b As New Regex(LocalUnsafeRegex)    ' Noncompliant
+            Dim c As New Regex(NontrackedField)     ' Not hardcoded strings are compliant
+            Dim d As New Regex(NontrackedVariable)  ' Not hardcoded strings are compliant
         End Sub
 
     End Class
