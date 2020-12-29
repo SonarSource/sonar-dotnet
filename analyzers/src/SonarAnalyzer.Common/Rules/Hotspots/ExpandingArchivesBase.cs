@@ -35,7 +35,8 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_IO_Compression_ZipFileExtensions, "ExtractToFile"),
-                    new MemberDescriptor(KnownType.System_IO_Compression_ZipArchiveEntry, "Open")));
+                    new MemberDescriptor(KnownType.System_IO_Compression_ZipFileExtensions, "ExtractToDirectory"),
+                    new MemberDescriptor(KnownType.System_IO_Compression_ZipFile, "ExtractToDirectory")));
         }
     }
 }
