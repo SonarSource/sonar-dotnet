@@ -30,11 +30,10 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4784";
         protected const string MessageFormat = "Make sure that using a regular expression is safe here.";
 
+        private readonly ISet<char> specialCharacters = new HashSet<char> { '{', '+', '*' };
+
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
-
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
-
-        private readonly ISet<char> SpecialCharacters = new HashSet<char> { '{', '+', '*' };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -58,18 +57,14 @@ namespace SonarAnalyzer.Rules
         protected abstract string GetStringLiteralAtIndex(ObjectCreationContext context, int index);
 
         private InvocationCondition SecondArgumentIsHardcodedRegex() =>
-            (context) =>
-                GetStringLiteralAtIndex(context, 1) is string hardcodedString &&
-                IsComplexRegex(hardcodedString);
+            context => GetStringLiteralAtIndex(context, 1) is string hardcodedString && IsComplexRegex(hardcodedString);
 
         private ObjectCreationCondition FirstArgumentIsHardcodedRegex() =>
-            (context) =>
-                GetStringLiteralAtIndex(context, 0) is string hardcodedString &&
-                IsComplexRegex(hardcodedString);
+            context => GetStringLiteralAtIndex(context, 0) is string hardcodedString && IsComplexRegex(hardcodedString);
 
         private bool IsComplexRegex(string s) =>
-            s != null &&
-            s.Length > 2 &&
-            s.ToCharArray().Count(c => SpecialCharacters.Contains(c)) > 1;
+            s != null
+            && s.Length > 2
+            && s.ToCharArray().Count(c => specialCharacters.Contains(c)) > 1;
     }
 }

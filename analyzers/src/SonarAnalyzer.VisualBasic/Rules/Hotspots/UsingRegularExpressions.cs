@@ -33,22 +33,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class UsingRegularExpressions : UsingRegularExpressionsBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        public UsingRegularExpressions() :
-            this(AnalyzerConfiguration.Hotspot)
-        {
-        }
+        public UsingRegularExpressions() : this(AnalyzerConfiguration.Hotspot) { }
 
         public UsingRegularExpressions(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, Rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, Rule);
         }
 
         protected override string GetStringLiteralAtIndex(InvocationContext context, int index) =>
