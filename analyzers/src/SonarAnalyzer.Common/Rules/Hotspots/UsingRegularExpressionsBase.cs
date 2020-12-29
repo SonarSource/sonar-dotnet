@@ -19,7 +19,9 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -28,12 +30,17 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4784";
-        protected const string MessageFormat = "Make sure that using a regular expression is safe here.";
+        private const string MessageFormat = "Make sure that using a regular expression is safe here.";
 
         private readonly ISet<char> specialCharacters = new HashSet<char> { '{', '+', '*' };
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected DiagnosticDescriptor Rule { get; }
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+
+        protected UsingRegularExpressionsBase(System.Resources.ResourceManager rspecStrings) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings).WithNotConfigurable();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
