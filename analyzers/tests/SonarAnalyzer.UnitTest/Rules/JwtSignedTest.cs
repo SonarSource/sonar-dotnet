@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using csharp = SonarAnalyzer.Rules.CSharp;
-using vbnet = SonarAnalyzer.Rules.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using csharp = SonarAnalyzer.Rules.CSharp;
+using vbnet = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,20 +32,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.cs", new csharp.JwtSigned(), additionalReferences: NuGetMetadataReference.JWT());
+            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.cs", new csharp.JwtSigned(), additionalReferences: NuGetMetadataReference.JWT("6.1.0"));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void JwtSigned_JWTDecoderExtensions_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.Extensions.cs", new csharp.JwtSigned(), additionalReferences: NuGetMetadataReference.JWT("7.3.1"));
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_CS_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\JwtSigned.CSharp9.cs", new csharp.JwtSigned(), NuGetMetadataReference.JWT());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\JwtSigned.CSharp9.cs", new csharp.JwtSigned(), NuGetMetadataReference.JWT("6.1.0"));
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void JwtSigned_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.vb", new vbnet.JwtSigned(), additionalReferences: NuGetMetadataReference.JWT());
+            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.vb", new vbnet.JwtSigned(), additionalReferences: NuGetMetadataReference.JWT("6.1.0"));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void JwtSigned_JWTDecoderExtensions_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\JwtSigned.Extensions.vb", new vbnet.JwtSigned(), additionalReferences: NuGetMetadataReference.JWT("7.3.1"));
     }
 }
-
-

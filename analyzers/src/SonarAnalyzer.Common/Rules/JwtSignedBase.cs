@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using System;
-using SonarAnalyzer.Helpers;
 using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
@@ -30,23 +30,21 @@ namespace SonarAnalyzer.Rules
         where TInvocationSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S5659";
+        protected const bool JwtBuilderConstructorIsSafe = false;
         private const string MessageFormat = "Use only strong cipher algorithms when {0} this JWT.";
         private const string MessageVerifying = "verifying the signature of";
-        protected const bool JwtBuilderConstructorIsSafe = false;
+        private const int ExtensionStaticCallParameters = 2;
 
-        protected readonly DiagnosticDescriptor verifyingRule;
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(verifyingRule);
-
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(VerifyingRule);
+        protected DiagnosticDescriptor VerifyingRule { get; }
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
 
         protected abstract BuilderPatternCondition<TInvocationSyntax> CreateBuilderPatternCondition();
 
-        protected JwtSignedBase(System.Resources.ResourceManager rspecResources)
-        {
-            verifyingRule = DiagnosticDescriptorBuilder
+        protected JwtSignedBase(System.Resources.ResourceManager rspecResources) =>
+            VerifyingRule = DiagnosticDescriptorBuilder
                 .GetDescriptor(DiagnosticId, string.Format(MessageFormat, MessageVerifying), rspecResources)
                 .WithNotConfigurable();
-        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -60,20 +58,27 @@ namespace SonarAnalyzer.Rules
                     ));
 
             InvocationTracker.Track(context,
+                InvocationTracker.MatchMethod(
+                    new MemberDescriptor(KnownType.JWT_JwtDecoderExtensions, "Decode"),
+                    new MemberDescriptor(KnownType.JWT_JwtDecoderExtensions, "DecodeToObject")),
+                Conditions.Or(
+                    InvocationTracker.ArgumentIsBoolConstant("verify", false),
+                    InvocationTracker.MethodHasParameters(1),
+                    InvocationTracker.MethodHasParameters(ExtensionStaticCallParameters)
+                    ));
+
+            InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.JWT_Builder_JwtBuilder, "Decode")),
                 InvocationTracker.IsInvalidBuilderInitialization(CreateBuilderPatternCondition())
                 );
         }
 
-        protected BuilderPatternDescriptor<TInvocationSyntax>[] JwtBuilderDescriptors(Func<TInvocationSyntax, bool> singleArgumentIsNotFalseLiteral)
-        {
-            return new[]
+        protected BuilderPatternDescriptor<TInvocationSyntax>[] JwtBuilderDescriptors(Func<TInvocationSyntax, bool> singleArgumentIsNotFalseLiteral) =>
+            new[]
             {
                 new BuilderPatternDescriptor<TInvocationSyntax>(true, InvocationTracker.MethodNameIs("MustVerifySignature")),
                 new BuilderPatternDescriptor<TInvocationSyntax>(false, InvocationTracker.MethodNameIs("DoNotVerifySignature")),
                 new BuilderPatternDescriptor<TInvocationSyntax>(singleArgumentIsNotFalseLiteral, InvocationTracker.MethodNameIs("WithVerifySignature"))
             };
-        }
     }
 }
-

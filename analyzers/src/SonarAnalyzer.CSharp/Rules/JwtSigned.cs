@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public JwtSigned() : base(RspecStrings.ResourceManager)
         {
-            InvocationTracker = new CSharpInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, verifyingRule);
+            InvocationTracker = new CSharpInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, VerifyingRule);
         }
 
         protected override BuilderPatternCondition<InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
@@ -44,4 +44,3 @@ namespace SonarAnalyzer.Rules.CSharp
                     || !invocation.ArgumentList.Arguments.Single().Expression.RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
     }
 }
-

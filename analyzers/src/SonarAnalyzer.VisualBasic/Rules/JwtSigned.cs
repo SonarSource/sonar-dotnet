@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         public JwtSigned() : base(RspecStrings.ResourceManager)
         {
-            InvocationTracker = new VisualBasicInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, verifyingRule);
+            InvocationTracker = new VisualBasicInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, VerifyingRule);
         }
 
         protected override BuilderPatternCondition<InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
@@ -43,7 +43,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 invocation =>
                     invocation.ArgumentList?.Arguments.Count != 1
                     || !invocation.ArgumentList.Arguments.Single().GetExpression().RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
-
     }
 }
-
