@@ -31,6 +31,7 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S4784";
         private const string MessageFormat = "Make sure that using a regular expression is safe here.";
+        private const int MinRegexLength = 3;
 
         private readonly ISet<char> specialCharacters = new HashSet<char> { '{', '+', '*' };
 
@@ -71,7 +72,7 @@ namespace SonarAnalyzer.Rules
 
         private bool IsComplexRegex(string s) =>
             s != null
-            && s.Length > 2
+            && s.Length >= MinRegexLength
             && s.ToCharArray().Count(c => specialCharacters.Contains(c)) > 1;
     }
 }
