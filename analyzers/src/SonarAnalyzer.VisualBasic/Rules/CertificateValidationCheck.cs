@@ -48,6 +48,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         public CertificateValidationCheck() : base(RspecStrings.ResourceManager) { }
 
+        internal override AbstractMethodParameterLookup<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
+            argumentListNode switch
+            {
+                InvocationExpressionSyntax invocation => new VisualBasicMethodParameterLookup(invocation.ArgumentList, method),
+                ObjectCreationExpressionSyntax ctor => new VisualBasicMethodParameterLookup(ctor.ArgumentList, method),
+                _ => throw new ArgumentException("Unexpected type.", nameof(argumentListNode)) // This should be throw only by bad usage of this method, not by input dependency
+            };
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             // C# += equivalent:
@@ -147,14 +155,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var syntax = reference.GetSyntax();
             return syntax is MethodStatementSyntax ? syntax.Parent : syntax;
         }
-
-        private protected override AbstractMethodParameterLookup<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
-            argumentListNode switch
-            {
-                InvocationExpressionSyntax invocation => new VisualBasicMethodParameterLookup(invocation.ArgumentList, method),
-                ObjectCreationExpressionSyntax ctor => new VisualBasicMethodParameterLookup(ctor.ArgumentList, method),
-                _ => throw new ArgumentException("Unexpected type.", nameof(argumentListNode)) // This should be throw only by bad usage of this method, not by input dependency
-            };
 
         private protected override KnownType GenericDelegateType() => KnownType.System_Func_T1_T2_T3_T4_TResult_VB;
     }

@@ -55,6 +55,7 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
+        internal /* for testing */ abstract AbstractMethodParameterLookup<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
         protected abstract Location ArgumentLocation(TArgumentSyntax argument);
         protected abstract TExpressionSyntax ArgumentExpression(TArgumentSyntax argument);
         protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
@@ -68,7 +69,6 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode LocalVariableScope(TVariableSyntax variable);
         protected abstract SyntaxNode ExtractArgumentExpressionNode(TExpressionSyntax expression);
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
-        private protected abstract AbstractMethodParameterLookup<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
         private protected abstract KnownType GenericDelegateType();
 
         protected CertificateValidationCheckBase(System.Resources.ResourceManager rspecResources) =>
