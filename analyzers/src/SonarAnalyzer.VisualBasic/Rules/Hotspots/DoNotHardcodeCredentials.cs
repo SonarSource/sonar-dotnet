@@ -34,15 +34,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         public DoNotHardcodeCredentials() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration analyzerConfiguration)
-            : base(RspecStrings.ResourceManager, analyzerConfiguration)
+        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration)
         {
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, Rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, Rule);
         }
 
-        protected override void InitializeActions(ParameterLoadingAnalysisContext context)
-        {
+        protected override void InitializeActions(ParameterLoadingAnalysisContext context) =>
             context.RegisterCompilationStartAction(
                 c =>
                 {
@@ -52,18 +50,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     }
 
                     c.RegisterSyntaxNodeActionInNonGenerated(
-                        new VariableDeclarationBannedWordsFinder(this).GetAnalysisAction(rule),
+                        new VariableDeclarationBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.VariableDeclarator);
 
                     c.RegisterSyntaxNodeActionInNonGenerated(
-                        new AssignmentExpressionBannedWordsFinder(this).GetAnalysisAction(rule),
+                        new AssignmentExpressionBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.SimpleAssignmentStatement);
 
                     c.RegisterSyntaxNodeActionInNonGenerated(
-                        new StringLiteralBannedWordsFinder(this).GetAnalysisAction(rule),
+                        new StringLiteralBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.StringLiteralExpression);
                 });
-        }
 
         private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
         {
@@ -72,16 +69,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Initializer?.Value.GetStringValue();
 
-
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Names[0].Identifier.ValueText; // We already tested the count in IsAssignedWithStringLiteral
 
-            protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax syntaxNode,
-                SemanticModel semanticModel) =>
-                syntaxNode.Names.Count == 1 &&
-                (syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression) &&
-                literalExpression.IsKind(SyntaxKind.StringLiteralExpression) &&
-                syntaxNode.Names[0].IsDeclarationKnownType(KnownType.System_String, semanticModel);
+            protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.Names.Count == 1
+                && syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression
+                && literalExpression.IsKind(SyntaxKind.StringLiteralExpression)
+                && syntaxNode.Names[0].IsDeclarationKnownType(KnownType.System_String, semanticModel);
         }
 
         private class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentStatementSyntax>
@@ -94,11 +89,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetVariableName(AssignmentStatementSyntax syntaxNode) =>
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
 
-            protected override bool IsAssignedWithStringLiteral(AssignmentStatementSyntax syntaxNode,
-                SemanticModel semanticModel) =>
-                syntaxNode.IsKind(SyntaxKind.SimpleAssignmentStatement) &&
-                syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel) &&
-                syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
+            protected override bool IsAssignedWithStringLiteral(AssignmentStatementSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.IsKind(SyntaxKind.SimpleAssignmentStatement)
+                && syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel)
+                && syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
         }
 
         /// <summary>

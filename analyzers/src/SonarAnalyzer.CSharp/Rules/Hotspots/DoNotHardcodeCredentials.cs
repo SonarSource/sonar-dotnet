@@ -33,11 +33,10 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public DoNotHardcodeCredentials() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration analyzerConfiguration)
-            : base(RspecStrings.ResourceManager, analyzerConfiguration)
+        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration)
         {
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, rule);
+            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, Rule);
+            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, Rule);
         }
 
         protected override void InitializeActions(ParameterLoadingAnalysisContext context)
@@ -51,15 +50,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     c.RegisterSyntaxNodeActionInNonGenerated(
-                        new VariableDeclarationBannedWordsFinder(this).GetAnalysisAction(rule),
+                        new VariableDeclarationBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.VariableDeclarator);
 
                     c.RegisterSyntaxNodeActionInNonGenerated(
-                        new AssignmentExpressionBannedWordsFinder(this).GetAnalysisAction(rule),
+                        new AssignmentExpressionBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.SimpleAssignmentExpression);
 
                     c.RegisterSyntaxNodeActionInNonGenerated(
-                        new StringLiteralBannedWordsFinder(this).GetAnalysisAction(rule),
+                        new StringLiteralBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.StringLiteralExpression);
                 });
         }
@@ -75,9 +74,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 syntaxNode.Identifier.ValueText;
 
             protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression &&
-                literalExpression.IsKind(SyntaxKind.StringLiteralExpression) &&
-                syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel);
+                syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression
+                && literalExpression.IsKind(SyntaxKind.StringLiteralExpression)
+                && syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel);
         }
 
         private class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentExpressionSyntax>
@@ -91,9 +90,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
 
             protected override bool IsAssignedWithStringLiteral(AssignmentExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
-                syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel) &&
-                syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
+                syntaxNode.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                && syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel)
+                && syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
         }
 
         /// <summary>
