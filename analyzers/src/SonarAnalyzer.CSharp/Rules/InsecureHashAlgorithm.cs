@@ -34,11 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2070";
         private const string MessageFormat = "Use a stronger hashing/asymmetric algorithm.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly ImmutableArray<KnownType> algorithmTypes =
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        internal override ImmutableArray<KnownType> AlgorithmTypes { get; } =
             ImmutableArray.Create(
                 KnownType.System_Security_Cryptography_SHA1,
                 KnownType.System_Security_Cryptography_MD5,
@@ -48,27 +48,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Security_Cryptography_HMACMD5,
                 KnownType.System_Security_Cryptography_HMACRIPEMD160
             );
-        internal override ImmutableArray<KnownType> AlgorithmTypes => algorithmTypes;
 
-        private static readonly ISet<string> algorithmParameterlessFactoryMethods = new HashSet<string>
-        {
-            "System.Security.Cryptography.HMAC.Create"
-        };
-        protected override ISet<string> AlgorithmParameterlessFactoryMethods => algorithmParameterlessFactoryMethods;
+        protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } =
+            new HashSet<string>
+            {
+                "System.Security.Cryptography.HMAC.Create"
+            };
 
-        private static readonly ISet<string> algorithmParameteredFactoryMethods = new HashSet<string>
-        {
-            "System.Security.Cryptography.CryptoConfig.CreateFromName",
-            "System.Security.Cryptography.HashAlgorithm.Create",
-            "System.Security.Cryptography.KeyedHashAlgorithm.Create",
-            "System.Security.Cryptography.AsymmetricAlgorithm.Create",
-            "System.Security.Cryptography.HMAC.Create"
-        };
-        protected override ISet<string> AlgorithmParameteredFactoryMethods => algorithmParameteredFactoryMethods;
+        protected override ISet<string> AlgorithmParameteredFactoryMethods { get; } =
+            new HashSet<string>
+            {
+                "System.Security.Cryptography.CryptoConfig.CreateFromName",
+                "System.Security.Cryptography.HashAlgorithm.Create",
+                "System.Security.Cryptography.KeyedHashAlgorithm.Create",
+                "System.Security.Cryptography.AsymmetricAlgorithm.Create",
+                "System.Security.Cryptography.HMAC.Create"
+            };
 
-        private static readonly ISet<string> factoryParameterNames =
-            new HashSet<string> { "SHA1", "MD5", "DSA", "HMACMD5", "HMACRIPEMD160", "RIPEMD160",
-                "RIPEMD160Managed" };
-        protected override ISet<string> FactoryParameterNames => factoryParameterNames;
+        protected override ISet<string> FactoryParameterNames { get; } = new HashSet<string> { "SHA1", "MD5", "DSA", "HMACMD5", "HMACRIPEMD160", "RIPEMD160", "RIPEMD160Managed" };
     }
 }

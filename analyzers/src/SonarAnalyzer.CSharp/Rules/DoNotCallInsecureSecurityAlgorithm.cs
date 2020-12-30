@@ -57,19 +57,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) ||
-                IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation.ArgumentList))
+            if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes)
+                || IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation.ArgumentList))
             {
-                reportAllDiagnostics(context, invocation.GetLocation());
+                ReportAllDiagnostics(context, invocation.GetLocation());
             }
         }
 
         private bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol,
             ArgumentListSyntax argumentList)
         {
-            if (argumentList == null ||
-                methodSymbol?.ContainingType == null ||
-                methodSymbol.Name == null)
+            if (argumentList == null || methodSymbol.ContainingType == null)
             {
                 return false;
             }
@@ -81,8 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return AlgorithmParameterlessFactoryMethods.Contains(methodFullName);
             }
 
-            if (argumentList.Arguments.Count > 1 ||
-                !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
+            if (argumentList.Arguments.Count > 1 || !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
             {
                 return false;
             }
@@ -108,11 +105,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (typeInfo.ConvertedType.DerivesFromAny(AlgorithmTypes))
             {
-                reportAllDiagnostics(context, objectCreation.Type.GetLocation());
+                ReportAllDiagnostics(context, objectCreation.Type.GetLocation());
             }
         }
 
-        private void reportAllDiagnostics(SyntaxNodeAnalysisContext context, Location location)
+        private void ReportAllDiagnostics(SyntaxNodeAnalysisContext context, Location location)
         {
             foreach (var supportedDiagnostic in SupportedDiagnostics)
             {

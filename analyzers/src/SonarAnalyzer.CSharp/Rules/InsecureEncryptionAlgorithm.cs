@@ -40,34 +40,28 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string S5547DiagnosticId = "S5547";
         private const string S5547MessageFormat = "Use a strong cipher algorithm.";
 
-        private static readonly DiagnosticDescriptor S2278 =
-            DiagnosticDescriptorBuilder.GetDescriptor(S2278DiagnosticId, S2278MessageFormat, RspecStrings.ResourceManager);
-
-        private static readonly DiagnosticDescriptor S5547 =
-            DiagnosticDescriptorBuilder.GetDescriptor(S5547DiagnosticId, S5547MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor S2278 = DiagnosticDescriptorBuilder.GetDescriptor(S2278DiagnosticId, S2278MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor S5547 = DiagnosticDescriptorBuilder.GetDescriptor(S5547DiagnosticId, S5547MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2278, S5547);
 
-        private static readonly ImmutableArray<KnownType> algorithmTypes =
+        internal override ImmutableArray<KnownType> AlgorithmTypes { get; } =
             ImmutableArray.Create(
                 KnownType.System_Security_Cryptography_DES,
                 KnownType.System_Security_Cryptography_TripleDES,
-                KnownType.System_Security_Cryptography_RC2
+                KnownType.System_Security_Cryptography_RC2,
+                KnownType.Org_BouncyCastle_Crypto_Engines_AesFastEngine
             );
-        internal override ImmutableArray<KnownType> AlgorithmTypes => algorithmTypes;
 
-        private static readonly ISet<string> algorithmParameterlessFactoryMethods = new HashSet<string>();
-        protected override ISet<string> AlgorithmParameterlessFactoryMethods => algorithmParameterlessFactoryMethods;
+        protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } = new HashSet<string>();
 
-        private static readonly ISet<string> algorithmParameteredFactoryMethods = new HashSet<string>
-        {
-            "System.Security.Cryptography.CryptoConfig.CreateFromName",
-            "System.Security.Cryptography.SymmetricAlgorithm.Create"
-        };
-        protected override ISet<string> AlgorithmParameteredFactoryMethods => algorithmParameteredFactoryMethods;
+        protected override ISet<string> AlgorithmParameteredFactoryMethods { get; } =
+            new HashSet<string>
+            {
+                "System.Security.Cryptography.CryptoConfig.CreateFromName",
+                "System.Security.Cryptography.SymmetricAlgorithm.Create"
+            };
 
-        private static readonly ISet<string> factoryParameterNames =
-            new HashSet<string> { "DES", "3DES", "TripleDES", "RC2" };
-        protected override ISet<string> FactoryParameterNames => factoryParameterNames;
+        protected override ISet<string> FactoryParameterNames { get; } = new HashSet<string> { "DES", "3DES", "TripleDES", "RC2" };
     }
 }
