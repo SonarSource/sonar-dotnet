@@ -29,20 +29,31 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicPropertyAccessTracker : PropertyAccessTracker<SyntaxKind>
     {
-        public VisualBasicPropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule, true)
-        {
-        }
-
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
-            new SyntaxKind[]
+            new[]
             {
                 SyntaxKind.SimpleMemberAccessExpression,
                 SyntaxKind.IdentifierName
             };
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
+
+        public VisualBasicPropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule, true) { }
+
+        public override PropertyAccessCondition MatchGetter() =>
+            context => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+
+        public override PropertyAccessCondition MatchSetter() =>
+            context => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+
+        public override PropertyAccessCondition AssignedValueIsConstant() =>
+            context =>
+            {
+                var assignment = (AssignmentStatementSyntax)context.Expression.Ancestors()
+                    .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement));
+
+                return assignment != null && assignment.Right.IsConstant(context.SemanticModel);
+            };
 
         protected override string GetPropertyName(SyntaxNode expression) =>
             ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
@@ -50,27 +61,5 @@ namespace SonarAnalyzer.Helpers
         protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
             expression.IsKind(SyntaxKind.IdentifierName) &&
             expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
-
-        #region Syntax-level checking methods
-
-        public override PropertyAccessCondition MatchGetter() =>
-            (context) =>
-                !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
-
-        public override PropertyAccessCondition MatchSetter() =>
-            (context) =>
-                ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
-
-        public override PropertyAccessCondition AssignedValueIsConstant() =>
-            (context) =>
-            {
-                var assignment = (AssignmentStatementSyntax)context.Expression.Ancestors()
-                    .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement));
-
-                return assignment != null &&
-                    assignment.Right.IsConstant(context.SemanticModel);
-            };
-
-        #endregion
     }
 }

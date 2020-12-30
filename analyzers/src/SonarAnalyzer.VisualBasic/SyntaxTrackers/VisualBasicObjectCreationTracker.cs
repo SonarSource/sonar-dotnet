@@ -28,35 +28,23 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
     {
-        public VisualBasicObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
-        {
-        }
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.ObjectCreationExpression };
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
-            new[] { SyntaxKind.ObjectCreationExpression };
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        public VisualBasicObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         internal override ObjectCreationCondition ArgumentAtIndexIsConst(int index) =>
-            (context) =>
-            {
-                var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
-                return argumentList != null &&
-                    argumentList.Arguments.Count > index &&
-                    argumentList.Arguments[index].GetExpression().IsConstant(context.SemanticModel);
-            };
+            context => ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList  is { } argumentList
+                        && argumentList.Arguments.Count > index
+                        && argumentList.Arguments[index].GetExpression().IsConstant(context.SemanticModel);
 
         internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName)
         {
             var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
             var values = VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName);
-            if (values.Length == 1 && values[0] is ExpressionSyntax valueSyntax)
-            {
-                return context.SemanticModel.GetConstantValue(valueSyntax).Value;
-            }
-            return null;
+            return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
+                ? context.SemanticModel.GetConstantValue(valueSyntax).Value
+                : null;
         }
     }
 }
