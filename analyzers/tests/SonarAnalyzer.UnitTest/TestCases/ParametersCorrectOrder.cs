@@ -193,4 +193,41 @@ namespace Tests.Diagnostics
             double doTheThing(int divisor, int dividend) => divide(dividend, divisor);  // Noncompliant
         }
     }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/3879
+    class NullableParam
+    {
+        void NotNullableParamVoid(int a, int b) // Secondary [D,E,F]
+        {
+            // Do nothing
+        }
+
+        void NullableParamValueVoid(int a, int? b)
+        {
+            if (b.HasValue)
+            {
+                NotNullableParamVoid(b.Value, a); // Noncompliant [D] FN
+                NotNullableParamVoid(a, b.Value); // Compliant [D]
+            }
+        }
+
+        void NullableParamCastVoid(int a, int? b)
+        {
+            if (b.HasValue)
+            {
+                NotNullableParamVoid((int)b, a); // Noncompliant [E] FN
+                NotNullableParamVoid(a, (int)b); // Compliant [E]
+            }
+        }
+
+        void NullableParamLocalValueVoid(int a, int? bParam)
+        {
+            if (bParam.HasValue)
+            {
+                var b = bParam.Value;
+                NotNullableParamVoid(b, a); // Noncompliant [F]
+                NotNullableParamVoid(a, b); // Compliant [F]
+            }
+        }
+    }
 }
