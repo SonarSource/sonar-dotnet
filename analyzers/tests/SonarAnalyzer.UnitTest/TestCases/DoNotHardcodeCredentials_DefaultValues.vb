@@ -94,6 +94,24 @@ Namespace Tests.Diagnostics
             Dim m As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretVariable    ' This will be FP
         End Sub
 
+        Public Sub Interpolations(Arg As String)
+            Dim SecretVariable As String = "literalValue"
+
+            Dim a As String = $"Server = localhost; Database = Test; User = SA; Password = {SecretConst}"       ' FN
+            Dim b As String = $"Server = localhost; Database = Test; User = SA; Password = {SecretField}"       ' FN
+            Dim c As String = $"Server = localhost; Database = Test; User = SA; Password = {SecretVariable}"    ' FN
+            Dim d As String = $"Server = localhost; Database = Test; User = SA; Password = {Arg}"               ' Compliant
+        End Sub
+
+        Public Sub StringFormat(Arg As String)
+            Dim SecretVariable As String = "literalValue"
+
+            Dim a As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", SecretConst)          ' FN
+            Dim b As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretField) ' FN
+            Dim c As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, SecretVariable) ' FN
+            Dim d As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arg)                  ' Compliant
+        End Sub
+
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)
             Const SecretLocalConst As String = "hardcodedSecret"
             Dim SecretVariable As String = "literalValue"

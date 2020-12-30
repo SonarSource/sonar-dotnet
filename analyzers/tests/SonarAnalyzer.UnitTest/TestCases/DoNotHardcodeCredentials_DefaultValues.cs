@@ -116,6 +116,27 @@ namespace Tests.Diagnostics
             var m = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // This will be FP
         }
 
+        public void Interpolations(string arg)
+        {
+            var secretVariable = "literalValue";
+            var a = $"Server = localhost; Database = Test; User = SA; Password = {secretConst}";    // FN
+            var b = $"Server = localhost; Database = Test; User = SA; Password = {secretField}";    // FN
+            var c = $"Server = localhost; Database = Test; User = SA; Password = {secretVariable}"; // FN
+            var d = $"Server = localhost; Database = Test; User = SA; Password = {arg}";            // Compliant
+            var e = $@"Server = localhost; Database = Test; User = SA; Password = {secretConst}";   // FN
+        }
+
+        public void StringFormat(string arg)
+        {
+            var secretVariable = "literalValue";
+
+            var a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);           // FN
+            var b = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretField);     // FN
+            var c = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, secretVariable);  // FN
+            var d = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", arg);                   // Compliant
+            var e = String.Format(@"Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);          // FN
+        }
+
         public void StandardAPI(SecureString secureString, string nonHardcodedPassword, byte[] byteArray, CspParameters cspParams)
         {
             const string secretLocalConst = "hardcodedSecret";
