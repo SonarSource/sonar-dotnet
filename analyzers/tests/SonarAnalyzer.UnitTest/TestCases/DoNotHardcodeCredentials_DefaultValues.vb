@@ -72,26 +72,45 @@ Namespace Tests.Diagnostics
             Dim SecretVariableConst As String = SecretConst
             Dim SecretVariableNull As String = Nothing
             Dim SecretVariableMethod As String = SomeMethod()
+            Dim a As String
 
-            Dim a As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretConst           ' FN
-            Dim b As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretField           ' FN
-            Dim c As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretFieldConst      ' FN
-            Dim d As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretVariable        ' FN
-            Dim e As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretVariableConst   ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & "hardcoded"           ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + "hardcoded"           ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretConst           ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretConst           ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretField           ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretField           ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldConst      ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariable        ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretVariable        ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableConst   ' FN
 
-            Dim f As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretFieldUninitialized  ' Compliant, not initialized to constant
-            Dim g As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretFieldNull           ' Compliant, not initialized to constant
-            Dim h As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretVariableNull        ' Compliant, not initialized to constant
-            Dim i As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretVariableMethod      ' Compliant, not initialized to constant
-            Dim j As String = "Server = localhost; Database = Test; User = SA; Password = " + Arg                       ' Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldUninitialized  ' Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldNull           ' Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableNull        ' Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableMethod      ' Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg                       ' Compliant, not initialized to constant
+
+            Const PasswordPrefixConst As String = "Password = "         ' Compliant by it's name
+            Dim PasswordPrefixVariable As String = "Password = "        ' Compliant by it's name
+            a = "Server = localhost;" & " Database = Test; User = SA; Password = " & SecretConst                ' FN
+            a = "Server = localhost;" & " Database = Test; User = SA; Pa" & "ssword = " & SecretConst           ' FN
+            a = "Server = localhost;" & " Database = Test; User = SA; " & PasswordPrefixConst & SecretConst     ' FN
+            a = "Server = localhost;" & " Database = Test; User = SA; " & PasswordPrefixVariable & SecretConst  ' FN
+            a = "Server = localhost;" & " Database = Test; User = SA; Password = " & SecretConst & " suffix"    ' FN
+            a = SomeMethod() & " Database = Test; User = SA; Password = " & SecretConst & " suffix"             ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretConst & Arg & " suffix"   ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg & SecretConst & " suffix"   ' Compliant
+            a = SecretConst & "Server = localhost; Database = Test; User = SA; Password = " & Arg               ' Compliant
+            a = "Server = localhost; Database = Test; User = SA; " & SomeMethod() & SecretConst                 ' Compliant
 
             ' Reassigned
             SecretVariableMethod = "literal"
-            Dim k As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretFieldMethod ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldMethod ' FN
             Arg = "literal"
-            Dim l As String = "Server = localhost; Database = Test; User = SA; Password = " + Arg               ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg               ' FN
             SecretVariable = SomeMethod()
-            Dim m As String = "Server = localhost; Database = Test; User = SA; Password = " + SecretVariable    ' This will be FP
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariable    ' This will be FP
         End Sub
 
         Public Sub Interpolations(Arg As String)

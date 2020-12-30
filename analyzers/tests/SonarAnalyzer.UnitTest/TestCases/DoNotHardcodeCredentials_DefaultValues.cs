@@ -94,26 +94,41 @@ namespace Tests.Diagnostics
             var secretVariableConst = secretConst;
             string secretVariableNull = null;
             var secretVariableMethod = someMethod();
+            string a;
 
-            var a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst;        // FN
-            var b = "Server = localhost; Database = Test; User = SA; Password = " + secretField;        // FN
-            var c = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldConst;   // FN
-            var d = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // FN
-            var e = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableConst;// FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + "hardcoded";        // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst;        // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretField;        // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldConst;   // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableConst;// FN
 
-            var f = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldUninitialized;   // Compliant, not initialized to constant
-            var g = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldNull;            // Compliant, not initialized to constant
-            var h = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableNull;         // Compliant, not initialized to constant
-            var i = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableMethod;       // Compliant, not initialized to constant
-            var j = "Server = localhost; Database = Test; User = SA; Password = " + arg;                        // Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldUninitialized;   // Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldNull;            // Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableNull;         // Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableMethod;       // Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                        // Compliant, not initialized to constant
+
+            const string passwordPrefixConst = "Password = ";       // Compliant by it's name
+            var passwordPrefixVariable = "Password = ";             // Compliant by it's name
+            a = "Server = localhost;" +" Database = Test; User = SA; Password = " + secretConst;                // FN
+            a = "Server = localhost;" +" Database = Test; User = SA; Pa" + "ssword = " + secretConst;           // FN
+            a = "Server = localhost;" +" Database = Test; User = SA; " + passwordPrefixConst + secretConst;     // FN
+            a = "Server = localhost;" +" Database = Test; User = SA; " + passwordPrefixVariable + secretConst;  // FN
+            a = "Server = localhost;" +" Database = Test; User = SA; Password = " + secretConst + " suffix";    // FN
+            a = someMethod() +" Database = Test; User = SA; Password = " + secretConst + " suffix";             // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst + arg + " suffix";  // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + arg + secretConst + " suffix";  // Compliant
+            a = secretConst + "Server = localhost; Database = Test; User = SA; Password = " + arg;              // Compliant
+            a = "Server = localhost; Database = Test; User = SA; " + someMethod() + secretConst;                // Compliant
 
             // Reassigned
             secretVariableMethod = "literal";
-            var k = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldMethod;  // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldMethod;  // FN
             arg = "literal";
-            var l = "Server = localhost; Database = Test; User = SA; Password = " + arg;                // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                // FN
             secretVariable = someMethod();
-            var m = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // This will be FP
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // This will be FP
         }
 
         public void Interpolations(string arg)
