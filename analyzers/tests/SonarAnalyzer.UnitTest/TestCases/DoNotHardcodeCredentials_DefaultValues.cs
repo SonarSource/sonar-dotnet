@@ -10,7 +10,14 @@ namespace Tests.Diagnostics
         public const string DBConnectionString = "Server=localhost; Database=Test; User=SA; Password=Secret123";    // Noncompliant
         public const string EditPasswordPageUrlToken = "{Account.EditPassword.PageUrl}"; // Compliant
 
-        private const string secret = "constantValue";
+        private const string secretConst = "constantValue";
+        private string secretField = "literalValue";
+        private string secretFieldConst = secretConst;
+        private string secretFieldUninitialized;
+        private string secretFieldNull = null;
+        private string secretFieldMethod = someMethod();
+
+        private static string someMethod() => "";
 
         public void Test(string user)
         {
@@ -81,11 +88,45 @@ namespace Tests.Diagnostics
             const string Localhost = "localhost";
         }
 
+        public void Concatenations(string arg)
+        {
+            var secretVariable = "literalValue";
+            var secretVariableConst = secretConst;
+            string secretVariableNull = null;
+            var secretVariableMethod = someMethod();
+
+            var a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst;        // FN
+            var b = "Server = localhost; Database = Test; User = SA; Password = " + secretField;        // FN
+            var c = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldConst;   // FN
+            var d = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // FN
+            var e = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableConst;// FN
+
+            var f = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldUninitialized;   // Compliant, not initialized to constant
+            var g = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldNull;            // Compliant, not initialized to constant
+            var h = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableNull;         // Compliant, not initialized to constant
+            var i = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableMethod;       // Compliant, not initialized to constant
+            var j = "Server = localhost; Database = Test; User = SA; Password = " + arg;                        // Compliant, not initialized to constant
+
+            // Reassigned
+            secretVariableMethod = "literal";
+            var k = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldMethod;  // FN
+            arg = "literal";
+            var l = "Server = localhost; Database = Test; User = SA; Password = " + arg;                // FN
+            secretVariable = someMethod();
+            var m = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // This will be FP
+        }
+
         public void StandardAPI(SecureString secureString, string nonHardcodedPassword, byte[] byteArray, CspParameters cspParams)
         {
+            const string secretLocalConst = "hardcodedSecret";
+            var secretVariable = "literalValue";
+            var secretVariableConst = secretConst;
+            string secretVariableNull = null;
+            var secretVariableMethod = someMethod();
             var networkCredential = new NetworkCredential();
             networkCredential.Password = nonHardcodedPassword;
             networkCredential.Domain = "hardcodedDomain";
+
             new NetworkCredential("username", secureString);
             new NetworkCredential("username", nonHardcodedPassword);
             new NetworkCredential("username", secureString, "domain");
@@ -100,14 +141,26 @@ namespace Tests.Diagnostics
             new PasswordDeriveBytes(nonHardcodedPassword, byteArray, "strHashName", 1, cspParams);
             new PasswordDeriveBytes(new byte[] { 1 }, byteArray, "strHashName", 1, cspParams);
 
-            new NetworkCredential("username", secret); // Noncompliant {{Please review this hard-coded password.}}
-            new NetworkCredential("username", "hardcoded"); // Noncompliant {{Please review this hard-coded password.}}
-            new NetworkCredential("username", "hardcoded", "domain"); // Noncompliant {{Please review this hard-coded password.}}
-            networkCredential.Password = "hardcoded"; // Noncompliant {{Please review this hard-coded password.}}
-            new PasswordDeriveBytes("hardcoded", byteArray); // Noncompliant {{Please review this hard-coded password.}}
-            new PasswordDeriveBytes("hardcoded", byteArray, cspParams); // Noncompliant {{Please review this hard-coded password.}}
-            new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1); // Noncompliant {{Please review this hard-coded password.}}
-            new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams); // Noncompliant {{Please review this hard-coded password.}}
+            new NetworkCredential("username", secretConst);         // Noncompliant {{Please review this hard-coded password.}}
+            new NetworkCredential("username", secretLocalConst);    // Noncompliant {{Please review this hard-coded password.}}
+            new NetworkCredential("username", secretField);         // FN
+            new NetworkCredential("username", secretFieldConst);    // FN
+            new NetworkCredential("username", secretVariable);      // FN
+            new NetworkCredential("username", secretVariableConst); // FN
+            new NetworkCredential("username", "hardcoded");         // Noncompliant {{Please review this hard-coded password.}}
+            new NetworkCredential("username", "hardcoded", "domain");   // Noncompliant {{Please review this hard-coded password.}}
+            networkCredential.Password = "hardcoded";               // Noncompliant {{Please review this hard-coded password.}}
+            new PasswordDeriveBytes("hardcoded", byteArray);        // Noncompliant {{Please review this hard-coded password.}}
+            new PasswordDeriveBytes("hardcoded", byteArray, cspParams);                     // Noncompliant {{Please review this hard-coded password.}}
+            new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1);              // Noncompliant {{Please review this hard-coded password.}}
+            new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams);   // Noncompliant {{Please review this hard-coded password.}}
+
+            // Compliant
+            new NetworkCredential("username", secretFieldUninitialized);
+            new NetworkCredential("username", secretFieldNull);
+            new NetworkCredential("username", secretFieldMethod);
+            new NetworkCredential("username", secretVariableNull);
+            new NetworkCredential("username", secretVariableMethod);
         }
 
         public void CompliantParameterUse(string pwd)
