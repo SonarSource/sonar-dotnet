@@ -90,6 +90,8 @@ namespace Tests.Diagnostics
 //                                  ^^^^^^^^^^^^^
 
             var oid = CryptoConfig.MapNameToOID("DES"); // Compliant
+
+            var unknown = new Unknown(); // Compliant // Error [CS0246]
         }
     }
 }
