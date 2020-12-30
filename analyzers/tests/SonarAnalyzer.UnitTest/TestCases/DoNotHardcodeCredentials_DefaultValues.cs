@@ -44,6 +44,9 @@ namespace Tests.Diagnostics
             bar = "Password=p"; // Noncompliant
 //          ^^^^^^^^^^^^^^^^^^
 
+            object obj;
+            obj = "Password=p"; // Compliant, only assignment to string is inspected
+
             foo = "password";
             foo = "password=";
             foo = "passwordpassword";

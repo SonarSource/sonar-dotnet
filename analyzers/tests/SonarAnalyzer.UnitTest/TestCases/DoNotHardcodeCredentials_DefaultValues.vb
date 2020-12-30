@@ -13,8 +13,8 @@ Namespace Tests.Diagnostics
         Private Const SecretConst As String = "constantValue"
         Private SecretField As String = "literalValue"
         Private SecretFieldConst As String = SecretConst
-        Private SecretFieldUninitialized As string
-        private SecretFieldNull  As string= Nothing
+        Private SecretFieldUninitialized As String
+        Private SecretFieldNull As String = Nothing
         Private SecretFieldMethod As String = SomeMethod()
 
         Private Shared Function SomeMethod() As String
@@ -31,11 +31,15 @@ Namespace Tests.Diagnostics
             Dim bar As String
             bar = "Password=p" 'Noncompliant ^13#18
 
+            Dim obj As Object
+            obj = "Password=p" ' Compliant, only assignment To String Is inspected
+
             foo = "password"
             foo = "password="
             foo = "passwordpassword"
             foo = "foo=1;password=1" 'Noncompliant
             foo = "foo=1password=1"
+
 
             Dim myPassword1 As String = Nothing
             Dim myPassword2 As String = ""

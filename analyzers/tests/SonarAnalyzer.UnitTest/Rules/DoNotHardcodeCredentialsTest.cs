@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -88,6 +89,18 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
                 new VB.DoNotHardcodeCredentials(),
                 AdditionalReferences);
+
+        [TestMethod]
+        public void DoNotHardcodeCredentials_ConfiguredCredentialsAreRead()
+        {
+            var cs = new CS.DoNotHardcodeCredentials();
+            cs.CredentialWords = "Lorem, ipsum";
+            cs.CredentialWords.Should().Be("Lorem, ipsum");
+
+            var vb = new CS.DoNotHardcodeCredentials();
+            vb.CredentialWords = "Lorem, ipsum";
+            vb.CredentialWords.Should().Be("Lorem, ipsum");
+        }
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
             MetadataReferenceFacade.GetSystemSecurityCryptography()

@@ -95,8 +95,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
 
             protected override bool IsAssignedWithStringLiteral(AssignmentStatementSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.IsKind(SyntaxKind.SimpleAssignmentStatement)
-                && syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel)
+                syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel)
                 && syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
         }
 
