@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
@@ -8,7 +9,6 @@ namespace Tests.Diagnostics
 {
     class CertificateValidationChecks
     {
-
         void FalseNegatives()
         {
             //Values from properties are not inspected at all
@@ -24,15 +24,15 @@ namespace Tests.Diagnostics
         {
             //Inline version
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
-//                                                                                                             ^^^^ Secondary@-1
+            //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
+            //                                                                                                 ^^^^ Secondary@-1
             //Secondary@+1
-            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => (((true)));    //Noncompliant 
+            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => (((true)));    //Noncompliant
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => false;
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => certificate.Subject == "Test";
 
             //Lambda block syntax
-                                                                                                                                    //Secondary@+1
+            //Secondary@+1
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => { return true; };    //Noncompliant
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) =>                      //Noncompliant
             {
@@ -84,8 +84,10 @@ namespace Tests.Diagnostics
 
         void GenericHandlerSignature()
         {
-            var httpHandler = new System.Net.Http.HttpClientHandler();          //This is not RemoteCertificateValidationCallback delegate type, but Func<...>
+            var httpHandler = new HttpClientHandler();          //This is not RemoteCertificateValidationCallback delegate type, but Func<...>
             httpHandler.ServerCertificateCustomValidationCallback += InvalidValidation;            //Noncompliant [flow9]
+            httpHandler.ServerCertificateCustomValidationCallback += HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;    // Noncompliant [flow19]
+                                                                                                                                        // Secondary@-1 [flow19]
 
             //Generic signature check without RemoteCertificateValidationCallback
             var ShouldTrigger = new RelatedSignatureType();
@@ -103,7 +105,7 @@ namespace Tests.Diagnostics
             if (true)
             {
                 //If there's only one Assignment, we will inspect it
-                                                                                    //Secondary@+1 [flow0]
+                //Secondary@+1 [flow0]
                 SingleAssignmentCB = InvalidValidationAsArgument;                   //Secondary [flow1]
                 FalseNegativeCB = InvalidValidation;                                //Compliant due to false negative, the second assignment is after usage of the variable
                 CompliantCB = InvalidValidation;                                    //Compliant due to further logic and more assingments
@@ -113,7 +115,7 @@ namespace Tests.Diagnostics
                 CompliantCB = null;                                                 //Compliant, there are more assignments, so there is a logic
                 DeclarationAssignmentCompliantCB = InvalidValidation;               //This is compliant due to the more assignments, first one is in variable initialization
             }
-                                                                                    //Secondary@+1 [flow0]
+            //Secondary@+1 [flow0]
             InitAsArgument(SingleAssignmentCB);                                     //Secondary [flow1]
             InitAsArgument(FalseNegativeCB);
             InitAsArgument(CompliantCB);
@@ -128,10 +130,10 @@ namespace Tests.Diagnostics
             InitAsOptionalArgument();
 
             //Call in nested class from root (this)
-            new InnerAssignmentClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary           
+            new InnerAssignmentClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
         }
 
-        void DelegateReturnedByFunction()
+        void DelegateReturnedByFunction(HttpClientHandler httpHandler)
         {
             CreateRQ().ServerCertificateValidationCallback += FindInvalid(false);       //Noncompliant [flow11]
             CreateRQ().ServerCertificateValidationCallback += FindInvalid();            //Noncompliant [flow12]
@@ -139,6 +141,8 @@ namespace Tests.Diagnostics
             CreateRQ().ServerCertificateValidationCallback += FindCompliant(true);
             CreateRQ().ServerCertificateValidationCallback += FindCompliantRecursive(3);
             CreateRQ().ServerCertificateValidationCallback += FindInvalidRecursive(3);  //Noncompliant [flow14]
+
+            httpHandler.ServerCertificateCustomValidationCallback += FindDangerous();   //Noncompliant [flow20]
         }
 
         void ConstructorArguments()
@@ -149,8 +153,8 @@ namespace Tests.Diagnostics
             using (var ms = new System.IO.MemoryStream())
             {
                 using (var ssl = new System.Net.Security.SslStream(ms, true, (sender, chain, certificate, SslPolicyErrors) => true))
-//                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
-//                                                                                                                            ^^^^ Secondary@-1
+                //                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
+                //                                                                                                            ^^^^ Secondary@-1
                 {
                 }
                 using (var ssl = new System.Net.Security.SslStream(ms, true, InvalidValidation))   //Noncompliant [flow16]
@@ -160,11 +164,10 @@ namespace Tests.Diagnostics
                 {
                 }
             }
-
         }
 
         #region Helpers
-        
+
         void InitAsArgument(RemoteCertificateValidationCallback Callback)   //This double-assigment will fire the seconday for each occurence twice
         {
             var cb = Callback;                                              //Secondary [flow1]
@@ -184,7 +187,7 @@ namespace Tests.Diagnostics
             else
                 InitAsArgumentRecursive(Callback, cnt - 1);
         }
-        
+
         void InitAsArgumentRecursiveNoInvocation(RemoteCertificateValidationCallback Callback, int cnt)
         {
             if (cnt == 0)
@@ -196,7 +199,7 @@ namespace Tests.Diagnostics
                 InitAsArgumentRecursiveNoInvocation(Callback, cnt - 1);
             }
         }
-        
+
         static HttpWebRequest CreateRQ()
         {
             return (HttpWebRequest)System.Net.HttpWebRequest.Create("http://localhost");
@@ -239,7 +242,7 @@ namespace Tests.Diagnostics
             }
             else
             {
-                return false; 
+                return false;
             }
         }
 
@@ -248,7 +251,7 @@ namespace Tests.Diagnostics
         {
             return certificate.Subject == "Test";
         }
-        
+
         bool CompliantValidationNegative(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             if (certificate.Subject != "Test")
@@ -282,7 +285,7 @@ namespace Tests.Diagnostics
                 return true; //Secondary [flow6]
             }
         }
-        
+
         bool AdvInvalidWithTryObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             try
@@ -325,7 +328,7 @@ namespace Tests.Diagnostics
 
             return true; //Secondary [flow8]
         }
-        
+
         bool AdvCompliantWithObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             Console.WriteLine("Log something");
@@ -360,7 +363,7 @@ namespace Tests.Diagnostics
             }
             return true;        //Compliant due to throw logic
         }
-                
+
         #endregion
 
         #region Find Validators
@@ -375,6 +378,11 @@ namespace Tests.Diagnostics
             return (sender, certificate, chain, SslPolicyErrors) => true;        //Secondary [flow13]
         }
 
+        static Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, Boolean> FindDangerous()
+        {
+            return HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;        //Secondary [flow20]
+        }
+
         static RemoteCertificateValidationCallback FindInvalid(bool useDelegate)   //All paths return noncompliant
         {
             if (useDelegate)
@@ -386,7 +394,7 @@ namespace Tests.Diagnostics
                 return (sender, certificate, chain, SslPolicyErrors) => true;   //Secondary [flow11]
             }
         }
-        
+
         static RemoteCertificateValidationCallback FindCompliant(bool Compliant)    //At least one path returns compliant => there is a logic and it is considered compliant
         {
             if (Compliant)
@@ -424,7 +432,7 @@ namespace Tests.Diagnostics
         }
 
         #endregion
-        
+
         #region False negatives
 
         static RemoteCertificateValidationCallback DelegateProperty
@@ -476,47 +484,37 @@ namespace Tests.Diagnostics
 
         class RelatedSignatureType
         {
-
             public Func<NonrelatedSignatureType, X509Certificate2, X509Chain, SslPolicyErrors, Boolean> Callback { get; set; }
-
         }
 
         class NonrelatedSignatureType
         {
             //Parameters are in order, that we do not inspect
             public Func<NonrelatedSignatureType, X509Chain, X509Certificate2, SslPolicyErrors, Boolean> Callback { get; set; }
-
         }
 
         class OptionalConstructorArguments
         {
-
             public OptionalConstructorArguments(object owner, int a = 0, int b = 0, RemoteCertificateValidationCallback cb = null)
             {
-
             }
-
         }
 
         class InnerAssignmentClass
         {
-
             public void InitAsArgument(RemoteCertificateValidationCallback callback)
             {
                 CertificateValidationChecks.CreateRQ().ServerCertificateValidationCallback += callback; //Noncompliant
             }
-
         }
 
         class NeighbourAssignmentClass
         {
-
             public void Init(RemoteCertificateValidationCallback callback)
             {
                 //Assignment from sibling class in nested tree
-                new InnerAssignmentClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary           
+                new InnerAssignmentClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
             }
-
         }
 
         #endregion

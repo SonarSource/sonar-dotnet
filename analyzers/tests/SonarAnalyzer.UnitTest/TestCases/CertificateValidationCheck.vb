@@ -1,6 +1,7 @@
 ﻿
 Imports System
 Imports System.Net
+Imports System.Net.Http
 Imports System.Net.Security
 Imports System.Security.Cryptography.X509Certificates
 
@@ -80,8 +81,12 @@ Namespace Tests.TestCases
         End Sub
 
         Private Sub GenericHandlerSignature()
-            Dim HttpHandler As New System.Net.Http.HttpClientHandler()          'This is not RemoteCertificateValidationCallback delegate type, but Func<...>
-            HttpHandler.ServerCertificateCustomValidationCallback = AddressOf InvalidValidation            'Noncompliant          
+            Dim Handler As New HttpClientHandler()          'This is not RemoteCertificateValidationCallback delegate type, but Func<...>
+            Handler.ServerCertificateCustomValidationCallback = AddressOf InvalidValidation            'Noncompliant
+            ' Secondary@+1
+            Handler.ServerCertificateCustomValidationCallback = Handler.DangerousAcceptAnyServerCertificateValidator            'Noncompliant
+            ' Secondary@+1
+            Handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator  'Noncompliant
 
             'Generic signature check without RemoteCertificateValidationCallback
             Dim ShouldTrigger As New RelatedSignatureType()
@@ -123,18 +128,19 @@ Namespace Tests.TestCases
 
             'Call in nested class from root (this)
             Dim Inner As New InnerAssignmentClass
-            Inner.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary           
+            Inner.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary
         End Sub
 
-        Private Sub DelegateReturnedByFunction()
-            CreateRQ.ServerCertificateValidationCallback = FindInvalid(False)         'Noncompliant
-            CreateRQ.ServerCertificateValidationCallback = FindInvalid()              'Noncompliant
-            CreateRQ.ServerCertificateValidationCallback = FindLambdaValidator()      'Noncompliant
+        Private Sub DelegateReturnedByFunction(Handler As HttpClientHandler)
+            CreateRQ.ServerCertificateValidationCallback = FindInvalid(False)           'Noncompliant
+            CreateRQ.ServerCertificateValidationCallback = FindInvalid()                'Noncompliant
+            CreateRQ.ServerCertificateValidationCallback = FindLambdaValidator()        'Noncompliant
             CreateRQ.ServerCertificateValidationCallback = FindCompliant(True)
             CreateRQ.ServerCertificateValidationCallback = FindCompliantRecursive(3)
-            CreateRQ.ServerCertificateValidationCallback = FindInvalidRecursive(3)    'Noncompliant
+            CreateRQ.ServerCertificateValidationCallback = FindInvalidRecursive(3)      'Noncompliant
+            Handler.ServerCertificateCustomValidationCallback = FindDangerous()         'Noncompliant
             'Specific cases for VB.NET
-            CreateRQ.ServerCertificateValidationCallback = FindInvalidVBSpecific()    'Noncompliant
+            CreateRQ.ServerCertificateValidationCallback = FindInvalidVBSpecific()      'Noncompliant
             CreateRQ.ServerCertificateValidationCallback = FindCompliant(True)
         End Sub
 
@@ -209,7 +215,7 @@ Namespace Tests.TestCases
             'Secondary@-7
             'Secondary@-8
             'Secondary@-9
-            'Secondary@-10            
+            'Secondary@-10
             'Secondary@-11
             'Secondary@-12
         End Function
@@ -283,7 +289,7 @@ Namespace Tests.TestCases
                 Return True 'Secondary
             Catch ex As Exception
                 System.Diagnostics.Trace.WriteLine(ex.Message)
-                Return True 'Secondary 
+                Return True 'Secondary
             End Try
         End Function
 
@@ -356,6 +362,10 @@ Namespace Tests.TestCases
 
         Private Function FindLambdaValidator() As RemoteCertificateValidationCallback
             Return Function(sender, certificate, chain, SslPolicyErrors) True       'Secondary
+        End Function
+
+        Private Function FindDangerous() As Func(Of HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, Boolean)
+            Return HttpClientHandler.DangerousAcceptAnyServerCertificateValidator   'Secondary
         End Function
 
         Private Function FindInvalid(UseDelegate As Boolean) As RemoteCertificateValidationCallback   'All paths return noncompliant
@@ -481,7 +491,7 @@ Namespace Tests.TestCases
             Public Sub Init(Callback As RemoteCertificateValidationCallback)
                 'Assignment from sibling class in nested tree
                 Dim Value As New InnerAssignmentClass()
-                Value.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary           
+                Value.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary
             End Sub
 
         End Class
@@ -495,7 +505,7 @@ Namespace Tests.TestCases
         Sub NeighbourAssignmentWithoutClass()
             'Assignment from sibling method in nested tree
             Dim Value As New InnerAssignmentClass()
-            Value.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary           
+            Value.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary
         End Sub
 
         Class InnerAssignmentClass
@@ -511,7 +521,7 @@ Namespace Tests.TestCases
             Public Sub Init(Callback As RemoteCertificateValidationCallback)
                 'Assignment from sibling class in nested tree
                 Dim Value As New InnerAssignmentClass()
-                Value.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary           
+                Value.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary
             End Sub
 
         End Class

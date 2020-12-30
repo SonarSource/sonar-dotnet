@@ -18,14 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
+using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using System.Linq;
+using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs",
-                new CertificateValidationCheck(),
+                new CS.CertificateValidationCheck(),
                 additionalReferences: GetAdditionalReferences());
 
 #if NET
@@ -44,14 +46,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\CertificateValidationCheck.CSharp9.cs",
-                new CertificateValidationCheck(),
+                new CS.CertificateValidationCheck(),
                 GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CertificateValidationCheck.TopLevelStatements.cs",
-                new CertificateValidationCheck(),
+                new CS.CertificateValidationCheck(),
                 GetAdditionalReferences());
 #endif
 
@@ -59,9 +61,27 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CertificateValidationCheck_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
-                new SonarAnalyzer.Rules.VisualBasic.CertificateValidationCheck(),
+                new VB.CertificateValidationCheck(),
                 additionalReferences: GetAdditionalReferences()
             );
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CreateParameterLookup_CS_ThrowsException()
+        {
+            var analyzer = new CS.CertificateValidationCheck();
+            Action a = () => analyzer.CreateParameterLookup(null, null);
+            a.Should().Throw<ArgumentException>();
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CreateParameterLookup_VB_ThrowsException()
+        {
+            var analyzer = new VB.CertificateValidationCheck();
+            Action a = () => analyzer.CreateParameterLookup(null, null);
+            a.Should().Throw<ArgumentException>();
+        }
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.GetSystemNetHttp()
@@ -69,4 +89,3 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(NetStandardMetadataReference.Netstandard);
     }
 }
-
