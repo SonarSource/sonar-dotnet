@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol,
             ArgumentListSyntax argumentList)
         {
-            if (argumentList == null || methodSymbol?.ContainingType == null || methodSymbol.Name == null)
+            if (argumentList == null || methodSymbol.ContainingType == null)
             {
                 return false;
             }
