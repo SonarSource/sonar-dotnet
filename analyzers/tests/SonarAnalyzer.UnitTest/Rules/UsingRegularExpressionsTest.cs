@@ -18,14 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,28 +34,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UsingRegularExpressions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingRegularExpressions.cs",
-                new CSharp.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingRegularExpressions_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingRegularExpressions.cs",
-                new CSharp.UsingRegularExpressions(),
+                new CS.UsingRegularExpressions(),
                 additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingRegularExpressions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingRegularExpressions.vb",
-                new VisualBasic.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
+                new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingRegularExpressions_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingRegularExpressions.vb",
-                new VisualBasic.UsingRegularExpressions(),
+                new VB.UsingRegularExpressions(),
                 additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
     }
 }
