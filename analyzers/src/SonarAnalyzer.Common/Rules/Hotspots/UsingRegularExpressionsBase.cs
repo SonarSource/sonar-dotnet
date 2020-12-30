@@ -19,7 +19,9 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -28,13 +30,18 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4784";
-        protected const string MessageFormat = "Make sure that using a regular expression is safe here.";
+        private const string MessageFormat = "Make sure that using a regular expression is safe here.";
+        private const int MinRegexLength = 3;
 
+        private readonly ISet<char> specialCharacters = new HashSet<char> { '{', '+', '*' };
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected DiagnosticDescriptor Rule { get; }
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
-
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
 
-        private readonly ISet<char> SpecialCharacters = new HashSet<char> { '{', '+', '*' };
+        protected UsingRegularExpressionsBase(System.Resources.ResourceManager rspecStrings) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings).WithNotConfigurable();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -58,18 +65,14 @@ namespace SonarAnalyzer.Rules
         protected abstract string GetStringLiteralAtIndex(ObjectCreationContext context, int index);
 
         private InvocationCondition SecondArgumentIsHardcodedRegex() =>
-            (context) =>
-                GetStringLiteralAtIndex(context, 1) is string hardcodedString &&
-                IsComplexRegex(hardcodedString);
+            context => GetStringLiteralAtIndex(context, 1) is string hardcodedString && IsComplexRegex(hardcodedString);
 
         private ObjectCreationCondition FirstArgumentIsHardcodedRegex() =>
-            (context) =>
-                GetStringLiteralAtIndex(context, 0) is string hardcodedString &&
-                IsComplexRegex(hardcodedString);
+            context => GetStringLiteralAtIndex(context, 0) is string hardcodedString && IsComplexRegex(hardcodedString);
 
         private bool IsComplexRegex(string s) =>
-            s != null &&
-            s.Length > 2 &&
-            s.ToCharArray().Count(c => SpecialCharacters.Contains(c)) > 1;
+            s != null
+            && s.Length >= MinRegexLength
+            && s.ToCharArray().Count(c => specialCharacters.Contains(c)) > 1;
     }
 }

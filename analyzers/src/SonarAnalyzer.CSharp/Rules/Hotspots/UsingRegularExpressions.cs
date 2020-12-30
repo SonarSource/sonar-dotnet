@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,35 +31,27 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class UsingRegularExpressions : UsingRegularExpressionsBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
+        public UsingRegularExpressions() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
-
-        public UsingRegularExpressions() :
-            this(AnalyzerConfiguration.Hotspot)
+        public UsingRegularExpressions(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
         {
-        }
-
-        public UsingRegularExpressions(IAnalyzerConfiguration analyzerConfiguration)
-        {
-            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
+            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, Rule);
+            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, Rule);
         }
 
         protected override string GetStringLiteralAtIndex(InvocationContext context, int index) =>
             context.Invocation is InvocationExpressionSyntax invocation
-                ? GetStringValue(invocation.ArgumentList, index)
+                ? GetStringValue(context.SemanticModel, invocation.ArgumentList, index)
                 : null;
 
         protected override string GetStringLiteralAtIndex(ObjectCreationContext context, int index) =>
             context.Expression is ObjectCreationExpressionSyntax objectCreation
-                ? GetStringValue(objectCreation.ArgumentList, index)
+                ? GetStringValue(context.SemanticModel, objectCreation.ArgumentList, index)
                 : null;
 
-        private string GetStringValue(ArgumentListSyntax argumentList, int index) =>
-            argumentList.Get(index).GetStringValue();
+        private static string GetStringValue(SemanticModel semanticModel, ArgumentListSyntax argumentList, int index) =>
+            argumentList.Get(index) is { } argument
+                ? argument.GetStringValue() ?? semanticModel.GetConstantValue(argument).Value as string
+                : null;
     }
 }
