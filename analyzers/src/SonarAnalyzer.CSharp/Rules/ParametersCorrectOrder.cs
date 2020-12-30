@@ -31,8 +31,17 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<ArgumentSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+        private static SyntaxToken? GetExpressionSyntaxIdentifier(ExpressionSyntax expressionSyntax) =>
+            expressionSyntax switch
+            {
+                IdentifierNameSyntax identifierNameSyntax => identifierNameSyntax.Identifier,
+                MemberAccessExpressionSyntax memberAccessExpressionSyntax => GetExpressionSyntaxIdentifier(memberAccessExpressionSyntax.Expression),
+                CastExpressionSyntax castExpressionSyntax => GetExpressionSyntaxIdentifier(castExpressionSyntax.Expression),
+                _ => null
+            };
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -85,8 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override Location GetMethodDeclarationIdentifierLocation(SyntaxNode syntaxNode) =>
             (syntaxNode as BaseMethodDeclarationSyntax)?.FindIdentifierLocation();
 
-        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument) =>
-            (argument.Expression as IdentifierNameSyntax)?.Identifier;
+        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument) => GetExpressionSyntaxIdentifier(argument?.Expression);
 
         protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
             argument.NameColon?.Name.Identifier;
