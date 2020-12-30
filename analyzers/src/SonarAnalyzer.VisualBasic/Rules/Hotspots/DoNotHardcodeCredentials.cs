@@ -60,13 +60,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     c.RegisterSyntaxNodeActionInNonGenerated(
                         new StringLiteralBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.StringLiteralExpression);
+
+                    c.RegisterSyntaxNodeActionInNonGenerated(
+                        new AddExpressionBannedWordsFinder(this).AnalysisAction(),
+                        SyntaxKind.ConcatenateExpression,
+                        SyntaxKind.AddExpression);
                 });
 
         private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
         {
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-            protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode) =>
+            protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Initializer?.Value.GetStringValue();
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
@@ -83,7 +88,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-            protected override string GetAssignedValue(AssignmentStatementSyntax syntaxNode) =>
+            protected override string GetAssignedValue(AssignmentStatementSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Right.GetStringValue();
 
             protected override string GetVariableName(AssignmentStatementSyntax syntaxNode) =>
@@ -105,7 +110,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             public StringLiteralBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-            protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode) =>
+            protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.GetStringValue();
 
             // We don't have a variable for cases that this finder should handle.  Cases with variable name are
@@ -145,6 +150,29 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 // We want to handle all other literals (property initializers, return statement and return values from lambdas, arrow functions, ...)
                 return true;
             }
+        }
+
+        private class AddExpressionBannedWordsFinder : CredentialWordsFinderBase<BinaryExpressionSyntax>
+        {
+            public AddExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+
+            protected override string GetAssignedValue(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel)
+            {
+                var left = syntaxNode.Left is BinaryExpressionSyntax precedingConcat && precedingConcat.IsAnyKind(SyntaxKind.ConcatenateExpression, SyntaxKind.AddExpression)
+                    ? precedingConcat.Right
+                    : syntaxNode.Left;
+                return GetStringConstant(left) is { } leftString
+                    && GetStringConstant(syntaxNode.Right) is { } rightString
+                    ? leftString + rightString
+                    : null;
+
+                string GetStringConstant(SyntaxNode node) =>
+                    node.GetStringValue() ?? semanticModel.GetConstantValue(node).Value as string;
+            }
+
+            protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
+
+            protected override bool IsAssignedWithStringLiteral(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
     }
 }

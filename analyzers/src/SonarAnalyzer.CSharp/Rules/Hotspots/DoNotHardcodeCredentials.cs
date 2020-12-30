@@ -39,8 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
             PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, Rule);
         }
 
-        protected override void InitializeActions(ParameterLoadingAnalysisContext context)
-        {
+        protected override void InitializeActions(ParameterLoadingAnalysisContext context) =>
             context.RegisterCompilationStartAction(
                 c =>
                 {
@@ -60,14 +59,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     c.RegisterSyntaxNodeActionInNonGenerated(
                         new StringLiteralBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.StringLiteralExpression);
+
+                    c.RegisterSyntaxNodeActionInNonGenerated(
+                        new AddExpressionBannedWordsFinder(this).AnalysisAction(),
+                        SyntaxKind.AddExpression);
                 });
-        }
 
         private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
         {
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-            protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode) =>
+            protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Initializer?.Value.GetStringValue();
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
@@ -83,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-            protected override string GetAssignedValue(AssignmentExpressionSyntax syntaxNode) =>
+            protected override string GetAssignedValue(AssignmentExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Right.GetStringValue();
 
             protected override string GetVariableName(AssignmentExpressionSyntax syntaxNode) =>
@@ -105,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public StringLiteralBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-            protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode) =>
+            protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.GetStringValue();
 
             // We don't have a variable for cases that this finder should handle.  Cases with variable name are
@@ -144,6 +146,27 @@ namespace SonarAnalyzer.Rules.CSharp
                 // We want to handle all other literals (property initializers, return statement and return values from lambdas, arrow functions, ...)
                 return true;
             }
+        }
+
+        private class AddExpressionBannedWordsFinder : CredentialWordsFinderBase<BinaryExpressionSyntax>
+        {
+            public AddExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+
+            protected override string GetAssignedValue(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel)
+            {
+                var left = syntaxNode.Left is BinaryExpressionSyntax precedingAdd && precedingAdd.IsKind(SyntaxKind.AddExpression) ? precedingAdd.Right : syntaxNode.Left;
+                return GetStringConstant(left) is { } leftString
+                    && GetStringConstant(syntaxNode.Right) is { } rightString
+                    ? leftString + rightString
+                    : null;
+
+                string GetStringConstant(SyntaxNode node) =>
+                    node.GetStringValue() ?? semanticModel.GetConstantValue(node).Value as string;
+            }
+
+            protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
+
+            protected override bool IsAssignedWithStringLiteral(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
     }
 }

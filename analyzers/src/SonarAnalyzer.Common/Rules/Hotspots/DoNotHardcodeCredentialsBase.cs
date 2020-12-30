@@ -93,8 +93,7 @@ namespace SonarAnalyzer.Rules
             PropertyAccessTracker.Track(innerContext, new object[] { MessageHardcodedPassword },
                PropertyAccessTracker.MatchSetter(),
                PropertyAccessTracker.AssignedValueIsConstant(),
-               PropertyAccessTracker.MatchProperty(
-                   new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
+               PropertyAccessTracker.MatchProperty(new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
 
             InitializeActions(context);
         }
@@ -114,11 +113,11 @@ namespace SonarAnalyzer.Rules
 
             protected abstract bool IsAssignedWithStringLiteral(TSyntaxNode syntaxNode, SemanticModel semanticModel);
             protected abstract string GetVariableName(TSyntaxNode syntaxNode);
-            protected abstract string GetAssignedValue(TSyntaxNode syntaxNode);
+            protected abstract string GetAssignedValue(TSyntaxNode syntaxNode, SemanticModel semanticModel);
 
             protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer)
             {
-                // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved |  pct-encoded | sub-delims
+                // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved | pct-encoded | sub-delims
                 const string Rfc3986_Unreserved = "-._~";  // Numbers and letters are embeded in regex itself without escaping
                 const string Rfc3986_Pct = "%";
                 const string Rfc3986_SubDelims = "!$&'()*+,;=";
@@ -137,26 +136,22 @@ namespace SonarAnalyzer.Rules
                     {
                         return;
                     }
-                    var variableName = GetVariableName(declarator);
-                    var variableValue = GetAssignedValue(declarator);
-                    var bannedWords = FindCredentialWords(variableName, variableValue);
-                    if (bannedWords.Any())
+                    if (GetAssignedValue(declarator, context.SemanticModel) is { } variableValue && !string.IsNullOrWhiteSpace(variableValue))
                     {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(analyzer.Rule, declarator.GetLocation(), string.Format(MessageFormatCredential, bannedWords.JoinStr(", "))));
-                    }
-                    else if (ContainsUriUserInfo(variableValue))
-                    {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(analyzer.Rule, declarator.GetLocation(), MessageUriUserInfo));
+                        var bannedWords = FindCredentialWords(GetVariableName(declarator), variableValue);
+                        if (bannedWords.Any())
+                        {
+                            context.ReportDiagnosticWhenActive(Diagnostic.Create(analyzer.Rule, declarator.GetLocation(), string.Format(MessageFormatCredential, bannedWords.JoinStr(", "))));
+                        }
+                        else if (ContainsUriUserInfo(variableValue))
+                        {
+                            context.ReportDiagnosticWhenActive(Diagnostic.Create(analyzer.Rule, declarator.GetLocation(), MessageUriUserInfo));
+                        }
                     }
                 };
 
             private IEnumerable<string> FindCredentialWords(string variableName, string variableValue)
             {
-                if (string.IsNullOrEmpty(variableValue?.Trim()))
-                {
-                    return Enumerable.Empty<string>();
-                }
-
                 var credentialWordsFound = variableName
                     .SplitCamelCaseToWords()
                     .Intersect(analyzer.splitCredentialWords)

@@ -74,10 +74,10 @@ Namespace Tests.Diagnostics
             Dim SecretVariableMethod As String = SomeMethod()
             Dim a As String
 
-            a = "Server = localhost; Database = Test; User = SA; Password = " & "hardcoded"           ' FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " + "hardcoded"           ' FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretConst           ' FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretConst           ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & "hardcoded"           ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + "hardcoded"           ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretConst           ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretConst           ' Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " & SecretField           ' FN
             a = "Server = localhost; Database = Test; User = SA; Password = " + SecretField           ' FN
             a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldConst      ' FN
@@ -93,13 +93,15 @@ Namespace Tests.Diagnostics
 
             Const PasswordPrefixConst As String = "Password = "         ' Compliant by it's name
             Dim PasswordPrefixVariable As String = "Password = "        ' Compliant by it's name
-            a = "Server = localhost;" & " Database = Test; User = SA; Password = " & SecretConst                ' FN
-            a = "Server = localhost;" & " Database = Test; User = SA; Pa" & "ssword = " & SecretConst           ' FN
-            a = "Server = localhost;" & " Database = Test; User = SA; " & PasswordPrefixConst & SecretConst     ' FN
+            a = "Server = localhost;" & " Database = Test; User = SA; Password = " & SecretConst                ' Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + SecretConst                ' Noncompliant
+            a = "Server = localhost;" & " Database = Test; User = SA; Pa" & "ssword = " & SecretConst           ' FN, we don't track all concatenations to avoid duplications
+            a = "Server = localhost;" & " Database = Test; User = SA; " & PasswordPrefixConst & SecretConst     ' Noncompliant
             a = "Server = localhost;" & " Database = Test; User = SA; " & PasswordPrefixVariable & SecretConst  ' FN
-            a = "Server = localhost;" & " Database = Test; User = SA; Password = " & SecretConst & " suffix"    ' FN
-            a = SomeMethod() & " Database = Test; User = SA; Password = " & SecretConst & " suffix"             ' FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretConst & Arg & " suffix"   ' FN
+            a = "Server = localhost;" & " Database = Test; User = SA; Password = " & SecretConst & " suffix"    ' Noncompliant
+            '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            a = SomeMethod() & " Database = Test; User = SA; Password = " & SecretConst & " suffix"             ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretConst & Arg & " suffix"   ' Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " & Arg & SecretConst & " suffix"   ' Compliant
             a = SecretConst & "Server = localhost; Database = Test; User = SA; Password = " & Arg               ' Compliant
             a = "Server = localhost; Database = Test; User = SA; " & SomeMethod() & SecretConst                 ' Compliant
@@ -110,7 +112,7 @@ Namespace Tests.Diagnostics
             Arg = "literal"
             a = "Server = localhost; Database = Test; User = SA; Password = " & Arg               ' FN
             SecretVariable = SomeMethod()
-            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariable    ' This will be FP
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariable    ' Compliant
         End Sub
 
         Public Sub Interpolations(Arg As String)
