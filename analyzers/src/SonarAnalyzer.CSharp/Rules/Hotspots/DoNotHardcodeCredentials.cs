@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -63,6 +64,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     c.RegisterSyntaxNodeActionInNonGenerated(
                         new AddExpressionBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.AddExpression);
+
+                    c.RegisterSyntaxNodeActionInNonGenerated(
+                        new InterpolatedStringBannedWordsFinder(this).AnalysisAction(),
+                        SyntaxKind.InterpolatedStringExpression);
                 });
 
         private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
@@ -166,6 +171,23 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
 
             protected override bool IsAssignedWithStringLiteral(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+        }
+
+        private class InterpolatedStringBannedWordsFinder : CredentialWordsFinderBase<InterpolatedStringExpressionSyntax>
+        {
+            public InterpolatedStringBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+
+            protected override string GetAssignedValue(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.Contents.JoinStr(null, x => x switch
+                                                        {
+                                                            InterpolationSyntax interpolation => semanticModel.GetConstantValue(interpolation.Expression).Value as string,
+                                                            InterpolatedStringTextSyntax text => text.TextToken.ToString(),
+                                                            _ => null
+                                                        } ?? CredentialSeparator.ToString()); // Unknown elements resolved to separator to terminate the keyword-value sequence
+
+            protected override string GetVariableName(InterpolatedStringExpressionSyntax syntaxNode) => null;
+
+            protected override bool IsAssignedWithStringLiteral(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
     }
 }

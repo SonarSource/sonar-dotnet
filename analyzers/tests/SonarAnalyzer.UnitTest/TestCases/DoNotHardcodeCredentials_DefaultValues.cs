@@ -138,11 +138,13 @@ namespace Tests.Diagnostics
         public void Interpolations(string arg)
         {
             var secretVariable = "literalValue";
-            var a = $"Server = localhost; Database = Test; User = SA; Password = {secretConst}";    // FN
-            var b = $"Server = localhost; Database = Test; User = SA; Password = {secretField}";    // FN
-            var c = $"Server = localhost; Database = Test; User = SA; Password = {secretVariable}"; // FN
-            var d = $"Server = localhost; Database = Test; User = SA; Password = {arg}";            // Compliant
-            var e = $@"Server = localhost; Database = Test; User = SA; Password = {secretConst}";   // FN
+            string a;
+            a = $"Server = localhost; Database = Test; User = SA; Password = {secretConst}";        // Noncompliant
+            a = $"Server = localhost; Database = Test; User = SA; Password = {secretField}";        // FN
+            a = $"Server = localhost; Database = Test; User = SA; Password = {secretVariable}";     // FN
+            a = $"Server = localhost; Database = Test; User = SA; Password = {arg}";                // Compliant
+            a = $"Server = localhost; Database = Test; User = SA; Password = {arg}{secretConst}";   // Compliant
+            a = $@"Server = localhost; Database = Test; User = SA; Password = {secretConst}";       // Noncompliant
         }
 
         public void StringFormat(string arg)
@@ -255,10 +257,12 @@ namespace Tests.Diagnostics
             string c5 = "scheme://domain.com/user:azerty123";
             string c6 = String.Format("scheme://user:{0}@domain.com", pwd);
             string c7 = $"scheme://user:{pwd}@domain.com";
+            string c8 = $"scheme://user:{secretConst}@domain.com";  // Noncompliant
 
-            string e1 = "scheme://admin:admin@domain.com";    // Compliant exception, user and password are the same
-            string e2 = "scheme://abc:abc@domain.com";        // Compliant exception, user and password are the same
-            string e3 = "scheme://a%20;c:a%20;c@domain.com";  // Compliant exception, user and password are the same
+            string e1 = "scheme://admin:admin@domain.com";      // Compliant exception, user and password are the same
+            string e2 = "scheme://abc:abc@domain.com";          // Compliant exception, user and password are the same
+            string e3 = "scheme://a%20;c:a%20;c@domain.com";    // Compliant exception, user and password are the same
+            string e4 = "scheme://user:;@domain.com";           // Compliant exception for implementation purposes
 
             string html1 = // Noncompliant
 @"This is article http://login:secret@www.example.com
