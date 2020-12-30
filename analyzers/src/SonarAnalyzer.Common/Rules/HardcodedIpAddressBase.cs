@@ -19,7 +19,7 @@
  */
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -30,64 +30,74 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class HardcodedIpAddressBase<TLiteralExpression> : HotspotDiagnosticAnalyzer
+    public abstract class HardcodedIpAddressBase<TSyntaxKind, TLiteralExpression> : HotspotDiagnosticAnalyzer
+        where TSyntaxKind : struct
         where TLiteralExpression : SyntaxNode
     {
         protected const string DiagnosticId = "S1313";
         protected const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
+        private const int IPv4AddressParts  = 4;
+        private const string IPv4Broadcast = "255.255.255.255";
 
-        private static readonly ISet<string> IgnoredVariableNames =
-            new HashSet<string>
+        private readonly string[] ignoredVariableNames =
             {
                 "VERSION",
                 "ASSEMBLY",
             };
 
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract TSyntaxKind SyntaxKind { get; }
+
         protected abstract string GetAssignedVariableName(TLiteralExpression stringLiteral);
         protected abstract string GetValueText(TLiteralExpression literalExpression);
         protected abstract bool HasAttributes(TLiteralExpression literalExpression);
 
-        protected HardcodedIpAddressBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration)
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected HardcodedIpAddressBase(IAnalyzerConfiguration analyzerConfiguration, System.Resources.ResourceManager rspecResources) : base(analyzerConfiguration)
         {
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
         }
 
-        protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
-            c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, CheckForHardcodedIpAddresses, SyntaxKind);
+
+        private void CheckForHardcodedIpAddresses(SyntaxNodeAnalysisContext context)
+        {
+            if (!IsEnabled(context.Options))
             {
-                var stringLiteral = (TLiteralExpression)c.Node;
-                var literalValue = GetValueText(stringLiteral);
-                if (IsLocalHost(literalValue))
-                {
-                    return;
-                }
+                return;
+            }
 
-                var variableName = GetAssignedVariableName(stringLiteral);
-                if (variableName != null &&
-                    IgnoredVariableNames.Any(variableName.Contains))
-                {
-                    return;
-                }
+            var stringLiteral = (TLiteralExpression)context.Node;
+            var variableName = GetAssignedVariableName(stringLiteral);
 
-                if (HasAttributes(stringLiteral))
-                {
-                    return;
-                }
+            if (variableName != null && ignoredVariableNames.Any(x => variableName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
+            {
+                return;
+            }
 
-                if (!IPAddress.TryParse(literalValue, out var address))
-                {
-                    return;
-                }
+            if (HasAttributes(stringLiteral))
+            {
+                return;
+            }
 
-                if (address.AddressFamily == AddressFamily.InterNetwork &&
-                    literalValue.Split('.').Length != 4)
-                {
-                    return;
-                }
+            var literalValue = GetValueText(stringLiteral);
 
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
-            };
+            if (!IPAddress.TryParse(literalValue, out var address)
+                || IPAddress.IsLoopback(address)
+                || address.GetAddressBytes().All(x => x == 0)                       // Nonroutable 0.0.0.0 or 0::0
+                || literalValue == IPv4Broadcast
+                || literalValue.StartsWith("2.5.")                                  // Looks like OID
+                || (address.AddressFamily == AddressFamily.InterNetwork
+                    && literalValue.Count(x => x == '.') != IPv4AddressParts - 1))
+            {
+                return;
+            }
 
-        private static bool IsLocalHost(string s) =>
-            s == "::" || s == "127.0.0.1";
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
+        }
     }
 }
