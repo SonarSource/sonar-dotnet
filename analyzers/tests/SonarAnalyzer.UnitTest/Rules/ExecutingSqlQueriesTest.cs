@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -27,8 +25,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -41,14 +39,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_CS_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_Net46.cs",
-                new CSharp.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetReferencesNet46(Constants.NuGetLatestVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_Net46.vb",
-                new VisualBasic.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 options: ParseOptionsHelper.FromVisualBasic15,
                 additionalReferences: GetReferencesNet46(Constants.NuGetLatestVersion));
 
@@ -64,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_CS_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.cs",
-                new CSharp.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 options: ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
 
@@ -73,14 +71,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.cs",
-                new CSharp.ExecutingSqlQueries(),
+                new CS.ExecutingSqlQueries(),
                 additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_VB_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.vb",
-                new VisualBasic.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 options: ParseOptionsHelper.FromVisualBasic15,
                 additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
 
@@ -88,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.vb",
-                new VisualBasic.ExecutingSqlQueries(),
+                new VB.ExecutingSqlQueries(),
                 additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
 
         internal static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>

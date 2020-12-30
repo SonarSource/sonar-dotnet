@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
@@ -30,7 +31,8 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S2077";
         protected const string MessageFormat = "Make sure that formatting this SQL query is safe here.";
 
-        private readonly KnownType[] constructors = {
+        private readonly KnownType[] constructors =
+            {
             KnownType.Microsoft_EntityFrameworkCore_RawSqlString,
             KnownType.System_Data_SqlClient_SqlCommand,
             KnownType.System_Data_SqlClient_SqlDataAdapter,
@@ -40,13 +42,26 @@ namespace SonarAnalyzer.Rules
             KnownType.System_Data_SqlServerCe_SqlCeDataAdapter,
             KnownType.System_Data_OracleClient_OracleCommand,
             KnownType.System_Data_OracleClient_OracleDataAdapter
-        };
+            };
+
+        protected abstract TExpressionSyntax GetInvocationExpression(SyntaxNode expression);
+        protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
+        protected abstract TExpressionSyntax GetSetValue(PropertyAccessContext context);
+        protected abstract TExpressionSyntax GetFirstArgument(ObjectCreationContext context);
+        protected abstract bool IsConcat(TExpressionSyntax argument, SemanticModel semanticModel);
+        protected abstract bool IsInterpolated(TExpressionSyntax expression, SemanticModel semanticModel);
+        protected abstract bool IsStringMethodInvocation(string methodName, TExpressionSyntax expression, SemanticModel semanticModel);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
-
         protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
-
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+
+        protected DiagnosticDescriptor Rule { get; }
+
+        protected ExecutingSqlQueriesBase(System.Resources.ResourceManager rspecResources) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -95,20 +110,6 @@ namespace SonarAnalyzer.Rules
                 Conditions.ExceptWhen(ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
         }
 
-        protected abstract TExpressionSyntax GetInvocationExpression(SyntaxNode expression);
-
-        protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
-
-        protected abstract TExpressionSyntax GetSetValue(PropertyAccessContext context);
-
-        protected abstract TExpressionSyntax GetFirstArgument(ObjectCreationContext context);
-
-        protected abstract bool IsConcat(TExpressionSyntax argument, SemanticModel semanticModel);
-
-        protected abstract bool IsInterpolated(TExpressionSyntax expression, SemanticModel semanticModel);
-
-        protected abstract bool IsStringMethodInvocation(string methodName, TExpressionSyntax expression, SemanticModel semanticModel);
-
         private bool IsFormat(TExpressionSyntax argument, SemanticModel semanticModel) =>
             IsStringMethodInvocation("Format", argument, semanticModel);
 
@@ -117,9 +118,9 @@ namespace SonarAnalyzer.Rules
             {
                 var invocationExpression = GetInvocationExpression(context.Invocation);
 
-                return invocationExpression != null &&
-                       context.SemanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol methodSymbol &&
-                       (ParameterIsRawString(methodSymbol, 0) || ParameterIsRawString(methodSymbol, 1));
+                return invocationExpression != null
+                       && context.SemanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol methodSymbol
+                       && (ParameterIsRawString(methodSymbol, 0) || ParameterIsRawString(methodSymbol, 1));
 
                 static bool ParameterIsRawString(IMethodSymbol method, int index) =>
                     method.Parameters.Length > index && method.Parameters[index].IsType(KnownType.Microsoft_EntityFrameworkCore_RawSqlString);

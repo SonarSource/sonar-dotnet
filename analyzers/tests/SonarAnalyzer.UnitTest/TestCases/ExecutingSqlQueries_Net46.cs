@@ -52,7 +52,7 @@ namespace Tests.Diagnostics
             string text = command.CommandText = string.Concat(query, param); // Noncompliant
 
             var adapter = new SqlDataAdapter(string.Concat(query, param), ""); // Noncompliant
-    }
+        }
 
         public void NonCompliant_Format_SqlCommands(SqlConnection connection, SqlTransaction transaction, string param)
         {
@@ -192,6 +192,14 @@ namespace Tests.Diagnostics
 
             string stillSensitive = sensitiveQuery;
             command.CommandText = stillSensitive; // Noncompliant
+
+            string sensitiveConcatQuery = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";
+            command = new SqlCommand(sensitiveConcatQuery); // Noncompliant
+
+            command.CommandText = sensitiveConcatQuery; // Noncompliant
+
+            string stillSensitiveConcat = sensitiveConcatQuery;
+            command.CommandText = stillSensitiveConcat; // Noncompliant
 
             SqlDataAdapter adapter;
             adapter = new SqlDataAdapter(sensitiveQuery, connection); // Noncompliant
