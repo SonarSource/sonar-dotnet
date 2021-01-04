@@ -133,7 +133,8 @@ Namespace Tests.Diagnostics
             Dim SecretVariable As String = "literalValue"
             Dim a As String
 
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", SecretConst)            ' FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", SecretConst)            ' Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretConst)   ' Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretField)   ' FN
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, SecretVariable)   ' FN
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arg)                    ' Compliant
@@ -144,8 +145,10 @@ Namespace Tests.Diagnostics
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0:#,0.00}", Arg)             ' Compliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}{2}", Arg)              ' Compliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = hardcoded")                   ' Noncompliant
+            ' Noncompliant@-1 FP duplicate from normal string detection
             a = String.Format("Server = localhost; Database = Test; User = {0}; Password = hardcoded", Arg)             ' Noncompliant
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}{0}", Arg, SecretConst)    ' FN
+            ' Noncompliant@-1 FP duplicate from normal string detection
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}{0}", Arg, SecretConst)    ' Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}", Arg, SecretConst)    ' Compliant
         End Sub
 

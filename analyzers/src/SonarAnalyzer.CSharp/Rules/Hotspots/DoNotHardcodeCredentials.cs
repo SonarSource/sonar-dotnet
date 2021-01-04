@@ -69,6 +69,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     c.RegisterSyntaxNodeActionInNonGenerated(
                         new InterpolatedStringBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.InterpolatedStringExpression);
+
+                    c.RegisterSyntaxNodeActionInNonGenerated(
+                        new InvocationBannedWordsFinder(this).AnalysisAction(),
+                        SyntaxKind.InvocationExpression);
                 });
 
         private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
@@ -190,6 +194,31 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override string GetVariableName(InterpolatedStringExpressionSyntax syntaxNode) => null;
 
             protected override bool ShouldHandle(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+        }
+
+        private class InvocationBannedWordsFinder : CredentialWordsFinderBase<InvocationExpressionSyntax>
+        {
+            public InvocationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
+
+            protected override string GetAssignedValue(InvocationExpressionSyntax syntaxNode, SemanticModel semanticModel)
+            {
+                var allArgs = syntaxNode.ArgumentList.Arguments.Select(x => semanticModel.GetConstantValue(x.Expression).Value as string ?? CredentialSeparator.ToString());
+                try
+                {
+                    return string.Format(allArgs.First(), allArgs.Skip(1).ToArray());
+                }
+                catch (FormatException)
+                {
+                    return null;
+                }
+            }
+
+            protected override string GetVariableName(InvocationExpressionSyntax syntaxNode) => null;
+
+            protected override bool ShouldHandle(InvocationExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.IsMethodInvocation(KnownType.System_String, "Format", semanticModel)
+                && semanticModel.GetSymbolInfo(syntaxNode).Symbol is IMethodSymbol symbol
+                && symbol.Parameters.First().Type.Is(KnownType.System_String);
         }
     }
 }
