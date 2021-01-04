@@ -108,8 +108,8 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         /// <summary>
-        /// This finder checks all string literal in the code, except VariableDeclarator and SimpleAssignmentExpression. These two have their own
-        /// finders with precise logic and variable name checking.
+        /// This finder checks all string literal in the code, except VariableDeclarator, SimpleAssignmentExpression and string.Format invocation.
+        /// These two have their own finders with precise logic and variable name checking.
         /// This class inspects all other standalone string literals for values considered as hardcoded passwords (in connection strings)
         /// based on same rules as in VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder.
         /// </summary>
@@ -127,9 +127,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 null;
 
             protected override bool ShouldHandle(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && ShouldHandle(syntaxNode.GetTopMostContainingMethod(), syntaxNode);
+                syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && ShouldHandle(syntaxNode.GetTopMostContainingMethod(), syntaxNode, semanticModel);
 
-            private static bool ShouldHandle(SyntaxNode method, SyntaxNode current)
+            private static bool ShouldHandle(SyntaxNode method, SyntaxNode current, SemanticModel semanticModel)
             {
                 // We don't want to handle VariableDeclarator and SimpleAssignmentExpression,
                 // they are implemented by other finders with better and more precise logic.
@@ -144,9 +144,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         // Direct return from nested syntaxes that must be handled by this finder
                         // before search reaches top level VariableDeclarator or SimpleAssignmentExpression.
                         case SyntaxKind.InvocationExpression:
-                        case SyntaxKind.Argument:
                         case SyntaxKind.AddExpression: // String concatenation is not supported by other finders
                             return true;
+
+                        // Handle all arguments except those inside string.Format. InvocationBannedWordsFinder takes care of them.
+                        case SyntaxKind.Argument:
+                            return !(current.Parent.Parent is InvocationExpressionSyntax invocation && invocation.IsMethodInvocation(KnownType.System_String, "Format", semanticModel));
 
                         default:
                             current = current.Parent;

@@ -140,14 +140,12 @@ Namespace Tests.Diagnostics
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arg)                    ' Compliant
             a = String.Format(FormatProvider, "Database = Test; User = SA; Password = {0}", SecretConst)                ' Compliant, we can't simulate formatProvider behavior
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arr)                    ' Compliant
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {invalid}", SecretConst)      ' Noncompliant FP from normal String detection
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = invalid {0", SecretConst)     ' Noncompliant FP from normal String detection
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {invalid}", SecretConst)      ' Compliant, the format is invalid and we should not raise
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = invalid {0", SecretConst)     ' Compliant, the format is invalid and we should not raise
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0:#,0.00}", Arg)             ' Compliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}{2}", Arg)              ' Compliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = hardcoded")                   ' Noncompliant
-            ' Noncompliant@-1 FP duplicate from normal string detection
             a = String.Format("Server = localhost; Database = Test; User = {0}; Password = hardcoded", Arg)             ' Noncompliant
-            ' Noncompliant@-1 FP duplicate from normal string detection
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}{0}", Arg, SecretConst)    ' Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}", Arg, SecretConst)    ' Compliant
         End Sub

@@ -159,14 +159,12 @@ namespace Tests.Diagnostics
             a = String.Format(@"Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);          // Noncompliant
             a = String.Format(formatProvider, "Database = Test; User = SA; Password = {0}", secretConst);               // Compliant, we can't simulate formatProvider behavior
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", arr);                   // Compliant
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {invalid}", secretConst);     // Noncompliant FP from normal string detection
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = invalid {0", secretConst);    // Noncompliant FP from normal string detection
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {invalid}", secretConst);     // Compliant, the format is invalid and we should not raise
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = invalid {0", secretConst);    // Compliant, the format is invalid and we should not raise
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0:#,0.00}", arg);            // Compliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}{2}", arg);             // Compliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = hardcoded");                  // Noncompliant
-                                                                                                                        // Noncompliant@-1 FP duplicate from normal string detection
             a = String.Format("Server = localhost; Database = Test; User = {0}; Password = hardcoded", arg);            // Noncompliant
-                                                                                                                        // Noncompliant@-1 FP duplicate from normal string detection
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}{0}", arg, secretConst);   // Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}", arg, secretConst);   // Compliant
         }
