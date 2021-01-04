@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                  || (argument is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel))
                  || IsTrackedVariableDeclaration(argument, semanticModel));
 
-        private bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+        private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             (invocation.IsMethodInvocation(KnownType.System_String, "Format", semanticModel) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", semanticModel))
             && !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
 
