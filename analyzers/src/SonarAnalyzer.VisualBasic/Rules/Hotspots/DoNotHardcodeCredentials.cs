@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -69,6 +71,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     c.RegisterSyntaxNodeActionInNonGenerated(
                         new InterpolatedStringBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.InterpolatedStringExpression);
+
+                    c.RegisterSyntaxNodeActionInNonGenerated(
+                        new InvocationBannedWordsFinder(this).AnalysisAction(),
+                        SyntaxKind.InvocationExpression);
                 });
 
         private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
@@ -81,7 +87,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Names[0].Identifier.ValueText; // We already tested the count in IsAssignedWithStringLiteral
 
-            protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
+            protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Names.Count == 1
                 && syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression
                 && literalExpression.IsKind(SyntaxKind.StringLiteralExpression)
@@ -98,14 +104,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetVariableName(AssignmentStatementSyntax syntaxNode) =>
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
 
-            protected override bool IsAssignedWithStringLiteral(AssignmentStatementSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel)
+            protected override bool ShouldHandle(AssignmentStatementSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.IsKind(SyntaxKind.SimpleAssignmentStatement)
+                && syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel)
                 && syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
         }
 
         /// <summary>
-        /// This finder checks all string literal in the code, except VariableDeclarator and SimpleAssignmentExpression. These two have their own
-        /// finders with precise logic and variable name checking.
+        /// This finder checks all string literal in the code, except VariableDeclarator, SimpleAssignmentExpression and String.Format invocation.
+        /// These two have their own finders with precise logic and variable name checking.
         /// This class inspects all other standalone string literals for values considered as hardcoded passwords (in connection strings)
         /// based on same rules as in VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder.
         /// </summary>
@@ -122,12 +129,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetVariableName(LiteralExpressionSyntax syntaxNode) =>
                 null;
 
-            protected override bool IsAssignedWithStringLiteral(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && ShouldHandle(syntaxNode.GetTopMostContainingMethod(), syntaxNode);
+            protected override bool ShouldHandle(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && ShouldHandle(syntaxNode.GetTopMostContainingMethod(), syntaxNode, semanticModel);
 
             // We don't want to handle VariableDeclarator and SimpleAssignmentExpression,
             // they are implemented by other finders with better and more precise logic.
-            private static bool ShouldHandle(SyntaxNode method, SyntaxNode current)
+            private static bool ShouldHandle(SyntaxNode method, SyntaxNode current, SemanticModel semanticModel)
             {
                 while (current != null && current != method)
                 {
@@ -140,10 +147,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         // Direct return from nested syntaxes that must be handled by this finder
                         // before search reaches top level VariableDeclarator or SimpleAssignmentExpression.
                         case SyntaxKind.InvocationExpression:
-                        case SyntaxKind.SimpleArgument:
                         case SyntaxKind.AddExpression: // String concatenation is not supported by other finders
                         case SyntaxKind.ConcatenateExpression:
                             return true;
+
+                        // Handle all arguments except those inside string.Format. InvocationBannedWordsFinder takes care of them.
+                        case SyntaxKind.SimpleArgument:
+                            return !(current.Parent.Parent is InvocationExpressionSyntax invocation && invocation.IsMethodInvocation(KnownType.System_String, "Format", semanticModel));
 
                         default:
                             current = current.Parent;
@@ -175,7 +185,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
 
-            protected override bool IsAssignedWithStringLiteral(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+            protected override bool ShouldHandle(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
 
         private class InterpolatedStringBannedWordsFinder : CredentialWordsFinderBase<InterpolatedStringExpressionSyntax>
@@ -192,7 +202,32 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             protected override string GetVariableName(InterpolatedStringExpressionSyntax syntaxNode) => null;
 
-            protected override bool IsAssignedWithStringLiteral(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+            protected override bool ShouldHandle(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+        }
+
+        private class InvocationBannedWordsFinder : CredentialWordsFinderBase<InvocationExpressionSyntax>
+        {
+            public InvocationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
+
+            protected override string GetAssignedValue(InvocationExpressionSyntax syntaxNode, SemanticModel semanticModel)
+            {
+                var allArgs = syntaxNode.ArgumentList.Arguments.Select(x => semanticModel.GetConstantValue(x.GetExpression()).Value as string ?? CredentialSeparator.ToString());
+                try
+                {
+                    return string.Format(allArgs.First(), allArgs.Skip(1).ToArray());
+                }
+                catch (FormatException)
+                {
+                    return null;
+                }
+            }
+
+            protected override string GetVariableName(InvocationExpressionSyntax syntaxNode) => null;
+
+            protected override bool ShouldHandle(InvocationExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.IsMethodInvocation(KnownType.System_String, "Format", semanticModel)
+                && semanticModel.GetSymbolInfo(syntaxNode).Symbol is IMethodSymbol symbol
+                && symbol.Parameters.First().Type.Is(KnownType.System_String);
         }
     }
 }

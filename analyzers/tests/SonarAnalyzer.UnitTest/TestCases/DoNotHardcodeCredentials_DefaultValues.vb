@@ -129,13 +129,28 @@ Namespace Tests.Diagnostics
             a = $"Server = localhost; Database = Test; User = SA; Password = {Arg}{SecretConst}"    ' Compliant
         End Sub
 
-        Public Sub StringFormat(Arg As String)
+        Public Sub StringFormat(Arg As String, FormatProvider As IFormatProvider, Arr() As String)
             Dim SecretVariable As String = "literalValue"
+            Dim a As String
 
-            Dim a As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", SecretConst)          ' FN
-            Dim b As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretField) ' FN
-            Dim c As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, SecretVariable) ' FN
-            Dim d As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arg)                  ' Compliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", SecretConst)            ' Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretConst)   ' Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretField)   ' FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, SecretVariable)   ' FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arg)                    ' Compliant
+            a = String.Format(FormatProvider, "Database = Test; User = SA; Password = {0}", SecretConst)                ' Compliant, we can't simulate formatProvider behavior
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arr)                    ' Compliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {invalid}", SecretConst)      ' Compliant, the format is invalid and we should not raise
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = invalid {0", SecretConst)     ' Compliant, the format is invalid and we should not raise
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0:#,0.00}", Arg)             ' Compliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}{2}", Arg)              ' Compliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = hardcoded")                   ' Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = {0}; Password = hardcoded", Arg)             ' Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}{0}", Arg, SecretConst)    ' Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}", Arg, SecretConst)    ' Compliant
+            a = String.Format("{0} Argument 1 is not used", "Hello", "User = SA; Password = hardcoded")                 ' Compliant
+
+            a = String.Format(arg0:=SecretConst, format:="Server = localhost; Database = Test; User = SA; Password = {0}")  ' FN, not supported
         End Sub
 
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)

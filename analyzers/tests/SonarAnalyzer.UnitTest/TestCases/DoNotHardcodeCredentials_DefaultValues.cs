@@ -114,13 +114,13 @@ namespace Tests.Diagnostics
 
             const string passwordPrefixConst = "Password = ";       // Compliant by it's name
             var passwordPrefixVariable = "Password = ";             // Compliant by it's name
-            a = "Server = localhost;" +" Database = Test; User = SA; Password = " + secretConst;                // Noncompliant
-            a = "Server = localhost;" +" Database = Test; User = SA; Pa" + "ssword = " + secretConst;           // FN, we don't track all concatenations to avoid duplications
-            a = "Server = localhost;" +" Database = Test; User = SA; " + passwordPrefixConst + secretConst;     // Noncompliant
-            a = "Server = localhost;" +" Database = Test; User = SA; " + passwordPrefixVariable + secretConst;  // FN
-            a = "Server = localhost;" +" Database = Test; User = SA; Password = " + secretConst + " suffix";    // Noncompliant
-            //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            a = someMethod() +" Database = Test; User = SA; Password = " + secretConst + " suffix";             // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst;                // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Pa" + "ssword = " + secretConst;           // FN, we don't track all concatenations to avoid duplications
+            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixConst + secretConst;     // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixVariable + secretConst;  // FN
+            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst + " suffix";    // Noncompliant
+            //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            a = someMethod() + " Database = Test; User = SA; Password = " + secretConst + " suffix";             // Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst + arg + " suffix";  // Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " + arg + secretConst + " suffix";  // Compliant
             a = secretConst + "Server = localhost; Database = Test; User = SA; Password = " + arg;              // Compliant
@@ -147,15 +147,29 @@ namespace Tests.Diagnostics
             a = $@"Server = localhost; Database = Test; User = SA; Password = {secretConst}";       // Noncompliant
         }
 
-        public void StringFormat(string arg)
+        public void StringFormat(string arg, IFormatProvider formatProvider, string[] arr)
         {
             var secretVariable = "literalValue";
+            string a;
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);           // Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretConst);     // Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretField);     // FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, secretVariable);  // FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", arg);                   // Compliant
+            a = String.Format(@"Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);          // Noncompliant
+            a = String.Format(formatProvider, "Database = Test; User = SA; Password = {0}", secretConst);               // Compliant, we can't simulate formatProvider behavior
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", arr);                   // Compliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {invalid}", secretConst);     // Compliant, the format is invalid and we should not raise
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = invalid {0", secretConst);    // Compliant, the format is invalid and we should not raise
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0:#,0.00}", arg);            // Compliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}{2}", arg);             // Compliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = hardcoded");                  // Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = {0}; Password = hardcoded", arg);            // Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}{0}", arg, secretConst);   // Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}", arg, secretConst);   // Compliant
+            a = String.Format("{0} Argument 1 is not used","Hello", "User = SA; Password = hardcoded");                 // Compliant
 
-            var a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);           // FN
-            var b = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretField);     // FN
-            var c = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, secretVariable);  // FN
-            var d = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", arg);                   // Compliant
-            var e = String.Format(@"Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);          // FN
+            a = String.Format(arg0: secretConst, format: "Server = localhost; Database = Test; User = SA; Password = {0}");  // FN, not supported
         }
 
         public void StandardAPI(SecureString secureString, string nonHardcodedPassword, byte[] byteArray, CspParameters cspParams)
