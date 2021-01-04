@@ -121,11 +121,12 @@ Namespace Tests.Diagnostics
 
         Public Sub Interpolations(Arg As String)
             Dim SecretVariable As String = "literalValue"
-
-            Dim a As String = $"Server = localhost; Database = Test; User = SA; Password = {SecretConst}"       ' FN
-            Dim b As String = $"Server = localhost; Database = Test; User = SA; Password = {SecretField}"       ' FN
-            Dim c As String = $"Server = localhost; Database = Test; User = SA; Password = {SecretVariable}"    ' FN
-            Dim d As String = $"Server = localhost; Database = Test; User = SA; Password = {Arg}"               ' Compliant
+            Dim a As String
+            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretConst}"         ' Noncompliant
+            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretField}"         ' FN
+            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretVariable}"      ' FN
+            a = $"Server = localhost; Database = Test; User = SA; Password = {Arg}"                 ' Compliant
+            a = $"Server = localhost; Database = Test; User = SA; Password = {Arg}{SecretConst}"    ' Compliant
         End Sub
 
         Public Sub StringFormat(Arg As String)
@@ -241,10 +242,12 @@ Namespace Tests.Diagnostics
             Dim c6 As String = "scheme://domain.com/user:azerty123"
             Dim c7 As String = String.Format("scheme://user:{0}@domain.com", Pwd)
             Dim c8 As String = $"scheme://user:{Pwd}@domain.com"
+            Dim c9 As String = $"scheme://user:{SecretConst}@domain.com"    ' Noncompliant
 
             Dim e1 As String = "scheme://admin:admin@domain.com"    ' Compliant exception, user and password are the same
             Dim e2 As String = "scheme://abc:abc@domain.com"        ' Compliant exception, user and password are the same
             Dim e3 As String = "scheme://a%20;c:a%20;c@domain.com"  ' Compliant exception, user and password are the same
+            Dim e4 As String = "scheme://user:;@domain.com"         ' Compliant exception for implementation purposes
 
             Dim html1 As String = ' Noncompliant
 "This is article http://login:secret@www.example.com

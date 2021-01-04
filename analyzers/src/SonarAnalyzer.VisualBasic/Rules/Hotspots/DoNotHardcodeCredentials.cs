@@ -65,6 +65,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         new AddExpressionBannedWordsFinder(this).AnalysisAction(),
                         SyntaxKind.ConcatenateExpression,
                         SyntaxKind.AddExpression);
+
+                    c.RegisterSyntaxNodeActionInNonGenerated(
+                        new InterpolatedStringBannedWordsFinder(this).AnalysisAction(),
+                        SyntaxKind.InterpolatedStringExpression);
                 });
 
         private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
@@ -172,6 +176,23 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
 
             protected override bool IsAssignedWithStringLiteral(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+        }
+
+        private class InterpolatedStringBannedWordsFinder : CredentialWordsFinderBase<InterpolatedStringExpressionSyntax>
+        {
+            public InterpolatedStringBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+
+            protected override string GetAssignedValue(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.Contents.JoinStr(null, x => x switch
+                {
+                    InterpolationSyntax interpolation => semanticModel.GetConstantValue(interpolation.Expression).Value as string,
+                    InterpolatedStringTextSyntax text => text.TextToken.ToString(),
+                    _ => null
+                } ?? CredentialSeparator.ToString()); // Unknown elements resolved to separator to terminate the keyword-value sequence
+
+            protected override string GetVariableName(InterpolatedStringExpressionSyntax syntaxNode) => null;
+
+            protected override bool IsAssignedWithStringLiteral(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
     }
 }

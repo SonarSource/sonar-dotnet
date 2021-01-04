@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2068";
+        protected const char CredentialSeparator = ';';
         private const string MessageFormat = "{0}";
         private const string MessageHardcodedPassword = "Please review this hard-coded password.";
         private const string MessageFormatCredential = @"""{0}"" detected here, make sure this is not a hard-coded credential.";
@@ -176,7 +177,7 @@ namespace SonarAnalyzer.Rules
 
             private bool IsValidCredential(string suffix)
             {
-                var candidateCredential = suffix.Split(';').First().Trim();
+                var candidateCredential = suffix.Split(CredentialSeparator).First().Trim();
                 return string.IsNullOrWhiteSpace(candidateCredential) || validCredentialPattern.IsMatch(candidateCredential);
             }
 
@@ -184,8 +185,10 @@ namespace SonarAnalyzer.Rules
             {
                 var match = uriUserInfoPattern.Match(variableValue);
                 return match.Success
-                    && !string.Equals(match.Groups["Login"].Value, match.Groups["Password"].Value, StringComparison.OrdinalIgnoreCase)
-                    && !validCredentialPattern.IsMatch(match.Groups["Password"].Value);
+                    && match.Groups["Password"].Value is { } password
+                    && !string.Equals(match.Groups["Login"].Value, password, StringComparison.OrdinalIgnoreCase)
+                    && password != CredentialSeparator.ToString()
+                    && !validCredentialPattern.IsMatch(password);
             }
         }
     }
