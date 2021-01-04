@@ -147,15 +147,25 @@ namespace Tests.Diagnostics
             a = $@"Server = localhost; Database = Test; User = SA; Password = {secretConst}";       // Noncompliant
         }
 
-        public void StringFormat(string arg)
+        public void StringFormat(string arg, IFormatProvider formatProvider, string[] arr)
         {
             var secretVariable = "literalValue";
-
-            var a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);           // FN
-            var b = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretField);     // FN
-            var c = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, secretVariable);  // FN
-            var d = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", arg);                   // Compliant
-            var e = String.Format(@"Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);          // FN
+            string a;
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);           // FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretField);     // FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, secretVariable);  // FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", arg);                   // Compliant
+            a = String.Format(@"Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);          // FN
+            a = String.Format(formatProvider, "Database = Test; User = SA; Password = {0}", secretConst);               // Compliant, we can't simulate formatProvider behavior
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", arr);                   // Compliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {invalid}", secretConst);     // Noncompliant FP from normal string detection
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = invalid {0", secretConst);    // Noncompliant FP from normal string detection
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0:#,0.00}", arg);            // Compliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}{2}", arg);             // Compliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = hardcoded");                  // Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = {0}; Password = hardcoded", arg);            // Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}{0}", arg, secretConst);   // FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}", arg, secretConst);   // Compliant
         }
 
         public void StandardAPI(SecureString secureString, string nonHardcodedPassword, byte[] byteArray, CspParameters cspParams)
