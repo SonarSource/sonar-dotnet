@@ -27,34 +27,23 @@ namespace SonarAnalyzer.Helpers
 {
     public class CSharpObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
     {
-        public CSharpObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
-        {
-        }
-
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.ObjectCreationExpression };
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        public CSharpObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         internal override ObjectCreationCondition ArgumentAtIndexIsConst(int index) =>
-            context =>
-            {
-                var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
-                return argumentList != null &&
-                    argumentList.Arguments.Count > index &&
-                    argumentList.Arguments[index].Expression.IsConstant(context.SemanticModel);
-            };
+            context => ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList is { } argumentList
+                        && argumentList.Arguments.Count > index
+                        && argumentList.Arguments[index].Expression.IsConstant(context.SemanticModel);
 
         internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName)
         {
             var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
             var values = CSharpSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName);
-            if (values.Length == 1 && values[0] is ExpressionSyntax valueSyntax)
-            {
-                return context.SemanticModel.GetConstantValue(valueSyntax).Value;
-            }
-            return null;
+            return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
+                ? context.SemanticModel.GetConstantValue(valueSyntax).Value
+                : null;
         }
     }
 }

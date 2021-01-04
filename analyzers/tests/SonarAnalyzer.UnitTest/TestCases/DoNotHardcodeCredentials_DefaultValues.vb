@@ -10,7 +10,16 @@ Namespace Tests.Diagnostics
         Public Const DBConnectionString As String = "Server=localhost; Database=Test; User=SA; Password=Secret123"    ' Noncompliant
         Public Const EditPasswordPageUrlToken As String = "{Account.EditPassword.PageUrl}" ' Compliant
 
-        Private Const Secret As String = "constantValue"
+        Private Const SecretConst As String = "constantValue"
+        Private SecretField As String = "literalValue"
+        Private SecretFieldConst As String = SecretConst
+        Private SecretFieldUninitialized As String
+        Private SecretFieldNull As String = Nothing
+        Private SecretFieldMethod As String = SomeMethod()
+
+        Private Shared Function SomeMethod() As String
+            Return ""
+        End Function
 
         Public Sub Test(User As String)
             Dim password As String = "foo" 'Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
@@ -22,11 +31,15 @@ Namespace Tests.Diagnostics
             Dim bar As String
             bar = "Password=p" 'Noncompliant ^13#18
 
+            Dim obj As Object
+            obj = "Password=p" ' Compliant, only assignment To String Is inspected
+
             foo = "password"
             foo = "password="
             foo = "passwordpassword"
             foo = "foo=1;password=1" 'Noncompliant
             foo = "foo=1password=1"
+
 
             Dim myPassword1 As String = Nothing
             Dim myPassword2 As String = ""
@@ -58,10 +71,82 @@ Namespace Tests.Diagnostics
             Const Localhost As String = "localhost"
         End Sub
 
+        Public Sub Concatenations(Arg As String)
+            Dim SecretVariable As String = "literalValue"
+            Dim SecretVariableConst As String = SecretConst
+            Dim SecretVariableNull As String = Nothing
+            Dim SecretVariableMethod As String = SomeMethod()
+            Dim a As String
+
+            a = "Server = localhost; Database = Test; User = SA; Password = " & "hardcoded"           ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + "hardcoded"           ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretConst           ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretConst           ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretField           ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretField           ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldConst      ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariable        ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretVariable        ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableConst   ' FN
+
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldUninitialized  ' Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldNull           ' Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableNull        ' Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableMethod      ' Compliant, not initialized to constant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg                       ' Compliant, not initialized to constant
+
+            Const PasswordPrefixConst As String = "Password = "         ' Compliant by it's name
+            Dim PasswordPrefixVariable As String = "Password = "        ' Compliant by it's name
+            a = "Server = localhost;" & " Database = Test; User = SA; Password = " & SecretConst                ' Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + SecretConst                ' Noncompliant
+            a = "Server = localhost;" & " Database = Test; User = SA; Pa" & "ssword = " & SecretConst           ' FN, we don't track all concatenations to avoid duplications
+            a = "Server = localhost;" & " Database = Test; User = SA; " & PasswordPrefixConst & SecretConst     ' Noncompliant
+            a = "Server = localhost;" & " Database = Test; User = SA; " & PasswordPrefixVariable & SecretConst  ' FN
+            a = "Server = localhost;" & " Database = Test; User = SA; Password = " & SecretConst & " suffix"    ' Noncompliant
+            '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            a = SomeMethod() & " Database = Test; User = SA; Password = " & SecretConst & " suffix"             ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretConst & Arg & " suffix"   ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg & SecretConst & " suffix"   ' Compliant
+            a = SecretConst & "Server = localhost; Database = Test; User = SA; Password = " & Arg               ' Compliant
+            a = "Server = localhost; Database = Test; User = SA; " & SomeMethod() & SecretConst                 ' Compliant
+
+            ' Reassigned
+            SecretVariableMethod = "literal"
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldMethod ' FN
+            Arg = "literal"
+            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg               ' FN
+            SecretVariable = SomeMethod()
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariable    ' Compliant
+        End Sub
+
+        Public Sub Interpolations(Arg As String)
+            Dim SecretVariable As String = "literalValue"
+
+            Dim a As String = $"Server = localhost; Database = Test; User = SA; Password = {SecretConst}"       ' FN
+            Dim b As String = $"Server = localhost; Database = Test; User = SA; Password = {SecretField}"       ' FN
+            Dim c As String = $"Server = localhost; Database = Test; User = SA; Password = {SecretVariable}"    ' FN
+            Dim d As String = $"Server = localhost; Database = Test; User = SA; Password = {Arg}"               ' Compliant
+        End Sub
+
+        Public Sub StringFormat(Arg As String)
+            Dim SecretVariable As String = "literalValue"
+
+            Dim a As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", SecretConst)          ' FN
+            Dim b As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretField) ' FN
+            Dim c As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, SecretVariable) ' FN
+            Dim d As String = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arg)                  ' Compliant
+        End Sub
+
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)
+            Const SecretLocalConst As String = "hardcodedSecret"
+            Dim SecretVariable As String = "literalValue"
+            Dim SecretVariableConst As String = SecretConst
+            Dim SecretVariableNull As String = Nothing
+            Dim SecretVariableMethod As String = SomeMethod()
             Dim networkCredential = New NetworkCredential()
             networkCredential.Password = nonHardcodedPassword
             networkCredential.Domain = "hardcodedDomain"
+
             networkCredential = New NetworkCredential("username", secureString)
             networkCredential = New NetworkCredential("username", nonHardcodedPassword)
             networkCredential = New NetworkCredential("username", secureString, "domain")
@@ -76,14 +161,26 @@ Namespace Tests.Diagnostics
             passwordDeriveBytes = New PasswordDeriveBytes(nonHardcodedPassword, byteArray, "strHashName", 1, cspParams)
             passwordDeriveBytes = New PasswordDeriveBytes(New Byte() {1}, byteArray, "strHashName", 1, cspParams)
 
-            networkCredential = New NetworkCredential("username", Secret) 'Noncompliant {{Please review this hard-coded password.}}
-            networkCredential = New NetworkCredential("username", "hardcoded") 'Noncompliant {{Please review this hard-coded password.}}
-            networkCredential = New NetworkCredential("username", "hardcoded", "domain") 'Noncompliant {{Please review this hard-coded password.}}
-            networkCredential.Password = "hardcoded" 'Noncompliant {{Please review this hard-coded password.}}
-            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray) 'Noncompliant {{Please review this hard-coded password.}}
-            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, cspParams) 'Noncompliant {{Please review this hard-coded password.}}
-            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1) 'Noncompliant {{Please review this hard-coded password.}}
-            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams) 'Noncompliant {{Please review this hard-coded password.}}
+            networkCredential = New NetworkCredential("username", SecretConst)           ' Noncompliant {{Please review this hard-coded password.}}
+            networkCredential = New NetworkCredential("username", SecretLocalConst)      ' Noncompliant {{Please review this hard-coded password.}}
+            networkCredential = New NetworkCredential("username", SecretField)           ' FN
+            networkCredential = New NetworkCredential("username", SecretFieldConst)      ' FN
+            networkCredential = New NetworkCredential("username", SecretVariable)        ' FN
+            networkCredential = New NetworkCredential("username", SecretVariableConst)   ' FN
+            networkCredential = New NetworkCredential("username", "hardcoded")           ' Noncompliant {{Please review this hard-coded password.}}
+            networkCredential = New NetworkCredential("username", "hardcoded", "domain") ' Noncompliant {{Please review this hard-coded password.}}
+            networkCredential.Password = "hardcoded"                                     ' Noncompliant {{Please review this hard-coded password.}}
+            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray)                               'Noncompliant {{Please review this hard-coded password.}}
+            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, cspParams)                    'Noncompliant {{Please review this hard-coded password.}}
+            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1)             'Noncompliant {{Please review this hard-coded password.}}
+            passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams)  'Noncompliant {{Please review this hard-coded password.}}
+
+            ' Compliant
+            networkCredential = New NetworkCredential("username", SecretFieldUninitialized)
+            networkCredential = New NetworkCredential("username", SecretFieldNull)
+            networkCredential = New NetworkCredential("username", SecretFieldMethod)
+            networkCredential = New NetworkCredential("username", SecretVariableNull)
+            networkCredential = New NetworkCredential("username", SecretVariableMethod)
         End Sub
 
         Public Sub CompliantParameterUse(pwd As String)
