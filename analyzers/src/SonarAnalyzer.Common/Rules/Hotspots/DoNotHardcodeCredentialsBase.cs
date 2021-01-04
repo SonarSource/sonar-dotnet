@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules
             private readonly Regex uriUserInfoPattern;
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
-            protected abstract bool IsAssignedWithStringLiteral(TSyntaxNode syntaxNode, SemanticModel semanticModel);
+            protected abstract bool ShouldHandle(TSyntaxNode syntaxNode, SemanticModel semanticModel);
             protected abstract string GetVariableName(TSyntaxNode syntaxNode);
             protected abstract string GetAssignedValue(TSyntaxNode syntaxNode, SemanticModel semanticModel);
 
@@ -133,11 +133,9 @@ namespace SonarAnalyzer.Rules
                 context =>
                 {
                     var declarator = (TSyntaxNode)context.Node;
-                    if (!IsAssignedWithStringLiteral(declarator, context.SemanticModel))
-                    {
-                        return;
-                    }
-                    if (GetAssignedValue(declarator, context.SemanticModel) is { } variableValue && !string.IsNullOrWhiteSpace(variableValue))
+                    if (ShouldHandle(declarator, context.SemanticModel)
+                        && GetAssignedValue(declarator, context.SemanticModel) is { } variableValue
+                        && !string.IsNullOrWhiteSpace(variableValue))
                     {
                         var bannedWords = FindCredentialWords(GetVariableName(declarator), variableValue);
                         if (bannedWords.Any())

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -72,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
         {
-            public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+            public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Initializer?.Value.GetStringValue();
@@ -80,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Identifier.ValueText;
 
-            protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
+            protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression
                 && literalExpression.IsKind(SyntaxKind.StringLiteralExpression)
                 && syntaxNode.IsDeclarationKnownType(KnownType.System_String, semanticModel);
@@ -88,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentExpressionSyntax>
         {
-            public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+            public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(AssignmentExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Right.GetStringValue();
@@ -96,8 +97,9 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override string GetVariableName(AssignmentExpressionSyntax syntaxNode) =>
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
 
-            protected override bool IsAssignedWithStringLiteral(AssignmentExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel)
+            protected override bool ShouldHandle(AssignmentExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                && syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel)
                 && syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
         }
 
@@ -109,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
         /// </summary>
         private class StringLiteralBannedWordsFinder : CredentialWordsFinderBase<LiteralExpressionSyntax>
         {
-            public StringLiteralBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+            public StringLiteralBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.GetStringValue();
@@ -120,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override string GetVariableName(LiteralExpressionSyntax syntaxNode) =>
                 null;
 
-            protected override bool IsAssignedWithStringLiteral(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
+            protected override bool ShouldHandle(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && ShouldHandle(syntaxNode.GetTopMostContainingMethod(), syntaxNode);
 
             private static bool ShouldHandle(SyntaxNode method, SyntaxNode current)
@@ -154,7 +156,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class AddExpressionBannedWordsFinder : CredentialWordsFinderBase<BinaryExpressionSyntax>
         {
-            public AddExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+            public AddExpressionBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel)
             {
@@ -170,24 +172,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
 
-            protected override bool IsAssignedWithStringLiteral(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+            protected override bool ShouldHandle(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
 
         private class InterpolatedStringBannedWordsFinder : CredentialWordsFinderBase<InterpolatedStringExpressionSyntax>
         {
-            public InterpolatedStringBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+            public InterpolatedStringBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Contents.JoinStr(null, x => x switch
-                                                        {
-                                                            InterpolationSyntax interpolation => semanticModel.GetConstantValue(interpolation.Expression).Value as string,
-                                                            InterpolatedStringTextSyntax text => text.TextToken.ToString(),
-                                                            _ => null
-                                                        } ?? CredentialSeparator.ToString()); // Unknown elements resolved to separator to terminate the keyword-value sequence
+                {
+                    InterpolationSyntax interpolation => semanticModel.GetConstantValue(interpolation.Expression).Value as string,
+                    InterpolatedStringTextSyntax text => text.TextToken.ToString(),
+                    _ => null
+                } ?? CredentialSeparator.ToString()); // Unknown elements resolved to separator to terminate the keyword-value sequence
 
             protected override string GetVariableName(InterpolatedStringExpressionSyntax syntaxNode) => null;
 
-            protected override bool IsAssignedWithStringLiteral(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+            protected override bool ShouldHandle(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
     }
 }

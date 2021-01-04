@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -81,7 +83,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Names[0].Identifier.ValueText; // We already tested the count in IsAssignedWithStringLiteral
 
-            protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
+            protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Names.Count == 1
                 && syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression
                 && literalExpression.IsKind(SyntaxKind.StringLiteralExpression)
@@ -98,8 +100,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetVariableName(AssignmentStatementSyntax syntaxNode) =>
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
 
-            protected override bool IsAssignedWithStringLiteral(AssignmentStatementSyntax syntaxNode, SemanticModel semanticModel) =>
-                syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel)
+            protected override bool ShouldHandle(AssignmentStatementSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.IsKind(SyntaxKind.SimpleAssignmentStatement)
+                && syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel)
                 && syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
         }
 
@@ -122,7 +125,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetVariableName(LiteralExpressionSyntax syntaxNode) =>
                 null;
 
-            protected override bool IsAssignedWithStringLiteral(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
+            protected override bool ShouldHandle(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && ShouldHandle(syntaxNode.GetTopMostContainingMethod(), syntaxNode);
 
             // We don't want to handle VariableDeclarator and SimpleAssignmentExpression,
@@ -175,7 +178,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
 
-            protected override bool IsAssignedWithStringLiteral(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+            protected override bool ShouldHandle(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
 
         private class InterpolatedStringBannedWordsFinder : CredentialWordsFinderBase<InterpolatedStringExpressionSyntax>
@@ -192,7 +195,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             protected override string GetVariableName(InterpolatedStringExpressionSyntax syntaxNode) => null;
 
-            protected override bool IsAssignedWithStringLiteral(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+            protected override bool ShouldHandle(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
         }
     }
 }
