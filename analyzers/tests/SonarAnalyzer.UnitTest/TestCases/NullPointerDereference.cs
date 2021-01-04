@@ -674,16 +674,37 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class GuardedTests
+    public static class GuardedTests
     {
-        public void Guarded(string s1)
+        public static void Guarded(string s1)
         {
             Guard1(s1);
 
             if (s1 == null) s1.ToUpper(); // Compliant, this code is unreachable
         }
 
-        public void Guard1<T>([ValidatedNotNull]T value) where T : class { }
+        public static void Guard1<T>([ValidatedNotNull]T value) where T : class { }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/3850
+        public static void UsedAsExtension()
+        {
+            object a = null;
+            if (a.IsNotNull())
+            {
+                a.ToString();   // Noncompliant FP
+            }
+        }
+
+        public static void UsedAsMethod()
+        {
+            object a = null;
+            if (IsNotNull(a))
+            {
+                a.ToString();   // Compliant
+            }
+        }
+
+        public static bool IsNotNull([ValidatedNotNull] this object item) => item != null;
 
         [AttributeUsage(AttributeTargets.Parameter)]
         public sealed class ValidatedNotNullAttribute : Attribute { }
@@ -799,3 +820,4 @@ namespace Tests.Diagnostics
         }
     }
 }
+
