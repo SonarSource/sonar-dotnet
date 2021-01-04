@@ -96,7 +96,7 @@ Namespace Tests.Diagnostics
             command.CommandText = "SELECT * FROM mytable WHERE mycol=" & param ' Noncompliant
             command.CommandText = $"SELECT * FROM mytable WHERE mycol={param}" ' Noncompliant
             Dim adapter = New OdbcDataAdapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
-            Dim adapter1 = New odbcdataadapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
+            Dim adapter1 = New odbcdataadapter(sTRing.foRmAt("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
         End Sub
 
         Public Sub OracleCommands(ByVal connection As OracleConnection, ByVal transaction As OracleTransaction, ByVal query As String)
@@ -121,7 +121,7 @@ Namespace Tests.Diagnostics
         Public Sub NonCompliant_OracleCommands(ByVal connection As OracleConnection, ByVal transaction As OracleTransaction, ByVal query As String, ByVal param As String)
             Dim command = New OracleCommand("SELECT * FROM mytable WHERE mycol=" & param) ' Noncompliant
             command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
-            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+            command.CommandText = string.forMAT("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
             Dim x = New OracleDataAdapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
             x = New OracleDataAdapter($"INSERT INTO Users (name) VALUES (""{param}"")", "") ' Noncompliant
         End Sub
@@ -151,7 +151,7 @@ Namespace Tests.Diagnostics
             command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
         End Sub
 
-        Public Sub Bar(ByVal connection As SqlConnection, ByVal param As String)
+        Public Sub ConcatAndStringFormat(ByVal connection As SqlConnection, ByVal param As String)
             Dim sensitiveQuery As String = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)
             Dim command = New SqlCommand(sensitiveQuery)    'Noncompliant
             command.CommandText = sensitiveQuery            'Noncompliant

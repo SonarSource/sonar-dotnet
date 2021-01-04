@@ -69,9 +69,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool IsConcat(ExpressionSyntax argument, SemanticModel semanticModel) =>
             IsStringMethodInvocation("Concat", argument, semanticModel)
             || IsConcatenation(argument, semanticModel)
-            || (argument is IdentifierNameSyntax identifierNameSyntax
-                && semanticModel.GetDeclaringSyntaxNode(identifierNameSyntax)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax
-                && IsConcat(variableDeclaratorSyntax.Initializer?.Value, semanticModel));
+            || IsVariableDeclarationWithConcat(argument, semanticModel);
 
         protected override bool IsInterpolated(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression switch
@@ -93,6 +91,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
             IsConcatenationOperator(expression)
             && expression is BinaryExpressionSyntax concatenation
             && !IsConcatenationOfConstants(concatenation, semanticModel);
+
+        private bool IsVariableDeclarationWithConcat(ExpressionSyntax argument, SemanticModel semanticModel) =>
+            (argument is IdentifierNameSyntax identifierNameSyntax
+             && semanticModel.GetDeclaringSyntaxNode(identifierNameSyntax)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax
+             && IsConcat(variableDeclaratorSyntax.Initializer?.Value, semanticModel));
 
         private bool IsInterpolated(IdentifierNameSyntax identifier, SemanticModel semanticModel) =>
             semanticModel.GetDeclaringSyntaxNode(identifier)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax
@@ -121,15 +124,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 while (nestedBinary != null)
                 {
-                    if (!nestedBinary.Right.IsConstant(semanticModel)
-                        || (!IsConcatenationOperator(nestedBinary)
-                            && !nestedBinary.IsConstant(semanticModel)))
+                    if (nestedBinary.Right.IsConstant(semanticModel)
+                        && (IsConcatenationOperator(nestedBinary) || nestedBinary.IsConstant(semanticModel)))
+                    {
+                        nestedLeft = nestedBinary.Left;
+                        nestedBinary = nestedLeft as BinaryExpressionSyntax;
+                    }
+                    else
                     {
                         return false;
                     }
-
-                    nestedLeft = nestedBinary.Left;
-                    nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 }
                 return nestedLeft.IsConstant(semanticModel);
             }

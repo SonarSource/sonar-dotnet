@@ -182,7 +182,7 @@ namespace Tests.Diagnostics
             command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
         }
 
-        public void Bar(SqlConnection connection, string param)
+        public void ConcatAndStringFormat(SqlConnection connection, string param)
         {
             SqlCommand command;
             string sensitiveQuery = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
@@ -203,6 +203,9 @@ namespace Tests.Diagnostics
 
             SqlDataAdapter adapter;
             adapter = new SqlDataAdapter(sensitiveQuery, connection); // Noncompliant
+
+            command = new SqlCommand("SELECT * FROM Table1 WHERE col1 = '" + param + "'"); // Noncompliant
+            command.CommandText = "SELECT * FROM Table1 WHERE col1 = '" + param + "'"; // Noncompliant
 
             string x = null;
             x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
