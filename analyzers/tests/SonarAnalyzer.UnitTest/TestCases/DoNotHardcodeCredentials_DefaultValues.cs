@@ -114,13 +114,13 @@ namespace Tests.Diagnostics
 
             const string passwordPrefixConst = "Password = ";       // Compliant by it's name
             var passwordPrefixVariable = "Password = ";             // Compliant by it's name
-            a = "Server = localhost;" +" Database = Test; User = SA; Password = " + secretConst;                // Noncompliant
-            a = "Server = localhost;" +" Database = Test; User = SA; Pa" + "ssword = " + secretConst;           // FN, we don't track all concatenations to avoid duplications
-            a = "Server = localhost;" +" Database = Test; User = SA; " + passwordPrefixConst + secretConst;     // Noncompliant
-            a = "Server = localhost;" +" Database = Test; User = SA; " + passwordPrefixVariable + secretConst;  // FN
-            a = "Server = localhost;" +" Database = Test; User = SA; Password = " + secretConst + " suffix";    // Noncompliant
-            //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            a = someMethod() +" Database = Test; User = SA; Password = " + secretConst + " suffix";             // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst;                // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Pa" + "ssword = " + secretConst;           // FN, we don't track all concatenations to avoid duplications
+            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixConst + secretConst;     // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixVariable + secretConst;  // FN
+            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst + " suffix";    // Noncompliant
+            //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            a = someMethod() + " Database = Test; User = SA; Password = " + secretConst + " suffix";             // Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst + arg + " suffix";  // Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " + arg + secretConst + " suffix";  // Compliant
             a = secretConst + "Server = localhost; Database = Test; User = SA; Password = " + arg;              // Compliant
@@ -167,6 +167,9 @@ namespace Tests.Diagnostics
             a = String.Format("Server = localhost; Database = Test; User = {0}; Password = hardcoded", arg);            // Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}{0}", arg, secretConst);   // Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}", arg, secretConst);   // Compliant
+            a = String.Format("{0} Argument 1 is not used","Hello", "User = SA; Password = hardcoded");                 // Compliant
+
+            a = String.Format(arg0: secretConst, format: "Server = localhost; Database = Test; User = SA; Password = {0}");  // FN, not supported
         }
 
         public void StandardAPI(SecureString secureString, string nonHardcodedPassword, byte[] byteArray, CspParameters cspParams)

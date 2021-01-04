@@ -148,6 +148,9 @@ Namespace Tests.Diagnostics
             a = String.Format("Server = localhost; Database = Test; User = {0}; Password = hardcoded", Arg)             ' Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}{0}", Arg, SecretConst)    ' Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}{1}", Arg, SecretConst)    ' Compliant
+            a = String.Format("{0} Argument 1 is not used", "Hello", "User = SA; Password = hardcoded")                 ' Compliant
+
+            a = String.Format(arg0:=SecretConst, format:="Server = localhost; Database = Test; User = SA; Password = {0}")  ' FN, not supported
         End Sub
 
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)
