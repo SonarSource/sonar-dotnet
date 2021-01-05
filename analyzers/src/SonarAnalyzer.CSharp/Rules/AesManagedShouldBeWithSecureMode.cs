@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(KnownType.System_Security_Cryptography_AesManaged);
 
-        protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+        protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
             isAllowedConstantValue: constantValue => false,
             trackedTypes: TrackedTypes,
             isTrackedPropertyName: propertyName => "Mode" == propertyName
