@@ -67,11 +67,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 : null;
 
         protected override bool IsTracked(ExpressionSyntax argument, SemanticModel semanticModel) =>
-            argument != null &&
-                (IsConcatenation(argument, semanticModel)
-                 || argument.IsKind(SyntaxKind.InterpolatedStringExpression)
-                 || (argument is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel))
-                 || IsTrackedVariableDeclaration(argument, semanticModel));
+            argument != null
+            && (IsConcatenation(argument, semanticModel)
+                || argument.IsKind(SyntaxKind.InterpolatedStringExpression)
+                || (argument is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel))
+                || IsTrackedVariableDeclaration(argument, semanticModel));
 
         private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             (invocation.IsMethodInvocation(KnownType.System_String, "Format", semanticModel) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", semanticModel))
