@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string GetStringValue(SemanticModel semanticModel, ArgumentListSyntax argumentList, int index) =>
             argumentList.Get(index) is { } argument
-                ? argument.GetStringValue() ?? semanticModel.GetConstantValue(argument).Value as string
+                ? argument.FindStringConstant(semanticModel)
                 : null;
     }
 }

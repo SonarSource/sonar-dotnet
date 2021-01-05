@@ -7,6 +7,9 @@ namespace Tests.Diagnostics
 {
     class Program
     {
+        string longField = "a+a+";
+        string shortField = "x";
+
         void Main(string s)
         {
             Regex r;
@@ -86,6 +89,13 @@ namespace Tests.Diagnostics
             r = new Regex(s, RegexOptions.Compiled, TimeSpan.Zero);
             Regex.Replace("{ab}*{ab}+{cd}+foo*", s, "{ab}*{ab}+{cd}+foo*", RegexOptions.Compiled, TimeSpan.Zero);
             Regex.Split("{ab}*{ab}+{cd}+foo*", s, RegexOptions.Compiled, TimeSpan.Zero);
+
+            var variable = "a+a+";
+            new Regex(variable);    // Noncompliant
+            new Regex(longField);   // Noncompliant
+            variable = "x";
+            new Regex(variable);    // Compliant, too short
+            new Regex(shortField);  // Compliant, too short
         }
     }
 
@@ -93,18 +103,18 @@ namespace Tests.Diagnostics
     class Repro_3298
     {
         private const string ClassUnsafeRegex = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
-        private string nontrackedField = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
+        private string trackedField = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
 
         void Go()
         {
             const string LocalUnsafeRegex = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
-            string nontrackedVariable = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
+            string trackedVariable = @"^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$";
 
             new Regex(ClassUnsafeRegex);    // Noncompliant
             new Regex(LocalUnsafeRegex);    // Noncompliant
 
-            new Regex(nontrackedField);     // not hardcoded strings are compliant
-            new Regex(nontrackedVariable);  // not hardcoded strings are compliant
+            new Regex(trackedField);        // Noncompliant
+            new Regex(trackedVariable);     // Noncompliant
         }
     }
 }
