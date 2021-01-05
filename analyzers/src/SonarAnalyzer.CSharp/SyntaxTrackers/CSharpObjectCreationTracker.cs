@@ -22,13 +22,14 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
     public class CSharpObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
     {
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.ObjectCreationExpression };
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
 
         public CSharpObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
