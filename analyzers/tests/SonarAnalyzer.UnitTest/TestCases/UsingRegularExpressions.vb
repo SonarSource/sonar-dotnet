@@ -3,7 +3,12 @@ Imports System.Text.RegularExpressions
 Imports RE = System.Text.RegularExpressions.Regex
 
 Namespace Tests.Diagnostics
+
     Class Program
+
+        Private LongField As String = "a+a+"
+        Private ShortField As String = "x"
+
         Private Sub Main(ByVal s As String)
             Dim r As Regex
             r = New Regex("")
@@ -12,7 +17,7 @@ Namespace Tests.Diagnostics
             r = New Regex("abcdefghijklmnopqrst")
             r = New Regex("abcdefghijklmnopqrst+")
             r = New Regex("{abc}+defghijklmnopqrst") ' Noncompliant {{Make sure that using a regular expression is safe here.}}
-'               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             r = New Regex("{abc}+{a}") ' Noncompliant
             r = New Regex("+++") ' Noncompliant
             r = New Regex("\\+\\+\\+") ' Noncompliant FP (escaped special characters)
@@ -23,8 +28,7 @@ Namespace Tests.Diagnostics
             r = New Regex("(a+)+s", RegexOptions.Compiled) ' Noncompliant
             r = New Regex("(a+)+s", RegexOptions.Compiled, TimeSpan.Zero) ' Noncompliant
             r = New Regex("{ab}*{ab}+{cd}+foo*") ' Noncompliant
-            Regex.IsMatch("", "(a+)+s") ' Noncompliant
-'           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            Regex.IsMatch("", "(a+)+s") ' Noncompliant ^13#27
             Regex.IsMatch(s, "(a+)+s", RegexOptions.Compiled) ' Noncompliant
             Regex.IsMatch("", "{foo}{bar}", RegexOptions.Compiled, TimeSpan.Zero) ' Noncompliant
             Regex.Match(s, "{foo}{bar}") ' Noncompliant
@@ -71,22 +75,30 @@ Namespace Tests.Diagnostics
             r = New Regex(s, RegexOptions.Compiled, TimeSpan.Zero)
             Regex.Replace("{ab}*{ab}+{cd}+foo*", s, "{ab}*{ab}+{cd}+foo*", RegexOptions.Compiled, TimeSpan.Zero)
             Regex.Split("{ab}*{ab}+{cd}+foo*", s, RegexOptions.Compiled, TimeSpan.Zero)
+
+            Dim Variable As String = "a+a+"
+            r = New Regex(Variable)     ' Noncompliant
+            r = New Regex(LongField)    ' Noncompliant
+            Variable = "x"
+            r = New Regex(Variable)     ' Compliant, too Short
+            r = New Regex(ShortField)   ' Compliant, too Short
         End Sub
+
     End Class
 
     ' https//github.com/SonarSource/sonar-dotnet/issues/3298
     Class Repro_3298
 
         Private Const ClassUnsafeRegex As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
-        Private NontrackedField As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
+        Private TrackedField As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
 
         Public Sub Go()
             Const LocalUnsafeRegex As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
-            Dim NontrackedVariable As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
+            Dim TrackedVariable As String = "^([(?>\.\-)*|\w]+)@\w+(?>(([\.-]?\w+)(?!$)))*(\.\w{2,3})+$"
             Dim a As New Regex(ClassUnsafeRegex)    ' Noncompliant
             Dim b As New Regex(LocalUnsafeRegex)    ' Noncompliant
-            Dim c As New Regex(NontrackedField)     ' Not hardcoded strings are compliant
-            Dim d As New Regex(NontrackedVariable)  ' Not hardcoded strings are compliant
+            Dim c As New Regex(TrackedField)        ' Noncompliant
+            Dim d As New Regex(TrackedVariable)     ' Noncompliant
         End Sub
 
     End Class
