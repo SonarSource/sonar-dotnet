@@ -34,7 +34,7 @@ Namespace Tests.Diagnostics
 
         Public Sub NonCompliant_Concat_SqlCommands(ByVal connection As SqlConnection, ByVal transaction As SqlTransaction, ByVal query As String, ByVal param As String)
             Dim command = New SqlCommand(String.Concat(query, param)) ' Noncompliant {{Make sure that formatting this SQL query is safe here.}}
-'                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            '             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             command = New SqlCommand(query & param, connection) ' Noncompliant
             command = New SqlCommand(query + param, connection) ' Noncompliant
             command = New SqlCommand(query + param & param, connection) ' Noncompliant
@@ -51,8 +51,7 @@ Namespace Tests.Diagnostics
             Dim dateTime As DateTime = DateTime.Now
             command = New SqlCommand(String.Format("INSERT INTO Users (name) VALUES (""{0}"", ""{2}"", ""{3}"")", x, g, dateTime), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Noncompliant - scalars can be dangerous and lead to expensive queries
             command = New SqlCommand(String.Format("INSERT INTO Users (name) VALUES (""{0}"", ""{2}"", ""{3}"")", x, param, dateTime), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Noncompliant
-            command.CommandText = String.Concat(query, param) ' Noncompliant
-'           ^^^^^^^^^^^^^^^^^^^
+            command.CommandText = String.Concat(query, param) ' Noncompliant ^13#19
             Dim adapter = New SqlDataAdapter(String.Concat(query, param), "") ' Noncompliant
         End Sub
 
@@ -63,18 +62,6 @@ Namespace Tests.Diagnostics
             command = New SqlCommand(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Noncompliant
             command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
             Dim adapter = New SqlDataAdapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
-
-            Dim sensitiveQuery = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)
-            Dim stillSensitive = sensitiveQuery
-            command.CommandText = stillSensitive ' Noncompliant
-
-            Dim x as String
-            x = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)
-            command.CommandText = x ' FN
-
-            Dim y as String
-            y = sensitiveQuery
-            command.CommandText = y ' FN
         End Sub
 
         Public Sub NonCompliant_Interpolation_SqlCommands(ByVal connection As SqlConnection, ByVal transaction As SqlTransaction, ByVal param As String)
@@ -162,6 +149,37 @@ Namespace Tests.Diagnostics
             Dim x = New SqlCeDataAdapter(String.Concat(query, param), "") ' Noncompliant
             Dim command = New SqlCeCommand("" & param) ' Noncompliant
             command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+        End Sub
+
+        Public Sub ConcatAndStringFormat(ByVal connection As SqlConnection, ByVal param As String)
+            Dim sensitiveQuery As String = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)
+            Dim command = New SqlCommand(sensitiveQuery)    'Noncompliant
+            command.CommandText = sensitiveQuery            'Noncompliant
+
+            Dim stillSensitive As String = sensitiveQuery
+            command.CommandText = stillSensitive            'Noncompliant
+
+            Dim sensitiveConcatQuery As String = "SELECT * FROM Table1 WHERE col1 = '" + param + "'"
+            command = New SqlCommand(sensitiveConcatQuery)             'Noncompliant
+            command.CommandText = sensitiveConcatQuery                 'Noncompliant
+
+            Dim stillSensitiveConcat As String = sensitiveConcatQuery
+            command.CommandText = stillSensitiveConcat                 'Noncompliant
+
+            Dim sensitiveConcatQuery2 As String = "SELECT * FROM Table1 WHERE col1 = '" & param & "'"
+            command = New SqlCommand(sensitiveConcatQuery2)             'Noncompliant
+            command.CommandText = sensitiveConcatQuery2                 'Noncompliant
+
+            Dim stillSensitiveConcat2 As String = sensitiveConcatQuery2
+            command.CommandText = stillSensitiveConcat2                 'Noncompliant
+
+            Dim x As String
+            x = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)
+            command.CommandText = x ' FN
+
+            Dim y As String
+            y = sensitiveQuery
+            command.CommandText = y ' FN
         End Sub
 
     End Class

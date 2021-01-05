@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -35,23 +34,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
-
         public ExecutingSqlQueries()
             : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analyzerConfiguration)
+        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
         {
-            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, Rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, Rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, Rule);
         }
 
         protected override ExpressionSyntax GetInvocationExpression(SyntaxNode expression) =>
@@ -74,48 +66,33 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 ? objectCreation.ArgumentList.Get(0)
                 : null;
 
-        protected override bool IsConcat(ExpressionSyntax argument, SemanticModel semanticModel) =>
-            IsStringMethodInvocation("Concat", argument, semanticModel) ||
-            (
-                IsConcatenationOperator(argument) &&
-                argument is BinaryExpressionSyntax concatenation &&
-                !IsConcatenationOfConstants(concatenation, semanticModel)
-            );
+        protected override bool IsTracked(ExpressionSyntax argument, SemanticModel semanticModel) =>
+            argument != null
+            && (IsConcatenation(argument, semanticModel)
+                || argument.IsKind(SyntaxKind.InterpolatedStringExpression)
+                || (argument is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel))
+                || IsTrackedVariableDeclaration(argument, semanticModel));
 
-        protected override bool IsInterpolated(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression switch
-            {
-                null => false,
-                IdentifierNameSyntax identifierNameSyntax => IsInterpolated(identifierNameSyntax, semanticModel),
-                _ => expression.IsKind(SyntaxKind.InterpolatedStringExpression)
-            };
+        private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            (invocation.IsMethodInvocation(KnownType.System_String, "Format", semanticModel) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", semanticModel))
+            && !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
 
-        private bool IsInterpolated(IdentifierNameSyntax identifier, SemanticModel semanticModel)
-            => semanticModel.GetDeclaringSyntaxNode(identifier)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax &&
-               IsInterpolated(variableDeclaratorSyntax.Initializer?.Value, semanticModel);
+        private static bool IsConcatenation(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            IsConcatenationOperator(expression)
+            && expression is BinaryExpressionSyntax concatenation
+            && !IsConcatenationOfConstants(concatenation, semanticModel);
 
-        protected override bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression switch
-            {
-                InvocationExpressionSyntax invocation => IsStringMethodInvocation(invocation, methodName, semanticModel),
-                IdentifierNameSyntax identifier => IsStringMethodInvocation(identifier, methodName, semanticModel),
-                _ => false
-            };
-
-        private static bool IsStringMethodInvocation(InvocationExpressionSyntax invocation, string methodName, SemanticModel semanticModel) =>
-            invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
-            !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
-
-        private bool IsStringMethodInvocation(IdentifierNameSyntax identifier, string methodName, SemanticModel semanticModel)
-            => semanticModel.GetDeclaringSyntaxNode(identifier)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax &&
-               IsStringMethodInvocation(methodName, variableDeclaratorSyntax.Initializer?.Value, semanticModel);
+        private bool IsTrackedVariableDeclaration(ExpressionSyntax argument, SemanticModel semanticModel) =>
+            (argument is IdentifierNameSyntax identifierNameSyntax
+             && semanticModel.GetDeclaringSyntaxNode(identifierNameSyntax)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax
+             && IsTracked(variableDeclaratorSyntax.Initializer?.Value, semanticModel));
 
         private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
             arguments.All(a => a.GetExpression().IsConstant(semanticModel));
 
         private static bool IsConcatenationOperator(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.ConcatenateExpression) ||
-            node.IsKind(SyntaxKind.AddExpression);
+            node.IsKind(SyntaxKind.ConcatenateExpression)
+            || node.IsKind(SyntaxKind.AddExpression);
 
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
         {
@@ -125,14 +102,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 while (nestedBinary != null)
                 {
-                    if (!nestedBinary.Right.IsConstant(semanticModel) ||
-                        (!IsConcatenationOperator(nestedBinary) && !nestedBinary.IsConstant(semanticModel)))
+                    if (nestedBinary.Right.IsConstant(semanticModel)
+                        && (IsConcatenationOperator(nestedBinary) || nestedBinary.IsConstant(semanticModel)))
+                    {
+                        nestedLeft = nestedBinary.Left;
+                        nestedBinary = nestedLeft as BinaryExpressionSyntax;
+                    }
+                    else
                     {
                         return false;
                     }
-
-                    nestedLeft = nestedBinary.Left;
-                    nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 }
                 return nestedLeft.IsConstant(semanticModel);
             }
