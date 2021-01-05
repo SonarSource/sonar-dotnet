@@ -46,7 +46,10 @@ namespace SonarAnalyzer.Helpers
             return toString.Contains(a) || toString.Contains(b);
         }
 
+        public static object FindConstantValue(this SyntaxNode node, SemanticModel semanticModel) =>
+            new CSharpConstantValueFinder(semanticModel).FindConstant(node);
+
         public static string FindStringConstant(this SyntaxNode node, SemanticModel semanticModel) =>
-            new CSharpStringConstantFinder(semanticModel).FindStringConstant(node);
+            FindConstantValue(node, semanticModel) as string;
     }
 }

@@ -24,7 +24,10 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class SyntaxNodeExtensions
     {
+        public static object FindConstantValue(this SyntaxNode node, SemanticModel semanticModel) =>
+            new VisualBasicConstantValueFinder(semanticModel).FindConstant(node);
+
         public static string FindStringConstant(this SyntaxNode node, SemanticModel semanticModel) =>
-            new VisualBasicStringConstantFinder(semanticModel).FindStringConstant(node);
+            FindConstantValue(node, semanticModel) as string;
     }
 }

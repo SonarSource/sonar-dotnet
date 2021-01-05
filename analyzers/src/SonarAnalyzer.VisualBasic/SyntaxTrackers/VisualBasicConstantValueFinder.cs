@@ -21,22 +21,18 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class VisualBasicStringConstantFinder : StringConstantFinder<IdentifierNameSyntax, VariableDeclaratorSyntax>
+    public class VisualBasicConstantValueFinder : ConstantValueFinder<IdentifierNameSyntax, VariableDeclaratorSyntax>
     {
-        public VisualBasicStringConstantFinder(SemanticModel semanticModel) : base(semanticModel, new VisualBasicAssignmentFinder(), (int)SyntaxKind.NothingLiteralExpression) { }
+        public VisualBasicConstantValueFinder(SemanticModel semanticModel) : base(semanticModel, new VisualBasicAssignmentFinder(), (int)SyntaxKind.NothingLiteralExpression) { }
 
         protected override string IdentifierName(IdentifierNameSyntax node) =>
             node.Identifier.ValueText;
 
         protected override SyntaxNode InitializerValue(VariableDeclaratorSyntax node) =>
             node.Initializer?.Value;
-
-        protected override string StringValue(SyntaxNode node) =>
-            node.GetStringValue();
 
         protected override VariableDeclaratorSyntax VariableDeclarator(SyntaxNode node) =>
             node?.Parent as VariableDeclaratorSyntax;

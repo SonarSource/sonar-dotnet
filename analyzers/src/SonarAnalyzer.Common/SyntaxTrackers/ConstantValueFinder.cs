@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class StringConstantFinder<TIdentifierNameSyntax, TVariableDeclaratorSyntax>
+    public abstract class ConstantValueFinder<TIdentifierNameSyntax, TVariableDeclaratorSyntax>
         where TIdentifierNameSyntax : SyntaxNode
         where TVariableDeclaratorSyntax : SyntaxNode
     {
@@ -32,32 +32,29 @@ namespace SonarAnalyzer.Helpers
         private readonly AssignmentFinder assignmentFinder;
         private readonly int nullLiteralExpressionSyntaxKind;
 
-        protected abstract string StringValue(SyntaxNode node);
         protected abstract string IdentifierName(TIdentifierNameSyntax node);
         protected abstract SyntaxNode InitializerValue(TVariableDeclaratorSyntax node);
         protected abstract TVariableDeclaratorSyntax VariableDeclarator(SyntaxNode node);
 
-        protected StringConstantFinder(SemanticModel semanticModel, AssignmentFinder assignmentFinder, int nullLiteralExpressionSyntaxKind)
+        protected ConstantValueFinder(SemanticModel semanticModel, AssignmentFinder assignmentFinder, int nullLiteralExpressionSyntaxKind)
         {
             this.semanticModel = semanticModel;
             this.assignmentFinder = assignmentFinder;
             this.nullLiteralExpressionSyntaxKind = nullLiteralExpressionSyntaxKind;
         }
 
-        public string FindStringConstant(SyntaxNode node) =>
-            FindStringConstant(node, null);
+        public object FindConstant(SyntaxNode node) =>
+            FindConstant(node, null);
 
-        private string FindStringConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables) =>
+        private object FindConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables) =>
             node == null || node.RawKind == nullLiteralExpressionSyntaxKind  // Performance shortcut
             ? null
-            : StringValue(node)
-                ?? semanticModel.GetConstantValue(node).Value as string
-                ?? FindAssignedStringConstant(node, visitedVariables);
+            : semanticModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, visitedVariables);
 
-        private string FindAssignedStringConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables)
+        private object FindAssignedConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables)
         {
             return node is TIdentifierNameSyntax identifier
-                ? FindStringConstant(assignmentFinder.FindLinearPrecedingAssignmentExpression(IdentifierName(identifier), node, FindFieldInitializer), visitedVariables)
+                ? FindConstant(assignmentFinder.FindLinearPrecedingAssignmentExpression(IdentifierName(identifier), node, FindFieldInitializer), visitedVariables)
                 : null;
 
             SyntaxNode FindFieldInitializer()
