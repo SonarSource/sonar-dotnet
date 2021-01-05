@@ -11,6 +11,9 @@ namespace Tests.Diagnostics
         HttpCookie Property1 { get; set; } = new HttpCookie("c"); // Noncompliant
         HttpCookie Property2 { get; set; }
 
+        private bool trueField = true;
+        private bool falseField = false;
+
         void CtorSetsAllowedValue()
         {
             // none
@@ -24,14 +27,16 @@ namespace Tests.Diagnostics
         void InitializerSetsAllowedValue()
         {
             new HttpCookie("c") { Secure = true };
+            new HttpCookie("c") { Secure = trueField };
         }
 
         void InitializerSetsNotAllowedValue()
         {
-            new HttpCookie("c") { Secure = false }; // Noncompliant
+            new HttpCookie("c") { Secure = false };         // Noncompliant
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            new HttpCookie("c") { }; // Noncompliant
-            new HttpCookie("c") { HttpOnly = true }; // Noncompliant
+            new HttpCookie("c") { Secure = falseField };    // Noncompliant
+            new HttpCookie("c") { };                        // Noncompliant
+            new HttpCookie("c") { HttpOnly = true };        // Noncompliant
         }
 
         void PropertySetsNotAllowedValue()

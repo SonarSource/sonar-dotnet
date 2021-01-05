@@ -129,7 +129,7 @@ namespace SonarAnalyzer.SyntaxTrackers
             {
                 return true;
             }
-            if (semanticModel.GetConstantValue(expression).Value is { } constantValue)
+            if (expression.FindConstantValue(semanticModel) is { } constantValue)
             {
                 return IsAllowedConstantValue(constantValue);
             }
