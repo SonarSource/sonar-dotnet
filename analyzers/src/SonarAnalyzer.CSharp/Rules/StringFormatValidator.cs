@@ -116,21 +116,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var formatArgumentIndex = methodSymbol.Parameters[0].IsType(KnownType.System_IFormatProvider)
-                ? 1 : 0;
-            var formatStringExpression = invocation.ArgumentList.Arguments[formatArgumentIndex];
-
-            var constValue = analysisContext.SemanticModel.GetConstantValue(formatStringExpression.Expression);
-            if (!constValue.HasValue)
-            {
-                // can't check non-constant format strings
-                return;
-            }
-
-            var failure = TryParseAndValidate(constValue.Value as string, invocation.ArgumentList,
-                formatArgumentIndex, analysisContext.SemanticModel);
-            if (failure == null ||
-                CanIgnoreFailure(failure, currentMethodSignature.Name, invocation.ArgumentList.Arguments.Count))
+            var formatArgumentIndex = methodSymbol.Parameters[0].IsType(KnownType.System_IFormatProvider) ? 1 : 0;
+            var formatStringExpression = invocation.ArgumentList.Arguments[formatArgumentIndex].Expression;
+            var failure = formatStringExpression.IsNullLiteral()
+                ? ValidationFailure.NullFormatString
+                : TryParseAndValidate(formatStringExpression.FindStringConstant(analysisContext.SemanticModel), invocation.ArgumentList, formatArgumentIndex, analysisContext.SemanticModel);
+            if (failure == null || CanIgnoreFailure(failure, currentMethodSignature.Name, invocation.ArgumentList.Arguments.Count))
             {
                 return;
             }
@@ -162,17 +153,10 @@ namespace SonarAnalyzer.Rules.CSharp
             return argumentsCount == 1;
         }
 
-        private static ValidationFailure TryParseAndValidate(string formatStringText, ArgumentListSyntax argumentList,
-            int formatArgumentIndex, SemanticModel semanticModel)
-        {
-            if (formatStringText == null)
-            {
-                return ValidationFailure.NullFormatString;
-            }
-
-            return ExtractFormatItems(formatStringText, out var formatStringItems) ??
-                TryValidateFormatString(formatStringItems, argumentList, formatArgumentIndex, semanticModel);
-        }
+        private static ValidationFailure TryParseAndValidate(string formatStringText, ArgumentListSyntax argumentList, int formatArgumentIndex, SemanticModel semanticModel) =>
+            formatStringText == null
+                ? null
+                : ExtractFormatItems(formatStringText, out var formatStringItems) ?? TryValidateFormatString(formatStringItems, argumentList, formatArgumentIndex, semanticModel);
 
         private static ValidationFailure ExtractFormatItems(string formatString,
             out List<FormatStringItem> formatStringItems)
