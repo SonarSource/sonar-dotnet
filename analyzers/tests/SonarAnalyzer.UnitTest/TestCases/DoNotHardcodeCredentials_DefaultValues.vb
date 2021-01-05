@@ -122,8 +122,8 @@ Namespace Tests.Diagnostics
             Dim SecretVariable As String = "literalValue"
             Dim a As String
             a = $"Server = localhost; Database = Test; User = SA; Password = {SecretConst}"         ' Noncompliant
-            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretField}"         ' FN
-            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretVariable}"      ' FN
+            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretField}"         ' Noncompliant
+            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretVariable}"      ' Noncompliant
             a = $"Server = localhost; Database = Test; User = SA; Password = {Arg}"                 ' Compliant
             a = $"Server = localhost; Database = Test; User = SA; Password = {Arg}{SecretConst}"    ' Compliant
         End Sub
@@ -134,8 +134,8 @@ Namespace Tests.Diagnostics
 
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", SecretConst)            ' Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretConst)   ' Noncompliant
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretField)   ' FN
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, SecretVariable)   ' FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretField)   ' Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, SecretVariable)   ' Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arg)                    ' Compliant
             a = String.Format(FormatProvider, "Database = Test; User = SA; Password = {0}", SecretConst)                ' Compliant, we can't simulate formatProvider behavior
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arr)                    ' Compliant

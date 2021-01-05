@@ -145,8 +145,8 @@ namespace Tests.Diagnostics
             var secretVariable = "literalValue";
             string a;
             a = $"Server = localhost; Database = Test; User = SA; Password = {secretConst}";        // Noncompliant
-            a = $"Server = localhost; Database = Test; User = SA; Password = {secretField}";        // FN
-            a = $"Server = localhost; Database = Test; User = SA; Password = {secretVariable}";     // FN
+            a = $"Server = localhost; Database = Test; User = SA; Password = {secretField}";        // Noncompliant
+            a = $"Server = localhost; Database = Test; User = SA; Password = {secretVariable}";     // Noncompliant
             a = $"Server = localhost; Database = Test; User = SA; Password = {arg}";                // Compliant
             a = $"Server = localhost; Database = Test; User = SA; Password = {arg}{secretConst}";   // Compliant
             a = $@"Server = localhost; Database = Test; User = SA; Password = {secretConst}";       // Noncompliant
@@ -158,8 +158,8 @@ namespace Tests.Diagnostics
             string a;
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);           // Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretConst);     // Noncompliant
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretField);     // FN
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, secretVariable);  // FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretField);     // Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, secretVariable);  // Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", arg);                   // Compliant
             a = String.Format(@"Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);          // Noncompliant
             a = String.Format(formatProvider, "Database = Test; User = SA; Password = {0}", secretConst);               // Compliant, we can't simulate formatProvider behavior
