@@ -22,56 +22,33 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
     public class CSharpElementAccessTracker : ElementAccessTracker<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.ElementAccessExpression };
 
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
-            new[]
-            {
-                SyntaxKind.ElementAccessExpression,
-            };
-
-        public CSharpElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
-        {
-        }
+        public CSharpElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override ElementAccessCondition ArgumentAtIndexEquals(int index, string value) =>
-            (context) =>
-            {
-                var argumentList = ((ElementAccessExpressionSyntax)context.Expression).ArgumentList;
-                if (argumentList == null ||
-                    argumentList.Arguments.Count <= index)
-                {
-                    return false;
-                }
-                var constantValue = context.SemanticModel.GetConstantValue(argumentList.Arguments[index].Expression);
-                return constantValue.HasValue &&
-                    constantValue.Value is string constant &&
-                    constant == value;
-            };
-
-        #region Syntax-level checking methods
+            context => ((ElementAccessExpressionSyntax)context.Expression).ArgumentList is { } argumentList
+                        && index < argumentList.Arguments.Count
+                        && argumentList.Arguments[index].Expression.FindStringConstant(context.SemanticModel) == value;
 
         public override ElementAccessCondition MatchSetter() =>
-            (context) => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+            context => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         public override ElementAccessCondition MatchProperty(MemberDescriptor member) =>
-            (context) =>
-                ((ElementAccessExpressionSyntax)context.Expression).Expression is MemberAccessExpressionSyntax memberAccess &&
-                 memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
-                 memberAccess.Name is SimpleNameSyntax memberName &&
-                 memberName.Identifier is SyntaxToken memberIdentifier &&
-                 context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType &&
-                 memberIdentifier.ValueText != null &&
-                 enclosingClassType.Type != null &&
-                 member.IsMatch(memberIdentifier.ValueText, enclosingClassType.Type);
-
-        #endregion
+            context => ((ElementAccessExpressionSyntax)context.Expression).Expression is MemberAccessExpressionSyntax memberAccess
+                        && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                        && memberAccess.Name is SimpleNameSyntax memberName
+                        && memberName.Identifier is SyntaxToken memberIdentifier
+                        && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
+                        && memberIdentifier.ValueText != null
+                        && enclosingClassType.Type != null
+                        && member.IsMatch(memberIdentifier.ValueText, enclosingClassType.Type);
     }
 }

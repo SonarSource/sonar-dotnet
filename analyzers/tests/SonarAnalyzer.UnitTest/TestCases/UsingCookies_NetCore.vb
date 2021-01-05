@@ -18,9 +18,13 @@ Namespace Tests.Diagnostics
             response.Headers.Add(SetCookieField, "")    ' Noncompliant
             response.Headers.Add(SetCookieVariable, "") ' Noncompliant
             response.Headers("Set-Cookie") = ""         ' Noncompliant
+            response.Headers(SetCookieConst) = ""       ' Noncompliant
+            response.Headers(SetCookieField) = ""       ' Noncompliant
+            response.Headers(SetCookieVariable) = ""    ' Noncompliant
             value = response.Headers("Set-Cookie")      ' Compliant
             SetCookieVariable = "Reset"
             response.Headers.Add(SetCookieVariable, "") ' Compliant
+            response.Headers(SetCookieVariable) = ""    ' Compliant
 
             ' Not the Set-Cookie header
             response.Headers.Add("something", "")

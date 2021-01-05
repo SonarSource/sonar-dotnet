@@ -20,9 +20,13 @@ namespace Tests.Diagnostics
             response.Headers.Add(setCookieVariable, "");    // Noncompliant
             response.Headers.Add("Set-Cookie", "");         // Noncompliant
             response.Headers["Set-Cookie"] = "";            // Noncompliant
+            response.Headers[SetCookieConst] = "";          // Noncompliant
+            response.Headers[setCookieField] = "";          // Noncompliant
+            response.Headers[setCookieVariable] = "";       // Noncompliant
             value = response.Headers["Set-Cookie"];         // Compliant
             setCookieVariable = "Reset";
             response.Headers.Add(setCookieVariable, "");    // Compliant
+            response.Headers[setCookieVariable] = "";       // Compliant
 
             // Not the Set-Cookie header
             response.Headers.Add("something", "");

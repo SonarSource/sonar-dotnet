@@ -28,52 +28,27 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicElementAccessTracker : ElementAccessTracker<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InvocationExpression };
 
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
-            new[]
-            {
-                SyntaxKind.InvocationExpression,
-            };
-
-        public VisualBasicElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
-        {
-        }
+        public VisualBasicElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override ElementAccessCondition ArgumentAtIndexEquals(int index, string value) =>
-            (context) =>
-            {
-                var argumentList = ((InvocationExpressionSyntax)context.Expression).ArgumentList;
-                if (argumentList == null ||
-                    argumentList.Arguments.Count <= index)
-                {
-                    return false;
-                }
-                var constantValue = context.SemanticModel.GetConstantValue(argumentList.Arguments[index].GetExpression());
-                return constantValue.HasValue &&
-                    constantValue.Value is string constant &&
-                    constant == value;
-            };
-
-        #region Syntax-level checking methods
+            context => ((InvocationExpressionSyntax)context.Expression).ArgumentList is { } argumentList
+                        && index < argumentList.Arguments.Count
+                        && argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel) == value;
 
         public override ElementAccessCondition MatchSetter() =>
-            (context) =>
-                ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+            context => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         public override ElementAccessCondition MatchProperty(MemberDescriptor member) =>
-            (context) =>
-                   ((InvocationExpressionSyntax)context.Expression).Expression is MemberAccessExpressionSyntax memberAccess &&
-                    memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
-                    memberAccess.Name is SimpleNameSyntax memberName &&
-                    memberName.Identifier is SyntaxToken memberIdentifier &&
-                    context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType &&
-                    memberIdentifier.ValueText != null &&
-                    enclosingClassType.Type != null &&
-                    member.IsMatch(memberIdentifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
-
-        #endregion
+            context => ((InvocationExpressionSyntax)context.Expression).Expression is MemberAccessExpressionSyntax memberAccess
+                        && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                        && memberAccess.Name is SimpleNameSyntax memberName
+                        && memberName.Identifier is SyntaxToken memberIdentifier
+                        && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
+                        && memberIdentifier.ValueText != null
+                        && enclosingClassType.Type != null
+                        && member.IsMatch(memberIdentifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
     }
 }
