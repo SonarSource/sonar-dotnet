@@ -16,6 +16,7 @@ namespace Tests.Diagnostics
         private string secretFieldUninitialized;
         private string secretFieldNull = null;
         private string secretFieldMethod = someMethod();
+        private string invalidField = invalidField; // // Error [CS0236] A field initializer cannot reference the non-static field, method, or property
 
         private static string someMethod() => "";
 
@@ -128,14 +129,15 @@ namespace Tests.Diagnostics
 
             // Reassigned
             secretVariableMethod = "literal";
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldMethod;  // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableMethod;   // Noncompliant
             arg = "literal";
-            a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                    // Noncompliant
             secretVariable = someMethod();
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // Noncompliant FP
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;         // Compliant
 
-            var invalid = invalid; // Error [CS0841] Cannot use local variable invalid before it's declared
-            a = "Server = localhost; Database = Test; User = SA; Password = " + invalid;            // Compliant, test to avoid infinite recursion
+            var invalidVariable = invalidVariable; // Error [CS0841] Cannot use local variable invalid before it's declared
+            a = "Server = localhost; Database = Test; User = SA; Password = " + invalidVariable;        // Compliant, test to avoid infinite recursion
+            a = "Server = localhost; Database = Test; User = SA; Password = " + invalidField;           // Compliant, test to avoid infinite recursion
         }
 
         public void Interpolations(string arg)

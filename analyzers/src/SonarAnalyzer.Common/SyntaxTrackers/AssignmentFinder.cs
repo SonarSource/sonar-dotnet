@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
@@ -29,7 +30,7 @@ namespace SonarAnalyzer.Helpers
         protected abstract bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, out SyntaxNode rightExpression);
         protected abstract bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer);
 
-        public SyntaxNode FindLinearPrecedingAssignmentExpression(string identifierName, SyntaxNode current)
+        public SyntaxNode FindLinearPrecedingAssignmentExpression(string identifierName, SyntaxNode current, Func<SyntaxNode> defaultValue = null)
         {
             var method = GetTopMostContainingMethod(current);
             while (current != method && current?.Parent != null)
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.Helpers
                 }
                 current = parent;
             }
-            return null;
+            return defaultValue == null ? null : defaultValue();
         }
     }
 }

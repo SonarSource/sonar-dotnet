@@ -180,28 +180,35 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override bool ShouldHandle(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
 
             private string FindStringConstant(SyntaxNode node, SemanticModel semanticModel) =>
-                FindStringConstant(node, semanticModel, new HashSet<SyntaxNode>());
+                FindStringConstant(node, semanticModel, null);
 
-            private string FindStringConstant(SyntaxNode node, SemanticModel semanticModel, HashSet<SyntaxNode> visited) =>
+            private string FindStringConstant(SyntaxNode node, SemanticModel semanticModel, HashSet<SyntaxNode> visitedVariables) =>
                 node == null || node.IsNullLiteral()
                 ? null
                 : node.GetStringValue()
                     ?? semanticModel.GetConstantValue(node).Value as string
-                    ?? FindInitializerStringConstant(node, semanticModel, visited);
+                    ?? FindInitializerStringConstant(node, semanticModel, visitedVariables);
 
-            //FIXME: Not reassigned in current scope
-            private string FindInitializerStringConstant(SyntaxNode node, SemanticModel semanticModel, HashSet<SyntaxNode> visited)
+            private string FindInitializerStringConstant(SyntaxNode node, SemanticModel semanticModel, HashSet<SyntaxNode> visitedVariables)
             {
-                if (node is IdentifierNameSyntax identifier
-                    && semanticModel.GetDeclaringSyntaxNode(identifier) is VariableDeclaratorSyntax variable
-                    && !visited.Contains(variable))
+                return node is IdentifierNameSyntax identifier
+                    ? FindStringConstant(new CSharpAssignmentFinder().FindLinearPrecedingAssignmentExpression(identifier.Identifier.ValueText, node, FindFieldInitializer), semanticModel, visitedVariables)
+                    : null;
+
+                SyntaxNode FindFieldInitializer()
                 {
-                    visited.Add(variable);
-                    return FindStringConstant(variable.Initializer?.Value, semanticModel, visited);
-                }
-                else
-                {
-                    return null;
+                    if (semanticModel.GetSymbolInfo(identifier).Symbol is IFieldSymbol fieldSymbol
+                        && fieldSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is VariableDeclaratorSyntax variable
+                        && (visitedVariables == null || !visitedVariables.Contains(variable)))
+                    {
+                        visitedVariables ??= new HashSet<SyntaxNode>();
+                        visitedVariables.Add(variable);
+                        return variable.Initializer?.Value;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
         }
