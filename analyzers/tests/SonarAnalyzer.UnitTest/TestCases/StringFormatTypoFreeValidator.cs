@@ -13,6 +13,7 @@ namespace Tests.Diagnostics
 
             var s = string.Format("some text"); // Noncompliant {{Remove this formatting call and simply use the input string.}}
 //                  ^^^^^^^^^^^^^
+            s = string.Format(null, 42);                //Noncompliant {{Invalid string format, the format string cannot be null.}}
             s = string.Format(string.Format("foo"));    //Noncompliant
             s = string.Format(string.Format("{0}", 42));
 
