@@ -1,8 +1,10 @@
 ﻿Imports System
+Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Data.Odbc
 Imports System.Data.OracleClient
 Imports System.Data.SqlServerCe
+Imports MySql.Data.MySqlClient
 
 Namespace Tests.Diagnostics
     Class Program
@@ -96,7 +98,7 @@ Namespace Tests.Diagnostics
             command.CommandText = "SELECT * FROM mytable WHERE mycol=" & param ' Noncompliant
             command.CommandText = $"SELECT * FROM mytable WHERE mycol={param}" ' Noncompliant
             Dim adapter = New OdbcDataAdapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
-            Dim adapter1 = New odbcdataadapter(sTRing.foRmAt("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
+            Dim adapter1 = New odbcdataadapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
         End Sub
 
         Public Sub OracleCommands(ByVal connection As OracleConnection, ByVal transaction As OracleTransaction, ByVal query As String)
@@ -121,7 +123,7 @@ Namespace Tests.Diagnostics
         Public Sub NonCompliant_OracleCommands(ByVal connection As OracleConnection, ByVal transaction As OracleTransaction, ByVal query As String, ByVal param As String)
             Dim command = New OracleCommand("SELECT * FROM mytable WHERE mycol=" & param) ' Noncompliant
             command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
-            command.CommandText = string.forMAT("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
             Dim x = New OracleDataAdapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
             x = New OracleDataAdapter($"INSERT INTO Users (name) VALUES (""{param}"")", "") ' Noncompliant
         End Sub
@@ -149,6 +151,52 @@ Namespace Tests.Diagnostics
             Dim x = New SqlCeDataAdapter(String.Concat(query, param), "") ' Noncompliant
             Dim command = New SqlCeCommand("" & param) ' Noncompliant
             command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+        End Sub
+
+        Public Sub MySqlDataCompliant(ByVal connection As MySqlConnection, ByVal transaction As MySqlTransaction, ByVal query As String)
+            Dim command As MySqlCommand
+            command = New MySqlCommand() ' Compliant
+            command = New MySqlCommand("") ' Compliant
+            command = New MySqlCommand(query, connection, transaction) ' Compliant
+
+            command.CommandText = query ' Compliant
+            command.CommandText = ConstantQuery ' Compliant
+            Dim text As String
+            text = command.CommandText ' Compliant
+
+            Dim adapter As MySqlDataAdapter
+            adapter = New MySqlDataAdapter("", connection) ' Compliant
+            adapter = New MySqlDataAdapter(ConstantQuery, "connectionString") ' Compliant
+
+            MySqlHelper.ExecuteDataRow("connectionString", ConstantQuery) ' Compliant
+        End Sub
+
+        Public Sub NonCompliant_MySqlData(ByVal connection As MySqlConnection, ByVal transaction As MySqlTransaction, ByVal query As String, ByVal param As String)
+            Dim command As MySqlCommand
+            command = New MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            command = New MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection) ' Noncompliant
+            command = New MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction) ' Noncompliant
+            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+
+            Dim adapter As MySqlDataAdapter
+            adapter = New MySqlDataAdapter($"SELECT * FROM mytable WHERE mycol=" + param, connection) ' Noncompliant
+            MySqlHelper.ExecuteDataRow("connectionString", $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", New System.Threading.CancellationToken()) ' Noncompliant
+            MySqlHelper.ExecuteDataset("connectionString", $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            MySqlHelper.ExecuteDatasetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            MySqlHelper.ExecuteNonQuery("connectionString", $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            MySqlHelper.ExecuteNonQueryAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            MySqlHelper.ExecuteReader(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            MySqlHelper.ExecuteReaderAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            MySqlHelper.ExecuteScalar(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            MySqlHelper.ExecuteScalarAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            MySqlHelper.UpdateDataSet("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", New DataSet(), "tableName") ' Noncompliant
+            MySqlHelper.UpdateDataSetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", New DataSet(), "tableName") ' Noncompliant
+
+            Dim script As MySqlScript
+            script = New MySqlScript($"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            script = New MySqlScript(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
         End Sub
 
         Public Sub ConcatAndStringFormat(ByVal connection As SqlConnection, ByVal param As String)

@@ -30,8 +30,10 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S2077";
         private const string MessageFormat = "Make sure that formatting this SQL query is safe here.";
+        private const int FirstArgumentLocation = 0;
+        private const int SecondArgumentLocation = 1;
 
-        private readonly KnownType[] constructors =
+        private readonly KnownType[] constructorsWithFirstParam =
             {
                 KnownType.Microsoft_EntityFrameworkCore_RawSqlString,
                 KnownType.System_Data_SqlClient_SqlCommand,
@@ -41,13 +43,53 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Data_SqlServerCe_SqlCeCommand,
                 KnownType.System_Data_SqlServerCe_SqlCeDataAdapter,
                 KnownType.System_Data_OracleClient_OracleCommand,
-                KnownType.System_Data_OracleClient_OracleDataAdapter
+                KnownType.System_Data_OracleClient_OracleDataAdapter,
+                KnownType.MySql_Data_MySqlClient_MySqlCommand,
+                KnownType.MySql_Data_MySqlClient_MySqlDataAdapter,
+                KnownType.MySql_Data_MySqlClient_MySqlScript,
+            };
+
+        private readonly KnownType[] constructorsWithSecondParam =
+            {
+                KnownType.MySql_Data_MySqlClient_MySqlScript,
+            };
+
+        private readonly MemberDescriptor[] invocationsWithFirstTwoParams =
+            {
+                new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
+                new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand"),
+                new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql"),
+            };
+
+        private readonly MemberDescriptor[] invocationsWithSecondParam =
+            {
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataRow"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataRowAsync"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataset"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDatasetAsync"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteNonQuery"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteNonQueryAsync"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteReader"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteReaderAsync"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteScalar"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteScalarAsync"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSet"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "UpdateDataSetAsync"),
+            };
+
+        private readonly MemberDescriptor[] properties =
+            {
+                new MemberDescriptor(KnownType.System_Data_Odbc_OdbcCommand, "CommandText"),
+                new MemberDescriptor(KnownType.System_Data_OracleClient_OracleCommand, "CommandText"),
+                new MemberDescriptor(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
+                new MemberDescriptor(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText"),
+                new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlCommand, "CommandText"),
             };
 
         protected abstract TExpressionSyntax GetInvocationExpression(SyntaxNode expression);
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
+        protected abstract TExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index);
         protected abstract TExpressionSyntax GetSetValue(PropertyAccessContext context);
-        protected abstract TExpressionSyntax GetFirstArgument(ObjectCreationContext context);
         protected abstract bool IsTracked(TExpressionSyntax argument, SemanticModel semanticModel);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -64,10 +106,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
-                    new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
-                    new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand"),
-                    new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")),
+                InvocationTracker.MatchMethod(invocationsWithFirstTwoParams),
                 Conditions.And(
                     MethodHasRawSqlQueryParameter(),
                     Conditions.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1))
@@ -75,23 +114,33 @@ namespace SonarAnalyzer.Rules
                 Conditions.ExceptWhen(
                     InvocationTracker.ArgumentAtIndexIsConstant(0)));
 
+            TrackInvocations(context, invocationsWithSecondParam, SecondArgumentLocation);
+
             PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchProperty(
-                    new MemberDescriptor(KnownType.System_Data_Odbc_OdbcCommand, "CommandText"),
-                    new MemberDescriptor(KnownType.System_Data_OracleClient_OracleCommand, "CommandText"),
-                    new MemberDescriptor(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
-                    new MemberDescriptor(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText")),
+                PropertyAccessTracker.MatchProperty(properties),
                 PropertyAccessTracker.MatchSetter(),
                 c => IsTracked(GetSetValue(c), c.SemanticModel),
                 Conditions.ExceptWhen(
                     PropertyAccessTracker.AssignedValueIsConstant()));
 
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(this.constructors),
-                ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
-                 c => IsTracked(GetFirstArgument(c), c.SemanticModel),
-                Conditions.ExceptWhen(ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
+            TrackObjectCreation(context, constructorsWithFirstParam, FirstArgumentLocation);
+
+            TrackObjectCreation(context, constructorsWithSecondParam, SecondArgumentLocation);
         }
+
+        private void TrackObjectCreation(SonarAnalysisContext context, KnownType[] objectCreationTypes, int argumentIndex) =>
+            ObjectCreationTracker.Track(context,
+                ObjectCreationTracker.MatchConstructor(objectCreationTypes),
+                ObjectCreationTracker.ArgumentAtIndexIs(argumentIndex, KnownType.System_String),
+                    c => IsTracked(GetArgumentAtIndex(c, argumentIndex), c.SemanticModel),
+                Conditions.ExceptWhen(ObjectCreationTracker.ArgumentAtIndexIsConst(argumentIndex)));
+
+        private void TrackInvocations(SonarAnalysisContext context, MemberDescriptor[] incovationsDescriptors, int argumentIndex) =>
+            InvocationTracker.Track(context,
+                InvocationTracker.MatchMethod(incovationsDescriptors),
+                ArgumentAtIndexIsTracked(argumentIndex),
+                Conditions.ExceptWhen(
+                    InvocationTracker.ArgumentAtIndexIsConstant(argumentIndex)));
 
         private InvocationCondition MethodHasRawSqlQueryParameter() =>
             context =>

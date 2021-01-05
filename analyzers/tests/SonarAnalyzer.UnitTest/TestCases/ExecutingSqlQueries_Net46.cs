@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Data.Odbc;
 using System.Data.OracleClient;
 using System.Data.SqlServerCe;
+using MySql.Data.MySqlClient;
 
 namespace Tests.Diagnostics
 {
@@ -180,6 +182,50 @@ namespace Tests.Diagnostics
             new SqlCeDataAdapter(string.Concat(query, param), ""); // Noncompliant
             var command = new SqlCeCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant {{Make sure that formatting this SQL query is safe here.}}
             command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
+        }
+
+        public void MySqlDataCompliant(MySqlConnection connection, MySqlTransaction transaction, string query)
+        {
+            MySqlCommand command;
+            command = new MySqlCommand(); // Compliant
+            command = new MySqlCommand(""); // Compliant
+            command = new MySqlCommand(query, connection, transaction); // Compliant
+
+            command.CommandText = query; // Compliant
+            command.CommandText = ConstantQuery; // Compliant
+            string text;
+            text = command.CommandText; // Compliant
+            text = command.CommandText = query; // Compliant
+
+            var adapter = new MySqlDataAdapter("", connection); // Compliant
+            adapter = new MySqlDataAdapter(ConstantQuery, "connectionString"); // Compliant
+
+            MySqlHelper.ExecuteDataRow("connectionString", ConstantQuery); // Compliant
+        }
+
+        public void NonCompliant_MySqlData(MySqlConnection connection, MySqlTransaction transaction, string query, string param)
+        {
+            var command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection); // Noncompliant
+            command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction); // Noncompliant
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
+
+            var adapter = new MySqlDataAdapter($"SELECT * FROM mytable WHERE mycol=" + param, connection); // Noncompliant
+            MySqlHelper.ExecuteDataRow("connectionString", $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", new System.Threading.CancellationToken()); // Noncompliant
+            MySqlHelper.ExecuteDataset("connectionString", $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            MySqlHelper.ExecuteDatasetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            MySqlHelper.ExecuteNonQuery("connectionString", $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            MySqlHelper.ExecuteNonQueryAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            MySqlHelper.ExecuteReader(connection, $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            MySqlHelper.ExecuteReaderAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            MySqlHelper.ExecuteScalar(connection, $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            MySqlHelper.ExecuteScalarAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            MySqlHelper.UpdateDataSet("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", new DataSet(), "tableName"); // Noncompliant
+            MySqlHelper.UpdateDataSetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", new DataSet(), "tableName"); // Noncompliant
+            var script = new MySqlScript($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            script = new MySqlScript(connection, $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
         }
 
         public void ConcatAndStringFormat(SqlConnection connection, string param)

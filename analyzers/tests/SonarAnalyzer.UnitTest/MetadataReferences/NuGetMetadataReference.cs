@@ -19,8 +19,8 @@
  */
 
 using System.Linq;
-using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 using static SonarAnalyzer.UnitTest.TestFramework.NugetMetadataFactory;
+using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
@@ -79,6 +79,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => CreateWithCommandLine("Microsoft.Web.Xdt", packageVersion);
         public static References MSTestTestFramework(string packageVersion) => CreateWithCommandLine("MSTest.TestFramework", packageVersion);
         public static References MvvmLightLibs(string packageVersion) => CreateWithCommandLine("MvvmLightLibs", packageVersion);
+        public static References MySqlData(string packageVersion) => CreateWithCommandLine("MySql.Data", packageVersion);
         public static References Nancy(string packageVersion = "2.0.0") => CreateWithCommandLine("Nancy", packageVersion);
         public static References NLog(string packageVersion) => CreateWithCommandLine("NLog", packageVersion);
         public static References NHibernate(string packageVersion = "5.2.2") => CreateWithCommandLine("NHibernate", packageVersion);
