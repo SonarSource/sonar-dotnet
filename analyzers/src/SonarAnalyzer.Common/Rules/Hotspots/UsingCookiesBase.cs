@@ -44,8 +44,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchProperty(
-                    new MemberDescriptor(KnownType.System_Web_HttpCookie, "Value")),
+                PropertyAccessTracker.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Value")),
                 PropertyAccessTracker.MatchSetter());
 
             ObjectCreationTracker.Track(context,
@@ -69,15 +68,12 @@ namespace SonarAnalyzer.Rules
                 ElementAccessTracker.MatchSetter());
 
             ElementAccessTracker.Track(context,
-                ElementAccessTracker.MatchIndexerIn(
-                    KnownType.System_Collections_Specialized_NameValueCollection),
+                ElementAccessTracker.MatchIndexerIn(KnownType.System_Collections_Specialized_NameValueCollection),
                 ElementAccessTracker.MatchSetter(),
-                ElementAccessTracker.MatchProperty(
-                    new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
+                ElementAccessTracker.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
 
             InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
-                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
+                InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
 
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
@@ -88,15 +84,12 @@ namespace SonarAnalyzer.Rules
                 IsIHeadersDictionary());
 
             InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
-                    new MemberDescriptor(KnownType.System_Collections_Specialized_NameObjectCollectionBase, "Add")),
-                InvocationTracker.MatchProperty(
-                    new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
-
+                InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Collections_Specialized_NameObjectCollectionBase, "Add")),
+                InvocationTracker.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
         }
 
         private static InvocationCondition IsIHeadersDictionary() =>
-            (context) =>
+            context =>
             {
                 var containingType = context.MethodSymbol.Value.ContainingType;
                 // We already checked if ContainingType is IDictionary, but be defensive and check TypeArguments.Count
