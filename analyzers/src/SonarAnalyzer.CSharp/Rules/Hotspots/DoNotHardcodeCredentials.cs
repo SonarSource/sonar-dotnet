@@ -169,8 +169,8 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override string GetAssignedValue(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel)
             {
                 var left = syntaxNode.Left is BinaryExpressionSyntax precedingAdd && precedingAdd.IsKind(SyntaxKind.AddExpression) ? precedingAdd.Right : syntaxNode.Left;
-                return FindStringConstant(left, semanticModel) is { } leftString
-                    && FindStringConstant(syntaxNode.Right, semanticModel) is { } rightString
+                return left.FindStringConstant(semanticModel) is { } leftString
+                    && syntaxNode.Right.FindStringConstant(semanticModel) is { } rightString
                     ? leftString + rightString
                     : null;
             }
@@ -178,39 +178,6 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
 
             protected override bool ShouldHandle(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
-
-            private string FindStringConstant(SyntaxNode node, SemanticModel semanticModel) =>
-                FindStringConstant(node, semanticModel, null);
-
-            private string FindStringConstant(SyntaxNode node, SemanticModel semanticModel, HashSet<SyntaxNode> visitedVariables) =>
-                node == null || node.IsNullLiteral()
-                ? null
-                : node.GetStringValue()
-                    ?? semanticModel.GetConstantValue(node).Value as string
-                    ?? FindInitializerStringConstant(node, semanticModel, visitedVariables);
-
-            private string FindInitializerStringConstant(SyntaxNode node, SemanticModel semanticModel, HashSet<SyntaxNode> visitedVariables)
-            {
-                return node is IdentifierNameSyntax identifier
-                    ? FindStringConstant(new CSharpAssignmentFinder().FindLinearPrecedingAssignmentExpression(identifier.Identifier.ValueText, node, FindFieldInitializer), semanticModel, visitedVariables)
-                    : null;
-
-                SyntaxNode FindFieldInitializer()
-                {
-                    if (semanticModel.GetSymbolInfo(identifier).Symbol is IFieldSymbol fieldSymbol
-                        && fieldSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is VariableDeclaratorSyntax variable
-                        && (visitedVariables == null || !visitedVariables.Contains(variable)))
-                    {
-                        visitedVariables ??= new HashSet<SyntaxNode>();
-                        visitedVariables.Add(variable);
-                        return variable.Initializer?.Value;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-            }
         }
 
         private class InterpolatedStringBannedWordsFinder : CredentialWordsFinderBase<InterpolatedStringExpressionSyntax>

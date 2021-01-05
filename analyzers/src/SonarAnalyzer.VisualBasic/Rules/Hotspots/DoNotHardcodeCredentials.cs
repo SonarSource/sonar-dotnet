@@ -174,13 +174,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var left = syntaxNode.Left is BinaryExpressionSyntax precedingConcat && precedingConcat.IsAnyKind(SyntaxKind.ConcatenateExpression, SyntaxKind.AddExpression)
                     ? precedingConcat.Right
                     : syntaxNode.Left;
-                return GetStringConstant(left) is { } leftString
-                    && GetStringConstant(syntaxNode.Right) is { } rightString
+                return left.FindStringConstant(semanticModel) is { } leftString
+                    && syntaxNode.Right.FindStringConstant(semanticModel) is { } rightString
                     ? leftString + rightString
                     : null;
-
-                string GetStringConstant(SyntaxNode node) =>
-                    node.GetStringValue() ?? semanticModel.GetConstantValue(node).Value as string;
             }
 
             protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
