@@ -101,10 +101,10 @@ namespace Tests.Diagnostics
 
             a = "Server = localhost; Database = Test; User = SA; Password = " + "hardcoded";        // Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst;        // Noncompliant
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretField;        // FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldConst;   // FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableConst;// FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretField;        // Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldConst;   // Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableConst;// Noncompliant
 
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldUninitialized;   // Compliant, not initialized to constant
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldNull;            // Compliant, not initialized to constant
@@ -114,17 +114,17 @@ namespace Tests.Diagnostics
 
             const string passwordPrefixConst = "Password = ";       // Compliant by it's name
             var passwordPrefixVariable = "Password = ";             // Compliant by it's name
-            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst;                // Noncompliant
-            a = "Server = localhost;" + " Database = Test; User = SA; Pa" + "ssword = " + secretConst;           // FN, we don't track all concatenations to avoid duplications
-            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixConst + secretConst;     // Noncompliant
-            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixVariable + secretConst;  // FN
-            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst + " suffix";    // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst;                   // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Pa" + "ssword = " + secretConst;              // FN, we don't track all concatenations to avoid duplications
+            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixConst + secretConst;        // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixVariable + secretConst;     // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst + " suffix";       // Noncompliant
             //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            a = someMethod() + " Database = Test; User = SA; Password = " + secretConst + " suffix";             // Noncompliant
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst + arg + " suffix";  // Noncompliant
-            a = "Server = localhost; Database = Test; User = SA; Password = " + arg + secretConst + " suffix";  // Compliant
-            a = secretConst + "Server = localhost; Database = Test; User = SA; Password = " + arg;              // Compliant
-            a = "Server = localhost; Database = Test; User = SA; " + someMethod() + secretConst;                // Compliant
+            a = someMethod() + " Database = Test; User = SA; Password = " + secretConst + " suffix";                // Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst + arg + " suffix";      // Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + arg + secretConst + " suffix";      // Compliant
+            a = secretConst + "Server = localhost; Database = Test; User = SA; Password = " + arg;                  // Compliant
+            a = "Server = localhost; Database = Test; User = SA; " + someMethod() + secretConst;                    // Compliant
 
             // Reassigned
             secretVariableMethod = "literal";
@@ -132,7 +132,10 @@ namespace Tests.Diagnostics
             arg = "literal";
             a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                // FN
             secretVariable = someMethod();
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // Compliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // Noncompliant FP
+
+            var invalid = invalid; // Error [CS0841] Cannot use local variable invalid before it's declared
+            a = "Server = localhost; Database = Test; User = SA; Password = " + invalid;            // Compliant, test to avoid infinite recursion
         }
 
         public void Interpolations(string arg)

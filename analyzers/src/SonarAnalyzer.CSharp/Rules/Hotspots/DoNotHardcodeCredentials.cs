@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -168,18 +169,41 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override string GetAssignedValue(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel)
             {
                 var left = syntaxNode.Left is BinaryExpressionSyntax precedingAdd && precedingAdd.IsKind(SyntaxKind.AddExpression) ? precedingAdd.Right : syntaxNode.Left;
-                return GetStringConstant(left) is { } leftString
-                    && GetStringConstant(syntaxNode.Right) is { } rightString
+                return FindStringConstant(left, semanticModel) is { } leftString
+                    && FindStringConstant(syntaxNode.Right, semanticModel) is { } rightString
                     ? leftString + rightString
                     : null;
-
-                string GetStringConstant(SyntaxNode node) =>
-                    node.GetStringValue() ?? semanticModel.GetConstantValue(node).Value as string;
             }
 
             protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
 
             protected override bool ShouldHandle(BinaryExpressionSyntax syntaxNode, SemanticModel semanticModel) => true;
+
+            private string FindStringConstant(SyntaxNode node, SemanticModel semanticModel) =>
+                FindStringConstant(node, semanticModel, new HashSet<SyntaxNode>());
+
+            private string FindStringConstant(SyntaxNode node, SemanticModel semanticModel, HashSet<SyntaxNode> visited) =>
+                node == null || node.IsNullLiteral()
+                ? null
+                : node.GetStringValue()
+                    ?? semanticModel.GetConstantValue(node).Value as string
+                    ?? FindInitializerStringConstant(node, semanticModel, visited);
+
+            //FIXME: Not reassigned in current scope
+            private string FindInitializerStringConstant(SyntaxNode node, SemanticModel semanticModel, HashSet<SyntaxNode> visited)
+            {
+                if (node is IdentifierNameSyntax identifier
+                    && semanticModel.GetDeclaringSyntaxNode(identifier) is VariableDeclaratorSyntax variable
+                    && !visited.Contains(variable))
+                {
+                    visited.Add(variable);
+                    return FindStringConstant(variable.Initializer?.Value, semanticModel, visited);
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         private class InterpolatedStringBannedWordsFinder : CredentialWordsFinderBase<InterpolatedStringExpressionSyntax>
