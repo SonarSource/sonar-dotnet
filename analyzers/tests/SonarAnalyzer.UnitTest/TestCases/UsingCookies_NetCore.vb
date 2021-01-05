@@ -2,13 +2,25 @@
 Imports Microsoft.AspNetCore.Http
 
 Namespace Tests.Diagnostics
+
     Class Program
+
+        Private Const SetCookieConst As String = "Set-Cookie"
+        Private SetCookieField As String = "Set-Cookie"
+
         Private Sub Responses(ByVal response As HttpResponse)
             Dim value = ""
+            Dim SetCookieVariable As String = "Set-Cookie"
+
             ' Response headers
-            response.Headers.Add("Set-Cookie", "") ' Noncompliant
-            response.Headers("Set-Cookie") = "" ' Noncompliant
-            value = response.Headers("Set-Cookie") ' Compliant
+            response.Headers.Add("Set-Cookie", "")      ' Noncompliant
+            response.Headers.Add(SetCookieConst, "")    ' Noncompliant
+            response.Headers.Add(SetCookieField, "")    ' Noncompliant
+            response.Headers.Add(SetCookieVariable, "") ' Noncompliant
+            response.Headers("Set-Cookie") = ""         ' Noncompliant
+            value = response.Headers("Set-Cookie")      ' Compliant
+            SetCookieVariable = "Reset"
+            response.Headers.Add(SetCookieVariable, "") ' Compliant
 
             ' Not the Set-Cookie header
             response.Headers.Add("something", "")
@@ -65,5 +77,7 @@ Namespace Tests.Diagnostics
             value = requestCookies("") ' Compliant
             requestCookies.TryGetValue("", value) ' Compliant
         End Sub
+
     End Class
+
 End Namespace

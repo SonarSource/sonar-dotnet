@@ -45,16 +45,9 @@ namespace SonarAnalyzer.Helpers
                     && memberAccessSyntax.Expression.RawKind == (int)SyntaxKind.TypeOfExpression;
 
         public override InvocationCondition ArgumentAtIndexEquals(int index, string value) =>
-            context =>
-            {
-                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                if (argumentList == null || argumentList.Arguments.Count <= index)
-                {
-                    return false;
-                }
-                var constantValue = context.SemanticModel.GetConstantValue(argumentList.Arguments[index].Expression);
-                return constantValue.HasValue && constantValue.Value is string constant && constant == value;
-            };
+            context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
+                    && index < argumentList.Arguments.Count
+                    && argumentList.Arguments[index].Expression.FindStringConstant(context.SemanticModel) == value;
 
         public override InvocationCondition MatchProperty(MemberDescriptor member) =>
             context => ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess

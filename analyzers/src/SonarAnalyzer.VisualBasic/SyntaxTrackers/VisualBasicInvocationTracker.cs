@@ -39,18 +39,9 @@ namespace SonarAnalyzer.Helpers
                     && argumentList.Arguments[index].GetExpression().IsConstant(context.SemanticModel);
 
         public override InvocationCondition ArgumentAtIndexEquals(int index, string value) =>
-            context =>
-            {
-                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                if (argumentList == null || argumentList.Arguments.Count <= index)
-                {
-                    return false;
-                }
-                var constantValue = context.SemanticModel.GetConstantValue(argumentList.Arguments[index].GetExpression());
-                return constantValue.HasValue &&
-                    constantValue.Value is string constant &&
-                    constant == value;
-            };
+            context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
+                    && index < argumentList.Arguments.Count
+                    && argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel) == value;
 
         public override InvocationCondition IsTypeOfExpression() =>
             context => context.Invocation is InvocationExpressionSyntax invocation
