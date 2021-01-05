@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Helpers
             var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
             var values = VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName);
             return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
-                ? context.SemanticModel.GetConstantValue(valueSyntax).Value
+                ? valueSyntax.FindConstantValue(context.SemanticModel)
                 : null;
         }
     }

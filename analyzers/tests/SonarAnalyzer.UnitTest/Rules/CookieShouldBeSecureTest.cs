@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Nancy() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CookiesShouldBeSecure_Nancy.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_Nancy.cs",
                 new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.Nancy());
 
