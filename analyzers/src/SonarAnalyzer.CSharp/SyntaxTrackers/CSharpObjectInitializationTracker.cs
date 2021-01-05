@@ -38,8 +38,6 @@ namespace SonarAnalyzer.SyntaxTrackers
     /// - OR invoking the constructor and then setting some specific properties on the created object
     public class CSharpObjectInitializationTracker
     {
-        private static readonly Func<ISymbol, ExpressionSyntax, SemanticModel, bool> DefaultIsAllowedObject = (s, node, model) => false;
-
         /// <summary>
         /// By default, we consider constructors unsafe.
         /// </summary>
@@ -49,6 +47,8 @@ namespace SonarAnalyzer.SyntaxTrackers
         /// By default, the constructor arguments are ignored.
         /// </summary>
         private const int DefaultTrackedConstructorArgumentIndex = -1;
+
+        private static readonly Func<ISymbol, ExpressionSyntax, SemanticModel, bool> DefaultIsAllowedObject = (s, node, model) => false;
 
         /// <summary>
         /// Given the value of a literal (e.g. enum or boolean), returns true if it is an allowed value.
@@ -80,7 +80,8 @@ namespace SonarAnalyzer.SyntaxTrackers
         /// </summary>
         private readonly int trackedConstructorArgumentIndex;
 
-        internal CSharpObjectInitializationTracker(Predicate<object> isAllowedConstantValue, ImmutableArray<KnownType> trackedTypes,
+        internal CSharpObjectInitializationTracker(Predicate<object> isAllowedConstantValue,
+            ImmutableArray<KnownType> trackedTypes,
             Predicate<string> isTrackedPropertyName,
             Func<ISymbol, ExpressionSyntax, SemanticModel, bool> isAllowedObject = null,
             bool constructorIsSafe = DefaultIsConstructorSafe,
@@ -89,28 +90,28 @@ namespace SonarAnalyzer.SyntaxTrackers
             this.isAllowedConstantValue = isAllowedConstantValue;
             this.trackedTypes = trackedTypes;
             this.isTrackedPropertyName = isTrackedPropertyName;
-
             this.isAllowedObject = isAllowedObject ?? DefaultIsAllowedObject;
             this.constructorIsSafe = constructorIsSafe;
             this.trackedConstructorArgumentIndex = trackedConstructorArgumentIndex;
         }
 
         internal bool ShouldBeReported(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
-            IsTrackedType(objectCreation, semanticModel) &&
-            !ObjectCreatedWithAllowedValue(objectCreation, semanticModel) &&
-            !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
+            IsTrackedType(objectCreation, semanticModel)
+            && !ObjectCreatedWithAllowedValue(objectCreation, semanticModel)
+            && !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
 
         internal bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
             // Ignore assignments within object initializers, they are reported in the ObjectCreationExpression handler
-            assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null &&
-            IsTrackedPropertyName(assignment.Left) &&
-            IsPropertyOnTrackedType(assignment.Left, semanticModel) &&
-            !IsAllowedValue(assignment.Right, semanticModel);
+            assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null
+            && IsTrackedPropertyName(assignment.Left)
+            && IsPropertyOnTrackedType(assignment.Left, semanticModel)
+            && !IsAllowedValue(assignment.Right, semanticModel);
 
         /// <summary>
         /// Tests if the provided <paramref name="constantValue"/> is equal to an allowed constant (literal) value.
         /// </summary>
-        private bool IsAllowedConstantValue(object constantValue) => isAllowedConstantValue(constantValue);
+        private bool IsAllowedConstantValue(object constantValue) =>
+            isAllowedConstantValue(constantValue);
 
         private bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(expression).Type.IsAny(trackedTypes);
@@ -125,19 +126,22 @@ namespace SonarAnalyzer.SyntaxTrackers
             {
                 return false;
             }
-            if (expression.IsKind(SyntaxKind.NullLiteralExpression))
+            else if (expression.IsKind(SyntaxKind.NullLiteralExpression))
             {
                 return true;
             }
-            if (expression.FindConstantValue(semanticModel) is { } constantValue)
+            else if (expression.FindConstantValue(semanticModel) is { } constantValue)
             {
                 return IsAllowedConstantValue(constantValue);
             }
-            if (semanticModel.GetSymbolInfo(expression).Symbol is { } symbol)
+            else if (semanticModel.GetSymbolInfo(expression).Symbol is { } symbol)
             {
                 return isAllowedObject(symbol, expression, semanticModel);
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -156,36 +160,36 @@ namespace SonarAnalyzer.SyntaxTrackers
                 .OfType<AssignmentExpressionSyntax>()
                 .Where(assignment => IsTrackedPropertyName(assignment.Left))
                 .ToList();
-
-            if (trackedPropertyAssignments.Count != 0)
+            if (trackedPropertyAssignments.Any())
             {
                 return trackedPropertyAssignments.All(assignment => IsAllowedValue(assignment.Right, semanticModel));
             }
-
-            var argumentList = objectCreation.ArgumentList;
-            if (trackedConstructorArgumentIndex != -1)
+            else if (trackedConstructorArgumentIndex != -1)
             {
-                return argumentList == null ||
-                    argumentList.Arguments.Count != trackedConstructorArgumentIndex + 1 ||
-                    IsAllowedValue(argumentList.Arguments[trackedConstructorArgumentIndex].Expression, semanticModel);
+                var argumentList = objectCreation.ArgumentList;
+                return argumentList == null
+                    || argumentList.Arguments.Count != trackedConstructorArgumentIndex + 1
+                    || IsAllowedValue(argumentList.Arguments[trackedConstructorArgumentIndex].Expression, semanticModel);
             }
-
-            // if no tracked properties are being explicitly set or passed as arguments, the constructor may still be safe by design
-            return constructorIsSafe;
+            else
+            {
+                // if no tracked properties are being explicitly set or passed as arguments, the constructor may still be safe by design
+                return constructorIsSafe;
+            }
         }
 
         /// <summary>
         /// Returns true if <paramref name="propertyName"/> is the name of a tracked property.
         /// </summary>
-        private bool IsTrackedPropertyName(string propertyName) => isTrackedPropertyName(propertyName);
+        private bool IsTrackedPropertyName(string propertyName) =>
+            isTrackedPropertyName(propertyName);
 
         /// <summary>
         /// Returns true if the <paramref name="expression"/> has the name of a tracked property.
         /// </summary>
         private bool IsTrackedPropertyName(ExpressionSyntax expression)
         {
-            var memberAccess = expression as MemberAccessExpressionSyntax;
-            var identifier = memberAccess?.Name?.Identifier ?? (expression as IdentifierNameSyntax)?.Identifier;
+            var identifier = (expression as MemberAccessExpressionSyntax)?.Name?.Identifier ?? (expression as IdentifierNameSyntax)?.Identifier;
             return identifier.HasValue && IsTrackedPropertyName(identifier.Value.ValueText);
         }
 
@@ -193,9 +197,9 @@ namespace SonarAnalyzer.SyntaxTrackers
         /// Returns true if the provided expression is a member of a tracked type.
         /// </summary>
         private bool IsPropertyOnTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression is MemberAccessExpressionSyntax memberAccess &&
-            memberAccess.Expression != null &&
-            IsTrackedType(memberAccess.Expression, semanticModel);
+            expression is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.Expression != null
+            && IsTrackedType(memberAccess.Expression, semanticModel);
 
         private bool IsLaterAssignedWithAllowedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
@@ -206,7 +210,6 @@ namespace SonarAnalyzer.SyntaxTrackers
             }
 
             var variableSymbol = GetAssignedVariableSymbol(objectCreation, semanticModel);
-
             var nextStatements = GetNextStatements(statement);
             var innerStatements = GetInnerStatements(statement);
 
@@ -223,28 +226,24 @@ namespace SonarAnalyzer.SyntaxTrackers
                 && IsAllowedValue(assignment.Right, semanticModel);
         }
 
-        private IEnumerable<ExpressionSyntax> GetInitializerExpressions(InitializerExpressionSyntax initializer) =>
+        private static IEnumerable<ExpressionSyntax> GetInitializerExpressions(InitializerExpressionSyntax initializer) =>
             initializer?.Expressions ?? Enumerable.Empty<ExpressionSyntax>();
 
         private static ISymbol GetAssignedVariableSymbol(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
-            var variable = objectCreation.FirstAncestorOrSelf<AssignmentExpressionSyntax>()?.Left;
-            if (variable != null)
+            if (objectCreation.FirstAncestorOrSelf<AssignmentExpressionSyntax>()?.Left is { } variable)
             {
                 return semanticModel.GetSymbolInfo(variable).Symbol;
             }
 
-            var identifier = objectCreation.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
-            return identifier != null
+            return objectCreation.FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { }  identifier
                 ? semanticModel.GetDeclaredSymbol(identifier)
                 : null;
         }
 
         private static ISymbol GetAssignedVariableSymbol(AssignmentExpressionSyntax assignment, SemanticModel semanticModel)
         {
-            var identifier = (assignment.Left as MemberAccessExpressionSyntax)?.Expression
-                ?? assignment.Left as IdentifierNameSyntax;
-
+            var identifier = (assignment.Left as MemberAccessExpressionSyntax)?.Expression ?? assignment.Left as IdentifierNameSyntax;
             return identifier != null
                 ? semanticModel.GetSymbolInfo(identifier).Symbol
                 : null;
