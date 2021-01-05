@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -26,15 +28,18 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2255";
-        protected const string MessageFormat = "Make sure that this cookie is written safely.";
+        private const string MessageFormat = "Make sure that this cookie is written safely.";
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected DiagnosticDescriptor Rule { get; }
         protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
-
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
-
         protected ElementAccessTracker<TSyntaxKind> ElementAccessTracker { get; set; }
-
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+
+        protected UsingCookiesBase(System.Resources.ResourceManager rspecStrings) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings).WithNotConfigurable();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -73,7 +78,7 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
-            
+
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),

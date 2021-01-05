@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -31,24 +30,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class UsingCookies : UsingCookiesBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
+        public UsingCookies() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
-
-        public UsingCookies()
-            : this(AnalyzerConfiguration.Hotspot)
+        public UsingCookies(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
         {
-        }
-
-        public UsingCookies(IAnalyzerConfiguration analyzerConfiguration)
-        {
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
-            ElementAccessTracker = new VisualBasicElementAccessTracker(analyzerConfiguration, rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
-            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, Rule);
+            ElementAccessTracker = new VisualBasicElementAccessTracker(analyzerConfiguration, Rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, Rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, Rule);
         }
     }
 }

@@ -18,17 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -40,28 +38,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UsingCookies_CS_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_Net46.cs",
-                new CSharp.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingCookies_Net46.cs",
-                new CSharp.UsingCookies(),
+                new CS.UsingCookies(),
                 additionalReferences: GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_Net46.vb",
-                new VisualBasic.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
+                new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingCookies_Net46.vb",
-                new VisualBasic.UsingCookies(),
+                new VB.UsingCookies(),
                 additionalReferences: GetAdditionalReferencesForNet46());
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNet46() =>
@@ -72,14 +70,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UsingCookies_CS_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.cs",
-                new CSharp.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_VB_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.vb",
-                new VisualBasic.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
+                new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNetCore(string packageVersion) =>
