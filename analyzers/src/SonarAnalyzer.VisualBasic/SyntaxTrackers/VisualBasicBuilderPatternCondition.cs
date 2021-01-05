@@ -20,32 +20,23 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using System;
-using System.Linq;
 using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicBuilderPatternCondition : BuilderPatternCondition<InvocationExpressionSyntax>
     {
-
-        public VisualBasicBuilderPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<InvocationExpressionSyntax>[] descriptors) : base(constructorIsSafe, descriptors) { }
+        public VisualBasicBuilderPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<InvocationExpressionSyntax>[] descriptors)
+            : base(constructorIsSafe, descriptors, new VisualBasicAssignmentFinder()) { }
 
         protected override SyntaxNode RemoveParentheses(SyntaxNode node) =>
             node.RemoveParentheses();
 
-        protected override SyntaxNode GetTopMostContainingMethod(SyntaxNode node) =>
-            node.GetTopMostContainingMethod();
+        protected override SyntaxNode GetExpression(InvocationExpressionSyntax node) =>
+            node.Expression;
 
-        protected override SyntaxNode GetExpression(InvocationExpressionSyntax node)
-        {
-            return node.Expression;
-        }
-
-        protected override string GetIdentifierName(InvocationExpressionSyntax node)
-        {
-            return node.Expression.GetName();
-        }
+        protected override string GetIdentifierName(InvocationExpressionSyntax node) =>
+            node.Expression.GetName();
 
         protected override bool IsMemberAccess(SyntaxNode node, out SyntaxNode memberAccessExpression)
         {
@@ -70,32 +61,6 @@ namespace SonarAnalyzer.Helpers
             }
             identifierName = null;
             return false;
-        }
-
-        protected override bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, out SyntaxNode rightExpression)
-        {
-            if (node is AssignmentStatementSyntax assignment && assignment.Left.NameIs(identifierName))
-            {
-                rightExpression = assignment.Right;
-                return true;
-            }
-            rightExpression = null;
-            return false;
-        }
-
-        protected override bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer)
-        {
-            if (node is LocalDeclarationStatementSyntax declarationStatement
-                && declarationStatement.Declarators.SingleOrDefault(MatchesIdentifierName) is { } declaration)
-            {
-                initializer = declaration.Initializer?.Value ?? (declaration.AsClause as AsNewClauseSyntax)?.NewExpression;
-                return true;
-            }
-            initializer = null;
-            return false;
-
-            bool MatchesIdentifierName(VariableDeclaratorSyntax declarator) =>
-                declarator.Names.Any(n => identifierName.Equals(n.Identifier.ValueText, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

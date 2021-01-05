@@ -174,13 +174,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var left = syntaxNode.Left is BinaryExpressionSyntax precedingConcat && precedingConcat.IsAnyKind(SyntaxKind.ConcatenateExpression, SyntaxKind.AddExpression)
                     ? precedingConcat.Right
                     : syntaxNode.Left;
-                return GetStringConstant(left) is { } leftString
-                    && GetStringConstant(syntaxNode.Right) is { } rightString
+                return left.FindStringConstant(semanticModel) is { } leftString
+                    && syntaxNode.Right.FindStringConstant(semanticModel) is { } rightString
                     ? leftString + rightString
                     : null;
-
-                string GetStringConstant(SyntaxNode node) =>
-                    node.GetStringValue() ?? semanticModel.GetConstantValue(node).Value as string;
             }
 
             protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
@@ -195,7 +192,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override string GetAssignedValue(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
                 syntaxNode.Contents.JoinStr(null, x => x switch
                 {
-                    InterpolationSyntax interpolation => semanticModel.GetConstantValue(interpolation.Expression).Value as string,
+                    InterpolationSyntax interpolation => interpolation.Expression.FindStringConstant(semanticModel),
                     InterpolatedStringTextSyntax text => text.TextToken.ToString(),
                     _ => null
                 } ?? CredentialSeparator.ToString()); // Unknown elements resolved to separator to terminate the keyword-value sequence
@@ -211,7 +208,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             protected override string GetAssignedValue(InvocationExpressionSyntax syntaxNode, SemanticModel semanticModel)
             {
-                var allArgs = syntaxNode.ArgumentList.Arguments.Select(x => semanticModel.GetConstantValue(x.GetExpression()).Value as string ?? CredentialSeparator.ToString());
+                var allArgs = syntaxNode.ArgumentList.Arguments.Select(x => x.GetExpression().FindStringConstant(semanticModel) ?? CredentialSeparator.ToString());
                 try
                 {
                     return string.Format(allArgs.First(), allArgs.Skip(1).ToArray());

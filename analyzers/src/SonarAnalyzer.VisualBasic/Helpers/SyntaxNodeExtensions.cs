@@ -18,35 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
     internal static class SyntaxNodeExtensions
     {
-        public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
-            node != null &&
-            node.DescendantNodes()
-                .Any(descendant => descendant.IsAnyKind(SyntaxKind.IfStatement,
-                    SyntaxKind.ConditionalExpression,
-                    SyntaxKind.CoalesceExpression,
-                    SyntaxKind.SwitchStatement,
-                    SyntaxKindEx.SwitchExpression,
-                    SyntaxKindEx.CoalesceAssignmentExpression));
-
-        public static bool ToStringContains(this SyntaxNode node, string s) =>
-            node.ToString().Contains(s);
-
-        public static bool ToStringContainsEitherOr(this SyntaxNode node, string a, string b)
-        {
-            var toString = node.ToString();
-            return toString.Contains(a) || toString.Contains(b);
-        }
-
         public static string FindStringConstant(this SyntaxNode node, SemanticModel semanticModel) =>
-            new CSharpStringConstantFinder(semanticModel).FindStringConstant(node);
+            new VisualBasicStringConstantFinder(semanticModel).FindStringConstant(node);
     }
 }

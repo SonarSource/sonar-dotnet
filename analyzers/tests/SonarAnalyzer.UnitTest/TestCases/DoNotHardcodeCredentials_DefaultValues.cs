@@ -16,6 +16,7 @@ namespace Tests.Diagnostics
         private string secretFieldUninitialized;
         private string secretFieldNull = null;
         private string secretFieldMethod = someMethod();
+        private string invalidField = invalidField; // // Error [CS0236] A field initializer cannot reference the non-static field, method, or property
 
         private static string someMethod() => "";
 
@@ -101,10 +102,10 @@ namespace Tests.Diagnostics
 
             a = "Server = localhost; Database = Test; User = SA; Password = " + "hardcoded";        // Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst;        // Noncompliant
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretField;        // FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldConst;   // FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableConst;// FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretField;        // Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldConst;   // Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableConst;// Noncompliant
 
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldUninitialized;   // Compliant, not initialized to constant
             a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldNull;            // Compliant, not initialized to constant
@@ -114,25 +115,29 @@ namespace Tests.Diagnostics
 
             const string passwordPrefixConst = "Password = ";       // Compliant by it's name
             var passwordPrefixVariable = "Password = ";             // Compliant by it's name
-            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst;                // Noncompliant
-            a = "Server = localhost;" + " Database = Test; User = SA; Pa" + "ssword = " + secretConst;           // FN, we don't track all concatenations to avoid duplications
-            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixConst + secretConst;     // Noncompliant
-            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixVariable + secretConst;  // FN
-            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst + " suffix";    // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst;                   // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Pa" + "ssword = " + secretConst;              // FN, we don't track all concatenations to avoid duplications
+            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixConst + secretConst;        // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; " + passwordPrefixVariable + secretConst;     // Noncompliant
+            a = "Server = localhost;" + " Database = Test; User = SA; Password = " + secretConst + " suffix";       // Noncompliant
             //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            a = someMethod() + " Database = Test; User = SA; Password = " + secretConst + " suffix";             // Noncompliant
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst + arg + " suffix";  // Noncompliant
-            a = "Server = localhost; Database = Test; User = SA; Password = " + arg + secretConst + " suffix";  // Compliant
-            a = secretConst + "Server = localhost; Database = Test; User = SA; Password = " + arg;              // Compliant
-            a = "Server = localhost; Database = Test; User = SA; " + someMethod() + secretConst;                // Compliant
+            a = someMethod() + " Database = Test; User = SA; Password = " + secretConst + " suffix";                // Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretConst + arg + " suffix";      // Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + arg + secretConst + " suffix";      // Compliant
+            a = secretConst + "Server = localhost; Database = Test; User = SA; Password = " + arg;                  // Compliant
+            a = "Server = localhost; Database = Test; User = SA; " + someMethod() + secretConst;                    // Compliant
 
             // Reassigned
             secretVariableMethod = "literal";
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretFieldMethod;  // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariableMethod;   // Noncompliant
             arg = "literal";
-            a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                // FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " + arg;                    // Noncompliant
             secretVariable = someMethod();
-            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;     // Compliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + secretVariable;         // Compliant
+
+            var invalidVariable = invalidVariable; // Error [CS0841] Cannot use local variable invalid before it's declared
+            a = "Server = localhost; Database = Test; User = SA; Password = " + invalidVariable;        // Compliant, test to avoid infinite recursion
+            a = "Server = localhost; Database = Test; User = SA; Password = " + invalidField;           // Compliant, test to avoid infinite recursion
         }
 
         public void Interpolations(string arg)
@@ -140,8 +145,8 @@ namespace Tests.Diagnostics
             var secretVariable = "literalValue";
             string a;
             a = $"Server = localhost; Database = Test; User = SA; Password = {secretConst}";        // Noncompliant
-            a = $"Server = localhost; Database = Test; User = SA; Password = {secretField}";        // FN
-            a = $"Server = localhost; Database = Test; User = SA; Password = {secretVariable}";     // FN
+            a = $"Server = localhost; Database = Test; User = SA; Password = {secretField}";        // Noncompliant
+            a = $"Server = localhost; Database = Test; User = SA; Password = {secretVariable}";     // Noncompliant
             a = $"Server = localhost; Database = Test; User = SA; Password = {arg}";                // Compliant
             a = $"Server = localhost; Database = Test; User = SA; Password = {arg}{secretConst}";   // Compliant
             a = $@"Server = localhost; Database = Test; User = SA; Password = {secretConst}";       // Noncompliant
@@ -153,8 +158,8 @@ namespace Tests.Diagnostics
             string a;
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);           // Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretConst);     // Noncompliant
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretField);     // FN
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, secretVariable);  // FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", null, secretField);     // Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, secretVariable);  // Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", arg);                   // Compliant
             a = String.Format(@"Server = localhost; Database = Test; User = SA; Password = {0}", secretConst);          // Noncompliant
             a = String.Format(formatProvider, "Database = Test; User = SA; Password = {0}", secretConst);               // Compliant, we can't simulate formatProvider behavior

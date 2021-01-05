@@ -12,7 +12,7 @@ Namespace Tests.Diagnostics
 
         Private Const SecretConst As String = "constantValue"
         Private SecretField As String = "literalValue"
-        Private SecretFieldConst As String = SecretConst
+        Dim SecretFieldConst As String = SecretConst
         Private SecretFieldUninitialized As String
         Private SecretFieldNull As String = Nothing
         Private SecretFieldMethod As String = SomeMethod()
@@ -39,7 +39,6 @@ Namespace Tests.Diagnostics
             foo = "passwordpassword"
             foo = "foo=1;password=1" 'Noncompliant
             foo = "foo=1password=1"
-
 
             Dim myPassword1 As String = Nothing
             Dim myPassword2 As String = ""
@@ -82,12 +81,12 @@ Namespace Tests.Diagnostics
             a = "Server = localhost; Database = Test; User = SA; Password = " + "hardcoded"           ' Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " & SecretConst           ' Noncompliant
             a = "Server = localhost; Database = Test; User = SA; Password = " + SecretConst           ' Noncompliant
-            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretField           ' FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretField           ' FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldConst      ' FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariable        ' FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretVariable        ' FN
-            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableConst   ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretField           ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretField           ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldConst      ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariable        ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " + SecretVariable        ' Noncompliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableConst   ' Noncompliant
 
             a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldUninitialized  ' Compliant, not initialized to constant
             a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldNull           ' Compliant, not initialized to constant
@@ -101,7 +100,7 @@ Namespace Tests.Diagnostics
             a = "Server = localhost;" + " Database = Test; User = SA; Password = " + SecretConst                ' Noncompliant
             a = "Server = localhost;" & " Database = Test; User = SA; Pa" & "ssword = " & SecretConst           ' FN, we don't track all concatenations to avoid duplications
             a = "Server = localhost;" & " Database = Test; User = SA; " & PasswordPrefixConst & SecretConst     ' Noncompliant
-            a = "Server = localhost;" & " Database = Test; User = SA; " & PasswordPrefixVariable & SecretConst  ' FN
+            a = "Server = localhost;" & " Database = Test; User = SA; " & PasswordPrefixVariable & SecretConst  ' Noncompliant
             a = "Server = localhost;" & " Database = Test; User = SA; Password = " & SecretConst & " suffix"    ' Noncompliant
             '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             a = SomeMethod() & " Database = Test; User = SA; Password = " & SecretConst & " suffix"             ' Noncompliant
@@ -112,19 +111,19 @@ Namespace Tests.Diagnostics
 
             ' Reassigned
             SecretVariableMethod = "literal"
-            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretFieldMethod ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariableMethod    ' Noncompliant
             Arg = "literal"
-            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg               ' FN
+            a = "Server = localhost; Database = Test; User = SA; Password = " & Arg                     ' Noncompliant
             SecretVariable = SomeMethod()
-            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariable    ' Compliant
+            a = "Server = localhost; Database = Test; User = SA; Password = " & SecretVariable          ' Compliant
         End Sub
 
         Public Sub Interpolations(Arg As String)
             Dim SecretVariable As String = "literalValue"
             Dim a As String
             a = $"Server = localhost; Database = Test; User = SA; Password = {SecretConst}"         ' Noncompliant
-            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretField}"         ' FN
-            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretVariable}"      ' FN
+            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretField}"         ' Noncompliant
+            a = $"Server = localhost; Database = Test; User = SA; Password = {SecretVariable}"      ' Noncompliant
             a = $"Server = localhost; Database = Test; User = SA; Password = {Arg}"                 ' Compliant
             a = $"Server = localhost; Database = Test; User = SA; Password = {Arg}{SecretConst}"    ' Compliant
         End Sub
@@ -135,8 +134,8 @@ Namespace Tests.Diagnostics
 
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", SecretConst)            ' Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretConst)   ' Noncompliant
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretField)   ' FN
-            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, SecretVariable)   ' FN
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {1}", Nothing, SecretField)   ' Noncompliant
+            a = String.Format("Server = localhost; Database = Test; User = SA; Password = {2}", 0, 0, SecretVariable)   ' Noncompliant
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arg)                    ' Compliant
             a = String.Format(FormatProvider, "Database = Test; User = SA; Password = {0}", SecretConst)                ' Compliant, we can't simulate formatProvider behavior
             a = String.Format("Server = localhost; Database = Test; User = SA; Password = {0}", Arr)                    ' Compliant

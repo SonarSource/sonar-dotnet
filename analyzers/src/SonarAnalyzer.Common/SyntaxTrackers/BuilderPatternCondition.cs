@@ -28,21 +28,20 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly bool constructorIsSafe;
         private readonly BuilderPatternDescriptor<TInvocationSyntax>[] descriptors;
+        private readonly AssignmentFinder assignmentFinder;
 
         protected abstract SyntaxNode RemoveParentheses(SyntaxNode node);
-        protected abstract SyntaxNode GetTopMostContainingMethod(SyntaxNode node);
         protected abstract SyntaxNode GetExpression(TInvocationSyntax node);
         protected abstract string GetIdentifierName(TInvocationSyntax node);
         protected abstract bool IsMemberAccess(SyntaxNode node, out SyntaxNode memberAccessExpression);
         protected abstract bool IsObjectCreation(SyntaxNode node);
         protected abstract bool IsIdentifier(SyntaxNode node, out string identifierName);
-        protected abstract bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, out SyntaxNode rightExpression);
-        protected abstract bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer);
 
-        protected BuilderPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<TInvocationSyntax>[] descriptors)
+        protected BuilderPatternCondition(bool constructorIsSafe, BuilderPatternDescriptor<TInvocationSyntax>[] descriptors, AssignmentFinder assignmentFinder)
         {
             this.constructorIsSafe = constructorIsSafe;
             this.descriptors = descriptors;
+            this.assignmentFinder = assignmentFinder;
         }
 
         public bool IsInvalidBuilderInitialization(InvocationContext context)
@@ -54,7 +53,7 @@ namespace SonarAnalyzer.Helpers
                 if (current is TInvocationSyntax invocation)
                 {
                     var invocationContext = new InvocationContext(invocation, GetIdentifierName(invocation), context.SemanticModel);
-                    if (this.descriptors.FirstOrDefault(x => x.IsMatch(invocationContext)) is { } desc)
+                    if (descriptors.FirstOrDefault(x => x.IsMatch(invocationContext)) is { } desc)
                     {
                         return !desc.IsValid(invocation);
                     }
@@ -77,7 +76,7 @@ namespace SonarAnalyzer.Helpers
                     }
                     // When tracking reaches the local variable in invocation chain 'variable.MethodA().MethodB()'
                     // we'll try to find preceding assignment to that variable to continue inspection of initialization chain.
-                    current = FindLinearPrecedingAssignmentExpression(identifierName, current);
+                    current = assignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, current);
                 }
                 else
                 {
@@ -85,32 +84,6 @@ namespace SonarAnalyzer.Helpers
                 }
             }
             return false;
-        }
-
-        private SyntaxNode FindLinearPrecedingAssignmentExpression(string identifierName, SyntaxNode current)
-        {
-            var method = GetTopMostContainingMethod(current);
-            while (current != method && current?.Parent != null)
-            {
-                var parent = current.Parent;
-                foreach (var statement in parent.ChildNodes().TakeWhile(x => x != current).Reverse())
-                {
-                    if (IsAssignmentToIdentifier(statement, identifierName, out var right))
-                    {
-                        return right;
-                    }
-                    else if (IsIdentifierDeclaration(statement, identifierName, out var initializer))
-                    {
-                        return initializer;
-                    }
-                    else if (statement.DescendantNodes().Any(x => IsAssignmentToIdentifier(x, identifierName, out _)))
-                    {
-                        return null; // Assignment inside nested statement (if, try, for, ...)
-                    }
-                }
-                current = parent;
-            }
-            return null;
         }
     }
 }
