@@ -110,7 +110,7 @@ namespace Tests.Diagnostics
             OdbcDataAdapter adapter;
             adapter = new OdbcDataAdapter(); // Compliant
             adapter = new OdbcDataAdapter(command); // Compliant
-            adapter = new OdbcDataAdapter(query, ""); // Compliant
+            adapter = new OdbcDataAdapter(query, $" non constant {query}"); // Compliant
             adapter = new OdbcDataAdapter(query, connection); // Compliant
         }
 
@@ -145,7 +145,7 @@ namespace Tests.Diagnostics
             OracleDataAdapter adapter;
             adapter = new OracleDataAdapter(); // Compliant
             adapter = new OracleDataAdapter(command); // Compliant
-            adapter = new OracleDataAdapter(query, ""); // Compliant, we don't know anything about the parameter
+            adapter = new OracleDataAdapter(query, $"non constant {query}"); // Compliant, we don't know anything about the parameter
             adapter = new OracleDataAdapter(query, connection); // Compliant, we don't know anything about the parameter
         }
 
@@ -175,7 +175,7 @@ namespace Tests.Diagnostics
             SqlCeDataAdapter adapter;
             adapter = new SqlCeDataAdapter(); // Compliant
             adapter = new SqlCeDataAdapter(command); // Compliant
-            adapter = new SqlCeDataAdapter(query, ""); // Compliant
+            adapter = new SqlCeDataAdapter(query, string.Concat(query, "other param")); // Compliant
             adapter = new SqlCeDataAdapter(query, connection); // Compliant
         }
 
@@ -189,50 +189,50 @@ namespace Tests.Diagnostics
         public void MySqlDataCompliant(MySqlConnection connection, MySqlTransaction transaction, string query)
         {
             MySqlCommand command;
-            command = new MySqlCommand();                                       // Compliant
-            command = new MySqlCommand("");                                     // Compliant
-            command = new MySqlCommand(query, connection, transaction);         // Compliant
+            command = new MySqlCommand();                                               // Compliant
+            command = new MySqlCommand("");                                             // Compliant
+            command = new MySqlCommand(query, connection, transaction);                 // Compliant
 
-            command.CommandText = query;                                        // Compliant
-            command.CommandText = ConstantQuery;                                // Compliant
+            command.CommandText = query;                                                // Compliant
+            command.CommandText = ConstantQuery;                                        // Compliant
             string text;
-            text = command.CommandText;                                         // Compliant
-            text = command.CommandText = query;                                 // Compliant
+            text = command.CommandText;                                                 // Compliant
+            text = command.CommandText = query;                                         // Compliant
 
-            var adapter = new MySqlDataAdapter("", connection);                 // Compliant
-            adapter = new MySqlDataAdapter(ConstantQuery, "connectionString");  // Compliant
+            var adapter = new MySqlDataAdapter("", connection);                         // Compliant
+            adapter = new MySqlDataAdapter(ConstantQuery, "connectionString");          // Compliant
 
-            MySqlHelper.ExecuteDataRow("connectionString", ConstantQuery);      // Compliant
+            MySqlHelper.ExecuteDataRow($"connectionString = {query}", ConstantQuery);   // Compliant
         }
 
         public void NonCompliant_MySqlData(MySqlConnection connection, MySqlTransaction transaction, string query, string param)
         {
-            var command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}");                                                                   // Noncompliant
-            command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection);                                                           // Noncompliant
-            command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction);                                              // Noncompliant
-            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);                                                        // Noncompliant
+            var command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}");                          // Noncompliant
+            command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection);                  // Noncompliant
+            command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction);     // Noncompliant
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);               // Noncompliant
 
-            var adapter = new MySqlDataAdapter($"SELECT * FROM mytable WHERE mycol=" + param, connection);                                                  // Noncompliant
+            var adapter = new MySqlDataAdapter($"SELECT * FROM mytable WHERE mycol=" + param, connection);         // Noncompliant
 
-            MySqlHelper.ExecuteDataRow("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");                                                   // Noncompliant
-            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");                                              // Noncompliant
+            MySqlHelper.ExecuteDataRow("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");          // Noncompliant
+            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");     // Noncompliant
             MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", new System.Threading.CancellationToken());    // Noncompliant
-            MySqlHelper.ExecuteDataset("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");                                                   // Noncompliant
-            MySqlHelper.ExecuteDatasetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");                                              // Noncompliant
-            MySqlHelper.ExecuteNonQuery("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");                                                  // Noncompliant
-            MySqlHelper.ExecuteNonQueryAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}");                                                     // Noncompliant
-            MySqlHelper.ExecuteReader(connection, $"SELECT * FROM mytable WHERE mycol={param}");                                                            // Noncompliant
-            MySqlHelper.ExecuteReaderAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}");                                                       // Noncompliant
-            MySqlHelper.ExecuteScalar(connection, $"SELECT * FROM mytable WHERE mycol={param}");                                                            // Noncompliant
-            MySqlHelper.ExecuteScalarAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}");                                                       // Noncompliant
+            MySqlHelper.ExecuteDataset("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");          // Noncompliant
+            MySqlHelper.ExecuteDatasetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");     // Noncompliant
+            MySqlHelper.ExecuteNonQuery("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");         // Noncompliant
+            MySqlHelper.ExecuteNonQueryAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}");            // Noncompliant
+            MySqlHelper.ExecuteReader(connection, $"SELECT * FROM mytable WHERE mycol={param}");                   // Noncompliant
+            MySqlHelper.ExecuteReaderAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}");              // Noncompliant
+            MySqlHelper.ExecuteScalar(connection, $"SELECT * FROM mytable WHERE mycol={param}");                   // Noncompliant
+            MySqlHelper.ExecuteScalarAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}");              // Noncompliant
             MySqlHelper.UpdateDataSet("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", new DataSet(), "tableName");                        // Noncompliant
             MySqlHelper.UpdateDataSetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", new DataSet(), "tableName");                   // Noncompliant
 
-            var script = new MySqlScript($"SELECT * FROM mytable WHERE mycol={param}");                                                                     // Noncompliant
-            script = new MySqlScript(connection, $"SELECT * FROM mytable WHERE mycol={param}");                                                             // Noncompliant
+            var script = new MySqlScript($"SELECT * FROM mytable WHERE mycol={param}");                            // Noncompliant
+            script = new MySqlScript(connection, $"SELECT * FROM mytable WHERE mycol={param}");                    // Noncompliant
         }
 
-        public void MicrosoftDataSqliteCompliant(SqliteConnection connection,string query)
+        public void MicrosoftDataSqliteCompliant(SqliteConnection connection, string query)
         {
             SqliteCommand command;
             command = new SqliteCommand();          // Compliant
@@ -260,6 +260,8 @@ namespace Tests.Diagnostics
             string text;
             text = command.CommandText;                                     // Compliant
             text = command.CommandText = query;                             // Compliant
+
+            SQLiteCommand.Execute("SELECT * FROM mytable WHERE mycol={param}", SQLiteExecuteType.None, $"connectionString={query}");    // Compliant
         }
 
         public void NonCompliant_SystemDataSqlite(SQLiteConnection connection, SQLiteTransaction transaction, string query, string param)

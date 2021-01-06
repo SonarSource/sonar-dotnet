@@ -30,10 +30,10 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S2077";
         private const string MessageFormat = "Make sure that formatting this SQL query is safe here.";
-        private const int FirstArgumentLocation = 0;
-        private const int SecondArgumentLocation = 1;
+        private const int FirstArgumentIndex = 0;
+        private const int SecondArgumentIndex = 1;
 
-        private readonly KnownType[] constructorsWithFirstParam =
+        private readonly KnownType[] constructorsForFirstArgument =
             {
                 KnownType.Microsoft_EntityFrameworkCore_RawSqlString,
                 KnownType.System_Data_SqlClient_SqlCommand,
@@ -52,24 +52,24 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Data_Sqlite_SQLiteDataAdapter,
             };
 
-        private readonly KnownType[] constructorsWithSecondParam =
+        private readonly KnownType[] constructorsForSecondArgument =
             {
                 KnownType.MySql_Data_MySqlClient_MySqlScript,
             };
 
-        private readonly MemberDescriptor[] invocationsWithFirstTwoParams =
+        private readonly MemberDescriptor[] invocationsForFirstTwoArguments =
             {
                 new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
                 new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand"),
                 new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql"),
             };
 
-        private readonly MemberDescriptor[] invocationsWithFirstParam =
+        private readonly MemberDescriptor[] invocationsForFirstArgument =
             {
                 new MemberDescriptor(KnownType.System_Data_Sqlite_SqliteCommand, "Execute"),
             };
 
-        private readonly MemberDescriptor[] invocationsWithSecondParam =
+        private readonly MemberDescriptor[] invocationsForSecondArgument =
             {
                 new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataRow"),
                 new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlHelper, "ExecuteDataRowAsync"),
@@ -116,26 +116,24 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(invocationsWithFirstTwoParams),
+                InvocationTracker.MatchMethod(invocationsForFirstTwoArguments),
                 Conditions.And(
                     MethodHasRawSqlQueryParameter(),
                     Conditions.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1))
                 ),
-                Conditions.ExceptWhen(
-                    InvocationTracker.ArgumentAtIndexIsConstant(0)));
+                Conditions.ExceptWhen(InvocationTracker.ArgumentAtIndexIsConstant(0)));
 
-            TrackInvocations(context, invocationsWithFirstParam, FirstArgumentLocation);
-            TrackInvocations(context, invocationsWithSecondParam, SecondArgumentLocation);
+            TrackInvocations(context, invocationsForFirstArgument, FirstArgumentIndex);
+            TrackInvocations(context, invocationsForSecondArgument, SecondArgumentIndex);
 
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchProperty(properties),
                 PropertyAccessTracker.MatchSetter(),
                 c => IsTracked(GetSetValue(c), c.SemanticModel),
-                Conditions.ExceptWhen(
-                    PropertyAccessTracker.AssignedValueIsConstant()));
+                Conditions.ExceptWhen(PropertyAccessTracker.AssignedValueIsConstant()));
 
-            TrackObjectCreation(context, constructorsWithFirstParam, FirstArgumentLocation);
-            TrackObjectCreation(context, constructorsWithSecondParam, SecondArgumentLocation);
+            TrackObjectCreation(context, constructorsForFirstArgument, FirstArgumentIndex);
+            TrackObjectCreation(context, constructorsForSecondArgument, SecondArgumentIndex);
         }
 
         private void TrackObjectCreation(SonarAnalysisContext context, KnownType[] objectCreationTypes, int argumentIndex) =>
@@ -149,8 +147,7 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(incovationsDescriptors),
                 ArgumentAtIndexIsTracked(argumentIndex),
-                Conditions.ExceptWhen(
-                    InvocationTracker.ArgumentAtIndexIsConstant(argumentIndex)));
+                Conditions.ExceptWhen(InvocationTracker.ArgumentAtIndexIsConstant(argumentIndex)));
 
         private InvocationCondition MethodHasRawSqlQueryParameter() =>
             context =>
