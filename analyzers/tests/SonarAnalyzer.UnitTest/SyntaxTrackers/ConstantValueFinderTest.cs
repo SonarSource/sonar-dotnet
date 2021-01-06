@@ -38,7 +38,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             const string code1 = @"
 public partial class Sample
 {
-    private int Field = 42;
+    private static int Original = 42;
+    private int Field = Original;
 }";
             const string code2 = @"
 public partial class Sample
@@ -55,7 +56,7 @@ public partial class Sample
             var tree = compilation.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
             var returnExpression = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression;
             var finder = new CSharpConstantValueFinder(compilation.GetSemanticModel(tree));
-            finder.FindConstant(returnExpression).Should().BeNull();
+            finder.FindConstant(returnExpression).Should().Be(42);
         }
     }
 }

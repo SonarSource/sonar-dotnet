@@ -49,7 +49,10 @@ namespace SonarAnalyzer.Helpers
         private object FindConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables) =>
             node == null || node.RawKind == nullLiteralExpressionSyntaxKind  // Performance shortcut
             ? null
-            : semanticModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, visitedVariables);
+            : EnsureCorrectSemanticModel(node).GetConstantValue(node).Value ?? FindAssignedConstant(node, visitedVariables);
+
+        private SemanticModel EnsureCorrectSemanticModel(SyntaxNode node) =>
+            semanticModel.SyntaxTree == node.SyntaxTree ? semanticModel : semanticModel.Compilation.GetSemanticModel(node.SyntaxTree);
 
         private object FindAssignedConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables)
         {
@@ -59,7 +62,7 @@ namespace SonarAnalyzer.Helpers
 
             SyntaxNode FindFieldInitializer()
             {
-                if (semanticModel.GetSymbolInfo(identifier).Symbol is IFieldSymbol fieldSymbol
+                if (EnsureCorrectSemanticModel(identifier).GetSymbolInfo(identifier).Symbol is IFieldSymbol fieldSymbol
                     && VariableDeclarator(fieldSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()) is { } variable
                     && (visitedVariables == null || !visitedVariables.Contains(variable)))
                 {
