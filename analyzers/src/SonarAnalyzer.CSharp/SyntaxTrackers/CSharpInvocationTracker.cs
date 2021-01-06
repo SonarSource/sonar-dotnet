@@ -48,12 +48,8 @@ namespace SonarAnalyzer.Helpers
                     && methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
                     && methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess
                     && propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                    && propertyMemberAccess.Name is SimpleNameSyntax propertyMemberName
-                    && propertyMemberName.Identifier is SyntaxToken propertyMemberIdentifier
                     && context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType
-                    && propertyMemberIdentifier.ValueText != null
-                    && enclosingClassType.Type != null
-                    && member.IsMatch(propertyMemberIdentifier.ValueText, enclosingClassType.Type);
+                    && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type);
 
         internal override object ConstArgumentForParameter(InvocationContext context, string parameterName)
         {

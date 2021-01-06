@@ -21,6 +21,7 @@
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -142,7 +143,7 @@ End Class";
             tracker.ArgumentAtIndexIsConstant(5)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsConstant(42)(context).Should().BeFalse();
 
-            context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "NoArgs", AnalyzerLanguage.VisualBasic);
+            context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "NoArgs", AnalyzerLanguage.VisualBasic, 1);
             tracker.ArgumentAtIndexIsConstant(0)(context).Should().BeFalse();
         }
 
@@ -169,7 +170,7 @@ End Class";
             tracker.ArgumentAtIndexEquals(2, "true")(context).Should().BeFalse();   // Not a string
             tracker.ArgumentAtIndexEquals(42, "myConst")(context).Should().BeFalse();
 
-            context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "NoArgs", AnalyzerLanguage.VisualBasic);
+            context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "NoArgs", AnalyzerLanguage.VisualBasic, 1);
             tracker.ArgumentAtIndexEquals(0, "myConst")(context).Should().BeFalse();
         }
 

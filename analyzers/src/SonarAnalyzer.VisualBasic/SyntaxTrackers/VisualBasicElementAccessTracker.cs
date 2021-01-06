@@ -44,11 +44,7 @@ namespace SonarAnalyzer.Helpers
         public override ElementAccessCondition MatchProperty(MemberDescriptor member) =>
             context => ((InvocationExpressionSyntax)context.Expression).Expression is MemberAccessExpressionSyntax memberAccess
                         && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                        && memberAccess.Name is SimpleNameSyntax memberName
-                        && memberName.Identifier is SyntaxToken memberIdentifier
                         && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
-                        && memberIdentifier.ValueText != null
-                        && enclosingClassType.Type != null
-                        && member.IsMatch(memberIdentifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
+                        && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
     }
 }
