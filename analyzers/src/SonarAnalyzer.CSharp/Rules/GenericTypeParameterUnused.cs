@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         var typeParameterNames = helper.Parameters.Parameters.Select(typeParameter => typeParameter.Identifier.Text).ToArray();
 
-                        var usedTypeParameters = GetUsedTypeParameters(declarations, typeParameterNames, c, analysisContext.Compilation);
+                        var usedTypeParameters = GetUsedTypeParameters(declarations, typeParameterNames, c);
 
                         foreach (var typeParameter in typeParameterNames
                             .Where(typeParameter => !usedTypeParameters.Contains(typeParameter)))
@@ -136,27 +136,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.IsChangeable();
         }
 
-        private static List<string> GetUsedTypeParameters(IEnumerable<SyntaxNode> declarations, string[] typeParameterNames,
-            SyntaxNodeAnalysisContext localContext,
-            Compilation compilation)
-        {
-            return declarations
+        private static List<string> GetUsedTypeParameters(IEnumerable<SyntaxNode> declarations, string[] typeParameterNames, SyntaxNodeAnalysisContext context) =>
+            declarations
                 .SelectMany(declaration => declaration.DescendantNodes())
                 .OfType<IdentifierNameSyntax>()
                 .Where(identifier => !(identifier.Parent is TypeParameterConstraintClauseSyntax))
                 .Where(identifier => typeParameterNames.Contains(identifier.Identifier.ValueText))
-                .Select(identifier =>
-                {
-                    var semanticModelOfThisTree = identifier.SyntaxTree == localContext.Node.SyntaxTree
-                        ? localContext.SemanticModel
-                        : compilation.GetSemanticModel(identifier.SyntaxTree);
-
-                    return semanticModelOfThisTree?.GetSymbolInfo(identifier).Symbol;
-                })
+                .Select(identifier => identifier.EnsureCorrectSemanticModel(context.SemanticModel)?.GetSymbolInfo(identifier).Symbol)
                 .Where(symbol => symbol != null && symbol.Kind == SymbolKind.TypeParameter)
                 .Select(symbol => symbol.Name)
                 .ToList();
-        }
 
         private static readonly ISet<SyntaxKind> MethodModifiersToSkip = new HashSet<SyntaxKind>
         {
