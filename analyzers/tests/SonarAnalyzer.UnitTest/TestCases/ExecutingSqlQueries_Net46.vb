@@ -157,119 +157,120 @@ Namespace Tests.Diagnostics
 
         Public Sub MySqlDataCompliant(ByVal connection As MySqlConnection, ByVal transaction As MySqlTransaction, ByVal query As String)
             Dim command As MySqlCommand
-            command = New MySqlCommand() ' Compliant
-            command = New MySqlCommand("") ' Compliant
-            command = New MySqlCommand(query, connection, transaction) ' Compliant
+            command = New MySqlCommand()                                        ' Compliant
+            command = New MySqlCommand("")                                      ' Compliant
+            command = New MySqlCommand(query, connection, transaction)          ' Compliant
 
-            command.CommandText = query ' Compliant
-            command.CommandText = ConstantQuery ' Compliant
+            command.CommandText = query                                         ' Compliant
+            command.CommandText = ConstantQuery                                 ' Compliant
             Dim text As String
-            text = command.CommandText ' Compliant
+            text = command.CommandText                                          ' Compliant
 
             Dim adapter As MySqlDataAdapter
-            adapter = New MySqlDataAdapter("", connection) ' Compliant
-            adapter = New MySqlDataAdapter(ConstantQuery, "connectionString") ' Compliant
+            adapter = New MySqlDataAdapter("", connection)                      ' Compliant
+            adapter = New MySqlDataAdapter(ConstantQuery, "connectionString")   ' Compliant
 
-            MySqlHelper.ExecuteDataRow("connectionString", ConstantQuery) ' Compliant
+            MySqlHelper.ExecuteDataRow("connectionString", ConstantQuery)       ' Compliant
         End Sub
 
         Public Sub NonCompliant_MySqlData(ByVal connection As MySqlConnection, ByVal transaction As MySqlTransaction, ByVal query As String, ByVal param As String)
             Dim command As MySqlCommand
-            command = New MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            command = New MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection) ' Noncompliant
-            command = New MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction) ' Noncompliant
-            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+            command = New MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}")                                                                        ' Noncompliant
+            command = New MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection)                                                            ' Noncompliant
+            command = New MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction)                                               ' Noncompliant
+            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)                                                         ' Noncompliant
 
             Dim adapter As MySqlDataAdapter
-            adapter = New MySqlDataAdapter($"SELECT * FROM mytable WHERE mycol=" + param, connection) ' Noncompliant
-            MySqlHelper.ExecuteDataRow("connectionString", $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", New System.Threading.CancellationToken()) ' Noncompliant
-            MySqlHelper.ExecuteDataset("connectionString", $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            MySqlHelper.ExecuteDatasetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            MySqlHelper.ExecuteNonQuery("connectionString", $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            MySqlHelper.ExecuteNonQueryAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            MySqlHelper.ExecuteReader(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            MySqlHelper.ExecuteReaderAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            MySqlHelper.ExecuteScalar(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            MySqlHelper.ExecuteScalarAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            MySqlHelper.UpdateDataSet("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", New DataSet(), "tableName") ' Noncompliant
-            MySqlHelper.UpdateDataSetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", New DataSet(), "tableName") ' Noncompliant
+            adapter = New MySqlDataAdapter($"SELECT * FROM mytable WHERE mycol=" + param, connection)                                                       ' Noncompliant
+
+            MySqlHelper.ExecuteDataRow("connectionString", $"SELECT * FROM mytable WHERE mycol={param}")                                                    ' Noncompliant
+            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}")                                               ' Noncompliant
+            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", New System.Threading.CancellationToken())     ' Noncompliant
+            MySqlHelper.ExecuteDataset("connectionString", $"SELECT * FROM mytable WHERE mycol={param}")                                                    ' Noncompliant
+            MySqlHelper.ExecuteDatasetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}")                                               ' Noncompliant
+            MySqlHelper.ExecuteNonQuery("connectionString", $"SELECT * FROM mytable WHERE mycol={param}")                                                   ' Noncompliant
+            MySqlHelper.ExecuteNonQueryAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}")                                                      ' Noncompliant
+            MySqlHelper.ExecuteReader(connection, $"SELECT * FROM mytable WHERE mycol={param}")                                                             ' Noncompliant
+            MySqlHelper.ExecuteReaderAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}")                                                        ' Noncompliant
+            MySqlHelper.ExecuteScalar(connection, $"SELECT * FROM mytable WHERE mycol={param}")                                                             ' Noncompliant
+            MySqlHelper.ExecuteScalarAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}")                                                        ' Noncompliant
+            MySqlHelper.UpdateDataSet("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", New DataSet(), "tableName")                         ' Noncompliant
+            MySqlHelper.UpdateDataSetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", New DataSet(), "tableName")                    ' Noncompliant
 
             Dim script As MySqlScript
-            script = New MySqlScript($"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            script = New MySqlScript(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            script = New MySqlScript($"SELECT * FROM mytable WHERE mycol={param}")                                                                          ' Noncompliant
+            script = New MySqlScript(connection, $"SELECT * FROM mytable WHERE mycol={param}")                                                              ' Noncompliant
         End Sub
 
         Public Sub MicrosoftDataSqliteCompliant(ByVal connection As MSSqlite.SqliteConnection, ByVal query As String)
             Dim command As MSSqlite.SqliteCommand
-            command = New MSSqlite.SqliteCommand() ' Compliant
-            command = New MSSqlite.SqliteCommand("") ' Compliant
-            command.CommandText = ConstantQuery ' Compliant
+            command = New MSSqlite.SqliteCommand()      ' Compliant
+            command = New MSSqlite.SqliteCommand("")    ' Compliant
+            command.CommandText = ConstantQuery         ' Compliant
 
-            command.CommandText = query ' Compliant
+            command.CommandText = query                 ' Compliant
         End Sub
 
         Public Sub NonCompliant_MicrosoftDataSqlite(ByVal connection As MSSqlite.SqliteConnection, ByVal query As String, ByVal param As String)
             Dim command As MSSqlite.SqliteCommand
-            command = New MSSqlite.SqliteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection) ' Noncompliant
-            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+            command = New MSSqlite.SqliteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection)  ' Noncompliant
+            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)         ' Noncompliant
         End Sub
 
         Public Sub SystemDataSqliteCompliant(ByVal connection As SystemSqlite.SQLiteConnection, ByVal transaction As SystemSqlite.SQLiteTransaction, ByVal query As String)
             Dim command As SystemSqlite.SQLiteCommand
-            command = New SystemSqlite.SQLiteCommand() ' Compliant
-            command = New SystemSqlite.SQLiteCommand("") ' Compliant
-            command = New SystemSqlite.SQLiteCommand(query, connection, transaction) ' Compliant
+            command = New SystemSqlite.SQLiteCommand()                                  ' Compliant
+            command = New SystemSqlite.SQLiteCommand("")                                ' Compliant
+            command = New SystemSqlite.SQLiteCommand(query, connection, transaction)    ' Compliant
 
-            command.CommandText = query ' Compliant
-            command.CommandText = ConstantQuery ' Compliant
+            command.CommandText = query                                                 ' Compliant
+            command.CommandText = ConstantQuery                                         ' Compliant
             Dim Text As String
-            Text = command.CommandText ' Compliant
-            Text = command.CommandText = query ' Compliant
+            Text = command.CommandText                                                  ' Compliant
+            Text = command.CommandText = query                                          ' Compliant
         End Sub
 
         Public Sub NonCompliant_SystemDataSqlite(ByVal connection As SystemSqlite.SqliteConnection, ByVal transaction As SystemSqlite.SQLiteTransaction, ByVal query As String, ByVal param As String)
             Dim command As SystemSqlite.SQLiteCommand
-            command = New SystemSqlite.SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
-            command = New SystemSqlite.SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection) ' Noncompliant
-            command = New SystemSqlite.SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction) ' Noncompliant
-            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+            command = New SystemSqlite.SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}")                                                      ' Noncompliant
+            command = New SystemSqlite.SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection)                                          ' Noncompliant
+            command = New SystemSqlite.SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction)                             ' Noncompliant
+            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)                                                     ' Noncompliant
 
             Dim adapter As SystemSqlite.SQLiteDataAdapter
-            adapter = New SystemSqlite.SQLiteDataAdapter($"SELECT * FROM mytable WHERE mycol={param}", connection) ' Noncompliant
-            SystemSqlite.SQLiteCommand.Execute($"SELECT * FROM mytable WHERE mycol={param}", SystemSqlite.SQLiteExecuteType.None, "connectionString") ' Noncompliant
+            adapter = New SystemSqlite.SQLiteDataAdapter($"SELECT * FROM mytable WHERE mycol={param}", connection)                                      ' Noncompliant
+            SystemSqlite.SQLiteCommand.Execute($"SELECT * FROM mytable WHERE mycol={param}", SystemSqlite.SQLiteExecuteType.None, "connectionString")   ' Noncompliant
         End Sub
 
         Public Sub ConcatAndStringFormat(ByVal connection As SqlConnection, ByVal param As String)
             Dim sensitiveQuery As String = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)
-            Dim command = New SqlCommand(sensitiveQuery)    'Noncompliant
-            command.CommandText = sensitiveQuery            'Noncompliant
+            Dim command = New SqlCommand(sensitiveQuery)                                                        ' Noncompliant
+            command.CommandText = sensitiveQuery                                                                ' Noncompliant
 
             Dim stillSensitive As String = sensitiveQuery
-            command.CommandText = stillSensitive            'Noncompliant
+            command.CommandText = stillSensitive                                                                ' Noncompliant
 
             Dim sensitiveConcatQuery As String = "SELECT * FROM Table1 WHERE col1 = '" + param + "'"
-            command = New SqlCommand(sensitiveConcatQuery)             'Noncompliant
-            command.CommandText = sensitiveConcatQuery                 'Noncompliant
+            command = New SqlCommand(sensitiveConcatQuery)                                                      ' Noncompliant
+            command.CommandText = sensitiveConcatQuery                                                          ' Noncompliant
 
             Dim stillSensitiveConcat As String = sensitiveConcatQuery
-            command.CommandText = stillSensitiveConcat                 'Noncompliant
+            command.CommandText = stillSensitiveConcat                                                          ' Noncompliant
 
             Dim sensitiveConcatQuery2 As String = "SELECT * FROM Table1 WHERE col1 = '" & param & "'"
-            command = New SqlCommand(sensitiveConcatQuery2)             'Noncompliant
-            command.CommandText = sensitiveConcatQuery2                 'Noncompliant
+            command = New SqlCommand(sensitiveConcatQuery2)                                                     ' Noncompliant
+            command.CommandText = sensitiveConcatQuery2                                                         ' Noncompliant
 
             Dim stillSensitiveConcat2 As String = sensitiveConcatQuery2
-            command.CommandText = stillSensitiveConcat2                 'Noncompliant
+            command.CommandText = stillSensitiveConcat2                                                         ' Noncompliant
 
             Dim x As String
             x = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)
-            command.CommandText = x ' FN
+            command.CommandText = x                                                                             ' FN
 
             Dim y As String
             y = sensitiveQuery
-            command.CommandText = y ' FN
+            command.CommandText = y                                                                             ' FN
         End Sub
 
     End Class
