@@ -31,10 +31,11 @@ namespace SonarAnalyzer.Helpers
     public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        protected ElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
-        {
-        }
+        public abstract ElementAccessCondition ArgumentAtIndexEquals(int index, string value);
+        public abstract ElementAccessCondition MatchSetter();
+        public abstract ElementAccessCondition MatchProperty(MemberDescriptor member);
+
+        protected ElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public void Track(SonarAnalysisContext context, params ElementAccessCondition[] conditions)
         {
@@ -66,27 +67,12 @@ namespace SonarAnalyzer.Helpers
         }
 
         internal ElementAccessCondition ArgumentAtIndexIs(int index, params KnownType[] types) =>
-            (context) =>
-                context.InvokedPropertySymbol.Value != null &&
-                context.InvokedPropertySymbol.Value.Parameters.Length > index &&
-                context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]);
+            context => context.InvokedPropertySymbol.Value != null
+                        && context.InvokedPropertySymbol.Value.Parameters.Length > index
+                        && context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]);
 
-        internal ElementAccessCondition MatchIndexerIn(params KnownType[] types)
-        {
-            var immutableTypes = types.ToImmutableArray();
-            return (context) =>
-                context.InvokedPropertySymbol.Value != null &&
-                context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(immutableTypes);
-        }
-
-        public abstract ElementAccessCondition ArgumentAtIndexEquals(int index, string value);
-
-        #region Syntax-level checking methods
-
-        public abstract ElementAccessCondition MatchSetter();
-
-        public abstract ElementAccessCondition MatchProperty(MemberDescriptor member);
-
-        #endregion
+        internal ElementAccessCondition MatchIndexerIn(params KnownType[] types) =>
+            context => context.InvokedPropertySymbol.Value != null
+                        && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
     }
 }

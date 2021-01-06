@@ -5,14 +5,28 @@ namespace Tests.Diagnostics
 {
     class Program
     {
+        private string setCookieField = "Set-Cookie";
+        private const string SetCookieConst = "Set-Cookie";
+
         void Responses(HttpResponse response)
         {
             var value = "";
+            var setCookieVariable = "Set-Cookie";
 
             // Response headers
-            response.Headers.Add("Set-Cookie", ""); // Noncompliant
-            response.Headers["Set-Cookie"] = ""; // Noncompliant
-            value = response.Headers["Set-Cookie"]; // Compliant
+            response.Headers.Add("Set-Cookie", "");         // Noncompliant
+            response.Headers.Add(setCookieField, "");       // Noncompliant
+            response.Headers.Add(SetCookieConst, "");       // Noncompliant
+            response.Headers.Add(setCookieVariable, "");    // Noncompliant
+            response.Headers.Add("Set-Cookie", "");         // Noncompliant
+            response.Headers["Set-Cookie"] = "";            // Noncompliant
+            response.Headers[SetCookieConst] = "";          // Noncompliant
+            response.Headers[setCookieField] = "";          // Noncompliant
+            response.Headers[setCookieVariable] = "";       // Noncompliant
+            value = response.Headers["Set-Cookie"];         // Compliant
+            setCookieVariable = "Reset";
+            response.Headers.Add(setCookieVariable, "");    // Compliant
+            response.Headers[setCookieVariable] = "";       // Compliant
 
             // Not the Set-Cookie header
             response.Headers.Add("something", "");

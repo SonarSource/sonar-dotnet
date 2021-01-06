@@ -30,15 +30,16 @@ namespace SonarAnalyzer.Helpers
     public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        private bool CaseInsensitiveComparison { get; }
+        private readonly bool caseInsensitiveComparison;
 
-        protected InvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false)
-            : base(analyzerConfiguration, rule)
-        {
-            this.CaseInsensitiveComparison = caseInsensitiveComparison;
-        }
-
+        public abstract InvocationCondition ArgumentAtIndexIsConstant(int index);
+        public abstract InvocationCondition ArgumentAtIndexEquals(int index, string value);
+        public abstract InvocationCondition MatchProperty(MemberDescriptor member);
+        internal abstract object ConstArgumentForParameter(InvocationContext context, string parameterName);
         protected abstract string GetMethodName(SyntaxNode invocationExpression);
+
+        protected InvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
+            this.caseInsensitiveComparison = caseInsensitiveComparison;
 
         public void Track(SonarAnalysisContext context, params InvocationCondition[] conditions)
         {
@@ -75,55 +76,34 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public abstract InvocationCondition ArgumentAtIndexIsConstant(int index);
-
-        public abstract InvocationCondition ArgumentAtIndexEquals(int index, string value);
-
-        public abstract InvocationCondition IsTypeOfExpression();
-
-        internal abstract object ConstArgumentForParameter(InvocationContext context, string parameterName);
-
-        internal InvocationCondition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
-            context =>
-                ConstArgumentForParameter(context, parameterName) is bool boolValue &&
-                boolValue == expectedValue;
-
         public InvocationCondition MatchMethod(params MemberDescriptor[] methods) =>
-            context =>
-                MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, CaseInsensitiveComparison, methods);
+            context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, caseInsensitiveComparison, methods);
 
         public InvocationCondition MethodNameIs(string methodName) =>
-            context =>
-                context.MethodName == methodName;
+            context => context.MethodName == methodName;
 
         public InvocationCondition MethodIsStatic() =>
-            context =>
-                context.MethodSymbol.Value != null &&
-                context.MethodSymbol.Value.IsStatic;
+            context => context.MethodSymbol.Value != null
+                    && context.MethodSymbol.Value.IsStatic;
 
         public InvocationCondition MethodIsExtension() =>
-            context =>
-                context.MethodSymbol.Value != null &&
-                context.MethodSymbol.Value.IsExtensionMethod;
+            context => context.MethodSymbol.Value != null
+                    && context.MethodSymbol.Value.IsExtensionMethod;
 
         public InvocationCondition MethodHasParameters(int count) =>
-            context =>
-                context.MethodSymbol.Value != null &&
-                context.MethodSymbol.Value.Parameters.Length == count;
-
-        internal InvocationCondition MethodReturnTypeIs(KnownType returnType) =>
-            context =>
-                context.MethodSymbol.Value != null &&
-                context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
+            context => context.MethodSymbol.Value != null
+                    && context.MethodSymbol.Value.Parameters.Length == count;
 
         public InvocationCondition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition)
             where TInvocationSyntax : SyntaxNode =>
             condition.IsInvalidBuilderInitialization;
 
-        #region Syntax-level checking methods
+        internal InvocationCondition MethodReturnTypeIs(KnownType returnType) =>
+            context => context.MethodSymbol.Value != null
+                    && context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
 
-        public abstract InvocationCondition MatchProperty(MemberDescriptor member);
-
-        #endregion
+        internal InvocationCondition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
+            context => ConstArgumentForParameter(context, parameterName) is bool boolValue
+                    && boolValue == expectedValue;
     }
 }

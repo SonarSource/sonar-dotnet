@@ -28,76 +28,39 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
     {
-        public VisualBasicInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule, caseInsensitiveComparison: true)
-        {
-        }
+        public VisualBasicInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule, caseInsensitiveComparison: true) { }
 
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
-            new[] { SyntaxKind.InvocationExpression };
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InvocationExpression };
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
         public override InvocationCondition ArgumentAtIndexIsConstant(int index) =>
-            (context) =>
-            {
-                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                return argumentList != null &&
-                    argumentList.Arguments.Count > index &&
-                    argumentList.Arguments[index].GetExpression().IsConstant(context.SemanticModel);
-            };
+            context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
+                    && argumentList.Arguments.Count > index
+                    && argumentList.Arguments[index].GetExpression().IsConstant(context.SemanticModel);
 
         public override InvocationCondition ArgumentAtIndexEquals(int index, string value) =>
-            (context) =>
-            {
-                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                if (argumentList == null ||
-                    argumentList.Arguments.Count <= index)
-                {
-                    return false;
-                }
-                var constantValue = context.SemanticModel.GetConstantValue(argumentList.Arguments[index].GetExpression());
-                return constantValue.HasValue &&
-                    constantValue.Value is string constant &&
-                    constant == value;
-            };
+            context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
+                    && index < argumentList.Arguments.Count
+                    && argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel) == value;
 
-        public override InvocationCondition IsTypeOfExpression() =>
-            (context) => context.Invocation is InvocationExpressionSyntax invocation
-                        && invocation.Expression is MemberAccessExpressionSyntax memberAccessSyntax
-                        && memberAccessSyntax.Expression != null
-                        && memberAccessSyntax.Expression.RawKind == (int)SyntaxKind.GetTypeExpression;
-
-        protected override string GetMethodName(SyntaxNode invocationExpression) =>
-            ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier()?.Identifier.ValueText;
+        public override InvocationCondition MatchProperty(MemberDescriptor member) =>
+            context => ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess
+                    && methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                    && methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess
+                    && propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                    && context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType
+                    && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
 
         internal override object ConstArgumentForParameter(InvocationContext context, string parameterName)
         {
             var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
             var values = VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName);
-            if (values.Length == 1 && values[0] is ExpressionSyntax valueSyntax)
-            {
-                return context.SemanticModel.GetConstantValue(valueSyntax).Value;
-            }
-            return null;
+            return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
+                ? context.SemanticModel.GetConstantValue(valueSyntax).Value
+                : null;
         }
 
-        #region Syntax-level checking methods
-
-        public override InvocationCondition MatchProperty(MemberDescriptor member) =>
-            (context) =>
-                ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess &&
-                methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
-                methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess &&
-                propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
-                propertyMemberAccess.Name is SimpleNameSyntax propertyMemberName &&
-                propertyMemberName.Identifier is SyntaxToken propertyMemberIdentifier &&
-                context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType &&
-                propertyMemberIdentifier.ValueText != null &&
-                enclosingClassType.Type != null &&
-                member.IsMatch(propertyMemberIdentifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
-
-        #endregion
+        protected override string GetMethodName(SyntaxNode invocationExpression) =>
+          ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier()?.Identifier.ValueText;
     }
 }
