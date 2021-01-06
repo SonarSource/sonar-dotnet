@@ -43,12 +43,6 @@ namespace SonarAnalyzer.Helpers
                     && index < argumentList.Arguments.Count
                     && argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel) == value;
 
-        public override InvocationCondition IsTypeOfExpression() =>
-            context => context.Invocation is InvocationExpressionSyntax invocation
-                    && invocation.Expression is MemberAccessExpressionSyntax memberAccessSyntax
-                    && memberAccessSyntax.Expression != null
-                    && memberAccessSyntax.Expression.RawKind == (int)SyntaxKind.GetTypeExpression;
-
         public override InvocationCondition MatchProperty(MemberDescriptor member) =>
             context => ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess
                     && methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)

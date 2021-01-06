@@ -38,12 +38,6 @@ namespace SonarAnalyzer.Helpers
                     && argumentList.Arguments.Count > index
                     && argumentList.Arguments[index].Expression.IsConstant(context.SemanticModel);
 
-        public override InvocationCondition IsTypeOfExpression() =>
-            context => context.Invocation is InvocationExpressionSyntax invocation
-                    && invocation.Expression is MemberAccessExpressionSyntax memberAccessSyntax
-                    && memberAccessSyntax.Expression != null
-                    && memberAccessSyntax.Expression.RawKind == (int)SyntaxKind.TypeOfExpression;
-
         public override InvocationCondition ArgumentAtIndexEquals(int index, string value) =>
             context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
                     && index < argumentList.Arguments.Count
