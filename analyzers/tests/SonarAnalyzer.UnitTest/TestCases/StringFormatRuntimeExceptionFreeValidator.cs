@@ -4,6 +4,9 @@ namespace Tests.Diagnostics
 {
     public class StringFormatRuntimeExceptionFreeValidator
     {
+        private string validFormatField = "{0}";
+        private string invalidFormatField = "{{0}";
+
         void System_String_Format(string[] args)
         {
             string s;
@@ -36,7 +39,7 @@ namespace Tests.Diagnostics
             s = string.Format("{0} {1} {2}", new object[] { 1, 2 }); // Noncompliant
 
             var pattern = "{0} {1} {2}";
-            s = string.Format(pattern, 1, 2); // Compliant, not const string are not recognized
+            s = string.Format(pattern, 1, 2); // Noncompliant
 
             int[] intArray = new int[] { };
             s = string.Format("{0} {1} {2}", intArray); // Compliant, arrays are not recognized
@@ -62,6 +65,18 @@ namespace Tests.Diagnostics
 
             s = string.Format("{1000001}"); // Noncompliant {{Invalid string format, the string format item index should not be greater than 1000000.}}
             s = string.Format("{0,1000001}"); // Noncompliant {{Invalid string format, the string format item alignment should not be greater than 1000000.}}
+
+            var validFormatVariable = "{0}";
+            var invalidFormatVariable = "{{0}";
+            s = string.Format(invalidFormatField, arg0);    // Noncompliant
+            s = string.Format(invalidFormatVariable, arg0); // Noncompliant
+            s = string.Format(validFormatField, arg0);
+            s = string.Format(validFormatVariable, arg0);
+            // Reassigned to fixed values
+            invalidFormatField = "{0}";
+            invalidFormatVariable = "{0}";
+            s = string.Format(invalidFormatField, arg0);
+            s = string.Format(invalidFormatVariable, arg0);
         }
 
         void System_Console_Write(string[] args)
