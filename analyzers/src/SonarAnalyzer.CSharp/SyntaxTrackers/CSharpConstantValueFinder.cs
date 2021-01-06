@@ -24,18 +24,15 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class CSharpStringConstantFinder : StringConstantFinder<IdentifierNameSyntax, VariableDeclaratorSyntax>
+    public class CSharpConstantValueFinder : ConstantValueFinder<IdentifierNameSyntax, VariableDeclaratorSyntax>
     {
-        public CSharpStringConstantFinder(SemanticModel semanticModel) : base(semanticModel, new CSharpAssignmentFinder(), (int)SyntaxKind.NullLiteralExpression) { }
+        public CSharpConstantValueFinder(SemanticModel semanticModel) : base(semanticModel, new CSharpAssignmentFinder(), (int)SyntaxKind.NullLiteralExpression) { }
 
         protected override string IdentifierName(IdentifierNameSyntax node) =>
             node.Identifier.ValueText;
 
         protected override SyntaxNode InitializerValue(VariableDeclaratorSyntax node) =>
             node.Initializer?.Value;
-
-        protected override string StringValue(SyntaxNode node) =>
-            node.GetStringValue();
 
         protected override VariableDeclaratorSyntax VariableDeclarator(SyntaxNode node) =>
             node as VariableDeclaratorSyntax;

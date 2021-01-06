@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 "ConfiguringLoggers" => "ConfiguringLoggers_AspNetCore",
                 "CookieShouldBeHttpOnly" => "CookieShouldBeHttpOnly_Nancy",
-                "CookieShouldBeSecure" => "CookiesShouldBeSecure_Nancy",
+                "CookieShouldBeSecure" => "CookieShouldBeSecure_Nancy",
                 "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials_DefaultValues",
                 "DeliveringDebugFeaturesInProduction" => "DeliveringDebugFeaturesInProduction.NetCore2",
 #if NETFRAMEWORK

@@ -11,6 +11,9 @@ namespace Tests.Diagnostics
         HttpCookie Property1 { get; set; } = new HttpCookie("c"); // Noncompliant
         HttpCookie Property2 { get; set; }
 
+        private bool trueField = true;
+        private bool falseField = false;
+
         void CtorSetsAllowedValue()
         {
             // none
@@ -24,14 +27,16 @@ namespace Tests.Diagnostics
         void InitializerSetsAllowedValue()
         {
             new HttpCookie("c") { HttpOnly = true };
+            new HttpCookie("c") { HttpOnly = trueField };
         }
 
         void InitializerSetsNotAllowedValue()
         {
-            new HttpCookie("c") { HttpOnly = false }; // Noncompliant
+            new HttpCookie("c") { HttpOnly = false };       // Noncompliant
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            new HttpCookie("c") { }; // Noncompliant
-            new HttpCookie("c") { Secure = true }; // Noncompliant
+            new HttpCookie("c") { HttpOnly = falseField };  // Noncompliant
+            new HttpCookie("c") { };                        // Noncompliant
+            new HttpCookie("c") { Secure = true };          // Noncompliant
         }
 
         void PropertySetsNotAllowedValue()
@@ -40,17 +45,21 @@ namespace Tests.Diagnostics
             c.HttpOnly = false; // Noncompliant
 //          ^^^^^^^^^^^^^^^^^^
 
-            field1.HttpOnly = false; // Noncompliant
-            this.field1.HttpOnly = false; // Noncompliant
+            field1.HttpOnly = false;        // Noncompliant
+            field1.HttpOnly = falseField;   // Noncompliant
+            this.field1.HttpOnly = false;   // Noncompliant
 
-            Property1.HttpOnly = false; // Noncompliant
-            this.Property1.HttpOnly = false; // Noncompliant
+            Property1.HttpOnly = false;         // Noncompliant
+            this.Property1.HttpOnly = false;    // Noncompliant
         }
 
         void PropertySetsAllowedValue(bool foo)
         {
             var c1 = new HttpCookie("c"); // Compliant, HttpOnly is set below
             c1.HttpOnly = true;
+
+            var cc = new HttpCookie("c"); // Compliant, HttpOnly is set below
+            cc.HttpOnly = trueField;
 
             field1 = new HttpCookie("c"); // Compliant, HttpOnly is set below
             field1.HttpOnly = true;

@@ -29,20 +29,13 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class ObjectShouldBeInitializedCorrectlyBase : HotspotDiagnosticAnalyzer
     {
-        protected ObjectShouldBeInitializedCorrectlyBase()
-            : base(AnalyzerConfiguration.AlwaysEnabled)
-        {
-        }
+        protected ObjectShouldBeInitializedCorrectlyBase() : base(AnalyzerConfiguration.AlwaysEnabled) { }
 
-        protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
-        {
-        }
+        protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
-        protected abstract CSharpObjectInitializationTracker objectInitializationTracker { get; }
+        protected abstract CSharpObjectInitializationTracker ObjectInitializationTracker { get; }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(
                 ccc =>
                 {
@@ -55,7 +48,7 @@ namespace SonarAnalyzer.Rules
                         c =>
                         {
                             var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                            if (objectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel))
+                            if (ObjectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel))
                             {
                                 c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetLocation()));
                             }
@@ -66,14 +59,12 @@ namespace SonarAnalyzer.Rules
                         c =>
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
-
-                            if (objectInitializationTracker.ShouldBeReported(assignment, c.SemanticModel))
+                            if (ObjectInitializationTracker.ShouldBeReported(assignment, c.SemanticModel))
                             {
                                 c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
                             }
                         },
                         SyntaxKind.SimpleAssignmentExpression);
                 });
-        }
     }
 }

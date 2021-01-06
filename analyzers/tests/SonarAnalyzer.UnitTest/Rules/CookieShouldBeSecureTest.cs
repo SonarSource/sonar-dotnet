@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System.Collections.Generic;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -35,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Nancy() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CookiesShouldBeSecure_Nancy.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_Nancy.cs",
                 new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.Nancy());
 
