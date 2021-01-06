@@ -160,7 +160,7 @@ namespace Tests.Diagnostics
         {
             XmlTextReader reader = new XmlTextReader("resources/", table);
             var parse = DtdProcessing.Parse;
-            reader.DtdProcessing = parse; // FN
+            reader.DtdProcessing = parse; // Noncompliant
         }
 
         protected void PropagateValues_Null(XmlNameTable table)
