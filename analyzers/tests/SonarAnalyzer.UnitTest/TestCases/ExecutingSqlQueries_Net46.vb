@@ -5,6 +5,8 @@ Imports System.Data.Odbc
 Imports System.Data.OracleClient
 Imports System.Data.SqlServerCe
 Imports MySql.Data.MySqlClient
+Imports MSSqlite = Microsoft.Data.Sqlite
+Imports SystemSqlite = System.Data.SQLite
 
 Namespace Tests.Diagnostics
     Class Program
@@ -197,6 +199,46 @@ Namespace Tests.Diagnostics
             Dim script As MySqlScript
             script = New MySqlScript($"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
             script = New MySqlScript(connection, $"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+        End Sub
+
+        Public Sub MicrosoftDataSqliteCompliant(ByVal connection As MSSqlite.SqliteConnection, ByVal query As String)
+            Dim command As MSSqlite.SqliteCommand
+            command = New MSSqlite.SqliteCommand() ' Compliant
+            command = New MSSqlite.SqliteCommand("") ' Compliant
+            command.CommandText = ConstantQuery ' Compliant
+
+            command.CommandText = query ' Compliant
+        End Sub
+
+        Public Sub NonCompliant_MicrosoftDataSqlite(ByVal connection As MSSqlite.SqliteConnection, ByVal query As String, ByVal param As String)
+            Dim command As MSSqlite.SqliteCommand
+            command = New MSSqlite.SqliteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection) ' Noncompliant
+            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+        End Sub
+
+        Public Sub SystemDataSqliteCompliant(ByVal connection As SystemSqlite.SQLiteConnection, ByVal transaction As SystemSqlite.SQLiteTransaction, ByVal query As String)
+            Dim command As SystemSqlite.SQLiteCommand
+            command = New SystemSqlite.SQLiteCommand() ' Compliant
+            command = New SystemSqlite.SQLiteCommand("") ' Compliant
+            command = New SystemSqlite.SQLiteCommand(query, connection, transaction) ' Compliant
+
+            command.CommandText = query ' Compliant
+            command.CommandText = ConstantQuery ' Compliant
+            Dim Text As String
+            Text = command.CommandText ' Compliant
+            Text = command.CommandText = query ' Compliant
+        End Sub
+
+        Public Sub NonCompliant_SystemDataSqlite(ByVal connection As SystemSqlite.SqliteConnection, ByVal transaction As SystemSqlite.SQLiteTransaction, ByVal query As String, ByVal param As String)
+            Dim command As SystemSqlite.SQLiteCommand
+            command = New SystemSqlite.SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}") ' Noncompliant
+            command = New SystemSqlite.SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection) ' Noncompliant
+            command = New SystemSqlite.SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction) ' Noncompliant
+            command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+
+            Dim adapter As SystemSqlite.SQLiteDataAdapter
+            adapter = New SystemSqlite.SQLiteDataAdapter($"SELECT * FROM mytable WHERE mycol={param}", connection) ' Noncompliant
+            SystemSqlite.SQLiteCommand.Execute($"SELECT * FROM mytable WHERE mycol={param}", SystemSqlite.SQLiteExecuteType.None, "connectionString") ' Noncompliant
         End Sub
 
         Public Sub ConcatAndStringFormat(ByVal connection As SqlConnection, ByVal param As String)

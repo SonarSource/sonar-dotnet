@@ -47,6 +47,9 @@ namespace SonarAnalyzer.Rules
                 KnownType.MySql_Data_MySqlClient_MySqlCommand,
                 KnownType.MySql_Data_MySqlClient_MySqlDataAdapter,
                 KnownType.MySql_Data_MySqlClient_MySqlScript,
+                KnownType.Microsoft_Data_Sqlite_SqliteCommand,
+                KnownType.System_Data_Sqlite_SqliteCommand,
+                KnownType.System_Data_Sqlite_SQLiteDataAdapter,
             };
 
         private readonly KnownType[] constructorsWithSecondParam =
@@ -59,6 +62,11 @@ namespace SonarAnalyzer.Rules
                 new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
                 new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand"),
                 new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql"),
+            };
+
+        private readonly MemberDescriptor[] invocationsWithFirstParam =
+            {
+                new MemberDescriptor(KnownType.System_Data_Sqlite_SqliteCommand, "Execute"),
             };
 
         private readonly MemberDescriptor[] invocationsWithSecondParam =
@@ -84,6 +92,8 @@ namespace SonarAnalyzer.Rules
                 new MemberDescriptor(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
                 new MemberDescriptor(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText"),
                 new MemberDescriptor(KnownType.MySql_Data_MySqlClient_MySqlCommand, "CommandText"),
+                new MemberDescriptor(KnownType.Microsoft_Data_Sqlite_SqliteCommand, "CommandText"),
+                new MemberDescriptor(KnownType.System_Data_Sqlite_SqliteCommand, "CommandText"),
             };
 
         protected abstract TExpressionSyntax GetInvocationExpression(SyntaxNode expression);
@@ -114,6 +124,7 @@ namespace SonarAnalyzer.Rules
                 Conditions.ExceptWhen(
                     InvocationTracker.ArgumentAtIndexIsConstant(0)));
 
+            TrackInvocations(context, invocationsWithFirstParam, FirstArgumentLocation);
             TrackInvocations(context, invocationsWithSecondParam, SecondArgumentLocation);
 
             PropertyAccessTracker.Track(context,
@@ -124,7 +135,6 @@ namespace SonarAnalyzer.Rules
                     PropertyAccessTracker.AssignedValueIsConstant()));
 
             TrackObjectCreation(context, constructorsWithFirstParam, FirstArgumentLocation);
-
             TrackObjectCreation(context, constructorsWithSecondParam, SecondArgumentLocation);
         }
 

@@ -5,6 +5,8 @@ using System.Data.Odbc;
 using System.Data.OracleClient;
 using System.Data.SqlServerCe;
 using MySql.Data.MySqlClient;
+using Microsoft.Data.Sqlite;
+using System.Data.SQLite;
 
 namespace Tests.Diagnostics
 {
@@ -226,6 +228,47 @@ namespace Tests.Diagnostics
             MySqlHelper.UpdateDataSetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", new DataSet(), "tableName"); // Noncompliant
             var script = new MySqlScript($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
             script = new MySqlScript(connection, $"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+        }
+
+        public void MicrosoftDataSqliteCompliant(SqliteConnection connection,string query)
+        {
+            SqliteCommand command;
+            command = new SqliteCommand(); // Compliant
+            command = new SqliteCommand(""); // Compliant
+            command.CommandText = ConstantQuery; // Compliant
+
+            command.CommandText = query; // Compliant
+        }
+
+        public void NonCompliant_MicrosoftDataSqlite(SqliteConnection connection, string query, string param)
+        {
+            var command = new SqliteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection); // Noncompliant
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
+        }
+
+        public void SystemDataSqliteCompliant(SQLiteConnection connection, SQLiteTransaction transaction, string query)
+        {
+            SQLiteCommand command;
+            command = new SQLiteCommand(); // Compliant
+            command = new SQLiteCommand(""); // Compliant
+            command = new SQLiteCommand(query, connection, transaction); // Compliant
+
+            command.CommandText = query; // Compliant
+            command.CommandText = ConstantQuery; // Compliant
+            string text;
+            text = command.CommandText; // Compliant
+            text = command.CommandText = query; // Compliant
+        }
+
+        public void NonCompliant_SystemDataSqlite(SQLiteConnection connection, SQLiteTransaction transaction, string query, string param)
+        {
+            var command = new SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant
+            command = new SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection); // Noncompliant
+            command = new SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction); // Noncompliant
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
+
+            var adapter = new SQLiteDataAdapter($"SELECT * FROM mytable WHERE mycol=" + param, connection); // Noncompliant
+            SQLiteCommand.Execute($"SELECT * FROM mytable WHERE mycol={param}", SQLiteExecuteType.None, "connectionString"); // Noncompliant
         }
 
         public void ConcatAndStringFormat(SqlConnection connection, string param)

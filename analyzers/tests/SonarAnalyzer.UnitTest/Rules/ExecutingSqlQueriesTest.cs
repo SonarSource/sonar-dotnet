@@ -55,7 +55,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(FrameworkMetadataReference.SystemData)
                 .Concat(FrameworkMetadataReference.SystemDataOracleClient)
                 .Concat(NuGetMetadataReference.SystemDataSqlServerCe(sqlServerCeVersion)
-                .Concat(NuGetMetadataReference.MySqlData("8.0.22")));
+                .Concat(NuGetMetadataReference.MySqlData("8.0.22"))
+                .Concat(NuGetMetadataReference.MicrosoftDataSqliteCore())
+                .Concat(NuGetMetadataReference.SystemDataSQLiteCore()));
 
 #else
 
