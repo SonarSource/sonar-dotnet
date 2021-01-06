@@ -500,6 +500,32 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
 "region":  {
+"startLine":  126,
+"startColumn":  16,
+"endLine":  126,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"region":  {
+"startLine":  127,
+"startColumn":  26,
+"endLine":  127,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"region":  {
 "startLine":  149,
 "startColumn":  30,
 "endLine":  149,
