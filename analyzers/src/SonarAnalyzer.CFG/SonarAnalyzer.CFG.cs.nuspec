@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>CFG library for SonarSource C# plugins</description>
     <language>en-US</language>
-    <copyright>Copyright © 2015-2019 SonarSource SA</copyright>
+    <copyright>Copyright © 2015-2021 SonarSource SA</copyright>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />
     </frameworkAssemblies>
