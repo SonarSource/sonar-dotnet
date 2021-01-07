@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -25,14 +27,20 @@ namespace SonarAnalyzer.Rules
     public abstract class EncryptionAlgorithmsShouldBeSecureBase<TSyntaxKind> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
-        internal const string DiagnosticId = "S5542";
-        protected const string MessageFormat = "Use secure mode and padding scheme.";
+        protected const string DiagnosticId = "S5542";
+        private const string MessageFormat = "Use secure mode and padding scheme.";
 
+        protected abstract PropertyAccessCondition IsInsideObjectInitializer();
+        protected abstract InvocationCondition HasPkcs1PaddingArgument();
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected DiagnosticDescriptor Rule { get; }
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
-
         protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
-
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+
+        protected EncryptionAlgorithmsShouldBeSecureBase(System.Resources.ResourceManager rspecStrings) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -55,9 +63,5 @@ namespace SonarAnalyzer.Rules
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.MatchConstructor(KnownType.System_Security_Cryptography_AesManaged));
         }
-
-        protected abstract PropertyAccessCondition IsInsideObjectInitializer();
-
-        protected abstract InvocationCondition HasPkcs1PaddingArgument();
     }
 }

@@ -35,11 +35,11 @@ namespace SonarAnalyzer.Rules
         private const string MessageVerifying = "verifying the signature of";
         private const int ExtensionStaticCallParameters = 2;
 
+        protected abstract BuilderPatternCondition<TInvocationSyntax> CreateBuilderPatternCondition();
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(VerifyingRule);
         protected DiagnosticDescriptor VerifyingRule { get; }
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
-
-        protected abstract BuilderPatternCondition<TInvocationSyntax> CreateBuilderPatternCondition();
 
         protected JwtSignedBase(System.Resources.ResourceManager rspecResources) =>
             VerifyingRule = DiagnosticDescriptorBuilder

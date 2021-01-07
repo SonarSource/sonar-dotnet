@@ -52,27 +52,39 @@ namespace Tests.Diagnostics
     class RSAEncryptionPaddingTest
     {
         RSACryptoServiceProvider rsaProvider = new RSACryptoServiceProvider();
+        private bool trueField = true;
+        private bool falseField = false;
 
         void InvocationSetsAllowedValue(byte[] data, RSAEncryptionPadding padding, RSA genericRSA)
         {
-            rsaProvider.Encrypt(data, true); // OAEP Padding is used (second parameter set to true)
-            rsaProvider.Decrypt(data, false); // Only raise on Encrypt method
+            rsaProvider.Encrypt(data, true);        // OAEP Padding is used (second parameter set to true)
+            rsaProvider.Encrypt(data, trueField);   // OAEP Padding is used (second parameter set to true)
+            rsaProvider.Decrypt(data, false);       // Only raise on Encrypt method
             rsaProvider.Encrypt(fOAEP: true, rgb: data);
             rsaProvider.Encrypt(data, System.Security.Cryptography.RSAEncryptionPadding.OaepSHA1);
             rsaProvider.Encrypt(data, RSAEncryptionPadding.OaepSHA256);
             rsaProvider.Encrypt(padding: padding, data: data); // we don't know which padding is actually used here so we do not raise the issue
 
             genericRSA.Encrypt(data, RSAEncryptionPadding.OaepSHA256);
+
+            //Reassigned
+            trueField = false;
+            rsaProvider.Encrypt(data, trueField);   // Noncompliant
         }
 
         void InvocationSetsNotAllowedValue(byte[] data, RSA genericRSA)
         {
-            rsaProvider.Encrypt(data, false); // Noncompliant {{Use secure mode and padding scheme.}}
-            rsaProvider.Encrypt(fOAEP: false, rgb: data); // Noncompliant
+            rsaProvider.Encrypt(data, false);               // Noncompliant {{Use secure mode and padding scheme.}}
+            rsaProvider.Encrypt(data, falseField);          // Noncompliant
+            rsaProvider.Encrypt(fOAEP: false, rgb: data);   // Noncompliant
             rsaProvider.Encrypt(data, System.Security.Cryptography.RSAEncryptionPadding.Pkcs1); // Noncompliant
-            rsaProvider.Encrypt(data, RSAEncryptionPadding.Pkcs1); // Noncompliant
+            rsaProvider.Encrypt(data, RSAEncryptionPadding.Pkcs1);  // Noncompliant
 
-            genericRSA.Encrypt(data, RSAEncryptionPadding.Pkcs1); // Noncompliant
+            genericRSA.Encrypt(data, RSAEncryptionPadding.Pkcs1);   // Noncompliant
+
+            //Reassigned
+            falseField = true;
+            rsaProvider.Encrypt(data, falseField);          // Compliant
         }
     }
 }

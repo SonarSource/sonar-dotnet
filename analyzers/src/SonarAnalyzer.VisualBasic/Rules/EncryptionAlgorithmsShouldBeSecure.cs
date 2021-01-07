@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -33,31 +32,25 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class EncryptionAlgorithmsShouldBeSecure : EncryptionAlgorithmsShouldBeSecureBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        public EncryptionAlgorithmsShouldBeSecure()
+        public EncryptionAlgorithmsShouldBeSecure() : base(RspecStrings.ResourceManager)
         {
-            InvocationTracker = new VisualBasicInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(AnalyzerConfiguration.AlwaysEnabled, rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(AnalyzerConfiguration.AlwaysEnabled, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
         }
 
         protected override PropertyAccessCondition IsInsideObjectInitializer() =>
-            (context) =>
-                context.Expression.FirstAncestorOrSelf<ObjectMemberInitializerSyntax>() != null;
+            context => context.Expression.FirstAncestorOrSelf<ObjectMemberInitializerSyntax>() != null;
 
         protected override InvocationCondition HasPkcs1PaddingArgument() =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
                 var values = VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, "padding");
-                return values.Length == 1 &&
-                    values[0] is ExpressionSyntax valueSyntax &&
-                    context.SemanticModel.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol &&
-                    symbol.Name == "Pkcs1";
+                return values.Length == 1
+                    && values[0] is ExpressionSyntax valueSyntax
+                    && context.SemanticModel.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol
+                    && symbol.Name == "Pkcs1";
             };
     }
 }
