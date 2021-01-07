@@ -24,18 +24,16 @@ using Microsoft.CodeAnalysis;
 namespace SonarAnalyzer.Helpers
 {
     /// <summary>
-    /// Syntax and semantic information about a object creation
+    /// Syntax and semantic information about a object creation.
     /// </summary>
-    public class ObjectCreationContext
+    public class ObjectCreationContext : BaseContext
     {
         public SyntaxNode Expression { get; }
-        public SemanticModel SemanticModel { get; }
         public Lazy<IMethodSymbol> InvokedConstructorSymbol { get; }
 
-        public ObjectCreationContext(SyntaxNode invocation, SemanticModel semanticModel)
+        public ObjectCreationContext(SyntaxNode invocation, SemanticModel semanticModel) : base(semanticModel)
         {
             Expression = invocation;
-            SemanticModel = semanticModel;
             InvokedConstructorSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol);
         }
     }

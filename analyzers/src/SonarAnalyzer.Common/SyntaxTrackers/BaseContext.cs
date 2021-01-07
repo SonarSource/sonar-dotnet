@@ -18,25 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
     /// <summary>
-    /// Syntax and semantic information about a single method invocation.
+    /// Base contxt information with semantic model and secondary location.
     /// </summary>
-    public class InvocationContext : BaseContext
+    public abstract class BaseContext
     {
-        public SyntaxNode Invocation { get; }
-        public string MethodName { get; }
-        public Lazy<IMethodSymbol> MethodSymbol { get; }
+        public SemanticModel SemanticModel { get; }
+        public IEnumerable<Location> SecondaryLocations { get; }
 
-        public InvocationContext(SyntaxNode invocation, string methodName, SemanticModel semanticModel) : base(semanticModel)
+        protected BaseContext(SemanticModel semanticModel)
         {
-            Invocation = invocation;
-            MethodName = methodName;
-            MethodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol);
+            SemanticModel = semanticModel;
+            SecondaryLocations = new List<Location>();
         }
     }
 }

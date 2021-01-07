@@ -20,88 +20,49 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
     public delegate bool FieldAccessCondition(FieldAccessContext invocationContext);
 
-    public abstract class FieldAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
+    public abstract class FieldAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, FieldAccessCondition>
         where TSyntaxKind : struct
     {
-        private bool CaseInsensitiveComparison { get; }
-
-        protected FieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false)
-            : base(analyzerConfiguration, rule)
-        {
-            this.CaseInsensitiveComparison = caseInsensitiveComparison;
-        }
-
+        public abstract FieldAccessCondition WhenRead();
+        public abstract FieldAccessCondition MatchSet();
+        public abstract FieldAccessCondition AssignedValueIsConstant();
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
-
         protected abstract string GetFieldName(SyntaxNode expression);
 
-        public void Track(SonarAnalysisContext context, params FieldAccessCondition[] conditions)
-        {
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    if (IsEnabled(c.Options))
-                    {
-                        c.RegisterSyntaxNodeActionInNonGenerated(
-                            GeneratedCodeRecognizer,
-                            TrackMemberAccess,
-                            TrackedSyntaxKinds);
-                    }
-                });
+        private bool CaseInsensitiveComparison { get; }
 
-            void TrackMemberAccess(SyntaxNodeAnalysisContext c)
-            {
-                if (IsTrackedField(c.Node, c.SemanticModel))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                }
-            }
-
-            bool IsTrackedField(SyntaxNode expression, SemanticModel semanticModel)
-            {
-                // We register for both MemberAccess and IdentifierName and we want to
-                // avoid raising two times for the same identifier.
-                if (IsIdentifierWithinMemberAccess(expression))
-                {
-                    return false;
-                }
-
-                var fieldName = GetFieldName(expression);
-                if (fieldName == null)
-                {
-                    return false;
-                }
-
-                var conditionContext = new FieldAccessContext(expression, fieldName, semanticModel);
-                return conditions.All(c => c(conditionContext));
-            }
-        }
+        protected FieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
+            CaseInsensitiveComparison = caseInsensitiveComparison;
 
         public FieldAccessCondition MatchField(params MemberDescriptor[] fields) =>
-            (context) =>
-                MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, CaseInsensitiveComparison, fields);
+            context => MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, CaseInsensitiveComparison, fields);
 
-        #region Syntax-level standard conditions
+        protected override BaseContext IsTracked(SyntaxNode expression, SemanticModel semanticModel, FieldAccessCondition[] conditions, out Location location)
+        {
+            location = Location.None;
 
-        public abstract FieldAccessCondition WhenRead();
+            // We register for both MemberAccess and IdentifierName and we want to
+            // avoid raising two times for the same identifier.
+            if (IsIdentifierWithinMemberAccess(expression))
+            {
+                return null;
+            }
 
-        public abstract FieldAccessCondition MatchSet();
+            var fieldName = GetFieldName(expression);
+            if (fieldName == null)
+            {
+                return null;
+            }
 
-        public abstract FieldAccessCondition AssignedValueIsConstant();
-
-        #endregion
-
-        #region Symbol-level standard conditions
-
-        // Add any common symbol-level checks here...
-
-        #endregion
+            var context = new FieldAccessContext(expression, fieldName, semanticModel);
+            location = expression.GetLocation();
+            return conditions.All(c => c(context)) ? context : null;
+        }
     }
 }

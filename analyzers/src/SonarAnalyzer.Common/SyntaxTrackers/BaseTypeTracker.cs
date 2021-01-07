@@ -22,7 +22,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
@@ -31,70 +30,21 @@ namespace SonarAnalyzer.Helpers
     /// Checker method called by <see cref="BaseClassTracker"/> to check whether
     /// an issue should be reported because of a type the class is inheriting from.
     /// </summary>
-   public delegate bool BaseClassCondition(BaseTypeContext context, out Location issueLocation);
+    public delegate bool BaseClassCondition(BaseTypeContext context, out Location issueLocation);
 
     /// <summary>
-    /// Tracker class for rules that check the inheritance tree for e.g. disallowed base classes
+    /// Tracker class for rules that check the inheritance tree for e.g. disallowed base classes.
     /// </summary>
-    /// <typeparam name="TSyntaxKind"></typeparam>
-    public abstract class BaseTypeTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
+    /// <typeparam name="TSyntaxKind">The syntax type.</typeparam>
+    public abstract class BaseTypeTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, BaseClassCondition>
         where TSyntaxKind : struct
     {
-        protected BaseTypeTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
-        {
-        }
-
-        public void Track(SonarAnalysisContext context, params BaseClassCondition[] conditions)
-        {
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    if (IsEnabled(c.Options))
-                    {
-                        c.RegisterSyntaxNodeActionInNonGenerated(
-                            GeneratedCodeRecognizer,
-                            TrackInheritance,
-                            TrackedSyntaxKinds);
-                    }
-                });
-
-            void TrackInheritance(SyntaxNodeAnalysisContext c)
-            {
-                Location issueLocation;
-                if (IsTrackedRelationship(c.Node, c.SemanticModel, out issueLocation))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, issueLocation));
-                }
-            }
-
-            bool IsTrackedRelationship(SyntaxNode contextNode, SemanticModel semanticModel, out Location issueLocation)
-            {
-                var baseTypeList = GetBaseTypeNodes(contextNode);
-                if (baseTypeList == null || !baseTypeList.Any())
-                {
-                    issueLocation = Location.None;
-                    return false;
-                }
-
-                var baseClassContext = new BaseTypeContext(contextNode, baseTypeList, semanticModel);
-
-                // We can't pass the issueLocation to the lambda directly so we need a temporary variable
-                Location locationToReport = null;
-                if (conditions.All(c => c(baseClassContext, out locationToReport)))
-                {
-                    issueLocation = locationToReport;
-                    return true;
-                }
-                issueLocation = Location.None;
-                return false;
-            }
-        }
-
         /// <summary>
-        /// Extract the list of type syntax nodes for the base types/interface types
+        /// Extract the list of type syntax nodes for the base types/interface types.
         /// </summary>
         protected abstract IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode);
+
+        protected BaseTypeTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         internal BaseClassCondition MatchSubclassesOf(params KnownType[] types)
         {
@@ -113,6 +63,29 @@ namespace SonarAnalyzer.Helpers
                 issueLocation = null;
                 return false;
             };
+        }
+
+        protected override BaseContext IsTracked(SyntaxNode expression, SemanticModel semanticModel, BaseClassCondition[] conditions, out Location location)
+        {
+            location = Location.None;
+
+            var baseTypeList = GetBaseTypeNodes(expression);
+            if (baseTypeList == null || !baseTypeList.Any())
+            {
+                return null;
+            }
+
+            var context = new BaseTypeContext(expression, baseTypeList, semanticModel);
+
+            // We can't pass the issueLocation to the lambda directly so we need a temporary variable
+            Location locationToReport = null;
+            if (conditions.All(c => c(context, out locationToReport)))
+            {
+                location = locationToReport;
+                return context;
+            }
+
+            return null;
         }
     }
 }

@@ -25,26 +25,24 @@ using Microsoft.CodeAnalysis;
 namespace SonarAnalyzer.Helpers
 {
     /// <summary>
-    /// Syntax and semantic information about an inheritance relationship
+    /// Syntax and semantic information about an inheritance relationship.
     /// </summary>
-    public class BaseTypeContext
+    public class BaseTypeContext : BaseContext
     {
         /// <summary>
-        /// The node being analyzed - the base list syntax node
+        /// The node being analyzed - the base list syntax node.
         /// </summary>
         public SyntaxNode ContextNode { get; }
-        public SemanticModel SemanticModel { get; }
 
         /// <summary>
-        /// A list of all type syntax nodes for node being analyzed
+        /// A list of all type syntax nodes for node being analyzed.
         /// </summary>
         public IEnumerable<SyntaxNode> AllBaseTypeNodes { get; }
 
-        public BaseTypeContext(SyntaxNode contextNode, IEnumerable<SyntaxNode> allBaseTypeNodes, SemanticModel semanticModel)
+        public BaseTypeContext(SyntaxNode contextNode, IEnumerable<SyntaxNode> allBaseTypeNodes, SemanticModel semanticModel) : base(semanticModel)
         {
             ContextNode = contextNode;
             AllBaseTypeNodes = allBaseTypeNodes ?? Enumerable.Empty<SyntaxNode>();
-            SemanticModel = semanticModel;
         }
     }
 }

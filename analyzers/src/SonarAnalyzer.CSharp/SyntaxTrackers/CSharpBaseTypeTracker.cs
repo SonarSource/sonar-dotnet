@@ -29,16 +29,13 @@ namespace SonarAnalyzer.Helpers
 {
     public class CSharpBaseTypeTracker : BaseTypeTracker<SyntaxKind>
     {
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.BaseList };
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharp.CSharpGeneratedCodeRecognizer.Instance;
+
         public CSharpBaseTypeTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
             : base(analyzerConfiguration, rule)
         {
         }
-
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
-            new[] { SyntaxKind.BaseList };
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode) =>
             ((BaseListSyntax)contextNode)?.Types.Select(t => t.Type).ToArray();

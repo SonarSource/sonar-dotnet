@@ -35,16 +35,16 @@ namespace SonarAnalyzer.Helpers
 
         public override ElementAccessCondition ArgumentAtIndexEquals(int index, string value) =>
             context => ((InvocationExpressionSyntax)context.Expression).ArgumentList is { } argumentList
-                        && index < argumentList.Arguments.Count
-                        && argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel) == value;
+                       && index < argumentList.Arguments.Count
+                       && argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel) == value;
 
         public override ElementAccessCondition MatchSetter() =>
             context => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         public override ElementAccessCondition MatchProperty(MemberDescriptor member) =>
             context => ((InvocationExpressionSyntax)context.Expression).Expression is MemberAccessExpressionSyntax memberAccess
-                        && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                        && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
-                        && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
+                       && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                       && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
+                       && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
     }
 }

@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Helpers
                 SyntaxKind.MemberBindingExpression,
                 SyntaxKind.IdentifierName
             };
-
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         public CSharpPropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }

@@ -24,29 +24,41 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class SyntaxTrackerBase<TSyntaxKind>
+    public abstract class SyntaxTrackerBase<TSyntaxKind, TCondition> : TrackerBase
         where TSyntaxKind : struct
     {
-        private readonly IAnalyzerConfiguration analyzerConfiguration;
-
-        protected DiagnosticDescriptor Rule { get; }
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
         protected abstract TSyntaxKind[] TrackedSyntaxKinds { get; }
 
-        protected SyntaxTrackerBase(IAnalyzerConfiguration analyzerConfiguration,
-            DiagnosticDescriptor rule)
-        {
-            this.analyzerConfiguration = analyzerConfiguration;
-            this.Rule = rule;
-        }
+        protected abstract BaseContext IsTracked(SyntaxNode expression, SemanticModel semanticModel, TCondition[] conditions, out Location location);
 
-        protected bool IsEnabled(AnalyzerOptions options)
-        {
-            analyzerConfiguration.Initialize(options);
+        protected SyntaxTrackerBase(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-            return analyzerConfiguration.IsEnabled(Rule.Id);
+        public void Track(SonarAnalysisContext context, params TCondition[] conditions) =>
+            Track(context, new object[0], conditions);
+
+        public void Track(SonarAnalysisContext context, object[] diagnosticMessageArgs, params TCondition[] conditions)
+        {
+            context.RegisterCompilationStartAction(
+              c =>
+              {
+                  if (IsEnabled(c.Options))
+                  {
+                      c.RegisterSyntaxNodeActionInNonGenerated(
+                          GeneratedCodeRecognizer,
+                          TrackAndReportIfNecessary,
+                          TrackedSyntaxKinds);
+                  }
+              });
+
+            void TrackAndReportIfNecessary(SyntaxNodeAnalysisContext c)
+            {
+                var baseContext = IsTracked(c.Node, c.SemanticModel, conditions, out var location);
+
+                if (baseContext != null)
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, baseContext.SecondaryLocations, diagnosticMessageArgs));
+                }
+            }
         }
     }
 }

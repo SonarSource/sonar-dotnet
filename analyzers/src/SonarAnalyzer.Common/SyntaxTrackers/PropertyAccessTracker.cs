@@ -18,20 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using PropertyAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.PropertyAccessContext>;
 
 namespace SonarAnalyzer.Helpers
 {
-    public delegate bool PropertyAccessCondition(PropertyAccessContext invocationContext);
-
-    public abstract class PropertyAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
+    public abstract class PropertyAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, PropertyAccessContext>
         where TSyntaxKind : struct
     {
-        private bool CaseInsensitiveComparison { get; }
-
         public abstract object AssignedValue(PropertyAccessContext context);
         public abstract PropertyAccessCondition MatchGetter();
         public abstract PropertyAccessCondition MatchSetter();
@@ -39,55 +34,26 @@ namespace SonarAnalyzer.Helpers
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
         protected abstract string GetPropertyName(SyntaxNode expression);
 
+        private bool CaseInsensitiveComparison { get; }
+
         protected PropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
-            CaseInsensitiveComparison = caseInsensitiveComparison;
-
-        public void Track(SonarAnalysisContext context, params PropertyAccessCondition[] conditions) =>
-            Track(context, new object[0], conditions);
-
-        public void Track(SonarAnalysisContext context, object[] diagnosticMessageArgs,  params PropertyAccessCondition[] conditions)
-        {
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    if (IsEnabled(c.Options))
-                    {
-                        c.RegisterSyntaxNodeActionInNonGenerated(
-                            GeneratedCodeRecognizer,
-                            TrackMemberAccess,
-                            TrackedSyntaxKinds);
-                    }
-                });
-
-            void TrackMemberAccess(SyntaxNodeAnalysisContext c)
-            {
-                if (IsTrackedProperty(c.Node, c.SemanticModel))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation(), diagnosticMessageArgs));
-                }
-            }
-
-            bool IsTrackedProperty(SyntaxNode expression, SemanticModel semanticModel)
-            {
-                // We register for both MemberAccess and IdentifierName and we want to
-                // avoid raising two times for the same identifier.
-                if (IsIdentifierWithinMemberAccess(expression))
-                {
-                    return false;
-                }
-
-                var propertyName = GetPropertyName(expression);
-                if (propertyName == null)
-                {
-                    return false;
-                }
-
-                var conditionContext = new PropertyAccessContext(expression, propertyName, semanticModel);
-                return conditions.All(c => c(conditionContext));
-            }
-        }
+           CaseInsensitiveComparison = caseInsensitiveComparison;
 
         public PropertyAccessCondition MatchProperty(params MemberDescriptor[] properties) =>
             context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, CaseInsensitiveComparison, properties);
+
+        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel)
+        {
+            // We register for both MemberAccess and IdentifierName and we want to
+            // avoid raising two times for the same identifier.
+            if (IsIdentifierWithinMemberAccess(expression))
+            {
+                return null;
+            }
+
+            return GetPropertyName(expression) is string propertyName ? (SyntaxBaseContext)new PropertyAccessContext(expression, propertyName, semanticModel) : null;
+        }
     }
 }
+
+

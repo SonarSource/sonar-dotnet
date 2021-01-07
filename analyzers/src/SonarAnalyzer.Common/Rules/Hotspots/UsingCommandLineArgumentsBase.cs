@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4823";
         protected const string MessageFormat = "Make sure that command line arguments are used safely here.";
 
-        protected MethodDeclarationTracker<TSyntaxKind> MethodDeclarationTracker { get; set; }
+        protected MethodDeclarationTracker MethodDeclarationTracker { get; set; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {

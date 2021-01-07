@@ -20,14 +20,13 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
     public delegate bool InvocationCondition(InvocationContext invocationContext);
 
-    public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
+    public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, InvocationCondition>
         where TSyntaxKind : struct
     {
         private readonly bool caseInsensitiveComparison;
@@ -41,69 +40,47 @@ namespace SonarAnalyzer.Helpers
         protected InvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
             this.caseInsensitiveComparison = caseInsensitiveComparison;
 
-        public void Track(SonarAnalysisContext context, params InvocationCondition[] conditions)
-        {
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    if (IsEnabled(c.Options))
-                    {
-                        c.RegisterSyntaxNodeActionInNonGenerated(
-                            GeneratedCodeRecognizer,
-                            TrackInvocationExpression,
-                            TrackedSyntaxKinds);
-                    }
-                });
-
-            void TrackInvocationExpression(SyntaxNodeAnalysisContext c)
-            {
-                if (IsTrackedMethod(c.Node, c.SemanticModel))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                }
-            }
-
-            bool IsTrackedMethod(SyntaxNode invocation, SemanticModel semanticModel)
-            {
-                var methodName = GetMethodName(invocation);
-                if (methodName == null)
-                {
-                    return false;
-                }
-
-                var conditionContext = new InvocationContext(invocation, methodName, semanticModel);
-                return conditions.All(c => c(conditionContext));
-            }
-        }
-
         public InvocationCondition MatchMethod(params MemberDescriptor[] methods) =>
-            context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, caseInsensitiveComparison, methods);
+           context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, caseInsensitiveComparison, methods);
 
         public InvocationCondition MethodNameIs(string methodName) =>
             context => context.MethodName == methodName;
 
         public InvocationCondition MethodIsStatic() =>
             context => context.MethodSymbol.Value != null
-                    && context.MethodSymbol.Value.IsStatic;
+                       && context.MethodSymbol.Value.IsStatic;
 
         public InvocationCondition MethodIsExtension() =>
             context => context.MethodSymbol.Value != null
-                    && context.MethodSymbol.Value.IsExtensionMethod;
+                       && context.MethodSymbol.Value.IsExtensionMethod;
 
         public InvocationCondition MethodHasParameters(int count) =>
             context => context.MethodSymbol.Value != null
-                    && context.MethodSymbol.Value.Parameters.Length == count;
+                       && context.MethodSymbol.Value.Parameters.Length == count;
 
-        public InvocationCondition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition)
-            where TInvocationSyntax : SyntaxNode =>
+        public InvocationCondition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition) where TInvocationSyntax : SyntaxNode =>
             condition.IsInvalidBuilderInitialization;
 
         internal InvocationCondition MethodReturnTypeIs(KnownType returnType) =>
             context => context.MethodSymbol.Value != null
-                    && context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
+                       && context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
 
         internal InvocationCondition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
             context => ConstArgumentForParameter(context, parameterName) is bool boolValue
-                    && boolValue == expectedValue;
+                       && boolValue == expectedValue;
+
+        protected override BaseContext IsTracked(SyntaxNode expression, SemanticModel semanticModel, InvocationCondition[] conditions, out Location location)
+        {
+            var methodName = GetMethodName(expression);
+            if (methodName == null)
+            {
+                location = Location.None;
+                return null;
+            }
+
+            var context = new InvocationContext(expression, methodName, semanticModel);
+            location = expression.GetLocation();
+            return conditions.All(c => c(context)) ? context : null;
+        }
     }
 }

@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Helpers
                 SyntaxKind.SimpleMemberAccessExpression,
                 SyntaxKind.IdentifierName
             };
-
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
         public VisualBasicPropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule, true) { }

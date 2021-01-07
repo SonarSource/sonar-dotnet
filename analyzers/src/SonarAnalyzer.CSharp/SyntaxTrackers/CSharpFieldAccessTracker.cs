@@ -28,11 +28,6 @@ namespace SonarAnalyzer.Helpers
 {
     public class CSharpFieldAccessTracker : FieldAccessTracker<SyntaxKind>
     {
-        public CSharpFieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
-        {
-        }
-
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
             new[]
             {
@@ -40,27 +35,18 @@ namespace SonarAnalyzer.Helpers
                 SyntaxKind.MemberBindingExpression,
                 SyntaxKind.IdentifierName
             };
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            CSharp.CSharpGeneratedCodeRecognizer.Instance;
-
-        protected override string GetFieldName(SyntaxNode expression) =>
-            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
-
-        protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
-            expression.IsKind(SyntaxKind.IdentifierName) &&
-            expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
-
-        #region Syntax-level checking methods
+        public CSharpFieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override FieldAccessCondition WhenRead() =>
-            (context) => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+            context => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         public override FieldAccessCondition MatchSet() =>
-            (context) => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+            context => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         public override FieldAccessCondition AssignedValueIsConstant() =>
-            (context) =>
+            context =>
             {
                 var assignment = (AssignmentExpressionSyntax)context.Expression.Ancestors()
                     .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression));
@@ -69,7 +55,11 @@ namespace SonarAnalyzer.Helpers
                     assignment.Right.HasConstantValue(context.SemanticModel);
             };
 
-        #endregion
+        protected override string GetFieldName(SyntaxNode expression) =>
+            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
 
+        protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
+            expression.IsKind(SyntaxKind.IdentifierName)
+            && expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
     }
 }

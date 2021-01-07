@@ -28,15 +28,12 @@ namespace SonarAnalyzer.Helpers
 {
     public delegate bool MethodDeclarationCondition(MethodDeclarationContext context);
 
-    public abstract class MethodDeclarationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
-        where TSyntaxKind : struct
+    public abstract class MethodDeclarationTracker : TrackerBase
     {
-        protected MethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
-        {
-        }
-
+        public abstract MethodDeclarationCondition ParameterAtIndexIsUsed(int index);
         protected abstract SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration);
+
+        protected MethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public void Track(SonarAnalysisContext context, params MethodDeclarationCondition[] conditions)
         {
@@ -71,30 +68,24 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        public MethodDeclarationCondition MatchMethodName(params string[] methodNames) =>
+            context => methodNames.Contains(context.MethodSymbol.Name);
+
+        public MethodDeclarationCondition IsOrdinaryMethod() =>
+            context => context.MethodSymbol.MethodKind == MethodKind.Ordinary;
+
+        public MethodDeclarationCondition IsMainMethod() =>
+            context => context.MethodSymbol.IsMainMethod();
+
         internal MethodDeclarationCondition AnyParameterIsOfType(params KnownType[] types)
         {
             var typesArray = types.ToImmutableArray();
-            return (context) =>
-                context.MethodSymbol.Parameters.Length > 0 &&
-                context.MethodSymbol.Parameters.Any(parameter => parameter.Type.DerivesOrImplementsAny(typesArray));
+            return context =>
+                context.MethodSymbol.Parameters.Length > 0
+                && context.MethodSymbol.Parameters.Any(parameter => parameter.Type.DerivesOrImplementsAny(typesArray));
         }
 
-        public abstract MethodDeclarationCondition ParameterAtIndexIsUsed(int index);
-
         internal MethodDeclarationCondition DecoratedWithAnyAttribute(params KnownType[] attributeTypes) =>
-            (context) =>
-                context.MethodSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(attributeTypes));
-
-        public MethodDeclarationCondition MatchMethodName(params string[] methodNames) =>
-            (context) =>
-                methodNames.Contains(context.MethodSymbol.Name);
-
-        public MethodDeclarationCondition IsOrdinaryMethod() =>
-            (context) =>
-                context.MethodSymbol.MethodKind == MethodKind.Ordinary;
-
-        public MethodDeclarationCondition IsMainMethod() =>
-            (context) =>
-                context.MethodSymbol.IsMainMethod();
+            context => context.MethodSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(attributeTypes));
     }
 }

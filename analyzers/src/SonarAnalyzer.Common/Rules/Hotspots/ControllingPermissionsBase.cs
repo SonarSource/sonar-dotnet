@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
 
         protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
 
-        protected MethodDeclarationTracker<TSyntaxKind> MethodDeclarationTracker { get; set; }
+        protected MethodDeclarationTracker MethodDeclarationTracker { get; set; }
 
         protected BaseTypeTracker<TSyntaxKind> BaseTypeTracker { get; set; }
 
