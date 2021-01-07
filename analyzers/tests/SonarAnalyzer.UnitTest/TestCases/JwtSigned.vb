@@ -12,33 +12,45 @@ Namespace Tests.Diagnostics
         Protected Const InvalidToken As String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmb28iOiJmYWtlYmFyIiwiaWF0IjoxNTc1NjQ0NTc3fQ.pcX_7snpSGf01uBfaM8XPkbgdhs1gq9JcYRCQvZrJyk"
 
         Private InvalidParts As JwtParts
+        Private TrueField As String = True
+        Private FalseField As String = False
 
         ' Encoding with JWT.NET Is safe
 
         Sub DecodingWithDecoder(Decoder As JwtDecoder)
-            Dim Decoded1 As String = Decoder.Decode(InvalidToken, Secret, True)
-            Dim Decoded2 As String = Decoder.Decode(InvalidToken, Secret, False) ' Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
+            Dim Decoded As String
+            Decoded = Decoder.Decode(InvalidToken, Secret, True)
+            Decoded = Decoder.Decode(InvalidToken, Secret, False)   ' Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
 
-            Dim Decoded3 As String = Decoder.Decode(InvalidToken, Secret, verify:=True)
-            Dim Decoded4 As String = Decoder.Decode(InvalidToken, Secret, verify:=False) ' Noncompliant
+            Decoded = Decoder.Decode(InvalidToken, Secret, TrueField)
+            Decoded = Decoder.Decode(InvalidToken, Secret, FalseField)      ' Noncompliant
 
-            Dim Decoded5 As String = Decoder.Decode(InvalidToken, Secret, verify:=True)
-            Dim Decoded6 As String = Decoder.Decode(InvalidToken, Secret, verify:=False) ' Noncompliant
+            Decoded = Decoder.Decode(InvalidToken, Secret, verify:=True)
+            Decoded = Decoder.Decode(InvalidToken, Secret, verify:=False)   ' Noncompliant
 
-            Dim Decoded7 As String = Decoder.Decode(InvalidToken, verify:=True, key:=Secret)
-            Dim Decoded8 As String = Decoder.Decode(InvalidToken, verify:=False, key:=Secret) ' Noncompliant
+            Decoded = Decoder.Decode(InvalidToken, Secret, verify:=True)
+            Decoded = Decoder.Decode(InvalidToken, Secret, verify:=False)   ' Noncompliant
 
-            Dim Decoded9 As String = Decoder.Decode(InvalidToken, verify:=True, key:={42})
-            Dim Decoded10 As String = Decoder.Decode(InvalidToken, verify:=False, key:={42}) ' Noncompliant
+            Decoded = Decoder.Decode(InvalidToken, verify:=True, key:=Secret)
+            Decoded = Decoder.Decode(InvalidToken, verify:=False, key:=Secret)  ' Noncompliant
 
-            Dim Decoded11 As String = Decoder.Decode(InvalidToken) ' Noncompliant
-            Dim Decoded12 As String = Decoder.Decode(InvalidParts) ' Noncompliant
+            Decoded = Decoder.Decode(InvalidToken, verify:=True, key:={42})
+            Decoded = Decoder.Decode(InvalidToken, verify:=False, key:={42})    ' Noncompliant
+
+            Decoded = Decoder.Decode(InvalidToken) ' Noncompliant
+            Decoded = Decoder.Decode(InvalidParts) ' Noncompliant
 
             Dim Decoded21 As Object = Decoder.DecodeToObject(InvalidToken, Secret, True)
             Dim Decoded22 As Object = Decoder.DecodeToObject(InvalidToken, Secret, False) ' Noncompliant
 
             Dim Decoded31 As UserInfo = Decoder.DecodeToObject(Of UserInfo)(InvalidToken, Secret, True)
             Dim Decoded32 As UserInfo = Decoder.DecodeToObject(Of UserInfo)(InvalidToken, Secret, False) ' Noncompliant
+
+            ' Reassigned
+            TrueField = False
+            FalseField = True
+            Decoded = Decoder.Decode(InvalidToken, Secret, TrueField)      ' Noncompliant
+            Decoded = Decoder.Decode(InvalidToken, Secret, FalseField)
         End Sub
 
         Sub DecodingWithCustomDecoder(Decoder As CustomDecoder)

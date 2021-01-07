@@ -12,34 +12,46 @@ namespace Tests.Diagnostics
         const string invalidToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmb28iOiJmYWtlYmFyIiwiaWF0IjoxNTc1NjQ0NTc3fQ.pcX_7snpSGf01uBfaM8XPkbgdhs1gq9JcYRCQvZrJyk";
 
         private JwtParts invalidParts;
+        private bool trueField = true;
+        private bool falseField = false;
 
         // Encoding with JWT.NET is safe
 
         void DecodingWithDecoder(JwtDecoder decoder)
         {
-            var decoded1 = decoder.Decode(invalidToken, secret, true);
-            var decoded2 = decoder.Decode(invalidToken, secret, false); // Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
+            string decoded;
+            decoded = decoder.Decode(invalidToken, secret, true);
+            decoded = decoder.Decode(invalidToken, secret, false); // Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
 
-            var decoded3 = decoder.Decode(invalidToken, secret, verify: true);
-            var decoded4 = decoder.Decode(invalidToken, secret, verify: false); // Noncompliant
+            decoded = decoder.Decode(invalidToken, secret, trueField);
+            decoded = decoder.Decode(invalidToken, secret, falseField);         // Noncompliant
 
-            var decoded5 = decoder.Decode(invalidToken, secret, verify: true);
-            var decoded6 = decoder.Decode(invalidToken, secret, verify: false); // Noncompliant
+            decoded = decoder.Decode(invalidToken, secret, verify: true);
+            decoded = decoder.Decode(invalidToken, secret, verify: false);      // Noncompliant
 
-            var decoded7 = decoder.Decode(invalidToken, verify: true, key: secret);
-            var decoded8 = decoder.Decode(invalidToken, verify: false, key: secret); // Noncompliant
+            decoded = decoder.Decode(invalidToken, secret, verify: true);
+            decoded = decoder.Decode(invalidToken, secret, verify: false);      // Noncompliant
 
-            var decoded9 = decoder.Decode(invalidToken, verify: true, key: new byte[] { 42 });
-            var decoded10 = decoder.Decode(invalidToken, verify: false, key: new byte[] { 42 }); // Noncompliant
+            decoded = decoder.Decode(invalidToken, verify: true, key: secret);
+            decoded = decoder.Decode(invalidToken, verify: false, key: secret); // Noncompliant
 
-            var decoded11 = decoder.Decode(invalidToken); // Noncompliant
-            var decoded12 = decoder.Decode(invalidParts); // Noncompliant
+            decoded = decoder.Decode(invalidToken, verify: true, key: new byte[] { 42 });
+            decoded = decoder.Decode(invalidToken, verify: false, key: new byte[] { 42 }); // Noncompliant
+
+            decoded = decoder.Decode(invalidToken); // Noncompliant
+            decoded = decoder.Decode(invalidParts); // Noncompliant
 
             var decoded21 = decoder.DecodeToObject(invalidToken, secret, true);
             var decoded22 = decoder.DecodeToObject(invalidToken, secret, false); // Noncompliant
 
             var decoded31 = decoder.DecodeToObject<UserInfo>(invalidToken, secret, true);
             var decoded32 = decoder.DecodeToObject<UserInfo>(invalidToken, secret, false); // Noncompliant
+
+            // Reassigned
+            trueField = false;
+            falseField = true;
+            decoded = decoder.Decode(invalidToken, secret, trueField);          // Noncompliant
+            decoded = decoder.Decode(invalidToken, secret, falseField);
         }
 
         void DecodingWithCustomDecoder(CustomDecoder decoder)
