@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var assignment = (AssignmentExpressionSyntax)context.Node;
             if (assignment.Left is MemberAccessExpressionSyntax memberAccess
                 && memberAccess.IsMemberAccessOnKnownType(EnableSslName, KnownType.System_Net_FtpWebRequest, context.SemanticModel)
-                && context.SemanticModel.GetConstantValue(assignment.Right) is { HasValue: true, Value: bool enableSslValue }
+                && assignment.Right.FindConstantValue(context.SemanticModel) is bool enableSslValue
                 && !enableSslValue)
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, assignment.GetLocation()));
