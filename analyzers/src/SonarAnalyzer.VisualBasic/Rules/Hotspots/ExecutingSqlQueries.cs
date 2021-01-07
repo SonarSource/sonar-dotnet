@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
              && IsTracked(variableDeclaratorSyntax.Initializer?.Value, semanticModel));
 
         private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
-            arguments.All(a => a.GetExpression().IsConstant(semanticModel));
+            arguments.All(a => a.GetExpression().HasConstantValue(semanticModel));
 
         private static bool IsConcatenationOperator(SyntaxNode node) =>
             node.IsKind(SyntaxKind.ConcatenateExpression)
@@ -96,14 +96,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
         {
-            if ((semanticModel.GetTypeInfo(binaryExpression).Type is ITypeSymbol) && binaryExpression.Right.IsConstant(semanticModel))
+            if ((semanticModel.GetTypeInfo(binaryExpression).Type is ITypeSymbol) && binaryExpression.Right.HasConstantValue(semanticModel))
             {
                 var nestedLeft = binaryExpression.Left;
                 var nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 while (nestedBinary != null)
                 {
-                    if (nestedBinary.Right.IsConstant(semanticModel)
-                        && (IsConcatenationOperator(nestedBinary) || nestedBinary.IsConstant(semanticModel)))
+                    if (nestedBinary.Right.HasConstantValue(semanticModel)
+                        && (IsConcatenationOperator(nestedBinary) || nestedBinary.HasConstantValue(semanticModel)))
                     {
                         nestedLeft = nestedBinary.Left;
                         nestedBinary = nestedLeft as BinaryExpressionSyntax;
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return false;
                     }
                 }
-                return nestedLeft.IsConstant(semanticModel);
+                return nestedLeft.HasConstantValue(semanticModel);
             }
             return false;
         }

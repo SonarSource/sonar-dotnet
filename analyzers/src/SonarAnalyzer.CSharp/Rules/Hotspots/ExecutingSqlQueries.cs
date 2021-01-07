@@ -87,19 +87,19 @@ namespace SonarAnalyzer.Rules.CSharp
              && IsTracked(variableDeclaratorSyntax.Initializer?.Value, semanticModel));
 
         private static bool AllConstants(IEnumerable<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
-            arguments.All(a => a.Expression.IsConstant(semanticModel));
+            arguments.All(a => a.Expression.HasConstantValue(semanticModel));
 
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
         {
             System.Diagnostics.Debug.Assert(binaryExpression.IsKind(SyntaxKind.AddExpression), "Binary expression should be of syntax kind add expression.");
-            if ((semanticModel.GetTypeInfo(binaryExpression).Type is ITypeSymbol) && binaryExpression.Right.IsConstant(semanticModel))
+            if ((semanticModel.GetTypeInfo(binaryExpression).Type is ITypeSymbol) && binaryExpression.Right.HasConstantValue(semanticModel))
             {
                 var nestedLeft = binaryExpression.Left;
                 var nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 while (nestedBinary != null)
                 {
-                    if (nestedBinary.Right.IsConstant(semanticModel)
-                        && (nestedBinary.IsKind(SyntaxKind.AddExpression) || nestedBinary.IsConstant(semanticModel)))
+                    if (nestedBinary.Right.HasConstantValue(semanticModel)
+                        && (nestedBinary.IsKind(SyntaxKind.AddExpression) || nestedBinary.HasConstantValue(semanticModel)))
                     {
                         nestedLeft = nestedBinary.Left;
                         nestedBinary = nestedLeft as BinaryExpressionSyntax;
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return false;
                     }
                 }
-                return nestedLeft.IsConstant(semanticModel);
+                return nestedLeft.HasConstantValue(semanticModel);
             }
             return false;
         }

@@ -349,15 +349,8 @@ namespace SonarAnalyzer.Helpers
         public static bool NameIs(this ExpressionSyntax expression, string name) =>
             expression.GetName().Equals(name, StringComparison.InvariantCulture);
 
-        public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            if (expression == null)
-            {
-                return false;
-            }
-            return expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) ||
-                semanticModel.GetConstantValue(expression).HasValue;
-        }
+        public static bool HasConstantValue(this ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) != null;
 
         public static string GetStringValue(this SyntaxNode node) =>
             node != null &&

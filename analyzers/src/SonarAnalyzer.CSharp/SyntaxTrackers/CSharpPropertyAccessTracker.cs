@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Helpers
                 var assignment = (AssignmentExpressionSyntax)context.Expression.Ancestors()
                     .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression));
 
-                return assignment != null && assignment.Right.IsConstant(context.SemanticModel);
+                return assignment != null && assignment.Right.HasConstantValue(context.SemanticModel);
             };
 
         protected override string GetPropertyName(SyntaxNode expression) =>

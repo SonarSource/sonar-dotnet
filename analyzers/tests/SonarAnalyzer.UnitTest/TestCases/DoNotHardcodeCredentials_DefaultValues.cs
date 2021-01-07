@@ -204,13 +204,15 @@ namespace Tests.Diagnostics
 
             new NetworkCredential("username", secretConst);         // Noncompliant {{Please review this hard-coded password.}}
             new NetworkCredential("username", secretLocalConst);    // Noncompliant {{Please review this hard-coded password.}}
-            new NetworkCredential("username", secretField);         // FN
-            new NetworkCredential("username", secretFieldConst);    // FN
-            new NetworkCredential("username", secretVariable);      // FN
-            new NetworkCredential("username", secretVariableConst); // FN
+            new NetworkCredential("username", secretField);         // Noncompliant
+            new NetworkCredential("username", secretFieldConst);    // Noncompliant
+            new NetworkCredential("username", secretVariable);      // Noncompliant
+            new NetworkCredential("username", secretVariableConst); // Noncompliant
             new NetworkCredential("username", "hardcoded");         // Noncompliant {{Please review this hard-coded password.}}
             new NetworkCredential("username", "hardcoded", "domain");   // Noncompliant {{Please review this hard-coded password.}}
-            networkCredential.Password = "hardcoded";               // Noncompliant {{Please review this hard-coded password.}}
+            networkCredential.Password = "hardcoded";               // Noncompliant
+            networkCredential.Password = secretVariable;            // Noncompliant
+            networkCredential.Password = secretField;               // Noncompliant
             new PasswordDeriveBytes("hardcoded", byteArray);        // Noncompliant {{Please review this hard-coded password.}}
             new PasswordDeriveBytes("hardcoded", byteArray, cspParams);                     // Noncompliant {{Please review this hard-coded password.}}
             new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1);              // Noncompliant {{Please review this hard-coded password.}}
@@ -222,6 +224,8 @@ namespace Tests.Diagnostics
             new NetworkCredential("username", secretFieldMethod);
             new NetworkCredential("username", secretVariableNull);
             new NetworkCredential("username", secretVariableMethod);
+            networkCredential.Password = secretVariableMethod;
+            networkCredential.Password = secretFieldMethod;
         }
 
         public void CompliantParameterUse(string pwd)
