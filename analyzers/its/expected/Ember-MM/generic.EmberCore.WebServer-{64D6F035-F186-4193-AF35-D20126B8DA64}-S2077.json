@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  432,
+"startColumn":  13,
+"endLine":  432,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  451,
+"startColumn":  13,
+"endLine":  451,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  465,
+"startColumn":  13,
+"endLine":  465,
+"endColumn":  35
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  816,
+"startColumn":  13,
+"endLine":  816,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  835,
+"startColumn":  13,
+"endLine":  835,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  849,
+"startColumn":  13,
+"endLine":  849,
+"endColumn":  35
+}
+}
+}
+]
+}

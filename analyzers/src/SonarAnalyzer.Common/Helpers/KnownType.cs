@@ -52,6 +52,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
+        internal static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new KnownType("Microsoft.Data.Sqlite.SqliteCommand");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new KnownType("Microsoft.EntityFrameworkCore.Migrations.Migration");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RawSqlString = new KnownType("Microsoft.EntityFrameworkCore.RawSqlString");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions");
@@ -81,6 +82,10 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute");
         internal static readonly KnownType Microsoft_Web_XmlTransform_XmlFileInfoDocument = new KnownType("Microsoft.Web.XmlTransform.XmlFileInfoDocument");
         internal static readonly KnownType Microsoft_Web_XmlTransform_XmlTransformableDocument = new KnownType("Microsoft.Web.XmlTransform.XmlTransformableDocument");
+        internal static readonly KnownType MySql_Data_MySqlClient_MySqlDataAdapter = new KnownType("MySql.Data.MySqlClient.MySqlDataAdapter");
+        internal static readonly KnownType MySql_Data_MySqlClient_MySqlCommand = new KnownType("MySql.Data.MySqlClient.MySqlCommand");
+        internal static readonly KnownType MySql_Data_MySqlClient_MySqlHelper = new KnownType("MySql.Data.MySqlClient.MySqlHelper");
+        internal static readonly KnownType MySql_Data_MySqlClient_MySqlScript = new KnownType("MySql.Data.MySqlClient.MySqlScript");
         internal static readonly KnownType Nancy_Cookies_NancyCookie = new KnownType("Nancy.Cookies.NancyCookie");
         internal static readonly KnownType NLog_LogManager = new KnownType("NLog.LogManager");
         internal static readonly KnownType NUnit_Framework_Assert = new KnownType("NUnit.Framework.Assert");
@@ -188,6 +193,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Data_OracleClient_OracleDataAdapter = new KnownType("System.Data.OracleClient.OracleDataAdapter");
         internal static readonly KnownType System_Data_SqlClient_SqlCommand = new KnownType("System.Data.SqlClient.SqlCommand");
         internal static readonly KnownType System_Data_SqlClient_SqlDataAdapter = new KnownType("System.Data.SqlClient.SqlDataAdapter");
+        internal static readonly KnownType System_Data_Sqlite_SqliteCommand = new KnownType("System.Data.SQLite.SQLiteCommand");
+        internal static readonly KnownType System_Data_Sqlite_SQLiteDataAdapter = new KnownType("System.Data.SQLite.SQLiteDataAdapter");
         internal static readonly KnownType System_Data_SqlServerCe_SqlCeCommand = new KnownType("System.Data.SqlServerCe.SqlCeCommand");
         internal static readonly KnownType System_Data_SqlServerCe_SqlCeDataAdapter = new KnownType("System.Data.SqlServerCe.SqlCeDataAdapter");
         internal static readonly KnownType System_DateTime = new KnownType(SpecialType.System_DateTime, "DateTime");

@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  235,
+"startColumn":  33,
+"endLine":  235,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  239,
+"startColumn":  45,
+"endLine":  239,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  299,
+"startColumn":  33,
+"endLine":  299,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  21,
+"endLine":  78,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"region":  {
+"startLine":  132,
+"startColumn":  25,
+"endLine":  132,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  21,
+"endLine":  73,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"region":  {
+"startLine":  98,
+"startColumn":  21,
+"endLine":  98,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  25,
+"endLine":  120,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  359,
+"startColumn":  17,
+"endLine":  359,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  375,
+"startColumn":  17,
+"endLine":  375,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2027,
+"startColumn":  25,
+"endLine":  2027,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2575,
+"startColumn":  25,
+"endLine":  2575,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7141,
+"startColumn":  17,
+"endLine":  7141,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7216,
+"startColumn":  25,
+"endLine":  7216,
+"endColumn":  47
+}
+}
+}
+]
+}

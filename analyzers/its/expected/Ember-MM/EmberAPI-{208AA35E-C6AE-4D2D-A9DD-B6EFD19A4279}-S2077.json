@@ -1,0 +1,1044 @@
+{
+"issues":  [
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  77,
+"startColumn":  29,
+"endLine":  77,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  29,
+"endLine":  90,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  29,
+"endLine":  135,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  303,
+"startColumn":  17,
+"endLine":  303,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  305,
+"startColumn":  17,
+"endLine":  305,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  307,
+"startColumn":  17,
+"endLine":  307,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  309,
+"startColumn":  17,
+"endLine":  309,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  311,
+"startColumn":  17,
+"endLine":  311,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  313,
+"startColumn":  17,
+"endLine":  313,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  17,
+"endLine":  315,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  317,
+"startColumn":  17,
+"endLine":  317,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  338,
+"startColumn":  17,
+"endLine":  338,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  343,
+"startColumn":  33,
+"endLine":  343,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  345,
+"startColumn":  33,
+"endLine":  345,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  347,
+"startColumn":  33,
+"endLine":  347,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  349,
+"startColumn":  33,
+"endLine":  349,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  351,
+"startColumn":  33,
+"endLine":  351,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  353,
+"startColumn":  33,
+"endLine":  353,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  358,
+"startColumn":  33,
+"endLine":  358,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  360,
+"startColumn":  33,
+"endLine":  360,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  383,
+"startColumn":  17,
+"endLine":  383,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  387,
+"startColumn":  29,
+"endLine":  387,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  392,
+"startColumn":  45,
+"endLine":  392,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  394,
+"startColumn":  45,
+"endLine":  394,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  396,
+"startColumn":  45,
+"endLine":  396,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  398,
+"startColumn":  45,
+"endLine":  398,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  400,
+"startColumn":  45,
+"endLine":  400,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  403,
+"startColumn":  45,
+"endLine":  403,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  408,
+"startColumn":  57,
+"endLine":  408,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  414,
+"startColumn":  45,
+"endLine":  414,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  418,
+"startColumn":  41,
+"endLine":  418,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  446,
+"startColumn":  17,
+"endLine":  446,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  452,
+"startColumn":  17,
+"endLine":  452,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  477,
+"startColumn":  17,
+"endLine":  477,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  483,
+"startColumn":  17,
+"endLine":  483,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  485,
+"startColumn":  17,
+"endLine":  485,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  487,
+"startColumn":  17,
+"endLine":  487,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  582,
+"startColumn":  17,
+"endLine":  582,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  633,
+"startColumn":  17,
+"endLine":  633,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  648,
+"startColumn":  17,
+"endLine":  648,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  667,
+"startColumn":  17,
+"endLine":  667,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  681,
+"startColumn":  17,
+"endLine":  681,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  695,
+"startColumn":  17,
+"endLine":  695,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  708,
+"startColumn":  21,
+"endLine":  708,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  720,
+"startColumn":  21,
+"endLine":  720,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  744,
+"startColumn":  17,
+"endLine":  744,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  771,
+"startColumn":  17,
+"endLine":  771,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  798,
+"startColumn":  17,
+"endLine":  798,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  826,
+"startColumn":  17,
+"endLine":  826,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  835,
+"startColumn":  17,
+"endLine":  835,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  850,
+"startColumn":  17,
+"endLine":  850,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  869,
+"startColumn":  17,
+"endLine":  869,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  883,
+"startColumn":  17,
+"endLine":  883,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  916,
+"startColumn":  17,
+"endLine":  916,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  954,
+"startColumn":  17,
+"endLine":  954,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  981,
+"startColumn":  17,
+"endLine":  981,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1011,
+"startColumn":  17,
+"endLine":  1011,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1245,
+"startColumn":  25,
+"endLine":  1245,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1268,
+"startColumn":  25,
+"endLine":  1268,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1300,
+"startColumn":  25,
+"endLine":  1300,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1323,
+"startColumn":  25,
+"endLine":  1323,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1347,
+"startColumn":  25,
+"endLine":  1347,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1364,
+"startColumn":  25,
+"endLine":  1364,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1393,
+"startColumn":  25,
+"endLine":  1393,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1438,
+"startColumn":  21,
+"endLine":  1438,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1556,
+"startColumn":  25,
+"endLine":  1556,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1579,
+"startColumn":  25,
+"endLine":  1579,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1611,
+"startColumn":  25,
+"endLine":  1611,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1634,
+"startColumn":  25,
+"endLine":  1634,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1668,
+"startColumn":  13,
+"endLine":  1668,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1802,
+"startColumn":  25,
+"endLine":  1802,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1872,
+"startColumn":  13,
+"endLine":  1872,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1917,
+"startColumn":  17,
+"endLine":  1917,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1937,
+"startColumn":  17,
+"endLine":  1937,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1949,
+"startColumn":  17,
+"endLine":  1949,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1951,
+"startColumn":  17,
+"endLine":  1951,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1973,
+"startColumn":  17,
+"endLine":  1973,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1080,
+"startColumn":  29,
+"endLine":  1080,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1154,
+"startColumn":  29,
+"endLine":  1154,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure that formatting this SQL query is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1265,
+"startColumn":  33,
+"endLine":  1265,
+"endColumn":  55
+}
+}
+}
+]
+}

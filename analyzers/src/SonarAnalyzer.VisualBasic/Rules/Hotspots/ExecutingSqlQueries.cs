@@ -56,14 +56,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 ? invocation.ArgumentList.Get(index)
                 : null;
 
+        protected override ExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index) =>
+            context.Expression is ObjectCreationExpressionSyntax objectCreation
+                ? objectCreation.ArgumentList.Get(index)
+                : null;
+
         protected override ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
             context.Expression is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
                 ? ((AssignmentStatementSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
-                : null;
-
-        protected override ExpressionSyntax GetFirstArgument(ObjectCreationContext context) =>
-            context.Expression is ObjectCreationExpressionSyntax objectCreation
-                ? objectCreation.ArgumentList.Get(0)
                 : null;
 
         protected override bool IsTracked(ExpressionSyntax argument, SemanticModel semanticModel) =>

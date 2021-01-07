@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Data.Odbc;
 using System.Data.OracleClient;
 using System.Data.SqlServerCe;
+using MySql.Data.MySqlClient;
+using Microsoft.Data.Sqlite;
+using System.Data.SQLite;
 
 namespace Tests.Diagnostics
 {
@@ -106,7 +110,7 @@ namespace Tests.Diagnostics
             OdbcDataAdapter adapter;
             adapter = new OdbcDataAdapter(); // Compliant
             adapter = new OdbcDataAdapter(command); // Compliant
-            adapter = new OdbcDataAdapter(query, ""); // Compliant
+            adapter = new OdbcDataAdapter(query, $"concatenated connection string {query}"); // Compliant
             adapter = new OdbcDataAdapter(query, connection); // Compliant
         }
 
@@ -141,7 +145,7 @@ namespace Tests.Diagnostics
             OracleDataAdapter adapter;
             adapter = new OracleDataAdapter(); // Compliant
             adapter = new OracleDataAdapter(command); // Compliant
-            adapter = new OracleDataAdapter(query, ""); // Compliant, we don't know anything about the parameter
+            adapter = new OracleDataAdapter(query, $"nonconcatenated connection string {query}"); // Compliant, we don't know anything about the parameter
             adapter = new OracleDataAdapter(query, connection); // Compliant, we don't know anything about the parameter
         }
 
@@ -171,7 +175,7 @@ namespace Tests.Diagnostics
             SqlCeDataAdapter adapter;
             adapter = new SqlCeDataAdapter(); // Compliant
             adapter = new SqlCeDataAdapter(command); // Compliant
-            adapter = new SqlCeDataAdapter(query, ""); // Compliant
+            adapter = new SqlCeDataAdapter(query, string.Concat("concatenated connection string", query)); // Compliant
             adapter = new SqlCeDataAdapter(query, connection); // Compliant
         }
 
@@ -182,38 +186,127 @@ namespace Tests.Diagnostics
             command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
         }
 
+        public void MySqlDataCompliant(MySqlConnection connection, MySqlTransaction transaction, string query)
+        {
+            MySqlCommand command;
+            command = new MySqlCommand();                                               // Compliant
+            command = new MySqlCommand("");                                             // Compliant
+            command = new MySqlCommand(query, connection, transaction);                 // Compliant
+
+            command.CommandText = query;                                                // Compliant
+            command.CommandText = ConstantQuery;                                        // Compliant
+            string text;
+            text = command.CommandText;                                                 // Compliant
+            text = command.CommandText = query;                                         // Compliant
+
+            var adapter = new MySqlDataAdapter("", connection);                         // Compliant
+            adapter = new MySqlDataAdapter(ConstantQuery, "connectionString");          // Compliant
+
+            MySqlHelper.ExecuteDataRow($"concatenated connection string = {query}", ConstantQuery);   // Compliant
+        }
+
+        public void NonCompliant_MySqlData(MySqlConnection connection, MySqlTransaction transaction, string query, string param)
+        {
+            var command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}");                          // Noncompliant
+            command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection);                  // Noncompliant
+            command = new MySqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction);     // Noncompliant
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);               // Noncompliant
+
+            var adapter = new MySqlDataAdapter($"SELECT * FROM mytable WHERE mycol=" + param, connection);         // Noncompliant
+
+            MySqlHelper.ExecuteDataRow("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");          // Noncompliant
+            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");     // Noncompliant
+            MySqlHelper.ExecuteDataRowAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", new System.Threading.CancellationToken());    // Noncompliant
+            MySqlHelper.ExecuteDataset("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");          // Noncompliant
+            MySqlHelper.ExecuteDatasetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");     // Noncompliant
+            MySqlHelper.ExecuteNonQuery("connectionString", $"SELECT * FROM mytable WHERE mycol={param}");         // Noncompliant
+            MySqlHelper.ExecuteNonQueryAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}");            // Noncompliant
+            MySqlHelper.ExecuteReader(connection, $"SELECT * FROM mytable WHERE mycol={param}");                   // Noncompliant
+            MySqlHelper.ExecuteReaderAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}");              // Noncompliant
+            MySqlHelper.ExecuteScalar(connection, $"SELECT * FROM mytable WHERE mycol={param}");                   // Noncompliant
+            MySqlHelper.ExecuteScalarAsync(connection, $"SELECT * FROM mytable WHERE mycol={param}");              // Noncompliant
+            MySqlHelper.UpdateDataSet("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", new DataSet(), "tableName");                        // Noncompliant
+            MySqlHelper.UpdateDataSetAsync("connectionString", $"SELECT * FROM mytable WHERE mycol={param}", new DataSet(), "tableName");                   // Noncompliant
+
+            var script = new MySqlScript($"SELECT * FROM mytable WHERE mycol={param}");                            // Noncompliant
+            script = new MySqlScript(connection, $"SELECT * FROM mytable WHERE mycol={param}");                    // Noncompliant
+        }
+
+        public void MicrosoftDataSqliteCompliant(SqliteConnection connection, string query)
+        {
+            SqliteCommand command;
+            command = new SqliteCommand();          // Compliant
+            command = new SqliteCommand("");        // Compliant
+            command.CommandText = ConstantQuery;    // Compliant
+
+            command.CommandText = query;            // Compliant
+        }
+
+        public void NonCompliant_MicrosoftDataSqlite(SqliteConnection connection, string query, string param)
+        {
+            var command = new SqliteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection);  // Noncompliant
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);    // Noncompliant
+        }
+
+        public void SystemDataSqliteCompliant(SQLiteConnection connection, SQLiteTransaction transaction, string query)
+        {
+            SQLiteCommand command;
+            command = new SQLiteCommand();                                  // Compliant
+            command = new SQLiteCommand("");                                // Compliant
+            command = new SQLiteCommand(query, connection, transaction);    // Compliant
+
+            command.CommandText = query;                                    // Compliant
+            command.CommandText = ConstantQuery;                            // Compliant
+            string text;
+            text = command.CommandText;                                     // Compliant
+            text = command.CommandText = query;                             // Compliant
+
+            SQLiteCommand.Execute("SELECT * FROM mytable WHERE mycol={param}", SQLiteExecuteType.None, $"connectionString={query}");    // Compliant
+        }
+
+        public void NonCompliant_SystemDataSqlite(SQLiteConnection connection, SQLiteTransaction transaction, string query, string param)
+        {
+            var command = new SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}");                                      // Noncompliant
+            command = new SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection);                              // Noncompliant
+            command = new SQLiteCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction);                 // Noncompliant
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);                            // Noncompliant
+
+            var adapter = new SQLiteDataAdapter($"SELECT * FROM mytable WHERE mycol=" + param, connection);                     // Noncompliant
+            SQLiteCommand.Execute($"SELECT * FROM mytable WHERE mycol={param}", SQLiteExecuteType.None, "connectionString");    // Noncompliant
+        }
+
         public void ConcatAndStringFormat(SqlConnection connection, string param)
         {
             SqlCommand command;
             string sensitiveQuery = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
-            command = new SqlCommand(sensitiveQuery); // Noncompliant
+            command = new SqlCommand(sensitiveQuery);                                                   // Noncompliant
 
-            command.CommandText = sensitiveQuery; // Noncompliant
+            command.CommandText = sensitiveQuery;                                                       // Noncompliant
 
             string stillSensitive = sensitiveQuery;
-            command.CommandText = stillSensitive; // Noncompliant
+            command.CommandText = stillSensitive;                                                       // Noncompliant
 
             string sensitiveConcatQuery = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";
-            command = new SqlCommand(sensitiveConcatQuery); // Noncompliant
+            command = new SqlCommand(sensitiveConcatQuery);                                             // Noncompliant
 
-            command.CommandText = sensitiveConcatQuery; // Noncompliant
+            command.CommandText = sensitiveConcatQuery;                                                 // Noncompliant
 
             string stillSensitiveConcat = sensitiveConcatQuery;
-            command.CommandText = stillSensitiveConcat; // Noncompliant
+            command.CommandText = stillSensitiveConcat;                                                 // Noncompliant
 
             SqlDataAdapter adapter;
-            adapter = new SqlDataAdapter(sensitiveQuery, connection); // Noncompliant
+            adapter = new SqlDataAdapter(sensitiveQuery, connection);                                   // Noncompliant
 
-            command = new SqlCommand("SELECT * FROM Table1 WHERE col1 = '" + param + "'"); // Noncompliant
-            command.CommandText = "SELECT * FROM Table1 WHERE col1 = '" + param + "'"; // Noncompliant
+            command = new SqlCommand("SELECT * FROM Table1 WHERE col1 = '" + param + "'");              // Noncompliant
+            command.CommandText = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";                  // Noncompliant
 
             string x = null;
             x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
-            command.CommandText = x; // FN
+            command.CommandText = x;                                                                    // FN
 
             string y;
             y = sensitiveQuery;
-            command.CommandText = y;  // FN
+            command.CommandText = y;                                                                    // FN
         }
     }
 }
