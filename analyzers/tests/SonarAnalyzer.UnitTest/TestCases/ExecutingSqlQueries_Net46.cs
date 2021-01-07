@@ -110,7 +110,7 @@ namespace Tests.Diagnostics
             OdbcDataAdapter adapter;
             adapter = new OdbcDataAdapter(); // Compliant
             adapter = new OdbcDataAdapter(command); // Compliant
-            adapter = new OdbcDataAdapter(query, $" non constant {query}"); // Compliant
+            adapter = new OdbcDataAdapter(query, $"concatenated connection string {query}"); // Compliant
             adapter = new OdbcDataAdapter(query, connection); // Compliant
         }
 
@@ -145,7 +145,7 @@ namespace Tests.Diagnostics
             OracleDataAdapter adapter;
             adapter = new OracleDataAdapter(); // Compliant
             adapter = new OracleDataAdapter(command); // Compliant
-            adapter = new OracleDataAdapter(query, $"non constant {query}"); // Compliant, we don't know anything about the parameter
+            adapter = new OracleDataAdapter(query, $"nonconcatenated connection string {query}"); // Compliant, we don't know anything about the parameter
             adapter = new OracleDataAdapter(query, connection); // Compliant, we don't know anything about the parameter
         }
 
@@ -175,7 +175,7 @@ namespace Tests.Diagnostics
             SqlCeDataAdapter adapter;
             adapter = new SqlCeDataAdapter(); // Compliant
             adapter = new SqlCeDataAdapter(command); // Compliant
-            adapter = new SqlCeDataAdapter(query, string.Concat(query, "other param")); // Compliant
+            adapter = new SqlCeDataAdapter(query, string.Concat("concatenated connection string", query)); // Compliant
             adapter = new SqlCeDataAdapter(query, connection); // Compliant
         }
 
@@ -202,7 +202,7 @@ namespace Tests.Diagnostics
             var adapter = new MySqlDataAdapter("", connection);                         // Compliant
             adapter = new MySqlDataAdapter(ConstantQuery, "connectionString");          // Compliant
 
-            MySqlHelper.ExecuteDataRow($"connectionString = {query}", ConstantQuery);   // Compliant
+            MySqlHelper.ExecuteDataRow($"concatenated connection string = {query}", ConstantQuery);   // Compliant
         }
 
         public void NonCompliant_MySqlData(MySqlConnection connection, MySqlTransaction transaction, string query, string param)

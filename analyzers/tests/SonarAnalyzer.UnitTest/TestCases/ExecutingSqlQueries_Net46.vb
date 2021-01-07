@@ -90,7 +90,7 @@ Namespace Tests.Diagnostics
             Dim adapter As OdbcDataAdapter
             adapter = New OdbcDataAdapter() ' Compliant
             adapter = New OdbcDataAdapter(command) ' Compliant
-            adapter = New OdbcDataAdapter(query, $" non constant {query}") ' Compliant
+            adapter = New OdbcDataAdapter(query, $"concatenated connection string {query}") ' Compliant
             adapter = New OdbcDataAdapter(query, connection) ' Compliant
         End Sub
 
@@ -118,7 +118,7 @@ Namespace Tests.Diagnostics
             Dim adapter As OracleDataAdapter
             adapter = New OracleDataAdapter() ' Compliant
             adapter = New OracleDataAdapter(command) ' Compliant
-            adapter = New OracleDataAdapter(query, $" non constant {query}") ' Compliant
+            adapter = New OracleDataAdapter(query, $"concatenated connection string {query}") ' Compliant
             adapter = New OracleDataAdapter(query, connection) ' Compliant
         End Sub
 
@@ -145,7 +145,7 @@ Namespace Tests.Diagnostics
             Dim adapter As SqlCeDataAdapter
             adapter = New SqlCeDataAdapter() ' Compliant
             adapter = New SqlCeDataAdapter(command) ' Compliant
-            adapter = New SqlCeDataAdapter(query, string.Concat(query, "other param")) ' Compliant
+            adapter = New SqlCeDataAdapter(query, string.Concat("concatenated connection string", query)) ' Compliant
             adapter = New SqlCeDataAdapter(query, connection) ' Compliant
         End Sub
 
@@ -170,7 +170,7 @@ Namespace Tests.Diagnostics
             adapter = New MySqlDataAdapter("", connection)                              ' Compliant
             adapter = New MySqlDataAdapter(ConstantQuery, "connectionString")           ' Compliant
 
-            MySqlHelper.ExecuteDataRow($"connectionString = {query}", ConstantQuery)    ' Compliant
+            MySqlHelper.ExecuteDataRow($"concatenated connection string = {query}", ConstantQuery)    ' Compliant
         End Sub
 
         Public Sub NonCompliant_MySqlData(ByVal connection As MySqlConnection, ByVal transaction As MySqlTransaction, ByVal query As String, ByVal param As String)
