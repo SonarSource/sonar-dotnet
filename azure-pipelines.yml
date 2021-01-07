@@ -526,7 +526,7 @@ stages:
   condition: succeeded()
   jobs:
     - job: promoteRepox
-      displayName: 'Promote SonarAnalyzer.CFG.CSharp NuGet on repox'
+      displayName: 'SonarAnalyzer.CFG.CSharp'
       steps:
         - powershell: |
             # Calculate the file path
