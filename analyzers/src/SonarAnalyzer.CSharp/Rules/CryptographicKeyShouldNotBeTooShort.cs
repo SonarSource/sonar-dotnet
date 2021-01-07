@@ -163,8 +163,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var param = c.SemanticModel.GetConstantValue(firstParam);
-            if (param.HasValue && param.Value is string curveId)
+            if (firstParam.FindStringConstant(c.SemanticModel) is { } curveId)
             {
                 CheckCurveNameKeyLength(invocation, curveId, c);
             }
@@ -252,11 +251,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsInvalidCommonKeyLength(SyntaxNode keyLengthSyntax, SyntaxNodeAnalysisContext c)
-        {
-            var optionalKeyLength = c.SemanticModel.GetConstantValue(keyLengthSyntax);
-            return optionalKeyLength.HasValue && optionalKeyLength.Value is int keyLength && keyLength < MinimalCommonKeyLength;
-        }
+        private static bool IsInvalidCommonKeyLength(SyntaxNode keyLengthSyntax, SyntaxNodeAnalysisContext c) =>
+            keyLengthSyntax.FindConstantValue(c.SemanticModel) is int keyLength && keyLength < MinimalCommonKeyLength;
 
         private static string GetMethodName(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.Expression.GetIdentifier()?.Identifier.ValueText;
