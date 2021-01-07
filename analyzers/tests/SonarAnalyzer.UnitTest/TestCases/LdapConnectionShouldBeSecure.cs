@@ -42,9 +42,10 @@ namespace Tests.Diagnostics
             new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None); // Noncompliant {{Set the 'AuthenticationType' property of this DirectoryEntry to 'AuthenticationTypes.Secure'.}}
         }
 
-        void InitializerSetsAllowedValue()
+        void InitializerSetsAllowedValue(AuthenticationTypes arg)
         {
             new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None) { AuthenticationType = AuthenticationTypes.Secure }; // Compliant
+            new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None) { AuthenticationType = arg };  // Compliant
         }
 
         void InitializerSetsNotAllowedValue()

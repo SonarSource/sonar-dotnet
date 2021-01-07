@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void VisitAssignments(SyntaxNodeAnalysisContext context)
+        private static void VisitAssignments(SyntaxNodeAnalysisContext context)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
             if (assignment.Left is MemberAccessExpressionSyntax memberAccess

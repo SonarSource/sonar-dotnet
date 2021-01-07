@@ -305,7 +305,7 @@ namespace Tests.Diagnostics
             kp3.Init(r3);
         }
 
-        public void NoncompliantParametersGenerator()
+        public void NoncompliantParametersGenerator(int arg)
         {
             var pGen1 = new DHParametersGenerator();
             pGen1.Init(1024, 10, new SecureRandom()); // Noncompliant {{Use a key length of at least 2048 bits for DH cipher algorithm.}}
@@ -317,6 +317,7 @@ namespace Tests.Diagnostics
             var r3 = new RsaKeyGenerationParameters(new BigInteger("1"), new SecureRandom(), 1024, 5); // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
             kp3.Init(r3);
 
+            pGen1.Init(arg, 10, new SecureRandom());     // Compliant
             var keySize = 4096;
             pGen1.Init(keySize, 10, new SecureRandom()); // Compliant
             keySize = 1024;
@@ -395,7 +396,7 @@ namespace Tests.Diagnostics
             curve = ECNamedCurveTable.GetByName("RandomString"); // Compliant
         }
 
-        public void NoncompliantGetByName()
+        public void NoncompliantGetByName(string arg)
         {
             X9ECParameters curve = null;
 
@@ -435,10 +436,11 @@ namespace Tests.Diagnostics
             curve = ECNamedCurveTable.GetByName("brainpoolp192t1"); // Noncompliant
             curve = ECNamedCurveTable.GetByName("B-163"); // Noncompliant
 
+            ECNamedCurveTable.GetByName(arg);       // Compliant
             var variable = "RandomString";
-            ECNamedCurveTable.GetByName(variable); // Compliant
+            ECNamedCurveTable.GetByName(variable);  // Compliant
             variable = "B-163";
-            ECNamedCurveTable.GetByName(variable); // Noncompliant
+            ECNamedCurveTable.GetByName(variable);  // Noncompliant
         }
     }
 
