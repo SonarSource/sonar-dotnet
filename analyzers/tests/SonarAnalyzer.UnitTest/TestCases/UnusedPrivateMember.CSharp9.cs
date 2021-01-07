@@ -63,3 +63,17 @@ public record Record
         { }
     }
 }
+
+public class TargetTypedNew
+{
+    private TargetTypedNew(int arg) // Noncompliant FP
+                                    // Noncompliant@-1 - duplicate issue reported
+    {
+        var x = arg;
+    }
+
+    public static TargetTypedNew Create()
+    {
+        return new(42);
+    }
+}
