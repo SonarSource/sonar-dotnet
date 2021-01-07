@@ -226,7 +226,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsUsedAsEventHandlerFunctionOrAction(MethodContext declaration) =>
             declaration.Symbol.ContainingType.DeclaringSyntaxReferences
             .Select(r => r.GetSyntax())
-            .Any(n => IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(declaration.Symbol, n, declaration.Context.SemanticModel.Compilation.GetSemanticModel(n.SyntaxTree)));
+            .Any(n => IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(declaration.Symbol, n, n.EnsureCorrectSemanticModel(declaration.Context.SemanticModel)));
 
         private static bool IsMethodUsedAsEventHandlerFunctionOrActionWithinNode(IMethodSymbol methodSymbol, SyntaxNode typeDeclaration, SemanticModel semanticModel) =>
             typeDeclaration.DescendantNodes()

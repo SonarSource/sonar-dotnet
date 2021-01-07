@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void Visit(SyntaxNode node)
         {
-            semanticModel = compilation.GetSemanticModel(node.SyntaxTree);
+            semanticModel = node.EnsureCorrectSemanticModel(semanticModel ?? compilation.GetSemanticModel(node.SyntaxTree));
             base.Visit(node);
         }
 
