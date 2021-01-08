@@ -18,23 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UsingCommandLineArgumentsBase<TSyntaxKind> : SonarDiagnosticAnalyzer
-        where TSyntaxKind : struct
+    public abstract class UsingCommandLineArgumentsBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S4823";
-        protected const string MessageFormat = "Make sure that command line arguments are used safely here.";
+        private const string MessageFormat = "Make sure that command line arguments are used safely here.";
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected MethodDeclarationTracker MethodDeclarationTracker { get; set; }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected DiagnosticDescriptor Rule { get; }
+
+        protected UsingCommandLineArgumentsBase(System.Resources.ResourceManager rspecResources) =>
+             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             MethodDeclarationTracker.Track(context,
-                MethodDeclarationTracker.IsMainMethod(),
-                MethodDeclarationTracker.ParameterAtIndexIsUsed(0));
-        }
+                                           MethodDeclarationTracker.IsMainMethod(),
+                                           MethodDeclarationTracker.ParameterAtIndexIsUsed(0));
     }
 }

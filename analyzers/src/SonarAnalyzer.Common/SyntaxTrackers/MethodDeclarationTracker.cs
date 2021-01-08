@@ -68,16 +68,16 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public MethodDeclarationCondition MatchMethodName(params string[] methodNames) =>
+        public static MethodDeclarationCondition MatchMethodName(params string[] methodNames) =>
             context => methodNames.Contains(context.MethodSymbol.Name);
 
-        public MethodDeclarationCondition IsOrdinaryMethod() =>
+        public static MethodDeclarationCondition IsOrdinaryMethod() =>
             context => context.MethodSymbol.MethodKind == MethodKind.Ordinary;
 
-        public MethodDeclarationCondition IsMainMethod() =>
+        public static MethodDeclarationCondition IsMainMethod() =>
             context => context.MethodSymbol.IsMainMethod();
 
-        internal MethodDeclarationCondition AnyParameterIsOfType(params KnownType[] types)
+        internal static MethodDeclarationCondition AnyParameterIsOfType(params KnownType[] types)
         {
             var typesArray = types.ToImmutableArray();
             return context =>
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Helpers
                 && context.MethodSymbol.Parameters.Any(parameter => parameter.Type.DerivesOrImplementsAny(typesArray));
         }
 
-        internal MethodDeclarationCondition DecoratedWithAnyAttribute(params KnownType[] attributeTypes) =>
+        internal static MethodDeclarationCondition DecoratedWithAnyAttribute(params KnownType[] attributeTypes) =>
             context => context.MethodSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(attributeTypes));
     }
 }

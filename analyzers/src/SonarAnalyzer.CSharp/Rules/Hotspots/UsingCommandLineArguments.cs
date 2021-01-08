@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -29,23 +27,13 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class UsingCommandLineArguments : UsingCommandLineArgumentsBase<SyntaxKind>
+    public sealed class UsingCommandLineArguments : UsingCommandLineArgumentsBase
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
+        public UsingCommandLineArguments() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
-
-        public UsingCommandLineArguments() :
-            this(AnalyzerConfiguration.Hotspot)
+        public UsingCommandLineArguments(IAnalyzerConfiguration analyzerConfiguration) : base (RspecStrings.ResourceManager)
         {
-        }
-
-        public UsingCommandLineArguments(IAnalyzerConfiguration analyzerConfiguration)
-        {
-            MethodDeclarationTracker = new CSharpMethodDeclarationTracker(analyzerConfiguration, rule);
+            MethodDeclarationTracker = new CSharpMethodDeclarationTracker(analyzerConfiguration, Rule);
         }
     }
 }

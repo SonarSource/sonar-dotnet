@@ -27,14 +27,14 @@ namespace SonarAnalyzer.Helpers
     /// <summary>
     /// Base contxt information with semantic model and secondary location.
     /// </summary>
-    public abstract class BaseContext
+    public class BaseContext
     {
         private readonly List<Location> secondaryLocations;
 
         public SemanticModel SemanticModel { get; }
         public IEnumerable<Location> SecondaryLocations => secondaryLocations;
 
-        protected BaseContext(SemanticModel semanticModel)
+        public BaseContext(SemanticModel semanticModel)
         {
             SemanticModel = semanticModel;
             secondaryLocations = new List<Location>();
