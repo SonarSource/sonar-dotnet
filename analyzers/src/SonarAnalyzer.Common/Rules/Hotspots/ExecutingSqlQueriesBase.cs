@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
         protected abstract TExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index);
         protected abstract TExpressionSyntax GetSetValue(PropertyAccessContext context);
-        protected abstract bool IsTracked(TExpressionSyntax argument, SemanticModel semanticModel);
+        protected abstract bool IsTracked(TExpressionSyntax expression, BaseContext context);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchProperty(properties),
                 PropertyAccessTracker.MatchSetter(),
-                c => IsTracked(GetSetValue(c), c.SemanticModel),
+                c => IsTracked(GetSetValue(c), c),
                 Conditions.ExceptWhen(PropertyAccessTracker.AssignedValueIsConstant()));
 
             TrackObjectCreation(context, constructorsForFirstArgument, FirstArgumentIndex);
@@ -140,7 +140,7 @@ namespace SonarAnalyzer.Rules
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.MatchConstructor(objectCreationTypes),
                 ObjectCreationTracker.ArgumentAtIndexIs(argumentIndex, KnownType.System_String),
-                    c => IsTracked(GetArgumentAtIndex(c, argumentIndex), c.SemanticModel),
+                    c => IsTracked(GetArgumentAtIndex(c, argumentIndex), c),
                 Conditions.ExceptWhen(ObjectCreationTracker.ArgumentAtIndexIsConst(argumentIndex)));
 
         private void TrackInvocations(SonarAnalysisContext context, MemberDescriptor[] incovationsDescriptors, int argumentIndex) =>
@@ -163,6 +163,6 @@ namespace SonarAnalyzer.Rules
             };
 
         private InvocationCondition ArgumentAtIndexIsTracked(int index) =>
-            context => IsTracked(GetArgumentAtIndex(context, index), context.SemanticModel);
+            context => IsTracked(GetArgumentAtIndex(context, index), context);
     }
 }

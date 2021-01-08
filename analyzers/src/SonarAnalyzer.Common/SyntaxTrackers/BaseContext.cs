@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
@@ -28,13 +29,22 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     public abstract class BaseContext
     {
+        private readonly List<Location> secondaryLocations;
+
         public SemanticModel SemanticModel { get; }
-        public IEnumerable<Location> SecondaryLocations { get; }
+        public IEnumerable<Location> SecondaryLocations => secondaryLocations;
 
         protected BaseContext(SemanticModel semanticModel)
         {
             SemanticModel = semanticModel;
-            SecondaryLocations = new List<Location>();
+            secondaryLocations = new List<Location>();
+        }
+
+        public void AddSecondaryLocation(Location location)
+        {
+            Debug.Assert(location != null, "Location should not be null.");
+            Debug.Assert(location != Location.None, "Location should not be equal to None.");
+            secondaryLocations.Add(location);
         }
     }
 }

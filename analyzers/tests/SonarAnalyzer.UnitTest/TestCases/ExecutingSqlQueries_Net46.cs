@@ -278,35 +278,38 @@ namespace Tests.Diagnostics
         public void ConcatAndStringFormat(SqlConnection connection, string param)
         {
             SqlCommand command;
-            string sensitiveQuery = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
-            command = new SqlCommand(sensitiveQuery);                                                   // Noncompliant
+            string sensitiveQuery = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);  // Secondary [1,2,3,4,5]
+            //     ^^^^^^^^^^^^^^
+            command = new SqlCommand(sensitiveQuery);                                                   // Noncompliant [1]
 
-            command.CommandText = sensitiveQuery;                                                       // Noncompliant
+            command.CommandText = sensitiveQuery;                                                       // Noncompliant [2]
 
-            string stillSensitive = sensitiveQuery;
-            command.CommandText = stillSensitive;                                                       // Noncompliant
+            string stillSensitive = sensitiveQuery;                                                     // Secondary [3]
+            command.CommandText = stillSensitive;                                                       // Noncompliant [3]
 
-            string sensitiveConcatQuery = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";
-            command = new SqlCommand(sensitiveConcatQuery);                                             // Noncompliant
+            string sensitiveConcatQuery = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";          // Secondary [6,7,8]
+            //     ^^^^^^^^^^^^^^^^^^^^
+            command = new SqlCommand(sensitiveConcatQuery);                                             // Noncompliant [6]
 
-            command.CommandText = sensitiveConcatQuery;                                                 // Noncompliant
+            command.CommandText = sensitiveConcatQuery;                                                 // Noncompliant [7]
 
-            string stillSensitiveConcat = sensitiveConcatQuery;
-            command.CommandText = stillSensitiveConcat;                                                 // Noncompliant
+            string stillSensitiveConcat = sensitiveConcatQuery;                                         // Secondary [8]
+            command.CommandText = stillSensitiveConcat;                                                 // Noncompliant [8]
 
             SqlDataAdapter adapter;
-            adapter = new SqlDataAdapter(sensitiveQuery, connection);                                   // Noncompliant
+            adapter = new SqlDataAdapter(sensitiveQuery, connection);                                   // Noncompliant [4]
 
             command = new SqlCommand("SELECT * FROM Table1 WHERE col1 = '" + param + "'");              // Noncompliant
             command.CommandText = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";                  // Noncompliant
 
             string x = null;
-            x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
-            command.CommandText = x;                                                                    // FN
+            x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);                      // Secondary [9] ^13#1
+
+            command.CommandText = x;                                                                    // Noncompliant [9]
 
             string y;
-            y = sensitiveQuery;
-            command.CommandText = y;                                                                    // FN
+            y = sensitiveQuery;                                                                         // Secondary [5] ^13#1
+            command.CommandText = y;                                                                    // Noncompliant [5]
         }
     }
 }

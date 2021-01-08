@@ -34,6 +34,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax>
     {
+        private static readonly AssignmentFinder AssignmentFinder = new VisualBasicAssignmentFinder();
+
         public ExecutingSqlQueries()
             : this(AnalyzerConfiguration.Hotspot)
         {
@@ -66,12 +68,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 ? ((AssignmentStatementSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
                 : null;
 
-        protected override bool IsTracked(ExpressionSyntax argument, SemanticModel semanticModel) =>
-            argument != null
-            && (IsConcatenation(argument, semanticModel)
-                || argument.IsKind(SyntaxKind.InterpolatedStringExpression)
-                || (argument is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel))
-                || IsTrackedVariableDeclaration(argument, semanticModel));
+        protected override bool IsTracked(ExpressionSyntax expression, BaseContext context) =>
+            expression != null && (IsSensitiveExpression(expression, context.SemanticModel) || IsTrackedVariableDeclaration(expression, context));
+
+        private static bool IsSensitiveExpression(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            IsConcatenation(expression, semanticModel)
+            || expression.IsKind(SyntaxKind.InterpolatedStringExpression)
+            || (expression is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel));
 
         private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             (invocation.IsMethodInvocation(KnownType.System_String, "Format", semanticModel) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", semanticModel))
@@ -82,10 +85,50 @@ namespace SonarAnalyzer.Rules.VisualBasic
             && expression is BinaryExpressionSyntax concatenation
             && !IsConcatenationOfConstants(concatenation, semanticModel);
 
-        private bool IsTrackedVariableDeclaration(ExpressionSyntax argument, SemanticModel semanticModel) =>
-            (argument is IdentifierNameSyntax identifierNameSyntax
-             && semanticModel.GetDeclaringSyntaxNode(identifierNameSyntax)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax
-             && IsTracked(variableDeclaratorSyntax.Initializer?.Value, semanticModel));
+        private static bool IsTrackedVariableDeclaration(ExpressionSyntax expression, BaseContext context)
+        {
+            if (expression is IdentifierNameSyntax)
+            {
+                var node = expression;
+                Location location;
+                do
+                {
+                    var identifierName = (node as IdentifierNameSyntax).Identifier.ValueText;
+                    node = AssignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, node) as ExpressionSyntax;
+                    location = GetSecondaryLocationForExpression(node, identifierName);
+
+                    if (location != Location.None)
+                    {
+                        context.AddSecondaryLocation(location);
+                    }
+
+                    if (IsSensitiveExpression(node, context.SemanticModel))
+                    {
+                        return true;
+                    }
+                }
+                while (node is IdentifierNameSyntax);
+            }
+
+            return false;
+        }
+
+        private static Location GetSecondaryLocationForExpression(ExpressionSyntax node, string identifierName)
+        {
+            if (node == null)
+            {
+                return Location.None;
+            }
+
+            if (node.Parent is EqualsValueSyntax equalsValueSyntax
+                && equalsValueSyntax.Parent is VariableDeclaratorSyntax declarationSyntax)
+            {
+                var identifier = declarationSyntax.Names.FirstOrDefault(name => name.Identifier.ValueText == identifierName);
+                return identifier != null ? identifier.GetLocation() : Location.None;
+            }
+
+            return node.Parent is AssignmentStatementSyntax assignment ? assignment.Left.GetLocation() : Location.None;
+        }
 
         private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
             arguments.All(a => a.GetExpression().HasConstantValue(semanticModel));
