@@ -114,6 +114,7 @@ namespace SonarAnalyzer.UnitTest.Common
                                   .Concat(MetadataReferenceFacade.GetSystemComponentModelPrimitives())
                                   .Concat(MetadataReferenceFacade.GetRegularExpressions()) // Needed by UsingRegularExpressions
                                   .Concat(MetadataReferenceFacade.GetSystemSecurityCryptography()) // Needed by DoNotUseRandom
+                                  .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion)) // Needed by DisablingRequestValidation
                                   .Concat(NuGetMetadataReference.Nancy()); // Needed by CookieShouldBeHttpOnly, CookiesShouldBeSecure
     }
 }
