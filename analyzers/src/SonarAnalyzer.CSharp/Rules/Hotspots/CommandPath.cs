@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,14 +31,9 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class CommandPath : SonarDiagnosticAnalyzer
+    public sealed class CommandPath : CommandPathBase
     {
-        internal const string DiagnosticId = "S4036";
-        private const string MessageFormat = "";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public CommandPath() : base(RspecStrings.ResourceManager) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -47,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var node = c.Node;
                     if (true)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
