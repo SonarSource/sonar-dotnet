@@ -8,7 +8,7 @@ var authTypeSecure = AuthenticationTypes.Secure;
 new DirectoryEntry("path", "user", "pass", authTypeSecure); // Compliant
 
 var authTypeNone = AuthenticationTypes.None;
-new DirectoryEntry("path", "user", "pass", authTypeNone);   // Noncompliant
+new DirectoryEntry("path", "user", "pass", authTypeNone);   // FN
 
 DirectoryEntry entry1 = new("path", "user", "pass", AuthenticationTypes.Secure);    // Compliant
 DirectoryEntry entry2 = new("path", "user", "pass", AuthenticationTypes.None);      // FN

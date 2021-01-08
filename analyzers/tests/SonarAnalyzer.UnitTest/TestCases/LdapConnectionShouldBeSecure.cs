@@ -11,6 +11,8 @@ namespace Tests.Diagnostics
         DirectoryEntry Property1 { get; set; } = new DirectoryEntry(); // Compliant
         DirectoryEntry Property2 { get; set; }
 
+        AuthenticationTypes field = AuthenticationTypes.None;
+
         public Program()
         {
             new DirectoryEntry("path", "user", "pass", AuthenticationTypes.Secure); // Compliant
@@ -21,6 +23,12 @@ namespace Tests.Diagnostics
 
             var authTypeNone = AuthenticationTypes.None;
             new DirectoryEntry("path", "user", "pass", authTypeNone); // Noncompliant
+
+            new DirectoryEntry("path", "user", "pass", field);  // Noncompliant
+            field = AuthenticationTypes.Secure;
+            new DirectoryEntry("path", "user", "pass", field);
+            field = AuthenticationTypes.None;
+            new DirectoryEntry("path", "user", "pass", field);  // Noncompliant
         }
 
         void CtorSetsAllowedValue()
@@ -34,9 +42,10 @@ namespace Tests.Diagnostics
             new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None); // Noncompliant {{Set the 'AuthenticationType' property of this DirectoryEntry to 'AuthenticationTypes.Secure'.}}
         }
 
-        void InitializerSetsAllowedValue()
+        void InitializerSetsAllowedValue(AuthenticationTypes arg)
         {
             new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None) { AuthenticationType = AuthenticationTypes.Secure }; // Compliant
+            new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None) { AuthenticationType = arg };  // Compliant
         }
 
         void InitializerSetsNotAllowedValue()

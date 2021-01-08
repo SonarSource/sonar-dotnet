@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -81,13 +81,18 @@ namespace Tests.Diagnostics
 
         public void Ftp()
         {
+            bool variable;
             var notSet = (FtpWebRequest)WebRequest.Create(UntrackedSource()); // Compliant, FN
 
             var setToFalse = (FtpWebRequest)WebRequest.Create(UntrackedSource());
-            setToFalse.EnableSsl = false; // Noncompliant {{EnableSsl should be set to true.}}
+            setToFalse.EnableSsl = false;       // Noncompliant {{EnableSsl should be set to true.}}
+            variable = false;
+            setToFalse.EnableSsl = variable;    // Noncompliant
 
             var setToTrue = (FtpWebRequest)WebRequest.Create(UntrackedSource());
             setToTrue.EnableSsl = true;
+            variable = true;
+            setToFalse.EnableSsl = variable;
         }
 
         private string UntrackedSource() => string.Empty;

@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const int MinimalCommonKeyLength = 2048;
         private const int MinimalEllipticCurveKeyLength = 224;
-        private readonly Regex NamedEllipticCurve = new Regex("^(secp|sect|prime|c2tnb|c2pnb|brainpoolP|B-|K-|P-)(?<KeyLength>\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private readonly Regex namedEllipticCurve = new Regex("^(secp|sect|prime|c2tnb|c2pnb|brainpoolP|B-|K-|P-)(?<KeyLength>\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private static readonly ImmutableArray<KnownType> BouncyCastleCurveClasses =
             ImmutableArray.Create(
@@ -60,14 +60,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Security_Cryptography_ECDiffieHellman,
                 KnownType.System_Security_Cryptography_ECDsa);
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -126,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         // https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider.keysize
                         if (containingType.IsAny(KnownType.System_Security_Cryptography_DSACryptoServiceProvider, KnownType.System_Security_Cryptography_RSACryptoServiceProvider))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), UselessAssignmentInfo));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), UselessAssignmentInfo));
                         }
                         else
                         {
@@ -147,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (containingType.IsAny(SystemSecurityCryptographyDsaRsa) && IsInvalidCommonKeyLength(firstParam, c))
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
             }
             else
             {
@@ -163,8 +161,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var param = c.SemanticModel.GetConstantValue(firstParam);
-            if (param.HasValue && param.Value is string curveId)
+            if (firstParam.FindStringConstant(c.SemanticModel) is { } curveId)
             {
                 CheckCurveNameKeyLength(invocation, curveId, c);
             }
@@ -178,8 +175,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var paramSymbol = c.SemanticModel.GetSymbolInfo(firstParam).Symbol;
-            if (paramSymbol != null)
+            if (c.SemanticModel.GetSymbolInfo(firstParam).Symbol is { }  paramSymbol)
             {
                 CheckCurveNameKeyLength(syntaxElement, paramSymbol.Name, c);
             }
@@ -187,10 +183,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckCurveNameKeyLength(SyntaxNode syntaxElement, string curveName, SyntaxNodeAnalysisContext c)
         {
-            var match = NamedEllipticCurve.Match(curveName);
+            var match = namedEllipticCurve.Match(curveName);
             if (match.Success && int.TryParse(match.Groups["KeyLength"].Value, out var keyLength) && keyLength < MinimalEllipticCurveKeyLength)
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, syntaxElement.GetLocation(), MinimalEllipticCurveKeyLength, "EC", ""));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, syntaxElement.GetLocation(), MinimalEllipticCurveKeyLength, "EC", ""));
             }
         }
 
@@ -201,7 +197,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (containingType.Is(KnownType.System_Security_Cryptography_DSACryptoServiceProvider)
                 || (containingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider) && HasDefaultSize(objectCreation.ArgumentList.Arguments, c)))
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
             }
             else
             {
@@ -210,75 +206,50 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool HasDefaultSize(SeparatedSyntaxList<ArgumentSyntax> arguments, SyntaxNodeAnalysisContext c)
-        {
-            return arguments.Count == 0
-                || (arguments.Count == 1 && c.SemanticModel.GetTypeInfo(arguments[0].Expression).Type is ITypeSymbol type && type.Is(KnownType.System_Security_Cryptography_CspParameters));
-        }
+        private static bool HasDefaultSize(SeparatedSyntaxList<ArgumentSyntax> arguments, SyntaxNodeAnalysisContext c) =>
+            arguments.Count == 0
+            || (arguments.Count == 1 && c.SemanticModel.GetTypeInfo(arguments[0].Expression).Type is ITypeSymbol type && type.Is(KnownType.System_Security_Cryptography_CspParameters));
 
         private static void CheckGenericDsaRsaCryptographyAlgorithms(ITypeSymbol containingType, SyntaxNode syntaxElement, SyntaxNode keyLengthSyntax, SyntaxNodeAnalysisContext c)
         {
             if (containingType.DerivesFromAny(SystemSecurityCryptographyDsaRsa) && keyLengthSyntax != null && IsInvalidCommonKeyLength(keyLengthSyntax, c))
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, syntaxElement.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, syntaxElement.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
             }
         }
 
         private static void CheckBouncyCastleParametersGenerators(ITypeSymbol containingType, InvocationExpressionSyntax invocation, SyntaxNodeAnalysisContext c)
         {
-            var firstParam = invocation.ArgumentList.Get(0);
-            if (firstParam == null
-                || containingType == null
-                || !containingType.IsAny(KnownType.Org_BouncyCastle_Crypto_Generators_DHParametersGenerator, KnownType.Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator))
-            {
-                return;
-            }
-
-            if (IsInvalidCommonKeyLength(firstParam, c))
+            if (invocation.ArgumentList.Get(0) is { } firstParam
+                && containingType != null
+                && containingType.IsAny(KnownType.Org_BouncyCastle_Crypto_Generators_DHParametersGenerator, KnownType.Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator)
+                && IsInvalidCommonKeyLength(firstParam, c))
             {
                 var cipherAlgorithmName = containingType.Is(KnownType.Org_BouncyCastle_Crypto_Generators_DHParametersGenerator) ? "DH" : "DSA";
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), MinimalCommonKeyLength, cipherAlgorithmName, ""));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation(), MinimalCommonKeyLength, cipherAlgorithmName, ""));
             }
         }
 
         private static void CheckBouncyCastleKeyGenerationParameters(ITypeSymbol containingType, ObjectCreationExpressionSyntax objectCreation, SyntaxNodeAnalysisContext c)
         {
-            var keyLengthParam = objectCreation.ArgumentList.Get(2);
-            if (keyLengthParam != null
+            if (objectCreation.ArgumentList.Get(2) is { }  keyLengthParam
                 && containingType.Is(KnownType.Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters)
                 && IsInvalidCommonKeyLength(keyLengthParam, c))
             {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation(), MinimalCommonKeyLength, "RSA", ""));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation(), MinimalCommonKeyLength, "RSA", ""));
             }
         }
 
-        private static bool IsInvalidCommonKeyLength(SyntaxNode keyLengthSyntax, SyntaxNodeAnalysisContext c)
-        {
-            var optionalKeyLength = c.SemanticModel.GetConstantValue(keyLengthSyntax);
-            return optionalKeyLength.HasValue && optionalKeyLength.Value is int keyLength && keyLength < MinimalCommonKeyLength;
-        }
+        private static bool IsInvalidCommonKeyLength(SyntaxNode keyLengthSyntax, SyntaxNodeAnalysisContext c) =>
+            keyLengthSyntax.FindConstantValue(c.SemanticModel) is int keyLength && keyLength < MinimalCommonKeyLength;
 
         private static string GetMethodName(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.Expression.GetIdentifier()?.Identifier.ValueText;
 
-        private static string GetPropertyName(ExpressionSyntax expression)
-        {
-            var nameSyntax = expression.GetIdentifier();
-            if (nameSyntax != null)
-            {
-                return nameSyntax.Identifier.ValueText;
-            }
-            return null;
-        }
+        private static string GetPropertyName(ExpressionSyntax expression) =>
+            expression.GetIdentifier() is { } nameSyntax ? nameSyntax.Identifier.ValueText : null;
 
-        private static string CipherName(ITypeSymbol containingType)
-        {
-            if (containingType.Is(KnownType.System_Security_Cryptography_DSA)
-                || containingType.DerivesFrom(KnownType.System_Security_Cryptography_DSA))
-            {
-                return "DSA";
-            }
-            return "RSA";
-        }
+        private static string CipherName(ITypeSymbol containingType) =>
+            containingType.Is(KnownType.System_Security_Cryptography_DSA) || containingType.DerivesFrom(KnownType.System_Security_Cryptography_DSA) ? "DSA" : "RSA";
     }
 }

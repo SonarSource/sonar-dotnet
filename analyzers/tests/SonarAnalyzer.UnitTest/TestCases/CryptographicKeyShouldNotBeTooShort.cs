@@ -28,7 +28,7 @@ namespace Tests.Diagnostics
             new RSACryptoServiceProvider(localValidSize);
             new RSACryptoServiceProvider(validKeySizeConst);
             new RSACryptoServiceProvider(validKeySize);
-            new RSACryptoServiceProvider(invalidKeySize); // Compliant - FN - cannot detect static readonly from GetConstantValue
+            new RSACryptoServiceProvider(invalidKeySize); // Noncompliant
 
 
             const int localInvalidSize = 1024;
@@ -305,7 +305,7 @@ namespace Tests.Diagnostics
             kp3.Init(r3);
         }
 
-        public void NoncompliantParametersGenerator()
+        public void NoncompliantParametersGenerator(int arg)
         {
             var pGen1 = new DHParametersGenerator();
             pGen1.Init(1024, 10, new SecureRandom()); // Noncompliant {{Use a key length of at least 2048 bits for DH cipher algorithm.}}
@@ -316,6 +316,12 @@ namespace Tests.Diagnostics
             var kp3 = new RsaKeyPairGenerator();
             var r3 = new RsaKeyGenerationParameters(new BigInteger("1"), new SecureRandom(), 1024, 5); // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
             kp3.Init(r3);
+
+            pGen1.Init(arg, 10, new SecureRandom());     // Compliant
+            var keySize = 4096;
+            pGen1.Init(keySize, 10, new SecureRandom()); // Compliant
+            keySize = 1024;
+            pGen1.Init(keySize, 10, new SecureRandom()); // Noncompliant
         }
 
         public void CompliantGetByName()
@@ -390,7 +396,7 @@ namespace Tests.Diagnostics
             curve = ECNamedCurveTable.GetByName("RandomString"); // Compliant
         }
 
-        public void NoncompliantGetByName()
+        public void NoncompliantGetByName(string arg)
         {
             X9ECParameters curve = null;
 
@@ -429,6 +435,12 @@ namespace Tests.Diagnostics
             curve = ECNamedCurveTable.GetByName("c2pnb208w1"); // Noncompliant
             curve = ECNamedCurveTable.GetByName("brainpoolp192t1"); // Noncompliant
             curve = ECNamedCurveTable.GetByName("B-163"); // Noncompliant
+
+            ECNamedCurveTable.GetByName(arg);       // Compliant
+            var variable = "RandomString";
+            ECNamedCurveTable.GetByName(variable);  // Compliant
+            variable = "B-163";
+            ECNamedCurveTable.GetByName(variable);  // Noncompliant
         }
     }
 
