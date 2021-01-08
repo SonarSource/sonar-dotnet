@@ -4033,7 +4033,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4033"],
             //["4034"],
             ["4035"] = "CODE_SMELL",
-            //["4036"],
+            ["4036"] = "SECURITY_HOTSPOT",
             //["4037"],
             //["4038"],
             ["4039"] = "CODE_SMELL",
