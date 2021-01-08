@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public UsingCommandLineArguments() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public UsingCommandLineArguments(IAnalyzerConfiguration analyzerConfiguration) : base (RspecStrings.ResourceManager)
+        public UsingCommandLineArguments(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
         {
             MethodDeclarationTracker = new CSharpMethodDeclarationTracker(analyzerConfiguration, Rule);
         }
