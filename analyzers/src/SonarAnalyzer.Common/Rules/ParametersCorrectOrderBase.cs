@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules
             }
 
             var parameterNames = argumentParameterMappings.Values
-                .Select(symbol => symbol.Name)
+                .Select(symbol => symbol.Name.ToLowerInvariant())
                 .Distinct()
                 .ToList();
 
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules
                 .Select(argument => ConvertToArgumentIdentifier(argument))
                 .ToList();
             var identifierNames = argumentIdentifiers
-                .Select(p => p.IdentifierName)
+                .Select(p => p.IdentifierName?.ToLowerInvariant())
                 .ToList();
 
             if (parameterNames.Intersect(identifierNames).Any() &&
@@ -85,9 +85,9 @@ namespace SonarAnalyzer.Rules
             for (var i = 0; i < argumentIdentifiers.Count; i++)
             {
                 var argumentIdentifier = argumentIdentifiers[i];
-                var identifierName = argumentIdentifier.IdentifierName;
+                var identifierName = argumentIdentifier.IdentifierName?.ToLowerInvariant();
                 var parameter = argumentParameterMappings[argumentIdentifier.ArgumentSyntax];
-                var parameterName = parameter.Name;
+                var parameterName = parameter.Name.ToLowerInvariant();
 
                 if (string.IsNullOrEmpty(identifierName) ||
                     !parameterNames.Contains(identifierName) ||

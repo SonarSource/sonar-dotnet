@@ -85,11 +85,26 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override Location GetMethodDeclarationIdentifierLocation(SyntaxNode syntaxNode) =>
             (syntaxNode as MethodBlockBaseSyntax)?.FindIdentifierLocation();
 
-        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument) =>
-            (argument.GetExpression() as IdentifierNameSyntax)?.Identifier;
+        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument) => GetExpressionSyntaxIdentifier(argument?.GetExpression());
 
         protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
             (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
+
+        private static SyntaxToken? GetExpressionSyntaxIdentifier(ExpressionSyntax expression) =>
+            expression switch
+            {
+                IdentifierNameSyntax identifier => identifier.Identifier,
+                MemberAccessExpressionSyntax memberAccess => GetValueAccessIdentifier(memberAccess),
+                CastExpressionSyntax cast => GetExpressionSyntaxIdentifier(cast.Expression),
+                PredefinedCastExpressionSyntax predefinedCast => GetExpressionSyntaxIdentifier(predefinedCast.Expression),
+                ParenthesizedExpressionSyntax parentheses => GetExpressionSyntaxIdentifier(parentheses.Expression),
+                _ => null
+            };
+
+        private static SyntaxToken? GetValueAccessIdentifier(MemberAccessExpressionSyntax expression) =>
+            expression.Name.ToString() == "Value"
+                ? GetExpressionSyntaxIdentifier(expression.Expression)
+                : expression.Name.Identifier;
     }
 }
 

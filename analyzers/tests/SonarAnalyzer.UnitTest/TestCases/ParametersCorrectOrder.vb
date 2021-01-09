@@ -1,4 +1,6 @@
-﻿Namespace Tests.TestCases
+﻿Imports System
+
+Namespace Tests.TestCases
     Public Class Foo
         Public Shared Property ValProp As Integer
 
@@ -67,5 +69,57 @@
                 MyBase.New(right, left) ' Noncompliant
             End Sub
         End Class
+    End Class
+
+    ' See https://github.com/SonarSource/sonar-dotnet/issues/3879
+    Public Class NotOnlyNullableParam
+
+        Public Class A
+            Public Property Something as C
+        End Class
+
+        Public Class C
+            Public Property b as Integer
+        End Class
+
+        Sub NotNullableParamVoid(ByVal a as Integer, ByVal b as Integer)
+            ' Do nothing
+        End Sub
+
+        Sub NullableParamValueVoid(ByVal a as Integer, ByVal b as Nullable(Of Integer))
+
+            if b.HasValue Then
+                NotNullableParamVoid(b.Value, a) ' Noncompliant
+                NotNullableParamVoid(a, b.Value) ' Compliant
+            End If
+        End Sub
+
+
+        Sub NullableParamCastVoid(ByVal a as Integer, ByVal b as Nullable(Of Integer))
+            if b.HasValue Then
+                NotNullableParamVoid(CInt(b), a) ' Noncompliant
+                NotNullableParamVoid(a, CInt(b)) ' Compliant
+            End If
+        End Sub
+
+        Sub InnerPropertyParamVoid(ByVal a as Integer, ByRef c as A)
+            NotNullableParamVoid(c.Something.b, a) ' Noncompliant
+            NotNullableParamVoid(a, c.Something.b) ' Compliant
+        End Sub
+
+       Sub ObjectParamCastVoid(ByVal a as Integer, ByVal b as Object)
+            NotNullableParamVoid(CInt(b), a) ' Noncompliant
+            NotNullableParamVoid(a, CInt(b)) ' Compliant
+       End Sub
+
+        Sub ObjectParamNullableCastVoid(ByVal a as Integer, ByVal b as Object)
+            NotNullableParamVoid(DirectCast(b, Integer?).Value, a) ' Noncompliant
+            NotNullableParamVoid(a, DirectCast(b, Integer?).Value) ' Compliant
+        End Sub
+
+        Sub DifferentCaseParamsVoid(ByVal a as Integer, ByVal B as Integer)
+            NotNullableParamVoid(B, a) ' Noncompliant
+            NotNullableParamVoid(a, B) ' Compliant
+        End Sub
     End Class
 End Namespace

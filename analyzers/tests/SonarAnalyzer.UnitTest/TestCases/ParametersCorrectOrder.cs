@@ -195,39 +195,63 @@ namespace Tests.Diagnostics
     }
 
     // See https://github.com/SonarSource/sonar-dotnet/issues/3879
-    class NullableParam
+    class NotOnlyNullableParam
     {
-        void NotNullableParamVoid(int a, int b) // Secondary [D,E,F]
+        internal class A
+        {
+            public C Something { get; set; }
+        }
+
+        internal class C
+        {
+            public int b { get; set; }
+        }
+
+        void NotNullableParamVoid(int a, int b) // Secondary [D,E,F,G,H,I]
         {
             // Do nothing
         }
 
-        void NullableParamValueVoid(int a, int? b)
+        void NullableParamValueVoid(int a, Nullable<int> b)
         {
             if (b.HasValue)
             {
-                NotNullableParamVoid(b.Value, a); // Noncompliant [D] FN
-                NotNullableParamVoid(a, b.Value); // Compliant [D]
+                NotNullableParamVoid(b.Value, a); // Noncompliant [D]
+                NotNullableParamVoid(a, b.Value); // Compliant
             }
         }
 
-        void NullableParamCastVoid(int a, int? b)
+        void NullableParamCastVoid(int a, Nullable<int> b)
         {
             if (b.HasValue)
             {
-                NotNullableParamVoid((int)b, a); // Noncompliant [E] FN
-                NotNullableParamVoid(a, (int)b); // Compliant [E]
+                NotNullableParamVoid((int)b, a); // Noncompliant [E]
+                NotNullableParamVoid(a, (int)b); // Compliant
             }
         }
 
-        void NullableParamLocalValueVoid(int a, int? bParam)
+        void InnerPropertyParamVoid(int a, A c)
         {
-            if (bParam.HasValue)
-            {
-                var b = bParam.Value;
-                NotNullableParamVoid(b, a); // Noncompliant [F]
-                NotNullableParamVoid(a, b); // Compliant [F]
-            }
+            NotNullableParamVoid(c.Something.b, a); // Noncompliant [F]
+            NotNullableParamVoid(a, c.Something.b); // Compliant
+        }
+
+        void ObjectParamCastVoid(int a, object b)
+        {
+            NotNullableParamVoid((int)b, a); // Noncompliant [G]
+            NotNullableParamVoid(a, (int)b); // Compliant
+        }
+
+        void ObjectParamNullableCastVoid(int a, object b)
+        {
+            NotNullableParamVoid(((int?)b).Value, a); // Noncompliant [H]
+            NotNullableParamVoid(a, ((int?)b).Value); // Compliant
+        }
+
+        void DifferentCaseParamsVoid(int a, int B)
+        {
+            NotNullableParamVoid(B, a); // Noncompliant [I]
+            NotNullableParamVoid(a, B); // Compliant
         }
     }
 }
