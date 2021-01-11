@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal abstract ImmutableArray<KnownType> AlgorithmTypes { get; }
         protected abstract ISet<string> AlgorithmParameterlessFactoryMethods { get; }
-        protected abstract ISet<string> AlgorithmParameteredFactoryMethods { get; }
+        protected abstract ISet<string> AlgorithmParameterizedFactoryMethods { get; }
         protected abstract ISet<string> FactoryParameterNames { get; }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            if (!AlgorithmParameteredFactoryMethods.Contains(methodFullName))
+            if (!AlgorithmParameterizedFactoryMethods.Contains(methodFullName))
             {
                 return false;
             }
