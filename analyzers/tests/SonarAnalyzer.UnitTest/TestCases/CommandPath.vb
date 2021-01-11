@@ -10,7 +10,7 @@ Public Class Program
     Private Field As Process = Process.Start("file.exe")                ' FN
     Public Property PropertyRW As Process = Process.Start("file.exe")   ' FN
 
-    Public Sub Invocations(Password As SecureString, Arguments As IEnumerable(Of String))
+    Public Sub Invocations(Password As SecureString)
         Dim CompliantVariable As String = "C:\file.exe"
         Dim NoncompliantVariable As String = "file.exe"
         Dim StartInfo As New ProcessStartInfo("bad.exe")    ' FN {{Make sure the "PATH" used To find this command includes only what you intend.}}
@@ -19,7 +19,6 @@ Public Class Program
         ' Compliant
         Process.Start(StartInfo)       ' Not tracked here, it's already raised on the constructor
         Process.Start("C:\file.exe")
-        Process.Start("C:\file.exe", Arguments)
         Process.Start("C:\file.exe", "arguments")
         Process.Start("C:\file.exe", "arguments", "userName", Password, "domain")
         Process.Start("C:\file.exe", "userName", Password, "domain")
@@ -30,7 +29,6 @@ Public Class Program
         StartInfo = New ProcessStartInfo("C:\file.exe", "arguments")
 
         Process.Start("file.exe")                       ' FN
-        Process.Start("file.exe", Arguments)            ' FN
         Process.Start("file.exe", "arguments")          ' FN
         Process.Start("file.exe", "arguments", "userName", Password, "domain")  ' FN
         Process.Start("file.exe", "userName", Password, "domain")               ' FN

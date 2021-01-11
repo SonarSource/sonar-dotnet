@@ -11,7 +11,7 @@ public class Program
     public Process PropertyRW { get; set; } = Process.Start("file.exe");    // FN
     public Process PropertyRO => Process.Start("file.exe");                 // FN
 
-    public void Invocations(SecureString password, IEnumerable<string> arguments)
+    public void Invocations(SecureString password)
     {
         var compliantVariable = @"C:\file.exe";
         var noncompliantVariable = @"file.exe";
@@ -21,7 +21,6 @@ public class Program
         // Compliant
         Process.Start(startInfo);       // Not tracked here, it's already raised on the constructor
         Process.Start(@"C:\file.exe");
-        Process.Start(@"C:\file.exe", arguments);
         Process.Start(@"C:\file.exe", "arguments");
         Process.Start(@"C:\file.exe", "arguments", "userName", password, "domain");
         Process.Start(@"C:\file.exe", "userName", password, "domain");
@@ -32,7 +31,6 @@ public class Program
         new ProcessStartInfo(@"C:\file.exe", "arguments");
 
         Process.Start("file.exe");                      // FN
-        Process.Start("file.exe", arguments);           // FN
         Process.Start("file.exe", "arguments");         // FN
         Process.Start("file.exe", "arguments", "userName", password, "domain"); // FN
         Process.Start("file.exe", "userName", password, "domain");              // FN

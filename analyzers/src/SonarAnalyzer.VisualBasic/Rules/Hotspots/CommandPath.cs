@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2020 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -18,36 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class CommandPath : CommandPathBase
+    public sealed class CommandPath : CommandPathBase<SyntaxKind>
     {
-        public CommandPath() : base(RspecStrings.ResourceManager) { }
+        public CommandPath() : this(AnalyzerConfiguration.Hotspot) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        internal CommandPath(IAnalyzerConfiguration configuration) : base(RspecStrings.ResourceManager)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-                SyntaxKind.InvocationExpression);
+            InvocationTracker = new VisualBasicInvocationTracker(configuration, Rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(configuration, Rule);
         }
     }
 }

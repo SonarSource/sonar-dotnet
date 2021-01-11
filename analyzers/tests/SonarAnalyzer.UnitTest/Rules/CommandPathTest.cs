@@ -1,6 +1,6 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2020 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -18,10 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +32,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommandPath()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\CommandPath.cs",
-                new CommandPath());
-        }
+        public void CommandPath_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), additionalReferences: MetadataReferenceFacade.GetSystemDiagnosticsProcess());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommandPath_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\CommandPath.vb",
-                new SonarAnalyzer.Rules.VisualBasic.CommandPath());
-        }
+        public void CommandPath_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), additionalReferences: MetadataReferenceFacade.GetSystemDiagnosticsProcess());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CommandPath_CS_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\CommandPath.cs", new CS.CommandPath(), additionalReferences: MetadataReferenceFacade.GetSystemDiagnosticsProcess());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CommandPath_VB_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\CommandPath.vb", new VB.CommandPath(), additionalReferences: MetadataReferenceFacade.GetSystemDiagnosticsProcess());
     }
 }
-
-

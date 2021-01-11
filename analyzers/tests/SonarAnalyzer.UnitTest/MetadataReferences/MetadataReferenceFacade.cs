@@ -87,6 +87,17 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 #endif
 
+        internal static References GetSystemDiagnosticsProcess() =>
+#if NETFRAMEWORK
+            Enumerable.Empty<MetadataReference>();
+#else
+            new[]
+            {
+                CoreMetadataReference.SystemComponentModelPrimitives,
+                CoreMetadataReference.SystemDiagnosticsProcess
+            };
+#endif
+
         internal static References GetSystemDrawing() =>
 #if NETFRAMEWORK
             FrameworkMetadataReference.SystemDrawing;

@@ -42,6 +42,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference SystemComponentModelPrimitives { get; } = CreateReference("System.ComponentModel.Primitives.dll");
         internal static MetadataReference SystemDataCommon { get; } = CreateReference("System.Data.Common.dll");
         internal static MetadataReference SystemDiagnosticsTraceSource { get; } = CreateReference("System.Diagnostics.TraceSource.dll");
+        internal static MetadataReference SystemDiagnosticsProcess { get; } = CreateReference("System.Diagnostics.Process.dll");
         internal static MetadataReference SystemDiagnosticsTools { get; } = CreateReference("System.Diagnostics.Tools.dll");
         internal static MetadataReference SystemGlobalization { get; } = CreateReference("System.Globalization.dll");
         internal static MetadataReference SystemIoCompression { get; } = CreateReference("System.IO.Compression.dll");

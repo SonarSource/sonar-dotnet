@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2020 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -20,21 +20,27 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CommandPathBase : SonarDiagnosticAnalyzer
+    public abstract class CommandPathBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4036";
         private const string MessageFormat = "";
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
         protected DiagnosticDescriptor Rule { get; }
+        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+        protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
 
         protected CommandPathBase(System.Resources.ResourceManager rspecStrings) =>
-             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings);
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings).WithNotConfigurable();
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            //FIXME: Implement
+        }
     }
 }
-
