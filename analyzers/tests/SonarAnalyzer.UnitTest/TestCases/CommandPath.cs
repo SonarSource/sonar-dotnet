@@ -16,8 +16,8 @@ public class Program
         var compliantVariable = @"C:\file.exe";
         var noncompliantVariable = @"file.exe";
         string nullVariable = null;
-        var startInfo = new ProcessStartInfo("bad.exe");    // FN {{Make sure the "PATH" used to find this command includes only what you intend.}}
-        //FIXME: Mark location
+        var startInfo = new ProcessStartInfo("bad.exe");    // Noncompliant {{Make sure the "PATH" used to find this command includes only what you intend.}}
+        //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         // Compliant
         Process.Start(startInfo);       // Not tracked here, it's already raised on the constructor
@@ -39,8 +39,8 @@ public class Program
         Process.Start("file.exe", "userName", password, "domain");              // Noncompliant
         Process.Start(noncompliantField);               // Noncompliant
         Process.Start(noncompliantVariable);            // Noncompliant
-        new ProcessStartInfo("file.exe");               // FN
-        new ProcessStartInfo("file.exe", "arguments");  // FN
+        new ProcessStartInfo("file.exe");               // Noncompliant
+        new ProcessStartInfo("file.exe", "arguments");  // Noncompliant
 
         // Reassignment
         compliantField = noncompliantVariable;
@@ -58,15 +58,7 @@ public class Program
         var psi = new ProcessStartInfo(@"C:\file.exe");
         psi.FileName = "file.exe";              // Noncompliant
 
-        psi = new ProcessStartInfo("bad.exe");  // Compliant, safe value is assigned later
-        psi.FileName = @"C:\file.exe";
-
-        psi = new ProcessStartInfo("bad.exe");  // FN, safe value is assigned later, but we don't track the intermediate usage
-        Process.Start(psi);
-        psi.FileName = @"C:\file.exe";
-
-        psi = new ProcessStartInfo("bad.exe");  // FN, safe value is assigned later, but we don't track the intermediate usage
-        Run(psi);
+        psi = new ProcessStartInfo("bad.exe");  // Noncompliant, later assignment is not tracked
         psi.FileName = @"C:\file.exe";
     }
 

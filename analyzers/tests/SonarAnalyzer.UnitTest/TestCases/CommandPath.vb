@@ -14,8 +14,8 @@ Public Class Program
         Dim CompliantVariable As String = "C:\file.exe"
         Dim NoncompliantVariable As String = "file.exe"
         Dim NothingVariable As String = Nothing
-        Dim StartInfo As New ProcessStartInfo("bad.exe")    ' FN {{Make sure the "PATH" used To find this command includes only what you intend.}}
-        'FIXME: Mark location
+        Dim StartInfo As New ProcessStartInfo("bad.exe")    ' Noncompliant {{Make sure the "PATH" used to find this command includes only what you intend.}}
+        '                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         ' Compliant
         Process.Start(StartInfo)       ' Not tracked here, it's already raised on the constructor
@@ -37,8 +37,8 @@ Public Class Program
         Process.Start("file.exe", "userName", Password, "domain")               ' Noncompliant
         Process.Start(NoncompliantField)                ' Noncompliant
         Process.Start(NoncompliantVariable)             ' Noncompliant
-        StartInfo = New ProcessStartInfo("file.exe")                ' FN
-        StartInfo = New ProcessStartInfo("file.exe", "arguments")   ' FN
+        StartInfo = New ProcessStartInfo("file.exe")                ' Noncompliant
+        StartInfo = New ProcessStartInfo("file.exe", "arguments")   ' Noncompliant
 
         ' Reassignment
         CompliantField = NoncompliantVariable
@@ -54,15 +54,7 @@ Public Class Program
         Dim psi As New ProcessStartInfo("C:\file.exe")
         psi.FileName = "file.exe"               ' Noncompliant
 
-        psi = New ProcessStartInfo("bad.exe")   ' Compliant, safe value Is assigned later
-        psi.FileName = "C:\file.exe"
-
-        psi = New ProcessStartInfo("bad.exe")   ' FN, safe value Is assigned later, but we don't track the intermediate usage
-        Process.Start(psi)
-        psi.FileName = "C:\file.exe"
-
-        psi = New ProcessStartInfo("bad.exe")   ' FN, safe value Is assigned later, but we don't track the intermediate usage
-        Run(psi)
+        psi = New ProcessStartInfo("bad.exe")   ' Noncompliant, later assignment is not tracked
         psi.FileName = "C:\file.exe"
     End Sub
 

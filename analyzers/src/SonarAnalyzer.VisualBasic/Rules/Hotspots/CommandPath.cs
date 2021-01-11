@@ -38,6 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             InvocationTracker = new VisualBasicInvocationTracker(configuration, Rule);
             PropertyAccessTracker = new VisualBasicPropertyAccessTracker(configuration, Rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(configuration, Rule);
         }
 
         protected override string FirstArgument(InvocationContext context) =>

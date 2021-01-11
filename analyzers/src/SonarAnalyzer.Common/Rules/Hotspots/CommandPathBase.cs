@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules
         protected DiagnosticDescriptor Rule { get; }
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
         protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
+        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
 
         protected CommandPathBase(System.Resources.ResourceManager rspecStrings) =>
             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings).WithNotConfigurable();
@@ -53,6 +54,10 @@ namespace SonarAnalyzer.Rules
                 PropertyAccessTracker.MatchProperty(new MemberDescriptor(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
                 PropertyAccessTracker.MatchSetter(),
                 c => IsInvalid((string)PropertyAccessTracker.AssignedValue(c)));
+
+            ObjectCreationTracker.Track(context,
+                ObjectCreationTracker.MatchConstructor(KnownType.System_Diagnostics_ProcessStartInfo),
+                c => ObjectCreationTracker.ConstArgumentForParameter(c, "fileName") is string value && IsInvalid(value));
         }
 
         private static bool IsInvalid(string path) =>
