@@ -348,16 +348,6 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void ElementAccess2(Exception ex)
-        {
-            if (ex?.Data["Key"] is string value)
-            {
-            }
-            else if (ex.Data != null) // FN
-            {
-            }
-        }
-
         public void MemberBinding1(Exception ex)
         {
             if (ex?.Message is string value)
@@ -372,6 +362,9 @@ namespace Tests.Diagnostics
         {
             if (ex?.Message is string value)
             {
+            }
+            else if (ex == null)    // Noncompliant FP
+            {                       // Secondary
             }
             else if (ex.Message != null) // FN
             {
