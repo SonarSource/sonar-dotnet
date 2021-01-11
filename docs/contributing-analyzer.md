@@ -47,6 +47,17 @@ In general, it is best to run commands from the Visual Studio Developer Command 
 You can run the Unit Tests via the Test Explorer of Visual Studio or using `.\scripts\build\dev-build.ps1 -test`
 
 ### Integration Tests
+
+#### Types of tests
+
+For most projects, there are JSON files in the [expected](../analyzers/its/expected) folder with expected issues. One JSON file per rule.
+
+For the [ManuallyAddedNoncompliantIssues](../analyzers/its/sources/ManuallyAddedNoncompliantIssues) project, we verify for each file the issues for one specific rule - like we do for Unit Tests. The first occurrence must specify the rule ID (`// Noncompliant (S9999)`), and the next occurrences can only have `// Noncompliant`. If multiple rules are raising issues in that file, they will be ignored. The framework can only verify one rule per file. Look at some files inside the **ManuallyAddedNoncompliantIssues** project.
+
+The same applies for **ManuallyAddedNoncompliantIssuesVB**.
+
+For details on how the parsing works, read the [regression-test.ps1](../analyzers/its/regression-test.ps1) script.
+
 #### Running the tests
 To run the ITs you will need to follow this pattern:
 
@@ -94,10 +105,10 @@ From Visual Studio, make sure `SonarAnalyzer.Vsix.csproj` is selected as startup
 1. Make sure SonarLint for Visual Studio is uninstalled
 1. Hit `F5` to launch the experimental instance of Visual Studio
 1. Open one of the following solutions from the experimental instance:
-    - [Akka.NET](akka.net/src/Akka.sln)
-    - [Nancy](Nancy/src/Nancy.sln)
-    - [Ember-MM](Ember-MM/Ember%20Media%20Manager.sln)
-1. Turn on your new rule in [Validation Ruleset](ValidationRuleset.ruleset), review the results, improve, and setup the regression test once you are satisfied.
+    - [Akka.NET](../analyzers/its/sources/akka.net/src/Akka.sln)
+    - [Nancy](../analyzers/its/sources/Nancy/src/Nancy.sln)
+    - [Ember-MM](../analyzers/its/sources/Ember-MM/Ember%20Media%20Manager.sln)
+1. Turn on your new rule in [Validation Ruleset](../analyzers/its/ValidationRuleset.ruleset), review the results, improve, and setup the regression test once you are satisfied.
     - Note: the solutions have been pre-configured to use this ruleset on all their projects.
     - Note: for rules that need project-specific configuration, you need to manually add the link to the project-specific SonarLint.xml file
       e.g. for Akka.net `..\akka.net\src\core\Akka\Akka.csproj` add
