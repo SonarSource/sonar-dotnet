@@ -49,30 +49,31 @@ namespace SonarAnalyzer.Rules.CSharp
             this.analyzerConfiguration = analyzerConfiguration;
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            if (analyzerConfiguration.IsEnabled(DiagnosticId))
-            {
-                context.RegisterSymbolAction(c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSymbolAction(c =>
+                {
+                    analyzerConfiguration.Initialize(c.Options);
+                    if (!analyzerConfiguration.IsEnabled(DiagnosticId))
                     {
-                        var attributes = c.Symbol.GetAttributes();
-                        if (attributes.IsEmpty)
-                        {
-                            return;
-                        }
-                        var attributeWithFalseParameter = attributes.FirstOrDefault(a =>
-                            a.ConstructorArguments.Length == 1
-                            && a.ConstructorArguments[0].Kind == TypedConstantKind.Primitive
-                            && a.ConstructorArguments[0].Value is bool b
-                            && b == false);
-                        if (attributeWithFalseParameter != null && attributeWithFalseParameter.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute))
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
-                        }
-                    },
-                    SymbolKind.NamedType,
-                    SymbolKind.Method);
-            }
-        }
+                        return;
+                    }
+
+                    var attributes = c.Symbol.GetAttributes();
+                    if (attributes.IsEmpty)
+                    {
+                        return;
+                    }
+                    var attributeWithFalseParameter = attributes.FirstOrDefault(a =>
+                        a.ConstructorArguments.Length == 1
+                        && a.ConstructorArguments[0].Kind == TypedConstantKind.Primitive
+                        && a.ConstructorArguments[0].Value is bool b
+                        && b == false);
+                    if (attributeWithFalseParameter != null && attributeWithFalseParameter.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                    }
+                },
+                SymbolKind.NamedType,
+                SymbolKind.Method);
     }
 }
