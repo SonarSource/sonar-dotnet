@@ -92,9 +92,9 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsMethodCountExtension(IMethodSymbol methodSymbol) =>
-            methodSymbol.Name == "Count" &&
-            methodSymbol.IsExtensionMethod &&
-            methodSymbol.ReceiverType != null;
+            methodSymbol.Name == "Count" 
+            && methodSymbol.IsExtensionMethod 
+            && methodSymbol.ReceiverType != null;
 
         internal readonly struct CountType
         {
