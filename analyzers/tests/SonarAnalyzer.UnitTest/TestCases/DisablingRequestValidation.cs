@@ -75,6 +75,11 @@ namespace Tests.Diagnostics
     {
     }
 
+    [Obsolete("", false)]
+    public class MyObsoleteClass2 // for coverage
+    {
+    }
+
     [CLSCompliant(false)] // for coverage
     public class ClassWithFalse
     {
