@@ -56,6 +56,8 @@ For the [ManuallyAddedNoncompliantIssues](../analyzers/its/sources/ManuallyAdded
 
 The same applies for **ManuallyAddedNoncompliantIssuesVB**.
 
+For details on how the parsing works, read the [regression-test.ps1](../analyzers/its/regression-test.ps1) script.
+
 #### Running the tests
 To run the ITs you will need to follow this pattern:
 
