@@ -21,8 +21,10 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -37,5 +39,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             InvocationTracker = new VisualBasicInvocationTracker(configuration, Rule);
             PropertyAccessTracker = new VisualBasicPropertyAccessTracker(configuration, Rule);
         }
+
+        protected override string FirstArgument(InvocationContext context) =>
+            ((InvocationExpressionSyntax)context.Invocation).ArgumentList.Get(0).FindStringConstant(context.SemanticModel);
     }
 }

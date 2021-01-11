@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
@@ -28,7 +29,11 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4036";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Make sure the \"PATH\" used to find this command includes only what you intend.";
+
+        private static readonly Regex ValidPath = new Regex(@"^(\.{0,2}[\\/]|[a-zA-Z]:)");
+
+        protected abstract string FirstArgument(InvocationContext context);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
         protected DiagnosticDescriptor Rule { get; }
@@ -40,7 +45,12 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            //FIXME: Implement
+            InvocationTracker.Track(context,
+                InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
+                c => IsInvalid(FirstArgument(c)));
         }
+
+        private static bool IsInvalid(string path) =>
+            !string.IsNullOrEmpty(path) && !ValidPath.IsMatch(path);
     }
 }

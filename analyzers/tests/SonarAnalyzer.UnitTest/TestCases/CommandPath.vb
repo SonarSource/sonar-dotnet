@@ -7,17 +7,20 @@ Public Class Program
     Private CompliantField As String = "C:\file.exe"
     Private NoncompliantField As String = "file.exe"
 
-    Private Field As Process = Process.Start("file.exe")                ' FN
-    Public Property PropertyRW As Process = Process.Start("file.exe")   ' FN
+    Private Field As Process = Process.Start("file.exe")                ' Noncompliant
+    Public Property PropertyRW As Process = Process.Start("file.exe")   ' Noncompliant
 
     Public Sub Invocations(Password As SecureString)
         Dim CompliantVariable As String = "C:\file.exe"
         Dim NoncompliantVariable As String = "file.exe"
+        Dim NothingVariable As String = Nothing
         Dim StartInfo As New ProcessStartInfo("bad.exe")    ' FN {{Make sure the "PATH" used To find this command includes only what you intend.}}
         'FIXME: Mark location
 
         ' Compliant
         Process.Start(StartInfo)       ' Not tracked here, it's already raised on the constructor
+        Process.Start("")
+        Process.Start(NothingVariable)
         Process.Start("C:\file.exe")
         Process.Start("C:\file.exe", "arguments")
         Process.Start("C:\file.exe", "arguments", "userName", Password, "domain")
@@ -28,19 +31,19 @@ Public Class Program
         StartInfo = New ProcessStartInfo("C:\file.exe")
         StartInfo = New ProcessStartInfo("C:\file.exe", "arguments")
 
-        Process.Start("file.exe")                       ' FN
-        Process.Start("file.exe", "arguments")          ' FN
-        Process.Start("file.exe", "arguments", "userName", Password, "domain")  ' FN
-        Process.Start("file.exe", "userName", Password, "domain")               ' FN
-        Process.Start(NoncompliantField)                ' FN
-        Process.Start(NoncompliantVariable)             ' FN
+        Process.Start("file.exe")                       ' Noncompliant
+        Process.Start("file.exe", "arguments")          ' Noncompliant
+        Process.Start("file.exe", "arguments", "userName", Password, "domain")  ' Noncompliant
+        Process.Start("file.exe", "userName", Password, "domain")               ' Noncompliant
+        Process.Start(NoncompliantField)                ' Noncompliant
+        Process.Start(NoncompliantVariable)             ' Noncompliant
         StartInfo = New ProcessStartInfo("file.exe")                ' FN
         StartInfo = New ProcessStartInfo("file.exe", "arguments")   ' FN
 
         ' Reassignment
         CompliantField = NoncompliantVariable
-        Process.Start(CompliantField)                   ' FN
-        NoncompliantVariable = CompliantField
+        Process.Start(CompliantField)                   ' Noncompliant
+        NoncompliantVariable = CompliantVariable
         Process.Start(NoncompliantVariable)             ' Compliant after reassignment
     End Sub
 
@@ -76,6 +79,7 @@ Public Class Program
         Process.Start("/file.exe")
         Process.Start("./file.exe")
         Process.Start("../file.exe")
+        Process.Start("c:")
         Process.Start("c:/file.exe")
         Process.Start("C:/file.exe")
         Process.Start("D:/file.exe")
@@ -100,27 +104,27 @@ Public Class Program
         Process.Start("\\server\c$\file.exe")
         Process.Start("\\10.0.0.1\dir\file.exe")
 
-        Process.Start("file")           ' FN
-        Process.Start("file.exe")       ' FN
-        Process.Start("File.bat")       ' FN
-        Process.Start("dir/file.cmd")   ' FN
-        Process.Start("-file.com")      ' FN
-        Process.Start("@file.cpl")      ' FN
-        Process.Start("$file.dat")      ' FN
-        Process.Start(".file.txt")      ' FN
-        Process.Start(".|file.fake")    ' FN
-        Process.Start("~/file.exe")     ' FN
-        Process.Start("...file.exe")    ' FN
-        Process.Start(".../file.exe")   ' FN
-        Process.Start("AA:/file.exe")   ' FN
-        Process.Start("0:/file.exe")    ' FN
-        Process.Start("Ř:/file.exe")    ' FN
-        Process.Start("ř:/file.exe")    ' FN
-        Process.Start("...\file.exe")   ' FN
-        Process.Start("AA:\file.exe")   ' FN
-        Process.Start("0:\file.exe")    ' FN
-        Process.Start("Ř:\file.exe")    ' FN
-        Process.Start("ř:\file.exe")    ' FN
+        Process.Start("file")           ' Noncompliant
+        Process.Start("file.exe")       ' Noncompliant
+        Process.Start("File.bat")       ' Noncompliant
+        Process.Start("dir/file.cmd")   ' Noncompliant
+        Process.Start("-file.com")      ' Noncompliant
+        Process.Start("@file.cpl")      ' Noncompliant
+        Process.Start("$file.dat")      ' Noncompliant
+        Process.Start(".file.txt")      ' Noncompliant
+        Process.Start(".|file.fake")    ' Noncompliant
+        Process.Start("~/file.exe")     ' Noncompliant
+        Process.Start("...file.exe")    ' Noncompliant
+        Process.Start(".../file.exe")   ' Noncompliant
+        Process.Start("AA:/file.exe")   ' Noncompliant
+        Process.Start("0:/file.exe")    ' Noncompliant
+        Process.Start("Ř:/file.exe")    ' Noncompliant
+        Process.Start("ř:/file.exe")    ' Noncompliant
+        Process.Start("...\file.exe")   ' Noncompliant
+        Process.Start("AA:\file.exe")   ' Noncompliant
+        Process.Start("0:\file.exe")    ' Noncompliant
+        Process.Start("Ř:\file.exe")    ' Noncompliant
+        Process.Start("ř:\file.exe")    ' Noncompliant
     End Sub
 
 End Class

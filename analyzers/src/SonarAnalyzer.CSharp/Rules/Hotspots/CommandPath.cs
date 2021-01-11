@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -37,5 +38,8 @@ namespace SonarAnalyzer.Rules.CSharp
             InvocationTracker = new CSharpInvocationTracker(configuration, Rule);
             PropertyAccessTracker = new CSharpPropertyAccessTracker(configuration, Rule);
         }
+
+        protected override string FirstArgument(InvocationContext context) =>
+            ((InvocationExpressionSyntax)context.Invocation).ArgumentList.Get(0).FindStringConstant(context.SemanticModel);
     }
 }
