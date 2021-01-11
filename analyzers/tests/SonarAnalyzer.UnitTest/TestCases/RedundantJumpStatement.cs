@@ -217,9 +217,9 @@ namespace Tests.Diagnostics
     {
         public void DoSomething()
         {
-            Action a = () => throw new Exception(); // Noncompliant FP, it's a function declaration, not a jump
+            Action a = () => throw new Exception();
 
-            Invoke(() => throw new Exception()); // Noncompliant FP, it's a function declaration, not a jump
+            Invoke(() => throw new Exception());
         }
 
         void Invoke(Action a)
