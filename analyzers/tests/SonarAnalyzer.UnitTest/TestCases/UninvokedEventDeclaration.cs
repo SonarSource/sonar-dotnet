@@ -211,6 +211,7 @@ namespace Tests.Diagnostics
         public class ReproForIssue3931
         {
             public event SomeDelegate ActuallyUsedEvent; // Noncompliant FP
+            public event SomeDelegate OtherUsedEvent; // Noncompliant FP
 
             public void SomeMethod()
             {
@@ -220,6 +221,8 @@ namespace Tests.Diagnostics
                 {
                     invocation.DynamicInvoke(1623);
                 }
+
+                var unusedDelegates = OtherUsedEvent.GetInvocationList();
             }
         }
     }
