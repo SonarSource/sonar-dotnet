@@ -37,8 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class CollectionEmptinessCheckingFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Use Any() instead";
-        public override ImmutableArray<string> FixableDiagnosticIds =>
-            ImmutableArray.Create(DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(DiagnosticId);
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
@@ -81,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
             CountType type,
             CodeFixContext context)
         {
-            var countNode = countExpression.ChildNodes().OfType<MemberAccessExpressionSyntax>().FirstOrDefault();
+            var countNode = countExpression.ChildNodes().OfType<MemberAccessExpressionSyntax>().Single();
             var anyNode = countNode.WithName(SyntaxFactory.IdentifierName("Any"));
             ExpressionSyntax anyExpression = countExpression.ReplaceNode(countNode, anyNode);
             if (type.IsEmpty)

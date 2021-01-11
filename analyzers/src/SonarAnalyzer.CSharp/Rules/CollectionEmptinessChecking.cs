@@ -65,6 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
         }
+
         private static bool TryGetCountCall(ExpressionSyntax expression, SemanticModel semanticModel, out Location countLocation, out string typeArgument)
         {
             countLocation = null;
@@ -92,26 +93,26 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsMethodCountExtension(IMethodSymbol methodSymbol) =>
-            methodSymbol.Name == "Count" 
-            && methodSymbol.IsExtensionMethod 
+            methodSymbol.Name == "Count"
+            && methodSymbol.IsExtensionMethod
             && methodSymbol.ReceiverType != null;
 
         internal readonly struct CountType
         {
-            public CountType(int? left, SyntaxKind logical, int? right)
-            {
-                Left = left;
-                Right = right;
-                LogicalOperator = logical;
-            }
-
             public int? Left { get; }
             public int? Right { get; }
             public SyntaxKind LogicalOperator { get; }
             public bool IsValid => (Left.HasValue ^ Right.HasValue) && (IsEmpty || HasAny);
             public bool IsEmpty => Empties.Contains(this);
             public bool HasAny => Anys.Contains(this);
-            public override string ToString() => $"{Left} {LogicalOperator} {Right}";
+
+            private CountType(int? left, SyntaxKind logical, int? right)
+            {
+                Left = left;
+                Right = right;
+                LogicalOperator = logical;
+            }
+
             public static CountType FromExpression(BinaryExpressionSyntax binary)
             {
                 int? left = default;
@@ -127,7 +128,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return new CountType(left, binary.Kind(), right);
             }
 
-            private static int? Count() => default;
+            public override string ToString() => $"{Left} {LogicalOperator} {Right}";
+
             private static readonly CountType[] Empties = new[]
             {
                 new CountType(Count(), SyntaxKind.EqualsExpression, 0),
@@ -146,6 +148,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 new CountType(0, SyntaxKind.LessThanExpression, Count()),
                 new CountType(1, SyntaxKind.LessThanOrEqualExpression, Count()),
             };
+
+            private static int? Count() => default; // for readability only.
         }
     }
 }
