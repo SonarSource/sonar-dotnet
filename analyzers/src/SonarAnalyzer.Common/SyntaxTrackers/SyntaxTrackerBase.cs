@@ -56,7 +56,8 @@ namespace SonarAnalyzer.Helpers
 
                 if (baseContext != null)
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, baseContext.SecondaryLocations, diagnosticMessageArgs));
+                    c.ReportDiagnosticWhenActive(
+                        Diagnostic.Create(Rule, location, baseContext.SecondaryLocations.ToAdditionalLocations(), baseContext.SecondaryLocations.ToProperties(), diagnosticMessageArgs));
                 }
             }
         }

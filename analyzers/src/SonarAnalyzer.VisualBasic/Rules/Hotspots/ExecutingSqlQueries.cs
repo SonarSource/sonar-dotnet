@@ -97,14 +97,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     node = AssignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, node) as ExpressionSyntax;
                     location = GetSecondaryLocationForExpression(node, identifierName);
 
-                    if (location != Location.None)
-                    {
-                        context.AddSecondaryLocation(location);
-                    }
-
                     if (IsSensitiveExpression(node, context.SemanticModel))
                     {
+                        if (location != Location.None)
+                        {
+                            context.AddSecondaryLocation(new SecondaryLocation(location, string.Format(AssignmentWithFormattingMessage, identifierName)));
+                        }
+
                         return true;
+                    }
+                    else if (location != Location.None)
+                    {
+                        context.AddSecondaryLocation(new SecondaryLocation(location, string.Format(AssignmentMessage, identifierName)));
                     }
                 }
                 while (node is IdentifierNameSyntax);
