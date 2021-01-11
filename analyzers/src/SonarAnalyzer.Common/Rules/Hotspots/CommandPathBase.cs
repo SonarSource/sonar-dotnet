@@ -48,6 +48,11 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
                 c => IsInvalid(FirstArgument(c)));
+
+            PropertyAccessTracker.Track(context,
+                PropertyAccessTracker.MatchProperty(new MemberDescriptor(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
+                PropertyAccessTracker.MatchSetter(),
+                c => IsInvalid((string)PropertyAccessTracker.AssignedValue(c)));
         }
 
         private static bool IsInvalid(string path) =>

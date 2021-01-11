@@ -52,11 +52,11 @@ public class Program
     public void Properties(ProcessStartInfo arg)
     {
         arg.FileName = @"C:\file.exe";
-        arg.FileName = "file.exe";              // FN
+        arg.FileName = "file.exe";              // Noncompliant
         //FIXME: Mark location
 
         var psi = new ProcessStartInfo(@"C:\file.exe");
-        psi.FileName = "file.exe";              // FN
+        psi.FileName = "file.exe";              // Noncompliant
 
         psi = new ProcessStartInfo("bad.exe");  // Compliant, safe value is assigned later
         psi.FileName = @"C:\file.exe";

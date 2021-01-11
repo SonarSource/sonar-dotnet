@@ -49,10 +49,10 @@ Public Class Program
 
     Public Sub Properties(Arg As ProcessStartInfo)
         Arg.FileName = "C:\file.exe"
-        Arg.FileName = "file.exe"               ' FN
+        Arg.FileName = "file.exe"               ' Noncompliant
 
         Dim psi As New ProcessStartInfo("C:\file.exe")
-        psi.FileName = "file.exe"               ' FN
+        psi.FileName = "file.exe"               ' Noncompliant
 
         psi = New ProcessStartInfo("bad.exe")   ' Compliant, safe value Is assigned later
         psi.FileName = "C:\file.exe"
