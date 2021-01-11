@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                var type = CountType.FromExpression(binary);
+                var type = CountExpressionSyntax.FromBinaryExpression(binary);
                 var countExpression = type.Left.HasValue
                     ? binary.Right as InvocationExpressionSyntax
                     : binary.Left as InvocationExpressionSyntax;
@@ -77,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxNode root,
             BinaryExpressionSyntax binary,
             InvocationExpressionSyntax countExpression,
-            CountType type,
+            CountExpressionSyntax type,
             CodeFixContext context)
         {
             var countNode = countExpression.ChildNodes().OfType<MemberAccessExpressionSyntax>().Single();

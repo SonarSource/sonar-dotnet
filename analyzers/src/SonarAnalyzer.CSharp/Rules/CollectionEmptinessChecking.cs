@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckCount(BinaryExpressionSyntax binary, SyntaxNodeAnalysisContext context)
         {
-            var countType = CountType.FromExpression(binary);
+            var countType = CountExpressionSyntax.FromBinaryExpression(binary);
             if (countType.IsValid)
             {
                 var count = countType.Left.HasValue ? binary.Right : binary.Left;
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && methodSymbol.IsExtensionMethod
             && methodSymbol.ReceiverType != null;
 
-        internal readonly struct CountType
+        internal readonly struct CountExpressionSyntax
         {
             public int? Left { get; }
             public int? Right { get; }
@@ -106,14 +106,14 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool IsEmpty => Empties.Contains(this);
             public bool HasAny => Anys.Contains(this);
 
-            private CountType(int? left, SyntaxKind logical, int? right)
+            private CountExpressionSyntax(int? left, SyntaxKind logical, int? right)
             {
                 Left = left;
                 Right = right;
                 LogicalOperator = logical;
             }
 
-            public static CountType FromExpression(BinaryExpressionSyntax binary)
+            public static CountExpressionSyntax FromBinaryExpression(BinaryExpressionSyntax binary)
             {
                 int? left = default;
                 int? right = default;
@@ -125,30 +125,29 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     right = r_out;
                 };
-                return new CountType(left, binary.Kind(), right);
+                return new CountExpressionSyntax(left, binary.Kind(), right);
             }
 
             public override string ToString() => $"{Left} {LogicalOperator} {Right}";
 
-            private static readonly CountType[] Empties = new[]
+            private static readonly CountExpressionSyntax[] Empties = new[]
             {
-                new CountType(Count(), SyntaxKind.EqualsExpression, 0),
-                new CountType(Count(), SyntaxKind.LessThanExpression, 1),
-                new CountType(Count(), SyntaxKind.LessThanOrEqualExpression, 0),
-                new CountType(0, SyntaxKind.EqualsExpression, Count()),
-                new CountType(1, SyntaxKind.GreaterThanExpression, Count()),
-                new CountType(0, SyntaxKind.GreaterThanOrEqualExpression, Count()),
+                new CountExpressionSyntax(Count(), SyntaxKind.EqualsExpression, 0),
+                new CountExpressionSyntax(Count(), SyntaxKind.LessThanExpression, 1),
+                new CountExpressionSyntax(Count(), SyntaxKind.LessThanOrEqualExpression, 0),
+                new CountExpressionSyntax(0, SyntaxKind.EqualsExpression, Count()),
+                new CountExpressionSyntax(1, SyntaxKind.GreaterThanExpression, Count()),
+                new CountExpressionSyntax(0, SyntaxKind.GreaterThanOrEqualExpression, Count()),
             };
-            private static readonly CountType[] Anys = new[]
-            {
-                new CountType(Count(), SyntaxKind.NotEqualsExpression, 0),
-                new CountType(Count(), SyntaxKind.GreaterThanExpression, 0),
-                new CountType(Count(), SyntaxKind.GreaterThanOrEqualExpression, 1),
-                new CountType(0, SyntaxKind.NotEqualsExpression, Count()),
-                new CountType(0, SyntaxKind.LessThanExpression, Count()),
-                new CountType(1, SyntaxKind.LessThanOrEqualExpression, Count()),
+                private static readonly CountExpressionSyntax[] Anys = new[]
+                {
+                new CountExpressionSyntax(Count(), SyntaxKind.NotEqualsExpression, 0),
+                new CountExpressionSyntax(Count(), SyntaxKind.GreaterThanExpression, 0),
+                new CountExpressionSyntax(Count(), SyntaxKind.GreaterThanOrEqualExpression, 1),
+                new CountExpressionSyntax(0, SyntaxKind.NotEqualsExpression, Count()),
+                new CountExpressionSyntax(0, SyntaxKind.LessThanExpression, Count()),
+                new CountExpressionSyntax(1, SyntaxKind.LessThanOrEqualExpression, Count()),
             };
-
             private static int? Count() => default; // for readability only.
         }
     }
