@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Helpers
                     .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement));
 
                 return assignment != null &&
-                    assignment.Right.IsConstant(context.SemanticModel);
+                    assignment.Right.HasConstantValue(context.SemanticModel);
             };
 
         #endregion

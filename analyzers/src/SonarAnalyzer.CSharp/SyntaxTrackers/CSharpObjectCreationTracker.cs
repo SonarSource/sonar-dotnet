@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
         internal override ObjectCreationCondition ArgumentAtIndexIsConst(int index) =>
             context => ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList is { } argumentList
                         && argumentList.Arguments.Count > index
-                        && argumentList.Arguments[index].Expression.IsConstant(context.SemanticModel);
+                        && argumentList.Arguments[index].Expression.HasConstantValue(context.SemanticModel);
 
         internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName)
         {

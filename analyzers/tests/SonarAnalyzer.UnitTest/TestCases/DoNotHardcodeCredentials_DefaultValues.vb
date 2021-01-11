@@ -178,13 +178,15 @@ Namespace Tests.Diagnostics
 
             networkCredential = New NetworkCredential("username", SecretConst)           ' Noncompliant {{Please review this hard-coded password.}}
             networkCredential = New NetworkCredential("username", SecretLocalConst)      ' Noncompliant {{Please review this hard-coded password.}}
-            networkCredential = New NetworkCredential("username", SecretField)           ' FN
-            networkCredential = New NetworkCredential("username", SecretFieldConst)      ' FN
-            networkCredential = New NetworkCredential("username", SecretVariable)        ' FN
-            networkCredential = New NetworkCredential("username", SecretVariableConst)   ' FN
+            networkCredential = New NetworkCredential("username", SecretField)           ' Noncompliant
+            networkCredential = New NetworkCredential("username", SecretFieldConst)      ' Noncompliant
+            networkCredential = New NetworkCredential("username", SecretVariable)        ' Noncompliant
+            networkCredential = New NetworkCredential("username", SecretVariableConst)   ' Noncompliant
             networkCredential = New NetworkCredential("username", "hardcoded")           ' Noncompliant {{Please review this hard-coded password.}}
             networkCredential = New NetworkCredential("username", "hardcoded", "domain") ' Noncompliant {{Please review this hard-coded password.}}
             networkCredential.Password = "hardcoded"                                     ' Noncompliant {{Please review this hard-coded password.}}
+            networkCredential.Password = SecretField                                     ' Noncompliant
+            networkCredential.Password = SecretVariable                                  ' Noncompliant
             passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray)                               'Noncompliant {{Please review this hard-coded password.}}
             passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, cspParams)                    'Noncompliant {{Please review this hard-coded password.}}
             passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1)             'Noncompliant {{Please review this hard-coded password.}}
@@ -196,6 +198,8 @@ Namespace Tests.Diagnostics
             networkCredential = New NetworkCredential("username", SecretFieldMethod)
             networkCredential = New NetworkCredential("username", SecretVariableNull)
             networkCredential = New NetworkCredential("username", SecretVariableMethod)
+            networkCredential.Password = SecretFieldMethod
+            networkCredential.Password = SecretVariableMethod
         End Sub
 
         Public Sub CompliantParameterUse(pwd As String)
