@@ -105,9 +105,9 @@ From Visual Studio, make sure `SonarAnalyzer.Vsix.csproj` is selected as startup
 1. Make sure SonarLint for Visual Studio is uninstalled
 1. Hit `F5` to launch the experimental instance of Visual Studio
 1. Open one of the following solutions from the experimental instance:
-    - [Akka.NET](akka.net/src/Akka.sln)
-    - [Nancy](Nancy/src/Nancy.sln)
-    - [Ember-MM](Ember-MM/Ember%20Media%20Manager.sln)
+    - [Akka.NET](../analyzers/its/sources/akka.net/src/Akka.sln)
+    - [Nancy](../analyzers/its/sources/Nancy/src/Nancy.sln)
+    - [Ember-MM](../analyzers/its/sources/Ember-MM/Ember%20Media%20Manager.sln)
 1. Turn on your new rule in [Validation Ruleset](../analyzers/its/ValidationRuleset.ruleset), review the results, improve, and setup the regression test once you are satisfied.
     - Note: the solutions have been pre-configured to use this ruleset on all their projects.
     - Note: for rules that need project-specific configuration, you need to manually add the link to the project-specific SonarLint.xml file
