@@ -212,9 +212,9 @@ namespace Tests.Diagnostics
         {
             public event SomeDelegate ActuallyUsedEvent; // Noncompliant FP
 
-            public void SomeMethod(SomeDelegate usedEvent)
+            public void SomeMethod()
             {
-                var invocations = usedEvent.GetInvocationList();
+                var invocations = ActuallyUsedEvent.GetInvocationList();
 
                 foreach (var invocation in invocations)
                 {
