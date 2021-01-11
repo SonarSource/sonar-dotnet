@@ -53,12 +53,16 @@ public class Program
     {
         arg.FileName = @"C:\file.exe";
         arg.FileName = "file.exe";              // Noncompliant
-        //FIXME: Mark location
 
         var psi = new ProcessStartInfo(@"C:\file.exe");
         psi.FileName = "file.exe";              // Noncompliant
 
         psi = new ProcessStartInfo("bad.exe");  // Noncompliant, later assignment is not tracked
+        psi.FileName = @"C:\file.exe";
+
+        psi = new ProcessStartInfo() { FileName = @"C:\file.exe" };
+        psi = new ProcessStartInfo() { FileName = "bad.exe" };     // Noncompliant
+        psi = new ProcessStartInfo() { FileName = "bad.exe" };     // Noncompliant FP, value is reassigned later
         psi.FileName = @"C:\file.exe";
     }
 

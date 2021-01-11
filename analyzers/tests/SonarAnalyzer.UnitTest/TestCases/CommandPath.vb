@@ -56,6 +56,11 @@ Public Class Program
 
         psi = New ProcessStartInfo("bad.exe")   ' Noncompliant, later assignment is not tracked
         psi.FileName = "C:\file.exe"
+
+        psi = New ProcessStartInfo() With {.FileName = "C:\file.exe"}
+        psi = New ProcessStartInfo() With {.FileName = "bad.exe"}   ' FN
+        psi = New ProcessStartInfo() With {.FileName = "bad.exe"}   ' Compliant, reassigned later
+        psi.FileName = "C:\file.exe"
     End Sub
 
     Private Sub Run(Psi As ProcessStartInfo)
