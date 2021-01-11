@@ -204,5 +204,26 @@ namespace Tests.Diagnostics
                 outer.MyAction6?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/3931
+        public delegate void SomeDelegate(int a);
+
+        public class ReproForIssue3931
+        {
+            public event SomeDelegate ActuallyUsedEvent; // Noncompliant FP
+            public event SomeDelegate OtherUsedEvent; // Noncompliant FP
+
+            public void SomeMethod()
+            {
+                var invocations = ActuallyUsedEvent.GetInvocationList();
+
+                foreach (var invocation in invocations)
+                {
+                    invocation.DynamicInvoke(1623);
+                }
+
+                var unusedDelegates = OtherUsedEvent.GetInvocationList();
+            }
+        }
     }
 }

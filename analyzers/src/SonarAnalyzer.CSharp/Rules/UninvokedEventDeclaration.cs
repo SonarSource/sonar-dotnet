@@ -38,27 +38,23 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3264";
         private const string MessageFormat = "Remove the unused event '{0}' or invoke it.";
 
-        private static readonly Accessibility maxAccessibility = Accessibility.Public;
+        private static readonly Accessibility MaxAccessibility = Accessibility.Public;
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ISet<SyntaxKind> eventSyntax = new HashSet<SyntaxKind>
+        private static readonly ISet<SyntaxKind> EventSyntax = new HashSet<SyntaxKind>
         {
             SyntaxKind.EventFieldDeclaration,
         };
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(RaiseOnUninvokedEventDeclaration, SymbolKind.NamedType);
-        }
 
         private void RaiseOnUninvokedEventDeclaration(SymbolAnalysisContext context)
         {
             var namedType = (INamedTypeSymbol)context.Symbol;
-            if (!namedType.IsClassOrStruct() ||
-                namedType.ContainingType != null)
+            if (!namedType.IsClassOrStruct() || namedType.ContainingType != null)
             {
                 return;
             }
@@ -66,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, context.Compilation);
 
             var removableEventFields = removableDeclarationCollector
-                .GetRemovableFieldLikeDeclarations(eventSyntax, maxAccessibility)
+                .GetRemovableFieldLikeDeclarations(EventSyntax, MaxAccessibility)
                 .ToList();
 
             if (!removableEventFields.Any())
@@ -74,15 +70,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var invokedSymbols = GetInvokedEventSymbols(removableDeclarationCollector);
-            var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
-
             removableEventFields
                 .Where(IsNotInvoked)
                 .Where(IsNotCopied)
                 .ToList()
                 .ForEach(x => context.ReportDiagnosticIfNonGenerated(
-                    Diagnostic.Create(rule, GetLocation(x.SyntaxNode), x.Symbol.Name)));
+                    Diagnostic.Create(Rule, GetLocation(x.SyntaxNode), x.Symbol.Name)));
 
             Location GetLocation(SyntaxNode node) =>
                 node is VariableDeclaratorSyntax variableDeclarator
@@ -90,10 +83,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     : ((EventDeclarationSyntax)node).Identifier.GetLocation();
 
             bool IsNotInvoked(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
-                !invokedSymbols.Contains(tuple.Symbol);
+                !GetInvokedEventSymbols(removableDeclarationCollector).Contains(tuple.Symbol);
 
             bool IsNotCopied(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
-                !possiblyCopiedSymbols.Contains(tuple.Symbol);
+                !GetPossiblyCopiedSymbols(removableDeclarationCollector).Contains(tuple.Symbol);
         }
 
         private static ISet<ISymbol> GetInvokedEventSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)
@@ -110,8 +103,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             Symbol = container.SemanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol
                         }))
                  .Where(tuple =>
-                    tuple.Symbol != null &&
-                    IsDelegateInvocation(tuple.Symbol));
+                    tuple.Symbol != null
+                    && IsDelegateInvocation(tuple.Symbol));
 
             var invokedEventSymbols = delegateInvocations
                 .Select(tuple =>
@@ -177,7 +170,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var node in allNodes)
             {
-
                 if (node.SemanticModel.GetSymbolInfo(node.SyntaxNode).Symbol is IEventSymbol symbol)
                 {
                     usedSymbols.Add(symbol.OriginalDefinition);
@@ -200,44 +192,35 @@ namespace SonarAnalyzer.Rules.CSharp
                 invokedMethodName = memberBinding.Name;
             }
 
-            if ((memberAccess != null || memberBinding != null) &&
-                expression != null &&
-                IsExplicitDelegateInvocation(symbol, invokedMethodName))
-            {
-                return expression;
-            }
-
-            return invocation.Expression;
+            return (memberAccess != null || memberBinding != null)
+                   && expression != null
+                   && IsExplicitDelegateInvocation(symbol, invokedMethodName)
+                ? expression
+                : invocation.Expression;
         }
 
-        private static bool IsExplicitDelegateInvocation(IMethodSymbol symbol, SimpleNameSyntax invokedMethodName)
-        {
-            if (IsDynamicInvoke(symbol) ||
-                IsBeginInvoke(symbol))
-            {
-                return true;
-            }
-
-            return symbol.MethodKind == MethodKind.DelegateInvoke && invokedMethodName.Identifier.ValueText == "Invoke";
-        }
+        private static bool IsExplicitDelegateInvocation(IMethodSymbol symbol, SimpleNameSyntax invokedMethodName) =>
+            IsDynamicInvoke(symbol)
+            || IsBeginInvoke(symbol)
+            || (symbol.MethodKind == MethodKind.DelegateInvoke && invokedMethodName.Identifier.ValueText == "Invoke");
 
         private static bool IsDelegateInvocation(IMethodSymbol symbol) =>
-            symbol.MethodKind == MethodKind.DelegateInvoke ||
-            IsInvoke(symbol) ||
-            IsDynamicInvoke(symbol) ||
-            IsBeginInvoke(symbol);
+            symbol.MethodKind == MethodKind.DelegateInvoke
+            || IsInvoke(symbol)
+            || IsDynamicInvoke(symbol)
+            || IsBeginInvoke(symbol);
 
         private static bool IsInvoke(IMethodSymbol symbol) =>
-            symbol.MethodKind == MethodKind.Ordinary &&
-            symbol.Name == nameof(EventHandler.Invoke);
+            symbol.MethodKind == MethodKind.Ordinary
+            && symbol.Name == nameof(EventHandler.Invoke);
 
         private static bool IsDynamicInvoke(IMethodSymbol symbol) =>
-            symbol.MethodKind == MethodKind.Ordinary &&
-            symbol.Name == nameof(Delegate.DynamicInvoke) &&
-            symbol.ReceiverType.OriginalDefinition.Is(KnownType.System_Delegate);
+            symbol.MethodKind == MethodKind.Ordinary
+            && symbol.Name == nameof(Delegate.DynamicInvoke)
+            && symbol.ReceiverType.OriginalDefinition.Is(KnownType.System_Delegate);
 
         private static bool IsBeginInvoke(IMethodSymbol symbol) =>
-            symbol.MethodKind == MethodKind.Ordinary &&
-            symbol.Name == nameof(EventHandler.BeginInvoke);
+            symbol.MethodKind == MethodKind.Ordinary
+            && symbol.Name == nameof(EventHandler.BeginInvoke);
     }
 }
