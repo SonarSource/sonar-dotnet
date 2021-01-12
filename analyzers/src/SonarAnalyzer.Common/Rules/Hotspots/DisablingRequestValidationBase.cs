@@ -61,8 +61,9 @@ namespace SonarAnalyzer.Rules
                         a.ConstructorArguments.Length == 1
                         && a.ConstructorArguments[0].Kind == TypedConstantKind.Primitive
                         && a.ConstructorArguments[0].Value is bool b
-                        && b == false);
-                    if (attributeWithFalseParameter != null && attributeWithFalseParameter.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute))
+                        && b == false
+                        && a.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
+                    if (attributeWithFalseParameter != null)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                     }

@@ -17,6 +17,13 @@ namespace Tests.Diagnostics
             return null;
         }
 
+        [CLSCompliant(false)]
+        [ValidateInput(false)] // Noncompliant
+        public ActionResult WithTwoFalse(string input)
+        {
+            return Foo(input);
+        }
+
         [HttpPost]
         [ValidateInput(false)] // Noncompliant
         [Obsolete]
@@ -24,6 +31,7 @@ namespace Tests.Diagnostics
         {
             return Foo(input);
         }
+
 
         [ValidateInput(false)] // Noncompliant
         public ActionResult FooNoParam()
