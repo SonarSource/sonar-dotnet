@@ -23,18 +23,13 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    /// <summary>
-    /// Syntax and semantic information about a single method invocation.
-    /// </summary>
-    public class InvocationContext : BaseContext
+    public class InvocationContext : SyntaxBaseContext
     {
-        public SyntaxNode Invocation { get; }
         public string MethodName { get; }
         public Lazy<IMethodSymbol> MethodSymbol { get; }
 
-        public InvocationContext(SyntaxNode invocation, string methodName, SemanticModel semanticModel) : base(semanticModel)
+        public InvocationContext(SyntaxNode invocation, string methodName, SemanticModel semanticModel) : base(invocation, semanticModel)
         {
-            Invocation = invocation;
             MethodName = methodName;
             MethodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol);
         }

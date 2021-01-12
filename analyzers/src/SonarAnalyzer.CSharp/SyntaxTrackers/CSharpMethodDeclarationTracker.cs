@@ -28,9 +28,7 @@ using SonarAnalyzer.ShimLayer.CSharp;
 namespace SonarAnalyzer.Helpers
 {
     public class CSharpMethodDeclarationTracker : MethodDeclarationTracker
-    {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharp.CSharpGeneratedCodeRecognizer.Instance;
-
+    { 
         public CSharpMethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override MethodDeclarationCondition ParameterAtIndexIsUsed(int index) =>

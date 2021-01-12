@@ -23,20 +23,15 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using BaseClassCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.BaseTypeContext>;
 
 namespace SonarAnalyzer.Helpers
 {
     /// <summary>
-    /// Checker method called by <see cref="BaseClassTracker"/> to check whether
-    /// an issue should be reported because of a type the class is inheriting from.
-    /// </summary>
-    public delegate bool BaseClassCondition(BaseTypeContext context, out Location issueLocation);
-
-    /// <summary>
     /// Tracker class for rules that check the inheritance tree for e.g. disallowed base classes.
     /// </summary>
     /// <typeparam name="TSyntaxKind">The syntax type.</typeparam>
-    public abstract class BaseTypeTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, BaseClassCondition>
+    public abstract class BaseTypeTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, BaseTypeContext>
         where TSyntaxKind : struct
     {
         /// <summary>
@@ -49,43 +44,26 @@ namespace SonarAnalyzer.Helpers
         internal BaseClassCondition MatchSubclassesOf(params KnownType[] types)
         {
             var immutableTypes = types.ToImmutableArray();
-            return (BaseTypeContext context, out Location issueLocation) =>
+            return (context) =>
             {
                 foreach (var baseTypeNode in context.AllBaseTypeNodes)
                 {
                     if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type.DerivesOrImplementsAny(immutableTypes))
                     {
-                        issueLocation = baseTypeNode.GetLocation();
+                        context.PrimaryLocation = baseTypeNode.GetLocation();
                         return true; // assume there won't be more than one matching node
                     }
                 }
 
-                issueLocation = null;
+                context.PrimaryLocation = null;
                 return false;
             };
         }
 
-        protected override BaseContext IsTracked(SyntaxNode expression, SemanticModel semanticModel, BaseClassCondition[] conditions, out Location location)
-        {
-            location = Location.None;
-
-            var baseTypeList = GetBaseTypeNodes(expression);
-            if (baseTypeList == null || !baseTypeList.Any())
-            {
-                return null;
-            }
-
-            var context = new BaseTypeContext(expression, baseTypeList, semanticModel);
-
-            // We can't pass the issueLocation to the lambda directly so we need a temporary variable
-            Location locationToReport = null;
-            if (conditions.All(c => c(context, out locationToReport)))
-            {
-                location = locationToReport;
-                return context;
-            }
-
-            return null;
-        }
+        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel) =>
+            GetBaseTypeNodes(expression) is { } baseTypeList
+            && baseTypeList.Any()
+            ? new BaseTypeContext(expression, baseTypeList, semanticModel)
+            : null;
     }
 }

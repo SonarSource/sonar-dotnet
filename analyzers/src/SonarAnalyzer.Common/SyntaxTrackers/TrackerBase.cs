@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly IAnalyzerConfiguration analyzerConfiguration;
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
         protected DiagnosticDescriptor Rule { get; }
 
         protected TrackerBase(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)

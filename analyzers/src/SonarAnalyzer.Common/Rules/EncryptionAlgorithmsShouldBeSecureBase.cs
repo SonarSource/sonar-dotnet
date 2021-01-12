@@ -30,8 +30,8 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S5542";
         private const string MessageFormat = "Use secure mode and padding scheme.";
 
-        protected abstract PropertyAccessCondition IsInsideObjectInitializer();
-        protected abstract InvocationCondition HasPkcs1PaddingArgument();
+        protected abstract TrackingCondition<PropertyAccessContext> IsInsideObjectInitializer();
+        protected abstract TrackingCondition<InvocationContext> HasPkcs1PaddingArgument();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
         protected DiagnosticDescriptor Rule { get; }

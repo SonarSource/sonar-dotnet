@@ -35,8 +35,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void IsMatch()
         {
             var context = CreateContext();
-            InvocationCondition trueCondition = _ => true;
-            InvocationCondition falseCondition = _ => false;
+            TrackingCondition<InvocationContext> trueCondition = _ => true;
+            TrackingCondition<InvocationContext> falseCondition = _ => false;
             BuilderPatternDescriptor<InvocationExpressionSyntax> descriptor;
 
             descriptor = new BuilderPatternDescriptor<InvocationExpressionSyntax>(true);
@@ -62,11 +62,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             var trueDescriptor = new BuilderPatternDescriptor<InvocationExpressionSyntax>(true);
             trueDescriptor.IsValid(null).Should().BeTrue();
-            trueDescriptor.IsValid(context.Invocation as InvocationExpressionSyntax).Should().BeTrue();
+            trueDescriptor.IsValid(context.Node as InvocationExpressionSyntax).Should().BeTrue();
 
             var falseDescriptor = new BuilderPatternDescriptor<InvocationExpressionSyntax>(false);
             falseDescriptor.IsValid(null).Should().BeFalse();
-            falseDescriptor.IsValid(context.Invocation as InvocationExpressionSyntax).Should().BeFalse();
+            falseDescriptor.IsValid(context.Node as InvocationExpressionSyntax).Should().BeFalse();
         }
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             var descriptor = new BuilderPatternDescriptor<InvocationExpressionSyntax>(invocation => invocation != null);
             descriptor.IsValid(null).Should().BeFalse();
-            descriptor.IsValid(context.Invocation as InvocationExpressionSyntax).Should().BeTrue();
+            descriptor.IsValid(context.Node as InvocationExpressionSyntax).Should().BeTrue();
         }
 
         private static InvocationContext CreateContext()

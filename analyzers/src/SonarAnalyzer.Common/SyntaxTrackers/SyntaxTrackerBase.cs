@@ -18,25 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class SyntaxTrackerBase<TSyntaxKind, TCondition> : TrackerBase
-        where TSyntaxKind : struct
-    {
-        protected abstract TSyntaxKind[] TrackedSyntaxKinds { get; }
+    public delegate bool TrackingCondition<in TContext>(TContext trackingContext);
 
-        protected abstract BaseContext IsTracked(SyntaxNode expression, SemanticModel semanticModel, TCondition[] conditions, out Location location);
+    public abstract class SyntaxTrackerBase<TSyntaxKind, TContext> : TrackerBase
+        where TSyntaxKind : struct
+        where TContext : SyntaxBaseContext
+    {
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract TSyntaxKind[] TrackedSyntaxKinds { get; }
+        protected abstract SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel);
 
         protected SyntaxTrackerBase(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        public void Track(SonarAnalysisContext context, params TCondition[] conditions) =>
+        public void Track(SonarAnalysisContext context, params TrackingCondition<TContext>[] conditions) =>
             Track(context, new object[0], conditions);
 
-        public void Track(SonarAnalysisContext context, object[] diagnosticMessageArgs, params TCondition[] conditions)
+        public void Track(SonarAnalysisContext context, object[] diagnosticMessageArgs, params TrackingCondition<TContext>[] conditions)
         {
             context.RegisterCompilationStartAction(
               c =>
@@ -52,12 +56,17 @@ namespace SonarAnalyzer.Helpers
 
             void TrackAndReportIfNecessary(SyntaxNodeAnalysisContext c)
             {
-                var baseContext = IsTracked(c.Node, c.SemanticModel, conditions, out var location);
-
-                if (baseContext != null)
+                if (CreateContext(c.Node, c.SemanticModel) is { } trackingContext
+                    && conditions.All(c => c((TContext)trackingContext))
+                    && trackingContext.PrimaryLocation != null
+                    && trackingContext.PrimaryLocation != Location.None)
                 {
                     c.ReportDiagnosticWhenActive(
-                        Diagnostic.Create(Rule, location, baseContext.SecondaryLocations.ToAdditionalLocations(), baseContext.SecondaryLocations.ToProperties(), diagnosticMessageArgs));
+                        Diagnostic.Create(Rule,
+                                          trackingContext.PrimaryLocation,
+                                          trackingContext.SecondaryLocations.ToAdditionalLocations(),
+                                          trackingContext.SecondaryLocations.ToProperties(),
+                                          diagnosticMessageArgs));
                 }
             }
         }

@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicMethodDeclarationTracker : MethodDeclarationTracker
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
-
         public VisualBasicMethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override MethodDeclarationCondition ParameterAtIndexIsUsed(int index) =>

@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
+using FieldAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.FieldAccessContext>;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -40,15 +41,15 @@ namespace SonarAnalyzer.Helpers
         public CSharpFieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override FieldAccessCondition WhenRead() =>
-            context => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+            context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
         public override FieldAccessCondition MatchSet() =>
-            context => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+            context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
         public override FieldAccessCondition AssignedValueIsConstant() =>
             context =>
             {
-                var assignment = (AssignmentExpressionSyntax)context.Expression.Ancestors()
+                var assignment = (AssignmentExpressionSyntax)context.Node.Ancestors()
                     .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression));
 
                 return assignment != null &&

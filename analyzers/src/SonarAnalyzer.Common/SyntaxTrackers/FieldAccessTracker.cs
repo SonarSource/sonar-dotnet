@@ -18,15 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using FieldAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.FieldAccessContext>;
 
 namespace SonarAnalyzer.Helpers
 {
-    public delegate bool FieldAccessCondition(FieldAccessContext invocationContext);
-
-    public abstract class FieldAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, FieldAccessCondition>
+    public abstract class FieldAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, FieldAccessContext>
         where TSyntaxKind : struct
     {
         public abstract FieldAccessCondition WhenRead();
@@ -43,10 +41,8 @@ namespace SonarAnalyzer.Helpers
         public FieldAccessCondition MatchField(params MemberDescriptor[] fields) =>
             context => MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, CaseInsensitiveComparison, fields);
 
-        protected override BaseContext IsTracked(SyntaxNode expression, SemanticModel semanticModel, FieldAccessCondition[] conditions, out Location location)
+        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel)
         {
-            location = Location.None;
-
             // We register for both MemberAccess and IdentifierName and we want to
             // avoid raising two times for the same identifier.
             if (IsIdentifierWithinMemberAccess(expression))
@@ -54,15 +50,7 @@ namespace SonarAnalyzer.Helpers
                 return null;
             }
 
-            var fieldName = GetFieldName(expression);
-            if (fieldName == null)
-            {
-                return null;
-            }
-
-            var context = new FieldAccessContext(expression, fieldName, semanticModel);
-            location = expression.GetLocation();
-            return conditions.All(c => c(context)) ? context : null;
+            return GetFieldName(expression) is string fieldName ? new FieldAccessContext(expression, fieldName, semanticModel) : null;
         }
     }
 }

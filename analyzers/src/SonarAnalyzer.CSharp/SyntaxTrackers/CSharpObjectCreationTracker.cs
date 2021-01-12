@@ -33,14 +33,14 @@ namespace SonarAnalyzer.Helpers
 
         public CSharpObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        internal override ObjectCreationCondition ArgumentAtIndexIsConst(int index) =>
-            context => ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList is { } argumentList
+        internal override TrackingCondition<ObjectCreationContext> ArgumentAtIndexIsConst(int index) =>
+            context => ((ObjectCreationExpressionSyntax)context.Node).ArgumentList is { } argumentList
                        && argumentList.Arguments.Count > index
                        && argumentList.Arguments[index].Expression.HasConstantValue(context.SemanticModel);
 
         internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName)
         {
-            var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
+            var argumentList = ((ObjectCreationExpressionSyntax)context.Node).ArgumentList;
             var values = CSharpSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName);
             return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
                 ? valueSyntax.FindConstantValue(context.SemanticModel)

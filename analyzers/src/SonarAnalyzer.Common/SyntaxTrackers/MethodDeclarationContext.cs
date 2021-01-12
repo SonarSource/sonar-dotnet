@@ -22,9 +22,6 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    /// <summary>
-    /// Syntax and semantic information about a single method declaration.
-    /// </summary>
     public class MethodDeclarationContext
     {
         private readonly Compilation compilation;

@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers.CSharp;
+using ElementAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.ElementAccessContext>;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -34,15 +35,15 @@ namespace SonarAnalyzer.Helpers
         public CSharpElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override ElementAccessCondition ArgumentAtIndexEquals(int index, string value) =>
-            context => ((ElementAccessExpressionSyntax)context.Expression).ArgumentList is { } argumentList
+            context => ((ElementAccessExpressionSyntax)context.Node).ArgumentList is { } argumentList
                        && index < argumentList.Arguments.Count
                        && argumentList.Arguments[index].Expression.FindStringConstant(context.SemanticModel) == value;
 
         public override ElementAccessCondition MatchSetter() =>
-            context => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+            context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
         public override ElementAccessCondition MatchProperty(MemberDescriptor member) =>
-            context => ((ElementAccessExpressionSyntax)context.Expression).Expression is MemberAccessExpressionSyntax memberAccess
+            context => ((ElementAccessExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax memberAccess
                        && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
                        && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
                        && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type);

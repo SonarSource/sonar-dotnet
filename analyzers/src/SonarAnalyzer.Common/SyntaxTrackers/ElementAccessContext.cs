@@ -23,18 +23,11 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    /// <summary>
-    /// Syntax and semantic information about a single element access.
-    /// </summary>
-    public class ElementAccessContext : BaseContext
+    public class ElementAccessContext : SyntaxBaseContext
     {
-        public SyntaxNode Expression { get; }
         public Lazy<IPropertySymbol> InvokedPropertySymbol { get; }
 
-        public ElementAccessContext(SyntaxNode invocation, SemanticModel semanticModel) : base(semanticModel)
-        {
-            Expression = invocation;
-            InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(Expression).Symbol as IPropertySymbol);
-        }
+        public ElementAccessContext(SyntaxNode expression, SemanticModel semanticModel) : base(expression, semanticModel) =>
+            InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(Node).Symbol as IPropertySymbol);
     }
 }

@@ -19,15 +19,13 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using ObjectCreationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.ObjectCreationContext>;
 
 namespace SonarAnalyzer.Helpers
 {
-    public delegate bool ObjectCreationCondition(ObjectCreationContext context);
-
-    public abstract class ObjectCreationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ObjectCreationCondition>
+    public abstract class ObjectCreationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ObjectCreationContext>
         where TSyntaxKind : struct
     {
         internal abstract ObjectCreationCondition ArgumentAtIndexIsConst(int index);
@@ -66,11 +64,7 @@ namespace SonarAnalyzer.Helpers
                        && context.InvokedConstructorSymbol.Value.IsConstructor()
                        && context.InvokedConstructorSymbol.Value.ContainingType.Implements(baseType);
 
-        protected override BaseContext IsTracked(SyntaxNode expression, SemanticModel semanticModel, ObjectCreationCondition[] conditions, out Location location)
-        {
-            var context = new ObjectCreationContext(expression, semanticModel);
-            location = expression.GetLocation();
-            return conditions.All(c => c(context)) ? context : null;
-        }
+        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel) =>
+            new ObjectCreationContext(expression, semanticModel);
     }
 }

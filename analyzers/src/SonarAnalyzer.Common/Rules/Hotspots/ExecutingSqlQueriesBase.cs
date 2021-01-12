@@ -21,6 +21,7 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
+using InvocationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.InvocationContext>;
 
 namespace SonarAnalyzer.Rules
 {
@@ -154,7 +155,7 @@ namespace SonarAnalyzer.Rules
         private InvocationCondition MethodHasRawSqlQueryParameter() =>
             context =>
             {
-                var invocationExpression = GetInvocationExpression(context.Invocation);
+                var invocationExpression = GetInvocationExpression(context.Node);
 
                 return invocationExpression != null
                        && context.SemanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol methodSymbol

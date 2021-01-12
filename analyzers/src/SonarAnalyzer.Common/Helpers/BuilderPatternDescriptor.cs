@@ -21,6 +21,7 @@
 using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using InvocationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.InvocationContext>;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -30,9 +31,7 @@ namespace SonarAnalyzer.Helpers
         private readonly InvocationCondition[] invocationConditions;
         private readonly Func<TInvocationSyntax, bool> isValid;
 
-        public BuilderPatternDescriptor(bool isValid, params InvocationCondition[] invocationConditions)
-            : this(invocation => isValid, invocationConditions)
-        { }
+        public BuilderPatternDescriptor(bool isValid, params InvocationCondition[] invocationConditions) : this(invocation => isValid, invocationConditions) { }
 
         public BuilderPatternDescriptor(Func<TInvocationSyntax, bool> isValid, params InvocationCondition[] invocationConditions)
         {
@@ -41,9 +40,9 @@ namespace SonarAnalyzer.Helpers
         }
 
         public bool IsMatch(InvocationContext context) =>
-            this.invocationConditions.All(x => x(context));
+            invocationConditions.All(x => x(context));
 
         public bool IsValid(TInvocationSyntax invocation) =>
-            this.isValid(invocation);
+            isValid(invocation);
     }
 }

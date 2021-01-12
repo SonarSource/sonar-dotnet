@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers.CSharp;
+using InvocationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.InvocationContext>;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -35,17 +36,17 @@ namespace SonarAnalyzer.Helpers
         public CSharpInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override InvocationCondition ArgumentAtIndexIsConstant(int index) =>
-            context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
+            context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
                        && argumentList.Arguments.Count > index
                        && argumentList.Arguments[index].Expression.HasConstantValue(context.SemanticModel);
 
         public override InvocationCondition ArgumentAtIndexIsAny(int index, params string[] values) =>
-            context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
+            context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
                        && index < argumentList.Arguments.Count
                        && values.Contains(argumentList.Arguments[index].Expression.FindStringConstant(context.SemanticModel));
 
         public override InvocationCondition MatchProperty(MemberDescriptor member) =>
-            context => ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess
+            context => ((InvocationExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax methodMemberAccess
                        && methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
                        && methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess
                        && propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
@@ -54,7 +55,7 @@ namespace SonarAnalyzer.Helpers
 
         internal override object ConstArgumentForParameter(InvocationContext context, string parameterName)
         {
-            var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
+            var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
             var values = CSharpSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName);
             return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
                 ? valueSyntax.FindConstantValue(context.SemanticModel)

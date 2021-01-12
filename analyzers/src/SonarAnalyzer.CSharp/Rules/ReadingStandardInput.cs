@@ -50,6 +50,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override bool WhenResultIsNotIgnored(InvocationContext context) =>
-            !context.Invocation.Parent.IsKind(SyntaxKind.ExpressionStatement);
+            !context.Node.Parent.IsKind(SyntaxKind.ExpressionStatement);
     }
 }

@@ -18,15 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using InvocationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.InvocationContext>;
 
 namespace SonarAnalyzer.Helpers
 {
-    public delegate bool InvocationCondition(InvocationContext invocationContext);
-
-    public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, InvocationCondition>
+    public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, InvocationContext>
         where TSyntaxKind : struct
     {
         private readonly bool caseInsensitiveComparison;
@@ -69,18 +67,7 @@ namespace SonarAnalyzer.Helpers
             context => ConstArgumentForParameter(context, parameterName) is bool boolValue
                        && boolValue == expectedValue;
 
-        protected override BaseContext IsTracked(SyntaxNode expression, SemanticModel semanticModel, InvocationCondition[] conditions, out Location location)
-        {
-            var methodName = GetMethodName(expression);
-            if (methodName == null)
-            {
-                location = Location.None;
-                return null;
-            }
-
-            var context = new InvocationContext(expression, methodName, semanticModel);
-            location = expression.GetLocation();
-            return conditions.All(c => c(context)) ? context : null;
-        }
+        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel) =>
+            GetMethodName(expression) is string methodName ? new InvocationContext(expression, methodName, semanticModel) : null;
     }
 }

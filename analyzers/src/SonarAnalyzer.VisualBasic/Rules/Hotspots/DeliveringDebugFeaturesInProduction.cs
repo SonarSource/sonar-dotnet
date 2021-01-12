@@ -45,9 +45,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
         internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analyzerConfiguration) =>
             InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
 
-        protected override InvocationCondition IsInvokedConditionally() =>
+        protected override TrackingCondition<InvocationContext> IsInvokedConditionally() =>
             context =>
-                context.Invocation.FirstAncestorOrSelf<StatementSyntax>() is { } invocationStatement
+                context.Node.FirstAncestorOrSelf<StatementSyntax>() is { } invocationStatement
                 && invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));
 
         private static bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>

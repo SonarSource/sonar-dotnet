@@ -54,17 +54,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 : null;
 
         protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
-            context.Invocation is InvocationExpressionSyntax invocation
+            context.Node is InvocationExpressionSyntax invocation
                 ? invocation.ArgumentList.Get(index)
                 : null;
 
         protected override ExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index) =>
-            context.Expression is ObjectCreationExpressionSyntax objectCreation
+            context.Node is ObjectCreationExpressionSyntax objectCreation
                 ? objectCreation.ArgumentList.Get(index)
                 : null;
 
         protected override ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
-            context.Expression is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
+            context.Node is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
                 ? ((AssignmentStatementSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
                 : null;
 

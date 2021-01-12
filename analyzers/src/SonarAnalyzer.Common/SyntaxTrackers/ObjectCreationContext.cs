@@ -23,18 +23,11 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    /// <summary>
-    /// Syntax and semantic information about a object creation.
-    /// </summary>
-    public class ObjectCreationContext : BaseContext
+    public class ObjectCreationContext : SyntaxBaseContext
     {
-        public SyntaxNode Expression { get; }
         public Lazy<IMethodSymbol> InvokedConstructorSymbol { get; }
 
-        public ObjectCreationContext(SyntaxNode invocation, SemanticModel semanticModel) : base(semanticModel)
-        {
-            Expression = invocation;
-            InvokedConstructorSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol);
-        }
+        public ObjectCreationContext(SyntaxNode expression, SemanticModel semanticModel) : base(expression, semanticModel) =>
+            InvokedConstructorSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(expression).Symbol as IMethodSymbol);
     }
 }

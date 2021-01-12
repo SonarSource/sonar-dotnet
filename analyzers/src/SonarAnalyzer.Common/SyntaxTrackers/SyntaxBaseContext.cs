@@ -18,23 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    /// <summary>
-    /// Syntax and semantic information about an inheritance relationship.
-    /// </summary>
-    public class BaseTypeContext : SyntaxBaseContext
+    public class SyntaxBaseContext : BaseContext
     {
-        /// <summary>
-        /// A list of all type syntax nodes for node being analyzed.
-        /// </summary>
-        public IEnumerable<SyntaxNode> AllBaseTypeNodes { get; }
+        public SyntaxNode Node { get; }
+        public Location PrimaryLocation { get; set; }
 
-        public BaseTypeContext(SyntaxNode contextNode, IEnumerable<SyntaxNode> allBaseTypeNodes, SemanticModel semanticModel) : base(contextNode, semanticModel) =>
-            AllBaseTypeNodes = allBaseTypeNodes ?? Enumerable.Empty<SyntaxNode>();
+        public SyntaxBaseContext(SyntaxNode node, SemanticModel semanticModel) : base(semanticModel)
+        {
+            Node = node;
+            PrimaryLocation = Node.GetLocation();
+        }
     }
 }

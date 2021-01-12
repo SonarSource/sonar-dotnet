@@ -18,6 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using InvocationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.InvocationContext>;
+using ObjectCreationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.ObjectCreationContext>;
+using PropertyAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.PropertyAccessContext>;
+
 namespace SonarAnalyzer.Helpers
 {
     public static class Conditions
@@ -57,6 +61,5 @@ namespace SonarAnalyzer.Helpers
 
         public static ObjectCreationCondition Or(ObjectCreationCondition condition1, ObjectCreationCondition condition2, ObjectCreationCondition condition3) =>
             (value) => condition1(value) || condition2(value) || condition3(value);
-
     }
 }

@@ -19,15 +19,13 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using ElementAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.ElementAccessContext>;
 
 namespace SonarAnalyzer.Helpers
 {
-    public delegate bool ElementAccessCondition(ElementAccessContext elementAccessContext);
-
-    public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ElementAccessCondition>
+    public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ElementAccessContext>
         where TSyntaxKind : struct
     {
         public abstract ElementAccessCondition ArgumentAtIndexEquals(int index, string value);
@@ -45,11 +43,7 @@ namespace SonarAnalyzer.Helpers
             context => context.InvokedPropertySymbol.Value != null
                        && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
 
-        protected override BaseContext IsTracked(SyntaxNode expression, SemanticModel semanticModel, ElementAccessCondition[] conditions, out Location location)
-        {
-            var context = new ElementAccessContext(expression, semanticModel);
-            location = expression.GetLocation();
-            return conditions.All(c => c(context)) ? context : null;
-        }
+        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel) =>
+            new ElementAccessContext(expression, semanticModel);
     }
 }

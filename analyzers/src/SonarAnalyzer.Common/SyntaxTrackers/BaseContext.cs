@@ -19,33 +19,20 @@
  */
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    /// <summary>
-    /// Base contxt information with semantic model and secondary location.
-    /// </summary>
     public class BaseContext
     {
-        private readonly List<SecondaryLocation> secondaryLocations;
-
         public SemanticModel SemanticModel { get; }
-        public IEnumerable<SecondaryLocation> SecondaryLocations => secondaryLocations;
+        public IList<SecondaryLocation> SecondaryLocations { get; } = new List<SecondaryLocation>();
 
-        public BaseContext(SemanticModel semanticModel)
-        {
+        public BaseContext(SemanticModel semanticModel) =>
             SemanticModel = semanticModel;
-            secondaryLocations = new List<SecondaryLocation>();
-        }
 
-        public void AddSecondaryLocation(SecondaryLocation location)
-        {
-            Debug.Assert(location != null, "Location should not be null.");
-            Debug.Assert(location.Location != Location.None, "Location should not be equal to None.");
-            secondaryLocations.Add(location);
-        }
+        public void AddSecondaryLocation(SecondaryLocation location) =>
+            SecondaryLocations.Add(location);
     }
 }
