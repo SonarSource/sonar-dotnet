@@ -39,13 +39,31 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
 
-       [DataTestMethod]
+        [DataTestMethod]
+        [DataRow("3.0.20105.1")]
+        [DataRow(Constants.NuGetLatestVersion)]
+        [TestCategory("Rule")]
+        public void DisablingRequestValidation_CS_Disabled(string aspNetMvcVersion) =>
+            Verifier.VerifyNoIssueReported(@"TestCases\DisablingRequestValidation.cs",
+                new CS.DisablingRequestValidation(),
+                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
+
+        [DataTestMethod]
         [DataRow("3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_VB(string aspNetMvcVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DisablingRequestValidation.vb",
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
+
+        [DataTestMethod]
+        [DataRow("3.0.20105.1")]
+        [DataRow(Constants.NuGetLatestVersion)]
+        [TestCategory("Rule")]
+        public void DisablingRequestValidation_VB_Disabled(string aspNetMvcVersion) =>
+            Verifier.VerifyNoIssueReported(@"testcases\disablingrequestvalidation.vb",
+                new VB.DisablingRequestValidation(),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
     }
 }

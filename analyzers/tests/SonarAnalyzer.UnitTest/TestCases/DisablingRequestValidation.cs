@@ -72,6 +72,11 @@ namespace Tests.Diagnostics
         private ActionResult Quix(string i) => null;
     }
 
+    [ValidateInput(true)]
+    public class CompliantController2 : Controller
+    {
+    }
+
     public class AllowedHtml
     {
         [AllowHtml] // ok

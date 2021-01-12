@@ -13,6 +13,12 @@ Namespace Tests.Diagnostics
             Return Nothing
         End Function
 
+        <CLSCompliant(False)>
+        <ValidateInput(False)> ' Noncompliant
+        Public Function WithTwoFalse(ByVal input As String) As ActionResult
+            Return Foo(input)
+        End Function
+
         <HttpPost>
         <ValidateInput(False)> ' Noncompliant
         <Obsolete>
@@ -61,6 +67,10 @@ Namespace Tests.Diagnostics
         Private Function Quix(ByVal i As String) As ActionResult
             Return Nothing
         End Function
+    End Class
+
+    <ValidateInput(True)>
+    Public Class CompliantController2
     End Class
 
     Public Class AllowedHtml
