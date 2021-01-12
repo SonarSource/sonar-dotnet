@@ -20,14 +20,16 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using InvocationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.InvocationContext>;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax> : SonarDiagnosticAnalyzer
+    public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TExpressionSyntax : SyntaxNode
+        where TIdentifierNameSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S2077";
         protected const string AssignmentWithFormattingMessage = "SQL Query is dynamically formatted and assigned to {0}.";
@@ -104,12 +106,16 @@ namespace SonarAnalyzer.Rules
         protected abstract TExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index);
         protected abstract TExpressionSyntax GetSetValue(PropertyAccessContext context);
         protected abstract bool IsTracked(TExpressionSyntax expression, BaseContext context);
+        protected abstract bool IsSensitiveExpression(TExpressionSyntax expression, SemanticModel semanticModel);
+        protected abstract Location SecondaryLocationForExpression(TExpressionSyntax node, string identifierName);
+        protected abstract string GetIdentifierName(TIdentifierNameSyntax identifierNameSyntax);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
         protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+        protected AssignmentFinder AssignmentFinder { get; set; }
 
         protected DiagnosticDescriptor Rule { get; }
 
@@ -137,6 +143,31 @@ namespace SonarAnalyzer.Rules
 
             TrackObjectCreation(context, constructorsForFirstArgument, FirstArgumentIndex);
             TrackObjectCreation(context, constructorsForSecondArgument, SecondArgumentIndex);
+        }
+
+        protected bool IsTrackedVariableDeclaration(TExpressionSyntax expression, BaseContext context)
+        {
+            if (expression is TIdentifierNameSyntax)
+            {
+                var node = expression;
+                while (node is TIdentifierNameSyntax identifierNameSyntax)
+                {
+                    var identifierName = GetIdentifierName(identifierNameSyntax);
+                    node = AssignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, node) as TExpressionSyntax;
+
+                    if (IsSensitiveExpression(node, context.SemanticModel))
+                    {
+                        context.AddSecondaryLocation(new SecondaryLocation(SecondaryLocationForExpression(node, identifierName), string.Format(AssignmentWithFormattingMessage, identifierName)));
+                        return true;
+                    }
+                    else
+                    {
+                        context.AddSecondaryLocation(new SecondaryLocation(SecondaryLocationForExpression(node, identifierName), string.Format(AssignmentMessage, identifierName)));
+                    }
+                }
+            }
+
+            return false;
         }
 
         private void TrackObjectCreation(SonarAnalysisContext context, KnownType[] objectCreationTypes, int argumentIndex) =>

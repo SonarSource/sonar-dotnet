@@ -32,7 +32,12 @@ namespace SonarAnalyzer.Helpers
         public BaseContext(SemanticModel semanticModel) =>
             SemanticModel = semanticModel;
 
-        public void AddSecondaryLocation(SecondaryLocation location) =>
-            SecondaryLocations.Add(location);
+        public void AddSecondaryLocation(SecondaryLocation location)
+        {
+            if (location != null && location.Location != null && location.Location != Location.None)
+            {
+                SecondaryLocations.Add(location);
+            }
+        }
     }
 }

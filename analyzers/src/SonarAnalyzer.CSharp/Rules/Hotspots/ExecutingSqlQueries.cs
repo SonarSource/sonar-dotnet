@@ -31,10 +31,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax>
+    public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax, IdentifierNameSyntax>
     {
-        private static readonly AssignmentFinder AssignmentFinder = new CSharpAssignmentFinder();
-
         public ExecutingSqlQueries() : this(AnalyzerConfiguration.Hotspot) { }
 
         internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
@@ -42,7 +40,11 @@ namespace SonarAnalyzer.Rules.CSharp
             InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, Rule);
             PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, Rule);
             ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, Rule);
+            AssignmentFinder = new CSharpAssignmentFinder();
         }
+
+        protected override string GetIdentifierName(IdentifierNameSyntax identifierNameSyntax) =>
+            identifierNameSyntax.Identifier.ValueText;
 
         protected override ExpressionSyntax GetInvocationExpression(SyntaxNode expression) =>
             expression is InvocationExpressionSyntax invocation
@@ -67,11 +69,27 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsTracked(ExpressionSyntax expression, BaseContext context) =>
             IsSensitiveExpression(expression, context.SemanticModel) || IsTrackedVariableDeclaration(expression, context);
 
-        private static bool IsSensitiveExpression(ExpressionSyntax expression, SemanticModel semanticModel) =>
+        protected override bool IsSensitiveExpression(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression != null
             && (IsConcatenation(expression, semanticModel)
             || expression.IsKind(SyntaxKind.InterpolatedStringExpression)
             || (expression is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel)));
+
+        protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierName)
+        {
+            if (node == null)
+            {
+                return Location.None;
+            }
+
+            if (node.Parent is EqualsValueClauseSyntax equalsValueClause
+                && equalsValueClause.Parent is VariableDeclaratorSyntax declarationSyntax)
+            {
+                return declarationSyntax.Identifier.GetLocation();
+            }
+
+            return node.Parent is AssignmentExpressionSyntax assignment ? assignment.Left.GetLocation() : Location.None;
+        }
 
         private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             (invocation.IsMethodInvocation(KnownType.System_String, "Format", semanticModel) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", semanticModel))
@@ -81,57 +99,6 @@ namespace SonarAnalyzer.Rules.CSharp
             expression.IsKind(SyntaxKind.AddExpression)
             && expression is BinaryExpressionSyntax concatenation
             && !IsConcatenationOfConstants(concatenation, semanticModel);
-
-        private static bool IsTrackedVariableDeclaration(ExpressionSyntax expression, BaseContext context)
-        {
-            if (expression is IdentifierNameSyntax)
-            {
-                var node = expression;
-                Location location;
-                do
-                {
-                    var identifierName = (node as IdentifierNameSyntax).Identifier.ValueText;
-                    node = AssignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, node) as ExpressionSyntax;
-                    location = GetSecondaryLocationForExpression(node);
-
-                    if (IsSensitiveExpression(node, context.SemanticModel))
-                    {
-                        if (location != Location.None)
-                        {
-                            context.AddSecondaryLocation(new SecondaryLocation(location, string.Format(AssignmentWithFormattingMessage, identifierName)));
-                        }
-
-                        return true;
-                    }
-                    else
-                    {
-                        if (location != Location.None)
-                        {
-                            context.AddSecondaryLocation(new SecondaryLocation(location, string.Format(AssignmentMessage, identifierName)));
-                        }
-                    }
-                }
-                while (node is IdentifierNameSyntax);
-            }
-
-            return false;
-        }
-
-        private static Location GetSecondaryLocationForExpression(ExpressionSyntax node)
-        {
-            if (node == null)
-            {
-                return Location.None;
-            }
-
-            if (node.Parent is EqualsValueClauseSyntax equalsValueClauseSyntax
-                && equalsValueClauseSyntax.Parent is VariableDeclaratorSyntax declarationSyntax)
-            {
-                return declarationSyntax.Identifier.GetLocation();
-            }
-
-            return node.Parent is AssignmentExpressionSyntax assignment ? assignment.Left.GetLocation() : Location.None;
-        }
 
         private static bool AllConstants(IEnumerable<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
             arguments.All(a => a.Expression.HasConstantValue(semanticModel));

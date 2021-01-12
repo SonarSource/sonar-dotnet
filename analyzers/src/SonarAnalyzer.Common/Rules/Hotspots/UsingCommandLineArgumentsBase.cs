@@ -30,9 +30,7 @@ namespace SonarAnalyzer.Rules
         private const string MessageFormat = "Make sure that command line arguments are used safely here.";
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
         protected MethodDeclarationTracker MethodDeclarationTracker { get; set; }
-
         protected DiagnosticDescriptor Rule { get; }
 
         protected UsingCommandLineArgumentsBase(System.Resources.ResourceManager rspecResources) =>

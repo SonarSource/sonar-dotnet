@@ -249,12 +249,12 @@ Namespace Tests.Diagnostics
             Dim command = New SqlCommand(sensitiveQuery)                                                        ' Noncompliant [1]
             command.CommandText = sensitiveQuery                                                                ' Noncompliant [2]
 
-            Dim stillSensitive As String = sensitiveQuery                                                       ' Secondary [3] {{SQL query is assigned to stillSensitive.}}
+            Dim stillSensitive As String = sensitiveQuery                                                       ' Secondary [3] {{SQL query is assigned to STILLsENSITIVE.}}
             '   ^^^^^^^^^^^^^^
-            command.CommandText = stillSensitive                                                                ' Noncompliant [3]
+            command.CommandText = STILLsENSITIVE                                                                ' Noncompliant [3] ^13#19
 
             Dim sensitiveConcatQuery As String = "SELECT * FROM Table1 WHERE col1 = '" + param + "'"            ' Secondary [5,6,7] {{SQL Query is dynamically formatted and assigned to sensitiveConcatQuery.}}
-            '   ^^^^^^^^^^^^^^^^^^^^
+
             command = New SqlCommand(sensitiveConcatQuery)                                                      ' Noncompliant [5]
             command.CommandText = sensitiveConcatQuery                                                          ' Noncompliant [6]
 

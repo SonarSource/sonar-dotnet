@@ -284,11 +284,11 @@ namespace Tests.Diagnostics
 
             command.CommandText = sensitiveQuery;                                                       // Noncompliant [2]
 
-            string stillSensitive = sensitiveQuery;                                                     // Secondary [3] {{SQL query is assigned to stillSensitive.}}
-            command.CommandText = stillSensitive;                                                       // Noncompliant [3]
+            string stillSensitive = sensitiveQuery;                                                     // Secondary [3] {{SQL query is assigned to stillSensitive.}} ^20#14
+            command.CommandText = stillSensitive;                                                       // Noncompliant [3] ^13#19
 
             string sensitiveConcatQuery = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";          // Secondary [6,7,8] {{SQL Query is dynamically formatted and assigned to sensitiveConcatQuery.}}
-            //     ^^^^^^^^^^^^^^^^^^^^
+
             command = new SqlCommand(sensitiveConcatQuery);                                             // Noncompliant [6]
 
             command.CommandText = sensitiveConcatQuery;                                                 // Noncompliant [7]
@@ -304,7 +304,6 @@ namespace Tests.Diagnostics
 
             string x = null;
             x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);                      // Secondary [9] {{SQL Query is dynamically formatted and assigned to x.}} ^13#1
-
             command.CommandText = x;                                                                    // Noncompliant [9]
 
             string y;
