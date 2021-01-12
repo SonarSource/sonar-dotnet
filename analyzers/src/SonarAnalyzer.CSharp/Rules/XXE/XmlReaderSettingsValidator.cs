@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.XXE
         public XmlReaderSettingsValidator(SemanticModel semanticModel, NetFrameworkVersion version)
         {
             this.semanticModel = semanticModel;
-            this.isXmlResolverSafeByDefault = IsXmlResolverPropertySafeByDefault(version);
+            isXmlResolverSafeByDefault = IsXmlResolverPropertySafeByDefault(version);
         }
 
         /// <summary>
@@ -65,13 +65,13 @@ namespace SonarAnalyzer.Rules.XXE
             var objectCreationAssignments = objectCreation.GetInitializerExpressions().OfType<AssignmentExpressionSyntax>();
 
             var propertyAssignments = GetAssignments(invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>())
-                .Where(assignment => IsMemberAccessOnSymbol(assignment.Left, settings, this.semanticModel));
+                .Where(assignment => IsMemberAccessOnSymbol(assignment.Left, settings, semanticModel));
 
             foreach (var assignment in objectCreationAssignments.Union(propertyAssignments))
             {
                 var name = assignment.Left.GetName();
 
-                if (name =="ProhibitDtd" || name == "DtdProcessing")
+                if (name == "ProhibitDtd" || name == "DtdProcessing")
                 {
                     unsafeDtdProcessing = IsXmlResolverDtdProcessingUnsafe(assignment, semanticModel);
                 }
@@ -85,9 +85,9 @@ namespace SonarAnalyzer.Rules.XXE
         }
 
         private static bool IsMemberAccessOnSymbol(ExpressionSyntax expression, ISymbol symbol, SemanticModel semanticModel) =>
-            expression is MemberAccessExpressionSyntax memberAccess &&
-            IsXmlReaderSettings(memberAccess.Expression, semanticModel) &&
-            symbol.Equals(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol);
+            expression is MemberAccessExpressionSyntax memberAccess
+            && IsXmlReaderSettings(memberAccess.Expression, semanticModel)
+            && symbol.Equals(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol);
 
         private static IEnumerable<AssignmentExpressionSyntax> GetAssignments(SyntaxNode node) =>
             node == null
@@ -118,9 +118,9 @@ namespace SonarAnalyzer.Rules.XXE
 
             // To optimise, we search first for the class constructor, then for the method declaration.
             // If these cannot be found (e.g. fields), we get the root of the syntax tree and search from there.
-            var root = locationRootNode?.FindNode(location.SourceSpan) ??
-                       invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>() ??
-                       invocationRootNode;
+            var root = locationRootNode?.FindNode(location.SourceSpan)
+                       ?? invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>()
+                       ?? invocationRootNode;
 
             return root.DescendantNodes();
         }
