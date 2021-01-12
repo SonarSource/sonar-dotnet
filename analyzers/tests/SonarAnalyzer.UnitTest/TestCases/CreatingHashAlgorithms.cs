@@ -1,77 +1,104 @@
-﻿namespace NS
+﻿using System.Security.Cryptography;
+
+namespace Tests.Diagnostics
 {
-    using System.Security.Cryptography;
-
-    public class TestClass
+    public class InsecureHashAlgorithm
     {
-        // RSPEC 4790: https://jira.sonarsource.com/browse/RSPEC-4790
-        public void ComputeHash()
+        public void Hash(byte[] temp)
         {
-            // Review all instantiations of classes that inherit from HashAlgorithm, for example:
-            HashAlgorithm hashAlgo = HashAlgorithm.Create();
-//                                   ^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
-            HashAlgorithm hashAlgo2 = HashAlgorithm.Create("SHA1");
-//                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+            using (var sha1 = new SHA1Managed()) // Noncompliant {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+//                            ^^^^^^^^^^^^^^^^^
+            {
+            }
+            using (var sha1 = new SHA1CryptoServiceProvider()) // Noncompliant
+            {
+            }
 
-            SHA1 sha = new SHA1CryptoServiceProvider();
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+            using var sha1csharp8 = new SHA1Managed(); // Noncompliant
 
-            MD5 md5 = new MD5CryptoServiceProvider();
-//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
-
-            // ...
+            using (var sha256 = new SHA256Managed())
+            {
+            }
+            using (var sha256 = (HashAlgorithm)CryptoConfig.CreateFromName("SHA256Managed"))
+            {
+            }
+            using (var sha256 = HashAlgorithm.Create("SHA256Managed"))
+            {
+            }
         }
 
-        public void AdditionalTests(SHA1CryptoServiceProvider sha1)
+        public void Md5Calls()
         {
-            var myHash = new MyHashAlgorithm();     // Noncompliant
-            myHash = new MyHashAlgorithm(123);      // Noncompliant
+            byte[] temp = null;
 
-            myHash = MyHashAlgorithm.Create();      // Noncompliant
-            myHash = MyHashAlgorithm.Create(42);    // Noncompliant
+            using (var md5 = new MD5CryptoServiceProvider()) // Noncompliant
+            {
+                var hash = md5.ComputeHash(temp);
+            }
 
-            myHash = MyHashAlgorithm.CreateHash();  // compliant - method name is not Create
-            myHash = MyHashAlgorithm.DoCreate();    // compliant - method name is not Create
+            using (var md5 = (HashAlgorithm)CryptoConfig.CreateFromName("MD5")) // Noncompliant
+//                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            {
+                var hash = md5.ComputeHash(temp);
+            }
+            using (var md5 = HashAlgorithm.Create("MD5")) // Noncompliant
+            {
+                var hash = md5.ComputeHash(temp);
+            }
+            var algoName = "MD5";
+            using (var md5 = (HashAlgorithm)CryptoConfig.CreateFromName(algoName)) // Noncompliant
+            {
+                var hash = md5.ComputeHash(temp);
+            }
 
-            // Other methods are not checked
-            var hash = sha1.ComputeHash((byte[])null);
-            hash = sha1.Hash;
-            var canReuse = sha1.CanReuseTransform;
-            sha1.Clear();
+            using (var md5 = System.Security.Cryptography.MD5.Create()) // Noncompliant
+            {
+            }
+        }
+
+        public void DsaCalls()
+        {
+            using (var dsa = new DSACryptoServiceProvider()) // Noncompliant
+            {
+            }
+            using (var dsa = DSA.Create()) // Noncompliant
+            {
+            }
+            using (var dsa = (AsymmetricAlgorithm)CryptoConfig.CreateFromName("DSA")) // Noncompliant
+            {
+            }
+            using (var dsa = AsymmetricAlgorithm.Create("DSA")) // Noncompliant
+            {
+            }
+        }
+
+        public void HmaCalls()
+        {
+            using (var hmac = new HMACSHA1()) // Noncompliant
+            {
+            }
+            using (var hmac = HMAC.Create()) // Noncompliant
+            {
+            }
+            using (var hmacmd5 = HMACMD5.Create("HMACMD5")) // Noncompliant
+            {
+            }
+            using (var hmacmd5 = KeyedHashAlgorithm.Create("HMACMD5")) // Noncompliant
+            {
+            }
+            using (var hmacmd5 = (KeyedHashAlgorithm)CryptoConfig.CreateFromName("HMACMD5")) // Noncompliant
+            {
+            }
+
+            using (var hmacsha256 = HMACSHA256.Create("HMACSHA256"))
+            {
+            }
+            using (var hmacsha256 = KeyedHashAlgorithm.Create("HMACSHA256"))
+            {
+            }
+            using (var hmacsha256 = (KeyedHashAlgorithm)CryptoConfig.CreateFromName("HMACSHA256"))
+            {
+            }
         }
     }
-
-    public class MyHashAlgorithm : HashAlgorithm
-//                                 ^^^^^^^^^^^^^
-    {
-        public MyHashAlgorithm() { }
-        public MyHashAlgorithm(int data) { }
-        public static MyHashAlgorithm Create() => null;
-        public static MyHashAlgorithm Create(int data) => null;
-
-        public static MyHashAlgorithm CreateHash() => null;
-        public static MyHashAlgorithm DoCreate() => null;
-
-        public override void Initialize() { /* no-op */ }
-        protected override void HashCore(byte[] array, int ibStart, int cbSize) { /* no-op */ }
-        protected override byte[] HashFinal()
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-
-
-    // Check reporting on partial classes. Should only report once.
-    public partial class ParticalClassAglorithm : NS.MyHashAlgorithm, System.IDisposable
-//                                                ^^^^^^^^^^^^^^^^^^
-    {
-        public void Dispose() { /* no-op */ }
-    }
-
-    internal interface IMarker { }
-    internal interface IMarker2 { }
-    public partial class ParticalClassAglorithm : IMarker, IMarker2
-    {
-    }
-
 }

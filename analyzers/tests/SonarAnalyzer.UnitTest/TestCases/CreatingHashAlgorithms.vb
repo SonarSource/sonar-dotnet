@@ -1,116 +1,48 @@
-﻿Imports System
-Imports System.Security.Cryptography
+﻿Imports System.Security.Cryptography
 
-Namespace NS
+Namespace Tests.Diagnostics
 
-    Public Class TestClass
+    Public Class InsecureHashAlgorithm
 
-        ' RSPEC 4790 https://jira.sonarsource.com/browse/RSPEC-4790
-        Public Sub ComputeHash()
-
+        Public Sub Hash(temp as Byte())
             ' Review all instantiations of classes that inherit from HashAlgorithm, for example:
-            Dim hashAlgo As HashAlgorithm = HashAlgorithm.Create()
-'                                           ^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
-            Dim hashAlgo2 As HashAlgorithm = HashAlgorithm.Create("SHA1")
-'                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+            Dim sha1 As HashAlgorithm = new SHA1Managed()
+'                                       ^^^^^^^^^^^^^^^^^ {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+            Dim sha1Provider As HashAlgorithm = new SHA1CryptoServiceProvider() ' Noncompliant
+            Dim sha1csharp8 = new SHA1Managed() ' Noncompliant
 
-            Dim sha As SHA1 = New SHA1CryptoServiceProvider()
-'                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
-
-            Dim md5 As MD5 = New MD5CryptoServiceProvider()
-'                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
-
-            ' ...
+            Dim sha256 = new SHA256Managed()
+            Dim sha256Config = CryptoConfig.CreateFromName("SHA256Managed")
+            Dim sha256HashAlgo = HashAlgorithm.Create("SHA256Managed")
         End Sub
 
-        Public Sub AdditionalTests(sha As SHA1CryptoServiceProvider)
-            Dim myHash = New MyHashAlgorithm()
-'                        ^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
-            myHash = New MyHashAlgorithm(123)       ' Noncompliant
+        Public Sub Md5Calls(temp as Byte())
+            Dim md5 = new MD5CryptoServiceProvider() ' Noncompliant
+            Dim md5CryptoConfig = CryptoConfig.CreateFromName("MD5") ' Noncompliant
+            Dim md5HashAlgorithm = HashAlgorithm.Create("MD5") ' Noncompliant
 
-            myHash = MyHashAlgorithm.Create()       ' Noncompliant
-'                    ^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
-            myHash = MyHashAlgorithm.Create(42)     ' Noncompliant
-
-            myHash = MyHashAlgorithm.CreateHash()  ' compliant - method name is not Create
-            myHash = MyHashAlgorithm.DoCreate()    ' compliant - method name is not Create
-
-
-            '  Other methods are not checked
-            Dim hash = sha.ComputeHash(CType(Nothing, Byte()))
-            hash = sha.Hash
-            Dim canReuse = sha.CanReuseTransform
-            sha.Clear()
-
+            Dim algoName = "MD5"
+            Dim md5CryptoConfigVar = CryptoConfig.CreateFromName(algoName) ' Noncompliant
         End Sub
 
-    End Class
-
-    Public Class MyHashAlgorithm
-        Inherits System.Security.Cryptography.HashAlgorithm
-'                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        Implements System.IDisposable
-
-        Public Sub New()
-        End Sub
-        Public Sub New(Data As Integer)
+        Public Sub DSACalls(temp as Byte())
+            Dim dsa = System.Security.Cryptography.DSA.Create() ' Noncompliant
+            Dim dsaProvider = new DSACryptoServiceProvider() ' Noncompliant
+            Dim dsaCryptoConfig = CryptoConfig.CreateFromName("DSA") ' Noncompliant
+            Dim dsaAsymmetricAlgorithm = AsymmetricAlgorithm.Create("DSA") ' Noncompliant
         End Sub
 
-        Public Shared Function Create() As MyHashAlgorithm
-            Return Nothing
-        End Function
-        Public Shared Function Create(data As Integer) As MyHashAlgorithm
-            Return Nothing
-        End Function
-
-        Public Shared Function CreateHash() As MyHashAlgorithm
-            Return Nothing
-        End Function
-
-        Public Shared Function DoCreate() As MyHashAlgorithm
-            Return Nothing
-        End Function
-
-
-#Region "Abstract method implementations"
-
-        Public Overrides Sub Initialize()
-            Throw New NotImplementedException()
+        Public Sub HmaCalls(temp as Byte())
+            Dim hmac = System.Security.Cryptography.HMAC.Create() ' Noncompliant
+            Dim hmacSha1 = new HMACSHA1() ' Noncompliant
+            Dim md5HashAlgorithm = HashAlgorithm.Create("MD5") ' Noncompliant
+            Dim hmacmd5KeydHashAlgorithm = KeyedHashAlgorithm.Create("HMACMD5") ' Noncompliant
+            Dim hmacmd5CryptoConfig = CryptoConfig.CreateFromName("HMACMD5") ' Noncompliant
+            Dim hmacsha256 = System.Security.Cryptography.HMACSHA256.Create("HMACSHA256")
+            Dim hmacsha256KeyedHashAlgorithm = System.Security.Cryptography.HMACSHA256.Create("HMACSHA256")
+            Dim hmacsha256CryptoConfig = CryptoConfig.CreateFromName("HMACSHA256")
         End Sub
 
-        Protected Overrides Sub HashCore(array() As Byte, ibStart As Integer, cbSize As Integer)
-            Throw New NotImplementedException()
-        End Sub
-
-        Protected Overrides Function HashFinal() As Byte()
-            Throw New NotImplementedException()
-        End Function
-
-#End Region
-
-        Public Sub Dispose()
-            'no-op
-        End Sub
-
-    End Class
-
-
-    ' Check reporting on partial classes. Should only report once.
-    Public Interface IMarker
-    End Interface
-
-    Public Interface IMarker2
-    End Interface
-
-
-    Partial Public Class PartialClassAlgorithm
-        Inherits NS.MyHashAlgorithm
-'                ^^^^^^^^^^^^^^^^^^
-        Implements IMarker
-    End Class
-
-    Partial Public Class PartialClassAlgorithm
-        Implements IMarker2
     End Class
 
 End Namespace

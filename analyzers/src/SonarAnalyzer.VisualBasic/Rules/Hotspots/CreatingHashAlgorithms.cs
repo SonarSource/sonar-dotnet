@@ -46,8 +46,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         internal /*for testing*/ CreatingHashAlgorithms(IAnalyzerConfiguration analyzerConfiguration)
         {
             ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
-            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
-            BaseTypeTracker = new VisualBasicBaseTypeTracker(analyzerConfiguration, rule);
+            ParameterlessFactoryInvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
+            ParameterizedFactoryInvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
         }
     }
 }

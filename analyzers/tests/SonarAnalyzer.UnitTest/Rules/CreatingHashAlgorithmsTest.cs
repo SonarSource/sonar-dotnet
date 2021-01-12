@@ -37,32 +37,34 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.cs",
-                new CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences());
+                                    new CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.vb",
-                new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences());
+                                    new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
+                                    additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CreatingHashAlgorithms.cs",
-                new CreatingHashAlgorithms(),
-                additionalReferences: GetAdditionalReferences());
+                                           new CreatingHashAlgorithms(),
+                                           ParseOptionsHelper.FromCSharp8,
+                                           additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CreatingHashAlgorithms.vb",
-                new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(),
-                additionalReferences: GetAdditionalReferences());
+                                           new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(),
+                                           additionalReferences: GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.GetSystemSecurityCryptography();

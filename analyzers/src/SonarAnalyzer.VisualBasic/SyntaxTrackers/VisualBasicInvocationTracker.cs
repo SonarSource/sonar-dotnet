@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -42,6 +43,11 @@ namespace SonarAnalyzer.Helpers
             context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
                     && index < argumentList.Arguments.Count
                     && argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel) == value;
+
+        public override InvocationCondition ArgumentAtIndexIsOneOf(int index, params string[] values) =>
+            context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
+                       && index < argumentList.Arguments.Count
+                       && values.Contains(argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel));
 
         public override InvocationCondition MatchProperty(MemberDescriptor member) =>
             context => ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess
