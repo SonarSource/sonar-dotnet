@@ -50,7 +50,7 @@ languages in [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarc
 ## How to contribute
 
 There are many ways you can contribute to the `sonar-dotnet` project. 
-When contributing, please respect our [Code of Conduct](./CODE_OF_CONDUCT.md).
+When contributing, please respect our [Code of Conduct](./docs/code-of-conduct.md).
 
 ### Join the discussions
 
