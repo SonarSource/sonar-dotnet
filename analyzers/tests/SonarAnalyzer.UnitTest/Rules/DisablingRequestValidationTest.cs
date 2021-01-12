@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,10 +34,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void DisablingRequestValidation(string aspNetMvcVersion) =>
+        public void DisablingRequestValidation_CS(string aspNetMvcVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DisablingRequestValidation.cs",
-                new DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
+
+       [DataTestMethod]
+        [DataRow("3.0.20105.1")]
+        [DataRow(Constants.NuGetLatestVersion)]
+        [TestCategory("Rule")]
+        public void DisablingRequestValidation_VB(string aspNetMvcVersion) =>
+            Verifier.VerifyAnalyzer(@"TestCases\DisablingRequestValidation.vb",
+                new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
     }
 }
-
