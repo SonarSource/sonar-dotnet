@@ -334,4 +334,41 @@ namespace Tests.Diagnostics
             return 1;
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3910
+    public class Repro_3910
+    {
+        public void ElementAccess1(Exception ex)
+        {
+            if (ex?.Data["Key"] is string value)
+            {
+            }
+            else if (ex != null) // Noncompliant FP
+            {
+            }
+        }
+
+        public void MemberBinding1(Exception ex)
+        {
+            if (ex?.Message is string value)
+            {
+            }
+            else if (ex != null) // Noncompliant FP
+            {
+            }
+        }
+
+        public void MemberBinding2(Exception ex)
+        {
+            if (ex?.Message is string value)
+            {
+            }
+            else if (ex == null)    // Noncompliant FP
+            {                       // Secondary
+            }
+            else if (ex.Message != null) // FN
+            {
+            }
+        }
+    }
 }
