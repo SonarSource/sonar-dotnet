@@ -6,7 +6,7 @@
     <title>SonarAnalyzer for C#</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
-    <license type="file">License.txt</license>
+    <license type="expression">LGPL-3.0-only</license>
     <projectUrl>https://www.sonarlint.org/visualstudio/</projectUrl>
     <icon>images\sonarsource_64.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

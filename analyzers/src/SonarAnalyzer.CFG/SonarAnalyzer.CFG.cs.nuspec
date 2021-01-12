@@ -6,7 +6,7 @@
     <title>C# CFG library for SonarAnalyzer</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
-    <license type="file">License.txt</license>
+    <license type="expression">LGPL-3.0-only</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>CFG library for SonarSource C# plugins</description>
     <language>en-US</language>
