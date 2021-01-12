@@ -10,6 +10,7 @@ public class Program
     private Process field = Process.Start("file.exe");                      // Noncompliant
     public Process PropertyRW { get; set; } = Process.Start("file.exe");    // Noncompliant
     public Process PropertyRO => Process.Start("file.exe");                 // Noncompliant
+    public Process PropertyUnused { get; set; }     // For coverage
 
     public void Invocations(SecureString password)
     {
@@ -102,6 +103,19 @@ public class Program
         Process.Start(@"\\server\dir\file.exe");
         Process.Start(@"\\server\c$\file.exe");
         Process.Start(@"\\10.0.0.1\dir\file.exe");
+        Process.Start("http://www.microsoft.com");
+        Process.Start("https://www.microsoft.com");
+        Process.Start("ftp://www.microsoft.com");
+        // Compliant, custom protocols used to start an application
+        Process.Start("skype:echo123?call");
+        Process.Start("AA:/file.exe");
+        Process.Start("Ř:/file.exe");
+        Process.Start("ř:/file.exe");
+        Process.Start(@"AA:\file.exe");
+        Process.Start(@"Ř:\file.exe");
+        Process.Start(@"ř:\file.exe");
+        Process.Start("0:/file.exe");
+        Process.Start(@"0:\file.exe");
 
         Process.Start("file");          // Noncompliant
         Process.Start("file.exe");      // Noncompliant
@@ -115,14 +129,22 @@ public class Program
         Process.Start("~/file.exe");    // Noncompliant
         Process.Start("...file.exe");   // Noncompliant
         Process.Start(".../file.exe");  // Noncompliant
-        Process.Start("AA:/file.exe");  // Noncompliant
-        Process.Start("0:/file.exe");   // Noncompliant
-        Process.Start("Ř:/file.exe");   // Noncompliant
-        Process.Start("ř:/file.exe");   // Noncompliant
         Process.Start(@"...\file.exe"); // Noncompliant
-        Process.Start(@"AA:\file.exe"); // Noncompliant
-        Process.Start(@"0:\file.exe");  // Noncompliant
-        Process.Start(@"Ř:\file.exe");  // Noncompliant
-        Process.Start(@"ř:\file.exe");  // Noncompliant
+    }
+}
+
+namespace CustomType
+{
+    public class ProcessStartInfo
+    {
+        public string FileName { get; set; }
+
+        public ProcessStartInfo(string fileName) { }
+
+        public static void Usage()
+        {
+            var psi = new ProcessStartInfo("bad.exe");  // Compliant with this custom class
+            psi.FileName = "file.exe";                  // Compliant
+        }
     }
 }

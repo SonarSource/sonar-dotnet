@@ -9,6 +9,7 @@ Public Class Program
 
     Private Field As Process = Process.Start("file.exe")                ' Noncompliant
     Public Property PropertyRW As Process = Process.Start("file.exe")   ' Noncompliant
+    Public Property PropertyUnused As Process       ' For coverage
 
     Public Sub Invocations(Password As SecureString)
         Dim CompliantVariable As String = "C:\file.exe"
@@ -100,6 +101,19 @@ Public Class Program
         Process.Start("\\server\dir\file.exe")
         Process.Start("\\server\c$\file.exe")
         Process.Start("\\10.0.0.1\dir\file.exe")
+        Process.Start("http://www.microsoft.com")
+        Process.Start("https://www.microsoft.com")
+        Process.Start("ftp://www.microsoft.com")
+        ' Compliant, custom protocols used to start an application
+        Process.Start("skype:echo123?call")
+        Process.Start("AA:/file.exe")
+        Process.Start("Ř:/file.exe")
+        Process.Start("ř:/file.exe")
+        Process.Start("AA:\file.exe")
+        Process.Start("Ř:\file.exe")
+        Process.Start("ř:\file.exe")
+        Process.Start("0:/file.exe")
+        Process.Start("0:\file.exe")
 
         Process.Start("file")           ' Noncompliant
         Process.Start("file.exe")       ' Noncompliant
@@ -113,15 +127,25 @@ Public Class Program
         Process.Start("~/file.exe")     ' Noncompliant
         Process.Start("...file.exe")    ' Noncompliant
         Process.Start(".../file.exe")   ' Noncompliant
-        Process.Start("AA:/file.exe")   ' Noncompliant
-        Process.Start("0:/file.exe")    ' Noncompliant
-        Process.Start("Ř:/file.exe")    ' Noncompliant
-        Process.Start("ř:/file.exe")    ' Noncompliant
         Process.Start("...\file.exe")   ' Noncompliant
-        Process.Start("AA:\file.exe")   ' Noncompliant
-        Process.Start("0:\file.exe")    ' Noncompliant
-        Process.Start("Ř:\file.exe")    ' Noncompliant
-        Process.Start("ř:\file.exe")    ' Noncompliant
     End Sub
 
 End Class
+
+Namespace CustomType
+
+    Public Class ProcessStartInfo
+
+        Public Property FileName As String
+
+        Public Sub New(fileName As String)
+        End Sub
+
+        Public Shared Sub Usage()
+            Dim psi As New ProcessStartInfo("bad.exe")  ' Compliant with this custom class
+            psi.FileName = "file.exe"                   ' Compliant
+        End Sub
+
+    End Class
+
+End Namespace

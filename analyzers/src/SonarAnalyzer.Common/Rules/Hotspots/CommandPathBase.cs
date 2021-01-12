@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4036";
         private const string MessageFormat = "Make sure the \"PATH\" used to find this command includes only what you intend.";
 
-        private static readonly Regex ValidPath = new Regex(@"^(\.{0,2}[\\/]|[a-zA-Z]:)");
+        private static readonly Regex ValidPath = new Regex(@"^(\.{0,2}[\\/]|\w+:)");
 
         protected abstract string FirstArgument(InvocationContext context);
 
