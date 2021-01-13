@@ -65,6 +65,14 @@ public class Program
         psi = new ProcessStartInfo() { FileName = "bad.exe" };     // Noncompliant
         psi = new ProcessStartInfo() { FileName = "bad.exe" };     // Noncompliant FP, value is reassigned later
         psi.FileName = @"C:\file.exe";
+
+        psi = new ProcessStartInfo() { FileName = "bad.exe" };     // Noncompliant
+        Process.Start(psi);
+        psi.FileName = @"C:\file.exe";
+
+        psi = new ProcessStartInfo() { FileName = "bad.exe" };     // Noncompliant
+        Run(psi);
+        psi.FileName = @"C:\file.exe";
     }
 
     private void Run(ProcessStartInfo psi) => Process.Start(psi);

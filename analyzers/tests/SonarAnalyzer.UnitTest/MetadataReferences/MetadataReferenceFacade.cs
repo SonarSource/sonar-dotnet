@@ -93,7 +93,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 #else
             new[]
             {
-                CoreMetadataReference.SystemComponentModelPrimitives,
+                CoreMetadataReference.SystemComponentModelPrimitives,   // Type "Process" needs this for it's parent type "Component"
                 CoreMetadataReference.SystemDiagnosticsProcess
             };
 #endif
