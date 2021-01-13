@@ -29,9 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EnumerationValueName()
-        {
+        public void EnumerationValueName() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumerationValueName.vb", new EnumerationValueName());
-        }
     }
 }

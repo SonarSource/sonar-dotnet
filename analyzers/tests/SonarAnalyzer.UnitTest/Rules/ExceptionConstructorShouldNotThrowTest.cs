@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,19 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExceptionConstructorShouldNotThrow_CS()
-        {
+        public void ExceptionConstructorShouldNotThrow_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionConstructorShouldNotThrow.cs",
                 new ExceptionConstructorShouldNotThrow());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExceptionConstructorShouldNotThrow_VB()
-        {
+        public void ExceptionConstructorShouldNotThrow_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionConstructorShouldNotThrow.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ExceptionConstructorShouldNotThrow());
-        }
     }
 }
-

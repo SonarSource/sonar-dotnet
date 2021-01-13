@@ -30,22 +30,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotMarkEnumsWithFlags()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotMarkEnumsWithFlags.cs",
-                new DoNotMarkEnumsWithFlags());
-        }
+        public void DoNotMarkEnumsWithFlags() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotMarkEnumsWithFlags.cs", new DoNotMarkEnumsWithFlags());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotMarkEnumsWithFlags_InvalidEnumType()
-        {
+        public void DoNotMarkEnumsWithFlags_InvalidEnumType() =>
             Verifier.VerifyCSharpAnalyzer(@"
 [System.Flags]
 public enum InvalidStringEnum : string // Noncompliant
 {
     MyValue = ""toto"" // Secondary
 }", new DoNotMarkEnumsWithFlags(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }

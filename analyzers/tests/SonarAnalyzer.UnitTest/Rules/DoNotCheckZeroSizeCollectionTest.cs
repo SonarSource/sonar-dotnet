@@ -45,4 +45,3 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new SonarAnalyzer.Rules.VisualBasic.DoNotCheckZeroSizeCollection());
     }
 }
-

@@ -33,35 +33,29 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest(string testFwkVersion)
-        {
+        public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
-        }
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow("2.6.7")]
         [TestCategory("Rule")]
-        public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit(string testFwkVersion)
-        {
+        public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
-        }
 
         [DataTestMethod]
         [DataRow("3.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         [Description("Starting with version 3.0.0 the attribute was removed.")]
-        public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue(string testFwkVersion)
-        {
+        public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue(string testFwkVersion) =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion),
                 checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }

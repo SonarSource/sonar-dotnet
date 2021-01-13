@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,20 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExceptionRethrow()
-        {
+        public void ExceptionRethrow() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionRethrow.cs", new ExceptionRethrow());
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void ExceptionRethrow_CodeFix()
-        {
+        public void ExceptionRethrow_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\ExceptionRethrow.cs",
                 @"TestCases\ExceptionRethrow.Fixed.cs",
                 new ExceptionRethrow(),
                 new ExceptionRethrowCodeFixProvider());
-        }
     }
 }

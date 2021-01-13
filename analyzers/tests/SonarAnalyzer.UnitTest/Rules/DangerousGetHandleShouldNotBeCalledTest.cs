@@ -51,4 +51,3 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new vbnet.DangerousGetHandleShouldNotBeCalled());
     }
 }
-

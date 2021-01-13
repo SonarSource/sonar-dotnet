@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,26 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FileShouldEndWithEmptyNewLine_EmptyLine()
-        {
+        public void FileShouldEndWithEmptyNewLine_EmptyLine() =>
             Verifier.VerifyAnalyzer(@"TestCases\FileShouldEndWithEmptyNewLine_EmptyLine.cs",
                 new FileShouldEndWithEmptyNewLine());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void FileShouldEndWithEmptyNewLine_NoEmptyLine()
-        {
+        public void FileShouldEndWithEmptyNewLine_NoEmptyLine() =>
             Verifier.VerifyAnalyzer(@"TestCases\FileShouldEndWithEmptyNewLine_NoEmptyLine.cs",
                 new FileShouldEndWithEmptyNewLine());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void FileShouldEndWithEmptyNewLine_EmptyFile()
-        {
+        public void FileShouldEndWithEmptyNewLine_EmptyFile() =>
             Verifier.VerifyAnalyzer(@"TestCases\FileShouldEndWithEmptyNewLine_EmptyFile.cs",
                 new FileShouldEndWithEmptyNewLine());
-        }
     }
 }

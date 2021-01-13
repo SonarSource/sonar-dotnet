@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,10 +30,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EnumStorageNeedsToBeInt32()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\EnumStorageNeedsToBeInt32.cs",
-                new EnumStorageNeedsToBeInt32());
-        }
+        public void EnumStorageNeedsToBeInt32() => Verifier.VerifyAnalyzer(@"TestCases\EnumStorageNeedsToBeInt32.cs", new EnumStorageNeedsToBeInt32());
     }
 }

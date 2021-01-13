@@ -28,18 +28,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EnumNameShouldFollowRegexCSharp()
-        {
+        public void EnumNameShouldFollowRegexCSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumNameShouldFollowRegex.cs",
                 new SonarAnalyzer.Rules.CSharp.EnumNameShouldFollowRegex());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EnumNameShouldFollowRegexVisualBasic()
-        {
+        public void EnumNameShouldFollowRegexVisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumNameShouldFollowRegex.vb",
                 new SonarAnalyzer.Rules.VisualBasic.EnumNameShouldFollowRegex());
-        }
     }
 }

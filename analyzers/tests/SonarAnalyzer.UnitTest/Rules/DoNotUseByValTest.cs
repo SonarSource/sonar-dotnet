@@ -28,22 +28,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotUseByVal()
-        {
+        public void DoNotUseByVal() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseByVal.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseByVal());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotUseByValCodeFix()
-        {
+        public void DoNotUseByValCodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\DoNotUseByVal.vb",
                 @"TestCases\DoNotUseByVal.Fixed.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseByVal(),
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseByValCodeFixProvider(),
                 SonarAnalyzer.Rules.VisualBasic.DoNotUseByValCodeFixProvider.Title);
-        }
     }
 }
