@@ -28,34 +28,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionalStructureSameImplementation_If_CSharp()
-        {
+        public void ConditionalStructureSameImplementation_If_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.cs",
                 new SonarAnalyzer.Rules.CSharp.ConditionalStructureSameImplementation());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionalStructureSameImplementation_Switch_CSharp()
-        {
+        public void ConditionalStructureSameImplementation_Switch_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.cs",
                 new SonarAnalyzer.Rules.CSharp.ConditionalStructureSameImplementation());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionalStructureSameImplementation_If_VisualBasic()
-        {
+        public void ConditionalStructureSameImplementation_If_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_If.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ConditionalStructureSameImplementation());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionalStructureSameImplementation_Switch_VisualBasic()
-        {
+        public void ConditionalStructureSameImplementation_Switch_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameImplementation_Switch.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ConditionalStructureSameImplementation());
-        }
     }
 }

@@ -33,7 +33,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConstructorArgumentValueShouldExistTest
     {
-
         [TestMethod]
         [TestCategory("Rule")]
         public void ConstructorArgumentValueShouldExist_CS() =>

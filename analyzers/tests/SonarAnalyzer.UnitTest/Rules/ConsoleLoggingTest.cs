@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,23 +30,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConsoleLogging()
-        {
+        public void ConsoleLogging() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging.cs", new ConsoleLogging());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConsoleLogging_ConditionalDirectives1()
-        {
+        public void ConsoleLogging_ConditionalDirectives1() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging_Conditionals1.cs", new ConsoleLogging());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConsoleLogging_ConditionalDirectives2()
-        {
+        public void ConsoleLogging_ConditionalDirectives2() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConsoleLogging_Conditionals2.cs", new ConsoleLogging());
-        }
     }
 }

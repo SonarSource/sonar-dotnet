@@ -28,18 +28,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void BinaryOperationWithIdenticalExpressions_CSharp()
-        {
+        public void BinaryOperationWithIdenticalExpressions_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.cs",
                 new SonarAnalyzer.Rules.CSharp.BinaryOperationWithIdenticalExpressions());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void BinaryOperationWithIdenticalExpressions_VisualBasic()
-        {
+        public void BinaryOperationWithIdenticalExpressions_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\BinaryOperationWithIdenticalExpressions.vb",
                 new SonarAnalyzer.Rules.VisualBasic.BinaryOperationWithIdenticalExpressions());
-        }
     }
 }

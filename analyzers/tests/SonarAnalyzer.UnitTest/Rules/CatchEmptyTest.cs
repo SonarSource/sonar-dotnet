@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,16 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CatchEmpty()
-        {
+        public void CatchEmpty() =>
             Verifier.VerifyAnalyzer(@"TestCases\CatchEmpty.cs", new CatchEmpty());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CatchEmpty_InTest()
-        {
+        public void CatchEmpty_InTest() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\CatchEmpty.cs", new CatchEmpty());
-        }
     }
 }

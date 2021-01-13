@@ -23,7 +23,6 @@ extern alias vbnet;
 
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -89,15 +88,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestSplitToParts() =>
             new[]
             {
-                ("foo", new [] { "foo" }),
-                ("Foo", new [] { "Foo" }),
-                ("FFF", new [] { "FFF" }),
-                ("FfF", new [] { "Ff", "F" }),
-                ("Ff9F", new [] { "Ff", "9", "F" }),
-                ("你好", new [] { "你", "好" }),
-                ("FFf", new [] { "F", "Ff" }),
+                ("foo", new[] { "foo" }),
+                ("Foo", new[] { "Foo" }),
+                ("FFF", new[] { "FFF" }),
+                ("FfF", new[] { "Ff", "F" }),
+                ("Ff9F", new[] { "Ff", "9", "F" }),
+                ("你好", new[] { "你", "好" }),
+                ("FFf", new[] { "F", "Ff" }),
                 ("", new string[0]),
-                ("FF9d", new [] { "FF", "9", "d" }),
+                ("FF9d", new[] { "FF", "9", "d" }),
                 ("y2x5__w7", new[] { "y", "2", "x", "5", "_", "_", "w", "7" }),
                 ("3%c#account", new[] { "3", "%", "c", "#", "account" }),
             }
