@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
@@ -45,9 +45,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         }
 
         [TestMethod]
-        public void GetExpectedIssueLocations_Locations()
+        public void GetExpectedIssueLocations_Locations_CS()
         {
-            var code = @"public class Foo
+            var code = @"
+public class Foo
 {
     public void Bar(object o) // Noncompliant
     {
@@ -60,7 +61,50 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
             locations.Should().HaveCount(2);
 
             locations.Select(l => l.IsPrimary).Should().Equal(new[] { true, true });
-            locations.Select(l => l.LineNumber).Should().Equal(new[] { 3, 6 });
+            locations.Select(l => l.LineNumber).Should().Equal(new[] { 4, 7 });
+        }
+
+        [TestMethod]
+        public void GetExpectedIssueLocations_Locations_VB()
+        {
+            var code = @"
+Public Class Foo
+
+    Public Sub Bar(o As Object) ' Noncompliant
+        ' Noncompliant@+1
+        Console.WriteLine(o)
+    End Sub
+
+End Class";
+            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+
+            locations.Should().HaveCount(2);
+
+            locations.Select(l => l.IsPrimary).Should().Equal(new[] { true, true });
+            locations.Select(l => l.LineNumber).Should().Equal(new[] { 4, 6 });
+        }
+
+        [TestMethod]
+        public void GetExpectedIssueLocations_Locations_Xml()
+        {
+            var code = @"<Root>
+<SelfClosing /><!-- Noncompliant -->
+<SelfClosing /><!-- Noncompliant with additional comment and new line
+-->
+<InsideWithSpace><!-- Noncompliant--></InsideWithSpace>
+<InsideNoSpace><!--Secondary--></InsideNoSpace>
+<Innocent><!--Noncompliant@+1--></Innocent>
+<Guilty />
+<!--
+Noncompliant - this should not be detected as expected issue
+-->
+</Root>";
+            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+
+            locations.Should().HaveCount(5);
+
+            locations.Select(l => l.IsPrimary).Should().Equal(new[] { true, true, true, false, true });
+            locations.Select(l => l.LineNumber).Should().Equal(new[] { 2, 3, 5, 6, 8 });
         }
 
         [TestMethod]
