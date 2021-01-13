@@ -148,30 +148,32 @@ End Class";
         }
 
         [TestMethod]
-        public void ArgumentAtIndexEquals_CS()
+        public void ArgumentAtIndexIsAny_CS()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
             var tracker = new CSharpInvocationTracker(null, null);
-            tracker.ArgumentAtIndexEquals(0, "myConst")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(1, "myConst")(context).Should().BeTrue();
-            tracker.ArgumentAtIndexEquals(1, "foo")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(2, "true")(context).Should().BeFalse();   // Not a string
-            tracker.ArgumentAtIndexEquals(42, "myConst")(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsAny(0, "myConst")(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsAny(1, "myConst")(context).Should().BeTrue();
+            tracker.ArgumentAtIndexIsAny(1, "a", "b", "myConst")(context).Should().BeTrue();
+            tracker.ArgumentAtIndexIsAny(1, "a", "b")(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsAny(2, "true")(context).Should().BeFalse();   // Not a string
+            tracker.ArgumentAtIndexIsAny(42, "myConst")(context).Should().BeFalse();
         }
 
         [TestMethod]
-        public void ArgumentAtIndexEquals_VB()
+        public void ArgumentAtIndexIsAny_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
             var tracker = new VisualBasicInvocationTracker(null, null);
-            tracker.ArgumentAtIndexEquals(0, "myConst")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(1, "myConst")(context).Should().BeTrue();
-            tracker.ArgumentAtIndexEquals(1, "foo")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(2, "true")(context).Should().BeFalse();   // Not a string
-            tracker.ArgumentAtIndexEquals(42, "myConst")(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsAny(0, "myConst")(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsAny(1, "myConst")(context).Should().BeTrue();
+            tracker.ArgumentAtIndexIsAny(1, "a", "b", "myConst")(context).Should().BeTrue();
+            tracker.ArgumentAtIndexIsAny(1, "a", "b")(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsAny(2, "true")(context).Should().BeFalse();   // Not a string
+            tracker.ArgumentAtIndexIsAny(42, "myConst")(context).Should().BeFalse();
 
             context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "NoArgs", AnalyzerLanguage.VisualBasic, 1);
-            tracker.ArgumentAtIndexEquals(0, "myConst")(context).Should().BeFalse();
+            tracker.ArgumentAtIndexIsAny(0, "myConst")(context).Should().BeFalse();
         }
 
         [TestMethod]

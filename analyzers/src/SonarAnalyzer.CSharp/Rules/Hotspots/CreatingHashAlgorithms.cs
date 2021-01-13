@@ -43,11 +43,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
         }
 
-        internal /*for testing*/ CreatingHashAlgorithms(IAnalyzerConfiguration analyzerConfiguration)
+        internal CreatingHashAlgorithms(IAnalyzerConfiguration analyzerConfiguration)
         {
             ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
-            ParameterlessFactoryInvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
-            ParameterizedFactoryInvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
+            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
         }
     }
 }

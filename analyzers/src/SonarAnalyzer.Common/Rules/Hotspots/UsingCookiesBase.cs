@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue_VB, "Add")),
-                InvocationTracker.ArgumentAtIndexEquals(0, "Set-Cookie"),
+                InvocationTracker.ArgumentAtIndexIsAny(0, "Set-Cookie"),
                 InvocationTracker.MethodHasParameters(2),
                 IsIHeadersDictionary());
 

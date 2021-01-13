@@ -33,8 +33,7 @@ namespace SonarAnalyzer.Helpers
         private readonly bool caseInsensitiveComparison;
 
         public abstract InvocationCondition ArgumentAtIndexIsConstant(int index);
-        public abstract InvocationCondition ArgumentAtIndexEquals(int index, string value);
-        public abstract InvocationCondition ArgumentAtIndexIsOneOf(int index, params string[] values);
+        public abstract InvocationCondition ArgumentAtIndexIsAny(int index, params string[] values);
         public abstract InvocationCondition MatchProperty(MemberDescriptor member);
         internal abstract object ConstArgumentForParameter(InvocationContext context, string parameterName);
         protected abstract string GetMethodName(SyntaxNode invocationExpression);
