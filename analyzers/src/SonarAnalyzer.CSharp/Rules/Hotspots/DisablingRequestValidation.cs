@@ -29,6 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DisablingRequestValidation : DisablingRequestValidationBase
     {
         public DisablingRequestValidation() : this(AnalyzerConfiguration.Hotspot) { }
+
         public DisablingRequestValidation(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration) { }
     }
 }

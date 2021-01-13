@@ -28,18 +28,17 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class DisablingRequestValidationBase : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S5753";
+        protected const string DiagnosticId = "S5753";
         private const string MessageFormat = "Make sure disabling ASP.NET Request Validation feature is safe here.";
 
+        private readonly DiagnosticDescriptor rule;
         private readonly IAnalyzerConfiguration analyzerConfiguration;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        protected DiagnosticDescriptor Rule { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected DisablingRequestValidationBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration analyzerConfiguration)
         {
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
             this.analyzerConfiguration = analyzerConfiguration;
         }
 
@@ -65,7 +64,7 @@ namespace SonarAnalyzer.Rules
                         && a.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
                     if (attributeWithFalseParameter != null)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                     }
                 },
                 SymbolKind.NamedType,

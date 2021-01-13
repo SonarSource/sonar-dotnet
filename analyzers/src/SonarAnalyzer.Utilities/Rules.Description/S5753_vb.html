@@ -18,11 +18,10 @@ type="text/javascript" src="https://malicious.domain/payload.js"&gt;</code> to r
 <h2>Sensitive Code Example</h2>
 <p>At Controller level:</p>
 <pre>
-[ValidateInput(false)]
-public ActionResult Welcome(string name)
-{
+&lt;ValidateInput(false)&gt;
+Public Function Welcome(Name As String) As ActionResult
   ...
-}
+End Function
 </pre>
 <p>At application level, configured in the Web.config file:</p>
 <pre>
@@ -37,16 +36,14 @@ public ActionResult Welcome(string name)
 <h2>Compliant Solution</h2>
 <p>At Controller level:</p>
 <pre>
-[ValidateInput(true)]
-public ActionResult Welcome(string name)
-{
+&lt;ValidateInput(true)&gt;
+Public Function Welcome(Name As String) As ActionResult
   ...
-}
+End Function
 or
-public ActionResult Welcome(string name)
-{
+Public Function Welcome(Name As String) As ActionResult
   ...
-}
+End Function
 </pre>
 <p>At application level, configured in the Web.config file:</p>
 <pre>

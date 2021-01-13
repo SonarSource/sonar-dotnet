@@ -32,7 +32,6 @@ namespace Tests.Diagnostics
             return Foo(input);
         }
 
-
         [ValidateInput(false)] // Noncompliant
         public ActionResult FooNoParam()
         {
