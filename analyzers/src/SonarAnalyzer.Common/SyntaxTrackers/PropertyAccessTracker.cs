@@ -55,5 +55,3 @@ namespace SonarAnalyzer.Helpers
         }
     }
 }
-
-

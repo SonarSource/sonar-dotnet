@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Helpers
         public CSharpPropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override object AssignedValue(PropertyAccessContext context) =>
-            context.Expression.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
+            context.Node.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
                 ? assignment.Right.FindConstantValue(context.SemanticModel)
                 : null;
 
@@ -53,7 +53,6 @@ namespace SonarAnalyzer.Helpers
 
         public override PropertyAccessCondition AssignedValueIsConstant() =>
             context => AssignedValue(context) != null;
-
 
         protected override string GetPropertyName(SyntaxNode expression) =>
             ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
