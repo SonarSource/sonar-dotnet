@@ -30,24 +30,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     [TestClass]
     public class IssueLocationCollector_GetPreciseIssueLocations
     {
-        private TextLine GetLine(int lineNumber, string code)
-        {
-            var sourceText = SourceText.From(code);
-            return sourceText.Lines[lineNumber];
-        }
-
-        private void VerifyIssueLocations(IEnumerable<IIssueLocation> result,
-            IEnumerable<bool> expectedIsPrimary,
-            IEnumerable<int> expectedLineNumbers,
-            IEnumerable<string> expectedMessages,
-            IEnumerable<string> expectedIssueIds)
-        {
-            result.Select(l => l.IsPrimary).Should().Equal(expectedIsPrimary);
-            result.Select(l => l.LineNumber).Should().Equal(expectedLineNumbers);
-            result.Select(l => l.Message).Should().Equal(expectedMessages);
-            result.Select(l => l.IssueId).Should().Equal(expectedIssueIds);
-        }
-
         [TestMethod]
         public void GetPreciseIssueLocations_NoMessage_NoIds()
         {
@@ -182,7 +164,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         }
 
         [TestMethod]
-        public void GetPreciseIssueLocations_Message_And_IssueIds_Secondary()
+        public void GetPreciseIssueLocations_Message_And_IssueIds_Secondary_CS()
         {
             var line = GetLine(3, @"if (a > b)
 {
@@ -196,6 +178,24 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { false, false },
                 expectedLineNumbers: new[] { 3, 3 },
+                expectedMessages: new string[] { "Some message", "Some message" },
+                expectedIssueIds: new string[] { "flow1", "flow2" });
+        }
+
+        [TestMethod]
+        public void GetPreciseIssueLocations_Message_And_IssueIds_Secondary_XML()
+        {
+            var line = GetLine(2, @"<Root>
+            <Baaad />
+<!--        ^^^^^^^^^ Secondary [flow1,flow2] {{Some message}}         -->
+</Root>");
+            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+
+            result.Should().HaveCount(2);
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { false, false },
+                expectedLineNumbers: new[] { 2, 2 },
                 expectedMessages: new string[] { "Some message", "Some message" },
                 expectedIssueIds: new string[] { "flow1", "flow2" });
         }
@@ -296,7 +296,58 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 internal class MyClass : IInterface1 // there should be no Noncompliant comment
 ^^^^^^^ {{Do not create internal classes.}}
                          ^^^^^^^^^^^ @-1 {{IInterface1 is bad for your health.}}");
+        }
 
+        [TestMethod]
+        public void GetPreciseIssueLocations_Xml()
+        {
+            var code = @"<Root>
+<Space><SelfClosing /></Space>
+<!--   ^^^^^^^^^^^^^^^ -->
+<NoSpace><SelfClosing /></NoSpace>
+     <!--^^^^^^^^^^^^^^^-->
+<Multiline><SelfClosing /></Multiline>
+<!--       ^^^^^^^^^^^^^^^
+-->
+</Root>";
+            var line = GetLine(2, code);
+            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            result.Should().ContainSingle();
+            var issueLocation = result.Single();
+            issueLocation.Start.Should().Be(7);
+            issueLocation.Length.Should().Be(15);
+
+            line = GetLine(4, code);
+            result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            result.Should().ContainSingle();
+            issueLocation = result.Single();
+            issueLocation.Start.Should().Be(9);
+            issueLocation.Length.Should().Be(15);
+
+            line = GetLine(6, code);
+            result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            result.Should().ContainSingle();
+            issueLocation = result.Single();
+            issueLocation.Start.Should().Be(11);
+            issueLocation.Length.Should().Be(15);
+        }
+
+        private static TextLine GetLine(int lineNumber, string code)
+        {
+            var sourceText = SourceText.From(code);
+            return sourceText.Lines[lineNumber];
+        }
+
+        private static void VerifyIssueLocations(IEnumerable<IIssueLocation> result,
+            IEnumerable<bool> expectedIsPrimary,
+            IEnumerable<int> expectedLineNumbers,
+            IEnumerable<string> expectedMessages,
+            IEnumerable<string> expectedIssueIds)
+        {
+            result.Select(l => l.IsPrimary).Should().Equal(expectedIsPrimary);
+            result.Select(l => l.LineNumber).Should().Equal(expectedLineNumbers);
+            result.Select(l => l.Message).Should().Equal(expectedMessages);
+            result.Select(l => l.IssueId).Should().Equal(expectedIssueIds);
         }
     }
 }

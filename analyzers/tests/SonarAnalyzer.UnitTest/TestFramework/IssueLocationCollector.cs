@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// <code>
     ///     private void MyMethod() // Noncompliant ^4#7
     /// </code>
-    /// 
+    ///
     /// Multiple issues per line. To declare that multiple issues are expected, each issue must be assigned an id. All
     /// secondary locations associated with an issue must have the same id. Note that it is not possible to have multiple
     /// precise/column locations on a single line.
@@ -86,11 +86,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// <code>
     ///     private void MyMethod() // Noncompliant@+1 ^4#7 [MyIssueId] {{Remove this unused private method}}
     /// </code>
-    /// <code>
     /// </summary>
     public class IssueLocationCollector
     {
-        private const string CommentPattern = "(?<comment>//|')";
+        private const string CommentPattern = "(?<comment>//|'|<!--)";
         private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*";
         private const string NoPrecisePositionPattern = @"(?<!\s*\^+\s)";
         private const string IssueTypePattern = @"\s*(?<issueType>Noncompliant|Secondary)";
@@ -103,7 +102,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         internal static readonly Regex RxIssue =
            new Regex(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern, RegexOptions.Compiled);
         internal static readonly Regex RxPreciseLocation =
-            new Regex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + "$", RegexOptions.Compiled);
+            new Regex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->)?$", RegexOptions.Compiled);
         private static readonly Regex RxBuildError =
             new Regex(CommentPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern, RegexOptions.Compiled);
         private static readonly Regex RxInvalidType =
@@ -123,8 +122,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 {
                     preciseLocations.AddRange(newPreciseLocations);
                 }
-                else if (GetIssueLocations(line) is IEnumerable<IssueLocation> newLocations
-                    && newLocations.Any())
+                else if (GetIssueLocations(line) is IEnumerable<IssueLocation> newLocations && newLocations.Any())
                 {
                     locations.AddRange(newLocations);
                 }
@@ -137,26 +135,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations, preciseLocations));
         }
 
-        internal IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines)
-        {
-            return lines?.SelectMany(GetBuildErrorsLocations).OfType<IIssueLocation>() ?? Enumerable.Empty<IIssueLocation>();
-        }
+        internal IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
+            lines?.SelectMany(GetBuildErrorsLocations).OfType<IIssueLocation>() ?? Enumerable.Empty<IIssueLocation>();
 
         internal /*for testing*/ IList<IIssueLocation> MergeLocations(IEnumerable<IssueLocation> locations, IEnumerable<IssueLocation> preciseLocations)
         {
             var usedLocations = new List<IssueLocation>();
-
             foreach (var location in locations)
             {
                 var preciseLocationsOnSameLine = preciseLocations.Where(l => l.LineNumber == location.LineNumber);
-
                 if (preciseLocationsOnSameLine.Count() > 1)
                 {
                     ThrowUnexpectedPreciseLocationCount(preciseLocationsOnSameLine.Count(), preciseLocationsOnSameLine.First().LineNumber);
                 }
 
-                var preciseLocation = preciseLocationsOnSameLine.SingleOrDefault();
-                if (preciseLocation != null)
+                if (preciseLocationsOnSameLine.SingleOrDefault() is { }  preciseLocation)
                 {
                     if (location.Start.HasValue)
                     {
@@ -175,15 +168,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .ToList();
         }
 
-        internal /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line)
-        {
-            return GetLocations(line, RxIssue);
-        }
+        internal /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line) =>
+            GetLocations(line, RxIssue);
 
-        internal /*for testing*/ IEnumerable<IssueLocation> GetBuildErrorsLocations(TextLine line)
-        {
-            return GetLocations(line, RxBuildError);
-        }
+        internal /*for testing*/ IEnumerable<IssueLocation> GetBuildErrorsLocations(TextLine line) =>
+            GetLocations(line, RxBuildError);
 
         internal /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
         {
@@ -204,7 +193,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 EnsureNoRemainingCurlyBrace(line, match);
                 return CreateIssueLocations(match, line.LineNumber + 1);
             }
-
             return Enumerable.Empty<IssueLocation>();
         }
 
@@ -340,15 +328,10 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
         internal class IssueLocation : IIssueLocation
         {
             public bool IsPrimary { get; set; }
-
             public int LineNumber { get; set; }
-
             public string Message { get; set; }
-
             public string IssueId { get; set; }
-
             public int? Start { get; set; }
-
             public int? Length { get; set; }
         }
     }
