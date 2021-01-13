@@ -28,7 +28,7 @@ using SonarAnalyzer.ShimLayer.CSharp;
 namespace SonarAnalyzer.Helpers
 {
     public class CSharpMethodDeclarationTracker : MethodDeclarationTracker
-    { 
+    {
         public CSharpMethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override MethodDeclarationCondition ParameterAtIndexIsUsed(int index) =>
