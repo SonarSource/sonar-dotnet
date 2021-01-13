@@ -28,6 +28,8 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4790";
         protected const string MessageFormat = "Make sure this weak hash algorithm is not used in a sensitive context here.";
 
+        private const string Create = "Create";
+
         private readonly KnownType[] algorithmTypes =
         {
             KnownType.System_Security_Cryptography_SHA1,
@@ -52,23 +54,23 @@ namespace SonarAnalyzer.Rules
             ObjectCreationTracker.Track(context, ObjectCreationTracker.WhenDerivesOrImplementsAny(algorithmTypes));
 
             ParameterlessFactoryInvocationTracker.Track(context,
-                                                        ParameterlessFactoryInvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, "Create"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, "Create"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, "Create"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, "Create"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, "Create")),
+                                                        ParameterlessFactoryInvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, Create),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, Create),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, Create),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, Create),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, Create)),
                                                         ParameterlessFactoryInvocationTracker.MethodHasParameters(0));
 
             ParameterizedFactoryInvocationTracker.Track(context,
-                                                        ParameterizedFactoryInvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_AsymmetricAlgorithm, "Create"),
+                                                        ParameterizedFactoryInvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_AsymmetricAlgorithm, Create),
                                                                                                           new MemberDescriptor(KnownType.System_Security_Cryptography_CryptoConfig, "CreateFromName"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, "Create"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_HashAlgorithm, "Create"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, "Create"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_KeyedHashAlgorithm, "Create"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, "Create"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, "Create"),
-                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, "Create")),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, Create),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_HashAlgorithm, Create),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, Create),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_KeyedHashAlgorithm, Create),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, Create),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, Create),
+                                                                                                          new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, Create)),
                                                         ParameterizedFactoryInvocationTracker.ArgumentAtIndexIsOneOf(0, unsafeAlgorithms));
         }
     }
