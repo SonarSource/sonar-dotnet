@@ -18,8 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -28,22 +29,18 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class AesManagedShouldBeWithSecureMode : ObjectShouldBeInitializedCorrectlyBase
+    public sealed class CommandPath : CommandPathBase<SyntaxKind>
     {
-        private const string DiagnosticId = "S4432";
-        private const string MessageFormat = "Use a certified third party library implementing Galois/Counter Mode (GCM) instead.";
+        public CommandPath() : this(AnalyzerConfiguration.Hotspot) { }
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal CommandPath(IAnalyzerConfiguration configuration) : base(RspecStrings.ResourceManager)
+        {
+            InvocationTracker = new CSharpInvocationTracker(configuration, Rule);
+            PropertyAccessTracker = new CSharpPropertyAccessTracker(configuration, Rule);
+            ObjectCreationTracker = new CSharpObjectCreationTracker(configuration, Rule);
+        }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(KnownType.System_Security_Cryptography_AesManaged);
-
-        protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
-            isAllowedConstantValue: constantValue => false,
-            trackedTypes: TrackedTypes,
-            isTrackedPropertyName: propertyName => "Mode" == propertyName
-        );
+        protected override string FirstArgument(InvocationContext context) =>
+            ((InvocationExpressionSyntax)context.Invocation).ArgumentList.Get(0).FindStringConstant(context.SemanticModel);
     }
 }

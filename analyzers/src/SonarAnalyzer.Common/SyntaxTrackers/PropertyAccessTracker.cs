@@ -32,15 +32,15 @@ namespace SonarAnalyzer.Helpers
     {
         private bool CaseInsensitiveComparison { get; }
 
-        protected PropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false)
-            : base(analyzerConfiguration, rule)
-        {
-            this.CaseInsensitiveComparison = caseInsensitiveComparison;
-        }
-
+        public abstract object AssignedValue(PropertyAccessContext context);
+        public abstract PropertyAccessCondition MatchGetter();
+        public abstract PropertyAccessCondition MatchSetter();
+        public abstract PropertyAccessCondition AssignedValueIsConstant();
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
-
         protected abstract string GetPropertyName(SyntaxNode expression);
+
+        protected PropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
+            CaseInsensitiveComparison = caseInsensitiveComparison;
 
         public void Track(SonarAnalysisContext context, params PropertyAccessCondition[] conditions) =>
             Track(context, new object[0], conditions);
@@ -87,24 +87,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        #region Syntax-level standard conditions
-
         public PropertyAccessCondition MatchProperty(params MemberDescriptor[] properties) =>
-            context =>
-                MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, CaseInsensitiveComparison, properties);
-
-        public abstract PropertyAccessCondition MatchGetter();
-
-        public abstract PropertyAccessCondition MatchSetter();
-
-        public abstract PropertyAccessCondition AssignedValueIsConstant();
-
-        #endregion
-
-        #region Symbol-level standard conditions
-
-        // Add any common symbol-level checks here...
-
-        #endregion
+            context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, CaseInsensitiveComparison, properties);
     }
 }

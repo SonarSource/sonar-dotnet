@@ -26,9 +26,8 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.SyntaxTrackers
+namespace SonarAnalyzer.Helpers
 {
     /// <summary>
     /// Verifies the initialization of an object, whether one or more properties have been correctly set when the object was initialized.

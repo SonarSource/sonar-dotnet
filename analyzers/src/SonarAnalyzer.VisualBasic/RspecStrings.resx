@@ -3867,6 +3867,39 @@
   <data name="S3981_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S4036_Category" xml:space="preserve">
+    <value>Minor Security Hotspot</value>
+  </data>
+  <data name="S4036_Description" xml:space="preserve">
+    <value>When executing an OS command and unless you specify the full path to the executable, then the locations in your application's PATH environment variable will be searched for the executable. That search could leave an opening for an attacker if one of the elements in PATH is a directory under his control. </value>
+  </data>
+  <data name="S4036_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4036_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4036_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S4036_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S4036_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4036_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S4036_Tags" xml:space="preserve">
+    <value>cwe,owasp-a1</value>
+  </data>
+  <data name="S4036_Title" xml:space="preserve">
+    <value>Searching OS commands in PATH is security-sensitive</value>
+  </data>
+  <data name="S4036_Type" xml:space="preserve">
+    <value>SECURITY_HOTSPOT</value>
+  </data>
   <data name="S4136_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>
