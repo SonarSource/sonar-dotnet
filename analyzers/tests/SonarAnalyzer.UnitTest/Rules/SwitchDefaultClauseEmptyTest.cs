@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,21 +30,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchDefaultClauseEmpty()
-        {
+        public void SwitchDefaultClauseEmpty() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchDefaultClauseEmpty.cs",
                 new SwitchDefaultClauseEmpty());
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void SwitchDefaultClauseEmpty_CodeFix()
-        {
+        public void SwitchDefaultClauseEmpty_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\SwitchDefaultClauseEmpty.cs",
                 @"TestCases\SwitchDefaultClauseEmpty.Fixed.cs",
                 new SwitchDefaultClauseEmpty(),
                 new SwitchDefaultClauseEmptyCodeFixProvider());
-        }
     }
 }

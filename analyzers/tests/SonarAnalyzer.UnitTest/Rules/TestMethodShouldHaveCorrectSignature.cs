@@ -20,7 +20,9 @@
 
 extern alias csharp;
 
+#if NET
 using System.Linq;
+#endif
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;

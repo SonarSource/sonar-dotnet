@@ -29,20 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringConcatenationWithPlus()
-        {
+        public void StringConcatenationWithPlus() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringConcatenationWithPlus.vb", new StringConcatenationWithPlus());
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void StringConcatenationWithPlus_CodeFix()
-        {
+        public void StringConcatenationWithPlus_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\StringConcatenationWithPlus.vb",
                 @"TestCases\StringConcatenationWithPlus.Fixed.vb",
                 new StringConcatenationWithPlus(),
                 new StringConcatenationWithPlusCodeFixProvider());
-        }
     }
 }

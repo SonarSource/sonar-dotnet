@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CSharp = SonarAnalyzer.Rules.CSharp;
+using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,19 +30,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void TooManyLabelsInSwitch()
-        {
+        public void TooManyLabelsInSwitch() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.cs",
                 new CSharp.TooManyLabelsInSwitch { Maximum = 2 },
                 ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void TooManyLabelsInSwitch_VB()
-        {
+        public void TooManyLabelsInSwitch_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.vb",
                 new VisualBasic.TooManyLabelsInSwitch { Maximum = 2 });
-        }
     }
 }

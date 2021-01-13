@@ -30,19 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantParentheses_CS()
-        {
+        public void RedundantParentheses_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesExpression.cs",
                 new CS.RedundantParentheses());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantParentheses_VB()
-        {
+        public void RedundantParentheses_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantParentheses.vb",
                 new VB.RedundantParentheses());
-        }
     }
 }
-

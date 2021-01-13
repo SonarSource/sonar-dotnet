@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,20 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchShouldNotBeNested_CS()
-        {
+        public void SwitchShouldNotBeNested_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.cs",
                 new SwitchShouldNotBeNested(),
                 ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchShouldNotBeNested_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.vb",
+        public void SwitchShouldNotBeNested_VB() => Verifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.vb",
                 new SonarAnalyzer.Rules.VisualBasic.SwitchShouldNotBeNested());
-        }
     }
 }
-

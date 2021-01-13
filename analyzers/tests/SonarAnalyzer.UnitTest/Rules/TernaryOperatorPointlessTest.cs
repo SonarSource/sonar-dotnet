@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,20 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void TernaryOperatorPointless()
-        {
+        public void TernaryOperatorPointless() =>
             Verifier.VerifyAnalyzer(@"TestCases\TernaryOperatorPointless.cs", new TernaryOperatorPointless());
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void TernaryOperatorPointless_CodeFix()
-        {
+        public void TernaryOperatorPointless_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\TernaryOperatorPointless.cs",
                 @"TestCases\TernaryOperatorPointless.Fixed.cs",
                 new TernaryOperatorPointless(),
                 new TernaryOperatorPointlessCodeFixProvider());
-        }
     }
 }

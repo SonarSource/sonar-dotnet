@@ -28,18 +28,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SelfAssignment_CSharp()
-        {
+        public void SelfAssignment_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.cs",
                 new SonarAnalyzer.Rules.CSharp.SelfAssignment(),
                 options: ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SelfAssignment_VisualBasic()
-        {
+        public void SelfAssignment_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.vb", new SonarAnalyzer.Rules.VisualBasic.SelfAssignment());
-        }
     }
 }

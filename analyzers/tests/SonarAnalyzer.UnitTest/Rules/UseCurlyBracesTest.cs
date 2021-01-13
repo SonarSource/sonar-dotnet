@@ -30,19 +30,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseCurlyBraces()
-        {
+        public void UseCurlyBraces() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.cs",
                 new UseCurlyBraces());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseCurlyBraces_FromCSharp7()
-        {
+        public void UseCurlyBraces_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.CSharp7.cs",
                 new UseCurlyBraces(),
                 ParseOptionsHelper.FromCSharp7);
-        }
     }
 }

@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,20 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseGenericWithRefParameters()
-        {
+        public void UseGenericWithRefParameters() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseGenericWithRefParameters.cs",
                 new UseGenericWithRefParameters());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseGenericWithRefParameters_InvalidCode()
-        {
+        public void UseGenericWithRefParameters_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public void (ref object o1)
 {
 }", new UseGenericWithRefParameters(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }

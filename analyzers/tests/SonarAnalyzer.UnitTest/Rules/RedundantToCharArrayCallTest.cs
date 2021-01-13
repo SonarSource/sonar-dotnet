@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,20 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantToCharArrayCall()
-        {
+        public void RedundantToCharArrayCall() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantToCharArrayCall.cs", new RedundantToCharArrayCall());
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void RedundantToCharArrayCall_CodeFix()
-        {
+        public void RedundantToCharArrayCall_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\RedundantToCharArrayCall.cs",
                 @"TestCases\RedundantToCharArrayCall.Fixed.cs",
                 new RedundantToCharArrayCall(),
                 new RedundantToCharArrayCallCodeFixProvider());
-        }
     }
 }
