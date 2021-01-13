@@ -12562,6 +12562,33 @@
   <data name="S5659_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
   </data>
+  <data name="S5753_Category" xml:space="preserve">
+    <value>Major Security Hotspot</value>
+  </data>
+  <data name="S5753_Description" xml:space="preserve">
+    <value>ASP.NET 1.1+ comes with a feature called Request Validation, preventing the server to accept content containing un-encoded HTML. This feature comes as a first protection layer against Cross-Site Scripting (XSS) attacks and act as a simple Web Application Firewall (WAF) rejecting requests potentially containing malicious content.</value>
+  </data>
+  <data name="S5753_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S5753_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S5753_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S5753_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S5753_Tags" xml:space="preserve">
+    <value>cwe,owasp-a7</value>
+  </data>
+  <data name="S5753_Title" xml:space="preserve">
+    <value>Disabling ASP.NET "Request Validation" feature is security-sensitive</value>
+  </data>
+  <data name="S5753_Type" xml:space="preserve">
+    <value>SECURITY_HOTSPOT</value>
+  </data>
   <data name="S5766_Category" xml:space="preserve">
     <value>Major Security Hotspot</value>
   </data>
