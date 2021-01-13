@@ -18,35 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     [TestClass]
     public class IssueLocationCollector_GetIssueLocations
     {
-        private TextLine GetLine(int lineNumber, string code)
-        {
-            var sourceText = SourceText.From(code);
-            return sourceText.Lines[lineNumber];
-        }
-
-        private void VerifyIssueLocations(IEnumerable<IIssueLocation> result,
-            IEnumerable<bool> expectedIsPrimary, 
-            IEnumerable<int> expectedLineNumbers, 
-            IEnumerable<string> expectedMessages, 
-            IEnumerable<string> expectedIssueIds)
-        {
-            result.Select(l => l.IsPrimary).Should().Equal(expectedIsPrimary);
-            result.Select(l => l.LineNumber).Should().Equal(expectedLineNumbers);
-            result.Select(l => l.Message).Should().Equal(expectedMessages);
-            result.Select(l => l.IssueId).Should().Equal(expectedIssueIds);
-        }
-
         [TestMethod]
         public void GetIssueLocations_Noncompliant_With_Two_Flows()
         {
@@ -280,7 +262,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         {
             var line = GetLine(2, @"if (a > b)
 {
-    Console.WriteLine(a); //Noncompliant @-2 ^5#16 [myIssueId] {{MyMessage}}               
+    Console.WriteLine(a); // Noncompliant @-2 ^5#16 [myIssueId] {{MyMessage}}
 }");
             var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
 
@@ -295,13 +277,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
             result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
         }
 
-
         [TestMethod]
         public void GetIssueLocations_Noncompliant_Offset_ExactColumn_Message_NoWhitespace()
         {
             var line = GetLine(2, @"if (a > b)
 {
-    Console.WriteLine(a); //Noncompliant@-2^5#16[myIssueId]{{MyMessage}}        
+    Console.WriteLine(a); //Noncompliant@-2^5#16[myIssueId]{{MyMessage}}
 }");
             var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
 
@@ -314,6 +295,44 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
                 expectedIssueIds: new string[] { "myIssueId" });
             result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
             result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
+        }
+
+        [TestMethod]
+        public void GetIssueLocations_Noncompliant_Offset_ExactColumn_Message_Whitespaces_Xml()
+        {
+            var line = GetLine(2, @"<RootRootRootRootRootRoot />
+
+<!-- Noncompliant @-2 ^5#16 [myIssueId] {{MyMessage}} -->
+");
+            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+
+            result.Should().ContainSingle();
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { true },
+                expectedLineNumbers: new[] { 1 },
+                expectedMessages: new string[] { "MyMessage" },
+                expectedIssueIds: new string[] { "myIssueId" });
+            result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
+            result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
+        }
+
+        private static TextLine GetLine(int lineNumber, string code)
+        {
+            var sourceText = SourceText.From(code);
+            return sourceText.Lines[lineNumber];
+        }
+
+        private static void VerifyIssueLocations(IEnumerable<IIssueLocation> result,
+            IEnumerable<bool> expectedIsPrimary,
+            IEnumerable<int> expectedLineNumbers,
+            IEnumerable<string> expectedMessages,
+            IEnumerable<string> expectedIssueIds)
+        {
+            result.Select(l => l.IsPrimary).Should().Equal(expectedIsPrimary);
+            result.Select(l => l.LineNumber).Should().Equal(expectedLineNumbers);
+            result.Select(l => l.Message).Should().Equal(expectedMessages);
+            result.Select(l => l.IssueId).Should().Equal(expectedIssueIds);
         }
     }
 }
