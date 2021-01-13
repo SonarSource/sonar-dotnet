@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel, versionProvider.GetDotNetFrameworkVersion(context.Compilation));
-            if (xmlReaderSettingsValidator.IsUnsafe(invocation, settings, out var secondaryLocations))
+            if (xmlReaderSettingsValidator.GetUnsafeAssignmentLocations(invocation, settings) is { } secondaryLocations && secondaryLocations.Any())
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation(), secondaryLocations, secondaryLocations.ToProperties(SecondaryMessageFormat)));
             }

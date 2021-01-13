@@ -50,16 +50,15 @@ namespace SonarAnalyzer.Rules.XXE
         }
 
         /// <summary>
-        /// Checks if a method invocation (e.g. XmlReader.Create) receives a secure instance of XmlReaderSettings.
+        /// Gets the assignment locations of XmlReaderSettings properties which are unsafe and are used in invocations afterwards (e.g. XmlReader.Create).
         /// </summary>
         /// <param name="invocation">A method invocation syntax node (e.g. XmlReader.Create).</param>
         /// <param name="settings">The symbol of the XmlReaderSettings node received as parameter. This is used to check
         /// if certain properties (ProhibitDtd, DtdProcessing or XmlUrlResolver) were modified for the given symbol.</param>
-        /// <param name="secondaryLocations"> The locations where the settings got invalid.</param>
-        /// <returns>True if the settings is unsafe, otherwise false.</returns>
-        public bool IsUnsafe(InvocationExpressionSyntax invocation, ISymbol settings, out IList<Location> secondaryLocations)
+        /// <returns>The list of unsafe assignment locations.</returns>
+        public IList<Location> GetUnsafeAssignmentLocations(InvocationExpressionSyntax invocation, ISymbol settings)
         {
-            secondaryLocations = new List<Location>();
+            var unsafeAssignmentLocations = new List<Location>();
             // By default ProhibitDtd is 'true' and DtdProcessing is 'ignore'
             var unsafeDtdProcessing = false;
             var unsafeResolver = isXmlResolverSafeByDefault;
@@ -79,7 +78,7 @@ namespace SonarAnalyzer.Rules.XXE
                     unsafeDtdProcessing = IsXmlResolverDtdProcessingUnsafe(assignment, semanticModel);
                     if (unsafeDtdProcessing)
                     {
-                        secondaryLocations.Add(assignment.GetLocation());
+                        unsafeAssignmentLocations.Add(assignment.GetLocation());
                     }
                 }
                 else if (name == "XmlResolver")
@@ -87,12 +86,12 @@ namespace SonarAnalyzer.Rules.XXE
                     unsafeResolver = IsXmlResolverAssignmentUnsafe(assignment, semanticModel);
                     if (unsafeResolver)
                     {
-                        secondaryLocations.Add(assignment.GetLocation());
+                        unsafeAssignmentLocations.Add(assignment.GetLocation());
                     }
                 }
             }
 
-            return unsafeDtdProcessing && unsafeResolver;
+            return unsafeDtdProcessing && unsafeResolver ? unsafeAssignmentLocations : new List<Location>();
         }
 
         private static bool IsMemberAccessOnSymbol(ExpressionSyntax expression, ISymbol symbol, SemanticModel semanticModel) =>
@@ -112,12 +111,17 @@ namespace SonarAnalyzer.Rules.XXE
             semanticModel.GetTypeInfo(expressionSyntax).Type.Is(KnownType.System_Xml_XmlReaderSettings);
 
         private static ObjectCreationExpressionSyntax GetObjectCreation(ISymbol symbol, InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            // First we search for object creations at the syntax level to see if the object is created inline
+            // and if not we look for the identifier declaration.
             invocation.DescendantNodes()
                       .OfType<ObjectCreationExpressionSyntax>()
-                      .FirstOrDefault(objectCreation => objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel))
+                      .FirstOrDefault(objectCreation => IsXmlReaderSettingsCreationWithInitializer(objectCreation, semanticModel))
                 ?? symbol.Locations
                          .SelectMany(location => GetDescendantNodes(location, invocation).OfType<ObjectCreationExpressionSyntax>())
-                         .FirstOrDefault(objectCreation => objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel));
+                         .FirstOrDefault(objectCreation => IsXmlReaderSettingsCreationWithInitializer(objectCreation, semanticModel));
+
+        private static bool IsXmlReaderSettingsCreationWithInitializer(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+            objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel);
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode invocation)
         {
