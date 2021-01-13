@@ -19,15 +19,14 @@
  */
 
 extern alias csharp;
-
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.TestFramework;
-using System.Collections.Generic;
 using SonarAnalyzer.UnitTest.MetadataReferences;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
-using System.Linq;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -68,4 +67,3 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(MetadataReferenceFacade.PresentationFramework);
     }
 }
-

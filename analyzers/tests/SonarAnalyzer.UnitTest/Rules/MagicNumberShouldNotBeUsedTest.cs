@@ -30,10 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MagicNumberShouldNotBeUsed()
-        {
+        public void MagicNumberShouldNotBeUsed() =>
             Verifier.VerifyAnalyzer(@"TestCases\MagicNumberShouldNotBeUsed.cs",
                 new MagicNumberShouldNotBeUsed());
-        }
     }
 }

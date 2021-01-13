@@ -31,52 +31,41 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodParameterUnused_CS()
-        {
+        public void MethodParameterUnused_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.cs",
                 new CS.MethodParameterUnused());
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void MethodParameterUnused_CodeFix_CS()
-        {
+        public void MethodParameterUnused_CodeFix_CS() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodParameterUnused.cs",
                 @"TestCases\MethodParameterUnused.Fixed.cs",
                 new CS.MethodParameterUnused(),
                 new CS.MethodParameterUnusedCodeFixProvider());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodParameterUnused_CSharp7_CS()
-        {
+        public void MethodParameterUnused_CSharp7_CS() =>
             Verifier.VerifyNoIssueReported(@"TestCases\MethodParameterUnused.CSharp7.cs",
                 new CS.MethodParameterUnused(),
                 ParseOptionsHelper.FromCSharp7,
                 additionalReferences: NuGetMetadataReference.SystemValueTuple("4.5.0"));
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodParameterUnused_CSharp8_CS()
-        {
+        public void MethodParameterUnused_CSharp8_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp8.cs",
                 new CS.MethodParameterUnused(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodParameterUnused_VB()
-        {
+        public void MethodParameterUnused_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.vb",
                 new VB.MethodParameterUnused());
-        }
     }
 }
-

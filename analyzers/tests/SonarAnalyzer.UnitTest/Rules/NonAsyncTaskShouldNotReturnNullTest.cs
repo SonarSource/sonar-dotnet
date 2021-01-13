@@ -30,20 +30,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonAsyncTaskShouldNotReturnNull_CS()
-        {
+        public void NonAsyncTaskShouldNotReturnNull_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonAsyncTaskShouldNotReturnNull.cs",
                 new NonAsyncTaskShouldNotReturnNull(),
                 options: ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonAsyncTaskShouldNotReturnNull_VB()
-        {
+        public void NonAsyncTaskShouldNotReturnNull_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonAsyncTaskShouldNotReturnNull.vb",
                 new SonarAnalyzer.Rules.VisualBasic.NonAsyncTaskShouldNotReturnNull());
-        }
     }
 }
-

@@ -30,7 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PropertyWriteOnly_CSharp() => Verifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.cs", new CS.PropertyWriteOnly());
+        public void PropertyWriteOnly_CSharp() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.cs", new CS.PropertyWriteOnly());
 
 #if NET
         [TestMethod]
@@ -41,6 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void PropertyWriteOnly_VB() => Verifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.vb", new VB.PropertyWriteOnly());
+        public void PropertyWriteOnly_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyWriteOnly.vb", new VB.PropertyWriteOnly());
     }
 }

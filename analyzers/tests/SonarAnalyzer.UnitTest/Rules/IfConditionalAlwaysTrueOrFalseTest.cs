@@ -30,29 +30,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void IfConditionalAlwaysTrueOrFalse_CS()
-        {
+        public void IfConditionalAlwaysTrueOrFalse_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\IfConditionalAlwaysTrueOrFalse.cs",
                 new CS.IfConditionalAlwaysTrueOrFalse());
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void IfConditionalAlwaysTrueOrFalse_CodeFix_CS()
-        {
+        public void IfConditionalAlwaysTrueOrFalse_CodeFix_CS() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\IfConditionalAlwaysTrueOrFalse.cs",
                 @"TestCases\IfConditionalAlwaysTrueOrFalse.Fixed.cs",
                 new CS.IfConditionalAlwaysTrueOrFalse(),
                 new CS.IfConditionalAlwaysTrueOrFalseCodeFixProvider());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void IfConditionalAlwaysTrueOrFalse_VB()
-        {
+        public void IfConditionalAlwaysTrueOrFalse_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\IfConditionalAlwaysTrueOrFalse.vb",
                 new VB.IfConditionalAlwaysTrueOrFalse());
-        }
     }
 }

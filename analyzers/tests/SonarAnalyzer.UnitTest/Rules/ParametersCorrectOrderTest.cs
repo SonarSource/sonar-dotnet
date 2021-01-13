@@ -30,17 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParametersCorrectOrder_CS()
-        {
+        public void ParametersCorrectOrder_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
                 new CS.ParametersCorrectOrder(),
                 options: ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParametersCorrectOrder_InvalidCode_CS()
-        {
+        public void ParametersCorrectOrder_InvalidCode_CS() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class Foo
 {
@@ -51,20 +48,16 @@ public class Foo
         new System. ()
     }
 }", new CS.ParametersCorrectOrder(), checkMode: CompilationErrorBehavior.Ignore);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParametersCorrectOrder_VB()
-        {
+        public void ParametersCorrectOrder_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
                 new VB.ParametersCorrectOrder());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParametersCorrectOrder_InvalidCode_VB()
-        {
+        public void ParametersCorrectOrder_InvalidCode_VB() =>
             Verifier.VerifyVisualBasicAnalyzer(@"
 Public Class Foo
     Public Sub Bar()
@@ -72,7 +65,6 @@ Public Class Foo
         Dim y = New System. ()
     End Sub
 End Class", new VB.ParametersCorrectOrder(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }
 

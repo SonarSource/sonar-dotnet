@@ -30,9 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void IndexOfCheckAgainstZero()
-        {
+        public void IndexOfCheckAgainstZero() =>
             Verifier.VerifyAnalyzer(@"TestCases\IndexOfCheckAgainstZero.cs", new IndexOfCheckAgainstZero());
-        }
     }
 }

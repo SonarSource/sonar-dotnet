@@ -57,5 +57,3 @@ public class Foo
             Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new SonarAnalyzer.Rules.VisualBasic.ImplementSerializationMethodsCorrectly());
     }
 }
-
-

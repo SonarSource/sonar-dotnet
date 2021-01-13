@@ -32,11 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithAssemblyVersionAttribute()
-        {
+        public void MarkAssemblyWithAssemblyVersionAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs",
                 new MarkAssemblyWithAssemblyVersionAttribute());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]

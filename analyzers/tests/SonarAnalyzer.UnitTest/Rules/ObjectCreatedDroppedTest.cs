@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,16 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ObjectCreatedDropped()
-        {
+        public void ObjectCreatedDropped() =>
             Verifier.VerifyAnalyzer(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ObjectCreatedDropped_InTest()
-        {
+        public void ObjectCreatedDropped_InTest() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
-        }
     }
 }

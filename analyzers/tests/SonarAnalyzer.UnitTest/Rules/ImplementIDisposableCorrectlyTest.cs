@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,10 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ImplementIDisposableCorrectly()
-        {
+        public void ImplementIDisposableCorrectly() =>
             Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp8);
-        }
 
 #if NET
         [TestMethod]
@@ -46,21 +44,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ImplementIDisposableCorrectly_AbstractClass()
-        {
+        public void ImplementIDisposableCorrectly_AbstractClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.AbstractClass.cs", new ImplementIDisposableCorrectly());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles()
-        {
+        public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles() =>
             Verifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\ImplementIDisposableCorrectlyPartial1.cs",
                     @"TestCases\ImplementIDisposableCorrectlyPartial2.cs"
                 }, new ImplementIDisposableCorrectly());
-        }
     }
 }

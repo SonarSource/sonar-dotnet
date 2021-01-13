@@ -29,9 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void IndexedPropertyName()
-        {
+        public void IndexedPropertyName() =>
             Verifier.VerifyAnalyzer(@"TestCases\IndexedPropertyName.vb", new IndexedPropertyName());
-        }
     }
 }

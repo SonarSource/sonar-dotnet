@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,20 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PropertyNamesShouldNotMatchGetMethods()
-        {
+        public void PropertyNamesShouldNotMatchGetMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs",
                 new PropertyNamesShouldNotMatchGetMethods());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void PropertyNamesShouldNotMatchGetMethods_InvalidCode()
-        {
+        public void PropertyNamesShouldNotMatchGetMethods_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
     public int { get; } // Missing identifier on purpose
     public int () { return 42; } // Missing identifier on purpose
 ", new PropertyNamesShouldNotMatchGetMethods(), checkMode: CompilationErrorBehavior.Ignore);
-        }
     }
 }

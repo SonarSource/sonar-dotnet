@@ -29,9 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void LocalVariableName()
-        {
+        public void LocalVariableName() =>
             Verifier.VerifyAnalyzer(@"TestCases\LocalVariableName.vb", new LocalVariableName());
-        }
     }
 }

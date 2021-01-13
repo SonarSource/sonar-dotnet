@@ -32,11 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithComVisibleAttribute()
-        {
+        public void MarkAssemblyWithComVisibleAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.cs",
                 new MarkAssemblyWithComVisibleAttribute());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]

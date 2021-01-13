@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -30,12 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NestedCodeBlock() => Verifier.VerifyAnalyzer(@"TestCases\NestedCodeBlock.cs", new NestedCodeBlock());
+        public void NestedCodeBlock() =>
+            Verifier.VerifyAnalyzer(@"TestCases\NestedCodeBlock.cs", new NestedCodeBlock());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
-        public void NestedCodeBlock_CSharp9() => Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NestedCodeBlock.CSharp9.cs", new NestedCodeBlock());
+        public void NestedCodeBlock_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NestedCodeBlock.CSharp9.cs", new NestedCodeBlock());
 #endif
     }
 }

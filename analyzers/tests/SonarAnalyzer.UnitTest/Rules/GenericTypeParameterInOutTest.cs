@@ -30,17 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GenericTypeParameterInOut()
-        {
+        public void GenericTypeParameterInOut() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.cs", new GenericTypeParameterInOut());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void GenericTypeParameterInOut_FromCSharp7()
-        {
+        public void GenericTypeParameterInOut_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.CSharp7.cs", new GenericTypeParameterInOut(),
                 options: ParseOptionsHelper.FromCSharp7);
-        }
     }
 }

@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -48,5 +48,3 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new SonarAnalyzer.Rules.VisualBasic.GenericInheritanceShouldNotBeRecursive());
     }
 }
-
-

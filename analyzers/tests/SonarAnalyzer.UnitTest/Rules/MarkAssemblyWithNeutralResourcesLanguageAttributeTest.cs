@@ -32,8 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenResxAndAttribute_DoesntThrow()
-        {
+        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenResxAndAttribute_DoesntThrow() =>
             Verifier.VerifyAnalyzer(
                 new[]
                 {
@@ -41,16 +40,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"ResourceTests\SomeResources.Designer.cs"
                 },
                 new MarkAssemblyWithNeutralResourcesLanguageAttribute());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenAttributeButNoResx_DoesntThrow()
-        {
+        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenAttributeButNoResx_DoesntThrow() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
                 new MarkAssemblyWithNeutralResourcesLanguageAttribute());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]

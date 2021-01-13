@@ -30,16 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PropertyGetterWithThrowCSharp()
-        {
+        public void PropertyGetterWithThrowCSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertyGetterWithThrow.cs", new CS.PropertyGetterWithThrow());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void PropertyGetterWithThrowVBNet()
-        {
+        public void PropertyGetterWithThrowVBNet() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertyGetterWithThrow.vb", new VB.PropertyGetterWithThrow());
-        }
     }
 }
