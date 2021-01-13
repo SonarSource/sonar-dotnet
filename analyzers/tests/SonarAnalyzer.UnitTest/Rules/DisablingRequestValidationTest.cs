@@ -30,32 +30,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisablingRequestValidationTest
     {
+        private const string AspNetMvcVersion = "5.2.7";
+
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisablingRequestValidation.cs",
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc("3.0.20105.1"));
+                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DisablingRequestValidation.cs",
                 new CS.DisablingRequestValidation(),
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc("3.0.20105.1"));
+                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisablingRequestValidation.vb",
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc("3.0.20105.1"));
+                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"testcases\disablingrequestvalidation.vb",
                 new VB.DisablingRequestValidation(),
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc("3.0.20105.1"));
+                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
     }
 }
