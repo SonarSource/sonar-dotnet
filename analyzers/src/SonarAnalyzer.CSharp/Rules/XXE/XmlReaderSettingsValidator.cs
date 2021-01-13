@@ -55,8 +55,11 @@ namespace SonarAnalyzer.Rules.XXE
         /// <param name="invocation">A method invocation syntax node (e.g. XmlReader.Create).</param>
         /// <param name="settings">The symbol of the XmlReaderSettings node received as parameter. This is used to check
         /// if certain properties (ProhibitDtd, DtdProcessing or XmlUrlResolver) were modified for the given symbol.</param>
-        public bool IsUnsafe(InvocationExpressionSyntax invocation, ISymbol settings)
+        /// <param name="secondaryLocations"> The locations where the settings got invalid.</param>
+        /// <returns>True if the settings is unsafe, otherwise false.</returns>
+        public bool IsUnsafe(InvocationExpressionSyntax invocation, ISymbol settings, out IList<Location> secondaryLocations)
         {
+            secondaryLocations = new List<Location>();
             // By default ProhibitDtd is 'true' and DtdProcessing is 'ignore'
             var unsafeDtdProcessing = false;
             var unsafeResolver = isXmlResolverSafeByDefault;
@@ -74,10 +77,18 @@ namespace SonarAnalyzer.Rules.XXE
                 if (name == "ProhibitDtd" || name == "DtdProcessing")
                 {
                     unsafeDtdProcessing = IsXmlResolverDtdProcessingUnsafe(assignment, semanticModel);
+                    if (unsafeDtdProcessing)
+                    {
+                        secondaryLocations.Add(assignment.GetLocation());
+                    }
                 }
                 else if (name == "XmlResolver")
                 {
                     unsafeResolver = IsXmlResolverAssignmentUnsafe(assignment, semanticModel);
+                    if (unsafeResolver)
+                    {
+                        secondaryLocations.Add(assignment.GetLocation());
+                    }
                 }
             }
 
@@ -101,9 +112,12 @@ namespace SonarAnalyzer.Rules.XXE
             semanticModel.GetTypeInfo(expressionSyntax).Type.Is(KnownType.System_Xml_XmlReaderSettings);
 
         private static ObjectCreationExpressionSyntax GetObjectCreation(ISymbol symbol, InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            symbol.Locations
-                .SelectMany(location => GetDescendantNodes(location, invocation).OfType<ObjectCreationExpressionSyntax>())
-                .FirstOrDefault(objectCreation => objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel));
+            invocation.DescendantNodes()
+                      .OfType<ObjectCreationExpressionSyntax>()
+                      .FirstOrDefault(objectCreation => objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel))
+                ?? symbol.Locations
+                         .SelectMany(location => GetDescendantNodes(location, invocation).OfType<ObjectCreationExpressionSyntax>())
+                         .FirstOrDefault(objectCreation => objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel));
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode invocation)
         {
