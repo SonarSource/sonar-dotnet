@@ -28,6 +28,7 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -42,21 +43,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             "BC36716" // VB12 does not support line continuation comments" i.e. a comment at the end of a multi-line statement.
         };
 
+        public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileContent) =>
+            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, SourceText.From(fileContent));
+
         public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode) =>
             Verify(compilation, new[] { diagnosticAnalyzer }, checkMode);
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode)
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode) =>
+            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).First().GetText());
+
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode, SourceText source)
         {
+            SuppressionHandler.HookSuppression();
             try
             {
-                SuppressionHandler.HookSuppression();
-
                 var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzers, checkMode);
-
-                var expectedIssues = new IssueLocationCollector()
-                    .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
-                    .ToList();
-
+                var expectedIssues = new IssueLocationCollector().GetExpectedIssueLocations(source.Lines).ToList();
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
@@ -64,8 +66,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 // method.
                 if (diagnostics.Any())
                 {
-                    SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzers).Should()
-                        .BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
+                    SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzers).Should().BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
                 }
             }
             finally
