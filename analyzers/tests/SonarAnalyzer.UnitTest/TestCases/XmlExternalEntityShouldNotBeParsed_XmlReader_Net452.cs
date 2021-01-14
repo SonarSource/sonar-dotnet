@@ -9,15 +9,19 @@ namespace SonarAnalyzer.UnitTest.TestCases
     {
         public void XmlReader_NonCompliant_Inline_Settings()
         {
-            XmlReader.Create("uri", new XmlReaderSettings() {DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()}).Dispose(); // Noncompliant
+            XmlReader.Create("uri", new XmlReaderSettings() // Noncompliant
+            {
+                DtdProcessing = DtdProcessing.Parse, // Secondary
+                XmlResolver = new XmlUrlResolver() // Secondary
+            }).Dispose();
         }
 
         public void XmlReader_NonCompliant_ConstructorInitializer()
         {
             var settings = new XmlReaderSettings()
             {
-                DtdProcessing = DtdProcessing.Parse,
-                XmlResolver = new XmlUrlResolver()
+                DtdProcessing = DtdProcessing.Parse,     // Secondary
+                XmlResolver = new XmlUrlResolver()       // Secondary
             };
 
             XmlReader.Create("uri", settings).Dispose(); // Noncompliant
@@ -28,10 +32,10 @@ namespace SonarAnalyzer.UnitTest.TestCases
             var settings = new XmlReaderSettings();
 
             // Starting with .Net 4.5.2 this is safe because the XmlResolver property is null
-            settings.DtdProcessing = DtdProcessing.Parse;
-            settings.XmlResolver = new XmlUrlResolver(); // Populating the XmlResolver makes the settings unsafe
+            settings.DtdProcessing = DtdProcessing.Parse; // Secondary
+            settings.XmlResolver = new XmlUrlResolver();  // Secondary
 
-            XmlReader.Create("uri", settings).Dispose(); // Noncompliant
+            XmlReader.Create("uri", settings).Dispose();  // Noncompliant
         }
 
         public void XmlReader_NonCompliantAndCompliantMix()
@@ -40,13 +44,13 @@ namespace SonarAnalyzer.UnitTest.TestCases
             var unsafeSettings = new XmlReaderSettings();
 
             safeSettings.DtdProcessing = DtdProcessing.Parse;
-            unsafeSettings.DtdProcessing = DtdProcessing.Parse;
+            unsafeSettings.DtdProcessing = DtdProcessing.Parse;  // Secondary
 
             safeSettings.XmlResolver = null;
-            unsafeSettings.XmlResolver = new XmlUrlResolver();
+            unsafeSettings.XmlResolver = new XmlUrlResolver();  // Secondary
 
-            XmlReader.Create("uri", safeSettings).Dispose(); // Compliant
-            XmlReader.Create("uri", unsafeSettings).Dispose(); // Noncompliant
+            XmlReader.Create("uri", safeSettings).Dispose();    // Compliant
+            XmlReader.Create("uri", unsafeSettings).Dispose();  // Noncompliant
         }
     }
 
@@ -64,8 +68,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
         public void XmlReader_InlineSettings_NullResolver()
         {
-            XmlReader.Create("uri", new XmlReaderSettings(){ DtdProcessing = DtdProcessing.Parse}).Dispose(); // Compliant
-            XmlReader.Create("uri", new XmlReaderSettings(){ DtdProcessing = DtdProcessing.Parse, XmlResolver =  null}).Dispose(); // Compliant
+            XmlReader.Create("uri", new XmlReaderSettings() { DtdProcessing = DtdProcessing.Parse }).Dispose(); // Compliant
+            XmlReader.Create("uri", new XmlReaderSettings() { DtdProcessing = DtdProcessing.Parse, XmlResolver = null }).Dispose(); // Compliant
         }
 
         public void XmlReader_ConstructorInitializerOnlyParsing()
@@ -138,7 +142,11 @@ namespace SonarAnalyzer.UnitTest.TestCases
     internal class VariousUsages
     {
         XmlReader secure = XmlReader.Create("uri"); // Compliant
-        XmlReader unsecure = XmlReader.Create("uri", new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver() }); // Noncompliant
+        XmlReader unsecure = XmlReader.Create("uri", new XmlReaderSettings // Noncompliant
+        {
+            DtdProcessing = DtdProcessing.Parse, // Secondary
+            XmlResolver = new XmlUrlResolver() // Secondary
+        });
 
         public XmlReader CreateReader(XmlReaderSettings settings)
         {
@@ -147,8 +155,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
         public XmlReader CreateReader_AndUpdateSettings_Unsecure(XmlReaderSettings settings)
         {
-            settings.DtdProcessing = DtdProcessing.Parse;
-            settings.XmlResolver = new XmlUrlResolver();
+            settings.DtdProcessing = DtdProcessing.Parse; // Secondary
+            settings.XmlResolver = new XmlUrlResolver(); // Secondary
 
             return XmlReader.Create("uri", settings); // Noncompliant
         }
@@ -163,7 +171,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
         public void InsideTryCatch()
         {
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()};
+            // Secondary@+1
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver() }; // Secondary
             try
             {
                 XmlNodeReader.Create("uri", settings).Dispose(); // Noncompliant
@@ -175,7 +184,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
         private void InsideLocalFunction()
         {
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()};
+            // Secondary@+1
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver() }; // Secondary
 
             void LocalFunction()
             {
@@ -185,7 +195,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
         private void InsideLambda()
         {
-            Func<XmlReaderSettings> settingsFactory = () => new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()};
+            // Secondary@+1
+            Func<XmlReaderSettings> settingsFactory = () => new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver() }; // Secondary
 
             var settings = settingsFactory();
 
@@ -197,8 +208,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
         private void SetUnsafeResolverFromMethod()
         {
             var settings = new XmlReaderSettings();
-            settings.DtdProcessing = DtdProcessing.Parse;
-            settings.XmlResolver = GetUrlResolver();
+            settings.DtdProcessing = DtdProcessing.Parse; // Secondary
+            settings.XmlResolver = GetUrlResolver(); // Secondary
 
             XmlNodeReader.Create("uri", settings).Dispose(); // Noncompliant
         }
@@ -214,14 +225,15 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
         public void XmlNodeReader_SecureSettings()
         {
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new XmlUrlResolver()};
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new XmlUrlResolver() };
 
             XmlNodeReader.Create("uri", settings).Dispose(); // Compliant
         }
 
         public void XmlNodeReader_UnsecureSettings()
         {
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()};
+            // Secondary@+1
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver() }; // Secondary
 
             // Although the XmlNodeReader is safe when using the constructor, the Create method is the one from the base class (XmlReader)
             // and will return an unsecure XmlReader.
@@ -235,14 +247,15 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
         public void XmlTextReader_SecureSettings()
         {
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new XmlUrlResolver()};
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new XmlUrlResolver() };
 
             XmlTextReader.Create("uri", settings).Dispose(); // Compliant
         }
 
         public void XmlTextReader_UnsecureSettings()
         {
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()};
+            // Secondary@+1
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver() }; // Secondary
 
             // The Create method is the one from the base class (XmlReader) and will return an unsecure XmlReader.
             XmlTextReader.Create("uri", settings).Dispose(); // Noncompliant

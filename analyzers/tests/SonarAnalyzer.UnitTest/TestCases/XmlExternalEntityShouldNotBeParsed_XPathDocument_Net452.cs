@@ -13,6 +13,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
         public void UnsafeXmlReader()
         {
+            // Secondary@+2
+            // Secondary@+1
             var xmlReader = XmlReader.Create("uri", new XmlReaderSettings {ProhibitDtd = false, XmlResolver = new XmlUrlResolver()}); // Noncompliant
             var xPathDocument = new XPathDocument(xmlReader); // Compliant - we already raise the warning for the reader
         }

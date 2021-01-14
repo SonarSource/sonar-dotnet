@@ -38,28 +38,23 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S2755";
         private const string MessageFormat = "Disable access to external entities in XML parsing.";
+        private const string SecondaryMessageFormat = "This value enables external entities in XML parsing.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         // For the XXE rule we actually need to know about .NET 4.5.2,
         // but it is good enough given the other .NET 4.x do not have support anymore
-        private readonly INetFrameworkVersionProvider VersionProvider;
+        private readonly INetFrameworkVersionProvider versionProvider;
 
-        public XmlExternalEntityShouldNotBeParsed()
-            : this(new NetFrameworkVersionProvider())
-        {
-        }
+        public XmlExternalEntityShouldNotBeParsed() : this(new NetFrameworkVersionProvider()) { }
 
-        internal /*for testing*/ XmlExternalEntityShouldNotBeParsed(INetFrameworkVersionProvider netFrameworkVersionProvider)
-        {
-            VersionProvider = netFrameworkVersionProvider;
-        }
+        internal /*for testing*/ XmlExternalEntityShouldNotBeParsed(INetFrameworkVersionProvider netFrameworkVersionProvider) =>
+            versionProvider = netFrameworkVersionProvider;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(
                 ccc =>
                 {
@@ -68,11 +63,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
 
-                            var trackers = TrackerFactory.Create(c.Compilation, VersionProvider);
-                            if (trackers.xmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel) ||
-                                trackers.xmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel))
+                            var trackers = TrackerFactory.Create(c.Compilation, versionProvider);
+                            if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel)
+                               || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel))
                             {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation()));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation()));
                             }
 
                             VerifyXPathDocumentConstructor(c);
@@ -84,18 +79,17 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
 
-                            var trackers = TrackerFactory.Create(c.Compilation, VersionProvider);
-                            if (trackers.xmlDocumentTracker.ShouldBeReported(assignment, c.SemanticModel) ||
-                                trackers.xmlTextReaderTracker.ShouldBeReported(assignment, c.SemanticModel))
+                            var trackers = TrackerFactory.Create(c.Compilation, versionProvider);
+                            if (trackers.XmlDocumentTracker.ShouldBeReported(assignment, c.SemanticModel)
+                               || trackers.XmlTextReaderTracker.ShouldBeReported(assignment, c.SemanticModel))
                             {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation()));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.GetLocation()));
                             }
                         },
                         SyntaxKind.SimpleAssignmentExpression);
 
                     ccc.RegisterSyntaxNodeActionInNonGenerated(VerifyXmlReaderInvocations, SyntaxKind.InvocationExpression);
                 });
-        }
 
         private void VerifyXmlReaderInvocations(SyntaxNodeAnalysisContext context)
         {
@@ -111,10 +105,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return; // safe by default
             }
 
-            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel, VersionProvider.GetDotNetFrameworkVersion(context.Compilation));
-            if (xmlReaderSettingsValidator.IsUnsafe(invocation, settings))
+            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel, versionProvider.GetDotNetFrameworkVersion(context.Compilation));
+            if (xmlReaderSettingsValidator.GetUnsafeAssignmentLocations(invocation, settings) is { } secondaryLocations && secondaryLocations.Any())
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation(), secondaryLocations, secondaryLocations.ToProperties(SecondaryMessageFormat)));
             }
         }
 
@@ -130,9 +124,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!IsXPathDocumentSecureByDefault(this.VersionProvider.GetDotNetFrameworkVersion(context.Compilation)))
+            if (!IsXPathDocumentSecureByDefault(this.versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, objectCreation.GetLocation()));
+                context.ReportDiagnostic(Diagnostic.Create(Rule, objectCreation.GetLocation()));
             }
         }
 
@@ -143,8 +137,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static class TrackerFactory
         {
             private static ImmutableArray<KnownType> UnsafeXmlResolvers { get; } = ImmutableArray.Create(
-                    KnownType.System_Xml_XmlUrlResolver,
-                    KnownType.System_Xml_Resolvers_XmlPreloadedResolver
+                KnownType.System_Xml_XmlUrlResolver,
+                KnownType.System_Xml_Resolvers_XmlPreloadedResolver
             );
 
             private static readonly ImmutableArray<KnownType> XmlDocumentTrackedTypes = ImmutableArray.Create(
@@ -226,13 +220,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private readonly struct TrackersHolder
         {
-            internal readonly CSharpObjectInitializationTracker xmlDocumentTracker;
-            internal readonly CSharpObjectInitializationTracker xmlTextReaderTracker;
+            internal readonly CSharpObjectInitializationTracker XmlDocumentTracker;
+            internal readonly CSharpObjectInitializationTracker XmlTextReaderTracker;
 
             internal TrackersHolder(CSharpObjectInitializationTracker xmlDocumentTracker, CSharpObjectInitializationTracker xmlTextReaderTracker)
             {
-                this.xmlDocumentTracker = xmlDocumentTracker;
-                this.xmlTextReaderTracker = xmlTextReaderTracker;
+                XmlDocumentTracker = xmlDocumentTracker;
+                XmlTextReaderTracker = xmlTextReaderTracker;
             }
         }
     }

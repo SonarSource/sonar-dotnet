@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         /// There are multiple ways of verifying:
         /// - implicit constructor with property setting
-        ///   var x = new X { Prop = new Y() };
+        /// var x = new X { Prop = new Y() };
         /// - constructor with passing a list of arguments, where we care about a specific argument
         /// <remarks>
         /// Currently we do not handle the situation with default and named arguments.

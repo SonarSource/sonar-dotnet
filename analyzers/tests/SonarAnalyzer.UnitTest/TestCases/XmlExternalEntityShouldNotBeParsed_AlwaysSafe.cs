@@ -50,8 +50,9 @@ namespace Tests.Diagnostics
         protected void XmlDictionaryReader()
         {
             XmlReaderSettings settings = new XmlReaderSettings();
-            settings.DtdProcessing = DtdProcessing.Parse;
-            settings.XmlResolver = new XmlUrlResolver();
+            settings.ProhibitDtd = false;                  // Secondary {{This value enables external entities in XML parsing.}}
+            settings.DtdProcessing = DtdProcessing.Parse;  // Secondary {{This value enables external entities in XML parsing.}}
+            settings.XmlResolver = new XmlUrlResolver();   // Secondary {{This value enables external entities in XML parsing.}}
             XmlReader reader = XmlReader.Create(new MemoryStream(), settings, "resources/"); // Noncompliant
             XDocument xdocument = XDocument.Load(reader); // we already raise on XmlReader
         }
@@ -60,8 +61,9 @@ namespace Tests.Diagnostics
         protected void XDocumentTest()
         {
             XmlReaderSettings settings = new XmlReaderSettings();
-            settings.DtdProcessing = DtdProcessing.Parse;
-            settings.XmlResolver = new XmlUrlResolver();
+            settings.ProhibitDtd = false;                  // Secondary {{This value enables external entities in XML parsing.}}
+            settings.DtdProcessing = DtdProcessing.Parse;  // Secondary {{This value enables external entities in XML parsing.}}
+            settings.XmlResolver = new XmlUrlResolver();   // Secondary {{This value enables external entities in XML parsing.}}
             XmlReader reader = XmlReader.Create(new MemoryStream(), settings, "resources/"); // Noncompliant
             XDocument xdocument = XDocument.Load(reader); // we already raise for the XmlReader config
         }

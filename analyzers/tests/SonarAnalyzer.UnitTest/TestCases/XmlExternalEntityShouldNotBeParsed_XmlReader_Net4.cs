@@ -6,6 +6,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
     {
         public void XmlReader_NonCompliant_InlineInitialization()
         {
+            //                                                                                                 Secondary@+1
             XmlReader.Create("uri", new XmlReaderSettings() { DtdProcessing = DtdProcessing.Parse}).Dispose(); // Noncompliant
         }
 
@@ -13,19 +14,19 @@ namespace SonarAnalyzer.UnitTest.TestCases
         {
             var settings = new XmlReaderSettings();
 
-            settings.DtdProcessing = DtdProcessing.Parse;
+            settings.DtdProcessing = DtdProcessing.Parse; // Secondary
 
-            XmlReader.Create("uri", settings).Dispose(); // Noncompliant
+            XmlReader.Create("uri", settings).Dispose();  // Noncompliant
         }
 
         public void XmlReader_NonCompliant_WithUnsafeSettings_ParseAndResolver()
         {
             var settings = new XmlReaderSettings();
 
-            settings.DtdProcessing = DtdProcessing.Parse;
-            settings.XmlResolver = new XmlUrlResolver();
+            settings.DtdProcessing = DtdProcessing.Parse; // Secondary
+            settings.XmlResolver = new XmlUrlResolver();  // Secondary
 
-            XmlReader.Create("uri", settings).Dispose(); // Noncompliant
+            XmlReader.Create("uri", settings).Dispose();  // Noncompliant
         }
 
         public void XmlReader_NonCompliantAndCompliantMix()
@@ -36,18 +37,18 @@ namespace SonarAnalyzer.UnitTest.TestCases
             safeSettings.XmlResolver = null;
 
             var unsafeSettings = new XmlReaderSettings();
-            unsafeSettings.DtdProcessing = DtdProcessing.Parse;
-            unsafeSettings.XmlResolver = new XmlUrlResolver();
+            unsafeSettings.DtdProcessing = DtdProcessing.Parse; // Secondary
+            unsafeSettings.XmlResolver = new XmlUrlResolver();  // Secondary
 
-            XmlReader.Create("uri", safeSettings).Dispose(); // Compliant
-            XmlReader.Create("uri", unsafeSettings).Dispose(); // Noncompliant
+            XmlReader.Create("uri", safeSettings).Dispose();    // Compliant
+            XmlReader.Create("uri", unsafeSettings).Dispose();  // Noncompliant
         }
 
         public void XmlReader_NonCompliant_ObjectInitialization()
         {
             var settings = new XmlReaderSettings
             {
-                DtdProcessing = DtdProcessing.Parse
+                DtdProcessing = DtdProcessing.Parse      // Secondary
             };
 
             XmlReader.Create("uri", settings).Dispose(); // Noncompliant
@@ -57,8 +58,8 @@ namespace SonarAnalyzer.UnitTest.TestCases
         {
             var settings = new XmlReaderSettings
             {
-                DtdProcessing = DtdProcessing.Parse,
-                XmlResolver = urlResolver
+                DtdProcessing = DtdProcessing.Parse,     // Secondary
+                XmlResolver = urlResolver                // Secondary
             };
 
             XmlReader.Create("uri", settings).Dispose(); // Noncompliant

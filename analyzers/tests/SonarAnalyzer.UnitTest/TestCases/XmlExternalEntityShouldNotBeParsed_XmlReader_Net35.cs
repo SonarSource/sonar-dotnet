@@ -6,13 +6,18 @@ namespace SonarAnalyzer.UnitTest.TestCases
     {
         public void XmlReader_EnableProhibitDtdAndSetResolver()
         {
-            var settings = new XmlReaderSettings {ProhibitDtd = false, XmlResolver = new XmlUrlResolver()};
+            var settings = new XmlReaderSettings
+            {
+                ProhibitDtd = false,               // Secondary
+                XmlResolver = new XmlUrlResolver() // Secondary
+            };
 
             using (XmlReader.Create("uri", settings)) { } // Noncompliant
         }
 
         public void XmlReader_DisableProhibitDtd()
         {
+            //                                                                                  Secondary@+1
             using (XmlReader.Create("uri", new XmlReaderSettings {ProhibitDtd = false})) { } // Noncompliant
         }
 

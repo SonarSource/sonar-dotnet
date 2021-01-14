@@ -46,17 +46,19 @@ namespace SonarAnalyzer.Rules.XXE
         public XmlReaderSettingsValidator(SemanticModel semanticModel, NetFrameworkVersion version)
         {
             this.semanticModel = semanticModel;
-            this.isXmlResolverSafeByDefault = IsXmlResolverPropertySafeByDefault(version);
+            isXmlResolverSafeByDefault = IsXmlResolverPropertySafeByDefault(version);
         }
 
         /// <summary>
-        /// Checks if a method invocation (e.g. XmlReader.Create) receives a secure instance of XmlReaderSettings.
+        /// Gets the assignment locations of XmlReaderSettings properties which are unsafe and are used in invocations afterwards (e.g. XmlReader.Create).
         /// </summary>
         /// <param name="invocation">A method invocation syntax node (e.g. XmlReader.Create).</param>
         /// <param name="settings">The symbol of the XmlReaderSettings node received as parameter. This is used to check
         /// if certain properties (ProhibitDtd, DtdProcessing or XmlUrlResolver) were modified for the given symbol.</param>
-        public bool IsUnsafe(InvocationExpressionSyntax invocation, ISymbol settings)
+        /// <returns>The list of unsafe assignment locations.</returns>
+        public IList<Location> GetUnsafeAssignmentLocations(InvocationExpressionSyntax invocation, ISymbol settings)
         {
+            var unsafeAssignmentLocations = new List<Location>();
             // By default ProhibitDtd is 'true' and DtdProcessing is 'ignore'
             var unsafeDtdProcessing = false;
             var unsafeResolver = isXmlResolverSafeByDefault;
@@ -65,29 +67,37 @@ namespace SonarAnalyzer.Rules.XXE
             var objectCreationAssignments = objectCreation.GetInitializerExpressions().OfType<AssignmentExpressionSyntax>();
 
             var propertyAssignments = GetAssignments(invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>())
-                .Where(assignment => IsMemberAccessOnSymbol(assignment.Left, settings, this.semanticModel));
+                .Where(assignment => IsMemberAccessOnSymbol(assignment.Left, settings, semanticModel));
 
             foreach (var assignment in objectCreationAssignments.Union(propertyAssignments))
             {
                 var name = assignment.Left.GetName();
 
-                if (name =="ProhibitDtd" || name == "DtdProcessing")
+                if (name == "ProhibitDtd" || name == "DtdProcessing")
                 {
                     unsafeDtdProcessing = IsXmlResolverDtdProcessingUnsafe(assignment, semanticModel);
+                    if (unsafeDtdProcessing)
+                    {
+                        unsafeAssignmentLocations.Add(assignment.GetLocation());
+                    }
                 }
                 else if (name == "XmlResolver")
                 {
                     unsafeResolver = IsXmlResolverAssignmentUnsafe(assignment, semanticModel);
+                    if (unsafeResolver)
+                    {
+                        unsafeAssignmentLocations.Add(assignment.GetLocation());
+                    }
                 }
             }
 
-            return unsafeDtdProcessing && unsafeResolver;
+            return unsafeDtdProcessing && unsafeResolver ? unsafeAssignmentLocations : new List<Location>();
         }
 
         private static bool IsMemberAccessOnSymbol(ExpressionSyntax expression, ISymbol symbol, SemanticModel semanticModel) =>
-            expression is MemberAccessExpressionSyntax memberAccess &&
-            IsXmlReaderSettings(memberAccess.Expression, semanticModel) &&
-            symbol.Equals(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol);
+            expression is MemberAccessExpressionSyntax memberAccess
+            && IsXmlReaderSettings(memberAccess.Expression, semanticModel)
+            && symbol.Equals(semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol);
 
         private static IEnumerable<AssignmentExpressionSyntax> GetAssignments(SyntaxNode node) =>
             node == null
@@ -101,9 +111,17 @@ namespace SonarAnalyzer.Rules.XXE
             semanticModel.GetTypeInfo(expressionSyntax).Type.Is(KnownType.System_Xml_XmlReaderSettings);
 
         private static ObjectCreationExpressionSyntax GetObjectCreation(ISymbol symbol, InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            symbol.Locations
-                .SelectMany(location => GetDescendantNodes(location, invocation).OfType<ObjectCreationExpressionSyntax>())
-                .FirstOrDefault(objectCreation => objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel));
+            // First we search for object creations at the syntax level to see if the object is created inline
+            // and if not we look for the identifier declaration.
+            invocation.DescendantNodes()
+                      .OfType<ObjectCreationExpressionSyntax>()
+                      .FirstOrDefault(objectCreation => IsXmlReaderSettingsCreationWithInitializer(objectCreation, semanticModel))
+                ?? symbol.Locations
+                         .SelectMany(location => GetDescendantNodes(location, invocation).OfType<ObjectCreationExpressionSyntax>())
+                         .FirstOrDefault(objectCreation => IsXmlReaderSettingsCreationWithInitializer(objectCreation, semanticModel));
+
+        private static bool IsXmlReaderSettingsCreationWithInitializer(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+            objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel);
 
         private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode invocation)
         {
@@ -118,9 +136,9 @@ namespace SonarAnalyzer.Rules.XXE
 
             // To optimise, we search first for the class constructor, then for the method declaration.
             // If these cannot be found (e.g. fields), we get the root of the syntax tree and search from there.
-            var root = locationRootNode?.FindNode(location.SourceSpan) ??
-                       invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>() ??
-                       invocationRootNode;
+            var root = locationRootNode?.FindNode(location.SourceSpan)
+                       ?? invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>()
+                       ?? invocationRootNode;
 
             return root.DescendantNodes();
         }

@@ -40,28 +40,25 @@ namespace SonarAnalyzer.Common
 
     public static class SecondaryLocationHelper
     {
-        public static IEnumerable<Location> ToAdditionalLocations(this IEnumerable<SecondaryLocation> secondaryLocations)
-        {
-            return secondaryLocations.Select(x => x.Location);
-        }
+        public static IEnumerable<Location> ToAdditionalLocations(this IEnumerable<SecondaryLocation> secondaryLocations) =>
+            secondaryLocations.Select(x => x.Location);
 
-        public static ImmutableDictionary<string, string> ToProperties(this IEnumerable<SecondaryLocation> secondaryLocations)
-        {
-            return secondaryLocations
+        public static ImmutableDictionary<string, string> ToProperties(this IEnumerable<SecondaryLocation> secondaryLocations) =>
+            secondaryLocations
                 .Select((item, index) => new { item.Message, Index = index.ToString() })
                 .ToDictionary(i => i.Index, i => i.Message)
                 .ToImmutableDictionary();
-        }
 
-        public static SecondaryLocation GetSecondaryLocation(this Diagnostic diagnostic, int index)
-        {
-            if (diagnostic.AdditionalLocations.Count <= index)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index));
-            }
+        public static ImmutableDictionary<string, string> ToProperties(this IEnumerable<Location> secondaryLocations, string message) =>
+              secondaryLocations
+                .Select((item, index) => new { message, Index = index.ToString() })
+                .ToDictionary(i => i.Index, i => message)
+                .ToImmutableDictionary();
 
-            return new SecondaryLocation(diagnostic.AdditionalLocations[index],
-                diagnostic.Properties.GetValueOrDefault(index.ToString()));
-        }
+        public static SecondaryLocation GetSecondaryLocation(this Diagnostic diagnostic, int index) =>
+            diagnostic.AdditionalLocations.Count <= index
+                    ? throw new ArgumentOutOfRangeException(nameof(index))
+                    : new SecondaryLocation(diagnostic.AdditionalLocations[index],
+                                            diagnostic.Properties.GetValueOrDefault(index.ToString()));
     }
 }

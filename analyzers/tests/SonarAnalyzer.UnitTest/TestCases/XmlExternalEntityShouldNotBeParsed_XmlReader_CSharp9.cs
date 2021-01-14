@@ -1,11 +1,13 @@
 ﻿using System.Xml;
 
+// Secondary@+2
+// Secondary@+1
 XmlReader.Create("uri", new XmlReaderSettings() { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver() }).Dispose(); // Noncompliant
 
 var settings = new XmlReaderSettings()
 {
-    DtdProcessing = DtdProcessing.Parse,
-    XmlResolver = new XmlUrlResolver()
+    DtdProcessing = DtdProcessing.Parse, // Secondary
+    XmlResolver = new XmlUrlResolver() // Secondary
 };
 
 XmlReader.Create("uri", settings).Dispose(); // Noncompliant
