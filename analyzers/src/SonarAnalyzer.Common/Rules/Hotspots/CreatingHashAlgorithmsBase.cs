@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
             KnownType.System_Security_Cryptography_SHA1
         };
 
-        private readonly string[] unsafeAlgorithms = { "SHA1", "MD5", "DSA", "HMACMD5", "HMACRIPEMD160", "RIPEMD160", "RIPEMD160Managed" };
+        private readonly string[] unsafeAlgorithms = { "SHA1", "System.Security.Cryptography.SHA1", "MD5", "System.Security.Cryptography.MD5", "DSA", "HMACMD5", "HMACRIPEMD160", "HMACSHA1", "RIPEMD160", "RIPEMD160Managed" };
 
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
 

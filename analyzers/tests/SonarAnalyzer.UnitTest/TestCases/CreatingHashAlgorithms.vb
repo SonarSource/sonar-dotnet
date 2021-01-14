@@ -29,6 +29,10 @@ Namespace Tests.Diagnostics
             Dim HMACRIPEMD160CryptoConfig = CryptoConfig.CreateFromName("HMACRIPEMD160") ' Noncompliant
 
             Dim HMACSHA1 = new HMACSHA1() ' Noncompliant
+            Dim HMACSHA1Create = HMACMD5.Create() ' Noncompliant
+            Dim HMACSHA1CreateWithParam = HMACMD5.Create("HMACSHA1") ' Noncompliant
+            Dim HMACSHA1KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA1") ' Noncompliant
+            Dim HMACSHA1CryptoConfig = CryptoConfig.CreateFromName("HMACSHA1") ' Noncompliant
 
             Dim HMACSHA256Create = HMACSHA256.Create("HMACSHA256")
             Dim HMACSHA256KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA256")
@@ -38,6 +42,7 @@ Namespace Tests.Diagnostics
             Dim MD5CryptoServiceProvider = new MD5CryptoServiceProvider() ' Noncompliant
             Dim MD5CryptoConfig = CryptoConfig.CreateFromName("MD5") ' Noncompliant
             Dim MD5HashAlgorithm = HashAlgorithm.Create("MD5") ' Noncompliant
+            Dim MD5HashAlgorithmWithNamespace = HashAlgorithm.Create("System.Security.Cryptography.MD5") ' Noncompliant
             Dim MD5Create = MD5.Create() ' Noncompliant
             Dim MD5CreateWithParam = MD5.Create("MD5") ' Noncompliant
 
@@ -51,10 +56,11 @@ Namespace Tests.Diagnostics
             Dim RIPEMD160HashAlgorithm = HashAlgorithm.Create("RIPEMD160") ' Noncompliant
             Dim RIPEMD160CryptoConfig = CryptoConfig.CreateFromName("RIPEMD160") ' Noncompliant
 
+            Dim SHA1Managed = new SHA1Managed() ' Noncompliant
             Dim SHA1Create = SHA1.Create() ' Noncompliant
             Dim SHA1CreateWithParam = SHA1.Create("SHA1") ' Noncompliant
-            Dim SHA1Managed = new SHA1Managed() ' Noncompliant
             Dim SHA1HashAlgorithm = HashAlgorithm.Create("SHA1") ' Noncompliant
+            Dim SHA1HashAlgorithmWithNamespace = HashAlgorithm.Create("System.Security.Cryptography.SHA1") ' Noncompliant
             Dim SHA1CryptoServiceProvider = new SHA1CryptoServiceProvider() ' Noncompliant
 
             Dim SHA256Managed = new SHA256Managed()

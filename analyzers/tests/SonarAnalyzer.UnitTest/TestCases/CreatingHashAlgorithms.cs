@@ -30,6 +30,10 @@ namespace Tests.Diagnostics
             using var HMACRIPEMD160CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("HMACRIPEMD160"); // Noncompliant
 
             using var HMACSHA1 = new HMACSHA1(); // Noncompliant
+            using var HMACSHA1Create = HMACMD5.Create(); // Noncompliant
+            using var HMACSHA1CreateWithParam = HMACMD5.Create("HMACSHA1"); // Noncompliant
+            using var HMACSHA1KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA1"); // Noncompliant
+            using var HMACSHA1CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("HMACSHA1"); // Noncompliant
 
             using var HMACSHA256Create = HMACSHA256.Create("HMACSHA256");
             using var HMACSHA256KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA256");
@@ -39,6 +43,7 @@ namespace Tests.Diagnostics
             using var MD5CryptoServiceProvider = new MD5CryptoServiceProvider(); // Noncompliant
             using var MD5CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("MD5"); // Noncompliant
             using var MD5HashAlgorithm = HashAlgorithm.Create("MD5"); // Noncompliant
+            using var MD5HashAlgorithmWithNamespace = HashAlgorithm.Create("System.Security.Cryptography.MD5"); // Noncompliant
             using var MD5Create = MD5.Create(); // Noncompliant
             using var MD5CreateWithParam = MD5.Create("MD5"); // Noncompliant
 
@@ -52,10 +57,11 @@ namespace Tests.Diagnostics
             using var RIPEMD160HashAlgorithm = HashAlgorithm.Create("RIPEMD160"); // Noncompliant
             using var RIPEMD160CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("RIPEMD160"); // Noncompliant
 
+            using var SHA1Managed = new SHA1Managed(); // Noncompliant
             using var SHA1Create = SHA1.Create(); // Noncompliant
             using var SHA1CreateWithParam = SHA1.Create("SHA1"); // Noncompliant
-            using var SHA1Managed = new SHA1Managed(); // Noncompliant
             using var SHA1HashAlgorithm = HashAlgorithm.Create("SHA1"); // Noncompliant
+            using var SHA1HashAlgorithmWithNamespace = HashAlgorithm.Create("System.Security.Cryptography.SHA1"); // Noncompliant
             using var SHA1CryptoServiceProvider = new SHA1CryptoServiceProvider(); // Noncompliant
 
             using var sha256Managed = new SHA256Managed();
