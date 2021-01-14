@@ -88,13 +88,13 @@ namespace SonarAnalyzer.Rules
                 {
                     return;
                 }
-                foreach (var webConfigPath in Directory.GetFiles(rootPath, "web.config", SearchOption.AllDirectories))
+                foreach (var fullPath in Directory.GetFiles(rootPath, "web.config", SearchOption.AllDirectories).Select(p => Path.GetFullPath(p)))
                 {
-                    var webConfig = File.ReadAllText(webConfigPath);
+                    var webConfig = File.ReadAllText(fullPath);
                     if (webConfig.Contains("<system.web>") && ParseXDocument(webConfig) is { } doc)
                     {
-                        ReportValidateRequest(doc, webConfigPath, c);
-                        ReportRequestValidationMode(doc, webConfigPath, c);
+                        ReportValidateRequest(doc, fullPath, c);
+                        ReportRequestValidationMode(doc, fullPath, c);
                     }
                 }
             });

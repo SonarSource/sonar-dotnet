@@ -80,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
             // verify root issues
             var rootWebConfig = Path.Combine(rootDirectory, WebConfig);
-            var actualIssuesInRoot = allDiagnostics.Where(d => d.Location.GetLineSpan().Path == rootWebConfig);
+            var actualIssuesInRoot = allDiagnostics.Where(d => d.Location.GetLineSpan().Path.EndsWith(rootWebConfig));
             var expectedIssuesInRoot = new IssueLocationCollector().GetExpectedIssueLocations(GetLines(rootWebConfig)).ToList();
             DiagnosticVerifier.CompareActualToExpected(compilation.LanguageVersionString(), actualIssuesInRoot, expectedIssuesInRoot, false);
 
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             foreach (var subFolder in subFolders)
             {
                 var subFolderWebConfig = Path.Combine(rootDirectory, subFolder, WebConfig);
-                var actualSubFolderIssues = allDiagnostics.Where(d => d.Location.GetLineSpan().Path == subFolderWebConfig);
+                var actualSubFolderIssues = allDiagnostics.Where(d => d.Location.GetLineSpan().Path.EndsWith(subFolderWebConfig));
                 var expectedSubFolderIssues = new IssueLocationCollector().GetExpectedIssueLocations(GetLines(subFolderWebConfig)).ToList();
                 DiagnosticVerifier.CompareActualToExpected(compilation.LanguageVersionString(), actualSubFolderIssues, expectedSubFolderIssues, false);
             }
