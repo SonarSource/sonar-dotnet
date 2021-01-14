@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } = new HashSet<string>();
 
-        protected override ISet<string> AlgorithmParameteredFactoryMethods { get; } =
+        protected override ISet<string> AlgorithmParameterizedFactoryMethods { get; } =
             new HashSet<string>
             {
                 "System.Security.Cryptography.CryptoConfig.CreateFromName",

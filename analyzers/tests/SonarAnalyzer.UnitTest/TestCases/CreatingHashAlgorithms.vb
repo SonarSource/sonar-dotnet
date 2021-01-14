@@ -1,116 +1,69 @@
-﻿Imports System
-Imports System.Security.Cryptography
+﻿Imports System.Security.Cryptography
 
-Namespace NS
+Namespace Tests.Diagnostics
 
-    Public Class TestClass
+    Public Class InsecureHashAlgorithm
 
-        ' RSPEC 4790 https://jira.sonarsource.com/browse/RSPEC-4790
-        Public Sub ComputeHash()
+        Public Sub Hash(temp as Byte())
+            Dim DSACng = new DSACng(10)
+'                        ^^^^^^^^^^^^^^ {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+            Dim DSACryptoServiceProvider = new DSACryptoServiceProvider() ' Noncompliant
+            Dim DSACreate = DSA.Create() ' Noncompliant
+            Dim DSACreateWithParam = DSA.Create("DSA") ' Noncompliant
+            Dim DSACreateFromName = CryptoConfig.CreateFromName("DSA") ' Noncompliant
+            Dim DSAAsymmetricAlgorithm = AsymmetricAlgorithm.Create("DSA") ' Noncompliant
+            Dim DSAAsymmetricAlgorithmWithNamespace = AsymmetricAlgorithm.Create("System.Security.Cryptography.DSA") ' Noncompliant
 
-            ' Review all instantiations of classes that inherit from HashAlgorithm, for example:
-            Dim hashAlgo As HashAlgorithm = HashAlgorithm.Create()
-'                                           ^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
-            Dim hashAlgo2 As HashAlgorithm = HashAlgorithm.Create("SHA1")
-'                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+            Dim HMACCreate = HMAC.Create() ' Noncompliant
+            Dim HMACCreateWithParam = HMAC.Create("HMACMD5") ' Noncompliant
 
-            Dim sha As SHA1 = New SHA1CryptoServiceProvider()
-'                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+            Dim HMACMD5 = new HMACMD5() ' Noncompliant
+            Dim HMACMD5Create = HMACMD5.Create() ' Noncompliant
+            Dim HMACMD5CreateWithParam = HMACMD5.Create("HMACMD5") ' Noncompliant
+            Dim HMACMD5KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACMD5") ' Noncompliant
+            Dim HMACMD5KeyedHashAlgorithmWithNamespace = KeyedHashAlgorithm.Create("System.Security.Cryptography.HMACMD5") ' Noncompliant
+            Dim HMACMD5CryptoConfig = CryptoConfig.CreateFromName("HMACMD5") ' Noncompliant
 
-            Dim md5 As MD5 = New MD5CryptoServiceProvider()
-'                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+            Dim HMACSHA1 = new HMACSHA1() ' Noncompliant
+            Dim HMACSHA1Create = HMACMD5.Create() ' Noncompliant
+            Dim HMACSHA1CreateWithParam = HMACMD5.Create("HMACSHA1") ' Noncompliant
+            Dim HMACSHA1KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA1") ' Noncompliant
+            Dim HMACSHA1KeyedHashAlgorithmWithNamespace = KeyedHashAlgorithm.Create("System.Security.Cryptography.HMACSHA1") ' Noncompliant
+            Dim HMACSHA1CryptoConfig = CryptoConfig.CreateFromName("HMACSHA1") ' Noncompliant
 
-            ' ...
+            Dim HMACSHA256Create = HMACSHA256.Create("HMACSHA256")
+            Dim HMACSHA256KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA256")
+            Dim HMACSHA256KeyedHashAlgorithmWithNamespace = KeyedHashAlgorithm.Create("System.Security.Cryptography.HMACSHA256")
+            Dim HMACSHA256CryptoConfig = CryptoConfig.CreateFromName("HMACSHA256")
+
+            Dim MD5CryptoServiceProvider = new MD5CryptoServiceProvider() ' Noncompliant
+            Dim MD5CryptoConfig = CryptoConfig.CreateFromName("MD5") ' Noncompliant
+            Dim MD5HashAlgorithm = HashAlgorithm.Create("MD5") ' Noncompliant
+            Dim MD5HashAlgorithmWithNamespace = HashAlgorithm.Create("System.Security.Cryptography.MD5") ' Noncompliant
+            Dim MD5Create = MD5.Create() ' Noncompliant
+            Dim MD5CreateWithParam = MD5.Create("MD5") ' Noncompliant
+
+            Dim SHA1Managed = new SHA1Managed() ' Noncompliant
+            Dim SHA1Create = SHA1.Create() ' Noncompliant
+            Dim SHA1CreateWithParam = SHA1.Create("SHA1") ' Noncompliant
+            Dim SHA1HashAlgorithm = HashAlgorithm.Create("SHA1") ' Noncompliant
+            Dim SHA1HashAlgorithmWithNamespace = HashAlgorithm.Create("System.Security.Cryptography.SHA1") ' Noncompliant
+            Dim SHA1CryptoServiceProvider = new SHA1CryptoServiceProvider() ' Noncompliant
+
+            Dim SHA256Managed = new SHA256Managed()
+            Dim SHA256ManagedHashAlgorithm = HashAlgorithm.Create("SHA256Managed")
+            Dim SHA256ManagedHashAlgorithmWithNamespace = HashAlgorithm.Create("System.Security.Cryptography.SHA256Managed")
+            Dim SHA256ManagedCryptoConfig = CryptoConfig.CreateFromName("SHA256Managed")
+
+            Dim hashAlgo = HashAlgorithm.Create()
+
+            Dim algoName = "MD5"
+            Dim MD5Var = CryptoConfig.CreateFromName(algoName) ' Noncompliant
+
+            algoName = "SHA256Managed"
+            Dim SHA256ManagedVar = CryptoConfig.CreateFromName(algoName)
         End Sub
 
-        Public Sub AdditionalTests(sha As SHA1CryptoServiceProvider)
-            Dim myHash = New MyHashAlgorithm()
-'                        ^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
-            myHash = New MyHashAlgorithm(123)       ' Noncompliant
-
-            myHash = MyHashAlgorithm.Create()       ' Noncompliant
-'                    ^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
-            myHash = MyHashAlgorithm.Create(42)     ' Noncompliant
-
-            myHash = MyHashAlgorithm.CreateHash()  ' compliant - method name is not Create
-            myHash = MyHashAlgorithm.DoCreate()    ' compliant - method name is not Create
-
-
-            '  Other methods are not checked
-            Dim hash = sha.ComputeHash(CType(Nothing, Byte()))
-            hash = sha.Hash
-            Dim canReuse = sha.CanReuseTransform
-            sha.Clear()
-
-        End Sub
-
-    End Class
-
-    Public Class MyHashAlgorithm
-        Inherits System.Security.Cryptography.HashAlgorithm
-'                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        Implements System.IDisposable
-
-        Public Sub New()
-        End Sub
-        Public Sub New(Data As Integer)
-        End Sub
-
-        Public Shared Function Create() As MyHashAlgorithm
-            Return Nothing
-        End Function
-        Public Shared Function Create(data As Integer) As MyHashAlgorithm
-            Return Nothing
-        End Function
-
-        Public Shared Function CreateHash() As MyHashAlgorithm
-            Return Nothing
-        End Function
-
-        Public Shared Function DoCreate() As MyHashAlgorithm
-            Return Nothing
-        End Function
-
-
-#Region "Abstract method implementations"
-
-        Public Overrides Sub Initialize()
-            Throw New NotImplementedException()
-        End Sub
-
-        Protected Overrides Sub HashCore(array() As Byte, ibStart As Integer, cbSize As Integer)
-            Throw New NotImplementedException()
-        End Sub
-
-        Protected Overrides Function HashFinal() As Byte()
-            Throw New NotImplementedException()
-        End Function
-
-#End Region
-
-        Public Sub Dispose()
-            'no-op
-        End Sub
-
-    End Class
-
-
-    ' Check reporting on partial classes. Should only report once.
-    Public Interface IMarker
-    End Interface
-
-    Public Interface IMarker2
-    End Interface
-
-
-    Partial Public Class PartialClassAlgorithm
-        Inherits NS.MyHashAlgorithm
-'                ^^^^^^^^^^^^^^^^^^
-        Implements IMarker
-    End Class
-
-    Partial Public Class PartialClassAlgorithm
-        Implements IMarker2
     End Class
 
 End Namespace

@@ -28,23 +28,64 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4790";
         protected const string MessageFormat = "Make sure this weak hash algorithm is not used in a sensitive context here.";
 
+        private const string CreateMethodName = "Create";
+
+        private readonly KnownType[] algorithmTypes =
+        {
+            KnownType.System_Security_Cryptography_DSA,
+            KnownType.System_Security_Cryptography_HMACMD5,
+            KnownType.System_Security_Cryptography_HMACRIPEMD160,
+            KnownType.System_Security_Cryptography_HMACSHA1,
+            KnownType.System_Security_Cryptography_MD5,
+            KnownType.System_Security_Cryptography_RIPEMD160,
+            KnownType.System_Security_Cryptography_SHA1
+        };
+
+        private readonly string[] unsafeAlgorithms =
+        {
+            "DSA",
+            "System.Security.Cryptography.DSA",
+            "HMACMD5",
+            "System.Security.Cryptography.HMACMD5",
+            "HMACRIPEMD160",
+            "System.Security.Cryptography.HMACRIPEMD160",
+            "HMACSHA1",
+            "System.Security.Cryptography.HMACSHA1",
+            "MD5",
+            "System.Security.Cryptography.MD5",
+            "RIPEMD160",
+            "System.Security.Cryptography.RIPEMD160",
+            "SHA1",
+            "System.Security.Cryptography.SHA1"
+        };
+
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
 
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set;  }
-
-        protected BaseTypeTracker<TSyntaxKind> BaseTypeTracker { get; set; }
+        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.WhenDerivesFrom(KnownType.System_Security_Cryptography_HashAlgorithm));
+            ObjectCreationTracker.Track(context, ObjectCreationTracker.WhenDerivesOrImplementsAny(algorithmTypes));
 
             InvocationTracker.Track(context,
-                InvocationTracker.MethodNameIs("Create"),
-                InvocationTracker.MethodReturnTypeIs(KnownType.System_Security_Cryptography_HashAlgorithm));
+                                    InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, CreateMethodName)),
+                                    InvocationTracker.MethodHasParameters(0));
 
-            BaseTypeTracker.Track(context,
-                BaseTypeTracker.MatchSubclassesOf(KnownType.System_Security_Cryptography_HashAlgorithm));
+            InvocationTracker.Track(context,
+                                    InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_AsymmetricAlgorithm, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_CryptoConfig, "CreateFromName"),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_HashAlgorithm, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_KeyedHashAlgorithm, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, CreateMethodName),
+                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, CreateMethodName)),
+                                    InvocationTracker.ArgumentAtIndexIsAny(0, unsafeAlgorithms));
         }
     }
 }
