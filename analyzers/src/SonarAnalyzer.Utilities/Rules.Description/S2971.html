@@ -8,6 +8,8 @@ language integrated queries (LINQ) can be simplified</p>
   <li> Use <code>Count</code> instead of <code>Count()</code> when it's available. </li>
   <li> Don't call <code>ToArray()</code> or <code>ToList()</code> in the middle of a query chain. </li>
 </ul>
+<p>Using <code>EntityFramework</code> may require enforcing client evaluations. Such queries should use <code>AsEnumerable()</code> instead of
+<code>ToArray()</code> or <code>ToList()</code> in the middle of a query chain.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 seq1.Select(element =&gt; element as T).Any(element =&gt; element != null);  // Noncompliant; use OfType

@@ -5,29 +5,27 @@ collections won't handle class instances correctly.</p>
 overridden.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class MyClass {    // Noncompliant - should also override "hashCode()"
-
-  @Override
-  public boolean equals(Object obj) {
-    /* ... */
-  }
-
+class MyClass   // Noncompliant - should also override "GetHashCode()"
+{
+    public override bool Equals(object obj)
+    {
+        // ...
+    }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class MyClass {    // Compliant
+class MyClass
+{
+    public override bool Equals(object obj)
+    {
+        // ...
+    }
 
-  @Override
-  public boolean equals(Object obj) {
-    /* ... */
-  }
-
-  @Override
-  public int hashCode() {
-    /* ... */
-  }
-
+    public override int GetHashCode()
+    {
+        // ...
+    }
 }
 </pre>
 <h2>See</h2>
