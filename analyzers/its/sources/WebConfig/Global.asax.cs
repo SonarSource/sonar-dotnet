@@ -1,4 +1,4 @@
-﻿using System.Web.Routing; // Noncompliant (S1451)
+﻿using System.Web.Routing;
 
 namespace Framework48
 {

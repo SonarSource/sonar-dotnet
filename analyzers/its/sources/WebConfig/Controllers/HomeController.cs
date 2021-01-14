@@ -1,6 +1,4 @@
-﻿// Noncompliant (S1451)
-
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Framework48.Controllers
 {

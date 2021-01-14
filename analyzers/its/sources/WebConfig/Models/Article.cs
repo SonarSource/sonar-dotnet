@@ -1,6 +1,4 @@
-﻿// Noncompliant (S1451)
-
-namespace Framework48.Models
+﻿namespace Framework48.Models
 {
     public class Article
     {
