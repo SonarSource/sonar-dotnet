@@ -83,6 +83,11 @@ namespace SonarAnalyzer.Rules
 
             context.RegisterCompilationAction(c =>
             {
+                analyzerConfiguration.Initialize(c.Options);
+                if (!analyzerConfiguration.IsEnabled(DiagnosticId))
+                {
+                    return;
+                }
                 foreach (var webConfigPath in Directory.GetFiles(rootPath, "web.config", SearchOption.AllDirectories))
                 {
                     var webConfig = File.ReadAllText(webConfigPath);

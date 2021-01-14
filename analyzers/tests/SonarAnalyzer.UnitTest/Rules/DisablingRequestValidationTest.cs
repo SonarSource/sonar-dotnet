@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DisablingRequestValidation.cs",
-                new CS.DisablingRequestValidation(AnalyzerConfiguration.Hotspot, FolderWithoutWebConfig),
+                new CS.DisablingRequestValidation(AnalyzerConfiguration.Hotspot, @"TestCases\WebConfig"),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [DataTestMethod]
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisablingRequestValidation_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DisablingRequestValidation.vb",
-                new VB.DisablingRequestValidation(AnalyzerConfiguration.Hotspot, FolderWithoutWebConfig),
+                new VB.DisablingRequestValidation(AnalyzerConfiguration.Hotspot, @"TestCases\WebConfig"),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
