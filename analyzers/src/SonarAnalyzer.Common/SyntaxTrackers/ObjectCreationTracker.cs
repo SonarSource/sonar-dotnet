@@ -65,6 +65,6 @@ namespace SonarAnalyzer.Helpers
                        && context.InvokedConstructorSymbol.Value.ContainingType.Implements(baseType);
 
         protected override ObjectCreationContext CreateContext(SyntaxNodeAnalysisContext context) =>
-            new ObjectCreationContext(context.Node, context.SemanticModel);
+            new ObjectCreationContext(context);
     }
 }

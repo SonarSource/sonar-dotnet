@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -27,6 +28,8 @@ namespace SonarAnalyzer.Helpers
         public SemanticModel SemanticModel { get; }
         public SyntaxNode Node { get; }
         public Location PrimaryLocation { get; set; }
+
+        public SyntaxBaseContext(SyntaxNodeAnalysisContext context) : this(context.Node, context.SemanticModel) { }
 
         public SyntaxBaseContext(SyntaxNode node, SemanticModel semanticModel)
         {

@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Helpers
         protected override BaseTypeContext CreateContext(SyntaxNodeAnalysisContext context) =>
             GetBaseTypeNodes(context.Node) is { } baseTypeList
             && baseTypeList.Any()
-            ? new BaseTypeContext(context.Node, baseTypeList, context.SemanticModel)
+            ? new BaseTypeContext(context, baseTypeList)
             : null;
     }
 }

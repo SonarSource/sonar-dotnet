@@ -153,20 +153,15 @@ namespace SonarAnalyzer.Rules
                 var identifierName = GetIdentifierName(identifierNameSyntax);
                 node = AssignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, node) as TExpressionSyntax;
 
+                var location = SecondaryLocationForExpression(node, identifierName, out var foundName);
                 if (IsSensitiveExpression(node, context.SemanticModel))
                 {
-                    context.AddSecondaryLocation(
-                        new SecondaryLocation(
-                                SecondaryLocationForExpression(node, identifierName, out var foundName),
-                                string.Format(AssignmentWithFormattingMessage, foundName)));
+                    context.AddSecondaryLocation(location, AssignmentWithFormattingMessage, foundName);
                     return true;
                 }
                 else
                 {
-                    context.AddSecondaryLocation(
-                        new SecondaryLocation(
-                                SecondaryLocationForExpression(node, identifierName, out var foundName),
-                                string.Format(AssignmentMessage, foundName)));
+                    context.AddSecondaryLocation(location, AssignmentMessage, foundName);
                 }
             }
 

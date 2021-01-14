@@ -20,6 +20,7 @@
 
 using System;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -28,10 +29,12 @@ namespace SonarAnalyzer.Helpers
         public string MethodName { get; }
         public Lazy<IMethodSymbol> MethodSymbol { get; }
 
+        public InvocationContext(SyntaxNodeAnalysisContext context, string methodName) : this(context.Node, methodName, context.SemanticModel) { }
+
         public InvocationContext(SyntaxNode node, string methodName, SemanticModel semanticModel) : base(node, semanticModel)
         {
             MethodName = methodName;
-            MethodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol);
+            MethodSymbol = new Lazy<IMethodSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IMethodSymbol);
         }
     }
 }

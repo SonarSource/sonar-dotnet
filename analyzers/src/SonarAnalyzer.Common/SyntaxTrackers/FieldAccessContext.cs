@@ -20,6 +20,7 @@
 
 using System;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -28,10 +29,12 @@ namespace SonarAnalyzer.Helpers
         public string FieldName { get; }
         public Lazy<IFieldSymbol> InvokedFieldSymbol { get; }
 
+        public FieldAccessContext(SyntaxNodeAnalysisContext context, string fieldName) : this(context.Node, fieldName, context.SemanticModel) { }
+
         public FieldAccessContext(SyntaxNode node, string fieldName, SemanticModel semanticModel) : base(node, semanticModel)
         {
             FieldName = fieldName;
-            InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => semanticModel.GetSymbolInfo(Node).Symbol as IFieldSymbol);
+            InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IFieldSymbol);
         }
     }
 }

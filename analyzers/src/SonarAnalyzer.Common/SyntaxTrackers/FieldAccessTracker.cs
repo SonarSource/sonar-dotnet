@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Helpers
                 return null;
             }
 
-            return GetFieldName(context.Node) is string fieldName ? new FieldAccessContext(context.Node, fieldName, context.SemanticModel) : null;
+            return GetFieldName(context.Node) is string fieldName ? new FieldAccessContext(context, fieldName) : null;
         }
     }
 }

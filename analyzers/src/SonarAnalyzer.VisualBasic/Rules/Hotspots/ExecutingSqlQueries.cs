@@ -91,8 +91,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 && equalsValue.Parent is VariableDeclaratorSyntax declarationSyntax)
             {
                 var identifier = declarationSyntax.Names.FirstOrDefault(name => name.Identifier.ValueText.Equals(identifierNameToFind, StringComparison.OrdinalIgnoreCase));
-                identifierNameFound = identifier != null ? identifier.Identifier.ValueText : string.Empty;
-                return identifier != null ? identifier.GetLocation() : Location.None;
+
+                if (identifier == null)
+                {
+                    return Location.None;
+                }
+                else
+                {
+                    identifierNameFound = identifier.Identifier.ValueText;
+                    return identifier.GetLocation();
+                }
             }
 
             if (node.Parent is AssignmentStatementSyntax assignment)

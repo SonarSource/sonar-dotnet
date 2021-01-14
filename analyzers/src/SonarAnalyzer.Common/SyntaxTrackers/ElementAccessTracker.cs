@@ -44,6 +44,6 @@ namespace SonarAnalyzer.Helpers
                        && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
 
         protected override ElementAccessContext CreateContext(SyntaxNodeAnalysisContext context) =>
-            new ElementAccessContext(context.Node, context.SemanticModel);
+            new ElementAccessContext(context);
     }
 }

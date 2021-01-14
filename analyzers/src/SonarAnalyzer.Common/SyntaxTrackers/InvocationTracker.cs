@@ -68,6 +68,6 @@ namespace SonarAnalyzer.Helpers
                        && boolValue == expectedValue;
 
         protected override InvocationContext CreateContext(SyntaxNodeAnalysisContext context) =>
-            GetMethodName(context.Node) is string methodName ? new InvocationContext(context.Node, methodName, context.SemanticModel) : null;
+            GetMethodName(context.Node) is string methodName ? new InvocationContext(context, methodName) : null;
     }
 }

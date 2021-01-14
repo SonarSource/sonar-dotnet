@@ -28,11 +28,11 @@ namespace SonarAnalyzer.Helpers
     {
         public IList<SecondaryLocation> SecondaryLocations { get; } = new List<SecondaryLocation>();
 
-        public void AddSecondaryLocation(SecondaryLocation location)
+        public void AddSecondaryLocation(Location location, string message, params string[] formatArgs)
         {
-            if (location != null && location.Location != null && location.Location != Location.None)
+            if (location != null && location != Location.None)
             {
-                SecondaryLocations.Add(location);
+                SecondaryLocations.Add(new SecondaryLocation(location, string.Format(message, formatArgs)));
             }
         }
     }

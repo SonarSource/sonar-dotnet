@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         public IEnumerable<SyntaxNode> AllBaseTypeNodes { get; }
 
-        public BaseTypeContext(SyntaxNode node, IEnumerable<SyntaxNode> allBaseTypeNodes, SemanticModel semanticModel) : base(node, semanticModel) =>
+        public BaseTypeContext(SyntaxNodeAnalysisContext context, IEnumerable<SyntaxNode> allBaseTypeNodes) : base(context) =>
             AllBaseTypeNodes = allBaseTypeNodes ?? Enumerable.Empty<SyntaxNode>();
     }
 }

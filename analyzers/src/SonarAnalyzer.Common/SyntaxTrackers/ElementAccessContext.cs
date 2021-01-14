@@ -20,6 +20,7 @@
 
 using System;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -27,7 +28,9 @@ namespace SonarAnalyzer.Helpers
     {
         public Lazy<IPropertySymbol> InvokedPropertySymbol { get; }
 
+        public ElementAccessContext(SyntaxNodeAnalysisContext context) : this(context.Node, context.SemanticModel) { }
+
         public ElementAccessContext(SyntaxNode node, SemanticModel semanticModel) : base(node, semanticModel) =>
-            InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(Node).Symbol as IPropertySymbol);
+            InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IPropertySymbol);
     }
 }

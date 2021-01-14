@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Helpers
                 return null;
             }
 
-            return GetPropertyName(context.Node) is string propertyName ? new PropertyAccessContext(context.Node, propertyName, context.SemanticModel) : null;
+            return GetPropertyName(context.Node) is string propertyName ? new PropertyAccessContext(context, propertyName) : null;
         }
     }
 }
