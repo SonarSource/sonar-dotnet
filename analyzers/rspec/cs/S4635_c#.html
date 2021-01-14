@@ -14,6 +14,6 @@ str.Substring(StartIndex).IndexOf(char1); // Noncompliant; a new string is going
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-str.IndexOf(char1, startIndex);
+str.IndexOf(char1, startIndex) - startIndex;
 </pre>
 
