@@ -26,16 +26,14 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public delegate bool MethodDeclarationCondition(MethodDeclarationContext context);
-
-    public abstract class MethodDeclarationTracker : TrackerBase
+    public abstract class MethodDeclarationTracker : TrackerBase<MethodDeclarationContext>
     {
-        public abstract MethodDeclarationCondition ParameterAtIndexIsUsed(int index);
+        public abstract Condition ParameterAtIndexIsUsed(int index);
         protected abstract SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration);
 
         protected MethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        public void Track(SonarAnalysisContext context, params MethodDeclarationCondition[] conditions)
+        public void Track(SonarAnalysisContext context, params Condition[] conditions)
         {
             context.RegisterCompilationStartAction(
                 c =>
@@ -68,16 +66,16 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static MethodDeclarationCondition MatchMethodName(params string[] methodNames) =>
+        public static Condition MatchMethodName(params string[] methodNames) =>
             context => methodNames.Contains(context.MethodSymbol.Name);
 
-        public static MethodDeclarationCondition IsOrdinaryMethod() =>
+        public static Condition IsOrdinaryMethod() =>
             context => context.MethodSymbol.MethodKind == MethodKind.Ordinary;
 
-        public static MethodDeclarationCondition IsMainMethod() =>
+        public static Condition IsMainMethod() =>
             context => context.MethodSymbol.IsMainMethod();
 
-        internal static MethodDeclarationCondition AnyParameterIsOfType(params KnownType[] types)
+        internal static Condition AnyParameterIsOfType(params KnownType[] types)
         {
             var typesArray = types.ToImmutableArray();
             return context =>
@@ -85,7 +83,7 @@ namespace SonarAnalyzer.Helpers
                 && context.MethodSymbol.Parameters.Any(parameter => parameter.Type.DerivesOrImplementsAny(typesArray));
         }
 
-        internal static MethodDeclarationCondition DecoratedWithAnyAttribute(params KnownType[] attributeTypes) =>
+        internal static Condition DecoratedWithAnyAttribute(params KnownType[] attributeTypes) =>
             context => context.MethodSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(attributeTypes));
     }
 }

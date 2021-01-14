@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         public IEnumerable<SyntaxNode> AllBaseTypeNodes { get; }
 
-        public BaseTypeContext(SyntaxNode contextNode, IEnumerable<SyntaxNode> allBaseTypeNodes, SemanticModel semanticModel) : base(contextNode, semanticModel) =>
+        public BaseTypeContext(SyntaxNode node, IEnumerable<SyntaxNode> allBaseTypeNodes, SemanticModel semanticModel) : base(node, semanticModel) =>
             AllBaseTypeNodes = allBaseTypeNodes ?? Enumerable.Empty<SyntaxNode>();
     }
 }

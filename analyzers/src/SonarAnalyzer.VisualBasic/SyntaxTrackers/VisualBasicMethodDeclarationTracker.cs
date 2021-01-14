@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Helpers
     {
         public VisualBasicMethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        public override MethodDeclarationCondition ParameterAtIndexIsUsed(int index) =>
+        public override Condition ParameterAtIndexIsUsed(int index) =>
             context =>
             {
                 var parameterSymbol = context.MethodSymbol.Parameters.ElementAtOrDefault(0);

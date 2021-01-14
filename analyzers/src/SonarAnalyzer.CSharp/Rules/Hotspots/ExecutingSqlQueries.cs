@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? ((AssignmentExpressionSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
                 : null;
 
-        protected override bool IsTracked(ExpressionSyntax expression, BaseContext context) =>
+        protected override bool IsTracked(ExpressionSyntax expression, SyntaxBaseContext context) =>
             IsSensitiveExpression(expression, context.SemanticModel) || IsTrackedVariableDeclaration(expression, context);
 
         protected override bool IsSensitiveExpression(ExpressionSyntax expression, SemanticModel semanticModel) =>
@@ -75,8 +75,10 @@ namespace SonarAnalyzer.Rules.CSharp
             || expression.IsKind(SyntaxKind.InterpolatedStringExpression)
             || (expression is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel)));
 
-        protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierName)
+        protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierNameToFind, out string identifierNameFound)
         {
+            identifierNameFound = identifierNameToFind;
+
             if (node == null)
             {
                 return Location.None;

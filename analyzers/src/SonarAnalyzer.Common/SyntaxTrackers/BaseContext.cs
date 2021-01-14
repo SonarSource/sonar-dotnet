@@ -26,11 +26,7 @@ namespace SonarAnalyzer.Helpers
 {
     public class BaseContext
     {
-        public SemanticModel SemanticModel { get; }
         public IList<SecondaryLocation> SecondaryLocations { get; } = new List<SecondaryLocation>();
-
-        public BaseContext(SemanticModel semanticModel) =>
-            SemanticModel = semanticModel;
 
         public void AddSecondaryLocation(SecondaryLocation location)
         {

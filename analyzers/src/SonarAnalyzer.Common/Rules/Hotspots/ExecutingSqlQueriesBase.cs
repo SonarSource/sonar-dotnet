@@ -22,7 +22,7 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using InvocationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.InvocationContext>;
+using InvocationCondition = SonarAnalyzer.Helpers.TrackerBase<SonarAnalyzer.Helpers.InvocationContext>.Condition;
 
 namespace SonarAnalyzer.Rules
 {
@@ -105,9 +105,9 @@ namespace SonarAnalyzer.Rules
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
         protected abstract TExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index);
         protected abstract TExpressionSyntax GetSetValue(PropertyAccessContext context);
-        protected abstract bool IsTracked(TExpressionSyntax expression, BaseContext context);
+        protected abstract bool IsTracked(TExpressionSyntax expression, SyntaxBaseContext context);
         protected abstract bool IsSensitiveExpression(TExpressionSyntax expression, SemanticModel semanticModel);
-        protected abstract Location SecondaryLocationForExpression(TExpressionSyntax node, string identifierName);
+        protected abstract Location SecondaryLocationForExpression(TExpressionSyntax node, string identifierNameToFind, out string identifierNameFound);
         protected abstract string GetIdentifierName(TIdentifierNameSyntax identifierNameSyntax);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -145,25 +145,28 @@ namespace SonarAnalyzer.Rules
             TrackObjectCreation(context, constructorsForSecondArgument, SecondArgumentIndex);
         }
 
-        protected bool IsTrackedVariableDeclaration(TExpressionSyntax expression, BaseContext context)
+        protected bool IsTrackedVariableDeclaration(TExpressionSyntax expression, SyntaxBaseContext context)
         {
-            if (expression is TIdentifierNameSyntax)
+            var node = expression;
+            while (node is TIdentifierNameSyntax identifierNameSyntax)
             {
-                var node = expression;
-                while (node is TIdentifierNameSyntax identifierNameSyntax)
-                {
-                    var identifierName = GetIdentifierName(identifierNameSyntax);
-                    node = AssignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, node) as TExpressionSyntax;
+                var identifierName = GetIdentifierName(identifierNameSyntax);
+                node = AssignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, node) as TExpressionSyntax;
 
-                    if (IsSensitiveExpression(node, context.SemanticModel))
-                    {
-                        context.AddSecondaryLocation(new SecondaryLocation(SecondaryLocationForExpression(node, identifierName), string.Format(AssignmentWithFormattingMessage, identifierName)));
-                        return true;
-                    }
-                    else
-                    {
-                        context.AddSecondaryLocation(new SecondaryLocation(SecondaryLocationForExpression(node, identifierName), string.Format(AssignmentMessage, identifierName)));
-                    }
+                if (IsSensitiveExpression(node, context.SemanticModel))
+                {
+                    context.AddSecondaryLocation(
+                        new SecondaryLocation(
+                                SecondaryLocationForExpression(node, identifierName, out var foundName),
+                                string.Format(AssignmentWithFormattingMessage, foundName)));
+                    return true;
+                }
+                else
+                {
+                    context.AddSecondaryLocation(
+                        new SecondaryLocation(
+                                SecondaryLocationForExpression(node, identifierName, out var foundName),
+                                string.Format(AssignmentMessage, foundName)));
                 }
             }
 

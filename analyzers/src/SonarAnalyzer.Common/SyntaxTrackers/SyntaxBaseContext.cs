@@ -24,11 +24,13 @@ namespace SonarAnalyzer.Helpers
 {
     public class SyntaxBaseContext : BaseContext
     {
+        public SemanticModel SemanticModel { get; }
         public SyntaxNode Node { get; }
         public Location PrimaryLocation { get; set; }
 
-        public SyntaxBaseContext(SyntaxNode node, SemanticModel semanticModel) : base(semanticModel)
+        public SyntaxBaseContext(SyntaxNode node, SemanticModel semanticModel)
         {
+            SemanticModel = semanticModel;
             Node = node;
             PrimaryLocation = Node.GetLocation();
         }

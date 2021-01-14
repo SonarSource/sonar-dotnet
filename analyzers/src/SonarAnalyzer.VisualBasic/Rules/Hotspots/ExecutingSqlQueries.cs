@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 ? ((AssignmentStatementSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
                 : null;
 
-        protected override bool IsTracked(ExpressionSyntax expression, BaseContext context) =>
+        protected override bool IsTracked(ExpressionSyntax expression, SyntaxBaseContext context) =>
             expression != null && (IsSensitiveExpression(expression, context.SemanticModel) || IsTrackedVariableDeclaration(expression, context));
 
         protected override bool IsSensitiveExpression(ExpressionSyntax expression, SemanticModel semanticModel) =>
@@ -79,8 +79,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             || expression.IsKind(SyntaxKind.InterpolatedStringExpression)
             || (expression is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel));
 
-        protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierName)
+        protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierNameToFind, out string identifierNameFound)
         {
+            identifierNameFound = string.Empty;
             if (node == null)
             {
                 return Location.None;
@@ -89,11 +90,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (node.Parent is EqualsValueSyntax equalsValue
                 && equalsValue.Parent is VariableDeclaratorSyntax declarationSyntax)
             {
-                var identifier = declarationSyntax.Names.FirstOrDefault(name => name.Identifier.ValueText.Equals(identifierName, StringComparison.OrdinalIgnoreCase));
+                var identifier = declarationSyntax.Names.FirstOrDefault(name => name.Identifier.ValueText.Equals(identifierNameToFind, StringComparison.OrdinalIgnoreCase));
+                identifierNameFound = identifier != null ? identifier.Identifier.ValueText : string.Empty;
                 return identifier != null ? identifier.GetLocation() : Location.None;
             }
 
-            return node.Parent is AssignmentStatementSyntax assignment ? assignment.Left.GetLocation() : Location.None;
+            if (node.Parent is AssignmentStatementSyntax assignment)
+            {
+                identifierNameFound = assignment.Left.GetName();
+                return assignment.Left.GetLocation();
+            }
+
+            return Location.None;
         }
 
         private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>

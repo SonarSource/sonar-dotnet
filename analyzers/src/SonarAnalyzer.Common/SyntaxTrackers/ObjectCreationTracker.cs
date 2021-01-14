@@ -20,33 +20,33 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using ObjectCreationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.ObjectCreationContext>;
 
 namespace SonarAnalyzer.Helpers
 {
     public abstract class ObjectCreationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ObjectCreationContext>
         where TSyntaxKind : struct
     {
-        internal abstract ObjectCreationCondition ArgumentAtIndexIsConst(int index);
+        internal abstract Condition ArgumentAtIndexIsConst(int index);
         internal abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
 
         protected ObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        internal ObjectCreationCondition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
+        internal Condition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
             context => ConstArgumentForParameter(context, parameterName) is bool boolValue && boolValue == expectedValue;
 
-        internal ObjectCreationCondition ArgumentAtIndexIs(int index, KnownType type) =>
+        internal Condition ArgumentAtIndexIs(int index, KnownType type) =>
             context => context.InvokedConstructorSymbol.Value != null
                        && context.InvokedConstructorSymbol.Value.Parameters.Length > index
                        && context.InvokedConstructorSymbol.Value.Parameters[index].Type.Is(type);
 
-        internal ObjectCreationCondition WhenDerivesOrImplementsAny(params KnownType[] types) =>
+        internal Condition WhenDerivesOrImplementsAny(params KnownType[] types) =>
             context => context.InvokedConstructorSymbol.Value != null
                        && context.InvokedConstructorSymbol.Value.IsConstructor()
                        && context.InvokedConstructorSymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
 
-        internal ObjectCreationCondition MatchConstructor(params KnownType[] types) =>
+        internal Condition MatchConstructor(params KnownType[] types) =>
             // We cannot do a syntax check first because a type name can be aliased with
             // a using Alias = Fully.Qualified.Name and we will generate false negative
             // for new Alias()
@@ -54,17 +54,17 @@ namespace SonarAnalyzer.Helpers
                        && context.InvokedConstructorSymbol.Value.IsConstructor()
                        && context.InvokedConstructorSymbol.Value.ContainingType.IsAny(types);
 
-        internal ObjectCreationCondition WhenDerivesFrom(KnownType baseType) =>
+        internal Condition WhenDerivesFrom(KnownType baseType) =>
             context => context.InvokedConstructorSymbol.Value != null
                        && context.InvokedConstructorSymbol.Value.IsConstructor()
                        && context.InvokedConstructorSymbol.Value.ContainingType.DerivesFrom(baseType);
 
-        internal ObjectCreationCondition WhenImplements(KnownType baseType) =>
+        internal Condition WhenImplements(KnownType baseType) =>
             context => context.InvokedConstructorSymbol.Value != null
                        && context.InvokedConstructorSymbol.Value.IsConstructor()
                        && context.InvokedConstructorSymbol.Value.ContainingType.Implements(baseType);
 
-        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel) =>
-            new ObjectCreationContext(expression, semanticModel);
+        protected override ObjectCreationContext CreateContext(SyntaxNodeAnalysisContext context) =>
+            new ObjectCreationContext(context.Node, context.SemanticModel);
     }
 }

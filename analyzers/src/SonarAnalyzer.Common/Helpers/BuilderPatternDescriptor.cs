@@ -21,19 +21,18 @@
 using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using InvocationCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.InvocationContext>;
 
 namespace SonarAnalyzer.Helpers
 {
     public class BuilderPatternDescriptor<TInvocationSyntax>
         where TInvocationSyntax : SyntaxNode
     {
-        private readonly InvocationCondition[] invocationConditions;
+        private readonly TrackerBase<InvocationContext>.Condition[] invocationConditions;
         private readonly Func<TInvocationSyntax, bool> isValid;
 
-        public BuilderPatternDescriptor(bool isValid, params InvocationCondition[] invocationConditions) : this(invocation => isValid, invocationConditions) { }
+        public BuilderPatternDescriptor(bool isValid, params TrackerBase<InvocationContext>.Condition[] invocationConditions) : this(invocation => isValid, invocationConditions) { }
 
-        public BuilderPatternDescriptor(Func<TInvocationSyntax, bool> isValid, params InvocationCondition[] invocationConditions)
+        public BuilderPatternDescriptor(Func<TInvocationSyntax, bool> isValid, params TrackerBase<InvocationContext>.Condition[] invocationConditions)
         {
             this.isValid = isValid;
             this.invocationConditions = invocationConditions;

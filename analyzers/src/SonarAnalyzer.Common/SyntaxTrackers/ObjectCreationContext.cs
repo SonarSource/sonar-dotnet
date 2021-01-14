@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Helpers
     {
         public Lazy<IMethodSymbol> InvokedConstructorSymbol { get; }
 
-        public ObjectCreationContext(SyntaxNode expression, SemanticModel semanticModel) : base(expression, semanticModel) =>
-            InvokedConstructorSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(expression).Symbol as IMethodSymbol);
+        public ObjectCreationContext(SyntaxNode node, SemanticModel semanticModel) : base(node, semanticModel) =>
+            InvokedConstructorSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol);
     }
 }

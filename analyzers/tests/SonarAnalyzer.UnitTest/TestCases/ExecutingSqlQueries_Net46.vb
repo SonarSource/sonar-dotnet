@@ -249,7 +249,7 @@ Namespace Tests.Diagnostics
             Dim command = New SqlCommand(sensitiveQuery)                                                        ' Noncompliant [1]
             command.CommandText = sensitiveQuery                                                                ' Noncompliant [2]
 
-            Dim stillSensitive As String = sensitiveQuery                                                       ' Secondary [3] {{SQL query is assigned to STILLsENSITIVE.}}
+            Dim stillSensitive As String = sensitiveQuery                                                       ' Secondary [3] {{SQL query is assigned to stillSensitive.}}
             '   ^^^^^^^^^^^^^^
             command.CommandText = STILLsENSITIVE                                                                ' Noncompliant [3] ^13#19
 

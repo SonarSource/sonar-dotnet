@@ -35,8 +35,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void IsMatch()
         {
             var context = CreateContext();
-            TrackingCondition<InvocationContext> trueCondition = _ => true;
-            TrackingCondition<InvocationContext> falseCondition = _ => false;
+            TrackerBase<InvocationContext>.Condition trueCondition = _ => true;
+            TrackerBase<InvocationContext>.Condition falseCondition = _ => false;
             BuilderPatternDescriptor<InvocationExpressionSyntax> descriptor;
 
             descriptor = new BuilderPatternDescriptor<InvocationExpressionSyntax>(true);

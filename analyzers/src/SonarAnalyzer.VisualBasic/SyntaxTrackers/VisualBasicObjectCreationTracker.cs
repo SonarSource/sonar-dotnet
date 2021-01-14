@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
 
         public VisualBasicObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        internal override TrackingCondition<ObjectCreationContext> ArgumentAtIndexIsConst(int index) =>
+        internal override Condition ArgumentAtIndexIsConst(int index) =>
             context => ((ObjectCreationExpressionSyntax)context.Node).ArgumentList  is { } argumentList
                        && argumentList.Arguments.Count > index
                        && argumentList.Arguments[index].GetExpression().HasConstantValue(context.SemanticModel);

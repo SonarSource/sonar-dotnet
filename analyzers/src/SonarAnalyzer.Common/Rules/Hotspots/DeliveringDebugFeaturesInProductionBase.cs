@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
                 Conditions.ExceptWhen(IsInvokedConditionally()));
         }
 
-        protected abstract TrackingCondition<InvocationContext> IsInvokedConditionally();
+        protected abstract TrackerBase<InvocationContext>.Condition IsInvokedConditionally();
 
         protected static bool IsValidationMethod(SemanticModel semanticModel, SyntaxNode condition, string methodName, bool caseInsensitiveComparison = false)
         {

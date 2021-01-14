@@ -25,22 +25,20 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public delegate bool TrackingCondition<in TContext>(TContext trackingContext);
-
-    public abstract class SyntaxTrackerBase<TSyntaxKind, TContext> : TrackerBase
+    public abstract class SyntaxTrackerBase<TSyntaxKind, TContext> : TrackerBase<TContext>
         where TSyntaxKind : struct
         where TContext : SyntaxBaseContext
     {
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TSyntaxKind[] TrackedSyntaxKinds { get; }
-        protected abstract SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel);
+        protected abstract TContext CreateContext(SyntaxNodeAnalysisContext context);
 
         protected SyntaxTrackerBase(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        public void Track(SonarAnalysisContext context, params TrackingCondition<TContext>[] conditions) =>
+        public void Track(SonarAnalysisContext context, params Condition[] conditions) =>
             Track(context, new object[0], conditions);
 
-        public void Track(SonarAnalysisContext context, object[] diagnosticMessageArgs, params TrackingCondition<TContext>[] conditions)
+        public void Track(SonarAnalysisContext context, object[] diagnosticMessageArgs, params Condition[] conditions)
         {
             context.RegisterCompilationStartAction(
               c =>
@@ -56,8 +54,8 @@ namespace SonarAnalyzer.Helpers
 
             void TrackAndReportIfNecessary(SyntaxNodeAnalysisContext c)
             {
-                if (CreateContext(c.Node, c.SemanticModel) is { } trackingContext
-                    && conditions.All(c => c((TContext)trackingContext))
+                if (CreateContext(c) is { } trackingContext
+                    && conditions.All(c => c(trackingContext))
                     && trackingContext.PrimaryLocation != null
                     && trackingContext.PrimaryLocation != Location.None)
                 {

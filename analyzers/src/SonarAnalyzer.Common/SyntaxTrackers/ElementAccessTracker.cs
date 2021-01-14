@@ -20,30 +20,30 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using ElementAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.ElementAccessContext>;
 
 namespace SonarAnalyzer.Helpers
 {
     public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ElementAccessContext>
         where TSyntaxKind : struct
     {
-        public abstract ElementAccessCondition ArgumentAtIndexEquals(int index, string value);
-        public abstract ElementAccessCondition MatchSetter();
-        public abstract ElementAccessCondition MatchProperty(MemberDescriptor member);
+        public abstract Condition ArgumentAtIndexEquals(int index, string value);
+        public abstract Condition MatchSetter();
+        public abstract Condition MatchProperty(MemberDescriptor member);
 
         protected ElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        internal ElementAccessCondition ArgumentAtIndexIs(int index, params KnownType[] types) =>
+        internal Condition ArgumentAtIndexIs(int index, params KnownType[] types) =>
             context => context.InvokedPropertySymbol.Value != null
                        && context.InvokedPropertySymbol.Value.Parameters.Length > index
                        && context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]);
 
-        internal ElementAccessCondition MatchIndexerIn(params KnownType[] types) =>
+        internal Condition MatchIndexerIn(params KnownType[] types) =>
             context => context.InvokedPropertySymbol.Value != null
                        && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
 
-        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel) =>
-            new ElementAccessContext(expression, semanticModel);
+        protected override ElementAccessContext CreateContext(SyntaxNodeAnalysisContext context) =>
+            new ElementAccessContext(context.Node, context.SemanticModel);
     }
 }

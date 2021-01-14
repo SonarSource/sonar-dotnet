@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analyzerConfiguration) =>
             InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
 
-        protected override TrackingCondition<InvocationContext> IsInvokedConditionally() =>
+        protected override TrackerBase<InvocationContext>.Condition IsInvokedConditionally() =>
             context =>
                 context.Node.FirstAncestorOrSelf<StatementSyntax>() is { } invocationStatement
                 && invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));

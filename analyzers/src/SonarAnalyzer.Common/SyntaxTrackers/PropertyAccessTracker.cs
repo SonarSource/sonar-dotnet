@@ -19,8 +19,8 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using PropertyAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.PropertyAccessContext>;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -28,9 +28,9 @@ namespace SonarAnalyzer.Helpers
         where TSyntaxKind : struct
     {
         public abstract object AssignedValue(PropertyAccessContext context);
-        public abstract PropertyAccessCondition MatchGetter();
-        public abstract PropertyAccessCondition MatchSetter();
-        public abstract PropertyAccessCondition AssignedValueIsConstant();
+        public abstract Condition MatchGetter();
+        public abstract Condition MatchSetter();
+        public abstract Condition AssignedValueIsConstant();
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
         protected abstract string GetPropertyName(SyntaxNode expression);
 
@@ -39,19 +39,19 @@ namespace SonarAnalyzer.Helpers
         protected PropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
            CaseInsensitiveComparison = caseInsensitiveComparison;
 
-        public PropertyAccessCondition MatchProperty(params MemberDescriptor[] properties) =>
+        public Condition MatchProperty(params MemberDescriptor[] properties) =>
             context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, CaseInsensitiveComparison, properties);
 
-        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel)
+        protected override PropertyAccessContext CreateContext(SyntaxNodeAnalysisContext context)
         {
             // We register for both MemberAccess and IdentifierName and we want to
             // avoid raising two times for the same identifier.
-            if (IsIdentifierWithinMemberAccess(expression))
+            if (IsIdentifierWithinMemberAccess(context.Node))
             {
                 return null;
             }
 
-            return GetPropertyName(expression) is string propertyName ? (SyntaxBaseContext)new PropertyAccessContext(expression, propertyName, semanticModel) : null;
+            return GetPropertyName(context.Node) is string propertyName ? new PropertyAccessContext(context.Node, propertyName, context.SemanticModel) : null;
         }
     }
 }

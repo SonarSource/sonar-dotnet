@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
         }
 
-        private static TrackingCondition<InvocationContext> IsIHeadersDictionary() =>
+        private static TrackerBase<InvocationContext>.Condition IsIHeadersDictionary() =>
             context =>
             {
                 var containingType = context.MethodSymbol.Value.ContainingType;

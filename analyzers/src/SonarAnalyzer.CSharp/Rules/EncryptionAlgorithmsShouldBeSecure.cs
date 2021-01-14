@@ -38,10 +38,10 @@ namespace SonarAnalyzer.Rules.CSharp
             ObjectCreationTracker = new CSharpObjectCreationTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
         }
 
-        protected override TrackingCondition<PropertyAccessContext> IsInsideObjectInitializer() =>
+        protected override TrackerBase<PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
             context => context.Node.FirstAncestorOrSelf<InitializerExpressionSyntax>() != null;
 
-        protected override TrackingCondition<InvocationContext> HasPkcs1PaddingArgument() =>
+        protected override TrackerBase<InvocationContext>.Condition HasPkcs1PaddingArgument() =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;

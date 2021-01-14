@@ -24,7 +24,6 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers.VisualBasic;
-using PropertyAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.PropertyAccessContext>;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -45,13 +44,13 @@ namespace SonarAnalyzer.Helpers
                 ? assignment.Right.FindConstantValue(context.SemanticModel)
                 : null;
 
-        public override PropertyAccessCondition MatchGetter() =>
+        public override Condition MatchGetter() =>
             context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        public override PropertyAccessCondition MatchSetter() =>
+        public override Condition MatchSetter() =>
             context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        public override PropertyAccessCondition AssignedValueIsConstant() =>
+        public override Condition AssignedValueIsConstant() =>
             context => AssignedValue(context) != null;
 
         protected override string GetPropertyName(SyntaxNode expression) =>

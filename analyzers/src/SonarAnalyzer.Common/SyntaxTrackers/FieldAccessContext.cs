@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Helpers
         public string FieldName { get; }
         public Lazy<IFieldSymbol> InvokedFieldSymbol { get; }
 
-        public FieldAccessContext(SyntaxNode expression, string fieldName, SemanticModel semanticModel) : base(expression, semanticModel)
+        public FieldAccessContext(SyntaxNode node, string fieldName, SemanticModel semanticModel) : base(node, semanticModel)
         {
             FieldName = fieldName;
             InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => semanticModel.GetSymbolInfo(Node).Symbol as IFieldSymbol);

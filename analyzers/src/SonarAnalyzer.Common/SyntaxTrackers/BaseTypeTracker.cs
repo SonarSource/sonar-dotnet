@@ -22,8 +22,8 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using BaseClassCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.BaseTypeContext>;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -41,10 +41,10 @@ namespace SonarAnalyzer.Helpers
 
         protected BaseTypeTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        internal BaseClassCondition MatchSubclassesOf(params KnownType[] types)
+        internal Condition MatchSubclassesOf(params KnownType[] types)
         {
             var immutableTypes = types.ToImmutableArray();
-            return (context) =>
+            return context =>
             {
                 foreach (var baseTypeNode in context.AllBaseTypeNodes)
                 {
@@ -55,15 +55,14 @@ namespace SonarAnalyzer.Helpers
                     }
                 }
 
-                context.PrimaryLocation = null;
                 return false;
             };
         }
 
-        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel) =>
-            GetBaseTypeNodes(expression) is { } baseTypeList
+        protected override BaseTypeContext CreateContext(SyntaxNodeAnalysisContext context) =>
+            GetBaseTypeNodes(context.Node) is { } baseTypeList
             && baseTypeList.Any()
-            ? new BaseTypeContext(expression, baseTypeList, semanticModel)
+            ? new BaseTypeContext(context.Node, baseTypeList, context.SemanticModel)
             : null;
     }
 }

@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
-using PropertyAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.PropertyAccessContext>;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -45,13 +44,13 @@ namespace SonarAnalyzer.Helpers
                 ? assignment.Right.FindConstantValue(context.SemanticModel)
                 : null;
 
-        public override PropertyAccessCondition MatchGetter() =>
+        public override Condition MatchGetter() =>
             context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        public override PropertyAccessCondition MatchSetter() =>
+        public override Condition MatchSetter() =>
             context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        public override PropertyAccessCondition AssignedValueIsConstant() =>
+        public override Condition AssignedValueIsConstant() =>
             context => AssignedValue(context) != null;
 
         protected override string GetPropertyName(SyntaxNode expression) =>

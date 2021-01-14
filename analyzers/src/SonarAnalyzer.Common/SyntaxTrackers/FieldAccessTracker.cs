@@ -19,17 +19,17 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using FieldAccessCondition = SonarAnalyzer.Helpers.TrackingCondition<SonarAnalyzer.Helpers.FieldAccessContext>;
 
 namespace SonarAnalyzer.Helpers
 {
     public abstract class FieldAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, FieldAccessContext>
         where TSyntaxKind : struct
     {
-        public abstract FieldAccessCondition WhenRead();
-        public abstract FieldAccessCondition MatchSet();
-        public abstract FieldAccessCondition AssignedValueIsConstant();
+        public abstract Condition WhenRead();
+        public abstract Condition MatchSet();
+        public abstract Condition AssignedValueIsConstant();
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
         protected abstract string GetFieldName(SyntaxNode expression);
 
@@ -38,19 +38,19 @@ namespace SonarAnalyzer.Helpers
         protected FieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
             CaseInsensitiveComparison = caseInsensitiveComparison;
 
-        public FieldAccessCondition MatchField(params MemberDescriptor[] fields) =>
+        public Condition MatchField(params MemberDescriptor[] fields) =>
             context => MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, CaseInsensitiveComparison, fields);
 
-        protected override SyntaxBaseContext CreateContext(SyntaxNode expression, SemanticModel semanticModel)
+        protected override FieldAccessContext CreateContext(SyntaxNodeAnalysisContext context)
         {
             // We register for both MemberAccess and IdentifierName and we want to
             // avoid raising two times for the same identifier.
-            if (IsIdentifierWithinMemberAccess(expression))
+            if (IsIdentifierWithinMemberAccess(context.Node))
             {
                 return null;
             }
 
-            return GetFieldName(expression) is string fieldName ? new FieldAccessContext(expression, fieldName, semanticModel) : null;
+            return GetFieldName(context.Node) is string fieldName ? new FieldAccessContext(context.Node, fieldName, context.SemanticModel) : null;
         }
     }
 }
