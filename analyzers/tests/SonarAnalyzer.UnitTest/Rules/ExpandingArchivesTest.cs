@@ -63,6 +63,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                            additionalReferences: AdditionalReferences);
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            MetadataReferenceFacade.GetSystemIoCompression();
+            MetadataReferenceFacade.SystemIoCompression;
     }
 }

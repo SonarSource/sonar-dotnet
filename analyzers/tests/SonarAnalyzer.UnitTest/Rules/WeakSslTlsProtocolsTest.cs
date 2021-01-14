@@ -49,7 +49,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     additionalReferences: GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-           MetadataReferenceFacade.GetSystemNetHttp()
-               .Concat(MetadataReferenceFacade.GetSystemSecurityCryptography());
+           MetadataReferenceFacade.SystemNetHttp.Concat(MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

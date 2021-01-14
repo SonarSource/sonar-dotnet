@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeHttpOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly.cs",
                 new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: MetadataReferenceFacade.GetSystemWeb());
+                additionalReferences: MetadataReferenceFacade.SystemWeb);
 #else
         [TestMethod]
         [TestCategory("Rule")]

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericTypeParameterEmptinessChecking() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
                                     new GenericTypeParameterEmptinessChecking(),
-                                    additionalReferences: MetadataReferenceFacade.GetSystemCollections(),
+                                    additionalReferences: MetadataReferenceFacade.SystemCollections,
                                     checkMode: CompilationErrorBehavior.Ignore);
 
 #if NET
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
                                                       new GenericTypeParameterEmptinessChecking(),
-                                                      MetadataReferenceFacade.GetSystemCollections());
+                                                      MetadataReferenceFacade.SystemCollections);
 #endif
 
         [TestMethod]

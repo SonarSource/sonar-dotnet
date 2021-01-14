@@ -42,9 +42,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument(NetFrameworkVersion version, string testFilePath) =>
             Verifier.VerifyAnalyzer(testFilePath,
                 new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
-                additionalReferences: MetadataReferenceFacade.GetSystemXml()
-                    .Concat(MetadataReferenceFacade.GetSystemData())
-                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                additionalReferences: MetadataReferenceFacade.SystemXml
+                    .Concat(MetadataReferenceFacade.SystemData)
+                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .Concat(NuGetMetadataReference.MicrosoftWebXdt())
                     .ToArray());
 
@@ -54,9 +54,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_CSharp9.cs",
                 new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                MetadataReferenceFacade.GetSystemXml()
-                    .Concat(MetadataReferenceFacade.GetSystemData())
-                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                MetadataReferenceFacade.SystemXml
+                    .Concat(MetadataReferenceFacade.SystemData)
+                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .Concat(NuGetMetadataReference.MicrosoftWebXdt())
                     .ToArray());
 #endif
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader(NetFrameworkVersion version, string testFilePath) =>
             Verifier.VerifyAnalyzer(testFilePath, new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
                 ParseOptionsHelper.FromCSharp8,
-                additionalReferences: MetadataReferenceFacade.GetSystemXml().ToArray());
+                additionalReferences: MetadataReferenceFacade.SystemXml.ToArray());
 
 #if NET
         [TestMethod]
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_CSharp9.cs",
                 new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                MetadataReferenceFacade.GetSystemXml().ToArray());
+                MetadataReferenceFacade.SystemXml.ToArray());
 #endif
 
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
@@ -103,9 +103,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_CSharp9.cs",
                                                       new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                                                      MetadataReferenceFacade.GetSystemXml()
-                                                          .Concat(MetadataReferenceFacade.GetSystemData())
-                                                          .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                                                      MetadataReferenceFacade.SystemXml
+                                                          .Concat(MetadataReferenceFacade.SystemData)
+                                                          .Concat(MetadataReferenceFacade.SystemXmlLinq)
                                                           .ToArray());
 
         [TestMethod]
@@ -113,9 +113,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_CSharp9.cs",
                                                       new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                                                      MetadataReferenceFacade.GetSystemXml()
-                                                          .Concat(MetadataReferenceFacade.GetSystemData())
-                                                          .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                                                      MetadataReferenceFacade.SystemXml
+                                                          .Concat(MetadataReferenceFacade.SystemData)
+                                                          .Concat(MetadataReferenceFacade.SystemXmlLinq)
                                                           .ToArray());
 #endif
 
@@ -138,14 +138,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ParameterProvider.cs"
                 },
                 new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                additionalReferences: MetadataReferenceFacade.GetSystemXml());
+                additionalReferences: MetadataReferenceFacade.SystemXml);
 
         private static void VerifyRule(NetFrameworkVersion version, string testFilePath, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<ParseOptions> options = null) =>
             Verifier.VerifyAnalyzer(testFilePath,
                 new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
-                additionalReferences: MetadataReferenceFacade.GetSystemXml()
-                    .Concat(MetadataReferenceFacade.GetSystemData())
-                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                additionalReferences: MetadataReferenceFacade.SystemXml
+                    .Concat(MetadataReferenceFacade.SystemData)
+                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .ToArray(),
                 outputKind: outputKind,
                 options: options);

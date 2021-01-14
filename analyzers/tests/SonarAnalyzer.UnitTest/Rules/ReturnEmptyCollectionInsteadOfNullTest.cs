@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ReturnEmptyCollectionInsteadOfNull() =>
             Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
                                     new ReturnEmptyCollectionInsteadOfNull(),
-                                    additionalReferences: MetadataReferenceFacade.GetSystemXml());
+                                    additionalReferences: MetadataReferenceFacade.SystemXml);
 
 #if NET
         [TestMethod]

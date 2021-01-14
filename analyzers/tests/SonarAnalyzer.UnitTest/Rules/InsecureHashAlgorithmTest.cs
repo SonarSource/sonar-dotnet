@@ -42,12 +42,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureHashAlgorithm_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureHashAlgorithm.CSharp9.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.GetSystemSecurityCryptography());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureHashAlgorithm.CSharp9.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureHashAlgorithm() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.GetSystemSecurityCryptography());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.SystemSecurityCryptography);
 #endif
     }
 }

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
                                     new csharp.PartCreationPolicyShouldBeUsedWithExportAttribute(),
-                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
+                                    additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
 
 #if NET
         [TestMethod]
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs",
                                     new csharp.PartCreationPolicyShouldBeUsedWithExportAttribute(),
-                                    MetadataReferenceFacade.GetSystemComponentModelComposition());
+                                    MetadataReferenceFacade.SystemComponentModelComposition);
 #endif
 
         [TestMethod]
@@ -50,6 +50,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
                                     new vbnet.PartCreationPolicyShouldBeUsedWithExportAttribute(),
-                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
+                                    additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
     }
 }

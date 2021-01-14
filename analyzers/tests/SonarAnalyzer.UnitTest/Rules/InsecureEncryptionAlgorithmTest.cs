@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.GetSystemSecurityCryptography()
+            MetadataReferenceFacade.SystemSecurityCryptography
                 .Concat(NuGetMetadataReference.BouncyCastle());
     }
 }

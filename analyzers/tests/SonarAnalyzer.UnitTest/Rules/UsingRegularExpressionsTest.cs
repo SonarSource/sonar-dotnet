@@ -35,27 +35,27 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingRegularExpressions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingRegularExpressions.cs",
                 new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
+                additionalReferences: MetadataReferenceFacade.RegularExpressions);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingRegularExpressions_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingRegularExpressions.cs",
                 new CS.UsingRegularExpressions(),
-                additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
+                additionalReferences: MetadataReferenceFacade.RegularExpressions);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingRegularExpressions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingRegularExpressions.vb",
                 new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
+                additionalReferences: MetadataReferenceFacade.RegularExpressions);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingRegularExpressions_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingRegularExpressions.vb",
                 new VB.UsingRegularExpressions(),
-                additionalReferences: MetadataReferenceFacade.GetRegularExpressions());
+                additionalReferences: MetadataReferenceFacade.RegularExpressions);
     }
 }

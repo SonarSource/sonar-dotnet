@@ -34,13 +34,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void WcfNonVoidOneWay_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.cs",
                 new WcfNonVoidOneWay(),
-                additionalReferences: MetadataReferenceFacade.GetSystemServiceModel());
+                additionalReferences: MetadataReferenceFacade.SystemServiceModel);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void WcfNonVoidOneWay_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.vb",
                 new SonarAnalyzer.Rules.VisualBasic.WcfNonVoidOneWay(),
-                additionalReferences: MetadataReferenceFacade.GetSystemServiceModel());
+                additionalReferences: MetadataReferenceFacade.SystemServiceModel);
     }
 }

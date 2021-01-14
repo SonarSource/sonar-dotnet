@@ -103,7 +103,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            MetadataReferenceFacade.GetSystemSecurityCryptography()
-                .Union(MetadataReferenceFacade.GetSystemNetHttp());
+            MetadataReferenceFacade.SystemSecurityCryptography.Concat(MetadataReferenceFacade.SystemNetHttp);
     }
 }
