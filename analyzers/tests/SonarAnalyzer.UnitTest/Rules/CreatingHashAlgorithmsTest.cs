@@ -40,6 +40,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     additionalReferences: GetAdditionalReferences());
+#if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void CreatingHashAlgorithms_CS_NetFx() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.NetFramework.cs",
+                                    new CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    additionalReferences: GetAdditionalReferences());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -48,6 +58,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.vb",
                                     new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     additionalReferences: GetAdditionalReferences());
+
+#if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void CreatingHashAlgorithms_VB_NetFx() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.NetFramework.vb",
+                                    new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
+                                    additionalReferences: GetAdditionalReferences());
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -23,12 +23,6 @@ namespace Tests.Diagnostics
             using var HMACMD5KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACMD5"); // Noncompliant
             using var HMACMD5CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("HMACMD5"); // Noncompliant
 
-            using var HMACRIPEMD160 = new HMACRIPEMD160(); // Noncompliant
-            using var HMACRIPEMD160Create = HMACMD5.Create(); // Noncompliant
-            using var HMACRIPEMD160CreateWithParam = HMACMD5.Create("HMACRIPEMD160"); // Noncompliant
-            using var HMACRIPEMD160KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACRIPEMD160"); // Noncompliant
-            using var HMACRIPEMD160CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("HMACRIPEMD160"); // Noncompliant
-
             using var HMACSHA1 = new HMACSHA1(); // Noncompliant
             using var HMACSHA1Create = HMACMD5.Create(); // Noncompliant
             using var HMACSHA1CreateWithParam = HMACMD5.Create("HMACSHA1"); // Noncompliant
@@ -39,23 +33,12 @@ namespace Tests.Diagnostics
             using var HMACSHA256KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA256");
             using var HMACSHA256CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("HMACSHA256");
 
-            using var MD5Cng = new MD5Cng(); // Noncompliant
             using var MD5CryptoServiceProvider = new MD5CryptoServiceProvider(); // Noncompliant
             using var MD5CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("MD5"); // Noncompliant
             using var MD5HashAlgorithm = HashAlgorithm.Create("MD5"); // Noncompliant
             using var MD5HashAlgorithmWithNamespace = HashAlgorithm.Create("System.Security.Cryptography.MD5"); // Noncompliant
             using var MD5Create = MD5.Create(); // Noncompliant
             using var MD5CreateWithParam = MD5.Create("MD5"); // Noncompliant
-
-            using var RIPEMD160Managed  = new RIPEMD160Managed(); // Noncompliant
-            using var RIPEMD160ManagedCreate = RIPEMD160Managed.Create("RIPEMD160Managed"); // Noncompliant
-            using var RIPEMD160ManagedHashAlgorithm = HashAlgorithm.Create("RIPEMD160Managed"); // Noncompliant
-            using var RIPEMD160ManagedCryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("RIPEMD160Managed"); // Noncompliant
-
-            using var RIPEMD160Create = RIPEMD160.Create(); // Noncompliant
-            using var RIPEMD160CreateWithParam = RIPEMD160.Create("RIPEMD160"); // Noncompliant
-            using var RIPEMD160HashAlgorithm = HashAlgorithm.Create("RIPEMD160"); // Noncompliant
-            using var RIPEMD160CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("RIPEMD160"); // Noncompliant
 
             using var SHA1Managed = new SHA1Managed(); // Noncompliant
             using var SHA1Create = SHA1.Create(); // Noncompliant
