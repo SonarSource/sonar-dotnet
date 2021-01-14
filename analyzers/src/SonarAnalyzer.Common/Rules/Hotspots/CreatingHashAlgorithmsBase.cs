@@ -44,13 +44,17 @@ namespace SonarAnalyzer.Rules
         private readonly string[] unsafeAlgorithms =
         {
             "DSA",
+            "System.Security.Cryptography.DSA",
             "HMACMD5",
+            "System.Security.Cryptography.HMACMD5",
             "HMACRIPEMD160",
+            "System.Security.Cryptography.HMACRIPEMD160",
             "HMACSHA1",
+            "System.Security.Cryptography.HMACSHA1",
             "MD5",
             "System.Security.Cryptography.MD5",
             "RIPEMD160",
-            "RIPEMD160Managed",
+            "System.Security.Cryptography.RIPEMD160",
             "SHA1",
             "System.Security.Cryptography.SHA1"
         };

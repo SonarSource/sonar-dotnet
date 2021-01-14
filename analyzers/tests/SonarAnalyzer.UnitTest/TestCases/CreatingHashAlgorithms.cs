@@ -13,6 +13,7 @@ namespace Tests.Diagnostics
             using var DSACreateWithParam = DSA.Create("DSA"); // Noncompliant
             using var DSACreateFromName = (AsymmetricAlgorithm)CryptoConfig.CreateFromName("DSA"); // Noncompliant
             using var DSAAsymmetricAlgorithm = AsymmetricAlgorithm.Create("DSA"); // Noncompliant
+            using var DSAAsymmetricAlgorithmWithNamespace = AsymmetricAlgorithm.Create("System.Security.Cryptography.DSA"); // Noncompliant
 
             using var HMACCreate = HMAC.Create(); // Noncompliant
             using var HMACCreateWithParam = HMAC.Create("HMACMD5"); // Noncompliant
@@ -21,16 +22,19 @@ namespace Tests.Diagnostics
             using var HMACMD5Create = HMACMD5.Create(); // Noncompliant
             using var HMACMD5CreateWithParam = HMACMD5.Create("HMACMD5"); // Noncompliant
             using var HMACMD5KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACMD5"); // Noncompliant
+            using var HMACMD5KeyedHashAlgorithmWithNamespace = KeyedHashAlgorithm.Create("System.Security.Cryptography.HMACMD5"); // Noncompliant
             using var HMACMD5CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("HMACMD5"); // Noncompliant
 
             using var HMACSHA1 = new HMACSHA1(); // Noncompliant
             using var HMACSHA1Create = HMACMD5.Create(); // Noncompliant
             using var HMACSHA1CreateWithParam = HMACMD5.Create("HMACSHA1"); // Noncompliant
             using var HMACSHA1KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA1"); // Noncompliant
+            using var HMACSHA1KeyedHashAlgorithmWithNamespace = KeyedHashAlgorithm.Create("System.Security.Cryptography.HMACSHA1"); // Noncompliant
             using var HMACSHA1CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("HMACSHA1"); // Noncompliant
 
             using var HMACSHA256Create = HMACSHA256.Create("HMACSHA256");
             using var HMACSHA256KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA256");
+            using var HMACSHA256KeyedHashAlgorithmWithNamespace = KeyedHashAlgorithm.Create("System.Security.Cryptography.HMACSHA256");
             using var HMACSHA256CryptoConfig = (HashAlgorithm)CryptoConfig.CreateFromName("HMACSHA256");
 
             using var MD5CryptoServiceProvider = new MD5CryptoServiceProvider(); // Noncompliant
@@ -49,6 +53,7 @@ namespace Tests.Diagnostics
 
             using var sha256Managed = new SHA256Managed();
             using var sha256HashAlgorithm = HashAlgorithm.Create("SHA256Managed");
+            using var sha256HashAlgorithmWithNamespace = HashAlgorithm.Create("System.Security.Cryptography.SHA256Managed");
             var sha256CryptoConfig = CryptoConfig.CreateFromName("SHA256Managed");
 
             HashAlgorithm hashAlgo = HashAlgorithm.Create();

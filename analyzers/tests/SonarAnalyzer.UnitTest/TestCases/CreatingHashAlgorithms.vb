@@ -12,6 +12,7 @@ Namespace Tests.Diagnostics
             Dim DSACreateWithParam = DSA.Create("DSA") ' Noncompliant
             Dim DSACreateFromName = CryptoConfig.CreateFromName("DSA") ' Noncompliant
             Dim DSAAsymmetricAlgorithm = AsymmetricAlgorithm.Create("DSA") ' Noncompliant
+            Dim DSAAsymmetricAlgorithmWithNamespace = AsymmetricAlgorithm.Create("System.Security.Cryptography.DSA") ' Noncompliant
 
             Dim HMACCreate = HMAC.Create() ' Noncompliant
             Dim HMACCreateWithParam = HMAC.Create("HMACMD5") ' Noncompliant
@@ -20,16 +21,19 @@ Namespace Tests.Diagnostics
             Dim HMACMD5Create = HMACMD5.Create() ' Noncompliant
             Dim HMACMD5CreateWithParam = HMACMD5.Create("HMACMD5") ' Noncompliant
             Dim HMACMD5KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACMD5") ' Noncompliant
+            Dim HMACMD5KeyedHashAlgorithmWithNamespace = KeyedHashAlgorithm.Create("System.Security.Cryptography.HMACMD5") ' Noncompliant
             Dim HMACMD5CryptoConfig = CryptoConfig.CreateFromName("HMACMD5") ' Noncompliant
 
             Dim HMACSHA1 = new HMACSHA1() ' Noncompliant
             Dim HMACSHA1Create = HMACMD5.Create() ' Noncompliant
             Dim HMACSHA1CreateWithParam = HMACMD5.Create("HMACSHA1") ' Noncompliant
             Dim HMACSHA1KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA1") ' Noncompliant
+            Dim HMACSHA1KeyedHashAlgorithmWithNamespace = KeyedHashAlgorithm.Create("System.Security.Cryptography.HMACSHA1") ' Noncompliant
             Dim HMACSHA1CryptoConfig = CryptoConfig.CreateFromName("HMACSHA1") ' Noncompliant
 
             Dim HMACSHA256Create = HMACSHA256.Create("HMACSHA256")
             Dim HMACSHA256KeyedHashAlgorithm = KeyedHashAlgorithm.Create("HMACSHA256")
+            Dim HMACSHA256KeyedHashAlgorithmWithNamespace = KeyedHashAlgorithm.Create("System.Security.Cryptography.HMACSHA256")
             Dim HMACSHA256CryptoConfig = CryptoConfig.CreateFromName("HMACSHA256")
 
             Dim MD5CryptoServiceProvider = new MD5CryptoServiceProvider() ' Noncompliant
@@ -48,6 +52,7 @@ Namespace Tests.Diagnostics
 
             Dim SHA256Managed = new SHA256Managed()
             Dim SHA256ManagedHashAlgorithm = HashAlgorithm.Create("SHA256Managed")
+            Dim SHA256ManagedHashAlgorithmWithNamespace = HashAlgorithm.Create("System.Security.Cryptography.SHA256Managed")
             Dim SHA256ManagedCryptoConfig = CryptoConfig.CreateFromName("SHA256Managed")
 
             Dim hashAlgo = HashAlgorithm.Create()
