@@ -41,12 +41,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         protected override string GetStringLiteralAtIndex(InvocationContext context, int index) =>
-            context.Invocation is InvocationExpressionSyntax invocation
+            context.Node is InvocationExpressionSyntax invocation
                 ? GetStringValue(context.SemanticModel, invocation.ArgumentList, index)
                 : null;
 
         protected override string GetStringLiteralAtIndex(ObjectCreationContext context, int index) =>
-            context.Expression is ObjectCreationExpressionSyntax objectCreation
+            context.Node is ObjectCreationExpressionSyntax objectCreation
                 ? GetStringValue(context.SemanticModel, objectCreation.ArgumentList, index)
                 : null;
 

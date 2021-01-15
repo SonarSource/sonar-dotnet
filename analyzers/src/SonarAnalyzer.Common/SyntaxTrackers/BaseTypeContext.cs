@@ -21,30 +21,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
     /// <summary>
-    /// Syntax and semantic information about an inheritance relationship
+    /// Syntax and semantic information about an inheritance relationship.
     /// </summary>
-    public class BaseTypeContext
+    public class BaseTypeContext : SyntaxBaseContext
     {
         /// <summary>
-        /// The node being analyzed - the base list syntax node
-        /// </summary>
-        public SyntaxNode ContextNode { get; }
-        public SemanticModel SemanticModel { get; }
-
-        /// <summary>
-        /// A list of all type syntax nodes for node being analyzed
+        /// A list of all type syntax nodes for node being analyzed.
         /// </summary>
         public IEnumerable<SyntaxNode> AllBaseTypeNodes { get; }
 
-        public BaseTypeContext(SyntaxNode contextNode, IEnumerable<SyntaxNode> allBaseTypeNodes, SemanticModel semanticModel)
-        {
-            ContextNode = contextNode;
+        public BaseTypeContext(SyntaxNodeAnalysisContext context, IEnumerable<SyntaxNode> allBaseTypeNodes) : base(context) =>
             AllBaseTypeNodes = allBaseTypeNodes ?? Enumerable.Empty<SyntaxNode>();
-            SemanticModel = semanticModel;
-        }
     }
 }

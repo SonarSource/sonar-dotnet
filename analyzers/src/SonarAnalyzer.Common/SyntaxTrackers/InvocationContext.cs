@@ -20,25 +20,21 @@
 
 using System;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
-    /// <summary>
-    /// Syntax and semantic information about a single method invocation
-    /// </summary>
-    public class InvocationContext
+    public class InvocationContext : SyntaxBaseContext
     {
-        public SyntaxNode Invocation { get; }
         public string MethodName { get; }
-        public SemanticModel SemanticModel { get; }
         public Lazy<IMethodSymbol> MethodSymbol { get; }
 
-        public InvocationContext(SyntaxNode invocation, string methodName, SemanticModel semanticModel)
+        public InvocationContext(SyntaxNodeAnalysisContext context, string methodName) : this(context.Node, methodName, context.SemanticModel) { }
+
+        public InvocationContext(SyntaxNode node, string methodName, SemanticModel semanticModel) : base(node, semanticModel)
         {
-            Invocation = invocation;
             MethodName = methodName;
-            SemanticModel = semanticModel;
-            MethodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol);
+            MethodSymbol = new Lazy<IMethodSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IMethodSymbol);
         }
     }
 }

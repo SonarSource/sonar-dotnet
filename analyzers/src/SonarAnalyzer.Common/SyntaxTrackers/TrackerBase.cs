@@ -18,19 +18,32 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class ObjectCreationContext : SyntaxBaseContext
+    public class TrackerBase<TContext>
+        where TContext : BaseContext
     {
-        public Lazy<IMethodSymbol> InvokedConstructorSymbol { get; }
+        public delegate bool Condition(TContext trackingContext);
 
-        public ObjectCreationContext(SyntaxNodeAnalysisContext context) : this(context.Node, context.SemanticModel) { }
+        private readonly IAnalyzerConfiguration analyzerConfiguration;
 
-        public ObjectCreationContext(SyntaxNode node, SemanticModel semanticModel) : base(node, semanticModel) =>
-            InvokedConstructorSymbol = new Lazy<IMethodSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IMethodSymbol);
+        protected DiagnosticDescriptor Rule { get; }
+
+        protected TrackerBase(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+        {
+            this.analyzerConfiguration = analyzerConfiguration;
+            Rule = rule;
+        }
+
+        protected bool IsEnabled(AnalyzerOptions options)
+        {
+            analyzerConfiguration.Initialize(options);
+
+            return analyzerConfiguration.IsEnabled(Rule.Id);
+        }
     }
 }

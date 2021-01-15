@@ -41,6 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override string FirstArgument(InvocationContext context) =>
-            ((InvocationExpressionSyntax)context.Invocation).ArgumentList.Get(0).FindStringConstant(context.SemanticModel);
+            ((InvocationExpressionSyntax)context.Node).ArgumentList.Get(0).FindStringConstant(context.SemanticModel);
     }
 }

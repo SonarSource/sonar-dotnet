@@ -29,32 +29,32 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
     {
-        public VisualBasicInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule, caseInsensitiveComparison: true) { }
-
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InvocationExpression };
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
-        public override InvocationCondition ArgumentAtIndexIsConstant(int index) =>
-            context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
-                    && argumentList.Arguments.Count > index
-                    && argumentList.Arguments[index].GetExpression().HasConstantValue(context.SemanticModel);
+        public VisualBasicInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule, caseInsensitiveComparison: true) { }
 
-        public override InvocationCondition ArgumentAtIndexIsAny(int index, params string[] values) =>
-            context => ((InvocationExpressionSyntax)context.Invocation).ArgumentList is { } argumentList
+        public override Condition ArgumentAtIndexIsConstant(int index) =>
+            context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
+                       && argumentList.Arguments.Count > index
+                       && argumentList.Arguments[index].GetExpression().HasConstantValue(context.SemanticModel);
+
+        public override Condition ArgumentAtIndexIsAny(int index, params string[] values) =>
+            context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
                        && index < argumentList.Arguments.Count
                        && values.Contains(argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel));
 
-        public override InvocationCondition MatchProperty(MemberDescriptor member) =>
-            context => ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess
-                    && methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                    && methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess
-                    && propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                    && context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType
-                    && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
+        public override Condition MatchProperty(MemberDescriptor member) =>
+            context => ((InvocationExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax methodMemberAccess
+                       && methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                       && methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess
+                       && propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                       && context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType
+                       && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
 
         internal override object ConstArgumentForParameter(InvocationContext context, string parameterName)
         {
-            var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
+            var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
             var values = VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName);
             return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
                 ? valueSyntax.FindConstantValue(context.SemanticModel)

@@ -20,25 +20,19 @@
 
 using System;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
-    /// <summary>
-    /// Syntax and semantic information about a single Field access
-    /// </summary>
-    public class FieldAccessContext
+    public class FieldAccessContext : SyntaxBaseContext
     {
-        public SyntaxNode Expression { get; }
         public string FieldName { get; }
-        public SemanticModel SemanticModel { get; }
         public Lazy<IFieldSymbol> InvokedFieldSymbol { get; }
 
-        public FieldAccessContext(SyntaxNode expression, string fieldName, SemanticModel semanticModel)
+        public FieldAccessContext(SyntaxNodeAnalysisContext context, string fieldName) : base(context)
         {
-            Expression = expression;
             FieldName = fieldName;
-            SemanticModel = semanticModel;
-            InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => semanticModel.GetSymbolInfo(Expression).Symbol as IFieldSymbol);
+            InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IFieldSymbol);
         }
     }
 }

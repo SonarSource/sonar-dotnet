@@ -18,90 +18,39 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public delegate bool FieldAccessCondition(FieldAccessContext invocationContext);
-
-    public abstract class FieldAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
+    public abstract class FieldAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, FieldAccessContext>
         where TSyntaxKind : struct
     {
-        private bool CaseInsensitiveComparison { get; }
-
-        protected FieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false)
-            : base(analyzerConfiguration, rule)
-        {
-            this.CaseInsensitiveComparison = caseInsensitiveComparison;
-        }
-
+        public abstract Condition WhenRead();
+        public abstract Condition MatchSet();
+        public abstract Condition AssignedValueIsConstant();
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
-
         protected abstract string GetFieldName(SyntaxNode expression);
 
-        public void Track(SonarAnalysisContext context, params FieldAccessCondition[] conditions)
+        private bool CaseInsensitiveComparison { get; }
+
+        protected FieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
+            CaseInsensitiveComparison = caseInsensitiveComparison;
+
+        public Condition MatchField(params MemberDescriptor[] fields) =>
+            context => MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, CaseInsensitiveComparison, fields);
+
+        protected override FieldAccessContext CreateContext(SyntaxNodeAnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    if (IsEnabled(c.Options))
-                    {
-                        c.RegisterSyntaxNodeActionInNonGenerated(
-                            GeneratedCodeRecognizer,
-                            TrackMemberAccess,
-                            TrackedSyntaxKinds);
-                    }
-                });
-
-            void TrackMemberAccess(SyntaxNodeAnalysisContext c)
+            // We register for both MemberAccess and IdentifierName and we want to
+            // avoid raising two times for the same identifier.
+            if (IsIdentifierWithinMemberAccess(context.Node))
             {
-                if (IsTrackedField(c.Node, c.SemanticModel))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                }
+                return null;
             }
 
-            bool IsTrackedField(SyntaxNode expression, SemanticModel semanticModel)
-            {
-                // We register for both MemberAccess and IdentifierName and we want to
-                // avoid raising two times for the same identifier.
-                if (IsIdentifierWithinMemberAccess(expression))
-                {
-                    return false;
-                }
-
-                var fieldName = GetFieldName(expression);
-                if (fieldName == null)
-                {
-                    return false;
-                }
-
-                var conditionContext = new FieldAccessContext(expression, fieldName, semanticModel);
-                return conditions.All(c => c(conditionContext));
-            }
+            return GetFieldName(context.Node) is string fieldName ? new FieldAccessContext(context, fieldName) : null;
         }
-
-        public FieldAccessCondition MatchField(params MemberDescriptor[] fields) =>
-            (context) =>
-                MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, CaseInsensitiveComparison, fields);
-
-        #region Syntax-level standard conditions
-
-        public abstract FieldAccessCondition WhenRead();
-
-        public abstract FieldAccessCondition MatchSet();
-
-        public abstract FieldAccessCondition AssignedValueIsConstant();
-
-        #endregion
-
-        #region Symbol-level standard conditions
-
-        // Add any common symbol-level checks here...
-
-        #endregion
     }
 }

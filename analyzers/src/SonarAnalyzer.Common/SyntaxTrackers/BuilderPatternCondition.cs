@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Helpers
 
         public bool IsInvalidBuilderInitialization(InvocationContext context)
         {
-            var current = context.Invocation;
+            var current = context.Node;
             while (current != null)
             {
                 current = RemoveParentheses(current);

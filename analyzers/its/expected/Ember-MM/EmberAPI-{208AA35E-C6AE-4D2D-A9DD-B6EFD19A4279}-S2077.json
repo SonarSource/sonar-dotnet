@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -275,7 +275,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -288,7 +288,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -301,7 +301,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -314,7 +314,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -327,7 +327,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -340,7 +340,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -353,7 +353,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -366,7 +366,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -379,7 +379,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -392,7 +392,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -405,7 +405,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -418,7 +418,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -431,7 +431,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -444,7 +444,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -457,7 +457,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -470,7 +470,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -483,7 +483,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -496,7 +496,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -509,7 +509,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -522,7 +522,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -535,7 +535,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -548,7 +548,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -561,7 +561,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -574,7 +574,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -587,7 +587,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -600,7 +600,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -613,7 +613,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -626,7 +626,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -639,7 +639,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -652,7 +652,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -665,7 +665,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -678,7 +678,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -691,7 +691,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -704,7 +704,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -717,7 +717,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -730,7 +730,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -743,7 +743,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -756,7 +756,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -769,7 +769,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -782,7 +782,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -795,7 +795,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -808,7 +808,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -821,7 +821,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -834,7 +834,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -847,7 +847,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -860,7 +860,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -873,7 +873,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -886,7 +886,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -899,7 +899,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -912,7 +912,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -925,7 +925,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -938,7 +938,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -951,7 +951,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -964,7 +964,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -977,7 +977,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -990,7 +990,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -1003,7 +1003,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
@@ -1016,7 +1016,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
@@ -1029,7 +1029,7 @@
 },
 {
 "id":  "S2077",
-"message":  "Make sure that formatting this SQL query is safe here.",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {

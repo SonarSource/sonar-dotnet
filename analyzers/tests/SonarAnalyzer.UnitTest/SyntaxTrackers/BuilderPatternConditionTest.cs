@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var condition8 = new CSharpBuilderPatternCondition(true, cccInvalidator, bbbValidator); // Configuration order has no effect
             condition8.IsInvalidBuilderInitialization(context_CS).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
 
-            var dddContext = new InvocationContext(FindMethodInvocation_CS(context_CS.Invocation.SyntaxTree, "Ddd"), "Ddd", context_CS.SemanticModel);
+            var dddContext = new InvocationContext(FindMethodInvocation_CS(context_CS.Node.SyntaxTree, "Ddd"), "Ddd", context_CS.SemanticModel);
             var condition9 = new CSharpBuilderPatternCondition(false);
             condition9.IsInvalidBuilderInitialization(dddContext).Should().BeFalse(); // Invalid constructor is not tracked through array propagation
         }
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var condition8 = new VisualBasicBuilderPatternCondition(true, cccInvalidator, bbbValidator); // Configuration order has no effect
             condition8.IsInvalidBuilderInitialization(context_VB).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
 
-            var dddContext = new InvocationContext(FindMethodInvocation_VB(context_VB.Invocation.SyntaxTree, "Ddd"), "Ddd", context_VB.SemanticModel);
+            var dddContext = new InvocationContext(FindMethodInvocation_VB(context_VB.Node.SyntaxTree, "Ddd"), "Ddd", context_VB.SemanticModel);
             var condition9 = new VisualBasicBuilderPatternCondition(false);
             condition9.IsInvalidBuilderInitialization(dddContext).Should().BeFalse(); // Invalid constructor is not tracked through array propagation
         }

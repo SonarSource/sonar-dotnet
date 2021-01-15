@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax>
+    public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax, IdentifierNameSyntax>
     {
         public ExecutingSqlQueries()
             : this(AnalyzerConfiguration.Hotspot)
@@ -44,7 +45,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
             InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, Rule);
             PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, Rule);
             ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, Rule);
+            AssignmentFinder = new VisualBasicAssignmentFinder();
         }
+
+        protected override string GetIdentifierName(IdentifierNameSyntax identifierNameSyntax) =>
+            identifierNameSyntax.Identifier.ValueText;
 
         protected override ExpressionSyntax GetInvocationExpression(SyntaxNode expression) =>
             expression is InvocationExpressionSyntax invocation
@@ -52,26 +57,60 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 : null;
 
         protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
-            context.Invocation is InvocationExpressionSyntax invocation
+            context.Node is InvocationExpressionSyntax invocation
                 ? invocation.ArgumentList.Get(index)
                 : null;
 
         protected override ExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index) =>
-            context.Expression is ObjectCreationExpressionSyntax objectCreation
+            context.Node is ObjectCreationExpressionSyntax objectCreation
                 ? objectCreation.ArgumentList.Get(index)
                 : null;
 
         protected override ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
-            context.Expression is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
+            context.Node is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
                 ? ((AssignmentStatementSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
                 : null;
 
-        protected override bool IsTracked(ExpressionSyntax argument, SemanticModel semanticModel) =>
-            argument != null
-            && (IsConcatenation(argument, semanticModel)
-                || argument.IsKind(SyntaxKind.InterpolatedStringExpression)
-                || (argument is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel))
-                || IsTrackedVariableDeclaration(argument, semanticModel));
+        protected override bool IsTracked(ExpressionSyntax expression, SyntaxBaseContext context) =>
+            expression != null && (IsSensitiveExpression(expression, context.SemanticModel) || IsTrackedVariableDeclaration(expression, context));
+
+        protected override bool IsSensitiveExpression(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            IsConcatenation(expression, semanticModel)
+            || expression.IsKind(SyntaxKind.InterpolatedStringExpression)
+            || (expression is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel));
+
+        protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierNameToFind, out string identifierNameFound)
+        {
+            identifierNameFound = string.Empty;
+            if (node == null)
+            {
+                return Location.None;
+            }
+
+            if (node.Parent is EqualsValueSyntax equalsValue
+                && equalsValue.Parent is VariableDeclaratorSyntax declarationSyntax)
+            {
+                var identifier = declarationSyntax.Names.FirstOrDefault(name => name.Identifier.ValueText.Equals(identifierNameToFind, StringComparison.OrdinalIgnoreCase));
+
+                if (identifier == null)
+                {
+                    return Location.None;
+                }
+                else
+                {
+                    identifierNameFound = identifier.Identifier.ValueText;
+                    return identifier.GetLocation();
+                }
+            }
+
+            if (node.Parent is AssignmentStatementSyntax assignment)
+            {
+                identifierNameFound = assignment.Left.GetName();
+                return assignment.Left.GetLocation();
+            }
+
+            return Location.None;
+        }
 
         private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             (invocation.IsMethodInvocation(KnownType.System_String, "Format", semanticModel) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", semanticModel))
@@ -81,11 +120,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             IsConcatenationOperator(expression)
             && expression is BinaryExpressionSyntax concatenation
             && !IsConcatenationOfConstants(concatenation, semanticModel);
-
-        private bool IsTrackedVariableDeclaration(ExpressionSyntax argument, SemanticModel semanticModel) =>
-            (argument is IdentifierNameSyntax identifierNameSyntax
-             && semanticModel.GetDeclaringSyntaxNode(identifierNameSyntax)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax
-             && IsTracked(variableDeclaratorSyntax.Initializer?.Value, semanticModel));
 
         private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
             arguments.All(a => a.GetExpression().HasConstantValue(semanticModel));

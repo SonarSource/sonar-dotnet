@@ -20,23 +20,17 @@
 
 using System;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
-    /// <summary>
-    /// Syntax and semantic information about a single element access
-    /// </summary>
-    public class ElementAccessContext
+    public class ElementAccessContext : SyntaxBaseContext
     {
-        public SyntaxNode Expression { get; }
-        public SemanticModel SemanticModel { get; }
         public Lazy<IPropertySymbol> InvokedPropertySymbol { get; }
 
-        public ElementAccessContext(SyntaxNode invocation, SemanticModel semanticModel)
-        {
-            Expression = invocation;
-            SemanticModel = semanticModel;
-            InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(Expression).Symbol as IPropertySymbol);
-        }
+        public ElementAccessContext(SyntaxNodeAnalysisContext context) : this(context.Node, context.SemanticModel) { }
+
+        public ElementAccessContext(SyntaxNode node, SemanticModel semanticModel) : base(node, semanticModel) =>
+            InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IPropertySymbol);
     }
 }

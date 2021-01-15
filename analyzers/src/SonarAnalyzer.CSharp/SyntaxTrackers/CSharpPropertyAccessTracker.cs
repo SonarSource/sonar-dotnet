@@ -35,23 +35,22 @@ namespace SonarAnalyzer.Helpers
                 SyntaxKind.MemberBindingExpression,
                 SyntaxKind.IdentifierName
             };
-
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         public CSharpPropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override object AssignedValue(PropertyAccessContext context) =>
-            context.Expression.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
+            context.Node.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
                 ? assignment.Right.FindConstantValue(context.SemanticModel)
                 : null;
 
-        public override PropertyAccessCondition MatchGetter() =>
-            context => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+        public override Condition MatchGetter() =>
+            context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        public override PropertyAccessCondition MatchSetter() =>
-            context => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+        public override Condition MatchSetter() =>
+            context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        public override PropertyAccessCondition AssignedValueIsConstant() =>
+        public override Condition AssignedValueIsConstant() =>
             context => AssignedValue(context) != null;
 
         protected override string GetPropertyName(SyntaxNode expression) =>

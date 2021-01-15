@@ -43,7 +43,7 @@ namespace Tests.Diagnostics
 
         public void NonCompliant_Concat_SqlCommands(SqlConnection connection, SqlTransaction transaction, string query, string param)
         {
-            var command = new SqlCommand(string.Concat(query, param)); // Noncompliant {{Make sure that formatting this SQL query is safe here.}}
+            var command = new SqlCommand(string.Concat(query, param)); // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             command = new SqlCommand(query + param, connection); // Noncompliant
             command = new SqlCommand("" + 1 + 2, connection); // Compliant
@@ -60,7 +60,7 @@ namespace Tests.Diagnostics
 
         public void NonCompliant_Format_SqlCommands(SqlConnection connection, SqlTransaction transaction, string param)
         {
-            var command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param)); // Noncompliant {{Make sure that formatting this SQL query is safe here.}}
+            var command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param)); // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection); // Noncompliant
             command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection, transaction); // Noncompliant
@@ -81,7 +81,7 @@ namespace Tests.Diagnostics
 
         public void NonCompliant_Interpolation_SqlCommands(SqlConnection connection, SqlTransaction transaction, string param)
         {
-            var command = new SqlCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant {{Make sure that formatting this SQL query is safe here.}}
+            var command = new SqlCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             command = new SqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Noncompliant
 
@@ -120,7 +120,7 @@ namespace Tests.Diagnostics
 
         public void NonCompliant_OdbcCommands(SqlConnection connection, SqlTransaction transaction, string query, string param)
         {
-            var command = new OdbcCommand(string.Concat(query, param)); // Noncompliant {{Make sure that formatting this SQL query is safe here.}}
+            var command = new OdbcCommand(string.Concat(query, param)); // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
             command.CommandText = string.Concat(query, param); // Noncompliant
             command.CommandText = $"SELECT * FROM mytable WHERE mycol={param}"; // Noncompliant
             var adapter = new OdbcDataAdapter(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), ""); // Noncompliant
@@ -151,7 +151,7 @@ namespace Tests.Diagnostics
 
         public void NonCompliant_OracleCommands(OracleConnection connection, OracleTransaction transaction, string query, string param)
         {
-            var command = new OracleCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param)); // Noncompliant {{Make sure that formatting this SQL query is safe here.}}
+            var command = new OracleCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param)); // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
             command.CommandText = $"SELECT * FROM mytable WHERE mycol={param}"; // Noncompliant
             new OracleDataAdapter(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), ""); // Noncompliant
         }
@@ -182,7 +182,7 @@ namespace Tests.Diagnostics
         public void NonCompliant_SqlCeCommands(SqlCeConnection connection, SqlCeTransaction transaction, string query, string param)
         {
             new SqlCeDataAdapter(string.Concat(query, param), ""); // Noncompliant
-            var command = new SqlCeCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant {{Make sure that formatting this SQL query is safe here.}}
+            var command = new SqlCeCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
             command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
         }
 
@@ -278,35 +278,37 @@ namespace Tests.Diagnostics
         public void ConcatAndStringFormat(SqlConnection connection, string param)
         {
             SqlCommand command;
-            string sensitiveQuery = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
-            command = new SqlCommand(sensitiveQuery);                                                   // Noncompliant
+            string sensitiveQuery = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);  // Secondary [1,2,3,4,5] {{SQL Query is dynamically formatted and assigned to sensitiveQuery.}}
+            //     ^^^^^^^^^^^^^^
+            command = new SqlCommand(sensitiveQuery);                                                   // Noncompliant [1]
 
-            command.CommandText = sensitiveQuery;                                                       // Noncompliant
+            command.CommandText = sensitiveQuery;                                                       // Noncompliant [2]
 
-            string stillSensitive = sensitiveQuery;
-            command.CommandText = stillSensitive;                                                       // Noncompliant
+            string stillSensitive = sensitiveQuery;                                                     // Secondary [3] {{SQL query is assigned to stillSensitive.}} ^20#14
+            command.CommandText = stillSensitive;                                                       // Noncompliant [3] ^13#19
 
-            string sensitiveConcatQuery = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";
-            command = new SqlCommand(sensitiveConcatQuery);                                             // Noncompliant
+            string sensitiveConcatQuery = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";          // Secondary [6,7,8] {{SQL Query is dynamically formatted and assigned to sensitiveConcatQuery.}}
 
-            command.CommandText = sensitiveConcatQuery;                                                 // Noncompliant
+            command = new SqlCommand(sensitiveConcatQuery);                                             // Noncompliant [6]
 
-            string stillSensitiveConcat = sensitiveConcatQuery;
-            command.CommandText = stillSensitiveConcat;                                                 // Noncompliant
+            command.CommandText = sensitiveConcatQuery;                                                 // Noncompliant [7]
+
+            string stillSensitiveConcat = sensitiveConcatQuery;                                         // Secondary [8] {{SQL query is assigned to stillSensitiveConcat.}}
+            command.CommandText = stillSensitiveConcat;                                                 // Noncompliant [8]
 
             SqlDataAdapter adapter;
-            adapter = new SqlDataAdapter(sensitiveQuery, connection);                                   // Noncompliant
+            adapter = new SqlDataAdapter(sensitiveQuery, connection);                                   // Noncompliant [4]
 
             command = new SqlCommand("SELECT * FROM Table1 WHERE col1 = '" + param + "'");              // Noncompliant
             command.CommandText = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";                  // Noncompliant
 
             string x = null;
-            x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
-            command.CommandText = x;                                                                    // FN
+            x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);                      // Secondary [9] {{SQL Query is dynamically formatted and assigned to x.}} ^13#1
+            command.CommandText = x;                                                                    // Noncompliant [9]
 
             string y;
-            y = sensitiveQuery;
-            command.CommandText = y;                                                                    // FN
+            y = sensitiveQuery;                                                                         // Secondary [5] {{SQL query is assigned to y.}} ^13#1
+            command.CommandText = y;                                                                    // Noncompliant [5]
         }
     }
 }

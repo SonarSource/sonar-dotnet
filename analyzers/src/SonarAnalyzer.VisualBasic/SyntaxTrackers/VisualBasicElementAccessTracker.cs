@@ -33,18 +33,18 @@ namespace SonarAnalyzer.Helpers
 
         public VisualBasicElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        public override ElementAccessCondition ArgumentAtIndexEquals(int index, string value) =>
-            context => ((InvocationExpressionSyntax)context.Expression).ArgumentList is { } argumentList
-                        && index < argumentList.Arguments.Count
-                        && argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel) == value;
+        public override Condition ArgumentAtIndexEquals(int index, string value) =>
+            context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
+                       && index < argumentList.Arguments.Count
+                       && argumentList.Arguments[index].GetExpression().FindStringConstant(context.SemanticModel) == value;
 
-        public override ElementAccessCondition MatchSetter() =>
-            context => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+        public override Condition MatchSetter() =>
+            context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        public override ElementAccessCondition MatchProperty(MemberDescriptor member) =>
-            context => ((InvocationExpressionSyntax)context.Expression).Expression is MemberAccessExpressionSyntax memberAccess
-                        && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                        && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
-                        && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
+        public override Condition MatchProperty(MemberDescriptor member) =>
+            context => ((InvocationExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax memberAccess
+                       && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                       && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
+                       && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
     }
 }

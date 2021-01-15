@@ -27,23 +27,21 @@ namespace SonarAnalyzer.Helpers
     public class BuilderPatternDescriptor<TInvocationSyntax>
         where TInvocationSyntax : SyntaxNode
     {
-        private readonly InvocationCondition[] invocationConditions;
+        private readonly TrackerBase<InvocationContext>.Condition[] invocationConditions;
         private readonly Func<TInvocationSyntax, bool> isValid;
 
-        public BuilderPatternDescriptor(bool isValid, params InvocationCondition[] invocationConditions)
-            : this(invocation => isValid, invocationConditions)
-        { }
+        public BuilderPatternDescriptor(bool isValid, params TrackerBase<InvocationContext>.Condition[] invocationConditions) : this(invocation => isValid, invocationConditions) { }
 
-        public BuilderPatternDescriptor(Func<TInvocationSyntax, bool> isValid, params InvocationCondition[] invocationConditions)
+        public BuilderPatternDescriptor(Func<TInvocationSyntax, bool> isValid, params TrackerBase<InvocationContext>.Condition[] invocationConditions)
         {
             this.isValid = isValid;
             this.invocationConditions = invocationConditions;
         }
 
         public bool IsMatch(InvocationContext context) =>
-            this.invocationConditions.All(x => x(context));
+            invocationConditions.All(x => x(context));
 
         public bool IsValid(TInvocationSyntax invocation) =>
-            this.isValid(invocation);
+            isValid(invocation);
     }
 }

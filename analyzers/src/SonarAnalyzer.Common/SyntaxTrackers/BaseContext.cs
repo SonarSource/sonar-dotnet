@@ -18,19 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class ObjectCreationContext : SyntaxBaseContext
+    public class BaseContext
     {
-        public Lazy<IMethodSymbol> InvokedConstructorSymbol { get; }
+        public IList<SecondaryLocation> SecondaryLocations { get; } = new List<SecondaryLocation>();
 
-        public ObjectCreationContext(SyntaxNodeAnalysisContext context) : this(context.Node, context.SemanticModel) { }
-
-        public ObjectCreationContext(SyntaxNode node, SemanticModel semanticModel) : base(node, semanticModel) =>
-            InvokedConstructorSymbol = new Lazy<IMethodSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IMethodSymbol);
+        public void AddSecondaryLocation(Location location, string message, params string[] formatArgs)
+        {
+            if (location != null && location != Location.None)
+            {
+                SecondaryLocations.Add(new SecondaryLocation(location, string.Format(message, formatArgs)));
+            }
+        }
     }
 }

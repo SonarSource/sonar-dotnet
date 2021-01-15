@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -27,21 +26,12 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class VisualBasicMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKind>
+    public class VisualBasicMethodDeclarationTracker : MethodDeclarationTracker
     {
-        public VisualBasicMethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
-        {
-        }
+        public VisualBasicMethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        protected override SyntaxKind[] TrackedSyntaxKinds =>
-            throw new NotSupportedException("MethodDeclarationTracker uses symbols, not syntax");
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
-
-        public override MethodDeclarationCondition ParameterAtIndexIsUsed(int index) =>
-            (context) =>
+        public override Condition ParameterAtIndexIsUsed(int index) =>
+            context =>
             {
                 var parameterSymbol = context.MethodSymbol.Parameters.ElementAtOrDefault(0);
                 if (parameterSymbol == null)
@@ -65,15 +55,10 @@ namespace SonarAnalyzer.Helpers
 
                 return descendantNodes.Any(
                     node =>
-                    {
-                        return node.IsKind(SyntaxKind.IdentifierName) &&
-                            ((IdentifierNameSyntax)node).Identifier.ValueText == parameterSymbol.Name &&
-                            parameterSymbol.Equals(semanticModel.GetSymbolInfo(node).Symbol);
-                    });
+                        node.IsKind(SyntaxKind.IdentifierName)
+                        && ((IdentifierNameSyntax)node).Identifier.ValueText == parameterSymbol.Name
+                        && parameterSymbol.Equals(semanticModel.GetSymbolInfo(node).Symbol));
             };
-
-        private static bool HasImplementation(MethodBlockSyntax methodBlock) =>
-            methodBlock.Statements.Count > 0;
 
         protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration)
         {
@@ -96,5 +81,8 @@ namespace SonarAnalyzer.Helpers
                     return null;
             }
         }
+
+        private static bool HasImplementation(MethodBlockSyntax methodBlock) =>
+            methodBlock.Statements.Count > 0;
     }
 }

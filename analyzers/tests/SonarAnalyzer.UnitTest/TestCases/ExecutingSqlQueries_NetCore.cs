@@ -56,35 +56,35 @@ namespace Tests.Diagnostics
 
         public void ConcatAndFormat(DbContext context, string query, params object[] parameters)
         {
-            var concatenated = string.Concat(query, parameters);
-            var formatted = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", parameters);
-            var interpolated = $"SELECT * FROM mytable WHERE mycol={parameters[0]}";
+            var concatenated = string.Concat(query, parameters);                                    // Secondary [1,2,3]
+            var formatted = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", parameters); // Secondary [4,5,6]
+            var interpolated = $"SELECT * FROM mytable WHERE mycol={parameters[0]}";                // Secondary [7,8,9]
 
             context.Database.ExecuteSqlCommand(string.Concat(query, parameters)); // Noncompliant
             context.Database.ExecuteSqlCommand(string.Format(query, parameters)); // Noncompliant
             context.Database.ExecuteSqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", parameters)); // Noncompliant
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={parameters[0]}"); // Compliant, the FormattableString is transformed into a parametrized query.
             context.Database.ExecuteSqlCommand("SELECT * FROM mytable WHERE mycol=" + parameters[0]); // Noncompliant
-            context.Database.ExecuteSqlCommand(formatted); // Noncompliant
-            context.Database.ExecuteSqlCommand(concatenated); // Noncompliant
-            context.Database.ExecuteSqlCommand(interpolated); // Noncompliant
+            context.Database.ExecuteSqlCommand(formatted);    // Noncompliant [4]
+            context.Database.ExecuteSqlCommand(concatenated); // Noncompliant [1]
+            context.Database.ExecuteSqlCommand(interpolated); // Noncompliant [7]
 
             context.Database.ExecuteSqlCommandAsync(string.Concat(query, parameters)); // Noncompliant
             context.Database.ExecuteSqlCommandAsync(string.Format(query, parameters)); // Noncompliant
             context.Database.ExecuteSqlCommandAsync(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", parameters)); // Noncompliant
             context.Database.ExecuteSqlCommandAsync($"SELECT * FROM mytable WHERE mycol={parameters[0]}"); // Compliant, the FormattableString is transformed into a parametrized query.
             context.Database.ExecuteSqlCommandAsync("SELECT * FROM mytable WHERE mycol=" + parameters[0]); // Noncompliant
-            context.Database.ExecuteSqlCommandAsync(formatted); // Noncompliant
-            context.Database.ExecuteSqlCommandAsync(concatenated); // Noncompliant
-            context.Database.ExecuteSqlCommandAsync(interpolated); // Noncompliant
+            context.Database.ExecuteSqlCommandAsync(formatted);    // Noncompliant [5]
+            context.Database.ExecuteSqlCommandAsync(concatenated); // Noncompliant [2]
+            context.Database.ExecuteSqlCommandAsync(interpolated); // Noncompliant [8]
 
             context.Query<User>().FromSql(string.Concat(query, parameters)); // Noncompliant
             context.Query<User>().FromSql(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", parameters)); // Noncompliant
             context.Query<User>().FromSql($"SELECT * FROM mytable WHERE mycol={parameters[0]}"); // Compliant, the FormattableString is transformed into a parametrized query.
             context.Query<User>().FromSql("SELECT * FROM mytable WHERE mycol=" + parameters[0]); // Noncompliant
-            context.Query<User>().FromSql(formatted); // Noncompliant
-            context.Query<User>().FromSql(concatenated); // Noncompliant
-            context.Query<User>().FromSql(interpolated); // Noncompliant
+            context.Query<User>().FromSql(formatted);    // Noncompliant [6]
+            context.Query<User>().FromSql(concatenated); // Noncompliant [3]
+            context.Query<User>().FromSql(interpolated); // Noncompliant [9]
         }
     }
 

@@ -28,11 +28,6 @@ namespace SonarAnalyzer.Helpers
 {
     public class CSharpFieldAccessTracker : FieldAccessTracker<SyntaxKind>
     {
-        public CSharpFieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
-        {
-        }
-
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
             new[]
             {
@@ -40,36 +35,31 @@ namespace SonarAnalyzer.Helpers
                 SyntaxKind.MemberBindingExpression,
                 SyntaxKind.IdentifierName
             };
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        public CSharpFieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        protected override string GetFieldName(SyntaxNode expression) =>
-            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
+        public override Condition WhenRead() =>
+            context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
-            expression.IsKind(SyntaxKind.IdentifierName) &&
-            expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
+        public override Condition MatchSet() =>
+            context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        #region Syntax-level checking methods
-
-        public override FieldAccessCondition WhenRead() =>
-            (context) => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
-
-        public override FieldAccessCondition MatchSet() =>
-            (context) => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
-
-        public override FieldAccessCondition AssignedValueIsConstant() =>
-            (context) =>
+        public override Condition AssignedValueIsConstant() =>
+            context =>
             {
-                var assignment = (AssignmentExpressionSyntax)context.Expression.Ancestors()
+                var assignment = (AssignmentExpressionSyntax)context.Node.Ancestors()
                     .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression));
 
                 return assignment != null &&
                     assignment.Right.HasConstantValue(context.SemanticModel);
             };
 
-        #endregion
+        protected override string GetFieldName(SyntaxNode expression) =>
+            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
 
+        protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
+            expression.IsKind(SyntaxKind.IdentifierName)
+            && expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
     }
 }

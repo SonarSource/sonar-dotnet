@@ -19,60 +19,31 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public delegate bool ElementAccessCondition(ElementAccessContext elementAccessContext);
-
-    public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
+    public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ElementAccessContext>
         where TSyntaxKind : struct
     {
-        public abstract ElementAccessCondition ArgumentAtIndexEquals(int index, string value);
-        public abstract ElementAccessCondition MatchSetter();
-        public abstract ElementAccessCondition MatchProperty(MemberDescriptor member);
+        public abstract Condition ArgumentAtIndexEquals(int index, string value);
+        public abstract Condition MatchSetter();
+        public abstract Condition MatchProperty(MemberDescriptor member);
 
         protected ElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
-        public void Track(SonarAnalysisContext context, params ElementAccessCondition[] conditions)
-        {
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    if (IsEnabled(c.Options))
-                    {
-                        c.RegisterSyntaxNodeActionInNonGenerated(
-                            GeneratedCodeRecognizer,
-                            TrackElementAccess,
-                            TrackedSyntaxKinds);
-                    }
-                });
-
-            void TrackElementAccess(SyntaxNodeAnalysisContext c)
-            {
-                if (IsTrackedElementAccess(c.Node, c.SemanticModel))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                }
-            }
-
-            bool IsTrackedElementAccess(SyntaxNode expression, SemanticModel semanticModel)
-            {
-                var conditionContext = new ElementAccessContext(expression, semanticModel);
-                return conditions.All(c => c(conditionContext));
-            }
-        }
-
-        internal ElementAccessCondition ArgumentAtIndexIs(int index, params KnownType[] types) =>
+        internal Condition ArgumentAtIndexIs(int index, params KnownType[] types) =>
             context => context.InvokedPropertySymbol.Value != null
-                        && context.InvokedPropertySymbol.Value.Parameters.Length > index
-                        && context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]);
+                       && context.InvokedPropertySymbol.Value.Parameters.Length > index
+                       && context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]);
 
-        internal ElementAccessCondition MatchIndexerIn(params KnownType[] types) =>
+        internal Condition MatchIndexerIn(params KnownType[] types) =>
             context => context.InvokedPropertySymbol.Value != null
-                        && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
+                       && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
+
+        protected override ElementAccessContext CreateContext(SyntaxNodeAnalysisContext context) =>
+            new ElementAccessContext(context);
     }
 }

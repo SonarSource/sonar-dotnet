@@ -18,92 +18,56 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public delegate bool InvocationCondition(InvocationContext invocationContext);
-
-    public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
+    public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, InvocationContext>
         where TSyntaxKind : struct
     {
         private readonly bool caseInsensitiveComparison;
 
-        public abstract InvocationCondition ArgumentAtIndexIsConstant(int index);
-        public abstract InvocationCondition ArgumentAtIndexIsAny(int index, params string[] values);
-        public abstract InvocationCondition MatchProperty(MemberDescriptor member);
+        public abstract Condition ArgumentAtIndexIsConstant(int index);
+        public abstract Condition ArgumentAtIndexIsAny(int index, params string[] values);
+        public abstract Condition MatchProperty(MemberDescriptor member);
         internal abstract object ConstArgumentForParameter(InvocationContext context, string parameterName);
         protected abstract string GetMethodName(SyntaxNode invocationExpression);
 
         protected InvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
             this.caseInsensitiveComparison = caseInsensitiveComparison;
 
-        public void Track(SonarAnalysisContext context, params InvocationCondition[] conditions)
-        {
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    if (IsEnabled(c.Options))
-                    {
-                        c.RegisterSyntaxNodeActionInNonGenerated(
-                            GeneratedCodeRecognizer,
-                            TrackInvocationExpression,
-                            TrackedSyntaxKinds);
-                    }
-                });
+        public Condition MatchMethod(params MemberDescriptor[] methods) =>
+           context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, caseInsensitiveComparison, methods);
 
-            void TrackInvocationExpression(SyntaxNodeAnalysisContext c)
-            {
-                if (IsTrackedMethod(c.Node, c.SemanticModel))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                }
-            }
-
-            bool IsTrackedMethod(SyntaxNode invocation, SemanticModel semanticModel)
-            {
-                var methodName = GetMethodName(invocation);
-                if (methodName == null)
-                {
-                    return false;
-                }
-
-                var conditionContext = new InvocationContext(invocation, methodName, semanticModel);
-                return conditions.All(c => c(conditionContext));
-            }
-        }
-
-        public InvocationCondition MatchMethod(params MemberDescriptor[] methods) =>
-            context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, caseInsensitiveComparison, methods);
-
-        public InvocationCondition MethodNameIs(string methodName) =>
+        public Condition MethodNameIs(string methodName) =>
             context => context.MethodName == methodName;
 
-        public InvocationCondition MethodIsStatic() =>
+        public Condition MethodIsStatic() =>
             context => context.MethodSymbol.Value != null
-                    && context.MethodSymbol.Value.IsStatic;
+                       && context.MethodSymbol.Value.IsStatic;
 
-        public InvocationCondition MethodIsExtension() =>
+        public Condition MethodIsExtension() =>
             context => context.MethodSymbol.Value != null
-                    && context.MethodSymbol.Value.IsExtensionMethod;
+                       && context.MethodSymbol.Value.IsExtensionMethod;
 
-        public InvocationCondition MethodHasParameters(int count) =>
+        public Condition MethodHasParameters(int count) =>
             context => context.MethodSymbol.Value != null
-                    && context.MethodSymbol.Value.Parameters.Length == count;
+                       && context.MethodSymbol.Value.Parameters.Length == count;
 
-        public InvocationCondition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition)
-            where TInvocationSyntax : SyntaxNode =>
+        public Condition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition) where TInvocationSyntax : SyntaxNode =>
             condition.IsInvalidBuilderInitialization;
 
-        internal InvocationCondition MethodReturnTypeIs(KnownType returnType) =>
+        internal Condition MethodReturnTypeIs(KnownType returnType) =>
             context => context.MethodSymbol.Value != null
-                    && context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
+                       && context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
 
-        internal InvocationCondition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
+        internal Condition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
             context => ConstArgumentForParameter(context, parameterName) is bool boolValue
-                    && boolValue == expectedValue;
+                       && boolValue == expectedValue;
+
+        protected override InvocationContext CreateContext(SyntaxNodeAnalysisContext context) =>
+            GetMethodName(context.Node) is string methodName ? new InvocationContext(context, methodName) : null;
     }
 }

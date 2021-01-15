@@ -39,13 +39,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ObjectCreationTracker = new VisualBasicObjectCreationTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
         }
 
-        protected override PropertyAccessCondition IsInsideObjectInitializer() =>
-            context => context.Expression.FirstAncestorOrSelf<ObjectMemberInitializerSyntax>() != null;
+        protected override TrackerBase<PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
+            context => context.Node.FirstAncestorOrSelf<ObjectMemberInitializerSyntax>() != null;
 
-        protected override InvocationCondition HasPkcs1PaddingArgument() =>
+        protected override TrackerBase<InvocationContext>.Condition HasPkcs1PaddingArgument() =>
             (context) =>
             {
-                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
+                var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
                 var values = VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, "padding");
                 return values.Length == 1
                     && values[0] is ExpressionSyntax valueSyntax
