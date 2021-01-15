@@ -28,8 +28,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class DisablingRequestValidation : DisablingRequestValidationBase
     {
-        public DisablingRequestValidation() : this(AnalyzerConfiguration.Hotspot) { }
+        public DisablingRequestValidation() : this(AnalyzerConfiguration.Hotspot, ".") { }
 
-        public DisablingRequestValidation(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration) { }
+        public DisablingRequestValidation(IAnalyzerConfiguration analyzerConfiguration, string rootPath) : base(RspecStrings.ResourceManager, analyzerConfiguration, rootPath) { }
     }
 }

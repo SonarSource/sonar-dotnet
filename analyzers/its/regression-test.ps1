@@ -12,7 +12,7 @@ param
     $ruleId,
 
     [Parameter(HelpMessage = "The name of single project to build. If ommited, all projects will be build.")]
-    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb")]
+    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb", "WebConfig")]
     [string]
     $project
 )
@@ -490,6 +490,7 @@ try {
     Build-Project-MSBuild "Nancy" "src\Nancy.sln"
     Build-Project-MSBuild "SkipGenerated" "SkipGeneratedFiles.sln"
     Build-Project-MSBuild "SkipGeneratedVb" "SkipGeneratedVb.sln"
+    Build-Project-MSBuild "WebConfig" "WebConfig.sln"
 
     Build-Project-DotnetTool "NetCore31" "NetCore31.sln"
     Build-Project-DotnetTool "Net5" "Net5.sln"
