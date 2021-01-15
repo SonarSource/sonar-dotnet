@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// <summary>
     /// This class will look for specific patterns inside the unit test files being analyzed when testing a rule.
     /// Here's a summary and examples of the different patterns that can be used to mark part of the code as noncompliant.
-    /// These patterns must appear after a single line comment ("//" or "'" token).
+    /// These patterns must appear after a single line comment (the supported comment tokens: "//" for C#, "'" for VB.NET and "<!--" for XML).
     ///
     /// Simple 'Noncompliant' comment. Will mark the current line as expecting the primary location of an issue.
     /// <code>
