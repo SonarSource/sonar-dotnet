@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Org.BouncyCastle.Crypto.Engines;
+using Org.BouncyCastle.Crypto.Modes;
 
 namespace Tests.Diagnostics
 {
@@ -88,6 +89,11 @@ namespace Tests.Diagnostics
                                                      // Noncompliant@+1
             var aesFastEngine = new AesFastEngine(); // Noncompliant
 //                                  ^^^^^^^^^^^^^
+
+                                                                        // Noncompliant@+1
+            var blockCipher1 = new GcmBlockCipher(new AesFastEngine()); // Noncompliant
+
+            var blockCipher2 = new GcmBlockCipher(new AesEngine());     // Compliant
 
             var oid = CryptoConfig.MapNameToOID("DES"); // Compliant
 
