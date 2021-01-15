@@ -32,6 +32,7 @@
     <Rule><Key>S4834</Key></Rule>
     <Rule><Key>S5042</Key></Rule>
     <Rule><Key>S5332</Key></Rule>
+    <Rule><Key>S5753</Key></Rule>
     <Rule><Key>S5766</Key></Rule>
     <!-- End of workaround -->
     <Rule>

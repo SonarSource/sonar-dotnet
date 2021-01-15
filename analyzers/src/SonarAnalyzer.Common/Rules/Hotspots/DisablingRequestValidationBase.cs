@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
@@ -32,7 +34,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DisablingRequestValidationBase : SonarDiagnosticAnalyzer
+    public abstract class DisablingRequestValidationBase : HotspotDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S5753";
         private const string MessageFormat = "Make sure disabling ASP.NET Request Validation feature is safe here.";
@@ -40,15 +42,14 @@ namespace SonarAnalyzer.Rules
         private const int MinimumAcceptedRequestValidationModeValue = 4;
 
         private readonly DiagnosticDescriptor rule;
-        private readonly IAnalyzerConfiguration analyzerConfiguration;
         private readonly string rootPath;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected DisablingRequestValidationBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration analyzerConfiguration, string rootPath)
+            : base(analyzerConfiguration)
         {
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-            this.analyzerConfiguration = analyzerConfiguration;
             this.rootPath = rootPath;
         }
 
@@ -56,17 +57,16 @@ namespace SonarAnalyzer.Rules
         {
             context.RegisterSymbolAction(c =>
                 {
-                    analyzerConfiguration.Initialize(c.Options);
-                    if (!analyzerConfiguration.IsEnabled(DiagnosticId))
+                    if (!IsEnabled(c.Options))
                     {
                         return;
                     }
-
                     var attributes = c.Symbol.GetAttributes();
                     if (attributes.IsEmpty)
                     {
                         return;
                     }
+
                     var attributeWithFalseParameter = attributes.FirstOrDefault(a =>
                         a.ConstructorArguments.Length == 1
                         && a.ConstructorArguments[0].Kind == TypedConstantKind.Primitive
@@ -83,12 +83,12 @@ namespace SonarAnalyzer.Rules
 
             context.RegisterCompilationAction(c =>
             {
-                analyzerConfiguration.Initialize(c.Options);
-                if (!analyzerConfiguration.IsEnabled(DiagnosticId))
+                if (!IsEnabled(c.Options))
                 {
                     return;
                 }
-                foreach (var fullPath in Directory.GetFiles(rootPath, "web.config", SearchOption.AllDirectories).Select(p => Path.GetFullPath(p)))
+
+                foreach (var fullPath in GetWebConfigFilePathsRecursively(rootPath))
                 {
                     var webConfig = File.ReadAllText(fullPath);
                     if (webConfig.Contains("<system.web>") && ParseXDocument(webConfig) is { } doc)
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules
             foreach (var pages in doc.XPathSelectElements("configuration/system.web/pages"))
             {
                 if (pages.Attribute("validateRequest") is { } validateRequest
-                    && validateRequest.Value == "false"
+                    && validateRequest.Value.Equals("false", StringComparison.OrdinalIgnoreCase)
                     && CreateLocation(webConfigPath, pages, validateRequest.ToString()) is { } location)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
@@ -127,6 +127,9 @@ namespace SonarAnalyzer.Rules
             }
         }
 
+        private static IEnumerable<string> GetWebConfigFilePathsRecursively(string rootPath) =>
+            Directory.GetFiles(rootPath, "web.config", SearchOption.AllDirectories).Select(p => Path.GetFullPath(p));
+
         private static Location CreateLocation(string path, XNode element, string attribute)
         {
             var lineInfo = (IXmlLineInfo)element;
@@ -138,7 +141,7 @@ namespace SonarAnalyzer.Rules
                 var start = lineInfo.LinePosition + element.ToString().IndexOf(attribute) - 2;
                 var end = start + attribute.Length;
                 var linePos = new LinePositionSpan(new LinePosition(lineNumber, start), new LinePosition(lineNumber, end));
-                return Location.Create(path, new TextSpan(lineNumber, end - start), linePos);
+                return Location.Create(path, new TextSpan(lineNumber, attribute.Length), linePos);
             }
             return null;
         }

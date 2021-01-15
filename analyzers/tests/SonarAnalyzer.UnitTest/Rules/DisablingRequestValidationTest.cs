@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -73,27 +74,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisablingRequestValidation_CS_WebConfig_SubFolders(string rootDirectory, params string[] subFolders)
         {
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
+            var languageVersion = compilation.LanguageVersionString();
+
             var allDiagnostics = DiagnosticVerifier.GetDiagnostics(
                 compilation,
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled, rootDirectory),
-                CompilationErrorBehavior.Default);
+                CompilationErrorBehavior.Default).ToList();
 
-            // verify root issues
+            allDiagnostics.Should().NotBeEmpty();
             var rootWebConfig = Path.Combine(rootDirectory, WebConfig);
-            var actualIssuesInRoot = allDiagnostics.Where(d => d.Location.GetLineSpan().Path.EndsWith(rootWebConfig));
-            var expectedIssuesInRoot = new IssueLocationCollector().GetExpectedIssueLocations(GetLines(rootWebConfig)).ToList();
-            DiagnosticVerifier.CompareActualToExpected(compilation.LanguageVersionString(), actualIssuesInRoot, expectedIssuesInRoot, false);
-
-            // verify subfolder issues
+            VerifyResults(rootWebConfig, allDiagnostics, languageVersion);
             foreach (var subFolder in subFolders)
             {
                 var subFolderWebConfig = Path.Combine(rootDirectory, subFolder, WebConfig);
-                var actualSubFolderIssues = allDiagnostics.Where(d => d.Location.GetLineSpan().Path.EndsWith(subFolderWebConfig));
-                var expectedSubFolderIssues = new IssueLocationCollector().GetExpectedIssueLocations(GetLines(subFolderWebConfig)).ToList();
-                DiagnosticVerifier.CompareActualToExpected(compilation.LanguageVersionString(), actualSubFolderIssues, expectedSubFolderIssues, false);
+                VerifyResults(subFolderWebConfig, allDiagnostics, languageVersion);
             }
-
-            allDiagnostics.Should().NotBeEmpty();
         }
 
         [TestMethod]
@@ -125,6 +120,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled, @"TestCases\WebConfig\S5753Values\"),
                 File.ReadAllText(Path.Combine(@"TestCases\WebConfig\S5753Values", WebConfig)));
+
+        // Verifies the results for the given web.config file path.
+        private static void VerifyResults(string webConfigPath, IList<Diagnostic> allDiagnostics, string languageVersion)
+        {
+            var actualIssues = allDiagnostics.Where(d => d.Location.GetLineSpan().Path.EndsWith(webConfigPath));
+            var expectedIssues = new IssueLocationCollector().GetExpectedIssueLocations(GetLines(webConfigPath)).ToList();
+            DiagnosticVerifier.CompareActualToExpected(languageVersion, actualIssues, expectedIssues, false);
+        }
 
         private static IEnumerable<TextLine> GetLines(string path) => SourceText.From(File.ReadAllText(path)).Lines;
     }
