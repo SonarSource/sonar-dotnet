@@ -7,6 +7,6 @@ Namespace Tests.TestCases
     Class Foo
         Public Sub Test()
 
-		End Sub
+        End Sub
     End Class
 End Namespace

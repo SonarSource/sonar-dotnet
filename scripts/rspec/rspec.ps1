@@ -188,12 +188,12 @@ function AppendVbTestCase($ruleTestsFolder) {
     $existingClassText = Get-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Raw
     $snippetText = Get-Content -Path "${RuleTemplateFolder}\\VbNetTestSnippet.cs" -Raw
 
-    $token = "        }"
+    $token = "    }"
     $idx = $existingClassText.LastIndexOf($token)
 
     $newText = ""
     if ($idx -gt -1) {
-        $newText = $existingClassText.Remove($idx, $token.Length).Insert($idx, "${token}`r`n`r`n${snippetText}")
+        $newText = $existingClassText.Remove($idx, $token.Length).Insert($idx, "`r`n${snippetText}`r`n${token}")
     }
     else {
         $newText = "${existingClassText}`r`n${snippetText}"
