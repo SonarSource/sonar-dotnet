@@ -1,0 +1,1 @@
+﻿Empty file is needed to copy the folder to the bin/ directory.

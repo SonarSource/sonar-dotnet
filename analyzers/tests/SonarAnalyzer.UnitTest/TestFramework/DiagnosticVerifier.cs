@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, ICollection<IIssueLocation> expectedIssues, bool compareIdToMessage)
+        internal static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, ICollection<IIssueLocation> expectedIssues, bool compareIdToMessage)
         {
             DumpActualDiagnostics(languageVersion, diagnostics);
 
@@ -128,20 +128,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             bool verifyNoExceptionIsThrown = true) =>
             GetDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, verifyNoExceptionIsThrown);
 
-        private static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
-            DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode,
-            bool verifyNoExceptionIsThrown = true)
-        {
-            var ids = diagnosticAnalyzers
-                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                .Select(diagnostic => diagnostic.Id)
-                .Distinct()
-                .ToHashSet();
-
-            return GetAllDiagnostics(compilation, diagnosticAnalyzers, checkMode, verifyNoExceptionIsThrown)
-                .Where(d => ids.Contains(d.Id));
-        }
-
         public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default) =>
             GetDiagnostics(compilation, diagnosticAnalyzer, checkMode).Should().BeEmpty();
 
@@ -177,6 +163,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
 
             return diagnostics;
+        }
+
+        internal static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
+            DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode,
+            bool verifyNoExceptionIsThrown = true)
+        {
+            var ids = diagnosticAnalyzers
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .Select(diagnostic => diagnostic.Id)
+                .Distinct()
+                .ToHashSet();
+
+            return GetAllDiagnostics(compilation, diagnosticAnalyzers, checkMode, verifyNoExceptionIsThrown)
+                .Where(d => ids.Contains(d.Id));
         }
 
         private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
