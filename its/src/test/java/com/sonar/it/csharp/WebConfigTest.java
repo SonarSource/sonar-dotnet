@@ -46,7 +46,7 @@ public class WebConfigTest extends WebConfigBase {
     List<Hotspot> hotspots = Tests.getHotspots(projectName);
     assertThat(hotspots.size()).isEqualTo(2);
 
-    assertHotspot(hotspots.get(0), 16);
-    assertHotspot(hotspots.get(1), 17);
+    assertHotspot(hotspots.get(0), 10);
+    assertHotspot(hotspots.get(1), 11);
   }
 }
