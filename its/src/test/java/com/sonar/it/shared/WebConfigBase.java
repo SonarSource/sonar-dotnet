@@ -31,8 +31,9 @@ public class WebConfigBase {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  protected void assertHotspot(Hotspot hotspot, int line){
+  protected void assertHotspot(Hotspot hotspot, int line, String fileName){
     assertThat(hotspot.getLine()).isEqualTo(line);
     assertThat(hotspot.getMessage()).isEqualTo(ERROR_MESSAGE);
+    assertThat(hotspot.getComponent()).endsWith(fileName);
   }
 }
