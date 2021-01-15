@@ -20,7 +20,6 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using InvocationCondition = SonarAnalyzer.Helpers.TrackerBase<SonarAnalyzer.Helpers.InvocationContext>.Condition;
 

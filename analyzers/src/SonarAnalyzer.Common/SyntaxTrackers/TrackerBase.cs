@@ -24,7 +24,7 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class TrackerBase<TContext>
+    public class TrackerBase<TContext>
         where TContext : BaseContext
     {
         public delegate bool Condition(TContext trackingContext);
