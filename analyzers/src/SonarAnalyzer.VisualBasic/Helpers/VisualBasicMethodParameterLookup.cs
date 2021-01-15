@@ -26,12 +26,12 @@ namespace SonarAnalyzer.Helpers
     internal class VisualBasicMethodParameterLookup : AbstractMethodParameterLookup<ArgumentSyntax>
     {
         public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
-            : base(argumentList.Arguments, methodSymbol)
+            : base(argumentList?.Arguments, methodSymbol)
         {
         }
 
         public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
-            : base(argumentList.Arguments, semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol)
+            : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol)
         {
         }
 

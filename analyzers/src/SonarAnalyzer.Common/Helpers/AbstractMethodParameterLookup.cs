@@ -29,11 +29,13 @@ namespace SonarAnalyzer.Helpers
     internal abstract class AbstractMethodParameterLookup<TArgumentSyntax>
         where TArgumentSyntax : SyntaxNode
     {
-        private readonly SeparatedSyntaxList<TArgumentSyntax> argumentList;
+        private readonly SeparatedSyntaxList<TArgumentSyntax>? argumentList;
+
+        protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
 
         public IMethodSymbol MethodSymbol { get; }
 
-        protected AbstractMethodParameterLookup(SeparatedSyntaxList<TArgumentSyntax> argumentList, IMethodSymbol methodSymbol)
+        protected AbstractMethodParameterLookup(SeparatedSyntaxList<TArgumentSyntax>? argumentList, IMethodSymbol methodSymbol)
         {
             this.argumentList = argumentList;
             MethodSymbol = methodSymbol;
@@ -43,49 +45,44 @@ namespace SonarAnalyzer.Helpers
         {
             parameter = null;
 
-            if (!argumentList.Contains(argument) ||
-                MethodSymbol == null ||
-                MethodSymbol.IsVararg)
+            if (!argumentList.HasValue
+                || !argumentList.Value.Contains(argument)
+                || MethodSymbol == null
+                || MethodSymbol.IsVararg)
             {
                 return false;
             }
 
-            var nameColonArgumentIdenfitier = GetNameColonArgumentIdentifier(argument);
-            if (nameColonArgumentIdenfitier != null)
+            if (GetNameColonArgumentIdentifier(argument) is { }  nameColonArgumentIdenfitier)
             {
-                parameter = MethodSymbol.Parameters
-                    .FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdenfitier.Value.ValueText);
+                parameter = MethodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdenfitier.ValueText);
                 return parameter != null;
             }
 
-            var argumentIndex = argumentList.IndexOf(argument);
-            var parameterIndex = argumentIndex;
-
-            if (parameterIndex >= MethodSymbol.Parameters.Length)
+            var index = argumentList.Value.IndexOf(argument);
+            if (index >= MethodSymbol.Parameters.Length)
             {
                 var lastParameter = MethodSymbol.Parameters.Last();
                 parameter = lastParameter.IsParams ? lastParameter : null;
                 return parameter != null;
             }
-            parameter = MethodSymbol.Parameters[parameterIndex];
+            parameter = MethodSymbol.Parameters[index];
             return true;
         }
 
         /// <summary>
         /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
-        /// 
+        ///
         /// There could be multiple syntaxes for ParamArray/params.
         /// There could be zero or one result for optional parameters.
         /// There will be single result for normal parameters.
         /// </summary>
-        public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<TArgumentSyntax> argument)
-        {
-            return TryGetSyntax(parameter.Name, out argument);
-        }
+        public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<TArgumentSyntax> argument) =>
+            TryGetSyntax(parameter.Name, out argument);
 
         /// <summary>
         /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
-        /// 
+        ///
         /// There could be multiple syntaxes for ParamArray/params.
         /// There could be zero or one result for optional parameters.
         /// There will be single result for normal parameters.
@@ -105,7 +102,7 @@ namespace SonarAnalyzer.Helpers
 
         /// <summary>
         /// Method returns zero or one argument syntax that represents syntax passed to the parameter.
-        /// 
+        ///
         /// Caller must ensure that given parameter is not ParamArray/params.
         /// </summary>
         public bool TryGetNonParamsSyntax(IParameterSymbol parameter, out TArgumentSyntax argument)
@@ -123,15 +120,16 @@ namespace SonarAnalyzer.Helpers
             return false;
         }
 
-        protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
-
         internal IEnumerable<SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings()
         {
-            foreach (var argument in argumentList)
+            if (argumentList.HasValue)
             {
-                if (TryGetSymbol(argument, out var parameter))
+                foreach (var argument in argumentList)
                 {
-                    yield return new SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol> { SyntaxNode = argument, Symbol = parameter };
+                    if (TryGetSymbol(argument, out var parameter))
+                    {
+                        yield return new SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol> { SyntaxNode = argument, Symbol = parameter };
+                    }
                 }
             }
         }
