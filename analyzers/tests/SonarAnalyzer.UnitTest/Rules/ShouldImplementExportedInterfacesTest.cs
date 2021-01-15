@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ShouldImplementExportedInterfaces_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
                                     new ShouldImplementExportedInterfaces(),
-                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
+                                    additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
 
 #if NET
         [TestMethod]
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ShouldImplementExportedInterfaces_CSharp9() =>
            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ShouldImplementExportedInterfaces.CSharp9.cs",
                                               new ShouldImplementExportedInterfaces(),
-                                              MetadataReferenceFacade.GetSystemComponentModelComposition());
+                                              MetadataReferenceFacade.SystemComponentModelComposition);
 #endif
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ShouldImplementExportedInterfaces_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
                                     new SonarAnalyzer.Rules.VisualBasic.ShouldImplementExportedInterfaces(),
-                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
+                                    additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -61,6 +61,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\ShouldImplementExportedInterfaces_Part2.cs",
                 },
                 new ShouldImplementExportedInterfaces(),
-                additionalReferences: MetadataReferenceFacade.GetSystemComponentModelComposition());
+                additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
     }
 }

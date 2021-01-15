@@ -37,27 +37,27 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.cs",
                                     new CSharp.NonStandardCryptographicAlgorithmsShouldNotBeUsed(AnalyzerConfiguration.AlwaysEnabled),
-                                    additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
+                                    additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_CSharp_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.cs",
                                            new CSharp.NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
-                                           additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
+                                           additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.vb",
                                     new VisualBasic.NonStandardCryptographicAlgorithmsShouldNotBeUsed(AnalyzerConfiguration.AlwaysEnabled),
-                                    additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
+                                    additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.vb",
                                            new VisualBasic.NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
-                                           additionalReferences: MetadataReferenceFacade.GetSystemSecurityCryptography());
+                                           additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

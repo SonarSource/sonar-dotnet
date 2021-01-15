@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_DotnetFramework(string sqlNamespace)
         {
-            var references = MetadataReferenceFacade.GetSystemData()
+            var references = MetadataReferenceFacade.SystemData
                 .Concat(NuGetMetadataReference.Dapper())
                 .Concat(NuGetMetadataReference.EntityFramework())
                 .Concat(NuGetMetadataReference.MicrosoftDataSqliteCore())
@@ -103,7 +103,7 @@ namespace TestNamespace
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_DotnetCore(string sqlNamespace)
         {
-            var references = MetadataReferenceFacade.GetSystemData()
+            var references = MetadataReferenceFacade.SystemData
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.0"))
                 .Concat(NuGetMetadataReference.ServiceStackOrmLite())
                 .Concat(NuGetMetadataReference.SystemDataSqlClient())

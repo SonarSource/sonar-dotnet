@@ -138,7 +138,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.GetMsCorLib()
-                .Concat(MetadataReferenceFacade.GetSystemComponentModelComposition());
+            MetadataReferenceFacade.MsCorLib.Concat(MetadataReferenceFacade.SystemComponentModelComposition);
     }
 }

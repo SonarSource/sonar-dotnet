@@ -65,8 +65,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                     .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
-                    .Concat(MetadataReferenceFacade.GetSystemXml())
-                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                    .Concat(MetadataReferenceFacade.SystemXml)
+                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .ToArray());
 
         [DataTestMethod]
@@ -80,8 +80,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                     .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
-                    .Concat(MetadataReferenceFacade.GetSystemXml())
-                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                    .Concat(MetadataReferenceFacade.SystemXml)
+                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .ToArray());
 
         [DataTestMethod]
@@ -126,8 +126,8 @@ public class Foo
 }",
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
-                    .Concat(MetadataReferenceFacade.GetSystemXml())
-                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                    .Concat(MetadataReferenceFacade.SystemXml)
+                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .ToArray());
 
         [DataTestMethod]
@@ -140,8 +140,8 @@ public class Foo
                 additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                     .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
-                    .Concat(MetadataReferenceFacade.GetSystemXml())
-                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                    .Concat(MetadataReferenceFacade.SystemXml)
+                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .ToArray());
 
         [TestMethod]
@@ -151,8 +151,8 @@ public class Foo
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.XunitFrameworkV1
                     .Concat(NuGetMetadataReference.FluentAssertions(Constants.NuGetLatestVersion))
-                    .Concat(MetadataReferenceFacade.GetSystemXml())
-                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                    .Concat(MetadataReferenceFacade.SystemXml)
+                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .ToArray());
 
         [DataTestMethod]
@@ -192,7 +192,7 @@ public class Foo
                 additionalReferences:
                 NuGetMetadataReference.NUnit(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
-                    .Concat(MetadataReferenceFacade.GetSystemThreadingTasks()));
+                    .Concat(MetadataReferenceFacade.SystemThreadingTasks));
 
         [TestMethod]
         [TestCategory("Rule")]

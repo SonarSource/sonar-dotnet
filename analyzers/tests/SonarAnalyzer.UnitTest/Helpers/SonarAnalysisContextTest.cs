@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     Verifier.VerifyNoIssueReported(testCase.Path,
                                                    testCase.Analyzer,
                                                    ParseOptionsHelper.FromCSharp8,
-                                                   additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
+                                                   additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
                 }
             }
             finally
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 Verifier.VerifyAnalyzer(testCase.Path,
                                         testCase.Analyzer,
                                         ParseOptionsHelper.FromCSharp8,
-                                        additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
+                                        additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
             }
         }
 
@@ -128,14 +128,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
                             Verifier.VerifyNoIssueReported(testCase.Path,
                                                            testCase.Analyzer,
                                                            ParseOptionsHelper.FromCSharp8,
-                                                           additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
+                                                           additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
                         }
                         else
                         {
                             Verifier.VerifyAnalyzer(testCase.Path,
                                                     testCase.Analyzer,
                                                     ParseOptionsHelper.FromCSharp8,
-                                                    additionalReferences: MetadataReferenceFacade.GetSystemComponentModelPrimitives());
+                                                    additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
                         }
                     }
                 }

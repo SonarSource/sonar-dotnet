@@ -39,8 +39,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 additionalReferences:
-                MetadataReferenceFacade.GetSystemThreadingTasksExtensions(tasksVersion)
-                                       .Union(MetadataReferenceFacade.GetSystemComponentModelPrimitives())
+                MetadataReferenceFacade.SystemThreadingTasksExtensions(tasksVersion)
+                                       .Union(MetadataReferenceFacade.SystemComponentModelPrimitives)
                                        .Union(NuGetMetadataReference.MicrosoftAspNetSignalRCore()));
 
         [TestMethod]

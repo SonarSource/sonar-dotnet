@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotExposeListT() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs", new DoNotExposeListT(),
-                additionalReferences: MetadataReferences.MetadataReferenceFacade.GetSystemXml());
+                additionalReferences: MetadataReferences.MetadataReferenceFacade.SystemXml);
 
         [TestMethod]
         [TestCategory("Rule")]

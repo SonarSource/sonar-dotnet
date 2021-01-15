@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs",
                 new DisposableNotDisposed(),
                 ParseOptionsHelper.FromCSharp8,
-                additionalReferences: MetadataReferenceFacade.GetSystemNetHttp());
+                additionalReferences: MetadataReferenceFacade.SystemNetHttp);
 
 #if NET
         [TestMethod]
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisposableNotDisposed_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableNotDisposed.CSharp9.cs",
                 new DisposableNotDisposed(),
-                MetadataReferenceFacade.GetSystemNetHttp());
+                MetadataReferenceFacade.SystemNetHttp);
 #endif
     }
 }

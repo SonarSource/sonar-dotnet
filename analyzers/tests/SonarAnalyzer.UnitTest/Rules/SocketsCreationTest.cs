@@ -62,6 +62,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                            additionalReferences: GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.GetSystemNetSockets().Concat(MetadataReferenceFacade.GetSystemNetPrimitives());
+            MetadataReferenceFacade.SystemNetSockets.Concat(MetadataReferenceFacade.SystemNetPrimitives);
     }
 }

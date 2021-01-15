@@ -97,8 +97,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.GetMicrosoftWin32Primitives()
-                                   .Union(MetadataReferenceFacade.GetSystemSecurityCryptography());
+            MetadataReferenceFacade.MicrosoftWin32Primitives.Concat(MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }
-

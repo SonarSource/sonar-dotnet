@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotUseIif() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIif(),
-                additionalReferences: MetadataReferenceFacade.GetMicrosoftVisualBasic());
+                additionalReferences: MetadataReferenceFacade.MicrosoftVisualBasic);
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -42,6 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\DoNotUseIif.Fixed.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIif(),
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIifCodeFixProvider(),
-                additionalReferences: MetadataReferenceFacade.GetMicrosoftVisualBasic());
+                additionalReferences: MetadataReferenceFacade.MicrosoftVisualBasic);
     }
 }

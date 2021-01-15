@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConstructorArgumentValueShouldExist_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.cs",
                 new ConstructorArgumentValueShouldExist(),
-                additionalReferences: MetadataReferenceFacade.GetSystemXaml());
+                additionalReferences: MetadataReferenceFacade.SystemXaml);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConstructorArgumentValueShouldExist_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ConstructorArgumentValueShouldExist(),
-                additionalReferences: MetadataReferenceFacade.GetSystemXaml());
+                additionalReferences: MetadataReferenceFacade.SystemXaml);
     }
 }
 #endif

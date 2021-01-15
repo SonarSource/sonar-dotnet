@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> GetReferences() =>
             Enumerable.Empty<MetadataReference>()
-                .Concat(MetadataReferenceFacade.GetSystemThreadingTasks());
+                .Concat(MetadataReferenceFacade.SystemThreadingTasks);
     }
 }
 

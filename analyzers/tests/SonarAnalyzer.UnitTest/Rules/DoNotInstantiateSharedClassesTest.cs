@@ -60,6 +60,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.GetSystemComponentModelComposition();
+            MetadataReferenceFacade.SystemComponentModelComposition;
     }
 }

@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.GetSystemNetHttp().Concat(MetadataReferenceFacade.GetSystemComponentModelPrimitives());
+            MetadataReferenceFacade.SystemNetHttp.Concat(MetadataReferenceFacade.SystemComponentModelPrimitives);
     }
 }
 

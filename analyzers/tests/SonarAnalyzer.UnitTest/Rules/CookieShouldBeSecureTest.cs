@@ -45,14 +45,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure.cs",
                 new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: MetadataReferenceFacade.GetSystemWeb());
+                additionalReferences: MetadataReferenceFacade.SystemWeb);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Not_Enabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldBeSecure.cs",
                 new CookieShouldBeSecure(),
-                additionalReferences: MetadataReferenceFacade.GetSystemWeb());
+                additionalReferences: MetadataReferenceFacade.SystemWeb);
 
 #else
 
