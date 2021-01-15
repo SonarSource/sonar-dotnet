@@ -31,12 +31,12 @@ namespace SonarAnalyzer.Helpers
         }
 
         public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
-            : base(argumentList.Arguments, semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol)
+            : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol)
         {
         }
 
         public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
-            : base(argumentList.Arguments, methodSymbol)
+            : base(argumentList?.Arguments, methodSymbol)
         {
         }
 

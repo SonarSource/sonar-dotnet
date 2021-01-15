@@ -62,8 +62,9 @@ public class Program
         psi.FileName = @"C:\file.exe";
 
         psi = new ProcessStartInfo() { FileName = @"C:\file.exe" };
-        psi = new ProcessStartInfo() { FileName = "bad.exe" };     // Noncompliant
-        psi = new ProcessStartInfo() { FileName = "bad.exe" };     // Noncompliant FP, value is reassigned later
+        psi = new ProcessStartInfo { FileName = "bad.exe" };        // Noncompliant
+        psi = new ProcessStartInfo() { FileName = "bad.exe" };      // Noncompliant
+        psi = new ProcessStartInfo() { FileName = "bad.exe" };      // Noncompliant FP, value is reassigned later
         psi.FileName = @"C:\file.exe";
 
         psi = new ProcessStartInfo() { FileName = "bad.exe" };     // Noncompliant
