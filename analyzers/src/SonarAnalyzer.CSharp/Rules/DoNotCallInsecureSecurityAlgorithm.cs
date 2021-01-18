@@ -98,12 +98,12 @@ namespace SonarAnalyzer.Rules.CSharp
             var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
 
             var typeInfo = context.SemanticModel.GetTypeInfo(objectCreation);
-            if (typeInfo.ConvertedType == null || typeInfo.ConvertedType is IErrorTypeSymbol)
+            if (typeInfo.Type == null || typeInfo.Type is IErrorTypeSymbol)
             {
                 return;
             }
 
-            if (typeInfo.ConvertedType.DerivesFromAny(AlgorithmTypes))
+            if (typeInfo.Type.DerivesFromAny(AlgorithmTypes))
             {
                 ReportAllDiagnostics(context, objectCreation.Type.GetLocation());
             }
