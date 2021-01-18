@@ -2720,3 +2720,24 @@ namespace Repro_LocalFunction
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/3955 for S2583
+namespace Repro_RefParam
+{
+    public class Repro
+    {
+        public void TestExample(ref bool stop)
+        {
+            while (!stop)
+            {
+                while (true)
+                {
+                    if (stop)   // Noncompliant FP
+                    {           // Secondary
+                        break; 
+                    }
+                }
+            }
+        }
+    }
+}
