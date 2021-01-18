@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
@@ -37,6 +38,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.sonarqube.ws.Components;
+import org.sonarqube.ws.Hotspots;
 import org.sonarqube.ws.Measures;
 
 @RunWith(Suite.class)
@@ -48,7 +50,8 @@ import org.sonarqube.ws.Measures;
   MetricsTest.class,
   NoSonarTest.class,
   UnitTestResultsTest.class,
-  VbMainCodeCsTestCodeTest.class
+  VbMainCodeCsTestCodeTest.class,
+  WebConfigTest.class
 })
 public class Tests {
 
@@ -95,5 +98,9 @@ public class Tests {
   @CheckForNull
   static Measures.Measure getMeasure(String componentKey, String metricKey) {
     return TestUtils.getMeasure(ORCHESTRATOR, componentKey, metricKey);
+  }
+
+  static List<Hotspots.SearchWsResponse.Hotspot> getHotspots(String projectKey) {
+    return TestUtils.getHotspots(ORCHESTRATOR, projectKey);
   }
 }
