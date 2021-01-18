@@ -1,0 +1,22 @@
+{
+  "title": "Disabling ASP.NET \"Request Validation\" feature is security-sensitive",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "tags": [
+    "cwe",
+    "owasp-a7"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-5753",
+  "sqKey": "S5753",
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      79,
+      80
+    ],
+    "OWASP": [
+      "A7"
+    ]
+  }
+}
