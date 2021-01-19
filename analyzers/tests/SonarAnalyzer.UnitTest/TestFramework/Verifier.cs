@@ -125,8 +125,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
                                           IEnumerable<ParseOptions> options = null,
-                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                           CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, checkMode, outputKind, additionalReferences);
 
