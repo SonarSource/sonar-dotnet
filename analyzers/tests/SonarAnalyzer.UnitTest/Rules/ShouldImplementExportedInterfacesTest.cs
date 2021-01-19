@@ -18,11 +18,11 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
-                                    new ShouldImplementExportedInterfaces(),
+                                    new CS.ShouldImplementExportedInterfaces(),
                                     additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
 
 #if NET
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_CSharp9() =>
            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ShouldImplementExportedInterfaces.CSharp9.cs",
-                                              new ShouldImplementExportedInterfaces(),
+                                              new CS.ShouldImplementExportedInterfaces(),
                                               MetadataReferenceFacade.SystemComponentModelComposition);
 #endif
 
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
-                                    new SonarAnalyzer.Rules.VisualBasic.ShouldImplementExportedInterfaces(),
+                                    new VB.ShouldImplementExportedInterfaces(),
                                     additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\ShouldImplementExportedInterfaces_Part1.cs",
                     @"TestCases\ShouldImplementExportedInterfaces_Part2.cs",
                 },
-                new ShouldImplementExportedInterfaces(),
+                new CS.ShouldImplementExportedInterfaces(),
                 additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
     }
 }

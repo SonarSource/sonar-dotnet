@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SillyBitwiseOperation() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.cs", new SillyBitwiseOperation());
+            Verifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.cs", new CS.SillyBitwiseOperation());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SillyBitwiseOperation_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SillyBitwiseOperation.CSharp9.cs", new SillyBitwiseOperation());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SillyBitwiseOperation.CSharp9.cs", new CS.SillyBitwiseOperation());
 #endif
 
         [TestMethod]
@@ -45,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SillyBitwiseOperation_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\SillyBitwiseOperation.cs",
                                    @"TestCases\SillyBitwiseOperation.Fixed.cs",
-                                   new SillyBitwiseOperation(),
-                                   new SillyBitwiseOperationCodeFixProvider());
+                                   new CS.SillyBitwiseOperation(),
+                                   new CS.SillyBitwiseOperationCodeFixProvider());
     }
 }

@@ -20,8 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = SonarAnalyzer.Rules.CSharp;
-using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ShiftDynamicNotInteger_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.cs", new CSharp.ShiftDynamicNotInteger());
+            Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.cs", new CS.ShiftDynamicNotInteger());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ShiftDynamicNotInteger_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ShiftDynamicNotInteger.CSharp9.cs", new CSharp.ShiftDynamicNotInteger());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ShiftDynamicNotInteger.CSharp9.cs", new CS.ShiftDynamicNotInteger());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ShiftDynamicNotInteger_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.vb", new VisualBasic.ShiftDynamicNotInteger());
+            Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.vb", new VB.ShiftDynamicNotInteger());
     }
 }

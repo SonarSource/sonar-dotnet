@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,21 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void VirtualEventField() =>
-            Verifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new VirtualEventField());
+            Verifier.VerifyAnalyzer(@"TestCases\VirtualEventField.cs", new CS.VirtualEventField());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void VirtualEventField_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\VirtualEventField.CSharp9.cs", new VirtualEventField());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\VirtualEventField.CSharp9.cs", new CS.VirtualEventField());
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void VirtualEventField_CSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\VirtualEventField.CSharp9.cs",
                                    @"TestCases\VirtualEventField.CSharp9.Fixed.cs",
-                                   new VirtualEventField(),
-                                   new VirtualEventFieldCodeFixProvider(),
+                                   new CS.VirtualEventField(),
+                                   new CS.VirtualEventFieldCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp9);
 #endif
 
@@ -55,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\VirtualEventField.cs",
                 @"TestCases\VirtualEventField.Fixed.cs",
-                new VirtualEventField(),
-                new VirtualEventFieldCodeFixProvider());
+                new CS.VirtualEventField(),
+                new CS.VirtualEventFieldCodeFixProvider());
     }
 }

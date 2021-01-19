@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System.Collections.Generic;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured() =>
             Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured.cs",
-                                    new SerializationConstructorsShouldBeSecured(),
+                                    new CS.SerializationConstructorsShouldBeSecured(),
                                     additionalReferences: GetAdditionalReferences());
 
 #if NET
@@ -43,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\SerializationConstructorsShouldBeSecured.CSharp9.cs",
-                                    new SerializationConstructorsShouldBeSecured(),
+                                    new CS.SerializationConstructorsShouldBeSecured(),
                                     GetAdditionalReferences());
 #endif
 
@@ -61,13 +60,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         protected (SerializationInfo info, StreamingContext context) { }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
-    }", new SerializationConstructorsShouldBeSecured(), checkMode: CompilationErrorBehavior.Ignore);
+    }", new CS.SerializationConstructorsShouldBeSecured(), checkMode: CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs",
-                                    new SerializationConstructorsShouldBeSecured(),
+                                    new CS.SerializationConstructorsShouldBeSecured(),
                                     additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
@@ -79,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                         @"TestCases\SerializationConstructorsShouldBeSecured_Part1.cs",
                                         @"TestCases\SerializationConstructorsShouldBeSecured_Part2.cs",
                                     },
-                                    new SerializationConstructorsShouldBeSecured(),
+                                    new CS.SerializationConstructorsShouldBeSecured(),
                                     additionalReferences: GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

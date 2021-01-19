@@ -20,8 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = SonarAnalyzer.Rules.CSharp;
-using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,13 +32,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TooManyLabelsInSwitch() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.cs",
-                new CSharp.TooManyLabelsInSwitch { Maximum = 2 },
+                new CS.TooManyLabelsInSwitch { Maximum = 2 },
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyLabelsInSwitch_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.vb",
-                new VisualBasic.TooManyLabelsInSwitch { Maximum = 2 });
+                new VB.TooManyLabelsInSwitch { Maximum = 2 });
     }
 }

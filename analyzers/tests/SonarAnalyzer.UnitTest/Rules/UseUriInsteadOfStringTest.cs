@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UseUriInsteadOfString() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
-                new UseUriInsteadOfString(),
+                new CS.UseUriInsteadOfString(),
                 additionalReferences: MetadataReferenceFacade.SystemDrawing);
 
 #if NET
@@ -41,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UseUriInsteadOfString_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseUriInsteadOfString.CSharp9.cs",
-                new UseUriInsteadOfString(),
+                new CS.UseUriInsteadOfString(),
                 MetadataReferenceFacade.SystemDrawing);
 #endif
 
@@ -62,6 +61,6 @@ public class Bar : Foo
     {
         Uri.TryCreate(new object(), UriKind.Absolute, out result); // Compliant - invalid code
     }
-}", new UseUriInsteadOfString(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.UseUriInsteadOfString(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SwitchDefaultClauseEmpty() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchDefaultClauseEmpty.cs",
-                new SwitchDefaultClauseEmpty());
+                new CS.SwitchDefaultClauseEmpty());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -40,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\SwitchDefaultClauseEmpty.cs",
                 @"TestCases\SwitchDefaultClauseEmpty.Fixed.cs",
-                new SwitchDefaultClauseEmpty(),
-                new SwitchDefaultClauseEmptyCodeFixProvider());
+                new CS.SwitchDefaultClauseEmpty(),
+                new CS.SwitchDefaultClauseEmptyCodeFixProvider());
     }
 }

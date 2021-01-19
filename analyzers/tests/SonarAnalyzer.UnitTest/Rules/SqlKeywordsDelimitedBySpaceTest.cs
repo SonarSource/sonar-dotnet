@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System.Collections.Generic;
 using System.Linq;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace() =>
             Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace.cs",
-                new SqlKeywordsDelimitedBySpace(),
+                new CS.SqlKeywordsDelimitedBySpace(),
                 additionalReferences: GetAdditionalReferences(),
                 options: ParseOptionsHelper.FromCSharp8);
 
@@ -44,14 +43,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
             Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
-                new SqlKeywordsDelimitedBySpace(),
+                new CS.SqlKeywordsDelimitedBySpace(),
                 additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\SqlKeywordsDelimitedBySpace_DefaultNamespace.cs",
-                new SqlKeywordsDelimitedBySpace(),
+                new CS.SqlKeywordsDelimitedBySpace(),
                 GetAdditionalReferences());
 
         [DataRow("System.Data")]
@@ -91,7 +90,7 @@ namespace TestNamespace
     }}
 }}
 ",
-                new SqlKeywordsDelimitedBySpace(),
+                new CS.SqlKeywordsDelimitedBySpace(),
                 additionalReferences: references.ToArray());
         }
 
@@ -121,7 +120,7 @@ namespace TestNamespace
     }}
 }}
 ",
-                new SqlKeywordsDelimitedBySpace(),
+                new CS.SqlKeywordsDelimitedBySpace(),
                 additionalReferences: references.ToArray());
         }
 

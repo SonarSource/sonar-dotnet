@@ -18,15 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
 #if NET
 using System.Linq;
 #endif
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -39,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
-                                    new TestClassShouldHaveTestMethod(),
+                                    new CS.TestClassShouldHaveTestMethod(),
                                     additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
@@ -48,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
-                                    new TestClassShouldHaveTestMethod(),
+                                    new CS.TestClassShouldHaveTestMethod(),
                                     additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
 #if NET
@@ -56,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestClassShouldHaveTestMethod.CSharp9.cs",
-                            new TestClassShouldHaveTestMethod(),
+                            new CS.TestClassShouldHaveTestMethod(),
                             NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)
                                 .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)));
 #endif

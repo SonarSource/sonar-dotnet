@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,14 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TaskConfigureAwait_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetFx.cs", new TaskConfigureAwait());
+            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetFx.cs", new CS.TaskConfigureAwait());
 
 #else
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TaskConfigureAwait_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new TaskConfigureAwait());
+            Verifier.VerifyAnalyzer(@"TestCases\TaskConfigureAwait.NetCore.cs", new CS.TaskConfigureAwait());
 
 #endif
 
@@ -60,7 +59,7 @@ public static class EntryPoint
 }";
             var projectBuilder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(code);
             var compilationOptions = new CSharpCompilationOptions(OutputKind.ConsoleApplication);
-            var analyzer = new TaskConfigureAwait();
+            var analyzer = new CS.TaskConfigureAwait();
             var compilation = projectBuilder.GetCompilation(null, compilationOptions);
 
             DiagnosticVerifier.Verify(compilation, analyzer, CompilationErrorBehavior.Default);

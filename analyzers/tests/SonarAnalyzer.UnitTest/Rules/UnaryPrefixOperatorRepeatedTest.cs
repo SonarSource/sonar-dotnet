@@ -20,8 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = SonarAnalyzer.Rules.CSharp;
-using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnaryPrefixOperatorRepeated() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs", new CSharp.UnaryPrefixOperatorRepeated());
+            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs", new CS.UnaryPrefixOperatorRepeated());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void UnaryPrefixOperatorRepeated_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnaryPrefixOperatorRepeated.CSharp9.cs", new CSharp.UnaryPrefixOperatorRepeated());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnaryPrefixOperatorRepeated.CSharp9.cs", new CS.UnaryPrefixOperatorRepeated());
 #endif
 
         [TestMethod]
@@ -46,12 +46,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\UnaryPrefixOperatorRepeated.cs",
                 @"TestCases\UnaryPrefixOperatorRepeated.Fixed.cs",
-                new CSharp.UnaryPrefixOperatorRepeated(),
-                new CSharp.UnaryPrefixOperatorRepeatedCodeFixProvider());
+                new CS.UnaryPrefixOperatorRepeated(),
+                new CS.UnaryPrefixOperatorRepeatedCodeFixProvider());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UnaryPrefixOperatorRepeated_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.vb", new VisualBasic.UnaryPrefixOperatorRepeated());
+            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.vb", new VB.UnaryPrefixOperatorRepeated());
     }
 }

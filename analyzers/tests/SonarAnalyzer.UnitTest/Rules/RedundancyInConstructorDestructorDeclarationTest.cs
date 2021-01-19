@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundancyInConstructorDestructorDeclaration() =>
-            Verifier.VerifyAnalyzer(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs", new RedundancyInConstructorDestructorDeclaration());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs", new CS.RedundancyInConstructorDestructorDeclaration());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundancyInConstructorDestructorDeclaration_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs", new RedundancyInConstructorDestructorDeclaration());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundancyInConstructorDestructorDeclaration.CSharp9.cs", new CS.RedundancyInConstructorDestructorDeclaration());
 #endif
 
         [TestMethod]
@@ -45,26 +44,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_BaseCall() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                                    @"TestCases\RedundancyInConstructorDestructorDeclaration.BaseCall.Fixed.cs",
-                                   new RedundancyInConstructorDestructorDeclaration(),
-                                   new RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
-                                   RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveBaseCall);
+                                   new CS.RedundancyInConstructorDestructorDeclaration(),
+                                   new CS.RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
+                                   CS.RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveBaseCall);
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Constructor() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                                    @"TestCases\RedundancyInConstructorDestructorDeclaration.Constructor.Fixed.cs",
-                                   new RedundancyInConstructorDestructorDeclaration(),
-                                   new RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
-                                   RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveConstructor);
+                                   new CS.RedundancyInConstructorDestructorDeclaration(),
+                                   new CS.RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
+                                   CS.RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveConstructor);
 
         [TestMethod]
         [TestCategory("CodeFix")]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_Destructor() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundancyInConstructorDestructorDeclaration.cs",
                                    @"TestCases\RedundancyInConstructorDestructorDeclaration.Destructor.Fixed.cs",
-                                   new RedundancyInConstructorDestructorDeclaration(),
-                                   new RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
-                                   RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveDestructor);
+                                   new CS.RedundancyInConstructorDestructorDeclaration(),
+                                   new CS.RedundancyInConstructorDestructorDeclarationCodeFixProvider(),
+                                   CS.RedundancyInConstructorDestructorDeclarationCodeFixProvider.TitleRemoveDestructor);
     }
 }

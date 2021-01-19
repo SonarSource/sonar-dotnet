@@ -21,8 +21,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = SonarAnalyzer.Rules.CSharp;
-using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,13 +33,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UsingCommandLineArguments_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCommandLineArguments.cs",
-                                    new CSharp.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+                                    new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCommandLineArguments_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UsingCommandLineArguments.CSharp9.cs",
-                                                      new CSharp.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+                                                      new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -64,20 +64,20 @@ partial class Program1
 
             DiagnosticVerifier.Verify(
                 compilation,
-                new CSharp.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default);
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCommandLineArguments_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\UsingCommandLineArguments.cs", new CSharp.UsingCommandLineArguments());
+            Verifier.VerifyNoIssueReported(@"TestCases\UsingCommandLineArguments.cs", new CS.UsingCommandLineArguments());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCommandLineArguments_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCommandLineArguments.vb",
-                                    new VisualBasic.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
+                                    new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -102,7 +102,7 @@ End Class
 
             DiagnosticVerifier.Verify(
                 compilation,
-                new VisualBasic.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
+                new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default);
         }
 
@@ -110,6 +110,6 @@ End Class
         [TestCategory("Rule")]
         public void UsingCommandLineArguments_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingCommandLineArguments.vb",
-                                           new VisualBasic.UsingCommandLineArguments());
+                                           new VB.UsingCommandLineArguments());
     }
 }

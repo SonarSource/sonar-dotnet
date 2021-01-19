@@ -17,11 +17,11 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
+ 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,12 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SwitchShouldNotBeNested_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.cs",
-                new SwitchShouldNotBeNested(),
+                new CS.SwitchShouldNotBeNested(),
                 ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SwitchShouldNotBeNested_VB() => Verifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.vb",
-                new SonarAnalyzer.Rules.VisualBasic.SwitchShouldNotBeNested());
+                new VB.SwitchShouldNotBeNested());
     }
 }

@@ -21,8 +21,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = SonarAnalyzer.Rules.CSharp;
-using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,28 +32,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ReadingStandardInput_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReadingStandardInput.cs", new CSharp.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+            Verifier.VerifyAnalyzer(@"TestCases\ReadingStandardInput.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ReadingStandardInput_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReadingStandardInput.CSharp9.cs", new CSharp.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReadingStandardInput.CSharp9.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ReadingStandardInput_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReadingStandardInput.vb", new VisualBasic.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+            Verifier.VerifyAnalyzer(@"TestCases\ReadingStandardInput.vb", new VB.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ReadingStandardInput_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\ReadingStandardInput.cs", new CSharp.ReadingStandardInput());
+            Verifier.VerifyNoIssueReported(@"TestCases\ReadingStandardInput.cs", new CS.ReadingStandardInput());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ReadingStandardInput_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\ReadingStandardInput.vb", new VisualBasic.ReadingStandardInput());
+            Verifier.VerifyNoIssueReported(@"TestCases\ReadingStandardInput.vb", new VB.ReadingStandardInput());
     }
 }
