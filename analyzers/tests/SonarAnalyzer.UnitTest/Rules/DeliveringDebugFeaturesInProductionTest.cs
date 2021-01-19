@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.cs",
                 new CS.DeliveringDebugFeaturesInProduction(),
-                additionalReferences: AdditionalReferencesNetCore2);
+                AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.vb",
                 new VB.DeliveringDebugFeaturesInProduction(),
-                additionalReferences: AdditionalReferencesNetCore2);
+                AdditionalReferencesNetCore2);
 
 #if NET
 

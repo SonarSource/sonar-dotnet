@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyNoIssueReported(@"TestCases\ClearTextProtocolsAreSensitive.cs",
                                            new CS.ClearTextProtocolsAreSensitive(),
                                            ParseOptionsHelper.FromCSharp8,
-                                           additionalReferences: GetAdditionalReferences());
+                                           GetAdditionalReferences());
 
 #if NET5_0
         [TestMethod]

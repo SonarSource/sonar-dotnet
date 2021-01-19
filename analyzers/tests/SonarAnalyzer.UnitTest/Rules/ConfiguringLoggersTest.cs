@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ConfiguringLoggers_AspNetCore.cs",
                 new CS.ConfiguringLoggers(),
-                additionalReferences: AspNetCoreLoggingReferences);
+                AspNetCoreLoggingReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ConfiguringLoggers_AspNetCore.vb",
                 new VB.ConfiguringLoggers(),
-                additionalReferences: AspNetCoreLoggingReferences);
+                AspNetCoreLoggingReferences);
 
         internal static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
             NetStandardMetadataReference.Netstandard

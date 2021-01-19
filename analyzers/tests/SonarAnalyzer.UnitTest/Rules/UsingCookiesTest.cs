@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCookies_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingCookies_Net46.cs",
                 new CS.UsingCookies(),
-                additionalReferences: GetAdditionalReferencesForNet46());
+                GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCookies_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingCookies_Net46.vb",
                 new VB.UsingCookies(),
-                additionalReferences: GetAdditionalReferencesForNet46());
+                GetAdditionalReferencesForNet46());
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNet46() =>
             FrameworkMetadataReference.SystemWeb;

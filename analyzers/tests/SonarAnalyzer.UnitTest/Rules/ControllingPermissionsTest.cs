@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ControllingPermissions_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ControllingPermissions.cs",
                                            new CS.ControllingPermissions(),
-                                           additionalReferences: AdditionalReferences);
+                                           AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ControllingPermissions_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ControllingPermissions.vb",
                                            new VB.ControllingPermissions(),
-                                           additionalReferences: AdditionalReferences);
+                                           AdditionalReferences);
     }
 }
 

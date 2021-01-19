@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExpandingArchives_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.cs",
                                            new CS.ExpandingArchives(),
-                                           additionalReferences: AdditionalReferences);
+                                           AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExpandingArchives_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.vb",
                                            new VB.ExpandingArchives(),
-                                           additionalReferences: AdditionalReferences);
+                                           AdditionalReferences);
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
             MetadataReferenceFacade.SystemIoCompression;

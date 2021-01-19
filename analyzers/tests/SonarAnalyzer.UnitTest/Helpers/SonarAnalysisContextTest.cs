@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     Verifier.VerifyNoIssueReported(testCase.Path,
                                                    testCase.Analyzer,
                                                    ParseOptionsHelper.FromCSharp8,
-                                                   additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
+                                                   MetadataReferenceFacade.SystemComponentModelPrimitives);
                 }
             }
             finally
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                             Verifier.VerifyNoIssueReported(testCase.Path,
                                                            testCase.Analyzer,
                                                            ParseOptionsHelper.FromCSharp8,
-                                                           additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
+                                                           MetadataReferenceFacade.SystemComponentModelPrimitives);
                         }
                         else
                         {

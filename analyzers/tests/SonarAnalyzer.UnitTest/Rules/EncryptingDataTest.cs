@@ -51,14 +51,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EncryptingData_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\EncryptingData.cs",
                 new CS.EncryptingData(),
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptingData_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\EncryptingData.vb",
                 new VB.EncryptingData(),
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography;

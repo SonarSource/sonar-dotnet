@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingSqlQueries_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.cs",
                 new CS.ExecutingSqlQueries(),
-                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
+                GetReferencesNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingSqlQueries_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.vb",
                 new VB.ExecutingSqlQueries(),
-                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
+                GetReferencesNetCore(Constants.DotNetCore220Version));
 
         internal static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()

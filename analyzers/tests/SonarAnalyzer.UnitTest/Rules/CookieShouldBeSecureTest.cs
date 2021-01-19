@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure_Not_Enabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldBeSecure.cs",
                 new CS.CookieShouldBeSecure(),
-                additionalReferences: MetadataReferenceFacade.SystemWeb);
+                MetadataReferenceFacade.SystemWeb);
 
 #else
 

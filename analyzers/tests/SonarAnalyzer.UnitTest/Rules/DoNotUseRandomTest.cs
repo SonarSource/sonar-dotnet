@@ -41,6 +41,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotUseRandom_Not_Enabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DoNotUseRandom.cs",
                 new CS.DoNotUseRandom(),
-                additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
+                MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

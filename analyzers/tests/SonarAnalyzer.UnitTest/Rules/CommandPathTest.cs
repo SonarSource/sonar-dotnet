@@ -43,11 +43,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CommandPath_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\CommandPath.cs", new CS.CommandPath(), additionalReferences: MetadataReferenceFacade.SystemDiagnosticsProcess);
+            Verifier.VerifyNoIssueReported(@"TestCases\CommandPath.cs", new CS.CommandPath(), MetadataReferenceFacade.SystemDiagnosticsProcess);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CommandPath_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\CommandPath.vb", new VB.CommandPath(), additionalReferences: MetadataReferenceFacade.SystemDiagnosticsProcess);
+            Verifier.VerifyNoIssueReported(@"TestCases\CommandPath.vb", new VB.CommandPath(), MetadataReferenceFacade.SystemDiagnosticsProcess);
     }
 }
