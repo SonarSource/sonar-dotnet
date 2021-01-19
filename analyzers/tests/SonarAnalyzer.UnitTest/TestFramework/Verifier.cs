@@ -53,6 +53,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static void VerifyCSharpAnalyzer(string snippet,
+                                        SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                        IEnumerable<MetadataReference> additionalReferences) =>
+            VerifyCSharpAnalyzer(snippet, diagnosticAnalyzer, null, CompilationErrorBehavior.Default, additionalReferences);
+
+        public static void VerifyCSharpAnalyzer(string snippet,
+                                        SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                        CompilationErrorBehavior checkMode,
+                                        IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyCSharpAnalyzer(snippet, diagnosticAnalyzer, null, checkMode, additionalReferences);
+
+        public static void VerifyCSharpAnalyzer(string snippet,
                                                 SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                 IEnumerable<ParseOptions> options = null,
                                                 CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
