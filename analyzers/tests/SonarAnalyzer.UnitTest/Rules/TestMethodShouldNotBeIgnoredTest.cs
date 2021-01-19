@@ -94,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldNotBeIgnored_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldNotBeIgnored.CSharp9.cs",
                                                 new CS.TestMethodShouldNotBeIgnored(),
-                                                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                                NuGetMetadataReference.MSTestTestFrameworkV1
                                                     .Concat(NuGetMetadataReference.XunitFrameworkV1)
                                                     .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
                                                     .ToArray());

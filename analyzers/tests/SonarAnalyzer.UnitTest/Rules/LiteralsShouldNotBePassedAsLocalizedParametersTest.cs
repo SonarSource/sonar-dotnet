@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void LiteralsShouldNotBePassedAsLocalizedParameters_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\LiteralsShouldNotBePassedAsLocalizedParameters.CSharp9.cs",
                 new CS.LiteralsShouldNotBePassedAsLocalizedParameters(),
-                additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
+                MetadataReferenceFacade.SystemComponentModelPrimitives);
 #endif
     }
 }

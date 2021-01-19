@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldHaveCorrectSignature_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldHaveCorrectSignature.CSharp9.cs",
                                                 new CS.TestMethodShouldHaveCorrectSignature(),
-                                                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                                NuGetMetadataReference.MSTestTestFrameworkV1
                                                     .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
                                                     .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
                                                     .ToArray());
