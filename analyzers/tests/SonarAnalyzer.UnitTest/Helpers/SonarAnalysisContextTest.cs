@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 Verifier.VerifyAnalyzer(testCase.Path,
                                         testCase.Analyzer,
                                         ParseOptionsHelper.FromCSharp8,
-                                        additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
+                                        MetadataReferenceFacade.SystemComponentModelPrimitives);
             }
         }
 
@@ -135,7 +135,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                             Verifier.VerifyAnalyzer(testCase.Path,
                                                     testCase.Analyzer,
                                                     ParseOptionsHelper.FromCSharp8,
-                                                    additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
+                                                    MetadataReferenceFacade.SystemComponentModelPrimitives);
                         }
                     }
                 }

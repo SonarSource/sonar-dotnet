@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ClearTextProtocolsAreSensitive.cs",
                                     new CS.ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]

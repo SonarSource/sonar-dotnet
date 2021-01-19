@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotUseRandom() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseRandom.cs",
                 new CS.DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
+                MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]

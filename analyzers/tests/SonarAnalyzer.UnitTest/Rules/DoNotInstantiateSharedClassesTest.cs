@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotInstantiateSharedClasses_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.cs",
                 new CS.DoNotInstantiateSharedClasses(),
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotInstantiateSharedClasses_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.vb",
                 new VB.DoNotInstantiateSharedClasses(),
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]

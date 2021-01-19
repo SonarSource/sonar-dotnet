@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UseUriInsteadOfString() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
                 new CS.UseUriInsteadOfString(),
-                additionalReferences: MetadataReferenceFacade.SystemDrawing);
+                MetadataReferenceFacade.SystemDrawing);
 
 #if NET
         [TestMethod]

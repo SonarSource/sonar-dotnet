@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SerializationConstructorsShouldBeSecured() =>
             Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured.cs",
                                     new CS.SerializationConstructorsShouldBeSecured(),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
 #if NET
         [TestMethod]
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs",
                                     new CS.SerializationConstructorsShouldBeSecured(),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]

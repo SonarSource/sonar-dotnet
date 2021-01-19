@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DangerousGetHandleShouldNotBeCalled_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
                 new CS.DangerousGetHandleShouldNotBeCalled(),
-                additionalReferences: MetadataReferenceFacade.MicrosoftWin32Registry);
+                MetadataReferenceFacade.MicrosoftWin32Registry);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]

@@ -47,13 +47,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AsyncVoidMethod_MsTestV2(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV2.cs",
                 new CS.AsyncVoidMethod(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AsyncVoidMethod_MsTestV1() =>
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
                 new CS.AsyncVoidMethod(),
-                additionalReferences: NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+                NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
     }
 }

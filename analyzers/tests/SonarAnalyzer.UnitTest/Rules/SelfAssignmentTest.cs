@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SelfAssignment_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.cs",
                 new CS.SelfAssignment(),
-                options: ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]

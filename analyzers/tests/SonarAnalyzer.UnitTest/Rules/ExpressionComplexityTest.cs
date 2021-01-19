@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExpressionComplexity_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
                 new CS.ExpressionComplexity { Maximum = 3},
-                options: ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]

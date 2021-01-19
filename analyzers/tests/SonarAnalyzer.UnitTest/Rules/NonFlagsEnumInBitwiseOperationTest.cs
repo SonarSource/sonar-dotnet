@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void NonFlagsEnumInBitwiseOperation() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonFlagsEnumInBitwiseOperation.cs",
                                     new CS.NonFlagsEnumInBitwiseOperation(),
-                                    additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
+                                    MetadataReferenceFacade.SystemComponentModelPrimitives);
 
         [TestMethod]
         [TestCategory("CodeFix")]

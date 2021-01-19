@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ParametersCorrectOrder_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
                 new CS.ParametersCorrectOrder(),
-                options: ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]

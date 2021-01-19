@@ -37,14 +37,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EncryptingData_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptingData.cs",
                 new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptingData_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptingData.vb",
                 new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]

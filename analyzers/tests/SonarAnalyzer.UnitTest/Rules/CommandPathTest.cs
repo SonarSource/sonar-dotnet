@@ -33,12 +33,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CommandPath_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), additionalReferences: MetadataReferenceFacade.SystemDiagnosticsProcess);
+            Verifier.VerifyAnalyzer(@"TestCases\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CommandPath_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), additionalReferences: MetadataReferenceFacade.SystemDiagnosticsProcess);
+            Verifier.VerifyAnalyzer(@"TestCases\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EncryptionAlgorithmsShouldBeSecure_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
                 new CS.EncryptionAlgorithmsShouldBeSecure(),
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -45,9 +45,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
                 new CS.EncryptionAlgorithmsShouldBeSecure(),
 #if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));
+                NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));
 #else
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 #endif
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EncryptionAlgorithmsShouldBeSecure_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
                 new VB.EncryptionAlgorithmsShouldBeSecure(),
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -63,9 +63,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
                 new VB.EncryptionAlgorithmsShouldBeSecure(),
 #if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));
+                NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));
 #else
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 #endif
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

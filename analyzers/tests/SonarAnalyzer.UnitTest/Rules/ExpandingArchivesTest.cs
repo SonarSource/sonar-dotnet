@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExpandingArchives_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.cs",
                                     new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
-                                    additionalReferences: AdditionalReferences);
+                                    AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExpandingArchives_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.vb",
                                     new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
-                                    additionalReferences: AdditionalReferences);
+                                    AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]

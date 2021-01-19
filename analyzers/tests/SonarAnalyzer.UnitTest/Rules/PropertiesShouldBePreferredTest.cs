@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PropertiesShouldBePreferred() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesShouldBePreferred.cs",
                                     new CS.PropertiesShouldBePreferred(),
-                                    additionalReferences: MetadataReferenceFacade.SystemThreadingTasks);
+                                    MetadataReferenceFacade.SystemThreadingTasks);
 
 #if NET
         [TestMethod]

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.cs",
                 new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferencesNetCore2);
+                AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.vb",
                 new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferencesNetCore2);
+                AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -68,14 +68,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore3.cs",
                 new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferencesNetCore3);
+                AdditionalReferencesNetCore3);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore3.vb",
                 new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AdditionalReferencesNetCore3);
+                AdditionalReferencesNetCore3);
 
         internal static IEnumerable<MetadataReference> AdditionalReferencesNetCore3 =>
             Enumerable.Empty<MetadataReference>()

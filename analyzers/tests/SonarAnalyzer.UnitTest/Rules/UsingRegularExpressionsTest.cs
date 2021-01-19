@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingRegularExpressions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingRegularExpressions.cs",
                 new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: MetadataReferenceFacade.RegularExpressions);
+                MetadataReferenceFacade.RegularExpressions);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingRegularExpressions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingRegularExpressions.vb",
                 new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: MetadataReferenceFacade.RegularExpressions);
+                MetadataReferenceFacade.RegularExpressions);
 
         [TestMethod]
         [TestCategory("Rule")]

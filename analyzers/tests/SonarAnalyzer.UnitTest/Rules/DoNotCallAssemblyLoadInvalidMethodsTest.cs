@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotCallAssemblyLoadInvalidMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyLoadInvalidMethods.cs",
                                     new CS.DoNotCallAssemblyLoadInvalidMethods(),
-                                    additionalReferences: MetadataReferenceFacade.SystemSecurityPermissions);
+                                    MetadataReferenceFacade.SystemSecurityPermissions);
 
 #if NET
         [TestMethod]

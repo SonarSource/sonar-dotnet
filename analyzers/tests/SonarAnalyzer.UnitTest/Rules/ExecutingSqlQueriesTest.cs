@@ -40,15 +40,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingSqlQueries_CS_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_Net46.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetReferencesNet46(Constants.NuGetLatestVersion));
+                GetReferencesNet46(Constants.NuGetLatestVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_Net46.vb",
                 new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                options: ParseOptionsHelper.FromVisualBasic15,
-                additionalReferences: GetReferencesNet46(Constants.NuGetLatestVersion));
+                ParseOptionsHelper.FromVisualBasic15,
+                GetReferencesNet46(Constants.NuGetLatestVersion));
 
         internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
             Enumerable.Empty<MetadataReference>()
@@ -66,8 +66,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingSqlQueries_CS_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                options: ParseOptionsHelper.FromCSharp8,
-                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
+                ParseOptionsHelper.FromCSharp8,
+                GetReferencesNetCore(Constants.DotNetCore220Version));
 
 
         [TestMethod]
@@ -82,8 +82,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingSqlQueries_VB_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.vb",
                 new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                options: ParseOptionsHelper.FromVisualBasic15,
-                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
+                ParseOptionsHelper.FromVisualBasic15,
+                GetReferencesNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
         [TestCategory("Rule")]

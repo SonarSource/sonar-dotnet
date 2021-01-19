@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void InsecureEncryptionAlgorithm() =>
             Verifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.cs",
                                     new CS.InsecureEncryptionAlgorithm(),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
 #if NET
         [TestMethod]

@@ -36,15 +36,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SqlKeywordsDelimitedBySpace() =>
             Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace.cs",
                 new CS.SqlKeywordsDelimitedBySpace(),
-                additionalReferences: GetAdditionalReferences(),
-                options: ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8,
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
             Verifier.VerifyAnalyzer(@"TestCases\SqlKeywordsDelimitedBySpace_InsideNamespace.cs",
                 new CS.SqlKeywordsDelimitedBySpace(),
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]

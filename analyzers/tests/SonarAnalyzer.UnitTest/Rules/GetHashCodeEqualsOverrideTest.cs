@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GetHashCodeEqualsOverride() =>
             Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs",
                                     new CS.GetHashCodeEqualsOverride(),
-                                    additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
+                                    MetadataReferenceFacade.SystemComponentModelPrimitives);
 
 #if NET
         [TestMethod]

@@ -195,9 +195,12 @@ namespace EntityFrameworkMigrations
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
                                     new CS.UnusedPrivateMember(),
 #if NETFRAMEWORK
-                                    additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                                    ParseOptionsHelper.FromCSharp8,
+                                    NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                                    ParseOptionsHelper.FromCSharp8);
 #endif
-                                    options: ParseOptionsHelper.FromCSharp8);
+
 #if NET
         [TestMethod]
         [TestCategory("Rule")]

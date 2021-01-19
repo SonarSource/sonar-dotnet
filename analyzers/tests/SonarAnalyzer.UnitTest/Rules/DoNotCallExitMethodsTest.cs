@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotCallExitMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
                 new CS.DoNotCallExitMethods(),
-                additionalReferences: MetadataReferenceFacade.SystemWindowsForms);
+                MetadataReferenceFacade.SystemWindowsForms);
 #endif
 
 #if NET

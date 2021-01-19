@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ShouldImplementExportedInterfaces_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
                                     new CS.ShouldImplementExportedInterfaces(),
-                                    additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
+                                    MetadataReferenceFacade.SystemComponentModelComposition);
 
 #if NET
         [TestMethod]
@@ -49,8 +49,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ShouldImplementExportedInterfaces_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
-                                    new VB.ShouldImplementExportedInterfaces(),
-                                    additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
+                                    new SonarAnalyzer.Rules.VisualBasic.ShouldImplementExportedInterfaces(),
+                                    MetadataReferenceFacade.GetSystemComponentModelComposition());
 
         [TestMethod]
         [TestCategory("Rule")]

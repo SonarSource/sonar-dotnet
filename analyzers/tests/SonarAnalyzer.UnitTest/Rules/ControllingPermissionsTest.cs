@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ControllingPermissions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ControllingPermissions.cs",
                                     new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                    additionalReferences: AdditionalReferences);
+                                    AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ControllingPermissions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ControllingPermissions.vb",
                                     new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
-                                    additionalReferences: AdditionalReferences);
+                                    AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
