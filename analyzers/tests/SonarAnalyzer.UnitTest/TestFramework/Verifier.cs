@@ -250,27 +250,29 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                         IEnumerable<MetadataReference> additionalReferences = null) =>
             CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, null, options, outputKind, additionalReferences);
 
-        // verifies batch code fix
+        /// <summary>
+        /// Verifies batch code fix.
+        /// </summary>
         public static void VerifyCodeFix(string path,
                                         string pathToExpected,
                                         string pathToBatchExpected,
                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                         SonarCodeFixProvider codeFixProvider,
                                         IEnumerable<ParseOptions> options = null,
-                                        OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                         IEnumerable<MetadataReference> additionalReferences = null) =>
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, null, options, outputKind, additionalReferences);
+            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, null, options, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
-        // verifies code fix with title
+        /// <summary>
+        /// Verifies code fix with title.
+        /// </summary>
         public static void VerifyCodeFix(string path,
                                         string pathToExpected,
                                         SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                         SonarCodeFixProvider codeFixProvider,
                                         string codeFixTitle,
                                         IEnumerable<ParseOptions> options = null,
-                                        OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                         IEnumerable<MetadataReference> additionalReferences = null) =>
-            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, options, outputKind, additionalReferences);
+            CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, options, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
         private static void VerifyAnalyzer(IEnumerable<string> paths,
                                            DiagnosticAnalyzer[] diagnosticAnalyzers,
