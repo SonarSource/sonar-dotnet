@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2020 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -36,29 +35,29 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private const string DiagnosticId = "S5944";
         private const string MessageFormat = "Use a 'Return' statement; assigning returned values to function names is obsolete.";
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var name = (IdentifierNameSyntax)c.Node;
-                if (!Excluded(name.Parent) &&
+                if (!IsExcluded(name.Parent) &&
                     name.FirstAncestorOrSelf<MethodBlockSyntax>() is MethodBlockSyntax methodBlock &&
                     methodBlock.BlockStatement.DeclarationKeyword.IsKind(SyntaxKind.FunctionKeyword))
                 {
                     var statement = (MethodStatementSyntax)methodBlock.BlockStatement;
                     if (name.Identifier.ValueText.Equals(statement?.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, name.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, name.GetLocation()));
                     }
                 }
             },
             SyntaxKind.IdentifierName);
 
-        private static bool Excluded(SyntaxNode node) =>
-            node is InvocationExpressionSyntax 
-            || node is MemberAccessExpressionSyntax 
+        private static bool IsExcluded(SyntaxNode node) =>
+            node is InvocationExpressionSyntax
+            || node is MemberAccessExpressionSyntax
             || node is NamedFieldInitializerSyntax;
     }
 }
