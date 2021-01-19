@@ -1,50 +1,59 @@
-﻿Public Class UseReturnStatement
-    Public Function FunctionName() As Integer
-        FunctionName = 42 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
-        '       ^^^^^^^^^^^^
+﻿Public Class Implicit_return_statements_are_noncompliant
+    Public Function Assigned_return_value_only() As Integer
+        Assigned_return_value_only = 42 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+'       ^^^^^^^^^^^^^^^^^^^^^^^^^^
     End Function
 
-    Public Function ReturnStatement() As Integer
-        Return 42 ' Compliant
+    Public Function Explictly_return_default_return_value() As Integer
+        Explictly_return_default_return_value = 42  ' Noncompliant
+        Return Explictly_return_default_return_value ' Noncompliant
     End Function
 
-    Public Function ReturnWithVariable() As Integer
-        Dim value As Integer = 42
-        Return value  ' Compliant
+    Public Function Case_insensitive() As Integer
+        CASE_INSENSITIVE = 42  ' Noncompliant
     End Function
 
-    Public Function ReturnWithFunctionName() As Integer
-        ReturnWithFunctionName = 42 ' Noncompliant
-        Return ReturnWithFunctionName  ' Noncompliant
+    Public Shared Function Static_function() As Integer
+        Static_function = 42  ' Noncompliant
     End Function
 
-    Public Function WithRecursion(number As Integer) As Integer
+End Class
+
+Public Class Does_not_apply_on
+    Public Function function_with_explict_return_only()
+        Return 42 'Compliant
+    End Function
+
+    Public Sub sub_methods(number As Integer)
+        Dim Function_name = number ' Compliant
+    End Sub
+
+    Public Function recursive_function_calls(number As Integer)
         If number = 42 Then
-            Return WithRecursion ' Noncompliant, implicit return
+            Return 42
         Else
-            Return WithRecursion(42) ' Compliant, method call
+            Return recursive_function_calls(42) ' Compliant, method call
         End If
     End Function
 
-    Public Function CallOtherMethod(other As OtherType) As Integer
+    Public Function call_to_other_function(other As OtherType) As Integer
         With other
-            Return .CallOtherMethod ' Compliant
+            Return .call_to_other_function ' Compliant
         End With
     End Function
 
-    Public Function NewOtherType() As OtherType
+    Public Function call_to_other_property() As OtherType
         Return New OtherType With
         {
-            .NewOtherType = 69 ' Compliant
+            .call_to_other_property = 69 ' Compliant
         }
     End Function
 End Class
 
 Public Class OtherType
+    Public Property call_to_other_property As Integer
 
-    Public Property NewOtherType As Integer
-
-    Public Function CallOtherMethod() As Integer
+    Public Function call_to_other_function() As Integer
         Return 42
     End Function
 End Class

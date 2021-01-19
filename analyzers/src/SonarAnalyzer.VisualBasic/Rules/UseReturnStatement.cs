@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -41,23 +42,40 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var name = (IdentifierNameSyntax)c.Node;
-                if (!IsExcluded(name.Parent) &&
-                    name.FirstAncestorOrSelf<MethodBlockSyntax>() is MethodBlockSyntax methodBlock &&
-                    methodBlock.BlockStatement.DeclarationKeyword.IsKind(SyntaxKind.FunctionKeyword))
+                var method = (MethodStatementSyntax)((MethodBlockSyntax)c.Node).BlockStatement;
+                var walker = new Identifierswalker(method.Identifier.ValueText);
+                walker.SafeVisit(c.Node);
+                foreach (var location in walker.Locations)
                 {
-                    var statement = (MethodStatementSyntax)methodBlock.BlockStatement;
-                    if (name.Identifier.ValueText.Equals(statement?.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, name.GetLocation()));
-                    }
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
                 }
             },
-            SyntaxKind.IdentifierName);
+            SyntaxKind.FunctionBlock);
 
-        private static bool IsExcluded(SyntaxNode node) =>
-            node is InvocationExpressionSyntax
-            || node is MemberAccessExpressionSyntax
-            || node is NamedFieldInitializerSyntax;
+        private class Identifierswalker : VisualBasicSyntaxWalker
+        {
+            public ICollection<Location> Locations { get; } = new List<Location>();
+
+            private string Name { get; }
+
+            public Identifierswalker(string name) => Name = name;
+
+            public override void VisitIdentifierName(IdentifierNameSyntax node)
+            {
+                if (IsImplictReturnStatement(node))
+                {
+                    Locations.Add(node.GetLocation());
+                }
+            }
+
+            private static bool IsExcluded(SyntaxNode node) =>
+               node is InvocationExpressionSyntax
+               || node is MemberAccessExpressionSyntax
+               || node is NamedFieldInitializerSyntax;
+
+            private bool IsImplictReturnStatement(IdentifierNameSyntax node) =>
+                Name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase)
+                && !IsExcluded(node.Parent);
+        }
     }
 }

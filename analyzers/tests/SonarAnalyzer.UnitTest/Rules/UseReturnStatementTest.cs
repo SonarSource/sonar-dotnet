@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,6 +31,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseReturnStatement() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseReturnStatement.vb", new SonarAnalyzer.Rules.VisualBasic.UseReturnStatement());
+            Verifier.VerifyAnalyzer(@"TestCases\UseReturnStatement.vb", new VisualBasic.UseReturnStatement());
     }
 }
