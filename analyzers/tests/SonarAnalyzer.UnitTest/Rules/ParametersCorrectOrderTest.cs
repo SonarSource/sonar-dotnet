@@ -47,7 +47,7 @@ public class Foo
         new ()
         new System. ()
     }
-}", new CS.ParametersCorrectOrder(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.ParametersCorrectOrder(), CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -64,7 +64,7 @@ Public Class Foo
         Dim x = New ()
         Dim y = New System. ()
     End Sub
-End Class", new VB.ParametersCorrectOrder(), checkMode: CompilationErrorBehavior.Ignore);
+End Class", new VB.ParametersCorrectOrder(), CompilationErrorBehavior.Ignore);
     }
 }
 

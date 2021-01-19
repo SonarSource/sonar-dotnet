@@ -96,6 +96,6 @@ public class Foo
     {
         a.ToList();
     }
-}", new CS.MethodsShouldUseBaseTypes(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.MethodsShouldUseBaseTypes(), CompilationErrorBehavior.Ignore);
     }
 }

@@ -46,6 +46,6 @@ public class  : Exception
     My_07_Exception(string message, Exception innerException) {}
 
     My_07_Exception(SerializationInfo info, StreamingContext context) {}
-}", new CS.ExceptionsNeedStandardConstructors(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.ExceptionsNeedStandardConstructors(), CompilationErrorBehavior.Ignore);
     }
 }

@@ -53,6 +53,6 @@ public void Test_TypeThatCannotBeConst(int arg)
 public void (int arg)
 {
     int intVar = 1; // Noncompliant
-}", new CS.UnchangedLocalVariablesShouldBeConst(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.UnchangedLocalVariablesShouldBeConst(), CompilationErrorBehavior.Ignore);
     }
 }

@@ -123,7 +123,7 @@ public class Foo
     }
 }",
                 new CS.TestMethodShouldContainAssertion(),
-                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
+                NuGetMetadataReference.NUnit(testFwkVersion)
                     .Concat(MetadataReferenceFacade.SystemXml)
                     .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .ToArray());

@@ -73,7 +73,7 @@ public class HttpApplication1 : System.Web.HttpApplication
     protected int FooFoo() => 0; // Noncompliant
 }",
                 new CS.MemberShouldBeStatic(),
-                checkMode: CompilationErrorBehavior.Ignore);
+                CompilationErrorBehavior.Ignore);
 #endif
 
         [TestMethod]
@@ -89,6 +89,6 @@ public class Class7
         result = await f();
         return result;
     }
-}", new CS.MemberShouldBeStatic(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.MemberShouldBeStatic(), CompilationErrorBehavior.Ignore);
     }
 }

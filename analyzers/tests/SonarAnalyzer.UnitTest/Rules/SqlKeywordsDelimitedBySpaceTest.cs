@@ -90,8 +90,7 @@ namespace TestNamespace
     }}
 }}
 ",
-                new CS.SqlKeywordsDelimitedBySpace(),
-                additionalReferences: references.ToArray());
+                new CS.SqlKeywordsDelimitedBySpace(), references.ToArray());
         }
 
         [DataRow("System.Data.SqlClient")]
@@ -120,8 +119,7 @@ namespace TestNamespace
     }}
 }}
 ",
-                new CS.SqlKeywordsDelimitedBySpace(),
-                additionalReferences: references.ToArray());
+                new CS.SqlKeywordsDelimitedBySpace(), references.ToArray());
         }
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

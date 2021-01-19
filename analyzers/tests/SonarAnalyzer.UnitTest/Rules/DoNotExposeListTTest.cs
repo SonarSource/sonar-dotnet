@@ -59,7 +59,7 @@ public class InvalidCode
     public List<InvalidType> Method() => null;
 
     public InvalidType Method2() => null;
-}", new CS.DoNotExposeListT(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.DoNotExposeListT(), CompilationErrorBehavior.Ignore);
         }
     }
 }

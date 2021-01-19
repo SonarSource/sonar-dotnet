@@ -63,8 +63,7 @@ public class Foo
         return ""f"";
     }
 }",
-                new CS.MethodsShouldNotHaveTooManyLines { Max = 2 },
-                checkMode: CompilationErrorBehavior.Ignore);
+                new CS.MethodsShouldNotHaveTooManyLines { Max = 2 }, CompilationErrorBehavior.Ignore);
 
         [DataTestMethod]
         [DataRow(1)]

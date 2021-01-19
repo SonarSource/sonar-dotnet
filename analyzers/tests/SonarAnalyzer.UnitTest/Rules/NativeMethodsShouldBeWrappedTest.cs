@@ -59,6 +59,6 @@ public class InvalidSyntax
     {
         Extern3(x);
     }
-}", new CS.NativeMethodsShouldBeWrapped(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.NativeMethodsShouldBeWrapped(), CompilationErrorBehavior.Ignore);
     }
 }

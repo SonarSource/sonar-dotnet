@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         protected (SerializationInfo info, StreamingContext context) { }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
-    }", new CS.SerializationConstructorsShouldBeSecured(), checkMode: CompilationErrorBehavior.Ignore);
+    }", new CS.SerializationConstructorsShouldBeSecured(), CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -61,6 +61,6 @@ public class Bar : Foo
     {
         Uri.TryCreate(new object(), UriKind.Absolute, out result); // Compliant - invalid code
     }
-}", new CS.UseUriInsteadOfString(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.UseUriInsteadOfString(), CompilationErrorBehavior.Ignore);
     }
 }

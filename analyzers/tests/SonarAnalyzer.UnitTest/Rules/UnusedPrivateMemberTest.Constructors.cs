@@ -148,6 +148,6 @@ public interface IInterface
     // UnusedPrivateMember rule does not trigger AD0001 error from NullReferenceException
     IInterface() {} // Error [CS0526]
 }
-", new CS.UnusedPrivateMember(), checkMode: CompilationErrorBehavior.Ignore);
+", new CS.UnusedPrivateMember(), CompilationErrorBehavior.Ignore);
     }
 }
