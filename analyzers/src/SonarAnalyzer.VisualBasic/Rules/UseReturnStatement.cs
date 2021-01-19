@@ -57,8 +57,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.IdentifierName);
 
         private static bool Excluded(SyntaxNode node) =>
-            node is InvocationExpressionSyntax ||
-            node is MemberAccessExpressionSyntax ||
-            node is NamedFieldInitializerSyntax;
+            node is InvocationExpressionSyntax 
+            || node is MemberAccessExpressionSyntax 
+            || node is NamedFieldInitializerSyntax;
     }
 }
