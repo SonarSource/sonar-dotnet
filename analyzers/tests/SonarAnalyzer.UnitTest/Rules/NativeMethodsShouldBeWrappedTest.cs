@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NativeMethodsShouldBeWrapped() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs", new NativeMethodsShouldBeWrapped(), checkMode: CompilationErrorBehavior.Ignore);
+            Verifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs", new CS.NativeMethodsShouldBeWrapped(), checkMode: CompilationErrorBehavior.Ignore);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void NativeMethodsShouldBeWrapped_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NativeMethodsShouldBeWrapped.CSharp9.cs", new NativeMethodsShouldBeWrapped());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NativeMethodsShouldBeWrapped.CSharp9.cs", new CS.NativeMethodsShouldBeWrapped());
 #endif
 
         [TestMethod]
@@ -60,6 +59,6 @@ public class InvalidSyntax
     {
         Extern3(x);
     }
-}", new NativeMethodsShouldBeWrapped(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.NativeMethodsShouldBeWrapped(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

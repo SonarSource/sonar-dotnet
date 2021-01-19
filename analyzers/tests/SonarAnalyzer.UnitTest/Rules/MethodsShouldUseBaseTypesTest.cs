@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -60,20 +59,20 @@ internal class Bar
 
             foreach (var compilation in solution.Compile())
             {
-                DiagnosticVerifier.Verify(compilation, new MethodsShouldUseBaseTypes(), CompilationErrorBehavior.FailTest);
+                DiagnosticVerifier.Verify(compilation, new CS.MethodsShouldUseBaseTypes(), CompilationErrorBehavior.FailTest);
             }
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldUseBaseTypes.cs", new MethodsShouldUseBaseTypes());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldUseBaseTypes.cs", new CS.MethodsShouldUseBaseTypes());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new MethodsShouldUseBaseTypes());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MethodsShouldUseBaseTypes.CSharp9.cs", new CS.MethodsShouldUseBaseTypes());
 #endif
 
         [TestMethod]
@@ -97,6 +96,6 @@ public class Foo
     {
         a.ToList();
     }
-}", new MethodsShouldUseBaseTypes(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.MethodsShouldUseBaseTypes(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

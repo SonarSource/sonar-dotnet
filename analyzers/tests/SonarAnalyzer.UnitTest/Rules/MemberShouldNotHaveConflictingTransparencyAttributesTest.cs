@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,12 +31,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MemberShouldNotHaveConflictingTransparencyAttributes() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes.cs",
-                new MemberShouldNotHaveConflictingTransparencyAttributes());
+                new CS.MemberShouldNotHaveConflictingTransparencyAttributes());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel.cs",
-                new MemberShouldNotHaveConflictingTransparencyAttributes());
+                new CS.MemberShouldNotHaveConflictingTransparencyAttributes());
     }
 }

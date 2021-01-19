@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalParameterNotPassedToBaseCall_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.cs", new OptionalParameterNotPassedToBaseCall());
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.cs", new CS.OptionalParameterNotPassedToBaseCall());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalParameterNotPassedToBaseCall_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OptionalParameterNotPassedToBaseCall.CSharp9.cs", new OptionalParameterNotPassedToBaseCall());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\OptionalParameterNotPassedToBaseCall.CSharp9.cs", new CS.OptionalParameterNotPassedToBaseCall());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionalParameterNotPassedToBaseCall_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.vb", new SonarAnalyzer.Rules.VisualBasic.OptionalParameterNotPassedToBaseCall());
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalParameterNotPassedToBaseCall.vb", new VB.OptionalParameterNotPassedToBaseCall());
     }
 }

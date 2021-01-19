@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberOverrideCallsBaseMember() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MemberOverrideCallsBaseMember.cs", new MemberOverrideCallsBaseMember());
+            Verifier.VerifyAnalyzer(@"TestCases\MemberOverrideCallsBaseMember.cs", new CS.MemberOverrideCallsBaseMember());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberOverrideCallsBaseMember_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs", new MemberOverrideCallsBaseMember());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MemberOverrideCallsBaseMember.CSharp9.cs", new CS.MemberOverrideCallsBaseMember());
 #endif
 
         [TestMethod]
@@ -46,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\MemberOverrideCallsBaseMember.cs",
                 @"TestCases\MemberOverrideCallsBaseMember.Fixed.cs",
-                new MemberOverrideCallsBaseMember(),
-                new MemberOverrideCallsBaseMemberCodeFixProvider());
+                new CS.MemberOverrideCallsBaseMember(),
+                new CS.MemberOverrideCallsBaseMemberCodeFixProvider());
     }
 }

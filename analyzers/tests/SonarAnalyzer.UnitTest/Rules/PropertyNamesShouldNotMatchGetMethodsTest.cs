@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PropertyNamesShouldNotMatchGetMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs",
-                new PropertyNamesShouldNotMatchGetMethods());
+                new CS.PropertyNamesShouldNotMatchGetMethods());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -40,6 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCSharpAnalyzer(@"
     public int { get; } // Missing identifier on purpose
     public int () { return 42; } // Missing identifier on purpose
-", new PropertyNamesShouldNotMatchGetMethods(), checkMode: CompilationErrorBehavior.Ignore);
+", new CS.PropertyNamesShouldNotMatchGetMethods(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

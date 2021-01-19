@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void NotAssignedPrivateMember() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs", new NotAssignedPrivateMember());
+            Verifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs", new CS.NotAssignedPrivateMember());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void NotAssignedPrivateMember_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NotAssignedPrivateMember.CSharp9.cs", new NotAssignedPrivateMember());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\NotAssignedPrivateMember.CSharp9.cs", new CS.NotAssignedPrivateMember());
 #endif
 
         [TestMethod]
@@ -56,6 +55,6 @@ unsafe struct FixedArray
         a[0] = 42;
         b[0] = 42;
     }
-}", new NotAssignedPrivateMember(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_3) });
+}", new CS.NotAssignedPrivateMember(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_3) });
     }
 }

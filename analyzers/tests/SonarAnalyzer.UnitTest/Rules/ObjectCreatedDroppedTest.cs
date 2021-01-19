@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ObjectCreatedDropped() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
+            Verifier.VerifyAnalyzer(@"TestCases\ObjectCreatedDropped.cs", new CS.ObjectCreatedDropped());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ObjectCreatedDropped_InTest() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\ObjectCreatedDropped.cs", new CS.ObjectCreatedDropped());
     }
 }

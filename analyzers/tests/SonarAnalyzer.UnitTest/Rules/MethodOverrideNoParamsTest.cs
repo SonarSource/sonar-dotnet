@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideNoParams() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideNoParams.cs", new MethodOverrideNoParams());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideNoParams.cs", new CS.MethodOverrideNoParams());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideNoParams_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideNoParams.CSharp9.cs", new MethodOverrideNoParams());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideNoParams.CSharp9.cs", new CS.MethodOverrideNoParams());
 #endif
 
         [TestMethod]
@@ -46,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodOverrideNoParams.cs",
                 @"TestCases\MethodOverrideNoParams.Fixed.cs",
-                new MethodOverrideNoParams(),
-                new MethodOverrideNoParamsCodeFixProvider());
+                new CS.MethodOverrideNoParams(),
+                new CS.MethodOverrideNoParamsCodeFixProvider());
     }
 }

@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MarkAssemblyWithComVisibleAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.cs",
-                new MarkAssemblyWithComVisibleAttribute());
+                new CS.MarkAssemblyWithComVisibleAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -42,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Action action = () => Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.cs",
-                new MarkAssemblyWithComVisibleAttribute());
+                new CS.MarkAssemblyWithComVisibleAttribute());
             action.Should()
                 .Throw<UnexpectedDiagnosticException>()
                 .WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");

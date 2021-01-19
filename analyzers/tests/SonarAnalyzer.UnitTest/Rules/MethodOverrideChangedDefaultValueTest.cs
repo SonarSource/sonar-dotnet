@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MethodOverrideChangedDefaultValue() =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
-                new MethodOverrideChangedDefaultValue(),
+                new CS.MethodOverrideChangedDefaultValue(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
@@ -43,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodOverrideChangedDefaultValue_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new MethodOverrideChangedDefaultValue());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodOverrideChangedDefaultValue.CSharp9.cs", new CS.MethodOverrideChangedDefaultValue());
 #endif
 
         [TestMethod]
@@ -53,8 +52,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\MethodOverrideChangedDefaultValue.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.Batch.cs",
-                new MethodOverrideChangedDefaultValue(),
-                new MethodOverrideChangedDefaultValueCodeFixProvider(),
+                new CS.MethodOverrideChangedDefaultValue(),
+                new CS.MethodOverrideChangedDefaultValueCodeFixProvider(),
                 options: ParseOptionsHelper.FromCSharp8,
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
     }

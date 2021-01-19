@@ -21,8 +21,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using csharp = SonarAnalyzer.Rules.CSharp;
-using vbnet = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,14 +36,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
-                                    new csharp.MarkWindowsFormsMainWithStaThread(),
+                                    new CS.MarkWindowsFormsMainWithStaThread(),
                                     additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.vb",
-                                    new vbnet.MarkWindowsFormsMainWithStaThread(),
+                                    new VB.MarkWindowsFormsMainWithStaThread(),
                                     additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
 #endif
 
@@ -51,13 +51,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
-                                    new csharp.MarkWindowsFormsMainWithStaThread());
+                                    new CS.MarkWindowsFormsMainWithStaThread());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
-                                    new vbnet.MarkWindowsFormsMainWithStaThread(),
+                                    new VB.MarkWindowsFormsMainWithStaThread(),
                                     checkMode: CompilationErrorBehavior.Ignore);
     }
 }
