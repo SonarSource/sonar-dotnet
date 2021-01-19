@@ -209,6 +209,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static void VerifyNoIssueReported(string path,
                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                 IEnumerable<MetadataReference> additionalReferences) =>
+            VerifyNoIssueReported(path, diagnosticAnalyzer, null, CompilationErrorBehavior.Default, additionalReferences);
+
+        public static void VerifyNoIssueReported(string path,
+                                                 SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                 IEnumerable<ParseOptions> options,
+                                                 IEnumerable<MetadataReference> additionalReferences) =>
+            VerifyNoIssueReported(path, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, additionalReferences);
+
+        public static void VerifyNoIssueReported(string path,
+                                                 SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                  IEnumerable<ParseOptions> options = null,
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                  IEnumerable<MetadataReference> additionalReferences = null)
