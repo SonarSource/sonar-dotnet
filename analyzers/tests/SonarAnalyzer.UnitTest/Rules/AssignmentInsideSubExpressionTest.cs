@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,11 +30,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AssignmentInsideSubExpression() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AssignmentInsideSubExpression.cs", new AssignmentInsideSubExpression(), options: ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\AssignmentInsideSubExpression.cs", new CS.AssignmentInsideSubExpression(), options: ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AssignmentInsideSubExpression_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AssignmentInsideSubExpression.CSharp9.cs", new AssignmentInsideSubExpression());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AssignmentInsideSubExpression.CSharp9.cs", new CS.AssignmentInsideSubExpression());
     }
 }

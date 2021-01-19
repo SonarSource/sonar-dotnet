@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void BooleanCheckInverted_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.cs", new BooleanCheckInverted());
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.cs", new CS.BooleanCheckInverted());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -40,13 +40,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\BooleanCheckInverted.cs",
                 @"TestCases\BooleanCheckInverted.Fixed.cs",
                 @"TestCases\BooleanCheckInverted.Fixed.Batch.cs",
-                new BooleanCheckInverted(),
-                new BooleanCheckInvertedCodeFixProvider());
+                new CS.BooleanCheckInverted(),
+                new CS.BooleanCheckInvertedCodeFixProvider());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void BooleanCheckInverted_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\BooleanCheckInverted.vb",
-                new SonarAnalyzer.Rules.VisualBasic.BooleanCheckInverted());
+                new VB.BooleanCheckInverted());
     }
 }

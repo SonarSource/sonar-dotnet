@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,18 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AbstractTypesShouldNotHaveConstructors() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.cs", new AbstractTypesShouldNotHaveConstructors());
+            Verifier.VerifyAnalyzer(@"TestCases\AbstractTypesShouldNotHaveConstructors.cs", new CS.AbstractTypesShouldNotHaveConstructors());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AbstractTypesShouldNotHaveConstructors_Records() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AbstractTypesShouldNotHaveConstructors.Records.cs", new AbstractTypesShouldNotHaveConstructors());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AbstractTypesShouldNotHaveConstructors.Records.cs", new CS.AbstractTypesShouldNotHaveConstructors());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AbstractTypesShouldNotHaveConstructors_TopLevelStatements() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs", new AbstractTypesShouldNotHaveConstructors());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs", new CS.AbstractTypesShouldNotHaveConstructors());
 #endif
     }
 }
