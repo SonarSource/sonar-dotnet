@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "$DiagnosticId$";
         private const string MessageFormat = "";
+
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);

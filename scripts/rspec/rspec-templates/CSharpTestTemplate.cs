@@ -20,7 +20,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,8 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void $DiagnosticClassName$() =>
-            Verifier.VerifyAnalyzer(@"TestCases\$DiagnosticClassName$.cs",
-                new CSharp.$DiagnosticClassName$());
+        public void $DiagnosticClassName$_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\$DiagnosticClassName$.cs", new CS.$DiagnosticClassName$());
     }
 }

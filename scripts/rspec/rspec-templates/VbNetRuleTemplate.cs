@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -27,14 +26,16 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class $DiagnosticClassName$ : $DiagnosticClassName$Base
+    public sealed class $DiagnosticClassName$ : SonarDiagnosticAnalyzer
     {
+        internal const string DiagnosticId = "$DiagnosticId$";
+        private const string MessageFormat = "";
+
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);

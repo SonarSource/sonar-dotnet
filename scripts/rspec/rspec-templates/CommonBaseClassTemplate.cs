@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
@@ -29,5 +29,12 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "$DiagnosticId$";
         protected const string MessageFormat = "";
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected DiagnosticDescriptor Rule { get; }
+
+        protected $DiagnosticClassName$Base(System.Resources.ResourceManager rspecResources) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
     }
 }

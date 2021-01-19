@@ -20,7 +20,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,8 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void $DiagnosticClassName$() =>
-            Verifier.VerifyAnalyzer(@"TestCases\$DiagnosticClassName$.cs",
-                new VisualBasic.$DiagnosticClassName$());
+        public void $DiagnosticClassName$_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\$DiagnosticClassName$.cs", new VB.$DiagnosticClassName$());
     }
 }
