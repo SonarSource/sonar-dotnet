@@ -108,7 +108,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         /// Verify analyzer from C# 9 with top level statements.
         /// </summary>
         public static void VerifyAnalyzerFromCSharp9Console(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.ConsoleApplication, additionalReferences);
+            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.ConsoleApplication, additionalReferences);
 
         /// <summary>
         /// Verify analyzer from C# 9 with top level statements.
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         /// Verify analyzer from C# 9 without top level statements.
         /// </summary>
         public static void VerifyAnalyzerFromCSharp9Library(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                           CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                           OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, checkMode, outputKind, additionalReferences);
+            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, options, checkMode, outputKind, additionalReferences);
 
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer[] diagnosticAnalyzers,
@@ -138,15 +138,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, options, checkMode, outputKind, additionalReferences);
 
-        // This method is checking only the expected issues from the first file path provided. The rest of the paths are added to the
-        // project for enabling testing of different scenarios.
+        /// <summary>
+        /// This method is checking only the expected issues from the first file path provided. The rest of the paths are added to the project for enabling testing of different scenarios.
+        /// </summary>
+        public static void VerifyAnalyzer(IEnumerable<string> paths,
+                                          DiagnosticAnalyzer diagnosticAnalyzer,
+                                          IEnumerable<MetadataReference> additionalReferences) =>
+            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, null, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+
+        /// <summary>
+        /// This method is checking only the expected issues from the first file path provided. The rest of the paths are added to the project for enabling testing of different scenarios.
+        /// </summary>
         public static void VerifyAnalyzer(IEnumerable<string> paths,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
                                           IEnumerable<ParseOptions> options = null,
-                                          CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, checkMode, outputKind, additionalReferences);
+            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths,
                                                            UtilityAnalyzerBase diagnosticAnalyzer,
@@ -239,10 +246,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static void VerifyAnalyzer(IEnumerable<string> paths,
                                            DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                           IEnumerable<ParseOptions> options = null,
-                                           CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                           OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                           IEnumerable<MetadataReference> additionalReferences = null)
+                                           IEnumerable<ParseOptions> options,
+                                           CompilationErrorBehavior checkMode,
+                                           OutputKind outputKind,
+                                           IEnumerable<MetadataReference> additionalReferences)
         {
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences, IsSupportForCSharp9InitNeeded(options));
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
