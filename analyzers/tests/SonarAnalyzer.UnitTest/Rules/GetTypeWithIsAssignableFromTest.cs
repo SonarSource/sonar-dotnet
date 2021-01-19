@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GetTypeWithIsAssignableFrom() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GetTypeWithIsAssignableFrom.cs", new GetTypeWithIsAssignableFrom());
+            Verifier.VerifyAnalyzer(@"TestCases\GetTypeWithIsAssignableFrom.cs", new CS.GetTypeWithIsAssignableFrom());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void GetTypeWithIsAssignableFrom_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs", new GetTypeWithIsAssignableFrom());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GetTypeWithIsAssignableFrom.CSharp9.cs", new CS.GetTypeWithIsAssignableFrom());
 #endif
 
         [TestMethod]
@@ -46,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(@"TestCases\GetTypeWithIsAssignableFrom.cs",
                                    @"TestCases\GetTypeWithIsAssignableFrom.Fixed.cs",
                                    @"TestCases\GetTypeWithIsAssignableFrom.Fixed.Batch.cs",
-                                   new GetTypeWithIsAssignableFrom(),
-                                   new GetTypeWithIsAssignableFromCodeFixProvider());
+                                   new CS.GetTypeWithIsAssignableFrom(),
+                                   new CS.GetTypeWithIsAssignableFromCodeFixProvider());
     }
 }

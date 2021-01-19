@@ -18,14 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 #if NET
 using Microsoft.CodeAnalysis;
 #endif
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyMethod()
         {
             Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.cs",
-                new EmptyMethod(),
+                new CS.EmptyMethod(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EmptyMethod_CSharp9()
         {
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new EmptyMethod());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new CS.EmptyMethod());
         }
 #endif
 
@@ -60,9 +60,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\EmptyMethod.cs",
                 @"TestCases\EmptyMethod.Throw.Fixed.cs",
-                new EmptyMethod(),
-                new EmptyMethodCodeFixProvider(),
-                EmptyMethodCodeFixProvider.TitleThrow);
+                new CS.EmptyMethod(),
+                new CS.EmptyMethodCodeFixProvider(),
+                CS.EmptyMethodCodeFixProvider.TitleThrow);
         }
 
         [TestMethod]
@@ -72,9 +72,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\EmptyMethod.cs",
                 @"TestCases\EmptyMethod.Comment.Fixed.cs",
-                new EmptyMethod(),
-                new EmptyMethodCodeFixProvider(),
-                EmptyMethodCodeFixProvider.TitleComment);
+                new CS.EmptyMethod(),
+                new CS.EmptyMethodCodeFixProvider(),
+                CS.EmptyMethodCodeFixProvider.TitleComment);
         }
 
         [TestMethod]
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyMethod_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.vb",
-                new SonarAnalyzer.Rules.VisualBasic.EmptyMethod());
+                new VB.EmptyMethod());
         }
     }
 }

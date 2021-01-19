@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,21 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new CS.ImplementIDisposableCorrectly(), ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_FromCSharp9()
         {
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ImplementIDisposableCorrectly.CSharp9.cs", new ImplementIDisposableCorrectly());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ImplementIDisposableCorrectly.CSharp9.cs", new CS.ImplementIDisposableCorrectly());
         }
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementIDisposableCorrectly_AbstractClass() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.AbstractClass.cs", new ImplementIDisposableCorrectly());
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.AbstractClass.cs", new CS.ImplementIDisposableCorrectly());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -55,6 +54,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 {
                     @"TestCases\ImplementIDisposableCorrectlyPartial1.cs",
                     @"TestCases\ImplementIDisposableCorrectlyPartial2.cs"
-                }, new ImplementIDisposableCorrectly());
+                }, new CS.ImplementIDisposableCorrectly());
     }
 }

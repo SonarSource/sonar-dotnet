@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExceptionRethrow() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExceptionRethrow.cs", new ExceptionRethrow());
+            Verifier.VerifyAnalyzer(@"TestCases\ExceptionRethrow.cs", new CS.ExceptionRethrow());
 
         [TestMethod]
         [TestCategory("CodeFix")]
@@ -39,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\ExceptionRethrow.cs",
                 @"TestCases\ExceptionRethrow.Fixed.cs",
-                new ExceptionRethrow(),
-                new ExceptionRethrowCodeFixProvider());
+                new CS.ExceptionRethrow(),
+                new CS.ExceptionRethrowCodeFixProvider());
     }
 }

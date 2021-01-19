@@ -18,14 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System.Collections.Generic;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,28 +36,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EncryptingData_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptingData.cs",
-                new EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptingData_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptingData.vb",
-                new SonarAnalyzer.Rules.VisualBasic.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
+                new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptingData_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\EncryptingData.cs",
-                new EncryptingData(),
+                new CS.EncryptingData(),
                 additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptingData_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\EncryptingData.vb",
-                new SonarAnalyzer.Rules.VisualBasic.EncryptingData(),
+                new VB.EncryptingData(),
                 additionalReferences: GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

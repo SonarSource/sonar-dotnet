@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,14 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.cs",
-                new ExceptionShouldNotBeThrownFromUnexpectedMethods(),
+                new CS.ExceptionShouldNotBeThrownFromUnexpectedMethods(),
                 ParseOptionsHelper.FromCSharp8);
  #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs",
-                new ExceptionShouldNotBeThrownFromUnexpectedMethods());
+                new CS.ExceptionShouldNotBeThrownFromUnexpectedMethods());
 #endif
 
     }

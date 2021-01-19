@@ -20,6 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,12 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EnumNameShouldFollowRegexCSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumNameShouldFollowRegex.cs",
-                new SonarAnalyzer.Rules.CSharp.EnumNameShouldFollowRegex());
+                new CS.EnumNameShouldFollowRegex());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EnumNameShouldFollowRegexVisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\EnumNameShouldFollowRegex.vb",
-                new SonarAnalyzer.Rules.VisualBasic.EnumNameShouldFollowRegex());
+                new VB.EnumNameShouldFollowRegex());
     }
 }

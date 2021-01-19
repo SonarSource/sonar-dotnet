@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void FileShouldEndWithEmptyNewLine_EmptyLine() =>
             Verifier.VerifyAnalyzer(@"TestCases\FileShouldEndWithEmptyNewLine_EmptyLine.cs",
-                new FileShouldEndWithEmptyNewLine());
+                new CS.FileShouldEndWithEmptyNewLine());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void FileShouldEndWithEmptyNewLine_NoEmptyLine() =>
             Verifier.VerifyAnalyzer(@"TestCases\FileShouldEndWithEmptyNewLine_NoEmptyLine.cs",
-                new FileShouldEndWithEmptyNewLine());
+                new CS.FileShouldEndWithEmptyNewLine());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void FileShouldEndWithEmptyNewLine_EmptyFile() =>
             Verifier.VerifyAnalyzer(@"TestCases\FileShouldEndWithEmptyNewLine_EmptyFile.cs",
-                new FileShouldEndWithEmptyNewLine());
+                new CS.FileShouldEndWithEmptyNewLine());
     }
 }

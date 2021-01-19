@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GenericTypeParameterEmptinessChecking() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
-                                    new GenericTypeParameterEmptinessChecking(),
+                                    new CS.GenericTypeParameterEmptinessChecking(),
                                     additionalReferences: MetadataReferenceFacade.SystemCollections,
                                     checkMode: CompilationErrorBehavior.Ignore);
 
@@ -42,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\GenericTypeParameterEmptinessChecking.CSharp9.cs",
-                                                      new GenericTypeParameterEmptinessChecking(),
+                                                      new CS.GenericTypeParameterEmptinessChecking(),
                                                       MetadataReferenceFacade.SystemCollections);
 #endif
 
@@ -51,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericTypeParameterEmptinessChecking_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
                                    @"TestCases\GenericTypeParameterEmptinessChecking.Fixed.cs",
-                                   new GenericTypeParameterEmptinessChecking(),
-                                   new GenericTypeParameterEmptinessCheckingCodeFixProvider());
+                                   new CS.GenericTypeParameterEmptinessChecking(),
+                                   new CS.GenericTypeParameterEmptinessCheckingCodeFixProvider());
     }
 }

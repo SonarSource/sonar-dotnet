@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GenericReadonlyFieldPropertyAssignment() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
-                                    new GenericReadonlyFieldPropertyAssignment(),
+                                    new CS.GenericReadonlyFieldPropertyAssignment(),
                                     ParseOptionsHelper.FromCSharp8);
 
 #if NET
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GenericReadonlyFieldPropertyAssignment_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GenericReadonlyFieldPropertyAssignment.CSharp9.cs",
-                                                      new GenericReadonlyFieldPropertyAssignment());
+                                                      new CS.GenericReadonlyFieldPropertyAssignment());
 #endif
 
         [TestMethod]
@@ -48,9 +48,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Remove_Statement() =>
             Verifier.VerifyCodeFix(@"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                                    @"TestCases\GenericReadonlyFieldPropertyAssignment.Remove.Fixed.cs",
-                                   new GenericReadonlyFieldPropertyAssignment(),
-                                   new GenericReadonlyFieldPropertyAssignmentCodeFixProvider(),
-                                   GenericReadonlyFieldPropertyAssignmentCodeFixProvider.TitleRemove,
+                                   new CS.GenericReadonlyFieldPropertyAssignment(),
+                                   new CS.GenericReadonlyFieldPropertyAssignmentCodeFixProvider(),
+                                   CS.GenericReadonlyFieldPropertyAssignmentCodeFixProvider.TitleRemove,
                                    ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
@@ -58,9 +58,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericReadonlyFieldPropertyAssignment_CodeFix_Add_Generic_Type_Constraint() =>
             Verifier.VerifyCodeFix(@"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
                                    @"TestCases\GenericReadonlyFieldPropertyAssignment.AddConstraint.Fixed.cs",
-                                   new GenericReadonlyFieldPropertyAssignment(),
-                                   new GenericReadonlyFieldPropertyAssignmentCodeFixProvider(),
-                                   GenericReadonlyFieldPropertyAssignmentCodeFixProvider.TitleAddClassConstraint,
+                                   new CS.GenericReadonlyFieldPropertyAssignment(),
+                                   new CS.GenericReadonlyFieldPropertyAssignmentCodeFixProvider(),
+                                   CS.GenericReadonlyFieldPropertyAssignmentCodeFixProvider.TitleAddClassConstraint,
                                    ParseOptionsHelper.FromCSharp8);
     }
 }

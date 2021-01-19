@@ -20,8 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = SonarAnalyzer.Rules.CSharp;
-using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void IfChainWithoutElse_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.cs", new CSharp.IfChainWithoutElse());
+            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.cs", new CS.IfChainWithoutElse());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void IfChainWithoutElse_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.vb", new VisualBasic.IfChainWithoutElse());
+            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.vb", new VB.IfChainWithoutElse());
     }
 }
