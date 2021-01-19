@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CollectionPropertiesShouldBeReadOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
-                new CollectionPropertiesShouldBeReadOnly(),
+                new CS.CollectionPropertiesShouldBeReadOnly(),
                 additionalReferences: MetadataReferenceFacade.SystemRuntimeSerialization);
 
 #if NET
@@ -41,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CollectionPropertiesShouldBeReadOnly_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CollectionPropertiesShouldBeReadOnly.CSharp9.cs",
-                new CollectionPropertiesShouldBeReadOnly(),
+                new CS.CollectionPropertiesShouldBeReadOnly(),
                 MetadataReferenceFacade.SystemRuntimeSerialization);
 #endif
     }

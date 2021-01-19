@@ -22,11 +22,11 @@
 // https://github.com/SonarSource/sonar-dotnet/issues/3425
 #if NETFRAMEWORK
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,14 +37,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConstructorArgumentValueShouldExist_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.cs",
-                new ConstructorArgumentValueShouldExist(),
+                new CS.ConstructorArgumentValueShouldExist(),
                 additionalReferences: MetadataReferenceFacade.SystemXaml);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ConstructorArgumentValueShouldExist_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConstructorArgumentValueShouldExist.CSharp9.cs",
-                new ConstructorArgumentValueShouldExist(),
+                new CS.ConstructorArgumentValueShouldExist(),
                 MetadataReferenceFacade.GetSystemXaml());
 #endif
 
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConstructorArgumentValueShouldExist_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ConstructorArgumentValueShouldExist(),
+                new VB.ConstructorArgumentValueShouldExist(),
                 additionalReferences: MetadataReferenceFacade.SystemXaml);
     }
 }

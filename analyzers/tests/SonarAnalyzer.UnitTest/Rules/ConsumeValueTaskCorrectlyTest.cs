@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System.Collections.Generic;
 using System.Linq;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConsumeValueTaskCorrectly() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConsumeValueTaskCorrectly.cs",
-                new ConsumeValueTaskCorrectly(),
+                new CS.ConsumeValueTaskCorrectly(),
                 additionalReferences: GetReferences());
 
         private static IEnumerable<MetadataReference> GetReferences() =>

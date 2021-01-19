@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System.Collections.Generic;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,28 +35,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotInstantiateSharedClasses_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.cs",
-                new DoNotInstantiateSharedClasses(),
+                new CS.DoNotInstantiateSharedClasses(),
                 additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotInstantiateSharedClasses_CS_InTest() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.cs",
-                new DoNotInstantiateSharedClasses(),
+                new CS.DoNotInstantiateSharedClasses(),
                 GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotInstantiateSharedClasses_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.vb",
-                new SonarAnalyzer.Rules.VisualBasic.DoNotInstantiateSharedClasses(),
+                new VB.DoNotInstantiateSharedClasses(),
                 additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotInstantiateSharedClasses_VB_InTest() =>
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.vb",
-                new SonarAnalyzer.Rules.VisualBasic.DoNotInstantiateSharedClasses(),
+                new VB.DoNotInstantiateSharedClasses(),
                 GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
-                new DoNotUseLiteralBoolInAssertions(),
+                new CS.DoNotUseLiteralBoolInAssertions(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [DataTestMethod]
@@ -44,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.NUnit.cs",
-                new DoNotUseLiteralBoolInAssertions(),
+                new CS.DoNotUseLiteralBoolInAssertions(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
 
         [DataTestMethod]
@@ -53,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.Xunit.cs",
-                new DoNotUseLiteralBoolInAssertions(),
+                new CS.DoNotUseLiteralBoolInAssertions(),
                 additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion));
     }
 }

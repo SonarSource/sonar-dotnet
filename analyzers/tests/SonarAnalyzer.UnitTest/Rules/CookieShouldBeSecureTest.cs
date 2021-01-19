@@ -24,9 +24,9 @@ using Microsoft.CodeAnalysis;
 #endif
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_Nancy.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.Nancy());
 
 #if NETFRAMEWORK // HttpCookie is not available on .Net Core
@@ -46,14 +46,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: MetadataReferenceFacade.SystemWeb);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Not_Enabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldBeSecure.cs",
-                new CookieShouldBeSecure(),
+                new CS.CookieShouldBeSecure(),
                 additionalReferences: MetadataReferenceFacade.SystemWeb);
 
 #else
@@ -62,14 +62,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_NetCore.cs",
-                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_NetCore());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Net() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CookieShouldBeSecure_Net.cs",
-                                                      new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                                                      new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                                       GetAdditionalReferences_NetCore());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>

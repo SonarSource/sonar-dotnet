@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotNestTernaryOperators_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTernaryOperators.cs",
-                new DoNotNestTernaryOperators());
+                new CS.DoNotNestTernaryOperators());
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotNestTernaryOperators_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTernaryOperators.vb",
-                new SonarAnalyzer.Rules.VisualBasic.DoNotNestTernaryOperators());
+                new VB.DoNotNestTernaryOperators());
         }
     }
 }

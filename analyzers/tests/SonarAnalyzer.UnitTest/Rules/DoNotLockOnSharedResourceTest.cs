@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotLockOnSharedResource_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.cs",
-                new DoNotLockOnSharedResource());
+                new CS.DoNotLockOnSharedResource());
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotLockOnSharedResource_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.vb",
-                new SonarAnalyzer.Rules.VisualBasic.DoNotLockOnSharedResource());
+                new VB.DoNotLockOnSharedResource());
         }
     }
 }

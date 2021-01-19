@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,12 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotPassSameValueAsMultipleArguments() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotPassSameValueAsMultipleArguments.cs",
-                new DoNotPassSameValueAsMultipleArguments());
+                new CS.DoNotPassSameValueAsMultipleArguments());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotPassSameValueAsMultipleArguments_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotPassSameValueAsMultipleArguments.vb",
-                new vbnet::SonarAnalyzer.Rules.VisualBasic.DoNotPassSameValueAsMultipleArguments());
+                new VB.DoNotPassSameValueAsMultipleArguments());
     }
 }

@@ -46,7 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
 #endif
 
-
         [TestMethod]
         [TestCategory("Rule")]
         public void CognitiveComplexity_VB() =>

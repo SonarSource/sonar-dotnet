@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,14 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotUseRandom() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseRandom.cs",
-                new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotUseRandom_Not_Enabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DoNotUseRandom.cs",
-                new DoNotUseRandom(),
+                new CS.DoNotUseRandom(),
                 additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 #if NET
 using SonarAnalyzer.UnitTest.MetadataReferences;
 #endif
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,14 +34,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs",
-                                    new DisposableMemberInNonDisposableClass(),
+                                    new CS.DisposableMemberInNonDisposableClass(),
                                     ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new DisposableMemberInNonDisposableClass());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DisposableMemberInNonDisposableClass.CSharp9.cs", new CS.DisposableMemberInNonDisposableClass());
 
         [TestMethod]
         public void DisposableMemberInNonDisposableClass_IAsyncDisposable() => // IAsyncDisposable is available only on .Net Core
@@ -90,7 +89,7 @@ namespace Namespace
     {
         public ValueTask DisposeAsync() => new ValueTask();
     }
-}", new DisposableMemberInNonDisposableClass(), additionalReferences: NetStandardMetadataReference.Netstandard);
+}", new CS.DisposableMemberInNonDisposableClass(), additionalReferences: NetStandardMetadataReference.Netstandard);
 #endif
     }
 }

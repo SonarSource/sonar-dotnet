@@ -20,6 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +32,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.cs",
-                new SonarAnalyzer.Rules.CSharp.ConditionalStructureSameCondition());
+                new CS.ConditionalStructureSameCondition());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_CS_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalStructureSameCondition.CSharp9.cs",
-                new SonarAnalyzer.Rules.CSharp.ConditionalStructureSameCondition());
+                new CS.ConditionalStructureSameCondition());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalStructureSameCondition_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalStructureSameCondition.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ConditionalStructureSameCondition());
+                new VB.ConditionalStructureSameCondition());
     }
 }

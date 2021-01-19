@@ -18,14 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System.Collections.Generic;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.cs",
-                                    new CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     additionalReferences: GetAdditionalReferences());
 #if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS_NetFx() =>
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.NetFramework.cs",
-                                    new CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     additionalReferences: GetAdditionalReferences());
 #endif
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.vb",
-                                    new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
+                                    new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     additionalReferences: GetAdditionalReferences());
 
 #if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_VB_NetFx() =>
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.NetFramework.vb",
-                                    new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
+                                    new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     additionalReferences: GetAdditionalReferences());
 #endif
 
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CreatingHashAlgorithms.cs",
-                                           new CreatingHashAlgorithms(),
+                                           new CS.CreatingHashAlgorithms(),
                                            ParseOptionsHelper.FromCSharp8,
                                            additionalReferences: GetAdditionalReferences());
 
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CreatingHashAlgorithms.vb",
-                                           new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(),
+                                           new VB.CreatingHashAlgorithms(),
                                            additionalReferences: GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

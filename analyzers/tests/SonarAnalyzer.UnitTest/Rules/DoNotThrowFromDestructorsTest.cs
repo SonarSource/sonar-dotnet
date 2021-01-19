@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotThrowFromDestructors_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.cs", new DoNotThrowFromDestructors());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.cs", new CS.DoNotThrowFromDestructors());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotThrowFromDestructors_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotThrowFromDestructors.CSharp9.cs", new DoNotThrowFromDestructors());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotThrowFromDestructors.CSharp9.cs", new CS.DoNotThrowFromDestructors());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotThrowFromDestructors_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.vb", new SonarAnalyzer.Rules.VisualBasic.DoNotThrowFromDestructors());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.vb", new VB.DoNotThrowFromDestructors());
     }
 }

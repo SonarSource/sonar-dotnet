@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,18 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallGCSuppressFinalize() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.cs", new DoNotCallGCSuppressFinalize());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.cs", new CS.DoNotCallGCSuppressFinalize());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallGCSuppressFinalize_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.NetCore.cs", new DoNotCallGCSuppressFinalize(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.NetCore.cs", new CS.DoNotCallGCSuppressFinalize(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCallGCSuppressFinalize_Net5() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotCallGCSuppressFinalize.Net5.cs", new DoNotCallGCSuppressFinalize());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotCallGCSuppressFinalize.Net5.cs", new CS.DoNotCallGCSuppressFinalize());
 #endif
     }
 }

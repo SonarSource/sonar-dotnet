@@ -20,8 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = SonarAnalyzer.Rules.CSharp;
-using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,20 +32,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.cs",
-                new CSharp.DeclareTypesInNamespaces());
+                new CS.DeclareTypesInNamespaces());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_Before8() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.BeforeCSharp8.cs",
-                new CSharp.DeclareTypesInNamespaces(),
+                new CS.DeclareTypesInNamespaces(),
                 options: ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_After8() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.AfterCSharp8.cs",
-                new CSharp.DeclareTypesInNamespaces(),
+                new CS.DeclareTypesInNamespaces(),
                 options: ParseOptionsHelper.FromCSharp8);
 
 #if NET
@@ -53,13 +53,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_AfterCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DeclareTypesInNamespaces.AfterCSharp9.cs",
-                new CSharp.DeclareTypesInNamespaces());
+                new CS.DeclareTypesInNamespaces());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.vb",
-                new VisualBasic.DeclareTypesInNamespaces());
+                new VB.DeclareTypesInNamespaces());
     }
 }

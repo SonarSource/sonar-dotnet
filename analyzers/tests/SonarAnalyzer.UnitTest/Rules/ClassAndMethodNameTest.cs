@@ -18,16 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -42,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 {
                     @"TestCases\ClassName.cs",
                     @"TestCases\ClassName.Partial.cs",
-                }, new CSharp.ClassAndMethodName(),
+                }, new CS.ClassAndMethodName(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
@@ -52,18 +49,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_TopLevelStatement() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassName.TopLevelStatement.cs", new CSharp.ClassAndMethodName());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassName.TopLevelStatement.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void RecordName() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RecordName.cs", new CSharp.ClassAndMethodName());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VisualBasic.ClassName());
+            Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VB.ClassName());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -74,14 +71,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\MethodName.cs",
                     @"TestCases\MethodName.Partial.cs",
                 },
-                new CSharp.ClassAndMethodName(),
+                new CS.ClassAndMethodName(),
                 ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodName_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodName.CSharp9.cs", new CSharp.ClassAndMethodName());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
 #endif
 
         [TestMethod]
@@ -102,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
             .Select(x =>
             (
-                actual: CSharp.ClassAndMethodName.SplitToParts(x.Item1).ToArray(),
+                actual: CS.ClassAndMethodName.SplitToParts(x.Item1).ToArray(),
                 expected: x.Item2
             ))
             .ToList()
