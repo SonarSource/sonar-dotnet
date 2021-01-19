@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                         @"TestCases\SerializationConstructorsShouldBeSecured_Part2.cs",
                                     },
                                     new CS.SerializationConstructorsShouldBeSecured(),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityPermissions;

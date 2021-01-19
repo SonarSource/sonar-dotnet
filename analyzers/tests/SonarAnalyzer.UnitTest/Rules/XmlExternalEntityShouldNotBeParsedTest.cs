@@ -138,7 +138,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ParameterProvider.cs"
                 },
                 new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                additionalReferences: MetadataReferenceFacade.SystemXml);
+                MetadataReferenceFacade.SystemXml);
 
         private static void VerifyRule(NetFrameworkVersion version, string testFilePath, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<ParseOptions> options = null) =>
             Verifier.VerifyAnalyzer(testFilePath,

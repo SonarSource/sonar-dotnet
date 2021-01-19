@@ -230,7 +230,6 @@ namespace EntityFrameworkMigrations
         {
             Action verifyAnalyzer = () => Verifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
                                                                   new CS.UnusedPrivateMember(),
-                                                                  additionalReferences:
                                                                   GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
 
             // Once the NuGet packages are downloaded, the time to execute the analyzer on the given file is

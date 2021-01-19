@@ -61,6 +61,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\ShouldImplementExportedInterfaces_Part2.cs",
                 },
                 new CS.ShouldImplementExportedInterfaces(),
-                additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
+                MetadataReferenceFacade.SystemComponentModelComposition);
     }
 }

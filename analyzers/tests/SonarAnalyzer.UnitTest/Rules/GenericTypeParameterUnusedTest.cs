@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericTypeParameterUnused() =>
             Verifier.VerifyAnalyzer(new[] { @"TestCases\GenericTypeParameterUnused.cs", @"TestCases\GenericTypeParameterUnused.Partial.cs" },
                                     new CS.GenericTypeParameterUnused(),
-                                    options: ParseOptionsHelper.FromCSharp8);
+                                    ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
