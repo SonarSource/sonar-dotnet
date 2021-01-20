@@ -276,7 +276,7 @@ function AppendVbTestCase($ruleTestsFolder) {
     }
 
     if ($namespaceTokenIdx -gt -1) {
-        $newText = $newText.Remove($namespaceTokenIdx, $namespaceToken.Length).Insert($namespaceTokenIdx, "${namespaceToken}`r`nusing VB = SonarAnalyzer.Rules.VisualBasic;")
+        $newText = $newText.Insert($namespaceTokenIdx + $namespaceToken.Length + 1, "using VB = SonarAnalyzer.Rules.VisualBasic;`r`n")
     }
 
     $replaced = ReplaceTokens -text $newText
