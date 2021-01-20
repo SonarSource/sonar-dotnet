@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UseValueParameter() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
+            Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new CS.UseValueParameter());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void UseValueParameter_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new UseValueParameter());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\UseValueParameter.CSharp9.cs", new CS.UseValueParameter());
 #endif
 
         [TestMethod]
@@ -48,6 +47,6 @@ public int Foo
 {
     get => field;
     set => // Noncompliant
-}", new UseValueParameter(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.UseValueParameter(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

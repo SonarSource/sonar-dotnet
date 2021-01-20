@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,17 +29,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GenericTypeParameterInOut()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.cs", new GenericTypeParameterInOut());
-        }
+        public void GenericTypeParameterInOut() =>
+            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.cs", new CS.GenericTypeParameterInOut());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void GenericTypeParameterInOut_FromCSharp7()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.CSharp7.cs", new GenericTypeParameterInOut(),
+        public void GenericTypeParameterInOut_FromCSharp7() =>
+            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.CSharp7.cs", new CS.GenericTypeParameterInOut(),
                 options: ParseOptionsHelper.FromCSharp7);
-        }
     }
 }

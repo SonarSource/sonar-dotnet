@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void SuppressFinalizeUseless() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SuppressFinalizeUseless.cs", new SuppressFinalizeUseless());
+            Verifier.VerifyAnalyzer(@"TestCases\SuppressFinalizeUseless.cs", new CS.SuppressFinalizeUseless());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void SuppressFinalizeUseless_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SuppressFinalizeUseless.CSharp9.cs", new SuppressFinalizeUseless());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\SuppressFinalizeUseless.CSharp9.cs", new CS.SuppressFinalizeUseless());
 #endif
 
         [TestMethod]
@@ -45,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SuppressFinalizeUseless_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\SuppressFinalizeUseless.cs",
                                    @"TestCases\SuppressFinalizeUseless.Fixed.cs",
-                                   new SuppressFinalizeUseless(),
-                                   new SuppressFinalizeUselessCodeFixProvider());
+                                   new CS.SuppressFinalizeUseless(),
+                                   new CS.SuppressFinalizeUselessCodeFixProvider());
     }
 }

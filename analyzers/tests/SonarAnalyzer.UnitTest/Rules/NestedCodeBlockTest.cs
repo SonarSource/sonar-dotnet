@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,12 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NestedCodeBlock() => Verifier.VerifyAnalyzer(@"TestCases\NestedCodeBlock.cs", new NestedCodeBlock());
+        public void NestedCodeBlock() =>
+            Verifier.VerifyAnalyzer(@"TestCases\NestedCodeBlock.cs", new CS.NestedCodeBlock());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
-        public void NestedCodeBlock_CSharp9() => Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NestedCodeBlock.CSharp9.cs", new NestedCodeBlock());
+        public void NestedCodeBlock_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\NestedCodeBlock.CSharp9.cs", new CS.NestedCodeBlock());
 #endif
     }
 }

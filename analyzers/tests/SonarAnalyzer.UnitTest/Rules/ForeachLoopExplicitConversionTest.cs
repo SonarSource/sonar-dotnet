@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ForeachLoopExplicitConversion()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ForeachLoopExplicitConversion.cs", new ForeachLoopExplicitConversion());
-        }
+        public void ForeachLoopExplicitConversion() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ForeachLoopExplicitConversion.cs", new CS.ForeachLoopExplicitConversion());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void ForeachLoopExplicitConversion_CodeFix()
-        {
+        public void ForeachLoopExplicitConversion_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\ForeachLoopExplicitConversion.cs",
                 @"TestCases\ForeachLoopExplicitConversion.Fixed.cs",
-                new ForeachLoopExplicitConversion(),
-                new ForeachLoopExplicitConversionCodeFixProvider());
-        }
+                new CS.ForeachLoopExplicitConversion(),
+                new CS.ForeachLoopExplicitConversionCodeFixProvider());
     }
 }

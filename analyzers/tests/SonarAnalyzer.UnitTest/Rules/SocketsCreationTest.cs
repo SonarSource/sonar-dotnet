@@ -18,15 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -37,28 +37,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SocketsCreation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SocketsCreation.cs",
-                                    new SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CS.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
                                     additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SocketsCreation_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\SocketsCreation.vb",
-                                    new SonarAnalyzer.Rules.VisualBasic.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
+                                    new VB.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
                                     additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SocketsCreation_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\SocketsCreation.cs",
-                                           new SocketsCreation(),
+                                           new CS.SocketsCreation(),
                                            additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SocketsCreation_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\SocketsCreation.vb",
-                                           new SonarAnalyzer.Rules.VisualBasic.SocketsCreation(),
+                                           new VB.SocketsCreation(),
                                            additionalReferences: GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

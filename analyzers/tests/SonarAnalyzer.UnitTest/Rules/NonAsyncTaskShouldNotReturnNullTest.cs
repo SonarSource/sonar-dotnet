@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +30,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonAsyncTaskShouldNotReturnNull_CS()
-        {
+        public void NonAsyncTaskShouldNotReturnNull_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonAsyncTaskShouldNotReturnNull.cs",
-                new NonAsyncTaskShouldNotReturnNull(),
+                new CS.NonAsyncTaskShouldNotReturnNull(),
                 options: ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonAsyncTaskShouldNotReturnNull_VB()
-        {
+        public void NonAsyncTaskShouldNotReturnNull_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonAsyncTaskShouldNotReturnNull.vb",
-                new SonarAnalyzer.Rules.VisualBasic.NonAsyncTaskShouldNotReturnNull());
-        }
+                new VB.NonAsyncTaskShouldNotReturnNull());
     }
 }
-

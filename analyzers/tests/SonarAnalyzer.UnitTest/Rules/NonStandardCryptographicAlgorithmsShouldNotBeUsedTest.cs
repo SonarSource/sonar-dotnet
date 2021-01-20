@@ -18,14 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,28 +34,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.cs",
-                                    new CSharp.NonStandardCryptographicAlgorithmsShouldNotBeUsed(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CS.NonStandardCryptographicAlgorithmsShouldNotBeUsed(AnalyzerConfiguration.AlwaysEnabled),
                                     additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_CSharp_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.cs",
-                                           new CSharp.NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
+                                           new CS.NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
                                            additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.vb",
-                                    new VisualBasic.NonStandardCryptographicAlgorithmsShouldNotBeUsed(AnalyzerConfiguration.AlwaysEnabled),
+                                    new VB.NonStandardCryptographicAlgorithmsShouldNotBeUsed(AnalyzerConfiguration.AlwaysEnabled),
                                     additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.vb",
-                                           new VisualBasic.NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
+                                           new VB.NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
                                            additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

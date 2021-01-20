@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
-using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,29 +30,23 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void BooleanLiteralUnnecessary_CS()
-        {
+        public void BooleanLiteralUnnecessary_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.cs",
                 new CS.BooleanLiteralUnnecessary());
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void BooleanLiteralUnnecessary_CodeFix_CS()
-        {
+        public void BooleanLiteralUnnecessary_CodeFix_CS() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\BooleanLiteralUnnecessary.cs",
                 @"TestCases\BooleanLiteralUnnecessary.Fixed.cs",
                 new CS.BooleanLiteralUnnecessary(),
                 new CS.BooleanLiteralUnnecessaryCodeFixProvider());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void BooleanLiteralUnnecessary_VB()
-        {
+        public void BooleanLiteralUnnecessary_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.vb",
                 new VB.BooleanLiteralUnnecessary());
-        }
     }
 }

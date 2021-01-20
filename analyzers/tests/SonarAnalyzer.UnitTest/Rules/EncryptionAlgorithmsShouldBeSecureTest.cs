@@ -24,8 +24,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = SonarAnalyzer.Rules.CSharp;
-using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,14 +36,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
-                new CSharp.EncryptionAlgorithmsShouldBeSecure(),
+                new CS.EncryptionAlgorithmsShouldBeSecure(),
                 additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
-                new CSharp.EncryptionAlgorithmsShouldBeSecure(),
+                new CS.EncryptionAlgorithmsShouldBeSecure(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));
 #else
@@ -54,14 +54,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
-                new VisualBasic.EncryptionAlgorithmsShouldBeSecure(),
+                new VB.EncryptionAlgorithmsShouldBeSecure(),
                 additionalReferences: GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21() =>
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
-                new VisualBasic.EncryptionAlgorithmsShouldBeSecure(),
+                new VB.EncryptionAlgorithmsShouldBeSecure(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0.Concat(GetAdditionalReferences()));
 #else

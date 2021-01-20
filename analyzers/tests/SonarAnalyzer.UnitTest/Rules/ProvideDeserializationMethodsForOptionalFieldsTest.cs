@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,18 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ProvideDeserializationMethodsForOptionalFields_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.cs", new ProvideDeserializationMethodsForOptionalFields());
+            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.cs", new CS.ProvideDeserializationMethodsForOptionalFields());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ProvideDeserializationMethodsForOptionalFields_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ProvideDeserializationMethodsForOptionalFields.CSharp9.cs", new ProvideDeserializationMethodsForOptionalFields());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ProvideDeserializationMethodsForOptionalFields.CSharp9.cs", new CS.ProvideDeserializationMethodsForOptionalFields());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ProvideDeserializationMethodsForOptionalFields_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.vb", new SonarAnalyzer.Rules.VisualBasic.ProvideDeserializationMethodsForOptionalFields());
+            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.vb", new VB.ProvideDeserializationMethodsForOptionalFields());
     }
 }

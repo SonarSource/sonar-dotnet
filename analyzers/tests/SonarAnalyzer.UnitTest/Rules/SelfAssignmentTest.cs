@@ -20,6 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -28,18 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SelfAssignment_CSharp()
-        {
+        public void SelfAssignment_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.cs",
-                new SonarAnalyzer.Rules.CSharp.SelfAssignment(),
+                new CS.SelfAssignment(),
                 options: ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SelfAssignment_VisualBasic()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.vb", new SonarAnalyzer.Rules.VisualBasic.SelfAssignment());
-        }
+        public void SelfAssignment_VisualBasic() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.vb", new VB.SelfAssignment());
     }
 }

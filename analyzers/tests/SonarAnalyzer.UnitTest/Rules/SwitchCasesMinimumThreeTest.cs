@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,18 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchCasesMinimumThree_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.cs", new SwitchCasesMinimumThree(), ParseOptionsHelper.FromCSharp8);
-        }
+        public void SwitchCasesMinimumThree_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.cs", new CS.SwitchCasesMinimumThree(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchCasesMinimumThree_VB()
-        {
+        public void SwitchCasesMinimumThree_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.vb",
-                new SonarAnalyzer.Rules.VisualBasic.SwitchCasesMinimumThree());
-        }
+                new VB.SwitchCasesMinimumThree());
     }
 }
-

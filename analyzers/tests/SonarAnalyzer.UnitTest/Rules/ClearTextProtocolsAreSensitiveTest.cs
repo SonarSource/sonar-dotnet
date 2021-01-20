@@ -23,9 +23,9 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ClearTextProtocolsAreSensitive() =>
             Verifier.VerifyAnalyzer(@"TestCases\ClearTextProtocolsAreSensitive.cs",
-                                    new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CS.ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     additionalReferences: GetAdditionalReferences());
 
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ControllingPermissions_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ClearTextProtocolsAreSensitive.cs",
-                                           new ClearTextProtocolsAreSensitive(),
+                                           new CS.ClearTextProtocolsAreSensitive(),
                                            ParseOptionsHelper.FromCSharp8,
                                            additionalReferences: GetAdditionalReferences());
 
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClearTextProtocolsAreSensitive.CSharp9.cs",
-                                                      new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
+                                                      new CS.ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                                                       GetAdditionalReferences());
 #endif
 

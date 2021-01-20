@@ -18,14 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-
+using CS = SonarAnalyzer.Rules.CSharp;
 using RoslynCS = Microsoft.CodeAnalysis.CSharp;
 using RoslynVB = Microsoft.CodeAnalysis.VisualBasic;
-using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -35,41 +32,32 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NameOfShouldBeUsed_FromCSharp6()
-        {
+        public void NameOfShouldBeUsed_FromCSharp6() =>
             Verifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.cs",
                 new CS.NameOfShouldBeUsed(),
                 ParseOptionsHelper.FromCSharp6);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NameOfShouldBeUsed_CSharp5()
-        {
+        public void NameOfShouldBeUsed_CSharp5() =>
             Verifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.cs",
                 new CS.NameOfShouldBeUsed(),
                 new[] { new RoslynCS.CSharpParseOptions(RoslynCS.LanguageVersion.CSharp5) },
                 CompilationErrorBehavior.Ignore);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NameOfShouldBeUsed_FromVB14()
-        {
+        public void NameOfShouldBeUsed_FromVB14() =>
             Verifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.vb",
                 new VB.NameOfShouldBeUsed(),
                 ParseOptionsHelper.FromVisualBasic14);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NameOfShouldBeUsed_VB12()
-        {
+        public void NameOfShouldBeUsed_VB12() =>
             Verifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.vb",
                 new VB.NameOfShouldBeUsed(),
                 new[] { new RoslynVB.VisualBasicParseOptions(RoslynVB.LanguageVersion.VisualBasic12) },
                 CompilationErrorBehavior.Ignore);
-        }
     }
 }
-

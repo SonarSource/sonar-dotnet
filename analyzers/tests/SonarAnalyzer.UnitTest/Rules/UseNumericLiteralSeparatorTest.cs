@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UseNumericLiteralSeparator_BeforeCSharp7() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UseNumericLiteralSeparator.cs",
-                                           new UseNumericLiteralSeparator(),
+                                           new CS.UseNumericLiteralSeparator(),
                                            ParseOptionsHelper.BeforeCSharp7,
                                            CompilationErrorBehavior.Ignore);
 
@@ -40,14 +39,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UseNumericLiteralSeparator_FromCSharp7() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseNumericLiteralSeparator.cs",
-                                    new UseNumericLiteralSeparator(),
+                                    new CS.UseNumericLiteralSeparator(),
                                     ParseOptionsHelper.FromCSharp7);
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void UseNumericLiteralSeparator_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseNumericLiteralSeparator.CSharp9.cs", new UseNumericLiteralSeparator());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UseNumericLiteralSeparator.CSharp9.cs", new CS.UseNumericLiteralSeparator());
 #endif
     }
 }

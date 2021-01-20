@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,20 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLast() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLast.cs", new CallerInformationParametersShouldBeLast());
+            Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLast.cs", new CS.CallerInformationParametersShouldBeLast());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLast_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs", new CallerInformationParametersShouldBeLast());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CallerInformationParametersShouldBeLast.CSharp9.cs", new CS.CallerInformationParametersShouldBeLast());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CallerInformationParametersShouldBeLastInvalidSyntax.cs",
-                new CallerInformationParametersShouldBeLast(),
+                new CS.CallerInformationParametersShouldBeLast(),
                 checkMode: CompilationErrorBehavior.Ignore);
     }
 }

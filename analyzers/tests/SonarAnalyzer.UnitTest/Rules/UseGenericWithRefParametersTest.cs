@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseGenericWithRefParameters()
-        {
+        public void UseGenericWithRefParameters() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseGenericWithRefParameters.cs",
-                new UseGenericWithRefParameters());
-        }
+                new CS.UseGenericWithRefParameters());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UseGenericWithRefParameters_InvalidCode()
-        {
+        public void UseGenericWithRefParameters_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public void (ref object o1)
 {
-}", new UseGenericWithRefParameters(), checkMode: CompilationErrorBehavior.Ignore);
-        }
+}", new CS.UseGenericWithRefParameters(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

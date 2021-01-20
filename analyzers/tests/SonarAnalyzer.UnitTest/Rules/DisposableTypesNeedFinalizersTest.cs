@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableTypesNeedFinalizers() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new DisposableTypesNeedFinalizers());
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs", new CS.DisposableTypesNeedFinalizers());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisposableTypesNeedFinalizers_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DisposableTypesNeedFinalizers.CSharp9.cs", new DisposableTypesNeedFinalizers());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DisposableTypesNeedFinalizers.CSharp9.cs", new CS.DisposableTypesNeedFinalizers());
 #endif
 
         [TestMethod]
@@ -47,6 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 public class Foo_05 : IDisposable
 {
     private HandleRef;
-}", new DisposableTypesNeedFinalizers(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.DisposableTypesNeedFinalizers(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

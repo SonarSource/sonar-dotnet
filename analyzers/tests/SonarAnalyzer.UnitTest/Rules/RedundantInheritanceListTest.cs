@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantInheritanceList() => Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.cs", new RedundantInheritanceList());
+        public void RedundantInheritanceList() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantInheritanceList.cs", new CS.RedundantInheritanceList());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantInheritanceList_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantInheritanceList.CSharp9.cs", new RedundantInheritanceList());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantInheritanceList.CSharp9.cs", new CS.RedundantInheritanceList());
 #endif
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantInheritanceList_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantInheritanceList.cs",
                                    @"TestCases\RedundantInheritanceList.Fixed.cs",
-                                   new RedundantInheritanceList(),
-                                   new RedundantInheritanceListCodeFixProvider());
+                                   new CS.RedundantInheritanceList(),
+                                   new CS.RedundantInheritanceListCodeFixProvider());
     }
 }

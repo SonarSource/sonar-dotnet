@@ -20,6 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExpressionComplexity_CSharp() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
-                new SonarAnalyzer.Rules.CSharp.ExpressionComplexity { Maximum = 3},
+                new CS.ExpressionComplexity { Maximum = 3},
                 options: ParseOptionsHelper.FromCSharp8);
 
 #if NET
@@ -38,13 +40,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExpressionComplexity_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ExpressionComplexity.CSharp9.cs",
-                new SonarAnalyzer.Rules.CSharp.ExpressionComplexity { Maximum = 3});
+                new CS.ExpressionComplexity { Maximum = 3});
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpressionComplexity_VisualBasic() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ExpressionComplexity { Maximum = 3 });
+                new VB.ExpressionComplexity { Maximum = 3 });
     }
 }

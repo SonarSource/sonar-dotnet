@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -27,8 +25,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -39,28 +37,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.cs",
-                new CSharp.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.cs",
-                new CSharp.DeliveringDebugFeaturesInProduction(),
+                new CS.DeliveringDebugFeaturesInProduction(),
                 additionalReferences: AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.vb",
-                new VisualBasic.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.vb",
-                new VisualBasic.DeliveringDebugFeaturesInProduction(),
+                new VB.DeliveringDebugFeaturesInProduction(),
                 additionalReferences: AdditionalReferencesNetCore2);
 
 #if NET
@@ -69,14 +67,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore3.cs",
-                new CSharp.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferencesNetCore3);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore3.vb",
-                new VisualBasic.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
+                new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferencesNetCore3);
 
         internal static IEnumerable<MetadataReference> AdditionalReferencesNetCore3 =>

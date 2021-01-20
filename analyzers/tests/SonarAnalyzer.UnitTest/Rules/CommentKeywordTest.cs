@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,34 +30,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommentTodo_CS()
-        {
+        public void CommentTodo_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CommentTodo.cs",
-                new CSharp.CommentKeyword());
-        }
+                new CS.CommentKeyword());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommentFixme_CS()
-        {
+        public void CommentFixme_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CommentFixme.cs",
-                new CSharp.CommentKeyword());
-        }
+                new CS.CommentKeyword());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommentTodo_VB()
-        {
+        public void CommentTodo_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CommentTodo.vb",
-                new VisualBasic.CommentKeyword());
-        }
+                new VB.CommentKeyword());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommentFixme_VB()
-        {
+        public void CommentFixme_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CommentFixme.vb",
-                new VisualBasic.CommentKeyword());
-        }
+                new VB.CommentKeyword());
     }
 }

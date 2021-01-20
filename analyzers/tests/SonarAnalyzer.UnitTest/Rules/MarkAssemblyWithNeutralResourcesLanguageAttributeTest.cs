@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,25 +31,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenResxAndAttribute_DoesntThrow()
-        {
+        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenResxAndAttribute_DoesntThrow() =>
             Verifier.VerifyAnalyzer(
                 new[]
                 {
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
                     @"ResourceTests\SomeResources.Designer.cs"
                 },
-                new MarkAssemblyWithNeutralResourcesLanguageAttribute());
-        }
+                new CS.MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenAttributeButNoResx_DoesntThrow()
-        {
+        public void MarkAssemblyWithNeutralResourcesLanguageAttribute_WhenAttributeButNoResx_DoesntThrow() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttribute.cs",
-                new MarkAssemblyWithNeutralResourcesLanguageAttribute());
-        }
+                new CS.MarkAssemblyWithNeutralResourcesLanguageAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -61,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 {
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs",
                     @"ResourceTests\SomeResources.Designer.cs"
-                }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
+                }, new CS.MarkAssemblyWithNeutralResourcesLanguageAttribute());
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
                 "CSharp*: Unexpected primary issue on line 1, span (0,0)-(0,0) with message 'Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.'." + Environment.NewLine +
                 "See output to see all actual diagnostics raised on the file");

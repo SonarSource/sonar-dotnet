@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,33 +32,27 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion)
-        {
+        public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
-                new DoNotUseLiteralBoolInAssertions(),
+                new CS.DoNotUseLiteralBoolInAssertions(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
-        }
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion)
-        {
+        public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.NUnit.cs",
-                new DoNotUseLiteralBoolInAssertions(),
+                new CS.DoNotUseLiteralBoolInAssertions(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
-        }
 
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion)
-        {
+        public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.Xunit.cs",
-                new DoNotUseLiteralBoolInAssertions(),
+                new CS.DoNotUseLiteralBoolInAssertions(),
                 additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion));
-        }
     }
 }

@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantPropertyNamesInAnonymousClass()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantPropertyNamesInAnonymousClass.cs", new RedundantPropertyNamesInAnonymousClass());
-        }
+        public void RedundantPropertyNamesInAnonymousClass() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantPropertyNamesInAnonymousClass.cs", new CS.RedundantPropertyNamesInAnonymousClass());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void RedundantPropertyNamesInAnonymousClass_CodeFix()
-        {
+        public void RedundantPropertyNamesInAnonymousClass_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\RedundantPropertyNamesInAnonymousClass.cs",
                 @"TestCases\RedundantPropertyNamesInAnonymousClass.Fixed.cs",
-                new RedundantPropertyNamesInAnonymousClass(),
-                new RedundantPropertyNamesInAnonymousClassCodeFixProvider());
-        }
+                new CS.RedundantPropertyNamesInAnonymousClass(),
+                new CS.RedundantPropertyNamesInAnonymousClassCodeFixProvider());
     }
 }

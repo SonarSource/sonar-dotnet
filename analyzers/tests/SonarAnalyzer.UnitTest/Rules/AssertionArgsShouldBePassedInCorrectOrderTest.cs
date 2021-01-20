@@ -18,13 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
 using System.Linq;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,35 +33,29 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion)
-        {
+        public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs",
-                new AssertionArgsShouldBePassedInCorrectOrder(),
+                new CS.AssertionArgsShouldBePassedInCorrectOrder(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion).ToArray());
-        }
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion)
-        {
+        public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs",
-                new AssertionArgsShouldBePassedInCorrectOrder(),
+                new CS.AssertionArgsShouldBePassedInCorrectOrder(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion).ToArray());
-        }
 
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion)
-        {
+        public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs",
-                new AssertionArgsShouldBePassedInCorrectOrder(),
+                new CS.AssertionArgsShouldBePassedInCorrectOrder(),
                 additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion)
                     .Concat(NetStandardMetadataReference.Netstandard)
                     .ToArray());
-        }
     }
 }

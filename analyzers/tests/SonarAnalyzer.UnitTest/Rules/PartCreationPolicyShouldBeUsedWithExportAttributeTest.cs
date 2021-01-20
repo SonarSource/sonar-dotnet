@@ -21,8 +21,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using csharp = SonarAnalyzer.Rules.CSharp;
-using vbnet = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
-                                    new csharp.PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                                    new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                     additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
 
 #if NET
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs",
-                                    new csharp.PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                                    new CS.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                     MetadataReferenceFacade.SystemComponentModelComposition);
 #endif
 
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
-                                    new vbnet.PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                                    new VB.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                                     additionalReferences: MetadataReferenceFacade.SystemComponentModelComposition);
     }
 }

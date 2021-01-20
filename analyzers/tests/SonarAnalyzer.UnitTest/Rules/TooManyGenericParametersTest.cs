@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,19 +30,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyGenericParameters_DefaultValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyGenericParameters_DefaultValues.cs", new TooManyGenericParameters());
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyGenericParameters_DefaultValues.cs", new CS.TooManyGenericParameters());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyGenericParameters_CustomValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\TooManyGenericParameters_CustomValues.cs",
-                new TooManyGenericParameters { MaxNumberOfGenericParametersInClass = 4, MaxNumberOfGenericParametersInMethod = 4 });
+                new CS.TooManyGenericParameters { MaxNumberOfGenericParametersInClass = 4, MaxNumberOfGenericParametersInMethod = 4 });
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void TooManyGenericParameters_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyGenericParameters.CSharp9.cs", new TooManyGenericParameters());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\TooManyGenericParameters.CSharp9.cs", new CS.TooManyGenericParameters());
 #endif
     }
 }

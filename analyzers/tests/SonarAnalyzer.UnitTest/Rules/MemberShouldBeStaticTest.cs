@@ -18,14 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
 using System.Collections.Immutable;
 using System.Linq;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -38,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.cs",
-                new MemberShouldBeStatic(),
+                new CS.MemberShouldBeStatic(),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
                     .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
@@ -50,14 +48,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldBeStatic_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new MemberShouldBeStatic());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\MemberShouldBeStatic.CSharp9.cs", new CS.MemberShouldBeStatic());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MemberShouldBeStatic_CSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.CSharp8.cs",
-                new MemberShouldBeStatic(),
+                new CS.MemberShouldBeStatic(),
 #if NETFRAMEWORK
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
@@ -74,7 +72,7 @@ public class HttpApplication1 : System.Web.HttpApplication
 
     protected int FooFoo() => 0; // Noncompliant
 }",
-                new MemberShouldBeStatic(),
+                new CS.MemberShouldBeStatic(),
                 checkMode: CompilationErrorBehavior.Ignore);
 #endif
 
@@ -91,6 +89,6 @@ public class Class7
         result = await f();
         return result;
     }
-}", new MemberShouldBeStatic(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.MemberShouldBeStatic(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

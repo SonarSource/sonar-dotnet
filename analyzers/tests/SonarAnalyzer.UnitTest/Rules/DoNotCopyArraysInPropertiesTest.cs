@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCopyArraysInProperties() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCopyArraysInProperties.cs", new DoNotCopyArraysInProperties());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCopyArraysInProperties.cs", new CS.DoNotCopyArraysInProperties());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCopyArraysInProperties_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotCopyArraysInProperties.CSharp9.cs", new DoNotCopyArraysInProperties());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DoNotCopyArraysInProperties.CSharp9.cs", new CS.DoNotCopyArraysInProperties());
 #endif
     }
 }

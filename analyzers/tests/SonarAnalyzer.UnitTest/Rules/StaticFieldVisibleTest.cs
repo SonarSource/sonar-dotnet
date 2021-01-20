@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void StaticFieldVisible() => Verifier.VerifyAnalyzer(@"TestCases\StaticFieldVisible.cs", new StaticFieldVisible());
+        public void StaticFieldVisible() =>
+            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldVisible.cs", new CS.StaticFieldVisible());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void StaticFieldVisible_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldVisible.CSharp9.cs", new StaticFieldVisible());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\StaticFieldVisible.CSharp9.cs", new CS.StaticFieldVisible());
 #endif
     }
 }

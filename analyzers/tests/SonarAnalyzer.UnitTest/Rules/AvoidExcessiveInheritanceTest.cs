@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,34 +31,34 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_DefaultValues() =>
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_DefaultValues.cs",
-                new AvoidExcessiveInheritance());
+                new CS.AvoidExcessiveInheritance());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_DefaultValues_Records() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveInheritance_DefaultValues.Records.cs",
-                new AvoidExcessiveInheritance());
+                new CS.AvoidExcessiveInheritance());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_CustomValuesFullyNamedFilteredClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
-                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.SecondSubClass" });
+                new CS.AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.SecondSubClass" });
 
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredClass() =>
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
-                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubClass" });
+                new CS.AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubClass" });
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredRecord() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AvoidExcessiveInheritance_CustomValues.Records.cs",
-                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubRecord" });
+                new CS.AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubRecord" });
 #endif
     }
 }

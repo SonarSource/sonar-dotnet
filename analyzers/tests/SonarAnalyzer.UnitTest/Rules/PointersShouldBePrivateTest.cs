@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PointersShouldBePrivate() => Verifier.VerifyAnalyzer(@"TestCases\PointersShouldBePrivate.cs", new PointersShouldBePrivate());
+        public void PointersShouldBePrivate() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PointersShouldBePrivate.cs", new CS.PointersShouldBePrivate());
 
 #if NET // Function pointers are supported only by .Net 5 runtime
         [TestMethod]
         [TestCategory("Rule")]
         public void PointersShouldBePrivate_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PointersShouldBePrivate.CSharp9.cs", new PointersShouldBePrivate());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PointersShouldBePrivate.CSharp9.cs", new CS.PointersShouldBePrivate());
 #endif
     }
 }

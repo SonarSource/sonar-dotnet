@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,19 +30,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void AllBranchesShouldNotHaveSameImplementation_CS()
-        {
+        public void AllBranchesShouldNotHaveSameImplementation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.cs",
-                new CSharp.AllBranchesShouldNotHaveSameImplementation(),
+                new CS.AllBranchesShouldNotHaveSameImplementation(),
                 ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AllBranchesShouldNotHaveSameImplementation_VB()
-        {
+        public void AllBranchesShouldNotHaveSameImplementation_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.vb",
-                new VisualBasic.AllBranchesShouldNotHaveSameImplementation());
-        }
+                new VB.AllBranchesShouldNotHaveSameImplementation());
     }
 }

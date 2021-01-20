@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EqualityOnModulus() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EqualityOnModulus.cs", new EqualityOnModulus());
+            Verifier.VerifyAnalyzer(@"TestCases\EqualityOnModulus.cs", new CS.EqualityOnModulus());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EqualityOnModulus_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new EqualityOnModulus());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EqualityOnModulus.CSharp9.cs", new CS.EqualityOnModulus());
 #endif
     }
 }

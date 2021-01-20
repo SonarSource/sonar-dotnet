@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,11 +30,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PublicMutableFieldsShouldNotBeReadonly()
-        {
+        public void PublicMutableFieldsShouldNotBeReadonly() =>
             Verifier.VerifyAnalyzer(@"TestCases\MutableFieldsShouldNotBePublicReadonly.cs",
-                new MutableFieldsShouldNotBePublicReadonly(),
+                new CS.MutableFieldsShouldNotBePublicReadonly(),
                 additionalReferences: NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
-        }
     }
 }

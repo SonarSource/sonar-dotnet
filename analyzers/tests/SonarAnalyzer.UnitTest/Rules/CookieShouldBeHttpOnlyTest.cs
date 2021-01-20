@@ -18,13 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NET
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+#endif
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,21 +38,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CookiesShouldBeHttpOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly.cs",
-                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: MetadataReferenceFacade.SystemWeb);
 #else
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeHttpOnly_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly_NetCore.cs",
-                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_NetCore());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeHttpOnly_Net() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CookieShouldBeHttpOnly_Net.cs",
-                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled), GetAdditionalReferences_NetCore());
+                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled), GetAdditionalReferences_NetCore());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
@@ -60,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CookiesShouldBeHttpOnly_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly_Nancy.cs",
-                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.Nancy());
     }
 }

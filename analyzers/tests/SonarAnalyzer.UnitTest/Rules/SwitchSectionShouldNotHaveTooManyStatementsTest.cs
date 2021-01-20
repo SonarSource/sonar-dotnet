@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS=SonarAnalyzer.Rules.CSharp;
-using VB=SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,36 +30,27 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_CS()
-        {
+        public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.cs",
                 new CS.SwitchSectionShouldNotHaveTooManyStatements());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CS()
-        {
+        public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs",
                 new CS.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 },
                 ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_VB()
-        {
+        public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.vb",
                 new VB.SwitchSectionShouldNotHaveTooManyStatements());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_VB()
-        {
+        public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb",
                 new VB.SwitchSectionShouldNotHaveTooManyStatements() { Threshold = 1 });
-        }
     }
 }
-

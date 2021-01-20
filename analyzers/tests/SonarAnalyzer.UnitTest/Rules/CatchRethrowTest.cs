@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,29 +30,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CatchRethrow()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.cs", new CatchRethrow());
-        }
+        public void CatchRethrow() =>
+            Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.cs", new CS.CatchRethrow());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void CatchRethrow_CodeFix()
-        {
+        public void CatchRethrow_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\CatchRethrow.cs",
                 @"TestCases\CatchRethrow.Fixed.cs",
-                new CatchRethrow(),
-                new CatchRethrowCodeFixProvider());
-        }
+                new CS.CatchRethrow(),
+                new CS.CatchRethrowCodeFixProvider());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CatchRethrow_VB()
-        {
+        public void CatchRethrow_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.vb",
-                new SonarAnalyzer.Rules.VisualBasic.CatchRethrow());
-        }
+                new VB.CatchRethrow());
     }
 }
-

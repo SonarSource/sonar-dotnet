@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,20 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NegatedIsExpression()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\NegatedIsExpression.vb", new NegatedIsExpression());
-        }
+        public void NegatedIsExpression() =>
+            Verifier.VerifyAnalyzer(@"TestCases\NegatedIsExpression.vb", new VB.NegatedIsExpression());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void NegatedIsExpression_CodeFix()
-        {
+        public void NegatedIsExpression_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\NegatedIsExpression.vb",
                 @"TestCases\NegatedIsExpression.Fixed.vb",
-                new NegatedIsExpression(),
-                new NegatedIsExpressionCodeFixProvider());
-        }
+                new VB.NegatedIsExpression(),
+                new VB.NegatedIsExpressionCodeFixProvider());
     }
 }

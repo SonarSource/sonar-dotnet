@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,20 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassNotInstantiatable_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.cs", new ClassNotInstantiatable());
+            Verifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.cs", new CS.ClassNotInstantiatable());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassNotInstantiatable_CS_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ClassNotInstantiatable.CSharp9.cs", new ClassNotInstantiatable());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ClassNotInstantiatable.CSharp9.cs", new CS.ClassNotInstantiatable());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassNotInstantiatable_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.vb", new SonarAnalyzer.Rules.VisualBasic.ClassNotInstantiatable());
+            Verifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.vb", new VB.ClassNotInstantiatable());
     }
 }
-
-

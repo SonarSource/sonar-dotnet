@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GetHashCodeMutable() => Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs", new GetHashCodeMutable());
+        public void GetHashCodeMutable() =>
+            Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeMutable.cs", new CS.GetHashCodeMutable());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void GetHashCodeMutable_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeMutable.CSharp9.cs", new GetHashCodeMutable());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeMutable.CSharp9.cs", new CS.GetHashCodeMutable());
 #endif
 
         [TestMethod]
@@ -44,8 +44,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GetHashCodeMutable_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\GetHashCodeMutable.cs",
                                    @"TestCases\GetHashCodeMutable.Fixed.cs",
-                                   new GetHashCodeMutable(),
-                                   new GetHashCodeMutableCodeFixProvider());
+                                   new CS.GetHashCodeMutable(),
+                                   new CS.GetHashCodeMutableCodeFixProvider());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -57,6 +57,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         return i; // we don't report on this
     }
-}", new GetHashCodeMutable(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.GetHashCodeMutable(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

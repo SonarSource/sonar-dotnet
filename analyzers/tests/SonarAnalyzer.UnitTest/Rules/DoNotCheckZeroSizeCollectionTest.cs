@@ -20,6 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,20 +31,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCheckZeroSizeCollection() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs", new SonarAnalyzer.Rules.CSharp.DoNotCheckZeroSizeCollection());
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs", new CS.DoNotCheckZeroSizeCollection());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCheckZeroSizeCollection_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCheckZeroSizeCollection.CSharp9.cs", new SonarAnalyzer.Rules.CSharp.DoNotCheckZeroSizeCollection());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\DoNotCheckZeroSizeCollection.CSharp9.cs", new CS.DoNotCheckZeroSizeCollection());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotCheckZeroSizeCollection_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.vb",
-                new SonarAnalyzer.Rules.VisualBasic.DoNotCheckZeroSizeCollection());
+                new VB.DoNotCheckZeroSizeCollection());
     }
 }
-

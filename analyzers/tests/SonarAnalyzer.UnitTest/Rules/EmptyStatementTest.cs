@@ -18,11 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.TestFramework;
+#if NET
 using Microsoft.CodeAnalysis;
+#endif
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,13 +33,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyStatement() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new EmptyStatement());
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyStatement.cs", new CS.EmptyStatement());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyStatement_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new EmptyStatement());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyStatement.CSharp9.cs", new CS.EmptyStatement());
 #endif
 
         [TestMethod]
@@ -47,8 +48,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\EmptyStatement.cs",
                 @"TestCases\EmptyStatement.Fixed.cs",
-                new EmptyStatement(),
-                new EmptyStatementCodeFixProvider());
+                new CS.EmptyStatement(),
+                new CS.EmptyStatementCodeFixProvider());
 
 #if NET
         [TestMethod]
@@ -56,8 +57,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyStatement_CodeFix_CSharp9() =>
             Verifier.VerifyCodeFix(@"TestCases\EmptyStatement.CSharp9.cs",
                                    @"TestCases\EmptyStatement.CSharp9.Fixed.cs",
-                                   new EmptyStatement(),
-                                   new EmptyStatementCodeFixProvider(),
+                                   new CS.EmptyStatement(),
+                                   new CS.EmptyStatementCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp9,
                                    OutputKind.ConsoleApplication);
 #endif

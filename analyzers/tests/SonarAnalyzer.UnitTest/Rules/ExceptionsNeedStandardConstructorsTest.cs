@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,16 +29,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExceptionsNeedStandardConstructors()
-        {
+        public void ExceptionsNeedStandardConstructors() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionsNeedStandardConstructors.cs",
-                new ExceptionsNeedStandardConstructors());
-        }
+                new CS.ExceptionsNeedStandardConstructors());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExceptionsNeedStandardConstructors_InvalidCode()
-        {
+        public void ExceptionsNeedStandardConstructors_InvalidCode() =>
             Verifier.VerifyCSharpAnalyzer(@"
 public class  : Exception
 {
@@ -50,7 +46,6 @@ public class  : Exception
     My_07_Exception(string message, Exception innerException) {}
 
     My_07_Exception(SerializationInfo info, StreamingContext context) {}
-}", new ExceptionsNeedStandardConstructors(), checkMode: CompilationErrorBehavior.Ignore);
-        }
+}", new CS.ExceptionsNeedStandardConstructors(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
 using System.Collections.Immutable;
 using System.Linq;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UriShouldNotBeHardcoded_CSharp_General() =>
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.cs",
-                                    new UriShouldNotBeHardcoded());
+                                    new CS.UriShouldNotBeHardcoded());
 
 #if NETFRAMEWORK // HttpContext is available only when targeting .Net Framework
         [DataTestMethod]
@@ -45,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
-                                    new UriShouldNotBeHardcoded(),
+                                    new CS.UriShouldNotBeHardcoded(),
                                     additionalReferences: MetadataReferenceFacade.SystemWeb.Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion)));
 #endif
 
@@ -55,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNetCore.cs",
-                new UriShouldNotBeHardcoded(),
+                new CS.UriShouldNotBeHardcoded(),
                 additionalReferences:
                 // for VirtualFileResult
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion)
@@ -74,6 +73,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UriShouldNotBeHardcoded_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.vb",
-                                    new SonarAnalyzer.Rules.VisualBasic.UriShouldNotBeHardcoded());
+                                    new VB.UriShouldNotBeHardcoded());
     }
 }

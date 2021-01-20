@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs", new ImplementSerializationMethodsCorrectly());
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs", new CS.ImplementSerializationMethodsCorrectly());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_CS_FromCSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new ImplementSerializationMethodsCorrectly());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ImplementSerializationMethodsCorrectly.CSharp9.cs", new CS.ImplementSerializationMethodsCorrectly());
 #endif
 
         [TestMethod]
@@ -49,13 +49,11 @@ public class Foo
 {
     [OnDeserializing]
     public int  { throw new NotImplementedException(); }
-}", new ImplementSerializationMethodsCorrectly(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.ImplementSerializationMethodsCorrectly(), checkMode: CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new SonarAnalyzer.Rules.VisualBasic.ImplementSerializationMethodsCorrectly());
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb", new VB.ImplementSerializationMethodsCorrectly());
     }
 }
-
-

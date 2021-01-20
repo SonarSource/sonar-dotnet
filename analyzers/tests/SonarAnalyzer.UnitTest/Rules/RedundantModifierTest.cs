@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantModifier() => Verifier.VerifyAnalyzer(@"TestCases\RedundantModifier.cs", new RedundantModifier());
+        public void RedundantModifier() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantModifier.cs", new CS.RedundantModifier());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantModifier_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantModifier.CSharp9.cs", new RedundantModifier());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RedundantModifier.CSharp9.cs", new CS.RedundantModifier());
 #endif
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantModifier_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantModifier.cs",
                                    @"TestCases\RedundantModifier.Fixed.cs",
-                                   new RedundantModifier(),
-                                   new RedundantModifierCodeFixProvider());
+                                   new CS.RedundantModifier(),
+                                   new CS.RedundantModifierCodeFixProvider());
     }
 }

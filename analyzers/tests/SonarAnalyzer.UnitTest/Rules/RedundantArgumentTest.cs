@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundantArgument() =>
             Verifier.VerifyAnalyzer(@"TestCases\RedundantArgument.cs",
-                                    new RedundantArgument(),
+                                    new CS.RedundantArgument(),
 #if NETFRAMEWORK
                                     additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
 #endif
@@ -42,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantArgument_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantArgument.CSharp9.cs", new RedundantArgument());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantArgument.CSharp9.cs", new CS.RedundantArgument());
 #endif
 
         [TestMethod]
@@ -50,9 +49,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantArgument_CodeFix_No_Named_Arguments() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantArgument.cs",
                                    @"TestCases\RedundantArgument.NoNamed.Fixed.cs",
-                                   new RedundantArgument(),
-                                   new RedundantArgumentCodeFixProvider(),
-                                   RedundantArgumentCodeFixProvider.TitleRemove,
+                                   new CS.RedundantArgument(),
+                                   new CS.RedundantArgumentCodeFixProvider(),
+                                   CS.RedundantArgumentCodeFixProvider.TitleRemove,
                                    ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
@@ -60,9 +59,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantArgument_CodeFix_Named_Arguments() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantArgument.cs",
                                    @"TestCases\RedundantArgument.Named.Fixed.cs",
-                                   new RedundantArgument(),
-                                   new RedundantArgumentCodeFixProvider(),
-                                   RedundantArgumentCodeFixProvider.TitleRemoveWithNameAdditions,
+                                   new CS.RedundantArgument(),
+                                   new CS.RedundantArgumentCodeFixProvider(),
+                                   CS.RedundantArgumentCodeFixProvider.TitleRemoveWithNameAdditions,
                                    ParseOptionsHelper.FromCSharp8);
     }
 }

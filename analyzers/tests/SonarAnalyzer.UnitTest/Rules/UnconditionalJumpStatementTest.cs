@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +30,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnconditionalJumpStatement_CS()
-        {
+        public void UnconditionalJumpStatement_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.cs",
-                new UnconditionalJumpStatement(),
+                new CS.UnconditionalJumpStatement(),
                 ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnconditionalJumpStatement_VB()
-        {
+        public void UnconditionalJumpStatement_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.vb",
-                new SonarAnalyzer.Rules.VisualBasic.UnconditionalJumpStatement());
-        }
+                new VB.UnconditionalJumpStatement());
     }
 }
-

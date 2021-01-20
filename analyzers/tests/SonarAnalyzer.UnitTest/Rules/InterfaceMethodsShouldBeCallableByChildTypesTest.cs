@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InterfaceMethodsShouldBeCallableByChildTypes() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InterfaceMethodsShouldBeCallableByChildTypes.cs", new InterfaceMethodsShouldBeCallableByChildTypes());
+            Verifier.VerifyAnalyzer(@"TestCases\InterfaceMethodsShouldBeCallableByChildTypes.cs", new CS.InterfaceMethodsShouldBeCallableByChildTypes());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void InterfaceMethodsShouldBeCallableByChildTypes_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InterfaceMethodsShouldBeCallableByChildTypes.CSharp9.cs", new InterfaceMethodsShouldBeCallableByChildTypes());
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InterfaceMethodsShouldBeCallableByChildTypes.CSharp9.cs", new CS.InterfaceMethodsShouldBeCallableByChildTypes());
 #endif
     }
 }

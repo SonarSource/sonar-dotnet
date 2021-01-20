@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,13 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantConditionalAroundAssignment() => Verifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.cs", new RedundantConditionalAroundAssignment());
+        public void RedundantConditionalAroundAssignment() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantConditionalAroundAssignment.cs", new CS.RedundantConditionalAroundAssignment());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void RedundantConditionalAroundAssignment_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new RedundantConditionalAroundAssignment());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\RedundantConditionalAroundAssignment.CSharp9.cs", new CS.RedundantConditionalAroundAssignment());
 #endif
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantConditionalAroundAssignment_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\RedundantConditionalAroundAssignment.cs",
                                    @"TestCases\RedundantConditionalAroundAssignment.Fixed.cs",
-                                   new RedundantConditionalAroundAssignment(),
-                                   new RedundantConditionalAroundAssignmentCodeFixProvider());
+                                   new CS.RedundantConditionalAroundAssignment(),
+                                   new CS.RedundantConditionalAroundAssignmentCodeFixProvider());
     }
 }

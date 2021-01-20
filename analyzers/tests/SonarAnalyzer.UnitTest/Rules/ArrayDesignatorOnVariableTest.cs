@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,20 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ArrayDesignatorOnVariable()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ArrayDesignatorOnVariable.vb", new ArrayDesignatorOnVariable());
-        }
+        public void ArrayDesignatorOnVariable() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ArrayDesignatorOnVariable.vb", new VB.ArrayDesignatorOnVariable());
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void ArrayDesignatorOnVariable_CodeFix()
-        {
+        public void ArrayDesignatorOnVariable_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\ArrayDesignatorOnVariable.vb",
                 @"TestCases\ArrayDesignatorOnVariable.Fixed.vb",
-                new ArrayDesignatorOnVariable(),
-                new ArrayDesignatorOnVariableCodeFixProvider());
-        }
+                new VB.ArrayDesignatorOnVariable(),
+                new VB.ArrayDesignatorOnVariableCodeFixProvider());
     }
 }

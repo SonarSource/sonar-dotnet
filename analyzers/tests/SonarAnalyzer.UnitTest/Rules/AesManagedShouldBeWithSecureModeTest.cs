@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,14 +32,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void AesManagedShouldBeWithSecureMode() =>
             Verifier.VerifyAnalyzer(@"TestCases\AesManagedShouldBeWithSecureMode.cs",
-                                    new AesManagedShouldBeWithSecureMode(),
+                                    new CS.AesManagedShouldBeWithSecureMode(),
                                     additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void AesManagedShouldBeWithSecureMode_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\AesManagedShouldBeWithSecureMode.CSharp9.cs",
-                            new AesManagedShouldBeWithSecureMode(),
+                            new CS.AesManagedShouldBeWithSecureMode(),
                             MetadataReferenceFacade.SystemSecurityCryptography);
 #endif
     }

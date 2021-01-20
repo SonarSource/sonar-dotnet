@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,11 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithAssemblyVersionAttribute()
-        {
+        public void MarkAssemblyWithAssemblyVersionAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs",
-                new MarkAssemblyWithAssemblyVersionAttribute());
-        }
+                new CS.MarkAssemblyWithAssemblyVersionAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -44,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Action action = () => Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs",
-                new MarkAssemblyWithAssemblyVersionAttribute());
+                new CS.MarkAssemblyWithAssemblyVersionAttribute());
             action.Should()
                 .Throw<UnexpectedDiagnosticException>()
                 .WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");

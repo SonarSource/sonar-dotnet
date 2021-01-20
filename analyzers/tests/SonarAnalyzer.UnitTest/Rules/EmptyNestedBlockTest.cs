@@ -23,7 +23,6 @@ using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
@@ -31,17 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EmptyNestedBlock_CS()
-        {
+        public void EmptyNestedBlock_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyNestedBlock.cs", new CS.EmptyNestedBlock());
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EmptyNestedBlock_VB()
-        {
+        public void EmptyNestedBlock_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyNestedBlock.vb", new VB.EmptyNestedBlock());
-        }
     }
 }
-

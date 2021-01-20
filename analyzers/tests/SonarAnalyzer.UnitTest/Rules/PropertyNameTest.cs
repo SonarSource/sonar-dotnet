@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,9 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PropertyName()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\PropertyName.vb", new PropertyName());
-        }
+        public void PropertyName() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyName.vb", new VB.PropertyName());
     }
 }

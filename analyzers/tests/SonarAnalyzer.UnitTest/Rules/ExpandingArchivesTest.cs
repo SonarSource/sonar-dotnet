@@ -18,16 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -38,28 +36,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExpandingArchives_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.cs",
-                                    new CSharp.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
+                                    new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
                                     additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpandingArchives_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.cs",
-                                           new CSharp.ExpandingArchives(),
+                                           new CS.ExpandingArchives(),
                                            additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpandingArchives_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.vb",
-                                    new VisualBasic.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
+                                    new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
                                     additionalReferences: AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExpandingArchives_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.vb",
-                                           new VisualBasic.ExpandingArchives(),
+                                           new VB.ExpandingArchives(),
                                            additionalReferences: AdditionalReferences);
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>

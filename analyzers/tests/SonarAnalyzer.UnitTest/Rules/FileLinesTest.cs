@@ -20,6 +20,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void FileLines_CSharp()
         {
-            var diagnosticCs = new SonarAnalyzer.Rules.CSharp.FileLines { Maximum = 10 };
+            var diagnosticCs = new CS.FileLines { Maximum = 10 };
             Verifier.VerifyAnalyzer(@"TestCases\FileLines20.cs", diagnosticCs);
             Verifier.VerifyAnalyzer(@"TestCases\FileLines9.cs", diagnosticCs);
         }
@@ -39,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void FileLines_VBNet()
         {
-            var diagnosticVb = new SonarAnalyzer.Rules.VisualBasic.FileLines { Maximum = 10 };
+            var diagnosticVb = new VB.FileLines { Maximum = 10 };
             Verifier.VerifyAnalyzer(@"TestCases\FileLines20.vb", diagnosticVb);
             Verifier.VerifyAnalyzer(@"TestCases\FileLines9.vb", diagnosticVb);
         }

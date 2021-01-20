@@ -18,11 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.TestFramework;
+#if NET
 using Microsoft.CodeAnalysis;
+#endif
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,21 +34,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConditionalSimplification_BeforeCSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
-                                    new ConditionalSimplification(),
+                                    new CS.ConditionalSimplification(),
                                     ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalSimplification_FromCSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
-                                    new ConditionalSimplification(),
+                                    new CS.ConditionalSimplification(),
                                     ParseOptionsHelper.FromCSharp8);
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionalSimplification_FromCSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
-                                    new ConditionalSimplification());
+                                    new CS.ConditionalSimplification());
 #endif
 
         [TestMethod]
@@ -55,8 +56,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionalSimplification_BeforeCSharp8_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
                                    @"TestCases\ConditionalSimplification.BeforeCSharp8.Fixed.cs",
-                                   new ConditionalSimplification(),
-                                   new ConditionalSimplificationCodeFixProvider(),
+                                   new CS.ConditionalSimplification(),
+                                   new CS.ConditionalSimplificationCodeFixProvider(),
                                    ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
@@ -64,8 +65,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionalSimplification_FromCSharp8_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
                                    @"TestCases\ConditionalSimplification.FromCSharp8.Fixed.cs",
-                                   new ConditionalSimplification(),
-                                   new ConditionalSimplificationCodeFixProvider(),
+                                   new CS.ConditionalSimplification(),
+                                   new CS.ConditionalSimplificationCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp8);
 
 #if NET
@@ -74,8 +75,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionalSimplification_FromCSharp9_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\ConditionalSimplification.FromCSharp9.cs",
                                    @"TestCases\ConditionalSimplification.FromCSharp9.Fixed.cs",
-                                   new ConditionalSimplification(),
-                                   new ConditionalSimplificationCodeFixProvider(),
+                                   new CS.ConditionalSimplification(),
+                                   new CS.ConditionalSimplificationCodeFixProvider(),
                                    ParseOptionsHelper.FromCSharp9,
                                    OutputKind.ConsoleApplication);
 #endif

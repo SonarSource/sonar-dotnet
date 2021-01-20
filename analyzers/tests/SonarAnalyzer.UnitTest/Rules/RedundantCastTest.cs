@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,38 +30,31 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantCast()
-        {
+        public void RedundantCast() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\RedundantCast.cs",
-                new RedundantCast());
-        }
+                new CS.RedundantCast());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantCast_CSharp8()
-        {
+        public void RedundantCast_CSharp8() =>
             Verifier.VerifyAnalyzer(
                 @"TestCases\RedundantCast.CSharp8.cs",
-                new RedundantCast(),
+                new CS.RedundantCast(),
                 ParseOptionsHelper.FromCSharp8);
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void RedundantCast_CodeFix()
-        {
+        public void RedundantCast_CodeFix() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\RedundantCast.cs",
                 @"TestCases\RedundantCast.Fixed.cs",
-                new RedundantCast(),
-                new RedundantCastCodeFixProvider());
-        }
+                new CS.RedundantCast(),
+                new CS.RedundantCastCodeFixProvider());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantCast_DefaultLiteral()
-        {
+        public void RedundantCast_DefaultLiteral() =>
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 public static class MyClass
@@ -76,8 +68,7 @@ public static class MyClass
 
      public static T RunFunc<T>(Func<T> func, T returnValue = default) => returnValue;
 }",
-                new RedundantCast(),
+                new CS.RedundantCast(),
                 new[] { new CSharpParseOptions(LanguageVersion.CSharp7_1) });
-        }
     }
 }

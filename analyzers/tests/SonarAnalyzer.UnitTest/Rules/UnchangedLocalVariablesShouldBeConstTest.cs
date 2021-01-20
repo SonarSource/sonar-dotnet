@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,13 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UnchangedLocalVariablesShouldBeConst() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs", new UnchangedLocalVariablesShouldBeConst());
+            Verifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs", new CS.UnchangedLocalVariablesShouldBeConst());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void UnchangedLocalVariablesShouldBeConst_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp9.cs", new UnchangedLocalVariablesShouldBeConst());
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UnchangedLocalVariablesShouldBeConst.CSharp9.cs", new CS.UnchangedLocalVariablesShouldBeConst());
 #endif
 
         [TestMethod]
@@ -54,6 +53,6 @@ public void Test_TypeThatCannotBeConst(int arg)
 public void (int arg)
 {
     int intVar = 1; // Noncompliant
-}", new UnchangedLocalVariablesShouldBeConst(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.UnchangedLocalVariablesShouldBeConst(), checkMode: CompilationErrorBehavior.Ignore);
     }
 }

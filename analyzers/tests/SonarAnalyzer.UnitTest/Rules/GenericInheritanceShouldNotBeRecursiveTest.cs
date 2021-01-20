@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,22 +31,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericInheritanceShouldNotBeRecursive_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.cs", new GenericInheritanceShouldNotBeRecursive());
+            Verifier.VerifyAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.cs", new CS.GenericInheritanceShouldNotBeRecursive());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericInheritanceShouldNotBeRecursive_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GenericInheritanceShouldNotBeRecursive.CSharp9.cs",
-                                                      new GenericInheritanceShouldNotBeRecursive());
+                                                      new CS.GenericInheritanceShouldNotBeRecursive());
 #endif
 
         [TestMethod]
         [TestCategory("Rule")]
         public void GenericInheritanceShouldNotBeRecursive_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.vb",
-                                    new SonarAnalyzer.Rules.VisualBasic.GenericInheritanceShouldNotBeRecursive());
+                                    new VB.GenericInheritanceShouldNotBeRecursive());
     }
 }
-
-

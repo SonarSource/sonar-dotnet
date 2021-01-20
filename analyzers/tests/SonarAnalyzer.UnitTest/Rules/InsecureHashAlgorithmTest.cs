@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.TestFramework;
+#if NET
 using SonarAnalyzer.UnitTest.MetadataReferences;
+#endif
+using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,20 +35,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureHashAlgorithm_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureHashAlgorithm.NetFx.cs", new InsecureHashAlgorithm());
+            Verifier.VerifyAnalyzer(@"TestCases\InsecureHashAlgorithm.NetFx.cs", new CS.InsecureHashAlgorithm());
 
 #else
 
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureHashAlgorithm_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureHashAlgorithm.CSharp9.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.SystemSecurityCryptography);
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureHashAlgorithm.CSharp9.cs", new CS.InsecureHashAlgorithm(), MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void InsecureHashAlgorithm() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.cs", new InsecureHashAlgorithm(), MetadataReferenceFacade.SystemSecurityCryptography);
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureHashAlgorithm.cs", new CS.InsecureHashAlgorithm(), MetadataReferenceFacade.SystemSecurityCryptography);
 #endif
     }
 }
-

@@ -19,9 +19,9 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp = SonarAnalyzer.Rules.CSharp;
-using vbnet = SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,19 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ThreadResumeOrSuspendShouldNotBeCalled()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.cs",
-                new csharp.ThreadResumeOrSuspendShouldNotBeCalled());
-        }
+        public void ThreadResumeOrSuspendShouldNotBeCalled() => Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.cs",
+                new CS.ThreadResumeOrSuspendShouldNotBeCalled());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ThreadResumeOrSuspendShouldNotBeCalled_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.vb",
-                new vbnet.ThreadResumeOrSuspendShouldNotBeCalled());
-        }
+        public void ThreadResumeOrSuspendShouldNotBeCalled_VB() => Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.vb",
+                new VB.ThreadResumeOrSuspendShouldNotBeCalled());
     }
 }
-

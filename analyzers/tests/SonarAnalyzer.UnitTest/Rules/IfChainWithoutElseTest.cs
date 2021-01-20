@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,16 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void IfChainWithoutElse_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.cs", new CSharp.IfChainWithoutElse());
-        }
+        public void IfChainWithoutElse_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.cs", new CS.IfChainWithoutElse());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void IfChainWithoutElse_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.vb", new VisualBasic.IfChainWithoutElse());
-        }
+        public void IfChainWithoutElse_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.vb", new VB.IfChainWithoutElse());
     }
 }

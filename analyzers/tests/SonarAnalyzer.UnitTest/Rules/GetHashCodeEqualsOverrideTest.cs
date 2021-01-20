@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GetHashCodeEqualsOverride() =>
             Verifier.VerifyAnalyzer(@"TestCases\GetHashCodeEqualsOverride.cs",
-                                    new GetHashCodeEqualsOverride(),
+                                    new CS.GetHashCodeEqualsOverride(),
                                     additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
 
 #if NET
@@ -41,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GetHashCodeEqualsOverride_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\GetHashCodeEqualsOverride.CSharp9.cs",
-                                                      new GetHashCodeEqualsOverride(),
+                                                      new CS.GetHashCodeEqualsOverride(),
                                                       additionalReferences: MetadataReferenceFacade.SystemComponentModelPrimitives);
 #endif
     }
