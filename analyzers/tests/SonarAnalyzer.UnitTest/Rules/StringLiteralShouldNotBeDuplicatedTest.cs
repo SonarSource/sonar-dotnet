@@ -21,6 +21,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -41,7 +42,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void StringLiteralShouldNotBeDuplicated_Attributes() =>
+        public void StringLiteralShouldNotBeDuplicated_Attributes_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.cs", new CS.StringLiteralShouldNotBeDuplicated { Threshold = 2 });
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void StringLiteralShouldNotBeDuplicated_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.vb", new VB.StringLiteralShouldNotBeDuplicated());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void StringLiteralShouldNotBeDuplicated_Attributes_VB() =>
+           Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.vb", new VB.StringLiteralShouldNotBeDuplicated { Threshold = 2 });
     }
 }

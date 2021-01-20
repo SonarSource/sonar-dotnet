@@ -81,6 +81,31 @@ namespace Tests.Diagnostics
         }
     }
 
+    public struct OuterStruct
+    {
+        private string Name;
+        public OuterStruct(string s)
+        {
+            Name = "foobar"; // Noncompliant
+        }
+
+        private struct InnerStruct
+        {
+            private string name1;
+            private string name2;
+            private string name3;
+            private string name4;
+
+            public InnerStruct(string s)
+            {
+                name1 = "foobar"; // Secondary - inner struct count with base
+                name2 = "foobar"; // Secondary
+                name3 = "foobar"; // Secondary
+                name4 = "foobar"; // Secondary
+            }
+        }
+    }
+
     public class SpecialChar
     {
         // See https://github.com/SonarSource/sonar-dotnet/issues/2191

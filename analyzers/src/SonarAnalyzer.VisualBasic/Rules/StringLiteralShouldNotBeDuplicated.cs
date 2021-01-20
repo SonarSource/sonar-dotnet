@@ -22,17 +22,17 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class StringLiteralShouldNotBeDuplicated : ParameterLoadingDiagnosticAnalyzer
+    public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase
     {
         internal const string DiagnosticId = "S1192";
         private const string MessageFormat = "Define a constant instead of using this literal '{0}' {1} times.";
@@ -56,14 +56,14 @@ namespace SonarAnalyzer.Rules.CSharp
             // Hence the decision to do like other languages, at class-level
             context.RegisterSyntaxNodeActionInNonGenerated(
                 ReportOnViolation,
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration);
+                SyntaxKind.ClassBlock,
+                SyntaxKind.StructureBlock);
         }
 
         private void ReportOnViolation(SyntaxNodeAnalysisContext context)
         {
-            if (context.Node.Ancestors().OfType<ClassDeclarationSyntax>().Any()
-                || context.Node.Ancestors().OfType<StructDeclarationSyntax>().Any())
+            if (context.Node.Ancestors().OfType<ClassBlockSyntax>().Any()
+                || context.Node.Ancestors().OfType<StructureBlockSyntax>().Any())
             {
                 // Don't report on inner instances
                 return;
@@ -107,10 +107,10 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
-            literalExpression.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>()
-                ?.ParameterList
+            literalExpression.FirstAncestorOrSelf<MethodBlockBaseSyntax>()
+                ?.BlockStatement?.ParameterList
                 ?.Parameters
-                .Any(p => p.Identifier.ValueText == literalExpression.Token.ValueText)
+                .Any(p => p.Identifier.Identifier.ValueText == literalExpression.Token.ValueText)
                 ?? false;
 
         private static string ExtractStringContent(string literal)
