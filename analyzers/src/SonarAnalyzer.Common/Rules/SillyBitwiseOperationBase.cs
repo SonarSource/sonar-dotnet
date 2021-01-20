@@ -62,7 +62,13 @@ namespace SonarAnalyzer.Rules
 
         protected int? FindIntConstant(SemanticModel semanticModel, SyntaxNode node) =>
             FindConstant(semanticModel, node) is { } value
+            && !IsEnum(semanticModel, node)
                 ? ConversionHelper.TryConvertToInt(value)
                 : null;
+
+        private bool IsEnum(SemanticModel semanticModel, SyntaxNode node) =>
+            semanticModel.GetSymbolInfo(node).Symbol is IFieldSymbol field
+            && field.Type is INamedTypeSymbol type
+            && type.EnumUnderlyingType != null;
     }
 }

@@ -1,5 +1,12 @@
 ﻿Imports System
 
+Public Enum Types
+    [Class] = 0
+    Struct = 1
+    [Public] = 2
+    [Private] = 4
+End Enum
+
 Class SillyBitwiseOperation
 
     Public Sub Method()
@@ -35,6 +42,8 @@ Class SillyBitwiseOperation
 
         If True AndAlso True Then Return
         If True OrElse True Then Return
+
+        Dim Flags As Types = Types.Class Or Types.Private   ' Compliant even when Class Is zero
     End Sub
 
     Private Shared Function ReturnLong() As Long
