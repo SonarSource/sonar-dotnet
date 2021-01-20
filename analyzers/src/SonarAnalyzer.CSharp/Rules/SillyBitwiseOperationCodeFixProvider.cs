@@ -19,47 +19,24 @@
  */
 
 using System;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
+using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class SillyBitwiseOperationCodeFixProvider : SonarCodeFixProvider
+    public sealed class SillyBitwiseOperationCodeFixProvider : SillyBitwiseOperationCodeFixProviderBase
     {
-        internal const string Title = "Remove bitwise operation";
-
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SillyBitwiseOperationBase.DiagnosticId);
-
-        public override FixAllProvider GetFixAllProvider() =>
-            DocumentBasedFixAllProvider.Instance;
-
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
-        {
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var isReportingOnLeft = diagnostic.Properties.ContainsKey(SillyBitwiseOperationBase.IsReportingOnLeftKey)
-                && bool.Parse(diagnostic.Properties[SillyBitwiseOperationBase.IsReportingOnLeftKey]);
-            Func<SyntaxNode> createNewRoot = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) switch
+        protected override Func<SyntaxNode> CreateNewRoot(SyntaxNode root, TextSpan diagnosticSpan, bool isReportingOnLeft) =>
+            root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) switch
             {
                 StatementSyntax statement => () => root.RemoveNode(statement, SyntaxRemoveOptions.KeepNoTrivia),
                 AssignmentExpressionSyntax assignment => () => root.ReplaceNode(assignment, assignment.Left.WithAdditionalAnnotations(Formatter.Annotation)),
                 BinaryExpressionSyntax binary => () => root.ReplaceNode(binary, (isReportingOnLeft ? binary.Right : binary.Left).WithAdditionalAnnotations(Formatter.Annotation)),
                 _ => null
             };
-            if (createNewRoot != null)
-            {
-                context.RegisterCodeFix(CodeAction.Create(Title, c => Task.FromResult(context.Document.WithSyntaxRoot(createNewRoot()))), context.Diagnostics);
-            }
-            return TaskHelper.CompletedTask;
-        }
     }
 }

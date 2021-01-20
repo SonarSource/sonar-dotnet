@@ -1,4 +1,6 @@
-﻿Class SillyBitwiseOperation
+﻿Imports System
+
+Class SillyBitwiseOperation
 
     Public Sub Method()
         Dim Result As Integer
@@ -9,7 +11,7 @@
         Result = BitMask ' Fixed
         Result = BitMask   ' Fixed
         Result = BitMask  ' Fixed
-        Result = BitMask  ' Fixed {{Remove this silly bit operation.}}
+        Result = BitMask  ' Fixed
         Result = BitMask   ' Fixed
 
         Result = BitMask And 1  ' Compliant

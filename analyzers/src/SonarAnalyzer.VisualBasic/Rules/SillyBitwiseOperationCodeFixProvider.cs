@@ -18,23 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using System.Linq;
-using System.Threading.Tasks;
+using System;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
+using Microsoft.CodeAnalysis.Text;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public sealed class SillyBitwiseOperationCodeFixProvider : SonarCodeFixProvider
+    public sealed class SillyBitwiseOperationCodeFixProvider : SillyBitwiseOperationCodeFixProviderBase
     {
-        public override ImmutableArray<string> FixableDiagnosticIds => throw new System.NotImplementedException();
-
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context) => throw new System.NotImplementedException();
+        protected override Func<SyntaxNode> CreateNewRoot(SyntaxNode root, TextSpan diagnosticSpan, bool isReportingOnLeft)
+        {
+            if (root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is BinaryExpressionSyntax binary)
+            {
+                var newNode = isReportingOnLeft ? binary.Right : binary.Left;
+                return () => root.ReplaceNode(binary, newNode.WithTrailingTrivia(binary.GetTrailingTrivia()).WithAdditionalAnnotations(Formatter.Annotation));
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
