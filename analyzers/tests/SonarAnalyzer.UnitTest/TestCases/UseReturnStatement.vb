@@ -1,21 +1,25 @@
 ﻿Public Class Implicit_return_statements_are_noncompliant
     Public Function Assigned_return_value_only() As Integer
-        Assigned_return_value_only = 42 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
-'       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        Assigned_return_value_only = 42 ' Noncompliant ^9#26
     End Function
 
-    Public Function Explictly_return_default_return_value() As Integer
-        Explictly_return_default_return_value = 42  ' Noncompliant
-        Return Explictly_return_default_return_value ' Noncompliant
+    Public Function explictly_return_default_return_value() As Integer
+        explictly_return_default_return_value = 42  ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+        Return explictly_return_default_return_value ' Noncompliant {{Do not make use of the implicit return value.}}
     End Function
 
-    Public Function Case_insensitive() As Integer
+    Public Function case_insensitive() As Integer
         CASE_INSENSITIVE = 42  ' Noncompliant
     End Function
 
     Public Shared Function Static_function() As Integer
         Static_function = 42  ' Noncompliant
     End Function
+	
+	Public Function read_return_value_only() As Integer
+		dim value = read_return_value_only ' Noncompliant {{Do not make use of the implicit return value.}}
+		return value
+	End Function
 
 End Class
 
@@ -35,25 +39,44 @@ Public Class Does_not_apply_on
             Return recursive_function_calls(42) ' Compliant, method call
         End If
     End Function
-
-    Public Function call_to_other_function(other As OtherType) As Integer
+	
+	Public Function call_to_other_property(other As OtherType) As Integer
         With other
-            Return .call_to_other_function ' Compliant
+            Return .call_to_other_property ' Compliant
         End With
     End Function
 
-    Public Function call_to_other_property() As OtherType
+    Public Function call_to_other_function(other As OtherType) As Integer
+        With other
+            Return .call_to_other_function() ' Compliant
+        End With
+    End Function
+
+    Public Function write_to_other_property() As OtherType
         Return New OtherType With
         {
-            .call_to_other_property = 69 ' Compliant
+            .write_to_other_property = 69 ' Compliant
         }
     End Function
+	
+	Public Function write_to_other_function(other As OtherType) As Integer
+        With other
+            Return .write_to_other_function(42)
+        End With
+    End Function
+	
 End Class
 
 Public Class OtherType
     Public Property call_to_other_property As Integer
+	
+	Public Property write_to_other_property As Integer
 
     Public Function call_to_other_function() As Integer
         Return 42
+    End Function
+	
+	Public Function write_to_other_function(number as Integer) As Integer
+        Return number
     End Function
 End Class

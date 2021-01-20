@@ -43,39 +43,50 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var method = (MethodStatementSyntax)((MethodBlockSyntax)c.Node).BlockStatement;
-                var walker = new Identifierswalker(method.Identifier.ValueText);
-                walker.SafeVisit(c.Node);
-                foreach (var location in walker.Locations)
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
-                }
+                new Identifierswalker(c, method.Identifier.ValueText).SafeVisit(c.Node);
             },
             SyntaxKind.FunctionBlock);
 
         private class Identifierswalker : VisualBasicSyntaxWalker
         {
-            public ICollection<Location> Locations { get; } = new List<Location>();
-
+            private SyntaxNodeAnalysisContext Context { get; }
             private string Name { get; }
 
-            public Identifierswalker(string name) => Name = name;
+            public Identifierswalker(SyntaxNodeAnalysisContext context, string name)
+            {
+                Context = context;
+                Name = name;
+            }
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
             {
-                if (IsImplictReturnStatement(node))
+                if (IsImplicitReturnValue(node))
                 {
-                    Locations.Add(node.GetLocation());
+                    if (NoAssignment(node))
+                    {
+                        // TODO: find the best way to do this.
+                        var rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "Do not make use of the implicit return value.", RspecStrings.ResourceManager);
+                        Context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                    }
+                    else
+                    {
+                        Context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+                    }
                 }
             }
 
             private static bool IsExcluded(SyntaxNode node) =>
-               node is InvocationExpressionSyntax
-               || node is MemberAccessExpressionSyntax
-               || node is NamedFieldInitializerSyntax;
+               node.Parent is InvocationExpressionSyntax
+               || node.Parent is MemberAccessExpressionSyntax
+               || node.Parent is NamedFieldInitializerSyntax;
 
-            private bool IsImplictReturnStatement(IdentifierNameSyntax node) =>
+            private bool IsImplicitReturnValue(IdentifierNameSyntax node) =>
                 Name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase)
-                && !IsExcluded(node.Parent);
+                && !IsExcluded(node);
+
+            private bool NoAssignment(SyntaxNode node) =>
+                node.Parent is ReturnStatementSyntax
+                || node.Parent is EqualsValueSyntax;
         }
     }
 }
