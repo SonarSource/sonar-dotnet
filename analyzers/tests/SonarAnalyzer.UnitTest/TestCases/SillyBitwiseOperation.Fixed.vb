@@ -2,16 +2,20 @@
 
     Public Sub Method()
         Dim Result As Integer
+        Dim Zero As Integer = 0
+        Dim One As Integer = 1
         Dim BitMask As Integer = &H10F
 
         Result = BitMask ' Fixed
         Result = BitMask   ' Fixed
         Result = BitMask  ' Fixed
         Result = BitMask  ' Fixed {{Remove this silly bit operation.}}
+        Result = BitMask   ' Fixed
 
         Result = BitMask And 1  ' Compliant
-        Result = BitMask Or 1   ' compliant
+        Result = BitMask Or 1   ' Compliant
         Result = BitMask Xor 1  ' Compliant
+        Result = BitMask Xor One    ' Compliant
 
         Dim BitMaskLong As Long = &H10F
         Dim ResultLong As Long

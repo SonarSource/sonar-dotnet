@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,8 +31,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class SillyBitwiseOperation : SillyBitwiseOperationBase
     {
-        internal const string IsReportingOnLeftKey = "IsReportingOnLeft";
-
         public SillyBitwiseOperation() : base(RspecStrings.ResourceManager) { }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -57,10 +54,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ExclusiveOrAssignmentExpression);
         }
 
+        protected override object FindConstant(SemanticModel semanticModel, SyntaxNode node) =>
+            node.FindConstantValue(semanticModel);
+
         private void CheckAssignment(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
-            if (ExpressionNumericConverter.TryGetConstantIntValue(assignment.Right, out var constValue) && constValue == constValueToLookFor)
+            if (FindIntConstant(context.SemanticModel, assignment.Right) is int constValue && constValue == constValueToLookFor)
             {
                 var location = assignment.Parent is StatementSyntax
                     ? assignment.Parent.GetLocation()
@@ -71,24 +71,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckBinary(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {
-            var binary = (BinaryExpressionSyntax) context.Node;
-            Location location;
-            bool isReportingOnLeftKey;
-            if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var constValue) && constValue == constValueToLookFor)
-            {
-                location = binary.Left.CreateLocation(binary.OperatorToken);
-                isReportingOnLeftKey = true;
-            }
-            else if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Right, out constValue) && constValue == constValueToLookFor)
-            {
-                location = binary.OperatorToken.CreateLocation(binary.Right);
-                isReportingOnLeftKey = false;
-            }
-            else
-            {
-                return;
-            }
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
+            var binary = (BinaryExpressionSyntax)context.Node;
+            CheckBinary(context, binary.Left, binary.OperatorToken, binary.Right, constValueToLookFor);
         }
     }
 }

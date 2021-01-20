@@ -46,7 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var isReportingOnLeft = diagnostic.Properties.ContainsKey(SillyBitwiseOperation.IsReportingOnLeftKey) && bool.Parse(diagnostic.Properties[SillyBitwiseOperation.IsReportingOnLeftKey]);
+            var isReportingOnLeft = diagnostic.Properties.ContainsKey(SillyBitwiseOperationBase.IsReportingOnLeftKey)
+                && bool.Parse(diagnostic.Properties[SillyBitwiseOperationBase.IsReportingOnLeftKey]);
             Func<SyntaxNode> createNewRoot = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) switch
             {
                 StatementSyntax statement => () => root.RemoveNode(statement, SyntaxRemoveOptions.KeepNoTrivia),

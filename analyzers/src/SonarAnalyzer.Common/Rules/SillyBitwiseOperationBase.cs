@@ -20,7 +20,7 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -28,13 +28,41 @@ namespace SonarAnalyzer.Rules
     public abstract class SillyBitwiseOperationBase : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2437";
+        internal const string IsReportingOnLeftKey = "IsReportingOnLeft";
         private const string MessageFormat = "Remove this silly bit operation.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected abstract object FindConstant(SemanticModel semanticModel, SyntaxNode node);
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
         protected DiagnosticDescriptor Rule { get; }
 
         protected SillyBitwiseOperationBase(System.Resources.ResourceManager rspecResources) =>
             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources, fadeOutCode: true);
+
+        protected void CheckBinary(SyntaxNodeAnalysisContext context, SyntaxNode left, SyntaxToken @operator, SyntaxNode right, int constValueToLookFor)
+        {
+            Location location;
+            bool isReportingOnLeftKey;
+            if (FindIntConstant(context.SemanticModel, left) is int valueLeft && valueLeft == constValueToLookFor)
+            {
+                location = left.CreateLocation(@operator);
+                isReportingOnLeftKey = true;
+            }
+            else if (FindIntConstant(context.SemanticModel, right) is int valueRight && valueRight == constValueToLookFor)
+            {
+                location = @operator.CreateLocation(right);
+                isReportingOnLeftKey = false;
+            }
+            else
+            {
+                return;
+            }
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
+        }
+
+        protected int? FindIntConstant(SemanticModel semanticModel, SyntaxNode node) =>
+            FindConstant(semanticModel, node) is { } value
+                ? ConversionHelper.TryConvertToInt(value)
+                : null;
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -35,15 +33,25 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         public SillyBitwiseOperation() : base(RspecStrings.ResourceManager) { }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => CheckBinary(c, -1),
+                SyntaxKind.AndExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => CheckBinary(c, 0),
+                SyntaxKind.OrExpression,
+                SyntaxKind.ExclusiveOrExpression);
+        }
+
+        protected override object FindConstant(SemanticModel semanticModel, SyntaxNode node) =>
+            node.FindConstantValue(semanticModel);
+
+        private void CheckBinary(SyntaxNodeAnalysisContext context, int constValueToLookFor)
+        {
+            var binary = (BinaryExpressionSyntax)context.Node;
+            CheckBinary(context, binary.Left, binary.OperatorToken, binary.Right, constValueToLookFor);
+        }
     }
 }
