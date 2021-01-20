@@ -146,9 +146,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 options,
                 CompilationErrorBehavior.Default,
                 outputKind,
-                MetadataReferenceFacade.GetSystemXml()
-                    .Concat(MetadataReferenceFacade.GetSystemData())
-                    .Concat(MetadataReferenceFacade.GetSystemXmlLinq())
+                MetadataReferenceFacade.SystemXml
+                    .Concat(MetadataReferenceFacade.SystemData)
+                    .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .ToArray());
 
         private static INetFrameworkVersionProvider GetVersionProviderMock(NetFrameworkVersion version)

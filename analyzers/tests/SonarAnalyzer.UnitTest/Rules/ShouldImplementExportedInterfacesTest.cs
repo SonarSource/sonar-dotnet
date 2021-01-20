@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ShouldImplementExportedInterfaces_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
                                     new SonarAnalyzer.Rules.VisualBasic.ShouldImplementExportedInterfaces(),
-                                    MetadataReferenceFacade.GetSystemComponentModelComposition());
+                                    MetadataReferenceFacade.SystemComponentModelComposition);
 
         [TestMethod]
         [TestCategory("Rule")]
