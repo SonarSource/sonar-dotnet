@@ -21,6 +21,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SillyBitwiseOperation() =>
+        public void SillyBitwiseOperation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.cs", new CS.SillyBitwiseOperation());
 
 #if NET
@@ -41,10 +42,23 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void SillyBitwiseOperation_CodeFix() =>
+        public void SillyBitwiseOperation_CS_CodeFix() =>
             Verifier.VerifyCodeFix(@"TestCases\SillyBitwiseOperation.cs",
                                    @"TestCases\SillyBitwiseOperation.Fixed.cs",
                                    new CS.SillyBitwiseOperation(),
                                    new CS.SillyBitwiseOperationCodeFixProvider());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SillyBitwiseOperation_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SillyBitwiseOperation.vb", new VB.SillyBitwiseOperation());
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void SillyBitwiseOperation_VB_CodeFix() =>
+            Verifier.VerifyCodeFix(@"TestCases\SillyBitwiseOperation.vb",
+                                   @"TestCases\SillyBitwiseOperation.Fixed.vb",
+                                   new VB.SillyBitwiseOperation(),
+                                   new VB.SillyBitwiseOperationCodeFixProvider());
     }
 }

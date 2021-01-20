@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,10 +30,9 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class SillyBitwiseOperation : SonarDiagnosticAnalyzer
+    public sealed class SillyBitwiseOperation : SillyBitwiseOperationBase
     {
-        internal const string DiagnosticId = "S2437";
-        private const string MessageFormat = "Remove this silly bit operation.";
+       private const string MessageFormat = "Remove this silly bit operation.";
         internal const string IsReportingOnLeftKey = "IsReportingOnLeft";
 
         private static readonly DiagnosticDescriptor rule =
