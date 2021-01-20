@@ -8,7 +8,7 @@ Public Class Foo
 
     Public ReadOnly Property DefaultName As String = "foobar" ' Noncompliant
 
-    Public Sub Foo(Value As String = "foobar") ' Noncompliant
+    Public Sub Foo(Optional Value As String = "foobar") ' Noncompliant
 
         Dim Something = If(value, "foobar") ' Noncompliant
 
@@ -26,7 +26,7 @@ Public Class Foo
 
     Public ReadOnly Property DefaultName As String = Foobar
 
-    Public Sub Foo(Value As String = Foobar)
+    Public Sub Foo(Optional Value As String = Foobar)
 
         Dim Something = If(value, Foobar);
 
