@@ -2721,7 +2721,7 @@ namespace Repro_LocalFunction
     }
 }
 
-// https://github.com/SonarSource/sonar-dotnet/issues/3955 for S2583
+// https://github.com/SonarSource/sonar-dotnet/issues/3353 for S2583
 namespace Repro_RefParam
 {
     public class Repro
@@ -2732,7 +2732,7 @@ namespace Repro_RefParam
             {
                 while (true)
                 {
-                    if (stop)   // Noncompliant FP
+                    if (stop)   // Noncompliant FP - In a multithreaded context it makes sense to check as the value can be changed on another thread.
                     {           // Secondary
                         break; 
                     }
