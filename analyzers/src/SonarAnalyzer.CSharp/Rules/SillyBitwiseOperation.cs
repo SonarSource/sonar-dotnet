@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,14 +32,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class SillyBitwiseOperation : SillyBitwiseOperationBase
     {
-       private const string MessageFormat = "Remove this silly bit operation.";
         internal const string IsReportingOnLeftKey = "IsReportingOnLeft";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                fadeOutCode: true);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public SillyBitwiseOperation() : base(RspecStrings.ResourceManager) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -62,36 +57,38 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ExclusiveOrAssignmentExpression);
         }
 
-        private static void CheckAssignment(SyntaxNodeAnalysisContext context, int constValueToLookFor)
+        private void CheckAssignment(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
-            if (ExpressionNumericConverter.TryGetConstantIntValue(assignment.Right, out var constValue) &&
-                constValue == constValueToLookFor)
+            if (ExpressionNumericConverter.TryGetConstantIntValue(assignment.Right, out var constValue) && constValue == constValueToLookFor)
             {
                 var location = assignment.Parent is StatementSyntax
                     ? assignment.Parent.GetLocation()
                     : assignment.OperatorToken.CreateLocation(assignment.Right);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
             }
         }
 
-        private static void CheckBinary(SyntaxNodeAnalysisContext context, int constValueToLookFor)
+        private void CheckBinary(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {
             var binary = (BinaryExpressionSyntax) context.Node;
-            if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var constValue) &&
-                constValue == constValueToLookFor)
+            Location location;
+            bool isReportingOnLeftKey;
+            if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var constValue) && constValue == constValueToLookFor)
             {
-                var location = binary.Left.CreateLocation(binary.OperatorToken);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, true.ToString())));
+                location = binary.Left.CreateLocation(binary.OperatorToken);
+                isReportingOnLeftKey = true;
+            }
+            else if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Right, out constValue) && constValue == constValueToLookFor)
+            {
+                location = binary.OperatorToken.CreateLocation(binary.Right);
+                isReportingOnLeftKey = false;
+            }
+            else
+            {
                 return;
             }
-
-            if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Right, out constValue) &&
-                constValue == constValueToLookFor)
-            {
-                var location = binary.OperatorToken.CreateLocation(binary.Right);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, false.ToString())));
-            }
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
         }
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,14 +27,14 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class SillyBitwiseOperationBase : SonarDiagnosticAnalyzer
     {
-        protected const string DiagnosticId = "S2437";
-        protected const string MessageFormat = "";
+        internal const string DiagnosticId = "S2437";
+        private const string MessageFormat = "Remove this silly bit operation.";
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected DiagnosticDescriptor Rule { get; }
 
         protected SillyBitwiseOperationBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources, fadeOutCode: true);
     }
 }
