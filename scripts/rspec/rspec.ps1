@@ -206,7 +206,7 @@ function GenerateBaseClassIfSecondLanguage()
         $existingCSClassText = ReplaceTextInString -oldText $oldCsClass -newText $newCsClass -modifiableString $existingCSClassText
         $existingVBClassText = ReplaceTextInString -oldText $oldVbClass -newText $newVbClass -modifiableString $existingVBClassText
 
-        $diagnosticIdToken = "        internal const string DiagnosticId = ""${ruleKey}"";"
+        $diagnosticIdToken = "        private const string DiagnosticId = ""${ruleKey}"";"
         $existingCSClassText = RemoveText -textToRemove $diagnosticIdToken -modifiableString $existingCSClassText
         $existingVBClassText = RemoveText -textToRemove $diagnosticIdToken -modifiableString $existingVBClassText
 

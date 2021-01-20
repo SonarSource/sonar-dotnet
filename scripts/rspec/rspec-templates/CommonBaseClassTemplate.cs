@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
     public abstract class $DiagnosticClassName$Base : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "$DiagnosticId$";
-        protected const string MessageFormat = "";
+        private const string MessageFormat = "";
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

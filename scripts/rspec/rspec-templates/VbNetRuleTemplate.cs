@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class $DiagnosticClassName$ : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "$DiagnosticId$";
+        private const string DiagnosticId = "$DiagnosticId$";
         private const string MessageFormat = "";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
