@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CognitiveComplexity_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.cs",
                 new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 },
-                options: ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]

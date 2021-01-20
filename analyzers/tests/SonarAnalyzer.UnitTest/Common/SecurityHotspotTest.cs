@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 Verifier.VerifyNoIssueReported($"TestCases\\{GetTestCaseFileName(analyzer)}.{language.FileExtension}",
                                                analyzer,
-                                               additionalReferences: GetAdditionalReferences());
+                                               GetAdditionalReferences());
             }
         }
 

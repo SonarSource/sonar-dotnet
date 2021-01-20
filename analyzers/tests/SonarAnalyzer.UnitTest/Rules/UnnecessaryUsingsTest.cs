@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UnnecessaryUsings() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.cs",
                                     new CS.UnnecessaryUsings(),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
 #if NET
 

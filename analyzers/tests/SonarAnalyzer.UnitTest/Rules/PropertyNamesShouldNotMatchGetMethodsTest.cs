@@ -39,6 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCSharpAnalyzer(@"
     public int { get; } // Missing identifier on purpose
     public int () { return 42; } // Missing identifier on purpose
-", new CS.PropertyNamesShouldNotMatchGetMethods(), checkMode: CompilationErrorBehavior.Ignore);
+", new CS.PropertyNamesShouldNotMatchGetMethods(), CompilationErrorBehavior.Ignore);
     }
 }

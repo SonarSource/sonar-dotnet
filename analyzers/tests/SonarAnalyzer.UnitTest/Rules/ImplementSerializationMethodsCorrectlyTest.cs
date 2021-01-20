@@ -49,7 +49,7 @@ public class Foo
 {
     [OnDeserializing]
     public int  { throw new NotImplementedException(); }
-}", new CS.ImplementSerializationMethodsCorrectly(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.ImplementSerializationMethodsCorrectly(), CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -37,14 +37,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MarkWindowsFormsMainWithStaThread_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
                                     new CS.MarkWindowsFormsMainWithStaThread(),
-                                    additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
+                                    FrameworkMetadataReference.SystemWindowsForms);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.vb",
                                     new VB.MarkWindowsFormsMainWithStaThread(),
-                                    additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
+                                    FrameworkMetadataReference.SystemWindowsForms);
 #endif
 
         [TestMethod]
@@ -58,6 +58,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
                                     new VB.MarkWindowsFormsMainWithStaThread(),
-                                    checkMode: CompilationErrorBehavior.Ignore);
+                                    CompilationErrorBehavior.Ignore);
     }
 }

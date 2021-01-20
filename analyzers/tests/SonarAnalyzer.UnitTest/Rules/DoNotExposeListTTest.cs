@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DoNotExposeListT() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs", new CS.DoNotExposeListT(),
-                additionalReferences: MetadataReferences.MetadataReferenceFacade.SystemXml);
+                MetadataReferences.MetadataReferenceFacade.SystemXml);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -59,7 +59,7 @@ public class InvalidCode
     public List<InvalidType> Method() => null;
 
     public InvalidType Method2() => null;
-}", new CS.DoNotExposeListT(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.DoNotExposeListT(), CompilationErrorBehavior.Ignore);
         }
     }
 }

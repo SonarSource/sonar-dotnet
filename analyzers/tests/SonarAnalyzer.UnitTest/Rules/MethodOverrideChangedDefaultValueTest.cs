@@ -34,9 +34,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
                 new CS.MethodOverrideChangedDefaultValue(),
 #if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                ParseOptionsHelper.FromCSharp8,
+                NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                ParseOptionsHelper.FromCSharp8);
 #endif
-                options: ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
@@ -54,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.Batch.cs",
                 new CS.MethodOverrideChangedDefaultValue(),
                 new CS.MethodOverrideChangedDefaultValueCodeFixProvider(),
-                options: ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+                ParseOptionsHelper.FromCSharp8,
+                NuGetMetadataReference.NETStandardV2_1_0);
     }
 }

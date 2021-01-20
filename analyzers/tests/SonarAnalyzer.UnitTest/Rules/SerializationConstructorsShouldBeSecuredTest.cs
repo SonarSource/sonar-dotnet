@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SerializationConstructorsShouldBeSecured() =>
             Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured.cs",
                                     new CS.SerializationConstructorsShouldBeSecured(),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
 #if NET
         [TestMethod]
@@ -60,14 +60,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         protected (SerializationInfo info, StreamingContext context) { }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
-    }", new CS.SerializationConstructorsShouldBeSecured(), checkMode: CompilationErrorBehavior.Ignore);
+    }", new CS.SerializationConstructorsShouldBeSecured(), CompilationErrorBehavior.Ignore);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute() =>
             Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs",
                                     new CS.SerializationConstructorsShouldBeSecured(),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                         @"TestCases\SerializationConstructorsShouldBeSecured_Part2.cs",
                                     },
                                     new CS.SerializationConstructorsShouldBeSecured(),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityPermissions;

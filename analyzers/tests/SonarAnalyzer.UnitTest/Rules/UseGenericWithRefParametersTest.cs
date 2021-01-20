@@ -39,6 +39,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCSharpAnalyzer(@"
 public void (ref object o1)
 {
-}", new CS.UseGenericWithRefParameters(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.UseGenericWithRefParameters(), CompilationErrorBehavior.Ignore);
     }
 }

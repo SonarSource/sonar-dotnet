@@ -47,6 +47,6 @@ public int Foo
 {
     get => field;
     set => // Noncompliant
-}", new CS.UseValueParameter(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.UseValueParameter(), CompilationErrorBehavior.Ignore);
     }
 }

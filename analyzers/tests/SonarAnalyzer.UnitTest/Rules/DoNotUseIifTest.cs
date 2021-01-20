@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotUseIif() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb",
                 new VB.DoNotUseIif(),
-                additionalReferences: MetadataReferenceFacade.MicrosoftVisualBasic);
+                MetadataReferenceFacade.MicrosoftVisualBasic);
 
         [TestMethod]
         [TestCategory("CodeFix")]

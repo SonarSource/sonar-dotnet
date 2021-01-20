@@ -46,6 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 public class Foo_05 : IDisposable
 {
     private HandleRef;
-}", new CS.DisposableTypesNeedFinalizers(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.DisposableTypesNeedFinalizers(), CompilationErrorBehavior.Ignore);
     }
 }

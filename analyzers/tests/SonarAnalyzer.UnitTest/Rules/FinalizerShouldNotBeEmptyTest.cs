@@ -45,6 +45,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCSharpAnalyzer(@"class Program4
     {
         ~Program4() =>
-    }", new CS.FinalizerShouldNotBeEmpty(), checkMode: CompilationErrorBehavior.Ignore);
+    }", new CS.FinalizerShouldNotBeEmpty(), CompilationErrorBehavior.Ignore);
     }
 }

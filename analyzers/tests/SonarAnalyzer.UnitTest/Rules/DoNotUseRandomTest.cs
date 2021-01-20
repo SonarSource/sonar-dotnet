@@ -34,13 +34,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotUseRandom() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseRandom.cs",
                 new CS.DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
+                MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotUseRandom_Not_Enabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\DoNotUseRandom.cs",
                 new CS.DoNotUseRandom(),
-                additionalReferences: MetadataReferenceFacade.SystemSecurityCryptography);
+                MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

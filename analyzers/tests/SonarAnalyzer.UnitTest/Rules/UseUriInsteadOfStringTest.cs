@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UseUriInsteadOfString() =>
             Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
                 new CS.UseUriInsteadOfString(),
-                additionalReferences: MetadataReferenceFacade.SystemDrawing);
+                MetadataReferenceFacade.SystemDrawing);
 
 #if NET
         [TestMethod]
@@ -61,6 +61,6 @@ public class Bar : Foo
     {
         Uri.TryCreate(new object(), UriKind.Absolute, out result); // Compliant - invalid code
     }
-}", new CS.UseUriInsteadOfString(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.UseUriInsteadOfString(), CompilationErrorBehavior.Ignore);
     }
 }

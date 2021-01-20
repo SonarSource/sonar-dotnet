@@ -33,8 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericTypeParameterEmptinessChecking() =>
             Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterEmptinessChecking.cs",
                                     new CS.GenericTypeParameterEmptinessChecking(),
-                                    additionalReferences: MetadataReferenceFacade.SystemCollections,
-                                    checkMode: CompilationErrorBehavior.Ignore);
+                                    CompilationErrorBehavior.Ignore,
+                                    MetadataReferenceFacade.SystemCollections);
 
 #if NET
         [TestMethod]

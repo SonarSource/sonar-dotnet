@@ -195,9 +195,12 @@ namespace EntityFrameworkMigrations
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
                                     new CS.UnusedPrivateMember(),
 #if NETFRAMEWORK
-                                    additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                                    ParseOptionsHelper.FromCSharp8,
+                                    NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                                    ParseOptionsHelper.FromCSharp8);
 #endif
-                                    options: ParseOptionsHelper.FromCSharp8);
+
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
@@ -230,7 +233,6 @@ namespace EntityFrameworkMigrations
         {
             Action verifyAnalyzer = () => Verifier.VerifyAnalyzer(new[] {@"TestCases\UnusedPrivateMember.Performance.cs"},
                                                                   new CS.UnusedPrivateMember(),
-                                                                  additionalReferences:
                                                                   GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
 
             // Once the NuGet packages are downloaded, the time to execute the analyzer on the given file is

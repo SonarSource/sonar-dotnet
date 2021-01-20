@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_Nancy.cs",
                 new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: NuGetMetadataReference.Nancy());
+                NuGetMetadataReference.Nancy());
 
 #if NETFRAMEWORK // HttpCookie is not available on .Net Core
 
@@ -47,14 +47,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure.cs",
                 new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: MetadataReferenceFacade.SystemWeb);
+                MetadataReferenceFacade.SystemWeb);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Not_Enabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldBeSecure.cs",
                 new CS.CookieShouldBeSecure(),
-                additionalReferences: MetadataReferenceFacade.SystemWeb);
+                MetadataReferenceFacade.SystemWeb);
 
 #else
 
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_NetCore.cs",
                 new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences_NetCore());
+                GetAdditionalReferences_NetCore());
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.cs",
                 new CS.MemberShouldBeStatic(),
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
                     .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
@@ -57,9 +57,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.CSharp8.cs",
                 new CS.MemberShouldBeStatic(),
 #if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                ParseOptionsHelper.FromCSharp8,
+                NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                ParseOptionsHelper.FromCSharp8);
 #endif
-                options: ParseOptionsHelper.FromCSharp8);
 
 #if NETFRAMEWORK // HttpApplication is available only on .Net Framework
         [TestMethod]
@@ -73,7 +75,7 @@ public class HttpApplication1 : System.Web.HttpApplication
     protected int FooFoo() => 0; // Noncompliant
 }",
                 new CS.MemberShouldBeStatic(),
-                checkMode: CompilationErrorBehavior.Ignore);
+                CompilationErrorBehavior.Ignore);
 #endif
 
         [TestMethod]
@@ -89,6 +91,6 @@ public class Class7
         result = await f();
         return result;
     }
-}", new CS.MemberShouldBeStatic(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.MemberShouldBeStatic(), CompilationErrorBehavior.Ignore);
     }
 }

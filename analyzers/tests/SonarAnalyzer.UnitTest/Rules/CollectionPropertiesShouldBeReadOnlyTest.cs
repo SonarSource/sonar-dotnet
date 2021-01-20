@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CollectionPropertiesShouldBeReadOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
                 new CS.CollectionPropertiesShouldBeReadOnly(),
-                additionalReferences: MetadataReferenceFacade.SystemRuntimeSerialization);
+                MetadataReferenceFacade.SystemRuntimeSerialization);
 
 #if NET
         [TestMethod]

@@ -34,9 +34,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesInPartialMethod.cs",
                                     new CS.ParameterNamesInPartialMethod(),
 #if NETFRAMEWORK
-                                    additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                                    ParseOptionsHelper.FromCSharp8,
+                                    NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                                    ParseOptionsHelper.FromCSharp8);
 #endif
-                                    options: ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]

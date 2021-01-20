@@ -39,14 +39,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeclareTypesInNamespaces_CS_Before8() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.BeforeCSharp8.cs",
                 new CS.DeclareTypesInNamespaces(),
-                options: ParseOptionsHelper.BeforeCSharp8);
+                ParseOptionsHelper.BeforeCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeclareTypesInNamespaces_CS_After8() =>
             Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.AfterCSharp8.cs",
                 new CS.DeclareTypesInNamespaces(),
-                options: ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]

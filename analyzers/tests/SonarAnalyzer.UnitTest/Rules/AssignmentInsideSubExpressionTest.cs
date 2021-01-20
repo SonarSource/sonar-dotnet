@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void AssignmentInsideSubExpression() =>
-            Verifier.VerifyAnalyzer(@"TestCases\AssignmentInsideSubExpression.cs", new CS.AssignmentInsideSubExpression(), options: ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\AssignmentInsideSubExpression.cs", new CS.AssignmentInsideSubExpression(), ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]

@@ -39,14 +39,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeHttpOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: MetadataReferenceFacade.SystemWeb);
+                MetadataReferenceFacade.SystemWeb);
 #else
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeHttpOnly_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly_NetCore.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences_NetCore());
+                GetAdditionalReferences_NetCore());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -63,6 +63,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeHttpOnly_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly_Nancy.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: NuGetMetadataReference.Nancy());
+                NuGetMetadataReference.Nancy());
     }
 }

@@ -40,6 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 public enum InvalidStringEnum : string // Noncompliant
 {
     MyValue = ""toto"" // Secondary
-}", new CS.DoNotMarkEnumsWithFlags(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.DoNotMarkEnumsWithFlags(), CompilationErrorBehavior.Ignore);
     }
 }

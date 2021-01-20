@@ -39,28 +39,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCookies_CS_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_Net46.cs",
                 new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferencesForNet46());
+                GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_CS_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingCookies_Net46.cs",
                 new CS.UsingCookies(),
-                additionalReferences: GetAdditionalReferencesForNet46());
+                GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_Net46.vb",
                 new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferencesForNet46());
+                GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_VB_Disabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\UsingCookies_Net46.vb",
                 new VB.UsingCookies(),
-                additionalReferences: GetAdditionalReferencesForNet46());
+                GetAdditionalReferencesForNet46());
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNet46() =>
             FrameworkMetadataReference.SystemWeb;
@@ -71,14 +71,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCookies_CS_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.cs",
                 new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
+                GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_VB_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.vb",
                 new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
+                GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNetCore(string packageVersion) =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(packageVersion)

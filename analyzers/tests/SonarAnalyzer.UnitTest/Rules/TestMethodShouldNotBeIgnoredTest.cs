@@ -34,8 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldNotBeIgnored_MsTest_Legacy() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
                                     new CS.TestMethodShouldNotBeIgnored(),
-                                    additionalReferences: NuGetMetadataReference.MSTestTestFramework("1.1.11"),
-                                    checkMode: CompilationErrorBehavior.Ignore); // IgnoreAttribute doesn't contain any reason param
+                                    CompilationErrorBehavior.Ignore,    // IgnoreAttribute doesn't contain any reason param
+                                    NuGetMetadataReference.MSTestTestFramework("1.1.11"));
 
         [DataTestMethod]
         [DataRow("1.2.0")]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
                                     new CS.TestMethodShouldNotBeIgnored(),
-                                    additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                                    NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldNotBeIgnored_NUnit_V2(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.V2.cs",
                                     new CS.TestMethodShouldNotBeIgnored(),
-                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                    NuGetMetadataReference.MSTestTestFrameworkV1
                                         .Concat(NuGetMetadataReference.NUnit(testFwkVersion))
                                         .ToArray());
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldNotBeIgnored_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.cs",
                                     new CS.TestMethodShouldNotBeIgnored(),
-                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                    NuGetMetadataReference.MSTestTestFrameworkV1
                                         .Concat(NuGetMetadataReference.NUnit(testFwkVersion))
                                         .ToArray());
 
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.cs",
                                     new CS.TestMethodShouldNotBeIgnored(),
-                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                    NuGetMetadataReference.MSTestTestFrameworkV1
                                         .Concat(NuGetMetadataReference.XunitFramework(testFwkVersion))
                                         .ToArray());
 
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldNotBeIgnored_Xunit_v1() =>
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.v1.cs",
                                     new CS.TestMethodShouldNotBeIgnored(),
-                                    additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                    NuGetMetadataReference.MSTestTestFrameworkV1
                                         .Concat(NuGetMetadataReference.XunitFrameworkV1)
                                         .ToArray());
 
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldNotBeIgnored_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\TestMethodShouldNotBeIgnored.CSharp9.cs",
                                                 new CS.TestMethodShouldNotBeIgnored(),
-                                                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                                                NuGetMetadataReference.MSTestTestFrameworkV1
                                                     .Concat(NuGetMetadataReference.XunitFrameworkV1)
                                                     .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
                                                     .ToArray());

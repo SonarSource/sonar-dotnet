@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.JavaScriptSerializer.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\RestrictDeserializedTypes.LosFormatter.cs",
                 GetAnalyzer(),
                 ParseOptionsHelper.FromCSharp8,
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             FrameworkMetadataReference.SystemRuntimeSerialization

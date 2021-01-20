@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
                                     new CS.UriShouldNotBeHardcoded(),
-                                    additionalReferences: MetadataReferenceFacade.SystemWeb.Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion)));
+                                    MetadataReferenceFacade.SystemWeb.Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion)));
 #endif
 
         [DataTestMethod]
@@ -55,7 +55,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNetCore.cs",
                 new CS.UriShouldNotBeHardcoded(),
-                additionalReferences:
                 // for VirtualFileResult
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion)
                     // for Controller

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CertificateValidationCheck_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs",
                 new CS.CertificateValidationCheck(),
-                additionalReferences: GetAdditionalReferences());
+                GetAdditionalReferences());
 
 #if NET
         [TestMethod]
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CertificateValidationCheck_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
                 new VB.CertificateValidationCheck(),
-                additionalReferences: GetAdditionalReferences()
+                GetAdditionalReferences()
             );
 
         [TestMethod]

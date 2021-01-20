@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.cs",
                                     new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 #if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
         [TestMethod]
         [TestCategory("Rule")]
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.NetFramework.cs",
                                     new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 #endif
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CreatingHashAlgorithms_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.vb",
                                     new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
 #if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
         [TestMethod]
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CreatingHashAlgorithms_VB_NetFx() =>
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.NetFramework.vb",
                                     new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 #endif
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyNoIssueReported(@"TestCases\CreatingHashAlgorithms.cs",
                                            new CS.CreatingHashAlgorithms(),
                                            ParseOptionsHelper.FromCSharp8,
-                                           additionalReferences: GetAdditionalReferences());
+                                           GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CreatingHashAlgorithms_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\CreatingHashAlgorithms.vb",
                                            new VB.CreatingHashAlgorithms(),
-                                           additionalReferences: GetAdditionalReferences());
+                                           GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography;

@@ -57,6 +57,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         return i; // we don't report on this
     }
-}", new CS.GetHashCodeMutable(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.GetHashCodeMutable(), CompilationErrorBehavior.Ignore);
     }
 }

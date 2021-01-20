@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PropertiesAccessCorrectField_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
                                     new CS.PropertiesAccessCorrectField(),
-                                    additionalReferences: AdditionalReferences);
+                                    AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PropertiesAccessCorrectField_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
                                     new VB.PropertiesAccessCorrectField(),
-                                    additionalReferences: AdditionalReferences);
+                                    AdditionalReferences);
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             NuGetMetadataReference.MvvmLightLibs("5.4.1.1")

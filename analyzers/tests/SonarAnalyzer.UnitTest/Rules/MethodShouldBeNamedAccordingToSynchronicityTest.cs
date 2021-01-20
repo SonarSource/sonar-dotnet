@@ -38,7 +38,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodShouldBeNamedAccordingToSynchronicity(string tasksVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
-                additionalReferences:
                 MetadataReferenceFacade.SystemThreadingTasksExtensions(tasksVersion)
                                        .Union(MetadataReferenceFacade.SystemComponentModelPrimitives)
                                        .Union(NuGetMetadataReference.MicrosoftAspNetSignalRCore()));
@@ -50,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodShouldBeNamedAccordingToSynchronicity_MVC(string mvcVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.MVC.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(mvcVersion));
+                NuGetMetadataReference.MicrosoftAspNetMvc(mvcVersion));
 
         [TestMethod]
         [DataRow("2.0.4", "2.0.3")]
@@ -60,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             string aspNetCoreRoutingVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.MVC.Core.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
-                additionalReferences: NetStandardMetadataReference.Netstandard
+                NetStandardMetadataReference.Netstandard
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreMvcVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspNetCoreRoutingVersion)));
@@ -72,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodShouldBeNamedAccordingToSynchronicity_MsTest(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.MsTest.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion)
+                NuGetMetadataReference.MSTestTestFramework(testFwkVersion)
                     .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0")));
 
         [DataTestMethod]
@@ -82,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodShouldBeNamedAccordingToSynchronicity_NUnit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.NUnit.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
-                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
+                NuGetMetadataReference.NUnit(testFwkVersion)
                     .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0")));
 
         [DataTestMethod]
@@ -92,7 +91,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodShouldBeNamedAccordingToSynchronicity_Xunit(string testFwkVersion) =>
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.Xunit.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
-                additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion)
+                NuGetMetadataReference.XunitFramework(testFwkVersion)
                     .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0")));
 
         [TestCategory("Rule")]
@@ -101,8 +100,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.CSharp8.cs",
                                     new MethodShouldBeNamedAccordingToSynchronicity(),
 #if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                                    ParseOptionsHelper.FromCSharp8,
+                                    NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                                    ParseOptionsHelper.FromCSharp8);
 #endif
-                options: ParseOptionsHelper.FromCSharp8);
     }
 }

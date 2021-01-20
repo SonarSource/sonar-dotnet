@@ -34,15 +34,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EmptyMethod()
-        {
+        public void EmptyMethod() =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.cs",
                 new CS.EmptyMethod(),
 #if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                ParseOptionsHelper.FromCSharp8,
+                NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                ParseOptionsHelper.FromCSharp8);
 #endif
-                options: ParseOptionsHelper.FromCSharp8);
-        }
 
 #if NET
         [TestMethod]
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 #endif
 
-        [TestMethod]
+            [TestMethod]
         [TestCategory("CodeFix")]
         public void EmptyMethod_CodeFix_Throw()
         {

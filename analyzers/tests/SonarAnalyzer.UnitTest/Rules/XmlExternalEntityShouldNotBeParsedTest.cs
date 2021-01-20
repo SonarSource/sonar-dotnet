@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument(NetFrameworkVersion version, string testFilePath) =>
             Verifier.VerifyAnalyzer(testFilePath,
                 new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
-                additionalReferences: MetadataReferenceFacade.SystemXml
+                MetadataReferenceFacade.SystemXml
                     .Concat(MetadataReferenceFacade.SystemData)
                     .Concat(MetadataReferenceFacade.SystemXmlLinq)
                     .Concat(NuGetMetadataReference.MicrosoftWebXdt())
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader(NetFrameworkVersion version, string testFilePath) =>
             Verifier.VerifyAnalyzer(testFilePath, new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
                 ParseOptionsHelper.FromCSharp8,
-                additionalReferences: MetadataReferenceFacade.SystemXml.ToArray());
+                MetadataReferenceFacade.SystemXml.ToArray());
 
 #if NET
         [TestMethod]
@@ -138,17 +138,18 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_ParameterProvider.cs"
                 },
                 new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(NetFrameworkVersion.After452)),
-                additionalReferences: MetadataReferenceFacade.SystemXml);
+                MetadataReferenceFacade.SystemXml);
 
         private static void VerifyRule(NetFrameworkVersion version, string testFilePath, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<ParseOptions> options = null) =>
             Verifier.VerifyAnalyzer(testFilePath,
                 new CS.XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version)),
-                additionalReferences: MetadataReferenceFacade.SystemXml
+                options,
+                CompilationErrorBehavior.Default,
+                outputKind,
+                MetadataReferenceFacade.SystemXml
                     .Concat(MetadataReferenceFacade.SystemData)
                     .Concat(MetadataReferenceFacade.SystemXmlLinq)
-                    .ToArray(),
-                outputKind: outputKind,
-                options: options);
+                    .ToArray());
 
         private static INetFrameworkVersionProvider GetVersionProviderMock(NetFrameworkVersion version)
         {

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_AspNetCore_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_AspNetCore.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AspNetCoreLoggingReferences);
+                AspNetCoreLoggingReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_AspNetCore_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_AspNetCore.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: AspNetCoreLoggingReferences);
+                AspNetCoreLoggingReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_Log4Net_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Log4Net.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: Log4NetReferences);
+                Log4NetReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_Log4Net_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Log4Net.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: Log4NetReferences);
+                Log4NetReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_NLog_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_NLog.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: NLogReferences);
+                NLogReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_NLog_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_NLog.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: NLogReferences);
+                NLogReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_Serilog_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Serilog.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: SeriLogReferences);
+                SeriLogReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_Serilog_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Serilog.vb",
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: SeriLogReferences);
+                SeriLogReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ConfiguringLoggers_AspNetCore.cs",
                 new CS.ConfiguringLoggers(),
-                additionalReferences: AspNetCoreLoggingReferences);
+                AspNetCoreLoggingReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\ConfiguringLoggers_AspNetCore.vb",
                 new VB.ConfiguringLoggers(),
-                additionalReferences: AspNetCoreLoggingReferences);
+                AspNetCoreLoggingReferences);
 
         internal static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
             NetStandardMetadataReference.Netstandard

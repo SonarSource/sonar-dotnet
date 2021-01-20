@@ -38,28 +38,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SocketsCreation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\SocketsCreation.cs",
                                     new CS.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SocketsCreation_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\SocketsCreation.vb",
                                     new VB.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SocketsCreation_CS_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\SocketsCreation.cs",
                                            new CS.SocketsCreation(),
-                                           additionalReferences: GetAdditionalReferences());
+                                           GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void SocketsCreation_VB_RuleDisabled() =>
             Verifier.VerifyNoIssueReported(@"TestCases\SocketsCreation.vb",
                                            new VB.SocketsCreation(),
-                                           additionalReferences: GetAdditionalReferences());
+                                           GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemNetSockets.Concat(MetadataReferenceFacade.SystemNetPrimitives);

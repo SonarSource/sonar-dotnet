@@ -38,14 +38,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.cs",
                                     new CS.WeakSslTlsProtocols(),
                                     ParseOptionsHelper.FromCSharp8,
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void WeakSslTlsProtocols_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\WeakSslTlsProtocols.vb",
                                     new VB.WeakSslTlsProtocols(),
-                                    additionalReferences: GetAdditionalReferences());
+                                    GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
            MetadataReferenceFacade.SystemNetHttp.Concat(MetadataReferenceFacade.SystemSecurityCryptography);

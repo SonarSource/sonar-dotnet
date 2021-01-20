@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConditionEvaluatesToConstant() =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
                 GetAnalyzer(),
-                additionalReferences: NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7"));
+                NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7"));
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -51,9 +51,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
                 GetAnalyzer(),
 #if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                ParseOptionsHelper.FromCSharp8,
+                NuGetMetadataReference.NETStandardV2_1_0);
+#else
+                ParseOptionsHelper.FromCSharp8);
 #endif
-                options: ParseOptionsHelper.FromCSharp8);
 
 #if NET
         [TestMethod]
