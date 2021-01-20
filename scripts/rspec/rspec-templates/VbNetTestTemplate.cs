@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2020 SonarSource SA
+ * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -20,6 +20,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -28,10 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void $DiagnosticClassName$()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\$DiagnosticClassName$.cs",
-                new SonarAnalyzer.Rules.VisualBasic.$DiagnosticClassName$());
-        }
+        public void $DiagnosticClassName$_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\$DiagnosticClassName$.cs", new VB.$DiagnosticClassName$());
     }
 }

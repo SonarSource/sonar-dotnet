@@ -162,11 +162,10 @@ function GenerateCsRuleClasses() {
 function GenerateVbRuleClasses($language) {
     $vbRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.VisualBasic\\Rules"
     $csRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.CSharp\\Rules"
-    $commonRulesFolder     = "${sonaranalyzerPath}\\src\\SonarAnalyzer.Common\\Rules"
     $ruleTestsFolder       = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\Rules"
     $vbRuleTestCasesFolder = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\TestCases"
 
-    $csClassName = FindCsName -csRulesPath $csRulesFolder
+    $csClassName = FindCsName -rulesPath $csRulesFolder
 
     $filesMap = @{}
     if ($csClassName) {
@@ -177,36 +176,118 @@ function GenerateVbRuleClasses($language) {
         $filesMap["VbNetTestTemplate.cs"] = "${ruleTestsFolder}\\${className}Test.cs"
     }
 
-    $filesMap["CommonBaseClassTemplate.cs"] = "${commonRulesFolder}\\${className}Base.cs"
     $filesMap["VbNetRuleTemplate.cs"] = "${vbRulesFolder}\\${className}.cs"
     $filesMap["VbNetTestCaseTemplate.vb"] = "${vbRuleTestCasesFolder}\\${className}.vb"
 
     WriteClasses -filesMap $filesMap
 }
 
+function GenerateBaseClassIfSecondLanguage()
+{
+    $vbRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.VisualBasic\\Rules"
+    $csRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.CSharp\\Rules"
+    $commonRulesFolder     = "${sonaranalyzerPath}\\src\\SonarAnalyzer.Common\\Rules"
+
+    $csClassName = FindCsName -rulesPath $csRulesFolder
+    $vbClassName = FindCsName -rulesPath $vbRulesFolder
+
+    $csFilePath = "${csRulesFolder}\\${csClassName}.cs"
+    $vbFilePath = "${vbRulesFolder}\\${vbClassName}.cs"
+    $filesMap = @{}
+
+    if ($csClassName -And $vbClassName) {
+        $existingCSClassText = Get-Content -Path "${csRulesFolder}\\${csClassName}.cs" -Raw
+        $existingVBClassText = Get-Content -Path "${vbRulesFolder}\\${vbClassName}.cs" -Raw
+
+        $oldCsClass ="    public sealed class ${csClassName} : SonarDiagnosticAnalyzer"
+        $newCsClass ="    public sealed class ${csClassName} : ${className}Base"
+        $oldVbClass ="    public sealed class ${vbClassName} : SonarDiagnosticAnalyzer"
+        $newVbClass ="    public sealed class ${vbClassName} : ${className}Base"
+        $existingCSClassText = ReplaceTextInString -oldText $oldCsClass -newText $newCsClass -modifiableString $existingCSClassText
+        $existingVBClassText = ReplaceTextInString -oldText $oldVbClass -newText $newVbClass -modifiableString $existingVBClassText
+
+        $diagnosticIdToken = "        private const string DiagnosticId = ""${ruleKey}"";"
+        $existingCSClassText = RemoveText -textToRemove $diagnosticIdToken -modifiableString $existingCSClassText
+        $existingVBClassText = RemoveText -textToRemove $diagnosticIdToken -modifiableString $existingVBClassText
+
+        $messageFormatToken = "       private const string MessageFormat = """";"
+        $existingCSClassText = RemoveText -textToRemove $messageFormatToken -modifiableString $existingCSClassText
+        $existingVBClassText = RemoveText -textToRemove $messageFormatToken -modifiableString $existingVBClassText
+
+        $ruleToken = "        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);"
+        $existingCSClassText = RemoveText -textToRemove $ruleToken -modifiableString $existingCSClassText
+        $existingVBClassText = RemoveText -textToRemove $ruleToken -modifiableString $existingVBClassText
+
+        $supportedDiagToken = "        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);"
+        $csConstructorToken = "        public ${csClassName}() : base(RspecStrings.ResourceManager) { }"
+        $vbConstructorToken = "        public ${vbClassName}() : base(RspecStrings.ResourceManager) { }"
+
+        $existingCSClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $csConstructorToken -modifiableString $existingCSClassText
+        $existingVBClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $vbConstructorToken -modifiableString $existingVBClassText
+
+        $filesMap["CommonBaseClassTemplate.cs"] = "${commonRulesFolder}\\${className}Base.cs"
+
+        Set-Content -NoNewline `
+                    -Path $csFilePath `
+                    -Value $existingCSClassText
+
+        Set-Content -NoNewline `
+                    -Path $vbFilePath `
+                    -Value $existingVBClassText
+
+        WriteClasses -filesMap $filesMap
+    }
+}
+
+function ReplaceTextInString($oldText, $newText, $modifiableString)
+{
+    $idx = $modifiableString.LastIndexOf($oldText)
+    if ($idx -gt -1) {
+        $modifiableString = $modifiableString.Remove($idx, $oldText.Length).Insert($idx, "$newText")
+    }
+
+    return $modifiableString
+}
+
+function RemoveText($textToRemove, $modifiableString)
+{
+    $idx = $modifiableString.LastIndexOf($textToRemove)
+    if ($idx -gt -1) {
+        $modifiableString = $modifiableString.Remove($idx, $textToRemove.Length + 2)
+    }
+
+    return $modifiableString
+}
+
 function AppendVbTestCase($ruleTestsFolder) {
     $existingClassText = Get-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Raw
     $snippetText = Get-Content -Path "${RuleTemplateFolder}\\VbNetTestSnippet.cs" -Raw
 
-    $token = "        }"
+    $namespaceToken = "using CS = SonarAnalyzer.Rules.CSharp;"
+    $token = "    }"
     $idx = $existingClassText.LastIndexOf($token)
-
+    $namespaceTokenIdx = $existingClassText.LastIndexOf($namespaceToken)
     $newText = ""
     if ($idx -gt -1) {
-        $newText = $existingClassText.Remove($idx, $token.Length).Insert($idx, "${token}`r`n`r`n${snippetText}")
+        $newText = $existingClassText.Remove($idx, $token.Length).Insert($idx, "`r`n${snippetText}`r`n${token}")
     }
     else {
         $newText = "${existingClassText}`r`n${snippetText}"
     }
 
+    if ($namespaceTokenIdx -gt -1) {
+        $newText = $newText.Insert($namespaceTokenIdx + $namespaceToken.Length + 1, "using VB = SonarAnalyzer.Rules.VisualBasic;`r`n")
+    }
+
     $replaced = ReplaceTokens -text $newText
 
-    Set-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" `
+    Set-Content -NoNewline `
+                -Path "${ruleTestsFolder}\\${csClassName}Test.cs" `
                 -Value $replaced
 }
 
-function FindCsName($csRulesPath) {
-    $csRuleFiles = Get-ChildItem -Path $csRulesPath -Filter "*.cs"
+function FindCsName($rulesPath) {
+    $csRuleFiles = Get-ChildItem -Path $rulesPath -Filter "*.cs"
 
     $quotedRuleKey = "`"$ruleKey`";"
     foreach ($csRuleFile in $csRuleFiles) {
@@ -223,7 +304,7 @@ function WriteClasses($filesMap) {
         $fileContent = Get-Content "${RuleTemplateFolder}\\$($_.Key)" -Raw
         $replaced = ReplaceTokens -text $fileContent
 
-        Set-Content -Path $_.Value -Value $replaced
+        Set-Content -NoNewline -Path $_.Value -Value $replaced
     }
 }
 
@@ -262,10 +343,12 @@ if ($className -And $ruleKey) {
     if ($language -eq "cs") {
        GenerateCsRuleClasses
        UpdateTestEntry $csRuleData
+       GenerateBaseClassIfSecondLanguage
     }
     elseif ($language -eq "vbnet") {
        GenerateVbRuleClasses
        UpdateTestEntry $vbRuleData
+       GenerateBaseClassIfSecondLanguage
     }
 
     $vsTempFolder = "${sonaranalyzerPath}\\.vs"
