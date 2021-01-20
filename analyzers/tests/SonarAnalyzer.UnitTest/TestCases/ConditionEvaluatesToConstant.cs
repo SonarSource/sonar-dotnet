@@ -2726,6 +2726,8 @@ namespace Repro_RefParam
 {
     public class Repro
     {
+        private static object gate = new object();
+
         public void TestExample(ref bool stop)
         {
             while (!stop)
@@ -2736,6 +2738,31 @@ namespace Repro_RefParam
                     {           // Secondary
                         break; 
                     }
+                }
+            }
+        }
+
+        public void InitWithLock(ref object field)
+        {
+            if (field == null)
+            {
+                lock (gate)
+                {
+                    if (field == null) // Noncompliant, FP - in multithreading context it makes sense to check for null twice
+                    {
+                        field = new object();
+                    }
+                }
+            }
+        }
+
+        public void Init(ref object field)
+        {
+            if (field == null)
+            {
+                if (field == null) // Noncompliant, we already checked for null
+                {
+                    field = new object();
                 }
             }
         }
