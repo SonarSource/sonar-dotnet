@@ -35,7 +35,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class UseReturnStatement : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S5944";
-        private const string MessageFormat = "Use a 'Return' statement; assigning returned values to function names is obsolete.";
+        private const string MessageFormat = "{0}";
+        private const string ReturnMessage = "Use a 'Return' statement; assigning returned values to function names is obsolete.";
+        private const string UsageMessage = "Do not make use of the implicit return value.";
+
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -43,46 +46,37 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var method = (MethodStatementSyntax)((MethodBlockSyntax)c.Node).BlockStatement;
-                new Identifierswalker(c, method.Identifier.ValueText).SafeVisit(c.Node);
+                new IdentifierWalker(c, method.Identifier.ValueText).SafeVisit(c.Node);
             },
             SyntaxKind.FunctionBlock);
 
-        private class Identifierswalker : VisualBasicSyntaxWalker
+        private class IdentifierWalker : VisualBasicSyntaxWalker
         {
-            private SyntaxNodeAnalysisContext Context { get; }
-            private string Name { get; }
+            private readonly SyntaxNodeAnalysisContext context;
+            private readonly string name;
 
-            public Identifierswalker(SyntaxNodeAnalysisContext context, string name)
+            public IdentifierWalker(SyntaxNodeAnalysisContext context, string name)
             {
-                Context = context;
-                Name = name;
+                this.context = context;
+                this.name = name;
             }
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
             {
                 if (IsImplicitReturnValue(node))
                 {
-                    if (NoAssignment(node))
-                    {
-                        // TODO: find the best way to do this.
-                        var rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "Do not make use of the implicit return value.", RspecStrings.ResourceManager);
-                        Context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
-                    }
-                    else
-                    {
-                        Context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(), NoAssignment(node) ? UsageMessage : ReturnMessage));
                 }
             }
 
-            private static bool IsExcluded(SyntaxNode node) =>
-               node.Parent is InvocationExpressionSyntax
-               || node.Parent is MemberAccessExpressionSyntax
-               || node.Parent is NamedFieldInitializerSyntax;
-
             private bool IsImplicitReturnValue(IdentifierNameSyntax node) =>
-                Name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase)
+                name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase)
                 && !IsExcluded(node);
+
+            private bool IsExcluded(SyntaxNode node) =>
+                node.Parent is InvocationExpressionSyntax
+                || node.Parent is MemberAccessExpressionSyntax
+                || node.Parent is NamedFieldInitializerSyntax;
 
             private bool NoAssignment(SyntaxNode node) =>
                 node.Parent is ReturnStatementSyntax
