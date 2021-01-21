@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -36,8 +35,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private const string DiagnosticId = "S5944";
         private const string MessageFormat = "{0}";
-        private const string ReturnMessage = "Use a 'Return' statement; assigning returned values to function names is obsolete.";
-        private const string UsageMessage = "Do not make use of the implicit return value.";
+        private const string UseReturnStatementMessage = "Use a 'Return' statement; assigning returned values to function names is obsolete.";
+        private const string DontUseImplicitMessage = "Do not make use of the implicit return value.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -65,7 +64,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 if (IsImplicitReturnValue(node))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(), NoAssignment(node) ? UsageMessage : ReturnMessage));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(),
+                        IsAssignmentStatement(node)
+                        ? UseReturnStatementMessage
+                        : DontUseImplicitMessage));
                 }
             }
 
@@ -73,14 +75,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase)
                 && !IsExcluded(node);
 
-            private bool IsExcluded(SyntaxNode node) =>
+            private static bool IsExcluded(SyntaxNode node) =>
                 node.Parent is InvocationExpressionSyntax
                 || node.Parent is MemberAccessExpressionSyntax
                 || node.Parent is NamedFieldInitializerSyntax;
 
-            private bool NoAssignment(SyntaxNode node) =>
-                node.Parent is ReturnStatementSyntax
-                || node.Parent is EqualsValueSyntax;
+            private static bool IsAssignmentStatement(SyntaxNode node) =>
+                node.Parent is AssignmentStatementSyntax assignement
+                && assignement.Left == node;
         }
     }
 }
