@@ -19,15 +19,15 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class SillyBitwiseOperation : SillyBitwiseOperationBase
     {
@@ -37,37 +37,16 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckBinary(c, -1),
-                SyntaxKind.BitwiseAndExpression);
+                SyntaxKind.AndExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckBinary(c, 0),
-                SyntaxKind.BitwiseOrExpression,
+                SyntaxKind.OrExpression,
                 SyntaxKind.ExclusiveOrExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckAssignment(c, -1),
-                SyntaxKind.AndAssignmentExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckAssignment(c, 0),
-                SyntaxKind.OrAssignmentExpression,
-                SyntaxKind.ExclusiveOrAssignmentExpression);
         }
 
         protected override object FindConstant(SemanticModel semanticModel, SyntaxNode node) =>
             node.FindConstantValue(semanticModel);
-
-        private void CheckAssignment(SyntaxNodeAnalysisContext context, int constValueToLookFor)
-        {
-            var assignment = (AssignmentExpressionSyntax)context.Node;
-            if (FindIntConstant(context.SemanticModel, assignment.Right) is int constValue && constValue == constValueToLookFor)
-            {
-                var location = assignment.Parent is StatementSyntax
-                    ? assignment.Parent.GetLocation()
-                    : assignment.OperatorToken.CreateLocation(assignment.Right);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
-            }
-        }
 
         private void CheckBinary(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {

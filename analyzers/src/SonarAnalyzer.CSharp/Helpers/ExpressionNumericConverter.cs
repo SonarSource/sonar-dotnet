@@ -28,28 +28,6 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class ExpressionNumericConverter
     {
-        private static bool TryConvertWith<T>(object o, Func<object, T> converter, out T value)
-            where T : struct
-        {
-            try
-            {
-                value = converter(o);
-                return true;
-            }
-            catch (Exception exception)
-            {
-                if (exception is FormatException ||
-                    exception is OverflowException ||
-                    exception is InvalidCastException)
-                {
-                    value = default(T);
-                    return false;
-                }
-
-                throw;
-            }
-        }
-
         private static bool TryGetConstantValue<T>(ExpressionSyntax expression,
             Func<object, T> converter, Func<int, T, T> multiplierCalculator, out T value)
             where T : struct
@@ -62,7 +40,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             if (internalExpression is LiteralExpressionSyntax literalExpression &&
-                TryConvertWith(literalExpression.Token.Value, converter, out value))
+                ConversionHelper.TryConvertWith(literalExpression.Token.Value, converter, out value))
             {
                 value = multiplierCalculator(multiplier.Value, value);
                 return true;

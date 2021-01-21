@@ -2,6 +2,14 @@
 
 namespace Tests.Diagnostics
 {
+    public enum Types
+    {
+        Class = 0,
+        Struct = 1,
+        Public = 2,
+        Private = 4
+    }
+
     class SillyBitwiseOperation
     {
         static void Main(string[] args  )
@@ -40,6 +48,8 @@ namespace Tests.Diagnostics
             resultULong = 1UL | 18446744073709551615UL; // Compliant
 
             MyMethod(1UL | 0x00000UL); // Noncompliant
+
+            var flags = Types.Class | Types.Private; // Compliant even when Class is zero
         }
 
         private static long returnLong()
