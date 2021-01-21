@@ -25,8 +25,7 @@ using Microsoft.CodeAnalysis;
 using CSharp = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VisualBasic = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers.CSharp;
-using SonarAnalyzer.Helpers.VisualBasic;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {

@@ -28,7 +28,6 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.VisualBasic;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.Utilities;
 

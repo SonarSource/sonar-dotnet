@@ -28,6 +28,6 @@ namespace SonarAnalyzer.Rules.CSharp
     public class FileMetadataAnalyzer : FileMetadataAnalyzerBase
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+            CSharpGeneratedCodeRecognizer.Instance;
     }
 }

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Helpers
     public class CSharpBaseTypeTracker : BaseTypeTracker<SyntaxKind>
     {
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.BaseList };
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
 
         public CSharpBaseTypeTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
             : base(analyzerConfiguration, rule)

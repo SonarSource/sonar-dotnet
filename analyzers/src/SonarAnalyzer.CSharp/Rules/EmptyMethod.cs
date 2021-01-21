@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+            CSharpGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind[] SyntaxKinds { get; } = new []
         {

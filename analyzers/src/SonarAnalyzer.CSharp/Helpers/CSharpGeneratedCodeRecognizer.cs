@@ -25,9 +25,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Helpers.CSharp
+namespace SonarAnalyzer.Helpers
 {
-    internal class CSharpGeneratedCodeRecognizer : Helpers.GeneratedCodeRecognizer
+    internal class CSharpGeneratedCodeRecognizer : GeneratedCodeRecognizer
     {
         #region Singleton implementation
 

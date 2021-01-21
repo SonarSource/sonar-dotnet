@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+            CSharpGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxNode GetOperand(PrefixUnaryExpressionSyntax unarySyntax) =>
             unarySyntax.Operand;

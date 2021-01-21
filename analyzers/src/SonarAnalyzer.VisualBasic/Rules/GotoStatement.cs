@@ -32,8 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         public GotoStatement() : base(RspecStrings.ResourceManager) { }
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-           Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind[] GotoSyntaxKinds => new[] { SyntaxKind.GoToStatement };
 

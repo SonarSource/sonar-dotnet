@@ -238,7 +238,7 @@ End Module";
     }
 }";
 
-            var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance);
+            var result = IsGenerated(source, CSharpGeneratedCodeRecognizer.Instance);
             result.Should().BeTrue();
         }
 
@@ -261,7 +261,7 @@ End Module";
         }
     }
 }";
-            var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance);
+            var result = IsGenerated(source, CSharpGeneratedCodeRecognizer.Instance);
             result.Should().BeTrue();
         }
 
@@ -276,7 +276,7 @@ End Module";
     }
 }";
 
-            var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance);
+            var result = IsGenerated(source, CSharpGeneratedCodeRecognizer.Instance);
             result.Should().BeFalse();
         }
     }

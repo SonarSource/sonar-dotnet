@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SonarAnalyzer.Helpers.CSharp
+namespace SonarAnalyzer.Helpers
 {
     internal static class CSharpEquivalenceChecker
     {

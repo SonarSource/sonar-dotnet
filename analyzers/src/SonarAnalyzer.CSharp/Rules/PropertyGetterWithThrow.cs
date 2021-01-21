@@ -48,6 +48,6 @@ namespace SonarAnalyzer.Rules.CSharp
             ((ThrowStatementSyntax)syntaxNode).Expression;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+            CSharpGeneratedCodeRecognizer.Instance;
     }
 }
