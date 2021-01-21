@@ -1,0 +1,16 @@
+{
+  "title": "Parameter names should match base declaration",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "suspicious"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-927",
+  "sqKey": "S927",
+  "scope": "All"
+}

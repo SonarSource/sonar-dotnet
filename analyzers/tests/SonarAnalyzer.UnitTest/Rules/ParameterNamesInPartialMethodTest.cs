@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -22,6 +22,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -46,5 +47,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ParameterNamesInPartialMethod_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ParameterNamesInPartialMethod.CSharp9.cs", new CS.ParameterNamesInPartialMethod());
 #endif
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ParameterNamesInPartialMethod_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesInPartialMethod.vb", new VB.ParameterNamesInPartialMethod());
     }
 }

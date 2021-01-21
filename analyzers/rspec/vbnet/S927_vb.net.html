@@ -1,0 +1,64 @@
+<p>The name of a parameter in an externally visible. This rule raises an issue when method override does not match the name of the parameter in the
+base declaration of the method, or the name of the parameter in the interface declaration of the method.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public MustInherit Class Base
+
+    Public MustOverride Sub DoSomething(Name As String)
+
+End Class
+
+Public Interface IContract
+
+    Sub Add(Count As Integer)
+
+End Interface
+
+Public Class Handler
+    Inherits Base
+    Implements IContract
+
+    Public Overrides Sub DoSomething(Description As String) 'Noncompliant, parameter name should be "Name"
+        ' ...
+    End Sub
+
+    Public Sub Add(Difference As Integer) Implements IContract.Add  'Noncompliant, parameter name should be "Count"
+        ' ...
+    End Sub
+
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public MustInherit Class Base
+
+    Public MustOverride Sub DoSomething(Name As String)
+
+End Class
+
+Public Interface IContract
+
+    Sub Add(Count As Integer)
+
+End Interface
+
+Public Class Handler
+    Inherits Base
+    Implements IContract
+
+    Public Overrides Sub DoSomething(Name As String)
+        ' ...
+    End Sub
+
+    Public Sub Add(Count As Integer) Implements IContract.Add
+        ' ...
+    End Sub
+
+End Class
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://wiki.sei.cmu.edu/confluence/x/ftUxBQ">CERT, DCL40-C.</a> - Do not create incompatible declarations of the same function or
+  object </li>
+</ul>
+
