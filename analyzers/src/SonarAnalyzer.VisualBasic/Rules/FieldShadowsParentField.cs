@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -39,9 +38,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    // FIXME: Doresit
+                    var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
+                    if (!fieldDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.ShadowsKeyword)))
+                    {
+                        foreach (var diagnostics in fieldDeclaration.Declarators.SelectMany(x => x.Names).SelectMany(x => CheckFields(c.SemanticModel, x)))
+                        {
+                            c.ReportDiagnosticWhenActive(diagnostics);
+                        }
+                    }
                 },
-                SyntaxKind.InvocationExpression);
+                SyntaxKind.FieldDeclaration);
 
         protected override SyntaxToken GetIdentifier(ModifiedIdentifierSyntax declarator) =>
             declarator.Identifier;
