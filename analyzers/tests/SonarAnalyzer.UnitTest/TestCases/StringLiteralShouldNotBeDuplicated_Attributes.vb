@@ -21,8 +21,8 @@ Namespace Tests.Diagnostics
 
         ' nonCompliant - repetition above threshold. String in attributes should not be highlighted
         Private values2 As String() = { "CA1024:UsePropertiesWhereAppropriate", ' Noncompliant {{Define a constant instead of using this literal 'CA1024:UsePropertiesWhereAppropriate' 3 times.}}
-            "CA1024:UsePropertiesWhereAppropriate",     ' Secondary
-            "CA1024:UsePropertiesWhereAppropriate" }    ' Secondary
+            "CA1024:UsePropertiesWhereAppropriate",                             ' Secondary
+            "CA1024:UsePropertiesWhereAppropriate" }                            ' Secondary
 
     End Class
     

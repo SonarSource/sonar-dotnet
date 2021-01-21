@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -27,102 +26,40 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase
+    public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase<SyntaxKind, LiteralExpressionSyntax>
     {
-        internal const string DiagnosticId = "S1192";
-        private const string MessageFormat = "Define a constant instead of using this literal '{0}' {1} times.";
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private const int MinimumStringLength = 5;
-
-        private const int ThresholdDefaultValue = 3;
-        [RuleParameter("threshold", PropertyType.Integer, "Number of times a literal must be duplicated to trigger an issue.",
-            ThresholdDefaultValue)]
-        public int Threshold { get; set; } = ThresholdDefaultValue;
-
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override SyntaxKind[] SyntaxKinds { get; } =
         {
-            // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary
-            // locations. The problem is that this scenario is not yet supported on SonarQube side.
-            // Hence the decision to do like other languages, at class-level
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                ReportOnViolation,
-                SyntaxKind.ClassBlock,
-                SyntaxKind.StructureBlock);
-        }
+            SyntaxKind.ClassBlock,
+            SyntaxKind.StructureBlock
+        };
 
-        private void ReportOnViolation(SyntaxNodeAnalysisContext context)
-        {
-            if (context.Node.Ancestors().OfType<ClassBlockSyntax>().Any()
-                || context.Node.Ancestors().OfType<StructureBlockSyntax>().Any())
-            {
-                // Don't report on inner instances
-                return;
-            }
+        public StringLiteralShouldNotBeDuplicated() : base(RspecStrings.ResourceManager) { }
 
-            var stringLiterals = context.Node
-                .DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
-                .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
-                .Cast<LiteralExpressionSyntax>();
-
-            // Collect duplications
-            var stringWithLiterals = new Dictionary<string, List<LiteralExpressionSyntax>>();
-            foreach (var literal in stringLiterals)
-            {
-                // Remove leading and trailing double quotes
-                var stringValue = ExtractStringContent(literal.Token.Text);
-
-                if (stringValue != null &&
-                    stringValue.Length >= MinimumStringLength &&
-                    !IsMatchingMethodParameterName(literal))
-                {
-                    if (!stringWithLiterals.ContainsKey(stringValue))
-                    {
-                        stringWithLiterals[stringValue] = new List<LiteralExpressionSyntax>();
-                    }
-
-                    stringWithLiterals[stringValue].Add(literal);
-                }
-            }
-
-            // Report duplications
-            foreach (var item in stringWithLiterals)
-            {
-                if (item.Value.Count > Threshold)
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value[0].GetLocation(),
-                        additionalLocations: item.Value.Skip(1).Select(x => x.GetLocation()),
-                        messageArgs: new object[] { item.Key, item.Value.Count }));
-                }
-            }
-        }
-
-        private static bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
+        protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
             literalExpression.FirstAncestorOrSelf<MethodBlockBaseSyntax>()
                 ?.BlockStatement?.ParameterList
                 ?.Parameters
                 .Any(p => p.Identifier.Identifier.ValueText == literalExpression.Token.ValueText)
                 ?? false;
 
-        private static string ExtractStringContent(string literal)
-        {
-            if (literal.StartsWith("@\""))
-            {
-                return literal.Substring(2, literal.Length - 3);
-            }
-            else
-            {
-                return literal.Substring(1, literal.Length - 2);
-            }
-        }
+        protected override bool IsInnerInstance(SyntaxNodeAnalysisContext context) =>
+            context.Node.Ancestors().OfType<ClassBlockSyntax>().Any() || context.Node.Ancestors().OfType<StructureBlockSyntax>().Any();
+
+        protected override IEnumerable<LiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node) =>
+            node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
+                .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
+                .Cast<LiteralExpressionSyntax>();
+
+        protected override string GetLiteralValue(LiteralExpressionSyntax literal) =>
+            literal.Token.Text;
     }
 }
