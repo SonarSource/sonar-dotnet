@@ -101,6 +101,22 @@ public class CoverageTest {
   }
 
   @Test
+  public void open_cover_with_deterministic_source_paths() throws Exception {
+    BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "no_rule", "sonar.cs.opencover.reportsPaths", "opencover.xml");
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
+    org.sonarqube.ws.Measures.Measure linesToCover = getMeasure("CoverageWithDeterministicSourcePaths", "lines_to_cover");
+    org.sonarqube.ws.Measures.Measure uncoveredLines = getMeasure("CoverageWithDeterministicSourcePaths", "uncovered_lines");
+
+    assertThat(linesToCover.getValue()).isEqualTo("6");
+    assertThat(uncoveredLines.getValue()).isEqualTo("3");
+    assertCoverageMetrics("CoverageWithDeterministicSourcePaths", 6, 3, 9, 4);
+  }
+
+  @Test
   public void dotcover() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
 
