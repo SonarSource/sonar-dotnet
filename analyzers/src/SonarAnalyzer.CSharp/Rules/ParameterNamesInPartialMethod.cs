@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -27,66 +27,21 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ParameterNamesInPartialMethod : ParameterNamesInPartialMethodBase
+    public sealed class ParameterNamesInPartialMethod : ParameterNamesInPartialMethodBase<SyntaxKind, MethodDeclarationSyntax>
     {
-        internal const string DiagnosticId = "S927";
-        private const string MessageFormat = "Rename parameter '{0}' to '{1}' to match the {2} declaration.";
+        public ParameterNamesInPartialMethod() : base(RspecStrings.ResourceManager) { }
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override StringComparison NameComparison { get; } = StringComparison.Ordinal;
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.MethodDeclaration };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var methodSyntax = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodSyntax);
-
-                    if (methodSymbol?.PartialImplementationPart != null)
-                    {
-                        if (methodSymbol.PartialImplementationPart.DeclaringSyntaxReferences
-                             .FirstOrDefault()?.GetSyntax() is MethodDeclarationSyntax methodImplementationSyntax)
-                        {
-                            VerifyParameters(c, methodImplementationSyntax, methodSymbol.Parameters, "partial class");
-                        }
-                    }
-                    else if (methodSymbol?.OverriddenMethod != null)
-                    {
-                        VerifyParameters(c, methodSyntax, methodSymbol.OverriddenMethod.Parameters, "base class");
-                    }
-                    else
-                    {
-                        var interfaceMember = methodSymbol.GetInterfaceMember();
-                        if (interfaceMember != null)
-                        {
-                            VerifyParameters(c, methodSyntax, interfaceMember.Parameters, "interface");
-                        }
-                    }
-                },
-                SyntaxKind.MethodDeclaration);
-        }
-
-        private static void VerifyParameters(SyntaxNodeAnalysisContext context,
-            MethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> expectedParameters, string expectedLocation)
-        {
-            methodSyntax.ParameterList.Parameters
-                .Zip(expectedParameters, (actual, expected) => new { actual, expected })
-                .Where(x => x.actual.Identifier.ValueText != x.expected.Name)
-                .ToList()
-                .ForEach(x =>
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                        x.actual.Identifier.GetLocation(),
-                        x.actual.Identifier.ValueText, x.expected.Name, expectedLocation));
-                });
-        }
+        protected override IEnumerable<SyntaxToken> ParameterIdentifiers(MethodDeclarationSyntax method) =>
+            method.ParameterList.Parameters.Select(x => x.Identifier);
     }
 }

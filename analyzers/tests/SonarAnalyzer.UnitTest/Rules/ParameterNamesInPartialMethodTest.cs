@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParameterNamesInPartialMethod() =>
+        public void ParameterNamesInPartialMethod_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesInPartialMethod.cs",
                                     new CS.ParameterNamesInPartialMethod(),
 #if NETFRAMEWORK

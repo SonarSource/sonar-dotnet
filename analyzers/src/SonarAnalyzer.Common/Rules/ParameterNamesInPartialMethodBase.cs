@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,23 +18,68 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ParameterNamesInPartialMethodBase : SonarDiagnosticAnalyzer
+    public abstract class ParameterNamesInPartialMethodBase<TSyntaxKind, TMethodDeclarationSyntax> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
+        where TMethodDeclarationSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S927";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Rename parameter '{0}' to '{1}' to match the {2} declaration.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        private readonly DiagnosticDescriptor rule;
 
-        protected DiagnosticDescriptor Rule { get; }
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract StringComparison NameComparison { get; }
+        protected abstract TSyntaxKind[] SyntaxKinds { get; }
+        protected abstract IEnumerable<SyntaxToken> ParameterIdentifiers(TMethodDeclarationSyntax method);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected ParameterNamesInPartialMethodBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, c =>
+                {
+                    var methodSyntax = (TMethodDeclarationSyntax)c.Node;
+                    if (c.SemanticModel.GetDeclaredSymbol(methodSyntax) is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any())
+                    {
+                        if (methodSymbol.PartialImplementationPart != null)
+                        {
+                            if (methodSymbol.PartialImplementationPart.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is TMethodDeclarationSyntax methodImplementationSyntax)
+                            {
+                                VerifyParameters(c, methodImplementationSyntax, methodSymbol.Parameters, "partial class");
+                            }
+                        }
+                        else if (methodSymbol.OverriddenMethod != null)
+                        {
+                            VerifyParameters(c, methodSyntax, methodSymbol.OverriddenMethod.Parameters, "base class");
+                        }
+                        else if (methodSymbol.GetInterfaceMember() is { } interfaceMember)
+                        {
+                            VerifyParameters(c, methodSyntax, interfaceMember.Parameters, "interface");
+                        }
+                    }
+                },
+                SyntaxKinds);
+
+        private void VerifyParameters(SyntaxNodeAnalysisContext context, TMethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> expectedParameters, string expectedLocation)
+        {
+            foreach (var item in ParameterIdentifiers(methodSyntax)
+                                    .Zip(expectedParameters, (actual, expected) => new { actual, expected })
+                                    .Where(x => !x.actual.ValueText.Equals(x.expected.Name, NameComparison)))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.actual.GetLocation(), item.actual.ValueText, item.expected.Name, expectedLocation));
+            }
+        }
     }
 }
