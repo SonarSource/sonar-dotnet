@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class NoExceptionsInFinally : SonarDiagnosticAnalyzer
+    public sealed class NoExceptionsInFinally : NoExceptionsInFinallyBase
     {
         internal const string DiagnosticId = "S1163";
         private const string MessageFormat = "Refactor this code to not throw exceptions in finally blocks.";

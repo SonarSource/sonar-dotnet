@@ -1,0 +1,17 @@
+{
+  "title": "Exceptions should not be thrown in finally blocks",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "error-handling",
+    "suspicious"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-1163",
+  "sqKey": "S1163",
+  "scope": "Main"
+}

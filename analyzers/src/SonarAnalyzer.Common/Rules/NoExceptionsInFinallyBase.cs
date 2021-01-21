@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,24 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class NoExceptionsInFinallyTest
+    public abstract class NoExceptionsInFinallyBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void NoExceptionInFinally_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NoExceptionsInFinally.cs", new CS.NoExceptionsInFinally());
+        protected const string DiagnosticId = "S1163";
+        private const string MessageFormat = "";
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void NoExceptionsInFinally_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NoExceptionsInFinally.vb", new VB.NoExceptionsInFinally());
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected DiagnosticDescriptor Rule { get; }
+
+        protected NoExceptionsInFinallyBase(System.Resources.ResourceManager rspecResources) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
     }
 }
