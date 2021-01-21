@@ -1,0 +1,16 @@
+{
+  "title": "Child class fields should not differ from parent class fields only by capitalization",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-4025",
+  "sqKey": "S4025",
+  "scope": "All"
+}
