@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -37,8 +36,7 @@ namespace SonarAnalyzer.Rules
 
         private readonly DiagnosticDescriptor rule;
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract StringComparison NameComparison { get; }
+        protected abstract LanguageFacade LanguageFacade { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
         protected abstract IEnumerable<SyntaxToken> ParameterIdentifiers(TMethodDeclarationSyntax method);
 
@@ -48,7 +46,7 @@ namespace SonarAnalyzer.Rules
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(LanguageFacade.GeneratedCodeRecognizer, c =>
                 {
                     var methodSyntax = (TMethodDeclarationSyntax)c.Node;
                     if (c.SemanticModel.GetDeclaredSymbol(methodSyntax) is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any())
@@ -76,7 +74,7 @@ namespace SonarAnalyzer.Rules
         {
             foreach (var item in ParameterIdentifiers(methodSyntax)
                                     .Zip(expectedParameters, (actual, expected) => new { actual, expected })
-                                    .Where(x => !x.actual.ValueText.Equals(x.expected.Name, NameComparison)))
+                                    .Where(x => !x.actual.ValueText.Equals(x.expected.Name, LanguageFacade.NameComparison)))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.actual.GetLocation(), item.actual.ValueText, item.expected.Name, expectedLocation));
             }

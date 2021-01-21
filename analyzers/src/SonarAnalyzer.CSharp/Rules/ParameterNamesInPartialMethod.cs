@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -27,7 +26,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -37,8 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public ParameterNamesInPartialMethod() : base(RspecStrings.ResourceManager) { }
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
-        protected override StringComparison NameComparison { get; } = StringComparison.Ordinal;
+        protected override LanguageFacade LanguageFacade => CSharpFacade.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.MethodDeclaration };
 
         protected override IEnumerable<SyntaxToken> ParameterIdentifiers(MethodDeclarationSyntax method) =>
