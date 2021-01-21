@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,23 +18,60 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class FieldShadowsParentFieldBase : SonarDiagnosticAnalyzer
+    public abstract class FieldShadowsParentFieldBase<TVariableDeclaratorSyntax> : SonarDiagnosticAnalyzer
+        where TVariableDeclaratorSyntax : SyntaxNode
     {
-        protected const string DiagnosticId = "S2387";
-        private const string MessageFormat = "";
+        protected const string S2387DiagnosticId = "S2387";
+        private const string S2387MessageFormat = "'{0}' is the name of a field in '{1}'.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected const string S4025DiagnosticId = "S4025";
+        private const string S4025MessageFormat = "Rename this field; it may be confused with '{0}' in '{1}'.";
 
-        protected DiagnosticDescriptor Rule { get; }
+        private readonly DiagnosticDescriptor s2387;
+        private readonly DiagnosticDescriptor s4025;
 
-        protected FieldShadowsParentFieldBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        protected abstract SyntaxToken GetIdentifier(TVariableDeclaratorSyntax declarator);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s2387, s4025);
+
+        protected FieldShadowsParentFieldBase(System.Resources.ResourceManager rspecResources)
+        {
+            s2387 = DiagnosticDescriptorBuilder.GetDescriptor(S2387DiagnosticId, S2387MessageFormat, rspecResources);
+            s4025 = DiagnosticDescriptorBuilder.GetDescriptor(S4025DiagnosticId, S4025MessageFormat, rspecResources);
+        }
+
+        protected IEnumerable<Diagnostic> CheckFields(SemanticModel semanticModel, TVariableDeclaratorSyntax variableDeclarator)
+        {
+            if (semanticModel.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol fieldSymbol)
+            {
+                var fieldName = fieldSymbol.Name;
+                var fieldNameLower = fieldSymbol.Name.ToUpperInvariant();
+                foreach (var baseType in fieldSymbol.ContainingType.BaseType.GetSelfAndBaseTypes())
+                {
+                    var similarFields = baseType.GetMembers().OfType<IFieldSymbol>().Where(IsMatch).ToList();
+                    if (similarFields.Any(field => field.Name == fieldName))
+                    {
+                        yield return Diagnostic.Create(s2387, GetIdentifier(variableDeclarator).GetLocation(), fieldName, baseType.Name);
+                    }
+                    else if (similarFields.Any())
+                    {
+                        yield return Diagnostic.Create(s4025, GetIdentifier(variableDeclarator).GetLocation(), similarFields.First().Name, baseType.Name);
+                    }
+                }
+
+                bool IsMatch(IFieldSymbol field) =>
+                    field.DeclaredAccessibility != Accessibility.Private
+                    && !field.IsStatic
+                    && field.Name.ToUpperInvariant() == fieldNameLower;
+            }
+        }
     }
 }

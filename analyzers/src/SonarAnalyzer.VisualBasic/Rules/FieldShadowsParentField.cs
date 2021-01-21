@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,20 +30,20 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
-    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase
+    [Rule(S2387DiagnosticId)]
+    [Rule(S4025DiagnosticId)]
+    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase<ModifiedIdentifierSyntax>
     {
         public FieldShadowsParentField() : base(RspecStrings.ResourceManager) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
+                    // FIXME: Doresit
                 },
                 SyntaxKind.InvocationExpression);
+
+        protected override SyntaxToken GetIdentifier(ModifiedIdentifierSyntax declarator) =>
+            declarator.Identifier;
     }
 }

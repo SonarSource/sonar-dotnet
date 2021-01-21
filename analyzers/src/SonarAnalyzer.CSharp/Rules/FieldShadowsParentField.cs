@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -33,73 +31,23 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(S2387DiagnosticId)]
     [Rule(S4025DiagnosticId)]
-    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase
+    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase<VariableDeclaratorSyntax>
     {
-        internal const string S2387DiagnosticId = "S2387";
-        private const string S2387MessageFormat = "'{0}' is the name of a field in '{1}'.";
+        public FieldShadowsParentField() : base(RspecStrings.ResourceManager) { }
 
-        internal const string S4025DiagnosticId = "S4025";
-        private const string S4025MessageFormat = "Rename this field; it may be confused with '{0}' in '{1}'.";
-
-        private static readonly DiagnosticDescriptor s2387 =
-            DiagnosticDescriptorBuilder.GetDescriptor(S2387DiagnosticId, S2387MessageFormat, RspecStrings.ResourceManager);
-
-        private static readonly DiagnosticDescriptor s4025 =
-            DiagnosticDescriptorBuilder.GetDescriptor(S4025DiagnosticId, S4025MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(s2387, s4025);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
-
-                    fieldDeclaration.Declaration.Variables
-                        .SelectMany(v => CheckFields(c.SemanticModel, v))
-                        .ToList()
-                        .ForEach(d => c.ReportDiagnosticWhenActive(d));
+                    foreach (var diagnostics in fieldDeclaration.Declaration.Variables.SelectMany(v => CheckFields(c.SemanticModel, v)))
+                    {
+                        c.ReportDiagnosticWhenActive(diagnostics);
+                    }
                 },
                 SyntaxKind.FieldDeclaration);
-        }
 
-        private static IEnumerable<Diagnostic> CheckFields(SemanticModel semanticModel, VariableDeclaratorSyntax variableDeclarator)
-        {
-            if (!(semanticModel.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol fieldSymbol))
-            {
-                yield break;
-            }
-
-            var fieldName = fieldSymbol.Name;
-            var fieldNameLower = fieldSymbol.Name.ToUpperInvariant();
-            var declaringType = fieldSymbol.ContainingType;
-            var baseTypes = declaringType.BaseType.GetSelfAndBaseTypes();
-
-            foreach (var baseType in baseTypes)
-            {
-                var similarFields = baseType.GetMembers()
-                    .OfType<IFieldSymbol>()
-                    .Where(field => field.DeclaredAccessibility != Accessibility.Private)
-                    .Where(field => !field.IsStatic)
-                    .Where(field => field.Name.ToUpperInvariant() == fieldNameLower)
-                    .ToList();
-
-                if (similarFields.Any(field => field.Name == fieldName))
-                {
-                    yield return Diagnostic.Create(s2387, variableDeclarator.Identifier.GetLocation(),
-                        fieldName, baseType.Name);
-                }
-                else if (similarFields.Any())
-                {
-                    yield return Diagnostic.Create(s4025, variableDeclarator.Identifier.GetLocation(),
-                        similarFields.First().Name, baseType.Name);
-                }
-                else
-                {
-                    // nothing to do
-                }
-            }
-        }
+        protected override SyntaxToken GetIdentifier(VariableDeclaratorSyntax declarator) =>
+            declarator.Identifier;
     }
 }
