@@ -2,12 +2,20 @@
     Public Function AssignedReturnValueOnly() As Integer
         AssignedReturnValueOnly = 42 ' Noncompliant ^9#23
     End Function
-
-    Public Function ExplictlyReturnDefaultReturnValue() As Integer
-        ExplictlyReturnDefaultReturnValue = 42  ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
-        Return ExplictlyReturnDefaultReturnValue ' Noncompliant {{Do not make use of the implicit return value.}}
-    End Function
-
+	
+	Public Function AssignementStatements() As Integer
+		AssignementStatements = 101 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+        AssignementStatements += 42 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+        AssignementStatements -= 17 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+        AssignementStatements *= 99 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+        AssignementStatements /= 24 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+		AssignementStatements \= 21 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+        AssignementStatements &= 42 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+        AssignementStatements ^= 14 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+        AssignementStatements <<= 2 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+        AssignementStatements >>= 1 ' Noncompliant {{Use a 'Return' statement; assigning returned values to function names is obsolete.}}
+	End Function
+    
     Public Function CaseInsensitive() As Integer
         CASEINSENSITIVE = 42  ' Noncompliant
     End Function
@@ -16,9 +24,22 @@
         SharedFunction = 42  ' Noncompliant
     End Function
 	
-	Public Function ReadReturnValueOnly() As Integer
-		dim value = ReadReturnValueOnly ' Noncompliant {{Do not make use of the implicit return value.}}
-		return value
+	Public Function ExplictlyReturnDefaultReturnValue() As Integer
+        Return ExplictlyReturnDefaultReturnValue ' Noncompliant {{Do not make use of the implicit return value.}}
+    End Function
+		
+	Public Function ReadAssignementStatements() As Integer
+		dim value as Integer = ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
+        value += ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
+        value -= ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
+        value *= ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
+        value /= ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
+		value \= ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
+        value &= ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
+        value ^= ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
+        value <<= ReadAssignementStatements ' Noncompliant {{Do not make use of the implicit return value.}}
+        value >>= ReadAssignementStatements ' Noncompliant {{Do not make use of the implicit return value.}}
+        Return value
 	End Function
 
 End Class
@@ -61,7 +82,7 @@ Public Class DoesNotApplyOn
 	
 	Public Function WriteToOtherFunction(other As OtherType) As Integer
         With other
-            Return .WriteToOtherFunction(42)
+            Return .WriteToOtherFunction(42) ' Compliant
         End With
     End Function
 	
