@@ -36,13 +36,15 @@ namespace SonarAnalyzer.Rules.CSharp
         public FieldShadowsParentField() : base(RspecStrings.ResourceManager) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
-                    foreach (var diagnostics in fieldDeclaration.Declaration.Variables.SelectMany(v => CheckFields(c.SemanticModel, v)))
+                    if (!fieldDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.NewKeyword)))
                     {
-                        c.ReportDiagnosticWhenActive(diagnostics);
+                        foreach (var diagnostics in fieldDeclaration.Declaration.Variables.SelectMany(x => CheckFields(c.SemanticModel, x)))
+                        {
+                            c.ReportDiagnosticWhenActive(diagnostics);
+                        }
                     }
                 },
                 SyntaxKind.FieldDeclaration);

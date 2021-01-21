@@ -29,6 +29,6 @@ namespace Repro_3393
 
     public class DogContainer : AnimalContainer
     {
-        private new readonly Dog animal; // Noncompliant FP, modifier "new" is used to explicitly declare the intention
+        private new readonly Dog animal; // Compliant, modifier "new" is used to explicitly declare the intention
     }
 }
