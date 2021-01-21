@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(S2387DiagnosticId)]
     [Rule(S4025DiagnosticId)]
-    public sealed class FieldShadowsParentField : SonarDiagnosticAnalyzer
+    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase
     {
         internal const string S2387DiagnosticId = "S2387";
         private const string S2387MessageFormat = "'{0}' is the name of a field in '{1}'.";

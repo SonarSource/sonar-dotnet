@@ -3009,6 +3009,39 @@
   <data name="S2376_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2387_Category" xml:space="preserve">
+    <value>Blocker Code Smell</value>
+  </data>
+  <data name="S2387_Description" xml:space="preserve">
+    <value>Having a variable with the same name in two unrelated classes is fine, but do the same thing within a class hierarchy and you'll get confusion at best, chaos at worst. </value>
+  </data>
+  <data name="S2387_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2387_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2387_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S2387_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S2387_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S2387_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S2387_Tags" xml:space="preserve">
+    <value>confusing</value>
+  </data>
+  <data name="S2387_Title" xml:space="preserve">
+    <value>Child class fields should not shadow parent class fields</value>
+  </data>
+  <data name="S2387_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2429_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>

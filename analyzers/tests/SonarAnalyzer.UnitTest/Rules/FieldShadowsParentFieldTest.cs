@@ -21,6 +21,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -50,5 +51,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FieldsShouldNotDifferByCapitalization_CShar9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldNotDifferByCapitalization.CSharp9.cs", new CS.FieldShadowsParentField());
 #endif
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldShadowsParentField_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
     }
 }
