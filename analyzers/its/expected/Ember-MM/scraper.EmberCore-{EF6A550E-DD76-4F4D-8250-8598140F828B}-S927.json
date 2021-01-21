@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'studio' to 'sStudio' to match the interface declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  72,
+"endLine":  135,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'mMovie' to 'DBMovie' to match the interface declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  640,
+"startColumn":  38,
+"endLine":  640,
+"endColumn":  44
+}
+}
+}
+]
+}
