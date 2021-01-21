@@ -22,12 +22,12 @@ using System;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal sealed class CSharpFacade : LanguageFacade
+    internal sealed class CSharpFacade : ILanguageFacade
     {
         private static readonly Lazy<CSharpFacade> Singleton = new Lazy<CSharpFacade>(() => new CSharpFacade());
 
-        public override StringComparison NameComparison => StringComparison.Ordinal;
-        public override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+        public StringComparison NameComparison => StringComparison.Ordinal;
+        public GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
         public static CSharpFacade Instance => Singleton.Value;
 

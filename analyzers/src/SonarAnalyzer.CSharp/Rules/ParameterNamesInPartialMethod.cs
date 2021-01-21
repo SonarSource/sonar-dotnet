@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public ParameterNamesInPartialMethod() : base(RspecStrings.ResourceManager) { }
 
-        protected override LanguageFacade LanguageFacade => CSharpFacade.Instance;
+        protected override ILanguageFacade LanguageFacade => CSharpFacade.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.MethodDeclaration };
 
         protected override IEnumerable<SyntaxToken> ParameterIdentifiers(MethodDeclarationSyntax method) =>

@@ -22,9 +22,9 @@ using System;
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class LanguageFacade
+    public interface ILanguageFacade
     {
-        public abstract StringComparison NameComparison { get; }
-        public abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        StringComparison NameComparison { get; }
+        GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
     }
 }

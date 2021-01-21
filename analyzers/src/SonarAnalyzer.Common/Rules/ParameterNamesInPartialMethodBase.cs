@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
 
         private readonly DiagnosticDescriptor rule;
 
-        protected abstract LanguageFacade LanguageFacade { get; }
+        protected abstract ILanguageFacade LanguageFacade { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
         protected abstract IEnumerable<SyntaxToken> ParameterIdentifiers(TMethodDeclarationSyntax method);
 
