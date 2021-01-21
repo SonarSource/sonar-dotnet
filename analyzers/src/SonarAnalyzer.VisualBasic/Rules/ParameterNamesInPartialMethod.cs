@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -26,24 +27,21 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ParameterNamesInPartialMethod : ParameterNamesInPartialMethodBase
+    public sealed class ParameterNamesInPartialMethod : ParameterNamesInPartialMethodBase<SyntaxKind, MethodBlockBaseSyntax>
     {
         public ParameterNamesInPartialMethod() : base(RspecStrings.ResourceManager) { }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override StringComparison NameComparison { get; } = StringComparison.OrdinalIgnoreCase;
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.SubBlock, SyntaxKind.FunctionBlock };
+
+        protected override IEnumerable<SyntaxToken> ParameterIdentifiers(MethodBlockBaseSyntax method) =>
+            method.BlockStatement.ParameterList.Parameters.Select(x => x.Identifier.Identifier);
     }
 }
