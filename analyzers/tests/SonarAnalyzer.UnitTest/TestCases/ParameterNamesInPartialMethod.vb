@@ -7,6 +7,12 @@ Public MustInherit Class Base
     Public Overridable Sub DoSomethingOverridable(Name As String)
     End Sub
 
+    Public Sub NoParameters()
+    End Sub
+
+    Public Sub NoParametersNoParenthesis  'This should not have ()
+    End Sub
+
 End Class
 
 Public Interface IContract
