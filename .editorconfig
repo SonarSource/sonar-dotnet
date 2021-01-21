@@ -273,7 +273,7 @@ dotnet_diagnostic.SA1200.severity = none # needs configuration to be "outsideNam
 dotnet_diagnostic.SA1201.severity = none # needs configuration for our coding style order
 dotnet_diagnostic.SA1202.severity = warning
 dotnet_diagnostic.SA1203.severity = warning
-dotnet_diagnostic.SA1204.severity = warning
+dotnet_diagnostic.SA1204.severity = none # Doesn't match our coding style for private static methods
 dotnet_diagnostic.SA1205.severity = warning
 dotnet_diagnostic.SA1206.severity = warning
 dotnet_diagnostic.SA1207.severity = warning
@@ -295,7 +295,7 @@ dotnet_diagnostic.SA1301.severity = warning
 dotnet_diagnostic.SA1302.severity = warning
 dotnet_diagnostic.SA1303.severity = warning
 dotnet_diagnostic.SA1304.severity = warning
-dotnet_diagnostic.SA1305.severity = warning
+dotnet_diagnostic.SA1305.severity = none # Noisy for other prefixes csFileName, orCondition
 dotnet_diagnostic.SA1306.severity = warning
 dotnet_diagnostic.SA1307.severity = warning
 dotnet_diagnostic.SA1308.severity = warning
@@ -309,7 +309,7 @@ dotnet_diagnostic.SA1314.severity = warning
 # Maintainability Rules (SA1400-) https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/1.1.118/documentation/MaintainabilityRules.md
 
 dotnet_diagnostic.SA1400.severity = warning
-dotnet_diagnostic.SA1401.severity = warning
+dotnet_diagnostic.SA1401.severity = none # We have better rules S2357 and S1104
 dotnet_diagnostic.SA1402.severity = none # we use the pattern of keeping 2 base classes in the same file to split generic from non-generic logic
 dotnet_diagnostic.SA1403.severity = warning
 dotnet_diagnostic.SA1404.severity = warning
