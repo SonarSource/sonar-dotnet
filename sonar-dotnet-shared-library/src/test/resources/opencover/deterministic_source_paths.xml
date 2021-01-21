@@ -1,19 +1,7 @@
-<!--
-Instructions to generate this file, after the build:
-
- OpenCover.Console.exe -output:"opencover.xml" -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" -targetargs:".\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\CoverageWithDeterministicSourcePaths.Tests.dll"
-
-Then manually change
-
-"/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs"
-
-to
-
-"/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs"
-
-because the folder `CoverageWithDeterministicSourcePaths` is copied to a temp folder by the integration test
--->
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    The `opencover.xml` file from the integration test project CoverageWithDeterministicSourcePaths.
+-->
 <CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.7.922.0">
   <Summary numSequencePoints="9" visitedSequencePoints="4" numBranchPoints="4" visitedBranchPoints="2" sequenceCoverage="44.44" branchCoverage="50" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="1" visitedClasses="2" numClasses="3" visitedMethods="2" numMethods="4" />
   <Modules>
@@ -895,7 +883,7 @@ because the folder `CoverageWithDeterministicSourcePaths` is copied to a temp fo
       <ModuleTime>2021-01-21T14:45:15.947124Z</ModuleTime>
       <ModuleName>CoverageWithDeterministicSourcePaths</ModuleName>
       <Files>
-        <File uid="5" fullPath="/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs" />
+        <File uid="5" fullPath="/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs" />
       </Files>
       <Classes>
         <Class>

@@ -23,9 +23,14 @@ import java.util.Optional;
 
 public interface FileService {
 
+  /**
+   * Returns true if the absolute path is indexed by the scanner and has the correct extension.
+   */
   boolean isSupportedAbsolute(String absolutePath);
 
   /**
+   * Returns the absolute path for a deterministic build path.
+   *
    * Note that the absolute path returned by the Scanner may be different from the absolute path returned by the Operating System
    * @see org.sonar.api.batch.fs.InputFile#uri()
    *

@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -46,8 +47,8 @@ public class OpenCoverReportParser implements CoverageParser {
 
     private final File file;
     private final Coverage coverage;
-    // the key is the file ID, the value is the file path
-    private final Map<String, String> files = new HashMap<>();
+    // the key is the file ID, the value is the file path (which can be missing if the file is not found on disk)
+    private final Map<String, Optional<String>> files = new HashMap<>();
     // the key is the file path
     private String fileRef;
 
@@ -88,11 +89,23 @@ public class OpenCoverReportParser implements CoverageParser {
       String uid = xmlParserHelper.getRequiredAttribute("uid");
       String fullPath = xmlParserHelper.getRequiredAttribute("fullPath");
 
+
+      String canonicalPath;
       try {
-        files.put(uid, new File(fullPath).getCanonicalPath());
+        canonicalPath = new File(fullPath).getCanonicalPath();
       } catch (IOException e) {
         LOG.debug("Skipping the import of OpenCover code coverage for the invalid file path: " + fullPath
           + " at line " + xmlParserHelper.stream().getLocation().getLineNumber(), e);
+        return;
+      }
+
+      if (fileService.isSupportedAbsolute(canonicalPath)) {
+        files.put(uid, Optional.of(canonicalPath));
+      } else {
+        // maybe it's a deterministic build file path
+        Optional<String> absolutePath = fileService.getAbsolutePath(fullPath);
+        files.put(uid, absolutePath);
+        absolutePath.ifPresent(s -> LOG.debug("Found indexed file '{}' for coverage entry '{}'.", s, fullPath));
       }
     }
 
@@ -108,17 +121,17 @@ public class OpenCoverReportParser implements CoverageParser {
       }
 
       if (files.containsKey(fileId)) {
-        String filePath = files.get(fileId);
+        Optional<String> filePath = files.get(fileId);
 
-        if (fileService.isSupportedAbsolute(filePath)) {
+        if (filePath.isPresent()) {
+          String absoluteFilePath = filePath.get();
+          coverage.addHits(absoluteFilePath, line, visitCount);
+
           LOG.trace("OpenCover parser: add hits for fileId '{}', filePath '{}', line '{}', visitCount '{}'",
-            fileId, filePath, line, visitCount);
-
-          coverage.addHits(filePath, line, visitCount);
+            fileId, absoluteFilePath, line, visitCount);
         } else {
-          LOG.debug("Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +
-              " is not indexed or does not have the supported language.",
-            fileId, line, visitCount, filePath);
+          LOG.debug("Skipping the fileId '{}', line '{}', visitCount '{}' because file is not indexed or does not have the supported language.",
+            fileId, line, visitCount);
         }
       } else {
         LOG.debug("OpenCover parser: the fileId '{}' key is not contained in files", fileId);
@@ -132,7 +145,7 @@ public class OpenCoverReportParser implements CoverageParser {
       }
 
       if (files.containsKey(fileId)) {
-        String filePath = files.get(fileId);
+        Optional<String> filePath = files.get(fileId);
 
         int line = xmlParserHelper.getIntAttributeOrZero("sl");
         if (line == 0){
@@ -145,12 +158,15 @@ public class OpenCoverReportParser implements CoverageParser {
         int path = xmlParserHelper.getRequiredIntAttribute("path");
         int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
 
-        if (fileService.isSupportedAbsolute(filePath)) {
-          coverage.add(new BranchPoint(filePath, line, offset, offsetEnd, path, visitCount));
+        if (filePath.isPresent()) {
+          coverage.add(new BranchPoint(filePath.get(), line, offset, offsetEnd, path, visitCount));
+
+          LOG.trace("OpenCover parser: add branch hits for fileId '{}', filePath '{}', line '{}', offset '{}', visitCount '{}'",
+            fileId, filePath.get(), line, offset, visitCount);
         } else {
-          LOG.debug("OpenCover parser: Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +
+          LOG.debug("OpenCover parser: Skipping branch hits for fileId '{}', line '{}', offset '{}', visitCount '{}' because file" +
               " is not indexed or does not have the supported language.",
-            fileId, line, visitCount, filePath);
+            fileId, line, offset, visitCount);
         }
 
       } else {
