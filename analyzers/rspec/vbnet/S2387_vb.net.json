@@ -1,0 +1,16 @@
+{
+  "title": "Child class fields should not shadow parent class fields",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "confusing"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-2387",
+  "sqKey": "S2387",
+  "scope": "Main"
+}

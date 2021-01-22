@@ -21,6 +21,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,26 +30,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FieldShadowsParentField() =>
+        public void FieldShadowsParentField_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldShadowsParentField_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
 
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldShadowsParentField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldShadowsParentField.CSharp9.cs", new CS.FieldShadowsParentField());
-#endif
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void FieldsShouldNotDifferByCapitalization() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new CS.FieldShadowsParentField());
-
-#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void FieldsShouldNotDifferByCapitalization_CShar9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldNotDifferByCapitalization.CSharp9.cs", new CS.FieldShadowsParentField());
 #endif
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldsShouldNotDifferByCapitalization_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new CS.FieldShadowsParentField());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldsShouldNotDifferByCapitalization_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.vb", new VB.FieldShadowsParentField());
     }
 }

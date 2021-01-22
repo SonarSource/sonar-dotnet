@@ -20,18 +20,18 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(S2387DiagnosticId)]
     [Rule(S4025DiagnosticId)]
-    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase<VariableDeclaratorSyntax>
+    public sealed class FieldShadowsParentField : FieldShadowsParentFieldBase<ModifiedIdentifierSyntax>
     {
         public FieldShadowsParentField() : base(RspecStrings.ResourceManager) { }
 
@@ -39,9 +39,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
-                    if (!fieldDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.NewKeyword)))
+                    if (!fieldDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.ShadowsKeyword)))
                     {
-                        foreach (var diagnostics in fieldDeclaration.Declaration.Variables.SelectMany(x => CheckFields(c.SemanticModel, x)))
+                        foreach (var diagnostics in fieldDeclaration.Declarators.SelectMany(x => x.Names).SelectMany(x => CheckFields(c.SemanticModel, x)))
                         {
                             c.ReportDiagnosticWhenActive(diagnostics);
                         }
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.FieldDeclaration);
 
-        protected override SyntaxToken GetIdentifier(VariableDeclaratorSyntax declarator) =>
+        protected override SyntaxToken GetIdentifier(ModifiedIdentifierSyntax declarator) =>
             declarator.Identifier;
     }
 }

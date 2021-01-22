@@ -1,0 +1,68 @@
+<p>Having a variable with the same name in two unrelated classes is fine, but do the same thing within a class hierarchy and you'll get confusion at
+best, chaos at worst. </p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Class Fruit
+
+    Protected Ripe As Season
+    Protected Flesh As Color
+
+    ' ...
+
+End Class
+
+Public Class Raspberry
+    Inherits Fruit
+
+    Private Ripe As Boolean         ' Noncompliant
+    Private Shared FLESH As Color   ' Noncompliant
+
+    ' ...
+
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Class Fruit
+
+    Protected Ripe As Season
+    Protected Flesh As Color
+
+    ' ...
+
+End Class
+
+Public Class Raspberry
+    Inherits Fruit
+
+    Private Riped As Boolean
+    Private Shared FLESH_COLOR As Color   ' Noncompliant
+
+    ' ...
+
+End Class
+</pre>
+<h2>Exceptions</h2>
+<p>This rule ignores same-name fields that are <code>Shared</code> in both the parent and child classes. It also ignores <code>Private</code> parent
+class fields and fields explicitly declared as <code>Shadows</code>, but in all other such cases, the child class field should be renamed.</p>
+<pre>
+Public Class Fruit
+
+    Private Ripe As Season
+    Protected Flesh As Color
+
+    ' ...
+
+End Class
+
+Public Class Raspberry
+    Inherits Fruit
+
+    Private Ripe As Season      ' Compliant as parent field 'Ripe' is not visible from Raspberry anyway
+    Protected Shadows Flesh As Color    ' Compliant as the intention is explicitly declared
+
+    ' ...
+
+End Class
+</pre>
+

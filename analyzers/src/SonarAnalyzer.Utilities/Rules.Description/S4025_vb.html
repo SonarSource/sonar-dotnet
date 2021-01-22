@@ -1,0 +1,61 @@
+<p>Having a field in a child class with a name that differs from a parent class' field only by capitalization is sure to cause confusion. Such child
+class fields should be renamed.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Class Fruit
+
+    Protected PlantingSeason As String
+
+    ' ...
+
+End Class
+
+Public Class Raspberry
+    Inherits Fruit
+
+    Protected Plantingseason As String  ' Noncompliant
+
+    ' ...
+
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Class Fruit
+
+    Protected PlantingSeason As String
+
+    ' ...
+
+End Class
+
+Public Class Raspberry
+    Inherits Fruit
+
+    Protected WhenToPlant As String
+
+    ' ...
+
+End Class
+</pre>
+<p>Or</p>
+<pre>
+Public Class Fruit
+
+    Protected PlantingSeason As String
+
+    ' ...
+
+End Class
+
+Public Class Raspberry
+    Inherits Fruit
+
+    ' Field removed, parent field will be used instead
+
+End Class
+</pre>
+<h2>Exceptions</h2>
+<p>This rule ignores same-name fields that are <code>Shared</code> in both the parent and child classes. It also ignores <code>Private</code> parent
+class fields and fields explicitly declared as <code>Shadows</code>, but in all other such cases, the child class field should be renamed.</p>
+
