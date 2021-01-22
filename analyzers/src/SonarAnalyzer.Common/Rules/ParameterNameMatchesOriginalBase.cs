@@ -27,7 +27,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ParameterNamesInPartialMethodBase<TSyntaxKind, TMethodDeclarationSyntax> : SonarDiagnosticAnalyzer
+    public abstract class ParameterNameMatchesOriginalBase<TSyntaxKind, TMethodDeclarationSyntax> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TMethodDeclarationSyntax : SyntaxNode
     {
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected ParameterNamesInPartialMethodBase(System.Resources.ResourceManager rspecResources) =>
+        protected ParameterNameMatchesOriginalBase(System.Resources.ResourceManager rspecResources) =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>

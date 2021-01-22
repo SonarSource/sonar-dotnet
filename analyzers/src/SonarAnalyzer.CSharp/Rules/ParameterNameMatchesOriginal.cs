@@ -21,24 +21,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ParameterNamesInPartialMethod : ParameterNamesInPartialMethodBase<SyntaxKind, MethodBlockBaseSyntax>
+    public sealed class ParameterNameMatchesOriginal : ParameterNameMatchesOriginalBase<SyntaxKind, MethodDeclarationSyntax>
     {
-        public ParameterNamesInPartialMethod() : base(RspecStrings.ResourceManager) { }
+        public ParameterNameMatchesOriginal() : base(RspecStrings.ResourceManager) { }
 
-        protected override ILanguageFacade LanguageFacade => VisualBasicFacade.Instance;
-        protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.SubBlock, SyntaxKind.FunctionBlock };
+        protected override ILanguageFacade LanguageFacade => CSharpFacade.Instance;
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.MethodDeclaration };
 
-        protected override IEnumerable<SyntaxToken> ParameterIdentifiers(MethodBlockBaseSyntax method) =>
-            method.BlockStatement.ParameterList.Parameters.Select(x => x.Identifier.Identifier);
+        protected override IEnumerable<SyntaxToken> ParameterIdentifiers(MethodDeclarationSyntax method) =>
+            method.ParameterList.Parameters.Select(x => x.Identifier);
     }
 }
