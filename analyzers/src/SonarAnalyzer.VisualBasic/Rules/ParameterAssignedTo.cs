@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public ParameterAssignedTo() : base(RspecStrings.ResourceManager) { }
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind SyntaxKindOfInterest => SyntaxKind.SimpleAssignmentStatement;
 

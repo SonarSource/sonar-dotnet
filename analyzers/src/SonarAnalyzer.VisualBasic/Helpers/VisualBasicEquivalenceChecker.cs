@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SonarAnalyzer.Helpers.VisualBasic
+namespace SonarAnalyzer.Helpers
 {
     internal static class VisualBasicEquivalenceChecker
     {
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Helpers.VisualBasic
                 (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
         }
     }
-    
+
     internal class VisualBasicSyntaxNodeEqualityComparer<T> : IEqualityComparer<T>, IEqualityComparer<SyntaxList<T>>
         where T : SyntaxNode
     {

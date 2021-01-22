@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax>
     {
-        public override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        public override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
         public ExpressionComplexity() : base(RspecStrings.ResourceManager) { }
 

@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override IEqualityComparer<ExpressionSyntax> CreateNodeEqualityComparer() =>
-            new Helpers.CSharp.CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>();
+            new CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>();
 
         protected override SyntaxNode FindRootClassOrModule(SyntaxNode node)
         {

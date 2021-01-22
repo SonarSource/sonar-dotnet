@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public ImplementSerializationMethodsCorrectly() : base(RspecStrings.ResourceManager) { }
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override string MethodStaticMessage => ProblemStatic;
 

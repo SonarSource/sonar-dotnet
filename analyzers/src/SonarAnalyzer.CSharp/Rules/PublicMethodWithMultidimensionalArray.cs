@@ -43,6 +43,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxToken GetIdentifier(MethodDeclarationSyntax method) => method.Identifier;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
     }
 }

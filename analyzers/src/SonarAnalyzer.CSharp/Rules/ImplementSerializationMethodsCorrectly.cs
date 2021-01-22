@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ImplementSerializationMethodsCorrectly() : base(RspecStrings.ResourceManager) { }
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
         protected override string MethodStaticMessage => ProblemStatic;
 

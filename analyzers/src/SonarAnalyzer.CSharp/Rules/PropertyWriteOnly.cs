@@ -54,6 +54,6 @@ namespace SonarAnalyzer.Rules.CSharp
             return accessors.Accessors.First().IsKind(SyntaxKind.SetAccessorDeclaration);
         }
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
     }
 }

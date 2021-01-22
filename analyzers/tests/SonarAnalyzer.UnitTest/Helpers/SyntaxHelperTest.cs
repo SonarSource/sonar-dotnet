@@ -23,7 +23,6 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.VisualBasic;
 
 using CSharp = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VisualBasic = Microsoft.CodeAnalysis.VisualBasic.Syntax;

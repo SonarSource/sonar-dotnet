@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-           Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+           CSharpGeneratedCodeRecognizer.Instance;
 
         protected override string GoToLabel => "goto";
     }        

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ParameterAssignedTo() : base(RspecStrings.ResourceManager) { }
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind SyntaxKindOfInterest => SyntaxKind.SimpleAssignmentExpression;
 

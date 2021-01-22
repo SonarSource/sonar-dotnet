@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Helpers
     public class VisualBasicBaseTypeTracker : BaseTypeTracker<SyntaxKind>
     {
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InheritsStatement, SyntaxKind.ImplementsStatement };
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
         public VisualBasicBaseTypeTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 

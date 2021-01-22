@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, action,
+            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action,
                 syntaxKinds);
         }
 
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Helpers
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, action,
+            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action,
                 syntaxKinds);
         }
 
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Helpers
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, action,
+            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action,
                 syntaxKinds);
         }
 
@@ -59,21 +59,21 @@ namespace SonarAnalyzer.Helpers
             this SonarAnalysisContext context,
             Action<SyntaxTreeAnalysisContext> action)
         {
-            context.RegisterSyntaxTreeActionInNonGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, action);
+            context.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
         }
 
         public static void RegisterSyntaxTreeActionInNonGenerated(
             this ParameterLoadingAnalysisContext context,
             Action<SyntaxTreeAnalysisContext> action)
         {
-            context.RegisterSyntaxTreeActionInNonGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, action);
+            context.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
         }
 
         public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(
             this SonarAnalysisContext context,
             Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
         {
-            context.RegisterCodeBlockStartActionInNonGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, action);
+            context.RegisterCodeBlockStartActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
         }
 
         #endregion Register*ActionInNonGenerated
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Helpers
             Diagnostic diagnostic,
             Compilation compilation)
         {
-            context.ReportDiagnosticIfNonGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, diagnostic, compilation);
+            context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic, compilation);
         }
 
         public static void ReportDiagnosticIfNonGenerated(
@@ -93,14 +93,14 @@ namespace SonarAnalyzer.Helpers
             Diagnostic diagnostic,
             Compilation compilation)
         {
-            context.ReportDiagnosticIfNonGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, diagnostic, compilation);
+            context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic, compilation);
         }
 
         public static void ReportDiagnosticIfNonGenerated(
             this SymbolAnalysisContext context,
             Diagnostic diagnostic)
         {
-            context.ReportDiagnosticIfNonGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, diagnostic,
+            context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic,
                 context.Compilation);
         }
 
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Helpers
         internal static bool ShouldAnalyze(this SyntaxTree tree, AnalyzerOptions options,
             Compilation compilation)
             // ToDo: PERF: do the global setting check before the per-file check.
-            => DiagnosticAnalyzerContextHelper.ShouldAnalyze(CSharp.CSharpGeneratedCodeRecognizer.Instance,
+            => DiagnosticAnalyzerContextHelper.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance,
                 tree,
                 compilation,
                 options);

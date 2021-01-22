@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Helpers.CSharp
+namespace SonarAnalyzer.Helpers
 {
     internal static class CSharpOverloadHelper
     {

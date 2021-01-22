@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
         }
 
         public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Helpers
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
         }
 
         public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(
@@ -49,28 +49,28 @@ namespace SonarAnalyzer.Helpers
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterSyntaxNodeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
         }
 
         public static void RegisterSyntaxTreeActionInNonGenerated(
             this SonarAnalysisContext context,
             Action<SyntaxTreeAnalysisContext> action)
         {
-            context.RegisterSyntaxTreeActionInNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, action);
+            context.RegisterSyntaxTreeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
         }
 
         public static void RegisterSyntaxTreeActionInNonGenerated(
             this ParameterLoadingAnalysisContext context,
             Action<SyntaxTreeAnalysisContext> action)
         {
-            context.RegisterSyntaxTreeActionInNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, action);
+            context.RegisterSyntaxTreeActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
         }
 
         public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(
             this SonarAnalysisContext context,
             Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
         {
-            context.RegisterCodeBlockStartActionInNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, action);
+            context.RegisterCodeBlockStartActionInNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, action);
         }
 
         #endregion Register*ActionInNonGenerated
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Helpers
             Diagnostic diagnostic,
             Compilation compilation)
         {
-            context.ReportDiagnosticIfNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, diagnostic, compilation);
+            context.ReportDiagnosticIfNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, diagnostic, compilation);
         }
 
         public static void ReportDiagnosticIfNonGenerated(
@@ -90,14 +90,14 @@ namespace SonarAnalyzer.Helpers
             Diagnostic diagnostic,
             Compilation compilation)
         {
-            context.ReportDiagnosticIfNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, diagnostic, compilation);
+            context.ReportDiagnosticIfNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, diagnostic, compilation);
         }
 
         public static void ReportDiagnosticIfNonGenerated(
             this SymbolAnalysisContext context,
             Diagnostic diagnostic)
         {
-            context.ReportDiagnosticIfNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, diagnostic,
+            context.ReportDiagnosticIfNonGenerated(VisualBasicGeneratedCodeRecognizer.Instance, diagnostic,
                 context.Compilation);
         }
         #endregion ReportDiagnosticIfNonGenerated

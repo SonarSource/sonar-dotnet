@@ -373,7 +373,7 @@ End Namespace
             else
             {
                 invocation_identifierPairs = snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, vbnet::SonarAnalyzer.Helpers.VisualBasic.VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
+                    .Select(n => ((SyntaxNode)n, VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
             }
 
             foreach (var (invocation, methodName) in invocation_identifierPairs)
