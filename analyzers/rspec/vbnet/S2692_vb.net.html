@@ -5,53 +5,53 @@
 <code>&gt; 0</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Dim color As String = "blue"
-Dim name As String = "ishmael"
+Dim Color As String = "blue"
+Dim Name As String = "ishmael"
 
-Dim strings As New List(Of String) =  New List(Of String)
-strings.Add(color)
-strings.Add(name)
-Dim stringArray As String() = strings.ToArray()
+Dim Strings As New List(Of String)
+Strings.Add(Color)
+Strings.Add(Name)
+Dim StringArray As String() = Strings.ToArray()
 
-If (strings.IndexOf(color) &gt; 0) ' Noncompliant
+If Strings.IndexOf(Color) &gt; 0 Then ' Noncompliant
   ' ...
 End If
 
-If (name.IndexOf("ish") &gt; 0) ' Noncompliant
+If Name.IndexOf("ish") &gt; 0 Then ' Noncompliant
   ' ...
 End If
 
-If (name.IndexOf("ae") &gt; 0) ' Noncompliant
+If Name.IndexOf("ae") &gt; 0 Then ' Noncompliant
   ' ...
 End If
 
-If (Array.IndexOf(stringArray, color) &gt; 0) ' Noncompliant
+If Array.IndexOf(StringArray, Color) &gt; 0 Then ' Noncompliant
   ' ...
 End If
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Dim color As String = "blue"
-Dim name As String = "ishmael"
+Dim Color As String = "blue"
+Dim Name As String = "ishmael"
 
-Dim strings As New List(Of String) =  New List(Of String)
-strings.Add(color)
-strings.Add(name)
-Dim stringArray As String() = strings.ToArray()
+Dim Strings As New List(Of String)
+Strings.Add(Color)
+Strings.Add(Name)
+Dim StringArray As String() = Strings.ToArray()
 
-If (strings.IndexOf(color) &gt; -1)
+If Strings.IndexOf(Color) &gt; -1 Then
   ' ...
 End If
 
-If (name.IndexOf("ish") &gt;= 0)
+If Name.IndexOf("ish") &gt;= 0 Then
   ' ...
 End If
 
-If (name.Contains("ae"))
+If Name.Contains("ae") Then
   ' ...
 End If
 
-If (Array.IndexOf(stringArray, color) &gt;= 0)
+If Array.IndexOf(StringArray, Color) &gt;= 0 Then
   ' ...
 End If
 </pre>
