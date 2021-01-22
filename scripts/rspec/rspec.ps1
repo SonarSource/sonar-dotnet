@@ -229,11 +229,13 @@ function GenerateBaseClassIfSecondLanguage()
 
         Set-Content -NoNewline `
                     -Path $csFilePath `
-                    -Value $existingCSClassText
+                    -Value $existingCSClassText `
+                    -Encoding UTF8
 
         Set-Content -NoNewline `
                     -Path $vbFilePath `
-                    -Value $existingVBClassText
+                    -Value $existingVBClassText `
+                    -Encoding UTF8
 
         WriteClasses -filesMap $filesMap
     }
@@ -283,7 +285,8 @@ function AppendVbTestCase($ruleTestsFolder) {
 
     Set-Content -NoNewline `
                 -Path "${ruleTestsFolder}\\${csClassName}Test.cs" `
-                -Value $replaced
+                -Value $replaced `
+                -Encoding UTF8
 }
 
 function FindCsName($rulesPath) {
@@ -304,7 +307,7 @@ function WriteClasses($filesMap) {
         $fileContent = Get-Content "${RuleTemplateFolder}\\$($_.Key)" -Raw
         $replaced = ReplaceTokens -text $fileContent
 
-        Set-Content -NoNewline -Path $_.Value -Value $replaced
+        Set-Content -NoNewline -Path $_.Value -Value $replaced -Encoding UTF8
     }
 }
 
