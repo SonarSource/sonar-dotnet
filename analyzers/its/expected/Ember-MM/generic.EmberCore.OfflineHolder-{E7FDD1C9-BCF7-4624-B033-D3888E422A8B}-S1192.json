@@ -1,0 +1,190 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  489,
+"startColumn":  68,
+"endLine":  489,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  545,
+"startColumn":  68,
+"endLine":  545,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  579,
+"startColumn":  68,
+"endLine":  579,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  618,
+"startColumn":  68,
+"endLine":  618,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Valid' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  300,
+"startColumn":  105,
+"endLine":  300,
+"endColumn":  112
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  314,
+"startColumn":  96,
+"endLine":  314,
+"endColumn":  103
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  334,
+"startColumn":  96,
+"endLine":  334,
+"endColumn":  103
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  341,
+"startColumn":  92,
+"endLine":  341,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  540,
+"startColumn":  82,
+"endLine":  540,
+"endColumn":  89
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Not Valid' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  306,
+"startColumn":  93,
+"endLine":  306,
+"endColumn":  104
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  318,
+"startColumn":  92,
+"endLine":  318,
+"endColumn":  103
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  337,
+"startColumn":  96,
+"endLine":  337,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  532,
+"startColumn":  83,
+"endLine":  532,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  536,
+"startColumn":  82,
+"endLine":  536,
+"endColumn":  93
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Offline Media Manager' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  31,
+"endLine":  31,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"region":  {
+"startLine":  101,
+"startColumn":  50,
+"endLine":  101,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"region":  {
+"startLine":  106,
+"startColumn":  54,
+"endLine":  106,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  49,
+"endLine":  129,
+"endColumn":  72
+}
+}
+]
+}
+]
+}

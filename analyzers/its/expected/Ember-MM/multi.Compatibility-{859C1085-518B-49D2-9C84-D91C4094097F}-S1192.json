@@ -1,0 +1,64 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'BoxeeTVShowId' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  67,
+"startColumn":  69,
+"endLine":  67,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  38,
+"endLine":  93,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  45,
+"endLine":  105,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  118,
+"startColumn":  45,
+"endLine":  118,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  70,
+"endLine":  147,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  39,
+"endLine":  153,
+"endColumn":  54
+}
+}
+]
+}
+]
+}
