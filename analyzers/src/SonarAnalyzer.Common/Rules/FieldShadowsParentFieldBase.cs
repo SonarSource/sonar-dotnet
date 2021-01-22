@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules
             if (semanticModel.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol fieldSymbol)
             {
                 var fieldName = fieldSymbol.Name;
-                var fieldNameLower = fieldSymbol.Name.ToUpperInvariant();
+                var fieldNameUpper = fieldSymbol.Name.ToUpperInvariant();
                 foreach (var baseType in fieldSymbol.ContainingType.BaseType.GetSelfAndBaseTypes())
                 {
                     var similarFields = baseType.GetMembers().OfType<IFieldSymbol>().Where(IsMatch).ToList();
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules
                 bool IsMatch(IFieldSymbol field) =>
                     field.DeclaredAccessibility != Accessibility.Private
                     && !field.IsStatic
-                    && field.Name.ToUpperInvariant() == fieldNameLower;
+                    && field.Name.ToUpperInvariant() == fieldNameUpper;
             }
         }
     }
