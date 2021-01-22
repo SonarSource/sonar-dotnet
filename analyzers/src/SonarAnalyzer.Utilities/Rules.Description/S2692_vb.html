@@ -1,0 +1,58 @@
+<p>Most checks against an <code>IndexOf</code> value compare it with -1 because 0 is a valid index. Any checks which look for values <code>&gt;
+0</code> ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a <code>string</code>,
+<code>List</code>, or an array, consider using the <code>Contains</code> method instead.</p>
+<p>This rule raises an issue when an <code>IndexOf</code> value retrieved from a <code>string</code>, <code>List</code> or array is tested against
+<code>&gt; 0</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Dim color As String = "blue"
+Dim name As String = "ishmael"
+
+Dim strings As New List(Of String) =  New List(Of String)
+strings.Add(color)
+strings.Add(name)
+Dim stringArray As String() = strings.ToArray()
+
+If (strings.IndexOf(color) &gt; 0) ' Noncompliant
+  ' ...
+End If
+
+If (name.IndexOf("ish") &gt; 0) ' Noncompliant
+  ' ...
+End If
+
+If (name.IndexOf("ae") &gt; 0) ' Noncompliant
+  ' ...
+End If
+
+If (Array.IndexOf(stringArray, color) &gt; 0) ' Noncompliant
+  ' ...
+End If
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Dim color As String = "blue"
+Dim name As String = "ishmael"
+
+Dim strings As New List(Of String) =  New List(Of String)
+strings.Add(color)
+strings.Add(name)
+Dim stringArray As String() = strings.ToArray()
+
+If (strings.IndexOf(color) &gt; -1)
+  ' ...
+End If
+
+If (name.IndexOf("ish") &gt;= 0)
+  ' ...
+End If
+
+If (name.Contains("ae"))
+  ' ...
+End If
+
+If (Array.IndexOf(stringArray, color) &gt;= 0)
+  ' ...
+End If
+</pre>
+

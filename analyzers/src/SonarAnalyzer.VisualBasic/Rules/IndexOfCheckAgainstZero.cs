@@ -18,23 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.CSharp;
+using SonarAnalyzer.Helpers.VisualBasic;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class IndexOfCheckAgainstZero : IndexOfCheckAgainstZeroBase<SyntaxKind, ExpressionSyntax, BinaryExpressionSyntax>
     {
-        private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
+        private static readonly VisualBasicExpressionNumericConverter ExpressionNumericConverter = new VisualBasicExpressionNumericConverter();
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind LessThanExpression => SyntaxKind.LessThanExpression;
         protected override SyntaxKind GreaterThanExpression => SyntaxKind.GreaterThanExpression;
@@ -43,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsIndexOfCall(ExpressionSyntax call, SemanticModel semanticModel)
         {
-            if (!(semanticModel.GetSymbolInfo(call).Symbol is IMethodSymbol indexOfSymbol) || indexOfSymbol.Name != "IndexOf")
+            if (!(semanticModel.GetSymbolInfo(call).Symbol is IMethodSymbol indexOfSymbol) || !indexOfSymbol.Name.Equals("IndexOf", StringComparison.OrdinalIgnoreCase))
             {
                 return false;
             }

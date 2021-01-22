@@ -3207,6 +3207,39 @@
   <data name="S2551_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S2692_Category" xml:space="preserve">
+    <value>Critical Code Smell</value>
+  </data>
+  <data name="S2692_Description" xml:space="preserve">
+    <value>Most checks against an IndexOf value compare it with -1 because 0 is a valid index. Any checks which look for values &gt; 0 ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a string, List, or an array, consider using the Contains method instead.</value>
+  </data>
+  <data name="S2692_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2692_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2692_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S2692_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S2692_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S2692_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S2692_Tags" xml:space="preserve">
+    <value>suspicious</value>
+  </data>
+  <data name="S2692_Title" xml:space="preserve">
+    <value>"indexOf" checks should not be for positive numbers</value>
+  </data>
+  <data name="S2692_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2737_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>

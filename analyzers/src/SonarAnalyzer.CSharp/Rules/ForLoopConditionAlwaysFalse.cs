@@ -37,6 +37,8 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2252";
         private const string MessageFormat = "This loop will never execute.";
 
+        private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
+
         private static readonly ISet<SyntaxKind> ConditionsToCheck = new HashSet<SyntaxKind>
         {
             SyntaxKind.GreaterThanExpression,

@@ -35,6 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2197";
         private const string MessageFormat = "The result of this modulus operation may not be {0}.";
 
+        private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
+
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
