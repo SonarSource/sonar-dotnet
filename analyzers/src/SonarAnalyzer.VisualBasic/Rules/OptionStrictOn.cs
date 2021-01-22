@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class OptionStrictOn : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3860";
-        private const string MessageFormat = "Option Strict should not be disabled.";
+        private const string MessageFormat = "Option Strict should not be enabled.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
