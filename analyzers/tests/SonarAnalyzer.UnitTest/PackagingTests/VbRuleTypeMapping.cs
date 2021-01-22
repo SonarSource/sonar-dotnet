@@ -3901,7 +3901,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["3901"],
             //["3902"],
             ["3903"] = "BUG",
-            //["3904"],
+            ["3904"] = "CODE_SMELL",
             //["3905"],
             //["3906"],
             //["3907"],

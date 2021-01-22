@@ -20,23 +20,21 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class MarkAssemblyWithAssemblyVersionAttribute : MarkAssemblyWithAttributeBase
+    public abstract class MarkAssemblyWithAssemblyVersionAttributeBase : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3904";
-        private const string MessageFormat = "Provide an 'AssemblyVersion' attribute for assembly '{0}'.";
+        protected const string DiagnosticId = "S3904";
+        private const string MessageFormat = "";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        internal override KnownType AttributeToFind => KnownType.System_Reflection_AssemblyVersionAttribute;
+        protected DiagnosticDescriptor Rule { get; }
+
+        protected MarkAssemblyWithAssemblyVersionAttributeBase(System.Resources.ResourceManager rspecResources) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
     }
 }

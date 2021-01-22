@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,6 +23,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -46,5 +47,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Throw<UnexpectedDiagnosticException>()
                 .WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
     }
 }

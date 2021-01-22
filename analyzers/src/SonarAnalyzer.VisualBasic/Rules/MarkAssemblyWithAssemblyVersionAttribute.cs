@@ -19,24 +19,31 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class MarkAssemblyWithAssemblyVersionAttribute : MarkAssemblyWithAttributeBase
+    public sealed class MarkAssemblyWithAssemblyVersionAttribute : MarkAssemblyWithAssemblyVersionAttributeBase
     {
-        internal const string DiagnosticId = "S3904";
-        private const string MessageFormat = "Provide an 'AssemblyVersion' attribute for assembly '{0}'.";
+        public MarkAssemblyWithAssemblyVersionAttribute() : base(RspecStrings.ResourceManager) { }
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        internal override KnownType AttributeToFind => KnownType.System_Reflection_AssemblyVersionAttribute;
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var node = c.Node;
+                    if (true)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+                    }
+                },
+                SyntaxKind.InvocationExpression);
     }
 }
