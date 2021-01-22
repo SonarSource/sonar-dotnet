@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,21 +20,48 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotLockWeakIdentityObjectsBase : SonarDiagnosticAnalyzer
+    public abstract class DoNotLockWeakIdentityObjectsBase<TSyntaxKind, TLockStatementSyntax> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
+        where TLockStatementSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S3998";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Replace this lock on '{0}' with a lock against an object that cannot be accessed across application domain boundaries.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        private readonly DiagnosticDescriptor rule;
+        private readonly ImmutableArray<KnownType> weakIdentityTypes =
+            ImmutableArray.Create(
+                KnownType.System_MarshalByRefObject,
+                KnownType.System_ExecutionEngineException,
+                KnownType.System_OutOfMemoryException,
+                KnownType.System_StackOverflowException,
+                KnownType.System_String,
+                KnownType.System_IO_FileStream,
+                KnownType.System_Reflection_MemberInfo,
+                KnownType.System_Reflection_ParameterInfo,
+                KnownType.System_Threading_Thread
+            );
 
-        protected DiagnosticDescriptor Rule { get; }
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract TSyntaxKind SyntaxKind { get; }
+        protected abstract SyntaxNode LockExpression(TLockStatementSyntax node);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected DoNotLockWeakIdentityObjectsBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, c =>
+            {
+                var lockExpression = LockExpression((TLockStatementSyntax)c.Node);
+                if (c.SemanticModel.GetSymbolInfo(lockExpression).Symbol?.GetSymbolType() is { }  lockExpressionType && lockExpressionType.DerivesFromAny(weakIdentityTypes))
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lockExpression.GetLocation(), lockExpressionType.Name));
+                }
+            }, SyntaxKind);
     }
 }

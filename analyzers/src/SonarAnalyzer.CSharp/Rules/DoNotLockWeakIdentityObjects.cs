@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -30,44 +29,14 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotLockWeakIdentityObjects : DoNotLockWeakIdentityObjectsBase
+    public sealed class DoNotLockWeakIdentityObjects : DoNotLockWeakIdentityObjectsBase<SyntaxKind, LockStatementSyntax>
     {
-        internal const string DiagnosticId = "S3998";
-        private const string MessageFormat = "Replace this lock on '{0}' with a lock against an object that cannot be accessed across application domain boundaries.";
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.LockStatement;
 
-        private static readonly ImmutableArray<KnownType> weakIdentityTypes =
-            ImmutableArray.Create(
-                KnownType.System_MarshalByRefObject,
-                KnownType.System_ExecutionEngineException,
-                KnownType.System_OutOfMemoryException,
-                KnownType.System_StackOverflowException,
-                KnownType.System_String,
-                KnownType.System_IO_FileStream,
-                KnownType.System_Reflection_MemberInfo,
-                KnownType.System_Reflection_ParameterInfo,
-                KnownType.System_Threading_Thread
-            );
+        public DoNotLockWeakIdentityObjects() : base(RspecStrings.ResourceManager) { }
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var lockExpression = ((LockStatementSyntax)c.Node).Expression;
-                var lockExpressionType = c.SemanticModel.GetSymbolInfo(lockExpression).Symbol?.GetSymbolType();
-
-                if (lockExpressionType != null &&
-                    lockExpressionType.DerivesFromAny(weakIdentityTypes))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lockExpression.GetLocation(),
-                        lockExpressionType.Name));
-                }
-            },
-            SyntaxKind.LockStatement);
-        }
+        protected override SyntaxNode LockExpression(LockStatementSyntax node) =>
+            node.Expression;
     }
 }
