@@ -1,1 +1,1 @@
-﻿Option Strict Off ' Noncompliant {{Option Strict should not be disabled.}}
+﻿Option Strict Off ' Noncompliant {{Option Strict should not be enabled.}}
