@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
@@ -25,23 +26,24 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class MarkAssemblyWithAttributeBase : SonarDiagnosticAnalyzer
     {
+        private readonly DiagnosticDescriptor rule;
+
         internal abstract KnownType AttributeToFind { get; }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    c.RegisterCompilationEndAction(
-                        cc =>
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected MarkAssemblyWithAttributeBase(DiagnosticDescriptor rule) =>
+            this.rule = rule;
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterCompilationStartAction(c =>
+                c.RegisterCompilationEndAction(cc =>
+                    {
+                        if (!cc.Compilation.Assembly.HasAttribute(AttributeToFind))
                         {
-                            var requiredAttributeFound = cc.Compilation.Assembly.HasAttribute(AttributeToFind);
-                            if (!requiredAttributeFound)
-                            {
-                                cc.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], null, cc.Compilation.AssemblyName));
-                            }
-                        });
-                });
-        }
+                            cc.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null, cc.Compilation.AssemblyName));
+                        }
+                    })
+                );
     }
 }

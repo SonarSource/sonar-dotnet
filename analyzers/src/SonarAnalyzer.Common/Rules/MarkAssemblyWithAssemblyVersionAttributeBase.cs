@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,23 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MarkAssemblyWithAssemblyVersionAttributeBase : SonarDiagnosticAnalyzer
+    public abstract class MarkAssemblyWithAssemblyVersionAttributeBase : MarkAssemblyWithAttributeBase
     {
         protected const string DiagnosticId = "S3904";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Provide an 'AssemblyVersion' attribute for assembly '{0}'.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        internal override KnownType AttributeToFind => KnownType.System_Reflection_AssemblyVersionAttribute;
 
-        protected DiagnosticDescriptor Rule { get; }
-
-        protected MarkAssemblyWithAssemblyVersionAttributeBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        protected MarkAssemblyWithAssemblyVersionAttributeBase(System.Resources.ResourceManager rspecResources)
+            : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources)) { }
     }
 }

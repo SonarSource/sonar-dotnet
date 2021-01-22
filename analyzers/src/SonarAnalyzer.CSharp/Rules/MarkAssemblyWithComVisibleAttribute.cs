@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -33,10 +32,9 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3992";
         private const string MessageFormat = "Provide a 'ComVisible' attribute for assembly '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         internal override KnownType AttributeToFind => KnownType.System_Runtime_InteropServices_ComVisibleAttribute;
+
+        public MarkAssemblyWithComVisibleAttribute()
+            : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)) { }
     }
 }

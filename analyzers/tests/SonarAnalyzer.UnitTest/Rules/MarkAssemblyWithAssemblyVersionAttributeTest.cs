@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,25 +32,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithAssemblyVersionAttribute() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs",
-                new CS.MarkAssemblyWithAssemblyVersionAttribute());
+        public void MarkAssemblyWithAssemblyVersionAttribute_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant()
+        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS()
         {
-            Action action = () => Verifier.VerifyAnalyzer(
-                @"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs",
-                new CS.MarkAssemblyWithAssemblyVersionAttribute());
-            action.Should()
-                .Throw<UnexpectedDiagnosticException>()
-                .WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_VB()
+        {
+            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+        }
+
     }
 }

@@ -1,13 +1,3 @@
-Imports System
+﻿Imports System.Reflection
 
-Namespace Tests.TestCases
-
-    Class Program
-
-        Public Sub Test()
-
-        End Sub
-
-    End Class
-
-End Namespace
+<Assembly: AssemblyVersionAttribute("1.24.0")>
