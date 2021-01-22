@@ -6,55 +6,55 @@ Namespace Tests.TestCases
     Class IndexOfCheckAgainstZero
 
         Public Sub IndexOfCheckAgainstZero()
-            Dim color As String = "blue"
-            Dim name As String = "ishmael"
+            Dim Color As String = "blue"
+            Dim Name As String = "ishmael"
 
-            Dim strings As New List(Of String)
-            Dim stringIList As System.Collections.IList = New List(Of String) 
-            strings.Add(color)
-            strings.Add(name)
-            Dim stringArray As String() = strings.ToArray()
+            Dim Strings As New List(Of String)
+            Dim StringIList As System.Collections.IList = New List(Of String) 
+            Strings.Add(Color)
+            Strings.Add(Name)
+            Dim StringArray As String() = Strings.ToArray()
 
-            If stringIList.IndexOf(color) > 0 Then ' Noncompliant
+            If StringIList.IndexOf(Color) > 0 Then ' Noncompliant
             '                             ^^^
             '   ...
             End If
 
-            If stringIList.IndexOf(color) > -0 Then ' Noncompliant
+            If StringIList.IndexOf(Color) > -0 Then ' Noncompliant
             '                             ^^^^
             '   ...
             End If
 
-            If stringIList.iNdExOf(color) > 0 Then ' Noncompliant
+            If StringIList.iNdExOf(Color) > 0 Then ' Noncompliant
             '                             ^^^
             '   ...
             End If
 
-            if strings.IndexOf(color) > 0 Then ' Noncompliant {{0 is a valid index, but this check ignores it.}}
+            if Strings.IndexOf(Color) > 0 Then ' Noncompliant {{0 is a valid index, but this check ignores it.}}
             '    ...
             End If
 
-            if 0 < name.IndexOf("ish") Then ' Noncompliant
+            if 0 < Name.IndexOf("ish") Then ' Noncompliant
             '    ...
             End If
 
-            if -1 < name.IndexOf("ish") Then
+            if -1 < Name.IndexOf("ish") Then
             '    ...
             End If
 
-            if 2 < name.IndexOf("ish") Then
+            if 2 < Name.IndexOf("ish") Then
             '    ...
             End If
 
-            if name.IndexOf("ae") > 0 Then ' Noncompliant
+            if Name.IndexOf("ae") > 0 Then ' Noncompliant
             '    ...
             End If
 
-            if Array.IndexOf(stringArray, color) > 0 Then ' Noncompliant
+            if Array.IndexOf(StringArray, Color) > 0 Then ' Noncompliant
             '    ...
             End If
 
-            if Array.IndexOf(stringArray, color) >= 0 Then
+            if Array.IndexOf(StringArray, Color) >= 0 Then
             '    ...
             End If
 
