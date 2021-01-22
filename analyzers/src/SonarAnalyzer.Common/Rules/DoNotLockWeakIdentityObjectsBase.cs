@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,24 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class DoNotLockWeakIdentityObjectsTest
+    public abstract class DoNotLockWeakIdentityObjectsBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DoNotLockWeakIdentityObjects_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.cs", new CS.DoNotLockWeakIdentityObjects());
+        protected const string DiagnosticId = "S3998";
+        private const string MessageFormat = "";
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DoNotLockWeakIdentityObjects_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.vb", new VB.DoNotLockWeakIdentityObjects());
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected DiagnosticDescriptor Rule { get; }
+
+        protected DoNotLockWeakIdentityObjectsBase(System.Resources.ResourceManager rspecResources) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
     }
 }

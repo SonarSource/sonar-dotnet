@@ -13,26 +13,28 @@ identity are:</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Sample
-{
-    string myString = "foo";
+Public Class Sample
 
-    public void Go()
-    {
-        lock (myString) { } // Noncompliant
-    }
-}
+    Private myString As String = "foo"
+
+    Public Sub Go()
+        SyncLock myString   ' Noncompliant
+        End SyncLock
+    End Sub
+
+End Class
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Sample
-{
-    private readonly static string thisLock = new object();
+Public Class Sample
 
-    public void Go()
-    {
-        lock (thisLock) { }
-    }
-}
+    Private Shared ReadOnly fLock As New Object
+
+    Public Sub Go()
+        SyncLock fLock
+        End SyncLock
+    End Sub
+
+End Class
 </pre>
 

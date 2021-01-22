@@ -3933,6 +3933,39 @@
   <data name="S3981_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3998_Category" xml:space="preserve">
+    <value>Critical Code Smell</value>
+  </data>
+  <data name="S3998_Description" xml:space="preserve">
+    <value>A thread acquiring a lock on an object that can be accessed across application domain boundaries runs the risk of being blocked by another thread in a different application domain. Objects that can be accessed across application domain boundaries are said to have weak identity. Types with weak identity are:</value>
+  </data>
+  <data name="S3998_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3998_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3998_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S3998_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3998_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S3998_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S3998_Tags" xml:space="preserve">
+    <value>multi-threading,pitfall</value>
+  </data>
+  <data name="S3998_Title" xml:space="preserve">
+    <value>Threads should not lock on objects with weak identity</value>
+  </data>
+  <data name="S3998_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4025_Category" xml:space="preserve">
     <value>Critical Code Smell</value>
   </data>
