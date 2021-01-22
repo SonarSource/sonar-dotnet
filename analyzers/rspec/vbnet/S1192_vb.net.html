@@ -4,13 +4,13 @@
 <pre>
 Public Class Foo
 
-    Private name As String = "foobar" ' Noncompliant
+    Private Name As String = "foobar" ' Noncompliant
 
     Public ReadOnly Property DefaultName As String = "foobar" ' Noncompliant
 
-    Public Sub Foo(Optional Value As String = "foobar") ' Noncompliant
+    Public Sub New(Optional Value As String = "foobar") ' Noncompliant
 
-        Dim Something = If(value, "foobar") ' Noncompliant
+        Dim Something = If(Value, "foobar") ' Noncompliant
 
     End Sub
 
@@ -22,13 +22,13 @@ Public Class Foo
 
     Private Const Foobar As String = "foobar"
 
-    Private name As String = Foobar
+    Private Name As String = Foobar
 
     Public ReadOnly Property DefaultName As String = Foobar
 
-    Public Sub Foo(Optional Value As String = Foobar)
+    Public Sub New(Optional Value As String = Foobar)
 
-        Dim Something = If(value, Foobar);
+        Dim Something = If(Value, Foobar)
 
     End Sub
 

@@ -8,7 +8,7 @@ public class Foo
 
     public string DefaultName { get; } = "foobar"; // Noncompliant
 
-    public void Foo(string value = "foobar") // Noncompliant
+    public Foo(string value = "foobar") // Noncompliant
     {
         var something = value ?? "foobar"; // Noncompliant
     }
@@ -24,7 +24,7 @@ public class Foo
 
     public string DefaultName { get; } = Foobar;
 
-    public void Foo(string value = Foobar)
+    public Foo(string value = Foobar)
     {
         var something = value ?? Foobar;
     }
