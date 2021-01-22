@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'mMovie' to 'DBMovie' to match the interface declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  762,
+"startColumn":  38,
+"endLine":  762,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  237,
+"startColumn":  62,
+"endLine":  237,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  254,
+"startColumn":  62,
+"endLine":  254,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  377,
+"startColumn":  62,
+"endLine":  377,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  142,
+"startColumn":  62,
+"endLine":  142,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  240,
+"startColumn":  62,
+"endLine":  240,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'element' to 'xUrl' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  62,
+"endLine":  147,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  62,
+"endLine":  185,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'element' to 'xmlElement' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  62,
+"endLine":  245,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'xExpression' to 'xNodeInfo' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  454,
+"startColumn":  62,
+"endLine":  454,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'xFunctionElement' to 'xNodeInfo' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  283,
+"startColumn":  62,
+"endLine":  283,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'xRegExp' to 'xNodeInfo' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  360,
+"startColumn":  62,
+"endLine":  360,
+"endColumn":  69
+}
+}
+}
+]
+}

@@ -22,17 +22,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class ParameterNamesInPartialMethodTest
+    public class ParameterNameMatchesOriginalTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParameterNamesInPartialMethod() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesInPartialMethod.cs",
-                                    new CS.ParameterNamesInPartialMethod(),
+        public void ParameterNameMatchesOriginal_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ParameterNameMatchesOriginal.cs",
+                                    new CS.ParameterNameMatchesOriginal(),
 #if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
                                     NuGetMetadataReference.NETStandardV2_1_0);
@@ -43,8 +44,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParameterNamesInPartialMethod_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ParameterNamesInPartialMethod.CSharp9.cs", new CS.ParameterNamesInPartialMethod());
+        public void ParameterNameMatchesOriginal_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\ParameterNameMatchesOriginal.CSharp9.cs", new CS.ParameterNameMatchesOriginal());
 #endif
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ParameterNameMatchesOriginal_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\ParameterNameMatchesOriginal.vb", new VB.ParameterNameMatchesOriginal());
     }
 }
