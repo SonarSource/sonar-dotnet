@@ -732,6 +732,39 @@
   <data name="S1151_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1163_Category" xml:space="preserve">
+    <value>Critical Code Smell</value>
+  </data>
+  <data name="S1163_Description" xml:space="preserve">
+    <value>Throwing an exception from within a finally block will mask any exception which was previously thrown in the try or catch block, and the masked's exception message and stack trace will be lost.</value>
+  </data>
+  <data name="S1163_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1163_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1163_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S1163_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S1163_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S1163_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S1163_Tags" xml:space="preserve">
+    <value>error-handling,suspicious</value>
+  </data>
+  <data name="S1163_Title" xml:space="preserve">
+    <value>Exceptions should not be thrown in finally blocks</value>
+  </data>
+  <data name="S1163_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S117_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>

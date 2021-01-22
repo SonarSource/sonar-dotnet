@@ -19,26 +19,31 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class NoExceptionsInFinally : NoExceptionsInFinallyBase
     {
         public NoExceptionsInFinally() : base(RspecStrings.ResourceManager) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => new ThrowInFinallyWalker(c, Rule).SafeVisit(((FinallyClauseSyntax)c.Node).Block),
-                SyntaxKind.FinallyClause);
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+                {
+                    var walker = new ThrowInFinallyWalker(c, Rule);
+                    foreach (var statement in ((FinallyBlockSyntax)c.Node).Statements)
+                    {
+                        walker.SafeVisit(statement);
+                    }
+                }, SyntaxKind.FinallyBlock);
 
-        private class ThrowInFinallyWalker : CSharpSyntaxWalker
+        private class ThrowInFinallyWalker : VisualBasicSyntaxWalker
         {
             private readonly SyntaxNodeAnalysisContext context;
             private readonly DiagnosticDescriptor rule;
@@ -52,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitThrowStatement(ThrowStatementSyntax node) =>
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
 
-            public override void VisitFinallyClause(FinallyClauseSyntax node)
+            public override void VisitFinallyBlock(FinallyBlockSyntax node)
             {
                 // Do not call base to force the walker to stop. Another walker will take care of this finally clause.
             }
