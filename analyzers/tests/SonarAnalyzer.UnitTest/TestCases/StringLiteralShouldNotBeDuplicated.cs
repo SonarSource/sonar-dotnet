@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     public class Program
     {
@@ -45,7 +43,7 @@ namespace Tests.Diagnostics
         {
             if (foobar == null)
             {
-                throw new ArgumentNullException("foobar"); // Compliant - matches one of the parameter name
+                throw new System.ArgumentNullException("foobar"); // Compliant - matches one of the parameter name
             }
 
             Do("foobar"); // Compliant - matches one of the parameter name

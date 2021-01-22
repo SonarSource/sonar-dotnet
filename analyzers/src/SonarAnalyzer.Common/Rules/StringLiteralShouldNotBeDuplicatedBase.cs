@@ -78,9 +78,9 @@ namespace SonarAnalyzer.Rules
                 // Remove leading and trailing double quotes
                 var stringValue = ExtractStringContent(GetLiteralValue(literal));
 
-                if (stringValue != null &&
-                    stringValue.Length >= MinimumStringLength &&
-                    !IsMatchingMethodParameterName(literal))
+                if (stringValue != null
+                    && stringValue.Length >= MinimumStringLength
+                    && !IsMatchingMethodParameterName(literal))
                 {
                     if (!stringWithLiterals.ContainsKey(stringValue))
                     {
@@ -97,8 +97,8 @@ namespace SonarAnalyzer.Rules
                 if (item.Value.Count > Threshold)
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value[0].GetLocation(),
-                        additionalLocations: item.Value.Skip(1).Select(x => x.GetLocation()),
-                        messageArgs: new object[] { item.Key, item.Value.Count }));
+                        item.Value.Skip(1).Select(x => x.GetLocation()),
+                        item.Key, item.Value.Count ));
                 }
             }
         }

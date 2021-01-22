@@ -1,6 +1,4 @@
-﻿Imports System
-
-Namespace Tests.TestCases
+﻿Namespace Tests.TestCases
 
     Public Class Program
 
@@ -16,8 +14,8 @@ Namespace Tests.TestCases
 
         Private values As String() = { "something", "something", "something" } ' Compliant - repetition below threshold
 
-        Private ReadOnly Property FirstName  = "foobar"
-        '                                      ^^^^^^^^ Secondary
+        Private ReadOnly Property FirstName = "foobar"
+        '                                     ^^^^^^^^ Secondary
 
         Public Sub New()
 
@@ -34,10 +32,8 @@ Namespace Tests.TestCases
             '                       ^^^^^^^^ Secondary
         End Sub
 
-        public Sub Validate(foobar As Object)
-            If (foobar = Nothing)
-                throw New ArgumentNullException("foobar") ' Compliant - matches one of the parameter name
-            End If
+        public Sub Validate(fOobAR As Object)
+             If foobar Is Nothing Then Throw New System.ArgumentNullException("foobar") ' Compliant - matches one of the parameter name
 
             DoSomething("foobar") ' Compliant - matches one of the parameter name
 

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -48,11 +49,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
             literalExpression.FirstAncestorOrSelf<MethodBlockBaseSyntax>()
                 ?.BlockStatement?.ParameterList
                 ?.Parameters
-                .Any(p => p.Identifier.Identifier.ValueText == literalExpression.Token.ValueText)
+                .Any(p => p.Identifier.Identifier.ValueText.Equals(literalExpression.Token.ValueText, StringComparison.OrdinalIgnoreCase))
                 ?? false;
 
         protected override bool IsInnerInstance(SyntaxNodeAnalysisContext context) =>
-            context.Node.Ancestors().OfType<ClassBlockSyntax>().Any() || context.Node.Ancestors().OfType<StructureBlockSyntax>().Any();
+            context.Node.Ancestors().Any(x => x is ClassBlockSyntax || x is StructureBlockSyntax);
 
         protected override IEnumerable<LiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node) =>
             node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))

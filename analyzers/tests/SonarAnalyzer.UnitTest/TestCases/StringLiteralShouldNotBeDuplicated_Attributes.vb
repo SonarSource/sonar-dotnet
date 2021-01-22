@@ -39,7 +39,7 @@ Namespace Tests.Diagnostics
         <DebuggerStepThrough>
         Public Function DoStuff(Optional arg As String = "12345")
         '                                                ^^^^^^^ Secondary
-            If(arg = "12345")
+            If arg = "12345" Then
         '            ^^^^^^^ Secondary
                 Return True
             End If
