@@ -1,0 +1,17 @@
+{
+  "title": "Threads should not lock on objects with weak identity",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "multi-threading",
+    "pitfall"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-3998",
+  "sqKey": "S3998",
+  "scope": "All"
+}

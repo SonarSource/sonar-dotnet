@@ -13,39 +13,28 @@ identity are:</p>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
-using System.Threading;
+Public Class Sample
 
-namespace MyLibrary
-{
-  class Foo
-  {
-    string myString = "foo";
+    Private myString As String = "foo"
 
-    void Bar()
-    {
-      lock(myString) { } // Noncompliant
-    }
-  }
-}
+    Public Sub Go()
+        SyncLock myString   ' Noncompliant
+        End SyncLock
+    End Sub
+
+End Class
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
-using System.Threading;
+Public Class Sample
 
-namespace MyLibrary
-{
-  class Foo
-  {
-    string myString = "foo";
-    private readonly Object thisLock = new Object();
+    Private Shared ReadOnly fLock As New Object
 
-    void Bar()
-    {
-      lock(thisLock) { } // Compliant
-    }
-  }
-}
+    Public Sub Go()
+        SyncLock fLock
+        End SyncLock
+    End Sub
+
+End Class
 </pre>
 

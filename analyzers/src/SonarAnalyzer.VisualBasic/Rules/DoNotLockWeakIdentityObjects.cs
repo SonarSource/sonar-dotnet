@@ -19,24 +19,24 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotLockWeakIdentityObjects : DoNotLockWeakIdentityObjectsBase<SyntaxKind, LockStatementSyntax>
+    public sealed class DoNotLockWeakIdentityObjects : DoNotLockWeakIdentityObjectsBase<SyntaxKind, SyncLockStatementSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.LockStatement;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.SyncLockStatement;
 
         public DoNotLockWeakIdentityObjects() : base(RspecStrings.ResourceManager) { }
 
-        protected override SyntaxNode LockExpression(LockStatementSyntax node) =>
+        protected override SyntaxNode LockExpression(SyncLockStatementSyntax node) =>
             node.Expression;
     }
 }

@@ -21,6 +21,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,7 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotLockWeakIdentityObjects() =>
+        public void DoNotLockWeakIdentityObjects_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.cs", new CS.DoNotLockWeakIdentityObjects());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotLockWeakIdentityObjects_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotLockWeakIdentityObjects.vb", new VB.DoNotLockWeakIdentityObjects());
     }
 }
