@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,43 +31,30 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class NoExceptionsInFinally : NoExceptionsInFinallyBase
     {
-        internal const string DiagnosticId = "S1163";
-        private const string MessageFormat = "Refactor this code to not throw exceptions in finally blocks.";
+        public NoExceptionsInFinally() : base(RspecStrings.ResourceManager) { }
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var finallyClauseSyntaxBlock = ((FinallyClauseSyntax)c.Node).Block;
-                    new ThrowInFinallyWalker(c).SafeVisit(finallyClauseSyntaxBlock);
-                }, SyntaxKind.FinallyClause);
-        }
+                c => new ThrowInFinallyWalker(c, Rule).SafeVisit(((FinallyClauseSyntax)c.Node).Block),
+                SyntaxKind.FinallyClause);
 
         private class ThrowInFinallyWalker : CSharpSyntaxWalker
         {
             private readonly SyntaxNodeAnalysisContext context;
+            private readonly DiagnosticDescriptor rule;
 
-            public ThrowInFinallyWalker(SyntaxNodeAnalysisContext context)
+            public ThrowInFinallyWalker(SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
             {
                 this.context = context;
+                this.rule = rule;
             }
 
-            public override void VisitThrowStatement(ThrowStatementSyntax node)
-            {
-                base.VisitThrowStatement(node);
-
-                this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
-            }
+            public override void VisitThrowStatement(ThrowStatementSyntax node) =>
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
 
             public override void VisitFinallyClause(FinallyClauseSyntax node)
             {
-                // Do not call base to force the walker to stop.
-                // Another walker will take care of this finally clause.
+                // Do not call base to force the walker to stop. Another walker will take care of this finally clause.
             }
         }
     }

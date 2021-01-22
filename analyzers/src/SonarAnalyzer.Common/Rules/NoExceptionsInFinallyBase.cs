@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,7 +20,6 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -28,7 +27,7 @@ namespace SonarAnalyzer.Rules
     public abstract class NoExceptionsInFinallyBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S1163";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Refactor this code to not throw exceptions in finally blocks.";
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

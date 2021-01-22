@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -38,12 +36,31 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
-                    if (true)
+                    var walker = new ThrowInFinallyWalker(c, Rule);
+                    foreach (var statement in ((FinallyBlockSyntax)c.Node).Statements)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+                        walker.SafeVisit(statement);
                     }
-                },
-                SyntaxKind.InvocationExpression);
+                }, SyntaxKind.FinallyBlock);
+
+        private class ThrowInFinallyWalker : VisualBasicSyntaxWalker
+        {
+            private readonly SyntaxNodeAnalysisContext context;
+            private readonly DiagnosticDescriptor rule;
+
+            public ThrowInFinallyWalker(SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
+            {
+                this.context = context;
+                this.rule = rule;
+            }
+
+            public override void VisitThrowStatement(ThrowStatementSyntax node) =>
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+
+            public override void VisitFinallyBlock(FinallyBlockSyntax node)
+            {
+                // Do not call base to force the walker to stop. Another walker will take care of this finally clause.
+            }
+        }
     }
 }
