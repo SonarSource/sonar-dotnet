@@ -26,6 +26,8 @@ namespace SonarAnalyzer.Helpers
     public static class VisualBasicCompilationHelper
     {
         public static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
-            (compilation as VisualBasicCompilation)?.LanguageVersion.CompareTo(languageVersion) >= 0;
+            compilation.VB()?.LanguageVersion.CompareTo(languageVersion) >= 0;
+
+        public static VisualBasicCompilation VB(this Compilation compilation) => compilation as VisualBasicCompilation;
     }
 }

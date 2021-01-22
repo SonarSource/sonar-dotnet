@@ -33,20 +33,29 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class OptionStrictOn : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3860";
-        private const string MessageFormat = "Option Strict should be enabled.";
+        private const string MessageFormat = "Option Strict should be set to 'On'{0}.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterCompilationStartAction(
+                c => c.RegisterCompilationEndAction(
+                    cc =>
+                    {
+                        if (c.Compilation.VB().Options.OptionStrict != OptionStrict.On)
+                        {
+                            cc.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, null, " for " + cc.Compilation.AssemblyName));
+                        }
+                    }));
+
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var statement = (OptionStatementSyntax)c.Node;
-                if (statement.ValueKeyword.IsKind(SyntaxKind.OffKeyword))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, statement.GetLocation()));
-                }
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
             },
             SyntaxKind.OptionStatement);
+        }
     }
 }
