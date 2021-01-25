@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ?? false;
 
         protected override bool IsInnerInstance(SyntaxNodeAnalysisContext context) =>
-            context.Node.Ancestors().Any(x=> x is ClassDeclarationSyntax || x is StructDeclarationSyntax);
+            context.Node.Ancestors().Any(x => x is ClassDeclarationSyntax || x is StructDeclarationSyntax);
 
         protected override IEnumerable<LiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node) =>
             node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
