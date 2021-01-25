@@ -3,6 +3,8 @@
 <code>List</code>, or an array, consider using the <code>Contains</code> method instead.</p>
 <p>This rule raises an issue when an <code>IndexOf</code> value retrieved from a <code>string</code>, <code>List</code> or array is tested against
 <code>&gt; 0</code>.</p>
+<p>This rule also raises an issue when <code>IndexOfAny</code>, <code>LastIndexOf</code> or <code>LastIndexOfAny</code> from a <code>string</code> is
+tested against <code>&gt; 0</code></p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 Dim Color As String = "blue"
