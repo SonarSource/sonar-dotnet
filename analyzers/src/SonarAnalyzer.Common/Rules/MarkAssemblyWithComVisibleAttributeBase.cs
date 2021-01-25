@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S3992";
         private const string MessageFormat = "Provide a 'ComVisible' attribute for assembly '{0}'.";
 
-        internal override KnownType AttributeToFind => KnownType.System_Runtime_InteropServices_ComVisibleAttribute;
+        private protected override KnownType AttributeToFind => KnownType.System_Runtime_InteropServices_ComVisibleAttribute;
 
         public MarkAssemblyWithComVisibleAttributeBase(System.Resources.ResourceManager rspecResources)
             : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources)) { }

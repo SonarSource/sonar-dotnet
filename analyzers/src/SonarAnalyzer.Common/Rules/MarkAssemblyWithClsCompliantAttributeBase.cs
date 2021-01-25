@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S3990";
         private const string MessageFormat = "Provide a 'CLSCompliant' attribute for assembly '{0}'.";
 
-        internal override KnownType AttributeToFind => KnownType.System_CLSCompliantAttribute;
+        private protected override KnownType AttributeToFind => KnownType.System_CLSCompliantAttribute;
 
         protected MarkAssemblyWithClsCompliantAttributeBase(System.Resources.ResourceManager rspecResources)
             : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources)) { }
