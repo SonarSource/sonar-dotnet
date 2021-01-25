@@ -21,20 +21,13 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MarkAssemblyWithComVisibleAttribute : MarkAssemblyWithAttributeBase
+    public sealed class MarkAssemblyWithComVisibleAttribute : MarkAssemblyWithComVisibleAttributeBase
     {
-        internal const string DiagnosticId = "S3992";
-        private const string MessageFormat = "Provide a 'ComVisible' attribute for assembly '{0}'.";
-
-        internal override KnownType AttributeToFind => KnownType.System_Runtime_InteropServices_ComVisibleAttribute;
-
-        public MarkAssemblyWithComVisibleAttribute()
-            : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)) { }
+        public MarkAssemblyWithComVisibleAttribute() : base(RspecStrings.ResourceManager) { }
     }
 }
