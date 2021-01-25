@@ -19,12 +19,13 @@
  */
 
 using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal class VisualBasicExpressionNumericConverter : ExpressionNumericConverterBase<ExpressionSyntax, LiteralExpressionSyntax, UnaryExpressionSyntax>
+    internal class VisualBasicExpressionNumericConverter : ExpressionNumericConverterBase<LiteralExpressionSyntax, UnaryExpressionSyntax>
     {
         private static readonly ISet<SyntaxKind> SupportedOperatorTokens = new HashSet<SyntaxKind>
         {
@@ -35,7 +36,7 @@ namespace SonarAnalyzer.Helpers
         protected override object TokenValue(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Token.Value;
 
-        protected override ExpressionSyntax Operand(UnaryExpressionSyntax unaryExpression) =>
+        protected override SyntaxNode Operand(UnaryExpressionSyntax unaryExpression) =>
             unaryExpression.Operand;
 
         protected override bool IsSupportedOperator(UnaryExpressionSyntax unaryExpression) =>

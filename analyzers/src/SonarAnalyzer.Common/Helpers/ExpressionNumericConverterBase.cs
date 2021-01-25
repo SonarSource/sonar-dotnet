@@ -23,23 +23,22 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class ExpressionNumericConverterBase<TExpressionSyntax, TLiteralExpressionSyntax, TUnaryExpressionSyntax>
-        where TExpressionSyntax : SyntaxNode
+    public abstract class ExpressionNumericConverterBase<TLiteralExpressionSyntax, TUnaryExpressionSyntax> : IExpressionNumericConverter
         where TLiteralExpressionSyntax : SyntaxNode
         where TUnaryExpressionSyntax : SyntaxNode
     {
         protected abstract object TokenValue(TLiteralExpressionSyntax literalExpression);
-        protected abstract TExpressionSyntax Operand(TUnaryExpressionSyntax unaryExpression);
+        protected abstract SyntaxNode Operand(TUnaryExpressionSyntax unaryExpression);
         protected abstract bool IsSupportedOperator(TUnaryExpressionSyntax unaryExpression);
         protected abstract bool IsMinusOperator(TUnaryExpressionSyntax unaryExpression);
 
-        public bool TryGetConstantIntValue(TExpressionSyntax expression, out int value) =>
+        public bool TryGetConstantIntValue(SyntaxNode expression, out int value) =>
             TryGetConstantValue(expression, Convert.ToInt32, (multiplier, v) => multiplier * v, out value);
 
-        public bool TryGetConstantDoubleValue(TExpressionSyntax expression, out double value) =>
+        public bool TryGetConstantDoubleValue(SyntaxNode expression, out double value) =>
             TryGetConstantValue(expression, Convert.ToDouble, (multiplier, v) => multiplier * v, out value);
 
-        private bool TryGetConstantValue<T>(TExpressionSyntax expression, Func<object, T> converter, Func<int, T, T> multiplierCalculator, out T value)
+        private bool TryGetConstantValue<T>(SyntaxNode expression, Func<object, T> converter, Func<int, T, T> multiplierCalculator, out T value)
             where T : struct
         {
             var multiplier = GetMultiplier(expression, out var internalExpression);
@@ -60,7 +59,7 @@ namespace SonarAnalyzer.Helpers
             return false;
         }
 
-        private int? GetMultiplier(TExpressionSyntax expression, out TExpressionSyntax internalExpression)
+        private int? GetMultiplier(SyntaxNode expression, out SyntaxNode internalExpression)
         {
             var multiplier = 1;
             internalExpression = expression;

@@ -28,6 +28,8 @@ namespace SonarAnalyzer.Helpers
 
         public StringComparison NameComparison => StringComparison.OrdinalIgnoreCase;
         public GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        public Lazy<IExpressionNumericConverter> ExpressionNumericConverter { get; } =
+            new Lazy<IExpressionNumericConverter>(() => new VisualBasicExpressionNumericConverter());
 
         public static VisualBasicFacade Instance => Singleton.Value;
 

@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -32,24 +33,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class IndexOfCheckAgainstZero : IndexOfCheckAgainstZeroBase<SyntaxKind, ExpressionSyntax, BinaryExpressionSyntax>
     {
-        private static readonly VisualBasicExpressionNumericConverter ExpressionNumericConverter = new VisualBasicExpressionNumericConverter();
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
-
+        protected override ILanguageFacade LanguageFacade { get; } = VisualBasicFacade.Instance;
         protected override SyntaxKind LessThanExpression => SyntaxKind.LessThanExpression;
         protected override SyntaxKind GreaterThanExpression => SyntaxKind.GreaterThanExpression;
 
         public IndexOfCheckAgainstZero() : base(RspecStrings.ResourceManager) { }
 
-        protected override bool IsIndexOfCall(ExpressionSyntax call, SemanticModel semanticModel)
-        {
-            if (!(semanticModel.GetSymbolInfo(call).Symbol is IMethodSymbol indexOfSymbol) || !indexOfSymbol.Name.Equals("IndexOf", StringComparison.OrdinalIgnoreCase))
-            {
-                return false;
-            }
-
-            return indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes);
-        }
+        protected override bool IsSensitiveCall(ExpressionSyntax call, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(call).Symbol is IMethodSymbol indexOfSymbol
+            && ((indexOfSymbol.Name.Equals("IndexOf", StringComparison.OrdinalIgnoreCase)
+                 && indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes))
+               || (InvalidStringMethods.Any(x => x.Equals(indexOfSymbol.Name, StringComparison.OrdinalIgnoreCase))
+                   && indexOfSymbol.ContainingType.DerivesFrom(KnownType.System_String)));
 
         protected override ExpressionSyntax Left(BinaryExpressionSyntax binaryExpression) =>
             binaryExpression.Left;
@@ -61,6 +56,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             binaryExpression.Right;
 
         protected override bool TryGetConstantIntValue(ExpressionSyntax expression, out int constValue) =>
-            ExpressionNumericConverter.TryGetConstantIntValue(expression, out constValue);
+            LanguageFacade.ExpressionNumericConverter.Value.TryGetConstantIntValue(expression, out constValue);
     }
 }

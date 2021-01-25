@@ -3235,7 +3235,7 @@
     <value>suspicious</value>
   </data>
   <data name="S2692_Title" xml:space="preserve">
-    <value>"indexOf" checks should not be for positive numbers</value>
+    <value>"IndexOf" checks should not be for positive numbers</value>
   </data>
   <data name="S2692_Type" xml:space="preserve">
     <value>CODE_SMELL</value>

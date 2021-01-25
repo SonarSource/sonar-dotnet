@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Linq
 Imports System.Collections.Generic
 
 Namespace Tests.TestCases
@@ -14,6 +15,7 @@ Namespace Tests.TestCases
             Strings.Add(Color)
             Strings.Add(Name)
             Dim StringArray As String() = Strings.ToArray()
+            Dim Chars = New Char() { "i"c, "l"c }
 
             If StringIList.IndexOf(Color) > 0 Then ' Noncompliant
             '                             ^^^
@@ -30,34 +32,65 @@ Namespace Tests.TestCases
             '   ...
             End If
 
-            if Strings.IndexOf(Color) > 0 Then ' Noncompliant {{0 is a valid index, but this check ignores it.}}
+            If Strings.IndexOf(Color) > 0 Then ' Noncompliant {{0 is a valid index, but this check ignores it.}}
             '    ...
             End If
 
-            if 0 < Name.IndexOf("ish") Then ' Noncompliant
+            If 0 < Name.IndexOf("ish") Then ' Noncompliant
             '    ...
             End If
 
-            if -1 < Name.IndexOf("ish") Then
+            If -1 < Name.IndexOf("ish") Then
             '    ...
             End If
 
-            if 2 < Name.IndexOf("ish") Then
+            If 2 < Name.IndexOf("ish") Then
             '    ...
             End If
 
-            if Name.IndexOf("ae") > 0 Then ' Noncompliant
+            If Name.IndexOf("ae") > 0 Then ' Noncompliant
             '    ...
             End If
 
-            if Array.IndexOf(StringArray, Color) > 0 Then ' Noncompliant
+            If Array.IndexOf(StringArray, Color) > 0 Then ' Noncompliant
             '    ...
             End If
 
-            if Array.IndexOf(StringArray, Color) >= 0 Then
+            If Array.IndexOf(StringArray, Color) >= 0 Then
             '    ...
             End If
 
+            If 0  > 0 Then
+            '   ...
+            End If
+
+            If Strings.Count() > 0 Then
+            '   ...
+            End If
+
+            If Name.IndexOfAny(Chars) > 0 Then ' Noncompliant
+            '   ...
+            End If
+
+            If 0 < Name.IndexOfAny(Chars) Then ' Noncompliant
+            '   ...
+            End If
+
+            If Name.LastIndexOf("a"c) > 0 Then ' Noncompliant
+            '   ...
+            End If
+
+            If 0 < Name.LastIndexOf("a"c) Then ' Noncompliant
+            '   ...
+            End If
+
+            If Name.LastIndexOfAny(Chars) > 0 Then ' Noncompliant
+            '   ...
+            End If
+
+            If 0 < Name.LastIndexOfAny(Chars) Then ' Noncompliant
+            '   ...
+            End If
         End Sub
 
     End Class

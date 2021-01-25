@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal class CSharpExpressionNumericConverter : ExpressionNumericConverterBase<ExpressionSyntax, LiteralExpressionSyntax, PrefixUnaryExpressionSyntax>
+    internal class CSharpExpressionNumericConverter : ExpressionNumericConverterBase<LiteralExpressionSyntax, PrefixUnaryExpressionSyntax>
     {
         private static readonly ISet<SyntaxKind> SupportedOperatorTokens = new HashSet<SyntaxKind>
         {
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
         protected override object TokenValue(LiteralExpressionSyntax literalExpression) =>
             literalExpression.Token.Value;
 
-        protected override ExpressionSyntax Operand(PrefixUnaryExpressionSyntax unaryExpression) =>
+        protected override SyntaxNode Operand(PrefixUnaryExpressionSyntax unaryExpression) =>
             unaryExpression.Operand;
 
         protected override bool IsSupportedOperator(PrefixUnaryExpressionSyntax unaryExpression) =>

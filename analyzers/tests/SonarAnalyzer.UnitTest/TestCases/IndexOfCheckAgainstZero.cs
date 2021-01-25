@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
@@ -15,6 +16,7 @@ namespace Tests.Diagnostics
             strings.Add(color);
             strings.Add(name);
             string[] stringArray = strings.ToArray();
+            char[] chars = { 'i', 'l' };
 
             if (stringIList.IndexOf(color) > 0) // Noncompliant
 //                                         ^^^
@@ -61,6 +63,46 @@ namespace Tests.Diagnostics
             if (Array.IndexOf(stringArray, color) >= 0)
             {
                 // ...
+            }
+
+            if (0 > 0)
+            {
+
+            }
+
+            if (strings.Count() > 0)
+            {
+
+            }
+
+            if (name.IndexOfAny(chars) > 0) // Noncompliant
+            {
+
+            }
+
+            if (0 < name.IndexOfAny(chars)) // Noncompliant
+            {
+
+            }
+
+            if (name.LastIndexOf('a') > 0) // Noncompliant
+            {
+
+            }
+
+            if (0 < name.LastIndexOf('a')) // Noncompliant
+            {
+
+            }
+
+            if (name.LastIndexOfAny(chars) > 0) // Noncompliant
+            {
+
+            }
+
+            if (0 < name.LastIndexOfAny(chars)) // Noncompliant
+            {
+
             }
         }
     }

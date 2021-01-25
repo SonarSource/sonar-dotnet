@@ -18,21 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal sealed class CSharpFacade : ILanguageFacade
+    public interface IExpressionNumericConverter
     {
-        private static readonly Lazy<CSharpFacade> Singleton = new Lazy<CSharpFacade>(() => new CSharpFacade());
-
-        public StringComparison NameComparison => StringComparison.Ordinal;
-        public GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-        public Lazy<IExpressionNumericConverter> ExpressionNumericConverter { get; } =
-            new Lazy<IExpressionNumericConverter>(() => new CSharpExpressionNumericConverter());
-
-        public static CSharpFacade Instance => Singleton.Value;
-
-        private CSharpFacade() { }
+        bool TryGetConstantIntValue(SyntaxNode expression, out int value);
+        bool TryGetConstantDoubleValue(SyntaxNode expression, out double value);
     }
 }

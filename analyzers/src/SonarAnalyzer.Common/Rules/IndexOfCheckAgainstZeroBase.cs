@@ -29,7 +29,17 @@ namespace SonarAnalyzer.Rules
         where TExpressionSyntax : SyntaxNode
         where TBinaryExpressionSyntax : SyntaxNode
     {
-        internal static readonly ImmutableArray<KnownType> CheckedTypes =
+        protected const string DiagnosticId = "S2692";
+        private const string MessageFormat = "0 is a valid index, but this check ignores it.";
+
+        private protected static readonly string[] InvalidStringMethods =
+            {
+                "IndexOfAny",
+                "LastIndexOf",
+                "LastIndexOfAny"
+            };
+
+        private protected static readonly ImmutableArray<KnownType> CheckedTypes =
             ImmutableArray.Create(
                 KnownType.System_Array,
                 KnownType.System_Collections_Generic_IList_T,
@@ -37,56 +47,53 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Collections_IList
             );
 
-        protected const string DiagnosticId = "S2692";
-        private const string MessageFormat = "0 is a valid index, but this check ignores it.";
+        private readonly DiagnosticDescriptor rule;
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract ILanguageFacade LanguageFacade { get; }
         protected abstract TSyntaxKind LessThanExpression { get; }
         protected abstract TSyntaxKind GreaterThanExpression { get; }
 
         protected abstract bool TryGetConstantIntValue(TExpressionSyntax expression, out int constValue);
-        protected abstract bool IsIndexOfCall(TExpressionSyntax call, SemanticModel semanticModel);
+        protected abstract bool IsSensitiveCall(TExpressionSyntax call, SemanticModel semanticModel);
         protected abstract TExpressionSyntax Left(TBinaryExpressionSyntax binaryExpression);
         protected abstract TExpressionSyntax Right(TBinaryExpressionSyntax binaryExpression);
         protected abstract SyntaxToken OperatorToken(TBinaryExpressionSyntax binaryExpression);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-        protected DiagnosticDescriptor Rule { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected IndexOfCheckAgainstZeroBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+                LanguageFacade.GeneratedCodeRecognizer,
                 c =>
                 {
                     var lessThan = (TBinaryExpressionSyntax)c.Node;
-                    if (TryGetConstantIntValue(Left(lessThan), out var constValue) &&
-                        constValue == 0 &&
-                        IsIndexOfCall(Right(lessThan), c.SemanticModel))
+                    if (IsInvalidComparision(Left(lessThan), Right(lessThan), c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
-                            Left(lessThan).CreateLocation(OperatorToken(lessThan))));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Left(lessThan).CreateLocation(OperatorToken(lessThan))));
                     }
                 },
                 LessThanExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+                LanguageFacade.GeneratedCodeRecognizer,
                 c =>
                 {
                     var greaterThan = (TBinaryExpressionSyntax)c.Node;
-                    if (TryGetConstantIntValue(Right(greaterThan), out var constValue) &&
-                        constValue == 0 &&
-                        IsIndexOfCall(Left(greaterThan), c.SemanticModel))
+                    if (IsInvalidComparision(Right(greaterThan), Left(greaterThan), c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
-                            OperatorToken(greaterThan).CreateLocation(Right(greaterThan))));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, OperatorToken(greaterThan).CreateLocation(Right(greaterThan))));
                     }
                 },
                 GreaterThanExpression);
         }
+
+        private bool IsInvalidComparision(TExpressionSyntax conxtantExpression, TExpressionSyntax methodInvocationExpression, SemanticModel semanticModel) =>
+            TryGetConstantIntValue(conxtantExpression, out var constValue)
+            && constValue == 0
+            && IsSensitiveCall(methodInvocationExpression, semanticModel);
     }
 }

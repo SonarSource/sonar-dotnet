@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -31,24 +32,18 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class IndexOfCheckAgainstZero : IndexOfCheckAgainstZeroBase<SyntaxKind, ExpressionSyntax, BinaryExpressionSyntax>
     {
-        private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
-
+        protected override ILanguageFacade LanguageFacade { get; } = CSharpFacade.Instance;
         protected override SyntaxKind LessThanExpression => SyntaxKind.LessThanExpression;
         protected override SyntaxKind GreaterThanExpression => SyntaxKind.GreaterThanExpression;
 
         public IndexOfCheckAgainstZero() : base(RspecStrings.ResourceManager) { }
 
-        protected override bool IsIndexOfCall(ExpressionSyntax call, SemanticModel semanticModel)
-        {
-            if (!(semanticModel.GetSymbolInfo(call).Symbol is IMethodSymbol indexOfSymbol) || indexOfSymbol.Name != "IndexOf")
-            {
-                return false;
-            }
-
-            return indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes);
-        }
+        protected override bool IsSensitiveCall(ExpressionSyntax call, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(call).Symbol is IMethodSymbol indexOfSymbol
+            && ((indexOfSymbol.Name == "IndexOf"
+                 && indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes))
+               || (InvalidStringMethods.Any(x => x == indexOfSymbol.Name)
+                   && indexOfSymbol.ContainingType.DerivesFrom(KnownType.System_String)));
 
         protected override ExpressionSyntax Left(BinaryExpressionSyntax binaryExpression) =>
             binaryExpression.Left;
@@ -60,6 +55,6 @@ namespace SonarAnalyzer.Rules.CSharp
             binaryExpression.Right;
 
         protected override bool TryGetConstantIntValue(ExpressionSyntax expression, out int constValue) =>
-            ExpressionNumericConverter.TryGetConstantIntValue(expression, out constValue);
+            LanguageFacade.ExpressionNumericConverter.Value.TryGetConstantIntValue(expression, out constValue);
     }
 }
