@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,23 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MarkAssemblyWithClsCompliantAttributeBase : SonarDiagnosticAnalyzer
+    public abstract class MarkAssemblyWithClsCompliantAttributeBase : MarkAssemblyWithAttributeBase
     {
         protected const string DiagnosticId = "S3990";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Provide a 'CLSCompliant' attribute for assembly '{0}'.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        internal override KnownType AttributeToFind => KnownType.System_CLSCompliantAttribute;
 
-        protected DiagnosticDescriptor Rule { get; }
-
-        protected MarkAssemblyWithClsCompliantAttributeBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        protected MarkAssemblyWithClsCompliantAttributeBase(System.Resources.ResourceManager rspecResources)
+            : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources)) { }
     }
 }

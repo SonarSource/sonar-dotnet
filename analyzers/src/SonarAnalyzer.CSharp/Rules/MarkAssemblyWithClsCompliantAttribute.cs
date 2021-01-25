@@ -21,20 +21,13 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MarkAssemblyWithClsCompliantAttribute : MarkAssemblyWithAttributeBase
+    public sealed class MarkAssemblyWithClsCompliantAttribute : MarkAssemblyWithClsCompliantAttributeBase
     {
-        internal const string DiagnosticId = "S3990";
-        private const string MessageFormat = "Provide a 'CLSCompliant' attribute for assembly '{0}'.";
-
-        internal override KnownType AttributeToFind => KnownType.System_CLSCompliantAttribute;
-
-        public MarkAssemblyWithClsCompliantAttribute()
-            : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)) { }
+        public MarkAssemblyWithClsCompliantAttribute() : base(RspecStrings.ResourceManager) { }
     }
 }
