@@ -1,0 +1,226 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  68,
+"endLine":  70,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  137,
+"startColumn":  68,
+"endLine":  137,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  163,
+"startColumn":  72,
+"endLine":  163,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  194,
+"startColumn":  76,
+"endLine":  194,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  68,
+"endLine":  198,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  72,
+"endLine":  245,
+"endColumn":  79
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'XBMCSyncPlayCount' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  106,
+"startColumn":  74,
+"endLine":  106,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  45,
+"endLine":  187,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  266,
+"startColumn":  107,
+"endLine":  266,
+"endColumn":  126
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  289,
+"startColumn":  44,
+"endLine":  289,
+"endColumn":  63
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'XBMC Controller' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  31,
+"endLine":  37,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  49,
+"endLine":  112,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  323,
+"startColumn":  58,
+"endLine":  323,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  405,
+"startColumn":  54,
+"endLine":  405,
+"endColumn":  71
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  194,
+"startColumn":  77,
+"endLine":  194,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  205,
+"startColumn":  78,
+"endLine":  205,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  71,
+"endLine":  227,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  238,
+"startColumn":  74,
+"endLine":  238,
+"endColumn":  81
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  247,
+"startColumn":  74,
+"endLine":  247,
+"endColumn":  81
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  254,
+"startColumn":  59,
+"endLine":  254,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  619,
+"startColumn":  72,
+"endLine":  619,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  652,
+"startColumn":  72,
+"endLine":  652,
+"endColumn":  79
+}
+}
+]
+}
+]
+}

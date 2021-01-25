@@ -1,0 +1,7180 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  68,
+"endLine":  144,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  199,
+"startColumn":  106,
+"endLine":  199,
+"endColumn":  113
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  235,
+"startColumn":  68,
+"endLine":  235,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  68,
+"endLine":  250,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  68,
+"endLine":  293,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  333,
+"startColumn":  68,
+"endLine":  333,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'pnlInfoPanel' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  22,
+"endLine":  112,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  122,
+"startColumn":  35,
+"endLine":  122,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  39,
+"endLine":  124,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  125,
+"startColumn":  39,
+"endLine":  125,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  39,
+"endLine":  126,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  127,
+"startColumn":  39,
+"endLine":  127,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  39,
+"endLine":  131,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  309,
+"startColumn":  30,
+"endLine":  309,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'xdg-open' 9 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  175,
+"startColumn":  47,
+"endLine":  175,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  47,
+"endLine":  187,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  199,
+"startColumn":  47,
+"endLine":  199,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  211,
+"startColumn":  47,
+"endLine":  211,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  223,
+"startColumn":  47,
+"endLine":  223,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  235,
+"startColumn":  47,
+"endLine":  235,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  247,
+"startColumn":  47,
+"endLine":  247,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  259,
+"startColumn":  47,
+"endLine":  259,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  271,
+"startColumn":  47,
+"endLine":  271,
+"endColumn":  57
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Microsoft Sans Serif' 12 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  154,
+"endLine":  70,
+"endColumn":  176
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  71,
+"startColumn":  136,
+"endLine":  71,
+"endColumn":  158
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  99,
+"endLine":  73,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  97,
+"endLine":  75,
+"endColumn":  119
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  77,
+"startColumn":  98,
+"endLine":  77,
+"endColumn":  120
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  81,
+"startColumn":  105,
+"endLine":  81,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  87,
+"startColumn":  105,
+"endLine":  87,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  104,
+"endLine":  96,
+"endColumn":  126
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  107,
+"startColumn":  104,
+"endLine":  107,
+"endColumn":  126
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  104,
+"endLine":  124,
+"endColumn":  126
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  104,
+"endLine":  133,
+"endColumn":  126
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  348,
+"startColumn":  30,
+"endLine":  348,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'season{0}.tbn' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  171,
+"endLine":  245,
+"endColumn":  186
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  247,
+"startColumn":  171,
+"endLine":  247,
+"endColumn":  186
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  266,
+"startColumn":  164,
+"endLine":  266,
+"endColumn":  179
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  164,
+"endLine":  268,
+"endColumn":  179
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'season{0}.jpg' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  171,
+"endLine":  249,
+"endColumn":  186
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  251,
+"startColumn":  171,
+"endLine":  251,
+"endColumn":  186
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  270,
+"startColumn":  164,
+"endLine":  270,
+"endColumn":  179
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  272,
+"startColumn":  164,
+"endLine":  272,
+"endColumn":  179
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '-fanart.jpg' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  264,
+"startColumn":  100,
+"endLine":  264,
+"endColumn":  113
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  264,
+"startColumn":  186,
+"endLine":  264,
+"endColumn":  199
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  308,
+"startColumn":  84,
+"endLine":  308,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  308,
+"startColumn":  170,
+"endLine":  308,
+"endColumn":  183
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '.fanart.jpg' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  265,
+"startColumn":  100,
+"endLine":  265,
+"endColumn":  113
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  265,
+"startColumn":  186,
+"endLine":  265,
+"endColumn":  199
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  309,
+"startColumn":  84,
+"endLine":  309,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  309,
+"startColumn":  170,
+"endLine":  309,
+"endColumn":  183
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  48,
+"startColumn":  68,
+"endLine":  48,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  68,
+"endLine":  72,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  68,
+"endLine":  138,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  328,
+"startColumn":  68,
+"endLine":  328,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'FOLDER' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  57,
+"startColumn":  32,
+"endLine":  57,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  40,
+"endLine":  58,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  110,
+"startColumn":  46,
+"endLine":  110,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  416,
+"startColumn":  22,
+"endLine":  416,
+"endColumn":  30
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'MOVIE' 9 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  174,
+"startColumn":  55,
+"endLine":  174,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  175,
+"startColumn":  63,
+"endLine":  175,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  212,
+"startColumn":  55,
+"endLine":  212,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  213,
+"startColumn":  63,
+"endLine":  213,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  231,
+"startColumn":  59,
+"endLine":  231,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  232,
+"startColumn":  67,
+"endLine":  232,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  295,
+"startColumn":  59,
+"endLine":  295,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  296,
+"startColumn":  67,
+"endLine":  296,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  412,
+"startColumn":  22,
+"endLine":  412,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'TVEpPath' 16 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  117,
+"endLine":  242,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  244,
+"startColumn":  145,
+"endLine":  244,
+"endColumn":  155
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  118,
+"endLine":  245,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  247,
+"startColumn":  118,
+"endLine":  247,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  118,
+"endLine":  249,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  251,
+"startColumn":  118,
+"endLine":  251,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  259,
+"startColumn":  118,
+"endLine":  259,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  259,
+"startColumn":  196,
+"endLine":  259,
+"endColumn":  206
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  260,
+"startColumn":  115,
+"endLine":  260,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  266,
+"startColumn":  118,
+"endLine":  266,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  118,
+"endLine":  268,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  270,
+"startColumn":  118,
+"endLine":  270,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  272,
+"startColumn":  118,
+"endLine":  272,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  303,
+"startColumn":  102,
+"endLine":  303,
+"endColumn":  112
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  303,
+"startColumn":  180,
+"endLine":  303,
+"endColumn":  190
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  99,
+"endLine":  304,
+"endColumn":  109
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Size: {0}x{1}' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  116,
+"startColumn":  79,
+"endLine":  116,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  79,
+"endLine":  128,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  316,
+"startColumn":  85,
+"endLine":  316,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  325,
+"startColumn":  81,
+"endLine":  325,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  626,
+"startColumn":  83,
+"endLine":  626,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  641,
+"startColumn":  87,
+"endLine":  641,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  662,
+"startColumn":  83,
+"endLine":  662,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  677,
+"startColumn":  87,
+"endLine":  677,
+"endColumn":  102
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 24 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  59,
+"startColumn":  68,
+"endLine":  59,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  68,
+"endLine":  75,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  91,
+"startColumn":  68,
+"endLine":  91,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  190,
+"startColumn":  68,
+"endLine":  190,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  214,
+"startColumn":  68,
+"endLine":  214,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  226,
+"startColumn":  68,
+"endLine":  226,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  280,
+"startColumn":  68,
+"endLine":  280,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  351,
+"startColumn":  68,
+"endLine":  351,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  368,
+"startColumn":  68,
+"endLine":  368,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  385,
+"startColumn":  68,
+"endLine":  385,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  399,
+"startColumn":  68,
+"endLine":  399,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  413,
+"startColumn":  68,
+"endLine":  413,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  427,
+"startColumn":  68,
+"endLine":  427,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  441,
+"startColumn":  68,
+"endLine":  441,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  455,
+"startColumn":  68,
+"endLine":  455,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  469,
+"startColumn":  68,
+"endLine":  469,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  483,
+"startColumn":  68,
+"endLine":  483,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  497,
+"startColumn":  68,
+"endLine":  497,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  511,
+"startColumn":  68,
+"endLine":  511,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  556,
+"startColumn":  68,
+"endLine":  556,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  630,
+"startColumn":  68,
+"endLine":  630,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  646,
+"startColumn":  68,
+"endLine":  646,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  666,
+"startColumn":  68,
+"endLine":  666,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  682,
+"startColumn":  68,
+"endLine":  682,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'fanart.jpg' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  67,
+"endLine":  228,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  65,
+"endLine":  242,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  461,
+"startColumn":  58,
+"endLine":  461,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  462,
+"startColumn":  59,
+"endLine":  462,
+"endColumn":  71
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'poster.jpg' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  285,
+"startColumn":  67,
+"endLine":  285,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  299,
+"startColumn":  65,
+"endLine":  299,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  58,
+"endLine":  457,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  458,
+"startColumn":  59,
+"endLine":  458,
+"endColumn":  71
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Size: {0}x{1}' 9 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  220,
+"startColumn":  75,
+"endLine":  220,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  231,
+"startColumn":  87,
+"endLine":  231,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  83,
+"endLine":  249,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  273,
+"startColumn":  83,
+"endLine":  273,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  288,
+"startColumn":  87,
+"endLine":  288,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  305,
+"startColumn":  83,
+"endLine":  305,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  329,
+"startColumn":  83,
+"endLine":  329,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  756,
+"startColumn":  89,
+"endLine":  756,
+"endColumn":  104
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  764,
+"startColumn":  89,
+"endLine":  764,
+"endColumn":  104
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'extrathumbs' 13 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  469,
+"startColumn":  63,
+"endLine":  469,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  470,
+"startColumn":  80,
+"endLine":  470,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  823,
+"startColumn":  101,
+"endLine":  823,
+"endColumn":  114
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1090,
+"startColumn":  125,
+"endLine":  1090,
+"endColumn":  138
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1092,
+"startColumn":  155,
+"endLine":  1092,
+"endColumn":  168
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1094,
+"startColumn":  95,
+"endLine":  1094,
+"endColumn":  108
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1381,
+"startColumn":  92,
+"endLine":  1381,
+"endColumn":  105
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1396,
+"startColumn":  63,
+"endLine":  1396,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1399,
+"startColumn":  129,
+"endLine":  1399,
+"endColumn":  142
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1401,
+"startColumn":  159,
+"endLine":  1401,
+"endColumn":  172
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1403,
+"startColumn":  99,
+"endLine":  1403,
+"endColumn":  112
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1417,
+"startColumn":  85,
+"endLine":  1417,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1435,
+"startColumn":  80,
+"endLine":  1435,
+"endColumn":  93
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 39 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  84,
+"startColumn":  68,
+"endLine":  84,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  68,
+"endLine":  100,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  145,
+"startColumn":  68,
+"endLine":  145,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  160,
+"startColumn":  68,
+"endLine":  160,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  236,
+"startColumn":  68,
+"endLine":  236,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  257,
+"startColumn":  68,
+"endLine":  257,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  277,
+"startColumn":  68,
+"endLine":  277,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  68,
+"endLine":  293,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  313,
+"startColumn":  68,
+"endLine":  313,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  333,
+"startColumn":  68,
+"endLine":  333,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  365,
+"startColumn":  68,
+"endLine":  365,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  426,
+"startColumn":  68,
+"endLine":  426,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  444,
+"startColumn":  68,
+"endLine":  444,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  473,
+"startColumn":  68,
+"endLine":  473,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  490,
+"startColumn":  68,
+"endLine":  490,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  506,
+"startColumn":  68,
+"endLine":  506,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  565,
+"startColumn":  68,
+"endLine":  565,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  591,
+"startColumn":  68,
+"endLine":  591,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  786,
+"startColumn":  68,
+"endLine":  786,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  849,
+"startColumn":  72,
+"endLine":  849,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  876,
+"startColumn":  68,
+"endLine":  876,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  899,
+"startColumn":  72,
+"endLine":  899,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  913,
+"startColumn":  68,
+"endLine":  913,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  930,
+"startColumn":  68,
+"endLine":  930,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  944,
+"startColumn":  68,
+"endLine":  944,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  958,
+"startColumn":  68,
+"endLine":  958,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  972,
+"startColumn":  68,
+"endLine":  972,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  986,
+"startColumn":  68,
+"endLine":  986,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1000,
+"startColumn":  68,
+"endLine":  1000,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1014,
+"startColumn":  68,
+"endLine":  1014,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1028,
+"startColumn":  68,
+"endLine":  1028,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1042,
+"startColumn":  68,
+"endLine":  1042,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1056,
+"startColumn":  68,
+"endLine":  1056,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1075,
+"startColumn":  68,
+"endLine":  1075,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1117,
+"startColumn":  68,
+"endLine":  1117,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1175,
+"startColumn":  72,
+"endLine":  1175,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1306,
+"startColumn":  68,
+"endLine":  1306,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1388,
+"startColumn":  68,
+"endLine":  1388,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1438,
+"startColumn":  68,
+"endLine":  1438,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 7 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  57,
+"startColumn":  68,
+"endLine":  57,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  89,
+"startColumn":  68,
+"endLine":  89,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  68,
+"endLine":  105,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  137,
+"startColumn":  68,
+"endLine":  137,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  157,
+"startColumn":  68,
+"endLine":  157,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  68,
+"endLine":  207,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  237,
+"startColumn":  68,
+"endLine":  237,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Size: {0}x{1}' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  52,
+"startColumn":  87,
+"endLine":  52,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  79,
+"endLine":  68,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  85,
+"startColumn":  83,
+"endLine":  85,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  87,
+"endLine":  100,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  116,
+"startColumn":  79,
+"endLine":  116,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  83,
+"endLine":  133,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  183,
+"startColumn":  85,
+"endLine":  183,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  192,
+"startColumn":  81,
+"endLine":  192,
+"endColumn":  96
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Size: {0}x{1}' 11 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  79,
+"endLine":  99,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  114,
+"startColumn":  83,
+"endLine":  114,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  164,
+"startColumn":  87,
+"endLine":  164,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  79,
+"endLine":  180,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  197,
+"startColumn":  83,
+"endLine":  197,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  212,
+"startColumn":  87,
+"endLine":  212,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  79,
+"endLine":  228,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  83,
+"endLine":  245,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  446,
+"startColumn":  81,
+"endLine":  446,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  454,
+"startColumn":  81,
+"endLine":  454,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  463,
+"startColumn":  81,
+"endLine":  463,
+"endColumn":  96
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 27 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  68,
+"endLine":  58,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  74,
+"startColumn":  68,
+"endLine":  74,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  103,
+"startColumn":  68,
+"endLine":  103,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  119,
+"startColumn":  68,
+"endLine":  119,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  139,
+"startColumn":  68,
+"endLine":  139,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  169,
+"startColumn":  68,
+"endLine":  169,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  68,
+"endLine":  201,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  68,
+"endLine":  217,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  68,
+"endLine":  249,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  313,
+"startColumn":  68,
+"endLine":  313,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  337,
+"startColumn":  68,
+"endLine":  337,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  349,
+"startColumn":  68,
+"endLine":  349,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  391,
+"startColumn":  68,
+"endLine":  391,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  502,
+"startColumn":  68,
+"endLine":  502,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  521,
+"startColumn":  68,
+"endLine":  521,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  538,
+"startColumn":  68,
+"endLine":  538,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  552,
+"startColumn":  68,
+"endLine":  552,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  566,
+"startColumn":  68,
+"endLine":  566,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  580,
+"startColumn":  68,
+"endLine":  580,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  594,
+"startColumn":  68,
+"endLine":  594,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  608,
+"startColumn":  68,
+"endLine":  608,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  622,
+"startColumn":  68,
+"endLine":  622,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  636,
+"startColumn":  68,
+"endLine":  636,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  650,
+"startColumn":  68,
+"endLine":  650,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  664,
+"startColumn":  68,
+"endLine":  664,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  686,
+"startColumn":  72,
+"endLine":  686,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  759,
+"startColumn":  68,
+"endLine":  759,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  68,
+"endLine":  96,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  68,
+"endLine":  153,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  205,
+"startColumn":  68,
+"endLine":  205,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  316,
+"startColumn":  68,
+"endLine":  316,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Header' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  225,
+"startColumn":  25,
+"endLine":  225,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  265,
+"startColumn":  25,
+"endLine":  265,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  296,
+"startColumn":  25,
+"endLine":  296,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  322,
+"startColumn":  64,
+"endLine":  322,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  334,
+"startColumn":  63,
+"endLine":  334,
+"endColumn":  71
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Video Stream' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  74,
+"startColumn":  93,
+"endLine":  74,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  65,
+"endLine":  133,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  183,
+"startColumn":  73,
+"endLine":  183,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  218,
+"startColumn":  56,
+"endLine":  218,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  61,
+"endLine":  242,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  355,
+"startColumn":  60,
+"endLine":  355,
+"endColumn":  74
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Audio Stream' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  77,
+"startColumn":  93,
+"endLine":  77,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  65,
+"endLine":  136,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  186,
+"startColumn":  73,
+"endLine":  186,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  258,
+"startColumn":  56,
+"endLine":  258,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  277,
+"startColumn":  61,
+"endLine":  277,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  356,
+"startColumn":  60,
+"endLine":  356,
+"endColumn":  74
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Subtitle Stream' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  93,
+"endLine":  80,
+"endColumn":  110
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  139,
+"startColumn":  65,
+"endLine":  139,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  73,
+"endLine":  189,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  289,
+"startColumn":  56,
+"endLine":  289,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  306,
+"startColumn":  61,
+"endLine":  306,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  357,
+"startColumn":  60,
+"endLine":  357,
+"endColumn":  77
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"region":  {
+"startLine":  81,
+"startColumn":  68,
+"endLine":  81,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"region":  {
+"startLine":  121,
+"startColumn":  68,
+"endLine":  121,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"region":  {
+"startLine":  161,
+"startColumn":  68,
+"endLine":  161,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"region":  {
+"startLine":  182,
+"startColumn":  68,
+"endLine":  182,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  68,
+"endLine":  61,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  68,
+"endLine":  90,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"region":  {
+"startLine":  119,
+"startColumn":  68,
+"endLine":  119,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  68,
+"endLine":  155,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'EmberSetup.exe' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  59,
+"endLine":  36,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"region":  {
+"startLine":  40,
+"startColumn":  94,
+"endLine":  40,
+"endColumn":  110
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"region":  {
+"startLine":  56,
+"startColumn":  56,
+"endLine":  56,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  56,
+"endLine":  72,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  57,
+"endLine":  73,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  183,
+"endLine":  76,
+"endColumn":  199
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 12 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  68,
+"endLine":  61,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  81,
+"startColumn":  68,
+"endLine":  81,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  68,
+"endLine":  99,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  123,
+"startColumn":  68,
+"endLine":  123,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  168,
+"startColumn":  68,
+"endLine":  168,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  302,
+"startColumn":  68,
+"endLine":  302,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  317,
+"startColumn":  68,
+"endLine":  317,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  379,
+"startColumn":  68,
+"endLine":  379,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  399,
+"startColumn":  68,
+"endLine":  399,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  433,
+"startColumn":  68,
+"endLine":  433,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  452,
+"startColumn":  68,
+"endLine":  452,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  475,
+"startColumn":  68,
+"endLine":  475,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Folder' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2112,
+"startColumn":  18,
+"endLine":  2112,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2121,
+"startColumn":  18,
+"endLine":  2121,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2722,
+"startColumn":  63,
+"endLine":  2722,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2726,
+"startColumn":  41,
+"endLine":  2726,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'General' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  159,
+"startColumn":  58,
+"endLine":  159,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  58,
+"endLine":  187,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  215,
+"startColumn":  58,
+"endLine":  215,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4065,
+"startColumn":  55,
+"endLine":  4065,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4070,
+"startColumn":  55,
+"endLine":  4070,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Themes' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2740,
+"startColumn":  61,
+"endLine":  2740,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2745,
+"startColumn":  80,
+"endLine":  2745,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2750,
+"startColumn":  80,
+"endLine":  2750,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2755,
+"startColumn":  80,
+"endLine":  2755,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3909,
+"startColumn":  58,
+"endLine":  3909,
+"endColumn":  66
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Options' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  69,
+"endLine":  64,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  59,
+"endLine":  217,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  224,
+"startColumn":  59,
+"endLine":  224,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  231,
+"startColumn":  59,
+"endLine":  231,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4026,
+"startColumn":  66,
+"endLine":  4026,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Movies' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  68,
+"endLine":  72,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  161,
+"startColumn":  58,
+"endLine":  161,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  168,
+"startColumn":  58,
+"endLine":  168,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  175,
+"startColumn":  58,
+"endLine":  175,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  182,
+"startColumn":  58,
+"endLine":  182,
+"endColumn":  66
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'TV Shows' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  69,
+"endLine":  80,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  59,
+"endLine":  189,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  196,
+"startColumn":  59,
+"endLine":  196,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  203,
+"startColumn":  59,
+"endLine":  203,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  210,
+"startColumn":  59,
+"endLine":  210,
+"endColumn":  69
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Are You Sure?' 7 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  695,
+"startColumn":  190,
+"endLine":  695,
+"endColumn":  205
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  703,
+"startColumn":  193,
+"endLine":  703,
+"endColumn":  208
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  711,
+"startColumn":  191,
+"endLine":  711,
+"endColumn":  206
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  719,
+"startColumn":  200,
+"endLine":  719,
+"endColumn":  215
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  738,
+"startColumn":  188,
+"endLine":  738,
+"endColumn":  203
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3100,
+"startColumn":  256,
+"endLine":  3100,
+"endColumn":  271
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3196,
+"startColumn":  258,
+"endLine":  3196,
+"endColumn":  273
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Large' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2947,
+"startColumn":  130,
+"endLine":  2947,
+"endColumn":  137
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2960,
+"startColumn":  130,
+"endLine":  2960,
+"endColumn":  137
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4073,
+"startColumn":  122,
+"endLine":  4073,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4075,
+"startColumn":  82,
+"endLine":  4075,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4077,
+"startColumn":  82,
+"endLine":  4077,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4079,
+"startColumn":  86,
+"endLine":  4079,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4081,
+"startColumn":  84,
+"endLine":  4081,
+"endColumn":  91
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4085,
+"startColumn":  85,
+"endLine":  4085,
+"endColumn":  92
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Medium' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2947,
+"startColumn":  168,
+"endLine":  2947,
+"endColumn":  176
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2960,
+"startColumn":  168,
+"endLine":  2960,
+"endColumn":  176
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4073,
+"startColumn":  160,
+"endLine":  4073,
+"endColumn":  168
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4075,
+"startColumn":  120,
+"endLine":  4075,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4077,
+"startColumn":  120,
+"endLine":  4077,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4079,
+"startColumn":  124,
+"endLine":  4079,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4081,
+"startColumn":  122,
+"endLine":  4081,
+"endColumn":  130
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4085,
+"startColumn":  123,
+"endLine":  4085,
+"endColumn":  131
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Small' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2947,
+"startColumn":  207,
+"endLine":  2947,
+"endColumn":  214
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2960,
+"startColumn":  207,
+"endLine":  2960,
+"endColumn":  214
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4073,
+"startColumn":  199,
+"endLine":  4073,
+"endColumn":  206
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4075,
+"startColumn":  159,
+"endLine":  4075,
+"endColumn":  166
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4077,
+"startColumn":  159,
+"endLine":  4077,
+"endColumn":  166
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4079,
+"startColumn":  163,
+"endLine":  4079,
+"endColumn":  170
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4081,
+"startColumn":  161,
+"endLine":  4081,
+"endColumn":  168
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4085,
+"startColumn":  162,
+"endLine":  4085,
+"endColumn":  169
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 18 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  436,
+"startColumn":  68,
+"endLine":  436,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  472,
+"startColumn":  68,
+"endLine":  472,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  560,
+"startColumn":  68,
+"endLine":  560,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  576,
+"startColumn":  68,
+"endLine":  576,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  663,
+"startColumn":  68,
+"endLine":  663,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  690,
+"startColumn":  68,
+"endLine":  690,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  810,
+"startColumn":  68,
+"endLine":  810,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  826,
+"startColumn":  68,
+"endLine":  826,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  852,
+"startColumn":  68,
+"endLine":  852,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2562,
+"startColumn":  68,
+"endLine":  2562,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2601,
+"startColumn":  68,
+"endLine":  2601,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2653,
+"startColumn":  72,
+"endLine":  2653,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3133,
+"startColumn":  68,
+"endLine":  3133,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3226,
+"startColumn":  68,
+"endLine":  3226,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3673,
+"startColumn":  76,
+"endLine":  3673,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3681,
+"startColumn":  76,
+"endLine":  3681,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3688,
+"startColumn":  76,
+"endLine":  3688,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3694,
+"startColumn":  68,
+"endLine":  3694,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"region":  {
+"startLine":  56,
+"startColumn":  68,
+"endLine":  56,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"region":  {
+"startLine":  85,
+"startColumn":  68,
+"endLine":  85,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"region":  {
+"startLine":  107,
+"startColumn":  68,
+"endLine":  107,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  68,
+"endLine":  135,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'fanart.jpg' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1338,
+"startColumn":  86,
+"endLine":  1338,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1348,
+"startColumn":  86,
+"endLine":  1348,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1355,
+"startColumn":  82,
+"endLine":  1355,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1684,
+"startColumn":  75,
+"endLine":  1684,
+"endColumn":  87
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Are You Sure?' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1790,
+"startColumn":  256,
+"endLine":  1790,
+"endColumn":  271
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2021,
+"startColumn":  259,
+"endLine":  2021,
+"endColumn":  274
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2746,
+"startColumn":  258,
+"endLine":  2746,
+"endColumn":  273
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6649,
+"startColumn":  258,
+"endLine":  6649,
+"endColumn":  273
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'You have selected {0} folders to open. Are you sure you want to do this?' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1790,
+"startColumn":  73,
+"endLine":  1790,
+"endColumn":  147
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2021,
+"startColumn":  73,
+"endLine":  2021,
+"endColumn":  147
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2746,
+"startColumn":  73,
+"endLine":  2746,
+"endColumn":  147
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6649,
+"startColumn":  73,
+"endLine":  6649,
+"endColumn":  147
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'explorer.exe' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1798,
+"startColumn":  59,
+"endLine":  1798,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2034,
+"startColumn":  67,
+"endLine":  2034,
+"endColumn":  81
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2755,
+"startColumn":  59,
+"endLine":  2755,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6657,
+"startColumn":  59,
+"endLine":  6657,
+"endColumn":  73
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '/select,""{0}""' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1799,
+"startColumn":  74,
+"endLine":  1799,
+"endColumn":  91
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2035,
+"startColumn":  82,
+"endLine":  2035,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2759,
+"startColumn":  78,
+"endLine":  2759,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6658,
+"startColumn":  74,
+"endLine":  6658,
+"endColumn":  91
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'parLock' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2065,
+"startColumn":  87,
+"endLine":  2065,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2130,
+"startColumn":  87,
+"endLine":  2130,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2184,
+"startColumn":  87,
+"endLine":  2184,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2248,
+"startColumn":  87,
+"endLine":  2248,
+"endColumn":  96
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'parSeaID' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2090,
+"startColumn":  95,
+"endLine":  2090,
+"endColumn":  105
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2195,
+"startColumn":  99,
+"endLine":  2195,
+"endColumn":  109
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2315,
+"startColumn":  95,
+"endLine":  2315,
+"endColumn":  105
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2420,
+"startColumn":  99,
+"endLine":  2420,
+"endColumn":  109
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'parSeason' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2091,
+"startColumn":  96,
+"endLine":  2091,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2132,
+"startColumn":  89,
+"endLine":  2132,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2316,
+"startColumn":  96,
+"endLine":  2316,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2357,
+"startColumn":  89,
+"endLine":  2357,
+"endColumn":  100
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'parEID' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2143,
+"startColumn":  95,
+"endLine":  2143,
+"endColumn":  103
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2208,
+"startColumn":  95,
+"endLine":  2208,
+"endColumn":  103
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2368,
+"startColumn":  95,
+"endLine":  2368,
+"endColumn":  103
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2433,
+"startColumn":  95,
+"endLine":  2433,
+"endColumn":  103
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Microsoft Sans Serif' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2835,
+"startColumn":  46,
+"endLine":  2835,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2839,
+"startColumn":  41,
+"endLine":  2839,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6704,
+"startColumn":  38,
+"endLine":  6704,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6708,
+"startColumn":  33,
+"endLine":  6708,
+"endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '{0} ({1})' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3102,
+"startColumn":  47,
+"endLine":  3102,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4655,
+"startColumn":  50,
+"endLine":  4655,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5595,
+"startColumn":  92,
+"endLine":  5595,
+"endColumn":  103
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6980,
+"startColumn":  62,
+"endLine":  6980,
+"endColumn":  73
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '>> Multiple <<' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3185,
+"startColumn":  73,
+"endLine":  3185,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3509,
+"startColumn":  75,
+"endLine":  3509,
+"endColumn":  91
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3788,
+"startColumn":  79,
+"endLine":  3788,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4060,
+"startColumn":  77,
+"endLine":  4060,
+"endColumn":  93
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Movies' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  328,
+"startColumn":  60,
+"endLine":  328,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3102,
+"startColumn":  87,
+"endLine":  3102,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8103,
+"startColumn":  62,
+"endLine":  8103,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8302,
+"startColumn":  68,
+"endLine":  8302,
+"endColumn":  76
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Poster' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4278,
+"startColumn":  85,
+"endLine":  4278,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4360,
+"startColumn":  92,
+"endLine":  4360,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4429,
+"startColumn":  90,
+"endLine":  4429,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5182,
+"startColumn":  84,
+"endLine":  5182,
+"endColumn":  92
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Fanart' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4284,
+"startColumn":  85,
+"endLine":  4284,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4366,
+"startColumn":  92,
+"endLine":  4366,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4435,
+"startColumn":  90,
+"endLine":  4435,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5188,
+"startColumn":  84,
+"endLine":  5188,
+"endColumn":  92
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Actor' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4325,
+"startColumn":  110,
+"endLine":  4325,
+"endColumn":  117
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8372,
+"startColumn":  121,
+"endLine":  8372,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8664,
+"startColumn":  54,
+"endLine":  8664,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8671,
+"startColumn":  77,
+"endLine":  8671,
+"endColumn":  84
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'no_photo' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4512,
+"startColumn":  123,
+"endLine":  4512,
+"endColumn":  133
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4693,
+"startColumn":  123,
+"endLine":  4693,
+"endColumn":  133
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4861,
+"startColumn":  123,
+"endLine":  4861,
+"endColumn":  133
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5004,
+"startColumn":  123,
+"endLine":  5004,
+"endColumn":  133
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'addtiny.gif' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4512,
+"startColumn":  62,
+"endLine":  4512,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4693,
+"startColumn":  62,
+"endLine":  4693,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4861,
+"startColumn":  62,
+"endLine":  4861,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5004,
+"startColumn":  62,
+"endLine":  5004,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '{0} as {1}' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4524,
+"startColumn":  90,
+"endLine":  4524,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4705,
+"startColumn":  90,
+"endLine":  4705,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4873,
+"startColumn":  90,
+"endLine":  4873,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5016,
+"startColumn":  90,
+"endLine":  5016,
+"endColumn":  102
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'StudioTagAlwaysOn' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4554,
+"startColumn":  51,
+"endLine":  4554,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4735,
+"startColumn":  51,
+"endLine":  4735,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8967,
+"startColumn":  51,
+"endLine":  8967,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8972,
+"startColumn":  51,
+"endLine":  8972,
+"endColumn":  70
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Unmark All' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  577,
+"startColumn":  88,
+"endLine":  577,
+"endColumn":  100
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  591,
+"startColumn":  115,
+"endLine":  591,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2493,
+"startColumn":  74,
+"endLine":  2493,
+"endColumn":  86
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7797,
+"startColumn":  78,
+"endLine":  7797,
+"endColumn":  90
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Mark All' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  591,
+"startColumn":  74,
+"endLine":  591,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2493,
+"startColumn":  116,
+"endLine":  2493,
+"endColumn":  126
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7799,
+"startColumn":  77,
+"endLine":  7799,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8102,
+"startColumn":  63,
+"endLine":  8102,
+"endColumn":  73
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Update All' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7809,
+"startColumn":  100,
+"endLine":  7809,
+"endColumn":  112
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7811,
+"startColumn":  109,
+"endLine":  7811,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7830,
+"startColumn":  100,
+"endLine":  7830,
+"endColumn":  112
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7832,
+"startColumn":  105,
+"endLine":  7832,
+"endColumn":  117
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Update {0} Only' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7817,
+"startColumn":  118,
+"endLine":  7817,
+"endColumn":  135
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7819,
+"startColumn":  127,
+"endLine":  7819,
+"endColumn":  144
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7838,
+"startColumn":  118,
+"endLine":  7838,
+"endColumn":  135
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7840,
+"startColumn":  123,
+"endLine":  7840,
+"endColumn":  140
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Reload' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8084,
+"startColumn":  64,
+"endLine":  8084,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8320,
+"startColumn":  67,
+"endLine":  8320,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8329,
+"startColumn":  69,
+"endLine":  8329,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8337,
+"startColumn":  65,
+"endLine":  8337,
+"endColumn":  73
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '-fanart.jpg' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1336,
+"startColumn":  288,
+"endLine":  1336,
+"endColumn":  301
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1339,
+"startColumn":  211,
+"endLine":  1339,
+"endColumn":  224
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1346,
+"startColumn":  348,
+"endLine":  1346,
+"endColumn":  361
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1349,
+"startColumn":  241,
+"endLine":  1349,
+"endColumn":  254
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1356,
+"startColumn":  203,
+"endLine":  1356,
+"endColumn":  216
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal ' AND ' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1600,
+"startColumn":  99,
+"endLine":  1600,
+"endColumn":  106
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1610,
+"startColumn":  111,
+"endLine":  1610,
+"endColumn":  118
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6763,
+"startColumn":  91,
+"endLine":  6763,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6769,
+"startColumn":  80,
+"endLine":  6769,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7387,
+"startColumn":  96,
+"endLine":  7387,
+"endColumn":  103
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '>> No Item Selected <<' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3171,
+"startColumn":  69,
+"endLine":  3171,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3250,
+"startColumn":  69,
+"endLine":  3250,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3581,
+"startColumn":  71,
+"endLine":  3581,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3840,
+"startColumn":  75,
+"endLine":  3840,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4113,
+"startColumn":  73,
+"endLine":  4113,
+"endColumn":  97
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Select Genre...' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3212,
+"startColumn":  98,
+"endLine":  3212,
+"endColumn":  115
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3213,
+"startColumn":  97,
+"endLine":  3213,
+"endColumn":  114
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3242,
+"startColumn":  98,
+"endLine":  3242,
+"endColumn":  115
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3243,
+"startColumn":  97,
+"endLine":  3243,
+"endColumn":  114
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5822,
+"startColumn":  79,
+"endLine":  5822,
+"endColumn":  96
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'PosterGlassOverlay' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4571,
+"startColumn":  55,
+"endLine":  4571,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4762,
+"startColumn":  55,
+"endLine":  4762,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4908,
+"startColumn":  55,
+"endLine":  4908,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5051,
+"startColumn":  55,
+"endLine":  5051,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5101,
+"startColumn":  55,
+"endLine":  5101,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'parMark' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  580,
+"startColumn":  87,
+"endLine":  580,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2290,
+"startColumn":  87,
+"endLine":  2290,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2355,
+"startColumn":  87,
+"endLine":  2355,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2409,
+"startColumn":  87,
+"endLine":  2409,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2473,
+"startColumn":  87,
+"endLine":  2473,
+"endColumn":  96
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Remove' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8092,
+"startColumn":  81,
+"endLine":  8092,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8099,
+"startColumn":  76,
+"endLine":  8099,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8326,
+"startColumn":  80,
+"endLine":  8326,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8334,
+"startColumn":  69,
+"endLine":  8334,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8343,
+"startColumn":  78,
+"endLine":  8343,
+"endColumn":  86
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '""{0}""' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  654,
+"startColumn":  74,
+"endLine":  654,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1802,
+"startColumn":  74,
+"endLine":  1802,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2038,
+"startColumn":  82,
+"endLine":  2038,
+"endColumn":  91
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2765,
+"startColumn":  78,
+"endLine":  2765,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2767,
+"startColumn":  78,
+"endLine":  2767,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6661,
+"startColumn":  74,
+"endLine":  6661,
+"endColumn":  83
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Season' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2091,
+"startColumn":  126,
+"endLine":  2091,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2132,
+"startColumn":  119,
+"endLine":  2132,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2144,
+"startColumn":  130,
+"endLine":  2144,
+"endColumn":  138
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2316,
+"startColumn":  126,
+"endLine":  2316,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2357,
+"startColumn":  119,
+"endLine":  2357,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2369,
+"startColumn":  130,
+"endLine":  2369,
+"endColumn":  138
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5174,
+"startColumn":  84,
+"endLine":  5174,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5175,
+"startColumn":  83,
+"endLine":  5175,
+"endColumn":  91
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Selected Items: {0}' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2896,
+"startColumn":  84,
+"endLine":  2896,
+"endColumn":  105
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3276,
+"startColumn":  76,
+"endLine":  3276,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3607,
+"startColumn":  76,
+"endLine":  3607,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3870,
+"startColumn":  76,
+"endLine":  3870,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8577,
+"startColumn":  76,
+"endLine":  8577,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8595,
+"startColumn":  76,
+"endLine":  8595,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8613,
+"startColumn":  76,
+"endLine":  8613,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8631,
+"startColumn":  76,
+"endLine":  8631,
+"endColumn":  97
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Unmark' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3209,
+"startColumn":  120,
+"endLine":  3209,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3238,
+"startColumn":  143,
+"endLine":  3238,
+"endColumn":  151
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3542,
+"startColumn":  126,
+"endLine":  3542,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3574,
+"startColumn":  149,
+"endLine":  3574,
+"endColumn":  157
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3811,
+"startColumn":  126,
+"endLine":  3811,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3823,
+"startColumn":  148,
+"endLine":  3823,
+"endColumn":  156
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4084,
+"startColumn":  124,
+"endLine":  4084,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4097,
+"startColumn":  144,
+"endLine":  4097,
+"endColumn":  152
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Unlock' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3210,
+"startColumn":  120,
+"endLine":  3210,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3239,
+"startColumn":  143,
+"endLine":  3239,
+"endColumn":  151
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3543,
+"startColumn":  126,
+"endLine":  3543,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3575,
+"startColumn":  150,
+"endLine":  3575,
+"endColumn":  158
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3812,
+"startColumn":  126,
+"endLine":  3812,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3824,
+"startColumn":  148,
+"endLine":  3824,
+"endColumn":  156
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4085,
+"startColumn":  124,
+"endLine":  4085,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4098,
+"startColumn":  145,
+"endLine":  4098,
+"endColumn":  153
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'xdg-open' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  653,
+"startColumn":  59,
+"endLine":  653,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1801,
+"startColumn":  59,
+"endLine":  1801,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2037,
+"startColumn":  67,
+"endLine":  2037,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2763,
+"startColumn":  59,
+"endLine":  2763,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4140,
+"startColumn":  47,
+"endLine":  4140,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6660,
+"startColumn":  59,
+"endLine":  6660,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8910,
+"startColumn":  47,
+"endLine":  8910,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8941,
+"startColumn":  51,
+"endLine":  8941,
+"endColumn":  61
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Title' 9 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4271,
+"startColumn":  84,
+"endLine":  4271,
+"endColumn":  91
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4272,
+"startColumn":  83,
+"endLine":  4272,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4353,
+"startColumn":  91,
+"endLine":  4353,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4354,
+"startColumn":  90,
+"endLine":  4354,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4422,
+"startColumn":  89,
+"endLine":  4422,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4423,
+"startColumn":  88,
+"endLine":  4423,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8083,
+"startColumn":  62,
+"endLine":  8083,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8372,
+"startColumn":  83,
+"endLine":  8372,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8661,
+"startColumn":  53,
+"endLine":  8661,
+"endColumn":  60
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '{0} x {1}' 9 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4577,
+"startColumn":  45,
+"endLine":  4577,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4601,
+"startColumn":  45,
+"endLine":  4601,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4768,
+"startColumn":  45,
+"endLine":  4768,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4792,
+"startColumn":  45,
+"endLine":  4792,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4914,
+"startColumn":  45,
+"endLine":  4914,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4938,
+"startColumn":  45,
+"endLine":  4938,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5057,
+"startColumn":  45,
+"endLine":  5057,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5081,
+"startColumn":  45,
+"endLine":  5081,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5107,
+"startColumn":  45,
+"endLine":  5107,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'TVShowID' 10 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2090,
+"startColumn":  124,
+"endLine":  2090,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2131,
+"startColumn":  111,
+"endLine":  2131,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2143,
+"startColumn":  122,
+"endLine":  2143,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2195,
+"startColumn":  128,
+"endLine":  2195,
+"endColumn":  138
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2208,
+"startColumn":  122,
+"endLine":  2208,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2315,
+"startColumn":  124,
+"endLine":  2315,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2356,
+"startColumn":  111,
+"endLine":  2356,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2368,
+"startColumn":  122,
+"endLine":  2368,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2420,
+"startColumn":  128,
+"endLine":  2420,
+"endColumn":  138
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2433,
+"startColumn":  122,
+"endLine":  2433,
+"endColumn":  132
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'parID' 12 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  396,
+"startColumn":  85,
+"endLine":  396,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2066,
+"startColumn":  85,
+"endLine":  2066,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2131,
+"startColumn":  85,
+"endLine":  2131,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2185,
+"startColumn":  85,
+"endLine":  2185,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2249,
+"startColumn":  85,
+"endLine":  2249,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2291,
+"startColumn":  85,
+"endLine":  2291,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2356,
+"startColumn":  85,
+"endLine":  2356,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2410,
+"startColumn":  85,
+"endLine":  2410,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2474,
+"startColumn":  85,
+"endLine":  2474,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4154,
+"startColumn":  85,
+"endLine":  4154,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7301,
+"startColumn":  85,
+"endLine":  7301,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7695,
+"startColumn":  85,
+"endLine":  7695,
+"endColumn":  92
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Segoe UI' 13 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3064,
+"startColumn":  49,
+"endLine":  3064,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3068,
+"startColumn":  49,
+"endLine":  3068,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3072,
+"startColumn":  49,
+"endLine":  3072,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3364,
+"startColumn":  49,
+"endLine":  3364,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3368,
+"startColumn":  49,
+"endLine":  3368,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3372,
+"startColumn":  49,
+"endLine":  3372,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3376,
+"startColumn":  49,
+"endLine":  3376,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3696,
+"startColumn":  49,
+"endLine":  3696,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3700,
+"startColumn":  49,
+"endLine":  3700,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3704,
+"startColumn":  49,
+"endLine":  3704,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3959,
+"startColumn":  49,
+"endLine":  3959,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3963,
+"startColumn":  49,
+"endLine":  3963,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3967,
+"startColumn":  49,
+"endLine":  3967,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Arial' 18 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4578,
+"startColumn":  81,
+"endLine":  4578,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4581,
+"startColumn":  52,
+"endLine":  4581,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4602,
+"startColumn":  81,
+"endLine":  4602,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4605,
+"startColumn":  52,
+"endLine":  4605,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4769,
+"startColumn":  81,
+"endLine":  4769,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4772,
+"startColumn":  52,
+"endLine":  4772,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4793,
+"startColumn":  81,
+"endLine":  4793,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4796,
+"startColumn":  52,
+"endLine":  4796,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4915,
+"startColumn":  81,
+"endLine":  4915,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4918,
+"startColumn":  52,
+"endLine":  4918,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4939,
+"startColumn":  81,
+"endLine":  4939,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4942,
+"startColumn":  52,
+"endLine":  4942,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5058,
+"startColumn":  81,
+"endLine":  5058,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5061,
+"startColumn":  52,
+"endLine":  5061,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5082,
+"startColumn":  81,
+"endLine":  5082,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5085,
+"startColumn":  52,
+"endLine":  5085,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5108,
+"startColumn":  81,
+"endLine":  5108,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5111,
+"startColumn":  52,
+"endLine":  5111,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 113 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  311,
+"startColumn":  68,
+"endLine":  311,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  350,
+"startColumn":  68,
+"endLine":  350,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  366,
+"startColumn":  68,
+"endLine":  366,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  381,
+"startColumn":  68,
+"endLine":  381,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  422,
+"startColumn":  68,
+"endLine":  422,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  593,
+"startColumn":  68,
+"endLine":  593,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  662,
+"startColumn":  68,
+"endLine":  662,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  775,
+"startColumn":  68,
+"endLine":  775,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  889,
+"startColumn":  68,
+"endLine":  889,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  904,
+"startColumn":  68,
+"endLine":  904,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  949,
+"startColumn":  68,
+"endLine":  949,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  968,
+"startColumn":  68,
+"endLine":  968,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1008,
+"startColumn":  68,
+"endLine":  1008,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1022,
+"startColumn":  68,
+"endLine":  1022,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1064,
+"startColumn":  68,
+"endLine":  1064,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1078,
+"startColumn":  68,
+"endLine":  1078,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1105,
+"startColumn":  68,
+"endLine":  1105,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1152,
+"startColumn":  72,
+"endLine":  1152,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1258,
+"startColumn":  72,
+"endLine":  1258,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1321,
+"startColumn":  92,
+"endLine":  1321,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1364,
+"startColumn":  92,
+"endLine":  1364,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1375,
+"startColumn":  72,
+"endLine":  1375,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1388,
+"startColumn":  76,
+"endLine":  1388,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1414,
+"startColumn":  76,
+"endLine":  1414,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1455,
+"startColumn":  68,
+"endLine":  1455,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1513,
+"startColumn":  68,
+"endLine":  1513,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1703,
+"startColumn":  68,
+"endLine":  1703,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1782,
+"startColumn":  68,
+"endLine":  1782,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1859,
+"startColumn":  68,
+"endLine":  1859,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1886,
+"startColumn":  68,
+"endLine":  1886,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1913,
+"startColumn":  68,
+"endLine":  1913,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1939,
+"startColumn":  68,
+"endLine":  1939,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1981,
+"startColumn":  68,
+"endLine":  1981,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2011,
+"startColumn":  68,
+"endLine":  2011,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2112,
+"startColumn":  68,
+"endLine":  2112,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2164,
+"startColumn":  68,
+"endLine":  2164,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2228,
+"startColumn":  68,
+"endLine":  2228,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2270,
+"startColumn":  68,
+"endLine":  2270,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2337,
+"startColumn":  68,
+"endLine":  2337,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2389,
+"startColumn":  68,
+"endLine":  2389,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2453,
+"startColumn":  68,
+"endLine":  2453,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2504,
+"startColumn":  68,
+"endLine":  2504,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2555,
+"startColumn":  68,
+"endLine":  2555,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2630,
+"startColumn":  68,
+"endLine":  2630,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2847,
+"startColumn":  68,
+"endLine":  2847,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2885,
+"startColumn":  68,
+"endLine":  2885,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2935,
+"startColumn":  68,
+"endLine":  2935,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2973,
+"startColumn":  68,
+"endLine":  2973,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2994,
+"startColumn":  68,
+"endLine":  2994,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3105,
+"startColumn":  68,
+"endLine":  3105,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3163,
+"startColumn":  68,
+"endLine":  3163,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3254,
+"startColumn":  68,
+"endLine":  3254,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3313,
+"startColumn":  68,
+"endLine":  3313,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3334,
+"startColumn":  68,
+"endLine":  3334,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3407,
+"startColumn":  68,
+"endLine":  3407,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3447,
+"startColumn":  68,
+"endLine":  3447,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3482,
+"startColumn":  68,
+"endLine":  3482,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3585,
+"startColumn":  68,
+"endLine":  3585,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3644,
+"startColumn":  68,
+"endLine":  3644,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3666,
+"startColumn":  68,
+"endLine":  3666,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3731,
+"startColumn":  68,
+"endLine":  3731,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3770,
+"startColumn":  68,
+"endLine":  3770,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3844,
+"startColumn":  68,
+"endLine":  3844,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3909,
+"startColumn":  68,
+"endLine":  3909,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3929,
+"startColumn":  68,
+"endLine":  3929,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3995,
+"startColumn":  68,
+"endLine":  3995,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4037,
+"startColumn":  68,
+"endLine":  4037,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4117,
+"startColumn":  68,
+"endLine":  4117,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4191,
+"startColumn":  68,
+"endLine":  4191,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4468,
+"startColumn":  68,
+"endLine":  4468,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4641,
+"startColumn":  68,
+"endLine":  4641,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4835,
+"startColumn":  68,
+"endLine":  4835,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4978,
+"startColumn":  68,
+"endLine":  4978,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5146,
+"startColumn":  68,
+"endLine":  5146,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5549,
+"startColumn":  88,
+"endLine":  5549,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5624,
+"startColumn":  88,
+"endLine":  5624,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5745,
+"startColumn":  76,
+"endLine":  5745,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5752,
+"startColumn":  68,
+"endLine":  5752,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5771,
+"startColumn":  68,
+"endLine":  5771,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5806,
+"startColumn":  76,
+"endLine":  5806,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5816,
+"startColumn":  76,
+"endLine":  5816,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5862,
+"startColumn":  68,
+"endLine":  5862,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5892,
+"startColumn":  68,
+"endLine":  5892,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5916,
+"startColumn":  68,
+"endLine":  5916,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5938,
+"startColumn":  68,
+"endLine":  5938,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5972,
+"startColumn":  68,
+"endLine":  5972,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6339,
+"startColumn":  68,
+"endLine":  6339,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6467,
+"startColumn":  68,
+"endLine":  6467,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6688,
+"startColumn":  68,
+"endLine":  6688,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6714,
+"startColumn":  68,
+"endLine":  6714,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6727,
+"startColumn":  68,
+"endLine":  6727,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6739,
+"startColumn":  68,
+"endLine":  6739,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6751,
+"startColumn":  68,
+"endLine":  6751,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6912,
+"startColumn":  68,
+"endLine":  6912,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7075,
+"startColumn":  68,
+"endLine":  7075,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7129,
+"startColumn":  68,
+"endLine":  7129,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7248,
+"startColumn":  68,
+"endLine":  7248,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7277,
+"startColumn":  68,
+"endLine":  7277,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7292,
+"startColumn":  68,
+"endLine":  7292,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7323,
+"startColumn":  68,
+"endLine":  7323,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7405,
+"startColumn":  68,
+"endLine":  7405,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7458,
+"startColumn":  68,
+"endLine":  7458,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7488,
+"startColumn":  68,
+"endLine":  7488,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7557,
+"startColumn":  68,
+"endLine":  7557,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7581,
+"startColumn":  68,
+"endLine":  7581,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7608,
+"startColumn":  68,
+"endLine":  7608,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7625,
+"startColumn":  68,
+"endLine":  7625,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7715,
+"startColumn":  68,
+"endLine":  7715,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7892,
+"startColumn":  68,
+"endLine":  7892,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8023,
+"startColumn":  68,
+"endLine":  8023,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8381,
+"startColumn":  68,
+"endLine":  8381,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8525,
+"startColumn":  68,
+"endLine":  8525,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8565,
+"startColumn":  68,
+"endLine":  8565,
+"endColumn":  75
+}
+}
+]
+}
+]
+}

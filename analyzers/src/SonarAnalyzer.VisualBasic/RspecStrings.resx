@@ -864,6 +864,39 @@
   <data name="S1186_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1192_Category" xml:space="preserve">
+    <value>Minor Code Smell</value>
+  </data>
+  <data name="S1192_Description" xml:space="preserve">
+    <value>Duplicated string literals make the process of refactoring error-prone, since you must be sure to update all occurrences.</value>
+  </data>
+  <data name="S1192_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S1192_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1192_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S1192_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S1192_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S1192_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S1192_Tags" xml:space="preserve">
+    <value>design</value>
+  </data>
+  <data name="S1192_Title" xml:space="preserve">
+    <value>String literals should not be duplicated</value>
+  </data>
+  <data name="S1192_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1197_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>

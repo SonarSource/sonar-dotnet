@@ -26,8 +26,8 @@ namespace Tests.Diagnostics
 
         // nonCompliant - repetition above threshold. String in attributes should not be highlighted
         private string[] values2 = new[] { "CA1024:UsePropertiesWhereAppropriate",  // Noncompliant {{Define a constant instead of using this literal 'CA1024:UsePropertiesWhereAppropriate' 3 times.}}
-            "CA1024:UsePropertiesWhereAppropriate",     // Secondary
-            "CA1024:UsePropertiesWhereAppropriate" };   // Secondary
+            "CA1024:UsePropertiesWhereAppropriate",                                 // Secondary
+            "CA1024:UsePropertiesWhereAppropriate" };                               // Secondary
     }
     
     [DebuggerDisplay("12345", Name = "12345", TargetTypeName = "12345")] // Compliant - in attribute -> ignored

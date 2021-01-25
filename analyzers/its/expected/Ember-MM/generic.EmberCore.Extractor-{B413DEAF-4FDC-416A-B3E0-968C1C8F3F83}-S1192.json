@@ -1,0 +1,268 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'extrathumbs' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  63,
+"endLine":  144,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  148,
+"startColumn":  127,
+"endLine":  148,
+"endColumn":  140
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  151,
+"startColumn":  157,
+"endLine":  151,
+"endColumn":  170
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  154,
+"startColumn":  97,
+"endLine":  154,
+"endColumn":  110
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'thumb' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  212,
+"startColumn":  82,
+"endLine":  212,
+"endColumn":  89
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  214,
+"startColumn":  205,
+"endLine":  214,
+"endColumn":  212
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  221,
+"startColumn":  92,
+"endLine":  221,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  221,
+"startColumn":  154,
+"endLine":  221,
+"endColumn":  161
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  59,
+"endLine":  61,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  85,
+"startColumn":  59,
+"endLine":  85,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  59,
+"endLine":  133,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  161,
+"startColumn":  59,
+"endLine":  161,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  183,
+"startColumn":  59,
+"endLine":  183,
+"endColumn":  66
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'frame.jpg' 7 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  17,
+"startColumn":  189,
+"endLine":  17,
+"endColumn":  200
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  46,
+"startColumn":  77,
+"endLine":  46,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  47,
+"startColumn":  68,
+"endLine":  47,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  97,
+"startColumn":  163,
+"endLine":  97,
+"endColumn":  174
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  49,
+"endLine":  112,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  81,
+"endLine":  113,
+"endColumn":  92
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  156,
+"startColumn":  59,
+"endLine":  156,
+"endColumn":  70
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'frame.jpg' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"region":  {
+"startLine":  48,
+"startColumn":  200,
+"endLine":  48,
+"endColumn":  211
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"region":  {
+"startLine":  77,
+"startColumn":  86,
+"endLine":  77,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  80,
+"endLine":  78,
+"endColumn":  91
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"region":  {
+"startLine":  107,
+"startColumn":  171,
+"endLine":  107,
+"endColumn":  182
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"region":  {
+"startLine":  122,
+"startColumn":  58,
+"endLine":  122,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"region":  {
+"startLine":  123,
+"startColumn":  93,
+"endLine":  123,
+"endColumn":  104
+}
+}
+]
+}
+]
+}

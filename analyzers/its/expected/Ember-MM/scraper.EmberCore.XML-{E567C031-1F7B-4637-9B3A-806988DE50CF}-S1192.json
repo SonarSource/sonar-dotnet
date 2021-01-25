@@ -1,0 +1,3721 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '-trailer' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  51,
+"endLine":  58,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  102,
+"endLine":  58,
+"endColumn":  112
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  59,
+"startColumn":  52,
+"endLine":  59,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  62,
+"startColumn":  62,
+"endLine":  62,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  62,
+"startColumn":  120,
+"endLine":  62,
+"endColumn":  130
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  63,
+"startColumn":  59,
+"endLine":  63,
+"endColumn":  69
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '[trailer]' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  55,
+"endLine":  60,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  107,
+"endLine":  60,
+"endColumn":  118
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  52,
+"endLine":  61,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  62,
+"endLine":  64,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  121,
+"endLine":  64,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  65,
+"startColumn":  59,
+"endLine":  65,
+"endColumn":  70
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'extrathumbs' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  665,
+"startColumn":  67,
+"endLine":  665,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  668,
+"startColumn":  131,
+"endLine":  668,
+"endColumn":  144
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  670,
+"startColumn":  161,
+"endLine":  670,
+"endColumn":  174
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  672,
+"startColumn":  101,
+"endLine":  672,
+"endColumn":  114
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal ').jpg' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  120,
+"endLine":  189,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  195,
+"startColumn":  114,
+"endLine":  195,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  117,
+"endLine":  201,
+"endColumn":  124
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  116,
+"endLine":  207,
+"endColumn":  123
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  178,
+"endLine":  246,
+"endColumn":  185
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  614,
+"startColumn":  126,
+"endLine":  614,
+"endColumn":  133
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  620,
+"startColumn":  120,
+"endLine":  620,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  628,
+"startColumn":  122,
+"endLine":  628,
+"endColumn":  129
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 14 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  68,
+"endLine":  155,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  224,
+"startColumn":  68,
+"endLine":  224,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  264,
+"startColumn":  68,
+"endLine":  264,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  338,
+"startColumn":  68,
+"endLine":  338,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  392,
+"startColumn":  68,
+"endLine":  392,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  472,
+"startColumn":  68,
+"endLine":  472,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  536,
+"startColumn":  68,
+"endLine":  536,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  544,
+"startColumn":  68,
+"endLine":  544,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  562,
+"startColumn":  68,
+"endLine":  562,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  694,
+"startColumn":  68,
+"endLine":  694,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  755,
+"startColumn":  68,
+"endLine":  755,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  812,
+"startColumn":  68,
+"endLine":  812,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  877,
+"startColumn":  68,
+"endLine":  877,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  890,
+"startColumn":  68,
+"endLine":  890,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Error' 7 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  68,
+"endLine":  100,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  80,
+"endLine":  131,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  68,
+"endLine":  138,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  191,
+"startColumn":  68,
+"endLine":  191,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  205,
+"startColumn":  68,
+"endLine":  205,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  234,
+"startColumn":  68,
+"endLine":  234,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  287,
+"startColumn":  68,
+"endLine":  287,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'releasedate' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  50,
+"endLine":  100,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  103,
+"startColumn":  43,
+"endLine":  103,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  38,
+"endLine":  187,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  287,
+"startColumn":  38,
+"endLine":  287,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'label' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  82,
+"startColumn":  50,
+"endLine":  82,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  85,
+"startColumn":  43,
+"endLine":  85,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  240,
+"startColumn":  50,
+"endLine":  240,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  285,
+"startColumn":  38,
+"endLine":  285,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'review' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  109,
+"startColumn":  50,
+"endLine":  109,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  43,
+"endLine":  112,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  38,
+"endLine":  185,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  244,
+"startColumn":  51,
+"endLine":  244,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  289,
+"startColumn":  38,
+"endLine":  289,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'artist' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  50,
+"endLine":  64,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  67,
+"startColumn":  43,
+"endLine":  67,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  183,
+"startColumn":  38,
+"endLine":  183,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  239,
+"startColumn":  51,
+"endLine":  239,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  284,
+"startColumn":  38,
+"endLine":  284,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'style' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  118,
+"startColumn":  40,
+"endLine":  118,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  121,
+"startColumn":  33,
+"endLine":  121,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  188,
+"startColumn":  38,
+"endLine":  188,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  38,
+"endLine":  189,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  42,
+"endLine":  249,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  292,
+"startColumn":  35,
+"endLine":  292,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'theme' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  40,
+"endLine":  133,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  33,
+"endLine":  136,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  190,
+"startColumn":  38,
+"endLine":  190,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  191,
+"startColumn":  38,
+"endLine":  191,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  251,
+"startColumn":  42,
+"endLine":  251,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  294,
+"startColumn":  35,
+"endLine":  294,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'genre' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  40,
+"endLine":  73,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  33,
+"endLine":  76,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  194,
+"startColumn":  38,
+"endLine":  194,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  195,
+"startColumn":  38,
+"endLine":  195,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  248,
+"startColumn":  42,
+"endLine":  248,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  291,
+"startColumn":  35,
+"endLine":  291,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'disbanded' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  50,
+"endLine":  100,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  103,
+"startColumn":  43,
+"endLine":  103,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  215,
+"startColumn":  38,
+"endLine":  215,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  261,
+"startColumn":  54,
+"endLine":  261,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  302,
+"startColumn":  38,
+"endLine":  302,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'formed' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  127,
+"startColumn":  50,
+"endLine":  127,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  130,
+"startColumn":  43,
+"endLine":  130,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  214,
+"startColumn":  38,
+"endLine":  214,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  260,
+"startColumn":  51,
+"endLine":  260,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  301,
+"startColumn":  38,
+"endLine":  301,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'instrument' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  145,
+"startColumn":  47,
+"endLine":  145,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  148,
+"startColumn":  40,
+"endLine":  148,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  224,
+"startColumn":  38,
+"endLine":  224,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  266,
+"startColumn":  42,
+"endLine":  266,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  308,
+"startColumn":  35,
+"endLine":  308,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'yearsactive' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  196,
+"startColumn":  50,
+"endLine":  196,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  199,
+"startColumn":  43,
+"endLine":  199,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  216,
+"startColumn":  38,
+"endLine":  216,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  262,
+"startColumn":  56,
+"endLine":  262,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  303,
+"startColumn":  38,
+"endLine":  303,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'biography' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  50,
+"endLine":  73,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  43,
+"endLine":  76,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  38,
+"endLine":  217,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  257,
+"startColumn":  54,
+"endLine":  257,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  38,
+"endLine":  304,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'genre' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  47,
+"endLine":  136,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  139,
+"startColumn":  40,
+"endLine":  139,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  218,
+"startColumn":  38,
+"endLine":  218,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  219,
+"startColumn":  38,
+"endLine":  219,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  263,
+"startColumn":  42,
+"endLine":  263,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  305,
+"startColumn":  35,
+"endLine":  305,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'style' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  172,
+"startColumn":  47,
+"endLine":  172,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  175,
+"startColumn":  40,
+"endLine":  175,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  222,
+"startColumn":  38,
+"endLine":  222,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  223,
+"startColumn":  38,
+"endLine":  223,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  265,
+"startColumn":  42,
+"endLine":  265,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  307,
+"startColumn":  35,
+"endLine":  307,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'alias' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  47,
+"endLine":  64,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  67,
+"startColumn":  40,
+"endLine":  67,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  210,
+"startColumn":  38,
+"endLine":  210,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  211,
+"startColumn":  38,
+"endLine":  211,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  256,
+"startColumn":  42,
+"endLine":  256,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  298,
+"startColumn":  35,
+"endLine":  298,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'outline' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  132,
+"startColumn":  50,
+"endLine":  132,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  43,
+"endLine":  135,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  385,
+"startColumn":  55,
+"endLine":  385,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  458,
+"startColumn":  40,
+"endLine":  458,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'premiered' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  159,
+"startColumn":  50,
+"endLine":  159,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  162,
+"startColumn":  43,
+"endLine":  162,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  383,
+"startColumn":  57,
+"endLine":  383,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  462,
+"startColumn":  40,
+"endLine":  462,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'rating' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  168,
+"startColumn":  75,
+"endLine":  168,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  171,
+"startColumn":  43,
+"endLine":  171,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  391,
+"startColumn":  59,
+"endLine":  391,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  463,
+"startColumn":  40,
+"endLine":  463,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'runtime' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  177,
+"startColumn":  50,
+"endLine":  177,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  43,
+"endLine":  180,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  387,
+"startColumn":  55,
+"endLine":  387,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  461,
+"startColumn":  40,
+"endLine":  461,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'studio' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  195,
+"startColumn":  50,
+"endLine":  195,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  43,
+"endLine":  198,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  386,
+"startColumn":  54,
+"endLine":  386,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  460,
+"startColumn":  40,
+"endLine":  460,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'tagline' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  204,
+"startColumn":  50,
+"endLine":  204,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  43,
+"endLine":  207,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  384,
+"startColumn":  55,
+"endLine":  384,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  40,
+"endLine":  457,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'title' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  50,
+"endLine":  228,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  231,
+"startColumn":  43,
+"endLine":  231,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  378,
+"startColumn":  53,
+"endLine":  378,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  453,
+"startColumn":  40,
+"endLine":  453,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'originaltitle' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  237,
+"startColumn":  50,
+"endLine":  237,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  240,
+"startColumn":  43,
+"endLine":  240,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  379,
+"startColumn":  61,
+"endLine":  379,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  454,
+"startColumn":  40,
+"endLine":  454,
+"endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'top250' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  66,
+"endLine":  246,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  43,
+"endLine":  249,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  389,
+"startColumn":  51,
+"endLine":  389,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  466,
+"startColumn":  37,
+"endLine":  466,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'country' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  255,
+"startColumn":  47,
+"endLine":  255,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  258,
+"startColumn":  40,
+"endLine":  258,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  396,
+"startColumn":  42,
+"endLine":  396,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  482,
+"startColumn":  37,
+"endLine":  482,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'votes' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  273,
+"startColumn":  50,
+"endLine":  273,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  276,
+"startColumn":  43,
+"endLine":  276,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  392,
+"startColumn":  53,
+"endLine":  392,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  467,
+"startColumn":  40,
+"endLine":  467,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'credits' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  282,
+"startColumn":  47,
+"endLine":  282,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  285,
+"startColumn":  40,
+"endLine":  285,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  402,
+"startColumn":  42,
+"endLine":  402,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  483,
+"startColumn":  37,
+"endLine":  483,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'certification' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  47,
+"endLine":  69,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  40,
+"endLine":  72,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  394,
+"startColumn":  42,
+"endLine":  394,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  480,
+"startColumn":  37,
+"endLine":  480,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'director' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  47,
+"endLine":  78,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  81,
+"startColumn":  40,
+"endLine":  81,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  400,
+"startColumn":  42,
+"endLine":  400,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  484,
+"startColumn":  37,
+"endLine":  484,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'genre' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  47,
+"endLine":  96,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  40,
+"endLine":  99,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  398,
+"startColumn":  42,
+"endLine":  398,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  481,
+"startColumn":  37,
+"endLine":  481,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'lastplayed' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  114,
+"startColumn":  43,
+"endLine":  114,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  117,
+"startColumn":  36,
+"endLine":  117,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  341,
+"startColumn":  51,
+"endLine":  341,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  428,
+"startColumn":  58,
+"endLine":  428,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  490,
+"startColumn":  40,
+"endLine":  490,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'playcount' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  141,
+"startColumn":  59,
+"endLine":  141,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  36,
+"endLine":  144,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  344,
+"startColumn":  51,
+"endLine":  344,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  427,
+"startColumn":  54,
+"endLine":  427,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  489,
+"startColumn":  37,
+"endLine":  489,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'trailer' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  264,
+"startColumn":  47,
+"endLine":  264,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  267,
+"startColumn":  40,
+"endLine":  267,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  393,
+"startColumn":  42,
+"endLine":  393,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  408,
+"startColumn":  79,
+"endLine":  408,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  472,
+"startColumn":  53,
+"endLine":  472,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  475,
+"startColumn":  52,
+"endLine":  475,
+"endColumn":  61
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'album' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  52,
+"startColumn":  50,
+"endLine":  52,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  43,
+"endLine":  55,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  50,
+"endLine":  146,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  169,
+"startColumn":  40,
+"endLine":  169,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'artist' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  50,
+"endLine":  61,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  43,
+"endLine":  64,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  51,
+"endLine":  144,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  172,
+"startColumn":  40,
+"endLine":  172,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'genre' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  47,
+"endLine":  79,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  82,
+"startColumn":  40,
+"endLine":  82,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  151,
+"startColumn":  42,
+"endLine":  151,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  174,
+"startColumn":  37,
+"endLine":  174,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'studio' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  88,
+"startColumn":  50,
+"endLine":  88,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  91,
+"startColumn":  43,
+"endLine":  91,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  51,
+"endLine":  147,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  170,
+"startColumn":  40,
+"endLine":  170,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'director' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  47,
+"endLine":  70,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  40,
+"endLine":  73,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  148,
+"startColumn":  42,
+"endLine":  148,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  150,
+"startColumn":  42,
+"endLine":  150,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  173,
+"startColumn":  37,
+"endLine":  173,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'alias' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  47,
+"endLine":  68,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  71,
+"startColumn":  40,
+"endLine":  71,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  42,
+"endLine":  242,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  279,
+"startColumn":  35,
+"endLine":  279,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'biography' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  77,
+"startColumn":  50,
+"endLine":  77,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  43,
+"endLine":  80,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  54,
+"endLine":  246,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  282,
+"startColumn":  38,
+"endLine":  282,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'season' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  151,
+"startColumn":  62,
+"endLine":  151,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  169,
+"startColumn":  56,
+"endLine":  169,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  171,
+"startColumn":  72,
+"endLine":  171,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  220,
+"startColumn":  44,
+"endLine":  220,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'aired' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  63,
+"startColumn":  43,
+"endLine":  63,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  66,
+"startColumn":  36,
+"endLine":  66,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  188,
+"startColumn":  50,
+"endLine":  188,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  237,
+"startColumn":  42,
+"endLine":  237,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'credits' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  40,
+"endLine":  72,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  33,
+"endLine":  75,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  213,
+"startColumn":  42,
+"endLine":  213,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  42,
+"endLine":  250,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'director' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  81,
+"startColumn":  40,
+"endLine":  81,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  84,
+"startColumn":  33,
+"endLine":  84,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  214,
+"startColumn":  42,
+"endLine":  214,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  42,
+"endLine":  249,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'season' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  59,
+"endLine":  126,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  36,
+"endLine":  129,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  50,
+"endLine":  189,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  190,
+"startColumn":  62,
+"endLine":  190,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  232,
+"startColumn":  42,
+"endLine":  232,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'rating' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  68,
+"endLine":  108,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  111,
+"startColumn":  36,
+"endLine":  111,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  50,
+"endLine":  207,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  208,
+"startColumn":  65,
+"endLine":  208,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  209,
+"startColumn":  75,
+"endLine":  209,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  240,
+"startColumn":  46,
+"endLine":  240,
+"endColumn":  54
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'runtime' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  117,
+"startColumn":  43,
+"endLine":  117,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  36,
+"endLine":  120,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  199,
+"startColumn":  50,
+"endLine":  199,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  200,
+"startColumn":  65,
+"endLine":  200,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  51,
+"endLine":  201,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  236,
+"startColumn":  42,
+"endLine":  236,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'episode' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  59,
+"endLine":  90,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  36,
+"endLine":  93,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  195,
+"startColumn":  54,
+"endLine":  195,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  196,
+"startColumn":  63,
+"endLine":  196,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  229,
+"startColumn":  45,
+"endLine":  229,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  233,
+"startColumn":  42,
+"endLine":  233,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'status' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"region":  {
+"startLine":  164,
+"startColumn":  50,
+"endLine":  164,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"region":  {
+"startLine":  167,
+"startColumn":  43,
+"endLine":  167,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  51,
+"endLine":  246,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  41,
+"endLine":  268,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Scraper' 14 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  368,
+"startColumn":  116,
+"endLine":  368,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  372,
+"startColumn":  116,
+"endLine":  372,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  376,
+"startColumn":  116,
+"endLine":  376,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  380,
+"startColumn":  116,
+"endLine":  380,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  384,
+"startColumn":  116,
+"endLine":  384,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  390,
+"startColumn":  116,
+"endLine":  390,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  394,
+"startColumn":  116,
+"endLine":  394,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  398,
+"startColumn":  116,
+"endLine":  398,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  403,
+"startColumn":  120,
+"endLine":  403,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  407,
+"startColumn":  120,
+"endLine":  407,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  411,
+"startColumn":  120,
+"endLine":  411,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  418,
+"startColumn":  116,
+"endLine":  418,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  422,
+"startColumn":  116,
+"endLine":  422,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  426,
+"startColumn":  116,
+"endLine":  426,
+"endColumn":  125
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'premiered' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  264,
+"startColumn":  52,
+"endLine":  264,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  278,
+"startColumn":  52,
+"endLine":  278,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  322,
+"startColumn":  52,
+"endLine":  322,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  493,
+"startColumn":  45,
+"endLine":  493,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'studio' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  266,
+"startColumn":  47,
+"endLine":  266,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  310,
+"startColumn":  47,
+"endLine":  310,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  324,
+"startColumn":  47,
+"endLine":  324,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  496,
+"startColumn":  30,
+"endLine":  496,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'title' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  230,
+"startColumn":  46,
+"endLine":  230,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  243,
+"startColumn":  46,
+"endLine":  243,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  257,
+"startColumn":  46,
+"endLine":  257,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  271,
+"startColumn":  46,
+"endLine":  271,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  302,
+"startColumn":  46,
+"endLine":  302,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  46,
+"endLine":  315,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  329,
+"startColumn":  46,
+"endLine":  329,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  480,
+"startColumn":  38,
+"endLine":  480,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'genre' 8 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  237,
+"startColumn":  47,
+"endLine":  237,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  251,
+"startColumn":  47,
+"endLine":  251,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  265,
+"startColumn":  47,
+"endLine":  265,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  279,
+"startColumn":  47,
+"endLine":  279,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  47,
+"endLine":  293,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  309,
+"startColumn":  47,
+"endLine":  309,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  323,
+"startColumn":  47,
+"endLine":  323,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  499,
+"startColumn":  30,
+"endLine":  499,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'ScraperFunction' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  161,
+"startColumn":  50,
+"endLine":  161,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  190,
+"startColumn":  52,
+"endLine":  190,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  200,
+"startColumn":  50,
+"endLine":  200,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  251,
+"startColumn":  52,
+"endLine":  251,
+"endColumn":  69
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'default' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  338,
+"startColumn":  60,
+"endLine":  338,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  339,
+"startColumn":  61,
+"endLine":  339,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  458,
+"startColumn":  45,
+"endLine":  458,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  460,
+"startColumn":  44,
+"endLine":  460,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal ' default=""{0}""' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  386,
+"startColumn":  56,
+"endLine":  386,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  391,
+"startColumn":  60,
+"endLine":  391,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  399,
+"startColumn":  60,
+"endLine":  399,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  405,
+"startColumn":  60,
+"endLine":  405,
+"endColumn":  78
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'ID Cannot be empty for any type but ""sep"".' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  470,
+"startColumn":  47,
+"endLine":  470,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  503,
+"startColumn":  47,
+"endLine":  503,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  536,
+"startColumn":  47,
+"endLine":  536,
+"endColumn":  93
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  584,
+"startColumn":  47,
+"endLine":  584,
+"endColumn":  93
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Label' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  474,
+"startColumn":  41,
+"endLine":  474,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  507,
+"startColumn":  41,
+"endLine":  507,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  540,
+"startColumn":  41,
+"endLine":  540,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  588,
+"startColumn":  41,
+"endLine":  588,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Label Cannot be empty for any type but ""sep"".' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  474,
+"startColumn":  50,
+"endLine":  474,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  507,
+"startColumn":  50,
+"endLine":  507,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  540,
+"startColumn":  50,
+"endLine":  540,
+"endColumn":  99
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  588,
+"startColumn":  50,
+"endLine":  588,
+"endColumn":  99
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Default' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  478,
+"startColumn":  41,
+"endLine":  478,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  482,
+"startColumn":  49,
+"endLine":  482,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  511,
+"startColumn":  41,
+"endLine":  511,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  516,
+"startColumn":  45,
+"endLine":  516,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  544,
+"startColumn":  41,
+"endLine":  544,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  547,
+"startColumn":  45,
+"endLine":  547,
+"endColumn":  54
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'function' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  546,
+"startColumn":  53,
+"endLine":  546,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  559,
+"startColumn":  65,
+"endLine":  559,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  580,
+"startColumn":  53,
+"endLine":  580,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  594,
+"startColumn":  61,
+"endLine":  594,
+"endColumn":  71
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'entity' 5 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  409,
+"startColumn":  37,
+"endLine":  409,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  410,
+"startColumn":  50,
+"endLine":  410,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  410,
+"startColumn":  120,
+"endLine":  410,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  411,
+"startColumn":  41,
+"endLine":  411,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  613,
+"startColumn":  76,
+"endLine":  613,
+"endColumn":  84
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'conditional' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  360,
+"startColumn":  69,
+"endLine":  360,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  364,
+"startColumn":  48,
+"endLine":  364,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  365,
+"startColumn":  62,
+"endLine":  365,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  365,
+"startColumn":  120,
+"endLine":  365,
+"endColumn":  133
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  368,
+"startColumn":  62,
+"endLine":  368,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  469,
+"startColumn":  58,
+"endLine":  469,
+"endColumn":  71
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'function' 4 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  202,
+"startColumn":  40,
+"endLine":  202,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  49,
+"endLine":  249,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  51,
+"endLine":  250,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  269,
+"startColumn":  44,
+"endLine":  269,
+"endColumn":  54
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'spoof' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  183,
+"startColumn":  48,
+"endLine":  183,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  48,
+"endLine":  189,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  40,
+"endLine":  201,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  49,
+"endLine":  227,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  51,
+"endLine":  228,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  257,
+"startColumn":  44,
+"endLine":  257,
+"endColumn":  51
+}
+}
+]
+}
+]
+}

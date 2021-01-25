@@ -18,40 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase<SyntaxKind, LiteralExpressionSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind[] SyntaxKinds { get; } =
         {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration
+            SyntaxKind.ClassBlock,
+            SyntaxKind.StructureBlock
         };
 
         public StringLiteralShouldNotBeDuplicated() : base(RspecStrings.ResourceManager) { }
 
         protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
-            literalExpression.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>()
-                ?.ParameterList
+            literalExpression.FirstAncestorOrSelf<MethodBlockBaseSyntax>()
+                ?.BlockStatement?.ParameterList
                 ?.Parameters
-                .Any(p => p.Identifier.ValueText == literalExpression.Token.ValueText)
+                .Any(p => p.Identifier.Identifier.ValueText.Equals(literalExpression.Token.ValueText, StringComparison.OrdinalIgnoreCase))
                 ?? false;
 
         protected override bool IsInnerInstance(SyntaxNodeAnalysisContext context) =>
-            context.Node.Ancestors().Any(x => x is ClassDeclarationSyntax || x is StructDeclarationSyntax);
+            context.Node.Ancestors().Any(x => x is ClassBlockSyntax || x is StructureBlockSyntax);
 
         protected override IEnumerable<LiteralExpressionSyntax> RetrieveLiteralExpressions(SyntaxNode node) =>
             node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))

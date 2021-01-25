@@ -1,0 +1,64 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '*EmberAPP' 6 times.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  20,
+"startColumn":  105,
+"endLine":  20,
+"endColumn":  116
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  28,
+"startColumn":  87,
+"endLine":  28,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  91,
+"startColumn":  46,
+"endLine":  91,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  69,
+"endLine":  100,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  101,
+"startColumn":  93,
+"endLine":  101,
+"endColumn":  104
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  104,
+"startColumn":  142,
+"endLine":  104,
+"endColumn":  153
+}
+}
+]
+}
+]
+}
