@@ -827,17 +827,8 @@
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Source' 5 times.",
+"message":  "Define a constant instead of using this literal 'Source' 4 times.",
 "location":  [
-{
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
-"region":  {
-"startLine":  104,
-"startColumn":  142,
-"endLine":  104,
-"endColumn":  150
-}
-},
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
