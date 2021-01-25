@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Helpers
             }
             else if (AtLeast452(mscorlibAssembly))
             {
-                return NetFrameworkVersion.After452;
+                return NetFrameworkVersion.Is452;
             }
             else
             {
@@ -101,6 +101,6 @@ namespace SonarAnalyzer.Helpers
             => mscorlibAssembly
             .GetTypeByMetadataName("System.Array")?
             .GetMembers("Empty")
-            .Any();
+            .Any() == true;
     }
 }

@@ -132,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsXPathDocumentSecureByDefault(NetFrameworkVersion version) =>
             // XPathDocument is secure by default starting with .Net 4.5.2
-            version == NetFrameworkVersion.After452 || version == NetFrameworkVersion.Unknown;
+            version >= NetFrameworkVersion.Is452 || version == NetFrameworkVersion.Unknown;
 
         private static class TrackerFactory
         {
@@ -184,7 +184,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool ConstructorIsSafe(NetFrameworkVersion version) =>
                 version switch
                 {
-                    NetFrameworkVersion.After452 => true,
+                    NetFrameworkVersion.Is452 => true,
                     NetFrameworkVersion.Between4And451 => false,
                     NetFrameworkVersion.Probably35 => false,
                     _ => true

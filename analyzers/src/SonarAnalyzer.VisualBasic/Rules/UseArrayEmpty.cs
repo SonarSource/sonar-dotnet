@@ -43,8 +43,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override string ArrayEmptySuffix => "(Of T)";
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
-           => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override bool ShouldReport(SyntaxNode node)
             => base.ShouldReport(node)

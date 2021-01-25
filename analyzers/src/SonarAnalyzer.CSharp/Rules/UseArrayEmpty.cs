@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override string ArrayEmptySuffix => "<T>";
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
-            => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+            => CSharpGeneratedCodeRecognizer.Instance;
 
         protected override bool IsEmptyCreation(ArrayCreationExpressionSyntax creationNode)
         {
