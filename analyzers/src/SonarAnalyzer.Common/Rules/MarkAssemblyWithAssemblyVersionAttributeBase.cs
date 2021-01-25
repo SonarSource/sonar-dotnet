@@ -18,30 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MarkAssemblyWithAttributeBase : SonarDiagnosticAnalyzer
+    public abstract class MarkAssemblyWithAssemblyVersionAttributeBase : MarkAssemblyWithAttributeBase
     {
-        internal abstract KnownType AttributeToFind { get; }
+        protected const string DiagnosticId = "S3904";
+        private const string MessageFormat = "Provide an 'AssemblyVersion' attribute for assembly '{0}'.";
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    c.RegisterCompilationEndAction(
-                        cc =>
-                        {
-                            var requiredAttributeFound = cc.Compilation.Assembly.HasAttribute(AttributeToFind);
-                            if (!requiredAttributeFound)
-                            {
-                                cc.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], null, cc.Compilation.AssemblyName));
-                            }
-                        });
-                });
-        }
+        internal override KnownType AttributeToFind => KnownType.System_Reflection_AssemblyVersionAttribute;
+
+        protected MarkAssemblyWithAssemblyVersionAttributeBase(System.Resources.ResourceManager rspecResources)
+            : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources)) { }
     }
 }

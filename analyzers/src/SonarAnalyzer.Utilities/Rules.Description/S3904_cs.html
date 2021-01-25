@@ -2,7 +2,6 @@
 The .NET Framework to uniquely identify an assembly this can lead to broken dependencies.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
 using System.Reflection;
 
 [assembly: AssemblyTitle("MyAssembly")] // Noncompliant
@@ -13,7 +12,6 @@ namespace MyLibrary
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
 using System.Reflection;
 
 [assembly: AssemblyTitle("MyAssembly")]

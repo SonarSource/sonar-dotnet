@@ -2,24 +2,24 @@
 The .NET Framework to uniquely identify an assembly this can lead to broken dependencies.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System.Reflection;
+Imports System.Reflection
 
-[assembly: AssemblyTitle("MyAssembly")] // Noncompliant
+&lt;Assembly: AssemblyTitle("MyAssembly")&gt; ' Noncompliant
 
-namespace MyLibrary
-{
-}
+Namespace MyLibrary
+
+End Namespace
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System.Reflection;
+Imports System.Reflection
 
-[assembly: AssemblyTitle("MyAssembly")]
-[assembly: AssemblyVersion("1.2.125.0")]
+&lt;Assembly: AssemblyTitle("MyAssembly")&gt;
+&lt;Assembly: AssemblyVersion("1.1.125.0")&gt;
 
-namespace MyLibrary
-{
-}
+Namespace MyLibrary
+
+End Namespace
 </pre>
 <h2>See</h2>
 <p><a href="https://docs.microsoft.com/en-us/dotnet/standard/assembly/versioning">Microsoft documentation - Assembly Versioning</a></p>

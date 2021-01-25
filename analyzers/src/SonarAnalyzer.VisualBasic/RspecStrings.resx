@@ -3867,6 +3867,39 @@
   <data name="S3903_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3904_Category" xml:space="preserve">
+    <value>Critical Code Smell</value>
+  </data>
+  <data name="S3904_Description" xml:space="preserve">
+    <value>If no AssemblyVersionAttribute is provided, the same default version will be used for every build. Since the version number is used by The .NET Framework to uniquely identify an assembly this can lead to broken dependencies.</value>
+  </data>
+  <data name="S3904_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3904_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3904_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S3904_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S3904_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S3904_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S3904_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S3904_Title" xml:space="preserve">
+    <value>Assemblies should have version information</value>
+  </data>
+  <data name="S3904_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3923_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>

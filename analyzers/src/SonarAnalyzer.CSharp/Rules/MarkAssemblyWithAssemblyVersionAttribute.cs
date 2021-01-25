@@ -18,25 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MarkAssemblyWithAssemblyVersionAttribute : MarkAssemblyWithAttributeBase
+    public sealed class MarkAssemblyWithAssemblyVersionAttribute : MarkAssemblyWithAssemblyVersionAttributeBase
     {
-        internal const string DiagnosticId = "S3904";
-        private const string MessageFormat = "Provide an 'AssemblyVersion' attribute for assembly '{0}'.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        internal override KnownType AttributeToFind => KnownType.System_Reflection_AssemblyVersionAttribute;
+        public MarkAssemblyWithAssemblyVersionAttribute() : base(RspecStrings.ResourceManager) { }
     }
 }
