@@ -3989,7 +3989,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["3989"],
             ["3990"] = "CODE_SMELL",
             //["3991"],
-            //["3992"],
+            ["3992"] = "CODE_SMELL",
             //["3993"],
             //["3994"],
             //["3995"],

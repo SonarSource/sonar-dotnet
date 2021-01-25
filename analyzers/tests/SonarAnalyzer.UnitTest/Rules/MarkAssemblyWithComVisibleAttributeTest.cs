@@ -23,6 +23,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -46,5 +47,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Throw<UnexpectedDiagnosticException>()
                 .WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkAssemblyWithComVisibleAttribute_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithComVisibleAttribute.vb", new VB.MarkAssemblyWithComVisibleAttribute());
     }
 }
