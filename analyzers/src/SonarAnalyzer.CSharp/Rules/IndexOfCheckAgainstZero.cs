@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class IndexOfCheckAgainstZero : IndexOfCheckAgainstZeroBase<SyntaxKind, ExpressionSyntax, BinaryExpressionSyntax>
+    public sealed class IndexOfCheckAgainstZero : IndexOfCheckAgainstZeroBase<SyntaxKind, BinaryExpressionSyntax>
     {
         protected override ILanguageFacade LanguageFacade { get; } = CSharpFacade.Instance;
         protected override SyntaxKind LessThanExpression => SyntaxKind.LessThanExpression;
@@ -38,23 +38,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IndexOfCheckAgainstZero() : base(RspecStrings.ResourceManager) { }
 
-        protected override bool IsSensitiveCall(ExpressionSyntax call, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(call).Symbol is IMethodSymbol indexOfSymbol
-            && ((indexOfSymbol.Name == "IndexOf"
-                 && indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes))
-               || (InvalidStringMethods.Any(x => x == indexOfSymbol.Name)
-                   && indexOfSymbol.ContainingType.DerivesFrom(KnownType.System_String)));
-
-        protected override ExpressionSyntax Left(BinaryExpressionSyntax binaryExpression) =>
+        protected override SyntaxNode Left(BinaryExpressionSyntax binaryExpression) =>
             binaryExpression.Left;
 
         protected override SyntaxToken OperatorToken(BinaryExpressionSyntax binaryExpression) =>
             binaryExpression.OperatorToken;
 
-        protected override ExpressionSyntax Right(BinaryExpressionSyntax binaryExpression) =>
+        protected override SyntaxNode Right(BinaryExpressionSyntax binaryExpression) =>
             binaryExpression.Right;
-
-        protected override bool TryGetConstantIntValue(ExpressionSyntax expression, out int constValue) =>
-            LanguageFacade.ExpressionNumericConverter.Value.TryGetConstantIntValue(expression, out constValue);
     }
 }

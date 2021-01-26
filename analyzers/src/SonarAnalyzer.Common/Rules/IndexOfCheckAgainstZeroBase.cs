@@ -19,21 +19,22 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class IndexOfCheckAgainstZeroBase<TSyntaxKind, TExpressionSyntax, TBinaryExpressionSyntax> : SonarDiagnosticAnalyzer
+    public abstract class IndexOfCheckAgainstZeroBase<TSyntaxKind, TBinaryExpressionSyntax> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
-        where TExpressionSyntax : SyntaxNode
         where TBinaryExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S2692";
         private const string MessageFormat = "0 is a valid index, but this check ignores it.";
 
-        private protected static readonly string[] InvalidStringMethods =
+        private protected static readonly string[] InvalidMethods =
             {
+                "IndexOf",
                 "IndexOfAny",
                 "LastIndexOf",
                 "LastIndexOfAny"
@@ -53,10 +54,8 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind LessThanExpression { get; }
         protected abstract TSyntaxKind GreaterThanExpression { get; }
 
-        protected abstract bool TryGetConstantIntValue(TExpressionSyntax expression, out int constValue);
-        protected abstract bool IsSensitiveCall(TExpressionSyntax call, SemanticModel semanticModel);
-        protected abstract TExpressionSyntax Left(TBinaryExpressionSyntax binaryExpression);
-        protected abstract TExpressionSyntax Right(TBinaryExpressionSyntax binaryExpression);
+        protected abstract SyntaxNode Left(TBinaryExpressionSyntax binaryExpression);
+        protected abstract SyntaxNode Right(TBinaryExpressionSyntax binaryExpression);
         protected abstract SyntaxToken OperatorToken(TBinaryExpressionSyntax binaryExpression);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
@@ -71,7 +70,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var lessThan = (TBinaryExpressionSyntax)c.Node;
-                    if (IsInvalidComparision(Left(lessThan), Right(lessThan), c.SemanticModel))
+                    if (IsInvalidComparison(Left(lessThan), Right(lessThan), c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Left(lessThan).CreateLocation(OperatorToken(lessThan))));
                     }
@@ -83,7 +82,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var greaterThan = (TBinaryExpressionSyntax)c.Node;
-                    if (IsInvalidComparision(Right(greaterThan), Left(greaterThan), c.SemanticModel))
+                    if (IsInvalidComparison(Right(greaterThan), Left(greaterThan), c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, OperatorToken(greaterThan).CreateLocation(Right(greaterThan))));
                     }
@@ -91,9 +90,14 @@ namespace SonarAnalyzer.Rules
                 GreaterThanExpression);
         }
 
-        private bool IsInvalidComparision(TExpressionSyntax conxtantExpression, TExpressionSyntax methodInvocationExpression, SemanticModel semanticModel) =>
-            TryGetConstantIntValue(conxtantExpression, out var constValue)
+        private bool IsInvalidComparison(SyntaxNode constantExpression, SyntaxNode methodInvocationExpression, SemanticModel semanticModel) =>
+            LanguageFacade.ExpressionNumericConverter.TryGetConstantIntValue(constantExpression, out var constValue)
             && constValue == 0
             && IsSensitiveCall(methodInvocationExpression, semanticModel);
+
+        private bool IsSensitiveCall(SyntaxNode call, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(call).Symbol is IMethodSymbol indexOfSymbol
+            && InvalidMethods.Any(x => x.Equals(indexOfSymbol.Name, LanguageFacade.NameComparison))
+            && indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes);
     }
 }
