@@ -18,16 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class MarkAssemblyWithClsCompliantAttribute : MarkAssemblyWithClsCompliantAttributeBase
+    public abstract class MarkAssemblyWithClsCompliantAttributeBase : MarkAssemblyWithAttributeBase
     {
-        public MarkAssemblyWithClsCompliantAttribute() : base(RspecStrings.ResourceManager) { }
+        protected const string DiagnosticId = "S3990";
+        private const string MessageFormat = "Provide a 'CLSCompliant' attribute for assembly '{0}'.";
+
+        internal override KnownType AttributeToFind => KnownType.System_CLSCompliantAttribute;
+
+        protected MarkAssemblyWithClsCompliantAttributeBase(System.Resources.ResourceManager rspecResources)
+            : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources)) { }
     }
 }

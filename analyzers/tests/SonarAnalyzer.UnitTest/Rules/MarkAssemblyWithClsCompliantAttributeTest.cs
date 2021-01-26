@@ -23,6 +23,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,20 +32,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithClsCompliantAttribute() =>
-            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.cs",
-                new CS.MarkAssemblyWithClsCompliantAttribute());
+        public void MarkAssemblyWithClsCompliantAttribute_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.cs", new CS.MarkAssemblyWithClsCompliantAttribute());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkAssemblyWithClsCompliantAttributeNoncompliant()
+        public void MarkAssemblyWithClsCompliantAttribute_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.vb", new VB.MarkAssemblyWithClsCompliantAttribute());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS()
         {
-            Action action = () => Verifier.VerifyAnalyzer(
-                @"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs",
-                new CS.MarkAssemblyWithClsCompliantAttribute());
-            action.Should()
-                .Throw<UnexpectedDiagnosticException>()
-                .WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
+            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs", new CS.MarkAssemblyWithClsCompliantAttribute());
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB()
+        {
+            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.vb", new VB.MarkAssemblyWithClsCompliantAttribute());
+            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
     }
 }

@@ -4032,6 +4032,39 @@
   <data name="S3981_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3990_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S3990_Description" xml:space="preserve">
+    <value>Assemblies should conform with the Common Language Specification (CLS) in order to be usable across programming languages. To be compliant an assembly has to indicate it with System.CLSCompliantAttribute.</value>
+  </data>
+  <data name="S3990_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3990_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3990_RemediationCost" xml:space="preserve">
+    <value>1min</value>
+  </data>
+  <data name="S3990_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3990_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3990_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S3990_Tags" xml:space="preserve">
+    <value>api-design</value>
+  </data>
+  <data name="S3990_Title" xml:space="preserve">
+    <value>Assemblies should be marked as CLS compliant</value>
+  </data>
+  <data name="S3990_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3998_Category" xml:space="preserve">
     <value>Critical Code Smell</value>
   </data>

@@ -1,0 +1,16 @@
+{
+  "title": "Assemblies should be marked as CLS compliant",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1min"
+  },
+  "tags": [
+    "api-design"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3990",
+  "sqKey": "S3990",
+  "scope": "All"
+}
