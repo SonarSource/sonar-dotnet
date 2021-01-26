@@ -32,27 +32,21 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class SecurityPInvokeMethodShouldNotBeCalled : SonarDiagnosticAnalyzer
+    public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase
     {
-        internal const string DiagnosticId = "S3884";
-        private const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
-        private const string InteropDllName = "ole32.dll";
-
         private static readonly ISet<string> InvalidMethods = new HashSet<string>
         {
             "CoSetProxyBlanket",
             "CoInitializeSecurity"
         };
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public SecurityPInvokeMethodShouldNotBeCalled() : base(RspecStrings.ResourceManager) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.InvocationExpression);
         }
+
         private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
             var invocation = (InvocationExpressionSyntax)analysisContext.Node;
@@ -87,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (dllImportAttribute.ConstructorArguments.Any(x => x.Value.Equals(InteropDllName)))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, directMethodCall.Identifier.GetLocation(),
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, directMethodCall.Identifier.GetLocation(),
                     directMethodCall.Identifier.ValueText));
             }
         }

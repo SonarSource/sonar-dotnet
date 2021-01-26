@@ -18,25 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class SecurityPInvokeMethodShouldNotBeCalledTest
+    public abstract class SecurityPInvokeMethodShouldNotBeCalledBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void SecurityPInvokeMethodShouldNotBeCalled_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SecurityPInvokeMethodShouldNotBeCalled.cs",
-                new CS.SecurityPInvokeMethodShouldNotBeCalled());
+        protected const string DiagnosticId = "S3884";
+        protected const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
+        protected const string InteropDllName = "ole32.dll";
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void SecurityPInvokeMethodShouldNotBeCalled_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SecurityPInvokeMethodShouldNotBeCalled.vb", new VB.SecurityPInvokeMethodShouldNotBeCalled());
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected DiagnosticDescriptor Rule { get; }
+
+        protected SecurityPInvokeMethodShouldNotBeCalledBase(System.Resources.ResourceManager rspecResources) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
     }
 }
