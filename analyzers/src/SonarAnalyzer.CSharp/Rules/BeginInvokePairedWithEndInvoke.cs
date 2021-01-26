@@ -36,14 +36,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase
     {
-        internal const string DiagnosticId = "S4583";
-        private const string MessageFormat = "Pair this \"BeginInvoke\" with an \"EndInvoke\".";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
         private static readonly ISet<SyntaxKind> ParentDeclarationKinds = new HashSet<SyntaxKind>
         {
             SyntaxKind.AnonymousMethodExpression,
@@ -62,6 +54,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.LocalFunctionStatement,
         }.ToImmutableHashSet();
 
+        public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
+
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
@@ -76,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
                     {
                         var location = ((SyntaxToken)invocation.GetMethodCallIdentifier()).GetLocation();
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
                     }
                 },
                 SyntaxKind.InvocationExpression);

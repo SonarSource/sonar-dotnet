@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
     public abstract class BeginInvokePairedWithEndInvokeBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S4583";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Pair this \"BeginInvoke\" with an \"EndInvoke\".";
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
