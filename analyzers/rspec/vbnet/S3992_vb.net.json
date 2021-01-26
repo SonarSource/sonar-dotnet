@@ -1,0 +1,16 @@
+{
+  "title": "Assemblies should explicitly specify COM visibility",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1min"
+  },
+  "tags": [
+    "api-design"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3992",
+  "sqKey": "S3992",
+  "scope": "All"
+}

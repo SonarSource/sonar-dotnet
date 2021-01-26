@@ -18,16 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class MarkAssemblyWithComVisibleAttribute : MarkAssemblyWithComVisibleAttributeBase
+    public abstract class MarkAssemblyWithComVisibleAttributeBase : MarkAssemblyWithAttributeBase
     {
-        public MarkAssemblyWithComVisibleAttribute() : base(RspecStrings.ResourceManager) { }
+        protected const string DiagnosticId = "S3992";
+        private const string MessageFormat = "Provide a 'ComVisible' attribute for assembly '{0}'.";
+
+        private protected override KnownType AttributeToFind => KnownType.System_Runtime_InteropServices_ComVisibleAttribute;
+
+        public MarkAssemblyWithComVisibleAttributeBase(System.Resources.ResourceManager rspecResources)
+            : base(DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources)) { }
     }
 }

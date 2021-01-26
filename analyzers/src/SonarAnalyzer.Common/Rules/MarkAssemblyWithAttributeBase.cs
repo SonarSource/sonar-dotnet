@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
     {
         private readonly DiagnosticDescriptor rule;
 
-        internal abstract KnownType AttributeToFind { get; }
+        private protected abstract KnownType AttributeToFind { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
