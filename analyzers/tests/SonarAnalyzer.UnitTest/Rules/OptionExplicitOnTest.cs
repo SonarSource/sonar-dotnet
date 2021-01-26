@@ -19,8 +19,8 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,7 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void OptionExplicitOn_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\OptionExplicitOn.cs", new VB.OptionExplicitOn());
+        public void OptionExplicitOn_IsOff() =>
+            Verifier.VerifyVisualBasicAnalyzer("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}", new OptionExplicitOn());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void OptionExplicitOn_IsOn() =>
+            Verifier.VerifyVisualBasicAnalyzer("Option Explicit On", new OptionExplicitOn());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void OptionExplicitOn_IsMissing() =>
+            Verifier.VerifyVisualBasicAnalyzer("Option Strict Off", new OptionExplicitOn());
     }
 }

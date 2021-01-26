@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -34,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class OptionExplicitOn : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6146";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Change this to 'Option Explicit On'.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -43,12 +42,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
-                    if (true)
+                    var statement = (OptionStatementSyntax)c.Node;
+                    if (statement.NameKeyword.IsKind(SyntaxKind.ExplicitKeyword) && statement.ValueKeyword.IsKind(SyntaxKind.OffKeyword))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, statement.GetLocation()));
                     }
                 },
-                SyntaxKind.InvocationExpression);
+                SyntaxKind.OptionStatement);
     }
 }
