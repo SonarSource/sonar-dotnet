@@ -69,19 +69,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                 CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                 IEnumerable<MetadataReference> additionalReferences = null)
         {
-            var solution = SolutionBuilder
-               .Create()
-               .AddProject(AnalyzerLanguage.CSharp)
-               .AddSnippet(snippet)
-               .AddReferences(additionalReferences)
-               .GetSolution();
-
-            // ToDo: add [CallerLineNumber]int lineNumber = 0
-            // then add ability to shift result reports with this line number
-            foreach (var compilation in solution.Compile(options?.ToArray()))
-            {
-                DiagnosticVerifier.Verify(compilation, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, checkMode);
-            }
+            var solution = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(snippet).AddReferences(additionalReferences).GetSolution();
+            VerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, options, checkMode);
         }
 
         public static void VerifyVisualBasicAnalyzer(string snippet,
@@ -89,19 +78,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                      CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                      IEnumerable<MetadataReference> additionalReferences = null)
         {
-            var solution = SolutionBuilder
-               .Create()
-               .AddProject(AnalyzerLanguage.VisualBasic)
-               .AddSnippet(snippet)
-               .AddReferences(additionalReferences)
-               .GetSolution();
-
-            // ToDo: add [CallerLineNumber]int lineNumber = 0
-            // then add ability to shift result reports with this line number
-            foreach (var compilation in solution.Compile())
-            {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
-            }
+            var solution = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippet(snippet).AddReferences(additionalReferences).GetSolution();
+            VerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, null, checkMode);
         }
 
         /// <summary>
@@ -281,8 +259,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                            OutputKind outputKind,
                                            IEnumerable<MetadataReference> additionalReferences)
         {
-            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences, IsSupportForCSharp9InitNeeded(options));
-            foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
+            var solution = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences, IsSupportForCSharp9InitNeeded(options));
+            VerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode);
+        }
+
+        private static void VerifyAnalyzer(SolutionBuilder solution,
+                                           DiagnosticAnalyzer[] diagnosticAnalyzers,
+                                           IEnumerable<ParseOptions> options,
+                                           CompilationErrorBehavior checkMode)
+        {
+            foreach (var compilation in solution.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode);
             }
