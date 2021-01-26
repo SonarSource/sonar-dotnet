@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class BeginInvokePairedWithEndInvoke : SonarDiagnosticAnalyzer
+    public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase
     {
         internal const string DiagnosticId = "S4583";
         private const string MessageFormat = "Pair this \"BeginInvoke\" with an \"EndInvoke\".";

@@ -46,7 +46,7 @@ public static void Main()
 
     IAsyncResult result = caller.BeginInvoke(null, null);
 
-    string returnValue = caller.EndInvoke(out threadId, result);
+    string returnValue = caller.EndInvoke(result);
 }
 </pre>
 <p>BeginInvoke with callback</p>
@@ -61,14 +61,9 @@ public static void Main()
     IAsyncResult result = caller.BeginInvoke(
         new AsyncCallback((IAsyncResult ar) =&gt;
             {
-                // Retrieve the delegate.
-                AsyncResult result = (AsyncResult)ar;
-                AsyncMethodCaller caller = (AsyncMethodCaller)result.AsyncDelegate;
                 // Call EndInvoke to retrieve the results.
                 string returnValue = caller.EndInvoke(ar);
-            }),
-            null
-        );
+            }), null);
 }
 </pre>
 <h2>See</h2>
