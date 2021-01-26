@@ -1,0 +1,48 @@
+<p>There are several compilations options available for Visual Basic source code and <code>Option Explicit</code> defines compiler behavior for
+implicit variable declarations. Specifying <code>Option Explicit Off</code> will allow creating a variable by it's first usage. This behavior can lead
+to unexpected runtime errors due to typos in variable names.</p>
+<p><code>Option Explicit</code> can be set in project properties or overridden in individual source files.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Option Explicit Off ' Noncompliant
+
+Module MainMod
+
+    Public Sub DoSomething(First As String, Second As String)
+        Parameter = Fist        ' New local variable "Fist" is created and assigned to new local variable "Parameter" instead of "First" argument.
+        DoSomething(Parameter)
+        Parametr = Second       ' "Second" argument is assigned to newly created variable "Parametr" instead of intended "Parameter".
+        DoSomething(Parameter)  ' Value of "Parameter" is always Nothing
+    End Sub
+
+    Private Sub DoSomething(Parameter As String)
+        ' ...
+    End Sub
+
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Option Explicit On
+
+Module MainMod
+
+    Public Sub DoSomething(First As String, Second As String)
+        Dim Parameter As String = First
+        DoSomething(Parameter)
+        Parameter = Second
+        DoSomething(Parameter)
+    End Sub
+
+    Private Sub DoSomething(Parameter As String)
+        ' ...
+    End Sub
+
+End Module
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/option-explicit-statement">Visual Basic
+  documentation - Option Explicit Statement</a> </li>
+</ul>
+
