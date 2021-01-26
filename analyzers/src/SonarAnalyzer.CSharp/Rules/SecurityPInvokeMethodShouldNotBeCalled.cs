@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,58 +29,17 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase
+    public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax, IdentifierNameSyntax>
     {
-        private static readonly ISet<string> InvalidMethods = new HashSet<string>
-        {
-            "CoSetProxyBlanket",
-            "CoInitializeSecurity"
-        };
+        protected override SyntaxKind SyntaxKind => SyntaxKind.InvocationExpression;
+        protected override ILanguageFacade LanguageFacade => CSharpFacade.Instance;
 
         public SecurityPInvokeMethodShouldNotBeCalled() : base(RspecStrings.ResourceManager) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.InvocationExpression);
-        }
+        protected override SyntaxNode Expression(InvocationExpressionSyntax invocationExpression) =>
+            invocationExpression.Expression;
 
-        private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
-        {
-            var invocation = (InvocationExpressionSyntax)analysisContext.Node;
-            if (!(invocation.Expression is IdentifierNameSyntax directMethodCall))
-            {
-                return;
-            }
-
-            if (!InvalidMethods.Contains(directMethodCall.Identifier.ValueText))
-            {
-                return;
-            }
-
-            var methodCallSymbol = analysisContext.SemanticModel.GetSymbolInfo(directMethodCall);
-            if (methodCallSymbol.Symbol == null)
-            {
-                return;
-            }
-
-            if (!methodCallSymbol.Symbol.IsExtern || !methodCallSymbol.Symbol.IsStatic)
-            {
-                return;
-            }
-
-            var dllImportAttribute = methodCallSymbol.Symbol
-                .GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute)
-                .FirstOrDefault();
-            if (dllImportAttribute == null)
-            {
-                return;
-            }
-
-            if (dllImportAttribute.ConstructorArguments.Any(x => x.Value.Equals(InteropDllName)))
-            {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, directMethodCall.Identifier.GetLocation(),
-                    directMethodCall.Identifier.ValueText));
-            }
-        }
+        protected override SyntaxToken Identifier(IdentifierNameSyntax identifierName) =>
+            identifierName.Identifier;
     }
 }
