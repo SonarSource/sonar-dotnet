@@ -18,7 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.VisualBasic;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -27,6 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class OptionExplicitOnTest
     {
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void OptionExplicitOn_IsOffForProject()
+        {
+            var project = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}");
+            var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false);    // optionExplicit is true by default => tested in other tests
+            var compilation = project.GetCompilation(null, options);
+            DiagnosticVerifier.Verify(compilation, new OptionExplicitOn(), CompilationErrorBehavior.Default);
+        }
+
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionExplicitOn_IsOff() =>

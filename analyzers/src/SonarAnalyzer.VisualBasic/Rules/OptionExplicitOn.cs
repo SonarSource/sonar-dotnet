@@ -33,21 +33,35 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class OptionExplicitOn : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S6146";
-        private const string MessageFormat = "Change this to 'Option Explicit On'.";
+        private const string MessageFormat = "{0}";
+        private const string StatementMessage = "Change this to 'Option Explicit On'.";
+        private const string AssemblyMessageFormat = "Configure 'Option Explicit On' for assembly '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var statement = (OptionStatementSyntax)c.Node;
                     if (statement.NameKeyword.IsKind(SyntaxKind.ExplicitKeyword) && statement.ValueKeyword.IsKind(SyntaxKind.OffKeyword))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, statement.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, statement.GetLocation(), StatementMessage));
                     }
                 },
                 SyntaxKind.OptionStatement);
+
+            context.RegisterCompilationStartAction(cStart =>
+                cStart.RegisterCompilationEndAction(c =>
+                {
+                    var options = (VisualBasicCompilationOptions)c.Compilation.Options;
+                    if (!options.OptionExplicit)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, null, string.Format(AssemblyMessageFormat, c.Compilation.AssemblyName)));
+                    }
+                }));
+        }
     }
 }
