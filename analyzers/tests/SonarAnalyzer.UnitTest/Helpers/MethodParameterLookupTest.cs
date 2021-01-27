@@ -35,7 +35,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class MethodParameterLookupTest
     {
-
         [TestMethod]
         public void TestMethodParameterLookup_CS()
         {
@@ -167,14 +166,14 @@ End Module
 
             protected InspectionBase(string source, AnalyzerLanguage language)
             {
-                this.Compiler = new SnippetCompiler(source, false, language);
-                this.MainInvocations = FindInvocationsIn("Main");
+                Compiler = new SnippetCompiler(source, false, language);
+                MainInvocations = FindInvocationsIn("Main");
             }
 
             protected void InitSpecial(TInvocationSyntax specialInvocation)
             {
-                this.SpecialArgument = GetArguments(specialInvocation).Single();
-                this.SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
+                SpecialArgument = GetArguments(specialInvocation).Single();
+                SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
             }
 
             public MethodParameterLookupBase<TArgumentSyntax> CreateLookup(int invocationIndex, string expectedMethod)
@@ -192,8 +191,7 @@ End Module
                 InspectTryGetSymbol(lookup, expectedArguments, GetArguments(MainInvocations[invocationIndex]));
             }
 
-            private void InspectTryGetSyntax
-                (MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, IMethodSymbol method)
+            private void InspectTryGetSyntax(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, IMethodSymbol method)
             {
                 lookup.TryGetSyntax(SpecialParameter, out var symbol).Should().Be(false);
 
@@ -201,11 +199,11 @@ End Module
                 {
                     if (parameter.IsParams && lookup.TryGetSyntax(parameter, out var expressions))
                     {
-                        expressions.Should().BeEquivalentTo((IEnumerable)ExtractExpectedValue(expectedArguments, parameter.Name));
+                        expressions.Select(x => ConstantValue(x)).Should().BeEquivalentTo((IEnumerable)ExtractExpectedValue(expectedArguments, parameter.Name));
                     }
                     else if (!parameter.IsParams && lookup.TryGetNonParamsSyntax(parameter, out var expression))
                     {
-                        expression.Should().Be(ExtractExpectedValue(expectedArguments, parameter.Name));
+                        ConstantValue(expression).Should().Be(ExtractExpectedValue(expectedArguments, parameter.Name));
                     }
                     else if (!parameter.IsOptional && !parameter.IsParams)
                     {
@@ -249,6 +247,9 @@ End Module
                 }
                 return pi.GetValue(expected, null);
             }
+
+            private object ConstantValue(SyntaxNode node) =>
+                Compiler.SemanticModel.GetConstantValue(node).Value;
 
         }
 
