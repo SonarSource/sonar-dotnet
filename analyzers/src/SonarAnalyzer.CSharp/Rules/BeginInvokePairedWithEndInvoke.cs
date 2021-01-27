@@ -36,6 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase
     {
+        private const string BeginInvoke = "BeginInvoke";
+
         private static readonly ISet<SyntaxKind> ParentDeclarationKinds = new HashSet<SyntaxKind>
         {
             SyntaxKind.AnonymousMethodExpression,
@@ -60,38 +62,32 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    const string BeginInvoke = "BeginInvoke";
-                    if (invocation.Expression.ToStringContains(BeginInvoke) &&
-                        GetCallbackArg(invocation) is { } callbackArg &&
-                        GetMethodSymbol(invocation, c.SemanticModel) is { } methodSymbol &&
-                        methodSymbol.Name == BeginInvoke &&
-                        IsDelegate(methodSymbol) &&
-                        (callbackArg.IsNullLiteral() || !CallbackMayContainEndInvoke(callbackArg, c.SemanticModel)) &&
-                        !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
+                    if (invocation.Expression.ToStringContains(BeginInvoke)
+                        && GetCallbackArg(invocation) is { } callbackArg
+                        && GetMethodSymbol(invocation, c.SemanticModel) is { } methodSymbol
+                        && methodSymbol.Name == BeginInvoke
+                        && IsDelegate(methodSymbol)
+                        && (callbackArg.IsNullLiteral() || !CallbackMayContainEndInvoke(callbackArg, c.SemanticModel))
+                        && !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
                     {
-                        var location = ((SyntaxToken)invocation.GetMethodCallIdentifier()).GetLocation();
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ((SyntaxToken)invocation.GetMethodCallIdentifier()).GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
 
         private static bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
         {
-            var parentContext = node.AncestorsAndSelf()
-                .FirstOrDefault(ancestor => ParentDeclarationKinds.Contains(ancestor.Kind()));
-            return GetEndInvokeList(parentContext, semantic).Count > 0;
+            var parentContext = node.AncestorsAndSelf().FirstOrDefault(ancestor => ParentDeclarationKinds.Contains(ancestor.Kind()));
+            return GetEndInvokeList(parentContext, semantic).Any();
         }
 
         private ExpressionSyntax GetCallbackArg(InvocationExpressionSyntax invocationExpression)
         {
-            if (invocationExpression.ArgumentList.Arguments.Count >= 2)
+            if (invocationExpression.ArgumentList.Arguments.Count > 1)
             {
                 var callbackArgPos = invocationExpression.ArgumentList.Arguments.Count - 2;
-                var callbackArg = GetArgumentExpressionByNameOrPosition(invocationExpression, "callback", callbackArgPos)
-                    ?.RemoveParentheses();
-                return callbackArg;
+                return GetArgumentExpressionByNameOrPosition(invocationExpression, "callback", callbackArgPos)?.RemoveParentheses();
             }
-
             return null;
         }
 
@@ -123,35 +119,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            if (callback != null && ParentDeclarationKinds.Contains(callback.Kind()))
-            {
-                return GetEndInvokeList(callback, semantic).Count > 0;
-            }
-
-            return true;
+            return callback == null
+                || !ParentDeclarationKinds.Contains(callback.Kind())
+                || GetEndInvokeList(callback, semantic).Any();
         }
 
         private static SyntaxNode LookupFirstArgument(ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments[0].Expression : null;
+            objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().Expression : null;
 
         private static SyntaxNode LookupMethodDeclaration(IMethodSymbol methodSymbol) =>
             methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
 
-        private static SyntaxNode LookupIdentifierInitializer(IdentifierNameSyntax identifier, SemanticModel semantic)
-        {
-            var declaringReference = semantic.GetSymbolInfo(identifier)
-                .Symbol?.DeclaringSyntaxReferences.FirstOrDefault() ?.GetSyntax();
-            if (declaringReference is VariableDeclaratorSyntax variableDeclarator
-                && variableDeclarator.Initializer is EqualsValueClauseSyntax equalsValueClause)
-            {
-                return equalsValueClause.Value.RemoveParentheses();
-            }
+        private static SyntaxNode LookupIdentifierInitializer(IdentifierNameSyntax identifier, SemanticModel semantic) =>
+            semantic.GetSymbolInfo(identifier).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is VariableDeclaratorSyntax variableDeclarator
+                && variableDeclarator.Initializer is EqualsValueClauseSyntax equalsValueClause
+                ? equalsValueClause.Value.RemoveParentheses()
+                : null;
 
-            return null;
-        }
-
-        private ExpressionSyntax GetArgumentExpressionByNameOrPosition(InvocationExpressionSyntax invocationExpression,
-            string argumentName, int argumentPosition)
+        private ExpressionSyntax GetArgumentExpressionByNameOrPosition(InvocationExpressionSyntax invocationExpression, string argumentName, int argumentPosition)
         {
             var arguments = invocationExpression.ArgumentList.Arguments;
             var argumentByName = arguments.FirstOrDefault(a => a.NameColon?.Name.Identifier.Text == argumentName);
@@ -159,26 +144,25 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return argumentByName.Expression;
             }
-
             return argumentPosition < arguments.Count ? arguments[argumentPosition].Expression : null;
         }
 
-        private static IMethodSymbol
-            GetMethodSymbol(InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel) =>
-            invocationExpression.GetMethodCallIdentifier() is SyntaxToken identifier &&
-            semanticModel.GetSymbolInfo(identifier.Parent).Symbol is IMethodSymbol symbol
+        private static IMethodSymbol GetMethodSymbol(InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel) =>
+            invocationExpression.GetMethodCallIdentifier() is SyntaxToken identifier && semanticModel.GetSymbolInfo(identifier.Parent).Symbol is IMethodSymbol symbol
                 ? symbol
                 : null;
 
-        private static bool IsDelegate(IMethodSymbol methodSymbol) => methodSymbol.ReceiverType.Is(TypeKind.Delegate);
+        private static bool IsDelegate(IMethodSymbol methodSymbol) =>
+            methodSymbol.ReceiverType.Is(TypeKind.Delegate);
 
         private static List<InvocationExpressionSyntax> GetEndInvokeList(SyntaxNode parentContext, SemanticModel semanticModel)
         {
             var endInvokeList = new List<InvocationExpressionSyntax>();
             var walker = new InvocationExpressionWalker(parentContext, invocationExpression =>
             {
-                var methodSymbol = GetMethodSymbol(invocationExpression, semanticModel);
-                if (methodSymbol?.Name == "EndInvoke" && IsDelegate(methodSymbol))
+                if (GetMethodSymbol(invocationExpression, semanticModel) is { } methodSymbol
+                    && methodSymbol.Name == "EndInvoke"
+                    && IsDelegate(methodSymbol))
                 {
                     endInvokeList.Add(invocationExpression);
                 }
@@ -190,7 +174,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private class InvocationExpressionWalker : CSharpSyntaxWalker
         {
             private readonly SyntaxNode parentContext;
-
             private readonly Action<InvocationExpressionSyntax> consumer;
 
             public InvocationExpressionWalker(SyntaxNode parentContext, Action<InvocationExpressionSyntax> consumer)
@@ -201,7 +184,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                this.consumer.Invoke(node);
+                consumer.Invoke(node);
                 base.VisitInvocationExpression(node);
             }
 
@@ -225,7 +208,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void OnlyOnParent<T>(T node, Action action) where T : SyntaxNode
             {
-                if (this.parentContext == node)
+                if (parentContext == node)
                 {
                     action.Invoke();
                 }
