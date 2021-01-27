@@ -1,0 +1,12 @@
+{
+  "title": "\"Option Explicit\" should be enabled",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "tags": [
+    "bad-practice"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-6146",
+  "sqKey": "S6146",
+  "scope": "All"
+}
