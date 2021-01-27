@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     if (invocation.Expression.ToStringContains(BeginInvoke)
                         && GetCallbackArg(invocation) is { } callbackArg
-                        && GetMethodSymbol(invocation, c.SemanticModel) is { } methodSymbol
+                        && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                         && methodSymbol.Name == BeginInvoke
                         && IsDelegate(methodSymbol)
                         && (callbackArg.IsNullLiteral() || !CallbackMayContainEndInvoke(callbackArg, c.SemanticModel))
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
         {
             var parentContext = node.AncestorsAndSelf().FirstOrDefault(ancestor => ParentDeclarationKinds.Contains(ancestor.Kind()));
-            return GetEndInvokeList(parentContext, semantic).Any();
+            return ContainsEndInvoke(parentContext, semantic);
         }
 
         private ExpressionSyntax GetCallbackArg(InvocationExpressionSyntax invocationExpression)
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (callback.IsKind(SyntaxKind.ObjectCreationExpression))
             {
-                callback = LookupFirstArgument((ObjectCreationExpressionSyntax)callback);
+                callback = LookupSingleArgument((ObjectCreationExpressionSyntax)callback);
                 if (callback != null && semantic.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol)
                 {
                     callback = LookupMethodDeclaration(methodSymbol);
@@ -121,10 +121,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return callback == null
                 || !ParentDeclarationKinds.Contains(callback.Kind())
-                || GetEndInvokeList(callback, semantic).Any();
+                || ContainsEndInvoke(callback, semantic);
         }
 
-        private static SyntaxNode LookupFirstArgument(ObjectCreationExpressionSyntax objectCreation) =>
+        private static SyntaxNode LookupSingleArgument(ObjectCreationExpressionSyntax objectCreation) =>
             objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().Expression : null;
 
         private static SyntaxNode LookupMethodDeclaration(IMethodSymbol methodSymbol) =>
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? equalsValueClause.Value.RemoveParentheses()
                 : null;
 
-        private ExpressionSyntax GetArgumentExpressionByNameOrPosition(InvocationExpressionSyntax invocationExpression, string argumentName, int argumentPosition)
+        private static ExpressionSyntax GetArgumentExpressionByNameOrPosition(InvocationExpressionSyntax invocationExpression, string argumentName, int argumentPosition)
         {
             var arguments = invocationExpression.ArgumentList.Arguments;
             var argumentByName = arguments.FirstOrDefault(a => a.NameColon?.Name.Identifier.Text == argumentName);
@@ -147,71 +147,59 @@ namespace SonarAnalyzer.Rules.CSharp
             return argumentPosition < arguments.Count ? arguments[argumentPosition].Expression : null;
         }
 
-        private static IMethodSymbol GetMethodSymbol(InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel) =>
-            invocationExpression.GetMethodCallIdentifier() is SyntaxToken identifier && semanticModel.GetSymbolInfo(identifier.Parent).Symbol is IMethodSymbol symbol
-                ? symbol
-                : null;
-
         private static bool IsDelegate(IMethodSymbol methodSymbol) =>
             methodSymbol.ReceiverType.Is(TypeKind.Delegate);
 
-        private static List<InvocationExpressionSyntax> GetEndInvokeList(SyntaxNode parentContext, SemanticModel semanticModel)
+        private static bool ContainsEndInvoke(SyntaxNode node, SemanticModel semanticModel) =>
+            new InvocationWalker(node, semanticModel).Walk();
+
+        private class InvocationWalker : CSharpSyntaxWalker
         {
-            var endInvokeList = new List<InvocationExpressionSyntax>();
-            var walker = new InvocationExpressionWalker(parentContext, invocationExpression =>
+            private static readonly SyntaxKind[] VisitOnlyOnParent = new[]
             {
-                if (GetMethodSymbol(invocationExpression, semanticModel) is { } methodSymbol
-                    && methodSymbol.Name == "EndInvoke"
-                    && IsDelegate(methodSymbol))
+                SyntaxKind.AnonymousMethodExpression,
+                SyntaxKind.ConstructorDeclaration,
+                SyntaxKind.DestructorDeclaration,
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.ParenthesizedLambdaExpression,
+                SyntaxKind.SimpleLambdaExpression
+            };
+
+            private readonly SyntaxNode root;
+            private readonly SemanticModel semanticModel;
+            private bool containsEndInvoke;
+
+            public InvocationWalker(SyntaxNode root, SemanticModel semanticModel)
+            {
+                this.root = root;
+                this.semanticModel = semanticModel;
+            }
+
+            public bool Walk()
+            {
+                this.SafeVisit(root);
+                return containsEndInvoke;
+            }
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (!containsEndInvoke  // Stop visiting once we found it
+                    && (node == root || !node.IsAnyKind(VisitOnlyOnParent)))
                 {
-                    endInvokeList.Add(invocationExpression);
+                    base.Visit(node);
                 }
-            });
-            walker.SafeVisit(parentContext);
-            return endInvokeList;
-        }
-
-        private class InvocationExpressionWalker : CSharpSyntaxWalker
-        {
-            private readonly SyntaxNode parentContext;
-            private readonly Action<InvocationExpressionSyntax> consumer;
-
-            public InvocationExpressionWalker(SyntaxNode parentContext, Action<InvocationExpressionSyntax> consumer)
-            {
-                this.parentContext = parentContext;
-                this.consumer = consumer;
             }
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                consumer.Invoke(node);
-                base.VisitInvocationExpression(node);
-            }
-
-            public override void VisitAnonymousMethodExpression(AnonymousMethodExpressionSyntax node) =>
-                OnlyOnParent(node, () => base.VisitAnonymousMethodExpression(node));
-
-            public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node) =>
-                OnlyOnParent(node, () => base.VisitConstructorDeclaration(node));
-
-            public override void VisitDestructorDeclaration(DestructorDeclarationSyntax node) =>
-                OnlyOnParent(node, () => base.VisitDestructorDeclaration(node));
-
-            public override void VisitMethodDeclaration(MethodDeclarationSyntax node) =>
-                OnlyOnParent(node, () => base.VisitMethodDeclaration(node));
-
-            public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node) =>
-                OnlyOnParent(node, () => base.VisitParenthesizedLambdaExpression(node));
-
-            public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node) =>
-                OnlyOnParent(node, () => base.VisitSimpleLambdaExpression(node));
-
-            private void OnlyOnParent<T>(T node, Action action) where T : SyntaxNode
-            {
-                if (parentContext == node)
+                if (semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
+                    && methodSymbol.Name == "EndInvoke"
+                    && IsDelegate(methodSymbol))
                 {
-                    action.Invoke();
+                    containsEndInvoke = true;
+                    return;
                 }
+                base.VisitInvocationExpression(node);
             }
         }
     }
