@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -37,6 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase
     {
         private const string BeginInvoke = "BeginInvoke";
+        private const string EndInvoke = "EndInvoke";
 
         private static readonly ISet<SyntaxKind> ParentDeclarationKinds = new HashSet<SyntaxKind>
         {
@@ -170,8 +170,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                if (semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
-                    && methodSymbol.Name == "EndInvoke"
+                if (node.Expression.ToStringContains(EndInvoke)
+                    && semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
+                    && methodSymbol.Name == EndInvoke
                     && IsDelegate(methodSymbol))
                 {
                     containsEndInvoke = true;
