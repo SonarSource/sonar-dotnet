@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4512,
+"startColumn":  77,
+"endLine":  4512,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4512,
+"startColumn":  135,
+"endLine":  4512,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4693,
+"startColumn":  77,
+"endLine":  4693,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4693,
+"startColumn":  135,
+"endLine":  4693,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4861,
+"startColumn":  77,
+"endLine":  4861,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4861,
+"startColumn":  135,
+"endLine":  4861,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5004,
+"startColumn":  77,
+"endLine":  5004,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5004,
+"startColumn":  135,
+"endLine":  5004,
+"endColumn":  138
+}
+}
+}
+]
+}

@@ -1,0 +1,60 @@
+<p>Most checks against an <code>IndexOf</code> value compare it with -1 because 0 is a valid index. Any checks which look for values <code>&gt;
+0</code> ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a <code>string</code>,
+<code>List</code>, or an array, consider using the <code>Contains</code> method instead.</p>
+<p>This rule raises an issue when an <code>IndexOf</code> value retrieved from a <code>string</code>, <code>List</code> or array is tested against
+<code>&gt; 0</code>.</p>
+<p>This rule also raises an issue when <code>IndexOfAny</code>, <code>LastIndexOf</code> or <code>LastIndexOfAny</code> from a <code>string</code> is
+tested against <code>&gt; 0</code></p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Dim Color As String = "blue"
+Dim Name As String = "ishmael"
+
+Dim Strings As New List(Of String)
+Strings.Add(Color)
+Strings.Add(Name)
+Dim StringArray As String() = Strings.ToArray()
+
+If Strings.IndexOf(Color) &gt; 0 Then ' Noncompliant
+  ' ...
+End If
+
+If Name.IndexOf("ish") &gt; 0 Then ' Noncompliant
+  ' ...
+End If
+
+If Name.IndexOf("ae") &gt; 0 Then ' Noncompliant
+  ' ...
+End If
+
+If Array.IndexOf(StringArray, Color) &gt; 0 Then ' Noncompliant
+  ' ...
+End If
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Dim Color As String = "blue"
+Dim Name As String = "ishmael"
+
+Dim Strings As New List(Of String)
+Strings.Add(Color)
+Strings.Add(Name)
+Dim StringArray As String() = Strings.ToArray()
+
+If Strings.IndexOf(Color) &gt; -1 Then
+  ' ...
+End If
+
+If Name.IndexOf("ish") &gt;= 0 Then
+  ' ...
+End If
+
+If Name.Contains("ae") Then
+  ' ...
+End If
+
+If Array.IndexOf(StringArray, Color) &gt;= 0 Then
+  ' ...
+End If
+</pre>
+

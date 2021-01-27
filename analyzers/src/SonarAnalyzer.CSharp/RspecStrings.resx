@@ -5126,7 +5126,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S2692_Description" xml:space="preserve">
-    <value>Most checks against an IndexOf value compare it with -1 because 0 is a valid index. Any checks which look for values &gt;0 ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a string, List, or an array, consider using the Contains method instead.</value>
+    <value>Most checks against an IndexOf value compare it with -1 because 0 is a valid index. Any checks which look for values &gt; 0 ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a string, List, or an array, consider using the Contains method instead.</value>
   </data>
   <data name="S2692_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>

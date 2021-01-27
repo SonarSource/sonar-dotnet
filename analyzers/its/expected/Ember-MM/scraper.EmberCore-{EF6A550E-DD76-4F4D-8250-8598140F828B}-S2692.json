@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  205,
+"startColumn":  85,
+"endLine":  205,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  320,
+"startColumn":  83,
+"endLine":  320,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  320,
+"startColumn":  142,
+"endLine":  320,
+"endColumn":  145
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  347,
+"startColumn":  66,
+"endLine":  347,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  362,
+"startColumn":  63,
+"endLine":  362,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  382,
+"startColumn":  62,
+"endLine":  382,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  436,
+"startColumn":  79,
+"endLine":  436,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  439,
+"startColumn":  75,
+"endLine":  439,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  93,
+"endLine":  180,
+"endColumn":  96
+}
+}
+}
+]
+}

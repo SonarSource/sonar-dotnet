@@ -25,9 +25,11 @@ namespace SonarAnalyzer.Helpers
     internal sealed class VisualBasicFacade : ILanguageFacade
     {
         private static readonly Lazy<VisualBasicFacade> Singleton = new Lazy<VisualBasicFacade>(() => new VisualBasicFacade());
+        private static readonly Lazy<IExpressionNumericConverter> NumericConverter = new Lazy<IExpressionNumericConverter>(() => new VisualBasicExpressionNumericConverter());
 
         public StringComparison NameComparison => StringComparison.OrdinalIgnoreCase;
         public GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        public IExpressionNumericConverter ExpressionNumericConverter => NumericConverter.Value;
 
         public static VisualBasicFacade Instance => Singleton.Value;
 

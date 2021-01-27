@@ -38,6 +38,8 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3052";
         private const string MessageFormat = "Remove this initialization to '{0}', the compiler will do that for you.";
 
+        private static readonly CSharpExpressionNumericConverter ExpressionNumericConverter = new CSharpExpressionNumericConverter();
+
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 

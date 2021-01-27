@@ -26,5 +26,6 @@ namespace SonarAnalyzer.Helpers
     {
         StringComparison NameComparison { get; }
         GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        IExpressionNumericConverter ExpressionNumericConverter { get; }
     }
 }

@@ -18,24 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Helpers
 {
-    [TestClass]
-    public class IndexOfCheckAgainstZeroTest
+    public interface IExpressionNumericConverter
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void IndexOfCheckAgainstZero_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\IndexOfCheckAgainstZero.cs", new CS.IndexOfCheckAgainstZero());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void IndexOfCheckAgainstZero_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\IndexOfCheckAgainstZero.vb", new VB.IndexOfCheckAgainstZero());
+        bool TryGetConstantIntValue(SyntaxNode expression, out int value);
+        bool TryGetConstantDoubleValue(SyntaxNode expression, out double value);
     }
 }
