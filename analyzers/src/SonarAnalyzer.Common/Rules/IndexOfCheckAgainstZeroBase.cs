@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S2692";
         private const string MessageFormat = "0 is a valid index, but this check ignores it.";
 
-        private protected static readonly string[] InvalidMethods =
+        private static readonly string[] TrackedMethods =
             {
                 "IndexOf",
                 "IndexOfAny",
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
                 "LastIndexOfAny"
             };
 
-        private protected static readonly ImmutableArray<KnownType> CheckedTypes =
+        private static readonly ImmutableArray<KnownType> CheckedTypes =
             ImmutableArray.Create(
                 KnownType.System_Array,
                 KnownType.System_Collections_Generic_IList_T,
@@ -93,11 +93,8 @@ namespace SonarAnalyzer.Rules
         private bool IsInvalidComparison(SyntaxNode constantExpression, SyntaxNode methodInvocationExpression, SemanticModel semanticModel) =>
             LanguageFacade.ExpressionNumericConverter.TryGetConstantIntValue(constantExpression, out var constValue)
             && constValue == 0
-            && IsSensitiveCall(methodInvocationExpression, semanticModel);
-
-        private bool IsSensitiveCall(SyntaxNode call, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(call).Symbol is IMethodSymbol indexOfSymbol
-            && InvalidMethods.Any(x => x.Equals(indexOfSymbol.Name, LanguageFacade.NameComparison))
+            && semanticModel.GetSymbolInfo(methodInvocationExpression).Symbol is IMethodSymbol indexOfSymbol
+            && TrackedMethods.Any(x => x.Equals(indexOfSymbol.Name, LanguageFacade.NameComparison))
             && indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes);
     }
 }
