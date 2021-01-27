@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Helpers.Facade
                 : node switch
                 {
                     InvocationExpressionSyntax invocation => invocation.Expression,
+                    LockStatementSyntax @lock => @lock.Expression,
                     _ => throw Unexpected(node)
                 };
     }

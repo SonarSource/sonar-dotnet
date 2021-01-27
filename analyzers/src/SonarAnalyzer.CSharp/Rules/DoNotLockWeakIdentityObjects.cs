@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -29,14 +28,11 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotLockWeakIdentityObjects : DoNotLockWeakIdentityObjectsBase<SyntaxKind, LockStatementSyntax>
+    public sealed class DoNotLockWeakIdentityObjects : DoNotLockWeakIdentityObjectsBase<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.LockStatement;
 
         public DoNotLockWeakIdentityObjects() : base(RspecStrings.ResourceManager) { }
-
-        protected override SyntaxNode LockExpression(LockStatementSyntax node) =>
-            node.Expression;
     }
 }

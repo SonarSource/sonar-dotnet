@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -29,14 +28,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotLockWeakIdentityObjects : DoNotLockWeakIdentityObjectsBase<SyntaxKind, SyncLockStatementSyntax>
+    public sealed class DoNotLockWeakIdentityObjects : DoNotLockWeakIdentityObjectsBase<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.SyncLockStatement;
 
         public DoNotLockWeakIdentityObjects() : base(RspecStrings.ResourceManager) { }
-
-        protected override SyntaxNode LockExpression(SyncLockStatementSyntax node) =>
-            node.Expression;
     }
 }
