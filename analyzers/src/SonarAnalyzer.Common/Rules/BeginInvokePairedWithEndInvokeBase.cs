@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
                     && IsDelegate(methodSymbol)
                     && methodSymbol.Parameters.SingleOrDefault(x => x.Name == "callback") is { } parameter
                     && LanguageFacade.MethodParameterLookup(invocation, methodSymbol).TryGetNonParamsSyntax(parameter, out var callbackArg)
-                    && !CallbackMayContainEndInvoke(callbackArg, c.SemanticModel)
+                    && IsInvalidCallback(callbackArg, c.SemanticModel)
                     && !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, MethodCallIdentifier(invocation).GetLocation()));
@@ -72,34 +72,35 @@ namespace SonarAnalyzer.Rules
             methodSymbol.ReceiverType.Is(TypeKind.Delegate);
 
         /// <returns>
-        /// - true if callback code contains "EndInvoke" or callback code has not been resolved.
-        /// - false if callback code has been resolved and does not contain "EndInvoke".
+        /// - true if callback code has been resolved and does not contain "EndInvoke".
+        /// - false if callback code contains "EndInvoke" or callback code has not been resolved.
         /// </returns>
-        private bool CallbackMayContainEndInvoke(SyntaxNode callbackArg, SemanticModel semanticModel)
-        {
-            var callback = FindCallback(callbackArg, semanticModel);
-            //FIXME: Revert?
-            if (IsNullLiteral(callback))
-            {
-                return false;
-            }
-            return callback == null
-                || !ParentDeclarationKinds.Contains(Kind(callback))
-                || ContainsEndInvoke(callback, semanticModel);
-        }
+        private bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel semanticModel) =>
+            FindCallback(callbackArg, semanticModel) is { } callback
+            && (IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, semanticModel));
 
         private bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
         {
-            var parentContext = node.AncestorsAndSelf().FirstOrDefault(ancestor => ParentDeclarationKinds.Contains(Kind(ancestor)));
-            return ContainsEndInvoke(parentContext, semantic);
+            var parentContext = node.AncestorsAndSelf().FirstOrDefault(IsParentDeclaration);
+            return IsParentDeclarationWithEndInvoke(parentContext, semantic);
         }
 
-        private bool ContainsEndInvoke(SyntaxNode node, SemanticModel semanticModel)
+        private bool IsParentDeclarationWithEndInvoke(SyntaxNode node, SemanticModel semanticModel)
         {
-            var context = new EndInvokeContext(node, semanticModel);
-            VisitInvocation(context);
-            return context.ContainsEndInvoke;
+            if (IsParentDeclaration(node))
+            {
+                var context = new EndInvokeContext(node, semanticModel);
+                VisitInvocation(context);
+                return context.ContainsEndInvoke;
+            }
+            else
+            {
+                return false;
+            }
         }
+
+        private bool IsParentDeclaration(SyntaxNode node) =>
+            ParentDeclarationKinds.Contains(Kind(node));
 
         protected class EndInvokeContext
         {
