@@ -40,17 +40,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        internal override ImmutableArray<KnownType> AlgorithmTypes { get; } =
-            ImmutableArray.Create(
-                KnownType.System_Security_Cryptography_SHA1,
-                KnownType.System_Security_Cryptography_MD5,
-                KnownType.System_Security_Cryptography_DSA,
-                KnownType.System_Security_Cryptography_RIPEMD160,
-                KnownType.System_Security_Cryptography_HMACSHA1,
-                KnownType.System_Security_Cryptography_HMACMD5,
-                KnownType.System_Security_Cryptography_HMACRIPEMD160
-            );
-
         protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } =
             new HashSet<string>
             {
@@ -68,5 +57,16 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         protected override ISet<string> FactoryParameterNames { get; } = new HashSet<string> { "SHA1", "MD5", "DSA", "HMACMD5", "HMACRIPEMD160", "RIPEMD160", "RIPEMD160Managed" };
+
+        private protected override ImmutableArray<KnownType> AlgorithmTypes { get; } =
+            ImmutableArray.Create(
+                KnownType.System_Security_Cryptography_SHA1,
+                KnownType.System_Security_Cryptography_MD5,
+                KnownType.System_Security_Cryptography_DSA,
+                KnownType.System_Security_Cryptography_RIPEMD160,
+                KnownType.System_Security_Cryptography_HMACSHA1,
+                KnownType.System_Security_Cryptography_HMACMD5,
+                KnownType.System_Security_Cryptography_HMACRIPEMD160
+            );
     }
 }

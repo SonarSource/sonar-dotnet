@@ -19,54 +19,25 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    public abstract class DoNotCallInsecureSecurityAlgorithm : SonarDiagnosticAnalyzer
+    public abstract class DoNotCallInsecureSecurityAlgorithm : DoNotCallInsecureSecurityAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
     {
-        internal abstract ImmutableArray<KnownType> AlgorithmTypes { get; }
-        protected abstract ISet<string> AlgorithmParameterlessFactoryMethods { get; }
-        protected abstract ISet<string> AlgorithmParameterizedFactoryMethods { get; }
-        protected abstract ISet<string> FactoryParameterNames { get; }
+        protected sealed override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
+        protected sealed override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
+        protected sealed override SyntaxKind StringLiteral => SyntaxKind.StringLiteralExpression;
+        protected sealed override ILanguageFacade LanguageFacade => CSharpFacade.Instance;
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected sealed override bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocationExpression)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckObjectCreation,
-                SyntaxKind.ObjectCreationExpression);
+            var argumentList = invocationExpression.ArgumentList;
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckInvocation,
-                SyntaxKind.InvocationExpression);
-        }
-
-        private void CheckInvocation(SyntaxNodeAnalysisContext context)
-        {
-            var invocation = (InvocationExpressionSyntax)context.Node;
-
-            if (!(context.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol methodSymbol))
-            {
-                return;
-            }
-
-            if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes)
-                || IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation.ArgumentList))
-            {
-                ReportAllDiagnostics(context, invocation.GetLocation());
-            }
-        }
-
-        private bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol,
-            ArgumentListSyntax argumentList)
-        {
             if (argumentList == null || methodSymbol.ContainingType == null)
             {
                 return false;
@@ -93,28 +64,10 @@ namespace SonarAnalyzer.Rules.CSharp
             return FactoryParameterNames.Any(alg => alg.Equals(literalExpressionSyntax.Token.ValueText, StringComparison.Ordinal));
         }
 
-        private void CheckObjectCreation(SyntaxNodeAnalysisContext context)
-        {
-            var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
+        protected sealed override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
+            invocation.Expression;
 
-            var typeInfo = context.SemanticModel.GetTypeInfo(objectCreation);
-            if (typeInfo.Type == null || typeInfo.Type is IErrorTypeSymbol)
-            {
-                return;
-            }
-
-            if (typeInfo.Type.DerivesFromAny(AlgorithmTypes))
-            {
-                ReportAllDiagnostics(context, objectCreation.Type.GetLocation());
-            }
-        }
-
-        private void ReportAllDiagnostics(SyntaxNodeAnalysisContext context, Location location)
-        {
-            foreach (var supportedDiagnostic in SupportedDiagnostics)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(supportedDiagnostic, location));
-            }
-        }
+        protected sealed override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation.Type.GetLocation();
     }
 }

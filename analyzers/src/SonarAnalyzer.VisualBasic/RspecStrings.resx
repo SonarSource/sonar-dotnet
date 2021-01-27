@@ -5034,6 +5034,33 @@
   <data name="S5542_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
   </data>
+  <data name="S5547_Category" xml:space="preserve">
+    <value>Critical Vulnerability</value>
+  </data>
+  <data name="S5547_Description" xml:space="preserve">
+    <value>Strong cipher algorithms are cryptographic systems resistant to cryptanalysis, they are not vulnerable to well-known attacks like brute force attacks for example.</value>
+  </data>
+  <data name="S5547_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S5547_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S5547_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S5547_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S5547_Tags" xml:space="preserve">
+    <value>cwe,privacy,owasp-a6,sans-top25-porous,owasp-a3</value>
+  </data>
+  <data name="S5547_Title" xml:space="preserve">
+    <value>Cipher algorithms should be robust</value>
+  </data>
+  <data name="S5547_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S5659_Category" xml:space="preserve">
     <value>Critical Vulnerability</value>
   </data>

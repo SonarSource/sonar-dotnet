@@ -45,14 +45,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2278, S5547);
 
-        internal override ImmutableArray<KnownType> AlgorithmTypes { get; } =
-            ImmutableArray.Create(
-                KnownType.System_Security_Cryptography_DES,
-                KnownType.System_Security_Cryptography_TripleDES,
-                KnownType.System_Security_Cryptography_RC2,
-                KnownType.Org_BouncyCastle_Crypto_Engines_AesFastEngine
-            );
-
         protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } = new HashSet<string>();
 
         protected override ISet<string> AlgorithmParameterizedFactoryMethods { get; } =
@@ -63,5 +55,13 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         protected override ISet<string> FactoryParameterNames { get; } = new HashSet<string> { "DES", "3DES", "TripleDES", "RC2" };
+
+        private protected override ImmutableArray<KnownType> AlgorithmTypes { get; } =
+            ImmutableArray.Create(
+                KnownType.System_Security_Cryptography_DES,
+                KnownType.System_Security_Cryptography_TripleDES,
+                KnownType.System_Security_Cryptography_RC2,
+                KnownType.Org_BouncyCastle_Crypto_Engines_AesFastEngine
+        );
     }
 }

@@ -25,6 +25,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,10 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void InsecureEncryptionAlgorithm() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.cs",
-                                    new CS.InsecureEncryptionAlgorithm(),
-                                    GetAdditionalReferences());
+        public void InsecureEncryptionAlgorithm_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
 #if NET
         [TestMethod]
@@ -47,8 +46,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                       GetAdditionalReferences());
 #endif
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void InsecureEncryptionAlgorithm_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.vb", new VB.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.SystemSecurityCryptography
-                .Concat(NuGetMetadataReference.BouncyCastle());
+            MetadataReferenceFacade.SystemSecurityCryptography.Concat(NuGetMetadataReference.BouncyCastle());
     }
 }
