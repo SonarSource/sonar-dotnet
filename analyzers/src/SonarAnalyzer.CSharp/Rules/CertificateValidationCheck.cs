@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public CertificateValidationCheck() : base(RspecStrings.ResourceManager) { }
 
-        internal override AbstractMethodParameterLookup<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
+        internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
             argumentListNode switch
             {
                 InvocationExpressionSyntax invocation => new CSharpMethodParameterLookup(invocation.ArgumentList, method),
@@ -67,12 +67,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c => CheckConstructorParameterSyntax(c), SyntaxKind.ObjectCreationExpression);
         }
 
-        protected override Location ArgumentLocation(ArgumentSyntax argument) =>
+        protected override Location ExpressionLocation(SyntaxNode expression) =>
             // For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
-            ((argument.Expression is ParenthesizedLambdaExpressionSyntax lambda) ? (SyntaxNode)lambda.ParameterList : argument).GetLocation();
-
-        protected override ExpressionSyntax ArgumentExpression(ArgumentSyntax argument) =>
-            argument.Expression;
+            ((expression is ParenthesizedLambdaExpressionSyntax lambda) ? (SyntaxNode)lambda.ParameterList : expression).GetLocation();
 
         protected override void SplitAssignment(AssignmentExpressionSyntax assignment, out IdentifierNameSyntax leftIdentifier, out ExpressionSyntax right)
         {
@@ -134,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxNode LocalVariableScope(VariableDeclaratorSyntax variable) =>
             variable.FirstAncestorOrSelf<BlockSyntax>();
 
-        protected override SyntaxNode ExtractArgumentExpressionNode(ExpressionSyntax expression) =>
+        protected override SyntaxNode ExtractArgumentExpressionNode(SyntaxNode expression) =>
             expression.RemoveParentheses();
 
         protected override SyntaxNode SyntaxFromReference(SyntaxReference reference) =>

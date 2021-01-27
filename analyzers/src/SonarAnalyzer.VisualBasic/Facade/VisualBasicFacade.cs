@@ -19,6 +19,8 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -34,5 +36,8 @@ namespace SonarAnalyzer.Helpers
         public static VisualBasicFacade Instance => Singleton.Value;
 
         private VisualBasicFacade() { }
+
+        public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
+            new VisualBasicMethodParameterLookup((InvocationExpressionSyntax)invocation, methodSymbol);
     }
 }

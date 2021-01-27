@@ -257,14 +257,14 @@ namespace SonarAnalyzer.Helpers
         ///
         /// There can be zero, one or more results based on parameter type (Optional or ParamArray/params).
         /// </summary>
-        public static ImmutableArray<ExpressionSyntax> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
+        public static ImmutableArray<SyntaxNode> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
         {
             var methodParameterLookup = new VisualBasicMethodParameterLookup(argumentList, semanticModel);
-            if (methodParameterLookup.TryGetSyntax(parameterName, out var argumentSyntax))
+            if (methodParameterLookup.TryGetSyntax(parameterName, out var expressions))
             {
-                return argumentSyntax.Select(x => x.GetExpression()).ToImmutableArray();
+                return expressions;
             }
-            return ImmutableArray<ExpressionSyntax>.Empty;
+            return ImmutableArray<SyntaxNode>.Empty;
         }
     }
 }

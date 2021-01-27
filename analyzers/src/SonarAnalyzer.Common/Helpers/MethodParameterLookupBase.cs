@@ -25,17 +25,25 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
+    public interface IMethodParameterLookup
+    {
+        bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions);
+        bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions);
+        bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression);
+    }
+
     // ToDo: this should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
-    internal abstract class AbstractMethodParameterLookup<TArgumentSyntax>
+    internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodParameterLookup
         where TArgumentSyntax : SyntaxNode
     {
         private readonly SeparatedSyntaxList<TArgumentSyntax>? argumentList;
 
         protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
+        protected abstract SyntaxNode Expression(TArgumentSyntax argument);
 
         public IMethodSymbol MethodSymbol { get; }
 
-        protected AbstractMethodParameterLookup(SeparatedSyntaxList<TArgumentSyntax>? argumentList, IMethodSymbol methodSymbol)
+        protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax>? argumentList, IMethodSymbol methodSymbol)
         {
             this.argumentList = argumentList;
             MethodSymbol = methodSymbol;
@@ -77,8 +85,8 @@ namespace SonarAnalyzer.Helpers
         /// There could be zero or one result for optional parameters.
         /// There will be single result for normal parameters.
         /// </summary>
-        public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<TArgumentSyntax> arguments) =>
-            TryGetSyntax(parameter.Name, out arguments);
+        public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions) =>
+            TryGetSyntax(parameter.Name, out expressions);
 
         /// <summary>
         /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
@@ -86,10 +94,10 @@ namespace SonarAnalyzer.Helpers
         /// There could be multiple syntaxes for ParamArray/params.
         /// There could be zero or one result for optional parameters.
         /// There will be single result for normal parameters.
-        public bool TryGetSyntax(string parameterName, out ImmutableArray<TArgumentSyntax> arguments)
+        public bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions)
         {
-            arguments = GetAllArgumentParameterMappings().Where(x => x.Symbol.Name == parameterName).Select(x => x.SyntaxNode).ToImmutableArray();
-            return !arguments.IsEmpty;
+            expressions = GetAllArgumentParameterMappings().Where(x => x.Symbol.Name == parameterName).Select(x => Expression(x.SyntaxNode)).ToImmutableArray();
+            return !expressions.IsEmpty;
         }
 
         /// <summary>
@@ -97,7 +105,7 @@ namespace SonarAnalyzer.Helpers
         ///
         /// Caller must ensure that given parameter is not ParamArray/params.
         /// </summary>
-        public bool TryGetNonParamsSyntax(IParameterSymbol parameter, out TArgumentSyntax argument)
+        public bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression)
         {
             if (parameter.IsParams)
             {
@@ -105,10 +113,10 @@ namespace SonarAnalyzer.Helpers
             }
             if (TryGetSyntax(parameter, out var all))
             {
-                argument = all.Single();
+                expression = all.Single();
                 return true;
             }
-            argument = null;
+            expression = null;
             return false;
         }
 

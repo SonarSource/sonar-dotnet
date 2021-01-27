@@ -19,6 +19,8 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -34,5 +36,8 @@ namespace SonarAnalyzer.Helpers
         public static CSharpFacade Instance => Singleton.Value;
 
         private CSharpFacade() { }
+
+        public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
+            new CSharpMethodParameterLookup((InvocationExpressionSyntax)invocation, methodSymbol);
     }
 }

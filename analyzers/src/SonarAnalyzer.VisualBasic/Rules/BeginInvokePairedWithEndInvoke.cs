@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -31,19 +32,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase
+    public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase<SyntaxKind, InvocationExpressionSyntax>
     {
-        public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
+        protected override ISet<SyntaxKind> ParentDeclarationKinds => throw new System.NotImplementedException();
+        protected override void VisitInvocation(EndInvokeContext context) => throw new System.NotImplementedException();
+        protected override SyntaxKind Kind(SyntaxNode node) => throw new System.NotImplementedException();
+        protected override ILanguageFacade LanguageFacade => throw new System.NotImplementedException();
+        protected override SyntaxKind InvocationExpressionKind => throw new System.NotImplementedException();
+        protected override SyntaxToken MethodCallIdentifier(InvocationExpressionSyntax invocation) => throw new System.NotImplementedException();
+        protected override SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel) => throw new System.NotImplementedException();
+        protected override bool IsNullLiteral(SyntaxNode node) => throw new System.NotImplementedException();
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
+        public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
     }
 }

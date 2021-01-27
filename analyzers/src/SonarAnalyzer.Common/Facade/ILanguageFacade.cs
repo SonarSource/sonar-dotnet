@@ -19,6 +19,7 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -27,5 +28,7 @@ namespace SonarAnalyzer.Helpers
         StringComparison NameComparison { get; }
         GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         IExpressionNumericConverter ExpressionNumericConverter { get; }
+
+        IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
     }
 }

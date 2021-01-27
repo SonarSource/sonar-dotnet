@@ -401,12 +401,12 @@ namespace SonarAnalyzer.Helpers
         ///
         /// There can be zero, one or more results based on parameter type (Optional or ParamArray/params).
         /// </summary>
-        public static ImmutableArray<ExpressionSyntax> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
+        public static ImmutableArray<SyntaxNode> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
         {
             var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, semanticModel);
-            return methodParameterLookup.TryGetSyntax(parameterName, out var argumentSyntax)
-                ? argumentSyntax.Select(x => x.Expression).ToImmutableArray()
-                : ImmutableArray<ExpressionSyntax>.Empty;
+            return methodParameterLookup.TryGetSyntax(parameterName, out var expressions)
+                ? expressions
+                : ImmutableArray<SyntaxNode>.Empty;
         }
 
         // (arg, b) = something

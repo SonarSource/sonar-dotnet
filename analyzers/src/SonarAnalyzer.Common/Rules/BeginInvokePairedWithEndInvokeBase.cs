@@ -18,23 +18,115 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class BeginInvokePairedWithEndInvokeBase : SonarDiagnosticAnalyzer
+    public abstract class BeginInvokePairedWithEndInvokeBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
+        where TInvocationExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4583";
         private const string MessageFormat = "Pair this \"BeginInvoke\" with an \"EndInvoke\".";
+        private const string BeginInvoke = "BeginInvoke";
+        private const string EndInvoke = "EndInvoke";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        private readonly DiagnosticDescriptor rule;
 
-        protected DiagnosticDescriptor Rule { get; }
+        protected abstract ILanguageFacade LanguageFacade { get; }
+        protected abstract TSyntaxKind InvocationExpressionKind { get; }
+        protected abstract ISet<TSyntaxKind> ParentDeclarationKinds { get; }
+        protected abstract void VisitInvocation(EndInvokeContext context);
+        protected abstract TSyntaxKind Kind(SyntaxNode node);
+        protected abstract bool IsNullLiteral(SyntaxNode node);
+        protected abstract SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel);
+        protected abstract SyntaxToken MethodCallIdentifier(TInvocationExpressionSyntax invocation);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected BeginInvokePairedWithEndInvokeBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(LanguageFacade.GeneratedCodeRecognizer, c =>
+            {
+                var invocation = (TInvocationExpressionSyntax)c.Node;
+                if (true//FIXME: invocation.Expression.ToStringContains(BeginInvoke)
+                    && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                    && methodSymbol.Name == BeginInvoke
+                    && IsDelegate(methodSymbol)
+                    && methodSymbol.Parameters.SingleOrDefault(x => x.Name == "callback") is { } parameter
+                    && LanguageFacade.MethodParameterLookup(invocation, methodSymbol).TryGetNonParamsSyntax(parameter, out var callbackArg)
+                    && !CallbackMayContainEndInvoke(callbackArg, c.SemanticModel)
+                    && !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, MethodCallIdentifier(invocation).GetLocation()));
+                }
+            }, InvocationExpressionKind);
+
+        protected static bool IsDelegate(IMethodSymbol methodSymbol) =>
+            methodSymbol.ReceiverType.Is(TypeKind.Delegate);
+
+        /// <returns>
+        /// - true if callback code contains "EndInvoke" or callback code has not been resolved.
+        /// - false if callback code has been resolved and does not contain "EndInvoke".
+        /// </returns>
+        private bool CallbackMayContainEndInvoke(SyntaxNode callbackArg, SemanticModel semanticModel)
+        {
+            var callback = FindCallback(callbackArg, semanticModel);
+            //FIXME: Revert?
+            if (IsNullLiteral(callback))
+            {
+                return false;
+            }
+            return callback == null
+                || !ParentDeclarationKinds.Contains(Kind(callback))
+                || ContainsEndInvoke(callback, semanticModel);
+        }
+
+        private bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
+        {
+            var parentContext = node.AncestorsAndSelf().FirstOrDefault(ancestor => ParentDeclarationKinds.Contains(Kind(ancestor)));
+            return ContainsEndInvoke(parentContext, semantic);
+        }
+
+        private bool ContainsEndInvoke(SyntaxNode node, SemanticModel semanticModel)
+        {
+            var context = new EndInvokeContext(node, semanticModel);
+            VisitInvocation(context);
+            return context.ContainsEndInvoke;
+        }
+
+        protected class EndInvokeContext
+        {
+            private readonly SemanticModel semanticModel;
+
+            public SyntaxNode Root { get; }
+            public bool ContainsEndInvoke { get; private set; }
+
+            public EndInvokeContext(SyntaxNode root, SemanticModel semanticModel)
+            {
+                Root = root;
+                this.semanticModel = semanticModel;
+            }
+
+            public bool VisitInvocationExpression(SyntaxNode node)
+            {
+                if (
+                    true //FIXME: Doresit node.Expression.ToStringContains(EndInvoke)
+                    && semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
+                    && methodSymbol.Name == EndInvoke
+                    && IsDelegate(methodSymbol))
+                {
+                    ContainsEndInvoke = true;
+                    return false;   // Stop visiting
+                }
+                return true;
+            }
+        }
     }
 }

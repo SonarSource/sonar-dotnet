@@ -23,19 +23,21 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal class VisualBasicMethodParameterLookup : AbstractMethodParameterLookup<ArgumentSyntax>
+    internal class VisualBasicMethodParameterLookup : MethodParameterLookupBase<ArgumentSyntax>
     {
         public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
-            : base(argumentList?.Arguments, methodSymbol)
-        {
-        }
+            : base(argumentList?.Arguments, methodSymbol) { }
+
+        public VisualBasicMethodParameterLookup(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
+            : this(invocation.ArgumentList, methodSymbol) { }
 
         public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
-            : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol)
-        {
-        }
+            : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol) { }
 
         protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
             (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
+
+        protected override SyntaxNode Expression(ArgumentSyntax argument) =>
+            argument.GetExpression();
     }
 }

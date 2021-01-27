@@ -23,22 +23,22 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal class CSharpMethodParameterLookup : AbstractMethodParameterLookup<ArgumentSyntax>
+    internal class CSharpMethodParameterLookup : MethodParameterLookupBase<ArgumentSyntax>
     {
-        public CSharpMethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel) :
-            this(invocation.ArgumentList, semanticModel)
-        {
-        }
+        public CSharpMethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+            : this(invocation.ArgumentList, semanticModel) { }
+
+        public CSharpMethodParameterLookup(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
+            : this(invocation.ArgumentList, methodSymbol) { }
 
         public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
-            : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol)
-        {
-        }
+            : base(argumentList?.Arguments, argumentList == null ? null : semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol) { }
 
         public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
-            : base(argumentList?.Arguments, methodSymbol)
-        {
-        }
+            : base(argumentList?.Arguments, methodSymbol) { }
+
+        protected override SyntaxNode Expression(ArgumentSyntax argument) =>
+            argument.Expression;
 
         protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
             argument.NameColon?.Name.Identifier;
