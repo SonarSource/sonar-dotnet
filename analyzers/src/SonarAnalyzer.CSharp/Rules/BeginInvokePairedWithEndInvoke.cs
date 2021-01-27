@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase<SyntaxKind, InvocationExpressionSyntax>
     {
-        protected override ILanguageFacade LanguageFacade => CSharpFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind InvocationExpressionKind { get; } = SyntaxKind.InvocationExpression;
         protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
         {
@@ -57,17 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
 
-        protected override SyntaxKind Kind(SyntaxNode node) =>
-            node.Kind();
-
-        protected override SyntaxToken MethodCallIdentifier(InvocationExpressionSyntax invocation) =>
-            invocation.GetMethodCallIdentifier().Value;
-
         protected override void VisitInvocation(EndInvokeContext context) =>
             new InvocationWalker(context).SafeVisit(context.Root);
-
-        protected override bool IsNullLiteral(SyntaxNode node) =>
-            node.IsNullLiteral();
 
         /// <summary>
         /// This method is looking for the callback code which can be:

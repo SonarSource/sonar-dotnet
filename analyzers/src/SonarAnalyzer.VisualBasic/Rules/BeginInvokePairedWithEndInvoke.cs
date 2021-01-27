@@ -36,12 +36,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ISet<SyntaxKind> ParentDeclarationKinds => throw new System.NotImplementedException();
         protected override void VisitInvocation(EndInvokeContext context) => throw new System.NotImplementedException();
-        protected override SyntaxKind Kind(SyntaxNode node) => throw new System.NotImplementedException();
-        protected override ILanguageFacade LanguageFacade => throw new System.NotImplementedException();
+        protected override ILanguageFacade<SyntaxKind> Language => throw new System.NotImplementedException();
         protected override SyntaxKind InvocationExpressionKind => throw new System.NotImplementedException();
-        protected override SyntaxToken MethodCallIdentifier(InvocationExpressionSyntax invocation) => throw new System.NotImplementedException();
         protected override SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel) => throw new System.NotImplementedException();
-        protected override bool IsNullLiteral(SyntaxNode node) => throw new System.NotImplementedException();
 
         public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
     }

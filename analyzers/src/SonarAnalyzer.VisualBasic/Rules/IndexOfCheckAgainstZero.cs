@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class IndexOfCheckAgainstZero : IndexOfCheckAgainstZeroBase<SyntaxKind, BinaryExpressionSyntax>
     {
-        protected override ILanguageFacade LanguageFacade { get; } = VisualBasicFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind LessThanExpression => SyntaxKind.LessThanExpression;
         protected override SyntaxKind GreaterThanExpression => SyntaxKind.GreaterThanExpression;
 

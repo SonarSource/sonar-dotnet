@@ -20,18 +20,22 @@
 
 using System;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Helpers.Facade;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal sealed class VisualBasicFacade : ILanguageFacade
+    internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
     {
         private static readonly Lazy<VisualBasicFacade> Singleton = new Lazy<VisualBasicFacade>(() => new VisualBasicFacade());
-        private static readonly Lazy<IExpressionNumericConverter> NumericConverter = new Lazy<IExpressionNumericConverter>(() => new VisualBasicExpressionNumericConverter());
+        private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new Lazy<IExpressionNumericConverter>(() => new VisualBasicExpressionNumericConverter());
+        private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new Lazy<SyntaxFacade<SyntaxKind>>(() => new VisualBasicSyntaxFacade());
 
         public StringComparison NameComparison => StringComparison.OrdinalIgnoreCase;
         public GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
-        public IExpressionNumericConverter ExpressionNumericConverter => NumericConverter.Value;
+        public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
+        public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
 
         public static VisualBasicFacade Instance => Singleton.Value;
 

@@ -20,17 +20,27 @@
 
 using System;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Facade
 {
-    public interface ILanguageFacade<TSyntaxKind>
-        where TSyntaxKind : struct
+    internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     {
-        StringComparison NameComparison { get; }
-        GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        IExpressionNumericConverter ExpressionNumericConverter { get; }
-        SyntaxFacade<TSyntaxKind> Syntax { get; }
+        public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
 
-        IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
+        public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
+
+        public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
+            invocation == null ? null : TryCast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
+
+        public override SyntaxNode NodeExpression(SyntaxNode node) =>
+            node == null
+                ? null
+                : node switch
+                {
+                    InvocationExpressionSyntax invocation => invocation.Expression,
+                    _ => throw Unexpected(node)
+                };
     }
 }

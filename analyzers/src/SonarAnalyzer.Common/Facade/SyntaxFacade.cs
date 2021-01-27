@@ -23,14 +23,20 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    public interface ILanguageFacade<TSyntaxKind>
+    public abstract class SyntaxFacade<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        StringComparison NameComparison { get; }
-        GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        IExpressionNumericConverter ExpressionNumericConverter { get; }
-        SyntaxFacade<TSyntaxKind> Syntax { get; }
+        public abstract TSyntaxKind Kind(SyntaxNode node);
+        public abstract bool IsNullLiteral(SyntaxNode node);
 
-        IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
+        public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
+        public abstract SyntaxNode NodeExpression(SyntaxNode node);
+
+        protected static T TryCast<T>(SyntaxNode node) where T : SyntaxNode =>
+            node as T ?? throw Unexpected(node);
+
+        protected static Exception Unexpected(SyntaxNode node) =>
+            new InvalidOperationException($"Unexpected node: {node.GetType().Name}");
+
     }
 }

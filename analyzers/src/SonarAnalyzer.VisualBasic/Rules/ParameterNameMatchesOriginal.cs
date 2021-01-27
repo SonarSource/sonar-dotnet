@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         public ParameterNameMatchesOriginal() : base(RspecStrings.ResourceManager) { }
 
-        protected override ILanguageFacade LanguageFacade => VisualBasicFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.SubBlock, SyntaxKind.FunctionBlock };
 
         protected override IEnumerable<SyntaxToken> ParameterIdentifiers(MethodBlockBaseSyntax method) =>

@@ -37,14 +37,11 @@ namespace SonarAnalyzer.Rules
 
         private readonly DiagnosticDescriptor rule;
 
-        protected abstract ILanguageFacade LanguageFacade { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind InvocationExpressionKind { get; }
         protected abstract ISet<TSyntaxKind> ParentDeclarationKinds { get; }
         protected abstract void VisitInvocation(EndInvokeContext context);
-        protected abstract TSyntaxKind Kind(SyntaxNode node);
-        protected abstract bool IsNullLiteral(SyntaxNode node);
         protected abstract SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel);
-        protected abstract SyntaxToken MethodCallIdentifier(TInvocationExpressionSyntax invocation);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -52,19 +49,19 @@ namespace SonarAnalyzer.Rules
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(LanguageFacade.GeneratedCodeRecognizer, c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
             {
                 var invocation = (TInvocationExpressionSyntax)c.Node;
-                if (true//FIXME: invocation.Expression.ToStringContains(BeginInvoke)
+                if (Language.Syntax.NodeExpression(invocation).ToStringContains(BeginInvoke)
                     && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                     && methodSymbol.Name == BeginInvoke
                     && IsDelegate(methodSymbol)
                     && methodSymbol.Parameters.SingleOrDefault(x => x.Name == "callback") is { } parameter
-                    && LanguageFacade.MethodParameterLookup(invocation, methodSymbol).TryGetNonParamsSyntax(parameter, out var callbackArg)
+                    && Language.MethodParameterLookup(invocation, methodSymbol).TryGetNonParamsSyntax(parameter, out var callbackArg)
                     && IsInvalidCallback(callbackArg, c.SemanticModel)
                     && !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, MethodCallIdentifier(invocation).GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Language.Syntax.InvocationIdentifier(invocation).Value.GetLocation()));
                 }
             }, InvocationExpressionKind);
 
@@ -77,7 +74,7 @@ namespace SonarAnalyzer.Rules
         /// </returns>
         private bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel semanticModel) =>
             FindCallback(callbackArg, semanticModel) is { } callback
-            && (IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, semanticModel));
+            && (Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, semanticModel));
 
         private bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
         {
@@ -89,7 +86,7 @@ namespace SonarAnalyzer.Rules
         {
             if (IsParentDeclaration(node))
             {
-                var context = new EndInvokeContext(node, semanticModel);
+                var context = new EndInvokeContext(Language.Syntax, semanticModel, node);
                 VisitInvocation(context);
                 return context.ContainsEndInvoke;
             }
@@ -100,25 +97,26 @@ namespace SonarAnalyzer.Rules
         }
 
         private bool IsParentDeclaration(SyntaxNode node) =>
-            ParentDeclarationKinds.Contains(Kind(node));
+            ParentDeclarationKinds.Contains(Language.Syntax.Kind(node));
 
         protected class EndInvokeContext
         {
+            private readonly SyntaxFacade<TSyntaxKind> syntax;
             private readonly SemanticModel semanticModel;
 
             public SyntaxNode Root { get; }
             public bool ContainsEndInvoke { get; private set; }
 
-            public EndInvokeContext(SyntaxNode root, SemanticModel semanticModel)
+            public EndInvokeContext(SyntaxFacade<TSyntaxKind> syntax, SemanticModel semanticModel, SyntaxNode root)
             {
-                Root = root;
+                this.syntax = syntax;
                 this.semanticModel = semanticModel;
+                Root = root;
             }
 
             public bool VisitInvocationExpression(SyntaxNode node)
             {
-                if (
-                    true //FIXME: Doresit node.Expression.ToStringContains(EndInvoke)
+                if (syntax.NodeExpression(node).ToStringContains(EndInvoke)
                     && semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
                     && methodSymbol.Name == EndInvoke
                     && IsDelegate(methodSymbol))

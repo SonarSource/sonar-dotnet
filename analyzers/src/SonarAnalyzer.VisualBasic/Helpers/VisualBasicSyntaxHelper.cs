@@ -91,6 +91,9 @@ namespace SonarAnalyzer.Helpers
 
         #endregion Statement
 
+        public static bool IsNothingLiteral(this SyntaxNode syntaxNode) =>
+            syntaxNode != null && syntaxNode.IsKind(SyntaxKind.NothingLiteralExpression);
+
         public static bool IsAnyKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
            syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
 

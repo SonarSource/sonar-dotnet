@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
 
         private readonly DiagnosticDescriptor rule;
 
-        protected abstract ILanguageFacade LanguageFacade { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind LessThanExpression { get; }
         protected abstract TSyntaxKind GreaterThanExpression { get; }
 
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                LanguageFacade.GeneratedCodeRecognizer,
+                Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var lessThan = (TBinaryExpressionSyntax)c.Node;
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules
                 LessThanExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                LanguageFacade.GeneratedCodeRecognizer,
+                Language.GeneratedCodeRecognizer,
                 c =>
                 {
                     var greaterThan = (TBinaryExpressionSyntax)c.Node;
@@ -91,10 +91,10 @@ namespace SonarAnalyzer.Rules
         }
 
         private bool IsInvalidComparison(SyntaxNode constantExpression, SyntaxNode methodInvocationExpression, SemanticModel semanticModel) =>
-            LanguageFacade.ExpressionNumericConverter.TryGetConstantIntValue(constantExpression, out var constValue)
+            Language.ExpressionNumericConverter.TryGetConstantIntValue(constantExpression, out var constValue)
             && constValue == 0
             && semanticModel.GetSymbolInfo(methodInvocationExpression).Symbol is IMethodSymbol indexOfSymbol
-            && TrackedMethods.Any(x => x.Equals(indexOfSymbol.Name, LanguageFacade.NameComparison))
+            && TrackedMethods.Any(x => x.Equals(indexOfSymbol.Name, Language.NameComparison))
             && indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes);
     }
 }
