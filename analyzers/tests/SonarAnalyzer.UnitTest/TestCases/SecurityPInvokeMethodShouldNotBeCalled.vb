@@ -50,9 +50,9 @@ Namespace Tests.TestCases
     End Function
 
     Public Sub DoSomething()
-        Dim Hres1 As Integer = CoSetProxyBlanket(Nothing, 0, 0, Nothing, 0, 0, IntPtr.Zero, 0) ' Noncompliant
+        Dim Hres1 As Integer = CoSetProxyBlanket(Nothing, 0, 0, Nothing, 0, 0, IntPtr.Zero, 0) ' Noncompliant {{Refactor the code to remove this use of 'CoSetProxyBlanket'.}}
         '                      ^^^^^^^^^^^^^^^^^
-        Dim Hres2 As Integer = CoInitializeSecurity(IntPtr.Zero, -1, IntPtr.Zero, IntPtr.Zero, RpcAuthnLevel.None, RpcImpLevel.Impersonate, IntPtr.Zero, EoAuthnCap.None, IntPtr.Zero) ' Noncompliant
+        Dim Hres2 As Integer = CoInitializeSecurity(IntPtr.Zero, -1, IntPtr.Zero, IntPtr.Zero, RpcAuthnLevel.None, RpcImpLevel.Impersonate, IntPtr.Zero, EoAuthnCap.None, IntPtr.Zero) ' Noncompliant {{Refactor the code to remove this use of 'CoInitializeSecurity'.}}
         '                      ^^^^^^^^^^^^^^^^^^^^
     End Sub
 
