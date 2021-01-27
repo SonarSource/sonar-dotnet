@@ -63,11 +63,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     if (invocation.Expression.ToStringContains(BeginInvoke)
-                        && GetCallbackArg(invocation) is { } callbackArg
                         && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                         && methodSymbol.Name == BeginInvoke
                         && IsDelegate(methodSymbol)
-                        && (callbackArg.IsNullLiteral() || !CallbackMayContainEndInvoke(callbackArg, c.SemanticModel))
+                        && new CSharpMethodParameterLookup(invocation.ArgumentList, methodSymbol).TryGetSyntax("callback", out var callbackArgs)
+                        && !CallbackMayContainEndInvoke(callbackArgs.Single().Expression, c.SemanticModel)
                         && !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, ((SyntaxToken)invocation.GetMethodCallIdentifier()).GetLocation()));
@@ -79,16 +79,6 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var parentContext = node.AncestorsAndSelf().FirstOrDefault(ancestor => ParentDeclarationKinds.Contains(ancestor.Kind()));
             return ContainsEndInvoke(parentContext, semantic);
-        }
-
-        private ExpressionSyntax GetCallbackArg(InvocationExpressionSyntax invocationExpression)
-        {
-            if (invocationExpression.ArgumentList.Arguments.Count > 1)
-            {
-                var callbackArgPos = invocationExpression.ArgumentList.Arguments.Count - 2;
-                return GetArgumentExpressionByNameOrPosition(invocationExpression, "callback", callbackArgPos)?.RemoveParentheses();
-            }
-            return null;
         }
 
         /// <summary>
@@ -105,17 +95,22 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool CallbackMayContainEndInvoke(SyntaxNode callbackArg, SemanticModel semantic)
         {
             var callback = callbackArg.RemoveParentheses();
+            if (callback.IsNullLiteral())
+            {
+                return false;
+            }
+
             if (callback.IsKind(SyntaxKind.IdentifierName))
             {
                 callback = LookupIdentifierInitializer((IdentifierNameSyntax)callback, semantic);
             }
 
-            if (callback.IsKind(SyntaxKind.ObjectCreationExpression))
+            if (callback is ObjectCreationExpressionSyntax objectCreation)
             {
-                callback = LookupSingleArgument((ObjectCreationExpressionSyntax)callback);
+                callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().Expression : null;
                 if (callback != null && semantic.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol)
                 {
-                    callback = LookupMethodDeclaration(methodSymbol);
+                    callback = methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
                 }
             }
 
@@ -124,28 +119,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 || ContainsEndInvoke(callback, semantic);
         }
 
-        private static SyntaxNode LookupSingleArgument(ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().Expression : null;
-
-        private static SyntaxNode LookupMethodDeclaration(IMethodSymbol methodSymbol) =>
-            methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-
         private static SyntaxNode LookupIdentifierInitializer(IdentifierNameSyntax identifier, SemanticModel semantic) =>
             semantic.GetSymbolInfo(identifier).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is VariableDeclaratorSyntax variableDeclarator
                 && variableDeclarator.Initializer is EqualsValueClauseSyntax equalsValueClause
                 ? equalsValueClause.Value.RemoveParentheses()
                 : null;
-
-        private static ExpressionSyntax GetArgumentExpressionByNameOrPosition(InvocationExpressionSyntax invocationExpression, string argumentName, int argumentPosition)
-        {
-            var arguments = invocationExpression.ArgumentList.Arguments;
-            var argumentByName = arguments.FirstOrDefault(a => a.NameColon?.Name.Identifier.Text == argumentName);
-            if (argumentByName != null)
-            {
-                return argumentByName.Expression;
-            }
-            return argumentPosition < arguments.Count ? arguments[argumentPosition].Expression : null;
-        }
 
         private static bool IsDelegate(IMethodSymbol methodSymbol) =>
             methodSymbol.ReceiverType.Is(TypeKind.Delegate);

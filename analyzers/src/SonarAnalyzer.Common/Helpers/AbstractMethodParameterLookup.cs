@@ -77,8 +77,8 @@ namespace SonarAnalyzer.Helpers
         /// There could be zero or one result for optional parameters.
         /// There will be single result for normal parameters.
         /// </summary>
-        public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<TArgumentSyntax> argument) =>
-            TryGetSyntax(parameter.Name, out argument);
+        public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<TArgumentSyntax> arguments) =>
+            TryGetSyntax(parameter.Name, out arguments);
 
         /// <summary>
         /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
@@ -86,18 +86,10 @@ namespace SonarAnalyzer.Helpers
         /// There could be multiple syntaxes for ParamArray/params.
         /// There could be zero or one result for optional parameters.
         /// There will be single result for normal parameters.
-        public bool TryGetSyntax(string parameterName, out ImmutableArray<TArgumentSyntax> argument)
+        public bool TryGetSyntax(string parameterName, out ImmutableArray<TArgumentSyntax> arguments)
         {
-            var ret = ImmutableArray.CreateBuilder<TArgumentSyntax>();
-            foreach (var pair in GetAllArgumentParameterMappings())
-            {
-                if (parameterName == pair.Symbol.Name)
-                {
-                    ret.Add(pair.SyntaxNode);
-                }
-            }
-            argument = ret.ToImmutable();
-            return !argument.IsEmpty;
+            arguments = GetAllArgumentParameterMappings().Where(x => x.Symbol.Name == parameterName).Select(x => x.SyntaxNode).ToImmutableArray();
+            return !arguments.IsEmpty;
         }
 
         /// <summary>
