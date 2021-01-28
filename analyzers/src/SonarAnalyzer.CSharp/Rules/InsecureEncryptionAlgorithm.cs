@@ -18,9 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -29,39 +32,59 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(S2278DiagnosticId)]
-    [Rule(S5547DiagnosticId)]
-    public sealed class InsecureEncryptionAlgorithm : DoNotCallInsecureSecurityAlgorithm
+    [Rule(DiagnosticId)]
+    public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
     {
         // S2278 was deprecated in favor of S5547. Technically, there is no difference in the C# analyzer between
         // the 2 rules, but to be coherent with all the other languages, we still replace it with the new one
         private const string S2278DiagnosticId = "S2278";
         private const string S2278MessageFormat = "Use the recommended AES (Advanced Encryption Standard) instead.";
 
-        private const string S5547DiagnosticId = "S5547";
-        private const string S5547MessageFormat = "Use a strong cipher algorithm.";
-
         private static readonly DiagnosticDescriptor S2278 = DiagnosticDescriptorBuilder.GetDescriptor(S2278DiagnosticId, S2278MessageFormat, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor S5547 = DiagnosticDescriptorBuilder.GetDescriptor(S5547DiagnosticId, S5547MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2278, S5547);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S2278, Rule);
 
-        protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } = new HashSet<string>();
+        protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
+        protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
+        protected override SyntaxKind StringLiteral => SyntaxKind.StringLiteralExpression;
+        protected override ILanguageFacade LanguageFacade => CSharpFacade.Instance;
 
-        protected override ISet<string> AlgorithmParameterizedFactoryMethods { get; } =
-            new HashSet<string>
+        public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
+
+        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
+            invocation.Expression;
+
+        protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation.Type.GetLocation();
+
+        protected override bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocationExpression)
+        {
+            var argumentList = invocationExpression.ArgumentList;
+
+            if (argumentList == null || methodSymbol.ContainingType == null)
             {
-                "System.Security.Cryptography.CryptoConfig.CreateFromName",
-                "System.Security.Cryptography.SymmetricAlgorithm.Create"
-            };
+                return false;
+            }
 
-        protected override ISet<string> FactoryParameterNames { get; } = new HashSet<string> { "DES", "3DES", "TripleDES", "RC2" };
+            var methodFullName = $"{methodSymbol.ContainingType}.{methodSymbol.Name}";
 
-        private protected override ImmutableArray<KnownType> AlgorithmTypes { get; } =
-            ImmutableArray.Create(
-                KnownType.System_Security_Cryptography_DES,
-                KnownType.System_Security_Cryptography_TripleDES,
-                KnownType.System_Security_Cryptography_RC2,
-                KnownType.Org_BouncyCastle_Crypto_Engines_AesFastEngine
-        );
+            if (argumentList.Arguments.Count == 0)
+            {
+                return AlgorithmParameterlessFactoryMethods.Contains(methodFullName);
+            }
+
+            if (argumentList.Arguments.Count > 1 || !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
+            {
+                return false;
+            }
+
+            if (!AlgorithmParameterizedFactoryMethods.Contains(methodFullName))
+            {
+                return false;
+            }
+
+            var literalExpressionSyntax = (LiteralExpressionSyntax)argumentList.Arguments.First().Expression;
+            return FactoryParameterNames.Any(alg => alg.Equals(literalExpressionSyntax.Token.ValueText, StringComparison.Ordinal));
+        }
     }
 }

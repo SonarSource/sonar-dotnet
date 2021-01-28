@@ -21,7 +21,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -31,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     [Obsolete("This rule is deprecated in favor of S4790")]
-    public sealed class InsecureHashAlgorithm : DoNotCallInsecureSecurityAlgorithm
+    public sealed class InsecureHashAlgorithm : DoNotCallInsecureSecurityAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
     {
         internal const string DiagnosticId = "S2070";
         private const string MessageFormat = "Use a stronger hashing/asymmetric algorithm.";
@@ -39,6 +42,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
+        protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
+        protected override SyntaxKind StringLiteral => SyntaxKind.StringLiteralExpression;
+        protected override ILanguageFacade LanguageFacade => CSharpFacade.Instance;
 
         protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } =
             new HashSet<string>
@@ -56,7 +64,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 "System.Security.Cryptography.HMAC.Create"
             };
 
-        protected override ISet<string> FactoryParameterNames { get; } = new HashSet<string> { "SHA1", "MD5", "DSA", "HMACMD5", "HMACRIPEMD160", "RIPEMD160", "RIPEMD160Managed" };
+        protected override ISet<string> FactoryParameterNames { get; } =
+            new HashSet<string>
+            {
+                "SHA1",
+                "MD5",
+                "DSA",
+                "HMACMD5",
+                "HMACRIPEMD160",
+                "RIPEMD160",
+                "RIPEMD160Managed"
+            };
 
         private protected override ImmutableArray<KnownType> AlgorithmTypes { get; } =
             ImmutableArray.Create(
@@ -68,5 +86,41 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Security_Cryptography_HMACMD5,
                 KnownType.System_Security_Cryptography_HMACRIPEMD160
             );
+
+        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
+           invocation.Expression;
+
+        protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation.Type.GetLocation();
+
+        protected override bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocationExpression)
+        {
+            var argumentList = invocationExpression.ArgumentList;
+
+            if (argumentList == null || methodSymbol.ContainingType == null)
+            {
+                return false;
+            }
+
+            var methodFullName = $"{methodSymbol.ContainingType}.{methodSymbol.Name}";
+
+            if (argumentList.Arguments.Count == 0)
+            {
+                return AlgorithmParameterlessFactoryMethods.Contains(methodFullName);
+            }
+
+            if (argumentList.Arguments.Count > 1 || !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
+            {
+                return false;
+            }
+
+            if (!AlgorithmParameterizedFactoryMethods.Contains(methodFullName))
+            {
+                return false;
+            }
+
+            var literalExpressionSyntax = (LiteralExpressionSyntax)argumentList.Arguments.First().Expression;
+            return FactoryParameterNames.Any(alg => alg.Equals(literalExpressionSyntax.Token.ValueText, StringComparison.Ordinal));
+        }
     }
 }

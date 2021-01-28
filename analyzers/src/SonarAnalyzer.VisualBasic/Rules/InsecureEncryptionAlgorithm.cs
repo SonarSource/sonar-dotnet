@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -32,31 +32,51 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class InsecureEncryptionAlgorithm : DoNotCallInsecureSecurityAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
+    public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
     {
-        private const string DiagnosticId = "S5547";
-        private const string MessageFormat = "Use a strong cipher algorithm.";
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => throw new System.NotImplementedException();
+        protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
+        protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
+        protected override SyntaxKind StringLiteral => SyntaxKind.StringLiteralExpression;
+        protected override ILanguageFacade LanguageFacade => VisualBasicFacade.Instance;
 
-        protected override ISet<string> AlgorithmParameterlessFactoryMethods => throw new System.NotImplementedException();
+        public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
 
-        protected override ISet<string> AlgorithmParameterizedFactoryMethods => throw new System.NotImplementedException();
+        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
+            invocation.Expression;
 
-        protected override ISet<string> FactoryParameterNames => throw new System.NotImplementedException();
+        protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation.Type.GetLocation();
 
-        protected override SyntaxKind ObjectCreation => throw new System.NotImplementedException();
+        protected override bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocationExpression)
+        {
+            var argumentList = invocationExpression.ArgumentList;
 
-        protected override SyntaxKind Invocation => throw new System.NotImplementedException();
+            if (argumentList == null || methodSymbol.ContainingType == null)
+            {
+                return false;
+            }
 
-        protected override SyntaxKind StringLiteral => throw new System.NotImplementedException();
+            var methodFullName = $"{methodSymbol.ContainingType}.{methodSymbol.Name}";
 
-        protected override ILanguageFacade LanguageFacade => throw new System.NotImplementedException();
+            if (argumentList.Arguments.Count == 0)
+            {
+                return AlgorithmParameterlessFactoryMethods.Contains(methodFullName);
+            }
 
-        private protected override ImmutableArray<KnownType> AlgorithmTypes => throw new System.NotImplementedException();
+            if (argumentList.Arguments.Count > 1 || !argumentList.Arguments.First().GetExpression().IsKind(SyntaxKind.StringLiteralExpression))
+            {
+                return false;
+            }
 
-        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) => throw new System.NotImplementedException();
-        protected override bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocationExpression) => throw new System.NotImplementedException();
-        protected override Location Location(ObjectCreationExpressionSyntax objectCreation) => throw new System.NotImplementedException();
+            if (!AlgorithmParameterizedFactoryMethods.Contains(methodFullName))
+            {
+                return false;
+            }
+
+            var literalExpressionSyntax = (LiteralExpressionSyntax)argumentList.Arguments.First().GetExpression();
+            return FactoryParameterNames.Any(alg => alg.Equals(literalExpressionSyntax.Token.ValueText, StringComparison.Ordinal));
+        }
     }
 }

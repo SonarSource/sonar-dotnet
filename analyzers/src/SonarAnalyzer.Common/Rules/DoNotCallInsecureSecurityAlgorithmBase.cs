@@ -59,8 +59,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes)
-                || IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation))
+            if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) || IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation))
             {
                 ReportAllDiagnostics(context, invocation.GetLocation());
             }
