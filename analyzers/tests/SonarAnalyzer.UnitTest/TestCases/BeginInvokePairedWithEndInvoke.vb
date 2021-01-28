@@ -176,6 +176,27 @@ Public Class ForCoverage
         End Get
     End Property
 
+    Public Property PropFake As Integer
+        Get
+            Caller.BeginInvoke("prop", Nothing, Nothing) ' Noncompliant
+        End Get
+        Set(value As Integer)
+            Caller.EndInvoke(Nothing)
+        End Set
+    End Property
+
+    Public Custom Event CustomHandler As EventHandler
+        AddHandler(value As EventHandler)
+            Caller.BeginInvoke("prop", Nothing, Nothing) ' Noncompliant
+        End AddHandler
+        RemoveHandler(value As EventHandler)
+            Caller.BeginInvoke("prop", Nothing, Nothing) ' Noncompliant
+        End RemoveHandler
+        RaiseEvent(sender As Object, e As EventArgs)
+            Caller.EndInvoke(Nothing)
+        End RaiseEvent
+    End Event
+
     Public Shared Widening Operator CType(F As ForCoverage) As Integer
         Caller.BeginInvoke("prop", Nothing, Nothing) ' Noncompliant
     End Operator

@@ -268,6 +268,22 @@ namespace Tests.Diagnostics
                 }
             }
         }
+
+        public class FakeProperty
+        {
+            public int Prop
+            {
+                get
+                {
+                    caller.BeginInvoke("prop", null, null); // FN, detection thinks that "EndInvoke" in setter is valid pair for this
+                    return 0;
+                }
+                set
+                {
+                    caller.EndInvoke(null);
+                }
+            }
+        }
     }
 
     // Dummy implementation of IAsyncResult compatible with both .Net Framework and .Net Core

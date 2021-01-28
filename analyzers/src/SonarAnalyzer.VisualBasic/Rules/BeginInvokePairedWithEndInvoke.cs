@@ -40,26 +40,31 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
         {
             //FIXME: Coverage
-            //FIXME: Module
-            //SyntaxKind.AnonymousMethodExpression,
-            //SyntaxKind.ClassBlock,
-            SyntaxKind.CompilationUnit,
-            SyntaxKind.FunctionBlock,
-            //SyntaxKind.ConstructorBlock,
-            //SyntaxKind.ConversionOperatorDeclaration,
-            //SyntaxKind.DestructorDeclaration,
             //SyntaxKind.InterfaceDeclaration,
-            //SyntaxKind.MethodDeclaration,
-            SyntaxKind.SubBlock,
-            //SyntaxKind.OperatorDeclaration,
-            //SyntaxKind.ParenthesizedLambdaExpression,
-            //SyntaxKind.PropertyDeclaration,
-            //SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.SingleLineSubLambdaExpression,
-            SyntaxKind.MultiLineSubLambdaExpression,
-            //FIXME: MultiLine+test line 45
+
+            SyntaxKind.CompilationUnit,
+            // Types
+            //SyntaxKind.ClassBlock,
             //SyntaxKind.StructDeclaration,
-            //SyntaxKindEx.LocalFunctionStatement,
+            //FIXME: Module
+
+            // Methods
+            SyntaxKind.ConstructorBlock,
+            SyntaxKind.FunctionBlock,
+            SyntaxKind.SubBlock,
+            SyntaxKind.OperatorBlock,
+            // Properties
+            SyntaxKind.AddHandlerAccessorBlock,
+            SyntaxKind.GetAccessorBlock,
+            SyntaxKind.RaiseEventAccessorBlock,
+            SyntaxKind.RemoveHandlerAccessorBlock,
+            SyntaxKind.SetAccessorBlock,
+            // Lambdas
+            // FIXME: Function lambda
+            //SyntaxKind.SimpleLambdaExpression,
+            //SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.MultiLineSubLambdaExpression,
+            SyntaxKind.SingleLineSubLambdaExpression,
         }.ToImmutableHashSet();
 
         public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
