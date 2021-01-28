@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Helpers
         public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
         public abstract SyntaxNode NodeExpression(SyntaxNode node);
 
-        protected static T TryCast<T>(SyntaxNode node) where T : SyntaxNode =>
+        protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
             node as T ?? throw Unexpected(node);
 
         protected static Exception Unexpected(SyntaxNode node) =>

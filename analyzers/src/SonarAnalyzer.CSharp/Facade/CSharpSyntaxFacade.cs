@@ -31,16 +31,15 @@ namespace SonarAnalyzer.Helpers.Facade
         public override bool IsNullLiteral(SyntaxNode node) => node.IsNullLiteral();
 
         public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
-            invocation == null ? null : TryCast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
+            invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
 
         public override SyntaxNode NodeExpression(SyntaxNode node) =>
-            node == null
-                ? null
-                : node switch
-                {
-                    InvocationExpressionSyntax invocation => invocation.Expression,
-                    LockStatementSyntax @lock => @lock.Expression,
-                    _ => throw Unexpected(node)
-                };
+            node switch
+            {
+                InvocationExpressionSyntax invocation => invocation.Expression,
+                LockStatementSyntax @lock => @lock.Expression,
+                null => null,
+                _ => throw Unexpected(node)
+            };
     }
 }

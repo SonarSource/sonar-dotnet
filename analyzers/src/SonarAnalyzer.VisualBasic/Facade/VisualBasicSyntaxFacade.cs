@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -32,16 +31,15 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
         public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
-            invocation == null ? null : TryCast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
+            invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
 
         public override SyntaxNode NodeExpression(SyntaxNode node) =>
-            node == null
-                ? null
-                : node switch
-                {
-                    InvocationExpressionSyntax invocation => invocation.Expression,
-                    SyncLockStatementSyntax syncLock => syncLock.Expression,
-                    _ => throw Unexpected(node)
-                };
+            node switch
+            {
+                InvocationExpressionSyntax invocation => invocation.Expression,
+                SyncLockStatementSyntax syncLock => syncLock.Expression,
+                null => null,
+                _ => throw Unexpected(node)
+            };
     }
 }
