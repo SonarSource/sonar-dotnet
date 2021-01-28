@@ -13,12 +13,19 @@ Module Common
         BeginInvokeAndEndInvokeOnDelegateWithoutCallback()
     End Sub
 
-    Private Sub BeginInvokeOnDelegateWithoutCallback()
+    Private Sub BeginInvokeOnDelegateWithoutCallbackSub()
         Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
         Caller.BeginInvoke("delegate", Nothing, Nothing) ' Noncompliant {{Pair this "BeginInvoke" with an "EndInvoke".}}
         ' https:'docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/calling-synchronous-methods-asynchronously
         ' «Important: No matter which technique you use, always call EndInvoke to complete your asynchronous call.»
     End Sub
+
+    Private Function BeginInvokeOnDelegateWithoutCallbackFunction() As String
+        Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
+        Caller.BeginInvoke("delegate", Nothing, Nothing) ' Noncompliant {{Pair this "BeginInvoke" with an "EndInvoke".}}
+        ' https:'docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/calling-synchronous-methods-asynchronously
+        ' «Important: No matter which technique you use, always call EndInvoke to complete your asynchronous call.»
+    End Function
 
     Private Sub BeginInvokeAndEndInvokeOnDelegateWithoutCallback()
         Console.WriteLine("BeginInvokeAndEndInvokeOnDelegateWithoutCallback")
@@ -29,8 +36,8 @@ Module Common
 
     Private Sub BeginInvokeOnDelegateWithLambdaCallback1()
         Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
-        Caller.BeginInvoke("delegate", Sub(Result)
-                                       End Sub, Nothing) ' Noncompliant
+        Caller.BeginInvoke("delegate", Sub(Result)          ' Noncompliant
+                                       End Sub, Nothing)
     End Sub
 
     Private Sub BeginInvokeOnDelegateWithLambdaCallback2()
@@ -42,7 +49,10 @@ Module Common
 
     Private Sub BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback1()
         Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
-        Caller.BeginInvoke(Name:="delegate", DelegateAsyncState:=Nothing, DelegateCallback:=Sub(Result) Caller.EndInvoke(Result)) ' Compliant
+        Caller.BeginInvoke(Name:="delegate", DelegateAsyncState:=Nothing, DelegateCallback:=Sub(Result) Caller.EndInvoke(Result))   ' Compliant
+        Caller.BeginInvoke(Name:="delegate", DelegateAsyncState:=Nothing, DelegateCallback:=Sub(Result)                             ' Compliant
+                                                                                                Caller.EndInvoke(Result)
+                                                                                            End Sub)
     End Sub
 
     Private Sub BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback2()
