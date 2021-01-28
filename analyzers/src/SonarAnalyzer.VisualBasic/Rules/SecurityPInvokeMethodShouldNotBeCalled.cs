@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax, IdentifierNameSyntax>
     {
         protected override SyntaxKind SyntaxKind => SyntaxKind.InvocationExpression;
-        protected override ILanguageFacade LanguageFacade => VisualBasicFacade.Instance;
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         public SecurityPInvokeMethodShouldNotBeCalled() : base(RspecStrings.ResourceManager) { }
 
@@ -41,5 +42,19 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxToken Identifier(IdentifierNameSyntax identifierName) =>
             identifierName.Identifier;
+
+        protected override bool IsImportFromInteropDll(ISymbol symbol) =>
+            (symbol.DeclaringSyntaxReferences.FirstOrDefault() is { } delcarationRef
+             && delcarationRef.GetSyntax() is DeclareStatementSyntax declaration
+             && declaration.LibraryName != null
+             && declaration.LibraryName.GetStringValue() == InteropDllName)
+            || base.IsImportFromInteropDll(symbol);
+
+        protected override string GetMethodName(ISymbol symbol, SyntaxToken syntaxToken) =>
+            symbol.DeclaringSyntaxReferences.FirstOrDefault() is { } delcarationRef
+            && delcarationRef.GetSyntax() is DeclareStatementSyntax declaration
+            && declaration.AliasName != null
+                ? declaration.AliasName.GetStringValue()
+                : base.GetMethodName(symbol, syntaxToken);
     }
 }

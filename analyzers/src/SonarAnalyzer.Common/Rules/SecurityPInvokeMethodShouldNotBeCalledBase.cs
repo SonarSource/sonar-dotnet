@@ -36,14 +36,8 @@ namespace SonarAnalyzer.Rules
         protected const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
         protected const string InteropDllName = "ole32.dll";
 
-        protected static readonly ISet<string> InvalidMethods = new HashSet<string>
-        {
-            "CoSetProxyBlanket",
-            "CoInitializeSecurity"
-        };
-
         protected abstract TSyntaxKind SyntaxKind { get; }
-        protected abstract ILanguageFacade LanguageFacade { get; }
+        protected abstract ILanguageFacade Language { get; }
 
         protected abstract SyntaxNode Expression(TInvocationExpressionSyntax invocationExpression);
         protected abstract SyntaxToken Identifier(TIdentifierNameSyntax identifierName);
@@ -52,48 +46,37 @@ namespace SonarAnalyzer.Rules
 
         protected DiagnosticDescriptor Rule { get; }
 
+        protected ISet<string> InvalidMethods { get; } = new HashSet<string>
+        {
+            "CoSetProxyBlanket",
+            "CoInitializeSecurity"
+        };
+
         protected SecurityPInvokeMethodShouldNotBeCalledBase(System.Resources.ResourceManager rspecResources) =>
             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(LanguageFacade.GeneratedCodeRecognizer, CheckForIssue, SyntaxKind);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForIssue, SyntaxKind);
+
+        protected virtual bool IsImportFromInteropDll(ISymbol symbol) =>
+            symbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).FirstOrDefault() is AttributeData attributeData
+            && attributeData.ConstructorArguments.Any(x => x.Value.Equals(InteropDllName));
+
+        protected virtual string GetMethodName(ISymbol symbol, SyntaxToken syntaxToken) =>
+            syntaxToken.ValueText;
 
         private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
-            var invocation = (TInvocationExpressionSyntax)analysisContext.Node;
-
-            if (!(Expression(invocation) is TIdentifierNameSyntax directMethodCall))
+            if (analysisContext.Node is TInvocationExpressionSyntax invocation
+                && Expression(invocation) is TIdentifierNameSyntax directMethodCall
+                && analysisContext.SemanticModel.GetSymbolInfo(directMethodCall) is SymbolInfo methodCallSymbol
+                && methodCallSymbol.Symbol != null
+                && InvalidMethods.Contains(GetMethodName(methodCallSymbol.Symbol, Identifier(directMethodCall)))
+                && methodCallSymbol.Symbol.IsExtern
+                && methodCallSymbol.Symbol.IsStatic
+                && IsImportFromInteropDll(methodCallSymbol.Symbol))
             {
-                return;
-            }
-
-            if (!InvalidMethods.Contains(Identifier(directMethodCall).ValueText))
-            {
-                return;
-            }
-
-            var methodCallSymbol = analysisContext.SemanticModel.GetSymbolInfo(directMethodCall);
-
-            if (methodCallSymbol.Symbol == null)
-            {
-                return;
-            }
-
-            if (!methodCallSymbol.Symbol.IsExtern || !methodCallSymbol.Symbol.IsStatic)
-            {
-                return;
-            }
-
-            var dllImportAttribute = methodCallSymbol.Symbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).FirstOrDefault();
-
-            if (dllImportAttribute == null)
-            {
-                return;
-            }
-
-            if (dllImportAttribute.ConstructorArguments.Any(x => x.Value.Equals(InteropDllName)))
-            {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Identifier(directMethodCall).GetLocation(), Identifier(directMethodCall).ValueText));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Identifier(directMethodCall).GetLocation(), GetMethodName(methodCallSymbol.Symbol, Identifier(directMethodCall))));
             }
         }
     }
