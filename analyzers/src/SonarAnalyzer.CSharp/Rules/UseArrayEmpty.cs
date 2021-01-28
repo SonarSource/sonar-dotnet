@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public UseArrayEmpty() : base(RspecStrings.ResourceManager) { }
 
-        protected override SyntaxKind[] SyntaxKindsOfInterest => new SyntaxKind[]
+        protected override SyntaxKind[] SyntaxKindsOfInterest => new[]
         {
             SyntaxKind.ArrayCreationExpression,
             SyntaxKind.ArrayInitializerExpression,
@@ -42,24 +42,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override string ArrayEmptySuffix => "<T>";
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
-            => CSharpGeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override bool IsEmptyCreation(ArrayCreationExpressionSyntax creationNode)
+        public void X()
         {
-            var rankSpecifier = RankSpecifier(creationNode);
-            return rankSpecifier != null
-                && rankSpecifier.Rank == 1
-                && int.TryParse(rankSpecifier.Sizes[0].ToString(), out var size)
-                && size == 0;
+            SemanticModel.GetConstantValue()
         }
 
-        private static ArrayRankSpecifierSyntax RankSpecifier(ArrayCreationExpressionSyntax creationNode)
-            => creationNode
-                .ChildNodes()
-                .OfType<ArrayTypeSyntax>()
-                .FirstOrDefault()?
-                .ChildNodes()
+        protected override bool IsEmptyCreation(ArrayCreationExpressionSyntax creationNode) =>
+            RankSpecifier(creationNode) is { } rankSpecifier
+            && rankSpecifier.Rank == 1
+            && int.TryParse(rankSpecifier.Sizes[0].ToString(), out var size)
+            && size == 0;
+
+        private static ArrayRankSpecifierSyntax RankSpecifier(SyntaxNode creationNode) =>
+            creationNode
+                .DescendantNodes()
                 .OfType<ArrayRankSpecifierSyntax>()
                 .FirstOrDefault();
     }

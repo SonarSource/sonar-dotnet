@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
         where TCreation : SyntaxNode
         where TInitialization : SyntaxNode
     {
-        protected const string DiagnosticId = "S5939";
+        protected const string DiagnosticId = "S101";
         private const string MessageFormat = "Declare this empty array using Array.Empty{0}.";
 
         protected readonly INetFrameworkVersionProvider VersionProvider = new NetFrameworkVersionProvider();
@@ -51,18 +51,14 @@ namespace SonarAnalyzer.Rules
                GeneratedCodeRecognizer,
                c =>
                {
-                   if (VersionProvider.GetDotNetFrameworkVersion(c.Compilation) >= NetFrameworkVersion.After46)
+                   if (ShouldReport(c.Node))
                    {
-                       var node = c.Node;
-                       if (ShouldReport(node))
-                       {
-                           c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
-                       }
+                       c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                    }
                },
                SyntaxKindsOfInterest);
         }
-
+        // VersionProvider.GetDotNetFrameworkVersion(c.Compilation) >= NetFrameworkVersion.After46
         protected virtual bool ShouldReport(SyntaxNode node)
             => (node is TInitialization initializationNode
             && IsEmptyInitialization(initializationNode))

@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override bool ShouldReport(SyntaxNode node)
-            => base.ShouldReport(node)
+        protected override bool ShouldReport(SyntaxNode node) =>
+            base.ShouldReport(node)
             || (node is VariableDeclaratorSyntax variableDeclaratorNode
             && IsEmpyVariableDeclarator(variableDeclaratorNode));
 
@@ -66,8 +66,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 && arg == -1;
         }
 
-        protected override bool IsEmptyCreation(ObjectCreationExpressionSyntax creationNode)
-            => int.TryParse(SimpleArugment(creationNode)?.ToString(), out var count)
+        protected override bool IsEmptyCreation(ObjectCreationExpressionSyntax creationNode) =>
+            int.TryParse(SimpleArugment(creationNode)?.ToString(), out var count)
             && count == 0;
 
         private static SimpleArgumentSyntax SimpleArugment(ObjectCreationExpressionSyntax creationNode) => creationNode

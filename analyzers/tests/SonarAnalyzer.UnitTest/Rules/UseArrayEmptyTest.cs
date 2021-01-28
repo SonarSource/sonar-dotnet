@@ -39,4 +39,3 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\UseArrayEmpty.vb", new VB.UseArrayEmpty());
     }
 }
-

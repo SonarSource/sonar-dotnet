@@ -1,34 +1,29 @@
 ﻿Option Strict Off
 
-Namespace Tests.Diagnostics
+Public Class UseArrayEmpty
 
-    Public Class UseArrayEmpty
+    Public Const MinOne As Integer = -1
+    Public Sub Arrays()
 
-        Public Const MinOne As Integer = -1
+        Dim eplicit(-1) As Integer ' Noncompliant {{Declare this empty array using Array.Empty(Of T).}}
+        '   ^^^^^^^^^^^^^^^^^^^^^^
 
-        Public Sub Arrays()
+        Dim implicit1 As Integer() = New Integer() {} ' Noncompliant
+        Dim implicit2 As Integer() = {} ' // Noncompliant
+        Dim implicit3() As Integer = {} ' Noncompliant
+        Dim cnst(MinOne) As Integer ' Noncompliant
 
-            Dim eplicit(-1) As Integer ' Noncompliant {{Declare this empty array using Array.Empty(Of T).}}
-            '   ^^^^^^^^^^^^^^^^^^^^^^
+        Dim dynamic = {} ' Noncompliant
 
-            Dim implicit1 As Integer() = New Integer() {} ' Noncompliant
-            Dim implicit2 As Integer() = {} ' // Noncompliant
-            Dim implicit3() As Integer = {} ' Noncompliant
-            Dim cnst As Integer(MinOne) ' Nonecompliant
+        Dim array_1(0) As Integer ' Compliant
+        Dim other_1() As Integer = {1} ' Compliant
 
-            Dim dynamic = {} ' Noncompliant
+        Arguments({42}) ' Compliant
+        Arguments({}) ' Noncompliant
 
-            Dim array_1(0) As Integer ' Compliant
-            Dim other_1() As Integer = {1} ' Compliant
+    End Sub
 
-            Arguments({42}) ' Compliant
-            Arguments({}) ' Noncompliant
+    Public Sub Arguments(arguments As Integer())
+    End Sub
 
-        End Sub
-
-        Public Sub Arguments(arguments As Integer())
-        End Sub
-
-    End Class
-
-End Namespace
+End Class
