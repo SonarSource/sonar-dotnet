@@ -39,15 +39,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override string CallbackParameterName { get; } = "DelegateCallback";
         protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
         {
-            //FIXME: Coverage
-            //SyntaxKind.InterfaceDeclaration,
-
             SyntaxKind.CompilationUnit,
             // Types
-            //SyntaxKind.ClassBlock,
-            //SyntaxKind.StructDeclaration,
-            //FIXME: Module
-
+            SyntaxKind.ClassBlock,
+            SyntaxKind.StructureBlock,
+            SyntaxKind.ModuleBlock,
             // Methods
             SyntaxKind.ConstructorBlock,
             SyntaxKind.FunctionBlock,
@@ -63,8 +59,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.MultiLineFunctionLambdaExpression,
             SyntaxKind.MultiLineSubLambdaExpression,
             SyntaxKind.SingleLineFunctionLambdaExpression,
-            SyntaxKind.SingleLineSubLambdaExpression,
-
+            SyntaxKind.SingleLineSubLambdaExpression
         }.ToImmutableHashSet();
 
         public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
@@ -117,6 +112,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 //SyntaxKind.SingleLineFunctionLambdaExpression,
                 //SyntaxKind.SingleLineSubLambdaExpression,
                 //SyntaxKind.SubBlock,
+
+
+
             };
 
             private readonly EndInvokeContext context;

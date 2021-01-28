@@ -157,10 +157,27 @@ Public Class AnyClassWithOptionalEndInvoke
 
 End Class
 
+Public Module CommonMod
+
+    Public Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
+    Public Result As IAsyncResult = Caller.BeginInvoke("Foo", Nothing, Nothing)     ' Noncompliant
+    Public Property AutoProperty As IAsyncResult = Caller.BeginInvoke("Foo", Nothing, Nothing)     ' Noncompliant
+
+    Public Class Fake
+
+        Public Sub Misleading()
+            Caller.EndInvoke(Nothing)
+        End Sub
+
+    End Class
+
+End Module
+
 Public Class ForCoverage
 
     Public Shared Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
     Public Result As IAsyncResult = Caller.BeginInvoke("Foo", Nothing, Nothing)     ' Noncompliant
+    Public Property AutoProperty As IAsyncResult = Caller.BeginInvoke("Foo", Nothing, Nothing)     ' Noncompliant
 
     Public Action1 As Action = Sub()
                                    Caller.BeginInvoke("Foo", Nothing, Nothing)      ' Noncompliant
