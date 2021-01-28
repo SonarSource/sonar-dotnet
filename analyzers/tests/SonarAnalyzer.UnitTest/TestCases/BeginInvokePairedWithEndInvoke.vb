@@ -160,15 +160,19 @@ End Class
 Public Class ForCoverage
 
     Public Shared Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
-    Public Result As IAsyncResult = Caller.BeginInvoke("Foo", Nothing, Nothing) ' Noncompliant
+    Public Result As IAsyncResult = Caller.BeginInvoke("Foo", Nothing, Nothing)     ' Noncompliant
 
     Public Action1 As Action = Sub()
-                                   Caller.BeginInvoke("Foo", Nothing, Nothing) ' Noncompliant
+                                   Caller.BeginInvoke("Foo", Nothing, Nothing)      ' Noncompliant
                                End Sub
 
-    Public Action2 As Action = Sub() Caller.BeginInvoke("Foo", Nothing, Nothing) ' Noncompliant
+    Public Action2 As Action = Sub() Caller.BeginInvoke("Foo", Nothing, Nothing)    ' Noncompliant
 
     Public Action3 As Action(Of String) = Function(Name) Caller.BeginInvoke(Name, Nothing, Nothing) ' Noncompliant
+
+    Public Action4 As Action(Of String) = Function(Name)
+                                              Return Caller.BeginInvoke(Name, Nothing, Nothing) ' Noncompliant
+                                          End Function
 
     Public ReadOnly Property Prop As Integer
         Get

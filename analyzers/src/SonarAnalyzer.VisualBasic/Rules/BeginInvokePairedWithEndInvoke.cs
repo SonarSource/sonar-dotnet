@@ -60,11 +60,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.RemoveHandlerAccessorBlock,
             SyntaxKind.SetAccessorBlock,
             // Lambdas
-            // FIXME: Function lambda
-            //SyntaxKind.SimpleLambdaExpression,
-            //SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.MultiLineFunctionLambdaExpression,
             SyntaxKind.MultiLineSubLambdaExpression,
+            SyntaxKind.SingleLineFunctionLambdaExpression,
             SyntaxKind.SingleLineSubLambdaExpression,
+
         }.ToImmutableHashSet();
 
         public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
