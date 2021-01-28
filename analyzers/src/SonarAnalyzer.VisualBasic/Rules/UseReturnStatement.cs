@@ -81,7 +81,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             private static bool IsExcluded(SyntaxNode node) =>
                 node.Parent is InvocationExpressionSyntax
                 || node.Parent is MemberAccessExpressionSyntax
-                || node.Parent is NamedFieldInitializerSyntax;
+                || node.Parent is NamedFieldInitializerSyntax
+                || node.Ancestors().OfType<ImplementsClauseSyntax>().Any();
 
             private static bool IsAssignmentStatement(SyntaxNode node) =>
                 node.Parent is AssignmentStatementSyntax assignement

@@ -45,6 +45,8 @@
 End Class
 
 Public Class DoesNotApplyOn
+    Implements IInterface
+
     Public Function FunctionWithExplictReturnOnly()
         Return 42 'Compliant
     End Function
@@ -86,6 +88,10 @@ Public Class DoesNotApplyOn
         End With
     End Function
     
+    Public Function ImplementedInterfaceMethod() As Integer Implements IInterface.ImplementedInterfaceMethod ' Compliant
+        Return 42
+    End Function
+    
 End Class
 
 Public Class OtherType
@@ -101,3 +107,7 @@ Public Class OtherType
         Return number
     End Function
 End Class
+
+Public Interface IInterface
+    Function ImplementedInterfaceMethod() As Integer
+End Interface
