@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind InvocationExpressionKind { get; } = SyntaxKind.InvocationExpression;
+        protected override string CallbackParameterName { get; } = "callback";
         protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.AnonymousMethodExpression,

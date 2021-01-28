@@ -34,12 +34,105 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase<SyntaxKind, InvocationExpressionSyntax>
     {
-        protected override ISet<SyntaxKind> ParentDeclarationKinds => throw new System.NotImplementedException();
-        protected override void VisitInvocation(EndInvokeContext context) => throw new System.NotImplementedException();
-        protected override ILanguageFacade<SyntaxKind> Language => throw new System.NotImplementedException();
-        protected override SyntaxKind InvocationExpressionKind => throw new System.NotImplementedException();
-        protected override SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel) => throw new System.NotImplementedException();
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+        protected override SyntaxKind InvocationExpressionKind { get; } = SyntaxKind.InvocationExpression;
+        protected override string CallbackParameterName { get; } = "DelegateCallback";
+        protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
+        {
+            //FIXME: Coverage
+            //FIXME: Module
+            //SyntaxKind.AnonymousMethodExpression,
+            //SyntaxKind.ClassBlock,
+            SyntaxKind.CompilationUnit,
+            //SyntaxKind.ConstructorBlock,
+            //SyntaxKind.ConversionOperatorDeclaration,
+            //SyntaxKind.DestructorDeclaration,
+            //SyntaxKind.InterfaceDeclaration,
+            //SyntaxKind.MethodDeclaration,
+            //SyntaxKind.SubBlock,
+            //SyntaxKind.OperatorDeclaration,
+            //SyntaxKind.ParenthesizedLambdaExpression,
+            //SyntaxKind.PropertyDeclaration,
+            //SyntaxKind.SimpleLambdaExpression,
+            //SyntaxKind.StructDeclaration,
+            //SyntaxKindEx.LocalFunctionStatement,
+        }.ToImmutableHashSet();
 
         public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
+
+        protected override void VisitInvocation(EndInvokeContext context) =>
+            new InvocationWalker(context).SafeVisit(context.Root);
+
+        /// <summary>
+        /// This method is looking for the callback code which can be:
+        /// - in a identifier initializer (like a lambda)
+        /// - passed directly as a lambda argument
+        /// - passed as a new delegate instantiation (and the code can be inside the method declaration)
+        /// - a mix of the above.
+        /// </summary>
+        protected override SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel)
+        {
+            var callback = callbackArg.RemoveParentheses();
+            if (callback.IsKind(SyntaxKind.IdentifierName))
+            {
+                callback = LookupIdentifierInitializer((IdentifierNameSyntax)callback, semanticModel);
+            }
+
+            if (callback is ObjectCreationExpressionSyntax objectCreation)
+            {
+                callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().GetExpression() : null;
+                if (callback != null && semanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol)
+                {
+                    callback = methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+                }
+            }
+
+            return callback;
+        }
+
+        private static SyntaxNode LookupIdentifierInitializer(IdentifierNameSyntax identifier, SemanticModel semantic) =>
+            semantic.GetSymbolInfo(identifier).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is VariableDeclaratorSyntax variableDeclarator
+                && variableDeclarator.Initializer is EqualsValueSyntax equalsValue
+                ? equalsValue.Value.RemoveParentheses()
+                : null;
+
+        private class InvocationWalker : VisualBasicSyntaxWalker
+        {
+            private static readonly SyntaxKind[] VisitOnlyOnParent = new[]
+            {
+                // FIXME: Coverage
+                //SyntaxKind.ConstructorBlock,
+                SyntaxKind.FunctionBlock,
+                //SyntaxKind.MultiLineFunctionLambdaExpression,
+                //SyntaxKind.MultiLineSubLambdaExpression,
+                //SyntaxKind.SingleLineFunctionLambdaExpression,
+                //SyntaxKind.SingleLineSubLambdaExpression,
+                //SyntaxKind.SubBlock,
+            };
+
+            private readonly EndInvokeContext context;
+
+            public InvocationWalker(EndInvokeContext context)
+            {
+                this.context = context;
+            }
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (!context.ContainsEndInvoke  // Stop visiting once we found it
+                    && (node == context.Root || !node.IsAnyKind(VisitOnlyOnParent)))
+                {
+                    base.Visit(node);
+                }
+            }
+
+            public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+            {
+                if (!context.VisitInvocationExpression(node))
+                {
+                    base.VisitInvocationExpression(node);
+                }
+            }
+        }
     }
 }

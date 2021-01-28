@@ -40,6 +40,7 @@ namespace SonarAnalyzer.Rules
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind InvocationExpressionKind { get; }
         protected abstract ISet<TSyntaxKind> ParentDeclarationKinds { get; }
+        protected abstract string CallbackParameterName { get; }
         protected abstract void VisitInvocation(EndInvokeContext context);
         protected abstract SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel);
 
@@ -56,7 +57,7 @@ namespace SonarAnalyzer.Rules
                     && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                     && methodSymbol.Name == BeginInvoke
                     && IsDelegate(methodSymbol)
-                    && methodSymbol.Parameters.SingleOrDefault(x => x.Name == "callback") is { } parameter
+                    && methodSymbol.Parameters.SingleOrDefault(x => x.Name == CallbackParameterName) is { } parameter
                     && Language.MethodParameterLookup(invocation, methodSymbol).TryGetNonParamsSyntax(parameter, out var callbackArg)
                     && IsInvalidCallback(callbackArg, c.SemanticModel)
                     && !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
