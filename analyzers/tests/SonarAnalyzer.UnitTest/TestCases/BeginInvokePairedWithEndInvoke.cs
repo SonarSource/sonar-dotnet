@@ -271,6 +271,8 @@ namespace Tests.Diagnostics
 
         public class FakeProperty
         {
+            private AsyncMethodCaller caller;
+
             public int Prop
             {
                 get

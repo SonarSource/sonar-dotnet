@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules
         {
             if (IsParentDeclaration(node))
             {
-                var context = new EndInvokeContext(Language.Syntax, semanticModel, node);
+                var context = new EndInvokeContext(this, semanticModel, node);
                 VisitInvocation(context);
                 return context.ContainsEndInvoke;
             }
@@ -102,22 +102,26 @@ namespace SonarAnalyzer.Rules
 
         protected class EndInvokeContext
         {
-            private readonly SyntaxFacade<TSyntaxKind> syntax;
+            private readonly BeginInvokePairedWithEndInvokeBase<TSyntaxKind, TInvocationExpressionSyntax> rule;
             private readonly SemanticModel semanticModel;
 
             public SyntaxNode Root { get; }
             public bool ContainsEndInvoke { get; private set; }
 
-            public EndInvokeContext(SyntaxFacade<TSyntaxKind> syntax, SemanticModel semanticModel, SyntaxNode root)
+            public EndInvokeContext(BeginInvokePairedWithEndInvokeBase<TSyntaxKind, TInvocationExpressionSyntax> rule, SemanticModel semanticModel, SyntaxNode root)
             {
-                this.syntax = syntax;
+                this.rule = rule;
                 this.semanticModel = semanticModel;
                 Root = root;
             }
 
+            public bool Visit(SyntaxNode node) =>
+                !ContainsEndInvoke  // Stop visiting once we found it
+                && (node == Root || !rule.ParentDeclarationKinds.Contains(rule.Language.Syntax.Kind(node)));
+
             public bool VisitInvocationExpression(SyntaxNode node)
             {
-                if (syntax.NodeExpression(node).ToStringContains(EndInvoke)
+                if (rule.Language.Syntax.NodeExpression(node).ToStringContains(EndInvoke)
                     && semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
                     && methodSymbol.Name == EndInvoke
                     && IsDelegate(methodSymbol))

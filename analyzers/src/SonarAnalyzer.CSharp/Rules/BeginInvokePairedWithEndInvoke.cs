@@ -96,27 +96,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class InvocationWalker : CSharpSyntaxWalker
         {
-            private static readonly SyntaxKind[] VisitOnlyOnParent = new[]
-            {
-                SyntaxKind.AnonymousMethodExpression,
-                SyntaxKind.ConstructorDeclaration,
-                SyntaxKind.DestructorDeclaration,
-                SyntaxKind.MethodDeclaration,
-                SyntaxKind.ParenthesizedLambdaExpression,
-                SyntaxKind.SimpleLambdaExpression
-            };
-
             private readonly EndInvokeContext context;
 
-            public InvocationWalker(EndInvokeContext context)
-            {
+            public InvocationWalker(EndInvokeContext context) =>
                 this.context = context;
-            }
 
             public override void Visit(SyntaxNode node)
             {
-                if (!context.ContainsEndInvoke  // Stop visiting once we found it
-                    && (node == context.Root || !node.IsAnyKind(VisitOnlyOnParent)))
+                if (context.Visit(node))
                 {
                     base.Visit(node);
                 }

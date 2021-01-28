@@ -102,32 +102,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private class InvocationWalker : VisualBasicSyntaxWalker
         {
-            private static readonly SyntaxKind[] VisitOnlyOnParent = new[]
-            {
-                // FIXME: Coverage
-                //SyntaxKind.ConstructorBlock,
-                SyntaxKind.FunctionBlock,
-                //SyntaxKind.MultiLineFunctionLambdaExpression,
-                //SyntaxKind.MultiLineSubLambdaExpression,
-                //SyntaxKind.SingleLineFunctionLambdaExpression,
-                //SyntaxKind.SingleLineSubLambdaExpression,
-                //SyntaxKind.SubBlock,
-
-
-
-            };
-
             private readonly EndInvokeContext context;
 
-            public InvocationWalker(EndInvokeContext context)
-            {
+            public InvocationWalker(EndInvokeContext context) =>
                 this.context = context;
-            }
 
             public override void Visit(SyntaxNode node)
             {
-                if (!context.ContainsEndInvoke  // Stop visiting once we found it
-                    && (node == context.Root || !node.IsAnyKind(VisitOnlyOnParent)))
+                if (context.Visit(node))
                 {
                     base.Visit(node);
                 }
