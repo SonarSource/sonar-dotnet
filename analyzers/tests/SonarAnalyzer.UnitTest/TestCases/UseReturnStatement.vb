@@ -1,4 +1,6 @@
 ﻿Public Class ImplicitReturnStatementsAreNoncompliant
+    Implements IInterface
+    
     Public Function AssignedReturnValueOnly() As Integer
         AssignedReturnValueOnly = 42 ' Noncompliant ^9#23
     End Function
@@ -40,6 +42,10 @@
         value <<= ReadAssignementStatements ' Noncompliant {{Do not make use of the implicit return value.}}
         value >>= ReadAssignementStatements ' Noncompliant {{Do not make use of the implicit return value.}}
         Return value
+    End Function
+    
+     Public Function ImplementedInterfaceMethod() As Integer Implements IInterface.ImplementedInterfaceMethod
+        ImplementedInterfaceMethod = 42 ' Noncompliant
     End Function
 
 End Class
