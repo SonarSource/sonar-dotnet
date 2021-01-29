@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                if (!context.VisitInvocationExpression(node))   // FIXME: Otocit
+                if (context.VisitInvocationExpression(node))
                 {
                     base.VisitInvocationExpression(node);
                 }

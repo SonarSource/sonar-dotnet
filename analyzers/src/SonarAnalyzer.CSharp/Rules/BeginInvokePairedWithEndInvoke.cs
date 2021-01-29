@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                if (!context.VisitInvocationExpression(node))
+                if (context.VisitInvocationExpression(node))
                 {
                     base.VisitInvocationExpression(node);
                 }
