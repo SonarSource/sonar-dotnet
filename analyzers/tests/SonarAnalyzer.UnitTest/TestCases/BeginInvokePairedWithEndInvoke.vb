@@ -47,6 +47,13 @@ Module Common
         Caller.BeginInvoke("delegate", Callback, Nothing) ' Noncompliant
     End Sub
 
+    Private Sub BeginInvokeOnDelegateWithLambdaCallback3()
+        Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
+        Dim Callback As AsyncCallback = New AsyncCallback(Sub(Result)
+                                                          End Sub)
+        Caller.BeginInvoke("delegate", Callback, Nothing) ' Noncompliant
+    End Sub
+
     Private Sub BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback1()
         Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
         Caller.BeginInvoke(Name:="delegate", DelegateAsyncState:=Nothing, DelegateCallback:=Sub(Result) Caller.EndInvoke(Result))   ' Compliant
@@ -58,7 +65,7 @@ Module Common
     Private Sub BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback2()
         Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
         Dim Callback As New AsyncCallback(Sub(Result) Caller.EndInvoke(Result))
-        Caller.BeginInvoke("delegate", Callback, Nothing) ' Compliant, EndInvoke is called by wrapper.CallEndInvoke
+        Caller.BeginInvoke("delegate", Callback, Nothing) ' Compliant, EndInvoke is called by Callback
     End Sub
 
     Private Sub BeginInvokeAndEndInvokeOnDelegateWithVariableCallback()
@@ -70,25 +77,22 @@ Module Common
     Private Sub BeginInvokeAndEndInvokeOnDelegateWithStaticCallback1()
         Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
         Dim Callback As New AsyncCallback(AddressOf SharedCallEndInvoke)
-        Caller.BeginInvoke("delegate", Callback, Nothing) ' Compliant, EndInvoke is called by wrapper.CallEndInvoke
+        Caller.BeginInvoke("delegate", Callback, Nothing) ' Compliant, EndInvoke is called by SharedCallEndInvoke
     End Sub
 
     Private Sub BeginInvokeAndEndInvokeOnDelegateWithStaticCallback2()
         Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
-        Dim Wrapper As New CallerWrapper(Caller)
         Caller.BeginInvoke("delegate", New AsyncCallback(AddressOf SharedDoNothing), Nothing) ' Noncompliant
     End Sub
 
     Private Sub BeginInvokeAndEndInvokeOnDelegateWithStaticCallback3()
         Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
-        Dim Wrapper As New CallerWrapper(Caller)
         Dim Callback As New AsyncCallback(AddressOf SharedDoNothing)
         Caller.BeginInvoke("delegate", Callback, Nothing) ' Noncompliant
     End Sub
 
     Private Sub BeginInvokeOnDelegateWithCallbackAssignment()
         Dim Caller As New AsyncMethodCaller(AddressOf AsyncMethod)
-        Dim Wrapper As New CallerWrapper(Caller)
         Dim Callback As AsyncCallback
         Callback = New AsyncCallback(AddressOf SharedDoNothing)
         Caller.BeginInvoke("delegate", Callback, Nothing) ' false-negative, we only look at the variable initialization and not at all its assignments

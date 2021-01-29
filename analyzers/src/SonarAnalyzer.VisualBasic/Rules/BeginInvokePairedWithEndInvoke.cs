@@ -77,27 +77,30 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel)
         {
             var callback = callbackArg.RemoveParentheses();
-            if (callback.IsKind(SyntaxKind.IdentifierName))
+            if (callback is IdentifierNameSyntax identifier)
             {
-                callback = LookupIdentifierInitializer((IdentifierNameSyntax)callback, semanticModel);
+                callback = LookupIdentifierInitializer(identifier, semanticModel);
             }
 
             if (callback is ObjectCreationExpressionSyntax objectCreation)
             {
                 callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().GetExpression() : null;
-                if (callback != null && semanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol)
-                {
-                    callback = methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-                }
+            }
+
+            if (callback is UnaryExpressionSyntax addressOf
+                && callback.IsKind(SyntaxKind.AddressOfExpression)
+                && semanticModel.GetSymbolInfo(addressOf.Operand).Symbol is IMethodSymbol methodSymbol)
+            {
+                callback = methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().Parent;
             }
 
             return callback;
         }
 
         private static SyntaxNode LookupIdentifierInitializer(IdentifierNameSyntax identifier, SemanticModel semantic) =>
-            semantic.GetSymbolInfo(identifier).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is VariableDeclaratorSyntax variableDeclarator
-                && variableDeclarator.Initializer is EqualsValueSyntax equalsValue
-                ? equalsValue.Value.RemoveParentheses()
+            semantic.GetSymbolInfo(identifier).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is ModifiedIdentifierSyntax modifiedIdentifier
+            && modifiedIdentifier.Parent is VariableDeclaratorSyntax variableDeclarator
+                ? variableDeclarator.Initializer?.Value.RemoveParentheses() ?? (variableDeclarator.AsClause as AsNewClauseSyntax)?.NewExpression
                 : null;
 
         private class InvocationWalker : VisualBasicSyntaxWalker
@@ -117,7 +120,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                if (!context.VisitInvocationExpression(node))
+                if (!context.VisitInvocationExpression(node))   // FIXME: Otocit
                 {
                     base.VisitInvocationExpression(node);
                 }

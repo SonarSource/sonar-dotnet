@@ -71,9 +71,9 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel)
         {
             var callback = callbackArg.RemoveParentheses();
-            if (callback.IsKind(SyntaxKind.IdentifierName))
+            if (callback is IdentifierNameSyntax identifier)
             {
-                callback = LookupIdentifierInitializer((IdentifierNameSyntax)callback, semanticModel);
+                callback = LookupIdentifierInitializer(identifier, semanticModel);
             }
 
             if (callback is ObjectCreationExpressionSyntax objectCreation)
