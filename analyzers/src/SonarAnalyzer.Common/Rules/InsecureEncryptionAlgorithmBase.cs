@@ -26,11 +26,13 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class InsecureEncryptionAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax>
-        : DoNotCallInsecureSecurityAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax>
+    public abstract class InsecureEncryptionAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax, TArgumentListSyntax, TArgumentSyntax>
+        : DoNotCallInsecureSecurityAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax, TArgumentListSyntax, TArgumentSyntax>
         where TSyntaxKind : struct
         where TInvocationExpressionSyntax : SyntaxNode
         where TObjectCreationExpressionSyntax : SyntaxNode
+        where TArgumentListSyntax : SyntaxNode
+        where TArgumentSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S5547";
         private const string MessageFormat = "Use a strong cipher algorithm.";

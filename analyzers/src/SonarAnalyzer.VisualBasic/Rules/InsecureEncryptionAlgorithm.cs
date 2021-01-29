@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -32,13 +30,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
+    public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
     {
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
         protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
-        protected override SyntaxKind StringLiteral => SyntaxKind.StringLiteralExpression;
         protected override ILanguageFacade LanguageFacade => VisualBasicFacade.Instance;
 
         public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
@@ -49,34 +46,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
             objectCreation.Type.GetLocation();
 
-        protected override bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocationExpression)
-        {
-            var argumentList = invocationExpression.ArgumentList;
+        protected override ArgumentListSyntax ArgumentList(InvocationExpressionSyntax invocationExpression) =>
+            invocationExpression.ArgumentList;
 
-            if (argumentList == null || methodSymbol.ContainingType == null)
-            {
-                return false;
-            }
+        protected override SeparatedSyntaxList<ArgumentSyntax> Arguments(ArgumentListSyntax argumentList) =>
+            argumentList.Arguments;
+        protected override bool IsStringLiteralArgument(ArgumentSyntax argument) =>
+            argument.GetExpression().IsKind(SyntaxKind.StringLiteralExpression);
 
-            var methodFullName = $"{methodSymbol.ContainingType}.{methodSymbol.Name}";
-
-            if (argumentList.Arguments.Count == 0)
-            {
-                return AlgorithmParameterlessFactoryMethods.Contains(methodFullName);
-            }
-
-            if (argumentList.Arguments.Count > 1 || !argumentList.Arguments.First().GetExpression().IsKind(SyntaxKind.StringLiteralExpression))
-            {
-                return false;
-            }
-
-            if (!AlgorithmParameterizedFactoryMethods.Contains(methodFullName))
-            {
-                return false;
-            }
-
-            var literalExpressionSyntax = (LiteralExpressionSyntax)argumentList.Arguments.First().GetExpression();
-            return FactoryParameterNames.Any(alg => alg.Equals(literalExpressionSyntax.Token.ValueText, StringComparison.Ordinal));
-        }
+        protected override string StringLiteralValue(ArgumentSyntax argument) =>
+            ((LiteralExpressionSyntax)argument.GetExpression()).Token.ValueText;
     }
 }

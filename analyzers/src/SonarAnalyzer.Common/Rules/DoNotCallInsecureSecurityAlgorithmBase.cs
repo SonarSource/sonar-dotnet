@@ -18,31 +18,38 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotCallInsecureSecurityAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax> : SonarDiagnosticAnalyzer
+    public abstract class DoNotCallInsecureSecurityAlgorithmBase<TSyntaxKind, TInvocationExpressionSyntax, TObjectCreationExpressionSyntax, TArgumentListSyntax, TArgumentSyntax>
+        : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TInvocationExpressionSyntax : SyntaxNode
         where TObjectCreationExpressionSyntax : SyntaxNode
+        where TArgumentListSyntax : SyntaxNode
+        where TArgumentSyntax : SyntaxNode
     {
         protected abstract ISet<string> AlgorithmParameterlessFactoryMethods { get; }
         protected abstract ISet<string> AlgorithmParameterizedFactoryMethods { get; }
         protected abstract ISet<string> FactoryParameterNames { get; }
         protected abstract TSyntaxKind ObjectCreation { get; }
         protected abstract TSyntaxKind Invocation { get; }
-        protected abstract TSyntaxKind StringLiteral { get; }
         protected abstract ILanguageFacade LanguageFacade { get; }
         private protected abstract ImmutableArray<KnownType> AlgorithmTypes { get; }
 
         protected abstract SyntaxNode InvocationExpression(TInvocationExpressionSyntax invocation);
-        protected abstract bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol, TInvocationExpressionSyntax invocationExpression);
         protected abstract Location Location(TObjectCreationExpressionSyntax objectCreation);
+        protected abstract TArgumentListSyntax ArgumentList(TInvocationExpressionSyntax invocationExpression);
+        protected abstract SeparatedSyntaxList<TArgumentSyntax> Arguments(TArgumentListSyntax argumentList);
+        protected abstract bool IsStringLiteralArgument(TArgumentSyntax argument);
+        protected abstract string StringLiteralValue(TArgumentSyntax argument);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -79,6 +86,35 @@ namespace SonarAnalyzer.Rules
             {
                 ReportAllDiagnostics(context, Location(objectCreation));
             }
+        }
+
+        private bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol, TInvocationExpressionSyntax invocationExpression)
+        {
+            var argumentList = ArgumentList(invocationExpression);
+
+            if (argumentList == null || methodSymbol.ContainingType == null)
+            {
+                return false;
+            }
+
+            var methodFullName = $"{methodSymbol.ContainingType}.{methodSymbol.Name}";
+
+            if (Arguments(argumentList).Count == 0)
+            {
+                return AlgorithmParameterlessFactoryMethods.Contains(methodFullName);
+            }
+
+            if (Arguments(argumentList).Count > 1 || !IsStringLiteralArgument(Arguments(argumentList).First()))
+            {
+                return false;
+            }
+
+            if (!AlgorithmParameterizedFactoryMethods.Contains(methodFullName))
+            {
+                return false;
+            }
+
+            return FactoryParameterNames.Any(alg => alg.Equals(StringLiteralValue(Arguments(argumentList).First()), StringComparison.Ordinal));
         }
 
         private void ReportAllDiagnostics(SyntaxNodeAnalysisContext context, Location location)

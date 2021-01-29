@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     [Obsolete("This rule is deprecated in favor of S4790")]
-    public sealed class InsecureHashAlgorithm : DoNotCallInsecureSecurityAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
+    public sealed class InsecureHashAlgorithm : DoNotCallInsecureSecurityAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
     {
         internal const string DiagnosticId = "S2070";
         private const string MessageFormat = "Use a stronger hashing/asymmetric algorithm.";
@@ -45,7 +44,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
         protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
-        protected override SyntaxKind StringLiteral => SyntaxKind.StringLiteralExpression;
         protected override ILanguageFacade LanguageFacade => CSharpFacade.Instance;
 
         protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } =
@@ -93,34 +91,16 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
             objectCreation.Type.GetLocation();
 
-        protected override bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocationExpression)
-        {
-            var argumentList = invocationExpression.ArgumentList;
+        protected override ArgumentListSyntax ArgumentList(InvocationExpressionSyntax invocationExpression) =>
+            invocationExpression.ArgumentList;
 
-            if (argumentList == null || methodSymbol.ContainingType == null)
-            {
-                return false;
-            }
+        protected override SeparatedSyntaxList<ArgumentSyntax> Arguments(ArgumentListSyntax argumentList) =>
+            argumentList.Arguments;
 
-            var methodFullName = $"{methodSymbol.ContainingType}.{methodSymbol.Name}";
+        protected override bool IsStringLiteralArgument(ArgumentSyntax argument) =>
+            argument.Expression.IsKind(SyntaxKind.StringLiteralExpression);
 
-            if (argumentList.Arguments.Count == 0)
-            {
-                return AlgorithmParameterlessFactoryMethods.Contains(methodFullName);
-            }
-
-            if (argumentList.Arguments.Count > 1 || !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
-            {
-                return false;
-            }
-
-            if (!AlgorithmParameterizedFactoryMethods.Contains(methodFullName))
-            {
-                return false;
-            }
-
-            var literalExpressionSyntax = (LiteralExpressionSyntax)argumentList.Arguments.First().Expression;
-            return FactoryParameterNames.Any(alg => alg.Equals(literalExpressionSyntax.Token.ValueText, StringComparison.Ordinal));
-        }
+        protected override string StringLiteralValue(ArgumentSyntax argument) =>
+            ((LiteralExpressionSyntax)argument.Expression).Token.ValueText;
     }
 }

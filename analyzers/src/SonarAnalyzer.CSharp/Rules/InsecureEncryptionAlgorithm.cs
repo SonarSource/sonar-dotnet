@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -33,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(S2278DiagnosticId)]
     [Rule(DiagnosticId)]
-    public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax>
+    public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
     {
         // S2278 was deprecated in favor of S5547. Technically, there is no difference in the C# analyzer between
         // the 2 rules, but to be coherent with all the other languages, we still replace it with the new one
@@ -46,45 +44,26 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
         protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
-        protected override SyntaxKind StringLiteral => SyntaxKind.StringLiteralExpression;
         protected override ILanguageFacade LanguageFacade => CSharpFacade.Instance;
 
         public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
+
+        protected override ArgumentListSyntax ArgumentList(InvocationExpressionSyntax invocationExpression) =>
+            invocationExpression.ArgumentList;
+
+        protected override SeparatedSyntaxList<ArgumentSyntax> Arguments(ArgumentListSyntax argumentList) =>
+            argumentList.Arguments;
+
+        protected override bool IsStringLiteralArgument(ArgumentSyntax argument) =>
+            argument.Expression.IsKind(SyntaxKind.StringLiteralExpression);
+
+        protected override string StringLiteralValue(ArgumentSyntax argument) =>
+            ((LiteralExpressionSyntax)argument.Expression).Token.ValueText;
 
         protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
             invocation.Expression;
 
         protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
             objectCreation.Type.GetLocation();
-
-        protected override bool IsInsecureBaseAlgorithmCreationFactoryCall(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocationExpression)
-        {
-            var argumentList = invocationExpression.ArgumentList;
-
-            if (argumentList == null || methodSymbol.ContainingType == null)
-            {
-                return false;
-            }
-
-            var methodFullName = $"{methodSymbol.ContainingType}.{methodSymbol.Name}";
-
-            if (argumentList.Arguments.Count == 0)
-            {
-                return AlgorithmParameterlessFactoryMethods.Contains(methodFullName);
-            }
-
-            if (argumentList.Arguments.Count > 1 || !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
-            {
-                return false;
-            }
-
-            if (!AlgorithmParameterizedFactoryMethods.Contains(methodFullName))
-            {
-                return false;
-            }
-
-            var literalExpressionSyntax = (LiteralExpressionSyntax)argumentList.Arguments.First().Expression;
-            return FactoryParameterNames.Any(alg => alg.Equals(literalExpressionSyntax.Token.ValueText, StringComparison.Ordinal));
-        }
     }
 }
