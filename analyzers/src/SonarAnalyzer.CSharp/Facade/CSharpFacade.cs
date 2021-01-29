@@ -39,7 +39,6 @@ namespace SonarAnalyzer.Helpers
 
         public static CSharpFacade Instance => Singleton.Value;
 
-
         private CSharpFacade() { }
 
         public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>

@@ -37,6 +37,5 @@ namespace SonarAnalyzer.Helpers
 
         protected static Exception Unexpected(SyntaxNode node) =>
             new InvalidOperationException($"Unexpected node: {node.GetType().Name}");
-
     }
 }

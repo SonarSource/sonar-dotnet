@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Helpers
         bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression);
     }
 
-    // ToDo: this should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
+    // This should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
     internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodParameterLookup
         where TArgumentSyntax : SyntaxNode
     {
