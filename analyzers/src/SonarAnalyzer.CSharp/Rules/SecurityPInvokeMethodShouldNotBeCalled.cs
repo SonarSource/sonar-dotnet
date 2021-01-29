@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax, IdentifierNameSyntax>
+    public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax>
     {
         protected override SyntaxKind SyntaxKind => SyntaxKind.InvocationExpression;
         protected override ILanguageFacade Language => CSharpFacade.Instance;
@@ -39,7 +39,14 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxNode Expression(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.Expression;
 
-        protected override SyntaxToken Identifier(IdentifierNameSyntax identifierName) =>
-            identifierName.Identifier;
+        protected override SyntaxToken Identifier(SyntaxNode syntaxNode) =>
+            ((IdentifierNameSyntax)syntaxNode).Identifier;
+
+        protected override IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
+            syntaxNode is IdentifierNameSyntax identifierName
+            && InvalidMethods.Contains(identifierName.Identifier.ValueText)
+            && semanticModel.GetSymbolInfo(syntaxNode).Symbol is IMethodSymbol methodSymbol
+                ? methodSymbol
+                : null;
     }
 }

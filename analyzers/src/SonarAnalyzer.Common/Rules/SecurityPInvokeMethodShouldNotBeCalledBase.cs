@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -27,20 +28,21 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class SecurityPInvokeMethodShouldNotBeCalledBase<TSyntaxKind, TInvocationExpressionSyntax, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
+    public abstract class SecurityPInvokeMethodShouldNotBeCalledBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TInvocationExpressionSyntax : SyntaxNode
-        where TIdentifierNameSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S3884";
         protected const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
-        protected const string InteropDllName = "ole32.dll";
+        protected const string InteropName = "ole32";
+        protected const string InteropDllName = InteropName + ".dll";
 
         protected abstract TSyntaxKind SyntaxKind { get; }
         protected abstract ILanguageFacade Language { get; }
 
         protected abstract SyntaxNode Expression(TInvocationExpressionSyntax invocationExpression);
-        protected abstract SyntaxToken Identifier(TIdentifierNameSyntax identifierName);
+        protected abstract SyntaxToken Identifier(SyntaxNode syntaxNode);
+        protected abstract IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -60,23 +62,25 @@ namespace SonarAnalyzer.Rules
 
         protected virtual bool IsImportFromInteropDll(ISymbol symbol) =>
             symbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).FirstOrDefault() is AttributeData attributeData
-            && attributeData.ConstructorArguments.Any(x => x.Value.Equals(InteropDllName));
+            && attributeData.ConstructorArguments.Any(x => x.Value is string stringValue && IsInterop(stringValue));
 
-        protected virtual string GetMethodName(ISymbol symbol, SyntaxToken syntaxToken) =>
-            syntaxToken.ValueText;
+        protected virtual string GetMethodName(ISymbol symbol) =>
+            symbol.Name;
+
+        protected static bool IsInterop(string dllName) =>
+            dllName.Equals(InteropName, StringComparison.OrdinalIgnoreCase)
+            || dllName.Equals(InteropDllName, StringComparison.OrdinalIgnoreCase);
 
         private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
             if (analysisContext.Node is TInvocationExpressionSyntax invocation
-                && Expression(invocation) is TIdentifierNameSyntax directMethodCall
-                && analysisContext.SemanticModel.GetSymbolInfo(directMethodCall) is SymbolInfo methodCallSymbol
-                && methodCallSymbol.Symbol != null
-                && InvalidMethods.Contains(GetMethodName(methodCallSymbol.Symbol, Identifier(directMethodCall)))
-                && methodCallSymbol.Symbol.IsExtern
-                && methodCallSymbol.Symbol.IsStatic
-                && IsImportFromInteropDll(methodCallSymbol.Symbol))
+                && Expression(invocation) is { } directMethodCall
+                && MethodSymbolForInvalidInvocation(directMethodCall, analysisContext.SemanticModel) is IMethodSymbol methodSymbol
+                && methodSymbol.IsExtern
+                && methodSymbol.IsStatic
+                && IsImportFromInteropDll(methodSymbol))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Identifier(directMethodCall).GetLocation(), GetMethodName(methodCallSymbol.Symbol, Identifier(directMethodCall))));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Identifier(directMethodCall).GetLocation(), GetMethodName(methodSymbol)));
             }
         }
     }

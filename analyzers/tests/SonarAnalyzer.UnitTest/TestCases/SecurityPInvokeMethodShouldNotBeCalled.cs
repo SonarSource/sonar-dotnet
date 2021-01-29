@@ -5,7 +5,7 @@ namespace Tests.Diagnostics
 {
     class Program
     {
-        [DllImport("ole32.dll")]
+        [DllImport("OlE32.dll")]
         static extern int CoSetProxyBlanket([MarshalAs(UnmanagedType.IUnknown)]object pProxy, uint dwAuthnSvc,
             uint dwAuthzSvc, [MarshalAs(UnmanagedType.LPWStr)] string pServerPrincName, uint dwAuthnLevel, uint dwImpLevel,
             IntPtr pAuthInfo, uint dwCapabilities);
@@ -49,7 +49,7 @@ namespace Tests.Diagnostics
             DisableAAA = 0x1000
         }
 
-        [DllImport("ole32.dll")]
+        [DllImport("ole32")]
         public static extern int CoInitializeSecurity(IntPtr pVoid, int cAuthSvc, IntPtr asAuthSvc, IntPtr pReserved1,
             RpcAuthnLevel level, RpcImpLevel impers, IntPtr pAuthList, EoAuthnCap dwCapabilities, IntPtr pReserved3);
 

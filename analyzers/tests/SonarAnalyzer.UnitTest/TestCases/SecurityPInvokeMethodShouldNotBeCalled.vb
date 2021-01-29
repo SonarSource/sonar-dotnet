@@ -42,7 +42,7 @@ Namespace Tests.TestCases
 
     Public Class Noncompliant1
 
-    <DllImport("ole32.dll")>
+    <DllImport("oLe32")>
     Public Shared Function CoSetProxyBlanket(<MarshalAs(UnmanagedType.IUnknown)>pProxy As Object, dwAuthnSvc as UInt32, dwAuthzSvc As UInt32, <MarshalAs(UnmanagedType.LPWStr)> pServerPrincName As String, dwAuthnLevel As UInt32, dwImpLevel As UInt32, pAuthInfo As IntPtr, dwCapabilities As UInt32) As Integer
     End Function
 
@@ -55,6 +55,9 @@ Namespace Tests.TestCases
         '                      ^^^^^^^^^^^^^^^^^
         Dim Hres2 As Integer = CoInitializeSecurity(IntPtr.Zero, -1, IntPtr.Zero, IntPtr.Zero, RpcAuthnLevel.None, RpcImpLevel.Impersonate, IntPtr.Zero, EoAuthnCap.None, IntPtr.Zero) ' Noncompliant {{Refactor the code to remove this use of 'CoInitializeSecurity'.}}
         '                      ^^^^^^^^^^^^^^^^^^^^
+
+        Hres2 = cOINITIALIZEsECURITY(IntPtr.Zero, -1, IntPtr.Zero, IntPtr.Zero, RpcAuthnLevel.None, RpcImpLevel.Impersonate, IntPtr.Zero, EoAuthnCap.None, IntPtr.Zero) ' Noncompliant {{Refactor the code to remove this use of 'CoInitializeSecurity'.}}
+        '       ^^^^^^^^^^^^^^^^^^^^
     End Sub
 
     End Class

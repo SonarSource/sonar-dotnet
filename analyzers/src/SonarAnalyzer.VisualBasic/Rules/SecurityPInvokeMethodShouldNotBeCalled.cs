@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -30,7 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax, IdentifierNameSyntax>
+    public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax>
     {
         protected override SyntaxKind SyntaxKind => SyntaxKind.InvocationExpression;
         protected override ILanguageFacade Language => VisualBasicFacade.Instance;
@@ -40,21 +41,24 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxNode Expression(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.Expression;
 
-        protected override SyntaxToken Identifier(IdentifierNameSyntax identifierName) =>
-            identifierName.Identifier;
+        protected override SyntaxToken Identifier(SyntaxNode syntaxNode) =>
+            ((IdentifierNameSyntax)syntaxNode).Identifier;
 
         protected override bool IsImportFromInteropDll(ISymbol symbol) =>
-            (symbol.DeclaringSyntaxReferences.FirstOrDefault() is { } delcarationRef
-             && delcarationRef.GetSyntax() is DeclareStatementSyntax declaration
-             && declaration.LibraryName != null
-             && declaration.LibraryName.GetStringValue() == InteropDllName)
-            || base.IsImportFromInteropDll(symbol);
+            base.IsImportFromInteropDll(symbol)
+            || (symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is DeclareStatementSyntax declaration
+                && IsInterop(declaration.LibraryName?.GetStringValue()));
 
-        protected override string GetMethodName(ISymbol symbol, SyntaxToken syntaxToken) =>
-            symbol.DeclaringSyntaxReferences.FirstOrDefault() is { } delcarationRef
-            && delcarationRef.GetSyntax() is DeclareStatementSyntax declaration
+        protected override string GetMethodName(ISymbol symbol) =>
+            symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is DeclareStatementSyntax declaration
             && declaration.AliasName != null
                 ? declaration.AliasName.GetStringValue()
-                : base.GetMethodName(symbol, syntaxToken);
+                : symbol.Name;
+
+        protected override IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(syntaxNode).Symbol is IMethodSymbol methodSymbol
+            && InvalidMethods.Any(x => x.Equals(GetMethodName(methodSymbol), StringComparison.OrdinalIgnoreCase))
+                ? methodSymbol
+                : null;
     }
 }
