@@ -243,6 +243,14 @@ namespace Tests.Diagnostics
                 caller.BeginInvoke("Foo", null, null); // Noncompliant
             }
 
+            private void InvokeSomethingElse()
+            {
+                var BeginInvoke = "MemberBinding";
+                var EndInvoke = "MemberBinding";
+                BeginInvoke.ToString();
+                EndInvoke.ToString();
+            }
+
             public struct FooStruct
             {
                 public string field;

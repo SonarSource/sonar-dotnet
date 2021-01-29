@@ -251,6 +251,36 @@ Public Class ForCoverage
         Caller.BeginInvoke("Foo", Nothing, Nothing) ' Noncompliant
     End Sub
 
+    Public Sub BeginInvoke()
+    End Sub
+
+    Private Sub EndInvoke()
+    End Sub
+
+    Public Sub BeginInvoke(Arg As String)
+    End Sub
+
+    Private Sub InvokeFakeMethod()
+        BeginInvoke()
+        BeginInvoke("Wrong parameter type")
+        EndInvoke()
+    End Sub
+
+    Private Sub InvokeSomethingElse()
+        Dim BeginInvoke As String = "MemberBinding"
+        Dim EndInvoke As String = "MemberBinding"
+        BeginInvoke.ToString()
+        EndInvoke.ToString()
+    End Sub
+
+    Private Sub InvokeFromInvocation()
+        Caller.BeginInvoke("FromInvocation", CreateCallback(), Nothing) 'Noncompliant
+    End Sub
+
+    Private Function CreateCallback() As AsyncCallback
+        Return Nothing
+    End Function
+
     Public Structure FooStruct
 
         Public Field As String
