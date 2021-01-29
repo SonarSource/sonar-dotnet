@@ -74,19 +74,19 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             public override void VisitImplementsClause(ImplementsClauseSyntax node) { /* Skip */ }
 
-            private bool IsImplicitReturnValue(IdentifierNameSyntax node) =>
-                name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase)
-                && !IsExcluded(node);
+            public override void VisitImplementsClause(ImplementsClauseSyntax node) => Skip();
+            public override void VisitInvocationExpression(InvocationExpressionSyntax node) => Skip();
+            public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node) => Skip();
+            public override void VisitNamedFieldInitializer(NamedFieldInitializerSyntax node) => Skip();
 
-            private static bool IsExcluded(SyntaxNode node) =>
-                node.Parent is InvocationExpressionSyntax
-                || node.Parent is MemberAccessExpressionSyntax
-                || node.Parent is NamedFieldInitializerSyntax
-                || node.Ancestors().OfType<ImplementsClauseSyntax>().Any();
+            private bool IsImplicitReturnValue(IdentifierNameSyntax node) =>
+                name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase);
 
             private static bool IsAssignmentStatement(SyntaxNode node) =>
                 node.Parent is AssignmentStatementSyntax assignement
                 && assignement.Left == node;
+
+            private static void Skip() { /*'skip this syntax */ }
         }
     }
 }
