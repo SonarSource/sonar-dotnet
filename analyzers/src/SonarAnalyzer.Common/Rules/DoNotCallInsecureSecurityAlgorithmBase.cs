@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
         protected abstract ISet<string> FactoryParameterNames { get; }
         protected abstract TSyntaxKind ObjectCreation { get; }
         protected abstract TSyntaxKind Invocation { get; }
-        protected abstract ILanguageFacade LanguageFacade { get; }
+        protected abstract ILanguageFacade Language { get; }
         private protected abstract ImmutableArray<KnownType> AlgorithmTypes { get; }
 
         protected abstract SyntaxNode InvocationExpression(TInvocationExpressionSyntax invocation);
@@ -53,8 +53,8 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(LanguageFacade.GeneratedCodeRecognizer, CheckObjectCreation, ObjectCreation);
-            context.RegisterSyntaxNodeActionInNonGenerated(LanguageFacade.GeneratedCodeRecognizer, CheckInvocation, Invocation);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckObjectCreation, ObjectCreation);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckInvocation, Invocation);
         }
 
         private void CheckInvocation(SyntaxNodeAnalysisContext context)

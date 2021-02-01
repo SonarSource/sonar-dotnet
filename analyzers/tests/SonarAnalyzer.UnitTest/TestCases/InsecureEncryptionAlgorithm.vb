@@ -30,7 +30,7 @@ Namespace Tests.TestCases
     Public Class InsecureEncryptionAlgorithm
 
         Public Sub New()
-        
+
             Using TripleDES As New MyTripleDESCryptoServiceProvider() ' Noncompliant    {{Use a strong cipher algorithm.}}
             '                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             '   ...

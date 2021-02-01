@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
         protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
-        protected override ILanguageFacade LanguageFacade => CSharpFacade.Instance;
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } =
             new HashSet<string>

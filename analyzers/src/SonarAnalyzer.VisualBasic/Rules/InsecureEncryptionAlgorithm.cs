@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
         protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
-        protected override ILanguageFacade LanguageFacade => VisualBasicFacade.Instance;
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
 
@@ -51,6 +51,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SeparatedSyntaxList<ArgumentSyntax> Arguments(ArgumentListSyntax argumentList) =>
             argumentList.Arguments;
+
         protected override bool IsStringLiteralArgument(ArgumentSyntax argument) =>
             argument.GetExpression().IsKind(SyntaxKind.StringLiteralExpression);
 
