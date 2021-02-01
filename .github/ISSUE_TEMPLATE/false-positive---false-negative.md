@@ -13,7 +13,7 @@ Please provide a succinct description of your issue. Also please provide the rul
 
 ### Repro steps
 
-Please provide a code snippet that compiles which reproduces the problem. Alternatively, a link to a SonarCloud project where the issue appears, or a git repository, or attach a zip with a reproducer project.
+Please provide a minimal code snippet that compiles which reproduces the problem. Alternatively, you can share a link to the SonarCloud public project where the issue appears. If the issue requires some specific project configuration to reproduce, you can create minimal reproducible project and share it's git repository or attach it as a ZIP file.
 
 ### Expected behavior
 
