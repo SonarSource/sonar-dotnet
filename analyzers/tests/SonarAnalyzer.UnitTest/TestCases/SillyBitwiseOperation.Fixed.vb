@@ -43,7 +43,9 @@ Class SillyBitwiseOperation
         If True AndAlso True Then Return
         If True OrElse True Then Return
 
-        Dim Flags As Types = Types.Class Or Types.Private   ' Compliant even when Class Is zero
+        Dim Flags As Types = Types.Class Or Types.Private   ' Compliant even when class is zero
+        Flags = Types.Class
+        Flags = Flags Or Types.Private      ' Compliant, even when "flags" was initally zero
     End Sub
 
     Private Shared Function ReturnLong() As Long

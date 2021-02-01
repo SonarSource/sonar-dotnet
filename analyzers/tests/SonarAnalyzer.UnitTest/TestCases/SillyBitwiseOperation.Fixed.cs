@@ -45,6 +45,8 @@ namespace Tests.Diagnostics
             MyMethod(1UL); // Fixed
 
             var flags = Types.Class | Types.Private; // Compliant even when Class is zero
+            flags = Types.Class;
+            flags = flags | Types.Private;  // Compliant, even when "flags" was initally zero
         }
 
         private static long returnLong()
