@@ -97,23 +97,23 @@ namespace Tests.Diagnostics
 
         public Program(string s) : this(s.Length) { }   // Noncompliant {{Refactor this constructor to avoid using members of parameter 's' because it could be null.}}
 
-      public void NonCompliant1(object o)
-      {
-        var c = o?.ToString()?.IsNormalized();
-        if (c == null)
+        public void NonCompliant1(object o)
         {
-          o.GetType().GetMethods();  // Noncompliant
+            var c = o?.ToString()?.IsNormalized();
+            if (c == null)
+            {
+                o.GetType().GetMethods();  // Noncompliant
+            }
         }
-      }
 
-      public void Compliant1(object o)
-      {
-        var c = o?.ToString()?.IsNormalized();
-        if (c != null)
+        public void Compliant1(object o)
         {
-          o.GetType().GetMethods();
+            var c = o?.ToString()?.IsNormalized();
+            if (c != null)
+            {
+                o.GetType().GetMethods();
+            }
         }
-      }
     }
 
     [AttributeUsage(AttributeTargets.Parameter)]
@@ -121,7 +121,7 @@ namespace Tests.Diagnostics
 
     public static class GuardExtensionClass
     {
-        public static void GuardExtension([ValidatedNotNull]this string value) { }
+        public static void GuardExtension([ValidatedNotNull] this string value) { }
     }
 
     public class GuardedTests
@@ -144,13 +144,13 @@ namespace Tests.Diagnostics
             s5.ToUpper(); // Noncompliant - FP for extensions having the [ValidatedNotNull] attribute
         }
 
-        public void Guard1<T>([ValidatedNotNull]T value) where T : class { }
+        public void Guard1<T>([ValidatedNotNull] T value) where T : class { }
 
-        public void Guard2<T>([ValidatedNotNull]T value, string name) where T : class { }
+        public void Guard2<T>([ValidatedNotNull] T value, string name) where T : class { }
 
-        public void Guard3<T>(string name, [ValidatedNotNull]T value) where T : class { }
+        public void Guard3<T>(string name, [ValidatedNotNull] T value) where T : class { }
 
-        public static void Guard4<T>([ValidatedNotNull]T value) where T : class { }
+        public static void Guard4<T>([ValidatedNotNull] T value) where T : class { }
     }
 
     public class ReproIssue2476
@@ -190,13 +190,13 @@ namespace Tests.Diagnostics
 
         public void Method3(string infixes)
         {
-                Method(ref infixes, infixes.Length); // Noncompliant
-                var x = infixes.Length; // Noncompliant
+            Method(ref infixes, infixes.Length); // Noncompliant
+            var x = infixes.Length; // Noncompliant
         }
 
         public void Method4(string contentType)
         {
-             if (string.IsNullOrEmpty(contentType))
+            if (string.IsNullOrEmpty(contentType))
             {
                 throw new ArgumentException("inputString cannot be null or empty", contentType);
             }
@@ -274,11 +274,24 @@ namespace Tests.Diagnostics
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/2670
     public class ReproIssue2670
     {
-        public static void BooleanEqualityComparison(string argument, bool b)
+        public static void BooleanEqualityComparisonIsNullOrEmpty(string argument, bool b)
         {
             if (string.IsNullOrEmpty(argument) == true)
+            {
+                return;
+            }
+            if (b)
+            {
+                int index = argument.LastIndexOf('c'); // Noncompliant FP
+            }
+        }
+
+        public static void BooleanEqualityComparisonWithIsNullOrWhiteSpace(string argument, bool b)
+        {
+            if (string.IsNullOrWhiteSpace(argument) == true)
             {
                 return;
             }
@@ -468,7 +481,7 @@ namespace CSharp8
         {
             return address switch
             {
-                {State: "WA" } addr => s.ToString(), // Noncompliant
+                { State: "WA" } addr => s.ToString(), // Noncompliant
                 _ => string.Empty
             };
         }
@@ -486,19 +499,19 @@ namespace CSharp8
         {
             return person switch
             {
-                { Address: {State: "WA" } } pers => s.ToString(), // Noncompliant
+                { Address: { State: "WA" } } pers => s.ToString(), // Noncompliant
                 _ => string.Empty
             };
         }
 
         public string MultipleBranches_TuplePattern(Address address, string s)
-         {
-             return address switch
-             {
-                 var (name, state) => s.ToString(), // Compliant - FN
-                 _ => string.Empty
-             };
-         }
+        {
+            return address switch
+            {
+                var (name, state) => s.ToString(), // Compliant - FN
+                _ => string.Empty
+            };
+        }
 
         public string MultipleBranches_WhenClause(Address address, string s)
         {

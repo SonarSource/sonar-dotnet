@@ -39,19 +39,19 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string Constructor = "constructor to avoid using members of parameter '{0}' because it could be null";
         private const string Method = "method to add validation of parameter '{0}' before using it";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
 
        private static void CollectMemberAccesses(MemberAccessingEventArgs args, ISet<IdentifierNameSyntax> identifiers, SemanticModel semanticModel)
         {
-            if (args.Symbol is IParameterSymbol &&
-                !semanticModel.IsExtensionMethod(args.Identifier.Parent) &&
-                !args.Symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
+            if (args.Symbol is IParameterSymbol
+                && !semanticModel.IsExtensionMethod(args.Identifier.Parent)
+                && !args.Symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
             {
                 identifiers.Add(args.Identifier);
             }
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                identifiers.Select(identifier => Diagnostic.Create(rule, identifier.GetLocation(), GetMessage(identifier)));
+                identifiers.Select(identifier => Diagnostic.Create(Rule, identifier.GetLocation(), GetMessage(identifier)));
 
             public void Dispose()
             {
