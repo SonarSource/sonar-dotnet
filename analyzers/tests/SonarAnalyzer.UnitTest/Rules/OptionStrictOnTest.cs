@@ -47,11 +47,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void OptionStrictOn_IsCustom() =>
-            VerifyAnalyzer("Option Strict Custom ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}");
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void OptionStrictOn_IsOn() =>
             VerifyAnalyzer("Option Strict On ' Compliant");
 
