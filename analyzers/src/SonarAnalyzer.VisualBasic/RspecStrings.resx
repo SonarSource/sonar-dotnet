@@ -3834,6 +3834,39 @@
   <data name="S3869_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3884_Category" xml:space="preserve">
+    <value>Blocker Vulnerability</value>
+  </data>
+  <data name="S3884_Description" xml:space="preserve">
+    <value>CoSetProxyBlanket and CoInitializeSecurity both work to set the permissions context in which the process invoked immediately after is executed. Calling them from within that process is useless because it's too late at that point; the permissions context has already been set.</value>
+  </data>
+  <data name="S3884_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3884_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3884_RemediationCost" xml:space="preserve">
+    <value>20min</value>
+  </data>
+  <data name="S3884_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3884_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S3884_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S3884_Tags" xml:space="preserve">
+    <value>owasp-a6</value>
+  </data>
+  <data name="S3884_Title" xml:space="preserve">
+    <value>"CoSetProxyBlanket" and "CoInitializeSecurity" should not be used</value>
+  </data>
+  <data name="S3884_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S3889_Category" xml:space="preserve">
     <value>Blocker Bug</value>
   </data>

@@ -21,6 +21,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,8 +30,12 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SecurityPInvokeMethodShouldNotBeCalled() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SecurityPInvokeMethodShouldNotBeCalled.cs",
-                new CS.SecurityPInvokeMethodShouldNotBeCalled());
+        public void SecurityPInvokeMethodShouldNotBeCalled_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SecurityPInvokeMethodShouldNotBeCalled.cs", new CS.SecurityPInvokeMethodShouldNotBeCalled());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SecurityPInvokeMethodShouldNotBeCalled_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\SecurityPInvokeMethodShouldNotBeCalled.vb", new VB.SecurityPInvokeMethodShouldNotBeCalled());
     }
 }

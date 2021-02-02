@@ -18,21 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax>
     {
         protected override SyntaxKind SyntaxKind => SyntaxKind.InvocationExpression;
-        protected override ILanguageFacade Language => CSharpFacade.Instance;
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         public SecurityPInvokeMethodShouldNotBeCalled() : base(RspecStrings.ResourceManager) { }
 
@@ -42,10 +44,21 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxToken Identifier(SyntaxNode syntaxNode) =>
             ((IdentifierNameSyntax)syntaxNode).Identifier;
 
+        protected override bool IsImportFromInteropDll(ISymbol symbol) =>
+            base.IsImportFromInteropDll(symbol)
+            || (symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is DeclareStatementSyntax declaration
+                && IsInterop(declaration.LibraryName?.GetStringValue()));
+
+        protected override string GetMethodName(ISymbol symbol) =>
+            symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is DeclareStatementSyntax declaration
+            && declaration.AliasName != null
+                ? declaration.AliasName.GetStringValue()
+                : symbol.Name;
+
         protected override IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
-            syntaxNode is IdentifierNameSyntax identifierName
-            && InvalidMethods.Contains(identifierName.Identifier.ValueText)
-            && semanticModel.GetSymbolInfo(syntaxNode).Symbol is IMethodSymbol methodSymbol
+            semanticModel.GetSymbolInfo(syntaxNode).Symbol is IMethodSymbol methodSymbol
+            && GetMethodName(methodSymbol) is { } methodName
+            && InvalidMethods.Any(x => methodName.Equals(x, StringComparison.OrdinalIgnoreCase))
                 ? methodSymbol
                 : null;
     }
