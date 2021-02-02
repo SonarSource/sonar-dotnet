@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
         protected const string InteropDllName = InteropName + ".dll";
 
         protected abstract TSyntaxKind SyntaxKind { get; }
-        protected abstract ILanguageFacade Language { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         protected abstract SyntaxNode Expression(TInvocationExpressionSyntax invocationExpression);
         protected abstract SyntaxToken Identifier(SyntaxNode syntaxNode);
