@@ -32,30 +32,35 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class OptionStrictOn : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S6145";
-        private const string MessageFormat = "Option Strict should be set to 'On'{0}.";
+        private const string DiagnosticId = "S6145";
+        private const string MessageFormat = "{0}";
+        private const string StatementMessage = "Change this to 'Option Strict On'.";
+        private const string AssemblyMessageFormat = "Configure 'Option Strict On' for assembly '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                c => c.RegisterCompilationEndAction(
-                    cc =>
-                    {
-                        if (c.Compilation.VB().Options.OptionStrict != OptionStrict.On)
-                        {
-                            cc.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, null, " for " + cc.Compilation.AssemblyName));
-                        }
-                    }));
-
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var statement = (OptionStatementSyntax)c.Node;
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                if (statement.NameKeyword.IsKind(SyntaxKind.StrictKeyword) && !statement.ValueKeyword.IsKind(SyntaxKind.OnKeyword))
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, statement.GetLocation(), StatementMessage));
+                }
             },
             SyntaxKind.OptionStatement);
+
+            context.RegisterCompilationStartAction(cStart =>
+                cStart.RegisterCompilationEndAction(c =>
+                {
+                    if (c.Compilation.VB().Options.OptionStrict != OptionStrict.On)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, null, string.Format(AssemblyMessageFormat, c.Compilation.AssemblyName)));
+                    }
+                }));
         }
     }
 }

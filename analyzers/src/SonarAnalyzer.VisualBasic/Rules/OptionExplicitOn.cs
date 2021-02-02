@@ -56,8 +56,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterCompilationStartAction(cStart =>
                 cStart.RegisterCompilationEndAction(c =>
                 {
-                    var options = (VisualBasicCompilationOptions)c.Compilation.Options;
-                    if (!options.OptionExplicit)
+                    if (!c.Compilation.VB().Options.OptionExplicit)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, null, string.Format(AssemblyMessageFormat, c.Compilation.AssemblyName)));
                     }
