@@ -12785,7 +12785,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S927_Description" xml:space="preserve">
-    <value>The name of a parameter in an externally visible. This rule raises and issue when method override does not match the name of the parameter in the base declaration of the method, or the name of the parameter in the interface declaration of the method or the name of any other partial definition.</value>
+    <value>The name of a parameter in an externally visible. This rule raises an issue when method override does not match the name of the parameter in the base declaration of the method, or the name of the parameter in the interface declaration of the method or the name of any other partial definition.</value>
   </data>
   <data name="S927_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
