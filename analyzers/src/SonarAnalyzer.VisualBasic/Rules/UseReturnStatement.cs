@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -74,19 +73,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             public override void VisitImplementsClause(ImplementsClauseSyntax node) { /* Skip */ }
 
-            public override void VisitImplementsClause(ImplementsClauseSyntax node) => Skip();
-            public override void VisitInvocationExpression(InvocationExpressionSyntax node) => Skip();
-            public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node) => Skip();
-            public override void VisitNamedFieldInitializer(NamedFieldInitializerSyntax node) => Skip();
+            public override void VisitImplementsClause(ImplementsClauseSyntax node) { /* Skip */ }
 
             private bool IsImplicitReturnValue(IdentifierNameSyntax node) =>
-                name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase);
+                name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase)
+                && !IsExcluded(node);
+
+            private static bool IsExcluded(SyntaxNode node) =>
+                node.Parent is InvocationExpressionSyntax
+                || node.Parent is MemberAccessExpressionSyntax
+                || node.Parent is NamedFieldInitializerSyntax;
 
             private static bool IsAssignmentStatement(SyntaxNode node) =>
                 node.Parent is AssignmentStatementSyntax assignement
                 && assignement.Left == node;
-
-            private static void Skip() { /*'skip this syntax */ }
         }
     }
 }
