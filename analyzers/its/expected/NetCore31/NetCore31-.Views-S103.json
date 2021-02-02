@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\NetCore31\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  223
+}
+}
+}
+]
+}

@@ -3,5 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+  <ItemGroup>
+    <AdditionalFiles Include="SonarLint.xml" />
+  </ItemGroup>
 </Project>
