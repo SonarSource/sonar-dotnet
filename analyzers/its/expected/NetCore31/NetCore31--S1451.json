@@ -4,7 +4,33 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
+"uri":  "sources\NetCore31\Controllers\HomeController.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
 "uri":  "sources\NetCore31\Program.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\NetCore31\Startup.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
