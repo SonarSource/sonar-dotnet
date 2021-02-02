@@ -20,33 +20,31 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(S2278DiagnosticId)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class InsecureEncryptionAlgorithm : InsecureEncryptionAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
     {
-        // S2278 was deprecated in favor of S5547. Technically, there is no difference in the C# analyzer between
-        // the 2 rules, but to be coherent with all the other languages, we still replace it with the new one
-        private const string S2278DiagnosticId = "S2278";
-        private const string S2278MessageFormat = "Use the recommended AES (Advanced Encryption Standard) instead.";
-
-        private static readonly DiagnosticDescriptor S2278 = DiagnosticDescriptorBuilder.GetDescriptor(S2278DiagnosticId, S2278MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S2278, Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
         protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
-        protected override ILanguageFacade Language => CSharpFacade.Instance;
+        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
         public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
+
+        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
+            invocation.Expression;
+
+        protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation.Type.GetLocation();
 
         protected override ArgumentListSyntax ArgumentList(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.ArgumentList;
@@ -55,15 +53,9 @@ namespace SonarAnalyzer.Rules.CSharp
             argumentList.Arguments;
 
         protected override bool IsStringLiteralArgument(ArgumentSyntax argument) =>
-            argument.Expression.IsKind(SyntaxKind.StringLiteralExpression);
+            argument.GetExpression().IsKind(SyntaxKind.StringLiteralExpression);
 
         protected override string StringLiteralValue(ArgumentSyntax argument) =>
-            ((LiteralExpressionSyntax)argument.Expression).Token.ValueText;
-
-        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
-            invocation.Expression;
-
-        protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation.Type.GetLocation();
+            ((LiteralExpressionSyntax)argument.GetExpression()).Token.ValueText;
     }
 }

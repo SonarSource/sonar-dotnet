@@ -22,6 +22,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -31,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     [Obsolete("This rule is deprecated in favor of S4790")]
-    public sealed class InsecureHashAlgorithm : DoNotCallInsecureSecurityAlgorithm
+    public sealed class InsecureHashAlgorithm : DoNotCallInsecureSecurityAlgorithmBase<SyntaxKind, InvocationExpressionSyntax, ObjectCreationExpressionSyntax, ArgumentListSyntax, ArgumentSyntax>
     {
         internal const string DiagnosticId = "S2070";
         private const string MessageFormat = "Use a stronger hashing/asymmetric algorithm.";
@@ -40,16 +42,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        internal override ImmutableArray<KnownType> AlgorithmTypes { get; } =
-            ImmutableArray.Create(
-                KnownType.System_Security_Cryptography_SHA1,
-                KnownType.System_Security_Cryptography_MD5,
-                KnownType.System_Security_Cryptography_DSA,
-                KnownType.System_Security_Cryptography_RIPEMD160,
-                KnownType.System_Security_Cryptography_HMACSHA1,
-                KnownType.System_Security_Cryptography_HMACMD5,
-                KnownType.System_Security_Cryptography_HMACRIPEMD160
-            );
+        protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
+        protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
+        protected override ILanguageFacade Language => CSharpFacade.Instance;
 
         protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } =
             new HashSet<string>
@@ -67,6 +62,45 @@ namespace SonarAnalyzer.Rules.CSharp
                 "System.Security.Cryptography.HMAC.Create"
             };
 
-        protected override ISet<string> FactoryParameterNames { get; } = new HashSet<string> { "SHA1", "MD5", "DSA", "HMACMD5", "HMACRIPEMD160", "RIPEMD160", "RIPEMD160Managed" };
+        protected override ISet<string> FactoryParameterNames { get; } =
+            new HashSet<string>
+            {
+                "SHA1",
+                "MD5",
+                "DSA",
+                "HMACMD5",
+                "HMACRIPEMD160",
+                "RIPEMD160",
+                "RIPEMD160Managed"
+            };
+
+        private protected override ImmutableArray<KnownType> AlgorithmTypes { get; } =
+            ImmutableArray.Create(
+                KnownType.System_Security_Cryptography_SHA1,
+                KnownType.System_Security_Cryptography_MD5,
+                KnownType.System_Security_Cryptography_DSA,
+                KnownType.System_Security_Cryptography_RIPEMD160,
+                KnownType.System_Security_Cryptography_HMACSHA1,
+                KnownType.System_Security_Cryptography_HMACMD5,
+                KnownType.System_Security_Cryptography_HMACRIPEMD160
+            );
+
+        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
+           invocation.Expression;
+
+        protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation.Type.GetLocation();
+
+        protected override ArgumentListSyntax ArgumentList(InvocationExpressionSyntax invocationExpression) =>
+            invocationExpression.ArgumentList;
+
+        protected override SeparatedSyntaxList<ArgumentSyntax> Arguments(ArgumentListSyntax argumentList) =>
+            argumentList.Arguments;
+
+        protected override bool IsStringLiteralArgument(ArgumentSyntax argument) =>
+            argument.Expression.IsKind(SyntaxKind.StringLiteralExpression);
+
+        protected override string StringLiteralValue(ArgumentSyntax argument) =>
+            ((LiteralExpressionSyntax)argument.Expression).Token.ValueText;
     }
 }
