@@ -5,7 +5,7 @@ namespace Tests.Diagnostics
 {
     public class BooleanLiteralUnnecessary
     {
-        public BooleanLiteralUnnecessary(bool a, bool b, bool? c)
+        public BooleanLiteralUnnecessary(bool a, bool b, bool? c, Item item)
         {
             var z = true;   // Fixed
             z = false;     // Fixed
@@ -73,6 +73,11 @@ namespace Tests.Diagnostics
             }
 
             var d = true ? c : false;
+
+            var newItem = new Item
+            {
+                Required = !(item == null) && item.Required // Fixed
+            };
         }
 
         public static void SomeFunc(bool x) { }
@@ -109,6 +114,11 @@ namespace Tests.Diagnostics
             {
             }
         }
+    }
+
+    public class Item
+    {
+        public bool Required { get; set; }
     }
 
     public class SocketContainer
