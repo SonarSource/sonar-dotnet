@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -33,13 +34,20 @@ namespace SonarAnalyzer.Rules
         where TExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S3981";
-
-        protected const string MessageFormat =
+        private const string MessageFormat =
             "The {0} of '{1}' is always '>=0', so fix this test to get the real expected behavior.";
+
+        private readonly DiagnosticDescriptor rule;
 
         protected abstract TLanguageKindEnum GreaterThanOrEqualExpression { get; }
         protected abstract TLanguageKindEnum LessThanOrEqualExpression { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract string IEnumerableTString { get; }
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected DoNotCheckZeroSizeCollectionBase(System.Resources.ResourceManager rspecStrings) =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings);
 
         protected abstract TExpressionSyntax GetLeftNode(TBinaryExpressionSyntax binaryExpression);
 
@@ -47,7 +55,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ISymbol GetSymbol(SyntaxNodeAnalysisContext context, TExpressionSyntax expression);
 
-        protected abstract string IEnumerableTString { get; }
+        protected abstract TExpressionSyntax RemoveParentheses(TExpressionSyntax expression);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -66,28 +74,14 @@ namespace SonarAnalyzer.Rules
                 }, LessThanOrEqualExpression);
         }
 
-        private void CheckCondition(SyntaxNodeAnalysisContext context, TExpressionSyntax expressionValueNode,
-            TExpressionSyntax constantValueNode)
+        private void CheckCondition(SyntaxNodeAnalysisContext context, TExpressionSyntax expressionValueNode, TExpressionSyntax constantValueNode)
         {
-            if (!IsConstantZero(context, constantValueNode))
+            if (IsConstantZero(context, constantValueNode)
+                && GetSymbol(context, expressionValueNode) is { } symbol
+                && GetDeclaringTypeName(symbol) is { } symbolType)
             {
-                return;
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], context.Node.GetLocation(), symbol.Name.ToLowerInvariant(), symbolType));
             }
-
-            var symbol = GetSymbol(context, expressionValueNode);
-            if (symbol == null)
-            {
-                return;
-            }
-
-            var symbolType = GetDeclaringTypeName(symbol);
-            if (symbolType == null)
-            {
-                return;
-            }
-
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], context.Node.GetLocation(),
-                symbol.Name.ToLowerInvariant(), symbolType));
         }
 
         private string GetDeclaringTypeName(ISymbol symbol)
@@ -107,41 +101,38 @@ namespace SonarAnalyzer.Rules
                 return "ICollection";
             }
 
+            if (IsReadonlyCollectionProperty(symbol))
+            {
+                return "IReadonlyCollection";
+            }
+
             return null;
         }
-
-        protected abstract TExpressionSyntax RemoveParentheses(TExpressionSyntax expression);
 
         private bool IsConstantZero(SyntaxNodeAnalysisContext context, TExpressionSyntax expression)
         {
             var constantExpressionNode = RemoveParentheses(expression);
             var constant = context.SemanticModel.GetConstantValue(constantExpressionNode);
-            if (!constant.HasValue)
-            {
-                return false;
-            }
-
-            return (constant.Value is int) && (int)constant.Value == 0;
+            return constant.HasValue && (constant.Value is int intValue) && intValue == 0;
         }
 
-        private static bool IsEnumerableCountMethod(ISymbol symbol)
-        {
-            var methodSymbol = symbol as IMethodSymbol;
-            return methodSymbol.IsEnumerableCount();
-        }
+        private static bool IsEnumerableCountMethod(ISymbol symbol) =>
+            symbol is IMethodSymbol methodSymbol
+            && methodSymbol.IsEnumerableCount();
 
-        private static bool IsArrayLengthProperty(ISymbol symbol)
-        {
-            return symbol is IPropertySymbol propertySymbol &&
-                   propertySymbol.ContainingType.Is(KnownType.System_Array) &&
-                   (propertySymbol.Name == nameof(Array.Length) || propertySymbol.Name == "LongLength");
-        }
+        private static bool IsArrayLengthProperty(ISymbol symbol) =>
+            symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.Is(KnownType.System_Array)
+            && (propertySymbol.Name == nameof(Array.Length) || propertySymbol.Name == "LongLength");
 
-        private static bool IsCollectionProperty(ISymbol symbol)
-        {
-            return symbol is IPropertySymbol propertySymbol &&
-                   propertySymbol.ContainingType.Implements(KnownType.System_Collections_Generic_ICollection_T) &&
-                   propertySymbol.Name == nameof(System.Collections.Generic.ICollection<object>.Count);
-        }
+        private static bool IsCollectionProperty(ISymbol symbol) =>
+            symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T)
+            && propertySymbol.Name == nameof(System.Collections.Generic.ICollection<object>.Count);
+
+        private static bool IsReadonlyCollectionProperty(ISymbol symbol) =>
+            symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IReadOnlyCollection_T)
+            && propertySymbol.Name == nameof(System.Collections.Generic.IReadOnlyCollection<object>.Count);
     }
 }

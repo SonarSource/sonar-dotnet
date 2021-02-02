@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,25 +31,26 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionBase<SyntaxKind, BinaryExpressionSyntax, ExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
         protected override SyntaxKind GreaterThanOrEqualExpression => SyntaxKind.GreaterThanOrEqualExpression;
         protected override SyntaxKind LessThanOrEqualExpression => SyntaxKind.LessThanOrEqualExpression;
-        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
-        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
-        protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) => expression.RemoveParentheses();
         protected override string IEnumerableTString { get; } = "IEnumerable<T>";
+
+        public DoNotCheckZeroSizeCollection() : base(RspecStrings.ResourceManager) { }
+
+        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) =>
+            binaryExpression.Left;
+
+        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) =>
+            binaryExpression.Right;
+
+        protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) =>
+            expression.RemoveParentheses();
 
         protected override ISymbol GetSymbol(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {
-            while (true)
+            while (expression is ConditionalAccessExpressionSyntax conditionalAccess)
             {
-                if (!(expression is ConditionalAccessExpressionSyntax conditionalAccess))
-                {
-                    break;
-                }
                 expression = conditionalAccess.WhenNotNull;
             }
 

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -32,31 +31,26 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionBase<SyntaxKind, BinaryExpressionSyntax, ExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
         protected override SyntaxKind GreaterThanOrEqualExpression => SyntaxKind.GreaterThanOrEqualExpression;
         protected override SyntaxKind LessThanOrEqualExpression => SyntaxKind.LessThanOrEqualExpression;
-
-        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
-
-        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
-
-        protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) => expression.RemoveParentheses();
-
         protected override string IEnumerableTString { get; } = "IEnumerable(Of T)";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) =>
+            binaryExpression.Left;
+
+        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) =>
+            binaryExpression.Right;
+
+        protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) =>
+            expression.RemoveParentheses();
+
+        public DoNotCheckZeroSizeCollection() : base(RspecStrings.ResourceManager) { }
 
         protected override ISymbol GetSymbol(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {
-            while (true)
+            while ((RemoveParentheses(expression) is ConditionalAccessExpressionSyntax conditionalAccess))
             {
-                if (!(RemoveParentheses(expression) is ConditionalAccessExpressionSyntax conditionalAccess))
-                {
-                    break;
-                }
                 expression = conditionalAccess.WhenNotNull;
             }
 
