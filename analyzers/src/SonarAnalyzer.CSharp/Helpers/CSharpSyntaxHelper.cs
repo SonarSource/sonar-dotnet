@@ -61,13 +61,6 @@ namespace SonarAnalyzer.Helpers
         public static bool AnyOfKind(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
             tokens.Any(n => n.RawKind == (int)kind);
 
-
-
-        public static ExpressionSyntax Get(this ArgumentListSyntax argumentList, int index) =>
-            argumentList != null && argumentList.Arguments.Count > index
-                ? argumentList.Arguments[index].Expression.RemoveParentheses()
-                : null;
-
         public static SyntaxNode GetTopMostContainingMethod(this SyntaxNode node) =>
             node.AncestorsAndSelf().LastOrDefault(ancestor => ancestor is BaseMethodDeclarationSyntax || ancestor is PropertyDeclarationSyntax);
 
@@ -80,9 +73,6 @@ namespace SonarAnalyzer.Helpers
             }
             return currentExpression;
         }
-
-        public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
-            (ExpressionSyntax)RemoveParentheses((SyntaxNode)expression);
 
         public static SyntaxNode GetSelfOrTopParenthesizedExpression(this SyntaxNode node)
         {
@@ -404,12 +394,5 @@ namespace SonarAnalyzer.Helpers
                 ? expressions
                 : ImmutableArray<SyntaxNode>.Empty;
         }
-
-        // (arg, b) = something
-        public static bool IsInTupleAssignmentTarget(this ArgumentSyntax argument) =>
-            argument.Parent is { } tupleExpression
-            && TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
-            && tupleExpression.Parent is AssignmentExpressionSyntax assignment
-            && assignment.Left == tupleExpression;
     }
 }

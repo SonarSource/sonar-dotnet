@@ -22,6 +22,7 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;

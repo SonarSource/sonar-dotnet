@@ -23,6 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -39,5 +40,12 @@ namespace SonarAnalyzer.Extensions
 
         internal static bool NameIs(this ArgumentSyntax argument, string name) =>
             argument.NameColon?.Name.Identifier.Text == name;
+
+        // (arg, b) = something
+        internal static bool IsInTupleAssignmentTarget(this ArgumentSyntax argument) =>
+            argument.Parent is { } tupleExpression
+            && TupleExpressionSyntaxWrapper.IsInstance(tupleExpression)
+            && tupleExpression.Parent is AssignmentExpressionSyntax assignment
+            && assignment.Left == tupleExpression;
     }
 }
