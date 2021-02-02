@@ -9347,7 +9347,7 @@
     <value>Numbers are infinite, but the types that hold them are not. Each numeric type has hard upper and lower bounds. Try to calculate or assign numbers beyond those bounds, and the result will be a value that has silently wrapped around from the expected positive value to a negative one, or vice versa.</value>
   </data>
   <data name="S3949_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S3949_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
