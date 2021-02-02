@@ -35,8 +35,8 @@
     Since we want to generate resources only once, we will run the tool only after .Net build. This is done by
     checking the file extension.
    -->
-  <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(TargetFileName.EndsWith(&quot;exe&quot;))">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(TargetFileName.EndsWith(&quot;exe&quot;))">
     <Exec Command="cd $(OutDir)&#xD;&#xA;$(TargetFileName) cs&#xD;&#xA;$(TargetFileName) vbnet" />
-  </Target>-->
+  </Target>
 
 </Project>
