@@ -18,19 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class InvocationExpressionSyntaxExtensions
+    public static class CSharpSyntaxWalkerExtensions
     {
-        internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccess
-            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
-
-        internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
+        public static bool SafeVisit(this CSharpSyntaxWalker syntaxWalker, SyntaxNode syntaxNode)
+        {
+            try
+            {
+                syntaxWalker.Visit(syntaxNode);
+                return true;
+            }
+            catch (InsufficientExecutionStackException)
+            {
+                // Roslyn walker overflows the stack when the depth of the call is around 2050.
+                // See https://github.com/SonarSource/sonar-dotnet/issues/2115
+                return false;
+            }
+        }
     }
 }

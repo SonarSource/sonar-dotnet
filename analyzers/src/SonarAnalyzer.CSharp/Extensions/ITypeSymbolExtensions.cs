@@ -19,13 +19,26 @@
  */
 
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class BaseArgumentListSyntaxExtensions
+    internal static class ITypeSymbolExtensions
     {
-        internal static ArgumentSyntax GetArgumentByName(this BaseArgumentListSyntax list, string name) =>
-            list.Arguments.FirstOrDefault(argument => argument.NameIs(name));
+        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
+            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8) &&
+            IsRefStruct(symbol) &&
+            symbol.GetMembers("Dispose").Any(s => s is IMethodSymbol method && method.IsDisposeMethod());
+
+        internal static bool IsRefStruct(this ITypeSymbol symbol) =>
+            symbol != null &&
+            symbol.IsStruct() &&
+            symbol.DeclaringSyntaxReferences.Length == 1 &&
+            symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
+            structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
     }
 }

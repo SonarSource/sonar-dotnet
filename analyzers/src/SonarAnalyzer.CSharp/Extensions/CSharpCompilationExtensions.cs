@@ -19,15 +19,15 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class MemberAccessExpressionSyntaxExtensions
+    internal static class CSharpCompilationExtensions
     {
-        public static bool IsMemberAccessOnKnownType(this MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
-            memberAccess.NameIs(name)
-            && semanticModel.GetSymbolInfo(memberAccess).Symbol is {} symbol
-            && symbol.ContainingType.DerivesFrom(knownType);
+        internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
+            compilation.GetLanguageVersion().IsAtLeast(languageVersion);
+
+        internal static LanguageVersion GetLanguageVersion(this Compilation compilation) => ((CSharpCompilation) compilation).LanguageVersion;
     }
 }

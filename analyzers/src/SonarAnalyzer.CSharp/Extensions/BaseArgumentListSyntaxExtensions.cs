@@ -18,16 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+using System.Linq;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class CSharpCompilationHelper
+    internal static class BaseArgumentListSyntaxExtensions
     {
-        internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
-            compilation.GetLanguageVersion().IsAtLeast(languageVersion);
-
-        internal static LanguageVersion GetLanguageVersion(this Compilation compilation) => ((CSharpCompilation) compilation).LanguageVersion;
+        internal static ArgumentSyntax GetArgumentByName(this BaseArgumentListSyntax list, string name) =>
+            list.Arguments.FirstOrDefault(argument => argument.NameIs(name));
     }
 }

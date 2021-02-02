@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
@@ -60,12 +61,7 @@ namespace SonarAnalyzer.Helpers
         public static bool AnyOfKind(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
             tokens.Any(n => n.RawKind == (int)kind);
 
-        public static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count)
-        {
-            return invocation != null &&
-                invocation.ArgumentList != null &&
-                invocation.ArgumentList.Arguments.Count == count;
-        }
+
 
         public static ExpressionSyntax Get(this ArgumentListSyntax argumentList, int index) =>
             argumentList != null && argumentList.Arguments.Count > index

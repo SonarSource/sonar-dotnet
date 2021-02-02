@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers.Wrappers;
 using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
     public static class TypeDeclarationSyntaxExtensions
     {
@@ -45,30 +45,30 @@ namespace SonarAnalyzer.Helpers
 
         private class LocalFunctionStatementAdapter : IMethodDeclaration
         {
-            private readonly LocalFunctionStatementSyntaxWrapper _syntaxWrapper;
+            private readonly LocalFunctionStatementSyntaxWrapper syntaxWrapper;
 
             public LocalFunctionStatementAdapter(LocalFunctionStatementSyntaxWrapper syntaxWrapper)
-                => this._syntaxWrapper = syntaxWrapper;
+                => this.syntaxWrapper = syntaxWrapper;
 
-            public BlockSyntax Body { get => this._syntaxWrapper.Body; }
+            public BlockSyntax Body => syntaxWrapper.Body;
 
-            public SyntaxToken Identifier { get => this._syntaxWrapper.Identifier; }
+            public SyntaxToken Identifier => syntaxWrapper.Identifier;
 
-            public ParameterListSyntax ParameterList { get => this._syntaxWrapper.ParameterList; }
+            public ParameterListSyntax ParameterList => syntaxWrapper.ParameterList;
         }
 
         private class MethodDeclarationSyntaxAdapter : IMethodDeclaration
         {
-            private readonly MethodDeclarationSyntax _declarationSyntax;
+            private readonly MethodDeclarationSyntax declarationSyntax;
 
             public MethodDeclarationSyntaxAdapter(MethodDeclarationSyntax declarationSyntax)
-                => this._declarationSyntax = declarationSyntax;
+                => this.declarationSyntax = declarationSyntax;
 
-            public BlockSyntax Body { get => this._declarationSyntax.Body; }
+            public BlockSyntax Body => declarationSyntax.Body;
 
-            public SyntaxToken Identifier { get => this._declarationSyntax.Identifier; }
+            public SyntaxToken Identifier => declarationSyntax.Identifier;
 
-            public ParameterListSyntax ParameterList { get => this._declarationSyntax.ParameterList; }
+            public ParameterListSyntax ParameterList => declarationSyntax.ParameterList;
         }
     }
 }

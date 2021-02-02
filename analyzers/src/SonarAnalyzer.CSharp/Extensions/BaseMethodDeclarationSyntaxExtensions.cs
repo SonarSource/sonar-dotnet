@@ -18,21 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class ParameterSyntaxExtensions
+    internal static class BaseMethodDeclarationSyntaxExtensions
     {
-        /// <summary>
-        /// Returns true if the parameter is of type string. For performance reasons the check is done at the syntax level.
-        /// </summary>
-        internal static bool IsString(this ParameterSyntax parameterSyntax) =>
-            IsString(parameterSyntax.Type.ToString());
-
-        private static bool IsString(string parameterTypeName) =>
-            parameterTypeName == "string" ||
-            parameterTypeName == "String" ||
-            parameterTypeName == "System.String";
+        public static IEnumerable<SyntaxNode> GetBodyDescendantNodes(this BaseMethodDeclarationSyntax method) =>
+            (method ?? throw new ArgumentNullException(nameof(method))).Body == null
+                ? method.ExpressionBody().DescendantNodes()
+                : method.Body.DescendantNodes();
     }
 }

@@ -18,13 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class LanguageVersionExtensions
+    internal static class MemberAccessExpressionSyntaxExtensions
     {
-        internal static bool IsAtLeast(this LanguageVersion left, LanguageVersion right) =>
-            left.CompareTo(right) >= 0;
+        public static bool IsMemberAccessOnKnownType(this MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
+            memberAccess.NameIs(name)
+            && semanticModel.GetSymbolInfo(memberAccess).Symbol is {} symbol
+            && symbol.ContainingType.DerivesFrom(knownType);
     }
 }

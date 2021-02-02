@@ -19,24 +19,22 @@
  */
 
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class ArgumentSyntaxExtensions
+    internal static class InvocationExpressionSyntaxExtensions
     {
-        internal static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
-            syntaxList
-                .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.Is(knownType));
+        internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
+            invocation.Expression is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
 
-        internal static IEnumerable<ISymbol> GetSymbolsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
-            syntaxList
-                .GetArgumentsOfKnownType(knownType, semanticModel)
-                .Select(argument => semanticModel.GetSymbolInfo(argument.Expression).Symbol);
+        internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
+            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
 
-        internal static bool NameIs(this ArgumentSyntax argument, string name) =>
-            argument.NameColon?.Name.Identifier.Text == name;
+        internal static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
+            invocation?.ArgumentList != null && invocation.ArgumentList.Arguments.Count == count;
     }
 }

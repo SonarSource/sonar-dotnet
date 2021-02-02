@@ -18,18 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class IMethodSymbolExtensions
+    internal static class ObjectCreationExpressionSyntaxExtensions
     {
-        // The signature of the Dispose method on IDisposable
-        internal static bool IsDisposeMethod(this IMethodSymbol symbol) =>
-            symbol.Name.Equals("Dispose") &&
-            symbol.Arity == 0 &&
-            symbol.Parameters.Length == 0 &&
-            symbol.ReturnsVoid &&
-            symbol.DeclaredAccessibility == Accessibility.Public;
+        public static IEnumerable<ExpressionSyntax> GetInitializerExpressions(this ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation?.Initializer?.Expressions ?? Enumerable.Empty<ExpressionSyntax>();
+
+        public static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
+            objectCreation?.ArgumentList?.Arguments.GetArgumentsOfKnownType(knownType, semanticModel) ?? Enumerable.Empty<ArgumentSyntax>();
     }
 }

@@ -18,26 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.ShimLayer.CSharp;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class ITypeSymbolExtensions
+    internal static class ArgumentSyntaxExtensions
     {
-        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
-            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8) &&
-            IsRefStruct(symbol) &&
-            symbol.GetMembers("Dispose").Any(s => s is IMethodSymbol method && method.IsDisposeMethod());
+        internal static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
+            syntaxList
+                .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.Is(knownType));
 
-        internal static bool IsRefStruct(this ITypeSymbol symbol) =>
-            symbol != null &&
-            symbol.IsStruct() &&
-            symbol.DeclaringSyntaxReferences.Length == 1 &&
-            symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
-            structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
+        internal static IEnumerable<ISymbol> GetSymbolsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
+            syntaxList
+                .GetArgumentsOfKnownType(knownType, semanticModel)
+                .Select(argument => semanticModel.GetSymbolInfo(argument.Expression).Symbol);
+
+        internal static bool NameIs(this ArgumentSyntax argument, string name) =>
+            argument.NameColon?.Name.Identifier.Text == name;
     }
 }
