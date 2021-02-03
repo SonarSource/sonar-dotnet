@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Tests.Diagnostics
 {
@@ -346,4 +347,24 @@ namespace Tests.Diagnostics
         }
 
     }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/4015
+public class Repro_4015
+{
+    public void Method()
+    {
+        string localVariable = null;    // Noncompliant FP, changing the Expression<Func<T>> below changes the behavior of the code
+
+        WithExpressionArgument(() => localVariable);
+    }
+
+    private void WithExpressionArgument(Expression<Func<string>> expression)
+    {
+        if (!(expression.Body is MemberExpression))
+        {
+            throw new InvalidOperationException($"The expression body is a {expression.Body.GetType().Name}, but MemberExpression is expected.");
+        }
+    }
+
 }
