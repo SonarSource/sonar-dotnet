@@ -50,8 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void OptionStrictOn_IsOn() =>
             VerifyAnalyzer("Option Strict On ' Compliant");
 
-        /// <remarks>OptionStrict is off by default.</remarks>
-        private static void VerifyAnalyzer(string snippit, OptionStrict optionStrict = OptionStrict.On)
+        private static void VerifyAnalyzer(string snippit, OptionStrict optionStrict)
         {
             var project = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippet(snippit);
             var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionStrict: optionStrict);
