@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
         protected abstract ISet<string> FactoryParameterNames { get; }
         protected abstract TSyntaxKind ObjectCreation { get; }
         protected abstract TSyntaxKind Invocation { get; }
-        protected abstract ILanguageFacade Language { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         private protected abstract ImmutableArray<KnownType> AlgorithmTypes { get; }
 
         protected abstract SyntaxNode InvocationExpression(TInvocationExpressionSyntax invocation);

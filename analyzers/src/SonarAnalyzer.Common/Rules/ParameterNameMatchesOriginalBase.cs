@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
 
         private readonly DiagnosticDescriptor rule;
 
-        protected abstract ILanguageFacade LanguageFacade { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TSyntaxKind[] SyntaxKinds { get; }
         protected abstract IEnumerable<SyntaxToken> ParameterIdentifiers(TMethodDeclarationSyntax method);
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(LanguageFacade.GeneratedCodeRecognizer, c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
                     var methodSyntax = (TMethodDeclarationSyntax)c.Node;
                     if (c.SemanticModel.GetDeclaredSymbol(methodSyntax) is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any())
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules
         {
             foreach (var item in ParameterIdentifiers(methodSyntax)
                                     .Zip(expectedParameters, (actual, expected) => new { actual, expected })
-                                    .Where(x => !x.actual.ValueText.Equals(x.expected.Name, LanguageFacade.NameComparison)))
+                                    .Where(x => !x.actual.ValueText.Equals(x.expected.Name, Language.NameComparison)))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.actual.GetLocation(), item.actual.ValueText, item.expected.Name, expectedLocation));
             }

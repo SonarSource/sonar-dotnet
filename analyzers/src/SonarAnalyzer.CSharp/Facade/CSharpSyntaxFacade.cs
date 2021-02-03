@@ -18,19 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Facade
 {
-    public interface ILanguageFacade<TSyntaxKind>
-        where TSyntaxKind : struct
+    internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     {
-        StringComparison NameComparison { get; }
-        GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        IExpressionNumericConverter ExpressionNumericConverter { get; }
-        SyntaxFacade<TSyntaxKind> Syntax { get; }
+        public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
-        IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
+        public override bool IsNullLiteral(SyntaxNode node) => node.IsNullLiteral();
+
+        public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
+            invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
+
+        public override SyntaxNode NodeExpression(SyntaxNode node) =>
+            node switch
+            {
+                InvocationExpressionSyntax invocation => invocation.Expression,
+                LockStatementSyntax @lock => @lock.Expression,
+                null => null,
+                _ => throw Unexpected(node)
+            };
     }
 }

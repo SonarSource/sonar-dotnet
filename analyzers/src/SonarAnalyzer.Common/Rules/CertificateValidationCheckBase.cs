@@ -55,9 +55,8 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        internal /* for testing */ abstract AbstractMethodParameterLookup<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
-        protected abstract Location ArgumentLocation(TArgumentSyntax argument);
-        protected abstract TExpressionSyntax ArgumentExpression(TArgumentSyntax argument);
+        internal /* for testing */ abstract MethodParameterLookupBase<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
+        protected abstract Location ExpressionLocation(SyntaxNode expression);
         protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
         protected abstract IEqualityComparer<TExpressionSyntax> CreateNodeEqualityComparer();
         protected abstract SyntaxNode FindRootClassOrModule(SyntaxNode node);
@@ -67,7 +66,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TExpressionSyntax VariableInitializer(TVariableSyntax variable);
         protected abstract ImmutableArray<Location> LambdaLocations(InspectionContext c, TLambdaSyntax lambda);
         protected abstract SyntaxNode LocalVariableScope(TVariableSyntax variable);
-        protected abstract SyntaxNode ExtractArgumentExpressionNode(TExpressionSyntax expression);
+        protected abstract SyntaxNode ExtractArgumentExpressionNode(SyntaxNode expression);
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
         private protected abstract KnownType GenericDelegateType();
 
@@ -89,14 +88,14 @@ namespace SonarAnalyzer.Rules
         {
             if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol ctor)
             {
-                AbstractMethodParameterLookup<TArgumentSyntax> methodParamLookup = null;       // Cache, there might be more of them
+                MethodParameterLookupBase<TArgumentSyntax> methodParamLookup = null;       // Cache, there might be more of them
                 // Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
                 foreach (var param in ctor.Parameters.Where(x => !x.IsParams && IsValidationDelegateType(x.Type)))
                 {
                     methodParamLookup ??= CreateParameterLookup(c.Node, ctor);
-                    if (methodParamLookup.TryGetNonParamsSyntax(param, out var argument))
+                    if (methodParamLookup.TryGetNonParamsSyntax(param, out var expression))
                     {
-                        TryReportLocations(new InspectionContext(c), ArgumentLocation(argument), ArgumentExpression(argument));
+                        TryReportLocations(new InspectionContext(c), ExpressionLocation(expression), expression);
                     }
                 }
             }
@@ -117,9 +116,9 @@ namespace SonarAnalyzer.Rules
                     foreach (var invocation in FindInvocationList(c.Context, FindRootClassOrModule(param), containingMethod))
                     {
                         var methodParamLookup = CreateParameterLookup(invocation, containingMethod);
-                        if (methodParamLookup.TryGetNonParamsSyntax(paramSymbol, out var argument))
+                        if (methodParamLookup.TryGetNonParamsSyntax(paramSymbol, out var expression))
                         {
-                            ret.AddRange(CallStackSublocations(c, ArgumentExpression(argument)));
+                            ret.AddRange(CallStackSublocations(c, expression));
                         }
                     }
                 }
@@ -142,7 +141,7 @@ namespace SonarAnalyzer.Rules
             return ret.ToImmutable();
         }
 
-        private void TryReportLocations(InspectionContext c, Location primaryLocation, TExpressionSyntax expression)
+        private void TryReportLocations(InspectionContext c, Location primaryLocation, SyntaxNode expression)
         {
             var locations = ArgumentLocations(c, expression);
             if (!locations.IsEmpty)
@@ -176,7 +175,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private ImmutableArray<Location> ArgumentLocations(InspectionContext c, TExpressionSyntax expression)
+        private ImmutableArray<Location> ArgumentLocations(InspectionContext c, SyntaxNode expression)
         {
             switch (ExtractArgumentExpressionNode(expression))
             {
@@ -273,7 +272,7 @@ namespace SonarAnalyzer.Rules
             return exprSublocationsList.SelectMany(x => x).ToImmutableArray();      // Else every return statement is noncompliant
         }
 
-        private ImmutableArray<Location> CallStackSublocations(InspectionContext c, TExpressionSyntax expression)
+        private ImmutableArray<Location> CallStackSublocations(InspectionContext c, SyntaxNode expression)
         {
             var lst = ArgumentLocations(c, expression);
             if (!lst.IsEmpty)        // There's noncompliant issue in this chain

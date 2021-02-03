@@ -23,9 +23,8 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
-
-using CSharp = Microsoft.CodeAnalysis.CSharp.Syntax;
-using VisualBasic = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -52,24 +51,24 @@ End Class";
         public void GetName_CS()
         {
             var nodes = Parse_CS(SourceInputToString_CS);
-            nodes.OfType<CSharp.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
-            nodes.OfType<CSharp.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("input", "ToString");
-            nodes.OfType<CSharp.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
+            nodes.OfType<CS.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
+            nodes.OfType<CS.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("input", "ToString");
+            nodes.OfType<CS.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
         }
 
         [TestMethod]
         public void GetName_VB()
         {
             var nodes = Parse_VB(SourceInputToString_VB);
-            nodes.OfType<VisualBasic.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
-            nodes.OfType<VisualBasic.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Input", "ToString");
-            nodes.OfType<VisualBasic.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
+            nodes.OfType<VB.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
+            nodes.OfType<VB.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Input", "ToString");
+            nodes.OfType<VB.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
         }
 
         [TestMethod]
         public void NameIs_CS()
         {
-            var toString = Parse_CS(SourceInputToString_CS).OfType<CSharp.MemberAccessExpressionSyntax>().Single();
+            var toString = Parse_CS(SourceInputToString_CS).OfType<CS.MemberAccessExpressionSyntax>().Single();
             toString.NameIs("ToString").Should().BeTrue();
             toString.NameIs("TOSTRING").Should().BeFalse();
             toString.NameIs("tostring").Should().BeFalse();
@@ -81,7 +80,7 @@ End Class";
         [TestMethod]
         public void NameIs_VB()
         {
-            var toString = Parse_VB(SourceInputToString_VB).OfType<VisualBasic.MemberAccessExpressionSyntax>().Single();
+            var toString = Parse_VB(SourceInputToString_VB).OfType<VB.MemberAccessExpressionSyntax>().Single();
             toString.NameIs("ToString").Should().BeTrue();
             toString.NameIs("TOSTRING").Should().BeTrue();
             toString.NameIs("tostring").Should().BeTrue();
@@ -102,7 +101,7 @@ public class Sample
         (a, b) = (42, 42);
     }
 }";
-            var argument = Parse_CS(code).OfType<CSharp.ArgumentSyntax>().First();
+            var argument = Parse_CS(code).OfType<CS.ArgumentSyntax>().First();
             argument.IsInTupleAssignmentTarget().Should().BeTrue();
         }
 
@@ -124,7 +123,7 @@ public class Sample
         Method(0);
     }
 }";
-            var arguments = Parse_CS(code).OfType<CSharp.ArgumentSyntax>().ToArray();
+            var arguments = Parse_CS(code).OfType<CS.ArgumentSyntax>().ToArray();
 
             arguments.Should().HaveCount(12);
             foreach (var argument in arguments)
@@ -132,6 +131,14 @@ public class Sample
                 argument.IsInTupleAssignmentTarget().Should().BeFalse();
             }
         }
+
+        [TestMethod]
+        public void IsNullLiteral_Null_CS() =>
+            CSharpSyntaxHelper.IsNullLiteral(null).Should().BeFalse();
+
+        [TestMethod]
+        public void IsNothingLiteral_Null_VB() =>
+            VisualBasicSyntaxHelper.IsNothingLiteral(null).Should().BeFalse();
 
         private static SyntaxNode[] Parse_CS(string source) =>
             Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().ToArray();

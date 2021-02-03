@@ -26,5 +26,14 @@ namespace SonarAnalyzer.Helpers
     {
         public static SemanticModel EnsureCorrectSemanticModel(this SyntaxNode node, SemanticModel semanticModel) =>
             semanticModel.SyntaxTree == node.SyntaxTree ? semanticModel : semanticModel.Compilation.GetSemanticModel(node.SyntaxTree);
+
+        public static bool ToStringContains(this SyntaxNode node, string s) =>
+            node.ToString().Contains(s);
+
+        public static bool ToStringContainsEitherOr(this SyntaxNode node, string a, string b)
+        {
+            var toString = node.ToString();
+            return toString.Contains(a) || toString.Contains(b);
+        }
     }
 }

@@ -19,20 +19,29 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers.Facade;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal sealed class CSharpFacade : ILanguageFacade
+    internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
     {
         private static readonly Lazy<CSharpFacade> Singleton = new Lazy<CSharpFacade>(() => new CSharpFacade());
-        private static readonly Lazy<IExpressionNumericConverter> NumericConverter = new Lazy<IExpressionNumericConverter>(() => new CSharpExpressionNumericConverter());
+        private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new Lazy<IExpressionNumericConverter>(() => new CSharpExpressionNumericConverter());
+        private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new Lazy<SyntaxFacade<SyntaxKind>>(() => new CSharpSyntaxFacade());
 
         public StringComparison NameComparison => StringComparison.Ordinal;
         public GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-        public IExpressionNumericConverter ExpressionNumericConverter => NumericConverter.Value;
+        public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
+        public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
 
         public static CSharpFacade Instance => Singleton.Value;
 
         private CSharpFacade() { }
+
+        public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
+            new CSharpMethodParameterLookup((InvocationExpressionSyntax)invocation, methodSymbol);
     }
 }

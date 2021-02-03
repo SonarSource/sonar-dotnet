@@ -37,15 +37,6 @@ namespace SonarAnalyzer.Helpers
                     SyntaxKindEx.SwitchExpression,
                     SyntaxKindEx.CoalesceAssignmentExpression));
 
-        public static bool ToStringContains(this SyntaxNode node, string s) =>
-            node.ToString().Contains(s);
-
-        public static bool ToStringContainsEitherOr(this SyntaxNode node, string a, string b)
-        {
-            var toString = node.ToString();
-            return toString.Contains(a) || toString.Contains(b);
-        }
-
         public static object FindConstantValue(this SyntaxNode node, SemanticModel semanticModel) =>
             new CSharpConstantValueFinder(semanticModel).FindConstant(node);
 

@@ -19,20 +19,27 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Helpers.Facade
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
-    public sealed class DoNotLockWeakIdentityObjects : DoNotLockWeakIdentityObjectsBase<SyntaxKind>
+    internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.SyncLockStatement;
+        public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
 
-        public DoNotLockWeakIdentityObjects() : base(RspecStrings.ResourceManager) { }
+        public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
+
+        public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
+            invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
+
+        public override SyntaxNode NodeExpression(SyntaxNode node) =>
+            node switch
+            {
+                InvocationExpressionSyntax invocation => invocation.Expression,
+                SyncLockStatementSyntax syncLock => syncLock.Expression,
+                null => null,
+                _ => throw Unexpected(node)
+            };
     }
 }

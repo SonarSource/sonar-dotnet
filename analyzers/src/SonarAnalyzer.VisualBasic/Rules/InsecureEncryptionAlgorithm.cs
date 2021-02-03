@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
         protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
-        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
 

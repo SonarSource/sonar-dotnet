@@ -22,38 +22,44 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase<SyntaxKind, InvocationExpressionSyntax>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind InvocationExpressionKind { get; } = SyntaxKind.InvocationExpression;
-        protected override string CallbackParameterName { get; } = "callback";
+        protected override string CallbackParameterName { get; } = "DelegateCallback";
         protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
         {
-            SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.ClassDeclaration,
             SyntaxKind.CompilationUnit,
-            SyntaxKind.ConstructorDeclaration,
-            SyntaxKind.ConversionOperatorDeclaration,
-            SyntaxKind.DestructorDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.MethodDeclaration,
-            SyntaxKind.OperatorDeclaration,
-            SyntaxKind.ParenthesizedLambdaExpression,
-            SyntaxKind.PropertyDeclaration,
-            SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.StructDeclaration,
-            SyntaxKindEx.LocalFunctionStatement,
+            // Types
+            SyntaxKind.ClassBlock,
+            SyntaxKind.StructureBlock,
+            SyntaxKind.ModuleBlock,
+            // Methods
+            SyntaxKind.ConstructorBlock,
+            SyntaxKind.FunctionBlock,
+            SyntaxKind.SubBlock,
+            SyntaxKind.OperatorBlock,
+            // Properties
+            SyntaxKind.AddHandlerAccessorBlock,
+            SyntaxKind.GetAccessorBlock,
+            SyntaxKind.RaiseEventAccessorBlock,
+            SyntaxKind.RemoveHandlerAccessorBlock,
+            SyntaxKind.SetAccessorBlock,
+            // Lambdas
+            SyntaxKind.MultiLineFunctionLambdaExpression,
+            SyntaxKind.MultiLineSubLambdaExpression,
+            SyntaxKind.SingleLineFunctionLambdaExpression,
+            SyntaxKind.SingleLineSubLambdaExpression
         }.ToImmutableHashSet();
 
         public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
@@ -78,23 +84,26 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (callback is ObjectCreationExpressionSyntax objectCreation)
             {
-                callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().Expression : null;
-                if (callback != null && semanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol)
-                {
-                    callback = methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-                }
+                callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().GetExpression() : null;
+            }
+
+            if (callback is UnaryExpressionSyntax addressOf
+                && callback.IsKind(SyntaxKind.AddressOfExpression)
+                && semanticModel.GetSymbolInfo(addressOf.Operand).Symbol is IMethodSymbol methodSymbol)
+            {
+                callback = methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().Parent;
             }
 
             return callback;
         }
 
         private static SyntaxNode LookupIdentifierInitializer(IdentifierNameSyntax identifier, SemanticModel semantic) =>
-            semantic.GetSymbolInfo(identifier).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is VariableDeclaratorSyntax variableDeclarator
-                && variableDeclarator.Initializer is EqualsValueClauseSyntax equalsValueClause
-                ? equalsValueClause.Value.RemoveParentheses()
+            semantic.GetSymbolInfo(identifier).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is ModifiedIdentifierSyntax modifiedIdentifier
+            && modifiedIdentifier.Parent is VariableDeclaratorSyntax variableDeclarator
+                ? variableDeclarator.Initializer?.Value.RemoveParentheses() ?? (variableDeclarator.AsClause as AsNewClauseSyntax)?.NewExpression
                 : null;
 
-        private class InvocationWalker : CSharpSyntaxWalker
+        private class InvocationWalker : VisualBasicSyntaxWalker
         {
             private readonly EndInvokeContext context;
 
