@@ -82,6 +82,10 @@ Namespace Tests.TestCases
 
         End Sub
 
+        Public Sub NullConditionalIndexing(List As List(Of Integer))
+            Dim Value As Integer = List?(0)
+        End Sub
+
     End Class
 
 End Namespace

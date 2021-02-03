@@ -61,12 +61,9 @@ namespace SonarAnalyzer.Rules
         {
             var invocation = (TInvocationExpressionSyntax)context.Node;
 
-            if (!(context.SemanticModel.GetSymbolInfo(InvocationExpression(invocation)).Symbol is IMethodSymbol methodSymbol))
-            {
-                return;
-            }
-
-            if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) || IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation))
+            if (InvocationExpression(invocation) is { } expression
+                && (context.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol)
+                && (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) || IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation)))
             {
                 ReportAllDiagnostics(context, invocation.GetLocation());
             }

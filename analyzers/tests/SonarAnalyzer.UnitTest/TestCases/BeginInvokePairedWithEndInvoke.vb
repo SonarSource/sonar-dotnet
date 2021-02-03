@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Collections.Generic
 Imports System.Threading
 
 Public Delegate Sub AsyncMethodCaller(Name As String)
@@ -127,6 +128,10 @@ Module Common
     End Sub
 
     Private Sub SharedDoNothing(Result As IAsyncResult)
+    End Sub
+
+    Public Sub NullConditionalIndexing(List As List(Of Integer))
+        Dim Value As Integer = List?(0)
     End Sub
 
 End Module
