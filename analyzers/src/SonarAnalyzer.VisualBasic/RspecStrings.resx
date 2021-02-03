@@ -5115,6 +5115,33 @@
   <data name="S5753_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
   </data>
+  <data name="S6145_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S6145_Description" xml:space="preserve">
+    <value>There are several compilations options available for Visual Basic source code and Option Strict defines compiler behavior for implicit data type conversions. Specifying Option Strict Off will allow:</value>
+  </data>
+  <data name="S6145_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S6145_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S6145_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S6145_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S6145_Tags" xml:space="preserve">
+    <value>bad-practice</value>
+  </data>
+  <data name="S6145_Title" xml:space="preserve">
+    <value>"Option Strict" should be enabled</value>
+  </data>
+  <data name="S6145_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S6146_Category" xml:space="preserve">
     <value>Critical Code Smell</value>
   </data>
