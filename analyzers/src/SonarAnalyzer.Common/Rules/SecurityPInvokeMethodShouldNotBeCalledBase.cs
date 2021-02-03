@@ -37,11 +37,8 @@ namespace SonarAnalyzer.Rules
         protected const string InteropName = "ole32";
         protected const string InteropDllName = InteropName + ".dll";
 
-        protected abstract TSyntaxKind SyntaxKind { get; }
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        protected abstract SyntaxNode Expression(TInvocationExpressionSyntax invocationExpression);
-        protected abstract SyntaxToken Identifier(SyntaxNode syntaxNode);
         protected abstract IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -58,7 +55,7 @@ namespace SonarAnalyzer.Rules
             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForIssue, SyntaxKind);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForIssue, Language.SyntaxKind.InvocationExpression);
 
         protected virtual bool IsImportFromInteropDll(ISymbol symbol) =>
             symbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).FirstOrDefault() is AttributeData attributeData
@@ -74,13 +71,13 @@ namespace SonarAnalyzer.Rules
         private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
             if (analysisContext.Node is TInvocationExpressionSyntax invocation
-                && Expression(invocation) is { } directMethodCall
+                && Language.Syntax.NodeExpression(invocation) is { } directMethodCall
                 && MethodSymbolForInvalidInvocation(directMethodCall, analysisContext.SemanticModel) is IMethodSymbol methodSymbol
                 && methodSymbol.IsExtern
                 && methodSymbol.IsStatic
                 && IsImportFromInteropDll(methodSymbol))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Identifier(directMethodCall).GetLocation(), GetMethodName(methodSymbol)));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(directMethodCall).Value.GetLocation(), GetMethodName(methodSymbol)));
             }
         }
     }

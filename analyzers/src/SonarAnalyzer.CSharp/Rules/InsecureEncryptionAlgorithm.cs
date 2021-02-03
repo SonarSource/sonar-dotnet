@@ -42,8 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S2278, Rule);
 
-        protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
-        protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
@@ -59,9 +57,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override string StringLiteralValue(ArgumentSyntax argument) =>
             ((LiteralExpressionSyntax)argument.Expression).Token.ValueText;
-
-        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
-            invocation.Expression;
 
         protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
             objectCreation.Type.GetLocation();

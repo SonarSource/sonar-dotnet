@@ -41,5 +41,15 @@ namespace SonarAnalyzer.Helpers.Facade
                 null => null,
                 _ => throw Unexpected(node)
             };
+
+        public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
+            node switch
+            {
+                IdentifierNameSyntax identifierName => identifierName.Identifier,
+                ParameterSyntax parameter => parameter.Identifier.Identifier,
+                ModifiedIdentifierSyntax variable => variable.Identifier,
+                null => null,
+                _ => throw Unexpected(node)
+            };
     }
 }

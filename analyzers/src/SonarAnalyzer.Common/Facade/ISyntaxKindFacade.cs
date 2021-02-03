@@ -18,25 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class SyntaxFacade<TSyntaxKind>
+    public interface ISyntaxKindFacade<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        public abstract TSyntaxKind Kind(SyntaxNode node);
-        public abstract bool IsNullLiteral(SyntaxNode node);
-
-        public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
-        public abstract SyntaxNode NodeExpression(SyntaxNode node);
-        public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
-
-        protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
-            node as T ?? throw Unexpected(node);
-
-        protected static Exception Unexpected(SyntaxNode node) =>
-            new InvalidOperationException($"Unexpected node: {node.GetType().Name}");
+        abstract TSyntaxKind InvocationExpression { get; }
+        abstract TSyntaxKind ObjectCreationExpression { get; }
     }
 }

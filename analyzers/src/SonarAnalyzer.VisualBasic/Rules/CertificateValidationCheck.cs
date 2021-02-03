@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
+        SyntaxKind,
         MethodBlockSyntax,
         ArgumentSyntax,
         ExpressionSyntax,
@@ -45,6 +46,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         LambdaExpressionSyntax,
         MemberAccessExpressionSyntax>
     {
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
+
         public CertificateValidationCheck() : base(RspecStrings.ResourceManager) { }
 
         internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
@@ -112,15 +115,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsTrueLiteral(ExpressionSyntax expression) =>
             expression?.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
-
-        protected override string IdentifierText(SyntaxNode node) =>
-            node switch
-            {
-                IdentifierNameSyntax ident => ident.Identifier.ValueText,
-                ParameterSyntax param => param.Identifier.Identifier.ValueText,
-                ModifiedIdentifierSyntax variable => variable.Identifier.ValueText,
-                _ => null,
-            };
 
         protected override ExpressionSyntax VariableInitializer(ModifiedIdentifierSyntax variable) =>
             variable.FirstAncestorOrSelf<VariableDeclaratorSyntax>()?.Initializer?.Value;

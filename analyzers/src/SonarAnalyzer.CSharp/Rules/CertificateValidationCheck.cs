@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
+        SyntaxKind,
         MethodDeclarationSyntax,
         ArgumentSyntax,
         ExpressionSyntax,
@@ -45,6 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
         ParenthesizedLambdaExpressionSyntax,
         MemberAccessExpressionSyntax>
     {
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
+
         public CertificateValidationCheck() : base(RspecStrings.ResourceManager) { }
 
         internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
@@ -99,15 +102,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsTrueLiteral(ExpressionSyntax expression) =>
             expression?.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
-
-        protected override string IdentifierText(SyntaxNode node) =>
-            node switch
-            {
-                IdentifierNameSyntax ident => ident.Identifier.ValueText,
-                ParameterSyntax param => param.Identifier.ValueText,
-                VariableDeclaratorSyntax variable => variable.Identifier.ValueText,
-                _ => null,
-            };
 
         protected override ExpressionSyntax VariableInitializer(VariableDeclaratorSyntax variable) =>
             variable.Initializer?.Value;
