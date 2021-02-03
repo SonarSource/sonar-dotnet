@@ -53,7 +53,8 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
             {
                 var invocation = (TInvocationExpressionSyntax)c.Node;
-                if (Language.Syntax.NodeExpression(invocation).ToStringContains(BeginInvoke)
+                if (Language.Syntax.NodeExpression(invocation) is { } expression
+                    && expression.ToStringContains(BeginInvoke)
                     && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                     && methodSymbol.Name == BeginInvoke
                     && IsDelegate(methodSymbol)
