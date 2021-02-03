@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri": "replaced",
+"uri":  "Replaced-Temporary-Path\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs",
 "region":  {
 "startLine":  3,
 "startColumn":  1,

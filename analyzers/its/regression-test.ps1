@@ -104,26 +104,6 @@ function Initialize-ActualFolder() {
     Write-Debug "Initialized actual folder in '${methodTimerElapsed}'"
 }
 
-# FIXME: this is a hacky way of avoiding diffing problems with temporary generated files in the %TEMP% folder
-function ReplaceGeneratedTempFileName([string]$folder){
-
-    Write-Host "Will replace generated temporary file names from the jsons in ${folder}:"
-    $files = Get-ChildItem -Path $folder -Recurse -File
-    $tempFileNameLineRegexCs = '"uri":.*\.(NETFramework|NETCoreApp),Version=.*\.cs"'
-    $tempFileNameLineRegexVb = '"uri":.*\.(NETFramework|NETCoreApp),Version=.*\.vb"'
-
-    foreach ($file in $files){
-
-        $fullName = $file.FullName
-        Write-Host "Will replace the generated temporary file names inside $fullName..."
-
-        $data = [System.IO.File]::ReadAllText(${fullName})
-        $data = [System.Text.RegularExpressions.Regex]::Replace($data, $tempFileNameLineRegexCs, '"uri": "replaced"')
-        $data = [System.Text.RegularExpressions.Regex]::Replace($data, $tempFileNameLineRegexVb, '"uri": "replaced"')
-        [System.IO.File]::WriteAllText(${fullName}, $data)
-    }
-}
-
 function Initialize-OutputFolder() {
     $methodTimer = [system.diagnostics.stopwatch]::StartNew()
 
@@ -512,14 +492,6 @@ try {
     Measure-AnalyzerPerformance
     $measurePerfTimerElapsed = $measurePerfTimer.Elapsed.TotalSeconds
     Write-Debug "Computed analyzer performance in '${measurePerfTimerElapsed}'"
-
-    # FIXME: this is a hacky way of diffing the issues found on the temporary generated files during build
-    ReplaceGeneratedTempFileName(".\expected\AnalyzeGenerated")
-    ReplaceGeneratedTempFileName(".\actual\AnalyzeGenerated")
-    ReplaceGeneratedTempFileName(".\expected\AnalyzeGeneratedVb")
-    ReplaceGeneratedTempFileName(".\actual\AnalyzeGeneratedVb")
-    ReplaceGeneratedTempFileName(".\expected\NetCore31")
-    ReplaceGeneratedTempFileName(".\actual\NetCore31")
 
     Write-Host "Checking for differences..."
     $diffTimer = [system.diagnostics.stopwatch]::StartNew()
