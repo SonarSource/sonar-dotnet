@@ -43,12 +43,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionStrictOn_IsOff() =>
-            VerifyAnalyzer("Option Strict Off ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}");
+            VerifyAnalyzer("Option Strict Off ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}", OptionStrict.On);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void OptionStrictOn_IsOn() =>
-            VerifyAnalyzer("Option Strict On ' Compliant");
+            VerifyAnalyzer("Option Strict On ' Compliant", OptionStrict.On);
 
         private static void VerifyAnalyzer(string snippit, OptionStrict optionStrict)
         {
