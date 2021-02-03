@@ -28,6 +28,6 @@ namespace SonarAnalyzer.Extensions
         internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
             compilation.GetLanguageVersion().IsAtLeast(languageVersion);
 
-        internal static LanguageVersion GetLanguageVersion(this Compilation compilation) => ((CSharpCompilation) compilation).LanguageVersion;
+        internal static LanguageVersion GetLanguageVersion(this Compilation compilation) => ((CSharpCompilation)compilation).LanguageVersion;
     }
 }

@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Extensions
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        private static void Analyze(CSharpSyntaxNode declarationBody, ISymbol symbol, Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> analyze, SyntaxNodeAnalysisContext context)
+        private static void Analyze(CSharpSyntaxNode declarationBody, ISymbol symbol, Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> runAnalysis, SyntaxNodeAnalysisContext context)
         {
             if (declarationBody == null ||
                 declarationBody.ContainsDiagnostics)
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Extensions
             try
             {
                 var explodedGraph = new CSharpExplodedGraph(cfg, symbol, context.SemanticModel, lva);
-                analyze(explodedGraph, context);
+                runAnalysis(explodedGraph, context);
             }
             catch (Exception e)
             {
