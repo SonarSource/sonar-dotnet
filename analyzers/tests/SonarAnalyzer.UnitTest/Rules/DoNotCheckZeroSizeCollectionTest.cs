@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotCheckZeroSizeCollection() =>
+        public void DoNotCheckZeroSizeCollection_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs", new CS.DoNotCheckZeroSizeCollection());
 
 #if NET
