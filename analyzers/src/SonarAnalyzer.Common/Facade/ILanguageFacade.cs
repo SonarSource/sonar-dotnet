@@ -27,11 +27,13 @@ namespace SonarAnalyzer.Helpers
     public interface ILanguageFacade<TSyntaxKind>
         where TSyntaxKind : struct
     {
+        AssignmentFinder AssignmentFinder { get; }
         StringComparison NameComparison { get; }
         GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         IExpressionNumericConverter ExpressionNumericConverter { get; }
         SyntaxFacade<TSyntaxKind> Syntax { get; }
         ISyntaxKindFacade<TSyntaxKind> SyntaxKind { get; }
+        ITrackerFacade<TSyntaxKind> Tracker { get; }
 
         IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
     }
