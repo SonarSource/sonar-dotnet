@@ -35,11 +35,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [TestMethod]
         public void EnumMembers_Null_CS() =>
-            cs.EnumMembers(null).Should().BeNull();
+            cs.EnumMembers(null).Should().BeEmpty();
 
         [TestMethod]
         public void EnumMembers_Null_VB() =>
-            vb.EnumMembers(null).Should().BeNull();
+            vb.EnumMembers(null).Should().BeEmpty();
 
         [TestMethod]
         public void InvocationIdentifier_Null_CS() =>
