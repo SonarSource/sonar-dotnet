@@ -26,40 +26,31 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class EnumNameHasEnumSuffixBase : SonarDiagnosticAnalyzer
+    public abstract class EnumNameHasEnumSuffixBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2344";
-        protected const string MessageFormat = "Rename this enumeration to remove the '{0}' suffix.";
+        private const string MessageFormat = "Rename this enumeration to remove the '{0}' suffix.";
 
-        protected static readonly IEnumerable<string> NameEndings = ImmutableArray.Create("enum", "flags");
+        private static readonly IEnumerable<string> NameEndings = ImmutableArray.Create("enum", "flags");
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-    }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-    public abstract class EnumNameHasEnumSuffixBase<TLanguageKindEnum> : EnumNameHasEnumSuffixBase
-        where TLanguageKindEnum : struct
-    {
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
-                c =>
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private readonly DiagnosticDescriptor rule;
+
+        protected EnumNameHasEnumSuffixBase(System.Resources.ResourceManager rspecResources) =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
-                    var identifier = GetIdentifier(c.Node);
-                    var name = identifier.ValueText;
-
-                    var nameEnding = NameEndings.FirstOrDefault(ending => name.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase));
-                    if (nameEnding != null)
+                    if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier
+                        && NameEndings.FirstOrDefault(ending => identifier.ValueText.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase)) is { } nameEnding)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(),
-                            name.Substring(name.Length - nameEnding.Length, nameEnding.Length)));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(), identifier.ValueText.Substring(identifier.ValueText.Length - nameEnding.Length)));
                     }
                 },
-                SyntaxKindsOfInterest.ToArray());
-        }
-
-        protected abstract SyntaxToken GetIdentifier(SyntaxNode node);
-
-        public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+                Language.SyntaxKind.EnumDeclaration);
     }
 }
