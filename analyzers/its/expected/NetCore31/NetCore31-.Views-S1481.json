@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'unused'.",
+"location":  {
+"uri":  "sources\NetCore31\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  5,
+"endLine":  25,
+"endColumn":  11
+}
+}
+}
+]
+}

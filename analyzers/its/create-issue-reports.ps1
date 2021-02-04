@@ -108,10 +108,12 @@ function GetActualIssues([string]$sarifReportPath){
         return
     }
 
-    # Change spaces to %20
+    # Change spaces to %20 and replace temporary paths
+    $tempFileNameRegex = '^.*\.(NETFramework|NETCoreApp),Version='
     $allIssues.location | Foreach-Object {
         if ($_.uri) {
             $_.uri = $_.uri.replace(' ', '%20')
+            $_.uri = [System.Text.RegularExpressions.Regex]::Replace($_.uri, $tempFileNameRegex, 'Replaced-Temporary-Path\.$1,Version=')
         }
     }
 

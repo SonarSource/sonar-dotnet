@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterCompilationStartAction(c =>
                 c.RegisterCompilationEndAction(cc =>
                     {
-                        if (!cc.Compilation.Assembly.HasAttribute(AttributeToFind))
+                        if (!cc.Compilation.Assembly.HasAttribute(AttributeToFind) && !cc.Compilation.Assembly.HasAttribute(KnownType.Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute))
                         {
                             cc.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null, cc.Compilation.AssemblyName));
                         }

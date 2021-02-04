@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'ConfigureServices' a static method.",
+"location":  {
+"uri":  "sources\NetCore31\Startup.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  21,
+"endLine":  11,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Configure' a static method.",
+"location":  {
+"uri":  "sources\NetCore31\Startup.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  21,
+"endLine":  17,
+"endColumn":  30
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\NetCore31\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  1,
+"endLine":  3,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "sources\NetCore31\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  9,
+"endLine":  18,
+"endColumn":  32
+}
+}
+}
+]
+}
