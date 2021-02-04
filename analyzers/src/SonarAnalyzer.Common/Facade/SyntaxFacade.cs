@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Facade
 {
     public abstract class SyntaxFacade<TSyntaxKind>
         where TSyntaxKind : struct

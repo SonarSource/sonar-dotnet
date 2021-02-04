@@ -20,6 +20,7 @@
 
 using System;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers.Facade;
 
 namespace SonarAnalyzer.Helpers
 {
