@@ -48,4 +48,22 @@ namespace Tests.Diagnostics
         Orange,
         Strawberry
     }
+
+    [System.Flags]
+    enum FruitType7 // Noncompliant
+    {
+        Banana,
+        Orange,
+        Apple,
+        Pear,
+        Strawberry = 5
+    }
+
+    [System.Flags]
+    enum FruitType8 // Noncompliant
+    {
+        Banana = 1,
+        Orange,
+        Strawberry
+    }
 }

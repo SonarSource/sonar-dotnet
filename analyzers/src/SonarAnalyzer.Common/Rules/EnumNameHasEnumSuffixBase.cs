@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S2344";
         private const string MessageFormat = "Rename this enumeration to remove the '{0}' suffix.";
 
-        private static readonly IEnumerable<string> NameEndings = ImmutableArray.Create("enum", "flags");
+        private readonly IEnumerable<string> nameEndings = ImmutableArray.Create("enum", "flags");
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
                     if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier
-                        && NameEndings.FirstOrDefault(ending => identifier.ValueText.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase)) is { } nameEnding)
+                        && nameEndings.FirstOrDefault(ending => identifier.ValueText.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase)) is { } nameEnding)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(), identifier.ValueText.Substring(identifier.ValueText.Length - nameEnding.Length)));
                     }

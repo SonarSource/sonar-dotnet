@@ -72,5 +72,21 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void NodeExpression_UnexpectedTypeThrows_VB() =>
             vb.Invoking(x => x.NodeExpression(VB.SyntaxFactory.IdentifierName("ThisTypeDoesNotHaveExpression"))).Should().Throw<InvalidOperationException>();
+
+        [TestMethod]
+        public void NodeIdentifier_Null_CS() =>
+            cs.NodeIdentifier(null).Should().BeNull();
+
+        [TestMethod]
+        public void NodeIdentifier_Null_VB() =>
+            vb.NodeIdentifier(null).Should().BeNull();
+
+        [TestMethod]
+        public void NodeIdentifier_UnexpectedTypeThrows_CS() =>
+            cs.Invoking(x => x.NodeIdentifier(CS.SyntaxFactory.ThrowStatement())).Should().Throw<InvalidOperationException>();
+
+        [TestMethod]
+        public void NodeIdentifier_UnexpectedTypeThrows_VB() =>
+            vb.Invoking(x => x.NodeIdentifier(VB.SyntaxFactory.ThrowStatement())).Should().Throw<InvalidOperationException>();
     }
 }

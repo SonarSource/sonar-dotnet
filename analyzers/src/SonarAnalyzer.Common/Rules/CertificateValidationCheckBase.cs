@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
         TLambdaSyntax,
         TMemberAccessSyntax
         > : SonarDiagnosticAnalyzer
-        where TSyntaxKind: struct
+        where TSyntaxKind : struct
         where TMethodSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode

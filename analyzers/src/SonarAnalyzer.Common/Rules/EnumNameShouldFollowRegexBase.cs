@@ -47,7 +47,6 @@ namespace SonarAnalyzer.Rules
         protected EnumNameShouldFollowRegexBase(System.Resources.ResourceManager rspecResources) =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources, isEnabledByDefault: false);
 
-
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
