@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -30,6 +32,9 @@ namespace SonarAnalyzer.Helpers.Facade
 
         public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
+        public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
+            @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
+
         public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
             invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
 
@@ -38,6 +43,18 @@ namespace SonarAnalyzer.Helpers.Facade
             {
                 InvocationExpressionSyntax invocation => invocation.Expression,
                 SyncLockStatementSyntax syncLock => syncLock.Expression,
+                null => null,
+                _ => throw Unexpected(node)
+            };
+
+        public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
+            node switch
+            {
+                EnumStatementSyntax enumStatement => enumStatement.Identifier,
+                EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
+                IdentifierNameSyntax identifierName => identifierName.Identifier,
+                ParameterSyntax parameter => parameter.Identifier.Identifier,
+                ModifiedIdentifierSyntax variable => variable.Identifier,
                 null => null,
                 _ => throw Unexpected(node)
             };

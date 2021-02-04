@@ -39,12 +39,9 @@ namespace SonarAnalyzer.Rules
         protected abstract ISet<string> AlgorithmParameterlessFactoryMethods { get; }
         protected abstract ISet<string> AlgorithmParameterizedFactoryMethods { get; }
         protected abstract ISet<string> FactoryParameterNames { get; }
-        protected abstract TSyntaxKind ObjectCreation { get; }
-        protected abstract TSyntaxKind Invocation { get; }
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         private protected abstract ImmutableArray<KnownType> AlgorithmTypes { get; }
 
-        protected abstract SyntaxNode InvocationExpression(TInvocationExpressionSyntax invocation);
         protected abstract Location Location(TObjectCreationExpressionSyntax objectCreation);
         protected abstract TArgumentListSyntax ArgumentList(TInvocationExpressionSyntax invocationExpression);
         protected abstract SeparatedSyntaxList<TArgumentSyntax> Arguments(TArgumentListSyntax argumentList);
@@ -53,15 +50,15 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckObjectCreation, ObjectCreation);
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckInvocation, Invocation);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckObjectCreation, Language.SyntaxKind.ObjectCreationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckInvocation, Language.SyntaxKind.InvocationExpression);
         }
 
         private void CheckInvocation(SyntaxNodeAnalysisContext context)
         {
             var invocation = (TInvocationExpressionSyntax)context.Node;
 
-            if (InvocationExpression(invocation) is { } expression
+            if (Language.Syntax.NodeExpression(invocation) is { } expression
                 && (context.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol)
                 && (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) || IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation)))
             {

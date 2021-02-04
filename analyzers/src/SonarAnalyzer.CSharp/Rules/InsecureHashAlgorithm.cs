@@ -41,10 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
-        protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
         protected override ISet<string> AlgorithmParameterlessFactoryMethods { get; } =
             new HashSet<string>
@@ -84,9 +81,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Security_Cryptography_HMACMD5,
                 KnownType.System_Security_Cryptography_HMACRIPEMD160
             );
-
-        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
-           invocation.Expression;
 
         protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
             objectCreation.Type.GetLocation();

@@ -34,14 +34,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override SyntaxKind ObjectCreation => SyntaxKind.ObjectCreationExpression;
-        protected override SyntaxKind Invocation => SyntaxKind.InvocationExpression;
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
         public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
-
-        protected override SyntaxNode InvocationExpression(InvocationExpressionSyntax invocation) =>
-            invocation.Expression;
 
         protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
             objectCreation.Type.GetLocation();

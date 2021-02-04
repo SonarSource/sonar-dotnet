@@ -18,58 +18,44 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class EnumNameShouldFollowRegexBase : ParameterLoadingDiagnosticAnalyzer
+    public abstract class EnumNameShouldFollowRegexBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2342";
-        protected const string MessageFormat = "Rename this enumeration to match the regular expression: '{0}'.";
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
+        private const string MessageFormat = "Rename this enumeration to match the regular expression: '{0}'.";
         private const string DefaultEnumNamePattern = NamingHelper.PascalCasingPattern;
         private const string DefaultFlagsEnumNamePattern = "^" + NamingHelper.PascalCasingInternalPattern + "s$";
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the enumeration type names against.", DefaultEnumNamePattern)]
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
+        [RuleParameter("format", PropertyType.String, "Regular expression used to check the enumeration type names against.", DefaultEnumNamePattern)]
         public string EnumNamePattern { get; set; } = DefaultEnumNamePattern;
 
-        [RuleParameter("flagsAttributeFormat", PropertyType.String,
-            "Regular expression used to check the flags enumeration type names against.", DefaultFlagsEnumNamePattern)]
+        [RuleParameter("flagsAttributeFormat", PropertyType.String, "Regular expression used to check the flags enumeration type names against.", DefaultFlagsEnumNamePattern)]
         public string FlagsEnumNamePattern { get; set; } = DefaultFlagsEnumNamePattern;
-    }
 
-    public abstract class EnumNameShouldFollowRegexBase<TLanguageKindEnum, TEnumDeclarationSyntax> : EnumNameShouldFollowRegexBase
-        where TLanguageKindEnum : struct
-        where TEnumDeclarationSyntax : SyntaxNode
-    {
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
-                c =>
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private readonly DiagnosticDescriptor rule;
+
+        protected EnumNameShouldFollowRegexBase(System.Resources.ResourceManager rspecResources) =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources, isEnabledByDefault: false);
+
+        protected sealed override void Initialize(ParameterLoadingAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
-                    var enumDeclaration = (TEnumDeclarationSyntax)c.Node;
-                    var enumIdentifier = GetIdentifier(enumDeclaration);
-                    var enumPattern = enumDeclaration.HasFlagsAttribute(c.SemanticModel)
-                        ? FlagsEnumNamePattern
-                        : EnumNamePattern;
-
-                    if (!NamingHelper.IsRegexMatch(enumIdentifier.ValueText, enumPattern))
+                    var pattern = c.Node.HasFlagsAttribute(c.SemanticModel) ? FlagsEnumNamePattern : EnumNamePattern;
+                    if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier && !NamingHelper.IsRegexMatch(identifier.ValueText, pattern))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], enumIdentifier.GetLocation(),
-                            enumPattern));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(), pattern));
                     }
                 },
-                EnumStatementSyntaxKind);
-        }
-
-        protected abstract TLanguageKindEnum EnumStatementSyntaxKind { get; }
-
-        protected abstract SyntaxToken GetIdentifier(TEnumDeclarationSyntax declaration);
+                Language.SyntaxKind.EnumDeclaration);
     }
 }

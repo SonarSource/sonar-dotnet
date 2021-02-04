@@ -28,6 +28,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules
 {
     public abstract class CertificateValidationCheckBase<
+        TSyntaxKind,
         TMethodSyntax,
         TArgumentSyntax,
         TExpressionSyntax,
@@ -39,6 +40,7 @@ namespace SonarAnalyzer.Rules
         TLambdaSyntax,
         TMemberAccessSyntax
         > : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
         where TMethodSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
@@ -56,13 +58,13 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         internal /* for testing */ abstract MethodParameterLookupBase<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract Location ExpressionLocation(SyntaxNode expression);
         protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
         protected abstract IEqualityComparer<TExpressionSyntax> CreateNodeEqualityComparer();
         protected abstract SyntaxNode FindRootClassOrModule(SyntaxNode node);
         protected abstract TExpressionSyntax[] FindReturnAndThrowExpressions(InspectionContext c, SyntaxNode block);
         protected abstract bool IsTrueLiteral(TExpressionSyntax expression);
-        protected abstract string IdentifierText(SyntaxNode node);
         protected abstract TExpressionSyntax VariableInitializer(TVariableSyntax variable);
         protected abstract ImmutableArray<Location> LambdaLocations(InspectionContext c, TLambdaSyntax lambda);
         protected abstract SyntaxNode LocalVariableScope(TVariableSyntax variable);
@@ -109,7 +111,7 @@ namespace SonarAnalyzer.Rules
             {
                 c.VisitedMethods.Add(containingMethodDeclaration);
                 var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(containingMethodDeclaration) as IMethodSymbol;
-                var identText = IdentifierText(param);
+                var identText = Language.Syntax.NodeIdentifier(param)?.ValueText;
                 var paramSymbol = containingMethod.Parameters.Single(x => x.Name == identText);
                 if (!paramSymbol.IsParams)  // Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
                 {
@@ -223,14 +225,14 @@ namespace SonarAnalyzer.Rules
             var parentScope = LocalVariableScope(variable);
             if (parentScope != null)
             {
-                var identText = IdentifierText(variable);
+                var identText = Language.Syntax.NodeIdentifier(variable)?.ValueText;
                 allAssignedExpressions.AddRange(parentScope.DescendantNodes().OfType<TAssignmentExpressionSyntax>()
                     .Select(x =>
                     {
                         SplitAssignment(x, out var leftIdentifier, out var right);
                         return new { leftIdentifier, right };
                     })
-                    .Where(x => x.leftIdentifier != null && IdentifierText(x.leftIdentifier) == identText)
+                    .Where(x => x.leftIdentifier != null && Language.Syntax.NodeIdentifier(x.leftIdentifier) is { } identifier && identifier.ValueText == identText)
                     .Select(x => x.right));
             }
             var initializer = VariableInitializer(variable);

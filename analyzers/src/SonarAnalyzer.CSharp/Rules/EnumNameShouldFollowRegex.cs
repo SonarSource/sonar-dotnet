@@ -18,10 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -30,15 +28,10 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class EnumNameShouldFollowRegex : EnumNameShouldFollowRegexBase<SyntaxKind, EnumDeclarationSyntax>
+    public sealed class EnumNameShouldFollowRegex : EnumNameShouldFollowRegexBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
-        protected override SyntaxKind EnumStatementSyntaxKind => SyntaxKind.EnumDeclaration;
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-        protected override SyntaxToken GetIdentifier(EnumDeclarationSyntax declaration) => declaration.Identifier;
+        public EnumNameShouldFollowRegex() : base(RspecStrings.ResourceManager) { }
     }
 }

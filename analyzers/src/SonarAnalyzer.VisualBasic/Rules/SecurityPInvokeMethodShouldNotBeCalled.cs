@@ -33,16 +33,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax>
     {
-        protected override SyntaxKind SyntaxKind => SyntaxKind.InvocationExpression;
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         public SecurityPInvokeMethodShouldNotBeCalled() : base(RspecStrings.ResourceManager) { }
-
-        protected override SyntaxNode Expression(InvocationExpressionSyntax invocationExpression) =>
-            invocationExpression.Expression;
-
-        protected override SyntaxToken Identifier(SyntaxNode syntaxNode) =>
-            ((IdentifierNameSyntax)syntaxNode).Identifier;
 
         protected override bool IsImportFromInteropDll(ISymbol symbol) =>
             base.IsImportFromInteropDll(symbol)

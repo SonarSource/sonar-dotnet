@@ -20,6 +20,7 @@
 
 using System;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers.Facade;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -30,6 +31,7 @@ namespace SonarAnalyzer.Helpers
         GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         IExpressionNumericConverter ExpressionNumericConverter { get; }
         SyntaxFacade<TSyntaxKind> Syntax { get; }
+        ISyntaxKindFacade<TSyntaxKind> SyntaxKind { get; }
 
         IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
     }

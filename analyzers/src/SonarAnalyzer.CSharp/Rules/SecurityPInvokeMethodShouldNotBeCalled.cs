@@ -31,16 +31,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class SecurityPInvokeMethodShouldNotBeCalled : SecurityPInvokeMethodShouldNotBeCalledBase<SyntaxKind, InvocationExpressionSyntax>
     {
-        protected override SyntaxKind SyntaxKind => SyntaxKind.InvocationExpression;
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         public SecurityPInvokeMethodShouldNotBeCalled() : base(RspecStrings.ResourceManager) { }
-
-        protected override SyntaxNode Expression(InvocationExpressionSyntax invocationExpression) =>
-            invocationExpression.Expression;
-
-        protected override SyntaxToken Identifier(SyntaxNode syntaxNode) =>
-            ((IdentifierNameSyntax)syntaxNode).Identifier;
 
         protected override IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
             syntaxNode is IdentifierNameSyntax identifierName

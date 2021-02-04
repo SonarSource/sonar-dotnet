@@ -18,25 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
-
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Helpers.Facade
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
-    public sealed class FlagsEnumWithoutInitializer : FlagsEnumWithoutInitializerBase<SyntaxKind, EnumMemberDeclarationSyntax>
+    public interface ISyntaxKindFacade<TSyntaxKind>
+        where TSyntaxKind : struct
     {
-        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
-
-        public FlagsEnumWithoutInitializer() : base(RspecStrings.ResourceManager) { }
-
-        protected override bool IsInitialized(EnumMemberDeclarationSyntax member) =>
-            member.Initializer != null;
+        abstract TSyntaxKind InvocationExpression { get; }
+        abstract TSyntaxKind ObjectCreationExpression { get; }
+        abstract TSyntaxKind EnumDeclaration { get; }
     }
 }
