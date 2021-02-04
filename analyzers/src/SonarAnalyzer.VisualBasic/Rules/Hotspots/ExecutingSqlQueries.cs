@@ -34,26 +34,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax, IdentifierNameSyntax>
     {
-        public ExecutingSqlQueries()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
-        {
-            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, Rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, Rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, Rule);
-            AssignmentFinder = new VisualBasicAssignmentFinder();
-        }
+        public ExecutingSqlQueries() : this(AnalyzerConfiguration.Hotspot) { }
 
-        protected override string GetIdentifierName(IdentifierNameSyntax identifierNameSyntax) =>
-            identifierNameSyntax.Identifier.ValueText;
-
-        protected override ExpressionSyntax GetInvocationExpression(SyntaxNode expression) =>
-            expression is InvocationExpressionSyntax invocation
-                ? invocation.Expression
-                : null;
+        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration, RspecStrings.ResourceManager) { }
 
         protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
             context.Node is InvocationExpressionSyntax invocation
