@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -29,6 +31,9 @@ namespace SonarAnalyzer.Helpers.Facade
         public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
 
         public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
+
+        public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
+            @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
 
         public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
             invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
@@ -45,6 +50,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
             node switch
             {
+                EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
                 IdentifierNameSyntax identifierName => identifierName.Identifier,
                 ParameterSyntax parameter => parameter.Identifier.Identifier,
                 ModifiedIdentifierSyntax variable => variable.Identifier,

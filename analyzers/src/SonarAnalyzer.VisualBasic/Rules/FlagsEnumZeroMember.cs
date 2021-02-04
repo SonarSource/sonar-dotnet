@@ -18,13 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.Common;
@@ -33,24 +29,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class FlagsEnumZeroMember : FlagsEnumZeroMemberBase<SyntaxKind, EnumStatementSyntax, EnumMemberDeclarationSyntax>
+    public sealed class FlagsEnumZeroMember : FlagsEnumZeroMemberBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.EnumStatement);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
-
-        protected override SyntaxToken GetIdentifier(EnumMemberDeclarationSyntax zeroMember) => zeroMember.Identifier;
-
-        protected override IEnumerable<EnumMemberDeclarationSyntax> GetMembers(EnumStatementSyntax node)
-        {
-            var parent = node.Parent as EnumBlockSyntax;
-            return parent?.ChildNodes().OfType<EnumMemberDeclarationSyntax>() ?? new EnumMemberDeclarationSyntax[0];
-        }
-
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        public FlagsEnumZeroMember() : base(RspecStrings.ResourceManager) { }
     }
 }

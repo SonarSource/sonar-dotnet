@@ -25,5 +25,6 @@ namespace SonarAnalyzer.Helpers
     {
         abstract TSyntaxKind InvocationExpression { get; }
         abstract TSyntaxKind ObjectCreationExpression { get; }
+        abstract TSyntaxKind EnumDeclaration { get; }
     }
 }

@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
@@ -29,6 +30,7 @@ namespace SonarAnalyzer.Helpers
         public abstract TSyntaxKind Kind(SyntaxNode node);
         public abstract bool IsNullLiteral(SyntaxNode node);
 
+        public abstract IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum);
         public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
         public abstract SyntaxNode NodeExpression(SyntaxNode node);
         public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);

@@ -34,6 +34,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private readonly VisualBasicSyntaxFacade vb = new VisualBasicSyntaxFacade();
 
         [TestMethod]
+        public void EnumMembers_Null_CS() =>
+            cs.EnumMembers(null).Should().BeNull();
+
+        [TestMethod]
+        public void EnumMembers_Null_VB() =>
+            vb.EnumMembers(null).Should().BeNull();
+
+        [TestMethod]
         public void InvocationIdentifier_Null_CS() =>
             cs.InvocationIdentifier(null).Should().BeNull();
 

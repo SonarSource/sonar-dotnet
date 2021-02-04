@@ -19,93 +19,61 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.Common
 {
-    public abstract class FlagsEnumZeroMemberBase : SonarDiagnosticAnalyzer
+    public abstract class FlagsEnumZeroMemberBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2346";
-        protected const string MessageFormat = "Rename '{0}' to 'None'.";
+        private const string MessageFormat = "Rename '{0}' to 'None'.";
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-    }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-    public abstract class FlagsEnumZeroMemberBase<TLanguageKindEnum, TEnumDeclarationSyntax, TEnumMemberSyntax> : FlagsEnumZeroMemberBase
-        where TLanguageKindEnum : struct
-        where TEnumDeclarationSyntax : SyntaxNode
-        where TEnumMemberSyntax : SyntaxNode
-    {
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private readonly DiagnosticDescriptor rule;
+
+        protected FlagsEnumZeroMemberBase(System.Resources.ResourceManager rspecResources) =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+                Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var enumDeclaration = (TEnumDeclarationSyntax)c.Node;
-
-                    if (!enumDeclaration.HasFlagsAttribute(c.SemanticModel))
+                    if (c.Node.HasFlagsAttribute(c.SemanticModel)
+                        && ZeroMember(c.Node, c.SemanticModel) is { } zeroMember
+                        && Language.Syntax.NodeIdentifier(zeroMember) is { } identifier
+                        && identifier.ValueText != "None")
                     {
-                        return;
-                    }
-                    var zeroMember = GetZeroMember(enumDeclaration, c.SemanticModel);
-                    if (zeroMember == null)
-                    {
-                        return;
-                    }
-
-                    var identifier = GetIdentifier(zeroMember);
-                    if (identifier.ValueText != "None")
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], zeroMember.GetLocation(),
-                            identifier.ValueText));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, zeroMember.GetLocation(), identifier.ValueText));
                     }
                 },
-                SyntaxKindsOfInterest.ToArray());
-        }
+                Language.SyntaxKind.EnumDeclaration);
 
-        protected abstract SyntaxToken GetIdentifier(TEnumMemberSyntax zeroMember);
-
-        private TEnumMemberSyntax GetZeroMember(TEnumDeclarationSyntax node,
-            SemanticModel semanticModel)
+        private SyntaxNode ZeroMember(SyntaxNode node, SemanticModel semanticModel)
         {
-            var members = GetMembers(node);
-
-            foreach (var item in members)
+            foreach (var item in Language.Syntax.EnumMembers(node))
             {
-                if (!(semanticModel.GetDeclaredSymbol(item) is IFieldSymbol symbol))
+                if (semanticModel.GetDeclaredSymbol(item) is IFieldSymbol symbol && symbol.ConstantValue is { } constValue)
                 {
-                    return null;
-                }
-                var constValue = symbol.ConstantValue;
-
-                if (constValue == null)
-                {
-                    continue;
-                }
-
-                try
-                {
-                    var value = Convert.ToInt32(constValue);
-                    if (value == 0)
+                    try
                     {
-                        return item;
+                        if (Convert.ToInt64(constValue) == 0)
+                        {
+                            return item;
+                        }
                     }
-                }
-                catch (OverflowException)
-                {
-                    return null;
+                    catch (OverflowException)
+                    {
+                        return null;
+                    }
                 }
             }
             return null;
         }
-
-        protected abstract IEnumerable<TEnumMemberSyntax> GetMembers(TEnumDeclarationSyntax node);
-
-        public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
     }
 }
