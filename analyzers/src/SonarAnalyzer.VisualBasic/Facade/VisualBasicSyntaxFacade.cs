@@ -50,6 +50,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
             node switch
             {
+                EnumStatementSyntax enumStatement => enumStatement.Identifier,
                 EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
                 IdentifierNameSyntax identifierName => identifierName.Identifier,
                 ParameterSyntax parameter => parameter.Identifier.Identifier,

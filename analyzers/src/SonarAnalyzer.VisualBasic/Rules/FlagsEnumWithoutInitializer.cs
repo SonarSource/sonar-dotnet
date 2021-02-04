@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -33,35 +30,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class FlagsEnumWithoutInitializer : FlagsEnumWithoutInitializerBase<SyntaxKind, EnumStatementSyntax, EnumMemberDeclarationSyntax>
+    public sealed class FlagsEnumWithoutInitializer : FlagsEnumWithoutInitializerBase<SyntaxKind, EnumMemberDeclarationSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public FlagsEnumWithoutInitializer() : base(RspecStrings.ResourceManager) { }
 
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.EnumStatement);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
-
-        protected override IList<EnumMemberDeclarationSyntax> GetMembers(EnumStatementSyntax declaration)
-        {
-            if (!(declaration.Parent is EnumBlockSyntax parent))
-            {
-                return new List<EnumMemberDeclarationSyntax>();
-            }
-
-            return parent.ChildNodes()
-                .OfType<EnumMemberDeclarationSyntax>()
-                .ToList();
-        }
-
-        protected override bool IsInitialized(EnumMemberDeclarationSyntax member)
-        {
-            return member.Initializer != null;
-        }
-
-        protected override SyntaxToken GetIdentifier(EnumStatementSyntax declaration) => declaration.Identifier;
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override bool IsInitialized(EnumMemberDeclarationSyntax member) =>
+            member.Initializer != null;
     }
 }

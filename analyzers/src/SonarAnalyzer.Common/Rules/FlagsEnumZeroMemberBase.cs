@@ -40,9 +40,7 @@ namespace SonarAnalyzer.Rules.Common
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                Language.GeneratedCodeRecognizer,
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>
                 {
                     if (c.Node.HasFlagsAttribute(c.SemanticModel)
                         && ZeroMember(c.Node, c.SemanticModel) is { } zeroMember
