@@ -44,6 +44,10 @@ Namespace TestCasesForRuleFailure
             MessageBox(IntPtr.Zero, "My message", "My Message Box", 0)
         End Sub
 
+        Public Sub NullConditionalIndexing(List As List(Of Integer)
+            Dim Value As Integer = List?(0)
+        End Sub
+
     End Class
 
     Public Module MyExtensions

@@ -51,7 +51,7 @@ namespace Tests.Diagnostics
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
             var callback = new AsyncCallback(result => caller.EndInvoke(result));
-            caller.BeginInvoke("delegate",  callback, null); // Compliant, EndInvoke is called by wrapper.CallEndInvoke
+            caller.BeginInvoke("delegate", callback, null); // Compliant, EndInvoke is called by callback
         }
 
         private static void BeginInvokeOnDelegateWithDelegateCallback()
@@ -77,20 +77,18 @@ namespace Tests.Diagnostics
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
             var callback = new AsyncCallback(StaticCallEndInvoke);
-            caller.BeginInvoke("delegate",  callback, null); // Compliant, EndInvoke is called by wrapper.CallEndInvoke
+            caller.BeginInvoke("delegate",  callback, null); // Compliant, EndInvoke is called by callback and it's StaticCallEndInvoke
         }
 
         private static void BeginInvokeAndEndInvokeOnDelegateWithStaticCallback2()
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
-            var wrapper = new CallerWrapper(caller);
             caller.BeginInvoke("delegate",  new AsyncCallback(StaticDoNothing), null); // Noncompliant
         }
 
         private static void BeginInvokeAndEndInvokeOnDelegateWithStaticCallback3()
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
-            var wrapper = new CallerWrapper(caller);
             var callback = new AsyncCallback(StaticDoNothing);
             caller.BeginInvoke("delegate",  callback, null); // Noncompliant
         }
@@ -98,7 +96,6 @@ namespace Tests.Diagnostics
         private static void BeginInvokeOnDelegateWithCallbackAssignment()
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
-            var wrapper = new CallerWrapper(caller);
             AsyncCallback callback;
             callback = new AsyncCallback(StaticDoNothing);
             caller.BeginInvoke("delegate",  callback, null); // false-negative, we only look at the variable initialization and not at all its assignments
@@ -246,6 +243,14 @@ namespace Tests.Diagnostics
                 caller.BeginInvoke("Foo", null, null); // Noncompliant
             }
 
+            private void InvokeSomethingElse()
+            {
+                var BeginInvoke = "MemberBinding";
+                var EndInvoke = "MemberBinding";
+                BeginInvoke.ToString();
+                EndInvoke.ToString();
+            }
+
             public struct FooStruct
             {
                 public string field;
@@ -265,6 +270,24 @@ namespace Tests.Diagnostics
                 IAsyncResult BeginInvokeHiddenInALocalFunction()
                 {
                     return caller.BeginInvoke("method", null, null); // Noncompliant
+                }
+            }
+        }
+
+        public class FakeProperty
+        {
+            private AsyncMethodCaller caller;
+
+            public int Prop
+            {
+                get
+                {
+                    caller.BeginInvoke("prop", null, null); // FN, detection thinks that "EndInvoke" in setter is valid pair for this
+                    return 0;
+                }
+                set
+                {
+                    caller.EndInvoke(null);
                 }
             }
         }

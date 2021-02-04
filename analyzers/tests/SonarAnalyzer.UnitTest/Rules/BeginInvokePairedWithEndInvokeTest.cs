@@ -21,6 +21,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void BeginInvokePairedWithEndInvoke() =>
+        public void BeginInvokePairedWithEndInvoke_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.cs", new CS.BeginInvokePairedWithEndInvoke());
 
 #if NET
@@ -38,5 +39,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void BeginInvokePairedWithEndInvoke_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\BeginInvokePairedWithEndInvoke.CSharp9.cs", new CS.BeginInvokePairedWithEndInvoke());
 #endif
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void BeginInvokePairedWithEndInvoke_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\BeginInvokePairedWithEndInvoke.vb", new VB.BeginInvokePairedWithEndInvoke());
     }
 }

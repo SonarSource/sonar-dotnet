@@ -1,0 +1,22 @@
+{
+"issues":  [
+{
+"id":  "S6145",
+"message":  "Configure 'Option Strict On' for assembly 'AnalyzeGeneratedVb'.",
+"location":  null
+},
+{
+"id":  "S6145",
+"message":  "Change this to 'Option Strict On'.",
+"location":  {
+"uri": "replaced",
+"region":  {
+"startLine":  2,
+"startColumn":  13,
+"endLine":  2,
+"endColumn":  30
+}
+}
+}
+]
+}

@@ -21,6 +21,7 @@
 using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -37,6 +38,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void MarkAssemblyWithAssemblyVersionAttributeRazor_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.cs",
+                new CS.MarkAssemblyWithAssemblyVersionAttribute(),
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS()
         {
             Action action = () => Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs", new CS.MarkAssemblyWithAssemblyVersionAttribute());
@@ -47,6 +55,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttribute.vb", new VB.MarkAssemblyWithAssemblyVersionAttribute());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkAssemblyWithAssemblyVersionAttributeRazor_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithAssemblyVersionAttributeRazor.vb",
+                new VB.MarkAssemblyWithAssemblyVersionAttribute(),
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime());
 
         [TestMethod]
         [TestCategory("Rule")]

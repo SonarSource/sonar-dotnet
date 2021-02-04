@@ -56,6 +56,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftAspNetCoreMvcWebApiCompatShim(string packageVersion) => CreateWithCommandLine("Microsoft.AspNetCore.Mvc.WebApiCompatShim", packageVersion);
         public static References MicrosoftAspNetCoreRouting(string packageVersion) => CreateWithCommandLine("Microsoft.AspNetCore.Routing", packageVersion);
         public static References MicrosoftAspNetCoreMvcRazorPages(string packageVersion = "2.2.5") => CreateWithCommandLine("Microsoft.AspNetCore.Mvc.RazorPages", packageVersion);
+        public static References MicrosoftAspNetCoreMvcRazorRuntime(string packageVersion = "2.2.0") => CreateWithCommandLine("Microsoft.AspNetCore.Razor.Runtime", packageVersion);
         public static References MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) => CreateWithCommandLine("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
         public static References MicrosoftAspNetMvc(string packageVersion) => CreateWithCommandLine("Microsoft.AspNet.Mvc", packageVersion);
         public static References MicrosoftAspNetSignalRCore(string packageVersion = "2.4.1") => CreateWithCommandLine("Microsoft.AspNet.SignalR.Core", packageVersion);

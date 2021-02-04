@@ -35,7 +35,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class MethodParameterLookupTest
     {
-
         [TestMethod]
         public void TestMethodParameterLookup_CS()
         {
@@ -142,7 +141,7 @@ End Module
             c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1, opt = "Ipsum" });
             c.CheckExpectedParameterMappings(4, "WithParams", new { });
             c.CheckExpectedParameterMappings(5, "WithParams", new { arr = new[] { 1, 2, 3 } });
-            
+
             c.MainInvocations.Length.Should().Be(6); //Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
 
             //TryGetNonParamsSyntax throw scenario
@@ -163,21 +162,21 @@ End Module
             public abstract TInvocationSyntax[] FindInvocationsIn(string name);
             public abstract object ExtractArgumentValue(TArgumentSyntax argumentSyntax);
             public abstract TArgumentSyntax[] GetArguments(TInvocationSyntax invocation);
-            public abstract AbstractMethodParameterLookup<TArgumentSyntax> CreateLookup(TInvocationSyntax invocation, IMethodSymbol method);
+            public abstract MethodParameterLookupBase<TArgumentSyntax> CreateLookup(TInvocationSyntax invocation, IMethodSymbol method);
 
             protected InspectionBase(string source, AnalyzerLanguage language)
             {
-                this.Compiler = new SnippetCompiler(source, false, language);
-                this.MainInvocations = FindInvocationsIn("Main");
+                Compiler = new SnippetCompiler(source, false, language);
+                MainInvocations = FindInvocationsIn("Main");
             }
 
             protected void InitSpecial(TInvocationSyntax specialInvocation)
             {
-                this.SpecialArgument = GetArguments(specialInvocation).Single();
-                this.SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
+                SpecialArgument = GetArguments(specialInvocation).Single();
+                SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
             }
 
-            public AbstractMethodParameterLookup<TArgumentSyntax> CreateLookup(int invocationIndex, string expectedMethod)
+            public MethodParameterLookupBase<TArgumentSyntax> CreateLookup(int invocationIndex, string expectedMethod)
             {
                 var invocation = MainInvocations[invocationIndex];
                 var method = Compiler.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
@@ -192,20 +191,19 @@ End Module
                 InspectTryGetSymbol(lookup, expectedArguments, GetArguments(MainInvocations[invocationIndex]));
             }
 
-            private void InspectTryGetSyntax
-                (AbstractMethodParameterLookup<TArgumentSyntax> lookup, object expectedArguments, IMethodSymbol method)
+            private void InspectTryGetSyntax(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, IMethodSymbol method)
             {
                 lookup.TryGetSyntax(SpecialParameter, out var symbol).Should().Be(false);
 
                 foreach (var parameter in method.Parameters)
                 {
-                    if (parameter.IsParams && lookup.TryGetSyntax(parameter, out var argumentList))
+                    if (parameter.IsParams && lookup.TryGetSyntax(parameter, out var expressions))
                     {
-                        argumentList.Select(x => ExtractArgumentValue(x)).Should().BeEquivalentTo((IEnumerable)ExtractExpectedValue(expectedArguments, parameter.Name));
+                        expressions.Select(x => ConstantValue(x)).Should().BeEquivalentTo((IEnumerable)ExtractExpectedValue(expectedArguments, parameter.Name));
                     }
-                    else if (!parameter.IsParams && lookup.TryGetNonParamsSyntax(parameter, out var argument))
+                    else if (!parameter.IsParams && lookup.TryGetNonParamsSyntax(parameter, out var expression))
                     {
-                        ExtractArgumentValue(argument).Should().Be(ExtractExpectedValue(expectedArguments, parameter.Name));
+                        ConstantValue(expression).Should().Be(ExtractExpectedValue(expectedArguments, parameter.Name));
                     }
                     else if (!parameter.IsOptional && !parameter.IsParams)
                     {
@@ -214,7 +212,7 @@ End Module
                 }
             }
 
-            private void InspectTryGetSymbol(AbstractMethodParameterLookup<TArgumentSyntax> lookup, object expectedArguments, TArgumentSyntax[] arguments)
+            private void InspectTryGetSymbol(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, TArgumentSyntax[] arguments)
             {
                 lookup.TryGetSymbol(SpecialArgument, out var parameter).Should().Be(false);
 
@@ -250,6 +248,9 @@ End Module
                 return pi.GetValue(expected, null);
             }
 
+            private object ConstantValue(SyntaxNode node) =>
+                Compiler.SemanticModel.GetConstantValue(node).Value;
+
         }
 
         private class CSharpInspection : InspectionBase<CSharpSyntax.ArgumentSyntax, CSharpSyntax.InvocationExpressionSyntax>
@@ -275,7 +276,7 @@ End Module
                 return Compiler.SemanticModel.GetConstantValue(argumentSyntax.Expression).Value;
             }
 
-            public override AbstractMethodParameterLookup<CSharpSyntax.ArgumentSyntax> CreateLookup(CSharpSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method)
+            public override MethodParameterLookupBase<CSharpSyntax.ArgumentSyntax> CreateLookup(CSharpSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method)
             {
                 return new CSharpMethodParameterLookup(invocation.ArgumentList, method);
             }
@@ -300,7 +301,7 @@ End Module
                 return invocation.ArgumentList.Arguments.ToArray();
             }
 
-            public override AbstractMethodParameterLookup<VBSyntax.ArgumentSyntax> CreateLookup(VBSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method)
+            public override MethodParameterLookupBase<VBSyntax.ArgumentSyntax> CreateLookup(VBSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method)
             {
                 return new VisualBasicMethodParameterLookup(invocation.ArgumentList, Compiler.SemanticModel);
             }

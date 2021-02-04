@@ -110,5 +110,22 @@ namespace Tests.Diagnostics
             result = nonArray.Length >= 0;
             result = nonArray.LongLength >= 0;
         }
+
+        private void TestInterfacesAndReadonlyCollections(IList<int> list, ICollection<int> collection, IReadOnlyCollection<int> readonlyCollection, IReadOnlyList<int> readonlyList)
+        {
+            SortedSet<double> sortedSet = new SortedSet<double>();
+
+            bool result;
+
+            result = list.Count >= 0; // Noncompliant
+
+            result = collection.Count >= 0; // Noncompliant
+
+            result = readonlyCollection.Count >= 0; // Noncompliant
+
+            result = readonlyList.Count >= 0; // Noncompliant
+
+            result = sortedSet.Count >= 0; // Noncompliant
+        }
     }
 }

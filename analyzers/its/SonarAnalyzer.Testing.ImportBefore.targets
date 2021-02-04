@@ -43,6 +43,7 @@
     <PropertyGroup Condition="$(SonarAnalyzerRegressionTestRunning)">
       <!-- Set the path to the SARIF report -->
       <ErrorLog>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)-$(ProjectGuid).json</ErrorLog>
+      <RazorCompilationErrorLog>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)-$(ProjectGuid).Views.json</RazorCompilationErrorLog>
       
       <!-- Override the ruleset with all SonarAnalyzer rules -->
       <ResolvedCodeAnalysisRuleSet>$(MSBuildStartupDirectory)\output\AllSonarAnalyzerRules.ruleset</ResolvedCodeAnalysisRuleSet>

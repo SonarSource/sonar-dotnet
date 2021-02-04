@@ -104,26 +104,6 @@ function Initialize-ActualFolder() {
     Write-Debug "Initialized actual folder in '${methodTimerElapsed}'"
 }
 
-# FIXME: this is a hacky way of avoiding diffing problems with temporary generated files in the %TEMP% folder
-function ReplaceGeneratedTempFileName([string]$folder){
-
-    Write-Host "Will replace generated temporary file names from the jsons in ${folder}:"
-    $files = Get-ChildItem -Path $folder -Recurse -File
-    $tempFileNameLineRegexCs = '"uri":.*\.NETFramework,Version=.*\.cs"'
-    $tempFileNameLineRegexVb = '"uri":.*\.NETFramework,Version=.*\.vb"'
-
-    foreach ($file in $files){
-
-        $fullName = $file.FullName
-        Write-Host "Will replace the generated temporary file names inside $fullName..."
-
-        $data = [System.IO.File]::ReadAllText(${fullName})
-        $data = [System.Text.RegularExpressions.Regex]::Replace($data, $tempFileNameLineRegexCs, '"uri": "replaced"')
-        $data = [System.Text.RegularExpressions.Regex]::Replace($data, $tempFileNameLineRegexVb, '"uri": "replaced"')
-        [System.IO.File]::WriteAllText(${fullName}, $data)
-    }
-}
-
 function Initialize-OutputFolder() {
     $methodTimer = [system.diagnostics.stopwatch]::StartNew()
 
@@ -270,9 +250,9 @@ function CreateIssue($fileName, $lineNumber, $issueId, $message){
 }
 
 function LoadExpectedIssues($file, $regex){
-    # Unfortunatelly regex named groups don't work. 
+    # Unfortunatelly regex named groups don't work.
     # In the current context:
-    # - $_.Matches.Groups[3].Value is IssueId 
+    # - $_.Matches.Groups[3].Value is IssueId
     # - $_.Matches.Groups[4].Value is Message
     $issues = $file | Select-String -Pattern $regex | ForEach-Object { CreateIssue $_.Path $_.LineNumber $_.Matches.Groups[3].Value $_.Matches.Groups[4].Value }
 
@@ -281,7 +261,7 @@ function LoadExpectedIssues($file, $regex){
     }
 
     $id = $issues | where { $_.IssueId -ne "" } | select -ExpandProperty IssueId | unique
-    
+
     if ($id -eq $null){
         throw "Please specify the rule id in the following file: $($file.FullName)"
     }
@@ -317,7 +297,7 @@ function LoadExpectedIssuesForInternalProject($project){
     $csRegex = "\/\/\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
     $vbRegex = "'\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
 
-    return (LoadExpectedIssuesByProjectType $project $csRegex "*.cs") + 
+    return (LoadExpectedIssuesByProjectType $project $csRegex "*.cs") +
            (LoadExpectedIssuesByProjectType $project $vbRegex "*.vb")
 }
 
@@ -343,7 +323,7 @@ function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
         }
 
         if ($found -eq $false) {
-            # There might be the case when different rules fire for the same class. Since we want reduce the noise and narrow the focus, 
+            # There might be the case when different rules fire for the same class. Since we want reduce the noise and narrow the focus,
             # we can have only one rule verified per class (this is done by checking the specified id in the first Noncompliant message).
             $expectedIssueInFile = $expectedIssues | where { $_.FileName.endsWith($actualIssue.FileName) } | unique
 
@@ -412,7 +392,7 @@ function LoadActualIssues($project){
             if ($location -is [system.array]){
                 $location = $location[0]
             }
-        
+
             CreateIssue $location.uri $location.region.startLine $_.id $_.message
         }
     }
@@ -435,9 +415,9 @@ function CheckDiffsForInternalProject($project){
 function CheckInternalProjectsDifferences(){
     Write-Host "Check differences for internal projects"
     $internalProjTimer = [system.diagnostics.stopwatch]::StartNew()
-    
+
     foreach ($currentProject in $InternalProjects){
-        # we need to verify only the specified project if the "-project" parameter has a value 
+        # we need to verify only the specified project if the "-project" parameter has a value
         if ($project -eq "" -or $currentProject -eq $project){
             CheckDiffsForInternalProject $currentProject
         }
@@ -500,7 +480,7 @@ try {
 
     Write-Host "Normalizing the SARIF reports"
     $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
-    
+
     # Normalize & overwrite all *.json SARIF files found under the "actual" folder
     Get-ChildItem output -filter *.json -recurse | where { $_.FullName -notmatch 'ManuallyAddedNoncompliantIssues' } | Foreach-Object { New-IssueReports $_.FullName }
 
@@ -512,12 +492,6 @@ try {
     Measure-AnalyzerPerformance
     $measurePerfTimerElapsed = $measurePerfTimer.Elapsed.TotalSeconds
     Write-Debug "Computed analyzer performance in '${measurePerfTimerElapsed}'"
-
-    # FIXME: this is a hacky way of diffing the issues found on the temporary generated files during build
-    ReplaceGeneratedTempFileName(".\expected\AnalyzeGenerated")
-    ReplaceGeneratedTempFileName(".\actual\AnalyzeGenerated")
-    ReplaceGeneratedTempFileName(".\expected\AnalyzeGeneratedVb")
-    ReplaceGeneratedTempFileName(".\actual\AnalyzeGeneratedVb")
 
     Write-Host "Checking for differences..."
     $diffTimer = [system.diagnostics.stopwatch]::StartNew()

@@ -52,6 +52,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
+        internal static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new KnownType("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
         internal static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new KnownType("Microsoft.Data.Sqlite.SqliteCommand");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new KnownType("Microsoft.EntityFrameworkCore.Migrations.Migration");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RawSqlString = new KnownType("Microsoft.EntityFrameworkCore.RawSqlString");
@@ -136,6 +137,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Collections_Generic_IDictionary_TKey_TValue_VB = new KnownType("System.Collections.Generic.IDictionary(Of TKey, TValue)");
         internal static readonly KnownType System_Collections_Generic_IEnumerable_T = new KnownType(SpecialType.System_Collections_Generic_IEnumerable_T, "System.Collections.Generic.IEnumerable<T>");
         internal static readonly KnownType System_Collections_Generic_IList_T = new KnownType(SpecialType.System_Collections_Generic_IList_T, "System.Collections.Generic.IList<T>");
+        internal static readonly KnownType System_Collections_Generic_IReadOnlyCollection_T = new KnownType(SpecialType.System_Collections_Generic_IReadOnlyCollection_T, "System.Collections.Generic.IReadOnlyCollection<T>");
         internal static readonly KnownType System_Collections_Generic_ISet_T = new KnownType("System.Collections.Generic.ISet<T>");
         internal static readonly KnownType System_Collections_Generic_KeyValuePair_TKey_TValue = new KnownType("System.Collections.Generic.KeyValuePair<TKey, TValue>");
         internal static readonly KnownType System_Collections_Generic_List_T = new KnownType("System.Collections.Generic.List<T>");

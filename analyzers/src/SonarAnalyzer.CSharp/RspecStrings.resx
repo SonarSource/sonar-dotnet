@@ -9347,7 +9347,7 @@
     <value>Numbers are infinite, but the types that hold them are not. Each numeric type has hard upper and lower bounds. Try to calculate or assign numbers beyond those bounds, and the result will be a value that has silently wrapped around from the expected positive value to a negative one, or vice versa.</value>
   </data>
   <data name="S3949_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S3949_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -12785,7 +12785,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S927_Description" xml:space="preserve">
-    <value>The name of a parameter in an externally visible. This rule raises and issue when method override does not match the name of the parameter in the base declaration of the method, or the name of the parameter in the interface declaration of the method or the name of any other partial definition.</value>
+    <value>The name of a parameter in an externally visible. This rule raises an issue when method override does not match the name of the parameter in the base declaration of the method, or the name of the parameter in the interface declaration of the method or the name of any other partial definition.</value>
   </data>
   <data name="S927_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>

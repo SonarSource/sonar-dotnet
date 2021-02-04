@@ -19,13 +19,18 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    public interface ILanguageFacade
+    public interface ILanguageFacade<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         StringComparison NameComparison { get; }
         GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         IExpressionNumericConverter ExpressionNumericConverter { get; }
+        SyntaxFacade<TSyntaxKind> Syntax { get; }
+
+        IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
     }
 }
