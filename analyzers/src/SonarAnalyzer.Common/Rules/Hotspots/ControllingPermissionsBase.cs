@@ -18,36 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ControllingPermissionsBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ControllingPermissionsBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4834";
         protected const string MessageFormat = "Make sure controlling this permission is safe here.";
 
-        private readonly IAnalyzerConfiguration configuration;
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
         protected ControllingPermissionsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
-        {
-            this.configuration = configuration;
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-        }
+            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            var input = new TrackerInput(context, configuration, rule);
-
             var oc = Language.Tracker.ObjectCreation;
             oc.Track(input, oc.MatchConstructor(KnownType.System_Security_Permissions_PrincipalPermission));
 

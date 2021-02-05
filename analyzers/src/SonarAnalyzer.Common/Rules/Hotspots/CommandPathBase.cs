@@ -18,15 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CommandPathBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class CommandPathBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4036";
@@ -34,24 +32,12 @@ namespace SonarAnalyzer.Rules
 
         private readonly Regex validPath = new Regex(@"^(\.{0,2}[\\/]|\w+:)");
 
-        private readonly IAnalyzerConfiguration configuration;
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string FirstArgument(InvocationContext context);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected CommandPathBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected CommandPathBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+        protected override void Initialize(TrackerInput input)
         {
-            this.configuration = configuration;
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-        }
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            var input = new TrackerInput(context, configuration, rule);
-
             var inv = Language.Tracker.Invocation;
             inv.Track(input,
                 inv.MatchMethod(new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),

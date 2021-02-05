@@ -32,21 +32,21 @@ namespace SonarAnalyzer.Rules
         private const string MessageFormat = "Make sure disabling ASP.NET Request Validation feature is safe here.";
 
         private readonly DiagnosticDescriptor rule;
-        private readonly IAnalyzerConfiguration analyzerConfiguration;
+        private readonly IAnalyzerConfiguration configuration;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected DisablingRequestValidationBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration analyzerConfiguration)
+        protected DisablingRequestValidationBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration configuration)
         {
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-            this.analyzerConfiguration = analyzerConfiguration;
+            this.configuration = configuration;
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(c =>
                 {
-                    analyzerConfiguration.Initialize(c.Options);
-                    if (!analyzerConfiguration.IsEnabled(DiagnosticId))
+                    configuration.Initialize(c.Options);
+                    if (!configuration.IsEnabled(DiagnosticId))
                     {
                         return;
                     }

@@ -19,15 +19,13 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UsingRegularExpressionsBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class UsingRegularExpressionsBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4784";
@@ -35,25 +33,15 @@ namespace SonarAnalyzer.Rules
         private const int MinRegexLength = 3;
 
         private readonly ISet<char> specialCharacters = new HashSet<char> { '{', '+', '*' };
-        private readonly IAnalyzerConfiguration configuration;
-        private readonly DiagnosticDescriptor rule;
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string GetStringLiteralAtIndex(InvocationContext context, int index);
         protected abstract string GetStringLiteralAtIndex(ObjectCreationContext context, int index);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
         protected UsingRegularExpressionsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
-        {
-            this.configuration = configuration;
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-        }
+            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            var input = new TrackerInput(context, configuration, rule);
-
             var inv = Language.Tracker.Invocation;
             inv.Track(input,
                 inv.MatchMethod(

@@ -25,7 +25,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
+    public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax, TIdentifierNameSyntax> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TExpressionSyntax : SyntaxNode
         where TIdentifierNameSyntax : SyntaxNode
@@ -100,10 +100,6 @@ namespace SonarAnalyzer.Rules
                 new MemberDescriptor(KnownType.System_Data_Sqlite_SqliteCommand, "CommandText"),
             };
 
-        private readonly IAnalyzerConfiguration configuration;
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
         protected abstract TExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index);
         protected abstract TExpressionSyntax GetSetValue(PropertyAccessContext context);
@@ -111,18 +107,10 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsSensitiveExpression(TExpressionSyntax expression, SemanticModel semanticModel);
         protected abstract Location SecondaryLocationForExpression(TExpressionSyntax node, string identifierNameToFind, out string identifierNameFound);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected ExecutingSqlQueriesBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected ExecutingSqlQueriesBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+        protected override void Initialize(TrackerInput input)
         {
-            this.configuration = configuration;
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-        }
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            var input = new TrackerInput(context, configuration, rule);
-
             var inv = Language.Tracker.Invocation;
             inv.Track(input,
                 inv.MatchMethod(invocationsForFirstTwoArguments),

@@ -18,38 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ConfiguringLoggersBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ConfiguringLoggersBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4792";
         protected const string MessageFormat = "Make sure that this logger's configuration is safe.";
 
-        private readonly IAnalyzerConfiguration configuration;
-        private readonly DiagnosticDescriptor rule;
+        protected ConfiguringLoggersBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected ConfiguringLoggersBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
-        {
-            this.configuration = configuration;
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-        }
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
             var inv = Language.Tracker.Invocation;
             var pa = Language.Tracker.PropertyAccess;
             var oc = Language.Tracker.ObjectCreation;
-            var input = new TrackerInput(context, configuration, rule);
             // ASP.NET Core
             inv.Track(input,
                 inv.MatchMethod(

@@ -19,14 +19,13 @@
  */
 
 using System;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class JwtSignedBase<TSyntaxKind, TInvocationSyntax> : SonarDiagnosticAnalyzer
+    public abstract class JwtSignedBase<TSyntaxKind, TInvocationSyntax> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TInvocationSyntax : SyntaxNode
     {
@@ -35,23 +34,12 @@ namespace SonarAnalyzer.Rules
         private const string MessageFormat = "Use only strong cipher algorithms when verifying the signature of this JWT.";
         private const int ExtensionStaticCallParameters = 2;
 
-        private readonly IAnalyzerConfiguration configuration;
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract BuilderPatternCondition<TSyntaxKind, TInvocationSyntax> CreateBuilderPatternCondition();
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected JwtSignedBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected JwtSignedBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+        protected override void Initialize(TrackerInput input)
         {
-            this.configuration = configuration;
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-        }
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            var input = new TrackerInput(context, configuration, rule);
             var t = Language.Tracker.Invocation;
             t.Track(input,
                 t.MatchMethod(
