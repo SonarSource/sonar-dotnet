@@ -52,6 +52,18 @@ namespace SonarAnalyzer.Helpers
         public Condition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition) where TInvocationSyntax : SyntaxNode =>
             condition.IsInvalidBuilderInitialization;
 
+        public Condition ExceptWhen(Condition condition) =>
+            value => !condition(value);
+
+        public Condition And(Condition condition1, Condition condition2) =>
+            value => condition1(value) && condition2(value);
+
+        public Condition Or(Condition condition1, Condition condition2) =>
+            value => condition1(value) || condition2(value);
+
+        public Condition Or(Condition condition1, Condition condition2, Condition condition3) =>
+            value => condition1(value) || condition2(value) || condition3(value);
+
         internal Condition MethodReturnTypeIs(KnownType returnType) =>
             context => context.MethodSymbol.Value != null
                        && context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);

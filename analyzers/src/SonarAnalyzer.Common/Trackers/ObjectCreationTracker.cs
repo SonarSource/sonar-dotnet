@@ -29,6 +29,18 @@ namespace SonarAnalyzer.Helpers
         internal abstract Condition ArgumentAtIndexIsConst(int index);
         internal abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
 
+        public Condition ExceptWhen(Condition condition) =>
+            value => !condition(value);
+
+        public Condition And(Condition condition1, Condition condition2) =>
+            value => condition1(value) && condition2(value);
+
+        public Condition Or(Condition condition1, Condition condition2) =>
+            value => condition1(value) || condition2(value);
+
+        public Condition Or(Condition condition1, Condition condition2, Condition condition3) =>
+            value => condition1(value) || condition2(value) || condition3(value);
+
         internal Condition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
             context => ConstArgumentForParameter(context, parameterName) is bool boolValue && boolValue == expectedValue;
 
