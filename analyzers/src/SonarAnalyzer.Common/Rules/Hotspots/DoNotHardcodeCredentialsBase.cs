@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
 
         private readonly IAnalyzerConfiguration configuration;
         private readonly DiagnosticDescriptor rule;
-        private string credentialWords = DefaultCredentialWords;
+        private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
         private Regex passwordValuePattern;
 
@@ -73,6 +73,7 @@ namespace SonarAnalyzer.Rules
         {
             this.configuration = configuration;
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+            CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
         }
 
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context)

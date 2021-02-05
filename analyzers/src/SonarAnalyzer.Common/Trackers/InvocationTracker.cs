@@ -30,6 +30,7 @@ namespace SonarAnalyzer.Helpers
         public abstract Condition ArgumentAtIndexIsAny(int index, params string[] values);
         public abstract Condition MatchProperty(MemberDescriptor member);
         internal abstract object ConstArgumentForParameter(InvocationContext context, string parameterName);
+        protected abstract SyntaxToken? ExpectedExpressionIdentifier(SyntaxNode expression);
 
         public Condition MatchMethod(params MemberDescriptor[] methods) =>
            context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, Language.NameComparison, methods);
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.Helpers
 
         protected override InvocationContext CreateContext(SyntaxNodeAnalysisContext context) =>
             Language.Syntax.NodeExpression(context.Node) is { } expression
-            && Language.Syntax.NodeIdentifier(expression) is { } identifier
+            && ExpectedExpressionIdentifier(expression) is { } identifier
                 ? new InvocationContext(context, identifier.ValueText) : null;
     }
 }

@@ -57,5 +57,8 @@ namespace SonarAnalyzer.Helpers
                 ? valueSyntax.FindConstantValue(context.SemanticModel)
                 : null;
         }
+
+        protected override SyntaxToken? ExpectedExpressionIdentifier(SyntaxNode expression) =>
+            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier;
     }
 }
