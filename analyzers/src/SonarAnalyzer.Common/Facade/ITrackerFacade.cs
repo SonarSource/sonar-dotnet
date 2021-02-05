@@ -18,20 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
-
 namespace SonarAnalyzer.Helpers.Facade
 {
     public interface ITrackerFacade<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        BaseTypeTracker<TSyntaxKind> BaseType(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule);
-        ElementAccessTracker<TSyntaxKind> ElementAccess(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule);
-        FieldAccessTracker<TSyntaxKind> FieldAccess(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule);
-        InvocationTracker<TSyntaxKind> Invocation(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule);
-        MethodDeclarationTracker MethodDeclaration(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule);
-        ObjectCreationTracker<TSyntaxKind> ObjectCreation(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule);
-        PropertyAccessTracker<TSyntaxKind> PropertyAccess(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule);
+        BaseTypeTracker<TSyntaxKind> BaseType { get; }
+        ElementAccessTracker<TSyntaxKind> ElementAccess { get; }
+        FieldAccessTracker<TSyntaxKind> FieldAccess { get; }
+        InvocationTracker<TSyntaxKind> Invocation { get; }
+        MethodDeclarationTracker<TSyntaxKind> MethodDeclaration { get; }
+        ObjectCreationTracker<TSyntaxKind> ObjectCreation { get; }
+        PropertyAccessTracker<TSyntaxKind> PropertyAccess { get; }
     }
 }

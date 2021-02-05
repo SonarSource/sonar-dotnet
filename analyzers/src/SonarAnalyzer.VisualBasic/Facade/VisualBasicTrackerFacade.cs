@@ -18,33 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers.Facade
 {
     internal sealed class VisualBasicTrackerFacade : ITrackerFacade<SyntaxKind>
     {
-        public BaseTypeTracker<SyntaxKind> BaseType(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new VisualBasicBaseTypeTracker(analyzerConfiguration, rule);
-
-        public ElementAccessTracker<SyntaxKind> ElementAccess(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new VisualBasicElementAccessTracker(analyzerConfiguration, rule);
-
-        public FieldAccessTracker<SyntaxKind> FieldAccess(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new VisualBasicFieldAccessTracker(analyzerConfiguration, rule);
-
-        public InvocationTracker<SyntaxKind> Invocation(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new VisualBasicInvocationTracker(analyzerConfiguration, rule);
-
-        public MethodDeclarationTracker MethodDeclaration(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new VisualBasicMethodDeclarationTracker(analyzerConfiguration, rule);
-
-        public ObjectCreationTracker<SyntaxKind> ObjectCreation(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
-
-        public PropertyAccessTracker<SyntaxKind> PropertyAccess(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
+        public BaseTypeTracker<SyntaxKind> BaseType { get; } = new VisualBasicBaseTypeTracker();
+        public ElementAccessTracker<SyntaxKind> ElementAccess { get; } = new VisualBasicElementAccessTracker();
+        public FieldAccessTracker<SyntaxKind> FieldAccess { get; } = new VisualBasicFieldAccessTracker();
+        public InvocationTracker<SyntaxKind> Invocation { get; } = new VisualBasicInvocationTracker();
+        public MethodDeclarationTracker<SyntaxKind> MethodDeclaration { get; } = new VisualBasicMethodDeclarationTracker();
+        public ObjectCreationTracker<SyntaxKind> ObjectCreation { get; } = new VisualBasicObjectCreationTracker();
+        public PropertyAccessTracker<SyntaxKind> PropertyAccess { get; } = new VisualBasicPropertyAccessTracker();
     }
 }

@@ -18,33 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers.Facade
 {
     internal sealed class CSharpTrackerFacade : ITrackerFacade<SyntaxKind>
     {
-        public BaseTypeTracker<SyntaxKind> BaseType(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new CSharpBaseTypeTracker(analyzerConfiguration, rule);
-
-        public ElementAccessTracker<SyntaxKind> ElementAccess(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new CSharpElementAccessTracker(analyzerConfiguration, rule);
-
-        public FieldAccessTracker<SyntaxKind> FieldAccess(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new CSharpFieldAccessTracker(analyzerConfiguration, rule);
-
-        public InvocationTracker<SyntaxKind> Invocation(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new CSharpInvocationTracker(analyzerConfiguration, rule);
-
-        public MethodDeclarationTracker MethodDeclaration(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new CSharpMethodDeclarationTracker(analyzerConfiguration, rule);
-
-        public ObjectCreationTracker<SyntaxKind> ObjectCreation(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new CSharpObjectCreationTracker(analyzerConfiguration, rule);
-
-        public PropertyAccessTracker<SyntaxKind> PropertyAccess(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) =>
-            new CSharpPropertyAccessTracker(analyzerConfiguration, rule);
+        public BaseTypeTracker<SyntaxKind> BaseType { get; } = new CSharpBaseTypeTracker();
+        public ElementAccessTracker<SyntaxKind> ElementAccess { get; } = new CSharpElementAccessTracker();
+        public FieldAccessTracker<SyntaxKind> FieldAccess { get; } = new CSharpFieldAccessTracker();
+        public InvocationTracker<SyntaxKind> Invocation { get; } = new CSharpInvocationTracker();
+        public MethodDeclarationTracker<SyntaxKind> MethodDeclaration { get; } = new CSharpMethodDeclarationTracker();
+        public ObjectCreationTracker<SyntaxKind> ObjectCreation { get; } = new CSharpObjectCreationTracker();
+        public PropertyAccessTracker<SyntaxKind> PropertyAccess { get; } = new CSharpPropertyAccessTracker();
     }
 }
