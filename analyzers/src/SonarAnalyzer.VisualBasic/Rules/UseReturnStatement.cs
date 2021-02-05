@@ -72,9 +72,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 }
 
             public override void VisitImplementsClause(ImplementsClauseSyntax node) { /* Skip */ }
-
-            public override void VisitImplementsClause(ImplementsClauseSyntax node) { /* Skip */ }
-
             private bool IsImplicitReturnValue(IdentifierNameSyntax node) =>
                 name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase)
                 && !IsExcluded(node);
