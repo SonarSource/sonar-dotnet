@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -34,40 +35,46 @@ namespace SonarAnalyzer.Rules
         private const int MinRegexLength = 3;
 
         private readonly ISet<char> specialCharacters = new HashSet<char> { '{', '+', '*' };
+        private readonly IAnalyzerConfiguration configuration;
+        private readonly DiagnosticDescriptor rule;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-        protected DiagnosticDescriptor Rule { get; }
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
-        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract string GetStringLiteralAtIndex(InvocationContext context, int index);
+        protected abstract string GetStringLiteralAtIndex(ObjectCreationContext context, int index);
 
-        protected UsingRegularExpressionsBase(System.Resources.ResourceManager rspecStrings) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings).WithNotConfigurable();
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected UsingRegularExpressionsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+        {
+            this.configuration = configuration;
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
+            var input = new TrackerInput(context, configuration, rule);
+
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input,
+                inv.MatchMethod(
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "IsMatch"),
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Match"),
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Matches"),
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Replace"),
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Split")),
                 SecondArgumentIsHardcodedRegex(),
-                InvocationTracker.MethodIsStatic());
+                inv.MethodIsStatic());
 
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(KnownType.System_Text_RegularExpressions_Regex),
+            var oc = Language.Tracker.ObjectCreation;
+            oc.Track(input,
+                oc.MatchConstructor(KnownType.System_Text_RegularExpressions_Regex),
                 FirstArgumentIsHardcodedRegex());
         }
 
-        protected abstract string GetStringLiteralAtIndex(InvocationContext context, int index);
-
-        protected abstract string GetStringLiteralAtIndex(ObjectCreationContext context, int index);
-
-        private TrackerBase<InvocationContext>.Condition SecondArgumentIsHardcodedRegex() =>
+        private TrackerBase<TSyntaxKind, InvocationContext>.Condition SecondArgumentIsHardcodedRegex() =>
             context => GetStringLiteralAtIndex(context, 1) is string hardcodedString && IsComplexRegex(hardcodedString);
 
-        private TrackerBase<ObjectCreationContext>.Condition FirstArgumentIsHardcodedRegex() =>
+        private TrackerBase<TSyntaxKind, ObjectCreationContext>.Condition FirstArgumentIsHardcodedRegex() =>
             context => GetStringLiteralAtIndex(context, 0) is string hardcodedString && IsComplexRegex(hardcodedString);
 
         private bool IsComplexRegex(string s) =>

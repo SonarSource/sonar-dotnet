@@ -31,13 +31,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class UsingRegularExpressions : UsingRegularExpressionsBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
         public UsingRegularExpressions() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public UsingRegularExpressions(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
-        {
-            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, Rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, Rule);
-        }
+        internal /*for testing*/ UsingRegularExpressions(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         protected override string GetStringLiteralAtIndex(InvocationContext context, int index) =>
             context.Node is InvocationExpressionSyntax invocation
