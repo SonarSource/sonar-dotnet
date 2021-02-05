@@ -30,14 +30,10 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class UsingCookies : UsingCookiesBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
         public UsingCookies() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public UsingCookies(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
-        {
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, Rule);
-            ElementAccessTracker = new CSharpElementAccessTracker(analyzerConfiguration, Rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, Rule);
-            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, Rule);
-        }
+        internal /*for testing*/ UsingCookies(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
     }
 }
