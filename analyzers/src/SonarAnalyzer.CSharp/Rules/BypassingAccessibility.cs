@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -31,21 +30,10 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class BypassingAccessibility : BypassingAccessibilityBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
+        public BypassingAccessibility() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public BypassingAccessibility()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
-
-        internal /*for testing*/ BypassingAccessibility(IAnalyzerConfiguration analyzerConfiguration)
-        {
-            FieldAccessTracker = new CSharpFieldAccessTracker(analyzerConfiguration, rule);
-        }
+        internal /*for testing*/ BypassingAccessibility(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
     }
 }

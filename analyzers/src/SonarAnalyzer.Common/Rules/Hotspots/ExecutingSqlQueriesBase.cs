@@ -100,8 +100,8 @@ namespace SonarAnalyzer.Rules
                 new MemberDescriptor(KnownType.System_Data_Sqlite_SqliteCommand, "CommandText"),
             };
 
-        private readonly DiagnosticDescriptor rule;
         private readonly IAnalyzerConfiguration configuration;
+        private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
