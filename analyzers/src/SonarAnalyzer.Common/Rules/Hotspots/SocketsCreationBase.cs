@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -28,12 +31,24 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4818";
         protected const string MessageFormat = "Make sure that sockets are used safely here.";
 
-        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+        private readonly IAnalyzerConfiguration configuration;
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected SocketsCreationBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+        {
+            this.configuration = configuration;
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(
+            var t = Language.Tracker.ObjectCreation;
+            t.Track(new TrackerInput(context, configuration, rule),
+                t.MatchConstructor(
                     KnownType.System_Net_Sockets_Socket,
                     KnownType.System_Net_Sockets_TcpClient,
                     KnownType.System_Net_Sockets_UdpClient));
