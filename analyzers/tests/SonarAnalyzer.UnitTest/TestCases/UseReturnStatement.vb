@@ -115,5 +115,7 @@ Public Class OtherType
 End Class
 
 Public Interface IInterface
+
     Function ImplementedInterfaceMethod() As Integer
+    
 End Interface
