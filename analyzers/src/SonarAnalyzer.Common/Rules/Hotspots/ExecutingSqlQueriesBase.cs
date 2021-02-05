@@ -22,7 +22,6 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using InvocationCondition = SonarAnalyzer.Helpers.TrackerBase<SonarAnalyzer.Helpers.InvocationContext>.Condition;
 
 namespace SonarAnalyzer.Rules
 {
@@ -102,9 +101,7 @@ namespace SonarAnalyzer.Rules
             };
 
         private readonly DiagnosticDescriptor rule;
-        private readonly InvocationTracker<TSyntaxKind> invocationTracker;
-        private readonly PropertyAccessTracker<TSyntaxKind> propertyAccessTracker;
-        private readonly ObjectCreationTracker<TSyntaxKind> objectCreationTracker;
+        private readonly IAnalyzerConfiguration configuration;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
@@ -116,35 +113,37 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected ExecutingSqlQueriesBase(IAnalyzerConfiguration analyzerConfiguration, System.Resources.ResourceManager rspecResources)
+        protected ExecutingSqlQueriesBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
         {
+            this.configuration = configuration;
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-            invocationTracker = Language.Tracker.Invocation(analyzerConfiguration, rule);
-            propertyAccessTracker = Language.Tracker.PropertyAccess(analyzerConfiguration, rule);
-            objectCreationTracker = Language.Tracker.ObjectCreation(analyzerConfiguration, rule);
         }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            invocationTracker.Track(context,
-                invocationTracker.MatchMethod(invocationsForFirstTwoArguments),
-                Conditions.And(
+            var input = new TrackerInput(context, configuration, rule);
+
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input,
+                inv.MatchMethod(invocationsForFirstTwoArguments),
+                inv.And(
                     MethodHasRawSqlQueryParameter(),
-                    Conditions.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1))
+                    inv.Or(ArgumentAtIndexIsTracked(0), ArgumentAtIndexIsTracked(1))
                 ),
-                Conditions.ExceptWhen(invocationTracker.ArgumentAtIndexIsConstant(0)));
+                inv.ExceptWhen(inv.ArgumentAtIndexIsConstant(0)));
 
-            TrackInvocations(context, invocationsForFirstArgument, FirstArgumentIndex);
-            TrackInvocations(context, invocationsForSecondArgument, SecondArgumentIndex);
+            TrackInvocations(input, invocationsForFirstArgument, FirstArgumentIndex);
+            TrackInvocations(input, invocationsForSecondArgument, SecondArgumentIndex);
 
-            propertyAccessTracker.Track(context,
-                propertyAccessTracker.MatchProperty(properties),
-                propertyAccessTracker.MatchSetter(),
+            var pa = Language.Tracker.PropertyAccess;
+            pa.Track(input,
+                pa.MatchProperty(properties),
+                pa.MatchSetter(),
                 c => IsTracked(GetSetValue(c), c),
-                Conditions.ExceptWhen(propertyAccessTracker.AssignedValueIsConstant()));
+                pa.ExceptWhen(pa.AssignedValueIsConstant()));
 
-            TrackObjectCreation(context, constructorsForFirstArgument, FirstArgumentIndex);
-            TrackObjectCreation(context, constructorsForSecondArgument, SecondArgumentIndex);
+            TrackObjectCreation(input, constructorsForFirstArgument, FirstArgumentIndex);
+            TrackObjectCreation(input, constructorsForSecondArgument, SecondArgumentIndex);
         }
 
         protected bool IsTrackedVariableDeclaration(TExpressionSyntax expression, SyntaxBaseContext context)
@@ -166,24 +165,29 @@ namespace SonarAnalyzer.Rules
                     context.AddSecondaryLocation(location, AssignmentMessage, foundName);
                 }
             }
-
             return false;
         }
 
-        private void TrackObjectCreation(SonarAnalysisContext context, KnownType[] objectCreationTypes, int argumentIndex) =>
-            objectCreationTracker.Track(context,
-                objectCreationTracker.MatchConstructor(objectCreationTypes),
-                objectCreationTracker.ArgumentAtIndexIs(argumentIndex, KnownType.System_String),
+        private void TrackObjectCreation(TrackerInput input, KnownType[] objectCreationTypes, int argumentIndex)
+        {
+            var t = Language.Tracker.ObjectCreation;
+            t.Track(input,
+                t.MatchConstructor(objectCreationTypes),
+                t.ArgumentAtIndexIs(argumentIndex, KnownType.System_String),
                     c => IsTracked(GetArgumentAtIndex(c, argumentIndex), c),
-                Conditions.ExceptWhen(objectCreationTracker.ArgumentAtIndexIsConst(argumentIndex)));
+                t.ExceptWhen(t.ArgumentAtIndexIsConst(argumentIndex)));
+        }
 
-        private void TrackInvocations(SonarAnalysisContext context, MemberDescriptor[] incovationsDescriptors, int argumentIndex) =>
-            invocationTracker.Track(context,
-                invocationTracker.MatchMethod(incovationsDescriptors),
+        private void TrackInvocations(TrackerInput input, MemberDescriptor[] incovationsDescriptors, int argumentIndex)
+        {
+            var t = Language.Tracker.Invocation;
+            t.Track(input,
+                t.MatchMethod(incovationsDescriptors),
                 ArgumentAtIndexIsTracked(argumentIndex),
-                Conditions.ExceptWhen(invocationTracker.ArgumentAtIndexIsConstant(argumentIndex)));
+                t.ExceptWhen(t.ArgumentAtIndexIsConstant(argumentIndex)));
+        }
 
-        private InvocationCondition MethodHasRawSqlQueryParameter() =>
+        private TrackerBase<TSyntaxKind, InvocationContext>.Condition MethodHasRawSqlQueryParameter() =>
             context =>
             {
                 return Language.Syntax.NodeExpression(context.Node) is { } invocationExpression
@@ -194,7 +198,7 @@ namespace SonarAnalyzer.Rules
                     method.Parameters.Length > index && method.Parameters[index].IsType(KnownType.Microsoft_EntityFrameworkCore_RawSqlString);
             };
 
-        private InvocationCondition ArgumentAtIndexIsTracked(int index) =>
+        private TrackerBase<TSyntaxKind, InvocationContext>.Condition ArgumentAtIndexIsTracked(int index) =>
             context => IsTracked(GetArgumentAtIndex(context, index), context);
     }
 }

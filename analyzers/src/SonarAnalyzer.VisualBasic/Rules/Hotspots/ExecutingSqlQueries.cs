@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public ExecutingSqlQueries() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
             context.Node is InvocationExpressionSyntax invocation
