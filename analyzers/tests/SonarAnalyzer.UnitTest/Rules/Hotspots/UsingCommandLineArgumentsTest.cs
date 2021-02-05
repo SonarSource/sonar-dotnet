@@ -32,13 +32,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCommandLineArguments_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UsingCommandLineArguments.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.cs",
                                     new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCommandLineArguments_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\UsingCommandLineArguments.CSharp9.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\UsingCommandLineArguments.CSharp9.cs",
                                                       new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
@@ -71,12 +71,12 @@ partial class Program1
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCommandLineArguments_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\UsingCommandLineArguments.cs", new CS.UsingCommandLineArguments());
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingCommandLineArguments.cs", new CS.UsingCommandLineArguments());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCommandLineArguments_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UsingCommandLineArguments.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
                                     new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
@@ -109,7 +109,7 @@ End Class
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCommandLineArguments_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\UsingCommandLineArguments.vb",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
                                            new VB.UsingCommandLineArguments());
     }
 }

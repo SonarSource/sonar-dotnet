@@ -20,40 +20,27 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class ReadingStandardInputTest
+    public class DoNotUseRandomTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ReadingStandardInput_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReadingStandardInput.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
-
-#if NET
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ReadingStandardInput_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ReadingStandardInput.CSharp9.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
-#endif
+        public void DoNotUseRandom() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotUseRandom.cs",
+                new CS.DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ReadingStandardInput_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ReadingStandardInput.vb", new VB.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ReadingStandardInput_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\ReadingStandardInput.cs", new CS.ReadingStandardInput());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ReadingStandardInput_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\ReadingStandardInput.vb", new VB.ReadingStandardInput());
+        public void DoNotUseRandom_Not_Enabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DoNotUseRandom.cs",
+                new CS.DoNotUseRandom(),
+                MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

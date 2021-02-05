@@ -36,28 +36,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
                 new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.cs",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
                 new CS.DeliveringDebugFeaturesInProduction(),
                 AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
                 new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferencesNetCore2);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore2.vb",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
                 new VB.DeliveringDebugFeaturesInProduction(),
                 AdditionalReferencesNetCore2);
 
@@ -66,14 +66,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore3.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.cs",
                 new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferencesNetCore3);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.NetCore3.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore3.vb",
                 new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferencesNetCore3);
 

@@ -18,7 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NETFRAMEWORK // IdentityModel is not available on .Net Core
+
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -30,37 +33,41 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class ExpandingArchivesTest
+    public class ControllingPermissionsTest
     {
+        internal static readonly IEnumerable<MetadataReference> AdditionalReferences =
+            Enumerable.Empty<MetadataReference>()
+                .Concat(FrameworkMetadataReference.SystemIdentityModel)
+                .Concat(FrameworkMetadataReference.SystemWeb);
+
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpandingArchives_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.cs",
-                                    new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
+        public void ControllingPermissions_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.cs",
+                                    new CS.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpandingArchives_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.cs",
-                                           new CS.ExpandingArchives(),
+        public void ControllingPermissions_CS_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ControllingPermissions.cs",
+                                           new CS.ControllingPermissions(),
                                            AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpandingArchives_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExpandingArchives.vb",
-                                    new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
+        public void ControllingPermissions_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.vb",
+                                    new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpandingArchives_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\ExpandingArchives.vb",
-                                           new VB.ExpandingArchives(),
+        public void ControllingPermissions_VB_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ControllingPermissions.vb",
+                                           new VB.ControllingPermissions(),
                                            AdditionalReferences);
-
-        internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            MetadataReferenceFacade.SystemIoCompression;
     }
 }
+
+#endif

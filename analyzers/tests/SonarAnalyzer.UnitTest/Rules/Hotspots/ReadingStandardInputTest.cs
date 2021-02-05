@@ -18,11 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -30,37 +27,33 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class EncryptingDataTest
+    public class ReadingStandardInputTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptingData_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EncryptingData.cs",
-                new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+        public void ReadingStandardInput_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ReadingStandardInput.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+
+#if NET
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ReadingStandardInput_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ReadingStandardInput.CSharp9.cs", new CS.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
+#endif
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptingData_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\EncryptingData.vb",
-                new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences());
+        public void ReadingStandardInput_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ReadingStandardInput.vb", new VB.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptingData_CS_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\EncryptingData.cs",
-                new CS.EncryptingData(),
-                GetAdditionalReferences());
+        public void ReadingStandardInput_CS_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ReadingStandardInput.cs", new CS.ReadingStandardInput());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EncryptingData_VB_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\EncryptingData.vb",
-                new VB.EncryptingData(),
-                GetAdditionalReferences());
-
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.SystemSecurityCryptography;
+        public void ReadingStandardInput_VB_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ReadingStandardInput.vb", new VB.ReadingStandardInput());
     }
 }

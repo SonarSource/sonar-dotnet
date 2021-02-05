@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -28,26 +30,37 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class CommandPathTest
+    public class ExpandingArchivesTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommandPath_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
+        public void ExpandingArchives_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.cs",
+                                    new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommandPath_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
+        public void ExpandingArchives_CS_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ExpandingArchives.cs",
+                                           new CS.ExpandingArchives(),
+                                           AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommandPath_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\CommandPath.cs", new CS.CommandPath(), MetadataReferenceFacade.SystemDiagnosticsProcess);
+        public void ExpandingArchives_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.vb",
+                                    new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommandPath_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\CommandPath.vb", new VB.CommandPath(), MetadataReferenceFacade.SystemDiagnosticsProcess);
+        public void ExpandingArchives_VB_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ExpandingArchives.vb",
+                                           new VB.ExpandingArchives(),
+                                           AdditionalReferences);
+
+        internal static IEnumerable<MetadataReference> AdditionalReferences =>
+            MetadataReferenceFacade.SystemIoCompression;
     }
 }

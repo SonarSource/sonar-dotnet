@@ -20,28 +20,34 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class InsecureDeserializationTest
+    public class CommandPathTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
-        public void InsecureDeserialization() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureDeserialization.cs",
-                new CS.InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromCSharp8);
+        public void CommandPath_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
 
-#if NET
         [TestMethod]
         [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
-        public void InsecureDeserialization_CSharp9() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\InsecureDeserialization.CSharp9.cs", new CS.InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
-#endif
+        public void CommandPath_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CommandPath_CS_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\CommandPath.cs", new CS.CommandPath(), MetadataReferenceFacade.SystemDiagnosticsProcess);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CommandPath_VB_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\CommandPath.vb", new VB.CommandPath(), MetadataReferenceFacade.SystemDiagnosticsProcess);
     }
 }

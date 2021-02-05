@@ -20,27 +20,32 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class DoNotUseRandomTest
+    public class HardcodedIpAddressTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotUseRandom() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseRandom.cs",
-                new CS.DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+        public void HardcodedIpAddress_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotUseRandom_Not_Enabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\DoNotUseRandom.cs",
-                new CS.DoNotUseRandom(),
-                MetadataReferenceFacade.SystemSecurityCryptography);
+        public void HardcodedIpAddress_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.vb", new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void HardcodedIpAddress_Not_Enabled()
+        {
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\HardcodedIpAddress.cs", new CS.HardcodedIpAddress());
+
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\HardcodedIpAddress.vb", new VB.HardcodedIpAddress());
+        }
     }
 }

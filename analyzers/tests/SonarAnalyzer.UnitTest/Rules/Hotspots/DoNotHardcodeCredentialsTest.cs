@@ -37,56 +37,56 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_CS_DefaultValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_CS_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.cs",
                 new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE, x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_CS_DefaultConfiguration() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.cs",
                 new CS.DoNotHardcodeCredentials(),
                 AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_VB_DefaultValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled),
                 AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_VB_CustomValues() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,*,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotHardcodeCredentials_CustomValues.vb",
                 new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"KODE ,,,, FaCaL-FaIrE,x\*+?|}{][)(^$.# " },
                 AdditionalReferences);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_VB_DefaultConfiguration() =>
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\Hotspots\DoNotHardcodeCredentials_DefaultValues.vb",
                 new VB.DoNotHardcodeCredentials(),
                 AdditionalReferences);
 

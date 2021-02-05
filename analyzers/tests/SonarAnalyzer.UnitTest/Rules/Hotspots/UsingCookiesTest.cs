@@ -37,28 +37,28 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_CS_Net46() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_Net46.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.cs",
                 new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\UsingCookies_Net46.cs",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingCookies_Net46.cs",
                 new CS.UsingCookies(),
                 GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_VB_Net46() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_Net46.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.vb",
                 new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNet46());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\UsingCookies_Net46.vb",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingCookies_Net46.vb",
                 new VB.UsingCookies(),
                 GetAdditionalReferencesForNet46());
 
@@ -69,14 +69,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_CS_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.cs",
                 new CS.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void UsingCookies_VB_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_NetCore.vb",
                 new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version));
 
