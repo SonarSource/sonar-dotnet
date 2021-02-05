@@ -20,26 +20,19 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
     public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, InvocationContext>
         where TSyntaxKind : struct
     {
-        private readonly bool caseInsensitiveComparison;
-
         public abstract Condition ArgumentAtIndexIsConstant(int index);
         public abstract Condition ArgumentAtIndexIsAny(int index, params string[] values);
         public abstract Condition MatchProperty(MemberDescriptor member);
         internal abstract object ConstArgumentForParameter(InvocationContext context, string parameterName);
-        protected abstract string GetMethodName(SyntaxNode invocationExpression);
-
-        protected InvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
-            this.caseInsensitiveComparison = caseInsensitiveComparison;
 
         public Condition MatchMethod(params MemberDescriptor[] methods) =>
-           context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, caseInsensitiveComparison, methods);
+           context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, Language.NameComparison, methods);
 
         public Condition MethodNameIs(string methodName) =>
             context => context.MethodName == methodName;
@@ -68,6 +61,8 @@ namespace SonarAnalyzer.Helpers
                        && boolValue == expectedValue;
 
         protected override InvocationContext CreateContext(SyntaxNodeAnalysisContext context) =>
-            GetMethodName(context.Node) is string methodName ? new InvocationContext(context, methodName) : null;
+            Language.Syntax.NodeExpression(context.Node) is { } expression
+            && Language.Syntax.NodeIdentifier(expression) is { } identifier
+                ? new InvocationContext(context, identifier.ValueText) : null;
     }
 }

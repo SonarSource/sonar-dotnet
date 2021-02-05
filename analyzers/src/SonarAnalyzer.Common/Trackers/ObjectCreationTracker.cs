@@ -19,9 +19,7 @@
  */
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -30,8 +28,6 @@ namespace SonarAnalyzer.Helpers
     {
         internal abstract Condition ArgumentAtIndexIsConst(int index);
         internal abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
-
-        protected ObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         internal Condition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
             context => ConstArgumentForParameter(context, parameterName) is bool boolValue && boolValue == expectedValue;

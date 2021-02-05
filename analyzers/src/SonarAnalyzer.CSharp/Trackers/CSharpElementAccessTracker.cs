@@ -21,17 +21,14 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Helpers
 {
     public class CSharpElementAccessTracker : ElementAccessTracker<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.ElementAccessExpression };
-
-        public CSharpElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override Condition ArgumentAtIndexEquals(int index, string value) =>
             context => ((ElementAccessExpressionSyntax)context.Node).ArgumentList is { } argumentList
@@ -45,6 +42,6 @@ namespace SonarAnalyzer.Helpers
             context => ((ElementAccessExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax memberAccess
                        && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
                        && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
-                       && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type);
+                       && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
     }
 }

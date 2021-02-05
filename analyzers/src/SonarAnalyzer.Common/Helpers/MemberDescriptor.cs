@@ -19,87 +19,48 @@
  */
 
 using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
     public class MemberDescriptor
     {
+        internal KnownType ContainingType { get; }
+        internal string Name { get; }
+
         internal MemberDescriptor(KnownType containingType, string name)
         {
             ContainingType = containingType;
             Name = name;
         }
 
-        internal KnownType ContainingType { get; }
+        public override string ToString() =>
+            $"{ContainingType.ShortName}.{Name}";
 
-        internal string Name { get; }
+        public bool IsMatch(string memberName, ITypeSymbol containingType, StringComparison nameComparison) =>
+            containingType.Is(ContainingType) && HasSameName(memberName, Name, nameComparison);
 
-        public bool IsMatch(string memberName, ITypeSymbol containingType, bool caseInsensitiveComparison = false) =>
-            containingType.Is(ContainingType) && HasSameName(memberName, Name, caseInsensitiveComparison);
+        public bool IsMatch<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol, StringComparison nameComparison)
+            where TSymbolType : class, ISymbol =>
+            HasSameName(memberName, Name, nameComparison)
+            && memberSymbol.Value is { } symbol
+            && HasSameContainingType(symbol, checkOverriddenMethods: true);
 
-        public bool IsMatch<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol, bool caseInsensitiveComparison = false)
-            where TSymbolType : class, ISymbol
-        {
-            if (!HasSameName(memberName, Name, caseInsensitiveComparison) ||
-                memberSymbol.Value == null)
-            {
-                return false;
-            }
+        public static bool MatchesAny<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol, bool checkOverriddenMethods, StringComparison nameComparison, params MemberDescriptor[] members)
+            where TSymbolType : class, ISymbol =>
+            memberName != null
+            && memberSymbol.Value is { } symbol
+            && members.Any(x => HasSameName(memberName, x.Name, nameComparison) && x.HasSameContainingType(symbol, checkOverriddenMethods));
 
-            if (HasSameContainingType(memberSymbol.Value, checkOverriddenMethods: true))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool MatchesAny<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol,
-            bool checkOverriddenMethods, bool caseInsensitiveComparison, params MemberDescriptor[] members)
-            where TSymbolType : class, ISymbol
-        {
-            if (memberName == null)
-            {
-                return false;
-            }
-
-            foreach (var m in members)
-            {
-                if (!HasSameName(memberName, m.Name, caseInsensitiveComparison))
-                {
-                    continue;
-                }
-
-                if (memberSymbol.Value == null)
-                {
-                    return false; // No need to continue looping if the symbol is null
-                }
-
-                if (m.HasSameContainingType(memberSymbol.Value, checkOverriddenMethods))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static bool HasSameName(string name1, string name2, bool caseInsensitiveComparison) =>
-            (name1 == name2 ||
-                (caseInsensitiveComparison &&
-                name1 != null &&
-                name1.Equals(name2, StringComparison.OrdinalIgnoreCase)));
+        private static bool HasSameName(string name1, string name2, StringComparison comparison) =>
+            name1 != null && name1.Equals(name2, comparison);
 
         private bool HasSameContainingType<TSymbolType>(TSymbolType memberSymbol, bool checkOverriddenMethods)
             where TSymbolType : class, ISymbol
         {
             var containingType = memberSymbol.ContainingType?.ConstructedFrom;
-            return !checkOverriddenMethods && containingType.Is(ContainingType)
-                || checkOverriddenMethods && containingType.DerivesOrImplements(ContainingType);
+            return checkOverriddenMethods ? containingType.DerivesOrImplements(ContainingType) : containingType.Is(ContainingType);
         }
-
-        public override string ToString() =>
-            $"{ContainingType.ShortName}.{Name}";
     }
 }

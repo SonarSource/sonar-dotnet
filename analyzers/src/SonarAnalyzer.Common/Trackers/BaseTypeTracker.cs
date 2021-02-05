@@ -23,7 +23,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -38,8 +37,6 @@ namespace SonarAnalyzer.Helpers
         /// Extract the list of type syntax nodes for the base types/interface types.
         /// </summary>
         protected abstract IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode);
-
-        protected BaseTypeTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         internal Condition MatchSubclassesOf(params KnownType[] types)
         {

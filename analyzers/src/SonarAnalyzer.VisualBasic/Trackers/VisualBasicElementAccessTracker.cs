@@ -21,16 +21,13 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicElementAccessTracker : ElementAccessTracker<SyntaxKind>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InvocationExpression };
-
-        public VisualBasicElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override Condition ArgumentAtIndexEquals(int index, string value) =>
             context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
@@ -44,6 +41,6 @@ namespace SonarAnalyzer.Helpers
             context => ((InvocationExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax memberAccess
                        && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
                        && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
-                       && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
+                       && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
     }
 }

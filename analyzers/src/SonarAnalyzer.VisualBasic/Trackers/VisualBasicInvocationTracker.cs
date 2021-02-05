@@ -22,16 +22,13 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InvocationExpression };
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
-
-        public VisualBasicInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule, caseInsensitiveComparison: true) { }
 
         public override Condition ArgumentAtIndexIsConstant(int index) =>
             context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
@@ -49,7 +46,7 @@ namespace SonarAnalyzer.Helpers
                        && methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess
                        && propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
                        && context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType
-                       && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
+                       && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
 
         internal override object ConstArgumentForParameter(InvocationContext context, string parameterName)
         {
@@ -59,8 +56,5 @@ namespace SonarAnalyzer.Helpers
                 ? valueSyntax.FindConstantValue(context.SemanticModel)
                 : null;
         }
-
-        protected override string GetMethodName(SyntaxNode invocationExpression) =>
-          ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier()?.Identifier.ValueText;
     }
 }

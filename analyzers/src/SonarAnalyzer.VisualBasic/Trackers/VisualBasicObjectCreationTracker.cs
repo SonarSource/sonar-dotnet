@@ -18,19 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.ObjectCreationExpression };
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
-
-        public VisualBasicObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         internal override Condition ArgumentAtIndexIsConst(int index) =>
             context => ((ObjectCreationExpressionSyntax)context.Node).ArgumentList  is { } argumentList

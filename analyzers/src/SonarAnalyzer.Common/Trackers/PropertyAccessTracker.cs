@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -32,15 +31,9 @@ namespace SonarAnalyzer.Helpers
         public abstract Condition MatchSetter();
         public abstract Condition AssignedValueIsConstant();
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
-        protected abstract string GetPropertyName(SyntaxNode expression);
-
-        private bool CaseInsensitiveComparison { get; }
-
-        protected PropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
-           CaseInsensitiveComparison = caseInsensitiveComparison;
 
         public Condition MatchProperty(params MemberDescriptor[] properties) =>
-            context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, CaseInsensitiveComparison, properties);
+            context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, Language.NameComparison, properties);
 
         protected override PropertyAccessContext CreateContext(SyntaxNodeAnalysisContext context)
         {
@@ -51,7 +44,7 @@ namespace SonarAnalyzer.Helpers
                 return null;
             }
 
-            return GetPropertyName(context.Node) is string propertyName ? new PropertyAccessContext(context, propertyName) : null;
+            return Language.Syntax.NodeIdentifier(context.Node) is { } propertyIdentifier ? new PropertyAccessContext(context, propertyIdentifier.ValueText) : null;
         }
     }
 }

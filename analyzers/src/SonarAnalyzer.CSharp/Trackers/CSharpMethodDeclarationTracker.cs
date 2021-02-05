@@ -22,14 +22,13 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class CSharpMethodDeclarationTracker : MethodDeclarationTracker
+    public class CSharpMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKind>
     {
-        public CSharpMethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         public override Condition ParameterAtIndexIsUsed(int index) =>
             context =>

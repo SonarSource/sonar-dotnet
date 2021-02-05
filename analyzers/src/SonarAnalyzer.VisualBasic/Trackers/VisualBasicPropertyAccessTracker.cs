@@ -22,21 +22,18 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicPropertyAccessTracker : PropertyAccessTracker<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
             new[]
             {
                 SyntaxKind.SimpleMemberAccessExpression,
                 SyntaxKind.IdentifierName
             };
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
-
-        public VisualBasicPropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule, true) { }
 
         public override object AssignedValue(PropertyAccessContext context) =>
             context.Node.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement)) is AssignmentStatementSyntax assignment
@@ -51,9 +48,6 @@ namespace SonarAnalyzer.Helpers
 
         public override Condition AssignedValueIsConstant() =>
             context => AssignedValue(context) != null;
-
-        protected override string GetPropertyName(SyntaxNode expression) =>
-            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
 
         protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
             expression.IsKind(SyntaxKind.IdentifierName) && expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);

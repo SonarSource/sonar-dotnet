@@ -22,13 +22,12 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class VisualBasicMethodDeclarationTracker : MethodDeclarationTracker
+    public class VisualBasicMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKind>
     {
-        public VisualBasicMethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         public override Condition ParameterAtIndexIsUsed(int index) =>
             context =>

@@ -22,12 +22,12 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
     public class CSharpFieldAccessTracker : FieldAccessTracker<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
             new[]
             {
@@ -35,9 +35,6 @@ namespace SonarAnalyzer.Helpers
                 SyntaxKind.MemberBindingExpression,
                 SyntaxKind.IdentifierName
             };
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
-
-        public CSharpFieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override Condition WhenRead() =>
             context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
@@ -48,15 +45,9 @@ namespace SonarAnalyzer.Helpers
         public override Condition AssignedValueIsConstant() =>
             context =>
             {
-                var assignment = (AssignmentExpressionSyntax)context.Node.Ancestors()
-                    .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression));
-
-                return assignment != null &&
-                    assignment.Right.HasConstantValue(context.SemanticModel);
+                var assignment = (AssignmentExpressionSyntax)context.Node.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression));
+                return assignment != null && assignment.Right.HasConstantValue(context.SemanticModel);
             };
-
-        protected override string GetFieldName(SyntaxNode expression) =>
-            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
 
         protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
             expression.IsKind(SyntaxKind.IdentifierName)

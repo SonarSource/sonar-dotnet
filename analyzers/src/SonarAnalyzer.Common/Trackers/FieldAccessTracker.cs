@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -31,26 +30,19 @@ namespace SonarAnalyzer.Helpers
         public abstract Condition MatchSet();
         public abstract Condition AssignedValueIsConstant();
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
-        protected abstract string GetFieldName(SyntaxNode expression);
-
-        private bool CaseInsensitiveComparison { get; }
-
-        protected FieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false) : base(analyzerConfiguration, rule) =>
-            CaseInsensitiveComparison = caseInsensitiveComparison;
 
         public Condition MatchField(params MemberDescriptor[] fields) =>
-            context => MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, CaseInsensitiveComparison, fields);
+            context => MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, Language.NameComparison, fields);
 
         protected override FieldAccessContext CreateContext(SyntaxNodeAnalysisContext context)
         {
-            // We register for both MemberAccess and IdentifierName and we want to
-            // avoid raising two times for the same identifier.
+            // We register for both MemberAccess and IdentifierName and we want to avoid raising two times for the same identifier.
             if (IsIdentifierWithinMemberAccess(context.Node))
             {
                 return null;
             }
 
-            return GetFieldName(context.Node) is string fieldName ? new FieldAccessContext(context, fieldName) : null;
+            return Language.Syntax.NodeIdentifier(context.Node) is { } fieldIdentifier ? new FieldAccessContext(context, fieldIdentifier.ValueText) : null;
         }
     }
 }

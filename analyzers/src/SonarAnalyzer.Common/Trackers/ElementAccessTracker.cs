@@ -19,9 +19,7 @@
  */
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -31,8 +29,6 @@ namespace SonarAnalyzer.Helpers
         public abstract Condition ArgumentAtIndexEquals(int index, string value);
         public abstract Condition MatchSetter();
         public abstract Condition MatchProperty(MemberDescriptor member);
-
-        protected ElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         internal Condition ArgumentAtIndexIs(int index, params KnownType[] types) =>
             context => context.InvokedPropertySymbol.Value != null

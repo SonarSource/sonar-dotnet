@@ -22,17 +22,14 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Helpers
 {
     public class CSharpInvocationTracker : InvocationTracker<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InvocationExpression };
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
-
-        public CSharpInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
 
         public override Condition ArgumentAtIndexIsConstant(int index) =>
             context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList
@@ -50,7 +47,7 @@ namespace SonarAnalyzer.Helpers
                        && methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess
                        && propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
                        && context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType
-                       && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type);
+                       && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
 
         internal override object ConstArgumentForParameter(InvocationContext context, string parameterName)
         {
@@ -60,8 +57,5 @@ namespace SonarAnalyzer.Helpers
                 ? valueSyntax.FindConstantValue(context.SemanticModel)
                 : null;
         }
-
-        protected override string GetMethodName(SyntaxNode invocationExpression) =>
-            ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier()?.Identifier.ValueText;
     }
 }

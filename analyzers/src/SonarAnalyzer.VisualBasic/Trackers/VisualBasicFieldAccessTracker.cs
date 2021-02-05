@@ -28,15 +28,13 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicFieldAccessTracker : FieldAccessTracker<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
-            new SyntaxKind[]
+            new[]
             {
                 SyntaxKind.SimpleMemberAccessExpression,
                 SyntaxKind.IdentifierName
             };
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
-
-        public VisualBasicFieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule, caseInsensitiveComparison: true) { }
 
         public override Condition WhenRead() =>
             context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
@@ -47,15 +45,9 @@ namespace SonarAnalyzer.Helpers
         public override Condition AssignedValueIsConstant() =>
             context =>
             {
-                var assignment = (AssignmentStatementSyntax)context.Node.Ancestors()
-                    .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement));
-
-                return assignment != null &&
-                    assignment.Right.HasConstantValue(context.SemanticModel);
+                var assignment = (AssignmentStatementSyntax)context.Node.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement));
+                return assignment != null && assignment.Right.HasConstantValue(context.SemanticModel);
             };
-
-        protected override string GetFieldName(SyntaxNode expression) =>
-            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
 
         protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
             expression.IsKind(SyntaxKind.IdentifierName)
