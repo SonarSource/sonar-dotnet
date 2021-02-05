@@ -11567,7 +11567,7 @@
     <value>Minor</value>
   </data>
   <data name="S4261_Status" xml:space="preserve">
-    <value>ready</value>
+    <value>deprecated</value>
   </data>
   <data name="S4261_Tags" xml:space="preserve">
     <value>convention,async-await,confusing</value>
