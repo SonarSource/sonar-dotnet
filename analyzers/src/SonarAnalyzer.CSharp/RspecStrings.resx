@@ -12410,7 +12410,7 @@
     <value>Minor</value>
   </data>
   <data name="S4834_Status" xml:space="preserve">
-    <value>ready</value>
+    <value>deprecated</value>
   </data>
   <data name="S4834_Tags" xml:space="preserve">
     <value>cwe,sans-top25-porous,owasp-a5</value>
