@@ -203,6 +203,18 @@ public class OpenCoverReportParserTest {
       "Skipping the fileId '2', line '9', visitCount '1' because file is not indexed or does not have the supported language.",
       "Found indexed file '/full/path/to/Foo.cs' for coverage entry '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'."
     );
+    assertThat(logTester.logs(LoggerLevel.TRACE))
+      .hasSize(8)
+      .containsExactlyInAnyOrder(
+        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '6', visitCount '1'",
+        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '7', visitCount '1'",
+        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '8', visitCount '1'",
+        "OpenCover parser: add branch hits for fileId '5', filePath '/full/path/to/Foo.cs', line '7', offset '3', visitCount '0'",
+        "OpenCover parser: add branch hits for fileId '5', filePath '/full/path/to/Foo.cs', line '7', offset '3', visitCount '1'",
+        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '11', visitCount '0'",
+        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '12', visitCount '0'",
+        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '13', visitCount '0'"
+      );
   }
 
   @Test
