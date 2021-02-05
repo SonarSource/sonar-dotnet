@@ -18,14 +18,30 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
+
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class TrackerBase<TSyntaxKind, TContext>
-        where TSyntaxKind : struct
-        where TContext : BaseContext
+    public class TrackerInput
     {
-        public delegate bool Condition(TContext trackingContext);
+        private readonly IAnalyzerConfiguration configuration;
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        public DiagnosticDescriptor Rule { get; }
+        public SonarAnalysisContext Context { get; }
+
+        public TrackerInput(SonarAnalysisContext context, IAnalyzerConfiguration configuration, DiagnosticDescriptor rule)
+        {
+            Context = context;
+            this.configuration = configuration;
+            Rule = rule;
+        }
+
+        public bool IsEnabled(AnalyzerOptions options)
+        {
+            configuration.Initialize(options);
+            return configuration.IsEnabled(Rule.Id);
+        }
     }
 }

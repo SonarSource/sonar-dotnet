@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -25,28 +26,24 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class SyntaxTrackerBase<TSyntaxKind, TContext> : TrackerBase<TContext>
+    public abstract class SyntaxTrackerBase<TSyntaxKind, TContext> : TrackerBase<TSyntaxKind, TContext>
         where TSyntaxKind : struct
         where TContext : SyntaxBaseContext
     {
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TSyntaxKind[] TrackedSyntaxKinds { get; }
         protected abstract TContext CreateContext(SyntaxNodeAnalysisContext context);
 
-        protected SyntaxTrackerBase(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
+        public void Track(TrackerInput input, params Condition[] conditions) =>
+            Track(input, Array.Empty<object>(), conditions);
 
-        public void Track(SonarAnalysisContext context, params Condition[] conditions) =>
-            Track(context, new object[0], conditions);
-
-        public void Track(SonarAnalysisContext context, object[] diagnosticMessageArgs, params Condition[] conditions)
+        public void Track(TrackerInput input, object[] diagnosticMessageArgs, params Condition[] conditions)
         {
-            context.RegisterCompilationStartAction(
-              c =>
+            input.Context.RegisterCompilationStartAction(c =>
               {
-                  if (IsEnabled(c.Options))
+                  if (input.IsEnabled(c.Options))
                   {
                       c.RegisterSyntaxNodeActionInNonGenerated(
-                          GeneratedCodeRecognizer,
+                          Language.GeneratedCodeRecognizer,
                           TrackAndReportIfNecessary,
                           TrackedSyntaxKinds);
                   }
@@ -60,7 +57,7 @@ namespace SonarAnalyzer.Helpers
                     && trackingContext.PrimaryLocation != Location.None)
                 {
                     c.ReportDiagnosticWhenActive(
-                        Diagnostic.Create(Rule,
+                        Diagnostic.Create(input.Rule,
                                           trackingContext.PrimaryLocation,
                                           trackingContext.SecondaryLocations.ToAdditionalLocations(),
                                           trackingContext.SecondaryLocations.ToProperties(),

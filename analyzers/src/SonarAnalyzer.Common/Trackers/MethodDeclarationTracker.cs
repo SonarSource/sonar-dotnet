@@ -22,23 +22,20 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class MethodDeclarationTracker : TrackerBase<MethodDeclarationContext>
+    public abstract class MethodDeclarationTracker<TSyntaxKind> : TrackerBase<TSyntaxKind, MethodDeclarationContext>
+        where TSyntaxKind : struct
     {
         public abstract Condition ParameterAtIndexIsUsed(int index);
         protected abstract SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration);
 
-        protected MethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule) : base(analyzerConfiguration, rule) { }
-
-        public void Track(SonarAnalysisContext context, params Condition[] conditions)
+        public void Track(TrackerInput input, params Condition[] conditions)
         {
-            context.RegisterCompilationStartAction(
-                c =>
+            input.Context.RegisterCompilationStartAction(c =>
                 {
-                    if (IsEnabled(c.Options))
+                    if (input.IsEnabled(c.Options))
                     {
                         c.RegisterSymbolAction(TrackMethodDeclaration, SymbolKind.Method);
                     }
@@ -53,7 +50,7 @@ namespace SonarAnalyzer.Helpers
                         var methodIdentifier = GetMethodIdentifier(declaration.GetSyntax());
                         if (methodIdentifier.HasValue)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodIdentifier.Value.GetLocation()));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(input.Rule, methodIdentifier.Value.GetLocation()));
                         }
                     }
                 }
