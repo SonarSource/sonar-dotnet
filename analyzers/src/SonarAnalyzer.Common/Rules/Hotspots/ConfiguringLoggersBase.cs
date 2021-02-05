@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -28,17 +31,28 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4792";
         protected const string MessageFormat = "Make sure that this logger's configuration is safe.";
 
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+        private readonly IAnalyzerConfiguration configuration;
+        private readonly DiagnosticDescriptor rule;
 
-        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected ConfiguringLoggersBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+        {
+            this.configuration = configuration;
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
+            var inv = Language.Tracker.Invocation;
+            var pa = Language.Tracker.PropertyAccess;
+            var oc = Language.Tracker.ObjectCreation;
+            var input = new TrackerInput(context, configuration, rule);
             // ASP.NET Core
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
+            inv.Track(input,
+                inv.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions, "ConfigureLogging"),
                     new MemberDescriptor(KnownType.Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions, "AddLogging"),
                     new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_ConsoleLoggerExtensions, "AddConsole"),
@@ -47,14 +61,13 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_EventLoggerFactoryExtensions, "AddEventSourceLogger"),
                     new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_EventSourceLoggerFactoryExtensions, "AddEventSourceLogger"),
                     new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions, "AddAzureWebAppDiagnostics")),
-                InvocationTracker.MethodIsExtension());
+                inv.MethodIsExtension());
 
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.WhenImplements(KnownType.Microsoft_Extensions_Logging_ILoggerFactory));
+            oc.Track(input, oc.WhenImplements(KnownType.Microsoft_Extensions_Logging_ILoggerFactory));
 
             // log4net
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
+            inv.Track(input,
+                inv.MatchMethod(
                     new MemberDescriptor(KnownType.log4net_Config_XmlConfigurator, "Configure"),
                     new MemberDescriptor(KnownType.log4net_Config_XmlConfigurator, "ConfigureAndWatch"),
                     new MemberDescriptor(KnownType.log4net_Config_DOMConfigurator, "Configure"),
@@ -62,14 +75,13 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.log4net_Config_BasicConfigurator, "Configure")));
 
             // NLog
-            PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchSetter(),
-                PropertyAccessTracker.MatchProperty(
-                    new MemberDescriptor(KnownType.NLog_LogManager, "Configuration")));
+            pa.Track(input,
+                pa.MatchSetter(),
+                pa.MatchProperty(new MemberDescriptor(KnownType.NLog_LogManager, "Configuration")));
 
             // Serilog
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.WhenDerivesFrom(KnownType.Serilog_LoggerConfiguration));
+            oc.Track(input,
+                oc.WhenDerivesFrom(KnownType.Serilog_LoggerConfiguration));
         }
     }
 }
