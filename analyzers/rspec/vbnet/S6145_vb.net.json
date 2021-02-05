@@ -1,0 +1,12 @@
+{
+  "title": "\"Option Strict\" should be enabled",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "tags": [
+    "bad-practice"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6145",
+  "sqKey": "S6145",
+  "scope": "All"
+}

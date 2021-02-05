@@ -1,0 +1,52 @@
+<p>There are several compilations options available for Visual Basic source code and <code>Option Strict</code> defines compiler behavior for implicit
+data type conversions. Specifying <code>Option Strict Off</code> will allow:</p>
+<ul>
+  <li> Implicit narrowing conversions </li>
+  <li> Late binding </li>
+  <li> Implicit typing that results in an <code>Object</code> type </li>
+</ul>
+<p>This behavior can lead to unexpected runtime errors due to type mismatch or missing members. </p>
+<p><code>Option Strict</code> can be set in project properties or overridden in individual source files.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Option Strict Off    ' Noncompliant
+
+Public Class KnownType
+
+    Public ReadOnly Property Name As String
+
+End Class
+
+Public Module MainMod
+
+    Public Function DoSomething(Arg) As String  ' Type for "Arg" argument is not defined.
+        Dim Item As KnownType = Arg             ' Implicit narrowing conversion doesn't enforce "Arg" to be of type "KnownType"
+        Return Arg.Title                        ' "Title" might not exist in "Arg"
+    End Function
+
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Option Strict On
+
+Public Class KnownType
+
+    Public ReadOnly Property Name As String
+
+End Class
+
+Public Module MainMod
+
+    Public Function DoSomething(Arg As KnownType) As String
+        Dim Item As KnownType = Arg
+        Return Arg.Name
+    End Function
+
+End Module
+</pre>
+<h2>See</h2>
+<ul>
+  <li> https://docs.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/option-strict-statement </li>
+</ul>
+

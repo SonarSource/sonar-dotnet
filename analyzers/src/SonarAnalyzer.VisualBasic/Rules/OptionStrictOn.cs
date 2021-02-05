@@ -30,12 +30,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class OptionExplicitOn : SonarDiagnosticAnalyzer
+    public sealed class OptionStrictOn : SonarDiagnosticAnalyzer
     {
-        private const string DiagnosticId = "S6146";
+        private const string DiagnosticId = "S6145";
         private const string MessageFormat = "{0}";
-        private const string StatementMessage = "Change this to 'Option Explicit On'.";
-        private const string AssemblyMessageFormat = "Configure 'Option Explicit On' for assembly '{0}'.";
+        private const string StatementMessage = "Change this to 'Option Strict On'.";
+        private const string AssemblyMessageFormat = "Configure 'Option Strict On' for assembly '{0}'.";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -44,19 +44,19 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var statement = (OptionStatementSyntax)c.Node;
+                if (statement.NameKeyword.IsKind(SyntaxKind.StrictKeyword) && !statement.ValueKeyword.IsKind(SyntaxKind.OnKeyword))
                 {
-                    var statement = (OptionStatementSyntax)c.Node;
-                    if (statement.NameKeyword.IsKind(SyntaxKind.ExplicitKeyword) && statement.ValueKeyword.IsKind(SyntaxKind.OffKeyword))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, statement.GetLocation(), StatementMessage));
-                    }
-                },
-                SyntaxKind.OptionStatement);
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, statement.GetLocation(), StatementMessage));
+                }
+            },
+            SyntaxKind.OptionStatement);
 
             context.RegisterCompilationStartAction(cStart =>
                 cStart.RegisterCompilationEndAction(c =>
                 {
-                    if (!c.Compilation.VB().Options.OptionExplicit)
+                    if (c.Compilation.VB().Options.OptionStrict != OptionStrict.On)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, null, string.Format(AssemblyMessageFormat, c.Compilation.AssemblyName)));
                     }
