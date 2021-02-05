@@ -32,10 +32,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class JwtSigned : JwtSignedBase<SyntaxKind, InvocationExpressionSyntax>
     {
-        public JwtSigned() : base(RspecStrings.ResourceManager) =>
-            InvocationTracker = new CSharpInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, VerifyingRule);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override BuilderPatternCondition<InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
+        public JwtSigned() : base(AnalyzerConfiguration.AlwaysEnabled, RspecStrings.ResourceManager) { }
+
+        protected override BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
             new CSharpBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
                 invocation =>
                     invocation.ArgumentList?.Arguments.Count != 1
