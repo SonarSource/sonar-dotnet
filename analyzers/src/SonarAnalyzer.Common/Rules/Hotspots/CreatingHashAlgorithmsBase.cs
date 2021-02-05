@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -59,33 +62,48 @@ namespace SonarAnalyzer.Rules
             "System.Security.Cryptography.SHA1"
         };
 
-        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+        private readonly IAnalyzerConfiguration configuration;
+        private readonly DiagnosticDescriptor rule;
 
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected CreatingHashAlgorithmsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+        {
+            this.configuration = configuration;
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            ObjectCreationTracker.Track(context, ObjectCreationTracker.WhenDerivesOrImplementsAny(algorithmTypes));
+            var input = new TrackerInput(context, configuration, rule);
 
-            InvocationTracker.Track(context,
-                                    InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, CreateMethodName)),
-                                    InvocationTracker.MethodHasParameters(0));
+            var oc = Language.Tracker.ObjectCreation;
+            oc.Track(input, oc.WhenDerivesOrImplementsAny(algorithmTypes));
 
-            InvocationTracker.Track(context,
-                                    InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_AsymmetricAlgorithm, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_CryptoConfig, "CreateFromName"),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_HashAlgorithm, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_KeyedHashAlgorithm, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, CreateMethodName),
-                                                                  new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, CreateMethodName)),
-                                    InvocationTracker.ArgumentAtIndexIsAny(0, unsafeAlgorithms));
+            var t = Language.Tracker.Invocation;
+            t.Track(input,
+                t.MatchMethod(
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, CreateMethodName)),
+                t.MethodHasParameters(0));
+
+            t.Track(input,
+                t.MatchMethod(
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_AsymmetricAlgorithm, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_CryptoConfig, "CreateFromName"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_HashAlgorithm, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_KeyedHashAlgorithm, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, CreateMethodName),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, CreateMethodName)),
+                t.ArgumentAtIndexIsAny(0, unsafeAlgorithms));
         }
     }
 }
