@@ -23,11 +23,12 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class BuilderPatternCondition<TInvocationSyntax>
+    public abstract class BuilderPatternCondition<TSyntaxKind, TInvocationSyntax>
+        where TSyntaxKind : struct
         where TInvocationSyntax : SyntaxNode
     {
         private readonly bool constructorIsSafe;
-        private readonly BuilderPatternDescriptor<TInvocationSyntax>[] descriptors;
+        private readonly BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>[] descriptors;
         private readonly AssignmentFinder assignmentFinder;
 
         protected abstract SyntaxNode RemoveParentheses(SyntaxNode node);
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.Helpers
         protected abstract bool IsObjectCreation(SyntaxNode node);
         protected abstract bool IsIdentifier(SyntaxNode node, out string identifierName);
 
-        protected BuilderPatternCondition(bool constructorIsSafe, BuilderPatternDescriptor<TInvocationSyntax>[] descriptors, AssignmentFinder assignmentFinder)
+        protected BuilderPatternCondition(bool constructorIsSafe, BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>[] descriptors, AssignmentFinder assignmentFinder)
         {
             this.constructorIsSafe = constructorIsSafe;
             this.descriptors = descriptors;

@@ -79,7 +79,7 @@ End Class";
         public void ArgumentAtIndexIs_CS()
         {
             var context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 0, AnalyzerLanguage.CSharp);
-            var tracker = new CSharpElementAccessTracker(null, null);
+            var tracker = new CSharpElementAccessTracker();
             tracker.ArgumentAtIndexIs(0, KnownType.System_String)(context).Should().BeTrue();
             tracker.ArgumentAtIndexIs(0, KnownType.System_Int32)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIs(42, KnownType.System_String)(context).Should().BeFalse();
@@ -92,7 +92,7 @@ End Class";
         public void ArgumentAtIndexIs_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 0, AnalyzerLanguage.VisualBasic);
-            var tracker = new CSharpElementAccessTracker(null, null);
+            var tracker = new CSharpElementAccessTracker();
             tracker.ArgumentAtIndexIs(0, KnownType.System_String)(context).Should().BeTrue();
             tracker.ArgumentAtIndexIs(0, KnownType.System_Int32)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIs(42, KnownType.System_String)(context).Should().BeFalse();
@@ -105,7 +105,7 @@ End Class";
         public void ArgumentAtIndexEquals_CS()
         {
             var context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 0, AnalyzerLanguage.CSharp);
-            var tracker = new CSharpElementAccessTracker(null, null);
+            var tracker = new CSharpElementAccessTracker();
             tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeTrue();
             tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
             tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
@@ -125,7 +125,7 @@ End Class";
         public void ArgumentAtIndexEquals_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 0, AnalyzerLanguage.VisualBasic);
-            var tracker = new VisualBasicElementAccessTracker(null, null);
+            var tracker = new VisualBasicElementAccessTracker();
             tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeTrue();
             tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
             tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();

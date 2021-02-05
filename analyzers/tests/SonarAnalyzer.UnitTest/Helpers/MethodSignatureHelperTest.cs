@@ -20,6 +20,8 @@
 
 extern alias csharp;
 extern alias vbnet;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
@@ -345,18 +347,18 @@ End Namespace
             var dispose = new MemberDescriptor(KnownType.System_IDisposable, "Dispose");
             var callToDispose = CreateContextForMethod("Class1.Dispose", snippet);
 
-            var result = MemberDescriptor.MatchesAny("Dispose", callToDispose.MethodSymbol, true, false, dispose);
+            var result = MemberDescriptor.MatchesAny("Dispose", callToDispose.MethodSymbol, true, StringComparison.Ordinal, dispose);
             result.Should().Be(true);
-            result = MemberDescriptor.MatchesAny("dispose", callToDispose.MethodSymbol, true, false, dispose);
+            result = MemberDescriptor.MatchesAny("dispose", callToDispose.MethodSymbol, true, StringComparison.Ordinal, dispose);
             result.Should().Be(false);
-            result = MemberDescriptor.MatchesAny("DISPOSE", callToDispose.MethodSymbol, true, false, dispose);
+            result = MemberDescriptor.MatchesAny("DISPOSE", callToDispose.MethodSymbol, true, StringComparison.Ordinal, dispose);
             result.Should().Be(false);
 
-            result = MemberDescriptor.MatchesAny("Dispose", callToDispose.MethodSymbol, true, true, dispose);
+            result = MemberDescriptor.MatchesAny("Dispose", callToDispose.MethodSymbol, true, StringComparison.OrdinalIgnoreCase, dispose);
             result.Should().Be(true);
-            result = MemberDescriptor.MatchesAny("dispose", callToDispose.MethodSymbol, true, true, dispose);
+            result = MemberDescriptor.MatchesAny("dispose", callToDispose.MethodSymbol, true, StringComparison.OrdinalIgnoreCase, dispose);
             result.Should().Be(true);
-            result = MemberDescriptor.MatchesAny("DISPOSE", callToDispose.MethodSymbol, true, true, dispose);
+            result = MemberDescriptor.MatchesAny("DISPOSE", callToDispose.MethodSymbol, true, StringComparison.OrdinalIgnoreCase, dispose);
             result.Should().Be(true);
         }
 
@@ -402,7 +404,7 @@ End Namespace
             SnippetCompiler snippet, params MemberDescriptor[] targetMethodSignatures)
         {
             var result = MemberDescriptor.MatchesAny(invocationContext.MethodName,
-                invocationContext.MethodSymbol, checkDerived, false, targetMethodSignatures);
+                invocationContext.MethodSymbol, checkDerived, StringComparison.Ordinal, targetMethodSignatures);
 
             result.Should().Be(expectedOutcome);
         }

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Helpers
             context => context.MethodSymbol.Value != null
                        && context.MethodSymbol.Value.Parameters.Length == count;
 
-        public Condition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition) where TInvocationSyntax : SyntaxNode =>
+        public Condition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TSyntaxKind, TInvocationSyntax> condition) where TInvocationSyntax : SyntaxNode =>
             condition.IsInvalidBuilderInitialization;
 
         public Condition ExceptWhen(Condition condition) =>

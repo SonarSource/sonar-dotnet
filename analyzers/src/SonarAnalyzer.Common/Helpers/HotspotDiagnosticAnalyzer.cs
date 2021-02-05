@@ -26,18 +26,15 @@ namespace SonarAnalyzer.Helpers
 {
     public abstract class HotspotDiagnosticAnalyzer : SonarDiagnosticAnalyzer
     {
-        private readonly IAnalyzerConfiguration analyzerConfiguration;
+        protected IAnalyzerConfiguration Configuration { get; }
 
-        protected HotspotDiagnosticAnalyzer(IAnalyzerConfiguration analyzerConfiguration)
-        {
-            this.analyzerConfiguration = analyzerConfiguration;
-        }
+        protected HotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration) =>
+            Configuration = configuration;
 
         protected bool IsEnabled(AnalyzerOptions options)
         {
-            analyzerConfiguration.Initialize(options);
-
-            return SupportedDiagnostics.Any(d => analyzerConfiguration.IsEnabled(d.Id));
+            Configuration.Initialize(options);
+            return SupportedDiagnostics.Any(d => Configuration.IsEnabled(d.Id));
         }
     }
 }

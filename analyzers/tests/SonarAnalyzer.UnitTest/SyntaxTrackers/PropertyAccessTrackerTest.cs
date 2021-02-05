@@ -57,7 +57,7 @@ End Class";
         public void MatchesGetter_CS()
         {
             var context = CreateContext<CSharpSyntax.MemberAccessExpressionSyntax>(TestInputCS, "MyProperty", AnalyzerLanguage.CSharp);
-            var tracker = new CSharpPropertyAccessTracker(null, null);
+            var tracker = new CSharpPropertyAccessTracker();
 
             tracker.MatchGetter()(context).Should().BeTrue();
             tracker.MatchSetter()(context).Should().BeFalse();
@@ -67,7 +67,7 @@ End Class";
         public void MatchesGetter_VB()
         {
             var context = CreateContext<VBSyntax.MemberAccessExpressionSyntax>(TestInputVB, "MyProperty", AnalyzerLanguage.VisualBasic);
-            var tracker = new VisualBasicPropertyAccessTracker(null, null);
+            var tracker = new VisualBasicPropertyAccessTracker();
 
             tracker.MatchGetter()(context).Should().BeTrue();
             tracker.MatchSetter()(context).Should().BeFalse();

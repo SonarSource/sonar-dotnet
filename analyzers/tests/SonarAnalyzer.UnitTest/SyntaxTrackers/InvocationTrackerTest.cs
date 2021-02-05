@@ -64,7 +64,7 @@ End Class";
         public void ConstArgumentForParameter_CS()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
-            var tracker = new CSharpInvocationTracker(null, null);
+            var tracker = new CSharpInvocationTracker();
 
             tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
             tracker.ConstArgumentForParameter(context, "b").Should().Be("myConst");
@@ -78,7 +78,7 @@ End Class";
         public void ArgumentIsBoolConstant_CS()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
-            var tracker = new CSharpInvocationTracker(null, null);
+            var tracker = new CSharpInvocationTracker();
 
             tracker.ArgumentIsBoolConstant("a", true)(context).Should().Be(false);
             tracker.ArgumentIsBoolConstant("a", false)(context).Should().Be(false);
@@ -92,7 +92,7 @@ End Class";
         public void ConstArgumentForParameter_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
-            var tracker = new VisualBasicInvocationTracker(null, null);
+            var tracker = new VisualBasicInvocationTracker();
 
             tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
             tracker.ConstArgumentForParameter(context, "b").Should().Be("myConst");
@@ -107,7 +107,7 @@ End Class";
         public void ArgumentIsBoolConstant_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
-            var tracker = new VisualBasicInvocationTracker(null, null);
+            var tracker = new VisualBasicInvocationTracker();
 
             tracker.ArgumentIsBoolConstant("a", true)(context).Should().Be(false);
             tracker.ArgumentIsBoolConstant("a", false)(context).Should().Be(false);
@@ -121,7 +121,7 @@ End Class";
         public void ArgumentAtIndexIsConstant_CS()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
-            var tracker = new CSharpInvocationTracker(null, null);
+            var tracker = new CSharpInvocationTracker();
             tracker.ArgumentAtIndexIsConstant(0)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsConstant(1)(context).Should().BeTrue();
             tracker.ArgumentAtIndexIsConstant(2)(context).Should().BeTrue();
@@ -134,7 +134,7 @@ End Class";
         public void ArgumentAtIndexIsConstant_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
-            var tracker = new VisualBasicInvocationTracker(null, null);
+            var tracker = new VisualBasicInvocationTracker();
             tracker.ArgumentAtIndexIsConstant(0)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsConstant(1)(context).Should().BeTrue();
             tracker.ArgumentAtIndexIsConstant(2)(context).Should().BeTrue();
@@ -151,7 +151,7 @@ End Class";
         public void ArgumentAtIndexIsAny_CS()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
-            var tracker = new CSharpInvocationTracker(null, null);
+            var tracker = new CSharpInvocationTracker();
             tracker.ArgumentAtIndexIsAny(0, "myConst")(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsAny(1, "myConst")(context).Should().BeTrue();
             tracker.ArgumentAtIndexIsAny(1, "a", "b", "myConst")(context).Should().BeTrue();
@@ -164,7 +164,7 @@ End Class";
         public void ArgumentAtIndexIsAny_VB()
         {
             var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
-            var tracker = new VisualBasicInvocationTracker(null, null);
+            var tracker = new VisualBasicInvocationTracker();
             tracker.ArgumentAtIndexIsAny(0, "myConst")(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsAny(1, "myConst")(context).Should().BeTrue();
             tracker.ArgumentAtIndexIsAny(1, "a", "b", "myConst")(context).Should().BeTrue();
@@ -180,7 +180,7 @@ End Class";
         public void InvocationConditionForUndefinedMethod()
         {
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "Undefined", AnalyzerLanguage.CSharp, 1);
-            var tracker = new CSharpInvocationTracker(null, null);
+            var tracker = new CSharpInvocationTracker();
             tracker.MethodIsStatic()(context).Should().BeFalse();
             tracker.MethodIsExtension()(context).Should().BeFalse();
             tracker.MethodHasParameters(0)(context).Should().BeFalse();

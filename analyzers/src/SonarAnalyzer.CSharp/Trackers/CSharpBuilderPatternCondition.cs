@@ -19,13 +19,14 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class CSharpBuilderPatternCondition : BuilderPatternCondition<InvocationExpressionSyntax>
+    public class CSharpBuilderPatternCondition : BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax>
     {
-        public CSharpBuilderPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<InvocationExpressionSyntax>[] descriptors)
+        public CSharpBuilderPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<SyntaxKind, InvocationExpressionSyntax>[] descriptors)
             : base(constructorIsSafe, descriptors, new CSharpAssignmentFinder()) { }
 
         protected override SyntaxNode RemoveParentheses(SyntaxNode node) =>

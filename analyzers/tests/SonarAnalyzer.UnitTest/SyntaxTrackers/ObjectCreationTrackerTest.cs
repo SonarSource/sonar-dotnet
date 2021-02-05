@@ -47,7 +47,7 @@ public class Base
     }
 }";
             var context = CreateContext<CSharpSyntax.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
-            var tracker = new CSharpObjectCreationTracker(null, null);
+            var tracker = new CSharpObjectCreationTracker();
 
             tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
             tracker.ConstArgumentForParameter(context, "b").Should().Be("myConst");
@@ -70,7 +70,7 @@ Public Class Base
     End Sub
 End Class";
             var context = CreateContext<VBSyntax.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.VisualBasic);
-            var tracker = new VisualBasicObjectCreationTracker(null, null);
+            var tracker = new VisualBasicObjectCreationTracker();
 
             tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
             tracker.ConstArgumentForParameter(context, "b").Should().Be("myConst");
@@ -93,7 +93,7 @@ public class Base
     }
 }";
             var context = CreateContext<CSharpSyntax.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
-            var tracker = new CSharpObjectCreationTracker(null, null);
+            var tracker = new CSharpObjectCreationTracker();
             tracker.ArgumentAtIndexIs(0, KnownType.System_Boolean)(context).Should().BeFalse();
             tracker.WhenDerivesFrom(KnownType.System_Exception)(context).Should().BeFalse();
             tracker.WhenImplements(KnownType.System_IDisposable)(context).Should().BeFalse();
@@ -118,7 +118,7 @@ public class Base : Exception, IDisposable
     }
 }";
             var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);   // Created with wrong syntax
-            var tracker = new CSharpObjectCreationTracker(null, null);
+            var tracker = new CSharpObjectCreationTracker();
             tracker.ArgumentAtIndexIs(0, KnownType.System_Boolean)(context).Should().BeTrue();  // Doesn't care about symbol type
             tracker.WhenDerivesFrom(KnownType.System_Exception)(context).Should().BeFalse();
             tracker.WhenImplements(KnownType.System_IDisposable)(context).Should().BeFalse();

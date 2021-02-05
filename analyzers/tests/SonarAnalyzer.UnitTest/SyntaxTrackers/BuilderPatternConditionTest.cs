@@ -25,6 +25,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
+using BuilderPatternDescriptorCS = SonarAnalyzer.Helpers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.CSharp.SyntaxKind, Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax>;
+using BuilderPatternDescriptorVB = SonarAnalyzer.Helpers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.VisualBasic.SyntaxKind, Microsoft.CodeAnalysis.VisualBasic.Syntax.InvocationExpressionSyntax>;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -47,29 +49,29 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void ConstructorIsSafe_CS()
         {
-            var safeConstructor = new CSharpBuilderPatternCondition(true, new BuilderPatternDescriptor<CSharpSyntax.InvocationExpressionSyntax>(false, (context) => false));
+            var safeConstructor = new CSharpBuilderPatternCondition(true, new BuilderPatternDescriptorCS(false, (context) => false));
             safeConstructor.IsInvalidBuilderInitialization(context_CS).Should().BeFalse();
 
-            var unsafeConstructor = new CSharpBuilderPatternCondition(false, new BuilderPatternDescriptor<CSharpSyntax.InvocationExpressionSyntax>(false, (context) => false));
+            var unsafeConstructor = new CSharpBuilderPatternCondition(false, new BuilderPatternDescriptorCS(false, (context) => false));
             unsafeConstructor.IsInvalidBuilderInitialization(context_CS).Should().BeTrue();
         }
 
         [TestMethod]
         public void ConstructorIsSafe_VB()
         {
-            var safeConstructor = new VisualBasicBuilderPatternCondition(true, new BuilderPatternDescriptor<VBSyntax.InvocationExpressionSyntax>(false, (context) => false));
+            var safeConstructor = new VisualBasicBuilderPatternCondition(true, new BuilderPatternDescriptorVB(false, (context) => false));
             safeConstructor.IsInvalidBuilderInitialization(context_VB).Should().BeFalse();
 
-            var unsafeConstructor = new VisualBasicBuilderPatternCondition(false, new BuilderPatternDescriptor<VBSyntax.InvocationExpressionSyntax>(false, (context) => false));
+            var unsafeConstructor = new VisualBasicBuilderPatternCondition(false, new BuilderPatternDescriptorVB(false, (context) => false));
             unsafeConstructor.IsInvalidBuilderInitialization(context_VB).Should().BeTrue();
         }
 
         [TestMethod]
         public void IsInvalidBuilderInitialization_CS()
         {
-            var aaaInvalidator = new BuilderPatternDescriptor<CSharpSyntax.InvocationExpressionSyntax>(false, (context) => context.MethodName == "Aaa");
-            var bbbValidator = new BuilderPatternDescriptor<CSharpSyntax.InvocationExpressionSyntax>(true, (context) => context.MethodName == "Bbb");
-            var cccInvalidator = new BuilderPatternDescriptor<CSharpSyntax.InvocationExpressionSyntax>(false, (context) => context.MethodName == "Ccc");
+            var aaaInvalidator = new BuilderPatternDescriptorCS(false, (context) => context.MethodName == "Aaa");
+            var bbbValidator = new BuilderPatternDescriptorCS(true, (context) => context.MethodName == "Bbb");
+            var cccInvalidator = new BuilderPatternDescriptorCS(false, (context) => context.MethodName == "Ccc");
 
             var condition1 = new CSharpBuilderPatternCondition(false, bbbValidator);
             condition1.IsInvalidBuilderInitialization(context_CS).Should().BeFalse(); // Invalid constructor validated by method
@@ -103,9 +105,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void IsInvalidBuilderInitialization_VB()
         {
-            var aaaInvalidator = new BuilderPatternDescriptor<VBSyntax.InvocationExpressionSyntax>(false, (context) => context.MethodName == "Aaa");
-            var bbbValidator = new BuilderPatternDescriptor<VBSyntax.InvocationExpressionSyntax>(true, (context) => context.MethodName == "Bbb");
-            var cccInvalidator = new BuilderPatternDescriptor<VBSyntax.InvocationExpressionSyntax>(false, (context) => context.MethodName == "Ccc");
+            var aaaInvalidator = new BuilderPatternDescriptorVB(false, (context) => context.MethodName == "Aaa");
+            var bbbValidator = new BuilderPatternDescriptorVB(true, (context) => context.MethodName == "Bbb");
+            var cccInvalidator = new BuilderPatternDescriptorVB(false, (context) => context.MethodName == "Ccc");
 
             var condition1 = new VisualBasicBuilderPatternCondition(false, bbbValidator);
             condition1.IsInvalidBuilderInitialization(context_VB).Should().BeFalse(); // Invalid constructor validated by method
