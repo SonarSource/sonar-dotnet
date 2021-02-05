@@ -33,4 +33,3 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\UseReturnStatement.vb", new UseReturnStatement());
     }
 }
-
