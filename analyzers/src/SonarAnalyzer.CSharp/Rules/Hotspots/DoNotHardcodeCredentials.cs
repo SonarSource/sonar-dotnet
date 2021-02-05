@@ -34,13 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
         public DoNotHardcodeCredentials() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration)
-        {
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, Rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, Rule);
-        }
+        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         protected override void InitializeActions(ParameterLoadingAnalysisContext context) =>
             context.RegisterCompilationStartAction(
