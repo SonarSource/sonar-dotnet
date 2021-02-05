@@ -52,7 +52,7 @@ public class NoSonarTest {
 
   @Test
   public void filesAtProjectLevel() {
-    assertThat(getMeasureAsInt(PROJECT, "violations")).isEqualTo(2);
+    assertThat(getMeasureAsInt(PROJECT, "violations")).isEqualTo(1);
   }
 
 }
