@@ -34,12 +34,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S4432";
         private const string MessageFormat = "Use a certified third party library implementing Galois/Counter Mode (GCM) instead.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(KnownType.System_Security_Cryptography_AesManaged);
+
+        public AesManagedShouldBeWithSecureMode() : base(AnalyzerConfiguration.AlwaysEnabled, DiagnosticId, MessageFormat) { }
 
         protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
             isAllowedConstantValue: constantValue => false,

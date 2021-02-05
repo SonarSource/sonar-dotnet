@@ -27,15 +27,23 @@ using SonarAnalyzer.Helpers.Trackers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ObjectShouldBeInitializedCorrectlyBase : HotspotDiagnosticAnalyzer
+    public abstract class ObjectShouldBeInitializedCorrectlyBase : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>
     {
-        protected ObjectShouldBeInitializedCorrectlyBase() : base(AnalyzerConfiguration.AlwaysEnabled) { }
-
-        protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
-
         protected abstract CSharpObjectInitializationTracker ObjectInitializationTracker { get; }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+        protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat)
+            : base(configuration, diagnosticId, messageFormat, RspecStrings.ResourceManager) { }
+
+        protected override void Initialize(TrackerInput input)
+        {
+            // This should be overriden by inheriting class that uses trackers
+        }
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            base.Initialize(context);
             context.RegisterCompilationStartAction(
                 ccc =>
                 {
@@ -66,5 +74,6 @@ namespace SonarAnalyzer.Rules
                         },
                         SyntaxKind.SimpleAssignmentExpression);
                 });
+        }
     }
 }

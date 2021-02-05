@@ -34,14 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2092";
         private const string MessageFormat = "Make sure creating this cookie without setting the 'Secure' property is safe here.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
         private static readonly ImmutableArray<KnownType> TrackedTypes =
             ImmutableArray.Create(
                 KnownType.System_Web_HttpCookie,
                 KnownType.Microsoft_AspNetCore_Http_CookieOptions
             );
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
             isAllowedConstantValue: constantValue => constantValue is bool value && value,
@@ -51,13 +48,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public CookieShouldBeSecure() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal CookieShouldBeSecure(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
+        internal CookieShouldBeSecure(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            base.Initialize(context);
             var t = CSharpFacade.Instance.Tracker.ObjectCreation;
-            t.Track(new TrackerInput(context, Configuration, Rule),
+            t.Track(input,
                 t.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
                 t.ExceptWhen(t.ArgumentIsBoolConstant("secure", true)));
         }

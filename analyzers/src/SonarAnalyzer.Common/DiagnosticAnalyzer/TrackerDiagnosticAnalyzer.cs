@@ -35,11 +35,16 @@ namespace SonarAnalyzer.Helpers
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected TrackerHotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat, ResourceManager rspecResources) : base(configuration) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, messageFormat, rspecResources).WithNotConfigurable();
+        protected TrackerHotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat, ResourceManager rspecResources) : base(configuration)
+        {
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, messageFormat, rspecResources);
+            if (configuration == AnalyzerConfiguration.Hotspot)
+            {
+                Rule = Rule.WithNotConfigurable();
+            }
+        }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             Initialize(new TrackerInput(context, Configuration, Rule));
-
-        }
     }
+}
