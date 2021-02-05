@@ -3,7 +3,7 @@
     The `opencover.xml` file from the integration test project CoverageWithDeterministicSourcePaths.
 -->
 <CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.7.922.0">
-  <Summary numSequencePoints="9" visitedSequencePoints="4" numBranchPoints="4" visitedBranchPoints="2" sequenceCoverage="44.44" branchCoverage="50" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="1" visitedClasses="2" numClasses="3" visitedMethods="2" numMethods="4" />
+  <Summary numSequencePoints="9" visitedSequencePoints="4" numBranchPoints="6" visitedBranchPoints="3" sequenceCoverage="44.44" branchCoverage="50" maxCyclomaticComplexity="3" minCyclomaticComplexity="1" maxCrapScore="3" minCrapScore="1" visitedClasses="2" numClasses="3" visitedMethods="2" numMethods="4" />
   <Modules>
     <Module skippedDueTo="Filter" hash="F3-64-DC-46-34-AF-1B-66-21-41-5B-A7-BF-4F-BE-44-01-AA-E1-02">
       <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll</ModulePath>
@@ -773,10 +773,10 @@
       <ModuleName>System.Text.Encoding.Extensions</ModuleName>
       <Classes />
     </Module>
-    <Module hash="69-33-F7-90-64-F7-76-7A-D2-2E-82-FA-2E-2B-94-28-0E-79-76-52">
+    <Module hash="8E-94-F6-54-A0-D8-E5-C6-88-A4-50-BD-42-3C-22-0E-0C-86-05-56">
       <Summary numSequencePoints="3" visitedSequencePoints="1" numBranchPoints="2" visitedBranchPoints="1" sequenceCoverage="33.33" branchCoverage="50" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="1" visitedClasses="1" numClasses="2" visitedMethods="1" numMethods="2" />
       <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\CoverageWithDeterministicSourcePaths.Tests.dll</ModulePath>
-      <ModuleTime>2021-01-21T14:45:17.2507085Z</ModuleTime>
+      <ModuleTime>2021-02-05T11:05:42.2434243Z</ModuleTime>
       <ModuleName>CoverageWithDeterministicSourcePaths.Tests</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Users\Andrei\.nuget\packages\microsoft.net.test.sdk\16.5.0\build\netcoreapp2.1\Microsoft.NET.Test.Sdk.Program.cs" />
@@ -824,10 +824,10 @@
               <Name>System.Void Repro3362.Tests.UnitTest1::TestMethod1()</Name>
               <FileRef uid="2" />
               <SequencePoints>
-                <SequencePoint vc="1" uspid="4" ordinal="0" offset="0" sl="9" sc="38" el="9" ec="57" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="4" ordinal="0" offset="0" sl="9" sc="38" el="9" ec="61" bec="0" bev="0" fileid="2" />
               </SequencePoints>
               <BranchPoints />
-              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="4" ordinal="0" offset="0" sl="9" sc="38" el="9" ec="57" bec="0" bev="0" fileid="2" />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="4" ordinal="0" offset="0" sl="9" sc="38" el="9" ec="61" bec="0" bev="0" fileid="2" />
             </Method>
             <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
               <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
@@ -877,13 +877,13 @@
       <ModuleName>System.Console</ModuleName>
       <Classes />
     </Module>
-    <Module hash="4D-0D-CC-B6-B7-94-94-C9-0C-6B-E8-82-83-A5-43-F1-B7-66-E5-26">
-      <Summary numSequencePoints="6" visitedSequencePoints="3" numBranchPoints="2" visitedBranchPoints="1" sequenceCoverage="50" branchCoverage="50" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="1" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="2" />
+    <Module hash="00-D6-99-21-1D-6E-4C-84-5B-1D-64-64-E0-2B-BD-77-CE-8C-60-B4">
+      <Summary numSequencePoints="6" visitedSequencePoints="3" numBranchPoints="4" visitedBranchPoints="2" sequenceCoverage="50" branchCoverage="50" maxCyclomaticComplexity="3" minCyclomaticComplexity="1" maxCrapScore="3" minCrapScore="2" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="2" />
       <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\CoverageWithDeterministicSourcePaths.dll</ModulePath>
-      <ModuleTime>2021-01-21T14:45:15.947124Z</ModuleTime>
+      <ModuleTime>2021-02-05T11:05:40.9085403Z</ModuleTime>
       <ModuleName>CoverageWithDeterministicSourcePaths</ModuleName>
       <Files>
-        <File uid="5" fullPath="/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs" />
+        <File uid="5" fullPath="/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs" />
       </Files>
       <Classes>
         <Class>
@@ -892,20 +892,23 @@
           <Methods />
         </Class>
         <Class>
-          <Summary numSequencePoints="6" visitedSequencePoints="3" numBranchPoints="2" visitedBranchPoints="1" sequenceCoverage="50" branchCoverage="50" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="1" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="2" />
+          <Summary numSequencePoints="6" visitedSequencePoints="3" numBranchPoints="4" visitedBranchPoints="2" sequenceCoverage="50" branchCoverage="50" maxCyclomaticComplexity="3" minCyclomaticComplexity="1" maxCrapScore="3" minCrapScore="2" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="2" />
           <FullName>Repro3362.Foo</FullName>
           <Methods>
-            <Method visited="true" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="100" branchCoverage="100" crapScore="1" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
-              <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="1" minCrapScore="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+            <Method visited="true" cyclomaticComplexity="3" nPathComplexity="2" sequenceCoverage="100" branchCoverage="66.67" crapScore="3" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="3" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="66.67" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" maxCrapScore="3" minCrapScore="3" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
               <MetadataToken>100663297</MetadataToken>
-              <Name>System.Void Repro3362.Foo::Covered()</Name>
+              <Name>System.Void Repro3362.Foo::Covered(System.Boolean)</Name>
               <FileRef uid="5" />
               <SequencePoints>
                 <SequencePoint vc="1" uspid="6" ordinal="0" offset="0" sl="6" sc="9" el="6" ec="10" bec="0" bev="0" fileid="5" />
-                <SequencePoint vc="1" uspid="7" ordinal="1" offset="1" sl="7" sc="13" el="7" ec="27" bec="0" bev="0" fileid="5" />
-                <SequencePoint vc="1" uspid="8" ordinal="2" offset="3" sl="8" sc="9" el="8" ec="10" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="1" uspid="7" ordinal="1" offset="1" sl="7" sc="13" el="7" ec="41" bec="2" bev="1" fileid="5" />
+                <SequencePoint vc="1" uspid="8" ordinal="2" offset="11" sl="8" sc="9" el="8" ec="10" bec="0" bev="0" fileid="5" />
               </SequencePoints>
-              <BranchPoints />
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="9" ordinal="0" offset="3" sl="7" path="0" offsetend="5" fileid="5" />
+                <BranchPoint vc="1" uspid="10" ordinal="1" offset="3" sl="7" path="1" offsetend="8" fileid="5" />
+              </BranchPoints>
               <MethodPoint xsi:type="SequencePoint" vc="1" uspid="6" ordinal="0" offset="0" sl="6" sc="9" el="6" ec="10" bec="0" bev="0" fileid="5" />
             </Method>
             <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
@@ -914,12 +917,12 @@
               <Name>System.Void Repro3362.Foo::NotCovered()</Name>
               <FileRef uid="5" />
               <SequencePoints>
-                <SequencePoint vc="0" uspid="9" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="10" bec="0" bev="0" fileid="5" />
-                <SequencePoint vc="0" uspid="10" ordinal="1" offset="1" sl="12" sc="13" el="12" ec="27" bec="0" bev="0" fileid="5" />
-                <SequencePoint vc="0" uspid="11" ordinal="2" offset="3" sl="13" sc="9" el="13" ec="10" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="0" uspid="11" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="10" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="0" uspid="12" ordinal="1" offset="1" sl="12" sc="13" el="12" ec="27" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="0" uspid="13" ordinal="2" offset="3" sl="13" sc="9" el="13" ec="10" bec="0" bev="0" fileid="5" />
               </SequencePoints>
               <BranchPoints />
-              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="9" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="10" bec="0" bev="0" fileid="5" />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="11" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="10" bec="0" bev="0" fileid="5" />
             </Method>
             <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
               <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
@@ -927,7 +930,7 @@
               <Name>System.Void Repro3362.Foo::.ctor()</Name>
               <SequencePoints />
               <BranchPoints />
-              <MethodPoint vc="0" uspid="12" ordinal="0" offset="0" />
+              <MethodPoint vc="0" uspid="14" ordinal="0" offset="0" />
             </Method>
           </Methods>
         </Class>

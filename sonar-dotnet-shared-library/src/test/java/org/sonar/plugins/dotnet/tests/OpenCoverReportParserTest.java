@@ -177,7 +177,7 @@ public class OpenCoverReportParserTest {
     FileService mockFileService = mock(FileService.class);
     when(mockFileService.isSupportedAbsolute(anyString())).thenReturn(false);
     String testAbsolutePath = "/full/path/to/Foo.cs";
-    when(mockFileService.getAbsolutePath("/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs")).thenReturn(Optional.of(testAbsolutePath));
+    when(mockFileService.getAbsolutePath("/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs")).thenReturn(Optional.of(testAbsolutePath));
     new OpenCoverReportParser(mockFileService).accept(new File("src/test/resources/opencover/deterministic_source_paths.xml"), coverage);
 
     assertThat(coverage.files()).hasSize(1);
@@ -190,7 +190,9 @@ public class OpenCoverReportParserTest {
         Assertions.entry(11, 0),
         Assertions.entry(12, 0),
         Assertions.entry(13, 0));
-    assertThat(coverage.getBranchCoverage(testAbsolutePath)).isEmpty();
+    assertThat(coverage.getBranchCoverage(testAbsolutePath))
+      .hasSize(1)
+      .containsExactly(new BranchCoverage(7, 2, 1));
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the OpenCover report ");
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
@@ -199,7 +201,7 @@ public class OpenCoverReportParserTest {
       "Skipping the fileId '1', line '4', visitCount '0' because file is not indexed or does not have the supported language.",
       "Skipping the fileId '1', line '4', visitCount '0' because file is not indexed or does not have the supported language.",
       "Skipping the fileId '2', line '9', visitCount '1' because file is not indexed or does not have the supported language.",
-      "Found indexed file '/full/path/to/Foo.cs' for coverage entry '/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'."
+      "Found indexed file '/full/path/to/Foo.cs' for coverage entry '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'."
     );
   }
 

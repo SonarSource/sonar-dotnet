@@ -2,9 +2,9 @@
 {
     public class Foo
     {
-        public void Covered()
+        public void Covered(bool b)
         {
-            int x = 1 + 1;
+            int x = 1 + 1 + (b ? 2 : 4);
         }
 
         public void NotCovered()

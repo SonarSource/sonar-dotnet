@@ -113,7 +113,7 @@ public class CoverageTest {
 
     assertThat(linesToCover.getValue()).isEqualTo("6");
     assertThat(uncoveredLines.getValue()).isEqualTo("3");
-    assertCoverageMetrics("CoverageWithDeterministicSourcePaths", 6, 3, 9, 4);
+    assertCoverageMetrics("CoverageWithDeterministicSourcePaths", 6, 3, 2, 1);
   }
 
   @Test
