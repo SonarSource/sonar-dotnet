@@ -22,6 +22,7 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -32,28 +33,39 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4507";
         protected const string MessageFormat = "Make sure this debug feature is deactivated before delivering the code in production.";
 
-        private static readonly ImmutableArray<MemberDescriptor> isDevelopmentMethods = ImmutableArray.Create(
+        private readonly ImmutableArray<MemberDescriptor> isDevelopmentMethods = ImmutableArray.Create(
             new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment"),
             new MemberDescriptor(KnownType.Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions, "IsDevelopment")
             );
 
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+        private readonly IAnalyzerConfiguration configuration;
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract TrackerBase<TSyntaxKind, InvocationContext>.Condition IsInvokedConditionally();
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected DeliveringDebugFeaturesInProductionBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+        {
+            this.configuration = configuration;
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
+            var t = Language.Tracker.Invocation;
+            t.Track(new TrackerInput(context, configuration, rule),
+                t.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions, "UseDeveloperExceptionPage"),
                     new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions, "UseDatabaseErrorPage")),
-                Conditions.ExceptWhen(IsInvokedConditionally()));
+                t.ExceptWhen(IsInvokedConditionally()));
         }
 
-        protected abstract TrackerBase<InvocationContext>.Condition IsInvokedConditionally();
-
-        protected static bool IsValidationMethod(SemanticModel semanticModel, SyntaxNode condition, string methodName, bool caseInsensitiveComparison = false)
+        protected bool IsValidationMethod(SemanticModel semanticModel, SyntaxNode condition, string methodName)
         {
             var methodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol);
-            return isDevelopmentMethods.Any(x => x.IsMatch(methodName, methodSymbol, caseInsensitiveComparison));
+            return isDevelopmentMethods.Any(x => x.IsMatch(methodName, methodSymbol, Language.NameComparison));
         }
     }
 }

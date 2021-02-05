@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -33,23 +32,18 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DeliveringDebugFeaturesInProduction : DeliveringDebugFeaturesInProductionBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         public DeliveringDebugFeaturesInProduction() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analyzerConfiguration) =>
-            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
+        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
-        protected override TrackerBase<InvocationContext>.Condition IsInvokedConditionally() =>
+        protected override TrackerBase<SyntaxKind, InvocationContext>.Condition IsInvokedConditionally() =>
             context =>
                 context.Node.FirstAncestorOrSelf<StatementSyntax>() is { } invocationStatement
                 && invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));
 
-        private static bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>
+        private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>
             node is IfStatementSyntax ifStatement
             && ifStatement.Condition.RemoveParentheses() is InvocationExpressionSyntax condition
             && IsValidationMethod(semanticModel, condition, condition.Expression.GetIdentifier()?.Identifier.ValueText);
