@@ -21,7 +21,7 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Trackers
 {
     public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ElementAccessContext>
         where TSyntaxKind : struct

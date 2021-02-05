@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.Trackers;
 using SonarAnalyzer.Rules.XXE;
 
 namespace SonarAnalyzer.Rules.CSharp

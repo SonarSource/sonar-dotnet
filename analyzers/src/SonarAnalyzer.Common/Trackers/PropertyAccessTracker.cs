@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Trackers
 {
     public abstract class PropertyAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, PropertyAccessContext>
         where TSyntaxKind : struct

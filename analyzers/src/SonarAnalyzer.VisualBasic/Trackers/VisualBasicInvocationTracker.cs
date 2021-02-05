@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Trackers
 {
     public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
     {

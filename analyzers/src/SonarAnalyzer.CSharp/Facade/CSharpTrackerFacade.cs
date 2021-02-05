@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Helpers.Trackers;
 
 namespace SonarAnalyzer.Helpers.Facade
 {

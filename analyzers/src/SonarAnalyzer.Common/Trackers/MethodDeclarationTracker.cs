@@ -23,7 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Trackers
 {
     public abstract class MethodDeclarationTracker<TSyntaxKind> : TrackerBase<TSyntaxKind, MethodDeclarationContext>
         where TSyntaxKind : struct

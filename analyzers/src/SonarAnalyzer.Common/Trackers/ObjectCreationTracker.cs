@@ -21,7 +21,7 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Trackers
 {
     public abstract class ObjectCreationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ObjectCreationContext>
         where TSyntaxKind : struct

@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Trackers
 {
     public class CSharpMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKind>
     {

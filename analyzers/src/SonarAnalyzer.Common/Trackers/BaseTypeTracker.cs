@@ -24,7 +24,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Trackers
 {
     /// <summary>
     /// Tracker class for rules that check the inheritance tree for e.g. disallowed base classes.

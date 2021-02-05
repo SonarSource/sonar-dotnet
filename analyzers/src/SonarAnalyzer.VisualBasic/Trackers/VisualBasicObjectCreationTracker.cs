@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers.Trackers
 {
     public class VisualBasicObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
     {
