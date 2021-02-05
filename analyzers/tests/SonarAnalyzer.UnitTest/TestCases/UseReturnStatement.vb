@@ -31,7 +31,7 @@
     End Function
         
     Public Function ReadAssignementStatements() As Integer
-        dim value as Integer = ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
+        Dim value as Integer = ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
         value += ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
         value -= ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
         value *= ReadAssignementStatements ' Noncompliant  {{Do not make use of the implicit return value.}}
