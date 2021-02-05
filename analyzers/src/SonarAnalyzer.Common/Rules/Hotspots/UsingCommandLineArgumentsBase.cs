@@ -20,25 +20,35 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UsingCommandLineArgumentsBase : SonarDiagnosticAnalyzer
+    public abstract class UsingCommandLineArgumentsBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4823";
         private const string MessageFormat = "Make sure that command line arguments are used safely here.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-        protected MethodDeclarationTracker MethodDeclarationTracker { get; set; }
-        protected DiagnosticDescriptor Rule { get; }
+        private readonly IAnalyzerConfiguration configuration;
+        private readonly DiagnosticDescriptor rule;
 
-        protected UsingCommandLineArgumentsBase(System.Resources.ResourceManager rspecResources) =>
-             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            MethodDeclarationTracker.Track(context,
-                                           MethodDeclarationTracker.IsMainMethod(),
-                                           MethodDeclarationTracker.ParameterAtIndexIsUsed(0));
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected UsingCommandLineArgumentsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+        {
+            this.configuration = configuration;
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+        }
+
+        protected override void Initialize(SonarAnalysisContext context) {
+            var t = Language.Tracker.MethodDeclaration;
+            t.Track(new TrackerInput(context, configuration, rule),
+                t.IsMainMethod(),
+                t.ParameterAtIndexIsUsed(0));
+        }
     }
 }

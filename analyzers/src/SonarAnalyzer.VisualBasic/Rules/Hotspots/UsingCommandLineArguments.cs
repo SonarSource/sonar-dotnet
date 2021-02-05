@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -27,11 +28,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class UsingCommandLineArguments : UsingCommandLineArgumentsBase
+    public sealed class UsingCommandLineArguments : UsingCommandLineArgumentsBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
         public UsingCommandLineArguments() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public UsingCommandLineArguments(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager) =>
-            MethodDeclarationTracker = new VisualBasicMethodDeclarationTracker(analyzerConfiguration, Rule);
+        internal /*for testing*/ UsingCommandLineArguments(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
     }
 }
