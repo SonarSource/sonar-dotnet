@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Metrics.CSharp

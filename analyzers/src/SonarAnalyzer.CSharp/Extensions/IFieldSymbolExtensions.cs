@@ -20,28 +20,23 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Extensions
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class CommandPath : CommandPathBase<SyntaxKind>
+    internal static class IFieldSymbolExtensions
     {
-        public CommandPath() : this(AnalyzerConfiguration.Hotspot) { }
+        internal static bool IsNonStaticNonPublicDisposableField(this IFieldSymbol fieldSymbol, LanguageVersion languageVersion) =>
+            fieldSymbol != null
+            && !fieldSymbol.IsStatic
+            && (fieldSymbol.DeclaredAccessibility == Accessibility.Protected || fieldSymbol.DeclaredAccessibility == Accessibility.Private)
+            && IsDisposable(fieldSymbol, languageVersion);
 
-        internal CommandPath(IAnalyzerConfiguration configuration) : base(RspecStrings.ResourceManager)
-        {
-            InvocationTracker = new CSharpInvocationTracker(configuration, Rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(configuration, Rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(configuration, Rule);
-        }
-
-        protected override string FirstArgument(InvocationContext context) =>
-            ((InvocationExpressionSyntax)context.Node).ArgumentList.Get(0).FindStringConstant(context.SemanticModel);
+        private static bool IsDisposable(this IFieldSymbol fieldSymbol, LanguageVersion languageVersion) =>
+            fieldSymbol.Type.Is(KnownType.System_IDisposable)
+            || fieldSymbol.Type.Implements(KnownType.System_IDisposable)
+            || fieldSymbol.Type.Is(KnownType.System_IAsyncDisposable)
+            || fieldSymbol.Type.Implements(KnownType.System_IAsyncDisposable)
+            || fieldSymbol.Type.IsDisposableRefStruct(languageVersion);
     }
 }

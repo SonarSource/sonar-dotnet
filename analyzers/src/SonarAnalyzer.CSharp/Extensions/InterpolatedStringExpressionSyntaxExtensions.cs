@@ -18,19 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class ObjectCreationExpressionSyntaxExtensions
+    public static class InterpolatedStringExpressionSyntaxExtensions
     {
-        public static IEnumerable<ExpressionSyntax> GetInitializerExpressions(this ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation?.Initializer?.Expressions ?? Enumerable.Empty<ExpressionSyntax>();
-
-        public static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
-            objectCreation?.ArgumentList?.Arguments.GetArgumentsOfKnownType(knownType, semanticModel) ?? Enumerable.Empty<ArgumentSyntax>();
+        public static string GetContentsText(this InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
+            interpolatedStringExpression.Contents.JoinStr("", content => content.ToString());
     }
 }

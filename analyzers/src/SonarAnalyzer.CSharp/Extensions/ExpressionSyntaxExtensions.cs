@@ -19,15 +19,14 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class CSharpCompilationHelper
+    public static class ExpressionSyntaxExtensions
     {
-        internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
-            compilation.GetLanguageVersion().IsAtLeast(languageVersion);
-
-        internal static LanguageVersion GetLanguageVersion(this Compilation compilation) => ((CSharpCompilation) compilation).LanguageVersion;
+        public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
+            (ExpressionSyntax)((SyntaxNode)expression).RemoveParentheses();
     }
 }

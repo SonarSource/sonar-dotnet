@@ -18,18 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class IMethodSymbolExtensions
+    public static class ArgumentListSyntaxExtensions
     {
-        // The signature of the Dispose method on IDisposable
-        internal static bool IsDisposeMethod(this IMethodSymbol symbol) =>
-            symbol.Name.Equals("Dispose") &&
-            symbol.Arity == 0 &&
-            symbol.Parameters.Length == 0 &&
-            symbol.ReturnsVoid &&
-            symbol.DeclaredAccessibility == Accessibility.Public;
+        public static ExpressionSyntax Get(this ArgumentListSyntax argumentList, int index) =>
+            argumentList != null && argumentList.Arguments.Count > index
+                ? argumentList.Arguments[index].Expression.RemoveParentheses()
+                : null;
     }
 }

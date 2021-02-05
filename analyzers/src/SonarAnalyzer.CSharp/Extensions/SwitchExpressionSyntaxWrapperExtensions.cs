@@ -18,27 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+using System.Linq;
+using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    public static class CSharpSyntaxWalkerHelper
+    public static class SwitchExpressionSyntaxWrapperExtensions
     {
-        public static bool SafeVisit(this CSharpSyntaxWalker syntaxWalker, SyntaxNode syntaxNode)
-        {
-            try
-            {
-                syntaxWalker.Visit(syntaxNode);
-                return true;
-            }
-            catch (InsufficientExecutionStackException)
-            {
-                // Roslyn walker overflows the stack when the depth of the call is around 2050.
-                // See https://github.com/SonarSource/sonar-dotnet/issues/2115
-                return false;
-            }
-        }
+        public static bool HasDiscardPattern(this SwitchExpressionSyntaxWrapper switchExpression) =>
+            switchExpression.Arms.Any(arm => DiscardPatternSyntaxWrapper.IsInstance(arm.Pattern.SyntaxNode));
     }
 }

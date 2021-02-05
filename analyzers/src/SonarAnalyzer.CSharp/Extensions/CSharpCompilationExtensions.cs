@@ -18,14 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using SonarAnalyzer.ShimLayer.CSharp;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    public static class SwitchExpressionSyntaxWrapperExtensions
+    internal static class CSharpCompilationExtensions
     {
-        public static bool HasDiscardPattern(this SwitchExpressionSyntaxWrapper switchExpression) =>
-            switchExpression.Arms.Any(arm => DiscardPatternSyntaxWrapper.IsInstance(arm.Pattern.SyntaxNode));
+        internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
+            compilation.GetLanguageVersion().IsAtLeast(languageVersion);
+
+        internal static LanguageVersion GetLanguageVersion(this Compilation compilation) => ((CSharpCompilation)compilation).LanguageVersion;
     }
 }

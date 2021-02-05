@@ -18,30 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Extensions
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class CommandPath : CommandPathBase<SyntaxKind>
+    internal static class InvocationExpressionSyntaxExtensions
     {
-        public CommandPath() : this(AnalyzerConfiguration.Hotspot) { }
+        internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
+            invocation.Expression is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
 
-        internal CommandPath(IAnalyzerConfiguration configuration) : base(RspecStrings.ResourceManager)
-        {
-            InvocationTracker = new CSharpInvocationTracker(configuration, Rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(configuration, Rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(configuration, Rule);
-        }
+        internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
+            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
 
-        protected override string FirstArgument(InvocationContext context) =>
-            ((InvocationExpressionSyntax)context.Node).ArgumentList.Get(0).FindStringConstant(context.SemanticModel);
+        internal static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
+            invocation?.ArgumentList != null && invocation.ArgumentList.Arguments.Count == count;
     }
 }

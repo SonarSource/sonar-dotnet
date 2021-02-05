@@ -28,13 +28,13 @@ using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.ShimLayer.CSharp;
+using SonarAnalyzer.SymbolicExecution;
 
-namespace SonarAnalyzer.SymbolicExecution
+namespace SonarAnalyzer.Extensions
 {
-    internal static class FlowAnalysisExtensions
+    internal static class SonarAnalysisContextExtensions
     {
-        public static void RegisterExplodedGraphBasedAnalysis(this SonarAnalysisContext context,
-            Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> analyze)
+        public static void RegisterExplodedGraphBasedAnalysis(this SonarAnalysisContext context, Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> analyze)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -104,8 +104,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        private static void Analyze(CSharpSyntaxNode declarationBody, ISymbol symbol,
-            Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> analyze, SyntaxNodeAnalysisContext context)
+        private static void Analyze(CSharpSyntaxNode declarationBody, ISymbol symbol, Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> runAnalysis, SyntaxNodeAnalysisContext context)
         {
             if (declarationBody == null ||
                 declarationBody.ContainsDiagnostics)
@@ -123,7 +122,7 @@ namespace SonarAnalyzer.SymbolicExecution
             try
             {
                 var explodedGraph = new CSharpExplodedGraph(cfg, symbol, context.SemanticModel, lva);
-                analyze(explodedGraph, context);
+                runAnalysis(explodedGraph, context);
             }
             catch (Exception e)
             {
@@ -134,46 +133,10 @@ namespace SonarAnalyzer.SymbolicExecution
                 sb.AppendLine($"Error processing method: {symbol?.Name ?? "{unknown}"}");
                 sb.AppendLine($"Method file: {declarationBody.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}");
                 sb.AppendLine($"Method line: {declarationBody.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
-                sb.AppendLine($"Inner exception: {e.ToString()}");
+                sb.AppendLine($"Inner exception: {e}");
 
                 throw new SymbolicExecutionException(sb.ToString().Replace(Environment.NewLine, " ## "), e);
             }
-        }
-
-        public static bool HasConstraint(this ISymbol symbol, SymbolicValueConstraint constraint, ProgramState programState)
-        {
-            var symbolicValue = programState.GetSymbolValue(symbol);
-            if (symbolicValue == null)
-            {
-                return false;
-            }
-
-            return programState.HasConstraint(symbolicValue, constraint);
-        }
-
-        public static ProgramState SetConstraint(this ISymbol symbol, SymbolicValueConstraint constraint,
-            ProgramState programState)
-        {
-            var symbolicValue = programState.GetSymbolValue(symbol);
-            if (symbolicValue == null ||
-                programState.HasConstraint(symbolicValue, constraint))
-            {
-                return programState;
-            }
-
-            return programState.SetConstraint(symbolicValue, constraint);
-        }
-
-        public static ProgramState RemoveConstraint(this ISymbol symbol, SymbolicValueConstraint constraint, ProgramState programState)
-        {
-            var symbolicValue = programState.GetSymbolValue(symbol);
-            if (symbolicValue == null ||
-                !programState.HasConstraint(symbolicValue, constraint))
-            {
-                return programState;
-            }
-
-            return programState.RemoveConstraint(symbolicValue, constraint);
         }
     }
 }

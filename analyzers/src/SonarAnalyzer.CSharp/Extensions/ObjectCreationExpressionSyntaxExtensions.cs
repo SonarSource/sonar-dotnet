@@ -18,26 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.ShimLayer.CSharp;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class ITypeSymbolExtensions
+    internal static class ObjectCreationExpressionSyntaxExtensions
     {
-        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
-            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8) &&
-            IsRefStruct(symbol) &&
-            symbol.GetMembers("Dispose").Any(s => s is IMethodSymbol method && method.IsDisposeMethod());
+        public static IEnumerable<ExpressionSyntax> GetInitializerExpressions(this ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation?.Initializer?.Expressions ?? Enumerable.Empty<ExpressionSyntax>();
 
-        internal static bool IsRefStruct(this ITypeSymbol symbol) =>
-            symbol != null &&
-            symbol.IsStruct() &&
-            symbol.DeclaringSyntaxReferences.Length == 1 &&
-            symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
-            structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
+        public static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
+            objectCreation?.ArgumentList?.Arguments.GetArgumentsOfKnownType(knownType, semanticModel) ?? Enumerable.Empty<ArgumentSyntax>();
     }
 }

@@ -21,9 +21,10 @@
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
     internal static class SyntaxNodeExtensions
     {

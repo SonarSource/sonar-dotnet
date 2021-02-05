@@ -18,13 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
+using System;
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class LanguageVersionExtensions
+    internal static class BaseMethodDeclarationSyntaxExtensions
     {
-        internal static bool IsAtLeast(this LanguageVersion left, LanguageVersion right) =>
-            left.CompareTo(right) >= 0;
+        public static IEnumerable<SyntaxNode> GetBodyDescendantNodes(this BaseMethodDeclarationSyntax method) =>
+            (method ?? throw new ArgumentNullException(nameof(method))).Body == null
+                ? method.ExpressionBody().DescendantNodes()
+                : method.Body.DescendantNodes();
     }
 }

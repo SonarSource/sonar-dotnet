@@ -21,7 +21,7 @@
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
     internal static class BaseArgumentListSyntaxExtensions
     {

@@ -18,21 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class ParameterSyntaxExtensions
+    internal static class ITypeSymbolExtensions
     {
-        /// <summary>
-        /// Returns true if the parameter is of type string. For performance reasons the check is done at the syntax level.
-        /// </summary>
-        internal static bool IsString(this ParameterSyntax parameterSyntax) =>
-            IsString(parameterSyntax.Type.ToString());
+        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
+            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8) &&
+            IsRefStruct(symbol) &&
+            symbol.GetMembers("Dispose").Any(s => s is IMethodSymbol method && method.IsDisposeMethod());
 
-        private static bool IsString(string parameterTypeName) =>
-            parameterTypeName == "string" ||
-            parameterTypeName == "String" ||
-            parameterTypeName == "System.String";
+        internal static bool IsRefStruct(this ITypeSymbol symbol) =>
+            symbol != null &&
+            symbol.IsStruct() &&
+            symbol.DeclaringSyntaxReferences.Length == 1 &&
+            symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
+            structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
     }
 }

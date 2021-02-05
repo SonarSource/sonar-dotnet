@@ -18,25 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class IFieldSymbolExtensions
+    public static class CSharpSyntaxWalkerExtensions
     {
-        internal static bool IsNonStaticNonPublicDisposableField(this IFieldSymbol fieldSymbol, LanguageVersion languageVersion) =>
-            fieldSymbol != null
-            && !fieldSymbol.IsStatic
-            && (fieldSymbol.DeclaredAccessibility == Accessibility.Protected || fieldSymbol.DeclaredAccessibility == Accessibility.Private)
-            && IsDisposable(fieldSymbol, languageVersion);
-
-        private static bool IsDisposable(this IFieldSymbol fieldSymbol, LanguageVersion languageVersion) =>
-            fieldSymbol.Type.Is(KnownType.System_IDisposable)
-            || fieldSymbol.Type.Implements(KnownType.System_IDisposable)
-            || fieldSymbol.Type.Is(KnownType.System_IAsyncDisposable)
-            || fieldSymbol.Type.Implements(KnownType.System_IAsyncDisposable)
-            || fieldSymbol.Type.IsDisposableRefStruct(languageVersion);
+        public static bool SafeVisit(this CSharpSyntaxWalker syntaxWalker, SyntaxNode syntaxNode)
+        {
+            try
+            {
+                syntaxWalker.Visit(syntaxNode);
+                return true;
+            }
+            catch (InsufficientExecutionStackException)
+            {
+                // Roslyn walker overflows the stack when the depth of the call is around 2050.
+                // See https://github.com/SonarSource/sonar-dotnet/issues/2115
+                return false;
+            }
+        }
     }
 }
