@@ -40,7 +40,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Web_HttpCookie,
                 KnownType.Microsoft_AspNetCore_Http_CookieOptions
             );
-        private readonly ObjectCreationTracker<SyntaxKind> objectCreationTracker;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -52,16 +51,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public CookieShouldBeHttpOnly() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal CookieShouldBeHttpOnly(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
-            objectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, Rule);
+        internal CookieShouldBeHttpOnly(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             base.Initialize(context);
-
-            objectCreationTracker.Track(context,
-                objectCreationTracker.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
-                Conditions.ExceptWhen(objectCreationTracker.ArgumentIsBoolConstant("httpOnly", true)));
+            var t = CSharpFacade.Instance.Tracker.ObjectCreation;
+            t.Track(new TrackerInput(context, Configuration, Rule),
+                t.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
+                t.ExceptWhen(t.ArgumentIsBoolConstant("httpOnly", true)));
         }
     }
 }
