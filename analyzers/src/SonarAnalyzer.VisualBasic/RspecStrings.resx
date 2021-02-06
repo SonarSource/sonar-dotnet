@@ -5202,6 +5202,39 @@
   <data name="S6146_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S5944_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S5944_Description" xml:space="preserve">
+    <value>Functions can return values using two different syntaxes. The modern, and correct, way to do it is to use a Return statement. The VB6 way, i.e. old way, is to assign a return value to the function's name .</value>
+  </data>
+  <data name="S5944_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S5944_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S5944_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S5944_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S5944_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S5944_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S5944_Tags" xml:space="preserve">
+    <value>bad-practice,confusing</value>
+  </data>
+  <data name="S5944_Title" xml:space="preserve">
+    <value>"Return" statements should be used instead of assigning values to function names</value>
+  </data>
+  <data name="S5944_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S907_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
