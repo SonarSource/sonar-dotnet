@@ -23,11 +23,11 @@ using System.Security.Cryptography;
 
 namespace NetFramework48
 {
-    public class NonStandardCryptographicAlgorithmsShouldNotBeUsedTest
+    public class UsingNonstandardCryptographyTest
     {
         private readonly CustomHashAlgorithm hashAlgorithm;
 
-        public NonStandardCryptographicAlgorithmsShouldNotBeUsedTest()
+        public UsingNonstandardCryptographyTest()
         {
             hashAlgorithm = new CustomHashAlgorithm();
         }

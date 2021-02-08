@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class NonStandardCryptographicAlgorithmsShouldNotBeUsed : NonStandardCryptographicAlgorithmsShouldNotBeUsedBase<SyntaxKind, TypeBlockSyntax>
+    public sealed class UsingNonstandardCryptography : UsingNonstandardCryptographyBase<SyntaxKind, TypeBlockSyntax>
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
@@ -37,12 +37,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
 
-        public NonStandardCryptographicAlgorithmsShouldNotBeUsed()
+        public UsingNonstandardCryptography()
             : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        public NonStandardCryptographicAlgorithmsShouldNotBeUsed(IAnalyzerConfiguration analyzerConfiguration)
+        public UsingNonstandardCryptography(IAnalyzerConfiguration analyzerConfiguration)
             : base(analyzerConfiguration)
         {
         }
