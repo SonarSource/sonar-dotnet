@@ -36,9 +36,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
 
+        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.SimpleMemberAccessExpression;
+
         internal override bool IsMemberAccessOnKnownType(MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel model) =>
             memberAccess.IsMemberAccessOnKnownType(name, knownType, model);
-
-        protected override SyntaxKind GetSyntaxKind() => SyntaxKind.SimpleMemberAccessExpression;
     }
 }

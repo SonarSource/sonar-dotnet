@@ -41,14 +41,14 @@ namespace SonarAnalyzer.Rules
         protected InsecureTemporaryFilesCreationBase(ResourceManager rspecResources) =>
             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
+        protected abstract TSyntaxKind SyntaxKind { get; }
+
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
         internal abstract bool IsMemberAccessOnKnownType(TMemberAccessSyntax memberAccess, string name, KnownType knownType, SemanticModel model);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, Visit, GetSyntaxKind());
-
-        protected abstract TSyntaxKind GetSyntaxKind();
+            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, Visit, SyntaxKind);
 
         private void Visit(SyntaxNodeAnalysisContext context)
         {
