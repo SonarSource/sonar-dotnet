@@ -59,6 +59,21 @@ namespace SonarAnalyzer.Helpers
         public static string GetHelpLink(ResourceManager resourceManager, string diagnosticId) =>
             string.Format(resourceManager.GetString("HelpLinkFormat"), diagnosticId.Substring(1));
 
+        /**
+         * Indicates that the roslyn diagnostic cannot be suppressed, filtered or have its severity changed.
+         */
+        public static DiagnosticDescriptor WithNotConfigurable(this DiagnosticDescriptor dd) =>
+            new DiagnosticDescriptor(
+                dd.Id,
+                dd.Title,
+                dd.MessageFormat,
+                dd.Category,
+                dd.DefaultSeverity,
+                true,
+                dd.Description,
+                dd.HelpLinkUri,
+                dd.CustomTags.Union(new[] { WellKnownDiagnosticTags.NotConfigurable }).ToArray());
+
         private static string[] BuildCustomTags(string diagnosticId, ResourceManager resourceManager, bool fadeOutCode)
         {
             var tags = new List<string> { resourceManager.GetString("RoslynLanguage") };
@@ -106,20 +121,5 @@ namespace SonarAnalyzer.Helpers
 #endif
                 .ToArray();
         }
-
-        /**
-         * Indicates that the roslyn diagnostic cannot be suppressed, filtered or have its severity changed.
-         */
-        public static DiagnosticDescriptor WithNotConfigurable(this DiagnosticDescriptor dd) =>
-            new DiagnosticDescriptor(
-                dd.Id,
-                dd.Title,
-                dd.MessageFormat,
-                dd.Category,
-                dd.DefaultSeverity,
-                true,
-                dd.Description,
-                dd.HelpLinkUri,
-                dd.CustomTags.Union(new[] { WellKnownDiagnosticTags.NotConfigurable }).ToArray());
     }
 }
