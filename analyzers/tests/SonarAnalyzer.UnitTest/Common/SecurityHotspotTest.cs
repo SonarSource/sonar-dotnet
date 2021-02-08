@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             foreach (var analyzer in GetHotspotAnalyzers(language).Where(IsTestValid))
             {
-                Verifier.VerifyNoIssueReported($"TestCases\\{GetTestCaseFileName(analyzer)}.{language.FileExtension}",
+                Verifier.VerifyNoIssueReported(@$"TestCases\Hotspots\{GetTestCaseFileName(analyzer)}.{language.FileExtension}",
                                                analyzer,
                                                GetAdditionalReferences());
             }

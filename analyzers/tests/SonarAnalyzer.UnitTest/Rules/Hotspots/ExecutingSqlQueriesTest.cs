@@ -38,14 +38,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_CS_Net46() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_Net46.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 GetReferencesNet46(Constants.NuGetLatestVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_VB_Net46() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_Net46.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.vb",
                 new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromVisualBasic15,
                 GetReferencesNet46(Constants.NuGetLatestVersion));
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_CS_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp8,
                 GetReferencesNetCore(Constants.DotNetCore220Version));
@@ -73,14 +73,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.cs",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
                 new CS.ExecutingSqlQueries(),
                 GetReferencesNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_VB_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
                 new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromVisualBasic15,
                 GetReferencesNetCore(Constants.DotNetCore220Version));
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.vb",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
                 new VB.ExecutingSqlQueries(),
                 GetReferencesNetCore(Constants.DotNetCore220Version));
 

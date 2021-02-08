@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Nancy() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_Nancy.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_Nancy.cs",
                 new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 NuGetMetadataReference.Nancy());
 
@@ -45,14 +45,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
                 new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 MetadataReferenceFacade.SystemWeb);
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Not_Enabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldBeSecure.cs",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
                 new CS.CookieShouldBeSecure(),
                 MetadataReferenceFacade.SystemWeb);
 
@@ -61,14 +61,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_NetCore.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_NetCore.cs",
                 new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences_NetCore());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Net() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CookieShouldBeSecure_Net.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\CookieShouldBeSecure_Net.cs",
                                                       new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                                                       GetAdditionalReferences_NetCore());
 

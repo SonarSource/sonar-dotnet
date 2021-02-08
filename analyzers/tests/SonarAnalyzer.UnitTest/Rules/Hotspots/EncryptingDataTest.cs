@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -31,37 +30,37 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class SocketsCreationTest
+    public class EncryptingDataTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SocketsCreation_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SocketsCreation.cs",
-                                    new CS.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
-                                    GetAdditionalReferences());
+        public void EncryptingData_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.cs",
+                new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SocketsCreation_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\SocketsCreation.vb",
-                                    new VB.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
-                                    GetAdditionalReferences());
+        public void EncryptingData_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.vb",
+                new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SocketsCreation_CS_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\SocketsCreation.cs",
-                                           new CS.SocketsCreation(),
-                                           GetAdditionalReferences());
+        public void EncryptingData_CS_RuleDisabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\EncryptingData.cs",
+                new CS.EncryptingData(),
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SocketsCreation_VB_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\SocketsCreation.vb",
-                                           new VB.SocketsCreation(),
-                                           GetAdditionalReferences());
+        public void EncryptingData_VB_RuleDisabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\EncryptingData.vb",
+                new VB.EncryptingData(),
+                GetAdditionalReferences());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.SystemNetSockets.Concat(MetadataReferenceFacade.SystemNetPrimitives);
+            MetadataReferenceFacade.SystemSecurityCryptography;
     }
 }

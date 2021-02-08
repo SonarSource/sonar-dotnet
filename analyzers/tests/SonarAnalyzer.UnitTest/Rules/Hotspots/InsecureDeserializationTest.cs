@@ -22,30 +22,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class HardcodedIpAddressTest
+    public class InsecureDeserializationTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void HardcodedIpAddress_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.cs", new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+        [TestCategory("Hotspot")]
+        public void InsecureDeserialization() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\InsecureDeserialization.cs",
+                new CS.InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled),
+                ParseOptionsHelper.FromCSharp8);
 
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
-        public void HardcodedIpAddress_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.vb", new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void HardcodedIpAddress_Not_Enabled()
-        {
-            Verifier.VerifyNoIssueReported(@"TestCases\HardcodedIpAddress.cs", new CS.HardcodedIpAddress());
-
-            Verifier.VerifyNoIssueReported(@"TestCases\HardcodedIpAddress.vb", new VB.HardcodedIpAddress());
-        }
+        [TestCategory("Hotspot")]
+        public void InsecureDeserialization_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\InsecureDeserialization.CSharp9.cs", new CS.InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled));
+#endif
     }
 }

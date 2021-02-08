@@ -37,21 +37,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeHttpOnly() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 MetadataReferenceFacade.SystemWeb);
 #else
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeHttpOnly_NetCore() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly_NetCore.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_NetCore.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences_NetCore());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeHttpOnly_Net() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CookieShouldBeHttpOnly_Net.cs",
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Net.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled), GetAdditionalReferences_NetCore());
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void CookiesShouldBeHttpOnly_Nancy() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly_Nancy.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 NuGetMetadataReference.Nancy());
     }

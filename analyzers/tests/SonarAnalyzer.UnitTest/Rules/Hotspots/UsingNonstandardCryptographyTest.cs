@@ -28,34 +28,34 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class NonStandardCryptographicAlgorithmsShouldNotBeUsedTest
+    public class UsingNonstandardCryptographyTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_CSharp() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.cs",
-                                    new CS.NonStandardCryptographicAlgorithmsShouldNotBeUsed(AnalyzerConfiguration.AlwaysEnabled),
+        public void UsingNonstandardCryptography_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.cs",
+                                    new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_CSharp_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.cs",
-                                           new CS.NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
+        public void UsingNonstandardCryptography_CS_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingNonstandardCryptography.cs",
+                                           new CS.UsingNonstandardCryptography(),
                                            MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.vb",
-                                    new VB.NonStandardCryptographicAlgorithmsShouldNotBeUsed(AnalyzerConfiguration.AlwaysEnabled),
+        public void UsingNonstandardCryptography_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.vb",
+                                    new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonStandardCryptographicAlgorithmsShouldNotBeUsed_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\NonStandardCryptographicAlgorithmsShouldNotBeUsed.vb",
-                                           new VB.NonStandardCryptographicAlgorithmsShouldNotBeUsed(),
+        public void UsingNonstandardCryptography_VB_Disabled() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingNonstandardCryptography.vb",
+                                           new VB.UsingNonstandardCryptography(),
                                            MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

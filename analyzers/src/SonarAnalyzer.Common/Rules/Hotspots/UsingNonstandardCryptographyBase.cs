@@ -26,7 +26,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class NonStandardCryptographicAlgorithmsShouldNotBeUsedBase<TSyntaxKind, TTypeDeclarationSyntax> : HotspotDiagnosticAnalyzer
+    public abstract class UsingNonstandardCryptographyBase<TSyntaxKind, TTypeDeclarationSyntax> : HotspotDiagnosticAnalyzer
         where TTypeDeclarationSyntax : SyntaxNode
         where TSyntaxKind : struct
     {
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected NonStandardCryptographicAlgorithmsShouldNotBeUsedBase(IAnalyzerConfiguration analyzerConfiguration)
+        protected UsingNonstandardCryptographyBase(IAnalyzerConfiguration analyzerConfiguration)
             : base(analyzerConfiguration)
         {
         }

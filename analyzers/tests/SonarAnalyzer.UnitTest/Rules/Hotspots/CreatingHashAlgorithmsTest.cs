@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.cs",
                                     new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.NetFramework.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.cs",
                                     new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.vb",
                                     new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences());
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_VB_NetFx() =>
-            Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.NetFramework.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CreatingHashAlgorithms.NetFramework.vb",
                                     new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences());
 #endif
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_CS_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\CreatingHashAlgorithms.cs",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\CreatingHashAlgorithms.cs",
                                            new CS.CreatingHashAlgorithms(),
                                            ParseOptionsHelper.FromCSharp8,
                                            GetAdditionalReferences());
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CreatingHashAlgorithms_VB_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\CreatingHashAlgorithms.vb",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\CreatingHashAlgorithms.vb",
                                            new VB.CreatingHashAlgorithms(),
                                            GetAdditionalReferences());
 
