@@ -115,34 +115,12 @@ namespace SonarAnalyzer.Rules.XXE
             // First we search for object creations at the syntax level to see if the object is created inline
             // and if not we look for the identifier declaration.
             invocation.DescendantNodes()
+                      .Union(symbol.GetLocationNodes(invocation))
                       .OfType<ObjectCreationExpressionSyntax>()
-                      .FirstOrDefault(objectCreation => IsXmlReaderSettingsCreationWithInitializer(objectCreation, semanticModel))
-                ?? symbol.Locations
-                         .SelectMany(location => GetDescendantNodes(location, invocation).OfType<ObjectCreationExpressionSyntax>())
-                         .FirstOrDefault(objectCreation => IsXmlReaderSettingsCreationWithInitializer(objectCreation, semanticModel));
+                      .FirstOrDefault(objectCreation => IsXmlReaderSettingsCreationWithInitializer(objectCreation, semanticModel));
 
         private static bool IsXmlReaderSettingsCreationWithInitializer(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
             objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel);
-
-        private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode invocation)
-        {
-            var locationRootNode = location.SourceTree?.GetRoot();
-            var invocationRootNode = invocation.SyntaxTree.GetRoot();
-
-            // We don't look for descendants when the location is outside the current context root
-            if (locationRootNode != null && locationRootNode != invocationRootNode)
-            {
-                return Enumerable.Empty<SyntaxNode>();
-            }
-
-            // To optimise, we search first for the class constructor, then for the method declaration.
-            // If these cannot be found (e.g. fields), we get the root of the syntax tree and search from there.
-            var root = locationRootNode?.FindNode(location.SourceSpan)
-                       ?? invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>()
-                       ?? invocationRootNode;
-
-            return root.DescendantNodes();
-        }
 
         private static bool IsXmlResolverDtdProcessingUnsafe(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
             semanticModel.GetConstantValue(assignment.Right).Value switch

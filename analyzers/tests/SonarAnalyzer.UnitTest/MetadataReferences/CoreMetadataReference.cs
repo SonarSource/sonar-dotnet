@@ -48,6 +48,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference SystemIoCompression { get; } = CreateReference("System.IO.Compression.dll");
         internal static MetadataReference SystemIoCompressionZipFile { get; } = CreateReference("System.IO.Compression.ZipFile.dll");
         internal static MetadataReference SystemIoFileSystem { get; } = CreateReference("System.IO.FileSystem.dll");
+        internal static MetadataReference SystemIoFileSystemAccessControl { get; } = CreateReference("System.IO.FileSystem.AccessControl.dll");
         internal static MetadataReference SystemLinq { get; } = CreateReference("System.Linq.dll");
         internal static MetadataReference SystemLinqExpressions { get; } = CreateReference("System.Linq.Expressions.dll");
         internal static MetadataReference SystemLinqQueryable { get; } = CreateReference("System.Linq.Queryable.dll");
@@ -70,11 +71,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         internal static MetadataReference SystemRuntimeSerialization { get; } = CreateReference("System.Runtime.Serialization.dll");
         internal static MetadataReference SystemRuntimeSerializationFormatters { get; } = CreateReference("System.Runtime.Serialization.Formatters.dll");
         internal static MetadataReference SystemRuntimeSerializationPrimitives { get; } = CreateReference("System.Runtime.Serialization.Primitives.dll");
+        internal static MetadataReference SystemSecurityAccessControl { get; } = CreateReference("System.Security.AccessControl.dll");
         internal static MetadataReference SystemSecurityCryptographyAlgorithms { get; } = CreateReference("System.Security.Cryptography.Algorithms.dll");
         internal static MetadataReference SystemSecurityCryptographyX509Certificates { get; } = CreateReference("System.Security.Cryptography.X509Certificates.dll");
         internal static MetadataReference SystemSecurityCryptographyCsp { get; } = CreateReference("System.Security.Cryptography.Csp.dll");
         internal static MetadataReference SystemSecurityCryptographyCng { get; } = CreateReference("System.Security.Cryptography.Cng.dll");
         internal static MetadataReference SystemSecurityCryptographyPrimitives { get; } = CreateReference("System.Security.Cryptography.Primitives.dll");
+        internal static MetadataReference SystemSecurityPrincipalWindows { get; } = CreateReference("System.Security.Principal.Windows.dll");
         internal static MetadataReference SystemThreadingTasks { get; } = CreateReference("System.Threading.Tasks.dll");
         internal static MetadataReference SystemXmlReaderWriter { get; } = CreateReference("System.Xml.ReaderWriter.dll");
         internal static MetadataReference SystemXml { get; } = CreateReference("System.Xml.dll");

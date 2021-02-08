@@ -80,9 +80,11 @@ namespace SonarAnalyzer.UnitTest.Common
 #if NETFRAMEWORK
                 "ExecutingSqlQueries" => "ExecutingSqlQueries_Net46",
                 "UsingCookies" => "UsingCookies_Net46",
+                "LooseFilePermissions" => "LooseFilePermissions.Windows",
 #else
                 "ExecutingSqlQueries" => "ExecutingSqlQueries_NetCore",
                 "UsingCookies" => "UsingCookies_NetCore",
+                "LooseFilePermissions" => "LooseFilePermissions.Unix",
 #endif
                 _ => typeName
             };
@@ -107,6 +109,7 @@ namespace SonarAnalyzer.UnitTest.Common
 #else
                                   .Concat(ExecutingSqlQueriesTest.GetReferencesNetCore(Constants.DotNetCore220Version))
                                   .Concat(UsingCookies.GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
+                                  .Concat(NuGetMetadataReference.MonoPosixNetStandard()) // Needed by LooseFilePermissions
 #endif
                                   .Concat(DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2)
                                   .Concat(ExpandingArchivesTest.AdditionalReferences)

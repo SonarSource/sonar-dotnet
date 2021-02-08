@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string GetIdentifierText(TIdentifierNameSyntax identifierNameSyntax);
 
-        protected abstract bool IsBinaryNegationOrInsideIfCondition(SyntaxNode node);
+        protected abstract bool IsPartOfBinaryNegationOrCondition(SyntaxNode node);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
             var node = context.Node;
-            if (IsBinaryNegationOrInsideIfCondition(node) && IsWeakProtocolUsed((TIdentifierNameSyntax)node, context.SemanticModel))
+            if (!IsPartOfBinaryNegationOrCondition(node) && IsWeakProtocolUsed((TIdentifierNameSyntax)node, context.SemanticModel))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
             }

@@ -21,6 +21,7 @@
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.ShimLayer.CSharp;
 
@@ -43,5 +44,38 @@ namespace SonarAnalyzer.Extensions
 
         public static string FindStringConstant(this SyntaxNode node, SemanticModel semanticModel) =>
             FindConstantValue(node, semanticModel) as string;
+
+        public static bool IsPartOfBinaryNegationOrCondition(this SyntaxNode node)
+        {
+            if (!(node.Parent is MemberAccessExpressionSyntax))
+            {
+                return false;
+            }
+
+            var topNode = node.Parent.GetSelfOrTopParenthesizedExpression();
+            if (topNode.Parent?.IsKind(SyntaxKind.BitwiseNotExpression) ?? false)
+            {
+                return true;
+            }
+
+            var current = topNode;
+            while (!current.Parent?.IsAnyKind(SyntaxKind.BitwiseNotExpression,
+                                              SyntaxKind.IfStatement,
+                                              SyntaxKind.WhileStatement,
+                                              SyntaxKind.ConditionalExpression,
+                                              SyntaxKind.MethodDeclaration,
+                                              SyntaxKind.SimpleLambdaExpression) ?? false)
+            {
+                current = current.Parent;
+            }
+
+            return current.Parent switch
+            {
+                IfStatementSyntax ifStatement => ifStatement.Condition == current,
+                WhileStatementSyntax whileStatement => whileStatement.Condition == current,
+                ConditionalExpressionSyntax condExpr => condExpr.Condition == current,
+                _ => false
+            };
+        }
     }
 }

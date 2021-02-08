@@ -1,0 +1,6 @@
+{
+  "name": "Sonar way recommended",
+  "ruleKeys": [
+    "S2612"
+  ]
+}

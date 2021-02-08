@@ -304,6 +304,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                     CoreMetadataReference.SystemDiagnosticsTraceSource,
                     CoreMetadataReference.SystemGlobalization,
                     CoreMetadataReference.SystemIoFileSystem,
+                    CoreMetadataReference.SystemIoFileSystemAccessControl,
                     CoreMetadataReference.SystemLinq,
                     CoreMetadataReference.SystemLinqExpressions,
                     CoreMetadataReference.SystemLinqQueryable,
@@ -312,7 +313,9 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                     CoreMetadataReference.SystemPrivateUri,
                     CoreMetadataReference.SystemRuntime,
                     CoreMetadataReference.SystemRuntimeExtensions,
-                    CoreMetadataReference.SystemRuntimeInteropServices
+                    CoreMetadataReference.SystemRuntimeInteropServices,
+                    CoreMetadataReference.SystemSecurityAccessControl,
+                    CoreMetadataReference.SystemSecurityPrincipalWindows
                 }
                 .Concat(NetStandardMetadataReference.Netstandard);
 #endif

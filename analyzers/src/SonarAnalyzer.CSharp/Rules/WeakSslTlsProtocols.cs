@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -40,32 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override string GetIdentifierText(IdentifierNameSyntax identifierNameSyntax) =>
             identifierNameSyntax.Identifier.Text;
 
-        protected override bool IsBinaryNegationOrInsideIfCondition(SyntaxNode node)
-        {
-            if (!(node.Parent is MemberAccessExpressionSyntax))
-            {
-                return false;
-            }
-
-            var topNode = node.Parent.GetSelfOrTopParenthesizedExpression();
-
-            if (topNode.Parent != null && topNode.Parent.IsKind(SyntaxKind.BitwiseNotExpression))
-            {
-                return false;
-            }
-
-            var current = topNode;
-            while (current.Parent != null && !current.Parent.IsKind(SyntaxKind.IfStatement))
-            {
-                current = current.Parent;
-            }
-
-            if (current.Parent != null && current.Parent.IsKind(SyntaxKind.IfStatement))
-            {
-                return ((IfStatementSyntax)current.Parent).Condition != current;
-            }
-
-            return true;
-        }
+        protected override bool IsPartOfBinaryNegationOrCondition(SyntaxNode node) => node.IsPartOfBinaryNegationOrCondition();
     }
 }

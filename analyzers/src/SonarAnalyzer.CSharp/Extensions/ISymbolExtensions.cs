@@ -18,7 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution;
 
 namespace SonarAnalyzer.Extensions
@@ -59,6 +62,29 @@ namespace SonarAnalyzer.Extensions
             }
 
             return programState.RemoveConstraint(symbolicValue, constraint);
+        }
+
+        public static IEnumerable<SyntaxNode> GetLocationNodes(this ISymbol symbol, SyntaxNode node) =>
+            symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));
+
+        private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode invocation)
+        {
+            var locationRootNode = location.SourceTree?.GetRoot();
+            var invocationRootNode = invocation.SyntaxTree.GetRoot();
+
+            // We don't look for descendants when the location is outside the current context root
+            if (locationRootNode != null && locationRootNode != invocationRootNode)
+            {
+                return Enumerable.Empty<SyntaxNode>();
+            }
+
+            // To optimise, we search first for the class constructor, then for the method declaration.
+            // If these cannot be found (e.g. fields), we get the root of the syntax tree and search from there.
+            var root = locationRootNode?.FindNode(location.SourceSpan)
+                       ?? invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>()
+                       ?? invocationRootNode;
+
+            return root.DescendantNodes();
         }
     }
 }

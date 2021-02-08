@@ -86,6 +86,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute");
         internal static readonly KnownType Microsoft_Web_XmlTransform_XmlFileInfoDocument = new KnownType("Microsoft.Web.XmlTransform.XmlFileInfoDocument");
         internal static readonly KnownType Microsoft_Web_XmlTransform_XmlTransformableDocument = new KnownType("Microsoft.Web.XmlTransform.XmlTransformableDocument");
+        internal static readonly KnownType Mono_Unix_FileAccessPermissions = new KnownType("Mono.Unix.FileAccessPermissions");
         internal static readonly KnownType MySql_Data_MySqlClient_MySqlDataAdapter = new KnownType("MySql.Data.MySqlClient.MySqlDataAdapter");
         internal static readonly KnownType MySql_Data_MySqlClient_MySqlCommand = new KnownType("MySql.Data.MySqlClient.MySqlCommand");
         internal static readonly KnownType MySql_Data_MySqlClient_MySqlHelper = new KnownType("MySql.Data.MySqlClient.MySqlHelper");
@@ -324,6 +325,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_Serialization_SerializationInfo = new KnownType("System.Runtime.Serialization.SerializationInfo");
         internal static readonly KnownType System_Runtime_Serialization_StreamingContext = new KnownType("System.Runtime.Serialization.StreamingContext");
         internal static readonly KnownType System_SByte = new KnownType(SpecialType.System_SByte, "sbyte");
+        internal static readonly KnownType System_Security_AccessControl_FileSystemAccessRule = new KnownType("System.Security.AccessControl.FileSystemAccessRule");
+        internal static readonly KnownType System_Security_AccessControl_FileSystemSecurity = new KnownType("System.Security.AccessControl.FileSystemSecurity");
         internal static readonly KnownType System_Security_AllowPartiallyTrustedCallersAttribute = new KnownType("System.Security.AllowPartiallyTrustedCallersAttribute");
         internal static readonly KnownType System_Security_Authentication_SslProtocols = new KnownType("System.Security.Authentication.SslProtocols");
         internal static readonly KnownType System_Security_Cryptography_AesManaged = new KnownType("System.Security.Cryptography.AesManaged");
@@ -367,6 +370,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_PermissionSet = new KnownType("System.Security.PermissionSet");
         internal static readonly KnownType System_Security_Principal_IIdentity = new KnownType("System.Security.Principal.IIdentity");
         internal static readonly KnownType System_Security_Principal_IPrincipal = new KnownType("System.Security.Principal.IPrincipal");
+        internal static readonly KnownType System_Security_Principal_NTAccount = new KnownType("System.Security.Principal.NTAccount");
+        internal static readonly KnownType System_Security_Principal_SecurityIdentifier = new KnownType("System.Security.Principal.SecurityIdentifier");
         internal static readonly KnownType System_Security_Principal_WindowsIdentity = new KnownType("System.Security.Principal.WindowsIdentity");
         internal static readonly KnownType System_Security_SecurityCriticalAttribute = new KnownType("System.Security.SecurityCriticalAttribute");
         internal static readonly KnownType System_Security_SecuritySafeCriticalAttribute = new KnownType("System.Security.SecuritySafeCriticalAttribute");
