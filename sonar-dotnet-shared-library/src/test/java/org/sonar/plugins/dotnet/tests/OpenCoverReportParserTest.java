@@ -119,6 +119,11 @@ public class OpenCoverReportParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
+
+    // FIXME the test case may be wrong
+    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(6);
+    assertThat(logTester.logs(LoggerLevel.WARN).get(0))
+      .startsWith("OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs', indexed as");
   }
 
   @Test
@@ -132,6 +137,17 @@ public class OpenCoverReportParserTest {
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the OpenCover report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+
+    // FIXME the test case may be wrong
+    assertThat(logTester.logs(LoggerLevel.WARN))
+      .hasSize(6)
+      .contains(
+        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').",
+        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').",
+        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').",
+        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').",
+        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').",
+        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').");
   }
 
   @Test
@@ -169,6 +185,9 @@ public class OpenCoverReportParserTest {
     assertThat(debugLogs.get(7))
       .startsWith("Found indexed file '/test/file/Calc.cs' for coverage entry")
       .endsWith("MyLibrary\\Adder.cs'.");
+
+    // FIXME the test case may be wrong
+    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(6);
   }
 
   @Test
@@ -194,26 +213,24 @@ public class OpenCoverReportParserTest {
       .hasSize(1)
       .containsExactly(new BranchCoverage(7, 2, 1));
 
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the OpenCover report ");
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
-    assertThat(debugLogs).hasSize(5);
-    assertThat(debugLogs.stream().skip(1)).containsExactlyInAnyOrder(
-      "Skipping the fileId '1', line '4', visitCount '0' because file is not indexed or does not have the supported language.",
-      "Skipping the fileId '1', line '4', visitCount '0' because file is not indexed or does not have the supported language.",
-      "Skipping the fileId '2', line '9', visitCount '1' because file is not indexed or does not have the supported language.",
-      "Found indexed file '/full/path/to/Foo.cs' for coverage entry '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'."
-    );
+    assertThat(debugLogs)
+      // it logs that it skips "Microsoft.NET.Test.Sdk.Program.cs" and "FooTests.cs", but we're not interested in those
+      .hasSize(5)
+      .contains("Found indexed file '/full/path/to/Foo.cs' for coverage entry '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'.");
     assertThat(logTester.logs(LoggerLevel.TRACE))
       .hasSize(8)
       .containsExactlyInAnyOrder(
-        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '6', visitCount '1'",
-        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '7', visitCount '1'",
-        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '8', visitCount '1'",
-        "OpenCover parser: add branch hits for fileId '5', filePath '/full/path/to/Foo.cs', line '7', offset '3', visitCount '0'",
-        "OpenCover parser: add branch hits for fileId '5', filePath '/full/path/to/Foo.cs', line '7', offset '3', visitCount '1'",
-        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '11', visitCount '0'",
-        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '12', visitCount '0'",
-        "OpenCover parser: add hits for fileId '5', filePath '/full/path/to/Foo.cs', line '13', visitCount '0'"
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '6', visitCount '1'.",
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '7', visitCount '1'.",
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '8', visitCount '1'.",
+        "OpenCover parser: add branch hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '7', offset '3', visitCount '0'.",
+        "OpenCover parser: add branch hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '7', offset '3', visitCount '1'.",
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '11', visitCount '0'.",
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '12', visitCount '0'.",
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '13', visitCount '0'."
       );
   }
 
@@ -305,7 +322,14 @@ public class OpenCoverReportParserTest {
     assertThat(coverage.files()).isEmpty();
     assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG))
-      .contains("OpenCover parser: Skipping branch hits for fileId '1', line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language.");
+      .hasSize(7)
+      // 6 logs below, the 7th is "The current user dir is ..."
+      .contains(
+        "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs'), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language.",
+        "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs'), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language.",
+        "Skipping the file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs'), line '5', visitCount '1' because file is not indexed or does not have the supported language.",
+        "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs'), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language.",
+        "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs'), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language.");
   }
 
   @Test
@@ -319,9 +343,13 @@ public class OpenCoverReportParserTest {
     assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs)
+      .hasSize(5)
+      // 4 logs below, the 5th is "The current user dir is ..."
       .contains(
-        "OpenCover parser: the fileId '3' key is not contained in files",
-        "OpenCover parser: the fileId '4' key is not contained in files");
+        "OpenCover parser (handleBranchPointTag): the fileId '3' key is not contained in files.",
+        "OpenCover parser (handleBranchPointTag): the fileId '4' key is not contained in files.",
+        "OpenCover parser (handleBranchPointTag): the fileId '3' key is not contained in files.",
+        "OpenCover parser (handleBranchPointTag): the fileId '3' key is not contained in files.");
   }
 
   @Test
@@ -371,7 +399,7 @@ public class OpenCoverReportParserTest {
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
     assertThat(debugLogs.get(1))
-      .startsWith("Skipping the fileId '1', line '16', visitCount '1' because file is not indexed or does not have the supported language.");
+      .startsWith("Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs'), line '16', visitCount '1' because file is not indexed or does not have the supported language.");
   }
 
   @Test
@@ -381,12 +409,12 @@ public class OpenCoverReportParserTest {
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
     assertThat(debugLogs.get(1)).startsWith("Skipping the import of OpenCover code coverage for the invalid file path: z:\\*\"?.cs at line 150");
     assertThat(debugLogs.stream().skip(2)).containsOnly(
-      "OpenCover parser: the fileId '1' key is not contained in files",
-      "OpenCover parser: the fileId '1' key is not contained in files",
-      "OpenCover parser: the fileId '1' key is not contained in files",
-      "OpenCover parser: the fileId '1' key is not contained in files",
-      "OpenCover parser: the fileId '1' key is not contained in files",
-      "OpenCover parser: the fileId '1' key is not contained in files"
+      "OpenCover parser (handleSequencePointTag): the fileId '1' key is not contained in files (entry for line '16', visitCount '1').",
+      "OpenCover parser (handleSequencePointTag): the fileId '1' key is not contained in files (entry for line '17', visitCount '1').",
+      "OpenCover parser (handleSequencePointTag): the fileId '1' key is not contained in files (entry for line '18', visitCount '1').",
+      "OpenCover parser (handleSequencePointTag): the fileId '1' key is not contained in files (entry for line '22', visitCount '1').",
+      "OpenCover parser (handleSequencePointTag): the fileId '1' key is not contained in files (entry for line '23', visitCount '1').",
+      "OpenCover parser (handleSequencePointTag): the fileId '1' key is not contained in files (entry for line '24', visitCount '1')."
     );
   }
 

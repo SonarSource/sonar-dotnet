@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import javax.annotation.Nullable;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -47,8 +48,8 @@ public class OpenCoverReportParser implements CoverageParser {
 
     private final File file;
     private final Coverage coverage;
-    // the key is the file ID, the value is the file path (which can be missing if the file is not found on disk)
-    private final Map<String, Optional<String>> files = new HashMap<>();
+    // the key is the file ID, the value is the CoveredFile
+    private final Map<String, CoveredFile> files = new HashMap<>();
     // the key is the file path
     private String fileRef;
 
@@ -98,14 +99,20 @@ public class OpenCoverReportParser implements CoverageParser {
         return;
       }
 
+      CoveredFile coveredFile;
       if (fileService.isSupportedAbsolute(canonicalPath)) {
-        files.put(uid, Optional.of(canonicalPath));
+        coveredFile = new CoveredFile(uid, pathInCoverageFile, canonicalPath);
       } else {
         // maybe it's a deterministic build file path
         Optional<String> optionalPath = fileService.getAbsolutePath(pathInCoverageFile);
-        files.put(uid, optionalPath);
-        optionalPath.ifPresent(path -> LOG.debug("Found indexed file '{}' for coverage entry '{}'.", path, pathInCoverageFile));
+        if (optionalPath.isPresent()) {
+          coveredFile = new CoveredFile(uid, pathInCoverageFile, optionalPath.get());
+          LOG.debug("Found indexed file '{}' for coverage entry '{}'.", coveredFile.supportedPath, coveredFile.originalPath);
+        } else {
+          coveredFile = new CoveredFile(uid, pathInCoverageFile, null);
+        }
       }
+      files.put(uid, coveredFile);
     }
 
     private void handleSequencePointTag(XmlParserHelper xmlParserHelper) {
@@ -120,20 +127,20 @@ public class OpenCoverReportParser implements CoverageParser {
       }
 
       if (files.containsKey(fileId)) {
-        Optional<String> optionalPath = files.get(fileId);
+        CoveredFile coveredFile = files.get(fileId);
 
-        if (optionalPath.isPresent()) {
-          String absoluteFilePath = optionalPath.get();
-          coverage.addHits(absoluteFilePath, line, visitCount);
+        if (coveredFile.isSupported()) {
+          coverage.addHits(coveredFile.supportedPath, line, visitCount);
 
-          LOG.trace("OpenCover parser: add hits for fileId '{}', filePath '{}', line '{}', visitCount '{}'",
-            fileId, absoluteFilePath, line, visitCount);
+          LOG.trace("OpenCover parser: add hits for file {}, line '{}', visitCount '{}'.",
+            coveredFile, line, visitCount);
         } else {
-          LOG.debug("Skipping the fileId '{}', line '{}', visitCount '{}' because file is not indexed or does not have the supported language.",
-            fileId, line, visitCount);
+          LOG.debug("Skipping the file {}, line '{}', visitCount '{}' because file is not indexed or does not have the supported language.",
+            coveredFile, line, visitCount);
         }
       } else {
-        LOG.debug("OpenCover parser: the fileId '{}' key is not contained in files", fileId);
+        LOG.debug("OpenCover parser (handleSequencePointTag): the fileId '{}' key is not contained in files (entry for line '{}', visitCount '{}').",
+          fileId, line, visitCount);
       }
     }
 
@@ -144,9 +151,11 @@ public class OpenCoverReportParser implements CoverageParser {
       }
 
       if (files.containsKey(fileId)) {
+        CoveredFile coveredFile = files.get(fileId);
+
         int line = xmlParserHelper.getIntAttributeOrZero("sl");
         if (line == 0){
-          LOG.warn("OpenCover parser: invalid start line for {}", fileId);
+          LOG.warn("OpenCover parser: invalid start line for file {}.", coveredFile);
           return;
         }
 
@@ -155,20 +164,54 @@ public class OpenCoverReportParser implements CoverageParser {
         int path = xmlParserHelper.getRequiredIntAttribute("path");
         int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
 
-        Optional<String> optionalPath = files.get(fileId);
-        if (optionalPath.isPresent()) {
-          coverage.add(new BranchPoint(optionalPath.get(), line, offset, offsetEnd, path, visitCount));
+        if (coveredFile.isSupported()) {
+          coverage.add(new BranchPoint(coveredFile.supportedPath, line, offset, offsetEnd, path, visitCount));
 
-          LOG.trace("OpenCover parser: add branch hits for fileId '{}', filePath '{}', line '{}', offset '{}', visitCount '{}'",
-            fileId, optionalPath.get(), line, offset, visitCount);
+          LOG.trace("OpenCover parser: add branch hits for file {}, line '{}', offset '{}', visitCount '{}'.",
+            coveredFile, line, offset, visitCount);
         } else {
-          LOG.debug("OpenCover parser: Skipping branch hits for fileId '{}', line '{}', offset '{}', visitCount '{}' because file" +
+          LOG.debug("OpenCover parser: Skipping branch hits for file {}, line '{}', offset '{}', visitCount '{}' because file" +
               " is not indexed or does not have the supported language.",
-            fileId, line, offset, visitCount);
+            coveredFile, line, offset, visitCount);
         }
       } else {
-        LOG.debug("OpenCover parser: the fileId '{}' key is not contained in files", fileId);
+        LOG.debug("OpenCover parser (handleBranchPointTag): the fileId '{}' key is not contained in files.", fileId);
       }
+    }
+  }
+
+  /**
+   * Represents a file mentioned in the OpenCover report list of files, which may or may not be supported by the FileService.
+   * @see FileService
+   */
+  private class CoveredFile
+  {
+    // the file ID from the OpenCover report
+    private String uid;
+    // the path from the coverage file
+    private String originalPath;
+    // the path which is supported by the FileService
+    private String supportedPath;
+
+    private CoveredFile(String uid, String originalPath, @Nullable String supportedPath) {
+      this.uid = uid;
+      this.originalPath = originalPath;
+      this.supportedPath = supportedPath;
+    }
+
+    /**
+     * @return True if the file is supported by the FileService (which wraps the Scanner API).
+     * @see FileService#isSupportedAbsolute
+     */
+    private boolean isSupported() {
+      return supportedPath != null;
+    }
+
+    @Override
+    public String toString() {
+      return supportedPath == null
+        ? String.format("(ID '%s', path '%s')", uid, originalPath)
+        : String.format("(ID '%s', path '%s', indexed as '%s')", uid, originalPath, supportedPath);
     }
   }
 }
