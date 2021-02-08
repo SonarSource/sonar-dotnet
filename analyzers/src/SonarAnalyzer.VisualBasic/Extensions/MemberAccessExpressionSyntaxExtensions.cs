@@ -18,24 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Extensions
 {
-    [TestClass]
-    public class InsecureTemporaryFilesCreationTest
+    internal static class MemberAccessExpressionSyntaxExtensions
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void InsecureTemporaryFilesCreation_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureTemporaryFilesCreation.cs", new CS.InsecureTemporaryFilesCreation());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void InsecureTemporaryFilesCreation_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.vb", new VB.InsecureTemporaryFilesCreation());
+        public static bool IsMemberAccessOnKnownType(this MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
+            memberAccess.NameIs(name)
+            && semanticModel.GetSymbolInfo(memberAccess).Symbol is {} symbol
+            && symbol.ContainingType.DerivesFrom(knownType);
     }
 }

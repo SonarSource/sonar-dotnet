@@ -5040,6 +5040,33 @@
   <data name="S5042_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
   </data>
+  <data name="S5445_Category" xml:space="preserve">
+    <value>Blocker Vulnerability</value>
+  </data>
+  <data name="S5445_Description" xml:space="preserve">
+    <value>Creating temporary files using insecure methods exposes the application to race conditions on filenames: a malicious user can try to create a file with a predictable name before the application does. A successful attack can result in other files being accessed, modified, corrupted or deleted. This risk is even higher if the application run with elevated permissions.</value>
+  </data>
+  <data name="S5445_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S5445_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S5445_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S5445_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S5445_Tags" xml:space="preserve">
+    <value>cwe,owasp-a9</value>
+  </data>
+  <data name="S5445_Title" xml:space="preserve">
+    <value>Insecure temporary file creation methods should not be used</value>
+  </data>
+  <data name="S5445_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S5542_Category" xml:space="preserve">
     <value>Blocker Vulnerability</value>
   </data>
