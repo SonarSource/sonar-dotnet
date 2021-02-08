@@ -50,8 +50,11 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new KnownType("Microsoft.AspNetCore.Mvc.Controller");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new KnownType("Microsoft.AspNetCore.Mvc.ControllerBase");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
+        internal static readonly KnownType Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute = new KnownType("Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
+        internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute = new KnownType("Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute");
+        internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new KnownType("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new KnownType("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
         internal static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new KnownType("Microsoft.Data.Sqlite.SqliteCommand");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new KnownType("Microsoft.EntityFrameworkCore.Migrations.Migration");
