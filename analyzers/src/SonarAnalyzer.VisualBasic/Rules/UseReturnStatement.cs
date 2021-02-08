@@ -61,18 +61,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
-                {
+            {
                 if (IsImplicitReturnValue(node))
-                    {
+                {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(),
                         IsAssignmentStatement(node)
                         ? UseReturnStatementMessage
                         : DontUseImplicitMessage));
-                    }
                 }
+            }
 
             public override void VisitImplementsClause(ImplementsClauseSyntax node) { /* Skip */ }
-            
+
+            public override void VisitAttributeList(AttributeListSyntax node) { /* Skip */ }
+
             private bool IsImplicitReturnValue(IdentifierNameSyntax node) =>
                 name.Equals(node.Identifier.ValueText, StringComparison.InvariantCultureIgnoreCase)
                 && !IsExcluded(node);
@@ -80,7 +82,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             private static bool IsExcluded(SyntaxNode node) =>
                 node.Parent is InvocationExpressionSyntax
                 || node.Parent is MemberAccessExpressionSyntax
-                || node.Parent is NamedFieldInitializerSyntax;
+                || node.Parent is NamedFieldInitializerSyntax
+                || (node.Parent is NameColonEqualsSyntax nameColon && nameColon.Name == node);
 
             private static bool IsAssignmentStatement(SyntaxNode node) =>
                 node.Parent is AssignmentStatementSyntax assignement
