@@ -51,10 +51,10 @@ Public Class ImplicitReturnStatementsAreNoncompliant
     End Function
 
     Private Function ArgumentName() As Integer
-        WithExplicitArgumentName(ArgumentName:=ArgumentName)    ' Noncompliant
+        WithExplicitArgumentName(Something:=ArgumentName)    ' Noncompliant
     End Function
 
-    Private Sub WithExplicitArgumentName(ArgumentName As Integer)
+    Private Sub WithExplicitArgumentName(Something As Integer)
     End Sub
 
 End Class
