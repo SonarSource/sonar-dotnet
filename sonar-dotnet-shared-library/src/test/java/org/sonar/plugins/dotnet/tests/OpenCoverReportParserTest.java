@@ -120,7 +120,7 @@ public class OpenCoverReportParserTest {
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
 
-    // FIXME the test case may be wrong
+    // FIXME the test case may be wrong https://github.com/SonarSource/sonar-dotnet/issues/4038
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(6);
     assertThat(logTester.logs(LoggerLevel.WARN).get(0))
       .startsWith("OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs', indexed as");
@@ -138,16 +138,10 @@ public class OpenCoverReportParserTest {
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the OpenCover report ");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
 
-    // FIXME the test case may be wrong
+    // FIXME the test case may be wrong https://github.com/SonarSource/sonar-dotnet/issues/4038
     assertThat(logTester.logs(LoggerLevel.WARN))
       .hasSize(6)
-      .contains(
-        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').",
-        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').",
-        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').",
-        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').",
-        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').",
-        "OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs').");
+      .contains("OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs', NO INDEXED PATH).");
   }
 
   @Test
@@ -181,12 +175,14 @@ public class OpenCoverReportParserTest {
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the OpenCover report ");
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
-    assertThat(debugLogs).hasSize(11);
-    assertThat(debugLogs.get(7))
-      .startsWith("Found indexed file '/test/file/Calc.cs' for coverage entry")
-      .endsWith("MyLibrary\\Adder.cs'.");
+    assertThat(debugLogs).hasSize(13);
+    assertThat(debugLogs).contains(
+      "CoveredFile created: (ID '3', path 'MyLibrary\\Adder.cs', indexed as '/test/file/Calc.cs').",
+      "CoveredFile created: (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH).",
+      "CoveredFile created: (ID '4', path 'MyLibrary\\Multiplier.cs', NO INDEXED PATH)."
+    );
 
-    // FIXME the test case may be wrong
+    // FIXME the test case may be wrong https://github.com/SonarSource/sonar-dotnet/issues/4038
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(6);
   }
 
@@ -217,9 +213,8 @@ public class OpenCoverReportParserTest {
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the OpenCover report ");
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs)
-      // it logs that it skips "Microsoft.NET.Test.Sdk.Program.cs" and "FooTests.cs", but we're not interested in those
-      .hasSize(5)
-      .contains("Found indexed file '/full/path/to/Foo.cs' for coverage entry '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'.");
+      .hasSize(7)
+      .contains("CoveredFile created: (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs').");
     assertThat(logTester.logs(LoggerLevel.TRACE))
       .hasSize(8)
       .containsExactlyInAnyOrder(
@@ -322,14 +317,17 @@ public class OpenCoverReportParserTest {
     assertThat(coverage.files()).isEmpty();
     assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG))
-      .hasSize(7)
-      // 6 logs below, the 7th is "The current user dir is ..."
+      .hasSize(9)
+      // 6 logs below
+      // The other logs contain system-dependants paths (e.g. "The current user dir is ...", "CoveredFile created: ...")
       .contains(
-        "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs'), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language.",
-        "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs'), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language.",
-        "Skipping the file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs'), line '5', visitCount '1' because file is not indexed or does not have the supported language.",
-        "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs'), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language.",
-        "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs'), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language.");
+        // these are not ordered
+        "Skipping the file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', visitCount '1' because file is not indexed or does not have the supported language.",
+        "Skipping the file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', visitCount '1' because file is not indexed or does not have the supported language.",
+        "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language.",
+        "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language.",
+        "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language.",
+        "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language.");
   }
 
   @Test
@@ -343,8 +341,9 @@ public class OpenCoverReportParserTest {
     assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs)
-      .hasSize(5)
-      // 4 logs below, the 5th is "The current user dir is ..."
+      .hasSize(7)
+      // 4 logs below
+      // The other logs contain system-dependants paths (e.g. "The current user dir is ...", "CoveredFile created: ...")
       .contains(
         "OpenCover parser (handleBranchPointTag): the fileId '3' key is not contained in files.",
         "OpenCover parser (handleBranchPointTag): the fileId '4' key is not contained in files.",
@@ -398,8 +397,13 @@ public class OpenCoverReportParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
-    assertThat(debugLogs.get(1))
-      .startsWith("Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs'), line '16', visitCount '1' because file is not indexed or does not have the supported language.");
+    assertThat(debugLogs.stream().skip(1))
+      .containsExactlyInAnyOrder(
+        "CoveredFile created: (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH).",
+        "Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH), line '16', visitCount '1' because file is not indexed or does not have the supported language.",
+        "Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH), line '17', visitCount '1' because file is not indexed or does not have the supported language.",
+        "Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH), line '18', visitCount '1' because file is not indexed or does not have the supported language."
+      );
   }
 
   @Test
@@ -408,7 +412,10 @@ public class OpenCoverReportParserTest {
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
     assertThat(debugLogs.get(1)).startsWith("Skipping the import of OpenCover code coverage for the invalid file path: z:\\*\"?.cs at line 150");
-    assertThat(debugLogs.stream().skip(2)).containsOnly(
+    assertThat(debugLogs.get(1)).startsWith("Skipping the import of OpenCover code coverage for the invalid file path: z:\\*\"?.cs at line 150");
+    assertThat(debugLogs.get(8)).startsWith("CoveredFile created: (ID '3', path 'MyLibrary\\Adder.cs', indexed as");
+    assertThat(debugLogs.get(9)).startsWith("CoveredFile created: (ID '4', path 'MyLibrary\\Multiplier.cs', indexed as");
+    assertThat(debugLogs).contains(
       "OpenCover parser (handleSequencePointTag): the fileId '1' key is not contained in files (entry for line '16', visitCount '1').",
       "OpenCover parser (handleSequencePointTag): the fileId '1' key is not contained in files (entry for line '17', visitCount '1').",
       "OpenCover parser (handleSequencePointTag): the fileId '1' key is not contained in files (entry for line '18', visitCount '1').",

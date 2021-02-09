@@ -212,7 +212,7 @@ public class OpenCoverReportParser implements CoverageParser {
     @Override
     public String toString() {
       return indexedPath == null
-        ? String.format("(ID '%s', path '%s')", uid, originalPath)
+        ? String.format("(ID '%s', path '%s', NO INDEXED PATH)", uid, originalPath)
         : String.format("(ID '%s', path '%s', indexed as '%s')", uid, originalPath, indexedPath);
     }
   }
