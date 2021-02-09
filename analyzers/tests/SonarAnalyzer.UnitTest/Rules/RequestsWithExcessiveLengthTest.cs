@@ -20,9 +20,11 @@
 
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +35,31 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RequestsWithExcessiveLength_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\RequestsWithExcessiveLength.cs",
-                new CS.RequestsWithExcessiveLength(),
+                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion)));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RequestsWithExcessiveLength_CS_CustomValues() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RequestsWithExcessiveLength_CustomValues.cs",
+                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 22, StandardSizeLimit = 15 },
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion)));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RequestsWithExcessiveLength_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RequestsWithExcessiveLength.vb",
+                new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
+                NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion)));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RequestsWithExcessiveLength_VB_CustomValues() =>
+            Verifier.VerifyAnalyzer(@"TestCases\RequestsWithExcessiveLength_CustomValues.vb",
+                new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 22, StandardSizeLimit = 15 },
                 NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion)));
     }

@@ -20,40 +20,41 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class RequestsWithExcessiveLength : RequestsWithExcessiveLengthBase<SyntaxKind, AttributeSyntax>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         public RequestsWithExcessiveLength() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration) { }
+        public RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration) { }
 
         protected override bool IsInvalidRequestFormLimitsAttribut(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, semanticModel)
             && attribute.ArgumentList != null
             && attribute.ArgumentList.Arguments.FirstOrDefault(arg => FilterArgumentsOfInterest(arg)) is { } firstArgument
-            && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.Expression, out var intValue)
+            && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.GetExpression(), out var intValue)
             && intValue > FileUploadSizeLimit;
 
         protected override bool IsInvalidRequestSizeLimitAttribute(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute, semanticModel)
             && attribute.ArgumentList != null
-            && attribute.ArgumentList.Arguments.First() is { } firstArgument
-            && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.Expression, out var intValue)
+            && attribute.ArgumentList.Arguments.FirstOrDefault() is { } firstArgument
+            && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.GetExpression(), out var intValue)
             && intValue > StandardSizeLimit;
 
-        private static bool FilterArgumentsOfInterest(AttributeArgumentSyntax argument) =>
-            argument.NameEquals is { } nameEquals
-            && nameEquals.Name.Identifier.ValueText.Equals(MultipartBodyLengthLimit);
+        private static bool FilterArgumentsOfInterest(ArgumentSyntax argument) =>
+            argument is SimpleArgumentSyntax simpleArgument
+            && simpleArgument.NameColonEquals is { } nameColonEquals
+            && nameColonEquals.Name.Identifier.ValueText.Equals(MultipartBodyLengthLimit, System.StringComparison.OrdinalIgnoreCase);
     }
 }
