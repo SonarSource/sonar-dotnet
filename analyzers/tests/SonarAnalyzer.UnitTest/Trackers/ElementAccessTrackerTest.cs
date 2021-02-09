@@ -148,8 +148,8 @@ End Class";
         private static ElementAccessContext CreateContext<TSyntaxNodeType>(string testInput, int skip, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
         {
             var testCode = new SnippetCompiler(testInput, true, language);
-            var invocation = testCode.GetNodes<TSyntaxNodeType>().Skip(skip).First();
-            var context = new ElementAccessContext(invocation, testCode.SemanticModel);
+            var node = testCode.GetNodes<TSyntaxNodeType>().Skip(skip).First();
+            var context = new ElementAccessContext(testCode.CreateAnalysisContext(node));
             return context;
         }
     }

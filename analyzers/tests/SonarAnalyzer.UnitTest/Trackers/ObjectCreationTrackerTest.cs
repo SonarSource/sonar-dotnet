@@ -127,11 +127,40 @@ public class Base : Exception, IDisposable
             tracker.MatchConstructor(KnownType.System_Boolean)(context).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void AndCondition()
+        {
+            var tracker = new CSharpObjectCreationTracker();
+            CSharpObjectCreationTracker.Condition trueCondition = x => true;
+            CSharpObjectCreationTracker.Condition falseCondition = x => false;
+
+            tracker.And(trueCondition, trueCondition)(null).Should().BeTrue();
+            tracker.And(trueCondition, falseCondition)(null).Should().BeFalse();
+            tracker.And(falseCondition, trueCondition)(null).Should().BeFalse();
+            tracker.And(falseCondition, falseCondition)(null).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void OrCondition()
+        {
+            var tracker = new CSharpObjectCreationTracker();
+            CSharpObjectCreationTracker.Condition trueCondition = x => true;
+            CSharpObjectCreationTracker.Condition falseCondition = x => false;
+
+            tracker.Or(trueCondition, trueCondition)(null).Should().BeTrue();
+            tracker.Or(trueCondition, falseCondition)(null).Should().BeTrue();
+            tracker.Or(falseCondition, trueCondition)(null).Should().BeTrue();
+            tracker.Or(falseCondition, falseCondition)(null).Should().BeFalse();
+
+            tracker.Or(falseCondition, falseCondition, trueCondition)(null).Should().BeTrue();
+            tracker.Or(falseCondition, falseCondition, falseCondition)(null).Should().BeFalse();
+        }
+
         private static ObjectCreationContext CreateContext<TSyntaxNodeType>(string testInput, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
         {
             var testCode = new SnippetCompiler(testInput, true, language);
-            var objectCreationSyntaxNode = testCode.GetNodes<TSyntaxNodeType>().First();
-            var context = new ObjectCreationContext(objectCreationSyntaxNode, testCode.SemanticModel);
+            var node = testCode.GetNodes<TSyntaxNodeType>().First();
+            var context = new ObjectCreationContext(testCode.CreateAnalysisContext(node));
             return context;
         }
     }

@@ -74,11 +74,40 @@ End Class";
             tracker.MatchSetter()(context).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void AndCondition()
+        {
+            var tracker = new CSharpPropertyAccessTracker();
+            CSharpPropertyAccessTracker.Condition trueCondition = x => true;
+            CSharpPropertyAccessTracker.Condition falseCondition = x => false;
+
+            tracker.And(trueCondition, trueCondition)(null).Should().BeTrue();
+            tracker.And(trueCondition, falseCondition)(null).Should().BeFalse();
+            tracker.And(falseCondition, trueCondition)(null).Should().BeFalse();
+            tracker.And(falseCondition, falseCondition)(null).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void OrCondition()
+        {
+            var tracker = new CSharpPropertyAccessTracker();
+            CSharpPropertyAccessTracker.Condition trueCondition = x => true;
+            CSharpPropertyAccessTracker.Condition falseCondition = x => false;
+
+            tracker.Or(trueCondition, trueCondition)(null).Should().BeTrue();
+            tracker.Or(trueCondition, falseCondition)(null).Should().BeTrue();
+            tracker.Or(falseCondition, trueCondition)(null).Should().BeTrue();
+            tracker.Or(falseCondition, falseCondition)(null).Should().BeFalse();
+
+            tracker.Or(falseCondition, falseCondition, trueCondition)(null).Should().BeTrue();
+            tracker.Or(falseCondition, falseCondition, falseCondition)(null).Should().BeFalse();
+        }
+
         private static PropertyAccessContext CreateContext<TSyntaxNodeType>(string testInput, string propertyName, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
         {
             var testCode = new SnippetCompiler(testInput, false, language);
-            var expression = testCode.GetNodes<TSyntaxNodeType>().First();
-            return new PropertyAccessContext(expression, propertyName, testCode.SemanticModel);
+            var node = testCode.GetNodes<TSyntaxNodeType>().First();
+            return new PropertyAccessContext(testCode.CreateAnalysisContext(node), propertyName);
         }
     }
 }

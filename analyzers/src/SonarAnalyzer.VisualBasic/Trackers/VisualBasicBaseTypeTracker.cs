@@ -37,10 +37,10 @@ namespace SonarAnalyzer.Helpers.Trackers
             // If a class both inherits and implements then this tracker will check
             // the conditions against Inherits and Implements *separately*
             // i.e. the conditions will be called twice
-            contextNode.RawKind switch
+            contextNode switch
             {
-                (int)SyntaxKind.InheritsStatement => ((InheritsStatementSyntax)contextNode).Types,
-                (int)SyntaxKind.ImplementsStatement => ((ImplementsStatementSyntax)contextNode).Types,
+                InheritsStatementSyntax inherits => inherits.Types,
+                ImplementsStatementSyntax implements => implements.Types,
                 _ => Enumerable.Empty<SyntaxNode>(),
             };
     }
