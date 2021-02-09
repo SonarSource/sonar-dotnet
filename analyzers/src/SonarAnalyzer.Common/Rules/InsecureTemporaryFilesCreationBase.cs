@@ -34,28 +34,26 @@ namespace SonarAnalyzer.Rules
         private const string VulnerableApiName = "GetTempFileName";
         private const string MessageFormat = "'Path.GetTempFileName()' is insecure. Use 'Path.GetRandomFileName()' instead.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        private readonly DiagnosticDescriptor rule;
 
-        private DiagnosticDescriptor Rule { get; }
-
-        protected InsecureTemporaryFilesCreationBase(ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
-
-        protected abstract TSyntaxKind SyntaxKind { get; }
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         internal abstract bool IsMemberAccessOnKnownType(TMemberAccessSyntax memberAccess, string name, KnownType knownType, SemanticModel model);
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected InsecureTemporaryFilesCreationBase(ResourceManager rspecResources) =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer, Visit, SyntaxKind);
+            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, Visit, Language.SyntaxKind.SimpleMemberAccessExpression);
 
         private void Visit(SyntaxNodeAnalysisContext context)
         {
             var memberAccess = (TMemberAccessSyntax)context.Node;
             if (IsMemberAccessOnKnownType(memberAccess, VulnerableApiName, KnownType.System_IO_Path, context.SemanticModel))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, memberAccess.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.GetLocation()));
             }
         }
     }

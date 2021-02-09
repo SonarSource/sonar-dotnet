@@ -32,11 +32,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class InsecureTemporaryFilesCreation : InsecureTemporaryFilesCreationBase<MemberAccessExpressionSyntax, SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
+
         public InsecureTemporaryFilesCreation() : base(RspecStrings.ResourceManager) { }
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
-
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.SimpleMemberAccessExpression;
 
         internal override bool IsMemberAccessOnKnownType(MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel model) =>
             memberAccess.IsMemberAccessOnKnownType(name, knownType, model);
