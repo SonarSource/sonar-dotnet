@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '10000000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\NetCore31\Controllers\S5693Controller.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  27,
+"endLine":  15,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1623' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\NetCore31\Controllers\S5693Controller.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8000001' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\NetCore31\Controllers\S5693Controller.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  55,
+"endLine":  29,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\NetCore31\Controllers\S5693Controller.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  96,
+"endLine":  29,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '55' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\NetCore31\Controllers\S5693Controller.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  58,
+"endLine":  36,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\NetCore31\Controllers\S5693Controller.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  55,
+"endLine":  49,
+"endColumn":  57
+}
+}
+}
+]
+}
