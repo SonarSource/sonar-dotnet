@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Instructions to generate this file (&#45;&#45; is two dashes):
+
+```
+dotnet build &#45;&#45;no-incremental -p:DeterministicSourcePaths=true
+
+dotnet test &#45;&#45;no-restore &#45;&#45;no-build -c Debug &#45;&#45;logger trx &#45;&#45;results-directory TestResults &#45;&#45;collect:"Code Coverage"
+
+CodeCoverage.exe analyze /output:filename.coveragexml <FILENAME_FROM_CONSOLE_OUTPUT>.coverage
+
+```
+
+Then manually change
+
+"/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs"
+
+to
+
+"/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs"
+
+because the folder `CoverageWithDeterministicSourcePaths` is copied to a temp folder by the integration test
+-->
 <results>
   <modules>
-    <module name="coveragewithdeterministicsourcepaths.tests.dll" path="coveragewithdeterministicsourcepaths.tests.dll" id="323A4A5218B417449EC6A3D6F87D1B2A01000000" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+    <module name="coveragewithdeterministicsourcepaths.dll" path="coveragewithdeterministicsourcepaths.dll" id="3097CB5792E8C146938B1C8C27D18DC001000000" block_coverage="60.00" line_coverage="33.33" blocks_covered="3" blocks_not_covered="2" lines_covered="2" lines_partially_covered="1" lines_not_covered="3">
       <functions>
-        <function id="8284" token="0x6000003" name="TestMethod1()" namespace="Repro3362.Tests" type_name="UnitTest1" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
-          <ranges>
-            <range source_id="0" covered="yes" start_line="9" start_column="38" end_line="9" end_column="57" />
-          </ranges>
-        </function>
-      </functions>
-      <source_files>
-        <source_file id="0" path="C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\FooTests.cs" checksum_type="unknown">
-        </source_file>
-      </source_files>
-    </module>
-    <module name="coveragewithdeterministicsourcepaths.dll" path="coveragewithdeterministicsourcepaths.dll" id="56A4C88902D07047AB06B82DBC63818001000000" block_coverage="50.00" line_coverage="50.00" blocks_covered="1" blocks_not_covered="1" lines_covered="3" lines_partially_covered="0" lines_not_covered="3">
-      <functions>
-        <function id="8272" token="0x6000001" name="Covered()" namespace="Repro3362" type_name="Foo" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+        <function id="8272" token="0x6000001" name="Covered(bool)" namespace="Repro3362" type_name="Foo" block_coverage="75.00" line_coverage="66.67" blocks_covered="3" blocks_not_covered="1" lines_covered="2" lines_partially_covered="1" lines_not_covered="0">
           <ranges>
             <range source_id="0" covered="yes" start_line="6" start_column="9" end_line="6" end_column="10" />
-            <range source_id="0" covered="yes" start_line="7" start_column="13" end_line="7" end_column="27" />
+            <range source_id="0" covered="partial" start_line="7" start_column="13" end_line="7" end_column="41" />
             <range source_id="0" covered="yes" start_line="8" start_column="9" end_line="8" end_column="10" />
           </ranges>
         </function>
-        <function id="8288" token="0x6000002" name="NotCovered()" namespace="Repro3362" type_name="Foo" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+        <function id="8296" token="0x6000002" name="NotCovered()" namespace="Repro3362" type_name="Foo" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
           <ranges>
             <range source_id="0" covered="no" start_line="11" start_column="9" end_line="11" end_column="10" />
             <range source_id="0" covered="no" start_line="12" start_column="13" end_line="12" end_column="27" />
@@ -33,6 +42,19 @@
       </functions>
       <source_files>
         <source_file id="0" path="/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs" checksum_type="unknown">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="coveragewithdeterministicsourcepaths.tests.dll" path="coveragewithdeterministicsourcepaths.tests.dll" id="98419F48BF2F084BAFF0911C80B367BE01000000" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+      <functions>
+        <function id="8284" token="0x6000003" name="TestMethod1()" namespace="Repro3362.Tests" type_name="UnitTest1" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="9" start_column="38" end_line="9" end_column="61" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\FooTests.cs" checksum_type="unknown">
         </source_file>
       </source_files>
     </module>

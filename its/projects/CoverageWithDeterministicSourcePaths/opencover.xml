@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Instructions to generate this file (&#45;&#45; is two dashes):
+
+```
+dotnet build &#45;&#45;no-incremental -p:DeterministicSourcePaths=true
+
+OpenCover.Console.exe -output:"opencover.xml" -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" -targetargs:".\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\CoverageWithDeterministicSourcePaths.Tests.dll"
+
+```
+
+Then manually change
+
+"/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs"
+
+to
+
+"/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs"
+
+because the folder `CoverageWithDeterministicSourcePaths` is copied to a temp folder by the integration test
+-->
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.7.922.0">
+  <Summary numSequencePoints="9" visitedSequencePoints="4" numBranchPoints="6" visitedBranchPoints="3" sequenceCoverage="44.44" branchCoverage="50" maxCyclomaticComplexity="3" minCyclomaticComplexity="1" maxCrapScore="3" minCrapScore="1" visitedClasses="2" numClasses="3" visitedMethods="2" numMethods="4" />
+  <Modules>
+    <Module skippedDueTo="Filter" hash="F3-64-DC-46-34-AF-1B-66-21-41-5B-A7-BF-4F-BE-44-01-AA-E1-02">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll</ModulePath>
+      <ModuleTime>2020-10-08T02:21:34Z</ModuleTime>
+      <ModuleName>mscorlib</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="FB-8F-E7-1E-29-CE-90-CC-33-64-67-97-1D-E1-5C-B1-E1-01-18-02">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe</ModulePath>
+      <ModuleTime>2020-11-17T10:47:39.193591Z</ModuleTime>
+      <ModuleName>vstest.console</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="7D-C0-97-9A-55-B3-80-CA-C8-9A-3F-A5-EF-F2-93-47-3E-27-60-B1">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\vstest.console.exe</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.5114087Z</ModuleTime>
+      <ModuleName>vstest.console</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="52-CC-F7-33-8E-41-4B-53-F1-72-24-D5-2B-96-CF-A7-A7-C3-7A-67">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.TestPlatform.CoreUtilities.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.8973952Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.CoreUtilities</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="3E-65-A2-05-7C-67-F0-C6-A0-B8-F5-C9-09-73-B6-EC-86-B4-9C-58">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</ModulePath>
+      <ModuleTime>2020-10-08T02:21:33.8194762Z</ModuleTime>
+      <ModuleName>System</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="8C-C8-EA-43-CE-0F-45-32-02-BD-3A-E4-A7-2B-10-F9-70-64-53-FC">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.033428Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.ObjectModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="A6-69-79-9C-27-00-1C-D2-CD-19-92-B2-6D-40-17-61-89-96-E0-EF">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.VisualStudio.TestPlatform.Client.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.027426Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Client</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="F2-DC-FD-6A-79-3A-33-F3-A9-FC-22-58-B1-17-BD-0B-29-FB-3A-01">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.VisualStudio.TestPlatform.Common.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.0303945Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Common</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="C4-53-EB-F9-35-A0-AF-38-1A-FD-BD-6C-BD-AE-58-59-00-33-FF-F4">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</ModulePath>
+      <ModuleTime>2020-10-08T02:21:33.8038507Z</ModuleTime>
+      <ModuleName>System.Core</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="74-FE-A2-EF-DF-FA-23-A2-44-5D-55-4B-D7-FB-D6-3F-B9-AE-BA-1A">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.TestPlatform.PlatformAbstractions.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.9024279Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.PlatformAbstractions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="DA-72-DA-8C-56-D2-30-3A-A5-9C-B3-A9-A9-6F-D8-2F-60-43-B5-A9">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:37.7737543Z</ModuleTime>
+      <ModuleName>System.Xml</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="E8-D1-D2-D4-CF-9A-37-0B-09-BA-55-31-2E-19-2F-9F-5B-6C-21-94">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.TestPlatform.Utilities.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.9033968Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.Utilities</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="80-91-72-00-BE-FA-61-CA-EB-48-F5-FE-C2-FA-FE-90-6B-0E-F5-E8">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\NuGet.Frameworks.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.0910388Z</ModuleTime>
+      <ModuleName>NuGet.Frameworks</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="C8-2E-64-82-9F-3E-E5-68-28-EC-A3-5B-05-18-0A-CC-70-C1-0D-04">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</ModulePath>
+      <ModuleTime>2020-06-05T05:04:05.335002Z</ModuleTime>
+      <ModuleName>System.Configuration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="21-A3-50-7A-BB-F9-3B-97-D0-86-7E-29-16-61-36-5D-B1-E9-BA-8A">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.Extensions.FileSystemGlobbing.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.8673952Z</ModuleTime>
+      <ModuleName>Microsoft.Extensions.FileSystemGlobbing</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="78-16-77-DF-3D-BF-26-C2-86-30-EA-0D-A4-C2-6F-54-F6-9C-F8-10">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.TestPlatform.CrossPlatEngine.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.9004304Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.CrossPlatEngine</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="DF-71-F0-70-F2-DE-3E-2E-A3-6B-62-4F-25-08-FB-61-E8-A4-52-04">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.Cci.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.8498759Z</ModuleTime>
+      <ModuleName>Microsoft.Cci</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="69-5D-5D-9B-F7-23-8F-39-AB-08-BC-FE-2D-BB-F7-A6-09-5F-62-AF">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Runtime.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:34.4923358Z</ModuleTime>
+      <ModuleName>System.Runtime</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="1A-C0-32-0E-C5-53-1C-78-D4-5F-19-7F-02-40-91-22-61-53-E5-46">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.InteropServices\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Runtime.InteropServices.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:35.9300981Z</ModuleTime>
+      <ModuleName>System.Runtime.InteropServices</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="72-01-26-F0-DD-DC-BB-57-6E-36-5A-54-E1-F4-B8-CA-68-01-1D-73">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Collections\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Collections.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:34.5705678Z</ModuleTime>
+      <ModuleName>System.Collections</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="D9-7F-13-49-07-59-EF-B3-60-B1-A4-A8-8F-3E-90-92-59-6D-0D-47">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.TestPlatform.Extensions.BlameDataCollector.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6073957Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.Extensions.BlameDataCollector</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="59-5E-C2-EB-1C-5C-46-B2-F5-40-95-38-E0-0A-CC-6B-56-56-2E-A2">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.TestPlatform.Extensions.EventLogCollector.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6083968Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.Extensions.EventLogCollector</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="53-A7-EC-47-09-5F-20-DE-57-12-35-77-FD-9A-5E-51-5C-21-03-2A">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.TestPlatform.TestHostRuntimeProvider.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6103967Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.TestHostRuntimeProvider</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="8E-33-48-17-CA-F5-F5-F1-5F-20-3B-27-A8-F2-1C-A1-C1-E6-46-C6">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.VisualStudio.ArchitectureTools.PEReader.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.916394Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.ArchitectureTools.PEReader</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="DF-F5-25-6D-B9-3D-D0-DE-5D-80-ED-16-5B-C2-96-6F-C0-F0-03-3C">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.VisualStudio.Coverage.Interop.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.9273974Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.Coverage.Interop</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="C5-CF-3A-D2-3D-A1-D5-3C-41-45-57-5A-E2-D5-F8-B5-AB-22-6A-B8">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.Fakes.DataCollector.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.8518768Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.Fakes.DataCollector</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="71-9B-E1-F7-A6-9B-DF-45-0F-84-65-68-DE-9E-87-26-B2-3F-51-B1">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\netstandard\v4.0_2.0.0.0__cc7b13ffcd2ddd51\netstandard.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:37.6330785Z</ModuleTime>
+      <ModuleName>netstandard</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="1D-F5-D4-F7-A1-88-8F-1F-34-91-89-1B-C7-1E-30-B4-3E-1A-1E-E3">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.CodedWebTestAdapter.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6303965Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.CodedWebTestAdapter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="18-BD-0B-F5-16-68-1D-75-D4-B9-DD-92-EB-78-F4-91-3F-D9-75-C2">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.TmiAdapter.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6353959Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.TmiAdapter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="98-04-50-2E-45-23-1B-1F-A5-63-92-C2-5F-33-24-7A-C2-6A-E2-67">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.VisualStudio.QualityTools.Common.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.951425Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.QualityTools.Common</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="46-68-37-B3-49-49-46-CB-16-67-11-1A-3C-64-C9-64-6B-AF-72-CB">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.GenericTestAdapter.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6313962Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.GenericTestAdapter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="C0-26-82-AB-9B-D2-3B-29-B2-70-DE-B1-73-77-EA-B6-E8-A7-6B-C7">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.Html.TestLogger.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6333955Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.Html.TestLogger</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="16-F3-60-52-6F-63-81-46-4C-34-CC-8B-5D-1E-38-AD-55-FB-9B-37">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.OrderedTestAdapter.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6343964Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.OrderedTestAdapter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="EC-4A-96-01-44-D5-48-7A-06-AB-DA-39-D9-26-19-E4-C0-E3-E2-2F">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.Trx.TestLogger.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6383953Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.Trx.TestLogger</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="DB-3F-9F-AF-81-65-85-1F-9D-84-D2-5A-A4-21-E0-CF-CB-EE-9E-1A">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.VSTestIntegration.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6423952Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.VSTestIntegration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="57-0B-96-56-D9-D4-E4-AB-25-A8-DE-40-36-A4-9D-EC-B5-20-E5-3F">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.0184256Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.QualityTools.UnitTestFramework</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="72-A3-7E-C1-C3-DF-5F-24-DB-60-00-05-87-2A-9E-28-53-99-BA-4B">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll</ModulePath>
+      <ModuleTime>2020-09-04T22:37:08Z</ModuleTime>
+      <ModuleName>System.Data</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="5A-1E-CD-C4-DB-0C-DF-EB-C6-1E-68-93-B1-EA-8E-44-F5-88-B9-0C">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.WebTestAdapter.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6443954Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.WebTestAdapter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="21-65-12-66-26-34-CD-C5-91-D8-7D-87-EC-CF-4D-50-25-E0-F5-1A">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestTools.CppUnitTestFramework.ComInterfaces.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6463971Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestTools.CppUnitTestFramework.ComInterfaces</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="64-FA-DF-19-78-2D-5B-8F-26-20-07-25-2D-6D-03-30-B0-B2-DF-15">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestTools.CppUnitTestFramework.CppUnitTestExtension.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6483974Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestTools.CppUnitTestFramework.CppUnitTestExtension</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="C8-9D-8B-1D-6F-7E-BA-56-4C-20-91-48-AE-3D-41-D5-94-69-F6-66">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestTools.DataCollection.MediaRecorder.Model.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6493957Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestTools.DataCollection.MediaRecorder.Model</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="A1-EF-14-6A-23-6F-9A-13-7C-62-4A-AD-FA-AE-E7-D0-C7-88-52-37">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TestTools.DataCollection.VideoRecorderCollector.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6513959Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestTools.DataCollection.VideoRecorderCollector</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="28-68-70-3E-A1-6D-4E-78-E4-37-57-6B-7D-57-AC-48-D8-3C-BB-49">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Extensions\Microsoft.VisualStudio.TraceDataCollector.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.6543963Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TraceDataCollector</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="B8-3D-83-4A-96-9F-F0-2F-F0-36-70-70-B9-EC-A6-CE-86-0E-15-36">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.IntelliTrace.Core.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.892428Z</ModuleTime>
+      <ModuleName>Microsoft.IntelliTrace.Core</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="F1-D3-C4-19-F0-A3-97-CA-EE-78-EA-BA-5F-97-56-C8-6D-7F-01-45">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\System.Reflection.Metadata.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.16107Z</ModuleTime>
+      <ModuleName>System.Reflection.Metadata</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="8E-25-51-80-B6-FC-23-97-DE-18-0B-AA-0D-F2-A4-AD-97-C1-6A-8D">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.IO\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.IO.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:34.5552678Z</ModuleTime>
+      <ModuleName>System.IO</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="FB-BF-29-CE-7B-65-70-2C-55-E7-9A-03-D5-24-9F-04-A1-39-0C-A6">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\System.Collections.Immutable.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.1530675Z</ModuleTime>
+      <ModuleName>System.Collections.Immutable</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="A9-B8-38-52-F8-47-F1-F7-B1-42-BD-5D-0D-13-50-FA-8A-F5-08-DC">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Reflection\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Reflection.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:36.0237545Z</ModuleTime>
+      <ModuleName>System.Reflection</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="29-E2-55-07-C8-69-DD-86-D5-1E-15-EB-9A-30-ED-35-C2-B9-03-56">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.IO.FileSystem\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.IO.FileSystem.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:36.0095245Z</ModuleTime>
+      <ModuleName>System.IO.FileSystem</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="A5-4A-8D-3E-92-F3-E6-8A-37-31-3B-55-FF-F9-42-71-EA-75-C1-69">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.IO.MemoryMappedFiles\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.IO.MemoryMappedFiles.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:34.5552678Z</ModuleTime>
+      <ModuleName>System.IO.MemoryMappedFiles</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="43-A6-0D-38-57-A9-43-74-96-CC-94-35-A8-4D-BE-B5-A6-1E-21-29">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Handles\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Runtime.Handles.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:37.6643716Z</ModuleTime>
+      <ModuleName>System.Runtime.Handles</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="0D-4A-54-7F-D3-8D-3F-CB-0E-41-6D-19-BA-DE-3E-8E-24-AC-CF-F5">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Reflection.Extensions\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Reflection.Extensions.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:37.7113237Z</ModuleTime>
+      <ModuleName>System.Reflection.Extensions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="C6-18-EC-70-A3-C4-0D-6D-5D-3C-70-6D-21-0F-07-83-E2-12-E9-30">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Threading\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Threading.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:34.5860246Z</ModuleTime>
+      <ModuleName>System.Threading</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="3B-54-9E-DF-F9-FC-C4-94-AC-51-5D-4C-31-68-2A-24-99-9B-3C-FA">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Text.Encoding\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Text.Encoding.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:36.0705812Z</ModuleTime>
+      <ModuleName>System.Text.Encoding</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="E6-96-E0-ED-94-95-52-F4-BC-21-B7-D5-9B-3E-92-E7-68-62-3B-E3">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Extensions\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Runtime.Extensions.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:37.6174386Z</ModuleTime>
+      <ModuleName>System.Runtime.Extensions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="A9-B5-99-95-3D-BC-63-C8-0C-36-BC-93-7E-F1-FA-63-10-36-B9-50">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Text.Encoding.Extensions\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Text.Encoding.Extensions.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:36.1495949Z</ModuleTime>
+      <ModuleName>System.Text.Encoding.Extensions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="6C-B4-E1-9B-E1-27-BD-26-63-B8-F0-70-A6-93-6A-40-DA-B3-BD-47">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.VisualStudio.TestPlatform.Fakes.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.8528765Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Fakes</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="BB-CA-02-A4-89-49-32-0E-55-F9-C0-78-EB-63-AF-47-66-20-1E-15">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.TestPlatform.CommunicationUtilities.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.8964311Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.CommunicationUtilities</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="B5-1B-96-FC-E9-14-AA-DD-50-9B-EE-C3-63-9E-D8-B5-80-68-BF-6A">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Newtonsoft.Json.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:41.0870368Z</ModuleTime>
+      <ModuleName>Newtonsoft.Json</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="06-F9-8E-1A-FC-D4-91-9C-D0-32-40-16-3E-61-65-7F-A6-8C-FD-30">
+      <ModulePath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\TestPlatform\Microsoft.Extensions.DependencyModel.dll</ModulePath>
+      <ModuleTime>2020-11-17T10:47:40.8664344Z</ModuleTime>
+      <ModuleName>Microsoft.Extensions.DependencyModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="43-F3-56-07-A4-36-04-65-02-B8-6E-DA-43-D8-74-19-B9-44-30-E1">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Numerics\v4.0_4.0.0.0__b77a5c561934e089\System.Numerics.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:37.6330785Z</ModuleTime>
+      <ModuleName>System.Numerics</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="B7-88-55-91-79-CC-62-E3-1E-DF-7A-2C-74-35-F8-CD-B4-30-E7-EC">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.InteropServices.RuntimeInformation\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Runtime.InteropServices.RuntimeInformation.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:36.0558875Z</ModuleTime>
+      <ModuleName>System.Runtime.InteropServices.RuntimeInformation</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="E8-17-58-53-B3-AF-2B-F3-C5-CD-B0-72-6C-F3-BC-1F-B5-B7-47-A8">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Private.CoreLib.dll</ModulePath>
+      <ModuleTime>2020-09-22T21:29:36Z</ModuleTime>
+      <ModuleName>System.Private.CoreLib</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="84-19-AD-81-8F-07-C4-DA-0C-76-0C-0D-B2-E6-1B-C2-C9-72-6B-2C">
+      <ModulePath>C:\Users\Andrei\.nuget\packages\microsoft.testplatform.testhost\16.5.0\build\netcoreapp2.1\x64\testhost.dll</ModulePath>
+      <ModuleTime>2020-02-04T19:55:24Z</ModuleTime>
+      <ModuleName>testhost</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="C5-0B-07-EF-7A-61-7A-99-30-F2-63-71-AA-42-E0-CC-91-BB-FC-07">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Runtime.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:56Z</ModuleTime>
+      <ModuleName>System.Runtime</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="72-CD-4C-29-1F-8A-A2-EE-EE-49-B7-39-D7-D2-59-25-D4-15-8A-47">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CoreUtilities.dll</ModulePath>
+      <ModuleTime>2020-02-04T19:55:22Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.CoreUtilities</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="84-48-B0-1C-CC-25-05-23-54-96-F5-FC-02-3F-3B-20-BA-FB-39-0D">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\netstandard.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:52Z</ModuleTime>
+      <ModuleName>netstandard</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="5A-FB-C0-18-35-0F-BF-33-E9-09-93-73-65-6C-AA-BA-FB-28-5E-B0">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Diagnostics.Tracing.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:00Z</ModuleTime>
+      <ModuleName>System.Diagnostics.Tracing</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="03-17-2D-A2-47-E8-DA-D5-28-CB-74-74-E2-56-70-6A-C0-5A-AB-58">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.PlatformAbstractions.dll</ModulePath>
+      <ModuleTime>2020-02-04T19:55:22Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.PlatformAbstractions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="E4-CC-CF-B9-3C-B6-1F-E5-6D-4C-FD-DD-44-FD-E5-AC-BF-9C-A6-49">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Runtime.Extensions.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:56Z</ModuleTime>
+      <ModuleName>System.Runtime.Extensions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="B4-0F-D9-E5-08-79-7C-FE-AF-CB-3A-0F-6B-D3-0B-27-98-A7-6A-3B">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Diagnostics.Debug.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:58Z</ModuleTime>
+      <ModuleName>System.Diagnostics.Debug</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="75-5C-A3-B3-4C-5B-DF-41-91-A2-A8-84-EB-65-A9-75-67-6F-00-2F">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Collections.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:54Z</ModuleTime>
+      <ModuleName>System.Collections</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="C3-FB-C2-9E-95-BB-9F-EC-54-E9-D6-2E-96-6F-43-6E-95-D3-F0-A1">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CrossPlatEngine.dll</ModulePath>
+      <ModuleTime>2020-02-04T19:55:24Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.CrossPlatEngine</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="7E-1F-2A-CD-BD-DB-46-49-18-E0-16-C3-50-2A-47-26-74-E0-FA-63">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CommunicationUtilities.dll</ModulePath>
+      <ModuleTime>2020-02-04T19:55:24Z</ModuleTime>
+      <ModuleName>Microsoft.TestPlatform.CommunicationUtilities</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="40-25-A6-0F-A5-B4-71-8F-77-23-6F-C1-FC-B2-A9-94-DA-7B-5F-2E">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</ModulePath>
+      <ModuleTime>2020-02-04T19:55:22Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.ObjectModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="C9-48-8A-EF-A0-7E-17-43-0F-BC-D2-F3-4D-26-76-B6-7D-DE-DF-67">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.Common.dll</ModulePath>
+      <ModuleTime>2020-02-04T19:55:24Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Common</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="53-D0-A3-B9-10-36-09-21-32-F4-D0-88-75-00-B5-DC-77-89-1D-78">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll</ModulePath>
+      <ModuleTime>2016-06-13T21:06:14Z</ModuleTime>
+      <ModuleName>Newtonsoft.Json</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="ED-DD-36-7C-3E-CD-41-3B-EB-25-57-16-9C-6F-E9-F7-6E-5C-A0-83">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Runtime.Serialization.Primitives.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:58Z</ModuleTime>
+      <ModuleName>System.Runtime.Serialization.Primitives</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="BC-75-DE-6F-8B-4F-DA-00-A7-F4-11-15-CA-8C-1B-42-F6-5A-EC-BA">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Globalization.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:00Z</ModuleTime>
+      <ModuleName>System.Globalization</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="47-E6-41-24-74-E6-DF-13-CB-96-AD-74-6C-F1-FB-8A-0B-95-D0-49">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Threading.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:04Z</ModuleTime>
+      <ModuleName>System.Threading</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="2B-36-FE-B6-96-B8-70-FB-64-4C-18-59-2C-2B-D9-3B-59-12-25-9C">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Diagnostics.TraceSource.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:00Z</ModuleTime>
+      <ModuleName>System.Diagnostics.TraceSource</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="32-05-DF-9E-12-18-0E-7B-45-4F-99-82-6D-70-EF-6B-93-C6-2E-00">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Diagnostics.Process.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:58Z</ModuleTime>
+      <ModuleName>System.Diagnostics.Process</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="E3-7A-FE-69-20-DE-92-3C-03-95-A9-5A-6A-F8-10-FC-D8-80-19-94">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.ComponentModel.Primitives.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:54Z</ModuleTime>
+      <ModuleName>System.ComponentModel.Primitives</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="67-74-83-4C-01-D0-A2-79-17-78-A7-9A-33-EE-FC-F6-08-20-D5-72">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Memory.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:04Z</ModuleTime>
+      <ModuleName>System.Memory</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="0D-58-19-49-6F-43-9F-B0-D0-2E-93-CA-A7-96-F8-36-85-74-5B-23">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Threading.ThreadPool.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:14Z</ModuleTime>
+      <ModuleName>System.Threading.ThreadPool</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="92-7C-E0-9D-ED-A8-39-E9-7D-93-80-DE-5E-8E-02-83-C6-48-27-BB">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Runtime.InteropServices.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:56Z</ModuleTime>
+      <ModuleName>System.Runtime.InteropServices</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="6B-BD-3A-D1-03-F1-DE-FF-8B-26-54-C1-E6-CE-C8-54-22-C5-A8-04">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\Microsoft.Win32.Primitives.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:54Z</ModuleTime>
+      <ModuleName>Microsoft.Win32.Primitives</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="C6-54-35-EB-74-FE-02-E8-D5-D1-3A-16-FD-3C-D2-A3-D7-C0-1E-E0">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Net.Primitives.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:50Z</ModuleTime>
+      <ModuleName>System.Net.Primitives</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="17-28-0C-F3-C4-16-F4-8A-71-37-19-B7-5F-2F-66-DB-02-21-FD-FD">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Threading.Tasks.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:06Z</ModuleTime>
+      <ModuleName>System.Threading.Tasks</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="89-2F-B2-7E-79-FD-B3-86-54-77-92-B4-D7-40-B7-6A-B5-A1-4D-10">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Net.Sockets.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:50Z</ModuleTime>
+      <ModuleName>System.Net.Sockets</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="DA-C9-82-5F-C0-EE-62-5F-C4-20-A1-60-BB-D4-28-BC-3D-51-22-38">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Threading.Overlapped.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:06Z</ModuleTime>
+      <ModuleName>System.Threading.Overlapped</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="FE-1E-E5-0D-85-0E-7F-8B-15-67-82-9A-60-E4-76-02-8D-DE-46-66">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Net.NameResolution.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:06Z</ModuleTime>
+      <ModuleName>System.Net.NameResolution</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="F9-78-22-6A-6A-EA-D6-A6-72-05-72-E8-B7-30-78-12-F8-A2-2C-07">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Private.Uri.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:52Z</ModuleTime>
+      <ModuleName>System.Private.Uri</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="87-95-FF-58-E2-77-0D-A5-E6-AF-A9-1C-8B-F0-77-BE-BA-F4-07-23">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Security.Principal.Windows.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:00Z</ModuleTime>
+      <ModuleName>System.Security.Principal.Windows</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="45-8E-0B-91-1E-A5-ED-5A-CD-63-2F-F3-7E-82-1E-15-4D-E1-36-42">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Security.Claims.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:58Z</ModuleTime>
+      <ModuleName>System.Security.Claims</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="19-77-51-26-A9-E8-2F-F1-0C-2F-1B-8C-2D-6E-F8-2A-FA-E0-F3-1E">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Security.Principal.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:20Z</ModuleTime>
+      <ModuleName>System.Security.Principal</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="01-A6-55-30-50-42-B1-C7-61-5A-E0-0D-2E-23-90-7B-53-84-D7-D8">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Serialization\v4.0_4.0.0.0__b77a5c561934e089\System.Runtime.Serialization.dll</ModulePath>
+      <ModuleTime>2020-08-05T02:39:55.9298663Z</ModuleTime>
+      <ModuleName>System.Runtime.Serialization</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="76-4F-F2-57-05-34-3B-14-F0-74-D8-74-52-87-6D-06-AD-25-14-77">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xml.Linq\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.Linq.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:35.962301Z</ModuleTime>
+      <ModuleName>System.Xml.Linq</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="EE-09-04-67-9C-06-25-14-F9-8F-46-81-C0-78-F9-BF-E4-43-EE-BE">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.IO.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:02Z</ModuleTime>
+      <ModuleName>System.IO</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="48-00-FE-82-BF-2D-A7-64-91-D6-A5-A5-88-88-02-2A-FB-DA-39-D2">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Dynamic.Runtime.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:02Z</ModuleTime>
+      <ModuleName>System.Dynamic.Runtime</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="70-9D-1E-E5-CD-DB-7E-19-16-75-51-2B-26-05-FF-71-DA-77-AF-BC">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Linq.Expressions.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:04Z</ModuleTime>
+      <ModuleName>System.Linq.Expressions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="75-99-58-35-C5-29-2E-51-D9-25-2D-A3-31-28-1F-4D-EF-20-57-6D">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Reflection.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:54Z</ModuleTime>
+      <ModuleName>System.Reflection</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="5E-AA-4C-FF-F7-5B-E8-16-70-F3-32-06-59-ED-2C-EB-E3-C0-6B-41">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Reflection.Extensions.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:54Z</ModuleTime>
+      <ModuleName>System.Reflection.Extensions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="2E-24-12-47-3A-90-50-3D-D6-86-2B-C6-1D-6C-7D-30-43-71-41-81">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Linq.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:04Z</ModuleTime>
+      <ModuleName>System.Linq</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="FA-34-B3-26-5E-CA-D6-5B-5D-A0-22-5C-A6-2A-52-4F-9F-87-C7-93">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.ObjectModel.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:52Z</ModuleTime>
+      <ModuleName>System.ObjectModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="00-B9-3E-22-57-40-E6-BF-0A-7D-C6-71-EF-A3-36-0B-AB-5E-30-F1">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Xml.XDocument.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:14Z</ModuleTime>
+      <ModuleName>System.Xml.XDocument</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="AE-67-60-DC-53-02-AE-EC-ED-74-85-99-00-DE-1E-F3-04-E2-C7-CB">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Private.Xml.Linq.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:54Z</ModuleTime>
+      <ModuleName>System.Private.Xml.Linq</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="35-80-65-49-C2-7C-0D-14-80-AD-29-FA-E0-83-AD-BD-3F-1D-7A-B5">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Private.Xml.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:54Z</ModuleTime>
+      <ModuleName>System.Private.Xml</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="8E-53-4C-91-31-1B-EA-80-65-1E-AC-FD-66-83-7D-FC-71-01-C1-81">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Text.RegularExpressions.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:02Z</ModuleTime>
+      <ModuleName>System.Text.RegularExpressions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="22-18-9A-95-65-A4-AD-7D-0A-54-06-20-47-6A-3C-F4-B5-96-7B-04">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Reflection.Emit.ILGeneration.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:54Z</ModuleTime>
+      <ModuleName>System.Reflection.Emit.ILGeneration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="C9-D3-81-B6-32-42-EB-0D-A2-90-0D-C0-73-54-04-1F-47-BB-9F-98">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Reflection.Emit.Lightweight.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:54Z</ModuleTime>
+      <ModuleName>System.Reflection.Emit.Lightweight</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="7F-BE-6F-84-E9-FD-4F-14-BB-57-D6-9E-40-9C-51-D2-69-75-19-D6">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Reflection.Primitives.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:54Z</ModuleTime>
+      <ModuleName>System.Reflection.Primitives</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="">
+      <ModulePath>RefEmit_InMemoryManifestModule</ModulePath>
+      <ModuleTime>0001-01-01T00:00:00</ModuleTime>
+      <ModuleName>Anonymously Hosted DynamicMethods Assembly</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="3F-88-09-7E-44-5D-8E-CE-18-49-9F-BD-7B-A5-90-46-A5-AC-D6-7F">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Collections.NonGeneric.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:56Z</ModuleTime>
+      <ModuleName>System.Collections.NonGeneric</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="C5-5D-61-FC-43-EB-FB-B0-0E-3A-A5-32-D1-F3-1E-93-04-62-21-E4">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.IO.FileSystem.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:02Z</ModuleTime>
+      <ModuleName>System.IO.FileSystem</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="2E-4D-9B-4F-B3-C8-EA-2F-89-C0-8F-1E-8E-ED-30-99-D3-C1-A5-80">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Runtime.Loader.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:58Z</ModuleTime>
+      <ModuleName>System.Runtime.Loader</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="5C-37-15-25-14-5D-AA-CD-FE-A1-58-0B-02-CA-F0-06-3B-F0-75-3E">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll</ModulePath>
+      <ModuleTime>2020-02-03T08:45:56Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="9D-1A-06-D1-57-63-4E-2B-7F-60-AB-7C-A1-0C-67-26-0C-72-0B-31">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</ModulePath>
+      <ModuleTime>2020-02-03T08:42:14Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.TestFramework</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="14-23-11-33-8A-3E-C2-95-9C-AF-E0-44-A0-4E-01-93-24-28-69-36">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll</ModulePath>
+      <ModuleTime>2020-02-03T08:43:54Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="18-52-46-8F-91-31-7C-89-18-7F-98-66-A5-FF-E4-26-5C-68-8E-0A">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll</ModulePath>
+      <ModuleTime>2020-02-03T08:52:28Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="7D-37-62-BB-D2-EA-D6-C8-D2-45-E1-94-59-83-0F-7C-DF-3C-BA-BA">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Xml.ReaderWriter.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:14Z</ModuleTime>
+      <ModuleName>System.Xml.ReaderWriter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="43-A9-B0-BD-2D-A0-50-93-2C-B4-A4-44-C9-E3-42-47-9A-01-9D-1A">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Threading.Thread.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:14Z</ModuleTime>
+      <ModuleName>System.Threading.Thread</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="31-DC-60-A9-AC-2D-62-B2-C8-05-6E-48-F8-38-C7-4C-66-22-7F-FE">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Security.Cryptography.Algorithms.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:00Z</ModuleTime>
+      <ModuleName>System.Security.Cryptography.Algorithms</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="CA-71-8B-5A-44-7C-F4-29-BB-9D-07-00-FD-BB-B0-16-7C-76-80-C5">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Threading.Timer.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:38Z</ModuleTime>
+      <ModuleName>System.Threading.Timer</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="84-9E-37-F1-5D-0D-60-82-2E-1D-B0-91-EF-E8-2F-0F-25-5F-CB-A1">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Resources.ResourceManager.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:56Z</ModuleTime>
+      <ModuleName>System.Resources.ResourceManager</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="73-5D-56-A1-F6-B2-13-6C-D5-B7-00-E8-64-4D-5F-1C-0C-CC-17-B9">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Runtime.InteropServices.RuntimeInformation.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:04Z</ModuleTime>
+      <ModuleName>System.Runtime.InteropServices.RuntimeInformation</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="C1-E6-95-46-6B-22-AB-AD-8C-29-08-C6-4F-A8-BC-C8-E3-D9-B3-83">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll</ModulePath>
+      <ModuleTime>2019-04-01T16:23:50Z</ModuleTime>
+      <ModuleName>NuGet.Frameworks</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="02-EC-05-B0-1C-14-D0-09-5A-AD-BD-EE-99-87-60-A9-46-E8-00-BF">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Text.Encoding.Extensions.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:24Z</ModuleTime>
+      <ModuleName>System.Text.Encoding.Extensions</ModuleName>
+      <Classes />
+    </Module>
+    <Module hash="8E-94-F6-54-A0-D8-E5-C6-88-A4-50-BD-42-3C-22-0E-0C-86-05-56">
+      <Summary numSequencePoints="3" visitedSequencePoints="1" numBranchPoints="2" visitedBranchPoints="1" sequenceCoverage="33.33" branchCoverage="50" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="1" visitedClasses="1" numClasses="2" visitedMethods="1" numMethods="2" />
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\CoverageWithDeterministicSourcePaths.Tests.dll</ModulePath>
+      <ModuleTime>2021-02-05T11:05:42.2434243Z</ModuleTime>
+      <ModuleName>CoverageWithDeterministicSourcePaths.Tests</ModuleName>
+      <Files>
+        <File uid="1" fullPath="C:\Users\Andrei\.nuget\packages\microsoft.net.test.sdk\16.5.0\build\netcoreapp2.1\Microsoft.NET.Test.Sdk.Program.cs" />
+        <File uid="2" fullPath="C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\FooTests.cs" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+          <FullName>&lt;Module&gt;</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="1" visitedMethods="0" numMethods="1" />
+          <FullName>AutoGeneratedProgram</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663297</MetadataToken>
+              <Name>System.Void AutoGeneratedProgram::Main(System.String[])</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="1" ordinal="0" offset="0" sl="4" sc="60" el="4" ec="61" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="2" ordinal="1" offset="1" sl="4" sc="61" el="4" ec="62" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="1" ordinal="0" offset="0" sl="4" sc="60" el="4" ec="61" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+              <MetadataToken>100663298</MetadataToken>
+              <Name>System.Void AutoGeneratedProgram::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="3" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="1" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="1" />
+          <FullName>Repro3362.Tests.UnitTest1</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="100" branchCoverage="100" crapScore="1" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="1" minCrapScore="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+              <MetadataToken>100663299</MetadataToken>
+              <Name>System.Void Repro3362.Tests.UnitTest1::TestMethod1()</Name>
+              <FileRef uid="2" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="4" ordinal="0" offset="0" sl="9" sc="38" el="9" ec="61" bec="0" bev="0" fileid="2" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="4" ordinal="0" offset="0" sl="9" sc="38" el="9" ec="61" bec="0" bev="0" fileid="2" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+              <MetadataToken>100663300</MetadataToken>
+              <Name>System.Void Repro3362.Tests.UnitTest1::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="5" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+    <Module skippedDueTo="Filter" hash="84-05-62-D0-66-EC-A8-8B-13-0C-28-0B-67-25-E5-73-BA-D8-FB-7A">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.IO.FileSystem.Primitives.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:04Z</ModuleTime>
+      <ModuleName>System.IO.FileSystem.Primitives</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="48-69-8F-D3-34-45-06-46-29-98-3A-0A-71-C5-1A-6D-78-02-46-35">
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</ModulePath>
+      <ModuleTime>2020-02-03T08:43:06Z</ModuleTime>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="6E-4B-78-D5-5F-D2-70-75-6F-04-83-D5-3B-9D-7B-1A-38-12-53-CE">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.ComponentModel.TypeConverter.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:56Z</ModuleTime>
+      <ModuleName>System.ComponentModel.TypeConverter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="29-23-20-63-FA-C8-B6-84-BC-B1-E8-3A-4B-56-91-93-57-61-9F-A2">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Collections.Concurrent.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:52Z</ModuleTime>
+      <ModuleName>System.Collections.Concurrent</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="6A-1A-F8-09-3E-65-B3-2B-31-94-4A-F3-55-45-E2-16-3B-65-AC-40">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Diagnostics.TextWriterTraceListener.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:58Z</ModuleTime>
+      <ModuleName>System.Diagnostics.TextWriterTraceListener</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="5A-DE-0A-86-0A-77-E3-B9-CB-A9-02-72-0F-43-5F-CE-F5-E5-BF-EF">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Console.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:06:58Z</ModuleTime>
+      <ModuleName>System.Console</ModuleName>
+      <Classes />
+    </Module>
+    <Module hash="00-D6-99-21-1D-6E-4C-84-5B-1D-64-64-E0-2B-BD-77-CE-8C-60-B4">
+      <Summary numSequencePoints="6" visitedSequencePoints="3" numBranchPoints="4" visitedBranchPoints="2" sequenceCoverage="50" branchCoverage="50" maxCyclomaticComplexity="3" minCyclomaticComplexity="1" maxCrapScore="3" minCrapScore="2" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="2" />
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\CoverageWithDeterministicSourcePaths.dll</ModulePath>
+      <ModuleTime>2021-02-05T11:05:40.9085403Z</ModuleTime>
+      <ModuleName>CoverageWithDeterministicSourcePaths</ModuleName>
+      <Files>
+        <File uid="5" fullPath="/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+          <FullName>&lt;Module&gt;</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <Summary numSequencePoints="6" visitedSequencePoints="3" numBranchPoints="4" visitedBranchPoints="2" sequenceCoverage="50" branchCoverage="50" maxCyclomaticComplexity="3" minCyclomaticComplexity="1" maxCrapScore="3" minCrapScore="2" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="2" />
+          <FullName>Repro3362.Foo</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="3" nPathComplexity="2" sequenceCoverage="100" branchCoverage="66.67" crapScore="3" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="3" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="66.67" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" maxCrapScore="3" minCrapScore="3" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+              <MetadataToken>100663297</MetadataToken>
+              <Name>System.Void Repro3362.Foo::Covered(System.Boolean)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="6" ordinal="0" offset="0" sl="6" sc="9" el="6" ec="10" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="1" uspid="7" ordinal="1" offset="1" sl="7" sc="13" el="7" ec="41" bec="2" bev="1" fileid="5" />
+                <SequencePoint vc="1" uspid="8" ordinal="2" offset="11" sl="8" sc="9" el="8" ec="10" bec="0" bev="0" fileid="5" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="9" ordinal="0" offset="3" sl="7" path="0" offsetend="5" fileid="5" />
+                <BranchPoint vc="1" uspid="10" ordinal="1" offset="3" sl="7" path="1" offsetend="8" fileid="5" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="6" ordinal="0" offset="0" sl="6" sc="9" el="6" ec="10" bec="0" bev="0" fileid="5" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663298</MetadataToken>
+              <Name>System.Void Repro3362.Foo::NotCovered()</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="11" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="10" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="0" uspid="12" ordinal="1" offset="1" sl="12" sc="13" el="12" ec="27" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="0" uspid="13" ordinal="2" offset="3" sl="13" sc="9" el="13" ec="10" bec="0" bev="0" fileid="5" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="11" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="10" bec="0" bev="0" fileid="5" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+              <MetadataToken>100663299</MetadataToken>
+              <Name>System.Void Repro3362.Foo::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="14" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+    <Module skippedDueTo="Filter" hash="AB-E2-A2-F6-B1-60-6B-31-62-3B-B1-75-3F-AE-15-5A-7B-2C-1D-93">
+      <ModulePath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.9\System.Security.Cryptography.Primitives.dll</ModulePath>
+      <ModuleTime>2020-09-23T11:07:00Z</ModuleTime>
+      <ModuleName>System.Security.Cryptography.Primitives</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="80-40-BF-BD-20-3E-0F-4A-3E-B6-3F-77-9F-58-81-24-B9-DF-08-AB">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\SMDiagnostics\v4.0_4.0.0.0__b77a5c561934e089\SMDiagnostics.dll</ModulePath>
+      <ModuleTime>2020-08-05T02:39:55.9298663Z</ModuleTime>
+      <ModuleName>SMDiagnostics</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="65-32-21-56-AF-4E-2A-1B-63-AA-5B-0C-6F-33-E5-30-CE-22-79-8B">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.ServiceModel.Internals\v4.0_4.0.0.0__31bf3856ad364e35\System.ServiceModel.Internals.dll</ModulePath>
+      <ModuleTime>2020-08-05T02:39:55.9298663Z</ModuleTime>
+      <ModuleName>System.ServiceModel.Internals</ModuleName>
+      <Classes />
+    </Module>
+  </Modules>
+</CoverageSession>

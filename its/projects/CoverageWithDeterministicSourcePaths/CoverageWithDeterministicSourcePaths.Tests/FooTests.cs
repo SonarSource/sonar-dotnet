@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Repro3362.Tests
 {
@@ -6,6 +6,6 @@ namespace Repro3362.Tests
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1() => new Foo().Covered();
+        public void TestMethod1() => new Foo().Covered(true);
     }
 }
