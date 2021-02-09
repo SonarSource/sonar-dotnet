@@ -29,9 +29,22 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 8000001)] // Noncompliant {{Make sure the content length limit is safe here.}}
-//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        [RequestFormLimits(MultipartBodyLengthLimit = 8000001, MultipartHeadersLengthLimit = 42)] // Noncompliant {{Make sure the content length limit is safe here.}}
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult MultipartFormRequestAboveLimit()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestFormLimits(MultipartHeadersLengthLimit = 55)]
+        public ActionResult MultipartFormRequestHeadersLimitSet()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult MultiPartFromRequestWithDefaultLimit()
         {
             return null;
         }

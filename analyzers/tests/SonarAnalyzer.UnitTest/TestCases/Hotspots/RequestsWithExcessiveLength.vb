@@ -25,8 +25,20 @@ Namespace Tests.TestCases
         End Function
 
         <HttpPost>
-        <RequestFormLimits(MultipartBodyLengthLimit:=8000001)> ' Noncompliant ^10#52 {{Make sure the content length limit is safe here.}}
+        <RequestFormLimits(MultipartBodyLengthLimit:=8000001, MultipartHeadersLengthLimit:=42)> ' Noncompliant ^10#85 {{Make sure the content length limit is safe here.}}
         Public Function MultipartFormRequestAboveLimit() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(MultipartHeadersLengthLimit:=42)>
+        Public Function MultipartFormRequestHeadersLimitSet() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits()>
+        Public Function MultiPartFromRequestWithDefaultLimit() As ActionResult
             Return Nothing
         End Function
 
