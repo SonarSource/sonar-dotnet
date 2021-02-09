@@ -175,8 +175,9 @@ public class OpenCoverReportParserTest {
 
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the OpenCover report ");
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
-    assertThat(debugLogs).hasSize(13);
-    assertThat(debugLogs).contains(
+    assertThat(debugLogs)
+      .hasSize(13)
+      .contains(
       "CoveredFile created: (ID '3', path 'MyLibrary\\Adder.cs', indexed as '/test/file/Calc.cs').",
       "CoveredFile created: (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH).",
       "CoveredFile created: (ID '4', path 'MyLibrary\\Multiplier.cs', NO INDEXED PATH)."

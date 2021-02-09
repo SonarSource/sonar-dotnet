@@ -169,16 +169,16 @@ public class OpenCoverReportParser implements CoverageParser {
         LOG.debug("OpenCover parser (handleBranchPointTag): the fileId '{}' key is not contained in files.", fileId);
       }
     }
-  }
 
-  private CoveredFile createCoveredFile(String canonicalPath, String uid, String pathInCoverageFile){
-    if (fileService.isSupportedAbsolute(canonicalPath)) {
-      return new CoveredFile(uid, pathInCoverageFile, canonicalPath);
-    } else {
-      // maybe it's a deterministic build file path
-      return fileService.getAbsolutePath(pathInCoverageFile)
-        .map(path -> new CoveredFile(uid, pathInCoverageFile, path))
-        .orElseGet(() -> new CoveredFile(uid, pathInCoverageFile, null));
+    private CoveredFile createCoveredFile(String canonicalPath, String uid, String pathInCoverageFile){
+      if (fileService.isSupportedAbsolute(canonicalPath)) {
+        return new CoveredFile(uid, pathInCoverageFile, canonicalPath);
+      } else {
+        // maybe it's a deterministic build file path
+        return fileService.getAbsolutePath(pathInCoverageFile)
+          .map(path -> new CoveredFile(uid, pathInCoverageFile, path))
+          .orElseGet(() -> new CoveredFile(uid, pathInCoverageFile, null));
+      }
     }
   }
 
