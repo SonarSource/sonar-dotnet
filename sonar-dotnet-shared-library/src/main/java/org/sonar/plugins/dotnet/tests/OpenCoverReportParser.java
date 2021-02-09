@@ -201,7 +201,7 @@ public class OpenCoverReportParser implements CoverageParser {
     }
 
     /**
-     * @return True if the file is supported/resolved by the FileService, which means it's indexed by the Scanner.
+     * @return True if indexedPath is supported/resolved by the FileService, which means it's indexed by the Scanner.
      * @see FileService#isSupportedAbsolute(String)
      * @see FileService#getAbsolutePath(String)
      */
