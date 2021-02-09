@@ -18,15 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers.Facade
+namespace SonarAnalyzer.Extensions
 {
-    internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
+    internal static class MemberAccessExpressionSyntaxExtensions
     {
-        public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
-        public SyntaxKind ObjectCreationExpression => SyntaxKind.ObjectCreationExpression;
-        public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
-        public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
+        public static bool IsMemberAccessOnKnownType(this MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
+            memberAccess.NameIs(name)
+            && semanticModel.GetSymbolInfo(memberAccess).Symbol is {} symbol
+            && symbol.ContainingType.DerivesFrom(knownType);
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="AesTest.cs" />
     <Compile Include="BinaryFormatterTest.cs" />
     <Compile Include="InsecureDeserialization.cs" />
+    <Compile Include="InsecureTemporaryFilesCreation.cs" />
     <Compile Include="JavaScriptSerializerTest.cs" />
     <Compile Include="LosFormatterTest.cs" />
     <Compile Include="NetDataContractSerializerDeserializeTest.cs" />

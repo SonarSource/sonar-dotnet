@@ -18,15 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Helpers.Facade
+namespace SonarAnalyzer.UnitTest.Rules
 {
-    internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
+    [TestClass]
+    public class InsecureTemporaryFilesCreationTest
     {
-        public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
-        public SyntaxKind ObjectCreationExpression => SyntaxKind.ObjectCreationExpression;
-        public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
-        public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void InsecureTemporaryFilesCreation_CS() =>
+            Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InsecureTemporaryFilesCreation.cs", new CS.InsecureTemporaryFilesCreation());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void InsecureTemporaryFilesCreation_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\InsecureTemporaryFilesCreation.vb", new VB.InsecureTemporaryFilesCreation());
     }
 }

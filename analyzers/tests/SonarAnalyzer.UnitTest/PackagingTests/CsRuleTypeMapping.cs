@@ -5442,7 +5442,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
                 //["5442"],
                 //["5443"],
                 //["5444"],
-                //["5445"],
+                ["5445"] = "VULNERABILITY",
                 //["5446"],
                 //["5447"],
                 //["5448"],

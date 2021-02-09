@@ -253,6 +253,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_IO_Compression_ZipFile = new KnownType("System.IO.Compression.ZipFile");
         internal static readonly KnownType System_IO_Compression_ZipFileExtensions = new KnownType("System.IO.Compression.ZipFileExtensions");
         internal static readonly KnownType System_IO_FileStream = new KnownType("System.IO.FileStream");
+        internal static readonly KnownType System_IO_Path = new KnownType("System.IO.Path");
         internal static readonly KnownType System_IO_Stream = new KnownType("System.IO.Stream");
         internal static readonly KnownType System_IO_StreamReader = new KnownType("System.IO.StreamReader");
         internal static readonly KnownType System_IO_StreamWriter = new KnownType("System.IO.StreamWriter");

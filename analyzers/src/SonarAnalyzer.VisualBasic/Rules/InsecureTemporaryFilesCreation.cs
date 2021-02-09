@@ -18,15 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers.Facade
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+    [Rule(DiagnosticId)]
+    public sealed class InsecureTemporaryFilesCreation : InsecureTemporaryFilesCreationBase<MemberAccessExpressionSyntax, SyntaxKind>
     {
-        public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
-        public SyntaxKind ObjectCreationExpression => SyntaxKind.ObjectCreationExpression;
-        public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
-        public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
+
+        public InsecureTemporaryFilesCreation() : base(RspecStrings.ResourceManager) { }
+
+        internal override bool IsMemberAccessOnKnownType(MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel model) =>
+            memberAccess.IsMemberAccessOnKnownType(name, knownType, model);
     }
 }
