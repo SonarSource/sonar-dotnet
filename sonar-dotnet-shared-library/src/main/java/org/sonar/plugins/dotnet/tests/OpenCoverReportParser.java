@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -48,10 +47,13 @@ public class OpenCoverReportParser implements CoverageParser {
 
     private final File file;
     private final Coverage coverage;
+
     // the key is the file ID, the value is the CoveredFile
     private final Map<String, CoveredFile> files = new HashMap<>();
-    // the key is the file path
-    private String fileRef;
+
+    // The "uid" attribute of the "FileRef" XML tag.
+    // This is needed when the "SequencePoint" or "BranchPoint" XML tags do not contain the "fileid" attribute.
+    private String currentFileRefUid;
 
     Parser(File file, Coverage coverage) {
       this.file = file;
@@ -83,7 +85,7 @@ public class OpenCoverReportParser implements CoverageParser {
     }
 
     private void handleFileRef(XmlParserHelper xmlParserHelper) {
-      this.fileRef = xmlParserHelper.getRequiredAttribute("uid");
+      this.currentFileRefUid = xmlParserHelper.getRequiredAttribute("uid");
     }
 
     private void handleFileTag(XmlParserHelper xmlParserHelper) {
@@ -99,19 +101,8 @@ public class OpenCoverReportParser implements CoverageParser {
         return;
       }
 
-      CoveredFile coveredFile;
-      if (fileService.isSupportedAbsolute(canonicalPath)) {
-        coveredFile = new CoveredFile(uid, pathInCoverageFile, canonicalPath);
-      } else {
-        // maybe it's a deterministic build file path
-        Optional<String> optionalPath = fileService.getAbsolutePath(pathInCoverageFile);
-        if (optionalPath.isPresent()) {
-          coveredFile = new CoveredFile(uid, pathInCoverageFile, optionalPath.get());
-          LOG.debug("Found indexed file '{}' for coverage entry '{}'.", coveredFile.supportedPath, coveredFile.originalPath);
-        } else {
-          coveredFile = new CoveredFile(uid, pathInCoverageFile, null);
-        }
-      }
+      CoveredFile coveredFile = createCoveredFile(canonicalPath, uid, pathInCoverageFile);
+      LOG.debug("CoveredFile created: {}.", coveredFile);
       files.put(uid, coveredFile);
     }
 
@@ -123,14 +114,14 @@ public class OpenCoverReportParser implements CoverageParser {
 
       String fileId = xmlParserHelper.getAttribute("fileid");
       if (fileId == null) {
-        fileId = fileRef;
+        fileId = currentFileRefUid;
       }
 
       if (files.containsKey(fileId)) {
         CoveredFile coveredFile = files.get(fileId);
 
-        if (coveredFile.isSupported()) {
-          coverage.addHits(coveredFile.supportedPath, line, visitCount);
+        if (coveredFile.isIndexed()) {
+          coverage.addHits(coveredFile.indexedPath, line, visitCount);
 
           LOG.trace("OpenCover parser: add hits for file {}, line '{}', visitCount '{}'.",
             coveredFile, line, visitCount);
@@ -147,7 +138,7 @@ public class OpenCoverReportParser implements CoverageParser {
     private void handleBranchPointTag(XmlParserHelper xmlParserHelper) {
       String fileId = xmlParserHelper.getAttribute("fileid");
       if (fileId == null) {
-        fileId = fileRef;
+        fileId = currentFileRefUid;
       }
 
       if (files.containsKey(fileId)) {
@@ -164,8 +155,8 @@ public class OpenCoverReportParser implements CoverageParser {
         int path = xmlParserHelper.getRequiredIntAttribute("path");
         int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
 
-        if (coveredFile.isSupported()) {
-          coverage.add(new BranchPoint(coveredFile.supportedPath, line, offset, offsetEnd, path, visitCount));
+        if (coveredFile.isIndexed()) {
+          coverage.add(new BranchPoint(coveredFile.indexedPath, line, offset, offsetEnd, path, visitCount));
 
           LOG.trace("OpenCover parser: add branch hits for file {}, line '{}', offset '{}', visitCount '{}'.",
             coveredFile, line, offset, visitCount);
@@ -180,38 +171,49 @@ public class OpenCoverReportParser implements CoverageParser {
     }
   }
 
+  private CoveredFile createCoveredFile(String canonicalPath, String uid, String pathInCoverageFile){
+    if (fileService.isSupportedAbsolute(canonicalPath)) {
+      return new CoveredFile(uid, pathInCoverageFile, canonicalPath);
+    } else {
+      // maybe it's a deterministic build file path
+      return fileService.getAbsolutePath(pathInCoverageFile)
+        .map(path -> new CoveredFile(uid, pathInCoverageFile, path))
+        .orElseGet(() -> new CoveredFile(uid, pathInCoverageFile, null));
+    }
+  }
+
   /**
    * Represents a file mentioned in the OpenCover report list of files, which may or may not be supported by the FileService.
    * @see FileService
    */
-  private class CoveredFile
-  {
+  private static class CoveredFile {
     // the file ID from the OpenCover report
-    private String uid;
+    final String uid;
     // the path from the coverage file
-    private String originalPath;
-    // the path which is supported by the FileService
-    private String supportedPath;
+    final String originalPath;
+    // the path which is indexed by the scanner
+    final String indexedPath;
 
-    private CoveredFile(String uid, String originalPath, @Nullable String supportedPath) {
+    CoveredFile(String uid, String originalPath, @Nullable String indexedPath) {
       this.uid = uid;
       this.originalPath = originalPath;
-      this.supportedPath = supportedPath;
+      this.indexedPath = indexedPath;
     }
 
     /**
-     * @return True if the file is supported by the FileService (which wraps the Scanner API).
-     * @see FileService#isSupportedAbsolute
+     * @return True if the file is supported/resolved by the FileService, which means it's indexed by the Scanner.
+     * @see FileService#isSupportedAbsolute(String)
+     * @see FileService#getAbsolutePath(String)
      */
-    private boolean isSupported() {
-      return supportedPath != null;
+    boolean isIndexed() {
+      return indexedPath != null;
     }
 
     @Override
     public String toString() {
-      return supportedPath == null
+      return indexedPath == null
         ? String.format("(ID '%s', path '%s')", uid, originalPath)
-        : String.format("(ID '%s', path '%s', indexed as '%s')", uid, originalPath, supportedPath);
+        : String.format("(ID '%s', path '%s', indexed as '%s')", uid, originalPath, indexedPath);
     }
   }
 }

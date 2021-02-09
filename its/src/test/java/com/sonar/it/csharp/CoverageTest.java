@@ -27,7 +27,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.sonarqube.ws.Measures;
+import org.sonarqube.ws.Measures.Measure;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getMeasure;
@@ -52,8 +52,8 @@ public class CoverageTest {
       .doesNotContain("Sensor C# Tests Coverage Report Import")
       .doesNotContain("Coverage Report Statistics:");
 
-    Measures.Measure linesToCover = getMeasure("CoverageTest", "lines_to_cover");
-    Measures.Measure uncoveredLines = getMeasure("CoverageTest", "uncovered_lines");
+    Measure linesToCover = getMeasure("CoverageTest", "lines_to_cover");
+    Measure uncoveredLines = getMeasure("CoverageTest", "uncovered_lines");
 
     assertThat(linesToCover.getValue()).isEqualTo("2");
     assertThat(uncoveredLines.getValue()).isEqualTo("2");
@@ -109,8 +109,8 @@ public class CoverageTest {
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    Measures.Measure linesToCover = getMeasure("CoverageWithDeterministicSourcePaths", "lines_to_cover");
-    Measures.Measure uncoveredLines = getMeasure("CoverageWithDeterministicSourcePaths", "uncovered_lines");
+    Measure linesToCover = getMeasure("CoverageWithDeterministicSourcePaths", "lines_to_cover");
+    Measure uncoveredLines = getMeasure("CoverageWithDeterministicSourcePaths", "uncovered_lines");
 
     assertThat(linesToCover.getValue()).isEqualTo("6");
     assertThat(uncoveredLines.getValue()).isEqualTo("3");
@@ -162,8 +162,8 @@ public class CoverageTest {
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    Measures.Measure linesToCover = getMeasure("CoverageWithDeterministicSourcePaths", "lines_to_cover");
-    Measures.Measure uncoveredLines = getMeasure("CoverageWithDeterministicSourcePaths", "uncovered_lines");
+    Measure linesToCover = getMeasure("CoverageWithDeterministicSourcePaths", "lines_to_cover");
+    Measure uncoveredLines = getMeasure("CoverageWithDeterministicSourcePaths", "uncovered_lines");
 
     assertThat(linesToCover.getValue()).isEqualTo("6");
     assertThat(uncoveredLines.getValue()).isEqualTo("3");
