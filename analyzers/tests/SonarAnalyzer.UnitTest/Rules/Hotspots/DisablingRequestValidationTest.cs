@@ -41,23 +41,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DisablingRequestValidation_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DisablingRequestValidation.cs",
-                new CS.DisablingRequestValidation(),
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void DisablingRequestValidation_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.vb",
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DisablingRequestValidation_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"testcases\Hotspots\Disablingrequestvalidation.vb",
-                new VB.DisablingRequestValidation(),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
     }
 }

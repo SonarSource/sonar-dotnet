@@ -35,12 +35,5 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotUseRandom.cs",
                 new CS.DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),
                 MetadataReferenceFacade.SystemSecurityCryptography);
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DoNotUseRandom_Not_Enabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DoNotUseRandom.cs",
-                new CS.DoNotUseRandom(),
-                MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

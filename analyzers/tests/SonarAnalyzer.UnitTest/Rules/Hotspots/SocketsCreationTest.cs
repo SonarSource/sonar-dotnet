@@ -47,20 +47,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new VB.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
                                     GetAdditionalReferences());
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void SocketsCreation_CS_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\SocketsCreation.cs",
-                                           new CS.SocketsCreation(),
-                                           GetAdditionalReferences());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void SocketsCreation_VB_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\SocketsCreation.vb",
-                                           new VB.SocketsCreation(),
-                                           GetAdditionalReferences());
-
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemNetSockets.Concat(MetadataReferenceFacade.SystemNetPrimitives);
     }

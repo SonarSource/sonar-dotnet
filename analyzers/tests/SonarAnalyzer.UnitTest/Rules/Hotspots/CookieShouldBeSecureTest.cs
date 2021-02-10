@@ -49,13 +49,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 MetadataReferenceFacade.SystemWeb);
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void CookiesShouldBeSecure_Not_Enabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
-                new CS.CookieShouldBeSecure(),
-                MetadataReferenceFacade.SystemWeb);
-
 #else
 
         [TestMethod]

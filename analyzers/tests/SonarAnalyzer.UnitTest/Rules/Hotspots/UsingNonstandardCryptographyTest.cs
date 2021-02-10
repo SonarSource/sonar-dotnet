@@ -39,23 +39,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingNonstandardCryptography_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingNonstandardCryptography.cs",
-                                           new CS.UsingNonstandardCryptography(),
-                                           MetadataReferenceFacade.SystemSecurityCryptography);
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void UsingNonstandardCryptography_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.vb",
                                     new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
                                     MetadataReferenceFacade.SystemSecurityCryptography);
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void UsingNonstandardCryptography_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingNonstandardCryptography.vb",
-                                           new VB.UsingNonstandardCryptography(),
-                                           MetadataReferenceFacade.SystemSecurityCryptography);
     }
 }

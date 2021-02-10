@@ -42,23 +42,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeliveringDebugFeaturesInProduction_NetCore2_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.cs",
-                new CS.DeliveringDebugFeaturesInProduction(),
-                AdditionalReferencesNetCore2);
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
                 new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
-                AdditionalReferencesNetCore2);
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DeliveringDebugFeaturesInProduction_NetCore2_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DeliveringDebugFeaturesInProduction.NetCore2.vb",
-                new VB.DeliveringDebugFeaturesInProduction(),
                 AdditionalReferencesNetCore2);
 
 #if NET

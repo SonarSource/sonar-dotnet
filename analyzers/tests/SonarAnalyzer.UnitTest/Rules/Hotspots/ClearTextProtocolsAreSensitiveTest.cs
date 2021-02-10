@@ -40,14 +40,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ControllingPermissions_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.cs",
-                                           new CS.ClearTextProtocolsAreSensitive(),
-                                           ParseOptionsHelper.FromCSharp8,
-                                           GetAdditionalReferences());
-
 #if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
@@ -61,4 +53,3 @@ namespace SonarAnalyzer.UnitTest.Rules
             MetadataReferenceFacade.SystemNetHttp.Concat(MetadataReferenceFacade.SystemComponentModelPrimitives);
     }
 }
-

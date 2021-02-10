@@ -45,15 +45,5 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ReadingStandardInput_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ReadingStandardInput.vb", new VB.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ReadingStandardInput_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ReadingStandardInput.cs", new CS.ReadingStandardInput());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ReadingStandardInput_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ReadingStandardInput.vb", new VB.ReadingStandardInput());
     }
 }

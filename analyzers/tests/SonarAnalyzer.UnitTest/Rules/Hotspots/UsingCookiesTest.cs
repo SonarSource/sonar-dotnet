@@ -43,23 +43,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCookies_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingCookies_Net46.cs",
-                new CS.UsingCookies(),
-                GetAdditionalReferencesForNet46());
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void UsingCookies_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCookies_Net46.vb",
                 new VB.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferencesForNet46());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void UsingCookies_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingCookies_Net46.vb",
-                new VB.UsingCookies(),
                 GetAdditionalReferencesForNet46());
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferencesForNet46() =>

@@ -46,20 +46,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
                 GetAdditionalReferences());
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void EncryptingData_CS_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\EncryptingData.cs",
-                new CS.EncryptingData(),
-                GetAdditionalReferences());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void EncryptingData_VB_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\EncryptingData.vb",
-                new VB.EncryptingData(),
-                GetAdditionalReferences());
-
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography;
     }

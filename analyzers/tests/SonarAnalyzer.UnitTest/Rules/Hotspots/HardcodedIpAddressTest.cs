@@ -39,13 +39,5 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void HardcodedIpAddress_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\HardcodedIpAddress.vb", new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void HardcodedIpAddress_Not_Enabled()
-        {
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\HardcodedIpAddress.cs", new CS.HardcodedIpAddress());
-
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\HardcodedIpAddress.vb", new VB.HardcodedIpAddress());
-        }
     }
 }

@@ -70,11 +70,6 @@ partial class Program1
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCommandLineArguments_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingCommandLineArguments.cs", new CS.UsingCommandLineArguments());
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void UsingCommandLineArguments_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
                                     new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
@@ -105,11 +100,5 @@ End Class
                 new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default);
         }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void UsingCommandLineArguments_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
-                                           new VB.UsingCommandLineArguments());
     }
 }

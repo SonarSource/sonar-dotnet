@@ -49,24 +49,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ControllingPermissions_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ControllingPermissions.cs",
-                                           new CS.ControllingPermissions(),
-                                           AdditionalReferences);
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void ControllingPermissions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ControllingPermissions.vb",
                                     new VB.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferences);
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ControllingPermissions_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ControllingPermissions.vb",
-                                           new VB.ControllingPermissions(),
-                                           AdditionalReferences);
     }
 }
 
