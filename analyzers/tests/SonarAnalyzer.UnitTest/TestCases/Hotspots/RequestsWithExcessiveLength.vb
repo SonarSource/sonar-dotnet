@@ -48,6 +48,36 @@ Namespace Tests.TestCases
             Return Nothing
         End Function
 
+        <HttpPost>
+        <RequestFormLimits(MultipartHeadersLengthLimit:="NonNumericalValue")> ' Error [BC30934]
+        Public Function MultipartFormRequestNonNumerical() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits>
+        Public Function MultipartFormRequestWithoutParams() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(42)> ' Error [BC30057]
+        Public Function MultipartFormRequestNonNameEquals() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestSizeLimit("NonNumerical")> ' Error [BC30934]
+        Public Function PostRequestNonNumerical() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestSizeLimit> ' Error [BC30455]
+        Public Function PostRequestWithoutParams() As ActionResult
+            Return Nothing
+        End Function
+
         Public Function MethodWithoutAttributes() As ActionResult
             Return Nothing
         End Function

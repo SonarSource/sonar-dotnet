@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsInvalidRequestSizeLimitAttribute(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute, semanticModel)
             && attribute.ArgumentList != null
-            && attribute.ArgumentList.Arguments.First() is { } firstArgument
+            && attribute.ArgumentList.Arguments.FirstOrDefault() is { } firstArgument
             && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.Expression, out var intValue)
             && intValue > StandardSizeLimit;
 

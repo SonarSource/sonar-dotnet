@@ -56,6 +56,41 @@ namespace Tests.Diagnostics
             return null;
         }
 
+        [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = "NonNumericalValue")] // Error [CS0029]
+        public ActionResult MultipartFormRequestNonNumerical()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestFormLimits]
+        public ActionResult MultipartFormRequestWithoutParams()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestFormLimits(42)] // Error [CS1729]
+        public ActionResult MultipartFormRequestNonNameEquals()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestSizeLimit("NonNumerical")] // Error [CS1503]
+        public ActionResult PostRequestNonNumerical()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestSizeLimit] // Error [CS7036]
+        public ActionResult PostRequestWithoutParams()
+        {
+            return null;
+        }
+
         public ActionResult MethodWithoutAttributes()
         {
             return null;
