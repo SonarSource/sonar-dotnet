@@ -32,6 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void UsingNonstandardCryptography_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.cs",
                                     new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),
@@ -39,6 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void UsingNonstandardCryptography_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingNonstandardCryptography.vb",
                                     new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled),

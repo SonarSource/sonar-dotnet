@@ -32,6 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void UsingRegularExpressions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.cs",
                 new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
@@ -39,6 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void UsingRegularExpressions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.vb",
                 new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),

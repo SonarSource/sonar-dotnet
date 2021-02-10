@@ -35,6 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void SocketsCreation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\SocketsCreation.cs",
                                     new CS.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),
@@ -42,6 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void SocketsCreation_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\SocketsCreation.vb",
                                     new VB.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled),

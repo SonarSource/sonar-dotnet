@@ -34,6 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void EncryptingData_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.cs",
                 new CS.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),
@@ -41,6 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void EncryptingData_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\EncryptingData.vb",
                 new VB.EncryptingData(AnalyzerConfiguration.AlwaysEnabled),

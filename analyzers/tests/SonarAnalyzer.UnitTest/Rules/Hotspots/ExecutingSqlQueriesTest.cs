@@ -37,6 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CS_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
@@ -44,6 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.vb",
                 new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
@@ -63,6 +65,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CS_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
@@ -71,6 +74,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
                 new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),

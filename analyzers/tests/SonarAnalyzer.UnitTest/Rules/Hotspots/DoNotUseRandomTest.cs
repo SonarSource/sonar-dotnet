@@ -31,6 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void DoNotUseRandom() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DoNotUseRandom.cs",
                 new CS.DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled),

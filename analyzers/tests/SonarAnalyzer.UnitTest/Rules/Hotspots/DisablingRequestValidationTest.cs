@@ -34,6 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void DisablingRequestValidation_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.cs",
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
@@ -41,6 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void DisablingRequestValidation_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.vb",
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),

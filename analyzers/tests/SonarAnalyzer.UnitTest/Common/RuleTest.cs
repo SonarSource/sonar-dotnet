@@ -219,6 +219,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
+        [TestCategory("Hotspot")]
         public void SecurityHotspots_Rules_Not_Configurable()
         {
             var hotspotDiagnosticDescriptors = GetSupportedDiagnostics(AnalyzerLanguage.CSharp)
