@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -31,23 +30,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ReadingStandardInput : ReadingStandardInputBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
+        public ReadingStandardInput() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public ReadingStandardInput()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
-
-        internal /*for testing*/ ReadingStandardInput(IAnalyzerConfiguration analyzerConfiguration)
-        {
-            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
-        }
+        internal /*for testing*/ ReadingStandardInput(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         protected override bool WhenResultIsNotIgnored(InvocationContext context) =>
             !context.Node.Parent.IsKind(SyntaxKind.ExpressionStatement);

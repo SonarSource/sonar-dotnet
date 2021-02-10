@@ -18,41 +18,40 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class EncryptingDataBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class EncryptingDataBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4787";
         protected const string MessageFormat = "Make sure that encrypting data is safe here.";
 
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+        protected EncryptingDataBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected BaseTypeTracker<TSyntaxKind> BaseTypeTracker { get; set; }
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input,
+                inv.MatchMethod(
                     // "RSA" is the base class for all RSA algorithm implementations
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "Encrypt"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "EncryptValue"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "Decrypt"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "DecryptValue"),
-
                     // RSA methods added in NET Core 2.1
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "TryEncrypt"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "TryDecrypt"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateEncryptor"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateDecryptor")));
 
-            BaseTypeTracker.Track(context,
-                BaseTypeTracker.MatchSubclassesOf(
+            var bt = Language.Tracker.BaseType;
+            bt.Track(input,
+                bt.MatchSubclassesOf(
                     KnownType.System_Security_Cryptography_AsymmetricAlgorithm,
                     KnownType.System_Security_Cryptography_SymmetricAlgorithm));
         }
     }
 }
-

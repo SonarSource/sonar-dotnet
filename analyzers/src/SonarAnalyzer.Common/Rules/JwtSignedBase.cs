@@ -19,66 +19,56 @@
  */
 
 using System;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class JwtSignedBase<TSyntaxKind, TInvocationSyntax> : SonarDiagnosticAnalyzer
+    public abstract class JwtSignedBase<TSyntaxKind, TInvocationSyntax> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TInvocationSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S5659";
         protected const bool JwtBuilderConstructorIsSafe = false;
-        private const string MessageFormat = "Use only strong cipher algorithms when {0} this JWT.";
-        private const string MessageVerifying = "verifying the signature of";
+        private const string MessageFormat = "Use only strong cipher algorithms when verifying the signature of this JWT.";
         private const int ExtensionStaticCallParameters = 2;
 
-        protected abstract BuilderPatternCondition<TInvocationSyntax> CreateBuilderPatternCondition();
+        protected abstract BuilderPatternCondition<TSyntaxKind, TInvocationSyntax> CreateBuilderPatternCondition();
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(VerifyingRule);
-        protected DiagnosticDescriptor VerifyingRule { get; }
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+        protected JwtSignedBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected JwtSignedBase(System.Resources.ResourceManager rspecResources) =>
-            VerifyingRule = DiagnosticDescriptorBuilder
-                .GetDescriptor(DiagnosticId, string.Format(MessageFormat, MessageVerifying), rspecResources)
-                .WithNotConfigurable();
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
+            var t = Language.Tracker.Invocation;
+            t.Track(input,
+                t.MatchMethod(
                     new MemberDescriptor(KnownType.JWT_IJwtDecoder, "Decode"),
                     new MemberDescriptor(KnownType.JWT_IJwtDecoder, "DecodeToObject")),
-                Conditions.Or(
-                    InvocationTracker.ArgumentIsBoolConstant("verify", false),
-                    InvocationTracker.MethodHasParameters(1)
-                    ));
+                t.Or(
+                    t.ArgumentIsBoolConstant("verify", false),
+                    t.MethodHasParameters(1)));
 
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
+            t.Track(input,
+                t.MatchMethod(
                     new MemberDescriptor(KnownType.JWT_JwtDecoderExtensions, "Decode"),
                     new MemberDescriptor(KnownType.JWT_JwtDecoderExtensions, "DecodeToObject")),
-                Conditions.Or(
-                    InvocationTracker.ArgumentIsBoolConstant("verify", false),
-                    InvocationTracker.MethodHasParameters(1),
-                    InvocationTracker.MethodHasParameters(ExtensionStaticCallParameters)
-                    ));
+                t.Or(
+                    t.ArgumentIsBoolConstant("verify", false),
+                    t.MethodHasParameters(1),
+                    t.MethodHasParameters(ExtensionStaticCallParameters)));
 
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.JWT_Builder_JwtBuilder, "Decode")),
-                InvocationTracker.IsInvalidBuilderInitialization(CreateBuilderPatternCondition())
-                );
+            t.Track(input,
+                t.MatchMethod(new MemberDescriptor(KnownType.JWT_Builder_JwtBuilder, "Decode")),
+                t.IsInvalidBuilderInitialization(CreateBuilderPatternCondition()));
         }
 
-        protected BuilderPatternDescriptor<TInvocationSyntax>[] JwtBuilderDescriptors(Func<TInvocationSyntax, bool> singleArgumentIsNotFalseLiteral) =>
+        protected BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>[] JwtBuilderDescriptors(Func<TInvocationSyntax, bool> singleArgumentIsNotFalseLiteral) =>
             new[]
             {
-                new BuilderPatternDescriptor<TInvocationSyntax>(true, InvocationTracker.MethodNameIs("MustVerifySignature")),
-                new BuilderPatternDescriptor<TInvocationSyntax>(false, InvocationTracker.MethodNameIs("DoNotVerifySignature")),
-                new BuilderPatternDescriptor<TInvocationSyntax>(singleArgumentIsNotFalseLiteral, InvocationTracker.MethodNameIs("WithVerifySignature"))
+                new BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>(true, Language.Tracker.Invocation.MethodNameIs("MustVerifySignature")),
+                new BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>(false, Language.Tracker.Invocation.MethodNameIs("DoNotVerifySignature")),
+                new BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>(singleArgumentIsNotFalseLiteral, Language.Tracker.Invocation.MethodNameIs("WithVerifySignature"))
             };
     }
 }

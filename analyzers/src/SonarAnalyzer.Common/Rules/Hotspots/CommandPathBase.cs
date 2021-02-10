@@ -18,49 +18,44 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CommandPathBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class CommandPathBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4036";
         private const string MessageFormat = "Make sure the \"PATH\" used to find this command includes only what you intend.";
 
-        private static readonly Regex ValidPath = new Regex(@"^(\.{0,2}[\\/]|\w+:)");
+        private readonly Regex validPath = new Regex(@"^(\.{0,2}[\\/]|\w+:)");
 
         protected abstract string FirstArgument(InvocationContext context);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-        protected DiagnosticDescriptor Rule { get; }
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
-        protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
-        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+        protected CommandPathBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected CommandPathBase(System.Resources.ResourceManager rspecStrings) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings).WithNotConfigurable();
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input,
+                inv.MatchMethod(new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
                 c => IsInvalid(FirstArgument(c)));
 
-            PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchProperty(new MemberDescriptor(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
-                PropertyAccessTracker.MatchSetter(),
-                c => IsInvalid((string)PropertyAccessTracker.AssignedValue(c)));
+            var pa = Language.Tracker.PropertyAccess;
+            pa.Track(input,
+                pa.MatchProperty(new MemberDescriptor(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
+                pa.MatchSetter(),
+                c => IsInvalid((string)pa.AssignedValue(c)));
 
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(KnownType.System_Diagnostics_ProcessStartInfo),
-                c => ObjectCreationTracker.ConstArgumentForParameter(c, "fileName") is string value && IsInvalid(value));
+            var oc = Language.Tracker.ObjectCreation;
+            oc.Track(input,
+                oc.MatchConstructor(KnownType.System_Diagnostics_ProcessStartInfo),
+                c => oc.ConstArgumentForParameter(c, "fileName") is string value && IsInvalid(value));
         }
 
-        private static bool IsInvalid(string path) =>
-            !string.IsNullOrEmpty(path) && !ValidPath.IsMatch(path);
+        private bool IsInvalid(string path) =>
+            !string.IsNullOrEmpty(path) && !validPath.IsMatch(path);
     }
 }

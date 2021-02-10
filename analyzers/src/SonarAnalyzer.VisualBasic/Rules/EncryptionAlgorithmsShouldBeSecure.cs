@@ -31,17 +31,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class EncryptionAlgorithmsShouldBeSecure : EncryptionAlgorithmsShouldBeSecureBase<SyntaxKind>
     {
-        public EncryptionAlgorithmsShouldBeSecure() : base(RspecStrings.ResourceManager)
-        {
-            InvocationTracker = new VisualBasicInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
-        }
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override TrackerBase<PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
+        public EncryptionAlgorithmsShouldBeSecure() : base(AnalyzerConfiguration.AlwaysEnabled, RspecStrings.ResourceManager) { }
+
+        protected override TrackerBase<SyntaxKind, PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
             context => context.Node.FirstAncestorOrSelf<ObjectMemberInitializerSyntax>() != null;
 
-        protected override TrackerBase<InvocationContext>.Condition HasPkcs1PaddingArgument() =>
+        protected override TrackerBase<SyntaxKind, InvocationContext>.Condition HasPkcs1PaddingArgument() =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;

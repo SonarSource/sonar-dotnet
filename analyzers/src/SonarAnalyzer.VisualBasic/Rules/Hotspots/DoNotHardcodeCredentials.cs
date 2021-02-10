@@ -33,13 +33,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
         public DoNotHardcodeCredentials() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration)
-        {
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, Rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, Rule);
-        }
+        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         protected override void InitializeActions(ParameterLoadingAnalysisContext context) =>
             context.RegisterCompilationStartAction(

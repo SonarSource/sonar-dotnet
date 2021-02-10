@@ -18,63 +18,54 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ControllingPermissionsBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ControllingPermissionsBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4834";
         protected const string MessageFormat = "Make sure controlling this permission is safe here.";
 
-        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+        protected ControllingPermissionsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
-
-        protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
-
-        protected MethodDeclarationTracker MethodDeclarationTracker { get; set; }
-
-        protected BaseTypeTracker<TSyntaxKind> BaseTypeTracker { get; set; }
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(
-                    KnownType.System_Security_Permissions_PrincipalPermission));
+            var oc = Language.Tracker.ObjectCreation;
+            oc.Track(input, oc.MatchConstructor(KnownType.System_Security_Permissions_PrincipalPermission));
 
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.WhenDerivesOrImplementsAny(
-                    KnownType.System_Security_Principal_IIdentity,
-                    KnownType.System_Security_Principal_IPrincipal));
+            oc.Track(input, oc.WhenDerivesOrImplementsAny(
+                KnownType.System_Security_Principal_IIdentity,
+                KnownType.System_Security_Principal_IPrincipal));
 
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
-                    new MemberDescriptor(KnownType.System_Security_Principal_WindowsIdentity, "GetCurrent"),
-                    new MemberDescriptor(KnownType.System_IdentityModel_Tokens_SecurityTokenHandler, "ValidateToken"),
-                    new MemberDescriptor(KnownType.System_AppDomain, "SetPrincipalPolicy"),
-                    new MemberDescriptor(KnownType.System_AppDomain, "SetThreadPrincipal")));
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input, inv.MatchMethod(
+                new MemberDescriptor(KnownType.System_Security_Principal_WindowsIdentity, "GetCurrent"),
+                new MemberDescriptor(KnownType.System_IdentityModel_Tokens_SecurityTokenHandler, "ValidateToken"),
+                new MemberDescriptor(KnownType.System_AppDomain, "SetPrincipalPolicy"),
+                new MemberDescriptor(KnownType.System_AppDomain, "SetThreadPrincipal")));
 
-            PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchProperty(
-                    new MemberDescriptor(KnownType.System_Web_HttpContext, "User"),
-                    new MemberDescriptor(KnownType.System_Threading_Thread, "CurrentPrincipal")));
+            var pa = Language.Tracker.PropertyAccess;
+            pa.Track(input, pa.MatchProperty(
+                new MemberDescriptor(KnownType.System_Web_HttpContext, "User"),
+                new MemberDescriptor(KnownType.System_Threading_Thread, "CurrentPrincipal")));
 
-            MethodDeclarationTracker.Track(context,
-                MethodDeclarationTracker.AnyParameterIsOfType(
+            var md = Language.Tracker.MethodDeclaration;
+            md.Track(input,
+                md.AnyParameterIsOfType(
                     KnownType.System_Security_Principal_IIdentity,
                     KnownType.System_Security_Principal_IPrincipal),
-                MethodDeclarationTracker.IsOrdinaryMethod());
+                md.IsOrdinaryMethod());
 
-            MethodDeclarationTracker.Track(context,
-                MethodDeclarationTracker.DecoratedWithAnyAttribute(
-                    KnownType.System_Security_Permissions_PrincipalPermissionAttribute));
+            md.Track(input, md.DecoratedWithAnyAttribute(KnownType.System_Security_Permissions_PrincipalPermissionAttribute));
 
-            BaseTypeTracker.Track(context,
-                BaseTypeTracker.MatchSubclassesOf(
-                    KnownType.System_Security_Principal_IIdentity,
-                    KnownType.System_Security_Principal_IPrincipal));
+            var bt = Language.Tracker.BaseType;
+            bt.Track(input, bt.MatchSubclassesOf(
+                KnownType.System_Security_Principal_IIdentity,
+                KnownType.System_Security_Principal_IPrincipal));
         }
     }
 }

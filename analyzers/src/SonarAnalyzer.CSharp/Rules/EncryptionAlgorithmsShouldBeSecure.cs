@@ -31,18 +31,15 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class EncryptionAlgorithmsShouldBeSecure : EncryptionAlgorithmsShouldBeSecureBase<SyntaxKind>
     {
-        public EncryptionAlgorithmsShouldBeSecure() : base(RspecStrings.ResourceManager)
-        {
-            InvocationTracker = new CSharpInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(AnalyzerConfiguration.AlwaysEnabled, Rule);
-        }
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override TrackerBase<PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
+        public EncryptionAlgorithmsShouldBeSecure() : base(AnalyzerConfiguration.AlwaysEnabled, RspecStrings.ResourceManager) { }
+
+        protected override TrackerBase<SyntaxKind, PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
             context => context.Node.FirstAncestorOrSelf<InitializerExpressionSyntax>() != null;
 
-        protected override TrackerBase<InvocationContext>.Condition HasPkcs1PaddingArgument() =>
-            (context) =>
+        protected override TrackerBase<SyntaxKind, InvocationContext>.Condition HasPkcs1PaddingArgument() =>
+            context =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
                 var values = CSharpSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, "padding");

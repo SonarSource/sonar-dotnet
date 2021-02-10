@@ -32,14 +32,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class CommandPath : CommandPathBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
         public CommandPath() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal CommandPath(IAnalyzerConfiguration configuration) : base(RspecStrings.ResourceManager)
-        {
-            InvocationTracker = new CSharpInvocationTracker(configuration, Rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(configuration, Rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(configuration, Rule);
-        }
+        internal /*for testing*/ CommandPath(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         protected override string FirstArgument(InvocationContext context) =>
             ((InvocationExpressionSyntax)context.Node).ArgumentList.Get(0).FindStringConstant(context.SemanticModel);

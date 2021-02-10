@@ -20,10 +20,10 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.Trackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,15 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3330";
         private const string MessageFormat = "Make sure creating this cookie without the \"HttpOnly\" flag is safe.";
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
         private static readonly ImmutableArray<KnownType> TrackedTypes =
             ImmutableArray.Create(
                 KnownType.System_Web_HttpCookie,
                 KnownType.Microsoft_AspNetCore_Http_CookieOptions
             );
-        private readonly ObjectCreationTracker<SyntaxKind> objectCreationTracker;
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
             isAllowedConstantValue: constantValue => constantValue is bool value && value,
@@ -52,16 +48,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public CookieShouldBeHttpOnly() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal CookieShouldBeHttpOnly(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) =>
-            objectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, Rule);
+        internal CookieShouldBeHttpOnly(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration, DiagnosticId, MessageFormat) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            base.Initialize(context);
-
-            objectCreationTracker.Track(context,
-                objectCreationTracker.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
-                Conditions.ExceptWhen(objectCreationTracker.ArgumentIsBoolConstant("httpOnly", true)));
+            var t = CSharpFacade.Instance.Tracker.ObjectCreation;
+            t.Track(input,
+                t.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
+                t.ExceptWhen(t.ArgumentIsBoolConstant("httpOnly", true)));
         }
     }
 }

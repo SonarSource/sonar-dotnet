@@ -18,24 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class BypassingAccessibilityBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class BypassingAccessibilityBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S3011";
         protected const string MessageFormat = "Make sure that this accessibility bypass is safe here.";
 
-        protected FieldAccessTracker<TSyntaxKind> FieldAccessTracker { get; set;  }
+        protected BypassingAccessibilityBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            FieldAccessTracker.Track(context,
-                FieldAccessTracker.WhenRead(),
-                FieldAccessTracker.MatchField(
-                    new MemberDescriptor(KnownType.System_Reflection_BindingFlags, "NonPublic")));
+            var t = Language.Tracker.FieldAccess;
+            t.Track(input,
+                t.WhenRead(),
+                t.MatchField(new MemberDescriptor(KnownType.System_Reflection_BindingFlags, "NonPublic")));
         }
     }
 }

@@ -24,15 +24,16 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class BuilderPatternDescriptor<TInvocationSyntax>
+    public class BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>
+        where TSyntaxKind : struct
         where TInvocationSyntax : SyntaxNode
     {
-        private readonly TrackerBase<InvocationContext>.Condition[] invocationConditions;
+        private readonly TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions;
         private readonly Func<TInvocationSyntax, bool> isValid;
 
-        public BuilderPatternDescriptor(bool isValid, params TrackerBase<InvocationContext>.Condition[] invocationConditions) : this(invocation => isValid, invocationConditions) { }
+        public BuilderPatternDescriptor(bool isValid, params TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions) : this(invocation => isValid, invocationConditions) { }
 
-        public BuilderPatternDescriptor(Func<TInvocationSyntax, bool> isValid, params TrackerBase<InvocationContext>.Condition[] invocationConditions)
+        public BuilderPatternDescriptor(Func<TInvocationSyntax, bool> isValid, params TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions)
         {
             this.isValid = isValid;
             this.invocationConditions = invocationConditions;

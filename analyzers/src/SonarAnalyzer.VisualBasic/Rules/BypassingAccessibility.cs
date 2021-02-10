@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -31,21 +30,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class BypassingAccessibility : BypassingAccessibilityBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
+        public BypassingAccessibility() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public BypassingAccessibility()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
-
-        internal /*for testing*/ BypassingAccessibility(IAnalyzerConfiguration analyzerConfiguration)
-        {
-            FieldAccessTracker = new VisualBasicFieldAccessTracker(analyzerConfiguration, rule);
-        }
+        internal /*for testing*/ BypassingAccessibility(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
     }
 }

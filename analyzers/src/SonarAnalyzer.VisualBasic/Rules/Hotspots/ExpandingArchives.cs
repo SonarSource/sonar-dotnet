@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -31,17 +30,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ExpandingArchives : ExpandingArchivesBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        public ExpandingArchives() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public ExpandingArchives() : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
-
-        public ExpandingArchives(IAnalyzerConfiguration analyzerConfiguration)
-        {
-            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, Rule);
-        }
+        internal /*for testing*/ ExpandingArchives(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
     }
 }

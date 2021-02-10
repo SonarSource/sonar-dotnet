@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -27,13 +28,12 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class UsingCommandLineArguments : UsingCommandLineArgumentsBase
+    public sealed class UsingCommandLineArguments : UsingCommandLineArgumentsBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
         public UsingCommandLineArguments() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public UsingCommandLineArguments(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
-        {
-            MethodDeclarationTracker = new CSharpMethodDeclarationTracker(analyzerConfiguration, Rule);
-        }
+        internal /*for testing*/ UsingCommandLineArguments(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
     }
 }

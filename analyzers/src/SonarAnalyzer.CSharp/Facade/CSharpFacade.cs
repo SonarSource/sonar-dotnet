@@ -29,15 +29,19 @@ namespace SonarAnalyzer.Helpers
     internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
     {
         private static readonly Lazy<CSharpFacade> Singleton = new Lazy<CSharpFacade>(() => new CSharpFacade());
+        private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new Lazy<AssignmentFinder>(() => new CSharpAssignmentFinder());
         private static readonly Lazy<IExpressionNumericConverter> ExpressionNumericConverterLazy = new Lazy<IExpressionNumericConverter>(() => new CSharpExpressionNumericConverter());
         private static readonly Lazy<SyntaxFacade<SyntaxKind>> SyntaxLazy = new Lazy<SyntaxFacade<SyntaxKind>>(() => new CSharpSyntaxFacade());
         private static readonly Lazy<ISyntaxKindFacade<SyntaxKind>> SyntaxKindLazy = new Lazy<ISyntaxKindFacade<SyntaxKind>>(() => new CSharpSyntaxKindFacade());
+        private static readonly Lazy<ITrackerFacade<SyntaxKind>> TrackerLazy = new Lazy<ITrackerFacade<SyntaxKind>>(() => new CSharpTrackerFacade());
 
+        public AssignmentFinder AssignmentFinder => AssignmentFinderLazy.Value;
         public StringComparison NameComparison => StringComparison.Ordinal;
         public GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
         public IExpressionNumericConverter ExpressionNumericConverter => ExpressionNumericConverterLazy.Value;
         public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
         public ISyntaxKindFacade<SyntaxKind> SyntaxKind => SyntaxKindLazy.Value;
+        public ITrackerFacade<SyntaxKind> Tracker => TrackerLazy.Value;
 
         public static CSharpFacade Instance => Singleton.Value;
 

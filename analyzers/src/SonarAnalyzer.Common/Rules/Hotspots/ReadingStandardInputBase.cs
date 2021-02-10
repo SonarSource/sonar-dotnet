@@ -19,38 +19,35 @@
  */
 
 using System;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ReadingStandardInputBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ReadingStandardInputBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4829";
-        protected const string MessageFormat = "Make sure that reading the standard input is safe here.";
+        private const string MessageFormat = "Make sure that reading the standard input is safe here.";
 
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+        protected abstract bool WhenResultIsNotIgnored(InvocationContext context);
 
-        protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
+        protected ReadingStandardInputBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
-                    new MemberDescriptor(KnownType.System_Console, nameof(Console.OpenStandardInput))));
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input, inv.MatchMethod(new MemberDescriptor(KnownType.System_Console, nameof(Console.OpenStandardInput))));
 
-            InvocationTracker.Track(context,
+            inv.Track(input,
                 WhenResultIsNotIgnored, // This is syntax-only check and we can execute it first
-                InvocationTracker.MatchMethod(
+                inv.MatchMethod(
                     new MemberDescriptor(KnownType.System_Console, nameof(Console.Read)),
                     new MemberDescriptor(KnownType.System_Console, nameof(Console.ReadKey)),
                     new MemberDescriptor(KnownType.System_Console, nameof(Console.ReadLine))));
 
-            PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchProperty(
-                    new MemberDescriptor(KnownType.System_Console, nameof(Console.In))));
+            var pa = Language.Tracker.PropertyAccess;
+            pa.Track(input, pa.MatchProperty(new MemberDescriptor(KnownType.System_Console, nameof(Console.In))));
         }
-
-        protected abstract bool WhenResultIsNotIgnored(InvocationContext context);
     }
 }

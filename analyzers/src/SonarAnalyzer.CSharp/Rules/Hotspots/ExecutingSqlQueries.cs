@@ -34,23 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax, IdentifierNameSyntax>
     {
+        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
+
         public ExecutingSqlQueries() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
-        {
-            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, Rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, Rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, Rule);
-            AssignmentFinder = new CSharpAssignmentFinder();
-        }
-
-        protected override string GetIdentifierName(IdentifierNameSyntax identifierNameSyntax) =>
-            identifierNameSyntax.Identifier.ValueText;
-
-        protected override ExpressionSyntax GetInvocationExpression(SyntaxNode expression) =>
-            expression is InvocationExpressionSyntax invocation
-                ? invocation.Expression
-                : null;
+        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
             context.Node is InvocationExpressionSyntax invocation

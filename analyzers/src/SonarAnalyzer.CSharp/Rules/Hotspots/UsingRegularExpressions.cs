@@ -32,13 +32,11 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class UsingRegularExpressions : UsingRegularExpressionsBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
         public UsingRegularExpressions() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public UsingRegularExpressions(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
-        {
-            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, Rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, Rule);
-        }
+        internal /*for testing*/ UsingRegularExpressions(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         protected override string GetStringLiteralAtIndex(InvocationContext context, int index) =>
             context.Node is InvocationExpressionSyntax invocation

@@ -31,14 +31,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class CommandPath : CommandPathBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
         public CommandPath() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal CommandPath(IAnalyzerConfiguration configuration) : base(RspecStrings.ResourceManager)
-        {
-            InvocationTracker = new VisualBasicInvocationTracker(configuration, Rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(configuration, Rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(configuration, Rule);
-        }
+        internal /*for testing*/ CommandPath(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         protected override string FirstArgument(InvocationContext context) =>
             ((InvocationExpressionSyntax)context.Node).ArgumentList.Get(0).FindStringConstant(context.SemanticModel);

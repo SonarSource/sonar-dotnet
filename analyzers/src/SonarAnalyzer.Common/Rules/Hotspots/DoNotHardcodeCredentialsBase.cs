@@ -41,12 +41,16 @@ namespace SonarAnalyzer.Rules
         private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
-        private readonly IAnalyzerConfiguration analyzerConfiguration;
+        private readonly IAnalyzerConfiguration configuration;
+        private readonly DiagnosticDescriptor rule;
         private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
         private Regex passwordValuePattern;
 
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract void InitializeActions(ParameterLoadingAnalysisContext context);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("credentialWords", PropertyType.String, "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
         public string CredentialWords
@@ -65,44 +69,41 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-        protected DiagnosticDescriptor Rule { get; }
-        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
-        protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
-
-        protected DoNotHardcodeCredentialsBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration analyzerConfiguration)
+        protected DoNotHardcodeCredentialsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
         {
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-            CredentialWords = DefaultCredentialWords;
-            this.analyzerConfiguration = analyzerConfiguration;
+            this.configuration = configuration;
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+            CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
         }
 
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
         {
-            var innerContext = context.GetInnerContext();
+            var input = new TrackerInput(context.GetInnerContext(), configuration, rule);
 
-            ObjectCreationTracker.Track(innerContext, new object[] { MessageHardcodedPassword },
-                ObjectCreationTracker.MatchConstructor(KnownType.System_Net_NetworkCredential),
-                ObjectCreationTracker.ArgumentAtIndexIs(1, KnownType.System_String),
-                ObjectCreationTracker.ArgumentAtIndexIsConst(1));
+            var oc = Language.Tracker.ObjectCreation;
+            oc.Track(input, new object[] { MessageHardcodedPassword },
+                oc.MatchConstructor(KnownType.System_Net_NetworkCredential),
+                oc.ArgumentAtIndexIs(1, KnownType.System_String),
+                oc.ArgumentAtIndexIsConst(1));
 
-            ObjectCreationTracker.Track(innerContext, new object[] { MessageHardcodedPassword },
-               ObjectCreationTracker.MatchConstructor(KnownType.System_Security_Cryptography_PasswordDeriveBytes),
-               ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
-               ObjectCreationTracker.ArgumentAtIndexIsConst(0));
+            oc.Track(input, new object[] { MessageHardcodedPassword },
+               oc.MatchConstructor(KnownType.System_Security_Cryptography_PasswordDeriveBytes),
+               oc.ArgumentAtIndexIs(0, KnownType.System_String),
+               oc.ArgumentAtIndexIsConst(0));
 
-            PropertyAccessTracker.Track(innerContext, new object[] { MessageHardcodedPassword },
-               PropertyAccessTracker.MatchSetter(),
-               PropertyAccessTracker.AssignedValueIsConstant(),
-               PropertyAccessTracker.MatchProperty(new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
+            var pa = Language.Tracker.PropertyAccess;
+            pa.Track(input, new object[] { MessageHardcodedPassword },
+               pa.MatchSetter(),
+               pa.AssignedValueIsConstant(),
+               pa.MatchProperty(new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
 
             InitializeActions(context);
         }
 
         protected bool IsEnabled(AnalyzerOptions options)
         {
-            analyzerConfiguration.Initialize(options);
-            return analyzerConfiguration.IsEnabled(DiagnosticId);
+            configuration.Initialize(options);
+            return configuration.IsEnabled(DiagnosticId);
         }
 
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
@@ -140,11 +141,11 @@ namespace SonarAnalyzer.Rules
                         var bannedWords = FindCredentialWords(GetVariableName(declarator), variableValue);
                         if (bannedWords.Any())
                         {
-                            context.ReportDiagnosticWhenActive(Diagnostic.Create(analyzer.Rule, declarator.GetLocation(), string.Format(MessageFormatCredential, bannedWords.JoinStr(", "))));
+                            context.ReportDiagnosticWhenActive(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), string.Format(MessageFormatCredential, bannedWords.JoinStr(", "))));
                         }
                         else if (ContainsUriUserInfo(variableValue))
                         {
-                            context.ReportDiagnosticWhenActive(Diagnostic.Create(analyzer.Rule, declarator.GetLocation(), MessageUriUserInfo));
+                            context.ReportDiagnosticWhenActive(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), MessageUriUserInfo));
                         }
                     }
                 };

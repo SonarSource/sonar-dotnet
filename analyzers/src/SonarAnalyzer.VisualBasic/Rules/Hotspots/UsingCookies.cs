@@ -30,14 +30,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class UsingCookies : UsingCookiesBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
         public UsingCookies() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public UsingCookies(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager)
-        {
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, Rule);
-            ElementAccessTracker = new VisualBasicElementAccessTracker(analyzerConfiguration, Rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, Rule);
-            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, Rule);
-        }
+        internal /*for testing*/ UsingCookies(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
     }
 }

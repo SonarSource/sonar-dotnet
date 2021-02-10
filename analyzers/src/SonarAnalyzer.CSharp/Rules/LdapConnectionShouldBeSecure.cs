@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.Trackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -38,9 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const int AuthenticationTypesNone = 0;
         private const int AuthenticationTypesAnonymous = 16;
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        public LdapConnectionShouldBeSecure() : base(AnalyzerConfiguration.AlwaysEnabled, DiagnosticId, MessageFormat) { }
 
         protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
             isAllowedConstantValue: constantValue => constantValue is int integerValue && !IsUnsafe(integerValue),

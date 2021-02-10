@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -33,25 +32,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Obsolete("This rule is deprecated.")]
     public sealed class ControllingPermissions : ControllingPermissionsBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
+        public ControllingPermissions() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public ControllingPermissions()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
-
-        internal /*for testing*/ ControllingPermissions(IAnalyzerConfiguration analyzerConfiguration)
-        {
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
-            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
-            MethodDeclarationTracker = new VisualBasicMethodDeclarationTracker(analyzerConfiguration, rule);
-            BaseTypeTracker = new VisualBasicBaseTypeTracker(analyzerConfiguration, rule);
-        }
+        internal /*for testing*/ ControllingPermissions(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
     }
 }

@@ -18,22 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExpandingArchivesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ExpandingArchivesBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S5042";
         protected const string MessageFormat = "Make sure that decompressing this archive file is safe.";
 
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+        protected ExpandingArchivesBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
+            var t = Language.Tracker.Invocation;
+            t.Track(input,
+                t.MatchMethod(
                     new MemberDescriptor(KnownType.System_IO_Compression_ZipFileExtensions, "ExtractToFile"),
                     new MemberDescriptor(KnownType.System_IO_Compression_ZipFileExtensions, "ExtractToDirectory"),
                     new MemberDescriptor(KnownType.System_IO_Compression_ZipFile, "ExtractToDirectory")));

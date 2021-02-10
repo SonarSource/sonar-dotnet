@@ -18,22 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class SocketsCreationBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class SocketsCreationBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4818";
-        protected const string MessageFormat = "Make sure that sockets are used safely here.";
+        private const string MessageFormat = "Make sure that sockets are used safely here.";
 
-        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+        protected SocketsCreationBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(
+            var t = Language.Tracker.ObjectCreation;
+            t.Track(input,
+                t.MatchConstructor(
                     KnownType.System_Net_Sockets_Socket,
                     KnownType.System_Net_Sockets_TcpClient,
                     KnownType.System_Net_Sockets_UdpClient));

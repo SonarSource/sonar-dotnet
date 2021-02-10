@@ -18,77 +18,71 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UsingCookiesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class UsingCookiesBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2255";
         private const string MessageFormat = "Make sure that this cookie is written safely.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected UsingCookiesBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected DiagnosticDescriptor Rule { get; }
-        protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
-        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
-        protected ElementAccessTracker<TSyntaxKind> ElementAccessTracker { get; set; }
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
-
-        protected UsingCookiesBase(System.Resources.ResourceManager rspecStrings) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings).WithNotConfigurable();
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Value")),
-                PropertyAccessTracker.MatchSetter());
+            var pa = Language.Tracker.PropertyAccess;
+            pa.Track(input,
+                pa.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Value")),
+                pa.MatchSetter());
 
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(KnownType.System_Web_HttpCookie),
-                ObjectCreationTracker.ArgumentAtIndexIs(1, KnownType.System_String));
+            var oc = Language.Tracker.ObjectCreation;
+            oc.Track(input,
+                oc.MatchConstructor(KnownType.System_Web_HttpCookie),
+                oc.ArgumentAtIndexIs(1, KnownType.System_String));
 
-            ElementAccessTracker.Track(context,
-                ElementAccessTracker.MatchIndexerIn(KnownType.System_Web_HttpCookie),
-                ElementAccessTracker.ArgumentAtIndexIs(0, KnownType.System_String),
-                ElementAccessTracker.MatchSetter());
+            var ea = Language.Tracker.ElementAccess;
+            ea.Track(input,
+                ea.MatchIndexerIn(KnownType.System_Web_HttpCookie),
+                ea.ArgumentAtIndexIs(0, KnownType.System_String),
+                ea.MatchSetter());
 
-            ElementAccessTracker.Track(context,
-                ElementAccessTracker.MatchIndexerIn(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary),
-                ElementAccessTracker.ArgumentAtIndexEquals(0, "Set-Cookie"),
-                ElementAccessTracker.MatchSetter());
+            ea.Track(input,
+                ea.MatchIndexerIn(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary),
+                ea.ArgumentAtIndexEquals(0, "Set-Cookie"),
+                ea.MatchSetter());
 
-            ElementAccessTracker.Track(context,
-                ElementAccessTracker.MatchIndexerIn(
+            ea.Track(input,
+                ea.MatchIndexerIn(
                     KnownType.Microsoft_AspNetCore_Http_IRequestCookieCollection,
                     KnownType.Microsoft_AspNetCore_Http_IResponseCookies),
-                ElementAccessTracker.MatchSetter());
+                ea.MatchSetter());
 
-            ElementAccessTracker.Track(context,
-                ElementAccessTracker.MatchIndexerIn(KnownType.System_Collections_Specialized_NameValueCollection),
-                ElementAccessTracker.MatchSetter(),
-                ElementAccessTracker.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
+            ea.Track(input,
+                ea.MatchIndexerIn(KnownType.System_Collections_Specialized_NameValueCollection),
+                ea.MatchSetter(),
+                ea.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
 
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input,
+                inv.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
 
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
+            inv.Track(input,
+                inv.MatchMethod(
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue_VB, "Add")),
-                InvocationTracker.ArgumentAtIndexIsAny(0, "Set-Cookie"),
-                InvocationTracker.MethodHasParameters(2),
+                inv.ArgumentAtIndexIsAny(0, "Set-Cookie"),
+                inv.MethodHasParameters(2),
                 IsIHeadersDictionary());
 
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Collections_Specialized_NameObjectCollectionBase, "Add")),
-                InvocationTracker.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
+            inv.Track(input,
+                inv.MatchMethod(new MemberDescriptor(KnownType.System_Collections_Specialized_NameObjectCollectionBase, "Add")),
+                inv.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
         }
 
-        private static TrackerBase<InvocationContext>.Condition IsIHeadersDictionary() =>
+        private static TrackerBase<TSyntaxKind, InvocationContext>.Condition IsIHeadersDictionary() =>
             context =>
             {
                 var containingType = context.MethodSymbol.Value.ContainingType;

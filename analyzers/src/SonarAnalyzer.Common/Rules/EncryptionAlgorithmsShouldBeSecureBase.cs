@@ -18,50 +18,44 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class EncryptionAlgorithmsShouldBeSecureBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class EncryptionAlgorithmsShouldBeSecureBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S5542";
         private const string MessageFormat = "Use secure mode and padding scheme.";
 
-        protected abstract TrackerBase<PropertyAccessContext>.Condition IsInsideObjectInitializer();
-        protected abstract TrackerBase<InvocationContext>.Condition HasPkcs1PaddingArgument();
+        protected abstract TrackerBase<TSyntaxKind, PropertyAccessContext>.Condition IsInsideObjectInitializer();
+        protected abstract TrackerBase<TSyntaxKind, InvocationContext>.Condition HasPkcs1PaddingArgument();
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-        protected DiagnosticDescriptor Rule { get; }
-        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
-        protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
-        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+        protected EncryptionAlgorithmsShouldBeSecureBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
+            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
 
-        protected EncryptionAlgorithmsShouldBeSecureBase(System.Resources.ResourceManager rspecStrings) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecStrings);
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(TrackerInput input)
         {
-            InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input,
+                inv.MatchMethod(
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "Encrypt"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "TryEncrypt")),
-                Conditions.Or(
-                    InvocationTracker.ArgumentIsBoolConstant("fOAEP", false),
+                inv.Or(
+                    inv.ArgumentIsBoolConstant("fOAEP", false),
                     HasPkcs1PaddingArgument()));
 
             // There exist no GCM mode with AesManaged, so any mode we set will be insecure. We do not raise
             // when inside an ObjectInitializerExpression, as the issue is already raised on the constructor
-            PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchProperty(
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_AesManaged, "Mode")),
-                PropertyAccessTracker.MatchSetter(),
-                Conditions.ExceptWhen(IsInsideObjectInitializer()));
+            var pa = Language.Tracker.PropertyAccess;
+            pa.Track(input,
+                pa.MatchProperty(new MemberDescriptor(KnownType.System_Security_Cryptography_AesManaged, "Mode")),
+                pa.MatchSetter(),
+                pa.ExceptWhen(IsInsideObjectInitializer()));
 
-            ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(KnownType.System_Security_Cryptography_AesManaged));
+            var oc = Language.Tracker.ObjectCreation;
+            oc.Track(input, oc.MatchConstructor(KnownType.System_Security_Cryptography_AesManaged));
         }
     }
 }
