@@ -16,6 +16,49 @@ order to prevents DoS attacks.</p>
     </ul> </li>
 </ul>
 <p>It is recommended to customize the rule with the limit values that correspond to the web application.</p>
+<h2>Sensitive Code Example</h2>
+<pre>
+Imports Microsoft.AspNetCore.Mvc
+
+Public Class MyController
+    Inherits Controller
+
+    &lt;HttpPost&gt;
+    &lt;DisableRequestSizeLimit&gt; ' Sensitive: No size  limit
+    &lt;RequestSizeLimit(10000000)&gt; ' Sensitive: 10MB is more than the recommended limit of 2MB
+    Public Function PostRequest(Model model) As IActionResult
+    ' ...
+    End Function
+
+    &lt;HttpPost&gt;
+    &lt;RequestFormLimits(MultipartBodyLengthLimit = 8000000)&gt; ' Sensitive: 10MB is more than the recommended limit of 8MB
+    Public Function MultipartFormRequest(Model model) As IActionResult
+    ' ...
+    End Function
+
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Imports Microsoft.AspNetCore.Mvc
+
+Public Class MyController
+    Inherits Controller
+
+    &lt;HttpPost&gt;
+    &lt;RequestSizeLimit(2000000)&gt; ' Compliant: 2MB
+    Public Function PostRequest(Model model) As IActionResult
+    ' ...
+    End Function
+
+    &lt;HttpPost&gt;
+    &lt;RequestFormLimits(MultipartBodyLengthLimit = 8000000)&gt; ' Compliant: 8MB
+    Public Function MultipartFormRequest(Model model) AS IActionResult
+    ' ...
+    End Function
+
+End Class
+</pre>
 <h2>See</h2>
 <ul>
   <li> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html">Owasp Cheat Sheet</a> - Owasp Denial of Service
