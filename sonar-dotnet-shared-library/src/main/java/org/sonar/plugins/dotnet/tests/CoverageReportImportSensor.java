@@ -108,7 +108,6 @@ public class CoverageReportImportSensor implements ProjectSensor {
       } else if (inputFile.type().equals(Type.TEST)) {
         fileCountStatistics.test++;
         LOG.debug("Skipping '{}' as it is a test file.", filePath);
-        // Do not log for test files to avoid pointless noise
       } else if (!coverageConf.languageKey().equals(inputFile.language())) {
         LOG.debug("Skipping '{}' as conf lang '{}' does not equal file lang '{}'.",
           filePath, coverageConf.languageKey(), inputFile.language());
