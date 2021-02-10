@@ -12,7 +12,7 @@ param
     $ruleId,
 
     [Parameter(HelpMessage = "The name of single project to build. If ommited, all projects will be build.")]
-    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb")]
+    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "NetCore31WithConfigurableRules" , "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb")]
     [string]
     $project
 )
@@ -473,6 +473,7 @@ try {
 
     Build-Project-DotnetTool "NetCore31" "NetCore31.sln"
     Build-Project-DotnetTool "Net5" "Net5.sln"
+    Build-Project-DotnetTool "NetCore31WithConfigurableRules" "NetCore31WithConfigurableRules.sln"
 
     Write-Header "Processing analyzer results"
 

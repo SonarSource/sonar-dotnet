@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.Extensions.Hosting.IHostEnvironment' instead of 'Microsoft.AspNetCore.Hosting.IWebHostEnvironment'.",
+"location":  {
+"uri":  "sources\NetCore31WithConfigurableRules\Startup.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  76,
+"endLine":  30,
+"endColumn":  79
+}
+}
+}
+]
+}
