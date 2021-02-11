@@ -37,6 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CS_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
@@ -44,6 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.vb",
                 new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
@@ -63,33 +65,20 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CS_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
                 new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromCSharp8,
                 GetReferencesNetCore(Constants.DotNetCore220Version));
 
-
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExecutingSqlQueries_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
-                new CS.ExecutingSqlQueries(),
-                GetReferencesNetCore(Constants.DotNetCore220Version));
-
-        [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
                 new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 ParseOptionsHelper.FromVisualBasic15,
-                GetReferencesNetCore(Constants.DotNetCore220Version));
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ExecutingSqlQueries_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
-                new VB.ExecutingSqlQueries(),
                 GetReferencesNetCore(Constants.DotNetCore220Version));
 
         internal static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>

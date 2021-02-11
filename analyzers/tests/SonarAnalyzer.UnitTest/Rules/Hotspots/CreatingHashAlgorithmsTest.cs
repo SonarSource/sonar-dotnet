@@ -69,23 +69,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     GetAdditionalReferences());
 #endif
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
-        public void CreatingHashAlgorithms_CS_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\CreatingHashAlgorithms.cs",
-                                           new CS.CreatingHashAlgorithms(),
-                                           ParseOptionsHelper.FromCSharp8,
-                                           GetAdditionalReferences());
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
-        public void CreatingHashAlgorithms_VB_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\CreatingHashAlgorithms.vb",
-                                           new VB.CreatingHashAlgorithms(),
-                                           GetAdditionalReferences());
-
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             MetadataReferenceFacade.SystemSecurityCryptography;
     }

@@ -34,6 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExpandingArchives_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.cs",
                                     new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
@@ -41,24 +42,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExpandingArchives_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ExpandingArchives.cs",
-                                           new CS.ExpandingArchives(),
-                                           AdditionalReferences);
-
-        [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ExpandingArchives_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExpandingArchives.vb",
                                     new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled),
                                     AdditionalReferences);
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ExpandingArchives_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ExpandingArchives.vb",
-                                           new VB.ExpandingArchives(),
-                                           AdditionalReferences);
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
             MetadataReferenceFacade.SystemIoCompression;

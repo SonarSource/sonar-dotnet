@@ -32,22 +32,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void CommandPath_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.cs", new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void CommandPath_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CommandPath.vb", new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled), MetadataReferenceFacade.SystemDiagnosticsProcess);
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void CommandPath_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\CommandPath.cs", new CS.CommandPath(), MetadataReferenceFacade.SystemDiagnosticsProcess);
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void CommandPath_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\CommandPath.vb", new VB.CommandPath(), MetadataReferenceFacade.SystemDiagnosticsProcess);
     }
 }

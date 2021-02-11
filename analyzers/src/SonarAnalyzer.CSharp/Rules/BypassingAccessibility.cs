@@ -32,8 +32,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public BypassingAccessibility() : this(AnalyzerConfiguration.Hotspot) { }
-
-        internal /*for testing*/ BypassingAccessibility(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        public BypassingAccessibility() : base(AnalyzerConfiguration.AlwaysEnabled, RspecStrings.ResourceManager) { }
     }
 }

@@ -97,22 +97,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 SeriLogReferences);
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_CS_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
-                new CS.ConfiguringLoggers(),
-                AspNetCoreLoggingReferences);
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_VB_RuleDisabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.vb",
-                new VB.ConfiguringLoggers(),
-                AspNetCoreLoggingReferences);
-
         internal static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
             NetStandardMetadataReference.Netstandard
             .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))

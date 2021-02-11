@@ -36,6 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
@@ -43,6 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 #else
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_NetCore.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
@@ -50,6 +52,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_Net() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Net.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled), GetAdditionalReferences_NetCore());
@@ -60,6 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),

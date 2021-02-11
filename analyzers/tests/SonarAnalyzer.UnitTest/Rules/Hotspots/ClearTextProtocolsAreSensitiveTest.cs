@@ -34,23 +34,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ClearTextProtocolsAreSensitive() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.cs",
                                     new CS.ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetAdditionalReferences());
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ControllingPermissions_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.cs",
-                                           new CS.ClearTextProtocolsAreSensitive(),
-                                           ParseOptionsHelper.FromCSharp8,
-                                           GetAdditionalReferences());
-
 #if NET5_0
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs",
                                                       new CS.ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
@@ -61,4 +55,3 @@ namespace SonarAnalyzer.UnitTest.Rules
             MetadataReferenceFacade.SystemNetHttp.Concat(MetadataReferenceFacade.SystemComponentModelPrimitives);
     }
 }
-

@@ -31,18 +31,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void UsingCommandLineArguments_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.cs",
                                     new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void UsingCommandLineArguments_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\UsingCommandLineArguments.CSharp9.cs",
                                                       new CS.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void UsingCommandLineArguments_CS_Partial()
         {
             var compilation = SolutionBuilder.Create()
@@ -70,17 +73,14 @@ partial class Program1
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UsingCommandLineArguments_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingCommandLineArguments.cs", new CS.UsingCommandLineArguments());
-
-        [TestMethod]
-        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void UsingCommandLineArguments_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
                                     new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
 
         [TestMethod]
         [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void UsingCommandLineArguments_VB_Partial()
         {
             var compilation = SolutionBuilder.Create()
@@ -105,11 +105,5 @@ End Class
                 new VB.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default);
         }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void UsingCommandLineArguments_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\UsingCommandLineArguments.vb",
-                                           new VB.UsingCommandLineArguments());
     }
 }
