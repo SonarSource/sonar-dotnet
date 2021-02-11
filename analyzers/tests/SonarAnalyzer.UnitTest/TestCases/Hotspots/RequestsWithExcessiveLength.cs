@@ -14,30 +14,30 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestSizeLimit(10000000)] // Noncompliant {{Make sure the content length limit is safe here.}}
-//       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        [RequestSizeLimit(2_000_001)] // Noncompliant {{Make sure the content length limit is safe here.}}
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult PostRequestAboveLimit()
         {
             return null;
         }
 
         [HttpPost]
-        [RequestSizeLimit(1623)] // Compliant value is below limit.
+        [RequestSizeLimit(2_000_000)] // Compliant value is below limit.
         public ActionResult PostRequestBelowLimit()
         {
             return null;
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 8000001, MultipartHeadersLengthLimit = 42)] // Noncompliant {{Make sure the content length limit is safe here.}}
-//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        [RequestFormLimits(MultipartBodyLengthLimit = 8_000_001, MultipartHeadersLengthLimit = 42)] // Noncompliant {{Make sure the content length limit is safe here.}}
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult MultipartFormRequestAboveLimit()
         {
             return null;
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartHeadersLengthLimit = 55)]
+        [RequestFormLimits(MultipartHeadersLengthLimit = 8_000_000)]
         public ActionResult MultipartFormRequestHeadersLimitSet()
         {
             return null;
@@ -50,7 +50,7 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 42)] // Compliant value is below limit.
+        [RequestFormLimits(MultipartBodyLengthLimit = 8_000_000)] // Compliant value is below limit.
         public ActionResult MultipartFormRequestBelowLimit()
         {
             return null;
@@ -95,5 +95,36 @@ namespace Tests.Diagnostics
         {
             return null;
         }
+    }
+
+    [DisableRequestSizeLimit] // Noncompliant
+//   ^^^^^^^^^^^^^^^^^^^^^^^
+    public class DisableRequestSizeLimitController : Controller
+    {
+
+    }
+
+    [RequestSizeLimit(2_000_001)] // Noncompliant
+    public class RequestSizeLimitAboveController : Controller
+    {
+
+    }
+
+    [RequestFormLimits(MultipartBodyLengthLimit = 8_000_001)] // Noncompliant
+    public class RequestFormLimitsAboveController : Controller
+    {
+
+    }
+
+    [RequestSizeLimit(2_000_000)]
+    public class RequestSizeLimitBelowController : Controller
+    {
+
+    }
+
+    [RequestFormLimits(MultipartHeadersLengthLimit = 8_000_000)]
+    public class RequestFormLimitsBelowController : Controller
+    {
+
     }
 }

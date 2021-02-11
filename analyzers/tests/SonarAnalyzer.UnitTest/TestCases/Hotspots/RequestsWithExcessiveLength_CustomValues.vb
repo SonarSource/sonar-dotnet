@@ -18,6 +18,18 @@ Namespace Tests.TestCases
             Return Nothing
         End Function
 
+        <HttpPost>
+        <RequestSizeLimit(14)>
+        Public Function PostRequestBelowLimit() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(MultipartBodyLengthLimit:=21)>
+        Public Function MultipartFormRequestBelowLimit() As ActionResult
+            Return Nothing
+        End Function
+
     End Class
 
 End Namespace

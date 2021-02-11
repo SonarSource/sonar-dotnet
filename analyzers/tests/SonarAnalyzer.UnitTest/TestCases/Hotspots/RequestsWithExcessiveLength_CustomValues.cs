@@ -20,5 +20,19 @@ namespace Tests.Diagnostics
         {
             return null;
         }
+
+        [HttpPost]
+        [RequestSizeLimit(14)]
+        public ActionResult PostRequestBelowLimit()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = 21)]
+        public ActionResult MultipartFormRequestBelowLimit()
+        {
+            return null;
+        }
     }
 }

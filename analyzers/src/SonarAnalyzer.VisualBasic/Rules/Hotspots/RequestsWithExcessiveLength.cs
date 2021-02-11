@@ -38,23 +38,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration) { }
 
-        protected override bool IsInvalidRequestFormLimitsAttribut(AttributeSyntax attribute, SemanticModel semanticModel) =>
+        protected override bool IsInvalidRequestFormLimits(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, semanticModel)
-            && attribute.ArgumentList != null
-            && attribute.ArgumentList.Arguments.FirstOrDefault(arg => FilterArgumentsOfInterest(arg)) is { } firstArgument
+            && attribute.ArgumentList?.Arguments.FirstOrDefault(arg => IsMultipartBodyLengthLimit(arg)) is { } firstArgument
             && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.GetExpression(), out var intValue)
             && intValue > FileUploadSizeLimit;
 
-        protected override bool IsInvalidRequestSizeLimitAttribute(AttributeSyntax attribute, SemanticModel semanticModel) =>
+        protected override bool IsInvalidRequestSizeLimit(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute, semanticModel)
-            && attribute.ArgumentList != null
-            && attribute.ArgumentList.Arguments.FirstOrDefault() is { } firstArgument
+            && attribute.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
             && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.GetExpression(), out var intValue)
             && intValue > StandardSizeLimit;
 
-        private static bool FilterArgumentsOfInterest(ArgumentSyntax argument) =>
-            argument is SimpleArgumentSyntax simpleArgument
-            && simpleArgument.NameColonEquals is { } nameColonEquals
-            && nameColonEquals.Name.Identifier.ValueText.Equals(MultipartBodyLengthLimit, System.StringComparison.OrdinalIgnoreCase);
+        private bool IsMultipartBodyLengthLimit(ArgumentSyntax argument) =>
+            argument is SimpleArgumentSyntax { NameColonEquals: { } nameColonEquals }
+            && nameColonEquals.Name.Identifier.ValueText.Equals(MultipartBodyLengthLimit, Language.NameComparison);
     }
 }

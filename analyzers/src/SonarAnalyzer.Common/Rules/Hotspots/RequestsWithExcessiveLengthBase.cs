@@ -37,13 +37,14 @@ namespace SonarAnalyzer.Rules
         private const int DefaultFileUploadSizeLimit = 8_000_000;
         private const int DefaultStandardSizeLimit = 2_000_000;
         private readonly IAnalyzerConfiguration analyzerConfiguration;
+        private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        protected abstract bool IsInvalidRequestFormLimitsAttribut(TAttributeSyntax attribute, SemanticModel semanticModel);
-        protected abstract bool IsInvalidRequestSizeLimitAttribute(TAttributeSyntax attribute, SemanticModel semanticModel);
+        protected abstract bool IsInvalidRequestFormLimits(TAttributeSyntax attribute, SemanticModel semanticModel);
+        protected abstract bool IsInvalidRequestSizeLimit(TAttributeSyntax attribute, SemanticModel semanticModel);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("standardSizeLimit", PropertyType.Integer, "The maximum size of regular HTTP requests (in bytes).", DefaultStandardSizeLimit)]
         public int StandardSizeLimit { get; set; } = DefaultStandardSizeLimit;
@@ -51,11 +52,9 @@ namespace SonarAnalyzer.Rules
         [RuleParameter("fileUploadSizeLimit", PropertyType.Integer, "The maximum size of HTTP requests handling file uploads (in bytes).", DefaultFileUploadSizeLimit)]
         public int FileUploadSizeLimit { get; set; } = DefaultFileUploadSizeLimit;
 
-        protected DiagnosticDescriptor Rule { get; }
-
         protected RequestsWithExcessiveLengthBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration analyzerConfiguration)
         {
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
             this.analyzerConfiguration = analyzerConfiguration;
         }
 
@@ -70,10 +69,10 @@ namespace SonarAnalyzer.Rules
 
                     if (c.Node is TAttributeSyntax attribute
                         && (attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, c.SemanticModel)
-                            || IsInvalidRequestSizeLimitAttribute(attribute, c.SemanticModel)
-                            || IsInvalidRequestFormLimitsAttribut(attribute, c.SemanticModel)))
+                            || IsInvalidRequestSizeLimit(attribute, c.SemanticModel)
+                            || IsInvalidRequestFormLimits(attribute, c.SemanticModel)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
                 Language.SyntaxKind.Attribute);
