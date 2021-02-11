@@ -5148,6 +5148,39 @@
   <data name="S5659_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
   </data>
+  <data name="S5693_Category" xml:space="preserve">
+    <value>Major Security Hotspot</value>
+  </data>
+  <data name="S5693_Description" xml:space="preserve">
+    <value>Rejecting requests with significant content length is a good practice to control the network traffic intensity and thus resource consumption in order to prevents DoS attacks.</value>
+  </data>
+  <data name="S5693_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S5693_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S5693_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S5693_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S5693_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S5693_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S5693_Tags" xml:space="preserve">
+    <value>cwe,owasp-a6</value>
+  </data>
+  <data name="S5693_Title" xml:space="preserve">
+    <value>Allowing requests with excessive content length is security-sensitive</value>
+  </data>
+  <data name="S5693_Type" xml:space="preserve">
+    <value>SECURITY_HOTSPOT</value>
+  </data>
   <data name="S5753_Category" xml:space="preserve">
     <value>Major Security Hotspot</value>
   </data>

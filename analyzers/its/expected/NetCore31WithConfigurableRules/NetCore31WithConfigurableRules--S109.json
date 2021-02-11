@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '17' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  27,
+"endLine":  13,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  27,
+"endLine":  18,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  55,
+"endLine":  23,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '22' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  55,
+"endLine":  28,
+"endColumn":  57
+}
+}
+}
+]
+}

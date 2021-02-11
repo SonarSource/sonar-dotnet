@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S5693",
+"message":  "Make sure the content length limit is safe here.",
+"location":  {
+"uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  10,
+"endLine":  8,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S5693",
+"message":  "Make sure the content length limit is safe here.",
+"location":  {
+"uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  10,
+"endLine":  13,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S5693",
+"message":  "Make sure the content length limit is safe here.",
+"location":  {
+"uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  10,
+"endLine":  23,
+"endColumn":  58
+}
+}
+}
+]
+}

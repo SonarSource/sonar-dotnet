@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4823",
+"message":  "Make sure that command line arguments are used safely here.",
+"location":  {
+"uri":  "sources\NetCore31WithConfigurableRules\Program.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  28,
+"endLine":  14,
+"endColumn":  32
+}
+}
+}
+]
+}

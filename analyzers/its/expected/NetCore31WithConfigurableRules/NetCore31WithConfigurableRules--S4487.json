@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\NetCore31WithConfigurableRules\Controllers\HomeController.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  50,
+"endLine":  14,
+"endColumn":  57
+}
+}
+}
+]
+}

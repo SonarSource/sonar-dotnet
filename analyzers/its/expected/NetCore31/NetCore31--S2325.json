@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S2325",
+"message":  "Make 'MethodWithoutAttributes' a static method.",
+"location":  {
+"uri":  "sources\NetCore31\Controllers\S5693Controller.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  29,
+"endLine":  55,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2325",
 "message":  "Make 'ConfigureServices' a static method.",
 "location":  {
 "uri":  "sources\NetCore31\Startup.cs",
