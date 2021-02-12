@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Helpers
                 return;
             }
 
-            // ... but for compatibility purposes we need to keep handling the old-fashioned way
+            // ... but for compatibility purposes we need to keep handling the old-fashioned way. Old SonarLint can be used with latest NuGet.
             if (SonarAnalysisContext.AreAnalysisScopeMatching(reportingContext.Compilation, new[] { reportingContext.Diagnostic.Descriptor }) &&
                 !VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic) &&
                 (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
