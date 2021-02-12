@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References EntityFramework(string packageVersion = "6.2.0") => CreateWithCommandLine("EntityFramework", packageVersion);
         public static References FluentAssertions(string packageVersion) => CreateWithCommandLine("FluentAssertions", packageVersion);
         public static References JWT(string packageVersion) => CreateWithCommandLine("JWT", packageVersion);
-        public static References Log4Net(string packageVersion, string targetFramework) => Create("log4net", packageVersion, targetFramework);
+        public static References Log4Net(string packageVersion, string targetFramework) => Create("log4net", packageVersion, targetFramework, null);
         public static References MicrosoftAspNetCore(string packageVersion) => CreateWithCommandLine("Microsoft.AspNetCore", packageVersion);
         public static References MicrosoftAspNetCoreDiagnostics(string packageVersion) => CreateWithCommandLine("Microsoft.AspNetCore.Diagnostics", packageVersion);
         public static References MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(string packageVersion) => CreateWithCommandLine("Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore", packageVersion);
@@ -78,6 +78,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftNetHttpHeaders(string packageVersion) => CreateWithCommandLine("Microsoft.Net.Http.Headers", packageVersion);
         public static References MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") => CreateWithCommandLine("Microsoft.SqlServer.Compact", packageVersion);
         public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => CreateWithCommandLine("Microsoft.Web.Xdt", packageVersion);
+        public static References MonoPosixNetStandard(string packageVersion = "1.0.0") => Create("Mono.Posix.NETStandard", packageVersion, "netstandard2.0", "linux-x64");
         public static References MSTestTestFramework(string packageVersion) => CreateWithCommandLine("MSTest.TestFramework", packageVersion);
         public static References MvvmLightLibs(string packageVersion) => CreateWithCommandLine("MvvmLightLibs", packageVersion);
         public static References MySqlData(string packageVersion) => CreateWithCommandLine("MySql.Data", packageVersion);
