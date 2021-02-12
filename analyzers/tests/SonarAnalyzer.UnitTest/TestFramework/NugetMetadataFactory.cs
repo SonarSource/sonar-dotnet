@@ -57,14 +57,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static readonly PackageManager packageManager =
             new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
 
-        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion) =>
-            Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, InstallPackage);
+        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime) =>
+            Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, runtime, InstallPackage);
 
-        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework) =>
-            Create(packageId, packageVersion, new string[] { targetFramework }, InstallPackage);
+        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework, string runtime) =>
+            Create(packageId, packageVersion, new[] { targetFramework }, runtime, InstallPackage);
 
-        public static IEnumerable<MetadataReference> CreateWithCommandLine(string packageId, string packageVersion) =>
-            Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, InstallWithCommandLine);
+        public static IEnumerable<MetadataReference> CreateWithCommandLine(string packageId, string packageVersion, string runtime = null) =>
+            Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, runtime, InstallWithCommandLine);
 
         public static IEnumerable<MetadataReference> CreateNETStandard21()
         {
@@ -90,12 +90,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                .ToImmutableArray();
         }
 
-        private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string[] allowedTargetFrameworks, Action<string, string> installPackage)
+        private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string[] allowedTargetFrameworks, string runtime, Action<string, string> installPackage)
         {
-            EnsurePackageIsInstalled(packageId, packageVersion, installPackage);
+            EnsurePackageIsInstalled(packageId, packageVersion, runtime, installPackage);
 
             var allowedNugetLibDirectoriesByPreference = allowedTargetFrameworks.Select((folder, priority) => new { folder, priority });
-            var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
+            var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion, runtime);
             LogMessage($"Download package directory: {packageDirectory}");
             if (!Directory.Exists(packageDirectory))
             {
@@ -148,20 +148,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return aggregateRepository;
         }
 
-        private static string GetNuGetPackageDirectory(string packageId, string packageVersion)
+        private static string GetNuGetPackageDirectory(string packageId, string packageVersion, string runtime)
         {
-            var x = $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\lib";
+            var runtimePath = runtime == null ? string.Empty : $"runtimes\\{runtime}\\";
+            var x = $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\{runtimePath}lib";
             return Path.GetFullPath(x);
         }
 
         private static string GetRealVersionFolder(string packageId, string packageVersion) =>
             packageVersion != Constants.NuGetLatestVersion
-                ? packageVersion.ToString()
+                ? packageVersion
                 : GetSortedPackageFolders(packageId)
                     .Select(path => Path.GetFileName(path).Substring(packageId.Length + 1))
                     .Last(path => char.IsNumber(path[0]));
 
-        private static void EnsurePackageIsInstalled(string packageId, string packageVersion, Action<string, string> installPackage)
+        private static void EnsurePackageIsInstalled(string packageId, string packageVersion, string runtime, Action<string, string> installPackage)
         {
             if (packageVersion == Constants.NuGetLatestVersion)
             {
@@ -179,7 +180,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             else
             {
                 // Check to see if the specific package is already installed
-                var packageDir = GetNuGetPackageDirectory(packageId, packageVersion);
+                var packageDir = GetNuGetPackageDirectory(packageId, packageVersion, runtime);
                 if (Directory.Exists(packageDir))
                 {
                     LogMessage($"Package found at {packageDir}");
