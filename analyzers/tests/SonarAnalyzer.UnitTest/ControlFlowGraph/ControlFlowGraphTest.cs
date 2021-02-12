@@ -183,7 +183,7 @@ namespace NS
             Action a = () => CSharpControlFlowGraph.Create(equalsValueSyntax.Value, semanticModel);
 
             a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
-            CSharpControlFlowGraph.TryGet(method.Body, semanticModel, out _).Should().BeFalse();
+            CSharpControlFlowGraph.TryGet(equalsValueSyntax.Value, semanticModel, out _).Should().BeFalse();
         }
 
         [TestMethod]
@@ -218,7 +218,39 @@ public class Sample
             Action a = () => CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel);
 
             a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
-            CSharpControlFlowGraph.TryGet(method.Body, semanticModel, out _).Should().BeFalse();
+            CSharpControlFlowGraph.TryGet(method.ExpressionBody, semanticModel, out _).Should().BeFalse();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ExtremelyNestedExpression_IsSupported_InSimpleLambda()
+        {
+            var input = @$"
+public class Sample
+{{
+    public string Main() => Go(x => x + {ExtremelyNestedExpression()});
+
+    public void Go(System.Func<string, string> arg) {{ }}
+}}";
+            var (method, semanticModel) = TestHelper.Compile(input).GetMethod("Main");
+            CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel).Should().NotBeNull();
+            CSharpControlFlowGraph.TryGet(method.ExpressionBody, semanticModel, out _).Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ExtremelyNestedExpression_IsSupported_InParenthesizedLambda()
+        {
+            var input = @$"
+public class Sample
+{{
+    public string Main() => Go(() => {ExtremelyNestedExpression()});
+
+    public void Go(System.Func<string> arg) {{ }}
+}}";
+            var (method, semanticModel) = TestHelper.Compile(input).GetMethod("Main");
+            CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel).Should().NotBeNull();
+            CSharpControlFlowGraph.TryGet(method.ExpressionBody, semanticModel, out _).Should().BeTrue();
         }
 
         #endregion
