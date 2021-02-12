@@ -21,7 +21,7 @@ resources:
     - repository: commonTemplates
       type: git
       name: pipelines-yaml-templates
-      ref:  refs/tags/v1.0.10
+      ref:  refs/tags/v1.0.11
 
 stages:
 - template: stage-with-burgr-notifications.yml@commonTemplates
@@ -613,5 +613,6 @@ stages:
 
 - template: promote-stage.yml@commonTemplates
   parameters:
+    stageName: 'Artifacts:'
     stageDependencies:
     - promoteNugets
