@@ -25,8 +25,9 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
+        where TInvocationExpression : SyntaxNode
     {
         protected const string DiagnosticId = "S5443";
         private const string MessageFormat = "Make sure publicly writable directories are used safely here.";
@@ -66,6 +67,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
+        private protected abstract bool IsGetTempPathAssignment(TInvocationExpression invocationExpression, KnownType type, string methodName, SemanticModel semanticModel);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected DiagnosticDescriptor Rule { get; }
@@ -73,7 +76,8 @@ namespace SonarAnalyzer.Rules
         protected PubliclyWritableDirectoriesBase(System.Resources.ResourceManager rspecResources) =>
             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 Language.GeneratedCodeRecognizer,
                 c =>
@@ -89,5 +93,19 @@ namespace SonarAnalyzer.Rules
                 },
                 Language.SyntaxKind.StringLiteralExpression,
                 Language.SyntaxKind.InterpolatedStringExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                Language.GeneratedCodeRecognizer,
+                c =>
+                {
+                    var node = c.Node;
+                    if (node is TInvocationExpression invocation
+                        && IsGetTempPathAssignment(invocation, KnownType.System_IO_Path, "GetTempPath", c.SemanticModel))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+                    }
+                },
+                Language.SyntaxKind.InvocationExpression);
+        }
     }
 }

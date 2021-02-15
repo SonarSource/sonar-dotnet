@@ -19,10 +19,17 @@ namespace Tests.Diagnostics
             return dir;
         }
 
+        private class InnerClass
+        {
+            public string StringProp { get; set; }
+        }
+
         public void v(string partOfPath)
         {
             // Environment
-            var tmp = Path.GetTempPath(); // Sensitive
+            var tmp = Path.GetTempPath(); // Noncompliant
+            tmp = Path.GetTempPath(); // Noncompliant
+            InnerClass inner = new InnerClass() { StringProp = Path.GetTempPath() }; // Noncompliant
             tmp = Environment.GetEnvironmentVariable("TMPDIR"); // Noncompliant {{Make sure publicly writable directories are used safely here.}}
 //                                                   ^^^^^^^^
             tmp = Environment.GetEnvironmentVariable("TMP"); // Noncompliant

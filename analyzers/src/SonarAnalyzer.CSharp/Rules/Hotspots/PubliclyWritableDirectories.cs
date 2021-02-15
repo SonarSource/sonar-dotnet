@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -28,10 +29,15 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class PubliclyWritableDirectories : PubliclyWritableDirectoriesBase<SyntaxKind>
+    public sealed class PubliclyWritableDirectories : PubliclyWritableDirectoriesBase<SyntaxKind, InvocationExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         public PubliclyWritableDirectories() : base(RspecStrings.ResourceManager) { }
+
+        private protected override bool IsGetTempPathAssignment(InvocationExpressionSyntax invocationExpression, KnownType type, string methodName, SemanticModel semanticModel) =>
+            CSharpSyntaxHelper.IsMethodInvocation(invocationExpression, type, methodName, semanticModel)
+            && (invocationExpression.Parent is EqualsValueClauseSyntax
+                || invocationExpression.Parent is AssignmentExpressionSyntax);
     }
 }
