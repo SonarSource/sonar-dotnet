@@ -54,6 +54,7 @@
     <Compile Include="InsecureDeserialization.cs" />
     <Compile Include="InsecureTemporaryFilesCreation.cs" />
     <Compile Include="JavaScriptSerializerTest.cs" />
+    <Compile Include="LooseFilePermissions.cs" />
     <Compile Include="LosFormatterTest.cs" />
     <Compile Include="NetDataContractSerializerDeserializeTest.cs" />
     <Compile Include="UsingNonstandardCryptographyTest.cs" />

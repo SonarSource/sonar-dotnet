@@ -5023,6 +5023,39 @@
   <data name="S2589_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2612_Category" xml:space="preserve">
+    <value>Major Security Hotspot</value>
+  </data>
+  <data name="S2612_Description" xml:space="preserve">
+    <value>In Unix, "others" class refers to all users except the owner of the file and the members of the group assigned to this file. </value>
+  </data>
+  <data name="S2612_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2612_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2612_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S2612_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S2612_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S2612_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S2612_Tags" xml:space="preserve">
+    <value>cwe,sans-top25-porous,owasp-a5</value>
+  </data>
+  <data name="S2612_Title" xml:space="preserve">
+    <value>Setting loose file permissions is security-sensitive</value>
+  </data>
+  <data name="S2612_Type" xml:space="preserve">
+    <value>SECURITY_HOTSPOT</value>
+  </data>
   <data name="S2674_Category" xml:space="preserve">
     <value>Minor Bug</value>
   </data>

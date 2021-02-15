@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override string GetIdentifierText(IdentifierNameSyntax identifierNameSyntax) =>
             identifierNameSyntax.Identifier.Text;
 
-        protected override bool IsBinaryNegationOrInsideIfCondition(SyntaxNode node)
+        protected override bool IsPartOfBinaryNegationOrCondition(SyntaxNode node)
         {
             if (!(node.Parent is MemberAccessExpressionSyntax))
             {
@@ -53,12 +53,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 current = current.Parent;
             }
 
-            if (current.Parent != null && current.Parent.IsKind(SyntaxKind.IfStatement))
+            if (current.Parent?.IsKind(SyntaxKind.IfStatement) ?? false)
             {
-                return ((IfStatementSyntax)current.Parent).Condition != current;
+                return ((IfStatementSyntax)current.Parent).Condition == current;
             }
 
-            return true;
+            return false;
         }
     }
 }
