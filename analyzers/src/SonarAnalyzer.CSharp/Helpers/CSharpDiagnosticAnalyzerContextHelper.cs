@@ -1,7 +1,7 @@
 ﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
- * mailto:contact@sonarsource.com
+ * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -13,9 +13,9 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System;
@@ -26,8 +26,6 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class CSharpDiagnosticAnalyzerContextHelper
     {
-        #region Register*ActionInNonGenerated
-
         public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(
             this SonarAnalysisContext context,
             Action<SyntaxNodeAnalysisContext> action,
@@ -76,10 +74,6 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCodeBlockStartActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
         }
 
-        #endregion Register*ActionInNonGenerated
-
-        #region ReportDiagnosticIfNonGenerated
-
         public static void ReportDiagnosticIfNonGenerated(
             this CompilationAnalysisContext context,
             Diagnostic diagnostic,
@@ -103,8 +97,6 @@ namespace SonarAnalyzer.Helpers
             context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic,
                 context.Compilation);
         }
-
-        #endregion ReportDiagnosticIfNonGenerated
 
         internal static bool ShouldAnalyze(this SyntaxTree tree, AnalyzerOptions options,
             Compilation compilation)

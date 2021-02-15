@@ -1,7 +1,7 @@
 ﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
- * mailto:contact@sonarsource.com
+ * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -13,9 +13,9 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System;
@@ -29,8 +29,6 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class DiagnosticAnalyzerContextHelper
     {
-        #region Register*ActionInNonGenerated
-
         public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(
             this SonarAnalysisContext context,
             GeneratedCodeRecognizer generatedCodeRecognizer,
@@ -135,10 +133,6 @@ namespace SonarAnalyzer.Helpers
                 });
         }
 
-        #endregion Register*ActionInNonGenerated
-
-        #region ReportDiagnosticIfNonGenerated
-
         public static void ReportDiagnosticIfNonGenerated(
             this CompilationAnalysisContext context,
             GeneratedCodeRecognizer generatedCodeRecognizer,
@@ -171,8 +165,6 @@ namespace SonarAnalyzer.Helpers
             context.ReportDiagnosticIfNonGenerated(generatedCodeRecognizer, diagnostic, context.Compilation);
         }
 
-        #endregion ReportDiagnosticIfNonGenerated
-
         private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> Cache
             = new ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>>();
 
@@ -201,7 +193,7 @@ namespace SonarAnalyzer.Helpers
                 return false;
             }
 
-            //this is locking if the compilation is not present in the Cache.
+            // this is locking if the compilation is not present in the Cache.
             var cache = Cache.GetOrCreateValue(compilation);
             if (cache.TryGetValue(tree, out var result))
             {
