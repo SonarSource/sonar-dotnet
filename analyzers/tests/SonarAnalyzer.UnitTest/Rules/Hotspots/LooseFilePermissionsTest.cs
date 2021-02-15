@@ -23,6 +23,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.Hotspots;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 #if NET
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -31,13 +32,17 @@ using SonarAnalyzer.UnitTest.MetadataReferences;
 namespace SonarAnalyzer.UnitTest.Rules.Hotspots
 {
     [TestClass]
-    public class LooseFilePermissionsTest_NetFramework
+    public class LooseFilePermissionsTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void LooseFilePermissions_NetFramework() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.cs",
-                                    new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+        public void LooseFilePermissions_Windows_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.cs", new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LooseFilePermissions_Windows_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Windows.vb", new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
 #if NET
         [TestMethod]
@@ -45,6 +50,13 @@ namespace SonarAnalyzer.UnitTest.Rules.Hotspots
         public void LooseFilePermissions_Unix() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.cs",
                                     new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
+                                    NuGetMetadataReference.MonoPosixNetStandard());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void LooseFilePermissions_Unix_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\LooseFilePermissions.Unix.vb",
+                                    new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled),
                                     NuGetMetadataReference.MonoPosixNetStandard());
 #endif
     }

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,16 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Facade
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Helpers;
+
+namespace SonarAnalyzer.Extensions
 {
-    public interface ISyntaxKindFacade<TSyntaxKind>
-        where TSyntaxKind : struct
+    public static class InvocationExpressionSyntaxExtensions
     {
-        abstract TSyntaxKind InvocationExpression { get; }
-        abstract TSyntaxKind ObjectCreationExpression { get; }
-        abstract TSyntaxKind EnumDeclaration { get; }
-        abstract TSyntaxKind SimpleMemberAccessExpression { get; }
-        abstract TSyntaxKind Attribute { get; }
-        abstract TSyntaxKind IdentifierName { get; }
+        internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
+            invocation.Expression is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
+
+        internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
+            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
     }
 }
