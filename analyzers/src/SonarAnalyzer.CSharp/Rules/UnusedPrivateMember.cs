@@ -131,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, removableInternalTypes.ToHashSet(), "internal", new BidirectionalDictionary<ISymbol, SyntaxNode>());
                             foreach (var diagnostic in diagnostics)
                             {
-                                cc.ReportDiagnosticIfNonGenerated(diagnostic, cc.Compilation);
+                                cc.ReportDiagnosticIfNonGenerated(diagnostic);
                             }
                         });
                 });
