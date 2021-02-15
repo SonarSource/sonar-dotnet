@@ -100,7 +100,8 @@ namespace SonarAnalyzer.Helpers
                     }
                 });
 
-        public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic, Compilation compilation) // FIXME: Remove unused
+        // ToDo: Remove unused parameters
+        public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic, Compilation compilation)
         {
             if (ShouldAnalyze(context, generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
             {
