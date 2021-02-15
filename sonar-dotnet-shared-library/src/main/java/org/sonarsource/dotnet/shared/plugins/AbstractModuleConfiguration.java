@@ -47,11 +47,11 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
  *
  * Module-independent configuration is in {@link AbstractLanguageConfiguration}.
  *
- * @deprecated due to deprecation of module support and {@link org.sonar.api.batch.ScannerSide}.
+ * Although module support has been dropped in SQ/SC, inside the scanner there is no good replacement for {@link org.sonar.api.batch.ScannerSide}, yet.
+ * When a replacement will appear, this code will have to be refactored.
  */
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
-@Deprecated
 public abstract class AbstractModuleConfiguration {
   private static final Logger LOG = Loggers.get(AbstractModuleConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
