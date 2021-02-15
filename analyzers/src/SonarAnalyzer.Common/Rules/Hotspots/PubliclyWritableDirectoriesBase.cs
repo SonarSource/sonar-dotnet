@@ -21,11 +21,12 @@
 using System.Collections.Immutable;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind, TInvocationExpression> : SonarDiagnosticAnalyzer
+    public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind, TInvocationExpression> : HotspotDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TInvocationExpression : SyntaxNode
     {
@@ -73,8 +74,8 @@ namespace SonarAnalyzer.Rules
 
         protected DiagnosticDescriptor Rule { get; }
 
-        protected PubliclyWritableDirectoriesBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -82,6 +83,11 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
+                    if (!IsEnabled(c.Options))
+                    {
+                        return;
+                    }
+
                     var node = c.Node;
                     if (Language.Syntax.GetStringTextValue(node) is { } stringValue
                         && (WindowsAndMacPubliclyWritabelDirsRegex.IsMatch(stringValue)
@@ -98,6 +104,11 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
+                    if (!IsEnabled(c.Options))
+                    {
+                        return;
+                    }
+
                     var node = c.Node;
                     if (node is TInvocationExpression invocation
                         && IsGetTempPathAssignment(invocation, KnownType.System_IO_Path, "GetTempPath", c.SemanticModel))

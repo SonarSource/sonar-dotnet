@@ -33,7 +33,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public PubliclyWritableDirectories() : base(RspecStrings.ResourceManager) { }
+        public PubliclyWritableDirectories() : this(AnalyzerConfiguration.Hotspot) { }
+
+        internal PubliclyWritableDirectories(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         private protected override bool IsGetTempPathAssignment(InvocationExpressionSyntax invocationExpression, KnownType type, string methodName, SemanticModel semanticModel) =>
             VisualBasicSyntaxHelper.IsMethodInvocation(invocationExpression, type, methodName, semanticModel)

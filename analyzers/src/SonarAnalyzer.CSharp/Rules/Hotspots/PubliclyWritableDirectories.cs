@@ -33,7 +33,9 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public PubliclyWritableDirectories() : base(RspecStrings.ResourceManager) { }
+        public PubliclyWritableDirectories() : this(AnalyzerConfiguration.Hotspot) { }
+
+        internal PubliclyWritableDirectories(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         private protected override bool IsGetTempPathAssignment(InvocationExpressionSyntax invocationExpression, KnownType type, string methodName, SemanticModel semanticModel) =>
             CSharpSyntaxHelper.IsMethodInvocation(invocationExpression, type, methodName, semanticModel)
