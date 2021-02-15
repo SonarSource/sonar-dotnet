@@ -49,15 +49,13 @@ namespace SonarAnalyzer.Rules.Hotspots
             "OtherReadWriteExecute"
         };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         public LooseFilePermissions() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal LooseFilePermissions(IAnalyzerConfiguration configuration) : base(configuration)
-        {
-        }
+        internal LooseFilePermissions(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(c =>
@@ -88,13 +86,8 @@ namespace SonarAnalyzer.Rules.Hotspots
         private static void VisitInvocations(SyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (!invocation.IsMemberAccessOnKnownType("SetAccessRule", KnownType.System_Security_AccessControl_FileSystemSecurity, context.SemanticModel) &&
-                !invocation.IsMemberAccessOnKnownType("AddAccessRule", KnownType.System_Security_AccessControl_FileSystemSecurity, context.SemanticModel))
-            {
-                return;
-            }
-
-            if (GetObjectCreation(invocation, context.SemanticModel) is { } objectCreation)
+            if ((IsSetAccessRule(invocation, context.SemanticModel) || IsAddAccessRule(invocation, context.SemanticModel))
+                && (GetObjectCreation(invocation, context.SemanticModel) is { } objectCreation))
             {
                 var invocationLocation = invocation.GetLocation();
                 var secondaryLocation = objectCreation.GetLocation();
@@ -106,6 +99,12 @@ namespace SonarAnalyzer.Rules.Hotspots
                 context.ReportDiagnosticWhenActive(diagnostic);
             }
         }
+
+        private static bool IsSetAccessRule(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            invocation.IsMemberAccessOnKnownType("SetAccessRule", KnownType.System_Security_AccessControl_FileSystemSecurity, semanticModel);
+
+        private static bool IsAddAccessRule(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            invocation.IsMemberAccessOnKnownType("AddAccessRule", KnownType.System_Security_AccessControl_FileSystemSecurity, semanticModel);
 
         private static ObjectCreationExpressionSyntax GetObjectCreation(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
         {
@@ -134,17 +133,11 @@ namespace SonarAnalyzer.Rules.Hotspots
             && IsEveryone(argumentList.Arguments.First().Expression, semanticModel)
             && semanticModel.GetConstantValue(argumentList.Arguments.Last().Expression) is {HasValue: true, Value: 0};
 
-        private static bool IsEveryone(SyntaxNode syntaxNode, SemanticModel semanticModel)
-        {
-            if (semanticModel.GetConstantValue(syntaxNode) is {HasValue: true, Value: Everyone})
-            {
-                return true;
-            }
-
-            return syntaxNode.DescendantNodesAndSelf()
-                             .OfType<ObjectCreationExpressionSyntax>()
-                             .Any(objectCreation => IsNTAccountWithEveryone(objectCreation, semanticModel) || IsSecurityIdentifierWithEveryone(objectCreation, semanticModel));
-        }
+        private static bool IsEveryone(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
+            semanticModel.GetConstantValue(syntaxNode) is {HasValue: true, Value: Everyone}
+            || syntaxNode.DescendantNodesAndSelf()
+                         .OfType<ObjectCreationExpressionSyntax>()
+                         .Any(objectCreation => IsNTAccountWithEveryone(objectCreation, semanticModel) || IsSecurityIdentifierWithEveryone(objectCreation, semanticModel));
 
         private static bool IsNTAccountWithEveryone(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
             objectCreation.IsKnownType(KnownType.System_Security_Principal_NTAccount, semanticModel)

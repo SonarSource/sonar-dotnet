@@ -119,10 +119,6 @@ namespace Tests.Diagnostics
                 [SslProtocols.Default] = "Default", // Noncompliant
 //                            ^^^^^^^
             };
-
-            var protocol = SslProtocols.None;
-
-            bool isSafe = protocol == SslProtocols.Tls ? true : false;
         }
 
         private class Dummy1
@@ -174,10 +170,12 @@ namespace Tests.Diagnostics
 
             var sslProtocol = SslProtocols.None;
 
-            if (sslProtocol != SslProtocols.Default) // Compliant
-            {
+            if (sslProtocol != SslProtocols.Default) { } // Compliant
 
-            }
+            while (sslProtocol != SslProtocols.Default) { }  // Compliant
+
+            var protocol = SslProtocols.None;
+            bool isSafe = protocol == SslProtocols.Tls ? true : false; // Compliant
         }
     }
 }
