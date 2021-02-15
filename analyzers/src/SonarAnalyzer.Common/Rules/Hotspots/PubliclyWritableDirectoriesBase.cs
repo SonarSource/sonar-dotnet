@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
                     }
                 },
-        Language.SyntaxKind.InvocationExpression);
+                Language.SyntaxKind.InvocationExpression);
         }
     }
 }

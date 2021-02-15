@@ -24,7 +24,7 @@ namespace Tests.Diagnostics
             public string StringProp { get; set; }
         }
 
-        public void v(string partOfPath)
+        public void NonCompliant(string partOfPath)
         {
             // Environment
             var tmp = Path.GetTempPath(); // Noncompliant
