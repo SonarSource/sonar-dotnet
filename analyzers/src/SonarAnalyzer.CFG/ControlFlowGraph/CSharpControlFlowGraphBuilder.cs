@@ -500,7 +500,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private static bool IsTooComplex(SyntaxNode node)
         {
             var count = 0;  // Limit descending for performance reasons
-            return node.DescendantNodes(x => ++count < SupportedExpressionNodeCountLimit).Count() >= SupportedExpressionNodeCountLimit;
+            // The evaluation doesn't descend into the content of lambda expression. We need to tolerate these for Razor Layout pages.
+            return node.DescendantNodes(x => ++count < SupportedExpressionNodeCountLimit && !IsLambda(x)).Count() >= SupportedExpressionNodeCountLimit;
+
+            static bool IsLambda(SyntaxNode node) =>
+                 node is LambdaExpressionSyntax;
         }
 
         #endregion Top level Build*
