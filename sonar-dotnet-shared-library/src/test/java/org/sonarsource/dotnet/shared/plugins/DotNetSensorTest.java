@@ -54,9 +54,9 @@ import static org.mockito.Mockito.when;
 
 public class DotNetSensorTest {
 
-  public static final String REPO_KEY = "REPO_KEY";
-  public static final String LANG_KEY = "LANG_KEY";
-  public static final String LANG_NAME = "LANG_NAME";
+  private static final String REPO_KEY = "REPO_KEY";
+  private static final String LANG_KEY = "LANG_KEY";
+  private static final String LANG_NAME = "LANG_NAME";
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -88,26 +88,6 @@ public class DotNetSensorTest {
     sensor = new DotNetSensor(pluginMetadata, reportPathCollector, protobufDataImporter, roslynDataImporter);
   }
 
-  private void addMainFileToFs() {
-    DefaultInputFile mainFile = new TestInputFileBuilder("mod", "file.language")
-      .setLanguage(LANG_KEY)
-      .setType(Type.MAIN)
-      .build();
-    addFileToFs(mainFile);
-  }
-
-  private void addTestFileToFs() {
-    DefaultInputFile testFile = new TestInputFileBuilder("mod", "SomeTest.language")
-      .setLanguage(LANG_KEY)
-      .setType(Type.TEST)
-      .build();
-    addFileToFs(testFile);
-  }
-
-  private void addFileToFs(InputFile inputFile) {
-    tester.fileSystem().add(inputFile);
-  }
-
   @Test
   public void checkDescriptor() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
@@ -122,7 +102,7 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void noProtobufFiles_shouldNotFail() {
+  public void whenNoProtobufFiles_shouldNotFail() {
     addMainFileToFs();
     when(reportPathCollector.protobufDirs()).thenReturn(Collections.emptyList());
     when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
@@ -148,7 +128,7 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void noRoslynReport_shouldNotFail() {
+  public void whenNoRoslynReport_shouldNotFail() {
     addMainFileToFs();
 
     sensor.execute(tester);
@@ -165,12 +145,7 @@ public class DotNetSensorTest {
   @Test
   public void whenReportsArePresent_thereAreNoWarnings() {
     addMainFileToFs();
-    when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
-    tester.setActiveRules(new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "S1186")).build())
-      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "[parameters_key]")).build())
-      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of("roslyn.foo", "custom-roslyn")).build())
-      .build());
+    addRoslynReports();
 
     sensor.execute(tester);
 
@@ -184,12 +159,7 @@ public class DotNetSensorTest {
     addMainFileToFs();
     addTestFileToFs();
     // add roslyn reports to avoid warnings in the logs for this test
-    when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
-    tester.setActiveRules(new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "S1186")).build())
-      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "[parameters_key]")).build())
-      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of("roslyn.foo", "custom-roslyn")).build())
-      .build());
+    addRoslynReports();
 
     sensor.execute(tester);
 
@@ -215,5 +185,34 @@ public class DotNetSensorTest {
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG))
       .containsExactly("No files to analyze. Skip Sensor.");
+  }
+
+  private void addMainFileToFs() {
+    DefaultInputFile mainFile = new TestInputFileBuilder("mod", "file.language")
+      .setLanguage(LANG_KEY)
+      .setType(Type.MAIN)
+      .build();
+    addFileToFs(mainFile);
+  }
+
+  private void addTestFileToFs() {
+    DefaultInputFile testFile = new TestInputFileBuilder("mod", "SomeTest.language")
+      .setLanguage(LANG_KEY)
+      .setType(Type.TEST)
+      .build();
+    addFileToFs(testFile);
+  }
+
+  private void addFileToFs(InputFile inputFile) {
+    tester.fileSystem().add(inputFile);
+  }
+
+  private void addRoslynReports() {
+    when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
+    tester.setActiveRules(new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "S1186")).build())
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "[parameters_key]")).build())
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of("roslyn.foo", "custom-roslyn")).build())
+      .build());
   }
 }
