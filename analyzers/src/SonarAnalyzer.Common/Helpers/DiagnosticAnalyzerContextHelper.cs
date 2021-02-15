@@ -108,16 +108,13 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static void ReportDiagnosticIfNonGenerated(this SymbolAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic, Compilation compilation)
+        public static void ReportDiagnosticIfNonGenerated(this SymbolAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
         {
-            if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, compilation, context.Options))
+            if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
             {
                 context.ReportDiagnosticWhenActive(diagnostic);
             }
         }
-
-        public static void ReportDiagnosticIfNonGenerated(this SymbolAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic) =>
-            context.ReportDiagnosticIfNonGenerated(generatedCodeRecognizer, diagnostic, context.Compilation);
 
         public static bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
             options.ShouldAnalyzeGeneratedCode(c.Language) || !syntaxTree.IsGenerated(generatedCodeRecognizer, c);

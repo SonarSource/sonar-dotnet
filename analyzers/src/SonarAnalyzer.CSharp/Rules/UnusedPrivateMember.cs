@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                     .Concat(GetDiagnosticsForUsedButUnreadFields(usageCollector, removableSymbolsCollector.PrivateSymbols));
                             foreach (var diagnostic in diagnostics)
                             {
-                                cc.ReportDiagnosticIfNonGenerated(diagnostic, cc.Compilation);
+                                cc.ReportDiagnosticIfNonGenerated(diagnostic);
                             }
                         },
                         SymbolKind.NamedType);
