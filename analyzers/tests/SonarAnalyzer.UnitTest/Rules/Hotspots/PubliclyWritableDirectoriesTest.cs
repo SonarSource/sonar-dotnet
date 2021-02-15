@@ -31,11 +31,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void PubliclyWritableDirectories_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PubliclyWritableDirectories.cs", new CS.PubliclyWritableDirectories());
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.cs", new CS.PubliclyWritableDirectories());
 
         [TestMethod]
         [TestCategory("Rule")]
         public void PubliclyWritableDirectories_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\PubliclyWritableDirectories.vb", new VB.PubliclyWritableDirectories());
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.vb", new VB.PubliclyWritableDirectories());
     }
 }

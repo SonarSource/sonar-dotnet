@@ -19,16 +19,52 @@
  */
 
 using System.Collections.Immutable;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class PubliclyWritableDirectoriesBase : SonarDiagnosticAnalyzer
+    public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S5443";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Make sure publicly writable directories are used safely here.";
+        private const string TwoPartPatternWithVariableSlash = @"^[\/\\]{0}[\/\\]{1}([\/\\]|$)";
+        private const string TwoPartPatternWithForwardSlash = @"^\/{0}\/{1}(\/|$)";
+        private const string ThreePartPatternWithForwardSlash = @"^\/{0}\/{1}\/{2}(\/|$)";
+        private const string TmpRegex = @"^([a-zA-z]:)?[\\\/]?[\/\\]tmp([\/\\]|$)";
+        private const string TempRegex = @"^([a-zA-z]:)?[\\\/]?[\/\\]temp([\/\\]|$)";
+        private const string WindowsTempRegex = @"^([a-zA-z]:)?[\\\/]?[\\\/]windows[\\\/]temp([\\\/]|$)";
+        private const string UserProfileRegex = @"%USERPROFILE%\\AppData\\Local\\Temp([\\\/]|$)";
+        private const string EnvironmentVariableTemplate = @"%{0}%([\\\/]|$)";
+        private static readonly string VarTmpRegex = string.Format(TwoPartPatternWithVariableSlash, "var", "tmp");
+        private static readonly string UsrTmpRegex = string.Format(TwoPartPatternWithVariableSlash, "usr", "tmp");
+        private static readonly string DevShmRegex = string.Format(TwoPartPatternWithVariableSlash, "dev", "shm");
+        private static readonly string DevMqueueRegex = string.Format(TwoPartPatternWithForwardSlash, "dev", "mqueue");
+        private static readonly string RunLockRegex = string.Format(TwoPartPatternWithForwardSlash, "run", "lock");
+        private static readonly string VarRunLockRegex = string.Format(ThreePartPatternWithForwardSlash, "var", "run", "lock");
+        private static readonly string LibraryCachesRegex = string.Format(TwoPartPatternWithForwardSlash, "library", "caches");
+        private static readonly string UsersSharedRegex = string.Format(TwoPartPatternWithForwardSlash, "users","shared");
+        private static readonly string PrivateTmpRegex = string.Format(TwoPartPatternWithForwardSlash, "private", "tmp");
+        private static readonly string PrivateVarTmpRegex = string.Format(ThreePartPatternWithForwardSlash, "private", "var", "tmp");
+        private static readonly string TempEnvVariable = string.Format(EnvironmentVariableTemplate, "temp");
+        private static readonly string TmpEnvVariable = string.Format(EnvironmentVariableTemplate, "tmp");
+        private static readonly string TmpDirEnvVariable = string.Format(EnvironmentVariableTemplate, "tmpdir");
+
+        private static readonly Regex LinuxPubliclyWritabelDirsRegex =
+            new Regex($"{DevMqueueRegex}|{RunLockRegex}|{VarRunLockRegex}",
+                RegexOptions.Compiled);
+
+        private static readonly Regex WindowsAndMacPubliclyWritabelDirsRegex =
+            new Regex($"{TmpRegex}|{VarTmpRegex}|{UsrTmpRegex}|{DevShmRegex}|{LibraryCachesRegex}|{UsersSharedRegex}|{PrivateTmpRegex}|{PrivateVarTmpRegex}|{TempRegex}|{WindowsTempRegex}",
+                RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+
+        private static readonly Regex EnvironmentVariables =
+         new Regex($"^TMP$|^TEMP$|^TMPDIR$|{UserProfileRegex}|{TempEnvVariable}|{TmpEnvVariable}|{TmpDirEnvVariable}",
+              RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -36,5 +72,22 @@ namespace SonarAnalyzer.Rules
 
         protected PubliclyWritableDirectoriesBase(System.Resources.ResourceManager rspecResources) =>
             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                Language.GeneratedCodeRecognizer,
+                c =>
+                {
+                    var node = c.Node;
+                    if (Language.Syntax.GetStringTextValue(node) is { } stringValue
+                        && (WindowsAndMacPubliclyWritabelDirsRegex.IsMatch(stringValue)
+                            || LinuxPubliclyWritabelDirsRegex.IsMatch(stringValue)
+                            || EnvironmentVariables.IsMatch(stringValue)))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
+                    }
+                },
+                Language.SyntaxKind.StringLiteralExpression,
+                Language.SyntaxKind.InterpolatedStringExpression);
     }
 }

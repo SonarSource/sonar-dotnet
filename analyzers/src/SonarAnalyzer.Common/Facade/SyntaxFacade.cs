@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
         public abstract SyntaxNode NodeExpression(SyntaxNode node);
         public abstract SyntaxToken? NodeIdentifier(SyntaxNode node);
+        public abstract string GetStringTextValue(SyntaxNode node);
 
         protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
             node as T ?? throw Unexpected(node);
