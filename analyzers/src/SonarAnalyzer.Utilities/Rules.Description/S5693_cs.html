@@ -24,7 +24,7 @@ public class MyController : Controller
 {
     [HttpPost]
     [DisableRequestSizeLimit] // Sensitive: No size  limit
-    [RequestSizeLimit(10000000)] // Sensitive: 10MB is more than the recommended limit of 2MB
+    [RequestSizeLimit(10000000)] // Sensitive: 10MB is more than the recommended limit of 8MB
     public IActionResult PostRequest(Model model)
     {
     // ...
@@ -45,7 +45,7 @@ using Microsoft.AspNetCore.Mvc;
 public class MyController : Controller
 {
     [HttpPost]
-    [RequestSizeLimit(2000000)] // Compliant: 2MB
+    [RequestSizeLimit(8000000)] // Compliant: 8MB
     public IActionResult PostRequest(Model model)
     {
     // ...
