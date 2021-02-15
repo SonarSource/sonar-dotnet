@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -54,25 +56,34 @@ namespace SonarAnalyzer.Rules
         private static readonly string TmpEnvVariable = string.Format(EnvironmentVariableTemplate, "tmp");
         private static readonly string TmpDirEnvVariable = string.Format(EnvironmentVariableTemplate, "tmpdir");
 
-        private static readonly Regex LinuxPubliclyWritabelDirsRegex =
+        private static readonly Regex LinuxPubliclyWritabelDirs =
             new Regex($"{DevMqueueRegex}|{RunLockRegex}|{VarRunLockRegex}",
                 RegexOptions.Compiled);
 
-        private static readonly Regex WindowsAndMacPubliclyWritabelDirsRegex =
+        private static readonly Regex WindowsAndMacPubliclyWritabelDirs =
             new Regex($"{TmpRegex}|{VarTmpRegex}|{UsrTmpRegex}|{DevShmRegex}|{LibraryCachesRegex}|{UsersSharedRegex}|{PrivateTmpRegex}|{PrivateVarTmpRegex}|{TempRegex}|{WindowsTempRegex}",
                 RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
         private static readonly Regex EnvironmentVariables =
-         new Regex($"^TMP$|^TEMP$|^TMPDIR$|{UserProfileRegex}|{TempEnvVariable}|{TmpEnvVariable}|{TmpDirEnvVariable}",
-              RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+            new Regex($"{UserProfileRegex}|{TempEnvVariable}|{TmpEnvVariable}|{TmpDirEnvVariable}",
+                RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         private protected abstract bool IsGetTempPathAssignment(TInvocationExpression invocationExpression, KnownType type, string methodName, SemanticModel semanticModel);
+        private protected abstract bool IsInsecureEnvironmentVariableRetrieval(TInvocationExpression invocation, KnownType type, string methodName, SemanticModel semanticModel);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected DiagnosticDescriptor Rule { get; }
+
+        protected static readonly string[] InsecureEnvironmentVariables =
+            new[]
+                {
+                    "tmp",
+                    "temp",
+                    "tmpdir"
+                };
 
         protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration) =>
             Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
@@ -90,8 +101,8 @@ namespace SonarAnalyzer.Rules
 
                     var node = c.Node;
                     if (Language.Syntax.GetStringTextValue(node) is { } stringValue
-                        && (WindowsAndMacPubliclyWritabelDirsRegex.IsMatch(stringValue)
-                            || LinuxPubliclyWritabelDirsRegex.IsMatch(stringValue)
+                        && (WindowsAndMacPubliclyWritabelDirs.IsMatch(stringValue)
+                            || LinuxPubliclyWritabelDirs.IsMatch(stringValue)
                             || EnvironmentVariables.IsMatch(stringValue)))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
@@ -111,12 +122,13 @@ namespace SonarAnalyzer.Rules
 
                     var node = c.Node;
                     if (node is TInvocationExpression invocation
-                        && IsGetTempPathAssignment(invocation, KnownType.System_IO_Path, "GetTempPath", c.SemanticModel))
+                        && (IsGetTempPathAssignment(invocation, KnownType.System_IO_Path, "GetTempPath", c.SemanticModel)
+                            || IsInsecureEnvironmentVariableRetrieval(invocation, KnownType.System_Environment, "GetEnvironmentVariable", c.SemanticModel)))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
                     }
                 },
-                Language.SyntaxKind.InvocationExpression);
+        Language.SyntaxKind.InvocationExpression);
         }
     }
 }

@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -41,5 +43,9 @@ namespace SonarAnalyzer.Rules.CSharp
             CSharpSyntaxHelper.IsMethodInvocation(invocationExpression, type, methodName, semanticModel)
             && (invocationExpression.Parent is EqualsValueClauseSyntax
                 || invocationExpression.Parent is AssignmentExpressionSyntax);
+        private protected override bool IsInsecureEnvironmentVariableRetrieval(InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
+            CSharpSyntaxHelper.IsMethodInvocation(invocation, type, methodName, semanticModel)
+            && invocation.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
+            && InsecureEnvironmentVariables.Any(x => x.Equals(firstArgument.Expression?.GetStringValue(), StringComparison.OrdinalIgnoreCase));
     }
 }

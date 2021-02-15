@@ -31,7 +31,7 @@ namespace Tests.Diagnostics
             tmp = Path.GetTempPath(); // Noncompliant
             InnerClass inner = new InnerClass() { StringProp = Path.GetTempPath() }; // Noncompliant
             tmp = Environment.GetEnvironmentVariable("TMPDIR"); // Noncompliant {{Make sure publicly writable directories are used safely here.}}
-//                                                   ^^^^^^^^
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             tmp = Environment.GetEnvironmentVariable("TMP"); // Noncompliant
             tmp = Environment.GetEnvironmentVariable("TEMP"); // Noncompliant
             tmp = Environment.ExpandEnvironmentVariables("%TMPDIR%"); // Noncompliant
@@ -41,6 +41,7 @@ namespace Tests.Diagnostics
             tmp = "%TEMP%\\f"; // Noncompliant
             tmp = "%TMP%\\f"; // Noncompliant
             tmp = "%TMPDIR%\\f"; // Noncompliant
+//                ^^^^^^^^^^^^^
 
             // Common
             using (var tmpDir = new StreamReader("/tmp/f")) { }; // Noncompliant

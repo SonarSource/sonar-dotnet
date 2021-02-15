@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -41,5 +43,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             VisualBasicSyntaxHelper.IsMethodInvocation(invocationExpression, type, methodName, semanticModel)
             && (invocationExpression.Parent is EqualsValueSyntax
                 || invocationExpression.Parent is AssignmentStatementSyntax);
+
+        private protected override bool IsInsecureEnvironmentVariableRetrieval(InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
+            VisualBasicSyntaxHelper.IsMethodInvocation(invocation, type, methodName, semanticModel)
+            && invocation.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
+            && InsecureEnvironmentVariables.Any(x => x.Equals(firstArgument.GetExpression()?.GetStringValue(), StringComparison.OrdinalIgnoreCase));
     }
 }
