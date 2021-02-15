@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S109",
-"message":  "Assign this magic number '17' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '43' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '41' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '43' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '22' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '41' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\NetCore31WithConfigurableRules\Controllers\MyController.cs",
 "region":  {

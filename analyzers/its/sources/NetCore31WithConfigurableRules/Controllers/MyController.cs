@@ -10,22 +10,22 @@ namespace NetCore31WithConfigurableRules.Controllers
             null;
 
         [HttpPost]
-        [RequestSizeLimit(17)]
+        [RequestSizeLimit(43)]
         public ActionResult PostRequestAboveLimit() =>
             null;
 
         [HttpPost]
-        [RequestSizeLimit(15)]
+        [RequestSizeLimit(41)]
         public ActionResult PostRequestBelowLimit() =>
             null;
 
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 24)]
+        [RequestFormLimits(MultipartBodyLengthLimit = 43)]
         public ActionResult MultipartFormRequestAboveLimit() =>
             null;
 
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 22)]
+        [RequestFormLimits(MultipartBodyLengthLimit = 41)]
         public ActionResult MultipartFormRequestBelowLimit() =>
             null;
     }
