@@ -49,11 +49,13 @@ public class DotNetSensor implements ProjectSensor {
   private final RoslynDataImporter roslynDataImporter;
   private final DotNetPluginMetadata pluginMetadata;
   private final ReportPathCollector reportPathCollector;
+  private final ProjectTypeCollector projectTypeCollector;
 
-  public DotNetSensor(DotNetPluginMetadata pluginMetadata, ReportPathCollector reportPathCollector,
-    ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
+  public DotNetSensor(DotNetPluginMetadata pluginMetadata, ReportPathCollector reportPathCollector,ProjectTypeCollector projectTypeCollector,
+                      ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
     this.pluginMetadata = pluginMetadata;
     this.reportPathCollector = reportPathCollector;
+    this.projectTypeCollector = projectTypeCollector;
     this.protobufDataImporter = protobufDataImporter;
     this.roslynDataImporter = roslynDataImporter;
   }
@@ -69,6 +71,7 @@ public class DotNetSensor implements ProjectSensor {
     if (shouldExecuteOnProject(context.fileSystem())) {
       executeInternal(context);
     }
+    projectTypeCollector.getSummary().ifPresent(LOG::info);
   }
 
   private boolean shouldExecuteOnProject(FileSystem fs) {

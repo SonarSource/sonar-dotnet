@@ -24,6 +24,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -68,6 +69,7 @@ public class DotNetSensorTest {
   private RoslynDataImporter roslynDataImporter = mock(RoslynDataImporter.class);
   private ProtobufDataImporter protobufDataImporter = mock(ProtobufDataImporter.class);
   private ReportPathCollector reportPathCollector = mock(ReportPathCollector.class);
+  private ProjectTypeCollector projectTypeCollector = mock(ProjectTypeCollector.class);
 
   private SensorContextTester tester;
   private DotNetSensor sensor;
@@ -80,11 +82,12 @@ public class DotNetSensorTest {
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir);
     when(reportPathCollector.protobufDirs()).thenReturn(reportPaths);
+    when(projectTypeCollector.getSummary()).thenReturn(Optional.of("TEST PROJECTS SUMMARY"));
     DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
     when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
     when(pluginMetadata.shortLanguageName()).thenReturn(LANG_NAME);
-    sensor = new DotNetSensor(pluginMetadata, reportPathCollector, protobufDataImporter, roslynDataImporter);
+    sensor = new DotNetSensor(pluginMetadata, reportPathCollector, projectTypeCollector, protobufDataImporter, roslynDataImporter);
   }
 
   @Test
@@ -113,6 +116,8 @@ public class DotNetSensorTest {
 
     sensor.execute(tester);
 
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(
       "No protobuf reports found. The " + LANG_NAME + " files will not have highlighting and metrics.",
       "Your project contains " + LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
@@ -139,6 +144,8 @@ public class DotNetSensorTest {
       "No Roslyn issue reports were found. The " + LANG_NAME + " files have not been analyzed.",
       "Your project contains " + LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
         " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
 
   @Test
@@ -151,6 +158,8 @@ public class DotNetSensorTest {
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
 
   @Test
@@ -186,6 +195,16 @@ public class DotNetSensorTest {
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG))
       .containsExactly("No files to analyze. Skip Sensor.");
+  }
+
+  @Test
+  public void noAnalysisIfNoFilesDetected() {
+    sensor.execute(tester);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).isEqualTo("No files to analyze. Skip Sensor.");
   }
 
   private void addMainFileToFileSystem() {
