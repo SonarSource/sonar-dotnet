@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules
         protected const string MultipartBodyLengthLimit = "MultipartBodyLengthLimit";
         private const string MessageFormat = "Make sure the content length limit is safe here.";
         private const int DefaultFileUploadSizeLimit = 8_000_000;
-        private const int DefaultStandardSizeLimit = 2_000_000;
         private readonly IAnalyzerConfiguration analyzerConfiguration;
         private readonly DiagnosticDescriptor rule;
 
@@ -45,9 +44,6 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsInvalidRequestSizeLimit(TAttributeSyntax attribute, SemanticModel semanticModel);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        [RuleParameter("standardSizeLimit", PropertyType.Integer, "The maximum size of regular HTTP requests (in bytes).", DefaultStandardSizeLimit)]
-        public int StandardSizeLimit { get; set; } = DefaultStandardSizeLimit;
 
         [RuleParameter("fileUploadSizeLimit", PropertyType.Integer, "The maximum size of HTTP requests handling file uploads (in bytes).", DefaultFileUploadSizeLimit)]
         public int FileUploadSizeLimit { get; set; } = DefaultFileUploadSizeLimit;

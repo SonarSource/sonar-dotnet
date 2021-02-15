@@ -14,7 +14,7 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestSizeLimit(2_000_001)] // Noncompliant {{Make sure the content length limit is safe here.}}
+        [RequestSizeLimit(8_000_001)] // Noncompliant {{Make sure the content length limit is safe here.}}
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult PostRequestAboveLimit()
         {
@@ -22,7 +22,7 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestSizeLimit(2_000_000)] // Compliant value is below limit.
+        [RequestSizeLimit(8_000_000)] // Compliant value is below limit.
         public ActionResult PostRequestBelowLimit()
         {
             return null;
@@ -91,6 +91,13 @@ namespace Tests.Diagnostics
             return null;
         }
 
+        [HttpPost]
+        [RequestSizeLimit(int.MaxValue)] // Noncompliant
+        public ActionResult RequestSizeLimitWithoutNumericLiteral()
+        {
+            return null;
+        }
+
         public ActionResult MethodWithoutAttributes()
         {
             return null;
@@ -104,7 +111,7 @@ namespace Tests.Diagnostics
 
     }
 
-    [RequestSizeLimit(2_000_001)] // Noncompliant
+    [RequestSizeLimit(8_000_001)] // Noncompliant
     public class RequestSizeLimitAboveController : Controller
     {
 
@@ -116,7 +123,7 @@ namespace Tests.Diagnostics
 
     }
 
-    [RequestSizeLimit(2_000_000)]
+    [RequestSizeLimit(8_000_000)]
     public class RequestSizeLimitBelowController : Controller
     {
 

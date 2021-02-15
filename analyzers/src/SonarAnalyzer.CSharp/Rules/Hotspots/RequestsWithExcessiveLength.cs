@@ -41,14 +41,16 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsInvalidRequestFormLimits(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, semanticModel)
             && attribute.ArgumentList?.Arguments.FirstOrDefault(arg => IsMultipartBodyLengthLimit(arg)) is { } firstArgument
-            && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.Expression, out var intValue)
+            && semanticModel.GetConstantValue(firstArgument.Expression) is { HasValue: true } constantValue
+            && constantValue.Value is int intValue
             && intValue > FileUploadSizeLimit;
 
         protected override bool IsInvalidRequestSizeLimit(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute, semanticModel)
             && attribute.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
-            && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.Expression, out var intValue)
-            && intValue > StandardSizeLimit;
+            && semanticModel.GetConstantValue(firstArgument.Expression) is { HasValue: true } constantValue
+            && constantValue.Value is int intValue
+            && intValue > FileUploadSizeLimit;
 
         private static bool IsMultipartBodyLengthLimit(AttributeArgumentSyntax argument) =>
             argument.NameEquals is { } nameEquals

@@ -41,14 +41,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool IsInvalidRequestFormLimits(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, semanticModel)
             && attribute.ArgumentList?.Arguments.FirstOrDefault(arg => IsMultipartBodyLengthLimit(arg)) is { } firstArgument
-            && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.GetExpression(), out var intValue)
+            && semanticModel.GetConstantValue(firstArgument.GetExpression()) is { HasValue: true } constantValue
+            && constantValue.Value is int intValue
             && intValue > FileUploadSizeLimit;
 
         protected override bool IsInvalidRequestSizeLimit(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute, semanticModel)
             && attribute.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
-            && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.GetExpression(), out var intValue)
-            && intValue > StandardSizeLimit;
+            && semanticModel.GetConstantValue(firstArgument.GetExpression()) is { HasValue: true } constantValue
+            && constantValue.Value is int intValue
+            && intValue > FileUploadSizeLimit;
 
         private bool IsMultipartBodyLengthLimit(ArgumentSyntax argument) =>
             argument is SimpleArgumentSyntax { NameColonEquals: { } nameColonEquals }
