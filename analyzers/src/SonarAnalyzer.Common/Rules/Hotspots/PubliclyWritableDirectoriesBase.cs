@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -49,7 +47,7 @@ namespace SonarAnalyzer.Rules
         private static readonly string RunLockRegex = string.Format(TwoPartPatternWithForwardSlash, "run", "lock");
         private static readonly string VarRunLockRegex = string.Format(ThreePartPatternWithForwardSlash, "var", "run", "lock");
         private static readonly string LibraryCachesRegex = string.Format(TwoPartPatternWithForwardSlash, "library", "caches");
-        private static readonly string UsersSharedRegex = string.Format(TwoPartPatternWithForwardSlash, "users","shared");
+        private static readonly string UsersSharedRegex = string.Format(TwoPartPatternWithForwardSlash, "users", "shared");
         private static readonly string PrivateTmpRegex = string.Format(TwoPartPatternWithForwardSlash, "private", "tmp");
         private static readonly string PrivateVarTmpRegex = string.Format(ThreePartPatternWithForwardSlash, "private", "var", "tmp");
         private static readonly string TempEnvVariable = string.Format(EnvironmentVariableTemplate, "temp");
