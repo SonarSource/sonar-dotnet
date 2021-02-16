@@ -12434,7 +12434,7 @@
     <value>The access control of an application must be properly implemented in order to restrict access to resources to authorized entities otherwise this could lead to vulnerabilities:</value>
   </data>
   <data name="S4834_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S4834_Scope" xml:space="preserve">
     <value>Main</value>
@@ -12446,7 +12446,7 @@
     <value>deprecated</value>
   </data>
   <data name="S4834_Tags" xml:space="preserve">
-    <value>cwe,sans-top25-porous,owasp-a5</value>
+    <value />
   </data>
   <data name="S4834_Title" xml:space="preserve">
     <value>Controlling permissions is security-sensitive</value>

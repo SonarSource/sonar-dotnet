@@ -201,7 +201,6 @@ public class CSharpSonarWayProfileTest {
     assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4507"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4792"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4790"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4834"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S5042"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S2077"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S5766"))).isNotNull();
