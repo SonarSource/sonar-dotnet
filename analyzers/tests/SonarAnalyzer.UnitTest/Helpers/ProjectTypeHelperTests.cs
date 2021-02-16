@@ -18,9 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.MetadataReferences;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -28,14 +32,26 @@ namespace SonarAnalyzer.UnitTest.Helpers
     public class ProjectTypeHelperTests
     {
         [TestMethod]
-        public void IsTestAssemblyName_ReturnsExpectedValue()
+        public void IsTest_ReturnsTrueForTestFrameworks()
         {
-            ProjectTypeHelper.IsTestAssemblyName("SonarAnalyzer.UnitTest").Should().BeTrue();
-            ProjectTypeHelper.IsTestAssemblyName("SonarLint.VisualStudio.Integration.UnitTests").Should().BeTrue();
-            ProjectTypeHelper.IsTestAssemblyName("SonarLint.VisualStudio.Integration.TestInfrastructure").Should().BeTrue();
-            ProjectTypeHelper.IsTestAssemblyName("Nancy.Demo.Authentication.Forms.TestingDemo").Should().BeFalse();
-            ProjectTypeHelper.IsTestAssemblyName("SonarAnalyzer.BestEstimator").Should().BeFalse();
-            ProjectTypeHelper.IsTestAssemblyName("RainbowTeam.TheCutestPony").Should().BeFalse();
+            CreateCompilation(NuGetMetadataReference.MSTestTestFrameworkV1).IsTest().Should().BeTrue();
+            CreateCompilation(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
+            CreateCompilation(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework).IsTest().Should().BeTrue();
+
+            CreateCompilation(NuGetMetadataReference.XunitFrameworkV1).IsTest().Should().BeTrue();
+            CreateCompilation(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
+
+            CreateCompilation(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
         }
+
+        [TestMethod]
+        public void IsTest_ReturnsFalse()
+        {
+            CreateCompilation(null).IsTest().Should().BeFalse();
+            CreateCompilation(NuGetMetadataReference.SystemValueTuple(Constants.NuGetLatestVersion)).IsTest().Should().BeFalse();   // Any non-test reference
+        }
+
+        private Compilation CreateCompilation(IEnumerable<MetadataReference> additionalReferences) =>
+            new SnippetCompiler("// Nothing to see here", additionalReferences).SemanticModel.Compilation;
     }
 }
