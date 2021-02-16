@@ -102,7 +102,7 @@ public class DotNetSensorTest {
 
   @Test
   public void whenNoProtobufFiles_shouldNotFail() {
-    addMainFileToFs();
+    addMainFileToFileSystem();
     when(reportPathCollector.protobufDirs()).thenReturn(Collections.emptyList());
     when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
     tester.setActiveRules(new ActiveRulesBuilder()
@@ -128,7 +128,7 @@ public class DotNetSensorTest {
 
   @Test
   public void whenNoRoslynReport_shouldNotFail() {
-    addMainFileToFs();
+    addMainFileToFileSystem();
 
     sensor.execute(tester);
 
@@ -143,7 +143,7 @@ public class DotNetSensorTest {
 
   @Test
   public void whenReportsArePresent_thereAreNoWarnings() {
-    addMainFileToFs();
+    addMainFileToFileSystem();
     addRoslynReports();
 
     sensor.execute(tester);
@@ -155,8 +155,8 @@ public class DotNetSensorTest {
 
   @Test
   public void whenThereAreBothMainAndTestFiles_doNotLog() {
-    addMainFileToFs();
-    addTestFileToFs();
+    addMainFileToFileSystem();
+    addTestFileToFileSystem();
     // add roslyn reports to avoid warnings in the logs for this test
     addRoslynReports();
 
@@ -168,7 +168,7 @@ public class DotNetSensorTest {
 
   @Test
   public void whenThereAreOnlyTestFiles_logWarning() {
-    addTestFileToFs();
+    addTestFileToFileSystem();
 
     sensor.execute(tester);
 
@@ -188,15 +188,15 @@ public class DotNetSensorTest {
       .containsExactly("No files to analyze. Skip Sensor.");
   }
 
-  private void addMainFileToFs() {
-    addFileToFs("foo.language", Type.MAIN);
+  private void addMainFileToFileSystem() {
+    addFileToFileSystem("foo.language", Type.MAIN);
   }
 
-  private void addTestFileToFs() {
-    addFileToFs("bar.language", Type.TEST);
+  private void addTestFileToFileSystem() {
+    addFileToFileSystem("bar.language", Type.TEST);
   }
 
-  private void addFileToFs(String fileName, Type fileType) {
+  private void addFileToFileSystem(String fileName, Type fileType) {
     DefaultInputFile inputFile = new TestInputFileBuilder("mod", fileName)
       .setLanguage(LANG_KEY)
       .setType(fileType)
