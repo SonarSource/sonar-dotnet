@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Versioning;
 
 namespace Tests.Diagnostics
@@ -919,6 +920,43 @@ namespace Tests.Diagnostics
             var first = 2; // Noncompliant FP, value is used in Range
             var last = 22; // Noncompliant FP, value is used in Range
             return values[first..last];
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3719
+    public class Repro_3719
+    {
+        public void UseVariableInLocalFunction()
+        {
+            bool usedBool = BoolInitializer(true); // Noncompliant FP, value is used in local function
+            LocalUsage();
+
+            bool LocalUsage()
+            {
+                return usedBool;
+            }
+
+            bool BoolInitializer(bool value)
+            {
+                return value;
+            }
+        }
+
+        public void UseVariableInLocalPredicate()
+        {
+            bool usedBool = BoolInitializer(true); // Noncompliant FP, value is used in local predicate function
+            var list = new List<bool>();
+            list.Where(LocalPredicate);
+
+            bool LocalPredicate(bool input)
+            {
+                return usedBool && input;
+            }
+
+            bool BoolInitializer(bool value)
+            {
+                return value;
+            }
         }
     }
 }
