@@ -40,6 +40,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static readonly string[] AllowedNuGetLibDirectoriesInOrderOfPreference = new string[]
             {
+                "net",
                 "netstandard2.1",
                 "netstandard2.0",
                 "net47",
@@ -209,7 +210,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             //      e.g. Microsoft.AspNetCore.Core and Microsoft.AspNetCore.Core.Diagnostics
             // Most packages have a three-part version, but some have four. We don't check
             // the actual number of parts, as long as there is at least one.
-            var matcher = new Regex($"{packageId}(.\\d+)+$");
+            var matcher = new Regex($@"{Regex.Escape(packageId)}(\.\d+)+$", RegexOptions.IgnoreCase);
 
             return Directory.Exists(PackagesFolderRelativePath)
                 ? Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}.*", SearchOption.TopDirectoryOnly)

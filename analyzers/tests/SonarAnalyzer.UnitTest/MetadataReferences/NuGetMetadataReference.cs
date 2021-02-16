@@ -39,6 +39,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References Dapper(string packageVersion = "1.50.5") => Create("Dapper", packageVersion);
         public static References EntityFramework(string packageVersion = "6.2.0") => Create("EntityFramework", packageVersion);
         public static References FluentAssertions(string packageVersion) => Create("FluentAssertions", packageVersion);
+        public static References FakeItEasy(string packageVersion) => Create("FakeItEasy", packageVersion);
+        public static References JetBrainsDotMemoryUnit(string packageVersion) => Create("JetBrains.DotMemoryUnit", packageVersion);
         public static References JWT(string packageVersion) => Create("JWT", packageVersion);
         public static References Log4Net(string packageVersion, string targetFramework) => NuGetMetadataFactory.Create("log4net", packageVersion, targetFramework, null);
         public static References MicrosoftAspNetCore(string packageVersion) => Create("Microsoft.AspNetCore", packageVersion);
@@ -77,6 +79,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") => Create("Microsoft.SqlServer.Compact", packageVersion);
         public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => Create("Microsoft.Web.Xdt", packageVersion);
         public static References MonoPosixNetStandard(string packageVersion = "1.0.0") => Create("Mono.Posix.NETStandard", packageVersion, "linux-x64");
+        public static References Moq(string packageVersion ) => Create("Moq", packageVersion);
         public static References MSTestTestFramework(string packageVersion) => Create("MSTest.TestFramework", packageVersion);
         public static References MvvmLightLibs(string packageVersion) => Create("MvvmLightLibs", packageVersion);
         public static References MySqlData(string packageVersion) => Create("MySql.Data", packageVersion);
@@ -87,6 +90,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References NUnit(string packageVersion) => Create("NUnit", packageVersion);
         public static References PetaPocoCompiled(string packageVersion = "6.0.353") => Create("PetaPoco.Compiled", packageVersion);
         public static References RestSharp(string packageVersion) => Create("RestSharp", packageVersion);
+        public static References RhinoMocks(string packageVersion) => NuGetMetadataFactory.CreateWithCommandLine("RhinoMocks", packageVersion);
+        public static References Shouldly(string packageVersion) => Create("Shouldly", packageVersion);
         public static References SerilogPackages(string packageVersion) =>
             Create("Serilog", packageVersion)
             .Concat(Create("Serilog.Sinks.Console", packageVersion));
