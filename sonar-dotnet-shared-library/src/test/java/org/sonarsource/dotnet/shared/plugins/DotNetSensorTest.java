@@ -29,7 +29,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
@@ -175,7 +174,9 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN))
-      .containsExactly("This solution contains only TEST files. Because there are no MAIN files, this sensor will be skipped. Your SonarQube/SonarCloud project will not have results for LANG_KEY files.");
+      .containsExactly("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+        "Your SonarQube/SonarCloud project will not have results for LANG_KEY files. " +
+        "You can read more about the detection of test projects here: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
   }
 
   @Test
@@ -188,22 +189,18 @@ public class DotNetSensorTest {
   }
 
   private void addMainFileToFs() {
-    DefaultInputFile mainFile = new TestInputFileBuilder("mod", "file.language")
-      .setLanguage(LANG_KEY)
-      .setType(Type.MAIN)
-      .build();
-    addFileToFs(mainFile);
+    addFileToFs("foo.language", Type.MAIN);
   }
 
   private void addTestFileToFs() {
-    DefaultInputFile testFile = new TestInputFileBuilder("mod", "SomeTest.language")
-      .setLanguage(LANG_KEY)
-      .setType(Type.TEST)
-      .build();
-    addFileToFs(testFile);
+    addFileToFs("bar.language", Type.TEST);
   }
 
-  private void addFileToFs(InputFile inputFile) {
+  private void addFileToFs(String fileName, Type fileType) {
+    DefaultInputFile inputFile = new TestInputFileBuilder("mod", fileName)
+      .setLanguage(LANG_KEY)
+      .setType(fileType)
+      .build();
     tester.fileSystem().add(inputFile);
   }
 
