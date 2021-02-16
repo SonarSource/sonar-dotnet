@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\AutoPilots.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  35,
+"endLine":  57,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\AutoPilots.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  35,
+"endLine":  72,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\CallingThreadDispatcher.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  30,
+"endLine":  28,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\NullMessageEnvelope.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  43,
+"endLine":  14,
+"endColumn":  77
+}
+}
+}
+]
+}

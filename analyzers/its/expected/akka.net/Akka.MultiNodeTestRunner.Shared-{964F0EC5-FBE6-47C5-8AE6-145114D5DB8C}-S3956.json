@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunCoordinator.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  19,
+"endLine":  101,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this constructor to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  44,
+"endLine":  26,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this constructor to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  44,
+"endLine":  32,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  19,
+"endLine":  82,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  19,
+"endLine":  83,
+"endColumn":  36
+}
+}
+}
+]
+}

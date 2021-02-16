@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\AutoPilots.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  35,
+"endLine":  57,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\AutoPilots.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  35,
+"endLine":  72,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Id' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\CallingThreadDispatcher.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  30,
+"endLine":  28,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\NullMessageEnvelope.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  43,
+"endLine":  14,
+"endColumn":  51
+}
+}
+}
+]
+}

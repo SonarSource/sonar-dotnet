@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  32,
+"endLine":  63,
+"endColumn":  41
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'ExitCode' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\ExitCodeContainer.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  27,
+"endLine":  19,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Settings' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\JsonPersistentTestRunStore.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  46,
+"endLine":  44,
+"endColumn":  54
+}
+}
+}
+]
+}
