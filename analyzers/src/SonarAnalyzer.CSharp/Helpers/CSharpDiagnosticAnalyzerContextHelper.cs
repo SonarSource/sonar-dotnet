@@ -1,7 +1,7 @@
 ﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
- * mailto:contact@sonarsource.com
+ * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -13,9 +13,9 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System;
@@ -26,92 +26,41 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class CSharpDiagnosticAnalyzerContextHelper
     {
-        #region Register*ActionInNonGenerated
+        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context,
+                                                                               Action<SyntaxNodeAnalysisContext> action,
+                                                                               params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
+            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(
-            this SonarAnalysisContext context,
-            Action<SyntaxNodeAnalysisContext> action,
-            params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action,
-                syntaxKinds);
-        }
+        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this ParameterLoadingAnalysisContext context,
+                                                                               Action<SyntaxNodeAnalysisContext> action,
+                                                                               params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
+            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(
-            this ParameterLoadingAnalysisContext context,
-            Action<SyntaxNodeAnalysisContext> action,
-            params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action,
-                syntaxKinds);
-        }
+        public static void RegisterSyntaxNodeActionInNonGenerated<TSyntaxKind>(this CompilationStartAnalysisContext context, Action<SyntaxNodeAnalysisContext> action, params TSyntaxKind[] syntaxKinds)
+            where TSyntaxKind : struct =>
+            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(
-            this CompilationStartAnalysisContext context,
-            Action<SyntaxNodeAnalysisContext> action,
-            params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action,
-                syntaxKinds);
-        }
-
-        public static void RegisterSyntaxTreeActionInNonGenerated(
-            this SonarAnalysisContext context,
-            Action<SyntaxTreeAnalysisContext> action)
-        {
+        public static void RegisterSyntaxTreeActionInNonGenerated(this SonarAnalysisContext context, Action<SyntaxTreeAnalysisContext> action) =>
             context.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
-        }
 
-        public static void RegisterSyntaxTreeActionInNonGenerated(
-            this ParameterLoadingAnalysisContext context,
-            Action<SyntaxTreeAnalysisContext> action)
-        {
+        public static void RegisterSyntaxTreeActionInNonGenerated(this ParameterLoadingAnalysisContext context, Action<SyntaxTreeAnalysisContext> action) =>
             context.RegisterSyntaxTreeActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
-        }
 
-        public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(
-            this SonarAnalysisContext context,
-            Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
-        {
+        public static void RegisterCodeBlockStartActionInNonGenerated<TSyntaxKind>(this SonarAnalysisContext context, Action<CodeBlockStartAnalysisContext<TSyntaxKind>> action)
+            where TSyntaxKind : struct =>
             context.RegisterCodeBlockStartActionInNonGenerated(CSharpGeneratedCodeRecognizer.Instance, action);
-        }
 
-        #endregion Register*ActionInNonGenerated
-
-        #region ReportDiagnosticIfNonGenerated
-
-        public static void ReportDiagnosticIfNonGenerated(
-            this CompilationAnalysisContext context,
-            Diagnostic diagnostic,
-            Compilation compilation)
-        {
+        public static void ReportDiagnosticIfNonGenerated(this CompilationAnalysisContext context, Diagnostic diagnostic, Compilation compilation) =>
             context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic, compilation);
-        }
 
-        public static void ReportDiagnosticIfNonGenerated(
-            this SymbolAnalysisContext context,
-            Diagnostic diagnostic,
-            Compilation compilation)
-        {
+        public static void ReportDiagnosticIfNonGenerated(this SymbolAnalysisContext context, Diagnostic diagnostic, Compilation compilation) =>
             context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic, compilation);
-        }
 
-        public static void ReportDiagnosticIfNonGenerated(
-            this SymbolAnalysisContext context,
-            Diagnostic diagnostic)
-        {
-            context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic,
-                context.Compilation);
-        }
+        public static void ReportDiagnosticIfNonGenerated(this SymbolAnalysisContext context, Diagnostic diagnostic) =>
+            context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic, context.Compilation);
 
-        #endregion ReportDiagnosticIfNonGenerated
-
-        internal static bool ShouldAnalyze(this SyntaxTree tree, AnalyzerOptions options,
-            Compilation compilation)
+        internal static bool ShouldAnalyze(this SyntaxTree tree, AnalyzerOptions options, Compilation compilation) =>
             // ToDo: PERF: do the global setting check before the per-file check.
-            => DiagnosticAnalyzerContextHelper.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance,
-                tree,
-                compilation,
-                options);
+            DiagnosticAnalyzerContextHelper.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
     }
 }
