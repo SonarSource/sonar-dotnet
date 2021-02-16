@@ -18,20 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Rules.Hotspots
 {
-    public static class InvocationExpressionSyntaxExtensions
+    public static class LooseFilePermissionsConfig
     {
-        internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccess
-            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
-
-        internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
+        public static readonly ImmutableHashSet<string> WeakFileAccessPermissions =
+            ImmutableHashSet.Create("AllPermissions", "DefaultPermissions", "OtherExecute", "OtherWrite", "OtherRead", "OtherReadWriteExecute");
     }
 }

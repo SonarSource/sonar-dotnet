@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.Hotspots
         }
 
         private static bool IsFileAccessPermissions(SimpleNameSyntax identifierNameSyntax, SemanticModel semanticModel) =>
-            WeakFileAccessPermissions.Contains(identifierNameSyntax.Identifier.Text)
+            LooseFilePermissionsConfig.WeakFileAccessPermissions.Contains(identifierNameSyntax.Identifier.Text)
             && identifierNameSyntax.IsKnownType(KnownType.Mono_Unix_FileAccessPermissions, semanticModel);
 
         private static bool IsSetAccessRule(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>

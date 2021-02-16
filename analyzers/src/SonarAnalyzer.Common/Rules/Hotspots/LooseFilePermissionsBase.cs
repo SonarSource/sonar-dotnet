@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2021 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Resources;
 using Microsoft.CodeAnalysis;
@@ -35,16 +34,6 @@ namespace SonarAnalyzer.Rules.Hotspots
         protected const string Everyone = "Everyone";
 
         private const string MessageFormat = "Make sure this permission is safe.";
-
-        protected static readonly HashSet<string> WeakFileAccessPermissions = new HashSet<string>
-        {
-            "AllPermissions",
-            "DefaultPermissions",
-            "OtherExecute",
-            "OtherWrite",
-            "OtherRead",
-            "OtherReadWriteExecute"
-        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

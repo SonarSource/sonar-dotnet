@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         private static bool IsFileAccessPermissions(SimpleNameSyntax identifierNameSyntax, SemanticModel semanticModel) =>
-            WeakFileAccessPermissions.Contains(identifierNameSyntax.Identifier.Text)
+            LooseFilePermissionsConfig.WeakFileAccessPermissions.Contains(identifierNameSyntax.Identifier.Text)
             && identifierNameSyntax.IsKnownType(KnownType.Mono_Unix_FileAccessPermissions, semanticModel);
 
         private static bool IsSetAccessRule(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
@@ -99,8 +99,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 nodes.OfType<ObjectCreationExpressionSyntax>()
                      .FirstOrDefault(objectCreation => IsFileSystemAccessRuleForEveryoneWithAllow(objectCreation, semanticModel));
         }
-
-
 
         private static bool IsFileSystemAccessRuleForEveryoneWithAllow(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
             objectCreation.IsKnownType(KnownType.System_Security_AccessControl_FileSystemAccessRule, semanticModel)

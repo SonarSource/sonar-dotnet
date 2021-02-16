@@ -25,16 +25,16 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Extensions
 {
-    public static class ISymbolExtensions
+    internal static class ISymbolExtensions
     {
         public static IEnumerable<SyntaxNode> GetLocationNodes(this ISymbol symbol, SyntaxNode node) =>
             symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));
 
-        private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode node) =>
+        public static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode node) =>
             location.SourceTree?.GetRoot() is { } locationRootNode
             && locationRootNode == node.SyntaxTree.GetRoot()
-            && locationRootNode.FindNode(location.SourceSpan) is { } nodeAtLocation
-            && nodeAtLocation.FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { } declaration
+            && locationRootNode.FindNode(location.SourceSpan)
+                               .FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { } declaration
                 ? declaration.DescendantNodes()
                 : Enumerable.Empty<SyntaxNode>();
     }

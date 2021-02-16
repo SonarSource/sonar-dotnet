@@ -18,20 +18,32 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
+extern alias vbnet;
+using System.Linq;
+using FluentAssertions;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using vbnet::SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.UnitTest.Extensions.VisualBasic
 {
-    public static class InvocationExpressionSyntaxExtensions
+    [TestClass]
+    public class InvocationExpressionSyntaxExtensionsTest
     {
-        internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccess
-            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
-
-        internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
-            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
+        [TestMethod]
+        public void GivenExpressionIsNotMemberAccessExpressionSyntax_IsMemberAccessOnKnownType_ReturnsFalse() =>
+            SyntaxFactory.ParseSyntaxTree(
+@"Sub test()
+test()
+End Sub")
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .IsMemberAccessOnKnownType(null, KnownType.System_String, null)
+                .Should()
+                .BeFalse();
     }
 }
