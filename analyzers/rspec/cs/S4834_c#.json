@@ -3,23 +3,10 @@
   "type": "SECURITY_HOTSPOT",
   "status": "deprecated",
   "tags": [
-    "cwe",
-    "sans-top25-porous",
-    "owasp-a5"
+    
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-4834",
   "sqKey": "S4834",
-  "scope": "Main",
-  "securityStandards": {
-    "CWE": [
-      276,
-      732,
-      668,
-      277
-    ],
-    "OWASP": [
-      "A5"
-    ]
-  }
+  "scope": "Main"
 }
