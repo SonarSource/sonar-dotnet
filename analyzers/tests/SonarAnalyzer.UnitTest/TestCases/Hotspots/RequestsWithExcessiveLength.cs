@@ -98,6 +98,16 @@ namespace Tests.Diagnostics
             return null;
         }
 
+        [HttpPost]
+        [RequestSizeLimit(1000000000)] // Secondary [1]
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        [RequestFormLimits(MultipartBodyLengthLimit = 1000000000)] // Noncompliant [1]
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        public ActionResult RequestSizeLimitAndFormLimits()
+        {
+            return null;
+        }
+
         public ActionResult MethodWithoutAttributes()
         {
             return null;

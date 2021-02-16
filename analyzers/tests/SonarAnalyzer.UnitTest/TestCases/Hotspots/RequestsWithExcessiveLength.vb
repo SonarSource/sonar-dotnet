@@ -84,6 +84,13 @@ Namespace Tests.TestCases
             Return Nothing
         End Function
 
+        <HttpPost>
+        <RequestFormLimits(MultipartBodyLengthLimit:=1000000000)> ' Noncompliant [1]
+        <RequestSizeLimit(1000000000)> ' Secondary [1]
+        Public Function RequestSizeLimitAndFormLimits() As ActionResult
+            Return Nothing
+        End Function
+
         Public Function MethodWithoutAttributes() As ActionResult
             Return Nothing
         End Function

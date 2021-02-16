@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -42,6 +44,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsInvalidRequestFormLimits(TAttributeSyntax attribute, SemanticModel semanticModel);
         protected abstract bool IsInvalidRequestSizeLimit(TAttributeSyntax attribute, SemanticModel semanticModel);
+        protected abstract SyntaxNode GetMethodOrClassDeclaration(TAttributeSyntax attribute, SemanticModel semanticModel);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -55,28 +58,76 @@ namespace SonarAnalyzer.Rules
         }
 
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+            context.RegisterCompilationStartAction(
                 c =>
                 {
-                    if (!IsEnabled(c.Options))
-                    {
-                        return;
-                    }
+                    var attributesOverTheLimit = new ConcurrentDictionary<SyntaxNode, Attributes>();
 
-                    if (c.Node is TAttributeSyntax attribute
-                        && (attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, c.SemanticModel)
-                            || IsInvalidRequestSizeLimit(attribute, c.SemanticModel)
-                            || IsInvalidRequestFormLimits(attribute, c.SemanticModel)))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
-                    }
-                },
-                Language.SyntaxKind.Attribute);
+                    c.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
+                        cc =>
+                        {
+                            if (!IsEnabled(c.Options))
+                            {
+                                return;
+                            }
+
+                            var attribute = (TAttributeSyntax)cc.Node;
+
+                            if (attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, cc.SemanticModel))
+                            {
+                                cc.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
+                            }
+
+                            if ((IsInvalidRequestSizeLimit(attribute, cc.SemanticModel)
+                                 || IsInvalidRequestFormLimits(attribute, cc.SemanticModel))
+                                && GetMethodOrClassDeclaration(attribute, cc.SemanticModel) is { } delcaration)
+                            {
+                                var isRequestFormLimits = attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, cc.SemanticModel);
+
+                                attributesOverTheLimit.AddOrUpdate(
+                                    delcaration,
+                                    new Attributes
+                                    {
+                                        InvalidRequestForm = isRequestFormLimits ? attribute : null,
+                                        InvalidRequestSize = isRequestFormLimits ? null : attribute
+                                    },
+                                    (declaration, attributes) =>
+                                    new Attributes
+                                    {
+                                        InvalidRequestForm = isRequestFormLimits ? attribute : attributes.InvalidRequestForm,
+                                        InvalidRequestSize = isRequestFormLimits ? attributes.InvalidRequestSize : attribute
+                                    });
+                            }
+                        },
+                        Language.SyntaxKind.Attribute);
+
+                    c.RegisterCompilationEndAction(
+                        cc =>
+                        {
+                            foreach (var attrsByDec in attributesOverTheLimit)
+                            {
+                                var mainAttribute = attrsByDec.Value.InvalidRequestForm ?? attrsByDec.Value.InvalidRequestSize;
+
+                                cc.ReportDiagnosticWhenActive(
+                                    attrsByDec.Value.InvalidRequestForm != null
+                                    && attrsByDec.Value.InvalidRequestSize != null
+                                        ? Diagnostic.Create(rule, mainAttribute.GetLocation(), new List<Location> { attrsByDec.Value.InvalidRequestSize.GetLocation() })
+                                        : Diagnostic.Create(rule, mainAttribute.GetLocation()));
+                            }
+                        });
+                });
 
         private bool IsEnabled(AnalyzerOptions options)
         {
             analyzerConfiguration.Initialize(options);
             return SupportedDiagnostics.Any(d => analyzerConfiguration.IsEnabled(d.Id));
+        }
+
+        private struct Attributes
+        {
+            public SyntaxNode InvalidRequestForm { get; set; }
+
+            public SyntaxNode InvalidRequestSize { get; set; }
         }
     }
 }

@@ -52,6 +52,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             && constantValue.Value is int intValue
             && intValue > FileUploadSizeLimit;
 
+        protected override SyntaxNode GetMethodOrClassDeclaration(AttributeSyntax attribute, SemanticModel semanticModel) =>
+            attribute.FirstAncestorOrSelf<DeclarationStatementSyntax>();
+
         private bool IsMultipartBodyLengthLimit(ArgumentSyntax argument) =>
             argument is SimpleArgumentSyntax { NameColonEquals: { } nameColonEquals }
             && nameColonEquals.Name.Identifier.ValueText.Equals(MultipartBodyLengthLimit, Language.NameComparison);
