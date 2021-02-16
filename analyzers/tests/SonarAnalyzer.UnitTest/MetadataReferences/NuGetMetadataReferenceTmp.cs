@@ -19,7 +19,7 @@
  */
 
 using System.Linq;
-using static SonarAnalyzer.UnitTest.TestFramework.NugetMetadataFactory;
+using static SonarAnalyzer.UnitTest.TestFramework.NuGetMetadataFactory;
 using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences

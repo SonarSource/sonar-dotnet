@@ -31,13 +31,15 @@ using NuGet;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    public static class NugetMetadataFactory
+    public static class NuGetMetadataFactory
     {
         private const string PackagesFolderRelativePath = @"..\..\..\..\..\packages\";
         private const string NuGetConfigFileRelativePath = @"..\..\..\nuget.config";
 
-        private static readonly string[] allowedNugetLibDirectoriesInOrderOfPreference =
-            new string[] {
+        private static readonly PackageManager PackageManager = new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
+
+        private static readonly string[] AllowedNuGetLibDirectoriesInOrderOfPreference = new string[]
+            {
                 "netstandard2.1",
                 "netstandard2.0",
                 "net47",
@@ -54,17 +56,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 "lib",
             };
 
-        private static readonly PackageManager packageManager =
-            new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
-
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime) =>
-            Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, runtime, InstallPackage);
+            Create(packageId, packageVersion, AllowedNuGetLibDirectoriesInOrderOfPreference, runtime, InstallPackage);
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework, string runtime) =>
             Create(packageId, packageVersion, new[] { targetFramework }, runtime, InstallPackage);
 
         public static IEnumerable<MetadataReference> CreateWithCommandLine(string packageId, string packageVersion, string runtime = null) =>
-            Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, runtime, InstallWithCommandLine);
+            Create(packageId, packageVersion, AllowedNuGetLibDirectoriesInOrderOfPreference, runtime, InstallWithCommandLine);
 
         public static IEnumerable<MetadataReference> CreateNETStandard21()
         {
@@ -94,7 +93,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             EnsurePackageIsInstalled(packageId, packageVersion, runtime, installPackage);
 
-            var allowedNugetLibDirectoriesByPreference = allowedTargetFrameworks.Select((folder, priority) => new { folder, priority });
+            var allowedNuGetLibDirectoriesByPreference = allowedTargetFrameworks.Select((folder, priority) => new { folder, priority });
             var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion, runtime);
             LogMessage($"Download package directory: {packageDirectory}");
             if (!Directory.Exists(packageDirectory))
@@ -109,7 +108,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             selectedGroup = matchingDllsGroups.Length == 1 && matchingDllsGroups[0].Key.EndsWith(".dll")
                 ? matchingDllsGroups[0]
-                : matchingDllsGroups.Join(allowedNugetLibDirectoriesByPreference,
+                : matchingDllsGroups.Join(allowedNuGetLibDirectoriesByPreference,
                     group => group.Key.Split('+').First(),
                     allowed => allowed.folder,
                     (group, allowed) => new { group, allowed.priority })
@@ -243,8 +242,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 : null;
 
             LogMessage($"Installing NuGet {packageId}.{packageVersion}");
-            packageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(realVersion),
-                ignoreDependencies: true, allowPrereleaseVersions: false);
+            PackageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(realVersion), ignoreDependencies: true, allowPrereleaseVersions: false);
         }
 
         private static void InstallWithCommandLine(string packageId, string packageVersion)
@@ -258,7 +256,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var args = $"install {packageId} {versionArgument} -OutputDirectory {Path.GetFullPath(PackagesFolderRelativePath)} -NonInteractive -ForceEnglishOutput" +
                 // Explicitly specify the NuGet config to use to avoid being impacted by
                 // the NuGet config on the machine running the tests
-                $" -ConfigFile {nugetConfigPath}" ;
+                $" -ConfigFile {nugetConfigPath}";
             LogMessage("Installing package using nuget.exe:");
             LogMessage($"\tArgs: {args}");
 
