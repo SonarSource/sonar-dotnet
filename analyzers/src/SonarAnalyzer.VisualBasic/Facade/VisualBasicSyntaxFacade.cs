@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Helpers.Facade
                 _ => throw Unexpected(node)
             };
 
-        public override string GetStringTextValue(SyntaxNode node) =>
+        public override string NodeStringTextValue(SyntaxNode node) =>
             node switch
             {
                 InterpolatedStringExpressionSyntax interpolatedStringExpression => interpolatedStringExpression.GetContentsText(),

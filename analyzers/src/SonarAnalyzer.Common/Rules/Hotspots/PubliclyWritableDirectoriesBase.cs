@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules
                     }
 
                     var node = c.Node;
-                    if (Language.Syntax.GetStringTextValue(node) is { } stringValue
+                    if (Language.Syntax.NodeStringTextValue(node) is { } stringValue
                         && matcher.IsSensitiveDirectoryUsage(stringValue))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));

@@ -8,6 +8,7 @@ namespace Tests.Diagnostics
         public void Compliant()
         {
             var randomPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()); // Compliant
+            var tempFileName = Path.GetTempFileName(); // Compliant
 
             using (var tmpDir = new StreamReader(@"Path is /tmp/f")) { };  // Compliant
             using (var tmpDir = new StreamReader(@"C:\\Windows\\Tempete")) { };  // Compliant;

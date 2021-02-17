@@ -7,6 +7,7 @@ Namespace Tests.TestCases
 
         Public Sub Compliant()
             Dim RandomPath As String = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()) ' Compliant
+            Dim TempFileName As String = Path.GEtTempFileName() ' Compliant
             Using TmpDir = New StreamReader("Path is /tmp/f") ' Compliant
             End Using
             Using TmpDir = New StreamReader("C:\\Windows\\Tempete") ' Compliant;
