@@ -1,4 +1,6 @@
-﻿Public Class IFoo ' NOSONAR
+﻿<Assembly: Reflection.AssemblyVersion("1.0.0")>
+
+Public Class IFoo ' NOSONAR
 
     Public Sub Method()
         Console.WriteLine("Hello, ")

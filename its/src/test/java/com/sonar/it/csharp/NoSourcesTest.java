@@ -44,7 +44,7 @@ public class NoSourcesTest {
   }
 
   @Test
-  public void filesAtProjectLevel() {
+  public void raiseOnSharedFiles() {
     List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
     assertThat(issues).hasSize(1).hasOnlyOneElementSatisfying(e ->
     {
