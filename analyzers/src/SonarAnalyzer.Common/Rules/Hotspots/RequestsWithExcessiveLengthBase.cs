@@ -46,8 +46,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        protected abstract bool IsInvalidRequestFormLimits(TAttributeSyntax attribute, SemanticModel semanticModel);
-        protected abstract bool IsInvalidRequestSizeLimit(TAttributeSyntax attribute, SemanticModel semanticModel);
+        protected abstract TAttributeSyntax IsInvalidRequestFormLimits(TAttributeSyntax attribute, SemanticModel semanticModel);
+        protected abstract TAttributeSyntax IsInvalidRequestSizeLimit(TAttributeSyntax attribute, SemanticModel semanticModel);
         protected abstract SyntaxNode GetMethodOrClassDeclaration(TAttributeSyntax attribute, SemanticModel semanticModel);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
@@ -95,25 +95,17 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            if ((IsInvalidRequestSizeLimit(attribute, context.SemanticModel)
-                 || IsInvalidRequestFormLimits(attribute, context.SemanticModel))
+            var requestSizeLimit = IsInvalidRequestSizeLimit(attribute, context.SemanticModel);
+            var requestFormLimits = IsInvalidRequestFormLimits(attribute, context.SemanticModel);
+
+            if ((requestSizeLimit != null
+                 || requestFormLimits != null)
                 && GetMethodOrClassDeclaration(attribute, context.SemanticModel) is { } declaration)
             {
-                var isRequestFormLimits = attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, context.SemanticModel);
-
                 attributesOverTheLimit.AddOrUpdate(
                     declaration,
-                    new Attributes
-                    {
-                        InvalidRequestForm = isRequestFormLimits ? attribute : null,
-                        InvalidRequestSize = isRequestFormLimits ? null : attribute
-                    },
-                    (declaration, attributes) =>
-                    new Attributes
-                    {
-                        InvalidRequestForm = isRequestFormLimits ? attribute : attributes.InvalidRequestForm,
-                        InvalidRequestSize = isRequestFormLimits ? attributes.InvalidRequestSize : attribute
-                    });
+                    new Attributes(requestFormLimits, requestSizeLimit),
+                    (declaration, attributes) => new Attributes(requestFormLimits, requestSizeLimit, attributes));
             }
         }
 
@@ -121,13 +113,10 @@ namespace SonarAnalyzer.Rules
         {
             foreach (var attrsByDec in attributesOverTheLimit)
             {
-                var mainAttribute = attrsByDec.Value.InvalidRequestForm ?? attrsByDec.Value.InvalidRequestSize;
-
                 context.ReportDiagnosticWhenActive(
-                    attrsByDec.Value.InvalidRequestForm != null
-                    && attrsByDec.Value.InvalidRequestSize != null
-                        ? Diagnostic.Create(rule, mainAttribute.GetLocation(), new List<Location> { attrsByDec.Value.InvalidRequestSize.GetLocation() })
-                        : Diagnostic.Create(rule, mainAttribute.GetLocation()));
+                    attrsByDec.Value.SecondaryAttribute != null
+                        ? Diagnostic.Create(rule, attrsByDec.Value.MainAttribute.GetLocation(), new List<Location> { attrsByDec.Value.SecondaryAttribute.GetLocation() })
+                        : Diagnostic.Create(rule, attrsByDec.Value.MainAttribute.GetLocation()));
             }
         }
 
@@ -139,9 +128,26 @@ namespace SonarAnalyzer.Rules
 
         private struct Attributes
         {
-            public SyntaxNode InvalidRequestForm { get; set; }
+            private readonly SyntaxNode invalidRequestForm;
+            private readonly SyntaxNode invalidRequestSize;
 
-            public SyntaxNode InvalidRequestSize { get; set; }
+            public SyntaxNode MainAttribute =>
+                invalidRequestForm ?? invalidRequestSize;
+
+            public SyntaxNode SecondaryAttribute =>
+                invalidRequestForm != null && invalidRequestSize != null ? invalidRequestSize : null;
+
+            public Attributes(SyntaxNode invalidRequestForm, SyntaxNode invalidRequestSize)
+            {
+                this.invalidRequestForm = invalidRequestForm;
+                this.invalidRequestSize = invalidRequestSize;
+            }
+
+            public Attributes(SyntaxNode invalidRequestForm, SyntaxNode invalidRequestSize, Attributes oldAttributes)
+            {
+                this.invalidRequestForm = invalidRequestForm ?? oldAttributes.invalidRequestForm;
+                this.invalidRequestSize = invalidRequestSize ?? oldAttributes.invalidRequestSize;
+            }
         }
     }
 }

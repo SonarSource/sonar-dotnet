@@ -39,21 +39,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration) { }
 
-        protected override bool IsInvalidRequestFormLimits(AttributeSyntax attribute, SemanticModel semanticModel) =>
+        protected override AttributeSyntax IsInvalidRequestFormLimits(AttributeSyntax attribute, SemanticModel semanticModel) =>
             IsRequestFormLimits(attribute.Name.ToString())
             && attribute.ArgumentList?.Arguments.FirstOrDefault(arg => IsMultipartBodyLengthLimit(arg)) is { } firstArgument
             && semanticModel.GetConstantValue(firstArgument.Expression) is { HasValue: true } constantValue
             && constantValue.Value is int intValue
             && intValue > FileUploadSizeLimit
-            && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, semanticModel);
+            && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, semanticModel)
+                ? attribute
+                : null;
 
-        protected override bool IsInvalidRequestSizeLimit(AttributeSyntax attribute, SemanticModel semanticModel) =>
+        protected override AttributeSyntax IsInvalidRequestSizeLimit(AttributeSyntax attribute, SemanticModel semanticModel) =>
             IsRequestSizeLimit(attribute.Name.ToString())
             && attribute.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
             && semanticModel.GetConstantValue(firstArgument.Expression) is { HasValue: true } constantValue
             && constantValue.Value is int intValue
             && intValue > FileUploadSizeLimit
-            && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute, semanticModel);
+            && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute, semanticModel)
+                ? attribute
+                : null;
 
         protected override SyntaxNode GetMethodOrClassDeclaration(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.FirstAncestorOrSelf<SyntaxNode>(node => node is MemberDeclarationSyntax || LocalFunctionStatementSyntaxWrapper.IsInstance(node));
