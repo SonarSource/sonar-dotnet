@@ -3,26 +3,30 @@
 user can try to create a file with a predictable name before the application does. A successful attack can result in other files being accessed,
 modified, corrupted or deleted. This risk is even higher if the application runs with elevated permissions.</p>
 <p>In the past, it has led to the following vulnerabilities:</p>
-<p> * <a href="https://nvd.nist.gov/vuln/detail/CVE-2012-2451">CVE-2012-2451</a></p>
-<p> * <a href="https://nvd.nist.gov/vuln/detail/CVE-2015-1838">CVE-2015-1838</a></p>
+<ul>
+  <li> <a href="https://nvd.nist.gov/vuln/detail/CVE-2012-2451">CVE-2012-2451</a> </li>
+  <li> <a href="https://nvd.nist.gov/vuln/detail/CVE-2015-1838">CVE-2015-1838</a> </li>
+</ul>
 <p>This rule raises an issue whenever it detects a hard-coded path to a publicly writable directory like <code>/tmp</code> (see examples bellow). It
 also detects access to environment variables that point to publicly writable directories, e.g., <code>TMP</code>, <code>TMPDIR</code> and
 <code>TEMP</code>.</p>
-<p> * <code>/tmp</code></p>
-<p> * <code>/var/tmp</code></p>
-<p> * <code>/usr/tmp</code></p>
-<p> * <code>/dev/shm</code></p>
-<p> * <code>/dev/mqueue</code></p>
-<p> * <code>/run/lock</code></p>
-<p> * <code>/var/run/lock</code></p>
-<p> * <code>/Library/Caches</code></p>
-<p> * <code>/Users/Shared</code></p>
-<p> * <code>/private/tmp</code></p>
-<p> * <code>/private/var/tmp</code></p>
-<p> * <code>\Windows\Temp</code></p>
-<p> * <code>\Temp</code></p>
-<p> * <code>\TMP</code></p>
-<p> * <code>%USERPROFILE%\AppData\Local\Temp</code></p>
+<ul>
+  <li> <code>/tmp</code> </li>
+  <li> <code>/var/tmp</code> </li>
+  <li> <code>/usr/tmp</code> </li>
+  <li> <code>/dev/shm</code> </li>
+  <li> <code>/dev/mqueue</code> </li>
+  <li> <code>/run/lock</code> </li>
+  <li> <code>/var/run/lock</code> </li>
+  <li> <code>/Library/Caches</code> </li>
+  <li> <code>/Users/Shared</code> </li>
+  <li> <code>/private/tmp</code> </li>
+  <li> <code>/private/var/tmp</code> </li>
+  <li> <code>\Windows\Temp</code> </li>
+  <li> <code>\Temp</code> </li>
+  <li> <code>\TMP</code> </li>
+  <li> <code>%USERPROFILE%\AppData\Local\Temp</code> </li>
+</ul>
 <h2>Ask Yourself Whether</h2>
 <ul>
   <li> Files are read from or written into a publicly writable folder </li>
@@ -31,12 +35,16 @@ also detects access to environment variables that point to publicly writable dir
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <p>Out of the box, .NET is missing secure-by-design APIs to create temporary files. To overcome this, one of the following options can be used:</p>
-<p> * Use a dedicated sub-folder with tightly controlled permissions</p>
-<p> * Created temporary files in a publicly writable folder and make sure:</p>
-<p> <strong></strong> Generated filename is unpredictable</p>
-<p> <strong></strong> File is readable and writable only by the creating user ID</p>
-<p> <strong></strong> File descriptor is not inherited by child processes</p>
-<p> <strong></strong> File is destroyed as soon as it is closed</p>
+<ul>
+  <li> Use a dedicated sub-folder with tightly controlled permissions </li>
+  <li> Created temporary files in a publicly writable folder and make sure:
+    <ul>
+      <li> Generated filename is unpredictable </li>
+      <li> File is readable and writable only by the creating user ID </li>
+      <li> File descriptor is not inherited by child processes </li>
+      <li> File is destroyed as soon as it is closed </li>
+    </ul> </li>
+</ul>
 <h2>Sensitive Code Example</h2>
 <pre>
 Using Writer As New StreamWriter("/tmp/f") ' Sensitive
