@@ -25,6 +25,12 @@ Namespace Tests.TestCases
         End Function
 
         <HttpPost>
+        <RequestSizeLimit(8_388_608)> ' Noncompliant
+        Public Function SizeWith1024Base() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
         <RequestFormLimits(MultipartBodyLengthLimit:=8_000_001, MultipartHeadersLengthLimit:=42)> ' Noncompliant ^10#87 {{Make sure the content length limit is safe here.}}
         Public Function MultipartFormRequestAboveLimit() As ActionResult
             Return Nothing
@@ -39,6 +45,30 @@ Namespace Tests.TestCases
         <HttpPost>
         <RequestFormLimits()>
         Public Function MultiPartFromRequestWithDefaultLimit() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(MultipartHeadersLengthLimit:=42, MultipartBodyLengthLimit:=8_000_001)> ' Noncompliant
+        Public Function RequestFormLimitsWithVariousParamsV1() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(BufferBody:=True, MultipartBodyLengthLimit:=8_000_001)> ' Noncompliant
+        Public Function RequestFormLimitsWithVariousParamsV2() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(BufferBody:=True, MultipartHeadersLengthLimit:=42, ValueCountLimit:=42, MultipartBodyLengthLimit:=8_000_001)> ' Noncompliant
+        Public Function RequestFormLimitsWithVariousParamsV3() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(BufferBody:=True, MultipartHeadersLengthLimit:=42, ValueCountLimit:=42)>
+        Public Function RequestFormLimitsWithVariousParamsV4() As ActionResult
             Return Nothing
         End Function
 
@@ -88,6 +118,27 @@ Namespace Tests.TestCases
         <RequestFormLimits(MultipartBodyLengthLimit:=1000000000)> ' Noncompliant [1]
         <RequestSizeLimit(1000000000)> ' Secondary [1]
         Public Function RequestSizeLimitAndFormLimits() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(MultipartBodyLengthLimit:=1000000000)> ' Noncompliant
+        <RequestSizeLimit(42)>
+        Public Function SizeBelowLimitFormsAboveLimit() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(MultipartBodyLengthLimit:=42)>
+        <RequestSizeLimit(1000000000)> ' Noncompliant
+        Public Function SizeAboveLimitFormsBelowLimit() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(MultipartBodyLengthLimit:=42)>
+        <RequestSizeLimit(42)>
+        Public Function BothBelowLimit() As ActionResult
             Return Nothing
         End Function
 

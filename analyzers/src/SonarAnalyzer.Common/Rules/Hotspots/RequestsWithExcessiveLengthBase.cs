@@ -35,6 +35,10 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S5693";
         protected const string MultipartBodyLengthLimit = "MultipartBodyLengthLimit";
+        protected const string RequestSizeLimit = "RequestSizeLimit";
+        protected const string RequestSizeLimitAttribute = "RequestSizeLimitAttribute";
+        protected const string RequestFormLimits = "RequestFormLimits";
+        protected const string RequestFormLimitsAttribute = "RequestFormLimitsAttribute";
         private const string MessageFormat = "Make sure the content length limit is safe here.";
         private const int DefaultFileUploadSizeLimit = 8_000_000;
         private readonly IAnalyzerConfiguration analyzerConfiguration;
@@ -64,58 +68,68 @@ namespace SonarAnalyzer.Rules
                     var attributesOverTheLimit = new ConcurrentDictionary<SyntaxNode, Attributes>();
 
                     c.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer,
-                        cc =>
-                        {
-                            if (!IsEnabled(c.Options))
-                            {
-                                return;
-                            }
-
-                            var attribute = (TAttributeSyntax)cc.Node;
-
-                            if (attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, cc.SemanticModel))
-                            {
-                                cc.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
-                            }
-
-                            if ((IsInvalidRequestSizeLimit(attribute, cc.SemanticModel)
-                                 || IsInvalidRequestFormLimits(attribute, cc.SemanticModel))
-                                && GetMethodOrClassDeclaration(attribute, cc.SemanticModel) is { } delcaration)
-                            {
-                                var isRequestFormLimits = attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, cc.SemanticModel);
-
-                                attributesOverTheLimit.AddOrUpdate(
-                                    delcaration,
-                                    new Attributes
-                                    {
-                                        InvalidRequestForm = isRequestFormLimits ? attribute : null,
-                                        InvalidRequestSize = isRequestFormLimits ? null : attribute
-                                    },
-                                    (declaration, attributes) =>
-                                    new Attributes
-                                    {
-                                        InvalidRequestForm = isRequestFormLimits ? attribute : attributes.InvalidRequestForm,
-                                        InvalidRequestSize = isRequestFormLimits ? attributes.InvalidRequestSize : attribute
-                                    });
-                            }
-                        },
+                        cc => CollectAttributesOverTheLimit(cc, attributesOverTheLimit),
                         Language.SyntaxKind.Attribute);
 
-                    c.RegisterCompilationEndAction(
-                        cc =>
-                        {
-                            foreach (var attrsByDec in attributesOverTheLimit)
-                            {
-                                var mainAttribute = attrsByDec.Value.InvalidRequestForm ?? attrsByDec.Value.InvalidRequestSize;
-
-                                cc.ReportDiagnosticWhenActive(
-                                    attrsByDec.Value.InvalidRequestForm != null
-                                    && attrsByDec.Value.InvalidRequestSize != null
-                                        ? Diagnostic.Create(rule, mainAttribute.GetLocation(), new List<Location> { attrsByDec.Value.InvalidRequestSize.GetLocation() })
-                                        : Diagnostic.Create(rule, mainAttribute.GetLocation()));
-                            }
-                        });
+                    c.RegisterCompilationEndAction(cc => ReportOnCollectedAttributes(cc, attributesOverTheLimit));
                 });
+
+        protected bool IsRequestFormLimits(string attributeName) =>
+            attributeName.Equals(RequestFormLimits, Language.NameComparison) || attributeName.Equals(RequestFormLimitsAttribute, Language.NameComparison);
+
+        protected bool IsRequestSizeLimit(string attributeName) =>
+            attributeName.Equals(RequestSizeLimit, Language.NameComparison) || attributeName.Equals(RequestSizeLimitAttribute, Language.NameComparison);
+
+        private void CollectAttributesOverTheLimit(SyntaxNodeAnalysisContext context, ConcurrentDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
+        {
+            if (!IsEnabled(context.Options))
+            {
+                return;
+            }
+
+            var attribute = (TAttributeSyntax)context.Node;
+
+            if (attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, context.SemanticModel))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
+                return;
+            }
+
+            if ((IsInvalidRequestSizeLimit(attribute, context.SemanticModel)
+                 || IsInvalidRequestFormLimits(attribute, context.SemanticModel))
+                && GetMethodOrClassDeclaration(attribute, context.SemanticModel) is { } declaration)
+            {
+                var isRequestFormLimits = attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, context.SemanticModel);
+
+                attributesOverTheLimit.AddOrUpdate(
+                    declaration,
+                    new Attributes
+                    {
+                        InvalidRequestForm = isRequestFormLimits ? attribute : null,
+                        InvalidRequestSize = isRequestFormLimits ? null : attribute
+                    },
+                    (declaration, attributes) =>
+                    new Attributes
+                    {
+                        InvalidRequestForm = isRequestFormLimits ? attribute : attributes.InvalidRequestForm,
+                        InvalidRequestSize = isRequestFormLimits ? attributes.InvalidRequestSize : attribute
+                    });
+            }
+        }
+
+        private void ReportOnCollectedAttributes(CompilationAnalysisContext context, ConcurrentDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
+        {
+            foreach (var attrsByDec in attributesOverTheLimit)
+            {
+                var mainAttribute = attrsByDec.Value.InvalidRequestForm ?? attrsByDec.Value.InvalidRequestSize;
+
+                context.ReportDiagnosticWhenActive(
+                    attrsByDec.Value.InvalidRequestForm != null
+                    && attrsByDec.Value.InvalidRequestSize != null
+                        ? Diagnostic.Create(rule, mainAttribute.GetLocation(), new List<Location> { attrsByDec.Value.InvalidRequestSize.GetLocation() })
+                        : Diagnostic.Create(rule, mainAttribute.GetLocation()));
+            }
+        }
 
         private bool IsEnabled(AnalyzerOptions options)
         {

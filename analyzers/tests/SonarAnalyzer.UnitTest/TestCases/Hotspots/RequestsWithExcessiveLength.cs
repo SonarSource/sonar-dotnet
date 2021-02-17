@@ -29,6 +29,13 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
+        [RequestSizeLimit(8_388_608)] // Noncompliant
+        public ActionResult SizeWith1024Base()
+        {
+            return null;
+        }
+
+        [HttpPost]
         [RequestFormLimits(MultipartBodyLengthLimit = 8_000_001, MultipartHeadersLengthLimit = 42)] // Noncompliant {{Make sure the content length limit is safe here.}}
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult MultipartFormRequestAboveLimit()
@@ -45,6 +52,34 @@ namespace Tests.Diagnostics
 
         [HttpPost]
         public ActionResult MultiPartFromRequestWithDefaultLimit()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestFormLimits(MultipartHeadersLengthLimit = 42, MultipartBodyLengthLimit = 8_000_001)] // Noncompliant {{Make sure the content length limit is safe here.}}
+        public ActionResult RequestFormLimitsWithVariousParamsV1()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestFormLimits(BufferBody = true, MultipartBodyLengthLimit = 8_000_001)]  // Noncompliant {{Make sure the content length limit is safe here.}}
+        public ActionResult RequestFormLimitsWithVariousParamsV2()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestFormLimits(BufferBody = true, MultipartHeadersLengthLimit = 42, ValueCountLimit = 42, MultipartBodyLengthLimit = 8_000_001)] // Noncompliant
+        public ActionResult RequestFormLimitsWithVariousParamsV3()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestFormLimits(BufferBody = true, MultipartHeadersLengthLimit = 42, ValueCountLimit = 42)]
+        public ActionResult RequestFormLimitsWithVariousParamsV4()
         {
             return null;
         }
@@ -104,6 +139,30 @@ namespace Tests.Diagnostics
         [RequestFormLimits(MultipartBodyLengthLimit = 1000000000)] // Noncompliant [1]
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult RequestSizeLimitAndFormLimits()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestSizeLimit(42)]
+        [RequestFormLimits(MultipartBodyLengthLimit = 1000000000)] // Noncompliant
+        public ActionResult SizeBelowLimitFormsAboveLimit()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestSizeLimit(1000000000)] // Noncompliant
+        [RequestFormLimits(MultipartBodyLengthLimit = 42)]
+        public ActionResult SizeAboveLimitFormsBelowLimit()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [RequestSizeLimit(42)]
+        [RequestFormLimits(MultipartBodyLengthLimit = 42)]
+        public ActionResult BothBelowLimit()
         {
             return null;
         }
