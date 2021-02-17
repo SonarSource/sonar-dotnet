@@ -29,7 +29,7 @@ using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using NuGet;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     public static class NuGetMetadataFactory
     {

@@ -19,7 +19,6 @@
  */
 
 using System.Linq;
-using SonarAnalyzer.UnitTest.TestFramework;
 using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
