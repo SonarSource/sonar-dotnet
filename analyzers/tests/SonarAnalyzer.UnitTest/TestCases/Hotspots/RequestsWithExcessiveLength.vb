@@ -7,16 +7,18 @@ Namespace Tests.TestCases
         Inherits Controller
 
         <HttpPost>
-        <DisableRequestSizeLimit()> ' Noncompliant ^10#25 {{Make sure the content length limit is safe here.}}
+        <DisableRequestSizeLimit()>
         Public Function PostRequestWithNoLimit() As ActionResult
             Return Nothing
         End Function
+        '^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-3 {{Make sure the content length limit is safe here.}}
 
         <HttpPost>
-        <RequestSizeLimit(8_000_001)> ' Noncompliant ^10#27 {{Make sure the content length limit is safe here.}}
+        <RequestSizeLimit(8_000_001)>
         Public Function PostRequestAboveLimit() As ActionResult
             Return Nothing
         End Function
+        '^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-3 {{Make sure the content length limit is safe here.}}
 
         <HttpPost>
         <RequestSizeLimit(8_000_000)> ' Compliant value Is below limit.
@@ -148,11 +150,12 @@ Namespace Tests.TestCases
 
     End Class
 
-    <DisableRequestSizeLimit()> ' Noncompliant ^6#25
+    <DisableRequestSizeLimit()>
     Public Class DisableRequestSizeLimitController
         Inherits Controller
 
     End Class
+    '^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-4
 
     <RequestSizeLimit(8_000_001)> ' Noncompliant
     Public Class RequestSizeLimitAboveController

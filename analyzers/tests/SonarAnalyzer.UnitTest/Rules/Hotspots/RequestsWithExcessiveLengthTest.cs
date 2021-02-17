@@ -49,6 +49,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
                 GetAdditionalReferences());
 
+#if NET
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void RequestsWithExcessiveLength_Csharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\RequestsWithExcessiveLength.CSharp9.cs",
+                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
+                GetAdditionalReferences());
+#endif
+
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]

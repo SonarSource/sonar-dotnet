@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -55,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute, semanticModel);
 
         protected override SyntaxNode GetMethodOrClassDeclaration(AttributeSyntax attribute, SemanticModel semanticModel) =>
-            attribute.FirstAncestorOrSelf<MemberDeclarationSyntax>();
+            attribute.FirstAncestorOrSelf<SyntaxNode>(node => node is MemberDeclarationSyntax || LocalFunctionStatementSyntaxWrapper.IsInstance(node));
 
         private static bool IsMultipartBodyLengthLimit(AttributeArgumentSyntax argument) =>
             argument.NameEquals is { } nameEquals

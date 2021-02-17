@@ -7,16 +7,18 @@ Namespace Tests.TestCases
         Inherits Controller
 
         <HttpPost>
-        <RequestSizeLimit(43)> ' Noncompliant ^10#20 {{Make sure the content length limit is safe here.}}
+        <RequestSizeLimit(43)>
         Public Function PostRequestAboveLimit() As ActionResult
             Return Nothing
         End Function
+        '^^^^^^^^^^^^^^^^^^^^ Noncompliant@-3 {{Make sure the content length limit is safe here.}}
 
         <HttpPost>
-        <RequestFormLimits(MultipartBodyLengthLimit:=43)> ' Noncompliant ^10#47 {{Make sure the content length limit is safe here.}}
+        <RequestFormLimits(MultipartBodyLengthLimit:=43)>
         Public Function MultipartFormRequestAboveLimit() As ActionResult
             Return Nothing
         End Function
+        '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-3 {{Make sure the content length limit is safe here.}}
 
         <HttpPost>
         <RequestSizeLimit(41)>
