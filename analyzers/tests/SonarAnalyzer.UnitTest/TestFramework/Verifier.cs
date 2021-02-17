@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -179,6 +180,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             var compilation = SolutionBuilder.Create()
                 .AddTestProject(AnalyzerLanguage.FromPath(path))
+                .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)    // Any reference to detect a test project
                 .AddReferences(additionalReferences)
                 .AddDocument(path)
                 .GetCompilation();
