@@ -29,6 +29,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
@@ -43,7 +44,6 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -53,9 +53,9 @@ import static org.mockito.Mockito.when;
 
 public class DotNetSensorTest {
 
-  public static final String REPO_KEY = "REPO_KEY";
-  public static final String LANG_KEY = "LANG_KEY";
-  public static final String LANG_NAME = "LANG_NAME";
+  private static final String REPO_KEY = "REPO_KEY";
+  private static final String LANG_KEY = "LANG_KEY";
+  private static final String LANG_NAME = "LANG_NAME";
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -87,11 +87,6 @@ public class DotNetSensorTest {
     sensor = new DotNetSensor(pluginMetadata, reportPathCollector, protobufDataImporter, roslynDataImporter);
   }
 
-  private void addFileToFs() {
-    DefaultInputFile inputFile = new TestInputFileBuilder("mod", "file.vb").setLanguage(LANG_KEY).build();
-    tester.fileSystem().add(inputFile);
-  }
-
   @Test
   public void checkDescriptor() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
@@ -106,8 +101,8 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void noProtobufFilesShouldNotFail() {
-    addFileToFs();
+  public void whenNoProtobufFiles_shouldNotFail() {
+    addMainFileToFileSystem();
     when(reportPathCollector.protobufDirs()).thenReturn(Collections.emptyList());
     when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
     tester.setActiveRules(new ActiveRulesBuilder()
@@ -132,8 +127,8 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void noRoslynReportShouldNotFail() {
-    addFileToFs();
+  public void whenNoRoslynReport_shouldNotFail() {
+    addMainFileToFileSystem();
 
     sensor.execute(tester);
 
@@ -147,14 +142,9 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void whenReportsArePresentThereAreNoWarnings() {
-    addFileToFs();
-    when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
-    tester.setActiveRules(new ActiveRulesBuilder()
-      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "S1186")).build())
-      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "[parameters_key]")).build())
-      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of("roslyn.foo", "custom-roslyn")).build())
-      .build());
+  public void whenReportsArePresent_thereAreNoWarnings() {
+    addMainFileToFileSystem();
+    addRoslynReports();
 
     sensor.execute(tester);
 
@@ -164,10 +154,62 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void noAnalysisIfNoFilesDetected() {
+  public void whenThereAreBothMainAndTestFiles_doNotLog() {
+    addMainFileToFileSystem();
+    addTestFileToFileSystem();
+    // add roslyn reports to avoid warnings in the logs for this test
+    addRoslynReports();
+
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).isEqualTo("No files to analyze. Skip Sensor.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+  }
+
+  @Test
+  public void whenThereAreOnlyTestFiles_logWarning() {
+    addTestFileToFileSystem();
+
+    sensor.execute(tester);
+
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.WARN))
+      .containsExactly("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+        "Your SonarQube/SonarCloud project will not have results for LANG_KEY files. " +
+        "You can read more about the detection of test projects here: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+  }
+
+  @Test
+  public void whenThereAreNoFiles_logDebug() {
+    sensor.execute(tester);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.DEBUG))
+      .containsExactly("No files to analyze. Skip Sensor.");
+  }
+
+  private void addMainFileToFileSystem() {
+    addFileToFileSystem("foo.language", Type.MAIN);
+  }
+
+  private void addTestFileToFileSystem() {
+    addFileToFileSystem("bar.language", Type.TEST);
+  }
+
+  private void addFileToFileSystem(String fileName, Type fileType) {
+    DefaultInputFile inputFile = new TestInputFileBuilder("mod", fileName)
+      .setLanguage(LANG_KEY)
+      .setType(fileType)
+      .build();
+    tester.fileSystem().add(inputFile);
+  }
+
+  private void addRoslynReports() {
+    when(reportPathCollector.roslynReports()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
+    tester.setActiveRules(new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "S1186")).build())
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "[parameters_key]")).build())
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of("roslyn.foo", "custom-roslyn")).build())
+      .build());
   }
 }

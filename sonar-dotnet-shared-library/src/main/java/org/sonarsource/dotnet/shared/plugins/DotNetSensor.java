@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.UnaryOperator;
 import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -73,16 +72,22 @@ public class DotNetSensor implements ProjectSensor {
   }
 
   private boolean shouldExecuteOnProject(FileSystem fs) {
-    if (!filesToAnalyze(fs).iterator().hasNext()) {
+    if (hasFilesOfType(fs, Type.MAIN)) {
+      return true;
+    } else if (hasFilesOfType(fs, Type.TEST)) {
+      LOG.warn("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+          "Your SonarQube/SonarCloud project will not have results for {} files. " +
+          "You can read more about the detection of test projects here: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
+        pluginMetadata.languageKey());
+    } else {
+      // it's not a .NET project
       LOG.debug("No files to analyze. Skip Sensor.");
-      return false;
     }
-
-    return true;
+    return false;
   }
 
-  private Iterable<InputFile> filesToAnalyze(FileSystem fs) {
-    return fs.inputFiles(fs.predicates().and(fs.predicates().hasType(Type.MAIN), fs.predicates().hasLanguage(pluginMetadata.languageKey())));
+  private boolean hasFilesOfType(FileSystem fs, Type fileType) {
+    return fs.inputFiles(fs.predicates().and(fs.predicates().hasType(fileType), fs.predicates().hasLanguage(pluginMetadata.languageKey()))).iterator().hasNext();
   }
 
   private void executeInternal(SensorContext context) {
