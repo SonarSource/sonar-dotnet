@@ -40,11 +40,14 @@ namespace SonarAnalyzer.Rules.CSharp
         internal PubliclyWritableDirectories(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
         private protected override bool IsGetTempPathAssignment(InvocationExpressionSyntax invocationExpression, KnownType type, string methodName, SemanticModel semanticModel) =>
-            CSharpSyntaxHelper.IsMethodInvocation(invocationExpression, type, methodName, semanticModel)
+            invocationExpression.IsMethodInvocation(type, methodName, semanticModel)
             && (invocationExpression.Parent is EqualsValueClauseSyntax
-                || invocationExpression.Parent is AssignmentExpressionSyntax);
+                || invocationExpression.Parent is AssignmentExpressionSyntax
+                || invocationExpression.Parent is ArrowExpressionClauseSyntax
+                || invocationExpression.Parent is ReturnStatementSyntax);
+
         private protected override bool IsInsecureEnvironmentVariableRetrieval(InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
-            CSharpSyntaxHelper.IsMethodInvocation(invocation, type, methodName, semanticModel)
+            invocation.IsMethodInvocation(type, methodName, semanticModel)
             && invocation.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
             && InsecureEnvironmentVariables.Any(x => x.Equals(firstArgument.Expression?.GetStringValue(), StringComparison.OrdinalIgnoreCase));
     }

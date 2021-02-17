@@ -89,5 +89,12 @@ namespace Tests.Diagnostics
         {
             return dir;
         }
+
+        public string TempPath => Path.GetTempPath(); // Noncompliant
+
+        public string GetTempPath()
+        {
+            return Path.GetTempPath(); // Noncompliant
+        }
     }
 }

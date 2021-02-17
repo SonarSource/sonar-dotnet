@@ -99,6 +99,12 @@ Namespace Tests.TestCases
             Return Dir
         End Function
 
+        ReadOnly Property GetTempPath() As String
+            Get
+                Return Path.GetTempPath() ' Noncompliant
+            End Get
+        End Property
+
     End Class
 
 End Namespace
