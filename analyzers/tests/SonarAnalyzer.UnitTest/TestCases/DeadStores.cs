@@ -926,22 +926,6 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/3719
     public class Repro_3719
     {
-        public void UseVariableInLocalFunction()
-        {
-            bool usedBool = BoolInitializer(true); // Noncompliant FP, value is used in local function
-            LocalUsage();
-
-            bool LocalUsage()
-            {
-                return usedBool;
-            }
-
-            bool BoolInitializer(bool value)
-            {
-                return value;
-            }
-        }
-
         public void UseVariableInLocalPredicate()
         {
             bool usedBool = BoolInitializer(true); // Noncompliant FP, value is used in local predicate function
