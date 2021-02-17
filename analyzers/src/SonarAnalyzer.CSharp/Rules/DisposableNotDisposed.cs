@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             if (!excludedSymbols.Contains(trackedNodeAndSymbol.Symbol))
                             {
-                                c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name), c.Compilation);
+                                c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name));
                             }
                         }
                     }
