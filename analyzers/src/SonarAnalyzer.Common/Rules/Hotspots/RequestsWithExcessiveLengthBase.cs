@@ -36,10 +36,13 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S5693";
         protected const string MultipartBodyLengthLimit = "MultipartBodyLengthLimit";
         protected const string RequestSizeLimit = "RequestSizeLimit";
-        protected const string RequestSizeLimitAttribute = "RequestSizeLimitAttribute";
+        protected const string RequestSizeLimitAttribute = RequestSizeLimit + Attribute;
+        protected const string DisableRequestSizeLimit = "DisableRequestSizeLimit";
+        protected const string DisableRequestSizeLimitAttribute = DisableRequestSizeLimit + Attribute;
         protected const string RequestFormLimits = "RequestFormLimits";
-        protected const string RequestFormLimitsAttribute = "RequestFormLimitsAttribute";
+        protected const string RequestFormLimitsAttribute = RequestFormLimits + Attribute;
         private const string MessageFormat = "Make sure the content length limit is safe here.";
+        private const string Attribute = "Attribute";
         private const int DefaultFileUploadSizeLimit = 8_000_000;
         private readonly IAnalyzerConfiguration analyzerConfiguration;
         private readonly DiagnosticDescriptor rule;
@@ -48,7 +51,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TAttributeSyntax IsInvalidRequestFormLimits(TAttributeSyntax attribute, SemanticModel semanticModel);
         protected abstract TAttributeSyntax IsInvalidRequestSizeLimit(TAttributeSyntax attribute, SemanticModel semanticModel);
-        protected abstract SyntaxNode GetMethodOrClassDeclaration(TAttributeSyntax attribute, SemanticModel semanticModel);
+        protected abstract SyntaxNode GetMethodLocalFunctionOrClassDeclaration(TAttributeSyntax attribute, SemanticModel semanticModel);
+        protected abstract string AttributeName(TAttributeSyntax attribute);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -75,10 +79,12 @@ namespace SonarAnalyzer.Rules
                 });
 
         protected bool IsRequestFormLimits(string attributeName) =>
-            attributeName.Equals(RequestFormLimits, Language.NameComparison) || attributeName.Equals(RequestFormLimitsAttribute, Language.NameComparison);
+            attributeName.Equals(RequestFormLimits, Language.NameComparison)
+            || attributeName.Equals(RequestFormLimitsAttribute, Language.NameComparison);
 
         protected bool IsRequestSizeLimit(string attributeName) =>
-            attributeName.Equals(RequestSizeLimit, Language.NameComparison) || attributeName.Equals(RequestSizeLimitAttribute, Language.NameComparison);
+            attributeName.Equals(RequestSizeLimit, Language.NameComparison)
+            || attributeName.Equals(RequestSizeLimitAttribute, Language.NameComparison);
 
         private void CollectAttributesOverTheLimit(SyntaxNodeAnalysisContext context, ConcurrentDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
         {
@@ -89,7 +95,8 @@ namespace SonarAnalyzer.Rules
 
             var attribute = (TAttributeSyntax)context.Node;
 
-            if (attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, context.SemanticModel))
+            if (IsDisableRequestSizeLimit(AttributeName(attribute))
+                && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, context.SemanticModel))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
                 return;
@@ -98,9 +105,8 @@ namespace SonarAnalyzer.Rules
             var requestSizeLimit = IsInvalidRequestSizeLimit(attribute, context.SemanticModel);
             var requestFormLimits = IsInvalidRequestFormLimits(attribute, context.SemanticModel);
 
-            if ((requestSizeLimit != null
-                 || requestFormLimits != null)
-                && GetMethodOrClassDeclaration(attribute, context.SemanticModel) is { } declaration)
+            if ((requestSizeLimit != null || requestFormLimits != null)
+                && GetMethodLocalFunctionOrClassDeclaration(attribute, context.SemanticModel) is { } declaration)
             {
                 attributesOverTheLimit.AddOrUpdate(
                     declaration,
@@ -111,14 +117,18 @@ namespace SonarAnalyzer.Rules
 
         private void ReportOnCollectedAttributes(CompilationAnalysisContext context, ConcurrentDictionary<SyntaxNode, Attributes> attributesOverTheLimit)
         {
-            foreach (var attrsByDec in attributesOverTheLimit)
+            foreach (var invalidAttributes in attributesOverTheLimit.Values)
             {
                 context.ReportDiagnosticWhenActive(
-                    attrsByDec.Value.SecondaryAttribute != null
-                        ? Diagnostic.Create(rule, attrsByDec.Value.MainAttribute.GetLocation(), new List<Location> { attrsByDec.Value.SecondaryAttribute.GetLocation() })
-                        : Diagnostic.Create(rule, attrsByDec.Value.MainAttribute.GetLocation()));
+                    invalidAttributes.SecondaryAttribute != null
+                        ? Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation(), new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() })
+                        : Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation()));
             }
         }
+
+        private bool IsDisableRequestSizeLimit(string attributeName) =>
+            attributeName.Equals(DisableRequestSizeLimit, Language.NameComparison)
+            || attributeName.Equals(DisableRequestSizeLimitAttribute, Language.NameComparison);
 
         private bool IsEnabled(AnalyzerOptions options)
         {
@@ -128,25 +138,25 @@ namespace SonarAnalyzer.Rules
 
         private struct Attributes
         {
-            private readonly SyntaxNode invalidRequestForm;
-            private readonly SyntaxNode invalidRequestSize;
+            private readonly TAttributeSyntax requestForm;
+            private readonly TAttributeSyntax requestSize;
 
             public SyntaxNode MainAttribute =>
-                invalidRequestForm ?? invalidRequestSize;
+                requestForm ?? requestSize;
 
             public SyntaxNode SecondaryAttribute =>
-                invalidRequestForm != null && invalidRequestSize != null ? invalidRequestSize : null;
+                requestForm != null && requestSize != null ? requestSize : null;
 
-            public Attributes(SyntaxNode invalidRequestForm, SyntaxNode invalidRequestSize)
+            public Attributes(TAttributeSyntax requestForm, TAttributeSyntax requestSize)
             {
-                this.invalidRequestForm = invalidRequestForm;
-                this.invalidRequestSize = invalidRequestSize;
+                this.requestForm = requestForm;
+                this.requestSize = requestSize;
             }
 
-            public Attributes(SyntaxNode invalidRequestForm, SyntaxNode invalidRequestSize, Attributes oldAttributes)
+            public Attributes(TAttributeSyntax requestForm, TAttributeSyntax requestSize, Attributes oldAttributes)
             {
-                this.invalidRequestForm = invalidRequestForm ?? oldAttributes.invalidRequestForm;
-                this.invalidRequestSize = invalidRequestSize ?? oldAttributes.invalidRequestSize;
+                this.requestForm = requestForm ?? oldAttributes.requestForm;
+                this.requestSize = requestSize ?? oldAttributes.requestSize;
             }
         }
     }

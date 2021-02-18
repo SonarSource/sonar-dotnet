@@ -59,8 +59,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? attribute
                 : null;
 
-        protected override SyntaxNode GetMethodOrClassDeclaration(AttributeSyntax attribute, SemanticModel semanticModel) =>
+        protected override SyntaxNode GetMethodLocalFunctionOrClassDeclaration(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.FirstAncestorOrSelf<SyntaxNode>(node => node is MemberDeclarationSyntax || LocalFunctionStatementSyntaxWrapper.IsInstance(node));
+
+        protected override string AttributeName(AttributeSyntax attribute) =>
+            attribute.Name.ToString();
 
         private static bool IsMultipartBodyLengthLimit(AttributeArgumentSyntax argument) =>
             argument.NameEquals is { } nameEquals

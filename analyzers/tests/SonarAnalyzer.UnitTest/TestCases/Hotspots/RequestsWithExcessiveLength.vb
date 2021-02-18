@@ -14,9 +14,21 @@ Namespace Tests.TestCases
         End Function
 
         <HttpPost>
+        <DisableRequestSizeLimitAttribute()> ' Noncompliant
+        Public Function DisableRequestSizeLimitWithFullName() As ActionResult
+            Return Nothing
+        End Function
+
+        <HttpPost>
         <RequestSizeLimit(8_000_001)>
         Public Function PostRequestAboveLimit() As ActionResult
         '^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Make sure the content length limit is safe here.}}
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestSizeLimit(8_000_001)> ' Noncompliant
+        Public Function RequestSizeLimitWithFullname() As ActionResult
             Return Nothing
         End Function
 
@@ -36,6 +48,12 @@ Namespace Tests.TestCases
         <RequestFormLimits(MultipartBodyLengthLimit:=8_000_001, MultipartHeadersLengthLimit:=42)>
         Public Function MultipartFormRequestAboveLimit() As ActionResult
         '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Make sure the content length limit is safe here.}}
+            Return Nothing
+        End Function
+
+        <HttpPost>
+        <RequestFormLimits(MultipartBodyLengthLimit:=8_000_001)> ' Noncompliant
+        Public Function RequestFormLimitsWithFullname() As ActionResult
             Return Nothing
         End Function
 

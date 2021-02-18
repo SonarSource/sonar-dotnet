@@ -58,8 +58,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 ? attribute
                 : null;
 
-        protected override SyntaxNode GetMethodOrClassDeclaration(AttributeSyntax attribute, SemanticModel semanticModel) =>
+        protected override SyntaxNode GetMethodLocalFunctionOrClassDeclaration(AttributeSyntax attribute, SemanticModel semanticModel) =>
             attribute.FirstAncestorOrSelf<DeclarationStatementSyntax>();
+
+        protected override string AttributeName(AttributeSyntax attribute) =>
+            attribute.Name.ToString();
 
         private bool IsMultipartBodyLengthLimit(ArgumentSyntax argument) =>
             argument is SimpleArgumentSyntax { NameColonEquals: { } nameColonEquals }
