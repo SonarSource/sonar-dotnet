@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules
                 Language.SyntaxKind.InvocationExpression);
         }
 
-        private class PubliclyWritableDirectoriesRegexMatcher
+        private static class PubliclyWritableDirectoriesRegexMatcher
         {
             private const string TwoPartPatternWithVariableSlash = @"^[\/\\]{0}[\/\\]{1}([\/\\]|$)";
             private const string TwoPartPatternWithForwardSlash = @"^\/{0}\/{1}(\/|$)";
