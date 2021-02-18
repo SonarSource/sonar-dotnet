@@ -19,8 +19,10 @@
  */
 
 using System.Collections.Generic;
+using System.Threading;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -34,24 +36,35 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void IsTest_ReturnsTrueForTestFrameworks()
         {
-            CreateCompilation(NuGetMetadataReference.MSTestTestFrameworkV1).IsTest().Should().BeTrue();
-            CreateCompilation(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateCompilation(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework).IsTest().Should().BeTrue();
+            CreateContext(NuGetMetadataReference.MSTestTestFrameworkV1).IsTest().Should().BeTrue();
+            CreateContext(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
+            CreateContext(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework).IsTest().Should().BeTrue();
 
-            CreateCompilation(NuGetMetadataReference.XunitFrameworkV1).IsTest().Should().BeTrue();
-            CreateCompilation(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
+            CreateContext(NuGetMetadataReference.XunitFrameworkV1).IsTest().Should().BeTrue();
+            CreateContext(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
 
-            CreateCompilation(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
+            CreateContext(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
         }
 
         [TestMethod]
         public void IsTest_ReturnsFalse()
         {
-            CreateCompilation(null).IsTest().Should().BeFalse();
-            CreateCompilation(NuGetMetadataReference.SystemValueTuple(Constants.NuGetLatestVersion)).IsTest().Should().BeFalse();   // Any non-test reference
+            CreateContext(null).IsTest().Should().BeFalse();
+            CreateContext(NuGetMetadataReference.SystemValueTuple(Constants.NuGetLatestVersion)).IsTest().Should().BeFalse();   // Any non-test reference
         }
 
-        private Compilation CreateCompilation(IEnumerable<MetadataReference> additionalReferences) =>
-            new SnippetCompiler("// Nothing to see here", additionalReferences).SemanticModel.Compilation;
+        [TestMethod]
+        public void IsTest_Compilation()
+        {
+            CreateSemanticModel(NuGetMetadataReference.MSTestTestFrameworkV1).Compilation.IsTest().Should().BeTrue();
+
+            CreateSemanticModel(null).Compilation.IsTest().Should().BeFalse();
+        }
+
+        private static SyntaxNodeAnalysisContext CreateContext(IEnumerable<MetadataReference> additionalReferences) =>
+            new SyntaxNodeAnalysisContext(null, CreateSemanticModel(additionalReferences), null, null, null, CancellationToken.None);
+
+        private static SemanticModel CreateSemanticModel(IEnumerable<MetadataReference> additionalReferences) =>
+            new SnippetCompiler("// Nothing to see here", additionalReferences).SemanticModel;
     }
 }
