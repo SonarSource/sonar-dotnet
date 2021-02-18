@@ -34,7 +34,6 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S5443";
         private const string MessageFormat = "Make sure publicly writable directories are used safely here.";
         private readonly DiagnosticDescriptor rule;
-        private static readonly PubliclyWritableDirectoriesRegexMatcher matcher = new PubliclyWritableDirectoriesRegexMatcher();
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
@@ -61,7 +60,7 @@ namespace SonarAnalyzer.Rules
 
                     var node = c.Node;
                     if (Language.Syntax.NodeStringTextValue(node) is { } stringValue
-                        && matcher.IsSensitiveDirectoryUsage(stringValue))
+                        && PubliclyWritableDirectoriesRegexMatcher.IsSensitiveDirectoryUsage(stringValue))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
                     }
@@ -125,7 +124,7 @@ namespace SonarAnalyzer.Rules
                 new Regex($"{UserProfileRegex}|{TempEnvVariable}|{TmpEnvVariable}|{TmpDirEnvVariable}",
                     RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
-            public bool IsSensitiveDirectoryUsage(string directory) =>
+            public static bool IsSensitiveDirectoryUsage(string directory) =>
                 WindowsAndMacPubliclyWritabelDirs.IsMatch(directory)
                 || LinuxPubliclyWritabelDirs.IsMatch(directory)
                 || EnvironmentVariables.IsMatch(directory);
