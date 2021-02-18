@@ -32,9 +32,12 @@ namespace SonarAnalyzer.Helpers
             "DOTMEMORY.UNIT",
             "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
             "MICROSOFT.VISUALSTUDIO.QUALITYTOOLS.UNITTESTFRAMEWORK",
+            "MACHINE.SPECIFICATIONS",
+            "NUNIT.FRAMEWORK",
+            "NUNITLITE",
+            "TECHTALK.SPECFLOW",
             "XUNIT", // Legacy Xunit (v1.x)
             "XUNIT.CORE",
-            "NUNIT.FRAMEWORK",
             // Assertion
             "FLUENTASSERTIONS",
             "SHOULDLY",
@@ -42,7 +45,8 @@ namespace SonarAnalyzer.Helpers
             "FAKEITEASY",
             "MOQ",
             "NSUBSTITUTE",
-            "RHINO.MOCKS"
+            "RHINO.MOCKS",
+            "TELERIK.JUSTMOCK"
         };
 
         public static bool IsTest(this SyntaxNodeAnalysisContext context) =>

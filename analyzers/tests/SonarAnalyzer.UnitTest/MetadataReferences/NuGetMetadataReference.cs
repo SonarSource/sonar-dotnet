@@ -40,8 +40,10 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References FluentAssertions(string packageVersion) => Create("FluentAssertions", packageVersion);
         public static References FakeItEasy(string packageVersion) => Create("FakeItEasy", packageVersion);
         public static References JetBrainsDotMemoryUnit(string packageVersion) => Create("JetBrains.DotMemoryUnit", packageVersion);
+        public static References JustMock(string packageVersion) => Create("JustMock", packageVersion);
         public static References JWT(string packageVersion) => Create("JWT", packageVersion);
         public static References Log4Net(string packageVersion, string targetFramework) => NuGetMetadataFactory.Create("log4net", packageVersion, targetFramework, null);
+        public static References MachineSpecifications(string packageVersion) => Create("Machine.Specifications", packageVersion);
         public static References MicrosoftAspNetCore(string packageVersion) => Create("Microsoft.AspNetCore", packageVersion);
         public static References MicrosoftAspNetCoreDiagnostics(string packageVersion) => Create("Microsoft.AspNetCore.Diagnostics", packageVersion);
         public static References MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(string packageVersion) => Create("Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore", packageVersion);
@@ -78,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") => Create("Microsoft.SqlServer.Compact", packageVersion);
         public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => Create("Microsoft.Web.Xdt", packageVersion);
         public static References MonoPosixNetStandard(string packageVersion = "1.0.0") => Create("Mono.Posix.NETStandard", packageVersion, "linux-x64");
-        public static References Moq(string packageVersion ) => Create("Moq", packageVersion);
+        public static References Moq(string packageVersion) => Create("Moq", packageVersion);
         public static References MSTestTestFramework(string packageVersion) => Create("MSTest.TestFramework", packageVersion);
         public static References MvvmLightLibs(string packageVersion) => Create("MvvmLightLibs", packageVersion);
         public static References MySqlData(string packageVersion) => Create("MySql.Data", packageVersion);
@@ -87,6 +89,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References NHibernate(string packageVersion = "5.2.2") => Create("NHibernate", packageVersion);
         public static References NSubstitute(string packageVersion) => Create("NSubstitute", packageVersion);
         public static References NUnit(string packageVersion) => Create("NUnit", packageVersion);
+        public static References NUnitLite(string packageVersion) => Create("NUnitLite", packageVersion);
         public static References PetaPocoCompiled(string packageVersion = "6.0.353") => Create("PetaPoco.Compiled", packageVersion);
         public static References RestSharp(string packageVersion) => Create("RestSharp", packageVersion);
         public static References RhinoMocks(string packageVersion) => NuGetMetadataFactory.CreateWithCommandLine("RhinoMocks", packageVersion);
@@ -95,6 +98,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             Create("Serilog", packageVersion)
             .Concat(Create("Serilog.Sinks.Console", packageVersion));
         public static References ServiceStackOrmLite(string packageVersion = "5.1.0") => Create("ServiceStack.OrmLite", packageVersion);
+        public static References SpecFlow(string packageVersion) => Create("SpecFlow", packageVersion);
         public static References SystemCollectionsImmutable(string packageVersion) => Create("System.Collections.Immutable", packageVersion);
         public static References SystemConfigurationConfigurationManager(string packageVersion = "4.7.0") => Create("System.Configuration.ConfigurationManager", packageVersion);
         public static References SystemComponentModelComposition(string packageVersion = "4.7.0") => Create("System.ComponentModel.Composition", packageVersion);
