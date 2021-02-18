@@ -75,9 +75,9 @@ public class DotNetSensor implements ProjectSensor {
   }
 
   private boolean shouldExecuteOnProject(FileSystem fs) {
-    if (hasFilesOfType(fs, Type.MAIN)) {
+    if (SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey())) {
       return true;
-    } else if (hasFilesOfType(fs, Type.TEST)) {
+    } else if (SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey())) {
       LOG.warn("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
           "Your SonarQube/SonarCloud project will not have results for {} files. " +
           "You can read more about the detection of test projects here: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
@@ -87,10 +87,6 @@ public class DotNetSensor implements ProjectSensor {
       LOG.debug("No files to analyze. Skip Sensor.");
     }
     return false;
-  }
-
-  private boolean hasFilesOfType(FileSystem fs, Type fileType) {
-    return fs.inputFiles(fs.predicates().and(fs.predicates().hasType(fileType), fs.predicates().hasLanguage(pluginMetadata.languageKey()))).iterator().hasNext();
   }
 
   private void executeInternal(SensorContext context) {

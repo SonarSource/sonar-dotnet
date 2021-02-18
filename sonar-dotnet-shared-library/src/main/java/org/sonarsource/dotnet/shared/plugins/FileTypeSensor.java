@@ -63,8 +63,8 @@ public class FileTypeSensor implements Sensor {
     FileSystem fs = context.fileSystem();
     Configuration configuration = context.config();
 
-    boolean hasMainFiles = hasFilesOfType(fs, Type.MAIN);
-    boolean hasTestFiles = hasFilesOfType(fs, Type.TEST);
+    boolean hasMainFiles = SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey());
+    boolean hasTestFiles = SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey());
 
     Optional<String> projectName = configuration.get("sonar.projectName");
     if (projectName.isPresent()) {
@@ -72,11 +72,6 @@ public class FileTypeSensor implements Sensor {
         hasMainFiles, hasTestFiles, projectName.get(), getValueOrEmpty(configuration.get("sonar.projectBaseDir")), getValueOrEmpty(getProjectOutPath(configuration)));
       projectTypeCollector.addProjectInfo(hasMainFiles, hasTestFiles);
     }
-  }
-
-  // this is duplicated from future DotNetSensor
-  private boolean hasFilesOfType(FileSystem fs, Type fileType) {
-    return fs.inputFiles(fs.predicates().and(fs.predicates().hasType(fileType), fs.predicates().hasLanguage(pluginMetadata.languageKey()))).iterator().hasNext();
   }
 
   private Optional<String> getProjectOutPath(Configuration configuration) {

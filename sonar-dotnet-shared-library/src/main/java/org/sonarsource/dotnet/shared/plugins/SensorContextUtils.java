@@ -35,6 +35,10 @@ public final class SensorContextUtils {
     return fs.inputFile(fs.predicates().hasPath(file));
   }
 
+  public static boolean hasFilesOfType(FileSystem fs, InputFile.Type fileType, String languageKey) {
+    return fs.inputFiles(fs.predicates().and(fs.predicates().hasType(fileType), fs.predicates().hasLanguage(languageKey))).iterator().hasNext();
+  }
+
   public static TextRange toTextRange(InputFile inputFile, SonarAnalyzer.TextRange pbTextRange) {
     int startLine = pbTextRange.getStartLine();
     int startLineOffset = pbTextRange.getStartOffset();
