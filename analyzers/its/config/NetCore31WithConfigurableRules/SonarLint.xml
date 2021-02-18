@@ -24,18 +24,14 @@
     <Rule><Key>S5042</Key></Rule>
     <Rule><Key>S5332</Key></Rule>
     <Rule>
-      <Key>S5693</Key>
-      <Parameters>
-          <Parameter>
-            <Key>standardSizeLimit</Key>
-            <Value>16</Value>
-          </Parameter>
-          <Parameter>
-            <Key>fileUploadSizeLimit</Key>
-            <Value>23</Value>
-          </Parameter>
+        <Key>S5693</Key>
+            <Parameters>
+            <Parameter>
+                <Key>fileUploadSizeLimit</Key>
+                <Value>42</Value>
+            </Parameter>
         </Parameters>
-      </Rule>
+    </Rule>
     <Rule><Key>S5753</Key></Rule>
     <Rule><Key>S5766</Key></Rule>
     <!-- End of workaround -->

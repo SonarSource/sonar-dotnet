@@ -25,7 +25,7 @@ Public Class MyController
 
     &lt;HttpPost&gt;
     &lt;DisableRequestSizeLimit&gt; ' Sensitive: No size  limit
-    &lt;RequestSizeLimit(10000000)&gt; ' Sensitive: 10MB is more than the recommended limit of 2MB
+    &lt;RequestSizeLimit(10000000)&gt; ' Sensitive: 10MB is more than the recommended limit of 8MB
     Public Function PostRequest(Model model) As IActionResult
     ' ...
     End Function
@@ -46,7 +46,7 @@ Public Class MyController
     Inherits Controller
 
     &lt;HttpPost&gt;
-    &lt;RequestSizeLimit(2000000)&gt; ' Compliant: 2MB
+    &lt;RequestSizeLimit(8000000)&gt; ' Compliant: 8MB
     Public Function PostRequest(Model model) As IActionResult
     ' ...
     End Function

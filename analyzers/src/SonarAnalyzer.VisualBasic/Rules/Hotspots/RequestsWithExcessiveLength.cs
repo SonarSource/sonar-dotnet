@@ -38,17 +38,31 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration) { }
 
-        protected override bool IsInvalidRequestFormLimits(AttributeSyntax attribute, SemanticModel semanticModel) =>
-            attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, semanticModel)
+        protected override AttributeSyntax IsInvalidRequestFormLimits(AttributeSyntax attribute, SemanticModel semanticModel) =>
+            IsRequestFormLimits(attribute.Name.ToString())
             && attribute.ArgumentList?.Arguments.FirstOrDefault(arg => IsMultipartBodyLengthLimit(arg)) is { } firstArgument
-            && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.GetExpression(), out var intValue)
-            && intValue > FileUploadSizeLimit;
+            && semanticModel.GetConstantValue(firstArgument.GetExpression()) is { HasValue: true } constantValue
+            && constantValue.Value is int intValue
+            && intValue > FileUploadSizeLimit
+            && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute, semanticModel)
+                ? attribute
+                : null;
 
-        protected override bool IsInvalidRequestSizeLimit(AttributeSyntax attribute, SemanticModel semanticModel) =>
-            attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute, semanticModel)
+        protected override AttributeSyntax IsInvalidRequestSizeLimit(AttributeSyntax attribute, SemanticModel semanticModel) =>
+            IsRequestSizeLimit(attribute.Name.ToString())
             && attribute.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
-            && Language.ExpressionNumericConverter.TryGetConstantIntValue(firstArgument.GetExpression(), out var intValue)
-            && intValue > StandardSizeLimit;
+            && semanticModel.GetConstantValue(firstArgument.GetExpression()) is { HasValue: true } constantValue
+            && constantValue.Value is int intValue
+            && intValue > FileUploadSizeLimit
+            && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute, semanticModel)
+                ? attribute
+                : null;
+
+        protected override SyntaxNode GetMethodLocalFunctionOrClassDeclaration(AttributeSyntax attribute, SemanticModel semanticModel) =>
+            attribute.FirstAncestorOrSelf<DeclarationStatementSyntax>();
+
+        protected override string AttributeName(AttributeSyntax attribute) =>
+            attribute.Name.ToString();
 
         private bool IsMultipartBodyLengthLimit(ArgumentSyntax argument) =>
             argument is SimpleArgumentSyntax { NameColonEquals: { } nameColonEquals }
