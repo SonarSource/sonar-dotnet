@@ -81,8 +81,8 @@ public class MultipleProjectsTest {
           ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
 
           CommandExecutor.create().execute(Command.create("nuget")
-            .addArguments("restore")
-            .setDirectory(projectDir.toFile()),
+              .addArguments("restore")
+              .setDirectory(projectDir.toFile()),
             10 * 60 * 1000);
 
           ORCHESTRATOR.executeBuild(beginStep);
@@ -96,7 +96,7 @@ public class MultipleProjectsTest {
 
   @Test
   public void projectTypesInfoIsLogged() {
-    assertThat(buildResult.getLogs()).contains("Found 4 MSBuild projects. 2 MAIN project(s). 2 TEST project(s).");
+    assertThat(buildResult.getLogs()).contains("Found 4 MSBuild projects. 2 MAIN projects. 2 TEST projects.");
   }
 
   @Test

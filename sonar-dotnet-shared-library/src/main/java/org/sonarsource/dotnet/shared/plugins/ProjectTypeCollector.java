@@ -19,87 +19,65 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import org.sonar.api.scanner.ScannerSide;
 
+import static org.sonarsource.dotnet.shared.StringUtils.pluralize;
+
 /**
  * Collects information about what types of files are in each project (MAIN, TEST, both or none).
- * The invoker should make sure that no duplicates are added.
+ * The invoker should make sure that no duplicates are added (i.e. call twice for same information).
  */
 @ScannerSide
 public class ProjectTypeCollector {
-  private final List<Project> projects = new ArrayList<>();
+  private static final String PROJECT = "project";
+
+  // Each field holds the number of modules (MSBuild projects) based on the type of files inside.
+  // modules that have only MAIN files
+  private int onlyMain = 0;
+  // modules that have only TEST files
+  private int onlyTest = 0;
+  // modules that have both MAIN and TEST files
+  private int mixed = 0;
+  // modules that have no files
+  // there is always the top-level (global) module which has no files and has no equivalent "real" MSBuild project (module)
+  private int noFiles = -1;
 
   void addProjectInfo(boolean hasMainFiles, boolean hasTestFiles) {
-    projects.add(new Project(hasMainFiles, hasTestFiles));
+    if (hasMainFiles && hasTestFiles) {
+      mixed++;
+    } else if (hasMainFiles) {
+      onlyMain++;
+    } else if (hasTestFiles) {
+      onlyTest++;
+    } else {
+      noFiles++;
+    }
   }
 
   Optional<String> getSummary() {
-    int onlyMain = 0;
-    int onlyTest = 0;
-    int mixed = 0;
-    int projectsCount = 0;
-    int noFiles = 0;
-
-    for (Project project : projects) {
-      projectsCount++;
-      if (project.hasMainFiles) {
-        if (project.hasTestFiles) {
-          mixed++;
-        } else {
-          onlyMain++;
-        }
-      } else {
-        // no main files
-        if (project.hasTestFiles) {
-          onlyTest++;
-        } else {
-          noFiles++;
-        }
-      }
-    }
-
-    // The top-level module (an artificial module for doing global (solution level) operations) has no files.
-    // To avoid counting it, we remove it.
-    if (noFiles > 0) {
-      noFiles--;
-      projectsCount--;
-    }
-
-    return createMessage(projectsCount, onlyMain, onlyTest, mixed, noFiles);
+    return createMessage(onlyMain, onlyTest, mixed, noFiles);
   }
 
-  private static Optional<String> createMessage(int projectsCount, int onlyMain, int onlyTest, int mixed, int noFiles) {
-    if (projectsCount == 0) {
+  private static Optional<String> createMessage(int onlyMain, int onlyTest, int mixed, int noFiles) {
+    int projectsCount = onlyMain + onlyTest + mixed + noFiles;
+    if (projectsCount <= 0) {
       return Optional.empty();
     }
-    StringBuilder stringBuilder = new StringBuilder(String.format("Found %d MSBuild projects.", projectsCount));
+    StringBuilder stringBuilder = new StringBuilder(String.format("Found %d MSBuild %s.", projectsCount, pluralize(PROJECT, projectsCount)));
     if (onlyMain > 0) {
-      stringBuilder.append(String.format(" %d MAIN project(s).", onlyMain));
+      stringBuilder.append(String.format(" %d MAIN %s.", onlyMain, pluralize(PROJECT, onlyMain)));
     }
     if (onlyTest > 0) {
-      stringBuilder.append(String.format(" %d TEST project(s).", onlyTest));
+      stringBuilder.append(String.format(" %d TEST %s.", onlyTest, pluralize(PROJECT, onlyTest)));
     }
     if (mixed > 0) {
       stringBuilder.append(String.format(" %d with both MAIN and TEST files.", mixed));
     }
     if (noFiles > 0) {
-      stringBuilder.append(String.format(" %d with no MAIN or TEST files.", noFiles));
+      stringBuilder.append(String.format(" %d with no MAIN nor TEST files.", noFiles));
     }
 
     return Optional.of(stringBuilder.toString());
-  }
-
-  // .NET Project (Scanner "module")
-  private static class Project {
-    final boolean hasMainFiles;
-    final boolean hasTestFiles;
-
-    Project(boolean hasMainFiles, boolean hasTestFiles) {
-      this.hasMainFiles = hasMainFiles;
-      this.hasTestFiles = hasTestFiles;
-    }
   }
 }

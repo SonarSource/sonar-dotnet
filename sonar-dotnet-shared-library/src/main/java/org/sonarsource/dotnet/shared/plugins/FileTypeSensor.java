@@ -68,20 +68,16 @@ public class FileTypeSensor implements Sensor {
 
     Optional<String> projectName = configuration.get("sonar.projectName");
     if (projectName.isPresent()) {
+      // Note: the top-level module is artificially created by the scanner and will appear here with false-false.
       LOG.debug("Adding file type information (has MAIN '{}', has TEST '{}') for project '{}' (base dir '{}'). For debug info, see ProjectInfo.xml in '{}'.",
-        hasMainFiles, hasTestFiles, projectName.get(), getValueOrEmpty(configuration.get("sonar.projectBaseDir")), getValueOrEmpty(getProjectOutPath(configuration)));
+        hasMainFiles, hasTestFiles, projectName.get(), getValueOrEmpty(configuration.get("sonar.projectBaseDir")), getProjectOutPath(configuration));
       projectTypeCollector.addProjectInfo(hasMainFiles, hasTestFiles);
     }
   }
 
-  private Optional<String> getProjectOutPath(Configuration configuration) {
-    if (pluginMetadata.languageKey().equalsIgnoreCase("cs")) {
-      return configuration.get("sonar.cs.analyzer.projectOutPath");
-    } else if (pluginMetadata.languageKey().equalsIgnoreCase("vbnet")) {
-      return configuration.get("sonar.vbnet.analyzer.projectOutPath");
-    } else {
-      return Optional.empty();
-    }
+  private String getProjectOutPath(Configuration configuration) {
+    String property = "sonar." + pluginMetadata.languageKey() + ".analyzer.projectOutPath";
+    return getValueOrEmpty(configuration.get(property));
   }
 
   private static String getValueOrEmpty(Optional<String> optional) {

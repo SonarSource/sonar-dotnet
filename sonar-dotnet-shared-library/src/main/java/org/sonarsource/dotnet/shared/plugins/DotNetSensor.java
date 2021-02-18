@@ -51,7 +51,7 @@ public class DotNetSensor implements ProjectSensor {
   private final ReportPathCollector reportPathCollector;
   private final ProjectTypeCollector projectTypeCollector;
 
-  public DotNetSensor(DotNetPluginMetadata pluginMetadata, ReportPathCollector reportPathCollector,ProjectTypeCollector projectTypeCollector,
+  public DotNetSensor(DotNetPluginMetadata pluginMetadata, ReportPathCollector reportPathCollector, ProjectTypeCollector projectTypeCollector,
                       ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
     this.pluginMetadata = pluginMetadata;
     this.reportPathCollector = reportPathCollector;
@@ -117,7 +117,7 @@ public class DotNetSensor implements ProjectSensor {
 
     if (shouldSuggestScannerForMSBuild) {
       LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
-        + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+          + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         pluginMetadata.shortLanguageName());
     }
   }

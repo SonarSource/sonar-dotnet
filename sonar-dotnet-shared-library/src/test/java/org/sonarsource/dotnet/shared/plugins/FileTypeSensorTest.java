@@ -24,7 +24,6 @@ import java.nio.file.Path;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.ArgumentCaptor;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -75,10 +74,8 @@ public class FileTypeSensorTest {
     sensor = new FileTypeSensor(projectTypeCollectorMock, pluginMetadataMock);
   }
 
-
   @Test
   public void should_describe() {
-
     SensorDescriptor desc = mock(SensorDescriptor.class);
     sensor.describe(desc);
 
@@ -96,7 +93,7 @@ public class FileTypeSensorTest {
   }
 
   @Test
-  public void whenLanguageKeyIsPresent_logsCsOutputFile() {
+  public void whenLanguageKeyIsPresent_logsOutputFile() {
     when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
     when(settingsMock.getString("sonar.projectBaseDir")).thenReturn("BASE DIR");
     when(settingsMock.getString("sonar.cs.analyzer.projectOutPath")).thenReturn("CS PATH");
@@ -144,6 +141,7 @@ public class FileTypeSensorTest {
 
     sensor.execute(tester);
 
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'false') for project 'FOO_PROJ' (base dir ''). For debug info, see ProjectInfo.xml in ''.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo( true, false);
   }
 
@@ -155,6 +153,7 @@ public class FileTypeSensorTest {
 
     sensor.execute(tester);
 
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'true') for project 'FOO_PROJ' (base dir ''). For debug info, see ProjectInfo.xml in ''.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo(true, true);
   }
 
