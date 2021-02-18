@@ -193,15 +193,6 @@ public class DotNetSensorTest {
     sensor.execute(tester);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG))
-      .containsExactly("No files to analyze. Skip Sensor.");
-  }
-
-  @Test
-  public void noAnalysisIfNoFilesDetected() {
-    sensor.execute(tester);
-
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).isEqualTo("No files to analyze. Skip Sensor.");
