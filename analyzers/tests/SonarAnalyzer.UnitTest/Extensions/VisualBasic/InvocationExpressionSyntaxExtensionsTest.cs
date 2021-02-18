@@ -18,17 +18,32 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias vbnet;
+using System.Linq;
+using FluentAssertions;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
+using vbnet::SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.Helpers.Facade
+namespace SonarAnalyzer.UnitTest.Extensions.VisualBasic
 {
-    internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
+    [TestClass]
+    public class InvocationExpressionSyntaxExtensionsTest
     {
-        public SyntaxKind InvocationExpression => SyntaxKind.InvocationExpression;
-        public SyntaxKind ObjectCreationExpression => SyntaxKind.ObjectCreationExpression;
-        public SyntaxKind EnumDeclaration => SyntaxKind.EnumStatement;
-        public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
-        public SyntaxKind Attribute => SyntaxKind.Attribute;
-        public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
+        [TestMethod]
+        public void GivenExpressionIsNotMemberAccessExpressionSyntax_IsMemberAccessOnKnownType_ReturnsFalse() =>
+            SyntaxFactory.ParseSyntaxTree(
+@"Sub test()
+test()
+End Sub")
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single()
+                .IsMemberAccessOnKnownType(null, KnownType.System_String, null)
+                .Should()
+                .BeFalse();
     }
 }

@@ -21,20 +21,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.Hotspots;
 
-namespace SonarAnalyzer.Rules.Hotspots
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         public LooseFilePermissions() : this(AnalyzerConfiguration.Hotspot) { }
 
@@ -96,23 +97,23 @@ namespace SonarAnalyzer.Rules.Hotspots
         private static bool IsFileSystemAccessRuleForEveryoneWithAllow(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
             objectCreation.IsKnownType(KnownType.System_Security_AccessControl_FileSystemAccessRule, semanticModel)
             && objectCreation.ArgumentList is { } argumentList
-            && IsEveryone(argumentList.Arguments.First().Expression, semanticModel)
-            && semanticModel.GetConstantValue(argumentList.Arguments.Last().Expression) is {HasValue: true, Value: 0};
+            && IsEveryone(argumentList.Arguments.First().GetExpression(), semanticModel)
+            && semanticModel.GetConstantValue(argumentList.Arguments.Last().GetExpression()) is {HasValue: true, Value: 0};
 
         private static bool IsEveryone(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
             semanticModel.GetConstantValue(syntaxNode) is {HasValue: true, Value: Everyone}
             || syntaxNode.DescendantNodesAndSelf()
-                         .OfType<ObjectCreationExpressionSyntax>()
-                         .Any(objectCreation => IsNTAccountWithEveryone(objectCreation, semanticModel) || IsSecurityIdentifierWithEveryone(objectCreation, semanticModel));
+                .OfType<ObjectCreationExpressionSyntax>()
+                .Any(objectCreation => IsNTAccountWithEveryone(objectCreation, semanticModel) || IsSecurityIdentifierWithEveryone(objectCreation, semanticModel));
 
         private static bool IsNTAccountWithEveryone(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
             objectCreation.IsKnownType(KnownType.System_Security_Principal_NTAccount, semanticModel)
             && objectCreation.ArgumentList is { } argumentList
-            && semanticModel.GetConstantValue(argumentList.Arguments.Last().Expression) is { HasValue: true, Value: Everyone};
+            && semanticModel.GetConstantValue(argumentList.Arguments.Last().GetExpression()) is { HasValue: true, Value: Everyone};
 
         private static bool IsSecurityIdentifierWithEveryone(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
             objectCreation.IsKnownType(KnownType.System_Security_Principal_SecurityIdentifier, semanticModel)
             && objectCreation.ArgumentList is { } argumentList
-            && semanticModel.GetConstantValue(argumentList.Arguments.First().Expression) is { HasValue: true, Value: 1};
+            && semanticModel.GetConstantValue(argumentList.Arguments.First().GetExpression()) is { HasValue: true, Value: 1};
     }
 }

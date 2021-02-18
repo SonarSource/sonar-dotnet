@@ -18,16 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Facade
+using System.Collections.Immutable;
+
+namespace SonarAnalyzer.Rules.Hotspots
 {
-    public interface ISyntaxKindFacade<TSyntaxKind>
-        where TSyntaxKind : struct
+    public static class LooseFilePermissionsConfig
     {
-        abstract TSyntaxKind InvocationExpression { get; }
-        abstract TSyntaxKind ObjectCreationExpression { get; }
-        abstract TSyntaxKind EnumDeclaration { get; }
-        abstract TSyntaxKind SimpleMemberAccessExpression { get; }
-        abstract TSyntaxKind Attribute { get; }
-        abstract TSyntaxKind IdentifierName { get; }
+        public static readonly ImmutableHashSet<string> WeakFileAccessPermissions =
+            ImmutableHashSet.Create("AllPermissions", "DefaultPermissions", "OtherExecute", "OtherWrite", "OtherRead", "OtherReadWriteExecute");
     }
 }

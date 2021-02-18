@@ -19,29 +19,33 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Extensions
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
-    public sealed class WeakSslTlsProtocols : WeakSslTlsProtocolsBase<SyntaxKind, IdentifierNameSyntax>
+    public static class SyntaxNodeExtensions
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
+        public static bool IsPartOfBinaryNegationOrCondition(this SyntaxNode node)
+        {
+            if (!(node.Parent is MemberAccessExpressionSyntax))
+            {
+                return false;
+            }
 
-        protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.IdentifierName;
+            var current = node;
+            while (current.Parent != null && !current.Parent.IsAnyKind(SyntaxKind.IfStatement, SyntaxKind.WhileStatement))
+            {
+                current = current.Parent;
+            }
 
-        protected override DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected override string GetIdentifierText(IdentifierNameSyntax identifierNameSyntax) =>
-            identifierNameSyntax.Identifier.Text;
-
-        protected override bool IsPartOfBinaryNegationOrCondition(SyntaxNode node) =>
-            node.IsPartOfBinaryNegationOrCondition();
+            return current.Parent switch
+            {
+                IfStatementSyntax ifStatement => ifStatement.Condition == current,
+                WhileStatementSyntax whileStatement => whileStatement.Condition == current,
+                _ => false
+            };
+        }
     }
 }

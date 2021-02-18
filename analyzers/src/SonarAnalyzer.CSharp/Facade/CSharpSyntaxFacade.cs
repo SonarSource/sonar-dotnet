@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Helpers.Facade
             {
                 EnumDeclarationSyntax enumDeclaration => enumDeclaration.Identifier,
                 EnumMemberDeclarationSyntax enumMember => enumMember.Identifier,
-                IdentifierNameSyntax identifierName => identifierName.Identifier,
+                SimpleNameSyntax simpleName => simpleName.Identifier,
                 MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier,
                 MemberBindingExpressionSyntax memberBinding => memberBinding.Name.Identifier,
                 ParameterSyntax parameter => parameter.Identifier,

@@ -1,0 +1,71 @@
+<p>In Unix, "others" class refers to all users except the owner of the file and the members of the group assigned to this file. </p>
+<p>In Windows, "Everyone" group is similar and includes all members of the Authenticated Users group as well as the built-in Guest account, and
+several other built-in security accounts.</p>
+<p>Granting permissions to these groups can lead to unintended access to files.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> The application is designed to be run on a multi-user environment. </li>
+  <li> Corresponding files and directories may contain confidential information. </li>
+</ul>
+<p>There is a risk if you answered yes to any of those questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<p>The most restrictive possible permissions should be assigned to files and directories.</p>
+<h2>Sensitive Code Example</h2>
+<p>.Net Framework:</p>
+<pre>
+Dim unsafeAccessRule = new FileSystemAccessRule("Everyone", FileSystemRights.FullControl, AccessControlType.Allow)
+
+Dim fileSecurity = File.GetAccessControl("path")
+fileSecurity.AddAccessRule(unsafeAccessRule) ' Sensitive
+fileSecurity.SetAccessRule(unsafeAccessRule) ' Sensitive
+File.SetAccessControl("fileName", fileSecurity)
+</pre>
+<p>.Net / .Net Core</p>
+<pre>
+Dim fileInfo = new FileInfo("path")
+Dim fileSecurity = fileInfo.GetAccessControl()
+
+fileSecurity.AddAccessRule(new FileSystemAccessRule("Everyone", FileSystemRights.Write, AccessControlType.Allow)) ' Sensitive
+fileInfo.SetAccessControl(fileSecurity)
+</pre>
+<p>.Net / .Net Core using Mono.Posix.NETStandard</p>
+<pre>
+Dim fileSystemEntry = UnixFileSystemInfo.GetFileSystemEntry("path")
+fileSystemEntry.FileAccessPermissions = FileAccessPermissions.OtherReadWriteExecute ' Sensitive
+</pre>
+<h2>Compliant Solution</h2>
+<p>.Net Framework</p>
+<pre>
+Dim safeAccessRule = new FileSystemAccessRule("Everyone", FileSystemRights.FullControl, AccessControlType.Deny)
+
+Dim fileSecurity = File.GetAccessControl("path")
+fileSecurity.AddAccessRule(safeAccessRule)
+File.SetAccessControl("path", fileSecurity)
+</pre>
+<p>.Net / .Net Core</p>
+<pre>
+Dim safeAccessRule = new FileSystemAccessRule("Everyone", FileSystemRights.FullControl, AccessControlType.Deny)
+
+Dim fileInfo = new FileInfo("path")
+Dim fileSecurity = fileInfo.GetAccessControl()
+fileSecurity.SetAccessRule(safeAccessRule)
+fileInfo.SetAccessControl(fileSecurity)
+</pre>
+<p>.Net / .Net Core using Mono.Posix.NETStandard</p>
+<pre>
+Dim fs = UnixFileSystemInfo.GetFileSystemEntry("path")
+fs.FileAccessPermissions = FileAccessPermissions.UserExecute
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A5-Broken_Access_Control">OWASP Top 10 2017 Category A5</a> - Broken Access Control </li>
+  <li> <a href="https://www.owasp.org/index.php/Test_File_Permission_(OTG-CONFIG-009)">OWASP File Permission</a> </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/732">MITRE, CWE-732</a> - Incorrect Permission Assignment for Critical Resource </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/266.html">MITRE, CWE-266</a> - Incorrect Privilege Assignment </li>
+  <li> <a href="https://wiki.sei.cmu.edu/confluence/display/java/FIO01-J.+Create+files+with+appropriate+access+permissions">CERT, FIO01-J.</a> -
+  Create files with appropriate access permissions </li>
+  <li> <a href="https://wiki.sei.cmu.edu/confluence/display/c/FIO06-C.+Create+files+with+appropriate+access+permissions">CERT, FIO06-C.</a> - Create
+  files with appropriate access permissions </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
+</ul>
+
