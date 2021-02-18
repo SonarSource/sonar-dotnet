@@ -29,11 +29,24 @@ namespace SonarAnalyzer.Helpers
     {
         private static readonly ISet<string> TestAssemblyNames = new HashSet<string>
         {
+            "DOTMEMORY.UNIT",
             "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
             "MICROSOFT.VISUALSTUDIO.QUALITYTOOLS.UNITTESTFRAMEWORK",
+            "MACHINE.SPECIFICATIONS",
+            "NUNIT.FRAMEWORK",
+            "NUNITLITE",
+            "TECHTALK.SPECFLOW",
             "XUNIT", // Legacy Xunit (v1.x)
             "XUNIT.CORE",
-            "NUNIT.FRAMEWORK"
+            // Assertion
+            "FLUENTASSERTIONS",
+            "SHOULDLY",
+            // Mock
+            "FAKEITEASY",
+            "MOQ",
+            "NSUBSTITUTE",
+            "RHINO.MOCKS",
+            "TELERIK.JUSTMOCK"
         };
 
         public static bool IsTest(this SyntaxNodeAnalysisContext context) =>
