@@ -34,11 +34,11 @@ namespace SonarAnalyzer.Rules.Hotspots
     [Rule(DiagnosticId)]
     public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind>
     {
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
         public LooseFilePermissions() : this(AnalyzerConfiguration.Hotspot) { }
 
         internal LooseFilePermissions(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
-
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override void VisitAssignments(SyntaxNodeAnalysisContext context)
         {
