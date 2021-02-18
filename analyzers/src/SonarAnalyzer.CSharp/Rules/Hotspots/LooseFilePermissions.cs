@@ -42,10 +42,10 @@ namespace SonarAnalyzer.Rules.Hotspots
 
         protected override void VisitAssignments(SyntaxNodeAnalysisContext context)
         {
-            var identifier = (IdentifierNameSyntax)context.Node;
-            if (IsFileAccessPermissions(identifier, context.SemanticModel) && !identifier.IsPartOfBinaryNegationOrCondition())
+            var node = context.Node;
+            if (IsFileAccessPermissions(node, context.SemanticModel) && !node.IsPartOfBinaryNegationOrCondition())
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation()));
             }
         }
 
@@ -65,10 +65,6 @@ namespace SonarAnalyzer.Rules.Hotspots
                 context.ReportDiagnosticWhenActive(diagnostic);
             }
         }
-
-        private static bool IsFileAccessPermissions(SimpleNameSyntax identifierNameSyntax, SemanticModel semanticModel) =>
-            LooseFilePermissionsConfig.WeakFileAccessPermissions.Contains(identifierNameSyntax.Identifier.Text)
-            && identifierNameSyntax.IsKnownType(KnownType.Mono_Unix_FileAccessPermissions, semanticModel);
 
         private static bool IsSetAccessRule(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             invocation.IsMemberAccessOnKnownType("SetAccessRule", KnownType.System_Security_AccessControl_FileSystemSecurity, semanticModel);

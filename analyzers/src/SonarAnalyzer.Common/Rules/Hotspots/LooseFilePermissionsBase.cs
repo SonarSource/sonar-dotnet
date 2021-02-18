@@ -60,5 +60,10 @@ namespace SonarAnalyzer.Rules.Hotspots
 
                 c.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, VisitAssignments, Language.SyntaxKind.IdentifierName);
             });
+
+        protected bool IsFileAccessPermissions(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
+            Language.Syntax.NodeIdentifier(syntaxNode) is { } identifier
+            && LooseFilePermissionsConfig.WeakFileAccessPermissions.Contains(identifier.Text)
+            && syntaxNode.IsKnownType(KnownType.Mono_Unix_FileAccessPermissions, semanticModel);
     }
 }
