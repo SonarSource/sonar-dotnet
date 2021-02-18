@@ -44,14 +44,10 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class FileTypeSensorTest {
-  public static final String REPO_KEY = "REPO_KEY";
   public static final String LANG_KEY = "LANG_KEY";
-  public static final String LANG_NAME = "LANG_NAME";
 
   @Rule
   public LogTester logTester = new LogTester();
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
