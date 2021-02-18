@@ -41,14 +41,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private protected override bool IsGetTempPathAssignment(InvocationExpressionSyntax invocationExpression, KnownType type, string methodName, SemanticModel semanticModel) =>
             invocationExpression.IsMethodInvocation(type, methodName, semanticModel)
-            && (invocationExpression.Parent is EqualsValueClauseSyntax
-                || invocationExpression.Parent is AssignmentExpressionSyntax
-                || invocationExpression.Parent is ArrowExpressionClauseSyntax
-                || invocationExpression.Parent is ReturnStatementSyntax);
+            && invocationExpression.Parent.IsAnyKind(SyntaxKind.EqualsValueClause, SyntaxKind.SimpleAssignmentExpression, SyntaxKind.ArrowExpressionClause, SyntaxKind.ReturnStatement);
 
         private protected override bool IsInsecureEnvironmentVariableRetrieval(InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
             invocation.IsMethodInvocation(type, methodName, semanticModel)
             && invocation.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
-            && InsecureEnvironmentVariables.Any(x => x.Equals(firstArgument.Expression?.GetStringValue(), StringComparison.OrdinalIgnoreCase));
+            && firstArgument.Expression?.GetStringValue() is { } stringValue
+            && stringValue.Equals("tmpdir", StringComparison.OrdinalIgnoreCase);
     }
 }

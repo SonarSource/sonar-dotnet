@@ -79,7 +79,7 @@ Namespace Tests.TestCases
             ' Variates
             Using TmpDir = New StreamReader("/tmp/f") ' Noncompliant
             End Using
-            Using TmpDir = New StreamReader("\\Windows\Temp\f") ' Noncompliant
+            Using TmpDir = New StreamReader("\\Server_Name\Temp\f") ' Noncompliant
             End Using
             Using TmpDir = New StreamReader("C:\Windows\Temp\f") ' Noncompliant
             End Using

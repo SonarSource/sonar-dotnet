@@ -33,7 +33,26 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S5443";
         private const string MessageFormat = "Make sure publicly writable directories are used safely here.";
+        private const RegexOptions WindowsAndUnixOptions = RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
+        private const string VariableSlashTwoPartTemplate = @"^[\\\/]{0}[\\\/]{1}([\\\/]|$)";
+        private const string ForwardSlashTwoPartTemplate = @"^\/{0}\/{1}(\/|$)";
+        private const string ForwardSlashThreePartTemplate = @"^\/{0}\/{1}\/{2}(\/|$)";
+        private const string Temp = @"^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])?(windows[\\\/])?te?mp([\/\\]|$)";
+        private readonly Regex userProfile = new Regex(@"^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp([\\\/]|$)", WindowsAndUnixOptions);
+        private readonly string varTmp = string.Format(VariableSlashTwoPartTemplate, "var", "tmp");
+        private readonly string usrTmp = string.Format(VariableSlashTwoPartTemplate, "usr", "tmp");
+        private readonly string devShm = string.Format(VariableSlashTwoPartTemplate, "dev", "shm");
+        private readonly string devMqueue = string.Format(ForwardSlashTwoPartTemplate, "dev", "mqueue");
+        private readonly string runLock = string.Format(ForwardSlashTwoPartTemplate, "run", "lock");
+        private readonly string varRunLock = string.Format(ForwardSlashThreePartTemplate, "var", "run", "lock");
+        private readonly string libraryCaches = string.Format(ForwardSlashTwoPartTemplate, "library", "caches");
+        private readonly string usersShared = string.Format(ForwardSlashTwoPartTemplate, "users", "shared");
+        private readonly string privateTmp = string.Format(ForwardSlashTwoPartTemplate, "private", "tmp");
+        private readonly string privateVarTmp = string.Format(ForwardSlashThreePartTemplate, "private", "var", "tmp");
         private readonly DiagnosticDescriptor rule;
+        private readonly Regex linuxPubliclyWritabelDirs;
+        private readonly Regex windowsAndMacPubliclyWritabelDirs;
+        private readonly Regex environmentVariables = new Regex($@"^%(temp|tmp|tmpdir)%([\\\/]|$)", WindowsAndUnixOptions);
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
@@ -42,10 +61,12 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected string[] InsecureEnvironmentVariables { get; } = { "tmp", "temp", "tmpdir" };
-
-        protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration, ResourceManager rspecResources) : base(configuration) =>
+        protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration, ResourceManager rspecResources) : base(configuration)
+        {
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+            linuxPubliclyWritabelDirs = new Regex($"({devMqueue}|{runLock}|{varRunLock})", RegexOptions.Compiled);
+            windowsAndMacPubliclyWritabelDirs = new Regex($"({varTmp}|{usrTmp}|{devShm}|{libraryCaches}|{usersShared}|{privateTmp}|{privateVarTmp}|{Temp})", WindowsAndUnixOptions);
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -53,16 +74,11 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (!IsEnabled(c.Options))
+                    if (IsEnabled(c.Options)
+                        && Language.Syntax.NodeStringTextValue(c.Node) is { } stringValue
+                        && IsSensitiveDirectoryUsage(stringValue))
                     {
-                        return;
-                    }
-
-                    var node = c.Node;
-                    if (Language.Syntax.NodeStringTextValue(node) is { } stringValue
-                        && PubliclyWritableDirectoriesRegexMatcher.IsSensitiveDirectoryUsage(stringValue))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
                 Language.SyntaxKind.StringLiteralExpression,
@@ -72,62 +88,21 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (!IsEnabled(c.Options))
-                    {
-                        return;
-                    }
-
-                    var node = c.Node;
-                    if (node is TInvocationExpression invocation
+                    if (IsEnabled(c.Options)
+                        && c.Node is TInvocationExpression invocation
                         && (IsGetTempPathAssignment(invocation, KnownType.System_IO_Path, "GetTempPath", c.SemanticModel)
                             || IsInsecureEnvironmentVariableRetrieval(invocation, KnownType.System_Environment, "GetEnvironmentVariable", c.SemanticModel)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
                 Language.SyntaxKind.InvocationExpression);
         }
 
-        private static class PubliclyWritableDirectoriesRegexMatcher
-        {
-            private const string TwoPartPatternWithVariableSlash = @"^[\/\\]{0}[\/\\]{1}([\/\\]|$)";
-            private const string TwoPartPatternWithForwardSlash = @"^\/{0}\/{1}(\/|$)";
-            private const string ThreePartPatternWithForwardSlash = @"^\/{0}\/{1}\/{2}(\/|$)";
-            private const string TmpRegex = @"^([a-zA-z]:)?[\\\/]?[\/\\]tmp([\/\\]|$)";
-            private const string TempRegex = @"^([a-zA-z]:)?[\\\/]?[\/\\]temp([\/\\]|$)";
-            private const string WindowsTempRegex = @"^([a-zA-z]:)?[\\\/]?[\\\/]windows[\\\/]temp([\\\/]|$)";
-            private const string UserProfileRegex = @"%USERPROFILE%\\AppData\\Local\\Temp([\\\/]|$)";
-            private const string EnvironmentVariableTemplate = @"%{0}%([\\\/]|$)";
-            private static readonly string VarTmpRegex = string.Format(TwoPartPatternWithVariableSlash, "var", "tmp");
-            private static readonly string UsrTmpRegex = string.Format(TwoPartPatternWithVariableSlash, "usr", "tmp");
-            private static readonly string DevShmRegex = string.Format(TwoPartPatternWithVariableSlash, "dev", "shm");
-            private static readonly string DevMqueueRegex = string.Format(TwoPartPatternWithForwardSlash, "dev", "mqueue");
-            private static readonly string RunLockRegex = string.Format(TwoPartPatternWithForwardSlash, "run", "lock");
-            private static readonly string VarRunLockRegex = string.Format(ThreePartPatternWithForwardSlash, "var", "run", "lock");
-            private static readonly string LibraryCachesRegex = string.Format(TwoPartPatternWithForwardSlash, "library", "caches");
-            private static readonly string UsersSharedRegex = string.Format(TwoPartPatternWithForwardSlash, "users", "shared");
-            private static readonly string PrivateTmpRegex = string.Format(TwoPartPatternWithForwardSlash, "private", "tmp");
-            private static readonly string PrivateVarTmpRegex = string.Format(ThreePartPatternWithForwardSlash, "private", "var", "tmp");
-            private static readonly string TempEnvVariable = string.Format(EnvironmentVariableTemplate, "temp");
-            private static readonly string TmpEnvVariable = string.Format(EnvironmentVariableTemplate, "tmp");
-            private static readonly string TmpDirEnvVariable = string.Format(EnvironmentVariableTemplate, "tmpdir");
-
-            private static readonly Regex LinuxPubliclyWritabelDirs =
-                new Regex($"{DevMqueueRegex}|{RunLockRegex}|{VarRunLockRegex}",
-                    RegexOptions.Compiled);
-
-            private static readonly Regex WindowsAndMacPubliclyWritabelDirs =
-                new Regex($"{TmpRegex}|{VarTmpRegex}|{UsrTmpRegex}|{DevShmRegex}|{LibraryCachesRegex}|{UsersSharedRegex}|{PrivateTmpRegex}|{PrivateVarTmpRegex}|{TempRegex}|{WindowsTempRegex}",
-                    RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-
-            private static readonly Regex EnvironmentVariables =
-                new Regex($"{UserProfileRegex}|{TempEnvVariable}|{TmpEnvVariable}|{TmpDirEnvVariable}",
-                    RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-
-            public static bool IsSensitiveDirectoryUsage(string directory) =>
-                WindowsAndMacPubliclyWritabelDirs.IsMatch(directory)
-                || LinuxPubliclyWritabelDirs.IsMatch(directory)
-                || EnvironmentVariables.IsMatch(directory);
-        }
+        private bool IsSensitiveDirectoryUsage(string directory) =>
+            windowsAndMacPubliclyWritabelDirs.IsMatch(directory)
+            || linuxPubliclyWritabelDirs.IsMatch(directory)
+            || environmentVariables.IsMatch(directory)
+            || userProfile.IsMatch(directory);
     }
 }

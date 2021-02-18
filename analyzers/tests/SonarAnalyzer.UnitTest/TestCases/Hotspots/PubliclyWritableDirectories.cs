@@ -71,7 +71,7 @@ namespace Tests.Diagnostics
             // Variates
             using (var tmpDir = new StreamReader(@"/tmp/f")) { };  // Noncompliant
             using (var tmpDir = new StreamReader("D:\\Windows\\Temp\\f")) { }; // Noncompliant
-            using (var tmpDir = new StreamReader("\\\\Windows\\Temp\\f")) { }; // Noncompliant
+            using (var tmpDir = new StreamReader("\\\\Server_Name\\Temp\\f")) { }; // Noncompliant
             using (var tmpDir = new StreamReader("\\Windows\\Temp\\f")) { }; // Noncompliant
             using (var tmpDir = new StreamReader(@"C:\Windows\Temp\f")) { }; // Noncompliant
             using (var tmpDir = new StreamReader(@"D:\Windows\Temp\f")) { }; // Noncompliant
