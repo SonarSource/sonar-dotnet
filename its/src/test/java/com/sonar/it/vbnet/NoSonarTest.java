@@ -23,10 +23,12 @@ import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.nio.file.Path;
+import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
@@ -45,14 +47,17 @@ public class NoSonarTest {
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(orchestrator);
-
-    // Without setting the testProjectPattern, the VbNoSonarTest project is considered as a Test project :)
-    Tests.analyzeProject(temp, PROJECT, "vbnet_class_name", "sonar.msbuild.testProjectPattern", "noTests");
+    Tests.analyzeProject(temp, PROJECT, "vbnet_class_name");
   }
 
   @Test
-  public void filesAtProjectLevel() {
-    assertThat(getMeasureAsInt(PROJECT, "violations")).isEqualTo(2);
+  public void excludeNoSonarComment() {
+    List<Issues.Issue> issues = TestUtils.getIssues(com.sonar.it.vbnet.Tests.ORCHESTRATOR, PROJECT);
+    assertThat(issues).hasSize(1).hasOnlyOneElementSatisfying(e ->
+    {
+      assertThat(e.getLine()).isEqualTo(19);
+      assertThat(e.getRule()).isEqualTo("vbnet:S101");
+    });
   }
 
 }

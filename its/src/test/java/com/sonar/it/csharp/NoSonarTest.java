@@ -40,19 +40,16 @@ public class NoSonarTest {
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(ORCHESTRATOR);
-
-    // Without setting the testProjectPattern, the NoSonarTest project is considered as a Test project :)
-    Tests.analyzeProject(temp, PROJECT, "class_name", "sonar.msbuild.testProjectPattern", "noTests");
+    Tests.analyzeProject(temp, PROJECT, "class_name");
   }
 
   @Test
-  public void filesAtProjectLevel() {
+  public void excludeNoSonarComment() {
     List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
     assertThat(issues).hasSize(1).hasOnlyOneElementSatisfying(e ->
     {
-      assertThat(e.getLine()).isEqualTo(3);
+      assertThat(e.getLine()).isEqualTo(5);
       assertThat(e.getRule()).isEqualTo("csharpsquid:S101");
     });
   }
-
 }

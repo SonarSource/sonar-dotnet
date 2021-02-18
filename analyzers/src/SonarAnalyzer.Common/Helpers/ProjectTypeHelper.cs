@@ -27,29 +27,6 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class ProjectTypeHelper
     {
-        public static bool IsTest(this SyntaxNodeAnalysisContext context)
-        {
-            return context.SemanticModel.Compilation.IsTest();
-        }
-
-        public static bool IsTest(this Compilation compilation)
-        {
-            var assemblyName = string.Empty;
-            if (compilation.AssemblyName != null)
-            {
-                assemblyName = compilation.AssemblyName;
-            }
-
-            return IsTestAssemblyName(assemblyName) ||
-                compilation.ReferencedAssemblyNames
-                    .Any(assembly => TestAssemblyNames.Contains(assembly.Name.ToUpperInvariant()));
-        }
-
-        internal static bool IsTestAssemblyName(string assemblyName)
-        {
-            return assemblyName.SplitCamelCaseToWords().Any(word => word == "TEST" || word == "TESTS");
-        }
-
         private static readonly ISet<string> TestAssemblyNames = new HashSet<string>
         {
             "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
@@ -58,5 +35,11 @@ namespace SonarAnalyzer.Helpers
             "XUNIT.CORE",
             "NUNIT.FRAMEWORK"
         };
+
+        public static bool IsTest(this SyntaxNodeAnalysisContext context) =>
+            context.SemanticModel.Compilation.IsTest();
+
+        public static bool IsTest(this Compilation compilation) =>
+            compilation.ReferencedAssemblyNames.Any(assembly => TestAssemblyNames.Contains(assembly.Name.ToUpperInvariant()));
     }
 }

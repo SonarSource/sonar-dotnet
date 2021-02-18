@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3216",
+"message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunCoordinator.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  27,
+"endLine":  124,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3216",
+"message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunCoordinator.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  34,
+"endLine":  161,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3216",
+"message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  51,
+"endLine":  59,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3216",
+"message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  26,
+"endLine":  67,
+"endColumn":  71
+}
+}
+}
+]
+}

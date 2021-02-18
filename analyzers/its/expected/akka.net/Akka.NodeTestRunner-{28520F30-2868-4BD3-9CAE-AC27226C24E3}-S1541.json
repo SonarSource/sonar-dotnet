@@ -1,0 +1,127 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  21,
+"endLine":  29,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  21,
+"endLine":  29,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  13,
+"endLine":  32,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  13,
+"endLine":  37,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  13,
+"endLine":  46,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  17,
+"endLine":  50,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  17,
+"endLine":  51,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  17,
+"endLine":  52,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  13,
+"endLine":  57,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  17,
+"endLine":  60,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  17,
+"endLine":  61,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  17,
+"endLine":  62,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  13,
+"endLine":  65,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

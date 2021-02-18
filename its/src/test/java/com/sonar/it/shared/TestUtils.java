@@ -64,7 +64,7 @@ public class TestUtils {
   final private static Logger LOG = LoggerFactory.getLogger(TestUtils.class);
   private static final String MSBUILD_PATH = "MSBUILD_PATH";
 
-  public static Location getPluginLocation (String pluginName) {
+  public static Location getPluginLocation(String pluginName) {
     Location pluginLocation;
 
     String version = System.getProperty("csharpVersion"); // C# and VB.Net versions are the same
@@ -89,11 +89,11 @@ public class TestUtils {
       .addArgument("end");
   }
 
-  public static  ScannerForMSBuild createBeginStep(String projectName, Path projectDir) {
+  public static ScannerForMSBuild createBeginStep(String projectName, Path projectDir) {
     return createBeginStep(projectName, projectDir, "");
   }
 
-  public static  ScannerForMSBuild createBeginStep(String projectName, Path projectDir, String subProjectName) {
+  public static ScannerForMSBuild createBeginStep(String projectName, Path projectDir, String subProjectName) {
     return TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey(projectName)
@@ -102,7 +102,7 @@ public class TestUtils {
       .setProperty("sonar.projectBaseDir", getProjectBaseDir(projectDir, subProjectName));
   }
 
-  private static String getProjectBaseDir(Path projectDir, String subProjectName){
+  private static String getProjectBaseDir(Path projectDir, String subProjectName) {
     return projectDir.resolve(subProjectName).toString();
   }
 
@@ -177,14 +177,20 @@ public class TestUtils {
   // The SonarQube alias "LTS" has been dropped. An alternative is "LATEST_RELEASE[6.7]".
   // The term "latest" refers to the highest version number, not the most recently published version.
   public static String replaceLtsVersion(String version) {
-    if (version != null && version.equals("LTS"))
-    {
+    if (version != null && version.equals("LTS")) {
       return "LATEST_RELEASE[7.9]";
     }
     return version;
   }
 
   public static void reset(Orchestrator orchestrator) {
+    // Only for local debugging:
+    if (orchestrator.getServer() == null) {
+      // Tests.ORCHESTRATOR is a jUnit rule that is automagically started in it's beforeAll() action for all tests.
+      // Running individual test doesn't execute the @ClassRule annotation on ORCHESTRATOR in Tests class.
+      orchestrator.start();
+    }
+
     // We add one day to ensure that today's entries are deleted.
     Instant instant = Instant.now().plus(1, ChronoUnit.DAYS);
 
@@ -216,12 +222,11 @@ public class TestUtils {
     // If the test is being run under VSTS then the Scanner will
     // expect the project to be under the VSTS sources directory
     File baseDirectory = null;
-    if (VstsUtils.isRunningUnderVsts()){
+    if (VstsUtils.isRunningUnderVsts()) {
       String vstsSourcePath = VstsUtils.getSourcesDirectory();
       LOG.info("TEST SETUP: Tests are running under VSTS. Build dir:  " + vstsSourcePath);
       baseDirectory = new File(vstsSourcePath);
-    }
-    else {
+    } else {
       LOG.info("TEST SETUP: Tests are not running under VSTS");
     }
 
@@ -235,8 +240,7 @@ public class TestUtils {
     String localAppData = System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube";
     try {
       FileUtils.deleteDirectory(new File(localAppData));
-    }
-    catch (IOException ioe) {
+    } catch (IOException ioe) {
       throw new IllegalStateException("Could not delete SonarScanner for .NET cache folder", ioe);
     }
   }
