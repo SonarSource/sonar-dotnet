@@ -38,20 +38,12 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class RuleTest
     {
-        private static IEnumerable<Type> GetCodeFixProviderTypes(IEnumerable<Assembly> assemblies)
-        {
-            return assemblies
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof(SonarCodeFixProvider)));
-        }
-
         [TestMethod]
         public void DiagnosticAnalyzerHasRuleAttribute()
         {
             foreach (var analyzer in new RuleFinder().AllAnalyzerTypes)
             {
                 var ruleDescriptors = analyzer.GetCustomAttributes<RuleAttribute>();
-
                 ruleDescriptors.Should().NotBeEmpty("RuleAttribute is missing from DiagnosticAnalyzer '{0}'", analyzer.Name);
             }
         }
@@ -61,11 +53,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var analyzers = RuleFinder.PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(t =>
-                    t.IsSubclassOf(typeof(DiagnosticAnalyzer)) &&
-                    t.IsAbstract)
-                .ToList();
-
+                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) && t.IsAbstract);
             foreach (var analyzer in analyzers)
             {
                 var attributes = analyzer.GetCustomAttributes<RuleAttribute>();
@@ -76,26 +64,19 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void CodeFixProviders_Named_Properly()
         {
-            var codeFixProviders = GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies);
-
-            foreach (var codeFixProvider in codeFixProviders)
+            foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
             {
                 var analyzerName = codeFixProvider.FullName.Replace(RuleDetailBuilder.CodeFixProviderSuffix, "");
-
-                codeFixProvider.Assembly.GetType(analyzerName)
-                    .Should().NotBeNull("CodeFixProvider '{0}' has no matching DiagnosticAnalyzer.", codeFixProvider.Name);
+                codeFixProvider.Assembly.GetType(analyzerName).Should().NotBeNull("CodeFixProvider '{0}' has no matching DiagnosticAnalyzer.", codeFixProvider.Name);
             }
         }
 
         [TestMethod]
         public void CodeFixProviders_Have_Title()
         {
-            var codeFixProviders = GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies);
-
-            foreach (var codeFixProvider in codeFixProviders)
+            foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
             {
                 var titles = RuleDetailBuilder.GetCodeFixTitles(codeFixProvider);
-
                 titles.Should().NotBeEmpty("CodeFixProvider '{0}' has no title field.", codeFixProvider.Name);
             }
         }
@@ -123,13 +104,11 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var analyzers = RuleFinder.PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) && t != typeof(SonarDiagnosticAnalyzer))
-                .ToList();
+                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) && t != typeof(SonarDiagnosticAnalyzer));
 
             foreach (var analyzer in analyzers)
             {
-                analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>(
-                    $"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
+                analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>($"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
             }
         }
 
@@ -149,16 +128,13 @@ namespace SonarAnalyzer.UnitTest.Common
             var descriptors = new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics)
                 // Security hotspots are enabled by default, but they will report issues only
                 // when their ID is contained in SonarLint.xml
-                .Where(descriptor => !IsSecurityHotspot(descriptor))
-                .ToList();
+                .Where(descriptor => !IsSecurityHotspot(descriptor));
 
             foreach (var descriptor in descriptors)
             {
                 if (descriptor.IsEnabledByDefault)
                 {
-                    descriptor.CustomTags.Should().Contain(
-                        DiagnosticDescriptorBuilder.SonarWayTag,
-                        $"{descriptor.Id} should be in SonarWay");
+                    descriptor.CustomTags.Should().Contain(DiagnosticDescriptorBuilder.SonarWayTag, $"{descriptor.Id} should be in SonarWay");
                 }
             }
         }
@@ -174,37 +150,32 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
-            var allAnalyzers = new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics);
-
-            var parameterizedAnalyzers = new RuleFinder().AllAnalyzerTypes
+            var parameterized = new RuleFinder().AllAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
-                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
-                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .SelectMany(type => ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics)
                 .ToHashSet();
 
-            foreach (var analyzer in allAnalyzers)
+            foreach (var diagnostic in new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
-                var isInSonarWay = analyzer.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);
-
-                if (IsSecurityHotspot(analyzer))
+                if (IsSecurityHotspot(diagnostic))
                 {
                     // Security hotspots are enabled by default, but they will report issues only
                     // when their ID is contained in SonarLint.xml
-                    analyzer.IsEnabledByDefault.Should().BeTrue($"{analyzer.Id} should be enabled by default");
+                    diagnostic.IsEnabledByDefault.Should().BeTrue($"{diagnostic.Id} should be enabled by default");
                 }
-                else if (parameterizedAnalyzers.Contains(analyzer))
+                else if (parameterized.Contains(diagnostic))
                 {
                     // Even if a a parametrized rule is in Sonar way profile, it is still disabled by default.
                     // See https://github.com/SonarSource/sonar-dotnet/issues/1274
-                    analyzer.IsEnabledByDefault.Should().BeFalse($"{analyzer.Id} has parameters and should be disabled by default");
+                    diagnostic.IsEnabledByDefault.Should().BeFalse($"{diagnostic.Id} has parameters and should be disabled by default");
                 }
-                else if (isInSonarWay)
+                else if (diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag))
                 {
-                    analyzer.IsEnabledByDefault.Should().BeTrue($"{analyzer.Id} is in SonarWay");
+                    diagnostic.IsEnabledByDefault.Should().BeTrue($"{diagnostic.Id} is in SonarWay");
                 }
                 else
                 {
-                    analyzer.IsEnabledByDefault.Should().BeFalse($"{analyzer.Id} is not in SonarWay");
+                    diagnostic.IsEnabledByDefault.Should().BeFalse($"{diagnostic.Id} is not in SonarWay");
                 }
             }
         }
@@ -241,5 +212,8 @@ namespace SonarAnalyzer.UnitTest.Common
             typeof(DiagnosticAnalyzer).IsAssignableFrom(type)
                 ? ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics
                 : ((IRuleFactory)Activator.CreateInstance(type)).SupportedDiagnostics;
+
+        private static IEnumerable<Type> GetCodeFixProviderTypes(IEnumerable<Assembly> assemblies) =>
+            assemblies.SelectMany(assembly => assembly.GetTypes()).Where(t => t.IsSubclassOf(typeof(SonarCodeFixProvider)));
     }
 }
