@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -45,7 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private protected override bool IsInsecureEnvironmentVariableRetrieval(InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
             invocation.IsMethodInvocation(type, methodName, semanticModel)
             && invocation.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
-            && firstArgument.Expression?.GetStringValue() is { } stringValue
-            && stringValue.Equals("tmpdir", StringComparison.OrdinalIgnoreCase);
+            && InsecureEnvironmentVariables.Any(x => x.Equals(firstArgument.Expression?.GetStringValue(), StringComparison.OrdinalIgnoreCase));
     }
 }

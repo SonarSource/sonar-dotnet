@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
         private const string VariableSlashTwoPartTemplate = @"^[\\\/]{0}[\\\/]{1}([\\\/]|$)";
         private const string ForwardSlashTwoPartTemplate = @"^\/{0}\/{1}(\/|$)";
         private const string ForwardSlashThreePartTemplate = @"^\/{0}\/{1}\/{2}(\/|$)";
-        private const string Temp = @"^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])?(windows[\\\/])?te?mp([\/\\]|$)";
+        private const string Temp = @"^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\/\\]|$)";
         private readonly Regex userProfile = new Regex(@"^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp([\\\/]|$)", WindowsAndUnixOptions);
         private readonly string varTmp = string.Format(VariableSlashTwoPartTemplate, "var", "tmp");
         private readonly string usrTmp = string.Format(VariableSlashTwoPartTemplate, "usr", "tmp");
@@ -60,6 +60,8 @@ namespace SonarAnalyzer.Rules
         private protected abstract bool IsInsecureEnvironmentVariableRetrieval(TInvocationExpression invocation, KnownType type, string methodName, SemanticModel semanticModel);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected string[] InsecureEnvironmentVariables { get; } = { "tmp", "temp", "tmpdir" };
 
         protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration, ResourceManager rspecResources) : base(configuration)
         {
