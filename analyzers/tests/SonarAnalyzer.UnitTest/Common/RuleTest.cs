@@ -22,7 +22,6 @@ extern alias csharp;
 extern alias vbnet;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
@@ -59,8 +58,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) && t.IsAbstract);
             foreach (var analyzer in analyzers)
             {
-                var attributes = analyzer.GetCustomAttributes<RuleAttribute>();
-                attributes.Should().BeEmpty("At least one RuleAttribute is added to the abstract DiagnosticAnalyzer '{0}'", analyzer.Name);
+                analyzer.GetCustomAttributes<RuleAttribute>().Should().BeEmpty("At least one RuleAttribute is added to the abstract DiagnosticAnalyzer '{0}'", analyzer.Name);
             }
         }
 
@@ -79,8 +77,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
             {
-                var titles = RuleDetailBuilder.GetCodeFixTitles(codeFixProvider);
-                titles.Should().NotBeEmpty("CodeFixProvider '{0}' has no title field.", codeFixProvider.Name);
+                RuleDetailBuilder.GetCodeFixTitles(codeFixProvider).Should().NotBeEmpty("CodeFixProvider '{0}' has no title field.", codeFixProvider.Name);
             }
         }
 
