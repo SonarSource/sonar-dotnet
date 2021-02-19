@@ -55,19 +55,15 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 "lib",
             };
 
-        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime) =>
-            Create(new Package(packageId, packageVersion, runtime), AllowedNuGetLibDirectoriesInOrderOfPreference);
-
-        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework, string runtime) =>
+        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime, string targetFramework) =>
             Create(new Package(packageId, packageVersion, runtime), new[] { targetFramework });
 
-        public static IEnumerable<MetadataReference> CreateWithCommandLine(string packageId, string packageVersion, string runtime = null) =>
+        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime = null) =>
             Create(new Package(packageId, packageVersion, runtime), AllowedNuGetLibDirectoriesInOrderOfPreference);
 
         public static IEnumerable<MetadataReference> CreateNETStandard21()
         {
-            var x = $@"{PackagesFolderRelativePath}NETStandard.Library.Ref.2.1.0\ref\netstandard2.1";
-            var packageDir = Path.GetFullPath(x);
+            var packageDir = Path.GetFullPath($@"{PackagesFolderRelativePath}NETStandard.Library.Ref.2.1.0\ref\netstandard2.1");
             if (Directory.Exists(packageDir))
             {
                 LogMessage($"Package found at {packageDir}");
@@ -75,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             else
             {
                 LogMessage($"Package not found at {packageDir}");
-                InstallPackage("NETStandard.Library.Ref", "2.1.0");
+                PackageManager.InstallPackage("NETStandard.Library.Ref", SemanticVersion.ParseOptionalVersion("2.1.0"), ignoreDependencies: true, allowPrereleaseVersions: false);
                 if (!Directory.Exists(packageDir))
                 {
                     throw new ApplicationException($"Test setup error: folder for downloaded package does not exist. Folder: {packageDir}");
@@ -83,8 +79,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             }
 
             return Directory.GetFiles(packageDir, "*.dll", SearchOption.AllDirectories)
-               .Select(path => new FileInfo(path))
-               .Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName))
+               .Select(x => (MetadataReference)MetadataReference.CreateFromFile(x))
                .ToImmutableArray();
         }
 
@@ -117,7 +112,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
             DumpSelectedGroup(package, selectedGroup);
 
-            return selectedGroup.Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName)).ToImmutableArray();
+            return selectedGroup.Select(file => MetadataReference.CreateFromFile(file.FullName)).ToImmutableArray();
         }
 
         private static void DumpSelectedGroup(Package package, IGrouping<string, FileInfo> fileGroup)
@@ -135,25 +130,10 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         {
             var currentFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var localSettings = Settings.LoadDefaultSettings(new PhysicalFileSystem(currentFolder), null, null);
-
             // Get a package source provider that can use the settings
             var packageSourceProvider = new PackageSourceProvider(localSettings);
-
             // Create an aggregate repository that uses all of the configured sources
-            var aggregateRepository = packageSourceProvider.CreateAggregateRepository(PackageRepositoryFactory.Default,
-                true /* ignore failing repos. Errors will be logged as warnings. */ );
-
-            return aggregateRepository;
-        }
-
-        private static void InstallPackage(string packageId, string packageVersion)
-        {
-            var realVersion = packageVersion != Constants.NuGetLatestVersion
-                ? packageVersion
-                : null;
-
-            LogMessage($"Installing NuGet {packageId}.{packageVersion}");
-            PackageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(realVersion), ignoreDependencies: true, allowPrereleaseVersions: false);
+            return packageSourceProvider.CreateAggregateRepository(PackageRepositoryFactory.Default, true /* ignore failing repos. Errors will be logged as warnings. */ );
         }
 
         private static void LogMessage(string message) =>
