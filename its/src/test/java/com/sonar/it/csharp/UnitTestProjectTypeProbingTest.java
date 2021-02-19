@@ -24,6 +24,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonarqube.ws.Issues;
 
 import java.io.IOException;
 
@@ -33,6 +34,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UnitTestProjectTypeProbingTest {
   private static final String PROJECT = "UTProjectProbing";
+  private static final String MAIN_RULE_ID = "csharpsquid:S1048";
+  private static final String MAIN_AND_TEST_RULE_ID = "csharpsquid:S101";
   private static Boolean isProjectAnalyzed = false;
 
   @Rule
@@ -50,7 +53,9 @@ public class UnitTestProjectTypeProbingTest {
 
   @Test
   public void mainProject_IsIdentifiedAsMain() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.Main/calculator.cs")).hasSize(2);
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.Main/calculator.cs"))
+      .extracting(Issues.Issue::getRule)
+      .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID);
   }
 
   @Test
@@ -59,8 +64,10 @@ public class UnitTestProjectTypeProbingTest {
   }
 
   @Test
-  public void testProject_WithPropertySetToFalse_IsIdentifiedAsMainProject() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTestWithProjectPropertyFalse/calculator.cs")).hasSize(1);
+  public void testProject_WithPropertySetToFalse_IsIdentifiedAsMainProjectByScannerAndTestByAnalyzer() {
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTestWithProjectPropertyFalse/calculator.cs"))
+      .extracting(Issues.Issue::getRule)
+      .containsExactly(MAIN_AND_TEST_RULE_ID);
   }
 
   @Test
@@ -75,7 +82,9 @@ public class UnitTestProjectTypeProbingTest {
 
   @Test
   public void project_WithTestInName_IsIdentifiedAsMainProject() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.ContainsTestInName/calculator.cs")).hasSize(2);
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.ContainsTestInName/calculator.cs"))
+      .extracting(Issues.Issue::getRule)
+      .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID);
   }
 
   @Test
