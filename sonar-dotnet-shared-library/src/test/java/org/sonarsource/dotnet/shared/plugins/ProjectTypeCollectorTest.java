@@ -34,6 +34,8 @@ public class ProjectTypeCollectorTest {
   @Test
   public void withNoFiles_skip() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
+
+    // this will be skipped, considered as top-level module
     addProjectWithNoFiles(underTest);
 
     assertThat(underTest.getSummary()).isEmpty();
@@ -57,7 +59,11 @@ public class ProjectTypeCollectorTest {
   @Test
   public void withNoFiles_twoModules_logOne() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
+
+
+    // this will be skipped, considered as top-level module
     addProjectWithNoFiles(underTest);
+
     addProjectWithNoFiles(underTest);
 
     assertThat(underTest.getSummary()).hasValue("Found 1 MSBuild project. 1 with no MAIN nor TEST files.");
@@ -153,7 +159,6 @@ public class ProjectTypeCollectorTest {
 
     addTestProject(underTest);
     addTestProject(underTest);
-
     addProjectWithNoFiles(underTest);
 
     assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 2 TEST projects. 1 with no MAIN nor TEST files.");

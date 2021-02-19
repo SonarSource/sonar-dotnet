@@ -36,7 +36,9 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -80,6 +82,12 @@ public class FileTypeSensorTest {
     sensor.describe(desc);
 
     verify(desc).name("Verify what types of files (MAIN, TEST) are in LANG_KEY projects.");
+    verify(desc, never()).onlyOnLanguage(any());
+    verify(desc, never()).onlyOnLanguages(any());
+    verify(desc, never()).onlyOnFileType(any());
+    verify(desc, never()).onlyWhenConfiguration(any());
+    verify(desc, never()).createIssuesForRuleRepository(any());
+    verify(desc, never()).createIssuesForRuleRepositories(any());
   }
 
   @Test
