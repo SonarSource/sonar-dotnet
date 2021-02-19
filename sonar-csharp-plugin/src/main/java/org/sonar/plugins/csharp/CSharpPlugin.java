@@ -25,7 +25,9 @@ import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
+import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
@@ -55,6 +57,7 @@ public class CSharpPlugin implements Plugin {
     context.addExtensions(
       METADATA,
       CSharp.class,
+      ProjectTypeCollector.class,
       ReportPathCollector.class,
       CSharpSonarRulesDefinition.class,
       DotNetSensor.class,
@@ -64,6 +67,7 @@ public class CSharpPlugin implements Plugin {
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       GeneratedFileFilter.class,
+      FileTypeSensor.class,
       PropertiesSensor.class,
       SonarLintProfileExporter.class,
       ProtobufDataImporter.class,

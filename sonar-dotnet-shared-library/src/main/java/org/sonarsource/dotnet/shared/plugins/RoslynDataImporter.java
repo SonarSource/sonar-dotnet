@@ -29,6 +29,7 @@ import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonarsource.dotnet.shared.StringUtils;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 
@@ -48,7 +49,7 @@ public class RoslynDataImporter {
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey, ignoreThirdPartyIssues, config.bugCategories(),
       config.codeSmellCategories(), config.vulnerabilityCategories());
 
-    LOG.info("Importing {} Roslyn {}", reports.size(), pluralize("report", reports.size()));
+    LOG.info("Importing {} Roslyn {}", reports.size(), StringUtils.pluralize("report", reports.size()));
 
     for (RoslynReport report : reports) {
       SarifParserFactory.create(report, toRealPath).accept(callback);
@@ -68,9 +69,5 @@ public class RoslynDataImporter {
       }
     }
     return repositoryKeyByRoslynRuleKey;
-  }
-
-  private static String pluralize(String s, int count) {
-    return (count == 1) ? s : (s + "s");
   }
 }

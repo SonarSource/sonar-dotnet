@@ -26,8 +26,10 @@ import org.junit.Test;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -76,6 +78,12 @@ public class PropertiesSensorTest {
     underTest.describe(desc);
 
     verify(desc).name("Lang Name Properties");
+    verify(desc, never()).onlyOnLanguage(any());
+    verify(desc, never()).onlyOnLanguages(any());
+    verify(desc, never()).onlyOnFileType(any());
+    verify(desc, never()).onlyWhenConfiguration(any());
+    verify(desc, never()).createIssuesForRuleRepository(any());
+    verify(desc, never()).createIssuesForRuleRepositories(any());
   }
 
   @Test

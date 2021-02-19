@@ -36,6 +36,7 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
+import org.sonarsource.dotnet.shared.StringUtils;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 import org.sonarsource.dotnet.shared.plugins.protobuf.RawProtobufImporter;
 
@@ -66,7 +67,7 @@ public class ProtobufDataImporter {
 
     for (Path protobufReportsDir : protobufReportsDirectories) {
       long protoFiles = countProtoFiles(protobufReportsDir);
-      LOG.info(String.format("Importing results from %d proto %s in '%s'", protoFiles, pluralize("file", protoFiles), protobufReportsDir));
+      LOG.info(String.format("Importing results from %d proto %s in '%s'", protoFiles, StringUtils.pluralize("file", protoFiles), protobufReportsDir));
       // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
       parseProtobuf(metricsImporter, protobufReportsDir, METRICS_OUTPUT_PROTOBUF_NAME);
       parseProtobuf(highlightImporter, protobufReportsDir, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
@@ -78,13 +79,6 @@ public class ProtobufDataImporter {
     highlightImporter.save();
     symbolRefsImporter.save();
     cpdTokensImporter.save();
-  }
-
-  private static String pluralize(String s, long count) {
-    if (count == 1) {
-      return s;
-    }
-    return s + "s";
   }
 
   private static long countProtoFiles(Path dir) {

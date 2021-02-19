@@ -49,11 +49,13 @@ public class DotNetSensor implements ProjectSensor {
   private final RoslynDataImporter roslynDataImporter;
   private final DotNetPluginMetadata pluginMetadata;
   private final ReportPathCollector reportPathCollector;
+  private final ProjectTypeCollector projectTypeCollector;
 
-  public DotNetSensor(DotNetPluginMetadata pluginMetadata, ReportPathCollector reportPathCollector,
-    ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
+  public DotNetSensor(DotNetPluginMetadata pluginMetadata, ReportPathCollector reportPathCollector, ProjectTypeCollector projectTypeCollector,
+                      ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
     this.pluginMetadata = pluginMetadata;
     this.reportPathCollector = reportPathCollector;
+    this.projectTypeCollector = projectTypeCollector;
     this.protobufDataImporter = protobufDataImporter;
     this.roslynDataImporter = roslynDataImporter;
   }
@@ -69,12 +71,13 @@ public class DotNetSensor implements ProjectSensor {
     if (shouldExecuteOnProject(context.fileSystem())) {
       executeInternal(context);
     }
+    projectTypeCollector.getSummary().ifPresent(LOG::info);
   }
 
   private boolean shouldExecuteOnProject(FileSystem fs) {
-    if (hasFilesOfType(fs, Type.MAIN)) {
+    if (SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey())) {
       return true;
-    } else if (hasFilesOfType(fs, Type.TEST)) {
+    } else if (SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey())) {
       LOG.warn("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
           "Your SonarQube/SonarCloud project will not have results for {} files. " +
           "You can read more about the detection of test projects here: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
@@ -84,10 +87,6 @@ public class DotNetSensor implements ProjectSensor {
       LOG.debug("No files to analyze. Skip Sensor.");
     }
     return false;
-  }
-
-  private boolean hasFilesOfType(FileSystem fs, Type fileType) {
-    return fs.inputFiles(fs.predicates().and(fs.predicates().hasType(fileType), fs.predicates().hasLanguage(pluginMetadata.languageKey()))).iterator().hasNext();
   }
 
   private void executeInternal(SensorContext context) {
@@ -118,7 +117,7 @@ public class DotNetSensor implements ProjectSensor {
 
     if (shouldSuggestScannerForMSBuild) {
       LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
-        + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+          + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         pluginMetadata.shortLanguageName());
     }
   }

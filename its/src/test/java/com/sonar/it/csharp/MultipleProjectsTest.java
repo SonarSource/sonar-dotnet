@@ -20,6 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.util.Command;
 import com.sonar.orchestrator.util.CommandExecutor;
@@ -59,6 +60,9 @@ public class MultipleProjectsTest {
   @ClassRule
   public static RuleChain chain = getRuleChain();
 
+  // populated in getRuleChain()
+  private static BuildResult buildResult;
+
   private static RuleChain getRuleChain() {
     assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
 
@@ -77,17 +81,22 @@ public class MultipleProjectsTest {
           ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
 
           CommandExecutor.create().execute(Command.create("nuget")
-            .addArguments("restore")
-            .setDirectory(projectDir.toFile()),
+              .addArguments("restore")
+              .setDirectory(projectDir.toFile()),
             10 * 60 * 1000);
 
           ORCHESTRATOR.executeBuild(beginStep);
 
           TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-          ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+          buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
         }
       });
+  }
+
+  @Test
+  public void projectTypesInfoIsLogged() {
+    assertThat(buildResult.getLogs()).contains("Found 4 MSBuild projects. 2 MAIN projects. 2 TEST projects.");
   }
 
   @Test
