@@ -1,4 +1,9 @@
-﻿namespace UTProjectProbing.MsTest
+﻿using System;
+
+namespace UTProjectProbing.MsTest
 {
-    public class calculator { }
+    public class calculator
+    {
+        ~calculator() => throw new NotImplementedException();
+    }
 }

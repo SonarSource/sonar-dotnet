@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UTProjectProbing.xUnit
+namespace UTProjectProbing.MsTestWithProjectPropertyFalse
 {
     public class calculator
     {

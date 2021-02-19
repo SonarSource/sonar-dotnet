@@ -50,7 +50,7 @@ public class UnitTestProjectTypeProbingTest {
 
   @Test
   public void mainProject_IsIdentifiedAsMain() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.Main/calculator.cs")).hasSize(1);
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.Main/calculator.cs")).hasSize(2);
   }
 
   @Test
@@ -60,7 +60,7 @@ public class UnitTestProjectTypeProbingTest {
 
   @Test
   public void testProject_WithPropertySetToFalse_IsIdentifiedAsMainProject() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTstWithProjectPropertyFalse/calculator.cs")).hasSize(1);
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTestWithProjectPropertyFalse/calculator.cs")).hasSize(1);
   }
 
   @Test
@@ -74,8 +74,8 @@ public class UnitTestProjectTypeProbingTest {
   }
 
   @Test
-  public void project_WithTestInName_IsIdentifiedAsTestProject() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.ContainsTestInName/calculator.cs")).hasSize(1);
+  public void project_WithTestInName_IsIdentifiedAsMainProject() {
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.ContainsTestInName/calculator.cs")).hasSize(2);
   }
 
   @Test

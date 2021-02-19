@@ -1,4 +1,9 @@
-﻿namespace UTProjectProbing.ContainsTestInName
+﻿using System;
+
+namespace UTProjectProbing.ContainsTestInName
 {
-    public class calculator { }
+    public class calculator
+    {
+        ~calculator() => throw new NotImplementedException();
+    }
 }

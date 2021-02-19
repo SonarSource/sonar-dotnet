@@ -1,4 +1,9 @@
-﻿namespace UTProjectProbing.Main
+﻿using System;
+
+namespace UTProjectProbing.Main
 {
-    public class calculator { }
+    public class calculator
+    {
+        ~calculator() => throw new NotImplementedException();
+    }
 }

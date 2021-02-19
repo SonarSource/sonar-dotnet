@@ -1,4 +1,9 @@
-﻿namespace UTProjectProbing.EndsWithTests
+﻿using System;
+
+namespace UTProjectProbing.EndsWithTests
 {
-    public class calculator { }
+    public class calculator
+    {
+        ~calculator() => throw new NotImplementedException();
+    }
 }
