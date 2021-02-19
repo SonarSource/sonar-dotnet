@@ -88,5 +88,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void NodeIdentifier_UnexpectedTypeThrows_VB() =>
             vb.Invoking(x => x.NodeIdentifier(VB.SyntaxFactory.ThrowStatement())).Should().Throw<InvalidOperationException>();
+
+        [TestMethod]
+        public void NodeStringTextValue_UnexpectedType_CS() =>
+             cs.NodeStringTextValue(CS.SyntaxFactory.ThrowStatement()).Should().BeEmpty();
+
+        [TestMethod]
+        public void NodeStringTextValue_UnexpectedType_VB() =>
+            vb.NodeStringTextValue(VB.SyntaxFactory.ThrowStatement()).Should().BeEmpty();
     }
 }
