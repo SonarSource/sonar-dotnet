@@ -93,7 +93,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             package.EnsurePackageIsInstalled();
 
             var allowedNuGetLibDirectoriesByPreference = allowedTargetFrameworks.Select((folder, priority) => new { folder, priority });
-            var packageDirectory = package.GetNuGetPackageDirectory();
+            var packageDirectory = package.PackageDirectory();
             LogMessage($"Download package directory: {packageDirectory}");
             if (!Directory.Exists(packageDirectory))
             {

@@ -42,10 +42,10 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 Runtime = runtime;
             }
 
-            public string GetNuGetPackageDirectory()
+            public string PackageDirectory()
             {
                 var runtimePath = Runtime == null ? string.Empty : $"runtimes\\{Runtime}\\";
-                var x = $@"{PackagesFolderRelativePath}{Id}.{GetRealVersionFolder()}\{runtimePath}lib";
+                var x = $@"{PackagesFolderRelativePath}{Id}.{RealVersionFolder()}\{runtimePath}lib";
                 return Path.GetFullPath(x);
             }
 
@@ -56,8 +56,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                     if (IsCheckForLatestPackageRequired())
                     {
                         LogMessage($"Checking for newer version of package: {Id}");
-                        InstallWithCommandLine();
-                        WriteLastUpdateFile();
+                        Install();
+                        WriteLastCheckTime();
                     }
                     else
                     {
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 else
                 {
                     // Check to see if the specific package is already installed
-                    var packageDir = GetNuGetPackageDirectory();
+                    var packageDir = NuGetPackageDirectory();
                     if (Directory.Exists(packageDir))
                     {
                         LogMessage($"Package found at {packageDir}");
@@ -75,18 +75,18 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                     else
                     {
                         LogMessage($"Package not found at {packageDir}");
-                        InstallWithCommandLine();
+                        Install();
                     }
                 }
             }
 
-            private void InstallWithCommandLine()
+            private void Install()
             {
                 var versionArgument = Version == Constants.NuGetLatestVersion
                     ? string.Empty
                     : $"-Version {Version}";
 
-                var nugetConfigPath = GetValidatedNuGetConfigPath();
+                var nugetConfigPath = ValidatedNuGetConfigPath();
 
                 var args = $"install {Id} {versionArgument} -OutputDirectory {Path.GetFullPath(PackagesFolderRelativePath)} -NonInteractive -ForceEnglishOutput" +
                     // Explicitly specify the NuGet config to use to avoid being impacted by
@@ -131,10 +131,10 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 }
             }
 
-            private string GetRealVersionFolder() =>
+            private string RealVersionFolder() =>
                 Version != Constants.NuGetLatestVersion
                     ? Version
-                    : GetSortedPackageFolders()
+                    : SortedPackageFolders()
                         .Select(path => Path.GetFileName(path).Substring(Id.Length + 1))
                         .Last(path => char.IsNumber(path[0]));
 
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             /// Package directory names are in the form "{package id}.{package version}".
             /// The list is sorted in ascending order, so the most recent version will be last.
             /// </remarks>
-            private IEnumerable<string> GetSortedPackageFolders()
+            private IEnumerable<string> SortedPackageFolders()
             {
                 // The package will be in a folder called "\packages\{packageId}.{version}", but:
                 // : the package might not be installed
@@ -165,7 +165,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                     : Enumerable.Empty<string>();
             }
 
-            private static string GetValidatedNuGetConfigPath()
+            private static string ValidatedNuGetConfigPath()
             {
                 var path = Path.GetFullPath(NuGetConfigFileRelativePath);
                 if (!File.Exists(path))
@@ -191,21 +191,21 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 // released. If the waiting time when running tests locally is big we can increase.Annecy, France
                 const int VersionCheckDelayInDays = 1;
 
-                var lastCheck = GetLastCheckTime();
+                var lastCheck = ReadLastCheckTime();
                 LogMessage($"Last check for latest NuGets: {lastCheck}");
                 return (DateTime.Now.Subtract(lastCheck).TotalDays > VersionCheckDelayInDays);
             }
 
-            private DateTime GetLastCheckTime() =>
-                GetLastCheckFilePath() is { } filePath
+            private DateTime ReadLastCheckTime() =>
+                LastCheckFilePath() is { } filePath
                 && File.Exists(filePath)
                 && DateTime.TryParse(File.ReadAllText(filePath), out var timestamp)
                 ? timestamp
                 : DateTime.MinValue;
 
-            private void WriteLastUpdateFile()
+            private void WriteLastCheckTime()
             {
-                var filePath = GetLastCheckFilePath();
+                var filePath = LastCheckFilePath();
                 if (filePath == null)
                 {
                     return;
@@ -213,12 +213,12 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 File.WriteAllText(filePath, DateTime.Now.ToString("d")); // short date pattern
             }
 
-            private string GetLastCheckFilePath()
+            private string LastCheckFilePath()
             {
                 // The file containing the last-check timestamp is stored in folder of the latest version of the package.
                 const string LastUpdateFileName = "LastCheckedForUpdate.txt";
 
-                var directory = GetSortedPackageFolders().LastOrDefault();
+                var directory = SortedPackageFolders().LastOrDefault();
                 return directory == null ? null : Path.Combine(directory, LastUpdateFileName);
             }
         }
