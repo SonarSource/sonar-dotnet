@@ -36,13 +36,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             return Path.GetFullPath(x);
         }
 
-        private static string GetRealVersionFolder(string packageId, string packageVersion) =>
-            packageVersion != Constants.NuGetLatestVersion
-                ? packageVersion
-                : GetSortedPackageFolders(packageId)
-                    .Select(path => Path.GetFileName(path).Substring(packageId.Length + 1))
-                    .Last(path => char.IsNumber(path[0]));
-
         private static void EnsurePackageIsInstalled(string packageId, string packageVersion, string runtime)
         {
             if (packageVersion == Constants.NuGetLatestVersion)
@@ -73,49 +66,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 }
             }
         }
-
-        /// <summary>
-        /// Returns the list of folders containing installed versions of the specified package,
-        /// or an empty list if the package is not installed.
-        /// </summary>
-        /// <remarks>
-        /// Package directory names are in the form "{package id}.{package version}".
-        /// The list is sorted in ascending order, so the most recent version will be last.
-        /// </remarks>
-        private static IEnumerable<string> GetSortedPackageFolders(string packageId)
-        {
-            // The package will be in a folder called "\packages\{packageId}.{version}", but:
-            // : the package might not be installed
-            // : there might be multiple versions installed
-            // : there might be a package that starts with the same package id
-            //      e.g. Microsoft.AspNetCore.Core and Microsoft.AspNetCore.Core.Diagnostics
-            // Most packages have a three-part version, but some have four. We don't check
-            // the actual number of parts, as long as there is at least one.
-            var matcher = new Regex($@"{Regex.Escape(packageId)}(\.\d+)+$", RegexOptions.IgnoreCase);
-
-            return Directory.Exists(PackagesFolderRelativePath)
-                ? Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}.*", SearchOption.TopDirectoryOnly)
-                    .Where(path => matcher.IsMatch(path))
-                    .OrderBy(name => name)
-                    .ToArray()
-                : Enumerable.Empty<string>();
-        }
-
-        private static string GetLastCheckFilePath(string packageId)
-        {
-            // The file containing the last-check timestamp is stored in folder of the latest version of the package.
-            const string LastUpdateFileName = "LastCheckedForUpdate.txt";
-
-            var directory = GetSortedPackageFolders(packageId).LastOrDefault();
-            return directory == null ? null : Path.Combine(directory, LastUpdateFileName);
-        }
-
-        private static DateTime GetLastCheckTime(string packageId) =>
-            GetLastCheckFilePath(packageId) is { } filePath
-            && File.Exists(filePath)
-            && DateTime.TryParse(File.ReadAllText(filePath), out var timestamp)
-            ? timestamp
-            : DateTime.MinValue;
 
         private static void InstallWithCommandLine(string packageId, string packageVersion)
         {
@@ -168,6 +118,40 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             }
         }
 
+        private static string GetRealVersionFolder(string packageId, string packageVersion) =>
+            packageVersion != Constants.NuGetLatestVersion
+                ? packageVersion
+                : GetSortedPackageFolders(packageId)
+                    .Select(path => Path.GetFileName(path).Substring(packageId.Length + 1))
+                    .Last(path => char.IsNumber(path[0]));
+
+        /// <summary>
+        /// Returns the list of folders containing installed versions of the specified package,
+        /// or an empty list if the package is not installed.
+        /// </summary>
+        /// <remarks>
+        /// Package directory names are in the form "{package id}.{package version}".
+        /// The list is sorted in ascending order, so the most recent version will be last.
+        /// </remarks>
+        private static IEnumerable<string> GetSortedPackageFolders(string packageId)
+        {
+            // The package will be in a folder called "\packages\{packageId}.{version}", but:
+            // : the package might not be installed
+            // : there might be multiple versions installed
+            // : there might be a package that starts with the same package id
+            //      e.g. Microsoft.AspNetCore.Core and Microsoft.AspNetCore.Core.Diagnostics
+            // Most packages have a three-part version, but some have four. We don't check
+            // the actual number of parts, as long as there is at least one.
+            var matcher = new Regex($@"{Regex.Escape(packageId)}(\.\d+)+$", RegexOptions.IgnoreCase);
+
+            return Directory.Exists(PackagesFolderRelativePath)
+                ? Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}.*", SearchOption.TopDirectoryOnly)
+                    .Where(path => matcher.IsMatch(path))
+                    .OrderBy(name => name)
+                    .ToArray()
+                : Enumerable.Empty<string>();
+        }
+
         private static string GetValidatedNuGetConfigPath()
         {
             var path = Path.GetFullPath(NuGetConfigFileRelativePath);
@@ -199,6 +183,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             return (DateTime.Now.Subtract(lastCheck).TotalDays > VersionCheckDelayInDays);
         }
 
+        private static DateTime GetLastCheckTime(string packageId) =>
+            GetLastCheckFilePath(packageId) is { } filePath
+            && File.Exists(filePath)
+            && DateTime.TryParse(File.ReadAllText(filePath), out var timestamp)
+            ? timestamp
+            : DateTime.MinValue;
+
         private static void WriteLastUpdateFile(string packageId)
         {
             var filePath = GetLastCheckFilePath(packageId);
@@ -207,6 +198,15 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 return;
             }
             File.WriteAllText(filePath, DateTime.Now.ToString("d")); // short date pattern
+        }
+
+        private static string GetLastCheckFilePath(string packageId)
+        {
+            // The file containing the last-check timestamp is stored in folder of the latest version of the package.
+            const string LastUpdateFileName = "LastCheckedForUpdate.txt";
+
+            var directory = GetSortedPackageFolders(packageId).LastOrDefault();
+            return directory == null ? null : Path.Combine(directory, LastUpdateFileName);
         }
     }
 }
