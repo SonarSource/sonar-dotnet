@@ -25,5 +25,13 @@ namespace Tests.TestCases
         public static T tProp { get; set; }
 
         internal static string sField; //Noncompliant
+
+        internal string NestedClassUsage => NestedClass.StringField;
+
+        //https://github.com/SonarSource/sonar-dotnet/issues/4081
+        private static class NestedClass
+        {
+            public static readonly string StringField = "String"; // FN
+        }
     }
 }
