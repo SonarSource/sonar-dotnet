@@ -57,6 +57,7 @@
     <Compile Include="LooseFilePermissions.cs" />
     <Compile Include="LosFormatterTest.cs" />
     <Compile Include="NetDataContractSerializerDeserializeTest.cs" />
+    <Compile Include="PubliclyWritableDirectoriesTest.cs" />
     <Compile Include="UsingNonstandardCryptographyTest.cs" />
     <Compile Include="HashesShouldHaveUnpredictableSaltTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

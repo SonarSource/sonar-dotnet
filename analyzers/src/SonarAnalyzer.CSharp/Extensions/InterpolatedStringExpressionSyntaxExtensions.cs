@@ -26,6 +26,6 @@ namespace SonarAnalyzer.Extensions
     public static class InterpolatedStringExpressionSyntaxExtensions
     {
         public static string GetContentsText(this InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
-            interpolatedStringExpression.Contents.JoinStr("", content => content.ToString());
+            interpolatedStringExpression.Contents.JoinStr(null, content => content.ToString());
     }
 }

@@ -18,18 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Facade
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Helpers;
+
+namespace SonarAnalyzer.Extensions
 {
-    public interface ISyntaxKindFacade<TSyntaxKind>
-        where TSyntaxKind : struct
+    public static class InterpolatedStringExpressionSyntaxExtensions
     {
-        abstract TSyntaxKind InvocationExpression { get; }
-        abstract TSyntaxKind ObjectCreationExpression { get; }
-        abstract TSyntaxKind EnumDeclaration { get; }
-        abstract TSyntaxKind SimpleMemberAccessExpression { get; }
-        abstract TSyntaxKind Attribute { get; }
-        abstract TSyntaxKind IdentifierName { get; }
-        abstract TSyntaxKind StringLiteralExpression { get; }
-        abstract TSyntaxKind InterpolatedStringExpression { get; }
+        public static string GetContentsText(this InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
+            interpolatedStringExpression.Contents.JoinStr(null, content => content.ToString());
     }
 }

@@ -23,6 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Helpers.Facade
 {
@@ -58,6 +59,14 @@ namespace SonarAnalyzer.Helpers.Facade
                 ModifiedIdentifierSyntax variable => variable.Identifier,
                 null => null,
                 _ => throw Unexpected(node)
+            };
+
+        public override string NodeStringTextValue(SyntaxNode node) =>
+            node switch
+            {
+                InterpolatedStringExpressionSyntax interpolatedStringExpression => interpolatedStringExpression.GetContentsText(),
+                LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
+                _ => string.Empty
             };
     }
 }

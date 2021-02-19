@@ -30,5 +30,7 @@ namespace SonarAnalyzer.Helpers.Facade
         public SyntaxKind SimpleMemberAccessExpression => SyntaxKind.SimpleMemberAccessExpression;
         public SyntaxKind Attribute => SyntaxKind.Attribute;
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
+        public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
+        public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
     }
 }

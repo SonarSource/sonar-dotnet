@@ -18,18 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Facade
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
+
+namespace SonarAnalyzer.UnitTest.Rules
 {
-    public interface ISyntaxKindFacade<TSyntaxKind>
-        where TSyntaxKind : struct
+    [TestClass]
+    public class PubliclyWritableDirectoriesTest
     {
-        abstract TSyntaxKind InvocationExpression { get; }
-        abstract TSyntaxKind ObjectCreationExpression { get; }
-        abstract TSyntaxKind EnumDeclaration { get; }
-        abstract TSyntaxKind SimpleMemberAccessExpression { get; }
-        abstract TSyntaxKind Attribute { get; }
-        abstract TSyntaxKind IdentifierName { get; }
-        abstract TSyntaxKind StringLiteralExpression { get; }
-        abstract TSyntaxKind InterpolatedStringExpression { get; }
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PubliclyWritableDirectories_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.cs", new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PubliclyWritableDirectories_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PubliclyWritableDirectories.vb", new VB.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
     }
 }

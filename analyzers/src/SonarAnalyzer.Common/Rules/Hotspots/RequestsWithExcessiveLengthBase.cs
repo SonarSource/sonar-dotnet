@@ -136,7 +136,8 @@ namespace SonarAnalyzer.Rules
             return SupportedDiagnostics.Any(d => analyzerConfiguration.IsEnabled(d.Id));
         }
 
-        private struct Attributes // This struct is used as the same attributes can not be applied multiple times to the same declaration.
+        // This struct is used as the same attributes can not be applied multiple times to the same declaration.
+        private struct Attributes
         {
             private readonly TAttributeSyntax requestForm;
             private readonly TAttributeSyntax requestSize;
