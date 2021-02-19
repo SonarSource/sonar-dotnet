@@ -169,8 +169,6 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string FileName { get; }
 
-        // ToDo: Remove this hardcoded hack as soon as the following ticket is fixed:
-        // https://jira.sonarsource.com/browse/MMF-672
         private static bool ShouldGenerateMetrics(SyntaxTree tree) =>
             FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath));
     }

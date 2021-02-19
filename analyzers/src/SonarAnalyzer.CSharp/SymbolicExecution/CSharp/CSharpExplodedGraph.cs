@@ -1143,7 +1143,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             if (sv == null)
             {
-                if (symbol is IFieldSymbol fieldSymbol) // ToDo: Fix me when implementing SLVS-1130
+                if (symbol is IFieldSymbol fieldSymbol)
                 {
                     sv = fieldSymbol.CreateFieldSymbolicValue();
                     newProgramState = newProgramState.StoreSymbolicValue(symbol, sv);
@@ -1153,6 +1153,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     sv = SymbolicValue.Create(typeSymbol);
                 }
             }
+
             newProgramState = newProgramState.PushValue(sv);
 
             var parenthesized = identifier.GetSelfOrTopParenthesizedExpression();
@@ -1262,7 +1263,6 @@ namespace SonarAnalyzer.SymbolicExecution
         private ProgramState VisitTuple(TupleExpressionSyntaxWrapper tuple, ProgramState programState)
         {
             // TupleExpressions are not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/2933
-            // ToDo: Constraints should be set correctly
             for (var i = 0; i < tuple.Arguments.Count; i++)
             {
                 programState = programState.PopValue();

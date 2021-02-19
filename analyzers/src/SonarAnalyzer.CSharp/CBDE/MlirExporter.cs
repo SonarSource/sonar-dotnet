@@ -266,8 +266,8 @@ namespace SonarAnalyzer.CBDE
                     writer.WriteLine($"br ^{BlockId(jb.SuccessorBlock)} {GetLocation(continueStmt)} // continue");
                     break;
                 case ThrowStatementSyntax throwStmt:
-                    // TODO : Should we transfer to a catch block if we are inside a try/catch?
-                    // This is part of https://github.com/SonarSource/SonarCBDE/issues/111
+                    // Should we transfer to a catch block if we are inside a try/catch?
+                    // See: https://github.com/SonarSource/SonarCBDE/issues/111
                     writer.WriteLine($"cbde.throw %{OpId(throwStmt.Expression)} :  {MlirType(throwStmt.Expression)} {GetLocation(throwStmt)}");
                     break;
                 default:
@@ -810,8 +810,9 @@ namespace SonarAnalyzer.CBDE
             {
                 return string.Empty;
             }
-            // TODO: We should decide which of GetLineSpan or GetMappedLineSpan is better to use
-            // This is part of https://github.com/SonarSource/SonarCBDE/issues/30
+
+            // We should decide which one of GetLineSpan or GetMappedLineSpan is better to use
+            // See: https://github.com/SonarSource/SonarCBDE/issues/30
             var loc = node.GetLocation().GetLineSpan();
             var location = $"loc(\"{loc.Path}\"" +
                 $" :{loc.StartLinePosition.Line}" +

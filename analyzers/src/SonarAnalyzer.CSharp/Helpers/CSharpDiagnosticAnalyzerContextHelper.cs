@@ -57,7 +57,6 @@ namespace SonarAnalyzer.Helpers
             context.ReportDiagnosticIfNonGenerated(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
 
         internal static bool ShouldAnalyze(this SyntaxTree tree, AnalyzerOptions options, Compilation compilation) =>
-            // ToDo: PERF: do the global setting check before the per-file check.
             DiagnosticAnalyzerContextHelper.ShouldAnalyze(CSharpGeneratedCodeRecognizer.Instance, tree, compilation, options);
     }
 }
