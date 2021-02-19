@@ -18,11 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
+extern alias vbnet;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -163,6 +166,11 @@ namespace SonarAnalyzer.UnitTest.Common
                     // when their ID is contained in SonarLint.xml
                     diagnostic.IsEnabledByDefault.Should().BeTrue($"{diagnostic.Id} should be enabled by default");
                 }
+                else if (IsDeprecated(diagnostic))
+                {
+                    // Deprecated rules should be removed from SonarWay
+                    diagnostic.IsEnabledByDefault.Should().BeFalse($"{diagnostic.Id} is deprecated and should be disabled by default (removed from SonarWay)");
+                }
                 else if (parameterized.Contains(diagnostic))
                 {
                     // Even if a a parametrized rule is in Sonar way profile, it is still disabled by default.
@@ -215,5 +223,31 @@ namespace SonarAnalyzer.UnitTest.Common
 
         private static IEnumerable<Type> GetCodeFixProviderTypes(IEnumerable<Assembly> assemblies) =>
             assemblies.SelectMany(assembly => assembly.GetTypes()).Where(t => t.IsSubclassOf(typeof(SonarCodeFixProvider)));
+
+        private static bool IsDeprecated(DiagnosticDescriptor diagnostic)
+        {
+            return LanguageResources().GetString(diagnostic.Id + "_Status") switch
+            {
+                null => throw new InvalidOperationException($"Missing {diagnostic.Id}_Status in {nameof(csharp::SonarAnalyzer.RspecStrings)} resources"),
+                "deprecated" => true,
+                _ => false
+            };
+
+            ResourceManager LanguageResources()
+            {
+                if (diagnostic.CustomTags.Contains(LanguageNames.CSharp))
+                {
+                    return csharp::SonarAnalyzer.RspecStrings.ResourceManager;
+                }
+                else if (diagnostic.CustomTags.Contains(LanguageNames.VisualBasic))
+                {
+                    return vbnet::SonarAnalyzer.RspecStrings.ResourceManager;
+                }
+                else
+                {
+                    throw new InvalidOperationException($"{nameof(AllCSharpRules_HaveCSharpTag)} or {nameof(AllVbNetRules_HaveVbNetTag)} should fail, fix them first.");
+                }
+            }
+        }
     }
 }
