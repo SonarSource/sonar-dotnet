@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         private static readonly PackageManager PackageManager = new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
 
-        private static readonly string[] AllowedNuGetLibDirectoriesInOrderOfPreference = new string[]
+        private static readonly string[] SortedAllowedDirectories = new string[]
             {
                 "net",
                 "netstandard2.1",
@@ -52,14 +52,14 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 "net40",
                 "net20",
                 "portable-net45",
-                "lib",
+                "lib", // This has to be last, some packages have DLLs directly in "lib" directory
             };
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime, string targetFramework) =>
             Create(new Package(packageId, packageVersion, runtime), new[] { targetFramework });
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime = null) =>
-            Create(new Package(packageId, packageVersion, runtime), AllowedNuGetLibDirectoriesInOrderOfPreference);
+            Create(new Package(packageId, packageVersion, runtime), SortedAllowedDirectories);
 
         public static IEnumerable<MetadataReference> CreateNETStandard21()
         {
@@ -83,47 +83,26 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                .ToImmutableArray();
         }
 
-        private static IEnumerable<MetadataReference> Create(Package package, string[] allowedTargetFrameworks)
-        {
-            package.EnsurePackageIsInstalled();
-
-            var allowedNuGetLibDirectoriesByPreference = allowedTargetFrameworks.Select((folder, priority) => new { folder, priority });
-            var packageDirectory = package.PackageDirectory();
-            LogMessage($"Download package directory: {packageDirectory}");
-            if (!Directory.Exists(packageDirectory))
-            {
-                throw new ApplicationException($"Test setup error: folder for downloaded package does not exist. Folder: {packageDirectory}");
-            }
-
-            var matchingDllsGroups = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
-                .Select(path => new FileInfo(path))
-                .GroupBy(file => file.Directory.Name).ToArray();
-            IGrouping<string, FileInfo> selectedGroup;
-
-            selectedGroup = matchingDllsGroups.Length == 1 && matchingDllsGroups[0].Key.EndsWith(".dll")
-                ? matchingDllsGroups[0]
-                : matchingDllsGroups.Join(allowedNuGetLibDirectoriesByPreference,
-                    group => group.Key.Split('+').First(),
-                    allowed => allowed.folder,
-                    (group, allowed) => new { group, allowed.priority })
-                .OrderBy(merged => merged.priority)
-                .First()
-                .group;
-
-            DumpSelectedGroup(package, selectedGroup);
-
-            return selectedGroup.Select(file => MetadataReference.CreateFromFile(file.FullName)).ToImmutableArray();
-        }
-
-        private static void DumpSelectedGroup(Package package, IGrouping<string, FileInfo> fileGroup)
+        private static IEnumerable<MetadataReference> Create(Package package, string[] allowedDirectories)
         {
             Console.WriteLine();
-            Console.WriteLine($"Package: {package.Id}");
-            Console.WriteLine($"Version: {package.Version}, chosen targetFramework: {fileGroup.Key}");
-            foreach (var file in fileGroup)
+            Console.WriteLine($"Package: {package.Id}, {package.Version}");
+            package.EnsurePackageIsInstalled();
+
+            var packageDirectory = package.PackageDirectory();
+            if (!Directory.Exists(packageDirectory))
             {
-                Console.WriteLine($"File: {file.FullName}");
+                throw new ApplicationException($"Test setup error: Package directory doesn't exist: {packageDirectory}");
             }
+            var dllsPerDirectory = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
+                .GroupBy(x => new FileInfo(x).Directory.Name)
+                .ToDictionary(x => x.Key.Split('+').First(), x => x.AsEnumerable());
+            var dlls = dllsPerDirectory[allowedDirectories.First(x => dllsPerDirectory.ContainsKey(x))];
+            foreach (var file in dlls)
+            {
+                Console.WriteLine($"File: {file}");
+            }
+            return dlls.Select(x => MetadataReference.CreateFromFile(x)).ToArray();
         }
 
         private static IPackageRepository CreatePackageRepository()

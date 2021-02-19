@@ -122,6 +122,17 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                         LogMessage($"  nuget.exe: ERROR: {e.Data}");
                     }
                 }
+
+                static string ValidatedNuGetConfigPath()
+                {
+                    var path = Path.GetFullPath(NuGetConfigFileRelativePath);
+                    if (!File.Exists(path))
+                    {
+                        throw new ApplicationException($"Test setup error: failed to find nuget.config file at \"{path}\"");
+                    }
+                    LogMessage($"Path to nuget.config: {path}");
+                    return path;
+                }
             }
 
             /// <summary>
@@ -146,17 +157,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 return Directory.Exists(PackagesFolderRelativePath)
                     ? Directory.GetDirectories(PackagesFolderRelativePath, $"{Id}.*", SearchOption.TopDirectoryOnly).Where(x => matcher.IsMatch(x)).OrderBy(x => x)
                     : Enumerable.Empty<string>();
-            }
-
-            private static string ValidatedNuGetConfigPath()
-            {
-                var path = Path.GetFullPath(NuGetConfigFileRelativePath);
-                if (!File.Exists(path))
-                {
-                    throw new ApplicationException($"Test setup error: failed to find nuget.config file at \"{path}\"");
-                }
-                LogMessage($"Path to nuget.config: {path}");
-                return path;
             }
 
             private bool IsCheckForLatestPackageRequired()
