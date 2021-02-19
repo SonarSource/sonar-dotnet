@@ -43,14 +43,14 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                     .Select(path => Path.GetFileName(path).Substring(packageId.Length + 1))
                     .Last(path => char.IsNumber(path[0]));
 
-        private static void EnsurePackageIsInstalled(string packageId, string packageVersion, string runtime, Action<string, string> installPackage)
+        private static void EnsurePackageIsInstalled(string packageId, string packageVersion, string runtime)
         {
             if (packageVersion == Constants.NuGetLatestVersion)
             {
                 if (IsCheckForLatestPackageRequired(packageId))
                 {
                     LogMessage($"Checking for newer version of package: {packageId}");
-                    installPackage(packageId, packageVersion);
+                    InstallWithCommandLine(packageId, packageVersion);
                     WriteLastUpdateFile(packageId);
                 }
                 else
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 else
                 {
                     LogMessage($"Package not found at {packageDir}");
-                    installPackage(packageId, packageVersion);
+                    InstallWithCommandLine(packageId, packageVersion);
                 }
             }
         }

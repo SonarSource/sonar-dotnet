@@ -56,13 +56,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime) =>
-            Create(packageId, packageVersion, AllowedNuGetLibDirectoriesInOrderOfPreference, runtime, InstallPackage);
+            Create(packageId, packageVersion, AllowedNuGetLibDirectoriesInOrderOfPreference, runtime);
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework, string runtime) =>
-            Create(packageId, packageVersion, new[] { targetFramework }, runtime, InstallPackage);
+            Create(packageId, packageVersion, new[] { targetFramework }, runtime);
 
         public static IEnumerable<MetadataReference> CreateWithCommandLine(string packageId, string packageVersion, string runtime = null) =>
-            Create(packageId, packageVersion, AllowedNuGetLibDirectoriesInOrderOfPreference, runtime, InstallWithCommandLine);
+            Create(packageId, packageVersion, AllowedNuGetLibDirectoriesInOrderOfPreference, runtime);
 
         public static IEnumerable<MetadataReference> CreateNETStandard21()
         {
@@ -88,9 +88,9 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                .ToImmutableArray();
         }
 
-        private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string[] allowedTargetFrameworks, string runtime, Action<string, string> installPackage)
+        private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string[] allowedTargetFrameworks, string runtime)
         {
-            EnsurePackageIsInstalled(packageId, packageVersion, runtime, installPackage);
+            EnsurePackageIsInstalled(packageId, packageVersion, runtime);
 
             var allowedNuGetLibDirectoriesByPreference = allowedTargetFrameworks.Select((folder, priority) => new { folder, priority });
             var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion, runtime);
