@@ -18,15 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.PackagingTests;
 using SonarAnalyzer.UnitTest.TestFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SonarAnalyzer.UnitTest
 {
@@ -176,6 +178,13 @@ namespace SonarAnalyzer.UnitTest
             {
                 asserts[i](items[i]);
             }
+        }
+
+        public static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
+        {
+            var key = diagnostic.Id.Substring(1);
+            var type = CsRuleTypeMapping.RuleTypesCs.GetValueOrDefault(key) ?? VbRuleTypeMapping.RuleTypesVb.GetValueOrDefault(key);
+            return type == "SECURITY_HOTSPOT";
         }
     }
 }

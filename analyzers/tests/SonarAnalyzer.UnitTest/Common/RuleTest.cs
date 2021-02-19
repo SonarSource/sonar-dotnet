@@ -31,6 +31,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using SonarAnalyzer.Utilities;
+using static SonarAnalyzer.UnitTest.TestHelper;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -133,8 +134,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void AllParameterizedRules_AreDisabledByDefault()
-        {
+        public void AllParameterizedRules_AreDisabledByDefault() =>
             new RuleFinder().AllAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
@@ -142,12 +142,11 @@ namespace SonarAnalyzer.UnitTest.Common
                 .Where(analyzer => !IsSecurityHotspot(analyzer))
                 .ToList()
                 .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeFalse());
-        }
 
         [TestMethod]
         public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
         {
-            var descriptors = new RuleFinder().AllAnalyzerTypes.SelectMany(type => GetSupportedDiagnostics(type))
+            var descriptors = new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics)
                 // Security hotspots are enabled by default, but they will report issues only
                 // when their ID is contained in SonarLint.xml
                 .Where(descriptor => !IsSecurityHotspot(descriptor))
@@ -165,25 +164,17 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void AllCSharpRules_HaveCSharpTag()
-        {
-            GetSupportedDiagnostics(AnalyzerLanguage.CSharp)
-                .ToList()
-                .ForEach(diagnostic => diagnostic.CustomTags.Should().Contain(LanguageNames.CSharp));
-        }
+        public void AllCSharpRules_HaveCSharpTag() =>
+            SupportedDiagnostics(AnalyzerLanguage.CSharp).Should().OnlyContain(diagnostic => diagnostic.CustomTags.Contains(LanguageNames.CSharp));
 
         [TestMethod]
-        public void AllVbNetRules_HaveVbNetTag()
-        {
-            GetSupportedDiagnostics(AnalyzerLanguage.VisualBasic)
-                .ToList()
-                .ForEach(diagnostic => diagnostic.CustomTags.Should().Contain(LanguageNames.VisualBasic));
-        }
+        public void AllVbNetRules_HaveVbNetTag() =>
+            SupportedDiagnostics(AnalyzerLanguage.VisualBasic).Should().OnlyContain(diagnostic => diagnostic.CustomTags.Contains(LanguageNames.VisualBasic));
 
         [TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
-            var allAnalyzers =new RuleFinder().AllAnalyzerTypes.SelectMany(type => GetSupportedDiagnostics(type));
+            var allAnalyzers = new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics);
 
             var parameterizedAnalyzers = new RuleFinder().AllAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
@@ -220,31 +211,35 @@ namespace SonarAnalyzer.UnitTest.Common
 
         [TestMethod]
         [TestCategory("Hotspot")]
-        public void SecurityHotspots_Rules_Not_Configurable()
-        {
-            var hotspotDiagnosticDescriptors = GetSupportedDiagnostics(AnalyzerLanguage.CSharp)
-                .Where(IsSecurityHotspot)
-                .ToList();
+        public void OnlySecurityHotspots_AreNotConfigurable_CS() =>
+            OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.CSharp);
 
-            foreach (var descriptor in hotspotDiagnosticDescriptors)
+        [TestMethod]
+        [TestCategory("Hotspot")]
+        public void OnlySecurityHotspots_AreNotConfigurable_VB() =>
+            OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.VisualBasic);
+
+        private static void OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage language)
+        {
+            foreach (var diagnostic in SupportedDiagnostics(language))
             {
-                descriptor.CustomTags.Should().Contain(
-                    WellKnownDiagnosticTags.NotConfigurable,
-                    because: $"{descriptor.Id} is hotspot and should not be configurable");
+                if (IsSecurityHotspot(diagnostic))
+                {
+                    diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.NotConfigurable).Should().BeTrue(diagnostic.Id + " is a Security Hotspot and should not be configurable");
+                }
+                else
+                {
+                    diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.NotConfigurable).Should().BeFalse(diagnostic.Id + " is not a Security Hotspot and should be configurable");
+                }
             }
         }
 
-        private static IEnumerable<DiagnosticDescriptor> GetSupportedDiagnostics(AnalyzerLanguage language) =>
-            new RuleFinder()
-                .GetAnalyzerTypes(language)
-                .SelectMany(type => GetSupportedDiagnostics(type));
+        private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(AnalyzerLanguage language) =>
+            new RuleFinder().GetAnalyzerTypes(language).SelectMany(SupportedDiagnostics);
 
-        private static ImmutableArray<DiagnosticDescriptor> GetSupportedDiagnostics(Type type) =>
-            typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type)
-                ? ((SonarDiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics
+        private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(Type type) =>
+            typeof(DiagnosticAnalyzer).IsAssignableFrom(type)
+                ? ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics
                 : ((IRuleFactory)Activator.CreateInstance(type)).SupportedDiagnostics;
-
-        private static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic) =>
-            diagnostic.Category.IndexOf("hotspot", StringComparison.OrdinalIgnoreCase) >= 0;
     }
 }

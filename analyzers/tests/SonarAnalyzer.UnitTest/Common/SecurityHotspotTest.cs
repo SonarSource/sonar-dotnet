@@ -20,16 +20,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
-using FluentAssertions.Common;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
-using SonarAnalyzer.UnitTest.PackagingTests;
 using SonarAnalyzer.UnitTest.Rules;
 using SonarAnalyzer.UnitTest.TestFramework;
 using SonarAnalyzer.Utilities;
@@ -40,31 +37,29 @@ namespace SonarAnalyzer.UnitTest.Common
     public class SecurityHotspotTest
     {
         [TestMethod]
-        public void SecurityHotspotRules_AreDisabledByDefault()
-        {
+        public void SecurityHotspotRules_DoNotRaiseIssues_CS() =>
             VerifyNoIssueReported(AnalyzerLanguage.CSharp);
+
+        [TestMethod]
+        public void SecurityHotspotRules_DoNotRaiseIssues_VB() =>
             VerifyNoIssueReported(AnalyzerLanguage.VisualBasic);
-        }
 
         private static void VerifyNoIssueReported(AnalyzerLanguage language)
         {
             foreach (var analyzer in GetHotspotAnalyzers(language).Where(IsTestValid))
             {
-                Verifier.VerifyNoIssueReported(@$"TestCases\Hotspots\{GetTestCaseFileName(analyzer)}.{language.FileExtension}",
-                                               analyzer,
-                                               GetAdditionalReferences());
+                Verifier.VerifyNoIssueReported(@$"TestCases\Hotspots\{GetTestCaseFileName(analyzer)}.{language.FileExtension}", analyzer, GetAdditionalReferences());
             }
         }
 
         private static IEnumerable<SonarDiagnosticAnalyzer> GetHotspotAnalyzers(AnalyzerLanguage language) =>
             new RuleFinder().GetAnalyzerTypes(language)
-                .Where(type => type.Implements(typeof(DiagnosticAnalyzer)))
+                .Where(type => typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type))   // Avoid IRuleFactory and SE rules
                 .Select(type => (SonarDiagnosticAnalyzer)Activator.CreateInstance(type))
                 .Where(IsSecurityHotspot);
 
         private static bool IsSecurityHotspot(DiagnosticAnalyzer analyzer) =>
-            analyzer.SupportedDiagnostics
-                    .Any(diagnostic => CsRuleTypeMapping.RuleTypesCs.GetValueOrDefault(diagnostic.Id.TrimStart('S')) == "SECURITY_HOTSPOT");
+            analyzer.SupportedDiagnostics.Any(TestHelper.IsSecurityHotspot);
 
         private static string GetTestCaseFileName(DiagnosticAnalyzer analyzer)
         {
