@@ -29,16 +29,14 @@ import org.mockito.ArgumentCaptor;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Settings;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -78,16 +76,11 @@ public class FileTypeSensorTest {
 
   @Test
   public void should_describe() {
-    SensorDescriptor desc = mock(SensorDescriptor.class);
-    sensor.describe(desc);
-
-    verify(desc).name("Verify what types of files (MAIN, TEST) are in LANG_KEY projects.");
-    verify(desc, never()).onlyOnLanguage(any());
-    verify(desc, never()).onlyOnLanguages(any());
-    verify(desc, never()).onlyOnFileType(any());
-    verify(desc, never()).onlyWhenConfiguration(any());
-    verify(desc, never()).createIssuesForRuleRepository(any());
-    verify(desc, never()).createIssuesForRuleRepositories(any());
+    DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
+    sensor.describe(sensorDescriptor);
+    assertThat(sensorDescriptor.name()).isEqualTo("Verify what types of files (MAIN, TEST) are in LANG_KEY projects.");
+    // should not filter per language
+    assertThat(sensorDescriptor.languages()).isEmpty();
   }
 
   @Test
@@ -126,7 +119,7 @@ public class FileTypeSensorTest {
     assertThat(logTester.logs()).hasSize(1);
     // we haven't mocked the base dir and project out settings
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project 'FOO_PROJ' (base dir ''). For debug info, see ProjectInfo.xml in ''.");
-    verify(projectTypeCollectorMock, times(1)).addProjectInfo( false, false);
+    verify(projectTypeCollectorMock, times(1)).addProjectInfo(false, false);
   }
 
   @Test
@@ -139,7 +132,7 @@ public class FileTypeSensorTest {
     assertThat(logTester.logs()).hasSize(1);
     // we haven't mocked the base dir and project out settings
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'true') for project 'FOO_PROJ' (base dir ''). For debug info, see ProjectInfo.xml in ''.");
-    verify(projectTypeCollectorMock, times(1)).addProjectInfo( false, true);
+    verify(projectTypeCollectorMock, times(1)).addProjectInfo(false, true);
   }
 
   @Test
@@ -150,7 +143,7 @@ public class FileTypeSensorTest {
     sensor.execute(tester);
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'false') for project 'FOO_PROJ' (base dir ''). For debug info, see ProjectInfo.xml in ''.");
-    verify(projectTypeCollectorMock, times(1)).addProjectInfo( true, false);
+    verify(projectTypeCollectorMock, times(1)).addProjectInfo(true, false);
   }
 
   @Test
