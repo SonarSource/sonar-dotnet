@@ -56,13 +56,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             };
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime) =>
-            Create(packageId, packageVersion, AllowedNuGetLibDirectoriesInOrderOfPreference, runtime);
+            Create(new Package(packageId, packageVersion, runtime), AllowedNuGetLibDirectoriesInOrderOfPreference);
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework, string runtime) =>
-            Create(packageId, packageVersion, new[] { targetFramework }, runtime);
+            Create(new Package(packageId, packageVersion, runtime), new[] { targetFramework });
 
         public static IEnumerable<MetadataReference> CreateWithCommandLine(string packageId, string packageVersion, string runtime = null) =>
-            Create(packageId, packageVersion, AllowedNuGetLibDirectoriesInOrderOfPreference, runtime);
+            Create(new Package(packageId, packageVersion, runtime), AllowedNuGetLibDirectoriesInOrderOfPreference);
 
         public static IEnumerable<MetadataReference> CreateNETStandard21()
         {
@@ -88,12 +88,12 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                .ToImmutableArray();
         }
 
-        private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string[] allowedTargetFrameworks, string runtime)
+        private static IEnumerable<MetadataReference> Create(Package package, string[] allowedTargetFrameworks)
         {
-            EnsurePackageIsInstalled(packageId, packageVersion, runtime);
+            package.EnsurePackageIsInstalled();
 
             var allowedNuGetLibDirectoriesByPreference = allowedTargetFrameworks.Select((folder, priority) => new { folder, priority });
-            var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion, runtime);
+            var packageDirectory = package.GetNuGetPackageDirectory();
             LogMessage($"Download package directory: {packageDirectory}");
             if (!Directory.Exists(packageDirectory))
             {
@@ -115,16 +115,16 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 .First()
                 .group;
 
-            DumpSelectedGroup(packageId, packageVersion, selectedGroup);
+            DumpSelectedGroup(package, selectedGroup);
 
             return selectedGroup.Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName)).ToImmutableArray();
         }
 
-        private static void DumpSelectedGroup(string packageId, string packageVersion, IGrouping<string, FileInfo> fileGroup)
+        private static void DumpSelectedGroup(Package package, IGrouping<string, FileInfo> fileGroup)
         {
             Console.WriteLine();
-            Console.WriteLine($"Package: {packageId}");
-            Console.WriteLine($"Version: {packageVersion}, chosen targetFramework: {fileGroup.Key}");
+            Console.WriteLine($"Package: {package.Id}");
+            Console.WriteLine($"Version: {package.Version}, chosen targetFramework: {fileGroup.Key}");
             foreach (var file in fileGroup)
             {
                 Console.WriteLine($"File: {file.FullName}");
