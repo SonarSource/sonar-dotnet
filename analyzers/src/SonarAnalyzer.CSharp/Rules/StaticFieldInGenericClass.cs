@@ -35,23 +35,19 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class StaticFieldInGenericClass : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2743";
-        private const string MessageFormat =
-            "A static field in a generic type is not shared among instances of different close constructed types.";
+        private const string MessageFormat = "A static field in a generic type is not shared among instances of different close constructed types.";
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
 
-                    if (classDeclaration.TypeParameterList == null ||
-                        classDeclaration.TypeParameterList.Parameters.Count < 1)
+                    if (classDeclaration.TypeParameterList == null
+                        || classDeclaration.TypeParameterList.Parameters.Count < 1)
                     {
                         return;
                     }
@@ -65,10 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var field in fields.Where(field => !HasGenericType(field.Declaration.Type, typeParameterNames, c)))
                     {
-                        field.Declaration.Variables.ToList().ForEach(variable =>
-                        {
-                            CheckMember(variable, variable.Identifier.GetLocation(), typeParameterNames, c);
-                        });
+                        field.Declaration.Variables.ToList().ForEach(variable => CheckMember(variable, variable.Identifier.GetLocation(), typeParameterNames, c));
                     }
 
                     var properties = classDeclaration.Members
@@ -76,14 +69,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Where(p => p.Modifiers.Any(SyntaxKind.StaticKeyword))
                         .ToList();
 
-                    properties.ForEach(property =>
-                    {
-                        CheckMember(property, property.Identifier.GetLocation(), typeParameterNames, c);
-                    });
+                    properties.ForEach(property => CheckMember(property, property.Identifier.GetLocation(), typeParameterNames, c));
 
                 },
                 SyntaxKind.ClassDeclaration);
-        }
 
         private static void CheckMember(SyntaxNode root, Location location, IEnumerable<string> typeParameterNames,
             SyntaxNodeAnalysisContext context)
@@ -93,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
         }
 
         private static bool HasGenericType(SyntaxNode root, IEnumerable<string> typeParameterNames,
