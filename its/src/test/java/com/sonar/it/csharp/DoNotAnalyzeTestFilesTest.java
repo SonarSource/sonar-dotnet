@@ -20,6 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.BuildResult;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -43,11 +44,17 @@ public class DoNotAnalyzeTestFilesTest {
 
   @Test
   public void should_not_increment_test() throws Exception {
-    Tests.analyzeProjectWithSubProject(temp, PROJECT, "MyLib.Tests", "no_rule", "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
+    BuildResult buildResult = Tests.analyzeProjectWithSubProject(temp, PROJECT, "MyLib.Tests", "no_rule");
 
     assertThat(Tests.getComponent("DoNotAnalyzeTestFilesTest:UnitTest1.cs")).isNotNull();
     assertThat(getMeasureAsInt(PROJECT, "files")).isNull();
     assertThat(getMeasureAsInt(PROJECT, "lines")).isNull();
     assertThat(getMeasureAsInt(PROJECT, "ncloc")).isNull();
+
+    assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
+      .contains("WARN: This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+        "Your SonarQube/SonarCloud project will not have results for C# files. " +
+        "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+    assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild project. 1 TEST project.");
   }
 }

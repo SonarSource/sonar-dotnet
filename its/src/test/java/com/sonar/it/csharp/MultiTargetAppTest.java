@@ -20,6 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Before;
@@ -44,7 +45,7 @@ public class MultiTargetAppTest {
 
   @Test
   public void should_analyze_multitarget_project() throws Exception {
-    Tests.analyzeProjectWithSubProject(temp, "MultiTargetConsoleApp", "MultiTargetConsoleApp", null);
+    BuildResult buildResult = Tests.analyzeProjectWithSubProject(temp, "MultiTargetConsoleApp", "MultiTargetConsoleApp", null);
 
     String programCsComponentId = "MultiTargetConsoleApp:Program.cs";
     assertThat(getComponent(programCsComponentId)).isNotNull();
@@ -54,5 +55,7 @@ public class MultiTargetAppTest {
       .filter(x -> x.getRule().startsWith("csharpsquid:"))
       .collect(Collectors.toList());
     assertThat(issues).hasSize(4);
+
+    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild project. 1 MAIN project.");
   }
 }

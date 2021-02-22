@@ -20,13 +20,13 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.BuildResult;
+import java.io.IOException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
-
-import java.io.IOException;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getIssues;
@@ -38,6 +38,8 @@ public class UnitTestProjectTypeProbingTest {
   private static final String MAIN_AND_TEST_RULE_ID = "csharpsquid:S101";
   private static Boolean isProjectAnalyzed = false;
 
+  private static BuildResult buildResult;
+
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
@@ -45,7 +47,7 @@ public class UnitTestProjectTypeProbingTest {
   public void init() throws IOException {
     if (!isProjectAnalyzed) {
       TestUtils.reset(ORCHESTRATOR);
-      Tests.analyzeProject(temp, PROJECT, null);
+      buildResult = Tests.analyzeProject(temp, PROJECT, null);
 
       isProjectAnalyzed = true;
     }
@@ -90,5 +92,10 @@ public class UnitTestProjectTypeProbingTest {
   @Test
   public void project_WithTestsSuffix_IsIdentifiedAsTestProject() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.EndsWithTests/calculator.cs")).isEmpty();
+  }
+
+  @Test
+  public void logsContainInfo() {
+    assertThat(buildResult.getLogs()).contains("Found 7 MSBuild projects. 3 MAIN projects. 4 TEST projects.");
   }
 }

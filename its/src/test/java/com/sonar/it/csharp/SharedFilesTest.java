@@ -20,6 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
@@ -38,13 +39,13 @@ public class SharedFilesTest {
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
-  public void init(){
+  public void init() {
     TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
   public void should_analyze_shared_files() throws Exception {
-    Tests.analyzeProject(temp, "SharedFilesTest", null, "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
+    BuildResult buildResult = Tests.analyzeProject(temp, "SharedFilesTest", null, "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(getComponent("SharedFilesTest:Class1.cs")).isNotNull();
     assertThat(getComponent("SharedFilesTest:ConsoleApp1/Program1.cs")).isNotNull();
@@ -57,5 +58,7 @@ public class SharedFilesTest {
 
     List<Issue> issues = getIssues("SharedFilesTest:Class1.cs");
     assertThat(issues).hasSize(1);
+
+    assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 2 MSBuild projects. 3 MAIN projects.");
   }
 }

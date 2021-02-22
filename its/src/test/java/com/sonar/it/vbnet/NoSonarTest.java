@@ -21,8 +21,7 @@ package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import java.nio.file.Path;
+import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -30,8 +29,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
-import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
-import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NoSonarTest {
@@ -43,11 +40,12 @@ public class NoSonarTest {
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
   private static final String PROJECT = "VbNoSonarTest";
+  private static BuildResult buildResult;
 
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(orchestrator);
-    Tests.analyzeProject(temp, PROJECT, "vbnet_class_name");
+    buildResult = Tests.analyzeProject(temp, PROJECT, "vbnet_class_name");
   }
 
   @Test
@@ -58,6 +56,11 @@ public class NoSonarTest {
       assertThat(e.getLine()).isEqualTo(19);
       assertThat(e.getRule()).isEqualTo("vbnet:S101");
     });
+  }
+
+  @Test
+  public void logsContainInfo() {
+    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild project. 1 MAIN project.");
   }
 
 }
