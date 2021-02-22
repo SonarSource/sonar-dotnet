@@ -43,6 +43,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * This is copy pasted from MetricsTest. It does not re-test everything, it just makes sure
  * that when 'ignoreHeaderComments' is set to False, it counts the header comments as well
  * and it does not modify the LOC metrics.
+ *
+ * <p>
+ * Note: this class runs the analysis once in {@link MetricsIncludeHeaderCommentTest#getRuleChain()}, before the tests.
+ * </p>
  */
 public class MetricsIncludeHeaderCommentTest {
 
@@ -53,39 +57,9 @@ public class MetricsIncludeHeaderCommentTest {
   private static final String FILE = "MetricsTest:foo/Class1.cs";
   private static final int NUMBER_OF_HEADER_COMMENT_LINES = 2;
 
+  // This is where the analysis is done.
   @ClassRule
   public static RuleChain chain = getRuleChain();
-
-  private static RuleChain getRuleChain() {
-    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
-
-    TestUtils.deleteLocalCache();
-
-    return RuleChain
-      .outerRule(ORCHESTRATOR)
-      .around(temp)
-      .around(new ExternalResource() {
-        @Override
-        protected void before() throws Throwable {
-          TestUtils.reset(ORCHESTRATOR);
-
-          Path projectDir = Tests.projectDir(temp, "MetricsTest");
-
-          ScannerForMSBuild beginStep = TestUtils.createBeginStep("MetricsTest", projectDir)
-            .setProfile("no_rule")
-            // Without that, the MetricsTest project is considered as a Test project :)
-            .setProperty("sonar.msbuild.testProjectPattern", "noTests");
-
-          ORCHESTRATOR.executeBuild(beginStep);
-
-          setIgnoreHeaderCommentsToFalse(projectDir);
-
-          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
-
-          ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
-        }
-      });
-  }
 
   @Test
   public void projectIsAnalyzed() {
@@ -159,11 +133,41 @@ public class MetricsIncludeHeaderCommentTest {
     return getMeasureAsInt(FILE, metricKey);
   }
 
+  private static RuleChain getRuleChain() {
+    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
+
+    TestUtils.deleteLocalCache();
+
+    return RuleChain
+      .outerRule(ORCHESTRATOR)
+      .around(temp)
+      .around(new ExternalResource() {
+        @Override
+        protected void before() throws Throwable {
+          TestUtils.reset(ORCHESTRATOR);
+
+          Path projectDir = Tests.projectDir(temp, "MetricsTest");
+
+          ScannerForMSBuild beginStep = TestUtils.createBeginStep("MetricsTest", projectDir)
+            .setProfile("no_rule")
+            // Without that, the MetricsTest project is considered as a Test project :)
+            .setProperty("sonar.msbuild.testProjectPattern", "noTests");
+
+          ORCHESTRATOR.executeBuild(beginStep);
+
+          setIgnoreHeaderCommentsToFalse(projectDir);
+
+          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+
+          ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+        }
+      });
+  }
+
   private static void setIgnoreHeaderCommentsToFalse(Path projectDir) throws IOException {
     StringBuilder sb = new StringBuilder();
     String sonarLintXml = projectDir + "\\.sonarqube\\conf\\cs\\SonarLint.xml";
-    try (BufferedReader reader = new BufferedReader(new FileReader(sonarLintXml)))
-    {
+    try (BufferedReader reader = new BufferedReader(new FileReader(sonarLintXml))) {
       String currentLine;
       while ((currentLine = reader.readLine()) != null) {
         if (currentLine.contains("sonar.cs.ignoreHeaderComments")) {
