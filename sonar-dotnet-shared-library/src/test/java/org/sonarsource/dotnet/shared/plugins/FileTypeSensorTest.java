@@ -43,14 +43,12 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class FileTypeSensorTest {
-  public static final String LANG_KEY = "LANG_KEY";
+  private static final String LANG_KEY = "LANG_KEY";
 
   @Rule
   public LogTester logTester = new LogTester();
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
-
-  private Path workDir;
 
   private Settings settingsMock;
   private SensorContextTester tester;
@@ -60,7 +58,7 @@ public class FileTypeSensorTest {
 
   @Before
   public void prepare() throws Exception {
-    workDir = temp.newFolder().toPath();
+    Path workDir = temp.newFolder().toPath();
     settingsMock = mock(Settings.class);
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir);
@@ -84,8 +82,10 @@ public class FileTypeSensorTest {
   }
 
   @Test
-  public void whenProjectNameNotPresent_shouldNotAddProjectInfo() {
-    when(settingsMock.getString("sonar.projectName")).thenReturn(null);
+  public void whenProjectOutPathNotPresent_shouldNotAddProjectInfo() {
+    when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
+    when(settingsMock.getString("sonar.projectKey")).thenReturn("FOO_PROJ:GUID");
+    when(settingsMock.getString("sonar.projectBaseDir")).thenReturn("BASE DIR");
 
     sensor.execute(tester);
 
@@ -96,75 +96,76 @@ public class FileTypeSensorTest {
   @Test
   public void whenLanguageKeyIsPresent_logsOutputFile() {
     when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
+    when(settingsMock.getString("sonar.projectKey")).thenReturn("FOO_PROJ:GUID");
     when(settingsMock.getString("sonar.projectBaseDir")).thenReturn("BASE DIR");
     when(settingsMock.getString("sonar.cs.analyzer.projectOutPath")).thenReturn("CS PATH");
     when(settingsMock.getString("sonar.vbnet.analyzer.projectOutPath")).thenReturn("VB PATH");
 
     when(pluginMetadataMock.languageKey()).thenReturn("cs");
     sensor.execute(tester);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project 'FOO_PROJ' (base dir 'BASE DIR'). For debug info, see ProjectInfo.xml in 'CS PATH'.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project 'FOO_PROJ' (project key 'FOO_PROJ:GUID', base dir 'BASE DIR'). For debug info, see ProjectInfo.xml in 'CS PATH'.");
 
     logTester.clear();
     when(pluginMetadataMock.languageKey()).thenReturn("vbnet");
     sensor.execute(tester);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project 'FOO_PROJ' (base dir 'BASE DIR'). For debug info, see ProjectInfo.xml in 'VB PATH'.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project 'FOO_PROJ' (project key 'FOO_PROJ:GUID', base dir 'BASE DIR'). For debug info, see ProjectInfo.xml in 'VB PATH'.");
   }
 
   @Test
   public void whenProjectNamePresent_andHasNoFiles_shouldAddCorrectInfo() {
-    when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
 
     sensor.execute(tester);
 
     assertThat(logTester.logs()).hasSize(1);
     // we haven't mocked the base dir and project out settings
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project 'FOO_PROJ' (base dir ''). For debug info, see ProjectInfo.xml in ''.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo(false, false);
   }
 
   @Test
   public void whenProjectNamePresent_andHasOnlyTestFiles_shouldAddCorrectInfo() {
-    when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
     addFileToFileSystem("foo.language", Type.TEST);
 
     sensor.execute(tester);
 
     assertThat(logTester.logs()).hasSize(1);
     // we haven't mocked the base dir and project out settings
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'true') for project 'FOO_PROJ' (base dir ''). For debug info, see ProjectInfo.xml in ''.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'true') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo(false, true);
   }
 
   @Test
   public void whenProjectNamePresent_andHasOnlyMainFiles_shouldAddCorrectInfo() {
-    when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
     addFileToFileSystem("foo.language", Type.MAIN);
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'false') for project 'FOO_PROJ' (base dir ''). For debug info, see ProjectInfo.xml in ''.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'false') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo(true, false);
   }
 
   @Test
   public void whenProjectNamePresent_andHasBothMainAndTestFiles_shouldAddCorrectInfo() {
-    when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
     addFileToFileSystem("foo.language", Type.MAIN);
     addFileToFileSystem("bar.language", Type.TEST);
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'true') for project 'FOO_PROJ' (base dir ''). For debug info, see ProjectInfo.xml in ''.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'true') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo(true, true);
   }
 
   @Test
   public void whenInvokedMultipleTimes_shouldAddInformationForEachInvocation() {
-    when(settingsMock.getString("sonar.projectName")).thenReturn("foo.proj");
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
     addFileToFileSystem("foo.language", Type.MAIN);
     sensor.execute(tester);
 
-    when(settingsMock.getString("sonar.projectName")).thenReturn("bar.proj");
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\1");
     // the file system still has 'foo.language', too - so 2 files for 'bar.proj'
     addFileToFileSystem("bar.language", Type.TEST);
     sensor.execute(tester);

@@ -35,47 +35,21 @@ public class ProjectTypeCollectorTest {
   public void withNoFiles_skip() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
-
     assertThat(underTest.getSummary()).isEmpty();
-  }
-
-  @Test
-  public void withNoTopLevelModule_behavesIncorrect() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
-
-    addMainProject(underTest);
-
-    // There is an assumption that the scanner will always run the sensor on the top-level module which has no files.
-    // If that doesn't happen, it returns empty string.
-    assertThat(underTest.getSummary()).isEmpty();
-
-    addMainProject(underTest);
-    addMainProject(underTest);
-    assertThat(underTest.getSummary()).hasValue("Found 2 MSBuild projects. 3 MAIN projects.");
   }
 
   @Test
   public void withNoFiles_twoModules_logOne() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
 
-
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
-
     addProjectWithNoFiles(underTest);
 
     assertThat(underTest.getSummary()).hasValue("Found 1 MSBuild project. 1 with no MAIN nor TEST files.");
   }
 
-
   @Test
   public void withOnlyMainFiles() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
-
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
 
     addMainProject(underTest);
 
@@ -85,9 +59,6 @@ public class ProjectTypeCollectorTest {
   @Test
   public void withOnlyTestFile() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
-
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
 
     addTestProject(underTest);
     addTestProject(underTest);
@@ -100,9 +71,6 @@ public class ProjectTypeCollectorTest {
   public void withBothTypes_calledOnce_returnsEmpty() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
-
     addMixedProject(underTest);
 
     assertThat(underTest.getSummary()).hasValue("Found 1 MSBuild project. 1 with both MAIN and TEST files.");
@@ -111,9 +79,6 @@ public class ProjectTypeCollectorTest {
   @Test
   public void mixedProjects_test_and_main() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
-
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
 
     addTestProject(underTest);
     addMainProject(underTest);
@@ -126,9 +91,6 @@ public class ProjectTypeCollectorTest {
   public void mixedProjects_test_and_both() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
-
     addTestProject(underTest);
     addMixedProject(underTest);
     addTestProject(underTest);
@@ -139,9 +101,6 @@ public class ProjectTypeCollectorTest {
   @Test
   public void mixedProjects_main_and_both() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
-
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
 
     addMainProject(underTest);
     addMixedProject(underTest);
@@ -154,9 +113,6 @@ public class ProjectTypeCollectorTest {
   public void mixedProjects_test_none() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
 
-    // this will be skipped - considered as top-level module
-    addProjectWithNoFiles(underTest);
-
     addTestProject(underTest);
     addTestProject(underTest);
     addProjectWithNoFiles(underTest);
@@ -167,9 +123,6 @@ public class ProjectTypeCollectorTest {
   @Test
   public void mixedProjects_main_none() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
-
-    // this will be skipped, considered as top-level
-    addProjectWithNoFiles(underTest);
 
     addProjectWithNoFiles(underTest);
     addMainProject(underTest);
@@ -182,9 +135,6 @@ public class ProjectTypeCollectorTest {
   @Test
   public void mixedProjects_all_types() {
     ProjectTypeCollector underTest = new ProjectTypeCollector();
-
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
 
     addTestProject(underTest);
     addMainProject(underTest);

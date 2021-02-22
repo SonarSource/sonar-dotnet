@@ -32,7 +32,7 @@ import org.sonar.api.utils.log.Loggers;
 
 /**
  * This class is a non-global sensor used to count the type of files in the .NET projects (i.e. Scanner modules).
- *
+ * <p>
  * Why is this needed?
  * - the Scanner for MSBuild categorizes projects as MAIN or TEST (see https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects)
  * - in SQ / SC, users can specify which files should be considered as MAIN (sources) or TEST (test sources) (see https://docs.sonarqube.org/latest/project-administration/narrowing-the-focus/)
@@ -66,21 +66,24 @@ public class FileTypeSensor implements Sensor {
     boolean hasMainFiles = SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey());
     boolean hasTestFiles = SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey());
 
-    Optional<String> projectName = configuration.get("sonar.projectName");
-    if (projectName.isPresent()) {
-      // Note: the top-level module is artificially created by the scanner and will appear here with false-false.
-      LOG.debug("Adding file type information (has MAIN '{}', has TEST '{}') for project '{}' (base dir '{}'). For debug info, see ProjectInfo.xml in '{}'.",
-        hasMainFiles, hasTestFiles, projectName.get(), getValueOrEmpty(configuration.get("sonar.projectBaseDir")), getProjectOutPath(configuration));
+    Optional<String> projectOutPath = getProjectOutPath(configuration);
+    // We filter based on `projectOutPath` to avoid adding the top-level module, which has no files at all (is an artificial module with no MSBuild project equivalent).
+    // The top-level module has the `sonar.projectKey` and `sonar.projectName` properties, but does not have the `projectOutPath` property.
+    if (projectOutPath.isPresent()) {
+      LOG.debug("Adding file type information (has MAIN '{}', has TEST '{}') for project '{}' (project key '{}', base dir '{}'). For debug info, see ProjectInfo.xml in '{}'.",
+        hasMainFiles, hasTestFiles, getValueOrEmpty(configuration, "sonar.projectName"),
+        getValueOrEmpty(configuration, "sonar.projectKey"), getValueOrEmpty(configuration, "sonar.projectBaseDir"), projectOutPath.get());
       projectTypeCollector.addProjectInfo(hasMainFiles, hasTestFiles);
     }
   }
 
-  private String getProjectOutPath(Configuration configuration) {
+  private Optional<String> getProjectOutPath(Configuration configuration) {
     String property = "sonar." + pluginMetadata.languageKey() + ".analyzer.projectOutPath";
-    return getValueOrEmpty(configuration.get(property));
+    return configuration.get(property);
   }
 
-  private static String getValueOrEmpty(Optional<String> optional) {
+  private static String getValueOrEmpty(Configuration configuration, String key) {
+    Optional<String> optional = configuration.get(key);
     return optional.isPresent() ? optional.get() : "";
   }
 }
