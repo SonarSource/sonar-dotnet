@@ -55,24 +55,32 @@ public class VbNetPlugin implements Plugin {
   @Override
   public void define(Context context) {
     context.addExtensions(
-      METADATA,
-      VbNet.class,
-      ProjectTypeCollector.class,
-      ReportPathCollector.class,
-      VbNetSonarRulesDefinition.class,
-      DotNetSensor.class,
-      VbNetLanguageConfiguration.class,
-      VbNetModuleConfiguration.class,
-      VbNetGlobalProtobufFileProcessor.class,
-      WrongEncodingFileFilter.class,
-      EncodingPerFile.class,
-      GeneratedFileFilter.class,
+      // module-level components (some relying on deprecated Scanner APIs)
       FileTypeSensor.class,
       PropertiesSensor.class,
-      SonarLintProfileExporter.class,
+      VbNetModuleConfiguration.class,
+      // global components
+      // collectors - they are populated by the module-level sensors
+      ProjectTypeCollector.class,
+      ReportPathCollector.class,
+      // sensor
+      DotNetSensor.class,
+      // language-specific
+      METADATA,
+      VbNet.class,
+      VbNetGlobalProtobufFileProcessor.class,
+      VbNetLanguageConfiguration.class,
+      VbNetSonarRulesDefinition.class,
+      // filters
+      EncodingPerFile.class,
+      GeneratedFileFilter.class,
+      WrongEncodingFileFilter.class,
+      // importers / exporters
       ProtobufDataImporter.class,
       RoslynDataImporter.class,
-      RoslynProfileExporter.class);
+      RoslynProfileExporter.class,
+      SonarLintProfileExporter.class
+    );
 
     context.addExtensions(new VbNetPropertyDefinitions(context.getRuntime()).create());
     context.addExtension(new VbNetSonarWayProfile());

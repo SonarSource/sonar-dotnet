@@ -55,24 +55,32 @@ public class CSharpPlugin implements Plugin {
   @Override
   public void define(Context context) {
     context.addExtensions(
-      METADATA,
-      CSharp.class,
-      ProjectTypeCollector.class,
-      ReportPathCollector.class,
-      CSharpSonarRulesDefinition.class,
-      DotNetSensor.class,
-      CSharpLanguageConfiguration.class,
+      // module-level components (some relying on deprecated Scanner APIs)
       CSharpModuleConfiguration.class,
-      CSharpGlobalProtobufFileProcessor.class,
-      WrongEncodingFileFilter.class,
-      EncodingPerFile.class,
-      GeneratedFileFilter.class,
       FileTypeSensor.class,
       PropertiesSensor.class,
-      SonarLintProfileExporter.class,
+      // global components
+      // collectors - they are populated by the module-level sensors
+      ProjectTypeCollector.class,
+      ReportPathCollector.class,
+      // sensor
+      DotNetSensor.class,
+      // language-specific
+      METADATA,
+      CSharp.class,
+      CSharpGlobalProtobufFileProcessor.class,
+      CSharpLanguageConfiguration.class,
+      CSharpSonarRulesDefinition.class,
+      // filters
+      EncodingPerFile.class,
+      WrongEncodingFileFilter.class,
+      GeneratedFileFilter.class,
+      // importers / exporters
       ProtobufDataImporter.class,
       RoslynDataImporter.class,
-      RoslynProfileExporter.class);
+      RoslynProfileExporter.class,
+      SonarLintProfileExporter.class
+    );
 
     context.addExtensions(new CSharpPropertyDefinitions(context.getRuntime()).create());
     context.addExtension(new CSharpSonarWayProfile());
