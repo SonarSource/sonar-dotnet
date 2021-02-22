@@ -157,7 +157,7 @@ public class MetricsIncludeHeaderCommentTest {
 
           setIgnoreHeaderCommentsToFalse(projectDir);
 
-          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
 
           ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
         }

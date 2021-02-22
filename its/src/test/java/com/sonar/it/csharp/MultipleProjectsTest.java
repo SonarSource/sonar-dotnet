@@ -413,7 +413,7 @@ public class MultipleProjectsTest {
 
           ORCHESTRATOR.executeBuild(beginStep);
 
-          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
 
           buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
         }

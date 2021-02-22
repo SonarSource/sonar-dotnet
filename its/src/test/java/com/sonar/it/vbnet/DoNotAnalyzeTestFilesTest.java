@@ -51,7 +51,7 @@ public class DoNotAnalyzeTestFilesTest {
 
     ORCHESTRATOR.executeBuild(beginStep);
 
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
 
     BuildResult buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
 
