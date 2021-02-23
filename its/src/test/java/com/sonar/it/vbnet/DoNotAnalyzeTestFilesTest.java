@@ -47,8 +47,7 @@ public class DoNotAnalyzeTestFilesTest {
     Path projectDir = Tests.projectDir(temp, "VbDoNotAnalyzeTestFilesTest");
 
     ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbDoNotAnalyzeTestFilesTest", projectDir, "MyLib.Tests")
-      .setProfile("vbnet_no_rule")
-      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
+      .setProfile("vbnet_no_rule");
 
     ORCHESTRATOR.executeBuild(beginStep);
 
