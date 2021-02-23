@@ -23,124 +23,118 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// These tests use "SUT" (System Under Test) to name the object being tested.
 public class ProjectTypeCollectorTest {
 
   @Test
   public void withNoProjects() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
-    assertThat(underTest.getSummary()).isEmpty();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
+    assertThat(sut.getSummary()).isEmpty();
   }
 
   @Test
-  public void withNoFiles_skip() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+  public void withNoFiles() {
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    assertThat(underTest.getSummary()).isEmpty();
-  }
+    addProjectWithNoFiles(sut);
 
-  @Test
-  public void withNoFiles_twoModules_logOne() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
-
-    addProjectWithNoFiles(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 1 MSBuild project. 1 with no MAIN nor TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 1 MSBuild project. 1 with no MAIN nor TEST files.");
   }
 
   @Test
   public void withOnlyMainFiles() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    addMainProject(underTest);
+    addMainProject(sut);
 
-    assertThat(underTest.getSummary()).hasValue("Found 1 MSBuild project. 1 MAIN project.");
+    assertThat(sut.getSummary()).hasValue("Found 1 MSBuild project. 1 MAIN project.");
   }
 
   @Test
   public void withOnlyTestFile() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    addTestProject(underTest);
-    addTestProject(underTest);
-    addTestProject(underTest);
+    addTestProject(sut);
+    addTestProject(sut);
+    addTestProject(sut);
 
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 3 TEST projects.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 3 TEST projects.");
   }
 
   @Test
-  public void withBothTypes_calledOnce_returnsEmpty() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+  public void withBothTypes() {
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    addMixedProject(underTest);
+    addProjectWithBothTypes(sut);
 
-    assertThat(underTest.getSummary()).hasValue("Found 1 MSBuild project. 1 with both MAIN and TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 1 MSBuild project. 1 with both MAIN and TEST files.");
   }
 
   @Test
   public void mixedProjects_test_and_main() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    addTestProject(underTest);
-    addMainProject(underTest);
-    addTestProject(underTest);
+    addTestProject(sut);
+    addMainProject(sut);
+    addTestProject(sut);
 
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 1 MAIN project. 2 TEST projects.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 1 MAIN project. 2 TEST projects.");
   }
 
   @Test
   public void mixedProjects_test_and_both() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    addTestProject(underTest);
-    addMixedProject(underTest);
-    addTestProject(underTest);
+    addTestProject(sut);
+    addProjectWithBothTypes(sut);
+    addTestProject(sut);
 
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 2 TEST projects. 1 with both MAIN and TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 2 TEST projects. 1 with both MAIN and TEST files.");
   }
 
   @Test
   public void mixedProjects_main_and_both() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    addMainProject(underTest);
-    addMixedProject(underTest);
-    addMainProject(underTest);
+    addMainProject(sut);
+    addProjectWithBothTypes(sut);
+    addMainProject(sut);
 
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 2 MAIN projects. 1 with both MAIN and TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 2 MAIN projects. 1 with both MAIN and TEST files.");
   }
 
   @Test
   public void mixedProjects_test_none() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    addTestProject(underTest);
-    addTestProject(underTest);
-    addProjectWithNoFiles(underTest);
+    addTestProject(sut);
+    addTestProject(sut);
+    addProjectWithNoFiles(sut);
 
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 2 TEST projects. 1 with no MAIN nor TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 2 TEST projects. 1 with no MAIN nor TEST files.");
   }
 
   @Test
   public void mixedProjects_main_none() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    addProjectWithNoFiles(underTest);
-    addMainProject(underTest);
-    addMainProject(underTest);
-    addMainProject(underTest);
+    addProjectWithNoFiles(sut);
+    addMainProject(sut);
+    addMainProject(sut);
+    addMainProject(sut);
 
-    assertThat(underTest.getSummary()).hasValue("Found 4 MSBuild projects. 3 MAIN projects. 1 with no MAIN nor TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 4 MSBuild projects. 3 MAIN projects. 1 with no MAIN nor TEST files.");
   }
 
   @Test
   public void mixedProjects_all_types() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    addTestProject(underTest);
-    addMainProject(underTest);
-    addMixedProject(underTest);
+    addTestProject(sut);
+    addMainProject(sut);
+    addProjectWithBothTypes(sut);
 
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 1 MAIN project. 1 TEST project. 1 with both MAIN and TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 1 MAIN project. 1 TEST project. 1 with both MAIN and TEST files.");
   }
 
   private void addProjectWithNoFiles(ProjectTypeCollector projectTypeCollector) {
@@ -155,7 +149,7 @@ public class ProjectTypeCollectorTest {
     projectTypeCollector.addProjectInfo(true, false);
   }
 
-  private void addMixedProject(ProjectTypeCollector projectTypeCollector) {
+  private void addProjectWithBothTypes(ProjectTypeCollector projectTypeCollector) {
     projectTypeCollector.addProjectInfo(true, true);
   }
 }
