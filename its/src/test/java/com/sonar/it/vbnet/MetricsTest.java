@@ -20,8 +20,6 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import java.nio.file.Path;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -36,6 +34,9 @@ import static com.sonar.it.vbnet.Tests.getMeasure;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Note: this class runs the analysis once in {@link MetricsTest#getRuleChain()}, before the tests.
+ */
 public class MetricsTest {
 
   private static final String PROJECT = "VbMetricsTest";
@@ -43,24 +44,10 @@ public class MetricsTest {
   private static final String FILE = "VbMetricsTest:foo/Module1.vb";
 
   public static TemporaryFolder temp = TestUtils.createTempFolder();
+
+  // This is where the analysis is done.
   @ClassRule
   public static RuleChain chain = getRuleChain();
-
-  private static RuleChain getRuleChain() {
-    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
-
-    return RuleChain
-      .outerRule(ORCHESTRATOR)
-      .around(temp)
-      .around(new ExternalResource() {
-        @Override
-        protected void before() throws Throwable {
-          TestUtils.reset(ORCHESTRATOR);
-          // Without setting the testProjectPattern, the VbMetricsTest project is considered as a Test project :)
-          Tests.analyzeProject(temp, PROJECT, "vbnet_no_rule", "sonar.msbuild.testProjectPattern", "noTests");
-        }
-      });
-  }
 
   @Test
   public void projectIsAnalyzed() {
@@ -240,24 +227,23 @@ public class MetricsTest {
   public void linesOfCodeByLine() {
     String value = getFileMeasure("ncloc_data").getValue();
 
-    assertThat(value).contains("1=1");
-    assertThat(value).contains("5=1");
-    assertThat(value).contains("9=1");
-    assertThat(value).contains("10=1");
-    assertThat(value).contains("11=1");
-    assertThat(value).contains("12=1");
-    assertThat(value).contains("13=1");
-    assertThat(value).contains("14=1");
-    assertThat(value).contains("15=1");
-    assertThat(value).contains("17=1");
-    assertThat(value).contains("18=1");
-    assertThat(value).contains("19=1");
-    assertThat(value).contains("20=1");
-    assertThat(value).contains("21=1");
-    assertThat(value).contains("22=1");
-
-
-    assertThat(value.length()).isEqualTo(81); // No other line
+    assertThat(value)
+      .contains("1=1")
+      .contains("5=1")
+      .contains("9=1")
+      .contains("10=1")
+      .contains("11=1")
+      .contains("12=1")
+      .contains("13=1")
+      .contains("14=1")
+      .contains("15=1")
+      .contains("17=1")
+      .contains("18=1")
+      .contains("19=1")
+      .contains("20=1")
+      .contains("21=1")
+      .contains("22=1")
+      .hasSize(81); // No other line
   }
 
   @Test
@@ -265,16 +251,31 @@ public class MetricsTest {
 
     String value = getFileMeasure("executable_lines_data").getValue();
 
-    assertThat(value).contains("19=1");
-    assertThat(value).contains("20=1");
-    assertThat(value).contains("21=1");
-    assertThat(value).contains("12=1");
-
-    assertThat(value.length()).isEqualTo(19); // No other lines
+    assertThat(value)
+      .contains("19=1")
+      .contains("20=1")
+      .contains("21=1")
+      .contains("12=1")
+      .hasSize(19); // No other lines
   }
 
   private Measure getFileMeasure(String metricKey) {
     return getMeasure(FILE, metricKey);
   }
 
+  private static RuleChain getRuleChain() {
+    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
+
+    return RuleChain
+      .outerRule(ORCHESTRATOR)
+      .around(temp)
+      .around(new ExternalResource() {
+        @Override
+        protected void before() throws Throwable {
+          TestUtils.reset(ORCHESTRATOR);
+          // Without setting the testProjectPattern, the VbMetricsTest project is considered as a Test project :)
+          Tests.analyzeProject(temp, PROJECT, "vbnet_no_rule", "sonar.msbuild.testProjectPattern", "noTests");
+        }
+      });
+  }
 }

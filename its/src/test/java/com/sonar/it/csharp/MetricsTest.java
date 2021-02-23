@@ -20,8 +20,6 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import java.nio.file.Path;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -36,6 +34,9 @@ import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Note: this class runs the analysis once in {@link MetricsTest#getRuleChain()}, before the tests.
+ */
 public class MetricsTest {
 
   public static TemporaryFolder temp = TestUtils.createTempFolder();
@@ -44,26 +45,9 @@ public class MetricsTest {
   private static final String DIRECTORY = "MetricsTest:foo";
   private static final String FILE = "MetricsTest:foo/Class1.cs";
 
+  // This is where the analysis is done.
   @ClassRule
   public static RuleChain chain = getRuleChain();
-
-  private static RuleChain getRuleChain() {
-    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
-
-    TestUtils.deleteLocalCache();
-
-    return RuleChain
-      .outerRule(ORCHESTRATOR)
-      .around(temp)
-      .around(new ExternalResource() {
-        @Override
-        protected void before() throws Throwable {
-          TestUtils.reset(ORCHESTRATOR);
-          // Without setting the testProjectPattern, the MetricsTest project is considered as a Test project :)
-          Tests.analyzeProject(temp, PROJECT, "no_rule", "sonar.msbuild.testProjectPattern", "noTests");
-        }
-      });
-  }
 
   @Test
   public void projectIsAnalyzed() {
@@ -230,38 +214,38 @@ public class MetricsTest {
   public void linesOfCodeByLine() {
     String value = getFileMeasure("ncloc_data").getValue();
 
-    assertThat(value).contains("5=1");
-    assertThat(value).contains("6=1");
-    assertThat(value).contains("7=1");
-    assertThat(value).contains("8=1");
-    assertThat(value).contains("9=1");
-
-    assertThat(value).contains("13=1");
-    assertThat(value).contains("14=1");
-    assertThat(value).contains("15=1");
-    assertThat(value).contains("16=1");
-
-    assertThat(value).contains("20=1");
-    assertThat(value).contains("21=1");
-    assertThat(value).contains("22=1");
-    assertThat(value).contains("23=1");
-    assertThat(value).contains("24=1");
-    assertThat(value).contains("25=1");
-    assertThat(value).contains("26=1");
-    assertThat(value).contains("27=1");
-
-    assertThat(value).contains("29=1");
-    assertThat(value).contains("30=1");
-    assertThat(value).contains("31=1");
-    assertThat(value).contains("32=1");
-    assertThat(value).contains("33=1");
-    assertThat(value).contains("34=1");
-    assertThat(value).contains("35=1");
-    assertThat(value).contains("36=1");
-    assertThat(value).contains("37=1");
-    assertThat(value).contains("38=1");
-
-    assertThat(value.length()).isEqualTo(144); // No other line
+    assertThat(value)
+      .contains("5=1")
+      .contains("6=1")
+      .contains("7=1")
+      .contains("8=1")
+      .contains("9=1")
+      // lines 10-19
+      .contains("13=1")
+      .contains("14=1")
+      .contains("15=1")
+      .contains("16=1")
+      // lines 20-29
+      .contains("20=1")
+      .contains("21=1")
+      .contains("22=1")
+      .contains("23=1")
+      .contains("24=1")
+      .contains("25=1")
+      .contains("26=1")
+      .contains("27=1")
+      .contains("29=1")
+      // lines 30-39
+      .contains("30=1")
+      .contains("31=1")
+      .contains("32=1")
+      .contains("33=1")
+      .contains("34=1")
+      .contains("35=1")
+      .contains("36=1")
+      .contains("37=1")
+      .contains("38=1")
+      .hasSize(144); // No other line
   }
 
   /* Executable lines */
@@ -271,12 +255,12 @@ public class MetricsTest {
 
     String value = getFileMeasure("executable_lines_data").getValue();
 
-    assertThat(value).contains("24=1");
-    assertThat(value).contains("34=1");
-    assertThat(value).contains("36=1");
-    assertThat(value).contains("37=1");
-
-    assertThat(value.length()).isEqualTo(19); // No other lines
+    assertThat(value)
+      .contains("24=1")
+      .contains("34=1")
+      .contains("36=1")
+      .contains("37=1")
+      .hasSize(19); // No other lines
   }
 
   /* Helper methods */
@@ -297,4 +281,21 @@ public class MetricsTest {
     return getMeasureAsInt(FILE, metricKey);
   }
 
+  private static RuleChain getRuleChain() {
+    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
+
+    TestUtils.deleteLocalCache();
+
+    return RuleChain
+      .outerRule(ORCHESTRATOR)
+      .around(temp)
+      .around(new ExternalResource() {
+        @Override
+        protected void before() throws Throwable {
+          TestUtils.reset(ORCHESTRATOR);
+          // Without setting the testProjectPattern, the MetricsTest project is considered as a Test project :)
+          Tests.analyzeProject(temp, PROJECT, "no_rule", "sonar.msbuild.testProjectPattern", "noTests");
+        }
+      });
+  }
 }
