@@ -52,7 +52,7 @@ public class FileTypeSensor implements Sensor {
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    String name = String.format("Verify what types of files (MAIN, TEST) are in %s projects.", pluginMetadata.languageKey());
+    String name = String.format("%s Project Type Information", pluginMetadata.shortLanguageName());
     descriptor.name(name);
     // we do not filter by language because we want to be called on projects without sources
     // (that could reference only shared sources e.g. in .projitems)

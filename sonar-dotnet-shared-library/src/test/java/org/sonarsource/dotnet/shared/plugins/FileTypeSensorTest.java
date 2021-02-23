@@ -20,7 +20,6 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.File;
-import java.nio.file.Path;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,6 +43,7 @@ import static org.mockito.Mockito.when;
 
 public class FileTypeSensorTest {
   private static final String LANG_KEY = "LANG_KEY";
+  private static final String SHORT_LANG_NAME = "SHORT_LANG_NAME";
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -58,16 +58,16 @@ public class FileTypeSensorTest {
 
   @Before
   public void prepare() throws Exception {
-    Path workDir = temp.newFolder().toPath();
     settingsMock = mock(Settings.class);
     tester = SensorContextTester.create(new File("src/test/resources"));
-    tester.fileSystem().setWorkDir(workDir);
+    tester.fileSystem().setWorkDir(temp.newFolder().toPath());
     tester.setSettings(settingsMock);
 
     projectTypeCollectorMock = mock(ProjectTypeCollector.class);
 
     pluginMetadataMock = mock(DotNetPluginMetadata.class);
     when(pluginMetadataMock.languageKey()).thenReturn(LANG_KEY);
+    when(pluginMetadataMock.shortLanguageName()).thenReturn(SHORT_LANG_NAME);
 
     sensor = new FileTypeSensor(projectTypeCollectorMock, pluginMetadataMock);
   }
@@ -76,7 +76,7 @@ public class FileTypeSensorTest {
   public void should_describe() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     sensor.describe(sensorDescriptor);
-    assertThat(sensorDescriptor.name()).isEqualTo("Verify what types of files (MAIN, TEST) are in LANG_KEY projects.");
+    assertThat(sensorDescriptor.name()).isEqualTo(SHORT_LANG_NAME + " Project Type Information");
     // should not filter per language
     assertThat(sensorDescriptor.languages()).isEmpty();
   }
