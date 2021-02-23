@@ -23,174 +23,118 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// These tests use "SUT" (System Under Test) to name the object being tested.
 public class ProjectTypeCollectorTest {
 
   @Test
   public void withNoProjects() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
-    assertThat(underTest.getSummary()).isEmpty();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
+    assertThat(sut.getSummary()).isEmpty();
   }
 
   @Test
-  public void withNoFiles_skip() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+  public void withNoFiles() {
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
+    addProjectWithNoFiles(sut);
 
-    assertThat(underTest.getSummary()).isEmpty();
+    assertThat(sut.getSummary()).hasValue("Found 1 MSBuild project. 1 with no MAIN nor TEST files.");
   }
-
-  @Test
-  public void withNoTopLevelModule_behavesIncorrect() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
-
-    addMainProject(underTest);
-
-    // There is an assumption that the scanner will always run the sensor on the top-level module which has no files.
-    // If that doesn't happen, it returns empty string.
-    assertThat(underTest.getSummary()).isEmpty();
-
-    addMainProject(underTest);
-    addMainProject(underTest);
-    assertThat(underTest.getSummary()).hasValue("Found 2 MSBuild projects. 3 MAIN projects.");
-  }
-
-  @Test
-  public void withNoFiles_twoModules_logOne() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
-
-
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
-
-    addProjectWithNoFiles(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 1 MSBuild project. 1 with no MAIN nor TEST files.");
-  }
-
 
   @Test
   public void withOnlyMainFiles() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
+    addMainProject(sut);
 
-    addMainProject(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 1 MSBuild project. 1 MAIN project.");
+    assertThat(sut.getSummary()).hasValue("Found 1 MSBuild project. 1 MAIN project.");
   }
 
   @Test
   public void withOnlyTestFile() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
+    addTestProject(sut);
+    addTestProject(sut);
+    addTestProject(sut);
 
-    addTestProject(underTest);
-    addTestProject(underTest);
-    addTestProject(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 3 TEST projects.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 3 TEST projects.");
   }
 
   @Test
-  public void withBothTypes_calledOnce_returnsEmpty() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+  public void withBothTypes() {
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
+    addProjectWithBothTypes(sut);
 
-    addMixedProject(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 1 MSBuild project. 1 with both MAIN and TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 1 MSBuild project. 1 with both MAIN and TEST files.");
   }
 
   @Test
   public void mixedProjects_test_and_main() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
+    addTestProject(sut);
+    addMainProject(sut);
+    addTestProject(sut);
 
-    addTestProject(underTest);
-    addMainProject(underTest);
-    addTestProject(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 1 MAIN project. 2 TEST projects.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 1 MAIN project. 2 TEST projects.");
   }
 
   @Test
   public void mixedProjects_test_and_both() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
+    addTestProject(sut);
+    addProjectWithBothTypes(sut);
+    addTestProject(sut);
 
-    addTestProject(underTest);
-    addMixedProject(underTest);
-    addTestProject(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 2 TEST projects. 1 with both MAIN and TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 2 TEST projects. 1 with both MAIN and TEST files.");
   }
 
   @Test
   public void mixedProjects_main_and_both() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
+    addMainProject(sut);
+    addProjectWithBothTypes(sut);
+    addMainProject(sut);
 
-    addMainProject(underTest);
-    addMixedProject(underTest);
-    addMainProject(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 2 MAIN projects. 1 with both MAIN and TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 2 MAIN projects. 1 with both MAIN and TEST files.");
   }
 
   @Test
   public void mixedProjects_test_none() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    // this will be skipped - considered as top-level module
-    addProjectWithNoFiles(underTest);
+    addTestProject(sut);
+    addTestProject(sut);
+    addProjectWithNoFiles(sut);
 
-    addTestProject(underTest);
-    addTestProject(underTest);
-    addProjectWithNoFiles(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 2 TEST projects. 1 with no MAIN nor TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 2 TEST projects. 1 with no MAIN nor TEST files.");
   }
 
   @Test
   public void mixedProjects_main_none() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level
-    addProjectWithNoFiles(underTest);
+    addProjectWithNoFiles(sut);
+    addMainProject(sut);
+    addMainProject(sut);
+    addMainProject(sut);
 
-    addProjectWithNoFiles(underTest);
-    addMainProject(underTest);
-    addMainProject(underTest);
-    addMainProject(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 4 MSBuild projects. 3 MAIN projects. 1 with no MAIN nor TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 4 MSBuild projects. 3 MAIN projects. 1 with no MAIN nor TEST files.");
   }
 
   @Test
   public void mixedProjects_all_types() {
-    ProjectTypeCollector underTest = new ProjectTypeCollector();
+    ProjectTypeCollector sut = new ProjectTypeCollector();
 
-    // this will be skipped, considered as top-level module
-    addProjectWithNoFiles(underTest);
+    addTestProject(sut);
+    addMainProject(sut);
+    addProjectWithBothTypes(sut);
 
-    addTestProject(underTest);
-    addMainProject(underTest);
-    addMixedProject(underTest);
-
-    assertThat(underTest.getSummary()).hasValue("Found 3 MSBuild projects. 1 MAIN project. 1 TEST project. 1 with both MAIN and TEST files.");
+    assertThat(sut.getSummary()).hasValue("Found 3 MSBuild projects. 1 MAIN project. 1 TEST project. 1 with both MAIN and TEST files.");
   }
 
   private void addProjectWithNoFiles(ProjectTypeCollector projectTypeCollector) {
@@ -205,7 +149,7 @@ public class ProjectTypeCollectorTest {
     projectTypeCollector.addProjectInfo(true, false);
   }
 
-  private void addMixedProject(ProjectTypeCollector projectTypeCollector) {
+  private void addProjectWithBothTypes(ProjectTypeCollector projectTypeCollector) {
     projectTypeCollector.addProjectInfo(true, true);
   }
 }

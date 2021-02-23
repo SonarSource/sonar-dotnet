@@ -40,8 +40,7 @@ public class ProjectTypeCollector {
   // modules that have both MAIN and TEST files
   private int mixed = 0;
   // modules that have no files
-  // there is always the top-level (global) module which has no files and has no equivalent "real" MSBuild project (module)
-  private int noFiles = -1;
+  private int noFiles = 0;
 
   void addProjectInfo(boolean hasMainFiles, boolean hasTestFiles) {
     if (hasMainFiles && hasTestFiles) {
@@ -61,7 +60,7 @@ public class ProjectTypeCollector {
 
   private static Optional<String> createMessage(int onlyMain, int onlyTest, int mixed, int noFiles) {
     int projectsCount = onlyMain + onlyTest + mixed + noFiles;
-    if (projectsCount <= 0) {
+    if (projectsCount == 0) {
       return Optional.empty();
     }
     StringBuilder stringBuilder = new StringBuilder(String.format("Found %d MSBuild %s.", projectsCount, pluralize(PROJECT, projectsCount)));
