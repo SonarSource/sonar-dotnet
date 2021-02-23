@@ -81,6 +81,7 @@
             <includes>
               <include>com/sonar/it/csharp/Tests.java</include>
               <include>com/sonar/it/vbnet/Tests.java</include>
+              <include>com/sonar/it/shared/ScannerCliTest.java</include>
             </includes>
             <systemProperties>
               <scannerMsbuild.version>${scannerMsbuild.version}</scannerMsbuild.version>

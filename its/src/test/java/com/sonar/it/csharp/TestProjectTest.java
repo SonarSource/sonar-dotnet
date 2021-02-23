@@ -20,6 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.BuildResult;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -34,11 +35,12 @@ public class TestProjectTest {
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
   private static final String PROJECT = "TestOnlyProject";
+  private static BuildResult buildResult;
 
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(ORCHESTRATOR);
-    Tests.analyzeProject(temp, PROJECT, null);
+    buildResult = Tests.analyzeProject(temp, PROJECT, null);
   }
 
   @Test
@@ -46,5 +48,15 @@ public class TestProjectTest {
     assertThat(getComponent(PROJECT).getName()).isEqualTo("TestOnlyProject");
 
     assertThat(getComponent("TestOnlyProject:UnitTest1.cs").getName()).isEqualTo("UnitTest1.cs");
+  }
+
+  @Test
+  public void logsContainInfoAndWarning() {
+    assertThat(buildResult.getLogs()).contains(
+      "This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+        "Your SonarQube/SonarCloud project will not have results for C# files. " +
+        "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
+      "Found 1 MSBuild project. 1 TEST project."
+    );
   }
 }

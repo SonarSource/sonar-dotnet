@@ -20,6 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -36,11 +37,12 @@ public class NoSonarTest {
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
   private static final String PROJECT = "NoSonarTest";
+  private static BuildResult buildResult;
 
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(ORCHESTRATOR);
-    Tests.analyzeProject(temp, PROJECT, "class_name");
+    buildResult = Tests.analyzeProject(temp, PROJECT, "class_name");
   }
 
   @Test
@@ -51,5 +53,10 @@ public class NoSonarTest {
       assertThat(e.getLine()).isEqualTo(5);
       assertThat(e.getRule()).isEqualTo("csharpsquid:S101");
     });
+  }
+
+  @Test
+  public void logsContainInfo() {
+    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild project. 1 MAIN project.");
   }
 }

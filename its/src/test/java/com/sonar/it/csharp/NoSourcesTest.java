@@ -20,6 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.BuildResult;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -36,11 +37,12 @@ public class NoSourcesTest {
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
   private static final String PROJECT = "ProjectWithNoSources";
+  private static BuildResult buildResult;
 
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(ORCHESTRATOR);
-    Tests.analyzeProject(temp, PROJECT, null);
+    buildResult = Tests.analyzeProject(temp, PROJECT, null);
   }
 
   @Test
@@ -53,4 +55,8 @@ public class NoSourcesTest {
     });
   }
 
+  @Test
+  public void logsContainInfo() {
+    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild project. 1 with no MAIN nor TEST files.");
+  }
 }

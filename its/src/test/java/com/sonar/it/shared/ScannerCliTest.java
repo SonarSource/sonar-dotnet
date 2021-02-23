@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Regression tests for scanning projects with the scanner-cli.
- *
+ * <p>
  * Note that this uses a different orchestrator instance than {@link com.sonar.it.csharp.Tests} or {@link com.sonar.it.vbnet.Tests}
  */
 public class ScannerCliTest {
@@ -51,7 +51,7 @@ public class ScannerCliTest {
     .build();
 
   @Before
-  public void init(){
+  public void init() {
     TestUtils.deleteLocalCache();
   }
 

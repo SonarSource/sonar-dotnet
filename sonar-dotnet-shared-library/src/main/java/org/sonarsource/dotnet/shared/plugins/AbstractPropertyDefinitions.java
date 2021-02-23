@@ -35,6 +35,10 @@ public abstract class AbstractPropertyDefinitions {
   private static final String PROP_PREFIX = "sonar.";
   private static final String EXTERNAL_ANALYZERS_CATEGORY = "External Analyzers";
 
+  public static final String PROJECT_KEY_PROPERTY = PROP_PREFIX + "projectKey";
+  public static final String PROJECT_NAME_PROPERTY = PROP_PREFIX + "projectName";
+  public static final String PROJECT_BASE_DIR_PROPERTY = PROP_PREFIX + "projectBaseDir";
+
   private final String languageKey;
   private final String languageName;
   private final String fileSuffixDefaultValue;

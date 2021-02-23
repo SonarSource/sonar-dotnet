@@ -41,12 +41,12 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
 
 /**
  * This configuration is at the level of the project ("module" in scanner-cli terminology).
- *
+ * <p>
  * Note: even if the concept of "module" was dropped from the SQ server side,
  * "modules" are still a core concept of the SQ scanner.
- *
+ * <p>
  * Module-independent configuration is in {@link AbstractLanguageConfiguration}.
- *
+ * <p>
  * Although module support has been dropped in SQ/SC, inside the scanner there is no good replacement for {@link org.sonar.api.batch.ScannerSide}, yet.
  * When a replacement will appear, this code will have to be refactored.
  */
@@ -63,7 +63,7 @@ public abstract class AbstractModuleConfiguration {
   public AbstractModuleConfiguration(Configuration configuration, String languageKey) {
     this.configuration = configuration;
     this.languageKey = languageKey;
-    this.projectKey = configuration.get("sonar.projectKey").orElse("<NONE>");
+    this.projectKey = configuration.get(AbstractPropertyDefinitions.PROJECT_KEY_PROPERTY).orElse("<NONE>");
     LOG.trace("Project '{}': AbstractModuleConfiguration has been created.", projectKey);
   }
 
@@ -99,7 +99,7 @@ public abstract class AbstractModuleConfiguration {
         .map(Paths::get)
         .collect(Collectors.toList());
     } else {
-      LOG.debug( "Project '{}': No Roslyn issues reports have been found.", projectKey);
+      LOG.debug("Project '{}': No Roslyn issues reports have been found.", projectKey);
       return Collections.emptyList();
     }
   }

@@ -28,6 +28,7 @@ import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.log.Logger;
@@ -38,8 +39,9 @@ import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.active
 
 /**
  * This class is the main sensor for C# and VB.NET which is going to process all Roslyn reports and protobuf contents and then push them to SonarQube.
- *
- * This sensor is a SQ project sensor. It will execute once at the end.
+ * <p>
+ * This sensor is a SQ/SC project sensor. It will execute once at the end.
+ * Please note that a "SQ/SC project" is usually the equivalent of an "MSBuild solution".
  */
 public class DotNetSensor implements ProjectSensor {
 
@@ -50,14 +52,16 @@ public class DotNetSensor implements ProjectSensor {
   private final DotNetPluginMetadata pluginMetadata;
   private final ReportPathCollector reportPathCollector;
   private final ProjectTypeCollector projectTypeCollector;
+  private final AnalysisWarnings analysisWarnings;
 
   public DotNetSensor(DotNetPluginMetadata pluginMetadata, ReportPathCollector reportPathCollector, ProjectTypeCollector projectTypeCollector,
-                      ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
+                      ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter, AnalysisWarnings analysisWarnings) {
     this.pluginMetadata = pluginMetadata;
     this.reportPathCollector = reportPathCollector;
     this.projectTypeCollector = projectTypeCollector;
     this.protobufDataImporter = protobufDataImporter;
     this.roslynDataImporter = roslynDataImporter;
+    this.analysisWarnings = analysisWarnings;
   }
 
   @Override
@@ -78,10 +82,7 @@ public class DotNetSensor implements ProjectSensor {
     if (SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey())) {
       return true;
     } else if (SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey())) {
-      LOG.warn("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
-          "Your SonarQube/SonarCloud project will not have results for {} files. " +
-          "You can read more about the detection of test projects here: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
-        pluginMetadata.languageKey());
+      warnThatProjectContainsOnlyTestCode(analysisWarnings, pluginMetadata.shortLanguageName());
     } else {
       // it's not a .NET project
       LOG.debug("No files to analyze. Skip Sensor.");
@@ -120,5 +121,14 @@ public class DotNetSensor implements ProjectSensor {
           + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         pluginMetadata.shortLanguageName());
     }
+  }
+
+  private static void warnThatProjectContainsOnlyTestCode(AnalysisWarnings analysisWarnings, String languageName) {
+    String readMore = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
+    LOG.warn("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+        "Your SonarQube/SonarCloud project will not have results for {} files. {}",
+      languageName, readMore);
+    analysisWarnings.addUnique(String.format("Your project is considered to only have TEST code for language %s, so no results have been imported. %s",
+      languageName, readMore));
   }
 }
