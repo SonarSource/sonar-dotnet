@@ -52,7 +52,7 @@ public class DoNotAnalyzeTestFilesTest {
     assertThat(getMeasureAsInt(PROJECT, "ncloc")).isNull();
 
     assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
-      .contains("WARN: This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+      .containsExactly("WARN: This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
         "Your SonarQube/SonarCloud project will not have results for C# files. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild project. 1 TEST project.");
