@@ -58,7 +58,6 @@ public class DotNetSensorTest {
   private static final String REPO_KEY = "REPO_KEY";
   private static final String LANG_KEY = "LANG_KEY";
   private static final String SHORT_LANG_NAME = "SHORT_LANG_NAME";
-  private static final String LANG_NAME = "LANG_NAME";
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -90,7 +89,6 @@ public class DotNetSensorTest {
     when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
     when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
     when(pluginMetadata.shortLanguageName()).thenReturn(SHORT_LANG_NAME);
-    when(pluginMetadata.languageName()).thenReturn(LANG_NAME);
     sensor = new DotNetSensor(pluginMetadata, reportPathCollector, projectTypeCollector, protobufDataImporter, roslynDataImporter, analysisWarnings);
   }
 
@@ -193,8 +191,8 @@ public class DotNetSensorTest {
     String readMore = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
     assertThat(logTester.logs(LoggerLevel.WARN))
       .containsExactly("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
-        "Your SonarQube/SonarCloud project will not have results for LANG_NAME files. " + readMore);
-    verify(analysisWarnings).addUnique("Your project is considered to only have TEST code for language " + LANG_NAME + ", so no results have been imported. " + readMore);
+        "Your SonarQube/SonarCloud project will not have results for " + SHORT_LANG_NAME + " files. " + readMore);
+    verify(analysisWarnings).addUnique("Your project is considered to only have TEST code for language " + SHORT_LANG_NAME + ", so no results have been imported. " + readMore);
   }
 
   @Test

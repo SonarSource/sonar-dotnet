@@ -82,7 +82,7 @@ public class DotNetSensor implements ProjectSensor {
     if (SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey())) {
       return true;
     } else if (SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey())) {
-      warnThatProjectContainsOnlyTestCode(analysisWarnings, pluginMetadata.languageName());
+      warnThatProjectContainsOnlyTestCode(analysisWarnings, pluginMetadata.shortLanguageName());
     } else {
       // it's not a .NET project
       LOG.debug("No files to analyze. Skip Sensor.");
