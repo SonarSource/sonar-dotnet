@@ -30,6 +30,10 @@ import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.PROJECT_BASE_DIR_PROPERTY;
+import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.PROJECT_KEY_PROPERTY;
+import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.PROJECT_NAME_PROPERTY;
+
 /**
  * This class is a non-global sensor used to count the type of files in the .NET projects (i.e. Scanner modules).
  * <p>
@@ -66,19 +70,19 @@ public class FileTypeSensor implements Sensor {
     boolean hasMainFiles = SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey());
     boolean hasTestFiles = SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey());
 
-    Optional<String> projectOutPath = getProjectOutPath(configuration);
-    // We filter based on `projectOutPath` to avoid adding the top-level module, which has no files at all (is an artificial module with no MSBuild project equivalent).
-    // The top-level module has the `sonar.projectKey` and `sonar.projectName` properties, but does not have the `projectOutPath` property.
-    if (projectOutPath.isPresent()) {
+    Optional<String> analyzerWorkDir = getAnalyzerWorkDir(configuration);
+    // We filter based on the "analyzerWorkDir" to avoid adding the top-level module, which has no files at all (is an artificial module with no MSBuild project equivalent).
+    // The top-level module has the `sonar.projectKey` and `sonar.projectName` properties, but does not have the "analyzerWorkDir" property.
+    if (analyzerWorkDir.isPresent()) {
       LOG.debug("Adding file type information (has MAIN '{}', has TEST '{}') for project '{}' (project key '{}', base dir '{}'). For debug info, see ProjectInfo.xml in '{}'.",
-        hasMainFiles, hasTestFiles, getValueOrEmpty(configuration, "sonar.projectName"),
-        getValueOrEmpty(configuration, "sonar.projectKey"), getValueOrEmpty(configuration, "sonar.projectBaseDir"), projectOutPath.get());
+        hasMainFiles, hasTestFiles, getValueOrEmpty(configuration, PROJECT_NAME_PROPERTY),
+        getValueOrEmpty(configuration, PROJECT_KEY_PROPERTY), getValueOrEmpty(configuration, PROJECT_BASE_DIR_PROPERTY), analyzerWorkDir.get());
       projectTypeCollector.addProjectInfo(hasMainFiles, hasTestFiles);
     }
   }
 
-  private Optional<String> getProjectOutPath(Configuration configuration) {
-    String property = "sonar." + pluginMetadata.languageKey() + ".analyzer.projectOutPath";
+  private Optional<String> getAnalyzerWorkDir(Configuration configuration) {
+    String property = AbstractPropertyDefinitions.getAnalyzerWorkDirProperty(pluginMetadata.languageKey());
     return configuration.get(property);
   }
 

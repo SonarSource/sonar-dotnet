@@ -82,10 +82,13 @@ public class FileTypeSensorTest {
   }
 
   @Test
-  public void whenProjectOutPathNotPresent_shouldNotAddProjectInfo() {
+  public void whenProjectOutPathsNotPresent_shouldNotAddProjectInfo() {
     when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
     when(settingsMock.getString("sonar.projectKey")).thenReturn("FOO_PROJ:GUID");
     when(settingsMock.getString("sonar.projectBaseDir")).thenReturn("BASE DIR");
+    // note that below it's the singular - Path
+    when(settingsMock.getString("sonar.cs.analyzer.projectOutPath")).thenReturn("CS PATH");
+    when(settingsMock.getString("sonar.vbnet.analyzer.projectOutPath")).thenReturn("VB PATH");
 
     sensor.execute(tester);
 
@@ -94,12 +97,13 @@ public class FileTypeSensorTest {
   }
 
   @Test
-  public void whenLanguageKeyIsPresent_logsOutputFile() {
+  public void whenProjectOutPaths_andLanguageKey_ArePresent_logsAnalyzerWorkDir() {
     when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
     when(settingsMock.getString("sonar.projectKey")).thenReturn("FOO_PROJ:GUID");
     when(settingsMock.getString("sonar.projectBaseDir")).thenReturn("BASE DIR");
-    when(settingsMock.getString("sonar.cs.analyzer.projectOutPath")).thenReturn("CS PATH");
-    when(settingsMock.getString("sonar.vbnet.analyzer.projectOutPath")).thenReturn("VB PATH");
+    // the following property specifies the analyzer work dir
+    when(settingsMock.getString("sonar.cs.analyzer.projectOutPaths")).thenReturn("CS PATH");
+    when(settingsMock.getString("sonar.vbnet.analyzer.projectOutPaths")).thenReturn("VB PATH");
 
     when(pluginMetadataMock.languageKey()).thenReturn("cs");
     sensor.execute(tester);
@@ -112,8 +116,8 @@ public class FileTypeSensorTest {
   }
 
   @Test
-  public void whenProjectNamePresent_andHasNoFiles_shouldAddCorrectInfo() {
-    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
+  public void whenProjectOutPathsPresent_andHasNoFiles_shouldAddCorrectInfo() {
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPaths")).thenReturn("foo\\.sonarqube\\out\\0");
 
     sensor.execute(tester);
 
@@ -124,8 +128,8 @@ public class FileTypeSensorTest {
   }
 
   @Test
-  public void whenProjectNamePresent_andHasOnlyTestFiles_shouldAddCorrectInfo() {
-    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
+  public void whenProjectOutPathsPresent_andHasOnlyTestFiles_shouldAddCorrectInfo() {
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPaths")).thenReturn("foo\\.sonarqube\\out\\0");
     addFileToFileSystem("foo.language", Type.TEST);
 
     sensor.execute(tester);
@@ -137,8 +141,8 @@ public class FileTypeSensorTest {
   }
 
   @Test
-  public void whenProjectNamePresent_andHasOnlyMainFiles_shouldAddCorrectInfo() {
-    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
+  public void whenProjectOutPathsPresent_andHasOnlyMainFiles_shouldAddCorrectInfo() {
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPaths")).thenReturn("foo\\.sonarqube\\out\\0");
     addFileToFileSystem("foo.language", Type.MAIN);
 
     sensor.execute(tester);
@@ -148,8 +152,8 @@ public class FileTypeSensorTest {
   }
 
   @Test
-  public void whenProjectNamePresent_andHasBothMainAndTestFiles_shouldAddCorrectInfo() {
-    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
+  public void whenProjectOutPathsPresent_andHasBothMainAndTestFiles_shouldAddCorrectInfo() {
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPaths")).thenReturn("foo\\.sonarqube\\out\\0");
     addFileToFileSystem("foo.language", Type.MAIN);
     addFileToFileSystem("bar.language", Type.TEST);
 
@@ -161,11 +165,11 @@ public class FileTypeSensorTest {
 
   @Test
   public void whenInvokedMultipleTimes_shouldAddInformationForEachInvocation() {
-    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPaths")).thenReturn("foo\\.sonarqube\\out\\0");
     addFileToFileSystem("foo.language", Type.MAIN);
     sensor.execute(tester);
 
-    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\1");
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPaths")).thenReturn("foo\\.sonarqube\\out\\1");
     // the file system still has 'foo.language', too - so 2 files for 'bar.proj'
     addFileToFileSystem("bar.language", Type.TEST);
     sensor.execute(tester);
