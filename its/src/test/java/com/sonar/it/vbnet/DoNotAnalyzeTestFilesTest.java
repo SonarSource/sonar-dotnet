@@ -27,6 +27,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonarqube.ws.Ce;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
@@ -65,5 +66,14 @@ public class DoNotAnalyzeTestFilesTest {
         "Your SonarQube/SonarCloud project will not have results for VB.NET files. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild project. 1 TEST project.");
+    verifyGuiAnalysisWarning(buildResult);
+  }
+
+  // Verifies the analysis warning is raised inside SQ
+  private void verifyGuiAnalysisWarning(BuildResult buildResult) {
+    Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
+    assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
+    assertThat(task.getWarningsList()).containsExactly("Your project is considered to only have TEST code for language VB.NET, so no results have been imported. " +
+      "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
   }
 }
