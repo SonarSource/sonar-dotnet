@@ -86,14 +86,21 @@ public class FileTypeSensorTest {
     when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
     when(settingsMock.getString("sonar.projectKey")).thenReturn("FOO_PROJ:GUID");
     when(settingsMock.getString("sonar.projectBaseDir")).thenReturn("BASE DIR");
-    // note that below it's the singular - Path
-    when(settingsMock.getString("sonar.cs.analyzer.projectOutPath")).thenReturn("CS OutPath");
-    when(settingsMock.getString("sonar.vbnet.analyzer.projectOutPath")).thenReturn("VB OutPath");
-    // should query the `getStringArray` method, not the `getString` method like below
-    when(settingsMock.getString("sonar.cs.analyzer.projectOutPaths")).thenReturn("CS OutPaths");
-    when(settingsMock.getString("sonar.vbnet.analyzer.projectOutPaths")).thenReturn("VB OutPaths");
-    addFileToFileSystem("foo.language", Type.MAIN);
-    addFileToFileSystem("bar.language", Type.TEST);
+    // note that below it's the singular in both calls - "projectOutputPath"
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn("foo\\.sonarqube\\out\\0");
+    when(settingsMock.getStringArray("sonar.LANG_KEY.analyzer.projectOutPath")).thenReturn(arrayOf("foo\\.sonarqube\\out\\0"));
+
+    sensor.execute(tester);
+
+    assertThat(logTester.logs()).isEmpty();
+    verifyZeroInteractions(projectTypeCollectorMock);
+  }
+
+  @Test
+  public void projectOutPaths_shouldNotBeRetrievedWithGetString() {
+    // the `projectOutPaths` property is multi-value and should be queried via getStringArray()
+    // this test ensures that only `getStringArray` is used, and not `getString`
+    when(settingsMock.getString("sonar.LANG_KEY.analyzer.projectOutPaths")).thenReturn("foo\\.sonarqube\\out\\0");
 
     sensor.execute(tester);
 
@@ -104,8 +111,6 @@ public class FileTypeSensorTest {
   @Test
   public void whenProjectOutPaths_returnsNull_shouldNotAddProjectInfo_shouldNotLog() {
     when(settingsMock.getStringArray("sonar.LANG_KEY.analyzer.projectOutPaths")).thenReturn(null);
-    addFileToFileSystem("foo.language", Type.MAIN);
-    addFileToFileSystem("bar.language", Type.TEST);
 
     sensor.execute(tester);
 
@@ -116,8 +121,6 @@ public class FileTypeSensorTest {
   @Test
   public void whenProjectOutPaths_returnsEmpty_shouldNotAddProjectInfo_shouldNotLog() {
     when(settingsMock.getStringArray("sonar.LANG_KEY.analyzer.projectOutPaths")).thenReturn(new String[]{});
-    addFileToFileSystem("foo.language", Type.MAIN);
-    addFileToFileSystem("bar.language", Type.TEST);
 
     sensor.execute(tester);
 
@@ -126,7 +129,20 @@ public class FileTypeSensorTest {
   }
 
   @Test
-  public void whenProjectOutPaths_andLanguageKey_ArePresent_logsAnalyzerWorkDir() {
+  public void whenProjectOutPaths_IsPresent_andLanguageKey_notPresent_shouldNotLog() {
+    when(settingsMock.getStringArray("sonar.LANG_KEY.analyzer.projectOutPaths")).thenReturn(arrayOf("foo\\.sonarqube\\out\\0"));
+    when(pluginMetadataMock.languageKey()).thenReturn(null);
+
+    sensor.execute(tester);
+
+    assertThat(logTester.logs()).isEmpty();
+    verifyZeroInteractions(projectTypeCollectorMock);
+  }
+
+  @Test
+  public void shouldLogTheCorrectAnalyzerWorkDir() {
+    // in this test we set languageKey() other than LANG_KEY
+
     when(settingsMock.getString("sonar.projectName")).thenReturn("FOO_PROJ");
     when(settingsMock.getString("sonar.projectKey")).thenReturn("FOO_PROJ:GUID");
     when(settingsMock.getString("sonar.projectBaseDir")).thenReturn("BASE DIR");
