@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                     }
                     else
                     {
-                        LogMessage($"Skipping check for latest NuGet since checked recently: {Id}");
+                        LogMessage($"Skipping check for latest NuGet");
                     }
                 }
                 else
@@ -183,7 +183,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             private string NextCheckFilePath()
             {
                 // The file containing the next-check timestamp is stored in folder of the latest version of the package.
-                const string NextUpdateFileName = "NextCheckedForUpdate.txt";
+                const string NextUpdateFileName = "NextCheckForUpdate.txt";
                 var directory = SortedPackageFolders().LastOrDefault();
                 return directory == null ? null : Path.Combine(directory, NextUpdateFileName);
             }

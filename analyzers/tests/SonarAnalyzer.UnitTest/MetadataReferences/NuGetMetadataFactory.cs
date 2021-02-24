@@ -55,9 +55,10 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 "lib", // This has to be last, some packages have DLLs directly in "lib" directory
             };
 
-        /// <param name="targetFramework">Name of the directory containing DLL files inside *.nupgk/lib/{targetFramework}/ folder.</param>
-        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime, string targetFramework) =>
-            Create(new Package(packageId, packageVersion, runtime), new[] { targetFramework });
+        /// <param name="dllDirectory">Name of the directory containing DLL files inside *.nupgk/lib/{dllDirectory}/ or *.nupgk/runtimes/{runtime}/lib/{dllDirectory}/ folder.
+        /// This directory name represents target framework in most cases.</param>
+        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime, string dllDirectory) =>
+            Create(new Package(packageId, packageVersion, runtime), new[] { dllDirectory });
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime = null) =>
             Create(new Package(packageId, packageVersion, runtime), SortedAllowedDirectories);
@@ -84,6 +85,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                .ToImmutableArray();
         }
 
+        /// <param name="allowedDirectories">List of allowed directories sorted by preference to search for DLL files.</param>
         private static IEnumerable<MetadataReference> Create(Package package, string[] allowedDirectories)
         {
             Console.WriteLine();
@@ -102,9 +104,9 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 ?? throw new InvalidOperationException($"No allowed directory with DLL files was found in {packageDirectory}. " +
                                                         "Add new target framework to SortedAllowedDirectories or set targetFramework argument explicitly.");
             var dlls = dllsPerDirectory[directory];
-            foreach (var file in dlls)
+            foreach (string filePath in dlls)
             {
-                Console.WriteLine($"File: {file}");
+                Console.WriteLine($"File: {filePath}");
             }
             return dlls.Select(x => MetadataReference.CreateFromFile(x)).ToArray();
         }
