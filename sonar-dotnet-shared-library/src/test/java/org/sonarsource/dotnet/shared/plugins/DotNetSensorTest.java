@@ -84,7 +84,7 @@ public class DotNetSensorTest {
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir);
     when(reportPathCollector.protobufDirs()).thenReturn(reportPaths);
-    when(projectTypeCollector.getSummary()).thenReturn(Optional.of("TEST PROJECTS SUMMARY"));
+    when(projectTypeCollector.getSummary(SHORT_LANG_NAME)).thenReturn(Optional.of("TEST PROJECTS SUMMARY"));
     DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
     when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
@@ -190,7 +190,7 @@ public class DotNetSensorTest {
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
     String readMore = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
     assertThat(logTester.logs(LoggerLevel.WARN))
-      .containsExactly("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+      .containsExactly("This " + SHORT_LANG_NAME + " sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
         "Your SonarQube/SonarCloud project will not have results for " + SHORT_LANG_NAME + " files. " + readMore);
     verify(analysisWarnings).addUnique("Your project is considered to only have TEST code for language " + SHORT_LANG_NAME + ", so no results have been imported. " + readMore);
   }

@@ -75,7 +75,7 @@ public class DotNetSensor implements ProjectSensor {
     if (shouldExecuteOnProject(context.fileSystem())) {
       executeInternal(context);
     }
-    projectTypeCollector.getSummary().ifPresent(LOG::info);
+    projectTypeCollector.getSummary(pluginMetadata.shortLanguageName()).ifPresent(LOG::info);
   }
 
   private boolean shouldExecuteOnProject(FileSystem fs) {
@@ -125,9 +125,9 @@ public class DotNetSensor implements ProjectSensor {
 
   private static void warnThatProjectContainsOnlyTestCode(AnalysisWarnings analysisWarnings, String languageName) {
     String readMore = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
-    LOG.warn("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+    LOG.warn("This {} sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
         "Your SonarQube/SonarCloud project will not have results for {} files. {}",
-      languageName, readMore);
+      languageName, languageName, readMore);
     analysisWarnings.addUnique(String.format("Your project is considered to only have TEST code for language %s, so no results have been imported. %s",
       languageName, readMore));
   }

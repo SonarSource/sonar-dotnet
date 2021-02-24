@@ -54,16 +54,16 @@ public class ProjectTypeCollector {
     }
   }
 
-  Optional<String> getSummary() {
-    return createMessage(onlyMain, onlyTest, mixed, noFiles);
+  Optional<String> getSummary(String languageName) {
+    return createMessage(languageName, onlyMain, onlyTest, mixed, noFiles);
   }
 
-  private static Optional<String> createMessage(int onlyMain, int onlyTest, int mixed, int noFiles) {
+  private static Optional<String> createMessage(String languageName, int onlyMain, int onlyTest, int mixed, int noFiles) {
     int projectsCount = onlyMain + onlyTest + mixed + noFiles;
     if (projectsCount == 0) {
       return Optional.empty();
     }
-    StringBuilder stringBuilder = new StringBuilder(String.format("Found %d MSBuild %s.", projectsCount, pluralize(PROJECT, projectsCount)));
+    StringBuilder stringBuilder = new StringBuilder(String.format("Found %d MSBuild %s %s:", projectsCount, languageName, pluralize(PROJECT, projectsCount)));
     if (onlyMain > 0) {
       stringBuilder.append(String.format(" %d MAIN %s.", onlyMain, pluralize(PROJECT, onlyMain)));
     }
