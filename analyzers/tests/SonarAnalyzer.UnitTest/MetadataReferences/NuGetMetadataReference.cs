@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using static SonarAnalyzer.UnitTest.MetadataReferences.NuGetMetadataFactory;
 using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
 namespace SonarAnalyzer.UnitTest.MetadataReferences
@@ -26,12 +27,13 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
     internal static class NuGetMetadataReference
     {
         // Hardcoded version
-        public static References MicrosoftVisualStudioQualityToolsUnitTestFramework => Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2");
+        public static References MicrosoftVisualStudioQualityToolsUnitTestFramework =>
+            Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2", null, "Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll");
         public static References MSTestTestFrameworkV1 => Create("MSTest.TestFramework", "1.1.11");
         public static References XunitFrameworkV1 =>
             Create("xunit", "1.9.1")
             .Concat(Create("xunit.extensions", "1.9.1"));
-        public static References NETStandardV2_1_0 => NuGetMetadataFactory.CreateNETStandard21();
+        public static References NETStandardV2_1_0 => CreateNETStandard21();
 
         // Passed version
         public static References BouncyCastle(string packageVersion = "1.8.5") => Create("BouncyCastle", packageVersion);
@@ -42,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References JetBrainsDotMemoryUnit(string packageVersion) => Create("JetBrains.DotMemoryUnit", packageVersion);
         public static References JustMock(string packageVersion) => Create("JustMock", packageVersion);
         public static References JWT(string packageVersion) => Create("JWT", packageVersion);
-        public static References Log4Net(string packageVersion, string targetFramework) => NuGetMetadataFactory.Create("log4net", packageVersion, targetFramework, null);
+        public static References Log4Net(string packageVersion, string targetFramework) => Create("log4net", packageVersion, null, targetFramework);
         public static References MachineSpecifications(string packageVersion) => Create("Machine.Specifications", packageVersion);
         public static References MicrosoftAspNetCore(string packageVersion) => Create("Microsoft.AspNetCore", packageVersion);
         public static References MicrosoftAspNetCoreDiagnostics(string packageVersion) => Create("Microsoft.AspNetCore.Diagnostics", packageVersion);
@@ -92,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References NUnitLite(string packageVersion) => Create("NUnitLite", packageVersion);
         public static References PetaPocoCompiled(string packageVersion = "6.0.353") => Create("PetaPoco.Compiled", packageVersion);
         public static References RestSharp(string packageVersion) => Create("RestSharp", packageVersion);
-        public static References RhinoMocks(string packageVersion) => NuGetMetadataFactory.CreateWithCommandLine("RhinoMocks", packageVersion);
+        public static References RhinoMocks(string packageVersion) => Create("RhinoMocks", packageVersion);
         public static References Shouldly(string packageVersion) => Create("Shouldly", packageVersion);
         public static References SerilogPackages(string packageVersion) =>
             Create("Serilog", packageVersion)
@@ -120,8 +122,5 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References XunitFramework(string packageVersion) =>
             Create("xunit.assert", packageVersion)
             .Concat(Create("xunit.extensibility.core", packageVersion));
-
-        private static References Create(string packageId, string packageVersion, string runtime = null) =>
-            NuGetMetadataFactory.CreateWithCommandLine(packageId, packageVersion, runtime);
     }
 }
