@@ -148,6 +148,15 @@ namespace SonarAnalyzer.UnitTest.Common
             SupportedDiagnostics(AnalyzerLanguage.VisualBasic).Should().OnlyContain(diagnostic => diagnostic.CustomTags.Contains(LanguageNames.VisualBasic));
 
         [TestMethod]
+        public void DeprecatedRules_AreNotInSonarWay()
+        {
+            foreach (var diagnostic in new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics).Where(IsDeprecated))
+            {
+                IsSonarWay(diagnostic).Should().BeFalse($"{diagnostic.Id} is deprecated and should be removed from SonarWay.");
+            }
+        }
+
+        [TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
             var parameterized = new RuleFinder().AllAnalyzerTypes
@@ -159,9 +168,13 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 if (IsSecurityHotspot(diagnostic))
                 {
-                    // Security hotspots are enabled by default, but they will report issues only
-                    // when their ID is contained in SonarLint.xml
+                    // Security hotspots are enabled by default, but they will report issues only when their ID is contained in SonarLint.xml
+                    // Rule activation is done in DiagnosticDescriptorBuilder.WithNotConfigurable() to prevent rule supression and deactivation.
                     diagnostic.IsEnabledByDefault.Should().BeTrue($"{diagnostic.Id} should be enabled by default");
+                    if (IsDeprecated(diagnostic))
+                    {
+                        System.Diagnostics.Debugger.Break();
+                    }
                 }
                 else if (IsDeprecated(diagnostic))
                 {
@@ -174,7 +187,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     // See https://github.com/SonarSource/sonar-dotnet/issues/1274
                     diagnostic.IsEnabledByDefault.Should().BeFalse($"{diagnostic.Id} has parameters and should be disabled by default");
                 }
-                else if (diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag))
+                else if (IsSonarWay(diagnostic))
                 {
                     diagnostic.IsEnabledByDefault.Should().BeTrue($"{diagnostic.Id} is in SonarWay");
                 }
@@ -220,6 +233,9 @@ namespace SonarAnalyzer.UnitTest.Common
 
         private static IEnumerable<Type> GetCodeFixProviderTypes(IEnumerable<Assembly> assemblies) =>
             assemblies.SelectMany(assembly => assembly.GetTypes()).Where(t => t.IsSubclassOf(typeof(SonarCodeFixProvider)));
+
+        private static bool IsSonarWay(DiagnosticDescriptor diagnostic) =>
+            diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);
 
         private static bool IsDeprecated(DiagnosticDescriptor diagnostic)
         {
