@@ -27,7 +27,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
     internal static class NuGetMetadataReference
     {
         // Hardcoded version
-        public static References MicrosoftVisualStudioQualityToolsUnitTestFramework => Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2");
+        public static References MicrosoftVisualStudioQualityToolsUnitTestFramework =>
+            Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2", null, "Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll");
         public static References MSTestTestFrameworkV1 => Create("MSTest.TestFramework", "1.1.11");
         public static References XunitFrameworkV1 =>
             Create("xunit", "1.9.1")

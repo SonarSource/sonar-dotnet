@@ -55,6 +55,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 "lib", // This has to be last, some packages have DLLs directly in "lib" directory
             };
 
+        /// <param name="targetFramework">Name of the directory containing DLL files inside *.nupgk/lib/{targetFramework}/ folder.</param>
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime, string targetFramework) =>
             Create(new Package(packageId, packageVersion, runtime), new[] { targetFramework });
 
@@ -97,7 +98,10 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             var dllsPerDirectory = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
                 .GroupBy(x => new FileInfo(x).Directory.Name)
                 .ToDictionary(x => x.Key.Split('+').First(), x => x.AsEnumerable());
-            var dlls = dllsPerDirectory[allowedDirectories.First(x => dllsPerDirectory.ContainsKey(x))];
+            var directory = allowedDirectories.FirstOrDefault(x => dllsPerDirectory.ContainsKey(x))
+                ?? throw new InvalidOperationException($"No allowed directory with DLL files was found in {packageDirectory}. " +
+                                                        "Add new target framework to SortedAllowedDirectories or set targetFramework argument explicitly.");
+            var dlls = dllsPerDirectory[directory];
             foreach (var file in dlls)
             {
                 Console.WriteLine($"File: {file}");
