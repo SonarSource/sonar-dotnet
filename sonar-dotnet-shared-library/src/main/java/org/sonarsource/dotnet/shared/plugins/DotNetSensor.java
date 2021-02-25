@@ -82,7 +82,7 @@ public class DotNetSensor implements ProjectSensor {
     if (SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey())) {
       return true;
     } else if (SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey())) {
-      warnThatProjectContainsOnlyTestCode(analysisWarnings, pluginMetadata.shortLanguageName());
+      warnThatProjectContainsOnlyTestCode(fs, analysisWarnings, pluginMetadata.shortLanguageName());
     } else {
       // it's not a .NET project
       LOG.debug("No files to analyze. Skip Sensor.");
@@ -123,12 +123,18 @@ public class DotNetSensor implements ProjectSensor {
     }
   }
 
-  private static void warnThatProjectContainsOnlyTestCode(AnalysisWarnings analysisWarnings, String languageName) {
+  private static void warnThatProjectContainsOnlyTestCode(FileSystem fs, AnalysisWarnings analysisWarnings, String languageName) {
     String readMore = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
     LOG.warn("This {} sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
         "Your SonarQube/SonarCloud project will not have results for {} files. {}",
       languageName, languageName, readMore);
-    analysisWarnings.addUnique(String.format("Your project is considered to only have TEST code for language %s, so no results have been imported. %s",
-      languageName, readMore));
+
+    // Before outputting a warning in the User Interface, we want to make sure it's worth the user attention.
+    // There can be cases where a project written in language X has tests written in languages X, Y and Z.
+    // In this case, the fact that there is only test code for languages Y and Z should not trigger a UI warning.
+    if (!SensorContextUtils.hasMainFiles(fs)) {
+      analysisWarnings.addUnique(String.format("Your project contains only TEST code for language %s and no MAIN code for any language, so no results have been imported. %s",
+        languageName, readMore));
+    }
   }
 }
