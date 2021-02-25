@@ -47,7 +47,8 @@ import org.sonarqube.ws.Measures;
   EnsureAllTestsRunTest.class,
   MetricsTest.class,
   NoSonarTest.class,
-  UnitTestResultsTest.class
+  UnitTestResultsTest.class,
+  VbMainCodeCsTestCodeTest.class
 })
 public class Tests {
 

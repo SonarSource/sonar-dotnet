@@ -36,7 +36,9 @@ public class DoNotAnalyzeTestFilesTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  private static final String PROJECT = "DoNotAnalyzeTestFilesTest";
+  private static final String CSHARP_ONLY_TEST_PROJECT = "DoNotAnalyzeTestFilesTest";
+  // the below is explicitly marked as test with <SonarQubeTestProject> MSBuild property
+  private static final String EXPLICITLY_MARKED_AS_TEST = "HtmlCSharpExplicitlyMarkedAsTest";
 
   @Before
   public void init() {
@@ -44,19 +46,37 @@ public class DoNotAnalyzeTestFilesTest {
   }
 
   @Test
-  public void should_not_increment_test() throws Exception {
-    BuildResult buildResult = Tests.analyzeProjectWithSubProject(temp, PROJECT, "MyLib.Tests", "no_rule");
+  public void with_csharp_only_test_should_not_increment_test() throws Exception {
+    BuildResult buildResult = Tests.analyzeProjectWithSubProject(temp, CSHARP_ONLY_TEST_PROJECT, "MyLib.Tests", "no_rule");
 
     assertThat(Tests.getComponent("DoNotAnalyzeTestFilesTest:UnitTest1.cs")).isNotNull();
-    assertThat(getMeasureAsInt(PROJECT, "files")).isNull();
-    assertThat(getMeasureAsInt(PROJECT, "lines")).isNull();
-    assertThat(getMeasureAsInt(PROJECT, "ncloc")).isNull();
+    assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "files")).isNull();
+    assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "lines")).isNull();
+    assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "ncloc")).isNull();
 
     assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
-      .containsExactly("WARN: This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+      .containsExactly("WARN: This C# sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
         "Your SonarQube/SonarCloud project will not have results for C# files. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
-    assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild project. 1 TEST project.");
+    assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
+    verifyGuiAnalysisWarning(buildResult);
+  }
+
+  @Test
+  public void with_html_and_csharp_code_explicitly_marked_as_test_should_not_increment_test() throws Exception {
+    BuildResult buildResult = Tests.analyzeProject(temp, EXPLICITLY_MARKED_AS_TEST, "no_rule");
+
+    assertThat(Tests.getComponent("HtmlCSharpExplicitlyMarkedAsTest:Foo.cs")).isNotNull();
+    assertThat(Tests.getComponent("HtmlCSharpExplicitlyMarkedAsTest:Index.html")).isNull();
+    assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "files")).isNull();
+    assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "lines")).isNull();
+    assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "ncloc")).isNull();
+
+    assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
+      .containsExactly("WARN: This C# sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+        "Your SonarQube/SonarCloud project will not have results for C# files. " +
+        "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+    assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
     verifyGuiAnalysisWarning(buildResult);
   }
 
