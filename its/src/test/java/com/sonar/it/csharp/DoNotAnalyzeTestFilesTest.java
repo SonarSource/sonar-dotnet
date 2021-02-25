@@ -67,7 +67,6 @@ public class DoNotAnalyzeTestFilesTest {
     BuildResult buildResult = Tests.analyzeProject(temp, EXPLICITLY_MARKED_AS_TEST, "no_rule");
 
     assertThat(Tests.getComponent("HtmlCSharpExplicitlyMarkedAsTest:Foo.cs")).isNotNull();
-    assertThat(Tests.getComponent("HtmlCSharpExplicitlyMarkedAsTest:Index.html")).isNull();
     assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "files")).isNull();
     assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "lines")).isNull();
     assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "ncloc")).isNull();
@@ -84,7 +83,7 @@ public class DoNotAnalyzeTestFilesTest {
   private void verifyGuiAnalysisWarning(BuildResult buildResult) {
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("Your project is considered to only have TEST code for language C#, so no results have been imported. " +
+    assertThat(task.getWarningsList()).containsExactly("Your project contains only TEST code for language C# and no MAIN code for any language, so no results have been imported. " +
       "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
   }
 }

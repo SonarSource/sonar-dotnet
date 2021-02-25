@@ -59,6 +59,6 @@ public class SharedFilesTest {
     List<Issue> issues = getIssues("SharedFilesTest:Class1.cs");
     assertThat(issues).hasSize(1);
 
-    assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 2 MSBuild projects. 2 MAIN projects.");
+    assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 2 MSBuild C# projects: 2 MAIN projects.");
   }
 }

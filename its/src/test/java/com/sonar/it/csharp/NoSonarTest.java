@@ -57,6 +57,6 @@ public class NoSonarTest {
 
   @Test
   public void logsContainInfo() {
-    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild project. 1 MAIN project.");
+    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild C# project: 1 MAIN project.");
   }
 }

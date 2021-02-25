@@ -71,7 +71,7 @@ public class MultipleProjectsTest {
 
   @Test
   public void projectTypesInfoIsLogged() {
-    assertThat(buildResult.getLogs()).contains("Found 4 MSBuild projects. 2 MAIN projects. 2 TEST projects.");
+    assertThat(buildResult.getLogs()).contains("Found 4 MSBuild C# projects: 2 MAIN projects. 2 TEST projects.");
   }
 
   @Test
