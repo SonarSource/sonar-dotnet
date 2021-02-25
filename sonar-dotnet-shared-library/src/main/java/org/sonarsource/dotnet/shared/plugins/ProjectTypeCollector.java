@@ -26,7 +26,9 @@ import static org.sonarsource.dotnet.shared.StringUtils.pluralize;
 
 /**
  * Collects information about what types of files are in each project (MAIN, TEST, both or none).
- * The invoker should make sure that no duplicates are added (i.e. call twice for same information).
+ * The invoker should make sure that:
+ * - no duplicates are added (i.e. call twice for same information)
+ * - it is called by the Scanner for MSBuild
  */
 @ScannerSide
 public class ProjectTypeCollector {
