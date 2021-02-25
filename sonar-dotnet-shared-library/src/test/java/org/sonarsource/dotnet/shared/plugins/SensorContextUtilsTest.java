@@ -32,8 +32,8 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.api.batch.fs.InputFile.Type;
+import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasAnyMainFiles;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasFilesOfType;
-import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasMainFiles;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toInputFile;
 
 public class SensorContextUtilsTest {
@@ -98,26 +98,26 @@ public class SensorContextUtilsTest {
 
   @Test
   public void hasMainFiles_whenNoFiles_returnsFalse() {
-    assertThat(hasMainFiles(fs)).isFalse();
+    assertThat(hasAnyMainFiles(fs)).isFalse();
   }
 
   @Test
   public void hasMainFiles_whenOnlyTestFiles_returnsFalse() {
     addFileToFileSystem("foo", Type.TEST, LANG_ONE);
-    assertThat(hasMainFiles(fs)).isFalse();
+    assertThat(hasAnyMainFiles(fs)).isFalse();
   }
 
   @Test
   public void hasMainFiles_whenOnlyMainFiles_returnsTrue() {
     addFileToFileSystem("foo", Type.MAIN, LANG_ONE);
-    assertThat(hasMainFiles(fs)).isTrue();
+    assertThat(hasAnyMainFiles(fs)).isTrue();
   }
 
   @Test
   public void hasMainFiles_whenBothTestAndMainFiles_returnsTrue() {
     addFileToFileSystem("foo", Type.MAIN, LANG_ONE);
     addFileToFileSystem("bar", Type.TEST, LANG_TWO);
-    assertThat(hasMainFiles(fs)).isTrue();
+    assertThat(hasAnyMainFiles(fs)).isTrue();
   }
 
   private void addFileToFileSystem(String fileName, InputFile.Type fileType, String language) {

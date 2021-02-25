@@ -38,6 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ScannerCliTest {
   private static final String RAZOR_PAGES_PROJECT = "WebApplication";
+  private static final String MAIN_AND_TEST_PROJECT = "ScannerCli";
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
@@ -56,21 +57,57 @@ public class ScannerCliTest {
   }
 
   @Test
-  public void scannerCliWithRazorPages() {
+  public void scannerCliWithRazorPagesMainCode() {
+    // by default, the `sonar.sources` are in the scan base directory
     SonarScanner scanner = getSonarScanner(RAZOR_PAGES_PROJECT, "projects/" + RAZOR_PAGES_PROJECT);
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .containsExactlyInAnyOrder(
-        "WARN: No protobuf reports found. The C# files will not have highlighting and metrics.",
-        "WARN: No Roslyn issue reports were found. The C# files have not been analyzed.",
         "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        "WARN: No protobuf reports found. The VB.NET files will not have highlighting and metrics.",
-        "WARN: No Roslyn issue reports were found. The VB.NET files have not been analyzed.",
         "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
       );
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
+  }
+
+  @Test
+  public void scannerCliWithMainHtmlAndCSharpTest() {
+    SonarScanner scanner = getSonarScanner(MAIN_AND_TEST_PROJECT, "projects/" + MAIN_AND_TEST_PROJECT)
+      .setSourceDirs("main")
+      .setTestDirs("test");
+    BuildResult result = ORCHESTRATOR.executeBuild(scanner);
+
+    assertThat(result.getLogsLines(l -> l.contains("WARN")))
+      .containsExactlyInAnyOrder(
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
+      );
+    // The HTML plugin works
+    assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
+  }
+
+  @Test
+  public void scannerCliWithTestHtmlAndCSharp() {
+    SonarScanner scanner = getSonarScanner(MAIN_AND_TEST_PROJECT, "projects/" + MAIN_AND_TEST_PROJECT)
+      .setSourceDirs("")
+      .setTestDirs("main,test");
+    BuildResult result = ORCHESTRATOR.executeBuild(scanner);
+
+    assertThat(result.getLogsLines(l -> l.contains("WARN")))
+      .containsExactlyInAnyOrder(
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
+      );
+  }
+
+  @Test
+  public void scannerCliWithHtmlOnly() {
+    SonarScanner scanner = getSonarScanner(MAIN_AND_TEST_PROJECT, "projects/" + MAIN_AND_TEST_PROJECT)
+      .setSourceDirs("")
+      .setTestDirs("main,test")
+      .setProperty("sonar.cs.file.suffixes=", ".no_extension");
+    BuildResult result = ORCHESTRATOR.executeBuild(scanner);
+
+    assertThat(result.getLogsLines(l -> l.contains("WARN"))).isEmpty();
   }
 
   private SonarScanner getSonarScanner(String projectKey, String projectDir) {

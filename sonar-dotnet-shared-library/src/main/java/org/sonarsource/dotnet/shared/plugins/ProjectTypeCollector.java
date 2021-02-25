@@ -56,12 +56,12 @@ public class ProjectTypeCollector {
     }
   }
 
-  Optional<String> getSummary(String languageName) {
-    return createMessage(languageName, onlyMain, onlyTest, mixed, noFiles);
+  boolean anyProjects() {
+    return countProjects() > 0;
   }
 
-  private static Optional<String> createMessage(String languageName, int onlyMain, int onlyTest, int mixed, int noFiles) {
-    int projectsCount = onlyMain + onlyTest + mixed + noFiles;
+  Optional<String> getSummary(String languageName) {
+    int projectsCount = countProjects();
     if (projectsCount == 0) {
       return Optional.empty();
     }
@@ -80,5 +80,9 @@ public class ProjectTypeCollector {
     }
 
     return Optional.of(stringBuilder.toString());
+  }
+
+  private int countProjects() {
+    return onlyMain + onlyTest + mixed + noFiles;
   }
 }

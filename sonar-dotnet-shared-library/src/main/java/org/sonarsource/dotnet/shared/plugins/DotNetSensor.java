@@ -46,6 +46,7 @@ import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.active
 public class DotNetSensor implements ProjectSensor {
 
   private static final Logger LOG = Loggers.get(DotNetSensor.class);
+  private static final String GET_HELP_MESSAGE = "You can get help on the community forum: https://community.sonarsource.com";
 
   private final ProtobufDataImporter protobufDataImporter;
   private final RoslynDataImporter roslynDataImporter;
@@ -72,41 +73,30 @@ public class DotNetSensor implements ProjectSensor {
 
   @Override
   public void execute(SensorContext context) {
-    if (shouldExecuteOnProject(context.fileSystem())) {
-      executeInternal(context);
+    FileSystem fs = context.fileSystem();
+    boolean hasMainFiles = SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey());
+    boolean anyProjects = projectTypeCollector.anyProjects();
+    if (hasMainFiles && anyProjects) {
+      importResults(context);
+    } else {
+      log(fs, hasMainFiles, anyProjects);
     }
     projectTypeCollector.getSummary(pluginMetadata.shortLanguageName()).ifPresent(LOG::info);
   }
 
-  private boolean shouldExecuteOnProject(FileSystem fs) {
-    if (SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey())) {
-      return true;
-    } else if (SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey())) {
-      warnThatProjectContainsOnlyTestCode(fs, analysisWarnings, pluginMetadata.shortLanguageName());
-    } else {
-      // it's not a .NET project
-      LOG.debug("No files to analyze. Skip Sensor.");
-    }
-    return false;
-  }
-
-  private void executeInternal(SensorContext context) {
+  private void importResults(SensorContext context) {
     UnaryOperator<String> toRealPath = new RealPathProvider();
-
-    boolean shouldSuggestScannerForMSBuild = false;
 
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
     if (protobufPaths.isEmpty()) {
-      LOG.warn("No protobuf reports found. The {} files will not have highlighting and metrics.", pluginMetadata.shortLanguageName());
-      shouldSuggestScannerForMSBuild = true;
+      LOG.warn("No protobuf reports found. The {} files will not have highlighting and metrics. {}", pluginMetadata.shortLanguageName(), GET_HELP_MESSAGE);
     } else {
       protobufDataImporter.importResults(context, protobufPaths, toRealPath);
     }
 
     List<RoslynReport> roslynReports = reportPathCollector.roslynReports();
     if (roslynReports.isEmpty()) {
-      LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed.", pluginMetadata.shortLanguageName());
-      shouldSuggestScannerForMSBuild = true;
+      LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed. {}", pluginMetadata.shortLanguageName(), GET_HELP_MESSAGE);
     } else {
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
         .findAll()
@@ -115,11 +105,34 @@ public class DotNetSensor implements ProjectSensor {
         .collect(toList()));
       roslynDataImporter.importRoslynReports(roslynReports, context, activeRoslynRulesByPartialRepoKey, toRealPath);
     }
+  }
 
-    if (shouldSuggestScannerForMSBuild) {
-      LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
-          + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        pluginMetadata.shortLanguageName());
+  /**
+   * If the project does not contain MAIN files OR does not have any found .NET projects (implicitly it has not been scanned with the Scanner for .NET)
+   * we should log a warning to the user, because no files will be analyzed.
+   *
+   * @param hasMainFiles True if MAIN files of this sensor language have been indexed. Can be true only if `anyProjects` is false.
+   * @param anyProjects  True if at least one .NET project has been found in {@link org.sonarsource.dotnet.shared.plugins.FileTypeSensor#execute(SensorContext)}. Can be true only if `hasMainFiles` is false.
+   */
+  private void log(FileSystem fs, boolean hasMainFiles, boolean anyProjects) {
+    boolean hasTestFiles = SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey());
+    if (anyProjects) {
+      // the scanner for .NET has been used, which means that hasMainFiles is false
+      assert !hasMainFiles;
+      if (hasTestFiles) {
+        warnThatProjectContainsOnlyTestCode(fs, analysisWarnings, pluginMetadata.shortLanguageName());
+      } else {
+        logDebugNoFiles();
+      }
+    } else {
+      // the scanner for .NET has not been used. hasMainFiles can be either true or false
+      if (hasMainFiles || hasTestFiles) {
+        LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
+            + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+          pluginMetadata.shortLanguageName());
+      } else {
+        logDebugNoFiles();
+      }
     }
   }
 
@@ -132,9 +145,14 @@ public class DotNetSensor implements ProjectSensor {
     // Before outputting a warning in the User Interface, we want to make sure it's worth the user attention.
     // There can be cases where a project written in language X has tests written in languages X, Y and Z.
     // In this case, the fact that there is only test code for languages Y and Z should not trigger a UI warning.
-    if (!SensorContextUtils.hasMainFiles(fs)) {
+    if (!SensorContextUtils.hasAnyMainFiles(fs)) {
       analysisWarnings.addUnique(String.format("Your project contains only TEST code for language %s and no MAIN code for any language, so no results have been imported. %s",
         languageName, readMore));
     }
+  }
+
+  private static void logDebugNoFiles() {
+    // No MAIN and no TEST files -> skip
+    LOG.debug("No files to analyze. Skip Sensor.");
   }
 }
