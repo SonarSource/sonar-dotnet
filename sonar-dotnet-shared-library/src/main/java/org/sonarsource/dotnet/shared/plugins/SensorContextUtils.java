@@ -20,10 +20,13 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import javax.annotation.CheckForNull;
+import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+
+import static org.sonar.api.batch.fs.InputFile.Type;
 
 public final class SensorContextUtils {
   private SensorContextUtils() {
@@ -35,8 +38,13 @@ public final class SensorContextUtils {
     return fs.inputFile(fs.predicates().hasPath(file));
   }
 
-  public static boolean hasFilesOfType(FileSystem fs, InputFile.Type fileType, String languageKey) {
-    return fs.inputFiles(fs.predicates().and(fs.predicates().hasType(fileType), fs.predicates().hasLanguage(languageKey))).iterator().hasNext();
+  public static boolean hasFilesOfType(FileSystem fs, Type fileType, String languageKey) {
+    FilePredicates p = fs.predicates();
+    return fs.inputFiles(p.and(p.hasType(fileType), p.hasLanguage(languageKey))).iterator().hasNext();
+  }
+
+  public static boolean hasAnyMainFiles(FileSystem fs) {
+    return fs.inputFiles(fs.predicates().hasType(Type.MAIN)).iterator().hasNext();
   }
 
   public static TextRange toTextRange(InputFile inputFile, SonarAnalyzer.TextRange pbTextRange) {

@@ -26,7 +26,9 @@ import static org.sonarsource.dotnet.shared.StringUtils.pluralize;
 
 /**
  * Collects information about what types of files are in each project (MAIN, TEST, both or none).
- * The invoker should make sure that no duplicates are added (i.e. call twice for same information).
+ * The invoker should make sure that:
+ * - no duplicates are added (i.e. call twice for same information)
+ * - it is called by the Scanner for MSBuild
  */
 @ScannerSide
 public class ProjectTypeCollector {
@@ -54,16 +56,16 @@ public class ProjectTypeCollector {
     }
   }
 
-  Optional<String> getSummary() {
-    return createMessage(onlyMain, onlyTest, mixed, noFiles);
+  boolean hasProjects() {
+    return countProjects() > 0;
   }
 
-  private static Optional<String> createMessage(int onlyMain, int onlyTest, int mixed, int noFiles) {
-    int projectsCount = onlyMain + onlyTest + mixed + noFiles;
+  Optional<String> getSummary(String languageName) {
+    int projectsCount = countProjects();
     if (projectsCount == 0) {
       return Optional.empty();
     }
-    StringBuilder stringBuilder = new StringBuilder(String.format("Found %d MSBuild %s.", projectsCount, pluralize(PROJECT, projectsCount)));
+    StringBuilder stringBuilder = new StringBuilder(String.format("Found %d MSBuild %s %s:", projectsCount, languageName, pluralize(PROJECT, projectsCount)));
     if (onlyMain > 0) {
       stringBuilder.append(String.format(" %d MAIN %s.", onlyMain, pluralize(PROJECT, onlyMain)));
     }
@@ -78,5 +80,9 @@ public class ProjectTypeCollector {
     }
 
     return Optional.of(stringBuilder.toString());
+  }
+
+  private int countProjects() {
+    return onlyMain + onlyTest + mixed + noFiles;
   }
 }

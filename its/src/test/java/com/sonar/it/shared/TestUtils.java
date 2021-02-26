@@ -68,6 +68,21 @@ public class TestUtils {
   final private static Logger LOG = LoggerFactory.getLogger(TestUtils.class);
   private static final String MSBUILD_PATH = "MSBUILD_PATH";
 
+  // Ensure no AnalysisWarning is raised inside the SQ GUI
+  public static void verifyNoGuiWarnings(Orchestrator orchestrator, BuildResult buildResult) {
+    Ce.Task task = TestUtils.getAnalysisWarningsTask(orchestrator, buildResult);
+    assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
+    assertThat(task.getWarningsList()).isEmpty();
+  }
+
+  // Verify an AnalysisWarning is raised inside the SQ GUI (on the project dashboard)
+  public static void verifyGuiTestOnlyProjectAnalysisWarning(Orchestrator orchestrator, BuildResult buildResult, String language) {
+    Ce.Task task = TestUtils.getAnalysisWarningsTask(orchestrator, buildResult);
+    assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
+    assertThat(task.getWarningsList()).containsExactly("Your project contains only TEST code for language " + language + " and no MAIN code for any language, so no results have been imported. " +
+      "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+  }
+
   public static Ce.Task getAnalysisWarningsTask(Orchestrator orchestrator, BuildResult buildResult) {
     String taskId = extractCeTaskId(buildResult);
     return newWsClient(orchestrator)

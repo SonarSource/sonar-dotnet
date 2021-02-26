@@ -29,9 +29,10 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
+import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NoSonarTest {
+public class VbMainCodeCsTestCodeTest {
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
@@ -39,7 +40,8 @@ public class NoSonarTest {
   @ClassRule
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
-  private static final String PROJECT = "VbNoSonarTest";
+  private static final String SONAR_RULES_PREFIX = "vbnet:";
+  private static final String PROJECT = "VbMainCsTest";
   private static BuildResult buildResult;
 
   @BeforeClass
@@ -49,18 +51,28 @@ public class NoSonarTest {
   }
 
   @Test
-  public void excludeNoSonarComment() {
-    List<Issues.Issue> issues = TestUtils.getIssues(com.sonar.it.vbnet.Tests.ORCHESTRATOR, PROJECT);
-    assertThat(issues).hasSize(1).hasOnlyOneElementSatisfying(e ->
-    {
-      assertThat(e.getLine()).isEqualTo(19);
-      assertThat(e.getRule()).isEqualTo("vbnet:S101");
-    });
+  public void hasIssues() {
+    List<Issues.Issue> issues = TestUtils.getIssues(Tests.ORCHESTRATOR, PROJECT);
+    assertThat(issues).hasSize(3)
+      .extracting(Issues.Issue::getRule)
+      .containsExactlyInAnyOrder(
+        SONAR_RULES_PREFIX + "S117",
+        SONAR_RULES_PREFIX + "S1481",
+        SONAR_RULES_PREFIX + "S6145"
+      );
   }
 
   @Test
   public void logsContainInfo() {
-    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild VB.NET project: 1 MAIN project.");
+    assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
+      .contains("WARN: This C# sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+        "Your SonarQube/SonarCloud project will not have results for C# files. " +
+        "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+    assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains(
+      "INFO: Found 1 MSBuild VB.NET project: 1 MAIN project.",
+      "INFO: Found 1 MSBuild C# project: 1 TEST project."
+    );
+    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, buildResult);
   }
 
 }

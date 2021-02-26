@@ -38,6 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ScannerCliTest {
   private static final String RAZOR_PAGES_PROJECT = "WebApplication";
+  private static final String HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS = "ScannerCli";
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
@@ -53,24 +54,65 @@ public class ScannerCliTest {
   @Before
   public void init() {
     TestUtils.deleteLocalCache();
+    TestUtils.reset(ORCHESTRATOR);
   }
 
   @Test
-  public void scannerCliWithRazorPages() {
+  public void givenRazorPagesMainCode_whenScannerForCliIsUsed_logsCSharpWarning() {
+    // by default, the `sonar.sources` are in the scan base directory
     SonarScanner scanner = getSonarScanner(RAZOR_PAGES_PROJECT, "projects/" + RAZOR_PAGES_PROJECT);
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .containsExactlyInAnyOrder(
-        "WARN: No protobuf reports found. The C# files will not have highlighting and metrics.",
-        "WARN: No Roslyn issue reports were found. The C# files have not been analyzed.",
         "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        "WARN: No protobuf reports found. The VB.NET files will not have highlighting and metrics.",
-        "WARN: No Roslyn issue reports were found. The VB.NET files have not been analyzed.",
         "WARN: Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
       );
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
+    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+  }
+
+  @Test
+  public void givenMainHtmlCodeAndTestCSharpCode_whenScannerForCliIsUsed_logsCSharpWarning() {
+    SonarScanner scanner = getSonarScanner(HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "projects/" + HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS)
+      .setSourceDirs("main")
+      .setTestDirs("test");
+    BuildResult result = ORCHESTRATOR.executeBuild(scanner);
+
+    assertThat(result.getLogsLines(l -> l.contains("WARN")))
+      .containsExactlyInAnyOrder(
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
+      );
+    // The HTML plugin works
+    assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "violations")).isEqualTo(2);
+    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+  }
+
+  @Test
+  public void givenTestHtmlAndCSharpCode_whenScannerForCliIsUsed_logsCSharpWarning() {
+    SonarScanner scanner = getSonarScanner(HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "projects/" + HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS)
+      .setSourceDirs("")
+      .setTestDirs("main,test");
+    BuildResult result = ORCHESTRATOR.executeBuild(scanner);
+
+    assertThat(result.getLogsLines(l -> l.contains("WARN")))
+      .containsExactlyInAnyOrder(
+        "WARN: Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"
+      );
+    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
+  }
+
+  @Test
+  public void givenTestHtmlCode_whenScannerForCliIsUsed_doesNotLogCsharpWarning() {
+    SonarScanner scanner = getSonarScanner(HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "projects/" + HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS)
+      .setSourceDirs("")
+      .setTestDirs("main,test")
+      .setProperty("sonar.cs.file.suffixes=", ".no_extension");
+    BuildResult result = ORCHESTRATOR.executeBuild(scanner);
+
+    assertThat(result.getLogsLines(l -> l.contains("WARN"))).isEmpty();
+    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, result);
   }
 
   private SonarScanner getSonarScanner(String projectKey, String projectDir) {

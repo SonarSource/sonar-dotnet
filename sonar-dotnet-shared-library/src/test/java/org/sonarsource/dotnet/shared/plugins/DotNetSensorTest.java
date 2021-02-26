@@ -57,7 +57,9 @@ public class DotNetSensorTest {
 
   private static final String REPO_KEY = "REPO_KEY";
   private static final String LANG_KEY = "LANG_KEY";
+  private static final String A_DIFFERENT_LANG_KEY = "another language than the tested plugin";
   private static final String SHORT_LANG_NAME = "SHORT_LANG_NAME";
+  private static String READ_MORE_LOG = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -84,7 +86,8 @@ public class DotNetSensorTest {
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir);
     when(reportPathCollector.protobufDirs()).thenReturn(reportPaths);
-    when(projectTypeCollector.getSummary()).thenReturn(Optional.of("TEST PROJECTS SUMMARY"));
+    when(projectTypeCollector.getSummary(SHORT_LANG_NAME)).thenReturn(Optional.of("TEST PROJECTS SUMMARY"));
+    when(projectTypeCollector.hasProjects()).thenReturn(true);
     DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
     when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
@@ -120,10 +123,7 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(
-      "No protobuf reports found. The " + SHORT_LANG_NAME + " files will not have highlighting and metrics.",
-      "Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
-        " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("No protobuf reports found. The " + SHORT_LANG_NAME + " files will not have highlighting and metrics. You can get help on the community forum: https://community.sonarsource.com");
     verify(analysisWarnings, never()).addUnique(any());
     verify(reportPathCollector).protobufDirs();
     verifyZeroInteractions(protobufDataImporter);
@@ -143,10 +143,7 @@ public class DotNetSensorTest {
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     verifyZeroInteractions(roslynDataImporter);
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(
-      "No Roslyn issue reports were found. The " + SHORT_LANG_NAME + " files have not been analyzed.",
-      "Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
-        " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("No Roslyn issue reports were found. The " + SHORT_LANG_NAME + " files have not been analyzed. You can get help on the community forum: https://community.sonarsource.com");
     verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
@@ -168,6 +165,17 @@ public class DotNetSensorTest {
   }
 
   @Test
+  public void whereThereIsNoSummary_doNoLogSummary() {
+    addMainFileToFileSystem();
+    addRoslynReports();
+    when(projectTypeCollector.getSummary(SHORT_LANG_NAME)).thenReturn(Optional.empty());
+    sensor.execute(tester);
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.INFO)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+  }
+
+  @Test
   public void whenThereAreBothMainAndTestFiles_doNotLog() {
     addMainFileToFileSystem();
     addTestFileToFileSystem();
@@ -176,23 +184,57 @@ public class DotNetSensorTest {
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
     verify(analysisWarnings, never()).addUnique(any());
   }
 
   @Test
-  public void whenThereAreOnlyTestFiles_logWarning() {
+  public void whenThereAreOnlyTestFilesInAnotherLanguage_logOnlySkipSensor() {
+    addFileToFileSystem("qix", Type.TEST, A_DIFFERENT_LANG_KEY);
+
+    sensor.execute(tester);
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    verify(analysisWarnings, never()).addUnique(any());
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactlyInAnyOrder("No files to analyze. Skip Sensor.");
+  }
+
+  @Test
+  public void whenThereAreOnlyMainFilesInAnotherLanguage_logOnlySkipSensor() {
+    addFileToFileSystem("qix", Type.MAIN, A_DIFFERENT_LANG_KEY);
+
+    sensor.execute(tester);
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    verify(analysisWarnings, never()).addUnique(any());
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactlyInAnyOrder("No files to analyze. Skip Sensor.");
+  }
+
+  @Test
+  public void whenThereAreOnlyTestFilesInPluginLanguage_andNoMainFilesInAnyLanguage_logConsoleAndAnalysisWarnings() {
     addTestFileToFileSystem();
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
-    String readMore = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
     assertThat(logTester.logs(LoggerLevel.WARN))
-      .containsExactly("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
-        "Your SonarQube/SonarCloud project will not have results for " + SHORT_LANG_NAME + " files. " + readMore);
-    verify(analysisWarnings).addUnique("Your project is considered to only have TEST code for language " + SHORT_LANG_NAME + ", so no results have been imported. " + readMore);
+      .containsExactly("This " + SHORT_LANG_NAME + " sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+        "Your SonarQube/SonarCloud project will not have results for " + SHORT_LANG_NAME + " files. " + READ_MORE_LOG);
+    verify(analysisWarnings).addUnique("Your project contains only TEST code for language " + SHORT_LANG_NAME +
+      " and no MAIN code for any language, so no results have been imported. " + READ_MORE_LOG);
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+  }
+
+  @Test
+  public void whenThereAreOnlyTestFilesInPluginLanguage_andMainFilesInAnotherLanguage_logWarningOnlyConsole() {
+    addTestFileToFileSystem();
+    addFileToFileSystem("qix", Type.MAIN, A_DIFFERENT_LANG_KEY);
+
+    sensor.execute(tester);
+
+    assertThat(logTester.logs(LoggerLevel.WARN))
+      .containsExactly("This " + SHORT_LANG_NAME + " sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+        "Your SonarQube/SonarCloud project will not have results for " + SHORT_LANG_NAME + " files. " + READ_MORE_LOG);
+    verify(analysisWarnings, never()).addUnique(any());
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
 
   @Test
@@ -201,22 +243,68 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     verify(analysisWarnings, never()).addUnique(any());
-    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).isEqualTo("No files to analyze. Skip Sensor.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("No files to analyze. Skip Sensor.");
+  }
+
+  @Test
+  public void whenThereAreMainFiles_andNoProjects_logToUseScannerForNet() {
+    addMainFileToFileSystem();
+    when(projectTypeCollector.hasProjects()).thenReturn(false);
+
+    sensor.execute(tester);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
+      " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
+    verify(analysisWarnings, never()).addUnique(any());
+  }
+
+  @Test
+  public void whenThereAreTestFiles_andNoProjects_logToUseScannerForNet() {
+    addTestFileToFileSystem();
+    when(projectTypeCollector.hasProjects()).thenReturn(false);
+
+    sensor.execute(tester);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
+      " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
+    verify(analysisWarnings, never()).addUnique(any());
+  }
+
+  @Test
+  public void whenThereAreMainAndTestFiles_andNoProjects_logToUseScannerForNet() {
+    addMainFileToFileSystem();
+    addTestFileToFileSystem();
+    when(projectTypeCollector.hasProjects()).thenReturn(false);
+
+    sensor.execute(tester);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
+      " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
+    verify(analysisWarnings, never()).addUnique(any());
+  }
+
+  @Test
+  public void whenThereAreNoFiles_andNoProjects_logDebug() {
+    when(projectTypeCollector.hasProjects()).thenReturn(false);
+
+    sensor.execute(tester);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    verify(analysisWarnings, never()).addUnique(any());
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("No files to analyze. Skip Sensor.");
   }
 
   private void addMainFileToFileSystem() {
-    addFileToFileSystem("foo.language", Type.MAIN);
+    addFileToFileSystem("foo.language", Type.MAIN, LANG_KEY);
   }
 
   private void addTestFileToFileSystem() {
-    addFileToFileSystem("bar.language", Type.TEST);
+    addFileToFileSystem("bar.language", Type.TEST, LANG_KEY);
   }
 
-  private void addFileToFileSystem(String fileName, Type fileType) {
+  private void addFileToFileSystem(String fileName, Type fileType, String language) {
     DefaultInputFile inputFile = new TestInputFileBuilder("mod", fileName)
-      .setLanguage(LANG_KEY)
+      .setLanguage(language)
       .setType(fileType)
       .build();
     tester.fileSystem().add(inputFile);

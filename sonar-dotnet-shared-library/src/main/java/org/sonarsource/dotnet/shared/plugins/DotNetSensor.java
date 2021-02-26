@@ -46,6 +46,7 @@ import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.active
 public class DotNetSensor implements ProjectSensor {
 
   private static final Logger LOG = Loggers.get(DotNetSensor.class);
+  private static final String GET_HELP_MESSAGE = "You can get help on the community forum: https://community.sonarsource.com";
 
   private final ProtobufDataImporter protobufDataImporter;
   private final RoslynDataImporter roslynDataImporter;
@@ -72,41 +73,30 @@ public class DotNetSensor implements ProjectSensor {
 
   @Override
   public void execute(SensorContext context) {
-    if (shouldExecuteOnProject(context.fileSystem())) {
-      executeInternal(context);
-    }
-    projectTypeCollector.getSummary().ifPresent(LOG::info);
-  }
-
-  private boolean shouldExecuteOnProject(FileSystem fs) {
-    if (SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey())) {
-      return true;
-    } else if (SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey())) {
-      warnThatProjectContainsOnlyTestCode(analysisWarnings, pluginMetadata.shortLanguageName());
+    FileSystem fs = context.fileSystem();
+    boolean hasMainFiles = SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey());
+    boolean hasProjects = projectTypeCollector.hasProjects();
+    if (hasMainFiles && hasProjects) {
+      importResults(context);
     } else {
-      // it's not a .NET project
-      LOG.debug("No files to analyze. Skip Sensor.");
+      log(fs, hasMainFiles, hasProjects);
     }
-    return false;
+    projectTypeCollector.getSummary(pluginMetadata.shortLanguageName()).ifPresent(LOG::info);
   }
 
-  private void executeInternal(SensorContext context) {
+  private void importResults(SensorContext context) {
     UnaryOperator<String> toRealPath = new RealPathProvider();
-
-    boolean shouldSuggestScannerForMSBuild = false;
 
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
     if (protobufPaths.isEmpty()) {
-      LOG.warn("No protobuf reports found. The {} files will not have highlighting and metrics.", pluginMetadata.shortLanguageName());
-      shouldSuggestScannerForMSBuild = true;
+      LOG.warn("No protobuf reports found. The {} files will not have highlighting and metrics. {}", pluginMetadata.shortLanguageName(), GET_HELP_MESSAGE);
     } else {
       protobufDataImporter.importResults(context, protobufPaths, toRealPath);
     }
 
     List<RoslynReport> roslynReports = reportPathCollector.roslynReports();
     if (roslynReports.isEmpty()) {
-      LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed.", pluginMetadata.shortLanguageName());
-      shouldSuggestScannerForMSBuild = true;
+      LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed. {}", pluginMetadata.shortLanguageName(), GET_HELP_MESSAGE);
     } else {
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
         .findAll()
@@ -115,20 +105,51 @@ public class DotNetSensor implements ProjectSensor {
         .collect(toList()));
       roslynDataImporter.importRoslynReports(roslynReports, context, activeRoslynRulesByPartialRepoKey, toRealPath);
     }
+  }
 
-    if (shouldSuggestScannerForMSBuild) {
+  /**
+   * If the project does not contain MAIN files OR does not have any found .NET projects (implicitly it has not been scanned with the Scanner for .NET)
+   * we should log a warning to the user, because no files will be analyzed.
+   *
+   * @param hasMainFiles True if MAIN files of this sensor language have been indexed. Can be true only if `hasProjects` is false.
+   * @param hasProjects  True if at least one .NET project has been found in {@link org.sonarsource.dotnet.shared.plugins.FileTypeSensor#execute(SensorContext)}. Can be true only if `hasMainFiles` is false.
+   */
+  private void log(FileSystem fs, boolean hasMainFiles, boolean hasProjects) {
+    boolean hasTestFiles = SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey());
+    if (hasProjects) {
+      // the scanner for .NET has been used, which means that `hasMainFiles` is false.
+      assert !hasMainFiles;
+      if (hasTestFiles) {
+        warnThatProjectContainsOnlyTestCode(fs, analysisWarnings, pluginMetadata.shortLanguageName());
+      }
+    } else if (hasMainFiles || hasTestFiles) {
+      // the scanner for .NET has _not_ been used. hasMainFiles can be either true or false.
       LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
           + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         pluginMetadata.shortLanguageName());
     }
+    if (!hasMainFiles && !hasTestFiles) {
+      logDebugNoFiles();
+    }
   }
 
-  private static void warnThatProjectContainsOnlyTestCode(AnalysisWarnings analysisWarnings, String languageName) {
+  private static void warnThatProjectContainsOnlyTestCode(FileSystem fs, AnalysisWarnings analysisWarnings, String languageName) {
     String readMore = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
-    LOG.warn("This sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+    LOG.warn("This {} sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
         "Your SonarQube/SonarCloud project will not have results for {} files. {}",
-      languageName, readMore);
-    analysisWarnings.addUnique(String.format("Your project is considered to only have TEST code for language %s, so no results have been imported. %s",
-      languageName, readMore));
+      languageName, languageName, readMore);
+
+    // Before outputting a warning in the User Interface, we want to make sure it's worth the user attention.
+    // There can be cases where a project written in language X has tests written in languages X, Y and Z.
+    // In this case, the fact that there is only test code for languages Y and Z should not trigger a UI warning.
+    if (!SensorContextUtils.hasAnyMainFiles(fs)) {
+      analysisWarnings.addUnique(String.format("Your project contains only TEST code for language %s and no MAIN code for any language, so no results have been imported. %s",
+        languageName, readMore));
+    }
+  }
+
+  private static void logDebugNoFiles() {
+    // No MAIN and no TEST files -> skip
+    LOG.debug("No files to analyze. Skip Sensor.");
   }
 }

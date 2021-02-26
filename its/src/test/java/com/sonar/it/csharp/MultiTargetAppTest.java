@@ -56,6 +56,6 @@ public class MultiTargetAppTest {
       .collect(Collectors.toList());
     assertThat(issues).hasSize(4);
 
-    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild project. 1 MAIN project.");
+    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild C# project: 1 MAIN project.");
   }
 }

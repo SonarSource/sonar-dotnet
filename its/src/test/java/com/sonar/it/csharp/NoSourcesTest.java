@@ -57,6 +57,6 @@ public class NoSourcesTest {
 
   @Test
   public void logsContainInfo() {
-    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild project. 1 with no MAIN nor TEST files.");
+    assertThat(buildResult.getLogs()).contains("Found 1 MSBuild C# project: 1 with no MAIN nor TEST files.");
   }
 }

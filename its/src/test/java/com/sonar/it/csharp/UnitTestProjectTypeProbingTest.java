@@ -96,6 +96,6 @@ public class UnitTestProjectTypeProbingTest {
 
   @Test
   public void logsContainInfo() {
-    assertThat(buildResult.getLogs()).contains("Found 7 MSBuild projects. 3 MAIN projects. 4 TEST projects.");
+    assertThat(buildResult.getLogs()).contains("Found 7 MSBuild C# projects: 3 MAIN projects. 4 TEST projects.");
   }
 }

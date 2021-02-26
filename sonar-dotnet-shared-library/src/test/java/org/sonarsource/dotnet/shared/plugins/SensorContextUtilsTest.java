@@ -25,13 +25,20 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.api.batch.fs.InputFile.Type;
+import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasAnyMainFiles;
+import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasFilesOfType;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toInputFile;
 
 public class SensorContextUtilsTest {
+  private static final String LANG_ONE = "LANG_ONE";
+  private static final String LANG_TWO = "LANG_TWO";
 
   @Rule
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
@@ -65,4 +72,59 @@ public class SensorContextUtilsTest {
     assertThat(toInputFile(fs, "nonexistent")).isNull();
   }
 
+  @Test
+  public void hasFilesOfType_whenNoFiles_returnsFalse() {
+    assertThat(hasFilesOfType(fs, Type.MAIN, LANG_ONE)).isFalse();
+    assertThat(hasFilesOfType(fs, Type.TEST, LANG_ONE)).isFalse();
+  }
+
+  @Test
+  public void hasFilesOfType_whenTypeIsCorrect_andLanguageIsDifferent_returnFalse() {
+    addFileToFileSystem("foo", Type.MAIN, LANG_ONE);
+    assertThat(hasFilesOfType(fs, Type.MAIN, LANG_TWO)).isFalse();
+  }
+
+  @Test
+  public void hasFilesOfType_whenLanguageIsCorrect_andTypeIsDifferent_returnsFalse() {
+    addFileToFileSystem("foo", Type.MAIN, LANG_ONE);
+    assertThat(hasFilesOfType(fs, Type.TEST, LANG_ONE)).isFalse();
+  }
+
+  @Test
+  public void hasFilesOfType_whenLanguageAndTypeAreCorrect_returnsTrue() {
+    addFileToFileSystem("foo", Type.MAIN, LANG_ONE);
+    assertThat(hasFilesOfType(fs, Type.MAIN, LANG_ONE)).isTrue();
+  }
+
+  @Test
+  public void hasMainFiles_whenNoFiles_returnsFalse() {
+    assertThat(hasAnyMainFiles(fs)).isFalse();
+  }
+
+  @Test
+  public void hasMainFiles_whenOnlyTestFiles_returnsFalse() {
+    addFileToFileSystem("foo", Type.TEST, LANG_ONE);
+    assertThat(hasAnyMainFiles(fs)).isFalse();
+  }
+
+  @Test
+  public void hasMainFiles_whenOnlyMainFiles_returnsTrue() {
+    addFileToFileSystem("foo", Type.MAIN, LANG_ONE);
+    assertThat(hasAnyMainFiles(fs)).isTrue();
+  }
+
+  @Test
+  public void hasMainFiles_whenBothTestAndMainFiles_returnsTrue() {
+    addFileToFileSystem("foo", Type.MAIN, LANG_ONE);
+    addFileToFileSystem("bar", Type.TEST, LANG_TWO);
+    assertThat(hasAnyMainFiles(fs)).isTrue();
+  }
+
+  private void addFileToFileSystem(String fileName, InputFile.Type fileType, String language) {
+    DefaultInputFile inputFile = new TestInputFileBuilder("mod", fileName)
+      .setLanguage(language)
+      .setType(fileType)
+      .build();
+    fs.add(inputFile);
+  }
 }
