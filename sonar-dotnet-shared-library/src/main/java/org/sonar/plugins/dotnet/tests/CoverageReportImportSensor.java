@@ -50,7 +50,7 @@ public class CoverageReportImportSensor implements ProjectSensor {
   private final String languageName;
 
   public CoverageReportImportSensor(CoverageConfiguration coverageConf, CoverageAggregator coverageAggregator,
-    String languageKey, String languageName, boolean isIntegrationTest) {
+                                    String languageKey, String languageName, boolean isIntegrationTest) {
     this.coverageConf = coverageConf;
     this.coverageAggregator = coverageAggregator;
     this.isIntegrationTest = isIntegrationTest;
@@ -122,8 +122,7 @@ public class CoverageReportImportSensor implements ProjectSensor {
     if (fileCountStatistics.total != 0) {
       LOG.info(fileCountStatistics.toString());
       if (fileCountStatistics.mainWithCoverage == 0) {
-        LOG.warn("The Code Coverage report doesn't contain any coverage data for the included files. For "
-          + "troubleshooting help, please visit our community forum at https://community.sonarsource.com");
+        LOG.warn("The Code Coverage report doesn't contain any coverage data for the included files. Troubleshooting guide: https://community.sonarsource.com/t/37151");
       }
     }
   }
