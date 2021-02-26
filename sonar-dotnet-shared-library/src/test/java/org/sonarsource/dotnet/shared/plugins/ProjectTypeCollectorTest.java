@@ -31,6 +31,7 @@ public class ProjectTypeCollectorTest {
   public void withNoProjects() {
     ProjectTypeCollector sut = new ProjectTypeCollector();
     assertThat(sut.getSummary(LANG_NAME)).isEmpty();
+    assertThat(sut.anyProjects()).isFalse();
   }
 
   @Test
@@ -40,6 +41,7 @@ public class ProjectTypeCollectorTest {
     addProjectWithNoFiles(sut);
 
     assertThat(sut.getSummary(LANG_NAME)).hasValue("Found 1 MSBuild LANG project: 1 with no MAIN nor TEST files.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   @Test
@@ -49,6 +51,7 @@ public class ProjectTypeCollectorTest {
     addMainProject(sut);
 
     assertThat(sut.getSummary(LANG_NAME)).hasValue("Found 1 MSBuild LANG project: 1 MAIN project.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   @Test
@@ -60,6 +63,7 @@ public class ProjectTypeCollectorTest {
     addTestProject(sut);
 
     assertThat(sut.getSummary(LANG_NAME)).hasValue("Found 3 MSBuild LANG projects: 3 TEST projects.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   @Test
@@ -69,6 +73,7 @@ public class ProjectTypeCollectorTest {
     addProjectWithBothTypes(sut);
 
     assertThat(sut.getSummary(LANG_NAME)).hasValue("Found 1 MSBuild LANG project: 1 with both MAIN and TEST files.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   @Test
@@ -80,6 +85,7 @@ public class ProjectTypeCollectorTest {
     addTestProject(sut);
 
     assertThat(sut.getSummary(LANG_NAME)).hasValue("Found 3 MSBuild LANG projects: 1 MAIN project. 2 TEST projects.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   @Test
@@ -91,6 +97,7 @@ public class ProjectTypeCollectorTest {
     addTestProject(sut);
 
     assertThat(sut.getSummary(LANG_NAME)).hasValue("Found 3 MSBuild LANG projects: 2 TEST projects. 1 with both MAIN and TEST files.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   @Test
@@ -102,6 +109,7 @@ public class ProjectTypeCollectorTest {
     addMainProject(sut);
 
     assertThat(sut.getSummary(LANG_NAME)).hasValue("Found 3 MSBuild LANG projects: 2 MAIN projects. 1 with both MAIN and TEST files.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   @Test
@@ -113,6 +121,7 @@ public class ProjectTypeCollectorTest {
     addProjectWithNoFiles(sut);
 
     assertThat(sut.getSummary(LANG_NAME)).hasValue("Found 3 MSBuild LANG projects: 2 TEST projects. 1 with no MAIN nor TEST files.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   @Test
@@ -125,6 +134,7 @@ public class ProjectTypeCollectorTest {
     addMainProject(sut);
 
     assertThat(sut.getSummary(LANG_NAME)).hasValue("Found 4 MSBuild LANG projects: 3 MAIN projects. 1 with no MAIN nor TEST files.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   @Test
@@ -136,6 +146,7 @@ public class ProjectTypeCollectorTest {
     addProjectWithBothTypes(sut);
 
     assertThat(sut.getSummary(LANG_NAME)).hasValue("Found 3 MSBuild LANG projects: 1 MAIN project. 1 TEST project. 1 with both MAIN and TEST files.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   @Test
@@ -149,6 +160,7 @@ public class ProjectTypeCollectorTest {
     // this should not happen in real life, but we want to make sure we don't fail hard
     assertThat(sut.getSummary(null)).hasValue("Found 3 MSBuild null projects: 1 MAIN project. 1 TEST project. 1 with both MAIN and TEST files.");
     assertThat(sut.getSummary("")).hasValue("Found 3 MSBuild  projects: 1 MAIN project. 1 TEST project. 1 with both MAIN and TEST files.");
+    assertThat(sut.anyProjects()).isTrue();
   }
 
   private void addProjectWithNoFiles(ProjectTypeCollector projectTypeCollector) {
