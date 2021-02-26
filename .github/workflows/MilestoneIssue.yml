@@ -1,0 +1,22 @@
+name: Milestone Issue
+
+on:
+  issues:
+    types: ["milestoned"]
+
+jobs:
+  create_card:
+    name: Create card
+    runs-on: ubuntu-latest
+
+    steps:
+      # https://github.com/actions/github-script
+      - uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const TODO_COLUMN = 4971951;
+            console.log("Creating Issue card");
+            // Action will fail if a card already exists for this issue
+            github.projects.createCard({ column_id: TODO_COLUMN, content_id: context.payload.issue.id, content_type: "Issue" });
+            console.log("Done");
