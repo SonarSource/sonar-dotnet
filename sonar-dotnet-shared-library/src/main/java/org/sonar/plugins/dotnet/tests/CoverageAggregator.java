@@ -59,7 +59,8 @@ public class CoverageAggregator {
   }
 
   @VisibleForTesting
-  CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration,
+  CoverageAggregator(CoverageConfiguration coverageConf,
+                     Configuration configuration,
                      CoverageCache coverageCache,
                      NCover3ReportParser ncover3ReportParser,
                      OpenCoverReportParser openCoverReportParser,
