@@ -1789,10 +1789,10 @@
     <value>SECURITY_HOTSPOT</value>
   </data>
   <data name="S2077_Category" xml:space="preserve">
-    <value>Critical Security Hotspot</value>
+    <value>Major Security Hotspot</value>
   </data>
   <data name="S2077_Description" xml:space="preserve">
-    <value>Formatting strings used as SQL queries is security-sensitive. It has led in the past to the following vulnerabilities:</value>
+    <value>Formatted SQL queries can be difficult to maintain, debug and can increase the risk of SQL injection when concatenating untrusted values into the query. However, this rule doesn't detect SQL injections (unlike rule s3649), the goal is only to highlight complex/formatted queries.</value>
   </data>
   <data name="S2077_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1807,7 +1807,7 @@
     <value>Main</value>
   </data>
   <data name="S2077_Severity" xml:space="preserve">
-    <value>Critical</value>
+    <value>Major</value>
   </data>
   <data name="S2077_Status" xml:space="preserve">
     <value>ready</value>
@@ -4504,10 +4504,10 @@
     <value>True</value>
   </data>
   <data name="S4210_Remediation" xml:space="preserve">
-    <value />
+    <value>Constant/Issue</value>
   </data>
   <data name="S4210_RemediationCost" xml:space="preserve">
-    <value />
+    <value>2min</value>
   </data>
   <data name="S4210_Scope" xml:space="preserve">
     <value>All</value>
@@ -4849,7 +4849,7 @@
     <value>Critical Security Hotspot</value>
   </data>
   <data name="S4790_Description" xml:space="preserve">
-    <value>Cryptographic hash algorithms such as MD2, MD4, MD5, MD6, HAVAL-128, HMAC-MD5, DSA (which uses SHA-1), RIPEMD, RIPEMD-128, RIPEMD-160, HMACRIPEMD160 and SHA-1 are no longer considered secure, because it is too easy to create hash collisions with them (little computational effort is enough to find two or more different inputs that produces the same hash).</value>
+    <value>Cryptographic hash algorithms such as MD2, MD4, MD5, MD6, HAVAL-128, HMAC-MD5, DSA (which uses SHA-1), RIPEMD, RIPEMD-128, RIPEMD-160, HMACRIPEMD160 and SHA-1 are no longer considered secure, because it is possible to have collisions (little computational effort is enough to find two or more different inputs that produce the same hash).</value>
   </data>
   <data name="S4790_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5068,7 +5068,7 @@
     <value>cwe,owasp-a6,owasp-a5</value>
   </data>
   <data name="S5042_Title" xml:space="preserve">
-    <value>Expanding archive files without controlling resource consumption is security sensitive</value>
+    <value>Expanding archive files without controlling resource consumption is security-sensitive</value>
   </data>
   <data name="S5042_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
@@ -5268,6 +5268,39 @@
   <data name="S5753_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>
   </data>
+  <data name="S5944_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S5944_Description" xml:space="preserve">
+    <value>Functions can return values using two different syntaxes. The modern, and correct, way to do it is to use a Return statement. The VB6 way, i.e. old way, is to assign a return value to the function's name .</value>
+  </data>
+  <data name="S5944_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S5944_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S5944_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S5944_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S5944_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S5944_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S5944_Tags" xml:space="preserve">
+    <value>bad-practice,confusing</value>
+  </data>
+  <data name="S5944_Title" xml:space="preserve">
+    <value>"Return" statements should be used instead of assigning values to function names</value>
+  </data>
+  <data name="S5944_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S6145_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
@@ -5320,39 +5353,6 @@
     <value>"Option Explicit" should be enabled</value>
   </data>
   <data name="S6146_Type" xml:space="preserve">
-    <value>CODE_SMELL</value>
-  </data>
-  <data name="S5944_Category" xml:space="preserve">
-    <value>Major Code Smell</value>
-  </data>
-  <data name="S5944_Description" xml:space="preserve">
-    <value>Functions can return values using two different syntaxes. The modern, and correct, way to do it is to use a Return statement. The VB6 way, i.e. old way, is to assign a return value to the function's name .</value>
-  </data>
-  <data name="S5944_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
-  </data>
-  <data name="S5944_Remediation" xml:space="preserve">
-    <value>Constant/Issue</value>
-  </data>
-  <data name="S5944_RemediationCost" xml:space="preserve">
-    <value>5min</value>
-  </data>
-  <data name="S5944_Scope" xml:space="preserve">
-    <value>All</value>
-  </data>
-  <data name="S5944_Severity" xml:space="preserve">
-    <value>Major</value>
-  </data>
-  <data name="S5944_Status" xml:space="preserve">
-    <value>ready</value>
-  </data>
-  <data name="S5944_Tags" xml:space="preserve">
-    <value>bad-practice,confusing</value>
-  </data>
-  <data name="S5944_Title" xml:space="preserve">
-    <value>"Return" statements should be used instead of assigning values to function names</value>
-  </data>
-  <data name="S5944_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
   <data name="S907_Category" xml:space="preserve">

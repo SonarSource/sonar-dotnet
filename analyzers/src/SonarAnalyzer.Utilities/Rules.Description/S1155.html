@@ -1,10 +1,13 @@
 <p>Using <code>.Count()</code> to test for emptiness works, but using <code>.Any()</code> makes the intent clearer, and the code more readable.
 However, there are some cases where special attention should be paid:</p>
-<p>- if the collection is an <code>EntityFramework</code> or other ORM query, calling <code>.Count()</code> will cause executing a potentially massive
-SQL query and could put a large overhead on the application database. Calling <code>.Any()</code> will also connect to the database, but will generate
-much more efficient SQL.</p>
-<p>- if the collection is part of a LINQ query that contains <code>.Select()</code> statements that create objects, a large amount of memory could be
-unnecessarily allocated. Calling <code>.Any()</code> will be much more efficient because it will execute fewer iterations of the enumerable.</p>
+<ul>
+  <li> if the collection is an <code>EntityFramework</code> or other ORM query, calling <code>.Count()</code> will cause executing a potentially
+  massive SQL query and could put a large overhead on the application database. Calling <code>.Any()</code> will also connect to the database, but
+  will generate much more efficient SQL. </li>
+  <li> if the collection is part of a LINQ query that contains <code>.Select()</code> statements that create objects, a large amount of memory could
+  be unnecessarily allocated. Calling <code>.Any()</code> will be much more efficient because it will execute fewer iterations of the enumerable.
+  </li>
+</ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
 private static bool HasContent(IEnumerable&lt;string&gt; strings)

@@ -3,9 +3,8 @@
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
-    "func": "Linear",
-    "linearDesc": null,
-    "linearFactor": null
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
   },
   "tags": [
     "event",
