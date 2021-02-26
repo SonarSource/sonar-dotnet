@@ -54,7 +54,7 @@ public class DoNotAnalyzeTestFilesTest {
     assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "ncloc")).isNull();
 
     assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
-      .containsExactly("WARN: This C# sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+      .contains("WARN: This C# sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
         "Your SonarQube/SonarCloud project will not have results for C# files. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
@@ -71,7 +71,7 @@ public class DoNotAnalyzeTestFilesTest {
     assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "ncloc")).isNull();
 
     assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
-      .containsExactly("WARN: This C# sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
+      .contains("WARN: This C# sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
         "Your SonarQube/SonarCloud project will not have results for C# files. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
