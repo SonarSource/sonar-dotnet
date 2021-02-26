@@ -121,18 +121,15 @@ public class DotNetSensor implements ProjectSensor {
       assert !hasMainFiles;
       if (hasTestFiles) {
         warnThatProjectContainsOnlyTestCode(fs, analysisWarnings, pluginMetadata.shortLanguageName());
-      } else {
-        logDebugNoFiles();
       }
-    } else {
-      // the scanner for .NET has not been used. `hasMainFiles` can be either true or false.
-      if (hasMainFiles || hasTestFiles) {
-        LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
-            + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-          pluginMetadata.shortLanguageName());
-      } else {
-        logDebugNoFiles();
-      }
+    } else if (hasMainFiles || hasTestFiles) {
+      // the scanner for .NET has _not_ been used. hasMainFiles can be either true or false.
+      LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
+          + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+        pluginMetadata.shortLanguageName());
+    }
+    if (!hasMainFiles && !hasTestFiles) {
+      logDebugNoFiles();
     }
   }
 
