@@ -247,7 +247,7 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void whenThereAreMainFiles_andNotProjects_logToUseScannerForNet() {
+  public void whenThereAreMainFiles_andNoProjects_logToUseScannerForNet() {
     addMainFileToFileSystem();
     when(projectTypeCollector.hasProjects()).thenReturn(false);
 
@@ -259,7 +259,7 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void whenThereAreTestFiles_andNotProjects_logToUseScannerForNet() {
+  public void whenThereAreTestFiles_andNoProjects_logToUseScannerForNet() {
     addTestFileToFileSystem();
     when(projectTypeCollector.hasProjects()).thenReturn(false);
 
@@ -271,7 +271,7 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void whenThereAreMainAndTestFiles_andNotProjects_logToUseScannerForNet() {
+  public void whenThereAreMainAndTestFiles_andNoProjects_logToUseScannerForNet() {
     addMainFileToFileSystem();
     addTestFileToFileSystem();
     when(projectTypeCollector.hasProjects()).thenReturn(false);
@@ -284,7 +284,7 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void whenThereAreNoFiles_andNotProjects_logDebug() {
+  public void whenThereAreNoFiles_andNoProjects_logDebug() {
     when(projectTypeCollector.hasProjects()).thenReturn(false);
 
     sensor.execute(tester);
