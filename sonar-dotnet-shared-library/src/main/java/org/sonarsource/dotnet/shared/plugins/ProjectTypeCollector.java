@@ -56,7 +56,7 @@ public class ProjectTypeCollector {
     }
   }
 
-  boolean anyProjects() {
+  boolean hasProjects() {
     return countProjects() > 0;
   }
 

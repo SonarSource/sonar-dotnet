@@ -87,7 +87,7 @@ public class DotNetSensorTest {
     tester.fileSystem().setWorkDir(workDir);
     when(reportPathCollector.protobufDirs()).thenReturn(reportPaths);
     when(projectTypeCollector.getSummary(SHORT_LANG_NAME)).thenReturn(Optional.of("TEST PROJECTS SUMMARY"));
-    when(projectTypeCollector.anyProjects()).thenReturn(true);
+    when(projectTypeCollector.hasProjects()).thenReturn(true);
     DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
     when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
@@ -249,7 +249,7 @@ public class DotNetSensorTest {
   @Test
   public void whenThereAreMainFiles_andNotProjects_logToUseScannerForNet() {
     addMainFileToFileSystem();
-    when(projectTypeCollector.anyProjects()).thenReturn(false);
+    when(projectTypeCollector.hasProjects()).thenReturn(false);
 
     sensor.execute(tester);
 
@@ -261,7 +261,7 @@ public class DotNetSensorTest {
   @Test
   public void whenThereAreTestFiles_andNotProjects_logToUseScannerForNet() {
     addTestFileToFileSystem();
-    when(projectTypeCollector.anyProjects()).thenReturn(false);
+    when(projectTypeCollector.hasProjects()).thenReturn(false);
 
     sensor.execute(tester);
 
@@ -274,7 +274,7 @@ public class DotNetSensorTest {
   public void whenThereAreMainAndTestFiles_andNotProjects_logToUseScannerForNet() {
     addMainFileToFileSystem();
     addTestFileToFileSystem();
-    when(projectTypeCollector.anyProjects()).thenReturn(false);
+    when(projectTypeCollector.hasProjects()).thenReturn(false);
 
     sensor.execute(tester);
 
@@ -285,7 +285,7 @@ public class DotNetSensorTest {
 
   @Test
   public void whenThereAreNoFiles_andNotProjects_logDebug() {
-    when(projectTypeCollector.anyProjects()).thenReturn(false);
+    when(projectTypeCollector.hasProjects()).thenReturn(false);
 
     sensor.execute(tester);
 
