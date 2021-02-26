@@ -25,7 +25,6 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.sonarqube.ws.Ce;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
@@ -59,14 +58,6 @@ public class TestProjectTest {
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
       "Found 1 MSBuild C# project: 1 TEST project."
     );
-    verifyGuiAnalysisWarning(buildResult);
-  }
-
-  // Verifies the analysis warning is raised inside SQ
-  private void verifyGuiAnalysisWarning(BuildResult buildResult) {
-    Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
-    assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("Your project contains only TEST code for language C# and no MAIN code for any language, so no results have been imported. " +
-      "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
   }
 }

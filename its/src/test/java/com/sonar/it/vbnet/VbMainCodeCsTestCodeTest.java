@@ -27,7 +27,6 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.sonarqube.ws.Ce;
 import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
@@ -73,13 +72,7 @@ public class VbMainCodeCsTestCodeTest {
       "INFO: Found 1 MSBuild VB.NET project: 1 MAIN project.",
       "INFO: Found 1 MSBuild C# project: 1 TEST project."
     );
-    verifyNoGuiWarnings(buildResult);
+    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, buildResult);
   }
 
-  // Verifies the analysis warning is raised inside SQ
-  private void verifyNoGuiWarnings(BuildResult buildResult) {
-    Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
-    assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).isEmpty();
-  }
 }

@@ -25,7 +25,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.sonarqube.ws.Ce;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
@@ -46,7 +45,7 @@ public class DoNotAnalyzeTestFilesTest {
   }
 
   @Test
-  public void with_csharp_only_test_should_not_increment_test() throws Exception {
+  public void with_csharp_only_test_should_not_populate_metrics() throws Exception {
     BuildResult buildResult = Tests.analyzeProjectWithSubProject(temp, CSHARP_ONLY_TEST_PROJECT, "MyLib.Tests", "no_rule");
 
     assertThat(Tests.getComponent("DoNotAnalyzeTestFilesTest:UnitTest1.cs")).isNotNull();
@@ -59,11 +58,11 @@ public class DoNotAnalyzeTestFilesTest {
         "Your SonarQube/SonarCloud project will not have results for C# files. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
-    verifyGuiAnalysisWarning(buildResult);
+    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
   }
 
   @Test
-  public void with_html_and_csharp_code_explicitly_marked_as_test_should_not_increment_test() throws Exception {
+  public void with_html_and_csharp_code_explicitly_marked_as_test_should_not_populate_metrics() throws Exception {
     BuildResult buildResult = Tests.analyzeProject(temp, EXPLICITLY_MARKED_AS_TEST, "no_rule");
 
     assertThat(Tests.getComponent("HtmlCSharpExplicitlyMarkedAsTest:Foo.cs")).isNotNull();
@@ -76,14 +75,6 @@ public class DoNotAnalyzeTestFilesTest {
         "Your SonarQube/SonarCloud project will not have results for C# files. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
-    verifyGuiAnalysisWarning(buildResult);
-  }
-
-  // Verifies the analysis warning is raised inside SQ
-  private void verifyGuiAnalysisWarning(BuildResult buildResult) {
-    Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
-    assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("Your project contains only TEST code for language C# and no MAIN code for any language, so no results have been imported. " +
-      "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
   }
 }
