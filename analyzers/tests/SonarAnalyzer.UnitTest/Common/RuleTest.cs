@@ -18,11 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
+extern alias vbnet;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -31,26 +33,19 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using SonarAnalyzer.Utilities;
+using static SonarAnalyzer.UnitTest.TestHelper;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
     [TestClass]
     public class RuleTest
     {
-        private static IEnumerable<Type> GetCodeFixProviderTypes(IEnumerable<Assembly> assemblies)
-        {
-            return assemblies
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof(SonarCodeFixProvider)));
-        }
-
         [TestMethod]
         public void DiagnosticAnalyzerHasRuleAttribute()
         {
             foreach (var analyzer in new RuleFinder().AllAnalyzerTypes)
             {
                 var ruleDescriptors = analyzer.GetCustomAttributes<RuleAttribute>();
-
                 ruleDescriptors.Should().NotBeEmpty("RuleAttribute is missing from DiagnosticAnalyzer '{0}'", analyzer.Name);
             }
         }
@@ -60,42 +55,29 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var analyzers = RuleFinder.PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(t =>
-                    t.IsSubclassOf(typeof(DiagnosticAnalyzer)) &&
-                    t.IsAbstract)
-                .ToList();
-
+                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) && t.IsAbstract);
             foreach (var analyzer in analyzers)
             {
-                var attributes = analyzer.GetCustomAttributes<RuleAttribute>();
-                attributes.Should().BeEmpty("At least one RuleAttribute is added to the abstract DiagnosticAnalyzer '{0}'", analyzer.Name);
+                analyzer.GetCustomAttributes<RuleAttribute>().Should().BeEmpty("At least one RuleAttribute is added to the abstract DiagnosticAnalyzer '{0}'", analyzer.Name);
             }
         }
 
         [TestMethod]
         public void CodeFixProviders_Named_Properly()
         {
-            var codeFixProviders = GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies);
-
-            foreach (var codeFixProvider in codeFixProviders)
+            foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
             {
                 var analyzerName = codeFixProvider.FullName.Replace(RuleDetailBuilder.CodeFixProviderSuffix, "");
-
-                codeFixProvider.Assembly.GetType(analyzerName)
-                    .Should().NotBeNull("CodeFixProvider '{0}' has no matching DiagnosticAnalyzer.", codeFixProvider.Name);
+                codeFixProvider.Assembly.GetType(analyzerName).Should().NotBeNull("CodeFixProvider '{0}' has no matching DiagnosticAnalyzer.", codeFixProvider.Name);
             }
         }
 
         [TestMethod]
         public void CodeFixProviders_Have_Title()
         {
-            var codeFixProviders = GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies);
-
-            foreach (var codeFixProvider in codeFixProviders)
+            foreach (var codeFixProvider in GetCodeFixProviderTypes(RuleFinder.PackagedRuleAssemblies))
             {
-                var titles = RuleDetailBuilder.GetCodeFixTitles(codeFixProvider);
-
-                titles.Should().NotBeEmpty("CodeFixProvider '{0}' has no title field.", codeFixProvider.Name);
+                RuleDetailBuilder.GetCodeFixTitles(codeFixProvider).Should().NotBeEmpty("CodeFixProvider '{0}' has no title field.", codeFixProvider.Name);
             }
         }
 
@@ -122,19 +104,16 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             var analyzers = RuleFinder.PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) && t != typeof(SonarDiagnosticAnalyzer))
-                .ToList();
+                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) && t != typeof(SonarDiagnosticAnalyzer));
 
             foreach (var analyzer in analyzers)
             {
-                analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>(
-                    $"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
+                analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>($"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
             }
         }
 
         [TestMethod]
-        public void AllParameterizedRules_AreDisabledByDefault()
-        {
+        public void AllParameterizedRules_AreDisabledByDefault() =>
             new RuleFinder().AllAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
@@ -142,109 +121,142 @@ namespace SonarAnalyzer.UnitTest.Common
                 .Where(analyzer => !IsSecurityHotspot(analyzer))
                 .ToList()
                 .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeFalse());
-        }
 
         [TestMethod]
         public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
         {
-            var descriptors = new RuleFinder().AllAnalyzerTypes.SelectMany(type => GetSupportedDiagnostics(type))
+            var descriptors = new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics)
                 // Security hotspots are enabled by default, but they will report issues only
                 // when their ID is contained in SonarLint.xml
-                .Where(descriptor => !IsSecurityHotspot(descriptor))
-                .ToList();
+                .Where(descriptor => !IsSecurityHotspot(descriptor));
 
             foreach (var descriptor in descriptors)
             {
                 if (descriptor.IsEnabledByDefault)
                 {
-                    descriptor.CustomTags.Should().Contain(
-                        DiagnosticDescriptorBuilder.SonarWayTag,
-                        $"{descriptor.Id} should be in SonarWay");
+                    descriptor.CustomTags.Should().Contain(DiagnosticDescriptorBuilder.SonarWayTag, $"{descriptor.Id} should be in SonarWay");
                 }
             }
         }
 
         [TestMethod]
-        public void AllCSharpRules_HaveCSharpTag()
-        {
-            GetSupportedDiagnostics(AnalyzerLanguage.CSharp)
-                .ToList()
-                .ForEach(diagnostic => diagnostic.CustomTags.Should().Contain(LanguageNames.CSharp));
-        }
+        public void AllCSharpRules_HaveCSharpTag() =>
+            SupportedDiagnostics(AnalyzerLanguage.CSharp).Should().OnlyContain(diagnostic => diagnostic.CustomTags.Contains(LanguageNames.CSharp));
 
         [TestMethod]
-        public void AllVbNetRules_HaveVbNetTag()
+        public void AllVbNetRules_HaveVbNetTag() =>
+            SupportedDiagnostics(AnalyzerLanguage.VisualBasic).Should().OnlyContain(diagnostic => diagnostic.CustomTags.Contains(LanguageNames.VisualBasic));
+
+        [TestMethod]
+        public void DeprecatedRules_AreNotInSonarWay()
         {
-            GetSupportedDiagnostics(AnalyzerLanguage.VisualBasic)
-                .ToList()
-                .ForEach(diagnostic => diagnostic.CustomTags.Should().Contain(LanguageNames.VisualBasic));
+            foreach (var diagnostic in new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics).Where(IsDeprecated))
+            {
+                IsSonarWay(diagnostic).Should().BeFalse($"{diagnostic.Id} is deprecated and should be removed from SonarWay.");
+            }
         }
 
         [TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
-            var allAnalyzers =new RuleFinder().AllAnalyzerTypes.SelectMany(type => GetSupportedDiagnostics(type));
-
-            var parameterizedAnalyzers = new RuleFinder().AllAnalyzerTypes
+            var parameterized = new RuleFinder().AllAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
-                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
-                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .SelectMany(type => ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics)
                 .ToHashSet();
 
-            foreach (var analyzer in allAnalyzers)
+            foreach (var diagnostic in new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
-                var isInSonarWay = analyzer.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);
-
-                if (IsSecurityHotspot(analyzer))
+                if (IsSecurityHotspot(diagnostic))
                 {
-                    // Security hotspots are enabled by default, but they will report issues only
-                    // when their ID is contained in SonarLint.xml
-                    analyzer.IsEnabledByDefault.Should().BeTrue($"{analyzer.Id} should be enabled by default");
+                    // Security hotspots are enabled by default, but they will report issues only when their ID is contained in SonarLint.xml
+                    // Rule activation is done in DiagnosticDescriptorBuilder.WithNotConfigurable() to prevent rule supression and deactivation.
+                    diagnostic.IsEnabledByDefault.Should().BeTrue($"{diagnostic.Id} should be enabled by default");
                 }
-                else if (parameterizedAnalyzers.Contains(analyzer))
+                else if (IsDeprecated(diagnostic))
+                {
+                    // Deprecated rules should be removed from SonarWay
+                    diagnostic.IsEnabledByDefault.Should().BeFalse($"{diagnostic.Id} is deprecated and should be disabled by default (removed from SonarWay)");
+                }
+                else if (parameterized.Contains(diagnostic))
                 {
                     // Even if a a parametrized rule is in Sonar way profile, it is still disabled by default.
                     // See https://github.com/SonarSource/sonar-dotnet/issues/1274
-                    analyzer.IsEnabledByDefault.Should().BeFalse($"{analyzer.Id} has parameters and should be disabled by default");
+                    diagnostic.IsEnabledByDefault.Should().BeFalse($"{diagnostic.Id} has parameters and should be disabled by default");
                 }
-                else if (isInSonarWay)
+                else if (IsSonarWay(diagnostic))
                 {
-                    analyzer.IsEnabledByDefault.Should().BeTrue($"{analyzer.Id} is in SonarWay");
+                    diagnostic.IsEnabledByDefault.Should().BeTrue($"{diagnostic.Id} is in SonarWay");
                 }
                 else
                 {
-                    analyzer.IsEnabledByDefault.Should().BeFalse($"{analyzer.Id} is not in SonarWay");
+                    diagnostic.IsEnabledByDefault.Should().BeFalse($"{diagnostic.Id} is not in SonarWay");
                 }
             }
         }
 
         [TestMethod]
         [TestCategory("Hotspot")]
-        public void SecurityHotspots_Rules_Not_Configurable()
-        {
-            var hotspotDiagnosticDescriptors = GetSupportedDiagnostics(AnalyzerLanguage.CSharp)
-                .Where(IsSecurityHotspot)
-                .ToList();
+        public void OnlySecurityHotspots_AreNotConfigurable_CS() =>
+            OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.CSharp);
 
-            foreach (var descriptor in hotspotDiagnosticDescriptors)
+        [TestMethod]
+        [TestCategory("Hotspot")]
+        public void OnlySecurityHotspots_AreNotConfigurable_VB() =>
+            OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.VisualBasic);
+
+        private static void OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage language)
+        {
+            foreach (var diagnostic in SupportedDiagnostics(language))
             {
-                descriptor.CustomTags.Should().Contain(
-                    WellKnownDiagnosticTags.NotConfigurable,
-                    because: $"{descriptor.Id} is hotspot and should not be configurable");
+                if (IsSecurityHotspot(diagnostic))
+                {
+                    diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.NotConfigurable).Should().BeTrue(diagnostic.Id + " is a Security Hotspot and should not be configurable");
+                }
+                else
+                {
+                    diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.NotConfigurable).Should().BeFalse(diagnostic.Id + " is not a Security Hotspot and should be configurable");
+                }
             }
         }
 
-        private static IEnumerable<DiagnosticDescriptor> GetSupportedDiagnostics(AnalyzerLanguage language) =>
-            new RuleFinder()
-                .GetAnalyzerTypes(language)
-                .SelectMany(type => GetSupportedDiagnostics(type));
+        private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(AnalyzerLanguage language) =>
+            new RuleFinder().GetAnalyzerTypes(language).SelectMany(SupportedDiagnostics);
 
-        private static ImmutableArray<DiagnosticDescriptor> GetSupportedDiagnostics(Type type) =>
-            typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type)
-                ? ((SonarDiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics
+        private static IEnumerable<DiagnosticDescriptor> SupportedDiagnostics(Type type) =>
+            typeof(DiagnosticAnalyzer).IsAssignableFrom(type)
+                ? ((DiagnosticAnalyzer)Activator.CreateInstance(type)).SupportedDiagnostics
                 : ((IRuleFactory)Activator.CreateInstance(type)).SupportedDiagnostics;
 
-        private static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic) =>
-            diagnostic.Category.IndexOf("hotspot", StringComparison.OrdinalIgnoreCase) >= 0;
+        private static IEnumerable<Type> GetCodeFixProviderTypes(IEnumerable<Assembly> assemblies) =>
+            assemblies.SelectMany(assembly => assembly.GetTypes()).Where(t => t.IsSubclassOf(typeof(SonarCodeFixProvider)));
+
+        private static bool IsSonarWay(DiagnosticDescriptor diagnostic) =>
+            diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);
+
+        private static bool IsDeprecated(DiagnosticDescriptor diagnostic)
+        {
+            return LanguageResources().GetString(diagnostic.Id + "_Status") switch
+            {
+                null => throw new InvalidOperationException($"Missing {diagnostic.Id}_Status in {nameof(csharp::SonarAnalyzer.RspecStrings)} resources"),
+                "deprecated" => true,
+                _ => false
+            };
+
+            ResourceManager LanguageResources()
+            {
+                if (diagnostic.CustomTags.Contains(LanguageNames.CSharp))
+                {
+                    return csharp::SonarAnalyzer.RspecStrings.ResourceManager;
+                }
+                else if (diagnostic.CustomTags.Contains(LanguageNames.VisualBasic))
+                {
+                    return vbnet::SonarAnalyzer.RspecStrings.ResourceManager;
+                }
+                else
+                {
+                    throw new InvalidOperationException($"{nameof(AllCSharpRules_HaveCSharpTag)} or {nameof(AllVbNetRules_HaveVbNetTag)} should fail, fix them first.");
+                }
+            }
+        }
     }
 }
