@@ -42,15 +42,13 @@ namespace SonarAnalyzer.Rules
         private const int MinimumAcceptedRequestValidationModeValue = 4;
 
         private readonly DiagnosticDescriptor rule;
-        private readonly IAnalyzerConfiguration configuration;
         private readonly string rootPath;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected DisablingRequestValidationBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration configuration, string rootPath)
+        protected DisablingRequestValidationBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration configuration, string rootPath) : base(configuration)
         {
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-            this.configuration = configuration;
             this.rootPath = rootPath;
         }
 
@@ -58,8 +56,7 @@ namespace SonarAnalyzer.Rules
         {
             context.RegisterSymbolAction(c =>
                 {
-                    configuration.Initialize(c.Options);
-                    if (!configuration.IsEnabled(DiagnosticId))
+                    if (!IsEnabled(c.Options))
                     {
                         return;
                     }
