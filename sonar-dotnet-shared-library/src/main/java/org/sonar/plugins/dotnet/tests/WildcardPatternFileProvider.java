@@ -43,16 +43,14 @@ public class WildcardPatternFileProvider {
   private static final String ANY_PATTERN = "?";
 
   private final File baseDir;
-  private final String directorySeparator;
 
-  public WildcardPatternFileProvider(File baseDir, String directorySeparator) {
+  public WildcardPatternFileProvider(File baseDir) {
     this.baseDir = baseDir;
-    this.directorySeparator = directorySeparator;
   }
 
   Set<File> listFiles(String pattern) {
 
-    List<String> elements = Arrays.asList(pattern.split(Pattern.quote(directorySeparator)));
+    List<String> elements = Arrays.asList(pattern.split("["+ Pattern.quote(File.separator) +"/]"));
 
     List<String> elementsTillFirstWildcard = elementsTillFirstWildcard(elements);
     String pathTillFirstWildcardElement = toPath(elementsTillFirstWildcard);
@@ -75,7 +73,7 @@ public class WildcardPatternFileProvider {
     }
     checkNoCurrentOrParentFolderAccess(wildcardElements);
 
-    WildcardPattern wildcardPattern = WildcardPattern.create(toPath(wildcardElements), directorySeparator);
+    WildcardPattern wildcardPattern = WildcardPattern.create(toPath(wildcardElements), File.separator);
 
     LOG.debug("Gathering files for wildcardPattern '{}'.", wildcardPattern.toString());
 
@@ -97,7 +95,7 @@ public class WildcardPatternFileProvider {
   }
 
   private String toPath(List<String> elements) {
-    return elements.stream().collect(Collectors.joining(directorySeparator));
+    return elements.stream().collect(Collectors.joining(File.separator));
   }
 
   private static List<String> elementsTillFirstWildcard(List<String> elements) {

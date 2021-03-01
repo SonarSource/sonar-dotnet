@@ -36,7 +36,7 @@ public class UnitTestResultsImportSensor implements ProjectSensor {
 
   private static final Logger LOG = Loggers.get(UnitTestResultsImportSensor.class);
 
-  private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(new File("."), File.separator);
+  private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(new File("."));
   private final UnitTestResultsAggregator unitTestResultsAggregator;
   private final String languageKey;
   private final String languageName;

@@ -42,7 +42,7 @@ public class CoverageReportImportSensor implements ProjectSensor {
 
   private static final Logger LOG = Loggers.get(CoverageReportImportSensor.class);
 
-  private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(BASE_DIR, File.separator);
+  private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(BASE_DIR);
   private final CoverageConfiguration coverageConf;
   private final CoverageAggregator coverageAggregator;
   private final boolean isIntegrationTest;
