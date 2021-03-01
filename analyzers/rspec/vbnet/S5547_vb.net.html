@@ -15,7 +15,7 @@ Dim RC2 As new RC2CryptoServiceProvider() ' Noncompliant: RC2 is vulnerable to a
 <p>For Bouncycastle library, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-1000339">AESFastEngine has a side channel leak</a>, it
 is possible to gain information about the key used to initialize the cipher:</p>
 <pre>
-Dim Aesfast As new AesFastEngine() ' Noncompliant
+Dim AesFast As new AesFastEngine() ' Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <p>For <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netcore-3.1">System.Security.Cryptography</a> library,

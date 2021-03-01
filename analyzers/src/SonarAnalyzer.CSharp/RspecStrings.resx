@@ -3013,7 +3013,7 @@
     <value>Critical Vulnerability</value>
   </data>
   <data name="S2053_Description" xml:space="preserve">
-    <value>In cryptography, "salt" is extra piece of data which is included in a hashing algorithm. It makes dictionary attacks more difficult. Using a cryptographic hash function without an unpredictable salt increases the likelihood that an attacker will be able to successfully guess a hashed value such as a password with a dictionary attack.</value>
+    <value>In cryptography, a "salt" is an extra piece of data which is included when hashing a password. This makes rainbow-table attacks more difficult. Using a cryptographic hash function without an unpredictable salt increases the likelihood that an attacker could successfully find the hash value in databases of precomputed hashes (called rainbow-tables).</value>
   </data>
   <data name="S2053_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3109,10 +3109,10 @@
     <value>VULNERABILITY</value>
   </data>
   <data name="S2077_Category" xml:space="preserve">
-    <value>Critical Security Hotspot</value>
+    <value>Major Security Hotspot</value>
   </data>
   <data name="S2077_Description" xml:space="preserve">
-    <value>Formatting strings used as SQL queries is security-sensitive. It has led in the past to the following vulnerabilities:</value>
+    <value>Formatted SQL queries can be difficult to maintain, debug and can increase the risk of SQL injection when concatenating untrusted values into the query. However, this rule doesn't detect SQL injections (unlike rule s3649), the goal is only to highlight complex/formatted queries.</value>
   </data>
   <data name="S2077_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3127,7 +3127,7 @@
     <value>Main</value>
   </data>
   <data name="S2077_Severity" xml:space="preserve">
-    <value>Critical</value>
+    <value>Major</value>
   </data>
   <data name="S2077_Status" xml:space="preserve">
     <value>ready</value>
@@ -3694,7 +3694,7 @@
     <value>deprecated</value>
   </data>
   <data name="S2228_Tags" xml:space="preserve">
-    <value>owasp-a3</value>
+    <value />
   </data>
   <data name="S2228_Title" xml:space="preserve">
     <value>Console logging should not be used</value>
@@ -4892,7 +4892,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2486_Category" xml:space="preserve">
-    <value>Minor Vulnerability</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2486_Description" xml:space="preserve">
     <value>When exceptions occur, it is usually a bad idea to simply ignore them. Instead, it is better to handle them properly, or at least to log them.</value>
@@ -4922,7 +4922,7 @@
     <value>Generic exceptions should not be ignored</value>
   </data>
   <data name="S2486_Type" xml:space="preserve">
-    <value>VULNERABILITY</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2551_Category" xml:space="preserve">
     <value>Critical Bug</value>
@@ -9548,10 +9548,10 @@
     <value>False</value>
   </data>
   <data name="S3967_Remediation" xml:space="preserve">
-    <value />
+    <value>Constant/Issue</value>
   </data>
   <data name="S3967_RemediationCost" xml:space="preserve">
-    <value />
+    <value>5min</value>
   </data>
   <data name="S3967_Scope" xml:space="preserve">
     <value>All</value>
@@ -11324,10 +11324,10 @@
     <value>True</value>
   </data>
   <data name="S4210_Remediation" xml:space="preserve">
-    <value />
+    <value>Constant/Issue</value>
   </data>
   <data name="S4210_RemediationCost" xml:space="preserve">
-    <value />
+    <value>2min</value>
   </data>
   <data name="S4210_Scope" xml:space="preserve">
     <value>All</value>
@@ -11456,10 +11456,10 @@
     <value>True</value>
   </data>
   <data name="S4220_Remediation" xml:space="preserve">
-    <value />
+    <value>Constant/Issue</value>
   </data>
   <data name="S4220_RemediationCost" xml:space="preserve">
-    <value />
+    <value>5min</value>
   </data>
   <data name="S4220_Scope" xml:space="preserve">
     <value>All</value>
@@ -11603,7 +11603,7 @@
     <value>deprecated</value>
   </data>
   <data name="S4261_Tags" xml:space="preserve">
-    <value>convention,async-await,confusing</value>
+    <value />
   </data>
   <data name="S4261_Title" xml:space="preserve">
     <value>Methods should be named according to their synchronicities</value>
@@ -12263,7 +12263,7 @@
     <value>Critical Security Hotspot</value>
   </data>
   <data name="S4790_Description" xml:space="preserve">
-    <value>Cryptographic hash algorithms such as MD2, MD4, MD5, MD6, HAVAL-128, HMAC-MD5, DSA (which uses SHA-1), RIPEMD, RIPEMD-128, RIPEMD-160, HMACRIPEMD160 and SHA-1 are no longer considered secure, because it is too easy to create hash collisions with them (little computational effort is enough to find two or more different inputs that produces the same hash).</value>
+    <value>Cryptographic hash algorithms such as MD2, MD4, MD5, MD6, HAVAL-128, HMAC-MD5, DSA (which uses SHA-1), RIPEMD, RIPEMD-128, RIPEMD-160, HMACRIPEMD160 and SHA-1 are no longer considered secure, because it is possible to have collisions (little computational effort is enough to find two or more different inputs that produce the same hash).</value>
   </data>
   <data name="S4790_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -12515,7 +12515,7 @@
     <value>cwe,owasp-a6,owasp-a5</value>
   </data>
   <data name="S5042_Title" xml:space="preserve">
-    <value>Expanding archive files without controlling resource consumption is security sensitive</value>
+    <value>Expanding archive files without controlling resource consumption is security-sensitive</value>
   </data>
   <data name="S5042_Type" xml:space="preserve">
     <value>SECURITY_HOTSPOT</value>

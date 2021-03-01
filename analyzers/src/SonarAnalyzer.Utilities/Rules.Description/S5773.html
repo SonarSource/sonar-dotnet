@@ -9,7 +9,7 @@ the TempFileCollection object is called).</p>
 <p>To restrict the types allowed to be deserialized:</p>
 <ul>
   <li> implement a whitelist of safe and required types that can be deserialized. </li>
-  <li> or/and implement tamper protection, such as <a href="https://en.wikipedia.org/wiki/HMAC">message authentication codes</a> (MAC), this way only
+  <li> or/and implement tamper protection, such as <a href="https://en.wikipedia.org/wiki/HMAC">message authentication codes</a> (MAC). This way only
   objects serialized with the correct MAC hash will be deserialized. </li>
 </ul>
 <h2>Noncompliant Code Example</h2>

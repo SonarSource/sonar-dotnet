@@ -18,7 +18,7 @@ detailed information on both the system running the application and users. </p>
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDeveloperExceptionPage</code> and
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDatabaseErrorPage</code> are two of them. Make sure that those features are disabled in
 production.</p>
-<p> Use <code>if (env.IsDevelopment())</code> to disable debug code.</p>
+<p>Use <code>if (env.IsDevelopment())</code> to disable debug code.</p>
 <h2>Sensitive Code Example</h2>
 <p>This rule raises issues when the following .Net Core methods are called:
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDeveloperExceptionPage</code>,
@@ -39,7 +39,6 @@ namespace mvcApp
         }
     }
 }
-
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
@@ -61,7 +60,6 @@ namespace mvcApp
         }
     }
 }
-
 </pre>
 <h2>Exceptions</h2>
 <p>This rule does not analyze configuration files. Make sure that debug mode is not enabled by default in those files.</p>

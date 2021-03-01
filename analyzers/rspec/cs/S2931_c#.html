@@ -1,7 +1,9 @@
 <p>An <code>IDisposable</code> object should be disposed (there are some rare exceptions where not disposing is fine, most notably <code>Task</code>).
 If a class has an <code>IDisposable</code> field, there can be two situations:</p>
-<p>- The class observes a field that is under the responsibility of another class. </p>
-<p>- The class owns the field, and is therefore responsible for calling <code>Dispose</code> on it.</p>
+<ul>
+  <li> The class observes a field that is under the responsibility of another class. </li>
+  <li> The class owns the field, and is therefore responsible for calling <code>Dispose</code> on it. </li>
+</ul>
 <p>In the second case, the safest way for the class to ensure <code>Dispose</code> is called is to call it in its own <code>Dispose</code> function,
 and therefore to be itself <code>IDisposable</code>. A class is considered to own an <code>IDisposable</code> field resource if it created the object
 referenced by the field.</p>

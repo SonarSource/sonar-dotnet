@@ -1,7 +1,7 @@
 <p>ASP.NET 1.1+ comes with a feature called <em>Request Validation</em>, preventing the server to accept content containing un-encoded HTML. This
 feature comes as a first protection layer against Cross-Site Scripting (XSS) attacks and act as a simple Web Application Firewall (WAF) rejecting
 requests potentially containing malicious content.</p>
-<p> While this feature is not a silver bullet to prevent all XSS attacks, it helps to catch basic ones. It will for example prevent <code>&lt;script
+<p>While this feature is not a silver bullet to prevent all XSS attacks, it helps to catch basic ones. It will for example prevent <code>&lt;script
 type="text/javascript" src="https://malicious.domain/payload.js"&gt;</code> to reach your Controller.</p>
 <p>Note: <em>Request Validation</em> feature being only available for ASP.NET, no Security Hotspot is raised on ASP.NET Core applications.</p>
 <h2>Ask Yourself Whether</h2>

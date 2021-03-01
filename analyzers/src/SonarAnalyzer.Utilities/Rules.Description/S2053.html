@@ -1,17 +1,13 @@
-<p>In cryptography, "salt" is extra piece of data which is included in a hashing algorithm. It makes dictionary attacks more difficult. Using a
-cryptographic hash function without an unpredictable salt increases the likelihood that an attacker will be able to successfully guess a hashed value
-such as a password with a dictionary attack.</p>
-<p>This rule raises an issue when a hashing function which has been specifically designed for hashing sensitive data, such as PBKDF2, is used with a
-non-random, reused or too short salt value. It does not raise an issue on base hashing algorithms such as sha1 or md5 as these are often used for
-other purposes.</p>
+<p>In cryptography, a "salt" is an extra piece of data which is included when hashing a password. This makes <code>rainbow-table attacks</code> more
+difficult. Using a cryptographic hash function without an unpredictable salt increases the likelihood that an attacker could successfully find the
+hash value in databases of precomputed hashes (called <code>rainbow-tables</code>).</p>
+<p>This rule raises an issue when a hashing function which has been specifically designed for hashing passwords, such as <code>PBKDF2</code>, is used
+with a non-random, reused or too short salt value. It does not raise an issue on base hashing algorithms such as <code>sha1</code> or <code>md5</code>
+as they should not be used to hash passwords.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> Use hashing functions generating their own salt or generate a long random salt of at least 32 bytes. </li>
-  <li> The salt is at least as long as the resulting hash value. </li>
-  <li> Provide the salt to a safe hashing function such as PBKDF2. </li>
-  <li> Save both the salt and the hashed value in the relevant database record; during future validation operations, the salt and hash can then be
-  retrieved from the database. The hash is recalculated with the stored salt and the value being validated, and the result compared to the stored
-  hash. </li>
+  <li> Use hashing functions generating their own secure salt or generate a secure random value of at least 16 bytes. </li>
+  <li> The salt should be unique by user password. </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>

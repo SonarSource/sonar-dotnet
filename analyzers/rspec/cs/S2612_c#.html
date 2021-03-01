@@ -30,7 +30,7 @@ fileInfo.SetAccessControl(fileSecurity);
 </pre>
 <p>.Net / .Net Core using Mono.Posix.NETStandard</p>
 <pre>
- var fileSystemEntry = UnixFileSystemInfo.GetFileSystemEntry("path");
+var fileSystemEntry = UnixFileSystemInfo.GetFileSystemEntry("path");
 fileSystemEntry.FileAccessPermissions = FileAccessPermissions.OtherReadWriteExecute; // Sensitive
 </pre>
 <h2>Compliant Solution</h2>

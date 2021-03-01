@@ -7,15 +7,10 @@
     "constantCost": "5min"
   },
   "tags": [
-    "owasp-a3"
+    
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2228",
   "sqKey": "S2228",
-  "scope": "Main",
-  "securityStandards": {
-    "OWASP": [
-      "A3"
-    ]
-  }
+  "scope": "Main"
 }
