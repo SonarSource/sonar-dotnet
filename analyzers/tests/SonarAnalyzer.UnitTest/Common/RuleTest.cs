@@ -171,10 +171,6 @@ namespace SonarAnalyzer.UnitTest.Common
                     // Security hotspots are enabled by default, but they will report issues only when their ID is contained in SonarLint.xml
                     // Rule activation is done in DiagnosticDescriptorBuilder.WithNotConfigurable() to prevent rule supression and deactivation.
                     diagnostic.IsEnabledByDefault.Should().BeTrue($"{diagnostic.Id} should be enabled by default");
-                    if (IsDeprecated(diagnostic))
-                    {
-                        System.Diagnostics.Debugger.Break();
-                    }
                 }
                 else if (IsDeprecated(diagnostic))
                 {
