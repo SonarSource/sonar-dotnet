@@ -1,6 +1,6 @@
 name: sonar-release
 # This workflow is triggered when publishing a new github release
-on: 
+on:
   release:
     types:
       - published
@@ -8,14 +8,14 @@ on:
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
   PYTHONUNBUFFERED: 1
-  
+
 jobs:
   sonar_release:
     runs-on: ubuntu-latest
     name: Start release process
     steps:
       - name: LT release
-        id: lt_release        
+        id: lt_release
         with:
           publish_to_binaries: true
           distribute: true
@@ -49,7 +49,7 @@ jobs:
       - name: Notify success on Slack
         uses: Ilshidur/action-slack@2.0.0
         with:
-          args: "Release successful for {{ GITHUB_REPOSITORY }} by {{ GITHUB_ACTOR }}"        
+          args: "Release successful for {{ GITHUB_REPOSITORY }} by {{ GITHUB_ACTOR }}"
       - name: Notify failures on Slack
         uses: Ilshidur/action-slack@2.0.0
         if: failure()
