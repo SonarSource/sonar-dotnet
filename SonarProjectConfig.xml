@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SonarProjectConfig xmlns="http://www.sonarsource.com/msbuild/analyzer/2021/1">
+  <AnalysisConfigPath>c:\Projects\1h with Hacker\AwesomeBankWeb\.sonarqube\conf\SonarQubeAnalysisConfig.xml</AnalysisConfigPath>
+  <ProjectPath>C:\Projects\1h with Hacker\AwesomeBankWeb\AwesomeBankWeb.CSharp\AwesomeBankWeb.CSharp.csproj</ProjectPath>
+  <OutputDir>C:\Projects\1h with Hacker\AwesomeBankWeb\.sonarqube\out\0</OutputDir>
+  <TestProject>false</TestProject>
+  <TargetFramework>netcoreapp3.1</TargetFramework>
+</SonarProjectConfig>
