@@ -94,7 +94,7 @@ public class WildcardPatternFileProvider {
     return result;
   }
 
-  private String toPath(List<String> elements) {
+  private static String toPath(List<String> elements) {
     return elements.stream().collect(Collectors.joining(File.separator));
   }
 
