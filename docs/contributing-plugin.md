@@ -6,6 +6,7 @@
 - Install IntelliJ IDEA Community Edition
 - Install Apache Maven 
 - Setup the Maven Settings ([internal link](https://xtranet-sonarsource.atlassian.net/wiki/spaces/DEV/pages/776711/Developer+Box))
+- Setup the Orchestrator ([internal link](https://github.com/sonarsource/orchestrator#configuration))
 
 ## Working with the code
 
@@ -38,6 +39,7 @@ As for any maven project, the command `mvn clean install` automatically runs the
 ### Integration Tests
 
 Before running ITs, you need to setup the NUGET_PATH environment variable to point to the *nuget.exe* executable.
+Additional information about the integration tests configuration can be found at the following [internal link](https://xtranet-sonarsource.atlassian.net/wiki/spaces/DEV/pages/776679/Integration+Tests).
 
 To run the ITs, from your command prompt, you can either:
 
