@@ -42,6 +42,8 @@ public class WildcardPatternFileProvider {
   private static final String ZERO_OR_MORE_PATTERN = "*";
   private static final String ANY_PATTERN = "?";
 
+  private static final String SEPARATOR_PATTERN = "["+ Pattern.quote(File.separator) +"/]";
+
   private final File baseDir;
 
   public WildcardPatternFileProvider(File baseDir) {
@@ -50,7 +52,7 @@ public class WildcardPatternFileProvider {
 
   Set<File> listFiles(String pattern) {
 
-    List<String> elements = Arrays.asList(pattern.split("["+ Pattern.quote(File.separator) +"/]"));
+    List<String> elements = Arrays.asList(pattern.split(SEPARATOR_PATTERN));
 
     List<String> elementsTillFirstWildcard = elementsTillFirstWildcard(elements);
     String pathTillFirstWildcardElement = toPath(elementsTillFirstWildcard);
