@@ -4,6 +4,6 @@
   <ProjectPath>C:\Projects\1h with Hacker\AwesomeBankWeb\AwesomeBankWeb.CSharp\AwesomeBankWeb.CSharp.csproj</ProjectPath>
   <FilesToAnalyzePath>c:\Projects\1h with Hacker\AwesomeBankWeb\.sonarqube\conf\0\FilesToAnalyze.txt</FilesToAnalyzePath>
   <OutputDir>C:\Projects\1h with Hacker\AwesomeBankWeb\.sonarqube\out\0</OutputDir>
-  <TestProject>false</TestProject>
+  <ProjectType>Product</ProjectType>
   <TargetFramework>netcoreapp3.1</TargetFramework>
 </SonarProjectConfig>
