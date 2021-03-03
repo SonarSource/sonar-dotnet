@@ -251,6 +251,8 @@ stages:
 
     - job: runIntegrationTestsJob
       displayName: '.NET ITs'
+      workspace:
+        clean: all
       steps:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download binaries to test'
@@ -271,9 +273,7 @@ stages:
       displayName: 'Java build'
       workspace:
         clean: all
-
       steps:
-
       - task: DownloadPipelineArtifact@2
         displayName: 'Download .Net binaries for Maven build'
         inputs:
@@ -325,9 +325,9 @@ stages:
     - job: runJavaUnitTests
       displayName: 'Java UTs'
       dependsOn: runJavaBuild
-
+      workspace:
+        clean: all
       steps:
-
       - task: DownloadSecureFile@1
         displayName: 'Download Maven settings'
         name: mavenSettings
@@ -406,6 +406,8 @@ stages:
     - job: runJavaIntegrationTests
       displayName: 'Java ITs'
       dependsOn: runJavaBuild
+      workspace:
+        clean: all
       steps:
       - task: DownloadSecureFile@1
         displayName: 'Download Maven settings'
