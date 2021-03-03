@@ -102,7 +102,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void open_cover_on_MultipleProjects_with_wildcardPattern() throws Exception {
+  public void open_cover_on_MultipleProjects_with_UnixWildcardPattern() throws Exception {
     BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.opencover.reportsPaths", "/*/opencover.xml");
 
     // The original opencover is moved to a subfolder and parts of it are removed and that is how we know the correct one is matched.
