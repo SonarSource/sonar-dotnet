@@ -24,6 +24,7 @@ languages in [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarc
 * [Issue tracking](./docs/issues.md)
 * [C# rules](https://rules.sonarsource.com/csharp)
 * [VB.Net rules](https://rules.sonarsource.com/vbnet)
+* [CI pipeline scripts and docs](https://github.com/SonarSource/dotnet-infra)
 
 ### Nuget.org packages
 
