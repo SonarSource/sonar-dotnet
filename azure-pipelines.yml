@@ -9,11 +9,10 @@ schedules:
 trigger:
 - master
 
-pool:
-  vmImage: 'windows-latest'
+pool: '.Net Bubble - GCP'
 
 variables:
-  - group: sonar-dotnet-variables
+  - group: sonar-dotnet-variables-tmp
   - group: sonarsource-build-variables
 
 resources:
@@ -163,25 +162,6 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
-      - task: UseDotNet@2
-        inputs:
-          packageType: sdk
-          version: 5.0.100
-          installationPath: $(Agent.ToolsDirectory)/dotnet
-        displayName: "Install NET 5"
-
-      - task: UseDotNet@2
-        inputs:
-          packageType: sdk
-          version: 3.1.201
-          installationPath: $(Agent.ToolsDirectory)/dotnet
-        displayName: "Install dotnet 3.1 LTS"
-
-      - powershell: |
-          dotnet --list-sdks
-          dotnet --version
-        displayName: 'List dotnet versions and current version'
-
       - powershell: |
           # Calculate the file path
           $versionFilePath = "$env:BUILD_SOURCESDIRECTORY\scripts\version\Version.props"
@@ -239,7 +219,6 @@ stages:
 
       - powershell: |
           . .\scripts\utils.ps1
-
           cd analyzers
 
           $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
@@ -251,16 +230,11 @@ stages:
           & dotnet build $testProjFileName -c $(BuildConfiguration)
           Test-ExitCode "ERROR: UnitTest project build FAILED."
 
-          Write-Host "Register OpenCover profilers!"
-
-          # This step needs to be manually done on CI agents. See https://github.com/OpenCover/opencover/raw/master/main/OpenCover.Documentation/Usage.pdf
-          regsvr32 $(NUGET_PACKAGES)\opencover\4.7.922\tools\x86\OpenCover.Profiler.dll
-          regsvr32 $(NUGET_PACKAGES)\opencover\4.7.922\tools\x64\OpenCover.Profiler.dll
-
           $supportedFrameworks = @('net48', 'net5.0')
+
           Foreach ($framework in $supportedFrameworks)
           {
-            & $(NUGET_PACKAGES)\opencover\4.7.922\tools\OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test $testProjFileName --no-build -c $(BuildConfiguration) -f $framework" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.$framework.xml -oldStyle
+            & OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test $testProjFileName --no-build -c $(BuildConfiguration) -f $framework" -returntargetcode -filter:"+[SonarAnalyzer.CFG]* +[SonarAnalyzer]* +[SonarAnalyzer.CSharp]* +[SonarAnalyzer.Utilities]* +[SonarAnalyzer.VisualBasic]*" -output:tests\coverage.$framework.xml -oldStyle
             Test-ExitCode "ERROR: Unit tests for $framework FAILED."
           }
 
@@ -277,7 +251,6 @@ stages:
 
     - job: runIntegrationTestsJob
       displayName: '.NET ITs'
-
       steps:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download binaries to test'
@@ -288,25 +261,6 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
-      - task: UseDotNet@2
-        inputs:
-          packageType: sdk
-          version: 5.0.100
-          installationPath: $(Agent.ToolsDirectory)/dotnet
-        displayName: "Install .NET 5 SDK"
-
-      - task: UseDotNet@2
-        inputs:
-          packageType: sdk
-          version: 3.1.201
-          installationPath: $(Agent.ToolsDirectory)/dotnet
-        displayName: "Install dotnet 3.1 LTS"
-
-      - powershell: |
-          dotnet --list-sdks
-          dotnet --version
-        displayName: 'List dotnet versions and current version'
-
       - task: PowerShell@2
         displayName: 'Run ITs'
         inputs:
@@ -315,6 +269,8 @@ stages:
 
     - job: runJavaBuild
       displayName: 'Java build'
+      workspace:
+        clean: all
 
       steps:
 
@@ -450,9 +406,7 @@ stages:
     - job: runJavaIntegrationTests
       displayName: 'Java ITs'
       dependsOn: runJavaBuild
-
       steps:
-
       - task: DownloadSecureFile@1
         displayName: 'Download Maven settings'
         name: mavenSettings
@@ -490,7 +444,7 @@ stages:
           ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
           ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
         inputs:
-          goals: 'install'
+          goals: 'clean install'
           options: >-
             $(commonMavenArguments)
             --settings $(mavenSettings.secureFilePath)

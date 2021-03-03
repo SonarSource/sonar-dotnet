@@ -20,7 +20,7 @@ function Get-MsBuildPath([ValidateSet("14.0", "15.0", "16.0", "Current")][string
     #If MSBUILD_PATH environment variable is found, the version is not checked and the value of input parameter is ignored.
     Write-Host "Trying to find 'msbuild.exe' using 'MSBUILD_PATH' environment variable"
     $msbuildPathEnvVar = "MSBUILD_PATH"
-    $msbuildPath = [environment]::GetEnvironmentVariable($msbuildPathEnvVar, "Process")
+    $msbuildPath = [environment]::GetEnvironmentVariable($msbuildPathEnvVar, [System.EnvironmentVariableTarget]::Machine)
 
     if (!$msbuildPath) {
         Write-Host "Environment variable ${msbuildEnv} not found"

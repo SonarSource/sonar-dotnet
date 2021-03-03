@@ -67,6 +67,7 @@ public class TestUtils {
 
   final private static Logger LOG = LoggerFactory.getLogger(TestUtils.class);
   private static final String MSBUILD_PATH = "MSBUILD_PATH";
+  private static final String MSBUILD_PATH_DEFAULT = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin\\msbuild.exe";
 
   // Ensure no AnalysisWarning is raised inside the SQ GUI
   public static void verifyNoGuiWarnings(Orchestrator orchestrator, BuildResult buildResult) {
@@ -159,8 +160,7 @@ public class TestUtils {
   }
 
   private static Path getMsBuildPath(Orchestrator orch) {
-    String msBuildPathStr = orch.getConfiguration().getString(MSBUILD_PATH, "C:\\Program Files (x86)\\Microsoft "
-      + "Visual Studio\\2017\\Enterprise\\MSBuild\\15.0\\Bin\\MSBuild.exe");
+    String msBuildPathStr = orch.getConfiguration().getString(MSBUILD_PATH, MSBUILD_PATH_DEFAULT);
     Path msBuildPath = Paths.get(msBuildPathStr).toAbsolutePath();
     if (!Files.exists(msBuildPath)) {
       throw new IllegalStateException("Unable to find MSBuild at '" + msBuildPath.toString() +
