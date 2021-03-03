@@ -50,14 +50,14 @@ namespace SonarAnalyzer.Helpers
         internal static void SetParameterValues(ParameterLoadingDiagnosticAnalyzer parameteredAnalyzer,
             AnalyzerOptions options)
         {
-            var additionalFile = options.AdditionalFiles.FirstOrDefault(f => IsSonarLintXml(f.Path));
+            var sonarLintXml = options.AdditionalFiles.FirstOrDefault(f => IsSonarLintXml(f.Path));
 
-            if (additionalFile == null)
+            if (sonarLintXml == null)
             {
                 return;
             }
 
-            var parameters = ParseParameters(additionalFile.Path);
+            var parameters = ParseParameters(sonarLintXml.Path);
             if (parameters.IsEmpty)
             {
                 return;
