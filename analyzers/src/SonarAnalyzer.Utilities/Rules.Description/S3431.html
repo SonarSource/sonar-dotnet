@@ -27,6 +27,14 @@ public void TestNullArg()
   Assert.IsTrue(callFailed, "Expected call to MyMethod to fail with ArgumentNullException");
 }
 </pre>
+<p>or</p>
+<pre>
+[TestMethod]
+public void TestNullArg()
+{
+  Assert.ThrowsException&lt;ArgumentNullException&gt;(() =&gt; /*...*/);
+}
+</pre>
 <h2>Exceptions</h2>
 <p>This rule ignores one-line test methods, since it is obvious in such methods where the exception is expected to be thrown. </p>
 

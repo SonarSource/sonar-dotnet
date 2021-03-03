@@ -37,5 +37,12 @@ namespace Tests.Diagnostics
                 callFailed = true;
             }
         }
+
+        [TestMethod]
+        public void TestWithThrowsAssertation()
+        {
+            object o = new object();
+            Assert.ThrowsException<ArgumentNullException>(() => o.ToString());
+        }
     }
 }

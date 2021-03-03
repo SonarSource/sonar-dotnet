@@ -33,40 +33,25 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ExpectedExceptionAttributeShouldNotBeUsed : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3431";
-        private const string MessageFormat = "Replace the 'ExpectedException' attribute with a try/catch block.";
+        private const string DiagnosticId = "S3431";
+        private const string MessageFormat = "Replace the 'ExpectedException' attribute with a throw assertion or a try/catch block.";
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol == null)
+                    if (methodDeclaration.ExpressionBody == null
+                        && methodDeclaration.Body?.Statements.Count > 1
+                        && c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
+                        && methodSymbol.GetAttributes(UnitTestHelper.KnownExpectedExceptionAttributes).FirstOrDefault() is { } firstExpectedExceptionAttributeOrDefault)
                     {
-                        return;
-                    }
-
-                    var isOneLineMethod = methodDeclaration.ExpressionBody != null ||
-                        methodDeclaration.Body?.Statements.Count <= 1; // do not raise on empty method
-                    var firstExpectedExceptionAttributeOrDefault = methodSymbol.GetAttributes(UnitTestHelper.KnownExpectedExceptionAttributes)
-                        .FirstOrDefault();
-
-                    if (firstExpectedExceptionAttributeOrDefault != null &&
-                        !isOneLineMethod)
-                    {
-                        var attributeLocation = firstExpectedExceptionAttributeOrDefault.ApplicationSyntaxReference
-                            .GetSyntax()
-                            .GetLocation();
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeLocation));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, firstExpectedExceptionAttributeOrDefault.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
     }
 }
