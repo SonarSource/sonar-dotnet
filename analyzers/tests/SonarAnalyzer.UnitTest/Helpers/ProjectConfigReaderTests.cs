@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("Valid_Test_UnixPaths", @"/home/user/.sonarqube/conf/0/FilesToAnalyze.txt")]
         public void WhenProjectConfigIsValid_FilesToAnalyzePath_ReturnsCorrectValue(string folder, string expectedFileToAnalyzePath)
         {
-            var options = CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
 
             var sut = new ProjectConfigReader(options);
 
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         public void WhenProjectConfigHasMissingValues_FilesToAnalyzePath_ReturnsCorrectValue(string folder)
         {
-            var options = CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
 
             var sut = new ProjectConfigReader(options);
 
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void WhenProjectConfigHasMixedSeparators_FilesToAnalyzePath_ReturnsValues()
         {
-            var options = CreateOptions($"ResourceTests\\SonarProjectConfig\\Invalid_MixedSeparators\\SonarProjectConfig.xml");
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Invalid_MixedSeparators\\SonarProjectConfig.xml");
 
             var sut = new ProjectConfigReader(options);
 
@@ -78,19 +78,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow(Constants.NuGetLatestVersion)]
         public void WhenProjectConfigIsValid_FilesToReturnPath_ReturnNull(string folder)
         {
-            var options = CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
 
             var sut = new ProjectConfigReader(options);
 
             sut.FilesToAnalyzePath.Should().BeNull();
-        }
-
-        // FIXME duplicated with ParameterLoaderTests.cs
-        private static AnalyzerOptions CreateOptions(string relativePath)
-        {
-            var additionalText = new Mock<AdditionalText>();
-            additionalText.Setup(x => x.Path).Returns(relativePath);
-            return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
     }
 }
