@@ -102,6 +102,18 @@ public class CoverageTest {
   }
 
   @Test
+  public void open_cover_on_MultipleProjects_with_UnixWildcardPattern() throws Exception {
+    BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.opencover.reportsPaths", "/*/opencover.xml");
+
+    // The original opencover is moved to a subfolder and parts of it are removed and that is how we know the correct one is matched.
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 3 files, 1 main files, 1 main files with coverage, 2 test files, 0 project excluded files, 0 other language files");
+
+    assertCoverageMetrics("MultipleProjects", 19, 11, 10, 4);
+  }
+
+  @Test
   public void open_cover_with_deterministic_source_paths() throws Exception {
     BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "no_rule", "sonar.cs.opencover.reportsPaths", "opencover.xml");
 

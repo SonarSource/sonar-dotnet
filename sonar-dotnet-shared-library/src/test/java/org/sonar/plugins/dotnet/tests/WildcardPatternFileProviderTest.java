@@ -236,6 +236,17 @@ public class WildcardPatternFileProviderTest {
     listFiles(path("*", "..", "foo.txt"), tmp.getRoot());
   }
 
+  @Test
+  public void given_pattern_with_mixed_folder_separator_listFiles_supports_pattern(){
+    File tmpRoot = tmp.getRoot();
+    String givenPattern = tmpRoot + File.separator + "agent_work9" + File.separator + "_temp/**/*.trx";
+
+    listFiles(givenPattern);
+
+    List<String> debugLogs = logTester.logs((LoggerLevel.DEBUG));
+    assertThat(debugLogs.get(1)).isEqualTo("Gathering files for wildcardPattern '**" + File.separator + "*.trx'.");
+  }
+
   private static String path(String... elements) {
     return Joiner.on(File.separator).join(elements);
   }
@@ -245,7 +256,7 @@ public class WildcardPatternFileProviderTest {
   }
 
   private static Set<File> listFiles(String pattern, File baseDir) {
-    return new WildcardPatternFileProvider(baseDir, File.separator).listFiles(pattern);
+    return new WildcardPatternFileProvider(baseDir).listFiles(pattern);
   }
 
 }
