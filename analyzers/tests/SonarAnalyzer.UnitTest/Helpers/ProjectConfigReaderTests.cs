@@ -18,12 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -32,16 +28,63 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
     public class ProjectConfigReaderTests
     {
-        [DataTestMethod]
-        [DataRow("Valid_Product_WindowsPaths", @"c:\foo\bar\.sonarqube\conf\0\FilesToAnalyze.txt")]
-        [DataRow("Valid_Test_UnixPaths", @"/home/user/.sonarqube/conf/0/FilesToAnalyze.txt")]
-        public void WhenProjectConfigIsValid_FilesToAnalyzePath_ReturnsCorrectValue(string folder, string expectedFileToAnalyzePath)
+        [TestMethod]
+        public void WhenProjectConfigHasWindowsPathsAndProductType_ReturnsCorrectValue()
         {
-            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Valid_Product_WindowsPaths\\SonarProjectConfig.xml");
 
             var sut = new ProjectConfigReader(options);
 
-            sut.FilesToAnalyzePath.Should().Be(expectedFileToAnalyzePath);
+            sut.AnalysisConfigPath.Should().Be(@"c:\foo\bar\.sonarqube\conf\SonarQubeAnalysisConfig.xml");
+            sut.ProjectPath.Should().Be(@"C:\foo\bar\AwesomeBankWeb.CSharp\AwesomeBankWeb.CSharp.csproj");
+            sut.FilesToAnalyzePath.Should().Be(@"c:\foo\bar\.sonarqube\conf\0\FilesToAnalyze.txt");
+            sut.OutPath.Should().Be(@"C:\foo\bar\.sonarqube\out\0");
+            sut.ProjectType.Should().Be(ProjectType.Product);
+            sut.TargetFramework.Should().Be("netcoreapp3.1");
+        }
+
+        [TestMethod]
+        public void WhenProjectConfigHasUnixPathAndTestType_ReturnsCorrectValue()
+        {
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Valid_Test_UnixPaths\\SonarProjectConfig.xml");
+
+            var sut = new ProjectConfigReader(options);
+
+            sut.AnalysisConfigPath.Should().Be(@"/home/user/.sonarqube/conf/SonarQubeAnalysisConfig.xml");
+            sut.ProjectPath.Should().Be(@"/home/user/AwesomeBankWeb.CSharp.csproj");
+            sut.FilesToAnalyzePath.Should().Be(@"/home/user/.sonarqube/conf/0/FilesToAnalyze.txt");
+            sut.OutPath.Should().Be(@"/home/user/.sonarqube/out/0");
+            sut.ProjectType.Should().Be(ProjectType.Test);
+            sut.TargetFramework.Should().Be("net5");
+        }
+
+        [TestMethod]
+        public void WhenProjectConfigHasMixedSeparators_FilesToAnalyzePath_ReturnsValues()
+        {
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Invalid_MixedSeparators\\SonarProjectConfig.xml");
+
+            var sut = new ProjectConfigReader(options);
+
+            sut.AnalysisConfigPath.Should().Be(@"c:\foo\bar\.sonarqube/conf/SonarQubeAnalysisConfig.xml");
+            sut.ProjectPath.Should().Be(@"C:\foo\bar\AwesomeBankWeb.CSharp/AwesomeBankWeb.CSharp.csproj");
+            sut.FilesToAnalyzePath.Should().Be(@"c:\foo\bar\.sonarqube\conf/0/FilesToAnalyze.txt");
+            sut.OutPath.Should().Be(@"C:\foo\bar\.sonarqube/out/0");
+            sut.ProjectType.Should().Be(ProjectType.Product);
+            sut.TargetFramework.Should().Be("netcoreapp3.1");
+        }
+
+        [TestMethod]
+        public void WhenProjectConfigHasMissingFilesToAnalyzePath_ReturnsCorrectValue()
+        {
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Invalid_MissingFilesToAnalyzePath\\SonarProjectConfig.xml");
+
+            var sut = new ProjectConfigReader(options);
+
+            sut.AnalysisConfigPath.Should().Be(@"c:\foo\bar\.sonarqube\conf\SonarQubeAnalysisConfig.xml");
+            sut.ProjectPath.Should().Be(@"C:\foo\bar\AwesomeBankWeb.CSharp\AwesomeBankWeb.CSharp.csproj");
+            sut.OutPath.Should().Be(@"C:\foo\bar\.sonarqube\out\0");
+            sut.ProjectType.Should().Be(ProjectType.Product);
+            sut.TargetFramework.Should().Be("netcoreapp3.1");
         }
 
         [DataTestMethod]
@@ -60,16 +103,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
             sut.FilesToAnalyzePath.Should().Be(@"c:\foo\bar\.sonarqube\conf\0\FilesToAnalyze.txt");
         }
 
-        [TestMethod]
-        public void WhenProjectConfigHasMixedSeparators_FilesToAnalyzePath_ReturnsValues()
-        {
-            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Invalid_MixedSeparators\\SonarProjectConfig.xml");
-
-            var sut = new ProjectConfigReader(options);
-
-            sut.FilesToAnalyzePath.Should().Be(@"c:\foo\bar\.sonarqube\conf/0/FilesToAnalyze.txt");
-        }
-
         [DataTestMethod]
         [DataRow("Invalid_DifferentClassName")]
         [DataRow("Invalid_DifferentNamespace")]
@@ -82,7 +115,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             var sut = new ProjectConfigReader(options);
 
+            sut.AnalysisConfigPath.Should().BeNull();
+            sut.ProjectPath.Should().BeNull();
             sut.FilesToAnalyzePath.Should().BeNull();
+            sut.OutPath.Should().BeNull();
+            sut.ProjectType.Should().BeNull();
+            sut.TargetFramework.Should().BeNull();
         }
     }
 }

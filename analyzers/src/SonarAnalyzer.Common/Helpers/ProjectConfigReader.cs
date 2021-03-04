@@ -35,7 +35,12 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly Lazy<ProjectConfig> projectConfig;
 
+        public string AnalysisConfigPath => ProjectConfigValue?.AnalysisConfigPath;
         public string FilesToAnalyzePath => ProjectConfigValue?.FilesToAnalyzePath;
+        public string OutPath => ProjectConfigValue?.OutPath;
+        public string ProjectPath => ProjectConfigValue?.ProjectPath;
+        public ProjectType? ProjectType => ProjectConfigValue?.ProjectType;
+        public string TargetFramework => ProjectConfigValue?.TargetFramework;
 
         private ProjectConfig ProjectConfigValue => projectConfig.Value;
 
