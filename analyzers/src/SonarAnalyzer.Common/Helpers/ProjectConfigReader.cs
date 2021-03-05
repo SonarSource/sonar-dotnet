@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Helpers
                 using var fs = File.Open(sonarProjectConfig.Path, FileMode.Open, FileAccess.Read, FileShare.Read);
                 return (ProjectConfig)ser.Deserialize(fs);
             }
-            catch (Exception ex) when (ex is IOException || ex is XmlException || ex is InvalidOperationException)
+            catch (Exception)
             {
                 // cannot log exception
                 return null;
@@ -70,6 +70,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         private static bool IsSonarProjectConfig(AdditionalText additionalText) =>
-            new FileInfo(additionalText.Path).Name.Equals("SonarProjectConfig.xml", StringComparison.OrdinalIgnoreCase);
+            additionalText.Path != null
+            && new FileInfo(additionalText.Path).Name.Equals("SonarProjectConfig.xml", StringComparison.OrdinalIgnoreCase);
     }
 }

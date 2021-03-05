@@ -122,5 +122,24 @@ namespace SonarAnalyzer.UnitTest.Helpers
             sut.ProjectType.Should().BeNull();
             sut.TargetFramework.Should().BeNull();
         }
+
+        [DataTestMethod]
+        [DataRow(null)]
+        [DataRow("/foo/bar/do-not-exit")]
+        [DataRow("/foo/bar/SonarProjectConfig.xml")]
+        [DataRow("/foo/bar/x.xml")]
+        public void WhenProjectConfigIsMissingOrNull_ReturnsNull(string folder)
+        {
+            var options = TestHelper.CreateOptions(folder);
+
+            var sut = new ProjectConfigReader(options);
+
+            sut.AnalysisConfigPath.Should().BeNull();
+            sut.ProjectPath.Should().BeNull();
+            sut.FilesToAnalyzePath.Should().BeNull();
+            sut.OutPath.Should().BeNull();
+            sut.ProjectType.Should().BeNull();
+            sut.TargetFramework.Should().BeNull();
+        }
     }
 }
