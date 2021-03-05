@@ -26,6 +26,8 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -185,6 +187,13 @@ namespace SonarAnalyzer.UnitTest
             var key = diagnostic.Id.Substring(1);
             var type = CsRuleTypeMapping.RuleTypesCs.GetValueOrDefault(key) ?? VbRuleTypeMapping.RuleTypesVb.GetValueOrDefault(key);
             return type == "SECURITY_HOTSPOT";
+        }
+
+        public static AnalyzerOptions CreateOptions(string relativePath)
+        {
+            var additionalText = new Mock<AdditionalText>();
+            additionalText.Setup(x => x.Path).Returns(relativePath);
+            return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
     }
 }
