@@ -48,8 +48,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 var versionFolder = Version == Constants.NuGetLatestVersion
                         ? SortedPackageFolders().Select(x => Path.GetFileName(x).Substring(Id.Length + 1)).Last(x => char.IsNumber(x[0]))
                         : Version;
-                var x = $@"{PackagesFolderRelativePath}{Id}.{versionFolder}\{runtimePath}lib";
-                return Path.GetFullPath(x);
+                return Path.Combine(PackagesFolder, $@"{Id}.{versionFolder}\{runtimePath}lib");
             }
 
             public void EnsurePackageIsInstalled()
@@ -86,7 +85,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 var versionArgument = Version == Constants.NuGetLatestVersion ? string.Empty : $"-Version {Version}";
                 var configFile = ValidatedNuGetConfigPath();
                 // Explicitly specify the NuGet config to use to avoid being impacted by the NuGet config on the machine running the tests
-                var args = $"install {Id} {versionArgument} -OutputDirectory {Path.GetFullPath(PackagesFolderRelativePath)} -NonInteractive -ForceEnglishOutput -ConfigFile {configFile}";
+                var args = $"install {Id} {versionArgument} -OutputDirectory \"{Environment.GetEnvironmentVariable("NUGET_PACKAGES")}\" -NonInteractive -ForceEnglishOutput -ConfigFile {configFile}";
                 LogMessage($"Installing package using nuget.exe {args}");
                 var startInfo = new ProcessStartInfo
                 {
@@ -154,8 +153,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 // the actual number of parts, as long as there is at least one.
                 var matcher = new Regex($@"{Regex.Escape(Id)}(\.\d+)+$", RegexOptions.IgnoreCase);
 
-                return Directory.Exists(PackagesFolderRelativePath)
-                    ? Directory.GetDirectories(PackagesFolderRelativePath, $"{Id}.*", SearchOption.TopDirectoryOnly).Where(x => matcher.IsMatch(x)).OrderBy(x => x)
+                return Directory.Exists(PackagesFolder)
+                    ? Directory.GetDirectories(PackagesFolder, $"{Id}.*", SearchOption.TopDirectoryOnly).Where(x => matcher.IsMatch(x)).OrderBy(x => x)
                     : Enumerable.Empty<string>();
             }
 

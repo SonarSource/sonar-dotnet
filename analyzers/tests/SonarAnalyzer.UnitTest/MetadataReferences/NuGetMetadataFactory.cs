@@ -31,29 +31,29 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     public static partial class NuGetMetadataFactory
     {
-        private const string PackagesFolderRelativePath = @"..\..\..\..\..\packages\";
+        private static string PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? @"..\..\..\..\..\packages\";
         private const string NuGetConfigFileRelativePath = @"..\..\..\nuget.config";
 
-        private static readonly PackageManager PackageManager = new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
+        private static readonly PackageManager PackageManager = new PackageManager(CreatePackageRepository(), PackagesFolder);
 
-        private static readonly string[] SortedAllowedDirectories = new string[]
-            {
-                "net",
-                "netstandard2.1",
-                "netstandard2.0",
-                "net47",
-                "net461",
-                "netstandard1.6",
-                "netstandard1.3",
-                "netstandard1.1",
-                "netstandard1.0",
-                "net451",
-                "net45",
-                "net40",
-                "net20",
-                "portable-net45",
-                "lib", // This has to be last, some packages have DLLs directly in "lib" directory
-            };
+        private static readonly string[] SortedAllowedDirectories =
+        {
+            "net",
+            "netstandard2.1",
+            "netstandard2.0",
+            "net47",
+            "net461",
+            "netstandard1.6",
+            "netstandard1.3",
+            "netstandard1.1",
+            "netstandard1.0",
+            "net451",
+            "net45",
+            "net40",
+            "net20",
+            "portable-net45",
+            "lib" // This has to be last, some packages have DLLs directly in "lib" directory
+        };
 
         /// <param name="dllDirectory">Name of the directory containing DLL files inside *.nupgk/lib/{dllDirectory}/ or *.nupgk/runtimes/{runtime}/lib/{dllDirectory}/ folder.
         /// This directory name represents target framework in most cases.</param>
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         public static IEnumerable<MetadataReference> CreateNETStandard21()
         {
-            var packageDir = Path.GetFullPath($@"{PackagesFolderRelativePath}NETStandard.Library.Ref.2.1.0\ref\netstandard2.1");
+            var packageDir = Path.Combine(PackagesFolder, @"NETStandard.Library.Ref.2.1.0\ref\netstandard2.1");
             if (Directory.Exists(packageDir))
             {
                 LogMessage($"Package found at {packageDir}");
