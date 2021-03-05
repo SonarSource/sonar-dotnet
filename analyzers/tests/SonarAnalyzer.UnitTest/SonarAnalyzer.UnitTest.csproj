@@ -63,14 +63,6 @@
     <None Remove="CBDEMocks\CBDEFails.exe" />
     <None Remove="CBDEMocks\CBDESucceedsWithIncorrectResults.exe" />
     <None Remove="CBDEMocks\CBDEWaitAndSucceeds.exe" />
-    <None Remove="ResourceTests\RuleWithBooleanParameter\SonarLint.xml" />
-    <None Remove="ResourceTests\SonarProjectConfig\Invalid_DifferentNamespace\SonarProjectConfig.xml" />
-    <None Remove="ResourceTests\SonarProjectConfig\Invalid_MixedSeparators\SonarProjectConfig.xml" />
-    <None Remove="ResourceTests\SonarProjectConfig\Invalid_DifferentClassName\SonarProjectConfig.xml" />
-    <None Remove="ResourceTests\StringInsteadOfBoolean\SonarLint.xml" />
-    <None Remove="ResourceTests\RuleWithStringParameter\SonarLint.xml" />
-    <None Remove="ResourceTests\StringInsteadOfInt\SonarLint.xml" />
-    <None Remove="ResourceTests\ToChange\SonarLint.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,61 +95,7 @@
     <Content Include="CBDEMocks\CBDEWaitAndSucceeds.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ResourceTests\SonarProjectConfig\**\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\AnalyzeGeneratedFalseVbnet\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\AnalyzeGeneratedFalse\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\AnalyzeGeneratedTrueVbnet\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\IgnoreHeaderCommentsFalseVbnet\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\IgnoreHeaderCommentsFalseCSharp\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\IgnoreHeaderCommentsTrueCSharp\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\IgnoreHeaderCommentsTrueVbnet\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\RuleWithBooleanParameter\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\StringInsteadOfBoolean\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\Malformed\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\NoSettings\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\AnalyzeGeneratedTrue\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\NotBoolean\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\RuleWithStringParameter\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\StringInsteadOfInt\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\ToChange\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\SonarLint.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ResourceTests\ProjectOutFolderPath.txt">
+    <Content Include="ResourceTests\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Common\Resources\input.txt">
