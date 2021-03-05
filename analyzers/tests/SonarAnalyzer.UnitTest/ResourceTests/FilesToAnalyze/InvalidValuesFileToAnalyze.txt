@@ -1,0 +1,4 @@
+﻿foo
+123
+C:\Projects\^^^\$\Controllers\HomeController.vb
+C:\Projects/DummyProj/Views\Web.confiG

@@ -22,18 +22,37 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class FilesToAnalyzeRetriever : IFilesToAnalyzeRetriever
+    public class FilesToAnalyzeProvider
     {
-        public IEnumerable<string> RetrieveFilesToAnalyze(string filePath)
+        private readonly Lazy<IEnumerable<string>> allFiles;
+
+        public FilesToAnalyzeProvider(string filePath)
         {
+            allFiles = new Lazy<IEnumerable<string>>(() => RetrieveFilesToAnalyze(filePath));
+        }
+
+        public IEnumerable<string> FindFiles(string fileName) =>
+            allFiles.Value.Where(x => Path.GetFileName(x).Equals(fileName, StringComparison.OrdinalIgnoreCase));
+
+        public IEnumerable<string> FindFiles(Regex fullPathRegex) =>
+            allFiles.Value.Where(x => fullPathRegex.IsMatch(x));
+
+        private static IEnumerable<string> RetrieveFilesToAnalyze(string filePath)
+        {
+            if (string.IsNullOrWhiteSpace(filePath) || !File.Exists(filePath))
+            {
+                return Enumerable.Empty<string>();
+            }
+
             try
             {
                 return File.ReadAllLines(filePath);
             }
-            catch (Exception ex) when (ex is IOException || ex is ArgumentNullException || ex is ArgumentException)
+            catch (Exception)
             {
                 // cannot log exception
                 return Enumerable.Empty<string>();
