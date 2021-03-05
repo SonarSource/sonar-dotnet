@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
@@ -25,13 +26,27 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-
     public class ProjectConfigReaderTests
     {
         [TestMethod]
-        public void WhenProjectConfigHasWindowsPathsAndProductType_ReturnsCorrectValue()
+        public void AllPropertiesAreSet()
         {
-            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Valid_Product_WindowsPaths\\SonarProjectConfig.xml");
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Path_Windows\\SonarProjectConfig.xml");
+
+            var sut = new ProjectConfigReader(options);
+
+            // this will fail if a new property is added to the class and no test case for it is added
+            foreach (var property in sut.GetType().GetProperties())
+            {
+                var value = property.GetValue(sut)?.ToString();
+                value.Should().NotBeNullOrEmpty($"property '{property.Name}' should have value");
+            }
+        }
+
+        [TestMethod]
+        public void WhenAllValuesAreSet_LoadsExpectedValues()
+        {
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Path_Windows\\SonarProjectConfig.xml");
 
             var sut = new ProjectConfigReader(options);
 
@@ -43,40 +58,23 @@ namespace SonarAnalyzer.UnitTest.Helpers
             sut.TargetFramework.Should().Be("netcoreapp3.1");
         }
 
-        [TestMethod]
-        public void WhenProjectConfigHasUnixPathAndTestType_ReturnsCorrectValue()
+        [DataTestMethod]
+        [DataRow("Path_MixedSeparators", @"c:\foo\bar\.sonarqube\conf/0/FilesToAnalyze.txt")]
+        [DataRow("Path_Unix", @"/home/user/.sonarqube/conf/0/FilesToAnalyze.txt")]
+        [DataRow("Path_Windows", @"c:\foo\bar\.sonarqube\conf\0\FilesToAnalyze.txt")]
+        public void WithVariousPathFormats_ReturnsAsIsValue(string project, string expectedFilesToAnalyzePath)
         {
-            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Valid_Test_UnixPaths\\SonarProjectConfig.xml");
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\{project}\\SonarProjectConfig.xml");
 
             var sut = new ProjectConfigReader(options);
 
-            sut.AnalysisConfigPath.Should().Be(@"/home/user/.sonarqube/conf/SonarQubeAnalysisConfig.xml");
-            sut.ProjectPath.Should().Be(@"/home/user/AwesomeBankWeb.CSharp.csproj");
-            sut.FilesToAnalyzePath.Should().Be(@"/home/user/.sonarqube/conf/0/FilesToAnalyze.txt");
-            sut.OutPath.Should().Be(@"/home/user/.sonarqube/out/0");
-            sut.ProjectType.Should().Be(ProjectType.Test);
-            sut.TargetFramework.Should().Be("net5");
+            sut.FilesToAnalyzePath.Should().Be(expectedFilesToAnalyzePath);
         }
 
         [TestMethod]
-        public void WhenProjectConfigHasMixedSeparators_FilesToAnalyzePath_ReturnsValues()
+        public void WhenHasMissingFilesToAnalyzePath_ReturnsCorrectValue()
         {
-            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Invalid_MixedSeparators\\SonarProjectConfig.xml");
-
-            var sut = new ProjectConfigReader(options);
-
-            sut.AnalysisConfigPath.Should().Be(@"c:\foo\bar\.sonarqube/conf/SonarQubeAnalysisConfig.xml");
-            sut.ProjectPath.Should().Be(@"C:\foo\bar\AwesomeBankWeb.CSharp/AwesomeBankWeb.CSharp.csproj");
-            sut.FilesToAnalyzePath.Should().Be(@"c:\foo\bar\.sonarqube\conf/0/FilesToAnalyze.txt");
-            sut.OutPath.Should().Be(@"C:\foo\bar\.sonarqube/out/0");
-            sut.ProjectType.Should().Be(ProjectType.Product);
-            sut.TargetFramework.Should().Be("netcoreapp3.1");
-        }
-
-        [TestMethod]
-        public void WhenProjectConfigHasMissingFilesToAnalyzePath_ReturnsCorrectValue()
-        {
-            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\Invalid_MissingFilesToAnalyzePath\\SonarProjectConfig.xml");
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\MissingFilesToAnalyzePath\\SonarProjectConfig.xml");
 
             var sut = new ProjectConfigReader(options);
 
@@ -87,14 +85,23 @@ namespace SonarAnalyzer.UnitTest.Helpers
             sut.TargetFramework.Should().Be("netcoreapp3.1");
         }
 
-        [DataTestMethod]
-        [DataRow("Invalid_MissingAnalysisConfigPath")]
-        [DataRow("Invalid_MissingOutPath")]
-        [DataRow("Invalid_MissingProjectPath")]
-        [DataRow("Invalid_MissingProjectType")]
-        [DataRow("Invalid_MissingTargetFramework")]
+        [TestMethod]
+        public void WhenHasUnexpectedProjectType_FallsBackToProduct()
+        {
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\UnexpectedProjectTypeValue\\SonarProjectConfig.xml");
 
-        public void WhenProjectConfigHasMissingValues_FilesToAnalyzePath_ReturnsCorrectValue(string folder)
+            var sut = new ProjectConfigReader(options);
+
+            sut.ProjectType.Should().Be(ProjectType.Product);
+        }
+
+        [DataTestMethod]
+        [DataRow("MissingAnalysisConfigPath")]
+        [DataRow("MissingOutPath")]
+        [DataRow("MissingProjectPath")]
+        [DataRow("MissingProjectType")]
+        [DataRow("MissingTargetFramework")]
+        public void WhenHasMissingValues_FilesToAnalyzePath_ReturnsCorrectValue(string folder)
         {
             var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
 
@@ -106,10 +113,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataTestMethod]
         [DataRow("Invalid_DifferentClassName")]
         [DataRow("Invalid_DifferentNamespace")]
-        [DataRow("Invalid_WrongProjectTypeValue")]
         [DataRow("Invalid_Xml")]
-        [DataRow(Constants.NuGetLatestVersion)]
-        public void WhenProjectConfigIsValid_FilesToReturnPath_ReturnNull(string folder)
+        [ExpectedException(typeof(InvalidOperationException), "File SonarProjectConfig.xml could not be parsed.")]
+        public void WhenInvalid_FilesToReturnPath_ReturnNull(string folder)
         {
             var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
 
@@ -119,16 +125,15 @@ namespace SonarAnalyzer.UnitTest.Helpers
             sut.ProjectPath.Should().BeNull();
             sut.FilesToAnalyzePath.Should().BeNull();
             sut.OutPath.Should().BeNull();
-            sut.ProjectType.Should().BeNull();
+            sut.ProjectType.Should().Be(ProjectType.Product);
             sut.TargetFramework.Should().BeNull();
         }
 
         [DataTestMethod]
         [DataRow(null)]
         [DataRow("/foo/bar/do-not-exit")]
-        [DataRow("/foo/bar/SonarProjectConfig.xml")]
         [DataRow("/foo/bar/x.xml")]
-        public void WhenProjectConfigIsMissingOrNull_ReturnsNull(string folder)
+        public void WhenNoFileFound_ReturnsNull(string folder)
         {
             var options = TestHelper.CreateOptions(folder);
 
@@ -138,8 +143,18 @@ namespace SonarAnalyzer.UnitTest.Helpers
             sut.ProjectPath.Should().BeNull();
             sut.FilesToAnalyzePath.Should().BeNull();
             sut.OutPath.Should().BeNull();
-            sut.ProjectType.Should().BeNull();
+            sut.ProjectType.Should().Be(ProjectType.Product);
             sut.TargetFramework.Should().BeNull();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "File SonarProjectConfig.xml has been added as an AdditionalFile but does not exist.")]
+        public void WhenFileIsMissing_ThrowException()
+        {
+            var options = TestHelper.CreateOptions("ResourceTests\\SonarProjectConfig\\FOO\\SonarProjectConfig.xml");
+            var sut = new ProjectConfigReader(options);
+            // trigger the lazy reading of the file, should not execute
+            sut.AnalysisConfigPath.Should().BeNull();
         }
     }
 }

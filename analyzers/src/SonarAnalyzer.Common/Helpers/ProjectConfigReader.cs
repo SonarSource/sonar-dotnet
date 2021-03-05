@@ -33,28 +33,33 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     internal class ProjectConfigReader
     {
+        private const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
+
         private readonly Lazy<ProjectConfig> projectConfig;
 
-        public string AnalysisConfigPath => ProjectConfigValue?.AnalysisConfigPath;
-        public string FilesToAnalyzePath => ProjectConfigValue?.FilesToAnalyzePath;
-        public string OutPath => ProjectConfigValue?.OutPath;
-        public string ProjectPath => ProjectConfigValue?.ProjectPath;
-        public ProjectType? ProjectType => ProjectConfigValue?.ProjectType;
-        public string TargetFramework => ProjectConfigValue?.TargetFramework;
+        public string AnalysisConfigPath => projectConfig.Value.AnalysisConfigPath;
+        public string FilesToAnalyzePath => projectConfig.Value.FilesToAnalyzePath;
+        public string OutPath => projectConfig.Value.OutPath;
+        public string ProjectPath => projectConfig.Value.ProjectPath;
+        public string TargetFramework => projectConfig.Value.TargetFramework;
+        public ProjectType ProjectType =>
+            Enum.TryParse<ProjectType>(projectConfig.Value.ProjectType, out var result)
+            ? result
+            : ProjectType.Product;
 
-        private ProjectConfig ProjectConfigValue => projectConfig.Value;
-
-        public ProjectConfigReader(AnalyzerOptions options)
-        {
+        public ProjectConfigReader(AnalyzerOptions options) =>
             projectConfig = new Lazy<ProjectConfig>(() => ReadContent(options));
-        }
 
         private static ProjectConfig ReadContent(AnalyzerOptions options)
         {
             var sonarProjectConfig = options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig);
-            if (sonarProjectConfig == null || !File.Exists(sonarProjectConfig.Path))
+            if (sonarProjectConfig == null)
             {
-                return null;
+                return ProjectConfig.Empty;
+            }
+            if (!File.Exists(sonarProjectConfig.Path))
+            {
+                throw new InvalidOperationException($"File {SonarProjectConfigFileName} has been added as an AdditionalFile but does not exist.");
             }
             try
             {
@@ -62,15 +67,14 @@ namespace SonarAnalyzer.Helpers
                 using var fs = File.Open(sonarProjectConfig.Path, FileMode.Open, FileAccess.Read, FileShare.Read);
                 return (ProjectConfig)ser.Deserialize(fs);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // cannot log exception
-                return null;
+                throw new InvalidOperationException($"File {SonarProjectConfigFileName} could not be parsed.", e);
             }
         }
 
         private static bool IsSonarProjectConfig(AdditionalText additionalText) =>
             additionalText.Path != null
-            && new FileInfo(additionalText.Path).Name.Equals("SonarProjectConfig.xml", StringComparison.OrdinalIgnoreCase);
+            && Path.GetFileName(additionalText.Path).Equals(SonarProjectConfigFileName, StringComparison.OrdinalIgnoreCase);
     }
 }

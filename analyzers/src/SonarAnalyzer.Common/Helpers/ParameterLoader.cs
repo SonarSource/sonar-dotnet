@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Helpers
         internal static bool IsSonarLintXml(string path) => ConfigurationFilePathMatchesExpected(path, ParameterConfigurationFileName);
 
         internal static bool ConfigurationFilePathMatchesExpected(string path, string fileName) =>
-            new FileInfo(path).Name.Equals(fileName, StringComparison.OrdinalIgnoreCase);
+            Path.GetFileName(path).Equals(fileName, StringComparison.OrdinalIgnoreCase);
 
         private static ImmutableList<RuleParameterValues> ParseParameters(string path)
         {

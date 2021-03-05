@@ -21,11 +21,11 @@
 namespace SonarAnalyzer.Helpers
 {
     /// <summary>
-    /// Possible types of project
+    /// Possible types of project. Note that we expect only the string format to be passed from the Scanner.
     /// </summary>
     public enum ProjectType
     {
-        Product = 0,
+        Product,
         Test
     }
 }

@@ -32,6 +32,8 @@ namespace SonarAnalyzer.Helpers
     [XmlRoot(ElementName = "SonarProjectConfig", Namespace = "http://www.sonarsource.com/msbuild/analyzer/2021/1")]
     public class ProjectConfig
     {
+        public static readonly ProjectConfig Empty = new ProjectConfig();
+
         /// <summary>
         /// Full path to the SonarQubeAnalysisConfig.xml file.
         /// </summary>
@@ -55,7 +57,7 @@ namespace SonarAnalyzer.Helpers
         /// <summary>
         /// The kind of the project.
         /// </summary>
-        public ProjectType ProjectType { get; set; }
+        public string ProjectType { get; set; }
 
         /// <summary>
         /// MSBuild target framework for the current build.
