@@ -19,14 +19,10 @@
  */
 
 extern alias csharp;
-using System.Collections.Immutable;
 using System.IO;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -38,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenNoSonarLintIsGiven_DoesNotPopulateParameters()
         {
             // Arrange
-            var options = CreateOptions("ResourceTests\\MyFile.xml");
+            var options = TestHelper.CreateOptions("ResourceTests\\MyFile.xml");
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -52,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenSonarLintFileHasIntParameterType_PopulatesProperties()
         {
             // Arrange
-            var options = CreateOptions("ResourceTests\\SonarLint.xml");
+            var options = TestHelper.CreateOptions("ResourceTests\\SonarLint.xml");
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -66,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenSonarLintFileHasStringParameterType_OnlyOneParameter_PopulatesProperty()
         {
             // Arrange
-            var options = CreateOptions("ResourceTests\\RuleWithStringParameter\\SonarLint.xml");
+            var options = TestHelper.CreateOptions("ResourceTests\\RuleWithStringParameter\\SonarLint.xml");
             var analyzer = new EnumNameShouldFollowRegex(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -80,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenSonarLintFileHasBooleanParameterType_OnlyOneParameter_PopulatesProperty()
         {
             // Arrange
-            var options = CreateOptions("ResourceTests\\RuleWithBooleanParameter\\SonarLint.xml");
+            var options = TestHelper.CreateOptions("ResourceTests\\RuleWithBooleanParameter\\SonarLint.xml");
             var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -94,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WhenGivenValidSonarLintFileAndDoesNotContainAnalyzerParameters_DoesNotPopulateProperties()
         {
             // Arrange
-            var options = CreateOptions("ResourceTests\\SonarLint.xml");
+            var options = TestHelper.CreateOptions("ResourceTests\\SonarLint.xml");
             var analyzer = new LineLength(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -109,7 +105,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             // Arrange
             var sonarLintXmlRelativePath = "ResourceTests\\ToChange\\SonarLint.xml";
-            var options = CreateOptions(sonarLintXmlRelativePath);
+            var options = TestHelper.CreateOptions(sonarLintXmlRelativePath);
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act with the file on disk
@@ -131,7 +127,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WithMalformedXml_DoesNotPopulateProperties()
         {
             // Arrange
-            var options = CreateOptions("ResourceTests\\Malformed\\SonarLint.xml");
+            var options = TestHelper.CreateOptions("ResourceTests\\Malformed\\SonarLint.xml");
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -145,7 +141,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WithBadPath_DoesNotPopulateProperties()
         {
             // Arrange
-            var options = CreateOptions("ResourceTests\\ThisPathDoesNotExist\\SonarLint.xml");
+            var options = TestHelper.CreateOptions("ResourceTests\\ThisPathDoesNotExist\\SonarLint.xml");
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -159,7 +155,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WithWrongPropertyType_StringInsteadOfInt_DoesNotPopulateProperties()
         {
             // Arrange
-            var options = CreateOptions("ResourceTests\\StringInsteadOfInt\\SonarLint.xml");
+            var options = TestHelper.CreateOptions("ResourceTests\\StringInsteadOfInt\\SonarLint.xml");
             var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -173,7 +169,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void SetParameterValues_WithWrongPropertyType_StringInsteadOfBoolean_DoesNotPopulateProperties()
         {
             // Arrange
-            var options = CreateOptions("ResourceTests\\StringInsteadOfBoolean\\SonarLint.xml");
+            var options = TestHelper.CreateOptions("ResourceTests\\StringInsteadOfBoolean\\SonarLint.xml");
             var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
 
             // Act
@@ -181,13 +177,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             // Assert
             analyzer.IsRegularExpression.Should().BeFalse(); // Default value
-        }
-
-        private static AnalyzerOptions CreateOptions(string relativePath)
-        {
-            var additionalText = new Mock<AdditionalText>();
-            additionalText.Setup(x => x.Path).Returns(relativePath);
-            return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
     }
 }
