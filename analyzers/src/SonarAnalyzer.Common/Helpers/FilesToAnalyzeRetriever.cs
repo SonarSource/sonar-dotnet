@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Helpers
         {
             try
             {
-                return File.ReadAllLines(new FileInfo(filePath).FullName);
+                return File.ReadAllLines(filePath);
             }
             catch (Exception ex) when (ex is IOException || ex is ArgumentNullException || ex is ArgumentException)
             {

@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -30,6 +31,7 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly Lazy<IEnumerable<string>> filestoAnalyze;
 
+        [ExcludeFromCodeCoverage]
         public FilesToAnalyzeStorage(string filePath) : this(filePath, new FilesToAnalyzeRetriever()) { }
 
         internal FilesToAnalyzeStorage(string filePath, IFilesToAnalyzeRetriever filesToAnalyzeRetriever)
