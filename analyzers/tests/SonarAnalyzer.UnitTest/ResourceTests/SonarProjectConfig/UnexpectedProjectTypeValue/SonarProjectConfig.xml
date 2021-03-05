@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SonarProjectConfig xmlns="http://www.sonarsource.com/msbuild/analyzer/2021/1">
+  <AnalysisConfigPath>/home/user/.sonarqube/conf/SonarQubeAnalysisConfig.xml</AnalysisConfigPath>
+  <ProjectPath>/home/user/AwesomeBankWeb.CSharp.csproj</ProjectPath>
+  <FilesToAnalyzePath>/home/user/.sonarqube/conf/0/FilesToAnalyze.txt</FilesToAnalyzePath>
+  <OutPath>/home/user/.sonarqube/out/0</OutPath>
+  <ProjectType>FOO</ProjectType>
+  <TargetFramework>net5</TargetFramework>
+</SonarProjectConfig>
