@@ -1,0 +1,5 @@
+﻿C:\Projects/DummyProj/wEB.config
+C:\Projects/DummyProj/Views\Web.confiG
+C:\Projects\DummyProj\Views\Global.asax
+C:\Projects\DummyProj\Csharp\Controllers\HomeController.cs
+C:\Projects\DummyProj\VisualBasic\Controllers\HomeController.vb
