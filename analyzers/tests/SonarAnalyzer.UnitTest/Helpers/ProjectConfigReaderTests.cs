@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("Path_MixedSeparators", @"c:\foo\bar\.sonarqube\conf/0/FilesToAnalyze.txt")]
         [DataRow("Path_Unix", @"/home/user/.sonarqube/conf/0/FilesToAnalyze.txt")]
         [DataRow("Path_Windows", @"c:\foo\bar\.sonarqube\conf\0\FilesToAnalyze.txt")]
-        public void WithVariousPathFormats_ReturnsAsIsValue(string project, string expectedFilesToAnalyzePath)
+        public void WithVariousPathFormats_ReturnsValueAsIs(string project, string expectedFilesToAnalyzePath)
         {
             var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\{project}\\SonarProjectConfig.xml");
 
@@ -111,25 +111,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [DataTestMethod]
-        [DataRow("Invalid_DifferentClassName")]
-        [DataRow("Invalid_DifferentNamespace")]
-        [DataRow("Invalid_Xml")]
-        [ExpectedException(typeof(InvalidOperationException), "File SonarProjectConfig.xml could not be parsed.")]
-        public void WhenInvalid_FilesToReturnPath_ReturnNull(string folder)
-        {
-            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
-
-            var sut = new ProjectConfigReader(options);
-
-            sut.AnalysisConfigPath.Should().BeNull();
-            sut.ProjectPath.Should().BeNull();
-            sut.FilesToAnalyzePath.Should().BeNull();
-            sut.OutPath.Should().BeNull();
-            sut.ProjectType.Should().Be(ProjectType.Product);
-            sut.TargetFramework.Should().BeNull();
-        }
-
-        [DataTestMethod]
         [DataRow(null)]
         [DataRow("/foo/bar/do-not-exit")]
         [DataRow("/foo/bar/x.xml")]
@@ -147,14 +128,24 @@ namespace SonarAnalyzer.UnitTest.Helpers
             sut.TargetFramework.Should().BeNull();
         }
 
+        [DataTestMethod]
+        [DataRow("Invalid_DifferentClassName")]
+        [DataRow("Invalid_DifferentNamespace")]
+        [DataRow("Invalid_Xml")]
+        public void WhenInvalid_FilesToReturnPath_ThrowsException(string folder)
+        {
+            var options = TestHelper.CreateOptions($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
+
+            var sut = new ProjectConfigReader(options);
+            sut.Invoking(x => x.AnalysisConfigPath).Should().Throw<InvalidOperationException>().WithMessage("File SonarProjectConfig.xml could not be parsed.");
+        }
+
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "File SonarProjectConfig.xml has been added as an AdditionalFile but does not exist.")]
         public void WhenFileIsMissing_ThrowException()
         {
-            var options = TestHelper.CreateOptions("ResourceTests\\SonarProjectConfig\\FOO\\SonarProjectConfig.xml");
+            var options = TestHelper.CreateOptions("ThisPathDoesNotExist\\SonarProjectConfig.xml");
             var sut = new ProjectConfigReader(options);
-            // trigger the lazy reading of the file, should not execute
-            sut.AnalysisConfigPath.Should().BeNull();
+            sut.Invoking(x => x.AnalysisConfigPath).Should().Throw<InvalidOperationException>().WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but does not exist.");
         }
     }
 }

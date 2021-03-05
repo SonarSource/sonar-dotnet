@@ -36,19 +36,20 @@ namespace SonarAnalyzer.Helpers
         private const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
 
         private readonly Lazy<ProjectConfig> projectConfig;
+        private readonly Lazy<ProjectType> projectType;
 
         public string AnalysisConfigPath => projectConfig.Value.AnalysisConfigPath;
         public string FilesToAnalyzePath => projectConfig.Value.FilesToAnalyzePath;
         public string OutPath => projectConfig.Value.OutPath;
         public string ProjectPath => projectConfig.Value.ProjectPath;
         public string TargetFramework => projectConfig.Value.TargetFramework;
-        public ProjectType ProjectType =>
-            Enum.TryParse<ProjectType>(projectConfig.Value.ProjectType, out var result)
-            ? result
-            : ProjectType.Product;
+        public ProjectType ProjectType => projectType.Value;
 
-        public ProjectConfigReader(AnalyzerOptions options) =>
+        public ProjectConfigReader(AnalyzerOptions options)
+        {
             projectConfig = new Lazy<ProjectConfig>(() => ReadContent(options));
+            projectType = new Lazy<ProjectType>(() => ParseProjectType(projectConfig.Value));
+        }
 
         private static ProjectConfig ReadContent(AnalyzerOptions options)
         {
@@ -72,6 +73,11 @@ namespace SonarAnalyzer.Helpers
                 throw new InvalidOperationException($"File {SonarProjectConfigFileName} could not be parsed.", e);
             }
         }
+
+        private static ProjectType ParseProjectType(ProjectConfig projectConfig) =>
+            Enum.TryParse<ProjectType>(projectConfig.ProjectType, out var result)
+                ? result
+                : ProjectType.Product;
 
         private static bool IsSonarProjectConfig(AdditionalText additionalText) =>
             additionalText.Path != null
