@@ -38,17 +38,14 @@ public class WebConfigTest extends WebConfigBase {
   }
 
   @Test
-  @Ignore("Ignore until https://github.com/SonarSource/sonar-dotnet/issues/4111 gets fixed")
   public void should_raise_hotspot_on_web_config() throws Exception {
     final String projectName = "WebConfig.CSharp";
-    final String fileName = "Web.config";
 
     Tests.analyzeProject(temp, projectName, null);
-
     List<Hotspot> hotspots = Tests.getHotspots(projectName);
+    // One from project directory, one from PathOutsideProjectRoot added with Directory.Build.props
     assertThat(hotspots.size()).isEqualTo(2);
-
-    assertHotspot(hotspots.get(0), 10, fileName);
-    assertHotspot(hotspots.get(1), 11, fileName);
+    assertHotspot(hotspots.get(0), 4, "WebConfig.CSharp\\Web.config");
+    assertHotspot(hotspots.get(1), 6, "PathOutsideProjectRoot\\Web.config");
   }
 }
