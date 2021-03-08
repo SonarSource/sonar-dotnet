@@ -85,7 +85,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
                 var versionArgument = Version == Constants.NuGetLatestVersion ? string.Empty : $"-Version {Version}";
                 var configFile = ValidatedNuGetConfigPath();
                 // Explicitly specify the NuGet config to use to avoid being impacted by the NuGet config on the machine running the tests
-                var args = $"install {Id} {versionArgument} -OutputDirectory \"{Environment.GetEnvironmentVariable("NUGET_PACKAGES")}\" -NonInteractive -ForceEnglishOutput -ConfigFile {configFile}";
+                var args = $"install {Id} {versionArgument} -OutputDirectory \"{PackagesFolder}\" -NonInteractive -ForceEnglishOutput -ConfigFile {configFile}";
                 LogMessage($"Installing package using nuget.exe {args}");
                 var startInfo = new ProcessStartInfo
                 {

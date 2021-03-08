@@ -31,9 +31,9 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     public static partial class NuGetMetadataFactory
     {
-        private static string PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? @"..\..\..\..\..\packages\";
         private const string NuGetConfigFileRelativePath = @"..\..\..\nuget.config";
 
+        private static readonly string PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? @"..\..\..\..\..\packages\";
         private static readonly PackageManager PackageManager = new PackageManager(CreatePackageRepository(), PackagesFolder);
 
         private static readonly string[] SortedAllowedDirectories =
