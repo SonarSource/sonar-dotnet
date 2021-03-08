@@ -39,6 +39,9 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     public class SonarAnalysisContext
     {
+        private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreatePropertyProvider(PropertiesHelper.AnalyzeGeneratedCodeCSharp);
+        private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreatePropertyProvider(PropertiesHelper.AnalyzeGeneratedCodeVisualBasic);
+
         private readonly AnalysisContext context;
         private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
 
@@ -83,17 +86,17 @@ namespace SonarAnalyzer.Helpers
 
         public static bool ShouldAnalyzeGenerated(AnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
             TryGetSonarLintXml(options, out var sonarLintXml)
-            && analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode)
+            && analysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGenerated(c.Language), out var shouldAnalyzeGeneratedCode)
             && shouldAnalyzeGeneratedCode;
 
         public static bool ShouldAnalyzeGenerated(CompilationStartAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
             TryGetSonarLintXml(options, out var sonarLintXml)
-            && analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode)
+            && analysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGenerated(c.Language), out var shouldAnalyzeGeneratedCode)
             && shouldAnalyzeGeneratedCode;
 
         public static bool ShouldAnalyzeGenerated(CompilationAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
             TryGetSonarLintXml(options, out var sonarLintXml)
-            && analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode)
+            && analysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGenerated(c.Language), out var shouldAnalyzeGeneratedCode)
             && shouldAnalyzeGeneratedCode;
 
         public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
@@ -120,21 +123,10 @@ namespace SonarAnalyzer.Helpers
             where TLanguageKindEnum : struct =>
             RegisterContextAction(x => context.RegisterSyntaxNodeAction(x, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
 
-        //FIXME: This doesn't belong in here
-        private static SourceTextValueProvider<bool> analyzeGeneratedCodeProviderCSharp = new SourceTextValueProvider<bool>(sourceText =>
-            PropertiesHelper.ReadBooleanProperty(
-                GetSettings(sourceText),
-                PropertiesHelper.AnalyzeGeneratedCodeCSharp,
-                false));
+        private static SourceTextValueProvider<bool> CreatePropertyProvider(string propertyName) =>
+            new SourceTextValueProvider<bool>(x => PropertiesHelper.ReadBooleanProperty(ParseXmlSettings(x), propertyName));
 
-        //FIXME: This doesn't belong in here
-        private static SourceTextValueProvider<bool> analyzeGeneratedCodeProviderVB = new SourceTextValueProvider<bool>(sourceText =>
-            PropertiesHelper.ReadBooleanProperty(
-                GetSettings(sourceText),
-                PropertiesHelper.AnalyzeGeneratedCodeVisualBasic,
-                false));
-
-        private static IEnumerable<XElement> GetSettings(SourceText sourceText)
+        private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)
         {
             try
             {
@@ -147,10 +139,8 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private static SourceTextValueProvider<bool> GetProvider(string language) =>
-            LanguageNames.CSharp == language
-                ? analyzeGeneratedCodeProviderCSharp
-                : analyzeGeneratedCodeProviderVB;
+        private static SourceTextValueProvider<bool> ShouldAnalyzeGenerated(string language) =>
+            language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS : ShouldAnalyzeGeneratedVB;
 
         private static bool TryGetSonarLintXml(AnalyzerOptions options, out AdditionalText sonarLintXml)
         {
