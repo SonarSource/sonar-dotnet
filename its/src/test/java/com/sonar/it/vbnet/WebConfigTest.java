@@ -22,6 +22,7 @@ package com.sonar.it.vbnet;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.it.shared.WebConfigBase;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.sonarqube.ws.Hotspots;
 
@@ -38,6 +39,7 @@ public class WebConfigTest extends WebConfigBase {
   }
 
   @Test
+  @Ignore("Ignore until https://github.com/SonarSource/sonar-dotnet/issues/4111 gets fixed")
   public void should_raise_hotspot_on_web_config() throws Exception {
     final String projectName = "WebConfig.Vb";
     final String fileName = "Web.config";
