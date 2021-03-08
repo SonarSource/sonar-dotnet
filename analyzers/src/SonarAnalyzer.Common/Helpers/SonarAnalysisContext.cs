@@ -102,20 +102,6 @@ namespace SonarAnalyzer.Helpers
         public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
             RegisterContextAction(act => this.context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
 
-        internal static bool AreAnalysisScopeMatching(Compilation compilation, IEnumerable<DiagnosticDescriptor> diagnostics)
-        {
-            if (compilation == null)
-            {
-                return true; // We don't know whether this is a Main or Test source so let's run the rule
-            }
-
-            var matchingScopeTag = compilation.IsTest()
-                ? DiagnosticDescriptorBuilder.TestSourceScopeTag
-                : DiagnosticDescriptorBuilder.MainSourceScopeTag;
-
-            return diagnostics.Any(d => d.CustomTags.Contains(matchingScopeTag));
-        }
-
         internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
             ShouldExecuteRegisteredAction == null ||
             tree == null ||
