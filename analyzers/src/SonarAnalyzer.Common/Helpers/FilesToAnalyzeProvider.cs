@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Helpers
             {
                 return File.ReadAllLines(filePath);
             }
-            catch (Exception)
+            catch
             {
                 // cannot log exception
                 return Enumerable.Empty<string>();
