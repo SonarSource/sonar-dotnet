@@ -30,18 +30,16 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly IEnumerable<string> allFiles;
 
-        public FilesToAnalyzeProvider(string filePath)
-        {
-            allFiles = RetrieveFilesToAnalyze(filePath);
-        }
+        public FilesToAnalyzeProvider(string filePath) =>
+            allFiles = ReadLines(filePath);
 
         public IEnumerable<string> FindFiles(string fileName) =>
-            allFiles.Where(x => Path.GetFileName(x).Equals(fileName, StringComparison.OrdinalIgnoreCase));
+            allFiles.Where(x => FilterByFileName(x, fileName));
 
         public IEnumerable<string> FindFiles(Regex fullPathRegex) =>
             allFiles.Where(x => fullPathRegex.IsMatch(x));
 
-        private static IEnumerable<string> RetrieveFilesToAnalyze(string filePath)
+        private static IEnumerable<string> ReadLines(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath) || !File.Exists(filePath))
             {
@@ -56,6 +54,18 @@ namespace SonarAnalyzer.Helpers
             {
                 // cannot log exception
                 return Enumerable.Empty<string>();
+            }
+        }
+
+        private bool FilterByFileName(string fullPath ,string fileName)
+        {
+            try
+            {
+                return Path.GetFileName(fullPath).Equals(fileName, StringComparison.OrdinalIgnoreCase);
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

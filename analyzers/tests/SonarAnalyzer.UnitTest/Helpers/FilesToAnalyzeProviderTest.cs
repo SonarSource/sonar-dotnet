@@ -18,6 +18,7 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+using System.IO;
 using System.Text.RegularExpressions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private const string MixedSlashesWebConfigPath1 = @"C:\Projects/DummyProj/wEB.config";
         private const string MixedSlashesWebConfigPath2 = @"C:\Projects/DummyProj/Views\Web.confiG";
         private const string FilesToAnalyzePath = @"ResourceTests\FilesToAnalyze\FilesToAnalyze.txt";
-        private const string InvalidFilesToAnalyzePath = @"ResourceTests\FilesToAnalyze\InvalidValuesFileToAnalyze.txt";
+        private const string InvalidFilesToAnalyzePath = @"ResourceTests\FilesToAnalyze\FilesToAnalyzeWithInvalidValues.txt";
 
         [TestMethod]
         public void FileNameWithMixedCapitalizationAndMixedSlashes_FindFilesWithFileName_ReturnsAllWebConfigFiles()
@@ -47,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void FileNameWithMixedCapitalizationAndMixedSlashes_FindFilesWithRegex_ReturnsAllWebConfigFiles()
         {
-            var fileNamePattern = new Regex("web\\.config$", RegexOptions.IgnoreCase);
+            var fileNamePattern = new Regex(@"[\\\/]web\.config$", RegexOptions.IgnoreCase);
 
             var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
 
@@ -58,34 +59,29 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void FileWithInvalidvalues_FindFilesWithFileName_ReturnsValidValue()
+        public void FileWithInvalidValues_FindFilesWithFileName_ReturnsValidValue()
         {
             var sut = new FilesToAnalyzeProvider(InvalidFilesToAnalyzePath);
 
-            var results = sut.FindFiles("Web.config");
+            var results = sut.FindFiles("123");
             results.Should().HaveCount(1);
-            results.Should().Contain(MixedSlashesWebConfigPath2);
+            results.Should().Contain("123");
         }
 
         [TestMethod]
-        public void FileWithInvalidvalues_FindFilesWithRegex_ReturnsValidValue()
+        public void FileWithInvalidValues_FindFilesWithRegex_ReturnsValidValue()
         {
             var fileNamePattern = new Regex("web\\.config$", RegexOptions.IgnoreCase);
 
             var sut = new FilesToAnalyzeProvider(InvalidFilesToAnalyzePath);
 
             var results = sut.FindFiles(fileNamePattern);
-            results.Should().HaveCount(1);
+            results.Should().HaveCount(5);
             results.Should().Contain(MixedSlashesWebConfigPath2);
-        }
-
-        [TestMethod]
-        public void NonExistentFile_FindFiles_ReturnsEmptyEnumerable()
-        {
-            var sut = new FilesToAnalyzeProvider(@"ResourceTests\FilesToAnalyze\NonExistingFile.txt");
-
-            var results = sut.FindFiles("Web.config");
-            results.Should().BeEmpty();
+            results.Should().Contain(@"C:\Projects\Controllers:web.config");
+            results.Should().Contain(@"C:web.config");
+            results.Should().Contain(@"C:\Projects<web.config");
+            results.Should().Contain(@"C:\Projects>\Controllers/web.config");
         }
 
         [TestMethod]
@@ -93,7 +89,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var sut = new FilesToAnalyzeProvider(@"ResourceTests\FilesToAnalyze\EmptyFilesToAnalyze.txt");
 
-            var results = sut.FindFiles("Web.config");
+            var results = sut.FindFiles(new Regex(".*"));
             results.Should().BeEmpty();
         }
 
@@ -101,12 +97,40 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("")]
         [DataRow(null)]
         [DataRow("invalidPath")]
+        [DataRow(@"ResourceTests\FilesToAnalyze\NonExistingFile.txt")]
         public void InvalidPath_FindFiles_ReturnsEmptyEnumerable(string filePath)
         {
             var sut = new FilesToAnalyzeProvider(filePath);
 
-            var results = sut.FindFiles("Web.config");
+            var results = sut.FindFiles(new Regex(".*"));
             results.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void FileWithValidValues_FindFilesRequestingAnyFile_AllValuesFromTheFileAreReturned()
+        {
+            var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
+
+            var results = sut.FindFiles(new Regex(".*"));
+            results.Should().HaveCount(6);
+            results.Should().Contain(MixedSlashesWebConfigPath1);
+            results.Should().Contain(MixedSlashesWebConfigPath2);
+            results.Should().Contain(@"C:\Projects\DummyProj\Views\Global.asax");
+            results.Should().Contain(@"C:\Projects\DummyProj\Csharp\Controllers\HomeController.cs");
+            results.Should().Contain(@"C:\Projects\DummyProj\VisualBasic\Controllers\HomeController.vb");
+            results.Should().Contain(@"C:\Projects/DummyProj/Views\Web.confiGuration");
+        }
+
+        [TestMethod]
+        public void UnableToOpenFile_FindFiles_ReturnsEmptyEnumerable()
+        {
+            using (Stream iStream = File.Open(FilesToAnalyzePath, FileMode.Open, FileAccess.Read, FileShare.None))
+            {
+                var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
+
+                var results = sut.FindFiles(new Regex(".*"));
+                results.Should().BeEmpty();
+            }
         }
     }
 }
