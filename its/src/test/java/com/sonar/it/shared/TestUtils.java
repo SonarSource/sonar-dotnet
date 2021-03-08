@@ -139,7 +139,7 @@ public class TestUtils {
   private static Build<ScannerForMSBuild> newScanner(Path projectDir) {
     // We need to set the fallback version to run from inside the IDE when the property isn't set
     return ScannerForMSBuild.create(projectDir.toFile())
-      .setScannerVersion(System.getProperty("scannerMsbuild.version", "4.8.0.12008"))
+      .setScannerVersion(System.getProperty("scannerMsbuild.version", "5.1.0.28487"))
 
       // In order to be able to run tests on Azure pipelines, the AGENT_BUILDDIRECTORY environment variable
       // needs to be set to the analyzed project directory.
