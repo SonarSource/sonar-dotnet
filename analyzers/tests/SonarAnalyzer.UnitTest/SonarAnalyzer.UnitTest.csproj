@@ -176,6 +176,12 @@
     </ProjectReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Common\Resources\SonarLint.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Import Project="..\..\StyleCopAnalyzers.targets" />
 
 </Project>

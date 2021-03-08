@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
@@ -41,9 +40,11 @@ namespace SonarAnalyzer.Common
         public static IAnalyzerConfiguration AlwaysEnabled { get; } =
             new AlwaysEnabledConfiguration();
 
+        public static IRuleLoader RuleLoader { get; } = new RuleLoader();
+
         private class AlwaysEnabledConfiguration : IAnalyzerConfiguration
         {
-            public void Initialize(AnalyzerOptions options)
+            public void Initialize(AnalyzerOptions options, IRuleLoader ruleLoader)
             {
                 // Ignore options because we always return true for IsEnabled
             }
@@ -56,6 +57,10 @@ namespace SonarAnalyzer.Common
         /// </summary>
         private class HotspotConfiguration : IAnalyzerConfiguration
         {
+            // Hotspot configuration is cached at the assembly level and the MsBuild process
+            // can reuse the already loaded assembly when multiple projects are analyzed one after the other.
+            // Due to this we have to check the current configuration path to see if a reload is needed.
+            private string loadedSonarLintXmlPath;
             private bool isInitialized;
             private HashSet<string> enabledRules;
 
@@ -76,38 +81,35 @@ namespace SonarAnalyzer.Common
                     && enabledRules.Contains(ruleKey);
             }
 
-            public void Initialize(AnalyzerOptions options)
+            public void Initialize(AnalyzerOptions options, IRuleLoader ruleLoader)
             {
-                if (isInitialized)
+                var currentSonarLintXmlPath = GetSonarLintXmlPath(options);
+                if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXmlPath)
                 {
                     return;
                 }
 
                 lock (@lock)
                 {
-                    if (isInitialized)
+                    if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXmlPath)
                     {
                         return;
                     }
 
                     isInitialized = true;
+                    loadedSonarLintXmlPath = currentSonarLintXmlPath;
 
-                    var sonarLintXml = options.AdditionalFiles
-                        .FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
-
-                    if (sonarLintXml == null)
+                    if (loadedSonarLintXmlPath == null)
                     {
                         return;
                     }
 
-                    var document = XDocument.Load(sonarLintXml.Path);
-
-                    enabledRules = document.Descendants("Rule")
-                        .Select(r => r.Element("Key")?.Value)
-                        .WhereNotNull()
-                        .ToHashSet();
+                    enabledRules = ruleLoader.GetEnabledRules(loadedSonarLintXmlPath);
                 }
             }
+
+            private static string GetSonarLintXmlPath(AnalyzerOptions options) =>
+                options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path))?.Path;
         }
     }
 }
