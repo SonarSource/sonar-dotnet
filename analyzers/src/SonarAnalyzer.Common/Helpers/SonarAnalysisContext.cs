@@ -39,6 +39,8 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     public class SonarAnalysisContext
     {
+        private delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
+
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreatePropertyProvider(PropertiesHelper.AnalyzeGeneratedCodeCSharp);
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreatePropertyProvider(PropertiesHelper.AnalyzeGeneratedCodeVisualBasic);
 
@@ -85,19 +87,13 @@ namespace SonarAnalyzer.Helpers
             ShouldAnalyzeGenerated(context, c, options);
 
         public static bool ShouldAnalyzeGenerated(AnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            TryGetSonarLintXml(options, out var sonarLintXml)
-            && analysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGenerated(c.Language), out var shouldAnalyzeGeneratedCode)
-            && shouldAnalyzeGeneratedCode;
-
-        public static bool ShouldAnalyzeGenerated(CompilationStartAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            TryGetSonarLintXml(options, out var sonarLintXml)
-            && analysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGenerated(c.Language), out var shouldAnalyzeGeneratedCode)
-            && shouldAnalyzeGeneratedCode;
+            ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
 
         public static bool ShouldAnalyzeGenerated(CompilationAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            TryGetSonarLintXml(options, out var sonarLintXml)
-            && analysisContext.TryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGenerated(c.Language), out var shouldAnalyzeGeneratedCode)
-            && shouldAnalyzeGeneratedCode;
+            ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
+
+        public static bool ShouldAnalyzeGenerated(CompilationStartAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
+            ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
 
         public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
             RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
@@ -139,14 +135,13 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private static SourceTextValueProvider<bool> ShouldAnalyzeGenerated(string language) =>
-            language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS : ShouldAnalyzeGeneratedVB;
+        private static bool ShouldAnalyzeGenerated(TryGetValueDelegate<bool> tryGetValue, Compilation c, AnalyzerOptions options) =>
+            options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path)) is { } sonarLintXml
+            && tryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(c.Language), out var shouldAnalyzeGenerated)
+            && shouldAnalyzeGenerated;
 
-        private static bool TryGetSonarLintXml(AnalyzerOptions options, out AdditionalText sonarLintXml)
-        {
-            sonarLintXml = options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
-            return sonarLintXml != null;
-        }
+        private static SourceTextValueProvider<bool> ShouldAnalyzeGeneratedProvider(string language) =>
+            language == LanguageNames.CSharp ? ShouldAnalyzeGeneratedCS : ShouldAnalyzeGeneratedVB;
 
         private void RegisterContextAction<TContext>(Action<Action<TContext>> registrationAction,
                                                      Action<TContext> registeredAction,
