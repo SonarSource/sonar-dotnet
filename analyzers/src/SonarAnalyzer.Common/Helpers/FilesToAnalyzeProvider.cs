@@ -57,13 +57,13 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private bool FilterByFileName(string fullPath ,string fileName)
+        private static bool FilterByFileName(string fullPath, string fileName)
         {
             try
             {
                 return Path.GetFileName(fullPath).Equals(fileName, StringComparison.OrdinalIgnoreCase);
             }
-            catch (Exception)
+            catch (ArgumentException)
             {
                 return false;
             }

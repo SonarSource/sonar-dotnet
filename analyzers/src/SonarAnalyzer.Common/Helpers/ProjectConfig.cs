@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Helpers
         public string ProjectPath { get; set; }
 
         /// <summary>
-        ///The full name and path of the text file containing all files to analyze.
+        /// The full name and path of the text file containing all files to analyze.
         /// </summary>
         public string FilesToAnalyzePath { get; set; }
 
