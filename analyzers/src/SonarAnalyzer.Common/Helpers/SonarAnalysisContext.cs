@@ -82,30 +82,28 @@ namespace SonarAnalyzer.Helpers
             ShouldAnalyzeGenerated(context, c, options);
 
         public static bool ShouldAnalyzeGenerated(AnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            TryGetSonarLintXml(options, out var sonarLintXml) &&
-            analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode) &&
-            shouldAnalyzeGeneratedCode;
+            TryGetSonarLintXml(options, out var sonarLintXml)
+            && analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode)
+            && shouldAnalyzeGeneratedCode;
 
         public static bool ShouldAnalyzeGenerated(CompilationStartAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            TryGetSonarLintXml(options, out var sonarLintXml) &&
-            analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode) &&
-            shouldAnalyzeGeneratedCode;
+            TryGetSonarLintXml(options, out var sonarLintXml)
+            && analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode)
+            && shouldAnalyzeGeneratedCode;
 
         public static bool ShouldAnalyzeGenerated(CompilationAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            TryGetSonarLintXml(options, out var sonarLintXml) &&
-            analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode) &&
-            shouldAnalyzeGeneratedCode;
+            TryGetSonarLintXml(options, out var sonarLintXml)
+            && analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode)
+            && shouldAnalyzeGeneratedCode;
 
         public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
             RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
 
         public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
-            RegisterContextAction(act => this.context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
+            RegisterContextAction(act => context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
 
         internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
-            ShouldExecuteRegisteredAction == null ||
-            tree == null ||
-            ShouldExecuteRegisteredAction(diagnostics, tree);
+            ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
 
         internal void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action)
             where TLanguageKindEnum : struct =>
@@ -114,22 +112,22 @@ namespace SonarAnalyzer.Helpers
         internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action) =>
             RegisterContextAction(context.RegisterCompilationAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
 
-        internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action,
-            ImmutableArray<TLanguageKindEnum> syntaxKinds)
+        internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds)
             where TLanguageKindEnum : struct =>
             RegisterSyntaxNodeAction(action, syntaxKinds.ToArray());
 
-        internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action,
-            params TLanguageKindEnum[] syntaxKinds)
+        internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, params TLanguageKindEnum[] syntaxKinds)
             where TLanguageKindEnum : struct =>
-            RegisterContextAction(act => this.context.RegisterSyntaxNodeAction(act, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
+            RegisterContextAction(x => context.RegisterSyntaxNodeAction(x, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
 
+        //FIXME: This doesn't belong in here
         private static SourceTextValueProvider<bool> analyzeGeneratedCodeProviderCSharp = new SourceTextValueProvider<bool>(sourceText =>
             PropertiesHelper.ReadBooleanProperty(
                 GetSettings(sourceText),
                 PropertiesHelper.AnalyzeGeneratedCodeCSharp,
                 false));
 
+        //FIXME: This doesn't belong in here
         private static SourceTextValueProvider<bool> analyzeGeneratedCodeProviderVB = new SourceTextValueProvider<bool>(sourceText =>
             PropertiesHelper.ReadBooleanProperty(
                 GetSettings(sourceText),
@@ -142,7 +140,7 @@ namespace SonarAnalyzer.Helpers
             {
                 return XDocument.Parse(sourceText.ToString()).Descendants("Setting");
             }
-            catch (Exception)
+            catch
             {
                 // cannot log the exception, so ignore it
                 return Enumerable.Empty<XElement>();
@@ -156,28 +154,24 @@ namespace SonarAnalyzer.Helpers
 
         private static bool TryGetSonarLintXml(AnalyzerOptions options, out AdditionalText sonarLintXml)
         {
-            sonarLintXml = options.AdditionalFiles
-                .FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
-
+            sonarLintXml = options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
             return sonarLintXml != null;
         }
 
-        private void RegisterContextAction<TContext>(Action<Action<TContext>> registrationAction, Action<TContext> registeredAction,
-            Func<TContext, SyntaxTree> getSyntaxTree, Func<TContext, Compilation> getCompilation)
-        {
-            registrationAction(
-                c =>
+        private void RegisterContextAction<TContext>(Action<Action<TContext>> registrationAction,
+                                                     Action<TContext> registeredAction,
+                                                     Func<TContext, SyntaxTree> getSyntaxTree,
+                                                     Func<TContext, Compilation> getCompilation) =>
+            registrationAction(c =>
                 {
                     // For each action registered on context we need to do some pre-processing before actually calling the rule.
                     // First, we need to ensure the rule does apply to the current scope (main vs test source).
                     // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
                     // the decision is made on based on whether the project contains the analyzer as NuGet).
-                    if (getCompilation(c).AreAnalysisScopeMatching(supportedDiagnostics) &&
-                        IsRegisteredActionEnabled(this.supportedDiagnostics, getSyntaxTree(c)))
+                    if (getCompilation(c).AreAnalysisScopeMatching(supportedDiagnostics) && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
                     {
                         registeredAction(c);
                     }
                 });
-        }
     }
 }
