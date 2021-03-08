@@ -121,7 +121,7 @@
       <Aliases>global,vbnet</Aliases>
     </ProjectReference>
   </ItemGroup>
-
+  
   <Import Project="..\..\StyleCopAnalyzers.targets" />
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿/*
- * SonarScanner for MSBuild
- * Copyright (C) 2016-2021 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2021 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Helpers
         public string ProjectPath { get; set; }
 
         /// <summary>
-        ///The full name and path of the text file containing all files to analyze.
+        /// The full name and path of the text file containing all files to analyze.
         /// </summary>
         public string FilesToAnalyzePath { get; set; }
 

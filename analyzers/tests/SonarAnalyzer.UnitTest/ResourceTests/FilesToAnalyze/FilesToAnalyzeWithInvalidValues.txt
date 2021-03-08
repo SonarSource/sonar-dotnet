@@ -1,0 +1,7 @@
+﻿foo
+123
+C:\Projects\Controllers:web.config
+C:web.config
+C:\Projects<web.config
+C:\Projects>\Controllers/web.config
+C:\Projects/DummyProj/Views\Web.confiG
