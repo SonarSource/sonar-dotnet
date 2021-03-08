@@ -121,19 +121,7 @@
       <Aliases>global,vbnet</Aliases>
     </ProjectReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <None Update="ResourceTests\FilesToAnalyze\EmptyFilesToAnalyze.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="ResourceTests\FilesToAnalyze\FilesToAnalyze.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="ResourceTests\FilesToAnalyze\InvalidValuesFileToAnalyze.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
+  
   <Import Project="..\..\StyleCopAnalyzers.targets" />
 
 </Project>

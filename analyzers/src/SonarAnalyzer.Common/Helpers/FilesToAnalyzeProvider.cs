@@ -28,18 +28,18 @@ namespace SonarAnalyzer.Helpers
 {
     public class FilesToAnalyzeProvider
     {
-        private readonly Lazy<IEnumerable<string>> allFiles;
+        private readonly IEnumerable<string> allFiles;
 
         public FilesToAnalyzeProvider(string filePath)
         {
-            allFiles = new Lazy<IEnumerable<string>>(() => RetrieveFilesToAnalyze(filePath));
+            allFiles = RetrieveFilesToAnalyze(filePath);
         }
 
         public IEnumerable<string> FindFiles(string fileName) =>
-            allFiles.Value.Where(x => Path.GetFileName(x).Equals(fileName, StringComparison.OrdinalIgnoreCase));
+            allFiles.Where(x => Path.GetFileName(x).Equals(fileName, StringComparison.OrdinalIgnoreCase));
 
         public IEnumerable<string> FindFiles(Regex fullPathRegex) =>
-            allFiles.Value.Where(x => fullPathRegex.IsMatch(x));
+            allFiles.Where(x => fullPathRegex.IsMatch(x));
 
         private static IEnumerable<string> RetrieveFilesToAnalyze(string filePath)
         {
