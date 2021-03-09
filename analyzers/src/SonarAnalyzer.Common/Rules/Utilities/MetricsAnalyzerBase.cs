@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
-        protected sealed override MetricsInfo GetMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override MetricsInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var metrics = GetMetrics(syntaxTree, semanticModel);
             return CalculateMetrics(metrics, syntaxTree.FilePath,

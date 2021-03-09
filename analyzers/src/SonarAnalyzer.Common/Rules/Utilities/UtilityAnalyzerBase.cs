@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string FileName { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract TMessage GetMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
+        protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationAction(c =>
@@ -119,29 +119,21 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    //FIXME: Linq
-                    var messages = new List<TMessage>();
-                    foreach (var tree in c.Compilation.SyntaxTrees)
+                    var messages = c.Compilation.SyntaxTrees
+                        .Where(ShouldGenerateMetrics)
+                        .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)))
+                        .ToArray();
+                    if (messages.Any())
                     {
-                        if (ShouldGenerateMetrics(tree))
+                        lock (FileWriteLock)
                         {
-                            messages.Add(GetMessage(tree, c.Compilation.GetSemanticModel(tree)));
-                        }
-                    }
-                    if (!messages.Any())
-                    {
-                        return;
-                    }
-
-                    var pathToWrite = Path.Combine(WorkDirectoryBasePath, FileName);
-                    lock (FileWriteLock)
-                    {
-                        // Make sure the folder exists
-                        Directory.CreateDirectory(WorkDirectoryBasePath);
-                        using var metricsStream = File.Create(pathToWrite);
-                        foreach (var message in messages)
-                        {
-                            message.WriteDelimitedTo(metricsStream);
+                            // Make sure the folder exists
+                            Directory.CreateDirectory(WorkDirectoryBasePath);
+                            using var metricsStream = File.Create(Path.Combine(WorkDirectoryBasePath, FileName));
+                            foreach (var message in messages)
+                            {
+                                message.WriteDelimitedTo(metricsStream);
+                            }
                         }
                     }
                 });
