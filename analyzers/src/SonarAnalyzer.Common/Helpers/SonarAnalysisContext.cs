@@ -186,6 +186,6 @@ namespace SonarAnalyzer.Helpers
 
         private static bool IsSonarProjectConfig(AdditionalText additionalText) =>
             additionalText.Path != null
-            && Path.GetFileName(additionalText.Path).Equals(SonarProjectConfigFileName, StringComparison.OrdinalIgnoreCase);
+            && ParameterLoader.ConfigurationFilePathMatchesExpected(additionalText.Path, SonarProjectConfigFileName);
     }
 }
