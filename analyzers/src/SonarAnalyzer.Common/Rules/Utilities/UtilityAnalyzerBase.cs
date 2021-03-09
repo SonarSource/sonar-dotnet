@@ -41,9 +41,7 @@ namespace SonarAnalyzer.Rules
         protected readonly object parameterReadLock = new object();
 
         protected bool IsAnalyzerEnabled { get; set; }
-
         protected string WorkDirectoryBasePath { get; set; }
-
         protected virtual bool AnalyzeGeneratedCode { get; set; }
 
         protected Dictionary<string, bool> IgnoreHeaderComments { get; } = new Dictionary<string, bool>
@@ -52,19 +50,26 @@ namespace SonarAnalyzer.Rules
                 { IgnoreHeaderCommentsVB, false },
             };
 
+        internal /* for testing */ static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
+            new TextRange
+            {
+                StartLine = lineSpan.StartLinePosition.GetLineNumberToReport(),
+                EndLine = lineSpan.EndLinePosition.GetLineNumberToReport(),
+                StartOffset = lineSpan.StartLinePosition.Character,
+                EndOffset = lineSpan.EndLinePosition.Character
+            };
+
         protected void ReadParameters(AnalyzerOptions options, string language)
         {
             var settings = PropertiesHelper.GetSettings(options);
-            var projectOutputAdditionalFile = options.AdditionalFiles
-                .FirstOrDefault(IsProjectOutput);
+            var projectOutputAdditionalFile = options.AdditionalFiles.FirstOrDefault(IsProjectOutput);
 
-            if (!settings.Any() ||
-                projectOutputAdditionalFile == null)
+            if (!settings.Any() || projectOutputAdditionalFile == null)
             {
                 return;
             }
 
-            lock (this.parameterReadLock)
+            lock (parameterReadLock)
             {
                 ReadHeaderCommentProperties(settings);
                 AnalyzeGeneratedCode = ShouldAnalyzeGeneratedCode();
@@ -72,14 +77,12 @@ namespace SonarAnalyzer.Rules
 
                 if (!string.IsNullOrEmpty(WorkDirectoryBasePath))
                 {
-                    var suffix = language == LanguageNames.CSharp
-                        ? "cs"
-                        : "vbnet";
-                    WorkDirectoryBasePath = Path.Combine(WorkDirectoryBasePath, "output-" + suffix);
+                    WorkDirectoryBasePath = Path.Combine(WorkDirectoryBasePath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                     IsAnalyzerEnabled = true;
                 }
             }
 
+            //FIXME: Redundant
             bool ShouldAnalyzeGeneratedCode() =>
                 PropertiesHelper.ReadBooleanProperty(
                     settings,
@@ -90,86 +93,61 @@ namespace SonarAnalyzer.Rules
 
         private void ReadHeaderCommentProperties(IEnumerable<XElement> settings)
         {
-            IgnoreHeaderComments[IgnoreHeaderCommentsCS] = PropertiesHelper.ReadBooleanProperty(settings,
-                IgnoreHeaderCommentsCS, false);
-            IgnoreHeaderComments[IgnoreHeaderCommentsVB] = PropertiesHelper.ReadBooleanProperty(settings,
-                IgnoreHeaderCommentsVB, false);
+            IgnoreHeaderComments[IgnoreHeaderCommentsCS] = PropertiesHelper.ReadBooleanProperty(settings, IgnoreHeaderCommentsCS);
+            IgnoreHeaderComments[IgnoreHeaderCommentsVB] = PropertiesHelper.ReadBooleanProperty(settings, IgnoreHeaderCommentsVB);
         }
 
-
-        internal static TextRange GetTextRange(FileLinePositionSpan lineSpan)
-        {
-            return new TextRange
-            {
-                StartLine = lineSpan.StartLinePosition.GetLineNumberToReport(),
-                EndLine = lineSpan.EndLinePosition.GetLineNumberToReport(),
-                StartOffset = lineSpan.StartLinePosition.Character,
-                EndOffset = lineSpan.EndLinePosition.Character
-            };
-        }
-
-        internal static bool IsProjectOutput(AdditionalText file) =>
+        private static bool IsProjectOutput(AdditionalText file) =>
             ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ProjectOutFolderPathFileName);
     }
 
     public abstract class UtilityAnalyzerBase<TMessage> : UtilityAnalyzerBase
         where TMessage : IMessage, new()
     {
-        private static readonly object fileWriteLock = new TMessage();
+        private static readonly object FileWriteLock = new TMessage();
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterCompilationAction(
-                c =>
+        protected abstract string FileName { get; }
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract TMessage GetMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterCompilationAction(c =>
                 {
                     ReadParameters(c.Options, c.Compilation.Language);
-
                     if (!IsAnalyzerEnabled)
                     {
                         return;
                     }
 
+                    //FIXME: Linq
                     var messages = new List<TMessage>();
-
                     foreach (var tree in c.Compilation.SyntaxTrees)
                     {
-                        if (ShouldGenerateMetrics(tree) &&
-                            (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree)))
+                        if (ShouldGenerateMetrics(tree))
                         {
                             messages.Add(GetMessage(tree, c.Compilation.GetSemanticModel(tree)));
                         }
                     }
-
                     if (!messages.Any())
                     {
                         return;
                     }
 
                     var pathToWrite = Path.Combine(WorkDirectoryBasePath, FileName);
-                    lock (fileWriteLock)
+                    lock (FileWriteLock)
                     {
                         // Make sure the folder exists
                         Directory.CreateDirectory(WorkDirectoryBasePath);
-
-                        using (var metricsStream = File.Create(pathToWrite))
+                        using var metricsStream = File.Create(pathToWrite);
+                        foreach (var message in messages)
                         {
-                            foreach (var message in messages)
-                            {
-                                message.WriteDelimitedTo(metricsStream);
-                            }
+                            message.WriteDelimitedTo(metricsStream);
                         }
                     }
                 });
-        }
 
-
-        protected abstract TMessage GetMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
-        protected abstract string FileName { get; }
-
-        private static bool ShouldGenerateMetrics(SyntaxTree tree) =>
-            FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath));
+        private bool ShouldGenerateMetrics(SyntaxTree tree) =>
+            FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
+             && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree));
     }
 }
