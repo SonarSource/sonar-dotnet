@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
         protected readonly object parameterReadLock = new object();
 
         protected bool IsAnalyzerEnabled { get; set; }
-        protected string WorkDirectoryBasePath { get; set; }
+        protected string OutPath { get; set; }
         protected virtual bool AnalyzeGeneratedCode { get; set; }
 
         protected Dictionary<string, bool> IgnoreHeaderComments { get; } = new Dictionary<string, bool>
@@ -73,11 +73,11 @@ namespace SonarAnalyzer.Rules
             {
                 ReadHeaderCommentProperties(settings);
                 AnalyzeGeneratedCode = ShouldAnalyzeGeneratedCode();
-                WorkDirectoryBasePath = File.ReadAllLines(projectOutputAdditionalFile.Path).FirstOrDefault(l => !string.IsNullOrEmpty(l));
+                OutPath = File.ReadAllLines(projectOutputAdditionalFile.Path).FirstOrDefault(l => !string.IsNullOrEmpty(l));
 
-                if (!string.IsNullOrEmpty(WorkDirectoryBasePath))
+                if (!string.IsNullOrEmpty(OutPath))
                 {
-                    WorkDirectoryBasePath = Path.Combine(WorkDirectoryBasePath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
+                    OutPath = Path.Combine(OutPath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                     IsAnalyzerEnabled = true;
                 }
             }
@@ -128,8 +128,8 @@ namespace SonarAnalyzer.Rules
                         lock (FileWriteLock)
                         {
                             // Make sure the folder exists
-                            Directory.CreateDirectory(WorkDirectoryBasePath);
-                            using var metricsStream = File.Create(Path.Combine(WorkDirectoryBasePath, FileName));
+                            Directory.CreateDirectory(OutPath);
+                            using var metricsStream = File.Create(Path.Combine(OutPath, FileName));
                             foreach (var message in messages)
                             {
                                 message.WriteDelimitedTo(metricsStream);

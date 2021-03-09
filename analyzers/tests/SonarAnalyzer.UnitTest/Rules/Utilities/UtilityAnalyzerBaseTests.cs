@@ -179,7 +179,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             {
                 get
                 {
-                    return WorkDirectoryBasePath;
+                    return OutPath;
                 }
             }
 
