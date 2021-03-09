@@ -32,9 +32,9 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
     {
-        internal const string ConfigurationAdditionalFile = "ProjectOutFolderPath.txt";
-        internal const string IgnoreHeaderCommentsCSharp = "sonar.cs.ignoreHeaderComments";
-        internal const string IgnoreHeaderCommentsVisualBasic = "sonar.vbnet.ignoreHeaderComments";
+        internal const string ProjectOutFolderPathFileName = "ProjectOutFolderPath.txt"; // Only for backward compatibility with S4MSB <= 5.0
+        internal const string IgnoreHeaderCommentsCS = "sonar.cs.ignoreHeaderComments";
+        internal const string IgnoreHeaderCommentsVB = "sonar.vbnet.ignoreHeaderComments";
 
         protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
 
@@ -48,8 +48,8 @@ namespace SonarAnalyzer.Rules
 
         protected Dictionary<string, bool> IgnoreHeaderComments { get; } = new Dictionary<string, bool>
             {
-                { IgnoreHeaderCommentsCSharp, false },
-                { IgnoreHeaderCommentsVisualBasic, false },
+                { IgnoreHeaderCommentsCS, false },
+                { IgnoreHeaderCommentsVB, false },
             };
 
         protected void ReadParameters(AnalyzerOptions options, string language)
@@ -90,10 +90,10 @@ namespace SonarAnalyzer.Rules
 
         private void ReadHeaderCommentProperties(IEnumerable<XElement> settings)
         {
-            IgnoreHeaderComments[IgnoreHeaderCommentsCSharp] = PropertiesHelper.ReadBooleanProperty(settings,
-                IgnoreHeaderCommentsCSharp, false);
-            IgnoreHeaderComments[IgnoreHeaderCommentsVisualBasic] = PropertiesHelper.ReadBooleanProperty(settings,
-                IgnoreHeaderCommentsVisualBasic, false);
+            IgnoreHeaderComments[IgnoreHeaderCommentsCS] = PropertiesHelper.ReadBooleanProperty(settings,
+                IgnoreHeaderCommentsCS, false);
+            IgnoreHeaderComments[IgnoreHeaderCommentsVB] = PropertiesHelper.ReadBooleanProperty(settings,
+                IgnoreHeaderCommentsVB, false);
         }
 
 
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules
         }
 
         internal static bool IsProjectOutput(AdditionalText file) =>
-            ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ConfigurationAdditionalFile);
+            ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ProjectOutFolderPathFileName);
     }
 
     public abstract class UtilityAnalyzerBase<TMessage> : UtilityAnalyzerBase

@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Rules
             var metrics = GetMetrics(syntaxTree, semanticModel);
             return CalculateMetrics(metrics, syntaxTree.FilePath,
                 syntaxTree.GetRoot().Language == LanguageNames.CSharp
-                ? IgnoreHeaderComments[IgnoreHeaderCommentsCSharp]
-                : IgnoreHeaderComments[IgnoreHeaderCommentsVisualBasic]);
+                ? IgnoreHeaderComments[IgnoreHeaderCommentsCS]
+                : IgnoreHeaderComments[IgnoreHeaderCommentsVB]);
         }
 
         internal /* for MsBuild12 support */ static MetricsInfo CalculateMetrics(MetricsBase metrics, string filePath, bool ignoreHeaderComments)
