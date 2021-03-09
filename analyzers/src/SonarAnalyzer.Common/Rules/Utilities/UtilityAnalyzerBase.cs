@@ -21,7 +21,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml.Linq;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -39,14 +38,9 @@ namespace SonarAnalyzer.Rules
         protected readonly object parameterReadLock = new object();
 
         protected bool IsAnalyzerEnabled { get; set; }
-        protected string OutPath { get; set; }
+        protected bool IgnoreHeaderComments { get; set; }
         protected virtual bool AnalyzeGeneratedCode { get; set; }
-
-        protected Dictionary<string, bool> IgnoreHeaderComments { get; } = new Dictionary<string, bool>
-            {
-                { PropertiesHelper.IgnoreHeaderCommentsCS, false },
-                { PropertiesHelper.IgnoreHeaderCommentsVB, false },
-            };
+        protected string OutPath { get; set; }
 
         internal /* for testing */ static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
             new TextRange
@@ -69,31 +63,15 @@ namespace SonarAnalyzer.Rules
 
             lock (parameterReadLock)
             {
-                ReadHeaderCommentProperties(settings);
-                AnalyzeGeneratedCode = ShouldAnalyzeGeneratedCode();
+                IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, language);
+                AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, language);
                 OutPath = File.ReadAllLines(projectOutputAdditionalFile.Path).FirstOrDefault(l => !string.IsNullOrEmpty(l));
-
                 if (!string.IsNullOrEmpty(OutPath))
                 {
                     OutPath = Path.Combine(OutPath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                     IsAnalyzerEnabled = true;
                 }
             }
-
-            //FIXME: Redundant
-            bool ShouldAnalyzeGeneratedCode() =>
-                PropertiesHelper.ReadBooleanProperty(
-                    settings,
-                    language == LanguageNames.CSharp
-                        ? PropertiesHelper.AnalyzeGeneratedCodeCS
-                        : PropertiesHelper.AnalyzeGeneratedCodeVB);
-        }
-
-        //FIXME: Ugly
-        private void ReadHeaderCommentProperties(IEnumerable<XElement> settings)
-        {
-            IgnoreHeaderComments[PropertiesHelper.IgnoreHeaderCommentsCS] = PropertiesHelper.ReadBooleanProperty(settings, PropertiesHelper.IgnoreHeaderCommentsCS);
-            IgnoreHeaderComments[PropertiesHelper.IgnoreHeaderCommentsVB] = PropertiesHelper.ReadBooleanProperty(settings, PropertiesHelper.IgnoreHeaderCommentsVB);
         }
 
         private static bool IsProjectOutput(AdditionalText file) =>

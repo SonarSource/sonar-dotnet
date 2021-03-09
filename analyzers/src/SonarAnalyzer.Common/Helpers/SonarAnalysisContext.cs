@@ -44,8 +44,8 @@ namespace SonarAnalyzer.Helpers
 
         private const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
 
-        private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreatePropertyProvider(PropertiesHelper.AnalyzeGeneratedCodeCS);
-        private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreatePropertyProvider(PropertiesHelper.AnalyzeGeneratedCodeVB);
+        private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreateAnalyzeGeneratedProvider(LanguageNames.CSharp);
+        private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreateAnalyzeGeneratedProvider(LanguageNames.VisualBasic);
         private static readonly Lazy<ProjectConfigReader> EmptyProjectConfig = new Lazy<ProjectConfigReader>(() => new ProjectConfigReader(null, null));
         private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider =
             new SourceTextValueProvider<ProjectConfigReader>(x => new ProjectConfigReader(x, SonarProjectConfigFileName));
@@ -144,8 +144,8 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private static SourceTextValueProvider<bool> CreatePropertyProvider(string propertyName) =>
-            new SourceTextValueProvider<bool>(x => PropertiesHelper.ReadBooleanProperty(ParseXmlSettings(x), propertyName));
+        private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
+            new SourceTextValueProvider<bool>(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
 
         private static IEnumerable<XElement> ParseXmlSettings(SourceText sourceText)
         {

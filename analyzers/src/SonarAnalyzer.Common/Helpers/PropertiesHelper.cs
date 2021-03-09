@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -29,22 +28,9 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class PropertiesHelper
     {
-        internal const string AnalyzeGeneratedCodeCS = "sonar.cs.analyzeGeneratedCode";
-        internal const string AnalyzeGeneratedCodeVB = "sonar.vbnet.analyzeGeneratedCode";
-        internal const string IgnoreHeaderCommentsCS = "sonar.cs.ignoreHeaderComments";
-        internal const string IgnoreHeaderCommentsVB = "sonar.vbnet.ignoreHeaderComments";
-
-        internal static bool ShouldAnalyzeGeneratedCode(this AnalyzerOptions options, string language)
-            => ReadBooleanProperty(GetSettings(options),
-                language == LanguageNames.CSharp
-                    ? AnalyzeGeneratedCodeCS
-                    : AnalyzeGeneratedCodeVB);
-
         internal static IEnumerable<XElement> GetSettings(AnalyzerOptions options)
         {
-            var sonarLintAdditionalFile = options.AdditionalFiles
-                .FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
-
+            var sonarLintAdditionalFile = options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
             if (sonarLintAdditionalFile == null)
             {
                 return Enumerable.Empty<XElement>();
@@ -55,31 +41,31 @@ namespace SonarAnalyzer.Helpers
                 var xml = XDocument.Load(sonarLintAdditionalFile.Path);
                 return xml.Descendants("Setting");
             }
-            catch (Exception)
+            catch
             {
                 // ignoring exception as we cannot log it
                 return Enumerable.Empty<XElement>();
             }
         }
 
-        internal static bool ReadBooleanProperty(IEnumerable<XElement> settings, string propertyName, bool defaultValue = false)
+        internal static bool ReadAnalyzeGeneratedCodeProperty(IEnumerable<XElement> settings, string language) =>
+            ReadBooleanProperty(settings, language, "analyzeGeneratedCode");
+
+        internal static bool ReadIgnoreHeaderCommentsProperty(IEnumerable<XElement> settings, string language) =>
+            ReadBooleanProperty(settings, language, "ignoreHeaderComments");
+
+        private static bool ReadBooleanProperty(IEnumerable<XElement> settings, string language, string propertySuffix, bool defaultValue = false)
         {
-            if (!settings.Any())
-            {
-                return defaultValue;
-            }
-            var propertyStringValue = GetPropertyStringValue(propertyName);
-            if (propertyStringValue != null &&
-                bool.TryParse(propertyStringValue, out var propertyValue))
-            {
-                return propertyValue;
-            }
-            return defaultValue;
+            var propertyLanguage = language == LanguageNames.CSharp ? "cs" : "vbnet";
+            var propertyName = $"sonar.{propertyLanguage}.{propertySuffix}";
+            return settings.Any()
+                && GetPropertyStringValue(propertyName) is { } propertyStringValue
+                && bool.TryParse(propertyStringValue, out var propertyValue)
+                ? propertyValue
+                : defaultValue;
 
             string GetPropertyStringValue(string propName) =>
-                settings
-                    .FirstOrDefault(s => s.Element("Key")?.Value == propName)
-                    ?.Element("Value").Value;
+                settings.FirstOrDefault(s => s.Element("Key")?.Value == propName)?.Element("Value").Value;
         }
     }
 }
