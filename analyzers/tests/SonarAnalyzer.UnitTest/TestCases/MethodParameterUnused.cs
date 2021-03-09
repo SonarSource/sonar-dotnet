@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -479,6 +480,27 @@ namespace Tests.TestCases
             var name = nameof(Unused);
 
             bool Unused() => condition;
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4096
+    public class Repro_4096
+    {
+        private int TryCatchWithUsing(int errorCode) // Noncompliant FP
+        {
+            try
+            {
+                using (var textWriter = new StreamWriter("TestOutput.txt"))
+                {
+                    textWriter.Write("There is an errorcode");
+
+                    return 0;
+                }
+            }
+            catch (Exception)
+            {
+                return errorCode;
+            }
         }
     }
 }
