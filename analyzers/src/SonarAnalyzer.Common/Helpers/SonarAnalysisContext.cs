@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
@@ -41,8 +42,13 @@ namespace SonarAnalyzer.Helpers
     {
         private delegate bool TryGetValueDelegate<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value);
 
+        private const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
+
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedCS = CreatePropertyProvider(PropertiesHelper.AnalyzeGeneratedCodeCSharp);
         private static readonly SourceTextValueProvider<bool> ShouldAnalyzeGeneratedVB = CreatePropertyProvider(PropertiesHelper.AnalyzeGeneratedCodeVisualBasic);
+        private static readonly Lazy<ProjectConfigReader> EmptyProjectConfig = new Lazy<ProjectConfigReader>(() => new ProjectConfigReader(null, null));
+        private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider =
+            new SourceTextValueProvider<ProjectConfigReader>(x => new ProjectConfigReader(x, SonarProjectConfigFileName));
 
         private readonly AnalysisContext context;
         private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
@@ -119,6 +125,25 @@ namespace SonarAnalyzer.Helpers
             where TLanguageKindEnum : struct =>
             RegisterContextAction(x => context.RegisterSyntaxNodeAction(x, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
 
+        /// <summary>
+        /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
+        /// </summary>
+        internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options)
+        {
+            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
+            {
+                return sonarProjectConfigXml.GetText() is { } sourceText
+                    // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when thrown
+                    && context.TryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
+                    ? cachedProjectConfigReader
+                    : throw new InvalidOperationException($"File {Path.GetFileName(sonarProjectConfigXml.Path)} has been added as an AdditionalFile but could not be read and parsed.");
+            }
+            else
+            {
+                return EmptyProjectConfig.Value;
+            }
+        }
+
         private static SourceTextValueProvider<bool> CreatePropertyProvider(string propertyName) =>
             new SourceTextValueProvider<bool>(x => PropertiesHelper.ReadBooleanProperty(ParseXmlSettings(x), propertyName));
 
@@ -158,5 +183,9 @@ namespace SonarAnalyzer.Helpers
                         registeredAction(c);
                     }
                 });
+
+        private static bool IsSonarProjectConfig(AdditionalText additionalText) =>
+            additionalText.Path != null
+            && Path.GetFileName(additionalText.Path).Equals(SonarProjectConfigFileName, StringComparison.OrdinalIgnoreCase);
     }
 }
