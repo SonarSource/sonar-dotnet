@@ -111,6 +111,21 @@ namespace SonarAnalyzer.UnitTest.Helpers
             a.Should().Throw<InvalidOperationException>().WithMessage("File LogNameFor-SonarProjectConfig.xml could not be parsed.");
         }
 
+        [TestMethod]
+        public void FilesToAnalyze_LoadsFileFromConfig()
+        {
+            var config = SourceText.From(@"
+<SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
+    <FilesToAnalyzePath>ResourceTests\FilesToAnalyze\FilesToAnalyze.txt</FilesToAnalyzePath>
+</SonarProjectConfig>");
+
+            var sut = new ProjectConfigReader(config, null);
+            var files = sut.FilesToAnalyze.FindFiles("web.config");
+
+            files.Should().HaveCount(2);
+            files.Should().BeEquivalentTo(new[] { @"C:\Projects/DummyProj/wEB.config", @"C:\Projects/DummyProj/Views\Web.confiG" });
+        }
+
         private ProjectConfigReader CreateProjectConfigReader(string relativePath) =>
             new ProjectConfigReader(SourceText.From(File.ReadAllText(relativePath)), "LogNameFor-SonarProjectConfig.xml");
     }

@@ -32,6 +32,7 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly ProjectConfig projectConfig;
         private readonly Lazy<ProjectType> projectType;
+        private readonly Lazy<FilesToAnalyzeProvider> filesToAnalyze;
 
         public string AnalysisConfigPath => projectConfig.AnalysisConfigPath;
         public string FilesToAnalyzePath => projectConfig.FilesToAnalyzePath;
@@ -39,11 +40,13 @@ namespace SonarAnalyzer.Helpers
         public string ProjectPath => projectConfig.ProjectPath;
         public string TargetFramework => projectConfig.TargetFramework;
         public ProjectType ProjectType => projectType.Value;
+        public FilesToAnalyzeProvider FilesToAnalyze => filesToAnalyze.Value;
 
         public ProjectConfigReader(SourceText sonarProjectConfig, string logFileName)
         {
             projectConfig = sonarProjectConfig == null ? ProjectConfig.Empty : ReadContent(sonarProjectConfig, logFileName);
             projectType = new Lazy<ProjectType>(() => ParseProjectType());
+            filesToAnalyze = new Lazy<FilesToAnalyzeProvider>(() => new FilesToAnalyzeProvider(FilesToAnalyzePath));
         }
 
         private static ProjectConfig ReadContent(SourceText sonarProjectConfig, string logFileName)
