@@ -19,22 +19,17 @@
  */
 
 using System.Linq;
-using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.UnitTest.Common
 {
-    public abstract class HotspotDiagnosticAnalyzer : SonarDiagnosticAnalyzer
+    [TestClass]
+    public class RuleLoaderTest
     {
-        protected IAnalyzerConfiguration Configuration { get; }
-
-        protected HotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration) =>
-            Configuration = configuration;
-
-        protected bool IsEnabled(AnalyzerOptions options)
-        {
-            Configuration.Initialize(options, AnalyzerConfiguration.RuleLoader);
-            return SupportedDiagnostics.Any(d => Configuration.IsEnabled(d.Id));
-        }
+        [TestMethod]
+        public void GivenAnExistingFile_RuleLoader_LoadsActiveRules() =>
+            CollectionAssert.AreEqual(new RuleLoader().GetEnabledRules(@"Common/Resources/SonarLint.xml").ToArray(),
+                                      new[] { "S1067" });
     }
 }

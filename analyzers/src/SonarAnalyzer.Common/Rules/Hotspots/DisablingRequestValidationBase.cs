@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(c =>
                 {
-                    configuration.Initialize(c.Options);
+                    configuration.Initialize(c.Options, AnalyzerConfiguration.RuleLoader);
                     if (!configuration.IsEnabled(DiagnosticId))
                     {
                         return;

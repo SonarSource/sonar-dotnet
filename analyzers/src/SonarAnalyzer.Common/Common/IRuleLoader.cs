@@ -18,23 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
+using System.Collections.Generic;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Common
 {
-    public abstract class HotspotDiagnosticAnalyzer : SonarDiagnosticAnalyzer
+    public interface IRuleLoader
     {
-        protected IAnalyzerConfiguration Configuration { get; }
-
-        protected HotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration) =>
-            Configuration = configuration;
-
-        protected bool IsEnabled(AnalyzerOptions options)
-        {
-            Configuration.Initialize(options, AnalyzerConfiguration.RuleLoader);
-            return SupportedDiagnostics.Any(d => Configuration.IsEnabled(d.Id));
-        }
+        HashSet<string> GetEnabledRules(string path);
     }
 }

@@ -26,6 +26,6 @@ namespace SonarAnalyzer.Common
     {
         bool IsEnabled(string ruleKey);
 
-        void Initialize(AnalyzerOptions options);
+        void Initialize(AnalyzerOptions options, IRuleLoader ruleLoader);
    }
 }
