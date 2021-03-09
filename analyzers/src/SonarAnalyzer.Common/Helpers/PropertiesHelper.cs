@@ -31,6 +31,8 @@ namespace SonarAnalyzer.Helpers
     {
         internal const string AnalyzeGeneratedCodeCS = "sonar.cs.analyzeGeneratedCode";
         internal const string AnalyzeGeneratedCodeVB = "sonar.vbnet.analyzeGeneratedCode";
+        internal const string IgnoreHeaderCommentsCS = "sonar.cs.ignoreHeaderComments";
+        internal const string IgnoreHeaderCommentsVB = "sonar.vbnet.ignoreHeaderComments";
 
         internal static bool ShouldAnalyzeGeneratedCode(this AnalyzerOptions options, string language)
             => ReadBooleanProperty(GetSettings(options),

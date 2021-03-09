@@ -81,10 +81,10 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
         }
 
         [DataTestMethod]
-        [DataRow(LanguageNames.CSharp, UtilityAnalyzerBase.IgnoreHeaderCommentsCS, "ResourceTests\\IgnoreHeaderCommentsTrueCSharp\\SonarLint.xml", true)]
-        [DataRow(LanguageNames.CSharp, UtilityAnalyzerBase.IgnoreHeaderCommentsCS, "ResourceTests\\IgnoreHeaderCommentsFalseCSharp\\SonarLint.xml", false)]
-        [DataRow(LanguageNames.VisualBasic, UtilityAnalyzerBase.IgnoreHeaderCommentsVB, "ResourceTests\\IgnoreHeaderCommentsTrueVbnet\\SonarLint.xml", true)]
-        [DataRow(LanguageNames.VisualBasic, UtilityAnalyzerBase.IgnoreHeaderCommentsVB, "ResourceTests\\IgnoreHeaderCommentsFalseVbnet\\SonarLint.xml", false)]
+        [DataRow(LanguageNames.CSharp, PropertiesHelper.IgnoreHeaderCommentsCS, "ResourceTests\\IgnoreHeaderCommentsTrueCSharp\\SonarLint.xml", true)]
+        [DataRow(LanguageNames.CSharp, PropertiesHelper.IgnoreHeaderCommentsCS, "ResourceTests\\IgnoreHeaderCommentsFalseCSharp\\SonarLint.xml", false)]
+        [DataRow(LanguageNames.VisualBasic, PropertiesHelper.IgnoreHeaderCommentsVB, "ResourceTests\\IgnoreHeaderCommentsTrueVbnet\\SonarLint.xml", true)]
+        [DataRow(LanguageNames.VisualBasic, PropertiesHelper.IgnoreHeaderCommentsVB, "ResourceTests\\IgnoreHeaderCommentsFalseVbnet\\SonarLint.xml", false)]
         [TestCategory("Utility")]
         public void UtilityAnalyzerBase_ReadsSettings_IgnoreHeaderComments(string language,
             string setting,

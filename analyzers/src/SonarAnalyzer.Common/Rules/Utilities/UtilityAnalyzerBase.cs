@@ -33,8 +33,6 @@ namespace SonarAnalyzer.Rules
     public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
     {
         internal const string ProjectOutFolderPathFileName = "ProjectOutFolderPath.txt"; // Only for backward compatibility with S4MSB <= 5.0
-        internal const string IgnoreHeaderCommentsCS = "sonar.cs.ignoreHeaderComments";
-        internal const string IgnoreHeaderCommentsVB = "sonar.vbnet.ignoreHeaderComments";
 
         protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
 
@@ -46,8 +44,8 @@ namespace SonarAnalyzer.Rules
 
         protected Dictionary<string, bool> IgnoreHeaderComments { get; } = new Dictionary<string, bool>
             {
-                { IgnoreHeaderCommentsCS, false },
-                { IgnoreHeaderCommentsVB, false },
+                { PropertiesHelper.IgnoreHeaderCommentsCS, false },
+                { PropertiesHelper.IgnoreHeaderCommentsVB, false },
             };
 
         internal /* for testing */ static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
@@ -91,10 +89,11 @@ namespace SonarAnalyzer.Rules
                         : PropertiesHelper.AnalyzeGeneratedCodeVB);
         }
 
+        //FIXME: Ugly
         private void ReadHeaderCommentProperties(IEnumerable<XElement> settings)
         {
-            IgnoreHeaderComments[IgnoreHeaderCommentsCS] = PropertiesHelper.ReadBooleanProperty(settings, IgnoreHeaderCommentsCS);
-            IgnoreHeaderComments[IgnoreHeaderCommentsVB] = PropertiesHelper.ReadBooleanProperty(settings, IgnoreHeaderCommentsVB);
+            IgnoreHeaderComments[PropertiesHelper.IgnoreHeaderCommentsCS] = PropertiesHelper.ReadBooleanProperty(settings, PropertiesHelper.IgnoreHeaderCommentsCS);
+            IgnoreHeaderComments[PropertiesHelper.IgnoreHeaderCommentsVB] = PropertiesHelper.ReadBooleanProperty(settings, PropertiesHelper.IgnoreHeaderCommentsVB);
         }
 
         private static bool IsProjectOutput(AdditionalText file) =>
