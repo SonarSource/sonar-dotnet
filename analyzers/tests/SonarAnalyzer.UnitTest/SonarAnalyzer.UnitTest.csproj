@@ -155,6 +155,9 @@
     <None Include="Common\Resources\input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Common\Resources\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -174,12 +177,6 @@
     <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
       <Aliases>global,vbnet</Aliases>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Common\Resources\SonarLint.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <Import Project="..\..\StyleCopAnalyzers.targets" />

@@ -69,17 +69,12 @@ namespace SonarAnalyzer.Common
             /// the XML loading is an IO operation (e.g. slow) we lock until it completes to prevent
             /// rules from wrongly deciding that they are disabled while the XML is loaded.
             /// </summary>
-            private static readonly object @lock = new object();
+            private static readonly object IsInitializedGate = new object();
 
-            public bool IsEnabled(string ruleKey)
-            {
-                if (!isInitialized)
-                {
-                    throw new InvalidOperationException("Call Initialize() before calling IsEnabled().");
-                }
-                return enabledRules != null
-                    && enabledRules.Contains(ruleKey);
-            }
+            public bool IsEnabled(string ruleKey) =>
+                isInitialized
+                    ? enabledRules.Contains(ruleKey)
+                    : throw new InvalidOperationException("Call Initialize() before calling IsEnabled().");
 
             public void Initialize(AnalyzerOptions options, IRuleLoader ruleLoader)
             {
@@ -89,7 +84,7 @@ namespace SonarAnalyzer.Common
                     return;
                 }
 
-                lock (@lock)
+                lock (IsInitializedGate)
                 {
                     if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXmlPath)
                     {
