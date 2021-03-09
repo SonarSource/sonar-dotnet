@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-        protected abstract override void Initialize(ParameterLoadingAnalysisContext context);
+        protected abstract override void Initialize(AdditionalCompilationStartActionAnalysisContext context);
 
         protected void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, SyntaxNode> nodeSelector, Func<TSyntax, Location> location,
             string declarationType)

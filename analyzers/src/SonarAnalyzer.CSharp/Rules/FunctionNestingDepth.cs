@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.RemoveAccessorDeclaration
         };
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(CheckFunctionNestingDepth, FunctionKinds);
 
         private void CheckFunctionNestingDepth(SyntaxNodeAnalysisContext context)

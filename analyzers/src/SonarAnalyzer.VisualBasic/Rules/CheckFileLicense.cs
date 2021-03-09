@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             HeaderFormatDefaultValue)]
         public override string HeaderFormat { get; set; } = HeaderFormatDefaultValue;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
                 stac =>

@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DefaultMaxNumberOfGenericParametersInMethod)]
         public int MaxNumberOfGenericParametersInMethod { get; set; } = DefaultMaxNumberOfGenericParametersInMethod;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

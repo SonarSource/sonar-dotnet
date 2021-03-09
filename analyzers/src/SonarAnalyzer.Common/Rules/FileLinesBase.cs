@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
             DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
                 GeneratedCodeRecognizer,

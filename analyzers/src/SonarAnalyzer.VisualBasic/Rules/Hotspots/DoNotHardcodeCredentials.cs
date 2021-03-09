@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
 
-        protected override void InitializeActions(ParameterLoadingAnalysisContext context) =>
+        protected override void InitializeActions(AdditionalCompilationStartActionAnalysisContext context) =>
             context.RegisterCompilationStartAction(
                 c =>
                 {

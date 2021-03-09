@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             "Regular expression used to check the event names against.", NamingHelper.PascalCasingPattern)]
         public string Pattern { get; set; } = NamingHelper.PascalCasingPattern;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected abstract bool IsCandidateSymbol(IFieldSymbol symbol);
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

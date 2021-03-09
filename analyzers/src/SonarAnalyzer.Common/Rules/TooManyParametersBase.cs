@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules
         protected TooManyParametersBase(System.Resources.ResourceManager rspecResources) =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources, isEnabledByDefault: false);
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
                 c =>

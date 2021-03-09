@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             typeof(ExpressionStatementSyntax)
         };
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

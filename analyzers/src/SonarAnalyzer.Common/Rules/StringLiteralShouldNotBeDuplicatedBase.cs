@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
         protected StringLiteralShouldNotBeDuplicatedBase(System.Resources.ResourceManager resourceManager) =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, resourceManager, isEnabledByDefault: false);
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context) =>
             // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary
             // locations. The problem is that this scenario is not yet supported on SonarQube side.
             // Hence the decision to do like other languages, at class-level

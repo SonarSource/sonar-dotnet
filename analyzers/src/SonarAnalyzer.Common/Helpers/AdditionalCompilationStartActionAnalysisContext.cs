@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class ParameterLoadingAnalysisContext
+    public class AdditionalCompilationStartActionAnalysisContext
     {
         private readonly SonarAnalysisContext context;
 
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Helpers
 
         internal IEnumerable<Action<CompilationStartAnalysisContext>> CompilationStartActions => this.compilationStartActions;
 
-        internal ParameterLoadingAnalysisContext(SonarAnalysisContext context)
+        internal AdditionalCompilationStartActionAnalysisContext(SonarAnalysisContext context)
         {
             this.context = context;
         }

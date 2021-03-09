@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
         private Regex passwordValuePattern;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract void InitializeActions(ParameterLoadingAnalysisContext context);
+        protected abstract void InitializeActions(AdditionalCompilationStartActionAnalysisContext context);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules
             CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
         }
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             var input = new TrackerInput(context.GetInnerContext(), configuration, rule);
 

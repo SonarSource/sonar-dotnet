@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Lazy
             );
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

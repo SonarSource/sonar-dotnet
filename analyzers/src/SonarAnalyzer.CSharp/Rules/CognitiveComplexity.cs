@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override DiagnosticDescriptor Rule => rule;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckComplexity<MethodDeclarationSyntax>(c, m => m, m => m.Identifier.GetLocation(),

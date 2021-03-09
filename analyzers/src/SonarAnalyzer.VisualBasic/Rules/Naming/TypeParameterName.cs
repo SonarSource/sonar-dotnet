@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             "Regular expression used to check the generic type parameter names against.", DefaultFormat)]
         public string Pattern { get; set; } = DefaultFormat;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

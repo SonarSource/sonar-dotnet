@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Helpers
                     }
                 }, syntaxKinds);
 
-        public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this ParameterLoadingAnalysisContext context,
+        public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(this AdditionalCompilationStartActionAnalysisContext context,
                                                                                      GeneratedCodeRecognizer generatedCodeRecognizer,
                                                                                      Action<SyntaxNodeAnalysisContext> action,
                                                                                      params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Helpers
                         }
                     }));
 
-        public static void RegisterSyntaxTreeActionInNonGenerated(this ParameterLoadingAnalysisContext context,
+        public static void RegisterSyntaxTreeActionInNonGenerated(this AdditionalCompilationStartActionAnalysisContext context,
                                                                   GeneratedCodeRecognizer generatedCodeRecognizer,
                                                                   Action<SyntaxTreeAnalysisContext> action) =>
             context.RegisterCompilationStartAction(csac =>
@@ -88,6 +88,12 @@ namespace SonarAnalyzer.Helpers
                             action(c);
                         }
                     }));
+
+        public static void RegisterSymbolAction(this AdditionalCompilationStartActionAnalysisContext context, Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
+            context.GetInnerContext().RegisterSymbolAction(action, symbolKinds);
+
+        public static void RegisterCompilationAction(this AdditionalCompilationStartActionAnalysisContext context, Action<CompilationAnalysisContext> action) =>
+            context.GetInnerContext().RegisterCompilationAction(action);
 
         public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(this SonarAnalysisContext context,
                                                                                          GeneratedCodeRecognizer generatedCodeRecognizer,

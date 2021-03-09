@@ -34,7 +34,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DisablingRequestValidationBase : HotspotDiagnosticAnalyzer
+    public abstract class DisablingRequestValidationBase : AdditionalFileTypeHotspotAnalyzer
     {
         protected const string DiagnosticId = "S5753";
         private const string MessageFormat = "Make sure disabling ASP.NET Request Validation feature is safe here.";
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules
             this.rootPath = rootPath;
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSymbolAction(c =>
                 {

@@ -18,10 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common;
+
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class ParameterLoadingDiagnosticAnalyzer : SonarDiagnosticAnalyzer
+    public abstract class AdditionalFileTypeHotspotAnalyzer : HotspotDiagnosticAnalyzer
     {
+        protected FilesToAnalyzeProvider FilesToAnalyzeProvider { get; private set; }
+
+        protected AdditionalFileTypeHotspotAnalyzer(IAnalyzerConfiguration configuration) : base(configuration) { }
+
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             var analysisContext = new AdditionalCompilationStartActionAnalysisContext(context);
@@ -30,7 +36,8 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCompilationStartAction(
                 cac =>
                 {
-                    ParameterLoader.SetParameterValues(this, cac.Options);
+                    var projectConfigReader = new ProjectConfigReader(cac.Options);
+                    FilesToAnalyzeProvider = new FilesToAnalyzeProvider(projectConfigReader.FilesToAnalyzePath);
                     foreach (var compilationStartActions in analysisContext.CompilationStartActions)
                     {
                         compilationStartActions(cac);

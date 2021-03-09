@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken? GetMethodIdentifierToken(TBaseMethodSyntax baseMethodDeclaration);
         protected abstract string GetMethodKindAndName(SyntaxToken identifierToken);
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,

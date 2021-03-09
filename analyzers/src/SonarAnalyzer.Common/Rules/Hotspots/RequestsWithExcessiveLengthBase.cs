@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
             this.analyzerConfiguration = analyzerConfiguration;
         }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context) =>
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context) =>
             context.RegisterCompilationStartAction(
                 c =>
                 {

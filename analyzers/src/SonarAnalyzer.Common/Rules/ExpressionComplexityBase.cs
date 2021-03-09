@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
 
         public abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
                 GeneratedCodeRecognizer,

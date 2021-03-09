@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             "Regular expression used to check the even handler names against.", DefaultPattern)]
         public string Pattern { get; set; } = DefaultPattern;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(AdditionalCompilationStartActionAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
