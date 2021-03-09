@@ -29,14 +29,14 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class PropertiesHelper
     {
-        internal const string AnalyzeGeneratedCodeCSharp = "sonar.cs.analyzeGeneratedCode";
-        internal const string AnalyzeGeneratedCodeVisualBasic = "sonar.vbnet.analyzeGeneratedCode";
+        internal const string AnalyzeGeneratedCodeCS = "sonar.cs.analyzeGeneratedCode";
+        internal const string AnalyzeGeneratedCodeVB = "sonar.vbnet.analyzeGeneratedCode";
 
         internal static bool ShouldAnalyzeGeneratedCode(this AnalyzerOptions options, string language)
             => ReadBooleanProperty(GetSettings(options),
                 language == LanguageNames.CSharp
-                    ? AnalyzeGeneratedCodeCSharp
-                    : AnalyzeGeneratedCodeVisualBasic);
+                    ? AnalyzeGeneratedCodeCS
+                    : AnalyzeGeneratedCodeVB);
 
         internal static IEnumerable<XElement> GetSettings(AnalyzerOptions options)
         {

@@ -84,8 +84,8 @@ namespace SonarAnalyzer.Rules
                 PropertiesHelper.ReadBooleanProperty(
                     settings,
                     language == LanguageNames.CSharp
-                        ? PropertiesHelper.AnalyzeGeneratedCodeCSharp
-                        : PropertiesHelper.AnalyzeGeneratedCodeVisualBasic);
+                        ? PropertiesHelper.AnalyzeGeneratedCodeCS
+                        : PropertiesHelper.AnalyzeGeneratedCodeVB);
         }
 
         private void ReadHeaderCommentProperties(IEnumerable<XElement> settings)
