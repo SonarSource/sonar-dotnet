@@ -34,32 +34,75 @@ namespace SonarAnalyzer.UnitTest.Common
     public class AnalyzerConfigurationTests
     {
         [TestMethod]
-        public void AllTests()
+        public void HotspotConfiguration_WhenInitializeIsCalledWithDifferentPathAndDifferentLoaders_EnabledRulesAreUpdated()
         {
-            // the Hotspot configuration is static, so we need to test multiple scenarios in the same method (otherwise, the tests will affect themselves)
-            // for example, we need to test what happens when the Configuration is not initialized before all the other tests
-            var sut = AnalyzerConfiguration.Hotspot;
+            var sut = new AnalyzerConfiguration.HotspotConfiguration();
+
+            sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(@"bar\SonarLint.xml")), GetRuleLoader("S1067"));
+            Assert.IsTrue(sut.IsEnabled("S1067"));
+            Assert.IsFalse(sut.IsEnabled("S9999"));
+
+            sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(@"qix\SonarLint.xml")), GetRuleLoader("S9999"));
+            Assert.IsFalse(sut.IsEnabled("S1067"));
+            Assert.IsTrue(sut.IsEnabled("S9999"));
+        }
+
+        [TestMethod]
+        public void HotspotConfiguration_WhenInitializeIsCalledWithTheSamePathAndDifferentLoaders_EnabledRulesAreNotUpdated()
+        {
+            var sut = new AnalyzerConfiguration.HotspotConfiguration();
+            var path = "SonarLint.xml";
+
+            sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(path)), GetRuleLoader("S1067"));
+            Assert.IsTrue(sut.IsEnabled("S1067"));
+            Assert.IsFalse(sut.IsEnabled("S9999"));
+
+            sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(path)), GetRuleLoader("S9999"));
+            Assert.IsTrue(sut.IsEnabled("S1067"));
+            Assert.IsFalse(sut.IsEnabled("S9999"));
+        }
+
+        [TestMethod]
+        public void HotspotConfiguration_WhenInitializeIsSecondTimeWithDifferentFileName_EnabledRulesAreNotUpdated()
+        {
+            var sut = new AnalyzerConfiguration.HotspotConfiguration();
+
+            sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(@"bar\SonarLint.xml")), GetRuleLoader("S1067"));
+            Assert.IsTrue(sut.IsEnabled("S1067"));
+            Assert.IsFalse(sut.IsEnabled("S9999"));
+
+            sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(@"qix\Foo.xml")), GetRuleLoader("S9999"));
+            Assert.IsTrue(sut.IsEnabled("S1067"));
+            Assert.IsFalse(sut.IsEnabled("S9999"));
+        }
+
+        [TestMethod]
+        public void HotspotConfiguration_WhenIsEnabledWithoutInitialized_ThrowException()
+        {
+            var sut = new AnalyzerConfiguration.HotspotConfiguration();
+            sut.Invoking(x => x.IsEnabled("")).Should().Throw<InvalidOperationException>().WithMessage("Call Initialize() before calling IsEnabled().");
+        }
+
+        [TestMethod]
+        public void HotspotConfiguration_GivenDifferentFileName_WillNotFinishInitialization()
+        {
+            var sut = new AnalyzerConfiguration.HotspotConfiguration();
             var ruleLoaderMock = GetEmptyMock();
 
-            // HotspotConfiguration_WhenIsEnabledWithoutInitialized_ThrowException
-            sut.Invoking(x => x.IsEnabled("")).Should().Throw<InvalidOperationException>().WithMessage("Call Initialize() before calling IsEnabled().");
-
-            // GivenDifferentFileName_WillNotFinishInitialization
             sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(@"foo\SomeFile.xml")), ruleLoaderMock.Object);
-            ruleLoaderMock.Verify(r => r.GetEnabledRules(It.IsAny<string>()), Times.Never);
 
-            // WhenInitializedTwice_WithTheSameFile_WillGetEnabledRulesOnlyOnce
+            ruleLoaderMock.Verify(r => r.GetEnabledRules(It.IsAny<string>()), Times.Never);
+        }
+
+        [TestMethod]
+        public void HotspotConfiguration_WhenInitializedTwiceWithTheSameFile_WillGetEnabledRulesOnlyOnce()
+        {
+            var sut = new AnalyzerConfiguration.HotspotConfiguration();
+            var ruleLoaderMock = GetEmptyMock();
+
             sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(@"foo\SonarLint.xml")), ruleLoaderMock.Object);
             sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(@"foo\SonarLint.xml")), ruleLoaderMock.Object);
             ruleLoaderMock.Verify(r => r.GetEnabledRules(It.IsAny<string>()), Times.Once);
-
-            // GivenSonarLintXmlIsLoaded_WhenInitializeIsCalledWithDifferentPath_EnabledRulesAreUpdated
-            sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(@"bar\SonarLint.xml")), GetRuleLoader("S1067"));
-            Assert.IsTrue(sut.IsEnabled("S1067"));
-
-            sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(@"qix\SonarLint.xml")), GetRuleLoader("S1068"));
-            Assert.IsFalse(sut.IsEnabled("S1067"));
-            Assert.IsTrue(sut.IsEnabled("S1068"));
         }
 
         private ImmutableArray<AdditionalText> GetAdditionalFiles(string path) =>

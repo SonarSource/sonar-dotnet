@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Common
         /// <summary>
         /// Singleton to hold the configuration for hotspot rules.
         /// </summary>
-        private class HotspotConfiguration : IAnalyzerConfiguration
+        internal /* for tests */ class HotspotConfiguration : IAnalyzerConfiguration
         {
             // Hotspot configuration is cached at the assembly level and the MsBuild process
             // can reuse the already loaded assembly when multiple projects are analyzed one after the other.
