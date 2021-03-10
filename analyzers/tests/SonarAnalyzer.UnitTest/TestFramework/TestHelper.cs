@@ -21,12 +21,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.PackagingTests;
@@ -191,8 +193,10 @@ namespace SonarAnalyzer.UnitTest
 
         public static AnalyzerOptions CreateOptions(string relativePath)
         {
+            var text = File.Exists(relativePath) ? SourceText.From(File.ReadAllText(relativePath)) : null;
             var additionalText = new Mock<AdditionalText>();
             additionalText.Setup(x => x.Path).Returns(relativePath);
+            additionalText.Setup(x => x.GetText(default)).Returns(text);
             return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
     }

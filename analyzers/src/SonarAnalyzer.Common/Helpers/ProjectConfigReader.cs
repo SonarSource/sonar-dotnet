@@ -20,10 +20,8 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using System.Xml.Serialization;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -32,54 +30,40 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     internal class ProjectConfigReader
     {
-        private const string SonarProjectConfigFileName = "SonarProjectConfig.xml";
-
-        private readonly Lazy<ProjectConfig> projectConfig;
+        private readonly ProjectConfig projectConfig;
         private readonly Lazy<ProjectType> projectType;
+        private readonly Lazy<FilesToAnalyzeProvider> filesToAnalyze;
 
-        public string AnalysisConfigPath => projectConfig.Value.AnalysisConfigPath;
-        public string FilesToAnalyzePath => projectConfig.Value.FilesToAnalyzePath;
-        public string OutPath => projectConfig.Value.OutPath;
-        public string ProjectPath => projectConfig.Value.ProjectPath;
-        public string TargetFramework => projectConfig.Value.TargetFramework;
+        public string AnalysisConfigPath => projectConfig.AnalysisConfigPath;
+        public string FilesToAnalyzePath => projectConfig.FilesToAnalyzePath;
+        public string OutPath => projectConfig.OutPath;
+        public string ProjectPath => projectConfig.ProjectPath;
+        public string TargetFramework => projectConfig.TargetFramework;
         public ProjectType ProjectType => projectType.Value;
+        public FilesToAnalyzeProvider FilesToAnalyze => filesToAnalyze.Value;
 
-        public ProjectConfigReader(AnalyzerOptions options)
+        public ProjectConfigReader(SourceText sonarProjectConfig, string logFileName)
         {
-            projectConfig = new Lazy<ProjectConfig>(() => ReadContent(options));
-            projectType = new Lazy<ProjectType>(() => ParseProjectType(projectConfig.Value));
+            projectConfig = sonarProjectConfig == null ? ProjectConfig.Empty : ReadContent(sonarProjectConfig, logFileName);
+            projectType = new Lazy<ProjectType>(() => ParseProjectType());
+            filesToAnalyze = new Lazy<FilesToAnalyzeProvider>(() => new FilesToAnalyzeProvider(FilesToAnalyzePath));
         }
 
-        private static ProjectConfig ReadContent(AnalyzerOptions options)
+        private static ProjectConfig ReadContent(SourceText sonarProjectConfig, string logFileName)
         {
-            var sonarProjectConfig = options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig);
-            if (sonarProjectConfig == null)
-            {
-                return ProjectConfig.Empty;
-            }
-            if (!File.Exists(sonarProjectConfig.Path))
-            {
-                throw new InvalidOperationException($"File {SonarProjectConfigFileName} has been added as an AdditionalFile but does not exist.");
-            }
             try
             {
-                var ser = new XmlSerializer(typeof(ProjectConfig));
-                using var fs = File.Open(sonarProjectConfig.Path, FileMode.Open, FileAccess.Read, FileShare.Read);
-                return (ProjectConfig)ser.Deserialize(fs);
+                var serializer = new XmlSerializer(typeof(ProjectConfig));
+                using var sr = new StringReader(sonarProjectConfig.ToString());
+                return (ProjectConfig)serializer.Deserialize(sr);
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException($"File {SonarProjectConfigFileName} could not be parsed.", e);
+                throw new InvalidOperationException($"File {logFileName} could not be parsed.", e);
             }
         }
 
-        private static ProjectType ParseProjectType(ProjectConfig projectConfig) =>
-            Enum.TryParse<ProjectType>(projectConfig.ProjectType, out var result)
-                ? result
-                : ProjectType.Product;
-
-        private static bool IsSonarProjectConfig(AdditionalText additionalText) =>
-            additionalText.Path != null
-            && Path.GetFileName(additionalText.Path).Equals(SonarProjectConfigFileName, StringComparison.OrdinalIgnoreCase);
+        private ProjectType ParseProjectType() =>
+            Enum.TryParse<ProjectType>(projectConfig.ProjectType, out var result) ? result : ProjectType.Product;
     }
 }
