@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
@@ -42,15 +41,11 @@ namespace SonarAnalyzer.Rules
         private const int MinimumAcceptedRequestValidationModeValue = 4;
 
         private readonly DiagnosticDescriptor rule;
-        private readonly string rootPath;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected DisablingRequestValidationBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration configuration, string rootPath) : base(configuration)
-        {
+        protected DisablingRequestValidationBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration configuration) : base(configuration) =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
-            this.rootPath = rootPath;
-        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -70,7 +65,7 @@ namespace SonarAnalyzer.Rules
                         a.ConstructorArguments.Length == 1
                         && a.ConstructorArguments[0].Kind == TypedConstantKind.Primitive
                         && a.ConstructorArguments[0].Value is bool b
-                        && b == false
+                        && !b
                         && a.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
                     if (attributeWithFalseParameter != null)
                     {
@@ -87,7 +82,7 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                foreach (var fullPath in GetWebConfigFilePathsRecursively(rootPath))
+                foreach (var fullPath in context.ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles("web.config"))
                 {
                     var webConfig = File.ReadAllText(fullPath);
                     if (webConfig.Contains("<system.web>") && ParseXDocument(webConfig) is { } doc)
@@ -125,9 +120,6 @@ namespace SonarAnalyzer.Rules
                 }
             }
         }
-
-        private static IEnumerable<string> GetWebConfigFilePathsRecursively(string rootPath) =>
-            Directory.GetFiles(rootPath, "web.config", SearchOption.AllDirectories).Select(p => Path.GetFullPath(p));
 
         private static Location CreateLocation(string path, XNode element, string attribute)
         {
