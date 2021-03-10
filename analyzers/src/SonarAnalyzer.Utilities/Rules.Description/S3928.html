@@ -16,6 +16,7 @@ public void Foo(Bar a, int[] b)
   throw new ArgumentOutOfRangeException("c");
   throw new ArgumentOutOfRangeException("c", "My error message"); // Noncompliant
   throw new ArgumentOutOfRangeException("c", b, "My error message"); // Noncompliant
+  throw new DuplicateWaitObjectException("c", "My error message");  // Noncompliant
 }
 </pre>
 <h2>Compliant Solution</h2>
@@ -25,11 +26,12 @@ public void Foo(Bar a, Bar b)
   throw new ArgumentException("My error message", "a");
   throw new ArgumentException("My error message", "b", innerException);
   throw new ArgumentNullException("a");
-  throw new ArgumentNullException(nameOf(a));
-  throw new ArgumentNullException("My error message", "a");
+  throw new ArgumentNullException(nameof(a));
+  throw new ArgumentNullException("a", "My error message");
   throw new ArgumentOutOfRangeException("b");
   throw new ArgumentOutOfRangeException("b", "My error message");
   throw new ArgumentOutOfRangeException("b", b, "My error message");
+  throw new DuplicateWaitObjectException("b", "My error message");
 }
 </pre>
 <h2>Exceptions</h2>
