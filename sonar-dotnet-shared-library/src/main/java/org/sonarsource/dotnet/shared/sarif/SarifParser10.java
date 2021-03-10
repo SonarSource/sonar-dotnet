@@ -147,8 +147,8 @@ class SarifParser10 implements SarifParser {
 
     if (primaryLocation == null) {
       String uri = resultFileObj.get("uri").getAsString();
-      String absolutePath = toRealPath.apply(uriToAbsolutePath(uri));
-      callback.onFileIssue(ruleId, level, absolutePath, message);
+      String path = toRealPath.apply(uriToPath(uri));
+      callback.onFileIssue(ruleId, level, path, message);
     } else {
       Collection<Location> secondaryLocations = new ArrayList<>();
       for (JsonElement relatedLocationEl : relatedLocations) {
@@ -172,7 +172,7 @@ class SarifParser10 implements SarifParser {
   @CheckForNull
   private Location handleLocation(JsonObject locationObj, @Nullable String message) {
     String uri = locationObj.get("uri").getAsString();
-    String absolutePath = toRealPath.apply(uriToAbsolutePath(uri));
+    String path = toRealPath.apply(uriToPath(uri));
     JsonObject region = locationObj.get("region").getAsJsonObject();
     int startLine = region.get("startLine").getAsInt();
 
@@ -182,7 +182,7 @@ class SarifParser10 implements SarifParser {
 
     JsonElement lengthOrNull = region.get("length");
     if (lengthOrNull != null) {
-      return new Location(absolutePath, message, startLine, startLineOffset, startLine, startLineOffset + lengthOrNull.getAsInt());
+      return new Location(path, message, startLine, startLineOffset, startLine, startLineOffset + lengthOrNull.getAsInt());
     }
 
     JsonElement endLineOrNull = region.get("endLine");
@@ -204,7 +204,7 @@ class SarifParser10 implements SarifParser {
       return null;
     }
 
-    return new Location(absolutePath, message, startLine, startLineOffset, endLine, endLineOffset);
+    return new Location(path, message, startLine, startLineOffset, endLine, endLineOffset);
   }
 
   private static boolean isSuppressed(JsonObject resultObj) {
@@ -220,9 +220,14 @@ class SarifParser10 implements SarifParser {
     return false;
   }
 
-  private static String uriToAbsolutePath(String uri) {
+  private static String uriToPath(String uri) {
     String uriEscaped = uri.replace("[", "%5B").replace("]", "%5D");
-    return new File(URI.create(uriEscaped)).getAbsolutePath();
+    String uriPath = URI.create(uriEscaped).getPath();
+    File file = new File(uriPath);
+
+    return file.isAbsolute()
+      ? file.getAbsolutePath()
+      : file.getPath();
   }
 
 }
