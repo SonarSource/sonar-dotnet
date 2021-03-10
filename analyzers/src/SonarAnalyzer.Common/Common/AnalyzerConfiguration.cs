@@ -72,6 +72,10 @@ namespace SonarAnalyzer.Common
             private static readonly object IsInitializedGate = new object();
 
             public bool IsEnabled(string ruleKey) =>
+                // Initialize can be called multiple times, and the `enabledRules` can change between initializations,
+                // so here we have a race condition when a second initialization happens.
+                // We would need to lock here as well, or even better, make IsEnabled and Initialize atomic.
+                // https://github.com/SonarSource/sonar-dotnet/issues/4139
                 isInitialized
                     ? enabledRules.Contains(ruleKey)
                     : throw new InvalidOperationException("Call Initialize() before calling IsEnabled().");
