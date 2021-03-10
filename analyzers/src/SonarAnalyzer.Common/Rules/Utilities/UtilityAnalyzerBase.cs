@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
     {
-        internal const string ProjectOutFolderPathFileName = "ProjectOutFolderPath.txt"; // Only for backward compatibility with S4MSB <= 5.0
+        internal const string ProjectOutFolderPathFileName = "ProjectOutFolderPath.txt";
 
         protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
 
@@ -51,30 +51,31 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected void ReadParameters(AnalyzerOptions options, string language)
+        protected void ReadParameters(SonarAnalysisContext context, CompilationAnalysisContext c)
         {
-            var settings = PropertiesHelper.GetSettings(options);
-            var projectOutputAdditionalFile = options.AdditionalFiles.FirstOrDefault(IsProjectOutput);
-
-            if (!settings.Any() || projectOutputAdditionalFile == null)
+            var settings = PropertiesHelper.GetSettings(c.Options);
+            var outPath = context.ProjectConfiguration(c.Options).OutPath;
+            // For backward compatibility with S4MSB <= 5.0
+            if (outPath == null && c.Options.AdditionalFiles.FirstOrDefault(IsProjectOutFolderPath) is { } projectOutFolderAdditionalFile)
             {
-                return;
+                outPath = File.ReadAllLines(projectOutFolderAdditionalFile.Path).First();
             }
-
-            lock (parameterReadLock)
+            if (settings.Any() && outPath != null)
             {
-                IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, language);
-                AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, language);
-                OutPath = File.ReadAllLines(projectOutputAdditionalFile.Path).FirstOrDefault(l => !string.IsNullOrEmpty(l));
-                if (!string.IsNullOrEmpty(OutPath))
+                lock (parameterReadLock)
                 {
-                    OutPath = Path.Combine(OutPath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
-                    IsAnalyzerEnabled = true;
+                    IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, c.Compilation.Language);
+                    AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, c.Compilation.Language);
+                    if (!string.IsNullOrEmpty(outPath))
+                    {
+                        OutPath = Path.Combine(outPath, c.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
+                        IsAnalyzerEnabled = true;
+                    }
                 }
             }
         }
 
-        private static bool IsProjectOutput(AdditionalText file) =>
+        private static bool IsProjectOutFolderPath(AdditionalText file) =>
             ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ProjectOutFolderPathFileName);
     }
 
@@ -90,7 +91,7 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationAction(c =>
                 {
-                    ReadParameters(c.Options, c.Compilation.Language);
+                    ReadParameters(context, c);
                     if (!IsAnalyzerEnabled)
                     {
                         return;

@@ -21,31 +21,49 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Rules.Utilities
 {
     [TestClass]
     public class UtilityAnalyzerBaseTests
     {
+        private const string DefaultSonarProjectConfig = @"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml";
+        private const string DefaultProjectOutFolderPath = @"ResourceTests\ProjectOutFolderPath.txt";
+
         [DataTestMethod]
-        [DataRow(LanguageNames.CSharp, @"path\output-cs")]
-        [DataRow(LanguageNames.VisualBasic, @"path\output-vbnet")]
+        [DataRow(LanguageNames.CSharp, DefaultProjectOutFolderPath, @"path\output-cs")]
+        [DataRow(LanguageNames.VisualBasic, DefaultProjectOutFolderPath, @"path\output-vbnet")]
+        [DataRow(LanguageNames.CSharp, DefaultSonarProjectConfig, @"C:\foo\bar\.sonarqube\out\0\output-cs")]
+        [DataRow(LanguageNames.VisualBasic, DefaultSonarProjectConfig, @"C:\foo\bar\.sonarqube\out\0\output-vbnet")]
         [TestCategory("Utility")]
-        public void ReadParameters_OutputPath(string language, string expectedWorkDirectoryPath)
+        public void ReadConfig_OutPath(string language, string additionalPath, string expectedOutPath)
         {
             // We do not test what is read from the SonarLint file, but we need it
-            var utilityAnalyzer = new TestUtilityAnalyzer(language, @"ResourceTests\SonarLint.xml", @"ResourceTests\ProjectOutFolderPath.txt");
+            var utilityAnalyzer = new TestUtilityAnalyzer(language, @"ResourceTests\SonarLint.xml", additionalPath);
 
-            utilityAnalyzer.TestOutPath.Should().Be(expectedWorkDirectoryPath);
+            utilityAnalyzer.TestOutPath.Should().Be(expectedOutPath);
+            utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("Utility")]
+        public void ReadConfig_OutPath_FromSonarProjectConfig_HasPriority()
+        {
+            // We do not test what is read from the SonarLint file, but we need it
+            var utilityAnalyzer = new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\SonarLint.xml", DefaultProjectOutFolderPath, DefaultSonarProjectConfig);
+
+            utilityAnalyzer.TestOutPath.Should().Be(@"C:\foo\bar\.sonarqube\out\0\output-cs");
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
         }
 
@@ -57,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
         [TestCategory("Utility")]
         public void ReadsSettings_AnalyzeGenerated(string language, string sonarLintXmlPath, bool expectedAnalyzeGeneratedCodeValue)
         {
-            var utilityAnalyzer = new TestUtilityAnalyzer(language, sonarLintXmlPath, @"ResourceTests\ProjectOutFolderPath.txt");
+            var utilityAnalyzer = new TestUtilityAnalyzer(language, sonarLintXmlPath, DefaultSonarProjectConfig);
 
             utilityAnalyzer.TestAnalyzeGeneratedCode.Should().Be(expectedAnalyzeGeneratedCodeValue);
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
@@ -71,7 +89,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
         [TestCategory("Utility")]
         public void ReadsSettings_IgnoreHeaderComments(string language, string sonarLintXmlPath, bool expectedIgnoreHeaderComments)
         {
-            var utilityAnalyzer = new TestUtilityAnalyzer(language, sonarLintXmlPath, @"ResourceTests\ProjectOutFolderPath.txt");
+            var utilityAnalyzer = new TestUtilityAnalyzer(language, sonarLintXmlPath, DefaultSonarProjectConfig);
 
             utilityAnalyzer.TestIgnoreHeaderComments.Should().Be(expectedIgnoreHeaderComments);
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
@@ -79,8 +97,11 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
 
         [TestMethod]
         [TestCategory("Utility")]
-        public void NoSonarLintXml_AnalyzerNotEnabled() =>
-            new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\ProjectOutFolderPath.txt").TestIsAnalyzerEnabled.Should().BeFalse();
+        public void NoSonarLintXml_AnalyzerNotEnabled()
+        {
+            new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultProjectOutFolderPath).TestIsAnalyzerEnabled.Should().BeFalse();
+            new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultSonarProjectConfig).TestIsAnalyzerEnabled.Should().BeFalse();
+        }
 
         [TestMethod]
         [TestCategory("Utility")]
@@ -108,14 +129,6 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             result.EndOffset.Should().Be(9313);
         }
 
-        private static Mock<AdditionalText> CreateMockAdditionalText(SourceText sourceText, string path)
-        {
-            var additionalTextMock = new Mock<AdditionalText>();
-            additionalTextMock.Setup(x => x.Path).Returns(path);
-            additionalTextMock.Setup(x => x.GetText(System.Threading.CancellationToken.None)).Returns(sourceText);
-            return additionalTextMock;
-        }
-
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
         private class TestUtilityAnalyzer : UtilityAnalyzerBase
         {
@@ -127,21 +140,20 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
 
             public TestUtilityAnalyzer(string language, params string[] additionalPaths)
             {
-                var additionalFiles = additionalPaths.Select(x => CreateMockAdditionalText(new DummySourceText(), x).Object).ToImmutableArray();
-                ReadParameters(new AnalyzerOptions(additionalFiles), language);
+                var additionalFiles = additionalPaths.Select(x => new AnalyzerAdditionalFile(x)).ToImmutableArray<AdditionalText>();
+                var context = new SonarAnalysisContext(new SonarAnalysisContextTest.DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+                Compilation compilation = language switch
+                {
+                    LanguageNames.CSharp => CSharpCompilation.Create(null),
+                    LanguageNames.VisualBasic => VisualBasicCompilation.Create(null),
+                    _ => throw new InvalidOperationException($"Unexpected {nameof(language)}: {language}")
+                };
+                var c = new CompilationAnalysisContext(compilation, new AnalyzerOptions(additionalFiles), null, null, default);
+                ReadParameters(context, c);
             }
 
             protected override void Initialize(SonarAnalysisContext context) =>
                 throw new NotImplementedException();
-        }
-
-        // We can't use Mock<SourceText> because SourceText is an abstract class
-        private class DummySourceText : SourceText
-        {
-            public override char this[int position] => throw new NotImplementedException();
-            public override Encoding Encoding => throw new NotImplementedException();
-            public override int Length => throw new NotImplementedException();
-            public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count) => throw new NotImplementedException();
         }
     }
 }
