@@ -33,8 +33,11 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
     {
         private const string NuGetConfigFileRelativePath = @"..\..\..\nuget.config";
 
-        private static readonly string PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? @"..\..\..\..\..\packages\";
-        private static readonly PackageManager PackageManager = new PackageManager(CreatePackageRepository(), PackagesFolder);
+        // We use the global nuget cache for storing our packages if the NUGET_PACKAGES environment variable is defined.
+        // This is especially helpful on the build agents where the packages are precached
+        // (since we don't need to spawn a new process for calling the nuget.exe to install or copy them from global cache)
+        private static readonly string PackagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? @"..\..\..\..\..\packages";
+        private static readonly PackageManager PackageManager = new (CreatePackageRepository(), PackagesFolder);
 
         private static readonly string[] SortedAllowedDirectories =
         {

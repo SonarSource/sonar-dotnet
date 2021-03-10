@@ -84,8 +84,10 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             {
                 var versionArgument = Version == Constants.NuGetLatestVersion ? string.Empty : $"-Version {Version}";
                 var configFile = ValidatedNuGetConfigPath();
-                // Explicitly specify the NuGet config to use to avoid being impacted by the NuGet config on the machine running the tests
-                var args = $"install {Id} {versionArgument} -OutputDirectory \"{PackagesFolder}\" -NonInteractive -ForceEnglishOutput -ConfigFile {configFile}";
+                // Explicitly specify the NuGet config to use to avoid being impacted by the NuGet config on the machine running the tests.
+                // If the unit tests are failing since the nuget packages cannot be installed (nuget.exe: ERROR: Illegal characters in path.)
+                // please ensure that the PackagesFolder does not end with a separator.
+                var args = $"install {Id} {versionArgument} -OutputDirectory \"{Path.GetFullPath(PackagesFolder)}\" -NonInteractive -ForceEnglishOutput -ConfigFile \"{configFile}\"";
                 LogMessage($"Installing package using nuget.exe {args}");
                 var startInfo = new ProcessStartInfo
                 {
