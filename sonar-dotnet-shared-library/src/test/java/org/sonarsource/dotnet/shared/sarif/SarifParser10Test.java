@@ -226,4 +226,17 @@ public class SarifParser10Test {
     verifyNoMoreInteractions(callback);
   }
 
+  @Test
+  public void sarif_version_1_0_relative_paths() throws IOException {
+    SarifParserCallback callback = mock(SarifParserCallback.class);
+    new SarifParser10(null, getRoot("v1_0_relative_paths.json"), String::toString).accept(callback);
+    InOrder inOrder = inOrder(callback);
+
+    Location s1144PrimaryLocation = new Location("SourceGeneratorPOC.Generators\\SourceGeneratorPOC.SourceGenerator\\Greetings.cs", "Remove the unused private method 'UnusedMethod'.", 7, 8, 7, 46);
+    inOrder.verify(callback).onIssue("S1144", "warning", s1144PrimaryLocation, new ArrayList<>());
+
+    Location s1186PrimaryLocation = new Location("SourceGeneratorPOC.Generators\\SourceGeneratorPOC.SourceGenerator\\Greetings.cs", "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.", 7, 28, 7, 40);
+    inOrder.verify(callback).onIssue("S1186", "warning", s1186PrimaryLocation, new ArrayList<>());
+  }
+
 }
