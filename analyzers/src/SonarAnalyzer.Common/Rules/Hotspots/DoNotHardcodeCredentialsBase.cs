@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules
 
         protected bool IsEnabled(AnalyzerOptions options)
         {
-            configuration.Initialize(options, AnalyzerConfiguration.RuleLoader);
+            configuration.Initialize(options);
             return configuration.IsEnabled(DiagnosticId);
         }
 

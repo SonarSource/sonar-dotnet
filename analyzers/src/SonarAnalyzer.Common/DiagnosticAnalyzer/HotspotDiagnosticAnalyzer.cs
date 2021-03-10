@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
 
         protected bool IsEnabled(AnalyzerOptions options)
         {
-            Configuration.Initialize(options, AnalyzerConfiguration.RuleLoader);
+            Configuration.Initialize(options);
             return SupportedDiagnostics.Any(d => Configuration.IsEnabled(d.Id));
         }
     }
