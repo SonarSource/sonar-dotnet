@@ -18,13 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
+using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -39,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             public SonarDiagnosticAnalyzer Analyzer { get; set; }
         }
 
-        private readonly List<TestSetup> TestCases = new List<TestSetup>(new[]
+        private readonly List<TestSetup> testCases = new List<TestSetup>(new[]
         {
             new TestSetup { Path = @"TestCases\AnonymousDelegateEventUnsubscribe.cs", Analyzer = new AnonymousDelegateEventUnsubscribe() },
             new TestSetup { Path = @"TestCases\AsyncAwaitIdentifier.cs", Analyzer = new AsyncAwaitIdentifier() },
@@ -49,13 +53,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
         });
 
         [TestMethod]
-        public void SonarAnalysis_WhenShouldAnalysisBeDisabledReturnsTrue_NoIssueReported()
+        public void WhenShouldAnalysisBeDisabledReturnsTrue_NoIssueReported()
         {
-            SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree )=> false;
+            SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => false;
 
             try
             {
-                foreach (var testCase in TestCases)
+                foreach (var testCase in testCases)
                 {
                     // ToDo: We should find a way to ack the fact the action was not run
                     Verifier.VerifyNoIssueReported(testCase.Path,
@@ -71,9 +75,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void SonarAnalysis_ByDefault_ExecuteRule()
+        public void ByDefault_ExecuteRule()
         {
-            foreach (var testCase in TestCases)
+            foreach (var testCase in testCases)
             {
                 // ToDo: We test that a rule is enabled only by checking the issues are reported
                 Verifier.VerifyAnalyzer(testCase.Path,
@@ -84,16 +88,15 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void SonarAnalysis_WhenAnalysisDisabledBaseOnSyntaxTree_ReportIssuesForEnabledRules()
+        public void WhenAnalysisDisabledBaseOnSyntaxTree_ReportIssuesForEnabledRules()
         {
-            TestCases.Should().HaveCountGreaterThan(2);
+            testCases.Should().HaveCountGreaterThan(2);
 
             try
             {
-                SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) =>
-                    tree.FilePath.EndsWith(new FileInfo(TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
-                Verifier.VerifyAnalyzer(TestCases[0].Path, TestCases[0].Analyzer);
-                Verifier.VerifyNoIssueReported(TestCases[1].Path, TestCases[1].Analyzer);
+                SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => tree.FilePath.EndsWith(new FileInfo(testCases[0].Path).Name, StringComparison.OrdinalIgnoreCase);
+                Verifier.VerifyAnalyzer(testCases[0].Path, testCases[0].Analyzer);
+                Verifier.VerifyNoIssueReported(testCases[1].Path, testCases[1].Analyzer);
             }
             finally
             {
@@ -102,7 +105,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void SonarAnalysis_WhenReportDiagnosticActionNotNull_AllowToContolWhetherOrNotToReport()
+        public void WhenReportDiagnosticActionNotNull_AllowToContolWhetherOrNotToReport()
         {
             try
             {
@@ -121,7 +124,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 // where the Debug.Assert of the AnalysisContextExtensions.ReportDiagnostic() method will raise.
                 using (new AssertIgnoreScope())
                 {
-                    foreach (var testCase in TestCases)
+                    foreach (var testCase in testCases)
                     {
                         if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe)
                         {
@@ -144,6 +147,93 @@ namespace SonarAnalyzer.UnitTest.Helpers
             {
                 SonarAnalysisContext.ReportDiagnostic = null;
             }
+        }
+
+        [TestMethod]
+        public void ProjectConfiguration_LoadsExpectedValues()
+        {
+            var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+
+            var sut = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+            var config = sut.ProjectConfiguration(options);
+
+            config.AnalysisConfigPath.Should().Be(@"c:\foo\bar\.sonarqube\conf\SonarQubeAnalysisConfig.xml");
+        }
+
+        [TestMethod]
+        public void ProjectConfiguration_UsesCachedValue()
+        {
+            var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+            var context = new DummyContext();
+            var firstSut = new SonarAnalysisContext(context, Enumerable.Empty<DiagnosticDescriptor>());
+            var secondSut = new SonarAnalysisContext(context, Enumerable.Empty<DiagnosticDescriptor>());
+            var firstConfig = firstSut.ProjectConfiguration(options);
+
+            secondSut.ProjectConfiguration(options).Should().BeSameAs(firstConfig);
+        }
+
+        [TestMethod]
+        public void ProjectConfiguration_WhenFileChanges_RebuildsCache()
+        {
+            var firstOptions = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml");
+            var secondOptions = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Path_Unix\SonarProjectConfig.xml");
+            var sut = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+            var firstConfig = sut.ProjectConfiguration(firstOptions);
+
+            sut.ProjectConfiguration(secondOptions).Should().NotBeSameAs(firstConfig);
+        }
+
+        [TestMethod]
+        [DataRow(null)]
+        [DataRow("/foo/bar/does-not-exit")]
+        [DataRow("/foo/bar/x.xml")]
+        public void ProjectConfiguration_WhenAdditionalFileNotPresent_ReturnsEmptyConfig(string folder)
+        {
+            var options = TestHelper.CreateOptions(folder);
+
+            var sut = new SonarAnalysisContext(null, Enumerable.Empty<DiagnosticDescriptor>());
+            var config = sut.ProjectConfiguration(options);
+
+            config.AnalysisConfigPath.Should().BeNull();
+            config.ProjectPath.Should().BeNull();
+            config.FilesToAnalyzePath.Should().BeNull();
+            config.OutPath.Should().BeNull();
+            config.ProjectType.Should().Be(ProjectType.Product);
+            config.TargetFramework.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ProjectConfiguration_WhenFileIsMissing_ThrowException()
+        {
+            var options = TestHelper.CreateOptions("ThisPathDoesNotExist\\SonarProjectConfig.xml");
+
+            var sut = new SonarAnalysisContext(null, Enumerable.Empty<DiagnosticDescriptor>());
+
+            sut.Invoking(x => x.ProjectConfiguration(options)).Should().Throw<InvalidOperationException>()
+                .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
+        }
+
+        [TestMethod]
+        public void ProjectConfiguration_WhenInvalidXml_ThrowException()
+        {
+            var options = TestHelper.CreateOptions($@"ResourceTests\SonarProjectConfig\Invalid_Xml\SonarProjectConfig.xml");
+
+            var sut = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+
+            sut.Invoking(x => x.ProjectConfiguration(options)).Should().Throw<InvalidOperationException>()
+                .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
+        }
+
+        private class DummyContext : AnalysisContext
+        {
+            public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => throw new NotImplementedException();
+            public override void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) => throw new NotImplementedException();
+            public override void RegisterCompilationAction(Action<CompilationAnalysisContext> action) => throw new NotImplementedException();
+            public override void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) => throw new NotImplementedException();
+            public override void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action) => throw new NotImplementedException();
+            public override void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds) => throw new NotImplementedException();
+            public override void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) => throw new NotImplementedException();
+            public override void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) => throw new NotImplementedException();
         }
     }
 }
