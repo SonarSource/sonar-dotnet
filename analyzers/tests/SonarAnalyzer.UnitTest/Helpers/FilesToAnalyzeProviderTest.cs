@@ -40,9 +40,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
 
             var results = sut.FindFiles("Web.config");
-            results.Should().HaveCount(2);
-            results.Should().Contain(MixedSlashesWebConfigPath1);
-            results.Should().Contain(MixedSlashesWebConfigPath2);
+            results.Should().BeEquivalentTo(new[] { MixedSlashesWebConfigPath1, MixedSlashesWebConfigPath2 });
         }
 
         [TestMethod]
@@ -53,9 +51,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
 
             var results = sut.FindFiles(fileNamePattern);
-            results.Should().HaveCount(2);
-            results.Should().Contain(MixedSlashesWebConfigPath1);
-            results.Should().Contain(MixedSlashesWebConfigPath2);
+            results.Should().BeEquivalentTo(new[] { MixedSlashesWebConfigPath1, MixedSlashesWebConfigPath2 });
         }
 
         [TestMethod]
@@ -76,12 +72,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sut = new FilesToAnalyzeProvider(InvalidFilesToAnalyzePath);
 
             var results = sut.FindFiles(fileNamePattern);
-            results.Should().HaveCount(5);
-            results.Should().Contain(MixedSlashesWebConfigPath2);
-            results.Should().Contain(@"C:\Projects\Controllers:web.config");
-            results.Should().Contain(@"C:web.config");
-            results.Should().Contain(@"C:\Projects<web.config");
-            results.Should().Contain(@"C:\Projects>\Controllers/web.config");
+            results.Should().BeEquivalentTo(new[]
+            {
+                MixedSlashesWebConfigPath2,
+                @"C:\Projects\Controllers:web.config",
+                @"C:web.config",
+                @"C:\Projects<web.config",
+                @"C:\Projects>\Controllers/web.config"
+            });
         }
 
         [TestMethod]
@@ -112,13 +110,15 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
 
             var results = sut.FindFiles(new Regex(".*"));
-            results.Should().HaveCount(6);
-            results.Should().Contain(MixedSlashesWebConfigPath1);
-            results.Should().Contain(MixedSlashesWebConfigPath2);
-            results.Should().Contain(@"C:\Projects\DummyProj\Views\Global.asax");
-            results.Should().Contain(@"C:\Projects\DummyProj\Csharp\Controllers\HomeController.cs");
-            results.Should().Contain(@"C:\Projects\DummyProj\VisualBasic\Controllers\HomeController.vb");
-            results.Should().Contain(@"C:\Projects/DummyProj/Views\Web.confiGuration");
+            results.Should().BeEquivalentTo(new[]
+            {
+                MixedSlashesWebConfigPath1,
+                MixedSlashesWebConfigPath2,
+                @"C:\Projects\DummyProj\Views\Global.asax",
+                @"C:\Projects\DummyProj\Csharp\Controllers\HomeController.cs",
+                @"C:\Projects\DummyProj\VisualBasic\Controllers\HomeController.vb",
+                @"C:\Projects/DummyProj/Views\Web.confiGuration"
+            });
         }
 
         [TestMethod]
