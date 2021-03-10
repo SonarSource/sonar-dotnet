@@ -5,28 +5,35 @@
 
     <!-- Copy project-specific SonarLint.xml to enable project-specific settings, such as file headers -->
     <PropertyGroup>
-      <ProjectSpecificSonarLintXml Condition="Exists('$(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml')">
-        $(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml
-      </ProjectSpecificSonarLintXml>
-      <ProjectSpecificSonarLintXml Condition="!Exists('$(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml')">
-        $(MSBuildStartupDirectory)\config\SonarLint.xml
-      </ProjectSpecificSonarLintXml>
+      <ProjectSpecificSonarLintXml Condition="Exists('$(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml')">$(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml</ProjectSpecificSonarLintXml>
+      <ProjectSpecificSonarLintXml Condition="!Exists('$(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml')">$(MSBuildStartupDirectory)\config\SonarLint.xml</ProjectSpecificSonarLintXml>
     </PropertyGroup>
 
     <PropertyGroup>
       <SonarAnalyzerRegressionTestRunning Condition="Exists('$(MSBuildStartupDirectory)\binaries\SonarAnalyzer.dll')">true</SonarAnalyzerRegressionTestRunning>
       <SonarAnalyzerRegressionTestRunning Condition="$(SonarAnalyzerRegressionTestRunning) == ''">false</SonarAnalyzerRegressionTestRunning>
       <SonarProjectOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</SonarProjectOutputPath>
-      <ProjectConfFilePath>$(SonarProjectOutputPath)\ProjectOutFolderPath.txt</ProjectConfFilePath>
+      <SonarProjectConfigFilePath>$(SonarProjectOutputPath)\SonarProjectConfig.xml</SonarProjectConfigFilePath>
     </PropertyGroup>
+
+    <!-- This section builds content of SonarProjectConfig.xml additional file -->
+    <ItemGroup>
+      <SonarProjectConfigLine Include="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;" />
+      <SonarProjectConfigLine Include="&lt;SonarProjectConfig xmlns=&quot;http://www.sonarsource.com/msbuild/analyzer/2021/1&quot;&gt;" />
+      <SonarProjectConfigLine Include="  &lt;AnalysisConfigPath&gt;&lt;/AnalysisConfigPath&gt;" />
+      <SonarProjectConfigLine Include="  &lt;ProjectPath&gt;$(MSBuildProjectFullPath)&lt;/ProjectPath&gt;" />
+      <SonarProjectConfigLine Include="  &lt;FilesToAnalyzePath&gt;&lt;/FilesToAnalyzePath&gt;" />
+      <SonarProjectConfigLine Include="  &lt;OutPath&gt;$(SonarProjectOutputPath)&lt;/OutPath&gt;" />
+      <SonarProjectConfigLine Include="  &lt;TargetFramework&gt;$(TargetFramework)&lt;/TargetFramework&gt;" />
+      <SonarProjectConfigLine Include="&lt;/SonarProjectConfig&gt;" />
+    </ItemGroup>
 
     <MakeDir Condition="$(SonarAnalyzerRegressionTestRunning)"
             Directories="$(SonarProjectOutputPath)"/>
     <WriteLinesToFile Condition="$(SonarAnalyzerRegressionTestRunning)"
-            File="$(SonarProjectOutputPath)\ProjectOutFolderPath.txt"
-            Lines="$(SonarProjectOutputPath)"
-            Overwrite="true"
-            Encoding="Unicode" />
+            File="$(SonarProjectConfigFilePath)"
+            Lines="@(SonarProjectConfigLine)"
+            Overwrite="true" />
 
     <Error Text="Could not find '$(MSBuildStartupDirectory)\binaries\SonarAnalyzer.dll'" Condition="!$(SonarAnalyzerRegressionTestRunning)" />
 
