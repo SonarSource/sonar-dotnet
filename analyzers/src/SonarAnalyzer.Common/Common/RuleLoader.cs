@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Common
 {
     public class RuleLoader : IRuleLoader
     {
-        public HashSet<string> GetEnabledRules(string path) =>
+        public ISet<string> GetEnabledRules(string path) =>
             XDocument.Load(path)
                      .Descendants("Rule")
                      .Select(r => r.Element("Key")?.Value)
