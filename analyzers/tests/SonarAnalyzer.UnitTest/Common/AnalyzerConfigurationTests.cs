@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllTests()
         {
-            // the Hotspot is static, so we need to test multiple scenarios in the same method (otherwise, the tests will affect themselves)
+            // the Hotspot configuration is static, so we need to test multiple scenarios in the same method (otherwise, the tests will affect themselves)
             // for example, we need to test what happens when the Configuration is not initialized before all the other tests
             var sut = AnalyzerConfiguration.Hotspot;
             var ruleLoaderMock = GetEmptyMock();
