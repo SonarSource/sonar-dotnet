@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
             // See https://github.com/dotnet/roslyn/issues/3798
             compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
 
-        internal static bool AreAnalysisScopeMatching(this Compilation compilation, IEnumerable<DiagnosticDescriptor> diagnostics)
+        internal static bool IsAnalysisScopeMatching(this Compilation compilation, IEnumerable<DiagnosticDescriptor> diagnostics)
         {
             if (compilation == null)
             {

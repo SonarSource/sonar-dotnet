@@ -60,12 +60,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("Path_MixedSeparators", @"c:\foo\bar\.sonarqube\conf/0/FilesToAnalyze.txt")]
         [DataRow("Path_Unix", @"/home/user/.sonarqube/conf/0/FilesToAnalyze.txt")]
         [DataRow("Path_Windows", @"c:\foo\bar\.sonarqube\conf\0\FilesToAnalyze.txt")]
-        public void WithVariousPathFormats_ReturnsValueAsIs(string project, string expectedFilesToAnalyzePath)
-        {
-            var sut = CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\{project}\\SonarProjectConfig.xml");
-
-            sut.FilesToAnalyzePath.Should().Be(expectedFilesToAnalyzePath);
-        }
+        public void WithVariousPathFormats_ReturnsValueAsIs(string project, string expectedFilesToAnalyzePath) =>
+            CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\{project}\\SonarProjectConfig.xml").FilesToAnalyzePath.Should().Be(expectedFilesToAnalyzePath);
 
         [TestMethod]
         public void WhenHasMissingFilesToAnalyzePath_ReturnsCorrectValue()
@@ -80,12 +76,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void WhenHasUnexpectedProjectType_FallsBackToProduct()
-        {
-            var sut = CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\UnexpectedProjectTypeValue\\SonarProjectConfig.xml");
-
-            sut.ProjectType.Should().Be(ProjectType.Product);
-        }
+        public void WhenHasUnexpectedProjectType_FallsBackToProduct() =>
+            CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\UnexpectedProjectTypeValue\\SonarProjectConfig.xml").ProjectType.Should().Be(ProjectType.Product);
 
         [DataTestMethod]
         [DataRow("MissingAnalysisConfigPath")]
@@ -93,23 +85,16 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("MissingProjectPath")]
         [DataRow("MissingProjectType")]
         [DataRow("MissingTargetFramework")]
-        public void WhenHasMissingValues_FilesToAnalyzePath_ReturnsCorrectValue(string folder)
-        {
-            var sut = CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
-
-            sut.FilesToAnalyzePath.Should().Be(@"c:\foo\bar\.sonarqube\conf\0\FilesToAnalyze.txt");
-        }
+        public void WhenHasMissingValues_FilesToAnalyzePath_ReturnsCorrectValue(string folder) =>
+            CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml").FilesToAnalyzePath.Should().Be(@"c:\foo\bar\.sonarqube\conf\0\FilesToAnalyze.txt");
 
         [DataTestMethod]
         [DataRow("Invalid_DifferentClassName")]
         [DataRow("Invalid_DifferentNamespace")]
         [DataRow("Invalid_Xml")]
-        public void WhenInvalid_FilesToReturnPath_ThrowsException(string folder)
-        {
-            Action a = () => CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml");
-
-            a.Should().Throw<InvalidOperationException>().WithMessage("File LogNameFor-SonarProjectConfig.xml could not be parsed.");
-        }
+        public void WhenInvalid_FilesToReturnPath_ThrowsException(string folder) =>
+            Assert.ThrowsException<InvalidOperationException>(() => CreateProjectConfigReader($"ResourceTests\\SonarProjectConfig\\{folder}\\SonarProjectConfig.xml"))
+                .Message.Should().Be("File LogNameFor-SonarProjectConfig.xml could not be parsed.");
 
         [TestMethod]
         public void FilesToAnalyze_LoadsFileFromConfig()
@@ -118,15 +103,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
 <SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
     <FilesToAnalyzePath>ResourceTests\FilesToAnalyze\FilesToAnalyze.txt</FilesToAnalyzePath>
 </SonarProjectConfig>");
+            var files = new ProjectConfigReader(config, null).FilesToAnalyze.FindFiles("web.config");
 
-            var sut = new ProjectConfigReader(config, null);
-            var files = sut.FilesToAnalyze.FindFiles("web.config");
-
-            files.Should().HaveCount(2);
             files.Should().BeEquivalentTo(new[] { @"C:\Projects/DummyProj/wEB.config", @"C:\Projects/DummyProj/Views\Web.confiG" });
         }
 
         private ProjectConfigReader CreateProjectConfigReader(string relativePath) =>
-            new ProjectConfigReader(SourceText.From(File.ReadAllText(relativePath)), "LogNameFor-SonarProjectConfig.xml");
+            new (SourceText.From(File.ReadAllText(relativePath)), "LogNameFor-SonarProjectConfig.xml");
     }
 }

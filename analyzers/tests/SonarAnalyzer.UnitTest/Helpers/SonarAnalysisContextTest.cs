@@ -185,7 +185,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [TestMethod]
         [DataRow(null)]
-        [DataRow("/foo/bar/do-not-exit")]
+        [DataRow("/foo/bar/does-not-exit")]
         [DataRow("/foo/bar/x.xml")]
         public void ProjectConfiguration_WhenAdditionalFileNotPresent_ReturnsEmptyConfig(string folder)
         {

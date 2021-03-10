@@ -178,7 +178,7 @@ namespace SonarAnalyzer.Helpers
                     // First, we need to ensure the rule does apply to the current scope (main vs test source).
                     // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
                     // the decision is made on based on whether the project contains the analyzer as NuGet).
-                    if (getCompilation(c).AreAnalysisScopeMatching(supportedDiagnostics) && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
+                    if (getCompilation(c).IsAnalysisScopeMatching(supportedDiagnostics) && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
                     {
                         registeredAction(c);
                     }
