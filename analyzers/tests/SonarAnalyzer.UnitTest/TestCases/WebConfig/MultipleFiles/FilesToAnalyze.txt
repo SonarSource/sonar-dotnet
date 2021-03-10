@@ -1,0 +1,2 @@
+﻿TestCases\WebConfig\MultipleFiles\Web.config
+TestCases\WebConfig\MultipleFiles\SubFolder\Web.config
