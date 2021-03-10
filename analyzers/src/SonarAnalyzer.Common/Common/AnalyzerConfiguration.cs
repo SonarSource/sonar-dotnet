@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Common
             // Due to this we have to check the current configuration path to see if a reload is needed.
             private string loadedSonarLintXmlPath;
             private bool isInitialized;
-            private HashSet<string> enabledRules;
+            private HashSet<string> enabledRules = new HashSet<string>();
 
             /// <summary>
             /// There could be many rules that check if they are enabled simultaneously and since
@@ -91,15 +91,16 @@ namespace SonarAnalyzer.Common
                         return;
                     }
 
-                    isInitialized = true;
                     loadedSonarLintXmlPath = currentSonarLintXmlPath;
 
                     if (loadedSonarLintXmlPath == null)
                     {
+                        isInitialized = true;
                         return;
                     }
 
                     enabledRules = ruleLoader.GetEnabledRules(loadedSonarLintXmlPath);
+                    isInitialized = true;
                 }
             }
 
