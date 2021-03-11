@@ -35,16 +35,14 @@ namespace SonarAnalyzer.Common
         /// and not by SonarLint, hence the hotspots run only when run through the CLI.
         /// </summary>
         public static IAnalyzerConfiguration Hotspot { get; } =
-            new HotspotConfiguration();
+            new HotspotConfiguration(new RuleLoader());
 
         public static IAnalyzerConfiguration AlwaysEnabled { get; } =
             new AlwaysEnabledConfiguration();
 
-        public static IRuleLoader RuleLoader { get; } = new RuleLoader();
-
         private class AlwaysEnabledConfiguration : IAnalyzerConfiguration
         {
-            public void Initialize(AnalyzerOptions options, IRuleLoader ruleLoader)
+            public void Initialize(AnalyzerOptions options)
             {
                 // Ignore options because we always return true for IsEnabled
             }
@@ -55,14 +53,16 @@ namespace SonarAnalyzer.Common
         /// <summary>
         /// Singleton to hold the configuration for hotspot rules.
         /// </summary>
-        private class HotspotConfiguration : IAnalyzerConfiguration
+        internal /* for tests */ class HotspotConfiguration : IAnalyzerConfiguration
         {
+            private readonly IRuleLoader ruleLoader;
+
             // Hotspot configuration is cached at the assembly level and the MsBuild process
             // can reuse the already loaded assembly when multiple projects are analyzed one after the other.
             // Due to this we have to check the current configuration path to see if a reload is needed.
             private string loadedSonarLintXmlPath;
             private bool isInitialized;
-            private HashSet<string> enabledRules;
+            private ISet<string> enabledRules = new HashSet<string>();
 
             /// <summary>
             /// There could be many rules that check if they are enabled simultaneously and since
@@ -71,12 +71,18 @@ namespace SonarAnalyzer.Common
             /// </summary>
             private static readonly object IsInitializedGate = new object();
 
+            public HotspotConfiguration(IRuleLoader ruleLoader) => this.ruleLoader = ruleLoader;
+
             public bool IsEnabled(string ruleKey) =>
+                // Initialize can be called multiple times, and the `enabledRules` can change between initializations,
+                // so here we have a race condition when a second initialization happens.
+                // We would need to lock here as well, or even better, make IsEnabled and Initialize atomic.
+                // https://github.com/SonarSource/sonar-dotnet/issues/4139
                 isInitialized
                     ? enabledRules.Contains(ruleKey)
                     : throw new InvalidOperationException("Call Initialize() before calling IsEnabled().");
 
-            public void Initialize(AnalyzerOptions options, IRuleLoader ruleLoader)
+            public void Initialize(AnalyzerOptions options)
             {
                 var currentSonarLintXmlPath = GetSonarLintXmlPath(options);
                 if (isInitialized && loadedSonarLintXmlPath == currentSonarLintXmlPath)
@@ -91,15 +97,17 @@ namespace SonarAnalyzer.Common
                         return;
                     }
 
-                    isInitialized = true;
                     loadedSonarLintXmlPath = currentSonarLintXmlPath;
 
                     if (loadedSonarLintXmlPath == null)
                     {
+                        isInitialized = true;
                         return;
                     }
 
+                    // we assume the returned set is not null
                     enabledRules = ruleLoader.GetEnabledRules(loadedSonarLintXmlPath);
+                    isInitialized = true;
                 }
             }
 

@@ -19,6 +19,8 @@
  */
 
 using System.Linq;
+using System.Xml;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 
@@ -28,7 +30,14 @@ namespace SonarAnalyzer.UnitTest.Common
     public class RuleLoaderTest
     {
         [TestMethod]
-        public void GivenAnExistingFile_RuleLoader_LoadsActiveRules() =>
+        public void GivenNonXmlFile_RuleLoader_Throws()
+        {
+            var sut = new RuleLoader();
+            sut.Invoking(x => x.GetEnabledRules(@"Common/Resources/input.txt")).Should().Throw<XmlException>();
+        }
+
+        [TestMethod]
+        public void GivenAnExistingSonarLintFile_RuleLoader_LoadsActiveRules() =>
             CollectionAssert.AreEqual(new RuleLoader().GetEnabledRules(@"Common/Resources/SonarLint.xml").ToArray(),
                                       new[] { "S1067" });
     }
