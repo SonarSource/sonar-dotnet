@@ -1,5 +1,5 @@
 ﻿<Project>
   <ItemGroup>
-    <Content Include="PathOutsideProjectRoot\Web.config" />
+    <Content Include="..\PathOutsideProjectRoot\Web.config" />
   </ItemGroup>
 </Project>
