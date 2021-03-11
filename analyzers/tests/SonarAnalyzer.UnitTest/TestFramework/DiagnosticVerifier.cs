@@ -145,8 +145,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var compilationOptions = compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics);
             var actualToken = cancellationToken ?? CancellationToken.None;
-
-            var analyzerOptions = string.IsNullOrWhiteSpace(sonarProjectConfigPath)? null : TestHelper.CreateOptions(sonarProjectConfigPath);
+            var analyzerOptions = string.IsNullOrWhiteSpace(sonarProjectConfigPath) ? null : TestHelper.CreateOptions(sonarProjectConfigPath);
 
             var diagnostics = compilation
                 .WithOptions(compilationOptions)
