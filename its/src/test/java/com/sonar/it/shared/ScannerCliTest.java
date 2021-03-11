@@ -53,7 +53,6 @@ public class ScannerCliTest {
 
   @Before
   public void init() {
-    TestUtils.deleteLocalCache();
     TestUtils.reset(ORCHESTRATOR);
   }
 

@@ -86,7 +86,7 @@ public class TestUtils {
       "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
   }
 
-  public static Ce.Task getAnalysisWarningsTask(Orchestrator orchestrator, BuildResult buildResult) {
+  private static Ce.Task getAnalysisWarningsTask(Orchestrator orchestrator, BuildResult buildResult) {
     String taskId = extractCeTaskId(buildResult);
     return newWsClient(orchestrator)
       .ce()
@@ -231,6 +231,9 @@ public class TestUtils {
       .withZone(ZoneId.of("UTC"))
       .format(instant);
 
+    LOG.info("TEST SETUP: deleting local analyzers cache");
+    TestUtils.deleteLocalCache();
+
     LOG.info("TEST SETUP: deleting projects analyzed before: " + currentDateTime);
 
     orchestrator.getServer()
@@ -241,7 +244,7 @@ public class TestUtils {
       .execute();
   }
 
-  static WsClient newWsClient(Orchestrator orch) {
+  private static WsClient newWsClient(Orchestrator orch) {
     return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
       .url(orch.getServer().getUrl())
       .build());
@@ -267,7 +270,7 @@ public class TestUtils {
     return folder;
   }
 
-  public static void deleteLocalCache() {
+  private static void deleteLocalCache() {
     // SonarScanner for .NET caches the analyzer, so running the test twice in a row means the old binary is used.
     String localAppData = System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube";
     try {
