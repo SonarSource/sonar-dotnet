@@ -136,8 +136,6 @@ public class MetricsIncludeHeaderCommentTest {
   private static RuleChain getRuleChain() {
     assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
 
-    TestUtils.deleteLocalCache();
-
     return RuleChain
       .outerRule(ORCHESTRATOR)
       .around(temp)
