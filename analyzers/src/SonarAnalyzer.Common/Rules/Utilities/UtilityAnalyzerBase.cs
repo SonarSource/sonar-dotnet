@@ -35,8 +35,6 @@ namespace SonarAnalyzer.Rules
 
         protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
 
-        protected readonly object parameterReadLock = new object();
-
         protected bool IsAnalyzerEnabled { get; set; }
         protected bool IgnoreHeaderComments { get; set; }
         protected virtual bool AnalyzeGeneratedCode { get; set; }
@@ -60,18 +58,12 @@ namespace SonarAnalyzer.Rules
             {
                 outPath = File.ReadAllLines(projectOutFolderAdditionalFile.Path).First();
             }
-            if (settings.Any() && outPath != null)
+            if (settings.Any() && string.IsNullOrEmpty(outPath))
             {
-                lock (parameterReadLock)
-                {
-                    IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, c.Compilation.Language);
-                    AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, c.Compilation.Language);
-                    if (!string.IsNullOrEmpty(outPath))
-                    {
-                        OutPath = Path.Combine(outPath, c.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
-                        IsAnalyzerEnabled = true;
-                    }
-                }
+                IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, c.Compilation.Language);
+                AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, c.Compilation.Language);
+                OutPath = Path.Combine(outPath, c.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
+                IsAnalyzerEnabled = true;
             }
         }
 

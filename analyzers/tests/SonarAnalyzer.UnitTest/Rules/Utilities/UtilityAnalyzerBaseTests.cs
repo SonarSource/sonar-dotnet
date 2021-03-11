@@ -56,12 +56,14 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
         }
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(DefaultProjectOutFolderPath, DefaultSonarProjectConfig)]
+        [DataRow(DefaultSonarProjectConfig, DefaultProjectOutFolderPath)]
         [TestCategory("Utility")]
-        public void ReadConfig_OutPath_FromSonarProjectConfig_HasPriority()
+        public void ReadConfig_OutPath_FromSonarProjectConfig_HasPriority(string firstFile, string secondFile)
         {
             // We do not test what is read from the SonarLint file, but we need it
-            var utilityAnalyzer = new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\SonarLint.xml", DefaultProjectOutFolderPath, DefaultSonarProjectConfig);
+            var utilityAnalyzer = new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\SonarLint.xml", firstFile, secondFile);
 
             utilityAnalyzer.TestOutPath.Should().Be(@"C:\foo\bar\.sonarqube\out\0\output-cs");
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
