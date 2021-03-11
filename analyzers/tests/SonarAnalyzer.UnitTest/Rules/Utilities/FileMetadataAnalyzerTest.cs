@@ -150,8 +150,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
             public string WorkingPath
             {
-                get => WorkDirectoryBasePath;
-                set => WorkDirectoryBasePath = value;
+                get => OutPath;
+                set => OutPath = value;
             }
         }
     }

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
 
         protected override bool AnalyzeGeneratedCode => true;
 
-        protected sealed override FileMetadataInfo GetMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             return new FileMetadataInfo
             {
