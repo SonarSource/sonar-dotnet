@@ -20,7 +20,7 @@
       <SonarProjectType Condition="$(SonarQubeTestProject) == 'true'">Test</SonarProjectType>
     </PropertyGroup>
 
-    <!-- This section builds content of SonarProjectConfig.xml additional file -->
+    <!-- This section builds content of SonarProjectConfig.xml additional file. We need to simulate S4MSB behavior to configure the analyzer. -->
     <ItemGroup>
       <SonarProjectConfigLine Include="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;" />
       <SonarProjectConfigLine Include="&lt;SonarProjectConfig xmlns=&quot;http://www.sonarsource.com/msbuild/analyzer/2021/1&quot;&gt;" />
@@ -34,7 +34,7 @@
     </ItemGroup>
 
     <MakeDir Condition="$(SonarAnalyzerRegressionTestRunning)" Directories="$(SonarProjectOutputPath)"/>
-    <!-- First FINDSTR removes \bin\, \obj\ and \packages\ subdirectories from FilesToAnalyze.txt. Second FINDSTR includes only files with an extension, becase DIR lists also directories themlselves.-->
+    <!-- First FINDSTR removes \bin\, \obj\ and \packages\ subdirectories from FilesToAnalyze.txt. Second FINDSTR includes only files with an extension, because DIR lists also directories themselves.-->
     <Exec Command="dir &quot;$(MSBuildStartupDirectory)\sources\$(PROJECT)&quot; /s /b | findstr /v &quot;\\bin\\ \\obj\\ \\packages\\&quot; | findstr /e /r &quot;\\[^\\]*\.[^\\]*&quot; > &quot;$(SonarFilesToAnalyzePath)&quot;"/>
     <WriteLinesToFile Condition="$(SonarAnalyzerRegressionTestRunning)"
             File="$(SonarProjectConfigFilePath)"
