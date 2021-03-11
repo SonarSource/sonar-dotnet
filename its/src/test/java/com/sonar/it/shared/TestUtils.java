@@ -38,6 +38,8 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -148,8 +150,11 @@ public class TestUtils {
   public static void runMSBuild(Orchestrator orch, Path projectDir, String... arguments) {
     Path msBuildPath = getMsBuildPath(orch);
 
+    List<String> argumentList = new ArrayList<>(Arrays.asList(arguments));
+    argumentList.add("/warnaserror:AD0001");
+
     Command command = Command.create(msBuildPath.toString())
-      .addArguments(arguments)
+      .addArguments(argumentList)
       .setEnvironmentVariable("AGENT_BUILDDIRECTORY", projectDir.toString())
       .setDirectory(projectDir.toFile());
 
