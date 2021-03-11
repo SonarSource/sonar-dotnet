@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S5753",
+"message":  "Make sure disabling ASP.NET Request Validation feature is safe here.",
+"location":  {
+"uri":  "sources\WebConfig\Views\Web.config",
+"region":  {
+"startLine":  35,
+"startColumn":  12,
+"endLine":  35,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S5753",
+"message":  "Make sure disabling ASP.NET Request Validation feature is safe here.",
+"location":  {
+"uri":  "sources\WebConfig\Web.config",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  45
+}
+}
+}
+]
+}
