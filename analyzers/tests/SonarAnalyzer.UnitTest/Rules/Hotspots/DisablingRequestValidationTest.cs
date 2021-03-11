@@ -40,11 +40,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string AspNetMvcVersion = "5.2.7";
         private const string WebConfig = "Web.config";
         private const string SonarProjectConfig = "SonarProjectConfig.xml";
-        private const string FilesToAnalyze = "FilesToAnalyze.txt";
         // for the tests that don't test the XML logic, to avoid test failures caused by unexpected issues from Web.config files
         private const string ProjectConfigTemplate = @"
 <SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
-    <FilesToAnalyzePath>{0}</FilesToAnalyzePath>
+    <FilesToAnalyzePath>{0}\FilesToAnalyze.txt</FilesToAnalyzePath>
 </SonarProjectConfig>";
 
         [TestMethod]
@@ -66,12 +65,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\WebConfig\Foo")]
         [DataRow(@"TestCases\WebConfig\Corrupt")]
         [TestCategory("Rule")]
-        public void DisablingRequestValidation_CS_WebConfig(string root) =>
+        public void DisablingRequestValidation_CS_WebConfig(string root)
+        {
+            WriteSonarProjectConfigToDisk(root);
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                File.ReadAllText(Path.Combine(root, WebConfig)), Path.Combine(root, SonarProjectConfig),
-                GetSonarProjectConfigWithFilesToAnalyze(root));
+                File.ReadAllText(Path.Combine(root, WebConfig)),
+                Path.Combine(root, SonarProjectConfig));
+        }
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\MultipleFiles", "SubFolder")]
@@ -82,12 +84,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
             var languageVersion = compilation.LanguageVersionString();
 
+            WriteSonarProjectConfigToDisk(rootDirectory);
             var allDiagnostics = DiagnosticVerifier.GetDiagnostics(
                 compilation,
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default,
-                analyzerOptions: TestHelper.CreateOptions(Path.Combine(rootDirectory, SonarProjectConfig),
-                GetSonarProjectConfigWithFilesToAnalyze(rootDirectory))).ToList();
+                sonarProjectConfigPath: Path.Combine(rootDirectory, SonarProjectConfig)).ToList();
 
             allDiagnostics.Should().NotBeEmpty();
             var rootWebConfig = Path.Combine(rootDirectory, WebConfig);
@@ -104,12 +106,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisablingRequestValidation_CS_WebConfig_LowerCase()
         {
             var root = @"TestCases\WebConfig\LowerCase";
+            WriteSonarProjectConfigToDisk(root);
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 File.ReadAllText(Path.Combine(root, "web.config")),
-                Path.Combine(root, SonarProjectConfig),
-                GetSonarProjectConfigWithFilesToAnalyze(root));
+                Path.Combine(root, SonarProjectConfig));
         }
 
         [TestMethod]
@@ -131,12 +133,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisablingRequestValidation_VB_WebConfig()
         {
             var root = @"TestCases\WebConfig\S5753Values";
+            WriteSonarProjectConfigToDisk(root);
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 File.ReadAllText(Path.Combine(root, WebConfig)),
-                Path.Combine(root, SonarProjectConfig),
-                GetSonarProjectConfigWithFilesToAnalyze(root));
+                Path.Combine(root, SonarProjectConfig));
         }
 
         // Verifies the results for the given web.config file path.
@@ -147,7 +149,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             DiagnosticVerifier.CompareActualToExpected(languageVersion, actualIssues, expectedIssues, false);
         }
 
-        private static SourceText GetSonarProjectConfigWithFilesToAnalyze(string filesToAnalyzeDirectory) =>
-            SourceText.From(string.Format(ProjectConfigTemplate, Path.Combine(filesToAnalyzeDirectory, FilesToAnalyze)));
+        private static void WriteSonarProjectConfigToDisk(string filesToAnalyzeDirectory) =>
+            File.WriteAllText(Path.Combine(filesToAnalyzeDirectory, SonarProjectConfig), string.Format(ProjectConfigTemplate, filesToAnalyzeDirectory));
     }
 }
