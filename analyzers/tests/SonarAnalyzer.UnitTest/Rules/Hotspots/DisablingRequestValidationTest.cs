@@ -84,7 +84,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             var languageVersion = compilation.LanguageVersionString();
             var oldCulture = Thread.CurrentThread.CurrentCulture;
             var newCulture = (CultureInfo)oldCulture.Clone();
-            newCulture.NumberFormat.NumberDecimalSeparator = ",";   // decimal.TryParse from the implementation might not recognize 1.2 under different culture
+            // decimal.TryParse() from the implementation might not recognize "1.2" under different culture
+            newCulture.NumberFormat.NumberDecimalSeparator = ",";
             Thread.CurrentThread.CurrentCulture = newCulture;
             try
             {
