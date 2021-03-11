@@ -18,7 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
+using System.IO;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -50,12 +54,40 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal CookieShouldBeHttpOnly(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration, DiagnosticId, MessageFormat) { }
 
+        protected override bool IsRuleApplicable(SonarAnalysisContext context, AnalyzerOptions options)
+        {
+            foreach (var fullPath in context.ProjectConfiguration(options).FilesToAnalyze.FindFiles("web.config"))
+            {
+                var webConfig = File.ReadAllText(fullPath);
+                if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc
+                    && IsHttpOnlyCookies(doc))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         protected override void Initialize(TrackerInput input)
         {
             var t = CSharpFacade.Instance.Tracker.ObjectCreation;
             t.Track(input,
                 t.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
                 t.ExceptWhen(t.ArgumentIsBoolConstant("httpOnly", true)));
+        }
+
+        private static bool IsHttpOnlyCookies(XDocument document)
+        {
+            foreach (var pages in document.XPathSelectElements("configuration/system.web/httpCookies"))
+            {
+                if (pages.GetAttributeIfBoolValueIs("httpOnlyCookies", true) is { } _)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

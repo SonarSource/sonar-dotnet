@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Trackers;
@@ -36,6 +37,8 @@ namespace SonarAnalyzer.Rules
         protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat)
             : base(configuration, diagnosticId, messageFormat, RspecStrings.ResourceManager) { }
 
+        protected virtual bool IsRuleApplicable(SonarAnalysisContext context, AnalyzerOptions options) => true;
+
         protected override void Initialize(TrackerInput input)
         {
             // This should be overriden by inheriting class that uses trackers
@@ -47,7 +50,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterCompilationStartAction(
                 ccc =>
                 {
-                    if (!IsEnabled(ccc.Options))
+                    if (!IsEnabled(ccc.Options) || !IsRuleApplicable(context, ccc.Options))
                     {
                         return;
                     }
