@@ -1,1 +1,2 @@
 ﻿TestCases\WebConfig\Corrupt\Web.config
+TestCases\WebConfig\Corrupt\ThisDirectoryDoesNotExist\Web.config
