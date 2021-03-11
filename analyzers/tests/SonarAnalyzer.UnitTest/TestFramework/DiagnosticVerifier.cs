@@ -43,8 +43,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             "BC36716" // VB12 does not support line continuation comments" i.e. a comment at the end of a multi-line statement.
         };
 
-        public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileContent) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, SourceText.From(fileContent));
+        public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileContent, string sonarProjectConfigPath) =>
+            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, SourceText.From(fileContent), sonarProjectConfigPath);
 
         public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode) =>
             Verify(compilation, new[] { diagnosticAnalyzer }, checkMode);
@@ -52,12 +52,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode) =>
             Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).First().GetText());
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode, SourceText source)
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode, SourceText source, string sonarProjectConfigPath = null)
         {
             SuppressionHandler.HookSuppression();
             try
             {
-                var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzers, checkMode);
+                var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath: sonarProjectConfigPath);
                 var expectedIssues = new IssueLocationCollector().GetExpectedIssueLocations(source.Lines).ToList();
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
 
@@ -125,8 +125,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
             DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode,
-            bool verifyNoExceptionIsThrown = true) =>
-            GetDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, verifyNoExceptionIsThrown);
+            bool verifyNoExceptionIsThrown = true,
+            string sonarProjectConfigPath = null) =>
+            GetDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, verifyNoExceptionIsThrown, sonarProjectConfigPath);
 
         public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default) =>
             GetDiagnostics(compilation, diagnosticAnalyzer, checkMode).Should().BeEmpty();
@@ -134,7 +135,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<Diagnostic> GetAllDiagnostics(Compilation compilation,
             IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode,
             bool verifyNoException = true,
-            CancellationToken? cancellationToken = null)
+            CancellationToken? cancellationToken = null,
+            string sonarProjectConfigPath = null)
         {
             var supportedDiagnostics = diagnosticAnalyzers
                     .SelectMany(analyzer => analyzer.SupportedDiagnostics)
@@ -143,10 +145,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var compilationOptions = compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics);
             var actualToken = cancellationToken ?? CancellationToken.None;
+            var analyzerOptions = string.IsNullOrWhiteSpace(sonarProjectConfigPath) ? null : TestHelper.CreateOptions(sonarProjectConfigPath);
 
             var diagnostics = compilation
                 .WithOptions(compilationOptions)
-                .WithAnalyzers(diagnosticAnalyzers.ToImmutableArray())
+                .WithAnalyzers(diagnosticAnalyzers.ToImmutableArray(), analyzerOptions)
                 .GetAllDiagnosticsAsync(actualToken)
                 .Result;
 
@@ -167,7 +170,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         internal static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
             DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode,
-            bool verifyNoExceptionIsThrown = true)
+            bool verifyNoExceptionIsThrown = true,
+            string sonarProjectConfigPath = null)
         {
             var ids = diagnosticAnalyzers
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
@@ -175,7 +179,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Distinct()
                 .ToHashSet();
 
-            return GetAllDiagnostics(compilation, diagnosticAnalyzers, checkMode, verifyNoExceptionIsThrown)
+            return GetAllDiagnostics(compilation, diagnosticAnalyzers, checkMode, verifyNoExceptionIsThrown, sonarProjectConfigPath: sonarProjectConfigPath)
                 .Where(d => ids.Contains(d.Id));
         }
 
