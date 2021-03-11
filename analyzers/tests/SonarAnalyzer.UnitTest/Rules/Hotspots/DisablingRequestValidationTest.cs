@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Thread.CurrentThread.CurrentCulture = newCulture;
             try
             {
-                var allDiagnostics = DiagnosticVerifier.GetDiagnostics(
+                allDiagnostics = DiagnosticVerifier.GetDiagnostics(
                     compilation,
                     new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                     CompilationErrorBehavior.Default,
