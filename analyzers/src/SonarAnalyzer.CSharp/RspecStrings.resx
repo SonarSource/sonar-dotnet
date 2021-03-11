@@ -1648,7 +1648,7 @@
     <value>ready</value>
   </data>
   <data name="S122_Tags" xml:space="preserve">
-    <value>style</value>
+    <value>convention</value>
   </data>
   <data name="S122_Title" xml:space="preserve">
     <value>Statements should be on separate lines</value>
@@ -12575,7 +12575,7 @@
     <value>SECURITY_HOTSPOT</value>
   </data>
   <data name="S5445_Category" xml:space="preserve">
-    <value>Blocker Vulnerability</value>
+    <value>Critical Vulnerability</value>
   </data>
   <data name="S5445_Description" xml:space="preserve">
     <value>Creating temporary files using insecure methods exposes the application to race conditions on filenames: a malicious user can try to create a file with a predictable name before the application does. A successful attack can result in other files being accessed, modified, corrupted or deleted. This risk is even higher if the application run with elevated permissions.</value>
@@ -12587,7 +12587,7 @@
     <value>Main</value>
   </data>
   <data name="S5445_Severity" xml:space="preserve">
-    <value>Blocker</value>
+    <value>Critical</value>
   </data>
   <data name="S5445_Status" xml:space="preserve">
     <value>ready</value>
@@ -12773,7 +12773,7 @@
     <value>Major Vulnerability</value>
   </data>
   <data name="S5773_Description" xml:space="preserve">
-    <value>Failure to control types during deserialization can lead to runtime errors and vulnerabilities. There are many types, called "gadgets" (see ysoserial.net) which are known to be not secure when deserializing. </value>
+    <value>During the deserialization process, the state of an object will be reconstructed from the serialized data stream which can contain dangerous operations. </value>
   </data>
   <data name="S5773_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
