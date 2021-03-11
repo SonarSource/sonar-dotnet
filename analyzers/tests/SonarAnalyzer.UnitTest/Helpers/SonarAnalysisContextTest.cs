@@ -224,7 +224,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
         }
 
-        private class DummyContext : AnalysisContext
+        internal class DummyContext : AnalysisContext
         {
             public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => throw new NotImplementedException();
             public override void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) => throw new NotImplementedException();

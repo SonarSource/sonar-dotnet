@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -112,7 +113,7 @@ namespace SonarAnalyzer.Rules
             foreach (var httpRuntime in doc.XPathSelectElements("configuration/system.web/httpRuntime"))
             {
                 if (httpRuntime.Attribute("requestValidationMode") is { } requestValidationMode
-                    && decimal.TryParse(requestValidationMode.Value, out var value)
+                    && decimal.TryParse(requestValidationMode.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out var value)
                     && value < MinimumAcceptedRequestValidationModeValue
                     && CreateLocation(webConfigPath, httpRuntime, requestValidationMode.ToString()) is { } location)
                 {

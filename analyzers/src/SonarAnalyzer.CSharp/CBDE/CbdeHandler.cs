@@ -21,16 +21,16 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.CBDE
@@ -40,23 +40,24 @@ namespace SonarAnalyzer.CBDE
         private const int ProcessStatPeriodMs = 1000;
         private const string CbdeOutputFileName = "cbdeSEout.xml";
 
+        protected HashSet<string> csSourceFileNames= new HashSet<string>();
+        protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
+
+        private static readonly object LogFileLock = new object();
+        private static readonly object MetricsFileLock = new object();
+        private static readonly object PerfFileLock = new object();
+        private static readonly object StaticInitLock = new object();
         private static bool initialized;
         // this is the place where the cbde executable is unpacked. It is in a temp folder
         private static string extractedCbdeBinaryPath;
-        private static readonly object logFileLock = new object();
-        private static readonly object metricsFileLock = new object();
-        private static readonly object perfFileLock = new object();
-        private static readonly object staticInitLock = new object();
 
         private readonly Action<string, string, Location, CompilationAnalysisContext> raiseIssue;
-        private readonly Func<CompilationAnalysisContext, bool> shouldRunInContext;
-        private readonly Func<string> getOutputDirectory;
-
-        // This is used by unit tests that want to check the log (whose path is the parameter of this action) contains
-        // what is expected
+        // This is used by unit tests that want to check the log (whose path is the parameter of this action) contains what is expected
         private readonly Action<string> onCbdeExecution;
-        protected HashSet<string> csSourceFileNames= new HashSet<string>();
-        protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
+        // the cbdeExecutablePath is normally the extractedCbdeBinaryPath, but can be different in tests
+        private readonly string cbdeExecutablePath;
+        private readonly bool emitLog;
+        private readonly bool unitTest;
         private StringBuilder logStringBuilder;
 
         // cbdePath is inside .sonarqube/out/<n>/
@@ -64,8 +65,6 @@ namespace SonarAnalyzer.CBDE
         // cbdeProcessSpecificPath is the $"{cbdePath}/CBDE_{pid}/" folder
         // cbdeLogFile, cbdeMetricsLogFile and cbdePerfLogFile are inside cbdeProcessSpecificPath
         private string cbdePath;
-        // the cbdeExecutablePath is normally the extractedCbdeBinaryPath, but can be different in tests
-        private readonly string cbdeExecutablePath;
         private string cbdeDirectoryRoot;
         private string cbdeDirectoryAssembly;
         private string cbdeResultsPath;
@@ -73,21 +72,19 @@ namespace SonarAnalyzer.CBDE
         private string cbdeMetricsLogFile;
         private string cbdePerfLogFile;
         private string moreDetailsMessage;
-        private readonly bool emitLog;
 
         public CbdeHandler(Action<string, string, Location, CompilationAnalysisContext> raiseIssue,
-            Func<CompilationAnalysisContext, bool> shouldRunInContext,
-            Func<string> getOutputDirectory,
-            string testCbdeBinaryPath = null, //  Used by unit tests
+            bool unitTest,
+            string testCbdeBinaryPath = null, // Used by unit tests
             Action<string> onCbdeExecution = null) // Used by unit tests
         {
             this.raiseIssue = raiseIssue;
-            this.shouldRunInContext = shouldRunInContext;
-            this.getOutputDirectory = getOutputDirectory;
+            this.unitTest = unitTest;
+
             this.onCbdeExecution = onCbdeExecution;
-            lock (staticInitLock)
+            lock (StaticInitLock)
             {
-                if(!initialized)
+                if (!initialized)
                 {
                     Initialize();
                     initialized = true;
@@ -116,12 +113,14 @@ namespace SonarAnalyzer.CBDE
             context.RegisterCompilationAction(
                 c =>
                 {
-                    if (!shouldRunInContext(c))
+                    // Do not run CBDE in SonarLint. OutPath is present only when run from S4MSB.
+                    var outPath = unitTest ? Path.GetTempPath() : context.ProjectConfiguration(c.Options).OutPath;
+                    if (string.IsNullOrEmpty(outPath))
                     {
                         return;
                     }
                     var compilationHash = c.Compilation.GetHashCode();
-                    InitializePathsAndLog(c.Compilation.Assembly.Name, compilationHash);
+                    InitializePathsAndLog(outPath, c.Compilation.Assembly.Name, compilationHash);
                     Log("CBDE: Compilation phase");
                     var exporterMetrics = new MlirExporterMetrics();
                     try
@@ -144,7 +143,7 @@ namespace SonarAnalyzer.CBDE
                         Log($"CBDE: CBDE execution and reporting time: {watch.ElapsedMilliseconds} ms");
                         Log($"CBDE: CBDE execution and reporting cpu time: {cpuWatch.ElapsedMilliseconds} ms");
                         Log("CBDE: End of compilation");
-                        lock (metricsFileLock)
+                        lock (MetricsFileLock)
                         {
                             File.AppendAllText(cbdeMetricsLogFile, exporterMetrics.Dump());
                         }
@@ -176,7 +175,7 @@ Stack trace: {e.StackTrace}";
         {
             if (emitLog)
             {
-                lock (logFileLock)
+                lock (LogFileLock)
                 {
                     var message = $"{DateTime.Now} ({Thread.CurrentThread.ManagedThreadId,5}): {s}\n";
                     File.AppendAllText(cbdeLogFile, message);
@@ -186,7 +185,7 @@ Stack trace: {e.StackTrace}";
 
         private void PerformanceLog(string s)
         {
-            lock (perfFileLock)
+            lock (PerfFileLock)
             {
                 File.AppendAllText(cbdePerfLogFile, s);
             }
@@ -196,7 +195,7 @@ Stack trace: {e.StackTrace}";
         {
             extractedCbdeBinaryPath = Path.Combine(Path.GetTempPath(), $"CBDE_{Process.GetCurrentProcess().Id}");
             Directory.CreateDirectory(extractedCbdeBinaryPath);
-            lock (logFileLock)
+            lock (LogFileLock)
             {
                 if (File.Exists(extractedCbdeBinaryPath))
                 {
@@ -231,9 +230,9 @@ Stack trace: {e.StackTrace}";
             return path;
         }
 
-        private void InitializePathsAndLog(string assemblyName, int compilationHash)
+        private void InitializePathsAndLog(string outPath, string assemblyName, int compilationHash)
         {
-            SetupMlirRootDirectory();
+            SetupMlirRootDirectory(outPath);
             cbdeDirectoryAssembly = Path.Combine(cbdeDirectoryRoot, assemblyName, compilationHash.ToString());
             if (Directory.Exists(cbdeDirectoryAssembly))
             {
@@ -245,18 +244,10 @@ Stack trace: {e.StackTrace}";
             LogIfFailure($">> New Cbde Run triggered at {DateTime.Now.ToShortTimeString()}");
         }
 
-        private void SetupMlirRootDirectory()
+        private void SetupMlirRootDirectory(string outPath)
         {
-            if((getOutputDirectory() != null) && (getOutputDirectory().Length != 0))
-            {
-                cbdePath = Path.Combine(getOutputDirectory(), "cbde");
-                Directory.CreateDirectory(cbdePath);
-            }
-            else
-            {
-                // used only when doing the unit test
-                cbdePath = Path.GetTempPath();
-            }
+            cbdePath = Path.Combine(outPath, "cbde");
+            Directory.CreateDirectory(cbdePath);
             var cbdeProcessSpecificPath = Path.Combine(cbdePath, $"CBDE_{Process.GetCurrentProcess().Id}");
             Directory.CreateDirectory(cbdeProcessSpecificPath);
             cbdeLogFile = Path.Combine(cbdeProcessSpecificPath, "cbdeHandler.log");
@@ -401,7 +392,7 @@ Stack trace: {e.StackTrace}";
                     RaiseIssueFromXElement(i, context);
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 if (exception is XmlException || exception is NullReferenceException)
                 {
@@ -417,9 +408,8 @@ Stack trace: {e.StackTrace}";
 
         private class ThreadCpuStopWatch
         {
-            private double totalMsStart;
-
             private readonly ProcessThread currentProcessThread;
+            private double totalMsStart;
 
             public void Reset() =>
                 totalMsStart = currentProcessThread?.TotalProcessorTime.TotalMilliseconds ?? 0;

@@ -40,13 +40,10 @@ namespace SonarAnalyzer.Rules
 
         protected abstract MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
-        protected sealed override MetricsInfo GetMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override MetricsInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var metrics = GetMetrics(syntaxTree, semanticModel);
-            return CalculateMetrics(metrics, syntaxTree.FilePath,
-                syntaxTree.GetRoot().Language == LanguageNames.CSharp
-                ? IgnoreHeaderComments[IgnoreHeaderCommentsCSharp]
-                : IgnoreHeaderComments[IgnoreHeaderCommentsVisualBasic]);
+            return CalculateMetrics(metrics, syntaxTree.FilePath, IgnoreHeaderComments);
         }
 
         internal /* for MsBuild12 support */ static MetricsInfo CalculateMetrics(MetricsBase metrics, string filePath, bool ignoreHeaderComments)
