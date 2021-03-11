@@ -15,8 +15,8 @@
       <SonarProjectOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</SonarProjectOutputPath>
       <SonarProjectConfigFilePath>$(SonarProjectOutputPath)\SonarProjectConfig.xml</SonarProjectConfigFilePath>
       <!-- Only projects with explicit SonarQubeTestProject=true will be classified as test ones. -->
-      <SonarProjectType condition="$(SonarQubeTestProject) != 'true'">Product</SonarProjectType>
-      <SonarProjectType condition="$(SonarQubeTestProject) == 'true'">Test</SonarProjectType>
+      <SonarProjectType Condition="$(SonarQubeTestProject) != 'true'">Product</SonarProjectType>
+      <SonarProjectType Condition="$(SonarQubeTestProject) == 'true'">Test</SonarProjectType>
     </PropertyGroup>
 
     <!-- This section builds content of SonarProjectConfig.xml additional file -->
