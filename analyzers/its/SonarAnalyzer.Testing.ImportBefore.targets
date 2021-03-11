@@ -14,6 +14,9 @@
       <SonarAnalyzerRegressionTestRunning Condition="$(SonarAnalyzerRegressionTestRunning) == ''">false</SonarAnalyzerRegressionTestRunning>
       <SonarProjectOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</SonarProjectOutputPath>
       <SonarProjectConfigFilePath>$(SonarProjectOutputPath)\SonarProjectConfig.xml</SonarProjectConfigFilePath>
+      <!-- Only projects with explicit SonarQubeTestProject=true will be classified as test ones. -->
+      <SonarProjectType condition="$(SonarQubeTestProject) != 'true'">Product</SonarProjectType>
+      <SonarProjectType condition="$(SonarQubeTestProject) == 'true'">Test</SonarProjectType>
     </PropertyGroup>
 
     <!-- This section builds content of SonarProjectConfig.xml additional file -->
@@ -24,6 +27,7 @@
       <SonarProjectConfigLine Include="  &lt;ProjectPath&gt;$(MSBuildProjectFullPath)&lt;/ProjectPath&gt;" />
       <SonarProjectConfigLine Include="  &lt;FilesToAnalyzePath&gt;&lt;/FilesToAnalyzePath&gt;" />
       <SonarProjectConfigLine Include="  &lt;OutPath&gt;$(SonarProjectOutputPath)&lt;/OutPath&gt;" />
+      <SonarProjectConfigLine Include="  &lt;ProjectType&gt;$(SonarProjectType)&lt;/ProjectType&gt;" />
       <SonarProjectConfigLine Include="  &lt;TargetFramework&gt;$(TargetFramework)&lt;/TargetFramework&gt;" />
       <SonarProjectConfigLine Include="&lt;/SonarProjectConfig&gt;" />
     </ItemGroup>

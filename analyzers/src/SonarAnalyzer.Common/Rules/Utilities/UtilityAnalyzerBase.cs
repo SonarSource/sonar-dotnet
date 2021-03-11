@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules
             {
                 outPath = File.ReadAllLines(projectOutFolderAdditionalFile.Path).First();
             }
-            if (settings.Any() && string.IsNullOrEmpty(outPath))
+            if (settings.Any() && !string.IsNullOrEmpty(outPath))
             {
                 IgnoreHeaderComments = PropertiesHelper.ReadIgnoreHeaderCommentsProperty(settings, c.Compilation.Language);
                 AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, c.Compilation.Language);
