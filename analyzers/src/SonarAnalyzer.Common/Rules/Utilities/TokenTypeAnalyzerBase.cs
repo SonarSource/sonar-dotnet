@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override string FileName => TokenTypeFileName;
 
-        protected sealed override TokenTypeInfo GetMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             return GetTokenTypeInfo(syntaxTree, semanticModel);
         }

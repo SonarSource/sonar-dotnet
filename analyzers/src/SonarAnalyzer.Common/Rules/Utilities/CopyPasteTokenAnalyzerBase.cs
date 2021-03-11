@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override string FileName => CopyPasteTokenFileName;
 
-        protected sealed override CopyPasteTokenInfo GetMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             return CalculateTokenInfo(syntaxTree);
         }

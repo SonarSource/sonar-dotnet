@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override string FileName => SymbolReferenceFileName;
 
-        protected sealed override SymbolReferenceInfo GetMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             return CalculateSymbolReferenceInfo(syntaxTree, semanticModel, IsIdentifier, GetBindableParent, GetSetKeyword);
         }

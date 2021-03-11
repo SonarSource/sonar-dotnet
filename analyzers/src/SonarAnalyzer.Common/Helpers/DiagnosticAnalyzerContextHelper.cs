@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         public static bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
-            options.ShouldAnalyzeGeneratedCode(c.Language) || !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
+            PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(PropertiesHelper.GetSettings(options), c.Language) || !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
 
         public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)
         {

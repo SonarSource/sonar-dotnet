@@ -19,124 +19,100 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Text;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Rules.Utilities
 {
     [TestClass]
     public class UtilityAnalyzerBaseTests
     {
-        private static DummySourceText DUMMY_TEXT = new DummySourceText();
+        private const string DefaultSonarProjectConfig = @"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml";
+        private const string DefaultProjectOutFolderPath = @"ResourceTests\ProjectOutFolderPath.txt";
 
         [DataTestMethod]
-        [DataRow(LanguageNames.CSharp, "path\\output-cs")]
-        [DataRow(LanguageNames.VisualBasic, "path\\output-vbnet")]
+        [DataRow(LanguageNames.CSharp, DefaultProjectOutFolderPath, @"path\output-cs")]
+        [DataRow(LanguageNames.VisualBasic, DefaultProjectOutFolderPath, @"path\output-vbnet")]
+        [DataRow(LanguageNames.CSharp, DefaultSonarProjectConfig, @"C:\foo\bar\.sonarqube\out\0\output-cs")]
+        [DataRow(LanguageNames.VisualBasic, DefaultSonarProjectConfig, @"C:\foo\bar\.sonarqube\out\0\output-vbnet")]
         [TestCategory("Utility")]
-        public void UtilityAnalyzerBase_ReadParameters_OutputPath(string language, string expectedWorkDirectoryPath)
+        public void ReadConfig_OutPath(string language, string additionalPath, string expectedOutPath)
         {
-            // we do not test what is read from the SonarLint file, but we need it
-            var sonarLintFile = CreateMockAdditionalText(DUMMY_TEXT, "ResourceTests\\SonarLint.xml");
-            // the output path is inside this file:
-            var projectOutputFile = CreateMockAdditionalText(DUMMY_TEXT, "ResourceTests\\ProjectOutFolderPath.txt");
-            var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(sonarLintFile.Object, projectOutputFile.Object));
+            // We do not test what is read from the SonarLint file, but we need it
+            var utilityAnalyzer = new TestUtilityAnalyzer(language, @"ResourceTests\SonarLint.xml", additionalPath);
 
-            // Act
-            var utilityAnalyzer = new TestUtilityAnalyzer();
-            utilityAnalyzer.TestReadParameters(analyzerOptions, language);
-
-            // Assert
-            utilityAnalyzer.TestWorkDirectoryBasePath.Should().Be(expectedWorkDirectoryPath);
+            utilityAnalyzer.TestOutPath.Should().Be(expectedOutPath);
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
         }
 
         [DataTestMethod]
-        [DataRow(LanguageNames.CSharp, "ResourceTests\\AnalyzeGeneratedTrue\\SonarLint.xml", true)]
-        [DataRow(LanguageNames.CSharp, "ResourceTests\\AnalyzeGeneratedFalse\\SonarLint.xml", false)]
-        [DataRow(LanguageNames.VisualBasic, "ResourceTests\\AnalyzeGeneratedTrueVbnet\\SonarLint.xml", true)]
-        [DataRow(LanguageNames.VisualBasic, "ResourceTests\\AnalyzeGeneratedFalseVbnet\\SonarLint.xml", false)]
+        [DataRow(DefaultProjectOutFolderPath, DefaultSonarProjectConfig)]
+        [DataRow(DefaultSonarProjectConfig, DefaultProjectOutFolderPath)]
         [TestCategory("Utility")]
-        public void UtilityAnalyzerBase_ReadsSettings_AnalyzeGenerated(string language, string sonarLintXmlPath, bool expectedAnalyzeGeneratedCodeValue)
+        public void ReadConfig_OutPath_FromSonarProjectConfig_HasPriority(string firstFile, string secondFile)
         {
-            var sonarLintFile = CreateMockAdditionalText(DUMMY_TEXT, sonarLintXmlPath);
-            var projectOutputFile = CreateMockAdditionalText(DUMMY_TEXT, "ResourceTests\\ProjectOutFolderPath.txt");
-            var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(sonarLintFile.Object, projectOutputFile.Object));
+            // We do not test what is read from the SonarLint file, but we need it
+            var utilityAnalyzer = new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\SonarLint.xml", firstFile, secondFile);
 
-            // Act
-            var utilityAnalyzer = new TestUtilityAnalyzer();
-            utilityAnalyzer.TestReadParameters(analyzerOptions, language);
+            utilityAnalyzer.TestOutPath.Should().Be(@"C:\foo\bar\.sonarqube\out\0\output-cs");
+            utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
+        }
 
-            // Assert
+        [DataTestMethod]
+        [DataRow(LanguageNames.CSharp, @"ResourceTests\AnalyzeGeneratedTrue\SonarLint.xml", true)]
+        [DataRow(LanguageNames.CSharp, @"ResourceTests\AnalyzeGeneratedFalse\SonarLint.xml", false)]
+        [DataRow(LanguageNames.VisualBasic, @"ResourceTests\AnalyzeGeneratedTrueVbnet\SonarLint.xml", true)]
+        [DataRow(LanguageNames.VisualBasic, @"ResourceTests\AnalyzeGeneratedFalseVbnet\SonarLint.xml", false)]
+        [TestCategory("Utility")]
+        public void ReadsSettings_AnalyzeGenerated(string language, string sonarLintXmlPath, bool expectedAnalyzeGeneratedCodeValue)
+        {
+            var utilityAnalyzer = new TestUtilityAnalyzer(language, sonarLintXmlPath, DefaultSonarProjectConfig);
+
             utilityAnalyzer.TestAnalyzeGeneratedCode.Should().Be(expectedAnalyzeGeneratedCodeValue);
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
         }
 
         [DataTestMethod]
-        [DataRow(LanguageNames.CSharp, UtilityAnalyzerBase.IgnoreHeaderCommentsCSharp, "ResourceTests\\IgnoreHeaderCommentsTrueCSharp\\SonarLint.xml", true)]
-        [DataRow(LanguageNames.CSharp, UtilityAnalyzerBase.IgnoreHeaderCommentsCSharp, "ResourceTests\\IgnoreHeaderCommentsFalseCSharp\\SonarLint.xml", false)]
-        [DataRow(LanguageNames.VisualBasic, UtilityAnalyzerBase.IgnoreHeaderCommentsVisualBasic, "ResourceTests\\IgnoreHeaderCommentsTrueVbnet\\SonarLint.xml", true)]
-        [DataRow(LanguageNames.VisualBasic, UtilityAnalyzerBase.IgnoreHeaderCommentsVisualBasic, "ResourceTests\\IgnoreHeaderCommentsFalseVbnet\\SonarLint.xml", false)]
+        [DataRow(LanguageNames.CSharp, @"ResourceTests\IgnoreHeaderCommentsTrueCSharp\SonarLint.xml", true)]
+        [DataRow(LanguageNames.CSharp, @"ResourceTests\IgnoreHeaderCommentsFalseCSharp\SonarLint.xml", false)]
+        [DataRow(LanguageNames.VisualBasic, @"ResourceTests\IgnoreHeaderCommentsTrueVbnet\SonarLint.xml", true)]
+        [DataRow(LanguageNames.VisualBasic, @"ResourceTests\IgnoreHeaderCommentsFalseVbnet\SonarLint.xml", false)]
         [TestCategory("Utility")]
-        public void UtilityAnalyzerBase_ReadsSettings_IgnoreHeaderComments(string language,
-            string setting,
-            string sonarLintXmlPath,
-            bool expectedIgnoreHeaderComments)
+        public void ReadsSettings_IgnoreHeaderComments(string language, string sonarLintXmlPath, bool expectedIgnoreHeaderComments)
         {
-            var sonarLintFile = CreateMockAdditionalText(DUMMY_TEXT, sonarLintXmlPath);
-            var projectOutputFile = CreateMockAdditionalText(DUMMY_TEXT, "ResourceTests\\ProjectOutFolderPath.txt");
-            var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(sonarLintFile.Object, projectOutputFile.Object));
+            var utilityAnalyzer = new TestUtilityAnalyzer(language, sonarLintXmlPath, DefaultSonarProjectConfig);
 
-            // Act
-            var utilityAnalyzer = new TestUtilityAnalyzer();
-            utilityAnalyzer.TestReadParameters(analyzerOptions, language);
-
-            // Assert
-            utilityAnalyzer.TestIgnoreHeaderComments[setting].Should().Be(expectedIgnoreHeaderComments);
+            utilityAnalyzer.TestIgnoreHeaderComments.Should().Be(expectedIgnoreHeaderComments);
             utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeTrue();
         }
 
         [TestMethod]
         [TestCategory("Utility")]
-        public void UtilityAnalyzerBase_NoSonarLintXml_AnalyzerNotEnabled()
+        public void NoSonarLintXml_AnalyzerNotEnabled()
         {
-            var projectOutputFile = CreateMockAdditionalText(DUMMY_TEXT, "ResourceTests\\ProjectOutFolderPath.txt");
-            var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(projectOutputFile.Object));
-
-            // Act
-            var utilityAnalyzer = new TestUtilityAnalyzer();
-            utilityAnalyzer.TestReadParameters(analyzerOptions, LanguageNames.CSharp);
-
-            // Assert
-            utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeFalse();
+            new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultProjectOutFolderPath).TestIsAnalyzerEnabled.Should().BeFalse();
+            new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultSonarProjectConfig).TestIsAnalyzerEnabled.Should().BeFalse();
         }
 
         [TestMethod]
         [TestCategory("Utility")]
-        public void UtilityAnalyzerBase_NoOutputPath_AnalyzerNotEnabled()
-        {
-            var sonarLintFile = CreateMockAdditionalText(DUMMY_TEXT, "ResourceTests\\AnalyzeGeneratedTrue\\SonarLint.xml");
-            var analyzerOptions = new AnalyzerOptions(ImmutableArray.Create(sonarLintFile.Object));
-
-            // Act
-            var utilityAnalyzer = new TestUtilityAnalyzer();
-            utilityAnalyzer.TestReadParameters(analyzerOptions, LanguageNames.CSharp);
-
-            // Assert
-            utilityAnalyzer.TestIsAnalyzerEnabled.Should().BeFalse();
-        }
+        public void NoOutputPath_AnalyzerNotEnabled() =>
+            new TestUtilityAnalyzer(LanguageNames.CSharp, @"ResourceTests\AnalyzeGeneratedTrue\SonarLint.xml").TestIsAnalyzerEnabled.Should().BeFalse();
 
         [TestMethod]
         [TestCategory("Utility")]
-        public void UtilityAnalyzerBase_GetTextRange()
+        public void GetTextRange()
         {
             var fileLinePositionSpan = new FileLinePositionSpan(
                 "path",
@@ -155,72 +131,31 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             result.EndOffset.Should().Be(9313);
         }
 
-        [Microsoft.CodeAnalysis.Diagnostics.DiagnosticAnalyzer(LanguageNames.CSharp)]
+        [DiagnosticAnalyzer(LanguageNames.CSharp)]
         private class TestUtilityAnalyzer : UtilityAnalyzerBase
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => throw new NotImplementedException();
+            public bool TestIsAnalyzerEnabled => IsAnalyzerEnabled;
+            public bool TestAnalyzeGeneratedCode => AnalyzeGeneratedCode;
+            public bool TestIgnoreHeaderComments => IgnoreHeaderComments;
+            public string TestOutPath => OutPath;
 
-            protected override void Initialize(SonarAnalysisContext context)
+            public TestUtilityAnalyzer(string language, params string[] additionalPaths)
             {
+                var additionalFiles = additionalPaths.Select(x => new AnalyzerAdditionalFile(x)).ToImmutableArray<AdditionalText>();
+                var context = new SonarAnalysisContext(new SonarAnalysisContextTest.DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+                Compilation compilation = language switch
+                {
+                    LanguageNames.CSharp => CSharpCompilation.Create(null),
+                    LanguageNames.VisualBasic => VisualBasicCompilation.Create(null),
+                    _ => throw new InvalidOperationException($"Unexpected {nameof(language)}: {language}")
+                };
+                var c = new CompilationAnalysisContext(compilation, new AnalyzerOptions(additionalFiles), null, null, default);
+                ReadParameters(context, c);
+            }
+
+            protected override void Initialize(SonarAnalysisContext context) =>
                 throw new NotImplementedException();
-            }
-
-            public void TestReadParameters(AnalyzerOptions options, string language) => this.ReadParameters(options, language);
-
-            public bool TestIsAnalyzerEnabled
-            {
-                get
-                {
-                    return IsAnalyzerEnabled;
-                }
-            }
-
-            public string TestWorkDirectoryBasePath
-            {
-                get
-                {
-                    return WorkDirectoryBasePath;
-                }
-            }
-
-            public bool TestAnalyzeGeneratedCode
-            {
-                get
-                {
-                    return AnalyzeGeneratedCode;
-                }
-            }
-
-            public Dictionary<string, bool> TestIgnoreHeaderComments
-            {
-                get
-                {
-                    return IgnoreHeaderComments;
-                }
-            }
-        }
-
-        private static Mock<AdditionalText> CreateMockAdditionalText(SourceText sourceText, string path)
-        {
-            var additionalTextMock = new Mock<AdditionalText>();
-            additionalTextMock.Setup(x => x.Path).Returns(path);
-            additionalTextMock.Setup(x => x.GetText(System.Threading.CancellationToken.None)).Returns(sourceText);
-            return additionalTextMock;
-        }
-
-        // We can't use Mock<SourceText> because SourceText is an abstract class
-        private class DummySourceText : SourceText
-        {
-            public override char this[int position] => throw new NotImplementedException();
-
-            public override Encoding Encoding => throw new NotImplementedException();
-
-            public override int Length => throw new NotImplementedException();
-
-            public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }

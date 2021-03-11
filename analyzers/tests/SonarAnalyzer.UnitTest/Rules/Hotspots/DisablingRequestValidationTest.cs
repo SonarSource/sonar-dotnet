@@ -19,8 +19,10 @@
  */
 
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
@@ -77,14 +79,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig_SubFolders(string rootDirectory, params string[] subFolders)
         {
+            List<Diagnostic> allDiagnostics;
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
             var languageVersion = compilation.LanguageVersionString();
-
-            var allDiagnostics = DiagnosticVerifier.GetDiagnostics(
-                compilation,
-                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                CompilationErrorBehavior.Default,
-                sonarProjectConfigPath: CreateSonarProjectConfig(rootDirectory)).ToList();
+            var oldCulture = Thread.CurrentThread.CurrentCulture;
+            var newCulture = (CultureInfo)oldCulture.Clone();
+            // decimal.TryParse() from the implementation might not recognize "1.2" under different culture
+            newCulture.NumberFormat.NumberDecimalSeparator = ",";
+            Thread.CurrentThread.CurrentCulture = newCulture;
+            try
+            {
+                allDiagnostics = DiagnosticVerifier.GetDiagnostics(
+                    compilation,
+                    new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                    CompilationErrorBehavior.Default,
+                    sonarProjectConfigPath: CreateSonarProjectConfig(rootDirectory)).ToList();
+            }
+            finally
+            {
+                Thread.CurrentThread.CurrentCulture = oldCulture; // Restore, don't mess with other UTs using the same thread
+            }
 
             allDiagnostics.Should().NotBeEmpty();
             var rootWebConfig = Path.Combine(rootDirectory, WebConfig);

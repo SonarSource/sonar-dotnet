@@ -18,18 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using System;
 using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer;
+using SonarAnalyzer.CBDE;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.CBDE;
 
 [assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest" + Signing.InternalsVisibleToPublicKey)]
 
@@ -40,21 +37,17 @@ namespace SonarAnalyzer.Rules.CSharp
     // Note: For now, this rule actually runs only under windows and outside of SonarLint
     public sealed class CbdeHandlerRule : SonarDiagnosticAnalyzer
     {
-        private readonly bool unitTest;
-
         private const string S3949DiagnosticId = "S3949";
         private const string S3949MessageFormat = "{0}";
-        private static readonly DiagnosticDescriptor ruleS3949 = DiagnosticDescriptorBuilder.GetDescriptor(S3949DiagnosticId, S3949MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
-        private static string WorkDirectoryBasePath;
+        private static readonly DiagnosticDescriptor RuleS3949 = DiagnosticDescriptorBuilder.GetDescriptor(S3949DiagnosticId, S3949MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
+        private readonly ImmutableDictionary<string, DiagnosticDescriptor> ruleIdToDiagDescriptor = ImmutableDictionary<string, DiagnosticDescriptor>.Empty.Add("S3949", RuleS3949);
+        private readonly bool unitTest;
         private readonly Action<string> onCbdeExecution;
         private readonly string testCbdeBinaryPath;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(ruleS3949);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleS3949);
 
-        private readonly ImmutableDictionary<string, DiagnosticDescriptor> ruleIdToDiagDescriptor = ImmutableDictionary<string, DiagnosticDescriptor>.Empty
-            .Add("S3949", ruleS3949);
-
-        public CbdeHandlerRule() : this(false, null, null) {}
+        public CbdeHandlerRule() : this(false, null, null) { }
 
         private CbdeHandlerRule(bool unitTest, string testCbdeBinaryPath, Action<string> onCbdeExecution)
         {
@@ -63,59 +56,28 @@ namespace SonarAnalyzer.Rules.CSharp
             this.onCbdeExecution = onCbdeExecution;
         }
 
-        internal static CbdeHandlerRule MakeUnitTestInstance(string testCbdeBinaryPath, Action<string> onCbdeExecution)
-        {
-            return new CbdeHandlerRule(true, testCbdeBinaryPath, onCbdeExecution);
-        }
+        internal static CbdeHandlerRule MakeUnitTestInstance(string testCbdeBinaryPath, Action<string> onCbdeExecution) =>
+            new CbdeHandlerRule(true, testCbdeBinaryPath, onCbdeExecution);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             // The available platform ids are documented here: https://docs.microsoft.com/en-us/dotnet/api/system.platformid?view=netframework-4.8
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                var handler = new CbdeHandler(OnCbdeIssue, ShouldRunCbdeInContext, () => WorkDirectoryBasePath, testCbdeBinaryPath, onCbdeExecution);
+                var handler = new CbdeHandler(OnCbdeIssue, unitTest, testCbdeBinaryPath, onCbdeExecution);
                 handler.RegisterMlirAndCbdeInOneStep(context);
             }
         }
 
         // This functions is called for each issue found by cbde after it runs
-        private void OnCbdeIssue(String key, String message, Location loc, CompilationAnalysisContext context)
+        private void OnCbdeIssue(string key, string message, Location loc, CompilationAnalysisContext context)
         {
             if (!ruleIdToDiagDescriptor.ContainsKey(key))
+            {
                 throw new InvalidOperationException($"CBDE should not raise issues on key {key}");
+            }
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(ruleIdToDiagDescriptor[key], loc, message));
-        }
-
-        internal const string ConfigurationAdditionalFile = "ProjectOutFolderPath.txt";
-
-        [ExcludeFromCodeCoverage]
-        internal static bool IsProjectOutput(AdditionalText file) =>
-           ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ConfigurationAdditionalFile);
-
-        // The logic used here is based on detecting a file which is present only when not run from SonarLint
-        /// The logic is copied from <see cref="SonarAnalyzer.Rules.UtilityAnalyzerBase"/>
-        [ExcludeFromCodeCoverage]
-        internal static bool CalledFromSonarLint(CompilationAnalysisContext context)
-        {
-            var options = context.Options;
-            var settings = PropertiesHelper.GetSettings(options);
-            var projectOutputAdditionalFile = options.AdditionalFiles
-                .FirstOrDefault(IsProjectOutput);
-
-            if (!settings.Any() || projectOutputAdditionalFile == null)
-            {
-                return true;
-            }
-            WorkDirectoryBasePath = File.ReadAllLines(projectOutputAdditionalFile.Path).FirstOrDefault(l => !string.IsNullOrEmpty(l));
-
-            return string.IsNullOrEmpty(WorkDirectoryBasePath);
-        }
-
-        // This function is called from CbdeHandler to check if it should run
-        private bool ShouldRunCbdeInContext(CompilationAnalysisContext context)
-        {
-            return !CalledFromSonarLint(context) || unitTest;
         }
     }
 }
