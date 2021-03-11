@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                foreach (var fullPath in context.ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles("web.config"))
+                foreach (var fullPath in context.ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles("web.config").Where(File.Exists))
                 {
                     var webConfig = File.ReadAllText(fullPath);
                     if (webConfig.Contains("<system.web>") && ParseXDocument(webConfig) is { } doc)
