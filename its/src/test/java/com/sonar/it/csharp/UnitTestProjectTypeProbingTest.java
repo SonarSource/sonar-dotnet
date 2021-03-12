@@ -73,7 +73,7 @@ public class UnitTestProjectTypeProbingTest {
   }
 
   @Test
-  public void msTestProject_IsIdentifiedAsMainProjectBzScannerAndTestByAnalyzer() {
+  public void msTestProject_IsIdentifiedAsMainProjectByScannerAndTestByAnalyzer() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTest/calculator.cs"))
       .extracting(Issues.Issue::getRule)
       .containsExactly(MAIN_AND_TEST_RULE_ID);
