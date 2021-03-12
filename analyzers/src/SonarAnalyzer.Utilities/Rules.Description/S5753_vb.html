@@ -23,6 +23,16 @@ Public Function Welcome(Name As String) As ActionResult
   ...
 End Function
 </pre>
+<p>At application level, configured in the Web.config file:</p>
+<pre>
+&lt;configuration&gt;
+   &lt;system.web&gt;
+      &lt;pages validateRequest="false" /&gt;
+      ...
+      &lt;httpRuntime requestValidationMode="0.0" /&gt;
+   &lt;/system.web&gt;
+&lt;/configuration&gt;
+</pre>
 <h2>Compliant Solution</h2>
 <p>At Controller level:</p>
 <pre>
@@ -36,6 +46,16 @@ End Function
 Public Function Welcome(Name As String) As ActionResult
   ...
 End Function
+</pre>
+<p>At application level, configured in the Web.config file:</p>
+<pre>
+&lt;configuration&gt;
+   &lt;system.web&gt;
+      &lt;pages validateRequest="true" /&gt;
+      ...
+      &lt;httpRuntime requestValidationMode="4.5" /&gt;
+   &lt;/system.web&gt;
+&lt;/configuration&gt;
 </pre>
 <h2>See</h2>
 <ul>
