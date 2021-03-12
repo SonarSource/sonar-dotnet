@@ -1,1 +1,0 @@
-﻿TestCases\WebConfig\Foo\Web.config
