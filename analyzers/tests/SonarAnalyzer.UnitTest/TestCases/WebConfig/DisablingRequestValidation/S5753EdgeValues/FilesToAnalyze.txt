@@ -1,0 +1,3 @@
+﻿TestCases\WebConfig\DisablingRequestValidation\S5753EdgeValues\Web.config
+TestCases\WebConfig\DisablingRequestValidation\S5753EdgeValues\3.9\Web.config
+TestCases\WebConfig\DisablingRequestValidation\S5753EdgeValues\5.6\Web.config

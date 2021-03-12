@@ -1,0 +1,1 @@
+﻿TestCases\WebConfig\DisablingRequestValidation\Corrupt\Web.config

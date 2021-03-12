@@ -62,9 +62,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\S5753Values")]
-        [DataRow(@"TestCases\WebConfig\UnexpectedContent")]
-        [DataRow(@"TestCases\WebConfig\Corrupt")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\S5753Values")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\UnexpectedContent")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Corrupt")]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig(string root) =>
             DiagnosticVerifier.VerifyExternalFile(
@@ -74,8 +74,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CreateSonarProjectConfig(root));
 
         [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\MultipleFiles", "SubFolder")]
-        [DataRow(@"TestCases\WebConfig\S5753EdgeValues", "3.9", "5.6")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\MultipleFiles", "SubFolder")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\S5753EdgeValues", "3.9", "5.6")]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig_SubFolders(string rootDirectory, params string[] subFolders)
         {
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig_LowerCase()
         {
-            var root = @"TestCases\WebConfig\LowerCase";
+            var root = @"TestCases\WebConfig\DisablingRequestValidation\LowerCase";
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
@@ -152,7 +152,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisablingRequestValidation_VB_WebConfig()
         {
-            var root = @"TestCases\WebConfig\S5753Values";
+            var root = @"TestCases\WebConfig\DisablingRequestValidation\S5753Values";
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),

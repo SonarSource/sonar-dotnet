@@ -94,12 +94,12 @@ namespace SonarAnalyzer.Helpers.Trackers
             this.trackedConstructorArgumentIndex = trackedConstructorArgumentIndex;
         }
 
-        internal bool ShouldBeReported(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+        internal bool ShouldBeReported(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel, Func<bool> isDefaultConstructorSafe = null) =>
             IsTrackedType(objectCreation, semanticModel)
-            && !ObjectCreatedWithAllowedValue(objectCreation, semanticModel)
+            && !ObjectCreatedWithAllowedValue(objectCreation, semanticModel, isDefaultConstructorSafe)
             && !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
 
-        internal bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
+        internal bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel, Func<bool> isDefaultConstructorSafe = null) =>
             // Ignore assignments within object initializers, they are reported in the ObjectCreationExpression handler
             assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null
             && IsTrackedPropertyName(assignment.Left)
@@ -153,7 +153,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// <remarks>
         /// Currently we do not handle the situation with default and named arguments.
         /// </remarks>
-        private bool ObjectCreatedWithAllowedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
+        private bool ObjectCreatedWithAllowedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel, Func<bool> isDefaultConstructorSafe = null)
         {
             var trackedPropertyAssignments = GetInitializerExpressions(objectCreation.Initializer)
                 .OfType<AssignmentExpressionSyntax>()
@@ -172,8 +172,8 @@ namespace SonarAnalyzer.Helpers.Trackers
             }
             else
             {
-                // if no tracked properties are being explicitly set or passed as arguments, the constructor may still be safe by design
-                return constructorIsSafe;
+                // if no tracked properties are being explicitly set or passed as arguments, check if the default constructor is safe
+                return isDefaultConstructorSafe != null ? isDefaultConstructorSafe() : constructorIsSafe;
             }
         }
 

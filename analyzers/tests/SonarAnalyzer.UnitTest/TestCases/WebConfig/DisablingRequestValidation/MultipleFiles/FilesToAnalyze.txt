@@ -1,0 +1,2 @@
+﻿TestCases\WebConfig\DisablingRequestValidation\MultipleFiles\Web.config
+TestCases\WebConfig\DisablingRequestValidation\MultipleFiles\SubFolder\Web.config

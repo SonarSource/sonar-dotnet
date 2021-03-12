@@ -22,6 +22,7 @@
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 #endif
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -33,6 +34,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CookieShouldBeHttpOnlyTest
     {
+        private const string ProjectConfigTemplate = @"
+<SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
+    <FilesToAnalyzePath>{0}\FilesToAnalyze.txt</FilesToAnalyzePath>
+</SonarProjectConfig>";
+
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
         [TestMethod]
         [TestCategory("Rule")]
@@ -41,6 +47,24 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 MetadataReferenceFacade.SystemWeb);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToTrue() =>
+            Verifier.VerifyAnalyzer(@"TestCases\WebConfig\CookieShouldBeHttpOnly\HttpOnlyCookiesConfig\CookieShouldBeHttpOnly.cs",
+                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.SystemWeb,
+                CreateSonarProjectConfig(@"TestCases\WebConfig\CookieShouldBeHttpOnly\HttpOnlyCookiesConfig"));
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToFalse() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
+                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.SystemWeb,
+                CreateSonarProjectConfig(@"TestCases\WebConfig\CookieShouldBeHttpOnly\NonHttpOnlyCookiesConfig"));
 #else
         [TestMethod]
         [TestCategory("Rule")]
@@ -68,5 +92,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 NuGetMetadataReference.Nancy());
+
+        private static string CreateSonarProjectConfig(string filesToAnalyzeDirectory)
+        {
+            var sonarProjectConfigPath = Path.Combine(filesToAnalyzeDirectory, "SonarProjectConfig.xml");
+            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplate, filesToAnalyzeDirectory));
+            return sonarProjectConfigPath;
+        }
     }
 }
