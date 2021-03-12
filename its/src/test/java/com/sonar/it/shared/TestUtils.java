@@ -70,10 +70,6 @@ public class TestUtils {
   final private static Logger LOG = LoggerFactory.getLogger(TestUtils.class);
   private static final String MSBUILD_PATH = "MSBUILD_PATH";
   private static final String MSBUILD_PATH_DEFAULT = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin\\msbuild.exe";
-  // Local temp path can be different from CI agent
-  private static final String[] TEMP_PATHS = new String[] {
-    System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube",
-    System.getenv("TEMP") + "\\.sonarqube"};
 
   // Ensure no AnalysisWarning is raised inside the SQ GUI
   public static void verifyNoGuiWarnings(Orchestrator orchestrator, BuildResult buildResult) {
@@ -273,16 +269,14 @@ public class TestUtils {
 
   public static void deleteLocalCache() {
     // SonarScanner for .NET caches the analyzer, so running the test twice in a row means the old binary is used.
-    LOG.info("TEST SETUP: deleting local analyzers cache");
-    for (String tempPath : TEMP_PATHS) {
-      try {
-        File file = new File(tempPath);
-        if (file.exists()) {
-          FileUtils.deleteDirectory(file);
-        }
-      } catch (IOException ioe) {
-        throw new IllegalStateException("Could not delete SonarScanner for .NET cache folder", ioe);
+    File file = new File(System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube");
+    LOG.info("TEST SETUP: deleting local analyzers cache: " + file.toString());
+    try {
+      if (file.exists()) {
+        FileUtils.deleteDirectory(file);
       }
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Could not delete SonarScanner for .NET cache folder", ioe);
     }
   }
 
