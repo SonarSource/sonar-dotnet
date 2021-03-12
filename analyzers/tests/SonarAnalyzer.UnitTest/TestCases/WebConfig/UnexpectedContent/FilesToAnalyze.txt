@@ -1,1 +1,1 @@
-﻿TestCases\WebConfig\Foo\Web.config
+﻿TestCases\WebConfig\UnexpectedContent\Web.config
