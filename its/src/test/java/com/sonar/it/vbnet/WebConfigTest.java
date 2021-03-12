@@ -40,7 +40,7 @@ public class WebConfigTest extends WebConfigBase {
 
   @Test
   public void should_raise_hotspot_on_web_config() throws Exception {
-    final String projectName = "WebConfig.Vb";
+    final String projectName = "WebConfig.VB";
 
     Tests.analyzeProject(temp, projectName, null);
     List<Hotspots.SearchWsResponse.Hotspot> hotspots = Tests.getHotspots(projectName);
