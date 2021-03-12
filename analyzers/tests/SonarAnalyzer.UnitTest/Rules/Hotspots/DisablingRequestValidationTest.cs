@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\S5753Values")]
-        [DataRow(@"TestCases\WebConfig\Foo")]
+        [DataRow(@"TestCases\WebConfig\UnexpectedContent")]
         [DataRow(@"TestCases\WebConfig\Corrupt")]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig(string root) =>
