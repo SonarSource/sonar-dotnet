@@ -24,6 +24,16 @@ public ActionResult Welcome(string name)
   ...
 }
 </pre>
+<p>At application level, configured in the Web.config file:</p>
+<pre>
+&lt;configuration&gt;
+   &lt;system.web&gt;
+      &lt;pages validateRequest="false" /&gt;
+      ...
+      &lt;httpRuntime requestValidationMode="0.0" /&gt;
+   &lt;/system.web&gt;
+&lt;/configuration&gt;
+</pre>
 <h2>Compliant Solution</h2>
 <p>At Controller level:</p>
 <pre>
@@ -40,8 +50,20 @@ public ActionResult Welcome(string name)
   ...
 }
 </pre>
+<p>At application level, configured in the Web.config file:</p>
+<pre>
+&lt;configuration&gt;
+   &lt;system.web&gt;
+      &lt;pages validateRequest="true" /&gt;
+      ...
+      &lt;httpRuntime requestValidationMode="4.5" /&gt;
+   &lt;/system.web&gt;
+&lt;/configuration&gt;
+</pre>
 <h2>See</h2>
 <ul>
+  <li> <a
+  href="https://docs.microsoft.com/en-us/dotnet/api/system.web.configuration.httpruntimesection.requestvalidationmode?view=netframework-4.8">HttpRuntimeSection.RequestValidationMode Property</a> </li>
   <li> <a href="https://owasp.org/www-community/ASP-NET_Request_Validation">OWASP ASP.NET Request Validation</a> </li>
   <li> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">OWASP Cheat Sheet</a> - XSS
   Prevention Cheat Sheet </li>

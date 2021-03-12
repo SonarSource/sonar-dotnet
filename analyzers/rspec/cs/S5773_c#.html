@@ -1,23 +1,26 @@
-<p>Failure to control types during deserialization can lead to runtime errors and vulnerabilities. There are many types, called "gadgets" (see <a
-href="https://github.com/pwntester/ysoserial.net">ysoserial.net</a>) which are known to be not secure when deserializing. </p>
 <p>During the deserialization process, the state of an object will be reconstructed from the serialized data stream which can contain dangerous
-operations. For example, a well-known attack vector consists in serializing an object of type <code><a
+operations. </p>
+<p>For example, a well-known attack vector consists in serializing an object of type <code><a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.codedom.compiler.tempfilecollection.-ctor?view=netframework-4.8#System_CodeDom_Compiler_TempFileCollection__ctor">TempFileCollection</a></code>
-with arbitrary files defined by the attacker which will be deleted on the application deserializing this object (more precisely when the <a
+with arbitrary files (defined by an attacker) which will be deleted on the application deserializing this object (when the <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.codedom.compiler.tempfilecollection.finalize?view=netframework-4.8">finalize() </a>method of
-the TempFileCollection object is called).</p>
-<p>To restrict the types allowed to be deserialized:</p>
+the TempFileCollection object is called). This kind of types are called "<a href="https://github.com/pwntester/ysoserial.net">gadgets</a>".</p>
+<p>Instead of using <code>BinaryFormatter</code> and similar serializers, it is recommended to use safer alternatives in most of the cases, such as <a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.xml.serialization.xmlserializer?view=net-5.0">XmlSerializer</a> or <a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.datacontractserializer?view=net-5.0">DataContractSerializer</a>. If
+it's not possible then try to mitigate the risk by restricting the types allowed to be deserialized:</p>
 <ul>
-  <li> implement a whitelist of safe and required types that can be deserialized. </li>
-  <li> or/and implement tamper protection, such as <a href="https://en.wikipedia.org/wiki/HMAC">message authentication codes</a> (MAC). This way only
-  objects serialized with the correct MAC hash will be deserialized. </li>
+  <li> by implementing an "allow-list" of types, but keep in mind that novel dangerous types are regularly discovered and this protection could be
+  insufficient over time. </li>
+  <li> or/and implementing a tamper protection, such as <a href="https://en.wikipedia.org/wiki/HMAC">message authentication codes</a> (MAC). This way
+  only objects serialized with the correct MAC hash will be deserialized. </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <p>For <a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.binary.binaryformatter?view=netframework-4.8">BinaryFormatter</a>,
 <a
-href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.netdatacontractserializer?view=netframework-4.8">NetDataContractSerializer
-</a>, <a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.netdatacontractserializer?view=netframework-4.8">NetDataContractSerializer</a>,
+<a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.soap.soapformatter?view=netframework-4.8">SoapFormatter</a>
 serializers:</p>
 <pre>
@@ -90,6 +93,8 @@ formatter.Deserialize(fs);
 </pre>
 <h2>See</h2>
 <ul>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/standard/serialization/binaryformatter-security-guide?s=03">docs.microsoft.com</a> -
+  BinaryFormatter security guide </li>
   <li> <a href="https://media.blackhat.com/bh-us-12/Briefings/Forshaw/BH_US_12_Forshaw_Are_You_My_Type_WP.pdf">Are You My Type?</a> - James Forshaw -
   BlackHat 2012 </li>
   <li> <a href="https://www.youtube.com/watch?v=oxlD8VWWHE8">BlueHat v17 - Dangerous Contents - Securing .Net Deserialization</a> </li>
