@@ -199,6 +199,7 @@ stages:
             sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
             sonar.analysis.prNumber=$(System.PullRequest.PullRequestNumber)
             sonar.analysis.repository=$(Build.Repository.ID)
+            sonar.verbose=true
 
       - task: SonarCloudPrepare@1
         displayName: 'Code Analysis - Begin (master or branch)'
@@ -216,6 +217,7 @@ stages:
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(Build.SourceVersion)
             sonar.analysis.repository=$(Build.Repository.ID)
+            sonar.verbose=true
 
       - powershell: |
           . .\scripts\utils.ps1

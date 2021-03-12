@@ -275,9 +275,11 @@ public class TestUtils {
     // SonarScanner for .NET caches the analyzer, so running the test twice in a row means the old binary is used.
     LOG.info("TEST SETUP: deleting local analyzers cache");
     for (String tempPath : TEMP_PATHS) {
+      LOG.info("TEST SETUP: deleting local analyzers cache, attempt: " + tempPath);
       try {
         File file = new File(tempPath);
         if (file.exists()) {
+          LOG.info("TEST SETUP: deleting local analyzers cache, exists: " + tempPath);
           FileUtils.deleteDirectory(file);
         }
       } catch (IOException ioe) {
