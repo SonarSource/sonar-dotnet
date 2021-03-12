@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebConfig.CSharp", "WebConfig.CSharp.csproj", "{6AC7E627-A21A-459C-8831-C45B6058E24D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebConfig.CSharp", "WebConfig.CSharp\WebConfig.CSharp.csproj", "{6AC7E627-A21A-459C-8831-C45B6058E24D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

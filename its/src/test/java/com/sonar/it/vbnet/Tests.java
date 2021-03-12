@@ -32,6 +32,7 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
@@ -70,6 +71,11 @@ public class Tests {
     Path tmpProjectDir = temp.newFolder(projectName).toPath();
     FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
     return tmpProjectDir;
+  }
+
+  @BeforeClass
+  public static void deleteLocalCache(){
+    TestUtils.deleteLocalCache();
   }
 
   static BuildResult analyzeProject(TemporaryFolder temp, String projectName, @Nullable String profileKey, String... keyValues) throws IOException {
