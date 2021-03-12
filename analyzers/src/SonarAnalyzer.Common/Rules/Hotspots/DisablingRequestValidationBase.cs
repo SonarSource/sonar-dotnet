@@ -23,6 +23,7 @@ using System.Collections.Immutable;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -40,6 +41,8 @@ namespace SonarAnalyzer.Rules
         private const string MessageFormat = "Make sure disabling ASP.NET Request Validation feature is safe here.";
         // See https://docs.microsoft.com/en-us/dotnet/api/system.web.configuration.httpruntimesection.requestvalidationmode
         private const int MinimumAcceptedRequestValidationModeValue = 4;
+
+        private static readonly Regex WebConfigRegex = new Regex(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
 
         private readonly DiagnosticDescriptor rule;
 
@@ -83,7 +86,7 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                foreach (var fullPath in context.ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles("web.config").Where(File.Exists))
+                foreach (var fullPath in context.ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess))
                 {
                     var webConfig = File.ReadAllText(fullPath);
                     if (webConfig.Contains("<system.web>") && ParseXDocument(webConfig) is { } doc)
@@ -93,6 +96,9 @@ namespace SonarAnalyzer.Rules
                     }
                 }
             });
+
+            static bool ShouldProcess(string path) =>
+                File.Exists(path) && !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
         }
 
         private void ReportValidateRequest(XDocument doc, string webConfigPath, CompilationAnalysisContext c)
