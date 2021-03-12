@@ -70,6 +70,10 @@ public class TestUtils {
   final private static Logger LOG = LoggerFactory.getLogger(TestUtils.class);
   private static final String MSBUILD_PATH = "MSBUILD_PATH";
   private static final String MSBUILD_PATH_DEFAULT = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin\\msbuild.exe";
+  // Local temp path can be different from CI agent
+  private static final String[] TEMP_PATHS = new String[] {
+    System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube",
+    System.getenv("TEMP") + "\\.sonarqube"};
 
   // Ensure no AnalysisWarning is raised inside the SQ GUI
   public static void verifyNoGuiWarnings(Orchestrator orchestrator, BuildResult buildResult) {
@@ -221,6 +225,7 @@ public class TestUtils {
       // Tests.ORCHESTRATOR is a jUnit rule that is automagically started in it's beforeAll() action for all tests.
       // Running individual test doesn't execute the @ClassRule annotation on ORCHESTRATOR in Tests class.
       orchestrator.start();
+      deleteLocalCache();
     }
 
     // We add one day to ensure that today's entries are deleted.
@@ -231,11 +236,7 @@ public class TestUtils {
       .withZone(ZoneId.of("UTC"))
       .format(instant);
 
-    LOG.info("TEST SETUP: deleting local analyzers cache");
-    TestUtils.deleteLocalCache();
-
     LOG.info("TEST SETUP: deleting projects analyzed before: " + currentDateTime);
-
     orchestrator.getServer()
       .newHttpCall("/api/projects/bulk_delete")
       .setAdminCredentials()
@@ -270,13 +271,18 @@ public class TestUtils {
     return folder;
   }
 
-  private static void deleteLocalCache() {
+  public static void deleteLocalCache() {
     // SonarScanner for .NET caches the analyzer, so running the test twice in a row means the old binary is used.
-    String localAppData = System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube";
-    try {
-      FileUtils.deleteDirectory(new File(localAppData));
-    } catch (IOException ioe) {
-      throw new IllegalStateException("Could not delete SonarScanner for .NET cache folder", ioe);
+    LOG.info("TEST SETUP: deleting local analyzers cache");
+    for (String tempPath : TEMP_PATHS) {
+      try {
+        File file = new File(tempPath);
+        if (file.exists()) {
+          FileUtils.deleteDirectory(file);
+        }
+      } catch (IOException ioe) {
+        throw new IllegalStateException("Could not delete SonarScanner for .NET cache folder", ioe);
+      }
     }
   }
 
