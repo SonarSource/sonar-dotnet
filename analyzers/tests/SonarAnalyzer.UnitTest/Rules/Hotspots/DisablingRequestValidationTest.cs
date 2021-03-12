@@ -130,8 +130,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisablingRequestValidation_CS_WebConfig_Transformation(string configPath) =>
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
-                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled, Path.GetDirectoryName(configPath)),
-                File.ReadAllText(configPath));
+                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                File.ReadAllText(configPath),
+                CreateSonarProjectConfig(Path.GetDirectoryName(configPath)));
 
         [TestMethod]
         [TestCategory("Rule")]
