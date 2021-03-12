@@ -1,1 +1,2 @@
 ﻿TestCases\WebConfig\DisablingRequestValidation\Corrupt\Web.config
+TestCases\WebConfig\DisablingRequestValidation\Corrupt\ThisDirectoryDoesNotExist\Web.config
