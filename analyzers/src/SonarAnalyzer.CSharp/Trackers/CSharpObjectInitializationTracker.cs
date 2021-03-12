@@ -38,11 +38,6 @@ namespace SonarAnalyzer.Helpers.Trackers
     public class CSharpObjectInitializationTracker
     {
         /// <summary>
-        /// By default, we consider constructors unsafe.
-        /// </summary>
-        private const bool DefaultIsConstructorSafe = false;
-
-        /// <summary>
         /// By default, the constructor arguments are ignored.
         /// </summary>
         private const int DefaultTrackedConstructorArgumentIndex = -1;
@@ -70,11 +65,6 @@ namespace SonarAnalyzer.Helpers.Trackers
         private readonly ImmutableArray<KnownType> trackedTypes;
 
         /// <summary>
-        /// True if the constructor is safe by design (when we don't have more information about relevant properties to be set).
-        /// </summary>
-        private readonly bool constructorIsSafe;
-
-        /// <summary>
         /// The index of a constructor argument that corresponds to a tracked property. It should be -1 if it should be ignored.
         /// </summary>
         private readonly int trackedConstructorArgumentIndex;
@@ -83,23 +73,21 @@ namespace SonarAnalyzer.Helpers.Trackers
             ImmutableArray<KnownType> trackedTypes,
             Predicate<string> isTrackedPropertyName,
             Func<ISymbol, ExpressionSyntax, SemanticModel, bool> isAllowedObject = null,
-            bool constructorIsSafe = DefaultIsConstructorSafe,
             int trackedConstructorArgumentIndex = DefaultTrackedConstructorArgumentIndex)
         {
             this.isAllowedConstantValue = isAllowedConstantValue;
             this.trackedTypes = trackedTypes;
             this.isTrackedPropertyName = isTrackedPropertyName;
             this.isAllowedObject = isAllowedObject ?? DefaultIsAllowedObject;
-            this.constructorIsSafe = constructorIsSafe;
             this.trackedConstructorArgumentIndex = trackedConstructorArgumentIndex;
         }
 
-        internal bool ShouldBeReported(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel, Func<bool> isDefaultConstructorSafe = null) =>
+        internal bool ShouldBeReported(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe) =>
             IsTrackedType(objectCreation, semanticModel)
             && !ObjectCreatedWithAllowedValue(objectCreation, semanticModel, isDefaultConstructorSafe)
             && !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
 
-        internal bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel, Func<bool> isDefaultConstructorSafe = null) =>
+        internal bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
             // Ignore assignments within object initializers, they are reported in the ObjectCreationExpression handler
             assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null
             && IsTrackedPropertyName(assignment.Left)
@@ -153,7 +141,7 @@ namespace SonarAnalyzer.Helpers.Trackers
         /// <remarks>
         /// Currently we do not handle the situation with default and named arguments.
         /// </remarks>
-        private bool ObjectCreatedWithAllowedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel, Func<bool> isDefaultConstructorSafe = null)
+        private bool ObjectCreatedWithAllowedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe)
         {
             var trackedPropertyAssignments = GetInitializerExpressions(objectCreation.Initializer)
                 .OfType<AssignmentExpressionSyntax>()
@@ -173,7 +161,7 @@ namespace SonarAnalyzer.Helpers.Trackers
             else
             {
                 // if no tracked properties are being explicitly set or passed as arguments, check if the default constructor is safe
-                return isDefaultConstructorSafe != null ? isDefaultConstructorSafe() : constructorIsSafe;
+                return isDefaultConstructorSafe;
             }
         }
 

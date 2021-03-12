@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Immutable;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Microsoft.CodeAnalysis;
@@ -54,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal CookieShouldBeHttpOnly(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration, DiagnosticId, MessageFormat) { }
 
-        protected override Func<bool> DetermineIfDefaultConstructorIsSafe(SonarAnalysisContext context, AnalyzerOptions options)
+        protected override bool DetermineIfDefaultConstructorIsSafe(SonarAnalysisContext context, AnalyzerOptions options)
         {
             foreach (var fullPath in context.ProjectConfiguration(options).FilesToAnalyze.FindFiles("web.config"))
             {
@@ -62,11 +63,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc
                     && IsHttpOnlyCookies(doc))
                 {
-                    return () => true;
+                    return true;
                 }
             }
 
-            return () => false;
+            return false;
         }
 
         protected override void Initialize(TrackerInput input)
@@ -77,17 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 t.ExceptWhen(t.ArgumentIsBoolConstant("httpOnly", true)));
         }
 
-        private static bool IsHttpOnlyCookies(XDocument document)
-        {
-            foreach (var pages in document.XPathSelectElements("configuration/system.web/httpCookies"))
-            {
-                if (pages.GetAttributeIfBoolValueIs("httpOnlyCookies", true) is { } _)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+        private static bool IsHttpOnlyCookies(XDocument document) =>
+            document.XPathSelectElements("configuration/system.web/httpCookies").Any(x => x.GetAttributeIfBoolValueIs("httpOnlyCookies", true) is { } _);
     }
 }

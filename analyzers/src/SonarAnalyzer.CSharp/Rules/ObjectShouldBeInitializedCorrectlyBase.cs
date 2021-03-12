@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
         protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat)
             : base(configuration, diagnosticId, messageFormat, RspecStrings.ResourceManager) { }
 
-        protected virtual Func<bool> DetermineIfDefaultConstructorIsSafe(SonarAnalysisContext context, AnalyzerOptions options) => null;
+        protected virtual bool DetermineIfDefaultConstructorIsSafe(SonarAnalysisContext context, AnalyzerOptions options) => false;
 
         protected override void Initialize(TrackerInput input)
         {
@@ -51,12 +51,12 @@ namespace SonarAnalyzer.Rules
             context.RegisterCompilationStartAction(
                 ccc =>
                 {
-                    var isDefaultConstructorSafe = DetermineIfDefaultConstructorIsSafe(context, ccc.Options);
-
                     if (!IsEnabled(ccc.Options))
                     {
                         return;
                     }
+
+                    var isDefaultConstructorSafe = DetermineIfDefaultConstructorIsSafe(context, ccc.Options);
 
                     ccc.RegisterSyntaxNodeActionInNonGenerated(
                         c =>

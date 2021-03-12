@@ -64,10 +64,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         c =>
                         {
                             var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
+                            var netFrameworkVersion = versionProvider.GetDotNetFrameworkVersion(c.Compilation);
+                            var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
 
                             var trackers = TrackerFactory.Create(c.Compilation, versionProvider);
-                            if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel)
-                               || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel))
+                            if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe)
+                               || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe))
                             {
                                 c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation()));
                             }
@@ -136,6 +138,16 @@ namespace SonarAnalyzer.Rules.CSharp
             // XPathDocument is secure by default starting with .Net 4.5.2
             version == NetFrameworkVersion.After452 || version == NetFrameworkVersion.Unknown;
 
+        // The XmlDocument and XmlTextReader constructors were made safe-by-default in .NET 4.5.2
+        private static bool ConstructorIsSafe(NetFrameworkVersion version) =>
+            version switch
+            {
+                NetFrameworkVersion.After452 => true,
+                NetFrameworkVersion.Between4And451 => false,
+                NetFrameworkVersion.Probably35 => false,
+                _ => true
+            };
+
         private static class TrackerFactory
         {
             private static ImmutableArray<KnownType> UnsafeXmlResolvers { get; } = ImmutableArray.Create(
@@ -159,38 +171,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public static TrackersHolder Create(Compilation compilation, INetFrameworkVersionProvider versionProvider)
             {
-                var netFrameworkVersion = versionProvider.GetDotNetFrameworkVersion(compilation);
-                var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
-
                 var xmlDocumentTracker = new CSharpObjectInitializationTracker(
                     // we do not expect any constant values for XmlResolver
                     isAllowedConstantValue: constantValue => false,
                     trackedTypes: XmlDocumentTrackedTypes,
                     isTrackedPropertyName: propertyName => "XmlResolver" == propertyName,
-                    isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol),
-                    constructorIsSafe: constructorIsSafe
+                    isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol)
                 );
 
                 var xmlTextReaderTracker = new CSharpObjectInitializationTracker(
                     isAllowedConstantValue: IsAllowedValueForXmlTextReader,
                     trackedTypes: ImmutableArray.Create(KnownType.System_Xml_XmlTextReader),
                     isTrackedPropertyName: XmlTextReaderTrackedProperties.Contains,
-                    isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol),
-                    constructorIsSafe: constructorIsSafe
+                    isAllowedObject: (symbol, _, __) => IsAllowedObject(symbol)
                 );
 
                 return new TrackersHolder(xmlDocumentTracker, xmlTextReaderTracker);
             }
-
-            // The XmlDocument and XmlTextReader constructors were made safe-by-default in .NET 4.5.2
-            private static bool ConstructorIsSafe(NetFrameworkVersion version) =>
-                version switch
-                {
-                    NetFrameworkVersion.After452 => true,
-                    NetFrameworkVersion.Between4And451 => false,
-                    NetFrameworkVersion.Probably35 => false,
-                    _ => true
-                };
 
             private static bool IsAllowedValueForXmlTextReader(object constantValue)
             {
