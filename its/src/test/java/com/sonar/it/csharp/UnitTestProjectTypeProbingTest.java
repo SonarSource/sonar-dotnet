@@ -73,8 +73,10 @@ public class UnitTestProjectTypeProbingTest {
   }
 
   @Test
-  public void msTestProject_IsIdentifiedAsTestProject() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTest/calculator.cs")).isEmpty();
+  public void msTestProject_IsIdentifiedAsMainProjectBzScannerAndTestByAnalyzer() {
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTest/calculator.cs"))
+      .extracting(Issues.Issue::getRule)
+      .containsExactly(MAIN_AND_TEST_RULE_ID);
   }
 
   @Test
@@ -90,12 +92,14 @@ public class UnitTestProjectTypeProbingTest {
   }
 
   @Test
-  public void project_WithTestsSuffix_IsIdentifiedAsTestProject() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.EndsWithTests/calculator.cs")).isEmpty();
+  public void project_WithTestsSuffix_IsIdentifiedAsMain() {
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.EndsWithTests/calculator.cs"))
+      .extracting(Issues.Issue::getRule)
+      .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID);
   }
 
   @Test
   public void logsContainInfo() {
-    assertThat(buildResult.getLogs()).contains("Found 7 MSBuild C# projects: 3 MAIN projects. 4 TEST projects.");
+    assertThat(buildResult.getLogs()).contains("Found 7 MSBuild C# projects: 5 MAIN projects. 2 TEST projects.");
   }
 }
