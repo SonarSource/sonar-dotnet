@@ -50,14 +50,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisablingRequestValidation.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.cs",
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\DisablingRequestValidation.cs",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DisablingRequestValidation.cs",
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.Hotspot),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
@@ -125,14 +125,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DisablingRequestValidation.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\DisablingRequestValidation.vb",
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_VB_Disabled() =>
-            Verifier.VerifyNoIssueReported(@"TestCases\DisablingRequestValidation.vb",
+            Verifier.VerifyNoIssueReported(@"TestCases\Hotspots\DisablingRequestValidation.vb",
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.Hotspot),
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
