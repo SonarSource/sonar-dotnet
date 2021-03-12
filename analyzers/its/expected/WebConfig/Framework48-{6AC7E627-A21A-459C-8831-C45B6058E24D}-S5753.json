@@ -25,6 +25,32 @@
 "endColumn":  45
 }
 }
+},
+{
+"id":  "S5753",
+"message":  "Make sure disabling ASP.NET Request Validation feature is safe here.",
+"location":  {
+"uri":  "sources\WebConfig\Web.Release.config",
+"region":  {
+"startLine":  7,
+"startColumn":  36,
+"endLine":  7,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S5753",
+"message":  "Make sure disabling ASP.NET Request Validation feature is safe here.",
+"location":  {
+"uri":  "sources\WebConfig\Web.Release.config",
+"region":  {
+"startLine":  8,
+"startColumn":  42,
+"endLine":  8,
+"endColumn":  69
+}
+}
 }
 ]
 }
