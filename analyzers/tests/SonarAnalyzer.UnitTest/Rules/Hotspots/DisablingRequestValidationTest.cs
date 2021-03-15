@@ -118,16 +118,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\TransformCustom\Web.Custom.config")]
-        [DataRow(@"TestCases\WebConfig\TransformDebug\Web.Debug.config")]
-        [DataRow(@"TestCases\WebConfig\TransformRelease\Web.Release.config")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformCustom\Web.Custom.config")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformDebug\Web.Debug.config")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformRelease\Web.Release.config")]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig_Transformation(string configPath) =>
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 File.ReadAllText(configPath),
-                CreateSonarProjectConfig(Path.GetDirectoryName(configPath)));
+                TestHelper.CreateSonarProjectConfig(Path.GetDirectoryName(configPath)));
 
         [TestMethod]
         [TestCategory("Rule")]

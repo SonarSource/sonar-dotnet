@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules
             }
 
             static bool ShouldProcess(string path) =>
-                File.Exists(path) && !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
+                !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
         }
 
         private void ReportValidateRequest(XDocument doc, string webConfigPath, CompilationAnalysisContext c)

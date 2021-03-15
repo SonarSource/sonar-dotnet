@@ -34,10 +34,10 @@ namespace SonarAnalyzer.Helpers
             allFiles = ReadLines(filePath);
 
         public IEnumerable<string> FindFiles(string fileName) =>
-            allFiles.Where(x => FilterByFileName(x, fileName));
+            allFiles.Where(x => FilterByFileName(x, fileName) && File.Exists(x));
 
         public IEnumerable<string> FindFiles(Regex fullPathRegex) =>
-            allFiles.Where(x => fullPathRegex.IsMatch(x));
+            allFiles.Where(x => fullPathRegex.IsMatch(x) && File.Exists(x));
 
         private static IEnumerable<string> ReadLines(string filePath)
         {
