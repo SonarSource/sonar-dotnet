@@ -45,7 +45,7 @@ stages:
           feedsToUse: 'config'
           nugetConfigPath: 'analyzers\NuGet.Config'
 
-      - powershell: .\scripts\build\set-project-version.ps1
+      - powershell: .\scripts\build\set-azp-project-version-variable.ps1
 
       - powershell: |
           cd analyzers
@@ -150,7 +150,7 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
-      - powershell: .\scripts\build\set-project-version.ps1
+      - powershell: .\scripts\build\set-azp-project-version-variable.ps1
 
       - task: VSBuild@1
         displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
@@ -301,7 +301,7 @@ stages:
         inputs:
           secureFile: 'maven-settings.xml'
 
-      - powershell: .\scripts\build\set-project-version.ps1
+      - powershell: .\scripts\build\set-azp-project-version-variable.ps1
 
       - template: update-maven-version-steps.yml
         parameters:
@@ -413,7 +413,7 @@ stages:
     - job: promoteRepox
       displayName: 'SonarAnalyzer.CFG.CSharp'
       steps:
-        - powershell: .\scripts\build\set-project-version.ps1
+        - powershell: .\scripts\build\set-azp-project-version-variable.ps1
 
         - task: UsePythonVersion@0
           inputs:
