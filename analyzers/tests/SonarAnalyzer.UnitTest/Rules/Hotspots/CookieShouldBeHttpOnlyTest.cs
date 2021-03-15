@@ -52,11 +52,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var root = @"TestCases\WebConfig\CookieShouldBeHttpOnly\HttpOnlyCookiesConfig";
             var webConfigPath = Path.Combine(root, WebConfig);
-            TestHelper.CreateFilesToAnalyze(root, new[] { webConfigPath });
-            Verifier.VerifyAnalyzer(@"TestCases\WebConfig\CookieShouldBeHttpOnly\HttpOnlyCookiesConfig\CookieShouldBeHttpOnly.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_WithWebConfig.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 MetadataReferenceFacade.SystemWeb,
-                TestHelper.CreateSonarProjectConfig(root));
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
         [TestMethod]
@@ -66,11 +65,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var root = @"TestCases\WebConfig\CookieShouldBeHttpOnly\NonHttpOnlyCookiesConfig";
             var webConfigPath = Path.Combine(root, WebConfig);
-            TestHelper.CreateFilesToAnalyze(root, new[] { webConfigPath });
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 MetadataReferenceFacade.SystemWeb,
-                TestHelper.CreateSonarProjectConfig(root));
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 #else
         [TestMethod]

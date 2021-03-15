@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest
     {
         private const string ProjectConfigTemplate = @"
 <SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
-    <FilesToAnalyzePath>{0}\FilesToAnalyze.txt</FilesToAnalyzePath>
+    <FilesToAnalyzePath>{0}</FilesToAnalyzePath>
 </SonarProjectConfig>";
 
         public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true,
@@ -205,17 +205,18 @@ namespace SonarAnalyzer.UnitTest
             return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
 
-        public static string CreateSonarProjectConfig(string soanrProjectConfigDirectory)
+        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath)
         {
-            var sonarProjectConfigPath = Path.Combine(soanrProjectConfigDirectory, "SonarProjectConfig.xml");
-            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplate, soanrProjectConfigDirectory));
+            var sonarProjectConfigPath = Path.Combine(sonarProjectConfigDirectory, "SonarProjectConfig.xml");
+            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplate, filesToAnalyzePath));
             return sonarProjectConfigPath;
         }
 
-        public static void CreateFilesToAnalyze(string filesToAnalyzeDirectory, string[] filesToAnalyze)
+        public static string CreateFilesToAnalyze(string filesToAnalyzeDirectory, params string[] filesToAnalyze)
         {
             var filestoAnalyzePath = Path.Combine(filesToAnalyzeDirectory, "FilesToAnalyze.txt");
             File.WriteAllLines(filestoAnalyzePath, filesToAnalyze);
+            return filestoAnalyzePath;
         }
     }
 }
