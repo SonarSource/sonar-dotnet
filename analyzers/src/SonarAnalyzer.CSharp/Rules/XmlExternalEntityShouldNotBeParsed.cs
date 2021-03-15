@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             var netFrameworkVersion = versionProvider.GetDotNetFrameworkVersion(c.Compilation);
                             var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
 
-                            var trackers = TrackerFactory.Create(c.Compilation, versionProvider);
+                            var trackers = TrackerFactory.Create();
                             if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe)
                                || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe))
                             {
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
 
-                            var trackers = TrackerFactory.Create(c.Compilation, versionProvider);
+                            var trackers = TrackerFactory.Create();
                             if (trackers.XmlDocumentTracker.ShouldBeReported(assignment, c.SemanticModel)
                                || trackers.XmlTextReaderTracker.ShouldBeReported(assignment, c.SemanticModel))
                             {
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 "ProhibitDtd" // should be true in .NET 3.5
             );
 
-            public static TrackersHolder Create(Compilation compilation, INetFrameworkVersionProvider versionProvider)
+            public static TrackersHolder Create()
             {
                 var xmlDocumentTracker = new CSharpObjectInitializationTracker(
                     // we do not expect any constant values for XmlResolver
