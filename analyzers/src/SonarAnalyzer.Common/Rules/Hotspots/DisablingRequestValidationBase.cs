@@ -23,6 +23,7 @@ using System.Collections.Immutable;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -41,6 +42,8 @@ namespace SonarAnalyzer.Rules
         // See https://docs.microsoft.com/en-us/dotnet/api/system.web.configuration.httpruntimesection.requestvalidationmode
         private const int MinimumAcceptedRequestValidationModeValue = 4;
 
+        private static readonly Regex WebConfigRegex = new Regex(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
+
         private readonly DiagnosticDescriptor rule;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
@@ -50,49 +53,56 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSymbolAction(c =>
-                {
-                    if (!IsEnabled(c.Options))
-                    {
-                        return;
-                    }
-                    var attributes = c.Symbol.GetAttributes();
-                    if (attributes.IsEmpty)
-                    {
-                        return;
-                    }
-
-                    var attributeWithFalseParameter = attributes.FirstOrDefault(a =>
-                        a.ConstructorArguments.Length == 1
-                        && a.ConstructorArguments[0].Kind == TypedConstantKind.Primitive
-                        && a.ConstructorArguments[0].Value is bool b
-                        && !b
-                        && a.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
-                    if (attributeWithFalseParameter != null)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
-                    }
-                },
+            context.RegisterSymbolAction(CheckController,
                 SymbolKind.NamedType,
                 SymbolKind.Method);
 
-            context.RegisterCompilationAction(c =>
-            {
-                if (!IsEnabled(c.Options))
-                {
-                    return;
-                }
+            context.RegisterCompilationAction(c => CheckWebConfig(context, c));
+        }
 
-                foreach (var fullPath in context.ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles("web.config").Where(File.Exists))
+        private void CheckController(SymbolAnalysisContext c)
+        {
+            if (!IsEnabled(c.Options))
+            {
+                return;
+            }
+            var attributes = c.Symbol.GetAttributes();
+            if (attributes.IsEmpty)
+            {
+                return;
+            }
+
+            var attributeWithFalseParameter = attributes.FirstOrDefault(a =>
+                a.ConstructorArguments.Length == 1
+                && a.ConstructorArguments[0].Kind == TypedConstantKind.Primitive
+                && a.ConstructorArguments[0].Value is bool b
+                && !b
+                && a.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
+            if (attributeWithFalseParameter != null)
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeWithFalseParameter.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+            }
+        }
+
+        private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
+        {
+            if (!IsEnabled(c.Options))
+            {
+                return;
+            }
+
+            foreach (var fullPath in context.ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess))
+            {
+                var webConfig = File.ReadAllText(fullPath);
+                if (webConfig.Contains("<system.web>") && ParseXDocument(webConfig) is { } doc)
                 {
-                    var webConfig = File.ReadAllText(fullPath);
-                    if (webConfig.Contains("<system.web>") && ParseXDocument(webConfig) is { } doc)
-                    {
-                        ReportValidateRequest(doc, fullPath, c);
-                        ReportRequestValidationMode(doc, fullPath, c);
-                    }
+                    ReportValidateRequest(doc, fullPath, c);
+                    ReportRequestValidationMode(doc, fullPath, c);
                 }
-            });
+            }
+
+            static bool ShouldProcess(string path) =>
+                File.Exists(path) && !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
         }
 
         private void ReportValidateRequest(XDocument doc, string webConfigPath, CompilationAnalysisContext c)

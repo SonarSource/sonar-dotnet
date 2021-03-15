@@ -1,0 +1,1 @@
+﻿TestCases\WebConfig\TransformRelease\Web.Release.config
