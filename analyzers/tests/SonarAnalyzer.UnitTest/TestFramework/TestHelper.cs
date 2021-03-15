@@ -205,11 +205,17 @@ namespace SonarAnalyzer.UnitTest
             return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
 
-        public static string CreateSonarProjectConfig(string filesToAnalyzeDirectory)
+        public static string CreateSonarProjectConfig(string soanrProjectConfigDirectory)
         {
-            var sonarProjectConfigPath = Path.Combine(filesToAnalyzeDirectory, "SonarProjectConfig.xml");
-            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplate, filesToAnalyzeDirectory));
+            var sonarProjectConfigPath = Path.Combine(soanrProjectConfigDirectory, "SonarProjectConfig.xml");
+            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplate, soanrProjectConfigDirectory));
             return sonarProjectConfigPath;
+        }
+
+        public static void CreateFilesToAnalyze(string filesToAnalyzeDirectory, string[] filesToAnalyze)
+        {
+            var filestoAnalyzePath = Path.Combine(filesToAnalyzeDirectory, "FilesToAnalyze.txt");
+            File.WriteAllLines(filestoAnalyzePath, filesToAnalyze);
         }
     }
 }

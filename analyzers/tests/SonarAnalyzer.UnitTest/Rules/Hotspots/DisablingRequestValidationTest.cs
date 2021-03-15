@@ -59,14 +59,33 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\S5753Values")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\UnexpectedContent")]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Corrupt")]
         [TestCategory("Rule")]
-        public void DisablingRequestValidation_CS_WebConfig(string root) =>
+        public void DisablingRequestValidation_CS_WebConfig(string root)
+        {
+            var webConfigPath = Path.Combine(root, WebConfig);
+            TestHelper.CreateFilesToAnalyze(root, new[] { webConfigPath });
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                File.ReadAllText(Path.Combine(root, WebConfig)),
+                File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DisablingRequestValidation_CS_CorruptAndNonExistingWebConfigs()
+        {
+            var root = @"TestCases\WebConfig\DisablingRequestValidation\Corrupt";
+            var nonexisting = @"TestCases\WebConfig\DisablingRequestValidation\NonExsitingDirectory";
+            var corruptFilePath = Path.Combine(root, WebConfig);
+            var nonExistingFilePath = Path.Combine(nonexisting, WebConfig);
+            TestHelper.CreateFilesToAnalyze(root, new[] { corruptFilePath, nonExistingFilePath });
+            DiagnosticVerifier.VerifyExternalFile(
+                SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
+                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+                File.ReadAllText(corruptFilePath),
+                TestHelper.CreateSonarProjectConfig(root));
+        }
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\MultipleFiles", "SubFolder")]
@@ -82,6 +101,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             // decimal.TryParse() from the implementation might not recognize "1.2" under different culture
             newCulture.NumberFormat.NumberDecimalSeparator = ",";
             Thread.CurrentThread.CurrentCulture = newCulture;
+            var rootFile = Path.Combine(rootDirectory, WebConfig);
+            var filesToAnalyze = new List<string>() { rootFile };
+            foreach (var subFolder in subFolders)
+            {
+                filesToAnalyze.Add(Path.Combine(rootDirectory, subFolder, WebConfig));
+            }
+
+            TestHelper.CreateFilesToAnalyze(rootDirectory, filesToAnalyze.ToArray());
             try
             {
                 allDiagnostics = DiagnosticVerifier.GetDiagnostics(
@@ -110,10 +137,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisablingRequestValidation_CS_WebConfig_LowerCase()
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\LowerCase";
+            var webConfigPath = Path.Combine(root, "web.config");
+            TestHelper.CreateFilesToAnalyze(root, new[] { webConfigPath });
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                File.ReadAllText(Path.Combine(root, "web.config")),
+                File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root));
         }
 
@@ -122,12 +151,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformDebug\Web.Debug.config")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformRelease\Web.Release.config")]
         [TestCategory("Rule")]
-        public void DisablingRequestValidation_CS_WebConfig_Transformation(string configPath) =>
+        public void DisablingRequestValidation_CS_WebConfig_Transformation(string configPath)
+        {
+            TestHelper.CreateFilesToAnalyze(Path.GetDirectoryName(configPath), new[] { configPath });
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 File.ReadAllText(configPath),
                 TestHelper.CreateSonarProjectConfig(Path.GetDirectoryName(configPath)));
+        }
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -148,10 +180,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisablingRequestValidation_VB_WebConfig()
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\S5753Values";
+            var webConfigPath = Path.Combine(root, WebConfig);
+            TestHelper.CreateFilesToAnalyze(root, new[] { webConfigPath });
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                File.ReadAllText(Path.Combine(root, WebConfig)),
+                File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root));
         }
 
