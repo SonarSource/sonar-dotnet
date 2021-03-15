@@ -49,8 +49,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode) =>
             Verify(compilation, new[] { diagnosticAnalyzer }, checkMode);
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode) =>
-            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).First().GetText());
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode, string sonarProjectConfigPath = null) =>
+            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).First().GetText(), sonarProjectConfigPath);
 
         public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode, SourceText source, string sonarProjectConfigPath = null)
         {

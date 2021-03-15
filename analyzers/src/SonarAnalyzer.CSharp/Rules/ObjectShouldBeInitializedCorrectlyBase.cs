@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.Trackers;
@@ -35,6 +37,8 @@ namespace SonarAnalyzer.Rules
 
         protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat)
             : base(configuration, diagnosticId, messageFormat, RspecStrings.ResourceManager) { }
+
+        protected virtual bool IsDefaultConstructorSafe(SonarAnalysisContext context, AnalyzerOptions options) => false;
 
         protected override void Initialize(TrackerInput input)
         {
@@ -52,11 +56,13 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
+                    var isDefaultConstructorSafe = IsDefaultConstructorSafe(context, ccc.Options);
+
                     ccc.RegisterSyntaxNodeActionInNonGenerated(
                         c =>
                         {
                             var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                            if (ObjectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel))
+                            if (ObjectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel, isDefaultConstructorSafe ))
                             {
                                 c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetLocation()));
                             }

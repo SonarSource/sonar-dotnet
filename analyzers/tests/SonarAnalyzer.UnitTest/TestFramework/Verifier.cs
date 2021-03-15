@@ -103,6 +103,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
+                                          IEnumerable<MetadataReference> additionalReferences,
+                                          string sonarProjectConfigPath) =>
+            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, null, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences, sonarProjectConfigPath);
+
+        public static void VerifyAnalyzer(string path,
+                                          DiagnosticAnalyzer diagnosticAnalyzer,
                                           IEnumerable<MetadataReference> additionalReferences) =>
             VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, null, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
@@ -259,20 +265,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                            IEnumerable<ParseOptions> options,
                                            CompilationErrorBehavior checkMode,
                                            OutputKind outputKind,
-                                           IEnumerable<MetadataReference> additionalReferences)
+                                           IEnumerable<MetadataReference> additionalReferences,
+                                           string sonarProjectConfigPath = null)
         {
             var solution = SolutionBuilder.CreateSolutionFromPaths(paths, outputKind, additionalReferences, IsSupportForCSharp9InitNeeded(options));
-            VerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode);
+            VerifyAnalyzer(solution, diagnosticAnalyzers, options, checkMode, sonarProjectConfigPath);
         }
 
         private static void VerifyAnalyzer(SolutionBuilder solution,
                                            DiagnosticAnalyzer[] diagnosticAnalyzers,
                                            IEnumerable<ParseOptions> options,
-                                           CompilationErrorBehavior checkMode)
+                                           CompilationErrorBehavior checkMode,
+                                           string sonarProjectConfigPath = null)
         {
             foreach (var compilation in solution.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode);
+                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath);
             }
         }
 

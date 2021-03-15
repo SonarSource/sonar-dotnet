@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules
             foreach (var fullPath in context.ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess))
             {
                 var webConfig = File.ReadAllText(fullPath);
-                if (webConfig.Contains("<system.web>") && ParseXDocument(webConfig) is { } doc)
+                if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
                 {
                     ReportValidateRequest(doc, fullPath, c);
                     ReportRequestValidationMode(doc, fullPath, c);
@@ -102,15 +102,14 @@ namespace SonarAnalyzer.Rules
             }
 
             static bool ShouldProcess(string path) =>
-                File.Exists(path) && !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
+                !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
         }
 
         private void ReportValidateRequest(XDocument doc, string webConfigPath, CompilationAnalysisContext c)
         {
             foreach (var pages in doc.XPathSelectElements("configuration/system.web/pages"))
             {
-                if (pages.Attribute("validateRequest") is { } validateRequest
-                    && validateRequest.Value.Equals("false", StringComparison.OrdinalIgnoreCase)
+                if (pages.GetAttributeIfBoolValueIs("validateRequest", false) is { } validateRequest
                     && CreateLocation(webConfigPath, pages, validateRequest.ToString()) is { } location)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
@@ -146,18 +145,6 @@ namespace SonarAnalyzer.Rules
                 return Location.Create(path, new TextSpan(lineNumber, attribute.Length), linePos);
             }
             return null;
-        }
-
-        private static XDocument ParseXDocument(string text)
-        {
-            try
-            {
-                return XDocument.Parse(text, LoadOptions.SetLineInfo);
-            }
-            catch
-            {
-                return null;
-            }
         }
     }
 }

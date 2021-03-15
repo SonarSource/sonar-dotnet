@@ -22,6 +22,7 @@
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 #endif
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -33,6 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CookieShouldBeHttpOnlyTest
     {
+        private const string WebConfig = "Web.config";
+
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
         [TestMethod]
         [TestCategory("Rule")]
@@ -41,6 +44,32 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 MetadataReferenceFacade.SystemWeb);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToTrue()
+        {
+            var root = @"TestCases\WebConfig\CookieShouldBeHttpOnly\HttpOnlyCookiesConfig";
+            var webConfigPath = Path.Combine(root, WebConfig);
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_WithWebConfig.cs",
+                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.SystemWeb,
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToFalse()
+        {
+            var root = @"TestCases\WebConfig\CookieShouldBeHttpOnly\NonHttpOnlyCookiesConfig";
+            var webConfigPath = Path.Combine(root, WebConfig);
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
+                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                MetadataReferenceFacade.SystemWeb,
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+        }
 #else
         [TestMethod]
         [TestCategory("Rule")]

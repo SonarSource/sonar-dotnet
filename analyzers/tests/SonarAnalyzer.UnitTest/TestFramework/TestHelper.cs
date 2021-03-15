@@ -38,6 +38,11 @@ namespace SonarAnalyzer.UnitTest
 {
     internal static class TestHelper
     {
+        private const string ProjectConfigTemplate = @"
+<SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
+    <FilesToAnalyzePath>{0}</FilesToAnalyzePath>
+</SonarProjectConfig>";
+
         public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true,
             params MetadataReference[] additionalReferences)
         {
@@ -198,6 +203,20 @@ namespace SonarAnalyzer.UnitTest
             additionalText.Setup(x => x.Path).Returns(relativePath);
             additionalText.Setup(x => x.GetText(default)).Returns(text);
             return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
+        }
+
+        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath)
+        {
+            var sonarProjectConfigPath = Path.Combine(sonarProjectConfigDirectory, "SonarProjectConfig.xml");
+            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplate, filesToAnalyzePath));
+            return sonarProjectConfigPath;
+        }
+
+        public static string CreateFilesToAnalyze(string filesToAnalyzeDirectory, params string[] filesToAnalyze)
+        {
+            var filestoAnalyzePath = Path.Combine(filesToAnalyzeDirectory, "FilesToAnalyze.txt");
+            File.WriteAllLines(filestoAnalyzePath, filesToAnalyze);
+            return filestoAnalyzePath;
         }
     }
 }

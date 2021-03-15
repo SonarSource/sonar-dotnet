@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, objectCreation.GetLocation(), TelnetKey, recommendedProtocols[TelnetKey]));
             }
-            else if (!IsServerSafe(objectCreation) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel))
+            else if (!IsServerSafe(objectCreation) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(EnableSslRule, objectCreation.GetLocation()));
             }
