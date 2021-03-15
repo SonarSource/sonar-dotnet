@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
 
-            var results = sut.FindFiles("Web.config");
+            var results = sut.FindFiles("Web.config", false);
             results.Should().BeEquivalentTo(new[] { MixedSlashesWebConfigPath1, MixedSlashesWebConfigPath2 });
         }
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
 
-            var results = sut.FindFiles(fileNamePattern);
+            var results = sut.FindFiles(fileNamePattern, false);
             results.Should().BeEquivalentTo(new[] { MixedSlashesWebConfigPath1, MixedSlashesWebConfigPath2 });
         }
 
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var sut = new FilesToAnalyzeProvider(InvalidFilesToAnalyzePath);
 
-            var results = sut.FindFiles("123");
+            var results = sut.FindFiles("123", false);
             results.Should().HaveCount(1);
             results.Should().Contain("123");
         }
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             var sut = new FilesToAnalyzeProvider(InvalidFilesToAnalyzePath);
 
-            var results = sut.FindFiles(fileNamePattern);
+            var results = sut.FindFiles(fileNamePattern, false);
             results.Should().BeEquivalentTo(new[]
             {
                 MixedSlashesWebConfigPath2,
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var sut = new FilesToAnalyzeProvider(@"ResourceTests\FilesToAnalyze\EmptyFilesToAnalyze.txt");
 
-            var results = sut.FindFiles(new Regex(".*"));
+            var results = sut.FindFiles(new Regex(".*"), false);
             results.Should().BeEmpty();
         }
 
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var sut = new FilesToAnalyzeProvider(filePath);
 
-            var results = sut.FindFiles(new Regex(".*"));
+            var results = sut.FindFiles(new Regex(".*"), false);
             results.Should().BeEmpty();
         }
 
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var sut = new FilesToAnalyzeProvider(FilesToAnalyzePath);
 
-            var results = sut.FindFiles(new Regex(".*"));
+            var results = sut.FindFiles(new Regex(".*"), false);
             results.Should().BeEquivalentTo(new[]
             {
                 MixedSlashesWebConfigPath1,
