@@ -75,8 +75,8 @@ namespace SonarAnalyzer.Rules
             var attributeWithFalseParameter = attributes.FirstOrDefault(a =>
                 a.ConstructorArguments.Length == 1
                 && a.ConstructorArguments[0].Kind == TypedConstantKind.Primitive
-                && a.ConstructorArguments[0].Value is bool b
-                && !b
+                && a.ConstructorArguments[0].Value is bool enableValidationValue
+                && !enableValidationValue
                 && a.AttributeClass.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
             if (attributeWithFalseParameter != null)
             {
