@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules
             foreach (var pages in doc.XPathSelectElements("configuration/system.web/pages"))
             {
                 if (pages.GetAttributeIfBoolValueIs("validateRequest", false) is { } validateRequest
-                    && CreateLocation(webConfigPath, pages, validateRequest.ToString()) is { } location)
+                    && CreateLocation(webConfigPath, validateRequest) is { } location)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
                 }
@@ -124,25 +124,24 @@ namespace SonarAnalyzer.Rules
                 if (httpRuntime.Attribute("requestValidationMode") is { } requestValidationMode
                     && decimal.TryParse(requestValidationMode.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out var value)
                     && value < MinimumAcceptedRequestValidationModeValue
-                    && CreateLocation(webConfigPath, httpRuntime, requestValidationMode.ToString()) is { } location)
+                    && CreateLocation(webConfigPath, requestValidationMode) is { } location)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
                 }
             }
         }
 
-        private static Location CreateLocation(string path, XNode element, string attribute)
+        private static Location CreateLocation(string path, XAttribute attribute)
         {
-            var lineInfo = (IXmlLineInfo)element;
-            if (lineInfo.HasLineInfo())
+            // IXmlLineInfo is 1-based, whereas Roslyn is zero-based
+            var startPos = (IXmlLineInfo)attribute;
+            if (startPos.HasLineInfo())
             {
-                // the IXmlLineInfo.LineNumber is 1-based, whereas Roslyn is zero-based
-                var lineNumber = lineInfo.LineNumber - 1;
-                // IXmlLineInfo.LinePosition is 1-based
-                var start = lineInfo.LinePosition + element.ToString().IndexOf(attribute) - 2;
-                var end = start + attribute.Length;
-                var linePos = new LinePositionSpan(new LinePosition(lineNumber, start), new LinePosition(lineNumber, end));
-                return Location.Create(path, new TextSpan(lineNumber, attribute.Length), linePos);
+                // LoadOptions.PreserveWhitespace doesn't preserve whitespace inside nodes and attributes => there's no easy way to find full length of a XAttribute.
+                var length = attribute.Name.ToString().Length;
+                var start = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1);
+                var end = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1 + length);
+                return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
             }
             return null;
         }
