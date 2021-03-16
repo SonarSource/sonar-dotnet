@@ -36,7 +36,7 @@ namespace Tests.Diagnostics
             }
             if (a) { } // Noncompliant
 
-            switch (a) { /* This commit doesn't count */ } // Noncompliant
+            switch (a) { /* This comment doesn't count */ } // Noncompliant
 
             switch (a)
             {
@@ -69,7 +69,7 @@ namespace Tests.Diagnostics
                 if (a)
                 {
                     if (a) { } // Noncompliant
-                    switch (a) { /* This commit doesn't count */ } // Noncompliant
+                    switch (a) { /* This comment doesn't count */ } // Noncompliant
                     while (a)
                     {
                         for (int i = 0; i < 42; i++) { }  // Noncompliant

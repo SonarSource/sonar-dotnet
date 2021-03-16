@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
         [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\S5753Values")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Values")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\UnexpectedContent")]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig(string root)
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\MultipleFiles", "SubFolder")]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\S5753EdgeValues", "3.9", "5.6")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\EdgeValues", "3.9", "5.6")]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig_SubFolders(string rootDirectory, params string[] subFolders)
         {
@@ -172,7 +172,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisablingRequestValidation_VB_WebConfig()
         {
-            var root = @"TestCases\WebConfig\DisablingRequestValidation\S5753Values";
+            var root = @"TestCases\WebConfig\DisablingRequestValidation\Values";
             var webConfigPath = Path.Combine(root, WebConfig);
             DiagnosticVerifier.VerifyExternalFile(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
