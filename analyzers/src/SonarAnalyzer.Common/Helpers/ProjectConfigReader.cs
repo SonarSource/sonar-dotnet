@@ -20,6 +20,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using Microsoft.CodeAnalysis.Text;
 
@@ -44,8 +45,17 @@ namespace SonarAnalyzer.Helpers
 
         public ProjectConfigReader(SourceText sonarProjectConfig, string logFileName)
         {
-            projectConfig = sonarProjectConfig == null ? ProjectConfig.Empty : ReadContent(sonarProjectConfig, logFileName);
-            projectType = new Lazy<ProjectType>(() => ParseProjectType());
+            if (sonarProjectConfig != null)
+            {
+                projectConfig = ReadContent(sonarProjectConfig, logFileName);
+                projectType = new Lazy<ProjectType>(() => ParseProjectType());
+            }
+            else
+            {
+                projectConfig = ProjectConfig.Empty;
+                projectType = new Lazy<ProjectType>(() => ProjectType.None);
+            }
+            // FilesToAnalyzerProvider has the fallback inside
             filesToAnalyze = new Lazy<FilesToAnalyzeProvider>(() => new FilesToAnalyzeProvider(FilesToAnalyzePath));
         }
 

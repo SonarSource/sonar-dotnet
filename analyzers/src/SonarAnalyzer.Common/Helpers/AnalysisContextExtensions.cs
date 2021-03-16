@@ -49,19 +49,18 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxTree GetSyntaxTree(this SemanticModelAnalysisContext context) =>
             context.SemanticModel.SyntaxTree;
 
-
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNotCached(context.Compilation, context.Options));
         public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNotCached(null, context.Options));
         public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProject(context));
         public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNotCached(context.Compilation, context.Options));
         public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNotCached(context.SemanticModel?.Compilation, context.Options));
 
-        private static void ReportDiagnostic(ReportingContext reportingContext)
+        private static void ReportDiagnostic(ReportingContext reportingContext, bool isTestProject)
         {
             // This is the new way SonarLint will handle how and what to report...
             if (SonarAnalysisContext.ReportDiagnostic != null)
@@ -72,7 +71,8 @@ namespace SonarAnalyzer.Helpers
             }
 
             // ... but for compatibility purposes we need to keep handling the old-fashioned way. Old SonarLint can be used with latest NuGet.
-            if (reportingContext.Compilation.IsAnalysisScopeMatching(new[] { reportingContext.Diagnostic.Descriptor }) &&
+
+            if (reportingContext.Compilation.IsAnalysisScopeMatching(isTestProject, new[] { reportingContext.Diagnostic.Descriptor }) &&
                 !VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic) &&
                 (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
             {

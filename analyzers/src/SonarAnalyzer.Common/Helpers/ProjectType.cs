@@ -25,6 +25,7 @@ namespace SonarAnalyzer.Helpers
     /// </summary>
     public enum ProjectType
     {
+        None,
         Product,
         Test
     }

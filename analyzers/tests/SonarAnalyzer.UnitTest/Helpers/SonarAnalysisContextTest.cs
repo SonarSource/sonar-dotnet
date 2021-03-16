@@ -198,7 +198,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             config.ProjectPath.Should().BeNull();
             config.FilesToAnalyzePath.Should().BeNull();
             config.OutPath.Should().BeNull();
-            config.ProjectType.Should().Be(ProjectType.Product);
+            config.ProjectType.Should().Be(ProjectType.None);
             config.TargetFramework.Should().BeNull();
         }
 
