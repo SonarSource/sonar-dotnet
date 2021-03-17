@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Diagnostics;
 using System.Linq;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -36,6 +36,7 @@ namespace SonarAnalyzer.Rules
     {
         protected override void Initialize(SonarAnalysisContext context)
         {
+            // FIXME - could have a lambda to capture the context and use the caching mechanism, with fallback on the Compilation
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
                 CheckMethod,

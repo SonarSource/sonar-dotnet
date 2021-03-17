@@ -32,6 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyMethodTest
     {
+
+        // FIXME: add a test with TestHelper.CreateSonarProjectConfig
+
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyMethod() =>

@@ -47,11 +47,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void CheckMethod(SyntaxNodeAnalysisContext context)
         {
+            var isTestProject = SonarAnalysisContext.IsTestProjectNotCached(context.Compilation, context.Options);
             var methodBlock = (MethodBlockSyntax)context.Node;
 
             if (methodBlock.Statements.Count == 0 &&
                 !ContainsComments(methodBlock.EndSubOrFunctionStatement.GetLeadingTrivia()) &&
-                !ShouldMethodBeExcluded(methodBlock.SubOrFunctionStatement, context.SemanticModel))
+                !ShouldMethodBeExcluded(methodBlock.SubOrFunctionStatement, context.SemanticModel, isTestProject))
             {
                 context.ReportDiagnosticWhenActive(
                     Diagnostic.Create(rule, methodBlock.SubOrFunctionStatement.Identifier.GetLocation()));
@@ -61,7 +62,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static bool ContainsComments(IEnumerable<SyntaxTrivia> trivias)
             => trivias.Any(s => s.IsKind(SyntaxKind.CommentTrivia));
 
-        private static bool ShouldMethodBeExcluded(MethodStatementSyntax methodStatement, SemanticModel semanticModel)
+        private static bool ShouldMethodBeExcluded(MethodStatementSyntax methodStatement, SemanticModel semanticModel, bool isTestProject)
         {
             if (methodStatement.Modifiers.Any(SyntaxKind.MustOverrideKeyword) ||
                 methodStatement.Modifiers.Any(SyntaxKind.OverridableKeyword))
@@ -83,7 +84,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return true;
             }
 
-            return methodSymbol.IsOverrides() && semanticModel.Compilation.IsTest();
+            return methodSymbol.IsOverrides() && isTestProject;
         }
 
         private static bool IsDllImport(MethodStatementSyntax methodStatement) => methodStatement.AttributeLists
