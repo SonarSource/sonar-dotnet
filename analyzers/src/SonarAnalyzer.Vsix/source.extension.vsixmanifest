@@ -5,7 +5,6 @@
         <DisplayName>SonarAnalyzer for CSharp and VB.NET</DisplayName>
         <Description xml:space="preserve">This extension provides on-the-fly feedback to developers on new bugs and quality issues injected into C# and VB.Net code.</Description>
         <MoreInfo>http://vs.sonarlint.org</MoreInfo>
-        <ReleaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/8.21.0.0</ReleaseNotes>
         <Icon>logos\sonarsource_32.png</Icon>
     </Metadata>
     <Installation>
