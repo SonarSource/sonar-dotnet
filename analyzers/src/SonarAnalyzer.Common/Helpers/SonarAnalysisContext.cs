@@ -93,7 +93,33 @@ namespace SonarAnalyzer.Helpers
             ShouldAnalyzeGenerated(context, c, options);
 
         public bool IsTestProject(Compilation c, AnalyzerOptions options) =>
-            IsTestProject(context, c, options);
+            IsTestProject(context.TryGetValue, c, options);
+
+        // FIXME: replace with caching at higher level
+        public static bool IsTestProjectNotCached(Compilation c, AnalyzerOptions options)
+        {
+            var projectType = ProjectType.None;
+            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml &&
+                sonarProjectConfigXml.GetText() is { } sourceText)
+            {
+                var projectConfigReader =  new ProjectConfigReader(sourceText, SonarProjectConfigFileName);
+                projectType = projectConfigReader.ProjectType;
+            }
+
+            if (projectType == ProjectType.None)
+            {
+                // not called by the Scanner for .NET >= 5.1 (might be SonarLint, nuget or older scanners)
+                // if the compilation is null, we don't know whether this is a Main or Test source so let's run the rule
+                return c?.IsTest() ?? true;
+            }
+            else
+            {
+                return projectType == ProjectType.Test;
+            }
+        }
+
+        public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
+            IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
 
         public static bool ShouldAnalyzeGenerated(AnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
@@ -103,17 +129,6 @@ namespace SonarAnalyzer.Helpers
 
         public static bool ShouldAnalyzeGenerated(CompilationStartAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
-
-        // FIXME: merge with only caller
-        public static bool IsTestProject(AnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            IsTestProject(analysisContext.TryGetValue, c, options);
-
-        public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
-            IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
-
-        // FIXME remove
-        public static bool IsTestProject(CompilationStartAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
-            IsTestProject(analysisContext.TryGetValue, c, options);
 
         public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
             RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation, c => c.Options);
@@ -184,29 +199,6 @@ namespace SonarAnalyzer.Helpers
                     && tryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
                     ? cachedProjectConfigReader
                     : throw new InvalidOperationException($"File {Path.GetFileName(sonarProjectConfigXml.Path)} has been added as an AdditionalFile but could not be read and parsed.");
-                projectType = projectConfigReader.ProjectType;
-            }
-
-            if (projectType == ProjectType.None)
-            {
-                // not called by the Scanner for .NET >= 5.1 (might be SonarLint, nuget or older scanners)
-                // if the compilation is null, we don't know whether this is a Main or Test source so let's run the rule
-                return c?.IsTest() ?? true;
-            }
-            else
-            {
-                return projectType == ProjectType.Test;
-            }
-        }
-
-        // FIXME: replace with caching at higher level
-        public static bool IsTestProjectNotCached(Compilation c, AnalyzerOptions options)
-        {
-            ProjectType projectType = ProjectType.None;
-            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml &&
-                sonarProjectConfigXml.GetText() is { } sourceText)
-            {
-                var projectConfigReader =  new ProjectConfigReader(sourceText, SonarProjectConfigFileName);
                 projectType = projectConfigReader.ProjectType;
             }
 
