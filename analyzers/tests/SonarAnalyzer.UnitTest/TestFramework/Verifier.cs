@@ -115,8 +115,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
                                           IEnumerable<ParseOptions> options,
-                                          IEnumerable<MetadataReference> additionalReferences) =>
-            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+                                          IEnumerable<MetadataReference> additionalReferences,
+                                          string sonarProjectConfigPath = null) =>
+            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences, sonarProjectConfigPath);
 
         public static void VerifyAnalyzer(string path,
                                           DiagnosticAnalyzer diagnosticAnalyzer,
@@ -201,14 +202,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyNoIssueReported(string path,
                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                  IEnumerable<ParseOptions> options,
-                                                 IEnumerable<MetadataReference> additionalReferences) =>
-            VerifyNoIssueReported(path, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, additionalReferences);
+                                                 IEnumerable<MetadataReference> additionalReferences,
+                                                 string sonarProjectConfigPath = null) =>
+            VerifyNoIssueReported(path, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, additionalReferences, sonarProjectConfigPath);
 
         public static void VerifyNoIssueReported(string path,
                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                  IEnumerable<ParseOptions> options = null,
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                                 IEnumerable<MetadataReference> additionalReferences = null)
+                                                 IEnumerable<MetadataReference> additionalReferences = null,
+                                                 string sonarProjectConfigPath = null)
         {
             var projectBuilder = SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.FromPath(path))
@@ -216,13 +219,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddDocument(path);
             if (options == null)
             {
-                DiagnosticVerifier.VerifyNoIssueReported(projectBuilder.GetCompilation(null), diagnosticAnalyzer, checkMode);
+                DiagnosticVerifier.VerifyNoIssueReported(projectBuilder.GetCompilation(null), diagnosticAnalyzer, checkMode, sonarProjectConfigPath);
             }
             else
             {
                 foreach (var option in options)
                 {
-                    DiagnosticVerifier.VerifyNoIssueReported(projectBuilder.GetCompilation(option), diagnosticAnalyzer, checkMode);
+                    DiagnosticVerifier.VerifyNoIssueReported(projectBuilder.GetCompilation(option), diagnosticAnalyzer, checkMode, sonarProjectConfigPath);
                 }
             }
         }

@@ -31,6 +31,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -38,9 +39,14 @@ namespace SonarAnalyzer.UnitTest
 {
     internal static class TestHelper
     {
-        private const string ProjectConfigTemplate = @"
+        private const string ProjectConfigTemplateWithFilesToAnalyze = @"
 <SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
     <FilesToAnalyzePath>{0}</FilesToAnalyzePath>
+</SonarProjectConfig>";
+
+        private const string ProjectConfigTemplateWithProjectType = @"
+<SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
+    <ProjectType>{0}</ProjectType>
 </SonarProjectConfig>";
 
         public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true,
@@ -208,7 +214,14 @@ namespace SonarAnalyzer.UnitTest
         public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath)
         {
             var sonarProjectConfigPath = Path.Combine(sonarProjectConfigDirectory, "SonarProjectConfig.xml");
-            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplate, filesToAnalyzePath));
+            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplateWithFilesToAnalyze, filesToAnalyzePath));
+            return sonarProjectConfigPath;
+        }
+
+        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, ProjectType projectType)
+        {
+            var sonarProjectConfigPath = Path.Combine(sonarProjectConfigDirectory, "SonarProjectConfig.xml");
+            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplateWithProjectType, projectType));
             return sonarProjectConfigPath;
         }
 

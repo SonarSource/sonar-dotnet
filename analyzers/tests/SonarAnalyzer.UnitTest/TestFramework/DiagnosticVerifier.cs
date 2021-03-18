@@ -129,8 +129,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             string sonarProjectConfigPath = null) =>
             GetDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, verifyNoExceptionIsThrown, sonarProjectConfigPath);
 
-        public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default) =>
-            GetDiagnostics(compilation, diagnosticAnalyzer, checkMode).Should().BeEmpty();
+        public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default, string sonarProjectConfigPath = null) =>
+            GetDiagnostics(compilation, diagnosticAnalyzer, checkMode, sonarProjectConfigPath: sonarProjectConfigPath).Should().BeEmpty();
 
         public static ImmutableArray<Diagnostic> GetAllDiagnostics(Compilation compilation,
             IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode,
