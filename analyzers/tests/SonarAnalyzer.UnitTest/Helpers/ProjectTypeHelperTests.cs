@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -33,6 +34,32 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class ProjectTypeHelperTests
     {
+        [TestMethod]
+        public void TestReference_ShouldBeSynchronized()
+        {
+            // Purpose of this test is to remind us, that we need to synchronize this list with sonar-scanner-msbuild and sonar-security.
+            var synchronizedSortedReferences = new[]
+            {
+                "DOTMEMORY.UNIT",
+                "FAKEITEASY",
+                "FLUENTASSERTIONS",
+                "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
+                "MICROSOFT.VISUALSTUDIO.QUALITYTOOLS.UNITTESTFRAMEWORK",
+                "MACHINE.SPECIFICATIONS",
+                "MOQ",
+                "NSUBSTITUTE",
+                "NUNIT.FRAMEWORK",
+                "NUNITLITE",
+                "RHINO.MOCKS",
+                "SHOULDLY",
+                "TECHTALK.SPECFLOW",
+                "TELERIK.JUSTMOCK",
+                "XUNIT",
+                "XUNIT.CORE"
+            };
+            ProjectTypeHelper.TestAssemblyNames.OrderBy(x => x).Should().BeEquivalentTo(synchronizedSortedReferences);
+        }
+
         [TestMethod]
         public void IsTest_ReturnsTrueForTestFrameworks()
         {
