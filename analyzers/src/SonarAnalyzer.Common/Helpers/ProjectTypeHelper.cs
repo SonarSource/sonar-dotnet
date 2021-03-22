@@ -27,8 +27,8 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class ProjectTypeHelper
     {
-        // This list is duplicated in sonar-scanner-msbuild and sonar-security and should be synchronized.
-        public /* for testring */ static readonly ISet<string> TestAssemblyNames = new HashSet<string>
+        // This list is duplicated in sonar-scanner-msbuild and sonar-security and should be manually synchronized after each change.
+        public /* for testing */ static readonly ISet<string> TestAssemblyNames = new HashSet<string>
         {
             "DOTMEMORY.UNIT",
             "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
