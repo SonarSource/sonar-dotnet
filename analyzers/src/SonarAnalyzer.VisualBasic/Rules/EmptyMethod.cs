@@ -45,9 +45,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.SubBlock
         };
 
-        protected override void CheckMethod(SyntaxNodeAnalysisContext context)
+        protected override void CheckMethod(SyntaxNodeAnalysisContext context, bool isTestProject)
         {
-            var isTestProject = SonarAnalysisContext.IsTestProjectNotCached(context.Compilation, context.Options);
             var methodBlock = (MethodBlockSyntax)context.Node;
 
             if (methodBlock.Statements.Count == 0 &&

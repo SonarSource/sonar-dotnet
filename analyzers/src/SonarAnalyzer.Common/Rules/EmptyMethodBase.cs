@@ -34,16 +34,19 @@ namespace SonarAnalyzer.Rules
     public abstract class EmptyMethodBase<TLanguageKindEnum> : EmptyMethodBase
         where TLanguageKindEnum : struct
     {
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            // FIXME - could have a lambda to capture the context and use the caching mechanism, with fallback on the Compilation
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
-                CheckMethod,
-                SyntaxKinds.ToArray());
-        }
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(c =>
+            {
+                var isTestProject = context.IsTestProject(c.Compilation, c.Options);
+                if (DiagnosticAnalyzerContextHelper.ShouldAnalyze(context, GeneratedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                {
+                    CheckMethod(c, isTestProject);
+                }
+            }, SyntaxKinds.ToArray());
+
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
-        protected abstract void CheckMethod(SyntaxNodeAnalysisContext context);
+        protected abstract void CheckMethod(SyntaxNodeAnalysisContext context, bool isTestProject);
+        protected bool IsTestProject { get; private set; }
     }
 }

@@ -44,9 +44,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.MethodDeclaration
         };
 
-        protected override void CheckMethod(SyntaxNodeAnalysisContext context)
+        protected override void CheckMethod(SyntaxNodeAnalysisContext context, bool isTestProject)
         {
-            var isTestProject = SonarAnalysisContext.IsTestProjectNotCached(context.Compilation, context.Options);
             var methodNode = (MethodDeclarationSyntax)context.Node;
 
             // No need to check for ExpressionBody as arrowed methods can't be empty

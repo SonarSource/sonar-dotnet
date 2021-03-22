@@ -21,7 +21,9 @@
 #if NET
 using Microsoft.CodeAnalysis;
 #endif
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -32,9 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class EmptyMethodTest
     {
-
-        // FIXME: add a test with TestHelper.CreateSonarProjectConfig
-
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyMethod() =>
@@ -50,42 +49,75 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
-        public void EmptyMethod_CSharp9()
-        {
+        public void EmptyMethod_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\EmptyMethod.CSharp9.cs", new CS.EmptyMethod());
-        }
 #endif
 
             [TestMethod]
         [TestCategory("CodeFix")]
-        public void EmptyMethod_CodeFix_Throw()
-        {
+        public void EmptyMethod_CodeFix_Throw() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\EmptyMethod.cs",
                 @"TestCases\EmptyMethod.Throw.Fixed.cs",
                 new CS.EmptyMethod(),
                 new CS.EmptyMethodCodeFixProvider(),
                 CS.EmptyMethodCodeFixProvider.TitleThrow);
-        }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void EmptyMethod_CodeFix_Comment()
-        {
+        public void EmptyMethod_CodeFix_Comment() =>
             Verifier.VerifyCodeFix(
                 @"TestCases\EmptyMethod.cs",
                 @"TestCases\EmptyMethod.Comment.Fixed.cs",
                 new CS.EmptyMethod(),
                 new CS.EmptyMethodCodeFixProvider(),
                 CS.EmptyMethodCodeFixProvider.TitleComment);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void EmptyMethod_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.vb",
-                new VB.EmptyMethod());
-        }
+        public void EmptyMethod_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.vb", new VB.EmptyMethod());
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Unknown)]
+        public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainAndUnknownProject_CS(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.cs",
+                new CS.EmptyMethod(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: null,
+                sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(
+                    Directory.CreateDirectory(@"TestCases\EmptyMethod_WithVirtualOverride_RaisesIssueForMainAndUnknownProject_CS").FullName,
+                    projectType));
+
+        [TestMethod]
+        public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\EmptyMethod.OverrideVirtual.cs",
+                new CS.EmptyMethod(),
+                ParseOptionsHelper.FromCSharp8,
+                NuGetMetadataReference.NETStandardV2_1_0,
+                sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(
+                    Directory.CreateDirectory(@"TestCases\EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS").FullName,
+                    ProjectType.Test));
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Unknown)]
+        public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainAndUnknownProject_VB(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.OverrideVirtual.vb",
+                new VB.EmptyMethod(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: null,
+                sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(
+                    Directory.CreateDirectory(@"TestCases\EmptyMethod_WithVirtualOverride_RaisesIssueForMainAndUnknownProject_VB").FullName,
+                    projectType));
+
+        [TestMethod]
+        public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB() =>
+            Verifier.VerifyNoIssueReported(@"TestCases\EmptyMethod.OverrideVirtual.vb",
+                new VB.EmptyMethod(),
+                sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(
+                    Directory.CreateDirectory(@"TestCases\EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB").FullName,
+                    ProjectType.Test));
     }
 }
