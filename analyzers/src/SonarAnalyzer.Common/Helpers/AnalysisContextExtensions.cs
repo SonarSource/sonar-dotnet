@@ -49,6 +49,9 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxTree GetSyntaxTree(this SemanticModelAnalysisContext context) =>
             context.SemanticModel.SyntaxTree;
 
+        // ToDo: by default, do not verify if the project is Test or not when reporting. This is already being done at rule registration.
+        // Only check if it's a Test project for classes with multiple rules.
+        // See details in this comment: https://github.com/SonarSource/sonar-dotnet/pull/4167#discussion_r598560726
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNotCached(context.Compilation, context.Options));
         public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>

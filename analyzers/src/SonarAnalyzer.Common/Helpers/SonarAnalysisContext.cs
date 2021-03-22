@@ -95,7 +95,6 @@ namespace SonarAnalyzer.Helpers
         public bool IsTestProject(Compilation c, AnalyzerOptions options) =>
             IsTestProject(context.TryGetValue, c, options);
 
-        // FIXME: replace with caching at higher level
         public static bool IsTestProjectNotCached(Compilation c, AnalyzerOptions options)
         {
             var projectType = ProjectType.Unknown;
