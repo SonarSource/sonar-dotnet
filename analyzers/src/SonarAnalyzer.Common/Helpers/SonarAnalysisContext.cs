@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Helpers
         // FIXME: replace with caching at higher level
         public static bool IsTestProjectNotCached(Compilation c, AnalyzerOptions options)
         {
-            var projectType = ProjectType.None;
+            var projectType = ProjectType.Unknown;
             if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml &&
                 sonarProjectConfigXml.GetText() is { } sourceText)
             {
@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Helpers
                 projectType = projectConfigReader.ProjectType;
             }
 
-            if (projectType == ProjectType.None)
+            if (projectType == ProjectType.Unknown)
             {
                 // not called by the Scanner for .NET >= 5.1 (might be SonarLint, nuget or older scanners)
                 // if the compilation is null, we don't know whether this is a Main or Test source so let's run the rule
@@ -191,7 +191,7 @@ namespace SonarAnalyzer.Helpers
 
         private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation c, AnalyzerOptions options)
         {
-            ProjectType projectType = ProjectType.None;
+            ProjectType projectType = ProjectType.Unknown;
             if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
             {
                 var projectConfigReader = sonarProjectConfigXml.GetText() is { } sourceText
@@ -202,7 +202,7 @@ namespace SonarAnalyzer.Helpers
                 projectType = projectConfigReader.ProjectType;
             }
 
-            if (projectType == ProjectType.None)
+            if (projectType == ProjectType.Unknown)
             {
                 // not called by the Scanner for .NET >= 5.1 (might be SonarLint, nuget or older scanners)
                 // if the compilation is null, we don't know whether this is a Main or Test source so let's run the rule

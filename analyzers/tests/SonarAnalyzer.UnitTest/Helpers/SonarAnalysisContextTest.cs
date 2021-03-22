@@ -280,7 +280,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             config.ProjectPath.Should().BeNull();
             config.FilesToAnalyzePath.Should().BeNull();
             config.OutPath.Should().BeNull();
-            config.ProjectType.Should().Be(ProjectType.None);
+            config.ProjectType.Should().Be(ProjectType.Unknown);
             config.TargetFramework.Should().BeNull();
         }
 
