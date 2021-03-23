@@ -271,7 +271,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var options = TestHelper.CreateOptions(folder);
 
-            var sut = new SonarAnalysisContext(null, Enumerable.Empty<DiagnosticDescriptor>());
+            var sut = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
             var config = sut.ProjectConfiguration(options);
 
             config.AnalysisConfigPath.Should().BeNull();
@@ -287,7 +287,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var options = TestHelper.CreateOptions("ThisPathDoesNotExist\\SonarProjectConfig.xml");
 
-            var sut = new SonarAnalysisContext(null, Enumerable.Empty<DiagnosticDescriptor>());
+            var sut = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
 
             sut.Invoking(x => x.ProjectConfiguration(options)).Should().Throw<InvalidOperationException>()
                 .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");

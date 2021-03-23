@@ -105,16 +105,7 @@ namespace SonarAnalyzer.Helpers
                 projectType = projectConfigReader.ProjectType;
             }
 
-            if (projectType == ProjectType.Unknown)
-            {
-                // not called by the Scanner for .NET >= 5.1 (might be SonarLint, nuget or older scanners)
-                // if the compilation is null, we don't know whether this is a Main or Test source so let's run the rule
-                return c?.IsTest() ?? true;
-            }
-            else
-            {
-                return projectType == ProjectType.Test;
-            }
+            return IsTest(projectType, c);
         }
 
         public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
@@ -156,21 +147,8 @@ namespace SonarAnalyzer.Helpers
         /// <summary>
         /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
         /// </summary>
-        internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options)
-        {
-            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
-            {
-                return sonarProjectConfigXml.GetText() is { } sourceText
-                    // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when thrown
-                    && context.TryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
-                    ? cachedProjectConfigReader
-                    : throw new InvalidOperationException($"File {Path.GetFileName(sonarProjectConfigXml.Path)} has been added as an AdditionalFile but could not be read and parsed.");
-            }
-            else
-            {
-                return EmptyProjectConfig.Value;
-            }
-        }
+        internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>
+            ProjectConfiguration(context.TryGetValue, options);
 
         private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
             new SourceTextValueProvider<bool>(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
@@ -188,30 +166,31 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation c, AnalyzerOptions options)
+        private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation c, AnalyzerOptions options) =>
+            IsTest(ProjectConfiguration(tryGetValue, options).ProjectType, c);
+
+        private static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options)
         {
-            ProjectType projectType = ProjectType.Unknown;
             if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
             {
-                var projectConfigReader = sonarProjectConfigXml.GetText() is { } sourceText
+                return sonarProjectConfigXml.GetText() is { } sourceText
                     // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when thrown
                     && tryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
                     ? cachedProjectConfigReader
                     : throw new InvalidOperationException($"File {Path.GetFileName(sonarProjectConfigXml.Path)} has been added as an AdditionalFile but could not be read and parsed.");
-                projectType = projectConfigReader.ProjectType;
-            }
-
-            if (projectType == ProjectType.Unknown)
-            {
-                // not called by the Scanner for .NET >= 5.1 (might be SonarLint, nuget or older scanners)
-                // if the compilation is null, we don't know whether this is a Main or Test source so let's run the rule
-                return c?.IsTest() ?? true;
             }
             else
             {
-                return projectType == ProjectType.Test;
+                return EmptyProjectConfig.Value;
             }
         }
+
+        private static bool IsTest(ProjectType projectType, Compilation compilation) =>
+            projectType.IsKnown()
+                ? projectType == ProjectType.Test
+                // not called by the Scanner for .NET >= 5.1 (might be SonarLint, nuget or older scanners)
+                // if the compilation is null, we don't know whether this is a Main or Test source so let's run the rule
+                : compilation?.IsTest() ?? true;
 
         private static bool ShouldAnalyzeGenerated(TryGetValueDelegate<bool> tryGetValue, Compilation c, AnalyzerOptions options) =>
             options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path)) is { } sonarLintXml
@@ -232,7 +211,6 @@ namespace SonarAnalyzer.Helpers
                     // First, we need to ensure the rule does apply to the current scope (main vs test source).
                     // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
                     // the decision is made on based on whether the project contains the analyzer as NuGet).
-
                     var compilation = getCompilation(c);
                     var isTestProject = IsTestProject(compilation, getAnalyzerOptions(c));
 

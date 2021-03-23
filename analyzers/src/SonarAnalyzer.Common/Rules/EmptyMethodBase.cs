@@ -47,6 +47,5 @@ namespace SonarAnalyzer.Rules
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
         protected abstract void CheckMethod(SyntaxNodeAnalysisContext context, bool isTestProject);
-        protected bool IsTestProject { get; private set; }
     }
 }
