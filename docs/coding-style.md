@@ -1,4 +1,4 @@
-# Coding Style
+﻿# Coding Style
 
 ## General
 
@@ -21,6 +21,16 @@ Ordering of class members should be the following:
 1. Private nested classes
 
 Furthermore, each of these categories should be ordered from higher to lower accessibility level (public, internal, protected, private).
+
+Static fields and properties should be placed before instance ones. 
+
+Static methods are preferred to be after instance methods.
+
+## Naming conventions
+
+Single variable lambdas should use `x` as the variable name (based on lambda calculus λx). Multi variable lambdas should use descriptive names, where `x` can be used for the main iterated item like `(x, index) => ...`.
+
+Variable name `sut` (System Under Test) is allowed in unit tests that really tests a single unit (contrary to our usual rule integration unit tests).
 
 ## Multi-line statements
 
