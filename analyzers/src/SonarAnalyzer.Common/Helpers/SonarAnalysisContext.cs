@@ -161,6 +161,20 @@ namespace SonarAnalyzer.Helpers
         internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>
             ProjectConfiguration(context.TryGetValue, options);
 
+        internal static bool IsAnalysisScopeMatching(Compilation compilation, bool isTestProject, IEnumerable<DiagnosticDescriptor> diagnostics)
+        {
+            if (compilation == null)
+            {
+                return true; // We don't know whether this is a Main or Test source so let's run the rule
+            }
+
+            var matchingScopeTag = isTestProject
+                ? DiagnosticDescriptorBuilder.TestSourceScopeTag
+                : DiagnosticDescriptorBuilder.MainSourceScopeTag;
+
+            return diagnostics.Any(d => d.CustomTags.Contains(matchingScopeTag));
+        }
+
         private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
             new SourceTextValueProvider<bool>(x => PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(ParseXmlSettings(x), language));
 
@@ -215,7 +229,7 @@ namespace SonarAnalyzer.Helpers
                     var compilation = getCompilation(c);
                     var isTestProject = IsTestProject(compilation, getAnalyzerOptions(c));
 
-                    if (compilation.IsAnalysisScopeMatching(isTestProject, supportedDiagnostics) && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
+                    if (IsAnalysisScopeMatching(compilation, isTestProject, supportedDiagnostics) && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
                     {
                         registeredAction(c);
                     }

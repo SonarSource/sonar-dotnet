@@ -35,19 +35,5 @@ namespace SonarAnalyzer.Helpers
             // There's no direct way of checking compilation target framework yet (09/2020).
             // See https://github.com/dotnet/roslyn/issues/3798
             compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
-
-        internal static bool IsAnalysisScopeMatching(this Compilation compilation, bool isTestProject, IEnumerable<DiagnosticDescriptor> diagnostics)
-        {
-            if (compilation == null)
-            {
-                return true; // We don't know whether this is a Main or Test source so let's run the rule
-            }
-
-            var matchingScopeTag = isTestProject
-                ? DiagnosticDescriptorBuilder.TestSourceScopeTag
-                : DiagnosticDescriptorBuilder.MainSourceScopeTag;
-
-            return diagnostics.Any(d => d.CustomTags.Contains(matchingScopeTag));
-        }
     }
 }

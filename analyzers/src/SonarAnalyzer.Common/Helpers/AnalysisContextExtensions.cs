@@ -29,37 +29,48 @@ namespace SonarAnalyzer.Helpers
     {
         public static SyntaxTree GetSyntaxTree(this SyntaxNodeAnalysisContext context) =>
             context.Node.SyntaxTree;
+
         public static SyntaxTree GetSyntaxTree(this SyntaxTreeAnalysisContext context) =>
             context.Tree;
+
         public static SyntaxTree GetFirstSyntaxTree(this CompilationAnalysisContext context) =>
             context.Compilation.SyntaxTrees.FirstOrDefault();
+
 #pragma warning disable RS1012 // Start action has no registered actions.
         public static SyntaxTree GetFirstSyntaxTree(this CompilationStartAnalysisContext context) =>
 #pragma warning restore RS1012 // Start action has no registered actions.
             context.Compilation.SyntaxTrees.FirstOrDefault();
+
         public static SyntaxTree GetFirstSyntaxTree(this SymbolAnalysisContext context) =>
             context.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree;
+
         public static SyntaxTree GetSyntaxTree(this CodeBlockAnalysisContext context) =>
             context.CodeBlock.SyntaxTree;
+
 #pragma warning disable RS1012 // Start action has no registered actions.
         public static SyntaxTree GetSyntaxTree<TLanguageKindEnum>(this CodeBlockStartAnalysisContext<TLanguageKindEnum> context)
 #pragma warning restore RS1012 // Start action has no registered actions.
             where TLanguageKindEnum : struct =>
             context.CodeBlock.SyntaxTree;
+
         public static SyntaxTree GetSyntaxTree(this SemanticModelAnalysisContext context) =>
             context.SemanticModel.SyntaxTree;
 
         // ToDo: by default, do not verify if the project is Test or not when reporting. This is already being done at rule registration.
         // Only check if it's a Test project for classes with multiple rules.
-        // See details in this comment: https://github.com/SonarSource/sonar-dotnet/pull/4167#discussion_r598560726
+        // https://github.com/SonarSource/sonar-dotnet/issues/4173
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(context.Compilation, context.Options));
+
         public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(null, context.Options));
+
         public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProject(context));
+
         public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(context.Compilation, context.Options));
+
         public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(context.SemanticModel?.Compilation, context.Options));
 
@@ -74,7 +85,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             // ... but for compatibility purposes we need to keep handling the old-fashioned way. Old SonarLint can be used with latest NuGet.
-            if (reportingContext.Compilation.IsAnalysisScopeMatching(isTestProject, new[] { reportingContext.Diagnostic.Descriptor }) &&
+            if (SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, isTestProject, new[] { reportingContext.Diagnostic.Descriptor }) &&
                 !VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic) &&
                 (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
             {
