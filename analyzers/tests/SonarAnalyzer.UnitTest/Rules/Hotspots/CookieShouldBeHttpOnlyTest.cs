@@ -50,13 +50,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\Formatting")]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToTrue(string rootForWebConfig)
+        public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToTrue(string root)
         {
-            var webConfigPath = Path.Combine(rootForWebConfig, WebConfig);
+            var webConfigPath = Path.Combine(root, WebConfig);
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_WithWebConfig.cs",
                 new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 MetadataReferenceFacade.SystemWeb,
-                TestHelper.CreateSonarProjectConfig(rootForWebConfig, TestHelper.CreateFilesToAnalyze(rootForWebConfig, webConfigPath)));
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
         [TestMethod]
