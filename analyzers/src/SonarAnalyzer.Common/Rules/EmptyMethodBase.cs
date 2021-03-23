@@ -37,9 +37,9 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeAction(c =>
             {
-                var isTestProject = context.IsTestProject(c.Compilation, c.Options);
                 if (DiagnosticAnalyzerContextHelper.ShouldAnalyze(context, GeneratedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                 {
+                    var isTestProject = context.IsTestProject(c.Compilation, c.Options);
                     CheckMethod(c, isTestProject);
                 }
             }, SyntaxKinds.ToArray());

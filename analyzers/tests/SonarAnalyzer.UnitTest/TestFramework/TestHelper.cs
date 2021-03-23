@@ -39,14 +39,9 @@ namespace SonarAnalyzer.UnitTest
 {
     internal static class TestHelper
     {
-        private const string ProjectConfigTemplateWithFilesToAnalyze = @"
+        private const string ProjectConfigTemplate = @"
 <SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
-    <FilesToAnalyzePath>{0}</FilesToAnalyzePath>
-</SonarProjectConfig>";
-
-        private const string ProjectConfigTemplateWithProjectType = @"
-<SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
-    <ProjectType>{0}</ProjectType>
+    <{0}>{1}</{0}>
 </SonarProjectConfig>";
 
         public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true,
@@ -211,25 +206,28 @@ namespace SonarAnalyzer.UnitTest
             return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
 
-        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath)
-        {
-            var sonarProjectConfigPath = Path.Combine(sonarProjectConfigDirectory, "SonarProjectConfig.xml");
-            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplateWithFilesToAnalyze, filesToAnalyzePath));
-            return sonarProjectConfigPath;
-        }
+        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath) =>
+            CreateSonarProjectConfig(
+                Directory.CreateDirectory(sonarProjectConfigDirectory),
+                string.Format(ProjectConfigTemplate, "FilesToAnalyzePath", filesToAnalyzePath));
 
-        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, ProjectType projectType)
-        {
-            var sonarProjectConfigPath = Path.Combine(sonarProjectConfigDirectory, "SonarProjectConfig.xml");
-            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplateWithProjectType, projectType));
-            return sonarProjectConfigPath;
-        }
+        public static string CreateSonarProjectConfig(string testMethodName, ProjectType projectType) =>
+            CreateSonarProjectConfig(
+                Directory.CreateDirectory(@"TestCases\" + testMethodName),
+                string.Format(ProjectConfigTemplate, "ProjectType", projectType));
 
         public static string CreateFilesToAnalyze(string filesToAnalyzeDirectory, params string[] filesToAnalyze)
         {
             var filestoAnalyzePath = Path.Combine(filesToAnalyzeDirectory, "FilesToAnalyze.txt");
             File.WriteAllLines(filestoAnalyzePath, filesToAnalyze);
             return filestoAnalyzePath;
+        }
+
+        private static string CreateSonarProjectConfig(DirectoryInfo sonarProjectConfigDirectory, string projectConfigContent)
+        {
+            var sonarProjectConfigPath = Path.Combine(sonarProjectConfigDirectory.FullName, "SonarProjectConfig.xml");
+            File.WriteAllText(sonarProjectConfigPath, projectConfigContent);
+            return sonarProjectConfigPath;
         }
     }
 }

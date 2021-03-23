@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 options: ParseOptionsHelper.FromCSharp8,
                 additionalReferences: null,
                 sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(
-                    Directory.CreateDirectory(@"TestCases\EmptyMethod_WithVirtualOverride_RaisesIssueForMainAndUnknownProject_CS").FullName,
+                    nameof(EmptyMethod_WithVirtualOverride_RaisesIssueForMainAndUnknownProject_CS),
                     projectType));
 
         [TestMethod]
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.EmptyMethod(),
                 ParseOptionsHelper.FromCSharp8,
                 sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(
-                    Directory.CreateDirectory(@"TestCases\EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS").FullName,
+                    nameof(EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS),
                     ProjectType.Test));
 
         [DataTestMethod]
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 options: ParseOptionsHelper.FromCSharp8,
                 additionalReferences: null,
                 sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(
-                    Directory.CreateDirectory(@"TestCases\EmptyMethod_WithVirtualOverride_RaisesIssueForMainAndUnknownProject_VB").FullName,
+                    nameof(EmptyMethod_WithVirtualOverride_RaisesIssueForMainAndUnknownProject_VB),
                     projectType));
 
         [TestMethod]
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyNoIssueReported(@"TestCases\EmptyMethod.OverrideVirtual.vb",
                 new VB.EmptyMethod(),
                 sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(
-                    Directory.CreateDirectory(@"TestCases\EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB").FullName,
+                    nameof(EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB),
                     ProjectType.Test));
     }
 }

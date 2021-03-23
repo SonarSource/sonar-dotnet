@@ -44,17 +44,8 @@ namespace SonarAnalyzer.Helpers
 
         public ProjectConfigReader(SourceText sonarProjectConfig, string logFileName)
         {
-            if (sonarProjectConfig == null)
-            {
-                projectConfig = ProjectConfig.Empty;
-                projectType = new Lazy<ProjectType>(() => ProjectType.Unknown);
-            }
-            else
-            {
-                projectConfig = ReadContent(sonarProjectConfig, logFileName);
-                projectType = new Lazy<ProjectType>(() => ParseProjectType());
-            }
-            // FilesToAnalyzerProvider has the fallback inside
+            projectConfig = sonarProjectConfig == null ? ProjectConfig.Empty : ReadContent(sonarProjectConfig, logFileName);
+            projectType = new Lazy<ProjectType>(() => ParseProjectType());
             filesToAnalyze = new Lazy<FilesToAnalyzeProvider>(() => new FilesToAnalyzeProvider(FilesToAnalyzePath));
         }
 

@@ -53,15 +53,15 @@ namespace SonarAnalyzer.Helpers
         // Only check if it's a Test project for classes with multiple rules.
         // See details in this comment: https://github.com/SonarSource/sonar-dotnet/pull/4167#discussion_r598560726
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNotCached(context.Compilation, context.Options));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(context.Compilation, context.Options));
         public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNotCached(null, context.Options));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(null, context.Options));
         public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProject(context));
         public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNotCached(context.Compilation, context.Options));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(context.Compilation, context.Options));
         public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNotCached(context.SemanticModel?.Compilation, context.Options));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(context.SemanticModel?.Compilation, context.Options));
 
         private static void ReportDiagnostic(ReportingContext reportingContext, bool isTestProject)
         {
