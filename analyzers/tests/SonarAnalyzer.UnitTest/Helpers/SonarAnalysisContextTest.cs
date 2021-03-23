@@ -116,19 +116,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(Directory.CreateDirectory(@"TestCases\WhenProjectType_IsTest_RunsOnlyTestRules").FullName, ProjectType.Test);
             foreach (var testCase in testCases)
             {
-
-                Console.WriteLine(testCase.Path);
-                // FIXME - instead of checking the type, check the diagnostics like in CompilationExtensions.IsAnalysisScopeMatching
-                // the below are MAIN-only rules
-                if (testCase.Analyzer is DisposeNotImplementingDispose || testCase.Analyzer is ClassShouldNotBeAbstract)
-                {
-                    Verifier.VerifyNoIssueReported(testCase.Path,
-                                                   testCase.Analyzer,
-                                                   ParseOptionsHelper.FromCSharp8,
-                                                   ConcatReferences(testCase.AdditionalReferences),
-                                                   sonarProjectConfig);
-                }
-                else
+                var isTest = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.TestSourceScopeTag));
+                if (isTest)
                 {
                     // the rules with TEST scope should run
                     Verifier.VerifyAnalyzer(testCase.Path,
@@ -136,6 +125,15 @@ namespace SonarAnalyzer.UnitTest.Helpers
                                             ParseOptionsHelper.FromCSharp8,
                                             ConcatReferences(testCase.AdditionalReferences),
                                             sonarProjectConfig);
+                }
+                else
+                {
+                    // MAIN-only rules
+                    Verifier.VerifyNoIssueReported(testCase.Path,
+                                                   testCase.Analyzer,
+                                                   ParseOptionsHelper.FromCSharp8,
+                                                   ConcatReferences(testCase.AdditionalReferences),
+                                                   sonarProjectConfig);
                 }
             }
         }
@@ -146,25 +144,23 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(Directory.CreateDirectory(@"TestCases\WhenProjectType_IsTest_RunsOnlyTestRules").FullName, ProjectType.Product);
             foreach (var testCase in testCases)
             {
-                // FIXME - instead of checking the type, check the diagnostics like in CompilationExtensions.IsAnalysisScopeMatching
-                // the below is a TEST-only rule
-                if (testCase.Analyzer is TestMethodShouldContainAssertion)
-                {
-
-                    Verifier.VerifyNoIssueReported(testCase.Path,
-                                                   testCase.Analyzer,
-                                                   ParseOptionsHelper.FromCSharp8,
-                                                   ConcatReferences(testCase.AdditionalReferences),
-                                                   sonarProjectConfig);
-
-                }
-                else
+                var isProduct = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
+                if (isProduct)
                 {
                     Verifier.VerifyAnalyzer(testCase.Path,
                                             testCase.Analyzer,
                                             ParseOptionsHelper.FromCSharp8,
                                             ConcatReferences(testCase.AdditionalReferences),
                                             sonarProjectConfig);
+                }
+                else
+                {
+                    // TEST-only rule
+                    Verifier.VerifyNoIssueReported(testCase.Path,
+                                                   testCase.Analyzer,
+                                                   ParseOptionsHelper.FromCSharp8,
+                                                   ConcatReferences(testCase.AdditionalReferences),
+                                                   sonarProjectConfig);
                 }
             }
         }
@@ -193,6 +189,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             {
                 SonarAnalysisContext.ReportDiagnostic = context =>
                 {
+                    // special logic for rules with SyntaxNodeAnalysisContext
                     if (context.Diagnostic.Id != AnonymousDelegateEventUnsubscribe.DiagnosticId && context.Diagnostic.Id != TestMethodShouldContainAssertion.DiagnosticId)
                     {
                         // Verifier expects all diagnostics to increase the counter in order to check that all rules call the
@@ -208,6 +205,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 {
                     foreach (var testCase in testCases)
                     {
+                        // special logic for rules with SyntaxNodeAnalysisContext
                         if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe || testCase.Analyzer is TestMethodShouldContainAssertion)
                         {
                             Verifier.VerifyNoIssueReported(testCase.Path,

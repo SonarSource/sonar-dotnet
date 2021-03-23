@@ -36,7 +36,6 @@ namespace SonarAnalyzer.Helpers
             // See https://github.com/dotnet/roslyn/issues/3798
             compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
 
-        // FIXME: move in ProjectTypeHelper
         internal static bool IsAnalysisScopeMatching(this Compilation compilation, bool isTestProject, IEnumerable<DiagnosticDescriptor> diagnostics)
         {
             if (compilation == null)

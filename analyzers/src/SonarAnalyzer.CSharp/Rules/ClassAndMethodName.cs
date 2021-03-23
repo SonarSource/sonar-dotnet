@@ -125,7 +125,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var isNameValid = IsTypeNameValid(identifier.ValueText,
                 requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
                 allowInitialI: typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword),
-                // FIXME - first check
+                // ToDo https://github.com/SonarSource/sonar-dotnet/issues/4172
+                // use SonarAnalysisContext.IsTestProject(c.Compilation, c.Options);
                 areUnderscoresAllowed: context.IsTest(),
                 suggestion: out var suggestion);
 
