@@ -95,7 +95,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyNoIssueReported(@"TestCases\EmptyMethod.OverrideVirtual.cs",
                 new CS.EmptyMethod(),
                 ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0,
                 sonarProjectConfigPath: TestHelper.CreateSonarProjectConfig(
                     Directory.CreateDirectory(@"TestCases\EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS").FullName,
                     ProjectType.Test));
