@@ -28,52 +28,44 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly Action<Diagnostic> contextSpecificReport;
 
-        public ReportingContext(SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
-        {
-            SyntaxTree = context.GetSyntaxTree();
-            Compilation = context.Compilation;
-            Diagnostic = diagnostic;
-            this.contextSpecificReport = context.ReportDiagnostic;
-        }
-
-        public ReportingContext(SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
-        {
-            SyntaxTree = context.GetSyntaxTree();
-            Compilation = null;
-            Diagnostic = diagnostic;
-            this.contextSpecificReport = context.ReportDiagnostic;
-        }
-
-        public ReportingContext(CompilationAnalysisContext context, Diagnostic diagnostic)
-        {
-            SyntaxTree = context.GetFirstSyntaxTree();
-            Compilation = context.Compilation;
-            Diagnostic = diagnostic;
-            this.contextSpecificReport = context.ReportDiagnostic;
-        }
-
-        public ReportingContext(SymbolAnalysisContext context, Diagnostic diagnostic)
-        {
-            SyntaxTree = context.GetFirstSyntaxTree();
-            Compilation = context.Compilation;
-            Diagnostic = diagnostic;
-            this.contextSpecificReport = context.ReportDiagnostic;
-        }
-
-        public ReportingContext(CodeBlockAnalysisContext context, Diagnostic diagnostic)
-        {
-            SyntaxTree = context.GetSyntaxTree();
-            Compilation = context.SemanticModel.Compilation;
-            Diagnostic = diagnostic;
-            this.contextSpecificReport = context.ReportDiagnostic;
-        }
-
         public SyntaxTree SyntaxTree { get; }
-
         public Diagnostic Diagnostic { get; }
-
         public Compilation Compilation { get; }
+        public bool? IsTestProject { get; set; }    //FIXME: Get only
 
-        public void ReportDiagnostic(Diagnostic diagnostic) => this.contextSpecificReport(diagnostic);
+        public ReportingContext(SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
+            : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, context.Compilation, context.GetSyntaxTree()) { }
+
+        public ReportingContext(SyntaxTreeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
+            : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, null, context.GetSyntaxTree()) { }
+
+        public ReportingContext(CompilationAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
+            : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, context.Compilation, context.GetFirstSyntaxTree()) { }
+
+        public ReportingContext(SymbolAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
+            : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, context.Compilation, context.GetFirstSyntaxTree()) { }
+
+        public ReportingContext(CodeBlockAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
+            : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, context.SemanticModel.Compilation, context.GetSyntaxTree()) { }
+
+        private ReportingContext(Diagnostic diagnostic,
+                                 SonarAnalysisContext verifyScopeContext,
+                                 AnalyzerOptions options,
+                                 Action<Diagnostic> contextSpecificReport,
+                                 Compilation compilation,
+                                 SyntaxTree syntaxTree)
+        {
+            Diagnostic = diagnostic;
+            SyntaxTree = syntaxTree;
+            Compilation = compilation;
+            this.contextSpecificReport = contextSpecificReport;
+            if (verifyScopeContext != null)
+            {
+                IsTestProject = verifyScopeContext.IsTestProject(compilation, options);
+            }
+        }
+
+        public void ReportDiagnostic(Diagnostic diagnostic) =>
+            contextSpecificReport(diagnostic);
     }
 }

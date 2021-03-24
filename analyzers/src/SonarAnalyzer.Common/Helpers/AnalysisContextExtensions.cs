@@ -56,27 +56,31 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxTree GetSyntaxTree(this SemanticModelAnalysisContext context) =>
             context.SemanticModel.SyntaxTree;
 
-        // ToDo: by default, do not verify if the project is Test or not when reporting. This is already being done at rule registration.
-        // Only check if it's a Test project for classes with multiple rules.
-        // https://github.com/SonarSource/sonar-dotnet/issues/4173
-        public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(context.Compilation, context.Options));
+        /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
+        public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic, verifyScopeContext));
 
         public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(null, context.Options));
+            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(null, context.Options) });
 
         public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProject(context));
+            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProject(context)});
 
         public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(context.Compilation, context.Options));
+            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(context.Compilation, context.Options)});
 
         public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProjectNoCache(context.SemanticModel?.Compilation, context.Options));
+            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(context.SemanticModel?.Compilation, context.Options)});
 
-        private static void ReportDiagnostic(ReportingContext reportingContext, bool isTestProject)
+        private static void ReportDiagnostic(ReportingContext reportingContext)
         {
-            // This is the new way SonarLint will handle how and what to report...
+            if (reportingContext.IsTestProject.HasValue
+                && !SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, reportingContext.IsTestProject.Value, new[] { reportingContext.Diagnostic.Descriptor }))
+            {
+                return;
+            }
+
+            // This is the current way SonarLint will handle how and what to report...
             if (SonarAnalysisContext.ReportDiagnostic != null)
             {
                 Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the old and the new delegates.");
@@ -85,9 +89,8 @@ namespace SonarAnalyzer.Helpers
             }
 
             // ... but for compatibility purposes we need to keep handling the old-fashioned way. Old SonarLint can be used with latest NuGet.
-            if (SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, isTestProject, new[] { reportingContext.Diagnostic.Descriptor }) &&
-                !VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic) &&
-                (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
+            if (!VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic)
+                && (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
             {
                 reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
             }

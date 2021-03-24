@@ -101,6 +101,7 @@ namespace SonarAnalyzer.Helpers
         private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation c, AnalyzerOptions options) =>
             IsTest(ProjectConfiguration(tryGetValue, options).ProjectType, c);
 
+        [Obsolete] //FIXME: REMOVE
         public static bool IsTestProjectNoCache(Compilation c, AnalyzerOptions options)
         {
             var projectType = ProjectType.Unknown;
