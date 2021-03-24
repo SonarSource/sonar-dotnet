@@ -3025,7 +3025,7 @@
     <value>30min</value>
   </data>
   <data name="S2053_Scope" xml:space="preserve">
-    <value>All</value>
+    <value>Main</value>
   </data>
   <data name="S2053_Severity" xml:space="preserve">
     <value>Critical</value>

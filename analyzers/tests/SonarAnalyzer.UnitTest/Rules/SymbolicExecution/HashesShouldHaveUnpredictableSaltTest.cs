@@ -33,15 +33,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class HashesShouldHaveUnpredictableSaltTest
     {
-        [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
+        [TestMethod]
         [TestCategory("Rule")]
-        public void HashesShouldHaveUnpredictableSalt(ProjectType projectType) =>
+        public void HashesShouldHaveUnpredictableSalt() =>
             Verifier.VerifyAnalyzer(@"TestCases\HashesShouldHaveUnpredictableSalt.cs",
                                     GetAnalyzer(),
                                     ParseOptionsHelper.FromCSharp8,
-                                    MetadataReferenceFacade.SystemSecurityCryptography.Concat(TestHelper.ProjectTypeReference(projectType)));
+                                    MetadataReferenceFacade.SystemSecurityCryptography);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void HashesShouldHaveUnpredictableSalt_DoesNotRaiseIssuesForTestProject() =>
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\HashesShouldHaveUnpredictableSalt.cs",
+                                                 GetAnalyzer(),
+                                                 ParseOptionsHelper.FromCSharp8,
+                                                 MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]
