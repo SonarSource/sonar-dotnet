@@ -98,31 +98,6 @@ namespace SonarAnalyzer.Helpers
         public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
             IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
 
-        private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation c, AnalyzerOptions options) =>
-            IsTest(ProjectConfiguration(tryGetValue, options).ProjectType, c);
-
-        [Obsolete] //FIXME: REMOVE
-        public static bool IsTestProjectNoCache(Compilation c, AnalyzerOptions options)
-        {
-            var projectType = ProjectType.Unknown;
-            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml &&
-                sonarProjectConfigXml.GetText() is { } sourceText)
-            {
-                var projectConfigReader =  new ProjectConfigReader(sourceText, SonarProjectConfigFileName);
-                projectType = projectConfigReader.ProjectType;
-            }
-
-            return IsTest(projectType, c);
-        }
-
-        private static bool IsTest(ProjectType projectType, Compilation compilation) =>
-            projectType == ProjectType.Unknown
-                // not called by the Scanner for .NET >= 5.1 (might be SonarLint, nuget or older scanners)
-                // if the compilation is null, we don't know whether this is a Main or Test source so let's run the rule
-                ? compilation?.IsTest() ?? true
-                // consider the Scanner for .NET decision
-                : projectType == ProjectType.Test;
-
         public static bool ShouldAnalyzeGenerated(AnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
 
@@ -174,6 +149,16 @@ namespace SonarAnalyzer.Helpers
                 : DiagnosticDescriptorBuilder.MainSourceScopeTag;
 
             return diagnostics.Any(d => d.CustomTags.Contains(matchingScopeTag));
+        }
+
+        private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)
+        {
+            var projectType = ProjectConfiguration(tryGetValue, options).ProjectType;
+            return projectType == ProjectType.Unknown
+                // SonarLint, NuGet or Scanner <= 5.0. We run the rule if the compilation is null, becase we can't detect test references.
+                ? compilation?.IsTest() ?? true
+                // Scanner >= 5.1 does authoritative decision that we follow
+                : projectType == ProjectType.Test;
         }
 
         private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
