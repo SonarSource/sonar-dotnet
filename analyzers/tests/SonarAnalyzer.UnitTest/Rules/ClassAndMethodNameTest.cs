@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ClassName_CSharp() =>
+        public void ClassName_CS() =>
             Verifier.VerifyAnalyzer(
                 new[]
                 {
@@ -45,16 +45,31 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ClassName_InTestProject_CS() =>
+            Verifier.VerifyAnalyzerInTest(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8);
+
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
-        public void ClassName_TopLevelStatement() =>
+        public void ClassName_TopLevelStatement_CS() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\ClassName.TopLevelStatement.cs", new CS.ClassAndMethodName());
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void RecordName() =>
+        public void ClassName_TopLevelStatement_InTestProject_CS() =>
+            Verifier.VerifyAnalyzerFromCSharp9ConsoleInTest(@"TestCases\ClassName.TopLevelStatement.Test.cs", new CS.ClassAndMethodName());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RecordName_CS() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RecordName_InTestProject_CS() =>
+            Verifier.VerifyNoIssueReportedFromCSharp9InTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
 #endif
 
         [TestMethod]
@@ -64,8 +79,21 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodName() =>
+        public void MethodName_CS() =>
             Verifier.VerifyAnalyzer(
+                new[]
+                {
+                    @"TestCases\MethodName.cs",
+                    @"TestCases\MethodName.Partial.cs",
+                },
+                new CS.ClassAndMethodName(),
+                ParseOptionsHelper.FromCSharp8);
+
+        // ToDo fix conflict with PR #4179
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodName_InTestProject_CS() =>
+            Verifier.VerifyAnalyzerInTest(
                 new[]
                 {
                     @"TestCases\MethodName.cs",
@@ -79,6 +107,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MethodName_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodName_InTestProject_CSharp9() =>
+            Verifier.VerifyAnalyzerFromCSharp9LibraryInTest(@"TestCases\MethodName.CSharp9.cs", new CS.ClassAndMethodName());
+
 #endif
 
         [TestMethod]

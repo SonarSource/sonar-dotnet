@@ -95,6 +95,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyAnalyzerFromCSharp9Console(string path, DiagnosticAnalyzer[] diagnosticAnalyzers, IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, OutputKind.ConsoleApplication, additionalReferences);
 
+        public static void VerifyAnalyzerFromCSharp9LibraryInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzerFromCSharp9InTest(path, diagnosticAnalyzer, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+
+        public static void VerifyAnalyzerFromCSharp9ConsoleInTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzerFromCSharp9InTest(path, diagnosticAnalyzer, OutputKind.ConsoleApplication, additionalReferences);
+
         /// <summary>
         /// Verify analyzer from C# 9 without top level statements.
         /// </summary>
@@ -158,6 +164,27 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
+        public static void VerifyAnalyzerInTest(string path,
+                          DiagnosticAnalyzer diagnosticAnalyzer,
+                          IEnumerable<ParseOptions> options = null,
+                          CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                          IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyAnalyzerInTest(new[] { path }, diagnosticAnalyzer, options, checkMode, outputKind, additionalReferences);
+
+        public static void VerifyAnalyzerInTest(IEnumerable<string> paths,
+                                  DiagnosticAnalyzer diagnosticAnalyzer,
+                                  IEnumerable<ParseOptions> options = null,
+                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                  OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                  IEnumerable<MetadataReference> additionalReferences = null)
+        {
+            var referencesWithTest = additionalReferences == null
+                ? NuGetMetadataReference.MSTestTestFrameworkV1
+                : NuGetMetadataReference.MSTestTestFrameworkV1.Concat(additionalReferences);
+            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, checkMode, outputKind, referencesWithTest);
+        }
+
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths,
                                                            UtilityAnalyzerBase diagnosticAnalyzer,
                                                            string protobufPath,
@@ -194,27 +221,40 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer);
         }
 
+        public static void VerifyNoIssueReportedFromCSharp9InTest(string path,
+                                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                                  OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                                  IEnumerable<MetadataReference> additionalReferences = null)
+        {
+            var referencesWithTest = additionalReferences == null
+                ? NuGetMetadataReference.MSTestTestFrameworkV1
+                : NuGetMetadataReference.MSTestTestFrameworkV1.Concat(additionalReferences);
+
+            VerifyNoIssueReported(path, diagnosticAnalyzer, options: ParseOptionsHelper.FromCSharp9, outputKind: outputKind, additionalReferences: referencesWithTest);
+        }
+
         public static void VerifyNoIssueReported(string path,
                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                  IEnumerable<MetadataReference> additionalReferences) =>
-            VerifyNoIssueReported(path, diagnosticAnalyzer, null, CompilationErrorBehavior.Default, additionalReferences);
+            VerifyNoIssueReported(path, diagnosticAnalyzer, null, checkMode: CompilationErrorBehavior.Default, additionalReferences: additionalReferences);
 
         public static void VerifyNoIssueReported(string path,
                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                  IEnumerable<ParseOptions> options,
                                                  IEnumerable<MetadataReference> additionalReferences,
                                                  string sonarProjectConfigPath = null) =>
-            VerifyNoIssueReported(path, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, additionalReferences, sonarProjectConfigPath);
+            VerifyNoIssueReported(path, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, additionalReferences: additionalReferences, sonarProjectConfigPath: sonarProjectConfigPath);
 
         public static void VerifyNoIssueReported(string path,
                                                  SonarDiagnosticAnalyzer diagnosticAnalyzer,
                                                  IEnumerable<ParseOptions> options = null,
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                                 OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
                                                  IEnumerable<MetadataReference> additionalReferences = null,
                                                  string sonarProjectConfigPath = null)
         {
             var projectBuilder = SolutionBuilder.Create()
-                .AddProject(AnalyzerLanguage.FromPath(path))
+                .AddProject(AnalyzerLanguage.FromPath(path), outputKind: outputKind)
                 .AddReferences(additionalReferences)
                 .AddDocument(path);
             if (options == null)
@@ -262,6 +302,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                         IEnumerable<ParseOptions> options = null,
                                         IEnumerable<MetadataReference> additionalReferences = null) =>
             CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, options, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
+
+        private static void VerifyAnalyzerFromCSharp9InTest(string path, DiagnosticAnalyzer diagnosticAnalyzer, OutputKind outputKind, IEnumerable<MetadataReference> additionalReferences = null)
+        {
+            var referencesWithTest = additionalReferences == null
+                ? NuGetMetadataReference.MSTestTestFrameworkV1
+                : NuGetMetadataReference.MSTestTestFrameworkV1.Concat(additionalReferences);
+            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, ParseOptionsHelper.FromCSharp9, CompilationErrorBehavior.Default, outputKind, referencesWithTest);
+        }
 
         private static void VerifyAnalyzer(IEnumerable<string> paths,
                                            DiagnosticAnalyzer[] diagnosticAnalyzers,
