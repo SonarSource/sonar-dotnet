@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -28,12 +30,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UseUriInsteadOfStringTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void UseUriInsteadOfString() =>
+        public void UseUriInsteadOfString(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
                 new CS.UseUriInsteadOfString(),
-                MetadataReferenceFacade.SystemDrawing);
+                MetadataReferenceFacade.SystemDrawing.Concat(TestHelper.ProjectTypeReference(projectType)));
 
 #if NET
         [TestMethod]
