@@ -205,15 +205,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public static void VerifyNoIssueReportedInTest(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null)
+        public static void VerifyNoIssueReportedInTest(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, IEnumerable<MetadataReference> additionalReferences = null) =>
+            VerifyNoIssueReportedInTest(path, diagnosticAnalyzer, null, additionalReferences);
+
+        public static void VerifyNoIssueReportedInTest(string path,
+                                                       SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                       IEnumerable<ParseOptions> options,
+                                                       IEnumerable<MetadataReference> additionalReferences = null)
         {
-            var compilation = SolutionBuilder.Create()
+            var builder = SolutionBuilder.Create()
                 .AddTestProject(AnalyzerLanguage.FromPath(path))
                 .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)    // Any reference to detect a test project
                 .AddReferences(additionalReferences)
-                .AddDocument(path)
-                .GetCompilation();
-            DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer);
+                .AddDocument(path);
+
+            VerifyNoIssueReported(builder, diagnosticAnalyzer, options, CompilationErrorBehavior.Default, null);
         }
 
         public static void VerifyNoIssueReportedFromCSharp9InTest(string path,
@@ -242,21 +248,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                  IEnumerable<MetadataReference> additionalReferences = null,
                                                  string sonarProjectConfigPath = null)
         {
-            var projectBuilder = SolutionBuilder.Create()
+            var builder = SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.FromPath(path), outputKind: outputKind)
                 .AddReferences(additionalReferences)
                 .AddDocument(path);
-            if (options == null)
-            {
-                DiagnosticVerifier.VerifyNoIssueReported(projectBuilder.GetCompilation(null), diagnosticAnalyzer, checkMode, sonarProjectConfigPath);
-            }
-            else
-            {
-                foreach (var option in options)
-                {
-                    DiagnosticVerifier.VerifyNoIssueReported(projectBuilder.GetCompilation(option), diagnosticAnalyzer, checkMode, sonarProjectConfigPath);
-                }
-            }
+
+            VerifyNoIssueReported(builder, diagnosticAnalyzer, options, checkMode, sonarProjectConfigPath);
         }
 
         public static void VerifyCodeFix(string path,
@@ -316,6 +313,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             foreach (var compilation in solution.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath);
+            }
+        }
+
+        private static void VerifyNoIssueReported(ProjectBuilder builder,
+                                                   SonarDiagnosticAnalyzer diagnosticAnalyzer,
+                                                   IEnumerable<ParseOptions> options,
+                                                   CompilationErrorBehavior checkMode,
+                                                   string sonarProjectConfigPath)
+        {
+            foreach (var option in options ?? new ParseOptions[] { null })
+            {
+                DiagnosticVerifier.VerifyNoIssueReported(builder.GetCompilation(option), diagnosticAnalyzer, checkMode, sonarProjectConfigPath);
             }
         }
 
