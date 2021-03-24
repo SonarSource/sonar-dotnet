@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Helpers
         public SyntaxTree SyntaxTree { get; }
         public Diagnostic Diagnostic { get; }
         public Compilation Compilation { get; }
-        public bool? IsTestProject { get; set; }    //FIXME: Get only
+        public bool? IsTestProject { get; set; }
 
         public ReportingContext(SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
             : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, context.Compilation, context.GetSyntaxTree()) { }

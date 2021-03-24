@@ -65,13 +65,13 @@ namespace SonarAnalyzer.Helpers
             ReportDiagnostic(new ReportingContext(context, diagnostic, null));
 
         public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProject(context)});
+            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProject(context) });
 
         public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(context.Compilation, context.Options)});
+            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(context.Compilation, context.Options) });
 
         public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(context.SemanticModel?.Compilation, context.Options)});
+            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(context.SemanticModel?.Compilation, context.Options) });
 
         private static void ReportDiagnostic(ReportingContext reportingContext)
         {
