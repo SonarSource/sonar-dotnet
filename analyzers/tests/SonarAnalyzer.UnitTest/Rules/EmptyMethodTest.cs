@@ -56,12 +56,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("CodeFix")]
         public void EmptyMethod_CodeFix_Throw() =>
-        Verifier.VerifyCodeFix(
-            @"TestCases\EmptyMethod.cs",
-            @"TestCases\EmptyMethod.Throw.Fixed.cs",
-            new CS.EmptyMethod(),
-            new CS.EmptyMethodCodeFixProvider(),
-            CS.EmptyMethodCodeFixProvider.TitleThrow);
+            Verifier.VerifyCodeFix(
+                @"TestCases\EmptyMethod.cs",
+                @"TestCases\EmptyMethod.Throw.Fixed.cs",
+                new CS.EmptyMethod(),
+                new CS.EmptyMethodCodeFixProvider(),
+                CS.EmptyMethodCodeFixProvider.TitleThrow);
 
         [TestMethod]
         [TestCategory("CodeFix")]
