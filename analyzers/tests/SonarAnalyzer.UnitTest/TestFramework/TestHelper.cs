@@ -31,6 +31,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.UnitTest
     {
         private const string ProjectConfigTemplate = @"
 <SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
-    <FilesToAnalyzePath>{0}</FilesToAnalyzePath>
+    <{0}>{1}</{0}>
 </SonarProjectConfig>";
 
         public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true,
@@ -205,18 +206,25 @@ namespace SonarAnalyzer.UnitTest
             return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
 
-        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath)
-        {
-            var sonarProjectConfigPath = Path.Combine(sonarProjectConfigDirectory, "SonarProjectConfig.xml");
-            File.WriteAllText(sonarProjectConfigPath, string.Format(ProjectConfigTemplate, filesToAnalyzePath));
-            return sonarProjectConfigPath;
-        }
-
         public static string CreateFilesToAnalyze(string filesToAnalyzeDirectory, params string[] filesToAnalyze)
         {
             var filestoAnalyzePath = Path.Combine(filesToAnalyzeDirectory, "FilesToAnalyze.txt");
             File.WriteAllLines(filestoAnalyzePath, filesToAnalyze);
             return filestoAnalyzePath;
+        }
+
+        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath) =>
+            CreateSonarProjectConfig(sonarProjectConfigDirectory, "FilesToAnalyzePath", filesToAnalyzePath);
+
+        public static string CreateSonarProjectConfig(string testMethodName, ProjectType projectType) =>
+            CreateSonarProjectConfig(@"TestCases\" + testMethodName, "ProjectType", projectType.ToString());
+
+        private static string CreateSonarProjectConfig(string directory, string element, string value)
+        {
+            var sonarProjectConfigPath = Path.Combine(Directory.CreateDirectory(directory).FullName, "SonarProjectConfig.xml");
+            var projectConfigContent = string.Format(ProjectConfigTemplate, element, value);
+            File.WriteAllText(sonarProjectConfigPath, projectConfigContent);
+            return sonarProjectConfigPath;
         }
     }
 }

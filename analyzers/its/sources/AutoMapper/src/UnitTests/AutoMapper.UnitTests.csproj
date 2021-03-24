@@ -1,6 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <!-- We need to manually mark this project as TEST. See analyzers\its\SonarAnalyzer.Testing.ImportBefore.targets for details.-->
+    <SonarQubeTestProject>true</SonarQubeTestProject>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TargetFrameworks>net452;netcoreapp2.0;netcoreapp1.1;</TargetFrameworks>
     <AssemblyName>AutoMapper.UnitTests</AssemblyName>
     <PackageId>AutoMapper.UnitTests</PackageId>

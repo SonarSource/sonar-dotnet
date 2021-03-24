@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Diagnostics;
 using System.Linq;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -34,15 +34,18 @@ namespace SonarAnalyzer.Rules
     public abstract class EmptyMethodBase<TLanguageKindEnum> : EmptyMethodBase
         where TLanguageKindEnum : struct
     {
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
-                CheckMethod,
-                SyntaxKinds.ToArray());
-        }
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(c =>
+            {
+                if (DiagnosticAnalyzerContextHelper.ShouldAnalyze(context, GeneratedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                {
+                    var isTestProject = context.IsTestProject(c.Compilation, c.Options);
+                    CheckMethod(c, isTestProject);
+                }
+            }, SyntaxKinds.ToArray());
+
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
-        protected abstract void CheckMethod(SyntaxNodeAnalysisContext context);
+        protected abstract void CheckMethod(SyntaxNodeAnalysisContext context, bool isTestProject);
     }
 }

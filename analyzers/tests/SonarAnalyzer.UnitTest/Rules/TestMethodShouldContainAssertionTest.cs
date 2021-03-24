@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -53,19 +55,22 @@ namespace SonarAnalyzer.UnitTest.Rules
             public const string Ver2 = "2.0.0";
         }
 
-        [DataTestMethod]
-        [DataRow(MsTestVersions.Ver1, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
-        [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
-        [TestCategory("Rule")]
-        public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.MsTest.cs",
-                new CS.TestMethodShouldContainAssertion(),
-                NuGetMetadataReference.MSTestTestFramework(testFwkVersion)
-                    .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
-                    .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
+        public static IEnumerable<MetadataReference> GetMsTestReferences(string msTestVersion) =>
+            NuGetMetadataReference.MSTestTestFramework(msTestVersion)
+                    .Concat(NuGetMetadataReference.FluentAssertions(Constants.NuGetLatestVersion))
+                    .Concat(NuGetMetadataReference.NSubstitute(Constants.NuGetLatestVersion))
                     .Concat(MetadataReferenceFacade.SystemXml)
                     .Concat(MetadataReferenceFacade.SystemXmlLinq)
-                    .ToArray());
+                    .ToArray();
+
+        [DataTestMethod]
+        [DataRow(MsTestVersions.Ver1)]
+        [DataRow(Constants.NuGetLatestVersion)]
+        [TestCategory("Rule")]
+        public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion) =>
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.MsTest.cs",
+                new CS.TestMethodShouldContainAssertion(),
+                GetMsTestReferences(testFwkVersion));
 
         [DataTestMethod]
         [DataRow(NUnitVersions.Ver3, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]

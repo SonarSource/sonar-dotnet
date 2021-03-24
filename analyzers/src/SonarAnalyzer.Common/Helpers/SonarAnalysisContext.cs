@@ -92,6 +92,36 @@ namespace SonarAnalyzer.Helpers
         public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(context, c, options);
 
+        public bool IsTestProject(Compilation c, AnalyzerOptions options) =>
+            IsTestProject(context.TryGetValue, c, options);
+
+        public static bool IsTestProject(CompilationAnalysisContext analysisContext) =>
+            IsTestProject(analysisContext.TryGetValue, analysisContext.Compilation, analysisContext.Options);
+
+        private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation c, AnalyzerOptions options) =>
+            IsTest(ProjectConfiguration(tryGetValue, options).ProjectType, c);
+
+        public static bool IsTestProjectNoCache(Compilation c, AnalyzerOptions options)
+        {
+            var projectType = ProjectType.Unknown;
+            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml &&
+                sonarProjectConfigXml.GetText() is { } sourceText)
+            {
+                var projectConfigReader =  new ProjectConfigReader(sourceText, SonarProjectConfigFileName);
+                projectType = projectConfigReader.ProjectType;
+            }
+
+            return IsTest(projectType, c);
+        }
+
+        private static bool IsTest(ProjectType projectType, Compilation compilation) =>
+            projectType == ProjectType.Unknown
+                // not called by the Scanner for .NET >= 5.1 (might be SonarLint, nuget or older scanners)
+                // if the compilation is null, we don't know whether this is a Main or Test source so let's run the rule
+                ? compilation?.IsTest() ?? true
+                // consider the Scanner for .NET decision
+                : projectType == ProjectType.Test;
+
         public static bool ShouldAnalyzeGenerated(AnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
 
@@ -102,20 +132,20 @@ namespace SonarAnalyzer.Helpers
             ShouldAnalyzeGenerated(analysisContext.TryGetValue, c, options);
 
         public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-            RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
+            RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation, c => c.Options);
 
         public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
-            RegisterContextAction(act => context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
+            RegisterContextAction(act => context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetFirstSyntaxTree(), c => c.Compilation, c => c.Options);
 
         internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
             ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
 
         internal void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action)
             where TLanguageKindEnum : struct =>
-            RegisterContextAction(context.RegisterCodeBlockStartAction, action, c => c.GetSyntaxTree(), c => c.SemanticModel.Compilation);
+            RegisterContextAction(context.RegisterCodeBlockStartAction, action, c => c.GetSyntaxTree(), c => c.SemanticModel.Compilation, c => c.Options);
 
         internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action) =>
-            RegisterContextAction(context.RegisterCompilationAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
+            RegisterContextAction(context.RegisterCompilationAction, action, c => c.GetFirstSyntaxTree(), c => c.Compilation, c => c.Options);
 
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds)
             where TLanguageKindEnum : struct =>
@@ -123,25 +153,26 @@ namespace SonarAnalyzer.Helpers
 
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, params TLanguageKindEnum[] syntaxKinds)
             where TLanguageKindEnum : struct =>
-            RegisterContextAction(x => context.RegisterSyntaxNodeAction(x, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
+            RegisterContextAction(x => context.RegisterSyntaxNodeAction(x, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation, c => c.Options);
 
         /// <summary>
         /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
         /// </summary>
-        internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options)
+        internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>
+            ProjectConfiguration(context.TryGetValue, options);
+
+        internal static bool IsAnalysisScopeMatching(Compilation compilation, bool isTestProject, IEnumerable<DiagnosticDescriptor> diagnostics)
         {
-            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
+            if (compilation == null)
             {
-                return sonarProjectConfigXml.GetText() is { } sourceText
-                    // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when thrown
-                    && context.TryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
-                    ? cachedProjectConfigReader
-                    : throw new InvalidOperationException($"File {Path.GetFileName(sonarProjectConfigXml.Path)} has been added as an AdditionalFile but could not be read and parsed.");
+                return true; // We don't know whether this is a Main or Test source so let's run the rule
             }
-            else
-            {
-                return EmptyProjectConfig.Value;
-            }
+
+            var matchingScopeTag = isTestProject
+                ? DiagnosticDescriptorBuilder.TestSourceScopeTag
+                : DiagnosticDescriptorBuilder.MainSourceScopeTag;
+
+            return diagnostics.Any(d => d.CustomTags.Contains(matchingScopeTag));
         }
 
         private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
@@ -160,6 +191,22 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        private static ProjectConfigReader ProjectConfiguration(TryGetValueDelegate<ProjectConfigReader> tryGetValue, AnalyzerOptions options)
+        {
+            if (options.AdditionalFiles.FirstOrDefault(IsSonarProjectConfig) is { } sonarProjectConfigXml)
+            {
+                return sonarProjectConfigXml.GetText() is { } sourceText
+                    // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when thrown
+                    && tryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
+                    ? cachedProjectConfigReader
+                    : throw new InvalidOperationException($"File {Path.GetFileName(sonarProjectConfigXml.Path)} has been added as an AdditionalFile but could not be read and parsed.");
+            }
+            else
+            {
+                return EmptyProjectConfig.Value;
+            }
+        }
+
         private static bool ShouldAnalyzeGenerated(TryGetValueDelegate<bool> tryGetValue, Compilation c, AnalyzerOptions options) =>
             options.AdditionalFiles.FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path)) is { } sonarLintXml
             && tryGetValue(sonarLintXml.GetText(), ShouldAnalyzeGeneratedProvider(c.Language), out var shouldAnalyzeGenerated)
@@ -171,14 +218,18 @@ namespace SonarAnalyzer.Helpers
         private void RegisterContextAction<TContext>(Action<Action<TContext>> registrationAction,
                                                      Action<TContext> registeredAction,
                                                      Func<TContext, SyntaxTree> getSyntaxTree,
-                                                     Func<TContext, Compilation> getCompilation) =>
+                                                     Func<TContext, Compilation> getCompilation,
+                                                     Func<TContext, AnalyzerOptions> getAnalyzerOptions) =>
             registrationAction(c =>
                 {
                     // For each action registered on context we need to do some pre-processing before actually calling the rule.
                     // First, we need to ensure the rule does apply to the current scope (main vs test source).
                     // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
                     // the decision is made on based on whether the project contains the analyzer as NuGet).
-                    if (getCompilation(c).IsAnalysisScopeMatching(supportedDiagnostics) && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
+                    var compilation = getCompilation(c);
+                    var isTestProject = IsTestProject(compilation, getAnalyzerOptions(c));
+
+                    if (IsAnalysisScopeMatching(compilation, isTestProject, supportedDiagnostics) && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
                     {
                         registeredAction(c);
                     }

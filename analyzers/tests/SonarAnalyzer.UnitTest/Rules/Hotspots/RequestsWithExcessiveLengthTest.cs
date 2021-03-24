@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new VB.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 42 },
                 GetAdditionalReferences());
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+        internal static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion));
     }

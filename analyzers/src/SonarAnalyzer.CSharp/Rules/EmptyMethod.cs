@@ -44,20 +44,20 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.MethodDeclaration
         };
 
-        protected override void CheckMethod(SyntaxNodeAnalysisContext context)
+        protected override void CheckMethod(SyntaxNodeAnalysisContext context, bool isTestProject)
         {
             var methodNode = (MethodDeclarationSyntax)context.Node;
 
             // No need to check for ExpressionBody as arrowed methods can't be empty
             if (methodNode.Body != null &&
                 IsEmpty(methodNode.Body) &&
-                !ShouldMethodBeExcluded(methodNode, context.SemanticModel))
+                !ShouldMethodBeExcluded(methodNode, context.SemanticModel, isTestProject))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodNode.Identifier.GetLocation()));
             }
         }
 
-        private static bool ShouldMethodBeExcluded(MethodDeclarationSyntax methodNode, SemanticModel semanticModel)
+        private static bool ShouldMethodBeExcluded(MethodDeclarationSyntax methodNode, SemanticModel semanticModel, bool isTestProject)
         {
             if (methodNode.Modifiers.Any(SyntaxKind.VirtualKeyword))
             {
@@ -73,8 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            return methodNode.Modifiers.Any(SyntaxKind.OverrideKeyword) &&
-                semanticModel.Compilation.IsTest();
+            return methodNode.Modifiers.Any(SyntaxKind.OverrideKeyword) && isTestProject;
         }
 
         private static bool IsEmpty(BlockSyntax node)
