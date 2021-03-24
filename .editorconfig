@@ -246,7 +246,7 @@ dotnet_diagnostic.SA1005.severity = warning
 dotnet_diagnostic.SA1006.severity = warning
 dotnet_diagnostic.SA1007.severity = warning
 dotnet_diagnostic.SA1008.severity = warning
-dotnet_diagnostic.SA1009.severity = none # needs discussion
+dotnet_diagnostic.SA1009.severity = warning
 dotnet_diagnostic.SA1010.severity = warning
 dotnet_diagnostic.SA1011.severity = warning
 dotnet_diagnostic.SA1012.severity = none # noisy on collection initializers
@@ -321,14 +321,14 @@ dotnet_diagnostic.SA1408.severity = warning
 dotnet_diagnostic.SA1410.severity = warning
 dotnet_diagnostic.SA1411.severity = warning
 dotnet_diagnostic.SA1412.severity = warning
-dotnet_diagnostic.SA1413.severity = none # needs discussion
+dotnet_diagnostic.SA1413.severity = none    # we do not want this
 dotnet_diagnostic.SA1414.severity = warning
 
 # Layout Rules (SA1500-) https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/1.1.118/documentation/LayoutRules.md
 
 dotnet_diagnostic.SA1500.severity = warning
 dotnet_diagnostic.SA1501.severity = warning
-dotnet_diagnostic.SA1502.severity = none # needs discussion
+dotnet_diagnostic.SA1502.severity = none # noisy on empty constructors calling base
 dotnet_diagnostic.SA1503.severity = warning
 dotnet_diagnostic.SA1504.severity = warning
 dotnet_diagnostic.SA1505.severity = warning
@@ -342,7 +342,7 @@ dotnet_diagnostic.SA1512.severity = warning
 dotnet_diagnostic.SA1513.severity = none # on short methods, it does not apply
 dotnet_diagnostic.SA1514.severity = warning
 dotnet_diagnostic.SA1515.severity = none # we do not respect this
-dotnet_diagnostic.SA1516.severity = none # needs discussion
+dotnet_diagnostic.SA1516.severity = none # we do not respect this for fields, properties and abstract members
 dotnet_diagnostic.SA1517.severity = warning
 dotnet_diagnostic.SA1518.severity = warning
 dotnet_diagnostic.SA1519.severity = warning
