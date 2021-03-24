@@ -67,8 +67,9 @@ namespace SonarAnalyzer.Helpers
         public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProject(context) });
 
-        public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(context.Compilation, context.Options) });
+        /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
+        public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic, verifyScopeContext));
 
         public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(context.SemanticModel?.Compilation, context.Options) });
