@@ -203,7 +203,7 @@ stages:
           Get-Content -Path $testProjFileName
 
           Write-Host "Build UnitTest project"
-          & dotnet build $testProjFileName -c $(BuildConfiguration)
+          & dotnet build /p:RunAnalyzers=true $testProjFileName -c $(BuildConfiguration)
           Test-ExitCode "ERROR: UnitTest project build FAILED."
 
           $supportedFrameworks = @('net48', 'net5.0')
