@@ -206,16 +206,6 @@ namespace SonarAnalyzer.UnitTest
             return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
         }
 
-        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath) =>
-            CreateSonarProjectConfig(
-                Directory.CreateDirectory(sonarProjectConfigDirectory),
-                string.Format(ProjectConfigTemplate, "FilesToAnalyzePath", filesToAnalyzePath));
-
-        public static string CreateSonarProjectConfig(string testMethodName, ProjectType projectType) =>
-            CreateSonarProjectConfig(
-                Directory.CreateDirectory(@"TestCases\" + testMethodName),
-                string.Format(ProjectConfigTemplate, "ProjectType", projectType));
-
         public static string CreateFilesToAnalyze(string filesToAnalyzeDirectory, params string[] filesToAnalyze)
         {
             var filestoAnalyzePath = Path.Combine(filesToAnalyzeDirectory, "FilesToAnalyze.txt");
@@ -223,9 +213,16 @@ namespace SonarAnalyzer.UnitTest
             return filestoAnalyzePath;
         }
 
-        private static string CreateSonarProjectConfig(DirectoryInfo sonarProjectConfigDirectory, string projectConfigContent)
+        public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath) =>
+            CreateSonarProjectConfig(sonarProjectConfigDirectory, "FilesToAnalyzePath", filesToAnalyzePath);
+
+        public static string CreateSonarProjectConfig(string testMethodName, ProjectType projectType) =>
+            CreateSonarProjectConfig(@"TestCases\" + testMethodName, "ProjectType", projectType.ToString());
+
+        private static string CreateSonarProjectConfig(string directory, string element, string value)
         {
-            var sonarProjectConfigPath = Path.Combine(sonarProjectConfigDirectory.FullName, "SonarProjectConfig.xml");
+            var sonarProjectConfigPath = Path.Combine(Directory.CreateDirectory(directory).FullName, "SonarProjectConfig.xml");
+            var projectConfigContent = string.Format(ProjectConfigTemplate, element, value);
             File.WriteAllText(sonarProjectConfigPath, projectConfigContent);
             return sonarProjectConfigPath;
         }
