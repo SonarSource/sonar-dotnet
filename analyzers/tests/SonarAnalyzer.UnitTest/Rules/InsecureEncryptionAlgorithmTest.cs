@@ -34,8 +34,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void InsecureEncryptionAlgorithm_CS() =>
+        public void InsecureEncryptionAlgorithm_MainProject_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void InsecureEncryptionAlgorithm_DoesNotRaiseIssuesForTestProject_CS() =>
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\InsecureEncryptionAlgorithm.cs", new CS.InsecureEncryptionAlgorithm(), GetAdditionalReferences());
 
 #if NET
         [TestMethod]
