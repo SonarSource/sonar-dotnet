@@ -18,8 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -30,16 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class EmptyNullableValueAccessTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void EmptyNullableValueAccess() =>
+        public void EmptyNullableValueAccess(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\EmptyNullableValueAccess.cs",
                 new SymbolicExecutionRunner(new EmptyNullableValueAccess()),
-#if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
+#if NETFRAMEWORK
+                TestHelper.ProjectTypeReference(projectType).Concat(NuGetMetadataReference.NETStandardV2_1_0));
 #else
-                ParseOptionsHelper.FromCSharp8);
+                TestHelper.ProjectTypeReference(projectType));
 #endif
 
 #if NET

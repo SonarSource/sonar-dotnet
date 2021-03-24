@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -31,13 +31,17 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
     [TestClass]
     public class InvalidCastToInterfaceTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void InvalidCastToInterface() =>
+        public void InvalidCastToInterface(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\InvalidCastToInterface.cs",
                 GetAnalyzers(),
 #if NETFRAMEWORK
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0,
+                additionalReferences: TestHelper.ProjectTypeReference(projectType).Concat(NuGetMetadataReference.NETStandardV2_1_0),
+#else
+                additionalReferences: TestHelper.ProjectTypeReference(projectType),
 #endif
                 options: ParseOptionsHelper.FromCSharp8);
 

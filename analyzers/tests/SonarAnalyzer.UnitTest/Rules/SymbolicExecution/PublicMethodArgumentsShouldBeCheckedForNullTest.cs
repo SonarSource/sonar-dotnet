@@ -18,9 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -30,16 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PublicMethodArgumentsShouldBeCheckedForNullTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void PublicMethodArgumentsShouldBeCheckedForNull() =>
+        public void PublicMethodArgumentsShouldBeCheckedForNull(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.cs",
                 new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
-#if NETFRAMEWORK
                 ParseOptionsHelper.FromCSharp8,
-                NuGetMetadataReference.NETStandardV2_1_0);
+#if NETFRAMEWORK
+                TestHelper.ProjectTypeReference(projectType).Concat(NuGetMetadataReference.NETStandardV2_1_0));
 #else
-                ParseOptionsHelper.FromCSharp8);
+                TestHelper.ProjectTypeReference(projectType));
 #endif
 
 #if NET
