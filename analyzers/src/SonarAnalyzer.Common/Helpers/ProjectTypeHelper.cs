@@ -21,7 +21,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -50,9 +49,7 @@ namespace SonarAnalyzer.Helpers
             "TELERIK.JUSTMOCK"
         };
 
-        public static bool IsTest(this SyntaxNodeAnalysisContext context) =>
-            context.SemanticModel.Compilation.IsTest();
-
+        // should only be used by SonarAnalysisContext
         public static bool IsTest(this Compilation compilation) =>
             compilation.ReferencedAssemblyNames.Any(assembly => TestAssemblyNames.Contains(assembly.Name.ToUpperInvariant()));
     }
