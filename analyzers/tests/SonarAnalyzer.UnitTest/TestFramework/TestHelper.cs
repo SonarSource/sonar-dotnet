@@ -32,6 +32,7 @@ using Microsoft.CodeAnalysis.Text;
 using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.PackagingTests;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -196,6 +197,11 @@ namespace SonarAnalyzer.UnitTest
             var type = CsRuleTypeMapping.RuleTypesCs.GetValueOrDefault(key) ?? VbRuleTypeMapping.RuleTypesVb.GetValueOrDefault(key);
             return type == "SECURITY_HOTSPOT";
         }
+
+        public static IEnumerable<MetadataReference> ProjectTypeReference(ProjectType projectType) =>
+            projectType == ProjectType.Test
+                ? NuGetMetadataReference.MSTestTestFrameworkV1  // Any reference to detect a test project
+                : Enumerable.Empty<MetadataReference>();
 
         public static AnalyzerOptions CreateOptions(string relativePath)
         {
