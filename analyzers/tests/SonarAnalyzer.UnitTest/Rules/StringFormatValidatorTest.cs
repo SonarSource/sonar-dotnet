@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 
@@ -27,15 +28,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class StringFormatValidatorTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void StringFormatRuntimeExceptionFreeValidator() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringFormatRuntimeExceptionFreeValidator.cs", new CS.StringFormatValidator());
+        public void StringFormatRuntimeExceptionFreeValidator(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatRuntimeExceptionFreeValidator.cs", new CS.StringFormatValidator(), TestHelper.ProjectTypeReference(projectType));
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void StringFormatTypoFreeValidator() =>
-            Verifier.VerifyAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs", new CS.StringFormatValidator());
+        public void StringFormatTypoFreeValidator(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs", new CS.StringFormatValidator(), TestHelper.ProjectTypeReference(projectType));
 
         [TestMethod]
         [TestCategory("Rule")]
