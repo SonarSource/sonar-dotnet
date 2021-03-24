@@ -21,6 +21,7 @@
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\SonarAnalyzer.Test.ruleset</CodeAnalysisRuleSet>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
