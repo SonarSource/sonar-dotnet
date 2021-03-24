@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -37,6 +38,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void FieldShadowsParentField_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_CS() =>
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_VB() =>
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
 
 #if NET
         [TestMethod]
@@ -59,5 +70,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void FieldsShouldNotDifferByCapitalization_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.vb", new VB.FieldShadowsParentField());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldsShouldNotDifferByCapitalization_RaisesIssueForTestProject_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new CS.FieldShadowsParentField(), NuGetMetadataReference.MSTestTestFrameworkV1);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldsShouldNotDifferByCapitalization_RaisesIssueForTestProject_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.vb", new VB.FieldShadowsParentField(), NuGetMetadataReference.MSTestTestFrameworkV1);
     }
 }
