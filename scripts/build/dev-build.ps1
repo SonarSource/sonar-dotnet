@@ -60,6 +60,8 @@ try {
     Write-Host "Bin folder to use: $binPath"
     Write-Host "MSBuild: ${msbuildVersion}"
 
+    $StartDate=(Get-Date)
+
     if ($build) {
         # Restore VSIX (special project)
         Push-Location "src\SonarAnalyzer.Vsix"
@@ -68,6 +70,7 @@ try {
 
         Invoke-MSBuild $msbuildVersion $solutionName /t:"Restore,Rebuild" `
             /consoleloggerparameters:Summary `
+            /p:WarningLevel=0 `
             /m `
             /p:configuration=$buildConfiguration `
             /p:DeployExtension=false `
@@ -100,7 +103,7 @@ try {
             $skipTests = ""
         }
         Invoke-InLocation ".." {
-            Exec { & mvn clean install -P local-analyzer -D analyzer.configuration=$buildConfiguration $skipTests }
+            Exec { & mvn clean install --batch-mode -P local-analyzer -D analyzer.configuration=$buildConfiguration $skipTests }
         }
     }
 
@@ -109,6 +112,10 @@ try {
             Exec { & mvn clean install }
         }
     }
+
+    $EndDate=(Get-Date)
+    $Time=(New-TimeSpan -Start $StartDate -End $EndDate)
+    Write-Host "Time spent: $Time (start at $StartDate, end at $EndDate)"
 
     Write-Host -ForegroundColor Green "SUCCESS: script was successful!"
     exit 0
