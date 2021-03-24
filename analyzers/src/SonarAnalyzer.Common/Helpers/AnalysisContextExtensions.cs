@@ -60,8 +60,9 @@ namespace SonarAnalyzer.Helpers
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic, verifyScopeContext));
 
+        // SyntaxTreeAnalysisContext doesn't have a Compilation => verifyScopeContext is never needed
         public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(null, context.Options) });
+            ReportDiagnostic(new ReportingContext(context, diagnostic, null));
 
         public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProject(context)});
