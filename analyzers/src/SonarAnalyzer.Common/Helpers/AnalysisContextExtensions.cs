@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Helpers
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic, verifyScopeContext));
 
-        // SyntaxTreeAnalysisContext doesn't have a Compilation => verifyScopeContext is never needed
+        // SyntaxTreeAnalysisContext doesn't have a Compilation => verifyScopeContext is never needed, because IsAnalysisScopeMatching returns always true.
         public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic, null));
 
@@ -71,8 +71,9 @@ namespace SonarAnalyzer.Helpers
         public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic, verifyScopeContext));
 
-        public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProjectNoCache(context.SemanticModel?.Compilation, context.Options) });
+        /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
+        public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic, verifyScopeContext));
 
         private static void ReportDiagnostic(ReportingContext reportingContext)
         {
