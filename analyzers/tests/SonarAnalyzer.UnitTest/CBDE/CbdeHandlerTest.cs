@@ -131,7 +131,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             IEnumerable<MetadataReference> additionalReferences = null)
         {
             var compilation = SolutionBuilder.Create()
-                .AddTestProject(AnalyzerLanguage.FromPath(path))
+                .AddProject(AnalyzerLanguage.FromPath(path))
+                .AddTestReferences()
                 .AddReferences(additionalReferences)
                 .AddDocument(path)
                 .GetCompilation();

@@ -164,22 +164,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                           IEnumerable<MetadataReference> additionalReferences = null) =>
             VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, CompilationErrorBehavior.Default, OutputKind.DynamicallyLinkedLibrary, additionalReferences);
 
-        public static void VerifyAnalyzerInTest(string path,
-                          DiagnosticAnalyzer diagnosticAnalyzer,
-                          IEnumerable<ParseOptions> options = null,
-                          CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                          IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyAnalyzerInTest(new[] { path }, diagnosticAnalyzer, options, checkMode, outputKind, additionalReferences);
-
-        public static void VerifyAnalyzerInTest(IEnumerable<string> paths,
-                                  DiagnosticAnalyzer diagnosticAnalyzer,
-                                  IEnumerable<ParseOptions> options = null,
-                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                  OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                  IEnumerable<MetadataReference> additionalReferences = null) =>
-            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, options, checkMode, outputKind, AddTestReference(additionalReferences));
-
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths,
                                                            UtilityAnalyzerBase diagnosticAnalyzer,
                                                            string protobufPath,
@@ -214,8 +198,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                        IEnumerable<MetadataReference> additionalReferences = null)
         {
             var builder = SolutionBuilder.Create()
-                .AddTestProject(AnalyzerLanguage.FromPath(path))
-                .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)    // Any reference to detect a test project
+                .AddProject(AnalyzerLanguage.FromPath(path))
+                .AddTestReferences()
                 .AddReferences(additionalReferences)
                 .AddDocument(path);
 

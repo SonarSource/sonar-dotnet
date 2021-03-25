@@ -24,6 +24,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -63,6 +64,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public Document FindDocument(string name) =>
             Project.Documents.Single(d => d.Name == name);
+
+        public ProjectBuilder AddTestReferences() =>
+            AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1);    // Any reference to detect a test project
 
         public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
         {

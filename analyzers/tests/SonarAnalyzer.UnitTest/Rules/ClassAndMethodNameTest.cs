@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_InTestProject_CS() =>
-            Verifier.VerifyAnalyzerInTest(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8, NuGetMetadataReference.MSTestTestFrameworkV1);
 
 #if NET
         [TestMethod]
