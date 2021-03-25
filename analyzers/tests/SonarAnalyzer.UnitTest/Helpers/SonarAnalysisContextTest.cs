@@ -350,6 +350,38 @@ namespace SonarAnalyzer.UnitTest.Helpers
             SonarAnalysisContext.IsAnalysisScopeMatching(compilation, isTestProject, diagnostics).Should().Be(expectedResult);
         }
 
+        [TestMethod]
+        public void IsTestProject_Standalone_NoCompilation_IsFalse()
+        {
+            var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);
+            var context = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+
+            context.IsTestProject(null, options).Should().BeFalse();
+        }
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product, false)]
+        [DataRow(ProjectType.Test, true)]
+        public void IsTestProject_Standalone(ProjectType projectType, bool expectedResult)
+        {
+            var compilation = new SnippetCompiler("// Nothing to see here", TestHelper.ProjectTypeReference(projectType)).SemanticModel.Compilation;
+            var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);
+            var context = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+
+            context.IsTestProject(compilation, options).Should().Be(expectedResult);
+        }
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product, false)]
+        [DataRow(ProjectType.Test, true)]
+        public void IsTestProject_WithConfigFile(ProjectType projectType, bool expectedResult)
+        {
+            var configPath = TestHelper.CreateSonarProjectConfig(nameof(IsTestProject_WithConfigFile), projectType);
+            var context = new CompilationAnalysisContext(null, TestHelper.CreateOptions(configPath), null, null, default);
+
+            SonarAnalysisContext.IsTestProject(context).Should().Be(expectedResult);
+        }
+
         internal class DummyContext : AnalysisContext
         {
             public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => throw new NotImplementedException();
