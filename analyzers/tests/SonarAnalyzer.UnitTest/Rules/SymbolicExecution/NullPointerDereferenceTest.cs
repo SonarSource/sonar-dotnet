@@ -69,6 +69,11 @@ public static class Utils
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void NullPointerDereference_DoesNotRaiseIssuesForTestProject() =>
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\NullPointerDereference.cs", GetAnalyzer());
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void NullPointerDereference_CSharp6() =>
             Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.CSharp6.cs",
                 GetAnalyzer(),

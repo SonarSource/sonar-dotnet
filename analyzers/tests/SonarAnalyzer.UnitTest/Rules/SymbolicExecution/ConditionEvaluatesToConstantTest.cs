@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -32,11 +32,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ConditionEvaluatesToConstantTest
     {
         [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void ConditionEvaluatesToConstant() =>
+        public void ConditionEvaluatesToConstant(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
                 GetAnalyzer(),
-                NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7"));
+                NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)));
 
         [TestMethod]
         [TestCategory("Rule")]

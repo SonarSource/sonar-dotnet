@@ -21,6 +21,7 @@
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void ClassName_InTestProject_CS() =>
-            Verifier.VerifyAnalyzerInTest(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\ClassName.Tests.cs", new CS.ClassAndMethodName(), ParseOptionsHelper.FromCSharp8, NuGetMetadataReference.MSTestTestFrameworkV1);
 
 #if NET
         [TestMethod]
@@ -72,14 +73,18 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyNoIssueReportedFromCSharp9InTest(@"TestCases\RecordName.cs", new CS.ClassAndMethodName());
 #endif
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void ClassName_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VB.ClassName());
+        public void ClassName_VB(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VB.ClassName(), TestHelper.ProjectTypeReference(projectType));
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void MethodName_CS() =>
+        public void MethodName(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(
                 new[]
                 {
@@ -87,20 +92,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\MethodName.Partial.cs",
                 },
                 new CS.ClassAndMethodName(),
-                ParseOptionsHelper.FromCSharp8);
-
-        // ToDo fix conflict with PR #4179
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void MethodName_InTestProject_CS() =>
-            Verifier.VerifyAnalyzerInTest(
-                new[]
-                {
-                    @"TestCases\MethodName.cs",
-                    @"TestCases\MethodName.Partial.cs",
-                },
-                new CS.ClassAndMethodName(),
-                ParseOptionsHelper.FromCSharp8);
+                ParseOptionsHelper.FromCSharp8,
+                TestHelper.ProjectTypeReference(projectType));
 
 #if NET
         [TestMethod]

@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -38,6 +39,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FieldShadowsParentField_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_CS() =>
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\FieldShadowsParentField.cs", new CS.FieldShadowsParentField());
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_VB() =>
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\FieldShadowsParentField.vb", new VB.FieldShadowsParentField());
+
 #if NET
         [TestMethod]
         [TestCategory("Rule")]
@@ -50,14 +61,18 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\FieldsShouldNotDifferByCapitalization.CSharp9.cs", new CS.FieldShadowsParentField());
 #endif
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void FieldsShouldNotDifferByCapitalization_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new CS.FieldShadowsParentField());
+        public void FieldsShouldNotDifferByCapitalization_CS(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.cs", new CS.FieldShadowsParentField(), TestHelper.ProjectTypeReference(projectType));
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void FieldsShouldNotDifferByCapitalization_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.vb", new VB.FieldShadowsParentField());
+        public void FieldsShouldNotDifferByCapitalization_VB(ProjectType projectType) =>
+            Verifier.VerifyAnalyzer(@"TestCases\FieldsShouldNotDifferByCapitalization.vb", new VB.FieldShadowsParentField(), TestHelper.ProjectTypeReference(projectType));
     }
 }

@@ -44,9 +44,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             Solution = solution;
         }
 
-        public ProjectBuilder AddTestProject(AnalyzerLanguage language, bool createExtraEmptyFile = true) =>
-            AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}.Tests", createExtraEmptyFile);
-
         public ProjectBuilder AddProject(AnalyzerLanguage language, bool createExtraEmptyFile = true, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
             AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}", createExtraEmptyFile, outputKind);
 

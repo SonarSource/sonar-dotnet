@@ -25,6 +25,7 @@ using FluentAssertions;
 using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -176,11 +177,14 @@ namespace EntityFrameworkMigrations
 }
 ", new CS.UnusedPrivateMember(), additionalReferences: GetEntityFrameworkCoreReferences(Constants.NuGetLatestVersion));
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember() =>
+        public void UnusedPrivateMember(ProjectType projectType) =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs",
-                                    new CS.UnusedPrivateMember());
+                                    new CS.UnusedPrivateMember(),
+                                    TestHelper.ProjectTypeReference(projectType));
 
         [TestMethod]
         [TestCategory("Rule")]

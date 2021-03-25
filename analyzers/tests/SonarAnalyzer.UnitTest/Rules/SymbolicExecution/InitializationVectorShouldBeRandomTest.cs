@@ -40,6 +40,14 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject() =>
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\InitializationVectorShouldBeRandom.cs",
+                                                   GetAnalyzer(),
+                                                   ParseOptionsHelper.FromCSharp8,
+                                                   MetadataReferenceFacade.SystemSecurityCryptography);
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void InitializationVectorShouldBeRandom_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InitializationVectorShouldBeRandom.CSharp9.cs",
                                                       GetAnalyzer(),

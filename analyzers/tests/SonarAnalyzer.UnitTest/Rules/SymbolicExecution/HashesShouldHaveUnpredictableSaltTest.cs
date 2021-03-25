@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
@@ -39,6 +40,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     GetAnalyzer(),
                                     ParseOptionsHelper.FromCSharp8,
                                     MetadataReferenceFacade.SystemSecurityCryptography);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void HashesShouldHaveUnpredictableSalt_DoesNotRaiseIssuesForTestProject() =>
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\HashesShouldHaveUnpredictableSalt.cs",
+                                                 GetAnalyzer(),
+                                                 ParseOptionsHelper.FromCSharp8,
+                                                 MetadataReferenceFacade.SystemSecurityCryptography);
 
         [TestMethod]
         [TestCategory("Rule")]

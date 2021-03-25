@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     {
                         foreach (var diagnostics in fieldDeclaration.Declarators.SelectMany(x => x.Names).SelectMany(x => CheckFields(c.SemanticModel, x)))
                         {
-                            c.ReportDiagnosticWhenActive(diagnostics);
+                            c.ReportDiagnosticWhenActive(diagnostics, context);
                         }
                     }
                 },
