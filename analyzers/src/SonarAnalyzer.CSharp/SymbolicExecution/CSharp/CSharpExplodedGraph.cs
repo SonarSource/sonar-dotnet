@@ -565,6 +565,11 @@ namespace SonarAnalyzer.SymbolicExecution
                     // Do nothing
                     break;
 
+                case (SyntaxKind)9029:
+                    // RelationalPattern is not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/4104
+                    // Do nothing
+                    break;
+
                 default:
                     throw new NotSupportedException($"{instruction.Kind()}");
             }

@@ -116,11 +116,20 @@ namespace Repro4104 // See: https://github.com/SonarSource/sonar-dotnet/issues/4
 
     public class SonarExample
     {
-        public void Evaluate(IEnumerable values)
+        public void TypePattern(IEnumerable values)
         {
             switch (values)
             {
                 case IEnumerable<int>: // TypePattern is not supported
+                    break;
+            }
+        }
+
+        public void RelationalPattern(object i)
+        {
+            switch (i)
+            {
+                case > 0: // RelationalPattern is not supported
                     break;
             }
         }
