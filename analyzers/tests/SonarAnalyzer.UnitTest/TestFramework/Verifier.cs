@@ -323,8 +323,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             options != null && options.OfType<CSharpParseOptions>().Select(option => option.LanguageVersion).Contains(LanguageVersion.CSharp9);
 
         private static IEnumerable<MetadataReference> AddTestReference(IEnumerable<MetadataReference> additionalReferences) =>
-            additionalReferences == null
-                ? NuGetMetadataReference.MSTestTestFrameworkV1
-                : NuGetMetadataReference.MSTestTestFrameworkV1.Concat(additionalReferences);
+            NuGetMetadataReference.MSTestTestFrameworkV1.Concat(additionalReferences ?? Enumerable.Empty<MetadataReference>());
     }
 }
