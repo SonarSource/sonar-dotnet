@@ -201,8 +201,10 @@ namespace Tests.Diagnostics
     {
         public void Method(MissingType argument) // Error [CS0246]
         {
+            var str = "xxx";
             throw new ArgumentNullException(nameof(argument)); // Noncompliant {{The parameter name '' is not declared in the argument list.}} FP with wrong message
             throw new ArgumentNullException(nameof(argument.argument)); // Compliant
+            throw new ArgumentNullException(nameof(str.argument)); // Error [CS1061] Compliant, argument is missing member without a symbol
         }
     }
 }
