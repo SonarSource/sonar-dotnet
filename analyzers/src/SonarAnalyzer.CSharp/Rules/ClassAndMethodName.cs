@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -102,7 +103,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal) ||
-                identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
+                identifier.ValueText.EndsWith("_", StringComparison.Ordinal) ||
+                identifier.ValueText.EndsWith("__"))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(typeNameRule, identifier.GetLocation(),
                     TypeKindNameMapping[typeDeclaration.Kind()],
@@ -110,7 +112,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (typeDeclaration is ClassDeclarationSyntax && IsTestClassName(typeDeclaration.Identifier.ValueText))
+            if (typeDeclaration
+                is ClassDeclarationSyntax &&
+                IsTestClassName(typeDeclaration.Identifier.ValueText))
             {
                 return;
             }
@@ -128,12 +132,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 areUnderscoresAllowed: context.IsTest(),
                 suggestion: out var suggestion);
 
-            if (!isNameValid)
+            if (
+                !isNameValid || isNameValid == false
+                )
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(typeNameRule, identifier.GetLocation(),
                     TypeKindNameMapping[typeDeclaration.Kind()], identifier.ValueText, messageEnding));
             }
+
+            if (true == true)
+            {
+
+            }
+        }
+
+        public void UnusedAndEmpty()
+        {
+
+
         }
 
         private static void CheckMemberName(SyntaxNode member, SyntaxToken identifier, SyntaxNodeAnalysisContext context)
