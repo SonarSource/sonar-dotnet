@@ -262,6 +262,15 @@ stages:
           artifact: RuleDescriptorBin
           targetPath: analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin
 
+      - task: Cache@2
+        displayName: "Cache Maven local repo"
+        inputs:
+          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          restoreKeys: |
+            maven | "$(Agent.OS)"
+            maven
+          path: $(MAVEN_CACHE_FOLDER)
+
       - task: DownloadSecureFile@1
         displayName: 'Download Maven settings'
         name: mavenSettings
@@ -319,6 +328,15 @@ stages:
           artifact: RuleDescriptorBin
           targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
 
+      - task: Cache@2
+        displayName: "Cache Maven local repo"
+        inputs:
+          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          restoreKeys: |
+            maven | "$(Agent.OS)"
+            maven
+          path: $(MAVEN_CACHE_FOLDER)
+
       - task: SonarCloudPrepare@1
         displayName: 'Prepare code analysis for Java plugin'
         inputs:
@@ -344,6 +362,10 @@ stages:
         displayName: 'Code Analysis - Publish QG'
         inputs:
           pollingTimeoutSec: '300'
+
+      - bash: git checkout .
+        name: revertPomChanges
+        displayName: Revert changes made to pom.xml to not break cache feature
 
     - job: runJavaIntegrationTests
       displayName: 'Java ITs'
@@ -372,6 +394,15 @@ stages:
         inputs:
           artifact: RuleDescriptorBin
           targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
+
+      - task: Cache@2
+        displayName: "Cache Maven local repo"
+        inputs:
+          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          restoreKeys: |
+            maven | "$(Agent.OS)"
+            maven
+          path: $(MAVEN_CACHE_FOLDER)
 
       - task: Maven@3
         displayName: 'Maven install'
@@ -404,6 +435,10 @@ stages:
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.11'
           mavenOptions: $(MAVEN_OPTS)
+
+      - bash: git checkout .
+        name: revertPomChanges
+        displayName: Revert changes made to pom.xml to not break cache feature
 
 - stage: promoteNugets
   displayName: Promote NuGet on repox
