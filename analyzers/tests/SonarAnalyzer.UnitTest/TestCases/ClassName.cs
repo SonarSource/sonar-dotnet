@@ -65,6 +65,8 @@ namespace t3
     {
     }
 
+    class Foo_2 { } // Noncompliant {{Rename class 'Foo_2' to match pascal case naming rules, consider using 'Foo2'.}}
+
     class Iden42TityFoo
     {
     }
@@ -115,6 +117,7 @@ namespace t4
     class AB { } // Compliant
     class AbABaa { } // Compliant
     class _AbABaa { } // Noncompliant {{Rename class '_AbABaa' to match pascal case naming rules, trim underscores from the name.}}
+    class AbABaa_ { } // Noncompliant {{Rename class 'AbABaa_' to match pascal case naming rules, trim underscores from the name.}}
 
     class 你好 { } // Compliant
 }

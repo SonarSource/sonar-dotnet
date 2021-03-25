@@ -68,13 +68,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableArray<KnownType> ComRelatedTypes =
             ImmutableArray.Create(
                 KnownType.System_Runtime_InteropServices_ComImportAttribute,
-                KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute
-            );
+                KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckTypeName,
+            context.RegisterSyntaxNodeAction(c =>
+                {
+                    if (DiagnosticAnalyzerContextHelper.ShouldAnalyze(context, CSharpGeneratedCodeRecognizer.Instance, c.GetSyntaxTree(), c.Compilation, c.Options))
+                    {
+                        var isTestProject = context.IsTestProject(c.Compilation, c.Options);
+                        CheckTypeName(c, isTestProject);
+                    }
+                },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKind.StructDeclaration);
@@ -90,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static void CheckTypeName(SyntaxNodeAnalysisContext context)
+        private static void CheckTypeName(SyntaxNodeAnalysisContext context, bool isTest)
         {
             var typeDeclaration = (BaseTypeDeclarationSyntax)context.Node;
             var identifier = typeDeclaration.Identifier;
@@ -123,12 +128,10 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var isNameValid = IsTypeNameValid(identifier.ValueText,
-                requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
-                allowInitialI: typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword),
-                // ToDo https://github.com/SonarSource/sonar-dotnet/issues/4172
-                // use SonarAnalysisContext.IsTestProject(c.Compilation, c.Options);
-                areUnderscoresAllowed: context.IsTest(),
-                suggestion: out var suggestion);
+                                              requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
+                                              allowInitialI: typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword),
+                                              areUnderscoresAllowed: isTest,
+                                              suggestion: out var suggestion);
 
             if (!isNameValid)
             {

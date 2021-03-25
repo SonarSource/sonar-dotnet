@@ -20,10 +20,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -63,46 +61,47 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void IsTest_ReturnsTrueForTestFrameworks()
         {
-            CreateContext(NuGetMetadataReference.JetBrainsDotMemoryUnit(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.MSTestTestFrameworkV1).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.MachineSpecifications(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.NUnitLite(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.SpecFlow(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.XunitFrameworkV1).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
+            IsTest(NuGetMetadataReference.JetBrainsDotMemoryUnit(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.MSTestTestFrameworkV1).Should().BeTrue();
+            IsTest(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework).Should().BeTrue();
+            IsTest(NuGetMetadataReference.MachineSpecifications(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.NUnitLite(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.SpecFlow(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.XunitFrameworkV1).Should().BeTrue();
+            IsTest(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion)).Should().BeTrue();
 
             // Assertion
-            CreateContext(NuGetMetadataReference.FluentAssertions(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.Shouldly(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
+            IsTest(NuGetMetadataReference.FluentAssertions(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.Shouldly(Constants.NuGetLatestVersion)).Should().BeTrue();
 
             // Mock
-            CreateContext(NuGetMetadataReference.FakeItEasy(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.JustMock(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.Moq(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.NSubstitute(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
-            CreateContext(NuGetMetadataReference.RhinoMocks(Constants.NuGetLatestVersion)).IsTest().Should().BeTrue();
+            IsTest(NuGetMetadataReference.FakeItEasy(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.JustMock(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.Moq(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.NSubstitute(Constants.NuGetLatestVersion)).Should().BeTrue();
+            IsTest(NuGetMetadataReference.RhinoMocks(Constants.NuGetLatestVersion)).Should().BeTrue();
         }
 
         [TestMethod]
         public void IsTest_ReturnsFalse()
         {
-            CreateContext(null).IsTest().Should().BeFalse();
-            CreateContext(NuGetMetadataReference.SystemValueTuple(Constants.NuGetLatestVersion)).IsTest().Should().BeFalse();   // Any non-test reference
+            IsTest(null).Should().BeFalse();
+            // Any non-test reference
+            IsTest(NuGetMetadataReference.SystemValueTuple(Constants.NuGetLatestVersion)).Should().BeFalse();
         }
 
         [TestMethod]
         public void IsTest_Compilation()
         {
-            CreateSemanticModel(NuGetMetadataReference.MSTestTestFrameworkV1).Compilation.IsTest().Should().BeTrue();
+            IsTest(NuGetMetadataReference.MSTestTestFrameworkV1).Should().BeTrue();
 
-            CreateSemanticModel(null).Compilation.IsTest().Should().BeFalse();
+            IsTest(null).Should().BeFalse();
         }
 
-        private static SyntaxNodeAnalysisContext CreateContext(IEnumerable<MetadataReference> additionalReferences) =>
-            new SyntaxNodeAnalysisContext(null, CreateSemanticModel(additionalReferences), null, null, null, CancellationToken.None);
+        private static bool IsTest(IEnumerable<MetadataReference> additionalReferences) =>
+            CreateSemanticModel(additionalReferences).Compilation.IsTest();
 
         private static SemanticModel CreateSemanticModel(IEnumerable<MetadataReference> additionalReferences) =>
             new SnippetCompiler("// Nothing to see here", additionalReferences).SemanticModel;
