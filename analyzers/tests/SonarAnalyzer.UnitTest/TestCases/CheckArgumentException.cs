@@ -121,11 +121,12 @@ namespace Tests.Diagnostics
                 };
         }
 
-        void NullMessage(string item)
+        void NullMessage(string item, int Length)
         {
             string item2;
             throw new ArgumentOutOfRangeException(nameof(item), item, null);
             throw new ArgumentOutOfRangeException(nameof(item2), item2, null); // Noncompliant
+            throw new ArgumentOutOfRangeException(nameof(item2.Length), Length, null); // Compliant, just weird
         }
 
         public int Foo9
@@ -194,4 +195,15 @@ namespace Tests.Diagnostics
         public bool this[string a] => throw new ArgumentNullException(nameof(a)); // Compliant
         public bool this[int a] => throw new ArgumentNullException("c"); // Noncompliant
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4180
+    public class Repro_4180
+    {
+        public void Method(MissingType argument) // Error [CS0246]
+        {
+            throw new ArgumentNullException(nameof(argument)); // Noncompliant {{The parameter name '' is not declared in the argument list.}} FP with wrong message
+            throw new ArgumentNullException(nameof(argument.argument)); // Compliant
+        }
+    }
 }
+
