@@ -108,3 +108,21 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+namespace Repro4104 // See: https://github.com/SonarSource/sonar-dotnet/issues/4104
+{
+    using System.Collections;
+    using System.Collections.Generic;
+
+    public class SonarExample
+    {
+        public void Evaluate(IEnumerable values)
+        {
+            switch (values)
+            {
+                case IEnumerable<int>: // TypePattern is not supported
+                    break;
+            }
+        }
+    }
+}
