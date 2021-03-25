@@ -31,26 +31,23 @@ namespace SonarAnalyzer.Helpers
         public SyntaxTree SyntaxTree { get; }
         public Diagnostic Diagnostic { get; }
         public Compilation Compilation { get; }
-        public bool? IsTestProject { get; set; }
 
-        public ReportingContext(SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
-            : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, context.Compilation, context.GetSyntaxTree()) { }
+        public ReportingContext(SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.ReportDiagnostic, context.Compilation, context.GetSyntaxTree()) { }
 
-        public ReportingContext(SyntaxTreeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
-            : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, null, context.GetSyntaxTree()) { }
+        public ReportingContext(SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.ReportDiagnostic, null, context.GetSyntaxTree()) { }
 
-        public ReportingContext(CompilationAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
-            : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, context.Compilation, context.GetFirstSyntaxTree()) { }
+        public ReportingContext(CompilationAnalysisContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.ReportDiagnostic, context.Compilation, context.GetFirstSyntaxTree()) { }
 
-        public ReportingContext(SymbolAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
-            : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, context.Compilation, context.GetFirstSyntaxTree()) { }
+        public ReportingContext(SymbolAnalysisContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.ReportDiagnostic, context.Compilation, context.GetFirstSyntaxTree()) { }
 
-        public ReportingContext(CodeBlockAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext)
-            : this(diagnostic, verifyScopeContext, context.Options, context.ReportDiagnostic, context.SemanticModel.Compilation, context.GetSyntaxTree()) { }
+        public ReportingContext(CodeBlockAnalysisContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.ReportDiagnostic, context.SemanticModel.Compilation, context.GetSyntaxTree()) { }
 
         private ReportingContext(Diagnostic diagnostic,
-                                 SonarAnalysisContext verifyScopeContext,
-                                 AnalyzerOptions options,
                                  Action<Diagnostic> contextSpecificReport,
                                  Compilation compilation,
                                  SyntaxTree syntaxTree)
@@ -59,10 +56,6 @@ namespace SonarAnalyzer.Helpers
             SyntaxTree = syntaxTree;
             Compilation = compilation;
             this.contextSpecificReport = contextSpecificReport;
-            if (verifyScopeContext != null)
-            {
-                IsTestProject = verifyScopeContext.IsTestProject(compilation, options);
-            }
         }
 
         public void ReportDiagnostic(Diagnostic diagnostic) =>

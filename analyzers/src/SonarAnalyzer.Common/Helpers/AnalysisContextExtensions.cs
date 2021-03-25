@@ -58,32 +58,31 @@ namespace SonarAnalyzer.Helpers
 
         /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, verifyScopeContext));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.Compilation, context.Options));
 
         // SyntaxTreeAnalysisContext doesn't have a Compilation => verifyScopeContext is never needed, because IsAnalysisScopeMatching returns always true.
         public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, null));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), null);
 
         public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, null) { IsTestProject = SonarAnalysisContext.IsTestProject(context) });
+            ReportDiagnostic(new ReportingContext(context, diagnostic), SonarAnalysisContext.IsTestProject(context));
 
         /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
         public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, verifyScopeContext));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.Compilation, context.Options));
 
         /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
         public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
-            ReportDiagnostic(new ReportingContext(context, diagnostic, verifyScopeContext));
+            ReportDiagnostic(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.SemanticModel.Compilation, context.Options));
 
-        private static void ReportDiagnostic(ReportingContext reportingContext)
+        private static void ReportDiagnostic(ReportingContext reportingContext, bool? isTestProject)
         {
-            if (reportingContext.IsTestProject.HasValue
-                && !SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, reportingContext.IsTestProject.Value, new[] { reportingContext.Diagnostic.Descriptor }))
+            if (isTestProject.HasValue && !SonarAnalysisContext.IsAnalysisScopeMatching(reportingContext.Compilation, isTestProject.Value, new[] { reportingContext.Diagnostic.Descriptor }))
             {
                 return;
             }
 
-            // This is the current way SonarLint will handle how and what to report...
+            // This is the current way SonarLint will handle how and what to report.
             if (SonarAnalysisContext.ReportDiagnostic != null)
             {
                 Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the old and the new delegates.");
@@ -91,7 +90,7 @@ namespace SonarAnalyzer.Helpers
                 return;
             }
 
-            // ... but for compatibility purposes we need to keep handling the old-fashioned way. Old SonarLint can be used with latest NuGet.
+            // Standalone NuGet, Scanner run and SonarLint < 4.0 used with latest NuGet
             if (!VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic)
                 && (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
             {
