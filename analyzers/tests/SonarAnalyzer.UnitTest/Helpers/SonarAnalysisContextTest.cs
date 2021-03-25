@@ -321,33 +321,33 @@ namespace SonarAnalyzer.UnitTest.Helpers
             SonarAnalysisContext.IsAnalysisScopeMatching(null, true, null).Should().BeTrue();
 
         [DataTestMethod]
-        [DataRow(true, false, MainTag)]
-        [DataRow(true, false, MainTag, TestTag)]
-        [DataRow(true, true, TestTag)]
-        [DataRow(true, true, MainTag, TestTag)]
-        [DataRow(false, false, TestTag)]
-        [DataRow(false, false, TestTag, TestTag)]
-        [DataRow(false, true, MainTag)]
-        [DataRow(false, true, MainTag, MainTag)]
-        public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes(bool expectedResult, bool isTestProject, params string[] singleDiagnosticTags)
+        [DataRow(true, ProjectType.Product, MainTag)]
+        [DataRow(true, ProjectType.Product, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Test, TestTag)]
+        [DataRow(true, ProjectType.Test, MainTag, TestTag)]
+        [DataRow(false, ProjectType.Product, TestTag)]
+        [DataRow(false, ProjectType.Product, TestTag, TestTag)]
+        [DataRow(false, ProjectType.Test, MainTag)]
+        [DataRow(false, ProjectType.Test, MainTag, MainTag)]
+        public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes(bool expectedResult, ProjectType projectType, params string[] ruleTags)
         {
             var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-            var diagnostic = new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: singleDiagnosticTags);
-            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, isTestProject, new[] { diagnostic }).Should().Be(expectedResult);
+            var diagnostic = new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: ruleTags);
+            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, new[] { diagnostic }).Should().Be(expectedResult);
         }
 
         [DataTestMethod]
-        [DataRow(true, false, MainTag, MainTag)]
-        [DataRow(true, false, MainTag, TestTag)]
-        [DataRow(true, true, TestTag, TestTag)]
-        [DataRow(true, true, TestTag, MainTag)]
-        [DataRow(false, false, TestTag, TestTag)]
-        [DataRow(false, true, MainTag, MainTag)]
-        public void IsAnalysisScopeMatching_MultipleDiagnostics_WithSingleScope(bool expectedResult, bool isTestProject, params string[] diagnosticsSingleTag)
+        [DataRow(true, ProjectType.Product, MainTag, MainTag)]
+        [DataRow(true, ProjectType.Product, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Test, TestTag, TestTag)]
+        [DataRow(true, ProjectType.Test, TestTag, MainTag)]
+        [DataRow(false, ProjectType.Product, TestTag, TestTag)]
+        [DataRow(false, ProjectType.Test, MainTag, MainTag)]
+        public void IsAnalysisScopeMatching_MultipleDiagnostics_WithSingleScope(bool expectedResult, ProjectType projectType, params string[] rulesTag)
         {
             var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
-            var diagnostics = diagnosticsSingleTag.Select(x => new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: new[] { x }));
-            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, isTestProject, diagnostics).Should().Be(expectedResult);
+            var diagnostics = rulesTag.Select(x => new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: new[] { x }));
+            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, diagnostics).Should().Be(expectedResult);
         }
 
         [TestMethod]
