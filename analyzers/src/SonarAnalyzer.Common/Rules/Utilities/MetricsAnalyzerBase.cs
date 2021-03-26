@@ -28,13 +28,12 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class MetricsAnalyzerBase : UtilityAnalyzerBase<MetricsInfo>
     {
+        internal const string MetricsFileName = "metrics.pb";
         protected const string DiagnosticId = "S9999-metrics";
         protected const string Title = "Metrics calculator";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        internal const string MetricsFileName = "metrics.pb";
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected sealed override string FileName => MetricsFileName;
 
@@ -43,30 +42,22 @@ namespace SonarAnalyzer.Rules
         protected sealed override MetricsInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var metrics = GetMetrics(syntaxTree, semanticModel);
-            return CalculateMetrics(metrics, syntaxTree.FilePath, IgnoreHeaderComments);
-        }
-
-        internal /* for MsBuild12 support */ static MetricsInfo CalculateMetrics(MetricsBase metrics, string filePath, bool ignoreHeaderComments)
-        {
             var complexity = metrics.Complexity;
 
             var metricsInfo = new MetricsInfo
             {
-                FilePath = filePath,
+                FilePath = syntaxTree.FilePath,
                 ClassCount = metrics.ClassCount,
                 StatementCount = metrics.StatementCount,
                 FunctionCount = metrics.FunctionCount,
-
                 Complexity = complexity,
-
                 CognitiveComplexity = metrics.CognitiveComplexity,
             };
 
-            var comments = metrics.GetComments(ignoreHeaderComments);
+            var comments = metrics.GetComments(IgnoreHeaderComments);
             metricsInfo.NoSonarComment.AddRange(comments.NoSonar);
             metricsInfo.NonBlankComment.AddRange(comments.NonBlank);
             metricsInfo.CodeLine.AddRange(metrics.CodeLines);
-
             metricsInfo.ExecutableLines.AddRange(metrics.ExecutableLines);
 
             return metricsInfo;
