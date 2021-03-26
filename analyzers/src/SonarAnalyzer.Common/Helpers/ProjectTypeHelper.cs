@@ -51,6 +51,7 @@ namespace SonarAnalyzer.Helpers
 
         // should only be used by SonarAnalysisContext
         public static bool IsTest(this Compilation compilation) =>
-            compilation.ReferencedAssemblyNames.Any(assembly => TestAssemblyNames.Contains(assembly.Name.ToUpperInvariant()));
+            compilation != null // We can't detect references => it's MAIN
+            && compilation.ReferencedAssemblyNames.Any(assembly => TestAssemblyNames.Contains(assembly.Name.ToUpperInvariant()));
     }
 }

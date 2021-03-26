@@ -27,6 +27,7 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -39,13 +40,16 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class SonarAnalysisContextTest
     {
+        private const string MainTag = "MainSourceScope";
+        private const string TestTag = "TestSourceScope";
+
         private class TestSetup
         {
             public string Path { get; private set; }
             public SonarDiagnosticAnalyzer Analyzer { get; private set; }
             public IEnumerable<MetadataReference> AdditionalReferences { get; private set; }
 
-            public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer) : this(testCase, analyzer, Enumerable.Empty<MetadataReference>()) {}
+            public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer) : this(testCase, analyzer, Enumerable.Empty<MetadataReference>()) { }
 
             public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer, IEnumerable<MetadataReference> additionalReferences)
             {
@@ -57,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         // Various classes that invoke all the `ReportDiagnosticWhenActive` methods in AnalysisContextExtensions
         // We mention in comments the type of Context that is used to invoke (directly or indirectly) the `ReportDiagnosticWhenActive` method
-        private readonly List<TestSetup> testCases = new List<TestSetup>(new[]
+        private readonly List<TestSetup> testCases = new(new[]
         {
             // SyntaxNodeAnalysisContext
             // S3244 - MAIN and TEST
@@ -310,6 +314,72 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             sut.Invoking(x => x.ProjectConfiguration(options)).Should().Throw<InvalidOperationException>()
                 .WithMessage("File SonarProjectConfig.xml has been added as an AdditionalFile but could not be read and parsed.");
+        }
+
+        [TestMethod]
+        public void IsAnalysisScopeMatching_NoCompilation_IsMatching() =>
+            SonarAnalysisContext.IsAnalysisScopeMatching(null, true, null).Should().BeTrue();
+
+        [DataTestMethod]
+        [DataRow(true, ProjectType.Product, MainTag)]
+        [DataRow(true, ProjectType.Product, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Test, TestTag)]
+        [DataRow(true, ProjectType.Test, MainTag, TestTag)]
+        [DataRow(false, ProjectType.Product, TestTag)]
+        [DataRow(false, ProjectType.Product, TestTag, TestTag)]
+        [DataRow(false, ProjectType.Test, MainTag)]
+        [DataRow(false, ProjectType.Test, MainTag, MainTag)]
+        public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes(bool expectedResult, ProjectType projectType, params string[] ruleTags)
+        {
+            var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
+            var diagnostic = new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: ruleTags);
+            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, new[] { diagnostic }).Should().Be(expectedResult);
+        }
+
+        [DataTestMethod]
+        [DataRow(true, ProjectType.Product, MainTag, MainTag)]
+        [DataRow(true, ProjectType.Product, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Test, TestTag, TestTag)]
+        [DataRow(true, ProjectType.Test, TestTag, MainTag)]
+        [DataRow(false, ProjectType.Product, TestTag, TestTag)]
+        [DataRow(false, ProjectType.Test, MainTag, MainTag)]
+        public void IsAnalysisScopeMatching_MultipleDiagnostics_WithSingleScope(bool expectedResult, ProjectType projectType, params string[] rulesTag)
+        {
+            var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
+            var diagnostics = rulesTag.Select(x => new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: new[] { x }));
+            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, diagnostics).Should().Be(expectedResult);
+        }
+
+        [TestMethod]
+        public void IsTestProject_Standalone_NoCompilation_IsFalse()
+        {
+            var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);
+            var context = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+
+            context.IsTestProject(null, options).Should().BeFalse();
+        }
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product, false)]
+        [DataRow(ProjectType.Test, true)]
+        public void IsTestProject_Standalone(ProjectType projectType, bool expectedResult)
+        {
+            var compilation = new SnippetCompiler("// Nothing to see here", TestHelper.ProjectTypeReference(projectType)).SemanticModel.Compilation;
+            var options = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty);
+            var context = new SonarAnalysisContext(new DummyContext(), Enumerable.Empty<DiagnosticDescriptor>());
+
+            context.IsTestProject(compilation, options).Should().Be(expectedResult);
+        }
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product, false)]
+        [DataRow(ProjectType.Test, true)]
+        public void IsTestProject_WithConfigFile(ProjectType projectType, bool expectedResult)
+        {
+            var configPath = TestHelper.CreateSonarProjectConfig(nameof(IsTestProject_WithConfigFile), projectType);
+            var context = new CompilationAnalysisContext(null, TestHelper.CreateOptions(configPath), null, null, default);
+
+            SonarAnalysisContext.IsTestProject(context).Should().Be(expectedResult);
         }
 
         internal class DummyContext : AnalysisContext

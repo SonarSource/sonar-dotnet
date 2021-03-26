@@ -155,10 +155,8 @@ namespace SonarAnalyzer.Helpers
         {
             var projectType = ProjectConfiguration(tryGetValue, options).ProjectType;
             return projectType == ProjectType.Unknown
-                // SonarLint, NuGet or Scanner <= 5.0. We run the rule if the compilation is null, becase we can't detect test references.
-                ? compilation?.IsTest() ?? true
-                // Scanner >= 5.1 does authoritative decision that we follow
-                : projectType == ProjectType.Test;
+                ? compilation.IsTest()              // SonarLint, NuGet or Scanner <= 5.0
+                : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
         }
 
         private static SourceTextValueProvider<bool> CreateAnalyzeGeneratedProvider(string language) =>
