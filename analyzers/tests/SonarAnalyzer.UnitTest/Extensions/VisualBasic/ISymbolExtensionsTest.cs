@@ -17,6 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+
 extern alias vbnet;
 using System.Linq;
 using FluentAssertions;
@@ -28,15 +29,12 @@ using ISymbolExtensions = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
 
 namespace SonarAnalyzer.UnitTest.Extensions.VisualBasic
 {
-    extern alias vbnet;
-
     [TestClass]
     public class ISymbolExtensionsTest
     {
         [TestMethod]
         public void GivenNullSourceTree_GetDescendantNodes_ReturnsEmpty() =>
             ISymbolExtensions.GetDescendantNodes(Location.None, SyntaxFactory.ModifiedIdentifier("a")).Should().BeEmpty();
-
 
         [TestMethod]
         public void GivenDifferentSyntaxTrees_GetDescendantNodes_ReturnsEmpty()

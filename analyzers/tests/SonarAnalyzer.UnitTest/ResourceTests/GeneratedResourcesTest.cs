@@ -91,10 +91,8 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
                 .OrderBy(name => name)
                 .ToArray();
 
-        private static bool IsNotUtilityAnalyzer(Type arg)
-        {
-            return !typeof(UtilityAnalyzerBase).IsAssignableFrom(arg);
-        }
+        private static bool IsNotUtilityAnalyzer(Type arg) =>
+            !typeof(UtilityAnalyzerBase).IsAssignableFrom(arg);
 
         private static string[] GetRulesFromResources(string relativePath)
         {
@@ -102,21 +100,17 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
 
             var resources = Directory.GetFiles(resourcesRoot);
 
-            var ruleNames = resources.Where(IsHtmlFile)
+            return resources.Where(IsHtmlFile)
                                      .Select(Path.GetFileNameWithoutExtension)
                                      .Select(GetRuleFromFileName)
                                      .OrderBy(name => name)
                                      .ToArray();
-
-            return ruleNames;
         }
 
-        private static IEnumerable<string> GetRuleNamesFromAttributes(Type analyzerType)
-        {
-            return analyzerType.GetCustomAttributes(typeof(RuleAttribute), true)
+        private static IEnumerable<string> GetRuleNamesFromAttributes(Type analyzerType) =>
+            analyzerType.GetCustomAttributes(typeof(RuleAttribute), true)
                                 .OfType<RuleAttribute>()
                                 .Select(attr => attr.Key);
-        }
 
         private static string GetRuleFromFileName(string fileName)
         {
@@ -126,9 +120,7 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
             return match.Success ? match.Groups[1].Value : null;
         }
 
-        private static bool IsHtmlFile(string name)
-        {
-            return Path.GetExtension(name).Equals(".html", StringComparison.OrdinalIgnoreCase);
-        }
+        private static bool IsHtmlFile(string name) =>
+            Path.GetExtension(name).Equals(".html", StringComparison.OrdinalIgnoreCase);
     }
 }

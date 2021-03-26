@@ -7001,4 +7001,3 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         #endregion
     }
 }
-

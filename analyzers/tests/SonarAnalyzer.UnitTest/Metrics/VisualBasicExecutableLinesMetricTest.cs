@@ -27,18 +27,15 @@ namespace SonarAnalyzer.UnitTest.Common
     public class VisualBasicExecutableLinesMetricTest
     {
         [TestMethod]
-        public void AttributeList()
-        {
+        public void AttributeList() =>
             AssertLinesOfCode(@"
 <System.Runtime.InteropServices.DllImport(""user32.dll"")>
 <System.Serializable()>
 Sub SampleMethod()
 End Sub");
-        }
 
         [TestMethod]
-        public void SyncLockStatement()
-        {
+        public void SyncLockStatement() =>
             AssertLinesOfCode(@"
 Class simpleMessageList
     Private messagesLock As New Object
@@ -49,54 +46,42 @@ Class simpleMessageList
     End Sub
 End Class",
             6);
-        }
 
         [TestMethod]
-        public void UsingStatement()
-        {
+        public void UsingStatement() =>
             AssertLinesOfCode(@"
 Using resource As New resourceType
     ' Insert code to work with resource.
 End Using ",
             2);
-        }
 
         [TestMethod]
-        public void DoUntilStatement()
-        {
+        public void DoUntilStatement() =>
             AssertLinesOfCode(@"
 Dim index As Integer = 0
 Do
 Loop Until index > 10");
-        }
 
         [TestMethod]
-        public void DoWhileStatement()
-        {
+        public void DoWhileStatement() =>
             AssertLinesOfCode(@"
 Dim index As Integer = 0
 Do While index <= 10
 Loop",
             3);
-        }
 
         [TestMethod]
-        public void ForEachStatement()
-        {
+        public void ForEachStatement() =>
             AssertLinesOfCode(@"
 For Each item As String In lst ' +1
-Next",
-            2);
-        }
+Next", 2);
 
         [TestMethod]
-        public void ForStatement()
-        {
+        public void ForStatement() =>
             AssertLinesOfCode(@"
 For index As Integer = 1 To 5
 Next",
             2);
-        }
 
         [TestMethod]
         public void WhileStatement()
@@ -108,8 +93,7 @@ End While",
         }
 
         [TestMethod]
-        public void IfStatement()
-        {
+        public void IfStatement() =>
             AssertLinesOfCode(@"
 If count = 0 Then
     message = ""There are no items.""
@@ -119,11 +103,9 @@ Else
     message = $""There are many items.""
 End If",
             2, 3, 5, 7);
-        }
 
         [TestMethod]
-        public void SelectStatement()
-        {
+        public void SelectStatement() =>
             AssertLinesOfCode(@"
 Dim number As Integer = 8
 Select Case number ' +1
@@ -133,51 +115,37 @@ Select Case number ' +1
         Debug.WriteLine(""f"") ' +1
 End Select",
             3, 5, 7);
-        }
 
         [TestMethod]
-        public void ConditionalAccessExpression()
-        {
+        public void ConditionalAccessExpression() =>
             AssertLinesOfCode(@"Dim length As Integer? = customers?.Length", 1);
-        }
 
         [TestMethod]
-        public void BinaryConditionalExpression()
-        {
+        public void BinaryConditionalExpression() =>
             AssertLinesOfCode(@"If(first, second)", 1);
-        }
 
         [TestMethod]
-        public void TernaryConditionalExpression()
-        {
+        public void TernaryConditionalExpression() =>
             AssertLinesOfCode(@"Dim foo as String = If(bar = buz, cat, dog)", 1);
-        }
 
         [TestMethod]
-        public void GoToStatement()
-        {
+        public void GoToStatement() =>
             AssertLinesOfCode(@"GoTo LastLine", 1);
-        }
 
         [TestMethod]
-        public void ThrowStatement()
-        {
+        public void ThrowStatement() =>
             AssertLinesOfCode(@"Throw New System.Exception()", 1);
-        }
 
         [TestMethod]
-        public void ReturnStatement()
-        {
+        public void ReturnStatement() =>
             AssertLinesOfCode(@"
 Public Function getAgePhrase(ByVal age As Integer) As String
     Return ""Infant""
 End Function",
             3);
-        }
 
         [TestMethod]
-        public void ExitDoStatement()
-        {
+        public void ExitDoStatement() =>
             AssertLinesOfCode(@"
 Do While index <= 100
     If index > 10 Then
@@ -185,57 +153,45 @@ Do While index <= 100
     End If
 Loop",
             2, 3, 4);
-        }
 
         [TestMethod]
-        public void ExitForStatement()
-        {
+        public void ExitForStatement() =>
             AssertLinesOfCode(@"
 For index As Integer = 1 To 100000
     Exit For
 End For",
             2, 3);
-        }
 
         [TestMethod]
-        public void ExitWhileStatement()
-        {
+        public void ExitWhileStatement() =>
             AssertLinesOfCode(@"
 While index < 100000
     Exit While
 End While",
             2, 3);
-        }
 
         [TestMethod]
-        public void ContinueDoStatement()
-        {
+        public void ContinueDoStatement() =>
             AssertLinesOfCode(@"
 Do
     Continue Do
 Loop While (a < 20)",
             3);
-        }
 
         [TestMethod]
-        public void ContinueForStatement()
-        {
+        public void ContinueForStatement() =>
             AssertLinesOfCode(@"
 For index As Integer = 1 To 100000
     Continue For
 End For",
             2, 3);
-        }
 
         [TestMethod]
-        public void SimpleMemberAccessExpression()
-        {
+        public void SimpleMemberAccessExpression() =>
             AssertLinesOfCode(@" Console.WriteLine(""Found"")", 1);
-        }
 
         [TestMethod]
-        public void InvocationExpression()
-        {
+        public void InvocationExpression() =>
             AssertLinesOfCode(@"
 Public Sub foo()
 End Sub
@@ -244,127 +200,97 @@ Public Sub bar()
     foo()
 End Sub",
             6);
-        }
 
         [TestMethod]
-        public void SingleLineSubLambdaExpression()
-        {
+        public void SingleLineSubLambdaExpression() =>
             AssertLinesOfCode(@"Dim writeline1 = Sub(x) Console.WriteLine(x)", 1);
-        }
 
         [TestMethod]
-        public void SingleLineFunctionLambdaExpression()
-        {
+        public void SingleLineFunctionLambdaExpression() =>
             AssertLinesOfCode(@"Dim increment1 = Function(x) x + 1", 1);
-        }
 
         [TestMethod]
-        public void MultiLineSubLambdaExpression()
-        {
+        public void MultiLineSubLambdaExpression() =>
             AssertLinesOfCode(@"
 Dim writeline2 = Sub(x)
                      Console.WriteLine(x)
                  End Sub",
             2, 3);
-        }
 
         [TestMethod]
-        public void MultiLineFunctionLambdaExpression()
-        {
+        public void MultiLineFunctionLambdaExpression() =>
             AssertLinesOfCode(@"
 Dim increment2 = Function(x)
                      Return x + 2
                  End Function",
             2, 3);
-        }
 
         [TestMethod]
-        public void StructureStatement()
-        {
+        public void StructureStatement() =>
             AssertLinesOfCode(@"
 Structure foo
 End Structure");
-        }
 
         [TestMethod]
-        public void ClassStatement()
-        {
+        public void ClassStatement() =>
             AssertLinesOfCode(@"
 Class foo
 End Class");
-        }
 
         [TestMethod]
-        public void ModuleStatement()
-        {
+        public void ModuleStatement() =>
             AssertLinesOfCode(@"
 Module foo
 End Module");
-        }
 
         [TestMethod]
-        public void FunctionStatement()
-        {
+        public void FunctionStatement() =>
             AssertLinesOfCode(@"
 Function myFunction(ByVal j As Integer) As Double
     Return 3.87 * j
 End Function",
             3);
-        }
 
         [TestMethod]
-        public void SubStatement()
-        {
+        public void SubStatement() =>
             AssertLinesOfCode(@"
 Sub computeArea(ByVal length As Double, ByVal width As Double)
 End Sub");
-        }
 
         [TestMethod]
-        public void SubNewStatement()
-        {
+        public void SubNewStatement() =>
             AssertLinesOfCode(@"
 Public Sub New()
 End Sub");
-        }
 
         [TestMethod]
-        public void PropertyStatement()
-        {
+        public void PropertyStatement() =>
             AssertLinesOfCode("Public Property Name As String");
-        }
 
         [TestMethod]
-        public void EventStatement()
-        {
+        public void EventStatement() =>
             AssertLinesOfCode(@"
 Public Event LogonCompleted(ByVal UserName As String)");
-        }
 
         [TestMethod]
-        public void AddHandlerAccessorStatement()
-        {
+        public void AddHandlerAccessorStatement() =>
             AssertLinesOfCode(@"
 Sub TestEvents()
     Dim Obj As New Class1
     AddHandler Obj.Ev_Event, AddressOf EventHandler
 End Sub", 4);
-        }
 
         [TestMethod]
-        public void RemoveHandlerAccessorStatement()
-        {
+        public void RemoveHandlerAccessorStatement() =>
             AssertLinesOfCode(@"
 Sub TestEvents()
     Dim Obj As New Class1
     RemoveHandler Obj.Ev_Event, AddressOf EventHandler
 End Sub",
             4);
-        }
 
         [TestMethod]
-        public void SetAccessorStatement()
-        {
+        public void SetAccessorStatement() =>
             AssertLinesOfCode(@"
 Property quoteForTheDay() As String
     Set(ByVal value As String)
@@ -372,21 +298,17 @@ Property quoteForTheDay() As String
     End Set
 End Property",
             4);
-        }
 
         [TestMethod]
-        public void GetAccessorStatement()
-        {
+        public void GetAccessorStatement() =>
             AssertLinesOfCode(@"
 ReadOnly Property quoteForTheDay() As String
     Get
     End Get
 End Property");
-        }
 
         [TestMethod]
-        public void Assignments()
-        {
+        public void Assignments() =>
             AssertLinesOfCode(@"
 Public Sub Foo(ByVal flag _
                 As Boolean)
@@ -396,7 +318,6 @@ Public Sub Foo(ByVal flag _
     End If
 End Sub",
             4, 6);
-        }
 
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
