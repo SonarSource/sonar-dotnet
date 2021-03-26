@@ -25,7 +25,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class VbcHelperTests
+    public class VbcHelperTest
     {
         [DataTestMethod]
         [DataRow(null, false)]

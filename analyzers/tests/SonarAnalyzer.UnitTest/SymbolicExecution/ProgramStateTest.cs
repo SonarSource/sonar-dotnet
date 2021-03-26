@@ -29,7 +29,7 @@ using SonarAnalyzer.UnitTest.ControlFlowGraph;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution
 {
     [TestClass]
-    public class ProgramStateTests
+    public class ProgramStateTest
     {
         private class FakeConstraint : SymbolicValueConstraint
         {

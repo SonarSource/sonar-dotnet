@@ -29,7 +29,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SonarAnalyzer.UnitTest.PackagingTests
 {
     [TestClass]
-    public class RuleTypeTests
+    public class RuleTypeTest
     {
         [TestMethod]
         public void DetectRuleTypeChanges_CS()

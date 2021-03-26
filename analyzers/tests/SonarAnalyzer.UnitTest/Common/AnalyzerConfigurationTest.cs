@@ -34,7 +34,7 @@ using static SonarAnalyzer.Common.AnalyzerConfiguration;
 namespace SonarAnalyzer.UnitTest.Common
 {
     [TestClass]
-    public class AnalyzerConfigurationTests
+    public class AnalyzerConfigurationTest
     {
         private const string FirstSonarLintFile = @"bar\SonarLint.xml";
         private const string FirstRuleId = "S0000";

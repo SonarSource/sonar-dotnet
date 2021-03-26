@@ -25,7 +25,7 @@ using SonarAnalyzer.Extensions;
 namespace SonarAnalyzer.UnitTest.Extensions
 {
     [TestClass]
-    public class CSharpSyntaxWalkerExtensionsTests
+    public class CSharpSyntaxWalkerExtensionsTest
     {
         [TestMethod]
         public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue()

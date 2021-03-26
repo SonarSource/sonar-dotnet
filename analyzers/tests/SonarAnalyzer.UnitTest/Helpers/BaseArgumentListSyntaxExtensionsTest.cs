@@ -29,7 +29,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class BaseArgumentListSyntaxExtensionsTests
+    public class BaseArgumentListSyntaxExtensionsTest
     {
         [TestMethod]
         public void GivenEmptyList_GetArgumentByName_ReturnsNull() =>

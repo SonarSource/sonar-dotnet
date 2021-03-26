@@ -28,7 +28,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class ParameterLoaderTests
+    public class ParameterLoaderTest
     {
         [TestMethod]
         public void SetParameterValues_WhenNoSonarLintIsGiven_DoesNotPopulateParameters()
