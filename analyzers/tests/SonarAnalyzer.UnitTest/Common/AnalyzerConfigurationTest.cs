@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Common;
+
 using static Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using static SonarAnalyzer.Common.AnalyzerConfiguration;
 

@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.Helpers;
+
 using static Microsoft.CodeAnalysis.CSharp.LanguageVersion;
 using static Microsoft.CodeAnalysis.VisualBasic.LanguageVersion;
 using CS = Microsoft.CodeAnalysis.CSharp;

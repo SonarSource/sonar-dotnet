@@ -23,8 +23,8 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Utilities;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Common
         public void GetAnalyzerTypes()
         {
             var analyzers = new RuleFinder().GetAnalyzerTypes(AnalyzerLanguage.CSharp);
-            analyzers.Should().Contain(typeof(CS.EmptyStatement));
+            analyzers.Should().Contain(typeof(EmptyStatement));
         }
 
         [TestMethod]

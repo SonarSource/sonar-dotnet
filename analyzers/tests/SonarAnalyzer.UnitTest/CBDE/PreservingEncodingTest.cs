@@ -18,17 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
 using System;
 using System.Text;
+using csharp::SonarAnalyzer.CBDE;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CS = SonarAnalyzer.CBDE;
 
 namespace SonarAnalyzer.UnitTest.CBDE
 {
     [TestClass]
     public class PreservingEncodingTest
     {
-        private readonly Encoding encoder = System.Text.Encoding.GetEncoding("ASCII", new CS.PreservingEncodingFallback(), DecoderFallback.ExceptionFallback);
+        private readonly Encoding encoder = System.Text.Encoding.GetEncoding("ASCII", new PreservingEncodingFallback(), DecoderFallback.ExceptionFallback);
 
         public string Encode(string name)
         {

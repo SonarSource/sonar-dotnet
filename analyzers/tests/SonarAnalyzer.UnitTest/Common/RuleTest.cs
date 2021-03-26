@@ -33,6 +33,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using SonarAnalyzer.Utilities;
+
 using static SonarAnalyzer.UnitTest.TestHelper;
 
 namespace SonarAnalyzer.UnitTest.Common

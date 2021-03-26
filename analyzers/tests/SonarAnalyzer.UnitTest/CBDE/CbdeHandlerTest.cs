@@ -25,8 +25,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             System.Environment.SetEnvironmentVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
             Verifier.VerifyAnalyzer(@"TestCases\CbdeHandler.cs",
-                CS.CbdeHandlerRule.MakeUnitTestInstance(null, null));
+                CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
 #if NET
         [TestMethod]
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             System.Environment.SetEnvironmentVariable("SONAR_DOTNET_INTERNAL_LOG_CBDE", "true");
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\CbdeHandler.CSharp9.cs",
-                                                      CS.CbdeHandlerRule.MakeUnitTestInstance(null, null));
+                                                      CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
 #endif
         [TestMethod]
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var cbdeExecuted = false;
             RunAnalysisWithoutVerification(@"TestCases\CbdeHandlerDummy.cs",
-                CS.CbdeHandlerRule.MakeUnitTestInstance(CreateMockPath("CBDEWaitAndSucceeds"),
+                CbdeHandlerRule.MakeUnitTestInstance(CreateMockPath("CBDEWaitAndSucceeds"),
                 s =>
                 {
                     cbdeExecuted = true;
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var cbdeExecuted = false;
             RunAnalysisWithoutVerification(@"TestCases\CbdeHandlerDummy.cs",
-                CS.CbdeHandlerRule.MakeUnitTestInstance(CreateMockPath("NonExistingExecutable"),
+                CbdeHandlerRule.MakeUnitTestInstance(CreateMockPath("NonExistingExecutable"),
                 s =>
                 {
                     cbdeExecuted = true;
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var cbdeExecuted = false;
             RunAnalysisWithoutVerification(@"TestCases\CbdeHandlerDummy.cs",
-                CS.CbdeHandlerRule.MakeUnitTestInstance(CreateMockPath("CBDEFails"),
+                CbdeHandlerRule.MakeUnitTestInstance(CreateMockPath("CBDEFails"),
                 s =>
                 {
                     cbdeExecuted = true;
@@ -110,7 +110,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var cbdeExecuted = false;
             RunAnalysisWithoutVerification(@"TestCases\CbdeHandlerDummy.cs",
-                CS.CbdeHandlerRule.MakeUnitTestInstance(CreateMockPath("CBDESucceedsWithIncorrectResults"),
+                CbdeHandlerRule.MakeUnitTestInstance(CreateMockPath("CBDESucceedsWithIncorrectResults"),
                 s =>
                 {
                     cbdeExecuted = true;
