@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Resources;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -42,6 +43,7 @@ namespace SonarAnalyzer.Helpers
         public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
         public ISyntaxKindFacade<SyntaxKind> SyntaxKind => SyntaxKindLazy.Value;
         public ITrackerFacade<SyntaxKind> Tracker => TrackerLazy.Value;
+        public ResourceManager RspecResources => RspecStrings.ResourceManager;
 
         public static VisualBasicFacade Instance => Singleton.Value;
 
