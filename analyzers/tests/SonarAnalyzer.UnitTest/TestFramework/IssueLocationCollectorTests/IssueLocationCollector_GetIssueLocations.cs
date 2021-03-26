@@ -317,11 +317,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
             result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
         }
 
-        private static TextLine GetLine(int lineNumber, string code)
-        {
-            var sourceText = SourceText.From(code);
-            return sourceText.Lines[lineNumber];
-        }
+        private static TextLine GetLine(int lineNumber, string code) =>
+            SourceText.From(code).Lines[lineNumber];
 
         private static void VerifyIssueLocations(IEnumerable<IIssueLocation> result,
             IEnumerable<bool> expectedIsPrimary,

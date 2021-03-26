@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 {
     internal struct ProjectBuilder
     {
-        private const string FIXED_MESSAGE = "Fixed";
+        private const string FixedMessage = "Fixed";
 
         private readonly Lazy<SolutionBuilder> solutionWrapper;
 
@@ -43,11 +43,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             Project = project;
             FileExtension = project.Language == LanguageNames.CSharp ? ".cs" : ".vb";
 
-            this.solutionWrapper = new Lazy<SolutionBuilder>(() => SolutionBuilder.FromSolution(project.Solution));
+            solutionWrapper = new Lazy<SolutionBuilder>(() => SolutionBuilder.FromSolution(project.Solution));
         }
 
         public SolutionBuilder GetSolution() =>
-            this.solutionWrapper.Value;
+            solutionWrapper.Value;
 
         public Compilation GetCompilation(ParseOptions parseOptions = null, CompilationOptions compilationOptions = null)
         {
@@ -71,15 +71,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
         {
             var existingReferences = Project.MetadataReferences;
-            IEnumerable<MetadataReference> deduplicated;
-            if (references == null)
-            {
-                deduplicated = Enumerable.Empty<MetadataReference>();
-            }
-            else
-            {
-                deduplicated = references.Where(mr => !existingReferences.Contains(mr)).Distinct().ToHashSet();
-            }
+            var deduplicated = references == null
+                ? Enumerable.Empty<MetadataReference>()
+                : references.Where(mr => !existingReferences.Contains(mr)).Distinct().ToHashSet();
             return FromProject(Project.AddMetadataReferences(deduplicated));
         }
 
@@ -101,13 +95,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var fileInfo = new FileInfo(path);
 
-            if (fileInfo.Extension != FileExtension)
-            {
-                throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not" +
-                    $" match the project language '{Project.Language}'.", nameof(path));
-            }
-
-            return AddDocument(Project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8), removeAnalysisComments);
+            return fileInfo.Extension != FileExtension
+                ? throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not" +
+                                              $" match the project language '{Project.Language}'.", nameof(path))
+                : AddDocument(Project, fileInfo.Name, File.ReadAllText(fileInfo.FullName, Encoding.UTF8), removeAnalysisComments);
         }
 
         public ProjectBuilder AddSnippet(string code, string fileName = null, bool removeAnalysisComments = false)
@@ -117,10 +108,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 throw new ArgumentNullException(nameof(code));
             }
 
-            fileName = fileName ?? $"snippet{Project.Documents.Count()}{FileExtension}";
+            fileName ??= $"snippet{Project.Documents.Count()}{FileExtension}";
 
             return AddDocument(Project, fileName, code, removeAnalysisComments);
         }
+
+        public static ProjectBuilder FromProject(Project project) =>
+            new ProjectBuilder(project);
 
         private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent, bool removeAnalysisComments)
         {
@@ -157,13 +151,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (match.Groups["issueType"].Value == "Noncompliant")
             {
                 var startIndex = line.IndexOf(match.Groups["issueType"].Value);
-                return string.Concat(line.Remove(startIndex), FIXED_MESSAGE);
+                return string.Concat(line.Remove(startIndex), FixedMessage);
             }
 
             return line.Replace(match.Value, string.Empty).TrimEnd();
         }
-
-        public static ProjectBuilder FromProject(Project project) =>
-            new ProjectBuilder(project);
     }
 }

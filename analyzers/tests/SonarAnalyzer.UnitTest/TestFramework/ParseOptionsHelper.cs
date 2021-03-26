@@ -24,12 +24,11 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using CS = Microsoft.CodeAnalysis.CSharp;
-using VB = Microsoft.CodeAnalysis.VisualBasic;
-
+using SonarAnalyzer.UnitTest.Helpers;
 using static Microsoft.CodeAnalysis.CSharp.LanguageVersion;
 using static Microsoft.CodeAnalysis.VisualBasic.LanguageVersion;
-using SonarAnalyzer.UnitTest.Helpers;
+using CS = Microsoft.CodeAnalysis.CSharp;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -50,11 +49,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<ParseOptions> FromCSharp8 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp9 { get; }
 
-        private static ImmutableArray<ParseOptions> FromVisualBasic12 { get; }
+        public static ImmutableArray<ParseOptions> FromVisualBasic12 { get; }
         public static ImmutableArray<ParseOptions> FromVisualBasic14 { get; }
         public static ImmutableArray<ParseOptions> FromVisualBasic15 { get; }
 
-        private static readonly ImmutableArray<ParseOptions> defaultParseOptions;
+        private static readonly ImmutableArray<ParseOptions> DefaultParseOptions;
 
 #pragma warning disable S3963 // The static fields are dependent between them so the values cannot be set inline
 
@@ -77,14 +76,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             FromVisualBasic14 = CreateOptions(VisualBasic14).Concat(FromVisualBasic15).FilterByEnvironment();
             FromVisualBasic12 = CreateOptions(VisualBasic12).Concat(FromVisualBasic14).FilterByEnvironment();
 
-            defaultParseOptions = FromCSharp7.Concat(FromVisualBasic12).ToImmutableArray(); // Values depends on the build environment
+            DefaultParseOptions = FromCSharp7.Concat(FromVisualBasic12).ToImmutableArray(); // Values depends on the build environment
         }
 #pragma warning restore S3963
 
         public static IEnumerable<ParseOptions> GetParseOptionsOrDefault(IEnumerable<ParseOptions> parseOptions) =>
             parseOptions != null && parseOptions.WhereNotNull().Any()
                 ? parseOptions.WhereNotNull()
-                : defaultParseOptions;
+                : DefaultParseOptions;
 
         public static Func<ParseOptions, bool> GetFilterByLanguage(string language) =>
             language switch
