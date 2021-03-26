@@ -42,11 +42,6 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
-            return GetTokenTypeInfo(syntaxTree, semanticModel);
-        }
-
-        internal /* only for msbuild12 support */ TokenTypeInfo GetTokenTypeInfo(SyntaxTree syntaxTree, SemanticModel semanticModel)
-        {
             var tokens = syntaxTree.GetRoot().DescendantTokens();
             var spans = new List<TokenTypeInfo.Types.TokenInfo>();
             foreach (var token in tokens)
