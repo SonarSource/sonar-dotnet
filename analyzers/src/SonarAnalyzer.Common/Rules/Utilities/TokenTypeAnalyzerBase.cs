@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules
 
             protected void CollectClassified(TokenType tokenType, TextSpan span)
             {
-                if (string.IsNullOrWhiteSpace(this.token.SyntaxTree.GetText().GetSubText(span).ToString()))
+                if (string.IsNullOrWhiteSpace(token.SyntaxTree.GetText().GetSubText(span).ToString()))
                 {
                     return;
                 }
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules
                 spans.Add(new TokenTypeInfo.Types.TokenInfo
                 {
                     TokenType = tokenType,
-                    TextRange = GetTextRange(Location.Create(this.token.SyntaxTree, span).GetLineSpan())
+                    TextRange = GetTextRange(Location.Create(token.SyntaxTree, span).GetLineSpan())
                 });
             }
 
@@ -152,7 +152,6 @@ namespace SonarAnalyzer.Rules
                 if (semanticModel.GetDeclaredSymbol(token.Parent) is { }  declaration)
                 {
                     ClassifyIdentifier(token, declaration);
-                    return;
                 }
                 else if (GetBindableParent(token) is { }  parent && semanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
                 {
