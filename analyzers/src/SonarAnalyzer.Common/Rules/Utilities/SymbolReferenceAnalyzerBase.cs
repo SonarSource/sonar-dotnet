@@ -35,6 +35,18 @@ namespace SonarAnalyzer.Rules
         private const string Title = "Symbol reference calculator";
         private const string SymbolReferenceFileName = "symrefs.pb";
 
+        private static readonly ISet<SymbolKind> DeclarationKinds = new HashSet<SymbolKind>
+        {
+            SymbolKind.Event,
+            SymbolKind.Field,
+            SymbolKind.Local,
+            SymbolKind.Method,
+            SymbolKind.NamedType,
+            SymbolKind.Parameter,
+            SymbolKind.Property,
+            SymbolKind.TypeParameter
+        };
+
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -49,7 +61,7 @@ namespace SonarAnalyzer.Rules
             var tokens = syntaxTree.GetRoot().DescendantTokens();
             foreach (var token in tokens)
             {
-                if (GetSymRefInfo(token, semanticModel, IsIdentifier, GetBindableParent) is { } reference)
+                if (GetSymRefInfo(token, semanticModel) is { } reference)
                 {
                     allReferences.Add(reference);
                 }
@@ -58,7 +70,7 @@ namespace SonarAnalyzer.Rules
             var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = syntaxTree.FilePath };
             foreach (var allReference in allReferences.GroupBy(r => r.Symbol))
             {
-                if (GetSymbolReference(allReference, syntaxTree, GetSetKeyword) is { } reference)
+                if (GetSymbolReference(allReference, syntaxTree) is { } reference)
                 {
                     symbolReferenceInfo.Reference.Add(reference);
                 }
@@ -74,116 +86,63 @@ namespace SonarAnalyzer.Rules
             && parameterSymbol.IsImplicitlyDeclared
             && parameterSymbol.Name == "value";
 
-        //FIXME: Deobfuscate
-        private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(IEnumerable<SymRefInfo> allReference, SyntaxTree tree, Func<ISymbol, SyntaxToken?> getSetKeyword)
+        private SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(IEnumerable<SymRefInfo> allReference, SyntaxTree tree)
         {
-            var declaration = allReference.FirstOrDefault(r => r.IsDeclaration);
             TextSpan declarationSpan;
-
-            if (declaration == null)
-            {
-                var reference = allReference.FirstOrDefault();
-                if (reference == null)
-                {
-                    return null;
-                }
-
-                var setKeyword = getSetKeyword(reference.Symbol);
-
-                if (!setKeyword.HasValue)
-                {
-                    return null;
-                }
-
-                declarationSpan = setKeyword.Value.Span;
-            }
-            else
+            if (allReference.FirstOrDefault(r => r.IsDeclaration) is { } declaration)
             {
                 declarationSpan = declaration.IdentifierToken.Span;
             }
-
-            var sr = new SymbolReferenceInfo.Types.SymbolReference
+            else
             {
-                Declaration = GetTextRange(Location.Create(tree, declarationSpan).GetLineSpan())
-            };
+                if (allReference.FirstOrDefault() is { } reference && GetSetKeyword(reference.Symbol) is { } setKeyword)
+                {
+                    declarationSpan = setKeyword.Span;
+                }
+                else
+                {
+                    return null;
+                }
+            }
 
-            var references = allReference.Where(r => !r.IsDeclaration).Select(r => r.IdentifierToken);
-            foreach (var reference in references)
+            var sr = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(Location.Create(tree, declarationSpan).GetLineSpan()) };
+            foreach (var reference in allReference.Where(r => !r.IsDeclaration).Select(r => r.IdentifierToken))
             {
                 sr.Reference.Add(GetTextRange(Location.Create(tree, reference.Span).GetLineSpan()));
             }
-
             return sr;
         }
 
-        private static readonly ISet<SymbolKind> DeclarationKinds = new HashSet<SymbolKind>
+        private SymRefInfo GetSymRefInfo(SyntaxToken token, SemanticModel semanticModel)
         {
-            SymbolKind.Event,
-            SymbolKind.Field,
-            SymbolKind.Local,
-            SymbolKind.Method,
-            SymbolKind.NamedType,
-            SymbolKind.Parameter,
-            SymbolKind.Property,
-            SymbolKind.TypeParameter
-        };
-
-        //FIXME: Deobfuscate
-        private static SymRefInfo GetSymRefInfo(SyntaxToken token, SemanticModel semanticModel, Func<SyntaxToken, bool> isIdentifier, Func<SyntaxToken, SyntaxNode> getBindableParent)
-        {
-            if (!isIdentifier(token))
+            if (!IsIdentifier(token))
             {
                 // For the time being, we only handle identifier tokens.
                 // We could also handle keywords, such as this, base
                 return null;
             }
 
-            var declaredSymbol = semanticModel.GetDeclaredSymbol(token.Parent);
-            if (declaredSymbol != null)
+            if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaredSymbol)
             {
-                if (DeclarationKinds.Contains(declaredSymbol.Kind))
-                {
-                    return new SymRefInfo
-                    {
-                        IdentifierToken = token,
-                        Symbol = declaredSymbol,
-                        IsDeclaration = true
-                    };
-                }
-
-                return null;
+                return DeclarationKinds.Contains(declaredSymbol.Kind)
+                    ? new SymRefInfo(token, declaredSymbol, true)
+                    : null;
             }
 
-            var node = getBindableParent(token);
-            if (node != null)
+            if (GetBindableParent(token) is { } node)
             {
                 var symbol = semanticModel.GetSymbolInfo(node).Symbol;
                 if (symbol == null)
                 {
                     return null;
                 }
-
-                if (symbol.DeclaringSyntaxReferences.Any() ||
-                    IsValuePropertyParameter(symbol))
+                else if (symbol.DeclaringSyntaxReferences.Any() || IsValuePropertyParameter(symbol))
                 {
-                    return new SymRefInfo
-                    {
-                        IdentifierToken = token,
-                        Symbol = symbol,
-                        IsDeclaration = false
-                    };
+                    return new SymRefInfo(token, symbol);
                 }
-
-                if (symbol is IMethodSymbol ctorSymbol &&
-                    ctorSymbol.MethodKind == MethodKind.Constructor &&
-                    ctorSymbol.IsImplicitlyDeclared)
+                else if (symbol is IMethodSymbol ctorSymbol && ctorSymbol.MethodKind == MethodKind.Constructor && ctorSymbol.IsImplicitlyDeclared)
                 {
-                    return new SymRefInfo
-                    {
-                        IdentifierToken = token,
-                        Symbol = ctorSymbol.ContainingType,
-                        IsDeclaration = false
-                    };
+                    return new SymRefInfo(token, ctorSymbol.ContainingType);
                 }
             }
 
@@ -192,9 +151,16 @@ namespace SonarAnalyzer.Rules
 
         public class SymRefInfo
         {
-            public SyntaxToken IdentifierToken { get; set; }
-            public ISymbol Symbol { get; set; }
-            public bool IsDeclaration { get; set; }
+            public SyntaxToken IdentifierToken { get; }
+            public ISymbol Symbol { get; }
+            public bool IsDeclaration { get; }
+
+            public SymRefInfo(SyntaxToken identifierToken, ISymbol symbol, bool isDeclaration = false)
+            {
+                IdentifierToken = identifierToken;
+                Symbol = symbol;
+                IsDeclaration = isDeclaration;
+            }
         }
     }
 }
