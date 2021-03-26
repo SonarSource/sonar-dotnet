@@ -33,53 +33,44 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S9999-symbolRef";
         protected const string Title = "Symbol reference calculator";
+        private const string SymbolReferenceFileName = "symrefs.pb";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        internal const string SymbolReferenceFileName = "symrefs.pb";
+        internal abstract SyntaxNode GetBindableParent(SyntaxToken token);
+        protected abstract bool IsIdentifier(SyntaxToken token);
 
         protected sealed override string FileName => SymbolReferenceFileName;
 
         protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
-            return CalculateSymbolReferenceInfo(syntaxTree, semanticModel, IsIdentifier, GetBindableParent, GetSetKeyword);
-        }
-
-        internal static SymbolReferenceInfo CalculateSymbolReferenceInfo(SyntaxTree syntaxTree, SemanticModel semanticModel,
-            Func<SyntaxToken, bool> isIdentifier, Func<SyntaxToken, SyntaxNode> getBindableParent, Func<ISymbol, SyntaxToken?> getSetKeyword)
-        {
             var allReferences = new List<SymRefInfo>();
-
             var tokens = syntaxTree.GetRoot().DescendantTokens();
             foreach (var token in tokens)
             {
-                var reference = GetSymRefInfo(token, semanticModel, isIdentifier, getBindableParent);
-                if (reference != null)
+                if (GetSymRefInfo(token, semanticModel, IsIdentifier, GetBindableParent) is { } reference)
                 {
                     allReferences.Add(reference);
                 }
             }
 
-            var symbolReferenceInfo = new SymbolReferenceInfo
-            {
-                FilePath = syntaxTree.FilePath
-            };
-
+            var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = syntaxTree.FilePath };
             foreach (var allReference in allReferences.GroupBy(r => r.Symbol))
             {
-                var sr = GetSymbolReference(allReference, syntaxTree, getSetKeyword);
-                if (sr != null)
+                if (GetSymbolReference(allReference, syntaxTree, GetSetKeyword) is { } reference)
                 {
-                    symbolReferenceInfo.Reference.Add(sr);
+                    symbolReferenceInfo.Reference.Add(reference);
                 }
             }
 
             return symbolReferenceInfo;
         }
 
-        private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(IEnumerable<SymRefInfo> allReference, SyntaxTree tree,
-            Func<ISymbol, SyntaxToken?> getSetKeyword)
+        protected virtual SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol) => null;
+
+        //FIXME: Deobfuscate
+        private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(IEnumerable<SymRefInfo> allReference, SyntaxTree tree, Func<ISymbol, SyntaxToken?> getSetKeyword)
         {
             var declaration = allReference.FirstOrDefault(r => r.IsDeclaration);
             TextSpan declarationSpan;
@@ -120,11 +111,6 @@ namespace SonarAnalyzer.Rules
             return sr;
         }
 
-        internal /* for MsBuild12 support */ virtual SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol)
-        {
-            return null;
-        }
-
         private static readonly ISet<SymbolKind> DeclarationKinds = new HashSet<SymbolKind>
         {
             SymbolKind.Event,
@@ -137,8 +123,8 @@ namespace SonarAnalyzer.Rules
             SymbolKind.TypeParameter
         };
 
-        private static SymRefInfo GetSymRefInfo(SyntaxToken token, SemanticModel semanticModel,
-            Func<SyntaxToken, bool> isIdentifier, Func<SyntaxToken, SyntaxNode> getBindableParent)
+        //FIXME: Deobfuscate
+        private static SymRefInfo GetSymRefInfo(SyntaxToken token, SemanticModel semanticModel, Func<SyntaxToken, bool> isIdentifier, Func<SyntaxToken, SyntaxNode> getBindableParent)
         {
             if (!isIdentifier(token))
             {
@@ -199,16 +185,11 @@ namespace SonarAnalyzer.Rules
             return null;
         }
 
-        internal static bool IsValuePropertyParameter(ISymbol symbol)
-        {
-            return symbol is IParameterSymbol parameterSymbol &&
-                parameterSymbol.IsImplicitlyDeclared &&
-                parameterSymbol.Name == "value";
-        }
-
-        internal /* for MsBuild12 support */ abstract SyntaxNode GetBindableParent(SyntaxToken token);
-
-        protected abstract bool IsIdentifier(SyntaxToken token);
+        //FIXME: Move
+        internal static bool IsValuePropertyParameter(ISymbol symbol) =>
+            symbol is IParameterSymbol parameterSymbol
+            && parameterSymbol.IsImplicitlyDeclared
+            && parameterSymbol.Name == "value";
 
         public class SymRefInfo
         {
