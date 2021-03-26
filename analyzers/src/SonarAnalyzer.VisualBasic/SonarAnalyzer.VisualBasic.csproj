@@ -33,6 +33,7 @@
   <PropertyGroup>
     <WarningsAsErrors />
     <NoWarn>NU1605</NoWarn>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
   <ItemGroup>
