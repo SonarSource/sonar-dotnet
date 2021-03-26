@@ -1,4 +1,4 @@
-# Coding Style
+﻿# Coding Style
 
 ## General
 
@@ -21,6 +21,14 @@ Ordering of class members should be the following:
 1. Private nested classes
 
 Furthermore, each of these categories should be ordered from higher to lower accessibility level (public, internal, protected, private).
+
+Static fields and properties should be placed before instance ones. 
+
+Static methods are preferred to be after instance methods.
+
+## Naming conventions
+
+Variable name `sut` (System Under Test) is recommended in unit tests that really tests a single unit (contrary to our usual rule integration unit tests).
 
 ## Multi-line statements
 
