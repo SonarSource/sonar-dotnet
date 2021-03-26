@@ -28,8 +28,6 @@ Static methods are preferred to be after instance methods.
 
 ## Naming conventions
 
-Single variable lambdas should use `x` as the variable name (based on lambda calculus λx). Multi variable lambdas should use descriptive names, where `x` can be used for the main iterated item like `(x, index) => ...`.
-
 Variable name `sut` (System Under Test) is recommended in unit tests that really tests a single unit (contrary to our usual rule integration unit tests).
 
 ## Multi-line statements
