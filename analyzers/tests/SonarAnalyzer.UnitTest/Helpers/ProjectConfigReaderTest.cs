@@ -28,7 +28,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class ProjectConfigReaderTests
+    public class ProjectConfigReaderTest
     {
         [TestMethod]
         public void AllPropertiesAreSet()

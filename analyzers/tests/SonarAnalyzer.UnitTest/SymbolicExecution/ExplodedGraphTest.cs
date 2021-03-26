@@ -43,7 +43,7 @@ using SonarAnalyzer.UnitTest.Helpers;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution
 {
     [TestClass]
-    public class ExplodedGraphTests
+    public class ExplodedGraphTest
     {
         private const string TestInput = @"
 namespace NS

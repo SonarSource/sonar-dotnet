@@ -26,7 +26,7 @@ using SonarAnalyzer.SymbolicExecution;
 namespace SonarAnalyzer.UnitTest.SymbolicExecution
 {
     [TestClass]
-    public class ProgramPointTests
+    public class ProgramPointTest
     {
         public class TestBlock : Block { }
 

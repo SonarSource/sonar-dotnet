@@ -25,7 +25,7 @@ using CS = SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class AbstractTypesShouldNotHaveConstructorsTests
+    public class AbstractTypesShouldNotHaveConstructorsTest
     {
         [TestMethod]
         [TestCategory("Rule")]

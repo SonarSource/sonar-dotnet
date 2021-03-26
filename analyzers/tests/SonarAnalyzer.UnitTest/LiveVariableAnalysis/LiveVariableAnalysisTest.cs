@@ -34,7 +34,7 @@ using SonarAnalyzer.UnitTest.ControlFlowGraph;
 namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
 {
     [TestClass]
-    public class LiveVariableAnalysisTests
+    public class LiveVariableAnalysisTest
     {
         private const string TestInput = @"
 namespace NS

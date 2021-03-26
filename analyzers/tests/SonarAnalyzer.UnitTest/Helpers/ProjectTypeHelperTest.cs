@@ -30,7 +30,7 @@ using SonarAnalyzer.UnitTest.TestFramework;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class ProjectTypeHelperTests
+    public class ProjectTypeHelperTest
     {
         [TestMethod]
         public void TestReference_ShouldBeSynchronized()

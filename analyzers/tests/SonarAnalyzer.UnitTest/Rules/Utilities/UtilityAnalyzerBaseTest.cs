@@ -36,7 +36,7 @@ using SonarAnalyzer.UnitTest.Helpers;
 namespace SonarAnalyzer.UnitTest.Rules.Utilities
 {
     [TestClass]
-    public class UtilityAnalyzerBaseTests
+    public class UtilityAnalyzerBaseTest
     {
         private const string DefaultSonarProjectConfig = @"ResourceTests\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml";
         private const string DefaultProjectOutFolderPath = @"ResourceTests\ProjectOutFolderPath.txt";
