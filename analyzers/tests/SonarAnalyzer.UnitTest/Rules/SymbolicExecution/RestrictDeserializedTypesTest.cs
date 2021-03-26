@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.SymbolicExecution;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 #if NETFRAMEWORK
 using System.Collections.Generic;
 using System.Linq;
@@ -86,6 +85,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 #endif
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
-            new SymbolicExecutionRunner(new RestrictDeserializedTypes());
+            new SymbolicExecutionRunner(new CS.RestrictDeserializedTypes());
     }
 }
