@@ -34,8 +34,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        public InsecureTemporaryFilesCreation() : base(RspecStrings.ResourceManager) { }
-
         internal override bool IsMemberAccessOnKnownType(MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel model) =>
             memberAccess.IsMemberAccessOnKnownType(name, knownType, model);
     }

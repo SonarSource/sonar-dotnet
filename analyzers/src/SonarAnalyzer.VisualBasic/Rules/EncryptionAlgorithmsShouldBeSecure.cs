@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public EncryptionAlgorithmsShouldBeSecure() : base(AnalyzerConfiguration.AlwaysEnabled, RspecStrings.ResourceManager) { }
+        public EncryptionAlgorithmsShouldBeSecure() : base(AnalyzerConfiguration.AlwaysEnabled) { }
 
         protected override TrackerBase<SyntaxKind, PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
             context => context.Node.FirstAncestorOrSelf<ObjectMemberInitializerSyntax>() != null;

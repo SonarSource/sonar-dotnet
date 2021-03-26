@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract BuilderPatternCondition<TSyntaxKind, TInvocationSyntax> CreateBuilderPatternCondition();
 
-        protected JwtSignedBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected JwtSignedBase(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

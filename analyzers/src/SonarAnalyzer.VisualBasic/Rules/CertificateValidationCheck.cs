@@ -48,8 +48,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        public CertificateValidationCheck() : base(RspecStrings.ResourceManager) { }
-
         internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
             argumentListNode switch
             {

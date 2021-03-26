@@ -44,8 +44,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
-
         protected override ArgumentListSyntax ArgumentList(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.ArgumentList;
 

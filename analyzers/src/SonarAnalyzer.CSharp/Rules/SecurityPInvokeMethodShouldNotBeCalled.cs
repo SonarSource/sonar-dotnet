@@ -33,8 +33,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public SecurityPInvokeMethodShouldNotBeCalled() : base(RspecStrings.ResourceManager) { }
-
         protected override IMethodSymbol MethodSymbolForInvalidInvocation(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
             syntaxNode is IdentifierNameSyntax identifierName
             && InvalidMethods.Contains(identifierName.Identifier.ValueText)

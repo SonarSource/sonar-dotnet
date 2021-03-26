@@ -34,8 +34,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
-        public FlagsEnumWithoutInitializer() : base(RspecStrings.ResourceManager) { }
-
         protected override bool IsInitialized(EnumMemberDeclarationSyntax member) =>
             member.EqualsValue != null;
     }

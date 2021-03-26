@@ -36,8 +36,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        public InsecureEncryptionAlgorithm() : base(RspecStrings.ResourceManager) { }
-
         protected override Location Location(ObjectCreationExpressionSyntax objectCreation) =>
             objectCreation.Type.GetLocation();
 

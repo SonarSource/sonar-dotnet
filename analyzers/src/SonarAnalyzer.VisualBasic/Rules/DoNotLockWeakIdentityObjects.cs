@@ -32,7 +32,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.SyncLockStatement;
-
-        public DoNotLockWeakIdentityObjects() : base(RspecStrings.ResourceManager) { }
     }
 }

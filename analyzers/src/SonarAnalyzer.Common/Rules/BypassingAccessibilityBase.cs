@@ -29,8 +29,8 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S3011";
         protected const string MessageFormat = "Make sure that this accessibility bypass is safe here.";
 
-        protected BypassingAccessibilityBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
-            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected BypassingAccessibilityBase(IAnalyzerConfiguration configuration)
+            : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

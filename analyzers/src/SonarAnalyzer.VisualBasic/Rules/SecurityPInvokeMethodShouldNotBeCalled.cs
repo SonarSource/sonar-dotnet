@@ -35,8 +35,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public SecurityPInvokeMethodShouldNotBeCalled() : base(RspecStrings.ResourceManager) { }
-
         protected override bool IsImportFromInteropDll(ISymbol symbol) =>
             base.IsImportFromInteropDll(symbol)
             || (symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is DeclareStatementSyntax declaration

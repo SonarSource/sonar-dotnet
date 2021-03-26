@@ -48,8 +48,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
-        public CertificateValidationCheck() : base(RspecStrings.ResourceManager) { }
-
         internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
             argumentListNode switch
             {

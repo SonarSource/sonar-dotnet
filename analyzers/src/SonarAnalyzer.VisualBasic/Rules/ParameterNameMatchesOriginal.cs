@@ -33,8 +33,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class ParameterNameMatchesOriginal : ParameterNameMatchesOriginalBase<SyntaxKind, MethodBlockBaseSyntax>
     {
-        public ParameterNameMatchesOriginal() : base(RspecStrings.ResourceManager) { }
-
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.SubBlock, SyntaxKind.FunctionBlock };
 

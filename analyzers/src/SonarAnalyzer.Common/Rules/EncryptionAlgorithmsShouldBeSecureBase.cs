@@ -32,8 +32,8 @@ namespace SonarAnalyzer.Rules
         protected abstract TrackerBase<TSyntaxKind, PropertyAccessContext>.Condition IsInsideObjectInitializer();
         protected abstract TrackerBase<TSyntaxKind, InvocationContext>.Condition HasPkcs1PaddingArgument();
 
-        protected EncryptionAlgorithmsShouldBeSecureBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
-            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected EncryptionAlgorithmsShouldBeSecureBase(IAnalyzerConfiguration configuration)
+            : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

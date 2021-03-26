@@ -57,8 +57,6 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.LocalFunctionStatement,
         }.ToImmutableHashSet();
 
-        public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
-
         protected override void VisitInvocation(EndInvokeContext context) =>
             new InvocationWalker(context).SafeVisit(context.Root);
 

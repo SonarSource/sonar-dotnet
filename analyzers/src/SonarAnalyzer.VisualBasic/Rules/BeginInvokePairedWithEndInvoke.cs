@@ -62,8 +62,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.SingleLineSubLambdaExpression
         }.ToImmutableHashSet();
 
-        public BeginInvokePairedWithEndInvoke() : base(RspecStrings.ResourceManager) { }
-
         protected override void VisitInvocation(EndInvokeContext context) =>
             new InvocationWalker(context).SafeVisit(context.Root);
 

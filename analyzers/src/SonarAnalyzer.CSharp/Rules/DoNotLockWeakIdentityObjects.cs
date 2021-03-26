@@ -32,7 +32,5 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind SyntaxKind { get; } = SyntaxKind.LockStatement;
-
-        public DoNotLockWeakIdentityObjects() : base(RspecStrings.ResourceManager) { }
     }
 }
