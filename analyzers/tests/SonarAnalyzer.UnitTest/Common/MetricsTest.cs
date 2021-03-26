@@ -53,8 +53,6 @@ namespace SonarAnalyzer.UnitTest.Common
             Lines(AnalyzerLanguage.VisualBasic, "Imports System;\r\n/*hello\r\nworld*/").Should().Be(3);
         }
 
-        private static int Lines(AnalyzerLanguage language, string text) => MetricsFor(language, text).LineCount;
-
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
         public void LinesOfCode()
@@ -79,8 +77,6 @@ line 4"")
  End Sub
 End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
-
-        private static ISet<int> LinesOfCode(AnalyzerLanguage language, string text) => MetricsFor(language, text).CodeLines;
 
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
@@ -137,11 +133,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "Imports System ' nOSonAr").NoSonar.Should().BeEquivalentTo();
 
             CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "Imports System ' fndskgjsdkl \n ' {00000000-0000-0000-0000-000000000000}\n").NonBlank.Should().BeEquivalentTo(1, 2);
-        }
-
-        private static FileComments CommentsWithoutHeaders(AnalyzerLanguage language, string text)
-        {
-            return MetricsFor(language, text).GetComments(true);
         }
 
         [TestMethod]
@@ -201,11 +192,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             CommentsWithoutHeaders(AnalyzerLanguage.VisualBasic, "Imports System ' fndskgjsdkl \n ' {00000000-0000-0000-0000-000000000000}\n").NonBlank.Should().BeEquivalentTo(1, 2);
         }
 
-        private static FileComments CommentsWithHeaders(AnalyzerLanguage language, string text)
-        {
-            return MetricsFor(language, text).GetComments(false);
-        }
-
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
         public void Classes()
@@ -226,8 +212,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Classes(AnalyzerLanguage.VisualBasic, "Class M \n End Class \n Namespace MyNamespace \n Class MyClass2 \n End Class \n End Namespace").Should().Be(2);
         }
 
-        private static int Classes(AnalyzerLanguage language, string text) => MetricsFor(language, text).ClassCount;
-
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
         public void Accessors()
@@ -240,7 +224,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty { get; set; } }").Should().Be(2);
             Functions(AnalyzerLanguage.CSharp, "class MyClass { public int MyProperty { get { return 0; } set { } } }").Should().Be(2);
             Functions(AnalyzerLanguage.CSharp, "class MyClass { public event EventHandler OnSomething { add { } remove {} }").Should().Be(2);
-
 
             Functions(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
             Functions(AnalyzerLanguage.VisualBasic,
@@ -325,8 +308,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
                 .Should().Be(3);
         }
 
-        private static int Statements(AnalyzerLanguage language, string text) => MetricsFor(language, text).StatementCount;
-
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
         public void Functions()
@@ -356,8 +337,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             Functions(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub MyMethod2() \n End Sub \n End Class").Should().Be(1);
             Functions(AnalyzerLanguage.VisualBasic, "Class MyClass \n Public Shared Operator +(a As MyClass) As MyClass \n Return a \n End Operator \n End Class").Should().Be(1);
         }
-
-        private static int Functions(AnalyzerLanguage language, string text) => MetricsFor(language, text).FunctionCount;
 
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
@@ -512,8 +491,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
                 .Should().Be(2);
         }
 
-        private static int Complexity(AnalyzerLanguage language, string text) => MetricsFor(language, text).Complexity;
-
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
         public void CognitiveComplexity()
@@ -523,24 +500,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
 
             var visualBasicCode = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.vb");
             CognitiveComplexity(AnalyzerLanguage.VisualBasic, visualBasicCode).Should().Be(122);
-        }
-
-        private static int CognitiveComplexity(AnalyzerLanguage language, string text) =>
-            MetricsFor(language, text).CognitiveComplexity;
-
-        private static MetricsBase MetricsFor(AnalyzerLanguage language, string text)
-        {
-            if (language != AnalyzerLanguage.CSharp &&
-                language != AnalyzerLanguage.VisualBasic)
-            {
-                throw new ArgumentException("Supplied language is not C# neither VB.Net", nameof(language));
-            }
-
-            (var syntaxTree, var semanticModel) = TestHelper.Compile(text);
-
-            return language == AnalyzerLanguage.CSharp
-                ? (MetricsBase)new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel)
-                : new Metrics.VisualBasic.VisualBasicMetrics(VisualBasicSyntaxTree.ParseText(text), semanticModel);
         }
 
         [TestMethod]
@@ -561,16 +520,56 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel);
         }
 
-        private static ICollection<int> ExecutableLines(AnalyzerLanguage language, string text) =>
-            MetricsFor(language, text).ExecutableLines;
-
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
-        public void ExecutableLinesMetricsIsPopulated()
-        {
+        public void ExecutableLinesMetricsIsPopulated() =>
             ExecutableLines(AnalyzerLanguage.CSharp,
                 @"public void Foo(int x) { int i = 0; if (i == 0) {i++;i--;} else { while(true){i--;} } }")
                 .Should().BeEquivalentTo(new[] { 1 });
+
+        private static int Lines(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).LineCount;
+
+        private static ISet<int> LinesOfCode(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).CodeLines;
+
+        private static FileComments CommentsWithoutHeaders(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).GetComments(true);
+
+        private static FileComments CommentsWithHeaders(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).GetComments(false);
+
+        private static int Classes(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).ClassCount;
+
+        private static int Statements(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).StatementCount;
+
+        private static int Functions(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).FunctionCount;
+
+        private static int Complexity(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).Complexity;
+
+        private static int CognitiveComplexity(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).CognitiveComplexity;
+
+        private static ICollection<int> ExecutableLines(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).ExecutableLines;
+
+        private static MetricsBase MetricsFor(AnalyzerLanguage language, string text)
+        {
+            if (language != AnalyzerLanguage.CSharp &&
+                language != AnalyzerLanguage.VisualBasic)
+            {
+                throw new ArgumentException("Supplied language is not C# neither VB.Net", nameof(language));
+            }
+
+            (var syntaxTree, var semanticModel) = TestHelper.Compile(text);
+
+            return language == AnalyzerLanguage.CSharp
+                ? (MetricsBase)new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel)
+                : new Metrics.VisualBasic.VisualBasicMetrics(VisualBasicSyntaxTree.ParseText(text), semanticModel);
         }
     }
 }
