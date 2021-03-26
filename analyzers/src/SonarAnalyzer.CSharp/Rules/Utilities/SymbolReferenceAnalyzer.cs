@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return GetBindableParentNode(token);
         }
 
-        internal override SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol)
+        protected override SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol)
         {
             if (!IsValuePropertyParameter(valuePropertySymbol))
             {
