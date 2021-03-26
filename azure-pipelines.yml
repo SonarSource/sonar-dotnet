@@ -262,10 +262,12 @@ stages:
           artifact: RuleDescriptorBin
           targetPath: analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin
 
+      - powershell: .\scripts\build\set-azp-project-version-variable.ps1
+
       - task: Cache@2
         displayName: "Cache Maven local repo"
         inputs:
-          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          key: 'maven | "$(Agent.OS)" | "$(SONAR_PROJECT_VERSION)" | **/pom.xml'
           path: $(MAVEN_CACHE_FOLDER)
 
       - task: DownloadSecureFile@1
@@ -328,7 +330,7 @@ stages:
       - task: Cache@2
         displayName: "Cache Maven local repo"
         inputs:
-          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          key: 'maven | "$(Agent.OS)" | "$(SONAR_PROJECT_VERSION)" | **/pom.xml'
           path: $(MAVEN_CACHE_FOLDER)
 
       - task: SonarCloudPrepare@1
@@ -389,10 +391,12 @@ stages:
           artifact: RuleDescriptorBin
           targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
 
+      - powershell: .\scripts\build\set-azp-project-version-variable.ps1
+
       - task: Cache@2
         displayName: "Cache Maven local repo"
         inputs:
-          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          key: 'maven | "$(Agent.OS)" | "$(SONAR_PROJECT_VERSION)" | **/pom.xml'
           path: $(MAVEN_CACHE_FOLDER)
 
       - task: Maven@3
