@@ -60,7 +60,7 @@ Public Class ImplicitReturnStatementsAreNoncompliant
     ' https//github.com/SonarSource/sonar-dotnet/issues/4159
     Public Function Repro_4159() As String
         Repro_4159 = NameOf(Exception)  ' Noncompliant
-        Return NameOf(Repro_4159)       ' Complant
+        Return NameOf(Repro_4159)       ' Compliant
     End Function
 
 End Class
