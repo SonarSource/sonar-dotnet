@@ -34,6 +34,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public EncryptingData() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ EncryptingData(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ EncryptingData(IAnalyzerConfiguration configuration) : base(configuration) { }
     }
 }

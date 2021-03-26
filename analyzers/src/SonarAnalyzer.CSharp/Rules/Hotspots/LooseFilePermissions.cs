@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.Hotspots
 
         public LooseFilePermissions() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal LooseFilePermissions(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal LooseFilePermissions(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override void VisitAssignments(SyntaxNodeAnalysisContext context)
         {

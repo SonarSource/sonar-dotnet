@@ -36,6 +36,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ControllingPermissions() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ ControllingPermissions(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ ControllingPermissions(IAnalyzerConfiguration configuration) : base(configuration) { }
     }
 }

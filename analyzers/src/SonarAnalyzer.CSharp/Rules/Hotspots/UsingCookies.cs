@@ -34,6 +34,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public UsingCookies() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ UsingCookies(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ UsingCookies(IAnalyzerConfiguration configuration) : base(configuration) { }
     }
 }

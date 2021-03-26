@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public RequestsWithExcessiveLength() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(RspecStrings.ResourceManager, analyzerConfiguration) { }
+        internal RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         protected override AttributeSyntax IsInvalidRequestFormLimits(AttributeSyntax attribute, SemanticModel semanticModel) =>
             IsRequestFormLimits(attribute.Name.ToString())

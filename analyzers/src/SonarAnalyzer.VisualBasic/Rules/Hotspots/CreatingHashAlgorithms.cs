@@ -34,6 +34,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public CreatingHashAlgorithms() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ CreatingHashAlgorithms(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ CreatingHashAlgorithms(IAnalyzerConfiguration configuration) : base(configuration) { }
     }
 }

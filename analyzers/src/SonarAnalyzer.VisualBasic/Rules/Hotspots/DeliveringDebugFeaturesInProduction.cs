@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public DeliveringDebugFeaturesInProduction() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override TrackerBase<SyntaxKind, InvocationContext>.Condition IsInvokedConditionally() =>
             context =>

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public PubliclyWritableDirectories() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal PubliclyWritableDirectories(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal PubliclyWritableDirectories(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         private protected override bool IsGetTempPathAssignment(InvocationExpressionSyntax invocationExpression, KnownType type, string methodName, SemanticModel semanticModel) =>
             invocationExpression.IsMethodInvocation(type, methodName, semanticModel)
