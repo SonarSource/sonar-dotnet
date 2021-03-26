@@ -50,7 +50,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PublicMethodArgumentsShouldBeCheckedForNull_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.CSharp9.cs",
-                new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()));
+                                                      new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
+                                                      NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion));
 #endif
 
     }
