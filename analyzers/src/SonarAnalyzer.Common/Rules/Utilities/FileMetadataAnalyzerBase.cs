@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
             {
                 FilePath = syntaxTree.FilePath,
                 IsGenerated = GeneratedCodeRecognizer.IsGenerated(syntaxTree),
-                Encoding = syntaxTree.Encoding?.WebName?.ToLowerInvariant() ?? string.Empty
+                Encoding = syntaxTree.Encoding?.WebName.ToLowerInvariant() ?? string.Empty
             };
     }
 }
