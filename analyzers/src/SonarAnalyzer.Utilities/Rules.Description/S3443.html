@@ -3,19 +3,22 @@ real point in making that call. The same applies to passing a type argument to <
 predictable.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var type = typeof(int);
-var ttype = type.GetType(); //Noncompliant, always typeof(System.Type)
+var intType = typeof(int);
+var runtimeType = intType.GetType(); // Noncompliant, always typeof(System.RuntimeType)
 
 var s = "abc";
-
-if (s.GetType().IsInstanceOfType(typeof(string))) //Noncompliant; false
+if (s.GetType().IsInstanceOfType(typeof(string))) // Noncompliant; false
 { /* ... */ }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 var s = "abc";
 
-if (s.GetType().IsInstanceOfType("ssss"))
+if (s.GetType().IsInstanceOfType("string"))
 { /* ... */ }
+</pre>
+<h2>Exceptions</h2>
+<pre>
+typeof(Type).GetType(); // Can be used by convention to get an instance of ‘System.RuntimeType’
 </pre>
 
