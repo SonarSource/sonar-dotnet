@@ -51,8 +51,8 @@ namespace SonarAnalyzer.Rules
             "CoInitializeSecurity"
         };
 
-        protected SecurityPInvokeMethodShouldNotBeCalledBase(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        protected SecurityPInvokeMethodShouldNotBeCalledBase() =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, CheckForIssue, Language.SyntaxKind.InvocationExpression);

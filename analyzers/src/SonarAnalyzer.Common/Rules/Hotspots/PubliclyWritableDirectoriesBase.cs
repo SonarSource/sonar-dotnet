@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Resources;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
@@ -66,9 +65,9 @@ namespace SonarAnalyzer.Rules
 
         protected string[] InsecureEnvironmentVariables { get; } = { "tmp", "temp", "tmpdir" };
 
-        protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration, ResourceManager rspecResources) : base(configuration)
+        protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration) : base(configuration)
         {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources).WithNotConfigurable();
             linuxDirectories = new Regex($@"^({linuxDirs.JoinStr("|", x => Regex.Escape(x))})(\/|$)", RegexOptions.Compiled);
             macDirectories = new Regex($@"^({macDirs.JoinStr("|", x => Regex.Escape(x))})(\/|$)", WindowsAndUnixOptions);
             environmentVariables = new Regex($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
