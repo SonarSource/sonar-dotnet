@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsSensitiveExpression(TExpressionSyntax expression, SemanticModel semanticModel);
         protected abstract Location SecondaryLocationForExpression(TExpressionSyntax node, string identifierNameToFind, out string identifierNameFound);
 
-        protected ExecutingSqlQueriesBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected ExecutingSqlQueriesBase(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4818";
         private const string MessageFormat = "Make sure that sockets are used safely here.";
 
-        protected SocketsCreationBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected SocketsCreationBase(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

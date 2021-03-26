@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4787";
         protected const string MessageFormat = "Make sure that encrypting data is safe here.";
 
-        protected EncryptingDataBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected EncryptingDataBase(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

@@ -40,8 +40,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TrackerBase<TSyntaxKind, InvocationContext>.Condition IsInvokedConditionally();
 
-        protected DeliveringDebugFeaturesInProductionBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
-            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected DeliveringDebugFeaturesInProductionBase(IAnalyzerConfiguration configuration)
+            : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

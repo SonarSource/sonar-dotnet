@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S2255";
         private const string MessageFormat = "Make sure that this cookie is written safely.";
 
-        protected UsingCookiesBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected UsingCookiesBase(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

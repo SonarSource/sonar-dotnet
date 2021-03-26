@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S5042";
         protected const string MessageFormat = "Make sure that decompressing this archive file is safe.";
 
-        protected ExpandingArchivesBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected ExpandingArchivesBase(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {
