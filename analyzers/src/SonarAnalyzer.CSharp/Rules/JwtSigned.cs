@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public JwtSigned() : base(AnalyzerConfiguration.AlwaysEnabled, RspecStrings.ResourceManager) { }
+        public JwtSigned() : base(AnalyzerConfiguration.AlwaysEnabled) { }
 
         protected override BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
             new CSharpBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(

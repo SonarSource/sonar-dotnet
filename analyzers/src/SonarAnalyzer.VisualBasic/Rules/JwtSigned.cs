@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public JwtSigned() : base(AnalyzerConfiguration.AlwaysEnabled, RspecStrings.ResourceManager) { }
+        public JwtSigned() : base(AnalyzerConfiguration.AlwaysEnabled) { }
 
         protected override BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
             new VisualBasicBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(

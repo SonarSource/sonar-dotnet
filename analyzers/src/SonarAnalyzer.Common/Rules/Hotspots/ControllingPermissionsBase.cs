@@ -29,8 +29,8 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4834";
         protected const string MessageFormat = "Make sure controlling this permission is safe here.";
 
-        protected ControllingPermissionsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
-            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected ControllingPermissionsBase(IAnalyzerConfiguration configuration)
+            : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

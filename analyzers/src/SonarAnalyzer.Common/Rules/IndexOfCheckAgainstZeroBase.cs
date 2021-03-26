@@ -60,8 +60,8 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected IndexOfCheckAgainstZeroBase(System.Resources.ResourceManager rspecResources) =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        protected IndexOfCheckAgainstZeroBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
         protected override void Initialize(SonarAnalysisContext context)
         {

@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Rules.Common
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
         private readonly DiagnosticDescriptor rule;
 
-        protected FlagsEnumZeroMemberBase(System.Resources.ResourceManager rspecResources) =>
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        protected FlagsEnumZeroMemberBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Language.GeneratedCodeRecognizer, c =>

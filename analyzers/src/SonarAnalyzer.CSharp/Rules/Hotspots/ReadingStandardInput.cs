@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ReadingStandardInput() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ ReadingStandardInput(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ ReadingStandardInput(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override bool WhenResultIsNotIgnored(InvocationContext context) =>
             !context.Node.Parent.IsKind(SyntaxKind.ExpressionStatement);

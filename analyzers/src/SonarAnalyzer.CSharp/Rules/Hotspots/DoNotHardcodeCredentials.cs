@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public DoNotHardcodeCredentials() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override void InitializeActions(ParameterLoadingAnalysisContext context) =>
             context.RegisterCompilationStartAction(

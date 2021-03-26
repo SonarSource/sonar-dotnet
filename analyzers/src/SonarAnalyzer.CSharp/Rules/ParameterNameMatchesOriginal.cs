@@ -33,8 +33,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ParameterNameMatchesOriginal : ParameterNameMatchesOriginalBase<SyntaxKind, MethodDeclarationSyntax>
     {
-        public ParameterNameMatchesOriginal() : base(RspecStrings.ResourceManager) { }
-
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.MethodDeclaration };
 

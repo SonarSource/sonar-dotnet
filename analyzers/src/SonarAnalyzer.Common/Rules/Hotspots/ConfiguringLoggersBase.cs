@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4792";
         protected const string MessageFormat = "Make sure that this logger's configuration is safe.";
 
-        protected ConfiguringLoggersBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected ConfiguringLoggersBase(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

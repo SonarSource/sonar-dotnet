@@ -32,7 +32,5 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class FlagsEnumZeroMember : FlagsEnumZeroMemberBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
-
-        public FlagsEnumZeroMember() : base(RspecStrings.ResourceManager) { }
     }
 }

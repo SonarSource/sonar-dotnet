@@ -60,8 +60,8 @@ namespace SonarAnalyzer.Rules
             "System.Security.Cryptography.SHA1"
         };
 
-        protected CreatingHashAlgorithmsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
-            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected CreatingHashAlgorithmsBase(IAnalyzerConfiguration configuration)
+            : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

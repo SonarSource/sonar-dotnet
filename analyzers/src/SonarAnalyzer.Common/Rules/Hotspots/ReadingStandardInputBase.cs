@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool WhenResultIsNotIgnored(InvocationContext context);
 
-        protected ReadingStandardInputBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected ReadingStandardInputBase(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

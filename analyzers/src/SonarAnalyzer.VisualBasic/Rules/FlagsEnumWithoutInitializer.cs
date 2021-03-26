@@ -34,8 +34,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        public FlagsEnumWithoutInitializer() : base(RspecStrings.ResourceManager) { }
-
         protected override bool IsInitialized(EnumMemberDeclarationSyntax member) =>
             member.Initializer != null;
     }

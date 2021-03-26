@@ -34,6 +34,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ConfiguringLoggers() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ ConfiguringLoggers(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ ConfiguringLoggers(IAnalyzerConfiguration configuration) : base(configuration) { }
     }
 }

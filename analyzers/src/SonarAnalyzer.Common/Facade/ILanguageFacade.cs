@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Resources;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers.Facade;
 
@@ -34,6 +35,7 @@ namespace SonarAnalyzer.Helpers
         SyntaxFacade<TSyntaxKind> Syntax { get; }
         ISyntaxKindFacade<TSyntaxKind> SyntaxKind { get; }
         ITrackerFacade<TSyntaxKind> Tracker { get; }
+        ResourceManager RspecResources { get; }
 
         IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
     }

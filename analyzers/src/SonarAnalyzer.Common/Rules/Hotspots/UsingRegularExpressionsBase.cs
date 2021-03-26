@@ -37,8 +37,8 @@ namespace SonarAnalyzer.Rules
         protected abstract string GetStringLiteralAtIndex(InvocationContext context, int index);
         protected abstract string GetStringLiteralAtIndex(ObjectCreationContext context, int index);
 
-        protected UsingRegularExpressionsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
-            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected UsingRegularExpressionsBase(IAnalyzerConfiguration configuration)
+            : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

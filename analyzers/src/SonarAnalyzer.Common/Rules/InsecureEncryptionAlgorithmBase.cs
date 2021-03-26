@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Resources;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
@@ -66,7 +65,7 @@ namespace SonarAnalyzer.Rules
                 KnownType.Org_BouncyCastle_Crypto_Engines_AesFastEngine
             );
 
-        protected InsecureEncryptionAlgorithmBase(ResourceManager resourceManager) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, resourceManager);
+        protected InsecureEncryptionAlgorithmBase() =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
     }
 }

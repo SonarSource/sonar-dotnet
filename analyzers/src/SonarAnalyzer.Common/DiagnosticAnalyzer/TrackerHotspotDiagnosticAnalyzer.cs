@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Resources;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 
@@ -35,9 +34,9 @@ namespace SonarAnalyzer.Helpers
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected TrackerHotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat, ResourceManager rspecResources) : base(configuration)
+        protected TrackerHotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat) : base(configuration)
         {
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, messageFormat, rspecResources);
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, messageFormat, Language.RspecResources);
             if (configuration == AnalyzerConfiguration.Hotspot)
             {
                 Rule = Rule.WithNotConfigurable();

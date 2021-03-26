@@ -34,6 +34,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public UsingCommandLineArguments() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ UsingCommandLineArguments(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ UsingCommandLineArguments(IAnalyzerConfiguration configuration) : base(configuration) { }
     }
 }

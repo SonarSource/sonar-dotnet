@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public UsingRegularExpressions() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ UsingRegularExpressions(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ UsingRegularExpressions(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override string GetStringLiteralAtIndex(InvocationContext context, int index) =>
             context.Node is InvocationExpressionSyntax invocation

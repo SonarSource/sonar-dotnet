@@ -34,6 +34,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public SocketsCreation() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ SocketsCreation(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ SocketsCreation(IAnalyzerConfiguration configuration) : base(configuration) { }
     }
 }

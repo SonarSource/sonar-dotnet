@@ -31,7 +31,5 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class EnumNameShouldFollowRegex : EnumNameShouldFollowRegexBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
-
-        public EnumNameShouldFollowRegex() : base(RspecStrings.ResourceManager) { }
     }
 }

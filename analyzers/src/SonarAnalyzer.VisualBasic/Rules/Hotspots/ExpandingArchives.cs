@@ -34,6 +34,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public ExpandingArchives() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ ExpandingArchives(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ ExpandingArchives(IAnalyzerConfiguration configuration) : base(configuration) { }
     }
 }

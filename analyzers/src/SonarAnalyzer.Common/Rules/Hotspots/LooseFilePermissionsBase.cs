@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Resources;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -45,8 +44,8 @@ namespace SonarAnalyzer.Rules.Hotspots
 
         protected abstract void VisitInvocations(SyntaxNodeAnalysisContext context);
 
-        protected LooseFilePermissionsBase(IAnalyzerConfiguration configuration, ResourceManager resourceManager) : base(configuration) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, resourceManager).WithNotConfigurable();
+        protected LooseFilePermissionsBase(IAnalyzerConfiguration configuration) : base(configuration) =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources).WithNotConfigurable();
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(c =>

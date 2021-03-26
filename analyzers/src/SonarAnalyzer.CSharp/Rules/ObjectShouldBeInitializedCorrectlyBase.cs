@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat)
-            : base(configuration, diagnosticId, messageFormat, RspecStrings.ResourceManager) { }
+            : base(configuration, diagnosticId, messageFormat) { }
 
         protected virtual bool IsDefaultConstructorSafe(SonarAnalysisContext context, AnalyzerOptions options) => false;
 

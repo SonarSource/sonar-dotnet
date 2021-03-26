@@ -31,7 +31,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class EnumNameHasEnumSuffix : EnumNameHasEnumSuffixBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
-
-        public EnumNameHasEnumSuffix() : base(RspecStrings.ResourceManager) { }
     }
 }

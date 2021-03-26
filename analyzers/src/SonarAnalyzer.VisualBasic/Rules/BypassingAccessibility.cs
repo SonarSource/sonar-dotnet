@@ -32,6 +32,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public BypassingAccessibility() : base(AnalyzerConfiguration.AlwaysEnabled, RspecStrings.ResourceManager) { }
+        public BypassingAccessibility() : base(AnalyzerConfiguration.AlwaysEnabled) { }
     }
 }

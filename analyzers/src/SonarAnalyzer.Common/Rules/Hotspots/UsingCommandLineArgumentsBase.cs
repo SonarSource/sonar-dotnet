@@ -29,8 +29,8 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4823";
         private const string MessageFormat = "Make sure that command line arguments are used safely here.";
 
-        protected UsingCommandLineArgumentsBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources)
-            : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected UsingCommandLineArgumentsBase(IAnalyzerConfiguration configuration)
+            : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

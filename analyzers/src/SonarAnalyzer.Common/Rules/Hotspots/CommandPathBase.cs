@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string FirstArgument(InvocationContext context);
 
-        protected CommandPathBase(IAnalyzerConfiguration configuration, System.Resources.ResourceManager rspecResources) : base(configuration, DiagnosticId, MessageFormat, rspecResources) { }
+        protected CommandPathBase(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
         protected override void Initialize(TrackerInput input)
         {

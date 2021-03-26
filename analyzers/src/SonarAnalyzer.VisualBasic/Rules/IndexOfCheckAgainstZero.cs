@@ -35,8 +35,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxKind LessThanExpression => SyntaxKind.LessThanExpression;
         protected override SyntaxKind GreaterThanExpression => SyntaxKind.GreaterThanExpression;
 
-        public IndexOfCheckAgainstZero() : base(RspecStrings.ResourceManager) { }
-
         protected override SyntaxNode Left(BinaryExpressionSyntax binaryExpression) =>
             binaryExpression.Left;
 

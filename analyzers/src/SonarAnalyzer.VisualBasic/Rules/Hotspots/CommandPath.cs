@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public CommandPath() : this(AnalyzerConfiguration.Hotspot) { }
 
-        internal /*for testing*/ CommandPath(IAnalyzerConfiguration configuration) : base(configuration, RspecStrings.ResourceManager) { }
+        internal /*for testing*/ CommandPath(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override string FirstArgument(InvocationContext context) =>
             ((InvocationExpressionSyntax)context.Node).ArgumentList.Get(0).FindStringConstant(context.SemanticModel);

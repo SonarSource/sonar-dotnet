@@ -31,7 +31,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class EnumNameShouldFollowRegex : EnumNameShouldFollowRegexBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
-
-        public EnumNameShouldFollowRegex() : base(RspecStrings.ResourceManager) { }
     }
 }

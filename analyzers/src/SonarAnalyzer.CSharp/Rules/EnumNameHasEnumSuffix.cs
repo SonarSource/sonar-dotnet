@@ -31,7 +31,5 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class EnumNameHasEnumSuffix : EnumNameHasEnumSuffixBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
-
-        public EnumNameHasEnumSuffix() : base(RspecStrings.ResourceManager) { }
     }
 }
