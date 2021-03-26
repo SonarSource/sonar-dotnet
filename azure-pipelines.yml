@@ -264,7 +264,7 @@ stages:
 
       - powershell: .\scripts\build\set-azp-project-version-variable.ps1
 
-      - task: Cache@2
+      - task: Cache@1
         displayName: "Cache Maven local repo"
         inputs:
           key: 'maven | "$(Agent.OS)" | "$(SONAR_PROJECT_VERSION)" | **/pom.xml'
@@ -327,7 +327,7 @@ stages:
           artifact: RuleDescriptorBin
           targetPath: 'analyzers\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
 
-      - task: Cache@2
+      - task: Cache@1
         displayName: "Cache Maven local repo"
         inputs:
           key: 'maven | "$(Agent.OS)" | "$(SONAR_PROJECT_VERSION)" | **/pom.xml'
@@ -393,7 +393,7 @@ stages:
 
       - powershell: .\scripts\build\set-azp-project-version-variable.ps1
 
-      - task: Cache@2
+      - task: Cache@1
         displayName: "Cache Maven local repo"
         inputs:
           key: 'maven | "$(Agent.OS)" | "$(SONAR_PROJECT_VERSION)" | **/pom.xml'
