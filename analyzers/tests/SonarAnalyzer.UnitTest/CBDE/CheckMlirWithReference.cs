@@ -36,10 +36,8 @@ namespace SonarAnalyzer.UnitTest.CBDE
         public TestContext TestContext { get; set; } // Set automatically by MsTest
 
         [ClassInitialize]
-        public static void checkExecutableExists(TestContext tc)
-        {
+        public static void CheckExecutableExists(TestContext tc) =>
             MlirTestUtilities.CheckExecutableExists();
-        }
 
         [TestMethod]
         public void TestAssignToLocalVarAndParam()

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.CBDE
@@ -33,10 +32,8 @@ namespace SonarAnalyzer.UnitTest.CBDE
         public TestContext TestContext { get; set; } // Set automatically by MsTest
 
         [ClassInitialize]
-        public static void CheckExecutableExists(TestContext tc)
-        {
+        public static void CheckExecutableExists(TestContext tc) =>
             MlirTestUtilities.CheckExecutableExists();
-        }
 
         [TestMethod]
         public void SimpleMethod()

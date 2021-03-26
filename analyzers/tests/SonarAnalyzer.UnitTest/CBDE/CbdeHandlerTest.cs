@@ -18,8 +18,6 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-extern alias csharp;
-
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -53,7 +51,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                       CS.CbdeHandlerRule.MakeUnitTestInstance(null, null));
         }
 #endif
-
         [TestMethod]
         [TestCategory("CBDE")]
         public void CbdeHandlerWait()
@@ -71,8 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     var peak = workingSet.Groups[1].Value;
                     Assert.IsTrue(int.TryParse(peak, out int peakValue));
                     Assert.AreNotEqual(peakValue, 0); // We had enough time to at least use some memory
-                }
-                ));
+                }));
             Assert.IsTrue(cbdeExecuted);
         }
 
@@ -88,8 +84,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     cbdeExecuted = true;
                     var logContent = File.ReadAllText(s);
                     Assert.IsTrue(logContent.Contains("Running CBDE: Cannot start process"));
-                }
-                ));
+                }));
             Assert.IsTrue(cbdeExecuted);
         }
 
@@ -105,8 +100,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     cbdeExecuted = true;
                     var logContent = File.ReadAllText(s);
                     Assert.IsTrue(logContent.Contains("Running CBDE: Failure"));
-                }
-                ));
+                }));
             Assert.IsTrue(cbdeExecuted);
         }
 
@@ -122,8 +116,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     cbdeExecuted = true;
                     var logContent = File.ReadAllText(s);
                     Assert.IsTrue(logContent.Contains("error parsing result file"));
-                }
-                ));
+                }));
             Assert.IsTrue(cbdeExecuted);
         }
 
