@@ -266,9 +266,6 @@ stages:
         displayName: "Cache Maven local repo"
         inputs:
           key: 'maven | "$(Agent.OS)" | **/pom.xml'
-          restoreKeys: |
-            maven | "$(Agent.OS)"
-            maven
           path: $(MAVEN_CACHE_FOLDER)
 
       - task: DownloadSecureFile@1
@@ -332,9 +329,6 @@ stages:
         displayName: "Cache Maven local repo"
         inputs:
           key: 'maven | "$(Agent.OS)" | **/pom.xml'
-          restoreKeys: |
-            maven | "$(Agent.OS)"
-            maven
           path: $(MAVEN_CACHE_FOLDER)
 
       - task: SonarCloudPrepare@1
@@ -399,9 +393,6 @@ stages:
         displayName: "Cache Maven local repo"
         inputs:
           key: 'maven | "$(Agent.OS)" | **/pom.xml'
-          restoreKeys: |
-            maven | "$(Agent.OS)"
-            maven
           path: $(MAVEN_CACHE_FOLDER)
 
       - task: Maven@3
