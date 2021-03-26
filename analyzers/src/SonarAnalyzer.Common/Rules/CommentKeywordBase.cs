@@ -58,19 +58,29 @@ namespace SonarAnalyzer.Rules
                     var comments = c.Tree.GetRoot().DescendantTrivia()
                         .Where(trivia => IsComment(trivia));
 
-                    foreach (var comment in comments)
+                    foreach (var comment2 in comments)
                     {
-                        foreach (var location in GetKeywordLocations(c.Tree, comment, TodoKeyword))
+                        foreach (var location in GetKeywordLocations(c.Tree, comment2, TodoKeyword))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(TodoDiagnostic, location));
                         }
 
-                        foreach (var location in GetKeywordLocations(c.Tree, comment, FixMeKeyword))
+                        foreach (var location   in  GetKeywordLocations(c.Tree, comment2,   FixMeKeyword))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(FixMeDiagnostic, location));
                         }
                     }
+
+                    if (true == true)
+                    {
+                        //
+                    }
                 });
+        }
+
+        public void EmptyMethod()
+        {
+
         }
 
         protected abstract bool IsComment(SyntaxTrivia trivia);

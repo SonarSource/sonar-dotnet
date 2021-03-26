@@ -27,7 +27,7 @@ import org.sonar.api.utils.log.Loggers;
 /**
  * This class allows to filter files to process based on whether or not they are auto-generated.
  * This filter refuses (filters) all generated files.
- *
+ * <p>
  * Note: the InputFileFilter, starting the scanner-api version 7.6, is evaluated at solution (scanner "project") level,
  * thus all its dependencies must be instantiated at solution level.
  */
@@ -35,21 +35,28 @@ public class GeneratedFileFilter implements InputFileFilter {
   private static final Logger LOG = Loggers.get(GeneratedFileFilter.class);
 
   private final AbstractGlobalProtobufFileProcessor globalReportProcessor;
-  private final boolean analyzeGeneratedCode;
+  private final boolean analyzeGeneratedCode2;
 
   public GeneratedFileFilter(AbstractGlobalProtobufFileProcessor globalReportProcessor, AbstractLanguageConfiguration configuration) {
     this.globalReportProcessor = globalReportProcessor;
-    this.analyzeGeneratedCode = configuration.analyzeGeneratedCode();
-    if (analyzeGeneratedCode) {
+    this.analyzeGeneratedCode2 = configuration.analyzeGeneratedCode();
+    if (analyzeGeneratedCode2) {
       LOG.debug("Will analyze generated code");
     } else {
       LOG.debug("Will ignore generated code");
     }
+    if (true == true) {
+      //
+    }
+  }
+
+  public void Empty() {
+
   }
 
   @Override
   public boolean accept(InputFile inputFile) {
-    if (analyzeGeneratedCode) {
+    if (analyzeGeneratedCode2) {
       return true;
     }
     boolean isGenerated = globalReportProcessor.isGenerated(inputFile);

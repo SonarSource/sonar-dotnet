@@ -36,7 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal static readonly DiagnosticDescriptor FIXME_Descriptor =
             DiagnosticDescriptorBuilder.GetDescriptor(FixMeDiagnosticId, FixMeMessageFormat, RspecStrings.ResourceManager);
-        protected override DiagnosticDescriptor FixMeDiagnostic { get; } = FIXME_Descriptor;
+        protected override DiagnosticDescriptor FixMeDiagnostic { get; } =
+            FIXME_Descriptor;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
             => CSharpGeneratedCodeRecognizer.Instance;
