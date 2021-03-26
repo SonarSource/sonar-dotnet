@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
     public abstract class SymbolReferenceAnalyzerBase : UtilityAnalyzerBase<SymbolReferenceInfo>
     {
         protected const string DiagnosticId = "S9999-symbolRef";
-        protected const string Title = "Symbol reference calculator";
+        private const string Title = "Symbol reference calculator";
         private const string SymbolReferenceFileName = "symrefs.pb";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);

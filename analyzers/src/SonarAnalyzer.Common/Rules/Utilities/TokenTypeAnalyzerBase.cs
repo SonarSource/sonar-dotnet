@@ -31,12 +31,11 @@ namespace SonarAnalyzer.Rules
     public abstract class TokenTypeAnalyzerBase : UtilityAnalyzerBase<TokenTypeInfo>
     {
         protected const string DiagnosticId = "S9999-token-type";
-        protected const string Title = "Token type calculator";
+        private const string Title = "Token type calculator";
+        private const string TokenTypeFileName = "token-type.pb";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        internal const string TokenTypeFileName = "token-type.pb";
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected sealed override string FileName => TokenTypeFileName;
 
@@ -64,6 +63,15 @@ namespace SonarAnalyzer.Rules
             private readonly SyntaxToken token;
             private readonly SemanticModel semanticModel;
             private readonly List<TokenTypeInfo.Types.TokenInfo> spans = new List<TokenTypeInfo.Types.TokenInfo>();
+
+            protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
+            protected abstract bool IsDocComment(SyntaxTrivia trivia);
+            protected abstract bool IsRegularComment(SyntaxTrivia trivia);
+            protected abstract bool IsKeyword(SyntaxToken token);
+            protected abstract bool IsContextualKeyword(SyntaxToken token);
+            protected abstract bool IsIdentifier(SyntaxToken token);
+            protected abstract bool IsNumericLiteral(SyntaxToken token);
+            protected abstract bool IsStringLiteral(SyntaxToken token);
 
             protected TokenClassifierBase(SyntaxToken token, SemanticModel semanticModel)
             {
@@ -144,8 +152,6 @@ namespace SonarAnalyzer.Rules
                 }
             }
 
-            protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
-
             private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
             {
                 MethodKind.Constructor,
@@ -219,8 +225,6 @@ namespace SonarAnalyzer.Rules
                 // Handle preprocessor directives here
             }
 
-            protected abstract bool IsDocComment(SyntaxTrivia trivia);
-
             private void ClassifyDocComment(SyntaxTrivia trivia)
             {
                 CollectClassified(TokenType.Comment, trivia.FullSpan);
@@ -239,18 +243,6 @@ namespace SonarAnalyzer.Rules
                     TextRange = GetTextRange(Location.Create(this.token.SyntaxTree, span).GetLineSpan())
                 });
             }
-
-            protected abstract bool IsRegularComment(SyntaxTrivia trivia);
-
-            protected abstract bool IsKeyword(SyntaxToken token);
-
-            protected abstract bool IsContextualKeyword(SyntaxToken token);
-
-            protected abstract bool IsIdentifier(SyntaxToken token);
-
-            protected abstract bool IsNumericLiteral(SyntaxToken token);
-
-            protected abstract bool IsStringLiteral(SyntaxToken token);
         }
     }
 }

@@ -28,12 +28,14 @@ namespace SonarAnalyzer.Rules
     public abstract class CopyPasteTokenAnalyzerBase : UtilityAnalyzerBase<CopyPasteTokenInfo>
     {
         protected const string DiagnosticId = "S9999-cpd";
-        protected const string Title = "Copy-paste token calculator";
+        private const string Title = "Copy-paste token calculator";
+        private const string CopyPasteTokenFileName = "token-cpd.pb";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        internal const string CopyPasteTokenFileName = "token-cpd.pb";
+        protected abstract string GetCpdValue(SyntaxToken token);
+        protected abstract bool IsUsingDirective(SyntaxNode node);
 
         protected sealed override string FileName => CopyPasteTokenFileName;
 
@@ -67,9 +69,5 @@ namespace SonarAnalyzer.Rules
 
             return cpdTokenInfo;
         }
-
-        protected abstract string GetCpdValue(SyntaxToken token);
-
-        protected abstract bool IsUsingDirective(SyntaxNode node);
     }
 }

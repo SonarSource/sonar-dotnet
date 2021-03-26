@@ -28,16 +28,16 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class MetricsAnalyzerBase : UtilityAnalyzerBase<MetricsInfo>
     {
-        internal const string MetricsFileName = "metrics.pb";
         protected const string DiagnosticId = "S9999-metrics";
-        protected const string Title = "Metrics calculator";
+        private const string Title = "Metrics calculator";
+        private const string MetricsFileName = "metrics.pb";
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected sealed override string FileName => MetricsFileName;
-
         protected abstract MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel);
+
+        protected sealed override string FileName => MetricsFileName;
 
         protected sealed override MetricsInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
