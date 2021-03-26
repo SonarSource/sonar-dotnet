@@ -155,6 +155,5 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 Count = count;
             }
         }
-
     }
 }

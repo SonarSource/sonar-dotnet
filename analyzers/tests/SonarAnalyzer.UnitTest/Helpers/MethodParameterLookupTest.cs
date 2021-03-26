@@ -19,8 +19,8 @@
  */
 
 using System;
-using System.Linq;
 using System.Collections;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -250,67 +250,47 @@ End Module
 
             private object ConstantValue(SyntaxNode node) =>
                 Compiler.SemanticModel.GetConstantValue(node).Value;
-
         }
 
         private class CSharpInspection : InspectionBase<CSharpSyntax.ArgumentSyntax, CSharpSyntax.InvocationExpressionSyntax>
         {
+            public CSharpInspection(string source) : base(source, AnalyzerLanguage.CSharp) =>
+                InitSpecial(Compiler.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
+                                    .Single(x => x.Expression is CSharpSyntax.IdentifierNameSyntax identifier
+                                                 && identifier.Identifier.ValueText == "SpecialMethod"));
 
-            public CSharpInspection(string source) : base(source, AnalyzerLanguage.CSharp)
-            {
-                InitSpecial(Compiler.GetNodes<CSharpSyntax.InvocationExpressionSyntax>().Single(x => x.Expression is CSharpSyntax.IdentifierNameSyntax identifier && identifier.Identifier.ValueText == "SpecialMethod"));
-            }
+            public override CSharpSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name) =>
+                Compiler.GetNodes<CSharpSyntax.MethodDeclarationSyntax>().Single(x => x.Identifier.ValueText == name).DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().ToArray();
 
-            public override CSharpSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name)
-            {
-                return Compiler.GetNodes<CSharpSyntax.MethodDeclarationSyntax>().Single(x => x.Identifier.ValueText == name).DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().ToArray();
-            }
+            public override CSharpSyntax.ArgumentSyntax[] GetArguments(CSharpSyntax.InvocationExpressionSyntax invocation) =>
+                invocation.ArgumentList.Arguments.ToArray();
 
-            public override CSharpSyntax.ArgumentSyntax[] GetArguments(CSharpSyntax.InvocationExpressionSyntax invocation)
-            {
-                return invocation.ArgumentList.Arguments.ToArray();
-            }
+            public override object ExtractArgumentValue(CSharpSyntax.ArgumentSyntax argumentSyntax) =>
+                Compiler.SemanticModel.GetConstantValue(argumentSyntax.Expression).Value;
 
-            public override object ExtractArgumentValue(CSharpSyntax.ArgumentSyntax argumentSyntax)
-            {
-                return Compiler.SemanticModel.GetConstantValue(argumentSyntax.Expression).Value;
-            }
-
-            public override MethodParameterLookupBase<CSharpSyntax.ArgumentSyntax> CreateLookup(CSharpSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method)
-            {
-                return new CSharpMethodParameterLookup(invocation.ArgumentList, method);
-            }
-
+            public override MethodParameterLookupBase<CSharpSyntax.ArgumentSyntax> CreateLookup(CSharpSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method) =>
+                new CSharpMethodParameterLookup(invocation.ArgumentList, method);
         }
 
         private class VisualBasicInspection : InspectionBase<VBSyntax.ArgumentSyntax, VBSyntax.InvocationExpressionSyntax>
         {
+            public VisualBasicInspection(string source) : base(source, AnalyzerLanguage.VisualBasic) =>
+                InitSpecial(Compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>()
+                                    .Single(x => x.Expression is VBSyntax.IdentifierNameSyntax identifier
+                                                 && identifier.Identifier.ValueText == "SpecialMethod"));
 
-            public VisualBasicInspection(string source) : base(source, AnalyzerLanguage.VisualBasic)
-            {
-                InitSpecial(Compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>().Single(x => x.Expression is VBSyntax.IdentifierNameSyntax identifier && identifier.Identifier.ValueText == "SpecialMethod"));
-            }
+            public override VBSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name) =>
+                Compiler.GetNodes<VBSyntax.MethodBlockSyntax>().Single(x => x.SubOrFunctionStatement.Identifier.ValueText == "Main")
+                                                               .DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().ToArray();
 
-            public override VBSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name)
-            {
-                return Compiler.GetNodes<VBSyntax.MethodBlockSyntax>().Single(x => x.SubOrFunctionStatement.Identifier.ValueText == "Main").DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().ToArray();
-            }
+            public override VBSyntax.ArgumentSyntax[] GetArguments(VBSyntax.InvocationExpressionSyntax invocation) =>
+                invocation.ArgumentList.Arguments.ToArray();
 
-            public override VBSyntax.ArgumentSyntax[] GetArguments(VBSyntax.InvocationExpressionSyntax invocation)
-            {
-                return invocation.ArgumentList.Arguments.ToArray();
-            }
+            public override MethodParameterLookupBase<VBSyntax.ArgumentSyntax> CreateLookup(VBSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method) =>
+                new VisualBasicMethodParameterLookup(invocation.ArgumentList, Compiler.SemanticModel);
 
-            public override MethodParameterLookupBase<VBSyntax.ArgumentSyntax> CreateLookup(VBSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method)
-            {
-                return new VisualBasicMethodParameterLookup(invocation.ArgumentList, Compiler.SemanticModel);
-            }
-
-            public override object ExtractArgumentValue(VBSyntax.ArgumentSyntax argumentSyntax)
-            {
-                return Compiler.SemanticModel.GetConstantValue(argumentSyntax.GetExpression()).Value;
-            }
-
+            public override object ExtractArgumentValue(VBSyntax.ArgumentSyntax argumentSyntax) =>
+                Compiler.SemanticModel.GetConstantValue(argumentSyntax.GetExpression()).Value;
         }
     }
 }

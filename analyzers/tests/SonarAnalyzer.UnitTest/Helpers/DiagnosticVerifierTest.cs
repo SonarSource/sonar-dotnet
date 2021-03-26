@@ -18,11 +18,10 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-extern alias csharp;
 using System;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -43,7 +42,7 @@ public class UnexpectedSecondary
             { }
         }
     }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
                 "CSharp*: Unexpected primary issue on line 7, span (6,21)-(6,22) with message 'Correct one of the identical expressions on both sides of operator '=='.'." + Environment.NewLine +
@@ -63,7 +62,7 @@ public class UnexpectedSecondary
             { }
         }
     }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
                 "CSharp*: Unexpected secondary issue on line 6, span (5,16)-(5,17) with message ''." + Environment.NewLine +
@@ -84,7 +83,7 @@ public class UnexpectedSecondary
             { }
         }
     }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
                 "CSharp*: Unexpected secondary issue [myId] on line 7, span (6,16)-(6,17) with message ''." + Environment.NewLine +
@@ -105,7 +104,7 @@ public class UnexpectedSecondary
             { }
         }
     }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
                 @"CSharp*: Expected secondary message on line 7 does not match actual message." + Environment.NewLine +
@@ -128,7 +127,7 @@ public class UnexpectedSecondary
             { }
         }
     }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
                   .WithMessage("CSharp*: Expected secondary issue on line 6 to start on column 14 but got column 16.");
@@ -149,7 +148,7 @@ public class UnexpectedSecondary
             { }
         }
     }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
                   .WithMessage("CSharp*: Expected secondary issue on line 6 to have a length of 4 but got a length of 1.");
@@ -169,7 +168,7 @@ public class UnexpectedSecondary
             { }
         }
     }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().NotThrow<UnexpectedDiagnosticException>();
         }
@@ -183,7 +182,7 @@ public class UnexpectedSecondaryWithBuildError
 
         public void Test(bool a, bool b) { }
 }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
                   .WithMessage("CSharp*: Unexpected build error [CS1514]: { * on line 2");
@@ -202,7 +201,7 @@ public class UnexpectedRemainingCurlyBrace
             { }
         }
     }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<AssertFailedException>()
                   .WithMessage("Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
@@ -221,7 +220,7 @@ public class UnexpectedRemainingCurlyBrace
             { }
         }
     }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<AssertFailedException>()
                   .WithMessage("Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
@@ -240,7 +239,7 @@ public class ExpectedIssuesNotRaised
             { } // Secondary [MyId1]
         }
     }",
-                    new BinaryOperationWithIdenticalExpressions());
+                    new CS.BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<AssertFailedException>().WithMessage(
                 @"CSharp*: Issue(s) expected but not raised on line(s):" + Environment.NewLine +

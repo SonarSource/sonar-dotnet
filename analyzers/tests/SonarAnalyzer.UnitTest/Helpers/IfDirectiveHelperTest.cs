@@ -225,7 +225,6 @@ namespace Test
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
         }
 
-
         [TestMethod]
         public void ActiveBlocks_NegativeConditions_InIf()
         {
@@ -546,4 +545,3 @@ namespace Test
                 .First(m => m.Identifier.ValueText == "Method1");
     }
 }
-

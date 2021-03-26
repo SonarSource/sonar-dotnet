@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System.IO;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -35,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             // Arrange
             var options = TestHelper.CreateOptions("ResourceTests\\MyFile.xml");
-            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+            var analyzer = new CS.ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
             ParameterLoader.SetParameterValues(analyzer, options);
@@ -49,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             // Arrange
             var options = TestHelper.CreateOptions("ResourceTests\\SonarLint.xml");
-            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+            var analyzer = new CS.ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
             ParameterLoader.SetParameterValues(analyzer, options);
@@ -63,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             // Arrange
             var options = TestHelper.CreateOptions("ResourceTests\\RuleWithStringParameter\\SonarLint.xml");
-            var analyzer = new EnumNameShouldFollowRegex(); // Cannot use mock because we use reflection to find properties.
+            var analyzer = new CS.EnumNameShouldFollowRegex(); // Cannot use mock because we use reflection to find properties.
 
             // Act
             ParameterLoader.SetParameterValues(analyzer, options);
@@ -77,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             // Arrange
             var options = TestHelper.CreateOptions("ResourceTests\\RuleWithBooleanParameter\\SonarLint.xml");
-            var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
+            var analyzer = new CS.CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
 
             // Act
             ParameterLoader.SetParameterValues(analyzer, options);
@@ -91,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             // Arrange
             var options = TestHelper.CreateOptions("ResourceTests\\SonarLint.xml");
-            var analyzer = new LineLength(); // Cannot use mock because we use reflection to find properties.
+            var analyzer = new CS.LineLength(); // Cannot use mock because we use reflection to find properties.
 
             // Act
             ParameterLoader.SetParameterValues(analyzer, options);
@@ -106,7 +105,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             // Arrange
             var sonarLintXmlRelativePath = "ResourceTests\\ToChange\\SonarLint.xml";
             var options = TestHelper.CreateOptions(sonarLintXmlRelativePath);
-            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+            var analyzer = new CS.ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act with the file on disk
             ParameterLoader.SetParameterValues(analyzer, options);
@@ -128,7 +127,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             // Arrange
             var options = TestHelper.CreateOptions("ResourceTests\\Malformed\\SonarLint.xml");
-            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+            var analyzer = new CS.ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
             ParameterLoader.SetParameterValues(analyzer, options);
@@ -142,7 +141,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             // Arrange
             var options = TestHelper.CreateOptions("ResourceTests\\ThisPathDoesNotExist\\SonarLint.xml");
-            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+            var analyzer = new CS.ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
             ParameterLoader.SetParameterValues(analyzer, options);
@@ -156,7 +155,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             // Arrange
             var options = TestHelper.CreateOptions("ResourceTests\\StringInsteadOfInt\\SonarLint.xml");
-            var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
+            var analyzer = new CS.ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
             // Act
             ParameterLoader.SetParameterValues(analyzer, options);
@@ -170,7 +169,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             // Arrange
             var options = TestHelper.CreateOptions("ResourceTests\\StringInsteadOfBoolean\\SonarLint.xml");
-            var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
+            var analyzer = new CS.CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
 
             // Act
             ParameterLoader.SetParameterValues(analyzer, options);

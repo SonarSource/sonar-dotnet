@@ -22,10 +22,10 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
-using CSharp = Microsoft.CodeAnalysis.CSharp.Syntax;
-using VisualBasic = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using CSharp = Microsoft.CodeAnalysis.CSharp.Syntax;
+using VisualBasic = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -146,9 +146,9 @@ End Namespace";
             result.Should().BeFalse();
 
             var hashSet = new HashSet<CSharp.BlockSyntax>(new[] { methods_CS.Method1, methods_CS.Method2, methods_CS.Method3 }, comparer);
-            hashSet.Count.Should().Be(2);
-            hashSet.Contains(methods_CS.Method1).Should().BeTrue();
-            hashSet.Contains(methods_CS.Method4).Should().BeFalse();
+            hashSet.Should().HaveCount(2);
+            hashSet.Should().Contain(methods_CS.Method1);
+            hashSet.Should().NotContain(methods_CS.Method4);
         }
 
         [TestMethod]
@@ -163,9 +163,9 @@ End Namespace";
             result.Should().BeFalse();
 
             var hashSet = new HashSet<SyntaxList<CSharp.StatementSyntax>>(new[] { methods_CS.Method1.Statements, methods_CS.Method2.Statements, methods_CS.Method3.Statements }, comparer);
-            hashSet.Count.Should().Be(2);
-            hashSet.Contains(methods_CS.Method1.Statements).Should().BeTrue();
-            hashSet.Contains(methods_CS.Method4.Statements).Should().BeFalse();
+            hashSet.Should().HaveCount(2);
+            hashSet.Should().Contain(methods_CS.Method1.Statements);
+            hashSet.Should().NotContain(methods_CS.Method4.Statements);
         }
 
         [TestMethod]
@@ -200,9 +200,9 @@ End Namespace";
             result.Should().BeFalse();
 
             var hashSet = new HashSet<VisualBasic.StatementSyntax>(new[] { methods_VB.Method1.First(), methods_VB.Method2.First(), methods_VB.Method3.First() }, comparer);
-            hashSet.Count.Should().Be(2);
-            hashSet.Contains(methods_VB.Method1.First()).Should().BeTrue();
-            hashSet.Contains(methods_VB.Method4.First()).Should().BeFalse();
+            hashSet.Should().HaveCount(2);
+            hashSet.Should().Contain(methods_VB.Method1.First());
+            hashSet.Should().NotContain(methods_VB.Method4.First());
         }
 
         [TestMethod]
@@ -217,9 +217,9 @@ End Namespace";
             result.Should().BeFalse();
 
             var hashSet = new HashSet<SyntaxList<VisualBasic.StatementSyntax>>(new[] { methods_VB.Method1, methods_VB.Method2, methods_VB.Method3 }, comparer);
-            hashSet.Count.Should().Be(2);
-            hashSet.Contains(methods_VB.Method1).Should().BeTrue();
-            hashSet.Contains(methods_VB.Method4).Should().BeFalse();
+            hashSet.Should().HaveCount(2);
+            hashSet.Should().Contain(methods_VB.Method1);
+            hashSet.Should().NotContain(methods_VB.Method4);
         }
 
         private class CSharpMethods
@@ -249,6 +249,5 @@ End Namespace";
                 Method4 = methods.Single(m => m.GetIdentifierText() == "Method4").Statements;
             }
         }
-
     }
 }

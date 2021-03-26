@@ -114,7 +114,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void NetFrameworkVersionProvider_NoReference()
         {
-
             var compilation = GetRawCompilation();
             var versionProvider = new NetFrameworkVersionProvider();
             versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Unknown);

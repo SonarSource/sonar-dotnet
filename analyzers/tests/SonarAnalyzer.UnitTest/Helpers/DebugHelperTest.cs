@@ -32,16 +32,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow(null)]
         [DataRow("false")]
         [DataRow("foo")]
-        public void IsInternalDebuggingContext_WhenEnvVarValueIsNotTrue_ReturnsFalse(string value)
-        {
+        public void IsInternalDebuggingContext_WhenEnvVarValueIsNotTrue_ReturnsFalse(string value) =>
             SetupRunAndReset(value, false);
-        }
 
         [TestMethod]
-        public void IsInternalDebuggingContext_WhenEnvVarValueIsTrue_ReturnsTrue()
-        {
+        public void IsInternalDebuggingContext_WhenEnvVarValueIsTrue_ReturnsTrue() =>
             SetupRunAndReset("true", true);
-        }
 
         private void SetupRunAndReset(string value, bool shouldBeTrue)
         {

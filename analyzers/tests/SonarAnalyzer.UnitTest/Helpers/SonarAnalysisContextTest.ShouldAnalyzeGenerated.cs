@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System.Collections.Immutable;
 using System.Text;
 using System.Threading;
@@ -196,7 +195,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             public override string ToString()
             {
-                this.ToStringCallCount++;
+                ToStringCallCount++;
                 return textToReturn;
             }
 

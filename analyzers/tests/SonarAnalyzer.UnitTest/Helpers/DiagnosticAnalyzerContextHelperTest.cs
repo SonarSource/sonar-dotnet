@@ -34,45 +34,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class DiagnosticAnalyzerContextHelperTest
     {
-        private static void VerifyEmpty(string name, string content, DiagnosticAnalyzer diagnosticAnalyzer,
-            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
-        {
-            AnalyzerLanguage language;
-            if (name.EndsWith(".cs"))
-            {
-                language = AnalyzerLanguage.CSharp;
-            }
-            else if (name.EndsWith(".vb"))
-            {
-                language = AnalyzerLanguage.VisualBasic;
-            }
-            else
-            {
-                throw new ArgumentException($"Was expecting the file name to end with '.cs' or '.vb', got '{name}'.", nameof(name));
-            }
-
-            var compilation = SolutionBuilder
-               .Create()
-               .AddProject(language, createExtraEmptyFile: false)
-               .AddSnippet(content, name)
-               .GetCompilation();
-
-            DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer, checkMode);
-        }
-
-        private static bool IsGenerated(string content, GeneratedCodeRecognizer generatedCodeRecognizer)
-        {
-            var compilation = SolutionBuilder
-               .Create()
-               .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-               .AddSnippet(content)
-               .GetCompilation();
-
-            var tree = compilation.SyntaxTrees.First();
-
-            return tree.IsGenerated(generatedCodeRecognizer, compilation);
-        }
-
         [TestMethod]
         public void No_Issue_On_Generated_File_With_Generated_Name()
         {
@@ -278,6 +239,44 @@ End Module";
 
             var result = IsGenerated(source, CSharpGeneratedCodeRecognizer.Instance);
             result.Should().BeFalse();
+        }
+
+        private static bool IsGenerated(string content, GeneratedCodeRecognizer generatedCodeRecognizer)
+        {
+            var compilation = SolutionBuilder
+               .Create()
+               .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+               .AddSnippet(content)
+               .GetCompilation();
+
+            var tree = compilation.SyntaxTrees.First();
+
+            return tree.IsGenerated(generatedCodeRecognizer, compilation);
+        }
+
+        private static void VerifyEmpty(string name, string content, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
+        {
+            AnalyzerLanguage language;
+            if (name.EndsWith(".cs"))
+            {
+                language = AnalyzerLanguage.CSharp;
+            }
+            else if (name.EndsWith(".vb"))
+            {
+                language = AnalyzerLanguage.VisualBasic;
+            }
+            else
+            {
+                throw new ArgumentException($"Was expecting the file name to end with '.cs' or '.vb', got '{name}'.", nameof(name));
+            }
+
+            var compilation = SolutionBuilder
+               .Create()
+               .AddProject(language, createExtraEmptyFile: false)
+               .AddSnippet(content, name)
+               .GetCompilation();
+
+            DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer, checkMode);
         }
     }
 }

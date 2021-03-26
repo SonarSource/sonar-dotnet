@@ -32,46 +32,28 @@ namespace SonarAnalyzer.UnitTest.Helpers
     public class PropertiesHelperTest
     {
         [TestMethod]
-        public void ShouldAnalyzeGeneratedCode_WithTrueSetting_ReturnsTrue()
-        {
-            var result = GetSetting("ResourceTests\\AnalyzeGeneratedTrue\\SonarLint.xml");
-            result.Should().BeTrue();
-        }
+        public void ShouldAnalyzeGeneratedCode_WithTrueSetting_ReturnsTrue() =>
+            GetSetting("ResourceTests\\AnalyzeGeneratedTrue\\SonarLint.xml").Should().BeTrue();
 
         [TestMethod]
-        public void ShouldAnalyzeGeneratedCode_WithFalseSetting_ReturnsFalse()
-        {
-            var result = GetSetting("ResourceTests\\AnalyzeGeneratedFalse\\SonarLint.xml");
-            result.Should().BeFalse();
-        }
+        public void ShouldAnalyzeGeneratedCode_WithFalseSetting_ReturnsFalse() =>
+            GetSetting("ResourceTests\\AnalyzeGeneratedFalse\\SonarLint.xml").Should().BeFalse();
 
         [TestMethod]
-        public void ShouldAnalyzeGeneratedCode_WithNoSetting_ReturnsFalse()
-        {
-            var result = GetSetting("ResourceTests\\NoSettings\\SonarLint.xml");
-            result.Should().BeFalse();
-        }
+        public void ShouldAnalyzeGeneratedCode_WithNoSetting_ReturnsFalse() =>
+            GetSetting("ResourceTests\\NoSettings\\SonarLint.xml").Should().BeFalse();
 
         [TestMethod]
-        public void ShouldAnalyzeGeneratedCode_WithMalformedXml_ReturnsFalse()
-        {
-            var result = GetSetting("ResourceTests\\Malformed\\SonarLint.xml");
-            result.Should().BeFalse();
-        }
+        public void ShouldAnalyzeGeneratedCode_WithMalformedXml_ReturnsFalse() =>
+            GetSetting("ResourceTests\\Malformed\\SonarLint.xml").Should().BeFalse();
 
         [TestMethod]
-        public void ShouldAnalyzeGeneratedCode_WithNotBooleanValue_ReturnsFalse()
-        {
-            var result = GetSetting("ResourceTests\\NotBoolean\\SonarLint.xml");
-            result.Should().BeFalse();
-        }
+        public void ShouldAnalyzeGeneratedCode_WithNotBooleanValue_ReturnsFalse() =>
+            GetSetting("ResourceTests\\NotBoolean\\SonarLint.xml").Should().BeFalse();
 
         [TestMethod]
-        public void ShouldAnalyzeGeneratedCode_WithNotExistingPath_ReturnsFalse()
-        {
-            var result = GetSetting("ResourceTests\\NotExistingFolder\\SonarLint.xml");
-            result.Should().BeFalse();
-        }
+        public void ShouldAnalyzeGeneratedCode_WithNotExistingPath_ReturnsFalse() =>
+            GetSetting("ResourceTests\\NotExistingFolder\\SonarLint.xml").Should().BeFalse();
 
         private static bool GetSetting(string filePath)
         {
