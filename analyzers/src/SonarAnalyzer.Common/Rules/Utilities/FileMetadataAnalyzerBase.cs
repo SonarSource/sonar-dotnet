@@ -38,14 +38,12 @@ namespace SonarAnalyzer.Rules
 
         protected override bool AnalyzeGeneratedCode => true;
 
-        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
-        {
-            return new FileMetadataInfo
+        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
+            new FileMetadataInfo
             {
                 FilePath = syntaxTree.FilePath,
                 IsGenerated = GeneratedCodeRecognizer.IsGenerated(syntaxTree),
                 Encoding = syntaxTree.Encoding?.WebName?.ToLowerInvariant() ?? string.Empty
             };
-        }
     }
 }

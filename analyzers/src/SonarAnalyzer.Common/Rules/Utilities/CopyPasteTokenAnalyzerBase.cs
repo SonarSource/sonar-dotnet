@@ -41,32 +41,19 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
-            return CalculateTokenInfo(syntaxTree);
-        }
-
-        internal CopyPasteTokenInfo CalculateTokenInfo(SyntaxTree syntaxTree)
-        {
-            var cpdTokenInfo = new CopyPasteTokenInfo
-            {
-                FilePath = syntaxTree.FilePath
-            };
-
-            var tokens = syntaxTree.GetRoot().DescendantTokens(n => !IsUsingDirective(n), false);
-
-            foreach (var token in tokens)
+            var cpdTokenInfo = new CopyPasteTokenInfo { FilePath = syntaxTree.FilePath };
+            foreach (var token in syntaxTree.GetRoot().DescendantTokens(n => !IsUsingDirective(n)))
             {
                 var tokenInfo = new CopyPasteTokenInfo.Types.TokenInfo
                 {
                     TokenValue = GetCpdValue(token),
                     TextRange = GetTextRange(Location.Create(syntaxTree, token.Span).GetLineSpan())
                 };
-
                 if (!string.IsNullOrWhiteSpace(tokenInfo.TokenValue))
                 {
                     cpdTokenInfo.TokenInfo.Add(tokenInfo);
                 }
             }
-
             return cpdTokenInfo;
         }
     }

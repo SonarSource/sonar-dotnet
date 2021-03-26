@@ -69,6 +69,11 @@ namespace SonarAnalyzer.Rules
 
         protected virtual SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol) => null;
 
+        protected static bool IsValuePropertyParameter(ISymbol symbol) =>
+            symbol is IParameterSymbol parameterSymbol
+            && parameterSymbol.IsImplicitlyDeclared
+            && parameterSymbol.Name == "value";
+
         //FIXME: Deobfuscate
         private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(IEnumerable<SymRefInfo> allReference, SyntaxTree tree, Func<ISymbol, SyntaxToken?> getSetKeyword)
         {
@@ -184,12 +189,6 @@ namespace SonarAnalyzer.Rules
 
             return null;
         }
-
-        //FIXME: Move
-        internal static bool IsValuePropertyParameter(ISymbol symbol) =>
-            symbol is IParameterSymbol parameterSymbol
-            && parameterSymbol.IsImplicitlyDeclared
-            && parameterSymbol.Name == "value";
 
         public class SymRefInfo
         {
