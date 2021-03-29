@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -31,5 +33,15 @@ namespace SonarAnalyzer.Extensions
             symbol.Parameters.Length == 0 &&
             symbol.ReturnsVoid &&
             symbol.DeclaredAccessibility == Accessibility.Public;
+
+        internal static bool IsGetTypeCall(this IMethodSymbol invokedMethod) =>
+            invokedMethod.Name == nameof(Type.GetType)
+            && !invokedMethod.IsStatic
+            && invokedMethod.ContainingType != null
+            && IsObjectOrType(invokedMethod.ContainingType);
+
+        private static bool IsObjectOrType(ITypeSymbol namedType) =>
+            namedType.SpecialType == SpecialType.System_Object
+            || namedType.Is(KnownType.System_Type);
     }
 }

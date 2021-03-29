@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -56,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckGetTypeAndTypeOfEquality(ExpressionSyntax sideA, ExpressionSyntax sideB, Location location,
             SyntaxNodeAnalysisContext context)
         {
-            if (!TypeExaminationOnSystemType.IsGetTypeCall(sideA as InvocationExpressionSyntax, context.SemanticModel))
+            if (!(sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
             {
                 return;
             }

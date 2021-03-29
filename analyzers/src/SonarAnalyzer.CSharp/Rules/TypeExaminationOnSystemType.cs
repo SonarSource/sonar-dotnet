@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -73,18 +74,18 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var invocationInArgument = argument as InvocationExpressionSyntax;
-            var message = IsGetTypeCall(invocationInArgument, context.SemanticModel)
+            var message = invocationInArgument.IsGetTypeCall(context.SemanticModel)
                 ? MessageIsInstanceOfTypeWithGetType
                 : MessageIsInstanceOfType;
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, argument.GetLocation(), message));
         }
 
-        private static void CheckGetTypeCallOnType(InvocationExpressionSyntax invocation, ISymbol invokedMethod, SyntaxNodeAnalysisContext context)
+        private static void CheckGetTypeCallOnType(InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod, SyntaxNodeAnalysisContext context)
         {
             if (!(invocation.Expression is MemberAccessExpressionSyntax memberCall)
                 || IsException(memberCall, context.SemanticModel)
-                || !IsGetTypeCall(invokedMethod))
+                || invokedMethod.IsGetTypeCall())
             {
                 return;
             }
@@ -101,19 +102,5 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsException(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
             memberAccess.Expression is TypeOfExpressionSyntax typeOf
             && typeOf.Type.IsKnownType(KnownType.System_Type, semanticModel);
-
-        private static bool IsGetTypeCall(ISymbol invokedMethod) =>
-            invokedMethod.Name == nameof(Type.GetType)
-            && !invokedMethod.IsStatic
-            && invokedMethod.ContainingType != null
-            && IsObjectOrType(invokedMethod.ContainingType);
-
-        private static bool IsObjectOrType(ITypeSymbol namedType) =>
-            namedType.SpecialType == SpecialType.System_Object
-            || namedType.Is(KnownType.System_Type);
-
-        internal static bool IsGetTypeCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            invocation != null
-            && (semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && IsGetTypeCall(methodSymbol));
     }
 }
