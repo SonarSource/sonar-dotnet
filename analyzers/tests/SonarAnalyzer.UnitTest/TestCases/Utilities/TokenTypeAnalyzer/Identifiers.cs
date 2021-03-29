@@ -1,4 +1,5 @@
-﻿using AliasName = System.Exception;
+﻿using System;
+using AliasName = System.Exception;
 
 public class Sample
 {
@@ -6,12 +7,17 @@ public class Sample
 
     public Sample() { }
 
-    public void Go()
+    public void Go(int value)
     {
-        var var = 42; // Second var is a contextual keyword
         var g = new Generic<int>();
         var alias = new AliasName();
         dynamic d = g;
+        value = 42;
+    }
+
+    public void ValueAsVariableForCoverage()
+    {
+        string value = null;
     }
 
     public int Property

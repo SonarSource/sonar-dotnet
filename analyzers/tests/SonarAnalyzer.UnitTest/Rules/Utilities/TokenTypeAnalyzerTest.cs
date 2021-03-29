@@ -41,10 +41,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_MainTokens() =>
             Verify("Tokens.cs", info =>
             {
-                info.Should().HaveCount(11);
-                info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(8);
+                info.Should().HaveCount(15);
+                info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(10);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(3);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.TypeName);
-                info.Should().ContainSingle(x => x.TokenType == TokenType.StringLiteral);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
 
@@ -53,11 +53,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Identifiers() =>
             Verify("Identifiers.cs", info =>
             {
-                info.Should().HaveCount(30);
-                info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(21);
+                info.Should().HaveCount(34);
+                info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(26);
                 info.Where(x => x.TokenType == TokenType.TypeName).Should().HaveCount(7);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
-                info.Should().ContainSingle(x => x.TokenType == TokenType.Comment);
             });
 
         [TestMethod]
