@@ -98,11 +98,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
             Verifier.VerifyUtilityAnalyzer<FileMetadataInfo>(
                 projectFiles,
-                new TestFileMetadataAnalyzer
-                {
-                    IsEnabled = true,
-                    WorkingPath = testRoot,
-                },
+                new TestFileMetadataAnalyzer(testRoot),
                 @$"{testRoot}\file-metadata.pb",
                 (messages) =>
                 {
@@ -125,7 +121,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var tree = new Mock<SyntaxTree>();
             tree.SetupGet(x => x.FilePath).Returns("File.Generated.cs");    // Generated to simplify mocking for GeneratedCodeRecognizer
             tree.SetupGet(x => x.Encoding).Returns(() => null);
-            var sut = new TestFileMetadataAnalyzer();
+            var sut = new TestFileMetadataAnalyzer(null);
 
             sut.TestCreateMessage(tree.Object, null).Encoding.Should().BeEmpty();
         }
@@ -138,11 +134,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var testRoot = Root + testName;
             Verifier.VerifyUtilityAnalyzer<FileMetadataInfo>(
                 projectFiles,
-                new TestFileMetadataAnalyzer
-                {
-                    IsEnabled = true,
-                    WorkingPath = testRoot,
-                },
+                new TestFileMetadataAnalyzer(testRoot),
                 @$"{testRoot}\file-metadata.pb",
                 (messages) =>
                 {
@@ -159,16 +151,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private class TestFileMetadataAnalyzer : CS.FileMetadataAnalyzer
         {
-            public bool IsEnabled
+            public TestFileMetadataAnalyzer(string outPath)
             {
-                get => IsAnalyzerEnabled;
-                set => IsAnalyzerEnabled = value;
-            }
-
-            public string WorkingPath
-            {
-                get => OutPath;
-                set => OutPath = value;
+                IsAnalyzerEnabled = true;
+                OutPath = outPath;
             }
 
             public FileMetadataInfo TestCreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>

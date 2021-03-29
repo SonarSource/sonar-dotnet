@@ -75,11 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var testRoot = Root + TestContext.TestName;
             Verifier.VerifyUtilityAnalyzer<TokenTypeInfo>(
                 new[] { Root + fileName },
-                new TestTokenTypeAnalyzer
-                {
-                    IsEnabled = true,
-                    WorkingPath = testRoot,
-                },
+                new TestTokenTypeAnalyzer(testRoot),
                 @$"{testRoot}\token-type.pb",
                 messages =>
                 {
@@ -93,16 +89,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private class TestTokenTypeAnalyzer : TokenTypeAnalyzer
         {
-            public bool IsEnabled
+            public TestTokenTypeAnalyzer(string outPath)
             {
-                get => IsAnalyzerEnabled;
-                set => IsAnalyzerEnabled = value;
-            }
-
-            public string WorkingPath
-            {
-                get => OutPath;
-                set => OutPath = value;
+                IsAnalyzerEnabled = true;
+                OutPath = outPath;
             }
         }
     }
