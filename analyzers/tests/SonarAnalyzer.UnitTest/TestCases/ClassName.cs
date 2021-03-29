@@ -1,4 +1,7 @@
-﻿namespace t1
+﻿using System;
+using System.Runtime.InteropServices;
+
+namespace t1
 {
     class FSM // Noncompliant {{Rename class 'FSM' to match pascal case naming rules, consider using 'Fsm'.}}
 //        ^^^
@@ -169,4 +172,21 @@ namespace TestSuffixes
 
     class XTest { }
     class XTests { }
+}
+
+namespace FPRepros
+{
+    // https://github.com/SonarSource/sonar-dotnet/issues/4086
+    public class StructWithDllImportRepro
+    {
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, out IMAGE_NT_HEADERS32 lpBuffer, int nSize, IntPtr lpNumberOfBytesRead);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct IMAGE_NT_HEADERS32 // Noncompliant FP
+        {
+            public UInt32 Signature;
+            public static int SizeOf = Marshal.SizeOf(typeof(IMAGE_NT_HEADERS32));
+        }
+    }
 }
