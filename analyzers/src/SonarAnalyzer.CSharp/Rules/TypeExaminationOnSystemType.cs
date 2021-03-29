@@ -39,9 +39,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageIsInstanceOfType = "Pass an argument that is not a 'System.Type' or consider using 'IsAssignableFrom'.";
         private const string MessageIsInstanceOfTypeWithGetType = "Consider removing the 'GetType' call, it's suspicious in an 'IsInstanceOfType' call.";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? MessageIsInstanceOfTypeWithGetType
                 : MessageIsInstanceOfType;
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, argument.GetLocation(), message));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, argument.GetLocation(), message));
         }
 
         private static void CheckGetTypeCallOnType(InvocationExpressionSyntax invocation, ISymbol invokedMethod, SyntaxNodeAnalysisContext context)
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberCall.OperatorToken.CreateLocation(invocation), MessageGetType));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, memberCall.OperatorToken.CreateLocation(invocation), MessageGetType));
         }
 
         private static bool IsException(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
