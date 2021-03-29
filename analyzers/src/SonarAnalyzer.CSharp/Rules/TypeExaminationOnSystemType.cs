@@ -103,14 +103,14 @@ namespace SonarAnalyzer.Rules.CSharp
             && typeOf.Type.IsKnownType(KnownType.System_Type, semanticModel);
 
         private static bool IsGetTypeCall(ISymbol invokedMethod) =>
-            invokedMethod.Name == nameof(Type.GetType) &&
-            !invokedMethod.IsStatic &&
-            invokedMethod.ContainingType != null &&
-            IsObjectOrType(invokedMethod.ContainingType);
+            invokedMethod.Name == nameof(Type.GetType)
+            && !invokedMethod.IsStatic
+            && invokedMethod.ContainingType != null
+            && IsObjectOrType(invokedMethod.ContainingType);
 
         private static bool IsObjectOrType(ITypeSymbol namedType) =>
-            namedType.SpecialType == SpecialType.System_Object ||
-            namedType.Is(KnownType.System_Type);
+            namedType.SpecialType == SpecialType.System_Object
+            || namedType.Is(KnownType.System_Type);
 
         internal static bool IsGetTypeCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
         {
