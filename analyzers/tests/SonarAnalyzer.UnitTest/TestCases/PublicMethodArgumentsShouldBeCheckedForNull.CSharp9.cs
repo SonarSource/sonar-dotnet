@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class Sample
 {
@@ -93,5 +94,21 @@ public partial class Partial
     public partial void Method(object arg)
     {
         arg.ToString();   // Noncompliant
+    }
+}
+
+namespace UsingAttributes
+{
+    using Microsoft.AspNetCore.Mvc;
+
+    public class Repro4122
+    {
+        public int GetProduct([FromServices] IService service) =>
+             service.GetValue(); // Noncompliant, see https://github.com/SonarSource/sonar-dotnet/issues/4122
+
+        public interface IService
+        {
+            int GetValue();
+        }
     }
 }
