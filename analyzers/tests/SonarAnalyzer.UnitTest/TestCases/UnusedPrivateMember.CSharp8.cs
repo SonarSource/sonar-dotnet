@@ -39,5 +39,46 @@
             public void Deconstruct(out string a, out string b) { a = b = null; } // Noncompliant FP
         }
     }
+}
 
+// See: https://github.com/SonarSource/sonar-dotnet/issues/4102
+namespace Repro1144
+{
+    using Microsoft.Extensions.DependencyInjection;
+
+    public interface IMyService { }
+    public interface ISomeExternalDependency {}
+
+    public static class UIServiceCollectionExtensions
+    {
+        public static IServiceCollection AddDefaultMyService(this IServiceCollection services)
+        {
+            services.AddSingleton<IMyService, MyServiceSingleton>();
+            services.AddScoped<IMyService, MyServiceScoped>();
+            services.AddTransient<IMyService, MyServiceTransient>();
+
+            return services;
+        }
+
+        private class MyServiceSingleton : IMyService
+        {
+            private readonly ISomeExternalDependency dependency;
+
+            public MyServiceSingleton(ISomeExternalDependency dependency) => this.dependency = dependency; // Noncompliant FP
+        }
+
+        private class MyServiceScoped : IMyService
+        {
+            private readonly ISomeExternalDependency dependency;
+
+            public MyServiceScoped(ISomeExternalDependency dependency) => this.dependency = dependency; // Noncompliant FP
+        }
+
+        private class MyServiceTransient : IMyService
+        {
+            private readonly ISomeExternalDependency dependency;
+
+            public MyServiceTransient(ISomeExternalDependency dependency) => this.dependency = dependency; // Noncompliant FP
+        }
+    }
 }

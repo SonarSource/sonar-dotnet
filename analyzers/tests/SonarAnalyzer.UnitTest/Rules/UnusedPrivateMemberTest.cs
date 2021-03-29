@@ -198,11 +198,11 @@ namespace EntityFrameworkMigrations
         public void UnusedPrivateMember_FromCSharp8() =>
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
                                     new CS.UnusedPrivateMember(),
-#if NETFRAMEWORK
                                     ParseOptionsHelper.FromCSharp8,
-                                    NuGetMetadataReference.NETStandardV2_1_0);
+#if NETFRAMEWORK
+                                    NuGetMetadataReference.NETStandardV2_1_0.Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version)));
 #else
-                                    ParseOptionsHelper.FromCSharp8);
+                                    NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version));
 #endif
 
 #if NET
