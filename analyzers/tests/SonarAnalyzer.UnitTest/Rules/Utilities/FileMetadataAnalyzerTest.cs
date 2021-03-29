@@ -156,8 +156,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 parseOptions);
         }
 
-        // We need to set protected properties and this class exists just to enable the analyzer
-        // without bothering with additional files with parameters
+        // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private class TestFileMetadataAnalyzer : CS.FileMetadataAnalyzer
         {
             public bool IsEnabled
