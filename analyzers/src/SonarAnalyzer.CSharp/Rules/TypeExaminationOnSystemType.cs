@@ -112,14 +112,8 @@ namespace SonarAnalyzer.Rules.CSharp
             namedType.SpecialType == SpecialType.System_Object
             || namedType.Is(KnownType.System_Type);
 
-        internal static bool IsGetTypeCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
-        {
-            if (invocation == null)
-            {
-                return false;
-            }
-
-            return semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && IsGetTypeCall(methodSymbol);
-        }
+        internal static bool IsGetTypeCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            invocation != null
+            && (semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && IsGetTypeCall(methodSymbol));
     }
 }
