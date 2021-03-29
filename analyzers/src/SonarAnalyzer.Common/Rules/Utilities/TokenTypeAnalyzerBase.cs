@@ -81,7 +81,6 @@ namespace SonarAnalyzer.Rules
             protected abstract bool IsDocComment(SyntaxTrivia trivia);
             protected abstract bool IsRegularComment(SyntaxTrivia trivia);
             protected abstract bool IsKeyword(SyntaxToken token);
-            protected abstract bool IsContextualKeyword(SyntaxToken token);
             protected abstract bool IsIdentifier(SyntaxToken token);
             protected abstract bool IsNumericLiteral(SyntaxToken token);
             protected abstract bool IsStringLiteral(SyntaxToken token);
@@ -113,7 +112,7 @@ namespace SonarAnalyzer.Rules
                 }
             }
 
-            protected void CollectClassified(TokenType tokenType, TextSpan span)
+            private void CollectClassified(TokenType tokenType, TextSpan span)
             {
                 if (string.IsNullOrWhiteSpace(token.SyntaxTree.GetText().GetSubText(span).ToString()))
                 {
@@ -156,10 +155,6 @@ namespace SonarAnalyzer.Rules
                 else if (GetBindableParent(token) is { }  parent && semanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
                 {
                     ClassifyIdentifier(token, symbol);
-                }
-                else if (IsContextualKeyword(token))
-                {
-                    CollectClassified(TokenType.Keyword, token.Span);
                 }
             }
 

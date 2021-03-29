@@ -50,9 +50,6 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override bool IsKeyword(SyntaxToken token) =>
                 SyntaxFacts.IsKeywordKind(token.Kind());
 
-            protected override bool IsContextualKeyword(SyntaxToken token) =>
-                SyntaxFacts.IsContextualKeyword(token.Kind());
-
             protected override bool IsRegularComment(SyntaxTrivia trivia)
             {
                 switch (trivia.Kind())
