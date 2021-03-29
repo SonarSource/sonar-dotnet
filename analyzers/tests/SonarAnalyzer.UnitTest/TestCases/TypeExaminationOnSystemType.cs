@@ -39,6 +39,8 @@ namespace Tests.Diagnostics
             IsInstanceOfType(string.Empty); // Compliant - different `IsInstanceOfType` method
         }
 
+        public Type ResolveType(string id) => Type.GetType(id);
+
         public void GetType(object o) { }
 
         public void IsInstanceOfType(object o) { }

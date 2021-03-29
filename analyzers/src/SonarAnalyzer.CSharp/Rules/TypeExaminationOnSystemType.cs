@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (!(invocation.Expression is MemberAccessExpressionSyntax memberCall)
                 || IsException(memberCall, context.SemanticModel)
-                || invokedMethod.IsGetTypeCall())
+                || !invokedMethod.IsGetTypeCall())
             {
                 return;
             }
