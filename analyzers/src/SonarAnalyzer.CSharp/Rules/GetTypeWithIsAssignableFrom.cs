@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -125,7 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (sideA.ToStringContains("GetType") &&
                 sideB is TypeOfExpressionSyntax sideBeTypeOf &&
                 sideBeTypeOf.Type is { } typeSyntax &&
-                TypeExaminationOnSystemType.IsGetTypeCall(sideA as InvocationExpressionSyntax, context.SemanticModel) &&
+                (sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel) &&
                 context.SemanticModel.GetTypeInfo(typeSyntax).Type is { } typeSymbol &&
                 typeSymbol.IsSealed &&
                 !typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
@@ -152,12 +153,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckForIsAssignableFrom(SyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation,
-            MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol,
-            ExpressionSyntax argument)
+        private static void CheckForIsAssignableFrom(SyntaxNodeAnalysisContext context,
+                                                     InvocationExpressionSyntax invocation,
+                                                     MemberAccessExpressionSyntax memberAccess,
+                                                     IMethodSymbol methodSymbol,
+                                                     ExpressionSyntax argument)
         {
-            if (methodSymbol.Name != "IsAssignableFrom" ||
-                !TypeExaminationOnSystemType.IsGetTypeCall(argument as InvocationExpressionSyntax, context.SemanticModel))
+            if (methodSymbol.Name != nameof(Type.IsAssignableFrom) || !(argument as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
             {
                 return;
             }

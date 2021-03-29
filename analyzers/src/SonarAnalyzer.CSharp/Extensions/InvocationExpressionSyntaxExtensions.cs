@@ -36,5 +36,9 @@ namespace SonarAnalyzer.Extensions
 
         internal static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
             invocation?.ArgumentList != null && invocation.ArgumentList.Arguments.Count == count;
+
+        internal static bool IsGetTypeCall(this InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            invocation != null
+            && (semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && methodSymbol.IsGetTypeCall());
     }
 }

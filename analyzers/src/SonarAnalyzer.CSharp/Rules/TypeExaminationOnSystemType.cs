@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -33,40 +34,33 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class TypeExaminationOnSystemType : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3443";
+        private const string DiagnosticId = "S3443";
         private const string MessageFormat = "{0}";
-        internal const string MessageGetType = "Remove this use of 'GetType' on a 'System.Type'.";
-        internal const string MessageIsInstanceOfType = "Pass an argument that is not a 'System.Type' or consider using 'IsAssignableFrom'.";
-        internal const string MessageIsInstanceOfTypeWithGetType = "Consider removing the 'GetType' call, it's suspicious in an 'IsInstanceOfType' call.";
+        private const string MessageGetType = "Remove this use of 'GetType' on a 'System.Type'.";
+        private const string MessageIsInstanceOfType = "Pass an argument that is not a 'System.Type' or consider using 'IsAssignableFrom'.";
+        private const string MessageIsInstanceOfTypeWithGetType = "Consider removing the 'GetType' call, it's suspicious in an 'IsInstanceOfType' call.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+               {
+                   var invocation = (InvocationExpressionSyntax)c.Node;
+
+                   if (invocation.Expression.ToStringContainsEitherOr(nameof(Type.IsInstanceOfType), nameof(Type.GetType))
+                       && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
+                   {
+                       CheckGetTypeCallOnType(invocation, methodSymbol, c);
+                       CheckIsInstanceOfTypeCallWithTypeArgument(invocation, methodSymbol, c);
+                   }
+               },
+               SyntaxKind.InvocationExpression);
+
+        private static void CheckIsInstanceOfTypeCallWithTypeArgument(InvocationExpressionSyntax invocation, ISymbol methodSymbol, SyntaxNodeAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
-
-                    if (invocation.Expression.ToStringContainsEitherOr("IsInstanceOfType", "GetType") &&
-                        c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
-                    {
-                        CheckGetTypeCallOnType(invocation, methodSymbol, c);
-                        CheckIsInstanceOfTypeCallWithTypeArgument(invocation, methodSymbol, c);
-                    }
-                },
-                SyntaxKind.InvocationExpression);
-        }
-
-        private static void CheckIsInstanceOfTypeCallWithTypeArgument(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol,
-            SyntaxNodeAnalysisContext context)
-        {
-            if (methodSymbol.Name != "IsInstanceOfType" ||
-                !methodSymbol.ContainingType.Is(KnownType.System_Type) ||
-                !invocation.HasExactlyNArguments(1))
+            if (methodSymbol.Name != nameof(Type.IsInstanceOfType) || !methodSymbol.ContainingType.Is(KnownType.System_Type))
             {
                 return;
             }
@@ -80,19 +74,18 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var invocationInArgument = argument as InvocationExpressionSyntax;
-            var message = IsGetTypeCall(invocationInArgument, context.SemanticModel)
+            var message = invocationInArgument.IsGetTypeCall(context.SemanticModel)
                 ? MessageIsInstanceOfTypeWithGetType
                 : MessageIsInstanceOfType;
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, argument.GetLocation(), message));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, argument.GetLocation(), message));
         }
 
-        private static void CheckGetTypeCallOnType(InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod,
-            SyntaxNodeAnalysisContext context)
+        private static void CheckGetTypeCallOnType(InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod, SyntaxNodeAnalysisContext context)
         {
-
-            if (!(invocation.Expression is MemberAccessExpressionSyntax memberCall) ||
-                !IsGetTypeCall(invokedMethod))
+            if (!(invocation.Expression is MemberAccessExpressionSyntax memberCall)
+                || IsException(memberCall, context.SemanticModel)
+                || !invokedMethod.IsGetTypeCall())
             {
                 return;
             }
@@ -103,32 +96,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberCall.OperatorToken.CreateLocation(invocation),
-                MessageGetType));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, memberCall.OperatorToken.CreateLocation(invocation), MessageGetType));
         }
 
-        private static bool IsGetTypeCall(IMethodSymbol invokedMethod)
-        {
-            return invokedMethod.Name == "GetType" &&
-                !invokedMethod.IsStatic &&
-                invokedMethod.ContainingType != null &&
-                IsObjectOrType(invokedMethod.ContainingType);
-        }
-
-        private static bool IsObjectOrType(INamedTypeSymbol namedType)
-        {
-            return namedType.SpecialType == SpecialType.System_Object ||
-                namedType.Is(KnownType.System_Type);
-        }
-
-        internal static bool IsGetTypeCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
-        {
-            if (invocation == null)
-            {
-                return false;
-            }
-
-            return semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && IsGetTypeCall(methodSymbol);
-        }
+        private static bool IsException(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
+            memberAccess.Expression is TypeOfExpressionSyntax typeOf
+            && typeOf.Type.IsKnownType(KnownType.System_Type, semanticModel);
     }
 }
