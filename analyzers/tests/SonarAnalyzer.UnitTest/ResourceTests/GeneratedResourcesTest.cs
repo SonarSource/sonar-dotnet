@@ -62,8 +62,8 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
         public void ThereShouldBeRuleDetailsForAllCSharpRuleClasses()
         {
             var ruleDetailsKeys = RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.CSharp)
-                .Select(rd => rd.Key)
-                .OrderBy(key => key);
+                                                   .Select(rd => rd.Key)
+                                                   .OrderBy(key => key);
 
             var rulesFromClasses = GetRulesFromClasses(typeof(CSharpSyntaxHelper).Assembly).OrderBy(key => key);
 
@@ -74,8 +74,8 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
         public void ThereShouldBeRuleDetailsForAllVbNetRuleClasses()
         {
             var ruleDetailsKeys = RuleDetailBuilder.GetAllRuleDetails(AnalyzerLanguage.VisualBasic)
-                .Select(rd => rd.Key)
-                .OrderBy(key => key);
+                                                   .Select(rd => rd.Key)
+                                                   .OrderBy(key => key);
 
             var rulesFromClasses = GetRulesFromClasses(typeof(VisualBasicSyntaxHelper).Assembly).OrderBy(key => key);
 
@@ -84,17 +84,15 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
 
         private static string[] GetRulesFromClasses(Assembly assembly) =>
             assembly.GetTypes()
-                .Where(t => typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(t) || typeof(IRuleFactory).IsAssignableFrom(t))
-                .Where(t => !t.IsAbstract)
-                .Where(IsNotUtilityAnalyzer)
-                .SelectMany(GetRuleNamesFromAttributes)
-                .OrderBy(name => name)
-                .ToArray();
+                    .Where(t => typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(t) || typeof(IRuleFactory).IsAssignableFrom(t))
+                    .Where(t => !t.IsAbstract)
+                    .Where(IsNotUtilityAnalyzer)
+                    .SelectMany(GetRuleNamesFromAttributes)
+                    .OrderBy(name => name)
+                    .ToArray();
 
-        private static bool IsNotUtilityAnalyzer(Type arg)
-        {
-            return !typeof(UtilityAnalyzerBase).IsAssignableFrom(arg);
-        }
+        private static bool IsNotUtilityAnalyzer(Type arg) =>
+            !typeof(UtilityAnalyzerBase).IsAssignableFrom(arg);
 
         private static string[] GetRulesFromResources(string relativePath)
         {
@@ -102,21 +100,17 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
 
             var resources = Directory.GetFiles(resourcesRoot);
 
-            var ruleNames = resources.Where(IsHtmlFile)
-                                     .Select(Path.GetFileNameWithoutExtension)
-                                     .Select(GetRuleFromFileName)
-                                     .OrderBy(name => name)
-                                     .ToArray();
-
-            return ruleNames;
+            return resources.Where(IsHtmlFile)
+                            .Select(Path.GetFileNameWithoutExtension)
+                            .Select(GetRuleFromFileName)
+                            .OrderBy(name => name)
+                            .ToArray();
         }
 
-        private static IEnumerable<string> GetRuleNamesFromAttributes(Type analyzerType)
-        {
-            return analyzerType.GetCustomAttributes(typeof(RuleAttribute), true)
-                                .OfType<RuleAttribute>()
-                                .Select(attr => attr.Key);
-        }
+        private static IEnumerable<string> GetRuleNamesFromAttributes(Type analyzerType) =>
+            analyzerType.GetCustomAttributes(typeof(RuleAttribute), true)
+                        .OfType<RuleAttribute>()
+                        .Select(attr => attr.Key);
 
         private static string GetRuleFromFileName(string fileName)
         {
@@ -126,9 +120,7 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
             return match.Success ? match.Groups[1].Value : null;
         }
 
-        private static bool IsHtmlFile(string name)
-        {
-            return Path.GetExtension(name).Equals(".html", StringComparison.OrdinalIgnoreCase);
-        }
+        private static bool IsHtmlFile(string name) =>
+            Path.GetExtension(name).Equals(".html", StringComparison.OrdinalIgnoreCase);
     }
 }

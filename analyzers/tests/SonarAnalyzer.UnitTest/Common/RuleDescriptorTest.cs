@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
+using System.Reflection;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Utilities;
-using System.Linq;
-using System.Reflection;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -37,28 +37,11 @@ namespace SonarAnalyzer.UnitTest.Common
             CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage.VisualBasic);
         }
 
-        private static void CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage language)
-        {
-            new RuleFinder()
-                .GetAnalyzerTypes(language)
-                .Any(at => !at.GetCustomAttributes<RuleAttribute>().Any())
-                .Should()
-                .BeFalse();
-        }
-
         [TestMethod]
         public void CheckParameterlessRuleDescriptorsHaveRuleId()
         {
             CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage.CSharp);
             CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage.VisualBasic);
-        }
-
-        private static void CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage language)
-        {
-            new RuleFinder().GetParameterlessAnalyzerTypes(language)
-                .Any(at => !at.GetCustomAttributes<RuleAttribute>().Any())
-                .Should()
-                .BeFalse();
         }
 
         [TestMethod]
@@ -67,6 +50,19 @@ namespace SonarAnalyzer.UnitTest.Common
             CheckRuleDescriptorsNotEmpty(AnalyzerLanguage.CSharp);
             CheckRuleDescriptorsNotEmpty(AnalyzerLanguage.VisualBasic);
         }
+
+        private static void CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage language) =>
+            new RuleFinder()
+                .GetAnalyzerTypes(language)
+                .Any(at => !at.GetCustomAttributes<RuleAttribute>().Any())
+                .Should()
+                .BeFalse();
+
+        private static void CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage language) =>
+            new RuleFinder().GetParameterlessAnalyzerTypes(language)
+                .Any(at => !at.GetCustomAttributes<RuleAttribute>().Any())
+                .Should()
+                .BeFalse();
 
         private static void CheckRuleDescriptorsNotEmpty(AnalyzerLanguage language)
         {

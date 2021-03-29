@@ -18,8 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
- extern alias csharp;
-
+extern alias csharp;
 using System;
 using System.Text;
 using csharp::SonarAnalyzer.CBDE;
@@ -38,35 +37,26 @@ namespace SonarAnalyzer.UnitTest.CBDE
             return encoder.GetString(encodedBytes);
         }
 
-        public void checkEncoding(string source, string encoded)
-        {
+        public void CheckEncoding(string source, string encoded) =>
             Assert.AreEqual(encoded, Encode(source));
-        }
 
         [TestMethod]
-        public void SimpleCharsAreUnchanged()
-        {
-            checkEncoding("ABCDEF abcdef", "ABCDEF abcdef");
-        }
+        public void SimpleCharsAreUnchanged() =>
+            CheckEncoding("ABCDEF abcdef", "ABCDEF abcdef");
 
         [TestMethod]
-        public void AccentedCharacterAreChanged()
-        {
-            checkEncoding("àÅéÈïİøÒùÛçµ", ".E0.C5.E9.C8.EF.130.F8.D2.F9.DB.E7.B5");
-        }
+        public void AccentedCharacterAreChanged() =>
+            CheckEncoding("àÅéÈïİøÒùÛçµ", ".E0.C5.E9.C8.EF.130.F8.D2.F9.DB.E7.B5");
 
         [TestMethod]
-        public void CharactersWithLongEncodingAreChanged()
-        {
-            checkEncoding("𤭢𐐷", ".D852DF62.D801DC37");
-        }
+        public void CharactersWithLongEncodingAreChanged() =>
+            CheckEncoding("𤭢𐐷", ".D852DF62.D801DC37");
 
         [TestMethod]
         public void StringWithPointsAreNoLongerInjective()
         {
-            checkEncoding(".E0", ".E0"); // If the input string contains a point, we are no longer injective
-            checkEncoding("à", ".E0");
+            CheckEncoding(".E0", ".E0"); // If the input string contains a point, we are no longer injective
+            CheckEncoding("à", ".E0");
         }
-
     }
 }

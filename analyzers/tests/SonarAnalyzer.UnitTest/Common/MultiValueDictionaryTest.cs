@@ -64,4 +64,3 @@ namespace SonarAnalyzer.UnitTest.Common
         }
     }
 }
-

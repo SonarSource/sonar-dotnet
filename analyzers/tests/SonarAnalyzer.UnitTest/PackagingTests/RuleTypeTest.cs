@@ -32,18 +32,14 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     public class RuleTypeTest
     {
         [TestMethod]
-        public void DetectRuleTypeChanges_CS()
-        {
+        public void DetectRuleTypeChanges_CS() =>
             DetectTypeChanges(csharp::SonarAnalyzer.RspecStrings.ResourceManager,
                 CsRuleTypeMapping.RuleTypesCs, nameof(CsRuleTypeMapping.RuleTypesCs));
-        }
 
         [TestMethod]
-        public void DetectRuleTypeChanges_VB()
-        {
+        public void DetectRuleTypeChanges_VB() =>
             DetectTypeChanges(vbnet::SonarAnalyzer.RspecStrings.ResourceManager,
                 VbRuleTypeMapping.RuleTypesVb, nameof(VbRuleTypeMapping.RuleTypesVb));
-        }
 
         private static void DetectTypeChanges(ResourceManager resourceManager, IImmutableDictionary<string, string> expectedTypes, string expectedTypesName)
         {

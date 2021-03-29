@@ -18,18 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using FluentAssertions;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using System;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -73,8 +72,5 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 return TaskHelper.CompletedTask;
             }
         }
-
     }
 }
-
-

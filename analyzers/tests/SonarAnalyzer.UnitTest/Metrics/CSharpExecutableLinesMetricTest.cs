@@ -28,8 +28,7 @@ namespace SonarAnalyzer.UnitTest.Common
     public class CSharpExecutableLinesMetricTest
     {
         [TestMethod]
-        public void No_Executable_Lines()
-        {
+        public void No_Executable_Lines() =>
             AssertLinesOfCode(
               @"using System;
                 using System.Linq;
@@ -43,20 +42,16 @@ namespace SonarAnalyzer.UnitTest.Common
                         }
                     }
                 }");
-        }
 
         [TestMethod]
-        public void Class()
-        {
-            AssertLinesOfCode(@"
-class Program
-{
-}");
-        }
+        public void Class() =>
+            AssertLinesOfCode(
+                @"class Program
+                {
+                }");
 
         [TestMethod]
-        public void Checked_Unchecked()
-        {
+        public void Checked_Unchecked() =>
             AssertLinesOfCode(
               @"
                 static void Main(string[] args)
@@ -69,11 +64,9 @@ class Program
                     }
                 }",
                 4, 6);
-        }
 
         [TestMethod]
-        public void Blocks()
-        {
+        public void Blocks() =>
             AssertLinesOfCode(
               @"
                 unsafe static void Main(int[] arr, object obj)
@@ -84,11 +77,9 @@ class Program
                     using ((IDisposable)obj) { } // +1
                 }",
                 4, 5, 6, 7);
-        }
 
         [TestMethod]
-        public void Statements()
-        {
+        public void Statements() =>
             AssertLinesOfCode(
               @"
                 void Foo(int i)
@@ -97,11 +88,9 @@ class Program
                     i++; // +1
                 }",
                 4, 5);
-        }
 
         [TestMethod]
-        public void Loops()
-        {
+        public void Loops() =>
             AssertLinesOfCode(
               @"
                 void Foo(int[] arr)
@@ -114,11 +103,9 @@ class Program
                         (true) { }
                 }",
                 4, 6, 7, 8);
-        }
 
         [TestMethod]
-        public void Conditionals()
-        {
+        public void Conditionals() =>
             AssertLinesOfCode(
               @"
                 void Foo(int? i, string s)
@@ -136,11 +123,9 @@ class Program
                     var xx = i == 1 ? 1 : 1; // +1
                 }",
                 4, 5, 6, 11, 13, 14);
-        }
 
         [TestMethod]
-        public void Conditionals2()
-        {
+        public void Conditionals2() =>
             AssertLinesOfCode(
               @"
                 void Foo(Exception ex)
@@ -157,11 +142,9 @@ class Program
                     return; // +1
                 }",
                 4, 5, 6, 8, 10, 11, 13);
-        }
 
         [TestMethod]
-        public void Yields()
-        {
+        public void Yields() =>
             AssertLinesOfCode(
               @"
                using System;
@@ -180,11 +163,9 @@ class Program
                    }
                }",
                12, 13);
-        }
 
         [TestMethod]
-        public void AccessAndInvocation()
-        {
+        public void AccessAndInvocation() =>
             AssertLinesOfCode(
               @"
                 static void Main(string[] args)
@@ -193,11 +174,9 @@ class Program
                     args.ToString(); // +1
                 }",
                 4, 5);
-        }
 
         [TestMethod]
-        public void Initialization()
-        {
+        public void Initialization() =>
             AssertLinesOfCode(
               @"
                 static string GetString() => "";
@@ -214,11 +193,9 @@ class Program
                     };
                 }",
                 7, 11);
-        }
 
         [TestMethod]
-        public void Property_Set()
-        {
+        public void Property_Set() =>
             AssertLinesOfCode(
               @"
                 class Program
@@ -231,11 +208,9 @@ class Program
                     }
                 }",
                 8);
-        }
 
         [TestMethod]
-        public void Property_Get()
-        {
+        public void Property_Get() =>
             AssertLinesOfCode(
               @"
                 class Program
@@ -247,11 +222,9 @@ class Program
                         var x = Prop;
                     }
                 }");
-        }
 
         [TestMethod]
-        public void Lambdas()
-        {
+        public void Lambdas() =>
             AssertLinesOfCode(
               @"
                 using System;
@@ -268,11 +241,9 @@ class Program
                     }
                 }",
                 9, 10, 11);
-        }
 
         [TestMethod]
-        public void TryCatch()
-        {
+        public void TryCatch() =>
             AssertLinesOfCode(
               @"
                 using System;
@@ -296,11 +267,9 @@ class Program
                     }
                 }",
                 9, 14);
-        }
 
         [TestMethod]
-        public void Test_16()
-        {
+        public void Test_16() =>
             AssertLinesOfCode(
              @"using System;
                public void Foo(int x) {
@@ -308,11 +277,9 @@ class Program
                { while(true){i--;} } // +1
                }",
                3, 4);
-        }
 
         [TestMethod]
-        public void Test_17()
-        {
+        public void Test_17() =>
             AssertLinesOfCode(
              @"
                 static void Main(string[] args)
@@ -329,11 +296,9 @@ class Program
                     ;
                 }",
                 4);
-        }
 
         [TestMethod]
-        public void ExcludeFromTestCoverage()
-        {
+        public void ExcludeFromTestCoverage() =>
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
                 public class ComplicatedCode
@@ -361,11 +326,9 @@ class Program
                     }
                 }",
                 19, 22);
-        }
 
         [TestMethod]
-        public void ExcludeFromTestCoverage_AttributeOnLocalFunction()
-        {
+        public void ExcludeFromTestCoverage_AttributeOnLocalFunction() =>
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
                 public class ComplicatedCode
@@ -385,7 +348,6 @@ class Program
                     }
                 }",
                 8, 14);
-        }
 
         [TestMethod]
         public void ExcludeFromTestCoverage_Variants()
@@ -418,8 +380,7 @@ class Program
         }
 
         [TestMethod]
-        public void ExcludeClassFromTestCoverage()
-        {
+        public void ExcludeClassFromTestCoverage() =>
             AssertLinesOfCode(
               @"
                 using System;
@@ -431,11 +392,9 @@ class Program
                         Main(null);
                     }
                 }");
-        }
 
         [TestMethod]
-        public void ExcludeStructFromTestCoverage()
-        {
+        public void ExcludeStructFromTestCoverage() =>
             AssertLinesOfCode(
               @"namespace project_1
                 {
@@ -448,11 +407,9 @@ class Program
                         }
                     }
                 }");
-        }
 
         [TestMethod]
-        public void ExcludePropertyFromTestCoverage()
-        {
+        public void ExcludePropertyFromTestCoverage() =>
             AssertLinesOfCode(
               @"[ExcludeFromCodeCoverage]
                 class Program
@@ -465,11 +422,9 @@ class Program
                         }
                     }
                 }");
-        }
 
         [TestMethod]
-        public void Constructor_ExcludeFromCodeCoverage()
-        {
+        public void Constructor_ExcludeFromCodeCoverage() =>
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
                 class Program
@@ -488,11 +443,9 @@ class Program
                     }
                 }",
                 14);
-        }
 
         [TestMethod]
-        public void Property_ExcludeFromCodeCoverage()
-        {
+        public void Property_ExcludeFromCodeCoverage() =>
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
                 class EventClass
@@ -520,12 +473,9 @@ class Program
                     }
                 }",
                 15, 22, 23);
-        }
-
 
         [TestMethod]
-        public void Event_ExcludeFromCodeCoverage()
-        {
+        public void Event_ExcludeFromCodeCoverage() =>
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
                 class EventClass
@@ -553,11 +503,9 @@ class Program
                     }
                 }",
                 15, 22, 23);
-        }
 
         [TestMethod]
-        public void PartialClasses_ExcludeFromCodeCoverage()
-        {
+        public void PartialClasses_ExcludeFromCodeCoverage() =>
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
                 [ExcludeFromCodeCoverage]
@@ -582,11 +530,9 @@ class Program
                     }
                 } ",
                 20);
-        }
 
         [TestMethod]
-        public void PartialMethods_ExcludeFromCodeCoverage()
-        {
+        public void PartialMethods_ExcludeFromCodeCoverage() =>
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
                 partial class Program
@@ -616,22 +562,18 @@ class Program
                         System.Console.WriteLine();         // excluded
                     }
                 }");
-        }
 
         [TestMethod]
-        public void AttributeAreIgnored()
-        {
+        public void AttributeAreIgnored() =>
             AssertLinesOfCode(
                 @"
                 using System.Reflection;
                 using System.Runtime.CompilerServices;
                 [assembly: InternalsVisibleTo(""FOO"" + Signing.InternalsVisibleToPublicKey)]
                 ");
-        }
 
         [TestMethod]
-        public void OnlyAttributeAreIgnored()
-        {
+        public void OnlyAttributeAreIgnored() =>
             AssertLinesOfCode(
                 @"
                 [AnAttribute]
@@ -644,11 +586,9 @@ class Program
                     }
                 }",
                 8);
-        }
 
         [TestMethod]
-        public void ExpressionsAreCounted()
-        {
+        public void ExpressionsAreCounted() =>
             AssertLinesOfCode(
                 @"
                 public void Foo(bool flag)
@@ -659,7 +599,6 @@ class Program
                     }
                 }",
                 4, 6);
-        }
 
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {

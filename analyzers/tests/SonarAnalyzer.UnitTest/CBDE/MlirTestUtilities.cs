@@ -18,31 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using SonarAnalyzer.ControlFlowGraph.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.CBDE;
+using SonarAnalyzer.ControlFlowGraph;
+using SonarAnalyzer.ControlFlowGraph.CSharp;
 
 namespace SonarAnalyzer.UnitTest.CBDE
 {
     public static class MlirTestUtilities
     {
-        private static readonly string cbdeDialectCheckerPath =
+        private static readonly string CbdeDialectCheckerPath =
             Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 @"CBDE\windows\cbde-dialect-checker.exe");
 
         public static void CheckExecutableExists() =>
-            Assert.IsTrue(File.Exists(cbdeDialectCheckerPath),
-                $"We need cbde-dialect-checker.exe to validate the generated IR, searched in path {cbdeDialectCheckerPath}");
+            Assert.IsTrue(File.Exists(CbdeDialectCheckerPath),
+                $"We need cbde-dialect-checker.exe to validate the generated IR, searched in path {CbdeDialectCheckerPath}");
 
         public static string ValidateCodeGeneration(string code, string testName, bool withLoc)
         {
@@ -108,7 +106,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
         {
             var pi = new ProcessStartInfo
             {
-                FileName = cbdeDialectCheckerPath,
+                FileName = CbdeDialectCheckerPath,
                 Arguments = '"' + path + '"',
                 UseShellExecute = false,
                 RedirectStandardOutput = true,

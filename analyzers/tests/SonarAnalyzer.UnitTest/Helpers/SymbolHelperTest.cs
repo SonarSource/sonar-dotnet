@@ -78,63 +78,61 @@ namespace NS
         [TestInitialize]
         public void Compile()
         {
-            this.testCode = new SnippetCompiler(TestInput, ignoreErrors: true, language: AnalyzerLanguage.CSharp);
+            testCode = new SnippetCompiler(TestInput, ignoreErrors: true, language: AnalyzerLanguage.CSharp);
         }
 
         [TestMethod]
         public void Symbol_IsPublicApi()
         {
-            ISymbol symbol = this.testCode.GetMethodSymbol("Base.Method1");
+            ISymbol symbol = testCode.GetMethodSymbol("Base.Method1");
             SymbolHelper.IsPubliclyAccessible(symbol).Should().BeTrue();
 
-            symbol = this.testCode.GetMethodSymbol("Base.Method2");
+            symbol = testCode.GetMethodSymbol("Base.Method2");
             symbol.IsPubliclyAccessible().Should().BeTrue();
 
-            symbol = this.testCode.GetPropertySymbol("Base.Property");
+            symbol = testCode.GetPropertySymbol("Base.Property");
             symbol.IsPubliclyAccessible().Should().BeTrue();
 
-            symbol = this.testCode.GetPropertySymbol("IInterface.Property2");
+            symbol = testCode.GetPropertySymbol("IInterface.Property2");
             symbol.IsPubliclyAccessible().Should().BeTrue();
 
-            symbol = this.testCode.GetPropertySymbol("Derived1.Property");
+            symbol = testCode.GetPropertySymbol("Derived1.Property");
             symbol.IsPubliclyAccessible().Should().BeFalse();
         }
 
         [TestMethod]
         public void Symbol_IsInterfaceImplementationOrMemberOverride()
         {
-            ISymbol symbol = this.testCode.GetMethodSymbol("Base.Method1");
+            ISymbol symbol = testCode.GetMethodSymbol("Base.Method1");
             symbol.GetInterfaceMember().Should().BeNull();
             symbol.GetOverriddenMember().Should().BeNull();
 
-            symbol = this.testCode.GetPropertySymbol("Derived2.Property");
+            symbol = testCode.GetPropertySymbol("Derived2.Property");
             symbol.GetOverriddenMember().Should().NotBeNull();
 
-            symbol = this.testCode.GetPropertySymbol("Derived2.Property2");
+            symbol = testCode.GetPropertySymbol("Derived2.Property2");
             symbol.GetInterfaceMember().Should().NotBeNull();
 
-            symbol = this.testCode.GetMethodSymbol("Derived2.Method3");
+            symbol = testCode.GetMethodSymbol("Derived2.Method3");
             symbol.GetInterfaceMember().Should().NotBeNull();
         }
 
         [TestMethod]
         public void Symbol_TryGetOverriddenOrInterfaceMember()
         {
-            var methodSymbol = this.testCode.GetMethodSymbol("Base.Method1");
+            var methodSymbol = testCode.GetMethodSymbol("Base.Method1");
             var actualOverriddenMethod = methodSymbol.GetOverriddenMember();
             actualOverriddenMethod.Should().BeNull();
 
-
-            var expectedOverriddenProperty = this.testCode.GetPropertySymbol("Base.Property");
-            var propertySymbol = this.testCode.GetPropertySymbol("Derived2.Property");
+            var expectedOverriddenProperty = testCode.GetPropertySymbol("Base.Property");
+            var propertySymbol = testCode.GetPropertySymbol("Derived2.Property");
 
             var actualOverriddenProperty = propertySymbol.GetOverriddenMember();
             actualOverriddenProperty.Should().NotBeNull();
             actualOverriddenProperty.Should().Be(expectedOverriddenProperty);
 
-
-            var expectedOverriddenMethod = this.testCode.GetMethodSymbol("IInterface.Method3");
-            methodSymbol = this.testCode.GetMethodSymbol("Derived2.Method3");
+            var expectedOverriddenMethod = testCode.GetMethodSymbol("IInterface.Method3");
+            methodSymbol = testCode.GetMethodSymbol("Derived2.Method3");
 
             actualOverriddenMethod = methodSymbol.GetInterfaceMember();
             actualOverriddenMethod.Should().NotBeNull();
@@ -144,49 +142,49 @@ namespace NS
         [TestMethod]
         public void Symbol_IsChangeable()
         {
-            var symbol = this.testCode.GetMethodSymbol("Base.Method1");
+            var symbol = testCode.GetMethodSymbol("Base.Method1");
             symbol.IsChangeable().Should().BeFalse();
 
-            symbol = this.testCode.GetMethodSymbol("Base.Method4");
+            symbol = testCode.GetMethodSymbol("Base.Method4");
             symbol.IsChangeable().Should().BeTrue();
 
-            symbol = this.testCode.GetMethodSymbol("Derived2.Method5");
+            symbol = testCode.GetMethodSymbol("Derived2.Method5");
             symbol.IsChangeable().Should().BeFalse();
 
-            symbol = this.testCode.GetMethodSymbol("Derived2.Method3");
+            symbol = testCode.GetMethodSymbol("Derived2.Method3");
             symbol.IsChangeable().Should().BeFalse();
         }
 
         [TestMethod]
         public void Symbol_IsProbablyEventHandler()
         {
-            var symbol = this.testCode.GetMethodSymbol("Derived2.Method3");
+            var symbol = testCode.GetMethodSymbol("Derived2.Method3");
             symbol.IsEventHandler().Should().BeFalse();
 
-            symbol = this.testCode.GetMethodSymbol("Derived2.EventHandler");
+            symbol = testCode.GetMethodSymbol("Derived2.EventHandler");
             symbol.IsEventHandler().Should().BeTrue();
         }
 
         [TestMethod]
         public void Symbol_GetSelfAndBaseTypes()
         {
-            var objectType = this.testCode.GetTypeByMetadataName("System.Object");
+            var objectType = testCode.GetTypeByMetadataName("System.Object");
             var baseTypes = objectType.GetSelfAndBaseTypes().ToList();
             baseTypes.Should().ContainSingle();
             baseTypes.First().Should().Be(objectType);
 
-            var derived1Type = this.testCode.GetTypeSymbol("Derived1") as INamedTypeSymbol;
+            var derived1Type = testCode.GetTypeSymbol("Derived1") as INamedTypeSymbol;
             baseTypes = derived1Type.GetSelfAndBaseTypes().ToList();
             baseTypes.Should().HaveCount(3);
             baseTypes.Should().HaveElementAt(0, derived1Type);
-            baseTypes.Should().HaveElementAt(1, this.testCode.GetTypeSymbol("Base"));
+            baseTypes.Should().HaveElementAt(1, testCode.GetTypeSymbol("Base"));
             baseTypes.Should().HaveElementAt(2, objectType);
         }
 
         [TestMethod]
         public void Symbol_GetAllNamedTypes_Namespace()
         {
-            var nsSymbol = this.testCode.GetNamespaceSymbol("NS");
+            var nsSymbol = testCode.GetNamespaceSymbol("NS");
 
             var typeSymbols = nsSymbol.GetAllNamedTypes();
             typeSymbols.Should().HaveCount(6);
@@ -195,7 +193,7 @@ namespace NS
         [TestMethod]
         public void Symbol_GetAllNamedTypes_Type()
         {
-            var typeSymbol = this.testCode.GetTypeSymbol("Base") as INamedTypeSymbol;
+            var typeSymbol = testCode.GetTypeSymbol("Base") as INamedTypeSymbol;
             var typeSymbols = typeSymbol.GetAllNamedTypes();
             typeSymbols.Should().HaveCount(3);
         }
@@ -203,30 +201,30 @@ namespace NS
         [TestMethod]
         public void Symbol_IsKnownType()
         {
-            var method4 = (MethodDeclarationSyntax)this.testCode.GetMethodDeclaration("IInterface.Method4");
+            var method4 = (MethodDeclarationSyntax)testCode.GetMethodDeclaration("IInterface.Method4");
 
             method4.ParameterList
                 .Parameters[0]
                 .Type
-                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.testCode.SemanticModel)
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, testCode.SemanticModel)
                 .Should().BeTrue();
 
             method4.ParameterList
                 .Parameters[1]
                 .Type
-                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.testCode.SemanticModel)
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, testCode.SemanticModel)
                 .Should().BeTrue();
 
             method4.ParameterList
                 .Parameters[2]
                 .Type
-                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.testCode.SemanticModel)
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, testCode.SemanticModel)
                 .Should().BeTrue();
 
             method4.ParameterList
                 .Parameters[3]
                 .Type
-                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.testCode.SemanticModel)
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, testCode.SemanticModel)
                 .Should().BeFalse();
         }
     }

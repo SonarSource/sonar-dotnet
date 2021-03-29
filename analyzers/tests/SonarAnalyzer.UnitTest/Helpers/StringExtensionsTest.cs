@@ -49,9 +49,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             AssertSplitEquivalent(null);
         }
 
-        private void AssertSplitEquivalent(string name, params string[] words)
-        {
+        private void AssertSplitEquivalent(string name, params string[] words) =>
             CollectionAssert.AreEquivalent(words, name.SplitCamelCaseToWords().ToList(), $" Value: {name}");
-        }
     }
 }

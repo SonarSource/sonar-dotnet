@@ -53,6 +53,5 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                       new SymbolicExecutionRunner(new PublicMethodArgumentsShouldBeCheckedForNull()),
                                                       NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion));
 #endif
-
     }
 }

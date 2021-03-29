@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using System;
 using System.Linq;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.UnitTest.Common
@@ -33,11 +32,8 @@ namespace SonarAnalyzer.UnitTest.Common
     public class RuleFinderTest
     {
         [TestMethod]
-        public void GetPackagedRuleAssembly()
-        {
-            RuleFinder.PackagedRuleAssemblies
-                .Should().HaveCount(3);
-        }
+        public void GetPackagedRuleAssembly() =>
+            RuleFinder.PackagedRuleAssemblies.Should().HaveCount(3);
 
         [TestMethod]
         public void GetParameterlessAnalyzerTypes()
@@ -68,9 +64,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void GetTargetLanguagesThrowsIfTypeDoesNotHaveLanguageInfo()
-        {
+        public void GetTargetLanguagesThrowsIfTypeDoesNotHaveLanguageInfo() =>
             Assert.ThrowsException<NotSupportedException>(() => RuleFinder.GetTargetLanguages(typeof(string)));
-        }
     }
 }

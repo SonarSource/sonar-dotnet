@@ -19,7 +19,6 @@
  */
 
 using System.Linq;
-using System.Threading;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

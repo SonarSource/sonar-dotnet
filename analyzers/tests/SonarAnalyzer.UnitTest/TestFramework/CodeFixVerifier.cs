@@ -185,7 +185,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 Diagnostics = DiagnosticVerifier.GetDiagnostics(Compilation, diagnosticAnalyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
                 ActualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
             }
-
         }
     }
 }

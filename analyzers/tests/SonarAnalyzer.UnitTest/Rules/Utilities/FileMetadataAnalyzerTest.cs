@@ -18,16 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
 using System.Collections.Generic;
 using System.Linq;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -140,7 +138,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         // We need to set protected properties and this class exists just to enable the analyzer
         // without bothering with additional files with parameters
-        private class FileMetadataAnalyzer_ : FileMetadataAnalyzer
+        private class FileMetadataAnalyzer_ : CS.FileMetadataAnalyzer
         {
             public bool IsEnabled
             {

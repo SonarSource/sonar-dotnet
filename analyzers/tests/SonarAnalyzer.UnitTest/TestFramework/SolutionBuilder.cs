@@ -92,8 +92,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                               IEnumerable<MetadataReference> additionalReferences = null,
                                                               bool isSupportForCSharp9InitNeeded = false)
         {
-            if (paths == null ||
-                !paths.Any())
+            if (paths == null || !paths.Any())
             {
                 throw new ArgumentException("Please specify at least one file path to analyze.", nameof(paths));
             }
@@ -114,8 +113,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 project = project.AddSnippet(InitSnippet);
             }
 
-            if (additionalReferences != null &&
-                additionalReferences.Any(r => r.Display.Contains("\\netstandard")))
+            if (additionalReferences != null
+                && additionalReferences.Any(r => r.Display.Contains("\\netstandard")))
             {
                 project = project.AddReferences(NetStandardMetadataReference.Netstandard);
             }

@@ -25,7 +25,6 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 
-
 namespace SonarAnalyzer.UnitTest
 {
     /// /// <summary>
@@ -33,47 +32,41 @@ namespace SonarAnalyzer.UnitTest
     /// </summary>
     internal class FixAllDiagnosticProvider : FixAllContext.DiagnosticProvider
     {
-        private readonly ISet<string> _diagnosticIds;
+        private readonly ISet<string> diagnosticIds;
 
         /// <summary>
         /// Delegate to fetch diagnostics for any given document within the given fix all scope.
-        /// This delegate is invoked by <see cref="GetDocumentDiagnosticsAsync(Document, CancellationToken)"/> with the given <see cref="_diagnosticIds"/> as arguments.
+        /// This delegate is invoked by <see cref="GetDocumentDiagnosticsAsync(Document, CancellationToken)"/> with the given <see cref="diagnosticIds"/> as arguments.
         /// </summary>
-        private readonly Func<Document, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> _getDocumentDiagnosticsAsync;
+        private readonly Func<Document, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> getDocumentDiagnosticsAsync;
 
         /// <summary>
         /// Delegate to fetch diagnostics for any given project within the given fix all scope.
         /// This delegate is invoked by <see cref="GetProjectDiagnosticsAsync(Project, CancellationToken)"/> and <see cref="GetAllDiagnosticsAsync(Project, CancellationToken)"/>
-        /// with the given <see cref="_diagnosticIds"/> as arguments.
+        /// with the given <see cref="diagnosticIds"/> as arguments.
         /// The boolean argument to the delegate indicates whether or not to return location-based diagnostics, i.e.
         /// (a) False => Return only diagnostics with <see cref="Location.None"/>.
         /// (b) True => Return all project diagnostics, regardless of whether or not they have a location.
         /// </summary>
-        private readonly Func<Project, bool, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> _getProjectDiagnosticsAsync;
+        private readonly Func<Project, bool, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> getProjectDiagnosticsAsync;
 
         public FixAllDiagnosticProvider(
             ISet<string> diagnosticIds,
             Func<Document, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> getDocumentDiagnosticsAsync,
             Func<Project, bool, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> getProjectDiagnosticsAsync)
         {
-            this._diagnosticIds = diagnosticIds;
-            this._getDocumentDiagnosticsAsync = getDocumentDiagnosticsAsync;
-            this._getProjectDiagnosticsAsync = getProjectDiagnosticsAsync;
+            this.diagnosticIds = diagnosticIds;
+            this.getDocumentDiagnosticsAsync = getDocumentDiagnosticsAsync;
+            this.getProjectDiagnosticsAsync = getProjectDiagnosticsAsync;
         }
 
-        public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancellationToken)
-        {
-            return this._getDocumentDiagnosticsAsync(document, this._diagnosticIds, cancellationToken);
-        }
+        public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancellationToken) =>
+            getDocumentDiagnosticsAsync(document, diagnosticIds, cancellationToken);
 
-        public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancellationToken)
-        {
-            return this._getProjectDiagnosticsAsync(project, true, this._diagnosticIds, cancellationToken);
-        }
+        public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancellationToken) =>
+            getProjectDiagnosticsAsync(project, true, diagnosticIds, cancellationToken);
 
-        public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancellationToken)
-        {
-            return this._getProjectDiagnosticsAsync(project, false, this._diagnosticIds, cancellationToken);
-        }
+        public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancellationToken) =>
+            getProjectDiagnosticsAsync(project, false, diagnosticIds, cancellationToken);
     }
 }
