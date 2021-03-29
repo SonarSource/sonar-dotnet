@@ -104,7 +104,7 @@ namespace UsingAttributes
     public class Repro4122
     {
         public int GetProduct([FromServices] IService service) =>
-             service.GetValue(); // Noncompliant
+             service.GetValue(); // Noncompliant, see https://github.com/SonarSource/sonar-dotnet/issues/4122
 
         public interface IService
         {
