@@ -82,8 +82,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckGetTypeCallOnType(InvocationExpressionSyntax invocation, ISymbol invokedMethod, SyntaxNodeAnalysisContext context)
         {
-            if (IsException(invocation, context.SemanticModel)
-                || !(invocation.Expression is MemberAccessExpressionSyntax memberCall)
+            if (!(invocation.Expression is MemberAccessExpressionSyntax memberCall)
+                || IsException(memberCall, context.SemanticModel)
                 || !IsGetTypeCall(invokedMethod))
             {
                 return;
@@ -98,8 +98,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberCall.OperatorToken.CreateLocation(invocation), MessageGetType));
         }
 
-        private static bool IsException(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax { Expression: TypeOfExpressionSyntax typeOf }
+        private static bool IsException(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
+            memberAccess.Expression is TypeOfExpressionSyntax typeOf
             && typeOf.Type.IsKnownType(KnownType.System_Type, semanticModel);
 
         private static bool IsGetTypeCall(ISymbol invokedMethod) =>
