@@ -31,7 +31,7 @@ namespace Tests.Diagnostics
 
             var x = Type.GetType("");
 
-            typeof(Type).GetType(); // Compliant - can be used by convention to get an instance of ‘System.RuntimeType’
+            typeof(Type).GetType(); // Compliant - can be used by convention to get an instance of ‘System.RuntimeType’. See: https://github.com/SonarSource/sonar-dotnet/issues/4201
         }
     }
 }
