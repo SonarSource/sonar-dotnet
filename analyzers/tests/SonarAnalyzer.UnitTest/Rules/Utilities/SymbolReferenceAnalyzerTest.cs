@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
@@ -107,6 +108,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_TypeParameter_CS() =>
             Verify("TypeParameter.cs", 5, 2, 4, 6);
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void GetSetKeyword_ReturnsNull_VB() =>
+            // This path is unreachable for VB code
+            new TestSymbolReferenceAnalyzer_VB(null).TestGetSetKeyword(null).Should().BeNull();
+
         public void Verify(string fileName, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
             Verify(fileName, references =>
                 {
@@ -151,6 +158,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 IsAnalyzerEnabled = true;
                 OutPath = outPath;
             }
+
+            public object TestGetSetKeyword(ISymbol valuePropertySymbol) =>
+                GetSetKeyword(valuePropertySymbol);
         }
     }
 }
