@@ -503,4 +503,18 @@ namespace Tests.TestCases
             }
         }
     }
+
+    public class Repro_4199
+    {
+        private Task DoSomethingAsync(string text) // Noncompliant FP, see https://github.com/SonarSource/sonar-dotnet/issues/4199
+        {
+            return Task.Run(async () => await UseAsync());
+
+            async Task UseAsync()
+            {
+                await Task.Delay(100);
+                Console.WriteLine(text);
+            }
+        }
+    }
 }

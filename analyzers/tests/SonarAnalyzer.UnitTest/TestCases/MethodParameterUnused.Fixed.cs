@@ -501,4 +501,18 @@ namespace Tests.TestCases
             }
         }
     }
+
+    public class Repro_4199
+    {
+        private Task DoSomethingAsync(string text) // Fixed
+        {
+            return Task.Run(async () => await UseAsync());
+
+            async Task UseAsync()
+            {
+                await Task.Delay(100);
+                Console.WriteLine(text);
+            }
+        }
+    }
 }
