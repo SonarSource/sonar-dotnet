@@ -87,18 +87,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsIdentifier(SyntaxToken token) =>
             token.IsKind(SyntaxKind.IdentifierToken);
 
-        protected override SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol)
-        {
-            if (!IsValuePropertyParameter(valuePropertySymbol))
-            {
-                return null;
-            }
-
-            var accessor = (valuePropertySymbol.ContainingSymbol as IMethodSymbol)
-                ?.DeclaringSyntaxReferences.FirstOrDefault()
-                ?.GetSyntax() as AccessorDeclarationSyntax;
-
-            return accessor?.Keyword;
-        }
+        protected override SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol) =>
+            IsValuePropertyParameter(valuePropertySymbol)
+            && valuePropertySymbol.ContainingSymbol is IMethodSymbol methodSymbol
+            && methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor
+                ? accessor?.Keyword
+                : null;
     }
 }
