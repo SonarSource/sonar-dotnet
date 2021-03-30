@@ -24,8 +24,10 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf;
-using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -38,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_Method_PreciseLocation() =>
+        public void Verify_Method_PreciseLocation_CS() =>
             Verify("Method.cs", references =>
             {
                 references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 5);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 5
@@ -50,42 +52,59 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_Event() =>
+        public void Verify_Method_PreciseLocation_VB() =>
+            Verify("Method.vb", references =>
+            {
+                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 6);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 6
+                var methodDeclaration = references.Single(x => x.Declaration.StartLine == 3);
+                methodDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 15, EndOffset = 21 });
+                methodDeclaration.Reference.Should().HaveCount(1);
+                methodDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 7, EndLine = 7, StartOffset = 8, EndOffset = 14 });
+            });
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void Verify_Event_CS() =>
             Verify("Event.cs", 6, 5, 9, 10);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_Field() =>
+        public void Verify_Field_CS() =>
             Verify("Field.cs", 4, 3, 7, 8);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_Local() =>
+        public void Verify_Local_CS() =>
             Verify("Local.cs", 4, 7, 5);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_Method() =>
+        public void Verify_Method_CS() =>
             Verify("Method.cs", 3, 3, 6);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_NamedType() =>
+        public void Verify_NamedType_CS() =>
             Verify("NamedType.cs", 4, 3, 7, 7); // 'var' and type name on the same line
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_Parameter() =>
+        public void Verify_Parameter_CS() =>
             Verify("Parameter.cs", 4, 4, 6, 7);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_Property() =>
+        public void Verify_Property_CS() =>
             Verify("Property.cs", 4, 3, 7, 8);
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_TypeParameter() =>
+        public void Verify_Setter_CS() =>
+            Verify("Setter.cs", 4, 6, 8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void Verify_TypeParameter_CS() =>
             Verify("TypeParameter.cs", 5, 2, 4, 6);
 
         public void Verify(string fileName, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
@@ -99,9 +118,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify(string fileName, Action<IEnumerable<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
         {
             var testRoot = Root + TestContext.TestName;
+            UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")
+                ? new TestSymbolReferenceAnalyzer_CS(testRoot)
+                : new TestSymbolReferenceAnalyzer_VB(testRoot);
             Verifier.VerifyUtilityAnalyzer<SymbolReferenceInfo>(
                 new[] { Root + fileName },
-                new TestSymbolReferenceAnalyzer(testRoot),
+                analyzer,
                 @$"{testRoot}\symrefs.pb",
                 messages =>
                 {
@@ -113,9 +135,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
-        private class TestSymbolReferenceAnalyzer : SymbolReferenceAnalyzer
+        private class TestSymbolReferenceAnalyzer_CS : CS.SymbolReferenceAnalyzer
         {
-            public TestSymbolReferenceAnalyzer(string outPath)
+            public TestSymbolReferenceAnalyzer_CS(string outPath)
+            {
+                IsAnalyzerEnabled = true;
+                OutPath = outPath;
+            }
+        }
+
+        private class TestSymbolReferenceAnalyzer_VB : VB.SymbolReferenceAnalyzer
+        {
+            public TestSymbolReferenceAnalyzer_VB(string outPath)
             {
                 IsAnalyzerEnabled = true;
                 OutPath = outPath;

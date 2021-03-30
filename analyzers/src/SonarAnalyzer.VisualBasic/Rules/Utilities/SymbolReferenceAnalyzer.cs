@@ -27,7 +27,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase
+    public class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
