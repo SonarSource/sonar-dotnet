@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Where(x => x.TokenValue == "$num").Should().HaveCount(2);
             });
 
-        public void Verify(string fileName, Action<IEnumerable<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
+        public void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
             Verifier.VerifyUtilityAnalyzer<CopyPasteTokenInfo>(

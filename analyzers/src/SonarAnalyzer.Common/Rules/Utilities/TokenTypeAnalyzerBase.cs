@@ -142,27 +142,27 @@ namespace SonarAnalyzer.Rules
                 }
                 else if (IsIdentifier(token))
                 {
-                    ClassifyIdentifier(token, semanticModel);
+                    ClassifyIdentifier();
                 }
             }
 
-            private void ClassifyIdentifier(SyntaxToken token, SemanticModel semanticModel)
+            private void ClassifyIdentifier()
             {
                 if (semanticModel.GetDeclaredSymbol(token.Parent) is { }  declaration)
                 {
-                    ClassifyIdentifier(token, declaration);
+                    ClassifyIdentifier(declaration);
                 }
                 else if (GetBindableParent(token) is { }  parent && semanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
                 {
-                    ClassifyIdentifier(token, symbol);
+                    ClassifyIdentifier(symbol);
                 }
             }
 
-            private void ClassifyIdentifier(SyntaxToken token, ISymbol symbol)
+            private void ClassifyIdentifier(ISymbol symbol)
             {
                 if (symbol.Kind == SymbolKind.Alias)
                 {
-                    ClassifyIdentifier(token, ((IAliasSymbol)symbol).Target);
+                    ClassifyIdentifier(((IAliasSymbol)symbol).Target);
                 }
                 else if (symbol is IMethodSymbol ctorSymbol && ConstructorKinds.Contains(ctorSymbol.MethodKind))
                 {

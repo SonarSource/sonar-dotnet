@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.Keyword);
             });
 
-        public void Verify(string fileName, Action<IEnumerable<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
+        public void Verify(string fileName, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
             Verifier.VerifyUtilityAnalyzer<TokenTypeInfo>(

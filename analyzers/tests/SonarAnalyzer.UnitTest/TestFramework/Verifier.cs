@@ -167,7 +167,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths,
                                                            UtilityAnalyzerBase diagnosticAnalyzer,
                                                            string protobufPath,
-                                                           Action<IList<TMessage>> verifyProtobuf,
+                                                           Action<IReadOnlyList<TMessage>> verifyProtobuf,
                                                            IEnumerable<ParseOptions> options = null)
             where TMessage : IMessage<TMessage>, new()
         {

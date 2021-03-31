@@ -75,8 +75,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_Local_CS() =>
-            Verify("Local.cs", 4, 7, 5);
+        public void Verify_LocalFunction_CS() =>
+            Verify("LocalFunction.cs", 4, 7, 5);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -118,11 +118,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verify(fileName, references =>
                 {
                     references.Where(x => x.Declaration != null).Should().HaveCount(expectedDeclarationCount);
-                    var declarationWithReferences = references.Single(x => x.Declaration.StartLine == assertedDeclarationLine).Reference;
-                    declarationWithReferences.Select(x => x.StartLine).Should().BeEquivalentTo(assertedDeclarationLineReferences);
+                    var declarationReferences = references.Single(x => x.Declaration.StartLine == assertedDeclarationLine).Reference;
+                    declarationReferences.Select(x => x.StartLine).Should().BeEquivalentTo(assertedDeclarationLineReferences);
                 });
 
-        public void Verify(string fileName, Action<IEnumerable<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
+        public void Verify(string fileName, Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
         {
             var testRoot = Root + TestContext.TestName;
             UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")

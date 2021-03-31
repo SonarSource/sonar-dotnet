@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules
             var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = syntaxTree.FilePath };
             foreach (var allReference in allReferences.GroupBy(r => r.Symbol))
             {
-                if (GetSymbolReference(allReference, syntaxTree) is { } reference)
+                if (GetSymbolReference(allReference.ToArray(), syntaxTree) is { } reference)
                 {
                     symbolReferenceInfo.Reference.Add(reference);
                 }
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules
             && parameterSymbol.IsImplicitlyDeclared
             && parameterSymbol.Name == "value";
 
-        private SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(IEnumerable<SymRefInfo> allReference, SyntaxTree tree)
+        private SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(SymRefInfo[] allReference, SyntaxTree tree)
         {
             TextSpan declarationSpan;
             if (allReference.FirstOrDefault(r => r.IsDeclaration) is { } declaration)
