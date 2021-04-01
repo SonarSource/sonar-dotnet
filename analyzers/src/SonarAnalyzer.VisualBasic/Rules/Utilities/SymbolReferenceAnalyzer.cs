@@ -27,19 +27,12 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase
+    public class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override bool IsIdentifier(SyntaxToken token) => token.IsKind(SyntaxKind.IdentifierToken);
-
         // Based on Roslyn: http://source.roslyn.codeplex.com/#Microsoft.CodeAnalysis.CSharp.Workspaces/LanguageServices/CSharpSyntaxFactsService.cs,1453
         internal override SyntaxNode GetBindableParent(SyntaxToken token)
-        {
-            return GetBindableParentNode(token);
-        }
-
-        private static SyntaxNode GetBindableParentNode(SyntaxToken token)
         {
             var node = token.Parent;
             while (node != null)
@@ -89,5 +82,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             return node;
         }
+
+        protected override bool IsIdentifier(SyntaxToken token) => token.IsKind(SyntaxKind.IdentifierToken);
     }
 }

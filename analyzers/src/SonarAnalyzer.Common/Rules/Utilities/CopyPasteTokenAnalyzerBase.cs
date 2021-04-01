@@ -28,48 +28,33 @@ namespace SonarAnalyzer.Rules
     public abstract class CopyPasteTokenAnalyzerBase : UtilityAnalyzerBase<CopyPasteTokenInfo>
     {
         protected const string DiagnosticId = "S9999-cpd";
-        protected const string Title = "Copy-paste token calculator";
+        private const string Title = "Copy-paste token calculator";
+        private const string CopyPasteTokenFileName = "token-cpd.pb";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        internal const string CopyPasteTokenFileName = "token-cpd.pb";
+        protected abstract string GetCpdValue(SyntaxToken token);
+        protected abstract bool IsUsingDirective(SyntaxNode node);
 
         protected sealed override string FileName => CopyPasteTokenFileName;
 
         protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
-            return CalculateTokenInfo(syntaxTree);
-        }
-
-        internal CopyPasteTokenInfo CalculateTokenInfo(SyntaxTree syntaxTree)
-        {
-            var cpdTokenInfo = new CopyPasteTokenInfo
-            {
-                FilePath = syntaxTree.FilePath
-            };
-
-            var tokens = syntaxTree.GetRoot().DescendantTokens(n => !IsUsingDirective(n), false);
-
-            foreach (var token in tokens)
+            var cpdTokenInfo = new CopyPasteTokenInfo { FilePath = syntaxTree.FilePath };
+            foreach (var token in syntaxTree.GetRoot().DescendantTokens(n => !IsUsingDirective(n)))
             {
                 var tokenInfo = new CopyPasteTokenInfo.Types.TokenInfo
                 {
                     TokenValue = GetCpdValue(token),
                     TextRange = GetTextRange(Location.Create(syntaxTree, token.Span).GetLineSpan())
                 };
-
                 if (!string.IsNullOrWhiteSpace(tokenInfo.TokenValue))
                 {
                     cpdTokenInfo.TokenInfo.Add(tokenInfo);
                 }
             }
-
             return cpdTokenInfo;
         }
-
-        protected abstract string GetCpdValue(SyntaxToken token);
-
-        protected abstract bool IsUsingDirective(SyntaxNode node);
     }
 }

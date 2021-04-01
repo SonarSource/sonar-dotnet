@@ -28,25 +28,22 @@ namespace SonarAnalyzer.Rules
     public abstract class FileMetadataAnalyzerBase : UtilityAnalyzerBase<FileMetadataInfo>
     {
         protected const string DiagnosticId = "S9999-metadata";
-        protected const string Title = "File metadata generator";
-
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
+        private const string Title = "File metadata generator";
         private const string MetadataFileName = "file-metadata.pb";
+
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected sealed override string FileName => MetadataFileName;
 
         protected override bool AnalyzeGeneratedCode => true;
 
-        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
-        {
-            return new FileMetadataInfo
+        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
+            new FileMetadataInfo
             {
                 FilePath = syntaxTree.FilePath,
                 IsGenerated = GeneratedCodeRecognizer.IsGenerated(syntaxTree),
-                Encoding = syntaxTree.Encoding?.WebName?.ToLowerInvariant() ?? string.Empty
+                Encoding = syntaxTree.Encoding?.WebName.ToLowerInvariant() ?? string.Empty
             };
-        }
     }
 }

@@ -31,21 +31,17 @@ namespace SonarAnalyzer.Rules
     public abstract class TokenTypeAnalyzerBase : UtilityAnalyzerBase<TokenTypeInfo>
     {
         protected const string DiagnosticId = "S9999-token-type";
-        protected const string Title = "Token type calculator";
+        private const string Title = "Token type calculator";
+        private const string TokenTypeFileName = "token-type.pb";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        internal const string TokenTypeFileName = "token-type.pb";
+        protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel);
 
         protected sealed override string FileName => TokenTypeFileName;
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
-        {
-            return GetTokenTypeInfo(syntaxTree, semanticModel);
-        }
-
-        internal /* only for msbuild12 support */ TokenTypeInfo GetTokenTypeInfo(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var tokens = syntaxTree.GetRoot().DescendantTokens();
             var spans = new List<TokenTypeInfo.Types.TokenInfo>();
@@ -62,13 +58,32 @@ namespace SonarAnalyzer.Rules
             return tokenTypeInfo;
         }
 
-        protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel);
-
         protected abstract class TokenClassifierBase
         {
             private readonly SyntaxToken token;
             private readonly SemanticModel semanticModel;
             private readonly List<TokenTypeInfo.Types.TokenInfo> spans = new List<TokenTypeInfo.Types.TokenInfo>();
+            private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
+            {
+                MethodKind.Constructor,
+                MethodKind.StaticConstructor,
+                MethodKind.SharedConstructor
+            };
+            private static readonly ISet<SymbolKind> VarSymbolKinds = new HashSet<SymbolKind>
+            {
+                SymbolKind.NamedType,
+                SymbolKind.TypeParameter,
+                SymbolKind.ArrayType,
+                SymbolKind.PointerType
+            };
+
+            protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
+            protected abstract bool IsDocComment(SyntaxTrivia trivia);
+            protected abstract bool IsRegularComment(SyntaxTrivia trivia);
+            protected abstract bool IsKeyword(SyntaxToken token);
+            protected abstract bool IsIdentifier(SyntaxToken token);
+            protected abstract bool IsNumericLiteral(SyntaxToken token);
+            protected abstract bool IsStringLiteral(SyntaxToken token);
 
             protected TokenClassifierBase(SyntaxToken token, SemanticModel semanticModel)
             {
@@ -80,182 +95,112 @@ namespace SonarAnalyzer.Rules
             {
                 get
                 {
-                    this.spans.Clear();
+                    spans.Clear();
                     ClassifyToken();
 
-                    foreach (var trivia in this.token.LeadingTrivia)
+                    foreach (var trivia in token.LeadingTrivia)
                     {
                         ClassifyTrivia(trivia);
                     }
 
-                    foreach (var trivia in this.token.TrailingTrivia)
+                    foreach (var trivia in token.TrailingTrivia)
                     {
                         ClassifyTrivia(trivia);
                     }
 
-                    return this.spans;
+                    return spans;
                 }
+            }
+
+            private void CollectClassified(TokenType tokenType, TextSpan span)
+            {
+                if (string.IsNullOrWhiteSpace(token.SyntaxTree.GetText().GetSubText(span).ToString()))
+                {
+                    return;
+                }
+
+                spans.Add(new TokenTypeInfo.Types.TokenInfo
+                {
+                    TokenType = tokenType,
+                    TextRange = GetTextRange(Location.Create(token.SyntaxTree, span).GetLineSpan())
+                });
             }
 
             private void ClassifyToken()
             {
-                if (IsKeyword(this.token))
-                {
-                    CollectClassified(TokenType.Keyword, this.token.Span);
-                    return;
-                }
-
-                if (IsStringLiteral(this.token))
-                {
-                    CollectClassified(TokenType.StringLiteral, this.token.Span);
-                    return;
-                }
-
-                if (IsNumericLiteral(this.token))
-                {
-                    CollectClassified(TokenType.NumericLiteral, this.token.Span);
-                    return;
-                }
-
-                if (IsIdentifier(this.token))
-                {
-                    ClassifyIdentifier(this.token, this.semanticModel);
-                }
-            }
-
-            private void ClassifyIdentifier(SyntaxToken token, SemanticModel semanticModel)
-            {
-                var declaration = semanticModel.GetDeclaredSymbol(token.Parent);
-                if (declaration != null)
-                {
-                    ClassifyIdentifier(token, declaration);
-                    return;
-                }
-
-                var parent = GetBindableParent(token);
-                if (parent != null)
-                {
-                    var symbol = semanticModel.GetSymbolInfo(parent).Symbol;
-                    if (symbol != null)
-                    {
-                        ClassifyIdentifier(token, symbol);
-                        return;
-                    }
-                }
-
-                if (IsContextualKeyword(token))
+                if (IsKeyword(token))
                 {
                     CollectClassified(TokenType.Keyword, token.Span);
                 }
+                else if (IsStringLiteral(token))
+                {
+                    CollectClassified(TokenType.StringLiteral, token.Span);
+                }
+                else if (IsNumericLiteral(token))
+                {
+                    CollectClassified(TokenType.NumericLiteral, token.Span);
+                }
+                else if (IsIdentifier(token))
+                {
+                    ClassifyIdentifier();
+                }
             }
 
-            protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
-
-            private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
+            private void ClassifyIdentifier()
             {
-                MethodKind.Constructor,
-                MethodKind.StaticConstructor,
-                MethodKind.SharedConstructor
-            };
+                if (semanticModel.GetDeclaredSymbol(token.Parent) is { }  declaration)
+                {
+                    ClassifyIdentifier(declaration);
+                }
+                else if (GetBindableParent(token) is { }  parent && semanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
+                {
+                    ClassifyIdentifier(symbol);
+                }
+            }
 
-            private void ClassifyIdentifier(SyntaxToken token, ISymbol symbol)
+            private void ClassifyIdentifier(ISymbol symbol)
             {
                 if (symbol.Kind == SymbolKind.Alias)
                 {
-                    ClassifyIdentifier(token, ((IAliasSymbol)symbol).Target);
-                    return;
+                    ClassifyIdentifier(((IAliasSymbol)symbol).Target);
                 }
-
-                if (symbol is IMethodSymbol ctorSymbol && ConstructorKinds.Contains(ctorSymbol.MethodKind))
+                else if (symbol is IMethodSymbol ctorSymbol && ConstructorKinds.Contains(ctorSymbol.MethodKind))
                 {
                     CollectClassified(TokenType.TypeName, token.Span);
-                    return;
                 }
-
-                if (token.ToString() == "var" &&
-                    VarSymbolKinds.Contains(symbol.Kind))
+                else if (token.ToString() == "var" && VarSymbolKinds.Contains(symbol.Kind))
                 {
                     CollectClassified(TokenType.Keyword, token.Span);
-                    return;
                 }
-
-                if (token.ToString() == "value" &&
-                    symbol.Kind == SymbolKind.Parameter &&
-                    symbol.IsImplicitlyDeclared)
+                else if (token.ToString() == "value" && symbol.Kind == SymbolKind.Parameter && symbol.IsImplicitlyDeclared)
                 {
                     CollectClassified(TokenType.Keyword, token.Span);
-                    return;
                 }
-
-                if (symbol.Kind == SymbolKind.NamedType ||
-                    symbol.Kind == SymbolKind.TypeParameter)
+                else if (symbol.Kind == SymbolKind.NamedType || symbol.Kind == SymbolKind.TypeParameter)
                 {
                     CollectClassified(TokenType.TypeName, token.Span);
-                    return;
                 }
-
-                if (symbol.Kind == SymbolKind.DynamicType)
+                else if (symbol.Kind == SymbolKind.DynamicType)
                 {
                     CollectClassified(TokenType.Keyword, token.Span);
                 }
             }
-
-            private static readonly ISet<SymbolKind> VarSymbolKinds = new HashSet<SymbolKind>
-            {
-                SymbolKind.NamedType,
-                SymbolKind.TypeParameter,
-                SymbolKind.ArrayType,
-                SymbolKind.PointerType
-            };
 
             private void ClassifyTrivia(SyntaxTrivia trivia)
             {
                 if (IsRegularComment(trivia))
                 {
                     CollectClassified(TokenType.Comment, trivia.Span);
-                    return;
                 }
-
-                if (IsDocComment(trivia))
+                else if (IsDocComment(trivia))
                 {
                     ClassifyDocComment(trivia);
                 }
-
                 // Handle preprocessor directives here
             }
 
-            protected abstract bool IsDocComment(SyntaxTrivia trivia);
-
-            private void ClassifyDocComment(SyntaxTrivia trivia)
-            {
+            private void ClassifyDocComment(SyntaxTrivia trivia) =>
                 CollectClassified(TokenType.Comment, trivia.FullSpan);
-            }
-
-            protected void CollectClassified(TokenType tokenType, TextSpan span)
-            {
-                if (string.IsNullOrWhiteSpace(this.token.SyntaxTree.GetText().GetSubText(span).ToString()))
-                {
-                    return;
-                }
-
-                this.spans.Add(new TokenTypeInfo.Types.TokenInfo
-                {
-                    TokenType = tokenType,
-                    TextRange = GetTextRange(Location.Create(this.token.SyntaxTree, span).GetLineSpan())
-                });
-            }
-
-            protected abstract bool IsRegularComment(SyntaxTrivia trivia);
-
-            protected abstract bool IsKeyword(SyntaxToken token);
-
-            protected abstract bool IsContextualKeyword(SyntaxToken token);
-
-            protected abstract bool IsIdentifier(SyntaxToken token);
-
-            protected abstract bool IsNumericLiteral(SyntaxToken token);
-
-            protected abstract bool IsStringLiteral(SyntaxToken token);
         }
     }
 }

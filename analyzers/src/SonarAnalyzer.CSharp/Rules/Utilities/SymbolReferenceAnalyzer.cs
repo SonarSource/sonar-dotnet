@@ -32,29 +32,8 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override bool IsIdentifier(SyntaxToken token) => token.IsKind(SyntaxKind.IdentifierToken);
-
         // Based on Roslyn: http://source.roslyn.codeplex.com/#Microsoft.CodeAnalysis.CSharp.Workspaces/LanguageServices/CSharpSyntaxFactsService.cs,1453
         internal override SyntaxNode GetBindableParent(SyntaxToken token)
-        {
-            return GetBindableParentNode(token);
-        }
-
-        internal override SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol)
-        {
-            if (!IsValuePropertyParameter(valuePropertySymbol))
-            {
-                return null;
-            }
-
-            var accessor = (valuePropertySymbol.ContainingSymbol as IMethodSymbol)
-                ?.DeclaringSyntaxReferences.FirstOrDefault()
-                ?.GetSyntax() as AccessorDeclarationSyntax;
-
-            return accessor?.Keyword;
-        }
-
-        private static SyntaxNode GetBindableParentNode(SyntaxToken token)
         {
             var node = token.Parent;
             while (node != null)
@@ -104,5 +83,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return node;
         }
+
+        protected override bool IsIdentifier(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.IdentifierToken);
+
+        protected override SyntaxToken? GetSetKeyword(ISymbol valuePropertySymbol) =>
+            IsValuePropertyParameter(valuePropertySymbol)
+            && valuePropertySymbol.ContainingSymbol is IMethodSymbol methodSymbol
+            && methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor
+                ? accessor?.Keyword
+                : null;
     }
 }

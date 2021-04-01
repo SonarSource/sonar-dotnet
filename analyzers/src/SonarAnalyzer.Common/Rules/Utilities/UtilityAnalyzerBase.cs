@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
     {
-        internal const string ProjectOutFolderPathFileName = "ProjectOutFolderPath.txt";
+        private const string ProjectOutFolderPathFileName = "ProjectOutFolderPath.txt";
 
         protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
 
