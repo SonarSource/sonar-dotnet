@@ -32,7 +32,7 @@ import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DoNotAnalyzeTestFilesTest {
+public class TestProjectTest {
 
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
