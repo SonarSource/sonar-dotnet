@@ -47,23 +47,20 @@ public class DotNetSensor implements ProjectSensor {
 
   private static final Logger LOG = Loggers.get(DotNetSensor.class);
   private static final String GET_HELP_MESSAGE = "You can get help on the community forum: https://community.sonarsource.com";
-  private static final String READ_MORE_MESSAGE = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
 
   private final ProtobufDataImporter protobufDataImporter;
   private final RoslynDataImporter roslynDataImporter;
   private final DotNetPluginMetadata pluginMetadata;
   private final ReportPathCollector reportPathCollector;
   private final ProjectTypeCollector projectTypeCollector;
-  private final AnalysisWarnings analysisWarnings;
 
   public DotNetSensor(DotNetPluginMetadata pluginMetadata, ReportPathCollector reportPathCollector, ProjectTypeCollector projectTypeCollector,
-                      ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter, AnalysisWarnings analysisWarnings) {
+                      ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
     this.pluginMetadata = pluginMetadata;
     this.reportPathCollector = reportPathCollector;
     this.projectTypeCollector = projectTypeCollector;
     this.protobufDataImporter = protobufDataImporter;
     this.roslynDataImporter = roslynDataImporter;
-    this.analysisWarnings = analysisWarnings;
   }
 
   @Override
@@ -81,7 +78,7 @@ public class DotNetSensor implements ProjectSensor {
     if ((hasMainFiles || hasTestFiles) && hasProjects) {
       importResults(context);
     } else {
-      log(fs, hasMainFiles,hasTestFiles, hasProjects);
+      log(hasMainFiles,hasTestFiles, hasProjects);
     }
     projectTypeCollector.getSummary(pluginMetadata.shortLanguageName()).ifPresent(LOG::info);
   }
@@ -115,9 +112,9 @@ public class DotNetSensor implements ProjectSensor {
    *
    * @param hasMainFiles True if MAIN files of this sensor language have been indexed.
    * @param hasTestFiles True if TEST files of this sensor language have been indexed.
-   * @param hasProjects  True if at least one .NET project has been found in {@link org.sonarsource.dotnet.shared.plugins.FileTypeSensor#execute(SensorContext)}. Can be true only if `hasMainFiles` is false.
+   * @param hasProjects  True if at least one .NET project has been found in {@link org.sonarsource.dotnet.shared.plugins.FileTypeSensor#execute(SensorContext)}.
    */
-  private void log(FileSystem fs, boolean hasMainFiles, boolean hasTestFiles, boolean hasProjects) {
+  private void log(boolean hasMainFiles, boolean hasTestFiles, boolean hasProjects) {
     if (hasProjects) {
       // the scanner for .NET has been used, which means that `hasMainFiles` and `hasTestFiles` are false.
       assert !hasMainFiles;

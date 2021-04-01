@@ -73,7 +73,6 @@ public class DotNetSensorTest {
   private ProtobufDataImporter protobufDataImporter = mock(ProtobufDataImporter.class);
   private ReportPathCollector reportPathCollector = mock(ReportPathCollector.class);
   private ProjectTypeCollector projectTypeCollector = mock(ProjectTypeCollector.class);
-  private AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
 
   private SensorContextTester tester;
   private DotNetSensor sensor;
@@ -92,7 +91,7 @@ public class DotNetSensorTest {
     when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
     when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
     when(pluginMetadata.shortLanguageName()).thenReturn(SHORT_LANG_NAME);
-    sensor = new DotNetSensor(pluginMetadata, reportPathCollector, projectTypeCollector, protobufDataImporter, roslynDataImporter, analysisWarnings);
+    sensor = new DotNetSensor(pluginMetadata, reportPathCollector, projectTypeCollector, protobufDataImporter, roslynDataImporter);
   }
 
   @Test
@@ -124,7 +123,6 @@ public class DotNetSensorTest {
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("No protobuf reports found. The " + SHORT_LANG_NAME + " files will not have highlighting and metrics. You can get help on the community forum: https://community.sonarsource.com");
-    verify(analysisWarnings, never()).addUnique(any());
     verify(reportPathCollector).protobufDirs();
     verifyZeroInteractions(protobufDataImporter);
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
@@ -144,7 +142,6 @@ public class DotNetSensorTest {
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     verifyZeroInteractions(roslynDataImporter);
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("No Roslyn issue reports were found. The " + SHORT_LANG_NAME + " files have not been analyzed. You can get help on the community forum: https://community.sonarsource.com");
-    verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
@@ -159,7 +156,6 @@ public class DotNetSensorTest {
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
@@ -186,7 +182,6 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
-    verify(analysisWarnings, never()).addUnique(any());
   }
 
   @Test
@@ -195,7 +190,6 @@ public class DotNetSensorTest {
 
     sensor.execute(tester);
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactlyInAnyOrder("No files to analyze. Skip Sensor.");
   }
 
@@ -205,7 +199,6 @@ public class DotNetSensorTest {
 
     sensor.execute(tester);
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactlyInAnyOrder("No files to analyze. Skip Sensor.");
   }
 
@@ -219,7 +212,6 @@ public class DotNetSensorTest {
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
@@ -235,7 +227,6 @@ public class DotNetSensorTest {
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
@@ -245,7 +236,6 @@ public class DotNetSensorTest {
     sensor.execute(tester);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("No files to analyze. Skip Sensor.");
   }
 
@@ -258,7 +248,6 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
       " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
-    verify(analysisWarnings, never()).addUnique(any());
   }
 
   @Test
@@ -270,7 +259,6 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
       " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
-    verify(analysisWarnings, never()).addUnique(any());
   }
 
   @Test
@@ -283,7 +271,6 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
       " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
-    verify(analysisWarnings, never()).addUnique(any());
   }
 
   @Test
@@ -293,7 +280,6 @@ public class DotNetSensorTest {
     sensor.execute(tester);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("No files to analyze. Skip Sensor.");
   }
 
