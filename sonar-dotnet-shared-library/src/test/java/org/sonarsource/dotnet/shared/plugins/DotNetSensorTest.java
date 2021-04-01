@@ -210,30 +210,33 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void whenThereAreOnlyTestFilesInPluginLanguage_andNoMainFilesInAnyLanguage_logConsoleAndAnalysisWarnings() {
+  public void whenThereAreOnlyTestFilesInPluginLanguage_andNoMainFilesInAnyLanguage_resultsAreImportedWithoutWarnings() {
     addTestFileToFileSystem();
+    addRoslynReports();
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.WARN))
-      .containsExactly("This " + SHORT_LANG_NAME + " sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
-        "Your SonarQube/SonarCloud project will not have results for " + SHORT_LANG_NAME + " files. " + READ_MORE_LOG);
-    verify(analysisWarnings).addUnique("Your project contains only TEST code for language " + SHORT_LANG_NAME +
-      " and no MAIN code for any language, so no results have been imported. " + READ_MORE_LOG);
+    verify(reportPathCollector).protobufDirs();
+    verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    verify(analysisWarnings, never()).addUnique(any());
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
 
   @Test
-  public void whenThereAreOnlyTestFilesInPluginLanguage_andMainFilesInAnotherLanguage_logWarningOnlyConsole() {
+  public void whenThereAreOnlyTestFilesInPluginLanguage_andMainFilesInAnotherLanguage_resultsAreImportedWithoutWarnings() {
     addTestFileToFileSystem();
     addFileToFileSystem("qix", Type.MAIN, A_DIFFERENT_LANG_KEY);
+    addRoslynReports();
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.WARN))
-      .containsExactly("This " + SHORT_LANG_NAME + " sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
-        "Your SonarQube/SonarCloud project will not have results for " + SHORT_LANG_NAME + " files. " + READ_MORE_LOG);
+    verify(reportPathCollector).protobufDirs();
+    verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     verify(analysisWarnings, never()).addUnique(any());
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
 

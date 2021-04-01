@@ -30,6 +30,7 @@ import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
+import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VbMainCodeCsTestCodeTest {
@@ -64,10 +65,6 @@ public class VbMainCodeCsTestCodeTest {
 
   @Test
   public void logsContainInfo() {
-    assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
-      .contains("WARN: This C# sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
-        "Your SonarQube/SonarCloud project will not have results for C# files. " +
-        "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains(
       "INFO: Found 1 MSBuild VB.NET project: 1 MAIN project.",
       "INFO: Found 1 MSBuild C# project: 1 TEST project."
@@ -75,4 +72,14 @@ public class VbMainCodeCsTestCodeTest {
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, buildResult);
   }
 
+  @Test
+  public void metrics_are_imported_only_for_maint_proj()throws Exception {
+    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "files")).isNotNull();
+    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "lines")).isNotNull();
+    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "ncloc")).isNotNull();
+
+    assertThat(getMeasureAsInt("VbMainCsTest:CsTest", "files")).isNull();
+    assertThat(getMeasureAsInt("VbMainCsTest:CsTest", "lines")).isNull();
+    assertThat(getMeasureAsInt("VbMainCsTest:CsTest", "ncloc")).isNull();
+  }
 }

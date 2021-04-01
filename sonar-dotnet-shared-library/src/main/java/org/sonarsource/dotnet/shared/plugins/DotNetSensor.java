@@ -76,11 +76,12 @@ public class DotNetSensor implements ProjectSensor {
   public void execute(SensorContext context) {
     FileSystem fs = context.fileSystem();
     boolean hasMainFiles = SensorContextUtils.hasFilesOfType(fs, Type.MAIN, pluginMetadata.languageKey());
+    boolean hasTestFiles = SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey());
     boolean hasProjects = projectTypeCollector.hasProjects();
-    if (hasMainFiles && hasProjects) {
+    if ((hasMainFiles || hasTestFiles) && hasProjects) {
       importResults(context);
     } else {
-      log(fs, hasMainFiles, hasProjects);
+      log(fs, hasMainFiles,hasTestFiles, hasProjects);
     }
     projectTypeCollector.getSummary(pluginMetadata.shortLanguageName()).ifPresent(LOG::info);
   }
@@ -109,42 +110,26 @@ public class DotNetSensor implements ProjectSensor {
   }
 
   /**
-   * If the project does not contain MAIN files OR does not have any found .NET projects (implicitly it has not been scanned with the Scanner for .NET)
+   * If the project does not contain MAIN or TEST files OR does not have any found .NET projects (implicitly it has not been scanned with the Scanner for .NET)
    * we should log a warning to the user, because no files will be analyzed.
    *
-   * @param hasMainFiles True if MAIN files of this sensor language have been indexed. Can be true only if `hasProjects` is false.
+   * @param hasMainFiles True if MAIN files of this sensor language have been indexed.
+   * @param hasTestFiles True if TEST files of this sensor language have been indexed.
    * @param hasProjects  True if at least one .NET project has been found in {@link org.sonarsource.dotnet.shared.plugins.FileTypeSensor#execute(SensorContext)}. Can be true only if `hasMainFiles` is false.
    */
-  private void log(FileSystem fs, boolean hasMainFiles, boolean hasProjects) {
-    boolean hasTestFiles = SensorContextUtils.hasFilesOfType(fs, Type.TEST, pluginMetadata.languageKey());
+  private void log(FileSystem fs, boolean hasMainFiles, boolean hasTestFiles, boolean hasProjects) {
     if (hasProjects) {
-      // the scanner for .NET has been used, which means that `hasMainFiles` is false.
+      // the scanner for .NET has been used, which means that `hasMainFiles` and `hasTestFiles` are false.
       assert !hasMainFiles;
-      if (hasTestFiles) {
-        warnThatProjectContainsOnlyTestCode(fs, analysisWarnings, pluginMetadata.shortLanguageName());
-      }
+      assert !hasTestFiles;
     } else if (hasMainFiles || hasTestFiles) {
-      // the scanner for .NET has _not_ been used. hasMainFiles can be either true or false.
+      // the scanner for .NET has _not_ been used.
       LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
           + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
         pluginMetadata.shortLanguageName());
     }
     if (!hasMainFiles && !hasTestFiles) {
       logDebugNoFiles();
-    }
-  }
-
-  private static void warnThatProjectContainsOnlyTestCode(FileSystem fs, AnalysisWarnings analysisWarnings, String languageName) {
-    LOG.warn("This {} sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
-        "Your SonarQube/SonarCloud project will not have results for {} files. {}",
-      languageName, languageName, READ_MORE_MESSAGE);
-
-    // Before outputting a warning in the User Interface, we want to make sure it's worth the user attention.
-    // There can be cases where a project written in language X has tests written in languages X, Y and Z.
-    // In this case, the fact that there is only test code for languages Y and Z should not trigger a UI warning.
-    if (!SensorContextUtils.hasAnyMainFiles(fs)) {
-      analysisWarnings.addUnique(String.format("Your project contains only TEST code for language %s and no MAIN code for any language, so no results have been imported. %s",
-        languageName, READ_MORE_MESSAGE));
     }
   }
 

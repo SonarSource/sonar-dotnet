@@ -28,36 +28,50 @@ import org.junit.rules.TemporaryFolder;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
+import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestProjectTest {
   @ClassRule
   public static final TemporaryFolder temp = TestUtils.createTempFolder();
+  private static final String CSHARP_ONLY_TEST_PROJECT = "TestOnlyProject";
+  // the below is explicitly marked as test with <SonarQubeTestProject> MSBuild property
+  private static final String EXPLICITLY_MARKED_AS_TEST = "HtmlCSharpExplicitlyMarkedAsTest";
 
-  private static final String PROJECT = "TestOnlyProject";
   private static BuildResult buildResult;
 
   @BeforeClass
   public static void init() throws Exception {
     TestUtils.reset(ORCHESTRATOR);
-    buildResult = Tests.analyzeProject(temp, PROJECT, null);
+    buildResult = Tests.analyzeProject(temp, CSHARP_ONLY_TEST_PROJECT, null);
   }
 
   @Test
   public void projectIsAnalyzed() {
-    assertThat(getComponent(PROJECT).getName()).isEqualTo("TestOnlyProject");
+    assertThat(getComponent(CSHARP_ONLY_TEST_PROJECT).getName()).isEqualTo("TestOnlyProject");
 
     assertThat(getComponent("TestOnlyProject:UnitTest1.cs").getName()).isEqualTo("UnitTest1.cs");
   }
 
   @Test
-  public void logsContainInfoAndWarning() {
-    assertThat(buildResult.getLogs()).contains(
-      "This C# sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
-        "Your SonarQube/SonarCloud project will not have results for C# files. " +
-        "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
-      "Found 1 MSBuild C# project: 1 TEST project."
-    );
-    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
+  public void with_csharp_only_test_should_not_populate_metrics() throws Exception {
+    BuildResult buildResult = Tests.analyzeProject(temp, CSHARP_ONLY_TEST_PROJECT, null);
+
+    assertThat(Tests.getComponent("TestOnlyProject:UnitTest1.cs")).isNotNull();
+    assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "files")).isNull();
+    assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "lines")).isNull();
+    assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "ncloc")).isNull();
+
+    assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
+  }
+
+  @Test
+  public void with_html_and_csharp_code_explicitly_marked_as_test_should_not_populate_metrics() throws Exception {
+    BuildResult buildResult = Tests.analyzeProject(temp, EXPLICITLY_MARKED_AS_TEST, "no_rule");
+
+    assertThat(Tests.getComponent("HtmlCSharpExplicitlyMarkedAsTest:Foo.cs")).isNotNull();
+    assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "files")).isNull();
+    assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "lines")).isNull();
+    assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "ncloc")).isNull();
   }
 }
