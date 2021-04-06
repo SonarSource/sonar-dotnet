@@ -80,7 +80,7 @@ public class DotNetSensor implements ProjectSensor {
     if (hasFilesOfLanguage && hasProjects) {
       importResults(fs, context);
     } else {
-      log(fs, hasFilesOfLanguage, hasProjects);
+      log(hasFilesOfLanguage, hasProjects);
     }
     projectTypeCollector.getSummary(pluginMetadata.shortLanguageName()).ifPresent(LOG::info);
   }
@@ -121,7 +121,7 @@ public class DotNetSensor implements ProjectSensor {
    * @param hasFilesOfLanguage True if ANY files of this sensor language have been indexed.
    * @param hasProjects  True if at least one .NET project has been found in {@link org.sonarsource.dotnet.shared.plugins.FileTypeSensor#execute(SensorContext)}.
    */
-  private void log(FileSystem fs, boolean hasFilesOfLanguage, boolean hasProjects) {
+  private void log(boolean hasFilesOfLanguage, boolean hasProjects) {
     if (hasProjects) {
       // the scanner for .NET has been used, which means that `hasFilesOfLanguage` is false.
       assert !hasFilesOfLanguage;
@@ -145,7 +145,8 @@ public class DotNetSensor implements ProjectSensor {
     // There can be cases where a project written in language X has tests written in languages X, Y and Z.
     // In this case, the fact that there is only test code for languages Y and Z should not trigger a UI warning.
     if (!SensorContextUtils.hasAnyMainFiles(fs)) {
-      analysisWarnings.addUnique(String.format("Your project contains only TEST code for language %s and no MAIN code for any language, so only TEST-code related results are imported. %s",
+      analysisWarnings.addUnique(
+        String.format("Your project contains only TEST code for language %s and no MAIN code for any language, so only TEST-code related results are imported. %s",
         languageName, READ_MORE_MESSAGE));
     }
   }
