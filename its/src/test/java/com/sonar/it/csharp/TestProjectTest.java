@@ -54,6 +54,17 @@ public class TestProjectTest {
   }
 
   @Test
+  public void logsContainInfoAndWarning() {
+    assertThat(buildResult.getLogs()).contains(
+      "The scanner detected only TEST files and no MAIN files in the current solution. " +
+        "Your SonarQube/SonarCloud project will be missing many C# MAIN-code related issues. " +
+        "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
+      "Found 1 MSBuild C# project: 1 TEST project."
+    );
+    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
+  }
+
+  @Test
   public void with_csharp_only_test_should_not_populate_metrics() throws Exception {
     BuildResult buildResult = Tests.analyzeProject(temp, CSHARP_ONLY_TEST_PROJECT, null);
 
@@ -73,5 +84,12 @@ public class TestProjectTest {
     assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "files")).isNull();
     assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "lines")).isNull();
     assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "ncloc")).isNull();
+
+    assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
+      .contains("WARN: The scanner detected only TEST files and no MAIN files in the current solution. " +
+        "Your SonarQube/SonarCloud project will be missing many C# MAIN-code related issues. " +
+        "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+    assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
+    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
   }
 }

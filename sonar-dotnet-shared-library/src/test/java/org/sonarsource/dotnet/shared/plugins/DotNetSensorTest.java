@@ -73,6 +73,7 @@ public class DotNetSensorTest {
   private ProtobufDataImporter protobufDataImporter = mock(ProtobufDataImporter.class);
   private ReportPathCollector reportPathCollector = mock(ReportPathCollector.class);
   private ProjectTypeCollector projectTypeCollector = mock(ProjectTypeCollector.class);
+  private AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
 
   private SensorContextTester tester;
   private DotNetSensor sensor;
@@ -91,7 +92,7 @@ public class DotNetSensorTest {
     when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
     when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
     when(pluginMetadata.shortLanguageName()).thenReturn(SHORT_LANG_NAME);
-    sensor = new DotNetSensor(pluginMetadata, reportPathCollector, projectTypeCollector, protobufDataImporter, roslynDataImporter);
+    sensor = new DotNetSensor(pluginMetadata, reportPathCollector, projectTypeCollector, protobufDataImporter, roslynDataImporter, analysisWarnings);
   }
 
   @Test
@@ -203,30 +204,36 @@ public class DotNetSensorTest {
   }
 
   @Test
-  public void whenThereAreOnlyTestFilesInPluginLanguage_andNoMainFilesInAnyLanguage_resultsAreImportedWithoutWarnings() {
+  public void whenThereAreOnlyTestFilesInPluginLanguage_andNoMainFilesInAnyLanguage_resultsAreImportedAndLogsConsoleAndAnalysisWarnings() {
     addTestFileToFileSystem();
     addRoslynReports();
 
     sensor.execute(tester);
 
+    assertThat(logTester.logs(LoggerLevel.WARN))
+      .containsExactly("The scanner detected only TEST files and no MAIN files in the current solution. " +
+        "Your SonarQube/SonarCloud project will be missing many " + SHORT_LANG_NAME + " MAIN-code related issues. " + READ_MORE_LOG);
+    verify(analysisWarnings).addUnique("Your project contains only TEST code for language " + SHORT_LANG_NAME +
+      " and no MAIN code for any language, so only TEST-code related results are imported. " + READ_MORE_LOG);
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }
 
   @Test
-  public void whenThereAreOnlyTestFilesInPluginLanguage_andMainFilesInAnotherLanguage_resultsAreImportedWithoutWarnings() {
+  public void whenThereAreOnlyTestFilesInPluginLanguage_andMainFilesInAnotherLanguage_resultsAreImportedWithWarningsOnlyInConsole() {
     addTestFileToFileSystem();
     addFileToFileSystem("qix", Type.MAIN, A_DIFFERENT_LANG_KEY);
     addRoslynReports();
 
     sensor.execute(tester);
 
+    assertThat(logTester.logs(LoggerLevel.WARN))
+      .containsExactly("The scanner detected only TEST files and no MAIN files in the current solution. " +
+        "Your SonarQube/SonarCloud project will be missing many " + SHORT_LANG_NAME + " MAIN-code related issues. " + READ_MORE_LOG);
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
   }

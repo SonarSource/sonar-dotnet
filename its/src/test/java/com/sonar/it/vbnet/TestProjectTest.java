@@ -60,6 +60,12 @@ public class TestProjectTest {
     assertThat(getMeasureAsInt("VbTestOnlyProjectTest", "lines")).isNull();
     assertThat(getMeasureAsInt("VbTestOnlyProjectTest", "ncloc")).isNull();
 
+    assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
+      .contains("WARN: The scanner detected only TEST files and no MAIN files in the current solution. " +
+        "Your SonarQube/SonarCloud project will be missing many VB.NET MAIN-code related issues. " +
+        "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild VB.NET project: 1 TEST project.");
+    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "VB.NET");
   }
 }
