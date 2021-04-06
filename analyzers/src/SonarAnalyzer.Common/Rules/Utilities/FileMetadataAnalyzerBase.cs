@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Rules
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
+        protected sealed override bool SkipAnalysisForTestProject => false;
         protected sealed override string FileName => MetadataFileName;
 
         protected override bool AnalyzeGeneratedCode => true;

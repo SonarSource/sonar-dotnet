@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FluentAssertions;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -186,6 +187,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 {
                     yield return parser.ParseDelimitedFrom(input);
                 }
+            }
+        }
+
+        public static void VeriFyUtilityAnalyzerIsNotRun(IEnumerable<string> paths,
+                                                           UtilityAnalyzerBase diagnosticAnalyzer,
+                                                           string protobufPath,
+                                                           IEnumerable<ParseOptions> options = null)
+        {
+            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths);
+            foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
+            {
+                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default);
+                File.Exists(protobufPath).Should().BeFalse();
             }
         }
 

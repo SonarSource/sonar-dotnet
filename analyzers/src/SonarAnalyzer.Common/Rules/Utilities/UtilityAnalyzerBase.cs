@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules
         protected bool IgnoreHeaderComments { get; set; }
         protected virtual bool AnalyzeGeneratedCode { get; set; }
         protected string OutPath { get; set; }
+        protected bool IsTestProject { get; set; }
 
         internal /* for testing */ static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
             new TextRange
@@ -64,6 +65,7 @@ namespace SonarAnalyzer.Rules
                 AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, c.Compilation.Language);
                 OutPath = Path.Combine(outPath, c.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                 IsAnalyzerEnabled = true;
+                IsTestProject = context.IsTestProject(c.Compilation, c.Options);
             }
         }
 
@@ -76,6 +78,7 @@ namespace SonarAnalyzer.Rules
     {
         private static readonly object FileWriteLock = new TMessage();
 
+        protected abstract bool SkipAnalysisForTestProject { get; }
         protected abstract string FileName { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
@@ -84,7 +87,8 @@ namespace SonarAnalyzer.Rules
             context.RegisterCompilationAction(c =>
                 {
                     ReadParameters(context, c);
-                    if (!IsAnalyzerEnabled)
+                    if (!IsAnalyzerEnabled ||
+                        (SkipAnalysisForTestProject && IsTestProject))
                     {
                         return;
                     }

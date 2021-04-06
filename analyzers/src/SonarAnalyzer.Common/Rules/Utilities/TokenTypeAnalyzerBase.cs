@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel);
 
+        protected sealed override bool SkipAnalysisForTestProject => false;
         protected sealed override string FileName => TokenTypeFileName;
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)

@@ -112,7 +112,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GetSetKeyword_ReturnsNull_VB() =>
             // This path is unreachable for VB code
-            new TestSymbolReferenceAnalyzer_VB(null).TestGetSetKeyword(null).Should().BeNull();
+            new TestSymbolReferenceAnalyzer_VB(null, false).TestGetSetKeyword(null).Should().BeNull();
 
         public void Verify(string fileName, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
             Verify(fileName, references =>
@@ -125,38 +125,53 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify(string fileName, Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
         {
             var testRoot = Root + TestContext.TestName;
-            UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")
-                ? new TestSymbolReferenceAnalyzer_CS(testRoot)
-                : new TestSymbolReferenceAnalyzer_VB(testRoot);
+            UtilityAnalyzerBase mainAnalyzer = fileName.EndsWith(".cs")
+                ? new TestSymbolReferenceAnalyzer_CS(testRoot, true)
+                : new TestSymbolReferenceAnalyzer_VB(testRoot, true);
+
+            UtilityAnalyzerBase testAnalyzer = fileName.EndsWith(".cs")
+                ? new TestSymbolReferenceAnalyzer_CS(testRoot, true)
+                : new TestSymbolReferenceAnalyzer_VB(testRoot, true);
+
             Verifier.VerifyUtilityAnalyzer<SymbolReferenceInfo>(
                 new[] { Root + fileName },
-                analyzer,
+                mainAnalyzer,
                 @$"{testRoot}\symrefs.pb",
-                messages =>
-                {
-                    messages.Should().HaveCount(1);
-                    var info = messages.Single();
-                    info.FilePath.Should().Be(fileName);
-                    verifyReference(info.Reference);
-                });
+                VerifyProtoBuf);
+
+            Verifier.VerifyUtilityAnalyzer<SymbolReferenceInfo>(
+                new[] { Root + fileName },
+                testAnalyzer,
+                @$"{testRoot}\symrefs.pb",
+                VerifyProtoBuf);
+
+            void VerifyProtoBuf(IReadOnlyList<SymbolReferenceInfo> messages)
+            {
+                messages.Should().HaveCount(1);
+                var info = messages.Single();
+                info.FilePath.Should().Be(fileName);
+                verifyReference(info.Reference);
+            }
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private class TestSymbolReferenceAnalyzer_CS : CS.SymbolReferenceAnalyzer
         {
-            public TestSymbolReferenceAnalyzer_CS(string outPath)
+            public TestSymbolReferenceAnalyzer_CS(string outPath, bool isTestProject)
             {
                 IsAnalyzerEnabled = true;
                 OutPath = outPath;
+                IsTestProject = isTestProject;
             }
         }
 
         private class TestSymbolReferenceAnalyzer_VB : VB.SymbolReferenceAnalyzer
         {
-            public TestSymbolReferenceAnalyzer_VB(string outPath)
+            public TestSymbolReferenceAnalyzer_VB(string outPath, bool isTestProject)
             {
                 IsAnalyzerEnabled = true;
                 OutPath = outPath;
+                IsTestProject = isTestProject;
             }
 
             public object TestGetSetKeyword(ISymbol valuePropertySymbol) =>
