@@ -32,7 +32,7 @@ import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DoNotAnalyzeTestFilesTest {
+public class TestProjectTest {
 
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
@@ -43,10 +43,10 @@ public class DoNotAnalyzeTestFilesTest {
   }
 
   @Test
-  public void should_not_increment_test() throws Exception {
-    Path projectDir = Tests.projectDir(temp, "VbDoNotAnalyzeTestFilesTest");
+  public void with_vbnet_only_test_should_not_populate_metrics() throws Exception {
+    Path projectDir = Tests.projectDir(temp, "VbTestOnlyProjectTest");
 
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbDoNotAnalyzeTestFilesTest", projectDir, "MyLib.Tests")
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbTestOnlyProjectTest", projectDir, "MyLib.Tests")
       .setProfile("vbnet_no_rule");
 
     ORCHESTRATOR.executeBuild(beginStep);
@@ -55,15 +55,17 @@ public class DoNotAnalyzeTestFilesTest {
 
     BuildResult buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
 
-    assertThat(Tests.getComponent("VbDoNotAnalyzeTestFilesTest:UnitTest1.vb")).isNotNull();
-    assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "files")).isNull();
-    assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "lines")).isNull();
-    assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "ncloc")).isNull();
+    assertThat(Tests.getComponent("VbTestOnlyProjectTest:UnitTest1.vb")).isNotNull();
+    assertThat(getMeasureAsInt("VbTestOnlyProjectTest", "files")).isNull();
+    assertThat(getMeasureAsInt("VbTestOnlyProjectTest", "lines")).isNull();
+    assertThat(getMeasureAsInt("VbTestOnlyProjectTest", "ncloc")).isNull();
 
     assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
-      .contains("WARN: This VB.NET sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
-        "Your SonarQube/SonarCloud project will not have results for VB.NET files. " +
+      .contains("WARN: SonarScanner for .NET detected only TEST files and no MAIN files for VB.NET in the current solution. " +
+        "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
+        "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild VB.NET project: 1 TEST project.");
     TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "VB.NET");
   }

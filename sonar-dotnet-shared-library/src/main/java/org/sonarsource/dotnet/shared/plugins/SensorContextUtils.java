@@ -43,6 +43,11 @@ public final class SensorContextUtils {
     return fs.inputFiles(p.and(p.hasType(fileType), p.hasLanguage(languageKey))).iterator().hasNext();
   }
 
+  public static boolean hasFilesOfLanguage(FileSystem fs, String languageKey) {
+    FilePredicates p = fs.predicates();
+    return fs.inputFiles(p.hasLanguage(languageKey)).iterator().hasNext();
+  }
+
   public static boolean hasAnyMainFiles(FileSystem fs) {
     return fs.inputFiles(fs.predicates().hasType(Type.MAIN)).iterator().hasNext();
   }

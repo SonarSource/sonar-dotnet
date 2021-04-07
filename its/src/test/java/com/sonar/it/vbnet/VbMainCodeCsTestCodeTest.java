@@ -30,6 +30,7 @@ import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
+import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VbMainCodeCsTestCodeTest {
@@ -65,9 +66,11 @@ public class VbMainCodeCsTestCodeTest {
   @Test
   public void logsContainInfo() {
     assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
-      .contains("WARN: This C# sensor will be skipped, because the current solution contains only TEST files and no MAIN files. " +
-        "Your SonarQube/SonarCloud project will not have results for C# files. " +
+      .contains("WARN: SonarScanner for .NET detected only TEST files and no MAIN files for C# in the current solution. " +
+        "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
+        "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains(
       "INFO: Found 1 MSBuild VB.NET project: 1 MAIN project.",
       "INFO: Found 1 MSBuild C# project: 1 TEST project."
@@ -75,4 +78,14 @@ public class VbMainCodeCsTestCodeTest {
     TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, buildResult);
   }
 
+  @Test
+  public void metrics_are_imported_only_for_main_proj()throws Exception {
+    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "files")).isEqualTo(1);
+    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "lines")).isEqualTo(11);
+    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "ncloc")).isEqualTo(8);
+
+    assertThat(getMeasureAsInt("VbMainCsTest:CsTest", "files")).isNull();
+    assertThat(getMeasureAsInt("VbMainCsTest:CsTest", "lines")).isNull();
+    assertThat(getMeasureAsInt("VbMainCsTest:CsTest", "ncloc")).isNull();
+  }
 }

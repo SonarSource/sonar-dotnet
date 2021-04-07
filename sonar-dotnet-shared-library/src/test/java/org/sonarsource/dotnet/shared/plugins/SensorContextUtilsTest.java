@@ -33,6 +33,7 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.api.batch.fs.InputFile.Type;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasAnyMainFiles;
+import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasFilesOfLanguage;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasFilesOfType;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toInputFile;
 
@@ -118,6 +119,42 @@ public class SensorContextUtilsTest {
     addFileToFileSystem("foo", Type.MAIN, LANG_ONE);
     addFileToFileSystem("bar", Type.TEST, LANG_TWO);
     assertThat(hasAnyMainFiles(fs)).isTrue();
+  }
+
+  @Test
+  public void hasFilesOfLanguage_whenOnlyThatLanguageExists_returnsTrue() {
+    addFileToFileSystem("foo", Type.MAIN, LANG_ONE);
+    addFileToFileSystem("bar", Type.TEST, LANG_ONE);
+    assertThat(hasFilesOfLanguage(fs, LANG_ONE)).isTrue();
+  }
+
+  @Test
+  public void hasFilesOfLanguage_whenMultipleLanguagesExist_returnsTrue() {
+    addFileToFileSystem("fooLang1", Type.MAIN, LANG_ONE);
+    addFileToFileSystem("barLang1", Type.TEST, LANG_ONE);
+    addFileToFileSystem("fooLang2", Type.MAIN, LANG_TWO);
+    addFileToFileSystem("barLang2", Type.TEST, LANG_TWO);
+    assertThat(hasFilesOfLanguage(fs, LANG_ONE)).isTrue();
+  }
+
+  @Test
+  public void hasFilesOfLanguage_whenOnlyMainFilesOfThatLanguageExist_returnsTrue() {
+    addFileToFileSystem("foo", Type.MAIN, LANG_ONE);
+    assertThat(hasFilesOfLanguage(fs, LANG_ONE)).isTrue();
+  }
+
+  @Test
+  public void hasFilesOfLanguage_whenOnlyTestFilesOfThatLanguageExist_returnsTrue() {
+    addFileToFileSystem("bar", Type.TEST, LANG_ONE);
+    assertThat(hasFilesOfLanguage(fs, LANG_ONE)).isTrue();
+
+  }
+
+  @Test
+  public void hasFilesOfLanguage_whenOnlyOtherLanguageExists_returnsFalse() {
+    addFileToFileSystem("foo", Type.MAIN, LANG_TWO);
+    addFileToFileSystem("bar", Type.TEST, LANG_TWO);
+    assertThat(hasFilesOfLanguage(fs, LANG_ONE)).isFalse();
   }
 
   private void addFileToFileSystem(String fileName, InputFile.Type fileType, String language) {
