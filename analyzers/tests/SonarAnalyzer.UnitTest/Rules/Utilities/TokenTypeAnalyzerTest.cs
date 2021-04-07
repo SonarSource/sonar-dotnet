@@ -82,15 +82,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new[] { Root + fileName },
                 new TestTokenTypeAnalyzer(testRoot, isTestProject),
                 @$"{testRoot}\token-type.pb",
-                VerifyProtobuf);
-
-            void VerifyProtobuf(IReadOnlyList<TokenTypeInfo> messages)
-            {
-                messages.Should().HaveCount(1);
-                var info = messages.Single();
-                info.FilePath.Should().Be(fileName);
-                verifyTokenInfo(info.TokenInfo);
-            }
+                messages =>
+                {
+                    messages.Should().HaveCount(1);
+                    var info = messages.Single();
+                    info.FilePath.Should().Be(fileName);
+                    verifyTokenInfo(info.TokenInfo);
+                });
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters

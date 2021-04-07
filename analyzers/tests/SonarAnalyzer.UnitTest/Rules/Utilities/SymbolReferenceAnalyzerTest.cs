@@ -157,15 +157,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new[] { Root + fileName },
                 analyzer,
                 @$"{testRoot}\symrefs.pb",
-                VerifyProtobuf);
-
-            void VerifyProtobuf(IReadOnlyList<SymbolReferenceInfo> messages)
-            {
-                messages.Should().HaveCount(1);
-                var info = messages.Single();
-                info.FilePath.Should().Be(fileName);
-                verifyReference(info.Reference);
-            }
+                messages =>
+                {
+                    messages.Should().HaveCount(1);
+                    var info = messages.Single();
+                    info.FilePath.Should().Be(fileName);
+                    verifyReference(info.Reference);
+                });
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
