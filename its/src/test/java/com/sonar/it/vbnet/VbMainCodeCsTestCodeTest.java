@@ -66,8 +66,9 @@ public class VbMainCodeCsTestCodeTest {
   @Test
   public void logsContainInfo() {
     assertThat(buildResult.getLogsLines(l -> l.contains("WARN")))
-      .contains("WARN: The scanner detected only TEST files and no MAIN files in the current solution. " +
-        "Your SonarQube/SonarCloud project will be missing many C# MAIN-code related issues. " +
+      .contains("WARN: SonarScanner for .NET detected only TEST files and no MAIN files for C# in the current solution. " +
+        "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
+        "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
 
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains(

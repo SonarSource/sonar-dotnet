@@ -137,16 +137,18 @@ public class DotNetSensor implements ProjectSensor {
   }
 
   private static void warnThatProjectContainsOnlyTestCode(FileSystem fs, AnalysisWarnings analysisWarnings, String languageName) {
-    LOG.warn("The scanner detected only TEST files and no MAIN files in the current solution. " +
-        "Your SonarQube/SonarCloud project will be missing many {} MAIN-code related issues. {}",
-      languageName, READ_MORE_MESSAGE);
+    LOG.warn("SonarScanner for .NET detected only TEST files and no MAIN files for {} in the current solution. " +
+        "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
+        "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. {}",
+        languageName, READ_MORE_MESSAGE);
 
     // Before outputting a warning in the User Interface, we want to make sure it's worth the user attention.
     // There can be cases where a project written in language X has tests written in languages X, Y and Z.
     // In this case, the fact that there is only test code for languages Y and Z should not trigger a UI warning.
     if (!SensorContextUtils.hasAnyMainFiles(fs)) {
       analysisWarnings.addUnique(
-        String.format("Your project contains only TEST code for language %s and no MAIN code for any language, so only TEST-code related results are imported. %s",
+        String.format("Your project contains only TEST-code for language %s and no MAIN-code for any language, so only TEST-code related results are imported. " +
+            "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. %s",
         languageName, READ_MORE_MESSAGE));
     }
   }
