@@ -61,6 +61,19 @@ public class DotCoverReportParserTest {
   }
 
   @Test
+  public void title_nested_tag() throws Exception {
+    Coverage coverage = new Coverage();
+    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/title_nested_tag.html"), mock(Coverage.class));
+
+    assertThat(coverage.files()).isEmpty();
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+      .startsWith("dotCover parser: found coverage for line '12', hits '0' when analyzing the path '")
+      .endsWith("<title><\\t><\\ti><\\tit><\\ts><\\titl><\\titles><\\titlee><\\title<<\\<\\<\\<\\<\\<<<\\<<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\titl<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.");
+  }
+
+  @Test
   public void no_highlight() {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("The report contents does not match the following regular expression: "
