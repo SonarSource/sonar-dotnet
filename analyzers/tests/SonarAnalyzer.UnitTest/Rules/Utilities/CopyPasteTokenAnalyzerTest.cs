@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_NotRunForTestProject()
         {
             var testRoot = Root + TestContext.TestName;
-            Verifier.VeriFyUtilityAnalyzerIsNotRun(new[] { Root + "DuplicatedDifferentLiterals.cs" },
+            Verifier.VerifyUtilityAnalyzerIsNotRun(new[] { Root + "DuplicatedDifferentLiterals.cs" },
                                                    new TestCopyPasteTokenAnalyzer(testRoot, true),
                                                    @$"{testRoot}\token-cpd.pb");
         }

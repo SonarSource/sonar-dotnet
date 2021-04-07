@@ -190,7 +190,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public static void VeriFyUtilityAnalyzerIsNotRun(IEnumerable<string> paths,
+        public static void VerifyUtilityAnalyzerIsNotRun(IEnumerable<string> paths,
                                                            UtilityAnalyzerBase diagnosticAnalyzer,
                                                            string protobufPath,
                                                            IEnumerable<ParseOptions> options = null)

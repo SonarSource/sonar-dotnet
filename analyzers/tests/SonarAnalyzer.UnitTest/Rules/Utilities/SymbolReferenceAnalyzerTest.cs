@@ -39,10 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         public TestContext TestContext { get; set; } // Set automatically by MsTest
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_Method_PreciseLocation_CS() =>
-            Verify("Method.cs", references =>
+        public void Verify_Method_PreciseLocation_CS(bool isTestProject) =>
+            Verify("Method.cs", isTestProject, references =>
             {
                 references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 5);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 5
                 var methodDeclaration = references.Single(x => x.Declaration.StartLine == 3);
@@ -51,10 +53,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 methodDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 6, EndLine = 6, StartOffset = 8, EndOffset = 14 });
             });
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_Method_PreciseLocation_VB() =>
-            Verify("Method.vb", references =>
+        public void Verify_Method_PreciseLocation_VB(bool isTestProject) =>
+            Verify("Method.vb", isTestProject, references =>
             {
                 references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 6);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 6
                 var methodDeclaration = references.Single(x => x.Declaration.StartLine == 3);
@@ -63,89 +67,99 @@ namespace SonarAnalyzer.UnitTest.Rules
                 methodDeclaration.Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 7, EndLine = 7, StartOffset = 8, EndOffset = 14 });
             });
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_Event_CS() =>
-            Verify("Event.cs", 6, 5, 9, 10);
+        public void Verify_Event_CS(bool isTestProject) =>
+            Verify("Event.cs", isTestProject, 6, 5, 9, 10);
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_Field_CS() =>
-            Verify("Field.cs", 4, 3, 7, 8);
+        public void Verify_Field_CS(bool isTestProject) =>
+            Verify("Field.cs", isTestProject, 4, 3, 7, 8);
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_LocalFunction_CS() =>
-            Verify("LocalFunction.cs", 4, 7, 5);
+        public void Verify_LocalFunction_CS(bool isTestProject) =>
+            Verify("LocalFunction.cs", isTestProject, 4, 7, 5);
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_Method_CS() =>
-            Verify("Method.cs", 3, 3, 6);
+        public void Verify_Method_CS(bool isTestProject) =>
+            Verify("Method.cs", isTestProject, 3, 3, 6);
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_NamedType_CS() =>
-            Verify("NamedType.cs", 4, 3, 7, 7); // 'var' and type name on the same line
+        public void Verify_NamedType_CS(bool isTestProject) =>
+            Verify("NamedType.cs", isTestProject, 4, 3, 7, 7); // 'var' and type name on the same line
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_Parameter_CS() =>
-            Verify("Parameter.cs", 4, 4, 6, 7);
+        public void Verify_Parameter_CS(bool isTestProject) =>
+            Verify("Parameter.cs", isTestProject, 4, 4, 6, 7);
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_Property_CS() =>
-            Verify("Property.cs", 4, 3, 7, 8);
+        public void Verify_Property_CS(bool isTestProject) =>
+            Verify("Property.cs", isTestProject, 4, 3, 7, 8);
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_Setter_CS() =>
-            Verify("Setter.cs", 4, 6, 8);
+        public void Verify_Setter_CS(bool isTestProject) =>
+            Verify("Setter.cs", isTestProject, 4, 6, 8);
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_TypeParameter_CS() =>
-            Verify("TypeParameter.cs", 5, 2, 4, 6);
+        public void Verify_TypeParameter_CS(bool isTestProject) =>
+            Verify("TypeParameter.cs", isTestProject, 5, 2, 4, 6);
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void GetSetKeyword_ReturnsNull_VB() =>
+        public void GetSetKeyword_ReturnsNull_VB(bool isTestProject) =>
             // This path is unreachable for VB code
-            new TestSymbolReferenceAnalyzer_VB(null, false).TestGetSetKeyword(null).Should().BeNull();
+            new TestSymbolReferenceAnalyzer_VB(null, isTestProject).TestGetSetKeyword(null).Should().BeNull();
 
-        public void Verify(string fileName, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
-            Verify(fileName, references =>
+        public void Verify(string fileName, bool isTestProject, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
+            Verify(fileName, isTestProject, references =>
                 {
                     references.Where(x => x.Declaration != null).Should().HaveCount(expectedDeclarationCount);
                     var declarationReferences = references.Single(x => x.Declaration.StartLine == assertedDeclarationLine).Reference;
                     declarationReferences.Select(x => x.StartLine).Should().BeEquivalentTo(assertedDeclarationLineReferences);
                 });
 
-        public void Verify(string fileName, Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
+        public void Verify(string fileName, bool isTestProject, Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
         {
             var testRoot = Root + TestContext.TestName;
-            UtilityAnalyzerBase mainAnalyzer = fileName.EndsWith(".cs")
-                ? new TestSymbolReferenceAnalyzer_CS(testRoot, true)
-                : new TestSymbolReferenceAnalyzer_VB(testRoot, true);
-
-            UtilityAnalyzerBase testAnalyzer = fileName.EndsWith(".cs")
-                ? new TestSymbolReferenceAnalyzer_CS(testRoot, true)
-                : new TestSymbolReferenceAnalyzer_VB(testRoot, true);
+            UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")
+                ? new TestSymbolReferenceAnalyzer_CS(testRoot, isTestProject)
+                : new TestSymbolReferenceAnalyzer_VB(testRoot, isTestProject);
 
             Verifier.VerifyUtilityAnalyzer<SymbolReferenceInfo>(
                 new[] { Root + fileName },
-                mainAnalyzer,
+                analyzer,
                 @$"{testRoot}\symrefs.pb",
-                VerifyProtoBuf);
+                VerifyProtobuf);
 
-            Verifier.VerifyUtilityAnalyzer<SymbolReferenceInfo>(
-                new[] { Root + fileName },
-                testAnalyzer,
-                @$"{testRoot}\symrefs.pb",
-                VerifyProtoBuf);
-
-            void VerifyProtoBuf(IReadOnlyList<SymbolReferenceInfo> messages)
+            void VerifyProtobuf(IReadOnlyList<SymbolReferenceInfo> messages)
             {
                 messages.Should().HaveCount(1);
                 var info = messages.Single();

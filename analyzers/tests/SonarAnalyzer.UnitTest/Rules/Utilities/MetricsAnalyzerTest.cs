@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_NotRunForTestProject()
         {
             var testRoot = Root + nameof(Verify_NotRunForTestProject);
-            Verifier.VeriFyUtilityAnalyzerIsNotRun(new[] { Root + "AllMetrics.cs" },
+            Verifier.VerifyUtilityAnalyzerIsNotRun(new[] { Root + "AllMetrics.cs" },
                                                    new TestMetricsAnalyzer(testRoot, true),
                                                    @$"{testRoot}\metrics.pb");
         }
