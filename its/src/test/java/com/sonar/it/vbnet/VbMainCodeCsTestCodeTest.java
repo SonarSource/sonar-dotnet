@@ -79,10 +79,10 @@ public class VbMainCodeCsTestCodeTest {
   }
 
   @Test
-  public void metrics_are_imported_only_for_maint_proj()throws Exception {
-    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "files")).isNotNull();
-    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "lines")).isNotNull();
-    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "ncloc")).isNotNull();
+  public void metrics_are_imported_only_for_main_proj()throws Exception {
+    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "files")).isEqualTo(1);
+    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "lines")).isEqualTo(11);
+    assertThat(getMeasureAsInt("VbMainCsTest:VbMain", "ncloc")).isEqualTo(8);
 
     assertThat(getMeasureAsInt("VbMainCsTest:CsTest", "files")).isNull();
     assertThat(getMeasureAsInt("VbMainCsTest:CsTest", "lines")).isNull();
