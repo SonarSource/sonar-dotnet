@@ -81,7 +81,7 @@ public class DotCoverReportParser implements CoverageParser {
       final String titleStart = "<title>";
       int indexOfTitleStart = contents.indexOf(titleStart);
       int indexOfTitleEnd = contents.indexOf("</title>");
-      handleExceptions(indexOfTitleStart, indexOfTitleEnd);
+      validateIndexes(indexOfTitleStart, indexOfTitleEnd);
       String lowerCaseAbsolutePath = contents.substring(indexOfTitleStart + titleStart.length(), indexOfTitleEnd);
 
       try {
@@ -116,7 +116,7 @@ public class DotCoverReportParser implements CoverageParser {
       }
     }
 
-    private void handleExceptions(int indexOfTitleStart, int indexOfTitleEnd) {
+    private void validateIndexes(int indexOfTitleStart, int indexOfTitleEnd) {
       if (indexOfTitleStart == -1) {
         throw new IllegalArgumentException("The report does not contain a '<title>' tag.");
       } else if (indexOfTitleEnd == -1) {
@@ -124,6 +124,4 @@ public class DotCoverReportParser implements CoverageParser {
       }
     }
   }
-
-
 }
