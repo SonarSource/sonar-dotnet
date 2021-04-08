@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
+        protected sealed override bool SkipAnalysisForTestProject => true;
         protected sealed override string FileName => MetricsFileName;
 
         protected sealed override MetricsInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)

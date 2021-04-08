@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var testRoot = Root + nameof(VerifyMetrics);
             Verifier.VerifyUtilityAnalyzer<MetricsInfo>(
                 new[] { Root + "AllMetrics.cs" },
-                new TestMetricsAnalyzer(testRoot),
+                new TestMetricsAnalyzer(testRoot, false),
                 @$"{testRoot}\metrics.pb",
                 messages =>
                 {
@@ -58,13 +58,24 @@ namespace SonarAnalyzer.UnitTest.Rules
                 });
         }
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void Verify_NotRunForTestProject()
+        {
+            var testRoot = Root + nameof(Verify_NotRunForTestProject);
+            Verifier.VerifyUtilityAnalyzerIsNotRun(new[] { Root + "AllMetrics.cs" },
+                                                   new TestMetricsAnalyzer(testRoot, true),
+                                                   @$"{testRoot}\metrics.pb");
+        }
+
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private class TestMetricsAnalyzer : MetricsAnalyzer
         {
-            public TestMetricsAnalyzer(string outPath)
+            public TestMetricsAnalyzer(string outPath, bool isTestProject)
             {
                 IsAnalyzerEnabled = true;
                 OutPath = outPath;
+                IsTestProject = isTestProject;
             }
         }
     }

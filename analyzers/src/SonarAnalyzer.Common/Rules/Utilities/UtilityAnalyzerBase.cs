@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules
         protected bool IgnoreHeaderComments { get; set; }
         protected virtual bool AnalyzeGeneratedCode { get; set; }
         protected string OutPath { get; set; }
+        protected bool IsTestProject { get; set; }
 
         internal /* for testing */ static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
             new TextRange
@@ -64,6 +65,7 @@ namespace SonarAnalyzer.Rules
                 AnalyzeGeneratedCode = PropertiesHelper.ReadAnalyzeGeneratedCodeProperty(settings, c.Compilation.Language);
                 OutPath = Path.Combine(outPath, c.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
                 IsAnalyzerEnabled = true;
+                IsTestProject = context.IsTestProject(c.Compilation, c.Options);
             }
         }
 
@@ -76,6 +78,7 @@ namespace SonarAnalyzer.Rules
     {
         private static readonly object FileWriteLock = new TMessage();
 
+        protected virtual bool SkipAnalysisForTestProject => false;
         protected abstract string FileName { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
@@ -89,6 +92,13 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
+                    // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
+                    if (IsTestProject && SkipAnalysisForTestProject)
+                    {
+                        EnsureDirectoryExistsAndCreateFile().Dispose();
+                        return;
+                    }
+
                     var messages = c.Compilation.SyntaxTrees
                         .Where(ShouldGenerateMetrics)
                         .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)))
@@ -97,9 +107,7 @@ namespace SonarAnalyzer.Rules
                     {
                         lock (FileWriteLock)
                         {
-                            // Make sure the folder exists
-                            Directory.CreateDirectory(OutPath);
-                            using var metricsStream = File.Create(Path.Combine(OutPath, FileName));
+                            using var metricsStream = EnsureDirectoryExistsAndCreateFile();
                             foreach (var message in messages)
                             {
                                 message.WriteDelimitedTo(metricsStream);
@@ -111,5 +119,11 @@ namespace SonarAnalyzer.Rules
         private bool ShouldGenerateMetrics(SyntaxTree tree) =>
             FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
              && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree));
+
+        private FileStream EnsureDirectoryExistsAndCreateFile()
+        {
+            Directory.CreateDirectory(OutPath);
+            return File.Create(Path.Combine(OutPath, FileName));
+        }
     }
 }

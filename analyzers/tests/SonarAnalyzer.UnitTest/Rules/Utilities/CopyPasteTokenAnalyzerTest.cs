@@ -64,12 +64,22 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Where(x => x.TokenValue == "$num").Should().HaveCount(2);
             });
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void Verify_NotRunForTestProject()
+        {
+            var testRoot = Root + TestContext.TestName;
+            Verifier.VerifyUtilityAnalyzerIsNotRun(new[] { Root + "DuplicatedDifferentLiterals.cs" },
+                                                   new TestCopyPasteTokenAnalyzer(testRoot, true),
+                                                   @$"{testRoot}\token-cpd.pb");
+        }
+
         public void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
             Verifier.VerifyUtilityAnalyzer<CopyPasteTokenInfo>(
                 new[] { Root + fileName },
-                new TestCopyPasteTokenAnalyzer(testRoot),
+                new TestCopyPasteTokenAnalyzer(testRoot, false),
                 @$"{testRoot}\token-cpd.pb",
                 messages =>
                 {
@@ -83,10 +93,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private class TestCopyPasteTokenAnalyzer : CopyPasteTokenAnalyzer
         {
-            public TestCopyPasteTokenAnalyzer(string outPath)
+            public TestCopyPasteTokenAnalyzer(string outPath, bool isTestProject)
             {
                 IsAnalyzerEnabled = true;
                 OutPath = outPath;
+                IsTestProject = isTestProject;
             }
         }
     }

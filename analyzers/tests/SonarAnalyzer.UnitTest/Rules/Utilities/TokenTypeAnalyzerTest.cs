@@ -36,10 +36,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         public TestContext TestContext { get; set; } // Set automatically by MsTest
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_MainTokens() =>
-            Verify("Tokens.cs", info =>
+        public void Verify_MainTokens(bool isTestProject) =>
+            Verify("Tokens.cs", isTestProject, info =>
             {
                 info.Should().HaveCount(15);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(10);
@@ -48,10 +50,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_Identifiers() =>
-            Verify("Identifiers.cs", info =>
+        public void Verify_Identifiers(bool isTestProject) =>
+            Verify("Identifiers.cs", isTestProject, info =>
             {
                 info.Should().HaveCount(34);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(26);
@@ -59,22 +63,24 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
-        public void Verify_Trivia() =>
-            Verify("Trivia.cs", info =>
+        public void Verify_Trivia(bool isTestProject) =>
+            Verify("Trivia.cs", isTestProject, info =>
             {
                 info.Should().HaveCount(5);
                 info.Where(x => x.TokenType == TokenType.Comment).Should().HaveCount(4);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.Keyword);
             });
 
-        public void Verify(string fileName, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
+        public void Verify(string fileName, bool isTestProject, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
             Verifier.VerifyUtilityAnalyzer<TokenTypeInfo>(
                 new[] { Root + fileName },
-                new TestTokenTypeAnalyzer(testRoot),
+                new TestTokenTypeAnalyzer(testRoot, isTestProject),
                 @$"{testRoot}\token-type.pb",
                 messages =>
                 {
@@ -88,10 +94,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private class TestTokenTypeAnalyzer : TokenTypeAnalyzer
         {
-            public TestTokenTypeAnalyzer(string outPath)
+            public TestTokenTypeAnalyzer(string outPath, bool isTestProject)
             {
                 IsAnalyzerEnabled = true;
                 OutPath = outPath;
+                IsTestProject = isTestProject;
             }
         }
     }
