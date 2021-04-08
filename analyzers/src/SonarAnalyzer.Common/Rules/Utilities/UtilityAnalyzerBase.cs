@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules
     {
         private static readonly object FileWriteLock = new TMessage();
 
-        protected abstract bool SkipAnalysisForTestProject { get; }
+        protected virtual bool SkipAnalysisForTestProject => false;
         protected abstract string FileName { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
@@ -87,9 +87,17 @@ namespace SonarAnalyzer.Rules
             context.RegisterCompilationAction(c =>
                 {
                     ReadParameters(context, c);
-                    if (!IsAnalyzerEnabled ||
-                        (SkipAnalysisForTestProject && IsTestProject))
+                    if (!IsAnalyzerEnabled)
                     {
+                        return;
+                    }
+
+                    // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
+                    if (SkipAnalysisForTestProject && IsTestProject)
+                    {
+                        // Make sure the folder exists
+                        Directory.CreateDirectory(OutPath);
+                        File.WriteAllBytes(Path.Combine(OutPath, FileName), new byte[] { });
                         return;
                     }
 

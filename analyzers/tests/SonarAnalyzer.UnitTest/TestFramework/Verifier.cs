@@ -199,7 +199,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default);
-                File.Exists(protobufPath).Should().BeFalse();
+                new FileInfo(protobufPath).Length.Should().Be(0);
             }
         }
 

@@ -52,7 +52,6 @@ namespace SonarAnalyzer.Rules
         internal abstract SyntaxNode GetBindableParent(SyntaxToken token);
         protected abstract bool IsIdentifier(SyntaxToken token);
 
-        protected sealed override bool SkipAnalysisForTestProject => false;
         protected sealed override string FileName => SymbolReferenceFileName;
 
         protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
