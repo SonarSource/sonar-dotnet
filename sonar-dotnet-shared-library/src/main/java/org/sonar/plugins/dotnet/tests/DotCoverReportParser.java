@@ -31,6 +31,7 @@ import org.sonar.api.utils.log.Loggers;
 
 public class DotCoverReportParser implements CoverageParser {
 
+  private static final String TITLE_START = "<title>";
   private static final Pattern COVERED_LINES_PATTERN_1 = Pattern.compile(
     ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[([\\d\\[\\],]*?)\\]\\);\\s*+</script>.*",
     Pattern.DOTALL);
@@ -78,11 +79,9 @@ public class DotCoverReportParser implements CoverageParser {
 
     @Nullable
     private String extractFileCanonicalPath(String contents) {
-      final String titleStart = "<title>";
-      int indexOfTitleStart = contents.indexOf(titleStart);
-      int indexOfTitleEnd = contents.indexOf("</title>");
-      validateIndexes(indexOfTitleStart, indexOfTitleEnd);
-      String lowerCaseAbsolutePath = contents.substring(indexOfTitleStart + titleStart.length(), indexOfTitleEnd);
+      int indexOfTitleStart = getIndexOf(contents, TITLE_START);
+      int indexOfTitleEnd = getIndexOf(contents, "</title>");
+      String lowerCaseAbsolutePath = getTitlePath(contents, indexOfTitleStart, indexOfTitleEnd);
 
       try {
         return new File(lowerCaseAbsolutePath).getCanonicalPath();
@@ -116,12 +115,20 @@ public class DotCoverReportParser implements CoverageParser {
       }
     }
 
-    private void validateIndexes(int indexOfTitleStart, int indexOfTitleEnd) {
-      if (indexOfTitleStart == -1) {
-        throw new IllegalArgumentException("The report does not contain a '<title>' tag.");
-      } else if (indexOfTitleEnd == -1) {
-        throw new IllegalArgumentException("The report does not contain a '</title>' tag.");
+    private int getIndexOf(String fileContent, String tag) {
+      int index = fileContent.indexOf(tag);
+      if (index == -1) {
+        throw new IllegalArgumentException(String.format("The report does not contain a '%s' tag.", tag));
       }
+      return index;
+    }
+
+    // fileContent could contain <title>foo</title> or </title>foo<title>
+    private String getTitlePath(String fileContent, int indexOfTitleStart, int indexOfTitleEnd) {
+      if (indexOfTitleStart >= indexOfTitleEnd) {
+        throw new IllegalArgumentException(String.format("Unexpected <title> at index %d, after </title> at index %d.", indexOfTitleStart, indexOfTitleEnd));
+      }
+      return fileContent.substring(indexOfTitleStart + TITLE_START.length(), indexOfTitleEnd);
     }
   }
 }

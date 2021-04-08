@@ -72,6 +72,16 @@ public class DotCoverReportParserTest {
   }
 
   @Test
+  public void title_swapped_tags() {
+    DotCoverReportParser parser = new DotCoverReportParser(alwaysTrue);
+    File file = new File("src/test/resources/dotcover/title_swapped.html");
+
+    Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
+
+    assertThat(thrown).hasMessage("Unexpected <title> at index 122, after </title> at index 111.");
+  }
+
+  @Test
   public void title_nested_tag() {
     Coverage coverage = new Coverage();
     new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/title_nested_tag.html"), mock(Coverage.class));
