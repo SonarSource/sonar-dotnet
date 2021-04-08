@@ -31,9 +31,8 @@ import org.sonar.api.utils.log.Loggers;
 
 public class DotCoverReportParser implements CoverageParser {
 
-  private static final Pattern TITLE_PATTERN = Pattern.compile(".*?<title>(.*?)</title>.*", Pattern.DOTALL);
   private static final Pattern COVERED_LINES_PATTERN_1 = Pattern.compile(
-    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(.*?)\\]\\);\\s*+</script>.*",
+    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[([\\d\\[\\],]*?)\\]\\);\\s*+</script>.*",
     Pattern.DOTALL);
   private static final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)\\]");
 
@@ -79,10 +78,11 @@ public class DotCoverReportParser implements CoverageParser {
 
     @Nullable
     private String extractFileCanonicalPath(String contents) {
-      Matcher matcher = TITLE_PATTERN.matcher(contents);
-      checkMatches(matcher);
-
-      String lowerCaseAbsolutePath = matcher.group(1);
+      final String titleStart = "<title>";
+      int indexOfTitleStart = contents.indexOf(titleStart);
+      int indexOfTitleEnd = contents.indexOf("</title>");
+      handleExceptions(indexOfTitleStart, indexOfTitleEnd);
+      String lowerCaseAbsolutePath = contents.substring(indexOfTitleStart + titleStart.length(), indexOfTitleEnd);
 
       try {
         return new File(lowerCaseAbsolutePath).getCanonicalPath();
@@ -106,7 +106,7 @@ public class DotCoverReportParser implements CoverageParser {
         coverage.addHits(fileCanonicalPath, lineStart, hits);
 
         LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
-            lineStart, hits, fileCanonicalPath);
+          lineStart, hits, fileCanonicalPath);
       }
     }
 
@@ -115,5 +115,15 @@ public class DotCoverReportParser implements CoverageParser {
         throw new IllegalArgumentException("The report contents does not match the following regular expression: " + matcher.pattern().pattern());
       }
     }
+
+    private void handleExceptions(int indexOfTitleStart, int indexOfTitleEnd) {
+      if (indexOfTitleStart == -1) {
+        throw new IllegalArgumentException("The report does not contain a '<title>' tag.");
+      } else if (indexOfTitleEnd == -1) {
+        throw new IllegalArgumentException("The report does not contain a '</title>' tag.");
+      }
+    }
   }
+
+
 }
