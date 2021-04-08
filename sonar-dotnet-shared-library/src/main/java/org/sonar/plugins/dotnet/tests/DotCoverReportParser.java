@@ -32,10 +32,14 @@ import org.sonar.api.utils.log.Loggers;
 public class DotCoverReportParser implements CoverageParser {
 
   private static final String TITLE_START = "<title>";
+  // the pattern for the information about a sequence point - (lineStart, columnStart, lineEnd, columnEnd, hits)
+  private static final Pattern SEQUENCE_POINT_PATTERN = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)]");
+  private static final String SEQUENCE_POINTS_GROUP_NAME = "SequencePoints";
+  // the file coverage has a list of sequence points
+  // we use SEQUENCE_POINT_PATTERN below to avoid non-determinism in the regular expression, due to the `[` and `]` characters appearing multiple times
   private static final Pattern FILE_COVERAGE_PATTERN = Pattern.compile(
-    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[([\\d\\[\\],]*?)\\]\\);\\s*+</script>.*",
+    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(?<" + SEQUENCE_POINTS_GROUP_NAME + ">" + SEQUENCE_POINT_PATTERN + "(," + SEQUENCE_POINT_PATTERN + ")*)]\\);\\s*+</script>.*",
     Pattern.DOTALL);
-  private static final Pattern SEQUENCE_POINT_PATTERN = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)\\]");
 
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
   private final FileService fileService;
@@ -92,26 +96,22 @@ public class DotCoverReportParser implements CoverageParser {
     }
 
     private void collectCoverage(String fileCanonicalPath, String contents) {
-      Matcher matcher = FILE_COVERAGE_PATTERN.matcher(contents);
-      checkMatches(matcher);
-      String highlightedContents = matcher.group(1);
+      Matcher fileCoverageMatcher = FILE_COVERAGE_PATTERN.matcher(contents);
+      if (!fileCoverageMatcher.matches()) {
+        throw new IllegalArgumentException("The report contents does not match the following regular expression: " + FILE_COVERAGE_PATTERN.pattern());
+      }
 
-      matcher = SEQUENCE_POINT_PATTERN.matcher(highlightedContents);
+      String highlightedContents = fileCoverageMatcher.group(SEQUENCE_POINTS_GROUP_NAME);
+      Matcher sequencePointsMatcher = SEQUENCE_POINT_PATTERN.matcher(highlightedContents);
 
-      while (matcher.find()) {
-        int lineStart = Integer.parseInt(matcher.group(1));
-        int hits = Integer.parseInt(matcher.group(3));
+      while (sequencePointsMatcher.find()) {
+        int lineStart = Integer.parseInt(sequencePointsMatcher.group(1));
+        int hits = Integer.parseInt(sequencePointsMatcher.group(3));
 
         coverage.addHits(fileCanonicalPath, lineStart, hits);
 
         LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
           lineStart, hits, fileCanonicalPath);
-      }
-    }
-
-    private void checkMatches(Matcher matcher) {
-      if (!matcher.matches()) {
-        throw new IllegalArgumentException("The report contents does not match the following regular expression: " + matcher.pattern().pattern());
       }
     }
 
