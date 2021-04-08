@@ -42,23 +42,17 @@ namespace SonarAnalyzer.Helpers
 
         #endregion Singleton implementation
 
-        public override bool IsGenerated(SyntaxTree tree)
-        {
-            return base.IsGenerated(tree) ||
-                HasGeneratedRegion(tree);
-        }
+        public override bool IsGenerated(SyntaxTree tree) =>
+            base.IsGenerated(tree) || HasGeneratedRegion(tree);
 
-        private static bool HasGeneratedRegion(SyntaxTree tree)
-        {
-            return tree
+        private static bool HasGeneratedRegion(SyntaxTree tree) =>
+            tree
                 .GetRoot()
                 .DescendantTrivia()
                 .Any(
                     t =>
                         t.IsKind(SyntaxKind.RegionDirectiveTrivia) &&
-                        CultureInfo.InvariantCulture.CompareInfo.IndexOf(t.ToString(), "generated",
-                        CompareOptions.IgnoreCase) >= 0);
-        }
+                        CultureInfo.InvariantCulture.CompareInfo.IndexOf(t.ToString(), "Windows Form Designer generated code", CompareOptions.IgnoreCase) >= 0);
 
         protected override bool IsTriviaComment(SyntaxTrivia trivia) =>
             trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||

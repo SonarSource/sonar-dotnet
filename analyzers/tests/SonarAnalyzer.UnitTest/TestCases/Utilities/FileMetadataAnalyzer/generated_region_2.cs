@@ -8,7 +8,7 @@ namespace SomeNamespace
         {
             object obj = null;
             Console.WriteLine(obj.ToString());
-            #region this is generated
+            #region this is Windows Form Designer generated code
             #endregion
         }
     }
