@@ -157,30 +157,40 @@ End Module";
             VerifyEmpty("test.vb", sourceVb, new VB.ArrayDesignatorOnVariable());
         }
 
-        [TestMethod]
-        public void No_Issue_On_Partially_Generated_Legacy_WinForms_File()
+        // until https://github.com/SonarSource/sonar-dotnet/issues/2228, we were considering a file as generated
+        // if the word "generated" was contained inside a region.
+        [DataTestMethod]
+        [DataRow("generated stuff")]
+        [DataRow("Contains FooGenerated methods")]
+        [DataRow("Windows Form Designer generated code")] // legacy Windows Forms used to include generated code in dev files, surrounded by such a region
+        [DataRow("Windows Form Designer GeNeRaTed code")] // legacy Windows Forms used to include generated code in dev files, surrounded by such a region
+        public void Issues_Raised_On_Partially_Generated_Legacy_WinForms_File(string regionName)
         {
-            const string format =
-@"namespace PartiallyGenerated
-{
+            var content =
+$@"namespace PartiallyGenerated
+{{
     class MyClass
-    {
-        // For the time being, the whole file is considered as generated
+    {{
         void HandWrittenEventHandler()
-        {
-            ;;;;
-        }
+        {{
+            ; // Noncompliant
+        }}
 
-#region {0}
+#region {regionName}
         void GeneratedStuff()
-        {
-            ;;;;
-        }
+        {{
+            ; // Noncompliant
+        }}
 #endregion
-    }
-}";
-            VerifyEmpty("test.cs", format.Replace("{0}", "Windows Form Designer generated code"), new CS.EmptyStatement());
-            VerifyEmpty("test.cs", format.Replace("{0}", "Windows Form Designer GeNeRaTeD code"), new CS.EmptyStatement());
+    }}
+}}";
+            var compilation = SolutionBuilder
+               .Create()
+               .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+               .AddSnippet(content, "Foo.cs")
+               .GetCompilation();
+
+            DiagnosticVerifier.Verify(compilation, new CS.EmptyStatement(), CompilationErrorBehavior.FailTest, compilation.SyntaxTrees.First().GetText());
         }
 
         [TestMethod]
