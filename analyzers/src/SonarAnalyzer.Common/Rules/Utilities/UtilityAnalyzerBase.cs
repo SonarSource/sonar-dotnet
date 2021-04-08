@@ -93,11 +93,9 @@ namespace SonarAnalyzer.Rules
                     }
 
                     // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
-                    if (SkipAnalysisForTestProject && IsTestProject)
+                    if (IsTestProject && SkipAnalysisForTestProject)
                     {
-                        // Make sure the folder exists
-                        Directory.CreateDirectory(OutPath);
-                        File.WriteAllBytes(Path.Combine(OutPath, FileName), new byte[] { });
+                        EnsureDirectoryExistsAndCreateFile().Dispose();
                         return;
                     }
 
@@ -109,9 +107,7 @@ namespace SonarAnalyzer.Rules
                     {
                         lock (FileWriteLock)
                         {
-                            // Make sure the folder exists
-                            Directory.CreateDirectory(OutPath);
-                            using var metricsStream = File.Create(Path.Combine(OutPath, FileName));
+                            using var metricsStream = EnsureDirectoryExistsAndCreateFile();
                             foreach (var message in messages)
                             {
                                 message.WriteDelimitedTo(metricsStream);
@@ -123,5 +119,11 @@ namespace SonarAnalyzer.Rules
         private bool ShouldGenerateMetrics(SyntaxTree tree) =>
             FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
              && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree));
+
+        private FileStream EnsureDirectoryExistsAndCreateFile()
+        {
+            Directory.CreateDirectory(OutPath);
+            return File.Create(Path.Combine(OutPath, FileName));
+        }
     }
 }
