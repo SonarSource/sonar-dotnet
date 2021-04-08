@@ -4,6 +4,32 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Method'.",
 "location":  {
+"uri":  "sources\GeneratedCode\generated_region.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Method'.",
+"location":  {
+"uri":  "sources\GeneratedCode\generated_region_2.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Method'.",
+"location":  {
 "uri":  "sources\GeneratedCode\handwritten.cs",
 "region":  {
 "startLine":  8,
