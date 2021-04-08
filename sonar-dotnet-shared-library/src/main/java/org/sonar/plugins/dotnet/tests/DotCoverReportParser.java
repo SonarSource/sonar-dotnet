@@ -32,10 +32,10 @@ import org.sonar.api.utils.log.Loggers;
 public class DotCoverReportParser implements CoverageParser {
 
   private static final String TITLE_START = "<title>";
-  private static final Pattern COVERED_LINES_PATTERN_1 = Pattern.compile(
+  private static final Pattern FILE_COVERAGE_PATTERN = Pattern.compile(
     ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[([\\d\\[\\],]*?)\\]\\);\\s*+</script>.*",
     Pattern.DOTALL);
-  private static final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)\\]");
+  private static final Pattern SEQUENCE_POINT_PATTERN = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)\\]");
 
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
   private final FileService fileService;
@@ -92,11 +92,11 @@ public class DotCoverReportParser implements CoverageParser {
     }
 
     private void collectCoverage(String fileCanonicalPath, String contents) {
-      Matcher matcher = COVERED_LINES_PATTERN_1.matcher(contents);
+      Matcher matcher = FILE_COVERAGE_PATTERN.matcher(contents);
       checkMatches(matcher);
       String highlightedContents = matcher.group(1);
 
-      matcher = COVERED_LINES_PATTERN_2.matcher(highlightedContents);
+      matcher = SEQUENCE_POINT_PATTERN.matcher(highlightedContents);
 
       while (matcher.find()) {
         int lineStart = Integer.parseInt(matcher.group(1));
