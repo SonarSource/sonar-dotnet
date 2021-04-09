@@ -32,8 +32,6 @@ import org.sonar.api.utils.log.Loggers;
 public class DotCoverReportParser implements CoverageParser {
 
   private static final String TITLE_START = "<title>";
-  private static final String TITLE_END = "</title>";
-  private static final String NO_TAG_MESSAGE = "The report does not contain a '%s' tag.";
   // the pattern for the information about a sequence point - (lineStart, columnStart, lineEnd, columnEnd, hits)
   private static final Pattern SEQUENCE_POINT = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)]");
   private static final String SEQUENCE_POINTS_GROUP_NAME = "SequencePoints";
@@ -85,7 +83,9 @@ public class DotCoverReportParser implements CoverageParser {
 
     @Nullable
     private String extractFileCanonicalPath(String contents) {
-      String lowerCaseAbsolutePath = getTitlePath(contents);
+      int indexOfTitleStart = getIndexOf(contents, TITLE_START, 0);
+      int indexOfTitleEnd = getIndexOf(contents, "</title>", indexOfTitleStart);
+      String lowerCaseAbsolutePath = contents.substring(indexOfTitleStart + TITLE_START.length(), indexOfTitleEnd);
       try {
         return new File(lowerCaseAbsolutePath).getCanonicalPath();
       } catch (IOException e) {
@@ -114,17 +114,12 @@ public class DotCoverReportParser implements CoverageParser {
       }
     }
 
-    // fileContent could contain <title>foo</title> or </title>foo<title>
-    private String getTitlePath(String fileContent) {
-      int indexOfTitleStart = fileContent.indexOf(TITLE_START);
-      if (indexOfTitleStart == -1) {
-        throw new IllegalArgumentException(String.format(NO_TAG_MESSAGE, TITLE_START));
+    private int getIndexOf(String fileContent, String tag, int startIndex) {
+      int index = fileContent.indexOf(tag, startIndex);
+      if (index == -1) {
+        throw new IllegalArgumentException("The report does not contain a vald '<title>...</title>' tag.");
       }
-      int indexOfTitleEnd = fileContent.indexOf(TITLE_END, indexOfTitleStart);
-      if (indexOfTitleEnd == -1) {
-        throw new IllegalArgumentException(String.format(NO_TAG_MESSAGE, TITLE_END));
-      }
-      return fileContent.substring(indexOfTitleStart + TITLE_START.length(), indexOfTitleEnd);
+      return index;
     }
   }
 }
