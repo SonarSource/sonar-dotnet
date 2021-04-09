@@ -19,7 +19,12 @@
  */
 
 using Microsoft.CodeAnalysis;
+
+#if CS
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+#else
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+#endif
 
 namespace SonarAnalyzer.Extensions
 {
