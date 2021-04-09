@@ -33,12 +33,12 @@ public class DotCoverReportParser implements CoverageParser {
 
   private static final String TITLE_START = "<title>";
   // the pattern for the information about a sequence point - (lineStart, columnStart, lineEnd, columnEnd, hits)
-  private static final Pattern SEQUENCE_POINT_PATTERN = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)]");
+  private static final Pattern SEQUENCE_POINT = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)]");
   private static final String SEQUENCE_POINTS_GROUP_NAME = "SequencePoints";
   // the file coverage has a list of sequence points
   // we use SEQUENCE_POINT_PATTERN below to avoid non-determinism in the regular expression, due to the `[` and `]` characters appearing multiple times
-  private static final Pattern FILE_COVERAGE_PATTERN = Pattern.compile(
-    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(?<" + SEQUENCE_POINTS_GROUP_NAME + ">" + SEQUENCE_POINT_PATTERN + "(," + SEQUENCE_POINT_PATTERN + ")*)]\\);\\s*+</script>.*",
+  private static final Pattern FILE_COVERAGE = Pattern.compile(
+    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(?<" + SEQUENCE_POINTS_GROUP_NAME + ">" + SEQUENCE_POINT + "(," + SEQUENCE_POINT + ")*)]\\);\\s*+</script>.*",
     Pattern.DOTALL);
 
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
@@ -96,13 +96,13 @@ public class DotCoverReportParser implements CoverageParser {
     }
 
     private void collectCoverage(String fileCanonicalPath, String contents) {
-      Matcher fileCoverageMatcher = FILE_COVERAGE_PATTERN.matcher(contents);
+      Matcher fileCoverageMatcher = FILE_COVERAGE.matcher(contents);
       if (!fileCoverageMatcher.matches()) {
-        throw new IllegalArgumentException("The report contents does not match the following regular expression: " + FILE_COVERAGE_PATTERN.pattern());
+        throw new IllegalArgumentException("The report contents does not match the following regular expression: " + FILE_COVERAGE.pattern());
       }
 
       String highlightedContents = fileCoverageMatcher.group(SEQUENCE_POINTS_GROUP_NAME);
-      Matcher sequencePointsMatcher = SEQUENCE_POINT_PATTERN.matcher(highlightedContents);
+      Matcher sequencePointsMatcher = SEQUENCE_POINT.matcher(highlightedContents);
 
       while (sequencePointsMatcher.find()) {
         int lineStart = Integer.parseInt(sequencePointsMatcher.group(1));
