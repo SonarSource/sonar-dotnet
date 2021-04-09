@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues;
@@ -51,18 +52,8 @@ public class TestProjectTest {
 
   @Test
   public void with_vbnet_only_test_should_not_populate_metrics() throws Exception {
-    Path projectDir = Tests.projectDir(temp, "VbTestOnlyProjectTest");
 
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbTestOnlyProjectTest", projectDir, "MyLib.Tests")
-      .setProfile("vbnet_no_rule");
-
-    ORCHESTRATOR.executeBuild(beginStep);
-
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
-
-    BuildResult buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
-
-    assertThat(Tests.getComponent("VbTestOnlyProjectTest:UnitTest1.vb")).isNotNull();
+    assertThat(Tests.getComponent("VbTestOnlyProjectTest:MyLib.Tests/UnitTest1.vb")).isNotNull();
     assertThat(getMeasureAsInt("VbTestOnlyProjectTest", "files")).isNull();
     assertThat(getMeasureAsInt("VbTestOnlyProjectTest", "lines")).isNull();
     assertThat(getMeasureAsInt("VbTestOnlyProjectTest", "ncloc")).isNull();

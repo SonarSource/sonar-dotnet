@@ -62,7 +62,7 @@ public class UnitTestProjectTypeProbingTest {
 
   @Test
   public void mainProject_WithPropertySetToTrue_IsIdentifiedAsTestProject() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MainWithProjectPropertyTrue/calculator.cs")).isEmpty();
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MainWithProjectPropertyTrue/Calculator.cs")).isEmpty();
   }
 
   @Test
@@ -85,7 +85,7 @@ public class UnitTestProjectTypeProbingTest {
   @Test
   public void xUnitProject_IsIdentifiedAsTestProject() {
     // project has the ProjectCapability 'TestContainer' -> test project
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.xUnit/calculator.cs")).isEmpty();
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.xUnit/Calculator.cs")).isEmpty();
   }
 
   @Test
