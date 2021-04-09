@@ -117,7 +117,7 @@ public class DotCoverReportParser implements CoverageParser {
     private int getIndexOf(String fileContent, String tag, int startIndex) {
       int index = fileContent.indexOf(tag, startIndex);
       if (index == -1) {
-        throw new IllegalArgumentException("The report does not contain a vald '<title>...</title>' tag.");
+        throw new IllegalArgumentException("The report does not contain a valid '<title>...</title>' tag.");
       }
       return index;
     }
