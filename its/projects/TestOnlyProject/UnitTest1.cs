@@ -10,5 +10,17 @@ namespace TestOnlyProject
         {
             Assert.AreEqual(10, 5 + 5);
         }
+
+        [TestMethod]
+        [Ignore]
+        public void IgnoredWithTestAndAllScopeRuleIssues(bool b)
+        {
+            if (b == true)
+            {
+                // Do something.
+            }
+
+            Assert.IsTrue(b);
+        }
     }
 }

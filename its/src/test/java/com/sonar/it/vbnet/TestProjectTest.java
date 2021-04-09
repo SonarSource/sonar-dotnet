@@ -23,23 +23,30 @@ import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import java.nio.file.Path;
-import org.junit.Before;
-import org.junit.Rule;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonarqube.ws.Issues;
 
+import static com.sonar.it.vbnet.Tests.getIssues;
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestProjectTest {
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @ClassRule
+  public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
-  @Before
-  public void init() {
+  private static BuildResult buildResult;
+
+  @BeforeClass
+  public static void init() throws Exception {
     TestUtils.reset(ORCHESTRATOR);
+    buildResult = Tests.analyzeProject(temp, "VbTestOnlyProjectTest", null);
   }
 
   @Test
@@ -68,5 +75,19 @@ public class TestProjectTest {
 
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild VB.NET project: 1 TEST project.");
     TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "VB.NET");
+  }
+
+  @Test
+  public void issuesAreImportedForTestProject(){
+    List<Issues.Issue> barIssues = getIssues("VbTestOnlyProjectTest:MyLib.Tests/UnitTest1.vb")
+      .stream()
+      .filter(x -> x.getRule().startsWith("vbnet:"))
+      .collect(Collectors.toList());
+
+    assertThat(barIssues).hasSize(2);
+
+    assertThat(barIssues)
+      .filteredOn(e -> e.getRule().equalsIgnoreCase("vbnet:S1125"))
+      .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(13));
   }
 }

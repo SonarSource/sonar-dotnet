@@ -22,7 +22,7 @@
   </organization>
 
   <properties>
-    <scannerMsbuild.version>5.1.0.28487</scannerMsbuild.version>
+    <scannerMsbuild.version>5.2.0.29862</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
   </properties>
 
