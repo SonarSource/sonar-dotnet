@@ -78,7 +78,7 @@ public class DotCoverReportParserTest {
 
     Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
 
-    assertThat(thrown).hasMessage("Unexpected <title> at index 122, after </title> at index 111.");
+    assertThat(thrown).hasMessage("The report does not contain a '</title>' tag.");
   }
 
   @Test

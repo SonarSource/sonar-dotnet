@@ -32,6 +32,8 @@ import org.sonar.api.utils.log.Loggers;
 public class DotCoverReportParser implements CoverageParser {
 
   private static final String TITLE_START = "<title>";
+  private static final String TITLE_END = "</title>";
+  private static final String NO_TAG_MESSAGE = "The report does not contain a '%s' tag.";
   // the pattern for the information about a sequence point - (lineStart, columnStart, lineEnd, columnEnd, hits)
   private static final Pattern SEQUENCE_POINT = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)]");
   private static final String SEQUENCE_POINTS_GROUP_NAME = "SequencePoints";
@@ -83,10 +85,7 @@ public class DotCoverReportParser implements CoverageParser {
 
     @Nullable
     private String extractFileCanonicalPath(String contents) {
-      int indexOfTitleStart = getIndexOf(contents, TITLE_START);
-      int indexOfTitleEnd = getIndexOf(contents, "</title>");
-      String lowerCaseAbsolutePath = getTitlePath(contents, indexOfTitleStart, indexOfTitleEnd);
-
+      String lowerCaseAbsolutePath = getTitlePath(contents);
       try {
         return new File(lowerCaseAbsolutePath).getCanonicalPath();
       } catch (IOException e) {
@@ -115,18 +114,15 @@ public class DotCoverReportParser implements CoverageParser {
       }
     }
 
-    private int getIndexOf(String fileContent, String tag) {
-      int index = fileContent.indexOf(tag);
-      if (index == -1) {
-        throw new IllegalArgumentException(String.format("The report does not contain a '%s' tag.", tag));
-      }
-      return index;
-    }
-
     // fileContent could contain <title>foo</title> or </title>foo<title>
-    private String getTitlePath(String fileContent, int indexOfTitleStart, int indexOfTitleEnd) {
-      if (indexOfTitleStart >= indexOfTitleEnd) {
-        throw new IllegalArgumentException(String.format("Unexpected <title> at index %d, after </title> at index %d.", indexOfTitleStart, indexOfTitleEnd));
+    private String getTitlePath(String fileContent) {
+      int indexOfTitleStart = fileContent.indexOf(TITLE_START);
+      if (indexOfTitleStart == -1) {
+        throw new IllegalArgumentException(String.format(NO_TAG_MESSAGE, TITLE_START));
+      }
+      int indexOfTitleEnd = fileContent.indexOf(TITLE_END, indexOfTitleStart);
+      if (indexOfTitleEnd == -1) {
+        throw new IllegalArgumentException(String.format(NO_TAG_MESSAGE, TITLE_END));
       }
       return fileContent.substring(indexOfTitleStart + TITLE_START.length(), indexOfTitleEnd);
     }
