@@ -19,7 +19,6 @@
  */
 package com.sonar.it.vbnet;
 
-import com.sonar.it.csharp.CodeDuplicationTest;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
