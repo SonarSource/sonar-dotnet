@@ -102,7 +102,7 @@ public class DotCoverReportParserTest {
     Exception thrown = assertThrows(IllegalArgumentException.class, () -> parser.accept(file, mock(Coverage.class)));
 
     assertThat(thrown).hasMessage("The report contents does not match the following regular expression: "
-      + ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(?<SequencePoints>\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)](,\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)])*)]\\);\\s*+</script>.*");
+      + ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(?<SequencePoints>\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)](,\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)])*)]\\);\\s*+</script>.*");
   }
 
   @Test

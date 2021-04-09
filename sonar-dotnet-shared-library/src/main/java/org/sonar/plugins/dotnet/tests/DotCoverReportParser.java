@@ -33,7 +33,7 @@ public class DotCoverReportParser implements CoverageParser {
 
   private static final String TITLE_START = "<title>";
   // the pattern for the information about a sequence point - (lineStart, columnStart, lineEnd, columnEnd, hits)
-  private static final Pattern SEQUENCE_POINT = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)]");
+  private static final Pattern SEQUENCE_POINT = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)]");
   private static final String SEQUENCE_POINTS_GROUP_NAME = "SequencePoints";
   // the file coverage has a list of sequence points
   // we use SEQUENCE_POINT_PATTERN below to avoid non-determinism in the regular expression, due to the `[` and `]` characters appearing multiple times
@@ -106,7 +106,7 @@ public class DotCoverReportParser implements CoverageParser {
 
       while (sequencePointsMatcher.find()) {
         int lineStart = Integer.parseInt(sequencePointsMatcher.group(1));
-        int hits = Integer.parseInt(sequencePointsMatcher.group(3));
+        int hits = Integer.parseInt(sequencePointsMatcher.group(2));
 
         coverage.addHits(fileCanonicalPath, lineStart, hits);
 
