@@ -33,10 +33,10 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        private static readonly Lazy<CSharpGeneratedCodeRecognizer> lazy =
+        private static readonly Lazy<CSharpGeneratedCodeRecognizer> Lazy =
             new Lazy<CSharpGeneratedCodeRecognizer>(() => new CSharpGeneratedCodeRecognizer());
 
-        public static CSharpGeneratedCodeRecognizer Instance => lazy.Value;
+        public static CSharpGeneratedCodeRecognizer Instance => Lazy.Value;
 
         #endregion Singleton implementation
 
