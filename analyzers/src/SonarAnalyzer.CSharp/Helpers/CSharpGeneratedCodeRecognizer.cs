@@ -19,8 +19,6 @@
  */
 
 using System;
-using System.Globalization;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -35,30 +33,12 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        private static readonly Lazy<CSharpGeneratedCodeRecognizer> lazy =
+        private static readonly Lazy<CSharpGeneratedCodeRecognizer> Lazy =
             new Lazy<CSharpGeneratedCodeRecognizer>(() => new CSharpGeneratedCodeRecognizer());
 
-        public static CSharpGeneratedCodeRecognizer Instance => lazy.Value;
+        public static CSharpGeneratedCodeRecognizer Instance => Lazy.Value;
 
         #endregion Singleton implementation
-
-        public override bool IsGenerated(SyntaxTree tree)
-        {
-            return base.IsGenerated(tree) ||
-                HasGeneratedRegion(tree);
-        }
-
-        private static bool HasGeneratedRegion(SyntaxTree tree)
-        {
-            return tree
-                .GetRoot()
-                .DescendantTrivia()
-                .Any(
-                    t =>
-                        t.IsKind(SyntaxKind.RegionDirectiveTrivia) &&
-                        CultureInfo.InvariantCulture.CompareInfo.IndexOf(t.ToString(), "generated",
-                        CompareOptions.IgnoreCase) >= 0);
-        }
 
         protected override bool IsTriviaComment(SyntaxTrivia trivia) =>
             trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||

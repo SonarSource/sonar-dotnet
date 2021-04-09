@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    public sealed class VisualBasicGeneratedCodeRecognizer : Helpers.GeneratedCodeRecognizer
+    public sealed class VisualBasicGeneratedCodeRecognizer : GeneratedCodeRecognizer
     {
         #region Singleton implementation
 
@@ -33,8 +33,8 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        private static readonly Lazy<VisualBasicGeneratedCodeRecognizer> lazy = new Lazy<VisualBasicGeneratedCodeRecognizer>(() => new VisualBasicGeneratedCodeRecognizer());
-        public static VisualBasicGeneratedCodeRecognizer Instance => lazy.Value;
+        private static readonly Lazy<VisualBasicGeneratedCodeRecognizer> Lazy = new Lazy<VisualBasicGeneratedCodeRecognizer>(() => new VisualBasicGeneratedCodeRecognizer());
+        public static VisualBasicGeneratedCodeRecognizer Instance => Lazy.Value;
 
         #endregion Singleton implementation
 
