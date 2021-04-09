@@ -106,9 +106,6 @@ namespace SonarAnalyzer.Helpers
         public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
             nodes.Any(n => n.RawKind == (int)kind);
 
-        public static bool AnyOfKind(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
-            tokens.Any(n => n.RawKind == (int)kind);
-
         public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation)
         {
             if (invocation == null ||
@@ -135,9 +132,6 @@ namespace SonarAnalyzer.Helpers
             methodSymbol.IsInType(type) &&
             // vbnet is case insensitive
             methodName.Equals(methodSymbol.Name, System.StringComparison.InvariantCultureIgnoreCase);
-
-        public static bool IsOnThis(this ExpressionSyntax expression) =>
-            IsOn(expression, SyntaxKind.MeExpression);
 
         public static bool IsOnBase(this ExpressionSyntax expression) =>
             IsOn(expression, SyntaxKind.MyBaseExpression);

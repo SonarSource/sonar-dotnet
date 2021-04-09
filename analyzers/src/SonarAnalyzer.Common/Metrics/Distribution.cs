@@ -28,9 +28,6 @@ namespace SonarAnalyzer.Common
 {
     public class Distribution
     {
-        internal static readonly IEnumerable<int> FileComplexityRange = ImmutableArray.Create(0, 5, 10, 20, 30, 60, 90);
-        internal static readonly IEnumerable<int> FunctionComplexityRange = ImmutableArray.Create(1, 2, 4, 6, 8, 10, 12);
-
         internal ImmutableArray<int> Ranges { private set; get; }
 
         public IList<int> Values { private set; get; }

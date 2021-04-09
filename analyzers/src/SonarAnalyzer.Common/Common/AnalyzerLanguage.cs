@@ -124,24 +124,6 @@ namespace SonarAnalyzer.Common
             }
         }
 
-        public string FriendlyName
-        {
-            get
-            {
-                if (this == CSharp)
-                {
-                    return "C#";
-                }
-
-                if (this == VisualBasic)
-                {
-                    return "VB.NET";
-                }
-
-                throw new NotSupportedException($"Can't get friendly name for '{ToString()}'.");
-            }
-        }
-
         public string FileExtension
         {
             get

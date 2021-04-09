@@ -27,8 +27,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ComparableInterfaceImplementationTest
     {
-        public int MyProperty { get; set; }
-
         [TestMethod]
         [TestCategory("Rule")]
         public void IComparableImplementation() =>

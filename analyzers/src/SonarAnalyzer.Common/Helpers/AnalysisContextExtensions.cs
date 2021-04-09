@@ -53,9 +53,6 @@ namespace SonarAnalyzer.Helpers
             where TLanguageKindEnum : struct =>
             context.CodeBlock.SyntaxTree;
 
-        public static SyntaxTree GetSyntaxTree(this SemanticModelAnalysisContext context) =>
-            context.SemanticModel.SyntaxTree;
-
         /// <param name="verifyScopeContext">Provide value for this argument only if the class has more than one SupportedDiagnostics.</param>
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic, SonarAnalysisContext verifyScopeContext = null) =>
             ReportDiagnostic(new ReportingContext(context, diagnostic), verifyScopeContext?.IsTestProject(context.Compilation, context.Options));

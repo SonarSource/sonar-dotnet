@@ -220,13 +220,6 @@ namespace SonarAnalyzer.SymbolicExecution
 
         protected abstract void VisitInstruction(ExplodedGraphNode node);
 
-        protected virtual void VisitBranchBlock(ExplodedGraphNode node, ProgramPoint programPoint)
-        {
-            var newProgramState = node.ProgramState.PopValue();
-            newProgramState = CleanStateAfterBlock(newProgramState, node.ProgramPoint.Block);
-            EnqueueAllSuccessors(programPoint.Block, newProgramState);
-        }
-
         protected virtual void VisitBranchBlock(BranchBlock branchBlock, ExplodedGraphNode node)
         {
             var newProgramState = node.ProgramState;

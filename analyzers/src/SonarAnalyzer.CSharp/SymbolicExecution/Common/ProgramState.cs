@@ -327,11 +327,6 @@ namespace SonarAnalyzer.SymbolicExecution
             return ExpressionStack.Peek();
         }
 
-        public SymbolicValue PeekValue(int nth)
-        {
-            return ExpressionStack.ToList()[nth];
-        }
-
         internal bool HasValue => !ExpressionStack.IsEmpty;
 
         internal ProgramState StoreSymbolicValue(ISymbol symbol, SymbolicValue newSymbolicValue)

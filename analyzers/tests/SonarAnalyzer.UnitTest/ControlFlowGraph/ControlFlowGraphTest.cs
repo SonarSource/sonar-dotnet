@@ -5369,14 +5369,6 @@ namespace NS
             return methodDeclaration;
         }
 
-        internal static ConstructorDeclarationSyntax CompileWithConstructorBody(string input, string methodName,
-            out SemanticModel semanticModel, ParseOptions parseOptions = null)
-        {
-            ConstructorDeclarationSyntax ctorDeclaration;
-            (ctorDeclaration, semanticModel) = TestHelper.Compile(input).GetConstructor(methodName);
-            return ctorDeclaration;
-        }
-
         private static IControlFlowGraph Build(string methodBody)
         {
             var method = CompileWithMethodBody(string.Format(TestInput, methodBody), "Bar", out var semanticModel);
