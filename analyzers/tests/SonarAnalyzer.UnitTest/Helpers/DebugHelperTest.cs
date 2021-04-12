@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void IsInternalDebuggingContext_WhenEnvVarValueIsTrue_ReturnsTrue() =>
             SetupRunAndReset("true", true);
 
-        private void SetupRunAndReset(string value, bool shouldBeTrue)
+        private static void SetupRunAndReset(string value, bool shouldBeTrue)
         {
             // Arrange
             var oldValue = Environment.GetEnvironmentVariable(DebugHelper.AnalyzerInternalDebugEnvVariable);

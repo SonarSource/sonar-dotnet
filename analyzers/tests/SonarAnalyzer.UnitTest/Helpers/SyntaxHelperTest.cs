@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class SyntaxHelperTest
     {
-        private const string SourceInputToString_CS =
+        private const string CsSourceInputToString =
 @"class Example
 {
     string Method(object input)
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     }
 }";
 
-        private const string SourceInputToString_VB =
+        private const string VbSourceInputToString =
 @"Class Example
     Function Method(Input As Object) As String
         Return Input.ToString()
@@ -51,7 +51,7 @@ End Class";
         [TestMethod]
         public void GetName_CS()
         {
-            var nodes = Parse_CS(SourceInputToString_CS);
+            var nodes = Parse_CS(CsSourceInputToString);
             nodes.OfType<CS.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
             nodes.OfType<CS.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("input", "ToString");
             nodes.OfType<CS.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
@@ -60,7 +60,7 @@ End Class";
         [TestMethod]
         public void GetName_VB()
         {
-            var nodes = Parse_VB(SourceInputToString_VB);
+            var nodes = Parse_VB(VbSourceInputToString);
             nodes.OfType<VB.MemberAccessExpressionSyntax>().Single().GetName().Should().Be("ToString");
             nodes.OfType<VB.IdentifierNameSyntax>().Select(x => x.GetName()).Should().BeEquivalentTo("Input", "ToString");
             nodes.OfType<VB.InvocationExpressionSyntax>().Single().GetName().Should().BeEmpty();
@@ -69,7 +69,7 @@ End Class";
         [TestMethod]
         public void NameIs_CS()
         {
-            var toString = Parse_CS(SourceInputToString_CS).OfType<CS.MemberAccessExpressionSyntax>().Single();
+            var toString = Parse_CS(CsSourceInputToString).OfType<CS.MemberAccessExpressionSyntax>().Single();
             toString.NameIs("ToString").Should().BeTrue();
             toString.NameIs("TOSTRING").Should().BeFalse();
             toString.NameIs("tostring").Should().BeFalse();
@@ -81,7 +81,7 @@ End Class";
         [TestMethod]
         public void NameIs_VB()
         {
-            var toString = Parse_VB(SourceInputToString_VB).OfType<VB.MemberAccessExpressionSyntax>().Single();
+            var toString = Parse_VB(VbSourceInputToString).OfType<VB.MemberAccessExpressionSyntax>().Single();
             toString.NameIs("ToString").Should().BeTrue();
             toString.NameIs("TOSTRING").Should().BeTrue();
             toString.NameIs("tostring").Should().BeTrue();
