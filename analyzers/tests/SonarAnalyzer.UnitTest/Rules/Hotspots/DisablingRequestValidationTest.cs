@@ -100,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             newCulture.NumberFormat.NumberDecimalSeparator = ",";
             Thread.CurrentThread.CurrentCulture = newCulture;
             var rootFile = Path.Combine(rootDirectory, WebConfig);
-            var filesToAnalyze = new List<string>() { rootFile };
+            var filesToAnalyze = new List<string> { rootFile };
             foreach (var subFolder in subFolders)
             {
                 filesToAnalyze.Add(Path.Combine(rootDirectory, subFolder, WebConfig));

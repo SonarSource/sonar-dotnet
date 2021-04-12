@@ -62,8 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CertificateValidationCheck_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
                 new VB.CertificateValidationCheck(),
-                GetAdditionalReferences()
-            );
+                GetAdditionalReferences());
 
         [TestMethod]
         [TestCategory("Rule")]
