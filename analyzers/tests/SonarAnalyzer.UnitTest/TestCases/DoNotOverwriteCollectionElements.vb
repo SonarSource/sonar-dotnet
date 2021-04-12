@@ -232,4 +232,29 @@ Namespace Tests.TestCases
 
     End Class
 
+    'See https://github.com/SonarSource/sonar-dotnet/issues/4178
+    Class Repro
+
+        Public Sub DifferentObjectSameProperty()
+            Dim First As New ClassWithListProperty
+            Dim Second As New ClassWithListProperty
+
+            First.IntList(0) = 1
+            Second.IntList(0) = 2
+
+        End Sub
+
+
+        Private Class ClassWithListProperty
+
+            Public ReadOnly Property IntList As List(Of Int32)
+                Get
+                    Return Nothing
+                End Get
+            End Property
+
+        End Class
+
+    End Class
+
 End Namespace

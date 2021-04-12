@@ -300,4 +300,22 @@ namespace Tests.Diagnostics
             MyContainer.publicStaticDictionaryField.Add("x", "x1"); // Noncompliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4178
+    public class Repro
+    {
+        public void DifferentObjectSameProperty()
+        {
+            var first = new ClassWithListProperty();
+            var second = new ClassWithListProperty();
+
+            first.IntList[0] = 1;
+            second.IntList[0] = 2;
+        }
+
+        private class ClassWithListProperty
+        {
+            public List<int> IntList { get; set; }
+        }
+    }
 }

@@ -32,14 +32,9 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionElementsBase<ExpressionStatementSyntax>
+    public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionElementsBase<SyntaxKind, ExpressionStatementSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected override DiagnosticDescriptor Rule { get; } = rule;
-
-        private static readonly HashSet<SyntaxKind> identifierOrLiteral = new HashSet<SyntaxKind>
+        private static readonly HashSet<SyntaxKind> IdentifierOrLiteral = new HashSet<SyntaxKind>
         {
             SyntaxKind.IdentifierName,
             SyntaxKind.StringLiteralExpression,
@@ -49,6 +44,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.TrueLiteralExpression,
             SyntaxKind.FalseLiteralExpression,
         };
+
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -80,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
             GetIndexOrKeyArgument(statement)?.Expression.RemoveParentheses();
 
         protected override bool IsIdentifierOrLiteral(SyntaxNode syntaxNode) =>
-            syntaxNode.IsAnyKind(identifierOrLiteral);
+            syntaxNode.IsAnyKind(IdentifierOrLiteral);
 
         private static SyntaxNode GetAssignmentOrInvocation(StatementSyntax statement)
         {
@@ -155,9 +152,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     // ElementAccess    // <-- we are here
                     //   Arguments: index
                     //   Expression: SimpleMemberAccess
-                    //                 Expression: a
-                    //                 Name: b  // <-- we need this
-                    return ((MemberAccessExpressionSyntax)expression).Name;
+                    //                 Expression: a // <-- we need this
+                    //                 Name: b
+                    return ((MemberAccessExpressionSyntax)expression);
                 case SyntaxKind.IdentifierName:
                     // a[index]
                     // ElementAccess    // <-- we are here

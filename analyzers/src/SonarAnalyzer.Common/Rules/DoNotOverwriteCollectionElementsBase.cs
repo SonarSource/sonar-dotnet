@@ -28,44 +28,17 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotOverwriteCollectionElementsBase<TStatementSyntax> : SonarDiagnosticAnalyzer
+    public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStatementSyntax> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
         where TStatementSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4143";
-        protected const string MessageFormat = "Verify this is the index/key that was intended; " +
+        private const string MessageFormat = "Verify this is the index/key that was intended; " +
             "a value has already been set for it.";
 
-        protected abstract DiagnosticDescriptor Rule { get; }
+        private readonly DiagnosticDescriptor rule;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-            ImmutableArray.Create(Rule);
-
-        protected void AnalysisAction(SyntaxNodeAnalysisContext context)
-        {
-            var statement = (TStatementSyntax)context.Node;
-            var collectionIdentifier = GetCollectionIdentifier(statement);
-            var indexOrKey = GetIndexOrKey(statement);
-
-            if (collectionIdentifier == null ||
-                indexOrKey == null ||
-                !IsIdentifierOrLiteral(indexOrKey) ||
-                !IsDictionaryOrCollection(collectionIdentifier, context.SemanticModel))
-            {
-                return;
-            }
-
-            var previousSet = GetPreviousStatements(statement)
-                .TakeWhile(IsSameCollection(collectionIdentifier))
-                .FirstOrDefault(IsSameIndexOrKey(indexOrKey));
-
-            if (previousSet != null)
-            {
-                context.ReportDiagnosticWhenActive(
-                    Diagnostic.Create(Rule,
-                        context.Node.GetLocation(),
-                        additionalLocations: new[] { previousSet.GetLocation() }));
-            }
-        }
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         /// <summary>
         /// Returns the index or key from the provided InvocationExpression or SimpleAssignmentExpression.
@@ -86,20 +59,49 @@ namespace SonarAnalyzer.Rules
         /// </summary>
         protected abstract bool IsIdentifierOrLiteral(SyntaxNode syntaxNode);
 
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected DoNotOverwriteCollectionElementsBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+
+        protected void AnalysisAction(SyntaxNodeAnalysisContext context)
+        {
+            var statement = (TStatementSyntax)context.Node;
+            var collectionIdentifier = GetCollectionIdentifier(statement);
+            var indexOrKey = GetIndexOrKey(statement);
+
+            if (collectionIdentifier == null
+                || indexOrKey == null
+                || !IsIdentifierOrLiteral(indexOrKey)
+                || !IsDictionaryOrCollection(collectionIdentifier, context.SemanticModel))
+            {
+                return;
+            }
+
+            var previousSet = GetPreviousStatements(statement)
+                .TakeWhile(IsSameCollection(collectionIdentifier))
+                .FirstOrDefault(IsSameIndexOrKey(indexOrKey));
+
+            if (previousSet != null)
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, context.Node.GetLocation(), additionalLocations: new[] { previousSet.GetLocation() }));
+            }
+        }
+
         private Func<TStatementSyntax, bool> IsSameCollection(SyntaxNode collectionIdentifier) =>
             statement =>
                 GetCollectionIdentifier(statement) is SyntaxNode identifier &&
                 identifier.ToString() == collectionIdentifier.ToString();
 
-        private bool IsDictionaryOrCollection(SyntaxNode identifier, SemanticModel semanticModel)
+        private Func<TStatementSyntax, bool> IsSameIndexOrKey(SyntaxNode indexOrKey) =>
+            statement => GetIndexOrKey(statement)?.ToString() == indexOrKey.ToString();
+
+        private static bool IsDictionaryOrCollection(SyntaxNode identifier, SemanticModel semanticModel)
         {
             var identifierType = semanticModel.GetTypeInfo(identifier).Type;
             return identifierType.DerivesOrImplements(KnownType.System_Collections_Generic_IDictionary_TKey_TValue)
                 || identifierType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T);
         }
-
-        private Func<TStatementSyntax, bool> IsSameIndexOrKey(SyntaxNode indexOrKey) =>
-            statement => GetIndexOrKey(statement)?.ToString() == indexOrKey.ToString();
 
         /// <summary>
         /// Returns all statements before the specified statement within the containing method.
