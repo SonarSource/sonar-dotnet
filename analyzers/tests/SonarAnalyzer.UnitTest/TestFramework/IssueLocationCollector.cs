@@ -110,7 +110,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static readonly Regex RxInvalidxPreciseLocation =
             new Regex(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern, RegexOptions.Compiled);
 
-        public IList<IIssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
+        public static IList<IIssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
         {
             var preciseLocations = new List<IssueLocation>();
             var locations = new List<IssueLocation>();
@@ -135,10 +135,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations, preciseLocations));
         }
 
-        internal IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
+        internal static IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
             lines?.SelectMany(GetBuildErrorsLocations).OfType<IIssueLocation>() ?? Enumerable.Empty<IIssueLocation>();
 
-        internal /*for testing*/ IList<IIssueLocation> MergeLocations(IEnumerable<IssueLocation> locations, IEnumerable<IssueLocation> preciseLocations)
+        internal static /*for testing*/ IList<IIssueLocation> MergeLocations(IEnumerable<IssueLocation> locations, IEnumerable<IssueLocation> preciseLocations)
         {
             var usedLocations = new List<IssueLocation>();
             foreach (var location in locations)
@@ -168,13 +168,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .ToList();
         }
 
-        internal /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line) =>
+        internal static /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line) =>
             GetLocations(line, RxIssue);
 
-        internal /*for testing*/ IEnumerable<IssueLocation> GetBuildErrorsLocations(TextLine line) =>
+        internal static /*for testing*/ IEnumerable<IssueLocation> GetBuildErrorsLocations(TextLine line) =>
             GetLocations(line, RxBuildError);
 
-        internal /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
+        internal static /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
         {
             var match = RxPreciseLocation.Match(line.ToString());
             if (match.Success)
@@ -185,7 +185,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return Enumerable.Empty<IssueLocation>();
         }
 
-        private IEnumerable<IssueLocation> GetLocations(TextLine line, Regex rx)
+        private static IEnumerable<IssueLocation> GetLocations(TextLine line, Regex rx)
         {
             var match = rx.Match(line.ToString());
             if (match.Success)
@@ -196,7 +196,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return Enumerable.Empty<IssueLocation>();
         }
 
-        private IEnumerable<IssueLocation> CreateIssueLocations(Match match, int lineNumber)
+        private static IEnumerable<IssueLocation> CreateIssueLocations(Match match, int lineNumber)
         {
             var line = lineNumber + GetOffset(match);
             var isPrimary = GetIsPrimary(match);
@@ -222,13 +222,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 });
         }
 
-        private int? GetStart(Match match)
+        private static int? GetStart(Match match)
         {
             var position = match.Groups["position"];
             return position.Success ? (int?)position.Index : null;
         }
 
-        private int? GetLength(Match match)
+        private static int? GetLength(Match match)
         {
             var position = match.Groups["position"];
             return position.Success ? (int?)position.Length : null;
@@ -246,25 +246,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return length.Success ? (int?)int.Parse(length.Value) : null;
         }
 
-        private bool GetIsPrimary(Match match)
+        private static bool GetIsPrimary(Match match)
         {
             var issueType = match.Groups["issueType"];
             return !issueType.Success || issueType.Value == "Noncompliant";
         }
 
-        private string GetMessage(Match match)
+        private static string GetMessage(Match match)
         {
             var message = match.Groups["message"];
             return message.Success ? message.Value : null;
         }
 
-        private int GetOffset(Match match)
+        private static int GetOffset(Match match)
         {
             var offset = match.Groups["offset"];
             return offset.Success ? int.Parse(offset.Value) : 0;
         }
 
-        private IEnumerable<string> GetIssueIds(Match match)
+        private static IEnumerable<string> GetIssueIds(Match match)
         {
             var issueIds = match.Groups["issueIds"];
             if (!issueIds.Success)

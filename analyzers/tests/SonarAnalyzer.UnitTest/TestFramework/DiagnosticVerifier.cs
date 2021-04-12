@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
-        private static readonly string[] BuildErrorsToIgnore = new string[]
+        private static readonly string[] BuildErrorsToIgnore = new[]
         {
             "BC36716" // VB12 does not support line continuation comments" i.e. a comment at the end of a multi-line statement.
         };
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             try
             {
                 var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath: sonarProjectConfigPath);
-                var expectedIssues = new IssueLocationCollector().GetExpectedIssueLocations(source.Lines).ToList();
+                var expectedIssues = IssueLocationCollector.GetExpectedIssueLocations(source.Lines).ToList();
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
@@ -78,61 +78,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        internal static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, ICollection<IIssueLocation> expectedIssues, bool compareIdToMessage)
-        {
-            DumpActualDiagnostics(languageVersion, diagnostics);
-
-            foreach (var diagnostic in diagnostics)
-            {
-                var issueId = VerifyPrimaryIssue(languageVersion,
-                    expectedIssues,
-                    issue => issue.IsPrimary,
-                    diagnostic.Location,
-                    compareIdToMessage ? diagnostic.Id : diagnostic.GetMessage(),
-                    compareIdToMessage
-                        ? $"{languageVersion}: Unexpected build error [{diagnostic.Id}]: {diagnostic.GetMessage()} on line {diagnostic.Location.GetLineNumberToReport()}"
-                        : null);
-
-                var secondaryLocations = diagnostic.AdditionalLocations
-                    .Select((location, i) => diagnostic.GetSecondaryLocation(i))
-                    .OrderBy(x => x.Location.GetLineNumberToReport())
-                    .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character);
-
-                foreach (var secondaryLocation in secondaryLocations)
-                {
-                    VerifySecondaryIssue(languageVersion,
-                        expectedIssues,
-                        issue => issue.IssueId == issueId && !issue.IsPrimary,
-                        secondaryLocation.Location,
-                        secondaryLocation.Message,
-                        issueId);
-                }
-            }
-
-            if (expectedIssues.Count != 0)
-            {
-                var expectedIssuesDescription = expectedIssues.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
-                Execute.Assertion.FailWith($"{languageVersion}: Issue(s) expected but not raised on line(s):{expectedIssuesDescription.JoinStr("")}");
-            }
-        }
-
-        private static void DumpActualDiagnostics(string languageVersion, IEnumerable<Diagnostic> diagnostics)
-        {
-            Console.WriteLine($"{languageVersion}: Actual diagnostics: {diagnostics.Count()}");
-            foreach (var d in diagnostics.OrderBy(x => x.GetLineNumberToReport()))
-            {
-                var lineSpan = d.Location.GetLineSpan();
-                Console.WriteLine($"  Id: {d.Id}, Line: {d.Location.GetLineNumberToReport()}, [{lineSpan.StartLinePosition.Character}, {lineSpan.EndLinePosition.Character}]");
-            }
-        }
-
         public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
             DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode,
             bool verifyNoExceptionIsThrown = true,
             string sonarProjectConfigPath = null) =>
             GetDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, verifyNoExceptionIsThrown, sonarProjectConfigPath);
 
-        public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default, string sonarProjectConfigPath = null) =>
+        public static void VerifyNoIssueReported(Compilation compilation,
+                                                 DiagnosticAnalyzer diagnosticAnalyzer,
+                                                 CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                                 string sonarProjectConfigPath = null) =>
             GetDiagnostics(compilation, diagnosticAnalyzer, checkMode, sonarProjectConfigPath: sonarProjectConfigPath).Should().BeEmpty();
 
         public static ImmutableArray<Diagnostic> GetAllDiagnostics(Compilation compilation,
@@ -186,13 +141,59 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Where(d => ids.Contains(d.Id));
         }
 
+        internal static void CompareActualToExpected(string languageVersion, IEnumerable<Diagnostic> diagnostics, ICollection<IIssueLocation> expectedIssues, bool compareIdToMessage)
+        {
+            DumpActualDiagnostics(languageVersion, diagnostics);
+
+            foreach (var diagnostic in diagnostics)
+            {
+                var issueId = VerifyPrimaryIssue(languageVersion,
+                    expectedIssues,
+                    issue => issue.IsPrimary,
+                    diagnostic.Location,
+                    compareIdToMessage ? diagnostic.Id : diagnostic.GetMessage(),
+                    compareIdToMessage
+                        ? $"{languageVersion}: Unexpected build error [{diagnostic.Id}]: {diagnostic.GetMessage()} on line {diagnostic.Location.GetLineNumberToReport()}"
+                        : null);
+
+                var secondaryLocations = diagnostic.AdditionalLocations
+                    .Select((location, i) => diagnostic.GetSecondaryLocation(i))
+                    .OrderBy(x => x.Location.GetLineNumberToReport())
+                    .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character);
+
+                foreach (var secondaryLocation in secondaryLocations)
+                {
+                    VerifySecondaryIssue(languageVersion,
+                        expectedIssues,
+                        issue => issue.IssueId == issueId && !issue.IsPrimary,
+                        secondaryLocation.Location,
+                        secondaryLocation.Message,
+                        issueId);
+                }
+            }
+
+            if (expectedIssues.Count != 0)
+            {
+                var expectedIssuesDescription = expectedIssues.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
+                Execute.Assertion.FailWith($"{languageVersion}: Issue(s) expected but not raised on line(s):{expectedIssuesDescription.JoinStr("")}");
+            }
+        }
+
+        private static void DumpActualDiagnostics(string languageVersion, IEnumerable<Diagnostic> diagnostics)
+        {
+            Console.WriteLine($"{languageVersion}: Actual diagnostics: {diagnostics.Count()}");
+            foreach (var d in diagnostics.OrderBy(x => x.GetLineNumberToReport()))
+            {
+                var lineSpan = d.Location.GetLineSpan();
+                Console.WriteLine($"  Id: {d.Id}, Line: {d.Location.GetLineNumberToReport()}, [{lineSpan.StartLinePosition.Character}, {lineSpan.EndLinePosition.Character}]");
+            }
+        }
+
         private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
         {
             var buildErrors = GetBuildErrors(diagnostics);
 
-            var expectedBuildErrors = new IssueLocationCollector()
-                .GetExpectedBuildErrors(compilation.SyntaxTrees.Skip(1).FirstOrDefault()?.GetText().Lines)
-                .ToList();
+            var expectedBuildErrors = IssueLocationCollector.GetExpectedBuildErrors(compilation.SyntaxTrees.Skip(1).FirstOrDefault()?.GetText().Lines).ToList();
             CompareActualToExpected(compilation.LanguageVersionString(), buildErrors, expectedBuildErrors, true);
         }
 
@@ -262,7 +263,7 @@ Actual  : '{message}'");
 
         internal static class SuppressionHandler
         {
-            private static bool isHooked = false;
+            private static bool isHooked;
 
             private static ConcurrentDictionary<string, int> counters = new ConcurrentDictionary<string, int>();
 

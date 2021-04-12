@@ -46,8 +46,8 @@ namespace SonarAnalyzer.UnitTest.Common
         public void Initialize()
         {
             ruleLoaderMock = new Mock<IRuleLoader>(MockBehavior.Strict);
-            ruleLoaderMock.Setup(r => r.GetEnabledRules(FirstSonarLintFile)).Returns(new HashSet<string>() { FirstRuleId });
-            ruleLoaderMock.Setup(r => r.GetEnabledRules(SecondSonarLintFile)).Returns(new HashSet<string>() { SecondRuleId });
+            ruleLoaderMock.Setup(r => r.GetEnabledRules(FirstSonarLintFile)).Returns(new HashSet<string> { FirstRuleId });
+            ruleLoaderMock.Setup(r => r.GetEnabledRules(SecondSonarLintFile)).Returns(new HashSet<string> { SecondRuleId });
         }
 
         [TestMethod]
@@ -154,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.Common
         private void Initialize(HotspotConfiguration sut, string path) =>
             sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(path)));
 
-        private ImmutableArray<AdditionalText> GetAdditionalFiles(string path) =>
+        private static ImmutableArray<AdditionalText> GetAdditionalFiles(string path) =>
             ImmutableArray.Create(Mock.Of<AdditionalText>(additionalText => additionalText.Path == path));
     }
 }

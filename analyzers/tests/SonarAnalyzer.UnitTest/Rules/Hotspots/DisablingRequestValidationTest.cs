@@ -185,7 +185,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static void VerifyResults(string webConfigPath, IList<Diagnostic> allDiagnostics, string languageVersion)
         {
             var actualIssues = allDiagnostics.Where(d => d.Location.GetLineSpan().Path.EndsWith(webConfigPath));
-            var expectedIssues = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(File.ReadAllText(webConfigPath)).Lines).ToList();
+            var expectedIssues = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(File.ReadAllText(webConfigPath)).Lines).ToList();
             DiagnosticVerifier.CompareActualToExpected(languageVersion, actualIssues, expectedIssues, false);
         }
     }

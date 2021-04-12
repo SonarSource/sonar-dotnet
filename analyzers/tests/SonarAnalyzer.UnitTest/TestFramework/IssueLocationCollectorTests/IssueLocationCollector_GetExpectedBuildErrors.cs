@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         Console.WriteLine(o);
     }
 }";
-            var expectedErrors = new IssueLocationCollector().GetExpectedBuildErrors(SourceText.From(code).Lines);
+            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines);
 
             expectedErrors.Should().BeEmpty();
         }
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         Console.WriteLine(o);
     }
 }";
-            var expectedErrors = new IssueLocationCollector().GetExpectedBuildErrors(SourceText.From(code).Lines);
+            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines);
 
             expectedErrors.Should().HaveCount(2);
 
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     {
     }
 }";
-            var expectedErrors = new IssueLocationCollector().GetExpectedBuildErrors(SourceText.From(code).Lines);
+            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines);
 
             expectedErrors.Should().HaveCount(3);
 

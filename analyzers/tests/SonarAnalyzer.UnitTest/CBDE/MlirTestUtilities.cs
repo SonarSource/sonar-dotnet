@@ -22,7 +22,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.CBDE;
@@ -35,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
     {
         private static readonly string CbdeDialectCheckerPath =
             Path.Combine(
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                Path.GetDirectoryName(typeof(MlirTestUtilities).Assembly.Location),
                 @"CBDE\windows\cbde-dialect-checker.exe");
 
         public static void CheckExecutableExists() =>

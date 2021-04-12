@@ -33,7 +33,6 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-
     /// <summary>
     /// Returned values depend on the build environment.
     /// Local run: Only the latest language version is used to simplify debugging.

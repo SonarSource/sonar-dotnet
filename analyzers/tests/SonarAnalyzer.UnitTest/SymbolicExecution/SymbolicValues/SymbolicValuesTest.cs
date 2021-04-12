@@ -41,6 +41,5 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.SymbolicValues
             var sv = new SymbolicValue();
             sv.ToString().Should().StartWith("SV_");
         }
-
     }
 }

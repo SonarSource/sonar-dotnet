@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^ @-1
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^ Secondary
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^ Secondary@-1
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^ [flow1,flow2]
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().HaveCount(2);
 
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
                 expectedIsPrimary: new[] { true, true },
                 expectedLineNumbers: new[] { 3, 3 },
                 expectedMessages: new string[] { null, null },
-                expectedIssueIds: new string[] { "flow1", "flow2" });
+                expectedIssueIds: new[] { "flow1", "flow2" });
         }
 
         [TestMethod]
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^ Secondary [last1,flow1,flow2]
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().HaveCount(3);
 
@@ -141,7 +141,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
                 expectedIsPrimary: new[] { false, false, false },
                 expectedLineNumbers: new[] { 3, 3, 3 },
                 expectedMessages: new string[] { null, null, null },
-                expectedIssueIds: new string[] { "flow1", "flow2", "last1" });
+                expectedIssueIds: new[] { "flow1", "flow2", "last1" });
         }
 
         [TestMethod]
@@ -152,15 +152,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^ [flow1,flow2] {{Some message}}
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().HaveCount(2);
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true, true },
                 expectedLineNumbers: new[] { 3, 3 },
-                expectedMessages: new string[] { "Some message", "Some message" },
-                expectedIssueIds: new string[] { "flow1", "flow2" });
+                expectedMessages: new[] { "Some message", "Some message" },
+                expectedIssueIds: new[] { "flow1", "flow2" });
         }
 
         [TestMethod]
@@ -171,15 +171,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^ Secondary [flow1,flow2] {{Some message}}
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().HaveCount(2);
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { false, false },
                 expectedLineNumbers: new[] { 3, 3 },
-                expectedMessages: new string[] { "Some message", "Some message" },
-                expectedIssueIds: new string[] { "flow1", "flow2" });
+                expectedMessages: new[] { "Some message", "Some message" },
+                expectedIssueIds: new[] { "flow1", "flow2" });
         }
 
         [TestMethod]
@@ -189,15 +189,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
             <Baaad />
 <!--        ^^^^^^^^^ Secondary [flow1,flow2] {{Some message}}         -->
 </Root>");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().HaveCount(2);
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { false, false },
                 expectedLineNumbers: new[] { 2, 2 },
-                expectedMessages: new string[] { "Some message", "Some message" },
-                expectedIssueIds: new string[] { "flow1", "flow2" });
+                expectedMessages: new[] { "Some message", "Some message" },
+                expectedIssueIds: new[] { "flow1", "flow2" });
         }
 
         [TestMethod]
@@ -208,14 +208,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^ {{Some message}}
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true },
                 expectedLineNumbers: new[] { 3 },
-                expectedMessages: new string[] { "Some message" },
+                expectedMessages: new[] { "Some message" },
                 expectedIssueIds: new string[] { null });
         }
 
@@ -227,14 +227,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^ Secondary {{Some message}}
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { false },
                 expectedLineNumbers: new[] { 3 },
-                expectedMessages: new string[] { "Some message" },
+                expectedMessages: new[] { "Some message" },
                 expectedIssueIds: new string[] { null });
         }
 
@@ -245,7 +245,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a);
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().BeEmpty();
         }
@@ -258,7 +258,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
     //      ^^^^^^^^^
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
             result.Should().ContainSingle();
             var issueLocation = result.First();
 
@@ -276,7 +276,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //          ^^^^^^^^^ SecondaryNoncompliantSecondary {{Some message}}
 }");
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
 
             result.Should().BeEmpty();
         }
@@ -289,7 +289,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     Console.WriteLine(a);
 //  ^^^^^^^ ^^^^^^^^^ ^
 }");
-            Action action = () => new IssueLocationCollector().GetPreciseIssueLocations(line);
+            Action action = () => IssueLocationCollector.GetPreciseIssueLocations(line);
             action.Should()
                 .Throw<InvalidOperationException>()
                 .WithMessage(@"Expecting only one precise location per line, found 3 on line 3. If you want to specify more than one precise location per line you need to omit the Noncompliant comment:
@@ -311,21 +311,21 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
 -->
 </Root>";
             var line = GetLine(2, code);
-            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
             result.Should().ContainSingle();
             var issueLocation = result.Single();
             issueLocation.Start.Should().Be(7);
             issueLocation.Length.Should().Be(15);
 
             line = GetLine(4, code);
-            result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
             result.Should().ContainSingle();
             issueLocation = result.Single();
             issueLocation.Start.Should().Be(9);
             issueLocation.Length.Should().Be(15);
 
             line = GetLine(6, code);
-            result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
             result.Should().ContainSingle();
             issueLocation = result.Single();
             issueLocation.Start.Should().Be(11);

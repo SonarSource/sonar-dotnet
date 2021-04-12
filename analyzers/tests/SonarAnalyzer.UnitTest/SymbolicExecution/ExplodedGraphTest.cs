@@ -1,22 +1,22 @@
 ﻿/*
-* SonarAnalyzer for .NET
-* Copyright (C) 2015-2021 SonarSource SA
-* mailto: contact AT sonarsource DOT com
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU Lesser General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* Lesser General Public License for more details.
-*
-* You should have received a copy of the GNU Lesser General Public License
-* along with this program; if not, write to the Free Software Foundation,
-* Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2021 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 
 extern alias csharp;
 using System;
@@ -179,7 +179,8 @@ namespace NS
             context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
-                    switch (args.Instruction.ToString()){
+                    switch (args.Instruction.ToString())
+                    {
                         case "a = true":
                             args.ProgramState.GetSymbolValue(aSymbol).Should().Be(SymbolicValue.True);
                             break;
@@ -633,7 +634,8 @@ namespace Namespace
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_DeclarationExpressionVisit_AsOutParameter_Discard()
         {
-            const string testInput = "string key = null; Dictionary<string, int> dictionary = new Dictionary<string, int>(); dictionary.TryGetValue(key, out var _); dictionary.TryGetValue(key, out _);";
+            const string testInput =
+                "string key = null; Dictionary<string, int> dictionary = new Dictionary<string, int>(); dictionary.TryGetValue(key, out var _); dictionary.TryGetValue(key, out _);";
             var context = new ExplodedGraphContext(testInput);
             var dictionarySymbol = context.GetSymbol("dictionary");
             var instructionsInspected = 0;
@@ -1504,9 +1506,7 @@ namespace Namespace
 
             context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
-                {
-                    isIndexerVisited = isIndexerVisited || args.Instruction.ToString() == "list[2..4]";
-                };
+                isIndexerVisited = isIndexerVisited || args.Instruction.ToString() == "list[2..4]";
 
             context.WalkWithExitBlocks(5, 1);
             isIndexerVisited.Should().BeTrue();
@@ -1536,17 +1536,17 @@ namespace Namespace
 
             private ExplodedGraphContext(MethodDeclarationSyntax mainMethod, SemanticModel semanticModel)
             {
-                this.MainMethod = mainMethod;
-                this.SemanticModel = semanticModel;
-                this.MainMethodSymbol = semanticModel.GetDeclaredSymbol(this.MainMethod);
-                var methodBody = (CSharpSyntaxNode)this.MainMethod.Body ?? this.MainMethod.ExpressionBody;
-                this.ControlFlowGraph = CSharpControlFlowGraph.Create(methodBody, semanticModel);
-                this.LiveVariableAnalysis = CSharpLiveVariableAnalysis.Analyze(this.ControlFlowGraph, this.MainMethodSymbol, semanticModel);
-                this.ExplodedGraph = new CSharpExplodedGraph(this.ControlFlowGraph, this.MainMethodSymbol, semanticModel, this.LiveVariableAnalysis);
-                this.ExplodedGraph.InstructionProcessed += (sender, args) => { this.NumberOfProcessedInstructions++; };
-                this.ExplodedGraph.ExplorationEnded += (sender, args) => { this.ExplorationEnded = true; };
-                this.ExplodedGraph.MaxStepCountReached += (sender, args) => { this.MaxStepCountReached = true; };
-                this.ExplodedGraph.ExitBlockReached += (sender, args) => { this.NumberOfExitBlockReached++; };
+                MainMethod = mainMethod;
+                SemanticModel = semanticModel;
+                MainMethodSymbol = semanticModel.GetDeclaredSymbol(MainMethod);
+                var methodBody = (CSharpSyntaxNode)MainMethod.Body ?? MainMethod.ExpressionBody;
+                ControlFlowGraph = CSharpControlFlowGraph.Create(methodBody, semanticModel);
+                LiveVariableAnalysis = CSharpLiveVariableAnalysis.Analyze(ControlFlowGraph, MainMethodSymbol, semanticModel);
+                ExplodedGraph = new CSharpExplodedGraph(ControlFlowGraph, MainMethodSymbol, semanticModel, LiveVariableAnalysis);
+                ExplodedGraph.InstructionProcessed += (sender, args) => { NumberOfProcessedInstructions++; };
+                ExplodedGraph.ExplorationEnded += (sender, args) => { ExplorationEnded = true; };
+                ExplodedGraph.MaxStepCountReached += (sender, args) => { MaxStepCountReached = true; };
+                ExplodedGraph.ExitBlockReached += (sender, args) => { NumberOfExitBlockReached++; };
             }
 
             public enum SymbolType
@@ -1556,21 +1556,27 @@ namespace Namespace
                 Declaration
             }
 
+            public void WalkWithExitBlocks(int expectedProcessedInstructions, int expectedExitBlocks) =>
+                WalkAndCheck(expectedProcessedInstructions, expectedExitBlocks);
+
+            public void WalkWithInstructions(int expectedProcessedInstructions) =>
+                WalkAndCheck(expectedProcessedInstructions, 1);
+
             internal ISymbol GetSymbol(string identifier, SymbolType st = SymbolType.Variable)
             {
                 var expression = st switch
                 {
-                    SymbolType.Variable => this.MainMethod
+                    SymbolType.Variable => MainMethod
                         .DescendantNodes()
                         .OfType<VariableDeclaratorSyntax>()
                         .First(d => d.Identifier.ToString() == identifier),
 
-                    SymbolType.Identifier => (CSharpSyntaxNode)this.MainMethod
+                    SymbolType.Identifier => (CSharpSyntaxNode)MainMethod
                         .DescendantNodes()
                         .OfType<IdentifierNameSyntax>()
                         .First(d => d.Identifier.ToString() == identifier),
 
-                    SymbolType.Declaration => this.MainMethod
+                    SymbolType.Declaration => MainMethod
                         .DescendantNodes()
                         .OfType<SingleVariableDesignationSyntax>()
                         .First(d => d.Identifier.Text == identifier),
@@ -1578,27 +1584,17 @@ namespace Namespace
                     _ => throw new NotSupportedException()
                 };
 
-                return this.SemanticModel.GetDeclaredSymbol(expression)
-                    ?? this.SemanticModel.GetSymbolOrCandidateSymbol(expression);
-            }
-
-            public void WalkWithExitBlocks(int expectedProcessedInstructions, int expectedExitBlocks)
-            {
-                WalkAndCheck(expectedProcessedInstructions, expectedExitBlocks);
-            }
-
-            public void WalkWithInstructions(int expectedProcessedInstructions)
-            {
-                WalkAndCheck(expectedProcessedInstructions, 1);
+                return SemanticModel.GetDeclaredSymbol(expression)
+                    ?? SemanticModel.GetSymbolOrCandidateSymbol(expression);
             }
 
             private void WalkAndCheck(int expectedProcessedInstructions, int expectedExitBlocks)
             {
-                this.ExplodedGraph.Walk();
-                this.ExplorationEnded.Should().Be(true);
-                this.NumberOfProcessedInstructions.Should().Be(expectedProcessedInstructions);
-                this.NumberOfExitBlockReached.Should().Be(expectedExitBlocks);
-                this.MaxStepCountReached.Should().Be(false);
+                ExplodedGraph.Walk();
+                ExplorationEnded.Should().Be(true);
+                NumberOfProcessedInstructions.Should().Be(expectedProcessedInstructions);
+                NumberOfExitBlockReached.Should().Be(expectedExitBlocks);
+                MaxStepCountReached.Should().Be(false);
             }
         }
 

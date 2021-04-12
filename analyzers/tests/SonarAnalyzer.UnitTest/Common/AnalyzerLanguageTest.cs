@@ -36,12 +36,8 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
-        public void AnalyzerLanguage_Parse_Fail()
-        {
-            var parsed = AnalyzerLanguage.Parse("csharp");
-            parsed.Should().Be(AnalyzerLanguage.CSharp);
-        }
+        public void AnalyzerLanguage_Parse_Fail() =>
+            Assert.ThrowsException<NotSupportedException>(() => AnalyzerLanguage.Parse("csharp"));
 
         [TestMethod]
         public void AnalyzerLanguage_GetDirectory()

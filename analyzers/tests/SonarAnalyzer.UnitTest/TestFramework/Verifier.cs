@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                                      IEnumerable<MetadataReference> additionalReferences = null)
         {
             var solution = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippet(snippet).AddReferences(additionalReferences).GetSolution();
-            VerifyAnalyzer(solution, new DiagnosticAnalyzer[] { diagnosticAnalyzer }, null, checkMode);
+            VerifyAnalyzer(solution, new[] { diagnosticAnalyzer }, null, checkMode);
         }
 
         /// <summary>

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         [TestMethod]
         public void MergeLocations_No_Issues()
         {
-            var result = new IssueLocationCollector().MergeLocations(
+            var result = IssueLocationCollector.MergeLocations(
                 Enumerable.Empty<IssueLocation>(),
                 Enumerable.Empty<IssueLocation>());
 
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         [TestMethod]
         public void MergeLocations_Issues_Same_Line()
         {
-            var result = new IssueLocationCollector().MergeLocations(
+            var result = IssueLocationCollector.MergeLocations(
                 new[] { new IssueLocation { LineNumber = 3, Message = "message 1" } },
                 new[] { new IssueLocation { LineNumber = 3, Start = 10, Length = 5, Message = "message 2" } });
 
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         [TestMethod]
         public void MergeLocations_Issues_Different_Lines()
         {
-            var result = new IssueLocationCollector().MergeLocations(
+            var result = IssueLocationCollector.MergeLocations(
                 new[] { new IssueLocation { LineNumber = 3, Message = "message 1" } },
                 new[] { new IssueLocation { LineNumber = 10, Start = 10, Length = 5, Message = "message 2" } });
 
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         [TestMethod]
         public void MergeLocations_More_Than_One_Precise_Location_For_Same_Issue()
         {
-            Action action = () => new IssueLocationCollector().MergeLocations(
+            Action action = () => IssueLocationCollector.MergeLocations(
                 new[] { new IssueLocation { LineNumber = 3 } },
                 new[]
                 {
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         [TestMethod]
         public void MergeLocations_Empty_Issues_NonEmpty_PreciseLocations()
         {
-            var result = new IssueLocationCollector().MergeLocations(
+            var result = IssueLocationCollector.MergeLocations(
                 Enumerable.Empty<IssueLocation>(),
                 new[] { new IssueLocation { LineNumber = 3 } });
 
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         [TestMethod]
         public void MergeLocations_NonEmpty_Issues_Empty_PreciseLocations()
         {
-            var result = new IssueLocationCollector().MergeLocations(
+            var result = IssueLocationCollector.MergeLocations(
                 new[] { new IssueLocation { LineNumber = 3 } },
                 Enumerable.Empty<IssueLocation>());
 
