@@ -71,13 +71,15 @@ namespace SonarAnalyzer.Extensions
                     return parent;
                 }
 
-                // If this node is not parented by a name, we're done.
-                if (!(parent is NameSyntax))
+                if (parent is NameSyntax)
                 {
+                    node = parent;
+                }
+                else
+                {
+                    // If this node is not parented by a name, we're done.
                     return node;
                 }
-
-                node = parent;
             }
 
             return null;
