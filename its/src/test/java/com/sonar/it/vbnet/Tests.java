@@ -40,6 +40,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.sonarqube.ws.Components;
 import org.sonarqube.ws.Hotspots;
+import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.Measures;
 
 @RunWith(Suite.class)
@@ -58,7 +59,7 @@ public class Tests {
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE")))
+    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "DEV")))
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
     .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
     .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_no_rule.xml"))
@@ -104,6 +105,10 @@ public class Tests {
   @CheckForNull
   static Measures.Measure getMeasure(String componentKey, String metricKey) {
     return TestUtils.getMeasure(ORCHESTRATOR, componentKey, metricKey);
+  }
+
+  static List<Issues.Issue> getIssues(String componentKey) {
+    return TestUtils.getIssues(ORCHESTRATOR, componentKey);
   }
 
   static List<Hotspots.SearchWsResponse.Hotspot> getHotspots(String projectKey) {

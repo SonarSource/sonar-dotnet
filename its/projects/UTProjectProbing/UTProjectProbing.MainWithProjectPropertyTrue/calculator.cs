@@ -2,8 +2,8 @@
 
 namespace UTProjectProbing.MainWithProjectPropertyTrue
 {
-    public class calculator
+    public class Calculator
     {
-        ~calculator() => throw new NotImplementedException();
+        ~Calculator() => throw new NotImplementedException();
     }
 }

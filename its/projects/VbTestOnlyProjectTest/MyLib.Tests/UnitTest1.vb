@@ -6,4 +6,15 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
     <TestMethod()> Public Sub TestMethod1()
     End Sub
 
+    <TestMethod()>
+    <Ignore>
+    Public Sub IgnoredWithTestAndAllScopeRuleIssues(B As Boolean)
+
+        If B = True Then
+           ' Do something.
+        End If
+
+        Assert.IsTrue(B)
+    End Sub
+
 End Class
