@@ -328,6 +328,7 @@ namespace SonarAnalyzer.Helpers
             {
                 MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
                 SimpleNameSyntax simpleNameSyntax => simpleNameSyntax.Identifier.ValueText,
+                NameSyntax nameSyntax => nameSyntax.GetText().ToString(),
                 _ => string.Empty
             };
 
