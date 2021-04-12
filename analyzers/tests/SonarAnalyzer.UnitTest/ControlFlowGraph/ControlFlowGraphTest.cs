@@ -5290,13 +5290,13 @@ namespace NS
             }
         }
 
-        private void VerifyAllInstructions(Block block, params string[] instructions)
+        private static void VerifyAllInstructions(Block block, params string[] instructions)
         {
             block.Instructions.Should().HaveSameCount(instructions);
             VerifyInstructions(block, 0, instructions);
         }
 
-        private void VerifyNoInstruction(Block block) =>
+        private static void VerifyNoInstruction(Block block) =>
             VerifyAllInstructions(block, Array.Empty<string>());
 
         private static void VerifyCfg(IControlFlowGraph cfg, int numberOfBlocks)

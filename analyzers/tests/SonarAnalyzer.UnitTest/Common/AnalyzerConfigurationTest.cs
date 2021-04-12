@@ -151,7 +151,7 @@ namespace SonarAnalyzer.UnitTest.Common
             ruleLoaderMock.Verify(r => r.GetEnabledRules(It.IsAny<string>()), Times.Never);
         }
 
-        private void Initialize(HotspotConfiguration sut, string path) =>
+        private static void Initialize(HotspotConfiguration sut, string path) =>
             sut.Initialize(new AnalyzerOptions(GetAdditionalFiles(path)));
 
         private static ImmutableArray<AdditionalText> GetAdditionalFiles(string path) =>
