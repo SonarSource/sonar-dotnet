@@ -32,15 +32,15 @@ namespace SonarAnalyzer.UnitTest.Extensions
     public class SyntaxTokenExtensionsTests
     {
         [TestMethod]
-        public void GivenEmptyToken_GetBindableParent_ReturnsNull()
+        public void GetBindableParent_ForEmptyToken_ReturnsNull()
         {
             SyntaxToken empty = default;
 
-            Assert.IsNull(empty.GetBindableParent());
+            empty.GetBindableParent().Should().BeNull();
         }
 
         [TestMethod]
-        public void GivenInterpolatedStringTextToken_GetBindableParent_ReturnsInterpolatedStringExpression()
+        public void GetBindableParent_ForInterpolatedStringTextToken_ReturnsInterpolatedStringExpression()
         {
             const string code = @"
 using System;
@@ -60,7 +60,7 @@ namespace TestCases
         }
 
         [TestMethod]
-        public void GivenMemberAccessExpressionSyntax_GetBindableParent_ReturnsTheExpression()
+        public void GetBindableParent_ForMemberAccessExpressionSyntax_ReturnsTheExpression()
         {
             const string code = @"
 namespace TestCases
