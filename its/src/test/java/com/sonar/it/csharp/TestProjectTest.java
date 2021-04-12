@@ -81,6 +81,23 @@ public class TestProjectTest {
   }
 
   @Test
+  public void issuesAreImportedForTestProject() {
+    List<Issues.Issue> barIssues = getIssues("TestOnlyProject:UnitTest1.cs")
+      .stream()
+      .filter(x -> x.getRule().startsWith("csharpsquid:"))
+      .collect(Collectors.toList());
+
+    assertThat(barIssues).hasSize(2);
+
+    assertThat(barIssues)
+      .filteredOn(e -> e.getRule().equalsIgnoreCase("csharpsquid:S1607"))
+      .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(15));
+    assertThat(barIssues)
+      .filteredOn(e -> e.getRule().equalsIgnoreCase("csharpsquid:S1125"))
+      .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(18));
+  }
+
+  @Test
   public void with_html_and_csharp_code_explicitly_marked_as_test_should_not_populate_metrics() throws Exception {
     BuildResult buildResult = Tests.analyzeProject(temp, EXPLICITLY_MARKED_AS_TEST, "no_rule");
 
@@ -96,22 +113,5 @@ public class TestProjectTest {
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
     TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
-  }
-
-  @Test
-  public void issuesAreImportedForTestProject() {
-    List<Issues.Issue> barIssues = getIssues("TestOnlyProject:UnitTest1.cs")
-      .stream()
-      .filter(x -> x.getRule().startsWith("csharpsquid:"))
-      .collect(Collectors.toList());
-
-    assertThat(barIssues).hasSize(2);
-
-    assertThat(barIssues)
-      .filteredOn(e -> e.getRule().equalsIgnoreCase("csharpsquid:S1607"))
-      .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(15));
-    assertThat(barIssues)
-      .filteredOn(e -> e.getRule().equalsIgnoreCase("csharpsquid:S1125"))
-      .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(18));
   }
 }

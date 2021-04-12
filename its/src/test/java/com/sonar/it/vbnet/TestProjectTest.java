@@ -78,6 +78,10 @@ public class TestProjectTest {
     assertThat(barIssues).hasSize(2);
 
     assertThat(barIssues)
+      .filteredOn(e -> e.getRule().equalsIgnoreCase("vbnet:S1186"))
+      .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(6));
+
+    assertThat(barIssues)
       .filteredOn(e -> e.getRule().equalsIgnoreCase("vbnet:S1125"))
       .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(13));
   }
