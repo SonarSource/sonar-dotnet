@@ -58,5 +58,28 @@ namespace TestCases
             var parent = aToken.GetBindableParent();
             parent.Kind().Should().Be(SyntaxKind.InterpolatedStringExpression);
         }
+
+        [TestMethod]
+        public void GivenMemberAccessExpressionSyntax_GetBindableParent_ReturnsTheExpression()
+        {
+            const string code = @"
+namespace TestCases
+{
+    class Foo
+    {
+        public int Value {get; set;}
+
+        void M()
+        {
+            _ = this.Value;
+        }
+    }
+}";
+            var syntaxTree = CSharpSyntaxTree.ParseText(code);
+            var thisToken = syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(SyntaxKind.ThisKeyword));
+
+            var parent = thisToken.GetBindableParent();
+            parent.Kind().Should().Be(SyntaxKind.ThisExpression);
+        }
     }
 }

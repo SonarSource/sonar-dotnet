@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.Keyword);
             });
 
-        public void Verify(string fileName, bool isTestProject, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
+        private void Verify(string fileName, bool isTestProject, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
             Verifier.VerifyUtilityAnalyzer<TokenTypeInfo>(
