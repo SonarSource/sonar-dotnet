@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class SyntaxTokenExtensions
     {
-        // Based on Roslyn: https://github.com/ivanbasov/roslyn/blob/09903da31892a30f71eab67d2fd83232cfbf0cea/src/Workspaces/CSharp/Portable/LanguageServices/CSharpSyntaxFactsService.cs#L1187-L1254
+        // Based on Roslyn: https://github.com/dotnet/roslyn/blob/09903da31892a30f71eab67d2fd83232cfbf0cea/src/Workspaces/CSharp/Portable/LanguageServices/CSharpSyntaxFactsService.cs#L1187-L1254
         public static SyntaxNode GetBindableParent(this SyntaxToken token)
         {
             var node = token.Parent;
