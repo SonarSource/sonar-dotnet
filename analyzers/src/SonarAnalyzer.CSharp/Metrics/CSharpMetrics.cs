@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -70,26 +69,6 @@ namespace SonarAnalyzer.Metrics.CSharp
         }
 
         protected override bool IsCommentTrivia(SyntaxTrivia trivia) => trivia.IsComment();
-
-        protected override bool IsDocumentationCommentTrivia(SyntaxTrivia trivia)
-        {
-            switch (trivia.Kind())
-            {
-                case SyntaxKind.SingleLineCommentTrivia:
-                    // Roslyn does not recognize the C# "documentation" comment trivia as such
-                    // unless you provide "/p:DocumentationFile=foo.xml" parameter to MSBuild.
-                    // In case the documentation is not generated, we try to guess if some of
-                    // the existing "normal" comments are actually documentation.
-                    return trivia.ToString().TrimStart().StartsWith("///");
-
-                case SyntaxKind.SingleLineDocumentationCommentTrivia:
-                case SyntaxKind.MultiLineDocumentationCommentTrivia:
-                    return true;
-
-                default:
-                    return false;
-            }
-        }
 
         protected override bool IsEndOfFile(SyntaxToken token) =>
             token.IsKind(SyntaxKind.EndOfFileToken);

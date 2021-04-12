@@ -103,20 +103,6 @@ namespace SonarAnalyzer.Metrics.VisualBasic
 
         protected override bool IsCommentTrivia(SyntaxTrivia trivia) => trivia.IsComment();
 
-        protected override bool IsDocumentationCommentTrivia(SyntaxTrivia trivia)
-        {
-            switch (trivia.Kind())
-            {
-                // Contrary to C#, VB.NET seems to always recognize the documentation comments.
-                case SyntaxKind.DocumentationCommentExteriorTrivia:
-                case SyntaxKind.DocumentationCommentTrivia:
-                    return true;
-
-                default:
-                    return false;
-            }
-        }
-
         protected override bool IsEndOfFile(SyntaxToken token) =>
             token.IsKind(SyntaxKind.EndOfFileToken);
 

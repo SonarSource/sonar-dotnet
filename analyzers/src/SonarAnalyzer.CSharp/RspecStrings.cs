@@ -6,7 +6,6 @@
 //------------------------------------------------------------------------------
 
 namespace SonarAnalyzer {
-    using System;
     using System.Reflection;
 
 

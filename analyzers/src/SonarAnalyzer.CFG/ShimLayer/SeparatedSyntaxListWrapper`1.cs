@@ -6,7 +6,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Collections.Immutable;
     using System.ComponentModel;
     using System.Linq;
     using Microsoft.CodeAnalysis;

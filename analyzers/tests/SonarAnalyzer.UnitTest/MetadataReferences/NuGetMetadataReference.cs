@@ -58,7 +58,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftAspNetCoreMvcViewFeatures(string packageVersion) => Create("Microsoft.AspNetCore.Mvc.ViewFeatures", packageVersion);
         public static References MicrosoftAspNetCoreMvcWebApiCompatShim(string packageVersion) => Create("Microsoft.AspNetCore.Mvc.WebApiCompatShim", packageVersion);
         public static References MicrosoftAspNetCoreRouting(string packageVersion) => Create("Microsoft.AspNetCore.Routing", packageVersion);
-        public static References MicrosoftAspNetCoreMvcRazorPages(string packageVersion = "2.2.5") => Create("Microsoft.AspNetCore.Mvc.RazorPages", packageVersion);
         public static References MicrosoftAspNetCoreMvcRazorRuntime(string packageVersion = "2.2.0") => Create("Microsoft.AspNetCore.Razor.Runtime", packageVersion);
         public static References MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) => Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
         public static References MicrosoftAspNetMvc(string packageVersion) => Create("Microsoft.AspNet.Mvc", packageVersion);
@@ -93,7 +92,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References NUnit(string packageVersion) => Create("NUnit", packageVersion);
         public static References NUnitLite(string packageVersion) => Create("NUnitLite", packageVersion);
         public static References PetaPocoCompiled(string packageVersion = "6.0.353") => Create("PetaPoco.Compiled", packageVersion);
-        public static References RestSharp(string packageVersion) => Create("RestSharp", packageVersion);
         public static References RhinoMocks(string packageVersion) => Create("RhinoMocks", packageVersion);
         public static References Shouldly(string packageVersion) => Create("Shouldly", packageVersion);
         public static References SerilogPackages(string packageVersion) =>
@@ -118,7 +116,6 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References SystemTextRegularExpressions(string packageVersion = "4.3.1") => Create("System.Text.RegularExpressions", packageVersion);
         public static References SystemThreadingTasksExtensions(string packageVersion) => Create("System.Threading.Tasks.Extensions", packageVersion);
         public static References SystemValueTuple(string packageVersion) => Create("System.ValueTuple", packageVersion);
-        public static References SystemNetHttp(string packageVersion = "4.3.4") => Create("System.Net.Http", packageVersion);
         public static References XunitFramework(string packageVersion) =>
             Create("xunit.assert", packageVersion)
             .Concat(Create("xunit.extensibility.core", packageVersion));

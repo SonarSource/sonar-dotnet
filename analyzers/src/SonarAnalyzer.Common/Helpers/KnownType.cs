@@ -253,7 +253,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Int64 = new KnownType(SpecialType.System_Int64, "long");
         internal static readonly KnownType System_IntPtr = new KnownType(SpecialType.System_IntPtr, "IntPtr");
         internal static readonly KnownType System_InvalidOperationException = new KnownType("System.InvalidOperationException");
-        internal static readonly KnownType System_IO_Compression_ZipArchiveEntry = new KnownType("System.IO.Compression.ZipArchiveEntry");
         internal static readonly KnownType System_IO_Compression_ZipFile = new KnownType("System.IO.Compression.ZipFile");
         internal static readonly KnownType System_IO_Compression_ZipFileExtensions = new KnownType("System.IO.Compression.ZipFileExtensions");
         internal static readonly KnownType System_IO_FileStream = new KnownType("System.IO.FileStream");

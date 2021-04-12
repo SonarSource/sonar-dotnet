@@ -80,9 +80,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>
             FromProject(Project.AddProjectReference(new ProjectReference(getProjectId(GetSolution()))));
 
-        public ProjectBuilder AddProjectReferences(Func<SolutionBuilder, IEnumerable<ProjectId>> getProjectIds) =>
-            FromProject(Project.AddProjectReferences(getProjectIds(GetSolution()).Select(id => new ProjectReference(id))));
-
         public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
             paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
 

@@ -127,8 +127,6 @@ namespace SonarAnalyzer.Common
 
         protected abstract bool IsCommentTrivia(SyntaxTrivia trivia);
 
-        protected abstract bool IsDocumentationCommentTrivia(SyntaxTrivia trivia);
-
         #endregion Comments
 
         #region Classes, Accessors, Functions, Statements
