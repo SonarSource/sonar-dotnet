@@ -59,6 +59,16 @@ namespace SonarAnalyzer.Helpers
             this.writer.WriteLine("]");
         }
 
+        internal void WriteEdge(string startId, string endId, string label)
+        {
+            this.writer.Write($"{startId} -> {endId}");
+            if (!string.IsNullOrEmpty(label))
+            {
+                this.writer.Write($" [label=\"{label}\"]");
+            }
+            this.writer.WriteLine();
+        }
+
         private static string Encode(string s) =>
             s.Replace("\r", string.Empty)
             .Replace("\n", "\\n")
