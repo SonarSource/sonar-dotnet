@@ -39,46 +39,35 @@ namespace SonarAnalyzer.Extensions
             {
                 var parent = node.Parent;
 
-                // If this node is on the left side of a member access expression, don't ascend
-                // further or we'll end up binding to something else.
-                if (parent is MemberAccessExpressionSyntax memberAccess &&
-                    memberAccess.Expression == node)
+                switch (parent)
                 {
-                    return node;
-                }
+                    // If this node is on the left side of a member access expression, don't ascend
+                    // further or we'll end up binding to something else.
+                    case MemberAccessExpressionSyntax memberAccess when memberAccess.Expression == node:
+                        return node;
 
-                // If this node is on the left side of a qualified name, don't ascend
-                // further or we'll end up binding to something else.
-                if (parent is QualifiedNameSyntax qualifiedName &&
-                    qualifiedName.Left == node)
-                {
-                    return node;
-                }
+                    // If this node is on the left side of a qualified name, don't ascend
+                    // further or we'll end up binding to something else.
+                    case QualifiedNameSyntax qualifiedName when qualifiedName.Left == node:
+                        return node;
 
-                // If this node is the type of an object creation expression, return the
-                // object creation expression.
-                if (parent is ObjectCreationExpressionSyntax objectCreation &&
-                    objectCreation.Type == node)
-                {
-                    return parent;
-                }
+                    // If this node is the type of an object creation expression, return the
+                    // object creation expression.
+                    case ObjectCreationExpressionSyntax objectCreation when objectCreation.Type == node:
+                        return parent;
 
-                // The inside of an interpolated string is treated as its own token so we
-                // need to force navigation to the parent expression syntax.
-                if (node is InterpolatedStringTextSyntax &&
-                    parent is InterpolatedStringExpressionSyntax)
-                {
-                    return parent;
-                }
+                    // The inside of an interpolated string is treated as its own token so we
+                    // need to force navigation to the parent expression syntax.
+                    case InterpolatedStringExpressionSyntax _ when node is InterpolatedStringTextSyntax:
+                        return parent;
 
-                if (parent is NameSyntax)
-                {
-                    node = parent;
-                }
-                else
-                {
+                    case NameSyntax _:
+                        node = parent;
+                        break;
+
                     // If this node is not parented by a name, we're done.
-                    return node;
+                    default:
+                        return node;
                 }
             }
 
