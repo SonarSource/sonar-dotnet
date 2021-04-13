@@ -547,6 +547,10 @@ namespace SonarAnalyzer.Helpers
 
         public string ShortName => shortName.Value;
 
+        public string ShortNameWithoutAttributeSuffix => shortName.Value == nameof(Attribute)
+            ? shortName.Value
+            : shortName.Value.Remove(shortName.Value.Length - 9);
+
         internal bool Matches(string type) => !isSpecialType && TypeName == type;
 
         internal bool Matches(SpecialType type) => isSpecialType && specialType == type;
