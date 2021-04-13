@@ -205,6 +205,7 @@ namespace SonarAnalyzer.UnitTest.Common
         public void OnlySecurityHotspots_AreNotConfigurable_VB() =>
             OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage.VisualBasic);
 
+        [AssertionMethod]
         private static void OnlySecurityHotspots_AreNotConfigurable(AnalyzerLanguage language)
         {
             foreach (var diagnostic in SupportedDiagnostics(language))

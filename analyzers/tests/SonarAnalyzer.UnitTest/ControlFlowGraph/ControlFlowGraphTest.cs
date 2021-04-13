@@ -1,22 +1,22 @@
 ﻿/*
-* SonarAnalyzer for .NET
-* Copyright (C) 2015-2021 SonarSource SA
-* mailto: contact AT sonarsource DOT com
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU Lesser General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* Lesser General Public License for more details.
-*
-* You should have received a copy of the GNU Lesser General Public License
-* along with this program; if not, write to the Free Software Foundation,
-* Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2021 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 
 using System;
 using System.Linq;
@@ -36,6 +36,12 @@ namespace SonarAnalyzer.UnitTest.ControlFlowGraph
     [TestClass]
     public class ControlFlowGraphTest
     {
+        private const string SimpleReturn = "return";
+        private const string SimpleThrow = "throw";
+        private const string SimpleYieldBreak = "yield break";
+        private const string ExpressionReturn = "return ii";
+        private const string ExpressionThrow = "throw ii";
+
         #region Top level - build CFG expression body / body
 
         [TestMethod]
@@ -979,11 +985,11 @@ public class Sample
             var cfg = Build("for (var i = 0; true; i++) { var x = 10; }");
             VerifyForStatement(cfg);
             VerifyAllInstructions(cfg.EntryBlock, "0", "i = 0");
-            var condition = cfg.EntryBlock.SuccessorBlocks.First();
+            var condition = cfg.EntryBlock.SuccessorBlocks[0];
             VerifyAllInstructions(condition, "true");
-            var body = condition.SuccessorBlocks.First();
-            VerifyAllInstructions(condition.SuccessorBlocks.First(), "10", "x = 10");
-            VerifyAllInstructions(body.SuccessorBlocks.First(), "i", "i++");
+            var body = condition.SuccessorBlocks[0];
+            VerifyAllInstructions(condition.SuccessorBlocks[0], "10", "x = 10");
+            VerifyAllInstructions(body.SuccessorBlocks[0], "i", "i++");
 
             cfg = Build("var y = 11; for (var i = 0; true; i++) { var x = 10; }");
             VerifyForStatement(cfg);
@@ -994,27 +1000,6 @@ public class Sample
             cfg = Build("for (i = 0, j = 11; ; i++) { var x = 10; }");
             VerifyForStatement(cfg);
             cfg.EntryBlock.Should().BeAssignableTo<ForInitializerBlock>();
-        }
-
-        private static void VerifyForStatement(IControlFlowGraph cfg)
-        {
-            VerifyCfg(cfg, 5);
-            var initBlock = cfg.EntryBlock;
-            var blocks = cfg.Blocks.ToList();
-            var branchBlock = blocks[1] as BinaryBranchBlock;
-            var incrementorBlock = blocks[3];
-            var loopBodyBlock = blocks[2];
-            var exitBlock = cfg.ExitBlock;
-
-            initBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
-
-            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(loopBodyBlock, exitBlock);
-            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
-
-            loopBodyBlock.SuccessorBlocks.Should().OnlyContain(incrementorBlock);
-            incrementorBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
-            branchBlock.PredecessorBlocks.Should().OnlyContain(initBlock, incrementorBlock);
-            exitBlock.PredecessorBlocks.Should().OnlyContain(branchBlock);
         }
 
         [TestMethod]
@@ -1028,29 +1013,6 @@ public class Sample
             VerifyForStatementNoInitializer(cfg);
         }
 
-        private static void VerifyForStatementNoInitializer(IControlFlowGraph cfg)
-        {
-            VerifyCfg(cfg, 5);
-            var blocks = cfg.Blocks.ToList();
-            var initializerBlock = cfg.EntryBlock as ForInitializerBlock;
-            var branchBlock = blocks[1] as BinaryBranchBlock;
-            var incrementorBlock = blocks
-                .First(b => b.Instructions.Any(n => n.ToString() == "i++"));
-            var loopBodyBlock = blocks
-                .First(b => b.Instructions.Any(n => n.ToString() == "x = 10"));
-            var exitBlock = cfg.ExitBlock;
-
-            initializerBlock.SuccessorBlock.Should().Be(branchBlock);
-
-            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(loopBodyBlock, exitBlock);
-            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
-
-            loopBodyBlock.SuccessorBlocks.Should().OnlyContain(incrementorBlock);
-            incrementorBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
-            branchBlock.PredecessorBlocks.Should().OnlyContain(incrementorBlock, initializerBlock);
-            exitBlock.PredecessorBlocks.Should().OnlyContain(branchBlock);
-        }
-
         [TestMethod]
         [TestCategory("CFG")]
         public void Cfg_For_NoIncrementor()
@@ -1062,28 +1024,6 @@ public class Sample
             VerifyForStatementNoIncrementor(cfg);
         }
 
-        private static void VerifyForStatementNoIncrementor(IControlFlowGraph cfg)
-        {
-            VerifyCfg(cfg, 4);
-            var initBlock = cfg.EntryBlock;
-            var blocks = cfg.Blocks.ToList();
-            var branchBlock = blocks[1] as BinaryBranchBlock;
-            var loopBodyBlock = blocks
-                .First(b => b.Instructions.Any(n => n.ToString() == "x = 10"));
-            var exitBlock = cfg.ExitBlock;
-
-            initBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
-
-            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(loopBodyBlock, exitBlock);
-            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
-
-            loopBodyBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
-
-            branchBlock.PredecessorBlocks.Should().OnlyContain(initBlock, loopBodyBlock);
-
-            exitBlock.PredecessorBlocks.Should().OnlyContain(branchBlock);
-        }
-
         [TestMethod]
         [TestCategory("CFG")]
         public void Cfg_For_Empty()
@@ -1093,26 +1033,6 @@ public class Sample
 
             cfg = Build("for (;;) { var x = 10; }");
             VerifyForStatementEmpty(cfg);
-        }
-
-        private static void VerifyForStatementEmpty(IControlFlowGraph cfg)
-        {
-            VerifyCfg(cfg, 4);
-            var initializerBlock = cfg.EntryBlock as ForInitializerBlock;
-            var blocks = cfg.Blocks.ToList();
-            var branchBlock = blocks[1] as BinaryBranchBlock;
-            var loopBodyBlock = cfg.Blocks
-                .First(b => b.Instructions.Any(n => n.ToString() == "x = 10"));
-            var exitBlock = cfg.ExitBlock;
-
-            initializerBlock.SuccessorBlock.Should().Be(branchBlock);
-
-            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(loopBodyBlock, exitBlock);
-            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
-
-            loopBodyBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
-            branchBlock.PredecessorBlocks.Should().OnlyContain(loopBodyBlock, initializerBlock);
-            exitBlock.PredecessorBlocks.Should().OnlyContain(branchBlock);
         }
 
         [TestMethod]
@@ -1160,12 +1080,6 @@ public class Sample
 
         #region Return, throw, yield break statement
 
-        private const string SimpleReturn = "return";
-        private const string SimpleThrow = "throw";
-        private const string SimpleYieldBreak = "yield break";
-        private const string ExpressionReturn = "return ii";
-        private const string ExpressionThrow = "throw ii";
-
         [TestMethod]
         [TestCategory("CFG")]
         public void Cfg_Return()
@@ -1211,22 +1125,6 @@ public class Sample
             VerifyJumpWithNoExpression(cfg, SyntaxKind.YieldBreakStatement);
         }
 
-        private static void VerifyJumpWithNoExpression(IControlFlowGraph cfg, SyntaxKind kind)
-        {
-            VerifyCfg(cfg, 4);
-            var branchBlock = cfg.EntryBlock as BinaryBranchBlock;
-            var blocks = cfg.Blocks.ToList();
-            var trueBlock = blocks[1] as JumpBlock;
-            var falseBlock = blocks[2];
-            var exitBlock = cfg.ExitBlock;
-
-            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(trueBlock, falseBlock);
-            trueBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
-            trueBlock.JumpNode.Kind().Should().Be(kind);
-            falseBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
-            exitBlock.PredecessorBlocks.Should().OnlyContain(trueBlock, falseBlock);
-        }
-
         [TestMethod]
         [TestCategory("CFG")]
         public void Cfg_Return_Value()
@@ -1265,24 +1163,6 @@ public class Sample
         {
             var cfg = Build($"if (true) {{ var y = 12; {ExpressionThrow}; }} var x = 11;");
             VerifyJumpWithExpression(cfg, SyntaxKind.ThrowStatement);
-        }
-
-        private static void VerifyJumpWithExpression(IControlFlowGraph cfg, SyntaxKind kind)
-        {
-            VerifyCfg(cfg, 4);
-            var branchBlock = cfg.EntryBlock as BinaryBranchBlock;
-            var blocks = cfg.Blocks.ToList();
-            var trueBlock = blocks[1] as JumpBlock;
-            var falseBlock = blocks[2];
-            var exitBlock = cfg.ExitBlock;
-
-            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(trueBlock, falseBlock);
-            trueBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
-            trueBlock.JumpNode.Kind().Should().Be(kind);
-
-            trueBlock.Instructions.Should().Contain(n => n.IsKind(SyntaxKind.IdentifierName) && n.ToString() == "ii");
-
-            exitBlock.PredecessorBlocks.Should().OnlyContain(trueBlock, falseBlock);
         }
 
         #endregion
@@ -1399,19 +1279,6 @@ public class Sample
             VerifyAllInstructions(cfg.EntryBlock, "pt", "pt.x", "&pt.x", "p = &pt.x");
         }
 
-        private static void VerifySimpleJumpBlock(IControlFlowGraph cfg, SyntaxKind kind)
-        {
-            VerifyCfg(cfg, 3);
-            var jumpBlock = cfg.EntryBlock as JumpBlock;
-            var bodyBlock = cfg.Blocks.ToList()[1];
-            var exitBlock = cfg.ExitBlock;
-
-            jumpBlock.SuccessorBlocks.Should().OnlyContain(bodyBlock);
-            bodyBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
-
-            jumpBlock.JumpNode.Kind().Should().Be(kind);
-        }
-
         #endregion
 
         #region Checked/unchecked statement
@@ -1424,13 +1291,13 @@ public class Sample
             VerifySimpleJumpBlock(cfg, SyntaxKind.CheckedStatement);
 
             VerifyNoInstruction(cfg.EntryBlock);
-            VerifyInstructions(cfg.EntryBlock.SuccessorBlocks.First(), 1, "int.MaxValue");
+            VerifyInstructions(cfg.EntryBlock.SuccessorBlocks[0], 1, "int.MaxValue");
 
             cfg = Build("unchecked { var i = int.MaxValue + 1; }");
             VerifySimpleJumpBlock(cfg, SyntaxKind.UncheckedStatement);
 
             VerifyNoInstruction(cfg.EntryBlock);
-            VerifyInstructions(cfg.EntryBlock.SuccessorBlocks.First(), 1, "int.MaxValue");
+            VerifyInstructions(cfg.EntryBlock.SuccessorBlocks[0], 1, "int.MaxValue");
         }
 
         #endregion
@@ -1445,7 +1312,7 @@ public class Sample
             VerifySimpleJumpBlock(cfg, SyntaxKind.UnsafeStatement);
 
             VerifyNoInstruction(cfg.EntryBlock);
-            VerifyInstructions(cfg.EntryBlock.SuccessorBlocks.First(), 0, "i");
+            VerifyInstructions(cfg.EntryBlock.SuccessorBlocks[0], 0, "i");
         }
 
         #endregion
@@ -1976,9 +1843,9 @@ public class Sample
             cond3Block.SuccessorBlocks.Should().HaveCount(2);
 
             cond2Block
-                .SuccessorBlocks.First()
-                .SuccessorBlocks.First()
-                .SuccessorBlocks.First().Should().Be(cfg.ExitBlock);
+                .SuccessorBlocks[0]
+                .SuccessorBlocks[0]
+                .SuccessorBlocks[0].Should().Be(cfg.ExitBlock);
 
             var assignmentBlock = cfg.ExitBlock.PredecessorBlocks.First();
             assignmentBlock.Instructions.Should().HaveCount(1);
@@ -3650,8 +3517,7 @@ public class Sample
                 {
                     return number;
                 }
-                foo();"
-            );
+                foo();");
 
             VerifyCfg(cfg, 6);
 
@@ -3697,8 +3563,7 @@ public class Sample
                 {
                     if (cond) return number;
                 }
-                foo();"
-            );
+                foo();");
 
             VerifyCfg(cfg, 7);
 
@@ -3750,8 +3615,7 @@ public class Sample
                 {
                     catchOne();
                 }
-                afterTry();"
-            );
+                afterTry();");
 
             VerifyCfg(cfg, 9);
 
@@ -3882,6 +3746,10 @@ public class Sample
             cw1.SuccessorBlocks.Should().OnlyContain(cw3);
             cw2.SuccessorBlocks.Should().OnlyContain(cw3);
             cw3.SuccessorBlocks.Should().OnlyContain(exitBlock);
+
+            branchCase2.Should().NotBeNull();
+            branchCase3.Should().NotBeNull();
+            branchDefault.Should().NotBeNull();
         }
 
         [TestMethod]
@@ -4631,7 +4499,7 @@ cw1(); // afterSwitchBlock
             VerifyCfg(cfg, 9);
 
             var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
-            var Case1Block = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var case1Block = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
             var firstCaseIfBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
             var trueBranchBlock = (SimpleBlock)cfg.Blocks.ElementAt(3);
             var falseBranchBlock = (JumpBlock)cfg.Blocks.ElementAt(4);
@@ -4640,9 +4508,9 @@ cw1(); // afterSwitchBlock
             var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(7);
             var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(8);
 
-            switchBlock.SuccessorBlocks.Should().OnlyContain(Case1Block);
-            Case1Block.TrueSuccessorBlock.Should().Be(firstCaseIfBlock);
-            Case1Block.FalseSuccessorBlock.Should().Be(defaultBranchBlock);
+            switchBlock.SuccessorBlocks.Should().OnlyContain(case1Block);
+            case1Block.TrueSuccessorBlock.Should().Be(firstCaseIfBlock);
+            case1Block.FalseSuccessorBlock.Should().Be(defaultBranchBlock);
             firstCaseIfBlock.TrueSuccessorBlock.Should().Be(trueBranchBlock);
             firstCaseIfBlock.FalseSuccessorBlock.Should().Be(falseBranchBlock);
             trueBranchBlock.SuccessorBlocks.Should().OnlyContain(breakJump);
@@ -5369,6 +5237,13 @@ namespace NS
             return methodDeclaration;
         }
 
+        internal static string ExtremelyNestedExpression()
+        {
+            const int count = 2000;
+            const string dna = "ACGT";
+            return Enumerable.Repeat($@"""{dna}""", count).JoinStr(" +\n");
+        }
+
         private static IControlFlowGraph Build(string methodBody)
         {
             var method = CompileWithMethodBody(string.Format(TestInput, methodBody), "Bar", out var semanticModel);
@@ -5381,18 +5256,32 @@ namespace NS
             return cfg;
         }
 
-        internal static string ExtremelyNestedExpression()
-        {
-            const int count = 2000;
-            const string dna = "ACGT";
-            return Enumerable.Repeat($@"""{dna}""", count).JoinStr(" +\n");
-        }
-
         #endregion
 
         #region Verify helpers
 
-        private void VerifyInstructions(Block block, int fromIndex, params string[] instructions)
+        private static void VerifyForStatement(IControlFlowGraph cfg)
+        {
+            VerifyCfg(cfg, 5);
+            var initBlock = cfg.EntryBlock;
+            var blocks = cfg.Blocks.ToList();
+            var branchBlock = blocks[1] as BinaryBranchBlock;
+            var incrementorBlock = blocks[3];
+            var loopBodyBlock = blocks[2];
+            var exitBlock = cfg.ExitBlock;
+
+            initBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
+
+            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(loopBodyBlock, exitBlock);
+            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
+
+            loopBodyBlock.SuccessorBlocks.Should().OnlyContain(incrementorBlock);
+            incrementorBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
+            branchBlock.PredecessorBlocks.Should().OnlyContain(initBlock, incrementorBlock);
+            exitBlock.PredecessorBlocks.Should().OnlyContain(branchBlock);
+        }
+
+        private static void VerifyInstructions(Block block, int fromIndex, params string[] instructions)
         {
             block.Instructions.Count.Should().BeGreaterOrEqualTo(fromIndex + instructions.Length);
             for (var i = 0; i < instructions.Length; i++)
@@ -5401,16 +5290,14 @@ namespace NS
             }
         }
 
-        private void VerifyAllInstructions(Block block, params string[] instructions)
+        private static void VerifyAllInstructions(Block block, params string[] instructions)
         {
             block.Instructions.Should().HaveSameCount(instructions);
             VerifyInstructions(block, 0, instructions);
         }
 
-        private void VerifyNoInstruction(Block block)
-        {
-            VerifyAllInstructions(block, new string[0]);
-        }
+        private static void VerifyNoInstruction(Block block) =>
+            VerifyAllInstructions(block, Array.Empty<string>());
 
         private static void VerifyCfg(IControlFlowGraph cfg, int numberOfBlocks)
         {
@@ -5437,10 +5324,8 @@ namespace NS
             cfg.EntryBlock.SuccessorBlocks.Should().OnlyContain(cfg.ExitBlock);
         }
 
-        private static void VerifyEmptyCfg(IControlFlowGraph cfg)
-        {
+        private static void VerifyEmptyCfg(IControlFlowGraph cfg) =>
             VerifyCfg(cfg, 1);
-        }
 
         private static void VerifyBasicCfgProperties(IControlFlowGraph cfg)
         {
@@ -5450,6 +5335,118 @@ namespace NS
 
             cfg.ExitBlock.SuccessorBlocks.Should().BeEmpty();
             cfg.ExitBlock.Instructions.Should().BeEmpty();
+        }
+
+        private static void VerifyForStatementNoInitializer(IControlFlowGraph cfg)
+        {
+            VerifyCfg(cfg, 5);
+            var blocks = cfg.Blocks.ToList();
+            var initializerBlock = cfg.EntryBlock as ForInitializerBlock;
+            var branchBlock = blocks[1] as BinaryBranchBlock;
+            var incrementorBlock = blocks
+                .First(b => b.Instructions.Any(n => n.ToString() == "i++"));
+            var loopBodyBlock = blocks
+                .First(b => b.Instructions.Any(n => n.ToString() == "x = 10"));
+            var exitBlock = cfg.ExitBlock;
+
+            initializerBlock.SuccessorBlock.Should().Be(branchBlock);
+
+            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(loopBodyBlock, exitBlock);
+            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
+
+            loopBodyBlock.SuccessorBlocks.Should().OnlyContain(incrementorBlock);
+            incrementorBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
+            branchBlock.PredecessorBlocks.Should().OnlyContain(incrementorBlock, initializerBlock);
+            exitBlock.PredecessorBlocks.Should().OnlyContain(branchBlock);
+        }
+
+        private static void VerifyForStatementNoIncrementor(IControlFlowGraph cfg)
+        {
+            VerifyCfg(cfg, 4);
+            var initBlock = cfg.EntryBlock;
+            var blocks = cfg.Blocks.ToList();
+            var branchBlock = blocks[1] as BinaryBranchBlock;
+            var loopBodyBlock = blocks
+                .First(b => b.Instructions.Any(n => n.ToString() == "x = 10"));
+            var exitBlock = cfg.ExitBlock;
+
+            initBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
+
+            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(loopBodyBlock, exitBlock);
+            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
+
+            loopBodyBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
+
+            branchBlock.PredecessorBlocks.Should().OnlyContain(initBlock, loopBodyBlock);
+
+            exitBlock.PredecessorBlocks.Should().OnlyContain(branchBlock);
+        }
+
+        private static void VerifyForStatementEmpty(IControlFlowGraph cfg)
+        {
+            VerifyCfg(cfg, 4);
+            var initializerBlock = cfg.EntryBlock as ForInitializerBlock;
+            var blocks = cfg.Blocks.ToList();
+            var branchBlock = blocks[1] as BinaryBranchBlock;
+            var loopBodyBlock = cfg.Blocks
+                .First(b => b.Instructions.Any(n => n.ToString() == "x = 10"));
+            var exitBlock = cfg.ExitBlock;
+
+            initializerBlock.SuccessorBlock.Should().Be(branchBlock);
+
+            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(loopBodyBlock, exitBlock);
+            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForStatement);
+
+            loopBodyBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
+            branchBlock.PredecessorBlocks.Should().OnlyContain(loopBodyBlock, initializerBlock);
+            exitBlock.PredecessorBlocks.Should().OnlyContain(branchBlock);
+        }
+
+        private static void VerifySimpleJumpBlock(IControlFlowGraph cfg, SyntaxKind kind)
+        {
+            VerifyCfg(cfg, 3);
+            var jumpBlock = cfg.EntryBlock as JumpBlock;
+            var bodyBlock = cfg.Blocks.ToList()[1];
+            var exitBlock = cfg.ExitBlock;
+
+            jumpBlock.SuccessorBlocks.Should().OnlyContain(bodyBlock);
+            bodyBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+
+            jumpBlock.JumpNode.Kind().Should().Be(kind);
+        }
+
+        private static void VerifyJumpWithNoExpression(IControlFlowGraph cfg, SyntaxKind kind)
+        {
+            VerifyCfg(cfg, 4);
+            var branchBlock = cfg.EntryBlock as BinaryBranchBlock;
+            var blocks = cfg.Blocks.ToList();
+            var trueBlock = blocks[1] as JumpBlock;
+            var falseBlock = blocks[2];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(trueBlock, falseBlock);
+            trueBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            trueBlock.JumpNode.Kind().Should().Be(kind);
+            falseBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            exitBlock.PredecessorBlocks.Should().OnlyContain(trueBlock, falseBlock);
+        }
+
+        private static void VerifyJumpWithExpression(IControlFlowGraph cfg, SyntaxKind kind)
+        {
+            VerifyCfg(cfg, 4);
+            var branchBlock = cfg.EntryBlock as BinaryBranchBlock;
+            var blocks = cfg.Blocks.ToList();
+            var trueBlock = blocks[1] as JumpBlock;
+            var falseBlock = blocks[2];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(trueBlock, falseBlock);
+            trueBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            trueBlock.JumpNode.Kind().Should().Be(kind);
+
+            trueBlock.Instructions.Should().Contain(n => n.IsKind(SyntaxKind.IdentifierName) && n.ToString() == "ii");
+
+            exitBlock.PredecessorBlocks.Should().OnlyContain(trueBlock, falseBlock);
         }
 
         #endregion
