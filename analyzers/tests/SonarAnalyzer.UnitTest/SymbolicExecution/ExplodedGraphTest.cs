@@ -189,6 +189,7 @@ namespace NS
                             Execute.Assertion.FailWith("We should never get into this branch");
                             break;
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
@@ -669,6 +670,7 @@ namespace Namespace
                             break;
 
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
@@ -839,6 +841,7 @@ namespace Namespace
                             break;
 
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
@@ -970,6 +973,7 @@ namespace Namespace
                             strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
                             break;
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
@@ -1028,6 +1032,7 @@ namespace Namespace
                             break;
 
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
@@ -1074,6 +1079,7 @@ namespace Namespace
                             break;
 
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
@@ -1107,6 +1113,7 @@ namespace Namespace
                             break;
 
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
@@ -1246,6 +1253,7 @@ namespace Namespace
                             break;
 
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
@@ -1319,6 +1327,7 @@ namespace Test
                             break;
 
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
@@ -1356,6 +1365,7 @@ namespace Test
                             break;
 
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
@@ -1401,6 +1411,7 @@ namespace Test
                             break;
 
                         default:
+                            // We are interested only in certain instructions.
                             break;
                     }
                 };
