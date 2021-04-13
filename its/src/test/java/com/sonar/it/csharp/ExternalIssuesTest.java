@@ -40,12 +40,12 @@ public class ExternalIssuesTest {
   @Rule
   public TemporaryFolder temp = TestUtils.createTempFolder();
 
-  private static final String PROJECT = "ExternalIssues";
+  private static final String MAIN_PROJECT = "ExternalIssues";
+  private static final String TEST_PROJECT = "ExternalIssues.TestProject.CS";
   private static final String PROGRAM_COMPONENT_ID = "ExternalIssues:Program.cs";
   private static final String SONAR_RULES_PREFIX = "csharpsquid:";
   // note that in the UI the prefix will be 'roslyn:'
   private static final String ROSLYN_RULES_PREFIX = "external_roslyn:";
-
 
   @Before
   public void init() {
@@ -54,7 +54,7 @@ public class ExternalIssuesTest {
 
   @Test
   public void external_issues_imported_by_default_as_code_smells() throws Exception {
-    Tests.analyzeProject(temp, PROJECT, null);
+    Tests.analyzeProject(temp, MAIN_PROJECT, null);
 
     assertThat(getComponent(PROGRAM_COMPONENT_ID)).isNotNull();
     List<Issues.Issue> allIssues = getIssues(PROGRAM_COMPONENT_ID);
@@ -72,8 +72,18 @@ public class ExternalIssuesTest {
   }
 
   @Test
+  public void external_issues_imported_by_default_for_test_project() throws Exception {
+    Tests.analyzeProject(temp, TEST_PROJECT, null);
+
+    List<Issues.Issue> allIssues = getIssues(TEST_PROJECT);
+    assertThat(allIssues).hasSize(2);
+    assertThat(allIssues.get(0).getRule()).isEqualTo(ROSLYN_RULES_PREFIX + "NUnit1001");
+    assertThat(allIssues.get(1).getRule()).isEqualTo(ROSLYN_RULES_PREFIX + "xUnit1001");
+  }
+
+  @Test
   public void external_issues_are_ignored() throws Exception {
-    Tests.analyzeProject(temp, PROJECT, null,
+    Tests.analyzeProject(temp, MAIN_PROJECT, null,
       "sonar.cs.roslyn.ignoreIssues", "true");
 
     assertThat(getComponent(PROGRAM_COMPONENT_ID)).isNotNull();
@@ -86,7 +96,7 @@ public class ExternalIssuesTest {
 
   @Test
   public void external_issues_categories_multiple_categories_mapped() throws Exception {
-    Tests.analyzeProject(temp, PROJECT, null,
+    Tests.analyzeProject(temp, MAIN_PROJECT, null,
       // notice that bugCategories has a list of 2 external categories
       "sonar.cs.roslyn.bugCategories", "StyleCop.CSharp.DocumentationRules,StyleCop.CSharp.MaintainabilityRules",
       "sonar.cs.roslyn.vulnerabilityCategories", "StyleCop.CSharp.OrderingRules");
@@ -114,7 +124,7 @@ public class ExternalIssuesTest {
 
   @Test
   public void external_issues_all_three_properties() throws Exception {
-    Tests.analyzeProject(temp, PROJECT, null,
+    Tests.analyzeProject(temp, MAIN_PROJECT, null,
       "sonar.cs.roslyn.codeSmellCategories", "StyleCop.CSharp.DocumentationRules",
       "sonar.cs.roslyn.bugCategories", "StyleCop.CSharp.MaintainabilityRules",
       "sonar.cs.roslyn.vulnerabilityCategories", "StyleCop.CSharp.OrderingRules");
