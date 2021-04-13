@@ -135,7 +135,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        private ResourceManager CreateMockedResourceManager(string diagnosticId, bool isActivatedByDefault)
+        private static ResourceManager CreateMockedResourceManager(string diagnosticId, bool isActivatedByDefault)
         {
             var mockedResourceManager = new Mock<ResourceManager>();
             mockedResourceManager.Setup(x => x.GetString("HelpLinkFormat")).Returns("bar");

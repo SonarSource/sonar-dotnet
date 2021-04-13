@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Common
         public void MultiValueDictionary_AddRange()
         {
             var mvd = new MultiValueDictionary<int, int>();
-            mvd.AddRangeWithKey(5, new [] { 42, 42 });
+            mvd.AddRangeWithKey(5, new[] { 42, 42 });
 
             mvd[5].Should().HaveCount(2);
         }

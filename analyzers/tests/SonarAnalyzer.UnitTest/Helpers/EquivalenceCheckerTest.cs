@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class EquivalenceCheckerTest
     {
-        private const string Source_CS = @"
+        private const string CsSource = @"
 namespace Test
 {
     class TestClass
@@ -65,7 +65,7 @@ namespace Test
     }
 }";
 
-        private const string Source_VB = @"
+        private const string VbSource = @"
 Namespace Test
 
     Class TestClass
@@ -104,33 +104,33 @@ Namespace Test
 
 End Namespace";
 
-        private CSharpMethods methods_CS;
-        private VisualBasicMethods methods_VB;
+        private CSharpMethods csMethods;
+        private VisualBasicMethods vbMethods;
 
         [TestInitialize]
         public void TestSetup()
         {
-            methods_CS = new CSharpMethods(Source_CS);
-            methods_VB = new VisualBasicMethods(Source_VB);
+            csMethods = new CSharpMethods(CsSource);
+            vbMethods = new VisualBasicMethods(VbSource);
         }
 
         [TestMethod]
         public void AreEquivalent_Node_CS()
         {
-            var result = CSharpEquivalenceChecker.AreEquivalent(methods_CS.Method1, methods_CS.Method2);
+            var result = CSharpEquivalenceChecker.AreEquivalent(csMethods.Method1, csMethods.Method2);
             result.Should().BeTrue();
 
-            result = CSharpEquivalenceChecker.AreEquivalent(methods_CS.Method1, methods_CS.Method3);
+            result = CSharpEquivalenceChecker.AreEquivalent(csMethods.Method1, csMethods.Method3);
             result.Should().BeFalse();
         }
 
         [TestMethod]
         public void AreEquivalent_List_CS()
         {
-            var result = CSharpEquivalenceChecker.AreEquivalent(methods_CS.Method1.Statements, methods_CS.Method2.Statements);
+            var result = CSharpEquivalenceChecker.AreEquivalent(csMethods.Method1.Statements, csMethods.Method2.Statements);
             result.Should().BeTrue();
 
-            result = CSharpEquivalenceChecker.AreEquivalent(methods_CS.Method1.Statements, methods_CS.Method3.Statements);
+            result = CSharpEquivalenceChecker.AreEquivalent(csMethods.Method1.Statements, csMethods.Method3.Statements);
             result.Should().BeFalse();
         }
 
@@ -139,16 +139,16 @@ End Namespace";
         {
             var comparer = new CSharpSyntaxNodeEqualityComparer<CSharp.BlockSyntax>();
 
-            var result = comparer.Equals(methods_CS.Method1, methods_CS.Method2);
+            var result = comparer.Equals(csMethods.Method1, csMethods.Method2);
             result.Should().BeTrue();
 
-            result = comparer.Equals(methods_CS.Method1, methods_CS.Method3);
+            result = comparer.Equals(csMethods.Method1, csMethods.Method3);
             result.Should().BeFalse();
 
-            var hashSet = new HashSet<CSharp.BlockSyntax>(new[] { methods_CS.Method1, methods_CS.Method2, methods_CS.Method3 }, comparer);
+            var hashSet = new HashSet<CSharp.BlockSyntax>(new[] { csMethods.Method1, csMethods.Method2, csMethods.Method3 }, comparer);
             hashSet.Should().HaveCount(2);
-            hashSet.Should().Contain(methods_CS.Method1);
-            hashSet.Should().NotContain(methods_CS.Method4);
+            hashSet.Should().Contain(csMethods.Method1);
+            hashSet.Should().NotContain(csMethods.Method4);
         }
 
         [TestMethod]
@@ -156,35 +156,35 @@ End Namespace";
         {
             var comparer = new CSharpSyntaxNodeEqualityComparer<CSharp.StatementSyntax>();
 
-            var result = comparer.Equals(methods_CS.Method1.Statements, methods_CS.Method2.Statements);
+            var result = comparer.Equals(csMethods.Method1.Statements, csMethods.Method2.Statements);
             result.Should().BeTrue();
 
-            result = comparer.Equals(methods_CS.Method1.Statements, methods_CS.Method3.Statements);
+            result = comparer.Equals(csMethods.Method1.Statements, csMethods.Method3.Statements);
             result.Should().BeFalse();
 
-            var hashSet = new HashSet<SyntaxList<CSharp.StatementSyntax>>(new[] { methods_CS.Method1.Statements, methods_CS.Method2.Statements, methods_CS.Method3.Statements }, comparer);
+            var hashSet = new HashSet<SyntaxList<CSharp.StatementSyntax>>(new[] { csMethods.Method1.Statements, csMethods.Method2.Statements, csMethods.Method3.Statements }, comparer);
             hashSet.Should().HaveCount(2);
-            hashSet.Should().Contain(methods_CS.Method1.Statements);
-            hashSet.Should().NotContain(methods_CS.Method4.Statements);
+            hashSet.Should().Contain(csMethods.Method1.Statements);
+            hashSet.Should().NotContain(csMethods.Method4.Statements);
         }
 
         [TestMethod]
         public void AreEquivalent_Node_VB()
         {
-            var result = VisualBasicEquivalenceChecker.AreEquivalent(methods_VB.Method1.First(), methods_VB.Method2.First());
+            var result = VisualBasicEquivalenceChecker.AreEquivalent(vbMethods.Method1.First(), vbMethods.Method2.First());
             result.Should().BeTrue();
 
-            result = VisualBasicEquivalenceChecker.AreEquivalent(methods_VB.Method1.First(), methods_VB.Method3.First());
+            result = VisualBasicEquivalenceChecker.AreEquivalent(vbMethods.Method1.First(), vbMethods.Method3.First());
             result.Should().BeFalse();
         }
 
         [TestMethod]
         public void AreEquivalent_List_VB()
         {
-            var result = VisualBasicEquivalenceChecker.AreEquivalent(methods_VB.Method1, methods_VB.Method2);
+            var result = VisualBasicEquivalenceChecker.AreEquivalent(vbMethods.Method1, vbMethods.Method2);
             result.Should().BeTrue();
 
-            result = VisualBasicEquivalenceChecker.AreEquivalent(methods_VB.Method1, methods_VB.Method3);
+            result = VisualBasicEquivalenceChecker.AreEquivalent(vbMethods.Method1, vbMethods.Method3);
             result.Should().BeFalse();
         }
 
@@ -193,16 +193,16 @@ End Namespace";
         {
             var comparer = new VisualBasicSyntaxNodeEqualityComparer<VisualBasic.StatementSyntax>();
 
-            var result = comparer.Equals(methods_VB.Method1.First(), methods_VB.Method2.First());
+            var result = comparer.Equals(vbMethods.Method1.First(), vbMethods.Method2.First());
             result.Should().BeTrue();
 
-            result = comparer.Equals(methods_VB.Method1.First(), methods_VB.Method3.First());
+            result = comparer.Equals(vbMethods.Method1.First(), vbMethods.Method3.First());
             result.Should().BeFalse();
 
-            var hashSet = new HashSet<VisualBasic.StatementSyntax>(new[] { methods_VB.Method1.First(), methods_VB.Method2.First(), methods_VB.Method3.First() }, comparer);
+            var hashSet = new HashSet<VisualBasic.StatementSyntax>(new[] { vbMethods.Method1.First(), vbMethods.Method2.First(), vbMethods.Method3.First() }, comparer);
             hashSet.Should().HaveCount(2);
-            hashSet.Should().Contain(methods_VB.Method1.First());
-            hashSet.Should().NotContain(methods_VB.Method4.First());
+            hashSet.Should().Contain(vbMethods.Method1.First());
+            hashSet.Should().NotContain(vbMethods.Method4.First());
         }
 
         [TestMethod]
@@ -210,21 +210,24 @@ End Namespace";
         {
             var comparer = new VisualBasicSyntaxNodeEqualityComparer<VisualBasic.StatementSyntax>();
 
-            var result = comparer.Equals(methods_VB.Method1, methods_VB.Method2);
+            var result = comparer.Equals(vbMethods.Method1, vbMethods.Method2);
             result.Should().BeTrue();
 
-            result = comparer.Equals(methods_VB.Method1, methods_VB.Method3);
+            result = comparer.Equals(vbMethods.Method1, vbMethods.Method3);
             result.Should().BeFalse();
 
-            var hashSet = new HashSet<SyntaxList<VisualBasic.StatementSyntax>>(new[] { methods_VB.Method1, methods_VB.Method2, methods_VB.Method3 }, comparer);
+            var hashSet = new HashSet<SyntaxList<VisualBasic.StatementSyntax>>(new[] { vbMethods.Method1, vbMethods.Method2, vbMethods.Method3 }, comparer);
             hashSet.Should().HaveCount(2);
-            hashSet.Should().Contain(methods_VB.Method1);
-            hashSet.Should().NotContain(methods_VB.Method4);
+            hashSet.Should().Contain(vbMethods.Method1);
+            hashSet.Should().NotContain(vbMethods.Method4);
         }
 
         private class CSharpMethods
         {
-            public readonly CSharp.BlockSyntax Method1, Method2, Method3, Method4;
+            public readonly CSharp.BlockSyntax Method1;
+            public readonly CSharp.BlockSyntax Method2;
+            public readonly CSharp.BlockSyntax Method3;
+            public readonly CSharp.BlockSyntax Method4;
 
             public CSharpMethods(string source)
             {
@@ -238,7 +241,10 @@ End Namespace";
 
         private class VisualBasicMethods
         {
-            public readonly SyntaxList<VisualBasic.StatementSyntax> Method1, Method2, Method3, Method4;
+            public readonly SyntaxList<VisualBasic.StatementSyntax> Method1;
+            public readonly SyntaxList<VisualBasic.StatementSyntax> Method2;
+            public readonly SyntaxList<VisualBasic.StatementSyntax> Method3;
+            public readonly SyntaxList<VisualBasic.StatementSyntax> Method4;
 
             public VisualBasicMethods(string source)
             {

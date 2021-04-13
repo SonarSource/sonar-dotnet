@@ -86,10 +86,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void JoinStr_T_String()
         {
-            var lst = new[] {
+            var lst = new[]
+            {
                 Tuple.Create(1, "a"),
                 Tuple.Create(2, "bb"),
-                Tuple.Create(3, "ccc") };
+                Tuple.Create(3, "ccc")
+            };
 
             lst.JoinStr(null, x => x.Item2).Should().Be("abbccc");
             lst.JoinStr(", ", x => x.Item2).Should().Be("a, bb, ccc");
@@ -100,10 +102,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void JoinStr_T_Int()
         {
-            var lst = new[] {
+            var lst = new[]
+            {
                 Tuple.Create(1, "a"),
                 Tuple.Create(2, "bb"),
-                Tuple.Create(3, "ccc") };
+                Tuple.Create(3, "ccc")
+            };
 
             lst.JoinStr(", ", x => x.Item1).Should().Be("1, 2, 3");
             lst.JoinStr(null, x => x.Item1 + 10).Should().Be("111213");
@@ -112,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void JoinStr_String()
         {
-            new string[] { }.JoinStr(", ").Should().Be("");
+            Array.Empty<string>().JoinStr(", ").Should().Be("");
             new[] { "a" }.JoinStr(", ").Should().Be("a");
             new[] { "a", "bb", "ccc" }.JoinStr(", ").Should().Be("a, bb, ccc");
             new[] { "a", "bb", "ccc" }.JoinStr(null).Should().Be("abbccc");
@@ -121,7 +125,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void JoinStr_Int()
         {
-            new int[] { }.JoinStr(", ").Should().Be("");
+            Array.Empty<int>().JoinStr(", ").Should().Be("");
             new[] { 1 }.JoinStr(", ").Should().Be("1");
             new[] { 1, 22, 333 }.JoinStr(", ").Should().Be("1, 22, 333");
             new[] { 1, 22, 333 }.JoinStr(null).Should().Be("122333");
@@ -131,7 +135,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void WhereNotNull_Class()
         {
             var instance = new Object();
-            new object[] { }.WhereNotNull().Should().BeEmpty();
+            Array.Empty<object>().WhereNotNull().Should().BeEmpty();
             new object[] { null, null, null }.WhereNotNull().Should().BeEmpty();
             new object[] { 1, "a", instance }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a", instance });
             new object[] { 1, "a", null }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a"});
@@ -140,19 +144,20 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void WhereNotNull_NullableStruct()
         {
-            new StructType?[] { }.WhereNotNull().Should().BeEmpty();
+            Array.Empty<StructType?>().WhereNotNull().Should().BeEmpty();
             new StructType?[] { null, null, null }.WhereNotNull().Should().BeEmpty();
-            new StructType?[] { new StructType(1), new StructType(2), new StructType (3)}.WhereNotNull().Should().BeEquivalentTo(new object[] { new StructType(1), new StructType(2), new StructType(3) });
+            new StructType?[] { new StructType(1), new StructType(2), new StructType(3) }
+                              .WhereNotNull().Should().BeEquivalentTo(new object[] { new StructType(1), new StructType(2), new StructType(3) });
             new StructType?[] { new StructType(1), new StructType(2), null }.WhereNotNull().Should().BeEquivalentTo(new object[] { new StructType(1), new StructType(2) });
         }
 
-        private struct StructType {
-
-            public int Count;
+        private struct StructType
+        {
+            private readonly int count;
 
             public StructType(int count)
             {
-                Count = count;
+                this.count = count;
             }
         }
     }

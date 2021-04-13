@@ -108,7 +108,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             files.Should().BeEquivalentTo(new[] { @"C:\Projects/DummyProj/wEB.config", @"C:\Projects/DummyProj/Views\Web.confiG" });
         }
 
-        private ProjectConfigReader CreateProjectConfigReader(string relativePath) =>
+        private static ProjectConfigReader CreateProjectConfigReader(string relativePath) =>
             new (SourceText.From(File.ReadAllText(relativePath)), "LogNameFor-SonarProjectConfig.xml");
     }
 }
