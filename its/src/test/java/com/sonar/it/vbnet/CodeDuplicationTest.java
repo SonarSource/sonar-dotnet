@@ -21,10 +21,12 @@ package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
+import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonarqube.ws.Duplications;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +46,16 @@ public class CodeDuplicationTest {
 
   @Test
   public void codeDuplicationResultsAreImportedForMainCode() throws Exception {
-    assertThat(TestUtils.getDuplication(ORCHESTRATOR, "VbCodeDuplicationTest:VbCodeDuplicationMainProj/DuplicatedMainClass1.vb").getDuplicationsList()).isNotEmpty();
+    List<Duplications.Duplication> duplications = TestUtils.getDuplication(ORCHESTRATOR, "VbCodeDuplicationTest:VbCodeDuplicationMainProj/DuplicatedMainClass1.vb").getDuplicationsList();
+    assertThat(duplications.size()).isEqualTo(1);
+    Duplications.Duplication duplication = duplications.get(0);
+    assertThat(duplication.getBlocksCount()).isEqualTo(2);
+    Duplications.Block firstBlock = duplication.getBlocks(0);
+    Duplications.Block secondBlock = duplication.getBlocks(1);
+    assertThat(firstBlock.getFrom()).isEqualTo(3);
+    assertThat(firstBlock.getSize()).isEqualTo(55);
+    assertThat(secondBlock.getFrom()).isEqualTo(3);
+    assertThat(secondBlock.getSize()).isEqualTo(55);
   }
 
   @Test
