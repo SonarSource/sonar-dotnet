@@ -35,7 +35,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class BuilderPatternConditionTest
     {
-
         private InvocationContext csContext;
         private InvocationContext vbContext;
 

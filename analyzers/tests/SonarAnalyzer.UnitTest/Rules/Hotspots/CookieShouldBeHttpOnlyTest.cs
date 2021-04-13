@@ -36,6 +36,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private const string WebConfig = "Web.config";
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void CookiesShouldBeHttpOnly_Nancy() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
+                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                NuGetMetadataReference.Nancy());
+
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
         [TestMethod]
         [TestCategory("Rule")]
@@ -71,6 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 MetadataReferenceFacade.SystemWeb,
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
+
 #else
         [TestMethod]
         [TestCategory("Rule")]
@@ -90,13 +99,5 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
 #endif
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
-        public void CookiesShouldBeHttpOnly_Nancy() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
-                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                NuGetMetadataReference.Nancy());
     }
 }

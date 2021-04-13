@@ -105,7 +105,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                         codeFixExecuted = true;
                     }
                 }
-            } while (codeBeforeFix != state.ActualCode);
+            }
+            while (codeBeforeFix != state.ActualCode);
 
             codeFixExecutedAtLeastOnce.Should().BeTrue();
 

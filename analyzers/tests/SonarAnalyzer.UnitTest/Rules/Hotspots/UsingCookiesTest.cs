@@ -78,6 +78,5 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(packageVersion))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsPrimitives(packageVersion));
 #endif
-
     }
 }

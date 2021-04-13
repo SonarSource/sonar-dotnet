@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         Console.WriteLine(o);
     }
 }";
-            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             locations.Should().BeEmpty();
         }
@@ -56,7 +56,7 @@ public class Foo
         Console.WriteLine(o);
     }
 }";
-            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             locations.Should().HaveCount(2);
 
@@ -76,7 +76,7 @@ Public Class Foo
     End Sub
 
 End Class";
-            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             locations.Should().HaveCount(2);
 
@@ -99,7 +99,7 @@ End Class";
 Noncompliant - this should not be detected as expected issue
 -->
 </Root>";
-            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             locations.Should().HaveCount(5);
 
@@ -117,9 +117,9 @@ Noncompliant - this should not be detected as expected issue
         Console.WriteLine(o); // Noncompliant
     }
 }";
-            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
-            locations.Should().HaveCount(1);
+            locations.Should().ContainSingle();
             locations.Select(l => l.IsPrimary).Should().Equal(new[] { true });
             locations.Select(l => l.LineNumber).Should().Equal(new[] { 5 });
         }
@@ -136,7 +136,7 @@ Noncompliant - this should not be detected as expected issue
         Console.WriteLine(o);
     }
 }";
-            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             locations.Should().HaveCount(2);
 
@@ -157,7 +157,7 @@ Noncompliant - this should not be detected as expected issue
         Console.WriteLine(o);
     }
 }";
-            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             locations.Should().HaveCount(2);
 
@@ -179,7 +179,7 @@ Noncompliant - this should not be detected as expected issue
     }
 }";
 
-            Action action = () => new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             action.Should().Throw<InvalidOperationException>()
                 .WithMessage("Unexpected redundant issue location on line 3. Issue location can be set either " +
@@ -197,7 +197,7 @@ Noncompliant - this should not be detected as expected issue
     }
 }";
 
-            Action action = () => new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             action.Should().Throw<InvalidOperationException>()
                 .WithMessage("Primary location with id [myId1] found on multiple lines: 3, 5");
@@ -214,7 +214,7 @@ Noncompliant - this should not be detected as expected issue
     }
 }";
 
-            Action action = () => new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             action.Should().Throw<InvalidOperationException>()
                 .WithMessage(@"Line 2 looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
@@ -233,7 +233,7 @@ Either remove the Noncompliant/Secondary word or precise pattern '^^' from the c
     }
 }";
 
-            Action action = () => new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
 
             action.Should().Throw<InvalidOperationException>()
                 .WithMessage(@"Line 3 looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
