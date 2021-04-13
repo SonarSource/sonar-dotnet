@@ -22,6 +22,7 @@ using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -39,6 +40,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void IsInternalDebuggingContext_WhenEnvVarValueIsTrue_ReturnsTrue() =>
             SetupRunAndReset("true", true);
 
+        [AssertionMethod]
         private static void SetupRunAndReset(string value, bool shouldBeTrue)
         {
             // Arrange

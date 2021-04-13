@@ -25,6 +25,7 @@ using System.Linq;
 using System.Resources;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.PackagingTests
 {
@@ -41,6 +42,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             DetectTypeChanges(vbnet::SonarAnalyzer.RspecStrings.ResourceManager,
                 VbRuleTypeMapping.RuleTypesVb, nameof(VbRuleTypeMapping.RuleTypesVb));
 
+        [AssertionMethod]
         private static void DetectTypeChanges(ResourceManager resourceManager, IImmutableDictionary<string, string> expectedTypes, string expectedTypesName)
         {
             var items = Enumerable

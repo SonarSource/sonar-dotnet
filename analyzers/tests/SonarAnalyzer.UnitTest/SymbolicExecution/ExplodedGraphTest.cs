@@ -188,6 +188,8 @@ namespace NS
                         case "!a":
                             Execute.Assertion.FailWith("We should never get into this branch");
                             break;
+                        default:
+                            break;
                     }
                 };
 
@@ -665,6 +667,9 @@ namespace Namespace
                             args.ProgramState.HasValue.Should().BeFalse();
                             instructionsInspected++;
                             break;
+
+                        default:
+                            break;
                     }
                 };
 
@@ -832,6 +837,9 @@ namespace Namespace
                             args.ProgramState.GetSymbolValue(addressSymbol).Should().BeNull();
                             args.ProgramState.GetSymbolValue(pSymbol).Should().BeNull();
                             break;
+
+                        default:
+                            break;
                     }
                 };
 
@@ -961,6 +969,8 @@ namespace Namespace
                             args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
                             strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
                             break;
+                        default:
+                            break;
                     }
                 };
 
@@ -1016,6 +1026,9 @@ namespace Namespace
                             instructionsInspected++;
                             assignmentInspected++;
                             break;
+
+                        default:
+                            break;
                     }
                 };
 
@@ -1059,6 +1072,9 @@ namespace Namespace
                             instructionsInspected++;
                             assignmentInspected++;
                             break;
+
+                        default:
+                            break;
                     }
                 };
 
@@ -1088,6 +1104,9 @@ namespace Namespace
                         case "s ??= \"N/A\"":
                             args.ProgramState.GetSymbolValue(sSymbol).Should().NotBeNull();
                             sSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        default:
                             break;
                     }
                 };
@@ -1225,6 +1244,9 @@ namespace Namespace
                             args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().NotBeNull();
                             args.ProgramState.HasValue.Should().BeFalse();
                             break;
+
+                        default:
+                            break;
                     }
                 };
 
@@ -1295,6 +1317,9 @@ namespace Test
                             args.ProgramState.GetSymbolValue(diagnosticsSymbol).Should().NotBeNull();
                             args.ProgramState.HasValue.Should().BeFalse();
                             break;
+
+                        default:
+                            break;
                     }
                 };
 
@@ -1328,6 +1353,9 @@ namespace Test
                         case "var (projectInstance, _) = loader":
                             args.ProgramState.GetSymbolValue(projectInstanceSymbol).Should().NotBeNull();
                             args.ProgramState.HasValue.Should().BeFalse();
+                            break;
+
+                        default:
                             break;
                     }
                 };
@@ -1370,6 +1398,9 @@ namespace Test
                         case "result = obj.Read(out int _)":
                             args.ProgramState.GetSymbolValue(resultSymbol).Should().NotBeNull();
                             args.ProgramState.HasValue.Should().BeFalse();
+                            break;
+
+                        default:
                             break;
                     }
                 };
