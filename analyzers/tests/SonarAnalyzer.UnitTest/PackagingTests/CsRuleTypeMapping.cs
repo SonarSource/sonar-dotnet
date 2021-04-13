@@ -4499,7 +4499,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4499"],
             //["4500"],
             //["4501"],
-            //["4502"],
+            ["4502"] = "SECURITY_HOTSPOT",
             //["4503"],
             //["4504"],
             //["4505"],
