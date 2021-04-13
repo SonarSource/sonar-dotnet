@@ -45,9 +45,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableArray<KnownType> TrackedTestIdentifierAttributes =
             // xUnit has it's own "ignore" mechanism (by providing a (Skip = "reason") string in
             // the attribute, so there is always an explanation for the test being skipped).
-            UnitTestHelper.KnownTestMethodAttributes_MSTest
+            UnitTestHelper.KnownTestMethodAttributesOfMSTest
             .Concat(new[] { KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute })
-            .Concat(UnitTestHelper.KnownTestMethodAttributes_NUnit)
+            .Concat(UnitTestHelper.KnownTestMethodAttributesOfNUnit)
             .ToImmutableArray();
 
         protected override void Initialize(SonarAnalysisContext context)
