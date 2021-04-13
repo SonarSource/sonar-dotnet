@@ -299,13 +299,9 @@ End Namespace
         {
             var nameParts = typeAndMethodName.Split('.');
 
-            var invocation_identifierPairs = snippet.IsCSharp()
-                ? (IEnumerable<(SyntaxNode node, string name)>)snippet.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, n.Expression.GetIdentifier()?.Identifier.ValueText))
-                : (IEnumerable<(SyntaxNode node, string name)>)snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
+            var identifierPairs = snippet.IsCSharp() ? GetCSharpNodes() : GetVbNodes();
 
-            foreach (var (invocation, methodName) in invocation_identifierPairs)
+            foreach (var (invocation, methodName) in identifierPairs)
             {
                 var symbol = snippet.GetSymbol<IMethodSymbol>(invocation);
                 if (symbol.Name == nameParts[1] &&
@@ -317,10 +313,18 @@ End Namespace
 
             Assert.Fail($"Test setup error: could not find method call in test code snippet: {typeAndMethodName}");
             return null;
+
+            IEnumerable<(SyntaxNode node, string name)> GetCSharpNodes() =>
+                snippet.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
+                    .Select(n => ((SyntaxNode)n, n.Expression.GetIdentifier()?.Identifier.ValueText));
+
+            IEnumerable<(SyntaxNode node, string name)> GetVbNodes() =>
+                snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
+                    .Select(n => ((SyntaxNode)n, VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
         }
 
         private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
-                CheckMatch(false, expectedOutcome, invocationContext, targetMethodSignatures);
+            CheckMatch(false, expectedOutcome, invocationContext, targetMethodSignatures);
 
         private static void CheckIsMethodOrDerived(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
             CheckMatch(true, expectedOutcome, invocationContext, targetMethodSignatures);
