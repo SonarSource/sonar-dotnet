@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
@@ -52,8 +53,8 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\InvalidCastToInterface.CSharp9.cs", GetAnalyzers());
 #endif
 
-        private static SonarDiagnosticAnalyzer[] GetAnalyzers() =>
-            new SonarDiagnosticAnalyzer[]
+        private static DiagnosticAnalyzer[] GetAnalyzers() =>
+            new DiagnosticAnalyzer[]
                 {
                     new SymbolicExecutionRunner(new InvalidCastToInterfaceSymbolicExecution()),
                     new InvalidCastToInterface()
