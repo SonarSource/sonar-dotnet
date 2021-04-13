@@ -7,9 +7,10 @@
     using NSubstitute;
     using NUnit.Framework;
 
+    using static NUnit.Framework.Assert;
+
     class BaseClass
     {
-
         public void AssertSomething()
         {
             Assert.IsTrue(true);
@@ -116,8 +117,15 @@
         }
 
         [Test]
+        public void Test15()
+        {
+            var x = 42;
+            AreEqual(x, 42);
+        }
+
+        [Test]
         [Ignore("Some reason")]
-        public void Test15() // Don't raise on skipped test methods
+        public void Test16() // Don't raise on skipped test methods
         {
         }
     }
@@ -331,7 +339,7 @@
         };
 
         [Test]
-        [TestCaseSource(nameof(Cases))] 
+        [TestCaseSource(nameof(Cases))]
         public bool TestCaseSource17(object obj1, object obj2)
         {
             return obj1.Equals(obj2);
