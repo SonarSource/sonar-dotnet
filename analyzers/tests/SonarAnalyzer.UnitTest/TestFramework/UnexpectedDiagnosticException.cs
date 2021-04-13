@@ -20,9 +20,9 @@
 
 using System;
 using System.IO;
+using System.Resources;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using System.Resources;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -66,15 +66,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 #if NETFRAMEWORK
         private static class NetFrameworkFormatter
         {
-            private static readonly ResourceManager mscorlibResources = new ResourceManager("mscorlib", typeof(object).Assembly);
-            private static readonly string at = mscorlibResources.GetString("Word_At");
-            private static readonly string stackTraceFormat = mscorlibResources.GetString("StackTrace_InFileLineNumber");
+            private static readonly ResourceManager MscorlibResources = new ResourceManager("mscorlib", typeof(object).Assembly);
+            private static readonly string At = MscorlibResources.GetString("Word_At");
+            private static readonly string StackTraceFormat = MscorlibResources.GetString("StackTrace_InFileLineNumber");
 
             internal static string GetAdditionalLine(string path, int line) =>
-                $"{at} Test Case {GetStackTraceLocation(path, line)}";
+                $"{At} Test Case {GetStackTraceLocation(path, line)}";
 
             private static string GetStackTraceLocation(string testCasePath, int testCaseLine) =>
-                string.Format(stackTraceFormat, testCasePath, testCaseLine);
+                string.Format(StackTraceFormat, testCasePath, testCaseLine);
         }
 #else
         private static class NetCoreFormatter

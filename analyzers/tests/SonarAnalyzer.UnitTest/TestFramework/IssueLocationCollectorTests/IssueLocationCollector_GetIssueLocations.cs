@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant [flow1,flow2]
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().HaveCount(2);
 
@@ -54,14 +54,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant@-1 [flow1,flow2] {{Some message}}
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().HaveCount(2);
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true, true },
                 expectedLineNumbers: new[] { 2, 2 },
-                expectedMessages: new string[] { "Some message", "Some message" },
+                expectedMessages: new[] { "Some message", "Some message" },
                 expectedIssueIds: new[] { "flow1", "flow2" });
         }
 
@@ -72,14 +72,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant {{Some message}} [flow1,flow2]
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true },
                 expectedLineNumbers: new[] { 3 },
-                expectedMessages: new string[] { "Some message" },
+                expectedMessages: new[] { "Some message" },
                 expectedIssueIds: new string[] { null });
         }
 
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant@-1
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
@@ -108,14 +108,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant [flow1,flow2] {{Some message}}
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().HaveCount(2);
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true, true },
                 expectedLineNumbers: new[] { 3, 3 },
-                expectedMessages: new string[] { "Some message", "Some message" },
+                expectedMessages: new[] { "Some message", "Some message" },
                 expectedIssueIds: new[] { "flow1", "flow2" });
         }
 
@@ -126,14 +126,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant {{Some message}}
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true },
                 expectedLineNumbers: new[] { 3 },
-                expectedMessages: new string[] { "Some message" },
+                expectedMessages: new[] { "Some message" },
                 expectedIssueIds: new string[] { null });
         }
 
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant@=1
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
@@ -162,7 +162,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant [last,flow1,flow2]
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().HaveCount(3);
 
@@ -180,7 +180,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
@@ -198,14 +198,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Secondary@-1 [flow1,flow2] {{Some message}}
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().HaveCount(2);
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { false, false },
                 expectedLineNumbers: new[] { 2, 2 },
-                expectedMessages: new string[] { "Some message", "Some message" },
+                expectedMessages: new[] { "Some message", "Some message" },
                 expectedIssueIds: new[] { "flow1", "flow2" });
         }
 
@@ -216,7 +216,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a);
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().BeEmpty();
         }
@@ -228,7 +228,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant^5#7
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
@@ -246,7 +246,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Secondary ^13#9 [myId]
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
@@ -254,7 +254,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
                 expectedIsPrimary: new[] { false },
                 expectedLineNumbers: new[] { 3 },
                 expectedMessages: new string[] { null },
-                expectedIssueIds: new string[] { "myId" });
+                expectedIssueIds: new[] { "myId" });
         }
 
         [TestMethod]
@@ -264,15 +264,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); // Noncompliant @-2 ^5#16 [myIssueId] {{MyMessage}}
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true },
                 expectedLineNumbers: new[] { 1 },
-                expectedMessages: new string[] { "MyMessage" },
-                expectedIssueIds: new string[] { "myIssueId" });
+                expectedMessages: new[] { "MyMessage" },
+                expectedIssueIds: new[] { "myIssueId" });
             result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
             result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
         }
@@ -284,15 +284,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     Console.WriteLine(a); //Noncompliant@-2^5#16[myIssueId]{{MyMessage}}
 }");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true },
                 expectedLineNumbers: new[] { 1 },
-                expectedMessages: new string[] { "MyMessage" },
-                expectedIssueIds: new string[] { "myIssueId" });
+                expectedMessages: new[] { "MyMessage" },
+                expectedIssueIds: new[] { "myIssueId" });
             result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
             result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
         }
@@ -304,15 +304,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 
 <!-- Noncompliant @-2 ^5#16 [myIssueId] {{MyMessage}} -->
 ");
-            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
 
             result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true },
                 expectedLineNumbers: new[] { 1 },
-                expectedMessages: new string[] { "MyMessage" },
-                expectedIssueIds: new string[] { "myIssueId" });
+                expectedMessages: new[] { "MyMessage" },
+                expectedIssueIds: new[] { "myIssueId" });
             result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
             result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
         }

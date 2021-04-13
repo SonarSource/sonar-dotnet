@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string runtime = null) =>
             Create(new Package(packageId, packageVersion, runtime), SortedAllowedDirectories);
 
-        public static IEnumerable<MetadataReference> CreateNETStandard21()
+        public static IEnumerable<MetadataReference> CreateNetStandard21()
         {
             var packageDir = Path.Combine(PackagesFolder, @"NETStandard.Library.Ref.2.1.0\ref\netstandard2.1");
             if (Directory.Exists(packageDir))
@@ -116,12 +116,12 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 
         private static IPackageRepository CreatePackageRepository()
         {
-            var currentFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var currentFolder = Path.GetDirectoryName(typeof(NuGetMetadataFactory).Assembly.Location);
             var localSettings = Settings.LoadDefaultSettings(new PhysicalFileSystem(currentFolder), null, null);
             // Get a package source provider that can use the settings
             var packageSourceProvider = new PackageSourceProvider(localSettings);
             // Create an aggregate repository that uses all of the configured sources
-            return packageSourceProvider.CreateAggregateRepository(PackageRepositoryFactory.Default, true /* ignore failing repos. Errors will be logged as warnings. */ );
+            return packageSourceProvider.CreateAggregateRepository(PackageRepositoryFactory.Default, true /* ignore failing repos. Errors will be logged as warnings. */);
         }
 
         private static void LogMessage(string message) =>

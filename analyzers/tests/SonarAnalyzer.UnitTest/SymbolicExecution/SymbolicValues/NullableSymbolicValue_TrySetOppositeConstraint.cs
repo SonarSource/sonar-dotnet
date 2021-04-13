@@ -30,14 +30,14 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
     [TestClass]
     public class NullableSymbolicValue_TrySetOppositeConstraint
     {
-        private SymbolicValue sv_w;
-        private NullableSymbolicValue sv_0;
+        private SymbolicValue symbolicValue;
+        private NullableSymbolicValue nullableSymbolicValue;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            this.sv_w = SymbolicValue.Create();
-            this.sv_0 = new NullableSymbolicValue(this.sv_w);
+            symbolicValue = SymbolicValue.Create();
+            nullableSymbolicValue = new NullableSymbolicValue(symbolicValue);
         }
 
         [TestMethod]
@@ -45,12 +45,12 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         {
             var ps = new ProgramState();
 
-            var newProgramStates = this.sv_0.TrySetOppositeConstraint(BoolConstraint.True, ps).ToList();
+            var newProgramStates = nullableSymbolicValue.TrySetOppositeConstraint(BoolConstraint.True, ps).ToList();
 
             newProgramStates.Should().HaveCount(2);
-            ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
-            ShouldHaveConstraint(newProgramStates[0], this.sv_w, BoolConstraint.False);
-            ShouldHaveConstraint(newProgramStates[1], this.sv_0, NullableValueConstraint.NoValue);
+            ShouldHaveConstraint(newProgramStates[0], nullableSymbolicValue, NullableValueConstraint.HasValue);
+            ShouldHaveConstraint(newProgramStates[0], symbolicValue, BoolConstraint.False);
+            ShouldHaveConstraint(newProgramStates[1], nullableSymbolicValue, NullableValueConstraint.NoValue);
         }
 
         [TestMethod]
@@ -58,12 +58,12 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         {
             var ps = new ProgramState();
 
-            var newProgramStates = this.sv_0.TrySetOppositeConstraint(BoolConstraint.False, ps).ToList();
+            var newProgramStates = nullableSymbolicValue.TrySetOppositeConstraint(BoolConstraint.False, ps).ToList();
 
             newProgramStates.Should().HaveCount(2);
-            ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
-            ShouldHaveConstraint(newProgramStates[0], this.sv_w, BoolConstraint.True);
-            ShouldHaveConstraint(newProgramStates[1], this.sv_0, NullableValueConstraint.NoValue);
+            ShouldHaveConstraint(newProgramStates[0], nullableSymbolicValue, NullableValueConstraint.HasValue);
+            ShouldHaveConstraint(newProgramStates[0], symbolicValue, BoolConstraint.True);
+            ShouldHaveConstraint(newProgramStates[1], nullableSymbolicValue, NullableValueConstraint.NoValue);
         }
 
         [TestMethod]
@@ -71,10 +71,10 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         {
             var ps = new ProgramState();
 
-            var newProgramStates = this.sv_0.TrySetOppositeConstraint(NullableValueConstraint.NoValue, ps).ToList();
+            var newProgramStates = nullableSymbolicValue.TrySetOppositeConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
             newProgramStates.Should().ContainSingle();
-            ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
+            ShouldHaveConstraint(newProgramStates[0], nullableSymbolicValue, NullableValueConstraint.HasValue);
         }
 
         [TestMethod]
@@ -82,10 +82,10 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         {
             var ps = new ProgramState();
 
-            var newProgramStates = this.sv_0.TrySetOppositeConstraint(NullableValueConstraint.HasValue, ps).ToList();
+            var newProgramStates = nullableSymbolicValue.TrySetOppositeConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
             newProgramStates.Should().ContainSingle();
-            ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.NoValue);
+            ShouldHaveConstraint(newProgramStates[0], nullableSymbolicValue, NullableValueConstraint.NoValue);
         }
 
         [TestMethod]
@@ -93,10 +93,10 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         {
             var ps = new ProgramState();
 
-            var newProgramStates = this.sv_0.TrySetOppositeConstraint(ObjectConstraint.Null, ps).ToList();
+            var newProgramStates = nullableSymbolicValue.TrySetOppositeConstraint(ObjectConstraint.Null, ps).ToList();
 
             newProgramStates.Should().ContainSingle();
-            ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
+            ShouldHaveConstraint(newProgramStates[0], nullableSymbolicValue, NullableValueConstraint.HasValue);
         }
 
         [TestMethod]
@@ -104,12 +104,12 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         {
             var ps = new ProgramState();
 
-            var newProgramStates = this.sv_0.TrySetOppositeConstraint(ObjectConstraint.NotNull, ps).ToList();
+            var newProgramStates = nullableSymbolicValue.TrySetOppositeConstraint(ObjectConstraint.NotNull, ps).ToList();
 
             newProgramStates.Should().BeEquivalentTo(ps);
         }
 
-        private void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicValueConstraint expectedConstraint)
+        private static void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicValueConstraint expectedConstraint)
         {
             sv.TryGetConstraints(ps, out var constraints).Should().BeTrue();
             constraints.HasConstraint(expectedConstraint).Should().BeTrue();

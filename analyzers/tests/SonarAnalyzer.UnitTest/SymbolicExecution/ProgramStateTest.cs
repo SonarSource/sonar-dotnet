@@ -36,13 +36,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             public override SymbolicValueConstraint OppositeForLogicalNot => null;
         }
 
-        private static ISymbol GetSymbol()
-        {
-            var testInput = "var a = true; var b = false; b = !b; a = (b);";
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(ControlFlowGraphTest.TestInput, testInput), "Bar", out var semanticModel);
-            return semanticModel.GetDeclaredSymbol(method);
-        }
-
         [TestMethod]
         [TestCategory("Symbolic execution")]
         public void ProgramState_Equivalence()
@@ -147,6 +140,13 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution
             ps = ps.SetConstraint(sv, ObjectConstraint.NotNull);
             symbol.HasConstraint(BoolConstraint.False, ps).Should().BeTrue();
             symbol.HasConstraint(ObjectConstraint.NotNull, ps).Should().BeTrue();
+        }
+
+        private static ISymbol GetSymbol()
+        {
+            var testInput = "var a = true; var b = false; b = !b; a = (b);";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(ControlFlowGraphTest.TestInput, testInput), "Bar", out var semanticModel);
+            return semanticModel.GetDeclaredSymbol(method);
         }
     }
 }
