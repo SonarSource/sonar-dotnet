@@ -240,14 +240,99 @@ Namespace Tests.TestCases
             Dim Second As New ClassWithListProperty
 
             First.IntList(0) = 1
+            First.IntList2(0) = 11
             Second.IntList(0) = 2
-
+            Second.IntList2(0) =22
         End Sub
 
+        Public Sub SamePropertyDifferentIndex()
+            Dim First As New ClassWithListProperty
+            First.IntList(0) = 1
+            First.IntList(1) = 2 ' ok, different index
+        End Sub
+
+        Public Sub FNBecauseOfTheOrder()
+            Dim First As New ClassWithListProperty
+
+            First.IntList(0) = 1
+            First.IntList2(1) = 2
+            First.IntList(0) = 3 ' FN
+            First.IntList2(1) = 4 ' FN
+        End Sub
+
+        Public Sub NoncompliantWithSameIndex()
+            Dim First As New ClassWithListProperty
+            First.IntList(0) = 1 ' Secondary
+            First.IntList(0) = 3 ' Noncompliant
+            First.IntList2(1) = 2 ' Secondary
+            First.IntList2(1) = 4 ' Noncompliant
+        End Sub
+
+        Public Sub DifferentIndexes()
+            Dim First As New ClassWithListProperty
+
+            First.IntList(0) = 1
+            First.IntList2(1) = 2
+            First.IntList(1) = 3
+            First.IntList2(0) = 4
+        End Sub
+
+        Public Sub CompliantDeeplyNested()
+            Dim First As New ClassWithNested
+            Dim Second As New ClassWithNested
+
+            First.Alpha.IntList(0) = 1
+            First.Alpha.IntList2(0) = 11
+            First.Beta.IntList(0) = 1111
+            First.Beta.IntList2(0) = 11111
+            Second.Alpha.IntList(0) = 2
+            Second.Alpha.IntList2(0) = 22
+            Second.Beta.IntList(0) = 222
+            Second.Beta.IntList2(0) = 2222
+        End Sub
+
+        Public Sub NonCompliantDeeplyNested()
+            Dim First As New ClassWithNested
+            Dim Second As New ClassWithNested
+
+            First.Alpha.IntList(0) = 1 ' Secondary
+            First.Alpha.IntList(0) = 2 ' Noncompliant
+            First.Beta.IntList(0) = 3
+            First.Beta.IntList2(0) = 4
+            Second.Alpha.IntList(0) = 5
+            Second.Alpha.IntList2(0) = 6
+            Second.Beta.IntList(1) = 7 ' FN
+            Second.Beta.IntList2(0) = 8
+            Second.Beta.IntList(1) = 9 ' FN
+            First.Beta.IntList(3) = 10
+            Second.Beta.IntList(3) = 11
+        End Sub
 
         Private Class ClassWithListProperty
 
             Public ReadOnly Property IntList As List(Of Int32)
+                Get
+                    Return Nothing
+                End Get
+            End Property
+
+            Public ReadOnly Property IntList2 As List(Of Int32)
+                Get
+                    Return Nothing
+                End Get
+            End Property
+
+        End Class
+
+        Private Class ClassWithNested
+
+            Public ReadOnly Property Alpha As ClassWithListProperty
+                Get
+                    Return Nothing
+                End Get
+            End Property
+
+            Public ReadOnly Property Beta As ClassWithListProperty
                 Get
                     Return Nothing
                 End Get
