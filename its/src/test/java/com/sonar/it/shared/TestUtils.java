@@ -190,6 +190,13 @@ public class TestUtils {
     return (measure == null) ? null : Integer.parseInt(measure.getValue());
   }
 
+  @CheckForNull
+  public static org.sonarqube.ws.Duplications.ShowResponse getDuplication(Orchestrator orch, String componentKey) {
+    org.sonarqube.ws.Duplications.ShowResponse response = newWsClient(orch).duplications().show(new org.sonarqube.ws.client.duplications.ShowRequest()
+      .setKey(componentKey));
+    return response;
+  }
+
   public static Components.Component getComponent(Orchestrator orch, String componentKey) {
     return newWsClient(orch).components().show(new ShowRequest().setComponent(componentKey)).getComponent();
   }

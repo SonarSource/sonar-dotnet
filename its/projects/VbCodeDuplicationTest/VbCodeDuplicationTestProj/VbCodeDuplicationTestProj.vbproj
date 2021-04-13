@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>VbCodeDuplicationTestProj</RootNamespace>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <SonarQubeTestProject>True</SonarQubeTestProject>
+  </PropertyGroup>
+
+</Project>

@@ -71,7 +71,6 @@ public class TestProjectTest {
 
   @Test
   public void with_csharp_only_test_should_not_populate_metrics() {
-
     assertThat(Tests.getComponent("TestOnlyProject:UnitTest1.cs")).isNotNull();
     assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "files")).isNull();
     assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "lines")).isNull();
