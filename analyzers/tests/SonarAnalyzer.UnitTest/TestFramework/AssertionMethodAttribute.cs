@@ -22,6 +22,9 @@ using System;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
+    /// <summary>
+    /// This attribute is used to decorate custom assertion methods for rule S2699.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public class AssertionMethodAttribute : Attribute
     {
