@@ -1,22 +1,22 @@
 ﻿/*
-* SonarAnalyzer for .NET
-* Copyright (C) 2015-2021 SonarSource SA
-* mailto: contact AT sonarsource DOT com
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU Lesser General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* Lesser General Public License for more details.
-*
-* You should have received a copy of the GNU Lesser General Public License
-* along with this program; if not, write to the Free Software Foundation,
-* Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2021 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 
 using System.Linq;
 using FluentAssertions;
@@ -52,10 +52,10 @@ namespace NS
         {
             var context = new LiveVariableAnalysisContext(
 @"static int LocalFunction(int a) => a + 1;
-outParameter = LocalFunction(inParameter);"
-            , "LocalFunction");
+outParameter = LocalFunction(inParameter);",
+            "LocalFunction");
             var liveIn = context.LVA.GetLiveIn(context.CFG.EntryBlock).OfType<IParameterSymbol>().ToArray();
-            liveIn.Should().HaveCount(1);
+            liveIn.Should().ContainSingle();
             liveIn.Single().Name.Should().Be("a");
         }
 
@@ -64,8 +64,8 @@ outParameter = LocalFunction(inParameter);"
         {
             var context = new LiveVariableAnalysisContext(
 @"static int LocalFunction(int a) => 42;
-outParameter = LocalFunction(0);"
-            , "LocalFunction");
+outParameter = LocalFunction(0);",
+            "LocalFunction");
             var liveIn = context.LVA.GetLiveIn(context.CFG.EntryBlock).OfType<IParameterSymbol>().ToArray();
             liveIn.Should().BeEmpty();
         }
@@ -78,8 +78,8 @@ outParameter = LocalFunction(0);"
 {
     return a + 1
 };
-outParameter = LocalFunction(inParameter);"
-            , "LocalFunction");
+outParameter = LocalFunction(inParameter);",
+            "LocalFunction");
             var liveIn = context.LVA.GetLiveIn(context.CFG.EntryBlock).OfType<IParameterSymbol>().ToArray();
             liveIn.Should().ContainSingle();
             liveIn.Single().Name.Should().Be("a");
@@ -93,8 +93,8 @@ outParameter = LocalFunction(inParameter);"
 {
     return 42
 };
-outParameter = LocalFunction(0);"
-            , "LocalFunction");
+outParameter = LocalFunction(0);",
+            "LocalFunction");
             var liveIn = context.LVA.GetLiveIn(context.CFG.EntryBlock).OfType<IParameterSymbol>().ToArray();
             liveIn.Should().BeEmpty();
         }
@@ -110,10 +110,10 @@ outParameter = LocalFunction(0);"
     else
         return LocalFunction(a - 1);
 };
-outParameter = LocalFunction(inParameter);"
-            , "LocalFunction");
+outParameter = LocalFunction(inParameter);",
+            "LocalFunction");
             var liveIn = context.LVA.GetLiveIn(context.CFG.EntryBlock).OfType<IParameterSymbol>().ToArray();
-            liveIn.Should().HaveCount(1);
+            liveIn.Should().ContainSingle();
             liveIn.Single().Name.Should().Be("a");
         }
 

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
@@ -67,12 +68,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             var context3 = new HashesShouldHaveUnpredictableSalt.LocationContext(null, "message");
             var context4 = new HashesShouldHaveUnpredictableSalt.LocationContext(location, "message");
 
-            Assert.AreEqual(false, context1.Equals(null));
-            Assert.AreEqual(false, context1.Equals(new object()));
-            Assert.AreEqual(false, context1.Equals(context2));
-            Assert.AreEqual(false, context1.Equals(context3));
-            Assert.AreEqual(true, context1.Equals(context1));
-            Assert.AreEqual(true, context1.Equals(context4));
+            context1.Equals(null).Should().BeFalse();
+            context1.Equals(new object()).Should().BeFalse();
+            context1.Equals(context2).Should().BeFalse();
+            context1.Equals(context3).Should().BeFalse();
+            context1.Equals(context1).Should().BeTrue();
+            context1.Equals(context4).Should().BeTrue();
         }
 
         private static SonarDiagnosticAnalyzer GetAnalyzer() =>
