@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
-                new SymbolReferenceAnalyzer().GetBindableParent(token);
+                token.GetBindableParent();
 
             protected override bool IsIdentifier(SyntaxToken token) =>
                 token.IsKind(SyntaxKind.IdentifierToken);

@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -32,57 +33,8 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
-        // Based on Roslyn: http://source.roslyn.codeplex.com/#Microsoft.CodeAnalysis.CSharp.Workspaces/LanguageServices/CSharpSyntaxFactsService.cs,1453
-        internal override SyntaxNode GetBindableParent(SyntaxToken token)
-        {
-            var node = token.Parent;
-            while (node != null)
-            {
-                var parent = node.Parent;
-
-                // If this node is on the left side of a member access expression, don't ascend
-                // further or we'll end up binding to something else.
-                if (parent is MemberAccessExpressionSyntax memberAccess &&
-                    memberAccess.Expression == node)
-                {
-                    return node;
-                }
-
-                // If this node is on the left side of a qualified name, don't ascend
-                // further or we'll end up binding to something else.
-                if (parent is QualifiedNameSyntax qualifiedName &&
-                    qualifiedName.Left == node)
-                {
-                    return node;
-                }
-
-                // If this node is the type of an object creation expression, return the
-                // object creation expression.
-                if (parent is ObjectCreationExpressionSyntax objectCreation &&
-                    objectCreation.Type == node)
-                {
-                    return parent;
-                }
-
-                // The inside of an interpolated string is treated as its own token so we
-                // need to force navigation to the parent expression syntax.
-                if (node is InterpolatedStringTextSyntax &&
-                    parent is InterpolatedStringExpressionSyntax)
-                {
-                    return parent;
-                }
-
-                // If this node is not parented by a name, we're done.
-                if (!(parent is NameSyntax name))
-                {
-                    return node;
-                }
-
-                node = parent;
-            }
-
-            return node;
-        }
+        internal override SyntaxNode GetBindableParent(SyntaxToken token) =>
+            token.GetBindableParent();
 
         protected override bool IsIdentifier(SyntaxToken token) =>
             token.IsKind(SyntaxKind.IdentifierToken);
