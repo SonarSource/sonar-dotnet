@@ -3,4 +3,5 @@
 [*.cs]
 
 dotnet_diagnostic.xUnit1001.severity = warning	# xUnit1001: Fact methods cannot have parameters. Change to warning to make project buildable
-dotnet_diagnostic.NUnit1001.severity = warning	# NUnit1001: Fact methods cannot have parameters. Change to warning to make project buildable
+dotnet_diagnostic.NUnit1001.severity = warning	# NUnit1001: The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
+
