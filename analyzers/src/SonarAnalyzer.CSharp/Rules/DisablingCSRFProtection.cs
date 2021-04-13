@@ -36,6 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S4502";
         private const string MessageFormat = "Make sure disabling CSRF protection is safe here.";
         private const string IgnoreAntiforgeryTokenAttributeName = "IgnoreAntiforgeryTokenAttribute";
+        private const SyntaxKind ImplicitObjectCreationExpression = (SyntaxKind)8659;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -45,28 +46,27 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public DisablingCSRFProtection(IAnalyzerConfiguration configuration) : base(configuration) { }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                {
-                   var attributeSyntax = (AttributeSyntax)c.Node;
-                   if (attributeSyntax.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel))
+                   var shouldReport = c.Node switch
                    {
-                       c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, attributeSyntax.GetLocation()));
-                   }
-               },
-               SyntaxKind.Attribute);
+                       AttributeSyntax attributeSyntax => attributeSyntax.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel),
+                       ObjectCreationExpressionSyntax objectCreation => IsIgnoreAntiforgeryTokenAttribute(objectCreation, c.SemanticModel),
+                       _ => c.Node.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel)
+                   };
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-               {
-                   var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                   if (IsIgnoreAntiforgeryTokenAttribute(objectCreation, c.SemanticModel))
+                   if (shouldReport)
                    {
-                       c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation()));
+                       ReportDiagnostic(c);
                    }
                },
-               SyntaxKind.ObjectCreationExpression);
-        }
+               SyntaxKind.Attribute,
+               SyntaxKind.ObjectCreationExpression,
+               ImplicitObjectCreationExpression);
+
+        private static void ReportDiagnostic(SyntaxNodeAnalysisContext context) =>
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.Node.GetLocation()));
 
         private static bool IsIgnoreAntiforgeryTokenAttribute(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
             (objectCreation.Type.NameIs(IgnoreAntiforgeryTokenAttributeName) || objectCreation.Type.NameIs(string.Empty))
