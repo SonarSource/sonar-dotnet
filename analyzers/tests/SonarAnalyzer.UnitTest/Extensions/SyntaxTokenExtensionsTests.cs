@@ -19,14 +19,12 @@
  */
 
 extern alias csharp;
-using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
-using CSharpExtensions = Microsoft.CodeAnalysis.CSharpExtensions;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {
