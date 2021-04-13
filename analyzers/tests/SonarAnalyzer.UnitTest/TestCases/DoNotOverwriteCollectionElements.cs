@@ -300,4 +300,102 @@ namespace Tests.Diagnostics
             MyContainer.publicStaticDictionaryField.Add("x", "x1"); // Noncompliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4178
+    public class Repro
+    {
+        public void DifferentObjectSameProperty()
+        {
+            var first = new ClassWithListProperty();
+            var second = new ClassWithListProperty();
+
+            first.IntList[0] = 1;
+            first.IntList2[0] = 11;
+            second.IntList[0] = 2;
+            second.IntList2[0] = 22;
+        }
+
+        public void SamePropertyDifferentIndex()
+        {
+            var first = new ClassWithListProperty();
+
+            first.IntList[0] = 1;
+            first.IntList[1] = 2; // ok, different index
+        }
+
+        public void FNBecauseOfTheOrder()
+        {
+            var first = new ClassWithListProperty();
+
+            first.IntList[0] = 1;
+            first.IntList2[1] = 2;
+            first.IntList[0] = 3; // FN
+            first.IntList2[1] = 4; // FN
+        }
+
+        public void NoncompliantWithSameIndex()
+        {
+            var first = new ClassWithListProperty();
+
+            first.IntList[0] = 1; // Secondary
+            first.IntList[0] = 3; // Noncompliant
+            first.IntList2[1] = 2; // Secondary
+            first.IntList2[1] = 4; // Noncompliant
+        }
+
+        public void DifferentIndexes()
+        {
+            var first = new ClassWithListProperty();
+
+            first.IntList[0] = 1;
+            first.IntList2[1] = 2;
+            first.IntList[1] = 3;
+            first.IntList2[0] = 4;
+        }
+
+        public void CompliantDeeplyNested()
+        {
+            var first = new ClassWithNested();
+            var second = new ClassWithNested();
+
+            first.Alpha.IntList[0] = 1;
+            first.Alpha.IntList2[0] = 11;
+            first.Beta.IntList[0] = 1111;
+            first.Beta.IntList2[0] = 11111;
+            second.Alpha.IntList[0] = 2;
+            second.Alpha.IntList2[0] = 22;
+            second.Beta.IntList[0] = 222;
+            second.Beta.IntList2[0] = 2222;
+        }
+
+        public void NonCompliantDeeplyNested()
+        {
+            var first = new ClassWithNested();
+            var second = new ClassWithNested();
+
+            first.Alpha.IntList[0] = 1; // Secondary
+            first.Alpha.IntList[0] = 2; // Noncompliant
+            first.Beta.IntList[0] = 3;
+            first.Beta.IntList2[0] = 4;
+            second.Alpha.IntList[0] = 5;
+            second.Alpha.IntList2[0] = 6;
+            second.Beta.IntList[1] = 7; // FN
+            second.Beta.IntList2[0] = 8;
+            second.Beta.IntList[1] = 9; // FN
+            first.Beta.IntList[3] = 10;
+            second.Beta.IntList[3] = 11;
+        }
+
+        private class ClassWithListProperty
+        {
+            public List<int> IntList { get; set; }
+            public List<int> IntList2 { get; set; }
+        }
+
+        private class ClassWithNested
+        {
+            public ClassWithListProperty Alpha { get; set; }
+            public ClassWithListProperty Beta { get; set; }
+        }
+    }
 }

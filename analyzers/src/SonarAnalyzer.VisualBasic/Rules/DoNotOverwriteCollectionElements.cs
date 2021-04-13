@@ -32,14 +32,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionElementsBase<StatementSyntax>
+    public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionElementsBase<SyntaxKind, StatementSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected override DiagnosticDescriptor Rule { get; } = rule;
-
-        private static readonly HashSet<SyntaxKind> identifierOrLiteral =
+        private static readonly HashSet<SyntaxKind> IdentifierOrLiteral =
             new HashSet<SyntaxKind>
             {
                 SyntaxKind.IdentifierName,
@@ -51,12 +46,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.FalseLiteralExpression,
             };
 
-        private static readonly HashSet<string> collectionModifyingMethods =
+        private static readonly HashSet<string> CollectionModifyingMethods =
             new HashSet<string>(StringComparer.InvariantCultureIgnoreCase) // VB is case insensitive
             {
-                "Item",
-                "Add",
+                        "Item",
+                        "Add",
             };
+
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -81,7 +78,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         protected override bool IsIdentifierOrLiteral(SyntaxNode syntaxNode) =>
-            syntaxNode.IsAnyKind(identifierOrLiteral);
+            syntaxNode.IsAnyKind(IdentifierOrLiteral);
 
         // In Visual Basic all collection/dictionary item sets are made through invocations
         private static InvocationExpressionSyntax GetInvocation(StatementSyntax statement)
@@ -106,7 +103,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static SyntaxNode GetInvokedMethodContainer(InvocationExpressionSyntax invocation)
         {
-            //Supported syntax structures:
+            // Supported syntax structures:
             // dictionary(key) = value
             // dictionary.Item(key) = value
             // dictionary.Add(key, value)
@@ -117,7 +114,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 case SyntaxKind.SimpleMemberAccessExpression:
                     var memberAccess = (MemberAccessExpressionSyntax)expression;
-                    if (!collectionModifyingMethods.Contains(memberAccess.Name.ToString()))
+                    if (!CollectionModifyingMethods.Contains(memberAccess.Name.ToString()))
                     {
                         // Possibly an indexer syntax
                         return memberAccess;
@@ -127,10 +124,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         var conditionalAccess = memberAccess.Parent.Parent as ConditionalAccessExpressionSyntax;
                         return conditionalAccess?.Expression;
                     }
-                    if(memberAccess.Name.ToString().Equals("Add", StringComparison.OrdinalIgnoreCase) && invocation.ArgumentList?.Arguments.Count == 1)
+
+                    if (memberAccess.Name.ToString().Equals("Add", StringComparison.OrdinalIgnoreCase) && invocation.ArgumentList?.Arguments.Count == 1)
                     {
-                        return null;    //#2674 Do not raise on ICollection.Add(item)
-                    }                  
+                        return null;    // #2674 Do not raise on ICollection.Add(item)
+                    }
+
                     return memberAccess.Expression; // Return the collection identifier containing the method
 
                 case SyntaxKind.IdentifierName:
