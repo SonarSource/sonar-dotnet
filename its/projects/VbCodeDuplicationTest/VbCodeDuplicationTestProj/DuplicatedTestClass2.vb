@@ -1,6 +1,6 @@
 ﻿Public Class DuplicatedTestClass2
 
-    Public Property DefinitelyNotDuplicated As String
+    Public Property DuplicatedProperty As String
 
     Public Property SomeDuplicatedProperty As String
 
@@ -30,12 +30,12 @@
         End If
     End Function
 
-    Public Sub ThisMethodIsNotDuplicated()
-        Console.WriteLine("This is not a duplicated method.")
+    Public Sub ThisMethodIsDuplicated()
+        Console.WriteLine("This is a duplicated method.")
     End Sub
 
-    Public Sub YetAnotherNotDuplicatedMethod()
-        Console.WriteLine("This is yet not another duplicated method.")
+    Public Sub DefinitelyDuplicatedMethod()
+        Console.WriteLine("This is definitely another duplicated method.")
     End Sub
 
     Public Sub ThirdDuplicatedMethod()

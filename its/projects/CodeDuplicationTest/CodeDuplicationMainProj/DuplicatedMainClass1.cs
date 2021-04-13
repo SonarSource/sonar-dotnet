@@ -4,7 +4,7 @@ namespace CodeDuplicationTest
 {
     public class DuplicatedClass1
     {
-        public string DefinitelyNotDuplicated { get; }
+        public string DuplicatedProperty { get; }
 
         public void UniqueMethod(string parameter) =>
             Console.WriteLine(parameter);
@@ -45,14 +45,14 @@ namespace CodeDuplicationTest
             }
         }
 
-        public void ThisMethodIsNotDuplicated()
+        public void ThisMethodIsDuplicated()
         {
-            Console.WriteLine("This is not a duplicated method.");
+            Console.WriteLine("This is a duplicated method.");
         }
 
-        public void YetAnotherNotDuplicatedMethod()
+        public void DefinitelyDuplicatedMethod()
         {
-            Console.WriteLine("This is yet not another duplicated method.");
+            Console.WriteLine("This is definitely another duplicated method.");
         }
 
         public void ThirdDuplicatedMethod()
