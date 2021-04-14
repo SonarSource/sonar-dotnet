@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NET
+
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,7 +34,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisablingCSRFProtectionTest
     {
-#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingCSRFProtection_CS() =>
@@ -49,6 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
                 CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions
             };
-#endif
     }
 }
+
+#endif
