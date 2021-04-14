@@ -52,6 +52,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.NUnit_Framework_Assert,
                 KnownType.Xunit_Assert);
 
+        private static readonly ImmutableArray<KnownType> KnownAsertionExceptionTypes = ImmutableArray.Create(
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssertFailedException,
+            KnownType.NUnit_Framework_AssertionException,
+            KnownType.Xunit_Sdk_AssertException,
+            KnownType.Xunit_Sdk_XunitException);
+
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -90,7 +96,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     var hasAnyAssertion = methodDeclaration.DescendantNodes()
                         .OfType<InvocationExpressionSyntax>()
                         .Any(invocation => IsAssertion(invocation));
-                    if (!hasAnyAssertion)
+
+                    var hasAnyThrownAssertionExceptions = methodDeclaration.DescendantNodes()
+                        .OfType<ThrowStatementSyntax>()
+                        .Any(throwStatement => throwStatement.Expression is { } expression
+                                               && c.SemanticModel.GetTypeInfo(expression).Type.DerivesFromAny(KnownAsertionExceptionTypes));
+
+                    if (!hasAnyAssertion && !hasAnyThrownAssertionExceptions)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }

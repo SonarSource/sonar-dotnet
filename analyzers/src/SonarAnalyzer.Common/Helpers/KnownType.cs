@@ -72,6 +72,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_Extensions_Primitives_StringValues = new KnownType("Microsoft.Extensions.Primitives.StringValues");
         internal static readonly KnownType Microsoft_VisualBasic_Interaction = new KnownType("Microsoft.VisualBasic.Interaction");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
+        internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_AssertFailedException = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ExpectedExceptionAttribute");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute");
@@ -94,6 +95,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Nancy_Cookies_NancyCookie = new KnownType("Nancy.Cookies.NancyCookie");
         internal static readonly KnownType NLog_LogManager = new KnownType("NLog.LogManager");
         internal static readonly KnownType NUnit_Framework_Assert = new KnownType("NUnit.Framework.Assert");
+        internal static readonly KnownType NUnit_Framework_AssertionException = new KnownType("NUnit.Framework.AssertionException");
         internal static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute = new KnownType("NUnit.Framework.ExpectedExceptionAttribute");
         internal static readonly KnownType NUnit_Framework_IgnoreAttribute = new KnownType("NUnit.Framework.IgnoreAttribute");
         internal static readonly KnownType NUnit_Framework_TestAttribute = new KnownType("NUnit.Framework.TestAttribute");
@@ -480,7 +482,9 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType UnityEngine_MonoBehaviour = new KnownType("UnityEngine.MonoBehaviour");
         internal static readonly KnownType UnityEngine_ScriptableObject = new KnownType("UnityEngine.ScriptableObject");
         internal static readonly KnownType Xunit_Assert = new KnownType("Xunit.Assert");
+        internal static readonly KnownType Xunit_Sdk_AssertException = new KnownType("Xunit.Sdk.AssertException");
         internal static readonly KnownType Xunit_FactAttribute = new KnownType("Xunit.FactAttribute");
+        internal static readonly KnownType Xunit_Sdk_XunitException = new KnownType("Xunit.Sdk.XunitException");
         internal static readonly KnownType Xunit_TheoryAttribute = new KnownType("Xunit.TheoryAttribute");
         internal static readonly KnownType LegacyXunit_TheoryAttribute = new KnownType("Xunit.Extensions.TheoryAttribute");
         internal static readonly ImmutableArray<KnownType> CallerInfoAttributes =

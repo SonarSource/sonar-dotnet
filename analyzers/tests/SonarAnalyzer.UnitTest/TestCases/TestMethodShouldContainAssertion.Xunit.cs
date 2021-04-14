@@ -87,8 +87,18 @@
             Equal(x, 42);
         }
 
+        [Fact]
+        public void Fact16()
+        {
+            var x = 42;
+            if (x == 42)
+            {
+                throw new Xunit.Sdk.XunitException("You failed me!");
+            }
+        }
+
         [Fact(Skip = "reason")]
-        public void Fact16() // Don't raise on skipped test methods
+        public void Fact17() // Don't raise on skipped test methods
         {
         }
 

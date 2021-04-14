@@ -96,8 +96,39 @@
         }
 
         [TestMethod]
+        public void TestMethod16()
+        {
+            var x = 42;
+            if (x == 42)
+            {
+                throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException("You failed me!");
+            }
+        }
+
+        [TestMethod]
+        public void TestMethod17()
+        {
+            var x = 42;
+            var exception = new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException("You failed me!");
+            if (x == 42)
+            {
+                throw exception;
+            }
+        }
+
+        [TestMethod]
+        public void TestMethod18() // Noncompliant
+        {
+            var x = 42;
+            if (x == 42)
+            {
+                throw new Exception("You failed me!");
+            }
+        }
+
+        [TestMethod]
         [Ignore]
-        public void TestMethod16() // Don't raise on skipped test methods
+        public void TestMethod19() // Don't raise on skipped test methods
         {
         }
 
