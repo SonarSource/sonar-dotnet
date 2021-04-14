@@ -152,9 +152,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     // ElementAccess    // <-- we are here
                     //   Arguments: index
                     //   Expression: SimpleMemberAccess
-                    //                 Expression: a // <-- we need this
+                    //                 Expression: a
                     //                 Name: b
-                    return ((MemberAccessExpressionSyntax)expression);
+                    // We need a.b
+                    return expression;
                 case SyntaxKind.IdentifierName:
                     // a[index]
                     // ElementAccess    // <-- we are here
