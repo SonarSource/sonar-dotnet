@@ -23,7 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 
 // Note: useful comparison of the differing syntax across unit test frameworks
-// at https://xunit.github.io/docs/comparisons
+// at https://xunit.net/docs/comparisons
 namespace SonarAnalyzer.Helpers
 {
     internal static class UnitTestHelper
@@ -66,6 +66,21 @@ namespace SonarAnalyzer.Helpers
                 "VERIFY",
                 "VALIDATE");
 
+        private static readonly ImmutableArray<KnownType> KnownTestMethodAttributes = ImmutableArray.Create(
+                KnownTestMethodAttributesOfMSTest
+                .Concat(KnownTestMethodAttributesOfNUnit)
+                .Concat(KnownTestMethodAttributesOfxUnit)
+                .ToArray());
+
+        private static readonly ImmutableArray<KnownType> KnownTestClassAttributes = ImmutableArray.Create(
+                // xUnit does not have have attributes to identity test classes
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
+                KnownType.NUnit_Framework_TestFixtureAttribute);
+
+        private static readonly ImmutableArray<KnownType> NoExpectedResultTestMethodReturnTypes = ImmutableArray.Create(
+                KnownType.Void,
+                KnownType.System_Threading_Tasks_Task);
+
         /// <summary>
         /// Returns whether the class has an attribute that marks the class
         /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes)
@@ -102,21 +117,6 @@ namespace SonarAnalyzer.Helpers
         public static KnownType FindFirstTestMethodType(this IMethodSymbol method) =>
             KnownTestMethodAttributes.FirstOrDefault(known =>
                     method.GetAttributes().Any(att => att.AttributeClass.Is(known)));
-
-        private static readonly ImmutableArray<KnownType> KnownTestMethodAttributes = ImmutableArray.Create(
-                KnownTestMethodAttributesOfMSTest
-                .Concat(KnownTestMethodAttributesOfNUnit)
-                .Concat(KnownTestMethodAttributesOfxUnit)
-                .ToArray());
-
-        private static readonly ImmutableArray<KnownType> KnownTestClassAttributes = ImmutableArray.Create(
-                // xUnit does not have have attributes to identity test classes
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
-                KnownType.NUnit_Framework_TestFixtureAttribute);
-
-        private static readonly ImmutableArray<KnownType> NoExpectedResultTestMethodReturnTypes = ImmutableArray.Create(
-                KnownType.Void,
-                KnownType.System_Threading_Tasks_Task);
 
         private static bool IsAnyTestCaseAttributeWithExpectedResult(AttributeData a) =>
             IsTestCaseAttributeWithExpectedResult(a)

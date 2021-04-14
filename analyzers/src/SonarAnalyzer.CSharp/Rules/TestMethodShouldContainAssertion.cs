@@ -120,14 +120,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Intersect(UnitTestHelper.KnownAssertionMethodParts)
                 .Any();
 
-        private static bool IsKnownAssertion(ISymbol methodSymbol)
-        {
-            var type = KnownAssertions.GetValueOrDefault(methodSymbol.Name);
-            return type != null
-                ? methodSymbol.ContainingType.ConstructedFrom.Is(type)
-                : methodSymbol.ContainingType is { } containingType
-                  && containingType.DerivesFromAny(KnownAssertionTypes);
-        }
+        private static bool IsKnownAssertion(ISymbol methodSymbol) =>
+            (KnownAssertions.GetValueOrDefault(methodSymbol.Name) is { } type && methodSymbol.ContainingType.ConstructedFrom.Is(type))
+            || methodSymbol.ContainingType.DerivesFromAny(KnownAssertionTypes);
 
         private static bool IsCustomAssertion(ISymbol methodSymbol) =>
             methodSymbol.GetAttributes().Any(x => x.AttributeClass.Name == CustomAssertionAttributeName);
