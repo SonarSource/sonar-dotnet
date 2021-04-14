@@ -48,6 +48,16 @@ namespace SonarAnalyzer.UnitTest.Extensions
             attribute.IsKnownType(KnownType.System_ObsoleteAttribute, compilation.GetSemanticModel(syntaxTree)).Should().Be(isKnownType);
         }
 
+        [TestMethod]
+        public void IsKnownType_TypeNotAnAttribute()
+        {
+            var compilation = CreateCompilation("[System.ObsoleteAttribute] public class X{}");
+            var syntaxTree = compilation.SyntaxTrees.First();
+            var attribute = syntaxTree.GetRoot().DescendantNodes().OfType<AttributeSyntax>().First();
+
+            attribute.IsKnownType(KnownType.System_String, compilation.GetSemanticModel(syntaxTree)).Should().Be(false);
+        }
+
         private static CSharpCompilation CreateCompilation(string code) =>
             CSharpCompilation.Create("TempAssembly.dll")
                              .AddSyntaxTrees(CSharpSyntaxTree.ParseText(code))

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
@@ -26,8 +27,15 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class AttributeSyntaxExtensions
     {
+        private const int AttributeLength = 9;
+
         public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
-            attribute.Name.GetName().Contains(knownType.ShortNameWithoutAttributeSuffix)
+            attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
             && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
+
+        private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
+            knownType.ShortName == nameof(Attribute) || !knownType.ShortName.EndsWith(nameof(Attribute))
+                ? knownType.ShortName
+                : knownType.ShortName.Remove(knownType.ShortName.Length - AttributeLength);
     }
 }
