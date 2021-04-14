@@ -32,13 +32,13 @@ using CS = SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class DisablingCSRFProtectionTest
+    public class DisablingCsrfProtectionTest
     {
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingCSRFProtection_CS() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\DisablingCSRFProtection.cs",
-                                                      new DisablingCSRFProtection(AnalyzerConfiguration.AlwaysEnabled),
+                                                      new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled),
                                                       AdditionalReferences());
 
         internal static IEnumerable<MetadataReference> AdditionalReferences() =>

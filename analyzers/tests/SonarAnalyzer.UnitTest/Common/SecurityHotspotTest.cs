@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Common
         private static bool IsTestValid(DiagnosticAnalyzer analyzer)
         {
 #if NETFRAMEWORK
-            return analyzer.GetType().Name != "DisablingCSRFProtection";
+            return analyzer.GetType().Name != nameof(SonarAnalyzer.Rules.Hotspots.DisablingCsrfProtection);
 #else
             // IdentityModel is not available on .Net Core
             return analyzer.GetType().Name != "ControllingPermissions";
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.Common
                                   .Concat(ExecutingSqlQueriesTest.GetReferencesNetCore(Constants.DotNetCore220Version))
                                   .Concat(UsingCookies.GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
                                   .Concat(NuGetMetadataReference.MonoPosixNetStandard()) // Needed by LooseFilePermissions
-                                  .Concat(DisablingCSRFProtectionTest.AdditionalReferences())
+                                  .Concat(DisablingCsrfProtectionTest.AdditionalReferences())
 #endif
                                   .Concat(ConfiguringLoggersTest.Log4NetReferences)
                                   .Concat(DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2)

@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 SeriLogReferences);
 
-#if !NETFRAMEWORK
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
@@ -97,17 +97,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.vb",
                                     new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                                     AspNetCoreLoggingReferences);
-
-        private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
-            NetStandardMetadataReference.Netstandard
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.DotNetCore220Version))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore220Version))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version))
-            .Concat(new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
 #endif
 
         internal static IEnumerable<MetadataReference> Log4NetReferences =>
@@ -120,5 +109,18 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> SeriLogReferences =>
             NuGetMetadataReference.SerilogPackages(Constants.NuGetLatestVersion);
+
+#if NET
+        private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
+            NetStandardMetadataReference.Netstandard
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.DotNetCore220Version))
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version))
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
+                                        .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore220Version))
+                                        .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
+                                        .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version))
+                                        .Concat(new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
+#endif
     }
 }

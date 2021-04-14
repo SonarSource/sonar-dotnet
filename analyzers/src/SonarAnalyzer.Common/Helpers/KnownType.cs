@@ -27,6 +27,8 @@ namespace SonarAnalyzer.Helpers
 {
     internal sealed class KnownType
     {
+        private const int AttributeLength = 9;
+
 #pragma warning disable SA1310 // FieldNamesMustNotContainUnderscore
         #region Known types
 
@@ -550,7 +552,7 @@ namespace SonarAnalyzer.Helpers
 
         public string ShortNameWithoutAttributeSuffix => shortName.Value == nameof(Attribute)
             ? shortName.Value
-            : shortName.Value.Remove(shortName.Value.Length - 9);
+            : shortName.Value.Remove(shortName.Value.Length - AttributeLength);
 
         internal bool Matches(string type) => !isSpecialType && TypeName == type;
 

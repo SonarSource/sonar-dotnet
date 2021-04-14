@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.Hotspots
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DisablingCSRFProtection : HotspotDiagnosticAnalyzer
+    public sealed class DisablingCsrfProtection : HotspotDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S4502";
         private const string MessageFormat = "Make sure disabling CSRF protection is safe here.";
@@ -42,9 +42,9 @@ namespace SonarAnalyzer.Rules.Hotspots
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public DisablingCSRFProtection() : base(AnalyzerConfiguration.Hotspot) { }
+        public DisablingCsrfProtection() : base(AnalyzerConfiguration.Hotspot) { }
 
-        public DisablingCSRFProtection(IAnalyzerConfiguration configuration) : base(configuration) { }
+        public DisablingCsrfProtection(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
              context.RegisterCompilationStartAction(
