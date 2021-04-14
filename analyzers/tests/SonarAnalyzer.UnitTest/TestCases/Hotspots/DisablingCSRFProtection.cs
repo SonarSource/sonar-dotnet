@@ -36,7 +36,6 @@ namespace TestCases
     {
         private readonly string path = string.Empty;
 
-        [HttpPost]
         [IgnoreAntiforgeryToken] // Noncompliant
         public IActionResult ChangeEmail_Noncompliant(string model) => View(path);
 
