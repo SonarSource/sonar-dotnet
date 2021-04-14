@@ -66,7 +66,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             // S3244 - MAIN and TEST
             new TestSetup("AnonymousDelegateEventUnsubscribe.cs", new AnonymousDelegateEventUnsubscribe()),
             // S2699 - TEST only
-            new TestSetup("TestMethodShouldContainAssertion.MsTest.cs", new TestMethodShouldContainAssertion(), TestMethodShouldContainAssertionTest.GetMsTestReferences(Constants.NuGetLatestVersion)),
+            new TestSetup("TestMethodShouldContainAssertion.NUnit.cs", new TestMethodShouldContainAssertion(),
+                TestMethodShouldContainAssertionTest.AdditionalTestReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))),
 
             // SyntaxTreeAnalysisContext
             // S3244 - MAIN and TEST
