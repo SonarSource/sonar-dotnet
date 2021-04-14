@@ -82,26 +82,6 @@ End Namespace
             CheckExactMatchOnly_OverridesAreNotMatched(snippet);
         }
 
-        private void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)
-        {
-            // Testing for calls to Console.WriteLine
-            var targetMethodSignature = new MemberDescriptor(KnownType.System_Console, "WriteLine");
-
-            // 1. Should match Console.WriteLine
-            var callToConsoleWriteLine = CreateContextForMethod("Console.WriteLine", snippet);
-            CheckExactMethod(true, callToConsoleWriteLine, snippet, targetMethodSignature);
-
-            // 2. Should not match call to xxx.WriteLine
-            var callToDoStuffWriteLine = CreateContextForMethod("Class1.WriteLine", snippet);
-            CheckExactMethod(false, callToDoStuffWriteLine, snippet,
-                new MemberDescriptor(KnownType.System_Console, "Foo"),
-                targetMethodSignature,
-                new MemberDescriptor(KnownType.System_Data_DataSet, ".ctor"));
-
-            // 3. Should match if Console.WriteLine is in the list of candidates
-            CheckExactMethod(false, callToDoStuffWriteLine, snippet, targetMethodSignature);
-        }
-
         [TestMethod]
         public void ExactMatch_DoesNotMatchOverrides_CS()
         {
@@ -143,23 +123,6 @@ End Namespace
             CheckExactMatch_DoesNotMatchOverrides(snippet);
         }
 
-        private static void CheckExactMatch_DoesNotMatchOverrides(SnippetCompiler snippet)
-        {
-            // XmlDocument derives from XmlNode
-            var nodeWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlNode, "WriteTo");
-            var docWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "WriteTo");
-
-            // 1. Call to node.WriteTo should only match for XmlNode
-            var callToNodeWriteTo = CreateContextForMethod("XmlNode.WriteTo", snippet);
-            CheckExactMethod(true, callToNodeWriteTo, snippet, nodeWriteTo);
-            CheckExactMethod(false, callToNodeWriteTo, snippet, docWriteTo);
-
-            // 2. Call to doc.WriteTo should only match for XmlDocument
-            var callToDocWriteTo = CreateContextForMethod("XmlDocument.WriteTo", snippet);
-            CheckExactMethod(false, callToDocWriteTo, snippet, nodeWriteTo);
-            CheckExactMethod(true, callToDocWriteTo, snippet, docWriteTo);
-        }
-
         [TestMethod]
         public void IsMatch_AndCheckingOverrides_DoesMatchOverrides_CS()
         {
@@ -198,23 +161,6 @@ End Namespace
 ";
             var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic, MetadataReferenceFacade.SystemXml);
             CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(snippet);
-        }
-
-        private void CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(SnippetCompiler snippet)
-        {
-            // XmlDocument derives from XmlNode
-            var nodeWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlNode, "WriteTo");
-            var docWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "WriteTo");
-
-            // 1. Call to node.WriteTo should only match for XmlNode
-            var callToNodeWriteTo = CreateContextForMethod("XmlNode.WriteTo", snippet);
-            CheckIsMethodOrDerived(true, callToNodeWriteTo, snippet, nodeWriteTo);
-            CheckIsMethodOrDerived(false, callToNodeWriteTo, snippet, docWriteTo);
-
-            // 2. Call to doc.WriteTo should match for XmlDocument and XmlNode
-            var callToDocWriteTo = CreateContextForMethod("XmlDocument.WriteTo", snippet);
-            CheckIsMethodOrDerived(true, callToDocWriteTo, snippet, nodeWriteTo);
-            CheckIsMethodOrDerived(true, callToDocWriteTo, snippet, docWriteTo);
         }
 
         [TestMethod]
@@ -260,16 +206,6 @@ End Namespace
 
             var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic);
             DoCheckMatch_InterfaceMethods(snippet);
-        }
-
-        private void DoCheckMatch_InterfaceMethods(SnippetCompiler snippet)
-        {
-            var dispose = new MemberDescriptor(KnownType.System_IDisposable, "Dispose");
-            var callToDispose = CreateContextForMethod("Class1.Dispose", snippet);
-
-            // Exact match should not match, but matching "derived" methods should
-            CheckExactMethod(false, callToDispose, snippet, dispose);
-            CheckIsMethodOrDerived(true, callToDispose, snippet, dispose);
         }
 
         [TestMethod]
@@ -363,19 +299,9 @@ End Namespace
         {
             var nameParts = typeAndMethodName.Split('.');
 
-            IEnumerable<(SyntaxNode node, string name)> invocation_identifierPairs = null;
-            if (snippet.IsCSharp())
-            {
-                invocation_identifierPairs = snippet.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, n.Expression.GetIdentifier()?.Identifier.ValueText));
-            }
-            else
-            {
-                invocation_identifierPairs = snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
-            }
+            var identifierPairs = snippet.IsCSharp() ? GetCSharpNodes() : GetVbNodes();
 
-            foreach (var (invocation, methodName) in invocation_identifierPairs)
+            foreach (var (invocation, methodName) in identifierPairs)
             {
                 var symbol = snippet.GetSymbol<IMethodSymbol>(invocation);
                 if (symbol.Name == nameParts[1] &&
@@ -387,23 +313,91 @@ End Namespace
 
             Assert.Fail($"Test setup error: could not find method call in test code snippet: {typeAndMethodName}");
             return null;
+
+            IEnumerable<(SyntaxNode node, string name)> GetCSharpNodes() =>
+                snippet.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
+                    .Select(n => ((SyntaxNode)n, n.Expression.GetIdentifier()?.Identifier.ValueText));
+
+            IEnumerable<(SyntaxNode node, string name)> GetVbNodes() =>
+                snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
+                    .Select(n => ((SyntaxNode)n, VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
         }
 
-        private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext,
-            SnippetCompiler snippet, params MemberDescriptor[] targetMethodSignatures) =>
-                CheckMatch(false, expectedOutcome, invocationContext, snippet, targetMethodSignatures);
+        private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
+            CheckMatch(false, expectedOutcome, invocationContext, targetMethodSignatures);
 
-        private static void CheckIsMethodOrDerived(bool expectedOutcome, InvocationContext invocationContext, SnippetCompiler snippet,
-            params MemberDescriptor[] targetMethodSignatures) =>
-            CheckMatch(true, expectedOutcome, invocationContext, snippet, targetMethodSignatures);
+        private static void CheckIsMethodOrDerived(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
+            CheckMatch(true, expectedOutcome, invocationContext, targetMethodSignatures);
 
-        private static void CheckMatch(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext,
-            SnippetCompiler snippet, params MemberDescriptor[] targetMethodSignatures)
+        private static void CheckMatch(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures)
         {
             var result = MemberDescriptor.MatchesAny(invocationContext.MethodName,
                 invocationContext.MethodSymbol, checkDerived, StringComparison.Ordinal, targetMethodSignatures);
 
             result.Should().Be(expectedOutcome);
+        }
+
+        private static void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)
+        {
+            // Testing for calls to Console.WriteLine
+            var targetMethodSignature = new MemberDescriptor(KnownType.System_Console, "WriteLine");
+
+            // 1. Should match Console.WriteLine
+            var callToConsoleWriteLine = CreateContextForMethod("Console.WriteLine", snippet);
+            CheckExactMethod(true, callToConsoleWriteLine, targetMethodSignature);
+
+            // 2. Should not match call to xxx.WriteLine
+            var callToDoStuffWriteLine = CreateContextForMethod("Class1.WriteLine", snippet);
+            CheckExactMethod(false, callToDoStuffWriteLine, new MemberDescriptor(KnownType.System_Console, "Foo"),
+                targetMethodSignature,
+                new MemberDescriptor(KnownType.System_Data_DataSet, ".ctor"));
+
+            // 3. Should match if Console.WriteLine is in the list of candidates
+            CheckExactMethod(false, callToDoStuffWriteLine, targetMethodSignature);
+        }
+
+        private static void CheckExactMatch_DoesNotMatchOverrides(SnippetCompiler snippet)
+        {
+            // XmlDocument derives from XmlNode
+            var nodeWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlNode, "WriteTo");
+            var docWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "WriteTo");
+
+            // 1. Call to node.WriteTo should only match for XmlNode
+            var callToNodeWriteTo = CreateContextForMethod("XmlNode.WriteTo", snippet);
+            CheckExactMethod(true, callToNodeWriteTo, nodeWriteTo);
+            CheckExactMethod(false, callToNodeWriteTo, docWriteTo);
+
+            // 2. Call to doc.WriteTo should only match for XmlDocument
+            var callToDocWriteTo = CreateContextForMethod("XmlDocument.WriteTo", snippet);
+            CheckExactMethod(false, callToDocWriteTo, nodeWriteTo);
+            CheckExactMethod(true, callToDocWriteTo, docWriteTo);
+        }
+
+        private static void CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(SnippetCompiler snippet)
+        {
+            // XmlDocument derives from XmlNode
+            var nodeWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlNode, "WriteTo");
+            var docWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "WriteTo");
+
+            // 1. Call to node.WriteTo should only match for XmlNode
+            var callToNodeWriteTo = CreateContextForMethod("XmlNode.WriteTo", snippet);
+            CheckIsMethodOrDerived(true, callToNodeWriteTo, nodeWriteTo);
+            CheckIsMethodOrDerived(false, callToNodeWriteTo, docWriteTo);
+
+            // 2. Call to doc.WriteTo should match for XmlDocument and XmlNode
+            var callToDocWriteTo = CreateContextForMethod("XmlDocument.WriteTo", snippet);
+            CheckIsMethodOrDerived(true, callToDocWriteTo, nodeWriteTo);
+            CheckIsMethodOrDerived(true, callToDocWriteTo, docWriteTo);
+        }
+
+        private static void DoCheckMatch_InterfaceMethods(SnippetCompiler snippet)
+        {
+            var dispose = new MemberDescriptor(KnownType.System_IDisposable, "Dispose");
+            var callToDispose = CreateContextForMethod("Class1.Dispose", snippet);
+
+            // Exact match should not match, but matching "derived" methods should
+            CheckExactMethod(false, callToDispose, dispose);
+            CheckIsMethodOrDerived(true, callToDispose, dispose);
         }
     }
 }

@@ -84,8 +84,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void NetFrameworkVersionProvider_Net35()
         {
-            var mscorlib35 = ImmutableArray.Create((MetadataReference)
-                MetadataReference.CreateFromFile(CreateMockPath("3.5/mscorlib.dll")));
+            var mscorlib35 = ImmutableArray.Create((MetadataReference)MetadataReference.CreateFromFile(CreateMockPath("3.5/mscorlib.dll")));
             var compilation = GetRawCompilation(mscorlib35);
             var versionProvider = new NetFrameworkVersionProvider();
             versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Probably35);
@@ -94,8 +93,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void NetFrameworkVersionProvider_Net40_NoIOClass()
         {
-            var mscorlib35 = ImmutableArray.Create((MetadataReference)
-                MetadataReference.CreateFromFile(CreateMockPath("4.0_no_IO/mscorlib.dll")));
+            var mscorlib35 = ImmutableArray.Create((MetadataReference)MetadataReference.CreateFromFile(CreateMockPath("4.0_no_IO/mscorlib.dll")));
             var compilation = GetRawCompilation(mscorlib35);
             var versionProvider = new NetFrameworkVersionProvider();
             versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Between4And451);
@@ -104,8 +102,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void NetFrameworkVersionProvider_Net40_WithIOClass()
         {
-            var mscorlib35 = ImmutableArray.Create((MetadataReference)
-                MetadataReference.CreateFromFile(CreateMockPath("4.0_with_IO/mscorlib.dll")));
+            var mscorlib35 = ImmutableArray.Create((MetadataReference)MetadataReference.CreateFromFile(CreateMockPath("4.0_with_IO/mscorlib.dll")));
             var compilation = GetRawCompilation(mscorlib35);
             var versionProvider = new NetFrameworkVersionProvider();
             versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Between4And451);
@@ -132,7 +129,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         private static string CreateMockPath(string mockName)
         {
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var assembly = typeof(NetFrameworkVersionProviderTest).Assembly;
             return Path.Combine(Path.GetDirectoryName(assembly.Location), "../../../../FrameworkMocks/lib/", mockName);
         }
 

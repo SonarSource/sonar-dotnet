@@ -630,7 +630,7 @@ int f(int i)
         }
 
         [TestMethod]
-        public void NonASCIIEncodings()
+        public void NonAsciiEncodings()
         {
             const string code = @"
 public void 你好() { }

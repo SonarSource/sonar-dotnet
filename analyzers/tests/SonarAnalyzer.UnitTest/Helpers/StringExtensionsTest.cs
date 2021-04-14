@@ -42,14 +42,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
             AssertSplitEquivalent("This_is_EPIC", "THIS", "IS", "EPIC");
             AssertSplitEquivalent("PEHeader", "PE", "HEADER");
             AssertSplitEquivalent("PE_Header", "PE", "HEADER");
-            AssertSplitEquivalent("BigB_smallc&GIANTD", "BIG", "B","SMALLC", "GIANTD");
+            AssertSplitEquivalent("BigB_smallc&GIANTD", "BIG", "B", "SMALLC", "GIANTD");
             AssertSplitEquivalent("SMTPServer", "SMTP", "SERVER");
             AssertSplitEquivalent("__url_foo", "URL", "FOO");
             AssertSplitEquivalent("");
             AssertSplitEquivalent(null);
         }
 
-        private void AssertSplitEquivalent(string name, params string[] words) =>
+        private static void AssertSplitEquivalent(string name, params string[] words) =>
             CollectionAssert.AreEquivalent(words, name.SplitCamelCaseToWords().ToList(), $" Value: {name}");
     }
 }

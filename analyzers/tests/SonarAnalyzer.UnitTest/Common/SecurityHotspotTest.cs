@@ -113,7 +113,7 @@ namespace SonarAnalyzer.UnitTest.Common
                                   .Concat(MetadataReferenceFacade.RegularExpressions) // Needed by UsingRegularExpressions
                                   .Concat(MetadataReferenceFacade.SystemSecurityCryptography) // Needed by DoNotUseRandom
                                   .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion)) // Needed by DisablingRequestValidation
-                                  .Concat(NuGetMetadataReference.Nancy()// Needed by CookieShouldBeHttpOnly, CookiesShouldBeSecure
+                                  .Concat(NuGetMetadataReference.Nancy() // Needed by CookieShouldBeHttpOnly, CookiesShouldBeSecure
                                   .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)) // Needed by RequestsWithExcessiveLength
                                   .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion))); // Needed by RequestsWithExcessiveLength
     }

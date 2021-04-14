@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void GivenNullMethodDeclaration_GetBodyDescendantNodes_ThrowsArgumentNullException()
         {
 #if NETFRAMEWORK
-             var messageFormat = "Value cannot be null." + Environment.NewLine +"Parameter name: {0}";
+             var messageFormat = "Value cannot be null." + Environment.NewLine + "Parameter name: {0}";
 #else
              var messageFormat = "Value cannot be null. (Parameter '{0}')";
 #endif

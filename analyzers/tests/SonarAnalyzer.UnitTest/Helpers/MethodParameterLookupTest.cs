@@ -91,9 +91,9 @@ namespace Test
             c.CheckExpectedParameterMappings(6, "WithParams", new { });
             c.CheckExpectedParameterMappings(7, "WithParams", new { arr = new[] { 1, 2, 3 } });
 
-            c.MainInvocations.Length.Should().Be(8); //Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+            c.MainInvocations.Length.Should().Be(8); // Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
 
-            //TryGetNonParamsSyntax throw scenario
+            // TryGetNonParamsSyntax throw scenario
             var lookupThrow = c.CreateLookup(6, "WithParams");
             Action actionThrow = () => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument);
             actionThrow.Should().Throw<InvalidOperationException>();
@@ -142,9 +142,9 @@ End Module
             c.CheckExpectedParameterMappings(4, "WithParams", new { });
             c.CheckExpectedParameterMappings(5, "WithParams", new { arr = new[] { 1, 2, 3 } });
 
-            c.MainInvocations.Length.Should().Be(6); //Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+            c.MainInvocations.Length.Should().Be(6); // Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
 
-            //TryGetNonParamsSyntax throw scenario
+            // TryGetNonParamsSyntax throw scenario
             var lookupThrow = c.CreateLookup(4, "WithParams");
             Action actionThrow = () => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument);
             actionThrow.Should().Throw<InvalidOperationException>();
@@ -170,12 +170,6 @@ End Module
                 MainInvocations = FindInvocationsIn("Main");
             }
 
-            protected void InitSpecial(TInvocationSyntax specialInvocation)
-            {
-                SpecialArgument = GetArguments(specialInvocation).Single();
-                SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
-            }
-
             public MethodParameterLookupBase<TArgumentSyntax> CreateLookup(int invocationIndex, string expectedMethod)
             {
                 var invocation = MainInvocations[invocationIndex];
@@ -189,6 +183,12 @@ End Module
                 var lookup = CreateLookup(invocationIndex, expectedMethod);
                 InspectTryGetSyntax(lookup, expectedArguments, lookup.MethodSymbol);
                 InspectTryGetSymbol(lookup, expectedArguments, GetArguments(MainInvocations[invocationIndex]));
+            }
+
+            protected void InitSpecial(TInvocationSyntax specialInvocation)
+            {
+                SpecialArgument = GetArguments(specialInvocation).Single();
+                SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
             }
 
             private void InspectTryGetSyntax(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, IMethodSymbol method)
@@ -208,7 +208,7 @@ End Module
                     else if (!parameter.IsOptional && !parameter.IsParams)
                     {
                         Assert.Fail($"TryGetSyntax missing {parameter.Name}");
-                    } //Else it's OK
+                    } // Else it's OK
                 }
             }
 
@@ -224,7 +224,7 @@ End Module
                         var expected = ExtractExpectedValue(expectedArguments, symbol.Name);
                         if (symbol.IsParams)
                         {
-                            ((IEnumerable)expected).Should().Contain(value);    //Expected contains all values {1, 2, 3} for ParamArray/params, but foreach is probing one at a time
+                            ((IEnumerable)expected).Should().Contain(value); // Expected contains all values {1, 2, 3} for ParamArray/params, but foreach is probing one at a time
                         }
                         else
                         {
@@ -238,7 +238,7 @@ End Module
                 }
             }
 
-            private object ExtractExpectedValue(object expected, string name)
+            private static object ExtractExpectedValue(object expected, string name)
             {
                 var pi = expected.GetType().GetProperty(name);
                 if (pi == null)

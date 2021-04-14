@@ -504,20 +504,18 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
 
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
-        [ExpectedException(typeof(ArgumentException))]
         public void WrongMetrics_CSharp()
         {
             (var syntaxTree, var semanticModel) = TestHelper.Compile("", isCSharp: false);
-            new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel);
+            Assert.ThrowsException<ArgumentException>(() => new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel));
         }
 
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
-        [ExpectedException(typeof(ArgumentException))]
         public void WrongMetrics_VisualBasic()
         {
             (var syntaxTree, var semanticModel) = TestHelper.Compile("", isCSharp: true);
-            new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel);
+            Assert.ThrowsException<ArgumentException>(() => new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel));
         }
 
         [TestMethod]
