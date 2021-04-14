@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4502",
+"message":  "Make sure disabling CSRF protection is safe here.",
+"location":  {
+"uri":  "sources\NetCore31\Controllers\S4502Controller.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  6,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4502",
+"message":  "Make sure disabling CSRF protection is safe here.",
+"location":  {
+"uri":  "sources\NetCore31\Controllers\S4502Controller.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  10,
+"endLine":  9,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4502",
+"message":  "Make sure disabling CSRF protection is safe here.",
+"location":  {
+"uri":  "sources\NetCore31\Startup.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  77,
+"endLine":  14,
+"endColumn":  114
+}
+}
+}
+]
+}

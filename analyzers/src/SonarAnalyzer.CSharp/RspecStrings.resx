@@ -11974,6 +11974,39 @@
   <data name="S4487_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4502_Category" xml:space="preserve">
+    <value>Critical Security Hotspot</value>
+  </data>
+  <data name="S4502_Description" xml:space="preserve">
+    <value>A cross-site request forgery (CSRF) attack occurs when a trusted user of a web application can be forced, by an attacker, to perform sensitive actions that he didn't intend, such as updating his profile or sending a message, more generally anything that can change the state of the application.</value>
+  </data>
+  <data name="S4502_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4502_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4502_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4502_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S4502_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S4502_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S4502_Tags" xml:space="preserve">
+    <value>cwe,sans-top25-insecure,owasp-a6</value>
+  </data>
+  <data name="S4502_Title" xml:space="preserve">
+    <value>Disabling CSRF protections is security-sensitive</value>
+  </data>
+  <data name="S4502_Type" xml:space="preserve">
+    <value>SECURITY_HOTSPOT</value>
+  </data>
   <data name="S4507_Category" xml:space="preserve">
     <value>Minor Security Hotspot</value>
   </data>

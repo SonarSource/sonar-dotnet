@@ -51,6 +51,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new KnownType("Microsoft.AspNetCore.Mvc.ControllerBase");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute = new KnownType("Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute");
+        internal static readonly KnownType Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute = new KnownType("Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute = new KnownType("Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute");
