@@ -18,8 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Rules.Hotspots;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -33,16 +36,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DisablingCSRFProtection_CS() =>
-            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\DisablingCSRFProtection.cs",
-                                                      new CS.DisablingCSRFProtection(AnalyzerConfiguration.AlwaysEnabled),
-                                                      new[]
-                                                      {
-                                                          CoreMetadataReference.MicrosoftAspNetCoreMvc,
-                                                          CoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
-                                                          CoreMetadataReference.MicrosoftAspNetCoreMvcCore,
-                                                          CoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
-                                                          CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions
-                                                      });
+            Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\Hotspots\DisablingCSRFProtection.cs",
+                                                      new DisablingCSRFProtection(AnalyzerConfiguration.AlwaysEnabled),
+                                                      AdditionalReferences());
+
+        internal static IEnumerable<MetadataReference> AdditionalReferences() =>
+            new[]
+            {
+                CoreMetadataReference.MicrosoftAspNetCoreMvc,
+                CoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+                CoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+                CoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+                CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions
+            };
 #endif
     }
 }

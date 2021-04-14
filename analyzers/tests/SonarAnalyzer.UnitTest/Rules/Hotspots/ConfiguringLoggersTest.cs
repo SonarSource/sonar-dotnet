@@ -36,22 +36,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_AspNetCore_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
-                new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                AspNetCoreLoggingReferences);
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_AspNetCore_VB() =>
-            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.vb",
-                new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
-                AspNetCoreLoggingReferences);
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_Log4Net_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_Log4Net.cs",
                 new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
@@ -97,18 +81,36 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 SeriLogReferences);
 
-        internal static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
+#if !NETFRAMEWORK
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void ConfiguringLoggers_AspNetCore_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.cs",
+                                    new CS.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
+                                    AspNetCoreLoggingReferences);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void ConfiguringLoggers_AspNetCore_VB() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ConfiguringLoggers_AspNetCore.vb",
+                                    new VB.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
+                                    AspNetCoreLoggingReferences);
+
+        private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
             NetStandardMetadataReference.Netstandard
             .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))
             .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.DotNetCore220Version))
             .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version))
             .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
             .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore220Version))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version))
             .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version));
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version))
+            .Concat(new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
+#endif
 
-        private static IEnumerable<MetadataReference> Log4NetReferences =>
+        internal static IEnumerable<MetadataReference> Log4NetReferences =>
             // See: https://github.com/SonarSource/sonar-dotnet/issues/3548
             NuGetMetadataReference.Log4Net("2.0.8", "net45-full")
             .Concat(MetadataReferenceFacade.SystemXml);

@@ -27,7 +27,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.Hotspots
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string IgnoreAntiforgeryTokenAttributeName = "IgnoreAntiforgeryTokenAttribute";
         private const SyntaxKind ImplicitObjectCreationExpression = (SyntaxKind)8659;
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -47,23 +47,34 @@ namespace SonarAnalyzer.Rules.CSharp
         public DisablingCSRFProtection(IAnalyzerConfiguration configuration) : base(configuration) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-               {
-                   var shouldReport = c.Node switch
-                   {
-                       AttributeSyntax attributeSyntax => attributeSyntax.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel),
-                       ObjectCreationExpressionSyntax objectCreation => IsIgnoreAntiforgeryTokenAttribute(objectCreation, c.SemanticModel),
-                       _ => c.Node.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel)
-                   };
+             context.RegisterCompilationStartAction(
+                ccc =>
+                {
+                    if (!IsEnabled(ccc.Options))
+                    {
+                        return;
+                    }
 
-                   if (shouldReport)
-                   {
-                       ReportDiagnostic(c);
-                   }
-               },
-               SyntaxKind.Attribute,
-               SyntaxKind.ObjectCreationExpression,
-               ImplicitObjectCreationExpression);
+                    context.RegisterSyntaxNodeActionInNonGenerated(CheckIgnoreAntiforgeryTokenAttribute,
+                                                                   SyntaxKind.Attribute,
+                                                                   SyntaxKind.ObjectCreationExpression,
+                                                                   ImplicitObjectCreationExpression);
+                });
+
+        private static void CheckIgnoreAntiforgeryTokenAttribute(SyntaxNodeAnalysisContext c)
+        {
+            var shouldReport = c.Node switch
+            {
+                AttributeSyntax attributeSyntax => attributeSyntax.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel),
+                ObjectCreationExpressionSyntax objectCreation => IsIgnoreAntiforgeryTokenAttribute(objectCreation, c.SemanticModel),
+                _ => c.Node.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel)
+            };
+
+            if (shouldReport)
+            {
+                ReportDiagnostic(c);
+            }
+        }
 
         private static void ReportDiagnostic(SyntaxNodeAnalysisContext context) =>
             context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.Node.GetLocation()));
