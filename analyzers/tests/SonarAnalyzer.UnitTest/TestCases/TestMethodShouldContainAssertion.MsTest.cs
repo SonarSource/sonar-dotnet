@@ -335,17 +335,17 @@
     public class WithHelperMethods
     {
         [TestMethod]
-        public void TestMethod1()       // Noncompliant FP
+        public void TestMethod1()
         {
             DoTheWork("42", 42);
         }
 
         [TestMethod]
-        public void TestMethod2() =>    // Noncompliant FP
+        public void TestMethod2() =>
             DoTheWork("42", 42);
 
         [TestMethod]
-        public void Complex()           // Noncompliant FP
+        public void Complex()
         {
             int cnt = 42;
             var sb = new System.Text.StringBuilder();
@@ -389,7 +389,7 @@
         }
 
         [TestMethod]
-        public void NestedTwoTimes() =>   // Noncompliant FP
+        public void NestedTwoTimes() =>
             NestedTwo();
 
         [TestMethod]

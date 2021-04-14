@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2699";
         private const string MessageFormat = "Add at least one assertion to this test case.";
         private const string CustomAssertionAttributeName = "AssertionMethodAttribute";
+        private const int MaxInvocationDepth = 2;
 
         private static readonly Dictionary<string, KnownType> KnownAssertions = new Dictionary<string, KnownType>
         {
@@ -84,11 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (methodDeclaration.DescendantNodes()
-                        .OfType<InvocationExpressionSyntax>()
-                        .Select(expression => c.SemanticModel.GetSymbolInfo(expression).Symbol)
-                        .OfType<IMethodSymbol>()
-                        .Any(symbol => IsKnownAssertion(symbol) || IsCustomAssertion(symbol)))
+                    if (ContainsAssertion(methodDeclaration, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
                     {
                         return;
                     }
@@ -108,6 +105,35 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.MethodDeclaration);
+        }
+
+        private static bool ContainsAssertion(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
+        {
+            var invokedSymbols = methodDeclaration.DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Select(expression => semanticModel.GetSymbolInfo(expression).Symbol)
+                .OfType<IMethodSymbol>();
+
+            if (invokedSymbols.Any(symbol => IsKnownAssertion(symbol) || IsCustomAssertion(symbol)))
+            {
+                return true;
+            }
+            if (level == MaxInvocationDepth)
+            {
+                return false;
+            }
+            foreach (var symbol in invokedSymbols.Where(x => !visitedSymbols.Contains(x)))
+            {
+                visitedSymbols.Add(symbol);
+                foreach (var invokedDeclaration in symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()).OfType<MethodDeclarationSyntax>())
+                {
+                    if (ContainsAssertion(invokedDeclaration, semanticModel, visitedSymbols, level + 1))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private static bool IsTestIgnored(IMethodSymbol method)
