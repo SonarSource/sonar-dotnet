@@ -20,6 +20,7 @@
 
 #if !NETFRAMEWORK
 
+using System;
 using Microsoft.CodeAnalysis;
 using static SonarAnalyzer.UnitTest.MetadataReferences.MetadataReferenceFactory;
 
@@ -27,17 +28,22 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class CoreMetadataReference
     {
+        internal static MetadataReference MicrosoftAspNetCoreCors { get; } = CreateReference(typeof(Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions).Assembly.Location);
         internal static MetadataReference MicrosoftAspNetCoreMvc { get; } = CreateReference(typeof(Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions).Assembly.Location);
         internal static MetadataReference MicrosoftAspNetCoreMvcAbstractions { get; } = CreateReference(typeof(Microsoft.AspNetCore.Mvc.IActionResult).Assembly.Location);
         internal static MetadataReference MicrosoftAspNetCoreMvcCore { get; } = CreateReference(typeof(Microsoft.AspNetCore.Mvc.ControllerBase).Assembly.Location);
         internal static MetadataReference MicrosoftAspNetCoreMvcViewFeatures { get; } = CreateReference(typeof(Microsoft.AspNetCore.Mvc.Controller).Assembly.Location);
+        internal static MetadataReference MicrosoftAspNetCoreHttpAbstractions { get; } = CreateReference(typeof(Microsoft.AspNetCore.Http.HttpResponse).Assembly.Location);
+        internal static MetadataReference MicrosoftAspNetCoreHttpFeatures { get; } = CreateReference(typeof(Microsoft.AspNetCore.Http.IHeaderDictionary).Assembly.Location);
         internal static MetadataReference MicrosoftExtensionsDependencyInjectionAbstractions { get; } =
             CreateReference(typeof(Microsoft.Extensions.DependencyInjection.IServiceCollection).Assembly.Location);
-        internal static MetadataReference MsCorLib { get; } = CreateReference("mscorlib.dll");
+        internal static MetadataReference MicrosoftExtensionsPrimitives { get; } = CreateReference(typeof(Microsoft.Extensions.Primitives.StringValues).Assembly.Location);
+        internal static MetadataReference MicrosoftNetHttpHeadersHeaderNames { get; } = CreateReference(typeof(Microsoft.Net.Http.Headers.HeaderNames).Assembly.Location);
         internal static MetadataReference MicrosoftVisualBasic { get; } = CreateReference("Microsoft.VisualBasic.dll");
         internal static MetadataReference MicrosoftVisualBasicCore { get; } = CreateReference("Microsoft.VisualBasic.Core.dll");
         internal static MetadataReference MicrosoftWin32Registry { get; } = CreateReference("Microsoft.Win32.Registry.dll");
         internal static MetadataReference MicrosoftWin32Primitives { get; } = CreateReference("Microsoft.Win32.Primitives.dll");
+        internal static MetadataReference MsCorLib { get; } = CreateReference("mscorlib.dll");
         internal static MetadataReference System { get; } = CreateReference("System.dll");
         internal static MetadataReference SystemCollections { get; } = CreateReference("System.Collections.dll");
         internal static MetadataReference SystemCore { get; } = CreateReference("System.Core.dll");

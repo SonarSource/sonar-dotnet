@@ -73,6 +73,18 @@ namespace SonarAnalyzer.Helpers.Trackers
             context => ConstArgumentForParameter(context, parameterName) is bool boolValue
                        && boolValue == expectedValue;
 
+        internal Condition IsIHeadersDictionary() =>
+            context =>
+            {
+                const int argumentsNumber = 2;
+
+                var containingType = context.MethodSymbol.Value.ContainingType;
+
+                return containingType.TypeArguments.Length == argumentsNumber
+                       && containingType.TypeArguments[0].Is(KnownType.System_String)
+                       && containingType.TypeArguments[1].Is(KnownType.Microsoft_Extensions_Primitives_StringValues);
+            };
+
         protected override InvocationContext CreateContext(SyntaxNodeAnalysisContext context) =>
             Language.Syntax.NodeExpression(context.Node) is { } expression
             && ExpectedExpressionIdentifier(expression) is { } identifier
