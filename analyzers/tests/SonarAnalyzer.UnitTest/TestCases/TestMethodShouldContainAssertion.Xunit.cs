@@ -5,6 +5,8 @@
     using NSubstitute;
     using Xunit;
 
+    using static Xunit.Assert;
+
     public class Program
     {
         [Fact]
@@ -78,8 +80,15 @@
             Assert.Equal(d, 10.0);
         }
 
+        [Fact]
+        public void Fact15()
+        {
+            var x = 42;
+            Equal(x, 42);
+        }
+
         [Fact(Skip = "reason")]
-        public void Fact15() // Don't raise on skipped test methods
+        public void Fact16() // Don't raise on skipped test methods
         {
         }
 

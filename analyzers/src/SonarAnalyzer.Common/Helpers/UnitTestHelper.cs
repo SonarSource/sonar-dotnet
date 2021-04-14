@@ -23,82 +23,63 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 
 // Note: useful comparison of the differing syntax across unit test frameworks
-// at https://xunit.github.io/docs/comparisons
-
+// at https://xunit.net/docs/comparisons
 namespace SonarAnalyzer.Helpers
 {
     internal static class UnitTestHelper
     {
-        public static readonly ImmutableArray<KnownType> KnownTestMethodAttributes_MSTest =
-            ImmutableArray.Create(
+        public static readonly ImmutableArray<KnownType> KnownTestMethodAttributesOfMSTest = ImmutableArray.Create(
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
-                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute
-            );
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute);
 
-        public static readonly ImmutableArray<KnownType> KnownTestMethodAttributes_NUnit =
-            ImmutableArray.Create(
+        public static readonly ImmutableArray<KnownType> KnownTestMethodAttributesOfNUnit = ImmutableArray.Create(
                 KnownType.NUnit_Framework_TestAttribute,
                 KnownType.NUnit_Framework_TestCaseAttribute,
                 KnownType.NUnit_Framework_TestCaseSourceAttribute,
-                KnownType.NUnit_Framework_TheoryAttribute
-            );
+                KnownType.NUnit_Framework_TheoryAttribute);
 
-        public static readonly ImmutableArray<KnownType> KnownTestMethodAttributes_xUnit =
-            ImmutableArray.Create(
+        public static readonly ImmutableArray<KnownType> KnownTestMethodAttributesOfxUnit = ImmutableArray.Create(
                 KnownType.Xunit_FactAttribute,
                 KnownType.Xunit_TheoryAttribute,
-                KnownType.LegacyXunit_TheoryAttribute
-            );
+                KnownType.LegacyXunit_TheoryAttribute);
 
-        public static readonly ImmutableArray<KnownType> KnownExpectedExceptionAttributes =
-            ImmutableArray.Create(
+        public static readonly ImmutableArray<KnownType> KnownExpectedExceptionAttributes = ImmutableArray.Create(
                 // Note: XUnit doesn't have a exception attribute
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute,
-                KnownType.NUnit_Framework_ExpectedExceptionAttribute
-            );
+                KnownType.NUnit_Framework_ExpectedExceptionAttribute);
 
-        public static readonly ImmutableArray<KnownType> KnownIgnoreAttributes =
-            ImmutableArray.Create(
+        public static readonly ImmutableArray<KnownType> KnownIgnoreAttributes = ImmutableArray.Create(
                 // Note: XUnit doesn't have a separate "Ignore" attribute. It has a "Skip" parameter
                 // on the test attribute
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute,
-                KnownType.NUnit_Framework_IgnoreAttribute
-            );
-
-        private static readonly ImmutableArray<KnownType> KnownTestMethodAttributes =
-            ImmutableArray.Create(
-                KnownTestMethodAttributes_MSTest
-                .Concat(KnownTestMethodAttributes_NUnit)
-                .Concat(KnownTestMethodAttributes_xUnit)
-                .ToArray()
-            );
+                KnownType.NUnit_Framework_IgnoreAttribute);
 
         /// <summary>
-        /// List of partial names that are assumed to indicate an assertion method
+        /// List of partial names that are assumed to indicate an assertion method.
         /// </summary>
-        public static readonly ImmutableArray<string> KnownAssertionMethodParts =
-            ImmutableArray.Create(
+        public static readonly ImmutableArray<string> KnownAssertionMethodParts = ImmutableArray.Create(
                 "ASSERT",
                 "CHECK",
                 "EXPECT",
                 "MUST",
                 "SHOULD",
                 "VERIFY",
-                "VALIDATE"
-            );
+                "VALIDATE");
 
-        private static readonly ImmutableArray<KnownType> KnownTestClassAttributes =
-            ImmutableArray.Create(
+        private static readonly ImmutableArray<KnownType> KnownTestMethodAttributes = ImmutableArray.Create(
+                KnownTestMethodAttributesOfMSTest
+                .Concat(KnownTestMethodAttributesOfNUnit)
+                .Concat(KnownTestMethodAttributesOfxUnit)
+                .ToArray());
+
+        private static readonly ImmutableArray<KnownType> KnownTestClassAttributes = ImmutableArray.Create(
                 // xUnit does not have have attributes to identity test classes
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
-                KnownType.NUnit_Framework_TestFixtureAttribute
-            );
+                KnownType.NUnit_Framework_TestFixtureAttribute);
 
-        private static readonly ImmutableArray<KnownType> NoExpectedResultTestMethodReturnTypes =
-            ImmutableArray.Create(
+        private static readonly ImmutableArray<KnownType> NoExpectedResultTestMethodReturnTypes = ImmutableArray.Create(
                 KnownType.Void,
-                KnownType.System_Threading_Tasks_Task
-            );
+                KnownType.System_Threading_Tasks_Task);
 
         /// <summary>
         /// Returns whether the class has an attribute that marks the class
@@ -117,23 +98,8 @@ namespace SonarAnalyzer.Helpers
             !NoExpectedResultTestMethodReturnTypes.Any(method.ReturnType.Is)
             && method.GetAttributes().Any(IsAnyTestCaseAttributeWithExpectedResult);
 
-        private static bool IsAnyTestCaseAttributeWithExpectedResult(AttributeData a) =>
-            IsTestCaseAttributeWithExpectedResult(a)
-            || a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute);
-
-        private static bool IsTestCaseAttributeWithExpectedResult(AttributeData a) =>
-            a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseAttribute)
-            && a.NamedArguments.Any(arg => arg.Key == "ExpectedResult");
-
-        public static bool IsMsTestOrNUnitTestIgnored(this IMethodSymbol method)
-        {
-            var attributes = method.GetAttributes();
-            if (attributes.Any(a => a.AttributeClass.IsAny(KnownIgnoreAttributes)))
-            {
-                return true;
-            }
-            return false;
-        }
+        public static bool IsMsTestOrNUnitTestIgnored(this IMethodSymbol method) =>
+            method.GetAttributes().Any(a => a.AttributeClass.IsAny(KnownIgnoreAttributes));
 
         public static AttributeData FindXUnitTestAttribute(this IMethodSymbol method) =>
             method.GetAttributes().FirstOrDefault(a =>
@@ -151,5 +117,13 @@ namespace SonarAnalyzer.Helpers
         public static KnownType FindFirstTestMethodType(this IMethodSymbol method) =>
             KnownTestMethodAttributes.FirstOrDefault(known =>
                     method.GetAttributes().Any(att => att.AttributeClass.Is(known)));
+
+        private static bool IsAnyTestCaseAttributeWithExpectedResult(AttributeData a) =>
+            IsTestCaseAttributeWithExpectedResult(a)
+            || a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute);
+
+        private static bool IsTestCaseAttributeWithExpectedResult(AttributeData a) =>
+            a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseAttribute)
+            && a.NamedArguments.Any(arg => arg.Key == "ExpectedResult");
     }
 }

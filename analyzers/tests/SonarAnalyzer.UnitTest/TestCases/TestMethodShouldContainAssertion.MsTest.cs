@@ -5,6 +5,8 @@
     using NSubstitute;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using static Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+
     [TestClass]
     public class Program
     {
@@ -87,8 +89,15 @@
         }
 
         [TestMethod]
+        public void TestMethod15()
+        {
+            var x = 42;
+            AreEqual(x, 42);
+        }
+
+        [TestMethod]
         [Ignore]
-        public void TestMethod15() // Don't raise on skipped test methods
+        public void TestMethod16() // Don't raise on skipped test methods
         {
         }
 

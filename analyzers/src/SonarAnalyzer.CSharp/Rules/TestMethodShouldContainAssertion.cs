@@ -38,11 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Add at least one assertion to this test case.";
         private const string CustomAssertionAttributeName = "AssertionMethodAttribute";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly Dictionary<string, KnownType> knownAssertions = new Dictionary<string, KnownType>
+        private static readonly Dictionary<string, KnownType> KnownAssertions = new Dictionary<string, KnownType>
         {
             {"DidNotReceive", KnownType.NSubstitute_SubstituteExtensions},
             {"DidNotReceiveWithAnyArgs", KnownType.NSubstitute_SubstituteExtensions},
@@ -50,6 +46,15 @@ namespace SonarAnalyzer.Rules.CSharp
             {"ReceivedWithAnyArgs", KnownType.NSubstitute_SubstituteExtensions},
             {"InOrder", KnownType.NSubstitute_Received }
         };
+
+        private static readonly ImmutableArray<KnownType> KnownAssertionTypes = ImmutableArray.Create(
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
+                KnownType.NUnit_Framework_Assert,
+                KnownType.Xunit_Assert);
+
+        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -87,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Any(invocation => IsAssertion(invocation));
                     if (!hasAnyAssertion)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
@@ -115,11 +120,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Intersect(UnitTestHelper.KnownAssertionMethodParts)
                 .Any();
 
-        private static bool IsKnownAssertion(ISymbol methodSymbol)
-        {
-            var type = knownAssertions.GetValueOrDefault(methodSymbol.Name);
-            return (type != null) && methodSymbol.ContainingType.ConstructedFrom.Is(type);
-        }
+        private static bool IsKnownAssertion(ISymbol methodSymbol) =>
+            (KnownAssertions.GetValueOrDefault(methodSymbol.Name) is { } type && methodSymbol.ContainingType.ConstructedFrom.Is(type))
+            || methodSymbol.ContainingType.DerivesFromAny(KnownAssertionTypes);
 
         private static bool IsCustomAssertion(ISymbol methodSymbol) =>
             methodSymbol.GetAttributes().Any(x => x.AttributeClass.Name == CustomAssertionAttributeName);
