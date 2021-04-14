@@ -143,12 +143,13 @@ namespace SonarAnalyzer.Helpers
             {
                 return true; // We don't know whether this is a Main or Test source so let's run the rule
             }
+            // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet. Only rules with TEST-ONLY scope are executed for test projects for now.
+            return isTestProject
+                ? ContainsTag(DiagnosticDescriptorBuilder.TestSourceScopeTag) && !ContainsTag(DiagnosticDescriptorBuilder.MainSourceScopeTag)
+                : ContainsTag(DiagnosticDescriptorBuilder.MainSourceScopeTag);
 
-            var matchingScopeTag = isTestProject
-                ? DiagnosticDescriptorBuilder.TestSourceScopeTag
-                : DiagnosticDescriptorBuilder.MainSourceScopeTag;
-
-            return diagnostics.Any(d => d.CustomTags.Contains(matchingScopeTag));
+            bool ContainsTag(string tag) =>
+                diagnostics.Any(d => d.CustomTags.Contains(tag));
         }
 
         private static bool IsTestProject(TryGetValueDelegate<ProjectConfigReader> tryGetValue, Compilation compilation, AnalyzerOptions options)

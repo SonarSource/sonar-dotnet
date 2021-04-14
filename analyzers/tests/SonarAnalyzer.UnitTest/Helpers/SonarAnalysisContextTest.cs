@@ -128,23 +128,23 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope), ProjectType.Test);
             foreach (var testCase in testCases)
             {
-                var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.TestSourceScopeTag));
-                if (hasTestScope)
+                var hasMainScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
+                if (hasMainScope)
+                {
+                    // MAIN-only and MAIN & TEST rules
+                    Verifier.VerifyNoIssueReported(testCase.Path,
+                                                   testCase.Analyzer,
+                                                   ParseOptionsHelper.FromCSharp8,
+                                                   testCase.AdditionalReferences,
+                                                   sonarProjectConfig);
+                }
+                else
                 {
                     Verifier.VerifyAnalyzer(testCase.Path,
                                             testCase.Analyzer,
                                             ParseOptionsHelper.FromCSharp8,
                                             testCase.AdditionalReferences,
                                             sonarProjectConfig);
-                }
-                else
-                {
-                    // MAIN-only rule
-                    Verifier.VerifyNoIssueReported(testCase.Path,
-                                                   testCase.Analyzer,
-                                                   ParseOptionsHelper.FromCSharp8,
-                                                   testCase.AdditionalReferences,
-                                                   sonarProjectConfig);
                 }
             }
         }
