@@ -18,7 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NET
+
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 
@@ -30,6 +36,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs", new CS.DatabasePasswordsShouldBeSecure());
+            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs", new CS.DatabasePasswordsShouldBeSecure(),
+                Enumerable.Empty<MetadataReference>()
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MySqlDataEntityFrameworkCore())
+                .Concat(NuGetMetadataReference.NpgsqlEntityFrameworkCorePostgreSQL()));
+
     }
 }
+
+#endif
