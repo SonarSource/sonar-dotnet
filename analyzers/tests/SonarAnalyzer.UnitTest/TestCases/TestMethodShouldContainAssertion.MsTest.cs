@@ -1,6 +1,7 @@
 ﻿namespace TestMsTest
 {
     using System;
+    using System.Text;
     using FluentAssertions;
     using NSubstitute;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -328,5 +329,106 @@
     {
         [TestMethod]
         public void Received() => Substitute.For<IDisposable>().Received().Dispose();
+    }
+
+    [TestClass]
+    public class WithHelperMethods
+    {
+        [TestMethod]
+        public void TestMethod1()       // Noncompliant FP
+        {
+            DoTheWork("42", 42);
+        }
+
+        [TestMethod]
+        public void TestMethod2() =>    // Noncompliant FP
+            DoTheWork("42", 42);
+
+        [TestMethod]
+        public void Complex()           // Noncompliant FP
+        {
+            int cnt = 42;
+            var sb = new System.Text.StringBuilder();
+            sb.Append("This invocation doesn't have syntax tree for Append");
+            DoNothing(sb);
+            for(int i = 0; i < cnt; i++)
+            {
+                DoNothing(sb);
+                if (i % 2 == 0)
+                {
+                    sb.Append(i.ToString());
+                    sb.Clear();
+                    try
+                    {
+                        sb.Append("42");
+                        DoTheWork(sb.ToString(), 42);
+                    }
+                    finally
+                    {
+                        DoNothing(null);
+                    }
+
+                }
+                DoNothing(sb);
+            }
+        }
+
+        private void DoNothing(StringBuilder sb)
+        {
+            // Empty path
+        }
+
+        [TestMethod]
+        public void Recursion() =>      // Noncompliant
+            Recursion(100);
+
+        private void Recursion(int cnt)
+        {
+            if (cnt > 0)
+                Recursion(cnt - 1);
+        }
+
+        [TestMethod]
+        public void NestedTwoTimes() =>   // Noncompliant FP
+            NestedTwo();
+
+        [TestMethod]
+        public void NestedThreeTimes() => // Noncompliant, it's too deep
+            NestedThree();
+
+        private void NestedThree() =>
+            NestedTwo();
+
+        private void NestedTwo() =>
+            DoTheWork("42", 42);
+
+        private void DoTheWork(string s, int i) =>
+            Assert.AreEqual(i.ToString(), s);
+
+        [TestMethod]
+        public void AssertionIsInConstructor()   // Noncompliant FP, not supported
+        {
+            var x = new BadDesign("42", 42);
+        }
+
+        [TestMethod]
+        public void AssertionIsInSetter()       // Noncompliant FP, not supported
+        {
+            var x = new BadDesign();
+            x.Property = 42;
+        }
+
+        private class BadDesign
+        {
+            public BadDesign() { }
+
+            public BadDesign(string s, int i) =>
+                Assert.AreEqual(i.ToString(), s);
+
+            public int Property
+            {
+                set => Assert.AreEqual(value, 42);
+            }
+        }
     }
 }
