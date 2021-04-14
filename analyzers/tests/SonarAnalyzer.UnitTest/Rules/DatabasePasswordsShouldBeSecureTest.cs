@@ -20,7 +20,6 @@
 
 #if NET
 
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,16 +32,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DatabasePasswordsShouldBeSecureTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("3.1.11", "3.19.80")]
+        [DataRow("5.0.2", "5.21.1")]
         [TestCategory("Rule")]
-        public void DatabasePasswordsShouldBeSecure_CS() =>
-            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs", new CS.DatabasePasswordsShouldBeSecure(),
+        public void DatabasePasswordsShouldBeSecure_CS(string dotnetVersion, string oracleVersion) =>
+            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs", new CS.DatabasePasswordsShouldBeSecure(), ParseOptionsHelper.FromCSharp8,
                 Enumerable.Empty<MetadataReference>()
-                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(Constants.DotNetCore220Version))
-                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(Constants.DotNetCore220Version))
+                .Concat(MetadataReferenceFacade.SystemData)
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(dotnetVersion))
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqliteCore(dotnetVersion))
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(dotnetVersion))
+                .Concat(NuGetMetadataReference.OracleEntityFrameworkCore(oracleVersion))
                 .Concat(NuGetMetadataReference.MySqlDataEntityFrameworkCore())
-                .Concat(NuGetMetadataReference.NpgsqlEntityFrameworkCorePostgreSQL()));
-
+                .Concat(NuGetMetadataReference.NpgsqlEntityFrameworkCorePostgreSQL(dotnetVersion)));
     }
 }
 

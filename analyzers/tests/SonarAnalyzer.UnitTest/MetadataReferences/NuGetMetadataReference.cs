@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftAspNetSignalRCore(string packageVersion = "2.4.1") => Create("Microsoft.AspNet.SignalR.Core", packageVersion);
         public static References MicrosoftDataSqliteCore(string packageVersion = "2.0.0") => Create("Microsoft.Data.Sqlite.Core", packageVersion);
         public static References MicrosoftEntityFrameworkCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore", packageVersion);
-
+        public static References MicrosoftEntityFrameworkCoreSqliteCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Sqlite.Core", packageVersion);
         public static References MicrosoftEntityFrameworkCoreSqlServer(string packageVersion) => Create("Microsoft.EntityFrameworkCore.SqlServer", packageVersion);
         public static References MicrosoftEntityFrameworkCoreRelational(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Relational", packageVersion);
         public static References MicrosoftExtensionsConfigurationAbstractions(string packageVersion) => Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
@@ -86,14 +86,15 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MSTestTestFramework(string packageVersion) => Create("MSTest.TestFramework", packageVersion);
         public static References MvvmLightLibs(string packageVersion) => Create("MvvmLightLibs", packageVersion);
         public static References MySqlData(string packageVersion) => Create("MySql.Data", packageVersion);
-        public static References MySqlDataEntityFrameworkCore(string packageVersion = "6.10.4") => Create("MySql.Data.EntityFrameworkCore", packageVersion);
+        public static References MySqlDataEntityFrameworkCore(string packageVersion = "8.0.22") => Create("MySql.Data.EntityFrameworkCore", packageVersion);
         public static References Nancy(string packageVersion = "2.0.0") => Create("Nancy", packageVersion);
         public static References NLog(string packageVersion) => Create("NLog", packageVersion);
         public static References NHibernate(string packageVersion = "5.2.2") => Create("NHibernate", packageVersion);
-        public static References NpgsqlEntityFrameworkCorePostgreSQL(string packageVersion = "3.1.3") => Create("Npgsql.EntityFrameworkCore.PostgreSQL", packageVersion);
+        public static References NpgsqlEntityFrameworkCorePostgreSQL(string packageVersion) => Create("Npgsql.EntityFrameworkCore.PostgreSQL", packageVersion);
         public static References NSubstitute(string packageVersion) => Create("NSubstitute", packageVersion);
         public static References NUnit(string packageVersion) => Create("NUnit", packageVersion);
         public static References NUnitLite(string packageVersion) => Create("NUnitLite", packageVersion);
+        public static References OracleEntityFrameworkCore(string packageVersion) => Create("Oracle.EntityFrameworkCore", packageVersion);
         public static References PetaPocoCompiled(string packageVersion = "6.0.353") => Create("PetaPoco.Compiled", packageVersion);
         public static References RhinoMocks(string packageVersion) => Create("RhinoMocks", packageVersion);
         public static References Shouldly(string packageVersion) => Create("Shouldly", packageVersion);
