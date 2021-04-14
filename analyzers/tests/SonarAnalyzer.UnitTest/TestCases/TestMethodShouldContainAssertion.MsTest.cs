@@ -406,6 +406,18 @@
             Assert.AreEqual(i.ToString(), s);
 
         [TestMethod]
+        public void MixedSyntaxTrees() =>
+            HelperFromAnotherSyntaxTree.Is42(42);
+
+        [TestMethod]
+        public void MixedSyntaxTreesNested() =>
+            HelperFromAnotherSyntaxTree.Is42Nested(42);
+
+        [TestMethod]
+        public void MixedSyntaxTreesMissingAssertion() =>   // Noncompliant
+            HelperFromAnotherSyntaxTree.DoNothing();
+
+        [TestMethod]
         public void AssertionIsInConstructor()   // Noncompliant FP, not supported
         {
             var x = new BadDesign("42", 42);

@@ -107,11 +107,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        private static bool ContainsAssertion(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
+        private static bool ContainsAssertion(MethodDeclarationSyntax methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
         {
+            var currentSemanticModel = methodDeclaration.EnsureCorrectSemanticModel(previousSemanticModel);
             var invokedSymbols = methodDeclaration.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
-                .Select(expression => semanticModel.GetSymbolInfo(expression).Symbol)
+                .Select(expression => currentSemanticModel.GetSymbolInfo(expression).Symbol)
                 .OfType<IMethodSymbol>();
 
             if (invokedSymbols.Any(symbol => IsKnownAssertion(symbol) || IsCustomAssertion(symbol)))
@@ -127,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 visitedSymbols.Add(symbol);
                 foreach (var invokedDeclaration in symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()).OfType<MethodDeclarationSyntax>())
                 {
-                    if (ContainsAssertion(invokedDeclaration, semanticModel, visitedSymbols, level + 1))
+                    if (ContainsAssertion(invokedDeclaration, currentSemanticModel, visitedSymbols, level + 1))
                     {
                         return true;
                     }

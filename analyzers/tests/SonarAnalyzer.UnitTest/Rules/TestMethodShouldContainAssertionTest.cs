@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.MsTest.cs",
+            Verifier.VerifyAnalyzer(new[] { @"TestCases\TestMethodShouldContainAssertion.MsTest.cs", @"TestCases\TestMethodShouldContainAssertion.MsTest.AnotherFile.cs" },
                 new CS.TestMethodShouldContainAssertion(),
                 GetMsTestReferences(testFwkVersion));
 
