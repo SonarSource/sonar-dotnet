@@ -11,5 +11,6 @@
     public void Bbb()
     {
         var y = "value";
+        var character = 'c';
     }
 }

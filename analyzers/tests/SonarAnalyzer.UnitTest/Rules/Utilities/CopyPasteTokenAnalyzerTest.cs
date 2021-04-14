@@ -43,9 +43,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_Unique_CS() =>
             Verify("Unique.cs", info =>
             {
-                info.Should().HaveCount(55);
+                info.Should().HaveCount(60);
                 info.Where(x => x.TokenValue == "$str").Should().HaveCount(5);
                 info.Should().ContainSingle(x => x.TokenValue == "$num");
+                info.Should().ContainSingle(x => x.TokenValue == "$char");
             });
 
         [TestMethod]
