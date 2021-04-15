@@ -16,23 +16,32 @@ vulnerability to steal session-cookies.</p>
   sensitive-security cookies. </li>
 </ul>
 <h2>Sensitive Code Example</h2>
-<p>For example In C# you can specify the HttpOnly flag for <a
-href="https://docs.microsoft.com/en-us/dotnet/api/system.web.httpcookie?view=netframework-4.8">HttpCookie</a> object.</p>
+<p>When the <code>HttpCookie.HttpOnly</code> property is set to <code>false</code> then the cookie can be accessed by client side code:</p>
 <pre>
 HttpCookie myCookie = new HttpCookie("Sensitive cookie");
-myCookie.HttpOnly = false;  // Sensitive:  this sensitive cookie is created with the httponly flag set to false and so it can be stolen easily in case of XSS vulnerability
+myCookie.HttpOnly = false; // Sensitive: this cookie is created with the httponly flag set to false and so it can be stolen easily in case of XSS vulnerability
 </pre>
 <p>The <a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.httpcookie.httponly?view=netframework-4.8">default value</a> of
-<code>secure</code> flag is false:</p>
+<code>HttpOnly</code> flag is <code>false</code>, unless overwritten by an application's configuration file:</p>
 <pre>
 HttpCookie myCookie = new HttpCookie("Sensitive cookie");
-// Sensitive: this sensitive cookie is created with the httponly flag not defined (by default set to false)  and so it can be stolen easily in case of XSS vulnerability
+// Sensitive: this cookie is created without the httponly flag  (by default set to false) and so it can be stolen easily in case of XSS vulnerability
 </pre>
 <h2>Compliant Solution</h2>
+<p>Set the <code>HttpCookie.HttpOnly</code> property to <code>true</code>:</p>
 <pre>
 HttpCookie myCookie = new HttpCookie("Sensitive cookie");
 myCookie.HttpOnly = true; // Compliant: the sensitive cookie is protected against theft thanks to the HttpOnly property set to true (HttpOnly = true)
 </pre>
+<p>Or change the default flag values for the whole application by editing the <a
+href="https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms228262(v=vs.100)">Web.config configuration file</a>:</p>
+<pre>
+&lt;httpCookies httpOnlyCookies="true" requireSSL="true" /&gt;
+</pre>
+<ul>
+  <li> the <code>requireSSL</code> attribute corresponds programmatically to the <code>Secure</code> field. </li>
+  <li> the <code>httpOnlyCookies</code> attribute corresponds programmatically to the <code>httpOnly</code> field. </li>
+</ul>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.owasp.org/index.php/HttpOnly">OWASP HttpOnly</a> </li>
