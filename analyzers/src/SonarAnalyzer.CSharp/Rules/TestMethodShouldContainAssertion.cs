@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2699";
         private const string MessageFormat = "Add at least one assertion to this test case.";
         private const string CustomAssertionAttributeName = "AssertionMethodAttribute";
-        private const int MaxInvocationDepth = 2;
+        private const int MaxInvocationDepth = 2; // Consider BFS instead of DFS if this gets increased
 
         private static readonly Dictionary<string, KnownType> KnownAssertions = new Dictionary<string, KnownType>
         {
@@ -63,8 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -91,7 +90,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
 
         private static bool ContainsAssertion(MethodDeclarationSyntax methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
         {
