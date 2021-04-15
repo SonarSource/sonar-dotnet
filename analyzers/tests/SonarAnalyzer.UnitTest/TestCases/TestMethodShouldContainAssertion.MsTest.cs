@@ -128,6 +128,16 @@
         }
 
         [TestMethod]
+        public void TestMethod18_UndefinedException() // Noncompliant
+        {
+            var x = 42;
+            if (x == 42)
+            {
+                throw new UndefinedTypeException("You failed me!"); // Error [CS0246]
+            }
+        }
+
+        [TestMethod]
         [Ignore]
         public void TestMethod19() // Don't raise on skipped test methods
         {
