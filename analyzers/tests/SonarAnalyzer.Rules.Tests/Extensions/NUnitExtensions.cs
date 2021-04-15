@@ -11,6 +11,25 @@ namespace NUnit.Framework.Internal.Builders
             IMethodInfo method,
             Test suite,
             LanguageVersionInfo language,
+            AnalyzerInfo analyzer,
+            string scenario) =>
+
+            builder.BuildTestMethod(method, suite, new TestCaseParameters(
+                new object[]
+                {
+                    analyzer.Instance(),
+                    new[] { language.Options },
+                }))
+                .AddCategories(
+                    "Rule",
+                    language.ToString())
+                .WithName(analyzer, language, scenario);
+
+        public static TestMethod AnalyzerTestCase(
+            this NUnitTestCaseBuilder builder,
+            IMethodInfo method,
+            Test suite,
+            LanguageVersionInfo language,
             TestCaseInfo testCase,
             AnalyzerInfo analyzer) =>
 
@@ -26,21 +45,21 @@ namespace NUnit.Framework.Internal.Builders
                 .AddCategories(
                     "Rule",
                     language.ToString())
-                .WithName(analyzer, language, testCase);
+                .WithName(analyzer, language, testCase.Scenario);
 
         private static TestMethod WithName(
             this TestMethod test,
             AnalyzerInfo analyzer,
             LanguageVersionInfo language,
-            TestCaseInfo testCase)
+            string scenario)
         {
 
             test.FullName = analyzer.DiagnosticIds.Any()
                 ? $"Rules.{analyzer.DiagnosticIds.First()}: {analyzer.Name}"
                 : $"Rules.?: {analyzer.Name}";
-            test.Name = string.IsNullOrEmpty(testCase.Scenario)
+            test.Name = string.IsNullOrEmpty(scenario)
                 ? $"[generic] {language.DisplayName}"
-                : $"[{testCase.Scenario}] {language.DisplayName}";
+                : $"[{scenario}] {language.DisplayName}";
             test.FullName += $".{test.Name}";
             return test;
         }

@@ -61,8 +61,8 @@ namespace SonarAnalyzer.Rules.Tests.Framework
 
         public override string ToString() => $"{Language} {Version}";
 
-        public static IEnumerable<LanguageVersionInfo> Select(LanguageVersions selection) =>
-            selection switch
+        public static IEnumerable<LanguageVersionInfo> Select(LanguageVersions versions) =>
+            versions switch
             {
                 LanguageVersions.BeforeCSharp7 => CSharp(language => language.Version < CSharp7.Version),
                 LanguageVersions.BeforeCSharp8 => CSharp(language => language.Version < CSharp8.Version),

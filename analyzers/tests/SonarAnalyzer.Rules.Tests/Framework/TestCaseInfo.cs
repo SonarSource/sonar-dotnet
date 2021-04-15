@@ -20,16 +20,16 @@ namespace SonarAnalyzer.Rules.Tests.Framework
             Name = name;
             Scenario = scenario;
             Location = location;
-            SupportedLanguageVersions = languages.ToArray();
+            SupportedLanguageVersions = languages;
             Output = output;
-            AdditionalReferences = additional.ToArray();
+            AdditionalReferences = additional;
             IsFix = isFix;
         }
 
         public string Name { get; }
         public string Scenario { get; }
         public FileInfo Location { get; }
-        public IReadOnlyCollection<LanguageVersionInfo> SupportedLanguageVersions { get; }
+        public IEnumerable<LanguageVersionInfo> SupportedLanguageVersions { get; }
         public OutputKind Output { get; }
         public bool IsFix { get; }
 
