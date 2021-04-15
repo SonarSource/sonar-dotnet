@@ -103,6 +103,9 @@ namespace SonarAnalyzer.Helpers
         public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> collection) =>
             syntaxNode != null && collection.Contains((SyntaxKind)syntaxNode.RawKind);
 
+        public static bool IsAnyKind(this SyntaxToken syntaxToken, params SyntaxKind[] syntaxKinds) =>
+            syntaxKinds.Contains((SyntaxKind)syntaxToken.RawKind);
+
         public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
             nodes.Any(n => n.RawKind == (int)kind);
 

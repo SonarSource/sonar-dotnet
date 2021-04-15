@@ -24,8 +24,10 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf;
-using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -38,17 +40,29 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_Unique() =>
+        public void Verify_Unique_CS() =>
             Verify("Unique.cs", info =>
             {
-                info.Should().HaveCount(54);
-                info.Where(x => x.TokenValue == "$str").Should().HaveCount(2); // ToDo: Expect 4 of them https://github.com/SonarSource/sonar-dotnet/issues/4205
+                info.Should().HaveCount(60);
+                info.Where(x => x.TokenValue == "$str").Should().HaveCount(5);
                 info.Should().ContainSingle(x => x.TokenValue == "$num");
+                info.Should().ContainSingle(x => x.TokenValue == "$char");
             });
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_Duplicated() =>
+        public void Verify_Unique_VB() =>
+            Verify("Unique.vb", info =>
+            {
+                info.Should().HaveCount(88);
+                info.Where(x => x.TokenValue == "$str").Should().HaveCount(3);
+                info.Where(x => x.TokenValue == "$num").Should().HaveCount(7);
+                info.Should().ContainSingle(x => x.TokenValue == "$char");
+            });
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void Verify_Duplicated_CS() =>
             Verify("Duplicated.cs", info =>
             {
                 info.Should().HaveCount(39);
@@ -57,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_DuplicatedDifferentLiterals() =>
+        public void Verify_DuplicatedDifferentLiterals_CS() =>
             Verify("DuplicatedDifferentLiterals.cs", info =>
             {
                 info.Should().HaveCount(39);
@@ -66,20 +80,24 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Verify_NotRunForTestProject()
+        public void Verify_NotRunForTestProject_CS()
         {
             var testRoot = Root + TestContext.TestName;
             Verifier.VerifyUtilityAnalyzerIsNotRun(new[] { Root + "DuplicatedDifferentLiterals.cs" },
-                                                   new TestCopyPasteTokenAnalyzer(testRoot, true),
+                                                   new TestCopyPasteTokenAnalyzer_CS(testRoot, true),
                                                    @$"{testRoot}\token-cpd.pb");
         }
 
-        public void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
+        private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
+            CopyPasteTokenAnalyzerBase analyzer = fileName.EndsWith(".cs")
+                ? new TestCopyPasteTokenAnalyzer_CS(testRoot, false)
+                : new TestCopyPasteTokenAnalyzer_VB(testRoot, false);
+
             Verifier.VerifyUtilityAnalyzer<CopyPasteTokenInfo>(
                 new[] { Root + fileName },
-                new TestCopyPasteTokenAnalyzer(testRoot, false),
+                analyzer,
                 @$"{testRoot}\token-cpd.pb",
                 messages =>
                 {
@@ -91,9 +109,19 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
-        private class TestCopyPasteTokenAnalyzer : CopyPasteTokenAnalyzer
+        private class TestCopyPasteTokenAnalyzer_CS : CS.CopyPasteTokenAnalyzer
         {
-            public TestCopyPasteTokenAnalyzer(string outPath, bool isTestProject)
+            public TestCopyPasteTokenAnalyzer_CS(string outPath, bool isTestProject)
+            {
+                IsAnalyzerEnabled = true;
+                OutPath = outPath;
+                IsTestProject = isTestProject;
+            }
+        }
+
+        private class TestCopyPasteTokenAnalyzer_VB : VB.CopyPasteTokenAnalyzer
+        {
+            public TestCopyPasteTokenAnalyzer_VB(string outPath, bool isTestProject)
             {
                 IsAnalyzerEnabled = true;
                 OutPath = outPath;

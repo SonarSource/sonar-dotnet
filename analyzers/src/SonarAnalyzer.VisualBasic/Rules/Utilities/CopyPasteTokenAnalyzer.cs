@@ -27,32 +27,31 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class CopyPasteTokenAnalyzer : CopyPasteTokenAnalyzerBase
+    public class CopyPasteTokenAnalyzer : CopyPasteTokenAnalyzerBase
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override bool IsUsingDirective(SyntaxNode node) => node is ImportsStatementSyntax;
+        protected override bool IsUsingDirective(SyntaxNode node) =>
+            node is ImportsStatementSyntax;
 
         protected override string GetCpdValue(SyntaxToken token)
         {
-            if (token.IsKind(SyntaxKind.DecimalLiteralToken) ||
-                token.IsKind(SyntaxKind.FloatingLiteralToken) ||
-                token.IsKind(SyntaxKind.IntegerLiteralToken))
+            if (token.IsAnyKind(SyntaxKind.DecimalLiteralToken, SyntaxKind.FloatingLiteralToken, SyntaxKind.IntegerLiteralToken))
             {
                 return "$num";
             }
-
-            if (token.IsKind(SyntaxKind.StringLiteralToken))
+            else if (token.IsAnyKind(SyntaxKind.StringLiteralToken, SyntaxKind.InterpolatedStringTextToken))
             {
                 return "$str";
             }
-
-            if (token.IsKind(SyntaxKind.CharacterLiteralToken))
+            else if (token.IsKind(SyntaxKind.CharacterLiteralToken))
             {
                 return "$char";
             }
-
-            return token.Text;
+            else
+            {
+                return token.Text;
+            }
         }
     }
 }

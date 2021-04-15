@@ -31,7 +31,8 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override bool IsUsingDirective(SyntaxNode node) => node is UsingDirectiveSyntax;
+        protected override bool IsUsingDirective(SyntaxNode node) =>
+            node is UsingDirectiveSyntax;
 
         protected override string GetCpdValue(SyntaxToken token)
         {
@@ -39,18 +40,18 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return "$num";
             }
-
-            if (token.IsKind(SyntaxKind.StringLiteralToken))
+            else if (token.IsAnyKind(SyntaxKind.StringLiteralToken, SyntaxKind.InterpolatedStringTextToken))
             {
                 return "$str";
             }
-
-            if (token.IsKind(SyntaxKind.CharacterLiteralToken))
+            else if (token.IsKind(SyntaxKind.CharacterLiteralToken))
             {
                 return "$char";
             }
-
-            return token.Text;
+            else
+            {
+                return token.Text;
+            }
         }
     }
 }
