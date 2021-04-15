@@ -67,18 +67,4 @@ public class TestProjectTest {
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild VB.NET project: 1 TEST project.");
     TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "VB.NET");
   }
-
-  @Test
-  public void issuesAreImportedForTestProject(){
-    List<Issues.Issue> barIssues = getIssues("VbTestOnlyProjectTest:MyLib.Tests/UnitTest1.vb")
-      .stream()
-      .filter(x -> x.getRule().startsWith("vbnet:"))
-      .collect(Collectors.toList());
-
-    assertThat(barIssues).hasSize(1); // Rule S1125 is not triggered for now, because it has scope MAIN & TEST
-
-    assertThat(barIssues)
-      .filteredOn(e -> e.getRule().equalsIgnoreCase("vbnet:S1186"))
-      .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(6));
-  }
 }
