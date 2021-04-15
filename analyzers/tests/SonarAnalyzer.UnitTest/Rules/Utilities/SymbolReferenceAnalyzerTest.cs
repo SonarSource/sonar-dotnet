@@ -138,7 +138,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             // This path is unreachable for VB code
             new TestSymbolReferenceAnalyzer_VB(null, isTestProject).TestGetSetKeyword(null).Should().BeNull();
 
-        public void Verify(string fileName, bool isTestProject, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
+        private void Verify(string fileName, bool isTestProject, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
             Verify(fileName, isTestProject, references =>
                 {
                     references.Where(x => x.Declaration != null).Should().HaveCount(expectedDeclarationCount);
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     declarationReferences.Select(x => x.StartLine).Should().BeEquivalentTo(assertedDeclarationLineReferences);
                 });
 
-        public void Verify(string fileName, bool isTestProject, Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
+        private void Verify(string fileName, bool isTestProject, Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
         {
             var testRoot = Root + TestContext.TestName;
             UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")

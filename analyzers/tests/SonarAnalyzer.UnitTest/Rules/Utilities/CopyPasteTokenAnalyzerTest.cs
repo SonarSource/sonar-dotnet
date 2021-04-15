@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                                    @$"{testRoot}\token-cpd.pb");
         }
 
-        public void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
+        private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
             CopyPasteTokenAnalyzerBase analyzer = fileName.EndsWith(".cs")
