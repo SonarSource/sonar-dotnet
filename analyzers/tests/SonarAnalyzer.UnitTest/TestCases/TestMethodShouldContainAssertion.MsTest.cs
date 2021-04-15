@@ -423,6 +423,15 @@
             i.ToString().Should().Be(s);
 
         [TestMethod]
+        public void TestMethod4() =>
+            DoTheWorkWithThrow();
+
+        private void DoTheWorkWithThrow()
+        {
+            throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException("You failed me!");
+        }
+
+        [TestMethod]
         public void MixedSyntaxTrees() =>
             HelperFromAnotherSyntaxTree.Is42(42);
 
