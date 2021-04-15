@@ -54,6 +54,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBDEArguments", "tests\CBDE
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SonarAnalyzer.Shared", "SonarAnalyzer.Shared\SonarAnalyzer.Shared.shproj", "{892CF3FA-3BE2-42E8-A7E6-76AE72864DEC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Rules.Tests", "tests\SonarAnalyzer.Rules.Tests\SonarAnalyzer.Rules.Tests.csproj", "{138FAB1A-F954-4F56-8BC7-C016C1535363}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{7cfa8fa5-8842-4e89-bb90-39d5c0f20ba8}*SharedItemsImports = 5
@@ -117,6 +119,10 @@ Global
 		{037E7106-8196-4D7C-A532-72730C304CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{037E7106-8196-4D7C-A532-72730C304CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{037E7106-8196-4D7C-A532-72730C304CB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{138FAB1A-F954-4F56-8BC7-C016C1535363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{138FAB1A-F954-4F56-8BC7-C016C1535363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{138FAB1A-F954-4F56-8BC7-C016C1535363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{138FAB1A-F954-4F56-8BC7-C016C1535363}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +135,7 @@ Global
 		{4452FCC0-56D0-40A4-91CA-5B29401FD146} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{9448EC04-0F0F-4901-8AB7-DF252744FF63} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{037E7106-8196-4D7C-A532-72730C304CB7} = {B7233F78-E142-4882-B084-7C83BE472109}
+		{138FAB1A-F954-4F56-8BC7-C016C1535363} = {B7233F78-E142-4882-B084-7C83BE472109}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4259CA71-C565-42DD-8D58-F59819A11065}

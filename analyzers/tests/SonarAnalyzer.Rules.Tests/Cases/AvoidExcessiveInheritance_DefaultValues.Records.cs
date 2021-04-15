@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Tests.Diagnostics
+{
+    public record BaseRecord { }
+}
+
+namespace RecordNamespace
+{
+    public record Record_0 : Tests.Diagnostics.BaseRecord { }
+    public record Record_1 : Record_0 { }
+    public record Record_2 : Record_1 { }
+    public record Record_3 : Record_2 { }
+    public record Record_4 : Record_3 { }
+    public record Record_5 : Record_4 { }
+    public record Record_6 : Record_5 { } // FN  {{This record has 6 parents which is greater than 5 authorized.}}
+    public record Record_7 : Record_6 { } // FN  {{This record has 7 parents which is greater than 5 authorized.}}
+}
+
+public record Record_0 { }
+public record Record_1 : Record_0 { }
+public record Record_2 : Record_1 { }
+public record Record_3 : Record_2 { }
+public record Record_4 : Record_3 { }
+public record Record_5 : Record_4 { }
+public record Record_6 : Record_5 { } // FN  {{This record has 6 parents which is greater than 5 authorized.}}
+public record Record_7 : Record_6 { } // FN  {{This record has 7 parents which is greater than 5 authorized.}}

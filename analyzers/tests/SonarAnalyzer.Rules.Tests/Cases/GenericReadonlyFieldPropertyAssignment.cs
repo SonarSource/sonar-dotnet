@@ -1,0 +1,107 @@
+﻿// version: FromCSharp8
+using System;using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Tests.TestCases
+{
+    interface IPoint
+    {
+        int X { get; set; }
+        int Y { get; set; }
+        string Tag { get; set; }
+    }
+
+    partial class PointManager<T> where T : IPoint
+    {
+        readonly T point;  // this could be a struct
+        public PointManager(T point)
+        {
+            this.point = point;
+            this.point.X = 1;       // Compliant, we are in the constructor
+            this.point.Tag ??= "";  // Compliant, we are in the constructor
+        }
+
+        public void MovePointVertically(int newX)
+        {
+            point.X = newX; //Noncompliant {{Restrict 'point' to be a reference type or remove this assignment of 'X'; it is useless if 'point' is a value type.}}
+//          ^^^^^^^
+            point.X++; //Noncompliant; if point is a struct, then nothing happened
+            Console.WriteLine(point.X);
+            var i = point.X = newX; //Noncompliant
+            i = point.X++;          //Noncompliant
+            point.Tag ??= "value";  //Noncompliant
+        }
+    }
+
+    partial class PointManager<T> where T : IPoint
+    {
+
+    }
+
+    partial class PointManager<T>
+    {
+
+    }
+
+    class PointManager2<T> where T : class, IPoint
+    {
+        readonly T point;  // this can only be a class
+        public PointManager2(T point)
+        {
+            this.point = point;
+        }
+
+        public void MovePointVertically(int newX)
+        {
+            point.X = newX;  // this assignment is guaranteed to work
+            Console.WriteLine(point.X);
+        }
+    }
+
+    class PointManager3<T> where T : struct, IPoint
+    {
+        readonly T point;  // this could be a struct
+        public PointManager3(T point)
+        {
+            this.point = point;
+            this.point.X = 1; // Compliant, we are in the constructor
+        }
+
+        public void MovePointVertically(int newX)
+        {
+            point.X = newX; // Compliant // Error [CS1648]
+            point.X++;      // Compliant // Error [CS1648]
+            Console.WriteLine(point.X);
+        }
+    }
+
+    class P2<A, B> where A : class, IPoint where B : A
+    {
+        readonly A pointA;
+        readonly B pointB;
+
+        public P2(A a, B b)
+        {
+            this.pointA = a;
+            this.pointB = b;
+        }
+
+        public void Add(int i)
+        {
+            pointA.X += i;
+            pointB.X += i;   // Compliant
+        }
+    }
+
+    class SelfReferencing2<T> where T : SelfReferencing2<T>, IPoint
+    {
+        readonly T pointA;
+
+        public void Add(int i)
+        {
+            pointA.X += i; // Compliant
+        }
+    }
+}
