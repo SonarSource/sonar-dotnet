@@ -406,6 +406,13 @@
             Assert.AreEqual(i.ToString(), s);
 
         [TestMethod]
+        public void TestMethod3() =>
+            DoTheWorkByInvocationName("42", 42);
+
+        private void DoTheWorkByInvocationName(string s, int i) =>
+            i.ToString().Should().Be(s);
+
+        [TestMethod]
         public void MixedSyntaxTrees() =>
             HelperFromAnotherSyntaxTree.Is42(42);
 

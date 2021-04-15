@@ -85,21 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (ContainsAssertion(methodDeclaration, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
-                    {
-                        return;
-                    }
-
-                    var hasAnyAssertion = methodDeclaration.DescendantNodes()
-                        .OfType<InvocationExpressionSyntax>()
-                        .Any(invocation => IsAssertion(invocation));
-
-                    var hasAnyThrownAssertionExceptions = methodDeclaration.DescendantNodes()
-                        .OfType<ThrowStatementSyntax>()
-                        .Any(throwStatement => throwStatement.Expression is { } expression
-                                               && c.SemanticModel.GetTypeInfo(expression).Type.DerivesFromAny(KnownAsertionExceptionTypes));
-
-                    if (!hasAnyAssertion && !hasAnyThrownAssertionExceptions)
+                    if (!ContainsAssertion(methodDeclaration, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
@@ -109,12 +95,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ContainsAssertion(MethodDeclarationSyntax methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
         {
-            var currentSemanticModel = methodDeclaration.EnsureCorrectSemanticModel(previousSemanticModel);
-            var invokedSymbols = methodDeclaration.DescendantNodes()
-                .OfType<InvocationExpressionSyntax>()
-                .Select(expression => currentSemanticModel.GetSymbolInfo(expression).Symbol)
-                .OfType<IMethodSymbol>();
+            var descendantNodes = methodDeclaration.DescendantNodes();
+            var invocations = descendantNodes.OfType<InvocationExpressionSyntax>().ToArray();
+            if (invocations.Any(x => IsAssertion(x))
+                || descendantNodes.OfType<ThrowStatementSyntax>().Any(x => x.Expression is { } expression && c.SemanticModel.GetTypeInfo(expression).Type.DerivesFromAny(KnownAsertionExceptionTypes)))
+            {
+                return true;
+            }
 
+            var currentSemanticModel = methodDeclaration.EnsureCorrectSemanticModel(previousSemanticModel);
+            var invokedSymbols = invocations.Select(expression => currentSemanticModel.GetSymbolInfo(expression).Symbol).OfType<IMethodSymbol>();
             if (invokedSymbols.Any(symbol => IsKnownAssertion(symbol) || IsCustomAssertion(symbol)))
             {
                 return true;
