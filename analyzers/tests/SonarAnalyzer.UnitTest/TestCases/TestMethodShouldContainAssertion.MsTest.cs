@@ -133,6 +133,20 @@
         }
 
         [TestMethod]
+        public void TestMethod20() // Noncompliant
+        {
+            var x = 42;
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [TestMethod]
         public void ArrowMethod1() => DoNothing(); // Noncompliant
 //                  ^^^^^^^^^^^^
 
