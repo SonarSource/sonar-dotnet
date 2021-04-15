@@ -123,9 +123,36 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void WhenProjectType_IsTest_RunRulesWithTestScope()
+        public void WhenProjectType_IsTest_RunRulesWithTestScope_SonarLint()
         {
-            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope), ProjectType.Test);
+            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_SonarLint), ProjectType.Test, false);
+            foreach (var testCase in testCases)
+            {
+                var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.TestSourceScopeTag));
+                if (hasTestScope)
+                {
+                    Verifier.VerifyAnalyzer(testCase.Path,
+                                            testCase.Analyzer,
+                                            ParseOptionsHelper.FromCSharp8,
+                                            testCase.AdditionalReferences,
+                                            sonarProjectConfig);
+                }
+                else
+                {
+                    // MAIN-only
+                    Verifier.VerifyNoIssueReported(testCase.Path,
+                                                   testCase.Analyzer,
+                                                   ParseOptionsHelper.FromCSharp8,
+                                                   testCase.AdditionalReferences,
+                                                   sonarProjectConfig);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void WhenProjectType_IsTest_RunRulesWithTestScope_Scanner()
+        {
+            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_Scanner), ProjectType.Test);
             foreach (var testCase in testCases)
             {
                 var hasMainScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
