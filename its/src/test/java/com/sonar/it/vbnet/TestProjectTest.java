@@ -75,14 +75,10 @@ public class TestProjectTest {
       .filter(x -> x.getRule().startsWith("vbnet:"))
       .collect(Collectors.toList());
 
-    assertThat(barIssues).hasSize(2);
+    assertThat(barIssues).hasSize(1); // Rule S1125 is not triggered for now, because it has scope MAIN & TEST
 
     assertThat(barIssues)
       .filteredOn(e -> e.getRule().equalsIgnoreCase("vbnet:S1186"))
       .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(6));
-
-    assertThat(barIssues)
-      .filteredOn(e -> e.getRule().equalsIgnoreCase("vbnet:S1125"))
-      .hasOnlyOneElementSatisfying(e -> assertThat(e.getLine()).isEqualTo(13));
   }
 }
