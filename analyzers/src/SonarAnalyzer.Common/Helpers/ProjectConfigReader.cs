@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Helpers
         private readonly Lazy<ProjectType> projectType;
         private readonly Lazy<FilesToAnalyzeProvider> filesToAnalyze;
 
+        public bool IsScannerRun => !string.IsNullOrEmpty(projectConfig.OutPath);
         public string AnalysisConfigPath => projectConfig.AnalysisConfigPath;
         public string FilesToAnalyzePath => projectConfig.FilesToAnalyzePath;
         public string OutPath => projectConfig.OutPath;

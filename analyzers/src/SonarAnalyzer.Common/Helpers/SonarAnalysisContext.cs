@@ -92,6 +92,12 @@ namespace SonarAnalyzer.Helpers
         public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
             ShouldAnalyzeGenerated(context, c, options);
 
+        public bool IsScannerRun(AnalyzerOptions options) =>
+            ProjectConfiguration(options).IsScannerRun;
+
+        public static bool IsScannerRun(CompilationAnalysisContext context) =>
+            ProjectConfiguration(context.TryGetValue, context.Options).IsScannerRun;
+
         public bool IsTestProject(Compilation c, AnalyzerOptions options) =>
             IsTestProject(context.TryGetValue, c, options);
 
@@ -137,15 +143,17 @@ namespace SonarAnalyzer.Helpers
         internal ProjectConfigReader ProjectConfiguration(AnalyzerOptions options) =>
             ProjectConfiguration(context.TryGetValue, options);
 
-        internal static bool IsAnalysisScopeMatching(Compilation compilation, bool isTestProject, IEnumerable<DiagnosticDescriptor> diagnostics)
+        internal static bool IsAnalysisScopeMatching(Compilation compilation, bool isTestProject, bool isScannerRun, IEnumerable<DiagnosticDescriptor> diagnostics)
         {
             if (compilation == null)
             {
                 return true; // We don't know whether this is a Main or Test source so let's run the rule
             }
-            // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet. Only rules with TEST-ONLY scope are executed for test projects for now.
+            // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
+            // ScannerRun: Only rules with TEST-ONLY scope are executed for test projects for now.
+            // SonarLint & Standalone Nuget: Respect the scope as before.
             return isTestProject
-                ? ContainsTag(DiagnosticDescriptorBuilder.TestSourceScopeTag) && !ContainsTag(DiagnosticDescriptorBuilder.MainSourceScopeTag)
+                ? ContainsTag(DiagnosticDescriptorBuilder.TestSourceScopeTag) && !(isScannerRun && ContainsTag(DiagnosticDescriptorBuilder.MainSourceScopeTag))
                 : ContainsTag(DiagnosticDescriptorBuilder.MainSourceScopeTag);
 
             bool ContainsTag(string tag) =>
@@ -214,7 +222,8 @@ namespace SonarAnalyzer.Helpers
                     var compilation = getCompilation(c);
                     var isTestProject = IsTestProject(compilation, getAnalyzerOptions(c));
 
-                    if (IsAnalysisScopeMatching(compilation, isTestProject, supportedDiagnostics) && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
+                    if (IsAnalysisScopeMatching(compilation, isTestProject, IsScannerRun(getAnalyzerOptions(c)), supportedDiagnostics)
+                        && IsRegisteredActionEnabled(supportedDiagnostics, getSyntaxTree(c)))
                     {
                         registeredAction(c);
                     }
