@@ -303,32 +303,6 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
-"region":  {
-"startLine":  38,
-"startColumn":  21,
-"endLine":  38,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
-"region":  {
-"startLine":  32,
-"startColumn":  21,
-"endLine":  32,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {
 "startLine":  43,
