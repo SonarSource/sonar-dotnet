@@ -25,8 +25,10 @@ namespace SonarAnalyzer.Rules.Tests.Framework
         {
             "Microsoft.VisualStudio.TestTools.UnitTesting" => Create(typeof(Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute)),
             "NUnit.Framework" => Create(typeof(NUnit.Framework.TestAttribute)),
-            "System.Xml" => Create(typeof(System.Xml.XmlDocument)),
             "System.Security.Cryptography" => Create(typeof(System.Security.Cryptography.SHA1)),
+            "System.Windows.Forms" => Create("System.Windows.Forms.dll"),
+            "System.Xml" => Create(typeof(System.Xml.XmlDocument)),
+
             "System.Data.SqlClient" => Nuget.Create("System.Data.SqlClient", "4.5.0"),
             "Xunit" =>
                 Nuget.Create("xunit.assert", LatestVersion).Concat(

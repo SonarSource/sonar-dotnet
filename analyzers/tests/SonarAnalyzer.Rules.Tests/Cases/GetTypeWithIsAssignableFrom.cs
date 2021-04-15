@@ -1,4 +1,5 @@
-﻿using System;
+﻿// version: FromCSharp7
+using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
