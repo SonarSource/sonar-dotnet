@@ -124,8 +124,18 @@
         }
 
         [Test]
+        public void TestMethod16()
+        {
+            var x = 42;
+            if (x == 42)
+            {
+                throw new NUnit.Framework.AssertionException("You failed me!");
+            }
+        }
+
+        [Test]
         [Ignore("Some reason")]
-        public void Test16() // Don't raise on skipped test methods
+        public void Test17() // Don't raise on skipped test methods
         {
         }
     }
