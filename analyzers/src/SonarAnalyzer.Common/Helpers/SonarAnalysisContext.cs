@@ -27,6 +27,7 @@ using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
+using static SonarAnalyzer.Helpers.DiagnosticDescriptorBuilder;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -150,11 +151,11 @@ namespace SonarAnalyzer.Helpers
                 return true; // We don't know whether this is a Main or Test source so let's run the rule
             }
             // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
-            // ScannerRun: Only rules with TEST-ONLY scope are executed for test projects for now.
+            // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
             // SonarLint & Standalone Nuget: Respect the scope as before.
             return isTestProject
-                ? ContainsTag(DiagnosticDescriptorBuilder.TestSourceScopeTag) && !(isScannerRun && ContainsTag(DiagnosticDescriptorBuilder.MainSourceScopeTag))
-                : ContainsTag(DiagnosticDescriptorBuilder.MainSourceScopeTag);
+                ? ContainsTag(TestSourceScopeTag) && !(isScannerRun && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
+                : ContainsTag(MainSourceScopeTag);
 
             bool ContainsTag(string tag) =>
                 diagnostics.Any(d => d.CustomTags.Contains(tag));

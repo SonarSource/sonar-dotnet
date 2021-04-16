@@ -105,34 +105,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void GetUtilityDescriptor_Should_Contain_NotConfigurable_CustomTag()
         {
-            // Arrange
-            // Act
             var result = DiagnosticDescriptorBuilder.GetUtilityDescriptor("Foo", "");
-
-            // Assert
 #if DEBUG
             result.CustomTags.Should().NotContain(WellKnownDiagnosticTags.NotConfigurable);
 #else
             result.CustomTags.Should().Contain(WellKnownDiagnosticTags.NotConfigurable);
 #endif
-        }
-
-        [TestMethod]
-        public void GetUtilityDescriptor_Should_Contain_NotConfigurable_CustomTag_SourceScope_Specified()
-        {
-            foreach (SourceScope sourceScope in Enum.GetValues(typeof(SourceScope)))
-            {
-                // Arrange
-                // Act
-                var result = DiagnosticDescriptorBuilder.GetUtilityDescriptor("Foo", "", sourceScope);
-
-                // Assert
-#if DEBUG
-                result.CustomTags.Should().NotContain(WellKnownDiagnosticTags.NotConfigurable);
-#else
-                result.CustomTags.Should().Contain(WellKnownDiagnosticTags.NotConfigurable);
-#endif
-            }
         }
 
         private static ResourceManager CreateMockedResourceManager(string diagnosticId, bool isActivatedByDefault)

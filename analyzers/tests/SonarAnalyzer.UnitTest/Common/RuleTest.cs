@@ -158,6 +158,24 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
+        public void AllRules_DoNotHaveUtilityTag()
+        {
+            foreach (var diagnostic in new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics))
+            {
+                diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.UtilityTag).Should().BeFalse();
+            }
+        }
+
+        [TestMethod]
+        public void UtilityAnalyzers_HaveUtilityTag()
+        {
+            foreach (var diagnostic in new RuleFinder().UtilityAnalyzerTypes.SelectMany(SupportedDiagnostics))
+            {
+                diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.UtilityTag).Should().BeTrue();
+            }
+        }
+
+        [TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
             var parameterized = new RuleFinder().AllAnalyzerTypes
