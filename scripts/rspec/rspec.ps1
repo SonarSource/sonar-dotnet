@@ -202,9 +202,9 @@ function GenerateBaseClassIfSecondLanguage()
         $existingVBClassText = Get-Content -Path "${vbRulesFolder}\\${vbClassName}.cs" -Raw
 
         $oldCsClass ="    public sealed class ${csClassName} : SonarDiagnosticAnalyzer"
-        $newCsClass ="    public sealed class ${csClassName} : ${className}Base"
+        $newCsClass ="    public sealed class ${csClassName} : ${className}Base<SyntaxKind>"
         $oldVbClass ="    public sealed class ${vbClassName} : SonarDiagnosticAnalyzer"
-        $newVbClass ="    public sealed class ${vbClassName} : ${className}Base"
+        $newVbClass ="    public sealed class ${vbClassName} : ${className}Base<SyntaxKind>"
         $existingCSClassText = ReplaceTextInString -oldText $oldCsClass -newText $newCsClass -modifiableString $existingCSClassText
         $existingVBClassText = ReplaceTextInString -oldText $oldVbClass -newText $newVbClass -modifiableString $existingVBClassText
 
@@ -221,11 +221,11 @@ function GenerateBaseClassIfSecondLanguage()
         $existingVBClassText = RemoveText -textToRemove $ruleToken -modifiableString $existingVBClassText
 
         $supportedDiagToken = "        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);"
-        $csConstructorToken = "        public ${csClassName}() : base(RspecStrings.ResourceManager) { }"
-        $vbConstructorToken = "        public ${vbClassName}() : base(RspecStrings.ResourceManager) { }"
+        $csLanguageFacadeToken = "        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;"
+        $vbLanguageFacadeToken = "        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;"
 
-        $existingCSClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $csConstructorToken -modifiableString $existingCSClassText
-        $existingVBClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $vbConstructorToken -modifiableString $existingVBClassText
+        $existingCSClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $csLanguageFacadeToken -modifiableString $existingCSClassText
+        $existingVBClassText = ReplaceTextInString -oldText $supportedDiagToken -newText $vbLanguageFacadeToken -modifiableString $existingVBClassText
 
         $filesMap["CommonBaseClassTemplate.cs"] = "${commonRulesFolder}\\${className}Base.cs"
 
