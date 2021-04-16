@@ -95,19 +95,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 ?? argumentList.Where(a => a.Expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression, SyntaxKind.AddExpression)).FirstOrDefault()
                 ?? argumentList.FirstOrDefault();
 
-        // First deal with the cheap case (password is at the end, and can be "Password=" without semicolon), then deal with the more expensive case (search inside the overall tree).
         private static bool HasEmptyPassword(InterpolatedStringExpressionSyntax interpolatedString) =>
-            interpolatedString.Contents.Count > 0 && interpolatedString.Contents.Last() is InterpolatedStringTextSyntax interpolatedStringText
-            && IsVulnerable(interpolatedStringText.TextToken.ValueText)
-                ? !HasSanitizers(interpolatedString.Contents.ToString())
-                : HasEmptyPasswordAndNoSanitizers(interpolatedString);
+            HasEmptyPasswordAndNoSanitizers(interpolatedString);
 
-        // First deal with the cheap case (password is at the end), then deal with the more expensive case.
         private static bool HasEmptyPassword(BinaryExpressionSyntax binaryExpression) =>
-            binaryExpression.IsKind(SyntaxKind.AddExpression) && binaryExpression.Right is LiteralExpressionSyntax literal && literal.IsKind(SyntaxKind.StringLiteralExpression)
-            && IsVulnerable(literal.Token.ValueText)
-                ? !HasSanitizers(binaryExpression.ToString())
-                : HasEmptyPasswordAndNoSanitizers(binaryExpression);
+            HasEmptyPasswordAndNoSanitizers(binaryExpression);
 
         // For both interpolated strings and concatenation chain, it's easier to search in the string representation of the tree, rather than doing string searches for each individual
         // string token inside.
@@ -117,7 +109,12 @@ namespace SonarAnalyzer.Rules.CSharp
             return IsVulnerable(toString) && !HasSanitizers(toString);
         }
 
-        private static bool IsVulnerable(string connectionString) => (connectionString.EndsWith("Password=") || connectionString.Contains("Password=;"));
+        private static bool IsVulnerable(string connectionString) =>
+            connectionString.EndsWith("Password=")
+            || connectionString.Contains("Password=;")
+            // this is an edge case, for a string interpolation or concatenation the toString() will contain the ending "
+            // we prefer to keep it like this for the simplicity of the implementation
+            || connectionString.EndsWith("Password=\"");
 
         private static bool HasSanitizers(string connectionString) => Sanitizers.Any(connectionString.Contains);
     }

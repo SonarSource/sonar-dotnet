@@ -56,6 +56,10 @@
 
             builder.UseNpgsql($"Server={a};Database={a};User Id={a};Password={a}"); // compliant
             builder.UseNpgsql($"Server={a};Database={a};User Id={a};Password=" + a); // compliant
+
+            // This FP is tolerated in order to keep the implementation simple
+            builder.UseSqlServer("Password=\""); // Noncompliant FP
+            builder.UseSqlServer("Password=\"mypassword\""); // compliant, not empty
         }
 
         private const string USED_CONNECT_STRING = "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password="; // FN
