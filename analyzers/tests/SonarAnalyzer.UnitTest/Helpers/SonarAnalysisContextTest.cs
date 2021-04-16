@@ -155,8 +155,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_Scanner), ProjectType.Test);
             foreach (var testCase in testCases)
             {
-                var hasMainScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
-                if (hasMainScope)
+                var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
+                if (hasProductScope)
                 {
                     // MAIN-only and MAIN & TEST rules
                     Verifier.VerifyNoIssueReported(testCase.Path,
