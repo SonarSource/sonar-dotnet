@@ -538,6 +538,7 @@ namespace SonarAnalyzer.Helpers
             );
         #endregion Known types
 #pragma warning restore SA1310 // FieldNamesMustNotContainUnderscore
+#pragma warning restore S103 // Lines should not be too long
 
         private readonly bool isSpecialType;
         private readonly SpecialType specialType;
