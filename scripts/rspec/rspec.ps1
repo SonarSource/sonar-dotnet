@@ -35,15 +35,17 @@ Set-StrictMode -version 1.0
 $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
 
-# Update the following variable when a new version of rule-api has to be used.
-$rule_api_version = "1.24.2.1313"
-$rule_api_error = "Download Rule-api from " + `
-    "'https://repox.jfrog.io/repox/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/${rule_api_version}' " +`
+$rule_api_error = "Could not find the Rule API Jar locally. Please download the latest rule-api from " + `
+    "'https://repox.jfrog.io/repox/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/' " +`
     "to a folder and set the %rule_api_path% environment variable with the full path of that folder. For example 'c:\\work\\tools'."
 if (-Not $Env:rule_api_path) {
     throw $rule_api_error
 }
-$rule_api_jar = "${Env:rule_api_path}\\rule-api-${rule_api_version}.jar"
+$rule_api_jars = Get-ChildItem "${Env:rule_api_path}\\rule-api-*.jar" | Sort -desc
+if ($rule_api_jars.Length -eq 0) {
+    throw $rule_api_error
+}
+$rule_api_jar = $rule_api_jars[0].FullName
 if (-Not (Test-Path $rule_api_jar)) {
     throw $rule_api_error
 }
@@ -321,7 +323,7 @@ function ReplaceTokens($text) {
 ### SCRIPT START ###
 
 $sonarpediaFolder = $sonarpediaMap.Get_Item($language)
-Write-Host "Will change directory to $sonarpediaFolder to run rule-api"
+Write-Host "Will change directory to $sonarpediaFolder to run rule-api (from $rule_api_jar )"
 pushd $sonarpediaFolder
 
 if ($ruleKey) {
