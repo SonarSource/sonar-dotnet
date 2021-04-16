@@ -162,7 +162,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             foreach (var diagnostic in new RuleFinder().AllAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
-                diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.UtilityTag).Should().BeFalse();
+                diagnostic.CustomTags.Should().NotContain(DiagnosticDescriptorBuilder.UtilityTag);
             }
         }
 
@@ -171,7 +171,7 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             foreach (var diagnostic in new RuleFinder().UtilityAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
-                diagnostic.CustomTags.Contains(DiagnosticDescriptorBuilder.UtilityTag).Should().BeTrue();
+                diagnostic.CustomTags.Should().Contain(DiagnosticDescriptorBuilder.UtilityTag);
             }
         }
 
@@ -230,11 +230,11 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 if (IsSecurityHotspot(diagnostic))
                 {
-                    diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.NotConfigurable).Should().BeTrue(diagnostic.Id + " is a Security Hotspot and should not be configurable");
+                    diagnostic.CustomTags.Should().Contain(WellKnownDiagnosticTags.NotConfigurable, diagnostic.Id + " is a Security Hotspot and should not be configurable");
                 }
                 else
                 {
-                    diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.NotConfigurable).Should().BeFalse(diagnostic.Id + " is not a Security Hotspot and should be configurable");
+                    diagnostic.CustomTags.Should().NotContain(WellKnownDiagnosticTags.NotConfigurable, diagnostic.Id + " is not a Security Hotspot and should be configurable");
                 }
             }
         }
