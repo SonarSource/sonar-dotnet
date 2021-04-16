@@ -306,4 +306,21 @@ namespace Tests.Diagnostics
 
         public virtual object AsyncDelegate { get; }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/4255
+    class ReproEndinvokeDelegate
+    {
+        public void BeginInvokeWithEndinvokeDelegate()
+        {
+            Action a = () => { };
+            a.BeginInvoke(a.EndInvoke, null); // Noncompliant FP
+        }
+
+        public void AsyncCallbackLocalVariable()
+        {
+            Action a = () => { };
+            AsyncCallback callback = a.EndInvoke;
+            a.BeginInvoke(callback, null); // Noncompliant FP
+        }
+    }
 }

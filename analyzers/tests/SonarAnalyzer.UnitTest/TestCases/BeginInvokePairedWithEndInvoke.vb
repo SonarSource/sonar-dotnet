@@ -311,3 +311,12 @@ Friend Class AsyncResult
     Public ReadOnly Property CompletedSynchronously As Boolean Implements IAsyncResult.CompletedSynchronously
 
 End Class
+
+Class ReproEndinvokeDelegate
+
+    Public Sub BeginInvokeWithEndinvokeDelegate()
+        Dim A As Action = Sub() Return
+        A.BeginInvoke(AddressOf A.EndInvoke, Nothing) ' Compliant
+     End Sub
+
+End Class
