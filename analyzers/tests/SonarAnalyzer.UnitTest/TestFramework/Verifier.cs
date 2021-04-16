@@ -168,6 +168,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths,
                                                            UtilityAnalyzerBase diagnosticAnalyzer,
                                                            string protobufPath,
+                                                           string sonarProjectConfigPath,
                                                            Action<IReadOnlyList<TMessage>> verifyProtobuf,
                                                            IEnumerable<ParseOptions> options = null)
             where TMessage : IMessage<TMessage>, new()
@@ -175,7 +176,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths);
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default);
+                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default, sonarProjectConfigPath);
                 verifyProtobuf(ReadProtobuf(protobufPath).ToList());
             }
 

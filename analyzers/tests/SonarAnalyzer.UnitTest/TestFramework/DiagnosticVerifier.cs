@@ -46,8 +46,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileContent, string sonarProjectConfigPath) =>
             Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, SourceText.From(fileContent), sonarProjectConfigPath);
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode);
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode, string sonarProjectConfigPath = null) =>
+            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, sonarProjectConfigPath);
 
         public static void Verify(Compilation compilation, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode, string sonarProjectConfigPath = null) =>
             Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).First().GetText(), sonarProjectConfigPath);

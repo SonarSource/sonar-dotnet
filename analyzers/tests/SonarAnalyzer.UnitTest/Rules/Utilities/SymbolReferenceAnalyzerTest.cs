@@ -24,6 +24,7 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -40,11 +41,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public TestContext TestContext { get; set; } // Set automatically by MsTest
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_Method_PreciseLocation_CS(bool isTestProject) =>
-            Verify("Method.cs", isTestProject, references =>
+        public void Verify_Method_PreciseLocation_CS(ProjectType projectType) =>
+            Verify("Method.cs", projectType, references =>
             {
                 references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 5);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 5
                 var methodDeclaration = references.Single(x => x.Declaration.StartLine == 3);
@@ -54,11 +55,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_Method_PreciseLocation_VB(bool isTestProject) =>
-            Verify("Method.vb", isTestProject, references =>
+        public void Verify_Method_PreciseLocation_VB(ProjectType projectType) =>
+            Verify("Method.vb", projectType, references =>
             {
                 references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(1, 3, 6);   // class 'Sample' on line 1, method 'Method' on line 3, method 'Go' on line 6
                 var methodDeclaration = references.Single(x => x.Declaration.StartLine == 3);
@@ -68,67 +69,67 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_Event_CS(bool isTestProject) =>
-            Verify("Event.cs", isTestProject, 6, 5, 9, 10);
+        public void Verify_Event_CS(ProjectType projectType) =>
+            Verify("Event.cs", projectType, 6, 5, 9, 10);
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_Field_CS(bool isTestProject) =>
-            Verify("Field.cs", isTestProject, 4, 3, 7, 8);
+        public void Verify_Field_CS(ProjectType projectType) =>
+            Verify("Field.cs", projectType, 4, 3, 7, 8);
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_LocalFunction_CS(bool isTestProject) =>
-            Verify("LocalFunction.cs", isTestProject, 4, 7, 5);
+        public void Verify_LocalFunction_CS(ProjectType projectType) =>
+            Verify("LocalFunction.cs", projectType, 4, 7, 5);
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_Method_CS(bool isTestProject) =>
-            Verify("Method.cs", isTestProject, 3, 3, 6);
+        public void Verify_Method_CS(ProjectType projectType) =>
+            Verify("Method.cs", projectType, 3, 3, 6);
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_NamedType_CS(bool isTestProject) =>
-            Verify("NamedType.cs", isTestProject, 4, 3, 7, 7); // 'var' and type name on the same line
+        public void Verify_NamedType_CS(ProjectType projectType) =>
+            Verify("NamedType.cs", projectType, 4, 3, 7, 7); // 'var' and type name on the same line
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_Parameter_CS(bool isTestProject) =>
-            Verify("Parameter.cs", isTestProject, 4, 4, 6, 7);
+        public void Verify_Parameter_CS(ProjectType projectType) =>
+            Verify("Parameter.cs", projectType, 4, 4, 6, 7);
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_Property_CS(bool isTestProject) =>
-            Verify("Property.cs", isTestProject, 4, 3, 7, 8);
+        public void Verify_Property_CS(ProjectType projectType) =>
+            Verify("Property.cs", projectType, 4, 3, 7, 8);
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_Setter_CS(bool isTestProject) =>
-            Verify("Setter.cs", isTestProject, 4, 6, 8);
+        public void Verify_Setter_CS(ProjectType projectType) =>
+            Verify("Setter.cs", projectType, 4, 6, 8);
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_TypeParameter_CS(bool isTestProject) =>
-            Verify("TypeParameter.cs", isTestProject, 5, 2, 4, 6);
+        public void Verify_TypeParameter_CS(ProjectType projectType) =>
+            Verify("TypeParameter.cs", projectType, 5, 2, 4, 6);
 
         [DataTestMethod]
         [DataRow(true)]
@@ -138,25 +139,26 @@ namespace SonarAnalyzer.UnitTest.Rules
             // This path is unreachable for VB code
             new TestSymbolReferenceAnalyzer_VB(null, isTestProject).TestGetSetKeyword(null).Should().BeNull();
 
-        private void Verify(string fileName, bool isTestProject, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
-            Verify(fileName, isTestProject, references =>
+        private void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
+            Verify(fileName, projectType, references =>
                 {
                     references.Where(x => x.Declaration != null).Should().HaveCount(expectedDeclarationCount);
                     var declarationReferences = references.Single(x => x.Declaration.StartLine == assertedDeclarationLine).Reference;
                     declarationReferences.Select(x => x.StartLine).Should().BeEquivalentTo(assertedDeclarationLineReferences);
                 });
 
-        private void Verify(string fileName, bool isTestProject, Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
+        private void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference)
         {
             var testRoot = Root + TestContext.TestName;
             UtilityAnalyzerBase analyzer = fileName.EndsWith(".cs")
-                ? new TestSymbolReferenceAnalyzer_CS(testRoot, isTestProject)
-                : new TestSymbolReferenceAnalyzer_VB(testRoot, isTestProject);
+                ? new TestSymbolReferenceAnalyzer_CS(testRoot, projectType == ProjectType.Test)
+                : new TestSymbolReferenceAnalyzer_VB(testRoot, projectType == ProjectType.Test);
 
             Verifier.VerifyUtilityAnalyzer<SymbolReferenceInfo>(
                 new[] { Root + fileName },
                 analyzer,
                 @$"{testRoot}\symrefs.pb",
+                TestHelper.CreateSonarProjectConfig(testRoot, projectType),
                 messages =>
                 {
                     messages.Should().HaveCount(1);
