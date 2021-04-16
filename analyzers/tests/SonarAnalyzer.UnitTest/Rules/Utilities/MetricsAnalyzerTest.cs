@@ -21,6 +21,7 @@
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private const string Root = @"TestCases\Utilities\MetricsAnalyzer\";
 
-        [TestMethod]
+        [DataTestMethod]
         [TestCategory("Rule")]
         public void VerifyMetrics()
         {
@@ -41,6 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new[] { Root + "AllMetrics.cs" },
                 new TestMetricsAnalyzer(testRoot, false),
                 @$"{testRoot}\metrics.pb",
+                TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
                 messages =>
                 {
                     messages.Should().HaveCount(1);

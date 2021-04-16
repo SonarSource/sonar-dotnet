@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -37,11 +38,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public TestContext TestContext { get; set; } // Set automatically by MsTest
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_MainTokens(bool isTestProject) =>
-            Verify("Tokens.cs", isTestProject, info =>
+        public void Verify_MainTokens(ProjectType projectType) =>
+            Verify("Tokens.cs", projectType, info =>
             {
                 info.Should().HaveCount(15);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(10);
@@ -51,11 +52,11 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_Identifiers(bool isTestProject) =>
-            Verify("Identifiers.cs", isTestProject, info =>
+        public void Verify_Identifiers(ProjectType projectType) =>
+            Verify("Identifiers.cs", projectType, info =>
             {
                 info.Should().HaveCount(34);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(26);
@@ -64,24 +65,25 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
         [TestCategory("Rule")]
-        public void Verify_Trivia(bool isTestProject) =>
-            Verify("Trivia.cs", isTestProject, info =>
+        public void Verify_Trivia(ProjectType projectType) =>
+            Verify("Trivia.cs", projectType, info =>
             {
                 info.Should().HaveCount(5);
                 info.Where(x => x.TokenType == TokenType.Comment).Should().HaveCount(4);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.Keyword);
             });
 
-        private void Verify(string fileName, bool isTestProject, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
+        private void Verify(string fileName, ProjectType projectType, Action<IReadOnlyList<TokenTypeInfo.Types.TokenInfo>> verifyTokenInfo)
         {
             var testRoot = Root + TestContext.TestName;
             Verifier.VerifyUtilityAnalyzer<TokenTypeInfo>(
                 new[] { Root + fileName },
-                new TestTokenTypeAnalyzer(testRoot, isTestProject),
+                new TestTokenTypeAnalyzer(testRoot, projectType == ProjectType.Test),
                 @$"{testRoot}\token-type.pb",
+                TestHelper.CreateSonarProjectConfig(testRoot, projectType),
                 messages =>
                 {
                     messages.Should().HaveCount(1);

@@ -41,6 +41,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     {
         private const string MainTag = "MainSourceScope";
         private const string TestTag = "TestSourceScope";
+        private const string UtilityTag = "Utility";
 
         private class TestSetup
         {
@@ -349,9 +350,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [DataTestMethod]
         [DataRow(true, ProjectType.Product, MainTag)]
+        [DataRow(true, ProjectType.Product, MainTag, UtilityTag)]
         [DataRow(true, ProjectType.Product, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Product, MainTag, TestTag, UtilityTag)]
         [DataRow(true, ProjectType.Test, TestTag)]
+        [DataRow(true, ProjectType.Test, TestTag, UtilityTag)]
         [DataRow(true, ProjectType.Test, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Test, MainTag, TestTag, UtilityTag)]
         [DataRow(false, ProjectType.Product, TestTag)]
         [DataRow(false, ProjectType.Product, TestTag, TestTag)]
         [DataRow(false, ProjectType.Test, MainTag)]
@@ -365,12 +370,18 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [DataTestMethod]
         [DataRow(true, ProjectType.Product, MainTag)]
+        [DataRow(true, ProjectType.Product, MainTag, UtilityTag)]
         [DataRow(true, ProjectType.Product, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Product, MainTag, TestTag, UtilityTag)]
         [DataRow(true, ProjectType.Test, TestTag)]
-        [DataRow(false, ProjectType.Test, MainTag, TestTag)]    // Rules with scope Test&Main do not run on test code under scanner context for now.
+        [DataRow(true, ProjectType.Test, TestTag, UtilityTag)]
+        [DataRow(true, ProjectType.Test, MainTag, TestTag, UtilityTag)]     // Utility rules with scope Test&Main do run on test code under scanner context.
+        [DataRow(false, ProjectType.Test, MainTag, TestTag)]                // Rules with scope Test&Main do not run on test code under scanner context for now.
         [DataRow(false, ProjectType.Product, TestTag)]
+        [DataRow(false, ProjectType.Product, TestTag, UtilityTag)]
         [DataRow(false, ProjectType.Product, TestTag, TestTag)]
         [DataRow(false, ProjectType.Test, MainTag)]
+        [DataRow(false, ProjectType.Test, MainTag, UtilityTag)]
         [DataRow(false, ProjectType.Test, MainTag, MainTag)]
         public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
         {
@@ -380,6 +391,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [DataTestMethod]
+        [DataRow(true, ProjectType.Product, MainTag, MainTag)]
         [DataRow(true, ProjectType.Product, MainTag, MainTag)]
         [DataRow(true, ProjectType.Product, MainTag, TestTag)]
         [DataRow(true, ProjectType.Test, TestTag, TestTag)]

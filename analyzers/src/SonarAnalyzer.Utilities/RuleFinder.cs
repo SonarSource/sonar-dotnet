@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.Utilities
 {
@@ -38,14 +39,19 @@ namespace SonarAnalyzer.Utilities
                 Assembly.Load(typeof(Rules.Common.DoNotInstantiateSharedClassesBase).Assembly.GetName())
             };
 
-        internal IEnumerable<Type> AllAnalyzerTypes { get; }
+        internal IEnumerable<Type> AllAnalyzerTypes { get; } // Rule-only, without utility analyzers
+        internal IEnumerable<Type> UtilityAnalyzerTypes { get; }
 
-        public RuleFinder() =>
-            AllAnalyzerTypes = PackagedRuleAssemblies
+        public RuleFinder()
+        {
+            var all = PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)) || typeof(IRuleFactory).IsAssignableFrom(t))
-                .Where(t => t.GetCustomAttributes<RuleAttribute>().Any())
-                .ToList();
+                .ToArray();
+
+            AllAnalyzerTypes = all.Where(x => x.GetCustomAttributes<RuleAttribute>().Any()).ToList();
+            UtilityAnalyzerTypes = all.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToList();
+        }
 
         public IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language) =>
             AllAnalyzerTypes.Where(type => GetTargetLanguages(type).IsAlso(language));
