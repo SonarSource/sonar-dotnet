@@ -48,6 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static IDictionary<string, ImmutableArray<KnownType>> NamesWithTypes = new Dictionary<string, ImmutableArray<KnownType>>()
         {
             { "UseSqlServer", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_SqlServerDbContextOptionsExtensions) },
+            // the namespaces are different in .NET Core 3.1 and .NET 5
             { "UseNpgsql", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions, KnownType.Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsBuilderExtensions) },
             { "UseMySQL", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions)  },
             { "UseSqlite", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_SqliteDbContextOptionsBuilderExtensions)  },
@@ -82,8 +83,8 @@ namespace SonarAnalyzer.Rules.CSharp
             ConnectionStringArgument(argumentList)?.Expression switch
             {
                 LiteralExpressionSyntax literal when literal.IsKind(SyntaxKind.StringLiteralExpression) => IsVulnerable(literal.Token.ValueText) && !HasSanitizers(literal.Token.ValueText),
-                InterpolatedStringExpressionSyntax interpolatedString => HasEmptyPassword(interpolatedString),
-                BinaryExpressionSyntax binaryExpression when binaryExpression.IsKind(SyntaxKind.AddExpression) => HasEmptyPassword(binaryExpression),
+                InterpolatedStringExpressionSyntax interpolatedString => HasEmptyPasswordAndNoSanitizers(interpolatedString),
+                BinaryExpressionSyntax binaryExpression when binaryExpression.IsKind(SyntaxKind.AddExpression) => HasEmptyPasswordAndNoSanitizers(binaryExpression),
                 _ => false
             };
 
@@ -94,12 +95,6 @@ namespace SonarAnalyzer.Rules.CSharp
             argumentList.Where(a => a.NameColon?.Name.Identifier.ValueText == "connectionString").FirstOrDefault()
                 ?? argumentList.Where(a => a.Expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression, SyntaxKind.AddExpression)).FirstOrDefault()
                 ?? argumentList.FirstOrDefault();
-
-        private static bool HasEmptyPassword(InterpolatedStringExpressionSyntax interpolatedString) =>
-            HasEmptyPasswordAndNoSanitizers(interpolatedString);
-
-        private static bool HasEmptyPassword(BinaryExpressionSyntax binaryExpression) =>
-            HasEmptyPasswordAndNoSanitizers(binaryExpression);
 
         // For both interpolated strings and concatenation chain, it's easier to search in the string representation of the tree, rather than doing string searches for each individual
         // string token inside.
