@@ -14,6 +14,34 @@
             void NestedDataTest() { } // Compliant - FN, there is no assert
         }
     }
+
+    [TestClass]
+    public partial class WithPartialMethods
+    {
+        [TestMethod]
+        public partial void ThisHasNoAssert();
+
+        [TestMethod]
+        public partial void ThisInvokesSomethingWithAssert();
+    }
+
+    public partial class WithPartialMethods
+    {
+        public partial void ThisHasNoAssert()   // Noncompliant
+        {
+            DoNothing();
+        }
+
+        private void DoNothing() { }
+
+        public partial void ThisInvokesSomethingWithAssert()
+        {
+            DoTheWork();
+        }
+
+        private void DoTheWork() =>
+            Assert.AreEqual(true, true);
+    }
 }
 
 namespace NUnitTests
