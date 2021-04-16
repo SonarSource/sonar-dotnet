@@ -1,9 +1,0 @@
-{
-"issues":  [
-{
-"id":  "S3990",
-"message":  "Provide a 'CLSCompliant' attribute for assembly 'Nancy.Hosting.Aspnet.Tests'.",
-"location":  null
-}
-]
-}
