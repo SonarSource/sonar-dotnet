@@ -18,17 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
-using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
-using SonarAnalyzer.Extensions;
-using System.Linq;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -80,61 +78,47 @@ namespace SonarAnalyzer.Rules.CSharp
             semanticModel.GetSymbolInfo(memberAccess).Symbol is { } symbol
             && symbol.ContainingType.DerivesFromAny(knownTypes);
 
-        private static bool HasEmptyPasswordArgument(SeparatedSyntaxList<ArgumentSyntax> argumentList)
-        {
-            var connectionStringArgument = ConnectionStringArgument(argumentList)?.Expression;
-            if (connectionStringArgument == null)
+        private static bool HasEmptyPasswordArgument(SeparatedSyntaxList<ArgumentSyntax> argumentList) =>
+            ConnectionStringArgument(argumentList)?.Expression switch
             {
-                return false;
-            }
+                LiteralExpressionSyntax literal when literal.IsKind(SyntaxKind.StringLiteralExpression) => IsVulnerable(literal.Token.ValueText) && !HasSanitizers(literal.Token.ValueText),
+                InterpolatedStringExpressionSyntax interpolatedString => HasEmptyPassword(interpolatedString),
+                BinaryExpressionSyntax binaryExpression when binaryExpression.IsKind(SyntaxKind.AddExpression) => HasEmptyPassword(binaryExpression),
+                _ => false
+            };
 
-            if (connectionStringArgument is LiteralExpressionSyntax literal && literal.IsKind(SyntaxKind.StringLiteralExpression))
-            {
-                return IsVulnerable(literal.Token.ValueText) && !HasSanitizers(literal.Token.ValueText);
-            }
-            else if (connectionStringArgument is InterpolatedStringExpressionSyntax interpolatedString && interpolatedString.Contents.Count > 0)
-            {
-                if (interpolatedString.Contents.Last() is InterpolatedStringTextSyntax interpolatedStringText && IsVulnerable(interpolatedStringText.TextToken.ValueText))
-                {
-                    return !HasSanitizers(interpolatedString.Contents.ToString());
-                }
-                else
-                {
-                    var contents = interpolatedString.Contents.ToString();
-                    return IsVulnerable(contents) && !HasSanitizers(contents);
-                }
-            }
-            else if (connectionStringArgument is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(SyntaxKind.AddExpression))
-            {
-                if (binaryExpression.Right is LiteralExpressionSyntax literal2 && literal2.IsKind(SyntaxKind.StringLiteralExpression) && IsVulnerable(literal2.Token.ValueText))
-                {
-                    return !HasSanitizers(binaryExpression.ToString());
-                }
-                else
-                {
-                    var concatenation = binaryExpression.ToString();
-                    return IsVulnerable(concatenation) && !HasSanitizers(concatenation);
-                }
-            }
-            return false;
+        // First search a named argument, then search literals, then fallback on the first argument (for constant propagation check).
+        // This is an easy way to support explicit extension method invocation.
+        private static ArgumentSyntax ConnectionStringArgument(SeparatedSyntaxList<ArgumentSyntax> argumentList) =>
+            // Where(cond).First() is more efficient than First(cond)
+            argumentList.Where(a => a.NameColon?.Name.Identifier.ValueText == "connectionString").FirstOrDefault()
+                ?? argumentList.Where(a => a.Expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression, SyntaxKind.AddExpression)).FirstOrDefault()
+                ?? argumentList.FirstOrDefault();
+
+        // First deal with the cheap case (password is at the end, and can be "Password=" without semicolon), then deal with the more expensive case (search inside the overall tree).
+        private static bool HasEmptyPassword(InterpolatedStringExpressionSyntax interpolatedString) =>
+            interpolatedString.Contents.Count > 0 && interpolatedString.Contents.Last() is InterpolatedStringTextSyntax interpolatedStringText
+            && IsVulnerable(interpolatedStringText.TextToken.ValueText)
+                ? !HasSanitizers(interpolatedString.Contents.ToString())
+                : HasEmptyPasswordAndNoSanitizers(interpolatedString);
+
+        // First deal with the cheap case (password is at the end), then deal with the more expensive case.
+        private static bool HasEmptyPassword(BinaryExpressionSyntax binaryExpression) =>
+            binaryExpression.IsKind(SyntaxKind.AddExpression) && binaryExpression.Right is LiteralExpressionSyntax literal && literal.IsKind(SyntaxKind.StringLiteralExpression)
+            && IsVulnerable(literal.Token.ValueText)
+                ? !HasSanitizers(binaryExpression.ToString())
+                : HasEmptyPasswordAndNoSanitizers(binaryExpression);
+
+        // For both interpolated strings and concatenation chain, it's easier to search in the string representation of the tree, rather than doing string searches for each individual
+        // string token inside.
+        private static bool HasEmptyPasswordAndNoSanitizers(ExpressionSyntax expression)
+        {
+            var toString = expression.ToString();
+            return IsVulnerable(toString) && !HasSanitizers(toString);
         }
 
         private static bool IsVulnerable(string connectionString) => (connectionString.EndsWith("Password=") || connectionString.Contains("Password=;"));
 
         private static bool HasSanitizers(string connectionString) => Sanitizers.Any(connectionString.Contains);
-
-        private static ArgumentSyntax ConnectionStringArgument(SeparatedSyntaxList<ArgumentSyntax> argumentList)
-        {
-            ArgumentSyntax result = null;
-            if (argumentList.Count > 0)
-            {
-                // Where(cond).First() is more efficient than First(cond)
-                var namedArgument = argumentList.Where(a => a.NameColon?.Name.Identifier.ValueText == "connectionString").FirstOrDefault();
-                result = namedArgument
-                    ?? argumentList.Where(a => a.Expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression, SyntaxKind.AddExpression)).FirstOrDefault()
-                    ?? argumentList.First();
-            }
-            return result;
-        }
     }
 }
