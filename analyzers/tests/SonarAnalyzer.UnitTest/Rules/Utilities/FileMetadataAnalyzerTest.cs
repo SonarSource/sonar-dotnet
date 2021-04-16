@@ -123,8 +123,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
+        [DataRow(true)]
+        [DataRow(false)]
         [TestCategory("Rule")]
         public void CreateMessage_NoEncoding_SetsEmptyString(bool isTestProject)
         {
