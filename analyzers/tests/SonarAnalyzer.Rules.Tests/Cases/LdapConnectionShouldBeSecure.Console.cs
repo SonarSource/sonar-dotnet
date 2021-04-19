@@ -1,4 +1,5 @@
-﻿using System;
+﻿// version: FromCSharp9
+using System;
 using System.DirectoryServices;
 
 new DirectoryEntry("path", "user", "pass", AuthenticationTypes.Secure); // Compliant

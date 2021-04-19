@@ -1,5 +1,6 @@
-﻿// version: FromCSharp7.1
-using System;using System.DirectoryServices;
+﻿// version: FromCSharp8
+using System;
+using System.DirectoryServices;
 
 namespace Tests.Diagnostics
 {

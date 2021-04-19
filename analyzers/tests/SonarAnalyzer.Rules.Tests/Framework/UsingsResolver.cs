@@ -30,6 +30,7 @@ namespace SonarAnalyzer.Rules.Tests.Framework
             "System.Xml" => Create(typeof(System.Xml.XmlDocument)),
 
             "System.Data.SqlClient" => Nuget.Create("System.Data.SqlClient", "4.5.0"),
+            "System.DirectoryServices" => Nuget.Create("System.DirectoryServices", "4.7.0"),
             "Xunit" =>
                 Nuget.Create("xunit.assert", LatestVersion).Concat(
                 Nuget.Create("xunit.extensibility.core", LatestVersion)),
