@@ -35,15 +35,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void UsingRegularExpressions_CS() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.cs",
-                new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.RegularExpressions);
+                                    new CS.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
+                                    MetadataReferenceFacade.RegularExpressions);
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void UsingRegularExpressions_VB() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\UsingRegularExpressions.vb",
-                new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.RegularExpressions);
+                                    new VB.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled),
+                                    MetadataReferenceFacade.RegularExpressions);
     }
 }

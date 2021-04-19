@@ -26,10 +26,13 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules.Hotspots;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.Rules;
 using SonarAnalyzer.UnitTest.TestFramework;
 using SonarAnalyzer.Utilities;
+using UsingCookies = SonarAnalyzer.UnitTest.Rules.UsingCookies;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -46,9 +49,16 @@ namespace SonarAnalyzer.UnitTest.Common
 
         private static void VerifyNoIssueReported(AnalyzerLanguage language)
         {
-            foreach (var analyzer in GetHotspotAnalyzers(language).Where(IsTestValid))
+            foreach (var analyzer in GetHotspotAnalyzers(language))
             {
-                Verifier.VerifyNoIssueReported(@$"TestCases\Hotspots\{GetTestCaseFileName(analyzer)}.{language.FileExtension}", analyzer, GetAdditionalReferences());
+                var analyzerName = analyzer.GetType().Name;
+
+                if (IsTestValid(analyzerName))
+                {
+                    Verifier.VerifyNoIssueReported(@$"TestCases\Hotspots\{GetTestCaseFileName(analyzerName)}.{language.FileExtension}",
+                                                   analyzer,
+                                                   GetAdditionalReferences(analyzerName));
+                }
             }
         }
 
@@ -61,11 +71,8 @@ namespace SonarAnalyzer.UnitTest.Common
         private static bool IsSecurityHotspot(DiagnosticAnalyzer analyzer) =>
             analyzer.SupportedDiagnostics.Any(TestHelper.IsSecurityHotspot);
 
-        private static string GetTestCaseFileName(DiagnosticAnalyzer analyzer)
-        {
-            var typeName = analyzer.GetType().Name;
-
-            return typeName switch
+        private static string GetTestCaseFileName(string analyzerName) =>
+            analyzerName switch
             {
                 "ConfiguringLoggers" => "ConfiguringLoggers_Log4Net",
                 "CookieShouldBeHttpOnly" => "CookieShouldBeHttpOnly_Nancy",
@@ -81,42 +88,45 @@ namespace SonarAnalyzer.UnitTest.Common
                 "UsingCookies" => "UsingCookies_NetCore",
                 "LooseFilePermissions" => "LooseFilePermissions.Unix",
 #endif
-                _ => typeName
+                _ => analyzerName
             };
-        }
 
-        private static bool IsTestValid(DiagnosticAnalyzer analyzer)
+        private static bool IsTestValid(string analyzerName)
         {
 #if NETFRAMEWORK
-            return analyzer.GetType().Name != nameof(SonarAnalyzer.Rules.Hotspots.DisablingCsrfProtection);
+            return analyzerName != nameof(DisablingCsrfProtection);
 #else
             // IdentityModel is not available on .Net Core
-            return analyzer.GetType().Name != "ControllingPermissions";
+            return analyzerName != nameof(ControllingPermissions);
 #endif
         }
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2
-#if NETFRAMEWORK
-                                  .Concat(ControllingPermissionsTest.AdditionalReferences)
-                                  .Concat(ExecutingSqlQueriesTest.GetReferencesNet46(Constants.NuGetLatestVersion))
-                                  .Concat(UsingCookies.GetAdditionalReferencesForNet46())
-                                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)) // Needed by RequestsWithExcessiveLength
-                                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion)) // Needed by RequestsWithExcessiveLength
+        private static IEnumerable<MetadataReference> GetAdditionalReferences(string analyzerName) =>
+            analyzerName switch
+            {
+                nameof(CookieShouldBeHttpOnly) => CookieShouldBeHttpOnlyTest.AdditionalReferences,
+                nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
+                nameof(ConfiguringLoggers) => ConfiguringLoggersTest.Log4NetReferences,
+                nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2,
+                nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion),
+                nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
+                nameof(DoNotUseRandom) => MetadataReferenceFacade.SystemSecurityCryptography,
+                nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
+                nameof(RequestsWithExcessiveLength) => RequestsWithExcessiveLengthTest.GetAdditionalReferences(),
+                nameof(UsingRegularExpressions) => MetadataReferenceFacade.RegularExpressions,
+#if NET
+                nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
+                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNetCore(Constants.DotNetCore220Version),
+                nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
+                nameof(UsingCookies) => UsingCookies.GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version),
 #else
-                                  .Concat(ExecutingSqlQueriesTest.GetReferencesNetCore(Constants.DotNetCore220Version))
-                                  .Concat(UsingCookies.GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
-                                  .Concat(NuGetMetadataReference.MonoPosixNetStandard()) // Needed by LooseFilePermissions
-                                  .Concat(DisablingCsrfProtectionTest.AdditionalReferences())
+                nameof(ControllingPermissions) => ControllingPermissionsTest.AdditionalReferences,
+                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(Constants.NuGetLatestVersion),
+                nameof(UsingCookies) => UsingCookies.GetAdditionalReferencesForNet46(),
 #endif
-                                  .Concat(ConfiguringLoggersTest.Log4NetReferences)
-                                  .Concat(DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2)
-                                  .Concat(ExpandingArchivesTest.AdditionalReferences)
-                                  .Concat(DoNotHardcodeCredentialsTest.AdditionalReferences)
-                                  .Concat(MetadataReferenceFacade.SystemDiagnosticsProcess)
-                                  .Concat(MetadataReferenceFacade.RegularExpressions) // Needed by UsingRegularExpressions
-                                  .Concat(MetadataReferenceFacade.SystemSecurityCryptography) // Needed by DoNotUseRandom
-                                  .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion)) // Needed by DisablingRequestValidation
-                                  .Concat(NuGetMetadataReference.Nancy()); // Needed by CookieShouldBeHttpOnly, CookiesShouldBeSecure
+                _ => MetadataReferenceFacade.SystemNetHttp
+                                            .Concat(MetadataReferenceFacade.SystemDiagnosticsProcess)
+                                            .Concat(MetadataReferenceFacade.SystemSecurityCryptography)
+            };
     }
 }

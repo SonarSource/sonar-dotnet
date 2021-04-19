@@ -76,7 +76,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 GetAdditionalReferences());
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion));
+            NetStandardMetadataReference.Netstandard
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion))
+                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion));
     }
 }
