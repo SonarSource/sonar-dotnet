@@ -29,6 +29,7 @@ namespace SonarAnalyzer.Rules.Tests.Framework
             "System.Windows.Forms" => Create("System.Windows.Forms.dll"),
             "System.Xml" => Create(typeof(System.Xml.XmlDocument)),
 
+            "System.ComponentModel.Composition" => Nuget.Create("System.ComponentModel.Composition", "4.7.0"),
             "System.Data.SqlClient" => Nuget.Create("System.Data.SqlClient", "4.5.0"),
             "System.DirectoryServices" => Nuget.Create("System.DirectoryServices", "4.7.0"),
             "Xunit" =>
