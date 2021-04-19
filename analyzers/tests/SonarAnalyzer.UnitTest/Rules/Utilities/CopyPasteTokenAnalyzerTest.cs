@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -99,6 +100,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new[] { Root + fileName },
                 analyzer,
                 @$"{testRoot}\token-cpd.pb",
+                TestHelper.CreateSonarProjectConfig(testRoot, ProjectType.Product),
                 messages =>
                 {
                     messages.Should().HaveCount(1);

@@ -2736,7 +2736,7 @@ namespace Repro_RefParam
                 {
                     if (stop)   // Noncompliant FP - In a multithreaded context it makes sense to check as the value can be changed on another thread.
                     {           // Secondary
-                        break; 
+                        break;
                     }
                 }
             }
@@ -2767,4 +2767,23 @@ namespace Repro_RefParam
             }
         }
     }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/4257
+public class Tuples
+{
+    public void Go()
+    {
+        MemoryStream memoryStream = null;
+        string str = null;
+
+        (memoryStream, str) = GetData();
+
+        if (memoryStream != null) // Noncompliant FP, memoryStream was reassigned as a tuple
+        {                         // Secondary
+            // some code
+        }
+    }
+
+    public (MemoryStream, string) GetData() => (null, null);
 }

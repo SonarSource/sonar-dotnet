@@ -31,9 +31,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly string SonarWayTag = "SonarWay";
         public static readonly string MainSourceScopeTag = "MainSourceScope";
         public static readonly string TestSourceScopeTag = "TestSourceScope";
+        public static readonly string UtilityTag = "Utility";
 
-        public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title,
-            SourceScope sourceScope = SourceScope.All) =>
+        public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
             new DiagnosticDescriptor(
                 diagnosticId,
                 title,
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Helpers
                 string.Empty,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                customTags: BuildUtilityCustomTags(sourceScope));
+                customTags: BuildUtilityCustomTags());
 
         public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
             ResourceManager resourceManager, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
@@ -111,9 +111,9 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private static string[] BuildUtilityCustomTags(SourceScope sourceScope)
+        private static string[] BuildUtilityCustomTags()
         {
-            return sourceScope.ToCustomTags()
+            return SourceScope.All.ToCustomTags().Concat(new[] { UtilityTag })
 #if !DEBUG
                 // Allow to configure the analyzers in debug mode only.
                 // This allows to run test selectively (for example to test only one rule)

@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2699";
         private const string MessageFormat = "Add at least one assertion to this test case.";
         private const string CustomAssertionAttributeName = "AssertionMethodAttribute";
+        private const int MaxInvocationDepth = 2; // Consider BFS instead of DFS if this gets increased
 
         private static readonly Dictionary<string, KnownType> KnownAssertions = new Dictionary<string, KnownType>
         {
@@ -62,8 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -84,30 +84,45 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (methodDeclaration.DescendantNodes()
-                        .OfType<InvocationExpressionSyntax>()
-                        .Select(expression => c.SemanticModel.GetSymbolInfo(expression).Symbol)
-                        .OfType<IMethodSymbol>()
-                        .Any(symbol => IsKnownAssertion(symbol) || IsCustomAssertion(symbol)))
-                    {
-                        return;
-                    }
-
-                    var hasAnyAssertion = methodDeclaration.DescendantNodes()
-                        .OfType<InvocationExpressionSyntax>()
-                        .Any(invocation => IsAssertion(invocation));
-
-                    var hasAnyThrownAssertionExceptions = methodDeclaration.DescendantNodes()
-                        .OfType<ThrowStatementSyntax>()
-                        .Any(throwStatement => throwStatement.Expression is { } expression
-                                               && c.SemanticModel.GetTypeInfo(expression).Type.DerivesFromAny(KnownAsertionExceptionTypes));
-
-                    if (!hasAnyAssertion && !hasAnyThrownAssertionExceptions)
+                    if (!ContainsAssertion(methodDeclaration, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
+
+        private static bool ContainsAssertion(MethodDeclarationSyntax methodDeclaration, SemanticModel previousSemanticModel, ISet<IMethodSymbol> visitedSymbols, int level)
+        {
+            var currentSemanticModel = methodDeclaration.EnsureCorrectSemanticModel(previousSemanticModel);
+            var descendantNodes = methodDeclaration.DescendantNodes();
+            var invocations = descendantNodes.OfType<InvocationExpressionSyntax>().ToArray();
+            if (invocations.Any(x => IsAssertion(x))
+                || descendantNodes.OfType<ThrowStatementSyntax>().Any(x => x.Expression != null && currentSemanticModel.GetTypeInfo(x.Expression).Type.DerivesFromAny(KnownAsertionExceptionTypes)))
+            {
+                return true;
+            }
+
+            var invokedSymbols = invocations.Select(expression => currentSemanticModel.GetSymbolInfo(expression).Symbol).OfType<IMethodSymbol>();
+            if (invokedSymbols.Any(symbol => IsKnownAssertion(symbol) || IsCustomAssertion(symbol)))
+            {
+                return true;
+            }
+            if (level == MaxInvocationDepth)
+            {
+                return false;
+            }
+            foreach (var symbol in invokedSymbols.Where(x => !visitedSymbols.Contains(x)))
+            {
+                visitedSymbols.Add(symbol);
+                foreach (var invokedDeclaration in symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()).OfType<MethodDeclarationSyntax>())
+                {
+                    if (ContainsAssertion(invokedDeclaration, currentSemanticModel, visitedSymbols, level + 1))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private static bool IsTestIgnored(IMethodSymbol method)

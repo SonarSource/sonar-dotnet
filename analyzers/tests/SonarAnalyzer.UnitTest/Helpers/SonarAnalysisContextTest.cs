@@ -41,6 +41,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     {
         private const string MainTag = "MainSourceScope";
         private const string TestTag = "TestSourceScope";
+        private const string UtilityTag = "Utility";
 
         private class TestSetup
         {
@@ -66,7 +67,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             // S3244 - MAIN and TEST
             new TestSetup("AnonymousDelegateEventUnsubscribe.cs", new AnonymousDelegateEventUnsubscribe()),
             // S2699 - TEST only
-            new TestSetup("TestMethodShouldContainAssertion.MsTest.cs", new TestMethodShouldContainAssertion(), TestMethodShouldContainAssertionTest.GetMsTestReferences(Constants.NuGetLatestVersion)),
+            new TestSetup("TestMethodShouldContainAssertion.NUnit.cs", new TestMethodShouldContainAssertion(),
+                TestMethodShouldContainAssertionTest.AdditionalTestReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))),
 
             // SyntaxTreeAnalysisContext
             // S3244 - MAIN and TEST
@@ -123,9 +125,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void WhenProjectType_IsTest_RunRulesWithTestScope()
+        public void WhenProjectType_IsTest_RunRulesWithTestScope_SonarLint()
         {
-            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope), ProjectType.Test);
+            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_SonarLint), ProjectType.Test, false);
             foreach (var testCase in testCases)
             {
                 var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.TestSourceScopeTag));
@@ -139,12 +141,39 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 }
                 else
                 {
-                    // MAIN-only rule
+                    // MAIN-only
                     Verifier.VerifyNoIssueReported(testCase.Path,
                                                    testCase.Analyzer,
                                                    ParseOptionsHelper.FromCSharp8,
                                                    testCase.AdditionalReferences,
                                                    sonarProjectConfig);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void WhenProjectType_IsTest_RunRulesWithTestScope_Scanner()
+        {
+            var sonarProjectConfig = TestHelper.CreateSonarProjectConfig(nameof(WhenProjectType_IsTest_RunRulesWithTestScope_Scanner), ProjectType.Test);
+            foreach (var testCase in testCases)
+            {
+                var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorBuilder.MainSourceScopeTag));
+                if (hasProductScope)
+                {
+                    // MAIN-only and MAIN & TEST rules
+                    Verifier.VerifyNoIssueReported(testCase.Path,
+                                                   testCase.Analyzer,
+                                                   ParseOptionsHelper.FromCSharp8,
+                                                   testCase.AdditionalReferences,
+                                                   sonarProjectConfig);
+                }
+                else
+                {
+                    Verifier.VerifyAnalyzer(testCase.Path,
+                                            testCase.Analyzer,
+                                            ParseOptionsHelper.FromCSharp8,
+                                            testCase.AdditionalReferences,
+                                            sonarProjectConfig);
                 }
             }
         }
@@ -317,36 +346,77 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [TestMethod]
         public void IsAnalysisScopeMatching_NoCompilation_IsMatching() =>
-            SonarAnalysisContext.IsAnalysisScopeMatching(null, true, null).Should().BeTrue();
+            SonarAnalysisContext.IsAnalysisScopeMatching(null, true, false, null).Should().BeTrue();
 
         [DataTestMethod]
         [DataRow(true, ProjectType.Product, MainTag)]
+        [DataRow(true, ProjectType.Product, MainTag, UtilityTag)]
         [DataRow(true, ProjectType.Product, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Product, MainTag, TestTag, UtilityTag)]
         [DataRow(true, ProjectType.Test, TestTag)]
+        [DataRow(true, ProjectType.Test, TestTag, UtilityTag)]
         [DataRow(true, ProjectType.Test, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Test, MainTag, TestTag, UtilityTag)]
         [DataRow(false, ProjectType.Product, TestTag)]
         [DataRow(false, ProjectType.Product, TestTag, TestTag)]
         [DataRow(false, ProjectType.Test, MainTag)]
         [DataRow(false, ProjectType.Test, MainTag, MainTag)]
-        public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes(bool expectedResult, ProjectType projectType, params string[] ruleTags)
+        public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes_SonarLint(bool expectedResult, ProjectType projectType, params string[] ruleTags)
         {
             var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
             var diagnostic = new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: ruleTags);
-            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, new[] { diagnostic }).Should().Be(expectedResult);
+            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, false, new[] { diagnostic }).Should().Be(expectedResult);
         }
 
         [DataTestMethod]
+        [DataRow(true, ProjectType.Product, MainTag)]
+        [DataRow(true, ProjectType.Product, MainTag, UtilityTag)]
+        [DataRow(true, ProjectType.Product, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Product, MainTag, TestTag, UtilityTag)]
+        [DataRow(true, ProjectType.Test, TestTag)]
+        [DataRow(true, ProjectType.Test, TestTag, UtilityTag)]
+        [DataRow(true, ProjectType.Test, MainTag, TestTag, UtilityTag)]     // Utility rules with scope Test&Main do run on test code under scanner context.
+        [DataRow(false, ProjectType.Test, MainTag, TestTag)]                // Rules with scope Test&Main do not run on test code under scanner context for now.
+        [DataRow(false, ProjectType.Product, TestTag)]
+        [DataRow(false, ProjectType.Product, TestTag, UtilityTag)]
+        [DataRow(false, ProjectType.Product, TestTag, TestTag)]
+        [DataRow(false, ProjectType.Test, MainTag)]
+        [DataRow(false, ProjectType.Test, MainTag, UtilityTag)]
+        [DataRow(false, ProjectType.Test, MainTag, MainTag)]
+        public void IsAnalysisScopeMatching_SingleDiagnostis_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
+        {
+            var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
+            var diagnostic = new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: ruleTags);
+            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, true, new[] { diagnostic }).Should().Be(expectedResult);
+        }
+
+        [DataTestMethod]
+        [DataRow(true, ProjectType.Product, MainTag, MainTag)]
         [DataRow(true, ProjectType.Product, MainTag, MainTag)]
         [DataRow(true, ProjectType.Product, MainTag, TestTag)]
         [DataRow(true, ProjectType.Test, TestTag, TestTag)]
         [DataRow(true, ProjectType.Test, TestTag, MainTag)]
         [DataRow(false, ProjectType.Product, TestTag, TestTag)]
         [DataRow(false, ProjectType.Test, MainTag, MainTag)]
-        public void IsAnalysisScopeMatching_MultipleDiagnostics_WithSingleScope(bool expectedResult, ProjectType projectType, params string[] rulesTag)
+        public void IsAnalysisScopeMatching_MultipleDiagnostics_WithSingleScope_SonarLint(bool expectedResult, ProjectType projectType, params string[] rulesTag)
         {
             var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
             var diagnostics = rulesTag.Select(x => new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: new[] { x }));
-            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, diagnostics).Should().Be(expectedResult);
+            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, false, diagnostics).Should().Be(expectedResult);
+        }
+
+        [DataTestMethod]
+        [DataRow(true, ProjectType.Product, MainTag, MainTag)]
+        [DataRow(true, ProjectType.Product, MainTag, TestTag)]
+        [DataRow(true, ProjectType.Test, TestTag, TestTag)]
+        [DataRow(false, ProjectType.Test, TestTag, MainTag)]    // Rules with scope Test&Main do not run on test code under scanner context for now.
+        [DataRow(false, ProjectType.Product, TestTag, TestTag)]
+        [DataRow(false, ProjectType.Test, MainTag, MainTag)]
+        public void IsAnalysisScopeMatching_MultipleDiagnostics_WithSingleScope_Scanner(bool expectedResult, ProjectType projectType, params string[] rulesTag)
+        {
+            var compilation = new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation;
+            var diagnostics = rulesTag.Select(x => new DiagnosticDescriptor("Sxxx", "Title", "Message", "Category", DiagnosticSeverity.Warning, true, customTags: new[] { x }));
+            SonarAnalysisContext.IsAnalysisScopeMatching(compilation, projectType == ProjectType.Test, true, diagnostics).Should().Be(expectedResult);
         }
 
         [TestMethod]

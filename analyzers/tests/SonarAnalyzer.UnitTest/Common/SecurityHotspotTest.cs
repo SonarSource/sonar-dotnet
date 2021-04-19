@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
             return typeName switch
             {
-                "ConfiguringLoggers" => "ConfiguringLoggers_AspNetCore",
+                "ConfiguringLoggers" => "ConfiguringLoggers_Log4Net",
                 "CookieShouldBeHttpOnly" => "CookieShouldBeHttpOnly_Nancy",
                 "CookieShouldBeSecure" => "CookieShouldBeSecure_Nancy",
                 "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials_DefaultValues",
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Common
         private static bool IsTestValid(DiagnosticAnalyzer analyzer)
         {
 #if NETFRAMEWORK
-            return true;
+            return analyzer.GetType().Name != nameof(SonarAnalyzer.Rules.Hotspots.DisablingCsrfProtection);
 #else
             // IdentityModel is not available on .Net Core
             return analyzer.GetType().Name != "ControllingPermissions";
@@ -96,16 +96,20 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            ConfiguringLoggersTest.AspNetCoreLoggingReferences
+            DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2
 #if NETFRAMEWORK
                                   .Concat(ControllingPermissionsTest.AdditionalReferences)
                                   .Concat(ExecutingSqlQueriesTest.GetReferencesNet46(Constants.NuGetLatestVersion))
                                   .Concat(UsingCookies.GetAdditionalReferencesForNet46())
+                                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)) // Needed by RequestsWithExcessiveLength
+                                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion)) // Needed by RequestsWithExcessiveLength
 #else
                                   .Concat(ExecutingSqlQueriesTest.GetReferencesNetCore(Constants.DotNetCore220Version))
                                   .Concat(UsingCookies.GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version))
                                   .Concat(NuGetMetadataReference.MonoPosixNetStandard()) // Needed by LooseFilePermissions
+                                  .Concat(DisablingCsrfProtectionTest.AdditionalReferences())
 #endif
+                                  .Concat(ConfiguringLoggersTest.Log4NetReferences)
                                   .Concat(DeliveringDebugFeaturesInProductionTest.AdditionalReferencesNetCore2)
                                   .Concat(ExpandingArchivesTest.AdditionalReferences)
                                   .Concat(DoNotHardcodeCredentialsTest.AdditionalReferences)
@@ -113,8 +117,6 @@ namespace SonarAnalyzer.UnitTest.Common
                                   .Concat(MetadataReferenceFacade.RegularExpressions) // Needed by UsingRegularExpressions
                                   .Concat(MetadataReferenceFacade.SystemSecurityCryptography) // Needed by DoNotUseRandom
                                   .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion)) // Needed by DisablingRequestValidation
-                                  .Concat(NuGetMetadataReference.Nancy() // Needed by CookieShouldBeHttpOnly, CookiesShouldBeSecure
-                                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)) // Needed by RequestsWithExcessiveLength
-                                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion))); // Needed by RequestsWithExcessiveLength
+                                  .Concat(NuGetMetadataReference.Nancy()); // Needed by CookieShouldBeHttpOnly, CookiesShouldBeSecure
     }
 }

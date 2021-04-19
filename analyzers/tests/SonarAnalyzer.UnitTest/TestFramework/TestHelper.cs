@@ -41,6 +41,7 @@ namespace SonarAnalyzer.UnitTest
         private const string ProjectConfigTemplate = @"
 <SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
     <{0}>{1}</{0}>
+    <OutPath>{2}</OutPath>
 </SonarProjectConfig>";
 
         public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true,
@@ -153,15 +154,16 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static string CreateSonarProjectConfig(string sonarProjectConfigDirectory, string filesToAnalyzePath) =>
-            CreateSonarProjectConfig(sonarProjectConfigDirectory, "FilesToAnalyzePath", filesToAnalyzePath);
+            CreateSonarProjectConfig(sonarProjectConfigDirectory, "FilesToAnalyzePath", filesToAnalyzePath, true);
 
-        public static string CreateSonarProjectConfig(string testMethodName, ProjectType projectType) =>
-            CreateSonarProjectConfig(@"TestCases\" + testMethodName, "ProjectType", projectType.ToString());
+        public static string CreateSonarProjectConfig(string testMethodName, ProjectType projectType, bool isScannerRun = true) =>
+            CreateSonarProjectConfig(@"TestCases\" + testMethodName, "ProjectType", projectType.ToString(), isScannerRun);
 
-        private static string CreateSonarProjectConfig(string directory, string element, string value)
+        private static string CreateSonarProjectConfig(string directoryName, string element, string value, bool isScannerRun)
         {
-            var sonarProjectConfigPath = Path.Combine(Directory.CreateDirectory(directory).FullName, "SonarProjectConfig.xml");
-            var projectConfigContent = string.Format(ProjectConfigTemplate, element, value);
+            var directory = Directory.CreateDirectory(directoryName).FullName;
+            var sonarProjectConfigPath = Path.Combine(directory, "SonarProjectConfig.xml");
+            var projectConfigContent = string.Format(ProjectConfigTemplate, element, value, isScannerRun ? directory : null);
             File.WriteAllText(sonarProjectConfigPath, projectConfigContent);
             return sonarProjectConfigPath;
         }

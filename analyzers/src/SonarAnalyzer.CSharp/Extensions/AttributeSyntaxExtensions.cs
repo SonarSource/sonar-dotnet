@@ -18,26 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
+using System;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Extensions
 {
-    public abstract class $DiagnosticClassName$Base<TSyntaxKind> : SonarDiagnosticAnalyzer
-        where TSyntaxKind : struct
+    internal static class AttributeSyntaxExtensions
     {
-        protected const string DiagnosticId = "$DiagnosticId$";
-        private const string MessageFormat = "";
+        private const int AttributeLength = 9;
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
+            attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
+            && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        protected DiagnosticDescriptor Rule { get; }
-
-        protected $DiagnosticClassName$Base() =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
+            knownType.ShortName == nameof(Attribute) || !knownType.ShortName.EndsWith(nameof(Attribute))
+                ? knownType.ShortName
+                : knownType.ShortName.Remove(knownType.ShortName.Length - AttributeLength);
     }
 }
