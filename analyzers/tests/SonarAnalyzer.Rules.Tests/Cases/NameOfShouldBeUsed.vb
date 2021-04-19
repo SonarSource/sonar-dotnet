@@ -6,17 +6,17 @@ Imports System.Text
 
 Namespace Tests.TestCases
     Class Program
-        Public Sub Method_00
+        Public Sub Method_00()
             Throw New Exception("arg1")
         End Sub
 
         Public Sub Method_01(arg1 As Integer, argument As Integer)
             If arg1 < 0 Then
                 Throw New Exception("arg1") ' Noncompliant {{Replace the string 'arg1' with 'nameof(arg1)'.}}
-'                                   ^^^^^^
+                '                   ^^^^^^
             End If
 
-            If ARG1 < 0 Then
+            If arg1 < 0 Then
                 Throw New ArgumentException("ARG1") ' Noncompliant {{Replace the string 'arg1' with 'nameof(arg1)'.}}
             End If
 
@@ -31,7 +31,7 @@ Namespace Tests.TestCases
             Throw New ArgumentException("argument ") ' Noncompliant
             Throw New ArgumentException("argument,") ' Noncompliant
             Throw New ArgumentException("This is argument.") ' Noncompliant
-'                                       ^^^^^^^^^^^^^^^^^^^
+            '                                       ^^^^^^^^^^^^^^^^^^^
             Throw New ArgumentException("argument!") ' Noncompliant
             Throw New ArgumentException("argument?") ' Noncompliant
             Throw New ArgumentException("argument and arg2") ' Noncompliant
@@ -58,12 +58,12 @@ Namespace Tests.TestCases
         End Sub
 
         Public Sub New(arg1 As String, argument As Integer, anotherArgument As String)
-            If arg1 is Nothing Or arg1.Length = 0 Then
+            If arg1 Is Nothing Or arg1.Length = 0 Then
                 Throw New Exception($"The arg1 with value {arg1} is not valid") ' too short
             End If
 
             Throw New Exception($"argument with value {argument} is not valid") ' Noncompliant
-'                                 ^^^^^^^^^^^^^^^^^^^^
+            '                                 ^^^^^^^^^^^^^^^^^^^^
             Throw New Exception($"arg1") ' Noncompliant
 
             Throw New Exception("anotherArgument argument argument value ""{argument}"" is not valid") ' Noncompliant
