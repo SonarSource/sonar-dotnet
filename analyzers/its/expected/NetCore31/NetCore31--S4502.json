@@ -32,9 +32,9 @@
 "location":  {
 "uri":  "sources\NetCore31\Startup.cs",
 "region":  {
-"startLine":  14,
+"startLine":  22,
 "startColumn":  77,
-"endLine":  14,
+"endLine":  22,
 "endColumn":  114
 }
 }
