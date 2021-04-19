@@ -25,19 +25,36 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
+    [Rule(DiagnosticId)]
     public abstract class NewGuidShouldNotBeUsedBase<TSyntaxKind> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
-        protected const string DiagnosticId = "S4581";
-        private const string MessageFormat = "";
+        internal const string DiagnosticId = "S4581";
+        private const string MessageFormat = "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this Guid instantiation.";
+
+        private readonly DiagnosticDescriptor rule;
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected NewGuidShouldNotBeUsedBase() =>
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                Language.GeneratedCodeRecognizer,
+                c =>
+                {
+                    if (ConstructorArgumentListCount(c.Node) == 0
+                        && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol methodSymbol
+                        && methodSymbol.ContainingType.Is(KnownType.System_Guid))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
+                    }
+                },
+                Language.SyntaxKind.ObjectCreationExpression);
 
-        protected DiagnosticDescriptor Rule { get; }
-
-        protected NewGuidShouldNotBeUsedBase() =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
+        protected abstract int? ConstructorArgumentListCount(SyntaxNode node);
     }
 }

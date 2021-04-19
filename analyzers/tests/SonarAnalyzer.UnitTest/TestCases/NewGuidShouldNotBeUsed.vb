@@ -1,13 +1,20 @@
 ﻿Imports System
 
-Namespace Tests.TestCases
+Public Class NewGuid
 
-    Class Program
+    Public Sub WithoutArguments()
 
-        Public Sub Test()
+        Dim id As Guid = New Guid()  ' Noncompliant {{Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this Guid instantiation.}}
+        '                ^^^^^^^^^^
+    End Sub
 
-        End Sub
+    Public Sub WithArguments()
+        Dim id As Guid = New Guid(New Byte() {}) ' Compliant
+    End Sub
 
-    End Class
+    Public Sub Other()
+        Dim empty As Guid = Guid.Empty ' Compliant
+        Dim rnd As Guid = Guid.NewGuid() ' Compliant
+    End Sub
 
-End Namespace
+End Class
