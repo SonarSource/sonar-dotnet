@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Rules.Tests.Framework;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -28,19 +27,19 @@ using VB = SonarAnalyzer.Rules.VisualBasic;
 namespace Rules
 {
     public class LineLength
+{
+    [Verify(typeof(CS.LineLength), scenario: "maximum 127")]
+    public void Verify_CSharp(CS.LineLength analyzer, ParseOptions[] options)
     {
-        [Verify(typeof(CS.LineLength), scenario: "maximum 127")]
-        public void Verify_CSharp(CS.LineLength analyzer, ParseOptions[] options)
-        {
-            analyzer.Maximum = 127;
-            Verifier.VerifyAnalyzer(@"Cases.Complex\LineLength.cs", analyzer, options);
-        }
-
-        [Verify(typeof(VB.LineLength), scenario: "maximum 127")]
-        public void Verify_VisualBasic(VB.LineLength analyzer, ParseOptions[] options)
-        {
-            analyzer.Maximum = 127;
-            Verifier.VerifyAnalyzer(@"Cases.Complex\LineLength.vb", analyzer, options);
-        }
+        analyzer.Maximum = 127;
+        Verifier.VerifyAnalyzer(@"Cases.Complex\LineLength.cs", analyzer, options);
     }
+
+    [Verify(typeof(VB.LineLength), scenario: "maximum 127")]
+    public void Verify_VisualBasic(VB.LineLength analyzer, ParseOptions[] options)
+    {
+        analyzer.Maximum = 127;
+        Verifier.VerifyAnalyzer(@"Cases.Complex\LineLength.vb", analyzer, options);
+    }
+}
 }
