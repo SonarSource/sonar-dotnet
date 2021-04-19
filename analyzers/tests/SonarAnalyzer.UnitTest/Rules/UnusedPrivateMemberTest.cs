@@ -202,7 +202,7 @@ namespace EntityFrameworkMigrations
 #if NETFRAMEWORK
                                     NuGetMetadataReference.NETStandardV2_1_0.Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version)));
 #else
-                                    NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version));
+                                    new[] {CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions});
 #endif
 
 #if NET

@@ -27,6 +27,12 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
 {
     internal static class CoreMetadataReference
     {
+        internal static MetadataReference MicrosoftAspNetCoreMvc { get; } = CreateReference(typeof(Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions).Assembly.Location);
+        internal static MetadataReference MicrosoftAspNetCoreMvcAbstractions { get; } = CreateReference(typeof(Microsoft.AspNetCore.Mvc.IActionResult).Assembly.Location);
+        internal static MetadataReference MicrosoftAspNetCoreMvcCore { get; } = CreateReference(typeof(Microsoft.AspNetCore.Mvc.ControllerBase).Assembly.Location);
+        internal static MetadataReference MicrosoftAspNetCoreMvcViewFeatures { get; } = CreateReference(typeof(Microsoft.AspNetCore.Mvc.Controller).Assembly.Location);
+        internal static MetadataReference MicrosoftExtensionsDependencyInjectionAbstractions { get; } =
+            CreateReference(typeof(Microsoft.Extensions.DependencyInjection.IServiceCollection).Assembly.Location);
         internal static MetadataReference MsCorLib { get; } = CreateReference("mscorlib.dll");
         internal static MetadataReference MicrosoftVisualBasic { get; } = CreateReference("Microsoft.VisualBasic.dll");
         internal static MetadataReference MicrosoftVisualBasicCore { get; } = CreateReference("Microsoft.VisualBasic.Core.dll");
