@@ -25,16 +25,19 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class $DiagnosticClassName$Base : SonarDiagnosticAnalyzer
+    public abstract class $DiagnosticClassName$Base<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "$DiagnosticId$";
         private const string MessageFormat = "";
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected DiagnosticDescriptor Rule { get; }
 
-        protected $DiagnosticClassName$Base(System.Resources.ResourceManager rspecResources) =>
-            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        protected $DiagnosticClassName$Base() =>
+            Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, Language.RspecResources);
     }
 }
