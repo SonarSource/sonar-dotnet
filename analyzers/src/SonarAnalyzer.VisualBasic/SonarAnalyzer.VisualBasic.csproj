@@ -46,7 +46,7 @@
     <AdditionalFiles Include="..\..\.sonarlint\sonaranalyzer-dotnet\CSharp\SonarLint.xml" Link="Properties\SonarLint.xml" />
   </ItemGroup>
 
-  <Import Project="..\..\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems" Label="Shared" />
+  <Import Project="..\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems" Label="Shared" />
 
   <Import Project="..\..\StyleCopAnalyzers.targets" />
 

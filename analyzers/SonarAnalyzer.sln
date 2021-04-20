@@ -52,13 +52,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBDESucceedsWithIncorrectRe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBDEArguments", "tests\CBDE\CBDEArguments\CBDEArguments.csproj", "{037E7106-8196-4D7C-A532-72730C304CB7}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SonarAnalyzer.Shared", "SonarAnalyzer.Shared\SonarAnalyzer.Shared.shproj", "{892CF3FA-3BE2-42E8-A7E6-76AE72864DEC}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SonarAnalyzer.Shared", "src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.shproj", "{892CF3FA-3BE2-42E8-A7E6-76AE72864DEC}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{7cfa8fa5-8842-4e89-bb90-39d5c0f20ba8}*SharedItemsImports = 5
-		SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{892cf3fa-3be2-42e8-a7e6-76ae72864dec}*SharedItemsImports = 13
-		SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{ca8eec07-8775-42e3-91eb-e51f4db72a48}*SharedItemsImports = 5
+		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{7cfa8fa5-8842-4e89-bb90-39d5c0f20ba8}*SharedItemsImports = 5
+		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{892cf3fa-3be2-42e8-a7e6-76ae72864dec}*SharedItemsImports = 13
+		src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems*{ca8eec07-8775-42e3-91eb-e51f4db72a48}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
