@@ -1,0 +1,59 @@
+<p>When relying on the password authentication mode for the database connection, a secure password should be chosen.</p>
+<p>This rule raises an issue when an empty password is used.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+  optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password="); // Noncompliant
+}
+</pre>
+<p>In <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">appsettings.json</a></p>
+<pre>
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password="
+  }
+}
+</pre>
+<p>In <a href="https://docs.microsoft.com/en-us/troubleshoot/aspnet/create-web-config">Web.config</a></p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;configuration&gt;
+  &lt;connectionStrings&gt;
+    &lt;add name="myConnection" connectionString="Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=" /&gt; &lt;!-- Noncompliant --&gt;
+  &lt;/connectionStrings&gt;
+&lt;/configuration&gt;
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+  optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=True");
+}
+</pre>
+<p>In <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">appsettings.json</a></p>
+<pre>
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=myServerAddress;Database=myDataBase;Integrated Security=True"
+  }
+}
+</pre>
+<p>In <a href="https://docs.microsoft.com/en-us/troubleshoot/aspnet/create-web-config">Web.config</a></p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;configuration&gt;
+  &lt;connectionStrings&gt;
+    &lt;add name="myConnection" connectionString="Server=myServerAddress;Database=myDataBase;Integrated Security=True" /&gt;
+  &lt;/connectionStrings&gt;
+&lt;/configuration&gt;
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://owasp.org/www-project-top-ten/2017/A2_2017-Broken_Authentication.html">OWASP Top 10 2017 Category A2</a> - Broken
+  Authentication </li>
+  <li> <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data
+  Exposure </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/521.html">MITRE, CWE-521</a> - Weak Password Requirements </li>
+</ul>
+

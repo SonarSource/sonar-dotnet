@@ -27,6 +27,7 @@ namespace SonarAnalyzer.Helpers
 {
     internal sealed class KnownType
     {
+#pragma warning disable S103 // Lines should not be too long
 #pragma warning disable SA1310 // FieldNamesMustNotContainUnderscore
         #region Known types
 
@@ -58,10 +59,17 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new KnownType("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new KnownType("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
         internal static readonly KnownType Microsoft_Data_Sqlite_SqliteCommand = new KnownType("Microsoft.Data.Sqlite.SqliteCommand");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_DbContextOptionsBuilder = new KnownType("Microsoft.EntityFrameworkCore.DbContextOptionsBuilder");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new KnownType("Microsoft.EntityFrameworkCore.Migrations.Migration");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions = new KnownType("Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions = new KnownType("Microsoft.EntityFrameworkCore.NpgsqlDbContextOptionsExtensions");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsBuilderExtensions = new KnownType("Microsoft.EntityFrameworkCore.NpgsqlDbContextOptionsBuilderExtensions");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_OracleDbContextOptionsExtensions = new KnownType("Microsoft.EntityFrameworkCore.OracleDbContextOptionsExtensions");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RawSqlString = new KnownType("Microsoft.EntityFrameworkCore.RawSqlString");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalQueryableExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalQueryableExtensions");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_SqliteDbContextOptionsBuilderExtensions = new KnownType("Microsoft.EntityFrameworkCore.SqliteDbContextOptionsBuilderExtensions");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_SqlServerDbContextOptionsExtensions = new KnownType("Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions");
         internal static readonly KnownType Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions = new KnownType("Microsoft.Extensions.DependencyInjection.LoggingServiceCollectionExtensions");
         internal static readonly KnownType Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions = new KnownType("Microsoft.Extensions.Hosting.HostEnvironmentEnvExtensions");
         internal static readonly KnownType Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions = new KnownType("Microsoft.Extensions.Logging.AzureAppServicesLoggerFactoryExtensions");
@@ -530,6 +538,7 @@ namespace SonarAnalyzer.Helpers
             );
         #endregion Known types
 #pragma warning restore SA1310 // FieldNamesMustNotContainUnderscore
+#pragma warning restore S103 // Lines should not be too long
 
         private readonly bool isSpecialType;
         private readonly SpecialType specialType;

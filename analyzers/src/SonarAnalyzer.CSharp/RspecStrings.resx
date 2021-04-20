@@ -3207,6 +3207,39 @@
   <data name="S2114_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S2115_Category" xml:space="preserve">
+    <value>Blocker Vulnerability</value>
+  </data>
+  <data name="S2115_Description" xml:space="preserve">
+    <value>When relying on the password authentication mode for the database connection, a secure password should be chosen.</value>
+  </data>
+  <data name="S2115_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2115_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2115_RemediationCost" xml:space="preserve">
+    <value>45min</value>
+  </data>
+  <data name="S2115_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S2115_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S2115_Status" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="S2115_Tags" xml:space="preserve">
+    <value>cwe,owasp-a2,owasp-a3</value>
+  </data>
+  <data name="S2115_Title" xml:space="preserve">
+    <value>A secure password should be used when connecting to a database</value>
+  </data>
+  <data name="S2115_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S2123_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>

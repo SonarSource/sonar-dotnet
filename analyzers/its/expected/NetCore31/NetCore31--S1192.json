@@ -1,0 +1,55 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=' 5 times.",
+"location":  [
+{
+"uri":  "sources\NetCore31\Controllers\S2115.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  41,
+"endLine":  9,
+"endColumn":  114
+}
+},
+{
+"uri":  "sources\NetCore31\Controllers\S2115.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  38,
+"endLine":  10,
+"endColumn":  111
+}
+},
+{
+"uri":  "sources\NetCore31\Controllers\S2115.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  37,
+"endLine":  11,
+"endColumn":  110
+}
+},
+{
+"uri":  "sources\NetCore31\Controllers\S2115.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  38,
+"endLine":  12,
+"endColumn":  111
+}
+},
+{
+"uri":  "sources\NetCore31\Controllers\S2115.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  38,
+"endLine":  13,
+"endColumn":  111
+}
+}
+]
+}
+]
+}

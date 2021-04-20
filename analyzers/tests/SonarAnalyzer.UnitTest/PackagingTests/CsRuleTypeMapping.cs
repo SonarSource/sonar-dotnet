@@ -2112,7 +2112,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["2112"],
             //["2113"],
             ["2114"] = "BUG",
-            //["2115"],
+            ["2115"] = "VULNERABILITY",
             //["2116"],
             //["2117"],
             //["2118"],

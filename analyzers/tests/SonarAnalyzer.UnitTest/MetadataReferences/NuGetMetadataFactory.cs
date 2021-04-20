@@ -103,6 +103,8 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             var dllsPerDirectory = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
                 .GroupBy(x => new FileInfo(x).Directory.Name)
                 .ToDictionary(x => x.Key.Split('+').First(), x => x.AsEnumerable());
+
+            // if this throws because it doesn't find a DLL (because the lib contains "_._"), maybe you are referencing the wrong DLL (check the dependencies of the DLL you use)
             var directory = allowedDirectories.FirstOrDefault(x => dllsPerDirectory.ContainsKey(x))
                 ?? throw new InvalidOperationException($"No allowed directory with DLL files was found in {packageDirectory}. " +
                                                         "Add new target framework to SortedAllowedDirectories or set targetFramework argument explicitly.");

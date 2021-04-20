@@ -1,0 +1,27 @@
+{
+  "title": "A secure password should be used when connecting to a database",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "45min"
+  },
+  "tags": [
+    "cwe",
+    "owasp-a2",
+    "owasp-a3"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-2115",
+  "sqKey": "S2115",
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      521
+    ],
+    "OWASP": [
+      "A2",
+      "A3"
+    ]
+  }
+}
