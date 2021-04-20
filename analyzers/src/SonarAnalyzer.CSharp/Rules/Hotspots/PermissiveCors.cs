@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.Hotspots
@@ -45,6 +46,19 @@ namespace SonarAnalyzer.Rules.Hotspots
         public PermissiveCors() : base(AnalyzerConfiguration.Hotspot, DiagnosticId, MessageFormat) { }
 
         public PermissiveCors(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            base.Initialize(context);
+
+            context.RegisterCompilationStartAction(compilationContext =>
+            {
+                if (IsEnabled(compilationContext.Options))
+                {
+                    context.RegisterSyntaxNodeActionInNonGenerated(VisitAttribute, SyntaxKind.Attribute);
+                }
+            });
+        }
 
         protected override void Initialize(TrackerInput input)
         {
@@ -68,16 +82,33 @@ namespace SonarAnalyzer.Rules.Hotspots
 
             iTracker.Track(input, iTracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder, "AllowAnyOrigin")));
 
+            iTracker.Track(input,
+                           iTracker.MatchMethod(new MemberDescriptor(KnownType.System_Web_HttpResponse, "AppendHeader"),
+                                                new MemberDescriptor(KnownType.System_Collections_Specialized_NameValueCollection, "Add")),
+                           iTracker.MethodHasParameters(ParameterCount),
+                           c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.SemanticModel)
+                                && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.SemanticModel));
+
             var ocTracker = Language.Tracker.ObjectCreation;
             ocTracker.Track(input,
                             ocTracker.MatchConstructor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder),
                             c => ContainsStar((ObjectCreationExpressionSyntax)c.Node, c.SemanticModel));
         }
 
+        private void VisitAttribute(SyntaxNodeAnalysisContext context)
+        {
+            var attribute = (AttributeSyntax)context.Node;
+            if (attribute.IsKnownType(KnownType.System_Web_Http_Cors_EnableCorsAttribute, context.SemanticModel)
+                && IsStar(attribute.ArgumentList.Arguments[0].Expression, context.SemanticModel))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, attribute.GetLocation()));
+            }
+        }
+
         private static bool IsFirstArgumentAccessControlAllowOrigin(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             invocation.ArgumentList.Arguments.First().Expression switch
             {
-                LiteralExpressionSyntax literal => semanticModel.GetConstantValue(literal) is {HasValue: true, Value: AccessControlAllowOriginHeader},
+                LiteralExpressionSyntax literal => literal.Token.ValueText == AccessControlAllowOriginHeader,
                 MemberAccessExpressionSyntax memberAccess => IsAccessControlAllowOriginProperty(memberAccess, semanticModel),
                 _ => false
             };

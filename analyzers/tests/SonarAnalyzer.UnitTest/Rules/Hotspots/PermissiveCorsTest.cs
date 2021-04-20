@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NET
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -32,6 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PermissiveCorsTest
     {
+#if NET
         [TestMethod]
         [TestCategory("Rule")]
         public void PermissiveCors_CS() =>
@@ -54,6 +55,21 @@ namespace SonarAnalyzer.UnitTest.Rules
                 CoreMetadataReference.MicrosoftExtensionsPrimitives,
                 CoreMetadataReference.MicrosoftNetHttpHeadersHeaderNames,
             };
+#else
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PermissiveCors_AspNet_WebApi() =>
+            Verifier.VerifyAnalyzer(@"TestCases\Hotspots\PermissiveCors.WebApi.cs",
+                                    new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled),
+                                    ParseOptionsHelper.FromCSharp9,
+                                    AdditionalReferences);
+
+        private static IEnumerable<MetadataReference> AdditionalReferences =>
+            NuGetMetadataReference.MicrosoftNetHttpHeaders(Constants.NuGetLatestVersion)
+                                  .Concat(NuGetMetadataReference.MicrosoftAspNetWebApiCors(Constants.NuGetLatestVersion))
+                                  .Concat(NuGetMetadataReference.MicrosoftNetWebApiCore(Constants.NuGetLatestVersion))
+                                  .Concat(FrameworkMetadataReference.SystemWeb)
+                                  .Concat(FrameworkMetadataReference.SystemNetHttp);
+#endif
     }
 }
-#endif

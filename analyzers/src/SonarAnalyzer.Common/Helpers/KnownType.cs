@@ -418,7 +418,9 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Web_HttpApplication = new KnownType("System.Web.HttpApplication");
         internal static readonly KnownType System_Web_HttpCookie = new KnownType("System.Web.HttpCookie");
         internal static readonly KnownType System_Web_HttpContext = new KnownType("System.Web.HttpContext");
+        internal static readonly KnownType System_Web_HttpResponse = new KnownType("System.Web.HttpResponse");
         internal static readonly KnownType System_Web_Http_ApiController = new KnownType("System.Web.Http.ApiController");
+        internal static readonly KnownType System_Web_Http_Cors_EnableCorsAttribute = new KnownType("System.Web.Http.Cors.EnableCorsAttribute");
         internal static readonly KnownType System_Web_Mvc_NonActionAttribute = new KnownType("System.Web.Mvc.NonActionAttribute");
         internal static readonly KnownType System_Web_Mvc_Controller = new KnownType("System.Web.Mvc.Controller");
         internal static readonly KnownType System_Web_Mvc_HttpPostAttribute = new KnownType("System.Web.Mvc.HttpPostAttribute");
