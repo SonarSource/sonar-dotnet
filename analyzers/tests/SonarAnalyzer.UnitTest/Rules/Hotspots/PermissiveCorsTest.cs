@@ -19,13 +19,16 @@
  */
 
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.Hotspots;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
+
+#if NETFRAMEWORK
+using System.Linq;
+#endif
 
 namespace SonarAnalyzer.UnitTest.Rules
 {

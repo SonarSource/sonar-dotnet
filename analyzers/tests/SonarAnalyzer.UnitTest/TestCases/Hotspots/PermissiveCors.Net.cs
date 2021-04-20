@@ -41,11 +41,16 @@ namespace Tests.Diagnostics
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, new StringValues(Star)); // Noncompliant
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, new StringValues("https://trustedwebsite.com"));
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, new StringValues(new [] {"*", "https://trustedwebsite.com"})); // Noncompliant
+
+            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, "*, https://trustedwebsite.com"); // Compliant - FN
+            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}, https://trustedwebsite.com"); // Compliant - FN
         }
     }
 
     public class Setup
     {
+        private const string Star = "*";
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
@@ -53,6 +58,7 @@ namespace Tests.Diagnostics
                 options.AddDefaultPolicy(builder =>
                 {
                     builder.WithOrigins("*"); // Noncompliant
+                    builder.WithOrigins(Star); // Noncompliant
                 });
 
                 options.AddPolicy("EnableAllPolicy", builder =>
