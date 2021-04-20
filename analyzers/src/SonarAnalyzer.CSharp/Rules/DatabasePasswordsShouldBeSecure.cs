@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -32,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DatabasePasswordsShouldBeSecure : SonarDiagnosticAnalyzer
+    public sealed class DatabasePasswordsShouldBeSecure : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>
     {
         private const string DiagnosticId = "S2115";
         private const string MessageFormat = "Use a secure password when connecting to this database.";
@@ -43,49 +42,44 @@ namespace SonarAnalyzer.Rules.CSharp
             "Trusted_Connection"
         };
 
-        private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        private static IDictionary<string, ImmutableArray<KnownType>> NamesWithTypes = new Dictionary<string, ImmutableArray<KnownType>>()
+        private readonly MemberDescriptor[] trackedInvocations =
         {
-            { "UseSqlServer", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_SqlServerDbContextOptionsExtensions) },
-            // the namespaces are different in .NET Core 3.1 and .NET 5
-            { "UseNpgsql", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions, KnownType.Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsBuilderExtensions) },
-            { "UseMySQL", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions) },
-            { "UseSqlite", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_SqliteDbContextOptionsBuilderExtensions) },
-            { "UseOracle", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_OracleDbContextOptionsExtensions) },
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, "UseSqlServer"),
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_SqlServerDbContextOptionsExtensions, "UseSqlServer"),
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, "UseMySQL"),
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions, "UseMySQL"),
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, "UseSqlite"),
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_SqliteDbContextOptionsBuilderExtensions, "UseSqlite"),
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, "UseOracle"),
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_OracleDbContextOptionsExtensions, "UseOracle"),
+            // for UseNpgsql,the namespaces are different in .NET Core 3.1 and .NET 5
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, "UseNpgsql"),
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions, "UseNpgsql"),
+            new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsBuilderExtensions, "UseNpgsql"),
         };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public DatabasePasswordsShouldBeSecure()
+            : base(AnalyzerConfiguration.AlwaysEnabled, DiagnosticId, MessageFormat) { }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (IsConnectionStringInvocation(invocation, c.SemanticModel)
-                        && HasEmptyPasswordArgument(invocation.ArgumentList.Arguments))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        private static bool IsConnectionStringInvocation(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccess
-            && memberAccess.GetName() is { } name
-            && NamesWithTypes.ContainsKey(name)
-            && IsInvocationOn(memberAccess, semanticModel, NamesWithTypes[name]);
+        protected override void Initialize(TrackerInput input)
+        {
+            var inv = Language.Tracker.Invocation;
+            inv.Track(input, inv.MatchMethod(trackedInvocations), HasEmptyPasswordArgument());
+        }
 
-        private static bool IsInvocationOn(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel, ImmutableArray<KnownType> knownTypes) =>
-            semanticModel.GetSymbolInfo(memberAccess).Symbol is { } symbol
-            && symbol.ContainingType.DerivesFromAny(knownTypes);
-
-        private static bool HasEmptyPasswordArgument(SeparatedSyntaxList<ArgumentSyntax> argumentList) =>
-            ConnectionStringArgument(argumentList)?.Expression switch
+        private static TrackerBase<SyntaxKind, InvocationContext>.Condition HasEmptyPasswordArgument() =>
+            context =>
             {
-                LiteralExpressionSyntax literal => IsVulnerable(literal.Token.ValueText) && !HasSanitizers(literal.Token.ValueText),
-                InterpolatedStringExpressionSyntax interpolatedString => HasEmptyPasswordAndNoSanitizers(interpolatedString),
-                BinaryExpressionSyntax binaryExpression when binaryExpression.IsKind(SyntaxKind.AddExpression) => HasEmptyPasswordAndNoSanitizers(binaryExpression),
-                _ => false
+                var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList.Arguments;
+                return ConnectionStringArgument(argumentList)?.Expression switch
+                {
+                    LiteralExpressionSyntax literal => IsVulnerable(literal.Token.ValueText) && !HasSanitizers(literal.Token.ValueText),
+                    InterpolatedStringExpressionSyntax interpolatedString => HasEmptyPasswordAndNoSanitizers(interpolatedString),
+                    BinaryExpressionSyntax binaryExpression when binaryExpression.IsKind(SyntaxKind.AddExpression) => HasEmptyPasswordAndNoSanitizers(binaryExpression),
+                    _ => false
+                };
             };
 
         // First search a named argument, then search literals, then fallback on the first argument (for constant propagation check).
