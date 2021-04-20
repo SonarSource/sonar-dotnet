@@ -50,9 +50,9 @@ namespace SonarAnalyzer.Rules.CSharp
             { "UseSqlServer", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_SqlServerDbContextOptionsExtensions) },
             // the namespaces are different in .NET Core 3.1 and .NET 5
             { "UseNpgsql", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions, KnownType.Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsBuilderExtensions) },
-            { "UseMySQL", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions)  },
-            { "UseSqlite", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_SqliteDbContextOptionsBuilderExtensions)  },
-            { "UseOracle", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_OracleDbContextOptionsExtensions)  },
+            { "UseMySQL", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions) },
+            { "UseSqlite", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_SqliteDbContextOptionsBuilderExtensions) },
+            { "UseOracle", ImmutableArray.Create(KnownType.Microsoft_EntityFrameworkCore_DbContextOptionsBuilder, KnownType.Microsoft_EntityFrameworkCore_OracleDbContextOptionsExtensions) },
         };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool HasEmptyPasswordArgument(SeparatedSyntaxList<ArgumentSyntax> argumentList) =>
             ConnectionStringArgument(argumentList)?.Expression switch
             {
-                LiteralExpressionSyntax literal when literal.IsKind(SyntaxKind.StringLiteralExpression) => IsVulnerable(literal.Token.ValueText) && !HasSanitizers(literal.Token.ValueText),
+                LiteralExpressionSyntax literal => IsVulnerable(literal.Token.ValueText) && !HasSanitizers(literal.Token.ValueText),
                 InterpolatedStringExpressionSyntax interpolatedString => HasEmptyPasswordAndNoSanitizers(interpolatedString),
                 BinaryExpressionSyntax binaryExpression when binaryExpression.IsKind(SyntaxKind.AddExpression) => HasEmptyPasswordAndNoSanitizers(binaryExpression),
                 _ => false

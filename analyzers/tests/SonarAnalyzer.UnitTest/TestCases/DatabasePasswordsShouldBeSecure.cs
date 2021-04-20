@@ -26,6 +26,7 @@
             getBuilder().UseSqlServer("Password="); // Noncompliant
 
             optionsBuilder.UseSqlite("Password=Server=myServerAddress"); // Compliant, inside we only look at 'Password=;'
+            builder.UseMySQL("Password=password"); // compliant, not empty
         }
 
         protected void Method(DbContextOptionsBuilder<NoncompliantDbContext> genericBuilder)

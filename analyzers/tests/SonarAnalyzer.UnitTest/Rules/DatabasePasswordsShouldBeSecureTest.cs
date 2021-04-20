@@ -20,6 +20,7 @@
 
 #if NET
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -37,15 +38,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("5.0.2", "5.21.1")]
         [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS(string dotnetVersion, string oracleVersion) =>
-            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs", new CS.DatabasePasswordsShouldBeSecure(), ParseOptionsHelper.FromCSharp8,
-                Enumerable.Empty<MetadataReference>()
-                .Concat(MetadataReferenceFacade.SystemData)
-                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(dotnetVersion))
-                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqliteCore(dotnetVersion))
-                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(dotnetVersion))
-                .Concat(NuGetMetadataReference.OracleEntityFrameworkCore(oracleVersion))
-                .Concat(NuGetMetadataReference.MySqlDataEntityFrameworkCore())
-                .Concat(NuGetMetadataReference.NpgsqlEntityFrameworkCorePostgreSQL(dotnetVersion)));
+            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.cs",
+                                    new CS.DatabasePasswordsShouldBeSecure(),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    GetReferences(dotnetVersion, oracleVersion));
+
+        private static IEnumerable<MetadataReference> GetReferences(string dotnetVersion, string oracleVersion) =>
+            Enumerable.Empty<MetadataReference>()
+                      .Concat(MetadataReferenceFacade.SystemData)
+                      .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(dotnetVersion))
+                      .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqliteCore(dotnetVersion))
+                      .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(dotnetVersion))
+                      .Concat(NuGetMetadataReference.OracleEntityFrameworkCore(oracleVersion))
+                      .Concat(NuGetMetadataReference.MySqlDataEntityFrameworkCore())
+                      .Concat(NuGetMetadataReference.NpgsqlEntityFrameworkCorePostgreSQL(dotnetVersion));
     }
 }
 
