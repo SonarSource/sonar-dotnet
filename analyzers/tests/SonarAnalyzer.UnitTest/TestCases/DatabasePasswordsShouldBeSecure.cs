@@ -1,5 +1,6 @@
 ﻿namespace TestFrameworkExtensions
 {
+    using System.Data.Common;
     using Microsoft.EntityFrameworkCore;
 
     public class NoncompliantDbContext : DbContext
@@ -79,7 +80,7 @@
             static string BuildConnection() => "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=";
         }
 
-        public void Compliant(DbContextOptionsBuilder optionsBuilder, string password)
+        public void Compliant(DbContextOptionsBuilder optionsBuilder, string password, DbConnection dbConnection)
         {
             // https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/connection-string-syntax#windows-authentication
             optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=SSPI");
@@ -96,6 +97,8 @@
             optionsBuilder.UseMySQL("Server=myServerAddress;Database=myDataBase;Integrated Security=yes;Password=;"); // FN, "yes" is for OracleClient
             optionsBuilder.UseNpgsql("Server=myServerAddress;Database=myDataBase;Trusted_Connection=yes;Password=;");
             optionsBuilder.UseSqlite("Server=myServerAddress;Database=myDataBase;Password=;Trusted_Connection=yes");
+
+            optionsBuilder.UseSqlite(dbConnection);
         }
     }
 }

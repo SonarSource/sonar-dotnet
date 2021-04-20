@@ -43,9 +43,24 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     ParseOptionsHelper.FromCSharp8,
                                     GetReferences(dotnetVersion, oracleVersion));
 
+        [TestMethod]
+        public void DatabasePasswordsShouldBeSecure_Net5_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.Net5.cs",
+                                    new CS.DatabasePasswordsShouldBeSecure(),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    GetReferences("5.0.2", "5.21.1"));
+
+        [TestMethod]
+        public void DatabasePasswordsShouldBeSecure_NetCore3_CS() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DatabasePasswordsShouldBeSecure.NetCore31.cs",
+                                    new CS.DatabasePasswordsShouldBeSecure(),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    GetReferences("3.1.11", "3.19.80"));
+
         private static IEnumerable<MetadataReference> GetReferences(string dotnetVersion, string oracleVersion) =>
             Enumerable.Empty<MetadataReference>()
                       .Concat(MetadataReferenceFacade.SystemData)
+                      .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(dotnetVersion))
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqliteCore(dotnetVersion))
                       .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(dotnetVersion))
