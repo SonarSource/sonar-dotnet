@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Helpers
 {

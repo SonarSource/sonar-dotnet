@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -71,9 +72,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var shiftInstances = ((MemberDeclarationSyntax)c.Node)
-                        .DescendantNodes()
-                        .Select(n => FindShiftInstance(n, c.SemanticModel))
-                        .WhereNotNull();
+                                         .DescendantNodes()
+                                         .Select(n => FindShiftInstance(n, c.SemanticModel)).WhereNotNull();
 
                     var zeroShiftIssues = new List<ShiftInstance>();
                     var linesWithShiftOperations = new HashSet<int>();

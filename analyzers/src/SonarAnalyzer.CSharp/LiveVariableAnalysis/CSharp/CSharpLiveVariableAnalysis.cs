@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.ShimLayer.CSharp;
 
@@ -110,9 +111,8 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
             if (block is UsingEndBlock usingFinalizerBlock)
             {
                 var disposableSymbols = usingFinalizerBlock.Identifiers
-                    .Select(i => semanticModel.GetDeclaredSymbol(i.Parent)
-                                ?? semanticModel.GetSymbolInfo(i.Parent).Symbol)
-                    .WhereNotNull();
+                    .Select(i => semanticModel.GetDeclaredSymbol(i.Parent) ?? semanticModel.GetSymbolInfo(i.Parent).Symbol).WhereNotNull();
+
                 foreach (var disposableSymbol in disposableSymbols)
                 {
                     state.UsedBeforeAssigned.Add(disposableSymbol);

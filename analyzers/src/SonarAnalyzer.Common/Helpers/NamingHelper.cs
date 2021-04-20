@@ -31,9 +31,7 @@ namespace SonarAnalyzer.Helpers
         internal const string CamelCasingPattern = "^" + CamelCasingInternalPattern + "$";
         internal const string CamelCasingPatternWithOptionalPrefixes = "^(s_|_)?" + CamelCasingInternalPattern + "$";
 
-        internal static bool IsRegexMatch(string name, string pattern)
-        {
-            return Regex.IsMatch(name, pattern, RegexOptions.CultureInvariant | RegexOptions.Compiled);
-        }
+        internal static bool IsRegexMatch(string name, string pattern) =>
+            Regex.IsMatch(name, pattern, RegexOptions.CultureInvariant | RegexOptions.Compiled);
     }
 }

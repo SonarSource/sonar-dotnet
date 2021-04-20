@@ -20,11 +20,16 @@
 
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    public static class SemanticModelExtensions
+    public static class AccessibilityExtensions
     {
-        public static bool IsExtensionMethod(this SemanticModel semanticModel, SyntaxNode expression) =>
-            semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol && memberSymbol.IsExtensionMethod;
+        /// <summary>
+        /// Beware of Accessibility members:
+        /// ProtectedOrInternal = C# "protected internal" or VB.NET "Protected Friend" syntax. Accessible from inheriting class OR the same assembly.
+        /// ProtectedAndInternal = C# "private protected" or VB.NET "Private Protected" syntax. Accessible only from inheriting class in the same assembly.
+        /// </summary>
+        public static bool IsAccessibleOutsideTheType(this Accessibility accessibility) =>
+            accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedOrInternal;
     }
 }

@@ -20,7 +20,7 @@
 
 using System;
 using System.Collections.Generic;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints
 {

@@ -20,19 +20,13 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    public static class CompilationExtensions
+    internal static class ISymbolExtensions
     {
-        public static IMethodSymbol GetTypeMethod(this Compilation compilation, SpecialType type, string methodName) =>
-            (IMethodSymbol)compilation.GetSpecialType(type)
-                .GetMembers(methodName)
-                .SingleOrDefault();
-
-        public static bool IsNetFrameworkTarget(this Compilation compilation) =>
-            // There's no direct way of checking compilation target framework yet (09/2020).
-            // See https://github.com/dotnet/roslyn/issues/3798
-            compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
+        public static bool HasAttribute(this ISymbol symbol, KnownType type) =>
+            symbol.GetAttributes(type).Any();
     }
 }

@@ -20,7 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.SymbolicExecution.Relationships
 {

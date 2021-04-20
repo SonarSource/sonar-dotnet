@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    internal static class ISymbolExtensions
+    public static class SemanticModelExtensions
     {
-        public static bool HasAttribute(this ISymbol symbol, KnownType type) =>
-            symbol.GetAttributes(type).Any();
+        public static bool IsExtensionMethod(this SemanticModel semanticModel, SyntaxNode expression) =>
+            semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol {IsExtensionMethod: true};
     }
 }

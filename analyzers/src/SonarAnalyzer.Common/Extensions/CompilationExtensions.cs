@@ -18,18 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
-    public static class AccessibilityExtensions
+    public static class CompilationExtensions
     {
-        /// <summary>
-        /// Beware of Accessibility members:
-        /// ProtectedOrInternal = C# "protected internal" or VB.NET "Protected Friend" syntax. Accessible from inheriting class OR the same assembly.
-        /// ProtectedAndInternal = C# "private protected" or VB.NET "Private Protected" syntax. Accessible only from inheriting class in the same assembly.
-        /// </summary>
-        public static bool IsAccessibleOutsideTheType(this Accessibility accessibility) =>
-            accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedOrInternal;
+        public static IMethodSymbol GetTypeMethod(this Compilation compilation, SpecialType type, string methodName) =>
+            (IMethodSymbol)compilation.GetSpecialType(type)
+                .GetMembers(methodName)
+                .SingleOrDefault();
+
+        public static bool IsNetFrameworkTarget(this Compilation compilation) =>
+            // There's no direct way of checking compilation target framework yet (09/2020).
+            // See https://github.com/dotnet/roslyn/issues/3798
+            compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
     }
 }

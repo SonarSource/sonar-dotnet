@@ -27,7 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.UnitTest.Helpers;
 

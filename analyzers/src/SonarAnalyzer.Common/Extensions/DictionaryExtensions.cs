@@ -21,34 +21,25 @@
 using System;
 using System.Collections.Generic;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
     public static class DictionaryExtensions
     {
-        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
-        {
-            return dictionary.GetValueOrDefault(key, default(TValue));
-        }
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key) =>
+            dictionary.GetValueOrDefault(key, default);
 
-        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
-            TValue defaultValue)
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue) =>
+            dictionary.TryGetValue(key, out var result) ? result : defaultValue;
+
+        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> factory)
         {
-            if (dictionary.TryGetValue(key, out var result))
+            if (dictionary.TryGetValue(key, out var value))
             {
-                return result;
+                return value;
             }
 
-            return defaultValue;
-        }
-
-        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
-            Func<TKey, TValue> factory)
-        {
-            if (!dictionary.TryGetValue(key, out var value))
-            {
-                value = factory(key);
-                dictionary.Add(key, value);
-            }
+            value = factory(key);
+            dictionary.Add(key, value);
             return value;
         }
 

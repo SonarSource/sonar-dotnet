@@ -20,7 +20,7 @@
 
 using System.Collections.Immutable;
 using System.Linq;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Relationships;
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints

@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Common
 {

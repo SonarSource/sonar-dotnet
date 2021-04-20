@@ -20,13 +20,13 @@
 
 using System.Collections.Generic;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
     public static class HashSetExtensions
     {
         public static void AddRange<T>(this HashSet<T> hashset, IEnumerable<T> values)
         {
-            foreach(var value in values)
+            foreach (var value in values)
             {
                 hashset.Add(value);
             }

@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions
 {
     public static class EnumerableExtensions
     {
@@ -67,16 +67,12 @@ namespace SonarAnalyzer.Helpers
         }
 
         public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable)
-            where T : class
-        {
-            return enumerable.Where(e => e != null);
-        }
+            where T : class =>
+            enumerable.Where(e => e != null);
 
-        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<Nullable<T>> enumerable)
-                where T : struct
-        {
-            return enumerable.Where(x => x.HasValue).Select(x => x.Value);
-        }
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable)
+                where T : struct =>
+            enumerable.Where(x => x.HasValue).Select(x => x.Value);
 
         /// <summary>
         /// Applies a specified function to the corresponding elements of two sequences,
@@ -92,22 +88,19 @@ namespace SonarAnalyzer.Helpers
         /// <param name="operation">A function that specifies how to merge the elements from the two sequences.</param>
         /// <returns>An System.Collections.Generic.IEnumerable`1 that contains merged elements of
         /// two input sequences.</returns>
-        public static IEnumerable<TResult> Merge<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first,
-            IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> operation)
+        public static IEnumerable<TResult> Merge<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> operation)
         {
-            using (var iter1 = first.GetEnumerator())
-            using (var iter2 = second.GetEnumerator())
-            {
-                while (iter1.MoveNext())
-                {
-                    yield return operation(iter1.Current,
-                         iter2.MoveNext() ? iter2.Current : default(TSecond));
-                }
+            using var iter1 = first.GetEnumerator();
+            using var iter2 = second.GetEnumerator();
 
-                while (iter2.MoveNext())
-                {
-                    yield return operation(default(TFirst), iter2.Current);
-                }
+            while (iter1.MoveNext())
+            {
+                yield return operation(iter1.Current, iter2.MoveNext() ? iter2.Current : default);
+            }
+
+            while (iter2.MoveNext())
+            {
+                yield return operation(default, iter2.Current);
             }
         }
 
@@ -121,13 +114,13 @@ namespace SonarAnalyzer.Helpers
         /// This is string.Join() as extension. Concatenates members of collection using specified separator between each member. Selector is used to extract string value from T for concatenation.
         /// </summary>
         public static string JoinStr<T>(this IEnumerable<T> enumerable, string separator, Func<T, string> selector) =>
-            string.Join(separator, enumerable.Select(x => selector(x)));
+            string.Join(separator, enumerable.Select(selector));
 
         /// <summary>
         /// This is string.Join() as extension. Concatenates members of collection using specified separator between each member. Selector is used to extract integer value from T for concatenation.
         /// </summary>
         public static string JoinStr<T>(this IEnumerable<T> enumerable, string separator, Func<T, int> selector) =>
-            string.Join(separator, enumerable.Select(x => selector(x)));
+            string.Join(separator, enumerable.Select(selector));
 
         /// <summary>
         /// This is string.Join() as extension. Concatenates members of string collection using specified separator between each member.
@@ -140,7 +133,5 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         public static string JoinStr(this IEnumerable<int> enumerable, string separator) =>
             JoinStr(enumerable, separator, x => x);
-
-
     }
 }
