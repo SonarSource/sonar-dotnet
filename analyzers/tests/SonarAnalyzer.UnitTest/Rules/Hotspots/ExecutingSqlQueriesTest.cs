@@ -40,26 +40,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CS_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.cs",
-                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                GetReferencesNet46(Constants.NuGetLatestVersion));
+                                    new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                                    GetReferencesNet46(Constants.NuGetLatestVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_Net46() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_Net46.vb",
-                new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromVisualBasic15,
-                GetReferencesNet46(Constants.NuGetLatestVersion));
+                                    new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                                    ParseOptionsHelper.FromVisualBasic15,
+                                    GetReferencesNet46(Constants.NuGetLatestVersion));
 
         internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
-            Enumerable.Empty<MetadataReference>()
-                .Concat(FrameworkMetadataReference.SystemData)
-                .Concat(FrameworkMetadataReference.SystemDataOracleClient)
-                .Concat(NuGetMetadataReference.SystemDataSqlServerCe(sqlServerCeVersion)
-                .Concat(NuGetMetadataReference.MySqlData("8.0.22"))
-                .Concat(NuGetMetadataReference.MicrosoftDataSqliteCore())
-                .Concat(NuGetMetadataReference.SystemDataSQLiteCore()));
+            NetStandardMetadataReference.Netstandard
+                                        .Concat(FrameworkMetadataReference.SystemData)
+                                        .Concat(FrameworkMetadataReference.SystemDataOracleClient)
+                                        .Concat(NuGetMetadataReference.SystemDataSqlServerCe(sqlServerCeVersion))
+                                        .Concat(NuGetMetadataReference.MySqlData("8.0.22"))
+                                        .Concat(NuGetMetadataReference.MicrosoftDataSqliteCore())
+                                        .Concat(NuGetMetadataReference.SystemDataSQLiteCore());
 
 #else
 
@@ -68,23 +68,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_CS_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.cs",
-                new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromCSharp8,
-                GetReferencesNetCore(Constants.DotNetCore220Version));
+                                    new CS.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                                    ParseOptionsHelper.FromCSharp8,
+                                    GetReferencesNetCore(Constants.DotNetCore220Version));
 
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void ExecutingSqlQueries_VB_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ExecutingSqlQueries_NetCore.vb",
-                new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                ParseOptionsHelper.FromVisualBasic15,
-                GetReferencesNetCore(Constants.DotNetCore220Version));
+                                    new VB.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                                    ParseOptionsHelper.FromVisualBasic15,
+                                    GetReferencesNetCore(Constants.DotNetCore220Version));
 
         internal static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()
-                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
-                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
+                      .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
+                      .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
 #endif
     }
 }

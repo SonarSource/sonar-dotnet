@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NET
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-#endif
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -38,8 +37,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_Nancy.cs",
-                new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                NuGetMetadataReference.Nancy());
+                                    new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferences);
 
 #if NETFRAMEWORK // HttpCookie is not available on .Net Core
 
@@ -48,8 +47,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
-                new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemWeb);
+                                    new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                                    MetadataReferenceFacade.SystemWeb);
 
 #else
 
@@ -58,8 +57,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure_NetCore.cs",
-                new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences_NetCore());
+                                    new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                                    GetAdditionalReferences_NetCore());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -73,6 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
 
 #endif
-
+        internal static IEnumerable<MetadataReference> AdditionalReferences =>
+            NetStandardMetadataReference.Netstandard.Concat(NuGetMetadataReference.Nancy());
     }
 }

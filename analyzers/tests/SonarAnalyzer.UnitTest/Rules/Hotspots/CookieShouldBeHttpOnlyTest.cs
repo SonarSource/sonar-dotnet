@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#if NET
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-#endif
 using System.IO;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -41,8 +40,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_Nancy() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_Nancy.cs",
-                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                NuGetMetadataReference.Nancy());
+                                    new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                    AdditionalReferences);
 
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
         [TestMethod]
@@ -50,8 +49,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
-                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemWeb);
+                                    new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                    MetadataReferenceFacade.SystemWeb);
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\HttpOnlyCookiesConfig")]
@@ -62,9 +61,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             var webConfigPath = Path.Combine(root, WebConfig);
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_WithWebConfig.cs",
-                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemWeb,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+                                    new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                    MetadataReferenceFacade.SystemWeb,
+                                    TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
         [TestMethod]
@@ -75,9 +74,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             var root = @"TestCases\WebConfig\CookieShouldBeHttpOnly\NonHttpOnlyCookiesConfig";
             var webConfigPath = Path.Combine(root, WebConfig);
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly.cs",
-                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                MetadataReferenceFacade.SystemWeb,
-                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+                                    new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                    MetadataReferenceFacade.SystemWeb,
+                                    TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
 #else
@@ -86,8 +85,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_NetCore() =>
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeHttpOnly_NetCore.cs",
-                new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
-                GetAdditionalReferences_NetCore());
+                                    new CS.CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                                    GetAdditionalReferences_NetCore());
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -99,5 +98,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
             NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
 #endif
+
+        internal static IEnumerable<MetadataReference> AdditionalReferences =>
+            NetStandardMetadataReference.Netstandard.Concat(NuGetMetadataReference.Nancy());
     }
 }
