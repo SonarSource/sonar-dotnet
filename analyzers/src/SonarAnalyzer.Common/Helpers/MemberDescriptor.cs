@@ -39,7 +39,8 @@ namespace SonarAnalyzer.Helpers
             $"{ContainingType.ShortName}.{Name}";
 
         public bool IsMatch(string memberName, ITypeSymbol containingType, StringComparison nameComparison) =>
-            containingType.Is(ContainingType) && HasSameName(memberName, Name, nameComparison);
+            HasSameName(memberName, Name, nameComparison)
+            && containingType.Is(ContainingType);
 
         public bool IsMatch<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol, StringComparison nameComparison)
             where TSymbolType : class, ISymbol =>
@@ -50,8 +51,9 @@ namespace SonarAnalyzer.Helpers
         public static bool MatchesAny<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol, bool checkOverriddenMethods, StringComparison nameComparison, params MemberDescriptor[] members)
             where TSymbolType : class, ISymbol =>
             memberName != null
+            && members.Any(x => memberName.Equals(x.Name, nameComparison))
             && memberSymbol.Value is { } symbol
-            && members.Any(x => HasSameName(memberName, x.Name, nameComparison) && x.HasSameContainingType(symbol, checkOverriddenMethods));
+            && members.Any(x => x.HasSameContainingType(symbol, checkOverriddenMethods));
 
         private static bool HasSameName(string name1, string name2, StringComparison comparison) =>
             name1 != null && name1.Equals(name2, comparison);
