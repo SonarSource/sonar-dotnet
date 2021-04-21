@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules.Hotspots
     {
         private const string DiagnosticId = "S4502";
         private const string MessageFormat = "Make sure disabling CSRF protection is safe here.";
-        private const string IgnoreAntiforgeryTokenAttributeName = "IgnoreAntiforgeryTokenAttribute";
         private const SyntaxKind ImplicitObjectCreationExpression = (SyntaxKind)8659;
 
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
@@ -66,7 +65,7 @@ namespace SonarAnalyzer.Rules.Hotspots
             var shouldReport = c.Node switch
             {
                 AttributeSyntax attributeSyntax => attributeSyntax.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel),
-                ObjectCreationExpressionSyntax objectCreation => IsIgnoreAntiforgeryTokenAttribute(objectCreation, c.SemanticModel),
+                ObjectCreationExpressionSyntax objectCreation => objectCreation.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel),
                 _ => c.Node.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, c.SemanticModel)
             };
 
@@ -78,9 +77,5 @@ namespace SonarAnalyzer.Rules.Hotspots
 
         private static void ReportDiagnostic(SyntaxNodeAnalysisContext context) =>
             context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.Node.GetLocation()));
-
-        private static bool IsIgnoreAntiforgeryTokenAttribute(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
-            (objectCreation.Type.NameIs(IgnoreAntiforgeryTokenAttributeName) || objectCreation.Type.NameIs(string.Empty))
-            && objectCreation.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute, semanticModel);
     }
 }

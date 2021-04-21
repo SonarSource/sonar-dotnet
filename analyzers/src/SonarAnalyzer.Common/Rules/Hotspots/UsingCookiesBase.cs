@@ -75,21 +75,11 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue_VB, "Add")),
                 inv.ArgumentAtIndexIsAny(0, "Set-Cookie"),
                 inv.MethodHasParameters(2),
-                IsIHeadersDictionary());
+                inv.IsIHeadersDictionary());
 
             inv.Track(input,
                 inv.MatchMethod(new MemberDescriptor(KnownType.System_Collections_Specialized_NameObjectCollectionBase, "Add")),
                 inv.MatchProperty(new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
         }
-
-        private static TrackerBase<TSyntaxKind, InvocationContext>.Condition IsIHeadersDictionary() =>
-            context =>
-            {
-                var containingType = context.MethodSymbol.Value.ContainingType;
-                // We already checked if ContainingType is IDictionary, but be defensive and check TypeArguments.Count
-                return containingType.TypeArguments.Length == 2
-                    && containingType.TypeArguments[0].Is(KnownType.System_String)
-                    && containingType.TypeArguments[1].Is(KnownType.Microsoft_Extensions_Primitives_StringValues);
-            };
     }
 }

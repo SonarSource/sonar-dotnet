@@ -87,6 +87,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 "ExecutingSqlQueries" => "ExecutingSqlQueries_NetCore",
                 "UsingCookies" => "UsingCookies_NetCore",
                 "LooseFilePermissions" => "LooseFilePermissions.Unix",
+                "PermissiveCors" => "PermissiveCors.Net",
 #endif
                 _ => analyzerName
             };
@@ -94,7 +95,8 @@ namespace SonarAnalyzer.UnitTest.Common
         private static bool IsTestValid(string analyzerName)
         {
 #if NETFRAMEWORK
-            return analyzerName != nameof(DisablingCsrfProtection);
+            return analyzerName != nameof(DisablingCsrfProtection)
+                   && analyzerName != nameof(PermissiveCors);
 #else
             // IdentityModel is not available on .Net Core
             return analyzerName != nameof(ControllingPermissions);
@@ -118,6 +120,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
                 nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNetCore(Constants.DotNetCore220Version),
                 nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
+                nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
                 nameof(UsingCookies) => UsingCookies.GetAdditionalReferencesForNetCore(Constants.DotNetCore220Version),
 #else
                 nameof(ControllingPermissions) => ControllingPermissionsTest.AdditionalReferences,

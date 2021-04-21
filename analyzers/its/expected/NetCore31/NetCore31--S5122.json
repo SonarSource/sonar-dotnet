@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S5122",
+"message":  "Make sure this permissive CORS policy is safe here.",
+"location":  {
+"uri":  "sources\NetCore31\Controllers\S5122Controller.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  13,
+"endLine":  9,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S5122",
+"message":  "Make sure this permissive CORS policy is safe here.",
+"location":  {
+"uri":  "sources\NetCore31\Startup.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  21,
+"endLine":  18,
+"endColumn":  45
+}
+}
+}
+]
+}

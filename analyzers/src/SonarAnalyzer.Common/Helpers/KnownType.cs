@@ -42,9 +42,11 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNet_SignalR_Hub = new KnownType("Microsoft.AspNet.SignalR.Hub");
         internal static readonly KnownType Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions = new KnownType("Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions = new KnownType("Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions");
+        internal static readonly KnownType Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder = new KnownType("Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder");
         internal static readonly KnownType Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions = new KnownType("Microsoft.AspNetCore.Hosting.HostingEnvironmentExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions = new KnownType("Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Http_CookieOptions = new KnownType("Microsoft.AspNetCore.Http.CookieOptions");
+        internal static readonly KnownType Microsoft_AspNetCore_Http_HeaderDictionaryExtensions = new KnownType("Microsoft.AspNetCore.Http.HeaderDictionaryExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Http_IHeaderDictionary = new KnownType("Microsoft.AspNetCore.Http.IHeaderDictionary");
         internal static readonly KnownType Microsoft_AspNetCore_Http_IRequestCookieCollection = new KnownType("Microsoft.AspNetCore.Http.IRequestCookieCollection");
         internal static readonly KnownType Microsoft_AspNetCore_Http_IResponseCookies = new KnownType("Microsoft.AspNetCore.Http.IResponseCookies");
@@ -79,6 +81,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_Extensions_Logging_EventSourceLoggerFactoryExtensions = new KnownType("Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions");
         internal static readonly KnownType Microsoft_Extensions_Logging_ILoggerFactory = new KnownType("Microsoft.Extensions.Logging.ILoggerFactory");
         internal static readonly KnownType Microsoft_Extensions_Primitives_StringValues = new KnownType("Microsoft.Extensions.Primitives.StringValues");
+        internal static readonly KnownType Microsoft_Net_Http_Headers_HeaderNames = new KnownType("Microsoft.Net.Http.Headers.HeaderNames");
         internal static readonly KnownType Microsoft_VisualBasic_Interaction = new KnownType("Microsoft.VisualBasic.Interaction");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_AssertFailedException = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException");
@@ -279,6 +282,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
         internal static readonly KnownType System_MTAThreadAttribute = new KnownType("System.MTAThreadAttribute");
         internal static readonly KnownType System_Net_FtpWebRequest = new KnownType("System.Net.FtpWebRequest");
+        internal static readonly KnownType System_Net_Http_Headers_HttpHeaders = new KnownType("System.Net.Http.Headers.HttpHeaders");
         internal static readonly KnownType System_Net_Http_HttpClientHandler = new KnownType("System.Net.Http.HttpClientHandler");
         internal static readonly KnownType System_Net_Mail_SmtpClient = new KnownType("System.Net.Mail.SmtpClient");
         internal static readonly KnownType System_Net_NetworkCredential = new KnownType("System.Net.NetworkCredential");
@@ -415,7 +419,10 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Web_HttpApplication = new KnownType("System.Web.HttpApplication");
         internal static readonly KnownType System_Web_HttpCookie = new KnownType("System.Web.HttpCookie");
         internal static readonly KnownType System_Web_HttpContext = new KnownType("System.Web.HttpContext");
+        internal static readonly KnownType System_Web_HttpResponse = new KnownType("System.Web.HttpResponse");
+        internal static readonly KnownType System_Web_HttpResponseBase = new KnownType("System.Web.HttpResponseBase");
         internal static readonly KnownType System_Web_Http_ApiController = new KnownType("System.Web.Http.ApiController");
+        internal static readonly KnownType System_Web_Http_Cors_EnableCorsAttribute = new KnownType("System.Web.Http.Cors.EnableCorsAttribute");
         internal static readonly KnownType System_Web_Mvc_NonActionAttribute = new KnownType("System.Web.Mvc.NonActionAttribute");
         internal static readonly KnownType System_Web_Mvc_Controller = new KnownType("System.Web.Mvc.Controller");
         internal static readonly KnownType System_Web_Mvc_HttpPostAttribute = new KnownType("System.Web.Mvc.HttpPostAttribute");

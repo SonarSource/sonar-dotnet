@@ -1,0 +1,23 @@
+{
+  "title": "Having a permissive Cross-Origin Resource Sharing policy is security-sensitive",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "tags": [
+    "cwe",
+    "owasp-a6",
+    "sans-top25-porous"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-5122",
+  "sqKey": "S5122",
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      346,
+      942
+    ],
+    "OWASP": [
+      "A6"
+    ]
+  }
+}

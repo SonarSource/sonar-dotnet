@@ -62,6 +62,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) => Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
         public static References MicrosoftAspNetMvc(string packageVersion) => Create("Microsoft.AspNet.Mvc", packageVersion);
         public static References MicrosoftAspNetSignalRCore(string packageVersion = "2.4.1") => Create("Microsoft.AspNet.SignalR.Core", packageVersion);
+        public static References MicrosoftAspNetWebApiCors(string packageVersion) => Create("Microsoft.AspNet.WebApi.Cors", packageVersion);
         public static References MicrosoftDataSqliteCore(string packageVersion = "2.0.0") => Create("Microsoft.Data.Sqlite.Core", packageVersion);
         public static References MicrosoftEntityFrameworkCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore", packageVersion);
         public static References MicrosoftEntityFrameworkCoreSqliteCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Sqlite.Core", packageVersion);
@@ -79,6 +80,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
         public static References MicrosoftExtensionsOptions(string packageVersion) => Create("Microsoft.Extensions.Options", packageVersion);
         public static References MicrosoftExtensionsPrimitives(string packageVersion) => Create("Microsoft.Extensions.Primitives", packageVersion);
         public static References MicrosoftNetHttpHeaders(string packageVersion) => Create("Microsoft.Net.Http.Headers", packageVersion);
+        public static References MicrosoftNetWebApiCore(string packageVersion) => Create("Microsoft.AspNet.WebApi.Core", packageVersion);
         public static References MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") => Create("Microsoft.SqlServer.Compact", packageVersion);
         public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => Create("Microsoft.Web.Xdt", packageVersion);
         public static References MonoPosixNetStandard(string packageVersion = "1.0.0") => Create("Mono.Posix.NETStandard", packageVersion, "linux-x64");

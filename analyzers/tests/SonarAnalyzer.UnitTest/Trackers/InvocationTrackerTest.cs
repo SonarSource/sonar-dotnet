@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -28,6 +29,10 @@ using SonarAnalyzer.Helpers.Trackers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+
+#if NET
+using SonarAnalyzer.UnitTest.MetadataReferences;
+#endif
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -59,6 +64,36 @@ Public Class Base
         NoArgs 'and no ParameterList
     End Sub
 End Class";
+
+#if NET
+        private const string IsIHeadersDictionaryCode = @"
+namespace WebPoc
+{
+    using System.Collections.Generic;
+    using Microsoft.Extensions.Primitives;
+
+    public class PermissiveCorsSimple
+    {
+        public void MoreParameters() => new Dictionary<string, StringValues>().Add(""a"", new StringValues(), ""c"");
+
+        public void WrongTypeFirstParameter() => new Dictionary<string, StringValues>().Add(1, new StringValues());
+
+        public void WrongTypeSecondParameter() => new Dictionary<string, StringValues>().Add(""a"", 1);
+
+        public void RightCall() => new Dictionary<string, StringValues>().Add(""A"", new StringValues());
+    }
+
+    public static class Extensions
+    {
+        public static void Add(this Dictionary<string, StringValues> d, string a, string b, string c) { }
+
+        public static void Add(this Dictionary<string, StringValues> d, int a, StringValues b) { }
+
+        public static void Add(this Dictionary<string, StringValues> d, string a, int b) { }
+    }
+}
+";
+#endif
 
         [TestMethod]
         public void ConstArgumentForParameter_CS()
@@ -187,9 +222,32 @@ End Class";
             tracker.MethodReturnTypeIs(KnownType.Void)(context).Should().BeFalse();
         }
 
-        private static InvocationContext CreateContext<TSyntaxNodeType>(string testInput, string methodName, AnalyzerLanguage language, int skip = 0) where TSyntaxNodeType : SyntaxNode
+#if NET
+        [TestMethod]
+        [DataRow(0, false)]
+        [DataRow(1, false)]
+        [DataRow(2, false)]
+        [DataRow(3, true)]
+        public void IsIHeadersDictionary(int invocationsToSkip, bool expectedValue)
         {
-            var testCode = new SnippetCompiler(testInput, true, language);
+            var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(IsIHeadersDictionaryCode,
+                                                                                 "MethodName",
+                                                                                 AnalyzerLanguage.CSharp,
+                                                                                 invocationsToSkip,
+                                                                                 new[] {CoreMetadataReference.MicrosoftExtensionsPrimitives});
+            var sut = new CSharpInvocationTracker();
+            sut.IsIHeadersDictionary()(context).Should().Be(expectedValue);
+        }
+#endif
+
+        private static InvocationContext CreateContext<TSyntaxNodeType>(string testInput,
+                                                                        string methodName,
+                                                                        AnalyzerLanguage language,
+                                                                        int skip = 0,
+                                                                        IEnumerable<MetadataReference> references = null)
+            where TSyntaxNodeType : SyntaxNode
+        {
+            var testCode = new SnippetCompiler(testInput, true, language, references);
             var invocationSyntaxNode = testCode.GetNodes<TSyntaxNodeType>().Skip(skip).First();
             var context = new InvocationContext(invocationSyntaxNode, methodName, testCode.SemanticModel);
             return context;
