@@ -91,6 +91,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   private void createProjectLevelIssue(String ruleId, InputProject inputProject, String message, String repositoryKey) {
+    logIssue("project level", ruleId, inputProject.toString());
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
@@ -111,6 +112,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
       .hasAbsolutePath(absolutePath));
     if (inputFile == null) {
+      logMissingInputFile(ruleId, absolutePath);
       return;
     }
 
@@ -123,6 +125,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   private void createFileLevelIssue(String ruleId, String message, String repositoryKey, InputFile inputFile) {
+    logIssue("file level", ruleId, inputFile.toString());
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
@@ -133,6 +136,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   private void createFileLevelExternalIssue(String ruleId, @Nullable String level, String message, InputFile inputFile) {
+    logIssue("file level external", ruleId, inputFile.toString());
     NewExternalIssue newIssue = newExternalIssue(ruleId);
     newIssue.at(newIssue.newLocation()
       .on(inputFile)
@@ -152,6 +156,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
       .hasAbsolutePath(primaryLocation.getAbsolutePath()));
     if (inputFile == null) {
+      logMissingInputFile(ruleId, primaryLocation.getAbsolutePath());
       return;
     }
 
@@ -164,12 +169,11 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   private void createExternalIssue(InputFile inputFile, String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations) {
+    logIssue("external", ruleId, primaryLocation.getAbsolutePath());
     NewExternalIssue newIssue = newExternalIssue(ruleId);
     newIssue.at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, true));
     setExternalIssueSeverityAndType(ruleId, level, newIssue);
-
     populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, true);
-
     newIssue.save();
   }
 
@@ -196,14 +200,12 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   private void createIssue(InputFile inputFile, String ruleId, Location primaryLocation, Collection<Location> secondaryLocations, String repositoryKey) {
     boolean isSonarSourceRepository  = isSonarSourceRepository(repositoryKey);
-
+    logIssue("normal", ruleId, primaryLocation.getAbsolutePath());
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
       .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, !isSonarSourceRepository ));
-
     populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, !isSonarSourceRepository );
-
     newIssue.save();
   }
 
@@ -230,8 +232,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   private static NewIssueLocation createIssueLocation(InputFile inputFile, Location location, Supplier<NewIssueLocation> newIssueLocationSupplier,
     boolean isLocationResilient) {
 
-    NewIssueLocation newIssueLocation = newIssueLocationSupplier.get()
-      .on(inputFile);
+    NewIssueLocation newIssueLocation = newIssueLocationSupplier.get().on(inputFile);
 
     try {
       // First, we try to report the issue with the precise location...
@@ -316,6 +317,14 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   private static boolean isSonarSourceRepository(String repositoryKey){
     return OWN_REPOSITORIES.contains(repositoryKey);
+  }
+
+  private void logIssue(String issueType, String ruleId, String location){
+    LOG.debug("Adding {} issue {}: {}", issueType, ruleId, location);
+  }
+
+  private void logMissingInputFile(String ruleId, String filePath){
+    LOG.debug("Skipping issue {}, input file not found or excluded: {}", ruleId, filePath);
   }
 
   private static class Issue {
