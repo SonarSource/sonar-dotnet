@@ -51,9 +51,11 @@ namespace SonarAnalyzer.Helpers
         public static bool MatchesAny<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol, bool checkOverriddenMethods, StringComparison nameComparison, params MemberDescriptor[] members)
             where TSymbolType : class, ISymbol =>
             memberName != null
+            // avoid calling the semantic model if no name matches
             && members.Any(x => memberName.Equals(x.Name, nameComparison))
             && memberSymbol.Value is { } symbol
-            && members.Any(x => x.HasSameContainingType(symbol, checkOverriddenMethods));
+            // we need to check both Name and Type to make sure the right method on the right type is called
+            && members.Any(x => memberName.Equals(x.Name, nameComparison) && x.HasSameContainingType(symbol, checkOverriddenMethods));
 
         private static bool HasSameName(string name1, string name2, StringComparison comparison) =>
             name1 != null && name1.Equals(name2, comparison);

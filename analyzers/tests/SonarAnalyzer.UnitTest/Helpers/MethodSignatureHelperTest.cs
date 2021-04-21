@@ -124,7 +124,7 @@ End Namespace
         }
 
         [TestMethod]
-        public void IsMatch_AndCheckingOverrides_DoesMatchOverrides_CS()
+        public void MatchesAny_AndCheckingOverrides_DoesMatchOverrides_CS()
         {
             var code = @"
 namespace Test
@@ -146,7 +146,38 @@ namespace Test
         }
 
         [TestMethod]
-        public void IsMatch_AndCheckingOverrides_DoesMatchOverrides_VB()
+        public void MatchesAny_MethodAndTypeCombination_FindsCorrectOne()
+        {
+            var code = @"
+namespace Test
+{
+    using System.Xml;
+
+    class Class1
+    {
+        public void DoStuff(XmlNode node)
+        {
+            node.CloneNode(true);
+        }
+    }
+}
+";
+            var snippet = new SnippetCompiler(code, MetadataReferenceFacade.SystemXml);
+
+            var nodeClone = new MemberDescriptor(KnownType.System_Xml_XmlNode, "Clone");
+            var nodeCloneNode = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            var docCloneNode = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "CloneNode");
+
+            var underTest = CreateContextForMethod("XmlNode.CloneNode", snippet);
+            // this should be false, because on XmlNode we check only Clone(), not CloneNode()
+            // the implementation should correctly map the method name with the type
+            CheckIsMethodOrDerived(false, underTest, nodeClone, docCloneNode);
+            // here, we verify if XmlNode.CloneNode() is called, which is true
+            CheckIsMethodOrDerived(true, underTest, nodeCloneNode, docCloneNode);
+        }
+
+        [TestMethod]
+        public void MatchesAny_AndCheckingOverrides_DoesMatchOverrides_VB()
         {
             var code = @"
 Imports System.Xml
@@ -324,12 +355,12 @@ End Namespace
         }
 
         private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
-            CheckMatch(false, expectedOutcome, invocationContext, targetMethodSignatures);
+            CheckMatchesAny(false, expectedOutcome, invocationContext, targetMethodSignatures);
 
         private static void CheckIsMethodOrDerived(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
-            CheckMatch(true, expectedOutcome, invocationContext, targetMethodSignatures);
+            CheckMatchesAny(true, expectedOutcome, invocationContext, targetMethodSignatures);
 
-        private static void CheckMatch(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures)
+        private static void CheckMatchesAny(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures)
         {
             var result = MemberDescriptor.MatchesAny(invocationContext.MethodName,
                 invocationContext.MethodSymbol, checkDerived, StringComparison.Ordinal, targetMethodSignatures);
