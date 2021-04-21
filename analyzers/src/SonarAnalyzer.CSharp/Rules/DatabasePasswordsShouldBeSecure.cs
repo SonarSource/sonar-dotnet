@@ -18,19 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -42,7 +38,6 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S2115";
         private const string MessageFormat = "Use a secure password when connecting to this database.";
-        private static readonly Regex WebConfigRegex = new Regex(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
 
         private static readonly ISet<string> Sanitizers = new HashSet<string>
         {
@@ -85,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
         {
-            foreach (var fullPath in context.ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess))
+            foreach (var fullPath in context.GetWebConfig(c))
             {
                 var webConfig = File.ReadAllText(fullPath);
                 if (webConfig.Contains("<connectionStrings>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
@@ -93,9 +88,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     ReportEmptyPassword(doc, fullPath, c);
                 }
             }
-
-            static bool ShouldProcess(string path) =>
-                !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
         }
 
         private void ReportEmptyPassword(XDocument doc, string webConfigPath, CompilationAnalysisContext c)
