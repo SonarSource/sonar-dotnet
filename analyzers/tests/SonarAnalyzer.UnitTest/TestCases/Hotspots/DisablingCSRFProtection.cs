@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
+using IATA = Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute;
 
 namespace TestCases
 {
@@ -10,6 +11,7 @@ namespace TestCases
         public static void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews(options => options.Filters.Add(new IgnoreAntiforgeryTokenAttribute())); // Noncompliant
+            services.AddControllersWithViews(options => options.Filters.Add(new IATA())); // FN - for performance reasons type alias is not supported
             services.AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
             services.AddControllersWithViews(options => options.Filters.Add(new ValidateAntiForgeryTokenAttribute()));
             services.AddControllers(options => options.Filters.Add(new IgnoreAntiforgeryTokenAttribute())); // Noncompliant

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
+using CPB = Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder;
+using SV = Microsoft.Extensions.Primitives.StringValues;
 
 namespace Tests.Diagnostics
 {
@@ -43,6 +45,7 @@ namespace Tests.Diagnostics
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, new StringValues("https://trustedwebsite.com"));
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, new StringValues(new [] {"*", "https://trustedwebsite.com"})); // Noncompliant
 
+            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, new SV("*")); // FN - for performance reasons type alias is not supported
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, "*, https://trustedwebsite.com"); // FN
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}, https://trustedwebsite.com"); // FN
         }
@@ -86,6 +89,9 @@ namespace Tests.Diagnostics
 
                 var unsafeBuilder = new CorsPolicyBuilder("*"); // Noncompliant
                 options.AddPolicy("UnsafeBuilder", unsafeBuilder.Build());
+
+                var unsafeBuilderWithAlias = new CPB("*"); // FN - for performance reasons type alias is not supported
+                options.AddPolicy("UnsafeBuilderWithAlias", unsafeBuilderWithAlias.Build());
 
                 var safeBuilder = new CorsPolicyBuilder("https://trustedwebsite.com");
                 options.AddPolicy("SafeBuilder", safeBuilder.Build());

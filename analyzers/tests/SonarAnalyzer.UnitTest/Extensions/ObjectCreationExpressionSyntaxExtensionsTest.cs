@@ -37,6 +37,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("new System.DateTime()", true)]
         [DataRow("using System; class T { DateTime field = new DateTime(); }", true)]
         [DataRow("new double()", false)]
+        [DataRow("using DT = System.DateTime; class T { DT field = new DT(); }", false)]
         public void IsKnownType_ChecksCtorType(string code, bool expectedResult)
         {
             var compilation = CreateCompilation(code);
