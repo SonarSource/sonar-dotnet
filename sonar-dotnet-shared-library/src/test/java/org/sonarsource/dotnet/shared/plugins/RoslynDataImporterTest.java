@@ -108,6 +108,7 @@ public class RoslynDataImporterTest {
 
     assertThat(tester.allAdHocRules()).isEmpty();
     assertThat(tester.allExternalIssues()).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Processing Roslyn report: " + workDir.resolve("roslyn-report.json"));
   }
 
   @Test

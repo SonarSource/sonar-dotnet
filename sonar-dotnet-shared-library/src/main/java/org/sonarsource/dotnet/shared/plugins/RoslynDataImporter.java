@@ -52,6 +52,7 @@ public class RoslynDataImporter {
     LOG.info("Importing {} Roslyn {}", reports.size(), StringUtils.pluralize("report", reports.size()));
 
     for (RoslynReport report : reports) {
+      LOG.debug("Processing Roslyn report: " + report.getReportPath());
       SarifParserFactory.create(report, toRealPath).accept(callback);
     }
   }
