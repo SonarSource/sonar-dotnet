@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.Trackers;
 
 namespace SonarAnalyzer.Rules.Hotspots
 {
@@ -62,40 +63,40 @@ namespace SonarAnalyzer.Rules.Hotspots
 
         protected override void Initialize(TrackerInput input)
         {
-            var iTracker = Language.Tracker.Invocation;
-            iTracker.Track(input,
-                           iTracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_HeaderDictionaryExtensions, "Append")),
-                           iTracker.MethodHasParameters(ParameterCount),
-                           c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.SemanticModel)
-                                && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.SemanticModel));
-
-            iTracker.Track(input,
-                           iTracker.MatchMethod(new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add")),
-                           iTracker.MethodHasParameters(ParameterCount),
-                           c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.SemanticModel)
-                                && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.SemanticModel),
-                           iTracker.IsIHeadersDictionary());
-
-            iTracker.Track(input,
-                           iTracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder, "WithOrigins")),
-                           c => ContainsStar(((InvocationExpressionSyntax)c.Node).ArgumentList.Arguments.Select(a => a.Expression), c.SemanticModel));
-
-            iTracker.Track(input, iTracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder, "AllowAnyOrigin")));
-
-            iTracker.Track(input,
-                           iTracker.MatchMethod(new MemberDescriptor(KnownType.System_Web_HttpResponse, "AppendHeader"),
-                                                new MemberDescriptor(KnownType.System_Web_HttpResponseBase, "AddHeader"),
-                                                new MemberDescriptor(KnownType.System_Collections_Specialized_NameValueCollection, "Add"),
-                                                new MemberDescriptor(KnownType.System_Net_Http_Headers_HttpHeaders, "Add")),
-                           iTracker.MethodHasParameters(ParameterCount),
-                           c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.SemanticModel)
-                                && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.SemanticModel));
-
-            var ocTracker = Language.Tracker.ObjectCreation;
-            ocTracker.Track(input,
-                            ocTracker.MatchConstructor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder),
-                            c => ContainsStar((ObjectCreationExpressionSyntax)c.Node, c.SemanticModel));
+            SetupInvocationTracker(Language.Tracker.Invocation, input);
+            SetupObjectCreationTracker(Language.Tracker.ObjectCreation, input);
         }
+
+        private static void SetupInvocationTracker(InvocationTracker<SyntaxKind> tracker, TrackerInput input)
+        {
+            tracker.Track(input,
+                          tracker.MatchMethod(new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add")),
+                          tracker.MethodHasParameters(ParameterCount),
+                          c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.SemanticModel)
+                               && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.SemanticModel),
+                          tracker.IsIHeadersDictionary());
+
+            tracker.Track(input,
+                          tracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder, "WithOrigins")),
+                          c => ContainsStar(((InvocationExpressionSyntax)c.Node).ArgumentList.Arguments.Select(a => a.Expression), c.SemanticModel));
+
+            tracker.Track(input, tracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder, "AllowAnyOrigin")));
+
+            tracker.Track(input,
+                          tracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_HeaderDictionaryExtensions, "Append"),
+                                              new MemberDescriptor(KnownType.System_Web_HttpResponse, "AppendHeader"),
+                                              new MemberDescriptor(KnownType.System_Web_HttpResponseBase, "AddHeader"),
+                                              new MemberDescriptor(KnownType.System_Collections_Specialized_NameValueCollection, "Add"),
+                                              new MemberDescriptor(KnownType.System_Net_Http_Headers_HttpHeaders, "Add")),
+                          tracker.MethodHasParameters(ParameterCount),
+                          c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.SemanticModel)
+                               && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.SemanticModel));
+        }
+
+        private static void SetupObjectCreationTracker(ObjectCreationTracker<SyntaxKind> tracker, TrackerInput input) =>
+            tracker.Track(input,
+                          tracker.MatchConstructor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder),
+                          c => ContainsStar((ObjectCreationExpressionSyntax)c.Node, c.SemanticModel));
 
         private void VisitAttribute(SyntaxNodeAnalysisContext context)
         {
