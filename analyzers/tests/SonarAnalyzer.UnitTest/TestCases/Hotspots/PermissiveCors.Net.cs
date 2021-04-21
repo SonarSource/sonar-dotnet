@@ -83,6 +83,8 @@ namespace Tests.Diagnostics
                 options.AddPolicy("SafeBuilder", safeBuilder.Build());
 
                 CorsPolicyBuilder builder = new ("*"); // FN
+
+                builder = new CorsPolicyBuilder { };
             });
 
             services.AddControllers();
