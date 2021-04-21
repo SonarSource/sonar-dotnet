@@ -282,6 +282,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
         internal static readonly KnownType System_MTAThreadAttribute = new KnownType("System.MTAThreadAttribute");
         internal static readonly KnownType System_Net_FtpWebRequest = new KnownType("System.Net.FtpWebRequest");
+        internal static readonly KnownType System_Net_Http_Headers_HttpHeaders = new KnownType("System.Net.Http.Headers.HttpHeaders");
         internal static readonly KnownType System_Net_Http_HttpClientHandler = new KnownType("System.Net.Http.HttpClientHandler");
         internal static readonly KnownType System_Net_Mail_SmtpClient = new KnownType("System.Net.Mail.SmtpClient");
         internal static readonly KnownType System_Net_NetworkCredential = new KnownType("System.Net.NetworkCredential");
@@ -419,6 +420,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Web_HttpCookie = new KnownType("System.Web.HttpCookie");
         internal static readonly KnownType System_Web_HttpContext = new KnownType("System.Web.HttpContext");
         internal static readonly KnownType System_Web_HttpResponse = new KnownType("System.Web.HttpResponse");
+        internal static readonly KnownType System_Web_HttpResponseBase = new KnownType("System.Web.HttpResponseBase");
         internal static readonly KnownType System_Web_Http_ApiController = new KnownType("System.Web.Http.ApiController");
         internal static readonly KnownType System_Web_Http_Cors_EnableCorsAttribute = new KnownType("System.Web.Http.Cors.EnableCorsAttribute");
         internal static readonly KnownType System_Web_Mvc_NonActionAttribute = new KnownType("System.Web.Mvc.NonActionAttribute");

@@ -84,7 +84,9 @@ namespace SonarAnalyzer.Rules.Hotspots
 
             iTracker.Track(input,
                            iTracker.MatchMethod(new MemberDescriptor(KnownType.System_Web_HttpResponse, "AppendHeader"),
-                                                new MemberDescriptor(KnownType.System_Collections_Specialized_NameValueCollection, "Add")),
+                                                new MemberDescriptor(KnownType.System_Web_HttpResponseBase, "AddHeader"),
+                                                new MemberDescriptor(KnownType.System_Collections_Specialized_NameValueCollection, "Add"),
+                                                new MemberDescriptor(KnownType.System_Net_Http_Headers_HttpHeaders, "Add")),
                            iTracker.MethodHasParameters(ParameterCount),
                            c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.SemanticModel)
                                 && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.SemanticModel));
