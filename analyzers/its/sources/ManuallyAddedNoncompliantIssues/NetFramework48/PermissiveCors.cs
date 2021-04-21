@@ -5,7 +5,7 @@
     using System.Web.Http.Cors;
     using Microsoft.Net.Http.Headers;
 
-    [EnableCors(origins: "*", headers: "*", methods: "*", exposedHeaders: "X-Custom-Header")] // Noncompliant {{Make sure this permissive CORS policy is safe here.}}
+    [EnableCors(origins: "*", headers: "*", methods: "*", exposedHeaders: "X-Custom-Header")] // Noncompliant (S5122) {{Make sure this permissive CORS policy is safe here.}}
     public class PermissiveCors : ApiController
     {
         [EnableCors("https:\\trustedwebsite.com", "*", "*", "X-Custom-Header")]
