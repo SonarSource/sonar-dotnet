@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2115",
+"message":  "Use a secure password when connecting to this database.",
+"location":  {
+"uri":  "sources\WebConfig\Views\Web.config",
+"region":  {
+"startLine":  39,
+"startColumn":  31,
+"endLine":  39,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2115",
+"message":  "Use a secure password when connecting to this database.",
+"location":  {
+"uri":  "sources\WebConfig\Web.config",
+"region":  {
+"startLine":  20,
+"startColumn":  31,
+"endLine":  20,
+"endColumn":  47
+}
+}
+}
+]
+}
