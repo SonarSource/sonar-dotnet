@@ -161,13 +161,20 @@ public class RoslynDataImporterTest {
 
     List<String> logs = logTester.logs();
     assertThat(logs.get(0)).isEqualTo("Importing 1 Roslyn report");
-    assertThat(logs.get(1))
+    assertThat(logs.get(1)).isEqualTo("Processing Roslyn report: " + workDir.resolve("roslyn-report-invalid-location.json"));
+    assertThat(logs.get(2))
+      .startsWith("Adding normal issue SA1629:")
+      .endsWith("\\resources\\Program.cs");
+    assertThat(logs.get(3))
       .startsWith("Precise issue location cannot be found! Location:")
       .endsWith("\\resources\\Program.cs, message=Documentation text should end with a period, startLine=13, startColumn=99, endLine=13, endColumn=100]");
-    assertThat(logs.get(2))
+    assertThat(logs.get(4))
+      .startsWith("Adding normal issue SA1629:")
+      .endsWith("\\resources\\Program.cs");
+    assertThat(logs.get(5))
       .startsWith("Precise issue location cannot be found! Location:")
       .endsWith("\\resources\\Program.cs, message=Documentation text should end with a period, startLine=100, startColumn=0, endLine=100, endColumn=1]");
-    assertThat(logs.get(3))
+    assertThat(logs.get(6))
       .startsWith("Line issue location cannot be found! Location:")
       .endsWith("\\resources\\Program.cs, message=Documentation text should end with a period, startLine=100, startColumn=0, endLine=100, endColumn=1]");
   }
