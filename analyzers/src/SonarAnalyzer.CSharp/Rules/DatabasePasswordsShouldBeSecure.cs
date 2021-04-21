@@ -105,26 +105,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (addAttribute.Attribute("connectionString") is { } connectionString
                     && IsVulnerable(connectionString.Value)
                     && !HasSanitizers(connectionString.Value)
-                    && CreateLocation(webConfigPath, connectionString) is { } location)
+                    && connectionString.CreateLocation(webConfigPath) is { } location)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
                 }
             }
-        }
-
-        private static Location CreateLocation(string path, XAttribute attribute)
-        {
-            // IXmlLineInfo is 1-based, whereas Roslyn is zero-based
-            var startPos = (IXmlLineInfo)attribute;
-            if (startPos.HasLineInfo())
-            {
-                // LoadOptions.PreserveWhitespace doesn't preserve whitespace inside nodes and attributes => there's no easy way to find full length of a XAttribute.
-                var length = attribute.Name.ToString().Length;
-                var start = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1);
-                var end = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1 + length);
-                return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
-            }
-            return null;
         }
 
         private static TrackerBase<SyntaxKind, InvocationContext>.Condition HasEmptyPasswordArgument() =>

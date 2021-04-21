@@ -19,7 +19,10 @@
  */
 
 using System;
+using System.Xml;
 using System.Xml.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -42,5 +45,20 @@ namespace SonarAnalyzer.Helpers
                 && attribute.Value.Equals(value.ToString(), StringComparison.OrdinalIgnoreCase)
                 ? attribute
                 : null;
+
+        public static Location CreateLocation(this XAttribute attribute, string path)
+        {
+            // IXmlLineInfo is 1-based, whereas Roslyn is zero-based
+            var startPos = (IXmlLineInfo)attribute;
+            if (startPos.HasLineInfo())
+            {
+                // LoadOptions.PreserveWhitespace doesn't preserve whitespace inside nodes and attributes => there's no easy way to find full length of a XAttribute.
+                var length = attribute.Name.ToString().Length;
+                var start = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1);
+                var end = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1 + length);
+                return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
+            }
+            return null;
+        }
     }
 }
