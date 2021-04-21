@@ -21,6 +21,7 @@ namespace Tests.Diagnostics
             Response.Headers.Add("Access-Control-Allow-Origin", Star); // Noncompliant
             Response.Headers.Add("Access-Control-Allow-Origin", "https://trustedwebsite.com");
             Response.Headers.Add("Access-Control-Allow-Origin", new [] {"https://trustedwebsite.com", "*"}); // Noncompliant
+            Response.Headers.Add("Access-Control-Allow-Origin", "*****");
             Response.Headers.Add("OtherString", "*");
             Response.Headers.Add(HeaderNames.Age, "*");
             Response.Headers.Add(HeaderNames.AccessControlAllowOrigin, "*"); // Noncompliant
@@ -42,8 +43,8 @@ namespace Tests.Diagnostics
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, new StringValues("https://trustedwebsite.com"));
             Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, new StringValues(new [] {"*", "https://trustedwebsite.com"})); // Noncompliant
 
-            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, "*, https://trustedwebsite.com"); // Compliant - FN
-            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}, https://trustedwebsite.com"); // Compliant - FN
+            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, "*, https://trustedwebsite.com"); // FN
+            Response.Headers.Append(HeaderNames.AccessControlAllowOrigin, $"{Star}, https://trustedwebsite.com"); // FN
         }
     }
 
@@ -59,6 +60,7 @@ namespace Tests.Diagnostics
                 {
                     builder.WithOrigins("*"); // Noncompliant
                     builder.WithOrigins(Star); // Noncompliant
+                    builder.WithOrigins("*", "*", "*"); // Noncompliant
                 });
 
                 options.AddPolicy("EnableAllPolicy", builder =>
@@ -74,6 +76,12 @@ namespace Tests.Diagnostics
                 options.AddPolicy("Safe", builder =>
                 {
                     builder.WithOrigins("https://trustedwebsite.com", "https://anothertrustedwebsite.com");
+                });
+
+                options.AddPolicy("MyAllowSubdomainPolicy", builder =>
+                {
+                    builder.WithOrigins("https://*.example.com")
+                           .SetIsOriginAllowedToAllowWildcardSubdomains();
                 });
 
                 var unsafeBuilder = new CorsPolicyBuilder("*"); // Noncompliant

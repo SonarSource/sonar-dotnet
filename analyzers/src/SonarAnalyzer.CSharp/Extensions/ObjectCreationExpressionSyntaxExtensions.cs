@@ -33,5 +33,9 @@ namespace SonarAnalyzer.Extensions
 
         public static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
             objectCreation?.ArgumentList?.Arguments.GetArgumentsOfKnownType(knownType, semanticModel) ?? Enumerable.Empty<ArgumentSyntax>();
+
+        public static bool IsKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
+            objectCreation.Type.GetName().EndsWith(knownType.ShortName)
+            && SymbolHelper.IsKnownType(objectCreation, knownType, semanticModel);
     }
 }

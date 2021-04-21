@@ -17,7 +17,7 @@
             response.Headers.Add("Access-Control-Allow-Origin", "*"); // Noncompliant
             response.Headers.Add("Access-Control-Allow-Origin", "https:\\trustedwebsite.com");
             response.Headers.Add("something else", "*");
-            response.Headers.Add("Access-Control-Allow-Origin", new String('*', 1)); // FP
+            response.Headers.Add("Access-Control-Allow-Origin", new String('*', 1)); // FN
 
             response.Headers.Add(HeaderNames.AccessControlAllowOrigin, "*"); // Noncompliant
             response.Headers.Add(HeaderNames.AccessControlAllowOrigin, "https:\\trustedwebsite.com");
