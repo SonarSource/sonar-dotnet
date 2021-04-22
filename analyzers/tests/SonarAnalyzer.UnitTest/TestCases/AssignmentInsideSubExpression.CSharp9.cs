@@ -1,4 +1,5 @@
-﻿
+﻿using System.IO;
+
 var topLevel = 0;
 Method(topLevel = 42); // Noncompliant
 
@@ -20,6 +21,18 @@ void TargetTypedNew()
     Method(r = new());              // Noncompliant
 
     void Method(Record arg) { }
+}
+
+async void IsNotNull(StreamReader reader)
+{
+    string line;
+    while ((line = await reader.ReadLineAsync()) is not null) // Noncompliant - FP, see: https://github.com/SonarSource/sonar-dotnet/issues/4264
+    {
+    }
+
+    while ((line = await reader.ReadLineAsync()) is null) // Noncompliant - FP, see: https://github.com/SonarSource/sonar-dotnet/issues/4264
+    {
+    }
 }
 
 record Record
