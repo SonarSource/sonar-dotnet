@@ -170,18 +170,16 @@ public class UnitTestResultsAggregatorTest {
   public void aggregate_logs_warning_on_exception() {
     UnitTestConfiguration unitTestConf = new UnitTestConfiguration("visualStudioTestResultsFile", "nunitTestResultsFile", "xunitTestResultsFile");
     MapSettings settings = new MapSettings();
+    VisualStudioTestResultsFileParser visualStudioTestResultsFileParser = new VisualStudioTestResultsFileParser();
     settings.setProperty("visualStudioTestResultsFile", "foo.trx");
 
     WildcardPatternFileProvider wildcardPatternFileProvider = mock(WildcardPatternFileProvider.class);
     when(wildcardPatternFileProvider.listFiles("foo.trx")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.trx"))));
 
-    VisualStudioTestResultsFileParser visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
-    doThrow(IllegalStateException.class).when(visualStudioTestResultsFileParser).accept(notNull(), notNull());
-
     new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), visualStudioTestResultsFileParser, null, null)
       .aggregate(wildcardPatternFileProvider);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Could not import unit test report 'foo.trx'");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Could not import unit test report 'foo.trx': java.io.FileNotFoundException: foo.trx (The system cannot find the file specified)");
   }
 
   private class AggregateTestContext {
