@@ -226,4 +226,35 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class EventChainingDirect
+    {
+        public event EventHandler Logging; // Noncompliant - FP
+
+        public void RunTest()
+        {
+            EventTestBase eventTestBase = new EventTestBase();
+            eventTestBase.Logging += Logging;
+            eventTestBase.RunSomethingThatSendAnEvent();
+        }
+    }
+
+    public class EventChainingLambda
+    {
+        public event EventHandler Logging;
+
+        public void RunTest()
+        {
+            EventTestBase eventTestBase = new EventTestBase();
+            eventTestBase.Logging += (s, e) => Logging(s, e);
+            eventTestBase.RunSomethingThatSendAnEvent();
+        }
+    }
+
+    public class EventTestBase
+    {
+        public event EventHandler Logging;
+
+        public void RunSomethingThatSendAnEvent() => Logging(this, EventArgs.Empty);
+    }
 }
