@@ -31,15 +31,11 @@ import org.sonar.api.utils.log.Loggers;
 
 public class DotCoverReportParser implements CoverageParser {
 
-  private static final String TITLE_START = "<title>";
-  // the pattern for the information about a sequence point - (lineStart, columnStart, lineEnd, columnEnd, hits)
-  private static final Pattern SEQUENCE_POINT = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)]");
-  private static final String SEQUENCE_POINTS_GROUP_NAME = "SequencePoints";
-  // the file coverage has a list of sequence points
-  // we use SEQUENCE_POINT_PATTERN below to avoid non-determinism in the regular expression, due to the `[` and `]` characters appearing multiple times
-  private static final Pattern FILE_COVERAGE = Pattern.compile(
-    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(?<" + SEQUENCE_POINTS_GROUP_NAME + ">" + SEQUENCE_POINT + "(," + SEQUENCE_POINT + ")*)]\\);\\s*+</script>.*",
+  private static final Pattern TITLE_PATTERN = Pattern.compile(".*?<title>(.*?)</title>.*", Pattern.DOTALL);
+  private static final Pattern COVERED_LINES_PATTERN_1 = Pattern.compile(
+    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(.*?)\\]\\);\\s*+</script>.*",
     Pattern.DOTALL);
+  private static final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,(\\d++),\\d++,(\\d++)\\]");
 
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
   private final FileService fileService;
@@ -83,9 +79,11 @@ public class DotCoverReportParser implements CoverageParser {
 
     @Nullable
     private String extractFileCanonicalPath(String contents) {
-      int indexOfTitleStart = getIndexOf(contents, TITLE_START, 0);
-      int indexOfTitleEnd = getIndexOf(contents, "</title>", indexOfTitleStart);
-      String lowerCaseAbsolutePath = contents.substring(indexOfTitleStart + TITLE_START.length(), indexOfTitleEnd);
+      Matcher matcher = TITLE_PATTERN.matcher(contents);
+      checkMatches(matcher);
+
+      String lowerCaseAbsolutePath = matcher.group(1);
+
       try {
         return new File(lowerCaseAbsolutePath).getCanonicalPath();
       } catch (IOException e) {
@@ -95,31 +93,27 @@ public class DotCoverReportParser implements CoverageParser {
     }
 
     private void collectCoverage(String fileCanonicalPath, String contents) {
-      Matcher fileCoverageMatcher = FILE_COVERAGE.matcher(contents);
-      if (!fileCoverageMatcher.matches()) {
-        throw new IllegalArgumentException("The report contents does not match the following regular expression: " + FILE_COVERAGE.pattern());
-      }
+      Matcher matcher = COVERED_LINES_PATTERN_1.matcher(contents);
+      checkMatches(matcher);
+      String highlightedContents = matcher.group(1);
 
-      String highlightedContents = fileCoverageMatcher.group(SEQUENCE_POINTS_GROUP_NAME);
-      Matcher sequencePointsMatcher = SEQUENCE_POINT.matcher(highlightedContents);
+      matcher = COVERED_LINES_PATTERN_2.matcher(highlightedContents);
 
-      while (sequencePointsMatcher.find()) {
-        int lineStart = Integer.parseInt(sequencePointsMatcher.group(1));
-        int hits = Integer.parseInt(sequencePointsMatcher.group(2));
+      while (matcher.find()) {
+        int lineStart = Integer.parseInt(matcher.group(1));
+        int hits = Integer.parseInt(matcher.group(3));
 
         coverage.addHits(fileCanonicalPath, lineStart, hits);
 
         LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
-          lineStart, hits, fileCanonicalPath);
+            lineStart, hits, fileCanonicalPath);
       }
     }
 
-    private int getIndexOf(String fileContent, String tag, int startIndex) {
-      int index = fileContent.indexOf(tag, startIndex);
-      if (index == -1) {
-        throw new IllegalArgumentException("The report does not contain a valid '<title>...</title>' tag.");
+    private void checkMatches(Matcher matcher) {
+      if (!matcher.matches()) {
+        throw new IllegalArgumentException("The report contents does not match the following regular expression: " + matcher.pattern().pattern());
       }
-      return index;
     }
   }
 }
