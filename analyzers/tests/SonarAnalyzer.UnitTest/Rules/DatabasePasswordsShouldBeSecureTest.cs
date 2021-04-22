@@ -61,7 +61,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\Values")]
-        [DataRow(@"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\ExternalConfig")]
         [DataRow(@"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\UnexpectedContent")]
         [TestCategory("Rule")]
         public void DatabasePasswordsShouldBeSecure_CS_WebConfig(string root)
@@ -72,6 +71,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.DatabasePasswordsShouldBeSecure(),
                 File.ReadAllText(webConfigPath),
                 TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DatabasePasswordsShouldBeSecure_CS_ExternalConnection()
+        {
+            var root = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\ExternalConfig";
+            var webConfigPath = GetWebConfigPath(root);
+            var externalConfigPath = Path.Combine(root, "external.config");
+            DiagnosticVerifier.VerifyExternalFile(
+                CreateCompilation(),
+                new CS.DatabasePasswordsShouldBeSecure(),
+                File.ReadAllText(webConfigPath),
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath, externalConfigPath)));
         }
 
         [TestMethod]

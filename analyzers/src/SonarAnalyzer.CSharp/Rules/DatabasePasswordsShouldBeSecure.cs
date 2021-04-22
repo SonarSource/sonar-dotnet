@@ -41,8 +41,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> Sanitizers = new HashSet<string>
         {
-            "Integrated Security",
-            "Trusted_Connection"
+            "Integrated Security=true",
+            "Integrated Security=SSPI",
+            "Trusted_Connection=yes",
+            "Integrated Security=yes",
         };
 
         private readonly MemberDescriptor[] trackedInvocations =
@@ -140,6 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // we prefer to keep it like this for the simplicity of the implementation
             || connectionString.EndsWith("Password=\"");
 
-        private static bool HasSanitizers(string connectionString) => Sanitizers.Any(connectionString.Contains);
+        private static bool HasSanitizers(string connectionString) =>
+            Sanitizers.Any(x => connectionString.IndexOf(x, System.StringComparison.InvariantCultureIgnoreCase) > -1);
     }
 }
