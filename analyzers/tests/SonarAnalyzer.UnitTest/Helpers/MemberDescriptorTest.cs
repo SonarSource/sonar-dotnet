@@ -354,20 +354,6 @@ End Namespace
                     .Select(n => ((SyntaxNode)n, VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
         }
 
-        private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
-            CheckMatchesAny(false, expectedOutcome, invocationContext, targetMethodSignatures);
-
-        private static void CheckIsMethodOrDerived(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
-            CheckMatchesAny(true, expectedOutcome, invocationContext, targetMethodSignatures);
-
-        private static void CheckMatchesAny(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures)
-        {
-            var result = MemberDescriptor.MatchesAny(invocationContext.MethodName,
-                invocationContext.MethodSymbol, checkDerived, StringComparison.Ordinal, targetMethodSignatures);
-
-            result.Should().Be(expectedOutcome);
-        }
-
         private static void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)
         {
             // Testing for calls to Console.WriteLine
@@ -429,6 +415,20 @@ End Namespace
             // Exact match should not match, but matching "derived" methods should
             CheckExactMethod(false, callToDispose, dispose);
             CheckIsMethodOrDerived(true, callToDispose, dispose);
+        }
+
+        private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
+            CheckMatchesAny(false, expectedOutcome, invocationContext, targetMethodSignatures);
+
+        private static void CheckIsMethodOrDerived(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
+            CheckMatchesAny(true, expectedOutcome, invocationContext, targetMethodSignatures);
+
+        private static void CheckMatchesAny(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures)
+        {
+            var result = MemberDescriptor.MatchesAny(invocationContext.MethodName,
+                invocationContext.MethodSymbol, checkDerived, StringComparison.Ordinal, targetMethodSignatures);
+
+            result.Should().Be(expectedOutcome);
         }
     }
 }
