@@ -102,7 +102,7 @@ public class UnitTestResultsAggregator {
           try {
             parser.accept(reportFile, unitTestResults);
           } catch (Exception e) {
-            LOG.warn("Could not import unit test report '{}'", reportFile);
+            LOG.warn("Could not import unit test report '{}': {}", reportFile, e.getMessage());
           }
         }
       }
