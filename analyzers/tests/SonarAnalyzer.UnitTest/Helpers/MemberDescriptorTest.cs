@@ -24,6 +24,7 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -36,6 +37,87 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class MethodDescriptorTest
     {
+        private static InvocationContext xmlNodeCloneNodeInvocationContext;
+
+        [ClassInitialize]
+        public static void ClassInit(TestContext context)
+        {
+            const string code = @"
+namespace Test
+{
+    using System.Xml;
+
+    class Class1
+    {
+        public void DoStuff(XmlNode node)
+        {
+            node.CloneNode(true);
+        }
+    }
+}
+";
+            var snippet = new SnippetCompiler(code, MetadataReferenceFacade.SystemXml);
+            xmlNodeCloneNodeInvocationContext = CreateContextForMethod("XmlNode.CloneNode", snippet);
+        }
+
+        [TestMethod]
+        public void IsMatch_WhenMethodNameIsNull_ReturnsFalse()
+        {
+            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            underTest.IsMatch(null, new Mock<ITypeSymbol>().Object, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsMatch_WhenTypeSymbolIsNull_ReturnsFalse()
+        {
+            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            underTest.IsMatch("CloneNode", null, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
+        }
+
+        [DataRow(null, StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("", StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("Clone", StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("clonenode", StringComparison.InvariantCulture)]
+        [DataTestMethod]
+        public void IsMatch_WhenMethodNameDoesNotMatch_ReturnsFalseDoesNotEvaluateSymbol(string memberName, StringComparison stringComparison)
+        {
+            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            var shouldNotBeUsed = new Lazy<IMethodSymbol>(() => throw new NotSupportedException());
+            underTest.IsMatch(memberName, shouldNotBeUsed, stringComparison).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsMatch_WhenTypeMatchesButNameIsDifferentCase_ReturnsFalse()
+        {
+            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            underTest.IsMatch("clonenode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsMatch_WhenMethodNameAndTypeMatch_ReturnsTrue()
+        {
+            const string code = @"
+namespace Test
+{
+    using System.Xml;
+
+    class Class1
+    {
+        public void DoStuff(XmlNode node)
+        {
+            node.CloneNode(true);
+        }
+    }
+}
+";
+            var snippet = new SnippetCompiler(code, MetadataReferenceFacade.SystemXml);
+            var cloneNodeContext = CreateContextForMethod("XmlNode.CloneNode", snippet);
+
+            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            underTest.IsMatch("CloneNode", cloneNodeContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeTrue();
+            underTest.IsMatch("clonenode", cloneNodeContext.MethodSymbol, StringComparison.InvariantCultureIgnoreCase).Should().BeTrue();
+        }
+
         [TestMethod]
         public void ExactMatchOnly_OverridesAreNotMatched_CS()
         {
