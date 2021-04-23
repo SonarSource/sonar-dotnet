@@ -96,26 +96,9 @@ namespace Test
         [TestMethod]
         public void IsMatch_WhenMethodNameAndTypeMatch_ReturnsTrue()
         {
-            const string code = @"
-namespace Test
-{
-    using System.Xml;
-
-    class Class1
-    {
-        public void DoStuff(XmlNode node)
-        {
-            node.CloneNode(true);
-        }
-    }
-}
-";
-            var snippet = new SnippetCompiler(code, MetadataReferenceFacade.SystemXml);
-            var cloneNodeContext = CreateContextForMethod("XmlNode.CloneNode", snippet);
-
             var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
-            underTest.IsMatch("CloneNode", cloneNodeContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeTrue();
-            underTest.IsMatch("clonenode", cloneNodeContext.MethodSymbol, StringComparison.InvariantCultureIgnoreCase).Should().BeTrue();
+            underTest.IsMatch("CloneNode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeTrue();
+            underTest.IsMatch("clonenode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCultureIgnoreCase).Should().BeTrue();
         }
 
         [TestMethod]
@@ -230,32 +213,15 @@ namespace Test
         [TestMethod]
         public void MatchesAny_MethodAndTypeCombination_FindsCorrectOne()
         {
-            const string code = @"
-namespace Test
-{
-    using System.Xml;
-
-    class Class1
-    {
-        public void DoStuff(XmlNode node)
-        {
-            node.CloneNode(true);
-        }
-    }
-}
-";
-            var snippet = new SnippetCompiler(code, MetadataReferenceFacade.SystemXml);
-
             var nodeClone = new MemberDescriptor(KnownType.System_Xml_XmlNode, "Clone");
             var nodeCloneNode = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
             var docCloneNode = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "CloneNode");
 
-            var underTest = CreateContextForMethod("XmlNode.CloneNode", snippet);
             // this should be false, because on XmlNode we check only Clone(), not CloneNode()
             // the implementation should correctly map the method name with the type
-            CheckIsMethodOrDerived(false, underTest, nodeClone, docCloneNode);
+            CheckIsMethodOrDerived(false, xmlNodeCloneNodeInvocationContext, nodeClone, docCloneNode);
             // here, we verify if XmlNode.CloneNode() is called, which is true
-            CheckIsMethodOrDerived(true, underTest, nodeCloneNode, docCloneNode);
+            CheckIsMethodOrDerived(true, xmlNodeCloneNodeInvocationContext, nodeCloneNode, docCloneNode);
         }
 
         [TestMethod]
