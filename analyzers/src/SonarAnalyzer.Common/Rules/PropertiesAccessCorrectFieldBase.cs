@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
         protected abstract IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
         protected abstract IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation);
         protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
-        protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod);
+        protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation);
 
         protected PropertiesAccessCorrectFieldBase(System.Resources.ResourceManager rspecResources)
         {
@@ -159,8 +159,8 @@ namespace SonarAnalyzer.Rules
             {
                 var readFields = FindFieldReads(property, compilation);
                 var updatedFields = FindFieldAssignments(property, compilation);
-                var ignoreGetter = ShouldIgnoreAccessor(property.GetMethod);
-                var ignoreSetter = ShouldIgnoreAccessor(property.SetMethod);
+                var ignoreGetter = ShouldIgnoreAccessor(property.GetMethod, compilation);
+                var ignoreSetter = ShouldIgnoreAccessor(property.SetMethod, compilation);
                 var data = new PropertyData(property, readFields, updatedFields, ignoreGetter, ignoreSetter);
                 allPropertyData.Add(data);
             }

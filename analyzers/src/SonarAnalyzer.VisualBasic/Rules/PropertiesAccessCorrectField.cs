@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod)
+        protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
         {
             if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor))
             {

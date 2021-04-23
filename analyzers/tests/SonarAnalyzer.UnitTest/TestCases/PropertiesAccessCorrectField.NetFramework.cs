@@ -19,18 +19,18 @@ namespace TestCases
 
         public Color BackgroundColor
         {
-            get => (Color)GetValue(BackgroundColorProperty); // Noncompliant - FP
-            set => this.SetValue(BackgroundColorProperty, value); // Noncompliant - FP
+            get => (Color)GetValue(BackgroundColorProperty);
+            set => this.SetValue(BackgroundColorProperty, value);
         }
 
         public Color ForegroundColor
         {
             get
             {
-                return (Color) GetValue(ForegroundColorProperty); // Noncompliant - FP
+                return (Color) GetValue(ForegroundColorProperty);
             }
 
-            set // Noncompliant - FP
+            set
             {
                 this.SetValue(ForegroundColorProperty, value);
             }

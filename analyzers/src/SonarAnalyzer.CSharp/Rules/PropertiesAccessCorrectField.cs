@@ -94,13 +94,14 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod)
+        protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
         {
-            if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor))
+            if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor)
+                || ContainsGetOrSetOnDependencyProperty((SyntaxNode)accessor.Body ?? accessor, compilation))
             {
-                // no accessor
                 return true;
             }
+
             // Special case: ignore the accessor if the only statement/expression is a throw.
             if (accessor.Body == null)
             {
@@ -108,6 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return accessor.DescendantNodes().FirstOrDefault() is ArrowExpressionClauseSyntax arrowClause
                        && ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
             }
+
             // Statement-bodied syntax
             return (accessor.Body.DescendantNodes().Count(n => n is StatementSyntax) == 1
                     && accessor.Body.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1);
@@ -118,6 +120,18 @@ namespace SonarAnalyzer.Rules.CSharp
              && setter.DescendantNodes().Any())
             || (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter
                 && getter.DescendantNodes().Any());
+
+        private static bool ContainsGetOrSetOnDependencyProperty(SyntaxNode syntaxNode, Compilation compilation)
+        {
+            var semanticModel = compilation.GetSemanticModel(syntaxNode.SyntaxTree);
+
+            // Ignore the accessor if it calls System.Windows.DependencyObject.GetValue or System.Windows.DependencyObject.SetValue
+            return syntaxNode
+                   .DescendantNodes()
+                   .OfType<InvocationExpressionSyntax>()
+                   .Where(invocation => invocation.Expression.NameIs("GetValue") || invocation.Expression.NameIs("SetValue"))
+                   .Any(invocation => semanticModel.GetSymbolInfo(invocation).Symbol.ContainingType.DerivesFrom(KnownType.System_Windows_DependencyObject));
+        }
 
         private static void FillAssignments(IDictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
         {
