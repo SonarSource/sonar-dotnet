@@ -943,4 +943,19 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2303
+    public class Repro_2303
+    {
+        public void WithRefKeywrod()
+        {
+            Span<int> span = new[] { 42 };
+            int j = 0;
+
+            foreach (ref var e in span)
+            {
+                e = j--; // Compliant because of ref keyword
+            }
+        }
+    }
 }
