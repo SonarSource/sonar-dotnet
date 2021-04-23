@@ -174,7 +174,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void ConditionEvaluatedHandler(object sender, ConditionEvaluatedEventArgs args) =>
                 CollectConditions(args, conditionTrue, conditionFalse, context.SemanticModel);
-        }
 
         private static bool IsYieldNode(Block node) =>
             node is JumpBlock jumpBlock &&
@@ -402,5 +401,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(x => (x is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.CoalesceExpression) ? binary.Right : null) ??
                              (x is AssignmentExpressionSyntax assign && assign.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) ? assign.Right : null))
                 .WhereNotNull();
+        }
     }
 }
