@@ -74,6 +74,17 @@ namespace Test
             sut.IsMatch("CloneNode", null, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void IsMatch_WhenContainingTypeIsNull_ReturnsFalse()
+        {
+            var typeMock = new Mock<IMethodSymbol>();
+            typeMock.SetupGet(t => t.ContainingType).Returns((INamedTypeSymbol)null);
+            var lazySymbol = new Lazy<IMethodSymbol>(() => typeMock.Object);
+
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            sut.IsMatch("CloneNode", lazySymbol, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
+        }
+
         [DataRow(null, StringComparison.InvariantCultureIgnoreCase)]
         [DataRow("", StringComparison.InvariantCultureIgnoreCase)]
         [DataRow("Clone", StringComparison.InvariantCultureIgnoreCase)]

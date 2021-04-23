@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Helpers
             where TSymbolType : class, ISymbol
         {
             var containingType = memberSymbol.ContainingType?.ConstructedFrom;
-            return checkOverriddenMethods ? containingType.DerivesOrImplements(ContainingType) : containingType.Is(ContainingType);
+            return containingType != null && checkOverriddenMethods ? containingType.DerivesOrImplements(ContainingType) : containingType.Is(ContainingType);
         }
     }
 }
