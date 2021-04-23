@@ -313,14 +313,14 @@ namespace Tests.Diagnostics
         public void BeginInvokeWithEndinvokeDelegate()
         {
             Action a = () => { };
-            a.BeginInvoke(a.EndInvoke, null); // Noncompliant FP
+            a.BeginInvoke(a.EndInvoke, null); // Compliant
         }
 
         public void AsyncCallbackLocalVariable()
         {
             Action a = () => { };
             AsyncCallback callback = a.EndInvoke;
-            a.BeginInvoke(callback, null); // Noncompliant FP
+            a.BeginInvoke(callback, null); // Compliant
         }
     }
 }
