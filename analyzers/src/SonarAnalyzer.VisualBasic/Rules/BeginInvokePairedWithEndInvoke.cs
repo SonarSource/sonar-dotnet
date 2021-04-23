@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         /// - passed as a new delegate instantiation (and the code can be inside the method declaration)
         /// - a mix of the above.
         /// </summary>
-        private SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel)
+        private static SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel)
         {
             var callback = callbackArg.RemoveParentheses();
             if (callback is IdentifierNameSyntax identifier)
