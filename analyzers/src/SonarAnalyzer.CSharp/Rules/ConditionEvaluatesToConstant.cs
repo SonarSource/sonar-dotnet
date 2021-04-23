@@ -428,20 +428,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private readonly SemanticModel semanticModel;
             private readonly SyntaxNode node;
-            private readonly ISymbol symbol;
+            private readonly IdentifierNameSyntax[] identifiers;
+            private readonly ISymbol[] symbols;
             private bool isMuted;
 
             public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node)
             {
                 this.semanticModel = semanticModel;
                 this.node = node;
-                symbol = semanticModel.GetSymbolInfo(node).Symbol;
+                identifiers = node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().ToArray();
+                symbols = identifiers.Select(x => semanticModel.GetSymbolInfo(x).Symbol).WhereNotNull().ToArray();
             }
 
             public bool IsMuted()
             {
-                // FIXME: Verify Ancestors order
-                if (symbol != null && node.Ancestors().FirstOrDefault(x => x.IsAnyKind(RootKinds)) is { } root)
+                if (symbols.Any() && node.Ancestors().FirstOrDefault(x => x.IsAnyKind(RootKinds)) is { } root)
                 {
                     Visit(root);
                 }
@@ -458,7 +459,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
             {
-                if (node.NameIs(symbol.Name) && semanticModel.GetSymbolInfo(node).Symbol == symbol)
+                if (symbols.Any(x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)))
                 {
                     isMuted = node.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget();
                 }

@@ -2779,8 +2779,8 @@ public class Tuples
 
         (memoryStream, str) = GetData();
 
-        if (memoryStream != null) // Noncompliant FP, memoryStream was reassigned as a tuple
-        {                         // Secondary
+        if (memoryStream != null) // Compliant, memoryStream was reassigned as a tuple
+        {
             // some code
         }
     }
