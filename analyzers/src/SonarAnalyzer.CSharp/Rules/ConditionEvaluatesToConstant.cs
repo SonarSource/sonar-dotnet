@@ -142,22 +142,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Enumerable.Empty<Diagnostic>()
                     .Union(conditionTrue
                         .Except(conditionFalse)
-                        .Where(x => !IsInsideCatchOrFinallyBlock(x) && !IsConditionOfLoopWithBreak(x))
+                        .Where(x => !IsMuted(x) && !IsInsideCatchOrFinallyBlock(x) && !IsConditionOfLoopWithBreak(x))
                         .Select(x => GetNodeDiagnostics(x, true)))
                     .Union(conditionFalse
                         .Except(conditionTrue)
-                        .Where(x => !IsInsideCatchOrFinallyBlock(x))
+                        .Where(x => !IsMuted(x) && !IsInsideCatchOrFinallyBlock(x))
                         .Select(x => GetNodeDiagnostics(x, false)))
                     .Union(isNull
                         .Except(isUnknown)
                         .Except(isNotNull)
-                        .Where(x => !IsInsideCatchOrFinallyBlock(x))
+                        .Where(x => !IsMuted(x) && !IsInsideCatchOrFinallyBlock(x))
                         .Select(x => Diagnostic.Create(s2589, x.GetLocation(), S2589MessageNull)))
                     .Union(isNotNull
                         .Except(isUnknown)
                         .Except(isNull)
-                        .Where(x => !IsInsideCatchOrFinallyBlock(x))
+                        .Where(x => !IsMuted(x) && !IsInsideCatchOrFinallyBlock(x))
                         .Select(x => Diagnostic.Create(s2583, x.GetLocation(), S2583MessageNotNull)));
+
+                bool IsMuted(SyntaxNode node) =>
+                    new MutedSyntaxWalker(context.SemanticModel, node).IsMuted();
             }
 
             public void Dispose()
@@ -401,6 +404,66 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(x => (x is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.CoalesceExpression) ? binary.Right : null) ??
                                  (x is AssignmentExpressionSyntax assign && assign.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) ? assign.Right : null))
                     .WhereNotNull();
+        }
+
+        private class MutedSyntaxWalker : CSharpSyntaxWalker
+        {
+            // All kinds that SonarAnalysisContextExtensions.RegisterExplodedGraphBasedAnalysis registers for
+            private static readonly SyntaxKind[] RootKinds = new[]
+            {
+                SyntaxKind.ConstructorDeclaration,
+                SyntaxKind.DestructorDeclaration,
+                SyntaxKind.ConversionOperatorDeclaration,
+                SyntaxKind.OperatorDeclaration,
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.PropertyDeclaration,
+                SyntaxKind.GetAccessorDeclaration,
+                SyntaxKind.SetAccessorDeclaration,
+                SyntaxKind.AddAccessorDeclaration,
+                SyntaxKind.RemoveAccessorDeclaration,
+                SyntaxKind.AnonymousMethodExpression,
+                SyntaxKind.SimpleLambdaExpression,
+                SyntaxKind.ParenthesizedLambdaExpression
+            };
+
+            private readonly SemanticModel semanticModel;
+            private readonly SyntaxNode node;
+            private readonly ISymbol symbol;
+            private bool isMuted;
+
+            public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node)
+            {
+                this.semanticModel = semanticModel;
+                this.node = node;
+                symbol = semanticModel.GetSymbolInfo(node).Symbol;
+            }
+
+            public bool IsMuted()
+            {
+                // FIXME: Verify Ancestors order
+                if (symbol != null && node.Ancestors().FirstOrDefault(x => x.IsAnyKind(RootKinds)) is { } root)
+                {
+                    Visit(root);
+                }
+                return isMuted;
+            }
+
+            public override void Visit(SyntaxNode node)
+            {
+                if (!isMuted)   // Performance optimization, we can stop visiting once we know the answer
+                {
+                    base.Visit(node);
+                }
+            }
+
+            public override void VisitIdentifierName(IdentifierNameSyntax node)
+            {
+                if (node.NameIs(symbol.Name) && semanticModel.GetSymbolInfo(node).Symbol == symbol)
+                {
+                    isMuted = node.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget();
+                }
+                base.VisitIdentifierName(node);
+            }
         }
     }
 }
