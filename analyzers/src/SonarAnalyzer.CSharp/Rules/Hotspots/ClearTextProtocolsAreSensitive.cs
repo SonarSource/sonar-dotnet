@@ -93,9 +93,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration)
         {
-            var allSubdomainsPattern = "([^/]+\\.)?";
+            const string allSubdomainsPattern = "([^/]+\\.)?";
             var domainsList = commonlyUsedXmlDomains.Concat(commonlyUsedExampleDomains.Select(x => allSubdomainsPattern + x)).Concat(localhostAddresses);
             var validServerPattern = domainsList.JoinStr("|");
+
             httpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).");
             ftpRegex = CompileRegex(@$"^ftp:\/\/.*@(?!{validServerPattern})");
             telnetRegex = CompileRegex(@$"^telnet:\/\/.*@(?!{validServerPattern})");
