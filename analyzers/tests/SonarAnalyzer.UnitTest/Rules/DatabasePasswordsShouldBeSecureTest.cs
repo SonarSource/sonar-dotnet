@@ -21,9 +21,11 @@
 #if NET
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.MetadataReferences;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -56,6 +58,53 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     new CS.DatabasePasswordsShouldBeSecure(),
                                     ParseOptionsHelper.FromCSharp8,
                                     GetReferences("3.1.11", "3.19.80"));
+
+        [DataTestMethod]
+        [DataRow(@"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\Values")]
+        [DataRow(@"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\UnexpectedContent")]
+        [TestCategory("Rule")]
+        public void DatabasePasswordsShouldBeSecure_CS_WebConfig(string root)
+        {
+            var webConfigPath = GetWebConfigPath(root);
+            DiagnosticVerifier.VerifyExternalFile(
+                CreateCompilation(),
+                new CS.DatabasePasswordsShouldBeSecure(),
+                File.ReadAllText(webConfigPath),
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DatabasePasswordsShouldBeSecure_CS_ExternalConnection()
+        {
+            var root = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\ExternalConfig";
+            var webConfigPath = GetWebConfigPath(root);
+            var externalConfigPath = Path.Combine(root, "external.config");
+            DiagnosticVerifier.VerifyExternalFile(
+                CreateCompilation(),
+                new CS.DatabasePasswordsShouldBeSecure(),
+                File.ReadAllText(webConfigPath),
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath, externalConfigPath)));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DatabasePasswordsShouldBeSecure_CS_CorruptAndNonExistingWebConfigs_ShouldNotFail()
+        {
+            var root = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\Corrupt";
+            var missingDirectory = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\NonExistingDirectory";
+            var corruptFilePath = GetWebConfigPath(root);
+            var nonExistingFilePath = GetWebConfigPath(missingDirectory);
+            DiagnosticVerifier.VerifyExternalFile(
+                CreateCompilation(),
+                new CS.DatabasePasswordsShouldBeSecure(),
+                File.ReadAllText(corruptFilePath),
+                TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, corruptFilePath, nonExistingFilePath)));
+        }
+
+        private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");
+
+        private static Compilation CreateCompilation() => SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
 
         private static IEnumerable<MetadataReference> GetReferences(string entityFrameworkCoreVersion, string oracleVersion) =>
             Enumerable.Empty<MetadataReference>()

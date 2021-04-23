@@ -58,6 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Values")]
+        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Formatting")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\UnexpectedContent")]
         [TestCategory("Rule")]
         public void DisablingRequestValidation_CS_WebConfig(string root)

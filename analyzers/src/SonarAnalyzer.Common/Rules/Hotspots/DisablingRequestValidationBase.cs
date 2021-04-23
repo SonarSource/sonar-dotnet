@@ -18,18 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -41,8 +37,6 @@ namespace SonarAnalyzer.Rules
         private const string MessageFormat = "Make sure disabling ASP.NET Request Validation feature is safe here.";
         // See https://docs.microsoft.com/en-us/dotnet/api/system.web.configuration.httpruntimesection.requestvalidationmode
         private const int MinimumAcceptedRequestValidationModeValue = 4;
-
-        private static readonly Regex WebConfigRegex = new Regex(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase);
 
         private readonly DiagnosticDescriptor rule;
 
@@ -91,7 +85,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            foreach (var fullPath in context.ProjectConfiguration(c.Options).FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess))
+            foreach (var fullPath in context.GetWebConfig(c))
             {
                 var webConfig = File.ReadAllText(fullPath);
                 if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
@@ -100,9 +94,6 @@ namespace SonarAnalyzer.Rules
                     ReportRequestValidationMode(doc, fullPath, c);
                 }
             }
-
-            static bool ShouldProcess(string path) =>
-                !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
         }
 
         private void ReportValidateRequest(XDocument doc, string webConfigPath, CompilationAnalysisContext c)
@@ -110,7 +101,7 @@ namespace SonarAnalyzer.Rules
             foreach (var pages in doc.XPathSelectElements("configuration/system.web/pages"))
             {
                 if (pages.GetAttributeIfBoolValueIs("validateRequest", false) is { } validateRequest
-                    && CreateLocation(webConfigPath, validateRequest) is { } location)
+                    && validateRequest.CreateLocation(webConfigPath) is { } location)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
                 }
@@ -124,26 +115,11 @@ namespace SonarAnalyzer.Rules
                 if (httpRuntime.Attribute("requestValidationMode") is { } requestValidationMode
                     && decimal.TryParse(requestValidationMode.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out var value)
                     && value < MinimumAcceptedRequestValidationModeValue
-                    && CreateLocation(webConfigPath, requestValidationMode) is { } location)
+                    && requestValidationMode.CreateLocation(webConfigPath) is { } location)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
                 }
             }
-        }
-
-        private static Location CreateLocation(string path, XAttribute attribute)
-        {
-            // IXmlLineInfo is 1-based, whereas Roslyn is zero-based
-            var startPos = (IXmlLineInfo)attribute;
-            if (startPos.HasLineInfo())
-            {
-                // LoadOptions.PreserveWhitespace doesn't preserve whitespace inside nodes and attributes => there's no easy way to find full length of a XAttribute.
-                var length = attribute.Name.ToString().Length;
-                var start = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1);
-                var end = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1 + length);
-                return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
-            }
-            return null;
         }
     }
 }

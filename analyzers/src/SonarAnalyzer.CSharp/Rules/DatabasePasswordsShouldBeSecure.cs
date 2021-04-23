@@ -19,7 +19,10 @@
  */
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -38,8 +41,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> Sanitizers = new HashSet<string>
         {
-            "Integrated Security",
-            "Trusted_Connection"
+            "Integrated Security=true",
+            "Integrated Security=SSPI",
+            "Trusted_Connection=yes",
+            "Integrated Security=yes",
         };
 
         private readonly MemberDescriptor[] trackedInvocations =
@@ -67,6 +72,38 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var inv = Language.Tracker.Invocation;
             inv.Track(input, inv.MatchMethod(trackedInvocations), HasEmptyPasswordArgument());
+        }
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            base.Initialize(context);
+            context.RegisterCompilationAction(c => CheckWebConfig(context, c));
+        }
+
+        private void CheckWebConfig(SonarAnalysisContext context, CompilationAnalysisContext c)
+        {
+            foreach (var fullPath in context.GetWebConfig(c))
+            {
+                var webConfig = File.ReadAllText(fullPath);
+                if (webConfig.Contains("<connectionStrings>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
+                {
+                    ReportEmptyPassword(doc, fullPath, c);
+                }
+            }
+        }
+
+        private void ReportEmptyPassword(XDocument doc, string webConfigPath, CompilationAnalysisContext c)
+        {
+            foreach (var addAttribute in doc.XPathSelectElements("configuration/connectionStrings/add"))
+            {
+                if (addAttribute.Attribute("connectionString") is { } connectionString
+                    && IsVulnerable(connectionString.Value)
+                    && !HasSanitizers(connectionString.Value)
+                    && connectionString.CreateLocation(webConfigPath) is { } location)
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                }
+            }
         }
 
         private static TrackerBase<SyntaxKind, InvocationContext>.Condition HasEmptyPasswordArgument() =>
@@ -105,6 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // we prefer to keep it like this for the simplicity of the implementation
             || connectionString.EndsWith("Password=\"");
 
-        private static bool HasSanitizers(string connectionString) => Sanitizers.Any(connectionString.Contains);
+        private static bool HasSanitizers(string connectionString) =>
+            Sanitizers.Any(x => connectionString.IndexOf(x, System.StringComparison.InvariantCultureIgnoreCase) > -1);
     }
 }

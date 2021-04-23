@@ -28,6 +28,12 @@
 
             optionsBuilder.UseSqlite("Password=Server=myServerAddress"); // Compliant, inside we only look at 'Password=;'
             builder.UseMySQL("Password=password"); // compliant, not empty
+
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=False;Password="); // Noncompliant
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=false;Password="); // Noncompliant
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Trusted_Connection=no;Password="); // Noncompliant
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Trusted_Connection=foo;Password="); // Noncompliant
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=maybe;Password="); // Noncompliant
         }
 
         protected void Method(DbContextOptionsBuilder<NoncompliantDbContext> genericBuilder)
@@ -87,6 +93,7 @@
             optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=True");
             optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Trusted_Connection=true");
             optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Trusted_Connection=yes");
+
             optionsBuilder.UseSqlServer("Password=Foo"); // not empty
             optionsBuilder.UseSqlServer("Password = "); // FN, has spaces
 
@@ -94,9 +101,14 @@
             // We don't actually map the correct parameters to the provider, we keep things simple (and may have FNs)
             optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=SSPI;Password=");
             optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=true;Password=;");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated SECURITY=TRUE;Password=;");
             optionsBuilder.UseMySQL("Server=myServerAddress;Database=myDataBase;Integrated Security=yes;Password=;"); // FN, "yes" is for OracleClient
             optionsBuilder.UseNpgsql("Server=myServerAddress;Database=myDataBase;Trusted_Connection=yes;Password=;");
+            optionsBuilder.UseNpgsql("Server=myServerAddress;Database=myDataBase;TRUSTED_CONNECTION=YES;Password=;");
             optionsBuilder.UseSqlite("Server=myServerAddress;Database=myDataBase;Password=;Trusted_Connection=yes");
+
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=False;Password=123");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Trusted_Connection=no;Password=123");
 
             optionsBuilder.UseSqlite(dbConnection);
         }
