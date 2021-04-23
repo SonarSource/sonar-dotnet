@@ -24,6 +24,7 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.MetadataReferences;
@@ -34,12 +35,99 @@ using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class MethodSignatureHelperTest
+    public class MethodDescriptorTest
     {
+        private static InvocationContext xmlNodeCloneNodeInvocationContext;
+
+        [ClassInitialize]
+        public static void ClassInit(TestContext context)
+        {
+            const string code = @"
+namespace Test
+{
+    using System.Xml;
+
+    class Class1
+    {
+        public void DoStuff(XmlNode node)
+        {
+            node.CloneNode(true);
+        }
+    }
+}
+";
+            var snippet = new SnippetCompiler(code, MetadataReferenceFacade.SystemXml);
+            xmlNodeCloneNodeInvocationContext = CreateContextForMethod("XmlNode.CloneNode", snippet);
+        }
+
+        [TestMethod]
+        public void IsMatch_WhenMethodNameIsNull_ReturnsFalse()
+        {
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            sut.IsMatch(null, new Mock<ITypeSymbol>().Object, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsMatch_WhenTypeSymbolIsNull_ReturnsFalse()
+        {
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            sut.IsMatch("CloneNode", null, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsMatch_WhenContainingTypeIsNull_ReturnsFalse()
+        {
+            var typeMock = new Mock<IMethodSymbol>();
+            typeMock.SetupGet(t => t.ContainingType).Returns((INamedTypeSymbol)null);
+            var lazySymbol = new Lazy<IMethodSymbol>(() => typeMock.Object);
+
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            sut.IsMatch("CloneNode", lazySymbol, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
+        }
+
+        [DataRow(null, StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("", StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("Clone", StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("clonenode", StringComparison.InvariantCulture)]
+        [DataTestMethod]
+        public void MatchesAny_WhenMethodNameDoesNotMatch_ReturnsFalseDoesNotEvaluateSymbol(string memberName, StringComparison stringComparison)
+        {
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            var shouldNotBeUsed = new Lazy<IMethodSymbol>(() => throw new NotSupportedException());
+            MemberDescriptor.MatchesAny(memberName, shouldNotBeUsed, false, stringComparison, sut).Should().BeFalse();
+        }
+
+        [DataRow(null, StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("", StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("Clone", StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("clonenode", StringComparison.InvariantCulture)]
+        [DataTestMethod]
+        public void IsMatch_WhenMethodNameDoesNotMatch_ReturnsFalseDoesNotEvaluateSymbol(string memberName, StringComparison stringComparison)
+        {
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            var shouldNotBeUsed = new Lazy<IMethodSymbol>(() => throw new NotSupportedException());
+            sut.IsMatch(memberName, shouldNotBeUsed, stringComparison).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsMatch_WhenTypeMatchesButNameIsDifferentCase_ReturnsFalse()
+        {
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            sut.IsMatch("clonenode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsMatch_WhenMethodNameAndTypeMatch_ReturnsTrue()
+        {
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            sut.IsMatch("CloneNode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeTrue();
+            sut.IsMatch("clonenode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCultureIgnoreCase).Should().BeTrue();
+        }
+
         [TestMethod]
         public void ExactMatchOnly_OverridesAreNotMatched_CS()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
   class Class1
@@ -62,7 +150,7 @@ namespace Test
         [TestMethod]
         public void ExactMatchOnly_OverridesAreNotMatched_VB()
         {
-            var code = @"
+            const string code = @"
 Namespace Test
     Class Class1
         Public Sub DoStuff()
@@ -85,7 +173,7 @@ End Namespace
         [TestMethod]
         public void ExactMatch_DoesNotMatchOverrides_CS()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
     using System.Xml;
@@ -107,7 +195,7 @@ namespace Test
         [TestMethod]
         public void ExactMatch_DoesNotMatchOverrides_VB()
         {
-            var code = @"
+            const string code = @"
 Imports System.Xml
 Namespace Test
     Class Class1
@@ -124,9 +212,9 @@ End Namespace
         }
 
         [TestMethod]
-        public void IsMatch_AndCheckingOverrides_DoesMatchOverrides_CS()
+        public void MatchesAny_AndCheckingOverrides_DoesMatchOverrides_CS()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
     using System.Xml;
@@ -142,13 +230,27 @@ namespace Test
 }
 ";
             var snippet = new SnippetCompiler(code, MetadataReferenceFacade.SystemXml);
-            CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(snippet);
+            CheckMatchesAny_AndCheckingOverrides_DoesMatchOverrides(snippet);
         }
 
         [TestMethod]
-        public void IsMatch_AndCheckingOverrides_DoesMatchOverrides_VB()
+        public void MatchesAny_MethodAndTypeCombination_FindsCorrectOne()
         {
-            var code = @"
+            var nodeClone = new MemberDescriptor(KnownType.System_Xml_XmlNode, "Clone");
+            var nodeCloneNode = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            var docCloneNode = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "CloneNode");
+
+            // this should be false, because on XmlNode we check only Clone(), not CloneNode()
+            // the implementation should correctly map the method name with the type
+            CheckIsMethodOrDerived(false, xmlNodeCloneNodeInvocationContext, nodeClone, docCloneNode);
+            // here, we verify if XmlNode.CloneNode() is called, which is true
+            CheckIsMethodOrDerived(true, xmlNodeCloneNodeInvocationContext, nodeCloneNode, docCloneNode);
+        }
+
+        [TestMethod]
+        public void MatchesAny_AndCheckingOverrides_DoesMatchOverrides_VB()
+        {
+            const string code = @"
 Imports System.Xml
 Namespace Test
     Class Class1
@@ -160,13 +262,13 @@ Namespace Test
 End Namespace
 ";
             var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic, MetadataReferenceFacade.SystemXml);
-            CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(snippet);
+            CheckMatchesAny_AndCheckingOverrides_DoesMatchOverrides(snippet);
         }
 
         [TestMethod]
         public void CheckMatch_InterfaceMethods_CS()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
     sealed class Class1 : System.IDisposable
@@ -188,7 +290,7 @@ namespace Test
         [TestMethod]
         public void CheckMatch_InterfaceMethods_VB()
         {
-            var code = @"
+            const string code = @"
 Namespace Test
     NotInheritable Class Class1
         Implements System.IDisposable
@@ -211,7 +313,7 @@ End Namespace
         [TestMethod]
         public void CheckMatch_InterfaceMethods_NameMatchButNotOverride_CS()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
     sealed class Class1 : System.IDisposable
@@ -234,7 +336,7 @@ namespace Test
         [TestMethod]
         public void CheckMatch_InterfaceMethods_NameMatchButNotOverride_VB()
         {
-            var code = @"
+            const string code = @"
 Namespace Test
     NotInheritable Class Class1
         Implements System.IDisposable
@@ -261,7 +363,7 @@ End Namespace
         [TestMethod]
         public void CheckMatch_CaseInsensitivity()
         {
-            var code = @"
+            const string code = @"
 Namespace Test
     NotInheritable Class Class1
         Implements System.IDisposable
@@ -323,20 +425,6 @@ End Namespace
                     .Select(n => ((SyntaxNode)n, VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
         }
 
-        private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
-            CheckMatch(false, expectedOutcome, invocationContext, targetMethodSignatures);
-
-        private static void CheckIsMethodOrDerived(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
-            CheckMatch(true, expectedOutcome, invocationContext, targetMethodSignatures);
-
-        private static void CheckMatch(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures)
-        {
-            var result = MemberDescriptor.MatchesAny(invocationContext.MethodName,
-                invocationContext.MethodSymbol, checkDerived, StringComparison.Ordinal, targetMethodSignatures);
-
-            result.Should().Be(expectedOutcome);
-        }
-
         private static void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)
         {
             // Testing for calls to Console.WriteLine
@@ -347,13 +435,13 @@ End Namespace
             CheckExactMethod(true, callToConsoleWriteLine, targetMethodSignature);
 
             // 2. Should not match call to xxx.WriteLine
-            var callToDoStuffWriteLine = CreateContextForMethod("Class1.WriteLine", snippet);
-            CheckExactMethod(false, callToDoStuffWriteLine, new MemberDescriptor(KnownType.System_Console, "Foo"),
+            var callClass1WriteLine = CreateContextForMethod("Class1.WriteLine", snippet);
+            CheckExactMethod(false, callClass1WriteLine, new MemberDescriptor(KnownType.System_Console, "Foo"),
                 targetMethodSignature,
                 new MemberDescriptor(KnownType.System_Data_DataSet, ".ctor"));
 
             // 3. Should match if Console.WriteLine is in the list of candidates
-            CheckExactMethod(false, callToDoStuffWriteLine, targetMethodSignature);
+            CheckExactMethod(false, callClass1WriteLine, targetMethodSignature);
         }
 
         private static void CheckExactMatch_DoesNotMatchOverrides(SnippetCompiler snippet)
@@ -373,7 +461,7 @@ End Namespace
             CheckExactMethod(true, callToDocWriteTo, docWriteTo);
         }
 
-        private static void CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(SnippetCompiler snippet)
+        private static void CheckMatchesAny_AndCheckingOverrides_DoesMatchOverrides(SnippetCompiler snippet)
         {
             // XmlDocument derives from XmlNode
             var nodeWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlNode, "WriteTo");
@@ -398,6 +486,20 @@ End Namespace
             // Exact match should not match, but matching "derived" methods should
             CheckExactMethod(false, callToDispose, dispose);
             CheckIsMethodOrDerived(true, callToDispose, dispose);
+        }
+
+        private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
+            CheckMatchesAny(false, expectedOutcome, invocationContext, targetMethodSignatures);
+
+        private static void CheckIsMethodOrDerived(bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures) =>
+            CheckMatchesAny(true, expectedOutcome, invocationContext, targetMethodSignatures);
+
+        private static void CheckMatchesAny(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext, params MemberDescriptor[] targetMethodSignatures)
+        {
+            var result = MemberDescriptor.MatchesAny(invocationContext.MethodName,
+                invocationContext.MethodSymbol, checkDerived, StringComparison.Ordinal, targetMethodSignatures);
+
+            result.Should().Be(expectedOutcome);
         }
     }
 }
