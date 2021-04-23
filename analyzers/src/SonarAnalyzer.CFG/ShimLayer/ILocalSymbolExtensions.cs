@@ -25,16 +25,9 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
     public static class ILocalSymbolExtensions
     {
-        private static readonly Func<ILocalSymbol, RefKind> RefKindAccessor;
+        private static readonly Func<ILocalSymbol, RefKind> RefKindAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ILocalSymbol, RefKind>(typeof(ILocalSymbol), nameof(RefKind));
 
-        static ILocalSymbolExtensions()
-        {
-            RefKindAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ILocalSymbol, RefKind>(typeof(ILocalSymbol), nameof(RefKind));
-        }
-
-        public static RefKind RefKind(this ILocalSymbol symbol)
-        {
-            return RefKindAccessor(symbol);
-        }
+        public static RefKind RefKind(this ILocalSymbol symbol) =>
+            RefKindAccessor(symbol);
     }
 }
