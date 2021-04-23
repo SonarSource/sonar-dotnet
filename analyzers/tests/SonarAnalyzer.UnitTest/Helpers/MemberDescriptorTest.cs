@@ -79,6 +79,18 @@ namespace Test
         [DataRow("Clone", StringComparison.InvariantCultureIgnoreCase)]
         [DataRow("clonenode", StringComparison.InvariantCulture)]
         [DataTestMethod]
+        public void MatchesAny_WhenMethodNameDoesNotMatch_ReturnsFalseDoesNotEvaluateSymbol(string memberName, StringComparison stringComparison)
+        {
+            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            var shouldNotBeUsed = new Lazy<IMethodSymbol>(() => throw new NotSupportedException());
+            MemberDescriptor.MatchesAny(memberName, shouldNotBeUsed, false, stringComparison, underTest).Should().BeFalse();
+        }
+
+        [DataRow(null, StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("", StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("Clone", StringComparison.InvariantCultureIgnoreCase)]
+        [DataRow("clonenode", StringComparison.InvariantCulture)]
+        [DataTestMethod]
         public void IsMatch_WhenMethodNameDoesNotMatch_ReturnsFalseDoesNotEvaluateSymbol(string memberName, StringComparison stringComparison)
         {
             var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
