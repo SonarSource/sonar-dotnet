@@ -267,11 +267,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                if (declarator.Initializer != null &&
-                    !IsAllowedInitialization(declarator.Initializer) &&
-                    !symbol.IsConst &&
-                    !liveOut.Contains(symbol) &&
-                    !IsUnusedLocal(symbol))
+                if (declarator.Initializer != null
+                    && !IsAllowedInitialization(declarator.Initializer)
+                    && !symbol.IsConst
+                    && symbol.RefKind() == RefKind.None
+                    && !liveOut.Contains(symbol)
+                    && !IsUnusedLocal(symbol))
                 {
                     var location = GetFirstLineLocationFromToken(declarator.Initializer.EqualsToken, declarator.Initializer);
                     this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, symbol.Name));

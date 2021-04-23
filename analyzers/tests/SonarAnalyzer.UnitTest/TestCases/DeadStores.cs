@@ -901,7 +901,7 @@ namespace Tests.Diagnostics
     {
         public void WithRefKeyword(int[] values)
         {
-            ref int value = ref values[0];  // Noncompliant FP because `value` keeps the reference to `values[0]`, and below `default` is actually assigned to `values[0]`
+            ref int value = ref values[0];  // Compliant, because `value` keeps the reference to `values[0]`, and below `default` is actually assigned to `values[0]`
             value = default;                // Compliant, because it's ref variable and value is propagated somewhere
         }
     }
