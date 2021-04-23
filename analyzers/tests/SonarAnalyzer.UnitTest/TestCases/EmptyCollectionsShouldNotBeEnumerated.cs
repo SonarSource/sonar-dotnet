@@ -653,6 +653,17 @@ namespace Tests.Diagnostics
         }
 
         public void DoSomething(IEnumerable<int> items) { }
+
+        public void AddPassedAsParameter()
+        {
+            var collector = new List<int>();
+
+            DoSomething(collector.Add);
+
+            collector.Clear(); // Noncompliant - FP, see https://github.com/SonarSource/sonar-dotnet/issues/4261
+        }
+
+        private static void DoSomething(Action<int> callback) => callback(42);
     }
 
     class Flows2
@@ -906,4 +917,3 @@ namespace CSharp8
         bool Convert(out int i3, out int i4);
     }
 }
-
