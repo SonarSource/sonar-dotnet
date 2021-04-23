@@ -63,15 +63,15 @@ namespace Test
         [TestMethod]
         public void IsMatch_WhenMethodNameIsNull_ReturnsFalse()
         {
-            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
-            underTest.IsMatch(null, new Mock<ITypeSymbol>().Object, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            sut.IsMatch(null, new Mock<ITypeSymbol>().Object, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
         }
 
         [TestMethod]
         public void IsMatch_WhenTypeSymbolIsNull_ReturnsFalse()
         {
-            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
-            underTest.IsMatch("CloneNode", null, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            sut.IsMatch("CloneNode", null, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
         }
 
         [DataRow(null, StringComparison.InvariantCultureIgnoreCase)]
@@ -81,9 +81,9 @@ namespace Test
         [DataTestMethod]
         public void MatchesAny_WhenMethodNameDoesNotMatch_ReturnsFalseDoesNotEvaluateSymbol(string memberName, StringComparison stringComparison)
         {
-            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
             var shouldNotBeUsed = new Lazy<IMethodSymbol>(() => throw new NotSupportedException());
-            MemberDescriptor.MatchesAny(memberName, shouldNotBeUsed, false, stringComparison, underTest).Should().BeFalse();
+            MemberDescriptor.MatchesAny(memberName, shouldNotBeUsed, false, stringComparison, sut).Should().BeFalse();
         }
 
         [DataRow(null, StringComparison.InvariantCultureIgnoreCase)]
@@ -93,24 +93,24 @@ namespace Test
         [DataTestMethod]
         public void IsMatch_WhenMethodNameDoesNotMatch_ReturnsFalseDoesNotEvaluateSymbol(string memberName, StringComparison stringComparison)
         {
-            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
             var shouldNotBeUsed = new Lazy<IMethodSymbol>(() => throw new NotSupportedException());
-            underTest.IsMatch(memberName, shouldNotBeUsed, stringComparison).Should().BeFalse();
+            sut.IsMatch(memberName, shouldNotBeUsed, stringComparison).Should().BeFalse();
         }
 
         [TestMethod]
         public void IsMatch_WhenTypeMatchesButNameIsDifferentCase_ReturnsFalse()
         {
-            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
-            underTest.IsMatch("clonenode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeFalse();
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            sut.IsMatch("clonenode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeFalse();
         }
 
         [TestMethod]
         public void IsMatch_WhenMethodNameAndTypeMatch_ReturnsTrue()
         {
-            var underTest = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
-            underTest.IsMatch("CloneNode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeTrue();
-            underTest.IsMatch("clonenode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCultureIgnoreCase).Should().BeTrue();
+            var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
+            sut.IsMatch("CloneNode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCulture).Should().BeTrue();
+            sut.IsMatch("clonenode", xmlNodeCloneNodeInvocationContext.MethodSymbol, StringComparison.InvariantCultureIgnoreCase).Should().BeTrue();
         }
 
         [TestMethod]
