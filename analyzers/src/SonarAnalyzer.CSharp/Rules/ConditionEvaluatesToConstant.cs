@@ -428,7 +428,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private readonly SemanticModel semanticModel;
             private readonly SyntaxNode node;
-            private readonly IdentifierNameSyntax[] identifiers;
             private readonly ISymbol[] symbols;
             private bool isMuted;
 
@@ -436,8 +435,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 this.semanticModel = semanticModel;
                 this.node = node;
-                identifiers = node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().ToArray();
-                symbols = identifiers.Select(x => semanticModel.GetSymbolInfo(x).Symbol).WhereNotNull().ToArray();
+                symbols = node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>()
+                    .Select(x => semanticModel.GetSymbolInfo(x).Symbol)
+                    .WhereNotNull()
+                    .ToArray();
             }
 
             public bool IsMuted()
