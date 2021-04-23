@@ -142,7 +142,7 @@ namespace Test
 }
 ";
             var snippet = new SnippetCompiler(code, MetadataReferenceFacade.SystemXml);
-            CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(snippet);
+            CheckMatchesAny_AndCheckingOverrides_DoesMatchOverrides(snippet);
         }
 
         [TestMethod]
@@ -191,7 +191,7 @@ Namespace Test
 End Namespace
 ";
             var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic, MetadataReferenceFacade.SystemXml);
-            CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(snippet);
+            CheckMatchesAny_AndCheckingOverrides_DoesMatchOverrides(snippet);
         }
 
         [TestMethod]
@@ -378,13 +378,13 @@ End Namespace
             CheckExactMethod(true, callToConsoleWriteLine, targetMethodSignature);
 
             // 2. Should not match call to xxx.WriteLine
-            var callToDoStuffWriteLine = CreateContextForMethod("Class1.WriteLine", snippet);
-            CheckExactMethod(false, callToDoStuffWriteLine, new MemberDescriptor(KnownType.System_Console, "Foo"),
+            var callClass1WriteLine = CreateContextForMethod("Class1.WriteLine", snippet);
+            CheckExactMethod(false, callClass1WriteLine, new MemberDescriptor(KnownType.System_Console, "Foo"),
                 targetMethodSignature,
                 new MemberDescriptor(KnownType.System_Data_DataSet, ".ctor"));
 
             // 3. Should match if Console.WriteLine is in the list of candidates
-            CheckExactMethod(false, callToDoStuffWriteLine, targetMethodSignature);
+            CheckExactMethod(false, callClass1WriteLine, targetMethodSignature);
         }
 
         private static void CheckExactMatch_DoesNotMatchOverrides(SnippetCompiler snippet)
@@ -404,7 +404,7 @@ End Namespace
             CheckExactMethod(true, callToDocWriteTo, docWriteTo);
         }
 
-        private static void CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(SnippetCompiler snippet)
+        private static void CheckMatchesAny_AndCheckingOverrides_DoesMatchOverrides(SnippetCompiler snippet)
         {
             // XmlDocument derives from XmlNode
             var nodeWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlNode, "WriteTo");
