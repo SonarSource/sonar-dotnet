@@ -142,23 +142,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Enumerable.Empty<Diagnostic>()
                     .Union(conditionTrue
                         .Except(conditionFalse)
-                        .Where(c => !IsConditionOfLoopWithBreak((ExpressionSyntax)c))
-                        .Where(c => !IsInsideCatchOrFinallyBlock(c))
-                        .Select(node => GetNodeDiagnostics(node, true)))
+                        .Where(x => !IsInsideCatchOrFinallyBlock(x) && !IsConditionOfLoopWithBreak(x))
+                        .Select(x => GetNodeDiagnostics(x, true)))
                     .Union(conditionFalse
                         .Except(conditionTrue)
-                        .Where(c => !IsInsideCatchOrFinallyBlock(c))
-                        .Select(node => GetNodeDiagnostics(node, false)))
+                        .Where(x => !IsInsideCatchOrFinallyBlock(x))
+                        .Select(x => GetNodeDiagnostics(x, false)))
                     .Union(isNull
                         .Except(isUnknown)
                         .Except(isNotNull)
-                        .Where(c => !IsInsideCatchOrFinallyBlock(c))
-                        .Select(node => Diagnostic.Create(s2589, node.GetLocation(), S2589MessageNull)))
+                        .Where(x => !IsInsideCatchOrFinallyBlock(x))
+                        .Select(x => Diagnostic.Create(s2589, x.GetLocation(), S2589MessageNull)))
                     .Union(isNotNull
                         .Except(isUnknown)
                         .Except(isNull)
-                        .Where(c => !IsInsideCatchOrFinallyBlock(c))
-                        .Select(node => Diagnostic.Create(s2583, node.GetLocation(), S2583MessageNotNull)));
+                        .Where(x => !IsInsideCatchOrFinallyBlock(x))
+                        .Select(x => Diagnostic.Create(s2583, x.GetLocation(), S2583MessageNotNull)));
             }
 
             public void Dispose()
@@ -184,7 +183,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsInsideCatchOrFinallyBlock(SyntaxNode c) =>
             c.Ancestors().Any(n => n.IsAnyKind(ignoredBlocks));
 
-        private static bool IsConditionOfLoopWithBreak(ExpressionSyntax constantExpression)
+        private static bool IsConditionOfLoopWithBreak(SyntaxNode constantExpression)
         {
             var loop = constantExpression.RemoveParentheses().Parent;
 
