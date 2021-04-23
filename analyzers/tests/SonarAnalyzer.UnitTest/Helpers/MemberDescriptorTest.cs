@@ -34,12 +34,12 @@ using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
-    public class MethodSignatureHelperTest
+    public class MethodDescriptorTest
     {
         [TestMethod]
         public void ExactMatchOnly_OverridesAreNotMatched_CS()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
   class Class1
@@ -62,7 +62,7 @@ namespace Test
         [TestMethod]
         public void ExactMatchOnly_OverridesAreNotMatched_VB()
         {
-            var code = @"
+            const string code = @"
 Namespace Test
     Class Class1
         Public Sub DoStuff()
@@ -85,7 +85,7 @@ End Namespace
         [TestMethod]
         public void ExactMatch_DoesNotMatchOverrides_CS()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
     using System.Xml;
@@ -107,7 +107,7 @@ namespace Test
         [TestMethod]
         public void ExactMatch_DoesNotMatchOverrides_VB()
         {
-            var code = @"
+            const string code = @"
 Imports System.Xml
 Namespace Test
     Class Class1
@@ -126,7 +126,7 @@ End Namespace
         [TestMethod]
         public void MatchesAny_AndCheckingOverrides_DoesMatchOverrides_CS()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
     using System.Xml;
@@ -148,7 +148,7 @@ namespace Test
         [TestMethod]
         public void MatchesAny_MethodAndTypeCombination_FindsCorrectOne()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
     using System.Xml;
@@ -179,7 +179,7 @@ namespace Test
         [TestMethod]
         public void MatchesAny_AndCheckingOverrides_DoesMatchOverrides_VB()
         {
-            var code = @"
+            const string code = @"
 Imports System.Xml
 Namespace Test
     Class Class1
@@ -197,7 +197,7 @@ End Namespace
         [TestMethod]
         public void CheckMatch_InterfaceMethods_CS()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
     sealed class Class1 : System.IDisposable
@@ -219,7 +219,7 @@ namespace Test
         [TestMethod]
         public void CheckMatch_InterfaceMethods_VB()
         {
-            var code = @"
+            const string code = @"
 Namespace Test
     NotInheritable Class Class1
         Implements System.IDisposable
@@ -242,7 +242,7 @@ End Namespace
         [TestMethod]
         public void CheckMatch_InterfaceMethods_NameMatchButNotOverride_CS()
         {
-            var code = @"
+            const string code = @"
 namespace Test
 {
     sealed class Class1 : System.IDisposable
@@ -265,7 +265,7 @@ namespace Test
         [TestMethod]
         public void CheckMatch_InterfaceMethods_NameMatchButNotOverride_VB()
         {
-            var code = @"
+            const string code = @"
 Namespace Test
     NotInheritable Class Class1
         Implements System.IDisposable
@@ -292,7 +292,7 @@ End Namespace
         [TestMethod]
         public void CheckMatch_CaseInsensitivity()
         {
-            var code = @"
+            const string code = @"
 Namespace Test
     NotInheritable Class Class1
         Implements System.IDisposable
