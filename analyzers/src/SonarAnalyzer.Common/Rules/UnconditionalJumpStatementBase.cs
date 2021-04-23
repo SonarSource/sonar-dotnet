@@ -60,6 +60,7 @@ namespace SonarAnalyzer.Rules
         where TLanguageKindEnum : struct
     {
         protected readonly SyntaxNode rootExpression;
+        protected readonly SemanticModel semanticModel;
 
         protected List<TStatementSyntax> ConditionalContinues { get; } = new List<TStatementSyntax>();
         protected List<TStatementSyntax> ConditionalTerminates { get; } = new List<TStatementSyntax>();
@@ -78,6 +79,7 @@ namespace SonarAnalyzer.Rules
         protected LoopWalkerBase(SyntaxNodeAnalysisContext context, ISet<TLanguageKindEnum> loopStatements)
         {
             this.rootExpression = context.Node;
+            this.semanticModel = context.SemanticModel;
             this.ignoredSyntaxesKind = LambdaSyntaxes.Union(LocalFunctionSyntaxes).Union(loopStatements).ToHashSet();
         }
 
@@ -108,7 +110,7 @@ namespace SonarAnalyzer.Rules
             }
 
             if (ancestors.Any(n => IsAnyKind(n, ConditionalStatements)) ||
-                IsInTryCatchWithMethodInvocation(node, ancestors))
+                IsInTryCatchWithStatementThatCanThrow(node, ancestors))
             {
                 conditionalCollection.Add(node);
             }
@@ -125,15 +127,18 @@ namespace SonarAnalyzer.Rules
         protected abstract bool TryGetTryAncestorStatements(TStatementSyntax node, List<SyntaxNode> ancestors,
             out IEnumerable<TStatementSyntax> tryAncestorStatements);
 
-        private bool IsInTryCatchWithMethodInvocation(TStatementSyntax node, List<SyntaxNode> ancestors)
+        protected abstract bool IsAccessToClassMember(TStatementSyntax node);
+
+        private bool IsInTryCatchWithStatementThatCanThrow(TStatementSyntax node, List<SyntaxNode> ancestors)
         {
             if (!TryGetTryAncestorStatements(node, ancestors, out var tryAncestorStatements))
             {
                 return false;
             }
 
-            if (IsReturnStatement(node) &&
-                node.DescendantNodes().Any(n => IsAnyKind(n, StatementsThatCanThrow)))
+            if (IsReturnStatement(node)
+                && (node.DescendantNodes().Any(n => IsAnyKind(n, StatementsThatCanThrow))
+                    || IsAccessToClassMember(node)))
             {
                 return true;
             }

@@ -380,5 +380,39 @@ Namespace Tests.Diagnostics
             Throw New NotImplementedException()
         End Sub
     End Class
+
+    Public Class ReproducerClass
+        ReadOnly Property FirstProperty As ReproducerClass
+            Get
+                Return Nothing
+            End Get
+        End Property
+
+        ReadOnly Property SecondProperty As Int32
+            Get
+                Throw New Exception()
+            End Get
+        End Property
+
+        Public Function MethodWithPropertyAccess() As Int32
+              While True
+                Try
+                    Return SecondProperty ' Compliant
+                Catch E As Exception
+
+                End Try
+            End While
+        End Function
+
+        Public Function MethodWithMemberAccess() As Int32
+              While True
+                Try
+                    Return FirstProperty.SecondProperty ' Compliant
+                Catch E As Exception
+
+                End Try
+            End While
+        End Function
+    End Class
 End Namespace
 

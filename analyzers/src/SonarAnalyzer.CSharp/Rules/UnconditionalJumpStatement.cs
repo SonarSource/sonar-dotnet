@@ -80,6 +80,20 @@ namespace SonarAnalyzer.Rules.CSharp
             {
             }
 
+            protected override bool IsAccessToClassMember(StatementSyntax node)
+            {
+                var returnStatementExpression = ((ReturnStatementSyntax)node).Expression;
+                if (returnStatementExpression is IdentifierNameSyntax identifier
+                    && semanticModel.GetSymbolInfo(identifier) is { } symbol
+                    && symbol.Symbol.Kind == SymbolKind.Property)
+                {
+                    return true;
+                }
+
+                // We are checking for memberAccessExpression to catch NullReferenceException.
+                return returnStatementExpression is MemberAccessExpressionSyntax memberAccessExpression;
+            }
+
             public override void Visit()
             {
                 var csWalker = new CsLoopwalker(this);
