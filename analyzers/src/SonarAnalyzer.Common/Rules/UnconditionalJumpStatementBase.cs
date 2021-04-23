@@ -75,11 +75,11 @@ namespace SonarAnalyzer.Rules
         protected abstract ISet<TLanguageKindEnum> LambdaSyntaxes { get; }
         protected abstract ISet<TLanguageKindEnum> LocalFunctionSyntaxes { get; }
 
+        public abstract void Visit();
         protected abstract bool IsAnyKind(SyntaxNode node, ISet<TLanguageKindEnum> syntaxKinds);
         protected abstract bool IsReturnStatement(SyntaxNode node);
         protected abstract bool TryGetTryAncestorStatements(TStatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<TStatementSyntax> tryAncestorStatements);
         protected abstract bool IsAccessToClassMember(TStatementSyntax node);
-        public abstract void Visit();
 
         protected List<TStatementSyntax> ConditionalContinues { get; } = new List<TStatementSyntax>();
         protected List<TStatementSyntax> ConditionalTerminates { get; } = new List<TStatementSyntax>();
