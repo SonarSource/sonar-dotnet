@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -34,11 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<StatementSyntax, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-                    DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override ISet<SyntaxKind> LoopStatements { get; } = new HashSet<SyntaxKind>
         {
@@ -83,10 +78,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.CatchBlock
             };
 
-            public LoopWalker(SyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements)
-                : base(context, loopStatements)
-            {
-            }
+            public LoopWalker(SyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements) : base(context, loopStatements) { }
 
             public override void Visit()
             {
@@ -98,48 +90,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 var returnStatementExpression = ((ReturnStatementSyntax)node).Expression;
                 if (returnStatementExpression is IdentifierNameSyntax identifier
-                    && semanticModel.GetSymbolInfo(identifier) is { } symbol
-                    && symbol.Symbol.Kind == SymbolKind.Property)
+                    && semanticModel.GetSymbolInfo(identifier) is { } symbolInfo
+                    && symbolInfo.Symbol is { } symbol
+                    && symbol.Kind == SymbolKind.Property)
                 {
                     return true;
                 }
 
                 // We are checking for memberAccessExpression to catch NullReferenceException.
                 return returnStatementExpression is MemberAccessExpressionSyntax;
-            }
-
-            private class VbLoopwalker : VisualBasicSyntaxWalker
-            {
-                private readonly LoopWalker walker;
-
-                public VbLoopwalker(LoopWalker loopWalker)
-                {
-                    this.walker = loopWalker;
-                }
-
-                public override void VisitContinueStatement(ContinueStatementSyntax node)
-                {
-                    base.VisitContinueStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalContinues, this.walker.UnconditionalContinues);
-                }
-
-                public override void VisitExitStatement(ExitStatementSyntax node)
-                {
-                    base.VisitExitStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
-                }
-
-                public override void VisitReturnStatement(ReturnStatementSyntax node)
-                {
-                    base.VisitReturnStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
-                }
-
-                public override void VisitThrowStatement(ThrowStatementSyntax node)
-                {
-                    base.VisitThrowStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
-                }
             }
 
             protected override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
@@ -150,8 +109,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 var tryAncestor = (TryBlockSyntax)ancestors.FirstOrDefault(n => n.IsKind(SyntaxKind.TryBlock));
 
-                if (tryAncestor == null ||
-                    tryAncestor.CatchBlocks.Count == 0)
+                if (tryAncestor == null || tryAncestor.CatchBlocks.Count == 0)
                 {
                     tryAncestorStatements = null;
                     return false;
@@ -159,6 +117,40 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 tryAncestorStatements = tryAncestor.Statements;
                 return true;
+            }
+
+            private class VbLoopwalker : VisualBasicSyntaxWalker
+            {
+                private readonly LoopWalker walker;
+
+                public VbLoopwalker(LoopWalker loopWalker)
+                {
+                    walker = loopWalker;
+                }
+
+                public override void VisitContinueStatement(ContinueStatementSyntax node)
+                {
+                    base.VisitContinueStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalContinues, walker.UnconditionalContinues);
+                }
+
+                public override void VisitExitStatement(ExitStatementSyntax node)
+                {
+                    base.VisitExitStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                }
+
+                public override void VisitReturnStatement(ReturnStatementSyntax node)
+                {
+                    base.VisitReturnStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                }
+
+                public override void VisitThrowStatement(ThrowStatementSyntax node)
+                {
+                    base.VisitThrowStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                }
             }
         }
     }

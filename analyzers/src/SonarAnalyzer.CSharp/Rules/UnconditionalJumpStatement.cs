@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -36,11 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<StatementSyntax, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
         protected override ISet<SyntaxKind> LoopStatements { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.ForEachStatement,
@@ -51,7 +47,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SyntaxNodeAnalysisContext context)
             => new LoopWalker(context, LoopStatements);
-
 
         private class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
         {
@@ -75,63 +70,26 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.CatchClause
             };
 
-            public LoopWalker(SyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements)
-                : base(context, loopStatements)
+            public LoopWalker(SyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements) : base(context, loopStatements) { }
+            public override void Visit()
             {
+                var csWalker = new CsLoopwalker(this);
+                csWalker.SafeVisit(rootExpression);
             }
 
             protected override bool IsAccessToClassMember(StatementSyntax node)
             {
                 var returnStatementExpression = ((ReturnStatementSyntax)node).Expression;
                 if (returnStatementExpression is IdentifierNameSyntax identifier
-                    && semanticModel.GetSymbolInfo(identifier) is { } symbol
-                    && symbol.Symbol.Kind == SymbolKind.Property)
+                    && semanticModel.GetSymbolInfo(identifier) is { } symbolInfo
+                    && symbolInfo.Symbol is { } symbol
+                    && symbol.Kind == SymbolKind.Property)
                 {
                     return true;
                 }
 
                 // We are checking for memberAccessExpression to catch NullReferenceException.
                 return returnStatementExpression is MemberAccessExpressionSyntax memberAccessExpression;
-            }
-
-            public override void Visit()
-            {
-                var csWalker = new CsLoopwalker(this);
-                csWalker.SafeVisit(this.rootExpression);
-            }
-
-            private class CsLoopwalker : CSharpSyntaxWalker
-            {
-                private readonly LoopWalker walker;
-
-                public CsLoopwalker(LoopWalker loopWalker)
-                {
-                    this.walker = loopWalker;
-                }
-
-                public override void VisitContinueStatement(ContinueStatementSyntax node)
-                {
-                    base.VisitContinueStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalContinues, this.walker.UnconditionalContinues);
-                }
-
-                public override void VisitBreakStatement(BreakStatementSyntax node)
-                {
-                    base.VisitBreakStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
-                }
-
-                public override void VisitReturnStatement(ReturnStatementSyntax node)
-                {
-                    base.VisitReturnStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
-                }
-
-                public override void VisitThrowStatement(ThrowStatementSyntax node)
-                {
-                    base.VisitThrowStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
-                }
             }
 
             protected override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
@@ -141,8 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var tryAncestor = (TryStatementSyntax)ancestors.FirstOrDefault(n => n.IsKind(SyntaxKind.TryStatement));
 
-                if (tryAncestor == null ||
-                    tryAncestor.Catches.Count == 0)
+                if (tryAncestor == null || tryAncestor.Catches.Count == 0)
                 {
                     tryAncestorStatements = null;
                     return false;
@@ -150,6 +107,40 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 tryAncestorStatements = tryAncestor.Block.Statements;
                 return true;
+            }
+
+            private class CsLoopwalker : CSharpSyntaxWalker
+            {
+                private readonly LoopWalker walker;
+
+                public CsLoopwalker(LoopWalker loopWalker)
+                {
+                    walker = loopWalker;
+                }
+
+                public override void VisitContinueStatement(ContinueStatementSyntax node)
+                {
+                    base.VisitContinueStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalContinues, walker.UnconditionalContinues);
+                }
+
+                public override void VisitBreakStatement(BreakStatementSyntax node)
+                {
+                    base.VisitBreakStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                }
+
+                public override void VisitReturnStatement(ReturnStatementSyntax node)
+                {
+                    base.VisitReturnStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                }
+
+                public override void VisitThrowStatement(ThrowStatementSyntax node)
+                {
+                    base.VisitThrowStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                }
             }
         }
     }
