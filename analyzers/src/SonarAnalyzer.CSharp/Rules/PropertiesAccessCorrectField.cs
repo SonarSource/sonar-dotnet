@@ -106,18 +106,18 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // Expression-bodied syntax
                 return accessor.DescendantNodes().FirstOrDefault() is ArrowExpressionClauseSyntax arrowClause
-                    && ShimLayer.CSharp.ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
+                       && ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
             }
             // Statement-bodied syntax
-            return (accessor.Body.DescendantNodes().Count(n => n is StatementSyntax) == 1 &&
-                accessor.Body.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1);
+            return (accessor.Body.DescendantNodes().Count(n => n is StatementSyntax) == 1
+                    && accessor.Body.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1);
         }
 
         protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
-            (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax setter &&
-            setter.DescendantNodes().Any()) ||
-            (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter &&
-            getter.DescendantNodes().Any());
+            (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax setter
+             && setter.DescendantNodes().Any())
+            || (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter
+                && getter.DescendantNodes().Any());
 
         private static void FillAssignments(IDictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
         {
@@ -147,6 +147,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return null;
             }
+
             var returns = body.DescendantNodes().OfType<ReturnStatementSyntax>().ToArray();
             return returns.Length == 1 ? returns.Single().Expression : null;
         }
@@ -163,7 +164,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var expr = expressions.Single();
                 if (expr is IdentifierNameSyntax
-                    || (expr is MemberAccessExpressionSyntax member && member.Expression is ThisExpressionSyntax))
+                    || (expr is MemberAccessExpressionSyntax {Expression: ThisExpressionSyntax _}))
                 {
                     return expr;
                 }
@@ -182,15 +183,14 @@ namespace SonarAnalyzer.Rules.CSharp
             var strippedExpression = expression.RemoveParentheses();
 
             // Check for direct field access: "foo"
-            if (strippedExpression is IdentifierNameSyntax &&
-                semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
+            if (strippedExpression is IdentifierNameSyntax
+                && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
             {
                 return new FieldData(accessorKind, field, strippedExpression, useFieldLocation);
             }
             // Check for "this.foo"
-            else if (strippedExpression is MemberAccessExpressionSyntax member &&
-                member.Expression is ThisExpressionSyntax &&
-                semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
+            else if (strippedExpression is MemberAccessExpressionSyntax {Expression: ThisExpressionSyntax _} member
+                     && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
             {
                 return new FieldData(accessorKind, field2, member.Name, useFieldLocation);
             }
@@ -201,9 +201,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsLeftSideOfAssignment(ExpressionSyntax expression)
         {
             var strippedExpression = expression.RemoveParentheses();
-            return strippedExpression.IsLeftSideOfAssignment() ||
-                // for this.field
-                (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment());
+            return strippedExpression.IsLeftSideOfAssignment()
+                   || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment()); // for this.field
         }
     }
 }

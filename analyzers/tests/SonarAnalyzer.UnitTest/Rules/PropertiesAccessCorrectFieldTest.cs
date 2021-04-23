@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             NuGetMetadataReference.MvvmLightLibs("5.4.1.1")
-                .Concat(MetadataReferenceFacade.WindowsBase)
-                .Concat(MetadataReferenceFacade.PresentationFramework);
+                                  .Concat(MetadataReferenceFacade.WindowsBase)
+                                  .Concat(MetadataReferenceFacade.PresentationFramework);
     }
 }
