@@ -36,6 +36,18 @@
         public void Method5(int[,] a) //Compliant, implements interface
         {
         }
+
+        void Method6(params int[][,] a) // Compliant
+        {
+        }
+
+        public void Method7(params int[][] a) // Compliant
+        {
+        }
+
+        public void Method8(params int[][][] a) // Noncompliant
+        {
+        }
     }
 
     internal class Other

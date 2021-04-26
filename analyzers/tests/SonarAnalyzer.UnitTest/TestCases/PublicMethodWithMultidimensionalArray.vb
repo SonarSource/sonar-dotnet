@@ -38,6 +38,16 @@ Namespace Tests.Diagnostics
         Private Sub Method6(a As Integer()()) Implements IFace.Method6 ' Compliant, interface implementation
             Throw New NotImplementedException()
         End Sub
+
+        Public Sub Method7(ParamArray a As Integer()()) ' Compliant
+        End Sub
+
+        Public Sub Method8(ParamArray a As Integer()()()) ' Noncompliant
+        End Sub
+
+        Sub Method9(ParamArray a As Integer()(,)) ' Compliant
+        End Sub
+
     End Class
     Friend Class Other
 

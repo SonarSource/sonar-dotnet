@@ -60,13 +60,15 @@ namespace SonarAnalyzer.Rules.Common
                 SyntaxKindsOfInterest.ToArray());
         }
 
-        private static bool MethodHasMultidimensionalArrayParameters(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.Parameters
-                .Select(param => param.Type as IArrayTypeSymbol)
-                .WhereNotNull()
-                .Any(type => type.Rank > 1 || type.ElementType is IArrayTypeSymbol);
-        }
+        private static bool MethodHasMultidimensionalArrayParameters(IMethodSymbol methodSymbol) =>
+            methodSymbol.Parameters.Any(param => param.Type is IArrayTypeSymbol arrayType
+                                                 && (arrayType.Rank > 1
+                                                     || IsJaggedArrayParam(param, arrayType)));
+
+        private static bool IsJaggedArrayParam(IParameterSymbol param, IArrayTypeSymbol arrayType) =>
+            param.IsParams
+                ? arrayType.ElementType is IArrayTypeSymbol subType && subType.ElementType is IArrayTypeSymbol
+                : arrayType.ElementType is IArrayTypeSymbol;
 
         protected abstract SyntaxToken GetIdentifier(TMethodSyntax method);
 
