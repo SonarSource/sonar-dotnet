@@ -77,7 +77,11 @@ namespace Tests.Diagnostics
 
             while (b &= false) { } // Noncompliant
 
+            do { } while (b &= false); // Noncompliant
+
             while ((i = 1) == 1) { } // Compliant
+
+            do { } while ((i = 1) == 1); // Compliant
 
             if (i == 0) i = 2;
             if ((i = 1) <= 1) // Compliant
