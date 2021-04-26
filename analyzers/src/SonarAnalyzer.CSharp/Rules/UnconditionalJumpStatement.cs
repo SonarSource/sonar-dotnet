@@ -38,12 +38,12 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override ISet<SyntaxKind> LoopStatements { get; } = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.ForEachStatement,
-                SyntaxKind.ForStatement,
-                SyntaxKind.WhileStatement,
-                SyntaxKind.DoStatement
-            };
+        {
+            SyntaxKind.ForEachStatement,
+            SyntaxKind.ForStatement,
+            SyntaxKind.WhileStatement,
+            SyntaxKind.DoStatement
+        };
 
         protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SyntaxNodeAnalysisContext context)
             => new LoopWalker(context, LoopStatements);

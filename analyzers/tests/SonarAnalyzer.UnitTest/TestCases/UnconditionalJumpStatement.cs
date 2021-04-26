@@ -591,6 +591,7 @@ namespace Tests.Diagnostics
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/2441
     class ReproducerWithDelegate
     {
         delegate int Delegate1();
