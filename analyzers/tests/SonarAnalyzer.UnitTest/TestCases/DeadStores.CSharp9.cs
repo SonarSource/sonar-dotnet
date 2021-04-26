@@ -70,12 +70,14 @@ void PatternMatchFalseNegative(int a, int b)
     }
 }
 
+
+
 Action<int, int, int> StaticLambda() =>
     static (int a, int _, int _) =>
     {
-        a = 100; // Noncompliant
-        int b = 100; // Noncompliant
-        b = 1; // Noncompliant
+        a = 100;        // FN, the outer statement is a local function and that is muted
+        int b = 100;    // FN, the outer statement is a local function and that is muted
+        b = 1;          // FN, the outer statement is a local function and that is muted
     };
 
 void Foo(object o) { }
@@ -89,6 +91,15 @@ public class C
         delegate*<void> ptr1 = &C.Log; // Noncompliant
         ptr1 = &C.Log; // Noncompliant
     }
+
+    Action<int, int, int> StaticLambda() =>
+        static (int a, int _, int _) =>
+        {
+            a = 100;        // Noncompliant
+            int b = 100;    // Noncompliant
+            b = 1;          // Noncompliant
+        };
+
 }
 
 record R
