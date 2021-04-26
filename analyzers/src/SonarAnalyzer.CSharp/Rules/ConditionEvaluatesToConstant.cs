@@ -36,7 +36,7 @@ using CSharpExplodedGraph = SonarAnalyzer.SymbolicExecution.CSharpExplodedGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    internal sealed class ConditionEvaluatesToConstant : ISymbolicExecutionAnalyzer
+    internal sealed partial class ConditionEvaluatesToConstant : ISymbolicExecutionAnalyzer
     {
         private static readonly ISet<SyntaxKind> omittedSyntaxKinds = new HashSet<SyntaxKind>
         {
@@ -404,74 +404,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(x => (x is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.CoalesceExpression) ? binary.Right : null) ??
                                  (x is AssignmentExpressionSyntax assign && assign.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) ? assign.Right : null))
                     .WhereNotNull();
-        }
-
-        private class MutedSyntaxWalker : CSharpSyntaxWalker
-        {
-            // All kinds that SonarAnalysisContextExtensions.RegisterExplodedGraphBasedAnalysis registers for
-            private static readonly SyntaxKind[] RootKinds = new[]
-            {
-                SyntaxKind.ConstructorDeclaration,
-                SyntaxKind.DestructorDeclaration,
-                SyntaxKind.ConversionOperatorDeclaration,
-                SyntaxKind.OperatorDeclaration,
-                SyntaxKind.MethodDeclaration,
-                SyntaxKind.PropertyDeclaration,
-                SyntaxKind.GetAccessorDeclaration,
-                SyntaxKind.SetAccessorDeclaration,
-                SyntaxKind.AddAccessorDeclaration,
-                SyntaxKind.RemoveAccessorDeclaration,
-                SyntaxKind.AnonymousMethodExpression,
-                SyntaxKind.SimpleLambdaExpression,
-                SyntaxKind.ParenthesizedLambdaExpression
-            };
-
-            private readonly SemanticModel semanticModel;
-            private readonly SyntaxNode node;
-            private readonly ISymbol[] symbols;
-            private bool isMuted;
-
-            public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node)
-            {
-                this.semanticModel = semanticModel;
-                this.node = node;
-                symbols = node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>()
-                    .Select(x => semanticModel.GetSymbolInfo(x).Symbol)
-                    .WhereNotNull()
-                    .ToArray();
-            }
-
-            public bool IsMuted()
-            {
-                if (symbols.Any() && node.Ancestors().FirstOrDefault(x => x.IsAnyKind(RootKinds)) is { } root)
-                {
-                    Visit(root);
-                }
-                return isMuted;
-            }
-
-            public override void Visit(SyntaxNode node)
-            {
-                if (!isMuted)   // Performance optimization, we can stop visiting once we know the answer
-                {
-                    base.Visit(node);
-                }
-            }
-
-            public override void VisitIdentifierName(IdentifierNameSyntax node)
-            {
-                if (symbols.Any(x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)))
-                {
-                    isMuted = IsInTupleAssignmentTarget() || IsInLocalFunction();
-                }
-                base.VisitIdentifierName(node);
-
-                bool IsInTupleAssignmentTarget() =>
-                    node.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget();
-
-                bool IsInLocalFunction() =>
-                    node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)) != null;
-            }
         }
     }
 }
