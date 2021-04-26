@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (FindCallback(callbackArg, semanticModel) is { } callback)
             {
-                return callback is MemberAccessExpressionSyntax { } memberAccess && memberAccess.Name.ToString().Equals(EndInvoke)
+                return callback is MemberAccessExpressionSyntax memberAccess && memberAccess.Name.ToString().Equals(EndInvoke)
                     ? !(semanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol)
                     : Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, semanticModel);
             }
