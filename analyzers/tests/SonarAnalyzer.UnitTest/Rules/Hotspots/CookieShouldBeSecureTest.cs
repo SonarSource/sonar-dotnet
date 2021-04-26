@@ -69,12 +69,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     TestHelper.CreateSonarProjectConfig(root, TestHelper.CreateFilesToAnalyze(root, webConfigPath)));
         }
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\NonSecureCookieConfig")]
+        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\UnrelatedConfig")]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void CookiesShouldBeSecure_WithWebConfigValueSetToFalse()
+        public void CookiesShouldBeSecure_WithWebConfigValueSetToFalse(string root)
         {
-            var root = @"TestCases\WebConfig\CookieShouldBeSecure\NonSecureCookieConfig";
             var webConfigPath = Path.Combine(root, WebConfig);
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\CookieShouldBeSecure.cs",
                                     new CS.CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),

@@ -7,6 +7,7 @@ namespace Tests.Diagnostics
     {
         HttpCookie field1 = new HttpCookie("c"); // Noncompliant
         HttpCookie field2;
+        HttpCookie field3 = new HttpCookie("c") { Secure = "false" }; // Noncompliant // Error [CS0029]
 
         HttpCookie Property1 { get; set; } = new HttpCookie("c"); // Noncompliant
         HttpCookie Property2 { get; set; }
