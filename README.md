@@ -12,10 +12,10 @@ languages in [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarc
 
 ## Features
 
-* 380+ C# rules and 130+ VB.&#8203;NET rules
-* Metrics (complexity, duplications, number of lines etc.)
-* Import of [unit test results](https://docs.sonarqube.org/x/CoBh) from VSTest, NUnit and xUnit
-* Import of [test coverage reports](https://docs.sonarqube.org/x/CoBh) from Visual Studio Code Coverage, dotCover, OpenCover, Coverlet and NCover 3.
+* [380+ C# rules](https://rules.sonarsource.com/csharp) and [130+ VB.&#8203;NET rules](https://rules.sonarsource.com/vbnet)
+* Metrics (cognitive complexity, duplications, number of lines etc.)
+* Import of [test coverage reports](https://community.sonarsource.com/t/9871) from Visual Studio Code Coverage, dotCover, OpenCover, Coverlet.
+* Import of third party Roslyn Analyzers results
 * Support for [custom rules](https://github.com/SonarSource/sonarqube-roslyn-sdk)
 
 ## Useful links
