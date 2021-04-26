@@ -174,25 +174,25 @@ namespace Tests.Diagnostics
             "http://docbook.org",
             "http://graphml.graphdrawing.org",
             "http://json-schema.org",
-            "http://email:password@subdomain.www.w3.org", // Noncompliant
-            "http://domain.com/.www.w3.org", // Noncompliant
-            "http://domain.com/path?domain=.www.w3.org", // Noncompliant
-            "http://domain.com?q=.www.w3.org", // Noncompliant
-            "http://domain.com#.www.w3.org", // Noncompliant
-            "http://subdomain.www.w3.org", // Noncompliant
-            "http://subdomain.xml.apache.org", // Noncompliant
-            "http://subdomain.schemas.xmlsoap.org", // Noncompliant
+            "http://email:password@subdomain.www.w3.org",  // Noncompliant
+            "http://domain.com/.www.w3.org",               // Noncompliant
+            "http://domain.com/path?domain=.www.w3.org",   // Noncompliant
+            "http://domain.com?q=.www.w3.org",             // Noncompliant
+            "http://domain.com#.www.w3.org",               // Noncompliant
+            "http://subdomain.www.w3.org",                 // Noncompliant
+            "http://subdomain.xml.apache.org",             // Noncompliant
+            "http://subdomain.schemas.xmlsoap.org",        // Noncompliant
             "http://subdomain.schemas.openxmlformats.org", // Noncompliant
-            "http://subdomain.rdfs.org", // Noncompliant
-            "http://subdomain.purl.org", // Noncompliant
-            "http://subdomain.xmlns.com", // Noncompliant
-            "http://subdomain.schemas.google.com", // Noncompliant
-            "http://subdomain.a9.com", // Noncompliant
-            "http://subdomain.ns.adobe.com", // Noncompliant
-            "http://subdomain.ltsc.ieee.org", // Noncompliant
-            "http://subdomain.docbook.org", // Noncompliant
-            "http://subdomain.graphml.graphdrawing.org", // Noncompliant
-            "http://subdomain.json-schema.org", // Noncompliant
+            "http://subdomain.rdfs.org",                   // Noncompliant
+            "http://subdomain.purl.org",                   // Noncompliant
+            "http://subdomain.xmlns.com",                  // Noncompliant
+            "http://subdomain.schemas.google.com",         // Noncompliant
+            "http://subdomain.a9.com",                     // Noncompliant
+            "http://subdomain.ns.adobe.com",               // Noncompliant
+            "http://subdomain.ltsc.ieee.org",              // Noncompliant
+            "http://subdomain.docbook.org",                // Noncompliant
+            "http://subdomain.graphml.graphdrawing.org",   // Noncompliant
+            "http://subdomain.json-schema.org",            // Noncompliant
         };
 
         private readonly List<string> commonlyUsedExampleDomains = new List<string>
@@ -204,10 +204,10 @@ namespace Tests.Diagnostics
             "http://subdomain.example.org",
             "http://subdomain.test.com",
             "http://email:password@subdomain.example.com",
-            "http://domain.com/.example.com", // Noncompliant
-            "http://domain.com/path?domain=.example.com", // Noncompliant
-            "http://domain.com?q=.example.com", // Noncompliant
-            "http://domain.com#.example.com", // Noncompliant
+            "http://domain.com/example.com",               // Noncompliant
+            "http://domain.com/path?domain=.example.com",  // Noncompliant
+            "http://domain.com?q=.example.com",            // Noncompliant
+            "http://domain.com#.example.com",              // Noncompliant
         };
     }
 }
