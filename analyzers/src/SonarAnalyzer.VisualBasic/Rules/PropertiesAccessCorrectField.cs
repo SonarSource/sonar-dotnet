@@ -109,7 +109,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (readField.HasValue && !reads.ContainsKey(readField.Value.Field))
                     {
                         reads.Add(readField.Value.Field, readField.Value);
-
                     }
                 }
             }
@@ -117,21 +116,34 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
         {
-            if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor))
+            if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor)
+                || ContainsGetOrSetOnDependencyProperty(accessor.Parent, compilation))
             {
-                // no accessor
                 return true;
             }
+
             // Special case: ignore the accessor if the only statement/expression is a throw.
-            return accessor.DescendantNodes(n => n is StatementSyntax).Count() == 1 &&
-                accessor.DescendantNodes(n => n is ThrowStatementSyntax).Count() == 1;
+            return accessor.DescendantNodes(n => n is StatementSyntax).Count() == 1
+                   && accessor.DescendantNodes(n => n is ThrowStatementSyntax).Count() == 1;
         }
 
         protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
-            (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax setter &&
-            setter.Parent.DescendantNodes().Any()) ||
-            (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax getter &&
-            getter.Parent.DescendantNodes().Any());
+            (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax setter
+             && setter.Parent.DescendantNodes().Any())
+            || (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax getter
+                && getter.Parent.DescendantNodes().Any());
+
+        private static bool ContainsGetOrSetOnDependencyProperty(SyntaxNode syntaxNode, Compilation compilation)
+        {
+            var semanticModel = compilation.GetSemanticModel(syntaxNode.SyntaxTree);
+
+            // Ignore the accessor if it calls System.Windows.DependencyObject.GetValue or System.Windows.DependencyObject.SetValue
+            return syntaxNode
+                   .DescendantNodes()
+                   .OfType<InvocationExpressionSyntax>()
+                   .Where(invocation => invocation.Expression.NameIs("GetValue") || invocation.Expression.NameIs("SetValue"))
+                   .Any(invocation => semanticModel.GetSymbolInfo(invocation).Symbol.ContainingType.DerivesFrom(KnownType.System_Windows_DependencyObject));
+        }
 
         private static ExpressionSyntax SingleReturn(StatementSyntax body)
         {
@@ -146,7 +158,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 var expr = expressions.Single();
                 if (expr is IdentifierNameSyntax
-                    || (expr is MemberAccessExpressionSyntax member && member.Expression is MeExpressionSyntax))
+                    || (expr is MemberAccessExpressionSyntax {Expression: MeExpressionSyntax _}))
                 {
                     return expr;
                 }
@@ -160,9 +172,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (semanticModel != null && argument.Parent is ArgumentListSyntax argList)
             {
                 var argumentIndex = argList.Arguments.IndexOf(argument);
-                if (semanticModel.GetSymbolInfo(argList.Parent).Symbol is IMethodSymbol methodSymbol &&
-                    argumentIndex < methodSymbol?.Parameters.Length &&
-                    methodSymbol?.Parameters[argumentIndex]?.RefKind != RefKind.None)
+                if (semanticModel.GetSymbolInfo(argList.Parent).Symbol is IMethodSymbol methodSymbol
+                    && argumentIndex < methodSymbol.Parameters.Length
+                    && methodSymbol.Parameters[argumentIndex]?.RefKind != RefKind.None)
                 {
                     return ExtractFieldFromExpression(AccessorKind.Setter, argument.GetExpression(), compilation, useFieldLocation);
                 }
@@ -186,9 +198,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return new FieldData(accessorKind, directSymbol, strippedExpression, useFieldLocation);
             }
             // Check for "Me.Foo"
-            else if (strippedExpression is MemberAccessExpressionSyntax member &&
-                    member.Expression is MeExpressionSyntax &&
-                    semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
+            else if (strippedExpression is MemberAccessExpressionSyntax {Expression: MeExpressionSyntax _} member
+                     && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
             {
                 return new FieldData(accessorKind, field, member.Name, useFieldLocation);
             }
@@ -198,12 +209,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             bool IsFieldOrWithEvents(out IFieldSymbol fieldSymbol)
             {
                 var symbol = semanticModel.GetSymbolInfo(strippedExpression).Symbol;
-                if (symbol is IFieldSymbol)
+                if (symbol is IFieldSymbol strippedExpressionSymbol)
                 {
-                    fieldSymbol = symbol as IFieldSymbol;
+                    fieldSymbol = strippedExpressionSymbol;
                     return true;
                 }
-                else if (symbol is IPropertySymbol property && property.IsWithEvents)
+                else if (symbol is IPropertySymbol {IsWithEvents: true} property)
                 {
                     fieldSymbol = property.ContainingType.GetMembers("_" + property.Name).OfType<IFieldSymbol>().SingleOrDefault();
                     return fieldSymbol != null;
@@ -219,9 +230,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static bool IsLeftSideOfAssignment(ExpressionSyntax expression)
         {
             var strippedExpression = expression.RemoveParentheses();
-            return strippedExpression.IsLeftSideOfAssignment() ||
-                // for Me.field
-                (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment());
+            return strippedExpression.IsLeftSideOfAssignment()
+                   || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment()); // for Me.field
         }
     }
 }
