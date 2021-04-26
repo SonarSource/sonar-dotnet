@@ -277,9 +277,44 @@ namespace Tests.Diagnostics
         {
             var tmp = 0;
             var flag = true;
-            while (flag) // Noncompliant FP
+            while (flag) // Compliant, muted by presence of tuple assignment
             {
                 (flag, tmp) = (false, 5);
+            }
+        }
+
+        public void MutedCase()
+        {
+            var tmp = 0;
+            var flag = true;
+            while (flag) // FN, all "flag" issues are muted by presence of tuple assignment
+            {
+                tmp = 0;
+            }
+
+            while (flag) // Compliant, muted by presence of tuple assignment
+            {
+                (flag, tmp) = (false, 5);
+            }
+        }
+
+        public void MutedCaseWithFalse()
+        {
+            var tmp = 0;
+            var flag = false;
+            while (flag) // FN, all "flag" muted are muted by presence of tuple assignment
+            {
+                (flag, tmp) = (false, 5);
+            }
+        }
+
+        public void MutedNull()
+        {
+            var tmp = 0;
+            var flag = "x";
+            while (flag != null) // Compliant, muted by presence of tuple assignment
+            {
+                (flag, tmp) = (null, 5);
             }
         }
     }
