@@ -48,5 +48,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 .FirstOrDefault()
                 ?.Identifier
                 .GetLocation();
+
+        protected override bool ContainsMatchingAttributes(IMethodSymbol methodSymbol) =>
+            base.ContainsMatchingAttributes(methodSymbol) && !HiddenByEditorBrowsableAttribute(methodSymbol);
+
+        private static bool HiddenByEditorBrowsableAttribute(IMethodSymbol methodSymbol) =>
+            methodSymbol.GetAttributes(KnownType.System_ComponentModel_EditorBrowsableAttribute)
+                .Any(x => x.ConstructorArguments.Any(a => a.Type.Is(KnownType.System_ComponentModel_EditorBrowsableState) && 1.CompareTo(a.Value) == 0));
     }
 }

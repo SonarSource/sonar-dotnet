@@ -50,6 +50,8 @@ namespace SonarAnalyzer.Rules
         protected abstract string MethodReturnTypeShouldBeVoidMessage { get; }
         protected abstract Location GetIdentifierLocation(IMethodSymbol methodSymbol);
 
+        protected virtual bool ContainsMatchingAttributes(IMethodSymbol methodSymbol) =>
+            methodSymbol.GetAttributes(SerializationAttributes).Any();
         protected ImplementSerializationMethodsCorrectlyBase(System.Resources.ResourceManager rspecResources) =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
@@ -58,7 +60,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var methodSymbol = (IMethodSymbol)c.Symbol;
-                    if (!methodSymbol.GetAttributes(SerializationAttributes).Any())
+                    if (!ContainsMatchingAttributes(methodSymbol))
                     {
                         return;
                     }
