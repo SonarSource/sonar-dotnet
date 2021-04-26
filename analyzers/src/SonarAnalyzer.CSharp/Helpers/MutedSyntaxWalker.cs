@@ -27,6 +27,9 @@ using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
+    /// <summary>
+    /// This class find syntax cases that are not properly supported by current CFG/SE/LVA and we mute all issues related to these scenarios.
+    /// </summary>
     internal class MutedSyntaxWalker : CSharpSyntaxWalker
     {
         // All kinds that SonarAnalysisContextExtensions.RegisterExplodedGraphBasedAnalysis registers for
