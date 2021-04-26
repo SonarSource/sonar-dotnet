@@ -57,6 +57,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CS_NetFramework() =>
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.cs", new CS.PropertiesAccessCorrectField(), AdditionalReferences);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PropertiesAccessCorrectField_VB_NetFramework() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.vb", new VB.PropertiesAccessCorrectField(), AdditionalReferences);
 #endif
 
         [TestMethod]
