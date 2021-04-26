@@ -106,6 +106,18 @@
             optionsBuilder.UseNpgsql("Server=myServerAddress;Database=myDataBase;Trusted_Connection=yes;Password=;");
             optionsBuilder.UseNpgsql("Server=myServerAddress;Database=myDataBase;TRUSTED_CONNECTION=YES;Password=;");
             optionsBuilder.UseSqlite("Server=myServerAddress;Database=myDataBase;Password=;Trusted_Connection=yes");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Trusted_Connection=True");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Trusted Connection=True");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Integrated Security=true");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Trusted Connection=Yes");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Integrated Security=yes");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Integrated Security=SSPI");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Trusted_Connection=True");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Integrated_Security=true");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Trusted_Connection=Yes");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Integrated_Security=yes");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Password=;Integrated_Security=sspi");
+            optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword");
 
             optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=False;Password=123");
             optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Trusted_Connection=no;Password=123");

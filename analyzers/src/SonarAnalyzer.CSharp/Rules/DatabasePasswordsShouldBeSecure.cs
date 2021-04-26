@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Microsoft.CodeAnalysis;
@@ -39,13 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S2115";
         private const string MessageFormat = "Use a secure password when connecting to this database.";
 
-        private static readonly ISet<string> Sanitizers = new HashSet<string>
-        {
-            "Integrated Security=true",
-            "Integrated Security=SSPI",
-            "Trusted_Connection=yes",
-            "Integrated Security=yes",
-        };
+        private static readonly Regex Sanitizers = new Regex(@"((integrated[_\s]security)|(trusted[_\s]connection))=(sspi|yes|true)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private readonly MemberDescriptor[] trackedInvocations =
         {
@@ -143,6 +137,6 @@ namespace SonarAnalyzer.Rules.CSharp
             || connectionString.EndsWith("Password=\"");
 
         private static bool HasSanitizers(string connectionString) =>
-            Sanitizers.Any(x => connectionString.IndexOf(x, System.StringComparison.InvariantCultureIgnoreCase) > -1);
+            Sanitizers.IsMatch(connectionString);
     }
 }
