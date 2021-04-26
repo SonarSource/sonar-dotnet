@@ -994,4 +994,30 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2766
+    public class Repro_2766
+    {
+        public int WithTryCatch()
+        {
+            var name = string.Empty;
+            try
+            {
+                var values = GetValues();
+                name = values.name; // Compliant, DoWork can throw
+
+                DoWork();
+                return 5;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"{name}: {e}");
+                throw;
+            }
+        }
+
+        private (string name, int count) GetValues() => ("foo", 1);
+
+        private void DoWork() => throw new InvalidOperationException("bang");
+    }
 }

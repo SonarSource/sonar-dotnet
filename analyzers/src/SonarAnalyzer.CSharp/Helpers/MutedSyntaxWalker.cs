@@ -89,15 +89,7 @@ namespace SonarAnalyzer.Helpers
             if (symbols.FirstOrDefault(x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)) is { } symbol)
             {
                 isMuted = IsInTupleAssignmentTarget() || IsUsedInLocalFunction(symbol) || IsInUnsupportedExpression();
-                if (HasAncestor(SyntaxKind.TryStatement))
-                {
-                    // We're only interested in "try" and "catch" blocks. Don't count "finally" block
-                    isInTryOrCatch = isInTryOrCatch || !HasAncestor(SyntaxKind.FinallyClause);
-                }
-                else
-                {
-                    isOutsideTryCatch = true;
-                }
+                InspectTryCatch(node);
             }
             base.VisitIdentifierName(node);
 
@@ -111,9 +103,31 @@ namespace SonarAnalyzer.Helpers
 
             bool IsInUnsupportedExpression() =>
                 node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) != null;
-
-            bool HasAncestor(SyntaxKind kind) =>
-                node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(kind)) != null;
         }
+
+        public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
+        {
+            if (symbols.FirstOrDefault(x => node.Identifier.ValueText == x.Name && x.Equals(semanticModel.GetDeclaredSymbol(node))) is { } symbol)
+            {
+                InspectTryCatch(node);
+            }
+            base.VisitVariableDeclarator(node);
+        }
+
+        private void InspectTryCatch(SyntaxNode node)
+        {
+            if (HasAncestor(node, SyntaxKind.TryStatement))
+            {
+                // We're only interested in "try" and "catch" blocks. Don't count "finally" block
+                isInTryOrCatch = isInTryOrCatch || !HasAncestor(node, SyntaxKind.FinallyClause);
+            }
+            else
+            {
+                isOutsideTryCatch = true;
+            }
+        }
+
+        private static bool HasAncestor(SyntaxNode node, SyntaxKind kind) =>
+            node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(kind)) != null;
     }
 }
