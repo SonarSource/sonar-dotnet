@@ -8,55 +8,55 @@ namespace Tests.Diagnostics
 {
     class ClearTextProtocols
     {
-        private const string a = "http://example.com"; // Noncompliant {{Using http protocol is insecure. Use https instead.}}
-        private const string b = "https://example.com";
+        private const string a = "http://foo.com"; // Noncompliant {{Using http protocol is insecure. Use https instead.}}
+        private const string b = "https://foo.com";
         private const string c = "http://localhost";
         private const string d = "http://localhost/path/query?query=xxx";
-        private const string e = "http://example.com/localhost/?query=xxx"; // Noncompliant
-        private const string f = "http://example.com/path/?query=localhost"; // Noncompliant
+        private const string e = "http://foo.com/localhost/?query=xxx"; // Noncompliant
+        private const string f = "http://foo.com/path/?query=localhost"; // Noncompliant
         private const string g = "http://127.0.0.1";
         private const string h = "http://::1";
 
-        private const string i = @"telnet://anonymous@example.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
-        private const string j = @"ssh://anonymous@example.com";
+        private const string i = @"telnet://anonymous@foo.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
+        private const string j = @"ssh://anonymous@foo.com";
         private const string k = @"telnet://anonymous@localhost";
         private const string l = "telnet://anonymous@127.0.0.1";
         private const string m = "telnet://anonymous@::1";
 
-        private readonly string n = $"ftp://anonymous@example.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
-        private readonly string o = $"sftp://anonymous@example.com";
+        private readonly string n = $"ftp://anonymous@foo.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
+        private readonly string o = $"sftp://anonymous@foo.com";
         private readonly string p = $"ftp://anonymous@localhost";
         private readonly string q = $"ftp://anonymous@127.0.0.1";
         private readonly string r = $"ftp://anonymous@::1";
 
         public void Method(string part, string user, string domain, string ftp)
         {
-            var a = "http://example.com"; // Noncompliant
-            var b = "https://example.com";
+            var a = "http://foo.com"; // Noncompliant
+            var b = "https://foo.com";
             var c = "http://localservername"; // Noncompliant, it's not a "localhost"
             var d = "http://localhosting";
-            var e = "See http://www.example.com for more information";
+            var e = "See http://www.foo.com for more information";
             var httpProtocolScheme = "http://"; // It's compliant when standalone
 
-            var f = $"ftp://anonymous@example.com"; // Noncompliant
-            var g = $"ftp://{part}@example.com"; // Noncompliant
-            var h = "ssh://anonymous@example.com";
-            var i = "sftp://anonymous@example.com";
+            var f = $"ftp://anonymous@foo.com"; // Noncompliant
+            var g = $"ftp://{part}@foo.com"; // Noncompliant
+            var h = "ssh://anonymous@foo.com";
+            var i = "sftp://anonymous@foo.com";
             var ftpProtocolScheme = "ftp://"; // It's compliant when standalone
-            var j = "ftp://" + user + "@example.com"; // Compliant - FN (protocol is compliant when standallone, check previous case)
+            var j = "ftp://" + user + "@foo.com"; // Compliant - FN (protocol is compliant when standallone, check previous case)
             var k = "ftp://anonymous@" + domain;// Noncompliant
             var l = $"ftp://anonymous@{domain}"; // Noncompliant
-            var m = $"{ftp}://anonymous@example.com"; // Compliant
+            var m = $"{ftp}://anonymous@foo.com"; // Compliant
 
-            var n = @"telnet://anonymous@example.com"; // Noncompliant
+            var n = @"telnet://anonymous@foo.com"; // Noncompliant
             var telnetProtocolScheme = "telnet://"; // It's compliant when standalone
 
-            var uri = new Uri("http://example.com"); // Noncompliant
-            var uriSafe = new Uri("https://example.com");
+            var uri = new Uri("http://foo.com"); // Noncompliant
+            var uriSafe = new Uri("https://foo.com");
 
             using var wc = new WebClient();
-            wc.DownloadData("http://example.com"); // Noncompliant
-            wc.DownloadData("https://example.com");
+            wc.DownloadData("http://foo.com"); // Noncompliant
+            wc.DownloadData("https://foo.com");
         }
 
         public void Smtp()
@@ -148,14 +148,66 @@ namespace Tests.Diagnostics
 
         private readonly List<string> links = new List<string>
         {
-            "http://example.com", // Noncompliant
-            "Http://example.com", // Noncompliant
-            "HTTP://example.com", // Noncompliant
-            "https://example.com",
-            "telnet://anonymous@example.com", // Noncompliant
-            "TELNET://anonymous@example.com", // Noncompliant
-            "ftp://anonymous@example.com", // Noncompliant
-            "FTP://anonymous@example.com" // Noncompliant
+            "http://foo.com", // Noncompliant
+            "Http://foo.com", // Noncompliant
+            "HTTP://foo.com", // Noncompliant
+            "https://foo.com",
+            "telnet://anonymous@foo.com", // Noncompliant
+            "TELNET://anonymous@foo.com", // Noncompliant
+            "ftp://anonymous@foo.com", // Noncompliant
+            "FTP://anonymous@foo.com" // Noncompliant
+        };
+
+        private readonly List<string> commonlyUsedXmlDomains = new List<string>
+        {
+            "http://www.w3.org",
+            "http://xml.apache.org",
+            "http://schemas.xmlsoap.org",
+            "http://schemas.openxmlformats.org",
+            "http://rdfs.org",
+            "http://purl.org",
+            "http://xmlns.com",
+            "http://schemas.google.com",
+            "http://a9.com",
+            "http://ns.adobe.com",
+            "http://ltsc.ieee.org",
+            "http://docbook.org",
+            "http://graphml.graphdrawing.org",
+            "http://json-schema.org",
+            "http://email:password@subdomain.www.w3.org",  // Noncompliant
+            "http://domain.com/www.w3.org",                // Noncompliant
+            "http://domain.com/path?domain=www.w3.org",    // Noncompliant
+            "http://domain.com?q=www.w3.org",              // Noncompliant
+            "http://domain.com#www.w3.org",                // Noncompliant
+            "http://subdomain.www.w3.org",                 // Noncompliant
+            "http://subdomain.xml.apache.org",             // Noncompliant
+            "http://subdomain.schemas.xmlsoap.org",        // Noncompliant
+            "http://subdomain.schemas.openxmlformats.org", // Noncompliant
+            "http://subdomain.rdfs.org",                   // Noncompliant
+            "http://subdomain.purl.org",                   // Noncompliant
+            "http://subdomain.xmlns.com",                  // Noncompliant
+            "http://subdomain.schemas.google.com",         // Noncompliant
+            "http://subdomain.a9.com",                     // Noncompliant
+            "http://subdomain.ns.adobe.com",               // Noncompliant
+            "http://subdomain.ltsc.ieee.org",              // Noncompliant
+            "http://subdomain.docbook.org",                // Noncompliant
+            "http://subdomain.graphml.graphdrawing.org",   // Noncompliant
+            "http://subdomain.json-schema.org",            // Noncompliant
+        };
+
+        private readonly List<string> commonlyUsedExampleDomains = new List<string>
+        {
+            "http://example.com",
+            "http://example.org",
+            "http://test.com",
+            "http://subdomain.example.com",
+            "http://subdomain.example.org",
+            "http://subdomain.test.com",
+            "http://email:password@subdomain.example.com",
+            "http://domain.com/example.com",               // Noncompliant
+            "http://domain.com/path?domain=example.com",   // Noncompliant
+            "http://domain.com?q=example.com",             // Noncompliant
+            "http://domain.com#example.com",               // Noncompliant
         };
     }
 }

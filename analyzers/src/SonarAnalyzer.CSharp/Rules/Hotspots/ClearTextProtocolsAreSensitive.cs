@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -42,16 +43,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const string TelnetKey = "telnet";
         private const string EnableSslName = "EnableSsl";
-        private const string ValidServerPattern = "localhost|127.0.0.1|::1";
 
         private static readonly DiagnosticDescriptor DefaultRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager).WithNotConfigurable();
         private static readonly DiagnosticDescriptor EnableSslRule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, EnableSslMessage, RspecStrings.ResourceManager).WithNotConfigurable();
-
-        private readonly Regex httpRegex = CompileRegex(@$"^http:\/\/(?!{ValidServerPattern}).");
-        private readonly Regex ftpRegex = CompileRegex(@$"^ftp:\/\/.*@(?!{ValidServerPattern})");
-        private readonly Regex telnetRegex = CompileRegex(@$"^telnet:\/\/.*@(?!{ValidServerPattern})");
-        private readonly Regex telnetRegexForIdentifier = CompileRegex(@"Telnet(?![a-z])", false);
-        private readonly Regex validServerRegex = CompileRegex($"^({ValidServerPattern})$");
 
         private readonly Dictionary<string, string> recommendedProtocols = new Dictionary<string, string>
         {
@@ -61,16 +55,57 @@ namespace SonarAnalyzer.Rules.CSharp
             {"clear-text SMTP", "SMTP over SSL/TLS or SMTP with STARTTLS" }
         };
 
+        private readonly string[] commonlyUsedXmlDomains =
+        {
+            "www.w3.org",
+            "xml.apache.org",
+            "schemas.xmlsoap.org",
+            "schemas.openxmlformats.org",
+            "rdfs.org",
+            "purl.org",
+            "xmlns.com",
+            "schemas.google.com",
+            "a9.com",
+            "ns.adobe.com",
+            "ltsc.ieee.org",
+            "docbook.org",
+            "graphml.graphdrawing.org",
+            "json-schema.org"
+        };
+
+        private readonly string[] commonlyUsedExampleDomains = {"example.com", "example.org", "test.com"};
+        private readonly string[] localhostAddresses = {"localhost", "127.0.0.1", "::1"};
+
         private readonly CSharpObjectInitializationTracker objectInitializationTracker =
             new CSharpObjectInitializationTracker(constantValue => constantValue is bool value && value,
                                                   ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient, KnownType.System_Net_FtpWebRequest),
                                                   propertyName => propertyName == EnableSslName);
 
+        private readonly Regex httpRegex;
+        private readonly Regex ftpRegex;
+        private readonly Regex telnetRegex;
+        private readonly Regex telnetRegexForIdentifier;
+        private readonly Regex validServerRegex;
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DefaultRule, EnableSslRule);
 
         public ClearTextProtocolsAreSensitive() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
+        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration)
+        {
+            const string allSubdomainsPattern = @"([^/?#]+\.)?";
+            var domainsList = localhostAddresses
+                .Concat(commonlyUsedXmlDomains)
+                    .Select(Regex.Escape)
+                    .Concat(commonlyUsedExampleDomains.Select(x => allSubdomainsPattern + Regex.Escape(x)));
+            var validServerPattern = domainsList.JoinStr("|");
+
+            httpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).");
+            ftpRegex = CompileRegex(@$"^ftp:\/\/.*@(?!{validServerPattern})");
+            telnetRegex = CompileRegex(@$"^telnet:\/\/.*@(?!{validServerPattern})");
+            telnetRegexForIdentifier = CompileRegex(@"Telnet(?![a-z])", false);
+            validServerRegex = CompileRegex($"^({validServerPattern})$");
+        }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(c =>
