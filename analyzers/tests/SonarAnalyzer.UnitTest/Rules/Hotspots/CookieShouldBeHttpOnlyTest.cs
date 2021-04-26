@@ -19,7 +19,9 @@
  */
 
 using System.Collections.Generic;
+#if NETFRAMEWORK
 using System.IO;
+#endif
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,8 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CookieShouldBeHttpOnlyTest
     {
-        private const string WebConfig = "Web.config";
-
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
@@ -44,6 +44,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     AdditionalReferences);
 
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
+
+        private const string WebConfig = "Web.config";
+
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]

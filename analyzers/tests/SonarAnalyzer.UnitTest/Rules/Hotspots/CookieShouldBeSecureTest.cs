@@ -19,7 +19,9 @@
  */
 
 using System.Collections.Generic;
+#if NETFRAMEWORK
 using System.IO;
+#endif
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,8 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CookieShouldBeSecureTest
     {
-        private const string WebConfig = "Web.config";
-
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
@@ -44,6 +44,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                                     AdditionalReferences);
 
 #if NETFRAMEWORK // HttpCookie is not available on .Net Core
+
+        private const string WebConfig = "Web.config";
 
         [TestMethod]
         [TestCategory("Rule")]
