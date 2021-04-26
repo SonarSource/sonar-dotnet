@@ -71,7 +71,7 @@ void PatternMatchFalseNegative(int a, int b)
 }
 
 Action<int, int, int> StaticLambda() =>
-    (int a, int _, int _) =>
+    static (int a, int _, int _) =>
     {
         a = 100; // Noncompliant
         int b = 100; // Noncompliant
