@@ -69,14 +69,13 @@ namespace SonarAnalyzer.Rules
 
         private readonly ISet<TLanguageKindEnum> ignoredSyntaxesKind;
 
+        protected abstract ILanguageFacade<TLanguageKindEnum> Language { get; }
         protected abstract ISet<TLanguageKindEnum> ConditionalStatements { get; }
         protected abstract ISet<TLanguageKindEnum> StatementsThatCanThrow { get; }
         protected abstract ISet<TLanguageKindEnum> LambdaSyntaxes { get; }
         protected abstract ISet<TLanguageKindEnum> LocalFunctionSyntaxes { get; }
 
         public abstract void Visit();
-        protected abstract bool IsAnyKind(SyntaxNode node, ISet<TLanguageKindEnum> syntaxKinds);
-        protected abstract bool IsReturnStatement(SyntaxNode node);
         protected abstract bool TryGetTryAncestorStatements(TStatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<TStatementSyntax> tryAncestorStatements);
         protected abstract bool IsPropertyAccess(TStatementSyntax node);
 
@@ -111,12 +110,12 @@ namespace SonarAnalyzer.Rules
                 .TakeWhile(n => !rootExpression.Equals(n))
                 .ToList();
 
-            if (ancestors.Any(n => IsAnyKind(n, ignoredSyntaxesKind)))
+            if (ancestors.Any(n => Language.Syntax.IsAnyKind(n, ignoredSyntaxesKind)))
             {
                 return;
             }
 
-            if (ancestors.Any(n => IsAnyKind(n, ConditionalStatements))
+            if (ancestors.Any(n => Language.Syntax.IsAnyKind(n, ConditionalStatements))
                 || IsInTryCatchWithStatementThatCanThrow(node, ancestors))
             {
                 conditionalCollection.Add(node);
@@ -134,8 +133,8 @@ namespace SonarAnalyzer.Rules
                 return false;
             }
 
-            if (IsReturnStatement(node)
-                && (node.DescendantNodes().Any(n => IsAnyKind(n, StatementsThatCanThrow))
+            if (Language.Syntax.IsKind(node, Language.SyntaxKind.ReturnStatement)
+                && (node.DescendantNodes().Any(n => Language.Syntax.IsAnyKind(n, StatementsThatCanThrow))
                     || IsPropertyAccess(node)))
             {
                 return true;
@@ -144,7 +143,7 @@ namespace SonarAnalyzer.Rules
             return tryAncestorStatements
                 .TakeWhile(statement => !statement.Equals(node))
                 .SelectMany(statement => statement.DescendantNodes())
-                .Any(statement => IsAnyKind(statement, StatementsThatCanThrow));
+                .Any(statement => Language.Syntax.IsAnyKind(statement, StatementsThatCanThrow));
         }
     }
 }

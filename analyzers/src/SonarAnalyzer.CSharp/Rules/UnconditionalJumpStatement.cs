@@ -74,7 +74,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.CatchClause
             };
 
+            protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
             public LoopWalker(SyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements) : base(context, loopStatements) { }
+
             public override void Visit()
             {
                 var csWalker = new CsLoopwalker(this);
@@ -83,12 +86,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override bool IsPropertyAccess(StatementSyntax node) =>
                 node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => semanticModel.GetSymbolInfo(x).Symbol is { } symbol && symbol.Kind == SymbolKind.Property);
-
-            protected override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) =>
-                node.IsAnyKind(syntaxKinds);
-
-            protected override bool IsReturnStatement(SyntaxNode node) =>
-                node.IsKind(SyntaxKind.ReturnStatement);
 
             protected override bool TryGetTryAncestorStatements(StatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<StatementSyntax> tryAncestorStatements)
             {

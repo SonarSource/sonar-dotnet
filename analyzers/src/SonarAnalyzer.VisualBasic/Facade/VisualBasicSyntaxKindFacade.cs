@@ -32,5 +32,6 @@ namespace SonarAnalyzer.Helpers.Facade
         public SyntaxKind IdentifierName => SyntaxKind.IdentifierName;
         public SyntaxKind StringLiteralExpression => SyntaxKind.StringLiteralExpression;
         public SyntaxKind InterpolatedStringExpression => SyntaxKind.InterpolatedStringExpression;
+        public SyntaxKind ReturnStatement => SyntaxKind.ReturnStatement;
     }
 }

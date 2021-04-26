@@ -29,6 +29,8 @@ namespace SonarAnalyzer.Helpers.Facade
     {
         public abstract TSyntaxKind Kind(SyntaxNode node);
         public abstract bool IsNullLiteral(SyntaxNode node);
+        public abstract bool IsKind(SyntaxNode node, TSyntaxKind kind);
+        public abstract bool IsAnyKind(SyntaxNode node, ISet<TSyntaxKind> syntaxKinds);
 
         public abstract IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum);
         public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
