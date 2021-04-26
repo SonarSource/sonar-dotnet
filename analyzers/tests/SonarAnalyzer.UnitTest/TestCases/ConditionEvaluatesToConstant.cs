@@ -2701,11 +2701,44 @@ namespace Repro_LocalFunction
         {
             string value = null;
             LocalFunction();
-            if (value != null) // Noncompliant False Positive S2583
-            {                  // Secondary
+            if (value != null) // Compliant, value is assigned in local function
+            {
                 throw new InvalidOperationException();
             }
-            if (value == null) // Noncompliant False Positive S2589
+            if (value == null) // Compliant, value is assigned in local function
+            {
+                throw new InvalidOperationException();
+            }
+
+            void LocalFunction()
+            {
+                if (condition)
+                {
+                    value = "Not null";
+                }
+            }
+        }
+
+        public void DoWork2(bool condition)
+        {
+            string value = null;
+            string alwaysNull = null;
+            LocalFunction();
+
+            if (alwaysNull != null) // Noncompliant
+            {                       // Secondary
+                throw new InvalidOperationException();
+            }
+            if (alwaysNull == null) // Noncompliant
+            {
+                throw new InvalidOperationException();
+            }
+
+            if (value != null) // Compliant
+            {
+                throw new InvalidOperationException();
+            }
+            if (value == null) // Compliant
             {
                 throw new InvalidOperationException();
             }

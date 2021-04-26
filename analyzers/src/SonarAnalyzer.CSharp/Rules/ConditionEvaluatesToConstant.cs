@@ -462,9 +462,15 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (symbols.Any(x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)))
                 {
-                    isMuted = node.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget();
+                    isMuted = IsInTupleAssignmentTarget() || IsInLocalFunction();
                 }
                 base.VisitIdentifierName(node);
+
+                bool IsInTupleAssignmentTarget() =>
+                    node.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget();
+
+                bool IsInLocalFunction() =>
+                    node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)) != null;
             }
         }
     }
