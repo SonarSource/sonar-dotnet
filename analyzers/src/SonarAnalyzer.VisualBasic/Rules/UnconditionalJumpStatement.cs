@@ -88,14 +88,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             protected override bool IsPropertyAccess(StatementSyntax node) =>
-                node.DescendantNodes().Any(x => x.IsKind(SyntaxKind.IdentifierName)
-                                                && x is IdentifierNameSyntax identifier
-                                                && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol
-                                                && symbol.Kind == SymbolKind.Property);
+                node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => semanticModel.GetSymbolInfo(x).Symbol is { } symbol && symbol.Kind == SymbolKind.Property);
 
-            protected override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
+            protected override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) =>
+                node.IsAnyKind(syntaxKinds);
 
-            protected override bool IsReturnStatement(SyntaxNode node) => node.IsKind(SyntaxKind.ReturnStatement);
+            protected override bool IsReturnStatement(SyntaxNode node) =>
+                node.IsKind(SyntaxKind.ReturnStatement);
 
             protected override bool TryGetTryAncestorStatements(StatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<StatementSyntax> tryAncestorStatements)
             {
