@@ -65,6 +65,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void VisitInvocation(EndInvokeContext context) =>
             new InvocationWalker(context).SafeVisit(context.Root);
 
+        protected override bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel semanticModel) =>
+            FindCallback(callbackArg, semanticModel) is { } callback
+            && (Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, semanticModel));
+
         /// <summary>
         /// This method is looking for the callback code which can be:
         /// - in a identifier initializer (like a lambda)
@@ -72,7 +76,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         /// - passed as a new delegate instantiation (and the code can be inside the method declaration)
         /// - a mix of the above.
         /// </summary>
-        protected override SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel)
+        private static SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel)
         {
             var callback = callbackArg.RemoveParentheses();
             if (callback is IdentifierNameSyntax identifier)

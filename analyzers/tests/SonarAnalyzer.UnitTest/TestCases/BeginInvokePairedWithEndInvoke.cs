@@ -142,6 +142,22 @@ namespace Tests.Diagnostics
         {
         }
 
+        private static void EndInvokeOfDifferentAction()
+        {
+            Action a = () => { };
+            Action b = () => { };
+            AsyncCallback callback = b.EndInvoke;
+            a.BeginInvoke(callback, null); // FN
+        }
+
+        private static void BeginInvokeAndEndInvokeOnDifferentDelegateWithVariableCallback()
+        {
+            var caller = new AsyncMethodCaller(AsyncMethod);
+            var caller2 = new AsyncMethodCaller(AsyncMethod);
+            AsyncCallback callback = result => { caller2.EndInvoke(result); };
+            caller.BeginInvoke("delegate", callback, null); // FN
+        }
+
         public class CallerWrapper
         {
             private AsyncMethodCaller caller;
@@ -307,20 +323,26 @@ namespace Tests.Diagnostics
         public virtual object AsyncDelegate { get; }
     }
 
-    // https://github.com/SonarSource/sonar-dotnet/issues/4255
     class ReproEndinvokeDelegate
     {
         public void BeginInvokeWithEndinvokeDelegate()
         {
             Action a = () => { };
-            a.BeginInvoke(a.EndInvoke, null); // Noncompliant FP
+            a.BeginInvoke(a.EndInvoke, null); // Compliant
         }
 
         public void AsyncCallbackLocalVariable()
         {
             Action a = () => { };
             AsyncCallback callback = a.EndInvoke;
-            a.BeginInvoke(callback, null); // Noncompliant FP
+            a.BeginInvoke(callback, null); // Compliant
+        }
+
+        public void AsyncCallbackLocalVariableNotEndinvokeAccess()
+        {
+            Action a = () => { };
+            AsyncCallback callback = a.NotEndInvoke; // Error [CS1061]
+            a.BeginInvoke(callback, null); // Noncompliant
         }
     }
 }

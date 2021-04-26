@@ -31,9 +31,9 @@ namespace SonarAnalyzer.Rules
         where TInvocationExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4583";
+        protected const string EndInvoke = "EndInvoke";
         private const string MessageFormat = "Pair this \"BeginInvoke\" with an \"EndInvoke\".";
         private const string BeginInvoke = "BeginInvoke";
-        private const string EndInvoke = "EndInvoke";
 
         private readonly DiagnosticDescriptor rule;
 
@@ -42,7 +42,12 @@ namespace SonarAnalyzer.Rules
         protected abstract ISet<TSyntaxKind> ParentDeclarationKinds { get; }
         protected abstract string CallbackParameterName { get; }
         protected abstract void VisitInvocation(EndInvokeContext context);
-        protected abstract SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel);
+
+        /// <returns>
+        /// - true if callback code has been resolved and does not contain "EndInvoke".
+        /// - false if callback code contains "EndInvoke" or callback code has not been resolved.
+        /// </returns>
+        protected abstract bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel semanticModel);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -70,21 +75,7 @@ namespace SonarAnalyzer.Rules
         protected static bool IsDelegate(IMethodSymbol methodSymbol) =>
             methodSymbol.ReceiverType.Is(TypeKind.Delegate);
 
-        /// <returns>
-        /// - true if callback code has been resolved and does not contain "EndInvoke".
-        /// - false if callback code contains "EndInvoke" or callback code has not been resolved.
-        /// </returns>
-        private bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel semanticModel) =>
-            FindCallback(callbackArg, semanticModel) is { } callback
-            && (Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, semanticModel));
-
-        private bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
-        {
-            var parentContext = node.AncestorsAndSelf().FirstOrDefault(IsParentDeclaration);
-            return IsParentDeclarationWithEndInvoke(parentContext, semantic);
-        }
-
-        private bool IsParentDeclarationWithEndInvoke(SyntaxNode node, SemanticModel semanticModel)
+        protected bool IsParentDeclarationWithEndInvoke(SyntaxNode node, SemanticModel semanticModel)
         {
             if (IsParentDeclaration(node))
             {
@@ -96,6 +87,12 @@ namespace SonarAnalyzer.Rules
             {
                 return false;
             }
+        }
+
+        private bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
+        {
+            var parentContext = node.AncestorsAndSelf().FirstOrDefault(IsParentDeclaration);
+            return IsParentDeclarationWithEndInvoke(parentContext, semantic);
         }
 
         private bool IsParentDeclaration(SyntaxNode node) =>
