@@ -173,8 +173,11 @@ namespace Tests.Diagnostics
             NamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
             NamespaceLikeProperty = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
         }
+
+        public void Bar(string NamespaceLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/123") { }
     }
 
+    [MyAttribute("http://www.sonarsource.com/msbuild/analyzer/2021/123")]  // Noncompliant
     [XmlRoot(ElementName = "SonarProjectConfig", Namespace = "ftp://a:a@foo.com/")]  // Noncompliant
     public class NamespaceLikeAssignment2
     {
@@ -185,7 +188,7 @@ namespace Tests.Diagnostics
         private string NaaamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
         private string NaaamespaceLikeProperty { get; set; }
 
-        public void Foo(string NamespaceLikeArgument, string NaaamespaceLikeArgument)
+        public void Foo(string NaaamespaceLikeArgument, string NamespaceLikeArgument = "ftp://a:a@foo.com/")  // Noncompliant
         {
             var NamespaceLikeVar = "ftp://a:a@foo.com/";  // Noncompliant
             NamespaceLikeArgument = "ftp://a:a@foo.com/";  // Noncompliant
@@ -193,11 +196,19 @@ namespace Tests.Diagnostics
             NamespaceLikeProperty = "ftp://a:a@foo.com/";  // Noncompliant
 
             var namespaceLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            string[] NamespaceArray = new string[1];
+            NamespaceArray[0] = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
 
             var NaaamespaceLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
             NaaamespaceLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
             NaaamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
             NaaamespaceLikeProperty = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+        }
+    }
+
+    public class MyAttribute : Attribute
+    {
+        public MyAttribute(string str) {
         }
     }
 }

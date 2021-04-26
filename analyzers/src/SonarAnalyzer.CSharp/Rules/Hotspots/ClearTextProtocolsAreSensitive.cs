@@ -136,30 +136,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private string GetUnsafeProtocol(string text, SyntaxNode node)
         {
-            if (httpRegex.IsMatch(text))
+            if (httpRegex.IsMatch(text) && !IsNamespace(node.Parent))
             {
-                switch (node.Parent)
-                {
-                    case AttributeArgumentSyntax attributeArgument:
-                        if (attributeArgument.NameEquals is { } nameEquals && nameEquals.Name.Identifier.ValueText.Contains("Namespace"))
-                        {
-                            return null;
-                        }
-                        break;
-                    case EqualsValueClauseSyntax equalsValueClause:
-                        if (equalsValueClause.Parent is VariableDeclaratorSyntax variableDeclarator && variableDeclarator.Identifier.Text.Contains("Namespace"))
-                        {
-                            return null;
-                        }
-                        break;
-                    case AssignmentExpressionSyntax assignmentExpression:
-                        if (assignmentExpression.Left.RemoveParentheses() is IdentifierNameSyntax identifierName && identifierName.Identifier.Text.Contains("Namespace"))
-                        {
-                            return null;
-                        }
-                        break;
-                }
-
                 return "http";
             }
             else if (ftpRegex.IsMatch(text))
@@ -183,6 +161,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 LiteralExpressionSyntax literalExpression => literalExpression.Token.ValueText,
                 _ => string.Empty
             };
+
+        private static bool IsNamespace(SyntaxNode node) =>
+            node switch
+            {
+                AttributeArgumentSyntax attributeArgument =>
+                    attributeArgument.NameEquals is { } nameEquals && TokenContainsNamespace(nameEquals.Name.Identifier),
+                EqualsValueClauseSyntax equalsValueClause =>
+                    (equalsValueClause.Parent is VariableDeclaratorSyntax variableDeclarator && TokenContainsNamespace(variableDeclarator.Identifier))
+                    || (equalsValueClause.Parent is ParameterSyntax parameter && TokenContainsNamespace(parameter.Identifier)),
+                AssignmentExpressionSyntax assignmentExpression =>
+                    assignmentExpression.Left.RemoveParentheses() is IdentifierNameSyntax identifierName && TokenContainsNamespace(identifierName.Identifier),
+                _ => false
+            };
+
+        private static bool TokenContainsNamespace(SyntaxToken token) =>
+            token.Text.Contains("Namespace");
 
         private static Regex CompileRegex(string pattern, bool ignoreCase = true) =>
             new Regex(pattern, ignoreCase
