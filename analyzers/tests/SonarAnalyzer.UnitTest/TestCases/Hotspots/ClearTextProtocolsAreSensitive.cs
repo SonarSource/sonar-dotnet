@@ -205,9 +205,9 @@ namespace Tests.Diagnostics
             "http://subdomain.test.com",
             "http://email:password@subdomain.example.com",
             "http://domain.com/example.com",               // Noncompliant
-            "http://domain.com/path?domain=.example.com",  // Noncompliant
-            "http://domain.com?q=.example.com",            // Noncompliant
-            "http://domain.com#.example.com",              // Noncompliant
+            "http://domain.com/path?domain=example.com",   // Noncompliant
+            "http://domain.com?q=example.com",             // Noncompliant
+            "http://domain.com#example.com",               // Noncompliant
         };
     }
 }
