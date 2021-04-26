@@ -884,7 +884,7 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/3126
     public class Issue_3126
     {
-        public string WithLocalFunction()
+        public string VariableDeclarator_WithLocalFunction()
         {
             string buffer = "Value"; // Noncompliant FP
             return Local();
@@ -892,6 +892,42 @@ namespace Tests.Diagnostics
             string Local()
             {
                 return buffer;
+            }
+        }
+
+        public string Assignment_WithLocalFunction()
+        {
+            string buffer;
+            buffer = "Value"; // Noncompliant FP
+            return Local();
+
+            string Local()
+            {
+                return buffer;
+            }
+        }
+
+        public int PrefixExpression_WithLocalFunction()
+        {
+            var count = 0;
+            ++count;        // Noncompliant FP
+            return Local();
+
+            int Local()
+            {
+                return count;
+            }
+        }
+
+        public int PostfixExpression_WithLocalFunction()
+        {
+            var count = 0;
+            count++;        // Noncompliant FP
+            return Local();
+
+            int Local()
+            {
+                return count;
             }
         }
     }
