@@ -444,7 +444,7 @@ namespace Tests.Diagnostics
                 static int LocalFunction(int x)
                 {
                     int seed;
-                    seed = 1;       // FN, variables declared in local functions are muted for now
+                    seed = 1;       // Noncompliant
                     seed = 42;
                     return x + seed;
                 }

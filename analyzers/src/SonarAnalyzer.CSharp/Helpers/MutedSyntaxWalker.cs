@@ -81,17 +81,19 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
-            if (symbols.Any(x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)))
+            if (symbols.FirstOrDefault(x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)) is { } symbol)
             {
-                isMuted = IsInTupleAssignmentTarget() || IsInLocalFunction();
+                isMuted = IsInTupleAssignmentTarget() || IsUsedInLocalFunction(symbol);
             }
             base.VisitIdentifierName(node);
 
             bool IsInTupleAssignmentTarget() =>
                 node.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget();
 
-            bool IsInLocalFunction() =>
-                node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)) != null;
+            bool IsUsedInLocalFunction(ISymbol symbol) =>
+                // We don't mute it if it's declared and used in local function
+                !(symbol.ContainingSymbol is IMethodSymbol containingSymbol && containingSymbol.MethodKind == MethodKindEx.LocalFunction)
+                && node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)) != null;
         }
     }
 }
