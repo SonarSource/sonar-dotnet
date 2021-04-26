@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.cs",
                                     new CS.ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
                                     ParseOptionsHelper.FromCSharp8,
-                                    GetAdditionalReferences());
+                                    AdditionalReferences);
 
 #if NET5_0
         [TestMethod]
@@ -48,10 +48,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ClearTextProtocolsAreSensitive_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Console(@"TestCases\Hotspots\ClearTextProtocolsAreSensitive.CSharp9.cs",
                                                       new CS.ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled),
-                                                      GetAdditionalReferences());
+                                                      AdditionalReferences);
 #endif
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.SystemNetHttp.Concat(MetadataReferenceFacade.SystemComponentModelPrimitives);
+        internal static IEnumerable<MetadataReference> AdditionalReferences =>
+            MetadataReferenceFacade.SystemNetHttp.Concat(MetadataReferenceFacade.SystemComponentModelPrimitives).Concat(MetadataReferenceFacade.SystemXml);
     }
 }

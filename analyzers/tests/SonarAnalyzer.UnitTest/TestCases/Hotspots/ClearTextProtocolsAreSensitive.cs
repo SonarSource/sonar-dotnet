@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
+using System.Xml.Serialization;
 
 namespace Tests.Diagnostics
 {
@@ -157,6 +158,47 @@ namespace Tests.Diagnostics
             "ftp://anonymous@example.com", // Noncompliant
             "FTP://anonymous@example.com" // Noncompliant
         };
+    }
+
+    [XmlRoot(ElementName = "SonarProjectConfig", Namespace = "http://www.sonarsource.com/msbuild/analyzer/2021/1")]
+    public class NamespaceLikeAssignment
+    {
+        private string NamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+        private string NamespaceLikeProperty { get; set; }
+
+        public void Foo(string NamespaceLikeArgument)
+        {
+            var NamespaceLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            NamespaceLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            NamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            NamespaceLikeProperty = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+        }
+    }
+
+    [XmlRoot(ElementName = "SonarProjectConfig", Namespace = "ftp://a:a@foo.com/")]  // Noncompliant
+    public class NamespaceLikeAssignment2
+    {
+        private string NamespaceLikeField = "ftp://a:a@foo.com/";  // Noncompliant
+        private string NamespaceLikeProperty { get; set; }
+
+
+        private string NaaamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+        private string NaaamespaceLikeProperty { get; set; }
+
+        public void Foo(string NamespaceLikeArgument, string NaaamespaceLikeArgument)
+        {
+            var NamespaceLikeVar = "ftp://a:a@foo.com/";  // Noncompliant
+            NamespaceLikeArgument = "ftp://a:a@foo.com/";  // Noncompliant
+            NamespaceLikeField = "ftp://a:a@foo.com/";  // Noncompliant
+            NamespaceLikeProperty = "ftp://a:a@foo.com/";  // Noncompliant
+
+            var namespaceLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+
+            var NaaamespaceLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            NaaamespaceLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            NaaamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            NaaamespaceLikeProperty = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+        }
     }
 }
 

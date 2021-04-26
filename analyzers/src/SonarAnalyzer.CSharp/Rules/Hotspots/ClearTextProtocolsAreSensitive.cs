@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private void VisitStringExpressions(SyntaxNodeAnalysisContext c)
         {
             var text = GetText(c.Node);
-            if (GetUnsafeProtocol(text) is {} unsafeProtocol)
+            if (GetUnsafeProtocol(text, c.Node) is {} unsafeProtocol)
             {
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, c.Node.GetLocation(), unsafeProtocol, recommendedProtocols[unsafeProtocol]));
             }
@@ -134,10 +134,32 @@ namespace SonarAnalyzer.Rules.CSharp
             objectCreation.ArgumentList?.Arguments.Count > 0
             && validServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression));
 
-        private string GetUnsafeProtocol(string text)
+        private string GetUnsafeProtocol(string text, SyntaxNode node)
         {
             if (httpRegex.IsMatch(text))
             {
+                switch (node.Parent)
+                {
+                    case AttributeArgumentSyntax attributeArgument:
+                        if (attributeArgument.NameEquals is { } nameEquals && nameEquals.Name.Identifier.ValueText.Contains("Namespace"))
+                        {
+                            return null;
+                        }
+                        break;
+                    case EqualsValueClauseSyntax equalsValueClause:
+                        if (equalsValueClause.Parent is VariableDeclaratorSyntax variableDeclarator && variableDeclarator.Identifier.Text.Contains("Namespace"))
+                        {
+                            return null;
+                        }
+                        break;
+                    case AssignmentExpressionSyntax assignmentExpression:
+                        if (assignmentExpression.Left.RemoveParentheses() is IdentifierNameSyntax identifierName && identifierName.Identifier.Text.Contains("Namespace"))
+                        {
+                            return null;
+                        }
+                        break;
+                }
+
                 return "http";
             }
             else if (ftpRegex.IsMatch(text))
