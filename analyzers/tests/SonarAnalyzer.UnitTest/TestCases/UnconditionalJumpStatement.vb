@@ -382,6 +382,7 @@ Namespace Tests.Diagnostics
     End Class
 
     Public Class ReproducerClass
+
         ReadOnly Property FirstProperty As ReproducerClass
             Get
                 Return Nothing
@@ -413,6 +414,28 @@ Namespace Tests.Diagnostics
                 End Try
             End While
         End Function
+
+        Public Function MethodWithElementAccess(Array As Int32()) As Int32
+              While True
+                Try
+                    Return (((Array(0)))) ' Compliant
+                Catch E As Exception
+
+                End Try
+            End While
+        End Function
+
+        Public Function MethodWithAssignmentInsideReturnStatement() As Int32
+            Dim X As Int32
+              While True
+                Try
+                    return X = SecondProperty ' Compliant
+                Catch E As Exception
+
+                End Try
+            End While
+        End Function
+
     End Class
 End Namespace
 

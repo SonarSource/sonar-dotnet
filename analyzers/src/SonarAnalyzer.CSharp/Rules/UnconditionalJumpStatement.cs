@@ -53,13 +53,17 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override ISet<SyntaxKind> StatementsThatCanThrow { get; } = new HashSet<SyntaxKind>
             {
                 SyntaxKind.InvocationExpression,
-                SyntaxKind.ObjectCreationExpression
+                SyntaxKind.ObjectCreationExpression,
+                SyntaxKind.SimpleMemberAccessExpression,
+                SyntaxKind.PointerMemberAccessExpression,
+                SyntaxKind.ElementAccessExpression
             };
 
-            protected override ISet<SyntaxKind> LambdaSyntaxes { get; }
-                = new HashSet<SyntaxKind> {
+            protected override ISet<SyntaxKind> LambdaSyntaxes { get; } = new HashSet<SyntaxKind>
+            {
                     SyntaxKind.ParenthesizedLambdaExpression,
-                    SyntaxKind.SimpleLambdaExpression };
+                    SyntaxKind.SimpleLambdaExpression
+            };
 
             protected override ISet<SyntaxKind> LocalFunctionSyntaxes { get; } = new HashSet<SyntaxKind> { SyntaxKindEx.LocalFunctionStatement };
 
@@ -77,20 +81,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 csWalker.SafeVisit(rootExpression);
             }
 
-            protected override bool IsAccessToClassMember(StatementSyntax node)
-            {
-                var returnStatementExpression = ((ReturnStatementSyntax)node).Expression;
-                if (returnStatementExpression is IdentifierNameSyntax identifier
-                    && semanticModel.GetSymbolInfo(identifier) is { } symbolInfo
-                    && symbolInfo.Symbol is { } symbol
-                    && symbol.Kind == SymbolKind.Property)
-                {
-                    return true;
-                }
-
-                // We are checking for memberAccessExpression to catch NullReferenceException.
-                return returnStatementExpression is MemberAccessExpressionSyntax memberAccessExpression;
-            }
+            protected override bool IsPropertyAccess(StatementSyntax node) =>
+                node.DescendantNodes().Any(x => x.IsKind(SyntaxKind.IdentifierName)
+                                                && x is IdentifierNameSyntax identifier
+                                                && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol
+                                                && symbol.Kind == SymbolKind.Property);
 
             protected override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
             protected override bool IsReturnStatement(SyntaxNode node) => node.IsKind(SyntaxKind.ReturnStatement);

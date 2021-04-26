@@ -535,6 +535,35 @@ namespace Tests.Diagnostics
                 }
             }
         }
+
+        int MethodWithElementAccess(int[] array)
+        {
+            while (true)
+            {
+                try
+                {
+                    return (((array[0]))); // Compliant
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
+        int MethodWithAssignmentInsideReturnStatement()
+        {
+            int x;
+            while (true)
+            {
+                try
+                {
+                    return x = SecondProperty; // Compliant
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
     }
 
     public class LocalFunctions

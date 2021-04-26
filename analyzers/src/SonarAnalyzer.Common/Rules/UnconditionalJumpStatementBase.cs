@@ -37,10 +37,9 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract ISet<TSyntaxKind> LoopStatements { get; }
 
         protected abstract LoopWalkerBase<TStatementSyntax, TSyntaxKind> GetWalker(SyntaxNodeAnalysisContext context);
-
-        protected abstract ISet<TSyntaxKind> LoopStatements { get; }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -79,7 +78,7 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsAnyKind(SyntaxNode node, ISet<TLanguageKindEnum> syntaxKinds);
         protected abstract bool IsReturnStatement(SyntaxNode node);
         protected abstract bool TryGetTryAncestorStatements(TStatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<TStatementSyntax> tryAncestorStatements);
-        protected abstract bool IsAccessToClassMember(TStatementSyntax node);
+        protected abstract bool IsPropertyAccess(TStatementSyntax node);
 
         protected List<TStatementSyntax> ConditionalContinues { get; } = new List<TStatementSyntax>();
         protected List<TStatementSyntax> ConditionalTerminates { get; } = new List<TStatementSyntax>();
@@ -105,8 +104,7 @@ namespace SonarAnalyzer.Rules
             return ruleViolations;
         }
 
-        protected void StoreVisitData(TStatementSyntax node, List<TStatementSyntax> conditionalCollection,
-            List<TStatementSyntax> unconditionalCollection)
+        protected void StoreVisitData(TStatementSyntax node, List<TStatementSyntax> conditionalCollection, List<TStatementSyntax> unconditionalCollection)
         {
             var ancestors = node
                 .Ancestors()
@@ -138,7 +136,7 @@ namespace SonarAnalyzer.Rules
 
             if (IsReturnStatement(node)
                 && (node.DescendantNodes().Any(n => IsAnyKind(n, StatementsThatCanThrow))
-                    || IsAccessToClassMember(node)))
+                    || IsPropertyAccess(node)))
             {
                 return true;
             }
