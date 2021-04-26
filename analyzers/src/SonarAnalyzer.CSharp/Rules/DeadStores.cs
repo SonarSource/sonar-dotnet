@@ -268,7 +268,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         && !symbol.IsConst
                         && symbol.RefKind() == RefKind.None
                         && !liveOut.Contains(symbol)
-                        && !IsUnusedLocal(symbol))
+                        && !IsUnusedLocal(symbol)
+                        && !new MutedSyntaxWalker(context.SemanticModel, declarator, symbol).IsMuted())
                     {
                         var location = GetFirstLineLocationFromToken(declarator.Initializer.EqualsToken, declarator.Initializer);
                         context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, symbol.Name));
@@ -329,7 +330,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     && context.SemanticModel.GetSymbolInfo(operand).Symbol is { } symbol
                     && IsSymbolRelevant(symbol)
                     && CSharpLiveVariableAnalysis.IsLocalScoped(symbol, declaration)
-                    && !liveOut.Contains(symbol))
+                    && !liveOut.Contains(symbol)
+                    && !IsMuted(operand))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, prefixExpression.GetLocation(), symbol.Name));
                 }
@@ -343,7 +345,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     && context.SemanticModel.GetSymbolInfo(operand).Symbol is { } symbol
                     && IsSymbolRelevant(symbol)
                     && CSharpLiveVariableAnalysis.IsLocalScoped(symbol, declaration)
-                    && !liveOut.Contains(symbol))
+                    && !liveOut.Contains(symbol)
+                    && !IsMuted(operand))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, postfixExpression.GetLocation(), symbol.Name));
                 }
@@ -352,7 +355,8 @@ namespace SonarAnalyzer.Rules.CSharp
             private void ReportOnAssignment(AssignmentExpressionSyntax assignment, ExpressionSyntax left, ISymbol symbol, HashSet<SyntaxNode> assignmentLhs, HashSet<ISymbol> outState)
             {
                 if (CSharpLiveVariableAnalysis.IsLocalScoped(symbol, declaration)
-                    && !outState.Contains(symbol))
+                    && !outState.Contains(symbol)
+                    && !IsMuted(left))
                 {
                     var location = GetFirstLineLocationFromToken(assignment.OperatorToken, assignment.Right);
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, symbol.Name));
@@ -360,6 +364,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 assignmentLhs.Add(left);
             }
+
+            private bool IsMuted(SyntaxNode node) =>
+                new MutedSyntaxWalker(context.SemanticModel, node).IsMuted();
 
             private static Location GetFirstLineLocationFromToken(SyntaxToken issueStartToken, SyntaxNode wholeIssue)
             {

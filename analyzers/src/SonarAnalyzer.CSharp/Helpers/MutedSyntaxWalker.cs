@@ -48,23 +48,23 @@ namespace SonarAnalyzer.Helpers
             };
 
         private readonly SemanticModel semanticModel;
-        private readonly SyntaxNode node;
+        private readonly SyntaxNode root;
         private readonly ISymbol[] symbols;
         private bool isMuted;
 
         public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node)
+            : this(semanticModel, node, node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Select(x => semanticModel.GetSymbolInfo(x).Symbol).WhereNotNull().ToArray()) { }
+
+        public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node, params ISymbol[] symbols)
         {
             this.semanticModel = semanticModel;
-            this.node = node;
-            symbols = node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>()
-                .Select(x => semanticModel.GetSymbolInfo(x).Symbol)
-                .WhereNotNull()
-                .ToArray();
+            this.symbols = symbols;
+            root = node.Ancestors().FirstOrDefault(x => x.IsAnyKind(RootKinds));
         }
 
         public bool IsMuted()
         {
-            if (symbols.Any() && node.Ancestors().FirstOrDefault(x => x.IsAnyKind(RootKinds)) is { } root)
+            if (symbols.Any() && root != null)
             {
                 Visit(root);
             }

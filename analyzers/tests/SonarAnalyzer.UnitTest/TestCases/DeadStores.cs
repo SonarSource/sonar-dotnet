@@ -444,7 +444,7 @@ namespace Tests.Diagnostics
                 static int LocalFunction(int x)
                 {
                     int seed;
-                    seed = 1;       //Noncompliant
+                    seed = 1;       // FN, variables declared in local functions are muted for now
                     seed = 42;
                     return x + seed;
                 }
@@ -886,7 +886,7 @@ namespace Tests.Diagnostics
     {
         public string VariableDeclarator_WithLocalFunction()
         {
-            string buffer = "Value"; // Noncompliant FP
+            string buffer = "Value"; // Compliant
             return Local();
 
             string Local()
@@ -898,7 +898,7 @@ namespace Tests.Diagnostics
         public string Assignment_WithLocalFunction()
         {
             string buffer;
-            buffer = "Value"; // Noncompliant FP
+            buffer = "Value"; // Compliant
             return Local();
 
             string Local()
@@ -910,7 +910,7 @@ namespace Tests.Diagnostics
         public int PrefixExpression_WithLocalFunction()
         {
             var count = 0;
-            ++count;        // Noncompliant FP
+            ++count;        // Compliant
             return Local();
 
             int Local()
@@ -922,7 +922,7 @@ namespace Tests.Diagnostics
         public int PostfixExpression_WithLocalFunction()
         {
             var count = 0;
-            count++;        // Noncompliant FP
+            count++;        // Compliant
             return Local();
 
             int Local()
@@ -964,7 +964,7 @@ namespace Tests.Diagnostics
     {
         public void UseVariableInLocalPredicate()
         {
-            bool usedBool = BoolInitializer(true); // Noncompliant FP, value is used in local predicate function
+            bool usedBool = BoolInitializer(true); // Compliant, value is used in local predicate function
             var list = new List<bool>();
             list.Where(LocalPredicate);
 
