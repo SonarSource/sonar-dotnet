@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {
-            if (!(property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax setter))
+            if (!(property.SetMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax setter))
             {
                 return Enumerable.Empty<FieldData>();
             }
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
         {
             // We don't handle properties with multiple returns that return different fields
-            if (!(property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter))
+            if (!(property.GetMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax getter))
             {
                 return Enumerable.Empty<FieldData>();
             }
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
         {
-            if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor)
+            if (!(accessorMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax accessor)
                 || ((SyntaxNode)accessor.Body ?? accessor).ContainsGetOrSetOnDependencyProperty(compilation))
             {
                 return true;
@@ -116,10 +116,8 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
-            (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax setter
-             && setter.DescendantNodes().Any())
-            || (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter
-                && getter.DescendantNodes().Any());
+            HasExplicitAccessor(property.SetMethod)
+            || HasExplicitAccessor(property.GetMethod);
 
         private static void FillAssignments(IDictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
         {
@@ -206,5 +204,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return strippedExpression.IsLeftSideOfAssignment()
                    || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment()); // for this.field
         }
+
+        private static bool HasExplicitAccessor(ISymbol symbol) =>
+            symbol.GetFirstSyntaxRef() is AccessorDeclarationSyntax accessor
+            && accessor.DescendantNodes().Any();
     }
 }
