@@ -227,9 +227,16 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class EventTestBase
+    {
+        public event EventHandler Logging;
+
+        public void RunSomethingThatSendAnEvent() => Logging(this, EventArgs.Empty);
+    }
+
     public class EventChainingDirect
     {
-        public event EventHandler Logging; // Noncompliant - FP
+        public event EventHandler Logging; // Noncompliant - FP, see https://github.com/SonarSource/sonar-dotnet/issues/4276
 
         public void RunTest()
         {
@@ -249,12 +256,5 @@ namespace Tests.Diagnostics
             eventTestBase.Logging += (s, e) => Logging(s, e);
             eventTestBase.RunSomethingThatSendAnEvent();
         }
-    }
-
-    public class EventTestBase
-    {
-        public event EventHandler Logging;
-
-        public void RunSomethingThatSendAnEvent() => Logging(this, EventArgs.Empty);
     }
 }
