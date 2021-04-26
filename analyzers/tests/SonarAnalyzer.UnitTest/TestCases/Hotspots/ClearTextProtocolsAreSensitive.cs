@@ -174,6 +174,11 @@ namespace Tests.Diagnostics
             "http://docbook.org",
             "http://graphml.graphdrawing.org",
             "http://json-schema.org",
+            "http://email:password@subdomain.www.w3.org", // Noncompliant
+            "http://domain.com/.www.w3.org", // Noncompliant
+            "http://domain.com/path?domain=.www.w3.org", // Noncompliant
+            "http://domain.com?q=.www.w3.org", // Noncompliant
+            "http://domain.com#.www.w3.org", // Noncompliant
             "http://subdomain.www.w3.org", // Noncompliant
             "http://subdomain.xml.apache.org", // Noncompliant
             "http://subdomain.schemas.xmlsoap.org", // Noncompliant
@@ -198,6 +203,11 @@ namespace Tests.Diagnostics
             "http://subdomain.example.com",
             "http://subdomain.example.org",
             "http://subdomain.test.com",
+            "http://email:password@subdomain.example.com",
+            "http://domain.com/.example.com", // Noncompliant
+            "http://domain.com/path?domain=.example.com", // Noncompliant
+            "http://domain.com?q=.example.com", // Noncompliant
+            "http://domain.com#.example.com", // Noncompliant
         };
     }
 }

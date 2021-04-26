@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {"clear-text SMTP", "SMTP over SSL/TLS or SMTP with STARTTLS" }
         };
 
-        private readonly List<string> commonlyUsedXmlDomains = new List<string>
+        private readonly string[] commonlyUsedXmlDomains =
         {
             "www.w3.org",
             "xml.apache.org",
@@ -73,8 +73,8 @@ namespace SonarAnalyzer.Rules.CSharp
             "json-schema.org"
         };
 
-        private readonly List<string> commonlyUsedExampleDomains = new List<string> {"example.com", "example.org", "test.com"};
-        private readonly List<string> localhostAddresses = new List<string> {"localhost", "127.0.0.1", "::1"};
+        private readonly string[] commonlyUsedExampleDomains = {"example.com", "example.org", "test.com"};
+        private readonly string[] localhostAddresses = {"localhost", "127.0.0.1", "::1"};
 
         private readonly CSharpObjectInitializationTracker objectInitializationTracker =
             new CSharpObjectInitializationTracker(constantValue => constantValue is bool value && value,
@@ -93,8 +93,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration)
         {
-            const string allSubdomainsPattern = "([^/]+\\.)?";
-            var domainsList = commonlyUsedXmlDomains.Concat(commonlyUsedExampleDomains.Select(x => allSubdomainsPattern + x)).Concat(localhostAddresses);
+            const string allSubdomainsPattern = @"([^/?#]+\.)?";
+            var domainsList = localhostAddresses.Concat(commonlyUsedXmlDomains).Concat(commonlyUsedExampleDomains.Select(x => allSubdomainsPattern + x));
             var validServerPattern = domainsList.JoinStr("|");
 
             httpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).");
