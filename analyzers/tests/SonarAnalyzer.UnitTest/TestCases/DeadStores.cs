@@ -816,7 +816,7 @@ namespace Tests.Diagnostics
             }
             catch (SystemException e)
             {
-                exception = e; // Noncompliant
+                exception = e; // FN, muted by try/catch
             }
 
             return exitCode;
@@ -1019,5 +1019,37 @@ namespace Tests.Diagnostics
         private (string name, int count) GetValues() => ("foo", 1);
 
         private void DoWork() => throw new InvalidOperationException("bang");
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2761
+    public class Repro_2761
+    {
+        public static void CreateDirectory(string directory)
+        {
+            const int CopyWaitInterval = 250;
+            bool created = false;
+            int attempts = 10;
+
+            do
+            {
+                try
+                {
+                    System.IO.Directory.CreateDirectory(directory);
+                    created = true;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    if (attempts == 0)
+                    {
+                        throw;
+                    }
+                }
+
+                if (!created)   // Compliant
+                {
+                    --attempts;
+                }
+            } while (!created); // Compliant
+        }
     }
 }
