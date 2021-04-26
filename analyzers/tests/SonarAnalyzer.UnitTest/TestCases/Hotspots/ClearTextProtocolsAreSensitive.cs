@@ -166,12 +166,17 @@ namespace Tests.Diagnostics
         private string NamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
         private string NamespaceLikeProperty { get; set; }
 
-        public void Foo(string NamespaceLikeArgument)
+        private string FooNamespace = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+        private string FOO_NAMESPACE { get; set; }
+
+        public void Foo(string namespaceLikeArgument)
         {
-            var NamespaceLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
-            NamespaceLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            var namespaceLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            namespaceLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
             NamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
             NamespaceLikeProperty = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            FooNamespace = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
+            FOO_NAMESPACE = "http://www.sonarsource.com/msbuild/analyzer/2021/1";
         }
 
         public void Bar(string NamespaceLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/123") { }
@@ -185,24 +190,23 @@ namespace Tests.Diagnostics
         private string NamespaceLikeProperty { get; set; }
 
 
-        private string NaaamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
-        private string NaaamespaceLikeProperty { get; set; }
+        private string NamefooLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+        private string NamefooLikeProperty { get; set; }
 
-        public void Foo(string NaaamespaceLikeArgument, string NamespaceLikeArgument = "ftp://a:a@foo.com/")  // Noncompliant
+        public void Foo(string namefooLikeArgument, string namespaceLikeArgument = "ftp://a:a@foo.com/")  // Noncompliant
         {
-            var NamespaceLikeVar = "ftp://a:a@foo.com/";  // Noncompliant
-            NamespaceLikeArgument = "ftp://a:a@foo.com/";  // Noncompliant
+            var namespaceLikeVar = "ftp://a:a@foo.com/";  // Noncompliant
+            namespaceLikeArgument = "ftp://a:a@foo.com/";  // Noncompliant
             NamespaceLikeField = "ftp://a:a@foo.com/";  // Noncompliant
             NamespaceLikeProperty = "ftp://a:a@foo.com/";  // Noncompliant
 
-            var namespaceLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
-            string[] NamespaceArray = new string[1];
-            NamespaceArray[0] = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            string[] namespaceArray = new string[1];
+            namespaceArray[0] = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
 
-            var NaaamespaceLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
-            NaaamespaceLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
-            NaaamespaceLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
-            NaaamespaceLikeProperty = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            var namefooLikeVar = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            namefooLikeArgument = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            NamefooLikeField = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
+            NamefooLikeProperty = "http://www.sonarsource.com/msbuild/analyzer/2021/1";  // Noncompliant
         }
     }
 
@@ -210,6 +214,17 @@ namespace Tests.Diagnostics
     {
         public MyAttribute(string str) {
         }
+    }
+
+    [XmlRoot(Namespace=XML_NAMESPACE)]
+    public class NamespaceInConstant {
+        public const string XML_NAMESPACE = "http://x";
+        public const string XML_FOOSPACE = "http://x";  // Noncompliant
+    }
+
+    public static class Constants {
+        public const String NAMESPACE1 = "http://x";
+        public const String FOOSPACE1 = "http://x";  // Noncompliant
     }
 }
 

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text.RegularExpressions;
@@ -123,8 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void VisitStringExpressions(SyntaxNodeAnalysisContext c)
         {
-            var text = GetText(c.Node);
-            if (GetUnsafeProtocol(text, c.Node) is {} unsafeProtocol)
+            if (GetUnsafeProtocol(c.Node) is {} unsafeProtocol)
             {
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(DefaultRule, c.Node.GetLocation(), unsafeProtocol, recommendedProtocols[unsafeProtocol]));
             }
@@ -134,8 +134,9 @@ namespace SonarAnalyzer.Rules.CSharp
             objectCreation.ArgumentList?.Arguments.Count > 0
             && validServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression));
 
-        private string GetUnsafeProtocol(string text, SyntaxNode node)
+        private string GetUnsafeProtocol(SyntaxNode node)
         {
+            var text = GetText(node);
             if (httpRegex.IsMatch(text) && !IsNamespace(node.Parent))
             {
                 return "http";
@@ -176,7 +177,7 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static bool TokenContainsNamespace(SyntaxToken token) =>
-            token.Text.Contains("Namespace");
+            token.Text.IndexOf("Namespace", StringComparison.OrdinalIgnoreCase) != -1;
 
         private static Regex CompileRegex(string pattern, bool ignoreCase = true) =>
             new Regex(pattern, ignoreCase
