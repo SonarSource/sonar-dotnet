@@ -139,5 +139,5 @@ namespace SonarAnalyzer.UnitTest.Rules
 //            var assembly = typeof(CbdeHandlerTest).Assembly;
 //            return Path.Combine(Path.GetDirectoryName(assembly.Location), "CBDEMocks", mockName + ".exe");
 //        }
-    }
+//    }
 }
