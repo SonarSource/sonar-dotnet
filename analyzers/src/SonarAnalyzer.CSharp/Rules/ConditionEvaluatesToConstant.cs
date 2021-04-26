@@ -36,7 +36,7 @@ using CSharpExplodedGraph = SonarAnalyzer.SymbolicExecution.CSharpExplodedGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    internal sealed partial class ConditionEvaluatesToConstant : ISymbolicExecutionAnalyzer
+    internal sealed class ConditionEvaluatesToConstant : ISymbolicExecutionAnalyzer
     {
         private static readonly ISet<SyntaxKind> omittedSyntaxKinds = new HashSet<SyntaxKind>
         {
