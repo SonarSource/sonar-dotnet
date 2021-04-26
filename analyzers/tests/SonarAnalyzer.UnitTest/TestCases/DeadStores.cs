@@ -901,8 +901,8 @@ namespace Tests.Diagnostics
     {
         public void WithRefKeyword(int[] values)
         {
-            ref int value = ref values[0]; // Noncompliant FP because `value` keeps the reference to `values[0]`, and below `default` is actually assigned to `values[0]`
-            value = default; // Noncompliant FP because it's ref variable and value is propagated somewhere
+            ref int value = ref values[0];  // Compliant, because `value` keeps the reference to `values[0]`, and below `default` is actually assigned to `values[0]`
+            value = default;                // Compliant, because it's ref variable and value is propagated somewhere
         }
     }
 
@@ -940,6 +940,21 @@ namespace Tests.Diagnostics
             bool BoolInitializer(bool value)
             {
                 return value;
+            }
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2303
+    public class Repro_2303
+    {
+        public void WithRefKeywrod()
+        {
+            Span<int> span = new[] { 42 };
+            int j = 0;
+
+            foreach (ref var e in span)
+            {
+                e = j--; // Compliant because of ref keyword
             }
         }
     }

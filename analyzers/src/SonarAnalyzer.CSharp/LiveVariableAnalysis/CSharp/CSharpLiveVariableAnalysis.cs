@@ -57,7 +57,8 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 && symbol.ContainingSymbol.Equals(declaration);
 
             bool IsLocalOrParameterSymbol() =>
-                symbol is ILocalSymbol || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
+                (symbol is ILocalSymbol local && local.RefKind() == RefKind.None)
+                || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
         }
 
         protected override State ProcessBlock(Block block)
