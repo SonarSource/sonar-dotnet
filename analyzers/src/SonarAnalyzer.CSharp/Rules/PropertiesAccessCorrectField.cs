@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
         {
             if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor)
-                || ContainsGetOrSetOnDependencyProperty((SyntaxNode)accessor.Body ?? accessor, compilation))
+                || ((SyntaxNode)accessor.Body ?? accessor).ContainsGetOrSetOnDependencyProperty(compilation))
             {
                 return true;
             }
@@ -120,18 +120,6 @@ namespace SonarAnalyzer.Rules.CSharp
              && setter.DescendantNodes().Any())
             || (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter
                 && getter.DescendantNodes().Any());
-
-        private static bool ContainsGetOrSetOnDependencyProperty(SyntaxNode syntaxNode, Compilation compilation)
-        {
-            var semanticModel = compilation.GetSemanticModel(syntaxNode.SyntaxTree);
-
-            // Ignore the accessor if it calls System.Windows.DependencyObject.GetValue or System.Windows.DependencyObject.SetValue
-            return syntaxNode
-                   .DescendantNodes()
-                   .OfType<InvocationExpressionSyntax>()
-                   .Where(invocation => invocation.Expression.NameIs("GetValue") || invocation.Expression.NameIs("SetValue"))
-                   .Any(invocation => semanticModel.GetSymbolInfo(invocation).Symbol.ContainingType.DerivesFrom(KnownType.System_Windows_DependencyObject));
-        }
 
         private static void FillAssignments(IDictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
         {

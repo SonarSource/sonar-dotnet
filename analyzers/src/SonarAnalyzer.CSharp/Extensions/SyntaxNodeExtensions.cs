@@ -27,7 +27,7 @@ using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Extensions
 {
-    internal static class SyntaxNodeExtensions
+    internal static partial class SyntaxNodeExtensions
     {
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
             node != null &&

@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -117,7 +118,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
         {
             if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor)
-                || ContainsGetOrSetOnDependencyProperty(accessor.Parent, compilation))
+                || accessor.Parent.ContainsGetOrSetOnDependencyProperty(compilation))
             {
                 return true;
             }
@@ -132,18 +133,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
              && setter.Parent.DescendantNodes().Any())
             || (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax getter
                 && getter.Parent.DescendantNodes().Any());
-
-        private static bool ContainsGetOrSetOnDependencyProperty(SyntaxNode syntaxNode, Compilation compilation)
-        {
-            var semanticModel = compilation.GetSemanticModel(syntaxNode.SyntaxTree);
-
-            // Ignore the accessor if it calls System.Windows.DependencyObject.GetValue or System.Windows.DependencyObject.SetValue
-            return syntaxNode
-                   .DescendantNodes()
-                   .OfType<InvocationExpressionSyntax>()
-                   .Where(invocation => invocation.Expression.NameIs("GetValue") || invocation.Expression.NameIs("SetValue"))
-                   .Any(invocation => semanticModel.GetSymbolInfo(invocation).Symbol.ContainingType.DerivesFrom(KnownType.System_Windows_DependencyObject));
-        }
 
         private static ExpressionSyntax SingleReturn(StatementSyntax body)
         {
