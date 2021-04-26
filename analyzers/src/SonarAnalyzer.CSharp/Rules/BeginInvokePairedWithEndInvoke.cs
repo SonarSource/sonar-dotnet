@@ -64,10 +64,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (FindCallback(callbackArg, semanticModel) is { } callback)
             {
-                if (Language.Syntax.Kind(callback) == SyntaxKind.SimpleMemberAccessExpression)
+                if (Language.Syntax.Kind(callback) == SyntaxKind.SimpleMemberAccessExpression
+                    && callback is MemberAccessExpressionSyntax { } memberAccess
+                    && memberAccess.Name.ToString().Equals(EndInvoke))
                 {
-                    return !(semanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol
-                             && methodSymbol.Name == EndInvoke);
+                    return !(semanticModel.GetSymbolInfo(callback).Symbol is IMethodSymbol { Name: EndInvoke });
                 }
 
                 return Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, semanticModel);

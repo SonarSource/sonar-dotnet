@@ -337,5 +337,12 @@ namespace Tests.Diagnostics
             AsyncCallback callback = a.EndInvoke;
             a.BeginInvoke(callback, null); // Compliant
         }
+
+        public void AsyncCallbackLocalVariableNotEndinvokeAccess()
+        {
+            Action a = () => { };
+            AsyncCallback callback = a.NotEndInvoke; // Error [CS1061]
+            a.BeginInvoke(callback, null); // Noncompliant
+        }
     }
 }
