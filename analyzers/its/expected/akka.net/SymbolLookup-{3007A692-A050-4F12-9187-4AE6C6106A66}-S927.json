@@ -15,19 +15,6 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'fail' to 'message' to match the interface declaration.",
-"location":  {
-"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  36,
-"endLine":  52,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S927",
 "message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
