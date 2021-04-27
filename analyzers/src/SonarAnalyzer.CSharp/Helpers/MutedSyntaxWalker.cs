@@ -73,12 +73,12 @@ namespace SonarAnalyzer.Helpers
             {
                 Visit(root);
             }
-            return isMuted || (isInTryOrCatch && isOutsideTryCatch);
+            return IsMutedState();
         }
 
         public override void Visit(SyntaxNode node)
         {
-            if (!isMuted)   // Performance optimization, we can stop visiting once we know the answer
+            if (!IsMutedState())   // Performance optimization, we can stop visiting once we know the answer
             {
                 base.Visit(node);
             }
@@ -113,6 +113,9 @@ namespace SonarAnalyzer.Helpers
             }
             base.VisitVariableDeclarator(node);
         }
+
+        private bool IsMutedState() =>
+            isMuted || (isInTryOrCatch && isOutsideTryCatch);
 
         private void InspectTryCatch(SyntaxNode node)
         {
