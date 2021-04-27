@@ -16,15 +16,18 @@ namespace Tests.Diagnostics
             return something + "foo";
         }
 
-        public async void OnSomeEvent(object sender, EventArgs args) // Noncompliant - it might looks weird to throw from some event method but that's valid syntax
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2665
+        public async void OnSomeEvent(object sender, EventArgs args) // Compliant
         {
             if (sender == null)
             {
-                throw new ArgumentNullException(nameof(sender)); // Secondary
+                throw new ArgumentNullException(nameof(sender));
             }
 
             await Task.Yield();
         }
+
+        public void Foo(object sender, EventArgs args) { }
     }
 
     public class ValidCases
@@ -114,11 +117,10 @@ namespace Tests.Diagnostics
         }
 
         // See https://github.com/SonarSource/sonar-dotnet/issues/2665
-        private async void OnButtonPressed( object sender, EventArgs e) // Noncompliant - FP (compliant solution from rule specs does not apply here)
+        private async void OnButtonPressed( object sender, EventArgs e) // Compliant (the compliant solution from rule specs does not apply here)
         {
             if(e == null)
                 throw new ArgumentException(nameof(e));
-//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
 
             await Task.Delay(0);
         }
