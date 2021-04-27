@@ -120,22 +120,22 @@ namespace Tests.Diagnostics
         void calculateRate2(int a, int b)
         {
             var x = 0;
-            x = 1; // Noncompliant
+            x = 1; // FN, muted due to try/catch
             try
             {
-                x = 11; // Noncompliant
+                x = 11; // FN, muted due to try/catch
                 x = 12;
                 Console.Write(x);
-                x = 13; // Noncompliant
+                x = 13; // Compliant, Console.Write could throw and value is read fater try/catch
             }
             catch (Exception)
             {
-                x = 21; // Noncompliant
+                x = 21; // FN, muted due to try/catch
                 x = 22;
                 Console.Write(x);
-                x = 23; // Noncompliant
+                x = 23; // FN, muted due to try/catch
             }
-            x = 31; // Noncompliant
+            x = 31; // FN, muted due to try/catch
         }
 
         void storeI(int i) { }
@@ -522,9 +522,9 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                actor = null; // Noncompliant
+                actor = null;   // FN, muted due to try/catch
             }
-            actor = null; // Noncompliant
+            actor = null;       // FN, muted due to try/catch
         }
 
         internal void SnippetTwo(object actor)
@@ -728,7 +728,7 @@ namespace Tests.Diagnostics
         public static long WithConstantValue(string path)
         {
             const int unknownfilelength = -1;
-            long length = unknownfilelength; // Noncompliant FP because we do not propagate constant values
+            long length = unknownfilelength; // Compliant
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -757,7 +757,7 @@ namespace Tests.Diagnostics
         const int UNKNOWN = -1;
         public static long WithClassConstant(string path)
         {
-            long length = UNKNOWN; // Noncompliant
+            long length = UNKNOWN; // Compliant
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -772,7 +772,7 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/2598
         public static string WithCastedNull(string path)
         {
-            var length = (string)null; // Noncompliant FP
+            var length = (string)null; // Compliant
             try
             {
                 length = new System.IO.FileInfo(path).Length.ToString();
@@ -805,7 +805,7 @@ namespace Tests.Diagnostics
         public int Start()
         {
             const int x = -1;
-            int exitCode = x; // Noncompliant FP - if Archive throws, it will be returned
+            int exitCode = x; // Compliant
             Exception exception = null;
 
             try
@@ -816,7 +816,7 @@ namespace Tests.Diagnostics
             }
             catch (SystemException e)
             {
-                exception = e; // Noncompliant
+                exception = e; // FN, muted by try/catch
             }
 
             return exitCode;
@@ -841,28 +841,28 @@ namespace Tests.Diagnostics
         }
     }
 
-    // Fixed issue verification https://github.com/SonarSource/sonar-dotnet/issues/2607
+    // https://github.com/SonarSource/sonar-dotnet/issues/2607
     public class Verify2607
     {
         public static void DeadStore(int[] array)
         {
             var x = 0;
-            x = array[^1]; // Noncompliant
+            x = array[^1]; // FN, muted due to try/catch
             try
             {
-                x = 11; // Noncompliant
+                x = 11; // FN, muted due to try/catch
                 x = 12;
                 Console.Write(x);
-                x = 13; // Noncompliant
+                x = 13; // Compliant, Console.Write can throw
             }
             catch (Exception)
             {
-                x = 21; // Noncompliant
+                x = 21; // FN, muted due to try/catch
                 x = 22;
                 Console.Write(x);
-                x = 23; // Noncompliant
+                x = 23; // FN, muted due to try/catch
             }
-            x = 31; // Noncompliant
+            x = 31; // FN, muted due to try/catch
         }
     }
 
@@ -992,6 +992,64 @@ namespace Tests.Diagnostics
             {
                 e = j--; // Compliant because of ref keyword
             }
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2766
+    public class Repro_2766
+    {
+        public int WithTryCatch()
+        {
+            var name = string.Empty;
+            try
+            {
+                var values = GetValues();
+                name = values.name; // Compliant, DoWork can throw
+
+                DoWork();
+                return 5;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"{name}: {e}");
+                throw;
+            }
+        }
+
+        private (string name, int count) GetValues() => ("foo", 1);
+
+        private void DoWork() => throw new InvalidOperationException("bang");
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2761
+    public class Repro_2761
+    {
+        public static void CreateDirectory(string directory)
+        {
+            const int CopyWaitInterval = 250;
+            bool created = false;
+            int attempts = 10;
+
+            do
+            {
+                try
+                {
+                    System.IO.Directory.CreateDirectory(directory);
+                    created = true;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    if (attempts == 0)
+                    {
+                        throw;
+                    }
+                }
+
+                if (!created)   // Compliant
+                {
+                    --attempts;
+                }
+            } while (!created); // Compliant
         }
     }
 }

@@ -187,7 +187,7 @@ namespace Tests.Diagnostics
         {
             bool deletesuccess = false;
             do
-            { // Secondary
+            {
                 try
                 {
                     deletesuccess = true;
@@ -196,11 +196,12 @@ namespace Tests.Diagnostics
                 {
                     System.Threading.Thread.Sleep(timeoutmilliseconds);
                 }
-            } while (!deletesuccess); // Noncompliant FP
+            } while (!deletesuccess); // Compliant
         }
 
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/2590
     static class Repro2590
     {
         static void Main()
@@ -217,12 +218,12 @@ namespace Tests.Diagnostics
                 // Do nothing
             }
 
-            if (foo == null) // Noncompliant S2583  FP
-            { // Secondary
+            if (foo == null) // Compliant
+            {
                 Console.WriteLine("Foo is null");
             }
 
-            if (foo != null) // Noncompliant S2589  FP
+            if (foo != null) // Compliant
             {
                 Console.WriteLine("Foo is not null");
             }

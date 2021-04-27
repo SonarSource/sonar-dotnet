@@ -54,6 +54,8 @@ namespace SonarAnalyzer.Helpers
         private readonly SyntaxNode root;
         private readonly ISymbol[] symbols;
         private bool isMuted;
+        private bool isInTryOrCatch;
+        private bool isOutsideTryCatch;
 
         public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node)
             : this(semanticModel, node, node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Select(x => semanticModel.GetSymbolInfo(x).Symbol).WhereNotNull().ToArray()) { }
@@ -71,12 +73,12 @@ namespace SonarAnalyzer.Helpers
             {
                 Visit(root);
             }
-            return isMuted;
+            return IsMutedState();
         }
 
         public override void Visit(SyntaxNode node)
         {
-            if (!isMuted)   // Performance optimization, we can stop visiting once we know the answer
+            if (!IsMutedState())   // Performance optimization, we can stop visiting once we know the answer
             {
                 base.Visit(node);
             }
@@ -87,6 +89,7 @@ namespace SonarAnalyzer.Helpers
             if (symbols.FirstOrDefault(x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)) is { } symbol)
             {
                 isMuted = IsInTupleAssignmentTarget() || IsUsedInLocalFunction(symbol) || IsInUnsupportedExpression();
+                InspectTryCatch(node);
             }
             base.VisitIdentifierName(node);
 
@@ -96,10 +99,38 @@ namespace SonarAnalyzer.Helpers
             bool IsUsedInLocalFunction(ISymbol symbol) =>
                 // We don't mute it if it's declared and used in local function
                 !(symbol.ContainingSymbol is IMethodSymbol containingSymbol && containingSymbol.MethodKind == MethodKindEx.LocalFunction)
-                && node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)) != null;
+                && HasAncestor(node, SyntaxKindEx.LocalFunctionStatement);
 
             bool IsInUnsupportedExpression() =>
                 node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) != null;
         }
+
+        public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
+        {
+            if (symbols.FirstOrDefault(x => node.Identifier.ValueText == x.Name && x.Equals(semanticModel.GetDeclaredSymbol(node))) is { } symbol)
+            {
+                InspectTryCatch(node);
+            }
+            base.VisitVariableDeclarator(node);
+        }
+
+        private bool IsMutedState() =>
+            isMuted || (isInTryOrCatch && isOutsideTryCatch);
+
+        private void InspectTryCatch(SyntaxNode node)
+        {
+            if (HasAncestor(node, SyntaxKind.TryStatement))
+            {
+                // We're only interested in "try" and "catch" blocks. Don't count "finally" block
+                isInTryOrCatch = isInTryOrCatch || !HasAncestor(node, SyntaxKind.FinallyClause);
+            }
+            else
+            {
+                isOutsideTryCatch = true;
+            }
+        }
+
+        private static bool HasAncestor(SyntaxNode node, SyntaxKind kind) =>
+            node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(kind)) != null;
     }
 }
