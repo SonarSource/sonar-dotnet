@@ -1,5 +1,6 @@
 ﻿Imports System
 Imports System.Runtime.Serialization
+Imports System.ComponentModel
 
 Namespace Tests.Diagnostics
 
@@ -63,6 +64,26 @@ Namespace Tests.Diagnostics
         Public Shared Sub OnSerializingPublicStatic(Context As StreamingContext)  ' Noncompliant {{Make this method non-public and non-shared.}}
         End Sub
 
+        <OnDeserialized>
+        <EditorBrowsable>
+        Public Shared Sub OnDeserialized(Context As StreamingContext)    ' Noncompliant {{Make this method non-public and non-shared.}}
+        End Sub
+
+        <OnDeserializing>
+        <EditorBrowsable>
+        Public Shared Sub OnDeserializing(Context As StreamingContext)   ' Noncompliant {{Make this method non-public and non-shared.}}
+        End Sub
+
+        <OnDeserialized>
+        <EditorBrowsable(EditorBrowsableState.Advanced)>
+        Public Shared Sub OnDeserialized1(Context As StreamingContext)   ' Noncompliant {{Make this method non-public and non-shared.}}
+        End Sub
+
+        <OnDeserializing>
+        <EditorBrowsable(EditorBrowsableState.Advanced)>
+        Public Shared Sub OnDeserializing1(Context As StreamingContext)  ' Noncompliant {{Make this method non-public and non-shared.}}
+        End Sub
+
         <OnSerializing>
         Friend Sub OnSerializingMethod(Context As StreamingContext)     ' Compliant, method is not public and gets invoked
         End Sub
@@ -76,12 +97,33 @@ Namespace Tests.Diagnostics
         End Sub
 
         <OnDeserializing>
-        Private Sub OnDeserializingMethod(Context As StreamingContext)  ' Compliant
+        Private Sub OnDeserializingMethod(Context As StreamingContext)        ' Compliant
         End Sub
 
         <OnDeserialized>
-        Private Sub OnDeserializedMethod(Context As StreamingContext)   ' Compliant
+        Private Sub OnDeserializedMethod(Context As StreamingContext)         ' Compliant
         End Sub
+
+        <OnDeserialized>
+        <EditorBrowsable(EditorBrowsableState.Never)>
+        Public Sub OnDeserialized3(Context As StreamingContext)               ' Compliant
+        End Sub
+
+        <OnDeserializing>
+        <EditorBrowsable(EditorBrowsableState.Never)>
+        Public Sub OnDeserializing3(Context As StreamingContext)              ' Compliant
+        End Sub
+
+        <OnSerializing>
+        <EditorBrowsable(EditorBrowsableState.Never)>
+        Public Sub OnSerializing3(Context As StreamingContext)                ' Compliant
+        End Sub
+
+        <OnSerialized>
+        <EditorBrowsable(EditorBrowsableState.Never)>
+        Public Function OnSerialized3(Context As StreamingContext) As Integer ' Compliant
+            Throw New NotImplementedException()
+        End Function
 
     End Class
 

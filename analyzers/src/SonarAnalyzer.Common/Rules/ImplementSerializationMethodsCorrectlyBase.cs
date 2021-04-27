@@ -50,8 +50,6 @@ namespace SonarAnalyzer.Rules
         protected abstract string MethodReturnTypeShouldBeVoidMessage { get; }
         protected abstract Location GetIdentifierLocation(IMethodSymbol methodSymbol);
 
-        protected virtual bool ContainsMatchingAttributes(IMethodSymbol methodSymbol) =>
-            methodSymbol.GetAttributes(SerializationAttributes).Any();
         protected ImplementSerializationMethodsCorrectlyBase(System.Resources.ResourceManager rspecResources) =>
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
 
@@ -60,7 +58,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var methodSymbol = (IMethodSymbol)c.Symbol;
-                    if (!ContainsMatchingAttributes(methodSymbol))
+                    if (!methodSymbol.GetAttributes(SerializationAttributes).Any() || HiddenByEditorBrowsableAttribute(methodSymbol))
                     {
                         return;
                     }
@@ -72,6 +70,10 @@ namespace SonarAnalyzer.Rules
                     }
                 },
                 SymbolKind.Method);
+
+        private static bool HiddenByEditorBrowsableAttribute(IMethodSymbol methodSymbol) =>
+            methodSymbol.GetAttributes(KnownType.System_ComponentModel_EditorBrowsableAttribute)
+                .Any(x => x.ConstructorArguments.Any(a => 1.CompareTo(a.Value) == 0));
 
         private IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
         {
