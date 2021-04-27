@@ -444,7 +444,7 @@ namespace Tests.Diagnostics
                 static int LocalFunction(int x)
                 {
                     int seed;
-                    seed = 1;       //Noncompliant
+                    seed = 1;       // Noncompliant
                     seed = 42;
                     return x + seed;
                 }
@@ -884,14 +884,50 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/3126
     public class Issue_3126
     {
-        public string WithLocalFunction()
+        public string VariableDeclarator_WithLocalFunction()
         {
-            string buffer = "Value"; // Noncompliant FP
+            string buffer = "Value"; // Compliant
             return Local();
 
             string Local()
             {
                 return buffer;
+            }
+        }
+
+        public string Assignment_WithLocalFunction()
+        {
+            string buffer;
+            buffer = "Value"; // Compliant
+            return Local();
+
+            string Local()
+            {
+                return buffer;
+            }
+        }
+
+        public int PrefixExpression_WithLocalFunction()
+        {
+            var count = 0;
+            ++count;        // Compliant
+            return Local();
+
+            int Local()
+            {
+                return count;
+            }
+        }
+
+        public int PostfixExpression_WithLocalFunction()
+        {
+            var count = 0;
+            count++;        // Compliant
+            return Local();
+
+            int Local()
+            {
+                return count;
             }
         }
     }
@@ -928,7 +964,7 @@ namespace Tests.Diagnostics
     {
         public void UseVariableInLocalPredicate()
         {
-            bool usedBool = BoolInitializer(true); // Noncompliant FP, value is used in local predicate function
+            bool usedBool = BoolInitializer(true); // Compliant, value is used in local predicate function
             var list = new List<bool>();
             list.Where(LocalPredicate);
 
