@@ -37,7 +37,7 @@ namespace ReproIssue2390
     }
     public class B : A
     {
-        public override int M // Noncompliant FP #2390
+        public override int M // compliant, getter is in base class
         {
             set { m = value + 1; }
         }

@@ -51,7 +51,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            return accessors.Accessors.First().IsKind(SyntaxKind.SetAccessorDeclaration);
+            return accessors.Accessors.First().IsKind(SyntaxKind.SetAccessorDeclaration)
+                // the get may be in the base class
+                && !prop.Modifiers.Any(SyntaxKind.OverrideKeyword);
         }
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
