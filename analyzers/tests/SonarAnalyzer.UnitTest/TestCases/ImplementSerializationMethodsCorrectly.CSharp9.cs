@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.ComponentModel;
 
 [OnSerialized]
 int OnSerialized(StreamingContext context) => 42; // FN, top level statement is not supported
@@ -55,38 +54,6 @@ public record Foo
 
     [OnDeserialized()]
     private void OnDeserializedMethod(StreamingContext context) { }     // Compliant
-
-    [OnDeserialized]
-    [EditorBrowsable]
-    public static void OnDeserialized(StreamingContext context) { }      // Noncompliant {{Make this method non-public and non-static.}}
-
-    [OnDeserializing]
-    [EditorBrowsable]
-    public static void OnDeserializing(StreamingContext context) { }     // Noncompliant {{Make this method non-public and non-static.}}
-
-    [OnDeserialized]
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public static void OnDeserialized1(StreamingContext context) { }     // Noncompliant {{Make this method non-public and non-static.}}
-
-    [OnDeserializing]
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public static void OnDeserializing1(StreamingContext context) { }    // Noncompliant {{Make this method non-public and non-static.}}
-
-    [OnDeserialized]
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    public void OnDeserialized3(StreamingContext context) { }           // Compliant
-
-    [OnDeserializing]
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    public void OnDeserializing3(StreamingContext context) { }          // Compliant
-
-    [OnSerializing]
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    public void OnSerializing3(StreamingContext context) { }            // Compliant
-
-    [OnSerialized]
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    int OnSerialized3(StreamingContext context) { return 1; }           // Compliant
 
     public void LocalFunctions()
     {
