@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Helpers.Trackers
 {

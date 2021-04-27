@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {
-            if (!(property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax setter))
+            if (!(property.SetMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax setter))
             {
                 return Enumerable.Empty<FieldData>();
             }
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
         {
             // We don't handle properties with multiple returns that return different fields
-            if (!(property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter))
+            if (!(property.GetMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax getter))
             {
                 return Enumerable.Empty<FieldData>();
             }
@@ -94,30 +94,30 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod)
+        protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
         {
-            if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor))
+            if (!(accessorMethod.GetFirstSyntaxRef() is AccessorDeclarationSyntax accessor)
+                || ((SyntaxNode)accessor.Body ?? accessor).ContainsGetOrSetOnDependencyProperty(compilation))
             {
-                // no accessor
                 return true;
             }
+
             // Special case: ignore the accessor if the only statement/expression is a throw.
             if (accessor.Body == null)
             {
                 // Expression-bodied syntax
                 return accessor.DescendantNodes().FirstOrDefault() is ArrowExpressionClauseSyntax arrowClause
-                    && ShimLayer.CSharp.ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
+                       && ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
             }
+
             // Statement-bodied syntax
-            return (accessor.Body.DescendantNodes().Count(n => n is StatementSyntax) == 1 &&
-                accessor.Body.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1);
+            return (accessor.Body.DescendantNodes().Count(n => n is StatementSyntax) == 1
+                    && accessor.Body.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1);
         }
 
         protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
-            (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax setter &&
-            setter.DescendantNodes().Any()) ||
-            (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter &&
-            getter.DescendantNodes().Any());
+            HasExplicitAccessor(property.SetMethod)
+            || HasExplicitAccessor(property.GetMethod);
 
         private static void FillAssignments(IDictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
         {
@@ -147,6 +147,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return null;
             }
+
             var returns = body.DescendantNodes().OfType<ReturnStatementSyntax>().ToArray();
             return returns.Length == 1 ? returns.Single().Expression : null;
         }
@@ -163,7 +164,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var expr = expressions.Single();
                 if (expr is IdentifierNameSyntax
-                    || (expr is MemberAccessExpressionSyntax member && member.Expression is ThisExpressionSyntax))
+                    || (expr is MemberAccessExpressionSyntax {Expression: ThisExpressionSyntax _}))
                 {
                     return expr;
                 }
@@ -182,15 +183,14 @@ namespace SonarAnalyzer.Rules.CSharp
             var strippedExpression = expression.RemoveParentheses();
 
             // Check for direct field access: "foo"
-            if (strippedExpression is IdentifierNameSyntax &&
-                semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
+            if (strippedExpression is IdentifierNameSyntax
+                && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
             {
                 return new FieldData(accessorKind, field, strippedExpression, useFieldLocation);
             }
             // Check for "this.foo"
-            else if (strippedExpression is MemberAccessExpressionSyntax member &&
-                member.Expression is ThisExpressionSyntax &&
-                semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
+            else if (strippedExpression is MemberAccessExpressionSyntax {Expression: ThisExpressionSyntax _} member
+                     && semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
             {
                 return new FieldData(accessorKind, field2, member.Name, useFieldLocation);
             }
@@ -201,9 +201,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsLeftSideOfAssignment(ExpressionSyntax expression)
         {
             var strippedExpression = expression.RemoveParentheses();
-            return strippedExpression.IsLeftSideOfAssignment() ||
-                // for this.field
-                (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment());
+            return strippedExpression.IsLeftSideOfAssignment()
+                   || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment()); // for this.field
         }
+
+        private static bool HasExplicitAccessor(ISymbol symbol) =>
+            symbol.GetFirstSyntaxRef() is AccessorDeclarationSyntax accessor
+            && accessor.DescendantNodes().Any();
     }
 }

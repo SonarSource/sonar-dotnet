@@ -21,13 +21,14 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Helpers.Trackers
 {
     public class VisualBasicElementAccessTracker : ElementAccessTracker<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InvocationExpression };
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.InvocationExpression };
 
         public override Condition ArgumentAtIndexEquals(int index, string value) =>
             context => ((InvocationExpressionSyntax)context.Node).ArgumentList is { } argumentList

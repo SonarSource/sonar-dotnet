@@ -52,6 +52,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void PropertiesAccessCorrectField_CSharp9() =>
             Verifier.VerifyAnalyzerFromCSharp9Library(@"TestCases\PropertiesAccessCorrectField.CSharp9.cs", new CS.PropertiesAccessCorrectField());
+#else
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PropertiesAccessCorrectField_CS_NetFramework() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.cs", new CS.PropertiesAccessCorrectField(), AdditionalReferences);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PropertiesAccessCorrectField_VB_NetFramework() =>
+            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.NetFramework.vb", new VB.PropertiesAccessCorrectField(), AdditionalReferences);
 #endif
 
         [TestMethod]
@@ -63,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             NuGetMetadataReference.MvvmLightLibs("5.4.1.1")
-                .Concat(MetadataReferenceFacade.WindowsBase)
-                .Concat(MetadataReferenceFacade.PresentationFramework);
+                                  .Concat(MetadataReferenceFacade.WindowsBase)
+                                  .Concat(MetadataReferenceFacade.PresentationFramework);
     }
 }

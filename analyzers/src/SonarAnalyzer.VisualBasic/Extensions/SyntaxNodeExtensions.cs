@@ -25,7 +25,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Extensions
 {
-    public static class SyntaxNodeExtensions
+    internal static partial class SyntaxNodeExtensions
     {
         public static bool IsPartOfBinaryNegationOrCondition(this SyntaxNode node)
         {
@@ -47,5 +47,11 @@ namespace SonarAnalyzer.Extensions
                 _ => false
             };
         }
+
+        public static object FindConstantValue(this SyntaxNode node, SemanticModel semanticModel) =>
+            new VisualBasicConstantValueFinder(semanticModel).FindConstant(node);
+
+        public static string FindStringConstant(this SyntaxNode node, SemanticModel semanticModel) =>
+            FindConstantValue(node, semanticModel) as string;
     }
 }

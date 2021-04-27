@@ -27,5 +27,8 @@ namespace SonarAnalyzer.Helpers
     {
         public static bool HasAttribute(this ISymbol symbol, KnownType type) =>
             symbol.GetAttributes(type).Any();
+
+        public static SyntaxNode GetFirstSyntaxRef(this ISymbol symbol) =>
+            symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
     }
 }

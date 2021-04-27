@@ -18,21 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
     public abstract class PropertiesAccessCorrectFieldBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S4275";
-        protected const string MessageFormat = "Refactor this {0} so that it actually refers to the field '{1}'.";
+        private const string MessageFormat = "Refactor this {0} so that it actually refers to the field '{1}'.";
 
         private readonly DiagnosticDescriptor rule;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
@@ -45,20 +45,18 @@ namespace SonarAnalyzer.Rules
         protected abstract IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
         protected abstract IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation);
         protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
-        protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod);
+        protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation);
 
         protected PropertiesAccessCorrectFieldBase(System.Resources.ResourceManager rspecResources)
         {
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             // We want to check the fields read and assigned in all properties in this class
             // so this is a symbol-level rule (also means the callback is called only once
             // for partial classes)
             context.RegisterSymbolAction(CheckType, SymbolKind.NamedType);
-        }
 
         protected static SyntaxNode FindInvokedMethod(Compilation compilation, INamedTypeSymbol containingType, SyntaxNode expression) =>
             compilation.GetSemanticModel(expression.SyntaxTree) is { } semanticModel
@@ -84,7 +82,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var properties = GetExplictlyDeclaredProperties(symbol);
+            var properties = GetExplicitlyDeclaredProperties(symbol);
             if (!properties.Any())
             {
                 return;
@@ -111,11 +109,11 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
+        private IEnumerable<IPropertySymbol> GetExplicitlyDeclaredProperties(INamedTypeSymbol symbol) =>
             symbol.GetMembers()
                 .Where(m => m.Kind == SymbolKind.Property)
                 .OfType<IPropertySymbol>()
-                .Where(p => ImplementsExplicitGetterOrSetter(p));
+                .Where(ImplementsExplicitGetterOrSetter);
 
         private void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields, SymbolAnalysisContext context)
         {
@@ -125,19 +123,17 @@ namespace SonarAnalyzer.Rules
                 var locationAndAccessorType = GetLocationAndAccessor(actualFields, methodSymbol);
                 if (locationAndAccessorType.Item1 != null)
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                        rule,
-                        locationAndAccessorType.Item1,
-                        locationAndAccessorType.Item2,
-                        expectedField.Name
-                        ));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
+                                                                         locationAndAccessorType.Item1,
+                                                                         locationAndAccessorType.Item2,
+                                                                         expectedField.Name));
                 }
             }
 
-            Tuple<Location, string> GetLocationAndAccessor(ImmutableArray<FieldData> fields, IMethodSymbol method)
+            static Tuple<Location, string> GetLocationAndAccessor(ImmutableArray<FieldData> fields, IMethodSymbol method)
             {
-                Location location = null;
-                string accessorType = null;
+                Location location;
+                string accessorType;
                 if (fields.Count(x => x.UseFieldLocation) == 1)
                 {
                     var fieldWithValue = fields.First();
@@ -163,8 +159,8 @@ namespace SonarAnalyzer.Rules
             {
                 var readFields = FindFieldReads(property, compilation);
                 var updatedFields = FindFieldAssignments(property, compilation);
-                var ignoreGetter = ShouldIgnoreAccessor(property.GetMethod);
-                var ignoreSetter = ShouldIgnoreAccessor(property.SetMethod);
+                var ignoreGetter = ShouldIgnoreAccessor(property.GetMethod, compilation);
+                var ignoreSetter = ShouldIgnoreAccessor(property.SetMethod, compilation);
                 var data = new PropertyData(property, readFields, updatedFields, ignoreGetter, ignoreSetter);
                 allPropertyData.Add(data);
             }
@@ -225,15 +221,15 @@ namespace SonarAnalyzer.Rules
         /// between the field name and the property name.
         /// This class hides the details of matching logic.
         /// </summary>
-        protected class PropertyToFieldMatcher
+        private class PropertyToFieldMatcher
         {
             private readonly IDictionary<IFieldSymbol, string> fieldToStandardNameMap;
 
             public PropertyToFieldMatcher(IEnumerable<IFieldSymbol> fields)
             {
-                // Calcuate and cache the standardised versions of the field names to avoid
+                // Calculate and cache the standardised versions of the field names to avoid
                 // calculating them every time
-                this.fieldToStandardNameMap = fields.ToDictionary(f => f, f => GetCanonicalFieldName(f.Name));
+                fieldToStandardNameMap = fields.ToDictionary(f => f, f => GetCanonicalFieldName(f.Name));
             }
 
             public IFieldSymbol GetSingleMatchingFieldOrNull(IPropertySymbol propertySymbol)
@@ -241,23 +237,20 @@ namespace SonarAnalyzer.Rules
                 // We're not caching the property name as only expect to be called once per property
                 var standardisedPropertyName = GetCanonicalFieldName(propertySymbol.Name);
 
-                var matchingFields = this.fieldToStandardNameMap.Keys
-                    .Where(k => AreCanonicalNamesEqual(this.fieldToStandardNameMap[k], standardisedPropertyName))
+                var matchingFields = fieldToStandardNameMap.Keys
+                    .Where(k => AreCanonicalNamesEqual(fieldToStandardNameMap[k], standardisedPropertyName))
                     .ToList();
 
-                if (matchingFields.Count != 1)
-                {
-                    return null;
-                }
-                return matchingFields[0];
+                return matchingFields.Count != 1
+                    ? null
+                    : matchingFields[0];
             }
 
             private static string GetCanonicalFieldName(string name) =>
                 name.Replace("_", string.Empty);
 
             private static bool AreCanonicalNamesEqual(string name1, string name2) =>
-                name1.Equals(name2, System.StringComparison.OrdinalIgnoreCase);
+                name1.Equals(name2, StringComparison.OrdinalIgnoreCase);
         }
-
     }
 }
