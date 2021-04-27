@@ -26,6 +26,8 @@ namespace Tests.Diagnostics
 
             await Task.Yield();
         }
+
+        public void Foo(object sender, EventArgs args) { }
     }
 
     public class ValidCases

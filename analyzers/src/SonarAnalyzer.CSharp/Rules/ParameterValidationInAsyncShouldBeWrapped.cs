@@ -42,14 +42,13 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     if (!methodDeclaration.Modifiers.Any(SyntaxKind.AsyncKeyword)
-                        || IsAsyncVoid(methodDeclaration, c.SemanticModel))
+                        || c.SemanticModel.GetTypeInfo(methodDeclaration.ReturnType).Type.SpecialType == SpecialType.System_Void)
                     {
                         return;
                     }
@@ -64,10 +63,5 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
-
-        private static bool IsAsyncVoid(MethodDeclarationSyntax method, SemanticModel semanticModel) =>
-            method.Modifiers.Any(SyntaxKind.AsyncKeyword)
-            && semanticModel.GetTypeInfo(method.ReturnType).Type.SpecialType == SpecialType.System_Void;
     }
 }
