@@ -18,13 +18,13 @@ Public Class Program
                 Console.WriteLine("No")
             Case Else
 
-                Select Case value ' Noncompliant {{Refactor the code to eliminate this nested 'Select'.}}
-'               ^^^^^^
-                    Case 0
-                    Case Else
-                End Select
+                    Select Case value ' Noncompliant {{Refactor the code to eliminate this nested 'Select Case'.}}
+'                   ^^^^^^^^^^^^^^^^^
+                        Case 0
+                        Case Else
+                    End Select
 
-                Console.WriteLine("Invalid response")
+                    Console.WriteLine("Invalid response")
         End Select
 
         Dim i As Integer = 1

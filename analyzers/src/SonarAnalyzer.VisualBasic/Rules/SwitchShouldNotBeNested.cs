@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class SwitchShouldNotBeNested : SwitchShouldNotBeNestedBase
     {
-        private const string MessageFormat = "Refactor the code to eliminate this nested 'Select'.";
+        private const string MessageFormat = "Refactor the code to eliminate this nested 'Select Case'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var selectBlock = (SelectBlockSyntax)c.Node;
                     if (selectBlock.Parent?.FirstAncestorOrSelf<SelectBlockSyntax>() != null)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, selectBlock.SelectStatement.SelectKeyword.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, selectBlock.SelectStatement.GetLocation()));
                     }
                 },
                 SyntaxKind.SelectBlock);
