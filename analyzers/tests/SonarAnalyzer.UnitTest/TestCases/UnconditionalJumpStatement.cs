@@ -590,4 +590,33 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2441
+    class ReproducerWithDelegate
+    {
+        delegate int Delegate1();
+        void myFunc()
+        {
+            while (true)
+            {
+                Delegate1 d2 = () => { return -1; }; // Compliant
+            }
+        }
+
+        void myFunc2()
+        {
+            while (true)
+            {
+                Delegate1 d1 = delegate () { return -1; }; // Compliant
+            }
+        }
+
+        Func<int> myFunc3()
+        {
+            while (true)
+            {
+                return (Func<int>)delegate () { return -1; }; // Noncompliant
+            }
+        }
+    }
 }

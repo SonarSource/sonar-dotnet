@@ -61,8 +61,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override ISet<SyntaxKind> LambdaSyntaxes { get; } = new HashSet<SyntaxKind>
             {
-                    SyntaxKind.ParenthesizedLambdaExpression,
-                    SyntaxKind.SimpleLambdaExpression
+                SyntaxKind.ParenthesizedLambdaExpression,
+                SyntaxKind.SimpleLambdaExpression,
+                SyntaxKind.AnonymousMethodExpression
             };
 
             protected override ISet<SyntaxKind> LocalFunctionSyntaxes { get; } = new HashSet<SyntaxKind> { SyntaxKindEx.LocalFunctionStatement };
