@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Helpers
             bool IsUsedInLocalFunction(ISymbol symbol) =>
                 // We don't mute it if it's declared and used in local function
                 !(symbol.ContainingSymbol is IMethodSymbol containingSymbol && containingSymbol.MethodKind == MethodKindEx.LocalFunction)
-                && HasAncestor(SyntaxKindEx.LocalFunctionStatement);
+                && HasAncestor(node, SyntaxKindEx.LocalFunctionStatement);
 
             bool IsInUnsupportedExpression() =>
                 node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) != null;
