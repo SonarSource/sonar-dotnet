@@ -60,3 +60,35 @@ Public Class IgnoreCaseChange
     End Sub
 
 End Class
+
+Public Interface IGenericInterface(Of A)
+    Sub DoSomething(ByVal value As A)
+    Sub DoSomething(ByVal value As A, intValue As Integer)
+    Sub DoSomethingElse(ByVal value As A)
+    Sub DoSomethingElse(ByVal value As A, intValue As Integer)
+    Sub TryOneMoreTime(ByVal value As AnotherParameterClass)
+
+End Interface
+
+Public Class ParameterClass
+End Class
+
+Public Class AnotherParameterClass
+End Class
+
+Public Class Implementation
+    Implements IGenericInterface(Of ParameterClass)
+    Public Sub DoSomething(parameter As ParameterClass) Implements IGenericInterface(Of ParameterClass).DoSomething
+    End Sub
+    Public Sub DoSomething(value As ParameterClass, intValue As Integer) Implements IGenericInterface(Of ParameterClass).DoSomething
+    End Sub
+    Public Sub DoSomethingElse(myValue As ParameterClass) Implements IGenericInterface(Of ParameterClass).DoSomethingElse                      ' Noncompliant
+        '                      ^^^^^^^
+    End Sub
+    Public Sub DoSomethingElse(value As ParameterClass, intVal As Integer) Implements IGenericInterface(Of ParameterClass).DoSomethingElse     ' Noncompliant
+        '                                               ^^^^^^
+    End Sub
+    Public Sub TryOneMoreTime(anotherParameter As AnotherParameterClass) Implements IGenericInterface(Of ParameterClass).TryOneMoreTime        ' Noncompliant
+        '                     ^^^^^^^^^^^^^^^^
+    End Sub
+End Class

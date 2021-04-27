@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -64,7 +65,15 @@ namespace SonarAnalyzer.Rules
                         }
                         else if (methodSymbol.GetInterfaceMember() is { } interfaceMember)
                         {
-                            VerifyParameters(c, methodSyntax, interfaceMember.Parameters, "interface");
+                            if (interfaceMember.ContainingType.TypeArguments.IsEmpty)
+                            {
+                                VerifyParameters(c, methodSyntax, interfaceMember.Parameters, "interface");
+                            }
+                            else
+                            {
+                                // Argument names could be binded to TypeArguments names of generic interface parameters
+                                VerifyGenericInterfaceMemberParameters(c, methodSymbol, methodSyntax, interfaceMember, "interface");
+                            }
                         }
                     }
                 },
@@ -77,6 +86,29 @@ namespace SonarAnalyzer.Rules
                                     .Where(x => !x.actual.ValueText.Equals(x.expected.Name, Language.NameComparison)))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.actual.GetLocation(), item.actual.ValueText, item.expected.Name, expectedLocation));
+            }
+        }
+
+        private void VerifyGenericInterfaceMemberParameters(SyntaxNodeAnalysisContext context, IMethodSymbol methodSymbol, TMethodDeclarationSyntax methodSyntax, IMethodSymbol interfaceMember,
+            string expectedLocation)
+        {
+            var parameters = ParameterIdentifiers(methodSyntax).ToList();
+            var interfaceMethodParameters = interfaceMember.Parameters.ToList();
+            var genericInterfaceTypeArguments = interfaceMember.ContainingType.TypeArguments;
+
+            for (var i = 0; i < parameters.Count; i++)
+            {
+                var parameter = parameters[i];
+                var parameterType = methodSymbol.Parameters[i].Type;
+                var interfaceMethodParameter = interfaceMethodParameters[i];
+                if (!parameter.ValueText.Equals(interfaceMethodParameter.Name, Language.NameComparison))
+                {
+                    var matchingGenericInterfaceArg = genericInterfaceTypeArguments.FirstOrDefault(x => parameterType.DerivesOrImplements(x));
+                    if (matchingGenericInterfaceArg == null || matchingGenericInterfaceArg.Name.IndexOf(parameter.ValueText, StringComparison.OrdinalIgnoreCase) != 0)
+                    {
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(), parameter.ValueText, interfaceMethodParameter.Name, expectedLocation));
+                    }
+                }
             }
         }
     }

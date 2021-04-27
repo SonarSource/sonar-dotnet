@@ -93,4 +93,26 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    public interface IGenericInterface<A>
+    {
+        void DoSomething(A value);
+        void DoSomething(A value, int intValue);
+        void DoSomethingElse(A value);
+        void DoSomethingElse(A value, int intValue);
+        void TryOneMoreTime(AnotherParameterClass value);
+    }
+    public class ParameterClass { }
+    public class AnotherParameterClass { }
+    public class Implementation : IGenericInterface<ParameterClass>
+    {
+        public void DoSomething(ParameterClass parameter) { }
+        public void DoSomething(ParameterClass value, int intValue) { }
+        public void DoSomethingElse(ParameterClass myValue) { }                // Noncompliant
+//                                                 ^^^^^^^
+        public void DoSomethingElse(ParameterClass value, int val) { }         // Noncompliant
+//                                                            ^^^
+        public void TryOneMoreTime(AnotherParameterClass anotherParameter) { } // Noncompliant
+//                                                       ^^^^^^^^^^^^^^^^
+    }
 }
