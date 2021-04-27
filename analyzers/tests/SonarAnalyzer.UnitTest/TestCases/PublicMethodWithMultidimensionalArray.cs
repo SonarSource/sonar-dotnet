@@ -48,6 +48,14 @@
         public void Method8(params int[][][] a) // Noncompliant
         {
         }
+
+        public void Method9(int[][] a, params int[][] b) // Noncompliant
+        {
+        }
+
+        public void Method10(int[,][] a) // Noncompliant
+        {
+        }
     }
 
     internal class Other

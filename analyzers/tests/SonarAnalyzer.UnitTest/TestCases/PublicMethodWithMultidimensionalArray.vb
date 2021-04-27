@@ -48,6 +48,16 @@ Namespace Tests.Diagnostics
         Sub Method9(ParamArray a As Integer()(,)) ' Compliant
         End Sub
 
+        Sub Method10 ' Compliant
+            Console.WriteLine("Hello, world!")
+        End Sub
+
+        Public Sub Metho11(a As Integer()(), ParamArray b As Integer()()) ' Noncompliant
+        End Sub
+
+        Sub Method12(a As Integer(,)()) ' Noncompliant
+        End Sub
+
     End Class
     Friend Class Other
 
