@@ -72,6 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\NonSecureCookieConfig")]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\UnrelatedConfig")]
+        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\ConfigWithoutAttribute")]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeSecure_WithWebConfigValueSetToFalse(string root)

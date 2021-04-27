@@ -19,10 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -56,9 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             foreach (var fullPath in context.ProjectConfiguration(options).FilesToAnalyze.FindFiles("web.config"))
             {
-                var webConfig = File.ReadAllText(fullPath);
-                if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc
-                    && IsSslRequired(doc))
+                if (IsWebConfigAttributeSet(fullPath, "requireSSL"))
                 {
                     return true;
                 }
@@ -74,8 +68,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 t.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
                 t.ExceptWhen(t.ArgumentIsBoolConstant("secure", true)));
         }
-
-        private static bool IsSslRequired(XDocument document) =>
-            document.XPathSelectElements("configuration/system.web/httpCookies").Any(x => x.GetAttributeIfBoolValueIs("requireSSL", true) != null);
     }
 }

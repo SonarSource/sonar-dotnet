@@ -72,6 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\NonHttpOnlyCookiesConfig")]
         [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\UnrelatedConfig")]
+        [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\ConfigWithoutAttribute")]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
         public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToFalse(string root)
