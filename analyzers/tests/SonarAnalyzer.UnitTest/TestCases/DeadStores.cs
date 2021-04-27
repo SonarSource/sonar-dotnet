@@ -947,14 +947,14 @@ namespace Tests.Diagnostics
     {
         public int Indices(int[] values)
         {
-            var index = 2; // Noncompliant FP, value is used in Indice
+            var index = 2; // Compliant, value is used in Indice
             return values[^index];
         }
 
         public int[] Ranges(int[] values)
         {
-            var first = 2; // Noncompliant FP, value is used in Range
-            var last = 22; // Noncompliant FP, value is used in Range
+            var first = 2; // Compliant, value is used in Range
+            var last = 22; // Compliant, value is used in Range
             return values[first..last];
         }
     }

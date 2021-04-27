@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (symbols.FirstOrDefault(x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)) is { } symbol)
             {
-                isMuted = IsInTupleAssignmentTarget() || IsUsedInLocalFunction(symbol);
+                isMuted = IsInTupleAssignmentTarget() || IsUsedInLocalFunction(symbol) || IsInUnsupportedExpression();
             }
             base.VisitIdentifierName(node);
 
@@ -97,6 +97,9 @@ namespace SonarAnalyzer.Helpers
                 // We don't mute it if it's declared and used in local function
                 !(symbol.ContainingSymbol is IMethodSymbol containingSymbol && containingSymbol.MethodKind == MethodKindEx.LocalFunction)
                 && node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement)) != null;
+
+            bool IsInUnsupportedExpression() =>
+                node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) != null;
         }
     }
 }
