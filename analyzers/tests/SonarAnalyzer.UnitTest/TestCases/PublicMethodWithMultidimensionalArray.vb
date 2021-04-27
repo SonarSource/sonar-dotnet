@@ -2,7 +2,7 @@
 
 Namespace Tests.Diagnostics
     Public Interface IFace
-        Sub Method6(a As Integer()()) ' Noncompliant {{Make this method private or simplify its parameters to not use multidimensional arrays.}}
+        Sub Method6(a As Integer()()) ' Noncompliant {{Make this method private or simplify its parameters to not use multidimensional/jagged arrays.}}
 '           ^^^^^^^
     End Interface
 
@@ -38,6 +38,26 @@ Namespace Tests.Diagnostics
         Private Sub Method6(a As Integer()()) Implements IFace.Method6 ' Compliant, interface implementation
             Throw New NotImplementedException()
         End Sub
+
+        Public Sub Method7(ParamArray a As Integer()()) ' Compliant
+        End Sub
+
+        Public Sub Method8(ParamArray a As Integer()()()) ' Noncompliant
+        End Sub
+
+        Sub Method9(ParamArray a As Integer()(,)) ' Compliant
+        End Sub
+
+        Sub Method10 ' Compliant
+            Console.WriteLine("Hello, world!")
+        End Sub
+
+        Public Sub Metho11(a As Integer()(), ParamArray b As Integer()()) ' Noncompliant
+        End Sub
+
+        Sub Method12(a As Integer(,)()) ' Noncompliant
+        End Sub
+
     End Class
     Friend Class Other
 
