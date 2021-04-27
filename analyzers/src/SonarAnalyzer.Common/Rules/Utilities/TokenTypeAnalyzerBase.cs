@@ -39,6 +39,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel);
 
+        protected override bool SkipAnalysisForLargeFiles => true;
+
         protected sealed override string FileName => TokenTypeFileName;
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
@@ -148,7 +150,7 @@ namespace SonarAnalyzer.Rules
 
             private void ClassifyIdentifier()
             {
-                if (semanticModel.GetDeclaredSymbol(token.Parent) is { }  declaration)
+                if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
                 {
                     ClassifyIdentifier(declaration);
                 }

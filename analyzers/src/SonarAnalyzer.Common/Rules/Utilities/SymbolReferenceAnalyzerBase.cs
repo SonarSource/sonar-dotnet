@@ -49,10 +49,12 @@ namespace SonarAnalyzer.Rules
         private static readonly DiagnosticDescriptor Rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        internal abstract SyntaxNode GetBindableParent(SyntaxToken token);
+        protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
         protected abstract bool IsIdentifier(SyntaxToken token);
 
         protected sealed override string FileName => SymbolReferenceFileName;
+
+        protected override bool SkipAnalysisForLargeFiles => true;
 
         protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {

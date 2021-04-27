@@ -76,9 +76,11 @@ namespace SonarAnalyzer.Rules
     public abstract class UtilityAnalyzerBase<TMessage> : UtilityAnalyzerBase
         where TMessage : IMessage, new()
     {
+        private const int TokenCountThreshold = 10_000;
         private static readonly object FileWriteLock = new TMessage();
 
         protected virtual bool SkipAnalysisForTestProject => false;
+        protected virtual bool SkipAnalysisForLargeFiles => false;
         protected abstract string FileName { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
@@ -92,10 +94,14 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
                     if (IsTestProject && SkipAnalysisForTestProject)
                     {
-                        EnsureDirectoryExistsAndCreateFile().Dispose();
+                        // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
+                        lock (FileWriteLock)
+                        {
+                            EnsureDirectoryExistsAndCreateFile().Dispose();
+                        }
+
                         return;
                     }
 
@@ -103,27 +109,29 @@ namespace SonarAnalyzer.Rules
                         .Where(ShouldGenerateMetrics)
                         .Select(x => CreateMessage(x, c.Compilation.GetSemanticModel(x)))
                         .ToArray();
-                    if (messages.Any())
+
+                    lock (FileWriteLock)
                     {
-                        lock (FileWriteLock)
+                        using var metricsStream = EnsureDirectoryExistsAndCreateFile();
+                        foreach (var message in messages)
                         {
-                            using var metricsStream = EnsureDirectoryExistsAndCreateFile();
-                            foreach (var message in messages)
-                            {
-                                message.WriteDelimitedTo(metricsStream);
-                            }
+                            message.WriteDelimitedTo(metricsStream);
                         }
                     }
                 });
 
         private bool ShouldGenerateMetrics(SyntaxTree tree) =>
             FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-             && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree));
+             && (AnalyzeGeneratedCode || !GeneratedCodeRecognizer.IsGenerated(tree))
+             && (!SkipAnalysisForLargeFiles || !HasTooManyTokens(tree));
 
         private FileStream EnsureDirectoryExistsAndCreateFile()
         {
             Directory.CreateDirectory(OutPath);
             return File.Create(Path.Combine(OutPath, FileName));
         }
+
+        private static bool HasTooManyTokens(SyntaxTree syntaxTree) =>
+            syntaxTree.GetRoot().DescendantTokens().Count() > TokenCountThreshold;
     }
 }
