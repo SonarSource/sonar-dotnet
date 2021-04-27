@@ -48,7 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    if (!methodDeclaration.Modifiers.Any(SyntaxKind.AsyncKeyword))
+                    if (!methodDeclaration.Modifiers.Any(SyntaxKind.AsyncKeyword)
+                        || IsAsyncVoid(methodDeclaration, c.SemanticModel))
                     {
                         return;
                     }
@@ -64,5 +65,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.MethodDeclaration);
         }
+
+        private static bool IsAsyncVoid(MethodDeclarationSyntax method, SemanticModel semanticModel) =>
+            method.Modifiers.Any(SyntaxKind.AsyncKeyword)
+            && semanticModel.GetTypeInfo(method.ReturnType).Type.SpecialType == SpecialType.System_Void;
     }
 }
