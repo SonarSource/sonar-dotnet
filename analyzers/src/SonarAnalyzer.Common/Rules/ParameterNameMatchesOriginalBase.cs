@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
                         }
                         else if (methodSymbol.GetInterfaceMember() is { } interfaceMember)
                         {
-                            VerifyGenericInterfaceMemberParameters(c, methodSymbol, methodSyntax, interfaceMember, "interface");
+                            VerifyInterfaceMemberParameters(c, methodSymbol, methodSyntax, interfaceMember, "interface");
                         }
                     }
                 },
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private void VerifyGenericInterfaceMemberParameters(SyntaxNodeAnalysisContext context, IMethodSymbol methodSymbol, TMethodDeclarationSyntax methodSyntax, IMethodSymbol interfaceMember,
+        private void VerifyInterfaceMemberParameters(SyntaxNodeAnalysisContext context, IMethodSymbol methodSymbol, TMethodDeclarationSyntax methodSyntax, IMethodSymbol interfaceMember,
             string expectedLocation)
         {
             if (interfaceMember.ContainingType.TypeArguments.IsEmpty)
@@ -90,22 +90,28 @@ namespace SonarAnalyzer.Rules
             }
             else
             {
-                var parameters = ParameterIdentifiers(methodSyntax).ToList();
-                var interfaceMethodParameters = interfaceMember.Parameters.ToList();
-                var genericInterfaceTypeArguments = interfaceMember.ContainingType.TypeArguments;
+                VerifyGenericInterfaceMemberParameters(context, methodSymbol, methodSyntax, interfaceMember, expectedLocation);
+            }
+        }
 
-                for (var i = 0; i < parameters.Count; i++)
+        private void VerifyGenericInterfaceMemberParameters(SyntaxNodeAnalysisContext context, IMethodSymbol methodSymbol, TMethodDeclarationSyntax methodSyntax, IMethodSymbol interfaceMember,
+            string expectedLocation)
+        {
+            var parameters = ParameterIdentifiers(methodSyntax).ToList();
+            var interfaceMethodParameters = interfaceMember.Parameters.ToList();
+            var genericInterfaceTypeArguments = interfaceMember.ContainingType.TypeArguments;
+
+            for (var i = 0; i < parameters.Count; i++)
+            {
+                var parameter = parameters[i];
+                var parameterType = methodSymbol.Parameters[i].Type;
+                var interfaceMethodParameter = interfaceMethodParameters[i];
+                if (!parameter.ValueText.Equals(interfaceMethodParameter.Name, Language.NameComparison))
                 {
-                    var parameter = parameters[i];
-                    var parameterType = methodSymbol.Parameters[i].Type;
-                    var interfaceMethodParameter = interfaceMethodParameters[i];
-                    if (!parameter.ValueText.Equals(interfaceMethodParameter.Name, Language.NameComparison))
+                    var matchingGenericInterfaceArg = genericInterfaceTypeArguments.FirstOrDefault(x => parameterType.DerivesOrImplements(x));
+                    if (matchingGenericInterfaceArg == null || matchingGenericInterfaceArg.Name.IndexOf(parameter.ValueText, StringComparison.OrdinalIgnoreCase) != 0)
                     {
-                        var matchingGenericInterfaceArg = genericInterfaceTypeArguments.FirstOrDefault(x => parameterType.DerivesOrImplements(x));
-                        if (matchingGenericInterfaceArg == null || matchingGenericInterfaceArg.Name.IndexOf(parameter.ValueText, StringComparison.OrdinalIgnoreCase) != 0)
-                        {
-                            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(), parameter.ValueText, interfaceMethodParameter.Name, expectedLocation));
-                        }
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(), parameter.ValueText, interfaceMethodParameter.Name, expectedLocation));
                     }
                 }
             }
