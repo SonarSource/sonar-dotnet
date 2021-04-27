@@ -31,5 +31,6 @@ namespace SonarAnalyzer.Helpers.Facade
         abstract TSyntaxKind IdentifierName { get; }
         abstract TSyntaxKind StringLiteralExpression { get; }
         abstract TSyntaxKind InterpolatedStringExpression { get; }
+        abstract TSyntaxKind ReturnStatement { get; }
     }
 }

@@ -501,17 +501,63 @@ namespace Tests.Diagnostics
         public void bar() { }
     }
 
-    class C
+    class ReproducerClass
     {
-        int P => throw new Exception();
-        int M()
+        ReproducerClass FirstProperty => null;
+        int SecondProperty => throw new Exception();
+
+        int MethodWithPropertyAccess()
         {
             while (true)
             {
                 try
                 {
-                    // P will throw, it will be caught and another iteration will happen
-                    return P; // Noncompliant FP
+                    // SecondProperty will throw, it will be caught and another iteration will happen
+                    return SecondProperty; // Compliant
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
+        int MethodWithMemberAccess()
+        {
+            while (true)
+            {
+                try
+                {
+                    // FirstProperty will be null and another iteration will happen
+                    return FirstProperty.SecondProperty; // Compliant
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
+        int MethodWithElementAccess(int[] array)
+        {
+            while (true)
+            {
+                try
+                {
+                    return (((array[0]))); // Compliant
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
+        int MethodWithAssignmentInsideReturnStatement()
+        {
+            int x;
+            while (true)
+            {
+                try
+                {
+                    return x = SecondProperty; // Compliant
                 }
                 catch (Exception ex)
                 {

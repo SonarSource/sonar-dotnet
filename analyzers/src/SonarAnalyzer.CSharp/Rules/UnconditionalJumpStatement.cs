@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -36,11 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<StatementSyntax, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
         protected override ISet<SyntaxKind> LoopStatements { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.ForEachStatement,
@@ -52,19 +48,22 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SyntaxNodeAnalysisContext context)
             => new LoopWalker(context, LoopStatements);
 
-
         private class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
         {
             protected override ISet<SyntaxKind> StatementsThatCanThrow { get; } = new HashSet<SyntaxKind>
             {
                 SyntaxKind.InvocationExpression,
-                SyntaxKind.ObjectCreationExpression
+                SyntaxKind.ObjectCreationExpression,
+                SyntaxKind.SimpleMemberAccessExpression,
+                SyntaxKind.PointerMemberAccessExpression,
+                SyntaxKind.ElementAccessExpression
             };
 
-            protected override ISet<SyntaxKind> LambdaSyntaxes { get; }
-                = new HashSet<SyntaxKind> {
+            protected override ISet<SyntaxKind> LambdaSyntaxes { get; } = new HashSet<SyntaxKind>
+            {
                     SyntaxKind.ParenthesizedLambdaExpression,
-                    SyntaxKind.SimpleLambdaExpression };
+                    SyntaxKind.SimpleLambdaExpression
+            };
 
             protected override ISet<SyntaxKind> LocalFunctionSyntaxes { get; } = new HashSet<SyntaxKind> { SyntaxKindEx.LocalFunctionStatement };
 
@@ -75,15 +74,31 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.CatchClause
             };
 
-            public LoopWalker(SyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements)
-                : base(context, loopStatements)
-            {
-            }
+            protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+            public LoopWalker(SyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements) : base(context, loopStatements) { }
 
             public override void Visit()
             {
                 var csWalker = new CsLoopwalker(this);
-                csWalker.SafeVisit(this.rootExpression);
+                csWalker.SafeVisit(rootExpression);
+            }
+
+            protected override bool IsPropertyAccess(StatementSyntax node) =>
+                node.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => semanticModel.GetSymbolInfo(x).Symbol is { } symbol && symbol.Kind == SymbolKind.Property);
+
+            protected override bool TryGetTryAncestorStatements(StatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<StatementSyntax> tryAncestorStatements)
+            {
+                var tryAncestor = (TryStatementSyntax)ancestors.FirstOrDefault(n => n.IsKind(SyntaxKind.TryStatement));
+
+                if (tryAncestor == null || tryAncestor.Catches.Count == 0)
+                {
+                    tryAncestorStatements = null;
+                    return false;
+                }
+
+                tryAncestorStatements = tryAncestor.Block.Statements;
+                return true;
             }
 
             private class CsLoopwalker : CSharpSyntaxWalker
@@ -92,50 +107,32 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 public CsLoopwalker(LoopWalker loopWalker)
                 {
-                    this.walker = loopWalker;
+                    walker = loopWalker;
                 }
 
                 public override void VisitContinueStatement(ContinueStatementSyntax node)
                 {
                     base.VisitContinueStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalContinues, this.walker.UnconditionalContinues);
+                    walker.StoreVisitData(node, walker.ConditionalContinues, walker.UnconditionalContinues);
                 }
 
                 public override void VisitBreakStatement(BreakStatementSyntax node)
                 {
                     base.VisitBreakStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
                 }
 
                 public override void VisitReturnStatement(ReturnStatementSyntax node)
                 {
                     base.VisitReturnStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
                 }
 
                 public override void VisitThrowStatement(ThrowStatementSyntax node)
                 {
                     base.VisitThrowStatement(node);
-                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
                 }
-            }
-
-            protected override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
-            protected override bool IsReturnStatement(SyntaxNode node) => node.IsKind(SyntaxKind.ReturnStatement);
-
-            protected override bool TryGetTryAncestorStatements(StatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<StatementSyntax> tryAncestorStatements)
-            {
-                var tryAncestor = (TryStatementSyntax)ancestors.FirstOrDefault(n => n.IsKind(SyntaxKind.TryStatement));
-
-                if (tryAncestor == null ||
-                    tryAncestor.Catches.Count == 0)
-                {
-                    tryAncestorStatements = null;
-                    return false;
-                }
-
-                tryAncestorStatements = tryAncestor.Block.Statements;
-                return true;
             }
         }
     }

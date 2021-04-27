@@ -31,6 +31,10 @@ namespace SonarAnalyzer.Helpers.Facade
     {
         public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
+        public override bool IsKind(SyntaxNode node, SyntaxKind kind) => node.IsKind(kind);
+
+        public override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
+
         public override bool IsNullLiteral(SyntaxNode node) => node.IsNullLiteral();
 
         public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
