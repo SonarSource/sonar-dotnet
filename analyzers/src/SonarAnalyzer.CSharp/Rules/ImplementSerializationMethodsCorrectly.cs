@@ -54,6 +54,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HiddenByEditorBrowsableAttribute(IMethodSymbol methodSymbol) =>
             methodSymbol.GetAttributes(KnownType.System_ComponentModel_EditorBrowsableAttribute)
-                .Any(x => x.ConstructorArguments.Any(a => a.Type.Is(KnownType.System_ComponentModel_EditorBrowsableState) && 1.CompareTo(a.Value) == 0));
+                .Any(x => x.ConstructorArguments.Any(a => 1.CompareTo(a.Value) == 0));
     }
 }
