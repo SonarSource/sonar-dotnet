@@ -84,11 +84,19 @@ namespace SonarAnalyzer.Rules
                 });
         }
 
-        protected static bool IsWebConfigAttributeSet(string xpath, string attribute)
+        protected static bool IsWebConfigAttributeSet(SonarAnalysisContext context, AnalyzerOptions options, string attribute)
         {
-            var webConfig = File.ReadAllText(xpath);
-            return webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc
-                && doc.XPathSelectElements("configuration/system.web/httpCookies").Any(x => x.GetAttributeIfBoolValueIs(attribute, true) != null);
+            foreach (var fullPath in context.ProjectConfiguration(options).FilesToAnalyze.FindFiles("web.config"))
+            {
+                var webConfig = File.ReadAllText(fullPath);
+                if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc
+                    && doc.XPathSelectElements("configuration/system.web/httpCookies").Any(x => x.GetAttributeIfBoolValueIs(attribute, true) != null))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

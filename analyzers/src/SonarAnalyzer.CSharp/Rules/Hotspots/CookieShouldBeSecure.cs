@@ -48,18 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal CookieShouldBeSecure(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
 
-        protected override bool IsDefaultConstructorSafe(SonarAnalysisContext context, AnalyzerOptions options)
-        {
-            foreach (var fullPath in context.ProjectConfiguration(options).FilesToAnalyze.FindFiles("web.config"))
-            {
-                if (IsWebConfigAttributeSet(fullPath, "requireSSL"))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+        protected override bool IsDefaultConstructorSafe(SonarAnalysisContext context, AnalyzerOptions options) =>
+            IsWebConfigAttributeSet(context, options, "requireSSL");
 
         protected override void Initialize(TrackerInput input)
         {

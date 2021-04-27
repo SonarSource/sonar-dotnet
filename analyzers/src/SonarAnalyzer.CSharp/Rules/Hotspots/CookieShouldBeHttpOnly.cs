@@ -48,18 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal CookieShouldBeHttpOnly(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration, DiagnosticId, MessageFormat) { }
 
-        protected override bool IsDefaultConstructorSafe(SonarAnalysisContext context, AnalyzerOptions options)
-        {
-            foreach (var fullPath in context.ProjectConfiguration(options).FilesToAnalyze.FindFiles("web.config"))
-            {
-                if (IsWebConfigAttributeSet(fullPath, "httpOnlyCookies"))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+        protected override bool IsDefaultConstructorSafe(SonarAnalysisContext context, AnalyzerOptions options) =>
+            IsWebConfigAttributeSet(context, options, "httpOnlyCookies");
 
         protected override void Initialize(TrackerInput input)
         {
